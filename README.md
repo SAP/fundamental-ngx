@@ -1,4 +1,4 @@
-# fundamental-ngx
+# Fundamental NGX - Angular components for [Fundamental UI:https://github.com/SAP/fundamental]
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
