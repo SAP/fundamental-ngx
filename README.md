@@ -12,7 +12,7 @@ At the time this version was released, there are no known limitations
 If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues)
 
 ### Contributing
-In case you want to contribute, please, check the [CONTRIBUTING.md](test) doc for contribution guidelines.
+In case you want to contribute, please, check the [CONTRIBUTING.md](./CONTRIBUTING.md) doc for contribution guidelines.
 
 ### To-Do (upcoming changes)
 ### License
