@@ -3,16 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
 ### Usage
-
-While this project is still in development, it will be stored on the private SAP hybris npm registry.  If you have not set up your `~/.npmrc` node configuration to pull from this registry, you'll need to follow the instructions at <https://repository.hybris.com/webapp/#/home> to do so.  Log in and search for "npm-repository" in the "Set Me Up" search box for details.
-
-Then, to install the library, run: 
-
-`npm install --save fundamental-ngx`
-
-This will add Angular Fundamental to your node_modules dependencies.
-
-Next we need to include the Fundamental UI CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
+We need to include the Fundamental UI CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
 
 `"./node_modules/fundamental-ui/dist/fundamental-ui.css"`
 
