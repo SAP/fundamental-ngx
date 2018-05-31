@@ -1,0 +1,87 @@
+<header>Inline Help</header>
+<description>Inline help is used to display help text in a popover, often inline with headers, body text and form labels.</description>
+<import module="InlineHelpModule" path="fundamental/inline-help/inline-help.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-inline-help&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'position', description: 'String - Options include \'bottom-right\' (default), \'bottom-left\', \'right\', and \'left\' '}
+  ]
+}"></properties>
+
+<separator></separator>
+<h2>Default Position</h2>
+<p>The default positioning of inline help component is bottom right.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p class="fd-centered-content">
+      <span>Bottom Right (Default)</span>
+      <fd-inline-help>
+          Lorem ipsum dolor sit amet, consectetur adipiscing.
+      </fd-inline-help>
+    </p>
+  </div>
+</div>
+<pre>{{defaultPositionHtml}}</pre>
+
+<separator></separator>
+
+<h2>Bottom Left Position</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p class="fd-centered-content">
+      <span>Bottom Left</span>
+      <fd-inline-help [position]="'bottom-left'">
+        Lorem ipsum dolor sit amet, consectetur adipiscing.
+      </fd-inline-help>
+    </p>
+  </div>
+</div>
+<pre>{{buttomLeftPositionHtml}}</pre>
+
+<separator></separator>
+<h2>Right Position</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p class="fd-centered-content">
+      <span>Right</span>
+      <fd-inline-help [position]="'right'">
+        Lorem ipsum dolor sit amet, consectetur adipiscing.
+      </fd-inline-help>
+    </p>
+  </div>
+</div>
+<pre>{{rightPositionHtml}}</pre>
+
+<separator></separator>
+<h2>Left Position</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p class="fd-centered-content">
+      <span>Left</span>
+      <fd-inline-help [position]="'left'">
+        Lorem ipsum dolor sit amet, consectetur adipiscing.
+      </fd-inline-help>
+    </p>
+  </div>
+</div>
+<pre>{{leftPositionHtml}}</pre>
+
+<separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <p class="fd-centered-content">
+      <span>{{data.properties.label}}</span>
+      <fd-inline-help [position]="data.properties.position">
+          {{data.properties.helpText}}
+      </fd-inline-help>
+    </p>
+</playground>
+
+

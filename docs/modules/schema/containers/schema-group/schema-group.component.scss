@@ -1,0 +1,43 @@
+$sub-header--margin-left: 20px;
+
+:host {
+  display: block;
+  padding: 20px;
+  border: 1px #eee solid;
+}
+
+.form-group {
+  label {
+    display: block;
+    margin: 8px 0 4px;
+  }
+  .form-control {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.checkbox {
+  > label {
+    padding-left: 25px;
+    position: relative;
+    cursor: pointer;
+    display: inline;
+    > input {
+      position: absolute;
+      left: 0;
+      top: 5px;
+    }
+  }
+}
+
+.schema--sub-header {
+  margin-left: $sub-header--margin-left;
+  margin-bottom: 10px;
+  :host + & {
+    margin-top: 15px;
+  }
+}

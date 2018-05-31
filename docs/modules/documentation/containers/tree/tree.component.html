@@ -1,0 +1,63 @@
+<header>Tree</header>
+<description>The Tree component is used to display hierarchical data in tabular way. Permitting the user to dig deeper into the data in an simple way. Along with displaying the hierarchy information it can also contain other data in the same node as well.</description>
+<import module="TreeModule" path="fundamental/tree/tree.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-tree&gt;</h1>
+
+There are two different types of tree cells you can use, the 'simple' cells and the 'rich' cells.  Simple cells can only display text.  Rich cells can contain plain text or links.  The tree component requires only two root arguments, a 'headers' array and a 'treeData' array.  The children of the tree are generated recursively from data within the treeData array.
+<br><br>
+In a tree with simple cells, the treeData property is an array of objects that contain two properties, 'rowData' and optionally 'children'.  Simple cell rowData is an array of strings, each string being a cell in the tree.  The 'children' property is an array of objects that match this object's structure.
+
+<separator></separator>
+
+<h2>Simple Tree</h2>
+This is an example of a tree with simple cells, where the rowData is an array of strings.<br><br>
+<properties [properties]="{
+    inputs: [
+    { name: 'headers', description: 'Array of strings for the column headers of the tree' },
+    { name: 'treeData', description: 'Array of objects that contain two properties, rowData (an array of strings containing data for each column in the row), and children (an array of objects containing additional rows).'},
+    { name: 'displayTreeActions', description: 'Boolean value to show or hide an action button on each tree row that displays Edit and Delete options.  When clicked, these buttons emit the events editRowClicked and deleteRowClicked, respectively, passing the selected row as an argument.  You can catch these events in your component that is housing the tree component.'}
+  ]
+  }">
+</properties>
+<br>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-tree (editRowClicked)="editRowClicked($event)" (deleteRowClicked)="deleteRowClicked($event)" [displayTreeActions]="true" [headers]="data.properties.headers" [treeData]="data.properties.simpleTreeData">
+
+    </fd-tree>
+  </div>
+</div>
+<pre>{{simpleTreeHtml}}</pre>
+<pre>{{simpleTreeJson}}</pre>
+
+<separator></separator>
+
+<h2>Rich Tree</h2>
+This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one or both of the following properties:<br><br>
+<properties [properties]="{
+    properties: [
+    { name: 'displayText', description: 'The text to display in the cell.  If omitted, the link url will be displayed.' },
+    { name: 'linkUrl', description: 'If provided, this is the URL the link will navigate to.' }
+  ]
+  }">
+</properties>
+<br><br>
+<properties [properties]="{
+    inputs: [
+    { name: 'headers', description: 'Array of strings for the column headers of the tree' },
+    { name: 'treeData', description: 'Array of objects that contain two properties, rowData (an array of objects containing data for each column in the row), and children (an array of objects containing additional rows).'}
+  ]
+  }">
+</properties>
+<br>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-tree [headers]="data.properties.headers" [treeData]="data.properties.richTreeData">
+
+    </fd-tree>
+  </div>
+</div>
+<pre>{{richTreeHtml}}</pre>
+<pre>{{richTreeJson}}</pre>

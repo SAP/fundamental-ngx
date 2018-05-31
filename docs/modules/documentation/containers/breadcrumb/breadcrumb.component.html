@@ -1,0 +1,23 @@
+<header>Breadcrumb</header>
+<description>
+  The breadcrumb allows users to see the current page and navigation path to that page. Users can navigate to previous levels
+  in the path by clicking on those levels. By clicking on the current page, a dropdown allows users to access other pages
+  at that same level.
+</description>
+<import module="BreadcrumbModule" path="fundamental/breadcrumb/breadcrumb.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-breadcrumb&gt;</h1>
+
+<separator></separator>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-breadcrumb>
+      <fd-breadcrumb-item [url]="'#'" [text]="'Link Text'"></fd-breadcrumb-item>
+      <fd-breadcrumb-item [url]="'#'" [text]="'Link Text'"></fd-breadcrumb-item>
+      <fd-breadcrumb-item [text]="'Link Text'"></fd-breadcrumb-item>
+    </fd-breadcrumb>
+  </div>
+</div>
+<pre>{{breadcrumbHtml}}</pre>

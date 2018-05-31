@@ -1,0 +1,16 @@
+
+<h3>Playground</h3>
+<div class="row" [ngClass]="{'schema-block': displayBlock}">
+  <div class="col">
+    <div class="json">
+      <ng-content></ng-content>
+    </div>
+    <br>
+  </div>
+  <div class="col">
+    <schema class="schema" [schema]="schema" [initialValues]="schemaInitialValues" (onSchemaValues)="onSchemaValueChanges($event)"></schema>
+  </div>
+</div>
+<separator></separator>
+<h3>JSON</h3>
+<pre><code>{{ jsonData | json }}</code></pre>

@@ -1,0 +1,92 @@
+<header>List</header>
+<description>The List Component can be used to display a list of items with simple information such as scopes, names, etc.</description>
+<import module="ListModule" path="fundamental/list/list.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-list&gt;</h1>
+
+<properties [properties]="{
+  childComponents: [
+    { name: '<fd-list-item>', description: 'A row in the list.  Must be a child of <fd-list>.' },
+    { name: '<fd-list-action>', description: 'Contextual dropdown for each list item.  Must be a child of <fd-list-item>.' },
+    { name: '<fd-list-checkbox>', description: 'Adds a checkbox to the list item.  Must be a child of <fd-list-item>.' }
+  ]
+}"></properties>
+
+<separator></separator>
+<p>A simple list.  The list item can contain plain text or links.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-list>
+      <fd-list-item><a style="cursor: pointer;">List item 1</a></fd-list-item>
+      <fd-list-item>List item 2</fd-list-item>
+      <fd-list-item><a style="cursor: pointer;">List item 3</a></fd-list-item>
+      <fd-list-item>List item 4</fd-list-item>
+    </fd-list>
+  </div>
+</div>
+<pre>{{simpleListHtml}}</pre>
+
+<separator></separator>
+
+<p>The List items can also contain quick actions, such as: remove, edit, copy, etc.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-list>
+      <fd-list-item>List item 1
+        <fd-list-action>
+          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+        </fd-list-action>
+      </fd-list-item>
+      <fd-list-item>List item 2
+        <fd-list-action>
+          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+        </fd-list-action>
+      </fd-list-item>
+      <fd-list-item>List item 3
+        <fd-list-action>
+          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+        </fd-list-action>
+      </fd-list-item>
+      <fd-list-item>List item 4
+        <fd-list-action>
+          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+        </fd-list-action>
+      </fd-list-item>
+    </fd-list>
+  </div>
+</div>
+<pre>{{listActionsHtml}}</pre>
+
+<separator></separator>
+
+<p>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-list>
+      <fd-list-item><fd-list-checkbox>List item 1</fd-list-checkbox></fd-list-item>
+      <fd-list-item><fd-list-checkbox>List item 2</fd-list-checkbox></fd-list-item>
+      <fd-list-item><fd-list-checkbox>List item 3</fd-list-checkbox></fd-list-item>
+      <fd-list-item><fd-list-checkbox>List item 4</fd-list-checkbox></fd-list-item>
+    </fd-list>
+  </div>
+</div>
+<pre>{{listCheckboxesHtml}}</pre>
+
+<separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-list-item>{{data.properties.action.label}}<fd-list-action>
+        <button fd-button type="secondary" [glyph] = "data.properties.action.icon">
+        </button>
+      </fd-list-action></fd-list-item>
+</playground>
+
+
+
+
+
+
+
+
+
