@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
+### Description
+### Requirements
+### Download and Installation
+### Configuration
+### Limitations
+### Known Issues
+### How to obtain support
+### Contributing
+### To-Do (upcoming changes)
+### License
+
 ### Usage
 We need to include the Fundamental UI CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
 
