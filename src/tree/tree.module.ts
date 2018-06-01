@@ -6,21 +6,8 @@ import { IconModule } from '../icon/icon.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
 
 @NgModule({
-  declarations: [
-    Tree,
-    TreeChild
-  ],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    IconModule,
-    DropdownModule
-  ],
-  exports: [
-    Tree,
-    TreeChild
-  ]
+  declarations: [Tree, TreeChild],
+  imports: [CommonModule, ButtonModule, IconModule, DropdownModule],
+  exports: [Tree, TreeChild]
 })
-export class TreeModule {
-
-}
+export class TreeModule {}

@@ -1,12 +1,21 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Tile, TileContent, TileTitle, TileMedia, TileActions, ProductTile, ProductTileMedia, ProductTileContent, ProductTileTitle, TileGrid} from './tile';
+import {
+  Tile,
+  TileContent,
+  TileTitle,
+  TileMedia,
+  TileActions,
+  ProductTile,
+  ProductTileMedia,
+  ProductTileContent,
+  ProductTileTitle,
+  TileGrid
+} from './tile';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [
     Tile,
     TileContent,
@@ -32,4 +41,4 @@ import { Tile, TileContent, TileTitle, TileMedia, TileActions, ProductTile, Prod
     TileGrid
   ]
 })
-export class TileModule { }
+export class TileModule {}

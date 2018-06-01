@@ -7,7 +7,6 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './panel.component.html'
 })
 export class PanelComponent implements OnInit {
-
   panelHtml = `<fd-panel>
   <fd-panel-header>
     <fd-panel-title>Panel Title</fd-panel-title>
@@ -32,10 +31,5 @@ export class PanelComponent implements OnInit {
   </fd-panel-footer>
 </fd-panel>`;
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }
-
-
-

@@ -6,18 +6,12 @@ declare let hljs: any;
   selector: 'html-example',
   templateUrl: './html-example.component.html'
 })
-export class HtmlExampleComponent implements AfterViewInit  {
+export class HtmlExampleComponent implements AfterViewInit {
+  @Input() html: string;
 
-  @Input()
-  html: string;
-
-  constructor(
-    private element: ElementRef
-  ) { }
+  constructor(private element: ElementRef) {}
 
   ngAfterViewInit() {
-    hljs.highlightBlock(this.element.nativeElement.querySelector('.highlight'))
+    hljs.highlightBlock(this.element.nativeElement.querySelector('.highlight'));
   }
-
 }
-

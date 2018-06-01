@@ -7,7 +7,6 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './mega-menu.component.html'
 })
 export class MegaMenuComponent implements OnInit {
-
   megaMenuHtml = `<fd-mega-menu>
   <fd-mega-menu-group>
     <fd-mega-menu-title>
@@ -38,10 +37,7 @@ export class MegaMenuComponent implements OnInit {
   </fd-mega-menu-group>
 </fd-mega-menu>`;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }
-
-
-

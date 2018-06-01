@@ -7,12 +7,14 @@ import { Component } from '@angular/core';
       <ng-content></ng-content>
     </p>
   `,
-  styles: [`
-    .description {
-      font-weight: 300;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-  `]
+  styles: [
+    `
+      .description {
+        font-weight: 300;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+    `
+  ]
 })
-export class DescriptionComponent { }
+export class DescriptionComponent {}

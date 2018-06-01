@@ -4,15 +4,11 @@ import { Directive, Input } from '@angular/core';
   selector: 'fd-icon',
   host: {
     '[class]': '"sap-icon sap-icon--" + glyph + ((size) ? " sap-icon--" + size : "")',
-    'role': 'presentation'
+    role: 'presentation'
   }
 })
 export class Icon {
+  @Input() glyph;
 
-  @Input()
-  glyph;
-
-  @Input()
-  size;
-
+  @Input() size;
 }

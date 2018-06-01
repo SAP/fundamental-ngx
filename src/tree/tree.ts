@@ -1,4 +1,13 @@
-import { Component, Input, Output, OnInit, AfterContentInit, ViewChildren, QueryList, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  AfterContentInit,
+  ViewChildren,
+  QueryList,
+  EventEmitter
+} from '@angular/core';
 
 export interface TreeRowObject {
   rowData: any[];
@@ -52,21 +61,15 @@ export interface TreeRowObject {
   `
 })
 export class TreeChild implements OnInit {
+  @Input() row: TreeRowObject;
 
-  @Input()
-  row: TreeRowObject;
+  @Input() hideChildren: boolean;
 
-  @Input()
-  hideChildren: boolean;
+  @Input() displayTreeActions: boolean;
 
-  @Input()
-  displayTreeActions: boolean;
+  @Output() editClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  editClicked: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
-  deleteClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();
 
   ngOnInit() {
     this.hideChildren = false;
@@ -85,7 +88,7 @@ export class TreeChild implements OnInit {
     if (typeof variable === 'string') {
       retVal = 'string';
     } else if (typeof variable === 'object') {
-      retVal = 'object'
+      retVal = 'object';
     }
 
     return retVal;
@@ -98,7 +101,6 @@ export class TreeChild implements OnInit {
   deleteTreeItem(row) {
     this.deleteClicked.emit(row);
   }
-
 }
 
 @Component({
@@ -125,27 +127,19 @@ export class TreeChild implements OnInit {
   `
 })
 export class Tree implements OnInit, AfterContentInit {
+  @Input() headers: string[];
 
-  @Input()
-  headers: string[];
+  @Input() treeData: TreeRowObject[];
 
-  @Input()
-  treeData: TreeRowObject[];
+  @Input() hideAll: boolean;
 
-  @Input()
-  hideAll: boolean;
+  @Input() displayTreeActions: boolean;
 
-  @Input()
-  displayTreeActions: boolean;
+  @Output() editRowClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  editRowClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteRowClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  deleteRowClicked: EventEmitter<any> = new EventEmitter<any>();
-
-  @ViewChildren(TreeChild)
-  treeChildren: QueryList<TreeChild>;
+  @ViewChildren(TreeChild) treeChildren: QueryList<TreeChild>;
 
   ngOnInit() {
     this.hideAll = false;
@@ -153,7 +147,7 @@ export class Tree implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     if (this.treeData && this.treeData.length) {
-      this.treeData.forEach((row) => {
+      this.treeData.forEach(row => {
         this.getChildDepth(row, 0);
         this.handleEmptyTrailingCells(row); // handle empty cells for parents
       });
@@ -162,7 +156,7 @@ export class Tree implements OnInit, AfterContentInit {
 
   toggleDisplayAll() {
     this.hideAll = !this.hideAll;
-    this.treeChildren.forEach((child) => {
+    this.treeChildren.forEach(child => {
       child.toggleDisplayChildren(this.hideAll);
     });
   }
@@ -172,7 +166,7 @@ export class Tree implements OnInit, AfterContentInit {
       row.sublevelClass = 'fd-tree__group--sublevel-' + depth;
     }
     if (row.children) {
-      row.children.forEach((child) => {
+      row.children.forEach(child => {
         this.getChildDepth(child, depth + 1);
         this.handleEmptyTrailingCells(child); // handle empty cells for children
       });
@@ -200,5 +194,4 @@ export class Tree implements OnInit, AfterContentInit {
   deleteClicked(row) {
     this.deleteRowClicked.emit(row);
   }
-
 }

@@ -7,19 +7,18 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './inline-help.component.html'
 })
 export class InlineHelpComponent implements OnInit {
-
   static schema: Schema = {
     properties: {
       properties: {
         type: 'object',
         properties: {
-          'label': {
+          label: {
             type: 'string'
           },
-          'helpText': {
+          helpText: {
             type: 'string'
           },
-          'position': {
+          position: {
             type: 'string',
             enum: ['default', 'bottom-left', 'right', 'left']
           }
@@ -58,14 +57,14 @@ export class InlineHelpComponent implements OnInit {
     '\n' +
     '<fd-inline-help [position]="\'right\'">\n' +
     '   Lorem ipsum dolor sit amet, consectetur adipiscing.\n' +
-    '</fd-inline-help>\n' ;
+    '</fd-inline-help>\n';
 
   leftPositionHtml =
     'Left\n' +
     '\n' +
     '<fd-inline-help [position]="\'left\'">\n' +
     '   Lorem ipsum dolor sit amet, consectetur adipiscing.\n' +
-    '</fd-inline-help>\n' ;
+    '</fd-inline-help>\n';
 
   constructor(private schemaFactory: SchemaFactoryService) {
     this.schema = this.schemaFactory.getComponent('inlineHelp');
@@ -75,10 +74,5 @@ export class InlineHelpComponent implements OnInit {
     this.data = data;
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }
-
-
-

@@ -7,11 +7,13 @@ import { Component } from '@angular/core';
       <ng-content></ng-content>
     </h1>
   `,
-  styles: [`
-    .header {
-      margin-top: 2rem;
-      font-size: 2.2rem;
-    }
-  `]
+  styles: [
+    `
+      .header {
+        margin-top: 2rem;
+        font-size: 2.2rem;
+      }
+    `
+  ]
 })
-export class HeaderComponent { }
+export class HeaderComponent {}

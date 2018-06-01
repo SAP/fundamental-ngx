@@ -1,6 +1,5 @@
 import { Component, Input, Directive } from '@angular/core';
 
-
 @Component({
   selector: 'fd-list',
   template: `
@@ -11,27 +10,23 @@ import { Component, Input, Directive } from '@angular/core';
     </ul>
   `
 })
-
-export class List { }
-
+export class List {}
 
 @Component({
   selector: 'fd-list-item',
   host: {
-    'class': 'fd-list-group__item',
+    class: 'fd-list-group__item'
   },
   template: `
       <ng-content></ng-content>
   `
 })
-
-export class ListItem { }
-
+export class ListItem {}
 
 @Component({
   selector: 'fd-list-checkbox',
   host: {
-    'class': 'fd-form__item fd-form__item--check',
+    class: 'fd-form__item fd-form__item--check'
   },
   template: `
     <div class="fd-form__item fd-form__item--check">
@@ -42,16 +37,12 @@ export class ListItem { }
     </div>
   `
 })
-
-export class ListCheckbox {
-
-}
-
+export class ListCheckbox {}
 
 @Directive({
   selector: 'fd-list-action',
   host: {
-    'class': 'fd-list-group__action'
+    class: 'fd-list-group__action'
   }
 })
-export class ListAction { }
+export class ListAction {}

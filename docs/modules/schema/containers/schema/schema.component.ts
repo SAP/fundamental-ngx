@@ -8,15 +8,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['schema.component.scss']
 })
 export class SchemaComponent implements OnInit {
+  @Input() schema: Schema;
 
-  @Input()
-  schema: Schema;
+  @Input() initialValues: any;
 
-  @Input()
-  initialValues: any;
-
-  @Output()
-  onSchemaValues: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onSchemaValues: EventEmitter<any> = new EventEmitter<any>();
 
   schemaGroup: FormGroup;
 
@@ -24,7 +20,7 @@ export class SchemaComponent implements OnInit {
     this.schemaGroup = this._constructProperties(this.schema.properties);
     this.schemaGroup.patchValue(this.initialValues);
 
-    this.schemaGroup.valueChanges.subscribe((values) => {
+    this.schemaGroup.valueChanges.subscribe(values => {
       this.onSchemaValues.emit(values);
     });
   }
@@ -40,5 +36,4 @@ export class SchemaComponent implements OnInit {
     }
     return new FormGroup(formGroup);
   }
-
 }

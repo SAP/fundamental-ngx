@@ -8,27 +8,23 @@ import { Directive, Input, Component } from '@angular/core';
     </div>
   `
 })
-export class ButtonGroup { }
+export class ButtonGroup {}
 
 @Directive({
   selector: '[fd-button-grouped]',
   host: {
-    '[class]': '"fd-button--grouped" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (compact ? " fd-button--compact" : "") + (state ? " is-" + state : "")'
+    '[class]':
+      '"fd-button--grouped" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (compact ? " fd-button--compact" : "") + (state ? " is-" + state : "")'
   }
 })
-export class ButtonGrouped { 
-  @Input()
-  id: string;
-  
-  @Input()
-  size: string;
+export class ButtonGrouped {
+  @Input() id: string;
 
-  @Input()
-  glyph: string;
+  @Input() size: string;
 
-  @Input()
-  state: string;
+  @Input() glyph: string;
 
-  @Input()
-  compact: boolean = false;
+  @Input() state: string;
+
+  @Input() compact: boolean = false;
 }

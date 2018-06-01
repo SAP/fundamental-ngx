@@ -1,4 +1,4 @@
-import {Component, HostListener, Input} from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'fd-mega-menu',
@@ -7,7 +7,8 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content></ng-content>
     </nav>
   `
-}) export class MegaMenu { }
+})
+export class MegaMenu {}
 
 @Component({
   selector: 'fd-mega-menu-group',
@@ -17,7 +18,8 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content select="fd-mega-menu-list"></ng-content>
     </div>
   `
-}) export class MegaMenuGroup { }
+})
+export class MegaMenuGroup {}
 
 @Component({
   selector: 'fd-mega-menu-title',
@@ -26,7 +28,8 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content></ng-content>
     </h1>
   `
-}) export class MegaMenuTitle { }
+})
+export class MegaMenuTitle {}
 
 @Component({
   selector: 'fd-mega-menu-list',
@@ -35,7 +38,8 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content></ng-content>
     </ul>
   `
-}) export class MegaMenuList { }
+})
+export class MegaMenuList {}
 
 @Component({
   selector: 'fd-mega-menu-item',
@@ -45,7 +49,8 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content select="fd-mega-menu-sublist"></ng-content>
     </li>
   `
-}) export class MegaMenuItem { }
+})
+export class MegaMenuItem {}
 
 @Component({
   selector: 'fd-mega-menu-link',
@@ -59,16 +64,13 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content select="fd-mega-menu-subitem"></ng-content>
     </ul>
   `
-}) export class MegaMenuLink {
+})
+export class MegaMenuLink {
+  @Input() url: string;
 
-  @Input()
-  url: string;
-
-  @Input()
-  hasSublist: boolean;
+  @Input() hasSublist: boolean;
 
   sublistIsOpen = false;
-
 }
 
 @Component({
@@ -78,7 +80,8 @@ import {Component, HostListener, Input} from '@angular/core';
       <ng-content></ng-content>
     </ul>
   `
-}) export class MegaMenuSubList { }
+})
+export class MegaMenuSubList {}
 
 @Component({
   selector: 'fd-mega-menu-subitem',
@@ -89,9 +92,7 @@ import {Component, HostListener, Input} from '@angular/core';
       </a>
     </li>
   `
-}) export class MegaMenuSubItem {
-
-  @Input()
-  url: string;
-
+})
+export class MegaMenuSubItem {
+  @Input() url: string;
 }

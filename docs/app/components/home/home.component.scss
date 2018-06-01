@@ -1,7 +1,7 @@
 :host {
   display: block;
   height: 100vh;
-  background-color: #008DEE;
+  background-color: #008dee;
 }
 
 $angular-logo-spacing: 1.5rem;
@@ -16,7 +16,7 @@ $trangle-size: 10rem;
 
 .home__welcome {
   padding: 2.5rem 3.5rem;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   max-width: 28rem;
   text-align: center;
   position: relative;
@@ -30,7 +30,7 @@ $trangle-size: 10rem;
 
 .home__title {
   font-size: 1.75rem;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 1rem;
@@ -56,8 +56,8 @@ $trangle-size: 10rem;
 
 .home__btn_docs {
   background-color: #000000;
-  padding: .75rem 1rem;
-  color: #FFFFFF;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
   border: none;
 }
 

@@ -12,10 +12,10 @@ export class TableComponent {
       properties: {
         type: 'object',
         properties: {
-          'headers': {
+          headers: {
             type: 'string[]'
           },
-          'tableData': {
+          tableData: {
             type: 'TableRowObject[]'
           }
         }
@@ -23,11 +23,11 @@ export class TableComponent {
       state: {
         type: 'object',
         properties: {
-          'disabled': {
+          disabled: {
             type: 'boolean'
           }
         }
-      },
+      }
     },
     type: 'object'
   };
@@ -153,123 +153,121 @@ export class TableComponent {
     }
   };
 
-  simpleTableHtml = '<fd-table [headers]="headers" [tableData]="tableData">\n' +
-    '\n' +
-    '</fd-table>';
+  simpleTableHtml = '<fd-table [headers]="headers" [tableData]="tableData">\n' + '\n' + '</fd-table>';
 
-  simpleTableJson = 'headers: [\'Column Header 1\', \'Column Header 2\', \'Column Header 3\', \'Column Header 4\'],\n' +
+  simpleTableJson =
+    "headers: ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'],\n" +
     'tableData: [\n' +
     '  {\n' +
-    '    rowData: [\'Data 1\', \'Data 2\', \'Data 3\', \'Data 4\']\n' +
+    "    rowData: ['Data 1', 'Data 2', 'Data 3', 'Data 4']\n" +
     '  },\n' +
     '  {\n' +
-    '    rowData: [\'Data 5\', \'Data 6\', \'Data 7\', \'Data 8\']\n' +
+    "    rowData: ['Data 5', 'Data 6', 'Data 7', 'Data 8']\n" +
     '  }\n' +
     ']';
 
-  richTableHtml = '<fd-table [headers]="headers" [tableData]="tableData">\n' +
-    '\n' +
-    '</fd-table>';
+  richTableHtml = '<fd-table [headers]="headers" [tableData]="tableData">\n' + '\n' + '</fd-table>';
 
-  richTableJson = 'headers: [\'Avatar\', \'email\', \'First Name\', \'Last Name\', \'Date\'],\n' +
+  richTableJson =
+    "headers: ['Avatar', 'email', 'First Name', 'Last Name', 'Date'],\n" +
     'tableData: [\n' +
     '    {\n' +
     '      rowData: [\n' +
     '        {\n' +
-    '          imageUrl: \'https://robohash.org/green?size=50x50\'\n' +
+    "          imageUrl: 'https://robohash.org/green?size=50x50'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'john.brown@qwerty.io\',\n' +
-    '          linkUrl: \'mailto:john.brown@qwerty.io\'\n' +
+    "          displayText: 'john.brown@qwerty.io',\n" +
+    "          linkUrl: 'mailto:john.brown@qwerty.io'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'John\'\n' +
+    "          displayText: 'John'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Brown\'\n' +
+    "          displayText: 'Brown'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'05/14/17\'\n' +
+    "          displayText: '05/14/17'\n" +
     '        }\n' +
     '      ]\n' +
     '    },\n' +
     '    {\n' +
     '      rowData: [\n' +
     '        {\n' +
-    '          imageUrl: \'https://robohash.org/brown?size=50x50\'\n' +
+    "          imageUrl: 'https://robohash.org/brown?size=50x50'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'florence.garcia@qwerty.io\',\n' +
-    '          linkUrl: \'mailto:florence.garcia@qwerty.io\'\n' +
+    "          displayText: 'florence.garcia@qwerty.io',\n" +
+    "          linkUrl: 'mailto:florence.garcia@qwerty.io'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Florence\'\n' +
+    "          displayText: 'Florence'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Garcia\'\n' +
+    "          displayText: 'Garcia'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'05/14/17\'\n' +
+    "          displayText: '05/14/17'\n" +
     '        }\n' +
     '      ]\n' +
     '    },\n' +
     '    {\n' +
     '      rowData: [\n' +
     '        {\n' +
-    '          imageUrl: \'https://robohash.org/Q27.png?set=set1&size=50x50\'\n' +
+    "          imageUrl: 'https://robohash.org/Q27.png?set=set1&size=50x50'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'mark.helper@qwerty.io\',\n' +
-    '          linkUrl: \'mailto:mark.helper@qwerty.io\'\n' +
+    "          displayText: 'mark.helper@qwerty.io',\n" +
+    "          linkUrl: 'mailto:mark.helper@qwerty.io'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Mark\'\n' +
+    "          displayText: 'Mark'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Helper\'\n' +
+    "          displayText: 'Helper'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'07/14/17\'\n' +
+    "          displayText: '07/14/17'\n" +
     '        }\n' +
     '      ]\n' +
     '    },\n' +
     '    {\n' +
     '      rowData: [\n' +
     '        {\n' +
-    '          imageUrl: \'https://robohash.org/water?&size=50x50\'\n' +
+    "          imageUrl: 'https://robohash.org/water?&size=50x50'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'beth.butler@qwerty.io\',\n' +
-    '          linkUrl: \'mailto:beth.butler@qwerty.io\'\n' +
+    "          displayText: 'beth.butler@qwerty.io',\n" +
+    "          linkUrl: 'mailto:beth.butler@qwerty.io'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Beth\'\n' +
+    "          displayText: 'Beth'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Butler\'\n' +
+    "          displayText: 'Butler'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'08/14/17\'\n' +
+    "          displayText: '08/14/17'\n" +
     '        }\n' +
     '      ]\n' +
     '    },\n' +
     '    {\n' +
     '      rowData: [\n' +
     '        {\n' +
-    '          imageUrl: \'https://robohash.org/red?size=50x50\'\n' +
+    "          imageUrl: 'https://robohash.org/red?size=50x50'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'stephen.johnson@qwerty.io\',\n' +
-    '          linkUrl: \'mailto:stephen.johnson@qwerty.io\'\n' +
+    "          displayText: 'stephen.johnson@qwerty.io',\n" +
+    "          linkUrl: 'mailto:stephen.johnson@qwerty.io'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Stephen\'\n' +
+    "          displayText: 'Stephen'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'Johnson\'\n' +
+    "          displayText: 'Johnson'\n" +
     '        },\n' +
     '        {\n' +
-    '          displayText: \'09/14/17\'\n' +
+    "          displayText: '09/14/17'\n" +
     '        }\n' +
     '      ]\n' +
     '    }\n' +
@@ -282,6 +280,4 @@ export class TableComponent {
   onSchemaValues(data) {
     this.data = data;
   }
-
-
 }

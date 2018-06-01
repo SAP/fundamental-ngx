@@ -13,20 +13,12 @@ import { SchemaFactoryService } from './services/schema-factory/schema-factory.s
 import { Schema } from './models/schema.model';
 
 @NgModule({
-  declarations: [
-    SchemaComponent,
-    SchemaGroupComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    SchemaComponent
-  ]
+  declarations: [SchemaComponent, SchemaGroupComponent],
+  imports: [CommonModule, ReactiveFormsModule],
+  exports: [SchemaComponent]
 })
 export class SchemaModule {
-  static forRoot (componentSchemas: {[name: string]: Schema}): ModuleWithProviders {
+  static forRoot(componentSchemas: { [name: string]: Schema }): ModuleWithProviders {
     return {
       ngModule: SchemaModule,
       providers: [

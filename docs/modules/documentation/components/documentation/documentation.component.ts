@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   templateUrl: './documentation.component.html'
 })
 export class DocumentationComponent {
-
   components: any = [
     { url: 'actionbar', name: 'Action Bar' },
     { url: 'alert', name: 'Alert' },
@@ -21,23 +20,20 @@ export class DocumentationComponent {
     { url: 'inlineHelp', name: 'Inline Help' },
     { url: 'image', name: 'Image' },
     { url: 'inputGroup', name: 'Input Group' },
-    { url: 'list', name: 'List'},
-    { url: 'megaMenu', name: 'Mega Menu'},
-    { url: 'modal', name: 'Modal'},
+    { url: 'list', name: 'List' },
+    { url: 'megaMenu', name: 'Mega Menu' },
+    { url: 'modal', name: 'Modal' },
     { url: 'pagination', name: 'Pagination' },
-    { url: 'panel', name: 'Panel'},
+    { url: 'panel', name: 'Panel' },
     { url: 'table', name: 'Table' },
     { url: 'tabs', name: 'Tabs' },
     { url: 'tile', name: 'Tile' },
     { url: 'tree', name: 'Tree' }
   ];
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private router: Router) {}
 
   selectComponent(component: string) {
     this.router.navigate(['/docs', component]);
   }
-
 }

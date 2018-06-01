@@ -7,22 +7,17 @@ import { Schema } from '../../../schema/models/schema.model';
   styleUrls: ['./playground.components.scss']
 })
 export class PlayGroundComponent implements OnInit {
+  @Input() schema: Schema;
 
-  @Input()
-  schema: Schema;
+  @Input() schemaInitialValues;
 
-  @Input()
-  schemaInitialValues;
+  @Input() displayBlock: boolean;
 
-  @Input()
-  displayBlock: boolean;
-
-  @Output()
-  onFormChanges: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();
 
   jsonData: any;
 
-  ngOnInit () {
+  ngOnInit() {
     this.jsonData = this.schemaInitialValues;
   }
 
@@ -30,5 +25,4 @@ export class PlayGroundComponent implements OnInit {
     this.jsonData = $event;
     this.onFormChanges.emit($event);
   }
-
 }

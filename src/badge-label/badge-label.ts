@@ -10,15 +10,10 @@ import { Directive, Input, Component } from '@angular/core';
   `
 })
 export class Badge {
+  @Input() status;
 
-  @Input()
-  status;
-
-  @Input()
-  modifier;
-
+  @Input() modifier;
 }
-
 
 @Component({
   selector: 'fd-label',
@@ -30,8 +25,5 @@ export class Badge {
   `
 })
 export class Label {
-
-  @Input()
-  status;
-
+  @Input() status;
 }

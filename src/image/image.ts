@@ -11,17 +11,11 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class Image {
+  @Input() size: string = 'm';
 
-  @Input()
-  size:string = "m";
+  @Input() circle: boolean = false;
 
-  @Input()
-  circle:boolean = false;
+  @Input() label: string = 'Image label';
 
-  @Input()
-  label:string="Image label";
-
-  @Input()
-  photo: string;
-
+  @Input() photo: string;
 }

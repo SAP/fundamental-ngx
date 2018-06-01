@@ -3,7 +3,8 @@ import { Component, Directive, Input } from '@angular/core';
 @Component({
   selector: 'fd-tile',
   host: {
-    '[class]': ' "fd-tile" + (disabled ? " is-disabled" : "") + (rowSpan ? " fd-has-grid-row-span-" + rowSpan : "")  + (columnSpan ? " fd-has-grid-column-span-" + columnSpan : "") + (colorAccent ? " fd-has-background-color-accent-" + colorAccent : "")',
+    '[class]':
+      ' "fd-tile" + (disabled ? " is-disabled" : "") + (rowSpan ? " fd-has-grid-row-span-" + rowSpan : "")  + (columnSpan ? " fd-has-grid-column-span-" + columnSpan : "") + (colorAccent ? " fd-has-background-color-accent-" + colorAccent : "")',
     '[attr.role]': "(this.isButton === true ? 'button' : '')"
   },
   template: `
@@ -14,29 +15,24 @@ import { Component, Directive, Input } from '@angular/core';
   `
 })
 export class Tile {
-  @Input()
-  disabled: boolean = false;
+  @Input() disabled: boolean = false;
 
-  @Input()
-  isButton: boolean = false;
+  @Input() isButton: boolean = false;
 
-  @Input()
-  rowSpan;
+  @Input() rowSpan;
 
-  @Input()
-  columnSpan;
+  @Input() columnSpan;
 
-  @Input()
-  colorAccent;
+  @Input() colorAccent;
 }
 
 @Directive({
   selector: 'fd-tile-content',
   host: {
-    class: "fd-tile__content"
+    class: 'fd-tile__content'
   }
 })
-export class TileContent { }
+export class TileContent {}
 
 @Component({
   selector: 'fd-tile-title',
@@ -44,15 +40,15 @@ export class TileContent { }
     <h2 class="fd-tile__title"><ng-content></ng-content></h2>
   `
 })
-export class TileTitle { }
+export class TileTitle {}
 
 @Directive({
   selector: 'fd-tile-media',
   host: {
-    class: "fd-tile__media"
+    class: 'fd-tile__media'
   }
 })
-export class TileMedia { }
+export class TileMedia {}
 
 @Component({
   selector: 'fd-tile-actions',
@@ -62,7 +58,7 @@ export class TileMedia { }
     </div>
   `
 })
-export class TileActions { }
+export class TileActions {}
 
 @Component({
   selector: 'fd-product-tile',
@@ -78,11 +74,9 @@ export class TileActions { }
   `
 })
 export class ProductTile {
-  @Input()
-  disabled: boolean = false;
+  @Input() disabled: boolean = false;
 
-  @Input()
-  isButton: boolean = false;
+  @Input() isButton: boolean = false;
 }
 
 @Component({
@@ -92,8 +86,7 @@ export class ProductTile {
   `
 })
 export class ProductTileMedia {
-  @Input()
-  photo: string;
+  @Input() photo: string;
 }
 
 @Component({
@@ -102,7 +95,7 @@ export class ProductTileMedia {
     <div class="fd-product-tile__content"><ng-content></ng-content></div>
   `
 })
-export class ProductTileContent { }
+export class ProductTileContent {}
 
 @Component({
   selector: 'fd-product-tile-title',
@@ -110,7 +103,7 @@ export class ProductTileContent { }
     <h2 class="fd-product-tile__title"><ng-content></ng-content></h2>
   `
 })
-export class ProductTileTitle { }
+export class ProductTileTitle {}
 
 @Directive({
   selector: 'fd-tile-grid',
@@ -119,6 +112,5 @@ export class ProductTileTitle { }
   }
 })
 export class TileGrid {
-  @Input()
-  col;
+  @Input() col;
 }

@@ -6,13 +6,12 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './alert.component.html'
 })
 export class AlertComponent {
-
   static schema: Schema = {
     properties: {
       properties: {
         type: 'object',
         properties: {
-          'dismissible': {
+          dismissible: {
             type: 'boolean'
           }
         }
@@ -20,7 +19,7 @@ export class AlertComponent {
       modifier: {
         type: 'object',
         properties: {
-          'block': {
+          block: {
             type: 'string',
             enum: ['', 'warning', 'error']
           }
@@ -80,5 +79,4 @@ export class AlertComponent {
   showAlert(id: string) {
     alert(`Alert with id ${id} has triggered a close event!`);
   }
-
 }

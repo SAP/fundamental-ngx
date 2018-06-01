@@ -33,26 +33,19 @@ export interface TableRowObject {
     </table>
   `
 })
-
-
 export class Table {
+  @Input() headers: string[];
 
-  @Input()
-  headers: string[];
-
-  @Input()
-  tableData: TableRowObject[];
+  @Input() tableData: TableRowObject[];
 
   typeOf(variable) {
     let retVal;
     if (typeof variable === 'string') {
       retVal = 'string';
     } else if (typeof variable === 'object') {
-      retVal = 'object'
+      retVal = 'object';
     }
 
     return retVal;
   }
-
 }
-

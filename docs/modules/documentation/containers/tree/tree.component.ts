@@ -12,10 +12,10 @@ export class TreeComponent {
       properties: {
         type: 'object',
         properties: {
-          'headers': {
+          headers: {
             type: 'string[]'
           },
-          'treeData': {
+          treeData: {
             type: 'TreeRowObject[]'
           }
         }
@@ -23,11 +23,11 @@ export class TreeComponent {
       state: {
         type: 'object',
         properties: {
-          'disabled': {
+          disabled: {
             type: 'boolean'
           }
         }
-      },
+      }
     },
     type: 'object'
   };
@@ -98,67 +98,68 @@ export class TreeComponent {
     }
   };
 
-  simpleTreeHtml = '<fd-tree (editRowClicked)="editRowClicked($event)" (deleteRowClicked)="deleteRowClicked($event)"\n' +
+  simpleTreeHtml =
+    '<fd-tree (editRowClicked)="editRowClicked($event)" (deleteRowClicked)="deleteRowClicked($event)"\n' +
     '         [displayTreeActions]="true" [headers]="headers" [treeData]="treeData">\n' +
     '</fd-tree>';
 
-  simpleTreeJson = 'headers: [\'Column Header 1\', \'Column Header 2\', \'Column Header 3\', \'Column Header 4\'],\n' +
+  simpleTreeJson =
+    "headers: ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'],\n" +
     'treeData: [\n' +
     '  {\n' +
-    '    rowData: [\'Data 1\', \'Data 2\', \'Data 3\', \'Data 4\'],\n' +
+    "    rowData: ['Data 1', 'Data 2', 'Data 3', 'Data 4'],\n" +
     '    children: [\n' +
     '      {\n' +
-    '        rowData: [\'Child 1\', \'Child 2\', \'Child 3\'],\n' +
+    "        rowData: ['Child 1', 'Child 2', 'Child 3'],\n" +
     '        children: [\n' +
     '          {\n' +
-    '            rowData: [\'Grandchild 1\', \'Grandchild 2\', \'Grandchild 3\', \'Grandchild 4\']\n' +
+    "            rowData: ['Grandchild 1', 'Grandchild 2', 'Grandchild 3', 'Grandchild 4']\n" +
     '          }\n' +
     '        ]\n' +
     '      }\n' +
     '    ]\n' +
     '  },\n' +
     '  {\n' +
-    '    rowData: [\'Data 5\', \'Data 6\', \'Data 7\', \'Data 8\']\n' +
+    "    rowData: ['Data 5', 'Data 6', 'Data 7', 'Data 8']\n" +
     '  },\n' +
     '  {\n' +
-    '    rowData: [\'Data 9\'],\n' +
+    "    rowData: ['Data 9'],\n" +
     '    children: [\n' +
     '      {\n' +
-    '        rowData: [\'Child 5\', \'Child 6\', \'Child 7\', \'Child 8\']\n' +
+    "        rowData: ['Child 5', 'Child 6', 'Child 7', 'Child 8']\n" +
     '      }\n' +
     '    ]\n' +
     '  }\n' +
     ']';
 
-  richTreeHtml = '<fd-tree [headers]="headers" [treeData]="treeData">\n' +
-    '\n' +
-    '</fd-tree>';
+  richTreeHtml = '<fd-tree [headers]="headers" [treeData]="treeData">\n' + '\n' + '</fd-tree>';
 
-  richTreeJson = 'headers: [\'Column Header 1\', \'Column Header 2\', \'Column Header 3\', \'Column Header 4\'],\n' +
+  richTreeJson =
+    "headers: ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'],\n" +
     'treeData: [\n' +
     '  {\n' +
     '    rowData: [\n' +
     '      {\n' +
-    '        displayText: \'Search Engines\'\n' +
+    "        displayText: 'Search Engines'\n" +
     '      }\n' +
     '    ],\n' +
     '    children: [\n' +
     '      {\n' +
     '        rowData: [\n' +
     '          {\n' +
-    '            displayText: \' \'\n' +
+    "            displayText: ' '\n" +
     '          },\n' +
     '          {\n' +
-    '            displayText: \'Google\',\n' +
-    '            linkUrl: \'http://google.com\'\n' +
+    "            displayText: 'Google',\n" +
+    "            linkUrl: 'http://google.com'\n" +
     '          },\n' +
     '          {\n' +
-    '            displayText: \'Bing\',\n' +
-    '            linkUrl: \'http://bing.com\'\n' +
+    "            displayText: 'Bing',\n" +
+    "            linkUrl: 'http://bing.com'\n" +
     '          },\n' +
     '          {\n' +
-    '            displayText: \'Yahoo\',\n' +
-    '            linkUrl: \'http://yahoo.com\'\n' +
+    "            displayText: 'Yahoo',\n" +
+    "            linkUrl: 'http://yahoo.com'\n" +
     '          }\n' +
     '        ]\n' +
     '      }\n' +
@@ -183,6 +184,4 @@ export class TreeComponent {
     alert('Delete row clicked');
     console.log(row);
   }
-
-
 }

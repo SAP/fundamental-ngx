@@ -7,19 +7,18 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './pagination.component.html'
 })
 export class PaginationComponent {
-
   static schema: Schema = {
     properties: {
       properties: {
         type: 'object',
         properties: {
-          'totalItems': {
+          totalItems: {
             type: 'integer'
           },
-          'itemsPerPage': {
+          itemsPerPage: {
             type: 'integer'
           },
-          'currentPage': {
+          currentPage: {
             type: 'integer'
           }
         }
@@ -34,11 +33,12 @@ export class PaginationComponent {
     properties: {
       totalItems: 70,
       itemsPerPage: 2,
-      currentPage: 5,
+      currentPage: 5
     }
   };
 
-  paginationHtml = '<fd-pagination [class]="\'fd-demo-pagination\'" ' +
+  paginationHtml =
+    '<fd-pagination [class]="\'fd-demo-pagination\'" ' +
     '[pagination]="{totalItems: totalItems, itemsPerPage:  itemsPerPage, currentPage: currentPage}">' +
     '</fd-pagination>';
 
@@ -49,6 +49,4 @@ export class PaginationComponent {
   onSchemaValues(data) {
     this.data = data;
   }
-
-
 }

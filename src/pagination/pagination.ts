@@ -41,14 +41,11 @@ enum PaginationPageType {
   `
 })
 export class Pagination implements OnChanges {
-
   private static readonly displayNumPages = 3;
 
-  @Input()
-  pagination: PaginationObject;
+  @Input() pagination: PaginationObject;
 
-  @Output()
-  selected = new EventEmitter<number>();
+  @Output() selected = new EventEmitter<number>();
 
   total: number;
 
@@ -58,7 +55,9 @@ export class Pagination implements OnChanges {
     this.total = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
 
     if (this.pagination.currentPage > this.total || this.pagination.currentPage < 1) {
-      throw new Error(`Pagination requires a current page ${this.pagination.currentPage} below ${this.total} or greater than 0`);
+      throw new Error(
+        `Pagination requires a current page ${this.pagination.currentPage} below ${this.total} or greater than 0`
+      );
     }
 
     this.calculatePagination(this.pagination.currentPage);
@@ -78,7 +77,7 @@ export class Pagination implements OnChanges {
         }
         pages.push(PaginationPageType.More);
         pages.push(this.total);
-      } else if (current > (this.total - (Pagination.displayNumPages - 1))) {
+      } else if (current > this.total - (Pagination.displayNumPages - 1)) {
         pages.push(1);
         pages.push(PaginationPageType.More);
         for (let i = this.total - (Pagination.displayNumPages - 1); i <= this.total; i++) {
@@ -110,5 +109,4 @@ export class Pagination implements OnChanges {
     this.calculatePagination(page);
     this.selected.emit(page);
   }
-
 }

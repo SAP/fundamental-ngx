@@ -18,13 +18,9 @@ import { IconModule } from '../icon/icon.module';
   `
 })
 export class ActionBar {
+  @Input() actionBarTitle: string;
 
-  @Input()
-  actionBarTitle: string;
-
-  @Input()
-  isNavigation: boolean;
-
+  @Input() isNavigation: boolean;
 }
 
 @Component({
@@ -33,4 +29,4 @@ export class ActionBar {
      <h1 class="fd-action-bar__title"><ng-content></ng-content></h1>
   `
 })
-export class ActionBarTitle { }
+export class ActionBarTitle {}

@@ -6,11 +6,9 @@ import { ModalService } from '../../../../../src/modal/modal.service';
 
 @Component({
   selector: 'app-modal',
-  templateUrl: './modal.component.html',
+  templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit {
-
-
   static schema: Schema = {
     properties: {
       properties: {
@@ -23,13 +21,13 @@ export class ModalComponent implements OnInit {
           header: {
             type: 'string'
           },
-          body:{
+          body: {
             type: 'string'
           },
-          primaryButton:{
+          primaryButton: {
             type: 'string'
           },
-          secondaryButton:{
+          secondaryButton: {
             type: 'string'
           }
         }
@@ -49,7 +47,8 @@ export class ModalComponent implements OnInit {
     }
   };
 
-  informationalModalHtml = '<ng-template #informationalModal>\n' +
+  informationalModalHtml =
+    '<ng-template #informationalModal>\n' +
     '  <fd-modal>\n' +
     '    <fd-modal-header>\n' +
     '      Modal Header/Title\n' +
@@ -61,7 +60,8 @@ export class ModalComponent implements OnInit {
     '</ng-template>\n' +
     '<button fd-button (click)="openModal(informationalModal)">Launch Demo</button>';
 
-  confirmationModalHtml = '<ng-template #confirmationModal>\n' +
+  confirmationModalHtml =
+    '<ng-template #confirmationModal>\n' +
     '  <fd-modal>\n' +
     '    <fd-modal-header>\n' +
     '      Modal Header/Title\n' +
@@ -77,7 +77,8 @@ export class ModalComponent implements OnInit {
     '</ng-template>\n' +
     '<button fd-button (click)="openModal(confirmationModal)">Launch Demo</button>';
 
-  formModalHtml = '<ng-template #formModal>\n' +
+  formModalHtml =
+    '<ng-template #formModal>\n' +
     '  <fd-modal>\n' +
     '    <fd-modal-header>\n' +
     '      Modal Header/Title\n' +
@@ -105,15 +106,9 @@ export class ModalComponent implements OnInit {
     this.data = data;
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   openModal(modalType) {
     this.modalService.open(modalType);
   }
-
-
 }
-
-

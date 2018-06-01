@@ -3,24 +3,21 @@ import { Properties, Schema } from '../../models/schema.model';
 
 @Injectable()
 export class SchemaFactoryService {
-
   schemasMap: Map<string, Schema> = new Map<string, Schema>();
 
-  constructor (
-    @Inject('SCHEMAS') private readonly SCHEMAS: {[name: string]: Schema}
-  ) { }
+  constructor(@Inject('SCHEMAS') private readonly SCHEMAS: { [name: string]: Schema }) {}
 
   getComponent(name: string): Schema {
     if (!this.schemasMap.has(name)) {
       this.schemasMap.set(name, {
         ...this.SCHEMAS[name],
-        properties: this._buildSchema({... this.SCHEMAS[name].properties}),
+        properties: this._buildSchema({ ...this.SCHEMAS[name].properties })
       });
     }
     return this.schemasMap.get(name);
   }
 
-  private _buildSchema (properties: Properties): Properties {
+  private _buildSchema(properties: Properties): Properties {
     for (const key in properties) {
       if (properties.hasOwnProperty(key)) {
         const type = properties[key].type;
@@ -32,5 +29,4 @@ export class SchemaFactoryService {
     }
     return properties;
   }
-
 }

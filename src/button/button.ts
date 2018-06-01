@@ -3,24 +3,18 @@ import { Directive, Input } from '@angular/core';
 @Directive({
   selector: '[fd-button]',
   host: {
-    '[class]': '"fd-button" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (type ? " fd-button--" + type : "") + (semantic ? " fd-button--" + semantic : "") + (state ? " is-" + state : "")'
+    '[class]':
+      '"fd-button" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (type ? " fd-button--" + type : "") + (semantic ? " fd-button--" + semantic : "") + (state ? " is-" + state : "")'
   }
 })
 export class Button {
+  @Input() size;
 
-  @Input()
-  size;
+  @Input() glyph;
 
-  @Input()
-  glyph;
+  @Input() type;
 
-  @Input()
-  type;
+  @Input() semantic;
 
-  @Input()
-  semantic;
-
-  @Input()
-  state;
-
+  @Input() state;
 }

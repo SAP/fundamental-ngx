@@ -14,36 +14,32 @@ import { HashService } from '../utils/hash.service';
     <ng-content></ng-content>
   `,
   host: {
-    'class': 'fd-alert',
-    'role': 'alert',
+    class: 'fd-alert',
+    role: 'alert',
     '[id]': 'id',
     '[class.fd-alert--dismissible]': 'dismissible == true',
     '[class.fd-alert--warning]': 'type == "warning"',
     '[class.fd-alert--error]': 'type == "error"'
   },
-  styles: [`
-    :host {
-      display: block;
-      position: relative;
-    }
-  `]
+  styles: [
+    `
+      :host {
+        display: block;
+        position: relative;
+      }
+    `
+  ]
 })
 export class Alert implements OnInit {
+  @Input() dismissible: boolean;
 
-  @Input()
-  dismissible: boolean;
+  @Input() type: string;
 
-  @Input()
-  type: string;
-
-  @Output()
-  close = new EventEmitter<string>();
+  @Output() close = new EventEmitter<string>();
 
   id: string;
 
-  constructor(
-    @Inject(HashService) private hasher: HashService
-  ) { }
+  constructor(@Inject(HashService) private hasher: HashService) {}
 
   ngOnInit() {
     this.id = this.hasher.hash();
@@ -52,5 +48,4 @@ export class Alert implements OnInit {
   handleClose() {
     this.close.emit(this.id);
   }
-
 }

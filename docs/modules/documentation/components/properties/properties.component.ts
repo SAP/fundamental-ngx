@@ -29,22 +29,22 @@ export interface ComponentProperties {
       </ng-container>
     </ng-container>
   `,
-  styles: [`
-    .property-header {
-      text-align: left;
-      padding-right: 1rem;
-      font-size:1rem;
-      vertical-align: text-top;
-    }
-    .header {
-      margin-bottom: .5rem;
-    }
-  `]
+  styles: [
+    `
+      .property-header {
+        text-align: left;
+        padding-right: 1rem;
+        font-size: 1rem;
+        vertical-align: text-top;
+      }
+      .header {
+        margin-bottom: 0.5rem;
+      }
+    `
+  ]
 })
 export class PropertiesComponent implements OnInit {
-
-  @Input()
-  properties: ComponentProperties;
+  @Input() properties: ComponentProperties;
 
   titles = {
     childComponents: 'Child Components',
@@ -52,15 +52,22 @@ export class PropertiesComponent implements OnInit {
     attributes: 'Attributes',
     inputs: 'Inputs',
     outputs: 'Outputs',
-    properties: 'Properties',
+    properties: 'Properties'
   };
 
   ngOnInit() {
-    this.properties = { childComponents: [], directives: [], attributes: [], inputs: [], outputs: [], properties: [], ...this.properties };
+    this.properties = {
+      childComponents: [],
+      directives: [],
+      attributes: [],
+      inputs: [],
+      outputs: [],
+      properties: [],
+      ...this.properties
+    };
   }
 
   get keys() {
     return Object.keys(this.properties);
   }
-
 }

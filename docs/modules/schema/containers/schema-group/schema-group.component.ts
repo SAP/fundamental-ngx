@@ -8,18 +8,17 @@ import { Property } from '../../models/schema.model';
   styleUrls: ['schema-group.component.scss']
 })
 export class SchemaGroupComponent implements OnInit {
-
   @Input() schemaGroup: FormGroup;
   @Input() properties: Property;
 
   forms: Array<{
-    key: string,
-    control: AbstractControl,
-    type: string,
-    enum: [any]
+    key: string;
+    control: AbstractControl;
+    type: string;
+    enum: [any];
   }> = [];
 
-  ngOnInit () {
+  ngOnInit() {
     const controls = this.schemaGroup.controls;
     for (const key in controls) {
       if (controls.hasOwnProperty(key)) {
@@ -33,8 +32,7 @@ export class SchemaGroupComponent implements OnInit {
     }
   }
 
-  private _isFormControl (form: FormControl|FormGroup): boolean {
+  private _isFormControl(form: FormControl | FormGroup): boolean {
     return form instanceof FormControl;
   }
-
 }

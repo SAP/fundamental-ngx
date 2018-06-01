@@ -1,9 +1,9 @@
-import {Component, Directive, OnChanges, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Directive, OnChanges, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'fd-input-group',
   host: {
-    'class': ''
+    class: ''
   },
   template: `
     <div class="fd-input-group" [ngClass]="{'fd-input-group--after': placement !== 'before',
@@ -27,41 +27,31 @@ import {Component, Directive, OnChanges, OnInit, Input, Output, EventEmitter} fr
   `
 })
 export class InputGroup {
+  @Input() placement: string;
 
-  @Input()
-  placement: string;
+  @Input() inline: boolean;
 
-  @Input()
-  inline: boolean;
+  @Input() placeholder: string;
 
-  @Input()
-  placeholder: string;
+  @Input() addOnText: string;
 
-  @Input()
-  addOnText: string;
+  @Input() glyph: string;
 
-  @Input()
-  glyph: string;
+  @Input() inputText: string;
 
-  @Input()
-  inputText: string;
+  @Input() button: boolean;
 
-  @Input()
-  button: boolean;
-
-  @Output()
-  addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
   buttonClicked($event) {
     this.addOnButtonClicked.emit($event);
   }
-
 }
 
 @Component({
   selector: 'fd-input-group-number',
   host: {
-    'class': ''
+    class: ''
   },
   template: `
     <div class="fd-input-group fd-input-group--after">
@@ -78,15 +68,11 @@ export class InputGroup {
   `
 })
 export class InputGroupNumber {
+  @Input() disabled: boolean;
 
-  @Input()
-  disabled: boolean;
+  @Input() inputText: number;
 
-  @Input()
-  inputText: number;
-
-  @Input()
-  placeholder: string;
+  @Input() placeholder: string;
 
   getInput() {
     return this.inputText;
@@ -99,13 +85,12 @@ export class InputGroupNumber {
   stepDownClicked() {
     this.inputText--;
   }
-
 }
 
 @Component({
   selector: 'fd-input-group-search',
   host: {
-    'class': ''
+    class: ''
   },
   template: `
     <div class="fd-input-group">
@@ -120,18 +105,13 @@ export class InputGroupNumber {
   `
 })
 export class InputGroupSearch {
+  @Input() disabled: boolean;
 
-  @Input()
-  disabled: boolean;
+  @Input() inputText: string;
 
-  @Input()
-  inputText: string;
-
-  @Input()
-  placeholder;
+  @Input() placeholder;
 
   getInput() {
     return this.inputText;
   }
-
 }

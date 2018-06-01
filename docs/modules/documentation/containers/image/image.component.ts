@@ -7,22 +7,21 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './image.component.html'
 })
 export class ImageComponent implements OnInit {
-
   static schema: Schema = {
     properties: {
       properties: {
         type: 'object',
         properties: {
-          'size': {
+          size: {
             type: 'string',
             enum: ['s', 'm', 'l']
           },
-          'photo': {
+          photo: {
             type: 'string'
           },
-          'isCircle': {
+          isCircle: {
             type: 'boolean'
-          },
+          }
         }
       }
     },
@@ -39,16 +38,15 @@ export class ImageComponent implements OnInit {
     }
   };
 
-  imageSizesHtml = 
+  imageSizesHtml =
     '<fd-image [size]="\'s\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
     '<fd-image [size]="\'m\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-    '<fd-image [size]="\'l\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' ;
+    '<fd-image [size]="\'l\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
 
-  imageShapesHtml = 
-  '<fd-image [size]="\'s\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-  '<fd-image [size]="\'m\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-  '<fd-image [size]="\'l\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' ;
-
+  imageShapesHtml =
+    '<fd-image [size]="\'s\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
+    '<fd-image [size]="\'m\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
+    '<fd-image [size]="\'l\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
 
   constructor(private schemaFactory: SchemaFactoryService) {
     this.schema = this.schemaFactory.getComponent('image');
@@ -58,10 +56,5 @@ export class ImageComponent implements OnInit {
     this.data = data;
   }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 }
-
-

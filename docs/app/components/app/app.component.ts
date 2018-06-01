@@ -11,16 +11,11 @@ import 'rxjs/add/operator/pluck';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   url$: Observable<string>;
 
-  constructor(
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.url$ = this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .pluck('url');
+    this.url$ = this.router.events.filter(event => event instanceof NavigationEnd).pluck('url');
   }
 }

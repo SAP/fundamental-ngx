@@ -4,10 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class ModalService {
-
   modalRef;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) {}
 
   close() {
     this.modalRef.close();
@@ -16,5 +15,4 @@ export class ModalService {
   open(modalType) {
     this.modalRef = this.modalService.open(modalType);
   }
-
 }

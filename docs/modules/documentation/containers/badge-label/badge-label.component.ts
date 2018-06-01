@@ -7,24 +7,23 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
   templateUrl: './badge-label.component.html'
 })
 export class BadgeLabelComponent implements OnInit {
-
   static schema: Schema = {
     properties: {
       properties: {
         type: 'object',
         properties: {
-          'text': {
+          text: {
             type: 'string'
           },
-          'type': {
+          type: {
             type: 'string',
             enum: ['label', 'badge']
           },
-          'status': {
+          status: {
             type: 'string',
             enum: ['', 'success', 'warning', 'error']
           },
-          'modifier': {
+          modifier: {
             type: 'string',
             enum: ['', 'pill', 'filled']
           }
@@ -45,31 +44,30 @@ export class BadgeLabelComponent implements OnInit {
     }
   };
 
-  
   defaultBadgeHtmlType =
     '<fd-badge>Default</fd-badge>\n' +
     '<fd-badge [status]="\'success\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'warning\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'error\'">Default</fd-badge>\n';
 
-    pillBadgeHtmlType =
+  pillBadgeHtmlType =
     '<fd-badge [modifier]="\'pill\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'success\'" [modifier]="\'pill\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'warning\'" [modifier]="\'pill\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'error\'"   [modifier]="\'pill\'">Default</fd-badge>\n';
 
-    filledBadgeHtmlType =
+  filledBadgeHtmlType =
     '<fd-badge [modifier]="\'filled\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'success\'" [modifier]="\'filled\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'warning\'" [modifier]="\'filled\'">Default</fd-badge>\n' +
     '<fd-badge [status]="\'error\'"   [modifier]="\'filled\'">Default</fd-badge>\n';
 
-    labelHtmlType =
+  labelHtmlType =
     '<fd-label>Default</fd-label>\n' +
     '<fd-label [status]="\'success\'">Success</fd-label>\n' +
     '<fd-label [status]="\'warning\'">Warning</fd-label>\n' +
     '<fd-label [status]="\'error\'">Error</fd-label>\n';
-    
+
   constructor(private schemaFactory: SchemaFactoryService) {
     this.schema = this.schemaFactory.getComponent('badgeLabel');
   }
@@ -78,10 +76,5 @@ export class BadgeLabelComponent implements OnInit {
     this.data = data;
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }
-
-
-

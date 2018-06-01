@@ -64,7 +64,8 @@ import { TileComponent } from './containers/tile/tile.component';
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
 const ROUTES: Routes = [
-  { path: '',
+  {
+    path: '',
     component: DocumentationComponent,
     children: [
       { path: '', redirectTo: 'actionbar', pathMatch: 'full' },
@@ -91,7 +92,7 @@ const ROUTES: Routes = [
       { path: 'tile', component: TileComponent },
       { path: 'tree', component: TreeComponent }
     ]
-  },
+  }
 ];
 
 @NgModule({
@@ -156,4 +157,4 @@ const ROUTES: Routes = [
 })
 export class DocumentationModule {}
 
-import { DomSanitizer } from '@angular/platform-browser'
+import { DomSanitizer } from '@angular/platform-browser';

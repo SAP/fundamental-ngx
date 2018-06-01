@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'fd-inline-help',
-  template:`
+  template: `
       <span class="fd-inline-help" >
         <span [ngClass]="(position ? 'fd-inline-help__content fd-inline-help__content--' + position : 'fd-inline-help__content fd-inline-help__content--bottom-right')" >  
           <ng-content></ng-content>  
@@ -11,7 +11,5 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class InlineHelp {
-  @Input()
-  position: string;
+  @Input() position: string;
 }
-

@@ -5,17 +5,12 @@ import { IconModule } from '../icon/icon.module';
 import { Pagination } from './pagination';
 
 describe('Pagination Test', () => {
-
   let fixture: ComponentFixture<Pagination>;
   let component: Pagination;
 
   beforeEach(() => {
     const bed = TestBed.configureTestingModule({
-      imports: [
-        ButtonModule,
-        IconModule,
-        PaginationModule
-      ]
+      imports: [ButtonModule, IconModule, PaginationModule]
     });
 
     fixture = TestBed.createComponent(Pagination);
@@ -29,5 +24,4 @@ describe('Pagination Test', () => {
     component.ngOnChanges();
     expect(component.total).toBe(Math.ceil(pagination.totalItems / pagination.itemsPerPage));
   });
-
 });

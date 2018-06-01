@@ -19,7 +19,7 @@ import { ModalComponent } from './modal/modal.component';
 import { TableComponent } from './table/table.component';
 import { TileComponent } from './tile/tile.component';
 
-export const COMPONENT_SCHEMAS: {[name: string]: Schema} = {
+export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
   badgeLabel: BadgeLabelComponent.schema,
   button: ButtonComponent.schema,
   buttonGroup: ButtonGroupComponent.schema,
@@ -39,10 +39,10 @@ export const COMPONENT_SCHEMAS: {[name: string]: Schema} = {
   tree: TreeComponent.schema,
   media: {
     properties: {
-      'image': {
+      image: {
         type: 'string'
       },
-      'alt': {
+      alt: {
         type: 'string'
       }
     },
