@@ -6,8 +6,8 @@ import { UtilsModule } from '../utils/utils.module';
 import { Alert } from './alert';
 
 @NgModule({
-  declarations: [Alert],
-  imports: [CommonModule, IconModule, UtilsModule],
-  exports: [Alert]
+    declarations: [Alert],
+    imports: [CommonModule, IconModule, UtilsModule],
+    exports: [Alert]
 })
 export class AlertModule {}

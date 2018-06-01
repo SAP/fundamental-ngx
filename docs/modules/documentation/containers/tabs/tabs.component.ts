@@ -3,105 +3,105 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html'
+    selector: 'app-tabs',
+    templateUrl: './tabs.component.html'
 })
 export class TabsComponent implements OnInit {
-  static schema: Schema = {
-    properties: {
-      properties: {
-        type: 'object',
+    static schema: Schema = {
         properties: {
-          items: {
-            type: 'object',
             properties: {
-              label: {
-                type: 'string'
-              },
-              label2: {
-                type: 'string'
-              },
-              label3: {
-                type: 'string'
-              }
+                type: 'object',
+                properties: {
+                    items: {
+                        type: 'object',
+                        properties: {
+                            label: {
+                                type: 'string'
+                            },
+                            label2: {
+                                type: 'string'
+                            },
+                            label3: {
+                                type: 'string'
+                            }
+                        }
+                    },
+                    panels: {
+                        type: 'object',
+                        properties: {
+                            content: {
+                                type: 'string'
+                            },
+                            content2: {
+                                type: 'string'
+                            },
+                            content3: {
+                                type: 'string'
+                            }
+                        }
+                    }
+                }
+            },
+            state: {
+                type: 'object',
+                properties: {
+                    disabled: {
+                        type: 'boolean'
+                    },
+                    disabled2: {
+                        type: 'boolean'
+                    },
+                    disabled3: {
+                        type: 'boolean'
+                    }
+                }
             }
-          },
-          panels: {
-            type: 'object',
-            properties: {
-              content: {
-                type: 'string'
-              },
-              content2: {
-                type: 'string'
-              },
-              content3: {
-                type: 'string'
-              }
-            }
-          }
-        }
-      },
-      state: {
-        type: 'object',
+        },
+        type: 'object'
+    };
+
+    schema: Schema;
+
+    data: any = {
         properties: {
-          disabled: {
-            type: 'boolean'
-          },
-          disabled2: {
-            type: 'boolean'
-          },
-          disabled3: {
-            type: 'boolean'
-          }
+            items: {
+                label: 'Link',
+                label2: 'Selected',
+                label3: 'Disabled'
+            },
+            panels: {
+                content: 'Content Link',
+                content2: 'Content Selected',
+                content3: 'Content Disabled'
+            }
+        },
+        state: {
+            disabled3: 'true'
         }
-      }
-    },
-    type: 'object'
-  };
+    };
 
-  schema: Schema;
+    tabHtml =
+        '<fd-tab-list>\n' +
+        '  <fd-tab title="Link">\n' +
+        '    Content Link\n' +
+        '  </fd-tab>\n' +
+        '  <fd-tab title="Selected" disabled="false">\n' +
+        '    Content Selected\n' +
+        '  </fd-tab>\n' +
+        '  <fd-tab title="Link" disabled="false">\n' +
+        '    Content Link Two\n' +
+        '  </fd-tab>\n' +
+        '  <fd-tab title="Disabled" disabled="true">\n' +
+        '    Disabled\n' +
+        '  </fd-tab>\n' +
+        '</fd-tab-list>';
 
-  data: any = {
-    properties: {
-      items: {
-        label: 'Link',
-        label2: 'Selected',
-        label3: 'Disabled'
-      },
-      panels: {
-        content: 'Content Link',
-        content2: 'Content Selected',
-        content3: 'Content Disabled'
-      }
-    },
-    state: {
-      disabled3: 'true'
+    constructor(private schemaFactory: SchemaFactoryService) {
+        this.schema = this.schemaFactory.getComponent('tabs');
     }
-  };
 
-  tabHtml =
-    '<fd-tab-list>\n' +
-    '  <fd-tab title="Link">\n' +
-    '    Content Link\n' +
-    '  </fd-tab>\n' +
-    '  <fd-tab title="Selected" disabled="false">\n' +
-    '    Content Selected\n' +
-    '  </fd-tab>\n' +
-    '  <fd-tab title="Link" disabled="false">\n' +
-    '    Content Link Two\n' +
-    '  </fd-tab>\n' +
-    '  <fd-tab title="Disabled" disabled="true">\n' +
-    '    Disabled\n' +
-    '  </fd-tab>\n' +
-    '</fd-tab-list>';
-
-  constructor(private schemaFactory: SchemaFactoryService) {
-    this.schema = this.schemaFactory.getComponent('tabs');
-  }
-
-  onSchemaValues(data) {
-    this.data = data;
-  }
-  ngOnInit() {}
+    onSchemaValues(data) {
+        this.data = data;
+    }
+    ngOnInit() {}
 }

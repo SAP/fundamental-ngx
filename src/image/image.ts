@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'fd-image',
-  template: `
+    selector: 'fd-image',
+    template: `
     <span 
     [ngClass]='(size ? "fd-image--" + size : "") + (circle ? " fd-image--circle" : "") '
     [attr.aria-label]='label'
@@ -11,11 +11,11 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class Image {
-  @Input() size: string = 'm';
+    @Input() size: string = 'm';
 
-  @Input() circle: boolean = false;
+    @Input() circle: boolean = false;
 
-  @Input() label: string = 'Image label';
+    @Input() label: string = 'Image label';
 
-  @Input() photo: string;
+    @Input() photo: string;
 }

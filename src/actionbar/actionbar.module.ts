@@ -7,8 +7,8 @@ import { DropdownModule } from '../dropdown/dropdown.module';
 import { ActionBar, ActionBarTitle } from './actionbar';
 
 @NgModule({
-  declarations: [ActionBar, ActionBarTitle],
-  imports: [CommonModule, ButtonModule, IconModule, DropdownModule],
-  exports: [ActionBar, ActionBarTitle]
+    declarations: [ActionBar, ActionBarTitle],
+    imports: [CommonModule, ButtonModule, IconModule, DropdownModule],
+    exports: [ActionBar, ActionBarTitle]
 })
 export class ActionbarModule {}

@@ -6,8 +6,8 @@ import { TabListComponent, TabPanelComponent } from './tabs';
 import { UtilsModule } from '../utils/utils.module';
 
 @NgModule({
-  declarations: [TabListComponent, TabPanelComponent],
-  imports: [CommonModule, UtilsModule],
-  exports: [TabListComponent, TabPanelComponent]
+    declarations: [TabListComponent, TabPanelComponent],
+    imports: [CommonModule, UtilsModule],
+    exports: [TabListComponent, TabPanelComponent]
 })
 export class TabsModule {}

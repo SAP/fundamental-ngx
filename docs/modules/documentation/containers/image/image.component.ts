@@ -3,58 +3,58 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 @Component({
-  selector: 'app-image',
-  templateUrl: './image.component.html'
+    selector: 'app-image',
+    templateUrl: './image.component.html'
 })
 export class ImageComponent implements OnInit {
-  static schema: Schema = {
-    properties: {
-      properties: {
-        type: 'object',
+    static schema: Schema = {
         properties: {
-          size: {
-            type: 'string',
-            enum: ['s', 'm', 'l']
-          },
-          photo: {
-            type: 'string'
-          },
-          isCircle: {
-            type: 'boolean'
-          }
+            properties: {
+                type: 'object',
+                properties: {
+                    size: {
+                        type: 'string',
+                        enum: ['s', 'm', 'l']
+                    },
+                    photo: {
+                        type: 'string'
+                    },
+                    isCircle: {
+                        type: 'boolean'
+                    }
+                }
+            }
+        },
+        type: 'object'
+    };
+
+    schema: Schema;
+
+    data: any = {
+        properties: {
+            size: 'l',
+            photo: 'https://placeimg.com/400/400/nature',
+            isCircle: false
         }
-      }
-    },
-    type: 'object'
-  };
+    };
 
-  schema: Schema;
+    imageSizesHtml =
+        '<fd-image [size]="\'s\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
+        '<fd-image [size]="\'m\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
+        '<fd-image [size]="\'l\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
 
-  data: any = {
-    properties: {
-      size: 'l',
-      photo: 'https://placeimg.com/400/400/nature',
-      isCircle: false
+    imageShapesHtml =
+        '<fd-image [size]="\'s\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
+        '<fd-image [size]="\'m\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
+        '<fd-image [size]="\'l\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
+
+    constructor(private schemaFactory: SchemaFactoryService) {
+        this.schema = this.schemaFactory.getComponent('image');
     }
-  };
 
-  imageSizesHtml =
-    '<fd-image [size]="\'s\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-    '<fd-image [size]="\'m\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-    '<fd-image [size]="\'l\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
+    onSchemaValues(data) {
+        this.data = data;
+    }
 
-  imageShapesHtml =
-    '<fd-image [size]="\'s\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-    '<fd-image [size]="\'m\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-    '<fd-image [size]="\'l\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
-
-  constructor(private schemaFactory: SchemaFactoryService) {
-    this.schema = this.schemaFactory.getComponent('image');
-  }
-
-  onSchemaValues(data) {
-    this.data = data;
-  }
-
-  ngOnInit() {}
+    ngOnInit() {}
 }

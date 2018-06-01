@@ -3,11 +3,11 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html'
+    selector: 'app-panel',
+    templateUrl: './panel.component.html'
 })
 export class PanelComponent implements OnInit {
-  panelHtml = `<fd-panel>
+    panelHtml = `<fd-panel>
   <fd-panel-header>
     <fd-panel-title>Panel Title</fd-panel-title>
     <fd-panel-actions>
@@ -31,5 +31,5 @@ export class PanelComponent implements OnInit {
   </fd-panel-footer>
 </fd-panel>`;
 
-  ngOnInit() {}
+    ngOnInit() {}
 }

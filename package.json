@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "precommit": "pretty-quick --staged",
     "ng": "ng",
     "start": "ng serve",
     "hmr": "ng serve --hmr -e=hmr",
@@ -11,7 +10,9 @@
     "test": "ng test --app=1",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-src": "gulp build-src"
+    "build-src": "gulp build-src",
+    "precise-commits": "precise-commits",
+    "precommit": "npm run precise-commits"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -58,7 +59,8 @@
     "karma-coverage-istanbul-reporter": "~1.2.1",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "~0.2.2",
-    "pretty-quick": "^1.6.0",
+    "precise-commits": "^1.0.2",
+    "prettier": "^1.13.4",
     "protractor": "5.1.2",
     "pump": "~3.0.0",
     "run-sequence": "~2.2.1",

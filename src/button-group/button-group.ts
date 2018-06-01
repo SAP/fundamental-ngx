@@ -1,8 +1,8 @@
 import { Directive, Input, Component } from '@angular/core';
 
 @Component({
-  selector: 'fd-button-group',
-  template: `
+    selector: 'fd-button-group',
+    template: `
     <div class="fd-button-group" role="group" aria-label="Group label">
       <ng-content></ng-content>
     </div>
@@ -11,20 +11,20 @@ import { Directive, Input, Component } from '@angular/core';
 export class ButtonGroup {}
 
 @Directive({
-  selector: '[fd-button-grouped]',
-  host: {
-    '[class]':
-      '"fd-button--grouped" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (compact ? " fd-button--compact" : "") + (state ? " is-" + state : "")'
-  }
+    selector: '[fd-button-grouped]',
+    host: {
+        '[class]':
+            '"fd-button--grouped" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (compact ? " fd-button--compact" : "") + (state ? " is-" + state : "")'
+    }
 })
 export class ButtonGrouped {
-  @Input() id: string;
+    @Input() id: string;
 
-  @Input() size: string;
+    @Input() size: string;
 
-  @Input() glyph: string;
+    @Input() glyph: string;
 
-  @Input() state: string;
+    @Input() state: string;
 
-  @Input() compact: boolean = false;
+    @Input() compact: boolean = false;
 }

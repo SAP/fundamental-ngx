@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Identifier } from './identifier';
 
 @NgModule({
-  imports: [CommonModule],
-  exports: [Identifier],
-  declarations: [Identifier]
+    imports: [CommonModule],
+    exports: [Identifier],
+    declarations: [Identifier]
 })
 export class IdentifierModule {}

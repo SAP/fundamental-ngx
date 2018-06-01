@@ -6,8 +6,8 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
 @NgModule({
-  declarations: [Pagination],
-  imports: [CommonModule, ButtonModule, IconModule],
-  exports: [Pagination]
+    declarations: [Pagination],
+    imports: [CommonModule, ButtonModule, IconModule],
+    exports: [Pagination]
 })
 export class PaginationModule {}

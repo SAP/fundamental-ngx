@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
 export interface TableRowObject {
-  rowData: any[];
+    rowData: any[];
 }
 
 @Component({
-  selector: 'fd-table',
-  template: `
+    selector: 'fd-table',
+    template: `
     <table class="fd-table">
       <thead>
         <tr>
@@ -34,18 +34,18 @@ export interface TableRowObject {
   `
 })
 export class Table {
-  @Input() headers: string[];
+    @Input() headers: string[];
 
-  @Input() tableData: TableRowObject[];
+    @Input() tableData: TableRowObject[];
 
-  typeOf(variable) {
-    let retVal;
-    if (typeof variable === 'string') {
-      retVal = 'string';
-    } else if (typeof variable === 'object') {
-      retVal = 'object';
+    typeOf(variable) {
+        let retVal;
+        if (typeof variable === 'string') {
+            retVal = 'string';
+        } else if (typeof variable === 'object') {
+            retVal = 'object';
+        }
+
+        return retVal;
     }
-
-    return retVal;
-  }
 }

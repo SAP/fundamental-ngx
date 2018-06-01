@@ -7,8 +7,8 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
 @NgModule({
-  declarations: [InputGroupSearch, InputGroupNumber, InputGroup],
-  imports: [CommonModule, ButtonModule, IconModule, FormsModule],
-  exports: [InputGroupSearch, InputGroupNumber, InputGroup]
+    declarations: [InputGroupSearch, InputGroupNumber, InputGroup],
+    imports: [CommonModule, ButtonModule, IconModule, FormsModule],
+    exports: [InputGroupSearch, InputGroupNumber, InputGroup]
 })
 export class InputGroupModule {}

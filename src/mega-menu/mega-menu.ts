@@ -1,8 +1,8 @@
 import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
-  selector: 'fd-mega-menu',
-  template: `
+    selector: 'fd-mega-menu',
+    template: `
     <nav class="fd-mega-menu">
       <ng-content></ng-content>
     </nav>
@@ -11,8 +11,8 @@ import { Component, HostListener, Input } from '@angular/core';
 export class MegaMenu {}
 
 @Component({
-  selector: 'fd-mega-menu-group',
-  template: `
+    selector: 'fd-mega-menu-group',
+    template: `
     <div class="fd-mega-menu__group">
       <ng-content select="fd-mega-menu-title"></ng-content>
       <ng-content select="fd-mega-menu-list"></ng-content>
@@ -22,8 +22,8 @@ export class MegaMenu {}
 export class MegaMenuGroup {}
 
 @Component({
-  selector: 'fd-mega-menu-title',
-  template: `
+    selector: 'fd-mega-menu-title',
+    template: `
     <h1 class="fd-mega-menu__title">
       <ng-content></ng-content>
     </h1>
@@ -32,8 +32,8 @@ export class MegaMenuGroup {}
 export class MegaMenuTitle {}
 
 @Component({
-  selector: 'fd-mega-menu-list',
-  template: `
+    selector: 'fd-mega-menu-list',
+    template: `
     <ul class="fd-mega-menu__list">
       <ng-content></ng-content>
     </ul>
@@ -42,8 +42,8 @@ export class MegaMenuTitle {}
 export class MegaMenuList {}
 
 @Component({
-  selector: 'fd-mega-menu-item',
-  template: `
+    selector: 'fd-mega-menu-item',
+    template: `
     <li class="fd-mega-menu__item">
       <ng-content select="fd-mega-menu-link"></ng-content>
       <ng-content select="fd-mega-menu-sublist"></ng-content>
@@ -53,8 +53,8 @@ export class MegaMenuList {}
 export class MegaMenuItem {}
 
 @Component({
-  selector: 'fd-mega-menu-link',
-  template: `
+    selector: 'fd-mega-menu-link',
+    template: `
     <a class="fd-mega-menu__link " [ngClass]="{'has-child': hasSublist === true}" [attr.aria-haspopup]="hasSublist" 
        [attr.href]="url ? url : null" (click)="sublistIsOpen = !sublistIsOpen" [attr.aria-expanded]="sublistIsOpen" 
        style="cursor: pointer;">
@@ -66,16 +66,16 @@ export class MegaMenuItem {}
   `
 })
 export class MegaMenuLink {
-  @Input() url: string;
+    @Input() url: string;
 
-  @Input() hasSublist: boolean;
+    @Input() hasSublist: boolean;
 
-  sublistIsOpen = false;
+    sublistIsOpen = false;
 }
 
 @Component({
-  selector: 'fd-mega-menu-sublist',
-  template: `
+    selector: 'fd-mega-menu-sublist',
+    template: `
     <ul class="fd-mega-menu__sublist">
       <ng-content></ng-content>
     </ul>
@@ -84,8 +84,8 @@ export class MegaMenuLink {
 export class MegaMenuSubList {}
 
 @Component({
-  selector: 'fd-mega-menu-subitem',
-  template: `
+    selector: 'fd-mega-menu-subitem',
+    template: `
     <li class="fd-mega-menu__subitem">
       <a class="fd-mega-menu__sublink" href="{{url}}">
         <ng-content></ng-content>
@@ -94,5 +94,5 @@ export class MegaMenuSubList {}
   `
 })
 export class MegaMenuSubItem {
-  @Input() url: string;
+    @Input() url: string;
 }

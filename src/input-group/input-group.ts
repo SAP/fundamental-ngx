@@ -1,11 +1,11 @@
 import { Component, Directive, OnChanges, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'fd-input-group',
-  host: {
-    class: ''
-  },
-  template: `
+    selector: 'fd-input-group',
+    host: {
+        class: ''
+    },
+    template: `
     <div class="fd-input-group" [ngClass]="{'fd-input-group--after': placement !== 'before',
         'fd-input-group--before': placement === 'before', 'fd-input-group--inline': inline === true }">
       <input [(ngModel)]="inputText" [disabled]="disabled" *ngIf="placement !== 'before'" type="text" class="" id="" 
@@ -27,33 +27,33 @@ import { Component, Directive, OnChanges, OnInit, Input, Output, EventEmitter } 
   `
 })
 export class InputGroup {
-  @Input() placement: string;
+    @Input() placement: string;
 
-  @Input() inline: boolean;
+    @Input() inline: boolean;
 
-  @Input() placeholder: string;
+    @Input() placeholder: string;
 
-  @Input() addOnText: string;
+    @Input() addOnText: string;
 
-  @Input() glyph: string;
+    @Input() glyph: string;
 
-  @Input() inputText: string;
+    @Input() inputText: string;
 
-  @Input() button: boolean;
+    @Input() button: boolean;
 
-  @Output() addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  buttonClicked($event) {
-    this.addOnButtonClicked.emit($event);
-  }
+    buttonClicked($event) {
+        this.addOnButtonClicked.emit($event);
+    }
 }
 
 @Component({
-  selector: 'fd-input-group-number',
-  host: {
-    class: ''
-  },
-  template: `
+    selector: 'fd-input-group-number',
+    host: {
+        class: ''
+    },
+    template: `
     <div class="fd-input-group fd-input-group--after">
       <input class="" type="number" name="" [disabled]="disabled" [(ngModel)]="inputText" placeholder="{{placeholder}}"/>
       <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon fd-input-group__addon--after">
@@ -68,31 +68,31 @@ export class InputGroup {
   `
 })
 export class InputGroupNumber {
-  @Input() disabled: boolean;
+    @Input() disabled: boolean;
 
-  @Input() inputText: number;
+    @Input() inputText: number;
 
-  @Input() placeholder: string;
+    @Input() placeholder: string;
 
-  getInput() {
-    return this.inputText;
-  }
+    getInput() {
+        return this.inputText;
+    }
 
-  stepUpClicked() {
-    this.inputText++;
-  }
+    stepUpClicked() {
+        this.inputText++;
+    }
 
-  stepDownClicked() {
-    this.inputText--;
-  }
+    stepDownClicked() {
+        this.inputText--;
+    }
 }
 
 @Component({
-  selector: 'fd-input-group-search',
-  host: {
-    class: ''
-  },
-  template: `
+    selector: 'fd-input-group-search',
+    host: {
+        class: ''
+    },
+    template: `
     <div class="fd-input-group">
       <input class="" type="search" id="search-2" name="" [disabled]="disabled" [(ngModel)]="inputText" placeholder="{{placeholder}}"/>
       <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon">
@@ -105,13 +105,13 @@ export class InputGroupNumber {
   `
 })
 export class InputGroupSearch {
-  @Input() disabled: boolean;
+    @Input() disabled: boolean;
 
-  @Input() inputText: string;
+    @Input() inputText: string;
 
-  @Input() placeholder;
+    @Input() placeholder;
 
-  getInput() {
-    return this.inputText;
-  }
+    getInput() {
+        return this.inputText;
+    }
 }
