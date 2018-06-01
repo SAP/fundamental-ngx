@@ -4,26 +4,29 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './modal.service';
 
 @Component({
-  selector: 'fd-modal',
-  encapsulation: ViewEncapsulation.None,
-  styles: [`
-              .fd-modal__body {
+    selector: 'fd-modal',
+    encapsulation: ViewEncapsulation.None,
+    styles: [
+        `
+            .fd-modal__body {
                 overflow: hidden;
-              }
-              
-              .fd-modal__footer {
+            }
+
+            .fd-modal__footer {
                 border-top: 1px solid #eeeeef;
-              }
-              
-              .fd-modal { margin: 0 auto; }
-              
-              /*!
+            }
+
+            .fd-modal {
+                margin: 0 auto;
+            }
+
+            /*!
               * Bootstrap (http://getbootstrap.com)
               * Copyright 2011-2018 Twitter, Inc.
               * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
               */
-              
-              .modal-backdrop {
+
+            .modal-backdrop {
                 position: fixed;
                 top: 0;
                 right: 0;
@@ -31,9 +34,9 @@ import { ModalService } from './modal.service';
                 left: 0;
                 z-index: 1040;
                 background-color: rgba(0, 0, 0, 0.5);
-              }
-              
-              .modal-open  {
+            }
+
+            .modal-open {
                 position: fixed;
                 z-index: 9999;
                 left: 0;
@@ -41,10 +44,10 @@ import { ModalService } from './modal.service';
                 margin: auto;
                 width: fit-content;
                 overflow: hidden;
-                background-color: rgba(0,0,0,0.4);
-              }
-              
-              .modal {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            .modal {
                 position: fixed;
                 z-index: 9999;
                 left: 50%;
@@ -56,9 +59,10 @@ import { ModalService } from './modal.service';
                 min-height: 150px;
                 outline: none;
                 border-radius: 4px;
-              }`
-  ],
-  template: `
+            }
+        `
+    ],
+    template: `
     <div class="fd-modal">
       <div class="fd-modal__content" role="document">
         <ng-content select="fd-modal-header"></ng-content>
@@ -69,16 +73,16 @@ import { ModalService } from './modal.service';
   `
 })
 export class Modal {
-  constructor(@Inject(NgbModal) private modalService: NgbModal) {}
+    constructor(@Inject(NgbModal) private modalService: NgbModal) {}
 
-  open() {
-    this.modalService.open(Modal);
-  }
+    open() {
+        this.modalService.open(Modal);
+    }
 }
 
 @Component({
-  selector: 'fd-modal-header',
-  template: `
+    selector: 'fd-modal-header',
+    template: `
     <div class="fd-modal__header">
       <h1 class="fd-modal__title">
         <ng-content></ng-content>
@@ -88,22 +92,22 @@ export class Modal {
   `
 })
 export class ModalHeader {
-  constructor(@Inject(ModalService) public modalService: ModalService) { }
+    constructor(@Inject(ModalService) public modalService: ModalService) {}
 }
 
 @Component({
-  selector: 'fd-modal-body',
-  template: `
+    selector: 'fd-modal-body',
+    template: `
     <div class="fd-modal__body">
       <ng-content></ng-content>
     </div>
   `
 })
-export class ModalBody { }
+export class ModalBody {}
 
 @Component({
-  selector: 'fd-modal-footer',
-  template: `
+    selector: 'fd-modal-footer',
+    template: `
     <footer class="fd-modal__footer">
       <div class="fd-modal__actions">
         <ng-content></ng-content>
@@ -111,4 +115,4 @@ export class ModalBody { }
     </footer>
   `
 })
-export class ModalFooter { }
+export class ModalFooter {}

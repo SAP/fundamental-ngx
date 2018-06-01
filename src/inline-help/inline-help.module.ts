@@ -4,14 +4,8 @@ import { CommonModule } from '@angular/common';
 import { InlineHelp } from './inline-help';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    InlineHelp
-  ],
-  declarations: [
-    InlineHelp
-  ]
+    imports: [CommonModule],
+    exports: [InlineHelp],
+    declarations: [InlineHelp]
 })
-export class InlineHelpModule { }
+export class InlineHelpModule {}

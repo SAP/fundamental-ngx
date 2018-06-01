@@ -6,21 +6,16 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/pluck';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    url$: Observable<string>;
 
-  url$: Observable<string>;
+    constructor(private router: Router) {}
 
-  constructor(
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.url$ = this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .pluck('url');
-  }
+    ngOnInit() {
+        this.url$ = this.router.events.filter(event => event instanceof NavigationEnd).pluck('url');
+    }
 }

@@ -5,8 +5,8 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
 @Component({
-  selector: 'fd-action-bar',
-  template: `
+    selector: 'fd-action-bar',
+    template: `
     <div class="fd-action-bar">
       <div class="fd-action-bar__header">
         <fd-action-bar-title>{{actionBarTitle}}</fd-action-bar-title>
@@ -18,19 +18,15 @@ import { IconModule } from '../icon/icon.module';
   `
 })
 export class ActionBar {
+    @Input() actionBarTitle: string;
 
-  @Input()
-  actionBarTitle: string;
-
-  @Input()
-  isNavigation: boolean;
-
+    @Input() isNavigation: boolean;
 }
 
 @Component({
-  selector: 'fd-action-bar-title',
-  template: `
+    selector: 'fd-action-bar-title',
+    template: `
      <h1 class="fd-action-bar__title"><ng-content></ng-content></h1>
   `
 })
-export class ActionBarTitle { }
+export class ActionBarTitle {}

@@ -8,26 +8,9 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from './modal';
 import { ModalService } from './modal.service';
 
 @NgModule({
-    declarations: [
-      Modal,
-      ModalHeader,
-      ModalBody,
-      ModalFooter
-    ],
-    imports: [
-      CommonModule,
-      ButtonModule,
-      IconModule,
-      NgbModalModule.forRoot()
-    ],
-    exports: [
-      Modal,
-      ModalHeader,
-      ModalBody,
-      ModalFooter
-    ],
-    providers: [
-      ModalService
-    ]
-  })
-export class ModalModule { }
+    declarations: [Modal, ModalHeader, ModalBody, ModalFooter],
+    imports: [CommonModule, ButtonModule, IconModule, NgbModalModule.forRoot()],
+    exports: [Modal, ModalHeader, ModalBody, ModalFooter],
+    providers: [ModalService]
+})
+export class ModalModule {}
