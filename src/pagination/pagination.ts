@@ -1,18 +1,18 @@
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 export interface PaginationObject {
-  totalItems: number;
-  itemsPerPage: number;
-  currentPage: number;
+    totalItems: number;
+    itemsPerPage: number;
+    currentPage: number;
 }
 
 enum PaginationPageType {
-  More = -1
+    More = -1
 }
 
 @Component({
-  selector: 'fd-pagination',
-  template: `
+    selector: 'fd-pagination',
+    template: `
   <div class="fd-pagination">
     <span class="fd-pagination__total">{{ pagination.totalItems }} items</span>
     <nav class="fd-pagination__nav">
@@ -41,74 +41,74 @@ enum PaginationPageType {
   `
 })
 export class Pagination implements OnChanges {
+    private static readonly displayNumPages = 3;
 
-  private static readonly displayNumPages = 3;
+    @Input() pagination: PaginationObject;
 
-  @Input()
-  pagination: PaginationObject;
+    @Output() selected = new EventEmitter<number>();
 
-  @Output()
-  selected = new EventEmitter<number>();
+    total: number;
 
-  total: number;
+    pages: number[];
 
-  pages: number[];
+    ngOnChanges() {
+        this.total = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
 
-  ngOnChanges() {
-    this.total = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
-
-    if (this.pagination.currentPage > this.total || this.pagination.currentPage < 1) {
-      throw new Error(`Pagination requires a current page ${this.pagination.currentPage} below ${this.total} or greater than 0`);
-    }
-
-    this.calculatePagination(this.pagination.currentPage);
-  }
-
-  calculatePagination(current: number) {
-    const pages = [];
-
-    if (this.total <= Pagination.displayNumPages) {
-      for (let i = 1; i <= this.total; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (current <= Pagination.displayNumPages) {
-        for (let i = 1; i <= Pagination.displayNumPages; i++) {
-          pages.push(i);
+        if (this.pagination.currentPage > this.total || this.pagination.currentPage < 1) {
+            throw new Error(
+                `Pagination requires a current page ${this.pagination.currentPage} below ${
+                    this.total
+                } or greater than 0`
+            );
         }
-        pages.push(PaginationPageType.More);
-        pages.push(this.total);
-      } else if (current > (this.total - (Pagination.displayNumPages - 1))) {
-        pages.push(1);
-        pages.push(PaginationPageType.More);
-        for (let i = this.total - (Pagination.displayNumPages - 1); i <= this.total; i++) {
-          pages.push(i);
+
+        this.calculatePagination(this.pagination.currentPage);
+    }
+
+    calculatePagination(current: number) {
+        const pages = [];
+
+        if (this.total <= Pagination.displayNumPages) {
+            for (let i = 1; i <= this.total; i++) {
+                pages.push(i);
+            }
+        } else {
+            if (current <= Pagination.displayNumPages) {
+                for (let i = 1; i <= Pagination.displayNumPages; i++) {
+                    pages.push(i);
+                }
+                pages.push(PaginationPageType.More);
+                pages.push(this.total);
+            } else if (current > this.total - (Pagination.displayNumPages - 1)) {
+                pages.push(1);
+                pages.push(PaginationPageType.More);
+                for (let i = this.total - (Pagination.displayNumPages - 1); i <= this.total; i++) {
+                    pages.push(i);
+                }
+            } else {
+                pages.push(1);
+                pages.push(PaginationPageType.More);
+                const buffer = Math.floor(Pagination.displayNumPages / 2);
+                for (let i = current - buffer; i <= current + buffer; i++) {
+                    pages.push(i);
+                }
+                pages.push(PaginationPageType.More);
+                pages.push(this.total);
+            }
         }
-      } else {
-        pages.push(1);
-        pages.push(PaginationPageType.More);
-        const buffer = Math.floor(Pagination.displayNumPages / 2);
-        for (let i = current - buffer; i <= current + buffer; i++) {
-          pages.push(i);
+
+        this.pages = pages;
+    }
+
+    goToPage(page: number, $event: MouseEvent) {
+        if ($event) {
+            $event.preventDefault();
         }
-        pages.push(PaginationPageType.More);
-        pages.push(this.total);
-      }
+        if (page > this.total || page < 1) {
+            return;
+        }
+        this.pagination.currentPage = page;
+        this.calculatePagination(page);
+        this.selected.emit(page);
     }
-
-    this.pages = pages;
-  }
-
-  goToPage(page: number, $event: MouseEvent) {
-    if ($event) {
-      $event.preventDefault();
-    }
-    if (page > this.total || page < 1) {
-      return;
-    }
-    this.pagination.currentPage = page;
-    this.calculatePagination(page);
-    this.selected.emit(page);
-  }
-
 }

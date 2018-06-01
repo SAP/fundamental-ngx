@@ -1,14 +1,23 @@
-import { Component, Input, Output, OnInit, AfterContentInit, ViewChildren, QueryList, EventEmitter } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    OnInit,
+    AfterContentInit,
+    ViewChildren,
+    QueryList,
+    EventEmitter
+} from '@angular/core';
 
 export interface TreeRowObject {
-  rowData: any[];
-  children: TreeRowObject[];
-  sublevelClass: string;
+    rowData: any[];
+    children: TreeRowObject[];
+    sublevelClass: string;
 }
 
 @Component({
-  selector: 'fd-tree-child',
-  template: `
+    selector: 'fd-tree-child',
+    template: `
     <li #treeChild class="fd-tree__item" role="treeitem">
       <div class="fd-tree__row">
         <div *ngFor="let cell of row.rowData; let i = index" [attr.data-index]="i" class="fd-tree__col"
@@ -52,58 +61,51 @@ export interface TreeRowObject {
   `
 })
 export class TreeChild implements OnInit {
+    @Input() row: TreeRowObject;
 
-  @Input()
-  row: TreeRowObject;
+    @Input() hideChildren: boolean;
 
-  @Input()
-  hideChildren: boolean;
+    @Input() displayTreeActions: boolean;
 
-  @Input()
-  displayTreeActions: boolean;
+    @Output() editClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  editClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  deleteClicked: EventEmitter<any> = new EventEmitter<any>();
-
-  ngOnInit() {
-    this.hideChildren = false;
-  }
-
-  toggleDisplayChildren(hideAll) {
-    if (hideAll !== undefined) {
-      this.hideChildren = hideAll;
-    } else {
-      this.hideChildren = !this.hideChildren;
-    }
-  }
-
-  typeOf(variable) {
-    let retVal;
-    if (typeof variable === 'string') {
-      retVal = 'string';
-    } else if (typeof variable === 'object') {
-      retVal = 'object'
+    ngOnInit() {
+        this.hideChildren = false;
     }
 
-    return retVal;
-  }
+    toggleDisplayChildren(hideAll) {
+        if (hideAll !== undefined) {
+            this.hideChildren = hideAll;
+        } else {
+            this.hideChildren = !this.hideChildren;
+        }
+    }
 
-  editTreeItem(row) {
-    this.editClicked.emit(row);
-  }
+    typeOf(variable) {
+        let retVal;
+        if (typeof variable === 'string') {
+            retVal = 'string';
+        } else if (typeof variable === 'object') {
+            retVal = 'object';
+        }
 
-  deleteTreeItem(row) {
-    this.deleteClicked.emit(row);
-  }
+        return retVal;
+    }
 
+    editTreeItem(row) {
+        this.editClicked.emit(row);
+    }
+
+    deleteTreeItem(row) {
+        this.deleteClicked.emit(row);
+    }
 }
 
 @Component({
-  selector: 'fd-tree',
-  template: `
+    selector: 'fd-tree',
+    template: `
     <div
          class="fd-tree fd-tree--header" *ngIf="headers.length > 0">
       <div class="fd-tree__row fd-tree__row--header">
@@ -125,80 +127,71 @@ export class TreeChild implements OnInit {
   `
 })
 export class Tree implements OnInit, AfterContentInit {
+    @Input() headers: string[];
 
-  @Input()
-  headers: string[];
+    @Input() treeData: TreeRowObject[];
 
-  @Input()
-  treeData: TreeRowObject[];
+    @Input() hideAll: boolean;
 
-  @Input()
-  hideAll: boolean;
+    @Input() displayTreeActions: boolean;
 
-  @Input()
-  displayTreeActions: boolean;
+    @Output() editRowClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  editRowClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() deleteRowClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output()
-  deleteRowClicked: EventEmitter<any> = new EventEmitter<any>();
+    @ViewChildren(TreeChild) treeChildren: QueryList<TreeChild>;
 
-  @ViewChildren(TreeChild)
-  treeChildren: QueryList<TreeChild>;
-
-  ngOnInit() {
-    this.hideAll = false;
-  }
-
-  ngAfterContentInit() {
-    if (this.treeData && this.treeData.length) {
-      this.treeData.forEach((row) => {
-        this.getChildDepth(row, 0);
-        this.handleEmptyTrailingCells(row); // handle empty cells for parents
-      });
+    ngOnInit() {
+        this.hideAll = false;
     }
-  }
 
-  toggleDisplayAll() {
-    this.hideAll = !this.hideAll;
-    this.treeChildren.forEach((child) => {
-      child.toggleDisplayChildren(this.hideAll);
-    });
-  }
-
-  getChildDepth(row, depth) {
-    if (depth > 0) {
-      row.sublevelClass = 'fd-tree__group--sublevel-' + depth;
+    ngAfterContentInit() {
+        if (this.treeData && this.treeData.length) {
+            this.treeData.forEach(row => {
+                this.getChildDepth(row, 0);
+                this.handleEmptyTrailingCells(row); // handle empty cells for parents
+            });
+        }
     }
-    if (row.children) {
-      row.children.forEach((child) => {
-        this.getChildDepth(child, depth + 1);
-        this.handleEmptyTrailingCells(child); // handle empty cells for children
-      });
-    }
-  }
 
-  handleEmptyTrailingCells(row) {
-    if (row && row.rowData && row.rowData.length && typeof row.rowData[0] === 'string') {
-      while (row.rowData.length < this.headers.length) {
-        row.rowData.push('');
-      }
-    } else if (row && row.rowData && row.rowData.length && typeof row.rowData[0] === 'object') {
-      while (row.rowData.length < this.headers.length) {
-        row.rowData.push({
-          displayText: ''
+    toggleDisplayAll() {
+        this.hideAll = !this.hideAll;
+        this.treeChildren.forEach(child => {
+            child.toggleDisplayChildren(this.hideAll);
         });
-      }
     }
-  }
 
-  editClicked(row) {
-    this.editRowClicked.emit(row);
-  }
+    getChildDepth(row, depth) {
+        if (depth > 0) {
+            row.sublevelClass = 'fd-tree__group--sublevel-' + depth;
+        }
+        if (row.children) {
+            row.children.forEach(child => {
+                this.getChildDepth(child, depth + 1);
+                this.handleEmptyTrailingCells(child); // handle empty cells for children
+            });
+        }
+    }
 
-  deleteClicked(row) {
-    this.deleteRowClicked.emit(row);
-  }
+    handleEmptyTrailingCells(row) {
+        if (row && row.rowData && row.rowData.length && typeof row.rowData[0] === 'string') {
+            while (row.rowData.length < this.headers.length) {
+                row.rowData.push('');
+            }
+        } else if (row && row.rowData && row.rowData.length && typeof row.rowData[0] === 'object') {
+            while (row.rowData.length < this.headers.length) {
+                row.rowData.push({
+                    displayText: ''
+                });
+            }
+        }
+    }
 
+    editClicked(row) {
+        this.editRowClicked.emit(row);
+    }
+
+    deleteClicked(row) {
+        this.deleteRowClicked.emit(row);
+    }
 }

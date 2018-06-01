@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular
 import { HashService } from '../utils/hash.service';
 
 @Component({
-  selector: 'fd-alert',
-  template: `    
+    selector: 'fd-alert',
+    template: `    
     <button 
       class="fd-alert__close"
       *ngIf="dismissible"
@@ -13,44 +13,39 @@ import { HashService } from '../utils/hash.service';
     </button>
     <ng-content></ng-content>
   `,
-  host: {
-    'class': 'fd-alert',
-    'role': 'alert',
-    '[id]': 'id',
-    '[class.fd-alert--dismissible]': 'dismissible == true',
-    '[class.fd-alert--warning]': 'type == "warning"',
-    '[class.fd-alert--error]': 'type == "error"'
-  },
-  styles: [`
-    :host {
-      display: block;
-      position: relative;
-    }
-  `]
+    host: {
+        class: 'fd-alert',
+        role: 'alert',
+        '[id]': 'id',
+        '[class.fd-alert--dismissible]': 'dismissible == true',
+        '[class.fd-alert--warning]': 'type == "warning"',
+        '[class.fd-alert--error]': 'type == "error"'
+    },
+    styles: [
+        `
+            :host {
+                display: block;
+                position: relative;
+            }
+        `
+    ]
 })
 export class Alert implements OnInit {
+    @Input() dismissible: boolean;
 
-  @Input()
-  dismissible: boolean;
+    @Input() type: string;
 
-  @Input()
-  type: string;
+    @Output() close = new EventEmitter<string>();
 
-  @Output()
-  close = new EventEmitter<string>();
+    id: string;
 
-  id: string;
+    constructor(@Inject(HashService) private hasher: HashService) {}
 
-  constructor(
-    @Inject(HashService) private hasher: HashService
-  ) { }
+    ngOnInit() {
+        this.id = this.hasher.hash();
+    }
 
-  ngOnInit() {
-    this.id = this.hasher.hash();
-  }
-
-  handleClose() {
-    this.close.emit(this.id);
-  }
-
+    handleClose() {
+        this.close.emit(this.id);
+    }
 }

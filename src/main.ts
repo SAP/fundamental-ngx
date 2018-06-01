@@ -8,30 +8,30 @@ import { NgModuleRef, ApplicationRef } from '@angular/core';
 import { createNewHosts } from '@angularclass/hmr';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 const hmrBootstrap = (module: any, bootstrap: () => Promise<NgModuleRef<any>>) => {
-  let ngModule: NgModuleRef<any>;
-  module.hot.accept();
-  bootstrap().then(mod => ngModule = mod);
-  module.hot.dispose(() => {
-    const appRef: ApplicationRef = ngModule.injector.get(ApplicationRef);
-    const elements = appRef.components.map(c => c.location.nativeElement);
-    const makeVisible = createNewHosts(elements);
-    ngModule.destroy();
-    makeVisible();
-  });
+    let ngModule: NgModuleRef<any>;
+    module.hot.accept();
+    bootstrap().then(mod => (ngModule = mod));
+    module.hot.dispose(() => {
+        const appRef: ApplicationRef = ngModule.injector.get(ApplicationRef);
+        const elements = appRef.components.map(c => c.location.nativeElement);
+        const makeVisible = createNewHosts(elements);
+        ngModule.destroy();
+        makeVisible();
+    });
 };
 
 const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
 
 if (environment.hmr) {
-  if (module['hot']) {
-    hmrBootstrap(module, bootstrap);
-  } else {
-    console.error('HMR is not enabled for webpack-dev-server...');
-  }
+    if (module['hot']) {
+        hmrBootstrap(module, bootstrap);
+    } else {
+        console.error('HMR is not enabled for webpack-dev-server...');
+    }
 } else {
-  bootstrap();
+    bootstrap();
 }

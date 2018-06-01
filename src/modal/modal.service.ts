@@ -4,17 +4,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class ModalService {
+    modalRef;
 
-  modalRef;
+    constructor(private modalService: NgbModal) {}
 
-  constructor(private modalService: NgbModal) { }
+    close() {
+        this.modalRef.close();
+    }
 
-  close() {
-    this.modalRef.close();
-  }
-
-  open(modalType) {
-    this.modalRef = this.modalService.open(modalType);
-  }
-
+    open(modalType) {
+        this.modalRef = this.modalService.open(modalType);
+    }
 }

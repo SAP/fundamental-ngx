@@ -19,33 +19,33 @@ import { ModalComponent } from './modal/modal.component';
 import { TableComponent } from './table/table.component';
 import { TileComponent } from './tile/tile.component';
 
-export const COMPONENT_SCHEMAS: {[name: string]: Schema} = {
-  badgeLabel: BadgeLabelComponent.schema,
-  button: ButtonComponent.schema,
-  buttonGroup: ButtonGroupComponent.schema,
-  alert: AlertComponent.schema,
-  icon: IconComponent.schema,
-  identifier: IdentifierComponent.schema,
-  inlineHelp: InlineHelpComponent.schema,
-  inputGroup: InputGroupComponent.schema,
-  image: ImageComponent.schema,
-  pagination: PaginationComponent.schema,
-  list: ListComponent.schema,
-  dropdown: DropdownComponent.schema,
-  modal: ModalComponent.schema,
-  tabs: TabsComponent.schema,
-  table: TableComponent.schema,
-  tile: TileComponent.schema,
-  tree: TreeComponent.schema,
-  media: {
-    properties: {
-      'image': {
-        type: 'string'
-      },
-      'alt': {
-        type: 'string'
-      }
-    },
-    type: 'object'
-  }
+export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
+    badgeLabel: BadgeLabelComponent.schema,
+    button: ButtonComponent.schema,
+    buttonGroup: ButtonGroupComponent.schema,
+    alert: AlertComponent.schema,
+    icon: IconComponent.schema,
+    identifier: IdentifierComponent.schema,
+    inlineHelp: InlineHelpComponent.schema,
+    inputGroup: InputGroupComponent.schema,
+    image: ImageComponent.schema,
+    pagination: PaginationComponent.schema,
+    list: ListComponent.schema,
+    dropdown: DropdownComponent.schema,
+    modal: ModalComponent.schema,
+    tabs: TabsComponent.schema,
+    table: TableComponent.schema,
+    tile: TileComponent.schema,
+    tree: TreeComponent.schema,
+    media: {
+        properties: {
+            image: {
+                type: 'string'
+            },
+            alt: {
+                type: 'string'
+            }
+        },
+        type: 'object'
+    }
 };

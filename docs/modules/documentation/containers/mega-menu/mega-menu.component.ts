@@ -3,12 +3,11 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 @Component({
-  selector: 'app-mega-menu',
-  templateUrl: './mega-menu.component.html'
+    selector: 'app-mega-menu',
+    templateUrl: './mega-menu.component.html'
 })
 export class MegaMenuComponent implements OnInit {
-
-  megaMenuHtml = `<fd-mega-menu>
+    megaMenuHtml = `<fd-mega-menu>
   <fd-mega-menu-group>
     <fd-mega-menu-title>
       Group Name
@@ -38,10 +37,7 @@ export class MegaMenuComponent implements OnInit {
   </fd-mega-menu-group>
 </fd-mega-menu>`;
 
-  constructor() { }
+    constructor() {}
 
-  ngOnInit() { }
+    ngOnInit() {}
 }
-
-
-

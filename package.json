@@ -10,7 +10,9 @@
     "test": "ng test --app=1",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-src": "gulp build-src"
+    "build-src": "gulp build-src",
+    "precise-commits": "precise-commits",
+    "precommit": "npm run precise-commits"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -42,13 +44,13 @@
     "@types/jasminewd2": "^2.0.3",
     "@types/node": "^8.5.1",
     "codelyzer": "^4.0.2",
-    "fundamental-ui": "^1.0.0",
     "del": "~3.0.0",
     "gulp": "~3.9.1",
     "gulp-concat": "~2.6.1",
     "gulp-rename": "^1.2.3",
     "gulp-typescript": "~3.2.4",
     "gulp-uglify": "~3.0.0",
+    "husky": "^0.14.3",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -57,6 +59,8 @@
     "karma-coverage-istanbul-reporter": "~1.2.1",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "~0.2.2",
+    "precise-commits": "^1.0.2",
+    "prettier": "^1.13.4",
     "protractor": "5.1.2",
     "pump": "~3.0.0",
     "run-sequence": "~2.2.1",
