@@ -69,7 +69,7 @@ export class Pagination implements OnChanges {
         const pages = [];
 
         if (this.total <= Pagination.displayNumPages) {
-            for (let i = 1; i <= Pagination.displayNumPages; i++) {
+            for (let i = 1; i <= this.total; i++) {
                 pages.push(i);
             }
         } else {
