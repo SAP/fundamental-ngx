@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TreeRowObject } from './tree.component';
+import { TreeRowObject } from './tree-row-object.model';
 
 @Component({
     selector: 'fd-tree-child',

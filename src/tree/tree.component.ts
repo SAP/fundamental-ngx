@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 import { TreeRowObject } from './tree-row-object.model';
+import { TreeChildComponent } from './tree-child.component';
 
 @Component({
     selector: 'fd-tree',
