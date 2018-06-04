@@ -7,7 +7,7 @@ import { Directive, Input } from '@angular/core';
         role: 'presentation'
     }
 })
-export class IconComponent {
+export class IconDirective {
     @Input() glyph;
 
     @Input() size;

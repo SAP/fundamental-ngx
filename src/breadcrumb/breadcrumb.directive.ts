@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
         class: 'fd-breadcrumb'
     }
 })
-export class BreadcrumbComponent {}
+export class BreadcrumbDirective {}
 
 @Component({
     selector: 'fd-breadcrumb-item',
@@ -16,7 +16,7 @@ export class BreadcrumbComponent {}
     },
     templateUrl: './breadcrumb-item.component.html'
 })
-export class BreadcrumbItem {
+export class BreadcrumbItemComponent {
     constructor(private router: Router) {}
 
     @Input() url: string;

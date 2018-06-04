@@ -10,31 +10,31 @@ export class MegaMenuComponent {}
     selector: 'fd-mega-menu-group',
     templateUrl: './mega-menu-group.component.html'
 })
-export class MegaMenuGroup {}
+export class MegaMenuGroupComponent {}
 
 @Component({
     selector: 'fd-mega-menu-title',
     templateUrl: './mega-menu-title.component.html'
 })
-export class MegaMenuTitle {}
+export class MegaMenuTitleComponent {}
 
 @Component({
     selector: 'fd-mega-menu-list',
     templateUrl: './mega-menu-list.component.html'
 })
-export class MegaMenuList {}
+export class MegaMenuListComponent {}
 
 @Component({
     selector: 'fd-mega-menu-item',
     templateUrl: './mega-menu-item.component.html'
 })
-export class MegaMenuItem {}
+export class MegaMenuItemComponent {}
 
 @Component({
     selector: 'fd-mega-menu-link',
     templateUrl: './mega-menu-link.component.html'
 })
-export class MegaMenuLink {
+export class MegaMenuLinkComponent {
     @Input() url: string;
 
     @Input() hasSublist: boolean;
@@ -46,12 +46,12 @@ export class MegaMenuLink {
     selector: 'fd-mega-menu-sublist',
     templateUrl: './mega-menu-sublist.component.html'
 })
-export class MegaMenuSubList {}
+export class MegaMenuSubListComponent {}
 
 @Component({
     selector: 'fd-mega-menu-subitem',
     templateUrl: './mega-menu-subitem.component.html'
 })
-export class MegaMenuSubItem {
+export class MegaMenuSubItemComponent {
     @Input() url: string;
 }

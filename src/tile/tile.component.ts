@@ -27,13 +27,13 @@ export class TileComponent {
         class: 'fd-tile__content'
     }
 })
-export class TileContent {}
+export class TileContentDirective {}
 
 @Component({
     selector: 'fd-tile-title',
     templateUrl: './tile-title.component.html'
 })
-export class TileTitle {}
+export class TileTitleComponent {}
 
 @Directive({
     selector: 'fd-tile-media',
@@ -41,13 +41,13 @@ export class TileTitle {}
         class: 'fd-tile__media'
     }
 })
-export class TileMedia {}
+export class TileMediaDirective {}
 
 @Component({
     selector: 'fd-tile-actions',
     templateUrl: './tile-actions.component.html'
 })
-export class TileActions {}
+export class TileActionsComponent {}
 
 @Component({
     selector: 'fd-product-tile',
@@ -57,7 +57,7 @@ export class TileActions {}
     },
     templateUrl: './product-tile.component.html'
 })
-export class ProductTile {
+export class ProductTileComponent {
     @Input() disabled: boolean = false;
 
     @Input() isButton: boolean = false;
@@ -67,7 +67,7 @@ export class ProductTile {
     selector: 'fd-product-tile-media',
     templateUrl: './product-tile-media.component.html'
 })
-export class ProductTileMedia {
+export class ProductTileMediaComponent {
     @Input() photo: string;
 }
 
@@ -75,13 +75,13 @@ export class ProductTileMedia {
     selector: 'fd-product-tile-content',
     templateUrl: './product-tile-content.component.html'
 })
-export class ProductTileContent {}
+export class ProductTileContentComponent {}
 
 @Component({
     selector: 'fd-product-tile-title',
     templateUrl: './product-tile-title.component.html'
 })
-export class ProductTileTitle {}
+export class ProductTileTitleComponent {}
 
 @Directive({
     selector: 'fd-tile-grid',
@@ -89,6 +89,6 @@ export class ProductTileTitle {}
         '[class]': '"fd-tile-grid" + (col ? "  fd-tile-grid--" + col + "col" : "") '
     }
 })
-export class TileGrid {
+export class TileGridDirective {
     @Input() col;
 }

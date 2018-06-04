@@ -31,7 +31,7 @@ export class DropdownComponent {
       <a class="fd-dropdown__item" style="cursor: pointer;"><ng-content></ng-content></a>
   `
 })
-export class DropdownItem {}
+export class DropdownItemComponent {}
 
 @Component({
     selector: 'fd-dropdown-group',
@@ -42,7 +42,7 @@ export class DropdownItem {}
     <ng-content></ng-content>
   `
 })
-export class DropdownGroup {}
+export class DropdownGroupComponent {}
 
 @Directive({
     selector: '[fd-dropdown-control]',
@@ -50,7 +50,7 @@ export class DropdownGroup {}
         class: 'fd-dropdown__control'
     }
 })
-export class DropdownControl {}
+export class DropdownControlDirective {}
 
 @Directive({
     selector: '[fd-dropdown-control-no-border]',
@@ -58,7 +58,7 @@ export class DropdownControl {}
         class: 'fd-dropdown__control--no-border'
     }
 })
-export class DropdownControlNoBorder {}
+export class DropdownControlNoBorderDirective {}
 
 @Directive({
     selector: 'fd-dropdown-header',
@@ -67,4 +67,4 @@ export class DropdownControlNoBorder {}
         role: 'separator'
     }
 })
-export class DropdownGroupHeader {}
+export class DropdownGroupHeaderDirective {}

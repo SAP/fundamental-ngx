@@ -3,42 +3,42 @@ import { CommonModule } from '@angular/common';
 
 import {
     TileComponent,
-    TileContent,
-    TileTitle,
-    TileMedia,
-    TileActions,
-    ProductTile,
-    ProductTileMedia,
-    ProductTileContent,
-    ProductTileTitle,
-    TileGrid
+    TileContentDirective,
+    TileTitleComponent,
+    TileMediaDirective,
+    TileActionsComponent,
+    ProductTileComponent,
+    ProductTileMediaComponent,
+    ProductTileContentComponent,
+    ProductTileTitleComponent,
+    TileGridDirective
 } from './tile.component';
 
 @NgModule({
     imports: [CommonModule],
     exports: [
         TileComponent,
-        TileContent,
-        TileTitle,
-        TileMedia,
-        TileActions,
-        ProductTile,
-        ProductTileMedia,
-        ProductTileContent,
-        ProductTileTitle,
-        TileGrid
+        TileContentDirective,
+        TileTitleComponent,
+        TileMediaDirective,
+        TileActionsComponent,
+        ProductTileComponent,
+        ProductTileMediaComponent,
+        ProductTileContentComponent,
+        ProductTileTitleComponent,
+        TileGridDirective
     ],
     declarations: [
         TileComponent,
-        TileContent,
-        TileTitle,
-        TileMedia,
-        TileActions,
-        ProductTile,
-        ProductTileMedia,
-        ProductTileContent,
-        ProductTileTitle,
-        TileGrid
+        TileContentDirective,
+        TileTitleComponent,
+        TileMediaDirective,
+        TileActionsComponent,
+        ProductTileComponent,
+        ProductTileMediaComponent,
+        ProductTileContentComponent,
+        ProductTileTitleComponent,
+        TileGridDirective
     ]
 })
 export class TileModule {}

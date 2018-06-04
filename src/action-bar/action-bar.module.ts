@@ -4,11 +4,11 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
 
-import { ActionBarComponent, ActionBarTitle } from './action-bar.component';
+import { ActionBarComponent, ActionBarTitleComponent } from './action-bar.component';
 
 @NgModule({
-    declarations: [ActionBarComponent, ActionBarTitle],
+    declarations: [ActionBarComponent, ActionBarTitleComponent],
     imports: [CommonModule, ButtonModule, IconModule, DropdownModule],
-    exports: [ActionBarComponent, ActionBarTitle]
+    exports: [ActionBarComponent, ActionBarTitleComponent]
 })
 export class ActionBarModule {}

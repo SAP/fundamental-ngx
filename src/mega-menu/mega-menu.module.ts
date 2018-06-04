@@ -3,36 +3,36 @@ import { CommonModule } from '@angular/common';
 
 import {
     MegaMenuComponent,
-    MegaMenuGroup,
-    MegaMenuTitle,
-    MegaMenuList,
-    MegaMenuItem,
-    MegaMenuLink,
-    MegaMenuSubList,
-    MegaMenuSubItem
+    MegaMenuGroupComponent,
+    MegaMenuTitleComponent,
+    MegaMenuListComponent,
+    MegaMenuItemComponent,
+    MegaMenuLinkComponent,
+    MegaMenuSubListComponent,
+    MegaMenuSubItemComponent
 } from './mega-menu.component';
 
 @NgModule({
     imports: [CommonModule],
     exports: [
         MegaMenuComponent,
-        MegaMenuGroup,
-        MegaMenuTitle,
-        MegaMenuList,
-        MegaMenuItem,
-        MegaMenuLink,
-        MegaMenuSubList,
-        MegaMenuSubItem
+        MegaMenuGroupComponent,
+        MegaMenuTitleComponent,
+        MegaMenuListComponent,
+        MegaMenuItemComponent,
+        MegaMenuLinkComponent,
+        MegaMenuSubListComponent,
+        MegaMenuSubItemComponent
     ],
     declarations: [
         MegaMenuComponent,
-        MegaMenuGroup,
-        MegaMenuTitle,
-        MegaMenuList,
-        MegaMenuItem,
-        MegaMenuLink,
-        MegaMenuSubList,
-        MegaMenuSubItem
+        MegaMenuGroupComponent,
+        MegaMenuTitleComponent,
+        MegaMenuListComponent,
+        MegaMenuItemComponent,
+        MegaMenuLinkComponent,
+        MegaMenuSubListComponent,
+        MegaMenuSubItemComponent
     ]
 })
 export class MegaMenuModule {}

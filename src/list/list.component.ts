@@ -15,7 +15,7 @@ export class ListComponent {}
       <ng-content></ng-content>
   `
 })
-export class ListItem {}
+export class ListItemComponent {}
 
 @Component({
     selector: 'fd-list-checkbox',
@@ -24,7 +24,7 @@ export class ListItem {}
     },
     templateUrl: './list-checkbox.component.html'
 })
-export class ListCheckbox {}
+export class ListCheckboxComponent {}
 
 @Directive({
     selector: 'fd-list-action',
@@ -32,4 +32,4 @@ export class ListCheckbox {}
         class: 'fd-list-group__action'
     }
 })
-export class ListAction {}
+export class ListActionDirective {}

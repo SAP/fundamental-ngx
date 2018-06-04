@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import {
     PanelComponent,
-    PanelHeader,
-    PanelTitle,
-    PanelActions,
-    PanelFilters,
-    PanelBody,
-    PanelFooter
+    PanelHeaderComponent,
+    PanelTitleComponent,
+    PanelActionsComponent,
+    PanelFiltersComponent,
+    PanelBodyComponent,
+    PanelFooterComponent
 } from './panel.component';
 @NgModule({
-    declarations: [PanelComponent, PanelHeader, PanelTitle, PanelActions, PanelFilters, PanelBody, PanelFooter],
+    declarations: [PanelComponent, PanelHeaderComponent, PanelTitleComponent, PanelActionsComponent, PanelFiltersComponent, PanelBodyComponent, PanelFooterComponent],
     imports: [CommonModule],
-    exports: [PanelComponent, PanelHeader, PanelTitle, PanelActions, PanelFilters, PanelBody, PanelFooter]
+    exports: [PanelComponent, PanelHeaderComponent, PanelTitleComponent, PanelActionsComponent, PanelFiltersComponent, PanelBodyComponent, PanelFooterComponent]
 })
 export class PanelModule {}

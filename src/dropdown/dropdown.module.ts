@@ -3,30 +3,30 @@ import { CommonModule } from '@angular/common';
 import { UtilsModule } from '../utils/utils.module';
 import {
     DropdownComponent,
-    DropdownItem,
-    DropdownGroup,
-    DropdownControl,
-    DropdownControlNoBorder,
-    DropdownGroupHeader
+    DropdownItemComponent,
+    DropdownGroupComponent,
+    DropdownControlDirective,
+    DropdownControlNoBorderDirective,
+    DropdownGroupHeaderDirective
 } from './dropdown.component';
 
 @NgModule({
     declarations: [
         DropdownComponent,
-        DropdownItem,
-        DropdownGroup,
-        DropdownControl,
-        DropdownControlNoBorder,
-        DropdownGroupHeader
+        DropdownItemComponent,
+        DropdownGroupComponent,
+        DropdownControlDirective,
+        DropdownControlNoBorderDirective,
+        DropdownGroupHeaderDirective
     ],
     imports: [CommonModule, UtilsModule],
     exports: [
         DropdownComponent,
-        DropdownItem,
-        DropdownGroup,
-        DropdownControl,
-        DropdownControlNoBorder,
-        DropdownGroupHeader
+        DropdownItemComponent,
+        DropdownGroupComponent,
+        DropdownControlDirective,
+        DropdownControlNoBorderDirective,
+        DropdownGroupHeaderDirective
     ]
 })
 export class DropdownModule {}

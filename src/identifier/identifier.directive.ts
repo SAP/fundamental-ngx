@@ -8,7 +8,7 @@ import { Directive, Input } from '@angular/core';
         role: 'presentation'
     }
 })
-export class IdentifierComponent {
+export class IdentifierDirective {
     @Input() size: string = '';
 
     @Input() circle: boolean = false;

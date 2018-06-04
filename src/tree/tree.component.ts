@@ -19,7 +19,7 @@ export interface TreeRowObject {
     selector: 'fd-tree-child',
     templateUrl: './tree-child.component.html'
 })
-export class TreeChild implements OnInit {
+export class TreeChildComponent implements OnInit {
     @Input() row: TreeRowObject;
 
     @Input() hideChildren: boolean;
@@ -79,7 +79,7 @@ export class TreeComponent implements OnInit, AfterContentInit {
 
     @Output() deleteRowClicked: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChildren(TreeChild) treeChildren: QueryList<TreeChild>;
+    @ViewChildren(TreeChildComponent) treeChildren: QueryList<TreeChildComponent>;
 
     ngOnInit() {
         this.hideAll = false;

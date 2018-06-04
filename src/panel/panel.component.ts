@@ -17,7 +17,7 @@ export class PanelComponent {}
     },
     templateUrl: './panel-header.component.html'
 })
-export class PanelHeader {}
+export class PanelHeaderComponent {}
 
 @Component({
     selector: 'fd-panel-title',
@@ -26,7 +26,7 @@ export class PanelHeader {}
     },
     templateUrl: './panel-title.component.html'
 })
-export class PanelTitle {}
+export class PanelTitleComponent {}
 
 @Component({
     selector: 'fd-panel-actions',
@@ -35,7 +35,7 @@ export class PanelTitle {}
     },
     templateUrl: './panel-actions.component.html'
 })
-export class PanelActions {}
+export class PanelActionsComponent {}
 
 @Component({
     selector: 'fd-panel-filters',
@@ -44,7 +44,7 @@ export class PanelActions {}
     },
     templateUrl: './panel-filters.component.html'
 })
-export class PanelFilters {}
+export class PanelFiltersComponent {}
 
 @Component({
     selector: 'fd-panel-body',
@@ -53,7 +53,7 @@ export class PanelFilters {}
     },
     templateUrl: './panel-body.component.html'
 })
-export class PanelBody {}
+export class PanelBodyComponent {}
 
 @Component({
     selector: 'fd-panel-footer',
@@ -62,4 +62,4 @@ export class PanelBody {}
     },
     templateUrl: './panel-footer.component.html'
 })
-export class PanelFooter {}
+export class PanelFooterComponent {}

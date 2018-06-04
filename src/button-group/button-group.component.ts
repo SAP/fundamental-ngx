@@ -13,7 +13,7 @@ export class ButtonGroupComponent {}
             '"fd-button--grouped" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (compact ? " fd-button--compact" : "") + (state ? " is-" + state : "")'
     }
 })
-export class ButtonGrouped {
+export class ButtonGroupedDirective {
     @Input() id: string;
 
     @Input() size: string;

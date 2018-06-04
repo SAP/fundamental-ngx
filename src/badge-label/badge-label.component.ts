@@ -7,7 +7,7 @@ import { Directive, Input, Component } from '@angular/core';
     },
     templateUrl: './badge-label.component.html'
 })
-export class Badge {
+export class BadgeComponent {
     @Input() status;
 
     @Input() modifier;
@@ -20,6 +20,6 @@ export class Badge {
     },
     templateUrl: './badge-label.component.html'
 })
-export class Label {
+export class LabelComponent {
     @Input() status;
 }

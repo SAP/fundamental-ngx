@@ -1,18 +1,18 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { IconComponent } from './icon.component';
+import { IconDirective } from './icon.directive';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [IconComponent],
-    declarations: [IconComponent]
+    exports: [IconDirective],
+    declarations: [IconDirective]
 })
 export class IconModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: IconModule,
-            providers: [IconComponent]
+            providers: [IconDirective]
         };
     }
 }

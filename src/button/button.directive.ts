@@ -7,7 +7,7 @@ import { Directive, Input } from '@angular/core';
             '"fd-button" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (type ? " fd-button--" + type : "") + (semantic ? " fd-button--" + semantic : "") + (state ? " is-" + state : "")'
     }
 })
-export class ButtonComponent {
+export class ButtonDirective {
     @Input() size;
 
     @Input() glyph;

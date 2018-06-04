@@ -18,4 +18,4 @@ export class ActionBarComponent {
     selector: 'fd-action-bar-title',
     templateUrl: './action-bar-title.component.html'
 })
-export class ActionBarTitle {}
+export class ActionBarTitleComponent {}

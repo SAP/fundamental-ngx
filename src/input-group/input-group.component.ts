@@ -38,7 +38,7 @@ export class InputGroupComponent {
     },
     templateUrl: './input-group-number.component.html'
 })
-export class InputGroupNumber {
+export class InputGroupNumberComponent {
     @Input() disabled: boolean;
 
     @Input() inputText: number;
@@ -65,7 +65,7 @@ export class InputGroupNumber {
     },
     templateUrl: './input-group-search.component.html'
 })
-export class InputGroupSearch {
+export class InputGroupSearchComponent {
     @Input() disabled: boolean;
 
     @Input() inputText: string;

@@ -76,7 +76,7 @@ export class ModalComponent {
     selector: 'fd-modal-header',
     templateUrl: './modal-header.component.html'
 })
-export class ModalHeader {
+export class ModalHeaderComponent {
     constructor(@Inject(ModalService) public modalService: ModalService) {}
 }
 
@@ -84,10 +84,10 @@ export class ModalHeader {
     selector: 'fd-modal-body',
     templateUrl: './modal-body.component.html'
 })
-export class ModalBody {}
+export class ModalBodyComponent {}
 
 @Component({
     selector: 'fd-modal-footer',
     templateUrl: './modal-footer.component.html'
 })
-export class ModalFooter {}
+export class ModalFooterComponent {}
