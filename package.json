@@ -7,7 +7,7 @@
     "start": "ng serve",
     "hmr": "ng serve --hmr -e=hmr",
     "build": "ng build",
-    "test": "ng test --app=1",
+    "test": "ng test --app=1 --browser=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-src": "gulp build-src",
