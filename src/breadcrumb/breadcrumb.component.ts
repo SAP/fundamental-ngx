@@ -14,10 +14,7 @@ export class BreadcrumbComponent {}
     host: {
         class: 'fd-breadcrumb__item'
     },
-    template: `
-    <a *ngIf="url;else noUrltemplate" class="fd-breadcrumb__link" [routerLink]="['url']"> {{text}} </a>
-    <ng-template #noUrltemplate> {{text}} </ng-template>
-  `
+    templateUrl: './breadcrumb-item.component.html'
 })
 export class BreadcrumbItem {
     constructor(private router: Router) {}

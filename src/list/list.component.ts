@@ -2,13 +2,7 @@ import { Component, Input, Directive } from '@angular/core';
 
 @Component({
     selector: 'fd-list',
-    template: `
-    <ul class="fd-list-group">
-      <ng-content select="fd-list-item"></ng-content>
-      <ng-content select="fd-list-action"></ng-content>
-      <ng-content select="fd-list-checkbox"></ng-content>
-    </ul>
-  `
+    templateUrl: './list.component.html'
 })
 export class ListComponent {}
 
@@ -28,14 +22,7 @@ export class ListItem {}
     host: {
         class: 'fd-form__item fd-form__item--check'
     },
-    template: `
-    <div class="fd-form__item fd-form__item--check">
-      <label class="fd-form__label" for="checkbox-1">
-        <input class="fd-form__control" type="checkbox" id="checkbox-1">
-          <ng-content></ng-content>
-      </label>
-    </div>
-  `
+    templateUrl: './list-checkbox.component.html'
 })
 export class ListCheckbox {}
 

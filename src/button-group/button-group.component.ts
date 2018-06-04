@@ -2,11 +2,7 @@ import { Directive, Input, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-button-group',
-    template: `
-    <div class="fd-button-group" role="group" aria-label="Group label">
-      <ng-content></ng-content>
-    </div>
-  `
+    templateUrl: './button-group.component.html'
 })
 export class ButtonGroupComponent {}
 

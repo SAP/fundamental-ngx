@@ -6,16 +6,7 @@ import { IconModule } from '../icon/icon.module';
 
 @Component({
     selector: 'fd-action-bar',
-    template: `
-    <div class="fd-action-bar">
-      <div class="fd-action-bar__header">
-        <fd-action-bar-title>{{actionBarTitle}}</fd-action-bar-title>
-      </div>
-      <div class="fd-action-bar__actions">
-        <ng-content></ng-content>
-      </div>
-    </div>
-  `
+    templateUrl: './action-bar.component.html'
 })
 export class ActionBarComponent {
     @Input() actionBarTitle: string;
@@ -25,8 +16,6 @@ export class ActionBarComponent {
 
 @Component({
     selector: 'fd-action-bar-title',
-    template: `
-     <h1 class="fd-action-bar__title"><ng-content></ng-content></h1>
-  `
+    templateUrl: './action-bar-title.component.html'
 })
 export class ActionBarTitle {}

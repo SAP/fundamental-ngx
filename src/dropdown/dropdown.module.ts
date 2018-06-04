@@ -20,6 +20,13 @@ import {
         DropdownGroupHeader
     ],
     imports: [CommonModule, UtilsModule],
-    exports: [DropdownComponent, DropdownItem, DropdownGroup, DropdownControl, DropdownControlNoBorder, DropdownGroupHeader]
+    exports: [
+        DropdownComponent,
+        DropdownItem,
+        DropdownGroup,
+        DropdownControl,
+        DropdownControlNoBorder,
+        DropdownGroupHeader
+    ]
 })
 export class DropdownModule {}

@@ -2,13 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'fd-image',
-    template: `
-    <span 
-    [ngClass]='(size ? "fd-image--" + size : "") + (circle ? " fd-image--circle" : "") '
-    [attr.aria-label]='label'
-    [ngStyle]= "{'background-image': 'url(' + photo + ')'}">
-    </span>
-  `
+    templateUrl: './image.component.html'
 })
 export class ImageComponent {
     @Input() size: string = 'm';

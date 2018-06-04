@@ -7,12 +7,7 @@ import { Component, Directive, Input } from '@angular/core';
             ' "fd-tile" + (disabled ? " is-disabled" : "") + (rowSpan ? " fd-has-grid-row-span-" + rowSpan : "")  + (columnSpan ? " fd-has-grid-column-span-" + columnSpan : "") + (colorAccent ? " fd-has-background-color-accent-" + colorAccent : "")',
         '[attr.role]': "(this.isButton === true ? 'button' : '')"
     },
-    template: `
-      <ng-content select="fd-tile-media"></ng-content>
-      <ng-content select="fd-tile-content"></ng-content>
-      <ng-content select="fd-tile-title"></ng-content>
-      <ng-content></ng-content>
-  `
+    templateUrl: './tile.component.html'
 })
 export class TileComponent {
     @Input() disabled: boolean = false;
@@ -36,9 +31,7 @@ export class TileContent {}
 
 @Component({
     selector: 'fd-tile-title',
-    template: `
-    <h2 class="fd-tile__title"><ng-content></ng-content></h2>
-  `
+    templateUrl: './tile-title.component.html'
 })
 export class TileTitle {}
 
@@ -52,11 +45,7 @@ export class TileMedia {}
 
 @Component({
     selector: 'fd-tile-actions',
-    template: `
-    <div class="fd-tile__actions">
-      <ng-content select="fd-dropdown"></ng-content>
-    </div>
-  `
+    templateUrl: './tile-actions.component.html'
 })
 export class TileActions {}
 
@@ -66,12 +55,7 @@ export class TileActions {}
         '[class]': ' "fd-product-tile" + (disabled ? " is-disabled" : "")',
         '[attr.role]': "(this.isButton === true ? 'button' : '')"
     },
-    template: `
-      <ng-content select="fd-product-tile-media"></ng-content>
-      <ng-content select="fd-product-tile-content"></ng-content>
-      <ng-content select="fd-product-tile-title"></ng-content>
-      <ng-content></ng-content>
-  `
+    templateUrl: './product-tile.component.html'
 })
 export class ProductTile {
     @Input() disabled: boolean = false;
@@ -81,9 +65,7 @@ export class ProductTile {
 
 @Component({
     selector: 'fd-product-tile-media',
-    template: `
-    <div class="fd-product-tile__media" [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div>
-  `
+    templateUrl: './product-tile-media.component.html'
 })
 export class ProductTileMedia {
     @Input() photo: string;
@@ -91,17 +73,13 @@ export class ProductTileMedia {
 
 @Component({
     selector: 'fd-product-tile-content',
-    template: `
-    <div class="fd-product-tile__content"><ng-content></ng-content></div>
-  `
+    templateUrl: './product-tile-content.component.html'
 })
 export class ProductTileContent {}
 
 @Component({
     selector: 'fd-product-tile-title',
-    template: `
-    <h2 class="fd-product-tile__title"><ng-content></ng-content></h2>
-  `
+    templateUrl: './product-tile-title.component.html'
 })
 export class ProductTileTitle {}
 

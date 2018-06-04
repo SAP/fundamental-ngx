@@ -5,26 +5,7 @@ import { Component, Directive, OnChanges, OnInit, Input, Output, EventEmitter } 
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-input-group" [ngClass]="{'fd-input-group--after': placement !== 'before',
-        'fd-input-group--before': placement === 'before', 'fd-input-group--inline': inline === true }">
-      <input [(ngModel)]="inputText" [disabled]="disabled" *ngIf="placement !== 'before'" type="text" class="" id="" 
-             placeholder="{{placeholder}}">
-      <span *ngIf="!button" class="fd-input-group__addon" [ngClass]="{'fd-input-group__addon--after': placement !== 'before', 
-          'fd-input-group__addon--before': placement === 'before'}">
-        <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
-        <span *ngIf="glyph" [ngClass]="'sap-icon--' + glyph"></span>
-      </span>
-      <span *ngIf="button" class="fd-input-group__addon fd-input-group__addon--button"
-            [ngClass]="{'fd-input-group__addon--after': placement !== 'before', 'fd-input-group__addon--before': placement === 'before'}">
-        <button *ngIf="!glyph" (click)="buttonClicked($event)" class="fd-button--secondary">{{addOnText}}</button>
-        <button *ngIf="glyph" (click)="buttonClicked($event)" class="fd-button--icon fd-button--secondary"
-                [ngClass]="'sap-icon--' + glyph"></button>
-      </span>
-      <input [(ngModel)]="inputText" *ngIf="placement === 'before'" [disabled]="disabled" type="text" class="" id="" 
-             placeholder="{{placeholder}}">
-    </div>
-  `
+    templateUrl: './input-group.component.html'
 })
 export class InputGroupComponent {
     @Input() placement: string;
@@ -55,19 +36,7 @@ export class InputGroupComponent {
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-input-group fd-input-group--after">
-      <input class="" type="number" name="" [disabled]="disabled" [(ngModel)]="inputText" placeholder="{{placeholder}}"/>
-      <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon fd-input-group__addon--after">
-        <button class="fd-input-group__button fd-input-group__button--step-up" 
-                aria-label="Step up" 
-                (click)="stepUpClicked()"></button>
-        <button class="fd-input-group__button fd-input-group__button--step-down" 
-                aria-label="Step down" 
-                (click)="stepDownClicked()"></button>
-      </span>
-    </div>
-  `
+    templateUrl: './input-group-number.component.html'
 })
 export class InputGroupNumber {
     @Input() disabled: boolean;
@@ -94,17 +63,7 @@ export class InputGroupNumber {
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-input-group">
-      <input class="" type="search" id="search-2" name="" [disabled]="disabled" [(ngModel)]="inputText" placeholder="{{placeholder}}"/>
-      <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon">
-        <button *ngIf="inputText"
-                class="fd-input-group__button fd-input-group__button--clear" 
-                aria-label="Clear" 
-                (click)="inputText = '';"></button>
-      </span>
-    </div>
-  `
+    templateUrl: './input-group-search.component.html'
 })
 export class InputGroupSearch {
     @Input() disabled: boolean;

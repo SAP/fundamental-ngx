@@ -17,11 +17,7 @@ import {
         '[class.is-expanded]': 'expanded',
         '[id]': 'id'
     },
-    template: `
-      <ng-container *ngIf="expanded">
-        <ng-content></ng-content>
-      </ng-container>
-    `
+    templateUrl: './tab.component.html'
 })
 export class TabPanelComponent implements OnInit {
     @Input() title;
@@ -37,21 +33,7 @@ export class TabPanelComponent implements OnInit {
 @Component({
     selector: 'fd-tab-list',
     encapsulation: ViewEncapsulation.None,
-    template: `
-      <ul class="fd-tabs" role="tablist">
-        <li class="fd-tabs__item" *ngFor="let tab of tabs">
-          <a role="tab"
-            class="fd-tabs__link" 
-            [attr.aria-controls]="tab.id"
-            [attr.aria-disabled]="tab.disabled"
-            [attr.aria-selected]="tab.expanded ? true : null"
-            [class.is-selected]="tab.expanded" 
-            [href]="'#' + tab.id" 
-            (click)="select($event, tab)">{{ tab.title }}</a>
-        </li>
-      </ul>
-      <ng-content select="fd-tab"></ng-content>
-    `,
+    templateUrl: './tab-list.component.html',
     styles: [
         `
             :host,

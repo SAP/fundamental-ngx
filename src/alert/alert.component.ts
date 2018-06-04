@@ -3,16 +3,7 @@ import { HashService } from '../utils/hash.service';
 
 @Component({
     selector: 'fd-alert',
-    template: `    
-    <button 
-      class="fd-alert__close"
-      *ngIf="dismissible"
-      (click)="handleClose()"
-      [attr.aria-controls]="id"
-      aria-label="Close">
-    </button>
-    <ng-content></ng-content>
-  `,
+    templateUrl: './alert.component.html',
     host: {
         class: 'fd-alert',
         role: 'alert',

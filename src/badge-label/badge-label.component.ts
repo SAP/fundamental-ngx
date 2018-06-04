@@ -5,9 +5,7 @@ import { Directive, Input, Component } from '@angular/core';
     host: {
         '[class]': '"fd-badge" + (status ? " fd-badge--" + status : "") + (modifier ? " fd-badge--" + modifier : "")'
     },
-    template: `
-    <span><ng-content></ng-content></span>
-  `
+    templateUrl: './badge-label.component.html'
 })
 export class Badge {
     @Input() status;
@@ -20,9 +18,7 @@ export class Badge {
     host: {
         '[class]': '"fd-label" + (status ? " fd-label--" + status : "")'
     },
-    template: `
-    <span><ng-content></ng-content></span>
-  `
+    templateUrl: './badge-label.component.html'
 })
 export class Label {
     @Input() status;

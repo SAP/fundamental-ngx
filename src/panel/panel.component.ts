@@ -6,14 +6,7 @@ import { NgModule } from '@angular/core';
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-panel">
-      <ng-content select="fd-panel-header"></ng-content>
-      <ng-content select="fd-panel-filters"></ng-content>
-      <ng-content select="fd-panel-body"></ng-content>
-      <ng-content select="fd-panel-footer"></ng-content>
-    </div>
-  `
+    templateUrl: './panel.component.html'
 })
 export class PanelComponent {}
 
@@ -22,12 +15,7 @@ export class PanelComponent {}
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-panel__header">
-      <ng-content select="fd-panel-title"></ng-content>
-      <ng-content select="fd-panel-actions"></ng-content>
-    </div>
-  `
+    templateUrl: './panel-header.component.html'
 })
 export class PanelHeader {}
 
@@ -36,11 +24,7 @@ export class PanelHeader {}
     host: {
         class: 'fd-panel__title'
     },
-    template: `
-    <h1 class="fd-panel__title">
-      <ng-content></ng-content>
-    </h1>
-  `
+    templateUrl: './panel-title.component.html'
 })
 export class PanelTitle {}
 
@@ -49,11 +33,7 @@ export class PanelTitle {}
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-panel__actions">
-      <ng-content></ng-content>
-    </div>
-  `
+    templateUrl: './panel-actions.component.html'
 })
 export class PanelActions {}
 
@@ -62,11 +42,7 @@ export class PanelActions {}
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-panel__filters">
-      <ng-content></ng-content>
-    </div>
-  `
+    templateUrl: './panel-filters.component.html'
 })
 export class PanelFilters {}
 
@@ -75,11 +51,7 @@ export class PanelFilters {}
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-panel__body">
-      <ng-content></ng-content>
-    </div>
-  `
+    templateUrl: './panel-body.component.html'
 })
 export class PanelBody {}
 
@@ -88,10 +60,6 @@ export class PanelBody {}
     host: {
         class: ''
     },
-    template: `
-    <div class="fd-panel__footer">
-      <ng-content></ng-content>
-    </div>
-  `
+    templateUrl: './panel-footer.component.html'
 })
 export class PanelFooter {}

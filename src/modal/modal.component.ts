@@ -62,15 +62,7 @@ import { ModalService } from './modal.service';
             }
         `
     ],
-    template: `
-    <div class="fd-modal">
-      <div class="fd-modal__content" role="document">
-        <ng-content select="fd-modal-header"></ng-content>
-        <ng-content select="fd-modal-body"></ng-content>
-        <ng-content select="fd-modal-footer"></ng-content>
-      </div>
-    </div>
-  `
+    templateUrl: './modal.component.html'
 })
 export class ModalComponent {
     constructor(@Inject(NgbModal) private modalService: NgbModal) {}
@@ -82,14 +74,7 @@ export class ModalComponent {
 
 @Component({
     selector: 'fd-modal-header',
-    template: `
-    <div class="fd-modal__header">
-      <h1 class="fd-modal__title">
-        <ng-content></ng-content>
-      </h1>
-      <button class="fd-modal__close" aria-label="close" (click)="modalService.close()"></button>
-    </div>
-  `
+    templateUrl: './modal-header.component.html'
 })
 export class ModalHeader {
     constructor(@Inject(ModalService) public modalService: ModalService) {}
@@ -97,22 +82,12 @@ export class ModalHeader {
 
 @Component({
     selector: 'fd-modal-body',
-    template: `
-    <div class="fd-modal__body">
-      <ng-content></ng-content>
-    </div>
-  `
+    templateUrl: './modal-body.component.html'
 })
 export class ModalBody {}
 
 @Component({
     selector: 'fd-modal-footer',
-    template: `
-    <footer class="fd-modal__footer">
-      <div class="fd-modal__actions">
-        <ng-content></ng-content>
-      </div>
-    </footer>
-  `
+    templateUrl: './modal-footer.component.html'
 })
 export class ModalFooter {}
