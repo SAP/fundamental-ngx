@@ -5,14 +5,7 @@ import { TabPanelComponent } from './tabs.component';
     selector: 'fd-tab-list',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './tab-list.component.html',
-    styles: [
-        `
-            :host,
-            fd-tab {
-                display: block;
-            }
-        `
-    ]
+    styleUrls: ['./tab-list.component.scss']
 })
 export class TabListComponent implements AfterContentInit {
     @ContentChildren(TabPanelComponent) tabs: QueryList<TabPanelComponent>;

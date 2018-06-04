@@ -12,13 +12,8 @@ import { HashService } from '../utils/hash.service';
         '[class.fd-alert--warning]': 'type == "warning"',
         '[class.fd-alert--error]': 'type == "error"'
     },
-    styles: [
-        `
-            :host {
-                display: block;
-                position: relative;
-            }
-        `
+    styleUrls: [
+      './alert.component.scss'
     ]
 })
 export class AlertComponent implements OnInit {
