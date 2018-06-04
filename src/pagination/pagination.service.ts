@@ -3,11 +3,12 @@ import { validateConfig } from "@angular/router/src/config";
 import { Pagination } from "./pagination.model";
 
 const DISPLAY_NUM_PAGES = 3;
-const MORE = -1;
-const DEFAULT_ITEMS_PER_PAGE = 10;
 
 @Injectable()
 export class PaginationService {
+    public DEFAULT_ITEMS_PER_PAGE = 10;
+    public MORE = -1;
+
     constructor() {}
     
     public getPages(pagination: Pagination): number[] {
@@ -24,22 +25,22 @@ export class PaginationService {
                 for (let i = 1; i <= DISPLAY_NUM_PAGES; i++) {
                     pages.push(i);
                 }
-                pages.push(MORE);
+                pages.push(this.MORE);
                 pages.push(totalPages);
             } else if (pagination.currentPage > totalPages - (DISPLAY_NUM_PAGES - 1)) {
                 pages.push(1);
-                pages.push(MORE);
+                pages.push(this.MORE);
                 for (let i = totalPages - (DISPLAY_NUM_PAGES - 1); i <= totalPages; i++) {
                     pages.push(i);
                 }
             } else {
                 pages.push(1);
-                pages.push(MORE);
+                pages.push(this.MORE);
                 const buffer = Math.floor(DISPLAY_NUM_PAGES / 2);
                 for (let i = pagination.currentPage - buffer; i <= pagination.currentPage + buffer; i++) {
                     pages.push(i);
                 }
-                pages.push(MORE);
+                pages.push(this.MORE);
                 pages.push(totalPages);
             }
         }
@@ -55,7 +56,7 @@ export class PaginationService {
             console.error(`No pages provided in the Pagination object; we cannot provide paging`)
         }
         if (!pagination.itemsPerPage) {
-            pagination.itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
+            pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
         }
         if (!pagination.currentPage) {
             pagination.currentPage = 1;
