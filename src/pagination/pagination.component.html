@@ -1,4 +1,4 @@
-<div class="fd-pagination">
+<div class="fd-pagination" *ngIf="pagination.totalItems">
     <span class="fd-pagination__total">{{ pagination.totalItems }} items</span>
     <nav class="fd-pagination__nav">
         <a class="fd-pagination__link fd-pagination__link--previous" aria-label="Previous" [attr.aria-disabled]="pagination.currentPage === 1 ? true : null"

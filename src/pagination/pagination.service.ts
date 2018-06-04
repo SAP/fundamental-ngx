@@ -4,6 +4,7 @@ import { Pagination } from "./pagination.model";
 
 const DISPLAY_NUM_PAGES = 3;
 const MORE = -1;
+const DEFAULT_ITEMS_PER_PAGE = 10;
 
 @Injectable()
 export class PaginationService {
@@ -11,6 +12,7 @@ export class PaginationService {
     
     public getPages(pagination: Pagination): number[] {
         const pages = [];
+        this.validate(pagination);
         const totalPages = this.getTotalPages(pagination);
         
         if (totalPages <= DISPLAY_NUM_PAGES) {
@@ -46,6 +48,18 @@ export class PaginationService {
 
     public getTotalPages(pagination: Pagination): number {
         return Math.ceil(pagination.totalItems / pagination.itemsPerPage);
+    }
+
+    public validate(pagination: Pagination) {
+        if (!pagination.totalItems) {
+            console.error(`No pages provided in the Pagination object; we cannot provide paging`)
+        }
+        if (!pagination.itemsPerPage) {
+            pagination.itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
+        }
+        if (!pagination.currentPage) {
+            pagination.currentPage = 1;
+        }
     }
 }
 
