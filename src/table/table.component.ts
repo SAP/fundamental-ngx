@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface TableRowObject {
-    rowData: any[];
-}
+import { TableRowObject } from './table-row-object.model';
 
 @Component({
     selector: 'fd-table',

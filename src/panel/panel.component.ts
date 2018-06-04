@@ -1,5 +1,4 @@
-import { Component, Input, Directive } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-panel',
@@ -9,57 +8,3 @@ import { NgModule } from '@angular/core';
     templateUrl: './panel.component.html'
 })
 export class PanelComponent {}
-
-@Component({
-    selector: 'fd-panel-header',
-    host: {
-        class: ''
-    },
-    templateUrl: './panel-header.component.html'
-})
-export class PanelHeaderComponent {}
-
-@Component({
-    selector: 'fd-panel-title',
-    host: {
-        class: 'fd-panel__title'
-    },
-    templateUrl: './panel-title.component.html'
-})
-export class PanelTitleComponent {}
-
-@Component({
-    selector: 'fd-panel-actions',
-    host: {
-        class: ''
-    },
-    templateUrl: './panel-actions.component.html'
-})
-export class PanelActionsComponent {}
-
-@Component({
-    selector: 'fd-panel-filters',
-    host: {
-        class: ''
-    },
-    templateUrl: './panel-filters.component.html'
-})
-export class PanelFiltersComponent {}
-
-@Component({
-    selector: 'fd-panel-body',
-    host: {
-        class: ''
-    },
-    templateUrl: './panel-body.component.html'
-})
-export class PanelBodyComponent {}
-
-@Component({
-    selector: 'fd-panel-footer',
-    host: {
-        class: ''
-    },
-    templateUrl: './panel-footer.component.html'
-})
-export class PanelFooterComponent {}

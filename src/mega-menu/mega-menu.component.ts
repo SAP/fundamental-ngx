@@ -1,57 +1,7 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-mega-menu',
     templateUrl: './mega-menu.component.html'
 })
 export class MegaMenuComponent {}
-
-@Component({
-    selector: 'fd-mega-menu-group',
-    templateUrl: './mega-menu-group.component.html'
-})
-export class MegaMenuGroupComponent {}
-
-@Component({
-    selector: 'fd-mega-menu-title',
-    templateUrl: './mega-menu-title.component.html'
-})
-export class MegaMenuTitleComponent {}
-
-@Component({
-    selector: 'fd-mega-menu-list',
-    templateUrl: './mega-menu-list.component.html'
-})
-export class MegaMenuListComponent {}
-
-@Component({
-    selector: 'fd-mega-menu-item',
-    templateUrl: './mega-menu-item.component.html'
-})
-export class MegaMenuItemComponent {}
-
-@Component({
-    selector: 'fd-mega-menu-link',
-    templateUrl: './mega-menu-link.component.html'
-})
-export class MegaMenuLinkComponent {
-    @Input() url: string;
-
-    @Input() hasSublist: boolean;
-
-    sublistIsOpen = false;
-}
-
-@Component({
-    selector: 'fd-mega-menu-sublist',
-    templateUrl: './mega-menu-sublist.component.html'
-})
-export class MegaMenuSubListComponent {}
-
-@Component({
-    selector: 'fd-mega-menu-subitem',
-    templateUrl: './mega-menu-subitem.component.html'
-})
-export class MegaMenuSubItemComponent {
-    @Input() url: string;
-}

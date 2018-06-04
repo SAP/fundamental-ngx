@@ -1,4 +1,4 @@
-import { Component, Input, Directive, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, ViewEncapsulation, Inject } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './modal.service';
@@ -71,23 +71,3 @@ export class ModalComponent {
         this.modalService.open(ModalComponent);
     }
 }
-
-@Component({
-    selector: 'fd-modal-header',
-    templateUrl: './modal-header.component.html'
-})
-export class ModalHeaderComponent {
-    constructor(@Inject(ModalService) public modalService: ModalService) {}
-}
-
-@Component({
-    selector: 'fd-modal-body',
-    templateUrl: './modal-body.component.html'
-})
-export class ModalBodyComponent {}
-
-@Component({
-    selector: 'fd-modal-footer',
-    templateUrl: './modal-footer.component.html'
-})
-export class ModalFooterComponent {}
