@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { InputGroupSearchComponent, InputGroupNumberComponent, InputGroupComponent } from './input-group.component';
+import { InputGroupComponent } from './input-group.component';
+import { InputGroupNumberComponent } from './input-group-number.component';
+import { InputGroupSearchComponent } from './input-group-search.component';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 

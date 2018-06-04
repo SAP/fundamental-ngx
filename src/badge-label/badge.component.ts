@@ -1,4 +1,4 @@
-import { Directive, Input, Component } from '@angular/core';
+import { Input, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-badge',
@@ -11,15 +11,4 @@ export class BadgeComponent {
     @Input() status;
 
     @Input() modifier;
-}
-
-@Component({
-    selector: 'fd-label',
-    host: {
-        '[class]': '"fd-label" + (status ? " fd-label--" + status : "")'
-    },
-    templateUrl: './badge-label.component.html'
-})
-export class LabelComponent {
-    @Input() status;
 }

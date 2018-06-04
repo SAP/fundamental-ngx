@@ -1,8 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { DropdownModule } from '../dropdown/dropdown.module';
-import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/icon.module';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'fd-action-bar',
@@ -13,9 +9,3 @@ export class ActionBarComponent {
 
     @Input() isNavigation: boolean;
 }
-
-@Component({
-    selector: 'fd-action-bar-title',
-    templateUrl: './action-bar-title.component.html'
-})
-export class ActionBarTitleComponent {}

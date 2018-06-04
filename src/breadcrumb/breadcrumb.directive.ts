@@ -1,5 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Directive } from '@angular/core';
 
 @Directive({
     selector: 'fd-breadcrumb',
@@ -8,18 +7,3 @@ import { Router } from '@angular/router';
     }
 })
 export class BreadcrumbDirective {}
-
-@Component({
-    selector: 'fd-breadcrumb-item',
-    host: {
-        class: 'fd-breadcrumb__item'
-    },
-    templateUrl: './breadcrumb-item.component.html'
-})
-export class BreadcrumbItemComponent {
-    constructor(private router: Router) {}
-
-    @Input() url: string;
-
-    @Input() text: string;
-}
