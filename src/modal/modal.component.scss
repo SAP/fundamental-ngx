@@ -1,13 +1,13 @@
 .fd-modal__body {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .fd-modal__footer {
-  border-top: 1px solid #eeeeef;
+    border-top: 1px solid #eeeeef;
 }
 
 .fd-modal {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 /*!
@@ -17,36 +17,36 @@
   */
 
 .modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1040;
-  background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-open {
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  margin: auto;
-  width: fit-content;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    margin: auto;
+    width: fit-content;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal {
-  position: fixed;
-  z-index: 9999;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  margin: auto;
-  width: 460px;
-  min-height: 150px;
-  outline: none;
-  border-radius: 4px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    margin: auto;
+    width: 460px;
+    min-height: 150px;
+    outline: none;
+    border-radius: 4px;
 }

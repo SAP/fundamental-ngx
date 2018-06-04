@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { validateConfig } from '@angular/router/src/config';
 import { Pagination } from './pagination.model';
 
 const DISPLAY_NUM_PAGES = 3;

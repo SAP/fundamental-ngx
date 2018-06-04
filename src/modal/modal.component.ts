@@ -1,7 +1,5 @@
 import { Component, ViewEncapsulation, Inject } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalService } from './modal.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'fd-modal',
