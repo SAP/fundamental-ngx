@@ -12,38 +12,33 @@ import {
 } from './panel.component';
 @NgModule({
     declarations: [
-        
         PanelComponent,
-       
+
         PanelHeaderComponent,
-       
+
         PanelTitleComponent,
-       
+
         PanelActionsComponent,
-       
+
         PanelFiltersComponent,
-       
-        PanelBodyComponent
-    ,
-       
-        PanelFooterComponent
-    ],
-    imports: [
-        CommonModule],
-    exports: [
-        PanelComponent,
-       
-        PanelHeaderComponent,
-       
-        PanelTitleComponent,
-       
-        PanelActionsComponent,
-       
-        PanelFiltersComponent,
-       
+
         PanelBodyComponent,
         PanelFooterComponent
-    
+    ],
+    imports: [CommonModule],
+    exports: [
+        PanelComponent,
+
+        PanelHeaderComponent,
+
+        PanelTitleComponent,
+
+        PanelActionsComponent,
+
+        PanelFiltersComponent,
+
+        PanelBodyComponent,
+        PanelFooterComponent
     ]
 })
 export class PanelModule {}
