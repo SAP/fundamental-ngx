@@ -1,0 +1,62 @@
+<header>Action Bar</header>
+<description>The Action Bar is located at the top of the page and is used for Page title and Main Actions for the page</description>
+<import module="ActionBarModule" path="fundamental/actionbar/actionbar.module"></import>
+
+<separator></separator>
+
+<h1>&lt;fd-action-bar&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+  { name: 'actionBarTitle', description: 'Title of the action bar' }
+]
+}">
+</properties>
+
+
+<separator></separator>
+<h2>Title</h2>
+<p>The page title is displayed prominently in the Action Bar. This is helpful for the user to know exactly where they are.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-action-bar [actionBarTitle]="'Page Title'"></fd-action-bar>
+  </div>
+</div>
+<pre>{{titleHtml}}</pre>
+
+
+<separator></separator>
+
+<h2>Main Actions</h2>
+<p>Display main actions within the Action bar. This allows for users to find important page actions in a consistent area no matter what page they are on within the application.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-action-bar [actionBarTitle]="'Page Title'">
+      <button fd-button type="secondary">Cancel</button>
+      <button fd-button type="main">Save</button>
+    </fd-action-bar>
+  </div>
+</div>
+<pre>{{mainActionsHtml}}</pre>
+
+<separator></separator>
+
+<h2>Several Main Actions in a Contextual Menu</h2>
+<p>When there are several main actions for a page, consider displaying them under a contextual menu. This allows the user to look in the same position they are used to but avoids cluttering the action bar with more than 3-4 actions. This also works well for a responsive/adaptive application.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-action-bar [actionBarTitle]="'Page Title'">
+      <fd-dropdown [isContextualMenu]="true">
+        <fd-dropdown-item>Edit</fd-dropdown-item>
+        <fd-dropdown-item>Delete</fd-dropdown-item>
+        <fd-dropdown-item>Assign</fd-dropdown-item>
+        <fd-dropdown-item>Expire</fd-dropdown-item>
+        <fd-dropdown-item>Archive</fd-dropdown-item>
+      </fd-dropdown>
+    </fd-action-bar>
+  </div>
+</div>
+<pre>{{actionsContextualMenuHtml}}</pre>

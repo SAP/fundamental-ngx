@@ -4,13 +4,13 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { Modal, ModalHeader, ModalBody, ModalFooter } from './modal';
+import { ModalComponent, ModalHeader, ModalBody, ModalFooter } from './modal.component';
 import { ModalService } from './modal.service';
 
 @NgModule({
-    declarations: [Modal, ModalHeader, ModalBody, ModalFooter],
+    declarations: [ModalComponent, ModalHeader, ModalBody, ModalFooter],
     imports: [CommonModule, ButtonModule, IconModule, NgbModalModule.forRoot()],
-    exports: [Modal, ModalHeader, ModalBody, ModalFooter],
+    exports: [ModalComponent, ModalHeader, ModalBody, ModalFooter],
     providers: [ModalService]
 })
 export class ModalModule {}

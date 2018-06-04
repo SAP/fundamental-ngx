@@ -1,13 +1,13 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '../icon/icon.module';
 import { UtilsModule } from '../utils/utils.module';
 
-import { Alert } from './alert';
+import { AlertComponent } from './alert.component';
 
 @NgModule({
-    declarations: [Alert],
+    declarations: [AlertComponent],
     imports: [CommonModule, IconModule, UtilsModule],
-    exports: [Alert]
+    exports: [AlertComponent]
 })
 export class AlertModule {}

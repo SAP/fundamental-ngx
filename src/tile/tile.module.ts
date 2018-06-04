@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-    Tile,
+    TileComponent,
     TileContent,
     TileTitle,
     TileMedia,
@@ -12,12 +12,12 @@ import {
     ProductTileContent,
     ProductTileTitle,
     TileGrid
-} from './tile';
+} from './tile.component';
 
 @NgModule({
     imports: [CommonModule],
     exports: [
-        Tile,
+        TileComponent,
         TileContent,
         TileTitle,
         TileMedia,
@@ -29,7 +29,7 @@ import {
         TileGrid
     ],
     declarations: [
-        Tile,
+        TileComponent,
         TileContent,
         TileTitle,
         TileMedia,

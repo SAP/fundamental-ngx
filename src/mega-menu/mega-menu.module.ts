@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-    MegaMenu,
+    MegaMenuComponent,
     MegaMenuGroup,
     MegaMenuTitle,
     MegaMenuList,
@@ -10,12 +10,12 @@ import {
     MegaMenuLink,
     MegaMenuSubList,
     MegaMenuSubItem
-} from './mega-menu';
+} from './mega-menu.component';
 
 @NgModule({
     imports: [CommonModule],
     exports: [
-        MegaMenu,
+        MegaMenuComponent,
         MegaMenuGroup,
         MegaMenuTitle,
         MegaMenuList,
@@ -25,7 +25,7 @@ import {
         MegaMenuSubItem
     ],
     declarations: [
-        MegaMenu,
+        MegaMenuComponent,
         MegaMenuGroup,
         MegaMenuTitle,
         MegaMenuList,

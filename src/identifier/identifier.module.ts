@@ -1,11 +1,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Identifier } from './identifier';
+import { IdentifierComponent } from './identifier.component';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [Identifier],
-    declarations: [Identifier]
+    exports: [IdentifierComponent],
+    declarations: [IdentifierComponent]
 })
 export class IdentifierModule {}

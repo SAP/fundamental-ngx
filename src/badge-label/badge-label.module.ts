@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Badge, Label } from './badge-label';
+import { Badge, Label } from './badge-label.component';
 
 @NgModule({
     imports: [CommonModule],
