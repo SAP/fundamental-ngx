@@ -12,35 +12,9 @@ enum PaginationPageType {
 
 @Component({
     selector: 'fd-pagination',
-    template: `
-  <div class="fd-pagination">
-    <span class="fd-pagination__total">{{ pagination.totalItems }} items</span>
-    <nav class="fd-pagination__nav">
-      <a class="fd-pagination__link fd-pagination__link--previous" aria-label="Previous"
-          [attr.aria-disabled]="pagination.currentPage === 1 ? true : null" 
-          (click)="goToPage(pagination.currentPage - 1)">
-      </a>
-      <a class="fd-pagination__link" *ngFor="let page of pages">
-        <a href="#"  class="fd-pagination__link"
-           (click)="goToPage(page, $event)"
-           *ngIf="page !== -1; else more"
-           [attr.aria-selected]="pagination.currentPage === page">{{page}}</a>
-        <ng-template #more>
-          <span class="fd-pagination__link fd-pagination__link--more"
-            aria-hidden="true"
-            aria-label="..."
-            role="presentation"></span>
-        </ng-template>
-      </a>
-      <a class="fd-pagination__link fd-pagination__link--next" aria-label="Next"
-          [attr.aria-disabled]="pagination.currentPage === total ? true : null"
-          (click)="goToPage(pagination.currentPage + 1)">
-      </a>
-    </nav>
-  </div>
-  `
+    templateUrl: './pagination.component.html'
 })
-export class Pagination implements OnChanges {
+export class PaginationComponent implements OnChanges {
     private static readonly displayNumPages = 3;
 
     @Input() pagination: PaginationObject;
@@ -68,27 +42,27 @@ export class Pagination implements OnChanges {
     calculatePagination(current: number) {
         const pages = [];
 
-        if (this.total <= Pagination.displayNumPages) {
+        if (this.total <= PaginationComponent.displayNumPages) {
             for (let i = 1; i <= this.total; i++) {
                 pages.push(i);
             }
         } else {
-            if (current <= Pagination.displayNumPages) {
-                for (let i = 1; i <= Pagination.displayNumPages; i++) {
+            if (current <= PaginationComponent.displayNumPages) {
+                for (let i = 1; i <= PaginationComponent.displayNumPages; i++) {
                     pages.push(i);
                 }
                 pages.push(PaginationPageType.More);
                 pages.push(this.total);
-            } else if (current > this.total - (Pagination.displayNumPages - 1)) {
+            } else if (current > this.total - (PaginationComponent.displayNumPages - 1)) {
                 pages.push(1);
                 pages.push(PaginationPageType.More);
-                for (let i = this.total - (Pagination.displayNumPages - 1); i <= this.total; i++) {
+                for (let i = this.total - (PaginationComponent.displayNumPages - 1); i <= this.total; i++) {
                     pages.push(i);
                 }
             } else {
                 pages.push(1);
                 pages.push(PaginationPageType.More);
-                const buffer = Math.floor(Pagination.displayNumPages / 2);
+                const buffer = Math.floor(PaginationComponent.displayNumPages / 2);
                 for (let i = current - buffer; i <= current + buffer; i++) {
                     pages.push(i);
                 }
