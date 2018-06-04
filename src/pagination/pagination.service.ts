@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { validateConfig } from "@angular/router/src/config";
+import { Pagination } from "./pagination.model";
 
 const DISPLAY_NUM_PAGES = 3;
 const MORE = -1;
@@ -8,38 +9,43 @@ const MORE = -1;
 export class PaginationService {
     constructor() {}
     
-    public calculatePagination(current: number, total: number): number[] {
+    public getPages(pagination: Pagination): number[] {
         const pages = [];
-
-        if (total <= DISPLAY_NUM_PAGES) {
-            for (let i = 1; i <= total; i++) {
+        const totalPages = this.getTotalPages(pagination);
+        
+        if (totalPages <= DISPLAY_NUM_PAGES) {
+            for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
             }
         } else {
-            if (current <= DISPLAY_NUM_PAGES) {
+            if (pagination.currentPage <= DISPLAY_NUM_PAGES) {
                 for (let i = 1; i <= DISPLAY_NUM_PAGES; i++) {
                     pages.push(i);
                 }
                 pages.push(MORE);
-                pages.push(total);
-            } else if (current > total - (DISPLAY_NUM_PAGES - 1)) {
+                pages.push(totalPages);
+            } else if (pagination.currentPage > totalPages - (DISPLAY_NUM_PAGES - 1)) {
                 pages.push(1);
                 pages.push(MORE);
-                for (let i = total - (DISPLAY_NUM_PAGES - 1); i <= total; i++) {
+                for (let i = totalPages - (DISPLAY_NUM_PAGES - 1); i <= totalPages; i++) {
                     pages.push(i);
                 }
             } else {
                 pages.push(1);
                 pages.push(MORE);
                 const buffer = Math.floor(DISPLAY_NUM_PAGES / 2);
-                for (let i = current - buffer; i <= current + buffer; i++) {
+                for (let i = pagination.currentPage - buffer; i <= pagination.currentPage + buffer; i++) {
                     pages.push(i);
                 }
                 pages.push(MORE);
-                pages.push(total);
+                pages.push(totalPages);
             }
         }
         return pages;
+    }
+
+    public getTotalPages(pagination: Pagination): number {
+        return Math.ceil(pagination.totalItems / pagination.itemsPerPage);
     }
 }
 

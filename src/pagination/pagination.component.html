@@ -10,7 +10,7 @@
                 <span class="fd-pagination__link fd-pagination__link--more" aria-hidden="true" aria-label="..." role="presentation"></span>
             </ng-template>
         </a>
-        <a class="fd-pagination__link fd-pagination__link--next" aria-label="Next" [attr.aria-disabled]="pagination.currentPage === total ? true : null"
+        <a class="fd-pagination__link fd-pagination__link--next" aria-label="Next" [attr.aria-disabled]="isLastPage()"
             (click)="goToPage(pagination.currentPage + 1)">
         </a>
     </nav>

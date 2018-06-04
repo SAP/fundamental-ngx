@@ -13,36 +13,28 @@ export class PaginationComponent implements OnChanges {
 
     @Output() selected = new EventEmitter <number>(); 
 
-    total: number;
-
     pages: number[];
 
-    constructor(private paginationService: PaginationService){}
+    constructor(private paginationService: PaginationService) {}
 
     ngOnChanges() {
-        this.total = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
-        
-        if (this.pagination.currentPage > this.total || this.pagination.currentPage < 1) {
-            throw new Error(
-                `Pagination requires a current page ${this.pagination.currentPage} below ${
-                    this.total
-                } or greater than 0`
-            );
-        }
-
-        this.pages = this.paginationService.calculatePagination(this.pagination.currentPage, this.total);
+        this.pages = this.paginationService.getPages(this.pagination);
     }
 
+    isLastPage(): boolean {
+        return this.pagination.currentPage === this.paginationService.getTotalPages(this.pagination);
+    }
 
     goToPage(page: number, $event: MouseEvent) {
         if ($event) {
             $event.preventDefault();
         }
-        if (page > this.total || page < 1) {
+        if (page > this.paginationService.getTotalPages(this.pagination) || page < 1) {
             return;
         }
         this.pagination.currentPage = page;
-        this.pages = this.paginationService.calculatePagination(page, this.total);
+        this.pages = this.paginationService.getPages(this.pagination);
         this.selected.emit(page);
     }
+
 }
