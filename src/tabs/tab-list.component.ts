@@ -21,12 +21,15 @@ export class TabListComponent implements AfterContentInit {
 
     select($event: MouseEvent, tab: TabPanelComponent) {
         $event.preventDefault();
+        if (tab.disabled) {
+            return;
+        } else {
+            this.selected.expanded = false;
+        }
 
         if (this.selected) {
-            this.selected.expanded = false;
             this.selected = tab;
             this.selected.expanded = true;
-            this.selected.disabled === 'true' ? (this.selected.expanded = false) : (this.selected.expanded = true);
         }
     }
 }
