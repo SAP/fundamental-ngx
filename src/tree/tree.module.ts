@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tree, TreeChild } from './tree';
+import { TreeComponent } from './tree.component';
+import { TreeChildComponent } from './tree-child.component';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
 
 @NgModule({
-    declarations: [Tree, TreeChild],
+    declarations: [TreeComponent, TreeChildComponent],
     imports: [CommonModule, ButtonModule, IconModule, DropdownModule],
-    exports: [Tree, TreeChild]
+    exports: [TreeComponent, TreeChildComponent]
 })
 export class TreeModule {}

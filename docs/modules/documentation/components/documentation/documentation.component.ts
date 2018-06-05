@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class DocumentationComponent {
     components: any = [
-        { url: 'actionbar', name: 'Action Bar' },
+        { url: 'action-bar', name: 'Action Bar' },
         { url: 'alert', name: 'Alert' },
         { url: 'badgeLabel', name: 'Badge and Label' },
         { url: 'breadcrumb', name: 'Breadcrumb' },

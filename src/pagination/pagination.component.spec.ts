@@ -16,5 +16,4 @@ describe('Pagination Test', () => {
         fixture = TestBed.createComponent(PaginationComponent);
         component = fixture.componentInstance;
     });
-
 });

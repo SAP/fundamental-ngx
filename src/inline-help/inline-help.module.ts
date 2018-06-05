@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InlineHelp } from './inline-help';
+import { InlineHelpComponent } from './inline-help.component';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [InlineHelp],
-    declarations: [InlineHelp]
+    exports: [InlineHelpComponent],
+    declarations: [InlineHelpComponent]
 })
 export class InlineHelpModule {}

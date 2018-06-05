@@ -23,7 +23,7 @@ import { TabsModule } from '../../../src/tabs/tabs.module';
 import { TreeModule } from '../../../src/tree/tree.module';
 import { ModalModule } from '../../../src/modal/modal.module';
 import { TableModule } from '../../../src/table/table.module';
-import { ActionbarModule } from '../../../src/actionbar/actionbar.module';
+import { ActionBarModule } from '../../../src/action-bar/action-bar.module';
 import { PanelModule } from '../../../src/panel/panel.module';
 import { MegaMenuModule } from '../../../src/mega-menu/mega-menu.module';
 import { TileModule } from '../../../src/tile/tile.module';
@@ -39,27 +39,27 @@ import { SeparatorComponent } from './components/seperator/seperator.component';
 import { ImportComponent } from './components/import/import.component';
 
 // containers
-import { BadgeLabelComponent } from './containers/badge-label/badge-label.component';
-import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
-import { ButtonComponent } from './containers/button/button.component';
-import { ButtonGroupComponent } from './containers/button-group/button-group.component';
-import { AlertComponent } from './containers/alert/alert.component';
-import { IconComponent } from './containers/icon/icon.component';
-import { IdentifierComponent } from './containers/identifier/identifier.component';
-import { InlineHelpComponent } from './containers/inline-help/inline-help.component';
-import { InputGroupComponent } from './containers/input-group/input-group.component';
-import { ImageComponent } from './containers/image/image.component';
-import { DropdownComponent } from './containers/dropdown/dropdown.component';
-import { PaginationComponent } from './containers/pagination/pagination.component';
-import { ListComponent } from './containers/list/list.component';
-import { TabsComponent } from './containers/tabs/tabs.component';
-import { TreeComponent } from './containers/tree/tree.component';
-import { ModalComponent } from './containers/modal/modal.component';
-import { TableComponent } from './containers/table/table.component';
-import { ActionbarComponent } from './containers/actionbar/actionbar.component';
-import { PanelComponent } from './containers/panel/panel.component';
-import { MegaMenuComponent } from './containers/mega-menu/mega-menu.component';
-import { TileComponent } from './containers/tile/tile.component';
+import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
+import { BreadcrumbDocsComponent } from './containers/breadcrumb/breadcrumb-docs.component';
+import { ButtonDocsComponent } from './containers/button/button-docs.component';
+import { ButtonGroupDocsComponent } from './containers/button-group/button-group-docs.component';
+import { AlertDocsComponent } from './containers/alert/alert-docs.component';
+import { IconDocsComponent } from './containers/icon/icon-docs.component';
+import { IdentifierDocsComponent } from './containers/identifier/identifier-docs.component';
+import { InlineHelpDocsComponent } from './containers/inline-help/inline-help-docs.component';
+import { InputGroupDocsComponent } from './containers/input-group/input-group-docs.component';
+import { ImageDocsComponent } from './containers/image/image-docs.component';
+import { DropdownDocsComponent } from './containers/dropdown/dropdown-docs.component';
+import { PaginationDocsComponent } from './containers/pagination/pagination-docs.component';
+import { ListDocsComponent } from './containers/list/list-docs.component';
+import { TabsDocsComponent } from './containers/tabs/tabs-docs.component';
+import { TreeDocsComponent } from './containers/tree/tree-docs.component';
+import { ModalDocsComponent } from './containers/modal/modal-docs.component';
+import { TableDocsComponent } from './containers/table/table-docs.component';
+import { ActionBarDocsComponent } from './containers/action-bar/action-bar-docs.component';
+import { PanelDocsComponent } from './containers/panel/panel-docs.component';
+import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.component';
+import { TileDocsComponent } from './containers/tile/tile-docs.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
@@ -68,29 +68,29 @@ const ROUTES: Routes = [
         path: '',
         component: DocumentationComponent,
         children: [
-            { path: '', redirectTo: 'actionbar', pathMatch: 'full' },
-            { path: 'actionbar', component: ActionbarComponent },
-            { path: 'alert', component: AlertComponent },
-            { path: 'badgeLabel', component: BadgeLabelComponent },
-            { path: 'breadcrumb', component: BreadcrumbComponent },
-            { path: 'button', component: ButtonComponent },
-            { path: 'buttonGroup', component: ButtonGroupComponent },
-            { path: 'icon', component: IconComponent },
-            { path: 'identifier', component: IdentifierComponent },
-            { path: 'image', component: ImageComponent },
-            { path: 'inlineHelp', component: InlineHelpComponent },
-            { path: 'inputGroup', component: InputGroupComponent },
-            { path: 'alert', component: AlertComponent },
-            { path: 'dropdown', component: DropdownComponent },
-            { path: 'pagination', component: PaginationComponent },
-            { path: 'list', component: ListComponent },
-            { path: 'megaMenu', component: MegaMenuComponent },
-            { path: 'modal', component: ModalComponent },
-            { path: 'panel', component: PanelComponent },
-            { path: 'tabs', component: TabsComponent },
-            { path: 'table', component: TableComponent },
-            { path: 'tile', component: TileComponent },
-            { path: 'tree', component: TreeComponent }
+            { path: '', redirectTo: 'action-bar', pathMatch: 'full' },
+            { path: 'action-bar', component: ActionBarDocsComponent },
+            { path: 'alert', component: AlertDocsComponent },
+            { path: 'badgeLabel', component: BadgeLabelDocsComponent },
+            { path: 'breadcrumb', component: BreadcrumbDocsComponent },
+            { path: 'button', component: ButtonDocsComponent },
+            { path: 'buttonGroup', component: ButtonGroupDocsComponent },
+            { path: 'icon', component: IconDocsComponent },
+            { path: 'identifier', component: IdentifierDocsComponent },
+            { path: 'image', component: ImageDocsComponent },
+            { path: 'inlineHelp', component: InlineHelpDocsComponent },
+            { path: 'inputGroup', component: InputGroupDocsComponent },
+            { path: 'alert', component: AlertDocsComponent },
+            { path: 'dropdown', component: DropdownDocsComponent },
+            { path: 'pagination', component: PaginationDocsComponent },
+            { path: 'list', component: ListDocsComponent },
+            { path: 'megaMenu', component: MegaMenuDocsComponent },
+            { path: 'modal', component: ModalDocsComponent },
+            { path: 'panel', component: PanelDocsComponent },
+            { path: 'tabs', component: TabsDocsComponent },
+            { path: 'table', component: TableDocsComponent },
+            { path: 'tile', component: TileDocsComponent },
+            { path: 'tree', component: TreeDocsComponent }
         ]
     }
 ];
@@ -105,27 +105,27 @@ const ROUTES: Routes = [
         PropertiesComponent,
         SeparatorComponent,
         ImportComponent,
-        BadgeLabelComponent,
-        BreadcrumbComponent,
-        ButtonComponent,
-        ButtonGroupComponent,
-        AlertComponent,
-        IconComponent,
-        IdentifierComponent,
-        InlineHelpComponent,
-        InputGroupComponent,
-        ImageComponent,
-        DropdownComponent,
-        ModalComponent,
-        ListComponent,
-        PaginationComponent,
-        TabsComponent,
-        TableComponent,
-        TreeComponent,
-        ActionbarComponent,
-        PanelComponent,
-        MegaMenuComponent,
-        TileComponent
+        BadgeLabelDocsComponent,
+        BreadcrumbDocsComponent,
+        ButtonDocsComponent,
+        ButtonGroupDocsComponent,
+        AlertDocsComponent,
+        IconDocsComponent,
+        IdentifierDocsComponent,
+        InlineHelpDocsComponent,
+        InputGroupDocsComponent,
+        ImageDocsComponent,
+        DropdownDocsComponent,
+        ModalDocsComponent,
+        ListDocsComponent,
+        PaginationDocsComponent,
+        TabsDocsComponent,
+        TableDocsComponent,
+        TreeDocsComponent,
+        ActionBarDocsComponent,
+        PanelDocsComponent,
+        MegaMenuDocsComponent,
+        TileDocsComponent
     ],
     imports: [
         CommonModule,
@@ -149,7 +149,7 @@ const ROUTES: Routes = [
         TabsModule,
         TableModule,
         TreeModule,
-        ActionbarModule,
+        ActionBarModule,
         PanelModule,
         MegaMenuModule,
         TileModule

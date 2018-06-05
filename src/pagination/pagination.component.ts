@@ -1,17 +1,15 @@
-import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { PaginationService } from './pagination.service';
 import { Pagination } from './pagination.model';
-
 
 @Component({
     selector: 'fd-pagination',
     templateUrl: './pagination.component.html'
 })
 export class PaginationComponent implements OnChanges {
+    @Input() pagination: Pagination;
 
-    @Input() pagination: Pagination; 
-
-    @Output() selected = new EventEmitter <number>(); 
+    @Output() selected = new EventEmitter<number>();
 
     pages: number[];
 
@@ -36,5 +34,4 @@ export class PaginationComponent implements OnChanges {
         this.pages = this.paginationService.getPages(this.pagination);
         this.selected.emit(page);
     }
-
 }

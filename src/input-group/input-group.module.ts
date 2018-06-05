@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { InputGroupSearch, InputGroupNumber, InputGroup } from './input-group';
+import { InputGroupComponent } from './input-group.component';
+import { InputGroupNumberComponent } from './input-group-number.component';
+import { InputGroupSearchComponent } from './input-group-search.component';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
 @NgModule({
-    declarations: [InputGroupSearch, InputGroupNumber, InputGroup],
+    declarations: [InputGroupSearchComponent, InputGroupNumberComponent, InputGroupComponent],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule],
-    exports: [InputGroupSearch, InputGroupNumber, InputGroup]
+    exports: [InputGroupSearchComponent, InputGroupNumberComponent, InputGroupComponent]
 })
 export class InputGroupModule {}

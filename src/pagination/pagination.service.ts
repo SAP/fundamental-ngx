@@ -1,6 +1,5 @@
-import { Injectable } from "@angular/core";
-import { validateConfig } from "@angular/router/src/config";
-import { Pagination } from "./pagination.model";
+import { Injectable } from '@angular/core';
+import { Pagination } from './pagination.model';
 
 const DISPLAY_NUM_PAGES = 3;
 
@@ -10,12 +9,12 @@ export class PaginationService {
     public MORE = -1;
 
     constructor() {}
-    
+
     public getPages(pagination: Pagination): number[] {
         const pages = [];
         this.validate(pagination);
         const totalPages = this.getTotalPages(pagination);
-        
+
         if (totalPages <= DISPLAY_NUM_PAGES) {
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
@@ -53,7 +52,7 @@ export class PaginationService {
 
     public validate(pagination: Pagination) {
         if (!pagination.totalItems) {
-            console.error(`No pages provided in the Pagination object; we cannot provide paging`)
+            console.error(`No pages provided in the Pagination object; we cannot provide paging`);
         }
         if (!pagination.itemsPerPage) {
             pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
@@ -63,5 +62,3 @@ export class PaginationService {
         }
     }
 }
-
-

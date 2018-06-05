@@ -1,42 +1,42 @@
 import { Schema } from '../../schema/models/schema.model';
 
 // components
-import { BadgeLabelComponent } from './badge-label/badge-label.component';
-import { ButtonComponent } from './button/button.component';
-import { ButtonGroupComponent } from './button-group/button-group.component';
-import { AlertComponent } from './alert/alert.component';
-import { IconComponent } from './icon/icon.component';
-import { IdentifierComponent } from './identifier/identifier.component';
-import { InlineHelpComponent } from './inline-help/inline-help.component';
-import { InputGroupComponent } from './input-group/input-group.component';
-import { ImageComponent } from './image/image.component';
-import { PaginationComponent } from './pagination/pagination.component';
-import { ListComponent } from './list/list.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
-import { TreeComponent } from './tree/tree.component';
-import { ModalComponent } from './modal/modal.component';
-import { TableComponent } from './table/table.component';
-import { TileComponent } from './tile/tile.component';
+import { BadgeLabelDocsComponent } from './badge-label/badge-label-docs.component';
+import { ButtonDocsComponent } from './button/button-docs.component';
+import { ButtonGroupDocsComponent } from './button-group/button-group-docs.component';
+import { AlertDocsComponent } from './alert/alert-docs.component';
+import { IconDocsComponent } from './icon/icon-docs.component';
+import { IdentifierDocsComponent } from './identifier/identifier-docs.component';
+import { InlineHelpDocsComponent } from './inline-help/inline-help-docs.component';
+import { InputGroupDocsComponent } from './input-group/input-group-docs.component';
+import { ImageDocsComponent } from './image/image-docs.component';
+import { PaginationDocsComponent } from './pagination/pagination-docs.component';
+import { ListDocsComponent } from './list/list-docs.component';
+import { TabsDocsComponent } from './tabs/tabs-docs.component';
+import { DropdownDocsComponent } from './dropdown/dropdown-docs.component';
+import { TreeDocsComponent } from './tree/tree-docs.component';
+import { ModalDocsComponent } from './modal/modal-docs.component';
+import { TableDocsComponent } from './table/table-docs.component';
+import { TileDocsComponent } from './tile/tile-docs.component';
 
 export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
-    badgeLabel: BadgeLabelComponent.schema,
-    button: ButtonComponent.schema,
-    buttonGroup: ButtonGroupComponent.schema,
-    alert: AlertComponent.schema,
-    icon: IconComponent.schema,
-    identifier: IdentifierComponent.schema,
-    inlineHelp: InlineHelpComponent.schema,
-    inputGroup: InputGroupComponent.schema,
-    image: ImageComponent.schema,
-    pagination: PaginationComponent.schema,
-    list: ListComponent.schema,
-    dropdown: DropdownComponent.schema,
-    modal: ModalComponent.schema,
-    tabs: TabsComponent.schema,
-    table: TableComponent.schema,
-    tile: TileComponent.schema,
-    tree: TreeComponent.schema,
+    badgeLabel: BadgeLabelDocsComponent.schema,
+    button: ButtonDocsComponent.schema,
+    buttonGroup: ButtonGroupDocsComponent.schema,
+    alert: AlertDocsComponent.schema,
+    icon: IconDocsComponent.schema,
+    identifier: IdentifierDocsComponent.schema,
+    inlineHelp: InlineHelpDocsComponent.schema,
+    inputGroup: InputGroupDocsComponent.schema,
+    image: ImageDocsComponent.schema,
+    pagination: PaginationDocsComponent.schema,
+    list: ListDocsComponent.schema,
+    dropdown: DropdownDocsComponent.schema,
+    modal: ModalDocsComponent.schema,
+    tabs: TabsDocsComponent.schema,
+    table: TableDocsComponent.schema,
+    tile: TileDocsComponent.schema,
+    tree: TreeDocsComponent.schema,
     media: {
         properties: {
             image: {
