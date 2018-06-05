@@ -1,13 +1,13 @@
 <div class="fd-dropdown">
   <ng-container *ngIf="isContextualMenu">
     <button (focus)="toggleOpen()" (blur)="toggleOpen()" [attr.aria-controls]="id" [attr.aria-expanded]="isOpen" [attr.aria-label]="'More'"
-      [disabled]="disabled" aria-haspopup="true" [ngClass]="{' fd-button fd-button--secondary fd-button--l sap-icon--vertical-grip' : true}">
+      [attr.aria-disabled]="disabled" aria-haspopup="true" [ngClass]="{' fd-button fd-button--secondary fd-button--l sap-icon--vertical-grip' : true}">
       <ng-content></ng-content>
     </button>
   </ng-container>
   <ng-container *ngIf="!isContextualMenu">
     <button (focus)="toggleOpen()" (blur)="toggleOpen()" class="fd-dropdown__control fd-button--toolbar" [attr.aria-controls]="id"
-      [attr.aria-expanded]="isOpen" [disabled]="disabled" aria-haspopup="true" [ngClass]="(glyph ? 'sap-icon--' + glyph + ' ' : ' ') + (size ? 'fd-button--' + size : '')">
+      [attr.aria-expanded]="isOpen" [attr.aria-disabled]="disabled" aria-haspopup="true" [ngClass]="(glyph ? 'sap-icon--' + glyph + ' ' : ' ') + (size ? 'fd-button--' + size : '')">
       <ng-content></ng-content>
     </button>
   </ng-container>

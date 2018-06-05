@@ -20,7 +20,8 @@
 <separator></separator>
 
 <p>
-  The dropdown is designed to resemble other Fundamental input components. The options can be divided in groups, which are visually separated and can have a small group header text.
+  The dropdown is designed to resemble other Fundamental input components. The options can be divided in groups, which are
+  visually separated and can have a small group header text.
 </p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
@@ -39,6 +40,23 @@
   </div>
 </div>
 <pre>{{textDropdownHtml}}</pre>
+
+<separator></separator>
+
+<p>
+  An disabled dropdown is styled differently and is inactive.
+</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-dropdown [disabled]="true">
+      Select
+      <fd-dropdown-item>Option 1</fd-dropdown-item>
+      <fd-dropdown-item>Option 2</fd-dropdown-item>
+      <fd-dropdown-item>Option 3</fd-dropdown-item>
+    </fd-dropdown>
+  </div>
+</div>
+<pre>{{disabledDropdownHtml}}</pre>
 
 <separator></separator>
 
@@ -124,18 +142,19 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-dropdown [glyph]="data.properties.glyph" [size]="data.properties.size" [disabled]="data.state.disabled" [id]="data.properties.id" [isContextualMenu]="data.state.isContextualMenu">
-        {{data.properties.label}}
-        <fd-dropdown-item>{{data.properties.items.optionOne}}</fd-dropdown-item>
-        <fd-dropdown-item>{{data.properties.items.optionTwo}}</fd-dropdown-item>
-        <fd-dropdown-item>{{data.properties.items.OptionThree}}</fd-dropdown-item>
-        <fd-dropdown-group>
-            <fd-dropdown-header>Group Header</fd-dropdown-header>
-            <fd-dropdown-item>{{data.properties.items.GroupOption.optionFour}}</fd-dropdown-item>
-            <fd-dropdown-item>{{data.properties.items.GroupOption.optionFive}}</fd-dropdown-item>
-            <fd-dropdown-item>{{data.properties.items.GroupOption.optionSix}}</fd-dropdown-item>
-        </fd-dropdown-group>
+  <fd-dropdown [glyph]="data.properties.glyph" [size]="data.properties.size" [disabled]="data.state.disabled" [id]="data.properties.id"
+    [isContextualMenu]="data.state.isContextualMenu">
+    {{data.properties.label}}
+    <fd-dropdown-item>{{data.properties.items.optionOne}}</fd-dropdown-item>
+    <fd-dropdown-item>{{data.properties.items.optionTwo}}</fd-dropdown-item>
+    <fd-dropdown-item>{{data.properties.items.OptionThree}}</fd-dropdown-item>
+    <fd-dropdown-group>
+      <fd-dropdown-header>Group Header</fd-dropdown-header>
+      <fd-dropdown-item>{{data.properties.items.GroupOption.optionFour}}</fd-dropdown-item>
+      <fd-dropdown-item>{{data.properties.items.GroupOption.optionFive}}</fd-dropdown-item>
+      <fd-dropdown-item>{{data.properties.items.GroupOption.optionSix}}</fd-dropdown-item>
+    </fd-dropdown-group>
 
-    </fd-dropdown>
+  </fd-dropdown>
 
 </playground>
