@@ -24,6 +24,9 @@ export class TabListComponent implements AfterContentInit {
         if (tab.disabled) {
             return;
         }
+        else {
+          this.selected.expanded = false;
+        }
 
         if (this.selected) {
             this.selected = tab;
