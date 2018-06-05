@@ -12,9 +12,9 @@ import { Component, OnInit, Input } from '@angular/core';
     templateUrl: './tab.component.html'
 })
 export class TabPanelComponent implements OnInit {
-    @Input() title;
+    @Input() title: string;
 
-    @Input() disabled;
+    @Input() disabled: boolean;
 
     id: string;
     expanded = false;

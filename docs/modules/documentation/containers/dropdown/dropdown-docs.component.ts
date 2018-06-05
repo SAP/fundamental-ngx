@@ -732,6 +732,14 @@ export class DropdownDocsComponent {
         '  </fd-dropdown-group>\n' +
         '</fd-dropdown>';
 
+    disabledDropdownHtml =
+        '<fd-dropdown>\n' +
+        '  Select\n' +
+        '  <fd-dropdown-item>Option 1</fd-dropdown-item>\n' +
+        '  <fd-dropdown-item>Option 2</fd-dropdown-item>\n' +
+        '  <fd-dropdown-item>Option 3</fd-dropdown-item>\n' +
+        '</fd-dropdown>';
+
     iconDropdownHtml =
         '<fd-dropdown [glyph]="\'filter\'">Select\n' +
         '  <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>\n' +
