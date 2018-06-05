@@ -43,24 +43,29 @@ export class AlertDocsComponent {
     message: String = 'This is an ';
 
     alertHtml =
-        '<p>\n' +
-        '  <fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)">\n' +
-        '    A dismissible warning type alert.\n' +
-        '  </fd-alert>\n' +
-        '</p>\n' +
-        '<p>\n' +
-        '  <fd-alert [dismissible]="true" type="error" (close)="showAlert($event)">\n' +
-        '    <div>\n' +
-        '      <h3>A dismissible error type alert with template.</h3>\n' +
-        '      <p>More information...</p>\n' +
-        '    </div>\n' +
-        '  </fd-alert>\n' +
-        '</p>\n' +
-        '<p>\n' +
-        '  <fd-alert [dismissible]="false">\n' +
-        '    A normal type alert\n' +
-        '  </fd-alert>\n' +
-        '</p>';
+        '    <p>\n' +
+        '      <fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)">\n' +
+        '        A dismissible warning type alert.\n' +
+        '      </fd-alert>\n' +
+        '    </p>\n' +
+        '    <p>\n' +
+        '      <fd-alert [dismissible]="true" type="error" (close)="showAlert($event)">\n' +
+        '        <div>\n' +
+        '          <h3>A dismissible error type alert with template.</h3>\n' +
+        '          <p>More information...</p>\n' +
+        '        </div>\n' +
+        '      </fd-alert>\n' +
+        '    </p>\n' +
+        '    <p>\n' +
+        '      <fd-alert [dismissible]="false">\n' +
+        '        A normal type alert.\n' +
+        '      </fd-alert>\n' +
+        '    </p>\n' +
+        '    <p>\n' +
+        '      <fd-alert [dismissible]="false">\n' +
+        '        An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="\'arrow-right\'" [size]="\'s\'"></fd-icon></a>\n' +
+        '      </fd-alert>\n' +
+        '    </p>';
 
     preview = `
     <fd-alert block='error' dismissible='true'>
