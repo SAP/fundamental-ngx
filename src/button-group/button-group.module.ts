@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonGroupComponent, ButtonGroupedDirective } from './button-group.component';
+import { ButtonGroupComponent } from './button-group.component';
+import { ButtonGroupedDirective } from './button-grouped.directive';
 
 @NgModule({
     imports: [CommonModule],
