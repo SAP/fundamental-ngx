@@ -28,15 +28,20 @@
       <fd-alert [dismissible]="true" type="error" (close)="showAlert($event)">
         <div>
           <h3>A dismissible error type alert with template.</h3>
-    <p>More information...</p>
-  </div>
-  </fd-alert>
-  </p>
-  <p>
-    <fd-alert [dismissible]="false">
-      A normal type alert.
-    </fd-alert>
-  </p>
+          <p>More information...</p>
+        </div>
+      </fd-alert>
+    </p>
+    <p>
+      <fd-alert [dismissible]="false">
+        A normal type alert.
+      </fd-alert>
+    </p>
+    <p>
+      <fd-alert [dismissible]="false">
+        An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a>
+      </fd-alert>
+    </p>
   </div>
 </div>
 <pre>{{alertHtml}}</pre>
