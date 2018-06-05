@@ -1,4 +1,4 @@
-import { Directive, Component, Input } from '@angular/core';
+import { Directive, Component, Input, HostListener } from '@angular/core';
 
 @Component({
     selector: 'fd-dropdown',
@@ -20,8 +20,19 @@ export class DropdownComponent {
 
     isOpen = false;
 
-    toggleOpen() {
-        this.isOpen = !this.isOpen;
+    open() {
+        this.isOpen = true;
+    }
+
+    close() {
+        this.isOpen = false;
+    }
+
+    @HostListener('document:keydown.escape', ['$event'])
+    onKeydownHandler(evt: KeyboardEvent) {
+        if (this.isOpen) {
+            this.close();
+        }
     }
 }
 
