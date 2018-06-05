@@ -13,7 +13,6 @@
   </ng-container>
   <nav class="fd-dropdown__menu" [attr.aria-hidden]="(this.disabled === true ? true : !isOpen)" [id]="id" [ngClass]="(isContextualMenu ? ' fd-contextual-menu' : '')">
     <ul class="fd-dropdown__list">
-      <li *ngFor="let item of items"></li>
       <ng-content select="fd-dropdown-item"></ng-content>
       <ng-content select="fd-dropdown-group"></ng-content>
     </ul>
