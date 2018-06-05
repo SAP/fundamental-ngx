@@ -1,4 +1,4 @@
-import { Directive, HostListener, Component, Input } from '@angular/core';
+import { Directive, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'fd-dropdown',
@@ -16,13 +16,13 @@ export class DropdownComponent {
 
     @Input() size;
 
+    @Input() isContextualMenu: boolean = false;
+
     isOpen = false;
-    @HostListener('click')
+
     toggleOpen() {
         this.isOpen = !this.isOpen;
     }
-
-    @Input() isContextualMenu: boolean = false;
 }
 
 @Component({
