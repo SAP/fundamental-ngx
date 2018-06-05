@@ -23,9 +23,8 @@ export class TabListComponent implements AfterContentInit {
         $event.preventDefault();
         if (tab.disabled) {
             return;
-        }
-        else {
-          this.selected.expanded = false;
+        } else {
+            this.selected.expanded = false;
         }
 
         if (this.selected) {
