@@ -18,7 +18,7 @@
     <fd-pagination [class]="'fd-demo-pagination'" [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
   </div>
 </div>
-<pre>{{paginationHtml}}</pre>
+<pre><code highlight [code]="paginationHtml"></code></pre>
 <pre>
   totalItems: {{data.properties.totalItems}},
   itemsPerPage: {{data.properties.itemsPerPage}},

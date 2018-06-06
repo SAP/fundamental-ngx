@@ -359,3 +359,17 @@ pre {
 .is-disabled {
     pointer-events: none;
 }
+
+//highlight overrides
+.hljs-tag {
+    color: #000080;
+}
+.hljs-name {
+    color: #000080;
+}
+.hljs-attr {
+    color: #008080;
+}
+.hljs-string {
+    color: #d14;
+}

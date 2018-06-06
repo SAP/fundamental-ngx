@@ -63,6 +63,8 @@ import { TileDocsComponent } from './containers/tile/tile-docs.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
+import { HighlightModule } from 'ngx-highlightjs';
+
 const ROUTES: Routes = [
     {
         path: '',
@@ -128,6 +130,7 @@ const ROUTES: Routes = [
         TileDocsComponent
     ],
     imports: [
+        HighlightModule.forRoot(),
         CommonModule,
         FormsModule,
         RouterModule.forChild(ROUTES),
