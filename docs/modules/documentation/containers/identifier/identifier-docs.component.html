@@ -27,7 +27,7 @@
     </div>
   </div>
 </div>
-<pre>{{iconHtml}}</pre>
+<pre><code highlight [code]="iconHtml"></code></pre>
 
 <separator></separator>
 <h2>Initials</h2>
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-<pre>{{initialsHtml}}</pre>
+<pre><code highlight [code]="initialsHtml"></code></pre>
 
 <separator></separator>
 <h2>Circle</h2>
@@ -58,7 +58,7 @@
     </div>
   </div>
 </div>
-<pre>{{circleHtml}}</pre>
+<pre><code highlight [code]="circleHtml"></code></pre>
 
 <separator></separator>
 <h2>Transparent</h2>
@@ -76,7 +76,7 @@
     </div>
   </div>
 </div>
-<pre>{{transparentHtml}}</pre>
+<pre><code highlight [code]="transparentHtml"></code></pre>
 
 <separator></separator>
 <h2>Accent Colors</h2>
@@ -96,7 +96,7 @@
     </div>
   </div>
 </div>
-<pre>{{colorAccentHtml}}</pre>
+<pre><code highlight [code]="colorAccentHtml"></code></pre>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <div *ngIf="data.properties.glyphs.length > 0 && data.properties.initials.length == 0;else initialsTemplate">

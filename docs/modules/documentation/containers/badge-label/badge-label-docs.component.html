@@ -1,6 +1,6 @@
 <header>Badge and Label</header>
 <description>
-  <p>Badges and labels are used to indicate status. Colors, generally in combination with text, are used to easily highlight 
+  <p>Badges and labels are used to indicate status. Colors, generally in combination with text, are used to easily highlight
   the state of an object.</p>
   <p> - Black is used to indicate default or inactive status </p>
   <p> - Green indicates positive status, used for active, published, approved </p>
@@ -10,7 +10,7 @@
 <import module="BadgeLabelModule" path="fundamental/badge-label/badge-label.module"></import>
 <separator></separator>
 
-<h1>&lt;fd-badge&gt;</h1> 
+<h1>&lt;fd-badge&gt;</h1>
 <h1>&lt;fd-label&gt;</h1>
 
 <properties [properties]="{
@@ -32,7 +32,7 @@
     <fd-badge [status]="'error'">Default</fd-badge>
   </div>
 </div>
-<pre>{{defaultBadgeHtmlType}}</pre>
+<pre><code highlight [code]="defaultBadgeHtmlType"></code></pre>
 
 <separator></separator>
 
@@ -46,7 +46,7 @@
     <fd-badge [status]="'error'"   [modifier]="'pill'">Default</fd-badge>
   </div>
 </div>
-<pre>{{pillBadgeHtmlType}}</pre>
+<pre><code highlight [code]="pillBadgeHtmlType"></code></pre>
 
 <separator></separator>
 
@@ -60,7 +60,7 @@
     <fd-badge [status]="'error'"   [modifier]="'filled'">Default</fd-badge>
   </div>
 </div>
-<pre>{{filledBadgeHtmlType}}</pre>
+<pre><code highlight [code]="filledBadgeHtmlType"></code></pre>
 
 <separator></separator>
 
@@ -73,7 +73,7 @@
     <fd-label [status]="'error'">Error</fd-label>
   </div>
 </div>
-<pre>{{labelHtmlType}}</pre>
+<pre><code highlight [code]="labelHtmlType"></code></pre>
 
 <separator></separator>
 
