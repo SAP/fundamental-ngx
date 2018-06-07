@@ -7,7 +7,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './dropdown-docs.component.html'
 })
 export class DropdownDocsComponent {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             state: {
                 type: 'object',

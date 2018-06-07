@@ -9,7 +9,7 @@ import { ModalService } from '../../../../../src/modal/modal.service';
     templateUrl: './modal-docs.component.html'
 })
 export class ModalDocsComponent implements OnInit {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',

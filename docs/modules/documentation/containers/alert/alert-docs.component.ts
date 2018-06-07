@@ -6,7 +6,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './alert-docs.component.html'
 })
 export class AlertDocsComponent {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',

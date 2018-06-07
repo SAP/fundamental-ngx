@@ -7,7 +7,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './inline-help-docs.component.html'
 })
 export class InlineHelpDocsComponent implements OnInit {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',
