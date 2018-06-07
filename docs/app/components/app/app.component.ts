@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/pluck';
+import { Observable } from 'rxjs';
+import { filter, pluck } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +15,6 @@ export class AppComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit() {
-        this.url$ = this.router.events.filter(event => event instanceof NavigationEnd).pluck('url');
+        this.url$ = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).pipe(pluck('url'));
     }
 }
