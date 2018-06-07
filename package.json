@@ -27,7 +27,7 @@
     "@angular/platform-browser": "6.0.4",
     "@angular/platform-browser-dynamic": "6.0.4",
     "@angular/router": "6.0.4",
-    "@ng-bootstrap/ng-bootstrap": "~1.0.4",
+    "@ng-bootstrap/ng-bootstrap": "~2.0.0",
     "core-js": "~2.5.3",
     "fundamental-ui": "^1.0.0",
     "ngx-highlightjs": "^2.1.1",
