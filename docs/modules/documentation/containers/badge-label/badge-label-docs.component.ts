@@ -7,7 +7,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './badge-label-docs.component.html'
 })
 export class BadgeLabelDocsComponent implements OnInit {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',

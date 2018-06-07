@@ -7,7 +7,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './input-group-docs.component.html'
 })
 export class InputGroupDocsComponent {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',

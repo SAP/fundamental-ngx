@@ -7,7 +7,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './button-docs.component.html'
 })
 export class ButtonDocsComponent implements OnInit {
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',

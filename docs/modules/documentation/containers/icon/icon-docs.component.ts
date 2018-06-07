@@ -632,7 +632,7 @@ export class IconDocsComponent implements OnInit {
         'zoom-out'
     ];
 
-    static schema: Schema = {
+    static schema: any = {
         properties: {
             properties: {
                 type: 'object',
