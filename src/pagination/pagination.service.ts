@@ -31,7 +31,7 @@ export class PaginationService {
             } else if (pagination.currentPage > totalPages - (DISPLAY_NUM_PAGES - 1)) {
                 pages.push(1);
                 if (totalPages !== DISPLAY_NUM_PAGES + 1) {
-                  pages.push(this.MORE);
+                    pages.push(this.MORE);
                 }
                 for (let i = totalPages - (DISPLAY_NUM_PAGES - 1); i <= totalPages; i++) {
                     pages.push(i);
