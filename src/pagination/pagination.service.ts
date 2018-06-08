@@ -24,22 +24,30 @@ export class PaginationService {
                 for (let i = 1; i <= DISPLAY_NUM_PAGES; i++) {
                     pages.push(i);
                 }
-                pages.push(this.MORE);
+                if (totalPages !== DISPLAY_NUM_PAGES + 1) {
+                    pages.push(this.MORE);
+                }
                 pages.push(totalPages);
             } else if (pagination.currentPage > totalPages - (DISPLAY_NUM_PAGES - 1)) {
                 pages.push(1);
-                pages.push(this.MORE);
+                if (totalPages !== DISPLAY_NUM_PAGES + 1) {
+                  pages.push(this.MORE);
+                }
                 for (let i = totalPages - (DISPLAY_NUM_PAGES - 1); i <= totalPages; i++) {
                     pages.push(i);
                 }
             } else {
                 pages.push(1);
-                pages.push(this.MORE);
+                if (totalPages !== DISPLAY_NUM_PAGES + 1) {
+                    pages.push(this.MORE);
+                }
                 const buffer = Math.floor(DISPLAY_NUM_PAGES / 2);
                 for (let i = pagination.currentPage - buffer; i <= pagination.currentPage + buffer; i++) {
                     pages.push(i);
                 }
-                pages.push(this.MORE);
+                if (totalPages !== DISPLAY_NUM_PAGES + 1) {
+                    pages.push(this.MORE);
+                }
                 pages.push(totalPages);
             }
         }
