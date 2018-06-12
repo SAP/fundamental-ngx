@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import { ModalService } from '../../../../../src/modal/modal.service';
+import { ModalService } from '../../../../../projects/fundamental-ngx/src/lib/modal/modal.service';
 
 @Component({
     selector: 'app-modal',
-    templateUrl: './modal-docs.component.html'
+    templateUrl: './modal-docs.component.html',
+    providers: [ModalService]
 })
 export class ModalDocsComponent implements OnInit {
     static schema: any = {

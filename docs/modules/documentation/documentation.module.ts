@@ -6,27 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SchemaModule } from '../schema/schema.module';
 
 // modules
-import { BadgeLabelModule } from '../../../src/badge-label/badge-label.module';
-import { BreadcrumbModule } from '../../../src/breadcrumb/breadcrumb.module';
-import { ButtonModule } from '../../../src/button/button.module';
-import { ButtonGroupModule } from '../../../src/button-group/button-group.module';
-import { AlertModule } from '../../../src/alert/alert.module';
-import { IconModule } from '../../../src/icon/icon.module';
-import { IdentifierModule } from '../../../src/identifier/identifier.module';
-import { InlineHelpModule } from '../../../src/inline-help/inline-help.module';
-import { InputGroupModule } from '../../../src/input-group/input-group.module';
-import { ImageModule } from '../../../src/image/image.module';
-import { DropdownModule } from '../../../src/dropdown/dropdown.module';
-import { PaginationModule } from '../../../src/pagination/pagination.module';
-import { ListModule } from '../../../src/list/list.module';
-import { TabsModule } from '../../../src/tabs/tabs.module';
-import { TreeModule } from '../../../src/tree/tree.module';
-import { ModalModule } from '../../../src/modal/modal.module';
-import { TableModule } from '../../../src/table/table.module';
-import { ActionBarModule } from '../../../src/action-bar/action-bar.module';
-import { PanelModule } from '../../../src/panel/panel.module';
-import { MegaMenuModule } from '../../../src/mega-menu/mega-menu.module';
-import { TileModule } from '../../../src/tile/tile.module';
+import { FundamentalNgxModule } from 'fundamental-ngx';
 
 // components
 import { DocumentationComponent } from './components/documentation/documentation.component';
@@ -135,27 +115,7 @@ const ROUTES: Routes = [
         FormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
-        BadgeLabelModule,
-        BreadcrumbModule,
-        ButtonModule,
-        ButtonGroupModule,
-        AlertModule,
-        IconModule,
-        IdentifierModule,
-        InlineHelpModule,
-        InputGroupModule,
-        ImageModule,
-        DropdownModule,
-        ModalModule,
-        PaginationModule,
-        ListModule,
-        TabsModule,
-        TableModule,
-        TreeModule,
-        ActionBarModule,
-        PanelModule,
-        MegaMenuModule,
-        TileModule
+        FundamentalNgxModule
     ]
 })
 export class DocumentationModule {}

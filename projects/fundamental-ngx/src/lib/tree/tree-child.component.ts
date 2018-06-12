@@ -20,7 +20,7 @@ export class TreeChildComponent implements OnInit {
         this.hideChildren = false;
     }
 
-    toggleDisplayChildren(hideAll) {
+    toggleDisplayChildren(hideAll?) {
         if (hideAll !== undefined) {
             this.hideChildren = hideAll;
         } else {
@@ -28,7 +28,7 @@ export class TreeChildComponent implements OnInit {
         }
     }
 
-    typeOf(variable) {
+    typeOf(variable?) {
         let retVal;
         if (typeof variable === 'string') {
             retVal = 'string';
@@ -39,11 +39,15 @@ export class TreeChildComponent implements OnInit {
         return retVal;
     }
 
-    editTreeItem(row) {
-        this.editClicked.emit(row);
+    editTreeItem(row?) {
+        if (row) {
+            this.editClicked.emit(row);
+        }
     }
 
-    deleteTreeItem(row) {
-        this.deleteClicked.emit(row);
+    deleteTreeItem(row?) {
+        if (row) {
+            this.deleteClicked.emit(row);
+        }
     }
 }
