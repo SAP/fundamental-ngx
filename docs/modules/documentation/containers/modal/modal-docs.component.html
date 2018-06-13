@@ -3,7 +3,7 @@
 <import module="ModalModule" path="fundamental/modal/modal.module"></import>
 <separator></separator>
 
-The Modal component utilizes a singleton ModalService to handle opening/closing of the modal.  In your component, you'll need to create a method that calls ModalService's open() function.  First, inject the service into your component's constructor with <code>private modalService: ModalService</code>.  Then you'll need to call <code>this.modalService.open(modalName)</code>.  Use <code>this.modalService.close()</code> to close the modal.
+The Modal component utilizes a singleton ModalService to handle opening/closing of the modal.  In your component, you'll need to create a method that calls ModalService's open() function.  First, import the service with <code>import {{ '{' }} ModalService } from 'fundamental-ngx';</code>. Then inject the service into your component's constructor with <code>private modalService: ModalService</code>.  Then you'll need to call <code>this.modalService.open(modalName)</code>.  Use <code>this.modalService.close()</code> to close the modal.
 <br><br>
 <h1>&lt;fd-modal&gt;</h1>
 
