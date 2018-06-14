@@ -25,13 +25,13 @@
     color: #21262c;
     min-width: 16rem;
     background-color: #f1f3f6;
+    height: 100%;
+    overflow: auto;
 }
 
 .nav {
     list-style: none;
     border-top: 2px solid #dbe7f3;
-    height: 90%;
-    overflow: auto;
 }
 
 .nav-item {
