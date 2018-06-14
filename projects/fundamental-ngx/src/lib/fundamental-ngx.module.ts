@@ -28,8 +28,6 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './modal/modal.service';
 
-export * from './modal/modal.service';
-
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, NgbModule.forRoot()],
     declarations: [FundamentalNgxComponent],
