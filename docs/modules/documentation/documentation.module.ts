@@ -41,6 +41,9 @@ import { PanelDocsComponent } from './containers/panel/panel-docs.component';
 import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.component';
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
 
+import { InstallationDocsComponent } from './containers/installation/installation.component';
+import { UsageDocsComponent } from './containers/usage/usage.component';
+
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
 import { HighlightModule } from 'ngx-highlightjs';
@@ -72,7 +75,9 @@ const ROUTES: Routes = [
             { path: 'tabs', component: TabsDocsComponent },
             { path: 'table', component: TableDocsComponent },
             { path: 'tile', component: TileDocsComponent },
-            { path: 'tree', component: TreeDocsComponent }
+            { path: 'tree', component: TreeDocsComponent },
+            { path: 'installation', component: InstallationDocsComponent },
+            { path: 'usage', component: UsageDocsComponent }
         ]
     }
 ];
@@ -107,7 +112,9 @@ const ROUTES: Routes = [
         ActionBarDocsComponent,
         PanelDocsComponent,
         MegaMenuDocsComponent,
-        TileDocsComponent
+        TileDocsComponent,
+        InstallationDocsComponent,
+        UsageDocsComponent
     ],
     imports: [
         HighlightModule.forRoot(),
