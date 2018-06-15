@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ModalService {
     modalRef;
 

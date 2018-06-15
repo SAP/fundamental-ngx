@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,7 +15,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [AppComponent, HomeComponent],
-    imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(routes)],
+    imports: [BrowserAnimationsModule, RouterModule.forRoot(routes)],
     providers: [NgbActiveModal],
     bootstrap: [AppComponent],
     entryComponents: []

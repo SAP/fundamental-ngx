@@ -10,8 +10,8 @@ https://www.npmjs.com/get-npm
 Fundamental NGX is intended for use with Angular 5 or newer.  We assume the user has some knowledge of Angular before using this library.
 
 ## Download and Installation
-Download Fundamental NGX and add it to your project's dependencies:
-`npm install --save fundamental-ngx`
+Download Fundamental NGX and its peer dependencies:
+`npm install --save @ng-bootstrap/ng-bootstrap fundamental-ui normalize.css fundamental-ngx`
 
 Next you'll need to include the Fundamental UI CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
 
@@ -19,7 +19,13 @@ Next you'll need to include the Fundamental UI CSS in your Angular application. 
 
 Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.
 
-To include an Angular Fundamental component in your application, we'll need to import it in your app or module declaration.  For example, if we wanted to use Alerts, we would add
+You have the option of importing all of Fundamental NGX at once, or you can import individual components as you need them.  To import the whole library, add:
+
+`import { FundamentalNgxModule } from 'fundamental-ngx';`
+
+To your app's module definition.  Also add `FundamentalNgxModule` to the `imports` array in the @NgModule declaration.
+
+To include an individual Angular Fundamental component in your application, we only need to import the relevant module.  For example, if we wanted to use Alerts, we would add
 
 `import { AlertModule } from 'fundamental-ngx/alert/alert.module';`
 
