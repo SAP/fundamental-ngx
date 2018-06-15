@@ -4,7 +4,8 @@ import { Pagination } from './pagination.model';
 
 @Component({
     selector: 'fd-pagination',
-    templateUrl: './pagination.component.html'
+    templateUrl: './pagination.component.html',
+    providers: [PaginationService]
 })
 export class PaginationComponent implements OnChanges {
     @Input() pagination: Pagination;
@@ -23,7 +24,7 @@ export class PaginationComponent implements OnChanges {
         return this.pagination.currentPage === this.paginationService.getTotalPages(this.pagination);
     }
 
-    goToPage(page: number, $event: MouseEvent) {
+    goToPage(page: number, $event?: MouseEvent) {
         if ($event) {
             $event.preventDefault();
         }

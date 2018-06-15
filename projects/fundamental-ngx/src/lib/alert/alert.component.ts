@@ -12,7 +12,8 @@ import { HashService } from '../utils/hash.service';
         '[class.fd-alert--warning]': 'type == "warning"',
         '[class.fd-alert--error]': 'type == "error"'
     },
-    styleUrls: ['./alert.component.scss']
+    styleUrls: ['./alert.component.scss'],
+    providers: [HashService]
 })
 export class AlertComponent implements OnInit {
     @Input() dismissible: boolean;

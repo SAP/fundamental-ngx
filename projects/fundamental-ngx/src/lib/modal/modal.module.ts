@@ -8,6 +8,7 @@ import { ModalComponent } from './modal.component';
 import { ModalHeaderComponent } from './modal-header.component';
 import { ModalBodyComponent } from './modal-body.component';
 import { ModalFooterComponent } from './modal-footer.component';
+
 import { ModalService } from './modal.service';
 
 @NgModule({
