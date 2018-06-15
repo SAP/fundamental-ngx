@@ -1,3 +1,6 @@
+#### Have you squashed your commits and provided a simple commit message?
+
+
 #### Please provide a link to the associated issue
 
 
