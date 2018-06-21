@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import { ModalService } from 'fundamental-ngx';
+import { ModalService } from '../../../../../projects/fundamental-ngx/src/lib/modal/modal.service';
 
 @Component({
     selector: 'app-modal',
