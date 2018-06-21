@@ -1,0 +1,17 @@
+.fd-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &-flex-end {
+        justify-content: flex-end;
+    }
+
+    &-space-between {
+        justify-content: space-between;
+    }
+
+    &-group {
+        display: block;
+    }
+}

@@ -1,0 +1,145 @@
+<header>Button</header>
+<description>The Button directive is used to enhance standard HTML buttons.</description>
+<import module="ButtonModule" path="fundamental/button/button.module"></import>
+<separator></separator>
+
+<h1>&lt;button fd-button&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'type', description: '(Optional) String - The type of the button.  Options include \'primary\', \'main\', \'secondary\', and \'toolbar\'. Leave empty for default.'},
+    { name: 'semantic', description: '(Optional) String - Semantic buttons. Semantic modifiers include \'positive\' and \'negative\'. Leave empty for no modifier.'},
+    { name: 'size', description: '(Optional) String - The size of the button.  Options include \'xs\', \'s\', \'compact\', \'default\', and \'l\'. Leave empty for default.'},
+    { name: 'glyph', description: '(Optional) String - The icon to include in the button.  See the icon page for the list of icons.'},
+    { name: 'state', description: '(Optional) String - The state of the button. Options include \'normal\', \'selected\', and \'disabled\'. Leave empty for normal.' }
+  ]
+}"></properties>
+
+<separator></separator>
+<h2>Button Types</h2>
+<p>
+  The default button type is "primary", no modifier is required.  Use <code class="code-snippet">type="main",
+  type="secondary", type="toolbar", type="positive"</code> or <code class="code-snippet">type="negative"</code> to modify the type of the button.
+</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <button fd-button>
+        Primary Button
+      </button>
+      <button fd-button type="main">
+        Main Button
+      </button>
+      <button fd-button type="secondary">
+        Secondary Button
+      </button>
+      <button fd-button type="toolbar">
+        Toolbar Button
+      </button>
+      <button fd-button type="positive">
+        Positive Button
+      </button>
+      <button fd-button type="negative">
+        Negative Button
+      </button>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="buttonHtmlType"></code></pre>
+
+<separator></separator>
+<h2>Button Sizes</h2>
+<p>
+  Use <code class="code-snippet">size="xs", size="s", size="compact"</code> or
+  <code class="code-snippet">size="l"</code> to modify the size of the button.
+</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <button fd-button size="xs">
+        Extra-Small Button
+      </button>
+      <button fd-button size="s">
+        Small Button
+      </button>
+      <button fd-button size="compact">
+        Compact Button
+      </button>
+      <button fd-button>
+        Normal Button
+      </button>
+      <button fd-button size="l">
+        Large Button
+      </button>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="buttonHtmlSize"></code></pre>
+
+<separator></separator>
+<h2>Buttons with Icons</h2>
+<p>
+  Use <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to add an icon to the button.
+</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <button fd-button [glyph]="'cart'">
+        Add to Cart
+      </button>
+      <button fd-button type="main" [glyph]="'cart'">
+        Add to Cart
+      </button>
+      <button fd-button type="toolbar" [glyph]="'filter'">
+        Filter
+      </button>
+      <button fd-button type="positive" [glyph]="'accept'">
+        Approve
+      </button>
+      <button fd-button [glyph]="'cart'"></button>
+      <button fd-button type="main" [glyph]="'cart'"></button>
+      <button fd-button type="toolbar" [glyph]="'filter'"></button>
+      <button fd-button type="positive" [glyph]="'accept'"></button>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="buttonHtmlIcon"></code></pre>
+
+<separator></separator>
+<h2>Button State</h2>
+<p>
+  Use <code class="code-snippet">[state]="'disabled'"</code> or <code class="code-snippet">[state]="'selected'"</code> to set button state.
+</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <button fd-button>
+        Normal State
+      </button>
+      <button fd-button [state]="'selected'">
+        Selected State
+      </button>
+      <button fd-button [state]="'disabled'">
+        Disabled State
+      </button>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="buttonHtmlState"></code></pre>
+
+<separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+  <button fd-button
+          [type]     = "data.properties.type"
+          [semantic] = "data.properties.semantic"
+          [state]    = "data.properties.state"
+          [size]     = "data.properties.size"
+          [glyph]    = "data.properties.icon">
+    {{data.properties.label}}
+  </button>
+</playground>
+
+
