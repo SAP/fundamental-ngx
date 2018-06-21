@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SchemaModule } from '../schema/schema.module';
 
 // modules
-import { FundamentalNgxModule } from 'fundamental-ngx';
+import { FundamentalNgxModule } from '../../../projects/fundamental-ngx/src/lib/fundamental-ngx.module';
 
 // components
 import { DocumentationComponent } from './components/documentation/documentation.component';
