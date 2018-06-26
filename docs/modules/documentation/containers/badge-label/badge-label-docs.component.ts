@@ -21,11 +21,11 @@ export class BadgeLabelDocsComponent implements OnInit {
                     },
                     status: {
                         type: 'string',
-                        enum: ['', 'success', 'warning', 'error']
+                        enum: ['default', 'success', 'warning', 'error']
                     },
                     modifier: {
                         type: 'string',
-                        enum: ['', 'pill', 'filled']
+                        enum: ['default', 'pill', 'filled']
                     }
                 }
             }
@@ -39,8 +39,8 @@ export class BadgeLabelDocsComponent implements OnInit {
         properties: {
             text: 'default',
             type: 'badge',
-            status: '',
-            modifier: ''
+            status: 'default',
+            modifier: 'default'
         }
     };
 

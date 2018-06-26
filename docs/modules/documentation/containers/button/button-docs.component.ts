@@ -17,15 +17,15 @@ export class ButtonDocsComponent implements OnInit {
                     },
                     type: {
                         type: 'string',
-                        enum: ['', 'main', 'secondary', 'toolbar']
+                        enum: ['default', 'main', 'secondary', 'toolbar']
                     },
                     semantic: {
                         type: 'string',
-                        enum: ['', 'positive', 'negative']
+                        enum: ['default', 'positive', 'negative']
                     },
                     size: {
                         type: 'string',
-                        enum: ['', 'xs', 's', 'compact', 'l']
+                        enum: ['default', 'xs', 's', 'compact', 'l']
                     },
                     icon: {
                         type: 'string',
@@ -656,7 +656,7 @@ export class ButtonDocsComponent implements OnInit {
                     },
                     state: {
                         type: 'string',
-                        enum: ['', 'selected', 'disabled']
+                        enum: ['default', 'selected', 'disabled']
                     }
                 }
             }
@@ -669,11 +669,11 @@ export class ButtonDocsComponent implements OnInit {
     data: any = {
         properties: {
             label: 'click here',
-            type: '',
-            semantic: '',
-            size: '',
+            type: 'default',
+            semantic: 'default',
+            size: 'default',
             icon: '',
-            state: ''
+            state: 'default'
         }
     };
 

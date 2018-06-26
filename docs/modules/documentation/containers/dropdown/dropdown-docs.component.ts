@@ -655,7 +655,7 @@ export class DropdownDocsComponent {
                     },
                     size: {
                         type: 'string',
-                        enum: ['', 'xs', 's', 'compact', 'l']
+                        enum: ['default', 'xs', 's', 'compact', 'l']
                     },
                     label: {
                         type: 'string'
@@ -700,7 +700,7 @@ export class DropdownDocsComponent {
         properties: {
             id: 'test-ID',
             glyph: '',
-            size: '',
+            size: 'default',
             label: 'test-label',
             items: {
                 optionOne: 'test option 1',

@@ -21,7 +21,7 @@ export class AlertDocsComponent {
                 properties: {
                     block: {
                         type: 'string',
-                        enum: ['', 'warning', 'error']
+                        enum: ['default', 'warning', 'error']
                     }
                 }
             }
@@ -36,11 +36,12 @@ export class AlertDocsComponent {
             dismissible: true
         },
         modifier: {
-            block: 'error'
+            block: 'default'
         }
     };
 
-    message: String = 'This is an ';
+    messagePart1: String = 'This is the ';
+    messagePart2: String = ' alert style.';
 
     alertHtml =
         '<p>\n' +

@@ -14,28 +14,28 @@ export class ButtonGroupDocsComponent implements OnInit {
                 properties: {
                     size: {
                         type: 'string',
-                        enum: ['', 'xs', 's']
+                        enum: ['default', 'xs', 's']
                     },
                     label1: {
                         type: 'string'
                     },
                     state1: {
                         type: 'string',
-                        enum: ['', 'disabled', 'selected']
+                        enum: ['default', 'disabled', 'selected']
                     },
                     label2: {
                         type: 'string'
                     },
                     state2: {
                         type: 'string',
-                        enum: ['', 'disabled', 'selected']
+                        enum: ['default', 'disabled', 'selected']
                     },
                     label3: {
                         type: 'string'
                     },
                     state3: {
                         type: 'string',
-                        enum: ['', 'disabled', 'selected']
+                        enum: ['default', 'disabled', 'selected']
                     },
                     icon1: {
                         type: 'string',
@@ -666,7 +666,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state4: {
                         type: 'string',
-                        enum: ['', 'disabled', 'selected']
+                        enum: ['default', 'disabled', 'selected']
                     },
                     icon2: {
                         type: 'string',
@@ -1297,7 +1297,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state5: {
                         type: 'string',
-                        enum: ['', 'disabled', 'selected']
+                        enum: ['default', 'disabled', 'selected']
                     },
                     icon3: {
                         type: 'string',
@@ -1928,7 +1928,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state6: {
                         type: 'string',
-                        enum: ['', 'disabled', 'selected']
+                        enum: ['default', 'disabled', 'selected']
                     },
                     compact: {
                         type: 'boolean'
@@ -1943,19 +1943,19 @@ export class ButtonGroupDocsComponent implements OnInit {
 
     data: any = {
         properties: {
-            size: '',
+            size: 'default',
             label1: '',
-            state1: '',
+            state1: 'default',
             label2: 'Middle',
-            state2: '',
+            state2: 'default',
             label3: 'Right',
-            state3: '',
+            state3: 'default',
             icon1: '',
-            state4: '',
+            state4: 'default',
             icon2: 'pie-chart',
-            state5: '',
+            state5: 'default',
             icon3: 'pool',
-            state6: '',
+            state6: 'default',
             compact: false
         }
     };
