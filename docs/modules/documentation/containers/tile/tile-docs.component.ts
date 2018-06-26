@@ -37,7 +37,7 @@ export class TileDocsComponent implements OnInit {
                     },
                     colorAccent: {
                         type: 'string',
-                        enum: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                        enum: ['default', '1', '2', '3', '4', '5', '6', '7', '8', '9']
                     },
                     glyphs: {
                         type: 'string',
@@ -692,7 +692,7 @@ export class TileDocsComponent implements OnInit {
             size: 'm',
             circle: false,
             transparent: true,
-            colorAccent: '',
+            colorAccent: 'default',
             initials: '',
             glyphs: 'home',
             imageUrl: '',

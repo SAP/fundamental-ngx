@@ -24,7 +24,7 @@ export class IdentifierDocsComponent implements OnInit {
                     },
                     colorAccent: {
                         type: 'string',
-                        enum: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                        enum: ['default', '1', '2', '3', '4', '5', '6', '7', '8', '9']
                     },
                     initials: {
                         type: 'string'
@@ -669,7 +669,7 @@ export class IdentifierDocsComponent implements OnInit {
             size: 'm',
             circle: false,
             transparent: false,
-            colorAccent: '',
+            colorAccent: 'default',
             initials: '',
             glyphs: 'money-bills'
         }

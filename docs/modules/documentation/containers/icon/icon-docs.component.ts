@@ -1270,7 +1270,7 @@ export class IconDocsComponent implements OnInit {
                 properties: {
                     block: {
                         type: 'string',
-                        enum: ['s', '', 'm', 'l', 'xl']
+                        enum: ['s', 'default', 'm', 'l', 'xl']
                     }
                 }
             }
@@ -1285,7 +1285,7 @@ export class IconDocsComponent implements OnInit {
             glyphs: 'accelerated'
         },
         modifier: {
-            block: ''
+            block: 'default '
         }
     };
 
