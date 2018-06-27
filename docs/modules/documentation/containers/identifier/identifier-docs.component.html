@@ -1,0 +1,108 @@
+<header>Identifier</header>
+<description></description>
+<import module="IdentifierModule" path="fundamental/identifier/identifier.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-identifier&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'size', description: 'String - Three sizes are available: small (s) - 24px, medium (m) - 36px, and large (l) - 48px.' },
+    { name: 'circle', description: '(Optional) boolean - if set to true, a circle style is rendered. Default is set to false' },
+    { name: 'transparent', description: '(Optional) boolean - if set to true, a transperant style is rendered. Default is set to false' },
+    { name: 'colorAccent', description: '(Optional) number - applies a background color. Options include numbers from 1 to 9' },
+    { name: 'glyph', description: '(Optional) string - The name of the icon to include. See the icon page for the list of icons.' }
+  ]
+}"></properties>
+<separator></separator>
+
+<h2>Icon</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div class="grid">
+        <span fd-identifier [size]="'s'" [glyph]="'washing-machine'"></span>
+        <span fd-identifier [size]="'m'" [glyph]="'washing-machine'"></span>
+        <span fd-identifier [size]="'l'" [glyph]="'washing-machine'"></span>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="iconHtml"></code></pre>
+
+<separator></separator>
+<h2>Initials</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div class="grid">
+        <span fd-identifier [size]="'s'" aria-label="Wendy Wallace">WW</span>
+        <span fd-identifier [size]="'m'" aria-label="Wendy Wallace">WW</span>
+        <span fd-identifier [size]="'l'" aria-label="Wendy Wallace">WW</span>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="initialsHtml"></code></pre>
+
+<separator></separator>
+<h2>Circle</h2>
+<p>A circle style can be rendered using the <code>--circle modifier</code></p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div class="grid">
+        <span fd-identifier [size]="'s'" [glyph]="'money-bills'" [circle]="true"></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [circle]="true"></span>
+        <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [circle]="true"></span>
+
+        <span fd-identifier [size]="'s'" [circle]="true" aria-label="Wendy Wallace">WW</span>
+        <span fd-identifier [size]="'m'" [circle]="true" aria-label="Wendy Wallace">WW</span>
+        <span fd-identifier [size]="'l'" [circle]="true" aria-label="Wendy Wallace">WW</span>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="circleHtml"></code></pre>
+
+<separator></separator>
+<h2>Transparent</h2>
+<p>A transparent style can be rendered using the <code>--transparent modifier</code></p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div class="grid">
+        <span fd-identifier [size]="'s'" [glyph]="'money-bills'" [transparent]="true"></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [transparent]="true"></span>
+        <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [transparent]="true"></span>
+
+        <span fd-identifier [size]="'s'" [transparent]="true">WW</span>
+        <span fd-identifier [size]="'m'" [transparent]="true">WW</span>
+        <span fd-identifier [size]="'l'" [transparent]="true">WW</span>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="transparentHtml"></code></pre>
+
+<separator></separator>
+<h2>Accent Colors</h2>
+<p>Use helpers classes tp change the background colors, e.g., <code>.fd-has-background-color-accent-9</code></p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div class="grid">
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='1'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='2'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='3'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='4'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='5'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='6'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='7'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='8'></span>
+        <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='9'></span>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="colorAccentHtml"></code></pre>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+  <div *ngIf="data.properties.glyphs.length > 0 && data.properties.initials.length == 0;else initialsTemplate">
+    <span fd-identifier [size]="data.properties.size" [glyph]="data.properties.glyphs" [colorAccent]="data.properties.colorAccent" [transparent]="data.properties.transparent" [circle]="data.properties.circle" ></span>
+  </div>
+  <ng-template #initialsTemplate>
+    <span fd-identifier [size]="data.properties.size" [colorAccent]="data.properties.colorAccent" [transparent]="data.properties.transparent" [circle]="data.properties.circle">{{data.properties.initials}}</span>
+  </ng-template>
+</playground>

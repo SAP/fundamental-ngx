@@ -1,0 +1,31 @@
+<header>Pagination</header>
+<description>Use pagination components in conjunction with Lists, Tables, and Trees to allow for more efficient performance and quick access to specific records in the overall data set.</description>
+<import module="PaginationModule" path="fundamental/pagination/pagination.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-pagination&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'totalItems', description: 'The total number items.' },
+    { name: 'itemsPerPage', description: 'The number of items per page.' },
+    { name: 'currentPage', description: 'The current page.' }
+  ]
+}"></properties>
+<separator></separator>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-pagination [class]="'fd-demo-pagination'" [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="paginationHtml"></code></pre>
+<pre>
+  totalItems: {{data.properties.totalItems}},
+  itemsPerPage: {{data.properties.itemsPerPage}},
+  currentPage: {{data.properties.currentPage}},
+</pre>
+
+<separator></separator>
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+  <fd-pagination [class]="'fd-demo-pagination'" [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
+</playground>

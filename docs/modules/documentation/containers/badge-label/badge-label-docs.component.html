@@ -1,0 +1,93 @@
+<header>Badge and Label</header>
+<description>
+  <p>Badges and labels are used to indicate status. Colors, generally in combination with text, are used to easily highlight
+  the state of an object.</p>
+  <p> - Black is used to indicate default or inactive status </p>
+  <p> - Green indicates positive status, used for active, published, approved </p>
+  <p> - Orange can be used for a warning status or to indicate that an action can be taken</p>
+  <p> - Red indicates error status</p>
+</description>
+<import module="BadgeLabelModule" path="fundamental/badge-label/badge-label.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-badge&gt;</h1>
+<h1>&lt;fd-label&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'status',   description: 'The status of an object. Options include \'default\', \'success\', \'warning\', and \'error\'. Leave empty for default.'},
+    { name: 'modifier', description: 'Modifiers can be \'pill\' and \'filled\'. Leave empty for normal.'}
+  ]
+}">
+</properties>
+
+<separator></separator>
+
+<h2>Default Badge</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-badge>Default</fd-badge>
+    <fd-badge [status]="'success'">Default</fd-badge>
+    <fd-badge [status]="'warning'">Default</fd-badge>
+    <fd-badge [status]="'error'">Default</fd-badge>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="defaultBadgeHtmlType"></code></pre>
+
+<separator></separator>
+
+<h2>Pill Badge</h2>
+<p><code>fd-badge--pill</code> modifier can be used to render a pill version of the badge.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-badge [modifier]="'pill'">Default</fd-badge>
+    <fd-badge [status]="'success'" [modifier]="'pill'">Default</fd-badge>
+    <fd-badge [status]="'warning'" [modifier]="'pill'">Default</fd-badge>
+    <fd-badge [status]="'error'"   [modifier]="'pill'">Default</fd-badge>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="pillBadgeHtmlType"></code></pre>
+
+<separator></separator>
+
+<h2>Filled Badge</h2>
+<p><code>fd-badge--filled</code> modifier can be used to render a filled version of the badge.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-badge [modifier]="'filled'">Default</fd-badge>
+    <fd-badge [status]="'success'" [modifier]="'filled'">Default</fd-badge>
+    <fd-badge [status]="'warning'" [modifier]="'filled'">Default</fd-badge>
+    <fd-badge [status]="'error'"   [modifier]="'filled'">Default</fd-badge>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="filledBadgeHtmlType"></code></pre>
+
+<separator></separator>
+
+<h2>Label</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-label>Default</fd-label>
+    <fd-label [status]="'success'">Success</fd-label>
+    <fd-label [status]="'warning'">Warning</fd-label>
+    <fd-label [status]="'error'">Error</fd-label>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="labelHtmlType"></code></pre>
+
+<separator></separator>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+  <div *ngIf ="data.properties.type === 'badge'">
+      <fd-badge [status]="data.properties.status" [modifier]="data.properties.modifier">{{data.properties.text}}</fd-badge>
+  </div>
+  <div *ngIf ="data.properties.type === 'label'">
+      <fd-label [status]="data.properties.status">{{data.properties.text}}</fd-label>
+  </div>
+</playground>
+
+<style>
+  .fd-badge, .fd-label {
+    margin-right: 20px;
+  }
+</style>
