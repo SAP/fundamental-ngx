@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 export class BreadcrumbDocsComponent {
     breadcrumbHtml =
         '<fd-breadcrumb>\n' +
-        '  <fd-breadcrumb-item [url]="\'#\'" [text]="\'Link Text\'"></fd-breadcrumb-item>\n' +
-        '  <fd-breadcrumb-item [url]="\'#\'" [text]="\'Link Text\'"></fd-breadcrumb-item>\n' +
-        '  <fd-breadcrumb-item [text]="\'Link Text\'"></fd-breadcrumb-item>\n' +
+        '  <fd-breadcrumb-item [url]="\'#\'">Link Text</fd-breadcrumb-item>\n' +
+        '  <fd-breadcrumb-item [url]="\'#\'">Link Text</fd-breadcrumb-item>\n' +
+        '  <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>\n' +
         '</fd-breadcrumb>\n';
 
     constructor() {}
