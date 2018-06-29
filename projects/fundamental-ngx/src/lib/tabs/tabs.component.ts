@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { HashService } from '../utils/hash.service';
 
 @Component({
     selector: 'fd-tab',
@@ -9,15 +10,23 @@ import { Component, OnInit, Input } from '@angular/core';
         '[class.is-expanded]': 'expanded',
         '[id]': 'id'
     },
-    templateUrl: './tab.component.html'
+    templateUrl: './tab.component.html',
+    providers: [HashService]
 })
 export class TabPanelComponent implements OnInit {
     @Input() title: string;
 
     @Input() disabled: boolean;
 
-    id: string;
+    @Input() id: string;
+
     expanded = false;
 
-    ngOnInit() {}
+    constructor(@Inject(HashService) private hasher: HashService) {}
+
+    ngOnInit() {
+        if (!this.id) {
+            this.id = this.hasher.hash();
+        }
+    }
 }
