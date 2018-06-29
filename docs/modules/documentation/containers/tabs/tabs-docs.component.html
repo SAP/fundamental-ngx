@@ -7,9 +7,20 @@
 
 <properties [properties]="{
   childComponents: [
-    { name: '<fd-tab>', description: 'An individual tab.  Has properties \'title\' and \'disabled\'. '}
+    { name: '<fd-tab>', description: 'An individual tab.'}
+  ],
+  inputs: [
+    { name: 'title', description: 'String - Text to display at the top of the tab.'},
+    { name: 'disabled', description: 'Boolean - Prevents the tab from being selected.'},
+    { name: 'id', description: 'String - Allows you to select a tab programmatically using the select() function.'}
+  ],
+  outputs: [
+    { name: 'tabChange', description: 'EventEmitter - emitted when the user selects a tab.  Emits the id of the newly selected tab.'}
   ]
 }"></properties>
+
+<separator></separator>
+
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-tab-list>
@@ -29,6 +40,27 @@
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="tabHtml"></code></pre>
+
+<separator></separator>
+<h2>Selecting a tab programmatically by ID</h2>
+<p>You can set an <code>id</code> on a tab and select it programmatically using the <code>select()</code> function.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-tab-list #tabList>
+      <fd-tab id="tab1" title="Tab 1">
+        Tab 1
+      </fd-tab>
+      <fd-tab id="tab2" title="Tab 2">
+        Tab 2
+      </fd-tab>
+    </fd-tab-list>
+  </div>
+</div>
+<br><br>
+<button fd-button type="main" (click)="this.tabList.select('tab2')">
+  Select Tab 2
+</button>
+<pre><code mwlHighlightJs language="HTML" [source]="selectTabByIdHtml"></code></pre>
 
 <separator></separator>
 

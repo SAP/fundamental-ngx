@@ -1,4 +1,12 @@
-import { AfterContentInit, Component, ContentChildren, QueryList, ViewEncapsulation } from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ContentChildren,
+    EventEmitter,
+    Output,
+    QueryList,
+    ViewEncapsulation
+} from '@angular/core';
 import { TabPanelComponent } from './tabs.component';
 
 @Component({
@@ -10,6 +18,8 @@ import { TabPanelComponent } from './tabs.component';
 export class TabListComponent implements AfterContentInit {
     @ContentChildren(TabPanelComponent) tabs: QueryList<TabPanelComponent>;
 
+    @Output() tabChange = new EventEmitter<any>();
+
     selected: TabPanelComponent;
 
     ngAfterContentInit() {
@@ -19,17 +29,28 @@ export class TabListComponent implements AfterContentInit {
         });
     }
 
-    select($event: MouseEvent, tab: TabPanelComponent) {
-        $event.preventDefault();
-        if (tab.disabled) {
-            return;
-        } else {
-            this.selected.expanded = false;
-        }
+    select(tabId) {
+        this.tabs.forEach(tab => {
+            if (tab.id === tabId) {
+                if (tab.disabled) {
+                    return;
+                } else {
+                    this.selected.expanded = false;
+                }
 
-        if (this.selected) {
-            this.selected = tab;
-            this.selected.expanded = true;
+                if (this.selected) {
+                    this.selected = tab;
+                    this.selected.expanded = true;
+                    this.tabChange.emit(tab.id);
+                }
+            }
+        });
+    }
+
+    tabClicked($event: MouseEvent, tabId) {
+        if ($event) {
+            $event.preventDefault();
         }
+        this.select(tabId);
     }
 }
