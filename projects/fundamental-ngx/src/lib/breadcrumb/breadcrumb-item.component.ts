@@ -13,5 +13,11 @@ export class BreadcrumbItemComponent {
 
     @Input() url: string;
 
-    @Input() text: string;
+    getCursor(url) {
+        let retVal = 'text';
+        if (url) {
+            retVal = 'pointer';
+        }
+        return retVal;
+    }
 }

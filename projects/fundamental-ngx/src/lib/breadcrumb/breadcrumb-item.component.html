@@ -1,2 +1,3 @@
-<a *ngIf="url;else noUrltemplate" class="fd-breadcrumb__link" [routerLink]="['url']"> {{text}} </a>
-<ng-template #noUrltemplate> {{text}} </ng-template>
+<span [ngClass]="{'fd-breadcrumb__link': url }" [ngStyle]="{'cursor': getCursor(url) }" [routerLink]="url ? [url] : []">
+  <ng-content></ng-content>
+</span>

@@ -8,15 +8,20 @@
 <separator></separator>
 
 <h1>&lt;fd-breadcrumb&gt;</h1>
+<properties [properties]="{
+  inputs: [
+    { name: 'url', description: '(Optional) Url the breadcrumb should link to.  Leave blank for the current page.'}
+  ]
+}"></properties>
 
 <separator></separator>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-breadcrumb>
-      <fd-breadcrumb-item [url]="'#'" [text]="'Link Text'"></fd-breadcrumb-item>
-      <fd-breadcrumb-item [url]="'#'" [text]="'Link Text'"></fd-breadcrumb-item>
-      <fd-breadcrumb-item [text]="'Link Text'"></fd-breadcrumb-item>
+      <fd-breadcrumb-item [url]="'#'">Link Text</fd-breadcrumb-item>
+      <fd-breadcrumb-item [url]="'#'">Link Text</fd-breadcrumb-item>
+      <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>
     </fd-breadcrumb>
   </div>
 </div>
