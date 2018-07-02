@@ -16,5 +16,6 @@ export class ModalService {
 
     open(modalType) {
         this.modalRef = this.modalService.open(modalType);
+        return this.modalRef;
     }
 }
