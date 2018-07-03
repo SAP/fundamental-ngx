@@ -22,10 +22,11 @@ The Modal component utilizes a singleton ModalService to handle opening/closing 
         </fd-modal-body>
       </fd-modal>
     </ng-template>
-    <button fd-button (click)="openModal(informationalModal)">Launch Demo</button>
+    <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="informationalModalHtml"></code></pre>
+<pre><code mwlHighlightJs language="typescript" [source]="informationalModalJs"></code></pre>
 
 <separator></separator>
 
@@ -33,7 +34,7 @@ The Modal component utilizes a singleton ModalService to handle opening/closing 
 <p>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two buttons at the bottom. With the “positive” path always been the primary button.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <ng-template #confirmationModal>
+    <ng-template #confirmationModal let-c="close">
       <fd-modal>
         <fd-modal-header>
           Modal Header/Title
@@ -42,23 +43,27 @@ The Modal component utilizes a singleton ModalService to handle opening/closing 
           Modal Body
         </fd-modal-body>
         <fd-modal-footer>
-          <button fd-button type="secondary">No</button>
-          <button fd-button type="main">Yes</button>
+          <button fd-button (click)="c('No')" type="secondary">No</button>
+          <button fd-button (click)="c('Yes')" type="main">Yes</button>
         </fd-modal-footer>
       </fd-modal>
     </ng-template>
-    <button fd-button (click)="openModal(confirmationModal)">Launch Demo</button>
+    <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
+    <separator></separator>
+    <span>{{confirmationReason}}</span>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="confirmationModalHtml"></code></pre>
+<pre><code mwlHighlightJs language="typescript" [source]="confirmationModalJs"></code></pre>
 
+<!--
 <separator></separator>
 
 <h2>Form Modal</h2>
 <p>Used to collect simple information from the user. Please use with care and don’t include more than five inputs on a modal to avoid scrolling inside the modal.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <ng-template #formModal>
+    <ng-template #formModal let-c="close">
       <fd-modal>
         <fd-modal-header>
           Modal Header/Title
@@ -72,14 +77,17 @@ The Modal component utilizes a singleton ModalService to handle opening/closing 
           </div>
         </fd-modal-body>
         <fd-modal-footer>
-          <button fd-button type="secondary">Cancel</button>
-          <button fd-button type="main">Invite</button>
+          <button fd-button (click)="c('Cancel')" type="secondary">Cancel</button>
+          <button fd-button (click)="c('Invite')" type="main">Invite</button>
         </fd-modal-footer>
       </fd-modal>
     </ng-template>
     <button fd-button (click)="openModal(formModal)">Launch Demo</button>
+    <separator></separator>
+    <span>{{reason}}</span>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="formModalHtml"></code></pre>
 
 <separator></separator>
+-->
