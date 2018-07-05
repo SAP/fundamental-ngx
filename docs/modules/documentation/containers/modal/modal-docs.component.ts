@@ -48,6 +48,8 @@ export class ModalDocsComponent implements OnInit {
         }
     };
 
+    confirmationReason: string;
+
     informationalModalHtml =
         '<ng-template #informationalModal>\n' +
         '  <fd-modal>\n' +
@@ -59,10 +61,10 @@ export class ModalDocsComponent implements OnInit {
         '    </fd-modal-body>\n' +
         '  </fd-modal>\n' +
         '</ng-template>\n' +
-        '<button fd-button (click)="openModal(informationalModal)">Launch Demo</button>';
+        '<button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>';
 
     confirmationModalHtml =
-        '<ng-template #confirmationModal>\n' +
+        '<ng-template #confirmationModal let-c="close">\n' +
         '  <fd-modal>\n' +
         '    <fd-modal-header>\n' +
         '      Modal Header/Title\n' +
@@ -71,12 +73,13 @@ export class ModalDocsComponent implements OnInit {
         '      Modal Body\n' +
         '    </fd-modal-body>\n' +
         '    <fd-modal-footer>\n' +
-        '      <button fd-button type="secondary">No</button>\n' +
-        '      <button fd-button type="main">Yes</button>\n' +
+        '      <button fd-button (click)="c(\'No\')" type="secondary">No</button>\n' +
+        '      <button fd-button (click)="c(\'Yes\')" type="main">Yes</button>\n' +
         '    </fd-modal-footer>\n' +
         '  </fd-modal>\n' +
         '</ng-template>\n' +
-        '<button fd-button (click)="openModal(confirmationModal)">Launch Demo</button>';
+        '<button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>\n' +
+        '<span>{{confirmationReason}}</span>';
 
     formModalHtml =
         '<ng-template #formModal>\n' +
@@ -99,6 +102,24 @@ export class ModalDocsComponent implements OnInit {
         '  </fd-modal>\n' +
         '</ng-template>';
 
+    informationalModalJs = 'openModal(modalType) {\n' + '    this.modalService.open(modalType);\n' + '}';
+
+    confirmationModalJs =
+        'openConfirmationModal(modalType) {\n' +
+        '    this.modalService.open(modalType).result.then(\n' +
+        '        result => {\n' +
+        '            if (result === "Yes") {\n' +
+        '                this.confirmationReason = \'Modal closed with "Yes" button\';\n' +
+        '            } else if (result === "No") {\n' +
+        '                this.confirmationReason = \'Modal closed with "No" button\';\n' +
+        '            }\n' +
+        '        },\n' +
+        '        () => {\n' +
+        '            this.confirmationReason = \'Modal dismissed with the "X" button\';\n' +
+        '        }\n' +
+        '    );\n' +
+        '}';
+
     constructor(private schemaFactory: SchemaFactoryService, private modalService: ModalService) {
         this.schema = this.schemaFactory.getComponent('modal');
     }
@@ -109,7 +130,22 @@ export class ModalDocsComponent implements OnInit {
 
     ngOnInit() {}
 
-    openModal(modalType) {
+    openInfoModal(modalType) {
         this.modalService.open(modalType);
+    }
+
+    openConfirmationModal(modalType) {
+        this.modalService.open(modalType).result.then(
+            result => {
+                if (result === 'Yes') {
+                    this.confirmationReason = 'Modal closed with "Yes" button';
+                } else if (result === 'No') {
+                    this.confirmationReason = 'Modal closed with "No" button';
+                }
+            },
+            () => {
+                this.confirmationReason = 'Modal dismissed with the "X" button';
+            }
+        );
     }
 }

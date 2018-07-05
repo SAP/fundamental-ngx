@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalComponent {
     constructor(@Inject(NgbModal) private modalService: NgbModal) {}
 
-    open() {
-        this.modalService.open(ModalComponent);
+    open(): any {
+        return this.modalService.open(ModalComponent);
     }
 }
