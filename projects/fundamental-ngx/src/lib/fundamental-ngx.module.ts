@@ -7,6 +7,7 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
 import { DropdownModule } from './dropdown/dropdown.module';
+import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { IdentifierModule } from './identifier/identifier.module';
 import { ImageModule } from './image/image.module';
@@ -40,6 +41,7 @@ import { ModalService } from './modal/modal.service';
         ButtonModule,
         ButtonGroupModule,
         DropdownModule,
+        FormModule,
         IconModule,
         IdentifierModule,
         ImageModule,
