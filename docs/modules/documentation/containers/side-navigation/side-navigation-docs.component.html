@@ -1,0 +1,231 @@
+<header>Side Navigation</header>
+<description>The left navigation can always display or expand/collapse using the menu icon within the global navigation.</description>
+<import module="SideNavigationModule" path="fundamental/side-navigation/side-navigation.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-side-nav&gt;</h1>
+
+<properties [properties]="{
+  childComponents: [
+    { name: 'fd-side-nav-group', description: 'Side navigation group contains a side navigation title and a side navigation list.'},
+    { name: 'fd-side-nav-title', description: 'The title of a side navigation group.'},
+    { name: 'fd-side-nav-list', description: 'A list of side navigation items.'},
+    { name: 'fd-side-nav-item', description: 'An item in the navigation list.'},
+    { name: 'fd-side-nav-link', description: 'A side navigation link. Has a [url] input.'},
+    { name: 'fd-side-nav-subitem', description: 'A second-tier subitem.  Must be a child of a fd-side-nav-link component.'}
+  ]
+}"></properties>
+
+<separator></separator>
+<h2>Side navigation with one level</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-side-nav>
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="oneLevelSideNavHtml"></code></pre>
+
+
+<separator></separator>
+<h2>Side navigation with titles</h2>
+<p>Use this to group navigation. Titles are not clickable.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-side-nav>
+        <fd-side-nav-group>
+          <fd-side-nav-title>
+            Group Title
+          </fd-side-nav-title>
+          <fd-side-nav-list>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+          </fd-side-nav-list>
+        </fd-side-nav-group>
+        <fd-side-nav-group>
+          <fd-side-nav-title>
+            Group Title
+          </fd-side-nav-title>
+          <fd-side-nav-list>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+          </fd-side-nav-list>
+        </fd-side-nav-group>
+      </fd-side-nav>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="titlesSideNavHtml"></code></pre>
+
+<separator></separator>
+<h2>Side navigation with multiple levels</h2>
+<p>Use this when there is more than one level of hierarchy in the left navigation. Each level can be expanded and collapsed.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-side-nav>
+        <fd-side-nav-group>
+          <fd-side-nav-title>
+            Group Name
+          </fd-side-nav-title>
+          <fd-side-nav-list>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+            </fd-side-nav-item>
+          </fd-side-nav-list>
+        </fd-side-nav-group>
+        <fd-side-nav-group>
+          <fd-side-nav-title>
+            Group Name
+          </fd-side-nav-title>
+          <fd-side-nav-list>
+            <fd-side-nav-item>
+              <fd-side-nav-link [hasSublist]="true">
+                Link Item
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              </fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [hasSublist]="true">
+                Link Item
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              </fd-side-nav-link>
+            </fd-side-nav-item>
+            <fd-side-nav-item>
+              <fd-side-nav-link [hasSublist]="true">
+                Link Item
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              </fd-side-nav-link>
+            </fd-side-nav-item>
+          </fd-side-nav-list>
+        </fd-side-nav-group>
+      </fd-side-nav>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="multiLevelsSideNavHtml"></code></pre>
+
+<separator></separator>
+<h2>Side navigation with icons</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-side-nav>
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+              Link Icon
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+              Link Icon
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+              Link Icon
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+              Link Icon
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="iconsSideNavHtml"></code></pre>
+
+<separator></separator>
+<h2>Side navigation collapsed with icons</h2>
+<p>The user can identify which level they are on based on the icon displayed as selected when the navigation is collapsed. Note that the suggested use is when there is only one level of navigation as the user can only see one level of navigation when collapsed.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-side-nav [collapsed]="true">
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">
+              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="collapsedSideNavHtml"></code></pre>
+

@@ -25,6 +25,7 @@ export class DocumentationComponent {
         { url: 'modal', name: 'Modal' },
         { url: 'pagination', name: 'Pagination' },
         { url: 'panel', name: 'Panel' },
+        { url: 'sideNavigation', name: 'Side Navigation' },
         { url: 'table', name: 'Table' },
         { url: 'tabs', name: 'Tabs' },
         { url: 'tile', name: 'Tile' },
