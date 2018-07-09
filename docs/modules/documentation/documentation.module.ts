@@ -40,6 +40,7 @@ import { ActionBarDocsComponent } from './containers/action-bar/action-bar-docs.
 import { PanelDocsComponent } from './containers/panel/panel-docs.component';
 import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.component';
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
+import { SideNavigationDocsComponent } from './containers/side-navigation/side-navigation-docs.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -77,6 +78,7 @@ const ROUTES: Routes = [
             { path: 'megaMenu', component: MegaMenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
+            { path: 'sideNavigation', component: SideNavigationDocsComponent },
             { path: 'tabs', component: TabsDocsComponent },
             { path: 'table', component: TableDocsComponent },
             { path: 'tile', component: TileDocsComponent },
@@ -116,6 +118,7 @@ const ROUTES: Routes = [
         TreeDocsComponent,
         ActionBarDocsComponent,
         PanelDocsComponent,
+        SideNavigationDocsComponent,
         MegaMenuDocsComponent,
         TileDocsComponent,
         InstallationDocsComponent,
