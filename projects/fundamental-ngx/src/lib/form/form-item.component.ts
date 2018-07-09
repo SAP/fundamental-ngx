@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
-@Component({
-    selector: 'fd-form-item',
-    templateUrl: './form-item.component.html',
-    styleUrls: ['./form-item.component.scss']
+@Directive({
+    selector: '[fd-form-item]',
+    host: {
+      '[class]': '"fd-form__item" + (isCheck ? " fd-form__item--check" : "") + (isInline ? " fd-form__item--inline" : "")'
+    }
+
 })
 export class FormItemComponent {
     @Input() isCheck: boolean = false;
