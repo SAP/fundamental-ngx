@@ -19,7 +19,6 @@ import { FormGroupComponent } from './form-group.component';
         FormLegendComponent,
         FormMessageComponent,
         FormGroupComponent
-        
     ],
     declarations: [
         FormSetDirective,

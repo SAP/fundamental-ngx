@@ -207,38 +207,59 @@
 
     <fieldset fd-form-set>
       <fd-form-legend>Radio buttons</fd-form-legend>
-      <fd-form-group> 
-      <fd-form-item [isCheck]="true">
-        <input fd-form-control type="radio" id="radio-1" name="radio-name-1" value="" checked>
-        <fd-form-label [forValue]="'radio-1'">Option One</fd-form-label>
-      </fd-form-item>
-      <fd-form-item [isCheck]="true">
-        <input fd-form-control type="radio" id="radio-2" name="radio-name-1" value="">
-        <fd-form-label [forValue]="'radio-2'">Option Two</fd-form-label>
-      </fd-form-item>
-      <fd-form-item [isCheck]="true">
-        <input fd-form-control type="radio" id="radio-3" name="radio-name-1" value="">
-        <fd-form-label [forValue]="'radio-3'">Option Three</fd-form-label>
-      </fd-form-item>
-    </fd-form-group> 
+      <fd-form-group>
+        <fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-1" name="radio-name-1" value="" checked>
+          <fd-form-label [forValue]="'radio-1'">Option One</fd-form-label>
+        </fd-form-item>
+        <fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-2" name="radio-name-1" value="">
+          <fd-form-label [forValue]="'radio-2'">Option Two</fd-form-label>
+        </fd-form-item>
+        <fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-3" name="radio-name-1" value="">
+          <fd-form-label [forValue]="'radio-3'">Option Three</fd-form-label>
+        </fd-form-item>
+      </fd-form-group>
+    </fieldset>
+
+    <fieldset fd-form-set>
+      <fd-form-legend>Radio buttons disabled</fd-form-legend>
+      <fd-form-group>
+        <fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-1" name="radio-name-2" value="" checked disabled>
+          <fd-form-label [forValue]="'radio-1'">Option One</fd-form-label>
+        </fd-form-item>
+        <fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-2" name="radio-name-2" value="" disabled>
+          <fd-form-label [forValue]="'radio-2'">Option Two</fd-form-label>
+        </fd-form-item>
+        <fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-3" name="radio-name-2" value="" disabled>
+          <fd-form-label [forValue]="'radio-3'">Option Three</fd-form-label>
+        </fd-form-item>
+      </fd-form-group>
     </fieldset>
 
     <fieldset fd-form-set>
       <fd-form-legend>Inline Radio buttons</fd-form-legend>
-      <fd-form-group> 
-      <fd-form-item [isInline]="true" [isCheck]="true">
-        <input fd-form-control type="radio" id="radio-4" name="radio-name-2" value="" checked>
-        <fd-form-label [forValue]="'radio-4'">Option One</fd-form-label>
-      </fd-form-item>
-      <fd-form-item [isInline]="true" [isCheck]="true">
-        <input fd-form-control type="radio" id="radio-5" name="radio-name-2" value="">
-        <fd-form-label [forValue]="'radio-5'">Option Two</fd-form-label>
-      </fd-form-item>
-      <fd-form-item [isInline]="true" [isCheck]="true">
-        <input fd-form-control type="radio" id="radio-6" name="radio-name-2" value="">
-        <fd-form-label [forValue]="'radio-6'">Option Three</fd-form-label>
-      </fd-form-item>
-    </fd-form-group>
+      <fd-form-group>
+        <fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'radio-4'">
+            <input fd-form-control type="radio" id="radio-4" name="radio-name-3" value="" checked> Option One
+          </fd-form-label>
+        </fd-form-item>
+        <fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'radio-5'">
+            <input fd-form-control type="radio" id="radio-5" name="radio-name-3" value=""> Option Two
+          </fd-form-label>
+        </fd-form-item>
+        <fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'radio-6'">
+            <input fd-form-control type="radio" id="radio-6" name="radio-name-3" value=""> Option Three
+          </fd-form-label>
+        </fd-form-item>
+      </fd-form-group>
     </fieldset>
   </div>
 </div>
@@ -268,19 +289,38 @@
     </fieldset>
 
     <fieldset fd-form-set>
+      <fd-form-legend>Checkboxes disabled</fd-form-legend>
+      <fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-1" name="checkbox-name-2" disabled>
+        <fd-form-label [forValue]="'checkbox-1'">Option One</fd-form-label>
+      </fd-form-item>
+      <fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-2" name="checkbox-name-2" checked disabled>
+        <fd-form-label [forValue]="'checkbox-2'">Option Two</fd-form-label>
+      </fd-form-item>
+      <fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-3" name="checkbox-name-2" disabled>
+        <fd-form-label [forValue]="'checkbox-3'">Option Three</fd-form-label>
+      </fd-form-item>
+    </fieldset>
+
+    <fieldset fd-form-set>
       <fd-form-legend>Checkboxes inline</fd-form-legend>
       <fd-form-group>
         <fd-form-item [isInline]="true" [isCheck]="true">
-          <input fd-form-control type="checkbox" id="checkbox-1" name="checkbox-name-1" checked>
-          <fd-form-label [forValue]="'checkbox-1'">Option One</fd-form-label>
+          <fd-form-label [forValue]="'checkbox-1'">
+            <input fd-form-control type="checkbox" id="checkbox-1" name="checkbox-name-3" checked> Option One
+          </fd-form-label>
         </fd-form-item>
         <fd-form-item [isInline]="true" [isCheck]="true">
-          <input fd-form-control type="checkbox" id="checkbox-2" name="checkbox-name-1">
-          <fd-form-label [forValue]="'checkbox-2'">Option Two</fd-form-label>
+          <fd-form-label [forValue]="'checkbox-2'">
+            <input fd-form-control type="checkbox" id="checkbox-2" name="checkbox-name-3"> Option Two
+          </fd-form-label>
         </fd-form-item>
         <fd-form-item [isInline]="true" [isCheck]="true">
-          <input fd-form-control type="checkbox" id="checkbox-3" name="checkbox-name-1">
-          <fd-form-label [forValue]="'checkbox-3'">Option Three</fd-form-label>
+          <fd-form-label [forValue]="'checkbox-3'">
+            <input fd-form-control type="checkbox" id="checkbox-3" name="checkbox-name-3"> Option Three
+          </fd-form-label>
         </fd-form-item>
       </fd-form-group>
     </fieldset>

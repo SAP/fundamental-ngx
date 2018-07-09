@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FormLabelComponent {
     @Input() isRequired: boolean = false;
-    @Input() forValue:   string = '';
+    @Input() forValue: string = '';
 }
