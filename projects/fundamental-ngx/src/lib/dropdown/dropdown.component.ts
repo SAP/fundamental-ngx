@@ -17,7 +17,11 @@ export class DropdownComponent {
 
     @Input() size;
 
+    @Input() buttonText: string = '';
+
     @Input() isContextualMenu: boolean = false;
+
+    @Input() noBorder: boolean = false;
 
     isOpen = false;
 

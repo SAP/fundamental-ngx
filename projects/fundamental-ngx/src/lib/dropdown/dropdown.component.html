@@ -1,13 +1,17 @@
 <div class="fd-dropdown">
-  <ng-container *ngIf="isContextualMenu">
+  <ng-container *ngIf="isContextualMenu && buttonText.length === 0">
     <button [tabindex]="disabled ? -1 : 0" [attr.aria-controls]="id" [attr.aria-expanded]="isOpen"
       [attr.aria-label]="'More'" [attr.aria-disabled]="disabled" aria-haspopup="true" [ngClass]="{' fd-button fd-button--secondary fd-button--l sap-icon--vertical-grip' : true}">
-      <ng-content></ng-content>
     </button>
   </ng-container>
+  <ng-container *ngIf="isContextualMenu && buttonText.length !== 0">
+      <button [tabindex]="disabled ? -1 : 0" class="fd-button" [ngClass]="(noBorder ? ' fd-button--secondary' : '') " [attr.aria-controls]="id" [attr.aria-expanded]="isOpen"
+        [attr.aria-label]="'More'" [attr.aria-disabled]="disabled" aria-haspopup="true"> {{buttonText}}
+      </button>
+    </ng-container>
   <ng-container *ngIf="!isContextualMenu">
     <button [tabindex]="disabled ? -1 : 0" class="fd-dropdown__control fd-button--toolbar"
-      [attr.aria-controls]="id" [attr.aria-expanded]="isOpen" [attr.aria-disabled]="disabled" aria-haspopup="true" [ngClass]="(glyph ? 'sap-icon--' + glyph + ' ' : ' ') + (size ? 'fd-button--' + size : '')">
+      [attr.aria-controls]="id" [attr.aria-expanded]="isOpen" [attr.aria-disabled]="disabled" aria-haspopup="true" [ngClass]="(glyph ? 'sap-icon--' + glyph + ' ' : ' ') + (size ? 'fd-button--' + size : '') + (noBorder ? ' fd-dropdown__control--no-border' : '') ">
       <ng-content></ng-content>
     </button>
   </ng-container>
