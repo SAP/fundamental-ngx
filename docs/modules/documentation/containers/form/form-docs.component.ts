@@ -209,8 +209,8 @@ export class FormDocsComponent {
 
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'input-2'" [isRequired]="true">Required Input*</fd-form-label>
-        <input fd-form-control type="text" id="input-2" placeholder="Field placeholder text">
+        <fd-form-label [forValue]="'input-21'" [isRequired]="true">Required Input*</fd-form-label>
+        <input fd-form-control type="text" id="input-21" placeholder="Field placeholder text">
     </div>
 </div>
 
@@ -234,5 +234,4 @@ export class FormDocsComponent {
     </div>
   </fd-form-group>
 </fieldset>`;
-
 }

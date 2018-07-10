@@ -18,6 +18,7 @@ import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { ModalModule } from './modal/modal.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
+import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
 import { TileModule } from './tile/tile.module';
@@ -53,6 +54,7 @@ import { ModalService } from './modal/modal.service';
         ModalModule,
         PaginationModule,
         PanelModule,
+        SideNavigationModule,
         TableModule,
         TabsModule,
         TileModule,

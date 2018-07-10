@@ -1,0 +1,12 @@
+<a class="fd-side-nav__link " 
+   [ngClass]="{'has-child': hasSublist === true, 'is-selected': hasSublist === true && sublistIsOpen === true}" 
+   [attr.aria-haspopup]="hasSublist"
+   [attr.href]="url ? url : null" 
+   (click)="sublistIsOpen = !sublistIsOpen" 
+   [attr.aria-expanded]="sublistIsOpen && hasSublist === true"
+   style="cursor: pointer;">
+    <ng-content></ng-content>
+</a>
+<ul class="fd-side-nav__sublist" *ngIf="hasSublist" [attr.aria-hidden]="!sublistIsOpen">
+  <ng-content select="fd-side-nav-subitem"></ng-content>
+</ul>
