@@ -8,6 +8,4 @@ export class SideNavigationIconComponent {
     @Input() glyph: string;
 
     @Input() size: string;
-
-    @Input() presentation: string;
 }
