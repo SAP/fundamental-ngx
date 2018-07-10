@@ -10,9 +10,14 @@
 <h1>&lt;fd-breadcrumb&gt;</h1>
 <properties [properties]="{
   inputs: [
-    { name: 'url', description: '(Optional) Url the breadcrumb should link to.  Leave blank for the current page.'}
+    { name: 'url', description: '(Optional) Url the breadcrumb should link to.  Can not be used with routerLink simultaneously.  Leave blank for the current page.'},
+    { name: 'routerLink', description: '(Optional) RouterLink the breadcrumb should link to.  Can not be used with URL simultaneously.  Leave blank for the current page.'}
   ]
 }"></properties>
+<br>
+<span>
+  Instead of the [url] property, you may use any RouterLink properties on each breadcrumb item.  See the official <a href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.
+</span>
 
 <separator></separator>
 
@@ -20,7 +25,7 @@
   <div class="fd-tile__content">
     <fd-breadcrumb>
       <fd-breadcrumb-item [url]="'#'">Link Text</fd-breadcrumb-item>
-      <fd-breadcrumb-item [url]="'#'">Link Text</fd-breadcrumb-item>
+      <fd-breadcrumb-item [routerLink]="'#'" [queryParams]="'#'">Link Text</fd-breadcrumb-item>
       <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>
     </fd-breadcrumb>
   </div>
