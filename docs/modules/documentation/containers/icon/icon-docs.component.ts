@@ -1285,7 +1285,7 @@ export class IconDocsComponent implements OnInit {
             glyphs: 'accelerated'
         },
         modifier: {
-            block: 'default '
+            block: 'default'
         }
     };
 
