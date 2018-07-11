@@ -1,5 +1,6 @@
 <header>Icon</header>
-<description>Icons are used throughout the UI to save space, allow for visual clarity and focus, and for fun. Icons can be used adaptively if desired, but at this point they are used more as visual elements within other components.</description>
+<description>Icons are used throughout the UI to save space, allow for visual clarity and focus, and for fun. Icons can be used adaptively
+  if desired, but at this point they are used more as visual elements within other components.</description>
 <import module="IconModule" path="fundamental/icon/icon.module"></import>
 <separator></separator>
 
@@ -28,8 +29,6 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-icon
-    [glyph]="data.properties.glyphs"
-    [size]="data.modifier.block">
+  <fd-icon [glyph]="data.properties.glyphs" [size]="data.modifier.block">
   </fd-icon>
 </playground>
