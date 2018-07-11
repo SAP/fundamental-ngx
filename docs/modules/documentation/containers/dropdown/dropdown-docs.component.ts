@@ -660,6 +660,12 @@ export class DropdownDocsComponent {
                     label: {
                         type: 'string'
                     },
+                    buttonText: {
+                        type: 'string'
+                    },
+                    noBorder: {
+                        type: 'boolean'
+                    },
                     items: {
                         type: 'object',
                         properties: {
@@ -702,6 +708,8 @@ export class DropdownDocsComponent {
             glyph: '',
             size: 'default',
             label: 'test-label',
+            buttonText: '',
+            noBorder: false,
             items: {
                 optionOne: 'test option 1',
                 optionTwo: 'test option 2',
@@ -781,18 +789,41 @@ export class DropdownDocsComponent {
         '  <fd-dropdown-item>Suspendisse</fd-dropdown-item>\n' +
         '</fd-dropdown>';
 
-    contextualMenuDropdownHtml =
-        '<fd-dropdown [isContextualMenu]="true">\n' +
-        '  <fd-dropdown-item>Option 1</fd-dropdown-item>\n' +
-        '  <fd-dropdown-item>Option 2</fd-dropdown-item>\n' +
-        '  <fd-dropdown-item>Option 3</fd-dropdown-item>\n' +
-        '  <fd-dropdown-group>\n' +
-        '    <fd-dropdown-header>Group Header</fd-dropdown-header>\n' +
-        '    <fd-dropdown-item>Option 4</fd-dropdown-item>\n' +
-        '    <fd-dropdown-item>Option 5</fd-dropdown-item>\n' +
-        '    <fd-dropdown-item>Option 6</fd-dropdown-item>\n' +
-        '  </fd-dropdown-group>\n' +
-        '</fd-dropdown>';
+    contextualMenuDropdownHtml = `<fd-dropdown [isContextualMenu]="true">
+    <fd-dropdown-item>Option 1</fd-dropdown-item>
+    <fd-dropdown-item>Option 2</fd-dropdown-item>
+    <fd-dropdown-item>Option 3</fd-dropdown-item>
+    <fd-dropdown-group>
+        <fd-dropdown-header>Group Header</fd-dropdown-header>
+        <fd-dropdown-item>Option 4</fd-dropdown-item>
+        <fd-dropdown-item>Option 5</fd-dropdown-item>
+        <fd-dropdown-item>Option 6</fd-dropdown-item>
+    </fd-dropdown-group>
+</fd-dropdown>
+
+<fd-dropdown [isContextualMenu]="true" [buttonText]="'More'">
+    <fd-dropdown-item>Option 1</fd-dropdown-item>
+    <fd-dropdown-item>Option 2</fd-dropdown-item>
+    <fd-dropdown-item>Option 3</fd-dropdown-item>
+    <fd-dropdown-group>
+        <fd-dropdown-header>Group Header</fd-dropdown-header>
+        <fd-dropdown-item>Option 4</fd-dropdown-item>
+        <fd-dropdown-item>Option 5</fd-dropdown-item>
+        <fd-dropdown-item>Option 6</fd-dropdown-item>
+    </fd-dropdown-group>
+</fd-dropdown>
+
+<fd-dropdown [isContextualMenu]="true" [buttonText]="'More'" [noBorder]="true">
+    <fd-dropdown-item>Option 1</fd-dropdown-item>
+    <fd-dropdown-item>Option 2</fd-dropdown-item>
+    <fd-dropdown-item>Option 3</fd-dropdown-item>
+    <fd-dropdown-group>
+        <fd-dropdown-header>Group Header</fd-dropdown-header>
+        <fd-dropdown-item>Option 4</fd-dropdown-item>
+        <fd-dropdown-item>Option 5</fd-dropdown-item>
+        <fd-dropdown-item>Option 6</fd-dropdown-item>
+    </fd-dropdown-group>
+</fd-dropdown>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('dropdown');
