@@ -24,6 +24,7 @@ export class DocumentationComponent {
         { url: 'list', name: 'List' },
         { url: 'megaMenu', name: 'Mega Menu' },
         { url: 'modal', name: 'Modal' },
+        { url: 'navbar', name: 'Navbar' },
         { url: 'pagination', name: 'Pagination' },
         { url: 'panel', name: 'Panel' },
         { url: 'sideNavigation', name: 'Side Navigation' },

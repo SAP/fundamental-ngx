@@ -16,6 +16,7 @@ import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { ModalModule } from './modal/modal.module';
+import { NavbarModule } from './navbar/navbar.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
@@ -52,6 +53,7 @@ import { ModalService } from './modal/modal.service';
         ListModule,
         MegaMenuModule,
         ModalModule,
+        NavbarModule,
         PaginationModule,
         PanelModule,
         SideNavigationModule,

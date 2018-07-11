@@ -1,0 +1,75 @@
+<header>Navigation Bar</header>
+<description>The navigation bar (Navbar) component offers a similar navigation approach between Hybris applications. It allows for branding,
+  application groupings, access to a left navigation, switch between applications, contexts and access tooling such as search
+  or a users’ profile. </description>
+<import module="NavbarModule" path="fundamental/navbar/navbar.module"></import>
+
+<separator></separator>
+
+<h1>&lt;fd-navbar&gt;</h1>
+
+<properties [properties]="{
+  childComponents: [
+    { name: 'fd-navbar-group', description: 'Navigation bar group allows application grouping. The directive has two properties: \'position\' and \'hasLaunchpad\' '},
+    { name: 'fd-navbar-context-menu', description: 'Context grouping.'},
+    { name: 'fd-navbar-actions', description: 'Actions grouping.'}
+  ],
+  inputs: [
+  { name: 'position', description: 'The position of the group in the navigation bar. Oprions include \'left\' and \'right\'. For default (middle) leave empty.'},
+  { name: 'hasLaunchpad', description: 'When set to \'true\', renders a navigation group as a launchpad.'}
+]
+}">
+</properties>
+
+<separator></separator>
+<h2>Navbar</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-navbar>
+      <div fd-navbar-group [position]="'left'">
+        <div class="fd-global-nav__side-menu">
+          <button class=" fd-button--secondary fd-button--l sap-icon--menu2 fd-global-nav__btn" aria-label="BUTTON_LABEL"></button>
+        </div>
+        <div class="fd-global-nav__logo fd-has-margin-left-none"></div>
+        <div class="fd-global-nav__product-name">
+          Product Name
+        </div>
+      </div>
+
+      <div fd-navbar-group [hasLaunchpad]="true">
+        <button class=" fd-button--secondary fd-button--l" aria-haspopup="true" aria-controls="launchpad">Suite Name</button>
+      </div>
+
+      <div fd-navbar-group [position]="'right'">
+        <div fd-navbar-context-menu>
+          <fd-dropdown fd-dropdown-control-no-border>
+            Context Switcher
+            <fd-dropdown-item>Option 1</fd-dropdown-item>
+            <fd-dropdown-item>Option 2</fd-dropdown-item>
+            <fd-dropdown-item>Option 3</fd-dropdown-item>
+            <fd-dropdown-group>
+              <fd-dropdown-header>Group Header</fd-dropdown-header>
+              <fd-dropdown-item>Option 4</fd-dropdown-item>
+              <fd-dropdown-item>Option 5</fd-dropdown-item>
+              <fd-dropdown-item>Option 6</fd-dropdown-item>
+            </fd-dropdown-group>
+          </fd-dropdown>
+        </div>
+
+        <div fd-navbar-actions>
+          <div class="fd-global-nav__search">
+            <button class=" fd-button--secondary fd-button--m sap-icon--search fd-global-nav__btn" aria-label="BUTTON_LABEL" aria-controls="3Ac1t348"
+              aria-haspopup="true" aria-expanded="false"></button>
+            <input type="text" class="fd-form__control" id="3Ac1t348" aria-hidden="true" placeholder="Search... ">
+          </div>
+          <button class=" fd-button--secondary fd-button--m sap-icon--action-settings fd-global-nav__btn" aria-label="BUTTON_LABEL"></button>
+          <button class=" fd-button--secondary fd-button--m fd-global-nav__btn" aria-label="BUTTON_LABEL">
+            <span class=" fd-identifier--s fd-identifier--circle">WW</span>
+          </button>
+        </div>
+      </div>
+    </fd-navbar>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="navbarHtml"></code></pre>

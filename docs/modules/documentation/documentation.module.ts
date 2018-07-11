@@ -42,6 +42,7 @@ import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.com
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
 import { FormDocsComponent } from './containers/form/form-docs.component';
 import { SideNavigationDocsComponent } from './containers/side-navigation/side-navigation-docs.component';
+import { NavbarDocsComponent } from './containers/navbar/navbar-docs.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -77,6 +78,7 @@ const ROUTES: Routes = [
             { path: 'list', component: ListDocsComponent },
             { path: 'megaMenu', component: MegaMenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
+            { path: 'navbar', component: NavbarDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'sideNavigation', component: SideNavigationDocsComponent },
@@ -125,6 +127,7 @@ const ROUTES: Routes = [
         SideNavigationDocsComponent,
         MegaMenuDocsComponent,
         TileDocsComponent,
+        NavbarDocsComponent,
         InstallationDocsComponent,
         UsageDocsComponent
     ],
