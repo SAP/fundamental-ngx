@@ -8,7 +8,7 @@ export class SideNavigationDocsComponent implements OnInit {
     oneLevelSideNavHtml = `<fd-side-nav>
   <fd-side-nav-list>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+      <fd-side-nav-link [routerLink]="'#'" [queryParams]="'#'">Link Item</fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
       <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>

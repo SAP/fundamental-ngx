@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'fd-breadcrumb-item',
@@ -9,13 +8,13 @@ import { Router } from '@angular/router';
     templateUrl: './breadcrumb-item.component.html'
 })
 export class BreadcrumbItemComponent {
-    constructor(private router: Router) {}
-
     @Input() url: string;
 
-    getCursor(url) {
+    @Input() routerLink;
+
+    getCursor() {
         let retVal = 'text';
-        if (url) {
+        if (this.url || this.routerLink) {
             retVal = 'pointer';
         }
         return retVal;
