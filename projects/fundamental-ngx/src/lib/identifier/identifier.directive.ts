@@ -1,14 +1,13 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, ElementRef, Inject, Input } from '@angular/core';
+import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
 
 @Directive({
     selector: '[fd-identifier]',
     host: {
-        '[class]':
-            '((size) ? " fd-identifier--" + size : "") + ((circle) ? " fd-identifier--circle" : "") + ((transparent) ? " fd-identifier--transparent" : "") + ((colorAccent) ? " fd-has-background-color-accent-" + colorAccent : "") + ((glyph) ? " sap-icon--" + glyph : "") ',
         role: 'presentation'
     }
 })
-export class IdentifierDirective {
+export class IdentifierDirective extends CustomClassBaseComponent {
     @Input() size: string = '';
 
     @Input() circle: boolean = false;
@@ -18,4 +17,26 @@ export class IdentifierDirective {
     @Input() colorAccent;
 
     @Input() glyph: string = '';
+
+    _setProperties() {
+        if (this.size) {
+            this._addClassToElement('fd-identifier--' + this.size);
+        }
+        if (this.circle) {
+            this._addClassToElement('fd-identifier--circle');
+        }
+        if (this.transparent) {
+            this._addClassToElement('fd-identifier--transparent');
+        }
+        if (this.colorAccent) {
+            this._addClassToElement('fd-has-background-color-accent-' + this.colorAccent);
+        }
+        if (this.glyph) {
+            this._addClassToElement('sap-icon--' + this.glyph);
+        }
+    }
+
+    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+        super(elementRef);
+    }
 }
