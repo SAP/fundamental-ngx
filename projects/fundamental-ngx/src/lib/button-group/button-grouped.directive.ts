@@ -2,11 +2,7 @@ import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
 
 @Directive({
-    selector: '[fd-button-grouped]',
-    host: {
-        '[class]':
-            '"fd-button--grouped" + (size ? " fd-button--" + size : "") + (glyph ? " sap-icon--" + glyph : "") + (compact ? " fd-button--compact" : "") + (state ? " is-" + state : "")'
-    }
+    selector: '[fd-button-grouped]'
 })
 export class ButtonGroupedDirective extends CustomClassBaseComponent {
     @Input() id: string;
