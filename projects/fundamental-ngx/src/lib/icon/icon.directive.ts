@@ -1,4 +1,5 @@
-import { Directive, Input, ElementRef } from '@angular/core';
+import { Directive, Input, ElementRef, Inject } from '@angular/core';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 export type IconSize = 's' | '' | 'm' | 'l' | 'xl';
 
@@ -14,37 +15,22 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
         role: 'presentation'
     }
 })
-export class IconDirective {
-    private _elementRef: ElementRef;
-
-    constructor(elementRef: ElementRef) {
-        this._elementRef = elementRef;
-        this._addClassToIcon(BASE_ICON_CLASS);
-        this._setProperties();
-    }
+export class IconDirective extends AbstractCustomClassManager {
     @Input() glyph;
 
     @Input() size: IconSize = '';
 
-    _addClassToIcon(classname: string) {
-        (this._elementRef.nativeElement as HTMLElement).classList.add(classname);
-    }
-
-    ngOnInit() {
-        this._setProperties();
-    }
-
     _setProperties() {
         if (this.glyph) {
-            this._addClassToIcon(PREFIX_ICON_CLASS + this.glyph);
+            this._addClassToElement(PREFIX_ICON_CLASS + this.glyph);
         }
 
         if (this.size) {
-            this._addClassToIcon(PREFIX_ICON_CLASS + this.size);
+            this._addClassToElement(PREFIX_ICON_CLASS + this.size);
         }
     }
 
-    ngOnChanges() {
-        this._setProperties();
+    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+        super(elementRef);
     }
 }
