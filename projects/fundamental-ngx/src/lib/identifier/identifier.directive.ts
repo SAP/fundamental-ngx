@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 @Directive({
     selector: '[fd-identifier]',
@@ -7,7 +7,7 @@ import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
         role: 'presentation'
     }
 })
-export class IdentifierDirective extends CustomClassBaseComponent {
+export class IdentifierDirective extends AbstractCustomClassManager {
     @Input() size: string = '';
 
     @Input() circle: boolean = false;

@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 @Directive({
     selector: 'fd-tile-grid'
 })
-export class TileGridDirective extends CustomClassBaseComponent {
+export class TileGridDirective extends AbstractCustomClassManager {
     @Input() col;
 
     _setProperties() {

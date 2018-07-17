@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, Input } from '@angular/core';
-import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 @Component({
     selector: 'fd-tile',
@@ -8,7 +8,7 @@ import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
     },
     templateUrl: './tile.component.html'
 })
-export class TileComponent extends CustomClassBaseComponent {
+export class TileComponent extends AbstractCustomClassManager {
     @Input() disabled: boolean = false;
 
     @Input() isButton: boolean = false;

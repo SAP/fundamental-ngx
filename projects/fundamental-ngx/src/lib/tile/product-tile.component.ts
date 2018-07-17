@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, Input } from '@angular/core';
-import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 @Component({
     selector: 'fd-product-tile',
@@ -8,7 +8,7 @@ import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
     },
     templateUrl: './product-tile.component.html'
 })
-export class ProductTileComponent extends CustomClassBaseComponent {
+export class ProductTileComponent extends AbstractCustomClassManager {
     @Input() disabled: boolean = false;
 
     @Input() isButton: boolean = false;

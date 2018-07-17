@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { CustomClassBaseComponent } from '../utils/custom-class-base-component';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 @Directive({
     selector: '[fd-button]'
 })
-export class ButtonDirective extends CustomClassBaseComponent {
+export class ButtonDirective extends AbstractCustomClassManager {
     @Input() size;
 
     @Input() glyph;
