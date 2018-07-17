@@ -15,7 +15,7 @@
       <ng-content></ng-content>
     </button>
   </ng-container>
-  <nav class="fd-dropdown__menu" [attr.aria-hidden]="(this.disabled === true ? true : !isOpen)" [id]="id" [ngClass]="(isContextualMenu ? ' fd-contextual-menu' : '')">
+  <nav class="fd-dropdown__menu" [attr.aria-hidden]="(this.disabled === true ? true : !isOpen)" [id]="(id + '--items')" [ngClass]="(isContextualMenu ? ' fd-contextual-menu' : '')">
     <ul class="fd-dropdown__list">
       <ng-content select="fd-dropdown-item"></ng-content>
       <ng-content select="fd-dropdown-group"></ng-content>
