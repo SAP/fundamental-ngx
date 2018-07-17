@@ -1,10 +1,10 @@
 import { Directive, Inject, ElementRef, Input } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 @Directive({
     selector: '[fd-form-item]'
 })
-export class FormItemComponent extends AbstractCustomClassManager {
+export class FormItemComponent extends AbstractCustomStyleManager {
     @Input() isCheck: boolean = false;
     @Input() isInline: boolean = false;
 

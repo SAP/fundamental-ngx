@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 @Component({
     selector: 'fd-product-tile',
@@ -8,7 +8,7 @@ import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager'
     },
     templateUrl: './product-tile.component.html'
 })
-export class ProductTileComponent extends AbstractCustomClassManager {
+export class ProductTileComponent extends AbstractCustomStyleManager {
     @Input() disabled: boolean = false;
 
     @Input() isButton: boolean = false;

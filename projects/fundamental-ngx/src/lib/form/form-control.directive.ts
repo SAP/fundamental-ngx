@@ -1,10 +1,10 @@
 import { Directive, Input, ElementRef, Inject } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 @Directive({
     selector: '[fd-form-control]'
 })
-export class FormControlDirective extends AbstractCustomClassManager {
+export class FormControlDirective extends AbstractCustomStyleManager {
     @Input() state: string = '';
 
     _setProperties() {

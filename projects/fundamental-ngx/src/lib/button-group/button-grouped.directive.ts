@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 @Directive({
     selector: '[fd-button-grouped]'
 })
-export class ButtonGroupedDirective extends AbstractCustomClassManager {
+export class ButtonGroupedDirective extends AbstractCustomStyleManager {
     @Input() id: string;
 
     @Input() size: string;

@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 @Directive({
     selector: '[fd-identifier]',
@@ -7,7 +7,7 @@ import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager'
         role: 'presentation'
     }
 })
-export class IdentifierDirective extends AbstractCustomClassManager {
+export class IdentifierDirective extends AbstractCustomStyleManager {
     @Input() size: string = '';
 
     @Input() circle: boolean = false;

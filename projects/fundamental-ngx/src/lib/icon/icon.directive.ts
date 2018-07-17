@@ -1,5 +1,5 @@
 import { Directive, Input, ElementRef, Inject } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 export type IconSize = 's' | '' | 'm' | 'l' | 'xl';
 
@@ -15,7 +15,7 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
         role: 'presentation'
     }
 })
-export class IconDirective extends AbstractCustomClassManager {
+export class IconDirective extends AbstractCustomStyleManager {
     @Input() glyph;
 
     @Input() size: IconSize = '';

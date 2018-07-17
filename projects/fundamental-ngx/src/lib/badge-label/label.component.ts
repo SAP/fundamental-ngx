@@ -1,11 +1,11 @@
 import { Component, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
 
 @Component({
     selector: 'fd-label',
     templateUrl: './badge-label.component.html'
 })
-export class LabelComponent extends AbstractCustomClassManager {
+export class LabelComponent extends AbstractCustomStyleManager {
     @Input() status;
 
     _setProperties() {
