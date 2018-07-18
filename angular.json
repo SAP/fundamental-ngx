@@ -18,7 +18,6 @@
                         "polyfills": "docs/polyfills.ts",
                         "assets": ["docs/assets", "docs/favicon.ico"],
                         "styles": [
-                            "node_modules/normalize.css/normalize.css",
                             "node_modules/fundamental-ui/dist/fundamental-ui.css",
                             "docs/styles.scss"
                         ],
@@ -90,7 +89,6 @@
                         "tsConfig": "docs/tsconfig.spec.json",
                         "scripts": [],
                         "styles": [
-                            "node_modules/normalize.css/normalize.css",
                             "node_modules/fundamental-ui/dist/fundamental-ui.css",
                             "docs/styles.scss"
                         ],
