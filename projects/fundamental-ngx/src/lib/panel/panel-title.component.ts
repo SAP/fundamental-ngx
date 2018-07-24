@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
     },
     templateUrl: './panel-title.component.html'
 })
-export class PanelTitleComponent  {}
+export class PanelTitleComponent {}
