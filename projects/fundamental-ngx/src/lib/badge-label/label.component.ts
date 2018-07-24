@@ -26,11 +26,11 @@ export class LabelComponent extends AbstractCustomClassManager {
                 this._addClassToElement('sap-icon--' + this.icon);
             }
         } else {
-            this._addClassToElement('fd-label');    
-            if (this.status) {  
-                this._addClassToElement('fd-label--' + this.status);
+            this._addClassToElement('fd-label');
+        if (this.status) {
+              this._addClassToElement('fd-label--' + this.status);
             }
-        } 
+        }
     }
 
     constructor(@Inject(ElementRef) elementRef: ElementRef) {

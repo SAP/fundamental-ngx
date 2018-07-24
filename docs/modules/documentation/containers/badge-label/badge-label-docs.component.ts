@@ -725,5 +725,5 @@ export class BadgeLabelDocsComponent implements OnInit {
         this.data = data;
     }
 
-    ngOnInit() { }
+    ngOnInit() {}
 }
