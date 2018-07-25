@@ -29,7 +29,7 @@ backButtonHtml = `<fd-action-bar>
     <fd-action-bar-actions>
         <button fd-button type="primary">Cancel</button>
         <button fd-button type="main">Save</button>
-    </fd-action-bar-    actions>
+    </fd-action-bar-actions>
 </fd-action-bar>`;
 
     actionsContextualMenuHtml = `<fd-action-bar>
@@ -47,7 +47,7 @@ backButtonHtml = `<fd-action-bar>
     </fd-action-bar-actions>
 </fd-action-bar>`;
 
-    mobileViewHtml = `<fd-action-bar-    mobile>
+    mobileViewHtml = `<fd-action-bar-mobile>
     <fd-action-bar>
         <fd-action-bar-back>
             <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
