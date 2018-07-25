@@ -10,7 +10,7 @@ export class DocumentationComponent {
     components: any = [
         { url: 'action-bar', name: 'Action Bar' },
         { url: 'alert', name: 'Alert' },
-        { url: 'badgeLabel', name: 'Badge and Label' },
+        { url: 'badgeLabel', name: 'Badge, Status & Label' },
         { url: 'breadcrumb', name: 'Breadcrumb' },
         { url: 'button', name: 'Button' },
         { url: 'buttonGroup', name: 'Button Group' },
