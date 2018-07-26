@@ -96,6 +96,19 @@ export class TabsDocsComponent implements OnInit {
         '  </fd-tab>\n' +
         '</fd-tab-list>';
 
+    selectTabByIdHtml =
+        '<fd-tab-list #tabList>\n' +
+        '  <fd-tab id="tab1" title="Tab 1">\n' +
+        '    Tab 1\n' +
+        '  </fd-tab>\n' +
+        '  <fd-tab id="tab2" title="Tab 2">\n' +
+        '    Tab 2\n' +
+        '  </fd-tab>\n' +
+        '</fd-tab-list>\n' +
+        '<button fd-button type="main" (click)="this.tabList.select(\'tab2\')">\n' +
+        '  Select Tab 2\n' +
+        '</button>';
+
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tabs');
     }

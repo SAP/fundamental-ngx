@@ -1,9 +1,10 @@
-import { Directive, Component, Input, HostListener } from '@angular/core';
+import { Component, Input, HostListener, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'fd-dropdown',
     host: {
-        class: 'fd-dropdown'
+        class: 'fd-dropdown',
+        '(document:click)': 'documentClick($event)'
     },
     templateUrl: './dropdown.component.html'
 })
@@ -16,16 +17,33 @@ export class DropdownComponent {
 
     @Input() size;
 
+    @Input() buttonText: string = '';
+
     @Input() isContextualMenu: boolean = false;
+
+    @Input() noBorder: boolean = false;
 
     isOpen = false;
 
-    open() {
-        this.isOpen = true;
+    dropdownClicked() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.isOpen = true;
+        }
     }
 
     close() {
         this.isOpen = false;
+    }
+
+    documentClick($event) {
+        const target = $event.target;
+        if (this.eRef.nativeElement.contains(target)) {
+            this.dropdownClicked();
+        } else {
+            this.close();
+        }
     }
 
     @HostListener('document:keydown.escape', ['$event'])
@@ -34,4 +52,6 @@ export class DropdownComponent {
             this.close();
         }
     }
+
+    constructor(private eRef: ElementRef) {}
 }

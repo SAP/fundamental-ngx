@@ -10,11 +10,16 @@ export class ModalService {
 
     constructor(private modalService: NgbModal) {}
 
-    close() {
-        this.modalRef.close();
+    close(): any {
+        return this.modalRef.close();
     }
 
-    open(modalType) {
+    dismiss(): any {
+        return this.modalRef.dismiss();
+    }
+
+    open(modalType): any {
         this.modalRef = this.modalService.open(modalType);
+        return this.modalRef;
     }
 }

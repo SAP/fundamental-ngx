@@ -1,0 +1,328 @@
+<header>Form</header>
+<description>Form elements include field layout, checkboxes, radio buttons and states of a field. Use these components along with inline
+  help and error state.</description>
+<import module="FormModule" path="fundamental/form/form.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-form-set&gt;</h1>
+
+<properties [properties]="{
+  childComponents: [
+    { name: 'fd-form-item', description: 'An item of the form set.'},
+    { name: 'fd-form-label', description: 'Label for the input field.'},
+    { name: 'fd-form-control', description: 'Adds styling for textual form controls like \'<input>\', \'<select>\', and \'<textarea>\'.'},
+    { name: 'fd-form-legend', description: 'Defines a caption for the fieldset element.'},
+    { name: 'fd-form-message', description: 'Message displayed below the field.'}
+  ],
+  inputs: [
+    { name: 'forValue', description: 'This attribute is used to specify which form element the label is bound to.'},
+    { name: 'isRequired', description: 'Specifies a required field. The label is displayed in bold and noted by an asterisk (*) '},
+    { name: 'type', description: 'Specifies the type of the form-message. Options include \'error\', \'warning\', and \'help\'. '},
+    { name: 'state', description: 'Specifies the state of the input field. Options include \'normal\', \'valid\', \'invalid\', and \'warning\'. '},
+    { name: 'isCheck', description: 'When set to \'true\', allows the form-items to be displayed as radio buttons and checkboxes.'},
+    { name: 'isInline', description: 'When set to \'true\', the component is displayed in a row.'}
+  ]
+}"></properties>
+
+<separator></separator>
+<h2>Inputs</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'input-1'">Default Input</fd-form-label>
+        <input fd-form-control type="text" id="input-1" placeholder="Field placeholder text">
+      </div>
+    </div>
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'input-2'" [isRequired]="true">Required Input*</fd-form-label>
+        <input fd-form-control type="text" id="input-2" placeholder="Field placeholder text">
+      </div>
+    </div>
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'input-3'" [isRequired]="true">Password*</fd-form-label>
+        <input fd-form-control type="password" id="input-3" placeholder="Field placeholder text">
+      </div>
+    </div>
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'textarea-1'">Text area</fd-form-label>
+        <textarea fd-form-control id="textarea-1">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc.</textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="inputsFormHtml"></code></pre>
+
+<separator></separator>
+<h2>Inputs help elements</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'input-41'">
+          Input with inline help
+          <span class="fd-inline-help fd-has-float-right">
+            <span class="fd-inline-help__content fd-inline-help__content--bottom-right">
+              Lorem ipsum dolor sit amet, consectetur adipiscing.
+            </span>
+          </span>
+        </fd-form-label>
+        <input fd-form-control type="text" id="input-41">
+      </div>
+    </div>
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'input-42'">
+          Input with help message
+        </fd-form-label>
+        <input fd-form-control type="text" id="input-42">
+        <fd-form-message [type]="'help'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+      </div>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="inputsHelpFormHtml"></code></pre>
+
+<separator></separator>
+<h2>Input States</h2>
+<p>The state of the input field can reflect validity of the data entered, whether the input data is editable or disabled.
+  <br>
+  <b>Normal:</b> The field is editable but no validation has occurred.
+  <br>
+  <b>Valid:</b> The data format entered has been validated and it’s correct, such as an email address.
+  <br>
+  <b>Invalid:</b> The data entered is not valid and must be corrected.
+  <br>
+  <b>Warning:</b> The data entered is formatted correctly but there are other issues are problematic but will not stop the user
+  from moving forward.
+  <br>
+  <b>Disabled:</b> This indicates the field is not editable. A common use case is that this field is dependent on a previous
+  entry or selection within the form.
+  <br>
+  <b>Read Only:</b> Used to display static information in the context of a form.
+  <br>
+  <br> Along with Invalid and Warning, error messages should be displayed below the field so the user can correct the error and
+  move forward.
+</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div fd-form-item>
+      <fd-form-label [forValue]="'input-51'">
+        Normal Input
+      </fd-form-label>
+      <input fd-form-control type="text" id="input-51" placeholder="Field placeholder text">
+      <fd-form-message>Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+    </div>
+    <div fd-form-item>
+      <fd-form-label [forValue]="'input-52'">
+        Valid Input
+      </fd-form-label>
+      <input fd-form-control [state]="'valid'" type="text" id="input-52">
+    </div>
+    <div fd-form-item>
+      <fd-form-label [forValue]="'input-53'">
+        Invalid Input
+      </fd-form-label>
+      <input fd-form-control [state]="'invalid'" type="text" id="input-53" placeholder="Field placeholder text">
+      <fd-form-message [type]="'error'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+    </div>
+    <div fd-form-item>
+      <fd-form-label [forValue]="'input-54'">
+        Warning Input
+      </fd-form-label>
+      <input fd-form-control [state]="'warning'" type="text" id="input-54" placeholder="Field placeholder text">
+      <fd-form-message [type]="'warning'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+    </div>
+    <div fd-form-item>
+      <fd-form-label [forValue]="'input-55'">
+        Disables Input
+      </fd-form-label>
+      <input fd-form-control type="text" id="input-55" placeholder="Field placeholder text" disabled>
+    </div>
+    <div fd-form-item>
+      <fd-form-label [forValue]="'input-56'">
+        Readonly Input
+      </fd-form-label>
+      <input fd-form-control type="text" id="input-56" placeholder="Field placeholder text" readonly>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="inputStatesFormHtml"></code></pre>
+
+<separator></separator>
+<h2>Select</h2>
+<p>The Select component is similar to a dropdown but is more commonly used within a form. It can also be set to a disabled state.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'select-1'">
+          Default Select
+        </fd-form-label>
+        <select fd-form-control id="select-1" name="">
+          <option value="1">Duis malesuada odio volutpat elementum</option>
+          <option value="2">Suspendisse ante ligula</option>
+          <option value="3">Sed bibendum sapien at posuere interdum</option>
+        </select>
+      </div>
+    </div>
+    <div fd-form-set>
+      <div fd-form-item>
+        <fd-form-label [forValue]="'select-2'">
+          Disabled Select
+        </fd-form-label>
+        <select fd-form-control id="select-2" name="" disabled>
+          <option value="1">Duis malesuada odio volutpat elementum</option>
+          <option value="2">Suspendisse ante ligula</option>
+          <option value="3">Sed bibendum sapien at posuere interdum</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="selectFormHtml"></code></pre>
+
+<separator></separator>
+<h2>Radio buttons</h2>
+<p>Radio buttons allow the user to see all options and select one. Generally, this is used when there are between 2-3 options.
+  This component can also be disabled and displayed in a row.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+
+    <fieldset fd-form-set>
+      <fd-form-legend>Radio buttons</fd-form-legend>
+      <fd-form-group>
+        <div fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-1" name="radio-name-1" value="" checked>
+          <fd-form-label [forValue]="'radio-1'">Option One</fd-form-label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-2" name="radio-name-1" value="">
+          <fd-form-label [forValue]="'radio-2'">Option Two</fd-form-label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-3" name="radio-name-1" value="">
+          <fd-form-label [forValue]="'radio-3'">Option Three</fd-form-label>
+        </div>
+      </fd-form-group>
+    </fieldset>
+
+    <fieldset fd-form-set>
+      <fd-form-legend>Radio buttons disabled</fd-form-legend>
+      <fd-form-group>
+        <div fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-4" name="radio-name-2" value="" checked disabled>
+          <fd-form-label [forValue]="'radio-4'">Option One</fd-form-label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-5" name="radio-name-2" value="" disabled>
+          <fd-form-label [forValue]="'radio-5'">Option Two</fd-form-label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+          <input fd-form-control type="radio" id="radio-6" name="radio-name-2" value="" disabled>
+          <fd-form-label [forValue]="'radio-6'">Option Three</fd-form-label>
+        </div>
+      </fd-form-group>
+    </fieldset>
+
+    <fieldset fd-form-set>
+      <fd-form-legend>Inline Radio buttons</fd-form-legend>
+      <fd-form-group>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'radio-7'">
+            <input fd-form-control type="radio" id="radio-7" name="radio-name-3" value="" checked> Option One
+          </fd-form-label>
+        </div>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'radio-8'">
+            <input fd-form-control type="radio" id="radio-8" name="radio-name-3" value=""> Option Two
+          </fd-form-label>
+        </div>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'radio-9'">
+            <input fd-form-control type="radio" id="radio-9" name="radio-name-3" value=""> Option Three
+          </fd-form-label>
+        </div>
+      </fd-form-group>
+    </fieldset>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="radioButtonsFormHtml"></code></pre>
+
+<separator></separator>
+<h2>Checkbox</h2>
+<p>With checkboxes, all options are visible and the user can make one or more selections. This component can be set disabled
+  and also displayed in a row.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fieldset fd-form-set>
+      <fd-form-legend>Checkboxes</fd-form-legend>
+      <div fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-1" name="checkbox-name-1" checked>
+        <fd-form-label [forValue]="'checkbox-1'">Option One</fd-form-label>
+      </div>
+      <div fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-2" name="checkbox-name-1">
+        <fd-form-label [forValue]="'checkbox-2'">Option Two</fd-form-label>
+      </div>
+      <div fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-3" name="checkbox-name-1">
+        <fd-form-label [forValue]="'checkbox-3'">Option Three</fd-form-label>
+      </div>
+    </fieldset>
+
+    <fieldset fd-form-set>
+      <fd-form-legend>Checkboxes disabled</fd-form-legend>
+      <div fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-4" name="checkbox-name-2" disabled>
+        <fd-form-label [forValue]="'checkbox-4'">Option One</fd-form-label>
+      </div>
+      <div fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-5" name="checkbox-name-2" checked disabled>
+        <fd-form-label [forValue]="'checkbox-5'">Option Two</fd-form-label>
+      </div>
+      <div fd-form-item [isCheck]="true">
+        <input fd-form-control type="checkbox" id="checkbox-6" name="checkbox-name-2" disabled>
+        <fd-form-label [forValue]="'checkbox-6'">Option Three</fd-form-label>
+      </div>
+    </fieldset>
+
+    <div fd-form-set>
+        <div fd-form-item>
+            <fd-form-label [forValue]="'input-21'" [isRequired]="true">Required Input*</fd-form-label>
+            <input fd-form-control type="text" id="input-21" placeholder="Field placeholder text">
+        </div>
+    </div>
+
+    <fieldset fd-form-set>
+      <fd-form-legend>Checkboxes inline</fd-form-legend>
+      <fd-form-group>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'checkbox-7'">
+            <input fd-form-control type="checkbox" id="checkbox-7" name="checkbox-name-3" checked> Option One
+          </fd-form-label>
+        </div>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'checkbox-8'">
+            <input fd-form-control type="checkbox" id="checkbox-8" name="checkbox-name-3"> Option Two
+          </fd-form-label>
+        </div>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+          <fd-form-label [forValue]="'checkbox-9'">
+            <input fd-form-control type="checkbox" id="checkbox-9" name="checkbox-name-3"> Option Three
+          </fd-form-label>
+        </div>
+      </fd-form-group>
+    </fieldset>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="checkboxFormHtml"></code></pre>

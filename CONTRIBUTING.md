@@ -81,7 +81,7 @@ We ask that you adhere to our coding style as best you can when submitting code.
 1.  Make sure the issue you've filed on our [issue tracker] has the label "contribution welcome" - otherwise, it is not ready to be worked on
 2.  Fork the Fundamental NGX repository to your GitHub account
 3.  Create a branch for your issue or feature and commit/push your changes on that branch
-4.  Please squash your commits into one commit and provide a summary of the changes in the commit message.  Also, please adhere to the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
+4.  Please adhere to the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
 5.  Create a Pull Request from your forked repository to github.com/SAP/fundamental-ngx.  In the subject of the pull request, briefly describe the bug fix or enhancement you're contributing.  In the pull request description, please provide a link to the issue from our issue tracker
 6.  Follow the link posted by the CLA assistant to your pull request and accept it, as described in detail above.
 7.  Wait for our code review and approval.  We may ask you for additional commits, or make changes to your pull request ourselves
