@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Inject } from '@angular/core';
+import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
 
 @Component({
     selector: 'fd-action-bar-header',
-    host: {
-        class: 'fd-action-bar__header'
-    },
     templateUrl: './action-bar-header.component.html'
 })
-export class ActionBarHeaderComponent {}
+export class ActionBarHeaderComponent extends AbstractCustomClassManager {
+    
+    _setProperties() {
+        this._addClassToElement('fd-action-bar__header');
+    }
+
+    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+        super(elementRef);
+    }
+}
