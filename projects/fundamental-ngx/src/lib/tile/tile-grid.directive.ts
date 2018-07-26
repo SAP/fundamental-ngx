@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractCustomStyleManager } from '../utils/abstract-custom-style-manager';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Directive({
     selector: 'fd-tile-grid'
 })
-export class TileGridDirective extends AbstractCustomStyleManager {
+export class TileGridDirective extends AbstractFdNgxClass {
     @Input() col;
 
     _setProperties() {

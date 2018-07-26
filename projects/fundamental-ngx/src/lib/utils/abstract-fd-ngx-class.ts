@@ -7,7 +7,7 @@ import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
  overwritten.  By extending this class, we instead add library styles to the user's classList rather than replace them.
  */
 
-export abstract class AbstractCustomStyleManager implements OnInit, OnChanges {
+export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     private _elementRef: ElementRef;
 
     @Input() class; // user's custom classes
