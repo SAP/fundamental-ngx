@@ -6,27 +6,24 @@ import { Component } from '@angular/core';
 })
 export class PopoverDocsComponent {
     
-    popoverExampleHtml =`<fd-popover [id]="'id_1'">
+    popoverExampleHtml =`  <fd-popover [id]="'id_1'">
     <fd-popover-control>
       <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
     </fd-popover-control>
     <fd-popover-body>
-      <nav class="fd-menu">
-        <ul class="fd-menu__list">
-          <li>
-            <a href="#" class="fd-menu__item">Option 1</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 2</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 3</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 4</a>
-          </li>
-        </ul>
-      </nav>
+      <fd-menu>
+        <fd-menu-list>
+          <fd-menu-item [url]="'#'">
+            Option 1
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 2
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 3
+          </fd-menu-item>
+        </fd-menu-list>
+      </fd-menu>
     </fd-popover-body>
   </fd-popover>
 
@@ -35,22 +32,19 @@ export class PopoverDocsComponent {
       <fd-icon [glyph]="'menu2'" size="l"></fd-icon>
     </fd-popover-control>
     <fd-popover-body>
-      <nav class="fd-menu">
-        <ul class="fd-menu__list">
-          <li>
-            <a href="#" class="fd-menu__item">Option 1</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 2</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 3</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 4</a>
-          </li>
-        </ul>
-      </nav>
+      <fd-menu>
+        <fd-menu-list>
+          <fd-menu-item [url]="'#'">
+            Option 1
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 2
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 3
+          </fd-menu-item>
+        </fd-menu-list>
+      </fd-menu>
     </fd-popover-body>
   </fd-popover>
 
@@ -59,22 +53,19 @@ export class PopoverDocsComponent {
       <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]='3'></span>
     </fd-popover-control>
     <fd-popover-body>
-      <nav class="fd-menu">
-        <ul class="fd-menu__list">
-          <li>
-            <a href="#" class="fd-menu__item">Option 1</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 2</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 3</a>
-          </li>
-          <li>
-            <a href="#" class="fd-menu__item">Option 4</a>
-          </li>
-        </ul>
-      </nav>
+      <fd-menu>
+        <fd-menu-list>
+          <fd-menu-item [url]="'#'">
+            Option 1
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 2
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 3
+          </fd-menu-item>
+        </fd-menu-list>
+      </fd-menu>
     </fd-popover-body>
   </fd-popover>`;
 

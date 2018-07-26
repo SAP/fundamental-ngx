@@ -1,6 +1,6 @@
 <header>Popover</header>
-<description>The popover is a wrapping component containing a control element that triggers the interaction form and a popover body displayed on the page after triggering the popover. 
-  Only one popover is displayed on the page at any given time. 
+<description>The popover is a wrapping component containing a control element that triggers the interaction form and a popover body displayed
+  on the page after triggering the popover. Only one popover is displayed on the page at any given time.
 </description>
 <import module="PopoverModule" path="fundamental/popover/popover.module"></import>
 <separator></separator>
@@ -14,7 +14,7 @@
     { name: '<fd-popover-body>', description: 'Wrapper that contains the popover content.' }
   ],
   inputs: [
-    { name: 'id', description: '(optional) ID of the element' }
+    { name: 'id', description: 'ID of the element' }
   ]
 }"></properties>
 <separator></separator>
@@ -27,22 +27,19 @@
         <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
       </fd-popover-control>
       <fd-popover-body>
-        <nav class="fd-menu">
-          <ul class="fd-menu__list">
-            <li>
-              <a href="#" class="fd-menu__item">Option 1</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 2</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 3</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 4</a>
-            </li>
-          </ul>
-        </nav>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
       </fd-popover-body>
     </fd-popover>
 
@@ -51,22 +48,19 @@
         <fd-icon [glyph]="'menu2'" size="l"></fd-icon>
       </fd-popover-control>
       <fd-popover-body>
-        <nav class="fd-menu">
-          <ul class="fd-menu__list">
-            <li>
-              <a href="#" class="fd-menu__item">Option 1</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 2</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 3</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 4</a>
-            </li>
-          </ul>
-        </nav>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
       </fd-popover-body>
     </fd-popover>
 
@@ -75,22 +69,19 @@
         <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]='3'></span>
       </fd-popover-control>
       <fd-popover-body>
-        <nav class="fd-menu">
-          <ul class="fd-menu__list">
-            <li>
-              <a href="#" class="fd-menu__item">Option 1</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 2</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 3</a>
-            </li>
-            <li>
-              <a href="#" class="fd-menu__item">Option 4</a>
-            </li>
-          </ul>
-        </nav>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
       </fd-popover-body>
     </fd-popover>
   </div>
