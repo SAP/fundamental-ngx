@@ -20,6 +20,7 @@ import { ModalModule } from './modal/modal.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
+import { PopoverModule } from './popover/popover.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
@@ -58,6 +59,7 @@ import { ModalService } from './modal/modal.service';
         NavbarModule,
         PaginationModule,
         PanelModule,
+        PopoverModule,
         SideNavigationModule,
         TableModule,
         TabsModule,
