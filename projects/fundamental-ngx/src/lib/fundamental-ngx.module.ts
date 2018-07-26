@@ -15,6 +15,7 @@ import { InlineHelpModule } from './inline-help/inline-help.module';
 import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
+import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { PaginationModule } from './pagination/pagination.module';
@@ -52,6 +53,7 @@ import { ModalService } from './modal/modal.service';
         InputGroupModule,
         ListModule,
         MegaMenuModule,
+        MenuModule,
         ModalModule,
         NavbarModule,
         PaginationModule,

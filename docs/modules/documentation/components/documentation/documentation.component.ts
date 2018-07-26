@@ -23,6 +23,7 @@ export class DocumentationComponent {
         { url: 'inputGroup', name: 'Input Group' },
         { url: 'list', name: 'List' },
         { url: 'megaMenu', name: 'Mega Menu' },
+        { url: 'menu', name: 'Menu' },
         { url: 'modal', name: 'Modal' },
         { url: 'navbar', name: 'Navbar' },
         { url: 'pagination', name: 'Pagination' },
