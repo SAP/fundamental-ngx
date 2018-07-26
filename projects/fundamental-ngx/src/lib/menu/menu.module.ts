@@ -9,19 +9,7 @@ import { MenuItemComponent } from './menu-item.component';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [
-        MenuComponent,
-        MenuGroupComponent,
-        MenuTitleComponent,
-        MenuListComponent,
-        MenuItemComponent
-    ],
-    declarations: [
-        MenuComponent,
-        MenuGroupComponent,
-        MenuTitleComponent,
-        MenuListComponent,
-        MenuItemComponent
-    ]
+    exports: [MenuComponent, MenuGroupComponent, MenuTitleComponent, MenuListComponent, MenuItemComponent],
+    declarations: [MenuComponent, MenuGroupComponent, MenuTitleComponent, MenuListComponent, MenuItemComponent]
 })
 export class MenuModule {}
