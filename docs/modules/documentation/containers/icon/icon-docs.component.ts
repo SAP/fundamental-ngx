@@ -1292,7 +1292,7 @@ export class IconDocsComponent implements OnInit {
     iconHtml =
         '<div class="grid">\n' +
         '  <div *ngFor="let icon of icons">\n' +
-        '    <fd-icon [glyph]="icon" size=""></fd-icon>\n' +
+        '    <fd-icon [glyph]="icon" size="\'l\'"></fd-icon>\n' +
         '    <span>{{ icon }}</span>\n' +
         '  </div>\n' +
         '</div>';

@@ -20,29 +20,28 @@
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>
-      <fd-panel>
-        <fd-panel-header>
-          <fd-panel-title>Panel Title</fd-panel-title>
-          <fd-panel-actions>
-            <button fd-button size="s" [glyph]="'add'">Add New Item</button>
-          </fd-panel-actions>
-        </fd-panel-header>
-        <fd-panel-filters>
-          <fd-dropdown>Color</fd-dropdown>
-          <fd-dropdown>Size</fd-dropdown>
-        </fd-panel-filters>
-        <fd-panel-filters>
-          <span class="fd-tag" role="button">Blue</span>
-          <span class="fd-tag" role="button">Small</span>
-          <button fd-modal-button-secondary size="s">Clear All</button>
-        </fd-panel-filters>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-        <fd-panel-footer>
-          Panel Footer
-        </fd-panel-footer>
-      </fd-panel>
+<fd-panel>
+  <fd-panel-header>
+    <fd-panel-title>Panel Title</fd-panel-title>
+    <fd-panel-actions>
+      <button fd-button [size]="'s'" [glyph]="'add'">Add New Item</button>
+    </fd-panel-actions>
+  </fd-panel-header>
+  <fd-panel-filters>
+    <fd-dropdown>Color</fd-dropdown>
+    <fd-dropdown>Size</fd-dropdown>
+  </fd-panel-filters>
+  <fd-panel-filters>
+    <span class="fd-tag" role="button">Blue</span>
+    <span class="fd-tag" role="button">Small</span>
+  </fd-panel-filters>
+  <fd-panel-body>
+    Panel Content
+  </fd-panel-body>
+  <fd-panel-footer>
+    Panel Footer
+  </fd-panel-footer>
+</fd-panel>
     </p>
   </div>
 </div>

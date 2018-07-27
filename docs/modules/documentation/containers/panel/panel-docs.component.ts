@@ -7,29 +7,29 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     templateUrl: './panel-docs.component.html'
 })
 export class PanelDocsComponent implements OnInit {
-    panelHtml = `<fd-panel>
-  <fd-panel-header>
-    <fd-panel-title>Panel Title</fd-panel-title>
-    <fd-panel-actions>
-      <button fd-button size="s" [glyph]="'add'">Add New Item</button>
-    </fd-panel-actions>
-  </fd-panel-header>
-  <fd-panel-filters>
-    <fd-dropdown>Color</fd-dropdown>
-    <fd-dropdown>Size</fd-dropdown>
-  </fd-panel-filters>
-  <fd-panel-filters>
-    <span class="fd-tag" role="button">Blue</span>
-    <span class="fd-tag" role="button">Small</span>
-    <button fd-modal-button-secondary size="s">Clear All</button>
-  </fd-panel-filters>
-  <fd-panel-body>
-    Panel Content
-  </fd-panel-body>
-  <fd-panel-footer>
-    Panel Footer
-  </fd-panel-footer>
-</fd-panel>`;
+    panelHtml =
+        '<fd-panel>\n' +
+        '  <fd-panel-header>\n' +
+        '    <fd-panel-title>Panel Title</fd-panel-title>\n' +
+        '    <fd-panel-actions>\n' +
+        '      <button fd-button [size]="\'s\'" [glyph]="\'add\'">Add New Item</button>\n' +
+        '    </fd-panel-actions>\n' +
+        '  </fd-panel-header>\n' +
+        '  <fd-panel-filters>\n' +
+        '    <fd-dropdown>Color</fd-dropdown>\n' +
+        '    <fd-dropdown>Size</fd-dropdown>\n' +
+        '  </fd-panel-filters>\n' +
+        '  <fd-panel-filters>\n' +
+        '    <span class="fd-tag" role="button">Blue</span>\n' +
+        '    <span class="fd-tag" role="button">Small</span>\n' +
+        '  </fd-panel-filters>\n' +
+        '  <fd-panel-body>\n' +
+        '    Panel Content\n' +
+        '  </fd-panel-body>\n' +
+        '  <fd-panel-footer>\n' +
+        '    Panel Footer\n' +
+        '  </fd-panel-footer>\n' +
+        '</fd-panel>';
 
     ngOnInit() {}
 }

@@ -670,32 +670,32 @@ export class ListDocsComponent implements OnInit {
 
     simpleListHtml =
         '<fd-list>\n' +
-        '    <fd-list-item>List item 1</fd-list-item>\n' +
-        '    <fd-list-item>List item 2</fd-list-item>\n' +
-        '    <fd-list-item>List item 3</fd-list-item>\n' +
-        '    <fd-list-item>List item 4</fd-list-item>\n' +
+        '  <fd-list-item><a href="#">List item 1</a></fd-list-item>\n' +
+        '  <fd-list-item>List item 2</fd-list-item>\n' +
+        '  <fd-list-item><a href="#">List item 3</a></fd-list-item>\n' +
+        '  <fd-list-item>List item 4</fd-list-item>\n' +
         '</fd-list>';
 
     listActionsHtml =
         '<fd-list>\n' +
         '  <fd-list-item>List item 1\n' +
         '    <fd-list-action>\n' +
-        '      <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>\n' +
+        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
         '    </fd-list-action>\n' +
         '  </fd-list-item>\n' +
         '  <fd-list-item>List item 2\n' +
         '    <fd-list-action>\n' +
-        '      <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>\n' +
+        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
         '    </fd-list-action>\n' +
         '  </fd-list-item>\n' +
         '  <fd-list-item>List item 3\n' +
         '    <fd-list-action>\n' +
-        '      <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>\n' +
+        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
         '    </fd-list-action>\n' +
         '  </fd-list-item>\n' +
         '  <fd-list-item>List item 4\n' +
         '    <fd-list-action>\n' +
-        '      <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>\n' +
+        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
         '    </fd-list-action>\n' +
         '  </fd-list-item>\n' +
         '</fd-list>';

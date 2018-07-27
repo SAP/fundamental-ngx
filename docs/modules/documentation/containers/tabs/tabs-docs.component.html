@@ -24,16 +24,16 @@
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-tab-list>
-      <fd-tab title="Link">
+      <fd-tab [title]="'Link'">
         Content Link
       </fd-tab>
-      <fd-tab title="Selected" [disabled]="false">
+      <fd-tab [title]="'Selected'" [disabled]="false">
         Content Selected
       </fd-tab>
-      <fd-tab title="Link" [disabled]="false">
+      <fd-tab [title]="'Link'" [disabled]="false">
         Content Link Two
       </fd-tab>
-      <fd-tab title="Disabled" [disabled]="true">
+      <fd-tab [title]="'Disabled'" [disabled]="true">
         Disabled
       </fd-tab>
     </fd-tab-list>
@@ -47,10 +47,10 @@
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-tab-list #tabList>
-      <fd-tab id="tab1" title="Tab 1">
+      <fd-tab id="tab1" [title]="'Tab 1'">
         Tab 1
       </fd-tab>
-      <fd-tab id="tab2" title="Tab 2">
+      <fd-tab id="tab2" [title]="'Tab 2'">
         Tab 2
       </fd-tab>
     </fd-tab-list>
@@ -66,13 +66,13 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <fd-tab-list>
-        <fd-tab title="{{data.properties.items.label}}" [disabled]="data.state.disabled" >
+        <fd-tab [title]="data.properties.items.label" [disabled]="data.state.disabled" >
           {{data.properties.panels.content}}
         </fd-tab>
-        <fd-tab title="{{data.properties.items.label2}}"  [disabled]="data.state.disabled2" >
+        <fd-tab [title]="data.properties.items.label2"  [disabled]="data.state.disabled2" >
           {{data.properties.panels.content2}}
         </fd-tab>
-        <fd-tab title="{{data.properties.items.label3}}" [disabled]="data.state.disabled3" >
+        <fd-tab [title]="data.properties.items.label3" [disabled]="data.state.disabled3" >
           {{data.properties.panels.content3}}
         </fd-tab>
       </fd-tab-list>

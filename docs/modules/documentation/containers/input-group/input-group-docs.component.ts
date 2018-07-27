@@ -695,7 +695,7 @@ export class InputGroupDocsComponent {
         '\n' +
         '</fd-input-group>\n' +
         '<br/>\n' +
-        '<label fd-form-label for="">Right Aligned Text Add-on</label>\n' +
+        '<label fd-form-label>Right Aligned Text Add-on</label>\n' +
         '<fd-input-group [placement]="\'after\'" [addOnText]="\'$\'" [placeholder]="\'Amount\'">\n' +
         '\n' +
         '</fd-input-group>';
@@ -706,7 +706,7 @@ export class InputGroupDocsComponent {
         '\n' +
         '</fd-input-group>\n' +
         '<br/>\n' +
-        '<label fd-form-label for="">Right Aligned Icon Add-on</label>\n' +
+        '<label fd-form-label>Right Aligned Icon Add-on</label>\n' +
         '<fd-input-group [placement]="\'after\'" [glyph]="\'accelerated\'" [placeholder]="\'Amount\'">\n' +
         '\n' +
         '</fd-input-group>';
@@ -714,8 +714,8 @@ export class InputGroupDocsComponent {
     numberInputHtml =
         '<div fd-form-group>\n' +
         '  <div fd-form-item>\n' +
-        '    <label fd-form-label for="">Quantity Spinner</label>\n' +
-        '    <fd-input-group-number name=""\n' +
+        '    <label fd-form-label>Quantity Spinner</label>\n' +
+        '    <fd-input-group-number\n' +
         '                           [disabled]="false"\n' +
         '                           [inputText]="123">\n' +
         '    </fd-input-group-number>\n' +
@@ -725,8 +725,8 @@ export class InputGroupDocsComponent {
     searchInputHtml =
         '<div fd-form-group>\n' +
         '  <div fd-form-item>\n' +
-        '    <label fd-form-label for="">Search input</label>\n' +
-        '    <fd-input-group-search name=""\n' +
+        '    <label fd-form-label>Search input</label>\n' +
+        '    <fd-input-group-search\n' +
         '                           [disabled]="false"\n' +
         '                           [inputText]="\'Search term\'">\n' +
         '    </fd-input-group-search>\n' +
