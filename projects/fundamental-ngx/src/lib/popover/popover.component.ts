@@ -2,15 +2,10 @@ import { Component, Input, HostListener, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'fd-popover',
-    host: {
-        class: 'fd-popover'
-    },
     templateUrl: './popover.component.html'
 })
 export class PopoverComponent {
-    @Input() id = 123;
-
-    @Input() disabled;
+    @Input() id;
 
     isOpen:boolean = false;
 
