@@ -1,10 +1,10 @@
 import { Directive, Input, ElementRef, Inject } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Directive({
     selector: '[fd-navbar-group]'
 })
-export class NavbarGroupDirective extends AbstractCustomClassManager {
+export class NavbarGroupDirective extends AbstractFdNgxClass {
     @Input() position: string = '';
     @Input() hasLaunchpad: boolean = false;
 
