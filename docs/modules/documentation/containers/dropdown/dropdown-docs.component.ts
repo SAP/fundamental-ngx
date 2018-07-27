@@ -741,7 +741,7 @@ export class DropdownDocsComponent {
         '</fd-dropdown>';
 
     disabledDropdownHtml =
-        '<fd-dropdown>\n' +
+        '<fd-dropdown [disabled]="true">\n' +
         '  Select\n' +
         '  <fd-dropdown-item>Option 1</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Option 2</fd-dropdown-item>\n' +
@@ -768,22 +768,22 @@ export class DropdownDocsComponent {
         '</fd-dropdown>';
 
     dropdownSizeHtml =
-        '<fd-dropdown size="xs" [glyph]="\'filter\'">Select\n' +
+        '<fd-dropdown [size]="\'xs\'" [glyph]="\'filter\'">Select\n' +
         '  <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Suspendisse</fd-dropdown-item>\n' +
         '</fd-dropdown>\n' +
-        '<fd-dropdown size="s" [glyph]="\'filter\'">Select\n' +
+        '<fd-dropdown [size]="\'s\'" [glyph]="\'filter\'">Select\n' +
         '  <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Suspendisse</fd-dropdown-item>\n' +
         '</fd-dropdown>\n' +
-        '<fd-dropdown size="compact" [glyph]="\'filter\'">Select\n' +
+        '<fd-dropdown [size]="\'compact\'" [glyph]="\'filter\'">Select\n' +
         '  <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Suspendisse</fd-dropdown-item>\n' +
         '</fd-dropdown>\n' +
-        '<fd-dropdown size="l" [glyph]="\'filter\'">Select\n' +
+        '<fd-dropdown [size]="\'l\'" [glyph]="\'filter\'">Select\n' +
         '  <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>\n' +
         '  <fd-dropdown-item>Suspendisse</fd-dropdown-item>\n' +

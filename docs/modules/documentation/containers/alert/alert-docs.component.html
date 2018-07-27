@@ -20,12 +20,12 @@
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>
-      <fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)">
+      <fd-alert [dismissible]="true" [type]="'warning'" (close)="showAlert($event)">
         A dismissible warning type alert.
       </fd-alert>
     </p>
     <p>
-      <fd-alert [dismissible]="true" type="error" (close)="showAlert($event)">
+      <fd-alert [dismissible]="true" [type]="'error'" (close)="showAlert($event)">
         <div>
           <h3>A dismissible error type alert with template.</h3>
           <p>More information...</p>
