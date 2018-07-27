@@ -28,6 +28,7 @@ export class DocumentationComponent {
         { url: 'navbar', name: 'Navbar' },
         { url: 'pagination', name: 'Pagination' },
         { url: 'panel', name: 'Panel' },
+        { url: 'popover', name: 'Popover' },
         { url: 'sideNavigation', name: 'Side Navigation' },
         { url: 'table', name: 'Table' },
         { url: 'tabs', name: 'Tabs' },
