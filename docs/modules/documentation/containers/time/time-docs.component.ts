@@ -39,6 +39,8 @@ export class TimeDocsComponent {
         }
     };
 
+    timeHtml = '';
+
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');
     }
