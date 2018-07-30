@@ -38,8 +38,12 @@
           </fd-panel-actions>
         </fd-panel-header>
         <fd-panel-filters>
-          <fd-dropdown>Color</fd-dropdown>
-          <fd-dropdown>Size</fd-dropdown>
+          <fd-popover [isDropdown]="true">
+              Color
+          </fd-popover>
+          <fd-popover [isDropdown]="true">
+              Size
+          </fd-popover>
         </fd-panel-filters>
         <fd-panel-filters>
           <span class="fd-tag" role="button">Blue</span>
@@ -103,8 +107,11 @@
 
 <separator></separator>
 
-<h2>Panel Grid with<code>[nogap]</code></h2>
-<p><code>[nogap]="true"</code> will remove the margins between the panels.</p>
+<h2>Panel Grid with
+  <code>[nogap]</code>
+</h2>
+<p>
+  <code>[nogap]="true"</code> will remove the margins between the panels.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>
@@ -138,7 +145,8 @@
 <separator></separator>
 
 <h2>Panel Grid with 2 columns</h2>
-<p>The<code>[col]="2"</code> renders a 2 column grid.</p>
+<p>The
+  <code>[col]="2"</code> renders a 2 column grid.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>

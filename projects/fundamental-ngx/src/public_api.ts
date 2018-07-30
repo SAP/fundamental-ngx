@@ -12,7 +12,6 @@ export * from './lib/badge-label/badge-label.module';
 export * from './lib/breadcrumb/breadcrumb.module';
 export * from './lib/button/button.module';
 export * from './lib/button-group/button-group.module';
-export * from './lib/dropdown/dropdown.module';
 export * from './lib/form/form.module';
 export * from './lib/icon/icon.module';
 export * from './lib/identifier/identifier.module';

@@ -5,7 +5,11 @@ import { Component, Input, HostListener, ElementRef } from '@angular/core';
     templateUrl: './popover.component.html'
 })
 export class PopoverComponent {
-    @Input() id;
+    @Input() disabled: boolean = false;
+    @Input() isDropdown: boolean = false;
+    @Input() glyph: string;
+    @Input() size: string;
+    @Input() btnType: string = '';
 
     isOpen:boolean = false;
 
