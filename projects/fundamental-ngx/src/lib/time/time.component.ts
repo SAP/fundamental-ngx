@@ -7,7 +7,7 @@ import { TimeObject } from './time-object';
     styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnChanges {
-    meridian: string;
+    period: string;
 
     displayedHour: number;
 
@@ -17,10 +17,10 @@ export class TimeComponent implements OnChanges {
         console.log(this.time);
         if (this.time.hour > 11) {
             this.displayedHour = this.time.hour - 12;
-            this.meridian = 'pm';
+            this.period = 'pm';
         } else {
             this.displayedHour = this.time.hour;
-            this.meridian = 'am';
+            this.period = 'am';
         }
     }
 
@@ -72,5 +72,16 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.second = this.time.second - 1;
         }
+    }
+
+    changePeriod() {
+        if (this.period === 'am') {
+          this.period = 'pm';
+          this.time.hour = this.time.hour + 12;
+        } else if (this.period === 'pm') {
+          this.period = 'am';
+          this.time.hour = this.time.hour - 12;
+        }
+        this.parseHour();
     }
 }
