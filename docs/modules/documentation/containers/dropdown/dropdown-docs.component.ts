@@ -21,6 +21,22 @@ export class DropdownDocsComponent {
         '          Option 3\n' +
         '        </fd-menu-item>\n' +
         '      </fd-menu-list>\n' +
+        '      <fd-menu-group>\n' +
+        '        <fd-menu-title>\n' +
+        '          Group header\n' +
+        '        </fd-menu-title>\n' +
+        '        <fd-menu-list>\n' +
+        '          <fd-menu-item [url]="\'#\'">\n' +
+        '            Option 4\n' +
+        '          </fd-menu-item>\n' +
+        '          <fd-menu-item [url]="\'#\'">\n' +
+        '            Option 5\n' +
+        '          </fd-menu-item>\n' +
+        '          <fd-menu-item [url]="\'#\'">\n' +
+        '            Option 6\n' +
+        '          </fd-menu-item>\n' +
+        '        </fd-menu-list>\n' +
+        '      </fd-menu-group>\n' +
         '    </fd-menu>\n' +
         '  </fd-popover-body>\n' +
         '</fd-popover>';
@@ -179,22 +195,6 @@ export class DropdownDocsComponent {
         '          Option 3\n' +
         '        </fd-menu-item>\n' +
         '      </fd-menu-list>\n' +
-        '      <fd-menu-group>\n' +
-        '        <fd-menu-title>\n' +
-        '          Group header\n' +
-        '        </fd-menu-title>\n' +
-        '        <fd-menu-list>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 4\n' +
-        '          </fd-menu-item>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 5\n' +
-        '          </fd-menu-item>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 6\n' +
-        '          </fd-menu-item>\n' +
-        '        </fd-menu-list>\n' +
-        '      </fd-menu-group>\n' +
         '    </fd-menu>\n' +
         '  </fd-popover-body>\n' +
         '</fd-popover>\n' +
@@ -216,22 +216,6 @@ export class DropdownDocsComponent {
         '          Option 3\n' +
         '        </fd-menu-item>\n' +
         '      </fd-menu-list>\n' +
-        '      <fd-menu-group>\n' +
-        '        <fd-menu-title>\n' +
-        '          Group header\n' +
-        '        </fd-menu-title>\n' +
-        '        <fd-menu-list>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 4\n' +
-        '          </fd-menu-item>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 5\n' +
-        '          </fd-menu-item>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 6\n' +
-        '          </fd-menu-item>\n' +
-        '        </fd-menu-list>\n' +
-        '      </fd-menu-group>\n' +
         '    </fd-menu>\n' +
         '  </fd-popover-body>\n' +
         '</fd-popover>\n' +
@@ -253,22 +237,6 @@ export class DropdownDocsComponent {
         '          Option 3\n' +
         '        </fd-menu-item>\n' +
         '      </fd-menu-list>\n' +
-        '      <fd-menu-group>\n' +
-        '        <fd-menu-title>\n' +
-        '          Group header\n' +
-        '        </fd-menu-title>\n' +
-        '        <fd-menu-list>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 4\n' +
-        '          </fd-menu-item>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 5\n' +
-        '          </fd-menu-item>\n' +
-        '          <fd-menu-item [routerLink]="\'#\'">\n' +
-        '            Option 6\n' +
-        '          </fd-menu-item>\n' +
-        '        </fd-menu-list>\n' +
-        '      </fd-menu-group>\n' +
         '    </fd-menu>\n' +
         '  </fd-popover-body>\n' +
         '</fd-popover>';

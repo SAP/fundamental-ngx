@@ -11,17 +11,17 @@ export class PopoverComponent {
     @Input() size: string;
     @Input() btnType: string = '';
 
-    isOpen:boolean = false;
+    isOpen: boolean = false;
 
     close() {
         if (this.isOpen) {
             this.isOpen = false;
-        } 
+        }
     }
 
     @HostListener('document:keydown.escape', ['$event'])
     onEscapeKeydownHandler() {
-       this.close();
+        this.close();
     }
 
     @HostListener('document:click', ['$event'])
