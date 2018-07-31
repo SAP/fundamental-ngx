@@ -73,8 +73,8 @@ export class ModalDocsComponent implements OnInit {
         '      Modal Body\n' +
         '    </fd-modal-body>\n' +
         '    <fd-modal-footer>\n' +
-        '      <button fd-button (click)="c(\'No\')" type="secondary">No</button>\n' +
-        '      <button fd-button (click)="c(\'Yes\')" type="main">Yes</button>\n' +
+        '      <button fd-button (click)="c(\'No\')" fdType="secondary">No</button>\n' +
+        '      <button fd-button (click)="c(\'Yes\')" fdType="main">Yes</button>\n' +
         '    </fd-modal-footer>\n' +
         '  </fd-modal>\n' +
         '</ng-template>\n' +
@@ -96,8 +96,8 @@ export class ModalDocsComponent implements OnInit {
         '      </div>\n' +
         '    </fd-modal-body>\n' +
         '    <fd-modal-footer>\n' +
-        '      <button fd-button type="secondary">Cancel</button>\n' +
-        '      <button fd-button type="main">Invite</button>\n' +
+        '      <button fd-button fdType="secondary">Cancel</button>\n' +
+        '      <button fd-button fdType="main">Invite</button>\n' +
         '    </fd-modal-footer>\n' +
         '  </fd-modal>\n' +
         '</ng-template>';

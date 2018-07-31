@@ -18,8 +18,10 @@
 <separator></separator>
 <h2>Button Types</h2>
 <p>
-  The default button type is "primary", no modifier is required.  Use <code class="code-snippet">[type]="'main'",
-  [type]="'secondary'", [type]="'toolbar'", [type]="'positive'"</code> or <code class="code-snippet">[type]="'negative'"</code> to modify the type of the button.
+  The default button type is "primary", no modifier is required. Use
+  <code class="code-snippet">[type]="'main'",
+  [type]="'secondary'", [type]="'toolbar'", [type]="'positive'"</code> or
+  <code class="code-snippet">[type]="'negative'"</code> to modify the type of the button.
 </p>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
@@ -28,19 +30,19 @@
       <button fd-button>
         Primary Button
       </button>
-      <button fd-button [type]="'main'">
+      <button fd-button [fdType]="'main'">
         Main Button
       </button>
-      <button fd-button [type]="'secondary'">
+      <button fd-button [fdType]="'secondary'">
         Secondary Button
       </button>
-      <button fd-button [type]="'toolbar'">
+      <button fd-button [fdType]="'toolbar'">
         Toolbar Button
       </button>
-      <button fd-button [type]="'positive'">
+      <button fd-button [fdType]="'positive'">
         Positive Button
       </button>
-      <button fd-button [type]="'negative'">
+      <button fd-button [fdType]="'negative'">
         Negative Button
       </button>
     </p>
@@ -51,7 +53,8 @@
 <separator></separator>
 <h2>Button Sizes</h2>
 <p>
-  Use <code class="code-snippet">[size]="'xs'", [size]="'s'", [size]="'compact'"</code> or
+  Use
+  <code class="code-snippet">[size]="'xs'", [size]="'s'", [size]="'compact'"</code> or
   <code class="code-snippet">[size]="'l'"</code> to modify the size of the button.
 </p>
 
@@ -81,7 +84,8 @@
 <separator></separator>
 <h2>Buttons with Icons</h2>
 <p>
-  Use <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to add an icon to the button.
+  Use
+  <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to add an icon to the button.
 </p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
@@ -89,19 +93,19 @@
       <button fd-button [glyph]="'cart'">
         Add to Cart
       </button>
-      <button fd-button [type]="'main'" [glyph]="'cart'">
+      <button fd-button [fdType]="'main'" [glyph]="'cart'">
         Add to Cart
       </button>
-      <button fd-button [type]="'toolbar'" [glyph]="'filter'">
+      <button fd-button [fdType]="'toolbar'" [glyph]="'filter'">
         Filter
       </button>
-      <button fd-button [type]="'positive'" [glyph]="'accept'">
+      <button fd-button [fdType]="'positive'" [glyph]="'accept'">
         Approve
       </button>
       <button fd-button [glyph]="'cart'"></button>
-      <button fd-button [type]="'main'" [glyph]="'cart'"></button>
-      <button fd-button [type]="'toolbar'" [glyph]="'filter'"></button>
-      <button fd-button [type]="'positive'" [glyph]="'accept'"></button>
+      <button fd-button [fdType]="'main'" [glyph]="'cart'"></button>
+      <button fd-button [fdType]="'toolbar'" [glyph]="'filter'"></button>
+      <button fd-button [fdType]="'positive'" [glyph]="'accept'"></button>
     </p>
   </div>
 </div>
@@ -110,7 +114,9 @@
 <separator></separator>
 <h2>Button State</h2>
 <p>
-  Use <code class="code-snippet">[state]="'disabled'"</code> or <code class="code-snippet">[state]="'selected'"</code> to set button state.
+  Use
+  <code class="code-snippet">[state]="'disabled'"</code> or
+  <code class="code-snippet">[state]="'selected'"</code> to set button state.
 </p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
@@ -132,19 +138,15 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <button fd-button
-          [type]     = "data.properties.type"
-          [semantic] = "data.properties.semantic"
-          [state]    = "data.properties.state"
-          [size]     = "data.properties.size"
-          [glyph]    = "data.properties.icon">
+  <button fd-button [fdType]="data.properties.type" [semantic]="data.properties.semantic" [state]="data.properties.state" [size]="data.properties.size"
+    [glyph]="data.properties.icon">
     {{data.properties.label}}
   </button>
 </playground>
 
 <style>
   .fd-button,
-  [class*="fd-button--"]{
+  [class*="fd-button--"] {
     margin-right: 10px;
   }
 </style>

@@ -175,7 +175,7 @@ export class DropdownDocsComponent {
 
     contextualMenuDropdownHtml = `<fd-popover>
   <fd-popover-control>
-    <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+    <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
   </fd-popover-control>
   <fd-popover-body>
     <fd-menu>
@@ -217,7 +217,7 @@ export class DropdownDocsComponent {
 
 <fd-popover>
   <fd-popover-control>
-    <button fd-button [type]="'secondary'">More</button>
+    <button fd-button [fdType]="'secondary'">More</button>
   </fd-popover-control>
   <fd-popover-body>
     <fd-menu>
