@@ -669,7 +669,7 @@ export class ButtonDocsComponent implements OnInit {
     data: any = {
         properties: {
             label: 'click here',
-            type: 'default',
+            fdType: 'default',
             semantic: 'default',
             size: 'default',
             icon: '',
