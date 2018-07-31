@@ -701,68 +701,70 @@ export class TileDocsComponent implements OnInit {
         }
     };
 
-    simpleTileHtml =
-        '<fd-tile>\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '    <p>Tile Description</p>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n';
+    simpleTileHtml = `
+        <fd-tile>
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+            <p>Tile Description</p>
+          </fd-tile-content>
+        </fd-tile>\
+        `;
 
-    mediaTileHtml =
-        '<fd-tile>\n' +
-        '  <fd-tile-media>\n' +
-        '    <span fd-identifier [size]="\'m\'" [glyph]="\'home\'" [transparent]="true"></span> \n' +
-        '  </fd-tile-media>\n' +
-        '  <fd-tile-content>\n' +
-        '  <fd-tile-title>\n' +
-        '    Tile Title\n' +
-        '  </fd-tile-title>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n' +
-        '\n' +
-        '<br>\n' +
-        '\n' +
-        '<fd-tile>\n' +
-        '  <fd-tile-media>\n' +
-        "    <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '  </fd-tile-media>\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '    <p>Tile Description</p>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n' +
-        '\n' +
-        '<br>\n' +
-        '\n' +
-        '<fd-tile>\n' +
-        '  <fd-tile-media>\n' +
-        '    <fd-image [size]="\'m\'" [photo]="\'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png\'"></fd-image>\n' +
-        '  </fd-tile-media>\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n' +
-        '\n' +
-        '<br>\n' +
-        '\n' +
-        '<fd-tile>\n' +
-        '  <fd-tile-media>\n' +
-        '    <fd-image [size]="\'m\'" [circle]="true" [photo]="\'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png\'"></fd-image>\n' +
-        '  </fd-tile-media>\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '    <p>Tile Description</p>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n';
+    mediaTileHtml = `
+        <fd-tile>
+          <fd-tile-media>
+            <span fd-identifier [size]="\'m\'" [glyph]="\'home\'" [transparent]="true"></span> 
+          </fd-tile-media>
+          <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+          </fd-tile-content>
+        </fd-tile>
+        
+        <br>
+        
+        <fd-tile>
+          <fd-tile-media>
+            <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+          </fd-tile-media>
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+            <p>Tile Description</p>
+          </fd-tile-content>
+        </fd-tile>
+        
+        <br>
+        
+        <fd-tile>
+          <fd-tile-media>
+            <fd-image [size]="\'m\'" [photo]="\'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png\'"></fd-image>
+          </fd-tile-media>
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+          </fd-tile-content>
+        </fd-tile>
+        
+        <br>
+        
+        <fd-tile>
+          <fd-tile-media>
+            <fd-image [size]="\'m\'" [circle]="true" [photo]="\'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png\'"></fd-image>
+          </fd-tile-media>
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+            <p>Tile Description</p>
+          </fd-tile-content>
+        </fd-tile>
+        `;
 
     actionsTileHtml = `<fd-tile>
     <fd-tile-content>
@@ -786,213 +788,217 @@ export class TileDocsComponent implements OnInit {
     </fd-tile-actions>
 </fd-tile>`;
 
-    buttonTileHtml =
-        '<fd-tile [isButton]="true">\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n';
+    buttonTileHtml = `
+        <fd-tile [isButton]="true">
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+          </fd-tile-content>
+        </fd-tile>
+        `;
 
-    productTileHtml =
-        '<fd-product-tile>\n' +
-        '  <fd-product-tile-media [photo]="\'https://techne.yaas.io/images/product-thumbnail-wide.png\'"></fd-product-tile-media>\n' +
-        '  <fd-product-tile-content>\n' +
-        '    <fd-product-tile-title>Default Product Tile</fd-product-tile-title>\n' +
-        '  </fd-product-tile-content>\n' +
-        '</fd-product-tile>\n' +
-        '\n' +
-        '<fd-product-tile [isButton]="true">\n' +
-        '  <fd-product-tile-media [photo]="\'https://techne.yaas.io/images/product-thumbnail-wide.png\'"></fd-product-tile-media>\n' +
-        '  <fd-product-tile-content>\n' +
-        '    <fd-product-tile-title>Default Product Tile</fd-product-tile-title>\n' +
-        '  </fd-product-tile-content>\n' +
-        '</fd-product-tile>\n';
+    productTileHtml = `
+        <fd-product-tile>
+          <fd-product-tile-media [photo]="\'https://techne.yaas.io/images/product-thumbnail-wide.png\'"></fd-product-tile-media>
+          <fd-product-tile-content>
+            <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
+          </fd-product-tile-content>
+        </fd-product-tile>
+        
+        <fd-product-tile [isButton]="true">
+          <fd-product-tile-media [photo]="\'https://techne.yaas.io/images/product-thumbnail-wide.png\'"></fd-product-tile-media>
+          <fd-product-tile-content>
+            <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
+          </fd-product-tile-content>
+        </fd-product-tile>;
 
     disabledTilesHtml =
-        '<fd-tile [disabled]="true">\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n' +
-        '\n' +
-        '<br>\n' +
-        '\n' +
-        '<fd-tile [disabled]="true">\n' +
-        '  <fd-tile-media>\n' +
-        '    <span fd-identifier [size]="\'m\'" [glyph]="\'home\'" [transparent]="true"></span>\n' +
-        '  </fd-tile-media>\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '  </fd-tile-content>\n' +
-        '</fd-tile>\n' +
-        '\n' +
-        '<br>\n' +
-        '\n' +
-        '<fd-product-tile [disabled]="true">\n' +
-        '  <fd-product-tile-media [photo]="\'https://techne.yaas.io/images/product-thumbnail-wide.png\'"></fd-product-tile-media>\n' +
-        '  <fd-product-tile-content>\n' +
-        '    <fd-product-tile-title>Default Product Tile</fd-product-tile-title>\n' +
-        '  </fd-product-tile-content>\n' +
-        '</fd-product-tile>\n';
+        <fd-tile [disabled]="true">
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+          </fd-tile-content>
+        </fd-tile>
+        
+        <br>
+        
+        <fd-tile [disabled]="true">
+          <fd-tile-media>
+            <span fd-identifier [size]="\'m\'" [glyph]="\'home\'" [transparent]="true"></span>
+          </fd-tile-media>
+          <fd-tile-content>
+            <fd-tile-title>
+              Tile Title
+            </fd-tile-title>
+          </fd-tile-content>
+        </fd-tile>
+        
+        <br>
+        
+        <fd-product-tile [disabled]="true">
+          <fd-product-tile-media [photo]="\'https://techne.yaas.io/images/product-thumbnail-wide.png\'"></fd-product-tile-media>
+          <fd-product-tile-content>
+            <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
+          </fd-product-tile-content>
+        </fd-product-tile>
+        `;
 
-    defaultGridHtml =
-        '<fd-tile-grid [col]="3">\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '</fd-tile-grid>\n';
+    defaultGridHtml = ` 
+        <fd-tile-grid [col]="3">
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='3'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+        </fd-tile-grid>
+        `;
 
-    gridWithHelpersHtml =
-        '<fd-tile-grid [col]="6">\n' +
-        '  <fd-tile [rowSpan]="2" [colorAccent]="7">\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='2'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '   <fd-tile-media>\n' +
-        '     <span fd-identifier [size]="\'m\'" [glyph]="\'home\'" [transparent]="true"></span>\n' +
-        '   </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='5'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        "      <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='5'></span>\n" +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-media>\n' +
-        '      <fd-image [size]="\'m\'" [circle]="true" [photo]="\'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png\'"></fd-image>\n' +
-        '    </fd-tile-media>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        "  <fd-tile [colorAccent]='8'>\n" +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile>\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '  <fd-tile [columnSpan]="2" [colorAccent]="5">\n' +
-        '    <fd-tile-content>\n' +
-        '      <fd-tile-title>\n' +
-        '        Tile Title\n' +
-        '      </fd-tile-title>\n' +
-        '    </fd-tile-content>\n' +
-        '  </fd-tile>\n' +
-        '</fd-tile-grid>\n';
+    gridWithHelpersHtml = `
+        <fd-tile-grid [col]="6">
+          <fd-tile [rowSpan]="2" [colorAccent]="7">
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='2'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+           <fd-tile-media>
+             <span fd-identifier [size]="\'m\'" [glyph]="\'home\'" [transparent]="true"></span>
+           </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='5'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <span fd-identifier [size]=\"'m'\" [glyph]=\"'home'\" [colorAccent]='5'></span>\n" +
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-media>
+              <fd-image [size]="\'m\'" [circle]="true" [photo]="\'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png\'"></fd-image>
+            </fd-tile-media>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile [colorAccent]='8'>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile>
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+          <fd-tile [columnSpan]="2" [colorAccent]="5">
+            <fd-tile-content>
+              <fd-tile-title>
+                Tile Title
+              </fd-tile-title>
+            </fd-tile-content>
+          </fd-tile>
+        </fd-tile-grid>
+        `;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tile');
