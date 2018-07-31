@@ -1,5 +1,5 @@
 <header>Action Bar</header>
-<description>The Action Bar is located at the top of the page and is used for Page title and Main Actions for the page</description>
+<description>The Action Bar is located at the top of the page and is used for Page title and Main Actions for the page.</description>
 <import module="ActionBarModule" path="fundamental/actionbar/actionbar.module"></import>
 
 <separator></separator>
@@ -7,56 +7,152 @@
 <h1>&lt;fd-action-bar&gt;</h1>
 
 <properties [properties]="{
-  inputs: [
-  { name: 'actionBarTitle', description: 'Title of the action bar' }
-]
-}">
-</properties>
-
+  childComponents: [
+    { name: '[fd-action-bar-header]', description: 'The Action Bar header. Contains an action bar header and/or an action bar description.' },
+    { name: '[fd-action-bar-title]', description: 'The Action Bar title. Must be placed within the action bar header.' },
+    { name: '[fd-action-bar-description]', description: 'The Action Bar description. Must be placed within the action bar header.' },
+    { name: '[fd-action-bar-actions]', description: 'Adds main actions within the Action bar.' },
+    { name: '[fd-action-bar-back]', description: 'Contains a Back Button.' },
+    { name: '[fd-action-bar-mobile]', description: 'Displays the Action Bar in a mobile view.' }
+  ]
+}"></properties>
 
 <separator></separator>
-<h2>Title</h2>
-<p>The page title is displayed prominently in the Action Bar. This is helpful for the user to know exactly where they are.</p>
+<h2>Action bar with back button, description and action buttons.</h2>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-action-bar [actionBarTitle]="'Page Title'"></fd-action-bar>
-  </div>
-</div>
-<pre><code mwlHighlightJs language="HTML" [source]="titleHtml"></code></pre>
-
-
-<separator></separator>
-
-<h2>Main Actions</h2>
-<p>Display main actions within the Action bar. This allows for users to find important page actions in a consistent area no matter what page they are on within the application.</p>
-
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-action-bar [actionBarTitle]="'Page Title'">
-      <button fd-button type="secondary">Cancel</button>
-      <button fd-button type="main">Save</button>
+    <fd-action-bar>
+      <fd-action-bar-back>
+        <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
+      </fd-action-bar-back>
+      <fd-action-bar-header>
+        <fd-action-bar-title>Page Title</fd-action-bar-title>
+        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+      </fd-action-bar-header>
+      <fd-action-bar-actions>
+        <button fd-button type="primary">Cancel</button>
+        <button fd-button type="main">Save</button>
+      </fd-action-bar-actions>
     </fd-action-bar>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="mainActionsHtml"></code></pre>
+<pre><code mwlHighlightJs language="HTML" [source]="backButtonHtml"></code></pre>
+
+
+<separator></separator>
+
+<h2>Action bar with main actions and no Back button</h2>
+<p>Display main actions within the Action bar. This allows for users to find important page actions in a consistent area no
+  matter what page they are on within the application.</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-action-bar>
+      <fd-action-bar-header>
+        <fd-action-bar-title>Page Title</fd-action-bar-title>
+        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+      </fd-action-bar-header>
+      <fd-action-bar-actions>
+        <button fd-button type="primary">Cancel</button>
+        <button fd-button type="main">Save</button>
+      </fd-action-bar-actions>
+    </fd-action-bar>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="noBackButtonHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Several Main Actions in a Contextual Menu</h2>
-<p>When there are several main actions for a page, consider displaying them under a contextual menu. This allows the user to look in the same position they are used to but avoids cluttering the action bar with more than 3-4 actions. This also works well for a responsive/adaptive application.</p>
+<p>When there are several main actions for a page, consider displaying them under a contextual menu. This allows the user to
+  look in the same position they are used to but avoids cluttering the action bar with more than 3-4 actions. This also works
+  well for a responsive/adaptive application.</p>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-action-bar [actionBarTitle]="'Page Title'">
-      <fd-dropdown [isContextualMenu]="true">
-        <fd-dropdown-item>Edit</fd-dropdown-item>
-        <fd-dropdown-item>Delete</fd-dropdown-item>
-        <fd-dropdown-item>Assign</fd-dropdown-item>
-        <fd-dropdown-item>Expire</fd-dropdown-item>
-        <fd-dropdown-item>Archive</fd-dropdown-item>
-      </fd-dropdown>
+    <fd-action-bar>
+      <fd-action-bar-header>
+        <fd-action-bar-title>Page Title</fd-action-bar-title>
+      </fd-action-bar-header>
+      <fd-action-bar-actions>
+        <fd-popover>
+          <fd-popover-control>
+            <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+          </fd-popover-control>
+          <fd-popover-body>
+            <fd-menu>
+              <fd-menu-list>
+                <fd-menu-item [url]="'#'">
+                  Edit
+                </fd-menu-item>
+                <fd-menu-item [url]="'#'">
+                  Delete
+                </fd-menu-item>
+                <fd-menu-item [url]="'#'">
+                  Assign
+                </fd-menu-item>
+                <fd-menu-item [url]="'#'">
+                  Expire
+                </fd-menu-item>
+                <fd-menu-item [url]="'#'">
+                  Archive
+                </fd-menu-item>
+              </fd-menu-list>
+            </fd-menu>
+          </fd-popover-body>
+        </fd-popover>
+      </fd-action-bar-actions>
     </fd-action-bar>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="actionsContextualMenuHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Action bar mobile view</h2>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-action-bar-mobile>
+      <fd-action-bar>
+        <fd-action-bar-back>
+          <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
+        </fd-action-bar-back>
+        <fd-action-bar-header>
+          <fd-action-bar-title>Page Title</fd-action-bar-title>
+          <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+        </fd-action-bar-header>
+        <fd-action-bar-actions>
+          <fd-popover>
+            <fd-popover-control>
+              <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+              <fd-menu>
+                <fd-menu-list>
+                  <fd-menu-item [url]="'#'">
+                    Edit
+                  </fd-menu-item>
+                  <fd-menu-item [url]="'#'">
+                    Delete
+                  </fd-menu-item>
+                  <fd-menu-item [url]="'#'">
+                    Assign
+                  </fd-menu-item>
+                  <fd-menu-item [url]="'#'">
+                    Expire
+                  </fd-menu-item>
+                  <fd-menu-item [url]="'#'">
+                    Archive
+                  </fd-menu-item>
+                </fd-menu-list>
+              </fd-menu>
+            </fd-popover-body>
+          </fd-popover>
+        </fd-action-bar-actions>
+      </fd-action-bar>
+    </fd-action-bar-mobile>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="mobileViewHtml"></code></pre>

@@ -6,7 +6,6 @@ import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
-import { DropdownModule } from './dropdown/dropdown.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { IdentifierModule } from './identifier/identifier.module';
@@ -15,10 +14,12 @@ import { InlineHelpModule } from './inline-help/inline-help.module';
 import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
+import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
+import { PopoverModule } from './popover/popover.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
@@ -42,7 +43,6 @@ import { ModalService } from './modal/modal.service';
         BreadcrumbModule,
         ButtonModule,
         ButtonGroupModule,
-        DropdownModule,
         FormModule,
         IconModule,
         IdentifierModule,
@@ -52,10 +52,12 @@ import { ModalService } from './modal/modal.service';
         InputGroupModule,
         ListModule,
         MegaMenuModule,
+        MenuModule,
         ModalModule,
         NavbarModule,
         PaginationModule,
         PanelModule,
+        PopoverModule,
         SideNavigationModule,
         TableModule,
         TabsModule,
