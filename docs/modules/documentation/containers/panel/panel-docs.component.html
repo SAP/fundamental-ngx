@@ -7,12 +7,19 @@
 
 <properties [properties]="{
   childComponents: [
-    { name: '[fd-panel-header]', description: 'The panel header. Contains a panel title and panel filters.' },
-    { name: '[fd-panel-title]', description: 'The panel title. Must be placed within the panel header.' },
+    { name: '[fd-panel-header]', description: 'The panel header. Contains a panel head and panel actions.' },
+    { name: '[fd-panel-head]', description: 'Contains a panel title and panel description.' },
+    { name: '[fd-panel-title]', description: 'The panel title. Must be placed within the panel head.' },
+    { name: '[fd-panel-description]', description: ' Title of the description. Must be placed within the panel head.' },
     { name: '[fd-panel-actions]', description: 'The panel actions that appear to the right of the title. Must be placed within the panel header.' },
     { name: '[fd-panel-filters]', description: 'The panel filters. These are placed between the header and the body.  Multiple rows of filters can be used.' },
     { name: '[fd-panel-body]', description: 'The panel body.' },
     { name: '[fd-panel-footer]', description: 'The panel footer.' }
+  ],
+  inputs: [
+    { name: 'col',   description: 'The number of columns in the Panel Grid. Leave empty for default (3 columns).'},
+    { name: 'nogap', description: 'When set to \'true\' removes the margins between the panels.'},
+    { name: 'span',  description: 'The number of columns the panel expands. Option ranges from 2 to 6.'}
   ]
 }"></properties>
 
@@ -22,14 +29,21 @@
     <p>
       <fd-panel>
         <fd-panel-header>
-          <fd-panel-title>Panel Title</fd-panel-title>
+          <fd-panel-head>
+            <fd-panel-title>Panel Title</fd-panel-title>
+            <fd-panel-description>Panel Description</fd-panel-description>
+          </fd-panel-head>
           <fd-panel-actions>
             <button fd-button size="s" [glyph]="'add'">Add New Item</button>
           </fd-panel-actions>
         </fd-panel-header>
         <fd-panel-filters>
-          <fd-dropdown>Color</fd-dropdown>
-          <fd-dropdown>Size</fd-dropdown>
+          <fd-popover [isDropdown]="true">
+              Color
+          </fd-popover>
+          <fd-popover [isDropdown]="true">
+              Size
+          </fd-popover>
         </fd-panel-filters>
         <fd-panel-filters>
           <span class="fd-tag" role="button">Blue</span>
@@ -48,3 +62,205 @@
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="panelHtml"></code></pre>
 
+<separator></separator>
+
+<h2>Default Panel Grid (3 columns)</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-panel-grid>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+      </fd-panel-grid>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="defaultPanelGridHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Panel Grid with
+  <code>[nogap]</code>
+</h2>
+<p>
+  <code>[nogap]="true"</code> will remove the margins between the panels.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-panel-grid [col]="2" [nogap]="true">
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+      </fd-panel-grid>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="nogapPanelGridHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Panel Grid with 2 columns</h2>
+<p>The
+  <code>[col]="2"</code> renders a 2 column grid.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-panel-grid [col]="2">
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+      </fd-panel-grid>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="twoColumnsPanelGridHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Panel Grid with column span</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-panel-grid [col]="6">
+        <fd-panel [span]="2">
+          <fd-panel-body>
+            Panel Content with span 2
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel [span]="3">
+          <fd-panel-body>
+            Panel Content with span 3
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel [span]="4">
+          <fd-panel-body>
+            Panel Content with span 4
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel [span]="5">
+          <fd-panel-body>
+            Panel Content with span 5
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel [span]="6">
+          <fd-panel-body>
+            Panel Content with span 6
+          </fd-panel-body>
+        </fd-panel>
+      </fd-panel-grid>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="columnSpanPanelGridHtml"></code></pre>

@@ -1,0 +1,19 @@
+<div class="fd-popover">
+  <div *ngIf="!isDropdown; else dropdownTemplate" class="fd-popover__control" [attr.aria-expanded]="(this.disabled ? false : isOpen)"
+    [attr.aria-disabled]="this.disabled" aria-haspopup="true">
+    <ng-content select="fd-popover-control"></ng-content>
+  </div>
+
+  <ng-template #dropdownTemplate>
+    <div class="fd-popover__control">
+      <button fd-button *ngIf="isDropdown" class="fd-dropdown__control" [ngClass]='(btnType ? " fd-button--" + btnType : "fd-button--toolbar") + (glyph ? " sap-icon--" + glyph : "") + (size ? " fd-button--" + size : "") + (this.disabled ? " is-disabled" : "")'
+        [attr.aria-expanded]="(this.disabled ? false : isOpen)" [attr.aria-disabled]="this.disabled" aria-haspopup="true">
+        <ng-content></ng-content>
+      </button>
+    </div>
+  </ng-template>
+
+  <div class="fd-popover__body" [attr.aria-hidden]="(disabled ? true : !isOpen)">
+    <ng-content select="fd-popover-body"></ng-content>
+  </div>
+</div>

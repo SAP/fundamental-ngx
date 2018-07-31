@@ -7,22 +7,82 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     styleUrls: ['action-bar-docs.component.scss']
 })
 export class ActionBarDocsComponent {
-    titleHtml = '<fd-action-bar [actionBarTitle]="\'Page Title\'"></fd-action-bar>';
+        backButtonHtml = `<fd-action-bar>
+    <fd-action-bar-back>
+        <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
+    </fd-action-bar-back>
+    <fd-action-bar-header>
+        <fd-action-bar-title>Page Title</fd-action-bar-title>
+        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+    </fd-action-bar-header>
+    <fd-action-bar-actions>
+        <button fd-button type="primary">Cancel</button>
+        <button fd-button type="main">Save</button>
+    </fd-action-bar-actions>
+</fd-action-bar>`;
 
-    mainActionsHtml =
-        '<fd-action-bar [actionBarTitle]="\'Page Title\'">\n' +
-        '  <button fd-button type="secondary">Cancel</button>\n' +
-        '  <button fd-button type="main">Save</button>\n' +
-        '</fd-action-bar>';
+    noBackButtonHtml = `<fd-action-bar>
+    <fd-action-bar-header>
+        <fd-action-bar-title>Page Title</fd-action-bar-title>
+        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+    </fd-action-bar-header>
+    <fd-action-bar-actions>
+        <button fd-button type="primary">Cancel</button>
+        <button fd-button type="main">Save</button>
+    </fd-action-bar-actions>
+</fd-action-bar>`;
 
-    actionsContextualMenuHtml =
-        '<fd-action-bar [actionBarTitle]="\'Page Title\'">\n' +
-        '  <fd-dropdown [isContextualMenu]="true">\n' +
-        '   <fd-dropdown-item>Edit</fd-dropdown-item>\n' +
-        '   <fd-dropdown-item>Delete</fd-dropdown-item>\n' +
-        '   <fd-dropdown-item>Assign</fd-dropdown-item>\n' +
-        '   <fd-dropdown-item>Expire</fd-dropdown-item>\n' +
-        '   <fd-dropdown-item>Archive</fd-dropdown-item>\n' +
-        '  </fd-dropdown>\n' +
-        '</fd-action-bar>';
+    actionsContextualMenuHtml = `<fd-action-bar>
+    <fd-action-bar-header>
+        <fd-action-bar-title>Page Title</fd-action-bar-title>
+    </fd-action-bar-header>
+    <fd-action-bar-actions>
+        <fd-popover>
+            <fd-popover-control>
+                <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <fd-menu-list>
+                        <fd-menu-item [url]="'#'">Edit</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Delete</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Assign</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Expire</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Archive</fd-menu-item>
+                    </fd-menu-list>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-action-bar-actions>
+</fd-action-bar>`;
+
+    mobileViewHtml = `<fd-action-bar-mobile>
+    <fd-action-bar>
+        <fd-action-bar-back>
+            <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
+        </fd-action-bar-back>
+        <fd-action-bar-header>
+            <fd-action-bar-title>Page Title</fd-action-bar-title>
+            <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+        </fd-action-bar-header>
+        <fd-action-bar-actions>
+            <fd-popover>
+                <fd-popover-control>
+                    <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <fd-menu>
+                        <fd-menu-list>
+                            <fd-menu-item [url]="'#'">Edit</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Delete</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Assign</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Expire</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Archive</fd-menu-item>
+                        </fd-menu-list>
+                    </fd-menu>
+                </fd-popover-body>
+            </fd-popover>
+        </fd-action-bar-actions>
+    </fd-action-bar>
+</fd-action-bar-mobile>`;
 }

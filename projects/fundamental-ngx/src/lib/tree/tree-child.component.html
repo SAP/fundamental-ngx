@@ -1,9 +1,7 @@
 <li #treeChild class="fd-tree__item" role="treeitem">
   <div class="fd-tree__row">
-    <div *ngFor="let cell of row.rowData; let i = index" [attr.data-index]="i" class="fd-tree__col"
-         [ngClass]="{'fd-tree__col--control': i === 0}">
-      <button (click)="toggleDisplayChildren()" *ngIf="row.children && i === 0"
-              class="fd-tree__control" aria-label="Expand" [attr.aria-pressed]="!hideChildren"></button>
+    <div *ngFor="let cell of row.rowData; let i = index" [attr.data-index]="i" class="fd-tree__col" [ngClass]="{'fd-tree__col--control': i === 0}">
+      <button (click)="toggleDisplayChildren()" *ngIf="row.children && i === 0" class="fd-tree__control" aria-label="Expand" [attr.aria-pressed]="!hideChildren"></button>
       <ng-container *ngIf="typeOf(cell) === 'string'">
         {{cell}}
       </ng-container>
@@ -25,16 +23,23 @@
     </div>
     <div class="fd-tree__col fd-tree__col--actions">
       <ng-container *ngIf="displayTreeActions">
-        <fd-dropdown optionClass="button" [isContextualMenu]="true">
-          <fd-dropdown-item (click)="editTreeItem(row)">Edit</fd-dropdown-item>
-          <fd-dropdown-item (click)="deleteTreeItem(row)">Delete</fd-dropdown-item>
-        </fd-dropdown>
+        <fd-popover>
+          <fd-popover-control>
+            <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+          </fd-popover-control>
+          <fd-popover-body>
+            <fd-menu>
+              <fd-menu-list>
+                <fd-menu-item (click)="editTreeItem(row)">Edit</fd-menu-item>
+                <fd-menu-item (click)="deleteTreeItem(row)">Delete</fd-menu-item>
+              </fd-menu-list>
+            </fd-menu>
+          </fd-popover-body>
+        </fd-popover>
       </ng-container>
     </div>
   </div>
-  <ul *ngIf="row.children && row.children.length > 0" [ngClass]="{'is-hidden': hideChildren}"
-      class="fd-tree__group" role="group">
-    <fd-tree-child *ngFor="let child of row.children" [displayTreeActions]="displayTreeActions"
-                   [row]="child" [ngClass]="child.sublevelClass"></fd-tree-child>
+  <ul *ngIf="row.children && row.children.length > 0" [ngClass]="{'is-hidden': hideChildren}" class="fd-tree__group" role="group">
+    <fd-tree-child *ngFor="let child of row.children" [displayTreeActions]="displayTreeActions" [row]="child" [ngClass]="child.sublevelClass"></fd-tree-child>
   </ul>
 </li>
