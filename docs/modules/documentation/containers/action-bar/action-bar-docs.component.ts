@@ -7,7 +7,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     styleUrls: ['action-bar-docs.component.scss']
 })
 export class ActionBarDocsComponent {
-backButtonHtml = `<fd-action-bar>
+        backButtonHtml = `<fd-action-bar>
     <fd-action-bar-back>
         <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
     </fd-action-bar-back>

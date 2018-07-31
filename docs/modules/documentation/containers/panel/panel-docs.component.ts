@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './panel-docs.component.html'
 })
 export class PanelDocsComponent implements OnInit {
-panelHtml = `<fd-panel>
+        panelHtml = `<fd-panel>
   <fd-panel-header>
     <fd-panel-head>
       <fd-panel-title>Panel Title</fd-panel-title>
@@ -36,7 +36,7 @@ panelHtml = `<fd-panel>
   </fd-panel-footer>
 </fd-panel>`;
 
-        defaultPanelGridHtml =   `<fd-panel-grid>
+    defaultPanelGridHtml = `<fd-panel-grid>
   <fd-panel>
     <fd-panel-body>
       Panel Content
@@ -69,7 +69,7 @@ panelHtml = `<fd-panel>
   </fd-panel>
 </fd-panel-grid>`;
 
-        nogapPanelGridHtml = `<fd-panel-grid [col]="2" [nogap]="true">
+    nogapPanelGridHtml = `<fd-panel-grid [col]="2" [nogap]="true">
   <fd-panel>
     <fd-panel-body>
       Panel Content
@@ -92,7 +92,7 @@ panelHtml = `<fd-panel>
   </fd-panel>
 </fd-panel-grid>`;
 
-        twoColumnsPanelGridHtml = `<fd-panel-grid [col]="2">
+    twoColumnsPanelGridHtml = `<fd-panel-grid [col]="2">
   <fd-panel>
     <fd-panel-body>
       Panel Content
@@ -115,7 +115,7 @@ panelHtml = `<fd-panel>
   </fd-panel>
 </fd-panel-grid>`;
 
-        columnSpanPanelGridHtml = `<fd-panel-grid [col]="6">
+    columnSpanPanelGridHtml = `<fd-panel-grid [col]="6">
   <fd-panel [span]="2">
     <fd-panel-body>
       Panel Content with span 2

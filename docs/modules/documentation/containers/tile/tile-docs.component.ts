@@ -764,7 +764,7 @@ export class TileDocsComponent implements OnInit {
         '  </fd-tile-content>\n' +
         '</fd-tile>\n';
 
-    actionsTileHtml =`<fd-tile>
+    actionsTileHtml = `<fd-tile>
     <fd-tile-content>
         <fd-tile-title>Tile Title</fd-tile-title>
     </fd-tile-content>
