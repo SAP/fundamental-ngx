@@ -45,12 +45,12 @@ export class AlertDocsComponent {
 
     alertHtml =
         '<p>\n' +
-        '  <fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)">\n' +
+        '  <fd-alert [dismissible]="true" [type]="\'warning\'" (close)="showAlert($event)">\n' +
         '    A dismissible warning type alert.\n' +
         '  </fd-alert>\n' +
         '</p>\n' +
         '<p>\n' +
-        '  <fd-alert [dismissible]="true" type="error" (close)="showAlert($event)">\n' +
+        '  <fd-alert [dismissible]="true" [type]="\'error\'" (close)="showAlert($event)">\n' +
         '    <div>\n' +
         '      <h3>A dismissible error type alert with template.</h3>\n' +
         '      <p>More information...</p>\n' +

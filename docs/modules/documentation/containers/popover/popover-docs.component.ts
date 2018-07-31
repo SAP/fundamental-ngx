@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './popover-docs.component.html'
 })
 export class PopoverDocsComponent {
-popoverExampleHtml = `<fd-popover>
+    popoverExampleHtml = `<fd-popover>
   <fd-popover-control>
     <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
   </fd-popover-control>

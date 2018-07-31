@@ -18,8 +18,8 @@
 <separator></separator>
 <h2>Button Types</h2>
 <p>
-  The default button type is "primary", no modifier is required.  Use <code class="code-snippet">type="main",
-  type="secondary", type="toolbar", type="positive"</code> or <code class="code-snippet">type="negative"</code> to modify the type of the button.
+  The default button type is "primary", no modifier is required.  Use <code class="code-snippet">[type]="'main'",
+  [type]="'secondary'", [type]="'toolbar'", [type]="'positive'"</code> or <code class="code-snippet">[type]="'negative'"</code> to modify the type of the button.
 </p>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
@@ -28,19 +28,19 @@
       <button fd-button>
         Primary Button
       </button>
-      <button fd-button type="main">
+      <button fd-button [type]="'main'">
         Main Button
       </button>
-      <button fd-button type="secondary">
+      <button fd-button [type]="'secondary'">
         Secondary Button
       </button>
-      <button fd-button type="toolbar">
+      <button fd-button [type]="'toolbar'">
         Toolbar Button
       </button>
-      <button fd-button type="positive">
+      <button fd-button [type]="'positive'">
         Positive Button
       </button>
-      <button fd-button type="negative">
+      <button fd-button [type]="'negative'">
         Negative Button
       </button>
     </p>
@@ -51,26 +51,26 @@
 <separator></separator>
 <h2>Button Sizes</h2>
 <p>
-  Use <code class="code-snippet">size="xs", size="s", size="compact"</code> or
-  <code class="code-snippet">size="l"</code> to modify the size of the button.
+  Use <code class="code-snippet">[size]="'xs'", [size]="'s'", [size]="'compact'"</code> or
+  <code class="code-snippet">[size]="'l'"</code> to modify the size of the button.
 </p>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>
-      <button fd-button size="xs">
+      <button fd-button [size]="'xs'">
         Extra-Small Button
       </button>
-      <button fd-button size="s">
+      <button fd-button [size]="'s'">
         Small Button
       </button>
-      <button fd-button size="compact">
+      <button fd-button [size]="'compact'">
         Compact Button
       </button>
       <button fd-button>
         Normal Button
       </button>
-      <button fd-button size="l">
+      <button fd-button [size]="'l'">
         Large Button
       </button>
     </p>
@@ -89,19 +89,19 @@
       <button fd-button [glyph]="'cart'">
         Add to Cart
       </button>
-      <button fd-button type="main" [glyph]="'cart'">
+      <button fd-button [type]="'main'" [glyph]="'cart'">
         Add to Cart
       </button>
-      <button fd-button type="toolbar" [glyph]="'filter'">
+      <button fd-button [type]="'toolbar'" [glyph]="'filter'">
         Filter
       </button>
-      <button fd-button type="positive" [glyph]="'accept'">
+      <button fd-button [type]="'positive'" [glyph]="'accept'">
         Approve
       </button>
       <button fd-button [glyph]="'cart'"></button>
-      <button fd-button type="main" [glyph]="'cart'"></button>
-      <button fd-button type="toolbar" [glyph]="'filter'"></button>
-      <button fd-button type="positive" [glyph]="'accept'"></button>
+      <button fd-button [type]="'main'" [glyph]="'cart'"></button>
+      <button fd-button [type]="'toolbar'" [glyph]="'filter'"></button>
+      <button fd-button [type]="'positive'" [glyph]="'accept'"></button>
     </p>
   </div>
 </div>
