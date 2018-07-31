@@ -668,45 +668,42 @@ export class ListDocsComponent implements OnInit {
         }
     };
 
-    simpleListHtml =
-        '<fd-list>\n' +
-        '  <fd-list-item><a href="#">List item 1</a></fd-list-item>\n' +
-        '  <fd-list-item>List item 2</fd-list-item>\n' +
-        '  <fd-list-item><a href="#">List item 3</a></fd-list-item>\n' +
-        '  <fd-list-item>List item 4</fd-list-item>\n' +
-        '</fd-list>';
+    simpleListHtml = `<fd-list>
+  <fd-list-item><a href="#">List item 1</a></fd-list-item>
+  <fd-list-item>List item 2</fd-list-item>
+  <fd-list-item><a href="#">List item 3</a></fd-list-item>
+  <fd-list-item>List item 4</fd-list-item>
+</fd-list>`;
 
-    listActionsHtml =
-        '<fd-list>\n' +
-        '  <fd-list-item>List item 1\n' +
-        '    <fd-list-action>\n' +
-        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
-        '    </fd-list-action>\n' +
-        '  </fd-list-item>\n' +
-        '  <fd-list-item>List item 2\n' +
-        '    <fd-list-action>\n' +
-        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
-        '    </fd-list-action>\n' +
-        '  </fd-list-item>\n' +
-        '  <fd-list-item>List item 3\n' +
-        '    <fd-list-action>\n' +
-        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
-        '    </fd-list-action>\n' +
-        '  </fd-list-item>\n' +
-        '  <fd-list-item>List item 4\n' +
-        '    <fd-list-action>\n' +
-        '      <button fd-button [type]="\'secondary\'" [glyph]="\'edit\'"></button>\n' +
-        '    </fd-list-action>\n' +
-        '  </fd-list-item>\n' +
-        '</fd-list>';
+    listActionsHtml = `<fd-list>
+  <fd-list-item>List item 1
+    <fd-list-action>
+      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+    </fd-list-action>
+  </fd-list-item>
+  <fd-list-item>List item 2
+    <fd-list-action>
+      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+    </fd-list-action>
+  </fd-list-item>
+  <fd-list-item>List item 3
+    <fd-list-action>
+      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+    </fd-list-action>
+  </fd-list-item>
+  <fd-list-item>List item 4
+    <fd-list-action>
+      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+    </fd-list-action>
+  </fd-list-item>
+</fd-list>`;
 
-    listCheckboxesHtml =
-        '<fd-list>\n' +
-        '    <fd-list-item><fd-list-checkbox>List item 1</fd-list-checkbox></fd-list-item>\n' +
-        '    <fd-list-item><fd-list-checkbox>List item 2</fd-list-checkbox></fd-list-item>\n' +
-        '    <fd-list-item><fd-list-checkbox>List item 3</fd-list-checkbox></fd-list-item>\n' +
-        '    <fd-list-item><fd-list-checkbox>List item 4</fd-list-checkbox></fd-list-item>\n' +
-        '</fd-list>';
+    listCheckboxesHtml = `<fd-list>
+  <fd-list-item><fd-list-checkbox>List item 1</fd-list-checkbox></fd-list-item>
+  <fd-list-item><fd-list-checkbox>List item 2</fd-list-checkbox></fd-list-item>
+  <fd-list-item><fd-list-checkbox>List item 3</fd-list-checkbox></fd-list-item>
+  <fd-list-item><fd-list-checkbox>List item 4</fd-list-checkbox></fd-list-item>
+</fd-list>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('list');

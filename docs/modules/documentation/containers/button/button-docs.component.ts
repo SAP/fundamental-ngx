@@ -677,71 +677,67 @@ export class ButtonDocsComponent implements OnInit {
         }
     };
 
-    buttonHtmlType =
-        '<button fd-button>\n' +
-        '  Primary Button\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'main\'">\n' +
-        '  Main Button\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'secondary\'">\n' +
-        '  Secondary Button\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'toolbar\'">\n' +
-        '  Toolbar Button\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'positive\'">\n' +
-        '  Positive Button\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'negative\'">\n' +
-        '  Negative Button\n' +
-        '</button>';
+    buttonHtmlType = `<button fd-button>
+  Primary Button
+</button>
+<button fd-button [type]="'main'">
+  Main Button
+</button>
+<button fd-button [type]="'secondary'">
+  Secondary Button
+</button>
+<button fd-button [type]="'toolbar'">
+  Toolbar Button
+</button>
+<button fd-button [type]="'positive'">
+  Positive Button
+</button>
+<button fd-button [type]="'negative'">
+  Negative Button
+</button>`;
 
-    buttonHtmlSize =
-        '<button fd-button [size]="\'xs\'">\n' +
-        '  Extra-Small Button\n' +
-        '</button>\n' +
-        '<button fd-button [size]="\'s\'">\n' +
-        '  Small Button\n' +
-        '</button>\n' +
-        '<button fd-button [size]="\'compact\'">\n' +
-        '  Compact Button\n' +
-        '</button>\n' +
-        '<button fd-button>\n' +
-        '  Normal Button\n' +
-        '</button>\n' +
-        '<button fd-button [size]="\'l\'">\n' +
-        '  Large Button\n' +
-        '</button>';
+    buttonHtmlSize = `<button fd-button [size]="'xs'">
+  Extra-Small Button
+</button>
+<button fd-button [size]="'s'">
+  Small Button
+</button>
+<button fd-button [size]="'compact'">
+  Compact Button
+</button>
+<button fd-button>
+  Normal Button
+</button>
+<button fd-button [size]="'l'">
+  Large Button
+</button>`;
 
-    buttonHtmlIcon =
-        '<button fd-button [glyph]="\'cart\'">\n' +
-        '  Add to Cart\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'main\'" [glyph]="\'cart\'">\n' +
-        '  Add to Cart\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'toolbar\'" [glyph]="\'filter\'">\n' +
-        '  Filter\n' +
-        '</button>\n' +
-        '<button fd-button [type]="\'positive\'" [glyph]="\'accept\'">\n' +
-        '  Approve\n' +
-        '</button>\n' +
-        '<button fd-button [glyph]="\'cart\'"></button>\n' +
-        '<button fd-button [type]="\'main\'" [glyph]="\'cart\'"></button>\n' +
-        '<button fd-button [type]="\'toolbar\'" [glyph]="\'filter\'"></button>\n' +
-        '<button fd-button [type]="\'positive\'" [glyph]="\'accept\'"></button>';
+    buttonHtmlIcon = `<button fd-button [glyph]="'cart'">
+  Add to Cart
+</button>
+<button fd-button [type]="'main'" [glyph]="'cart'">
+  Add to Cart
+</button>
+<button fd-button [type]="'toolbar'" [glyph]="'filter'">
+  Filter
+</button>
+<button fd-button [type]="'positive'" [glyph]="'accept'">
+  Approve
+</button>
+<button fd-button [glyph]="'cart'"></button>
+<button fd-button [type]="'main'" [glyph]="'cart'"></button>
+<button fd-button [type]="'toolbar'" [glyph]="'filter'"></button>
+<button fd-button [type]="'positive'" [glyph]="'accept'"></button>`;
 
-    buttonHtmlState =
-        '<button fd-button>\n' +
-        '  Normal State\n' +
-        '</button>\n' +
-        '<button fd-button [state]="\'selected\'">\n' +
-        '  Selected State\n' +
-        '</button>\n' +
-        '<button fd-button [state]="\'disabled\'">\n' +
-        '  Disabled State\n' +
-        '</button>';
+    buttonHtmlState = `<button fd-button>
+  Normal State
+</button>
+<button fd-button [state]="'selected'">
+  Selected State
+</button>
+<button fd-button [state]="'disabled'">
+  Disabled State
+</button>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');

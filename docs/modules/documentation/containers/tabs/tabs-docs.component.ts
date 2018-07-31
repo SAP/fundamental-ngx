@@ -80,31 +80,29 @@ export class TabsDocsComponent implements OnInit {
         }
     };
 
-    tabHtml =
-        '<fd-tab-list>\n' +
-        '  <fd-tab [title]="\'Link\'">\n' +
-        '    Content Link\n' +
-        '  </fd-tab>\n' +
-        '  <fd-tab [title]="\'Selected\'" [disabled]="false">\n' +
-        '    Content Selected\n' +
-        '  </fd-tab>\n' +
-        '  <fd-tab [title]="\'Link\'" [disabled]="false">\n' +
-        '    Content Link Two\n' +
-        '  </fd-tab>\n' +
-        '  <fd-tab [title]="\'Disabled\'" [disabled]="true">\n' +
-        '    Disabled\n' +
-        '  </fd-tab>\n' +
-        '</fd-tab-list>';
+    tabHtml = `<fd-tab-list>
+  <fd-tab [title]="'Link'">
+    Content Link
+  </fd-tab>
+  <fd-tab [title]="'Selected'" [disabled]="false">
+    Content Selected
+  </fd-tab>
+  <fd-tab [title]="'Link'" [disabled]="false">
+    Content Link Two
+  </fd-tab>
+  <fd-tab [title]="'Disabled'" [disabled]="true">
+    Disabled
+  </fd-tab>
+</fd-tab-list>`;
 
-    selectTabByIdHtml =
-        '<fd-tab-list #tabList>\n' +
-        '  <fd-tab id="tab1" [title]="\'Tab 1\'">\n' +
-        '    Tab 1\n' +
-        '  </fd-tab>\n' +
-        '  <fd-tab id="tab2" [title]="\'Tab 2\'">\n' +
-        '    Tab 2\n' +
-        '  </fd-tab>\n' +
-        '</fd-tab-list>';
+    selectTabByIdHtml = `<fd-tab-list #tabList>
+  <fd-tab id="tab1" [title]="'Tab 1'">
+    Tab 1
+  </fd-tab>
+  <fd-tab id="tab2" [title]="'Tab 2'">
+    Tab 2
+  </fd-tab>
+</fd-tab-list>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tabs');
