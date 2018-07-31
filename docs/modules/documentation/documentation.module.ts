@@ -39,10 +39,12 @@ import { TableDocsComponent } from './containers/table/table-docs.component';
 import { ActionBarDocsComponent } from './containers/action-bar/action-bar-docs.component';
 import { PanelDocsComponent } from './containers/panel/panel-docs.component';
 import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.component';
+import { MenuDocsComponent } from './containers/menu/menu-docs.component';
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
 import { FormDocsComponent } from './containers/form/form-docs.component';
 import { SideNavigationDocsComponent } from './containers/side-navigation/side-navigation-docs.component';
 import { NavbarDocsComponent } from './containers/navbar/navbar-docs.component';
+import { PopoverDocsComponent } from './containers/popover/popover-docs.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -77,10 +79,12 @@ const ROUTES: Routes = [
             { path: 'inputGroup', component: InputGroupDocsComponent },
             { path: 'list', component: ListDocsComponent },
             { path: 'megaMenu', component: MegaMenuDocsComponent },
+            { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
             { path: 'navbar', component: NavbarDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
+            { path: 'popover', component: PopoverDocsComponent },
             { path: 'sideNavigation', component: SideNavigationDocsComponent },
             { path: 'table', component: TableDocsComponent },
             { path: 'tabs', component: TabsDocsComponent },
@@ -117,6 +121,7 @@ const ROUTES: Routes = [
         ImageDocsComponent,
         ListDocsComponent,
         MegaMenuDocsComponent,
+        MenuDocsComponent,
         ModalDocsComponent,
         TabsDocsComponent,
         TableDocsComponent,
@@ -124,6 +129,7 @@ const ROUTES: Routes = [
         TreeDocsComponent,
         PaginationDocsComponent,
         PanelDocsComponent,
+        PopoverDocsComponent,
         SideNavigationDocsComponent,
         MegaMenuDocsComponent,
         TileDocsComponent,
