@@ -5,7 +5,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: 'fd-label',
     templateUrl: './badge-label.component.html'
 })
-
 export class LabelComponent extends AbstractFdNgxClass {
     @Input() status: string = '';
     @Input() isStatusLabel: boolean = false;
@@ -13,7 +12,6 @@ export class LabelComponent extends AbstractFdNgxClass {
     @Input() indicator: string = '';
     @Input() icon: string = '';
     @Input() semantic: string = '';
-
 
     _setProperties() {
         if (this.isStatusLabel) {
@@ -29,8 +27,8 @@ export class LabelComponent extends AbstractFdNgxClass {
             }
         } else {
             this._addClassToElement('fd-label');
-        if (this.status) {
-              this._addClassToElement('fd-label--' + this.status);
+            if (this.status) {
+                this._addClassToElement('fd-label--' + this.status);
             }
         }
     }

@@ -6,7 +6,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     templateUrl: './action-bar-back.component.html'
 })
 export class ActionBarBackComponent extends AbstractFdNgxClass {
-   
     _setProperties() {
         this._addClassToElement('fd-action-bar__back');
     }
