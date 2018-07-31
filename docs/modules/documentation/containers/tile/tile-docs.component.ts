@@ -764,21 +764,27 @@ export class TileDocsComponent implements OnInit {
         '  </fd-tile-content>\n' +
         '</fd-tile>\n';
 
-    actionsTileHtml =
-        '<fd-tile>\n' +
-        '  <fd-tile-content>\n' +
-        '    <fd-tile-title>\n' +
-        '      Tile Title\n' +
-        '    </fd-tile-title>\n' +
-        '  </fd-tile-content>\n' +
-        '  <fd-tile-actions>\n' +
-        '    <fd-dropdown [isContextualMenu]="true">\n' +
-        '      <fd-dropdown-item>Option 1</fd-dropdown-item>\n' +
-        '      <fd-dropdown-item>Option 2</fd-dropdown-item>\n' +
-        '      <fd-dropdown-item>Option 3</fd-dropdown-item>\n' +
-        '    </fd-dropdown>\n' +
-        '  </fd-tile-actions>\n' +
-        '</fd-tile>\n';
+    actionsTileHtml =`<fd-tile>
+    <fd-tile-content>
+        <fd-tile-title>Tile Title</fd-tile-title>
+    </fd-tile-content>
+    <fd-tile-actions>
+        <fd-popover>
+            <fd-popover-control>
+                <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <fd-menu-list>
+                        <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
+                    </fd-menu-list>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-tile-actions>
+</fd-tile>`;
 
     buttonTileHtml =
         '<fd-tile [isButton]="true">\n' +

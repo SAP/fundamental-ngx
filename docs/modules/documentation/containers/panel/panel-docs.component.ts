@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './panel-docs.component.html'
 })
 export class PanelDocsComponent implements OnInit {
-            panelHtml = `<fd-panel>
+panelHtml = `<fd-panel>
   <fd-panel-header>
     <fd-panel-head>
       <fd-panel-title>Panel Title</fd-panel-title>
@@ -16,8 +16,12 @@ export class PanelDocsComponent implements OnInit {
     </fd-panel-actions>
   </fd-panel-header>
   <fd-panel-filters>
-    <fd-dropdown>Color</fd-dropdown>
-    <fd-dropdown>Size</fd-dropdown>
+    <fd-popover [isDropdown]="true">
+        Color
+    </fd-popover>
+    <fd-popover [isDropdown]="true">
+        Size
+    </fd-popover>
   </fd-panel-filters>
   <fd-panel-filters>
     <span class="fd-tag" role="button">Blue</span>

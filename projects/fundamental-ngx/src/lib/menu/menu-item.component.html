@@ -5,6 +5,9 @@
   <a *ngIf="routerLink" class="fd-menu__item" [ngStyle]="{'cursor': getCursor() }">
     <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
   </a>
+  <span *ngIf="!url && !routerLink" [ngStyle]="{'cursor': getCursor() }" class="fd-menu__item">
+    <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
+  </span>
   <ng-template #tempOutlet>
     <ng-content></ng-content>
   </ng-template>

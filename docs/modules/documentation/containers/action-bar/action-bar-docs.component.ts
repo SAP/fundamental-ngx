@@ -37,13 +37,22 @@ backButtonHtml = `<fd-action-bar>
         <fd-action-bar-title>Page Title</fd-action-bar-title>
     </fd-action-bar-header>
     <fd-action-bar-actions>
-        <fd-dropdown [isContextualMenu]="true">
-            <fd-dropdown-item>Edit</fd-dropdown-item>
-            <fd-dropdown-item>Delete</fd-dropdown-item>
-            <fd-dropdown-item>Assign</fd-dropdown-item>
-            <fd-dropdown-item>Expire</fd-dropdown-item>
-            <fd-dropdown-item>Archive</fd-dropdown-item>
-        </fd-dropdown>
+        <fd-popover>
+            <fd-popover-control>
+                <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <fd-menu-list>
+                        <fd-menu-item [url]="'#'">Edit</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Delete</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Assign</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Expire</fd-menu-item>
+                        <fd-menu-item [url]="'#'">Archive</fd-menu-item>
+                    </fd-menu-list>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
     </fd-action-bar-actions>
 </fd-action-bar>`;
 
@@ -57,13 +66,22 @@ backButtonHtml = `<fd-action-bar>
             <fd-action-bar-description>Action bar Description</fd-action-bar-description>
         </fd-action-bar-header>
         <fd-action-bar-actions>
-            <fd-dropdown [isContextualMenu]="true">
-                <fd-dropdown-item>Edit</fd-dropdown-item>
-                <fd-dropdown-item>Delete</fd-dropdown-item>
-                <fd-dropdown-item>Assign</fd-dropdown-item>
-                <fd-dropdown-item>Expire</fd-dropdown-item>
-                <fd-dropdown-item>Archive</fd-dropdown-item>
-            </fd-dropdown>
+            <fd-popover>
+                <fd-popover-control>
+                    <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <fd-menu>
+                        <fd-menu-list>
+                            <fd-menu-item [url]="'#'">Edit</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Delete</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Assign</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Expire</fd-menu-item>
+                            <fd-menu-item [url]="'#'">Archive</fd-menu-item>
+                        </fd-menu-list>
+                    </fd-menu>
+                </fd-popover-body>
+            </fd-popover>
         </fd-action-bar-actions>
     </fd-action-bar>
 </fd-action-bar-mobile>`;
