@@ -110,28 +110,6 @@
 <p>You can also specify dropdown size:</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-<<<<<<< HEAD
-    <fd-dropdown [size]="'xs'" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-    <fd-dropdown [size]="'s'" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-    <fd-dropdown [size]="'compact'" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-    <fd-dropdown [size]="'l'" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-=======
     <fd-popover [isDropdown]="true" [size]="'xs'">
       Dropdown
       <fd-popover-body>
@@ -226,7 +204,6 @@
         </fd-menu>
       </fd-popover-body>
     </fd-popover>
->>>>>>> develop
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="dropdownSizeHtml"></code></pre>
@@ -305,30 +282,8 @@
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="contextualMenuDropdownHtml"></code></pre>
 
-<<<<<<< HEAD
-<separator></separator>
-
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-dropdown [glyph]="data.properties.glyph" [size]="data.properties.size" [buttonText]="data.properties.buttonText" [disabled]="data.state.disabled"
-    [id]="data.properties.id" [isContextualMenu]="data.state.isContextualMenu" [noBorder]="data.properties.noBorder">
-    {{data.properties.label}}
-    <fd-dropdown-item>{{data.properties.items.optionOne}}</fd-dropdown-item>
-    <fd-dropdown-item>{{data.properties.items.optionTwo}}</fd-dropdown-item>
-    <fd-dropdown-item>{{data.properties.items.OptionThree}}</fd-dropdown-item>
-    <fd-dropdown-group>
-      <fd-dropdown-header>Group Header</fd-dropdown-header>
-      <fd-dropdown-item>{{data.properties.items.GroupOption.optionFour}}</fd-dropdown-item>
-      <fd-dropdown-item>{{data.properties.items.GroupOption.optionFive}}</fd-dropdown-item>
-      <fd-dropdown-item>{{data.properties.items.GroupOption.optionSix}}</fd-dropdown-item>
-    </fd-dropdown-group>
-
-  </fd-dropdown>
-
-</playground>
-=======
 <style>
   fd-popover {
     margin-right: 20px;
   }
 </style>
->>>>>>> develop
