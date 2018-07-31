@@ -6,7 +6,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     templateUrl: './badge-label.component.html'
 })
 
-export class LabelComponent extends AbstractCustomClassManager {
+export class LabelComponent extends AbstractFdNgxClass {
     @Input() status: string = '';
     @Input() isStatusLabel: boolean = false;
     @Input() statusIcon: string = '';
