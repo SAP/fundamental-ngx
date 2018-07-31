@@ -18,9 +18,9 @@
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-list>
-      <fd-list-item><a style="cursor: pointer;">List item 1</a></fd-list-item>
+      <fd-list-item><a href="#">List item 1</a></fd-list-item>
       <fd-list-item>List item 2</fd-list-item>
-      <fd-list-item><a style="cursor: pointer;">List item 3</a></fd-list-item>
+      <fd-list-item><a href="#">List item 3</a></fd-list-item>
       <fd-list-item>List item 4</fd-list-item>
     </fd-list>
   </div>
@@ -35,22 +35,22 @@
     <fd-list>
       <fd-list-item>List item 1
         <fd-list-action>
-          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+          <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
         </fd-list-action>
       </fd-list-item>
       <fd-list-item>List item 2
         <fd-list-action>
-          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+          <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
         </fd-list-action>
       </fd-list-item>
       <fd-list-item>List item 3
         <fd-list-action>
-          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+          <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
         </fd-list-action>
       </fd-list-item>
       <fd-list-item>List item 4
         <fd-list-action>
-          <button fd-button type="secondary" [glyph]="data.properties.action.icon"></button>
+          <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
         </fd-list-action>
       </fd-list-item>
     </fd-list>
@@ -74,14 +74,6 @@
 <pre><code mwlHighlightJs language="HTML" [source]="listCheckboxesHtml"></code></pre>
 
 <separator></separator>
-
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-list-item>{{data.properties.action.label}}<fd-list-action>
-        <button fd-button type="secondary" [glyph] = "data.properties.action.icon">
-        </button>
-      </fd-list-action></fd-list-item>
-</playground>
-
 
 
 
