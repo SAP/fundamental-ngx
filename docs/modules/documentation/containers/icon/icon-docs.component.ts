@@ -1289,13 +1289,12 @@ export class IconDocsComponent implements OnInit {
         }
     };
 
-    iconHtml =
-        '<div class="grid">\n' +
-        '  <div *ngFor="let icon of icons">\n' +
-        '    <fd-icon [glyph]="icon" size="\'l\'"></fd-icon>\n' +
-        '    <span>{{ icon }}</span>\n' +
-        '  </div>\n' +
-        '</div>';
+    iconHtml = `<div class="grid">
+  <div *ngFor="let icon of icons">
+    <fd-icon [glyph]="icon" [size]="'l'"></fd-icon>
+    <span>{{ icon }}</span>
+  </div>
+</div>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('icon');

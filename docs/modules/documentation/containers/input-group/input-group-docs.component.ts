@@ -689,49 +689,51 @@ export class InputGroupDocsComponent {
         }
     };
 
-    textAddOnHtml =
-        '<label class="fd-form__label">Left Aligned Text Add-on</label>\n' +
-        '<fd-input-group [placement]="\'before\'" [addOnText]="\'$\'" [placeholder]="\'Amount\'">\n' +
-        '\n' +
-        '</fd-input-group>\n' +
-        '<br/>\n' +
-        '<label fd-form-label>Right Aligned Text Add-on</label>\n' +
-        '<fd-input-group [placement]="\'after\'" [addOnText]="\'$\'" [placeholder]="\'Amount\'">\n' +
-        '\n' +
-        '</fd-input-group>';
+    textAddOnHtml = `<label class="fd-form__label">Left Aligned Text Add-on</label>
+<fd-input-group [placement]="'before'" [addOnText]="'$'" [placeholder]="'Amount'">
 
-    iconAddOnHtml =
-        '<label class="fd-form__label">Left Aligned Icon Add-on</label>\n' +
-        '<fd-input-group [placement]="\'before\'" [glyph]="\'accelerated\'" [placeholder]="\'Amount\'">\n' +
-        '\n' +
-        '</fd-input-group>\n' +
-        '<br/>\n' +
-        '<label fd-form-label>Right Aligned Icon Add-on</label>\n' +
-        '<fd-input-group [placement]="\'after\'" [glyph]="\'accelerated\'" [placeholder]="\'Amount\'">\n' +
-        '\n' +
-        '</fd-input-group>';
+</fd-input-group>
+<br/>
+<label fd-form-label>Right Aligned Text Add-on</label>
+<fd-input-group [placement]="'after'" [addOnText]="'$'" [placeholder]="'Amount'">
 
-    numberInputHtml =
-        '<div fd-form-group>\n' +
-        '  <div fd-form-item>\n' +
-        '    <label fd-form-label>Quantity Spinner</label>\n' +
-        '    <fd-input-group-number\n' +
-        '                           [disabled]="false"\n' +
-        '                           [inputText]="123">\n' +
-        '    </fd-input-group-number>\n' +
-        '  </div>\n' +
-        '</div>';
+</fd-input-group>`;
 
-    searchInputHtml =
-        '<div fd-form-group>\n' +
-        '  <div fd-form-item>\n' +
-        '    <label fd-form-label>Search input</label>\n' +
-        '    <fd-input-group-search\n' +
-        '                           [disabled]="false"\n' +
-        '                           [inputText]="\'Search term\'">\n' +
-        '    </fd-input-group-search>\n' +
-        '  </div>\n' +
-        '</div>';
+    iconAddOnHtml = `<label class="fd-form__label">Left Aligned Icon Add-on</label>
+<fd-input-group [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
+
+</fd-input-group>
+<br/>
+<label fd-form-label>Right Aligned Icon Add-on</label>
+<fd-input-group [placement]="'after'" [glyph]="'accelerated'" [placeholder]="'Amount'">
+
+</fd-input-group>`;
+
+    buttonIconAddOnHtml = `<label class="fd-form__label">Left Aligned Icon Button Add-on</label>
+<fd-input-group [button]="true" [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
+
+</fd-input-group>
+<br/>
+<div fd-form-group>
+  <div fd-form-item>
+    <label fd-form-label>Right Aligned Text Button Add-on</label>
+    <fd-input-group [button]="true" [placement]="'after'" [addOnText]="'Submit'" [placeholder]="'Amount'">
+
+    </fd-input-group>
+  </div>
+</div>`;
+
+    numberInputHtml = `<label fd-form-label>Quantity Spinner</label>
+<fd-input-group-number
+                       [disabled]="false"
+                       [inputText]="123">
+</fd-input-group-number>`;
+
+    searchInputHtml = `<label fd-form-label>Search input</label>
+<fd-input-group-search
+                       [disabled]="false"
+                       [inputText]="'Search term'">
+</fd-input-group-search>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');
