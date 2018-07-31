@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
-import { DropdownModule } from '../dropdown/dropdown.module';
 
 import { ActionBarComponent } from './action-bar.component';
 import { ActionBarTitleComponent } from './action-bar-title.component';
@@ -22,7 +21,7 @@ import { ActionBarMobileComponent } from './action-bar-mobile.component';
         ActionBarBackComponent,
         ActionBarMobileComponent
     ],
-    imports: [CommonModule, ButtonModule, IconModule, DropdownModule],
+    imports: [CommonModule, ButtonModule, IconModule],
     exports: [
         ActionBarComponent,
         ActionBarTitleComponent,
