@@ -15,12 +15,51 @@ export class TimeComponent implements OnChanges {
 
     parseHour() {
         console.log(this.time);
-        if (this.time.hour > 11) {
+        if (this.time.hour > 12) {
             this.displayedHour = this.time.hour - 12;
+            this.period = 'pm';
+        } else if (this.time.hour === 12) {
+            this.displayedHour = 12;
             this.period = 'pm';
         } else {
             this.displayedHour = this.time.hour;
             this.period = 'am';
+        }
+    }
+
+    setInternalHour() {
+        if (this.period === 'am') {
+            if (this.displayedHour === 12) {
+                this.time.hour = 0;
+            } else {
+                this.time.hour = this.displayedHour;
+            }
+        } else if (this.period === 'pm') {
+            if (this.displayedHour === 12) {
+                this.time.hour = this.displayedHour;
+            }
+        }
+    }
+
+    checkInput(inputType) {
+        if (inputType === 'hour') {
+            if (this.displayedHour > 12 || this.displayedHour < 0 || !Number.isInteger(this.displayedHour)) {
+                this.displayedHour = null;
+                this.time.hour = null;
+            } else {
+                this.setInternalHour();
+            }
+        } else if (inputType === 'minute' || inputType === 'second') {
+            if (this.time.minute > 59 || this.time.minute < 0 || !Number.isInteger(this.time.minute)) {
+                this.time.minute = null;
+            }
+            if (this.time.second > 59 || this.time.second < 0 || !Number.isInteger(this.time.second)) {
+                this.time.second = null;
+            }
+        } else if (inputType === 'period') {
+            if (this.period !== 'am' && this.period !== 'pm') {
+                this.parseHour();
+            }
         }
     }
 
@@ -29,12 +68,20 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseHour() {
-        this.time.hour = this.time.hour + 1;
+        if (this.time.hour === 23) {
+            this.time.hour = 0;
+        } else {
+            this.time.hour = this.time.hour + 1;
+        }
         this.parseHour();
     }
 
     decreaseHour() {
-        this.time.hour = this.time.hour - 1;
+        if (this.time.hour === 0) {
+            this.time.hour = 23;
+        } else {
+            this.time.hour = this.time.hour - 1;
+        }
         this.parseHour();
     }
 
@@ -74,13 +121,13 @@ export class TimeComponent implements OnChanges {
         }
     }
 
-    changePeriod() {
+    togglePeriod() {
         if (this.period === 'am') {
-          this.period = 'pm';
-          this.time.hour = this.time.hour + 12;
+            this.period = 'pm';
+            this.time.hour = this.time.hour + 12;
         } else if (this.period === 'pm') {
-          this.period = 'am';
-          this.time.hour = this.time.hour - 12;
+            this.period = 'am';
+            this.time.hour = this.time.hour - 12;
         }
         this.parseHour();
     }

@@ -5,7 +5,7 @@
               aria-label="Increase hours"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="displayedHour" class="fd-form__control" type="number" min="0" max="23" placeholder="hh"
+      <input [(ngModel)]="displayedHour" (blur)="checkInput('hour')" class="fd-form__control" type="number" min="0" max="23" placeholder="hh"
              aria-label="Hours"/>
     </div>
     <div class="fd-time__control">
@@ -20,7 +20,7 @@
               aria-label="Increase minutes"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="time.minute" class="fd-form__control" type="number" min="0" max="59" placeholder="mm"
+      <input [(ngModel)]="time.minute" (blur)="checkInput('minute')" class="fd-form__control" type="number" min="0" max="59" placeholder="mm"
              aria-label="Minutes"/>
     </div>
     <div class="fd-time__control">
@@ -34,7 +34,7 @@
               aria-label="Increase seconds"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="time.second" class="fd-form__control" type="number" min="0" max="59" placeholder="ss"
+      <input [(ngModel)]="time.second" (blur)="checkInput('second')" class="fd-form__control" type="number" min="0" max="59" placeholder="ss"
              aria-label="Seconds"/>
     </div>
     <div class="fd-time__control">
@@ -44,15 +44,15 @@
   </div>
   <div class="fd-time__item">
     <div class="fd-time__control">
-      <button (click)="changePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+      <button (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase period"></button>
     </div>
     <div class="fd-time__input">
-      <input class="fd-form__control" type="text" placeholder="am" value="{{period}}"
+      <input [(ngModel)]="period" class="fd-form__control" (blur)="checkInput('period')" type="text" placeholder="am"
              aria-label="Period"/>
     </div>
     <div class="fd-time__control">
-      <button (click)="changePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+      <button (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
               aria-label="Decrease period"></button>
     </div>
   </div>
