@@ -5,19 +5,23 @@ import { Component, Input, HostListener, ElementRef } from '@angular/core';
     templateUrl: './popover.component.html'
 })
 export class PopoverComponent {
-    @Input() id;
+    @Input() disabled: boolean = false;
+    @Input() isDropdown: boolean = false;
+    @Input() glyph: string;
+    @Input() size: string;
+    @Input() btnType: string = '';
 
-    isOpen:boolean = false;
+    isOpen: boolean = false;
 
     close() {
         if (this.isOpen) {
             this.isOpen = false;
-        } 
+        }
     }
 
     @HostListener('document:keydown.escape', ['$event'])
     onEscapeKeydownHandler() {
-       this.close();
+        this.close();
     }
 
     @HostListener('document:click', ['$event'])
