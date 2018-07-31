@@ -1,184 +1,289 @@
 <header>Dropdown</header>
-<description>The dropdown component lets the user select one of several different options. It is more flexible than the normal Select.</description>
-<import module="DropdownModule" path="fundamental/dropdown/dropdown.module"></import>
+<description>The dropdown component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use of a styled button. It allows users to make one selection from a list. It is more flexible than the normal Select. Generally, it should be used when there are between 3 to 10 or more options.
+<br><br>This component is completely composed from other components and doeszn’t have any of its own.</description>
+
 <separator></separator>
 
-<h1>&lt;fd-dropdown&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: '<fd-dropdown-item>', description: 'A dropdown menu action item.  Must be a child of <fd-dropdown> or <fd-dropdown-group>.' },
-    { name: '<fd-dropdown-group>', description: 'Groups a list of dropdown items.  Must be a child of <fd-dropdown>.' }
-  ],
-  inputs: [
-    { name: 'id', description: 'ID of the element' },
-    { name: 'glyph', description: 'The dropdown icon element.' },
-    { name: 'disabled', description: 'If true, disables the dropdown.' },
-    { name: 'size', description: 'Size of the dropdown.  Options include \'xs\', \'s\', \'compact\', and \'l\'.  If no size is provided, default (normal) will be used.'}
-  ]
-}"></properties>
-<separator></separator>
-
+<h2>Default Dropdown</h2>
 <p>
   The dropdown is designed to resemble other Fundamental input components. The options can be divided in groups, which are
   visually separated and can have a small group header text.
 </p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-dropdown>
-      Select
-      <fd-dropdown-item>Option 1</fd-dropdown-item>
-      <fd-dropdown-item>Option 2</fd-dropdown-item>
-      <fd-dropdown-item>Option 3</fd-dropdown-item>
-      <fd-dropdown-group>
-        <fd-dropdown-header>Group Header</fd-dropdown-header>
-        <fd-dropdown-item>Option 4</fd-dropdown-item>
-        <fd-dropdown-item>Option 5</fd-dropdown-item>
-        <fd-dropdown-item>Option 6</fd-dropdown-item>
-      </fd-dropdown-group>
-    </fd-dropdown>
+    <fd-popover [isDropdown]="true">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+          <fd-menu-group>
+            <fd-menu-title>
+              Group header
+            </fd-menu-title>
+            <fd-menu-list>
+              <fd-menu-item [url]="'#'">
+                Option 4
+              </fd-menu-item>
+              <fd-menu-item [url]="'#'">
+                Option 5
+              </fd-menu-item>
+              <fd-menu-item [url]="'#'">
+                Option 6
+              </fd-menu-item>
+            </fd-menu-list>
+          </fd-menu-group>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="textDropdownHtml"></code></pre>
 
 <separator></separator>
 
-<p>
-  An disabled dropdown is styled differently and is inactive.
-</p>
+<h2>Disabled State</h2>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-dropdown [disabled]="true">
-      Select
-      <fd-dropdown-item>Option 1</fd-dropdown-item>
-      <fd-dropdown-item>Option 2</fd-dropdown-item>
-      <fd-dropdown-item>Option 3</fd-dropdown-item>
-    </fd-dropdown>
+    <fd-popover [isDropdown]="true" [disabled]="true">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="disabledDropdownHtml"></code></pre>
 
 <separator></separator>
 
-<p>
-  It can also include complementary information like an icon.
-</p>
+<h2>Dropdown with Icon</h2>
+<p>It can also include complementary information like an icon.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-dropdown [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-      <fd-dropdown-group>
-        <fd-dropdown-header>1 Donec mattis arcu et velit</fd-dropdown-header>
-        <fd-dropdown-item>1 Accumsan tellus</fd-dropdown-item>
-        <fd-dropdown-item>1 Accumsan</fd-dropdown-item>
-        <fd-dropdown-item>1 Volutpat felix</fd-dropdown-item>
-        <fd-dropdown-group>
-          <fd-dropdown-header>2 Donec mattis arcu et velit</fd-dropdown-header>
-          <fd-dropdown-item>2 Accumsan tellus</fd-dropdown-item>
-          <fd-dropdown-item>2 Accumsan</fd-dropdown-item>
-          <fd-dropdown-item>2 Volutpat felix</fd-dropdown-item>
-        </fd-dropdown-group>
-      </fd-dropdown-group>
-    </fd-dropdown>
+    <fd-popover [isDropdown]="true" [glyph]="'filter'">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="iconDropdownHtml"></code></pre>
 
 <separator></separator>
 
-<p>
-  You can also specify dropdown size:
-</p>
+<h2>Size Options</h2>
+<p>You can also specify dropdown size:</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-dropdown size="xs" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-    <fd-dropdown size="s" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-    <fd-dropdown size="compact" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
-    <fd-dropdown size="l" [glyph]="'filter'">Select
-      <fd-dropdown-item>Pellentesque metus</fd-dropdown-item>
-      <fd-dropdown-item>Duis malesuada odio volutpat</fd-dropdown-item>
-      <fd-dropdown-item>Suspendisse</fd-dropdown-item>
-    </fd-dropdown>
+    <fd-popover [isDropdown]="true" [size]="'xs'">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [isDropdown]="true" [size]="'s'">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [isDropdown]="true" [size]="'compact'">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [isDropdown]="true">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [isDropdown]="true" [size]="'l'">
+      Dropdown
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="dropdownSizeHtml"></code></pre>
 
 <separator></separator>
 
-<p>
-  You can also use a contextual menu dropdown:
-</p>
+<header>Contextual Menu</header>
+<description>
+    The contextual menu component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use of a styled button. A More icon or the word “More”, is used to indicate there are more options than room to display them. On click or tap, a contextual menu opens.
+</description>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-dropdown [isContextualMenu]="true">
-      <fd-dropdown-item>Option 1</fd-dropdown-item>
-      <fd-dropdown-item>Option 2</fd-dropdown-item>
-      <fd-dropdown-item>Option 3</fd-dropdown-item>
-      <fd-dropdown-group>
-        <fd-dropdown-header>Group Header</fd-dropdown-header>
-        <fd-dropdown-item>Option 4</fd-dropdown-item>
-        <fd-dropdown-item>Option 5</fd-dropdown-item>
-        <fd-dropdown-item>Option 6</fd-dropdown-item>
-      </fd-dropdown-group>
-    </fd-dropdown>
+    <fd-popover>
+      <fd-popover-control>
+        <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+      </fd-popover-control>
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
 
-    <fd-dropdown [isContextualMenu]="true" [buttonText]="'More'">
-      <fd-dropdown-item>Option 1</fd-dropdown-item>
-      <fd-dropdown-item>Option 2</fd-dropdown-item>
-      <fd-dropdown-item>Option 3</fd-dropdown-item>
-      <fd-dropdown-group>
-        <fd-dropdown-header>Group Header</fd-dropdown-header>
-        <fd-dropdown-item>Option 4</fd-dropdown-item>
-        <fd-dropdown-item>Option 5</fd-dropdown-item>
-        <fd-dropdown-item>Option 6</fd-dropdown-item>
-      </fd-dropdown-group>
-    </fd-dropdown>
+    <fd-popover>
+      <fd-popover-control>
+        <button fd-button>More</button>
+      </fd-popover-control>
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
 
-    <fd-dropdown [isContextualMenu]="true" [buttonText]="'More'" [noBorder]="true">
-      <fd-dropdown-item>Option 1</fd-dropdown-item>
-      <fd-dropdown-item>Option 2</fd-dropdown-item>
-      <fd-dropdown-item>Option 3</fd-dropdown-item>
-      <fd-dropdown-group>
-        <fd-dropdown-header>Group Header</fd-dropdown-header>
-        <fd-dropdown-item>Option 4</fd-dropdown-item>
-        <fd-dropdown-item>Option 5</fd-dropdown-item>
-        <fd-dropdown-item>Option 6</fd-dropdown-item>
-      </fd-dropdown-group>
-    </fd-dropdown>
+    <fd-popover>
+      <fd-popover-control>
+        <button fd-button [type]="'secondary'">More</button>
+      </fd-popover-control>
+      <fd-popover-body>
+        <fd-menu>
+          <fd-menu-list>
+            <fd-menu-item [url]="'#'">
+              Option 1
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 2
+            </fd-menu-item>
+            <fd-menu-item [url]="'#'">
+              Option 3
+            </fd-menu-item>
+          </fd-menu-list>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="contextualMenuDropdownHtml"></code></pre>
 
-<separator></separator>
-
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-dropdown [glyph]="data.properties.glyph" [size]="data.properties.size" [buttonText]="data.properties.buttonText" [disabled]="data.state.disabled"
-    [id]="data.properties.id" [isContextualMenu]="data.state.isContextualMenu" [noBorder]="data.properties.noBorder">
-    {{data.properties.label}}
-    <fd-dropdown-item>{{data.properties.items.optionOne}}</fd-dropdown-item>
-    <fd-dropdown-item>{{data.properties.items.optionTwo}}</fd-dropdown-item>
-    <fd-dropdown-item>{{data.properties.items.OptionThree}}</fd-dropdown-item>
-    <fd-dropdown-group>
-      <fd-dropdown-header>Group Header</fd-dropdown-header>
-      <fd-dropdown-item>{{data.properties.items.GroupOption.optionFour}}</fd-dropdown-item>
-      <fd-dropdown-item>{{data.properties.items.GroupOption.optionFive}}</fd-dropdown-item>
-      <fd-dropdown-item>{{data.properties.items.GroupOption.optionSix}}</fd-dropdown-item>
-    </fd-dropdown-group>
-
-  </fd-dropdown>
-
-</playground>
+<style>
+  fd-popover {
+    margin-right: 20px;
+  }
+</style>

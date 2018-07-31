@@ -32,7 +32,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     image: ImageDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
     list: ListDocsComponent.schema,
-    dropdown: DropdownDocsComponent.schema,
     modal: ModalDocsComponent.schema,
     tabs: TabsDocsComponent.schema,
     table: TableDocsComponent.schema,

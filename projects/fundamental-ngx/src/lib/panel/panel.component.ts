@@ -1,11 +1,11 @@
 import { Component, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractCustomClassManager } from '../utils/AbstractCustomClassManager';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Component({
     selector: 'fd-panel',
     templateUrl: './panel.component.html'
 })
-export class PanelComponent extends AbstractCustomClassManager {
+export class PanelComponent extends AbstractFdNgxClass {
     @Input() span;
 
     _setProperties() {
