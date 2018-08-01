@@ -14,7 +14,10 @@ export class TimeComponent implements OnChanges {
     @Input() time: TimeObject;
 
     parseHour() {
-        if (this.time.hour > 12) {
+        if (this.time.hour === 0) {
+            this.displayedHour = 12;
+            this.period = 'am';
+        } else if (this.time.hour > 12) {
             this.displayedHour = this.time.hour - 12;
             this.period = 'pm';
         } else if (this.time.hour === 12) {
@@ -68,7 +71,7 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseHour() {
-        if (this.time.hour === 23) {
+        if (this.time.hour === 23 || !this.time.hour) {
             this.time.hour = 0;
         } else {
             this.time.hour = this.time.hour + 1;
@@ -77,7 +80,9 @@ export class TimeComponent implements OnChanges {
     }
 
     decreaseHour() {
-        if (this.time.hour === 0) {
+        if (!this.time.hour) {
+            this.time.hour = 0;
+        } else if (this.time.hour === 0) {
             this.time.hour = 23;
         } else {
             this.time.hour = this.time.hour - 1;
@@ -86,7 +91,9 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseMinute() {
-        if (this.time.minute === 59) {
+        if (!this.time.minute) {
+            this.time.minute = 0;
+        } else if (this.time.minute === 59) {
             this.time.minute = 0;
             this.increaseHour();
         } else {
@@ -95,7 +102,9 @@ export class TimeComponent implements OnChanges {
     }
 
     decreaseMinute() {
-        if (this.time.minute === 0) {
+        if (!this.time.minute) {
+            this.time.minute = 0;
+        } else if (this.time.minute === 0) {
             this.time.minute = 59;
             this.decreaseHour();
         } else {
@@ -104,7 +113,9 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseSecond() {
-        if (this.time.second === 59) {
+        if (!this.time.second) {
+            this.time.second = 0;
+        } else if (this.time.second === 59) {
             this.time.second = 0;
             this.increaseMinute();
         } else {
@@ -113,7 +124,9 @@ export class TimeComponent implements OnChanges {
     }
 
     decreaseSecond() {
-        if (this.time.second === 0) {
+        if (!this.time.second) {
+            this.time.second = 0;
+        } else if (this.time.second === 0) {
             this.time.second = 59;
             this.decreaseMinute();
         } else {
