@@ -23,6 +23,7 @@ import { PopoverModule } from './popover/popover.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
+import { TimeModule } from './time/time.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 
@@ -62,6 +63,7 @@ import { ModalService } from './modal/modal.service';
         TableModule,
         TabsModule,
         TileModule,
+        TimeModule,
         TreeModule
     ],
     providers: [ModalService]

@@ -18,6 +18,7 @@ import { TreeDocsComponent } from './tree/tree-docs.component';
 import { ModalDocsComponent } from './modal/modal-docs.component';
 import { TableDocsComponent } from './table/table-docs.component';
 import { TileDocsComponent } from './tile/tile-docs.component';
+import { TimeDocsComponent } from './time/time-docs.component';
 
 export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     badgeLabel: BadgeLabelDocsComponent.schema,
@@ -35,6 +36,7 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     tabs: TabsDocsComponent.schema,
     table: TableDocsComponent.schema,
     tile: TileDocsComponent.schema,
+    time: TimeDocsComponent.schema,
     tree: TreeDocsComponent.schema,
     media: {
         properties: {
