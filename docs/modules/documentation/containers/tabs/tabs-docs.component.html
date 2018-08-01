@@ -43,7 +43,9 @@
 
 <separator></separator>
 <h2>Selecting a tab programmatically by ID</h2>
-<p>You can set an <code>id</code> on a tab and select it programmatically using the <code>select()</code> function.</p>
+<p>You can set an
+  <code>id</code> on a tab and select it programmatically using the
+  <code>select()</code> function.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-tab-list #tabList>
@@ -56,8 +58,9 @@
     </fd-tab-list>
   </div>
 </div>
-<br><br>
-<button fd-button type="main" (click)="this.tabList.select('tab2')">
+<br>
+<br>
+<button fd-button [fdType]="'main'" (click)="this.tabList.select('tab2')">
   Select Tab 2
 </button>
 <pre><code mwlHighlightJs language="HTML" [source]="selectTabByIdHtml"></code></pre>
@@ -66,14 +69,14 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <fd-tab-list>
-        <fd-tab [title]="data.properties.items.label" [disabled]="data.state.disabled" >
-          {{data.properties.panels.content}}
-        </fd-tab>
-        <fd-tab [title]="data.properties.items.label2"  [disabled]="data.state.disabled2" >
-          {{data.properties.panels.content2}}
-        </fd-tab>
-        <fd-tab [title]="data.properties.items.label3" [disabled]="data.state.disabled3" >
-          {{data.properties.panels.content3}}
-        </fd-tab>
-      </fd-tab-list>
+    <fd-tab [title]="data.properties.items.label" [disabled]="data.state.disabled">
+      {{data.properties.panels.content}}
+    </fd-tab>
+    <fd-tab [title]="data.properties.items.label2" [disabled]="data.state.disabled2">
+      {{data.properties.panels.content2}}
+    </fd-tab>
+    <fd-tab [title]="data.properties.items.label3" [disabled]="data.state.disabled3">
+      {{data.properties.panels.content3}}
+    </fd-tab>
+  </fd-tab-list>
 </playground>

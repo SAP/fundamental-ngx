@@ -15,7 +15,7 @@ export class ButtonDocsComponent implements OnInit {
                     label: {
                         type: 'string'
                     },
-                    type: {
+                    fdType: {
                         type: 'string',
                         enum: ['default', 'main', 'secondary', 'toolbar']
                     },
@@ -669,7 +669,7 @@ export class ButtonDocsComponent implements OnInit {
     data: any = {
         properties: {
             label: 'click here',
-            type: 'default',
+            fdType: 'default',
             semantic: 'default',
             size: 'default',
             icon: '',
@@ -680,19 +680,19 @@ export class ButtonDocsComponent implements OnInit {
     buttonHtmlType = `<button fd-button>
   Primary Button
 </button>
-<button fd-button [type]="'main'">
+<button fd-button [fdType]="'main'">
   Main Button
 </button>
-<button fd-button [type]="'secondary'">
+<button fd-button [fdType]="'secondary'">
   Secondary Button
 </button>
-<button fd-button [type]="'toolbar'">
+<button fd-button [fdType]="'toolbar'">
   Toolbar Button
 </button>
-<button fd-button [type]="'positive'">
+<button fd-button [fdType]="'positive'">
   Positive Button
 </button>
-<button fd-button [type]="'negative'">
+<button fd-button [fdType]="'negative'">
   Negative Button
 </button>`;
 
@@ -715,19 +715,19 @@ export class ButtonDocsComponent implements OnInit {
     buttonHtmlIcon = `<button fd-button [glyph]="'cart'">
   Add to Cart
 </button>
-<button fd-button [type]="'main'" [glyph]="'cart'">
+<button fd-button [fdType]="'main'" [glyph]="'cart'">
   Add to Cart
 </button>
-<button fd-button [type]="'toolbar'" [glyph]="'filter'">
+<button fd-button [fdType]="'toolbar'" [glyph]="'filter'">
   Filter
 </button>
-<button fd-button [type]="'positive'" [glyph]="'accept'">
+<button fd-button [fdType]="'positive'" [glyph]="'accept'">
   Approve
 </button>
 <button fd-button [glyph]="'cart'"></button>
-<button fd-button [type]="'main'" [glyph]="'cart'"></button>
-<button fd-button [type]="'toolbar'" [glyph]="'filter'"></button>
-<button fd-button [type]="'positive'" [glyph]="'accept'"></button>`;
+<button fd-button [fdType]="'main'" [glyph]="'cart'"></button>
+<button fd-button [fdType]="'toolbar'" [glyph]="'filter'"></button>
+<button fd-button [fdType]="'positive'" [glyph]="'accept'"></button>`;
 
     buttonHtmlState = `<button fd-button>
   Normal State

@@ -5,44 +5,45 @@ import { Component } from '@angular/core';
     templateUrl: './navbar-docs.component.html'
 })
 export class NavbarDocsComponent {
-    navbarHtml =
-        '<fd-navbar>\n' +
-        '  <div fd-navbar-group [position]="\'left\'">\n' +
-        '    <div class="fd-global-nav__side-menu">\n' +
-        '      <button fd-button [type]="\'secondary\'" [size]="\'l\'" [glyph]="\'menu2\'" aria-label="BUTTON_LABEL"></button>\n' +
-        '    </div>\n' +
-        '    <div class="fd-global-nav__logo fd-has-margin-left-none"></div>\n' +
-        '    <div class="fd-global-nav__product-name">\n' +
-        '      Product Name\n' +
-        '    </div>\n' +
-        '  </div>\n' +
-        '\n' +
-        '  <div fd-navbar-group [hasLaunchpad]="true">\n' +
-        '    <button fd-button [type]="\'secondary\'" [size]="\'l\'" aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true"\n' +
-        '            [attr.aria-controls]="launchpad">Suite Name</button>\n' +
-        '  </div>\n' +
-        '\n' +
-        '  <div fd-navbar-group [position]="\'right\'">\n' +
-        '    <div fd-navbar-context-menu>\n' +
-        '      <fd-popover [isDropdown]="true" [btnType]="\'secondary\'">\n' +
-        '        Context Switcher\n' +
-        '        <fd-popover-body>\n' +
-        '          <fd-menu>\n' +
-        '            <fd-menu-list>\n' +
-        '              <fd-menu-item [url]="\'#\'">Option 1</fd-menu-item>\n' +
-        '              <fd-menu-item [url]="\'#\'">Option 2</fd-menu-item>\n' +
-        '              <fd-menu-item [url]="\'#\'">Option 3</fd-menu-item>\n' +
-        '            </fd-menu-list>\n' +
-        '          </fd-menu>\n' +
-        '        </fd-popover-body>\n' +
-        '      </fd-popover>\n' +
-        '    </div>\n' +
-        '\n' +
-        '    <div fd-navbar-actions>\n' +
-        '          <button fd-button [type]="\'secondary\'" [size]="\'l\'" [glyph]="\'search\'" aria-label="BUTTON_LABEL"></button>\n' +
-        '          <button fd-button [type]="\'secondary\'" [size]="\'l\'" [glyph]="\'action-settings\'" aria-label="BUTTON_LABEL"></button>\n' +
-        '      <span fd-identifier [size]="\'s\'" [circle]="true">WW</span>\n' +
-        '    </div>\n' +
-        '  </div>\n' +
-        '</fd-navbar>';
+    navbarHtml = `
+        <fd-navbar>
+          <div fd-navbar-group [position]="\'left\'">
+            <div class="fd-global-nav__side-menu">
+              <button fd-button [fdType]="\'secondary\'" [size]="\'l\'" [glyph]="\'menu2\'" aria-label="BUTTON_LABEL"></button>
+            </div>
+            <div class="fd-global-nav__logo fd-has-margin-left-none"></div>
+            <div class="fd-global-nav__product-name">
+              Product Name
+            </div>
+          </div>
+        
+          <div fd-navbar-group [hasLaunchpad]="true">
+            <button fd-button [fdType]="\'secondary\'" [size]="\'l\'" aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true"
+                    [attr.aria-controls]="launchpad">Suite Name</button>
+          </div>
+        
+          <div fd-navbar-group [position]="\'right\'">
+            <div fd-navbar-context-menu>
+              <fd-popover [isDropdown]="true" [btnType]="\'secondary\'">
+                Context Switcher
+                <fd-popover-body>
+                  <fd-menu>
+                    <fd-menu-list>
+                      <fd-menu-item [url]="\'#\'">Option 1</fd-menu-item>
+                      <fd-menu-item [url]="\'#\'">Option 2</fd-menu-item>
+                      <fd-menu-item [url]="\'#\'">Option 3</fd-menu-item>
+                    </fd-menu-list>
+                  </fd-menu>
+                </fd-popover-body>
+              </fd-popover>
+            </div>
+        
+            <div fd-navbar-actions>
+                  <button fd-button [fdType]="\'secondary\'" [size]="\'l\'" [glyph]="\'search\'" aria-label="BUTTON_LABEL"></button>
+                  <button fd-button [fdType]="\'secondary\'" [size]="\'l\'" [glyph]="\'action-settings\'" aria-label="BUTTON_LABEL"></button>
+              <span fd-identifier [size]="\'s\'" [circle]="true">WW</span>
+            </div>
+          </div>
+        </fd-navbar>
+        `;
 }
