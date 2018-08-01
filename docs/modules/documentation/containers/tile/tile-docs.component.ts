@@ -811,9 +811,10 @@ export class TileDocsComponent implements OnInit {
           <fd-product-tile-content>
             <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
           </fd-product-tile-content>
-        </fd-product-tile>;
+        </fd-product-tile>
+        `;
 
-    disabledTilesHtml =
+    disabledTilesHtml = `
         <fd-tile [disabled]="true">
           <fd-tile-content>
             <fd-tile-title>
