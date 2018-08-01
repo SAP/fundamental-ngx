@@ -27,7 +27,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="iconHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="iconHtml"></code></pre>
 
 <separator></separator>
 <h2>Initials</h2>
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="initialsHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="initialsHtml"></code></pre>
 
 <separator></separator>
 <h2>Circle</h2>
@@ -58,7 +58,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="circleHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="circleHtml"></code></pre>
 
 <separator></separator>
 <h2>Transparent</h2>
@@ -76,7 +76,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="transparentHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="transparentHtml"></code></pre>
 
 <separator></separator>
 <h2>Accent Colors</h2>
@@ -96,7 +96,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="colorAccentHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="colorAccentHtml"></code></pre>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <div *ngIf="data.properties.glyphs.length > 0 && data.properties.initials.length == 0;else initialsTemplate">

@@ -12,7 +12,7 @@ export class PanelDocsComponent implements OnInit {
       <fd-panel-description>Panel Description</fd-panel-description>
     </fd-panel-head>
     <fd-panel-actions>
-      <button fd-button size="s" [glyph]="'add'">Add New Item</button>
+      <button fd-button [size]="'s'" [glyph]="'add'">Add New Item</button>
     </fd-panel-actions>
   </fd-panel-header>
   <fd-panel-filters>
