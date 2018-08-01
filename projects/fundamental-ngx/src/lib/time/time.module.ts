@@ -6,7 +6,6 @@ import { TimeComponent } from './time.component';
 
 import { UtilsModule } from '../utils/utils.module';
 
-
 @NgModule({
     declarations: [TimeComponent],
     imports: [CommonModule, UtilsModule, FormsModule],

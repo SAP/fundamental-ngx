@@ -16,7 +16,8 @@
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>
-      <fd-time [time]="{hour: 13, minute: 55, second: 59}"></fd-time>
+      <fd-time [time]="timeObject"></fd-time>
+      <span>timeObject: {{ '{' }}hour: {{timeObject.hour}}, minute: {{timeObject.minute}}, second: {{timeObject.second}}}</span>
     </p>
   </div>
 </div>

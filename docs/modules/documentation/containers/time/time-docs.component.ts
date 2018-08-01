@@ -12,16 +12,14 @@ export class TimeDocsComponent {
             properties: {
                 type: 'object',
                 properties: {
-                    time: {
-                        type: 'string'
-                    }
-                }
-            },
-            state: {
-                type: 'object',
-                properties: {
-                    disabled: {
-                        type: 'boolean'
+                    hour: {
+                        type: 'integer'
+                    },
+                    minute: {
+                        type: 'integer'
+                    },
+                    second: {
+                        type: 'integer'
                     }
                 }
             }
@@ -32,14 +30,15 @@ export class TimeDocsComponent {
     schema: Schema;
     data: any = {
         properties: {
-            time: ''
-        },
-        state: {
-            disabled: false
+            hour: 13,
+            minute: 55,
+            second: 59
         }
     };
 
-    timeHtml = '';
+    timeHtml = `<fd-time [time]="timeObject"></fd-time>`;
+
+    timeObject = {hour: 13, minute: 55, second: 59};
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

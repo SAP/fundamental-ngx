@@ -14,7 +14,6 @@ export class TimeComponent implements OnChanges {
     @Input() time: TimeObject;
 
     parseHour() {
-        console.log(this.time);
         if (this.time.hour > 12) {
             this.displayedHour = this.time.hour - 12;
             this.period = 'pm';
@@ -25,6 +24,7 @@ export class TimeComponent implements OnChanges {
             this.displayedHour = this.time.hour;
             this.period = 'am';
         }
+        console.log(this.time);
     }
 
     setInternalHour() {
