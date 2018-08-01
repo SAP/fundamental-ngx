@@ -38,7 +38,11 @@ export class TimeDocsComponent {
 
     timeHtml = `<fd-time [time]="timeObject"></fd-time>`;
 
-    timeObject = {hour: 13, minute: 55, second: 59};
+    timeTwentyFourHtml = `<fd-time displayTwentyFour="true" [time]="timeTwentyFourObject"></fd-time>`;
+
+    timeObject = { hour: 13, minute: 55, second: 59 };
+
+    timeTwentyFourObject = { hour: 13, minute: 55, second: 59 };
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

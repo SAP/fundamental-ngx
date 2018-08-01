@@ -5,7 +5,9 @@
               aria-label="Increase hours"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="displayedHour" (blur)="checkInput('hour')" class="fd-form__control" type="number" min="0" max="23" placeholder="hh"
+      <input *ngIf="!displayTwentyFour" [(ngModel)]="displayedHour" (blur)="checkInput('hour')" class="fd-form__control" type="number" min="0" max="23" placeholder="hh"
+             aria-label="Hours"/>
+      <input *ngIf="displayTwentyFour" [(ngModel)]="time.hour" (blur)="checkInput('hour')" class="fd-form__control" type="number" min="0" max="23" placeholder="hh"
              aria-label="Hours"/>
     </div>
     <div class="fd-time__control">
@@ -42,7 +44,7 @@
               aria-label="Decrease seconds"></button>
     </div>
   </div>
-  <div class="fd-time__item">
+  <div *ngIf="!displayTwentyFour" class="fd-time__item">
     <div class="fd-time__control">
       <button (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase period"></button>

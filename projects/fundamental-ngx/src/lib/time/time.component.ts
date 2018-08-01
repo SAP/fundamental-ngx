@@ -13,6 +13,8 @@ export class TimeComponent implements OnChanges {
 
     @Input() time: TimeObject;
 
+    @Input() displayTwentyFour: boolean;
+
     parseHour() {
         if (this.time.hour === 0) {
             this.displayedHour = 12;
@@ -27,7 +29,6 @@ export class TimeComponent implements OnChanges {
             this.displayedHour = this.time.hour;
             this.period = 'am';
         }
-        console.log(this.time);
     }
 
     setInternalHour() {
@@ -46,14 +47,20 @@ export class TimeComponent implements OnChanges {
 
     checkInput(inputType) {
         if (inputType === 'hour') {
-            if (this.displayedHour > 12 || this.displayedHour < 0 || !Number.isInteger(this.displayedHour)) {
-                this.displayedHour = null;
-                this.time.hour = null;
-            } else if (this.displayedHour === 0) {
-                this.time.hour = 0;
-                this.parseHour();
+            if (!this.displayTwentyFour) {
+                if (this.displayedHour > 12 || this.displayedHour < 0 || !Number.isInteger(this.displayedHour)) {
+                    this.displayedHour = null;
+                    this.time.hour = null;
+                } else if (this.displayedHour === 0) {
+                    this.time.hour = 0;
+                    this.parseHour();
+                } else {
+                    this.setInternalHour();
+                }
             } else {
-                this.setInternalHour();
+                if (this.time.hour > 23 || !Number.isInteger(this.time.hour)) {
+                    this.time.hour = null;
+                }
             }
         } else if (inputType === 'minute' || inputType === 'second') {
             if (this.time.minute > 59 || this.time.minute < 0 || !Number.isInteger(this.time.minute)) {
@@ -70,7 +77,9 @@ export class TimeComponent implements OnChanges {
     }
 
     ngOnChanges() {
-        this.parseHour();
+        if (!this.displayTwentyFour) {
+            this.parseHour();
+        }
     }
 
     increaseHour() {
@@ -81,7 +90,9 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.hour = this.time.hour + 1;
         }
-        this.parseHour();
+        if (!this.displayTwentyFour) {
+            this.parseHour();
+        }
     }
 
     decreaseHour() {
@@ -92,7 +103,9 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.hour = this.time.hour - 1;
         }
-        this.parseHour();
+        if (!this.displayTwentyFour) {
+            this.parseHour();
+        }
     }
 
     increaseMinute() {
