@@ -25,6 +25,7 @@ import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
+import { TimeModule } from './time/time.module';
 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -62,6 +63,7 @@ import { ModalService } from './modal/modal.service';
         TableModule,
         TabsModule,
         TileModule,
+        TimeModule,
         TreeModule
     ],
     providers: [ModalService]
