@@ -10,11 +10,6 @@ export class TimeComponent implements OnChanges {
     period: string;
 
     displayedHour: number;
-    displayedHourInvalid: boolean;
-
-    hourInvalid: boolean;
-    minuteInvalid: boolean;
-    secondInvalid: boolean;
 
     @Input() time: TimeObject;
 
@@ -24,7 +19,7 @@ export class TimeComponent implements OnChanges {
 
     @Input() disabled: boolean;
 
-    parseHour() {
+    setDisplayedHour() {
         if (this.time.hour === 0) {
             this.displayedHour = 12;
             this.period = 'am';
@@ -40,7 +35,7 @@ export class TimeComponent implements OnChanges {
         }
     }
 
-    setInternalHour() {
+    displayedHourChanged() {
         if (this.period === 'am') {
             if (this.displayedHour === 12) {
                 this.time.hour = 0;
@@ -50,6 +45,8 @@ export class TimeComponent implements OnChanges {
         } else if (this.period === 'pm') {
             if (this.displayedHour === 12) {
                 this.time.hour = this.displayedHour;
+            } else {
+                this.time.hour = this.displayedHour + 12;
             }
         }
     }
@@ -57,50 +54,21 @@ export class TimeComponent implements OnChanges {
     checkInput(inputType) {
         if (inputType === 'hour') {
             if (!this.displayTwentyFour) {
-                if (this.displayedHour > 12 || this.displayedHour < 0 || !Number.isInteger(this.displayedHour)) {
-                    if (this.validate) {
-                        this.displayedHourInvalid = true;
-                    }
-                } else if (this.displayedHour === 0) {
-                    this.displayedHourInvalid = false;
+                if (this.displayedHour === 0) {
                     this.time.hour = 0;
-                    this.parseHour();
-                } else {
-                    this.displayedHourInvalid = false;
-                    this.setInternalHour();
+                    this.setDisplayedHour();
                 }
-            } else {
-                if ((this.time.hour > 23 || !Number.isInteger(this.time.hour)) && this.validate) {
-                    this.hourInvalid = true;
-                } else {
-                    this.hourInvalid = false;
-                }
-            }
-        } else if (inputType === 'minute' || inputType === 'second') {
-            if (this.time.minute > 59 || this.time.minute < 0 || !Number.isInteger(this.time.minute)) {
-                if (this.validate) {
-                    this.minuteInvalid = true;
-                }
-            } else {
-                this.minuteInvalid = false;
-            }
-            if (this.time.second > 59 || this.time.second < 0 || !Number.isInteger(this.time.second)) {
-                if (this.validate) {
-                    this.secondInvalid = true;
-                }
-            } else {
-                this.secondInvalid = false;
             }
         } else if (inputType === 'period') {
             if (this.period !== 'am' && this.period !== 'pm' && this.validate) {
-                this.parseHour();
+                this.setDisplayedHour();
             }
         }
     }
 
     ngOnChanges() {
         if (!this.displayTwentyFour) {
-            this.parseHour();
+            this.setDisplayedHour();
         }
     }
 
@@ -113,7 +81,7 @@ export class TimeComponent implements OnChanges {
             this.time.hour = this.time.hour + 1;
         }
         if (!this.displayTwentyFour) {
-            this.parseHour();
+            this.setDisplayedHour();
         }
     }
 
@@ -126,7 +94,7 @@ export class TimeComponent implements OnChanges {
             this.time.hour = this.time.hour - 1;
         }
         if (!this.displayTwentyFour) {
-            this.parseHour();
+            this.setDisplayedHour();
         }
     }
 
@@ -186,6 +154,6 @@ export class TimeComponent implements OnChanges {
                 this.time.hour = this.time.hour - 12;
             }
         }
-        this.parseHour();
+        this.setDisplayedHour();
     }
 }
