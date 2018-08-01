@@ -29,7 +29,7 @@
     <fd-navbar>
       <div fd-navbar-group [position]="'left'">
         <div class="fd-global-nav__side-menu">
-          <button fd-button [type]="'secondary'" [size]="'l'" [glyph]="'menu2'" aria-label="BUTTON_LABEL"></button>
+          <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'menu2'" aria-label="BUTTON_LABEL"></button>
         </div>
         <div class="fd-global-nav__logo fd-has-margin-left-none"></div>
         <div class="fd-global-nav__product-name">
@@ -38,7 +38,7 @@
       </div>
 
       <div fd-navbar-group [hasLaunchpad]="true">
-        <button fd-button [type]="'secondary'" [size]="'l'" aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true">Suite Name</button>
+        <button fd-button [fdType]="'secondary'" [size]="'l'" aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true">Suite Name</button>
       </div>
 
       <div fd-navbar-group [position]="'right'">
@@ -58,8 +58,8 @@
         </div>
 
         <div fd-navbar-actions>
-          <button fd-button [type]="'secondary'" [size]="'l'" [glyph]="'search'" aria-label="BUTTON_LABEL"></button>
-          <button fd-button [type]="'secondary'" [size]="'l'" [glyph]="'action-settings'" aria-label="BUTTON_LABEL"></button>
+          <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'search'" aria-label="BUTTON_LABEL"></button>
+          <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'action-settings'" aria-label="BUTTON_LABEL"></button>
           <span fd-identifier [size]="'s'" [circle]="true">WW</span>
         </div>
       </div>

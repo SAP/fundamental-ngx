@@ -678,22 +678,22 @@ export class ListDocsComponent implements OnInit {
     listActionsHtml = `<fd-list>
   <fd-list-item>List item 1
     <fd-list-action>
-      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
     </fd-list-action>
   </fd-list-item>
   <fd-list-item>List item 2
     <fd-list-action>
-      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
     </fd-list-action>
   </fd-list-item>
   <fd-list-item>List item 3
     <fd-list-action>
-      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
     </fd-list-action>
   </fd-list-item>
   <fd-list-item>List item 4
     <fd-list-action>
-      <button fd-button [type]="'secondary'" [glyph]="'edit'"></button>
+      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
     </fd-list-action>
   </fd-list-item>
 </fd-list>`;

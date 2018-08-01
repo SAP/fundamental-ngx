@@ -1,6 +1,9 @@
 <header>Dropdown</header>
-<description>The dropdown component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use of a styled button. It allows users to make one selection from a list. It is more flexible than the normal Select. Generally, it should be used when there are between 3 to 10 or more options.
-<br><br>This component is completely composed from other components and doeszn’t have any of its own.</description>
+<description>The dropdown component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use of a styled
+  button. It allows users to make one selection from a list. It is more flexible than the normal Select. Generally, it should
+  be used when there are between 3 to 10 or more options.
+  <br>
+  <br>This component is completely composed from other components and doeszn’t have any of its own.</description>
 
 <separator></separator>
 
@@ -212,13 +215,15 @@
 
 <header>Contextual Menu</header>
 <description>
-    The contextual menu component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use of a styled button. A More icon or the word “More”, is used to indicate there are more options than room to display them. On click or tap, a contextual menu opens.
+  The contextual menu component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use of
+  a styled button. A More icon or the word “More”, is used to indicate there are more options than room to display them.
+  On click or tap, a contextual menu opens.
 </description>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <fd-popover>
       <fd-popover-control>
-        <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+        <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
       </fd-popover-control>
       <fd-popover-body>
         <fd-menu>
@@ -260,7 +265,7 @@
 
     <fd-popover>
       <fd-popover-control>
-        <button fd-button [type]="'secondary'">More</button>
+        <button fd-button [fdType]="'secondary'">More</button>
       </fd-popover-control>
       <fd-popover-body>
         <fd-menu>
