@@ -49,6 +49,9 @@ export class TimeComponent implements OnChanges {
             if (this.displayedHour > 12 || this.displayedHour < 0 || !Number.isInteger(this.displayedHour)) {
                 this.displayedHour = null;
                 this.time.hour = null;
+            } else if (this.displayedHour === 0) {
+                this.time.hour = 0;
+                this.parseHour();
             } else {
                 this.setInternalHour();
             }
@@ -71,7 +74,9 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseHour() {
-        if (this.time.hour === 23 || !this.time.hour) {
+        if (this.time.hour === null) {
+            this.time.hour = 0;
+        } else if (this.time.hour === 23) {
             this.time.hour = 0;
         } else {
             this.time.hour = this.time.hour + 1;
@@ -80,7 +85,7 @@ export class TimeComponent implements OnChanges {
     }
 
     decreaseHour() {
-        if (!this.time.hour) {
+        if (this.time.hour === null) {
             this.time.hour = 0;
         } else if (this.time.hour === 0) {
             this.time.hour = 23;
@@ -91,7 +96,7 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseMinute() {
-        if (!this.time.minute) {
+        if (this.time.minute === null) {
             this.time.minute = 0;
         } else if (this.time.minute === 59) {
             this.time.minute = 0;
@@ -102,7 +107,7 @@ export class TimeComponent implements OnChanges {
     }
 
     decreaseMinute() {
-        if (!this.time.minute) {
+        if (this.time.minute === null) {
             this.time.minute = 0;
         } else if (this.time.minute === 0) {
             this.time.minute = 59;
@@ -113,7 +118,7 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseSecond() {
-        if (!this.time.second) {
+        if (this.time.second === null) {
             this.time.second = 0;
         } else if (this.time.second === 59) {
             this.time.second = 0;
@@ -124,7 +129,7 @@ export class TimeComponent implements OnChanges {
     }
 
     decreaseSecond() {
-        if (!this.time.second) {
+        if (this.time.second === null) {
             this.time.second = 0;
         } else if (this.time.second === 0) {
             this.time.second = 59;
