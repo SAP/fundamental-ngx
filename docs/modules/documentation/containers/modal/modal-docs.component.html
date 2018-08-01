@@ -33,8 +33,8 @@ to create a method that calls ModalService's open() function. First, import the 
     <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="informationalModalHtml"></code></pre>
-<pre><code mwlHighlightJs language="typescript" [source]="informationalModalJs"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="informationalModalHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="informationalModalJs"></code></pre>
 
 <separator></separator>
 
@@ -52,8 +52,8 @@ to create a method that calls ModalService's open() function. First, import the 
           Modal Body
         </fd-modal-body>
         <fd-modal-footer>
-          <button fd-button (click)="c('No')" fdType="secondary">No</button>
-          <button fd-button (click)="c('Yes')" fdType="main">Yes</button>
+          <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
+          <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
         </fd-modal-footer>
       </fd-modal>
     </ng-template>
@@ -62,8 +62,8 @@ to create a method that calls ModalService's open() function. First, import the 
     <span>{{confirmationReason}}</span>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="confirmationModalHtml"></code></pre>
-<pre><code mwlHighlightJs language="typescript" [source]="confirmationModalJs"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="confirmationModalHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="confirmationModalJs"></code></pre>
 
 <!--
 <separator></separator>
@@ -96,7 +96,7 @@ to create a method that calls ModalService's open() function. First, import the 
     <span>{{reason}}</span>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="formModalHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="formModalHtml"></code></pre>
 
 <separator></separator>
 -->
