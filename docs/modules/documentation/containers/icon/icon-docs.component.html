@@ -9,10 +9,20 @@
 <properties [properties]="{
   inputs: [
     { name: 'glyph', description: 'Icon name.' },
-    { name: 'size', description: 'Size of the icon.  Options include \'xs\', \'s\', \'compact\', and \'l\'.  If no size is provided, default (normal) will be used.' }
+    { name: 'size', description: 'Size of the icon.  The default options include \'xs\', \'s\', \'normal\', \'l\', and \'xl\'.  If no size is provided, default (normal) will be used.' }
   ]
 }"></properties>
+<description>The inputs for <code>fd-icon</code> will be translated into class attributed respecting fundamental-ui guidelines.
+  <br>For example:
+  <br>if it is passed <code>accept</code> for glyph the class <code>sap-icon--accept</code> will be added to the element.
+  <br>if it is passed <code>xs</code> for size the class <code>sap-icon--xs</code> will be added to the element.
+</description>
 <separator></separator>
+
+<h2>Extensibility</h2>
+<description>The icon implementation allows certain extensibility in terms of options for the inputs. <code>fd-icon</code> inputs doesn't have a restriction for the predefined values.
+  <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, <code>xl</code>, but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class <code>sap-icon--xxs</code>.
+</description>
 
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
