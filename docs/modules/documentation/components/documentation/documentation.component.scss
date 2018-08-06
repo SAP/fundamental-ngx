@@ -2,18 +2,24 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .logo {
-    font-size: 1.25rem;
+    background-color: #424e5a;
+    font-size: 24px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
     margin-bottom: 0;
     display: flex;
     justify-content: center;
     > a {
-        color: inherit;
+        color: white;
+        font-weight: bold;
+        .has-accent-color{
+            color: #2fd0c8;
+        }
     }
 }
 
@@ -23,7 +29,7 @@
 
 .sidebar {
     color: #21262c;
-    min-width: 16rem;
+    min-width: 18rem;
     background-color: #f1f3f6;
     height: 100%;
     overflow: auto;
@@ -36,7 +42,7 @@
 
 .nav-item {
     color: #21262c;
-    font-size: 0.875rem;
+    font-size: 1.25rem;
     position: relative;
     padding: 13px 40px;
 }
@@ -45,6 +51,8 @@
     color: #424e5a;
     padding: 15px 20px;
     display: block;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 .nav-item:hover,
