@@ -9,11 +9,23 @@
   inputs: [
     { name: 'type', description: '(Optional) String - The type of the button.  Options include \'primary\', \'main\', \'secondary\', and \'toolbar\'. Leave empty for default.'},
     { name: 'semantic', description: '(Optional) String - Semantic buttons. Semantic modifiers include \'positive\' and \'negative\'. Leave empty for no modifier.'},
-    { name: 'size', description: '(Optional) String - The size of the button.  Options include \'xs\', \'s\', \'compact\', \'default\', and \'l\'. Leave empty for default.'},
+    { name: 'size', description: '(Optional) String - The size of the button.  Options include \'xs\', \'s\', \'compact\', default, and \'l\'. Leave empty for default.'},
     { name: 'glyph', description: '(Optional) String - The icon to include in the button.  See the icon page for the list of icons.'},
     { name: 'state', description: '(Optional) String - The state of the button. Options include \'normal\', \'selected\', and \'disabled\'. Leave empty for normal.' }
   ]
 }"></properties>
+
+<description>The inputs for <code>button</code> will be translated into class attributed respecting fundamental-ui guidelines.
+  <br>For example:
+  <br>if it is passed <code>positive</code> for <code>fdType</code> the class <code>fd-button--positive</code> will be added to the element.
+  <br>if it is passed <code>s</code> for <code>size</code> the class <code>fd-button--s</code> will be added to the element.
+</description>
+
+<separator></separator>
+<h2>Extensibility</h2>
+<description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code> inputs doesn't have a restriction for the predefined values.
+  <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class <code>fd-button--xxs</code>.
+</description>
 
 <separator></separator>
 <h2>Button Types</h2>
