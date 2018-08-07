@@ -38,7 +38,7 @@ export class TimeDocsComponent {
 
     timeHtml = `<fd-time [time]="timeObject"></fd-time>`;
 
-    timeTwentyFourHtml = `<fd-time [displayTwentyFour]="true" [time]="timeTwentyFourObject"></fd-time>`;
+    timeMeridianHtml = `<fd-time [meridian]="true" [time]="timeMeridianObject"></fd-time>`;
 
     timeNoValidateHtml = `<fd-time [validate]="false" [time]="timeNoValidateObject"></fd-time>`;
 
@@ -46,7 +46,7 @@ export class TimeDocsComponent {
 
     timeObject = { hour: 13, minute: 55, second: 59 };
 
-    timeTwentyFourObject = { hour: 13, minute: 55, second: 59 };
+    timeMeridianObject = { hour: 13, minute: 55, second: 59 };
 
     timeNoValidateObject = { hour: 99, minute: 7.4, second: -5 };
 

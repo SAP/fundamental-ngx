@@ -13,7 +13,7 @@ export class TimeComponent implements OnChanges {
 
     @Input() time: TimeObject;
 
-    @Input() displayTwentyFour: boolean;
+    @Input() meridian: boolean;
 
     @Input() validate: boolean = true;
 
@@ -53,7 +53,7 @@ export class TimeComponent implements OnChanges {
 
     checkInput(inputType) {
         if (inputType === 'hour') {
-            if (!this.displayTwentyFour) {
+            if (this.meridian) {
                 if (this.displayedHour === 0) {
                     this.time.hour = 0;
                     this.setDisplayedHour();
@@ -67,7 +67,7 @@ export class TimeComponent implements OnChanges {
     }
 
     ngOnChanges() {
-        if (!this.displayTwentyFour) {
+        if (this.meridian) {
             this.setDisplayedHour();
         }
     }
@@ -80,7 +80,7 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.hour = this.time.hour + 1;
         }
-        if (!this.displayTwentyFour) {
+        if (this.meridian) {
             this.setDisplayedHour();
         }
     }
@@ -93,7 +93,7 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.hour = this.time.hour - 1;
         }
-        if (!this.displayTwentyFour) {
+        if (this.meridian) {
             this.setDisplayedHour();
         }
     }

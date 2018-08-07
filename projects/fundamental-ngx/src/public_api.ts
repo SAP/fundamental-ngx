@@ -31,4 +31,5 @@ export * from './lib/table/table.module';
 export * from './lib/tabs/tabs.module';
 export * from './lib/tile/tile.module';
 export * from './lib/time/time.module';
+export * from './lib/time-picker/time-picker.module';
 export * from './lib/tree/tree.module';
