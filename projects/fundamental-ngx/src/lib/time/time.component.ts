@@ -7,7 +7,7 @@ import { TimeObject } from './time-object';
     styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnChanges {
-    period: string;
+    @Input() period: string;
 
     displayedHour: number;
 
@@ -36,17 +36,21 @@ export class TimeComponent implements OnChanges {
     }
 
     displayedHourChanged() {
-        if (this.period === 'am') {
-            if (this.displayedHour === 12) {
-                this.time.hour = 0;
-            } else {
-                this.time.hour = this.displayedHour;
-            }
-        } else if (this.period === 'pm') {
-            if (this.displayedHour === 12) {
-                this.time.hour = this.displayedHour;
-            } else {
-                this.time.hour = this.displayedHour + 12;
+        if (this.displayedHour === null && this.time) {
+            this.time.hour = null;
+        } else {
+            if (this.period === 'am') {
+                if (this.displayedHour === 12) {
+                    this.time.hour = 0;
+                } else {
+                    this.time.hour = this.displayedHour;
+                }
+            } else if (this.period === 'pm') {
+                if (this.displayedHour === 12) {
+                    this.time.hour = this.displayedHour;
+                } else {
+                    this.time.hour = this.displayedHour + 12;
+                }
             }
         }
     }
@@ -143,17 +147,19 @@ export class TimeComponent implements OnChanges {
     }
 
     togglePeriod() {
-        if (this.period === 'am') {
-            this.period = 'pm';
-            this.time.hour = this.time.hour + 12;
-        } else if (this.period === 'pm') {
-            this.period = 'am';
-            if (this.time.hour === null) {
-                this.time.hour = 0;
-            } else {
-                this.time.hour = this.time.hour - 12;
+        if (this.time.hour < 24 && this.time.hour >= 0) {
+            if (this.period === 'am') {
+                this.period = 'pm';
+                this.time.hour = this.time.hour + 12;
+            } else if (this.period === 'pm') {
+                this.period = 'am';
+                if (this.time.hour === null) {
+                    this.time.hour = 0;
+                } else {
+                    this.time.hour = this.time.hour - 12;
+                }
             }
+            this.setDisplayedHour();
         }
-        this.setDisplayedHour();
     }
 }

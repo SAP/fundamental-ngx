@@ -40,15 +40,11 @@ export class TimeDocsComponent {
 
     timeMeridianHtml = `<fd-time [meridian]="true" [time]="timeMeridianObject"></fd-time>`;
 
-    timeNoValidateHtml = `<fd-time [validate]="false" [time]="timeNoValidateObject"></fd-time>`;
-
     timeDisabledHtml = `<fd-time [disabled]="true" [time]="{hour: 0, minute: 0, second: 0}"></fd-time>`;
 
     timeObject = { hour: 13, minute: 55, second: 59 };
 
     timeMeridianObject = { hour: 13, minute: 55, second: 59 };
-
-    timeNoValidateObject = { hour: 99, minute: 7.4, second: -5 };
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');
