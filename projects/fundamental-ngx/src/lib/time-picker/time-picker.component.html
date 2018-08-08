@@ -1,0 +1,11 @@
+<fd-popover [isTimePicker]="true">
+  <fd-popover-control>
+    <fd-input-group *ngIf="!meridian" (timeInputChanged)="timeInputChanged($event)" [type]="'time'" [placement]="'after'"
+                    [glyph]="'fob-watch'" [placeholder]="'hh:mm:ss'" [inputText]="getFormattedTime()" [disabled]="disabled"></fd-input-group>
+    <fd-input-group *ngIf="meridian" (timeInputChanged)="timeInputChanged($event)" [type]="'time'" [placement]="'after'"
+                    [glyph]="'fob-watch'" [placeholder]="'hh:mm:ss am/pm'" [inputText]="getFormattedTime()" [disabled]="disabled"></fd-input-group>
+  </fd-popover-control>
+  <fd-popover-body>
+    <fd-time [disabled]="disabled" [meridian]="meridian" style="text-align: center;" [time]="getTime()"></fd-time>
+  </fd-popover-body>
+</fd-popover>

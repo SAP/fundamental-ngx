@@ -26,6 +26,7 @@ import { TabsModule } from './tabs/tabs.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
+import { TimePickerModule } from './time-picker/time-picker.module';
 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -64,6 +65,7 @@ import { ModalService } from './modal/modal.service';
         TabsModule,
         TileModule,
         TimeModule,
+        TimePickerModule,
         TreeModule
     ],
     providers: [ModalService]
