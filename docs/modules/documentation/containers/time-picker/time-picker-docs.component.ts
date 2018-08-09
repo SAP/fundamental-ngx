@@ -9,9 +9,9 @@ export class TimePickerDocsComponent {
     meridianTimePickerHtml = `<fd-time-picker [meridian]="true" [time]="timeMeridianObject"></fd-time-picker>`;
     disabledTimePickerHtml = `<fd-time-picker [disabled]="true" [time]="timeObject"></fd-time-picker>`;
 
-    timeObject = { hour: 13, minute: 55, second: 59 };
+    timeObject = { hour: 12, minute: 0, second: 0 };
 
-    timeMeridianObject = { hour: 13, minute: 55, second: 59 };
+    timeMeridianObject = { hour: 12, minute: 0, second: 0 };
 
     constructor() {}
 }

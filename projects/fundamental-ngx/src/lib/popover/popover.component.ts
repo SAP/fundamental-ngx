@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, ElementRef, Inject, OnInit } from '@angular/core';
+import { Component, Input, HostListener, ElementRef, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 
 @Component({
@@ -12,14 +12,16 @@ export class PopoverComponent implements OnInit {
     @Input() glyph: string;
     @Input() size: string;
     @Input() btnType: string = '';
+    @Input() isOpen: boolean = false;
+
+    @Output() popoverClosed: EventEmitter<any> = new EventEmitter<any>();
 
     id: string;
-
-    isOpen: boolean = false;
 
     close() {
         if (this.isOpen) {
             this.isOpen = false;
+            this.popoverClosed.emit();
         }
     }
 
@@ -32,11 +34,10 @@ export class PopoverComponent implements OnInit {
     onClickHandler(e: MouseEvent) {
         const target = e.target;
         if (this.eRef.nativeElement.contains(target)) {
-            if (this.isTimePicker) {
-                if (!this.isOpen) {
-                    this.isOpen = true;
+            if (!this.isTimePicker) {
+                if (this.isOpen) {
+                    this.popoverClosed.emit();
                 }
-            } else {
                 this.isOpen = !this.isOpen;
             }
         } else {

@@ -44,20 +44,6 @@
 
 <separator></separator>
 
-<h2>Disable Input Validation</h2>
-<p>You can disable the input validation by setting <code>[validate]="false"</code></p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-time [validate]="false" [time]="timeNoValidateObject"></fd-time>
-      <span>timeNoValidate: {{ '{' }}hour: {{timeNoValidateObject.hour}}, minute: {{timeNoValidateObject.minute}}, second: {{timeNoValidateObject.second}}}</span>
-    </p>
-  </div>
-</div>
-<pre><code mwlHighlightJs language="HTML" [source]="timeNoValidateHtml"></code></pre>
-
-<separator></separator>
-
 <h2>Disabled State</h2>
 <p>You can disable the entire component by setting <code>[disabled]="true"</code></p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
