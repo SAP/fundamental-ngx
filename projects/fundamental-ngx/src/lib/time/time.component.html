@@ -5,7 +5,7 @@
               aria-label="Increase hours"></button>
     </div>
     <div class="fd-time__input">
-      <input *ngIf="meridian" (blur)="checkInput('period')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((displayedHour > 12 || displayedHour < 0) && validate)}" [(ngModel)]="displayedHour" (keyup)="displayedHourChanged()" class="fd-form__control" type="number" placeholder="hh"
+      <input *ngIf="meridian" (blur)="checkInput('hour')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((displayedHour > 12 || displayedHour < 0) && validate)}" [(ngModel)]="displayedHour" (keyup)="displayedHourChanged()" class="fd-form__control" type="number" placeholder="hh"
              aria-label="Hours"/>
       <input *ngIf="!meridian" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.hour > 23 || time.hour < 0) && validate)}" [(ngModel)]="time.hour" class="fd-form__control" type="number" placeholder="hh"
              aria-label="Hours"/>

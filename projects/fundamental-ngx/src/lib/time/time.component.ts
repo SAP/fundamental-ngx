@@ -152,12 +152,14 @@ export class TimeComponent implements OnChanges {
     }
 
     togglePeriod() {
-        if (this.period === 'am') {
-            this.period = 'pm';
-            this.periodModelChange();
-        } else if (this.period === 'pm') {
-            this.period = 'am';
-            this.periodModelChange();
+        if (this.time.hour < 24 && this.time.hour >= 0) {
+            if (this.period === 'am') {
+                this.period = 'pm';
+                this.periodModelChange();
+            } else if (this.period === 'pm') {
+                this.period = 'am';
+                this.periodModelChange();
+            }
         }
     }
 
