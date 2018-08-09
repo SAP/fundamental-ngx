@@ -5,9 +5,9 @@
               aria-label="Increase hours"></button>
     </div>
     <div class="fd-time__input">
-      <input *ngIf="meridian" (blur)="checkInput('period')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((displayedHour > 12 || displayedHour < 0) && validate)}" [(ngModel)]="displayedHour" (change)="displayedHourChanged()" class="fd-form__control" type="number" placeholder="hh"
+      <input *ngIf="meridian" (blur)="inputBlur('hour')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((displayedHour > 12 || displayedHour < 0) && validate)}" [(ngModel)]="displayedHour" (keyup)="displayedHourChanged()" class="fd-form__control" type="number" placeholder="hh"
              aria-label="Hours"/>
-      <input *ngIf="!meridian" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.hour > 23 || time.hour < 0) && validate)}" [(ngModel)]="time.hour" class="fd-form__control" type="number" placeholder="hh"
+      <input *ngIf="!meridian" (blur)="inputBlur('hour')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.hour > 23 || time.hour < 0) && validate)}" [(ngModel)]="time.hour" class="fd-form__control" type="number" placeholder="hh"
              aria-label="Hours"/>
     </div>
     <div class="fd-time__control">
@@ -22,7 +22,7 @@
               aria-label="Increase minutes"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="time.minute" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}" class="fd-form__control" type="number" placeholder="mm"
+      <input [(ngModel)]="time.minute" (blur)="inputBlur('minute')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}" class="fd-form__control" type="number" placeholder="mm"
              aria-label="Minutes"/>
     </div>
     <div class="fd-time__control">
@@ -36,7 +36,7 @@
               aria-label="Increase seconds"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="time.second" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}" class="fd-form__control" type="number" placeholder="ss"
+      <input [(ngModel)]="time.second" (blur)="inputBlur('second')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}" class="fd-form__control" type="number" placeholder="ss"
              aria-label="Seconds"/>
     </div>
     <div class="fd-time__control">
@@ -50,7 +50,7 @@
               aria-label="Increase period"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="period" [ngClass]="{'is-disabled': disabled}" class="fd-form__control" (blur)="checkInput('period')" type="text" placeholder="am"
+      <input [(ngModel)]="period" [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}" class="fd-form__control" (blur)="inputBlur('period')" (ngModelChange)="periodModelChange()" type="text" placeholder="am"
              aria-label="Period"/>
     </div>
     <div class="fd-time__control">
