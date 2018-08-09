@@ -50,7 +50,7 @@
               aria-label="Increase period"></button>
     </div>
     <div class="fd-time__input">
-      <input [(ngModel)]="period" [ngClass]="{'is-disabled': disabled}" class="fd-form__control" (blur)="checkInput('period')" type="text" placeholder="am"
+      <input [(ngModel)]="period" [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}" class="fd-form__control" (blur)="checkInput('period')" (ngModelChange)="periodModelChange()" type="text" placeholder="am"
              aria-label="Period"/>
     </div>
     <div class="fd-time__control">

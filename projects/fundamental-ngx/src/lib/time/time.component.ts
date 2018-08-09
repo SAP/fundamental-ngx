@@ -9,6 +9,10 @@ import { TimeObject } from './time-object';
 export class TimeComponent implements OnChanges {
     @Input() period: string;
 
+    oldPeriod: string;
+
+    periodInvalid: boolean;
+
     displayedHour: number;
 
     @Input() time: TimeObject;
@@ -33,6 +37,7 @@ export class TimeComponent implements OnChanges {
             this.displayedHour = this.time.hour;
             this.period = 'am';
         }
+        this.oldPeriod = this.period;
     }
 
     displayedHourChanged() {
@@ -147,19 +152,31 @@ export class TimeComponent implements OnChanges {
     }
 
     togglePeriod() {
-        if (this.time.hour < 24 && this.time.hour >= 0) {
-            if (this.period === 'am') {
-                this.period = 'pm';
+        if (this.period === 'am') {
+            this.period = 'pm';
+            this.periodModelChange();
+        } else if (this.period === 'pm') {
+            this.period = 'am';
+            this.periodModelChange();
+        }
+    }
+
+    periodModelChange() {
+        this.period = this.period.toLowerCase();
+        if (this.period !== 'am' && this.period !== 'pm') {
+            this.periodInvalid = true;
+        } else if (this.time.hour < 24 && this.time.hour >= 0) {
+            if (this.oldPeriod === 'am' && this.period === 'pm') {
                 this.time.hour = this.time.hour + 12;
-            } else if (this.period === 'pm') {
-                this.period = 'am';
+            } else if (this.oldPeriod === 'pm' && this.period === 'am') {
                 if (this.time.hour === null) {
                     this.time.hour = 0;
                 } else {
                     this.time.hour = this.time.hour - 12;
                 }
             }
-            this.setDisplayedHour();
+            this.periodInvalid = false;
         }
+        this.setDisplayedHour();
     }
 }
