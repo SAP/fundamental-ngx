@@ -7,17 +7,17 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
     styleUrls: ['action-bar-docs.component.scss']
 })
 export class ActionBarDocsComponent {
-        backButtonHtml = `<fd-action-bar>
+    backButtonHtml = `<fd-action-bar>
     <fd-action-bar-back>
-        <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
+        <button fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
     </fd-action-bar-back>
     <fd-action-bar-header>
         <fd-action-bar-title>Page Title</fd-action-bar-title>
         <fd-action-bar-description>Action bar Description</fd-action-bar-description>
     </fd-action-bar-header>
     <fd-action-bar-actions>
-        <button fd-button type="primary">Cancel</button>
-        <button fd-button type="main">Save</button>
+        <button fd-button [fdType]="'primary'">Cancel</button>
+        <button fd-button [fdType]="'main'">Save</button>
     </fd-action-bar-actions>
 </fd-action-bar>`;
 
@@ -27,8 +27,8 @@ export class ActionBarDocsComponent {
         <fd-action-bar-description>Action bar Description</fd-action-bar-description>
     </fd-action-bar-header>
     <fd-action-bar-actions>
-        <button fd-button type="primary">Cancel</button>
-        <button fd-button type="main">Save</button>
+        <button fd-button [fdType]="'primary'">Cancel</button>
+        <button fd-button [fdType]="'main'">Save</button>
     </fd-action-bar-actions>
 </fd-action-bar>`;
 
@@ -39,7 +39,7 @@ export class ActionBarDocsComponent {
     <fd-action-bar-actions>
         <fd-popover>
             <fd-popover-control>
-                <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+                <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
             </fd-popover-control>
             <fd-popover-body>
                 <fd-menu>
@@ -59,7 +59,7 @@ export class ActionBarDocsComponent {
     mobileViewHtml = `<fd-action-bar-mobile>
     <fd-action-bar>
         <fd-action-bar-back>
-            <button fd-button type="secondary" size="compact" [glyph]="'nav-back'"></button>
+            <button fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
         </fd-action-bar-back>
         <fd-action-bar-header>
             <fd-action-bar-title>Page Title</fd-action-bar-title>
@@ -68,7 +68,7 @@ export class ActionBarDocsComponent {
         <fd-action-bar-actions>
             <fd-popover>
                 <fd-popover-control>
-                    <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+                    <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
                 </fd-popover-control>
                 <fd-popover-body>
                     <fd-menu>

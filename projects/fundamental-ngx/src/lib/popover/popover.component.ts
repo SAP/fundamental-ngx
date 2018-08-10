@@ -19,7 +19,7 @@ export class PopoverComponent {
         }
     }
 
-    @HostListener('document:keydown.escape', ['$event'])
+    @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
         this.close();
     }

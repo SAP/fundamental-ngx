@@ -43,7 +43,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="simpleTileHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleTileHtml"></code></pre>
 
 <separator></separator>
 
@@ -100,7 +100,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="mediaTileHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="mediaTileHtml"></code></pre>
 
 <separator></separator>
 
@@ -116,26 +116,26 @@
           </fd-tile-title>
         </fd-tile-content>
         <fd-tile-actions>
-            <fd-popover>
-                <fd-popover-control>
-                  <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
-                </fd-popover-control>
-                <fd-popover-body>
-                  <fd-menu>
-                    <fd-menu-list>
-                      <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
-                      <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
-                      <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
-                    </fd-menu-list>
-                  </fd-menu>
-                </fd-popover-body>
-              </fd-popover>
+          <fd-popover>
+            <fd-popover-control>
+              <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+              <fd-menu>
+                <fd-menu-list>
+                  <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
+                  <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
+                  <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
+                </fd-menu-list>
+              </fd-menu>
+            </fd-popover-body>
+          </fd-popover>
         </fd-tile-actions>
       </fd-tile>
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="actionsTileHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="actionsTileHtml"></code></pre>
 
 <separator></separator>
 
@@ -157,7 +157,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="buttonTileHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonTileHtml"></code></pre>
 
 <separator></separator>
 
@@ -183,7 +183,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="productTileHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="productTileHtml"></code></pre>
 
 <separator></separator>
 
@@ -228,7 +228,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="disabledTilesHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="disabledTilesHtml"></code></pre>
 
 <separator></separator>
 
@@ -305,7 +305,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="defaultGridHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="defaultGridHtml"></code></pre>
 
 <separator></separator>
 
@@ -408,7 +408,7 @@
     </div>
   </div>
 </div>
-<pre><code mwlHighlightJs language="HTML" [source]="gridWithHelpersHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="gridWithHelpersHtml"></code></pre>
 
 <separator></separator>
 
@@ -446,7 +446,7 @@
             <fd-tile-actions *ngIf="data.properties.hasActions === true">
               <fd-popover>
                 <fd-popover-control>
-                  <button fd-button [type]="'secondary'" [glyph]="'vertical-grip'"></button>
+                  <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
                 </fd-popover-control>
                 <fd-popover-body>
                   <fd-menu>

@@ -9,7 +9,7 @@ export class ButtonDirective extends AbstractFdNgxClass {
 
     @Input() glyph;
 
-    @Input() type;
+    @Input() fdType;
 
     @Input() semantic;
 
@@ -23,8 +23,8 @@ export class ButtonDirective extends AbstractFdNgxClass {
         if (this.glyph) {
             this._addClassToElement('sap-icon--' + this.glyph);
         }
-        if (this.type) {
-            this._addClassToElement('fd-button--' + this.type);
+        if (this.fdType) {
+            this._addClassToElement('fd-button--' + this.fdType);
         }
         if (this.semantic) {
             this._addClassToElement('fd-button--' + this.semantic);

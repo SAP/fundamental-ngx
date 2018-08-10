@@ -1,8 +1,6 @@
 import { Directive, Input, ElementRef, Inject } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
-export type IconSize = 's' | '' | 'm' | 'l' | 'xl';
-
 /** The base class for the icon component */
 const BASE_ICON_CLASS = 'sap-icon';
 
@@ -18,7 +16,7 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 export class IconDirective extends AbstractFdNgxClass {
     @Input() glyph;
 
-    @Input() size: IconSize = '';
+    @Input() size: string = '';
 
     _setProperties() {
         if (this.glyph) {
