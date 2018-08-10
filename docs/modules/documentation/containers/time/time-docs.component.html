@@ -11,6 +11,7 @@
     { name: 'meridian', description: 'Boolean, when set to true, uses the 24 hour clock (hours ranging from 0 to 23) and does not display a period control. Default is false.'},
     { name: 'validate', description: 'Boolean, when set to false, does not set the input field to invalid state on invalid entry.  Default is true.'},
     { name: 'spinners', description: 'Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true.'},
+    { name: 'displaySeconds', description: 'Boolean, when set to false, hides the input for seconds. Default is true.'},
     { name: 'disabled', description: 'Disables the component.'}
   ]
 }"></properties>
@@ -56,6 +57,19 @@
   </div>
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="timeNoSpinnersHtml"></code></pre>
+<separator></separator>
+
+<h2>Clock With No Seconds</h2>
+<description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [displaySeconds]="false" [time]="timeNoSecondsObject"></fd-time>
+      <span>timeObject: {{ '{' }}hour: {{timeNoSecondsObject.hour}}, minute: {{timeNoSecondsObject.minute}}, second: {{timeNoSecondsObject.second}}}</span>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeNoSecondsHtml"></code></pre>
 <separator></separator>
 
 <h2>Disabled State</h2>

@@ -3,15 +3,15 @@
     <fd-popover-control>
       <fd-input-group *ngIf="!meridian" (timeInputChanged)="timeInputChanged($event)" [type]="'time'"
                       [placement]="'after'" [button]="true" (click)="inputGroupClicked($event)" [glyph]="'fob-watch'"
-                      [placeholder]="'hh:mm:ss'" [inputText]="getFormattedTime()" [disabled]="disabled"
+                      [placeholder]="getPlaceholder()" [inputText]="getFormattedTime()" [disabled]="disabled"
                       (addOnButtonClicked)="addOnButtonClicked($event)"></fd-input-group>
       <fd-input-group *ngIf="meridian" (timeInputChanged)="timeInputChanged($event)" [type]="'time'"
                       [placement]="'after'" [button]="true" (click)="inputGroupClicked($event)" [glyph]="'fob-watch'"
-                      [placeholder]="'hh:mm:ss am/pm'" [inputText]="getFormattedTime()" [disabled]="disabled"
+                      [placeholder]="getPlaceholder()" [inputText]="getFormattedTime()" [disabled]="disabled"
                       (addOnButtonClicked)="addOnButtonClicked($event)"></fd-input-group>
     </fd-popover-control>
     <fd-popover-body>
-      <fd-time [disabled]="disabled" [meridian]="meridian" [time]="getTime()" [period]="period" [spinners]="spinners"></fd-time>
+      <fd-time [disabled]="disabled" [meridian]="meridian" [time]="getTime()" [period]="period" [spinners]="spinners" [displaySeconds]="displaySeconds"></fd-time>
     </fd-popover-body>
   </fd-popover>
 </div>

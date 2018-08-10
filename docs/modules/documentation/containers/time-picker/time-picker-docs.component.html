@@ -35,6 +35,17 @@
 <pre><code mwlHighlightJs language="HTML" [source]="meridianTimePickerHtml"></code></pre>
 
 <separator></separator>
+<h2>Time Picker with No Seconds</h2>
+<description>Use <code>[displaySeconds]=false</code> to turn off seconds for the time picker.</description>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <fd-time-picker [displaySeconds]="false" [time]="timePickerNoSecondsObject"></fd-time-picker><br>
+    <span>timeObject: {{ '{' }}hour: {{timePickerNoSecondsObject.hour}}, minute: {{timePickerNoSecondsObject.minute}}, second: {{timePickerNoSecondsObject.second}}}</span>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timePickerNoSecondsHtml"></code></pre>
+
+<separator></separator>
 <h2>Disabled Time Picker</h2>
 <description>Set <code>[disabled]="true"</code> to disable the time picker.</description>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">

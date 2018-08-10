@@ -15,6 +15,8 @@ export class TimePickerComponent {
 
     @Input() spinners: boolean = true;
 
+    @Input() displaySeconds: boolean = true;
+
     @ViewChild(TimeComponent) child: TimeComponent;
 
     period: string;
@@ -53,17 +55,16 @@ export class TimePickerComponent {
         } else {
             formattedMinute = this.time.minute;
         }
-        if (this.time.second < 10 && this.time.second !== null) {
+        if (this.time.second < 10 && this.time.second !== null && this.displaySeconds) {
             formattedSecond = '0' + this.time.second;
-        } else {
+        } else if (this.displaySeconds) {
             formattedSecond = this.time.second;
         }
-        if (
-            (formattedHour || formattedHour === 0) &&
-            (formattedMinute || formattedMinute === '00') &&
-            (formattedSecond || formattedSecond === '00')
-        ) {
-            formattedTime = formattedHour + ':' + formattedMinute + ':' + formattedSecond;
+        if ((formattedHour || formattedHour === 0) && (formattedMinute || formattedMinute === '00')) {
+            formattedTime = formattedHour + ':' + formattedMinute;
+        }
+        if (formattedSecond || formattedSecond === '00') {
+            formattedTime = formattedTime + ':' + formattedSecond;
         }
 
         if (formattedMeridian) {
@@ -75,12 +76,20 @@ export class TimePickerComponent {
 
     timeInputChanged(timeFromInput) {
         // check for valid time input - 24-hour hh:mm:ss
+        let regexp;
         if (!this.meridian) {
-            if (/^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])$/.test(timeFromInput)) {
+            if (this.displaySeconds) {
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])$/;
+            } else {
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/;
+            }
+            if (regexp.test(timeFromInput)) {
                 const splitString = timeFromInput.split(':');
                 this.time.hour = parseInt(splitString[0], 10);
                 this.time.minute = parseInt(splitString[1], 10);
-                this.time.second = parseInt(splitString[2], 10);
+                if (this.displaySeconds) {
+                    this.time.second = parseInt(splitString[2], 10);
+                }
             } else {
                 this.time.hour = null;
                 this.time.minute = null;
@@ -89,7 +98,12 @@ export class TimePickerComponent {
                 this.child.period = 'am';
             }
         } else if (this.meridian) {
-            if (/^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9]) [APap][mM]$/.test(timeFromInput)) {
+            if (this.displaySeconds) {
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9]) [APap][mM]$/;
+            } else {
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]) [APap][mM]$/;
+            }
+            if (regexp.test(timeFromInput)) {
                 const period = timeFromInput.split(' ')[1];
                 this.period = period;
                 const splitString = timeFromInput.split(':');
@@ -103,8 +117,11 @@ export class TimePickerComponent {
                         this.time.hour = 0;
                     }
                 }
+                this.child.setDisplayedHour();
                 this.time.minute = parseInt(splitString[1], 10);
-                this.time.second = parseInt(splitString[2], 10);
+                if (this.displaySeconds) {
+                    this.time.second = parseInt(splitString[2], 10);
+                }
             } else {
                 this.time.hour = null;
                 this.time.minute = null;
@@ -131,5 +148,24 @@ export class TimePickerComponent {
 
     popoverClosed() {
         this.isOpen = false;
+    }
+
+    getPlaceholder() {
+        let retVal;
+        if (this.displaySeconds) {
+            if (this.meridian) {
+                retVal = 'hh:mm:ss am/pm';
+            } else {
+                retVal = 'hh:mm:ss';
+            }
+        } else {
+            if (this.meridian) {
+                retVal = 'hh:mm am/pm';
+            } else {
+                retVal = 'hh:mm';
+            }
+        }
+
+        return retVal;
     }
 }

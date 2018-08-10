@@ -25,6 +25,8 @@ export class TimeComponent implements OnChanges {
 
     @Input() spinners: boolean = true;
 
+    @Input() displaySeconds: boolean = true;
+
     @Input()
     setDisplayedHour() {
         if (this.time.hour === 0) {
@@ -159,24 +161,28 @@ export class TimeComponent implements OnChanges {
     }
 
     increaseSecond() {
-        if (this.time.second === null) {
-            this.time.second = 0;
-        } else if (this.time.second === 59) {
-            this.time.second = 0;
-            this.increaseMinute();
-        } else {
-            this.time.second = this.time.second + 1;
+        if (this.displaySeconds) {
+            if (this.time.second === null) {
+                this.time.second = 0;
+            } else if (this.time.second === 59) {
+                this.time.second = 0;
+                this.increaseMinute();
+            } else {
+                this.time.second = this.time.second + 1;
+            }
         }
     }
 
     decreaseSecond() {
-        if (this.time.second === null) {
-            this.time.second = 0;
-        } else if (this.time.second === 0) {
-            this.time.second = 59;
-            this.decreaseMinute();
-        } else {
-            this.time.second = this.time.second - 1;
+        if (this.displaySeconds) {
+            if (this.time.second === null) {
+                this.time.second = 0;
+            } else if (this.time.second === 0) {
+                this.time.second = 59;
+                this.decreaseMinute();
+            } else {
+                this.time.second = this.time.second - 1;
+            }
         }
     }
 

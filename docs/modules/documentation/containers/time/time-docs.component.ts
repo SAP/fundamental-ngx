@@ -44,11 +44,15 @@ export class TimeDocsComponent {
 
     timeNoSpinnersHtml = `<fd-time [spinners]="false" [time]="timeNoSpinnersObject"></fd-time>`;
 
+    timeNoSecondsHtml = `<fd-time [displaySeconds]="false" [time]="timeNoSecondsObject"></fd-time>`;
+
     timeObject = { hour: 12, minute: 0, second: 0 };
 
     timeMeridianObject = { hour: 12, minute: 0, second: 0 };
 
     timeNoSpinnersObject = { hour: 12, minute: 0, second: 0 };
+
+    timeNoSecondsObject = { hour: 12, minute: 0, second: null };
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

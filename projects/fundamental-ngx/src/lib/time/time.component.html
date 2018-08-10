@@ -30,7 +30,7 @@
               aria-label="Decrease minutes"></button>
     </div>
   </div>
-  <div class="fd-time__item">
+  <div *ngIf="displaySeconds" class="fd-time__item">
     <div class="fd-time__control">
       <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase seconds"></button>
