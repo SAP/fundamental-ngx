@@ -1,7 +1,7 @@
 <div class="fd-time">
   <div class="fd-time__item">
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="increaseHour()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseHour()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase hours"></button>
     </div>
     <div class="fd-time__input">
@@ -11,14 +11,14 @@
              aria-label="Hours"/>
     </div>
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="decreaseHour()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="decreaseHour()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
               aria-label="Decrease hours"></button>
     </div>
   </div>
 
   <div class="fd-time__item">
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="increaseMinute()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseMinute()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase minutes"></button>
     </div>
     <div class="fd-time__input">
@@ -26,13 +26,13 @@
              aria-label="Minutes"/>
     </div>
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="decreaseMinute()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="decreaseMinute()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
               aria-label="Decrease minutes"></button>
     </div>
   </div>
   <div class="fd-time__item">
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="increaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase seconds"></button>
     </div>
     <div class="fd-time__input">
@@ -40,13 +40,13 @@
              aria-label="Seconds"/>
     </div>
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="decreaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="decreaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
               aria-label="Decrease seconds"></button>
     </div>
   </div>
   <div *ngIf="meridian" class="fd-time__item">
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
               aria-label="Increase period"></button>
     </div>
     <div class="fd-time__input">
@@ -54,7 +54,7 @@
              aria-label="Period"/>
     </div>
     <div class="fd-time__control">
-      <button [ngClass]="{'is-disabled': disabled}" (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
               aria-label="Decrease period"></button>
     </div>
   </div>

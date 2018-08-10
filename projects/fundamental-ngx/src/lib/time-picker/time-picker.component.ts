@@ -13,6 +13,8 @@ export class TimePickerComponent {
 
     @Input() disabled: boolean;
 
+    @Input() spinners: boolean = true;
+
     @ViewChild(TimeComponent) child: TimeComponent;
 
     period: string;

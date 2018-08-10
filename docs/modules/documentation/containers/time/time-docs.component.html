@@ -9,7 +9,8 @@
   inputs: [
     { name: 'time', description: 'An object that contains three integer properties: \'hour\' (ranging from 0 to 23), \'minute\' (ranging from 0 to 59), and \'second\' (ranging from 0 to 59). ' },
     { name: 'meridian', description: 'Boolean, when set to true, uses the 24 hour clock (hours ranging from 0 to 23) and does not display a period control. Default is false.'},
-    { name: 'validate', description: 'Boolean, when set to false, does not validate the user input.  Default is true.'},
+    { name: 'validate', description: 'Boolean, when set to false, does not set the input field to invalid state on invalid entry.  Default is true.'},
+    { name: 'spinners', description: 'Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true.'},
     { name: 'disabled', description: 'Disables the component.'}
   ]
 }"></properties>
@@ -42,6 +43,19 @@
 </div>
 <pre><code mwlHighlightJs language="HTML" [source]="timeMeridianHtml"></code></pre>
 
+<separator></separator>
+
+<h2>Clock With No Spinners</h2>
+<description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [spinners]="false" [time]="timeNoSpinnersObject"></fd-time>
+      <span>timeObject: {{ '{' }}hour: {{timeNoSpinnersObject.hour}}, minute: {{timeNoSpinnersObject.minute}}, second: {{timeNoSpinnersObject.second}}}</span>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeNoSpinnersHtml"></code></pre>
 <separator></separator>
 
 <h2>Disabled State</h2>

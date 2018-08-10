@@ -42,9 +42,13 @@ export class TimeDocsComponent {
 
     timeDisabledHtml = `<fd-time [disabled]="true" [time]="{hour: 0, minute: 0, second: 0}"></fd-time>`;
 
+    timeNoSpinnersHtml = `<fd-time [spinners]="false" [time]="timeNoSpinnersObject"></fd-time>`;
+
     timeObject = { hour: 12, minute: 0, second: 0 };
 
     timeMeridianObject = { hour: 12, minute: 0, second: 0 };
+
+    timeNoSpinnersObject = { hour: 12, minute: 0, second: 0 };
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

@@ -23,6 +23,8 @@ export class TimeComponent implements OnChanges {
 
     @Input() disabled: boolean;
 
+    @Input() spinners: boolean = true;
+
     @Input()
     setDisplayedHour() {
         if (this.time.hour === 0) {
@@ -96,7 +98,7 @@ export class TimeComponent implements OnChanges {
                 this.time.second = this.time.second * -1;
             }
         } else if (inputType === 'period') {
-            if (this.period !== 'am' && this.period !== 'pm' && this.validate) {
+            if (this.period !== 'am' && this.period !== 'pm') {
                 this.setDisplayedHour();
             }
         }
