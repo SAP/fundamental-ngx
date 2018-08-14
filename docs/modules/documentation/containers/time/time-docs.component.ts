@@ -30,25 +30,29 @@ export class TimeDocsComponent {
     schema: Schema;
     data: any = {
         properties: {
-            hour: 13,
-            minute: 55,
-            second: 59
+            hour: 12,
+            minute: 0,
+            second: 0
         }
     };
 
     timeHtml = `<fd-time [time]="timeObject"></fd-time>`;
 
-    timeTwentyFourHtml = `<fd-time [displayTwentyFour]="true" [time]="timeTwentyFourObject"></fd-time>`;
-
-    timeNoValidateHtml = `<fd-time [validate]="false" [time]="timeNoValidateObject"></fd-time>`;
+    timeMeridianHtml = `<fd-time [meridian]="true" [time]="timeMeridianObject"></fd-time>`;
 
     timeDisabledHtml = `<fd-time [disabled]="true" [time]="{hour: 0, minute: 0, second: 0}"></fd-time>`;
 
-    timeObject = { hour: 13, minute: 55, second: 59 };
+    timeNoSpinnersHtml = `<fd-time [spinners]="false" [time]="timeNoSpinnersObject"></fd-time>`;
 
-    timeTwentyFourObject = { hour: 13, minute: 55, second: 59 };
+    timeNoSecondsHtml = `<fd-time [displaySeconds]="false" [time]="timeNoSecondsObject"></fd-time>`;
 
-    timeNoValidateObject = { hour: 99, minute: 7.4, second: -5 };
+    timeObject = { hour: 12, minute: 0, second: 0 };
+
+    timeMeridianObject = { hour: 12, minute: 0, second: 0 };
+
+    timeNoSpinnersObject = { hour: 12, minute: 0, second: 0 };
+
+    timeNoSecondsObject = { hour: 12, minute: 0, second: null };
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

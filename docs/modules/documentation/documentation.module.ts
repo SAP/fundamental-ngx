@@ -46,6 +46,7 @@ import { SideNavigationDocsComponent } from './containers/side-navigation/side-n
 import { NavbarDocsComponent } from './containers/navbar/navbar-docs.component';
 import { PopoverDocsComponent } from './containers/popover/popover-docs.component';
 import { TimeDocsComponent } from './containers/time/time-docs.component';
+import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -91,6 +92,7 @@ const ROUTES: Routes = [
             { path: 'tabs', component: TabsDocsComponent },
             { path: 'tile', component: TileDocsComponent },
             { path: 'time', component: TimeDocsComponent },
+            { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent }
@@ -136,6 +138,7 @@ const ROUTES: Routes = [
         MegaMenuDocsComponent,
         TileDocsComponent,
         TimeDocsComponent,
+        TimePickerDocsComponent,
         NavbarDocsComponent,
         InstallationDocsComponent,
         UsageDocsComponent
