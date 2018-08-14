@@ -9,6 +9,9 @@ export class InternationalizationDocsComponent implements OnInit {
 
     ngOnInit() {}
 
+    alertHtml = ``;
+    showAlert(event) {}
+
     buttonHtmlType = `
     <button fd-button>
     Primary Button
