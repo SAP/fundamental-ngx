@@ -68,6 +68,7 @@ export class TimeComponent implements OnChanges {
     inputBlur(inputType) {
         if (inputType === 'hour') {
             if (this.meridian) {
+                this.time.hour = Math.round(this.time.hour);
                 if (this.displayedHour === 0) {
                     this.time.hour = 0;
                     this.setDisplayedHour();
