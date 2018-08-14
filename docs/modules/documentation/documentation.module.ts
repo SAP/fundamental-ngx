@@ -48,6 +48,7 @@ import { PopoverDocsComponent } from './containers/popover/popover-docs.componen
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
+import { InternationalizationDocsComponent } from './containers/internationalization/internationalization.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
@@ -91,7 +92,8 @@ const ROUTES: Routes = [
             { path: 'tile', component: TileDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
-            { path: 'usage', component: UsageDocsComponent }
+            { path: 'usage', component: UsageDocsComponent },
+            { path: 'rtl', component: InternationalizationDocsComponent }
         ]
     }
 ];
@@ -135,7 +137,8 @@ const ROUTES: Routes = [
         TileDocsComponent,
         NavbarDocsComponent,
         InstallationDocsComponent,
-        UsageDocsComponent
+        UsageDocsComponent,
+        InternationalizationDocsComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
