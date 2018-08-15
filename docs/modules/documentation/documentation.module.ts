@@ -45,6 +45,8 @@ import { FormDocsComponent } from './containers/form/form-docs.component';
 import { SideNavigationDocsComponent } from './containers/side-navigation/side-navigation-docs.component';
 import { NavbarDocsComponent } from './containers/navbar/navbar-docs.component';
 import { PopoverDocsComponent } from './containers/popover/popover-docs.component';
+import { CalendarDocsComponent } from './containers/calendar/calendar-docs.component';
+import { DatePickerDocsComponent } from './containers/date-picker/date-picker-docs.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -70,6 +72,8 @@ const ROUTES: Routes = [
             { path: 'breadcrumb', component: BreadcrumbDocsComponent },
             { path: 'button', component: ButtonDocsComponent },
             { path: 'buttonGroup', component: ButtonGroupDocsComponent },
+            { path: 'calendar', component: CalendarDocsComponent },
+            { path: 'datePicker', component: DatePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
             { path: 'form', component: FormDocsComponent },
             { path: 'icon', component: IconDocsComponent },
@@ -130,6 +134,8 @@ const ROUTES: Routes = [
         PaginationDocsComponent,
         PanelDocsComponent,
         PopoverDocsComponent,
+        CalendarDocsComponent,
+        DatePickerDocsComponent,
         SideNavigationDocsComponent,
         MegaMenuDocsComponent,
         TileDocsComponent,
