@@ -1,0 +1,84 @@
+<header>Time</header>
+<description>The time component is used for a single time value. Multiple components can be used in the time-picker to assemble a clock time. A max of four will account for hours, minutes, seconds and period of the day. It will be rare to see this component used outside of it being composed in the time-picker component.</description>
+<import module="TimeModule" path="fundamental/time/time.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-time&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'time', description: 'An object that contains three integer properties: \'hour\' (ranging from 0 to 23), \'minute\' (ranging from 0 to 59), and \'second\' (ranging from 0 to 59). ' },
+    { name: 'meridian', description: 'Boolean, when set to true, uses the 24 hour clock (hours ranging from 0 to 23) and does not display a period control. Default is false.'},
+    { name: 'validate', description: 'Boolean, when set to false, does not set the input field to invalid state on invalid entry.  Default is true.'},
+    { name: 'spinners', description: 'Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true.'},
+    { name: 'displaySeconds', description: 'Boolean, when set to false, hides the input for seconds. Default is true.'},
+    { name: 'disabled', description: 'Disables the component.'}
+  ]
+}"></properties>
+
+<separator></separator>
+
+<h2>24-Hour Clock</h2>
+<description>This is the default clock setting.</description>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [time]="timeObject"></fd-time>
+      <span>timeObject: {{ '{' }}hour: {{timeObject.hour}}, minute: {{timeObject.minute}}, second: {{timeObject.second}}}</span>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeHtml"></code></pre>
+
+<separator></separator>
+
+<h2>12-Hour Clock</h2>
+<p>You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code></p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [meridian]="true" [time]="timeMeridianObject"></fd-time>
+      <span>timeMeridianObject: {{ '{' }}hour: {{timeMeridianObject.hour}}, minute: {{timeMeridianObject.minute}}, second: {{timeMeridianObject.second}}}</span>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeMeridianHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Clock With No Spinners</h2>
+<description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [spinners]="false" [time]="timeNoSpinnersObject"></fd-time>
+      <span>timeObject: {{ '{' }}hour: {{timeNoSpinnersObject.hour}}, minute: {{timeNoSpinnersObject.minute}}, second: {{timeNoSpinnersObject.second}}}</span>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeNoSpinnersHtml"></code></pre>
+<separator></separator>
+
+<h2>Clock With No Seconds</h2>
+<description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [displaySeconds]="false" [time]="timeNoSecondsObject"></fd-time>
+      <span>timeObject: {{ '{' }}hour: {{timeNoSecondsObject.hour}}, minute: {{timeNoSecondsObject.minute}}, second: {{timeNoSecondsObject.second}}}</span>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeNoSecondsHtml"></code></pre>
+<separator></separator>
+
+<h2>Disabled State</h2>
+<p>You can disable the entire component by setting <code>[disabled]="true"</code></p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-time [disabled]="true" [time]="{hour: 0, minute: 0, second: 0}"></fd-time>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs language="HTML" [source]="timeDisabledHtml"></code></pre>
