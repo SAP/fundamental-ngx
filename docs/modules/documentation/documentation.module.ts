@@ -57,6 +57,7 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 
+import { RTLToggleComponent } from "./components/RTL/RTLToggle.component";
 export function highlightJsFactory() {
     return hljs;
 }
@@ -104,6 +105,7 @@ const ROUTES: Routes = [
 
 @NgModule({
     declarations: [
+        RTLToggleComponent,
         DocumentationComponent,
         PlayGroundComponent,
         HtmlExampleComponent,
