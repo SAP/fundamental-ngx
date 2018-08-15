@@ -429,46 +429,50 @@ export class CalendarComponent implements OnInit {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.dateFromDatePicker.currentValue.length > 0) {
-            let dateFromDatePickerInput = changes.dateFromDatePicker.currentValue;
-
-            if (this.datePickerType === 'single') {
-                let singleDate = dateFromDatePickerInput.replace(/\s/g, '');
-                singleDate = singleDate.split(/[/]+/);
-
-                this.invalidDate = this.validateDateFromDatePicker(singleDate);
-
-                if (!this.invalidDate) {
-                    this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
-                    this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
-                    this.year = this.date.getFullYear();
-                    this.month = this.date.getMonth();
-                    this.monthName = this.monthsFullName[this.date.getMonth()];
-                    this.isInvalidDateInput.emit(this.invalidDate);
-                    this.constructCalendar();
+        if(changes.dateFromDatePicker) {
+            console.log(changes.dateFromDatePicker);
+            if (changes.dateFromDatePicker.currentValue.length > 0) {
+                let dateFromDatePickerInput = changes.dateFromDatePicker.currentValue;
+    
+                if (this.datePickerType === 'single') {
+                    let singleDate = dateFromDatePickerInput.replace(/\s/g, '');
+                    singleDate = singleDate.split(/[/]+/);
+    
+                    this.invalidDate = this.validateDateFromDatePicker(singleDate);
+    
+                    if (!this.invalidDate) {
+                        this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
+                        this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
+                        this.year = this.date.getFullYear();
+                        this.month = this.date.getMonth();
+                        this.monthName = this.monthsFullName[this.date.getMonth()];
+                        this.isInvalidDateInput.emit(this.invalidDate);
+                        this.constructCalendar();
+                    } else {
+                        this.isInvalidDateInput.emit(this.invalidDate);
+                    }
                 } else {
-                    this.isInvalidDateInput.emit(this.invalidDate);
-                }
-            } else {
-                let currentDates = dateFromDatePickerInput.replace(/\s/g, '');
-                currentDates = currentDates.split(/[-,]+/);
-                let firstDate = currentDates[0].split(/[/]+/);
-                let secondDate = currentDates[1].split(/[/]+/);
-
-                this.invalidDate =
-                    this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
-
-                if (!this.invalidDate) {
-                    this.selectedRangeFirst.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
-                    this.selectedRangeLast.date = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
-                    this.isInvalidDateInput.emit(this.invalidDate);
-                    this.isInvalidDateInput.emit(this.invalidDate);
-                    this.constructCalendar();
-                } else {
-                    this.isInvalidDateInput.emit(this.invalidDate);
+                    let currentDates = dateFromDatePickerInput.replace(/\s/g, '');
+                    currentDates = currentDates.split(/[-,]+/);
+                    let firstDate = currentDates[0].split(/[/]+/);
+                    let secondDate = currentDates[1].split(/[/]+/);
+    
+                    this.invalidDate =
+                        this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
+    
+                    if (!this.invalidDate) {
+                        this.selectedRangeFirst.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
+                        this.selectedRangeLast.date = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
+                        this.isInvalidDateInput.emit(this.invalidDate);
+                        this.isInvalidDateInput.emit(this.invalidDate);
+                        this.constructCalendar();
+                    } else {
+                        this.isInvalidDateInput.emit(this.invalidDate);
+                    }
                 }
             }
         }
+        
     }
 
     ngOnInit() {

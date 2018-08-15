@@ -1,9 +1,15 @@
 <header>Date Picker</header>
 <description>The date-picker component is an opinionated composition of the "input-group", "popover" and "calendar" components to accomplish the UI pattern for picking a date.</description>
-<!-- <import module="CalendarModule" path="fundamental/calendar/calendar.module"></import> -->
+<import module="DatePickerModule" path="fundamental/date-picker/date-picker.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-date-picker&gt;</h1>
+<properties [properties]="{
+  inputs: [
+    { name: 'type',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'}
+  ]
+}">
+</properties>
 
 <separator></separator>
 
@@ -16,7 +22,6 @@
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="datePickerSingleHtml"></code></pre>
 
 <separator></separator>
-
 
 <h1>Range Date Picker</h1>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">

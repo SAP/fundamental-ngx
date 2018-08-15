@@ -77,9 +77,9 @@ export class CalendarDocsComponent implements OnInit {
     }
 
     // Disable days within a range
-    filterFunction = function(d: Date): boolean {
-        let firstDay = new Date(2018, 9, 5);
-        let lastDay = new Date(2018, 10, 5);
+    myDisableFunction = function(d: Date): boolean {
+        let firstDay = new Date(2018, 7, 5);
+        let lastDay = new Date(2018, 7, 20);
         return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
     }
 

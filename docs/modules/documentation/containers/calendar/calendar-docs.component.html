@@ -20,7 +20,8 @@
 <h2>Calendar with single selection, disabled and blocked days</h2>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-        <fd-calendar [datePickerType]="'single'" (updateDatePickerInput)="updateDatePickerInputHandler($event)" [disableFunction]="myDisableFunction" [blockFunction]="myBlockFunction"></fd-calendar>
+        <fd-calendar [datePickerType]="'single'" (updateDatePickerInput)="updateDatePickerInputHandler($event)" 
+        [disableFunction]="myDisableFunction" [blockFunction]="myBlockFunction"></fd-calendar>
 
         <br/>
         <div>Selected Date: {{selectedDate}}</div>
