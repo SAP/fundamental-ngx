@@ -47,9 +47,13 @@ import { NavbarDocsComponent } from './containers/navbar/navbar-docs.component';
 import { PopoverDocsComponent } from './containers/popover/popover-docs.component';
 import { CalendarDocsComponent } from './containers/calendar/calendar-docs.component';
 import { DatePickerDocsComponent } from './containers/date-picker/date-picker-docs.component';
+import { TimeDocsComponent } from './containers/time/time-docs.component';
+import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
+
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
+import { InternationalizationDocsComponent } from './containers/internationalization/internationalization.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
@@ -93,9 +97,12 @@ const ROUTES: Routes = [
             { path: 'table', component: TableDocsComponent },
             { path: 'tabs', component: TabsDocsComponent },
             { path: 'tile', component: TileDocsComponent },
+            { path: 'time', component: TimeDocsComponent },
+            { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
-            { path: 'usage', component: UsageDocsComponent }
+            { path: 'usage', component: UsageDocsComponent },
+            { path: 'rtl', component: InternationalizationDocsComponent }
         ]
     }
 ];
@@ -139,9 +146,12 @@ const ROUTES: Routes = [
         SideNavigationDocsComponent,
         MegaMenuDocsComponent,
         TileDocsComponent,
+        TimeDocsComponent,
+        TimePickerDocsComponent,
         NavbarDocsComponent,
         InstallationDocsComponent,
-        UsageDocsComponent
+        UsageDocsComponent,
+        InternationalizationDocsComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

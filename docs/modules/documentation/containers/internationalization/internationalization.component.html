@@ -1,0 +1,105 @@
+<header>Directionality <a href="https://en.wikipedia.org/wiki/Writing_system#Directionality">*</a></header>
+<description>There are languages written in left-to-right(LTR - or sinistrodextrally) or in right-to-left(RTL or dextrosinistrally).
+    Writing direction is left to right in most European languages, right-to-left in Hebrew and Arabic, or both in boustrophedon
+    scripts, and optionally vertical in some Asian languages. In Hebrew and Arabic, the main direction of reading flows from
+    right to left and the starting point of the screen is in the top right corner. The idea is the localized forms must comply
+    to the requirements applicable for the intended language and location.</description>
+
+<separator></separator>
+<h1>Examples</h1>
+
+<p>Fundamental NGX should work in RTL mode in most of the cases without any issues. Here are 3 code snippets: one in English(list
+    of buttons); one in Herbew(list of buttons); list of alerts in Arabic;</p>
+
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+    <div class="fd-tile__content">
+        <p>
+            <button fd-button>
+                Primary Button
+            </button>
+            <button fd-button
+                    [fdType]="'main'">
+                Main Button
+            </button>
+            <button fd-button
+                    [fdType]="'secondary'">
+                Secondary Button
+            </button>
+            <button fd-button
+                    [fdType]="'toolbar'">
+                Toolbar Button
+            </button>
+            <button fd-button
+                    [fdType]="'positive'">
+                Positive Button
+            </button>
+            <button fd-button
+                    [fdType]="'negative'">
+                Negative Button
+            </button>
+        </p>
+    </div>
+</div>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlType"></code></pre>
+
+
+<div dir="rtl"
+     class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+    <div class="fd-tile__content">
+        <p>
+            <button fd-button>
+                לחצן ראשי
+            </button>
+            <button fd-button
+                    [fdType]="'main'">
+                לחצן ראשי
+            </button>
+            <button fd-button
+                    [fdType]="'secondary'">
+                לחצן משני
+            </button>
+            <button fd-button
+                    [fdType]="'toolbar'">
+                לחצן סרגל הכלים
+            </button>
+            <button fd-button
+                    [fdType]="'positive'">
+                לחצן חיובי
+            </button>
+            <button fd-button
+                    [fdType]="'negative'">
+                לחצן שלילי
+            </button>
+        </p>
+    </div>
+</div>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlTypeRTL"></code></pre>
+
+<div dir="rtl"
+     class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+    <div class="fd-tile__content">
+        <p>
+            <fd-alert [dismissible]="true"
+                      [type]="'warning'"
+                      (close)="showAlert($event)">
+                تنبيه من النوع القابل للإنذار.
+            </fd-alert>
+        </p>
+        <p>
+            <fd-alert [dismissible]="true"
+                      [type]="'error'"
+                      (close)="showAlert($event)">
+                <div>
+                    <h3>تنبيه من نوع الخطأ القابل للرفض مع القالب.</h3>
+                    <p>معلومات اكثر...</p>
+                </div>
+            </fd-alert>
+        </p>
+        <p>
+            <fd-alert [dismissible]="false">
+                تنبيه نوع عادي.
+            </fd-alert>
+        </p>
+    </div>
+</div>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="alertHtml"></code></pre>
