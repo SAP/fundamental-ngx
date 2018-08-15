@@ -23,7 +23,7 @@
       id="tn-components-selector">
     <li class="side-nav__headers">Components</li>
     <li *ngFor="let component of components">
-      <a class="nav-item"
+      <a class="nav-item {{component.themes}}"
          [routerLink]="['/docs', component.url]"
          routerLinkActive="nav-item--active">{{ component.name }}</a>
     </li>
