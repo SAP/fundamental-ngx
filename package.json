@@ -32,7 +32,7 @@
         "@ng-bootstrap/ng-bootstrap": "^2.2.1",
         "angular-highlight-js": "^2.0.1",
         "core-js": "^2.5.7",
-        "fundamental-ui": "1.1.0",
+        "fundamental-ui": "git+https://github.com/SAP/fundamental.git#develop-ariba",
         "highlight.js": "^9.12.0",
         "ngx-highlightjs": "^2.1.1",
         "npm": "^6.2.0",
