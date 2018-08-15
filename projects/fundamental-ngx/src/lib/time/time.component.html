@@ -1,0 +1,61 @@
+<div class="fd-time">
+  <div class="fd-time__item">
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseHour()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+              aria-label="Increase hours"></button>
+    </div>
+    <div class="fd-time__input">
+      <input *ngIf="meridian" (blur)="inputBlur('hour')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((displayedHour > 12 || displayedHour < 0) && validate)}" [(ngModel)]="displayedHour" (keyup)="displayedHourChanged()" class="fd-form__control" type="number" placeholder="hh"
+             aria-label="Hours"/>
+      <input *ngIf="!meridian" (blur)="inputBlur('hour')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.hour > 23 || time.hour < 0) && validate)}" [(ngModel)]="time.hour" class="fd-form__control" type="number" placeholder="hh"
+             aria-label="Hours"/>
+    </div>
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="decreaseHour()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+              aria-label="Decrease hours"></button>
+    </div>
+  </div>
+
+  <div class="fd-time__item">
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseMinute()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+              aria-label="Increase minutes"></button>
+    </div>
+    <div class="fd-time__input">
+      <input [(ngModel)]="time.minute" (blur)="inputBlur('minute')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}" class="fd-form__control" type="number" placeholder="mm"
+             aria-label="Minutes"/>
+    </div>
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="decreaseMinute()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+              aria-label="Decrease minutes"></button>
+    </div>
+  </div>
+  <div *ngIf="displaySeconds" class="fd-time__item">
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="increaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+              aria-label="Increase seconds"></button>
+    </div>
+    <div class="fd-time__input">
+      <input [(ngModel)]="time.second" (blur)="inputBlur('second')" [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}" class="fd-form__control" type="number" placeholder="ss"
+             aria-label="Seconds"/>
+    </div>
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="decreaseSecond()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+              aria-label="Decrease seconds"></button>
+    </div>
+  </div>
+  <div *ngIf="meridian" class="fd-time__item">
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-up-arrow"
+              aria-label="Increase period"></button>
+    </div>
+    <div class="fd-time__input">
+      <input [(ngModel)]="period" [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}" class="fd-form__control" (blur)="inputBlur('period')" (ngModelChange)="periodModelChange()" type="text" placeholder="am"
+             aria-label="Period"/>
+    </div>
+    <div class="fd-time__control">
+      <button *ngIf="spinners" [ngClass]="{'is-disabled': disabled}" (click)="togglePeriod()" class=" fd-button--secondary fd-button--xs sap-icon--navigation-down-arrow"
+              aria-label="Decrease period"></button>
+    </div>
+  </div>
+</div>

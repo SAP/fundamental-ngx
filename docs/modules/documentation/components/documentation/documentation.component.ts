@@ -33,6 +33,8 @@ export class DocumentationComponent {
         { url: 'table', name: 'Table' },
         { url: 'tabs', name: 'Tabs' },
         { url: 'tile', name: 'Tile' },
+        { url: 'time', name: 'Time' },
+        { url: 'timePicker', name: 'Time Picker' },
         { url: 'tree', name: 'Tree' }
     ];
 
