@@ -164,3 +164,9 @@ pre {
 .hljs-string {
     color: #d14;
 }
+
+$fd-icons-path: '../node_modules/fundamental-ui/scss/theme/ariba/icons/';
+@import "../node_modules/fundamental-ui/scss/theme/ariba/icons/icon";
+//.ariba {
+//  @import "../node_modules/fundamental-ui/scss/theme/ariba/all.scss";
+//}
