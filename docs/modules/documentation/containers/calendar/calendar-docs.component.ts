@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './calendar-docs.component.html'
 })
 export class CalendarDocsComponent implements OnInit {
-
     selectedDate: string;
     selectedFirstDate: string;
     selectedLastDate: string;
@@ -21,17 +20,17 @@ export class CalendarDocsComponent implements OnInit {
         }
     }
 
-    myDisableFunction = function (d: Date): boolean {
+    myDisableFunction = function(d: Date): boolean {
         let day = d.getDay();
         return day === 6 || day === 0;
-    }
+    };
 
     // Block days before/after any day
-    myBlockFunction = function (d: Date): boolean {
+    myBlockFunction = function(d: Date): boolean {
         let firstDay = new Date(2018, 7, 25);
         let lastDay = new Date(2018, 7, 30);
-        return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
-    }
+        return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime();
+    };
 
     calendarSingleHtml = `<fd-calendar [datePickerType]="'single'" [disableFunction]="myDisableFunction" [blockFunction]="myBlockFunction"></fd-calendar>
     `;

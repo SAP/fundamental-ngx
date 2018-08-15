@@ -1,14 +1,12 @@
 import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { DatePickerType } from '../calendar/calendar.component';
 
-
 @Component({
     selector: 'fd-date-picker',
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss']
 })
 export class DatePickerComponent implements OnInit {
-
     @Input() type: DatePickerType = 'single';
     inputFieldDate = null;
     isValidDateInput: boolean = false;
@@ -18,14 +16,14 @@ export class DatePickerComponent implements OnInit {
     openCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
-        if(this.isValidDateInput) {
+        if (this.isValidDateInput) {
             this.inputFieldDate = null;
         }
     }
 
     closeCalendar() {
-        if(this.isOpen) {
-            if(this.isValidDateInput) {
+        if (this.isOpen) {
+            if (this.isValidDateInput) {
                 this.inputFieldDate = null;
             }
             this.isOpen = false;
@@ -34,15 +32,15 @@ export class DatePickerComponent implements OnInit {
 
     updateDatePickerInputHandler(d) {
         if (this.type === 'single') {
-            if (d.selectedDay.id !== 0) {  
+            if (d.selectedDay.id !== 0) {
                 this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
             }
         } else {
             if (d.selectedFirstDay.id !== 0) {
-                this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
+                this.inputFieldDate =
+                    d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
             }
         }
-    
     }
 
     isInvalidDateInputHandler(e) {
@@ -55,12 +53,10 @@ export class DatePickerComponent implements OnInit {
 
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
-       this.closeCalendar();
+        this.closeCalendar();
     }
 
-    ngOnInit() { 
-    }
+    ngOnInit() {}
 
-    constructor() { }
-
+    constructor() {}
 }

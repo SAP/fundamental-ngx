@@ -6,7 +6,7 @@ export type MonthStatus = 'previous' | 'current' | 'next';
 export interface CalendarDay {
     id: number;
     date: Date;
-    day?: number
+    day?: number;
     weekDay?: number;
     monthStatus?: MonthStatus;
     disabled?: boolean;
@@ -30,11 +30,16 @@ export interface EmittedDate {
     styleUrls: ['calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-
     @Input() dateFromDatePicker: string;
     @Input() datePickerType: DatePickerType = 'single';
-    @Input() disableFunction = function (d): boolean { return false };
-    @Input() blockFunction = function (d): boolean { return false };
+    @Input()
+    disableFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockFunction = function(d): boolean {
+        return false;
+    };
 
     @Output() updateDatePickerInput: EventEmitter<any> = new EventEmitter();
     @Output() isInvalidDateInput: EventEmitter<any> = new EventEmitter();
@@ -45,8 +50,34 @@ export class CalendarComponent implements OnInit {
     showCalendarYears: boolean = false;
     showCalendarDates: boolean = true;
 
-    monthsShortName: string[] = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun', 'Jul', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-    monthsFullName: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    monthsShortName: string[] = [
+        'Jan.',
+        'Feb.',
+        'Mar.',
+        'Apr.',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug.',
+        'Sep.',
+        'Oct.',
+        'Nov.',
+        'Dec.'
+    ];
+    monthsFullName: string[] = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
     weekDays: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -68,15 +99,18 @@ export class CalendarComponent implements OnInit {
     selectCounter: number = 0;
 
     selectedDay: CalendarDay = {
-        id: 0, date: new Date(1900, 0, 1)
+        id: 0,
+        date: new Date(1900, 0, 1)
     };
 
     selectedRangeFirst: CalendarDay = {
-        id: 0, date: new Date(1900, 0, 1)
+        id: 0,
+        date: new Date(1900, 0, 1)
     };
 
     selectedRangeLast: CalendarDay = {
-        id: 0, date: new Date(1900, 0, 1)
+        id: 0,
+        date: new Date(1900, 0, 1)
     };
 
     emittedDate: EmittedDate = {
@@ -86,9 +120,9 @@ export class CalendarComponent implements OnInit {
     };
 
     // A function that determines the number of days in a particular month
-    determineDaysInMonth = function (month: number, year: number): number {
+    determineDaysInMonth = function(month: number, year: number): number {
         if (month === 1) {
-            if ((year % 100 !== 0) && (year % 4 === 0) || (year % 400 === 0)) {
+            if ((year % 100 !== 0 && year % 4 === 0) || year % 400 === 0) {
                 return 29;
             } else {
                 return this.daysPerMonth[month];
@@ -96,10 +130,9 @@ export class CalendarComponent implements OnInit {
         } else {
             return this.daysPerMonth[month];
         }
-    }
+    };
 
     populateCalendar(): CalendarDay[] {
-
         let idCounter: number = 100;
         let numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
         let calendarMonth: CalendarDay[] = [];
@@ -113,7 +146,6 @@ export class CalendarComponent implements OnInit {
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
-
                 let genId: number = idCounter++;
                 let prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
                 let calDate = new Date(prevMonthYear, prevMonth, prevMonthDay);
@@ -126,11 +158,16 @@ export class CalendarComponent implements OnInit {
                     monthStatus: 'previous',
                     disabled: this.disableFunction(calDate),
                     blocked: this.blockFunction(calDate),
-                    selected: calDate.toDateString() === this.selectedDay.date.toDateString() || calDate.toDateString() === this.selectedRangeFirst.date.toDateString() || calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                    selected:
+                        calDate.toDateString() === this.selectedDay.date.toDateString() ||
+                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString() ||
+                        calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                     selectedFirst: calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
                     selectedLast: calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
-                    selectedRange: calDate.getTime() > this.selectedRangeFirst.date.getTime() && calDate.getTime() < this.selectedRangeLast.date.getTime()
-                }
+                    selectedRange:
+                        calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                        calDate.getTime() < this.selectedRangeLast.date.getTime()
+                };
 
                 calendarMonth.push(previousMonthCalendarDay);
                 prevMonthLastWeekDay--;
@@ -139,7 +176,6 @@ export class CalendarComponent implements OnInit {
 
         //Current month days
         for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
-
             let genId: number = idCounter++;
             let calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
 
@@ -151,12 +187,17 @@ export class CalendarComponent implements OnInit {
                 monthStatus: 'current',
                 disabled: this.disableFunction(calDate),
                 blocked: this.blockFunction(calDate),
-                selected: calDate.toDateString() === this.selectedDay.date.toDateString() || calDate.toDateString() === this.selectedRangeFirst.date.toDateString() || calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                selected:
+                    calDate.toDateString() === this.selectedDay.date.toDateString() ||
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString() ||
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                 selectedFirst: calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
                 selectedLast: calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
-                selectedRange: calDate.getTime() > this.selectedRangeFirst.date.getTime() && calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                selectedRange:
+                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                    calDate.getTime() < this.selectedRangeLast.date.getTime(),
                 today: calDate.toDateString() === this.today.toDateString()
-            }
+            };
 
             calendarMonth.push(currMonthCalendarDay);
         }
@@ -164,7 +205,7 @@ export class CalendarComponent implements OnInit {
         //Next month days
         let nextMonthDisplayedDays: number = 0;
 
-        //The calendar grid can have either 5 (35 days) or 6 (42 days) weeks depending on the week day of the first day of the current month and the number of days in the current month 
+        //The calendar grid can have either 5 (35 days) or 6 (42 days) weeks depending on the week day of the first day of the current month and the number of days in the current month
         if (calendarMonth.length > 35) {
             nextMonthDisplayedDays = 42 - calendarMonth.length;
         } else {
@@ -194,11 +235,16 @@ export class CalendarComponent implements OnInit {
                 monthStatus: 'next',
                 disabled: this.disableFunction(calDate),
                 blocked: this.blockFunction(calDate),
-                selected: calDate.toDateString() === this.selectedDay.date.toDateString() || calDate.toDateString() === this.selectedRangeFirst.date.toDateString() || calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                selected:
+                    calDate.toDateString() === this.selectedDay.date.toDateString() ||
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString() ||
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                 selectedFirst: calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
                 selectedLast: calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
-                selectedRange: calDate.getTime() > this.selectedRangeFirst.date.getTime() && calDate.getTime() < this.selectedRangeLast.date.getTime()
-            }
+                selectedRange:
+                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                    calDate.getTime() < this.selectedRangeLast.date.getTime()
+            };
 
             calendarMonth.push(nextMonthCalendarDay);
         }
@@ -253,7 +299,6 @@ export class CalendarComponent implements OnInit {
         this.setCurrentMonth(this.date.getMonth() + 1);
         this.selectedMonth = this.month;
         this.constructCalendar();
-
     }
 
     loadNextYearsList() {
@@ -278,7 +323,7 @@ export class CalendarComponent implements OnInit {
                     this.selectCounter = 0;
                 }
 
-                if (this.selectCounter === 1 && (day.id !== this.selectedRangeLast.id)) {
+                if (this.selectCounter === 1 && day.id !== this.selectedRangeLast.id) {
                     this.selectedRangeLast = day;
                     this.selectCounter++;
                 }
@@ -310,7 +355,6 @@ export class CalendarComponent implements OnInit {
         this.year = this.date.getFullYear();
     }
 
-
     selectYear(selectedYear) {
         this.setCurrentYear(selectedYear);
         this.selectedMonth = this.month;
@@ -323,8 +367,7 @@ export class CalendarComponent implements OnInit {
             this.showCalendarYears = false;
             this.showCalendarMonths = true;
             this.showCalendarDates = false;
-        }
-        else {
+        } else {
             this.showCalendarMonths = !this.showCalendarMonths;
             this.showCalendarYears = false;
             this.showCalendarDates = !this.showCalendarDates;
@@ -336,8 +379,7 @@ export class CalendarComponent implements OnInit {
             this.showCalendarMonths = false;
             this.showCalendarYears = true;
             this.showCalendarDates = false;
-        }
-        else {
+        } else {
             this.showCalendarYears = !this.showCalendarYears;
             this.showCalendarMonths = false;
             this.showCalendarDates = !this.showCalendarDates;
@@ -371,7 +413,7 @@ export class CalendarComponent implements OnInit {
         if (isNaN(month) || isNaN(day) || isNaN(year)) {
             isInvalid = true;
             return isInvalid;
-        } 
+        }
 
         if (year < 1000 || year > 3000 || month < 1 || month > 12) {
             isInvalid = true;
@@ -393,10 +435,10 @@ export class CalendarComponent implements OnInit {
             if (this.datePickerType === 'single') {
                 let singleDate = dateFromDatePickerInput.replace(/\s/g, '');
                 singleDate = singleDate.split(/[/]+/);
- 
+
                 this.invalidDate = this.validateDateFromDatePicker(singleDate);
 
-                if(!this.invalidDate) {
+                if (!this.invalidDate) {
                     this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
                     this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
                     this.year = this.date.getFullYear();
@@ -407,16 +449,16 @@ export class CalendarComponent implements OnInit {
                 } else {
                     this.isInvalidDateInput.emit(this.invalidDate);
                 }
-
             } else {
                 let currentDates = dateFromDatePickerInput.replace(/\s/g, '');
                 currentDates = currentDates.split(/[-,]+/);
                 let firstDate = currentDates[0].split(/[/]+/);
                 let secondDate = currentDates[1].split(/[/]+/);
 
-                this.invalidDate = this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
+                this.invalidDate =
+                    this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
 
-                if(!this.invalidDate) {
+                if (!this.invalidDate) {
                     this.selectedRangeFirst.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
                     this.selectedRangeLast.date = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
                     this.isInvalidDateInput.emit(this.invalidDate);
@@ -429,13 +471,11 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-
     ngOnInit() {
         this.date = new Date();
         this.constructCalendar();
         this.constructCalendarYearsList();
     }
 
-    constructor(private eRef: ElementRef) { }
-
+    constructor(private eRef: ElementRef) {}
 }
