@@ -4,7 +4,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 @Directive({
     selector: '[fd-form-item]'
 })
-export class FormItemComponent extends AbstractFdNgxClass {
+export class FormItemDirective extends AbstractFdNgxClass {
     @Input() isCheck: boolean = false;
     @Input() isInline: boolean = false;
 

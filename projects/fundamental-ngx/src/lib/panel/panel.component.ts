@@ -6,7 +6,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     templateUrl: './panel.component.html'
 })
 export class PanelComponent extends AbstractFdNgxClass {
-    @Input() span;
+    @Input() span: number;
 
     _setProperties() {
         this._addClassToElement('fd-panel');
