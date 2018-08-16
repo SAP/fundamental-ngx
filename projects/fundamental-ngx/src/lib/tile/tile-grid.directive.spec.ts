@@ -1,15 +1,15 @@
-import { IdentifierDirective } from './identifier.directive';
+import { TileGridDirective } from './tile-grid.directive';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<span fd-identifier>Identifier</span>'
+    template: '<fd-tile-grid>TileGrid</fd-tile-grid>'
 })
 export class TestComponent {}
 
-describe('IdentifierDirective', () => {
+describe('TileGridDirective', () => {
     let fixture: ComponentFixture<TestComponent>,
         component: TestComponent,
         debugElement: DebugElement,
@@ -19,7 +19,7 @@ describe('IdentifierDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [IdentifierDirective, TestComponent]
+            declarations: [TileGridDirective, TestComponent]
         });
     }));
 
@@ -29,8 +29,8 @@ describe('IdentifierDirective', () => {
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(IdentifierDirective));
-        directiveInstance = directive.injector.get(IdentifierDirective);
+        directive = debugElement.query(By.directive(TileGridDirective));
+        directiveInstance = directive.injector.get(TileGridDirective);
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
         spyOn(directiveInstance, '_addClassToElement');
@@ -40,20 +40,13 @@ describe('IdentifierDirective', () => {
         expect(directive).toBeTruthy();
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-tile-grid');
     });
 
     it('should add appropriate classes', () => {
-        directiveInstance.size = 'someSize';
-        directiveInstance.circle = true;
-        directiveInstance.transparent = true;
-        directiveInstance.colorAccent = 1;
-        directiveInstance.glyph = 'someGlyph';
+        directiveInstance.col = 1;
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-identifier--someSize');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-identifier--circle');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-identifier--transparent');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-has-background-color-accent-1');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-tile-grid--1col');
     });
 });

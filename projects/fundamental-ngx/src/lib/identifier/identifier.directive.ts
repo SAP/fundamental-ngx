@@ -14,7 +14,7 @@ export class IdentifierDirective extends AbstractFdNgxClass {
 
     @Input() transparent: boolean;
 
-    @Input() colorAccent: string;
+    @Input() colorAccent: number;
 
     @Input() glyph: string;
 
