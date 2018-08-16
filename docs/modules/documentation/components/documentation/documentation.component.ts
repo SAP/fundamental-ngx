@@ -14,6 +14,8 @@ export class DocumentationComponent {
         { url: 'breadcrumb', name: 'Breadcrumb' },
         { url: 'button', name: 'Button' },
         { url: 'buttonGroup', name: 'Button Group' },
+        { url: 'calendar', name: 'Calendar' },
+        { url: 'datePicker', name: 'Date Picker' },
         { url: 'dropdown', name: 'Dropdown' },
         { url: 'form', name: 'Form' },
         { url: 'icon', name: 'Icon' },

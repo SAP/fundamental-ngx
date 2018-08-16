@@ -6,6 +6,8 @@ import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
+import { CalendarModule } from './calendar/calendar.module';
+import { DatePickerModule } from './date-picker/date-picker.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { IdentifierModule } from './identifier/identifier.module';
@@ -45,6 +47,8 @@ import { ModalService } from './modal/modal.service';
         BreadcrumbModule,
         ButtonModule,
         ButtonGroupModule,
+        CalendarModule,
+        DatePickerModule,
         FormModule,
         IconModule,
         IdentifierModule,
