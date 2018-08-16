@@ -61,7 +61,29 @@
     border-left: 6px solid #2fd0c8;
     padding-left: 34px;
 }
-
+.nav-item.ariba::after{
+  font-family: "Ariba-icons";
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  display: inline-block;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  speak: none;
+  content:'\eA21';
+  color: orange;
+  border: 1px solid #000;
+  border-radius: 50%;
+  height: 19px;
+  width: 19px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 12px;
+  margin-left: 10px;
+}
 .content {
     flex-grow: 1;
     overflow-y: scroll;

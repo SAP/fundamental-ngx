@@ -16,7 +16,7 @@ export class DocumentationComponent {
         { url: 'buttonGroup', name: 'Button Group' },
         { url: 'dropdown', name: 'Dropdown' },
         { url: 'form', name: 'Form' },
-        { url: 'icon', name: 'Icon' },
+        { url: 'icon', name: 'Icon', themes:'ariba'},
         { url: 'identifier', name: 'Identifier' },
         { url: 'inlineHelp', name: 'Inline Help' },
         { url: 'image', name: 'Image' },

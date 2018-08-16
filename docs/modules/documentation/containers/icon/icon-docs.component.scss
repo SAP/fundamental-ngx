@@ -22,3 +22,7 @@
         width: calc(100% / 4);
     }
 }
+
+.fd-tabs__panel.is-expanded {
+  width: 100%;
+}

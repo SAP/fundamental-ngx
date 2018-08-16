@@ -9,6 +9,7 @@
 <properties [properties]="{
   inputs: [
     { name: 'glyph', description: 'Icon name.' },
+    { name: 'glyphGroup', description: 'Icon-Set to be used; default \'sap\', other \'ariba\'.' },
     { name: 'size', description: 'Size of the icon.  The default options include \'xs\', \'s\', default, \'l\', and \'xl\'.  If no size is provided, default will be used.' }
   ]
 }"></properties>
@@ -24,16 +25,37 @@
   <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, <code>xl</code>, but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class <code>sap-icon--xxs</code>.
 </description>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <div *ngFor="let icon of icons">
-        <fd-icon [glyph]="icon" [size]="'l'"></fd-icon>
-        <span>{{ icon }}</span>
+<fd-tab-list #tabList>
+  <fd-tab id="tab1" [title]="'SAP Icons'">
+    <!-- ::.. SAP Icon Set ..:: -->
+    <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+      <div class="fd-tile__content">
+        <div class="grid">
+          <div *ngFor="let icon of icons">
+            <fd-icon [glyph]="icon" [size]="'l'" glyphGroup="sap"></fd-icon>
+            <span>{{ icon }}</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </fd-tab>
+  <fd-tab id="tab2" [title]="'Ariba Icons'">
+    <!-- ::.. Ariba Icon Set ..:: -->
+    <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+      <div class="fd-tile__content">
+        <div class="grid">
+          <div *ngFor="let icon of AribaIcons">
+            <fd-icon [glyph]="icon" [size]="'l'" glyphGroup="ariba"></fd-icon>
+            <span>{{ icon }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fd-tab>
+</fd-tab-list>
+
+
+
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="iconHtml"></code></pre>
 
 <separator></separator>
