@@ -7,7 +7,7 @@ import { TimeComponent } from '../time/time.component';
     templateUrl: './time-picker.component.html'
 })
 export class TimePickerComponent {
-    @Input() time: TimeObject;
+    @Input() time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     @Input() meridian: boolean;
 
