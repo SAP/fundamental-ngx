@@ -431,15 +431,23 @@ export class CalendarComponent implements OnInit {
 
     resetSelection() {
         if (this.calType === 'single') {
-            this.selectedDay = {
-                id: 0,
-                date: new Date(1900, 0, 1)
-            };
+            this.selectedDay = { id: 0, date: new Date(1900, 0, 1) };
         } else {
             this.selectedRangeFirst = { id: 0, date: new Date(1900, 0, 1) };
 
             this.selectedRangeLast = { id: 0, date: new Date(1900, 0, 1) };
         }
+        this.date = new Date();
+        this.year = this.date.getFullYear();
+        this.month = this.date.getMonth();
+        this.monthName = this.monthsFullName[this.date.getMonth()];
+        this.day = this.date.getDate();
+        this.selectedMonth = null;
+        this.firstYearCalendarList = this.year;
+        this.selectCounter = 0;
+        this.calendarYearsList = [];
+        this.constructCalendarYearsList();
+        this.constructCalendar();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -462,7 +470,6 @@ export class CalendarComponent implements OnInit {
                         this.constructCalendar();
                     } else {
                         this.resetSelection();
-                        this.constructCalendar();
                         this.isInvalidDateInput.emit(this.invalidDate);
                     }
                 } else {
@@ -486,7 +493,6 @@ export class CalendarComponent implements OnInit {
                         this.constructCalendar();
                     } else {
                         this.resetSelection();
-                        this.constructCalendar();
                         this.isInvalidDateInput.emit(this.invalidDate);
                     }
                 }
