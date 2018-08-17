@@ -1,13 +1,17 @@
 <header>Table</header>
-<description>The Table component is a common component used to display data that can be compared. Usually a set of item of the same type which data is divided on columns to facilitate the comparison between items.</description>
-<import module="TableModule" path="fundamental/table/table.module"></import>
+<description>The Table component is a common component used to display data that can be compared. Usually a set of item of
+  the same type which data is divided on columns to facilitate the comparison between items.</description>
+<import module="TableModule"
+        path="fundamental/table/table.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-table&gt;</h1>
 
-There are two different types of table cells you can use, the 'simple' cells and the 'rich' cells.  Simple cells can only display text.  Rich cells can contain images, plain text or links.  The table component requires only two root arguments, a 'headers' array and a 'tableData' array.
-<br><br>
-In a table with simple cells, the tableData property is an array of objects containing a 'rowData' property.  This property should contain an array of strings, each string being a cell in the table.
+There are two different types of table cells you can use, the 'simple' cells and the 'rich' cells. Simple cells can only
+display text. Rich cells can contain images, plain text or links. The table component requires only two root arguments, a
+'headers' array and a 'tableData' array.
+<br><br> In a table with simple cells, the tableData property is an array of objects containing a 'rowData' property. This
+property should contain an array of strings, each string being a cell in the table.
 
 <separator></separator>
 
@@ -23,7 +27,8 @@ This is an example of a table with simple cells, where the rowData is an array o
 <br>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-table [tableData]="data.properties.simpleTableData" [headers]="data.properties.simpleHeaders">
+    <fd-table [tableData]="data.properties.simpleTableData"
+              [headers]="data.properties.simpleHeaders">
 
     </fd-table>
   </div>
@@ -33,7 +38,8 @@ This is an example of a table with simple cells, where the rowData is an array o
 
 <separator></separator>
 <h2>Rich Table</h2>
-This is an example of a table with rich cells, where the rowData is an array of objects, where each object can have any of the following properties:<br><br>
+This is an example of a table with rich cells, where the rowData is an array of objects, where each object can have any of
+the following properties:<br><br>
 <properties [properties]="{
     properties: [
     { name: 'displayText', description: 'The text to display in the cell.  If omitted, the link url will be displayed.' },
@@ -53,7 +59,9 @@ This is an example of a table with rich cells, where the rowData is an array of 
 <br>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <fd-table [tableData]="data.properties.richTableData" [headers]="data.properties.richHeaders">
+    <fd-table [tableData]="data.properties.richTableData"
+              [headers]="data.properties.richHeaders"
+              [headerWidths]="data.properties.richWidths">
 
     </fd-table>
   </div>
