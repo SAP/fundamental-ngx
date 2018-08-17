@@ -55,6 +55,14 @@ describe('TimePickerComponent', () => {
         expect(retVal).toBe('1:00:00 pm');
     });
 
+    it('should get formatted non-meridian time, 13:00:00', () => {
+        const newTime: TimeObject = { hour: 13, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = false;
+        const retVal = component.getFormattedTime();
+        expect(retVal).toBe('13:00:00');
+    });
+
     it('should get formatted meridian time, 12:00:00', () => {
         const newTime: TimeObject = { hour: 12, minute: 0, second: 0 };
         component.time = newTime;
@@ -85,5 +93,143 @@ describe('TimePickerComponent', () => {
         component.meridian = true;
         const retVal = component.getFormattedTime();
         expect(retVal).toBe('12:10:11 am');
+    });
+
+    it('should handle timeInputChanged for 24 hour time picker with seconds', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = false;
+        component.displaySeconds = true;
+        component.timeInputChanged('12:00:00');
+        expect(component.time.hour).toBe(12);
+        expect(component.time.minute).toBe(0);
+        expect(component.time.second).toBe(0);
+    });
+
+    it('should handle timeInputChanged for 24 hour time picker without seconds', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = false;
+        component.displaySeconds = false;
+        component.timeInputChanged('12:00');
+        expect(component.time.hour).toBe(12);
+        expect(component.time.minute).toBe(0);
+        expect(component.time.second).toBe(0);
+    });
+
+    it('should handle regexp fail for 24 hour clock', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = false;
+        component.displaySeconds = false;
+        component.timeInputChanged('asdf');
+        expect(component.time.hour).toBe(null);
+        expect(component.time.minute).toBe(null);
+        expect(component.time.second).toBe(null);
+        expect(component.child.displayedHour).toBe(null);
+        expect(component.child.period).toBe('am');
+        expect(component.child.oldPeriod).toBe('am');
+    });
+
+    it('should handle timeInputChanged for meridian time picker with seconds', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = true;
+        component.displaySeconds = true;
+        component.timeInputChanged('11:59:59 am');
+        expect(component.time.hour).toBe(11);
+        expect(component.time.minute).toBe(59);
+        expect(component.time.second).toBe(59);
+    });
+
+    it('should handle timeInputChanged for meridian time picker without seconds', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = true;
+        component.displaySeconds = false;
+        component.timeInputChanged('11:59 am');
+        expect(component.time.hour).toBe(11);
+        expect(component.time.minute).toBe(59);
+        expect(component.time.second).toBe(0);
+    });
+
+    it('should handle timeInputChanged for meridian time picker with PM/seconds', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = true;
+        component.displaySeconds = true;
+        component.timeInputChanged('11:59:59 pm');
+        expect(component.time.hour).toBe(23);
+        expect(component.time.minute).toBe(59);
+        expect(component.time.second).toBe(59);
+    });
+
+    it('should handle timeInputChanged for meridian time picker without seconds where hour is 12', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = true;
+        component.displaySeconds = false;
+        component.timeInputChanged('12:59 am');
+        expect(component.time.hour).toBe(0);
+        expect(component.time.minute).toBe(59);
+        expect(component.time.second).toBe(0);
+    });
+
+    it('should handle regexp fail for meridian clock', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = false;
+        component.displaySeconds = false;
+        component.timeInputChanged('asdf');
+        expect(component.time.hour).toBe(null);
+        expect(component.time.minute).toBe(null);
+        expect(component.time.second).toBe(null);
+        expect(component.child.displayedHour).toBe(null);
+        expect(component.child.period).toBe('am');
+        expect(component.child.oldPeriod).toBe('am');
+    });
+
+    it('should handle input group click', () => {
+        component.isOpen = false;
+        component.disabled = false;
+        const event = { stopPropagation: function() {} };
+        spyOn(event, 'stopPropagation').and.callThrough();
+        component.inputGroupClicked(event);
+        expect(event.stopPropagation).toHaveBeenCalled();
+        expect(component.isOpen).toBe(true);
+    });
+
+    it('should handle addon button click', () => {
+        component.disabled = false;
+        const event = { stopPropagation: function() {} };
+        spyOn(event, 'stopPropagation').and.callThrough();
+        component.addOnButtonClicked(event);
+        expect(event.stopPropagation).toHaveBeenCalled();
+        expect(component.isOpen).toBe(true);
+    });
+
+    it('should handle popover close', () => {
+        component.isOpen = true;
+        component.popoverClosed();
+        expect(component.isOpen).toBe(false);
+    });
+
+    it('should get the placeholder', () => {
+        component.displaySeconds = true;
+        component.meridian = true;
+        let retVal = component.getPlaceholder();
+        expect(retVal).toBe('hh:mm:ss am/pm');
+        component.displaySeconds = true;
+        component.meridian = false;
+        retVal = component.getPlaceholder();
+        expect(retVal).toBe('hh:mm:ss');
+        component.displaySeconds = false;
+        component.meridian = true;
+        retVal = component.getPlaceholder();
+        expect(retVal).toBe('hh:mm am/pm');
+        component.displaySeconds = false;
+        component.meridian = false;
+        retVal = component.getPlaceholder();
+        expect(retVal).toBe('hh:mm');
     });
 });

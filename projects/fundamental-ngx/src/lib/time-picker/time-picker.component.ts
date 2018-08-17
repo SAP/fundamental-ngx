@@ -96,6 +96,7 @@ export class TimePickerComponent {
                 this.time.second = null;
                 this.child.displayedHour = null;
                 this.child.period = 'am';
+                this.child.oldPeriod = 'am';
             }
         } else if (this.meridian) {
             if (this.displaySeconds) {
@@ -128,6 +129,7 @@ export class TimePickerComponent {
                 this.time.second = null;
                 this.child.displayedHour = null;
                 this.child.period = 'am';
+                this.child.oldPeriod = 'am';
             }
         }
     }
