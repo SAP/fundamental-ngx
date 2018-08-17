@@ -43,6 +43,10 @@ to the file that declares the module you're adding alerts to. It can also be add
 
 This repository contains a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo app utilizes the Angular Fundamental source code in this repository, so changes you make to any component's source will be reflected in the demo app.
 
+## Tests
+
+To run the unit tests for the fundamental-ngx component library, run `ng test fundamental-ngx`.  Append `--code-coverage` to generate code coverage documentation.
+
 ## Known Issues
 
 Click [here](https://github.com/SAP/fundamental-ngx/issues) to view the current issues.
