@@ -95,6 +95,32 @@ describe('TimeComponent', () => {
         expect(component.time.hour).toBe(4);
     });
 
+    it('should handle input blur for displayedHour > 12, < 24', () => {
+        spyOn(component, 'displayedHourChanged');
+        spyOn(component, 'setDisplayedHour');
+        component.meridian = true;
+        component.period = 'pm';
+        component.displayedHour = 16;
+        component.inputBlur('hour');
+        expect(component.time.hour).toBe(4);
+        expect(component.setDisplayedHour).toHaveBeenCalled();
+        component.meridian = true;
+        component.period = 'am';
+        component.displayedHour = 16;
+        component.inputBlur('hour');
+        expect(component.setDisplayedHour).toHaveBeenCalled();
+    });
+
+    it('should handle input blur for displayedHour > 24', () => {
+        spyOn(component, 'displayedHourChanged');
+        spyOn(component, 'setDisplayedHour');
+        component.meridian = true;
+        component.displayedHour = 37;
+        component.inputBlur('hour');
+        expect(component.displayedHourChanged).toHaveBeenCalled();
+        expect(component.displayedHour).toBe(1);
+    });
+
     it('should handle input blur for displayedHour > 12, pm', () => {
         spyOn(component, 'setDisplayedHour').and.callThrough();
         component.meridian = true;
@@ -129,6 +155,142 @@ describe('TimeComponent', () => {
         spyOn(component, 'setDisplayedHour');
         component.meridian = true;
         component.ngOnChanges();
+        expect(component.setDisplayedHour).toHaveBeenCalled();
+    });
+
+    it('should increase the hour', () => {
+        component.time.hour = null;
+        component.increaseHour();
+        expect(component.time.hour).toBe(0);
+        component.time.hour = 23;
+        component.increaseHour();
+        expect(component.time.hour).toBe(0);
+        component.time.hour = 1;
+        component.increaseHour();
+        expect(component.time.hour).toBe(2);
+        spyOn(component, 'setDisplayedHour');
+        component.meridian = true;
+        component.increaseHour();
+        expect(component.setDisplayedHour).toHaveBeenCalled();
+    });
+
+    it('should decrease the hour', () => {
+        component.time.hour = null;
+        component.decreaseHour();
+        expect(component.time.hour).toBe(0);
+        component.time.hour = 0;
+        component.decreaseHour();
+        expect(component.time.hour).toBe(23);
+        component.time.hour = 1;
+        component.decreaseHour();
+        expect(component.time.hour).toBe(0);
+        spyOn(component, 'setDisplayedHour');
+        component.meridian = true;
+        component.increaseHour();
+        expect(component.setDisplayedHour).toHaveBeenCalled();
+    });
+
+    it('should increase the minute', () => {
+        spyOn(component, 'increaseHour');
+        component.time.minute = null;
+        component.increaseMinute();
+        expect(component.time.minute).toBe(0);
+        component.time.minute = 59;
+        component.increaseMinute();
+        expect(component.time.minute).toBe(0);
+        expect(component.increaseHour).toHaveBeenCalled();
+        component.time.minute = 1;
+        component.increaseMinute();
+        expect(component.time.minute).toBe(2);
+    });
+
+    it('should decrease the minute', () => {
+        spyOn(component, 'decreaseHour');
+        component.time.minute = null;
+        component.decreaseMinute();
+        expect(component.time.minute).toBe(0);
+        component.time.minute = 0;
+        component.decreaseMinute();
+        expect(component.time.minute).toBe(59);
+        expect(component.decreaseHour).toHaveBeenCalled();
+        component.time.minute = 1;
+        component.decreaseMinute();
+        expect(component.time.minute).toBe(0);
+    });
+
+    it('should increase the second', () => {
+        spyOn(component, 'increaseMinute');
+        component.time.second = null;
+        component.increaseSecond();
+        expect(component.time.second).toBe(0);
+        component.time.second = 59;
+        component.increaseSecond();
+        expect(component.time.second).toBe(0);
+        expect(component.increaseMinute).toHaveBeenCalled();
+        component.time.second = 1;
+        component.increaseSecond();
+        expect(component.time.second).toBe(2);
+    });
+
+    it('should decrease the second', () => {
+        spyOn(component, 'decreaseMinute');
+        component.time.second = null;
+        component.decreaseSecond();
+        expect(component.time.second).toBe(0);
+        component.time.second = 0;
+        component.decreaseSecond();
+        expect(component.time.second).toBe(59);
+        expect(component.decreaseMinute).toHaveBeenCalled();
+        component.time.second = 1;
+        component.decreaseSecond();
+        expect(component.time.second).toBe(0);
+    });
+
+    it('should toggle the period for am', () => {
+        spyOn(component, 'periodModelChange');
+        component.time.hour = 13;
+        component.period = 'am';
+        component.togglePeriod();
+        expect(component.period).toBe('pm');
+        expect(component.periodModelChange).toHaveBeenCalled();
+    });
+
+    it('should toggle the period for pm', () => {
+        spyOn(component, 'periodModelChange');
+        component.time.hour = 13;
+        component.period = 'pm';
+        component.togglePeriod();
+        expect(component.period).toBe('am');
+        expect(component.periodModelChange).toHaveBeenCalled();
+    });
+
+    it('should handle period model change', () => {
+        spyOn(component, 'setDisplayedHour');
+        component.period = 'PM';
+        component.oldPeriod = 'am';
+        component.time.hour = 0;
+        component.periodModelChange();
+        expect(component.period).toBe('pm');
+        expect(component.time.hour).toBe(12);
+
+        component.period = 'am';
+        component.oldPeriod = 'pm';
+        component.time.hour = null;
+        component.periodModelChange();
+        expect(component.period).toBe('am');
+        expect(component.time.hour).toBe(0);
+
+        component.period = 'am';
+        component.oldPeriod = 'pm';
+        component.time.hour = 16;
+        component.periodModelChange();
+        expect(component.period).toBe('am');
+        expect(component.time.hour).toBe(4);
+
+        component.period = 'asdf';
+        component.periodModelChange();
+        expect(component.periodInvalid).toBe(true);
+
         expect(component.setDisplayedHour).toHaveBeenCalled();
     });
 });
