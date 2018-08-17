@@ -15,7 +15,7 @@ export class TimeComponent implements OnChanges {
 
     displayedHour: number;
 
-    @Input() time: TimeObject;
+    @Input() time: TimeObject = {hour: 0, minute: 0, second: 0};
 
     @Input() meridian: boolean;
 
