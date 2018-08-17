@@ -27,7 +27,7 @@ export class TableComponent {
         return retVal;
     }
 
-    private calculateColumnWidth(columns: number = 1): string {
+    public calculateColumnWidth(columns: number = 1): string {
         return 100 / columns + '%';
     }
 }
