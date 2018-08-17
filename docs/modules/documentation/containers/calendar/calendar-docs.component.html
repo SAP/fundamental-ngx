@@ -1,0 +1,46 @@
+<header>Calendar with single selection</header>
+<description>Commonly used as the contents of a popover when composing “date-picker”, rarely used on its own as a standalone component.</description>
+<import module="CalendarModule" path="fundamental/calendar/calendar.module"></import>
+<separator></separator>
+
+<h1>&lt;fd-calendar&gt;</h1>
+
+
+<properties [properties]="{
+  inputs: [
+    { name: 'calType',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
+    { name: 'disableFunction', description: 'A user defined function that specifies the days that should be disabled.'},
+    { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked.'}
+  ]
+}">
+</properties>
+
+<separator></separator>
+
+<h2>Calendar with single selection, disabled and blocked days</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+        <fd-calendar [calType]="'single'" (updateDatePickerInput)="updateDatePickerInputHandler($event)" 
+         [blockFunction]="myBlockFunction" [disableFunction]="myDisableFunction"></fd-calendar>
+
+        <br/>
+        <div>Selected Date: {{selectedDate}}</div>
+  </div>
+</div>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="calendarSingleHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="exampleFunctionsHtml"></code></pre>
+<separator></separator>
+
+<h2>Calendar with range selection</h2>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+        <fd-calendar [calType]="'range'" (updateDatePickerInput)="updateDatePickerInputHandler($event)" [disableFunction]="myDisableFunction2"></fd-calendar>
+
+        <br/>
+        <div>Selected First Date: {{selectedFirstDate}}</div>
+        <br/>
+        <div>Selected Last Date: {{selectedLastDate}}</div>
+  </div>
+</div>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="calendarRangeHtml"></code></pre>
+
