@@ -8,6 +8,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 export class PanelComponent extends AbstractFdNgxClass {
     @Input() span;
 
+    @Input() backgroundImage: string;
+
     _setProperties() {
         this._addClassToElement('fd-panel');
         if (this.span) {
