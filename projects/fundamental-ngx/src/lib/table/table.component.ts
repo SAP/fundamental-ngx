@@ -17,14 +17,7 @@ export class TableComponent {
     tableData: TableRowObject[];
 
     typeOf(variable) {
-        let retVal;
-        if (typeof variable === 'string') {
-            retVal = 'string';
-        } else if (typeof variable === 'object') {
-            retVal = 'object';
-        }
-
-        return retVal;
+        return typeof variable;
     }
 
     public calculateColumnWidth(columns: number = 1): string {
