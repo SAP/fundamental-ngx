@@ -9,7 +9,6 @@ export class PanelComponent extends AbstractFdNgxClass {
     @Input() span;
 
     _setProperties() {
-        this._addClassToElement('fd-panel');
         if (this.span) {
             this._addClassToElement('fd-has-grid-column-span-' + this.span);
         }
