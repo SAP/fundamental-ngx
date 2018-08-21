@@ -64,7 +64,7 @@ export class TreeComponent implements OnInit, AfterContentInit {
     }
 
     handleEmptyTrailingCells(row) {
-        if (row && row.rowData && row.rowData.length && typeof row.rowData[0] === 'string') {
+        if (row && row.rowData && row.rowData.length && typeof row.rowData[0] !== 'object') {
             while (row.rowData.length < this.headers.length) {
                 row.rowData.push('');
             }
