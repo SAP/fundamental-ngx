@@ -15,6 +15,9 @@ export class PanelComponent extends AbstractFdNgxClass {
         if (this.span) {
             this._addClassToElement('fd-has-grid-column-span-' + this.span);
         }
+        if (this.backgroundImage) {
+            this._addStyleToElement('background-image', 'url("' + this.backgroundImage + '")');
+        }
     }
 
     constructor(@Inject(ElementRef) elementRef: ElementRef) {
