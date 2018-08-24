@@ -15,7 +15,7 @@ Fundamental NGX is intended for use with Angular 5 or newer. You should have som
 
 #### 1. Download Fundamental NGX and its peer dependencies:
 
-`npm install --save @ng-bootstrap/ng-bootstrap fundamental-ui fundamental-ngx`
+`npm install --save @ng-bootstrap/ng-bootstrap@2.2.2 fundamental-ui fundamental-ngx`
 
 #### 2. Include the Fundamental UI CSS in your Angular application. Open your `angular.json` file and add the following to the `styles` array:
 
