@@ -17,17 +17,10 @@ export class TableComponent {
     tableData: TableRowObject[];
 
     typeOf(variable) {
-        let retVal;
-        if (typeof variable === 'string') {
-            retVal = 'string';
-        } else if (typeof variable === 'object') {
-            retVal = 'object';
-        }
-
-        return retVal;
+        return typeof variable;
     }
 
-    private calculateColumnWidth(columns: number = 1): string {
+    public calculateColumnWidth(columns: number = 1): string {
         return 100 / columns + '%';
     }
 }
