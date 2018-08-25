@@ -4,6 +4,8 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import { ModalService } from '../../../../../projects/fundamental-ngx/src/lib/modal/modal.service';
 
+import { TestModal } from './test-modal.component';
+
 @Component({
     selector: 'app-modal',
     templateUrl: './modal-docs.component.html',
@@ -114,17 +116,29 @@ export class ModalDocsComponent implements OnInit {
     }
 
     openConfirmationModal(modalType) {
-        this.modalService.open(modalType).result.then(
-            result => {
-                if (result === 'Yes') {
-                    this.confirmationReason = 'Modal closed with "Yes" button';
-                } else if (result === 'No') {
-                    this.confirmationReason = 'Modal closed with "No" button';
-                }
-            },
-            () => {
-                this.confirmationReason = 'Modal dismissed with the "X" button';
+        const modalRef = this.modalService.open(modalType);
+        modalRef.afterClosed().subscribe(
+          result => {
+            console.log('confirmation closed ', result);
+            if (result === 'Yes') {
+              this.confirmationReason = 'Modal closed with "Yes" button';
+            } else if (result === 'No') {
+              this.confirmationReason = 'Modal closed with "No" button';
             }
+          },
+          () => {
+            this.confirmationReason = 'Modal dismissed with the "X" button';
+          }
         );
     }
+
+    open() {
+      const modalRef = this.modalService.open(TestModal, {
+        data: { name: 'austin' }
+      });
+      modalRef.afterClosed().subscribe((result) => {
+        console.log('closed ', result);
+      });
+    }
+
 }

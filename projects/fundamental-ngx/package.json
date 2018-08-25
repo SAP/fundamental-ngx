@@ -5,7 +5,8 @@
     "peerDependencies": {
         "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
         "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-        "@ng-bootstrap/ng-bootstrap": "^2.0.0",
+        "@angular/cdk": "^6.0.0-rc.0 || ^6.0.0",
+        "@angular/cdk-experimental": "^6.0.0-rc.0 || ^6.0.0",
         "fundamental-ui": "^1.1.0"
     }
 }

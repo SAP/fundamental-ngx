@@ -1,25 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
+import { Dialog, DialogConfig, DialogRef } from '@angular/cdk-experimental/dialog';
+import { ComponentType } from '@angular/cdk/portal';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ModalService {
-    modalRef;
-
-    constructor(private modalService: NgbModal) {}
-
-    close(): any {
-        return this.modalRef.close();
-    }
-
-    dismiss(): any {
-        return this.modalRef.dismiss();
-    }
-
-    open(modalType): any {
-        this.modalRef = this.modalService.open(modalType);
-        return this.modalRef;
+export class ModalService extends Dialog {
+    open<T, R>(component: ComponentType<T> | TemplateRef<T>, config?: DialogConfig): DialogRef<T, R> {
+      const consolidatedConfig = {
+        panelClass: 'fd-modal--panel',
+        ...config
+      };
+      if (component instanceof TemplateRef) {
+        return this.openFromTemplate<T>(component, consolidatedConfig);
+      }
+      return this.openFromComponent<T>(component, consolidatedConfig);
     }
 }
+

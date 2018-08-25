@@ -26,6 +26,8 @@
         "@angular/core": "^6.1.3",
         "@angular/forms": "^6.1.3",
         "@angular/http": "^6.1.3",
+        "@angular/cdk": "^6.4.6",
+        "@angular/cdk-experimental": "^6.4.6",
         "@angular/platform-browser": "^6.1.3",
         "@angular/platform-browser-dynamic": "^6.1.3",
         "@angular/router": "^6.1.3",

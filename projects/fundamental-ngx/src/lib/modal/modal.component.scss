@@ -1,3 +1,6 @@
+@import '~@angular/cdk/overlay';
+@include cdk-overlay;
+
 .fd-modal__body {
     overflow: hidden;
 }
@@ -8,8 +11,16 @@
 
 .fd-modal {
     margin: 0 auto;
+    min-width: 460px;
+    min-height: 150px;
 }
 
+.fd-modal--panel {
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+// can be removed or used for changing the panelClass or backgroundClass
 /*!
   * Bootstrap (http://getbootstrap.com)
   * Copyright 2011-2018 Twitter, Inc.
@@ -35,18 +46,4 @@
     width: fit-content;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal {
-    position: fixed;
-    z-index: 9999;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    margin: auto;
-    width: 460px;
-    min-height: 150px;
-    outline: none;
-    border-radius: 4px;
 }

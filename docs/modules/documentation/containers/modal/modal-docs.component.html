@@ -14,6 +14,8 @@ to create a method that calls ModalService's open() function. First, import the 
 <br>
 <h1>&lt;fd-modal&gt;</h1>
 
+<button fd-button (click)="open()">Test</button>
+
 <h2>Informational Modal</h2>
 <p>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user have to
   acknowledge the information, actively, by clicking a button or closing the Modal.
@@ -43,7 +45,7 @@ to create a method that calls ModalService's open() function. First, import the 
   at the bottom. With the “positive” path always been the primary button.</p>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
-    <ng-template #confirmationModal let-c="close">
+    <ng-template #confirmationModal>
       <fd-modal>
         <fd-modal-header>
           Modal Header/Title
@@ -52,8 +54,8 @@ to create a method that calls ModalService's open() function. First, import the 
           Modal Body
         </fd-modal-body>
         <fd-modal-footer>
-          <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
-          <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
+          <button fd-button fd-modal-close="No" [fdType]="'secondary'">No</button>
+          <button fd-button fd-modal-close="Yes" [fdType]="'main'">Yes</button>
         </fd-modal-footer>
       </fd-modal>
     </ng-template>

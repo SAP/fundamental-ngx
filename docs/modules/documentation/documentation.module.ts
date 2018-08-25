@@ -18,6 +18,9 @@ import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
 import { ImportComponent } from './components/import/import.component';
 
+// modals
+import { TestModal } from './containers/modal/test-modal.component';
+
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
 import { BreadcrumbDocsComponent } from './containers/breadcrumb/breadcrumb-docs.component';
@@ -108,7 +111,9 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
+    entryComponents: [TestModal],
     declarations: [
+        TestModal,
         DocumentationComponent,
         PlayGroundComponent,
         HtmlExampleComponent,
