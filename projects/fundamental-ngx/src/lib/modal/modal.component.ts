@@ -11,7 +11,6 @@ export class ModalComponent {
     // idea add directive for adding config in HTML and give it to modelService on open
     constructor(private modalService: ModalService) { }
 
-
     open(): any {
         return this.modalService.open(ModalComponent);
     }
