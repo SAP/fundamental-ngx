@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './panel-docs.component.html'
 })
 export class PanelDocsComponent implements OnInit {
-        panelHtml = `<fd-panel>
+    panelHtml = `<fd-panel>
   <fd-panel-header>
     <fd-panel-head>
       <fd-panel-title>Panel Title</fd-panel-title>
@@ -35,6 +35,24 @@ export class PanelDocsComponent implements OnInit {
     Panel Footer
   </fd-panel-footer>
 </fd-panel>`;
+
+    tableBleedHtml = `<fd-panel>
+  <fd-panel-body [bleed]="true">
+    <fd-table [tableData]="tableData"
+              [headers]="tableHeaders">
+    </fd-table>
+  </fd-panel-body>
+</fd-panel>`;
+
+    tableHeaders = ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'];
+    tableData = [
+        {
+            rowData: ['Data 1', 'Data 2', 'Data 3', 'Data 4']
+        },
+        {
+            rowData: ['Data 5', 'Data 6', 'Data 7', 'Data 8']
+        }
+    ];
 
     defaultPanelGridHtml = `<fd-panel-grid>
   <fd-panel>
