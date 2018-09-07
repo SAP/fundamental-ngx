@@ -134,7 +134,22 @@ export class PanelDocsComponent implements OnInit {
 </fd-panel-grid>`;
 
     columnSpanPanelGridHtml = `<fd-panel-grid [col]="6">
-  <fd-panel [span]="2">
+  <fd-panel [colSpan]="2" [rowSpan]="2">
+    <fd-panel-body>
+      Panel Content with span 2
+    </fd-panel-body>
+  </fd-panel>
+  <fd-panel>
+    <fd-panel-body>
+      Panel Content
+    </fd-panel-body>
+  </fd-panel>
+  <fd-panel>
+    <fd-panel-body>
+      Panel Content
+    </fd-panel-body>
+  </fd-panel>
+  <fd-panel [colSpan]="2">
     <fd-panel-body>
       Panel Content with span 2
     </fd-panel-body>
@@ -159,42 +174,22 @@ export class PanelDocsComponent implements OnInit {
       Panel Content
     </fd-panel-body>
   </fd-panel>
-  <fd-panel [span]="3">
-    <fd-panel-body>
-      Panel Content with span 3
-    </fd-panel-body>
-  </fd-panel>
   <fd-panel>
     <fd-panel-body>
       Panel Content
     </fd-panel-body>
   </fd-panel>
-  <fd-panel>
-    <fd-panel-body>
-      Panel Content
-    </fd-panel-body>
-  </fd-panel>
-  <fd-panel>
-    <fd-panel-body>
-      Panel Content
-    </fd-panel-body>
-  </fd-panel>
-  <fd-panel>
-    <fd-panel-body>
-      Panel Content
-    </fd-panel-body>
-  </fd-panel>
-  <fd-panel>
-    <fd-panel-body>
-      Panel Content
-    </fd-panel-body>
-  </fd-panel>
-  <fd-panel [span]="4">
+  <fd-panel [colSpan]="4">
     <fd-panel-body>
       Panel Content with span 4
     </fd-panel-body>
   </fd-panel>
-  <fd-panel [span]="5">
+  <fd-panel>
+    <fd-panel-body>
+      Panel Content
+    </fd-panel-body>
+  </fd-panel>
+  <fd-panel [colSpan]="5">
     <fd-panel-body>
       Panel Content with span 5
     </fd-panel-body>
@@ -204,7 +199,7 @@ export class PanelDocsComponent implements OnInit {
       Panel Content
     </fd-panel-body>
   </fd-panel>
-  <fd-panel [span]="6">
+  <fd-panel [colSpan]="6">
     <fd-panel-body>
       Panel Content with span 6
     </fd-panel-body>
