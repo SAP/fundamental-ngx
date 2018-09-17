@@ -7,18 +7,20 @@ import { TableRowObject } from './table-row-object.model';
     templateUrl: './table.component.html'
 })
 export class TableComponent {
-    @Input() headers: string[];
+    @Input()
+    headers: string[];
 
-    @Input() tableData: TableRowObject[];
+    @Input()
+    headerWidths: string[];
+
+    @Input()
+    tableData: TableRowObject[];
 
     typeOf(variable) {
-        let retVal;
-        if (typeof variable === 'string') {
-            retVal = 'string';
-        } else if (typeof variable === 'object') {
-            retVal = 'object';
-        }
+        return typeof variable;
+    }
 
-        return retVal;
+    public calculateColumnWidth(columns: number = 1): string {
+        return 100 / columns + '%';
     }
 }

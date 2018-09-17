@@ -8,10 +8,15 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 export class PanelComponent extends AbstractFdNgxClass {
     @Input() span: number;
 
+    @Input() backgroundImage: string;
+
     _setProperties() {
         this._addClassToElement('fd-panel');
         if (this.span) {
             this._addClassToElement('fd-has-grid-column-span-' + this.span);
+        }
+        if (this.backgroundImage) {
+            this._addStyleToElement('background-image', 'url("' + this.backgroundImage + '")');
         }
     }
 
