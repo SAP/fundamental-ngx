@@ -21,16 +21,4 @@ describe('MenuItemComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should change the cursor', () => {
-        let retVal = component.getCursor();
-        expect(retVal).toBe('text');
-        component.url = 'someUrl';
-        retVal = component.getCursor();
-        expect(retVal).toBe('pointer');
-        component.url = null;
-        component.routerLink = 'someLink';
-        retVal = component.getCursor();
-        expect(retVal).toBe('pointer');
-    });
 });
