@@ -64,6 +64,24 @@
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="panelHtml"></code></pre>
 
 <separator></separator>
+<h2>Panel with edge bleed</h2>
+<p>Use <code>[bleed]="true"</code> on the panel body to have the contents of the panel body bleed to the outer edge.  This is useful for components like tables.</p>
+<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+  <div class="fd-tile__content">
+    <p>
+      <fd-panel>
+        <fd-panel-body [bleed]="true">
+          <fd-table [tableData]="tableData"
+                    [headers]="tableHeaders">
+          </fd-table>
+        </fd-panel-body>
+      </fd-panel>
+    </p>
+  </div>
+</div>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="tableBleedHtml"></code></pre>
+
+<separator></separator>
 
 <h2>Default Panel Grid (3 columns)</h2>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">

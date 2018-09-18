@@ -1,6 +1,6 @@
 {
     "name": "fundamental-ngx",
-    "version": "0.0.13-beta",
+    "version": "0.0.17-beta",
     "license": "Apache-2.0",
     "peerDependencies": {
         "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
