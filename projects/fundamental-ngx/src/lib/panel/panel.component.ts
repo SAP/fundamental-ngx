@@ -6,16 +6,19 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     templateUrl: './panel.component.html'
 })
 export class PanelComponent extends AbstractFdNgxClass {
-    @Input() colSpan;
+    @Input()
+    columnSpan;
 
-    @Input() rowSpan;
+    @Input()
+    rowSpan;
 
-    @Input() backgroundImage: string;
+    @Input()
+    backgroundImage: string;
 
     _setProperties() {
         this._addClassToElement('fd-panel');
-        if (this.colSpan) {
-            this._addClassToElement('fd-has-grid-column-span-' + this.colSpan);
+        if (this.columnSpan) {
+            this._addClassToElement('fd-has-grid-column-span-' + this.columnSpan);
         }
         if (this.rowSpan) {
             this._addClassToElement('fd-has-grid-row-span-' + this.rowSpan);
