@@ -13,11 +13,11 @@ export class TileComponent extends AbstractFdNgxClass {
 
     @Input() isButton: boolean = false;
 
-    @Input() rowSpan;
+    @Input() rowSpan: number;
 
-    @Input() columnSpan;
+    @Input() columnSpan: number;
 
-    @Input() colorAccent;
+    @Input() colorAccent: number;
 
     _setProperties() {
         this._addClassToElement('fd-tile');

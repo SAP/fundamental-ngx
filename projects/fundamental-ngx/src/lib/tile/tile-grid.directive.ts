@@ -5,7 +5,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: 'fd-tile-grid'
 })
 export class TileGridDirective extends AbstractFdNgxClass {
-    @Input() col;
+    @Input() col: number;
 
     _setProperties() {
         this._addClassToElement('fd-tile-grid');

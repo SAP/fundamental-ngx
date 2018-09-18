@@ -6,7 +6,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     templateUrl: './panel-grid.component.html'
 })
 export class PanelGridComponent extends AbstractFdNgxClass {
-    @Input() col;
+    @Input() col: number;
     @Input() nogap: boolean = false;
 
     _setProperties() {
