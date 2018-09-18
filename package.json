@@ -11,7 +11,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "build-src": "gulp build-src",
-        "precommit": "precise-commits",
+        "precommit": "precise-commits && ng test fundamental-ngx --browsers ChromeHeadless --watch=false",
         "build-deploy-docs": "ng build --prod --base-href=\"/fundamental-ngx/\" && angular-cli-ghpages",
         "build-deploy-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm publish && cd ../.."
     },
