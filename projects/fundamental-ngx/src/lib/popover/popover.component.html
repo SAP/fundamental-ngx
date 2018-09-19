@@ -6,7 +6,7 @@
 
   <ng-template #dropdownTemplate>
     <div class="fd-popover__control">
-      <button fd-button *ngIf="isDropdown" class="fd-dropdown__control" [ngClass]='(btnType ? " fd-button--" + btnType : "fd-button--toolbar") + (glyph ? " sap-icon--" + glyph : "") + (size ? " fd-button--" + size : "") + (this.disabled ? " is-disabled" : "")'
+      <button fd-button *ngIf="isDropdown" [ngClass]='(btnType ? " fd-button--" + btnType : "fd-button--toolbar") + (glyph ? " sap-icon--" + glyph : "") + (size ? " fd-button--" + size : "") + (this.disabled ? " is-disabled" : "")'
         [attr.aria-expanded]="(this.disabled ? false : isOpen)" [attr.aria-disabled]="this.disabled" aria-haspopup="true">
         <ng-content></ng-content>
       </button>
