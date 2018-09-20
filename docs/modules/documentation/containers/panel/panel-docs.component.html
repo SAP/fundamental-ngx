@@ -17,9 +17,8 @@
     { name: '[fd-panel-footer]', description: 'The panel footer.' }
   ],
   inputs: [
-    { name: 'col',   description: 'The number of columns in the Panel Grid. Leave empty for default (3 columns).'},
-    { name: 'nogap', description: 'When set to \'true\' removes the margins between the panels.'},
-    { name: 'span',  description: 'The number of columns the panel expands. Option ranges from 2 to 6.'},
+    { name: 'colSpan',   description: 'If this panel is part of a panel grid, this value dictates how many columns in the grid the panel will occupy.'},
+    { name: 'rowSpan',  description: 'If this panel is part of a panel grid, this value dictates how many rows in the grid the panel will occupy.'},
     { name: 'backgroundImage', description: 'Optional string URL for the panel background image.'}
   ]
 }"></properties>
@@ -82,6 +81,14 @@
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="tableBleedHtml"></code></pre>
 
 <separator></separator>
+
+<h1>&lt;fd-panel-grid&gt;</h1>
+<properties [properties]="{
+  inputs: [
+    { name: 'col',   description: 'The number of columns in the Panel Grid. Leave empty for default (3 columns).'},
+    { name: 'nogap', description: 'When set to \'true\' removes the margins between the panels.'}
+  ]
+}"></properties>
 
 <h2>Default Panel Grid (3 columns)</h2>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
@@ -198,12 +205,27 @@
 
 <separator></separator>
 
-<h2>Panel Grid with column span</h2>
+<h2>Panel Grid with row and column span</h2>
 <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
   <div class="fd-tile__content">
     <p>
       <fd-panel-grid [col]="6">
-        <fd-panel [span]="2">
+        <fd-panel [columnSpan]="2" [rowSpan]="2">
+          <fd-panel-body>
+            Panel Content with span 2
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel [columnSpan]="2">
           <fd-panel-body>
             Panel Content with span 2
           </fd-panel-body>
@@ -228,42 +250,22 @@
             Panel Content
           </fd-panel-body>
         </fd-panel>
-        <fd-panel [span]="3">
-          <fd-panel-body>
-            Panel Content with span 3
-          </fd-panel-body>
-        </fd-panel>
         <fd-panel>
           <fd-panel-body>
             Panel Content
           </fd-panel-body>
         </fd-panel>
-        <fd-panel>
-          <fd-panel-body>
-            Panel Content
-          </fd-panel-body>
-        </fd-panel>
-        <fd-panel>
-          <fd-panel-body>
-            Panel Content
-          </fd-panel-body>
-        </fd-panel>
-        <fd-panel>
-          <fd-panel-body>
-            Panel Content
-          </fd-panel-body>
-        </fd-panel>
-        <fd-panel>
-          <fd-panel-body>
-            Panel Content
-          </fd-panel-body>
-        </fd-panel>
-        <fd-panel [span]="4">
+        <fd-panel [columnSpan]="4">
           <fd-panel-body>
             Panel Content with span 4
           </fd-panel-body>
         </fd-panel>
-        <fd-panel [span]="5">
+        <fd-panel>
+          <fd-panel-body>
+            Panel Content
+          </fd-panel-body>
+        </fd-panel>
+        <fd-panel [columnSpan]="5">
           <fd-panel-body>
             Panel Content with span 5
           </fd-panel-body>
@@ -273,7 +275,7 @@
             Panel Content
           </fd-panel-body>
         </fd-panel>
-        <fd-panel [span]="6">
+        <fd-panel [columnSpan]="6">
           <fd-panel-body>
             Panel Content with span 6
           </fd-panel-body>
