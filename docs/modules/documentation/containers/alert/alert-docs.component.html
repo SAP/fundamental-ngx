@@ -17,8 +17,36 @@
 
 <separator></separator>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+<component-example>
+  <p>
+    <fd-alert [dismissible]="true" [type]="'warning'" (close)="showAlert($event)">
+      A dismissible warning type alert.
+    </fd-alert>
+  </p>
+  <p>
+    <fd-alert [dismissible]="true" [type]="'error'" (close)="showAlert($event)">
+      <div>
+        <h3>A dismissible error type alert with template.</h3>
+        <p>More information...</p>
+      </div>
+    </fd-alert>
+  </p>
+  <p>
+    <fd-alert [dismissible]="false">
+      A normal type alert.
+    </fd-alert>
+  </p>
+  <p>
+    <fd-alert [dismissible]="false">
+      An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a>
+    </fd-alert>
+  </p>
+
+</component-example>
+
+<!-- <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1" id="tile-alert">
   <div class="fd-tile__content">
+    <rtl-toggle label="tile-alert"></rtl-toggle>
     <p>
       <fd-alert [dismissible]="true" [type]="'warning'" (close)="showAlert($event)">
         A dismissible warning type alert.
@@ -44,7 +72,7 @@
     </p>
   </div>
 </div>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="alertHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="alertHtml"></code></pre> -->
 
 <separator></separator>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
