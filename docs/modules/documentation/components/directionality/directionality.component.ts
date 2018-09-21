@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'rtl-toggle',
     template: `
-        <span>
+        <span class="rtl-toggle--wrapper">
             <label class="fd-form__label " for="{{id}}">
             <span class="fd-toggle fd-toggle--xs fd-form__control">
                 <input type="checkbox" name="" value="" id="{{id}}" class="toggle-rtl {{id}}" [attr.aria-controls]="label" (change)="onChange($event)" [(ngModel)]="isChecked">
@@ -12,7 +12,13 @@ import { Component, Input } from '@angular/core';
             Simulate RTL
             </label>  
         </span>`,
-    styles: [``]
+    styles: [
+        `
+            .rtl-toggle--wrapper {
+                display: inline-block;
+            }
+        `
+    ]
 })
 export class DirectionalityComponent {
     id = Date.now() + 1 + '';

@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'background-toggle',
     template: `
-        <span>
+        <span class="background-toggle--wrapper">
             <label class="fd-form__label " for="{{id}}">
             <span class="fd-toggle fd-toggle--xs fd-form__control">
                 <input type="checkbox" name="" value="" id="{{id}}" class="{{id}}" [attr.aria-controls]="label" (change)="onChange($event)" [(ngModel)]="isChecked">
@@ -12,7 +12,13 @@ import { Component, Input } from '@angular/core';
             Toggle background
             </label>  
         </span>`,
-    styles: [``]
+    styles: [
+        `
+            .background-toggle--wrapper {
+                display: inline-block;
+            }
+        `
+    ]
 })
 export class ExampleBackgroundComponent {
     id = Date.now() + 1 + '';
