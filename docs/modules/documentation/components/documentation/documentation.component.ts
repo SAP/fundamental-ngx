@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./documentation.component.scss'],
     templateUrl: './documentation.component.html'
 })
-export class DocumentationComponent {
-    components: any = [
+export class DocumentationComponent implements OnInit {
+    components = [
         { url: 'action-bar', name: 'Action Bar' },
         { url: 'alert', name: 'Alert' },
         { url: 'badgeLabel', name: 'Badge, Status & Label' },
@@ -20,8 +20,8 @@ export class DocumentationComponent {
         { url: 'form', name: 'Form' },
         { url: 'icon', name: 'Icon' },
         { url: 'identifier', name: 'Identifier' },
-        { url: 'inlineHelp', name: 'Inline Help' },
         { url: 'image', name: 'Image' },
+        { url: 'inlineHelp', name: 'Inline Help' },
         { url: 'inputGroup', name: 'Input Group' },
         { url: 'list', name: 'List' },
         { url: 'megaMenu', name: 'Mega Menu' },
@@ -40,7 +40,31 @@ export class DocumentationComponent {
         { url: 'tree', name: 'Tree' }
     ];
 
+    search: string = '';
+
     constructor(private router: Router) {}
+
+    ngOnInit() {
+        // sort the list alphabetically
+        this.components.sort((el1, el2) => {
+            if (el1.name < el2.name) {
+                return -1;
+            }
+
+            if (el1.name > el2.name) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    onFilter(filterString) {
+        this.search = filterString;
+    }
+
+    onFilterReset() {
+        this.search = '';
+    }
 
     selectComponent(component: string) {
         this.router.navigate(['/docs', component]);

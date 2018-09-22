@@ -17,6 +17,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
 import { ImportComponent } from './components/import/import.component';
+import { DirectionalityComponent } from './components/directionality/directionality.component';
+import { ComponentExampleComponent } from './components/component-example/component-example.component';
+import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
 
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
@@ -49,7 +52,6 @@ import { CalendarDocsComponent } from './containers/calendar/calendar-docs.compo
 import { DatePickerDocsComponent } from './containers/date-picker/date-picker-docs.component';
 import { TimeDocsComponent } from './containers/time/time-docs.component';
 import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
-
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -154,7 +156,10 @@ const ROUTES: Routes = [
         InstallationDocsComponent,
         UsageDocsComponent,
         InternationalizationDocsComponent,
-        HomeDocsComponent
+        HomeDocsComponent,
+        DirectionalityComponent,
+        ComponentExampleComponent,
+        ExampleBackgroundComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
