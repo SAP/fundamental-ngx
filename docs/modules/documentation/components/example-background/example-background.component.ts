@@ -21,7 +21,7 @@ import { Component, Input } from '@angular/core';
     ]
 })
 export class ExampleBackgroundComponent {
-    id = Date.now() + 1 + '';
+    id = Date.now() + 1234 + '';
     isChecked: boolean = false;
     @Input()
     label: string;

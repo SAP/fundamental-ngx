@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'rtl-toggle',
@@ -20,8 +20,8 @@ import { Component, Input } from '@angular/core';
         `
     ]
 })
-export class DirectionalityComponent {
-    id = Date.now() + 1 + '';
+export class DirectionalityComponent implements OnInit {
+    id: string;
     isChecked: boolean = false;
     @Input()
     label: string;
@@ -31,6 +31,14 @@ export class DirectionalityComponent {
 
     @Input()
     className: string;
+
+    ngOnInit() {
+        if (this.label) {
+            this.id = this.label + Date.now() + '-rtl';
+        } else {
+            this.id = Date.now() + 6 + '';
+        }
+    }
 
     onChange(event) {
         let dirValue = this.isChecked ? 'rtl' : 'ltr';
