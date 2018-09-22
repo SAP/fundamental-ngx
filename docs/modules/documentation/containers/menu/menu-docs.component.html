@@ -16,63 +16,59 @@
 <separator></separator>
 
 <h2>Menu</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item [url]="'#'">
-            Option 1
-          </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 2
-          </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <p>
+    <fd-menu>
+      <fd-menu-list>
+        <fd-menu-item [url]="'#'">
+          Option 1
+        </fd-menu-item>
+        <fd-menu-item [url]="'#'">
+          Option 2
+        </fd-menu-item>
+        <fd-menu-item [url]="'#'">
+          Option 3
+        </fd-menu-item>
+      </fd-menu-list>
+    </fd-menu>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="menuHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Menu with Group</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-menu>
+<component-example [name]="'ex2'">
+  <p>
+    <fd-menu>
+      <fd-menu-list>
+        <fd-menu-item [url]="'#'">
+          Option 1
+        </fd-menu-item>
+        <fd-menu-item [url]="'#'">
+          Option 2
+        </fd-menu-item>
+        <fd-menu-item [url]="'#'">
+          Option 3
+        </fd-menu-item>
+      </fd-menu-list>
+      <fd-menu-group>
+        <fd-menu-title>
+          Group header
+        </fd-menu-title>
         <fd-menu-list>
-          <fd-menu-item [url]="'#'">
-            Option 1
+          <fd-menu-item [routerLink]="'#'">
+            Option 4
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 2
+          <fd-menu-item [routerLink]="'#'">
+            Option 5
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 3
+          <fd-menu-item [routerLink]="'#'">
+            Option 6
           </fd-menu-item>
         </fd-menu-list>
-        <fd-menu-group>
-          <fd-menu-title>
-            Group header
-          </fd-menu-title>
-          <fd-menu-list>
-            <fd-menu-item [routerLink]="'#'">
-              Option 4
-            </fd-menu-item>
-            <fd-menu-item [routerLink]="'#'">
-              Option 5
-            </fd-menu-item>
-            <fd-menu-item [routerLink]="'#'">
-              Option 6
-            </fd-menu-item>
-          </fd-menu-list>
-        </fd-menu-group>
-      </fd-menu>
-    </p>
-  </div>
-</div>
+      </fd-menu-group>
+    </fd-menu>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="menuGroupHtml"></code></pre>
