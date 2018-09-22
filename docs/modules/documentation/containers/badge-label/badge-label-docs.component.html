@@ -28,7 +28,7 @@
 <separator></separator>
 
 <h2>Default Badge</h2>
-<component-example>
+<component-example [name]="'ex1'">
   <fd-badge>Default</fd-badge>
   <fd-badge [status]="'success'">Default</fd-badge>
   <fd-badge [status]="'warning'">Default</fd-badge>
@@ -41,7 +41,7 @@
 <h2>Pill Badge</h2>
 <p>
   <code>fd-badge--pill</code> modifier can be used to render a pill version of the badge.</p>
-<component-example>
+<component-example [name]="'ex2'">
   <fd-badge [modifier]="'pill'">Default</fd-badge>
   <fd-badge [status]="'success'" [modifier]="'pill'">Default</fd-badge>
   <fd-badge [status]="'warning'" [modifier]="'pill'">Default</fd-badge>
@@ -54,7 +54,7 @@
 <h2>Filled Badge</h2>
 <p>
   <code>fd-badge--filled</code> modifier can be used to render a filled version of the badge.</p>
-<component-example>
+<component-example [name]="'ex3'">
   <fd-badge [modifier]="'filled'">Default</fd-badge>
   <fd-badge [status]="'success'" [modifier]="'filled'">Default</fd-badge>
   <fd-badge [status]="'warning'" [modifier]="'filled'">Default</fd-badge>
@@ -65,7 +65,7 @@
 <separator></separator>
 
 <h2>Label</h2>
-<component-example>
+<component-example [name]="'ex4'">
   <fd-label>Default</fd-label>
   <fd-label [status]="'success'">Success</fd-label>
   <fd-label [status]="'warning'">Warning</fd-label>
@@ -76,7 +76,7 @@
 <separator></separator>
 
 <h2>Status Indicator Label with build in status icons</h2>
-<component-example>
+<component-example [name]="'ex5'">
   <fd-label [isStatusLabel]="true" [statusIcon]="'available'">Available</fd-label>
   <fd-label [isStatusLabel]="true" [statusIcon]="'away'">Away</fd-label>
   <fd-label [isStatusLabel]="true" [statusIcon]="'busy'">Busy</fd-label>
@@ -87,7 +87,7 @@
 <separator></separator>
 
 <h2>Status Indicator Label with any icons</h2>
-<component-example>
+<component-example [name]="'ex6'">
   <fd-label [isStatusLabel]="true" [icon]="'history'">Custom Icon</fd-label>
   <fd-label [isStatusLabel]="true" [icon]="'message-success'">Success</fd-label>
   <fd-label [isStatusLabel]="true" [icon]="'message-warning'">Warning</fd-label>
@@ -98,7 +98,7 @@
 <separator></separator>
 
 <h2>Status Indicator Label with sementic colors</h2>
-<component-example>
+<component-example [name]="'ex7'">
   <fd-label [isStatusLabel]="true">Default</fd-label>
   <fd-label [isStatusLabel]="true" [status]="'success'">Success</fd-label>
   <fd-label [isStatusLabel]="true" [status]="'warning'">Warning</fd-label>
