@@ -2,7 +2,8 @@
 <description>The Table component is a common component used to display data that can be compared. Usually a set of item
   of
   the same type which data is divided on columns to facilitate the comparison between items.</description>
-<import module="TableModule" path="fundamental/table/table.module"></import>
+<import module="TableModule"
+        path="fundamental/table/table.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-table&gt;</h1>
@@ -29,7 +30,8 @@ This is an example of a table with simple cells, where the rowData is an array o
 </properties>
 <br>
 <component-example [name]="'ex1'">
-  <fd-table [tableData]="data.properties.simpleTableData" [headers]="data.properties.simpleHeaders">
+  <fd-table [tableData]="data.properties.simpleTableData"
+            [headers]="data.properties.simpleHeaders">
 
   </fd-table>
 </component-example>
@@ -59,8 +61,9 @@ the following properties:<br><br>
 </properties>
 <br>
 <component-example [name]="'ex2'">
-  <fd-table [tableData]="data.properties.richTableData" [headers]="data.properties.richHeaders" [headerWidths]="data.properties.richWidths">
-
+  <fd-table [tableData]="data.properties.richTableData"
+            [headers]="data.properties.richHeaders"
+            [headerWidths]="data.properties.richWidths">
   </fd-table>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="richTableHtml"></code></pre>
