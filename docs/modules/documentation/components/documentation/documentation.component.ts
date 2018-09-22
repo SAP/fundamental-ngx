@@ -40,6 +40,8 @@ export class DocumentationComponent implements OnInit {
         { url: 'tree', name: 'Tree' }
     ];
 
+    search: string = '';
+
     constructor(private router: Router) {}
 
     ngOnInit() {
@@ -54,6 +56,14 @@ export class DocumentationComponent implements OnInit {
             }
             return 0;
         });
+    }
+
+    onFilter(filterString) {
+        this.search = filterString;
+    }
+
+    onFilterReset() {
+        this.search = '';
     }
 
     selectComponent(component: string) {
