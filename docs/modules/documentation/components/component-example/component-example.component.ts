@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 declare let hljs: any;
 
@@ -8,7 +9,7 @@ declare let hljs: any;
         <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1" id="{{id}}">
             <div class="fd-tile__content">
                 <div class="component-example__features">
-                    <rtl-toggle [label]="id2"></rtl-toggle>
+                    <rtl-toggle *ngIf="showRTL"[label]="id2"></rtl-toggle>
                     <background-toggle [label]="id"></background-toggle>
                 </div>
                 <div class="fd-doc-component" id="{{id2}}">
@@ -34,11 +35,14 @@ export class ComponentExampleComponent implements OnInit {
     @Input()
     name: string;
 
-    constructor(private element: ElementRef) {}
+    showRTL: boolean = false;
+
+    constructor(private element: ElementRef, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.id = '' + Date.now() + '_wrapper_' + this.name;
         this.id2 = '' + Date.now() + this.name;
+        this.showRTL = this.activatedRoute.snapshot.queryParams['rtl'];
     }
 
     id: string;
