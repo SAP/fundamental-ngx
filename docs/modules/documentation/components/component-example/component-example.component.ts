@@ -25,8 +25,8 @@ declare let hljs: any;
                 justify-content: flex-start;
             }
 
-            background-toggle {
-                padding-left: 20px;
+            rtl-toggle {
+                padding-right: 20px;
             }
         `
     ]
