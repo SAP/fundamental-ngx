@@ -1,4 +1,4 @@
-<header>Calendar with single selection</header>
+<header>Calendar</header>
 <description>Commonly used as the contents of a popover when composing “date-picker”, rarely used on its own as a
   standalone component.</description>
 <import module="CalendarModule" path="fundamental/calendar/calendar.module"></import>
@@ -11,7 +11,10 @@
   inputs: [
     { name: 'calType',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
     { name: 'disableFunction', description: 'A user defined function that specifies the days that should be disabled.'},
-    { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked.'}
+    { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked.'},
+    { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
+    { name: 'selectedRangeFirst', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the first selected day in a range of dates on \'range\' type calendars.'},
+    { name: 'selectedRangeLast', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the last selected day in a range of dates on \'range\' type calendars.'}
   ]
 }">
 </properties>
@@ -19,24 +22,32 @@
 <separator></separator>
 
 <h2>Calendar with single selection, disabled and blocked days</h2>
+<description>
+  You can use two-way data binding to select a date or range of dates on a calendar.  Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
+  To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
+  Note that selecting a day (or range of days) in this manner will override any block/disable functions.
+</description>
 <component-example [name]="'ex1'">
-  <fd-calendar [calType]="'single'" (updateDatePickerInput)="updateDatePickerInputHandler($event)" [blockFunction]="myBlockFunction"
-    [disableFunction]="myDisableFunction"></fd-calendar>
+  <fd-calendar [calType]="'single'" [(selectedDay)]="selectedDay"
+               [blockFunction]="myBlockFunction" [disableFunction]="myDisableFunction"></fd-calendar>
 
-  <br />
-  <div>Selected Date: {{selectedDate}}</div>
+  <br/>
+  <div>Selected Date: {{selectedDay.date.toDateString()}}</div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="calendarSingleHtml"></code></pre>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="exampleFunctionsHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="selectedDayJs"></code></pre>
+<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="exampleFunctionsHtml"></code></pre>
 <separator></separator>
 
-<h2>Calendar with range selection</h2>
+<h2>Calendar with range selection, selectedRangeFirst and selectedRangeLast</h2>
 <component-example [name]="'ex2'">
-  <fd-calendar [calType]="'range'" (updateDatePickerInput)="updateDatePickerInputHandler($event)" [disableFunction]="myDisableFunction2"></fd-calendar>
+  <fd-calendar [calType]="'range'" [disableFunction]="myDisableFunction2"
+               [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"></fd-calendar>
 
-  <br />
-  <div>Selected First Date: {{selectedFirstDate}}</div>
-  <br />
-  <div>Selected Last Date: {{selectedLastDate}}</div>
+  <br/>
+  <div>Selected First Date: {{selectedRangeFirst.date.toDateString()}}</div>
+  <br/>
+  <div>Selected Last Date: {{selectedRangeLast.date.toDateString()}}</div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="calendarRangeHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="calendarRangeJs"></code></pre>

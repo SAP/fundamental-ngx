@@ -20,7 +20,7 @@
     <div class="fd-calendar__years" *ngIf="showCalendarYears">
       <ul class="fd-calendar__list">
         <li class="fd-calendar__item" *ngFor="let listYear of calendarYearsList" [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
-          (click)="selectYear(listYear)">
+            (click)="selectYear(listYear)">
           <span class="fd-calendar__text">{{listYear}}</span>
         </li>
       </ul>
@@ -29,7 +29,7 @@
     <div class="fd-calendar__months" *ngIf="showCalendarMonths">
       <ul class="fd-calendar__list">
         <li class="fd-calendar__item" *ngFor="let monthShortName of monthsShortName, let i=index" [ngClass]='(i===todayMonth && year===todayYear ? " fd-calendar__item--current" : "") + (i===selectedMonth ? " is-selected" : "") '
-          (click)="selectMonth(i)">
+            (click)="selectMonth(i)">
           <span class="fd-calendar__text">{{monthShortName}}</span>
         </li>
       </ul>
@@ -38,26 +38,26 @@
     <div class="fd-calendar__dates" *ngIf="showCalendarDates">
       <table class="fd-calendar__table" role="grid">
         <thead class="fd-calendar__group">
-          <tr class="fd-calendar__row">
-            <th class="fd-calendar__column-header" *ngFor="let day of weekDays">
-              <span class="fd-calendar__day-of-week">{{day}}</span>
-            </th>
-          </tr>
+        <tr class="fd-calendar__row">
+          <th class="fd-calendar__column-header" *ngFor="let day of weekDays">
+            <span class="fd-calendar__day-of-week">{{day}}</span>
+          </th>
+        </tr>
         </thead>
         <tbody class="fd-calendar__group">
-          <tr class="fd-calendar__row" *ngFor="let row of calendarGrid; let i = index;">
-            <td class="fd-calendar__item" role="gridcell" *ngFor="let cell of row" 
-               [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") + 
+        <tr class="fd-calendar__row" *ngFor="let row of calendarGrid; let i = index;">
+          <td class="fd-calendar__item" role="gridcell" *ngFor="let cell of row"
+              [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
                           (cell.selected ? " is-selected": "") + 
                           (calType==="range" && cell.selectedLast && selectedRangeFirst != selectedRangeLast ? " is-selected-range-last": "") + 
                           (calType==="range" && cell.selectedFirst && selectedRangeFirst != selectedRangeLast ? " is-selected-range-first": "") + 
-                          (calType==="range" && cell.selectedRange ? " is-selected-range": "") + 
+                          (calType==="range" && cell.selectedRange && !cell.selectedFirst && !cell.selectedLast ? " is-selected-range": "") +
                           (cell.today ? " fd-calendar__item--current": "") + 
                           (cell.disabled ? " is-disabled": "") + 
                           (cell.blocked ? " is-blocked": "")' (click)="selectDate(cell)">
-              <span class="fd-calendar__text">{{cell.day}}</span>
-            </td>
-          </tr>
+            <span class="fd-calendar__text">{{cell.day}}</span>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
