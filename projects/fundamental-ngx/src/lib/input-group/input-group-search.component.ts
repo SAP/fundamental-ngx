@@ -19,6 +19,9 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     @Input()
     disabled: boolean;
 
+    @Input()
+    placeholder;
+
     inputTextValue: string;
 
     onChange: any = () => {};
@@ -44,7 +47,4 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
-
-    @Input()
-    placeholder;
 }

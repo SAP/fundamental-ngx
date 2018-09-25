@@ -26,10 +26,10 @@ describe('InputGroupNumberComponent', () => {
 
     it('should get the input and increment/decrement properly', () => {
         component.inputText = 0;
-        expect(component.getInput()).toBe(0);
+        expect(component.inputText).toBe(0);
         component.stepUpClicked();
-        expect(component.getInput()).toBe(1);
+        expect(component.inputText).toBe(1);
         component.stepDownClicked();
-        expect(component.getInput()).toBe(0);
+        expect(component.inputText).toBe(0);
     });
 });
