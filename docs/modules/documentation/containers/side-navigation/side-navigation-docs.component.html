@@ -1,5 +1,6 @@
 <header>Side Navigation</header>
-<description>The left navigation can always display or expand/collapse using the menu icon within the global navigation.</description>
+<description>The left navigation can always display or expand/collapse using the menu icon within the global
+  navigation.</description>
 <import module="SideNavigationModule" path="fundamental/side-navigation/side-navigation.module"></import>
 <separator></separator>
 
@@ -16,33 +17,33 @@
   ]
 }"></properties>
 <br>
-<span>Each <code>fd-side-nav-link</code> should have either a [url] or [routerLink] property.  If [routerLink] is used, any other property belonging to the RouterLink class can also be used.  See the official <a href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.</span>
+<span>Each <code>fd-side-nav-link</code> should have either a [url] or [routerLink] property. If [routerLink] is used,
+  any other property belonging to the RouterLink class can also be used. See the official <a href="https://angular.io/api/router/RouterLink">Angular
+    documentation for RouterLink</a> for more information.</span>
 
 <separator></separator>
 <h2>Side navigation with one level</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-side-nav>
-        <fd-side-nav-list>
-          <fd-side-nav-item>
-            <fd-side-nav-link [routerLink]="'#'" [queryParams]="'#'">Link Item</fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-          </fd-side-nav-item>
-        </fd-side-nav-list>
-      </fd-side-nav>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <p>
+    <fd-side-nav>
+      <fd-side-nav-list>
+        <fd-side-nav-item>
+          <fd-side-nav-link [routerLink]="'#'" [queryParams]="'#'">Link Item</fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        </fd-side-nav-item>
+      </fd-side-nav-list>
+    </fd-side-nav>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="oneLevelSideNavHtml"></code></pre>
 
 
@@ -50,184 +51,178 @@
 <h2>Side navigation with titles</h2>
 <p>Use this to group navigation. Titles are not clickable.</p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-side-nav>
-        <fd-side-nav-group>
-          <fd-side-nav-title>
-            Group Title
-          </fd-side-nav-title>
-          <fd-side-nav-list>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-          </fd-side-nav-list>
-        </fd-side-nav-group>
-        <fd-side-nav-group>
-          <fd-side-nav-title>
-            Group Title
-          </fd-side-nav-title>
-          <fd-side-nav-list>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-          </fd-side-nav-list>
-        </fd-side-nav-group>
-      </fd-side-nav>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <p>
+    <fd-side-nav>
+      <fd-side-nav-group>
+        <fd-side-nav-title>
+          Group Title
+        </fd-side-nav-title>
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav-group>
+      <fd-side-nav-group>
+        <fd-side-nav-title>
+          Group Title
+        </fd-side-nav-title>
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav-group>
+    </fd-side-nav>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="titlesSideNavHtml"></code></pre>
 
 <separator></separator>
 <h2>Side navigation with multiple levels</h2>
-<p>Use this when there is more than one level of hierarchy in the left navigation. Each level can be expanded and collapsed.</p>
+<p>Use this when there is more than one level of hierarchy in the left navigation. Each level can be expanded and
+  collapsed.</p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-side-nav>
-        <fd-side-nav-group>
-          <fd-side-nav-title>
-            Group Name
-          </fd-side-nav-title>
-          <fd-side-nav-list>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
-            </fd-side-nav-item>
-          </fd-side-nav-list>
-        </fd-side-nav-group>
-        <fd-side-nav-group>
-          <fd-side-nav-title>
-            Group Name
-          </fd-side-nav-title>
-          <fd-side-nav-list>
-            <fd-side-nav-item>
-              <fd-side-nav-link [hasSublist]="true">
-                Link Item
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-              </fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [hasSublist]="true">
-                Link Item
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-              </fd-side-nav-link>
-            </fd-side-nav-item>
-            <fd-side-nav-item>
-              <fd-side-nav-link [hasSublist]="true">
-                Link Item
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-                <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-              </fd-side-nav-link>
-            </fd-side-nav-item>
-          </fd-side-nav-list>
-        </fd-side-nav-group>
-      </fd-side-nav>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex3'">
+  <p>
+    <fd-side-nav>
+      <fd-side-nav-group>
+        <fd-side-nav-title>
+          Group Name
+        </fd-side-nav-title>
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav-group>
+      <fd-side-nav-group>
+        <fd-side-nav-title>
+          Group Name
+        </fd-side-nav-title>
+        <fd-side-nav-list>
+          <fd-side-nav-item>
+            <fd-side-nav-link [hasSublist]="true">
+              Link Item
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [hasSublist]="true">
+              Link Item
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+          <fd-side-nav-item>
+            <fd-side-nav-link [hasSublist]="true">
+              Link Item
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+              <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+            </fd-side-nav-link>
+          </fd-side-nav-item>
+        </fd-side-nav-list>
+      </fd-side-nav-group>
+    </fd-side-nav>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="multiLevelsSideNavHtml"></code></pre>
 
 <separator></separator>
 <h2>Side navigation with icons</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-side-nav>
-        <fd-side-nav-list>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-              Link Icon
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-              Link Icon
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-              Link Icon
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-              Link Icon
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-        </fd-side-nav-list>
-      </fd-side-nav>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex4'">
+  <p>
+    <fd-side-nav>
+      <fd-side-nav-list>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            Link Icon
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            Link Icon
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            Link Icon
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+            Link Icon
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+      </fd-side-nav-list>
+    </fd-side-nav>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="iconsSideNavHtml"></code></pre>
 
 <separator></separator>
 <h2>Side navigation collapsed with icons</h2>
-<p>The user can identify which level they are on based on the icon displayed as selected when the navigation is collapsed. Note that the suggested use is when there is only one level of navigation as the user can only see one level of navigation when collapsed.</p>
+<p>The user can identify which level they are on based on the icon displayed as selected when the navigation is
+  collapsed. Note that the suggested use is when there is only one level of navigation as the user can only see one
+  level of navigation when collapsed.</p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-side-nav [collapsed]="true">
-        <fd-side-nav-list>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-          <fd-side-nav-item>
-            <fd-side-nav-link [url]="'#'">
-              <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-            </fd-side-nav-link>
-          </fd-side-nav-item>
-        </fd-side-nav-list>
-      </fd-side-nav>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex5'">
+  <p>
+    <fd-side-nav [collapsed]="true">
+      <fd-side-nav-list>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+        <fd-side-nav-item>
+          <fd-side-nav-link [url]="'#'">
+            <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+          </fd-side-nav-link>
+        </fd-side-nav-item>
+      </fd-side-nav-list>
+    </fd-side-nav>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="collapsedSideNavHtml"></code></pre>
-

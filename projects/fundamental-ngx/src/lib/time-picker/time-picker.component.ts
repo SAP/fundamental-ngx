@@ -7,7 +7,7 @@ import { TimeComponent } from '../time/time.component';
     templateUrl: './time-picker.component.html'
 })
 export class TimePickerComponent {
-    @Input() time: TimeObject;
+    @Input() time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     @Input() meridian: boolean;
 
@@ -96,6 +96,7 @@ export class TimePickerComponent {
                 this.time.second = null;
                 this.child.displayedHour = null;
                 this.child.period = 'am';
+                this.child.oldPeriod = 'am';
             }
         } else if (this.meridian) {
             if (this.displaySeconds) {
@@ -128,6 +129,7 @@ export class TimePickerComponent {
                 this.time.second = null;
                 this.child.displayedHour = null;
                 this.child.period = 'am';
+                this.child.oldPeriod = 'am';
             }
         }
     }

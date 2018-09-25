@@ -1,5 +1,6 @@
 <header>Table</header>
-<description>The Table component is a common component used to display data that can be compared. Usually a set of item of
+<description>The Table component is a common component used to display data that can be compared. Usually a set of item
+  of
   the same type which data is divided on columns to facilitate the comparison between items.</description>
 <import module="TableModule"
         path="fundamental/table/table.module"></import>
@@ -16,27 +17,25 @@
 
 <h2>Table</h2>
 <br>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-table>
-      <fd-table-header>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
-        <th>Date</th>
-        <th>Type</th>
-      </fd-table-header>
-      <fd-table-body>
-        <tr *ngFor="let row of tableRows">
-          <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
-          <td>{{row.column2}}</td>
-          <td>{{row.column3}}</td>
-          <td>{{row.date}}</td>
-          <td><fd-icon [glyph]="row.type"></fd-icon></td>
-        </tr>
-      </fd-table-body>
-    </fd-table>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-table>
+    <fd-table-header>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Date</th>
+      <th>Type</th>
+    </fd-table-header>
+    <fd-table-body>
+      <tr *ngFor="let row of tableRows">
+        <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
+        <td>{{row.column2}}</td>
+        <td>{{row.column3}}</td>
+        <td>{{row.date}}</td>
+        <td><fd-icon [glyph]="row.type"></fd-icon></td>
+      </tr>
+    </fd-table-body>
+  </fd-table>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="tableHtml"></code></pre>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="tableJson"></code></pre>

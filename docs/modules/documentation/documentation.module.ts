@@ -17,6 +17,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
 import { ImportComponent } from './components/import/import.component';
+import { DirectionalityComponent } from './components/directionality/directionality.component';
+import { ComponentExampleComponent } from './components/component-example/component-example.component';
+import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
 
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
@@ -50,10 +53,10 @@ import { DatePickerDocsComponent } from './containers/date-picker/date-picker-do
 import { TimeDocsComponent } from './containers/time/time-docs.component';
 import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
 
-
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
 import { InternationalizationDocsComponent } from './containers/internationalization/internationalization.component';
+import { HomeDocsComponent } from './containers/home/home.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
@@ -69,7 +72,7 @@ const ROUTES: Routes = [
         path: '',
         component: DocumentationComponent,
         children: [
-            { path: '', redirectTo: 'installation', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'action-bar', component: ActionBarDocsComponent },
             { path: 'alert', component: AlertDocsComponent },
             { path: 'badgeLabel', component: BadgeLabelDocsComponent },
@@ -102,7 +105,8 @@ const ROUTES: Routes = [
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent },
-            { path: 'rtl', component: InternationalizationDocsComponent }
+            { path: 'rtl', component: InternationalizationDocsComponent },
+            { path: 'home', component: HomeDocsComponent }
         ]
     }
 ];
@@ -151,7 +155,11 @@ const ROUTES: Routes = [
         NavbarDocsComponent,
         InstallationDocsComponent,
         UsageDocsComponent,
-        InternationalizationDocsComponent
+        InternationalizationDocsComponent,
+        HomeDocsComponent,
+        DirectionalityComponent,
+        ComponentExampleComponent,
+        ExampleBackgroundComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

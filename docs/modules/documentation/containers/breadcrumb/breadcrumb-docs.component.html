@@ -1,7 +1,9 @@
 <header>Breadcrumb</header>
 <description>
-  The breadcrumb allows users to see the current page and navigation path to that page. Users can navigate to previous levels
-  in the path by clicking on those levels. By clicking on the current page, a dropdown allows users to access other pages
+  The breadcrumb allows users to see the current page and navigation path to that page. Users can navigate to previous
+  levels
+  in the path by clicking on those levels. By clicking on the current page, a dropdown allows users to access other
+  pages
   at that same level.
 </description>
 <import module="BreadcrumbModule" path="fundamental/breadcrumb/breadcrumb.module"></import>
@@ -16,18 +18,17 @@
 }"></properties>
 <br>
 <span>
-  Instead of the [url] property, you may use any RouterLink properties on each breadcrumb item.  See the official <a href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.
+  Instead of the [url] property, you may use any RouterLink properties on each breadcrumb item. See the official <a
+    href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.
 </span>
 
 <separator></separator>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-breadcrumb>
-      <fd-breadcrumb-item [url]="'#'">Link Text</fd-breadcrumb-item>
-      <fd-breadcrumb-item [routerLink]="'#'" [queryParams]="'#'">Link Text</fd-breadcrumb-item>
-      <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>
-    </fd-breadcrumb>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-breadcrumb>
+    <fd-breadcrumb-item [url]="'#'">Breakcrumb Level1</fd-breadcrumb-item>
+    <fd-breadcrumb-item [routerLink]="'#'" [queryParams]="'#'">Breakcrumb Level2</fd-breadcrumb-item>
+    <fd-breadcrumb-item>Breakcrumb Level3</fd-breadcrumb-item>
+  </fd-breadcrumb>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml"></code></pre>

@@ -19,41 +19,37 @@
 <separator></separator>
 <h2>Mega Menu</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <fd-mega-menu>
-        <fd-mega-menu-group>
-          <fd-mega-menu-title>
-            Group Name
-          </fd-mega-menu-title>
-          <fd-mega-menu-list>
-            <fd-mega-menu-item>
-              <fd-mega-menu-link [url]="'#'">Link</fd-mega-menu-link>
-            </fd-mega-menu-item>
-            <fd-mega-menu-item>
-              <fd-mega-menu-link [url]="'#'">Link</fd-mega-menu-link>
-            </fd-mega-menu-item>
-          </fd-mega-menu-list>
-        </fd-mega-menu-group>
-        <fd-mega-menu-group>
-          <fd-mega-menu-title>
-            Group Name
-          </fd-mega-menu-title>
-          <fd-mega-menu-list>
-            <fd-mega-menu-item>
-              <fd-mega-menu-link [hasSublist]="true">
-                Link
-                <fd-mega-menu-subitem [url]="'#'">Link</fd-mega-menu-subitem>
-                <fd-mega-menu-subitem [url]="'#'">Link</fd-mega-menu-subitem>
-              </fd-mega-menu-link>
-            </fd-mega-menu-item>
-          </fd-mega-menu-list>
-        </fd-mega-menu-group>
-      </fd-mega-menu>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <p>
+    <fd-mega-menu>
+      <fd-mega-menu-group>
+        <fd-mega-menu-title>
+          Group Name
+        </fd-mega-menu-title>
+        <fd-mega-menu-list>
+          <fd-mega-menu-item>
+            <fd-mega-menu-link [url]="'#'">Link</fd-mega-menu-link>
+          </fd-mega-menu-item>
+          <fd-mega-menu-item>
+            <fd-mega-menu-link [url]="'#'">Link</fd-mega-menu-link>
+          </fd-mega-menu-item>
+        </fd-mega-menu-list>
+      </fd-mega-menu-group>
+      <fd-mega-menu-group>
+        <fd-mega-menu-title>
+          Group Name
+        </fd-mega-menu-title>
+        <fd-mega-menu-list>
+          <fd-mega-menu-item>
+            <fd-mega-menu-link [hasSublist]="true">
+              Link
+              <fd-mega-menu-subitem [url]="'#'">Link</fd-mega-menu-subitem>
+              <fd-mega-menu-subitem [url]="'#'">Link</fd-mega-menu-subitem>
+            </fd-mega-menu-link>
+          </fd-mega-menu-item>
+        </fd-mega-menu-list>
+      </fd-mega-menu-group>
+    </fd-mega-menu>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="megaMenuHtml"></code></pre>
-
-

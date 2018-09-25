@@ -15,7 +15,7 @@ export class TimeComponent implements OnChanges {
 
     displayedHour: number;
 
-    @Input() time: TimeObject;
+    @Input() time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     @Input() meridian: boolean;
 
@@ -74,7 +74,7 @@ export class TimeComponent implements OnChanges {
                     this.setDisplayedHour();
                 } else if (this.displayedHour > 12 && this.displayedHour < 24) {
                     if (this.period === 'pm') {
-                        this.time.hour = this.time.hour - 12;
+                        this.time.hour = this.displayedHour - 12;
                     }
                     this.setDisplayedHour();
                 } else if (this.displayedHour >= 24) {
