@@ -21,9 +21,4 @@ describe('TableComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should handle typeOf', () => {
-        expect(component.typeOf('someString')).toBe('string');
-        expect(component.typeOf({})).toBe('object');
-    });
 });
