@@ -732,7 +732,7 @@ export class InputGroupDocsComponent {
     searchInputHtml = `<label fd-form-label>Search input</label>
 <fd-input-group-search
                        [disabled]="false"
-                       [(inputText)]="searchTerm">
+                       [(ngModel)]="searchTerm">
 </fd-input-group-search>`;
 
     searchTerm = 'Search Term';

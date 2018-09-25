@@ -1,29 +1,50 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fd-input-group-search',
     host: {
         class: ''
     },
-    templateUrl: './input-group-search.component.html'
+    templateUrl: './input-group-search.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputGroupSearchComponent),
+            multi: true
+        }
+    ]
 })
-export class InputGroupSearchComponent {
-    @Input() disabled: boolean;
+export class InputGroupSearchComponent implements ControlValueAccessor {
+    @Input()
+    disabled: boolean;
 
     inputTextValue: string;
 
-    @Output()
-    inputTextChange = new EventEmitter();
+    onChange: any = () => {};
+    onTouched: any = () => {};
 
-    @Input()
     get inputText() {
         return this.inputTextValue;
     }
 
     set inputText(value) {
         this.inputTextValue = value;
-        this.inputTextChange.emit(this.inputTextValue);
+        this.onChange(value);
+        this.onTouched();
     }
 
-    @Input() placeholder;
+    writeValue(value: any) {
+        this.inputTextValue = value;
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+
+    @Input()
+    placeholder;
 }
