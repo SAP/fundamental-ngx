@@ -732,8 +732,10 @@ export class InputGroupDocsComponent {
     searchInputHtml = `<label fd-form-label>Search input</label>
 <fd-input-group-search
                        [disabled]="false"
-                       [inputText]="'Search term'">
+                       [(inputText)]="searchTerm">
 </fd-input-group-search>`;
+
+    searchTerm = 'Search Term';
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');

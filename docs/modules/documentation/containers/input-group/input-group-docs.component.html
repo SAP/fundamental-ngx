@@ -116,8 +116,9 @@
 <p>This input group automatically shows a clear search button when the user has entered a value in the input.</p>
 <component-example [name]="'ex5'">
   <label fd-form-label>Search input</label>
-  <fd-input-group-search [disabled]="false" [inputText]="'Search term'">
-  </fd-input-group-search>
+  <fd-input-group-search [disabled]="false" [(inputText)]="searchTerm"></fd-input-group-search>
+  <br/>
+  <span>searchTerm: {{searchTerm}}</span>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="searchInputHtml"></code></pre>
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'fd-input-group-search',
@@ -10,11 +10,20 @@ import { Component, Input } from '@angular/core';
 export class InputGroupSearchComponent {
     @Input() disabled: boolean;
 
-    @Input() inputText: string;
+    inputTextValue: string;
+
+    @Output()
+    inputTextChange = new EventEmitter();
+
+    @Input()
+    get inputText() {
+        return this.inputTextValue;
+    }
+
+    set inputText(value) {
+        this.inputTextValue = value;
+        this.inputTextChange.emit(this.inputTextValue);
+    }
 
     @Input() placeholder;
-
-    getInput() {
-        return this.inputText;
-    }
 }
