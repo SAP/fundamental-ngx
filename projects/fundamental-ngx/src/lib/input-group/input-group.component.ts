@@ -38,17 +38,8 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     disabled: boolean;
 
-    @Input()
-    type: string;
-
-    @Input()
-    time;
-
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
-    timeInputChanged: EventEmitter<any> = new EventEmitter<any>();
 
     inputTextValue: string;
 
@@ -78,11 +69,5 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     buttonClicked($event) {
         this.addOnButtonClicked.emit($event);
-    }
-
-    inputChanged() {
-        if (this.type === 'time') {
-            this.timeInputChanged.emit(this.inputTextValue);
-        }
     }
 }
