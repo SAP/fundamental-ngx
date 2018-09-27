@@ -25,11 +25,16 @@ describe('InputGroupNumberComponent', () => {
     });
 
     it('should get the input and increment/decrement properly', () => {
+        spyOn(component, 'onChange');
+        spyOn(component, 'onTouched');
         component.inputText = 0;
-        expect(component.getInput()).toBe(0);
+        expect(component.inputText).toBe(0);
         component.stepUpClicked();
-        expect(component.getInput()).toBe(1);
+        expect(component.inputText).toBe(1);
+        expect(component.onChange).toHaveBeenCalledWith(1);
+        expect(component.onTouched).toHaveBeenCalled();
         component.stepDownClicked();
-        expect(component.getInput()).toBe(0);
+        expect(component.inputText).toBe(0);
+        expect(component.onChange).toHaveBeenCalledWith(0);
     });
 });

@@ -1,42 +1,73 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { InputGroupSearchComponent } from './input-group-search.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fd-input-group',
     host: {
         class: ''
     },
-    templateUrl: './input-group.component.html'
+    templateUrl: './input-group.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputGroupComponent),
+            multi: true
+        }
+    ]
 })
-export class InputGroupComponent {
-    @Input() placement: string;
+export class InputGroupComponent implements ControlValueAccessor {
+    @Input()
+    placement: string;
 
-    @Input() inline: boolean;
+    @Input()
+    inline: boolean;
 
-    @Input() placeholder: string;
+    @Input()
+    placeholder: string;
 
-    @Input() addOnText: string;
+    @Input()
+    addOnText: string;
 
-    @Input() glyph: string;
+    @Input()
+    glyph: string;
 
-    @Input() inputText: string;
+    @Input()
+    button: boolean;
 
-    @Input() button: boolean;
+    @Input()
+    disabled: boolean;
 
-    @Input() disabled: boolean;
+    @Output()
+    addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
-    @Input() type: string;
+    inputTextValue: string;
 
-    @Output() addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
+    onChange: any = () => {};
+    onTouched: any = () => {};
 
-    @Output() timeInputChanged: EventEmitter<any> = new EventEmitter<any>();
+    get inputText() {
+        return this.inputTextValue;
+    }
+
+    set inputText(value) {
+        this.inputTextValue = value;
+        this.onChange(value);
+        this.onTouched();
+    }
+
+    writeValue(value: any) {
+        this.inputTextValue = value;
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
 
     buttonClicked($event) {
         this.addOnButtonClicked.emit($event);
-    }
-
-    inputChanged() {
-        if (this.type === 'time') {
-            this.timeInputChanged.emit(this.inputText);
-        }
     }
 }
