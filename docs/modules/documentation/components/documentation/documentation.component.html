@@ -38,7 +38,7 @@
       id="tn-components-selector">
     <li class="side-nav__headers">Components</li>
     <ng-container *ngFor="let component of components">
-      <li *ngIf="search === '' || component.url.indexOf(search) != -1">
+      <li *ngIf="search === '' || component.url.toUpperCase().indexOf(search.toUpperCase()) != -1">
         <a class="nav-item"
            [routerLink]="['/docs', component.url]"
            routerLinkActive="nav-item--active">{{
