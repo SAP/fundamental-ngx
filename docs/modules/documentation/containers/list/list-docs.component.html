@@ -1,5 +1,6 @@
 <header>List</header>
-<description>The List Component can be used to display a list of items with simple information such as scopes, names, etc.</description>
+<description>The List Component can be used to display a list of items with simple information such as scopes, names,
+  etc.</description>
 <import module="ListModule" path="fundamental/list/list.module"></import>
 <separator></separator>
 
@@ -15,74 +16,68 @@
 
 <separator></separator>
 <p>A simple list. The list item can contain plain text or links.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-list>
-      <fd-list-item>
-        <a href="#">List item 1</a>
-      </fd-list-item>
-      <fd-list-item>List item 2</fd-list-item>
-      <fd-list-item>
-        <a href="#">List item 3</a>
-      </fd-list-item>
-      <fd-list-item>List item 4</fd-list-item>
-    </fd-list>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-list>
+    <fd-list-item>
+      <a href="#">List item 1</a>
+    </fd-list-item>
+    <fd-list-item>List item 2</fd-list-item>
+    <fd-list-item>
+      <a href="#">List item 3</a>
+    </fd-list-item>
+    <fd-list-item>List item 4</fd-list-item>
+  </fd-list>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleListHtml"></code></pre>
 
 <separator></separator>
 
 <p>The List items can also contain quick actions, such as: remove, edit, copy, etc.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-list>
-      <fd-list-item>List item 1
-        <fd-list-action>
-          <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-        </fd-list-action>
-      </fd-list-item>
-      <fd-list-item>List item 2
-        <fd-list-action>
-          <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-        </fd-list-action>
-      </fd-list-item>
-      <fd-list-item>List item 3
-        <fd-list-action>
-          <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-        </fd-list-action>
-      </fd-list-item>
-      <fd-list-item>List item 4
-        <fd-list-action>
-          <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-        </fd-list-action>
-      </fd-list-item>
-    </fd-list>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <fd-list>
+    <fd-list-item>List item 1
+      <fd-list-action>
+        <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
+      </fd-list-action>
+    </fd-list-item>
+    <fd-list-item>List item 2
+      <fd-list-action>
+        <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
+      </fd-list-action>
+    </fd-list-item>
+    <fd-list-item>List item 3
+      <fd-list-action>
+        <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
+      </fd-list-action>
+    </fd-list-item>
+    <fd-list-item>List item 4
+      <fd-list-action>
+        <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
+      </fd-list-action>
+    </fd-list-item>
+  </fd-list>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="listActionsHtml"></code></pre>
 
 <separator></separator>
 
 <p>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-list>
-      <fd-list-item>
-        <fd-list-checkbox>List item 1</fd-list-checkbox>
-      </fd-list-item>
-      <fd-list-item>
-        <fd-list-checkbox>List item 2</fd-list-checkbox>
-      </fd-list-item>
-      <fd-list-item>
-        <fd-list-checkbox>List item 3</fd-list-checkbox>
-      </fd-list-item>
-      <fd-list-item>
-        <fd-list-checkbox>List item 4</fd-list-checkbox>
-      </fd-list-item>
-    </fd-list>
-  </div>
-</div>
+<component-example [name]="'ex3'">
+  <fd-list>
+    <fd-list-item>
+      <fd-list-checkbox>List item 1</fd-list-checkbox>
+    </fd-list-item>
+    <fd-list-item>
+      <fd-list-checkbox>List item 2</fd-list-checkbox>
+    </fd-list-item>
+    <fd-list-item>
+      <fd-list-checkbox>List item 3</fd-list-checkbox>
+    </fd-list-item>
+    <fd-list-item>
+      <fd-list-checkbox>List item 4</fd-list-checkbox>
+    </fd-list-item>
+  </fd-list>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="listCheckboxesHtml"></code></pre>
 
 <separator></separator>

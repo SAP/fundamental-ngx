@@ -2,50 +2,50 @@
 <description>When using images you can use our helpers classes to adjust the size and the shape.</description>
 <import module="ImageModule" path="fundamental/image/image.module"></import>
 <separator></separator>
- <properties [properties]="{
+<properties [properties]="{
   inputs: [
     { name: 'size', description: 'String - the size of the image. Size options include \'s\' (24x24), \'m\' (36x36), and \'l\' (48x48).' },
     { name: 'photo', description: 'String - picture url.' },
     { name: 'circle', description: 'Boolean - when set to true renders a round image.' }
   ]
 }"></properties>
-<description>The inputs for <code>fd-image</code> will be translated into class attributed respecting fundamental-ui guidelines.
+<description>The inputs for <code>fd-image</code> will be translated into class attributed respecting fundamental-ui
+  guidelines.
   <br>For example:
   <br>if it is passed <code>s</code> for size the class <code>fd-image--s</code> will be added to the element.
 </description>
 <separator></separator>
 
 <h2>Extensibility</h2>
-<description>The image implementation allows certain extensibility in terms of options for the inputs. <code>fd-image</code> inputs doesn't have a restriction for the predefined values.
-  <br>The predefined values for the input <code>size</code> are <code>s</code>, <code>m</code>, <code>l</code>, but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class <code>fd-image--xxs</code>.
+<description>The image implementation allows certain extensibility in terms of options for the inputs. <code>fd-image</code>
+  inputs doesn't have a restriction for the predefined values.
+  <br>The predefined values for the input <code>size</code> are <code>s</code>, <code>m</code>, <code>l</code>, but
+  <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
+  <code>fd-image--xxs</code>.
 </description>
 
 <h2>Sizes</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-      <fd-image style="margin-right: 10px;" [size]="'s'" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-      <fd-image style="margin-right: 10px;" [size]="'m'" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-      <fd-image style="margin-right: 10px;" [size]="'l'" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-image style="margin-right: 10px;" [size]="'s'" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+  <fd-image style="margin-right: 10px;" [size]="'m'" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+  <fd-image style="margin-right: 10px;" [size]="'l'" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="imageSizesHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Shapes</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-      <fd-image style="margin-right: 10px;" [size]="'s'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-      <fd-image style="margin-right: 10px;" [size]="'m'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-      <fd-image style="margin-right: 10px;" [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <fd-image style="margin-right: 10px;" [size]="'s'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+  <fd-image style="margin-right: 10px;" [size]="'m'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+  <fd-image style="margin-right: 10px;" [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="imageShapesHtml"></code></pre>
 
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-image [size]="data.properties.size" [circle]="data.properties.isCircle" [photo]="data.properties.photo"></fd-image>
+  <fd-image [size]="data.properties.size" [circle]="data.properties.isCircle" [photo]="data.properties.photo"></fd-image>
 </playground>

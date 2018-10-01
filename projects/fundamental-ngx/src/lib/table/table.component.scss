@@ -1,0 +1,12 @@
+.fd-table {
+    display: table;
+    width: 100%;
+}
+
+.fd-table ::ng-deep fd-table-header {
+    display: contents;
+}
+
+.fd-table ::ng-deep fd-table-body {
+  display: contents;
+}

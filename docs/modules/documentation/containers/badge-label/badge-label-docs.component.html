@@ -1,6 +1,7 @@
 <header>Badge and Label</header>
 <description>
-  <p>Badges and labels are used to indicate status. Colors, generally in combination with text, are used to easily highlight
+  <p>Badges and labels are used to indicate status. Colors, generally in combination with text, are used to easily
+    highlight
     the state of an object.</p>
   <p> - Black is used to indicate default or inactive status </p>
   <p> - Green indicates positive status, used for active, published, approved </p>
@@ -27,14 +28,12 @@
 <separator></separator>
 
 <h2>Default Badge</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-badge>Default</fd-badge>
-    <fd-badge [status]="'success'">Default</fd-badge>
-    <fd-badge [status]="'warning'">Default</fd-badge>
-    <fd-badge [status]="'error'">Default</fd-badge>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-badge>Default</fd-badge>
+  <fd-badge [status]="'success'">Default</fd-badge>
+  <fd-badge [status]="'warning'">Default</fd-badge>
+  <fd-badge [status]="'error'">Default</fd-badge>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="defaultBadgeHtmlType"></code></pre>
 
 <separator></separator>
@@ -42,14 +41,12 @@
 <h2>Pill Badge</h2>
 <p>
   <code>fd-badge--pill</code> modifier can be used to render a pill version of the badge.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-badge [modifier]="'pill'">Default</fd-badge>
-    <fd-badge [status]="'success'" [modifier]="'pill'">Default</fd-badge>
-    <fd-badge [status]="'warning'" [modifier]="'pill'">Default</fd-badge>
-    <fd-badge [status]="'error'" [modifier]="'pill'">Default</fd-badge>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <fd-badge [modifier]="'pill'">Default</fd-badge>
+  <fd-badge [status]="'success'" [modifier]="'pill'">Default</fd-badge>
+  <fd-badge [status]="'warning'" [modifier]="'pill'">Default</fd-badge>
+  <fd-badge [status]="'error'" [modifier]="'pill'">Default</fd-badge>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="pillBadgeHtmlType"></code></pre>
 
 <separator></separator>
@@ -57,66 +54,56 @@
 <h2>Filled Badge</h2>
 <p>
   <code>fd-badge--filled</code> modifier can be used to render a filled version of the badge.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-badge [modifier]="'filled'">Default</fd-badge>
-    <fd-badge [status]="'success'" [modifier]="'filled'">Default</fd-badge>
-    <fd-badge [status]="'warning'" [modifier]="'filled'">Default</fd-badge>
-    <fd-badge [status]="'error'" [modifier]="'filled'">Default</fd-badge>
-  </div>
-</div>
+<component-example [name]="'ex3'">
+  <fd-badge [modifier]="'filled'">Default</fd-badge>
+  <fd-badge [status]="'success'" [modifier]="'filled'">Default</fd-badge>
+  <fd-badge [status]="'warning'" [modifier]="'filled'">Default</fd-badge>
+  <fd-badge [status]="'error'" [modifier]="'filled'">Default</fd-badge>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="filledBadgeHtmlType"></code></pre>
 
 <separator></separator>
 
 <h2>Label</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-label>Default</fd-label>
-    <fd-label [status]="'success'">Success</fd-label>
-    <fd-label [status]="'warning'">Warning</fd-label>
-    <fd-label [status]="'error'">Error</fd-label>
-  </div>
-</div>
+<component-example [name]="'ex4'">
+  <fd-label>Default</fd-label>
+  <fd-label [status]="'success'">Success</fd-label>
+  <fd-label [status]="'warning'">Warning</fd-label>
+  <fd-label [status]="'error'">Error</fd-label>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="labelHtmlType"></code></pre>
 
 <separator></separator>
 
 <h2>Status Indicator Label with build in status icons</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-label [isStatusLabel]="true" [statusIcon]="'available'">Available</fd-label>
-    <fd-label [isStatusLabel]="true" [statusIcon]="'away'">Away</fd-label>
-    <fd-label [isStatusLabel]="true" [statusIcon]="'busy'">Busy</fd-label>
-    <fd-label [isStatusLabel]="true" [statusIcon]="'offline'">Appear Offline</fd-label>
-  </div>
-</div>
+<component-example [name]="'ex5'">
+  <fd-label [isStatusLabel]="true" [statusIcon]="'available'">Available</fd-label>
+  <fd-label [isStatusLabel]="true" [statusIcon]="'away'">Away</fd-label>
+  <fd-label [isStatusLabel]="true" [statusIcon]="'busy'">Busy</fd-label>
+  <fd-label [isStatusLabel]="true" [statusIcon]="'offline'">Appear Offline</fd-label>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="statusIconLabelHtmlType"></code></pre>
 
 <separator></separator>
 
 <h2>Status Indicator Label with any icons</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-label [isStatusLabel]="true" [icon]="'history'">Custom Icon</fd-label>
-    <fd-label [isStatusLabel]="true" [icon]="'message-success'">Success</fd-label>
-    <fd-label [isStatusLabel]="true" [icon]="'message-warning'">Warning</fd-label>
-    <fd-label [isStatusLabel]="true" [icon]="'message-error'">Error</fd-label>
-  </div>
-</div>
+<component-example [name]="'ex6'">
+  <fd-label [isStatusLabel]="true" [icon]="'history'">Custom Icon</fd-label>
+  <fd-label [isStatusLabel]="true" [icon]="'message-success'">Success</fd-label>
+  <fd-label [isStatusLabel]="true" [icon]="'message-warning'">Warning</fd-label>
+  <fd-label [isStatusLabel]="true" [icon]="'message-error'">Error</fd-label>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="anyIconLabelHtmlType"></code></pre>
 
 <separator></separator>
 
 <h2>Status Indicator Label with sementic colors</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-label [isStatusLabel]="true">Default</fd-label>
-    <fd-label [isStatusLabel]="true" [status]="'success'">Success</fd-label>
-    <fd-label [isStatusLabel]="true" [status]="'warning'">Warning</fd-label>
-    <fd-label [isStatusLabel]="true" [status]="'error'">Error</fd-label>
-  </div>
-</div>
+<component-example [name]="'ex7'">
+  <fd-label [isStatusLabel]="true">Default</fd-label>
+  <fd-label [isStatusLabel]="true" [status]="'success'">Success</fd-label>
+  <fd-label [isStatusLabel]="true" [status]="'warning'">Warning</fd-label>
+  <fd-label [isStatusLabel]="true" [status]="'error'">Error</fd-label>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="semanticColorLabelHtmlType"></code></pre>
 
 <separator></separator>

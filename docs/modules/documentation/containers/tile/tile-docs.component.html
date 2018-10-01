@@ -1,8 +1,10 @@
 <header>Tile and Tile Grid</header>
-<description>A Tile component can be used to display information in a simple container format. A collection of tile can be displayed using
+<description>A Tile component can be used to display information in a simple container format. A collection of tile can
+  be displayed using
   <code>fd-tile-grid</code>.
 </description>
-<import module="TileModule" path="fundamental/tile/tile.module"></import>
+<import module="TileModule"
+        path="fundamental/tile/tile.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-tile&gt;</h1>
@@ -29,112 +31,117 @@
 <separator></separator>
 
 <h2>Simple Tile</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <fd-tile>
-        <fd-tile-content>
-          <fd-tile-title>
-            Tile Title
-          </fd-tile-title>
-          <p>Tile Description</p>
-        </fd-tile-content>
-      </fd-tile>
-    </div>
+<component-example [name]="'ex1'">
+  <div class="grid">
+    <fd-tile>
+      <fd-tile-content>
+        <fd-tile-title>
+          Tile Title
+        </fd-tile-title>
+        <p>Tile Description</p>
+      </fd-tile-content>
+    </fd-tile>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleTileHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Tile with
   <code>.fd-media</code> container</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <fd-tile>
-        <fd-tile-media>
-          <span fd-identifier [size]="'m'" [glyph]="'home'" [transparent]="true"></span>
-        </fd-tile-media>
-        <fd-tile-content>
-          <fd-tile-title>
-            Tile Title
-          </fd-tile-title>
-        </fd-tile-content>
-      </fd-tile>
-      <br>
-      <fd-tile>
-        <fd-tile-media>
-          <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-        </fd-tile-media>
-        <fd-tile-content>
-          <fd-tile-title>
-            Tile Title
-          </fd-tile-title>
-          <p>Tile Description</p>
-        </fd-tile-content>
-      </fd-tile>
-      <br>
-      <fd-tile>
-        <fd-tile-media>
-          <fd-image [size]="'m'" [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
-        </fd-tile-media>
-        <fd-tile-content>
-          <fd-tile-title>
-            Tile Title
-          </fd-tile-title>
-        </fd-tile-content>
-      </fd-tile>
-      <br>
-      <fd-tile>
-        <fd-tile-media>
-          <fd-image [size]="'m'" [circle]="true" [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
-        </fd-tile-media>
-        <fd-tile-content>
-          <fd-tile-title>
-            Tile Title
-          </fd-tile-title>
-          <p>Tile Description</p>
-        </fd-tile-content>
-      </fd-tile>
-    </div>
+<component-example [name]="'ex2'">
+  <div class="grid">
+    <fd-tile>
+      <fd-tile-media>
+        <span fd-identifier
+              [size]="'m'"
+              [glyph]="'home'"
+              [transparent]="true"></span>
+      </fd-tile-media>
+      <fd-tile-content>
+        <fd-tile-title>
+          Tile Title
+        </fd-tile-title>
+      </fd-tile-content>
+    </fd-tile>
+    <br>
+    <fd-tile>
+      <fd-tile-media>
+        <span fd-identifier
+              [size]="'m'"
+              [glyph]="'home'"
+              [colorAccent]='3'></span>
+      </fd-tile-media>
+      <fd-tile-content>
+        <fd-tile-title>
+          Tile Title
+        </fd-tile-title>
+        <p>Tile Description</p>
+      </fd-tile-content>
+    </fd-tile>
+    <br>
+    <fd-tile>
+      <fd-tile-media>
+        <fd-image [size]="'m'"
+                  [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
+      </fd-tile-media>
+      <fd-tile-content>
+        <fd-tile-title>
+          Tile Title
+        </fd-tile-title>
+      </fd-tile-content>
+    </fd-tile>
+    <br>
+    <fd-tile>
+      <fd-tile-media>
+        <fd-image [size]="'m'"
+                  [circle]="true"
+                  [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
+      </fd-tile-media>
+      <fd-tile-content>
+        <fd-tile-title>
+          Tile Title
+        </fd-tile-title>
+        <p>Tile Description</p>
+      </fd-tile-content>
+    </fd-tile>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="mediaTileHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Tile with
   <code>.fd-actions</code> container</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <fd-tile>
-        <fd-tile-content>
-          <fd-tile-title>
-            Tile Title
-          </fd-tile-title>
-        </fd-tile-content>
-        <fd-tile-actions>
-          <fd-popover>
-            <fd-popover-control>
-              <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
-            </fd-popover-control>
-            <fd-popover-body>
-              <fd-menu>
-                <fd-menu-list>
-                  <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
-                  <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
-                  <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
-                </fd-menu-list>
-              </fd-menu>
-            </fd-popover-body>
-          </fd-popover>
-        </fd-tile-actions>
-      </fd-tile>
-    </div>
+<component-example [name]="'ex3'">
+  <div class="grid">
+    <fd-tile>
+      <fd-tile-content>
+        <fd-tile-title>
+          Tile Title
+        </fd-tile-title>
+      </fd-tile-content>
+      <fd-tile-actions>
+        <fd-popover>
+          <fd-popover-control>
+            <button fd-button
+                    [fdType]="'secondary'"
+                    [glyph]="'vertical-grip'"></button>
+          </fd-popover-control>
+          <fd-popover-body>
+            <fd-menu>
+              <fd-menu-list>
+                <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
+                <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
+                <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
+              </fd-menu-list>
+            </fd-menu>
+          </fd-popover-body>
+        </fd-popover>
+      </fd-tile-actions>
+    </fd-tile>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="actionsTileHtml"></code></pre>
 
 <separator></separator>
@@ -142,47 +149,43 @@
 <h2>Tile as a Button</h2>
 <p>Add
   <code>[isButton]="true"</code> to rendering a tile as a button</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <p>
-        <fd-tile [isButton]="true">
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-      </p>
-    </div>
+<component-example [name]="'ex4'">
+  <div class="grid">
+    <p>
+      <fd-tile [isButton]="true">
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+    </p>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonTileHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Product Tile</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <p>
-        <fd-product-tile>
-          <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
-          <fd-product-tile-content>
-            <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
-          </fd-product-tile-content>
-        </fd-product-tile>
+<component-example [name]="'ex5'">
+  <div class="grid">
+    <p>
+      <fd-product-tile>
+        <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
+        <fd-product-tile-content>
+          <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
+        </fd-product-tile-content>
+      </fd-product-tile>
 
-        <fd-product-tile [isButton]="true">
-          <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
-          <fd-product-tile-content>
-            <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
-          </fd-product-tile-content>
-        </fd-product-tile>
-      </p>
-    </div>
+      <fd-product-tile [isButton]="true">
+        <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
+        <fd-product-tile-content>
+          <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
+        </fd-product-tile-content>
+      </fd-product-tile>
+    </p>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="productTileHtml"></code></pre>
 
 <separator></separator>
@@ -190,44 +193,45 @@
 <h2>Disabled state</h2>
 <p>Add
   <code>[disabled]="true"</code> for disabled state</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <p>
-        <fd-tile [disabled]="true">
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-      </p>
-      <br>
-      <p>
-        <fd-tile [disabled]="true">
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [transparent]="true"></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-      </p>
-      <br>
-      <p>
-        <fd-product-tile [disabled]="true">
-          <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
-          <fd-product-tile-content>
-            <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
-          </fd-product-tile-content>
-        </fd-product-tile>
-      </p>
-      <br/>
-    </div>
+<component-example [name]="'ex6'">
+  <div class="grid">
+    <p>
+      <fd-tile [disabled]="true">
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+    </p>
+    <br>
+    <p>
+      <fd-tile [disabled]="true">
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [transparent]="true"></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+    </p>
+    <br>
+    <p>
+      <fd-product-tile [disabled]="true">
+        <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
+        <fd-product-tile-content>
+          <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
+        </fd-product-tile-content>
+      </fd-product-tile>
+    </p>
+    <br />
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="disabledTilesHtml"></code></pre>
 
 <separator></separator>
@@ -237,74 +241,90 @@
   <code>fd-tile</code> components in a gird layout. The default is 3-col grid.</p>
 <p>It's also available as a modifier class
   <code>[col]="3"</code> .</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <fd-tile-grid [col]="3">
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-      </fd-tile-grid>
-    </div>
+<component-example [name]="'ex7'">
+  <div class="grid">
+    <fd-tile-grid [col]="3">
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='3'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='3'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='3'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='3'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='3'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='3'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+    </fd-tile-grid>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="defaultGridHtml"></code></pre>
 
 <separator></separator>
@@ -315,124 +335,150 @@
   <code>[columnSpan]="numberOfColumns"</code> </p>
 <p>Use
   <code>[colorAccent]="colorAccentNumber"</code> to add background to the tile.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <div class="grid">
-      <fd-tile-grid [col]="6">
-        <fd-tile [rowSpan]="2" [colorAccent]="7">
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='2'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [transparent]="true"></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='5'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='5'></span>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-media>
-            <fd-image [size]="'m'" [circle]="true" [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
-          </fd-tile-media>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile [colorAccent]='8'>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile>
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-        <fd-tile [columnSpan]="2" [colorAccent]="5">
-          <fd-tile-content>
-            <fd-tile-title>
-              Tile Title
-            </fd-tile-title>
-          </fd-tile-content>
-        </fd-tile>
-      </fd-tile-grid>
-    </div>
+<component-example [name]="'ex8'">
+  <div class="grid">
+    <fd-tile-grid [col]="6">
+      <fd-tile [rowSpan]="2"
+               [colorAccent]="7">
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='2'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [transparent]="true"></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='5'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <span fd-identifier
+                [size]="'m'"
+                [glyph]="'home'"
+                [colorAccent]='5'></span>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-media>
+          <fd-image [size]="'m'"
+                    [circle]="true"
+                    [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
+        </fd-tile-media>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile [colorAccent]='8'>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile>
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+      <fd-tile [columnSpan]="2"
+               [colorAccent]="5">
+        <fd-tile-content>
+          <fd-tile-title>
+            Tile Title
+          </fd-tile-title>
+        </fd-tile-content>
+      </fd-tile>
+    </fd-tile-grid>
   </div>
-</div>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="gridWithHelpersHtml"></code></pre>
 
 <separator></separator>
 
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+<playground [schema]="schema"
+            [schemaInitialValues]="data"
+            (onFormChanges)="onSchemaValues($event)">
   <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
     <div class="fd-tile__content">
       <div class="grid">
         <p>
-          <fd-tile [disabled]="data.properties.disabled" [isButton]="data.properties.isButton" [colorAccent]="data.properties.colorAccent"
-            *ngIf="data.properties.type !== 'product'">
+          <fd-tile [disabled]="data.properties.disabled"
+                   [isButton]="data.properties.isButton"
+                   [colorAccent]="data.properties.colorAccent"
+                   *ngIf="data.properties.type !== 'product'">
 
             <fd-tile-media *ngIf="data.properties.type === 'media'">
               <span *ngIf="data.properties.imageUrl.length === 0 ; else urlTemplate ">
-                <span *ngIf="data.properties.transparent === true ; else colorAccentTemplate" fd-identifier [size]="data.properties.size"
-                  [glyph]="data.properties.glyphs" [transparent]="data.properties.transparent"></span>
+                <span *ngIf="data.properties.transparent === true ; else colorAccentTemplate"
+                      fd-identifier
+                      [size]="data.properties.size"
+                      [glyph]="data.properties.glyphs"
+                      [transparent]="data.properties.transparent"></span>
 
                 <ng-template #colorAccentTemplate>
-                  <span fd-identifier [size]="data.properties.size" [glyph]="data.properties.glyphs" [colorAccent]="data.properties.colorAccent"
-                    [circle]="data.properties.circle"></span>
+                  <span fd-identifier
+                        [size]="data.properties.size"
+                        [glyph]="data.properties.glyphs"
+                        [colorAccent]="data.properties.colorAccent"
+                        [circle]="data.properties.circle"></span>
                 </ng-template>
               </span>
 
               <ng-template #urlTemplate>
-                <fd-image [size]="data.properties.size" [circle]="data.properties.circle" [photo]="data.properties.imageUrl"></fd-image>
+                <fd-image [size]="data.properties.size"
+                          [circle]="data.properties.circle"
+                          [photo]="data.properties.imageUrl"></fd-image>
               </ng-template>
             </fd-tile-media>
 
@@ -446,7 +492,9 @@
             <fd-tile-actions *ngIf="data.properties.hasActions === true">
               <fd-popover>
                 <fd-popover-control>
-                  <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+                  <button fd-button
+                          [fdType]="'secondary'"
+                          [glyph]="'vertical-grip'"></button>
                 </fd-popover-control>
                 <fd-popover-body>
                   <fd-menu>
@@ -461,7 +509,9 @@
             </fd-tile-actions>
           </fd-tile>
 
-          <fd-product-tile [disabled]="data.properties.disabled" [isButton]="data.properties.isButton" *ngIf="data.properties.type === 'product'">
+          <fd-product-tile [disabled]="data.properties.disabled"
+                           [isButton]="data.properties.isButton"
+                           *ngIf="data.properties.type === 'product'">
             <fd-product-tile-media [photo]="data.properties.imageUrl"></fd-product-tile-media>
             <fd-product-tile-content>
               <fd-product-tile-title>{{data.properties.title}}</fd-product-tile-title>

@@ -1,12 +1,15 @@
 <header>Modal</header>
-<description>The modal is used as a container to be displayed in response to a action. It is commonly used to collect simple information
+<description>The modal is used as a container to be displayed in response to a action. It is commonly used to collect
+  simple information
   with a short form, to get confirmation or display contextual information that does not require a page.</description>
 <import module="ModalModule" path="fundamental/modal/modal.module"></import>
 <separator></separator>
 
-The Modal component utilizes a singleton ModalService to handle opening/closing of the modal. In your component, you'll need
+The Modal component utilizes a singleton ModalService to handle opening/closing of the modal. In your component, you'll
+need
 to create a method that calls ModalService's open() function. First, import the service with
-<code>import {{ '{' }} ModalService } from 'fundamental-ngx';</code>. Then inject the service into your component's constructor with
+<code>import {{ '{' }} ModalService } from 'fundamental-ngx';</code>. Then inject the service into your component's
+constructor with
 <code>private modalService: ModalService</code>. Then you'll need to call
 <code>this.modalService.open(modalName)</code>. Use
 <code>this.modalService.close()</code> to close the modal.
@@ -15,88 +18,50 @@ to create a method that calls ModalService's open() function. First, import the 
 <h1>&lt;fd-modal&gt;</h1>
 
 <h2>Informational Modal</h2>
-<p>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user have to
+<p>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user
+  have to
   acknowledge the information, actively, by clicking a button or closing the Modal.
 </p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <ng-template #informationalModal>
-      <fd-modal>
-        <fd-modal-header>
-          Modal Header/Title
-        </fd-modal-header>
-        <fd-modal-body>
-          Modal Body
-        </fd-modal-body>
-      </fd-modal>
-    </ng-template>
-    <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <ng-template #informationalModal>
+    <fd-modal>
+      <fd-modal-header>
+        Modal Header/Title
+      </fd-modal-header>
+      <fd-modal-body>
+        Modal Body
+      </fd-modal-body>
+    </fd-modal>
+  </ng-template>
+  <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="informationalModalHtml"></code></pre>
 <pre><code mwlHighlightJs [language]="'typescript'" [source]="informationalModalJs"></code></pre>
 
 <separator></separator>
 
 <h2>Confirmation Modal</h2>
-<p>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two buttons
+<p>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two
+  buttons
   at the bottom. With the “positive” path always been the primary button.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <ng-template #confirmationModal let-c="close">
-      <fd-modal>
-        <fd-modal-header>
-          Modal Header/Title
-        </fd-modal-header>
-        <fd-modal-body>
-          Modal Body
-        </fd-modal-body>
-        <fd-modal-footer>
-          <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
-          <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
-        </fd-modal-footer>
-      </fd-modal>
-    </ng-template>
-    <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
-    <separator></separator>
-    <span>{{confirmationReason}}</span>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <ng-template #confirmationModal let-c="close">
+    <fd-modal>
+      <fd-modal-header>
+        Modal Header/Title
+      </fd-modal-header>
+      <fd-modal-body>
+        Modal Body
+      </fd-modal-body>
+      <fd-modal-footer>
+        <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
+        <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
+      </fd-modal-footer>
+    </fd-modal>
+  </ng-template>
+  <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
+  <separator></separator>
+  <span>{{confirmationReason}}</span>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="confirmationModalHtml"></code></pre>
 <pre><code mwlHighlightJs [language]="'typescript'" [source]="confirmationModalJs"></code></pre>
-
-<!--
-<separator></separator>
-
-<h2>Form Modal</h2>
-<p>Used to collect simple information from the user. Please use with care and don’t include more than five inputs on a modal to avoid scrolling inside the modal.</p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <ng-template #formModal let-c="close">
-      <fd-modal>
-        <fd-modal-header>
-          Modal Header/Title
-        </fd-modal-header>
-        <fd-modal-body>
-          <div class="fd-form__group">
-            <div class="fd-form__item">
-              <label class="fd-form__label is-required" for="input-2">Email*</label>
-              <input class="fd-form__control" type="text" id="input-2">
-            </div>
-          </div>
-        </fd-modal-body>
-        <fd-modal-footer>
-          <button fd-button (click)="c('Cancel')" [fdType]="'secondary'">Cancel</button>
-          <button fd-button (click)="c('Invite')" [fdType]="'main'">Invite</button>
-        </fd-modal-footer>
-      </fd-modal>
-    </ng-template>
-    <button fd-button (click)="openModal(formModal)">Launch Demo</button>
-    <separator></separator>
-    <span>{{reason}}</span>
-  </div>
-</div>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="formModalHtml"></code></pre>
-
-<separator></separator>
--->

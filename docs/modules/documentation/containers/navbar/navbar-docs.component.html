@@ -1,6 +1,8 @@
 <header>Navigation Bar</header>
-<description>The navigation bar (Navbar) component offers a similar navigation approach between Hybris applications. It allows for branding,
-  application groupings, access to a left navigation, switch between applications, contexts and access tooling such as search
+<description>The navigation bar (Navbar) component offers a similar navigation approach between Hybris applications. It
+  allows for branding,
+  application groupings, access to a left navigation, switch between applications, contexts and access tooling such as
+  search
   or a users’ profile. </description>
 <import module="NavbarModule" path="fundamental/navbar/navbar.module"></import>
 
@@ -24,46 +26,45 @@
 <separator></separator>
 <h2>Navbar</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-navbar>
-      <div fd-navbar-group [position]="'left'">
-        <div class="fd-global-nav__side-menu">
-          <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'menu2'" aria-label="BUTTON_LABEL"></button>
-        </div>
-        <div class="fd-global-nav__logo fd-has-margin-left-none"></div>
-        <div class="fd-global-nav__product-name">
-          Product Name
-        </div>
+<component-example [name]="'ex1'">
+  <fd-navbar>
+    <div fd-navbar-group [position]="'left'">
+      <div class="fd-global-nav__side-menu">
+        <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'menu2'" aria-label="BUTTON_LABEL"></button>
+      </div>
+      <div class="fd-global-nav__logo fd-has-margin-left-none"></div>
+      <div class="fd-global-nav__product-name">
+        Product Name
+      </div>
+    </div>
+
+    <div fd-navbar-group [hasLaunchpad]="true">
+      <button fd-button [fdType]="'secondary'" [size]="'l'" aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true">Suite
+        Name</button>
+    </div>
+
+    <div fd-navbar-group [position]="'right'">
+      <div fd-navbar-context-menu>
+        <fd-popover [isDropdown]="true" [btnType]="'secondary'">
+          Context Switcher
+          <fd-popover-body>
+            <fd-menu>
+              <fd-menu-list>
+                <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
+                <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
+                <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
+              </fd-menu-list>
+            </fd-menu>
+          </fd-popover-body>
+        </fd-popover>
       </div>
 
-      <div fd-navbar-group [hasLaunchpad]="true">
-        <button fd-button [fdType]="'secondary'" [size]="'l'" aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true">Suite Name</button>
+      <div fd-navbar-actions>
+        <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'search'" aria-label="BUTTON_LABEL"></button>
+        <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'action-settings'" aria-label="BUTTON_LABEL"></button>
+        <span fd-identifier [size]="'s'" [circle]="true">WW</span>
       </div>
-
-      <div fd-navbar-group [position]="'right'">
-        <div fd-navbar-context-menu>
-          <fd-popover [isDropdown]="true" [btnType]="'secondary'">
-            Context Switcher
-            <fd-popover-body>
-              <fd-menu>
-                <fd-menu-list>
-                  <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
-                  <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
-                  <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
-                </fd-menu-list>
-              </fd-menu>
-            </fd-popover-body>
-          </fd-popover>
-        </div>
-
-        <div fd-navbar-actions>
-          <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'search'" aria-label="BUTTON_LABEL"></button>
-          <button fd-button [fdType]="'secondary'" [size]="'l'" [glyph]="'action-settings'" aria-label="BUTTON_LABEL"></button>
-          <span fd-identifier [size]="'s'" [circle]="true">WW</span>
-        </div>
-      </div>
-    </fd-navbar>
-  </div>
-</div>
+    </div>
+  </fd-navbar>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="navbarHtml"></code></pre>

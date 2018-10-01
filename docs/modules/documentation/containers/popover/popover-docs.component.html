@@ -1,7 +1,11 @@
 <header>Popover</header>
-<description>The popover is a wrapping component that accepts a "control" as well as a "body". A control can be anything that you want to trigger the interaction from. The body will be the contents of what you reveal on the page after triggering the popover. When paired with the menu component, the popover is commonly used as the interaction/wrapping component for composing "dropdowns", "contextual menus", "mega menus", etc. <br />
+<description>The popover is a wrapping component that accepts a "control" as well as a "body". A control can be
+  anything that you want to trigger the interaction from. The body will be the contents of what you reveal on the page
+  after triggering the popover. When paired with the menu component, the popover is commonly used as the
+  interaction/wrapping component for composing "dropdowns", "contextual menus", "mega menus", etc. <br />
 
-As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one popover should close all others to prevent multiple layers and collisions of several popovers.
+  As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one popover
+  should close all others to prevent multiple layers and collisions of several popovers.
 </description>
 
 <import module="PopoverModule" path="fundamental/popover/popover.module"></import>
@@ -21,72 +25,70 @@ As a general rule, it is suggested that one popover be revealed on the page at a
 <separator></separator>
 
 <h2>Popover Example</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-popover>
-      <fd-popover-control>
-        <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
-      </fd-popover-control>
-      <fd-popover-body>
-        <fd-menu>
-          <fd-menu-list>
-            <fd-menu-item [url]="'#'">
-              Option 1
-            </fd-menu-item>
-            <fd-menu-item [url]="'#'">
-              Option 2
-            </fd-menu-item>
-            <fd-menu-item [url]="'#'">
-              Option 3
-            </fd-menu-item>
-          </fd-menu-list>
-        </fd-menu>
-      </fd-popover-body>
-    </fd-popover>
+<component-example [name]="'ex1'">
+  <fd-popover>
+    <fd-popover-control>
+      <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+    </fd-popover-control>
+    <fd-popover-body>
+      <fd-menu>
+        <fd-menu-list>
+          <fd-menu-item [url]="'#'">
+            Option 1
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 2
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 3
+          </fd-menu-item>
+        </fd-menu-list>
+      </fd-menu>
+    </fd-popover-body>
+  </fd-popover>
 
-    <fd-popover>
-      <fd-popover-control>
-        <fd-icon [glyph]="'menu2'" [size]="'l'"></fd-icon>
-      </fd-popover-control>
-      <fd-popover-body>
-        <fd-menu>
-          <fd-menu-list>
-            <fd-menu-item [url]="'#'">
-              Option 1
-            </fd-menu-item>
-            <fd-menu-item [url]="'#'">
-              Option 2
-            </fd-menu-item>
-            <fd-menu-item [url]="'#'">
-              Option 3
-            </fd-menu-item>
-          </fd-menu-list>
-        </fd-menu>
-      </fd-popover-body>
-    </fd-popover>
+  <fd-popover>
+    <fd-popover-control>
+      <fd-icon [glyph]="'menu2'" [size]="'l'"></fd-icon>
+    </fd-popover-control>
+    <fd-popover-body>
+      <fd-menu>
+        <fd-menu-list>
+          <fd-menu-item [url]="'#'">
+            Option 1
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 2
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 3
+          </fd-menu-item>
+        </fd-menu-list>
+      </fd-menu>
+    </fd-popover-body>
+  </fd-popover>
 
-    <fd-popover>
-      <fd-popover-control>
-        <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]='3'></span>
-      </fd-popover-control>
-      <fd-popover-body>
-        <fd-menu>
-          <fd-menu-list>
-            <fd-menu-item [url]="'#'">
-              Option 1
-            </fd-menu-item>
-            <fd-menu-item [url]="'#'">
-              Option 2
-            </fd-menu-item>
-            <fd-menu-item [url]="'#'">
-              Option 3
-            </fd-menu-item>
-          </fd-menu-list>
-        </fd-menu>
-      </fd-popover-body>
-    </fd-popover>
-  </div>
-</div>
+  <fd-popover>
+    <fd-popover-control>
+      <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]='3'></span>
+    </fd-popover-control>
+    <fd-popover-body>
+      <fd-menu>
+        <fd-menu-list>
+          <fd-menu-item [url]="'#'">
+            Option 1
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 2
+          </fd-menu-item>
+          <fd-menu-item [url]="'#'">
+            Option 3
+          </fd-menu-item>
+        </fd-menu-list>
+      </fd-menu>
+    </fd-popover-body>
+  </fd-popover>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="popoverExampleHtml"></code></pre>
 
 <style>
