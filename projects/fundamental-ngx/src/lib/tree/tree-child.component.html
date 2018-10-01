@@ -1,7 +1,17 @@
-<li #treeChild class="fd-tree__item" role="treeitem">
+<li #treeChild
+    class="fd-tree__item"
+    role="treeitem">
   <div class="fd-tree__row">
-    <div *ngFor="let cell of row.rowData; let i = index" [attr.data-index]="i" class="fd-tree__col" [ngClass]="{'fd-tree__col--control': i === 0}">
-      <button (click)="toggleDisplayChildren()" *ngIf="row.children && i === 0" class="fd-tree__control" aria-label="Expand" [attr.aria-pressed]="!hideChildren"></button>
+    <div *ngFor="let cell of row.rowData; let i = index"
+         [attr.data-index]="i"
+         class="fd-tree__col"
+         [ngClass]="{'fd-tree__col--control': i === 0}">
+      <button (click)="toggleDisplayChildren()"
+              tabindex="0"
+              *ngIf="row.children && i === 0"
+              class="fd-tree__control"
+              aria-label="Expand"
+              [attr.aria-pressed]="!hideChildren"></button>
       <ng-container *ngIf="typeOf(cell) === 'string'">
         {{cell}}
       </ng-container>
@@ -9,11 +19,13 @@
         <ng-container *ngIf="cell.linkUrl">
           <ng-container *ngIf="cell.displayText">
             <!-- link with display text -->
-            <a [attr.href]="cell.linkUrl" class="fd-has-font-weight-semi">{{cell.displayText}}</a>
+            <a [attr.href]="cell.linkUrl"
+               class="fd-has-font-weight-semi">{{cell.displayText}}</a>
           </ng-container>
           <ng-container *ngIf="!cell.displayText">
             <!-- link without display text -->
-            <a [attr.href]="cell.linkUrl" class="fd-has-font-weight-semi">{{cell.linkUrl}}</a>
+            <a [attr.href]="cell.linkUrl"
+               class="fd-has-font-weight-semi">{{cell.linkUrl}}</a>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="!cell.linkUrl">
@@ -25,13 +37,17 @@
       <ng-container *ngIf="displayTreeActions">
         <fd-popover>
           <fd-popover-control>
-            <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+            <button fd-button
+                    [fdType]="'secondary'"
+                    [glyph]="'vertical-grip'"></button>
           </fd-popover-control>
           <fd-popover-body>
             <fd-menu>
               <fd-menu-list>
-                <fd-menu-item (click)="editTreeItem(row)">Edit</fd-menu-item>
-                <fd-menu-item (click)="deleteTreeItem(row)">Delete</fd-menu-item>
+                <fd-menu-item tabindex="0"
+                              (click)="editTreeItem(row)">Edit</fd-menu-item>
+                <fd-menu-item tabindex="0"
+                              (click)="deleteTreeItem(row)">Delete</fd-menu-item>
               </fd-menu-list>
             </fd-menu>
           </fd-popover-body>
@@ -39,7 +55,13 @@
       </ng-container>
     </div>
   </div>
-  <ul *ngIf="row.children && row.children.length > 0" [ngClass]="{'is-hidden': hideChildren}" class="fd-tree__group" role="group">
-    <fd-tree-child *ngFor="let child of row.children" [displayTreeActions]="displayTreeActions" [row]="child" [ngClass]="child.sublevelClass"></fd-tree-child>
+  <ul *ngIf="row.children && row.children.length > 0"
+      [ngClass]="{'is-hidden': hideChildren}"
+      class="fd-tree__group"
+      role="group">
+    <fd-tree-child *ngFor="let child of row.children"
+                   [displayTreeActions]="displayTreeActions"
+                   [row]="child"
+                   [ngClass]="child.sublevelClass"></fd-tree-child>
   </ul>
 </li>

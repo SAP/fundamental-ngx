@@ -1,10 +1,17 @@
-<a *ngIf="url" class="fd-breadcrumb__link" [attr.href]="url ? [url] : []">
+<a *ngIf="url"
+   class="fd-breadcrumb__link"
+   [attr.href]="url ? [url] : []"
+   tabindex="0">
   <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
 </a>
-<a *ngIf="routerLink" class="fd-breadcrumb__link" [ngStyle]="{'cursor': getCursor() }">
+<a *ngIf="routerLink"
+   class="fd-breadcrumb__link"
+   [ngStyle]="{'cursor': getCursor() }"
+   tabindex="0">
   <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
 </a>
-<span *ngIf="!url && !routerLink" [ngStyle]="{'cursor': getCursor() }">
+<span *ngIf="!url && !routerLink"
+      [ngStyle]="{'cursor': getCursor() }">
   <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
 </span>
 <ng-template #tempOutlet>

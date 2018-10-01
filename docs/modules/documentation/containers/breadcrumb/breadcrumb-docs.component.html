@@ -6,7 +6,8 @@
   pages
   at that same level.
 </description>
-<import module="BreadcrumbModule" path="fundamental/breadcrumb/breadcrumb.module"></import>
+<import module="BreadcrumbModule"
+        path="fundamental/breadcrumb/breadcrumb.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-breadcrumb&gt;</h1>
@@ -19,15 +20,16 @@
 <br>
 <span>
   Instead of the [url] property, you may use any RouterLink properties on each breadcrumb item. See the official <a
-    href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.
+     href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.
 </span>
 
 <separator></separator>
 
 <component-example [name]="'ex1'">
   <fd-breadcrumb>
-    <fd-breadcrumb-item [url]="'#'">Breakcrumb Level1</fd-breadcrumb-item>
-    <fd-breadcrumb-item [routerLink]="'#'" [queryParams]="'#'">Breakcrumb Level2</fd-breadcrumb-item>
+    <fd-breadcrumb-item [routerLink]="'#'">Breakcrumb Level1</fd-breadcrumb-item>
+    <fd-breadcrumb-item [routerLink]="'#'"
+                        [queryParams]="'#'">Breakcrumb Level2</fd-breadcrumb-item>
     <fd-breadcrumb-item>Breakcrumb Level3</fd-breadcrumb-item>
   </fd-breadcrumb>
 </component-example>
