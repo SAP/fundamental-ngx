@@ -24,7 +24,7 @@
 </span>
 
 <separator></separator>
-
+<span>An Example using <b>routerLink</b></span>
 <component-example [name]="'ex1'">
   <fd-breadcrumb>
     <fd-breadcrumb-item [routerLink]="'#'">Breakcrumb Level1</fd-breadcrumb-item>
@@ -33,4 +33,15 @@
     <fd-breadcrumb-item>Breakcrumb Level3</fd-breadcrumb-item>
   </fd-breadcrumb>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml1"></code></pre>
+<separator></separator>
+
+<span>An Example usint <b>url</b></span>
+<component-example [name]="'ex2'">
+  <fd-breadcrumb>
+    <fd-breadcrumb-item [url]="'/docs/breadcrumb'">Breakcrumb Level1</fd-breadcrumb-item>
+    <fd-breadcrumb-item [url]="'/docs/inputGroup'">Breakcrumb Level2</fd-breadcrumb-item>
+    <fd-breadcrumb-item>Breakcrumb Level3</fd-breadcrumb-item>
+  </fd-breadcrumb>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml2"></code></pre>

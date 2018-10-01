@@ -5,12 +5,17 @@ import { Component } from '@angular/core';
     templateUrl: './breadcrumb-docs.component.html'
 })
 export class BreadcrumbDocsComponent {
-    breadcrumbHtml =
-        '<fd-breadcrumb>\n' +
-        '  <fd-breadcrumb-item [routerLink]="\'#\'">Link Text</fd-breadcrumb-item>\n' +
-        '  <fd-breadcrumb-item [routerLink]="\'#\'" [queryParams]="\'#\'">Link Text</fd-breadcrumb-item>\n' +
-        '  <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>\n' +
-        '</fd-breadcrumb>\n';
+    breadcrumbHtml1 = `<fd-breadcrumb>
+    <fd-breadcrumb-item [routerLink]="\'#\'">Link Text</fd-breadcrumb-item>
+    <fd-breadcrumb-item [routerLink]="\'#\'" [queryParams]="\'#\'">Link Text</fd-breadcrumb-item>
+    <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>
+</fd-breadcrumb>`;
+
+    breadcrumbHtml2 = `<fd-breadcrumb>
+    <fd-breadcrumb-item [url]="'/docs/breadcrumb'">Link Text</fd-breadcrumb-item>
+    <fd-breadcrumb-item [url]="'/docs/inputGroup'" >Link Text</fd-breadcrumb-item>
+    <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>
+</fd-breadcrumb>`;
 
     constructor() {}
 }
