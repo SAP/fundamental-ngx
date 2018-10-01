@@ -30,15 +30,18 @@
     </li>
   </ul>
 
-  <fd-input-group-search [disabled]="false"
-                         [(ngModel)]="search"
-                         placeholder="Search component"></fd-input-group-search>
 
   <ul class="nav"
       id="tn-components-selector">
+    <li class="side-nav__search">
+      <fd-input-group-search [disabled]="false"
+                             [(ngModel)]="search"
+                             placeholder="Search component"></fd-input-group-search>
+
+    </li>
     <li class="side-nav__headers">Components</li>
     <ng-container *ngFor="let component of components">
-      <li *ngIf="search === '' || component.url.toUpperCase().indexOf(search.toUpperCase()) != -1">
+      <li *ngIf="search === '' || component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 || component.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
         <a class="nav-item"
            [routerLink]="['/docs', component.url]"
            routerLinkActive="nav-item--active">{{
