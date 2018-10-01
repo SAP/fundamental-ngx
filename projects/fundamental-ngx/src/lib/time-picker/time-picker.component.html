@@ -1,5 +1,7 @@
 <div class="fd-time-picker">
-  <fd-popover [isOpen]="isOpen" [isTimePicker]="true" (popoverClosed)="popoverClosed()">
+  <fd-popover [isOpen]="isOpen"
+              [isTimePicker]="true"
+              (popoverClosed)="popoverClosed()">
     <fd-popover-control>
       <!--fd-input-group *ngIf="!meridian" (timeInputChanged)="timeInputChanged($event)" [type]="'time'"
                       [placement]="'after'" [button]="true" (click)="inputGroupClicked($event)" [glyph]="'fob-watch'"
@@ -9,19 +11,28 @@
                       [placement]="'after'" [button]="true" (click)="inputGroupClicked($event)" [glyph]="'fob-watch'"
                       [placeholder]="getPlaceholder()" [inputText]="getFormattedTime()" [disabled]="disabled"
                       (addOnButtonClicked)="addOnButtonClicked($event)"></fd-input-group-->
-      <div class="fd-input-group fd-input-group--after" (click)="inputGroupClicked($event)">
+      <div class="fd-input-group fd-input-group--after"
+           (click)="inputGroupClicked($event)">
         <input value="{{getFormattedTime()}}"
-          (change)="timeInputChanged($event.currentTarget.value)"
-          [disabled]="disabled"
-          type="text"
-          placeholder="{{getPlaceholder()}}">
+               (change)="timeInputChanged($event.currentTarget.value)"
+               [disabled]="disabled"
+               type="text"
+               tabindex="0"
+               placeholder="{{getPlaceholder()}}">
         <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon--after">
-          <button [disabled]="disabled" class="fd-button--icon fd-button--secondary sap-icon--fob-watch"></button>
+          <button [disabled]="disabled"
+                  tabindex="0"
+                  class="fd-button--icon fd-button--secondary sap-icon--fob-watch"></button>
         </span>
       </div>
     </fd-popover-control>
     <fd-popover-body>
-      <fd-time [disabled]="disabled" [meridian]="meridian" [time]="getTime()" [period]="period" [spinners]="spinners" [displaySeconds]="displaySeconds"></fd-time>
+      <fd-time [disabled]="disabled"
+               [meridian]="meridian"
+               [time]="getTime()"
+               [period]="period"
+               [spinners]="spinners"
+               [displaySeconds]="displaySeconds"></fd-time>
     </fd-popover-body>
   </fd-popover>
 </div>
