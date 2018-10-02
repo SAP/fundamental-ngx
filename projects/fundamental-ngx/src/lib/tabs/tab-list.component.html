@@ -4,7 +4,6 @@
       *ngFor="let tab of tabs">
     <a role="tab"
        class="fd-tabs__link"
-       tabindex="0"
        [attr.aria-controls]="tab.id"
        [attr.aria-disabled]="tab.disabled"
        [attr.aria-selected]="tab.expanded ? true : null"

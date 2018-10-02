@@ -30,8 +30,10 @@ export interface EmittedDate {
     styleUrls: ['calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-    @Input() dateFromDatePicker: string;
-    @Input() calType: CalendarType = 'single';
+    @Input()
+    dateFromDatePicker: string;
+    @Input()
+    calType: CalendarType = 'single';
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -41,8 +43,10 @@ export class CalendarComponent implements OnInit {
         return false;
     };
 
-    @Output() updateDatePickerInput: EventEmitter<any> = new EventEmitter();
-    @Output() isInvalidDateInput: EventEmitter<any> = new EventEmitter();
+    @Output()
+    updateDatePickerInput: EventEmitter<any> = new EventEmitter();
+    @Output()
+    isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
     invalidDate: boolean = false;
 
@@ -448,6 +452,13 @@ export class CalendarComponent implements OnInit {
         this.calendarYearsList = [];
         this.constructCalendarYearsList();
         this.constructCalendar();
+    }
+
+    onKeypressHandler(event, cell) {
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectDate(cell);
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

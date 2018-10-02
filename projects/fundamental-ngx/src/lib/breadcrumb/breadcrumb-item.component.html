@@ -1,13 +1,11 @@
 <a *ngIf="url"
    class="fd-breadcrumb__link"
-   [attr.href]="url ? [url] : []"
-   tabindex="0">
+   [attr.href]="url ? [url] : []">
   <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
 </a>
 <a *ngIf="routerLink"
    class="fd-breadcrumb__link"
-   [ngStyle]="{'cursor': getCursor() }"
-   tabindex="0">
+   [ngStyle]="{'cursor': getCursor() }">
   <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
 </a>
 <span *ngIf="!url && !routerLink"
