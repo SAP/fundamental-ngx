@@ -3,7 +3,10 @@
        class="fd-popover__control"
        [attr.aria-expanded]="(this.disabled ? false : isOpen)"
        [attr.aria-disabled]="this.disabled"
-       aria-haspopup="true">
+       tabindex="0"
+       role="button"
+       aria-haspopup="true"
+       (keypress)="onKeypressHandler($event)">
     <ng-content select="fd-popover-control"></ng-content>
   </div>
 
@@ -11,7 +14,6 @@
     <div class="fd-popover__control">
       <button fd-button
               *ngIf="isDropdown"
-              tabindex="0"
               [ngClass]='(btnType ? " fd-button--" + btnType : "fd-button--toolbar") + (glyph ? " sap-icon--" + glyph : "") + (size ? " fd-button--" + size : "") + (this.disabled ? " is-disabled" : "")'
               [attr.aria-expanded]="(this.disabled ? false : isOpen)"
               [attr.aria-disabled]="this.disabled"

@@ -6,15 +6,23 @@ import { HashService } from '../utils/hash.service';
     templateUrl: './popover.component.html'
 })
 export class PopoverComponent implements OnInit {
-    @Input() disabled: boolean = false;
-    @Input() isDropdown: boolean = false;
-    @Input() isTimePicker: boolean = false;
-    @Input() glyph: string;
-    @Input() size: string;
-    @Input() btnType: string = '';
-    @Input() isOpen: boolean = false;
+    @Input()
+    disabled: boolean = false;
+    @Input()
+    isDropdown: boolean = false;
+    @Input()
+    isTimePicker: boolean = false;
+    @Input()
+    glyph: string;
+    @Input()
+    size: string;
+    @Input()
+    btnType: string = '';
+    @Input()
+    isOpen: boolean = false;
 
-    @Output() popoverClosed: EventEmitter<any> = new EventEmitter<any>();
+    @Output()
+    popoverClosed: EventEmitter<any> = new EventEmitter<any>();
 
     id: string;
 
@@ -28,6 +36,18 @@ export class PopoverComponent implements OnInit {
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
         this.close();
+    }
+
+    onKeypressHandler(event) {
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            if (!this.isTimePicker) {
+                if (this.isOpen) {
+                    this.popoverClosed.emit();
+                }
+                this.isOpen = !this.isOpen;
+            }
+        }
     }
 
     @HostListener('document:click', ['$event'])
