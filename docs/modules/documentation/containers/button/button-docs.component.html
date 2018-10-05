@@ -47,32 +47,26 @@
 
 <component-example [name]="'ex1'">
   <p>
-    <button fd-button
-            tabindex="0">
+    <button fd-button>
       Primary Button
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'main'">
       Main Button
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'secondary'">
       Secondary Button
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'toolbar'">
       Toolbar Button
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'positive'">
       Positive Button
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'negative'">
       Negative Button
     </button>
@@ -91,26 +85,21 @@
 <component-example [name]="'ex2'">
   <p>
     <button fd-button
-            tabindex="0"
             [size]="'xs'">
       Extra-Small Button
     </button>
     <button fd-button
-            tabindex="0"
             [size]="'s'">
       Small Button
     </button>
     <button fd-button
-            tabindex="0"
             [size]="'compact'">
       Compact Button
     </button>
-    <button fd-button
-            tabindex="0">
+    <button fd-button>
       Normal Button
     </button>
     <button fd-button
-            tabindex="0"
             [size]="'l'">
       Large Button
     </button>
@@ -127,41 +116,33 @@
 <component-example [name]="'ex3'">
   <p>
     <button fd-button
-            tabindex="0"
             [glyph]="'cart'">
       Add to Cart
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'main'"
             [glyph]="'cart'">
       Add to Cart
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'toolbar'"
             [glyph]="'filter'">
       Filter
     </button>
     <button fd-button
-            tabindex="0"
             [fdType]="'positive'"
             [glyph]="'accept'">
       Approve
     </button>
     <button fd-button
-            tabindex="0"
             [glyph]="'cart'"></button>
     <button fd-button
-            tabindex="0"
             [fdType]="'main'"
             [glyph]="'cart'"></button>
     <button fd-button
-            tabindex="0"
             [fdType]="'toolbar'"
             [glyph]="'filter'"></button>
     <button fd-button
-            tabindex="0"
             [fdType]="'positive'"
             [glyph]="'accept'"></button>
   </p>
@@ -177,17 +158,14 @@
 </p>
 <component-example [name]="'ex4'">
   <p>
-    <button fd-button
-            tabindex="0">
+    <button fd-button>
       Normal State
     </button>
     <button fd-button
-            tabindex="0"
             [state]="'selected'">
       Selected State
     </button>
     <button fd-button
-            tabindex="0"
             [state]="'disabled'">
       Disabled State
     </button>
@@ -201,7 +179,6 @@
             [schemaInitialValues]="data"
             (onFormChanges)="onSchemaValues($event)">
   <button fd-button
-          tabindex="0"
           [fdType]="data.properties.type"
           [semantic]="data.properties.semantic"
           [state]="data.properties.state"

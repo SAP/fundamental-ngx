@@ -5,9 +5,18 @@ import { Component, Input } from '@angular/core';
     templateUrl: './side-navigation-link.component.html'
 })
 export class SideNavigationLinkComponent {
-    @Input() url: string;
+    @Input()
+    url: string;
 
-    @Input() hasSublist: boolean;
+    @Input()
+    hasSublist: boolean;
 
     sublistIsOpen: boolean = false;
+
+    onKeypressHandler(event) {
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.sublistIsOpen = !this.sublistIsOpen;
+        }
+    }
 }

@@ -4,7 +4,8 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 @Component({
     selector: 'app-identifier',
-    templateUrl: './identifier-docs.component.html'
+    templateUrl: './identifier-docs.component.html',
+    styleUrls: ['./identifier-docs.component.scss']
 })
 export class IdentifierDocsComponent implements OnInit {
     static schema: any = {

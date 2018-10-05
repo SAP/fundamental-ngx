@@ -1,7 +1,10 @@
 <a class="fd-side-nav__link " 
    [ngClass]="{'has-child': hasSublist === true, 'is-selected': hasSublist === true && sublistIsOpen === true}" 
    [attr.aria-haspopup]="hasSublist"
-   [attr.href]="url ? url : null" 
+   [attr.href]="url ? url : null"
+   role="button"
+   tabindex="0"
+   (keypress)="onKeypressHandler($event)"
    (click)="sublistIsOpen = !sublistIsOpen" 
    [attr.aria-expanded]="sublistIsOpen && hasSublist === true"
    style="cursor: pointer;">

@@ -3,23 +3,19 @@
     <div class="fd-calendar__navigation">
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
-                tabindex="0"
                 aria-label="Previous"
                 (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--secondary fd-button--s"
-                tabindex="0"
                 (click)="openMonthSelection()">{{monthName}}</button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--secondary fd-button--s"
-                tabindex="0"
                 (click)="openYearSelection()">{{year}}</button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
-                tabindex="0"
                 aria-label="Next"
                 (click)="showCalendarYears ? loadNextYearsList() : goToNextMonth()"></button>
       </div>
@@ -33,7 +29,7 @@
             *ngFor="let listYear of calendarYearsList"
             [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
             (click)="selectYear(listYear)">
-          <span class="fd-calendar__text">{{listYear}}</span>
+          <span role="button" tabindex="0" (keypress)="onKeypressYearHandler($event, listYear)" class="fd-calendar__text">{{listYear}}</span>
         </li>
       </ul>
     </div>
@@ -45,7 +41,7 @@
             *ngFor="let monthShortName of monthsShortName, let i=index"
             [ngClass]='(i===todayMonth && year===todayYear ? " fd-calendar__item--current" : "") + (i===selectedMonth ? " is-selected" : "") '
             (click)="selectMonth(i)">
-          <span class="fd-calendar__text">{{monthShortName}}</span>
+          <span role="button" tabindex="0" (keypress)="onKeypressMonthHandler($event, i)" class="fd-calendar__text">{{monthShortName}}</span>
         </li>
       </ul>
     </div>
@@ -76,9 +72,10 @@
                           (cell.today ? " fd-calendar__item--current": "") + 
                           (cell.disabled ? " is-disabled": "") + 
                           (cell.blocked ? " is-blocked": "")'
-                (click)="selectDate(cell)">
+                (click)="selectDate(cell)"
+                (keypress)="onKeypressDayHandler($event, cell)">
               <span class="fd-calendar__text"
-                    tabindex="0">{{cell.day}}</span>
+                    role="button" [attr.tabindex]="cell.disabled ? -1 : 0">{{cell.day}}</span>
             </td>
           </tr>
         </tbody>

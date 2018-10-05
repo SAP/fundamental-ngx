@@ -112,10 +112,6 @@ pre {
         max-width: 65px;
     }
 
-    [class*='fd-identifier'] {
-        margin-right: 20px;
-    }
-
     .fd-product-tile {
         min-width: 30%;
         float: left;
@@ -126,6 +122,10 @@ pre {
         .fd-product-tile {
             margin-right: 0;
         }
+    }
+
+    .fd-tile__content {
+        padding: 20px;
     }
 
     a[aria-disabled='true']:hover,
@@ -163,4 +163,8 @@ pre {
 }
 .hljs-string {
     color: #d14;
+}
+
+.side-nav__search {
+    padding: 10px 10px 0 10px;
 }
