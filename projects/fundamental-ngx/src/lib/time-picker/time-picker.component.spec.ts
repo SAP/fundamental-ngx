@@ -232,4 +232,19 @@ describe('TimePickerComponent', () => {
         retVal = component.getPlaceholder();
         expect(retVal).toBe('hh:mm');
     });
+
+    it('should not format time if hour or minute is null', () => {
+        component.time.second = 1;
+        component.time.minute = 1;
+        component.time.hour = null;
+        let retVal = component.getFormattedTime();
+        expect(retVal).toBeUndefined();
+        component.time.minute = null;
+        retVal = component.getFormattedTime();
+        expect(retVal).toBeUndefined();
+        component.time.hour = 1;
+        component.time.minute = 1;
+        retVal = component.getFormattedTime();
+        expect(retVal).toBeDefined();
+    });
 });
