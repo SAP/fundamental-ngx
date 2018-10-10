@@ -66,15 +66,17 @@ export class TimePickerComponent {
         } else if (this.displaySeconds) {
             formattedSecond = this.time.second;
         }
-        if ((formattedHour || formattedHour === 0) && (formattedMinute || formattedMinute === '00')) {
-            formattedTime = formattedHour + ':' + formattedMinute;
-        }
-        if (formattedSecond || formattedSecond === '00') {
-            formattedTime = formattedTime + ':' + formattedSecond;
-        }
-
-        if (formattedMeridian) {
-            formattedTime = formattedTime + ' ' + formattedMeridian;
+        if (formattedHour || formattedHour === 0) {
+            formattedTime = formattedHour;
+            if (formattedMinute || formattedMinute === '00') {
+                formattedTime = formattedHour + ':' + formattedMinute;
+                if (formattedSecond || formattedSecond === '00') {
+                    formattedTime = formattedTime + ':' + formattedSecond;
+                }
+            }
+            if (formattedMeridian) {
+                formattedTime = formattedTime + ' ' + formattedMeridian;
+            }
         }
 
         return formattedTime;
