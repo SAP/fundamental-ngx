@@ -3,20 +3,22 @@
     <div class="fd-calendar__navigation">
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
-                aria-label="Previous"
+                aria-label="previous month"
                 (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--secondary fd-button--s"
+                aria-label="month selection"
                 (click)="openMonthSelection()">{{monthName}}</button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--secondary fd-button--s"
+                aria-label="year selection"
                 (click)="openYearSelection()">{{year}}</button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
-                aria-label="Next"
+                aria-label="next month"
                 (click)="showCalendarYears ? loadNextYearsList() : goToNextMonth()"></button>
       </div>
     </div>

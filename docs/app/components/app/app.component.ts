@@ -12,6 +12,10 @@ import { filter, pluck } from 'rxjs/operators';
 export class AppComponent implements OnInit {
     url$: Observable<string>;
 
+    goToGithub() {
+        window.location.href = 'https://github.com/SAP/fundamental-ngx';
+    }
+
     constructor(private router: Router) {}
 
     ngOnInit() {

@@ -47,6 +47,10 @@
     padding: 13px 40px;
 }
 
+.nav-item:focus {
+    text-decoration: underline;
+}
+
 .side-nav__headers {
     color: #424e5a;
     padding: 15px 20px;
@@ -56,6 +60,7 @@
 }
 
 .nav-item:hover,
+.nav-item:focus,
 .nav-item--active {
     color: #424e5a;
     border-left: 6px solid #2fd0c8;
@@ -73,4 +78,5 @@
     min-width: 1024px;
     max-width: 1600px;
     width: 80%;
+    outline: 0;
 }

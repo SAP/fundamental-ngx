@@ -168,3 +168,12 @@ pre {
 .side-nav__search {
     padding: 10px 10px 0 10px;
 }
+
+.skip-navigation {
+    position: absolute;
+    left: -5000px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

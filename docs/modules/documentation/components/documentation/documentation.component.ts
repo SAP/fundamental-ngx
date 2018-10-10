@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
     templateUrl: './documentation.component.html'
 })
 export class DocumentationComponent implements OnInit {
+
+    @ViewChild('content') contentElRef: ElementRef;
+
     components = [
         { url: 'action-bar', name: 'Action Bar' },
         { url: 'alert', name: 'Alert' },
@@ -58,7 +61,20 @@ export class DocumentationComponent implements OnInit {
         });
     }
 
-    selectComponent(component: string) {
-        this.router.navigate(['/docs', component]);
+    selectComponent(component) {
+        this.router.navigate(['/docs', component]).then(() => {
+            this.skipNavClicked();
+        });
+    }
+
+    skipNavClicked() {
+        this.contentElRef.nativeElement.focus();
+    }
+
+    onKeypressHandler(url, event) {
+        if (event.code === 'Enter') {
+            event.preventDefault();
+            this.selectComponent(url);
+        }
     }
 }

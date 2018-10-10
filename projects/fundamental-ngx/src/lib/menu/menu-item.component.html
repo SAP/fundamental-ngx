@@ -1,4 +1,4 @@
-<li>
+<div>
   <a *ngIf="url" class="fd-menu__item" [attr.href]="url ? [url] : []">
     <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
   </a>
@@ -11,4 +11,4 @@
   <ng-template #tempOutlet>
     <ng-content></ng-content>
   </ng-template>
-</li>
+</div>

@@ -14,7 +14,7 @@ export class SideNavigationLinkComponent {
     sublistIsOpen: boolean = false;
 
     onKeypressHandler(event) {
-        if (event.code === 'Space' || event.code === 'Enter') {
+        if (event.code === 'Enter') {
             event.preventDefault();
             this.sublistIsOpen = !this.sublistIsOpen;
         }

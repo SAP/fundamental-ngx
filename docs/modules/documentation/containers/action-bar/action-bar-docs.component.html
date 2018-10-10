@@ -23,7 +23,7 @@
 <component-example [name]="'ex1'">
   <fd-action-bar>
     <fd-action-bar-back>
-      <button fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
+      <button aria-label="back" fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
     </fd-action-bar-back>
     <fd-action-bar-header>
       <fd-action-bar-title>Page Title</fd-action-bar-title>
@@ -76,7 +76,7 @@
     <fd-action-bar-actions>
       <fd-popover>
         <fd-popover-control>
-          <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+          <button aria-label="contextual menu" fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
         </fd-popover-control>
         <fd-popover-body>
           <fd-menu>
@@ -113,7 +113,7 @@
   <fd-action-bar-mobile>
     <fd-action-bar>
       <fd-action-bar-back>
-        <button fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
+        <button aria-label="back" fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
       </fd-action-bar-back>
       <fd-action-bar-header>
         <fd-action-bar-title>Page Title</fd-action-bar-title>
@@ -122,7 +122,7 @@
       <fd-action-bar-actions>
         <fd-popover>
           <fd-popover-control>
-            <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+            <button aria-label="contextual menu" fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
           </fd-popover-control>
           <fd-popover-body>
             <fd-menu>
