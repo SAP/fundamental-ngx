@@ -72,7 +72,7 @@ export class DocumentationComponent implements OnInit {
     }
 
     onKeypressHandler(url, event) {
-        if (event.code === 'Enter') {
+        if (event.code === 'Enter' || event.code === 'Space') {
             event.preventDefault();
             this.selectComponent(url);
         }

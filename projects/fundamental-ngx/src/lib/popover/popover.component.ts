@@ -92,6 +92,7 @@ export class PopoverComponent implements OnInit, AfterViewInit {
          check if the popover control contents have a tab index, and if not, add tabindex, role="button", and keypress handler (see HTML)
          */
         if (
+            this.popoverControl &&
             this.popoverControl.nativeElement &&
             this.popoverControl.nativeElement.children &&
             this.popoverControl.nativeElement.children[0] &&
