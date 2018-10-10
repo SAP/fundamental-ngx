@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { BreadcrumbDirective } from './breadcrumb.directive';
-import { BreadcrumbItemComponent } from './breadcrumb-item.component';
+import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
+import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
 
 @NgModule({
     imports: [CommonModule, RouterModule],
-    exports: [BreadcrumbDirective, BreadcrumbItemComponent],
-    declarations: [BreadcrumbDirective, BreadcrumbItemComponent]
+    exports: [BreadcrumbDirective, BreadcrumbItemDirective, BreadcrumbLinkDirective],
+    declarations: [BreadcrumbDirective, BreadcrumbItemDirective, BreadcrumbLinkDirective]
 })
 export class BreadcrumbModule {}

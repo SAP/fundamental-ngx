@@ -8,9 +8,11 @@ import { Pagination } from './pagination.model';
     providers: [PaginationService]
 })
 export class PaginationComponent implements OnChanges {
-    @Input() pagination: Pagination;
+    @Input()
+    pagination: Pagination;
 
-    @Output() selected = new EventEmitter<number>();
+    @Output()
+    selected = new EventEmitter<number>();
 
     pages: number[];
 
@@ -22,6 +24,13 @@ export class PaginationComponent implements OnChanges {
 
     isLastPage(): boolean {
         return this.pagination.currentPage === this.paginationService.getTotalPages(this.pagination);
+    }
+
+    onKeypressHandler(page: number, $event: KeyboardEvent) {
+        if ($event.code === 'Space' || $event.code === 'Enter') {
+            $event.preventDefault();
+            this.goToPage(page);
+        }
     }
 
     goToPage(page: number, $event?: MouseEvent) {

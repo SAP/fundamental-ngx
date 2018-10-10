@@ -32,7 +32,7 @@
     min-width: 18rem;
     background-color: #f1f3f6;
     height: 100%;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 .nav {
@@ -69,8 +69,8 @@
 }
 
 .content-margin {
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 40px 40px 80px 60px;
+    min-width: 1024px;
+    max-width: 1600px;
+    width: 80%;
 }

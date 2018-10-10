@@ -5,9 +5,15 @@ import { Component, Input } from '@angular/core';
     templateUrl: './mega-menu-link.component.html'
 })
 export class MegaMenuLinkComponent {
-    @Input() url: string;
-
-    @Input() hasSublist: boolean;
+    @Input()
+    hasSublist: boolean;
 
     sublistIsOpen = false;
+
+    onKeypressHandler(event) {
+        if (this.hasSublist && (event.code === 'Space' || event.code === 'Enter')) {
+            event.preventDefault();
+            this.sublistIsOpen = !this.sublistIsOpen;
+        }
+    }
 }

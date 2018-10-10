@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output, HostListener, ElementRef, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    HostListener,
+    ElementRef,
+    SimpleChanges,
+    OnChanges
+} from '@angular/core';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -29,9 +39,11 @@ export interface EmittedDate {
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
-    @Input() dateFromDatePicker: string;
-    @Input() calType: CalendarType = 'single';
+export class CalendarComponent implements OnInit, OnChanges {
+    @Input()
+    dateFromDatePicker: string;
+    @Input()
+    calType: CalendarType = 'single';
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -41,8 +53,10 @@ export class CalendarComponent implements OnInit {
         return false;
     };
 
-    @Output() updateDatePickerInput: EventEmitter<any> = new EventEmitter();
-    @Output() isInvalidDateInput: EventEmitter<any> = new EventEmitter();
+    @Output()
+    updateDatePickerInput: EventEmitter<any> = new EventEmitter();
+    @Output()
+    isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
     invalidDate: boolean = false;
 
@@ -448,6 +462,27 @@ export class CalendarComponent implements OnInit {
         this.calendarYearsList = [];
         this.constructCalendarYearsList();
         this.constructCalendar();
+    }
+
+    onKeypressYearHandler(event, year) {
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectYear(year);
+        }
+    }
+
+    onKeypressMonthHandler(event, month) {
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectMonth(month);
+        }
+    }
+
+    onKeypressDayHandler(event, cell) {
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectDate(cell);
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

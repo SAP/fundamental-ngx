@@ -11,8 +11,9 @@
     { name: 'fd-mega-menu-title', description: 'The title of a mega menu group.'},
     { name: 'fd-mega-menu-list', description: 'A list of mega menu items.'},
     { name: 'fd-mega-menu-item', description: 'An item in the list.'},
-    { name: 'fd-mega-menu-link', description: 'A menu link. Has a [url] input.'},
-    { name: 'fd-mega-menu-subitem', description: 'A second-tier subitem.  Must be a child of a fd-mega-menu-link component.'}
+    { name: 'fd-mega-menu-link', description: 'A menu link.'},
+    { name: 'fd-mega-menu-subitem', description: 'A second-tier subitem.  Must be a child of a fd-mega-menu-link component.'},
+    { name: 'fd-mega-menu-sublink', description: 'A link within a subitem.  Must be a child of fd-mega-menu-subitem.'}
   ]
 }"></properties>
 
@@ -28,10 +29,14 @@
         </fd-mega-menu-title>
         <fd-mega-menu-list>
           <fd-mega-menu-item>
-            <fd-mega-menu-link [url]="'#'">Link</fd-mega-menu-link>
+            <fd-mega-menu-link>
+              <a [attr.href]="'#'">Link</a>
+            </fd-mega-menu-link>
           </fd-mega-menu-item>
           <fd-mega-menu-item>
-            <fd-mega-menu-link [url]="'#'">Link</fd-mega-menu-link>
+            <fd-mega-menu-link>
+              <a [routerLink]="'#'">Link</a>
+            </fd-mega-menu-link>
           </fd-mega-menu-item>
         </fd-mega-menu-list>
       </fd-mega-menu-group>
@@ -43,8 +48,16 @@
           <fd-mega-menu-item>
             <fd-mega-menu-link [hasSublist]="true">
               Link
-              <fd-mega-menu-subitem [url]="'#'">Link</fd-mega-menu-subitem>
-              <fd-mega-menu-subitem [url]="'#'">Link</fd-mega-menu-subitem>
+              <fd-mega-menu-subitem>
+                <fd-mega-menu-sublink>
+                  <a [attr.href]="'#'">Link</a>
+                </fd-mega-menu-sublink>
+              </fd-mega-menu-subitem>
+              <fd-mega-menu-subitem>
+                <fd-mega-menu-sublink>
+                  <a [routerLink]="'#'">Link</a>
+                </fd-mega-menu-sublink>
+              </fd-mega-menu-subitem>
             </fd-mega-menu-link>
           </fd-mega-menu-item>
         </fd-mega-menu-list>

@@ -9,6 +9,7 @@ import { MegaMenuItemComponent } from './mega-menu-item.component';
 import { MegaMenuLinkComponent } from './mega-menu-link.component';
 import { MegaMenuSubListComponent } from './mega-menu-sublist.component';
 import { MegaMenuSubItemComponent } from './mega-menu-subitem.component';
+import { MegaMenuSubLinkDirective } from './mega-menu-sublink.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -20,7 +21,8 @@ import { MegaMenuSubItemComponent } from './mega-menu-subitem.component';
         MegaMenuItemComponent,
         MegaMenuLinkComponent,
         MegaMenuSubListComponent,
-        MegaMenuSubItemComponent
+        MegaMenuSubItemComponent,
+        MegaMenuSubLinkDirective
     ],
     declarations: [
         MegaMenuComponent,
@@ -30,7 +32,8 @@ import { MegaMenuSubItemComponent } from './mega-menu-subitem.component';
         MegaMenuItemComponent,
         MegaMenuLinkComponent,
         MegaMenuSubListComponent,
-        MegaMenuSubItemComponent
+        MegaMenuSubItemComponent,
+        MegaMenuSubLinkDirective
     ]
 })
 export class MegaMenuModule {}
