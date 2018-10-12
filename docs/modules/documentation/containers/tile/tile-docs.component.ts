@@ -770,9 +770,9 @@ export class TileDocsComponent implements OnInit {
       <fd-popover-body>
         <fd-menu>
           <fd-menu-list>
-            <fd-menu-item [url]="'#'">Option 1</fd-menu-item>
-            <fd-menu-item [url]="'#'">Option 2</fd-menu-item>
-            <fd-menu-item [url]="'#'">Option 3</fd-menu-item>
+            <fd-menu-item>Option 1</fd-menu-item>
+            <fd-menu-item>Option 2</fd-menu-item>
+            <fd-menu-item>Option 3</fd-menu-item>
           </fd-menu-list>
         </fd-menu>
       </fd-popover-body>
