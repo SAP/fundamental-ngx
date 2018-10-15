@@ -4,6 +4,8 @@
 
 Fundamental NGX is a set of Angular components that utilize the Fundamental UI library, making it easy to start developing Angular Fundamental apps.
 
+View live demo [here](https://sap.github.io/fundamental-ngx/).
+
 ## Requirements
 
 To download and use this library, you first need to install the node package manager.
@@ -42,6 +44,8 @@ to the file that declares the module you're adding alerts to. It can also be add
 ## Demo Application
 
 This repository contains a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo app utilizes the Angular Fundamental source code in this repository, so changes you make to any component's source will be reflected in the demo app.
+
+View live demo [here](https://sap.github.io/fundamental-ngx/).
 
 ## Tests
 
