@@ -22,6 +22,8 @@
              [attr.aria-expanded]="isOpen"
              [attr.aria-hidden]="!isOpen">
             <fd-calendar [calType]="type"
+                         [disableFunction]="disableFunction ? disableFunction : null"
+                         [blockFunction]="blockFunction ? blockFunction : null"
                          (updateDatePickerInput)="updateDatePickerInputHandler($event)"
                          (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                          [dateFromDatePicker]="dateFromDatePicker"></fd-calendar>
