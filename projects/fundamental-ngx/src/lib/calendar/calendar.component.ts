@@ -562,7 +562,6 @@ export class CalendarComponent implements OnChanges, OnInit {
             this.date = new Date();
         }
         this.constructCalendar();
-        this.constructCalendarYearsList();
     }
 
     constructor(private eRef: ElementRef) {}
