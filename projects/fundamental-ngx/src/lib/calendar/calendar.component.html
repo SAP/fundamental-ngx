@@ -68,13 +68,13 @@
             <td class="fd-calendar__item"
                 role="gridcell"
                 *ngFor="let cell of row"
-                [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") + 
+                [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
                           (cell.selected ? " is-selected": "") + 
                           (calType==="range" && cell.selectedLast && selectedRangeFirst != selectedRangeLast ? " is-selected-range-last": "") + 
                           (calType==="range" && cell.selectedFirst && selectedRangeFirst != selectedRangeLast ? " is-selected-range-first": "") + 
-                          (calType==="range" && cell.selectedRange ? " is-selected-range": "") + 
+                          (calType==="range" && cell.selectedRange && !cell.selectedFirst && !cell.selectedLast ? " is-selected-range": "") +
                           (cell.today ? " fd-calendar__item--current": "") + 
-                          (cell.disabled ? " is-disabled": "") + 
+                          (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
                 (click)="selectDate(cell)">
               <span class="fd-calendar__text"

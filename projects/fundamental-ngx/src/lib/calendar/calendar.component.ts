@@ -1,10 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output, HostListener, ElementRef, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    HostListener,
+    ElementRef,
+    SimpleChanges
+} from '@angular/core';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
 
 export interface CalendarDay {
-    id: number;
     date: Date;
     day?: number;
     weekDay?: number;
@@ -29,7 +38,7 @@ export interface EmittedDate {
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnChanges, OnInit {
     @Input() dateFromDatePicker: string;
     @Input() calType: CalendarType = 'single';
     @Input()
@@ -98,20 +107,23 @@ export class CalendarComponent implements OnInit {
     firstYearCalendarList: number = this.year;
     selectCounter: number = 0;
 
+    @Input()
     selectedDay: CalendarDay = {
-        id: 0,
-        date: new Date(1900, 0, 1)
+        date: null
     };
+    @Output() selectedDayChange = new EventEmitter();
 
+    @Input()
     selectedRangeFirst: CalendarDay = {
-        id: 0,
-        date: new Date(1900, 0, 1)
+        date: null
     };
+    @Output() selectedRangeFirstChange = new EventEmitter();
 
+    @Input()
     selectedRangeLast: CalendarDay = {
-        id: 0,
-        date: new Date(1900, 0, 1)
+        date: null
     };
+    @Output() selectedRangeLastChange = new EventEmitter();
 
     emittedDate: EmittedDate = {
         selectedDay: this.selectedDay,
@@ -146,12 +158,10 @@ export class CalendarComponent implements OnInit {
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
-                let genId: number = idCounter++;
                 let prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
                 let calDate = new Date(prevMonthYear, prevMonth, prevMonthDay);
 
                 let previousMonthCalendarDay: CalendarDay = {
-                    id: genId,
                     date: calDate,
                     day: calDate.getDate(),
                     weekDay: calDate.getDay(),
@@ -159,14 +169,22 @@ export class CalendarComponent implements OnInit {
                     disabled: this.disableFunction(calDate),
                     blocked: this.blockFunction(calDate),
                     selected:
-                        calDate.toDateString() === this.selectedDay.date.toDateString() ||
-                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString() ||
-                        calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
-                    selectedFirst: calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
-                    selectedLast: calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                    (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
+                    (this.selectedRangeFirst.date &&
+                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                    (this.selectedRangeLast.date &&
+                        calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
+                    selectedFirst:
+                    this.selectedRangeFirst.date &&
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
+                    selectedLast:
+                    this.selectedRangeLast.date &&
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                     selectedRange:
-                        calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
-                        calDate.getTime() < this.selectedRangeLast.date.getTime()
+                    this.selectedRangeFirst.date &&
+                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                    this.selectedRangeLast.date &&
+                    calDate.getTime() < this.selectedRangeLast.date.getTime()
                 };
 
                 calendarMonth.push(previousMonthCalendarDay);
@@ -176,11 +194,9 @@ export class CalendarComponent implements OnInit {
 
         //Current month days
         for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
-            let genId: number = idCounter++;
             let calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
 
             let currMonthCalendarDay: CalendarDay = {
-                id: genId,
                 date: calDate,
                 day: calDate.getDate(),
                 weekDay: calDate.getDay(),
@@ -188,14 +204,22 @@ export class CalendarComponent implements OnInit {
                 disabled: this.disableFunction(calDate),
                 blocked: this.blockFunction(calDate),
                 selected:
-                    calDate.toDateString() === this.selectedDay.date.toDateString() ||
-                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString() ||
-                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
-                selectedFirst: calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
-                selectedLast: calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
+                (this.selectedRangeFirst.date &&
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                (this.selectedRangeLast.date &&
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
+                selectedFirst:
+                this.selectedRangeFirst.date &&
+                calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
+                selectedLast:
+                this.selectedRangeLast.date &&
+                calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                 selectedRange:
-                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
-                    calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                this.selectedRangeFirst.date &&
+                calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                this.selectedRangeLast.date &&
+                calDate.getTime() < this.selectedRangeLast.date.getTime(),
                 today: calDate.toDateString() === this.today.toDateString()
             };
 
@@ -213,7 +237,6 @@ export class CalendarComponent implements OnInit {
         }
 
         for (let nextD = 1; nextD <= nextMonthDisplayedDays; nextD++) {
-            let genId: number = idCounter++;
             let nextMonthFirstDate: Date;
 
             if (this.date.getMonth() == 11) {
@@ -228,7 +251,6 @@ export class CalendarComponent implements OnInit {
             let calDate = new Date(nextMonthYear, nextMonth, nextD);
 
             let nextMonthCalendarDay: CalendarDay = {
-                id: genId,
                 date: calDate,
                 day: calDate.getDate(),
                 weekDay: calDate.getDay(),
@@ -236,14 +258,22 @@ export class CalendarComponent implements OnInit {
                 disabled: this.disableFunction(calDate),
                 blocked: this.blockFunction(calDate),
                 selected:
-                    calDate.toDateString() === this.selectedDay.date.toDateString() ||
-                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString() ||
-                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
-                selectedFirst: calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
-                selectedLast: calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
+                (this.selectedRangeFirst.date &&
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                (this.selectedRangeLast.date &&
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
+                selectedFirst:
+                this.selectedRangeFirst.date &&
+                calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
+                selectedLast:
+                this.selectedRangeLast.date &&
+                calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                 selectedRange:
-                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
-                    calDate.getTime() < this.selectedRangeLast.date.getTime()
+                this.selectedRangeFirst.date &&
+                calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                this.selectedRangeLast.date &&
+                calDate.getTime() < this.selectedRangeLast.date.getTime()
             };
 
             calendarMonth.push(nextMonthCalendarDay);
@@ -318,26 +348,32 @@ export class CalendarComponent implements OnInit {
         if (!day.blocked) {
             if (this.calType === 'single') {
                 this.selectedDay = day;
+                this.selectedDayChange.emit(this.selectedDay);
             } else {
                 if (this.selectCounter === 2) {
                     this.selectCounter = 0;
                 }
 
-                if (this.selectCounter === 1 && day.id !== this.selectedRangeLast.id) {
+                if (this.selectCounter === 1 && day.date !== this.selectedRangeLast.date) {
                     this.selectedRangeLast = day;
+                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectCounter++;
                 }
 
                 if (this.selectCounter === 0) {
                     this.selectedRangeLast = day;
+                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectedRangeFirst = day;
+                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectCounter++;
                 }
 
                 if (this.selectedRangeFirst.date > this.selectedRangeLast.date) {
                     let tempSelectedRangeFirst = this.selectedRangeFirst;
                     this.selectedRangeFirst = this.selectedRangeLast;
+                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectedRangeLast = tempSelectedRangeFirst;
+                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
                 }
             }
         }
@@ -431,11 +467,14 @@ export class CalendarComponent implements OnInit {
 
     resetSelection() {
         if (this.calType === 'single') {
-            this.selectedDay = { id: 0, date: new Date(1900, 0, 1) };
+            this.selectedDay = { date: null };
+            this.selectedDayChange.emit(this.selectedDay);
         } else {
-            this.selectedRangeFirst = { id: 0, date: new Date(1900, 0, 1) };
+            this.selectedRangeFirst = { date: null };
+            this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
 
-            this.selectedRangeLast = { id: 0, date: new Date(1900, 0, 1) };
+            this.selectedRangeLast = { date: null };
+            this.selectedRangeLastChange.emit(this.selectedRangeLast);
         }
         this.date = new Date();
         this.year = this.date.getFullYear();
@@ -498,10 +537,30 @@ export class CalendarComponent implements OnInit {
                 }
             }
         }
+        if (changes.selectedDay || changes.selectedRangeFirst || changes.selectedRangeLast) {
+            if (this.calType === 'single' && this.selectedDay) {
+                this.date = new Date(this.selectedDay.date);
+            }
+            if (this.calType === 'range' && changes.selectedRangeFirst) {
+                this.date = new Date(this.selectedRangeFirst.date);
+            }
+            if (this.calType === 'range' && changes.selectedRangeLast) {
+                this.date = new Date(this.selectedRangeLast.date);
+            }
+            this.month = this.date.getMonth();
+            this.monthName = this.monthsFullName[this.month];
+            this.year = this.date.getFullYear();
+            this.day = this.date.getDate();
+            this.firstYearCalendarList = this.year;
+            this.constructCalendar();
+            this.constructCalendarYearsList();
+        }
     }
 
     ngOnInit() {
-        this.date = new Date();
+        if (!this.date) {
+            this.date = new Date();
+        }
         this.constructCalendar();
         this.constructCalendarYearsList();
     }
