@@ -1,6 +1,7 @@
 <header>Button</header>
 <description>The Button directive is used to enhance standard HTML buttons.</description>
-<import module="ButtonModule" path="fundamental/button/button.module"></import>
+<import module="ButtonModule"
+        path="fundamental/button/button.module"></import>
 <separator></separator>
 
 <h1>&lt;button fd-button&gt;</h1>
@@ -46,22 +47,33 @@
 
 <component-example [name]="'ex1'">
   <p>
-    <button fd-button>
+    <button fd-button
+            tabindex="0">
       Primary Button
     </button>
-    <button fd-button [fdType]="'main'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'main'">
       Main Button
     </button>
-    <button fd-button [fdType]="'secondary'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'secondary'">
       Secondary Button
     </button>
-    <button fd-button [fdType]="'toolbar'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'toolbar'">
       Toolbar Button
     </button>
-    <button fd-button [fdType]="'positive'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'positive'">
       Positive Button
     </button>
-    <button fd-button [fdType]="'negative'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'negative'">
       Negative Button
     </button>
   </p>
@@ -78,19 +90,28 @@
 
 <component-example [name]="'ex2'">
   <p>
-    <button fd-button [size]="'xs'">
+    <button fd-button
+            tabindex="0"
+            [size]="'xs'">
       Extra-Small Button
     </button>
-    <button fd-button [size]="'s'">
+    <button fd-button
+            tabindex="0"
+            [size]="'s'">
       Small Button
     </button>
-    <button fd-button [size]="'compact'">
+    <button fd-button
+            tabindex="0"
+            [size]="'compact'">
       Compact Button
     </button>
-    <button fd-button>
+    <button fd-button
+            tabindex="0">
       Normal Button
     </button>
-    <button fd-button [size]="'l'">
+    <button fd-button
+            tabindex="0"
+            [size]="'l'">
       Large Button
     </button>
   </p>
@@ -105,22 +126,44 @@
 </p>
 <component-example [name]="'ex3'">
   <p>
-    <button fd-button [glyph]="'cart'">
+    <button fd-button
+            tabindex="0"
+            [glyph]="'cart'">
       Add to Cart
     </button>
-    <button fd-button [fdType]="'main'" [glyph]="'cart'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'main'"
+            [glyph]="'cart'">
       Add to Cart
     </button>
-    <button fd-button [fdType]="'toolbar'" [glyph]="'filter'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'toolbar'"
+            [glyph]="'filter'">
       Filter
     </button>
-    <button fd-button [fdType]="'positive'" [glyph]="'accept'">
+    <button fd-button
+            tabindex="0"
+            [fdType]="'positive'"
+            [glyph]="'accept'">
       Approve
     </button>
-    <button fd-button [glyph]="'cart'"></button>
-    <button fd-button [fdType]="'main'" [glyph]="'cart'"></button>
-    <button fd-button [fdType]="'toolbar'" [glyph]="'filter'"></button>
-    <button fd-button [fdType]="'positive'" [glyph]="'accept'"></button>
+    <button fd-button
+            tabindex="0"
+            [glyph]="'cart'"></button>
+    <button fd-button
+            tabindex="0"
+            [fdType]="'main'"
+            [glyph]="'cart'"></button>
+    <button fd-button
+            tabindex="0"
+            [fdType]="'toolbar'"
+            [glyph]="'filter'"></button>
+    <button fd-button
+            tabindex="0"
+            [fdType]="'positive'"
+            [glyph]="'accept'"></button>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlIcon"></code></pre>
@@ -134,13 +177,18 @@
 </p>
 <component-example [name]="'ex4'">
   <p>
-    <button fd-button>
+    <button fd-button
+            tabindex="0">
       Normal State
     </button>
-    <button fd-button [state]="'selected'">
+    <button fd-button
+            tabindex="0"
+            [state]="'selected'">
       Selected State
     </button>
-    <button fd-button [state]="'disabled'">
+    <button fd-button
+            tabindex="0"
+            [state]="'disabled'">
       Disabled State
     </button>
   </p>
@@ -149,9 +197,16 @@
 
 <separator></separator>
 
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <button fd-button [fdType]="data.properties.type" [semantic]="data.properties.semantic" [state]="data.properties.state"
-    [size]="data.properties.size" [glyph]="data.properties.icon">
+<playground [schema]="schema"
+            [schemaInitialValues]="data"
+            (onFormChanges)="onSchemaValues($event)">
+  <button fd-button
+          tabindex="0"
+          [fdType]="data.properties.type"
+          [semantic]="data.properties.semantic"
+          [state]="data.properties.state"
+          [size]="data.properties.size"
+          [glyph]="data.properties.icon">
     {{data.properties.label}}
   </button>
 </playground>

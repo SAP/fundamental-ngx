@@ -58,14 +58,6 @@ export class DocumentationComponent implements OnInit {
         });
     }
 
-    onFilter(filterString) {
-        this.search = filterString;
-    }
-
-    onFilterReset() {
-        this.search = '';
-    }
-
     selectComponent(component: string) {
         this.router.navigate(['/docs', component]);
     }

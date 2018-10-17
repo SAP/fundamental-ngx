@@ -1,33 +1,50 @@
 <div class="sidebar">
   <h1 class="logo">
-    <a routerLink="/" class="logo-link">Fundamental
+    <a routerLink="/"
+       class="logo-link">Fundamental
       <span class="has-accent-color">NGX</span>
     </a>
   </h1>
+
   <ul class="nav">
     <li class="side-nav__headers">Getting Started</li>
     <li>
-      <a class="nav-item" [routerLink]="['/docs', 'home']" routerLinkActive="nav-item--active">Home</a>
+      <a class="nav-item"
+         [routerLink]="['/docs', 'home']"
+         routerLinkActive="nav-item--active">Home</a>
     </li>
     <li>
-      <a class="nav-item" [routerLink]="['/docs', 'installation']" routerLinkActive="nav-item--active">Installation</a>
+      <a class="nav-item"
+         [routerLink]="['/docs', 'installation']"
+         routerLinkActive="nav-item--active">Installation</a>
     </li>
     <li>
-      <a class="nav-item" [routerLink]="['/docs', 'usage']" routerLinkActive="nav-item--active">Usage</a>
+      <a class="nav-item"
+         [routerLink]="['/docs', 'usage']"
+         routerLinkActive="nav-item--active">Usage</a>
     </li>
     <li>
-      <a class="nav-item" [routerLink]="['/docs', 'rtl']" routerLinkActive="nav-item--active">Internationalization</a>
+      <a class="nav-item"
+         [routerLink]="['/docs', 'rtl']"
+         routerLinkActive="nav-item--active">Internationalization</a>
     </li>
   </ul>
 
-  <!-- <fd-input-group-search [disabled]="false" [inputText]="'Search component'">
-  </fd-input-group-search> -->
 
-  <ul class="nav" id="tn-components-selector">
+  <ul class="nav"
+      id="tn-components-selector">
+    <li class="side-nav__search">
+      <fd-input-group-search [disabled]="false"
+                             [(ngModel)]="search"
+                             placeholder="Search component"></fd-input-group-search>
+
+    </li>
     <li class="side-nav__headers">Components</li>
     <ng-container *ngFor="let component of components">
-      <li *ngIf="search === '' || component.url.indexOf(search) != -1">
-        <a class="nav-item" [routerLink]="['/docs', component.url]" routerLinkActive="nav-item--active">{{
+      <li *ngIf="search === '' || component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 || component.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
+        <a class="nav-item"
+           [routerLink]="['/docs', component.url]"
+           routerLinkActive="nav-item--active">{{
           component.name }}</a>
       </li>
 

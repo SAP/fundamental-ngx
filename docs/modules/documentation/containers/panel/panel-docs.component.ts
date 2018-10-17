@@ -38,8 +38,19 @@ export class PanelDocsComponent implements OnInit {
 
     tableBleedHtml = `<fd-panel>
   <fd-panel-body [bleed]="true">
-    <fd-table [tableData]="tableData"
-              [headers]="tableHeaders">
+    <fd-table>
+      <fd-table-header>
+        <th *ngFor="let header of tableHeaders">
+          {{header}}
+        </th>
+      </fd-table-header>
+      <fd-table-body>
+        <tr *ngFor="let row of tableData">
+          <td *ngFor="let cell of row.rowData">
+            {{cell}}
+          </td>
+        </tr>
+      </fd-table-body>
     </fd-table>
   </fd-panel-body>
 </fd-panel>`;

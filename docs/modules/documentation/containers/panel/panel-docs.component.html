@@ -69,13 +69,24 @@
 <separator></separator>
 <h2>Panel with edge bleed</h2>
 <p>Use <code>[bleed]="true"</code> on the panel body to have the contents of the panel body bleed to the outer edge.
-  This is useful for components like tables.</p>
+  This is useful for components like tables and trees.</p>
 <component-example [name]="'ex2'">
   <p>
     <fd-panel>
       <fd-panel-body [bleed]="true">
-        <fd-table [tableData]="tableData"
-                  [headers]="tableHeaders">
+        <fd-table>
+          <fd-table-header>
+            <th *ngFor="let header of tableHeaders">
+              {{header}}
+            </th>
+          </fd-table-header>
+          <fd-table-body>
+            <tr *ngFor="let row of tableData">
+              <td *ngFor="let cell of row.rowData">
+                {{cell}}
+              </td>
+            </tr>
+          </fd-table-body>
         </fd-table>
       </fd-panel-body>
     </fd-panel>

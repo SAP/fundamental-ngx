@@ -1,9 +1,14 @@
 <div class="fd-input-group">
-  <input class="" type="search" id="search-2" name="" [disabled]="disabled" [(ngModel)]="inputText" placeholder="{{placeholder}}"/>
-  <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon">
-        <button *ngIf="inputText"
-                class="fd-input-group__button fd-input-group__button--clear"
-                aria-label="Clear"
-                (click)="inputText = '';"></button>
+      <input type="search"
+             [disabled]="disabled"
+             tabindex="0"
+             [(ngModel)]="inputText"
+             placeholder="{{placeholder}}" />
+      <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon">
+            <button *ngIf="inputText"
+                    tabindex="0"
+                    class="fd-input-group__button fd-input-group__button--clear"
+                    aria-label="Clear"
+                    (click)="inputText = '';"></button>
       </span>
 </div>

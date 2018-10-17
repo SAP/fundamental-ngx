@@ -1,41 +1,39 @@
 <div class="fd-input-group"
      [ngClass]="{'fd-input-group--after': placement !== 'before',
         'fd-input-group--before': placement === 'before', 'fd-input-group--inline': inline === true }">
-        <input [(ngModel)]="inputText"
-               (change)="inputChanged()"
-               [disabled]="disabled"
-               type="text"
-               *ngIf="placement !== 'before'"
-               class=""
-               id=""
-               placeholder="{{placeholder}}">
-        <span *ngIf="!button"
-              class="fd-input-group__addon"
-              [ngClass]="{'fd-input-group__addon--after': placement !== 'before',
+  <input [(ngModel)]="inputText"
+         [disabled]="disabled"
+         type="text"
+         tabindex="0"
+         *ngIf="placement !== 'before'"
+         placeholder="{{placeholder}}">
+  <span *ngIf="!button"
+        class="fd-input-group__addon"
+        [ngClass]="{'fd-input-group__addon--after': placement !== 'before',
           'fd-input-group__addon--before': placement === 'before'}">
-                <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
-                <span *ngIf="glyph"
-                      [ngClass]="'sap-icon--' + glyph"></span>
-        </span>
-        <span *ngIf="button"
-              class="fd-input-group__addon fd-input-group__addon--button"
-              [ngClass]="{'fd-input-group__addon--after': placement !== 'before', 'fd-input-group__addon--before': placement === 'before'}">
-                <button [disabled]="disabled"
-                        *ngIf="!glyph"
-                        (click)="buttonClicked($event)"
-                        class="fd-button--secondary">{{addOnText}}</button>
-                <button [disabled]="disabled"
-                        *ngIf="glyph"
-                        (click)="buttonClicked($event)"
-                        class="fd-button--icon fd-button--secondary"
-                        [ngClass]="'sap-icon--' + glyph"></button>
-        </span>
-        <input [(ngModel)]="inputText"
-               (change)="inputChanged()"
-               *ngIf="placement === 'before'"
-               [disabled]="disabled"
-               type="text"
-               class=""
-               id=""
-               placeholder="{{placeholder}}">
+    <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
+    <span *ngIf="glyph"
+          [ngClass]="'sap-icon--' + glyph"></span>
+  </span>
+  <span *ngIf="button"
+        class="fd-input-group__addon fd-input-group__addon--button"
+        [ngClass]="{'fd-input-group__addon--after': placement !== 'before', 'fd-input-group__addon--before': placement === 'before'}">
+    <button [disabled]="disabled"
+            *ngIf="!glyph"
+            tabindex="0"
+            (click)="buttonClicked($event)"
+            class="fd-button--secondary">{{addOnText}}</button>
+    <button [disabled]="disabled"
+            *ngIf="glyph"
+            tabindex="0"
+            (click)="buttonClicked($event)"
+            class="fd-button--icon fd-button--secondary"
+            [ngClass]="'sap-icon--' + glyph"></button>
+  </span>
+  <input [(ngModel)]="inputText"
+         tabindex="0"
+         *ngIf="placement === 'before'"
+         [disabled]="disabled"
+         type="text"
+         placeholder="{{placeholder}}">
 </div>

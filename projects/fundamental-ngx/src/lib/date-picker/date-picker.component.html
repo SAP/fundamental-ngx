@@ -1,18 +1,31 @@
-
 <div class="fd-date-picker">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <div class="fd-input-group fd-input-group--after">
-                <input #datePicker type="text" [value]="inputFieldDate" placeholder="mm/dd/yyyy" (change)="getInputValue(datePicker.value)" (focus)="onFocusHandler()" (blur)="onBlurHandler()">
+                <input #datePicker
+                       type="text"
+                       tabindex="0"
+                       [value]="inputFieldDate"
+                       placeholder="mm/dd/yyyy"
+                       (change)="getInputValue(datePicker.value)"
+                       (focus)="onFocusHandler()"
+                       (blur)="onBlurHandler()">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
-                    <button class="fd-popover__control fd-button--icon fd-button--secondary sap-icon--calendar" (click)="openCalendar(datePicker.value)"></button>
+                    <button class="fd-popover__control fd-button--icon fd-button--secondary sap-icon--calendar"
+                            tabindex="0"
+                            (click)="openCalendar(datePicker.value)"></button>
                 </span>
             </div>
         </div>
-
-        <div class="fd-popover__body" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
-            <fd-calendar [(selectedDay)]="selectedDay" [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"
-                         [calType]="type" (updateDatePickerInput)="updateDatePickerInputHandler($event)" (isInvalidDateInput)="isInvalidDateInputHandler($event)" [dateFromDatePicker]="dateFromDatePicker"></fd-calendar>
+        <div class="fd-popover__body"
+             [attr.aria-expanded]="isOpen"
+             [attr.aria-hidden]="!isOpen">
+            <fd-calendar [calType]="type"
+                         [(selectedDay)]="selectedDay"
+                         [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"
+                         (updateDatePickerInput)="updateDatePickerInputHandler($event)"
+                         (isInvalidDateInput)="isInvalidDateInputHandler($event)"
+                         [dateFromDatePicker]="dateFromDatePicker"></fd-calendar>
         </div>
     </div>
 </div>

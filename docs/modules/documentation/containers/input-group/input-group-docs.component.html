@@ -8,12 +8,12 @@
 
 <properties [properties]="{
   inputs: [
+    { name: 'ngModel', description: 'Text to be used in the input.  Should be used with two-way binding syntax.' },
     { name: 'placement', description: 'Use \'before\' to place the add-on before the input and \'after\' to place it after.  Default is after. ' },
     { name: 'inline', description: 'If true, the width of the input group does not take up the full screen.  Default is false.' },
     { name: 'placeholder', description: 'Placeholder text for the input' },
     { name: 'addOnText', description: 'Text to be used in the add-on.  Note that the addOnText will be hidden if a glyph icon is present.' },
     { name: 'glyph', description: 'Icon to be used in the add-on.' },
-    { name: 'inputText', description: 'Text to be used in the input.' },
     { name: 'button', description: 'When set to true, this turns the add-on into a button, which fires an addOnButtonClicked event.' },
     { name: 'disabled', description: 'Disables the input group.' }
 ]
@@ -86,7 +86,7 @@
 
 <properties [properties]="{
   inputs: [
-    { name: 'inputText', description: 'Text to be used in the input.' },
+    { name: 'ngModel', description: 'Number to be used in the input.  Should be used with two-way binding syntax.' },
     { name: 'disabled', description: 'Disables the input group.' }
 ]
 }">
@@ -95,8 +95,9 @@
 <p>The user can increase or decrease a number value using the spinner add-on.</p>
 <component-example [name]="'ex4'">
   <label fd-form-label>Quantity Spinner</label>
-  <fd-input-group-number [disabled]="false" [inputText]="123">
-  </fd-input-group-number>
+  <fd-input-group-number [disabled]="false" [(ngModel)]="numberValue"></fd-input-group-number>
+  <br/>
+  <span>numberValue: {{numberValue}}</span>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="numberInputHtml"></code></pre>
 
@@ -106,7 +107,7 @@
 
 <properties [properties]="{
   inputs: [
-    { name: 'inputText', description: 'Text to be used in the input.' },
+    { name: 'ngModel', description: 'Text to be used in the input.  Should be used with two-way binding syntax.' },
     { name: 'disabled', description: 'Disables the input group.' }
 ]
 }">
@@ -116,8 +117,9 @@
 <p>This input group automatically shows a clear search button when the user has entered a value in the input.</p>
 <component-example [name]="'ex5'">
   <label fd-form-label>Search input</label>
-  <fd-input-group-search [disabled]="false" [inputText]="'Search term'">
-  </fd-input-group-search>
+  <fd-input-group-search [disabled]="false" [(ngModel)]="searchTerm"></fd-input-group-search>
+  <br/>
+  <span>searchTerm: {{searchTerm}}</span>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="searchInputHtml"></code></pre>
 
@@ -126,7 +128,7 @@
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
 
   <fd-input-group [addOnText]="data.properties.addOnText" [placeholder]="data.properties.placeholder" [button]="data.properties.button"
-    [glyph]="data.properties.glyph" [inline]="data.properties.inline" [inputText]="data.properties.inputText"
+    [glyph]="data.properties.glyph" [inline]="data.properties.inline" [(ngModel)]="data.properties.ngModel"
     [placement]="data.properties.placement" [disabled]="data.state.disabled"></fd-input-group>
 
 </playground>
