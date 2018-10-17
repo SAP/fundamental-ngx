@@ -31,7 +31,7 @@
         "@ng-bootstrap/ng-bootstrap": "~3.2.2",
         "angular-highlight-js": "^2.0.1",
         "core-js": "^2.5.7",
-        "fundamental-ui": "~1.1.0",
+        "fundamental-ui": "~1.2.2",
         "highlight.js": "^9.12.0",
         "ngx-highlightjs": "^2.1.1",
         "npm": "^6.4.1",
