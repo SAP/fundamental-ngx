@@ -18,7 +18,7 @@ export class MenuItemComponent implements AfterViewInit, OnChanges {
         ) {
             this.itemEl.nativeElement.children[0].classList.add('fd-menu__item');
         } else if (
-            // if the menu item does not contain child elements, apply 'fd-menu__item' class to the fd-menu-item components
+            // if the menu item does not contain a child element, apply 'fd-menu__item' class to the fd-menu-item component
             this.itemEl &&
             this.itemEl.nativeElement &&
             this.itemEl.nativeElement.children &&
