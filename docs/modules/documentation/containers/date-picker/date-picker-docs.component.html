@@ -7,7 +7,10 @@
 <h1>&lt;fd-date-picker&gt;</h1>
 <properties [properties]="{
   inputs: [
-    { name: 'type',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'}
+    { name: 'type',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
+    { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
+    { name: 'selectedRangeFirst', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the first selected day in a range of dates on \'range\' type calendars.'},
+    { name: 'selectedRangeLast', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the last selected day in a range of dates on \'range\' type calendars.'}
   ]
 }">
 </properties>
@@ -15,15 +18,29 @@
 <separator></separator>
 
 <h1>Simple Date Picker</h1>
+<description>
+  You can use two-way data binding to select a date or range of dates on a calendar.  Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
+  To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
+  Note that selecting a day (or range of days) in this manner will override any block/disable functions.
+</description>
 <component-example [name]="'ex1'">
-  <fd-date-picker [type]="'single'"></fd-date-picker>
+  <fd-date-picker [type]="'single'" [(selectedDay)]="selectedDay"></fd-date-picker>
+  <br/>
+  <div>Selected Date: {{selectedDay.date.toDateString()}}</div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="datePickerSingleHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="datePickerSingleJs"></code></pre>
 
 <separator></separator>
 
 <h1>Range Date Picker</h1>
 <component-example [name]="'ex2'">
-  <fd-date-picker [type]="'range'"></fd-date-picker>
+  <fd-date-picker [type]="'range'" [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"></fd-date-picker>
+  <br/>
+  <div>Selected First Date: {{selectedRangeFirst.date.toDateString()}}</div>
+  <br/>
+  <div>Selected Last Date: {{selectedRangeLast.date.toDateString()}}</div>
 </component-example>
+
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="datePickerRangeHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="datePickerRangeJs"></code></pre>
