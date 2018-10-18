@@ -7,7 +7,8 @@ import { CalendarDay, CalendarType } from '../calendar/calendar.component';
     styleUrls: ['./date-picker.component.scss']
 })
 export class DatePickerComponent implements OnInit {
-    @Input() type: CalendarType = 'single';
+    @Input()
+    type: CalendarType = 'single';
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
@@ -24,13 +25,15 @@ export class DatePickerComponent implements OnInit {
     selectedRangeFirst: CalendarDay = {
         date: null
     };
-    @Output() selectedRangeFirstChange = new EventEmitter();
+    @Output()
+    selectedRangeFirstChange = new EventEmitter();
 
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
-    @Output() selectedRangeLastChange = new EventEmitter();
+    @Output()
+    selectedRangeLastChange = new EventEmitter();
 
     openCalendar(e) {
         this.isOpen = !this.isOpen;
@@ -76,8 +79,7 @@ export class DatePickerComponent implements OnInit {
                 this.selectedRangeLast = d.selectedLastDay;
                 this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                 this.selectedRangeLastChange.emit(this.selectedRangeLast);
-                this.inputFieldDate =
-                    d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
+                this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
             }
         }
     }

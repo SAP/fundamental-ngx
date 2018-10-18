@@ -2,13 +2,15 @@ import {
     Component,
     EventEmitter,
     Input,
-    OnChanges,
     OnInit,
     Output,
     HostListener,
     ElementRef,
-    SimpleChanges
+    SimpleChanges,
+    OnChanges,
+    Inject
 } from '@angular/core';
+import { HashService } from '../utils/hash.service';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -25,6 +27,7 @@ export interface CalendarDay {
     selectedRange?: boolean;
     selectedLast?: boolean;
     today?: boolean;
+    isTabIndexed?: boolean;
 }
 
 export interface EmittedDate {
@@ -38,9 +41,14 @@ export interface EmittedDate {
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss']
 })
-export class CalendarComponent implements OnChanges, OnInit {
-    @Input() dateFromDatePicker: string;
-    @Input() calType: CalendarType = 'single';
+export class CalendarComponent implements OnInit, OnChanges {
+    calendarId: string;
+
+    @Input()
+    dateFromDatePicker: string;
+    @Input()
+    calType: CalendarType = 'single';
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -50,8 +58,10 @@ export class CalendarComponent implements OnChanges, OnInit {
         return false;
     };
 
-    @Output() updateDatePickerInput: EventEmitter<any> = new EventEmitter();
-    @Output() isInvalidDateInput: EventEmitter<any> = new EventEmitter();
+    @Output()
+    updateDatePickerInput: EventEmitter<any> = new EventEmitter();
+    @Output()
+    isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
     invalidDate: boolean = false;
 
@@ -111,19 +121,22 @@ export class CalendarComponent implements OnChanges, OnInit {
     selectedDay: CalendarDay = {
         date: null
     };
-    @Output() selectedDayChange = new EventEmitter();
+    @Output()
+    selectedDayChange = new EventEmitter();
 
     @Input()
     selectedRangeFirst: CalendarDay = {
         date: null
     };
-    @Output() selectedRangeFirstChange = new EventEmitter();
+    @Output()
+    selectedRangeFirstChange = new EventEmitter();
 
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
-    @Output() selectedRangeLastChange = new EventEmitter();
+    @Output()
+    selectedRangeLastChange = new EventEmitter();
 
     emittedDate: EmittedDate = {
         selectedDay: this.selectedDay,
@@ -169,22 +182,22 @@ export class CalendarComponent implements OnChanges, OnInit {
                     disabled: this.disableFunction(calDate),
                     blocked: this.blockFunction(calDate),
                     selected:
-                    (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
-                    (this.selectedRangeFirst.date &&
-                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
-                    (this.selectedRangeLast.date &&
-                        calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
+                        (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
+                        (this.selectedRangeFirst.date &&
+                            calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                        (this.selectedRangeLast.date &&
+                            calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
                     selectedFirst:
-                    this.selectedRangeFirst.date &&
-                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
+                        this.selectedRangeFirst.date &&
+                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
                     selectedLast:
-                    this.selectedRangeLast.date &&
-                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                        this.selectedRangeLast.date &&
+                        calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                     selectedRange:
-                    this.selectedRangeFirst.date &&
-                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
-                    this.selectedRangeLast.date &&
-                    calDate.getTime() < this.selectedRangeLast.date.getTime()
+                        this.selectedRangeFirst.date &&
+                        calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                        this.selectedRangeLast.date &&
+                        calDate.getTime() < this.selectedRangeLast.date.getTime()
                 };
 
                 calendarMonth.push(previousMonthCalendarDay);
@@ -193,6 +206,7 @@ export class CalendarComponent implements OnChanges, OnInit {
         }
 
         //Current month days
+        let foundSelected = false;
         for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
             let calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
 
@@ -204,26 +218,42 @@ export class CalendarComponent implements OnChanges, OnInit {
                 disabled: this.disableFunction(calDate),
                 blocked: this.blockFunction(calDate),
                 selected:
-                (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
-                (this.selectedRangeFirst.date &&
-                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
-                (this.selectedRangeLast.date &&
-                    calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
+                    (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
+                    (this.selectedRangeFirst.date &&
+                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                    (this.selectedRangeLast.date &&
+                        calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
                 selectedFirst:
-                this.selectedRangeFirst.date &&
-                calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
+                    this.selectedRangeFirst.date &&
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
                 selectedLast:
-                this.selectedRangeLast.date &&
-                calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                    this.selectedRangeLast.date &&
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                 selectedRange:
-                this.selectedRangeFirst.date &&
-                calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
-                this.selectedRangeLast.date &&
-                calDate.getTime() < this.selectedRangeLast.date.getTime(),
-                today: calDate.toDateString() === this.today.toDateString()
+                    this.selectedRangeFirst.date &&
+                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                    this.selectedRangeLast.date &&
+                    calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                today: calDate.toDateString() === this.today.toDateString(),
+                isTabIndexed: false
             };
 
+            // if a day is selected, it should be tab indexed
+            if (currMonthCalendarDay.selected) {
+                foundSelected = true;
+                currMonthCalendarDay.isTabIndexed = true;
+            }
+
             calendarMonth.push(currMonthCalendarDay);
+        }
+
+        // if no day is selected, tab index today
+        if (!foundSelected) {
+            for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
+                if (calendarMonth[d] && calendarMonth[d].today) {
+                    calendarMonth[d].isTabIndexed = true;
+                }
+            }
         }
 
         //Next month days
@@ -258,22 +288,22 @@ export class CalendarComponent implements OnChanges, OnInit {
                 disabled: this.disableFunction(calDate),
                 blocked: this.blockFunction(calDate),
                 selected:
-                (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
-                (this.selectedRangeFirst.date &&
-                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
-                (this.selectedRangeLast.date &&
-                    calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
+                    (this.selectedDay.date && calDate.toDateString() === this.selectedDay.date.toDateString()) ||
+                    (this.selectedRangeFirst.date &&
+                        calDate.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                    (this.selectedRangeLast.date &&
+                        calDate.toDateString() === this.selectedRangeLast.date.toDateString()),
                 selectedFirst:
-                this.selectedRangeFirst.date &&
-                calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
+                    this.selectedRangeFirst.date &&
+                    calDate.toDateString() === this.selectedRangeFirst.date.toDateString(),
                 selectedLast:
-                this.selectedRangeLast.date &&
-                calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
+                    this.selectedRangeLast.date &&
+                    calDate.toDateString() === this.selectedRangeLast.date.toDateString(),
                 selectedRange:
-                this.selectedRangeFirst.date &&
-                calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
-                this.selectedRangeLast.date &&
-                calDate.getTime() < this.selectedRangeLast.date.getTime()
+                    this.selectedRangeFirst.date &&
+                    calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
+                    this.selectedRangeLast.date &&
+                    calDate.getTime() < this.selectedRangeLast.date.getTime()
             };
 
             calendarMonth.push(nextMonthCalendarDay);
@@ -311,13 +341,6 @@ export class CalendarComponent implements OnChanges, OnInit {
         }
     }
 
-    setCurrentMonth(month: number) {
-        this.date.setMonth(month);
-        this.month = this.date.getMonth();
-        this.monthName = this.monthsFullName[this.date.getMonth()];
-        this.year = this.date.getFullYear();
-    }
-
     //Functions that handle calendar navigation
     goToPreviousMonth() {
         this.setCurrentMonth(this.date.getMonth() - 1);
@@ -343,7 +366,7 @@ export class CalendarComponent implements OnChanges, OnInit {
         this.constructCalendarYearsList();
     }
 
-    //Functions that handle selection (day, month, year)
+    // Functions that handle selection (day, month, year)
     selectDate(day) {
         if (!day.blocked) {
             if (this.calType === 'single') {
@@ -381,6 +404,13 @@ export class CalendarComponent implements OnChanges, OnInit {
         this.isInvalidDateInput.emit(false);
     }
 
+    setCurrentMonth(month: number) {
+        this.date.setMonth(month);
+        this.month = this.date.getMonth();
+        this.monthName = this.monthsFullName[this.date.getMonth()];
+        this.year = this.date.getFullYear();
+    }
+
     selectMonth(selectedMonth) {
         this.selectedMonth = selectedMonth;
         this.setCurrentMonth(selectedMonth);
@@ -393,8 +423,8 @@ export class CalendarComponent implements OnChanges, OnInit {
     }
 
     selectYear(selectedYear) {
-        this.setCurrentYear(selectedYear);
         this.selectedMonth = this.month;
+        this.setCurrentYear(selectedYear);
         this.constructCalendar();
     }
 
@@ -489,6 +519,114 @@ export class CalendarComponent implements OnChanges, OnInit {
         this.constructCalendar();
     }
 
+    onKeydownYearHandler(event, year) {
+        let newFocusedYearId, newFocusedYearEl;
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectYear(year);
+        } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
+            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 4);
+            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
+            if (newFocusedYearEl) {
+                newFocusedYearEl.focus();
+            }
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 4);
+            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
+            if (newFocusedYearEl) {
+                newFocusedYearEl.focus();
+            }
+        } else if (event.code === 'ArrowLeft') {
+            event.preventDefault();
+            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 1);
+            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
+            if (newFocusedYearEl) {
+                newFocusedYearEl.focus();
+            }
+        } else if (event.code === 'ArrowRight') {
+            event.preventDefault();
+            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
+            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
+            if (newFocusedYearEl) {
+                newFocusedYearEl.focus();
+            }
+        }
+    }
+
+    onKeydownMonthHandler(event, month) {
+        let newFocusedMonthId, newFocusedMonthEl;
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectMonth(month);
+        } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
+            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 4);
+            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
+            if (newFocusedMonthEl) {
+                newFocusedMonthEl.focus();
+            }
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 4);
+            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
+            if (newFocusedMonthEl) {
+                newFocusedMonthEl.focus();
+            }
+        } else if (event.code === 'ArrowLeft') {
+            event.preventDefault();
+            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 1);
+            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
+            if (newFocusedMonthEl) {
+                newFocusedMonthEl.focus();
+            }
+        } else if (event.code === 'ArrowRight') {
+            event.preventDefault();
+            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
+            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
+            if (newFocusedMonthEl) {
+                newFocusedMonthEl.focus();
+            }
+        }
+    }
+
+    onKeydownDayHandler(event, cell) {
+        let newFocusedDayId, newFocusedDayEl;
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            this.selectDate(cell);
+        } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day - 7);
+            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
+            if (newFocusedDayEl) {
+                newFocusedDayEl.focus();
+            }
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day + 7);
+            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
+            if (newFocusedDayEl) {
+                newFocusedDayEl.focus();
+            }
+        } else if (event.code === 'ArrowLeft') {
+            event.preventDefault();
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day - 1);
+            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
+            if (newFocusedDayEl) {
+                newFocusedDayEl.focus();
+            }
+        } else if (event.code === 'ArrowRight') {
+            event.preventDefault();
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day + 1);
+            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
+            if (newFocusedDayEl) {
+                newFocusedDayEl.focus();
+            }
+        }
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         if (changes.dateFromDatePicker) {
             if (changes.dateFromDatePicker.currentValue.length > 0) {
@@ -563,7 +701,18 @@ export class CalendarComponent implements OnChanges, OnInit {
         }
         this.constructCalendar();
         this.constructCalendarYearsList();
+        this.calendarId = this.hasher.hash();
+        if (this.month) {
+            this.selectMonth(this.month);
+        } else {
+            this.selectMonth(this.date.getMonth());
+        }
+        if (this.year) {
+            this.selectYear(this.year);
+        } else {
+            this.selectMonth(this.date.getFullYear());
+        }
     }
 
-    constructor(private eRef: ElementRef) {}
+    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef) {}
 }

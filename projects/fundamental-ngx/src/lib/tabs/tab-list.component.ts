@@ -53,4 +53,11 @@ export class TabListComponent implements AfterContentInit {
         }
         this.select(tabId);
     }
+
+    onKeypressHandler($event: KeyboardEvent, tabId) {
+        if ($event.code === 'Space' || $event.code === 'Enter') {
+            $event.preventDefault();
+            this.select(tabId);
+        }
+    }
 }
