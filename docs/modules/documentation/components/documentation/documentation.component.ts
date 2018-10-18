@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,11 @@ import { Router } from '@angular/router';
     styleUrls: ['./documentation.component.scss'],
     templateUrl: './documentation.component.html'
 })
-export class DocumentationComponent {
-    components: any = [
+export class DocumentationComponent implements OnInit {
+
+    @ViewChild('content') contentElRef: ElementRef;
+
+    components = [
         { url: 'action-bar', name: 'Action Bar' },
         { url: 'alert', name: 'Alert' },
         { url: 'badgeLabel', name: 'Badge, Status & Label' },
@@ -20,11 +23,10 @@ export class DocumentationComponent {
         { url: 'form', name: 'Form' },
         { url: 'icon', name: 'Icon' },
         { url: 'identifier', name: 'Identifier' },
-        { url: 'inlineHelp', name: 'Inline Help' },
         { url: 'image', name: 'Image' },
+        { url: 'inlineHelp', name: 'Inline Help' },
         { url: 'inputGroup', name: 'Input Group' },
         { url: 'list', name: 'List' },
-        { url: 'megaMenu', name: 'Mega Menu' },
         { url: 'menu', name: 'Menu' },
         { url: 'modal', name: 'Modal' },
         { url: 'navbar', name: 'Navbar' },
@@ -40,9 +42,38 @@ export class DocumentationComponent {
         { url: 'tree', name: 'Tree' }
     ];
 
+    search: string = '';
+
     constructor(private router: Router) {}
 
-    selectComponent(component: string) {
-        this.router.navigate(['/docs', component]);
+    ngOnInit() {
+        // sort the list alphabetically
+        this.components.sort((el1, el2) => {
+            if (el1.name < el2.name) {
+                return -1;
+            }
+
+            if (el1.name > el2.name) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    selectComponent(component) {
+        this.router.navigate(['/docs', component]).then(() => {
+            this.skipNavClicked();
+        });
+    }
+
+    skipNavClicked() {
+        this.contentElRef.nativeElement.focus();
+    }
+
+    onKeypressHandler(url, event) {
+        if (event.code === 'Enter' || event.code === 'Space') {
+            event.preventDefault();
+            this.selectComponent(url);
+        }
     }
 }

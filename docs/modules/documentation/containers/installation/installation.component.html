@@ -1,28 +1,39 @@
 <header>Installation</header>
-<description>Fundamental NGX is intended for use with Angular 5 or newer. We assume the user has some knowledge of Angular
-    before using this library.</description>
 
-<separator></separator>
-
-<h1>Dependencies</h1>
+<h2>Dependencies</h2>
 
 <p>Fundamental NGX has a few peer dependencies you'll need to add to your project.</p>
 
-<pre><code>npm install --save @ng-bootstrap/ng-bootstrap@2.2.2 fundamental-ui</code></pre>
+<h3>NPM</h3>
 
-<h1>Download Fundamental NGX</h1>
+<pre><code>npm install --save @ng-bootstrap/ng-bootstrap fundamental-ui@1.2.2</code></pre>
+
+<h3>Yarn</h3>
+
+<pre><code>yarn add @ng-bootstrap/ng-bootstrap fundamental-ui@1.2.2</code></pre>
+
+<h2>Download Fundamental NGX</h2>
+
+<h3>NPM</h3>
 
 <pre><code>npm install --save fundamental-ngx</code></pre>
 
-<h1>Add the CSS</h1>
+<h3>Yarn</h3>
 
-Fundamental NGX utilizes Fundamental UI's CSS. Open your <code>angular.json</code> file and add the following to the <code>styles</code> arrays:
+<pre><code>yarn add fundamental-ngx</code></pre>
+
+<h2>Add Fundamental UI CSS</h2>
+
+Fundamental NGX utilizes Fundamental UI styling. You will need to include the fundamental ui css in your project.
+Open your <code>angular.json</code> file and add the following to the <code>styles</code> arrays:
 
 <pre><code>"./node_modules/fundamental-ui/dist/fundamental-ui.css"</code></pre>
 
-<p>Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set
+<p>Note the path may be different if your CLI configuration is not in the root of your project directory or if you have
+    set
     a custom root.</p>
 
 <p>Now you're ready to use Fundamental NGX!</p>
 
-<a [routerLink]="['/docs', 'usage']" routerLinkActive="nav-item--active">Usage ></a>
+<a [routerLink]="['/docs', 'usage']"
+   routerLinkActive="nav-item--active">Usage ></a>

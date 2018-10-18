@@ -1,8 +1,0 @@
-<a class="fd-mega-menu__link " [ngClass]="{'has-child': hasSublist === true}" [attr.aria-haspopup]="hasSublist"
-   [attr.href]="url ? url : null" (click)="sublistIsOpen = !sublistIsOpen" [attr.aria-expanded]="sublistIsOpen"
-   style="cursor: pointer;">
-  <ng-content></ng-content>
-</a>
-<ul class="fd-mega-menu__sublist" *ngIf="hasSublist" [attr.aria-hidden]="!sublistIsOpen">
-  <ng-content select="fd-mega-menu-subitem"></ng-content>
-</ul>

@@ -18,118 +18,95 @@
 <separator></separator>
 
 <h2>Extra Small Size (XS)</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-button-group style="margin-right: 10px;">
-      <button fd-button-grouped [id]="'1'" [size]="'xs'" [glyph]="'survey'" [state]="'selected'"></button>
-      <button fd-button-grouped [id]="'2'" [size]="'xs'" [glyph]="'pie-chart'"></button>
-      <button fd-button-grouped [id]="'3'" [size]="'xs'" [glyph]="'pool'"></button>
-    </fd-button-group>
-    <fd-button-group>
-      <button fd-button-grouped [id]="'4'" [size]="'xs'">Left</button>
-      <button fd-button-grouped [id]="'5'" [size]="'xs'" [state]="'selected'">Middle</button>
-      <button fd-button-grouped [id]="'6'" [size]="'xs'">Right</button>
-    </fd-button-group>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
+    <button fd-button-grouped [id]="'1'" [size]="'xs'" [glyph]="'survey'" [state]="'selected'"></button>
+    <button fd-button-grouped [id]="'2'" [size]="'xs'" [glyph]="'pie-chart'"></button>
+    <button fd-button-grouped [id]="'3'" [size]="'xs'" [glyph]="'pool'"></button>
+  </fd-button-group>
+  <fd-button-group>
+    <button fd-button-grouped [id]="'4'" [size]="'xs'">Left</button>
+    <button fd-button-grouped [id]="'5'" [size]="'xs'" [state]="'selected'">Middle</button>
+    <button fd-button-grouped [id]="'6'" [size]="'xs'">Right</button>
+  </fd-button-group>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" xsSizeHtml "></code></pre>
 
 <separator></separator>
 
 <h2>Small Size (S)</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-button-group style="margin-right: 10px;">
-      <button fd-button-grouped [size]="'s'" [glyph]="'survey'" [state]="'selected'"></button>
-      <button fd-button-grouped [size]="'s'" [glyph]="'pie-chart'"></button>
-      <button fd-button-grouped [size]="'s'" [glyph]="'pool'"></button>
-    </fd-button-group>
-    <fd-button-group>
-      <button fd-button-grouped [size]="'s'">Left</button>
-      <button fd-button-grouped [size]="'s'" [state]="'selected'">Middle</button>
-      <button fd-button-grouped [size]="'s'">Right</button>
-    </fd-button-group>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
+    <button fd-button-grouped [size]="'s'" [glyph]="'survey'" [state]="'selected'"></button>
+    <button fd-button-grouped [size]="'s'" [glyph]="'pie-chart'"></button>
+    <button fd-button-grouped [size]="'s'" [glyph]="'pool'"></button>
+  </fd-button-group>
+  <fd-button-group>
+    <button fd-button-grouped [size]="'s'">Left</button>
+    <button fd-button-grouped [size]="'s'" [state]="'selected'">Middle</button>
+    <button fd-button-grouped [size]="'s'">Right</button>
+  </fd-button-group>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" sSizeHtml "></code></pre>
 
 <separator></separator>
 
 <h2>Compact Size</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-button-group style="margin-right: 10px;">
-      <button fd-button-grouped [compact]="true" [glyph]="'survey'" [state]="'selected'"></button>
-      <button fd-button-grouped [compact]="true" [glyph]="'pie-chart'"></button>
-      <button fd-button-grouped [compact]="true" [glyph]="'pool'"></button>
-    </fd-button-group>
-    <fd-button-group>
-      <button fd-button-grouped [compact]="true">Left</button>
-      <button fd-button-grouped [compact]="true" [state]="'selected'">Middle</button>
-      <button fd-button-grouped [compact]="true">Right </button>
-    </fd-button-group>
-  </div>
-</div>
+<component-example [name]="'ex3'">
+  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
+    <button fd-button-grouped [compact]="true" [glyph]="'survey'" [state]="'selected'"></button>
+    <button fd-button-grouped [compact]="true" [glyph]="'pie-chart'"></button>
+    <button fd-button-grouped [compact]="true" [glyph]="'pool'"></button>
+  </fd-button-group>
+  <fd-button-group>
+    <button fd-button-grouped [compact]="true">Left</button>
+    <button fd-button-grouped [compact]="true" [state]="'selected'">Middle</button>
+    <button fd-button-grouped [compact]="true">Right </button>
+  </fd-button-group>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" compactSizeHtml "></code></pre>
 
 <separator></separator>
 
 <h2>Default Size (Large)</h2>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-button-group style="margin-right: 10px;">
-      <button fd-button-grouped [glyph]="'survey'" [state]="'selected'"></button>
-      <button fd-button-grouped [glyph]="'pie-chart'" ></button>
-      <button fd-button-grouped [glyph]="'pool'"></button>
-    </fd-button-group>
-    <fd-button-group>
-      <button fd-button-grouped >Left</button>
-      <button fd-button-grouped [state]="'selected'">Middle</button>
-      <button fd-button-grouped >Right</button>
-    </fd-button-group>
-  </div>
-</div>
+<component-example [name]="'ex4'">
+  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
+    <button fd-button-grouped [glyph]="'survey'" [state]="'selected'"></button>
+    <button fd-button-grouped [glyph]="'pie-chart'"></button>
+    <button fd-button-grouped [glyph]="'pool'"></button>
+  </fd-button-group>
+  <fd-button-group>
+    <button fd-button-grouped>Left</button>
+    <button fd-button-grouped [state]="'selected'">Middle</button>
+    <button fd-button-grouped>Right</button>
+  </fd-button-group>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" defaultSizeHtml "></code></pre>
 
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <fd-button-group>
-    <button *ngIf ="data.properties.label1.length > 0" fd-button-grouped
-        [size]="data.properties.size"
-        [compact]="data.properties.compact"
-        [state]="data.properties.state1" >
-        {{data.properties.label1}}
+    <button *ngIf="data.properties.label1.length > 0" fd-button-grouped [size]="data.properties.size" [compact]="data.properties.compact"
+      [state]="data.properties.state1">
+      {{data.properties.label1}}
     </button>
-    <button *ngIf ="data.properties.label2.length > 0" fd-button-grouped
-        [size]="data.properties.size"
-        [compact]="data.properties.compact"
-        [state]="data.properties.state2" >
-        {{data.properties.label2}}
+    <button *ngIf="data.properties.label2.length > 0" fd-button-grouped [size]="data.properties.size" [compact]="data.properties.compact"
+      [state]="data.properties.state2">
+      {{data.properties.label2}}
     </button>
-    <button *ngIf ="data.properties.label3.length > 0" fd-button-grouped
-        [size]="data.properties.size"
-        [compact]="data.properties.compact"
-        [state]="data.properties.state3" >
-        {{data.properties.label3}}
+    <button *ngIf="data.properties.label3.length > 0" fd-button-grouped [size]="data.properties.size" [compact]="data.properties.compact"
+      [state]="data.properties.state3">
+      {{data.properties.label3}}
     </button>
-    <button *ngIf ="data.properties.icon1.length > 0" fd-button-grouped
-        [size]="data.properties.size"
-        [glyph]="data.properties.icon1"
-        [compact]="data.properties.compact"
-        [state]="data.properties.state4" >
+    <button *ngIf="data.properties.icon1.length > 0" fd-button-grouped [size]="data.properties.size" [glyph]="data.properties.icon1"
+      [compact]="data.properties.compact" [state]="data.properties.state4">
     </button>
-    <button *ngIf ="data.properties.icon2.length > 0" fd-button-grouped
-        [size]="data.properties.size"
-        [glyph]="data.properties.icon2"
-        [compact]="data.properties.compact"
-        [state]="data.properties.state5" >
+    <button *ngIf="data.properties.icon2.length > 0" fd-button-grouped [size]="data.properties.size" [glyph]="data.properties.icon2"
+      [compact]="data.properties.compact" [state]="data.properties.state5">
     </button>
-    <button *ngIf ="data.properties.icon3.length > 0" fd-button-grouped
-        [size]="data.properties.size"
-        [glyph]="data.properties.icon3"
-        [compact]="data.properties.compact"
-        [state]="data.properties.state6" >
+    <button *ngIf="data.properties.icon3.length > 0" fd-button-grouped [size]="data.properties.size" [glyph]="data.properties.icon3"
+      [compact]="data.properties.compact" [state]="data.properties.state6">
     </button>
   </fd-button-group>
 </playground>

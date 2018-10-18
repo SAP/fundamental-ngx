@@ -7,17 +7,23 @@ import { TimeComponent } from '../time/time.component';
     templateUrl: './time-picker.component.html'
 })
 export class TimePickerComponent {
-    @Input() time: TimeObject = { hour: 0, minute: 0, second: 0 };
+    @Input()
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
-    @Input() meridian: boolean;
+    @Input()
+    meridian: boolean;
 
-    @Input() disabled: boolean;
+    @Input()
+    disabled: boolean;
 
-    @Input() spinners: boolean = true;
+    @Input()
+    spinners: boolean = true;
 
-    @Input() displaySeconds: boolean = true;
+    @Input()
+    displaySeconds: boolean = true;
 
-    @ViewChild(TimeComponent) child: TimeComponent;
+    @ViewChild(TimeComponent)
+    child: TimeComponent;
 
     period: string;
 
@@ -60,15 +66,17 @@ export class TimePickerComponent {
         } else if (this.displaySeconds) {
             formattedSecond = this.time.second;
         }
-        if ((formattedHour || formattedHour === 0) && (formattedMinute || formattedMinute === '00')) {
-            formattedTime = formattedHour + ':' + formattedMinute;
-        }
-        if (formattedSecond || formattedSecond === '00') {
-            formattedTime = formattedTime + ':' + formattedSecond;
-        }
-
-        if (formattedMeridian) {
-            formattedTime = formattedTime + ' ' + formattedMeridian;
+        if (formattedHour || formattedHour === 0) {
+            formattedTime = formattedHour;
+            if (formattedMinute || formattedMinute === '00') {
+                formattedTime = formattedHour + ':' + formattedMinute;
+                if (formattedSecond || formattedSecond === '00') {
+                    formattedTime = formattedTime + ':' + formattedSecond;
+                }
+            }
+            if (formattedMeridian) {
+                formattedTime = formattedTime + ' ' + formattedMeridian;
+            }
         }
 
         return formattedTime;

@@ -16,18 +16,23 @@
   ]
 }"></properties>
 
-<description>The inputs for <code>button</code> will be translated into class attributed respecting fundamental-ui guidelines.
+<description>The inputs for <code>button</code> will be translated into class attributed respecting fundamental-ui
+  guidelines.
   <br>For example:
-  <br>if it is passed <code>positive</code> for <code>fdType</code> the class <code>fd-button--positive</code> will be added
+  <br>if it is passed <code>positive</code> for <code>fdType</code> the class <code>fd-button--positive</code> will be
+  added
   to the element.
-  <br>if it is passed <code>s</code> for <code>size</code> the class <code>fd-button--s</code> will be added to the element.
+  <br>if it is passed <code>s</code> for <code>size</code> the class <code>fd-button--s</code> will be added to the
+  element.
 </description>
 
 <separator></separator>
 <h2>Extensibility</h2>
-<description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code>  inputs
+<description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code>
+  inputs
   doesn't have a restriction for the predefined values.
-  <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, but <code>size</code>  can
+  <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, but
+  <code>size</code> can
   accept any other string, for example <code>xxs</code>, which will be translated into class <code>fd-button--xxs</code>.
 </description>
 
@@ -40,35 +45,33 @@
   <code class="code-snippet">[fdType]="'negative'"</code> to modify the type of the button.
 </p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <button fd-button>
-        Primary Button
-      </button>
-      <button fd-button
-              [fdType]="'main'">
-        Main Button
-      </button>
-      <button fd-button
-              [fdType]="'secondary'">
-        Secondary Button
-      </button>
-      <button fd-button
-              [fdType]="'toolbar'">
-        Toolbar Button
-      </button>
-      <button fd-button
-              [fdType]="'positive'">
-        Positive Button
-      </button>
-      <button fd-button
-              [fdType]="'negative'">
-        Negative Button
-      </button>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <p>
+    <button fd-button>
+      Primary Button
+    </button>
+    <button fd-button
+            [fdType]="'main'">
+      Main Button
+    </button>
+    <button fd-button
+            [fdType]="'secondary'">
+      Secondary Button
+    </button>
+    <button fd-button
+            [fdType]="'toolbar'">
+      Toolbar Button
+    </button>
+    <button fd-button
+            [fdType]="'positive'">
+      Positive Button
+    </button>
+    <button fd-button
+            [fdType]="'negative'">
+      Negative Button
+    </button>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlType"></code></pre>
 
 <separator></separator>
@@ -79,31 +82,29 @@
   <code class="code-snippet">[size]="'l'"</code> to modify the size of the button.
 </p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <button fd-button
-              [size]="'xs'">
-        Extra-Small Button
-      </button>
-      <button fd-button
-              [size]="'s'">
-        Small Button
-      </button>
-      <button fd-button
-              [size]="'compact'">
-        Compact Button
-      </button>
-      <button fd-button>
-        Normal Button
-      </button>
-      <button fd-button
-              [size]="'l'">
-        Large Button
-      </button>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <p>
+    <button fd-button
+            [size]="'xs'">
+      Extra-Small Button
+    </button>
+    <button fd-button
+            [size]="'s'">
+      Small Button
+    </button>
+    <button fd-button
+            [size]="'compact'">
+      Compact Button
+    </button>
+    <button fd-button>
+      Normal Button
+    </button>
+    <button fd-button
+            [size]="'l'">
+      Large Button
+    </button>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlSize"></code></pre>
 
 <separator></separator>
@@ -112,42 +113,40 @@
   Use
   <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to add an icon to the button.
 </p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <button fd-button
-              [glyph]="'cart'">
-        Add to Cart
-      </button>
-      <button fd-button
-              [fdType]="'main'"
-              [glyph]="'cart'">
-        Add to Cart
-      </button>
-      <button fd-button
-              [fdType]="'toolbar'"
-              [glyph]="'filter'">
-        Filter
-      </button>
-      <button fd-button
-              [fdType]="'positive'"
-              [glyph]="'accept'">
-        Approve
-      </button>
-      <button fd-button
-              [glyph]="'cart'"></button>
-      <button fd-button
-              [fdType]="'main'"
-              [glyph]="'cart'"></button>
-      <button fd-button
-              [fdType]="'toolbar'"
-              [glyph]="'filter'"></button>
-      <button fd-button
-              [fdType]="'positive'"
-              [glyph]="'accept'"></button>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex3'">
+  <p>
+    <button fd-button
+            [glyph]="'cart'">
+      Add to Cart
+    </button>
+    <button fd-button
+            [fdType]="'main'"
+            [glyph]="'cart'">
+      Add to Cart
+    </button>
+    <button fd-button
+            [fdType]="'toolbar'"
+            [glyph]="'filter'">
+      Filter
+    </button>
+    <button fd-button
+            [fdType]="'positive'"
+            [glyph]="'accept'">
+      Approve
+    </button>
+    <button fd-button
+            [glyph]="'cart'"></button>
+    <button fd-button
+            [fdType]="'main'"
+            [glyph]="'cart'"></button>
+    <button fd-button
+            [fdType]="'toolbar'"
+            [glyph]="'filter'"></button>
+    <button fd-button
+            [fdType]="'positive'"
+            [glyph]="'accept'"></button>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlIcon"></code></pre>
 
 <separator></separator>
@@ -157,23 +156,21 @@
   <code class="code-snippet">[state]="'disabled'"</code> or
   <code class="code-snippet">[state]="'selected'"</code> to set button state.
 </p>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <p>
-      <button fd-button>
-        Normal State
-      </button>
-      <button fd-button
-              [state]="'selected'">
-        Selected State
-      </button>
-      <button fd-button
-              [state]="'disabled'">
-        Disabled State
-      </button>
-    </p>
-  </div>
-</div>
+<component-example [name]="'ex4'">
+  <p>
+    <button fd-button>
+      Normal State
+    </button>
+    <button fd-button
+            [state]="'selected'">
+      Selected State
+    </button>
+    <button fd-button
+            [state]="'disabled'">
+      Disabled State
+    </button>
+  </p>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlState"></code></pre>
 
 <separator></separator>

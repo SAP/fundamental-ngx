@@ -22,7 +22,7 @@ export class InputGroupDocsComponent {
                     placeholder: {
                         type: 'string'
                     },
-                    inputText: {
+                    ngModel: {
                         type: 'string'
                     },
                     addOnText: {
@@ -678,7 +678,7 @@ export class InputGroupDocsComponent {
             placement: 'after',
             inline: false,
             placeholder: '',
-            inputText: '10000',
+            ngModel: '10000',
             addOnType: 'text',
             addOnText: '€',
             glyph: '',
@@ -726,14 +726,18 @@ export class InputGroupDocsComponent {
     numberInputHtml = `<label fd-form-label>Quantity Spinner</label>
 <fd-input-group-number
                        [disabled]="false"
-                       [inputText]="123">
+                       [(ngModel)]="numberValue">
 </fd-input-group-number>`;
+
+    numberValue = '123';
 
     searchInputHtml = `<label fd-form-label>Search input</label>
 <fd-input-group-search
                        [disabled]="false"
-                       [inputText]="'Search term'">
+                       [(ngModel)]="searchTerm">
 </fd-input-group-search>`;
+
+    searchTerm = 'Search Term';
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');

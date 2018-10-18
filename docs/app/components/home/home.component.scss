@@ -42,13 +42,23 @@ $trangle-size: 10rem;
     margin-bottom: $angular-logo-spacing;
 }
 
-.home__logo-angular-wrap {
+.home__logo-wrap {
     margin-bottom: $angular-logo-spacing;
+    display: flex;
+    justify-content: center;
 }
 
-.home__logo-angular {
-    max-width: 6rem;
+.home__logo {
+    max-width: 8rem;
     display: inline-block;
+}
+
+.home__logo:first-of-type {
+    padding-right: 10px;
+}
+
+.home__logo:last-of-type {
+    padding-left: 10px;
 }
 
 .home__code-wrap {
@@ -62,7 +72,7 @@ $trangle-size: 10rem;
     border: none;
 }
 
-.home__btn_docs:hover {
+.home__btn_docs:hover, focus {
     background-color: #222222;
 }
 

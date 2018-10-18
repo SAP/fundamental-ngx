@@ -20,82 +20,126 @@
 <separator></separator>
 <h2>Action bar with back button, description and action buttons.</h2>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-action-bar>
-      <fd-action-bar-back>
-        <button fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
-      </fd-action-bar-back>
-      <fd-action-bar-header>
-        <fd-action-bar-title>Page Title</fd-action-bar-title>
-        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
-      </fd-action-bar-header>
-      <fd-action-bar-actions>
-        <button fd-button [fdType]="'primary'">Cancel</button>
-        <button fd-button [fdType]="'main'">Save</button>
-      </fd-action-bar-actions>
-    </fd-action-bar>
-  </div>
-</div>
+<component-example [name]="'ex1'">
+  <fd-action-bar>
+    <fd-action-bar-back>
+      <button aria-label="back" fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
+    </fd-action-bar-back>
+    <fd-action-bar-header>
+      <fd-action-bar-title>Page Title</fd-action-bar-title>
+      <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+    </fd-action-bar-header>
+    <fd-action-bar-actions>
+      <button fd-button [fdType]="'primary'">Cancel</button>
+      <button fd-button [fdType]="'main'">Save</button>
+    </fd-action-bar-actions>
+  </fd-action-bar>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="backButtonHtml"></code></pre>
 
 
 <separator></separator>
 
 <h2>Action bar with main actions and no Back button</h2>
-<p>Display main actions within the Action bar. This allows for users to find important page actions in a consistent area no
+<p>Display main actions within the Action bar. This allows for users to find important page actions in a consistent
+  area no
   matter what page they are on within the application.</p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-action-bar>
-      <fd-action-bar-header>
-        <fd-action-bar-title>Page Title</fd-action-bar-title>
-        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
-      </fd-action-bar-header>
-      <fd-action-bar-actions>
-        <button fd-button [fdType]="'primary'">Cancel</button>
-        <button fd-button [fdType]="'main'">Save</button>
-      </fd-action-bar-actions>
-    </fd-action-bar>
-  </div>
-</div>
+<component-example [name]="'ex2'">
+  <fd-action-bar>
+    <fd-action-bar-header>
+      <fd-action-bar-title>Page Title</fd-action-bar-title>
+      <fd-action-bar-description>Action bar Description</fd-action-bar-description>
+    </fd-action-bar-header>
+    <fd-action-bar-actions>
+      <button fd-button [fdType]="'primary'">Cancel</button>
+      <button fd-button [fdType]="'main'">Save</button>
+    </fd-action-bar-actions>
+  </fd-action-bar>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="noBackButtonHtml"></code></pre>
 
 <separator></separator>
 
 <h2>Several Main Actions in a Contextual Menu</h2>
-<p>When there are several main actions for a page, consider displaying them under a contextual menu. This allows the user to
-  look in the same position they are used to but avoids cluttering the action bar with more than 3-4 actions. This also works
+<p>When there are several main actions for a page, consider displaying them under a contextual menu. This allows the
+  user to
+  look in the same position they are used to but avoids cluttering the action bar with more than 3-4 actions. This also
+  works
   well for a responsive/adaptive application.</p>
 
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
+<component-example [name]="'ex3'">
+  <fd-action-bar>
+    <fd-action-bar-header>
+      <fd-action-bar-title>Page Title</fd-action-bar-title>
+    </fd-action-bar-header>
+    <fd-action-bar-actions>
+      <fd-popover>
+        <fd-popover-control>
+          <button aria-label="contextual menu" fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+          <fd-menu>
+            <fd-menu-list>
+              <fd-menu-item>
+                Edit
+              </fd-menu-item>
+              <fd-menu-item>
+                Delete
+              </fd-menu-item>
+              <fd-menu-item>
+                Assign
+              </fd-menu-item>
+              <fd-menu-item>
+                Expire
+              </fd-menu-item>
+              <fd-menu-item>
+                Archive
+              </fd-menu-item>
+            </fd-menu-list>
+          </fd-menu>
+        </fd-popover-body>
+      </fd-popover>
+    </fd-action-bar-actions>
+  </fd-action-bar>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="actionsContextualMenuHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Action bar mobile view</h2>
+
+<component-example [name]="'ex4'">
+  <fd-action-bar-mobile>
     <fd-action-bar>
+      <fd-action-bar-back>
+        <button aria-label="back" fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
+      </fd-action-bar-back>
       <fd-action-bar-header>
         <fd-action-bar-title>Page Title</fd-action-bar-title>
+        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
       </fd-action-bar-header>
       <fd-action-bar-actions>
         <fd-popover>
           <fd-popover-control>
-            <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
+            <button aria-label="contextual menu" fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
           </fd-popover-control>
           <fd-popover-body>
             <fd-menu>
               <fd-menu-list>
-                <fd-menu-item [url]="'#'">
+                <fd-menu-item>
                   Edit
                 </fd-menu-item>
-                <fd-menu-item [url]="'#'">
+                <fd-menu-item>
                   Delete
                 </fd-menu-item>
-                <fd-menu-item [url]="'#'">
+                <fd-menu-item>
                   Assign
                 </fd-menu-item>
-                <fd-menu-item [url]="'#'">
+                <fd-menu-item>
                   Expire
                 </fd-menu-item>
-                <fd-menu-item [url]="'#'">
+                <fd-menu-item>
                   Archive
                 </fd-menu-item>
               </fd-menu-list>
@@ -104,55 +148,6 @@
         </fd-popover>
       </fd-action-bar-actions>
     </fd-action-bar>
-  </div>
-</div>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="actionsContextualMenuHtml"></code></pre>
-
-<separator></separator>
-
-<h2>Action bar mobile view</h2>
-
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-action-bar-mobile>
-      <fd-action-bar>
-        <fd-action-bar-back>
-          <button fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
-        </fd-action-bar-back>
-        <fd-action-bar-header>
-          <fd-action-bar-title>Page Title</fd-action-bar-title>
-          <fd-action-bar-description>Action bar Description</fd-action-bar-description>
-        </fd-action-bar-header>
-        <fd-action-bar-actions>
-          <fd-popover>
-            <fd-popover-control>
-              <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
-            </fd-popover-control>
-            <fd-popover-body>
-              <fd-menu>
-                <fd-menu-list>
-                  <fd-menu-item [url]="'#'">
-                    Edit
-                  </fd-menu-item>
-                  <fd-menu-item [url]="'#'">
-                    Delete
-                  </fd-menu-item>
-                  <fd-menu-item [url]="'#'">
-                    Assign
-                  </fd-menu-item>
-                  <fd-menu-item [url]="'#'">
-                    Expire
-                  </fd-menu-item>
-                  <fd-menu-item [url]="'#'">
-                    Archive
-                  </fd-menu-item>
-                </fd-menu-list>
-              </fd-menu>
-            </fd-popover-body>
-          </fd-popover>
-        </fd-action-bar-actions>
-      </fd-action-bar>
-    </fd-action-bar-mobile>
-  </div>
-</div>
+  </fd-action-bar-mobile>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="mobileViewHtml"></code></pre>

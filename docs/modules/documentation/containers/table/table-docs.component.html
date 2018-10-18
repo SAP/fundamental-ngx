@@ -1,70 +1,41 @@
 <header>Table</header>
-<description>The Table component is a common component used to display data that can be compared. Usually a set of item of
+<description>The Table component is a common component used to display data that can be compared. Usually a set of item
+  of
   the same type which data is divided on columns to facilitate the comparison between items.</description>
 <import module="TableModule"
         path="fundamental/table/table.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-table&gt;</h1>
-
-There are two different types of table cells you can use, the 'simple' cells and the 'rich' cells. Simple cells can only
-display text. Rich cells can contain images, plain text or links. The table component requires only two root arguments, a
-'headers' array and a 'tableData' array.
-<br><br> In a table with simple cells, the tableData property is an array of objects containing a 'rowData' property. This
-property should contain an array of strings, each string being a cell in the table.
-
+<properties [properties]="{
+  childComponents: [
+    { name: '<fd-table-header>', description: 'The table header, contains \'<th>\' header cell elements.'},
+    { name: '<fd-table-body>', description: 'The table body. Use \'<tr *ngFor>\' to iterate over your collection.  Then construct a row using \'<td>\'s as you would for a standard HTML table.'}
+  ]
+}"></properties><br>
 <separator></separator>
 
-<h2>Simple Table</h2>
-This is an example of a table with simple cells, where the rowData is an array of strings.<br><br>
-<properties [properties]="{
-    inputs: [
-    { name: 'headers', description: 'Array of strings for the column headers of the table' },
-    { name: 'tableData', description: 'Array of objects that contain two properties, rowData (an array of strings containing data for each column in the row), and children (an array of objects containing additional rows).'}
-  ]
-  }">
-</properties>
+<h2>Table</h2>
 <br>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-table [tableData]="data.properties.simpleTableData"
-              [headers]="data.properties.simpleHeaders">
-
-    </fd-table>
-  </div>
-</div>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleTableHtml"></code></pre>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleTableJson"></code></pre>
-
-<separator></separator>
-<h2>Rich Table</h2>
-This is an example of a table with rich cells, where the rowData is an array of objects, where each object can have any of
-the following properties:<br><br>
-<properties [properties]="{
-    properties: [
-    { name: 'displayText', description: 'The text to display in the cell.  If omitted, the link url will be displayed.' },
-    { name: 'linkUrl', description: 'If provided, this is the URL the link will navigate to.' },
-    { name: 'imageUrl', description: 'If provided, this is the URL of the image to include.'}
-  ]
-  }">
-</properties>
-<br><br>
-<properties [properties]="{
-    inputs: [
-    { name: 'headers', description: 'Array of strings for the column headers of the table.' },
-    { name: 'tableData', description: 'Array of objects that contains rowData (an array of objects containing data for each column in the row).'}
-  ]
-  }">
-</properties>
-<br>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-table [tableData]="data.properties.richTableData"
-              [headers]="data.properties.richHeaders"
-              [headerWidths]="data.properties.richWidths">
-
-    </fd-table>
-  </div>
-</div>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="richTableHtml"></code></pre>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="richTableJson"></code></pre>
+<component-example [name]="'ex1'">
+  <fd-table>
+    <fd-table-header>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Date</th>
+      <th>Type</th>
+    </fd-table-header>
+    <fd-table-body>
+      <tr *ngFor="let row of tableRows">
+        <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
+        <td>{{row.column2}}</td>
+        <td>{{row.column3}}</td>
+        <td>{{row.date}}</td>
+        <td><fd-icon [glyph]="row.type"></fd-icon></td>
+      </tr>
+    </fd-table-body>
+  </fd-table>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="tableHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="tableJson"></code></pre>

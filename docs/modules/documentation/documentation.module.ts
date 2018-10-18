@@ -17,6 +17,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
 import { ImportComponent } from './components/import/import.component';
+import { DirectionalityComponent } from './components/directionality/directionality.component';
+import { ComponentExampleComponent } from './components/component-example/component-example.component';
+import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
 
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
@@ -38,7 +41,6 @@ import { ModalDocsComponent } from './containers/modal/modal-docs.component';
 import { TableDocsComponent } from './containers/table/table-docs.component';
 import { ActionBarDocsComponent } from './containers/action-bar/action-bar-docs.component';
 import { PanelDocsComponent } from './containers/panel/panel-docs.component';
-import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.component';
 import { MenuDocsComponent } from './containers/menu/menu-docs.component';
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
 import { FormDocsComponent } from './containers/form/form-docs.component';
@@ -50,10 +52,10 @@ import { DatePickerDocsComponent } from './containers/date-picker/date-picker-do
 import { TimeDocsComponent } from './containers/time/time-docs.component';
 import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
 
-
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
 import { InternationalizationDocsComponent } from './containers/internationalization/internationalization.component';
+import { HomeDocsComponent } from './containers/home/home.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
@@ -69,7 +71,7 @@ const ROUTES: Routes = [
         path: '',
         component: DocumentationComponent,
         children: [
-            { path: '', redirectTo: 'installation', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'action-bar', component: ActionBarDocsComponent },
             { path: 'alert', component: AlertDocsComponent },
             { path: 'badgeLabel', component: BadgeLabelDocsComponent },
@@ -86,7 +88,6 @@ const ROUTES: Routes = [
             { path: 'inlineHelp', component: InlineHelpDocsComponent },
             { path: 'inputGroup', component: InputGroupDocsComponent },
             { path: 'list', component: ListDocsComponent },
-            { path: 'megaMenu', component: MegaMenuDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
             { path: 'navbar', component: NavbarDocsComponent },
@@ -102,7 +103,8 @@ const ROUTES: Routes = [
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent },
-            { path: 'rtl', component: InternationalizationDocsComponent }
+            { path: 'rtl', component: InternationalizationDocsComponent },
+            { path: 'home', component: HomeDocsComponent }
         ]
     }
 ];
@@ -131,7 +133,6 @@ const ROUTES: Routes = [
         InputGroupDocsComponent,
         ImageDocsComponent,
         ListDocsComponent,
-        MegaMenuDocsComponent,
         MenuDocsComponent,
         ModalDocsComponent,
         TabsDocsComponent,
@@ -144,14 +145,17 @@ const ROUTES: Routes = [
         CalendarDocsComponent,
         DatePickerDocsComponent,
         SideNavigationDocsComponent,
-        MegaMenuDocsComponent,
         TileDocsComponent,
         TimeDocsComponent,
         TimePickerDocsComponent,
         NavbarDocsComponent,
         InstallationDocsComponent,
         UsageDocsComponent,
-        InternationalizationDocsComponent
+        InternationalizationDocsComponent,
+        HomeDocsComponent,
+        DirectionalityComponent,
+        ComponentExampleComponent,
+        ExampleBackgroundComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

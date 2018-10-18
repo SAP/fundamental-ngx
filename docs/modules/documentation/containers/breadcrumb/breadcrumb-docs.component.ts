@@ -5,12 +5,29 @@ import { Component } from '@angular/core';
     templateUrl: './breadcrumb-docs.component.html'
 })
 export class BreadcrumbDocsComponent {
-    breadcrumbHtml =
-        '<fd-breadcrumb>\n' +
-        '  <fd-breadcrumb-item [url]="\'#\'">Link Text</fd-breadcrumb-item>\n' +
-        '  <fd-breadcrumb-item [routerLink]="\'#\'" [queryParams]="\'#\'">Link Text</fd-breadcrumb-item>\n' +
-        '  <fd-breadcrumb-item>Link Text</fd-breadcrumb-item>\n' +
-        '</fd-breadcrumb>\n';
+    breadcrumbHtml1 = `<fd-breadcrumb>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 1</a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Breadcrumb Level 2</a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <span fd-breadcrumb-link>Breadcrumb Level 3</span>
+  </fd-breadcrumb-item>
+</fd-breadcrumb>`;
+
+    breadcrumbHtml2 = `<fd-breadcrumb>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 1</a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 2</a>
+  </fd-breadcrumb-item>
+  <fd-breadcrumb-item>
+    <span fd-breadcrumb-link>Breadcrumb Level 3</span>
+  </fd-breadcrumb-item>
+</fd-breadcrumb>`;
 
     constructor() {}
 }

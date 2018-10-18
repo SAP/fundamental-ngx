@@ -23,9 +23,4 @@ describe('InputGroupSearchComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should get the input', () => {
-        component.inputText = 'input';
-        expect(component.getInput()).toBe('input');
-    });
 });
