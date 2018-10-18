@@ -9,12 +9,22 @@ export class MenuItemComponent implements AfterViewInit, OnChanges {
 
     ngAfterViewInit() {
         if (
+            // if the menu item contains a child anchor element, apply 'fd-menu__item' class to that anchor
             this.itemEl &&
             this.itemEl.nativeElement &&
             this.itemEl.nativeElement.children &&
-            this.itemEl.nativeElement.children[0]
+            this.itemEl.nativeElement.children[0] &&
+            this.itemEl.nativeElement.children[0].tagName === 'A'
         ) {
             this.itemEl.nativeElement.children[0].classList.add('fd-menu__item');
+        } else if (
+            // if the menu item does not contain child elements, apply 'fd-menu__item' class to the fd-menu-item components
+            this.itemEl &&
+            this.itemEl.nativeElement &&
+            this.itemEl.nativeElement.children &&
+            this.itemEl.nativeElement.children.length === 0
+        ) {
+            this.itemEl.nativeElement.classList.add('fd-menu__item');
         }
     }
 
