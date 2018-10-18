@@ -7,7 +7,6 @@
          class="fd-tree__col"
          [ngClass]="{'fd-tree__col--control': i === 0}">
       <button (click)="toggleDisplayChildren()"
-              tabindex="0"
               *ngIf="row.children && i === 0"
               class="fd-tree__control"
               aria-label="Expand"
@@ -44,10 +43,8 @@
           <fd-popover-body>
             <fd-menu>
               <fd-menu-list>
-                <fd-menu-item tabindex="0"
-                              (click)="editTreeItem(row)">Edit</fd-menu-item>
-                <fd-menu-item tabindex="0"
-                              (click)="deleteTreeItem(row)">Delete</fd-menu-item>
+                <fd-menu-item (click)="editTreeItem(row)">Edit</fd-menu-item>
+                <fd-menu-item (click)="deleteTreeItem(row)">Delete</fd-menu-item>
               </fd-menu-list>
             </fd-menu>
           </fd-popover-body>

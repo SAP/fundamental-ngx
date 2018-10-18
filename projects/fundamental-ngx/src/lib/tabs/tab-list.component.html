@@ -4,12 +4,12 @@
       *ngFor="let tab of tabs">
     <a role="tab"
        class="fd-tabs__link"
-       tabindex="0"
        [attr.aria-controls]="tab.id"
        [attr.aria-disabled]="tab.disabled"
        [attr.aria-selected]="tab.expanded ? true : null"
        [class.is-selected]="tab.expanded"
        [href]="'#' + tab.id"
+       (keypress)="onKeypressHandler($event, tab.id)"
        (click)="tabClicked($event, tab.id)">{{ tab.title }}</a>
   </li>
 </ul>

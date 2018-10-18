@@ -11,37 +11,39 @@
 <separator></separator>
 
 <h1>&lt;fd-breadcrumb&gt;</h1>
-<properties [properties]="{
-  inputs: [
-    { name: 'url', description: '(Optional) Url the breadcrumb should link to.  Can not be used with routerLink simultaneously.  Leave blank for the current page.'},
-    { name: 'routerLink', description: '(Optional) RouterLink the breadcrumb should link to.  Can not be used with URL simultaneously.  Leave blank for the current page.'}
-  ]
-}"></properties>
-<br>
-<span>
-  Instead of the [url] property, you may use any RouterLink properties on each breadcrumb item. See the official <a
-     href="https://angular.io/api/router/RouterLink">Angular documentation for RouterLink</a> for more information.
-</span>
+<h2>&lt;fd-breadcrumb-item&gt;</h2>
+<h3>&lt;a fd-breadcrumb-link&gt;</h3>
 
 <separator></separator>
 <span>An example using <b>routerLink</b></span>
 <component-example [name]="'ex1'">
   <fd-breadcrumb>
-    <fd-breadcrumb-item [routerLink]="'#'">Breadcrumb Level 1</fd-breadcrumb-item>
-    <fd-breadcrumb-item [routerLink]="'#'"
-                        [queryParams]="'#'">Breadcrumb Level 2</fd-breadcrumb-item>
-    <fd-breadcrumb-item>Breadcrumb Level3</fd-breadcrumb-item>
+    <fd-breadcrumb-item>
+      <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 1</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item>
+      <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Breadcrumb Level 2</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item>
+      <span fd-breadcrumb-link>Breadcrumb Level 3</span>
+    </fd-breadcrumb-item>
   </fd-breadcrumb>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml1"></code></pre>
 <separator></separator>
 
-<span>An example using <b>url</b></span>
+<span>An example using <b>href</b></span>
 <component-example [name]="'ex2'">
   <fd-breadcrumb>
-    <fd-breadcrumb-item [url]="'/docs/breadcrumb'">Breadcrumb Level 1</fd-breadcrumb-item>
-    <fd-breadcrumb-item [url]="'/docs/inputGroup'">Breadcrumb Level 2</fd-breadcrumb-item>
-    <fd-breadcrumb-item>Breadcrumb Level 3</fd-breadcrumb-item>
+    <fd-breadcrumb-item>
+      <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 1</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item>
+      <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 2</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item>
+      <span fd-breadcrumb-link>Breadcrumb Level 3</span>
+    </fd-breadcrumb-item>
   </fd-breadcrumb>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml2"></code></pre>

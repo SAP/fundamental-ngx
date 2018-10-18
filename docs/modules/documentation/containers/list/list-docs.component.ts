@@ -669,9 +669,13 @@ export class ListDocsComponent implements OnInit {
     };
 
     simpleListHtml = `<fd-list>
-  <fd-list-item><a href="#">List item 1</a></fd-list-item>
+  <fd-list-item>
+    <a href="#">List item 1</a>
+  </fd-list-item>
   <fd-list-item>List item 2</fd-list-item>
-  <fd-list-item><a href="#">List item 3</a></fd-list-item>
+  <fd-list-item>
+    <a href="#">List item 3</a>
+  </fd-list-item>
   <fd-list-item>List item 4</fd-list-item>
 </fd-list>`;
 
@@ -699,10 +703,18 @@ export class ListDocsComponent implements OnInit {
 </fd-list>`;
 
     listCheckboxesHtml = `<fd-list>
-  <fd-list-item><fd-list-checkbox>List item 1</fd-list-checkbox></fd-list-item>
-  <fd-list-item><fd-list-checkbox>List item 2</fd-list-checkbox></fd-list-item>
-  <fd-list-item><fd-list-checkbox>List item 3</fd-list-checkbox></fd-list-item>
-  <fd-list-item><fd-list-checkbox>List item 4</fd-list-checkbox></fd-list-item>
+  <fd-list-item>
+    <fd-list-checkbox>List item 1</fd-list-checkbox>
+  </fd-list-item>
+  <fd-list-item>
+    <fd-list-checkbox>List item 2</fd-list-checkbox>
+  </fd-list-item>
+  <fd-list-item>
+    <fd-list-checkbox>List item 3</fd-list-checkbox>
+  </fd-list-item>
+  <fd-list-item>
+    <fd-list-checkbox>List item 4</fd-list-checkbox>
+  </fd-list-item>
 </fd-list>`;
 
     constructor(private schemaFactory: SchemaFactoryService) {

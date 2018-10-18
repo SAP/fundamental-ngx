@@ -12,13 +12,13 @@ export class PopoverDocsComponent {
   <fd-popover-body>
     <fd-menu>
       <fd-menu-list>
-        <fd-menu-item [url]="'#'">
-          Option 1
+        <fd-menu-item>
+          <a [attr.href]="'#'">Option 1</a>
         </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-          Option 2
+        <fd-menu-item>
+          <a [routerLink]="'#'">Option 2</a>
         </fd-menu-item>
-        <fd-menu-item [url]="'#'">
+        <fd-menu-item>
           Option 3
         </fd-menu-item>
       </fd-menu-list>
@@ -33,13 +33,13 @@ export class PopoverDocsComponent {
   <fd-popover-body>
     <fd-menu>
       <fd-menu-list>
-        <fd-menu-item [url]="'#'">
-          Option 1
+        <fd-menu-item>
+          <a [attr.href]="'#'">Option 1</a>
         </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-          Option 2
+        <fd-menu-item>
+          <a [routerLink]="'#'">Option 2</a>
         </fd-menu-item>
-        <fd-menu-item [url]="'#'">
+        <fd-menu-item>
           Option 3
         </fd-menu-item>
       </fd-menu-list>
@@ -54,13 +54,13 @@ export class PopoverDocsComponent {
   <fd-popover-body>
     <fd-menu>
       <fd-menu-list>
-        <fd-menu-item [url]="'#'">
-          Option 1
+        <fd-menu-item>
+          <a [attr.href]="'#'">Option 1</a>
         </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-          Option 2
+        <fd-menu-item>
+          <a [routerLink]="'#'">Option 2</a>
         </fd-menu-item>
-        <fd-menu-item [url]="'#'">
+        <fd-menu-item>
           Option 3
         </fd-menu-item>
       </fd-menu-list>

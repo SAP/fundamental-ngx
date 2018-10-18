@@ -2,7 +2,7 @@
 <description>The popover is a wrapping component that accepts a "control" as well as a "body". A control can be
   anything that you want to trigger the interaction from. The body will be the contents of what you reveal on the page
   after triggering the popover. When paired with the menu component, the popover is commonly used as the
-  interaction/wrapping component for composing "dropdowns", "contextual menus", "mega menus", etc. <br />
+  interaction/wrapping component for composing "dropdowns", "contextual menus", etc. <br />
 
   As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one popover
   should close all others to prevent multiple layers and collisions of several popovers.
@@ -33,13 +33,13 @@
     <fd-popover-body>
       <fd-menu>
         <fd-menu-list>
-          <fd-menu-item [url]="'#'">
-            Option 1
+          <fd-menu-item>
+            <a [attr.href]="'#'">Option 1</a>
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 2
+          <fd-menu-item>
+            <a [routerLink]="'#'">Option 2</a>
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
+          <fd-menu-item>
             Option 3
           </fd-menu-item>
         </fd-menu-list>
@@ -54,13 +54,13 @@
     <fd-popover-body>
       <fd-menu>
         <fd-menu-list>
-          <fd-menu-item [url]="'#'">
-            Option 1
+          <fd-menu-item>
+            <a [attr.href]="'#'">Option 1</a>
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 2
+          <fd-menu-item>
+            <a [routerLink]="'#'">Option 2</a>
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
+          <fd-menu-item>
             Option 3
           </fd-menu-item>
         </fd-menu-list>
@@ -75,13 +75,13 @@
     <fd-popover-body>
       <fd-menu>
         <fd-menu-list>
-          <fd-menu-item [url]="'#'">
-            Option 1
+          <fd-menu-item>
+            <a [attr.href]="'#'">Option 1</a>
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
-            Option 2
+          <fd-menu-item>
+            <a [routerLink]="'#'">Option 2</a>
           </fd-menu-item>
-          <fd-menu-item [url]="'#'">
+          <fd-menu-item>
             Option 3
           </fd-menu-item>
         </fd-menu-list>
