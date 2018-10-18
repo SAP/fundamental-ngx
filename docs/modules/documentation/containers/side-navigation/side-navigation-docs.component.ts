@@ -8,16 +8,24 @@ export class SideNavigationDocsComponent implements OnInit {
     oneLevelSideNavHtml = `<fd-side-nav>
   <fd-side-nav-list>
     <fd-side-nav-item>
-      <fd-side-nav-link [routerLink]="'#'" [queryParams]="'#'">Link Item</fd-side-nav-link>
+      <fd-side-nav-link>
+        <a [attr.href]="'#'">Link Item</a>
+      </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+      <fd-side-nav-link>
+        <a [routerLink]="'#'">Link Item</a>
+      </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+      <fd-side-nav-link>
+        Link Item
+      </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+      <fd-side-nav-link>
+        Link Item
+      </fd-side-nav-link>
     </fd-side-nav-item>
   </fd-side-nav-list>
 </fd-side-nav>`;
@@ -28,16 +36,24 @@ export class SideNavigationDocsComponent implements OnInit {
     </fd-side-nav-title>
     <fd-side-nav-list>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          <a [attr.href]="'#'">Link Item</a>
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          <a [routerLink]="'#'">Link Item</a>
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          Link Item
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          Link Item
+        </fd-side-nav-link>
       </fd-side-nav-item>
     </fd-side-nav-list>
   </fd-side-nav-group>
@@ -47,16 +63,24 @@ export class SideNavigationDocsComponent implements OnInit {
     </fd-side-nav-title>
     <fd-side-nav-list>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          <a [attr.href]="'#'">Link Item</a>
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          <a [routerLink]="'#'">Link Item</a>
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          Link Item
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          Link Item
+        </fd-side-nav-link>
       </fd-side-nav-item>
     </fd-side-nav-list>
   </fd-side-nav-group>
@@ -68,10 +92,14 @@ export class SideNavigationDocsComponent implements OnInit {
     </fd-side-nav-title>
     <fd-side-nav-list>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          <a [attr.href]="'#'">Link Item</a>
+        </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
-        <fd-side-nav-link [url]="'#'">Link Item</fd-side-nav-link>
+        <fd-side-nav-link>
+          <a [routerLink]="'#'">Link Item</a>
+        </fd-side-nav-link>
       </fd-side-nav-item>
     </fd-side-nav-list>
   </fd-side-nav-group>
@@ -83,25 +111,46 @@ export class SideNavigationDocsComponent implements OnInit {
       <fd-side-nav-item>
         <fd-side-nav-link [hasSublist]="true">
           Link Item
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+          <fd-side-nav-subitem>
+            <fd-side-nav-sublink>
+              <a [attr.href]="'#'">Link Item</a>
+            </fd-side-nav-sublink>
+          </fd-side-nav-subitem>
+          <fd-side-nav-subitem>
+            <fd-side-nav-sublink>
+              <a [routerLink]="'#'">Link Item</a>
+            </fd-side-nav-sublink>
+          </fd-side-nav-subitem>
         </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
         <fd-side-nav-link [hasSublist]="true">
           Link Item
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+          <fd-side-nav-subitem>
+            <fd-side-nav-sublink>
+              <a [attr.href]="'#'">Link Item</a>
+            </fd-side-nav-sublink>
+          </fd-side-nav-subitem>
+          <fd-side-nav-subitem>
+            <fd-side-nav-sublink>
+              <a [routerLink]="'#'">Link Item</a>
+            </fd-side-nav-sublink>
+          </fd-side-nav-subitem>
         </fd-side-nav-link>
       </fd-side-nav-item>
       <fd-side-nav-item>
         <fd-side-nav-link [hasSublist]="true">
           Link Item
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
-          <fd-side-nav-subitem [url]="'#'">Link Item</fd-side-nav-subitem>
+          <fd-side-nav-subitem>
+            <fd-side-nav-sublink>
+              <a [attr.href]="'#'">Link Item</a>
+            </fd-side-nav-sublink>
+          </fd-side-nav-subitem>
+          <fd-side-nav-subitem>
+            <fd-side-nav-sublink>
+              <a [routerLink]="'#'">Link Item</a>
+            </fd-side-nav-sublink>
+          </fd-side-nav-subitem>
         </fd-side-nav-link>
       </fd-side-nav-item>
     </fd-side-nav-list>
@@ -110,27 +159,31 @@ export class SideNavigationDocsComponent implements OnInit {
     iconsSideNavHtml = `<fd-side-nav>
   <fd-side-nav-list>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-        Link Icon
+      <fd-side-nav-link>
+        <a [routerLink]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>Link Icon
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-        Link Icon
+      <fd-side-nav-link>
+        <a [attr.href]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>Link Icon
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-        Link Icon
+      <fd-side-nav-link>
+        <a [routerLink]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>Link Icon
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
-        Link Icon
+      <fd-side-nav-link>
+        <a [attr.href]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>Link Icon
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
   </fd-side-nav-list>
@@ -138,23 +191,31 @@ export class SideNavigationDocsComponent implements OnInit {
     collapsedSideNavHtml = `<fd-side-nav [collapsed]="true">
   <fd-side-nav-list>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+      <fd-side-nav-link>
+        <a [attr.href]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+      <fd-side-nav-link>
+        <a [routerLink]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+      <fd-side-nav-link>
+        <a [attr.href]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
     <fd-side-nav-item>
-      <fd-side-nav-link [url]="'#'">
-        <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+      <fd-side-nav-link>
+        <a [routerLink]="'#'">
+          <fd-side-nav-icon [glyph]="'home'" [size]="'l'"></fd-side-nav-icon>
+        </a>
       </fd-side-nav-link>
     </fd-side-nav-item>
   </fd-side-nav-list>

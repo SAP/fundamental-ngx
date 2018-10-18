@@ -4,7 +4,6 @@
   <input [(ngModel)]="inputText"
          [disabled]="disabled"
          type="text"
-         tabindex="0"
          *ngIf="placement !== 'before'"
          placeholder="{{placeholder}}">
   <span *ngIf="!button"
@@ -20,18 +19,15 @@
         [ngClass]="{'fd-input-group__addon--after': placement !== 'before', 'fd-input-group__addon--before': placement === 'before'}">
     <button [disabled]="disabled"
             *ngIf="!glyph"
-            tabindex="0"
             (click)="buttonClicked($event)"
             class="fd-button--secondary">{{addOnText}}</button>
     <button [disabled]="disabled"
             *ngIf="glyph"
-            tabindex="0"
             (click)="buttonClicked($event)"
             class="fd-button--icon fd-button--secondary"
             [ngClass]="'sap-icon--' + glyph"></button>
   </span>
   <input [(ngModel)]="inputText"
-         tabindex="0"
          *ngIf="placement === 'before'"
          [disabled]="disabled"
          type="text"

@@ -3,24 +3,22 @@
     <div class="fd-calendar__navigation">
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
-                tabindex="0"
-                aria-label="Previous"
+                aria-label="previous month"
                 (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--secondary fd-button--s"
-                tabindex="0"
+                aria-label="month selection"
                 (click)="openMonthSelection()">{{monthName}}</button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--secondary fd-button--s"
-                tabindex="0"
+                aria-label="year selection"
                 (click)="openYearSelection()">{{year}}</button>
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
-                tabindex="0"
-                aria-label="Next"
+                aria-label="next month"
                 (click)="showCalendarYears ? loadNextYearsList() : goToNextMonth()"></button>
       </div>
     </div>
@@ -33,7 +31,7 @@
             *ngFor="let listYear of calendarYearsList"
             [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
             (click)="selectYear(listYear)">
-          <span class="fd-calendar__text">{{listYear}}</span>
+          <span role="button" [attr.tabIndex]="listYear === year ? 0 : -1" [attr.id]="calendarId + '-fd-year-' + listYear" (keydown)="onKeydownYearHandler($event, listYear)" class="fd-calendar__text">{{listYear}}</span>
         </li>
       </ul>
     </div>
@@ -45,7 +43,7 @@
             *ngFor="let monthShortName of monthsShortName, let i=index"
             [ngClass]='(i===todayMonth && year===todayYear ? " fd-calendar__item--current" : "") + (i===selectedMonth ? " is-selected" : "") '
             (click)="selectMonth(i)">
-          <span class="fd-calendar__text">{{monthShortName}}</span>
+          <span role="button" [attr.tabIndex]="i === selectedMonth ? 0 : -1" [attr.id]="calendarId + '-fd-month-' + i" (keydown)="onKeydownMonthHandler($event, i)" class="fd-calendar__text">{{monthShortName}}</span>
         </li>
       </ul>
     </div>
@@ -77,8 +75,9 @@
                           (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
                 (click)="selectDate(cell)">
-              <span class="fd-calendar__text"
-                    tabindex="0">{{cell.day}}</span>
+              <span class="fd-calendar__text" [attr.id]="calendarId + '-fd-day-' + cell.day"
+                    role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
+                    (keydown)="onKeydownDayHandler($event, cell)">{{cell.day}}</span>
             </td>
           </tr>
         </tbody>

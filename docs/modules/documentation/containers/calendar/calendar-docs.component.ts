@@ -36,10 +36,6 @@ export class CalendarDocsComponent implements OnInit {
 
     calendarSingleHtml = `<fd-calendar [calType]="'single'" [(selectedDay)]="selectedDay" [disableFunction]="myDisableFunction" [blockFunction]="myBlockFunction"></fd-calendar>`;
 
-    selectedDayJs = `selectedDay = {
-    date: new Date()
-};`;
-
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
 // Disable the weekends
@@ -85,14 +81,11 @@ myDisableFunction = function(d: Date): boolean {
     let firstDay = new Date(2018, 7, 5);
     let lastDay = new Date(2018, 7, 20);
     return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
-}
+}`;
 
-// Block days within a range
-myBlockFunction = function (d: Date): boolean {
-    let firstDay = new Date(2018, 7, 25);
-    let lastDay = new Date(2018, 7, 30);
-    return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
-} `;
+    selectedDayJs = `selectedDay = {
+    date: new Date()
+}`;
 
     calendarRangeHtml = `<fd-calendar [datePickerType]="'range'" [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast" [disableFunction]="myDisableFunction2" ></fd-calendar>`;
 
