@@ -700,7 +700,6 @@ export class CalendarComponent implements OnInit, OnChanges {
             this.date = new Date();
         }
         this.constructCalendar();
-        this.constructCalendarYearsList();
         this.calendarId = this.hasher.hash();
         if (this.month) {
             this.selectMonth(this.month);

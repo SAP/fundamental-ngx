@@ -19,6 +19,8 @@
              [attr.aria-expanded]="isOpen"
              [attr.aria-hidden]="!isOpen">
             <fd-calendar [calType]="type"
+                         [disableFunction]="disableFunction ? disableFunction : null"
+                         [blockFunction]="blockFunction ? blockFunction : null"
                          [(selectedDay)]="selectedDay"
                          [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"
                          (updateDatePickerInput)="updateDatePickerInputHandler($event)"

@@ -8,6 +8,8 @@
 <properties [properties]="{
   inputs: [
     { name: 'type',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
+    { name: 'disableFunction', description: 'A user defined function that specifies the days that should be disabled. See \'Calendar\' docs for more info.'},
+    { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked. See \'Calendar\' docs for more info.'},
     { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
     { name: 'selectedRangeFirst', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the first selected day in a range of dates on \'range\' type calendars.'},
     { name: 'selectedRangeLast', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the last selected day in a range of dates on \'range\' type calendars.'}
