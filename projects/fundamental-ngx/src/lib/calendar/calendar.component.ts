@@ -520,110 +520,79 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
 
     onKeydownYearHandler(event, year) {
-        let newFocusedYearId, newFocusedYearEl;
+        let newFocusedYearId;
         if (event.code === 'Space' || event.code === 'Enter') {
             event.preventDefault();
             this.selectYear(year);
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 4);
-            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
-            if (newFocusedYearEl) {
-                newFocusedYearEl.focus();
-            }
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 4);
-            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
-            if (newFocusedYearEl) {
-                newFocusedYearEl.focus();
-            }
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 1);
-            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
-            if (newFocusedYearEl) {
-                newFocusedYearEl.focus();
-            }
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
-            newFocusedYearEl = this.eRef.nativeElement.querySelector(newFocusedYearId);
-            if (newFocusedYearEl) {
-                newFocusedYearEl.focus();
-            }
+        }
+        if (newFocusedYearId) {
+            this.focusElement(newFocusedYearId);
         }
     }
 
     onKeydownMonthHandler(event, month) {
-        let newFocusedMonthId, newFocusedMonthEl;
+        let newFocusedMonthId;
         if (event.code === 'Space' || event.code === 'Enter') {
             event.preventDefault();
             this.selectMonth(month);
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
             newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 4);
-            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
-            if (newFocusedMonthEl) {
-                newFocusedMonthEl.focus();
-            }
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 4);
-            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
-            if (newFocusedMonthEl) {
-                newFocusedMonthEl.focus();
-            }
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
             newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 1);
-            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
-            if (newFocusedMonthEl) {
-                newFocusedMonthEl.focus();
-            }
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
             newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
-            newFocusedMonthEl = this.eRef.nativeElement.querySelector(newFocusedMonthId);
-            if (newFocusedMonthEl) {
-                newFocusedMonthEl.focus();
-            }
+        }
+        if (newFocusedMonthId) {
+            this.focusElement(newFocusedMonthId);
         }
     }
 
     onKeydownDayHandler(event, cell) {
-        let newFocusedDayId, newFocusedDayEl;
+        const currentId = parseInt(event.currentTarget.id.split('-').pop());
+        let newFocusedDayId;
         if (event.code === 'Space' || event.code === 'Enter') {
             event.preventDefault();
             this.selectDate(cell);
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day - 7);
-            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
-            if (newFocusedDayEl) {
-                newFocusedDayEl.focus();
-            }
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day + 7);
-            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
-            if (newFocusedDayEl) {
-                newFocusedDayEl.focus();
-            }
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day - 1);
-            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
-            if (newFocusedDayEl) {
-                newFocusedDayEl.focus();
-            }
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (cell.day + 1);
-            newFocusedDayEl = this.eRef.nativeElement.querySelector(newFocusedDayId);
-            if (newFocusedDayEl) {
-                newFocusedDayEl.focus();
-            }
+            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
+        }
+        if (newFocusedDayId) {
+            this.focusElement(newFocusedDayId);
+        }
+    }
+
+    focusElement(elementSelector) {
+        const elementToFocus = this.eRef.nativeElement.querySelector(elementSelector);
+        if (elementToFocus) {
+            elementToFocus.focus();
         }
     }
 

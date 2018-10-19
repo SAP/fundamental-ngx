@@ -3,7 +3,7 @@
     <div class="fd-calendar__navigation">
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
-                aria-label="previous month"
+                [attr.aria-label]="showCalendarYears ? 'previous year' : 'previous month'"
                 (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
       </div>
       <div class="fd-calendar__action">
@@ -18,12 +18,12 @@
       </div>
       <div class="fd-calendar__action">
         <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
-                aria-label="next month"
+                [attr.aria-label]="showCalendarYears ? 'next year' : 'next month'"
                 (click)="showCalendarYears ? loadNextYearsList() : goToNextMonth()"></button>
       </div>
     </div>
   </header>
-  <div class="fd-calendar__content">
+  <div class="fd-calendar__content" id="calendarId">
     <div class="fd-calendar__years"
          *ngIf="showCalendarYears">
       <ul class="fd-calendar__list">
@@ -65,7 +65,7 @@
               *ngFor="let row of calendarGrid; let i = index;">
             <td class="fd-calendar__item"
                 role="gridcell"
-                *ngFor="let cell of row"
+                *ngFor="let cell of row; let cellIndex = index;"
                 [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
                           (cell.selected ? " is-selected": "") + 
                           (calType==="range" && cell.selectedLast && selectedRangeFirst != selectedRangeLast ? " is-selected-range-last": "") + 
@@ -75,7 +75,7 @@
                           (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
                 (click)="selectDate(cell)">
-              <span class="fd-calendar__text" [attr.id]="calendarId + '-fd-day-' + cell.day"
+              <span class="fd-calendar__text" [attr.id]="calendarId + '-fd-day-' + (i + 1) + cellIndex"
                     role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
                     (keydown)="onKeydownDayHandler($event, cell)">{{cell.day}}</span>
             </td>
