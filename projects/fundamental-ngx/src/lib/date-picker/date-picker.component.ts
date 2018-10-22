@@ -7,12 +7,22 @@ import { CalendarDay, CalendarType } from '../calendar/calendar.component';
     styleUrls: ['./date-picker.component.scss']
 })
 export class DatePickerComponent implements OnInit {
-    @Input()
-    type: CalendarType = 'single';
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker: string = '';
+
+    @Input()
+    type: CalendarType = 'single';
+
+    @Input()
+    disableFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockFunction = function(d): boolean {
+        return false;
+    };
 
     @Input()
     selectedDay: CalendarDay = {
