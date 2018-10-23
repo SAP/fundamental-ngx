@@ -28,10 +28,10 @@
          *ngIf="showCalendarYears">
       <ul class="fd-calendar__list">
         <li class="fd-calendar__item"
-            *ngFor="let listYear of calendarYearsList"
+            *ngFor="let listYear of calendarYearsList; let i = index;"
             [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
             (click)="selectYear(listYear)">
-          <span role="button" [attr.tabIndex]="listYear === year ? 0 : -1" [attr.id]="calendarId + '-fd-year-' + listYear" (keydown)="onKeydownYearHandler($event, listYear)" class="fd-calendar__text">{{listYear}}</span>
+          <span role="button" [attr.tabIndex]="getYearTabIndex(listYear, i)" [attr.id]="calendarId + '-fd-year-' + listYear" (keydown)="onKeydownYearHandler($event, listYear)" class="fd-calendar__text">{{listYear}}</span>
         </li>
       </ul>
     </div>

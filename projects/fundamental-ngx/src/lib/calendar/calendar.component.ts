@@ -347,6 +347,29 @@ export class CalendarComponent implements OnInit, OnChanges {
         }
     }
 
+    getYearTabIndex(year, i) {
+        let retVal = -1;
+        // tab index currently selected year
+        if (year === this.year) {
+            retVal = 0;
+        } else {
+            // if no year on the calendarYearsList is selected, tab index the first
+            let foundYear = false;
+            this.calendarYearsList.forEach((yearFromList) => {
+                if (this.year === yearFromList) {
+                    foundYear = true;
+                }
+            });
+            if (!foundYear) {
+                if (i === 0) {
+                    retVal = 0;
+                }
+            }
+        }
+
+        return retVal;
+    }
+
     //Functions that handle calendar navigation
     goToPreviousMonth() {
         this.setCurrentMonth(this.date.getMonth() - 1);
