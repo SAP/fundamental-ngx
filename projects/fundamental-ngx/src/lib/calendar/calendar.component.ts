@@ -247,12 +247,18 @@ export class CalendarComponent implements OnInit, OnChanges {
             calendarMonth.push(currMonthCalendarDay);
         }
 
-        // if no day is selected, tab index today
         if (!foundSelected) {
-            for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
+            let foundToday = false;
+            for (let d = 0; d < numOfDaysInCurrentMonth; d++) {
+                // if no day is selected, tab index today
                 if (calendarMonth[d] && calendarMonth[d].today) {
+                    foundToday = true;
                     calendarMonth[d].isTabIndexed = true;
                 }
+            }
+            // if today isn't present on the calendarGrid, tab index the first day
+            if (!foundToday) {
+                calendarMonth[0].isTabIndexed = true;
             }
         }
 
@@ -400,7 +406,6 @@ export class CalendarComponent implements OnInit, OnChanges {
                 }
             }
         }
-        this.constructCalendar();
         this.isInvalidDateInput.emit(false);
     }
 
