@@ -20,9 +20,7 @@
 
 <component-example [name]="'ex1'">
   <div class="grid identifier-grid">
-    <span fd-identifier [size]="'s'" [glyph]="'washing-machine'"></span>
-    <span fd-identifier [size]="'m'" [glyph]="'washing-machine'"></span>
-    <span fd-identifier [size]="'l'" [glyph]="'washing-machine'"></span>
+    <fd-icon-identifier-example></fd-icon-identifier-example>
   </div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="iconHtml"></code></pre>
@@ -31,9 +29,7 @@
 <h2>Initials</h2>
 <component-example [name]="'ex2'">
   <div class="grid identifier-grid">
-    <span fd-identifier [size]="'s'" aria-label="Wendy Wallace">WW</span>
-    <span fd-identifier [size]="'m'" aria-label="Wendy Wallace">WW</span>
-    <span fd-identifier [size]="'l'" aria-label="Wendy Wallace">WW</span>
+    <fd-initials-identifier-example></fd-initials-identifier-example>
   </div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="initialsHtml"></code></pre>
@@ -43,13 +39,7 @@
 <p>A circle style can be rendered using the <code>--circle modifier</code></p>
 <component-example [name]="'ex3'">
   <div class="grid identifier-grid">
-    <span fd-identifier [size]="'s'" [glyph]="'money-bills'" [circle]="true"></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [circle]="true"></span>
-    <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [circle]="true"></span>
-
-    <span fd-identifier [size]="'s'" [circle]="true" aria-label="Wendy Wallace">WW</span>
-    <span fd-identifier [size]="'m'" [circle]="true" aria-label="Wendy Wallace">WW</span>
-    <span fd-identifier [size]="'l'" [circle]="true" aria-label="Wendy Wallace">WW</span>
+    <fd-circle-identifier-example></fd-circle-identifier-example>
   </div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="circleHtml"></code></pre>
@@ -59,13 +49,7 @@
 <p>A transparent style can be rendered using the <code>--transparent modifier</code></p>
 <component-example [name]="'ex4'">
   <div class="grid identifier-grid">
-    <span fd-identifier [size]="'s'" [glyph]="'money-bills'" [transparent]="true"></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [transparent]="true"></span>
-    <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [transparent]="true"></span>
-
-    <span fd-identifier [size]="'s'" [transparent]="true">WW</span>
-    <span fd-identifier [size]="'m'" [transparent]="true">WW</span>
-    <span fd-identifier [size]="'l'" [transparent]="true">WW</span>
+    <fd-transparent-identifier-example></fd-transparent-identifier-example>
   </div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="transparentHtml"></code></pre>
@@ -75,15 +59,7 @@
 <p>Use helpers classes tp change the background colors, e.g., <code>.fd-has-background-color-accent-9</code></p>
 <component-example [name]="'ex5'">
   <div class="grid identifier-grid">
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='1'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='2'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='3'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='4'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='5'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='6'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='7'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='8'></span>
-    <span fd-identifier [size]="'m'" [glyph]="'money-bills'" [colorAccent]='9'></span>
+    <fd-colors-identifier-example></fd-colors-identifier-example>
   </div>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="colorAccentHtml"></code></pre>

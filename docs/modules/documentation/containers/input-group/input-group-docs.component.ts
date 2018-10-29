@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as inputGroupButtonSrc from '!raw-loader!./examples/input-group-button-example.component.html';
+import * as inputGroupIconSrc from '!raw-loader!./examples/input-group-icon-example.component.html';
+import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example.component.html';
+import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
+import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
+
 @Component({
     selector: 'app-input-group',
     templateUrl: './input-group-docs.component.html'
@@ -689,55 +695,15 @@ export class InputGroupDocsComponent {
         }
     };
 
-    textAddOnHtml = `<label class="fd-form__label">Left Aligned Text Add-on</label>
-<fd-input-group [placement]="'before'" [addOnText]="'$'" [placeholder]="'Amount'">
+    textAddOnHtml = inputGroupTextSrc;
 
-</fd-input-group>
-<br/>
-<label fd-form-label>Right Aligned Text Add-on</label>
-<fd-input-group [placement]="'after'" [addOnText]="'$'" [placeholder]="'Amount'">
+    iconAddOnHtml = inputGroupIconSrc;
 
-</fd-input-group>`;
+    buttonIconAddOnHtml = inputGroupButtonSrc;
 
-    iconAddOnHtml = `<label class="fd-form__label">Left Aligned Icon Add-on</label>
-<fd-input-group [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
+    numberInputHtml = inputGroupNumberSrc;
 
-</fd-input-group>
-<br/>
-<label fd-form-label>Right Aligned Icon Add-on</label>
-<fd-input-group [placement]="'after'" [glyph]="'accelerated'" [placeholder]="'Amount'">
-
-</fd-input-group>`;
-
-    buttonIconAddOnHtml = `<label class="fd-form__label">Left Aligned Icon Button Add-on</label>
-<fd-input-group [button]="true" [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
-
-</fd-input-group>
-<br/>
-<div fd-form-group>
-  <div fd-form-item>
-    <label fd-form-label>Right Aligned Text Button Add-on</label>
-    <fd-input-group [button]="true" [placement]="'after'" [addOnText]="'Submit'" [placeholder]="'Amount'">
-
-    </fd-input-group>
-  </div>
-</div>`;
-
-    numberInputHtml = `<label fd-form-label>Quantity Spinner</label>
-<fd-input-group-number
-                       [disabled]="false"
-                       [(ngModel)]="numberValue">
-</fd-input-group-number>`;
-
-    numberValue = '123';
-
-    searchInputHtml = `<label fd-form-label>Search input</label>
-<fd-input-group-search
-                       [disabled]="false"
-                       [(ngModel)]="searchTerm">
-</fd-input-group-search>`;
-
-    searchTerm = 'Search Term';
+    searchInputHtml = inputGroupSearchSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');

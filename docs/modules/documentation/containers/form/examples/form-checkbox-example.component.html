@@ -1,0 +1,59 @@
+<fieldset fd-form-set>
+    <fd-form-legend>Checkboxes</fd-form-legend>
+    <div fd-form-item [isCheck]="true">
+        <input fd-form-control [type]="'checkbox'" id="checkbox-1" name="checkbox-name-1" checked>
+        <fd-form-label [forValue]="'checkbox-1'">Option One</fd-form-label>
+    </div>
+    <div fd-form-item [isCheck]="true">
+        <input fd-form-control [type]="'checkbox'" id="checkbox-2" name="checkbox-name-1">
+        <fd-form-label [forValue]="'checkbox-2'">Option Two</fd-form-label>
+    </div>
+    <div fd-form-item [isCheck]="true">
+        <input fd-form-control [type]="'checkbox'" id="checkbox-3" name="checkbox-name-1">
+        <fd-form-label [forValue]="'checkbox-3'">Option Three</fd-form-label>
+    </div>
+</fieldset>
+
+<fieldset fd-form-set>
+    <fd-form-legend>Checkboxes disabled</fd-form-legend>
+    <div fd-form-item [isCheck]="true">
+        <input fd-form-control [type]="'checkbox'" id="checkbox-4" name="checkbox-name-2" disabled>
+        <fd-form-label [forValue]="'checkbox-4'">Option One</fd-form-label>
+    </div>
+    <div fd-form-item [isCheck]="true">
+        <input fd-form-control [type]="'checkbox'" id="checkbox-5" name="checkbox-name-2" checked disabled>
+        <fd-form-label [forValue]="'checkbox-5'">Option Two</fd-form-label>
+    </div>
+    <div fd-form-item [isCheck]="true">
+        <input fd-form-control [type]="'checkbox'" id="checkbox-6" name="checkbox-name-2" disabled>
+        <fd-form-label [forValue]="'checkbox-6'">Option Three</fd-form-label>
+    </div>
+</fieldset>
+
+<div fd-form-set>
+    <div fd-form-item>
+        <fd-form-label [forValue]="'input-21'" [isRequired]="true">Required Input</fd-form-label>
+        <input fd-form-control [type]="'text'" id="input-21" placeholder="Field placeholder text">
+    </div>
+</div>
+
+<fieldset fd-form-set>
+    <fd-form-legend>Checkboxes inline</fd-form-legend>
+    <fd-form-group>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+            <fd-form-label [forValue]="'checkbox-7'">
+                <input fd-form-control [type]="'checkbox'" id="checkbox-7" name="checkbox-name-3" checked> Option One
+            </fd-form-label>
+        </div>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+            <fd-form-label [forValue]="'checkbox-8'">
+                <input fd-form-control [type]="'checkbox'" id="checkbox-8" name="checkbox-name-3"> Option Two
+            </fd-form-label>
+        </div>
+        <div fd-form-item [isInline]="true" [isCheck]="true">
+            <fd-form-label [forValue]="'checkbox-9'">
+                <input fd-form-control [type]="'checkbox'" id="checkbox-9" name="checkbox-name-3"> Option Three
+            </fd-form-label>
+        </div>
+    </fd-form-group>
+</fieldset>

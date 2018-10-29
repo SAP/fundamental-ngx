@@ -16,40 +16,7 @@
   visually separated and can have a small group header text.
 </p>
 <component-example [name]="'ex1'">
-  <fd-popover [isDropdown]="true">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-        <fd-menu-group>
-          <fd-menu-title>
-            Group header
-          </fd-menu-title>
-          <fd-menu-list>
-            <fd-menu-item>
-              Option 4
-            </fd-menu-item>
-            <fd-menu-item>
-              Option 5
-            </fd-menu-item>
-            <fd-menu-item>
-              Option 6
-            </fd-menu-item>
-          </fd-menu-list>
-        </fd-menu-group>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
+  <fd-dropdown-default-example></fd-dropdown-default-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="textDropdownHtml"></code></pre>
 
@@ -57,24 +24,7 @@
 
 <h2>Disabled State</h2>
 <component-example [name]="'ex2'">
-  <fd-popover [isDropdown]="true" [disabled]="true">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
+  <fd-dropdown-state-example></fd-dropdown-state-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="disabledDropdownHtml"></code></pre>
 
@@ -83,24 +33,7 @@
 <h2>Dropdown with Icon</h2>
 <p>It can also include complementary information like an icon.</p>
 <component-example [name]="'ex3'">
-  <fd-popover [isDropdown]="true" [glyph]="'filter'">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
+  <fd-dropdown-icons-example></fd-dropdown-icons-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="iconDropdownHtml"></code></pre>
 
@@ -109,100 +42,7 @@
 <h2>Size Options</h2>
 <p>You can also specify dropdown size:</p>
 <component-example [name]="'ex4'">
-  <fd-popover [isDropdown]="true" [size]="'xs'">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
-
-  <fd-popover [isDropdown]="true" [size]="'s'">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
-
-  <fd-popover [isDropdown]="true" [size]="'compact'">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
-
-  <fd-popover [isDropdown]="true">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
-
-  <fd-popover [isDropdown]="true" [size]="'l'">
-    Dropdown
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
+  <fd-dropdown-sizes-example></fd-dropdown-sizes-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="dropdownSizeHtml"></code></pre>
 
@@ -217,73 +57,12 @@
   On click or tap, a contextual menu opens.
 </description>
 <component-example [name]="'ex5'">
-  <fd-popover>
-    <fd-popover-control>
-      <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
-    </fd-popover-control>
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
-
-  <fd-popover>
-    <fd-popover-control>
-      <button fd-button>More</button>
-    </fd-popover-control>
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
-
-  <fd-popover>
-    <fd-popover-control>
-      <button fd-button [fdType]="'secondary'">More</button>
-    </fd-popover-control>
-    <fd-popover-body>
-      <fd-menu>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 1</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 2</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 3
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu>
-    </fd-popover-body>
-  </fd-popover>
+  <fd-dropdown-contextual-menu-example></fd-dropdown-contextual-menu-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="contextualMenuDropdownHtml"></code></pre>
 
 <style>
-  fd-popover {
+  ::ng-deep fd-popover {
     margin-right: 20px;
   }
 </style>

@@ -38,8 +38,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'tabs', name: 'Tabs' },
         { url: 'tile', name: 'Tile' },
         { url: 'time', name: 'Time' },
-        { url: 'timePicker', name: 'Time Picker' },
-        { url: 'tree', name: 'Tree' }
+        { url: 'timePicker', name: 'Time Picker' }
     ];
 
     search: string = '';

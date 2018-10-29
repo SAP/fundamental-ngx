@@ -25,8 +25,7 @@
 <description>This is the default clock setting.</description>
 <component-example [name]="'ex1'">
   <p>
-    <fd-time [time]="timeObject"></fd-time>
-    <span>timeObject: {{ '{' }}hour: {{timeObject.hour}}, minute: {{timeObject.minute}}, second: {{timeObject.second}}}</span>
+    <fd-time-example></fd-time-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timeHtml"></code></pre>
@@ -37,10 +36,7 @@
 <p>You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code></p>
 <component-example [name]="'ex2'">
   <p>
-    <fd-time [meridian]="true"
-             [time]="timeMeridianObject"></fd-time>
-    <span>timeMeridianObject: {{ '{' }}hour: {{timeMeridianObject.hour}}, minute: {{timeMeridianObject.minute}},
-      second: {{timeMeridianObject.second}}}</span>
+    <fd-time-12-example></fd-time-12-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timeMeridianHtml"></code></pre>
@@ -51,10 +47,7 @@
 <description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
 <component-example [name]="'ex3'">
   <p>
-    <fd-time [spinners]="false"
-             [time]="timeNoSpinnersObject"></fd-time>
-    <span>timeObject: {{ '{' }}hour: {{timeNoSpinnersObject.hour}}, minute: {{timeNoSpinnersObject.minute}}, second:
-      {{timeNoSpinnersObject.second}}}</span>
+    <fd-time-no-spinners-example></fd-time-no-spinners-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timeNoSpinnersHtml"></code></pre>
@@ -64,10 +57,7 @@
 <description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
 <component-example [name]="'ex4'">
   <p>
-    <fd-time [displaySeconds]="false"
-             [time]="timeNoSecondsObject"></fd-time>
-    <span>timeObject: {{ '{' }}hour: {{timeNoSecondsObject.hour}}, minute: {{timeNoSecondsObject.minute}}, second:
-      {{timeNoSecondsObject.second}}}</span>
+    <fd-time-no-seconds-example></fd-time-no-seconds-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timeNoSecondsHtml"></code></pre>
@@ -77,8 +67,7 @@
 <p>You can disable the entire component by setting <code>[disabled]="true"</code></p>
 <component-example [name]="'ex5'">
   <p>
-    <fd-time [disabled]="true"
-             [time]="{hour: 0, minute: 0, second: 0}"></fd-time>
+    <fd-time-disabled-example></fd-time-disabled-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timeDisabledHtml"></code></pre>

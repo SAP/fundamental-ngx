@@ -18,19 +18,7 @@
 <h2>Menu</h2>
 <component-example [name]="'ex1'">
   <p>
-    <fd-menu>
-      <fd-menu-list>
-        <fd-menu-item>
-          <a [attr.href]="'#'">Option 1</a>
-        </fd-menu-item>
-        <fd-menu-item>
-          <a [routerLink]="'#'">Option 2</a>
-        </fd-menu-item>
-        <fd-menu-item>
-          Option 3
-        </fd-menu-item>
-      </fd-menu-list>
-    </fd-menu>
+    <fd-menu-example></fd-menu-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="menuHtml"></code></pre>
@@ -40,35 +28,7 @@
 <h2>Menu with Group</h2>
 <component-example [name]="'ex2'">
   <p>
-    <fd-menu>
-      <fd-menu-list>
-        <fd-menu-item>
-          <a [attr.href]="'#'">Option 1</a>
-        </fd-menu-item>
-        <fd-menu-item>
-          <a [routerLink]="'#'">Option 2</a>
-        </fd-menu-item>
-        <fd-menu-item>
-          Option 3
-        </fd-menu-item>
-      </fd-menu-list>
-      <fd-menu-group>
-        <fd-menu-title>
-          Group header
-        </fd-menu-title>
-        <fd-menu-list>
-          <fd-menu-item>
-            <a [attr.href]="'#'">Option 4</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            <a [routerLink]="'#'">Option 5</a>
-          </fd-menu-item>
-          <fd-menu-item>
-            Option 6
-          </fd-menu-item>
-        </fd-menu-list>
-      </fd-menu-group>
-    </fd-menu>
+    <fd-menu-group-example></fd-menu-group-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="menuGroupHtml"></code></pre>

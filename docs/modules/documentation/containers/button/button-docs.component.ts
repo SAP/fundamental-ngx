@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
+import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
+import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
+import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
+
 @Component({
     selector: 'app-button',
     templateUrl: './button-docs.component.html'
@@ -677,67 +682,13 @@ export class ButtonDocsComponent implements OnInit {
         }
     };
 
-    buttonHtmlType = `<button fd-button>
-  Primary Button
-</button>
-<button fd-button [fdType]="'main'">
-  Main Button
-</button>
-<button fd-button [fdType]="'secondary'">
-  Secondary Button
-</button>
-<button fd-button [fdType]="'toolbar'">
-  Toolbar Button
-</button>
-<button fd-button [fdType]="'positive'">
-  Positive Button
-</button>
-<button fd-button [fdType]="'negative'">
-  Negative Button
-</button>`;
+    buttonHtmlType = buttonTypesExample;
 
-    buttonHtmlSize = `<button fd-button [size]="'xs'">
-  Extra-Small Button
-</button>
-<button fd-button [size]="'s'">
-  Small Button
-</button>
-<button fd-button [size]="'compact'">
-  Compact Button
-</button>
-<button fd-button>
-  Normal Button
-</button>
-<button fd-button [size]="'l'">
-  Large Button
-</button>`;
+    buttonHtmlSize = buttonSizesExample;
 
-    buttonHtmlIcon = `<button fd-button [glyph]="'cart'">
-  Add to Cart
-</button>
-<button fd-button [fdType]="'main'" [glyph]="'cart'">
-  Add to Cart
-</button>
-<button fd-button [fdType]="'toolbar'" [glyph]="'filter'">
-  Filter
-</button>
-<button fd-button [fdType]="'positive'" [glyph]="'accept'">
-  Approve
-</button>
-<button fd-button [glyph]="'cart'"></button>
-<button fd-button [fdType]="'main'" [glyph]="'cart'"></button>
-<button fd-button [fdType]="'toolbar'" [glyph]="'filter'"></button>
-<button fd-button [fdType]="'positive'" [glyph]="'accept'"></button>`;
+    buttonHtmlIcon = buttonIconsExample;
 
-    buttonHtmlState = `<button fd-button>
-  Normal State
-</button>
-<button fd-button [state]="'selected'">
-  Selected State
-</button>
-<button fd-button [state]="'disabled'">
-  Disabled State
-</button>`;
+    buttonHtmlState = buttonStateExample;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');

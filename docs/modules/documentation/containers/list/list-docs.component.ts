@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as listSrc from '!raw-loader!./examples/list-example.component.html';
+import * as listActionsSrc from '!raw-loader!./examples/list-actions-example.component.html';
+import * as listCheckboxSrc from '!raw-loader!./examples/list-checkbox-example.component.html';
+
 @Component({
     selector: 'app-list',
     templateUrl: './list-docs.component.html'
@@ -668,54 +672,11 @@ export class ListDocsComponent implements OnInit {
         }
     };
 
-    simpleListHtml = `<fd-list>
-  <fd-list-item>
-    <a href="#">List item 1</a>
-  </fd-list-item>
-  <fd-list-item>List item 2</fd-list-item>
-  <fd-list-item>
-    <a href="#">List item 3</a>
-  </fd-list-item>
-  <fd-list-item>List item 4</fd-list-item>
-</fd-list>`;
+    simpleListHtml = listSrc;
 
-    listActionsHtml = `<fd-list>
-  <fd-list-item>List item 1
-    <fd-list-action>
-      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-    </fd-list-action>
-  </fd-list-item>
-  <fd-list-item>List item 2
-    <fd-list-action>
-      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-    </fd-list-action>
-  </fd-list-item>
-  <fd-list-item>List item 3
-    <fd-list-action>
-      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-    </fd-list-action>
-  </fd-list-item>
-  <fd-list-item>List item 4
-    <fd-list-action>
-      <button fd-button [fdType]="'secondary'" [glyph]="'edit'"></button>
-    </fd-list-action>
-  </fd-list-item>
-</fd-list>`;
+    listActionsHtml = listActionsSrc;
 
-    listCheckboxesHtml = `<fd-list>
-  <fd-list-item>
-    <fd-list-checkbox>List item 1</fd-list-checkbox>
-  </fd-list-item>
-  <fd-list-item>
-    <fd-list-checkbox>List item 2</fd-list-checkbox>
-  </fd-list-item>
-  <fd-list-item>
-    <fd-list-checkbox>List item 3</fd-list-checkbox>
-  </fd-list-item>
-  <fd-list-item>
-    <fd-list-checkbox>List item 4</fd-list-checkbox>
-  </fd-list-item>
-</fd-list>`;
+    listCheckboxesHtml = listCheckboxSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('list');

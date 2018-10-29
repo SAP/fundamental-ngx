@@ -17,33 +17,13 @@
 <separator></separator>
 <span>An example using <b>routerLink</b></span>
 <component-example [name]="'ex1'">
-  <fd-breadcrumb>
-    <fd-breadcrumb-item>
-      <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 1</a>
-    </fd-breadcrumb-item>
-    <fd-breadcrumb-item>
-      <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Breadcrumb Level 2</a>
-    </fd-breadcrumb-item>
-    <fd-breadcrumb-item>
-      <span fd-breadcrumb-link>Breadcrumb Level 3</span>
-    </fd-breadcrumb-item>
-  </fd-breadcrumb>
+  <fd-breadcrumb-routerLink-example></fd-breadcrumb-routerLink-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml1"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbRouterLinkHtml"></code></pre>
 <separator></separator>
 
 <span>An example using <b>href</b></span>
 <component-example [name]="'ex2'">
-  <fd-breadcrumb>
-    <fd-breadcrumb-item>
-      <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 1</a>
-    </fd-breadcrumb-item>
-    <fd-breadcrumb-item>
-      <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 2</a>
-    </fd-breadcrumb-item>
-    <fd-breadcrumb-item>
-      <span fd-breadcrumb-link>Breadcrumb Level 3</span>
-    </fd-breadcrumb-item>
-  </fd-breadcrumb>
+  <fd-breadcrumb-href-example></fd-breadcrumb-href-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHtml2"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHrefHtml"></code></pre>

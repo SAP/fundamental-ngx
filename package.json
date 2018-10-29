@@ -35,6 +35,7 @@
         "highlight.js": "^9.12.0",
         "ngx-highlightjs": "^2.1.1",
         "npm": "^6.4.1",
+        "raw-loader": "^0.5.1",
         "rxjs": "^6.3.3",
         "zone.js": "^0.8.26"
     },

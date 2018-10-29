@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import { ModalService } from '../../../../../projects/fundamental-ngx/src/lib/modal/modal.service';
+import * as modalSrc from '!raw-loader!./examples/modal-example.component.ts';
+import * as modalConfirmationSrc from '!raw-loader!./examples/modal-confirmation-example.component.ts';
 
 @Component({
     selector: 'app-modal',
-    templateUrl: './modal-docs.component.html',
-    providers: [ModalService]
+    templateUrl: './modal-docs.component.html'
 })
 export class ModalDocsComponent implements OnInit {
     static schema: any = {
@@ -48,58 +48,11 @@ export class ModalDocsComponent implements OnInit {
         }
     };
 
-    confirmationReason: string;
+    informationalModalSource = modalSrc;
 
-    informationalModalHtml =`<ng-template #informationalModal>
-    <fd-modal>
-      <fd-modal-header>
-        Modal Header/Title
-      </fd-modal-header>
-      <fd-modal-body>
-        Modal Body
-      </fd-modal-body>
-    </fd-modal>
-</ng-template>
-<button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>`;
+    confirmationModalSource = modalConfirmationSrc;
 
-    confirmationModalHtml =`<ng-template #confirmationModal let-c="close">
-    <fd-modal>
-      <fd-modal-header>
-        Modal Header/Title
-      </fd-modal-header>
-      <fd-modal-body>
-        Modal Body
-      </fd-modal-body>
-      <fd-modal-footer>
-        <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
-        <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
-      </fd-modal-footer>
-    </fd-modal>
-</ng-template>
-<button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>`;
-
-    formModalHtml =``;
-
-    informationalModalJs = `openInfoModal(modalType) {
-    this.modalService.open(modalType);
-}`;
-
-    confirmationModalJs =`openConfirmationModal(modalType) {
-    this.modalService.open(modalType).result.then(
-        result => {
-            if (result === 'Yes') {
-                this.confirmationReason = 'Modal closed with "Yes" button';
-            } else if (result === 'No') {
-                this.confirmationReason = 'Modal closed with "No" button';
-            }
-        },
-        () => {
-            this.confirmationReason = 'Modal dismissed with the "X" button';
-        }
-    );
-}`;
-
-    constructor(private schemaFactory: SchemaFactoryService, private modalService: ModalService) {
+    constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('modal');
     }
 
@@ -109,22 +62,7 @@ export class ModalDocsComponent implements OnInit {
 
     ngOnInit() {}
 
-    openInfoModal(modalType) {
-        this.modalService.open(modalType);
-    }
 
-    openConfirmationModal(modalType) {
-        this.modalService.open(modalType).result.then(
-            result => {
-                if (result === 'Yes') {
-                    this.confirmationReason = 'Modal closed with "Yes" button';
-                } else if (result === 'No') {
-                    this.confirmationReason = 'Modal closed with "No" button';
-                }
-            },
-            () => {
-                this.confirmationReason = 'Modal dismissed with the "X" button';
-            }
-        );
-    }
+
+
 }

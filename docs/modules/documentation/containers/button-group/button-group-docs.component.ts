@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as buttonGroupCompactExample from '!raw-loader!./examples/button-group-compact-example.component.html';
+import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
+import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
+import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
+
 @Component({
     selector: 'app-button-group',
     templateUrl: './button-group-docs.component.html'
@@ -1960,57 +1965,13 @@ export class ButtonGroupDocsComponent implements OnInit {
         }
     };
 
-    xsSizeHtml =
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [id]="\'1\'" [size]="\'xs\'" [glyph]="\'survey\'" [state]="\'selected\'"></button>\n' +
-        '  <button fd-button-grouped [id]="\'2\'" [size]="\'xs\'" [glyph]="\'pie-chart\'"></button>\n' +
-        '  <button fd-button-grouped [id]="\'3\'" [size]="\'xs\'" [glyph]="\'pool\'"></button>\n' +
-        '</fd-button-group>\n' +
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [id]="\'4\'" [size]="\'xs\'" >Left</button>\n' +
-        '  <button fd-button-grouped [id]="\'5\'" [size]="\'xs\'" [state]="\'selected\'">Middle</button>\n' +
-        '  <button fd-button-grouped [id]="\'6\'" [size]="\'xs\'" >Right</button>\n' +
-        '</fd-button-group>\n' +
-        '';
+    xsSizeHtml = buttonGroupXsExample;
 
-    sSizeHtml =
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [size]="\'s\'" [glyph]="\'survey\'" [state]="\'selected\'"></button>\n' +
-        '  <button fd-button-grouped [size]="\'s\'" [glyph]="\'pie-chart\'"></button>\n' +
-        '  <button fd-button-grouped [size]="\'s\'" [glyph]="\'pool\'"></button>\n' +
-        '</fd-button-group>\n' +
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [size]="\'s\'" aria-pressed="true">Left</button>\n' +
-        '  <button fd-button-grouped [size]="\'s\'" [state]="\'selected\'">Middle</button>\n' +
-        '  <button fd-button-grouped [size]="\'s\'" >Right</button>\n' +
-        '</fd-button-group>\n' +
-        '';
+    sSizeHtml = buttonGroupSmallExample;
 
-    compactSizeHtml =
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [compact]="true" [glyph]="\'survey\'" [state]="\'selected\'"></button>\n' +
-        '  <button fd-button-grouped [compact]="true" [glyph]="\'pie-chart\'"></button>\n' +
-        '  <button fd-button-grouped [compact]="true" [glyph]="\'pool\'"></button>\n' +
-        '</fd-button-group>\n' +
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [compact]="true" >Left</button>\n' +
-        '  <button fd-button-grouped [compact]="true" [state]="\'selected\'">Middle</button>\n' +
-        '  <button fd-button-grouped [compact]="true" >Right</button>\n' +
-        '</fd-button-group>\n' +
-        '';
+    compactSizeHtml = buttonGroupCompactExample;
 
-    defaultSizeHtml =
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped [glyph]="\'survey\'" [state]="\'selected\'"></button>\n' +
-        '  <button fd-button-grouped [glyph]="\'pie-chart\'"></button>\n' +
-        '  <button fd-button-grouped [glyph]="\'pool\'"></button>\n' +
-        '</fd-button-group>\n' +
-        '<fd-button-group>\n' +
-        '  <button fd-button-grouped >Left</button>\n' +
-        '  <button fd-button-grouped [state]="\'selected\'">Middle</button>\n' +
-        '  <button fd-button-grouped >Right</button>\n' +
-        '</fd-button-group>\n' +
-        '';
+    defaultSizeHtml = buttonGroupDefaultExample;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('buttonGroup');
