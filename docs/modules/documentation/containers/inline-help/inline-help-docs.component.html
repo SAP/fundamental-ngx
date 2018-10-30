@@ -8,63 +8,18 @@
 
 <properties [properties]="{
   inputs: [
-    { name: 'position', description: 'String - Options include \'bottom-right\' (default), \'bottom-left\', \'right\', and \'left\' '}
+    { name: 'position', description: 'String - Options include \'bottom-right\' (default), \'bottom-left\', \'right\', and \'left\'. Default is bottom right. '}
   ]
 }"></properties>
 
 <separator></separator>
-<h2>Default Position</h2>
-<p>The default positioning of inline help component is bottom right.</p>
 
 <component-example [name]="'ex1'">
   <p class="fd-centered-content">
-    <span>Bottom Right (Default) </span>
-    <fd-inline-help>
-      Lorem ipsum dolor sit amet, consectetur adipiscing.
-    </fd-inline-help>
+    <fd-inline-help-example></fd-inline-help-example>
   </p>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="defaultPositionHtml"></code></pre>
-
-<separator></separator>
-
-<h2>Bottom Left Position</h2>
-
-<component-example [name]="'ex2'">
-  <p class="fd-centered-content">
-    <span>Bottom Left </span>
-    <fd-inline-help [position]="'bottom-left'">
-      Lorem ipsum dolor sit amet, consectetur adipiscing.
-    </fd-inline-help>
-  </p>
-</component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="buttomLeftPositionHtml"></code></pre>
-
-<separator></separator>
-<h2>Right Position</h2>
-
-<component-example [name]="'ex3'">
-  <p class="fd-centered-content">
-    <span>Right </span>
-    <fd-inline-help [position]="'right'">
-      Lorem ipsum dolor sit amet, consectetur adipiscing.
-    </fd-inline-help>
-  </p>
-</component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="rightPositionHtml"></code></pre>
-
-<separator></separator>
-<h2>Left Position </h2>
-
-<component-example [name]="'ex4'">
-  <p class="fd-centered-content">
-    <span>Left </span>
-    <fd-inline-help [position]="'left'">
-      Lorem ipsum dolor sit amet, consectetur adipiscing.
-    </fd-inline-help>
-  </p>
-</component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="leftPositionHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="inlineHelpHtml"></code></pre>
 
 <separator></separator>
 

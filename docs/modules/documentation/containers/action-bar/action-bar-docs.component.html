@@ -21,19 +21,7 @@
 <h2>Action bar with back button, description and action buttons.</h2>
 
 <component-example [name]="'ex1'">
-  <fd-action-bar>
-    <fd-action-bar-back>
-      <button aria-label="back" fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
-    </fd-action-bar-back>
-    <fd-action-bar-header>
-      <fd-action-bar-title>Page Title</fd-action-bar-title>
-      <fd-action-bar-description>Action bar Description</fd-action-bar-description>
-    </fd-action-bar-header>
-    <fd-action-bar-actions>
-      <button fd-button [fdType]="'primary'">Cancel</button>
-      <button fd-button [fdType]="'main'">Save</button>
-    </fd-action-bar-actions>
-  </fd-action-bar>
+  <fd-action-bar-back-example></fd-action-bar-back-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="backButtonHtml"></code></pre>
 
@@ -46,16 +34,7 @@
   matter what page they are on within the application.</p>
 
 <component-example [name]="'ex2'">
-  <fd-action-bar>
-    <fd-action-bar-header>
-      <fd-action-bar-title>Page Title</fd-action-bar-title>
-      <fd-action-bar-description>Action bar Description</fd-action-bar-description>
-    </fd-action-bar-header>
-    <fd-action-bar-actions>
-      <button fd-button [fdType]="'primary'">Cancel</button>
-      <button fd-button [fdType]="'main'">Save</button>
-    </fd-action-bar-actions>
-  </fd-action-bar>
+  <fd-action-bar-no-back-example></fd-action-bar-no-back-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="noBackButtonHtml"></code></pre>
 
@@ -69,39 +48,7 @@
   well for a responsive/adaptive application.</p>
 
 <component-example [name]="'ex3'">
-  <fd-action-bar>
-    <fd-action-bar-header>
-      <fd-action-bar-title>Page Title</fd-action-bar-title>
-    </fd-action-bar-header>
-    <fd-action-bar-actions>
-      <fd-popover>
-        <fd-popover-control>
-          <button aria-label="contextual menu" fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
-        </fd-popover-control>
-        <fd-popover-body>
-          <fd-menu>
-            <fd-menu-list>
-              <fd-menu-item>
-                Edit
-              </fd-menu-item>
-              <fd-menu-item>
-                Delete
-              </fd-menu-item>
-              <fd-menu-item>
-                Assign
-              </fd-menu-item>
-              <fd-menu-item>
-                Expire
-              </fd-menu-item>
-              <fd-menu-item>
-                Archive
-              </fd-menu-item>
-            </fd-menu-list>
-          </fd-menu>
-        </fd-popover-body>
-      </fd-popover>
-    </fd-action-bar-actions>
-  </fd-action-bar>
+  <fd-action-bar-contextual-menu-example></fd-action-bar-contextual-menu-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="actionsContextualMenuHtml"></code></pre>
 
@@ -110,44 +57,6 @@
 <h2>Action bar mobile view</h2>
 
 <component-example [name]="'ex4'">
-  <fd-action-bar-mobile>
-    <fd-action-bar>
-      <fd-action-bar-back>
-        <button aria-label="back" fd-button [fdType]="'secondary'" [size]="'compact'" [glyph]="'nav-back'"></button>
-      </fd-action-bar-back>
-      <fd-action-bar-header>
-        <fd-action-bar-title>Page Title</fd-action-bar-title>
-        <fd-action-bar-description>Action bar Description</fd-action-bar-description>
-      </fd-action-bar-header>
-      <fd-action-bar-actions>
-        <fd-popover>
-          <fd-popover-control>
-            <button aria-label="contextual menu" fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
-          </fd-popover-control>
-          <fd-popover-body>
-            <fd-menu>
-              <fd-menu-list>
-                <fd-menu-item>
-                  Edit
-                </fd-menu-item>
-                <fd-menu-item>
-                  Delete
-                </fd-menu-item>
-                <fd-menu-item>
-                  Assign
-                </fd-menu-item>
-                <fd-menu-item>
-                  Expire
-                </fd-menu-item>
-                <fd-menu-item>
-                  Archive
-                </fd-menu-item>
-              </fd-menu-list>
-            </fd-menu>
-          </fd-popover-body>
-        </fd-popover>
-      </fd-action-bar-actions>
-    </fd-action-bar>
-  </fd-action-bar-mobile>
+  <fd-action-bar-mobile-example></fd-action-bar-mobile-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="mobileViewHtml"></code></pre>

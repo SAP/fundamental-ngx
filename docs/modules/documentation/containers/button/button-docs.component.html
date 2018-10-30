@@ -46,31 +46,7 @@
 </p>
 
 <component-example [name]="'ex1'">
-  <p>
-    <button fd-button>
-      Primary Button
-    </button>
-    <button fd-button
-            [fdType]="'main'">
-      Main Button
-    </button>
-    <button fd-button
-            [fdType]="'secondary'">
-      Secondary Button
-    </button>
-    <button fd-button
-            [fdType]="'toolbar'">
-      Toolbar Button
-    </button>
-    <button fd-button
-            [fdType]="'positive'">
-      Positive Button
-    </button>
-    <button fd-button
-            [fdType]="'negative'">
-      Negative Button
-    </button>
-  </p>
+  <fd-button-types-example></fd-button-types-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlType"></code></pre>
 
@@ -83,27 +59,7 @@
 </p>
 
 <component-example [name]="'ex2'">
-  <p>
-    <button fd-button
-            [size]="'xs'">
-      Extra-Small Button
-    </button>
-    <button fd-button
-            [size]="'s'">
-      Small Button
-    </button>
-    <button fd-button
-            [size]="'compact'">
-      Compact Button
-    </button>
-    <button fd-button>
-      Normal Button
-    </button>
-    <button fd-button
-            [size]="'l'">
-      Large Button
-    </button>
-  </p>
+  <fd-button-sizes-example></fd-button-sizes-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlSize"></code></pre>
 
@@ -114,38 +70,7 @@
   <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to add an icon to the button.
 </p>
 <component-example [name]="'ex3'">
-  <p>
-    <button fd-button
-            [glyph]="'cart'">
-      Add to Cart
-    </button>
-    <button fd-button
-            [fdType]="'main'"
-            [glyph]="'cart'">
-      Add to Cart
-    </button>
-    <button fd-button
-            [fdType]="'toolbar'"
-            [glyph]="'filter'">
-      Filter
-    </button>
-    <button fd-button
-            [fdType]="'positive'"
-            [glyph]="'accept'">
-      Approve
-    </button>
-    <button fd-button
-            [glyph]="'cart'"></button>
-    <button fd-button
-            [fdType]="'main'"
-            [glyph]="'cart'"></button>
-    <button fd-button
-            [fdType]="'toolbar'"
-            [glyph]="'filter'"></button>
-    <button fd-button
-            [fdType]="'positive'"
-            [glyph]="'accept'"></button>
-  </p>
+  <fd-button-icons-example></fd-button-icons-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlIcon"></code></pre>
 
@@ -157,19 +82,7 @@
   <code class="code-snippet">[state]="'selected'"</code> to set button state.
 </p>
 <component-example [name]="'ex4'">
-  <p>
-    <button fd-button>
-      Normal State
-    </button>
-    <button fd-button
-            [state]="'selected'">
-      Selected State
-    </button>
-    <button fd-button
-            [state]="'disabled'">
-      Disabled State
-    </button>
-  </p>
+  <fd-button-state-example></fd-button-state-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlState"></code></pre>
 
@@ -189,7 +102,7 @@
 </playground>
 
 <style>
-  .fd-button,
+  ::ng-deep .fd-button,
   [class*="fd-button--"] {
     margin-right: 10px;
   }

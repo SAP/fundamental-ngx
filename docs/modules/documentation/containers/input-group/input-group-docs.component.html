@@ -27,15 +27,7 @@
   unit of measure, etc.
   The informational add-on can be left or right aligned.</p>
 <component-example [name]="'ex1'">
-  <label class="fd-form__label">Left Aligned Text Add-on</label>
-  <fd-input-group [placement]="'before'" [addOnText]="'$'" [placeholder]="'Amount'">
-
-  </fd-input-group>
-  <br />
-  <label fd-form-label>Right Aligned Text Add-on</label>
-  <fd-input-group [placement]="'after'" [addOnText]="'$'" [placeholder]="'Amount'">
-
-  </fd-input-group>
+  <fd-input-group-text-example></fd-input-group-text-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="textAddOnHtml"></code></pre>
 
@@ -44,16 +36,7 @@
 <h2>Icon add-on</h2>
 <p>An icon can be used instead of text by providing a 'glyph' attribute.</p>
 <component-example [name]="'ex2'">
-  <label class="fd-form__label">Left Aligned Icon Add-on</label>
-  <fd-input-group [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
-
-  </fd-input-group>
-  <br />
-  <label fd-form-label>Right Aligned Icon Add-on</label>
-  <fd-input-group [placement]="'after'" [glyph]="'accelerated'" [placeholder]="'Amount'">
-
-  </fd-input-group>
-  <br />
+  <fd-input-group-icon-example></fd-input-group-icon-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="iconAddOnHtml"></code></pre>
 
@@ -63,20 +46,7 @@
 <p>Adding <code>[button]="true"</code> to the component turns either the icon add-on or text add-on into a button,
   which emits an event <code>addOnButtonClicked($event)</code>.</p>
 <component-example [name]="'ex3'">
-  <label class="fd-form__label">Left Aligned Icon Button Add-on</label>
-  <fd-input-group [button]="true" [placement]="'before'" [glyph]="'accelerated'" [placeholder]="'Amount'">
-
-  </fd-input-group>
-  <br />
-  <div fd-form-group>
-    <div fd-form-item>
-      <label fd-form-label>Right Aligned Text Button Add-on</label>
-      <fd-input-group [button]="true" [placement]="'after'" [addOnText]="'Submit'" [placeholder]="'Amount'">
-
-      </fd-input-group>
-    </div>
-  </div>
-  <br />
+  <fd-input-group-button-example></fd-input-group-button-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonIconAddOnHtml"></code></pre>
 
@@ -94,10 +64,7 @@
 
 <p>The user can increase or decrease a number value using the spinner add-on.</p>
 <component-example [name]="'ex4'">
-  <label fd-form-label>Quantity Spinner</label>
-  <fd-input-group-number [disabled]="false" [(ngModel)]="numberValue"></fd-input-group-number>
-  <br/>
-  <span>numberValue: {{numberValue}}</span>
+  <fd-input-group-number-example></fd-input-group-number-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="numberInputHtml"></code></pre>
 
@@ -116,10 +83,7 @@
 
 <p>This input group automatically shows a clear search button when the user has entered a value in the input.</p>
 <component-example [name]="'ex5'">
-  <label fd-form-label>Search input</label>
-  <fd-input-group-search [disabled]="false" [(ngModel)]="searchTerm"></fd-input-group-search>
-  <br/>
-  <span>searchTerm: {{searchTerm}}</span>
+  <fd-input-group-search-example></fd-input-group-search-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="searchInputHtml"></code></pre>
 

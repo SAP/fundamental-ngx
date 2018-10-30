@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as tileActionsSrc from '!raw-loader!./examples/tile-actions-example.component.html';
+import * as tileButtonSrc from '!raw-loader!./examples/tile-button-example.component.html';
+import * as tileDisabledSrc from '!raw-loader!./examples/tile-disabled-example.component.html';
+import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
+import * as tileGridSrc from '!raw-loader!./examples/tile-grid-example.component.html';
+import * as tileGridHelpersSrc from '!raw-loader!./examples/tile-grid-helpers-example.component.html';
+import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
+import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
+
 @Component({
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html'
@@ -701,289 +710,21 @@ export class TileDocsComponent implements OnInit {
         }
     };
 
-    simpleTileHtml = `<fd-tile>
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-    <p>Tile Description</p>
-  </fd-tile-content>
-</fd-tile>`;
+    simpleTileHtml = tileSrc;
 
-    mediaTileHtml = `<fd-tile>
-  <fd-tile-media>
-    <span fd-identifier [size]="'m'" [glyph]="'home'" [transparent]="true"></span>
-  </fd-tile-media>
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-  </fd-tile-content>
-</fd-tile>
-<br>
-<fd-tile>
-  <fd-tile-media>
-    <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-  </fd-tile-media>
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-    <p>Tile Description</p>
-  </fd-tile-content>
-</fd-tile>
-<br>
-<fd-tile>
-  <fd-tile-media>
-    <fd-image [size]="'m'" [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
-  </fd-tile-media>
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-  </fd-tile-content>
-</fd-tile>
-<br>
-<fd-tile>
-  <fd-tile-media>
-    <fd-image [size]="'m'" [circle]="true" [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
-  </fd-tile-media>
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-    <p>Tile Description</p>
-  </fd-tile-content>
-</fd-tile>`;
+    mediaTileHtml = tileMediaSrc;
 
-    actionsTileHtml = `<fd-tile>
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-  </fd-tile-content>
-  <fd-tile-actions>
-    <fd-popover>
-      <fd-popover-control>
-        <button fd-button [fdType]="'secondary'" [glyph]="'vertical-grip'"></button>
-      </fd-popover-control>
-      <fd-popover-body>
-        <fd-menu>
-          <fd-menu-list>
-            <fd-menu-item>Option 1</fd-menu-item>
-            <fd-menu-item>Option 2</fd-menu-item>
-            <fd-menu-item>Option 3</fd-menu-item>
-          </fd-menu-list>
-        </fd-menu>
-      </fd-popover-body>
-    </fd-popover>
-  </fd-tile-actions>
-</fd-tile>`;
+    actionsTileHtml = tileActionsSrc;
 
-    buttonTileHtml = `<fd-tile [isButton]="true">
-  <fd-tile-content>
-    <fd-tile-title>
-      Tile Title
-    </fd-tile-title>
-  </fd-tile-content>
-</fd-tile>`;
+    buttonTileHtml = tileButtonSrc;
 
-    productTileHtml = `<fd-product-tile>
-  <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
-  <fd-product-tile-content>
-    <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
-  </fd-product-tile-content>
-</fd-product-tile>
+    productTileHtml = tileProductSrc;
 
-<fd-product-tile [isButton]="true">
-  <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
-  <fd-product-tile-content>
-    <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
-  </fd-product-tile-content>
-</fd-product-tile>`;
+    disabledTilesHtml = tileDisabledSrc;
 
-    disabledTilesHtml = `<p>
-  <fd-tile [disabled]="true">
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-</p>
-<br>
-<p>
-  <fd-tile [disabled]="true">
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [transparent]="true"></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-</p>
-<br>
-<p>
-  <fd-product-tile [disabled]="true">
-    <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'"></fd-product-tile-media>
-    <fd-product-tile-content>
-      <fd-product-tile-title>Default Product Tile</fd-product-tile-title>
-    </fd-product-tile-content>
-  </fd-product-tile>
-</p>`;
+    defaultGridHtml = tileGridSrc;
 
-    defaultGridHtml = `<fd-tile-grid [col]="3">
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='3'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-</fd-tile-grid>`;
-
-    gridWithHelpersHtml = `<fd-tile-grid [col]="6">
-  <fd-tile [rowSpan]="2" [colorAccent]="7">
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='2'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [transparent]="true"></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='5'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <span fd-identifier [size]="'m'" [glyph]="'home'" [colorAccent]='5'></span>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-media>
-      <fd-image [size]="'m'" [circle]="true" [photo]="'http://api.adorable.io/avatars/50/rodney.artichoke@hybris.com.png'"></fd-image>
-    </fd-tile-media>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile [colorAccent]='8'>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile>
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-  <fd-tile [columnSpan]="2" [colorAccent]="5">
-    <fd-tile-content>
-      <fd-tile-title>
-        Tile Title
-      </fd-tile-title>
-    </fd-tile-content>
-  </fd-tile>
-</fd-tile-grid>`;
+    gridWithHelpersHtml = tileGridHelpersSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tile');

@@ -19,16 +19,7 @@
 
 <h2>Extra Small Size (XS)</h2>
 <component-example [name]="'ex1'">
-  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
-    <button fd-button-grouped [id]="'1'" [size]="'xs'" [glyph]="'survey'" [state]="'selected'"></button>
-    <button fd-button-grouped [id]="'2'" [size]="'xs'" [glyph]="'pie-chart'"></button>
-    <button fd-button-grouped [id]="'3'" [size]="'xs'" [glyph]="'pool'"></button>
-  </fd-button-group>
-  <fd-button-group>
-    <button fd-button-grouped [id]="'4'" [size]="'xs'">Left</button>
-    <button fd-button-grouped [id]="'5'" [size]="'xs'" [state]="'selected'">Middle</button>
-    <button fd-button-grouped [id]="'6'" [size]="'xs'">Right</button>
-  </fd-button-group>
+  <fd-button-group-xs-example></fd-button-group-xs-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" xsSizeHtml "></code></pre>
 
@@ -36,16 +27,7 @@
 
 <h2>Small Size (S)</h2>
 <component-example [name]="'ex2'">
-  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
-    <button fd-button-grouped [size]="'s'" [glyph]="'survey'" [state]="'selected'"></button>
-    <button fd-button-grouped [size]="'s'" [glyph]="'pie-chart'"></button>
-    <button fd-button-grouped [size]="'s'" [glyph]="'pool'"></button>
-  </fd-button-group>
-  <fd-button-group>
-    <button fd-button-grouped [size]="'s'">Left</button>
-    <button fd-button-grouped [size]="'s'" [state]="'selected'">Middle</button>
-    <button fd-button-grouped [size]="'s'">Right</button>
-  </fd-button-group>
+  <fd-button-group-s-example></fd-button-group-s-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" sSizeHtml "></code></pre>
 
@@ -53,16 +35,7 @@
 
 <h2>Compact Size</h2>
 <component-example [name]="'ex3'">
-  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
-    <button fd-button-grouped [compact]="true" [glyph]="'survey'" [state]="'selected'"></button>
-    <button fd-button-grouped [compact]="true" [glyph]="'pie-chart'"></button>
-    <button fd-button-grouped [compact]="true" [glyph]="'pool'"></button>
-  </fd-button-group>
-  <fd-button-group>
-    <button fd-button-grouped [compact]="true">Left</button>
-    <button fd-button-grouped [compact]="true" [state]="'selected'">Middle</button>
-    <button fd-button-grouped [compact]="true">Right </button>
-  </fd-button-group>
+  <fd-button-group-compact-example></fd-button-group-compact-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" compactSizeHtml "></code></pre>
 
@@ -70,16 +43,7 @@
 
 <h2>Default Size (Large)</h2>
 <component-example [name]="'ex4'">
-  <fd-button-group style="margin-right: 10px; margin-left: 10px;">
-    <button fd-button-grouped [glyph]="'survey'" [state]="'selected'"></button>
-    <button fd-button-grouped [glyph]="'pie-chart'"></button>
-    <button fd-button-grouped [glyph]="'pool'"></button>
-  </fd-button-group>
-  <fd-button-group>
-    <button fd-button-grouped>Left</button>
-    <button fd-button-grouped [state]="'selected'">Middle</button>
-    <button fd-button-grouped>Right</button>
-  </fd-button-group>
+  <fd-button-group-default-example></fd-button-group-default-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]=" defaultSizeHtml "></code></pre>
 

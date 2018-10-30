@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as circleSrc from '!raw-loader!./examples/circle-identifier-example.component.html';
+import * as colorsSrc from '!raw-loader!./examples/colors-identifier-example.component.html';
+import * as iconSrc from '!raw-loader!./examples/icon-identifier-example.component.html';
+import * as initialsSrc from '!raw-loader!./examples/initials-identifier-example.component.html';
+import * as transparentSrc from '!raw-loader!./examples/transparent-identifier-example.component.html';
+
 @Component({
     selector: 'app-identifier',
     templateUrl: './identifier-docs.component.html',
@@ -676,42 +682,15 @@ export class IdentifierDocsComponent implements OnInit {
         }
     };
 
-    iconHtml =
-        '<span fd-identifier [size]="\'s\'" [glyph]="\'washing-machine\'"></span>\n' +
-        '<span fd-identifier [size]="\'m\'" [glyph]="\'washing-machine\'"></span>\n' +
-        '<span fd-identifier [size]="\'l\'" [glyph]="\'washing-machine\'"></span>\n';
+    iconHtml = iconSrc;
 
-    initialsHtml =
-        '<span fd-identifier [size]="\'s\'" aria-label="Wendy Wallace">WW</span>\n' +
-        '<span fd-identifier [size]="\'m\'" aria-label="Wendy Wallace">WW</span>\n' +
-        '<span fd-identifier [size]="\'l\'" aria-label="Wendy Wallace">WW</span>\n';
+    initialsHtml = initialsSrc;
 
-    circleHtml =
-        '<span fd-identifier [size]="\'s\'" [glyph]="\'money-bills\'" [circle]="true"></span>\n' +
-        '<span fd-identifier [size]="\'m\'" [glyph]="\'money-bills\'" [circle]="true"></span>\n' +
-        '<span fd-identifier [size]="\'l\'" [glyph]="\'money-bills\'" [circle]="true"></span>\n' +
-        '<span fd-identifier [size]="\'s\'" [circle]="true" aria-label="Wendy Wallace">WW</span>\n' +
-        '<span fd-identifier [size]="\'m\'" [circle]="true" aria-label="Wendy Wallace">WW</span>\n' +
-        '<span fd-identifier [size]="\'l\'" [circle]="true" aria-label="Wendy Wallace">WW</span>\n';
+    circleHtml = circleSrc;
 
-    transparentHtml =
-        '<span fd-identifier [size]="\'s\'" [glyph]="\'money-bills\'" [transparent]="true"></span>\n' +
-        '<span fd-identifier [size]="\'m\'" [glyph]="\'money-bills\'" [transparent]="true"></span>\n' +
-        '<span fd-identifier [size]="\'l\'" [glyph]="\'money-bills\'" [transparent]="true"></span>\n' +
-        '<span fd-identifier [size]="\'s\'" [transparent]="true">WW</span>\n' +
-        '<span fd-identifier [size]="\'m\'" [transparent]="true">WW</span>\n' +
-        '<span fd-identifier [size]="\'l\'" [transparent]="true">WW</span>\n';
+    transparentHtml = transparentSrc;
 
-    colorAccentHtml =
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='1'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='2'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='3'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='4'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='5'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='6'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='7'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='8'></span>\n" +
-        "<span fd-identifier [size]=\"'m'\" [glyph]=\"'money-bills'\" [colorAccent]='9'></span>\n";
+    colorAccentHtml = colorsSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('identifier');

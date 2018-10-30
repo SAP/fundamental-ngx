@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as badgeDefaultExample from '!raw-loader!./examples/badge-default-example.component.html';
+import * as badgeFilledExample from '!raw-loader!./examples/badge-filled-example.component.html';
+import * as badgePillExample from '!raw-loader!./examples/badge-pill-example.component.html';
+import * as labelBuildStatusExample from '!raw-loader!./examples/label-build-status-example.component.html';
+import * as labelDefaultExample from '!raw-loader!./examples/label-default-example.component.html';
+import * as labeliconStatusExample from '!raw-loader!./examples/label-icon-status-example.component.html';
+import * as labelStatusColorsExample from '!raw-loader!./examples/label-status-colors-example.component.html';
+
 @Component({
     selector: 'app-badge-label',
     templateUrl: './badge-label-docs.component.html'
@@ -675,47 +683,19 @@ export class BadgeLabelDocsComponent implements OnInit {
         }
     };
 
-    defaultBadgeHtmlType =
-        '<fd-badge>Default</fd-badge>\n' +
-        '<fd-badge [status]="\'success\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'warning\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'error\'">Default</fd-badge>\n';
+    defaultBadgeHtmlType = badgeDefaultExample;
 
-    pillBadgeHtmlType =
-        '<fd-badge [modifier]="\'pill\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'success\'" [modifier]="\'pill\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'warning\'" [modifier]="\'pill\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'error\'"   [modifier]="\'pill\'">Default</fd-badge>\n';
+    pillBadgeHtmlType = badgePillExample;
 
-    filledBadgeHtmlType =
-        '<fd-badge [modifier]="\'filled\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'success\'" [modifier]="\'filled\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'warning\'" [modifier]="\'filled\'">Default</fd-badge>\n' +
-        '<fd-badge [status]="\'error\'"   [modifier]="\'filled\'">Default</fd-badge>\n';
+    filledBadgeHtmlType = badgeFilledExample;
 
-    labelHtmlType =
-        '<fd-label>Default</fd-label>\n' +
-        '<fd-label [status]="\'success\'">Success</fd-label>\n' +
-        '<fd-label [status]="\'warning\'">Warning</fd-label>\n' +
-        '<fd-label [status]="\'error\'">Error</fd-label>\n';
+    labelHtmlType = labelDefaultExample;
 
-    statusIconLabelHtmlType =
-        '<fd-label [isStatusLabel]="true" [statusIcon]="\'available\'">Available</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [statusIcon]="\'away\'">Away</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [statusIcon]="\'busy\'">Busy</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [statusIcon]="\'offline\'">Appear Offline</fd-label>\n';
+    statusIconLabelHtmlType = labelBuildStatusExample;
 
-    anyIconLabelHtmlType =
-        '<fd-label [isStatusLabel]="true" [icon]="\'history\'">Custom Icon</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [icon]="\'message-success\'">Success</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [icon]="\'message-warning\'">Warning</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [icon]="\'message-error\'">Error</fd-label>\n';
+    anyIconLabelHtmlType = labeliconStatusExample;
 
-    semanticColorLabelHtmlType =
-        '<fd-label [isStatusLabel]="true" >Default</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [status]="\'success\'">Success</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [status]="\'warning\'">Warning</fd-label>\n' +
-        '<fd-label [isStatusLabel]="true" [status]="\'error\'">Error</fd-label>\n';
+    semanticColorLabelHtmlType = labelStatusColorsExample;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('badgeLabel');

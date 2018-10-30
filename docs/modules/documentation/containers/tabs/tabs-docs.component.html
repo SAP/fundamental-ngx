@@ -23,20 +23,7 @@
 <separator></separator>
 
 <component-example [name]="'ex1'">
-  <fd-tab-list>
-    <fd-tab [title]="'Link'">
-      Content Link
-    </fd-tab>
-    <fd-tab [title]="'Selected'" [disabled]="false">
-      Content Selected
-    </fd-tab>
-    <fd-tab [title]="'Link'" [disabled]="false">
-      Content Link Two
-    </fd-tab>
-    <fd-tab [title]="'Disabled'" [disabled]="true">
-      Disabled
-    </fd-tab>
-  </fd-tab-list>
+  <fd-tabs-example></fd-tabs-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="tabHtml"></code></pre>
 
@@ -46,22 +33,8 @@
   <code>id</code> on a tab and select it programmatically using the
   <code>select()</code> function.</p>
 <component-example [name]="'ex2'">
-  <fd-tab-list #tabList>
-    <fd-tab id="tab1" [title]="'Tab 1'">
-      Tab 1
-    </fd-tab>
-    <fd-tab id="tab2" [title]="'Tab 2'">
-      Tab 2
-    </fd-tab>
-  </fd-tab-list>
+  <fd-tab-selection-example></fd-tab-selection-example>
 </component-example>
-<br>
-<br>
-<button fd-button
-        [fdType]="'main'"
-        (click)="this.tabList.select('tab2')">
-  Select Tab 2
-</button>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="selectTabByIdHtml"></code></pre>
 
 <separator></separator>

@@ -15,14 +15,9 @@
 }"></properties>
 <separator></separator>
 <component-example [name]="'ex1'">
-  <fd-pagination [class]="'fd-demo-pagination'" [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
+  <fd-pagination-example></fd-pagination-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="paginationHtml"></code></pre>
-<pre>
-  totalItems: {{data.properties.totalItems}},
-  itemsPerPage: {{data.properties.itemsPerPage}},
-  currentPage: {{data.properties.currentPage}},
-</pre>
 
 <separator></separator>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">

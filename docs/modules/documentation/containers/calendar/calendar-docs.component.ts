@@ -1,40 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
+import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
+
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html'
 })
 export class CalendarDocsComponent implements OnInit {
-    selectedDay = {
-        date: new Date()
-    };
 
-    selectedRangeFirst = {
-        date: new Date()
-    };
-
-    selectedRangeLast = {
-        date: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
-    };
-
-    myDisableFunction = function(d: Date): boolean {
-        let day = d.getDay();
-        return day === 6 || day === 0;
-    };
-
-    myDisableFunction2 = function(d: Date): boolean {
-        let day = d.getDay();
-        return day === 1;
-    };
-
-    // Block days before/after any day
-    myBlockFunction = function(d: Date): boolean {
-        let firstDay = new Date(2018, 7, 25);
-        let lastDay = new Date(2018, 7, 30);
-        return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime();
-    };
-
-    calendarSingleHtml = `<fd-calendar [calType]="'single'" [(selectedDay)]="selectedDay" [disableFunction]="myDisableFunction" [blockFunction]="myBlockFunction"></fd-calendar>`;
+    calendarSingleSource = calendarSingleSrc;
+    calendarRangeSource = calendarRangeSrc;
 
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
@@ -82,20 +58,6 @@ myDisableFunction = function(d: Date): boolean {
     let lastDay = new Date(2018, 7, 20);
     return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
 }`;
-
-    selectedDayJs = `selectedDay = {
-    date: new Date()
-}`;
-
-    calendarRangeHtml = `<fd-calendar [datePickerType]="'range'" [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast" [disableFunction]="myDisableFunction2" ></fd-calendar>`;
-
-    calendarRangeJs = `selectedRangeFirst = {
-    date: new Date()
-};
-
-selectedRangeLast = {
-    date: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
-};`;
 
     constructor() {}
 
