@@ -397,7 +397,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     // Functions that handle selection (day, month, year)
     selectDate(day) {
-        if (!day.blocked) {
+        if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDay = day;
                 this.selectedDayChange.emit(this.selectedDay);
