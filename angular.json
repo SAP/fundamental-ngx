@@ -18,7 +18,7 @@
                         "polyfills": "docs/polyfills.ts",
                         "assets": ["docs/assets", "docs/favicon.ico"],
                         "styles": [
-                            "node_modules/fundamental-ui/dist/fundamental-ui.css",
+                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
                             "docs/styles.scss"
                         ],
                         "scripts": []
@@ -89,7 +89,7 @@
                         "tsConfig": "docs/tsconfig.spec.json",
                         "scripts": [],
                         "styles": [
-                            "node_modules/fundamental-ui/dist/fundamental-ui.css",
+                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
                             "docs/styles.scss"
                         ],
                         "assets": ["docs/assets", "docs/favicon.ico"]
