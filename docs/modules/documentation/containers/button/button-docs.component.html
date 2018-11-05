@@ -8,40 +8,53 @@
 
 <properties [properties]="{
   inputs: [
+    { name: 'options', description: '(Optional) String - Button Options.  Options include \'emphasized\' and \'light\'.  Leave empty for default.'},
     { name: 'type', description: '(Optional) String - The type of the button.  Options include \'primary\', \'main\', \'secondary\', and \'toolbar\'. Leave empty for default.'},
-    { name: 'semantic', description: '(Optional) String - Semantic buttons. Semantic modifiers include \'positive\' and \'negative\'. Leave empty for no modifier.'},
-    { name: 'size', description: '(Optional) String - The size of the button.  Options include \'xs\', \'s\', \'compact\', default, and \'l\'. Leave empty for default.'},
+    { name: 'semantic', description: '(Optional) String - Semantic buttons. Semantic modifiers include \'standard\', \'positive\', \'medium\', and \'negative\'. Leave empty for no modifier.'},
+    { name: 'size', description: '(Optional) String - The size of the button. Leave empty for default, or specify \'compact\'.'},
     { name: 'glyph', description: '(Optional) String - The icon to include in the button.  See the icon page for the list of icons.'},
     { name: 'state', description: '(Optional) String - The state of the button. Options include \'normal\', \'selected\', and \'disabled\'. Leave empty for normal.' }
   ]
 }"></properties>
 
+<separator></separator>
+
 <description>The inputs for <code>button</code> will be translated into classes attributed to fiori-fundamentals
   guidelines.
   <br>For example:
-  <br>if it is passed <code>positive</code> for <code>fdType</code> the class <code>fd-button--positive</code> will be
-  added
-  to the element.
-  <br>if it is passed <code>s</code> for <code>size</code> the class <code>fd-button--s</code> will be added to the
+  <br>if <code>positive</code> is passed for <code>fdType</code>, the class <code>fd-button--positive</code> will be
+  added to the element.
+  <br>if <code>compact</code> is passed for <code>size</code>, the class <code>fd-button--compact</code> will be added to the
   element.
 </description>
 
 <separator></separator>
 <h2>Extensibility</h2>
 <description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code>
-  inputs
-  doesn't have a restriction for the predefined values.
-  <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, but
-  <code>size</code> can
-  accept any other string, for example <code>xxs</code>, which will be translated into class <code>fd-button--xxs</code>.
+  inputs don't have a restriction for the predefined values.
+  <br>The only predefined value for the input <code>size</code> is <code>compact</code>, but
+  <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
+  <code>fd-button--xxs</code>.
 </description>
+
+<separator></separator>
+<h2>Button Options</h2>
+<p>
+  There are three emphasis styles used to indicate the importance of the button on the page. Do not provide a value for
+  the default option. Use <code class="code-snippet">[options]="'emphasized'"</code> or
+  <code class="code-snippet">[options]="'light'"</code> to set the option.
+</p>
+
+<component-example [name]="'ex0'">
+  <fd-button-options-example></fd-button-options-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlOptions"></code></pre>
 
 <separator></separator>
 <h2>Button Types</h2>
 <p>
-  The default button type is "primary", no modifier is required. Use
-  <code class="code-snippet">[fdType]="'main'",
-  [fdType]="'secondary'", [fdType]="'toolbar'", [fdType]="'positive'"</code> or
+  The default button type is "action", no modifier is required. Use
+  <code class="code-snippet">[fdType]="'standard'", [fdType]="'positive'", [fdType]="'medium'"</code>, or
   <code class="code-snippet">[fdType]="'negative'"</code> to modify the type of the button.
 </p>
 
@@ -53,9 +66,8 @@
 <separator></separator>
 <h2>Button Sizes</h2>
 <p>
-  Use
-  <code class="code-snippet">[size]="'xs'", [size]="'s'", [size]="'compact'"</code> or
-  <code class="code-snippet">[size]="'l'"</code> to modify the size of the button.
+  Use <code class="code-snippet">[size]="'compact'"</code> for the mobile button size. Do not provide a size input for
+  the default button size.
 </p>
 
 <component-example [name]="'ex2'">
@@ -85,6 +97,13 @@
   <fd-button-state-example></fd-button-state-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlState"></code></pre>
+
+<separator></separator>
+<h2>Button RTL</h2>
+<component-example [name]="'ex5'">
+  <fd-button-rtl-example></fd-button-rtl-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="buttonHtmlRtl"></code></pre>
 
 <separator></separator>
 

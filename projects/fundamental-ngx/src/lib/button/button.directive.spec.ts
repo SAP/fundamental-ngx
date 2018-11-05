@@ -49,6 +49,7 @@ describe('ButtonDirective', () => {
         directiveInstance.fdType = 'someFdType';
         directiveInstance.semantic = 'someSemantic';
         directiveInstance.state = 'someState';
+        directiveInstance.options = 'someOption';
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
@@ -57,5 +58,6 @@ describe('ButtonDirective', () => {
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someFdType');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someSemantic');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('is-someState');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption');
     });
 });

@@ -15,6 +15,8 @@ export class ButtonDirective extends AbstractFdNgxClass {
 
     @Input() state;
 
+    @Input() options;
+
     _setProperties() {
         this._addClassToElement('fd-button');
         if (this.size) {
@@ -31,6 +33,9 @@ export class ButtonDirective extends AbstractFdNgxClass {
         }
         if (this.state) {
             this._addClassToElement('is-' + this.state);
+        }
+        if (this.options) {
+            this._addClassToElement('fd-button--' + this.options);
         }
     }
 
