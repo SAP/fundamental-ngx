@@ -1,7 +1,7 @@
-# Fundamental NGX - Angular components for [Fundamental UI](https://github.com/SAP/fundamental)
+# Fundamental NGX - Angular components for [Fiori Fundamentals](https://github.com/SAP/fundamental)
 
 ## Description
-Fundamental NGX is a set of Angular components that utilize the Fundamental UI library, making it easy to get started developing Angular Fundamental apps.
+Fundamental NGX is a set of Angular components that utilize the Fiori Fundamentals library, making it easy to get started developing Angular Fundamental apps.
 
 ## Requirements
 In order to download and use this library, you'll need to install the node package manager.
@@ -12,11 +12,11 @@ Fundamental NGX is intended for use with Angular 5 or newer.  We assume the user
 ## Download and Installation
 #### 1.  Download Fundamental NGX and its peer dependencies:
 
-`npm install --save @ng-bootstrap/ng-bootstrap@2.2.2 fundamental-ui fundamental-ngx`
+`npm install --save fiori-fundamentals fundamental-ngx @ng-bootstrap/ng-bootstrap`
 
-#### 2.  Next you'll need to include the Fundamental UI CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
+#### 2.  Next you'll need to include the Fiori Fundamentals CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
 
-`"./node_modules/fundamental-ui/dist/fundamental-ui.css"`
+`"./node_modules/fiori-fundamentals/dist/fiori-fundamentals.css"`
 
 Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.
 
