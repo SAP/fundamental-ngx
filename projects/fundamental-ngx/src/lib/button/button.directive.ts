@@ -5,20 +5,25 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: '[fd-button]'
 })
 export class ButtonDirective extends AbstractFdNgxClass {
-    @Input() size;
+    @Input() compact: boolean;
 
-    @Input() glyph;
+    @Input() glyph: string;
 
-    @Input() fdType;
+    @Input() fdType: string;
 
-    @Input() semantic;
+    @Input() semantic: string;
 
-    @Input() state;
+    @Input() state: string;
 
-    @Input() options;
+    @Input() options: string | string[];
+
+    @Input() size: string; // TODO: deprecated, leaving for backwards compatibility
 
     _setProperties() {
         this._addClassToElement('fd-button');
+        if (this.compact) {
+            this._addClassToElement('fd-button--compact');
+        }
         if (this.size) {
             this._addClassToElement('fd-button--' + this.size);
         }
@@ -35,7 +40,15 @@ export class ButtonDirective extends AbstractFdNgxClass {
             this._addClassToElement('is-' + this.state);
         }
         if (this.options) {
-            this._addClassToElement('fd-button--' + this.options);
+            if (typeof this.options === 'string') {
+                this._addClassToElement('fd-button--' + this.options);
+            } else if (Array.isArray(this.options)) {
+                this.options.forEach((option) => {
+                    if (typeof option === 'string') {
+                        this._addClassToElement('fd-button--' + option);
+                    }
+                });
+            }
         }
     }
 

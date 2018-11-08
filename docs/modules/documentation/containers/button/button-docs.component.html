@@ -32,9 +32,13 @@
 <h2>Extensibility</h2>
 <description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code>
   inputs don't have a restriction for the predefined values.
-  <br>The only predefined value for the input <code>size</code> is <code>compact</code>, but
-  <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
-  <code>fd-button--xxs</code>.
+  <br>For example, passing the value "someState" to the <code>state</code> input will result in the class
+  <code>fd-button--someState</code> being added to the button element.
+  You can pass a number of custom options to the <code>options</code> input, which accepts as a parameter either a string
+  or an array of strings.  For example, <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code>
+  to the button.  If you'd like to add multiple options, you could use <code>[options]="['emphasized', 'option1', 'option2']"</code>.
+  This would result in 3 classes being added to the button: <code>fd-button--emphasized</code>, <code>fd-button--option1</code>,
+  and <code>fd-button--option2</code>.
 </description>
 
 <separator></separator>
@@ -66,8 +70,7 @@
 <separator></separator>
 <h2>Button Sizes</h2>
 <p>
-  Use <code class="code-snippet">[size]="'compact'"</code> for the mobile button size. Do not provide a size input for
-  the default button size.
+  Use <code class="code-snippet">[compact]="true"</code> for the mobile button size.
 </p>
 
 <component-example [name]="'ex2'">
@@ -114,7 +117,7 @@
           [fdType]="data.properties.type"
           [semantic]="data.properties.semantic"
           [state]="data.properties.state"
-          [size]="data.properties.size"
+          [compact]="data.properties.compact"
           [glyph]="data.properties.icon">
     {{data.properties.label}}
   </button>

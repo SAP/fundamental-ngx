@@ -30,9 +30,8 @@ export class ButtonDocsComponent implements OnInit {
                         type: 'string',
                         enum: ['default', 'positive', 'negative']
                     },
-                    size: {
-                        type: 'string',
-                        enum: ['default', 'xs', 's', 'compact', 'l']
+                    compact: {
+                        type: 'boolean'
                     },
                     icon: {
                         type: 'string',

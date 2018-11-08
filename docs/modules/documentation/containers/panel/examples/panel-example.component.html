@@ -6,7 +6,6 @@
         </fd-panel-head>
         <fd-panel-actions>
             <button fd-button
-                    [size]="'s'"
                     [glyph]="'add'">Add New Item</button>
         </fd-panel-actions>
     </fd-panel-header>
@@ -23,8 +22,7 @@
               role="button">Blue</span>
         <span class="fd-tag"
               role="button">Small</span>
-        <button fd-modal-button-secondary
-                size="s">Clear All</button>
+        <button fd-button [compact]="true">Clear All</button>
     </fd-panel-filters>
     <fd-panel-body>
         Panel Content
