@@ -8,7 +8,8 @@ import {
     ElementRef,
     SimpleChanges,
     OnChanges,
-    Inject
+    Inject,
+    AfterViewChecked
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 
@@ -41,8 +42,10 @@ export interface EmittedDate {
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss']
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     calendarId: string;
+
+    newFocusedDayId: string;
 
     @Input()
     dateFromDatePicker: string;
@@ -595,25 +598,25 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     onKeydownDayHandler(event, cell) {
         const currentId = parseInt(event.currentTarget.id.split('-').pop());
-        let newFocusedDayId;
         if (event.code === 'Space' || event.code === 'Enter') {
             event.preventDefault();
             this.selectDate(cell);
+            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
+            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
+            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
+            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
-            newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
+            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
         }
-        if (newFocusedDayId) {
-            this.focusElement(newFocusedDayId);
+        if (this.newFocusedDayId) {
+            this.focusElement(this.newFocusedDayId);
         }
     }
 
@@ -707,6 +710,13 @@ export class CalendarComponent implements OnInit, OnChanges {
             this.selectYear(this.year);
         } else {
             this.selectMonth(this.date.getFullYear());
+        }
+    }
+
+    ngAfterViewChecked() {
+        if (this.newFocusedDayId) {
+            this.focusElement(this.newFocusedDayId);
+            this.newFocusedDayId = null;
         }
     }
 
