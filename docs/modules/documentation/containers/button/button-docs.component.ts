@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as buttonOptionsExample from '!raw-loader!./examples/button-options-example.component.html';
 import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
 import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
+import * as buttonRtlExample from '!raw-loader!./examples/button-rtl-example.component.html';
 
 @Component({
     selector: 'app-button',
@@ -28,9 +30,8 @@ export class ButtonDocsComponent implements OnInit {
                         type: 'string',
                         enum: ['default', 'positive', 'negative']
                     },
-                    size: {
-                        type: 'string',
-                        enum: ['default', 'xs', 's', 'compact', 'l']
+                    compact: {
+                        type: 'boolean'
                     },
                     icon: {
                         type: 'string',
@@ -682,6 +683,8 @@ export class ButtonDocsComponent implements OnInit {
         }
     };
 
+    buttonHtmlOptions = buttonOptionsExample;
+
     buttonHtmlType = buttonTypesExample;
 
     buttonHtmlSize = buttonSizesExample;
@@ -689,6 +692,8 @@ export class ButtonDocsComponent implements OnInit {
     buttonHtmlIcon = buttonIconsExample;
 
     buttonHtmlState = buttonStateExample;
+
+    buttonHtmlRtl = buttonRtlExample;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');

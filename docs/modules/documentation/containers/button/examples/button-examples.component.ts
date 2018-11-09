@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
+    selector: 'fd-button-options-example',
+    templateUrl: './button-options-example.component.html'
+})
+export class ButtonOptionsExampleComponent {}
+
+@Component({
     selector: 'fd-button-types-example',
     templateUrl: './button-types-example.component.html'
 })
@@ -23,3 +29,9 @@ export class ButtonIconsExampleComponent {}
     templateUrl: './button-state-example.component.html'
 })
 export class ButtonStateExampleComponent {}
+
+@Component({
+    selector: 'fd-button-rtl-example',
+    templateUrl: './button-rtl-example.component.html'
+})
+export class ButtonRtlExampleComponent {}

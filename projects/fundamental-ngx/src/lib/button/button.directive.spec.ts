@@ -44,18 +44,26 @@ describe('ButtonDirective', () => {
     });
 
     it('should add appropriate classes', () => {
-        directiveInstance.size = 'someSize';
+        directiveInstance.compact = 'true';
         directiveInstance.glyph = 'someGlyph';
         directiveInstance.fdType = 'someFdType';
         directiveInstance.semantic = 'someSemantic';
         directiveInstance.state = 'someState';
+        directiveInstance.options = 'someOption';
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someSize');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someFdType');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someSemantic');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('is-someState');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption');
+
+        // should handle an array of options
+        directiveInstance.options = ['someOption1', 'someOption2'];
+        directiveInstance.ngOnInit();
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption1');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption2');
     });
 });

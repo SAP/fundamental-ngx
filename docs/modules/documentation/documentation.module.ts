@@ -75,6 +75,8 @@ import {
 } from './containers/breadcrumb/examples/breadcrumb-examples.component';
 import {
     ButtonIconsExampleComponent,
+    ButtonOptionsExampleComponent,
+    ButtonRtlExampleComponent,
     ButtonSizesExampleComponent,
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
@@ -295,6 +297,8 @@ const ROUTES: Routes = [
         BreadcrumbHrefExampleComponent,
         BreadcrumbRouterLinkExampleComponent,
         ButtonIconsExampleComponent,
+        ButtonOptionsExampleComponent,
+        ButtonRtlExampleComponent,
         ButtonSizesExampleComponent,
         ButtonStateExampleComponent,
         ButtonTypesExampleComponent,
