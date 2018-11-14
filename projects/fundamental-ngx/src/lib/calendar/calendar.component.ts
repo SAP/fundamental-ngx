@@ -345,6 +345,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     }
 
     constructCalendarYearsList() {
+        this.calendarYearsList = [];
         for (let y = 0; y < 12; y++) {
             this.calendarYearsList.push(this.firstYearCalendarList + y);
         }
