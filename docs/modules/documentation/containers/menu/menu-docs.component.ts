@@ -1,53 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
+import * as menuGroupSrc from '!raw-loader!./examples/menu-group-example.component.html';
+
 @Component({
     selector: 'app-menu',
     templateUrl: './menu-docs.component.html'
 })
 export class MenuDocsComponent implements OnInit {
-    menuHtml = `<fd-menu>
-    <fd-menu-list>
-        <fd-menu-item [url]="'#'">
-            Option 1
-        </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-            Option 2
-        </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-            Option 3
-        </fd-menu-item>
-    </fd-menu-list>
-</fd-menu>`;
+    menuHtml = menuSrc;
 
-    menuGroupHtml = `<fd-menu>
-    <fd-menu-list>
-        <fd-menu-item [url]="'#'">
-            Option 1
-        </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-            Option 2
-        </fd-menu-item>
-        <fd-menu-item [url]="'#'">
-            Option 3
-        </fd-menu-item>
-    </fd-menu-list>
-    <fd-menu-group>
-        <fd-menu-title>
-            Group header
-        </fd-menu-title>
-            <fd-menu-list>
-                <fd-menu-item [routerLink]="'#'">
-                    Option 4
-                </fd-menu-item>
-                <fd-menu-item [routerLink]="'#'">
-                    Option 5
-                </fd-menu-item>
-                <fd-menu-item [routerLink]="'#'">
-                    Option 6
-                </fd-menu-item>
-            </fd-menu-list>
-    </fd-menu-group>
-</fd-menu>`;
+    menuGroupHtml = menuGroupSrc;
 
     constructor() {}
 

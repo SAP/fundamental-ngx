@@ -1,8 +1,10 @@
-# Fundamental NGX - Angular components for [Fundamental UI](https://github.com/SAP/fundamental)
+# Fundamental NGX - Angular components for [Fiori Fundamentals](https://github.com/SAP/fundamental)
 
 ## Description
 
-Fundamental NGX is a set of Angular components that utilize the Fundamental UI library, making it easy to start developing Angular Fundamental apps.
+Fundamental NGX is a set of Angular components that utilize the Fiori Fundamentals library, making it easy to start developing Angular Fundamental apps.
+
+View live demo [here](https://sap.github.io/fundamental-ngx/).
 
 ## Requirements
 
@@ -13,13 +15,13 @@ Fundamental NGX is intended for use with Angular 5 or newer. You should have som
 
 ## Download and Installation
 
-#### 1. Download Fundamental NGX and its peer dependencies:
+#### 1. Download Fundamental NGX, Fiori Fundamentals and ng-bootstrap
 
-`npm install --save @ng-bootstrap/ng-bootstrap@2.2.2 fundamental-ui fundamental-ngx`
+`npm install --save fiori-fundamentals fundamental-ngx @ng-bootstrap/ng-bootstrap`
 
-#### 2. Include the Fundamental UI CSS in your Angular application. Open your `angular.json` file and add the following to the `styles` array:
+#### 2. Include the Fiori Fundamentals CSS in your Angular application. Open your `angular.json` file and add the following to the `styles` array:
 
-`"./node_modules/fundamental-ui/dist/fundamental-ui.css"`
+`"./node_modules/fiori-fundamentals/dist/fiori-fundamentals.css"`
 
 Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.
 
@@ -42,6 +44,12 @@ to the file that declares the module you're adding alerts to. It can also be add
 ## Demo Application
 
 This repository contains a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo app utilizes the Angular Fundamental source code in this repository, so changes you make to any component's source will be reflected in the demo app.
+
+View live demo [here](https://sap.github.io/fundamental-ngx/).
+
+## Tests
+
+To run the unit tests for the fundamental-ngx component library, run `ng test fundamental-ngx`. Append `--code-coverage` to generate code coverage documentation.
 
 ## Known Issues
 

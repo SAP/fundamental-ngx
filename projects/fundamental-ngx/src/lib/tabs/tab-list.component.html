@@ -1,5 +1,7 @@
-<ul class="fd-tabs" role="tablist">
-  <li class="fd-tabs__item" *ngFor="let tab of tabs">
+<ul class="fd-tabs"
+    role="tablist">
+  <li class="fd-tabs__item"
+      *ngFor="let tab of tabs">
     <a role="tab"
        class="fd-tabs__link"
        [attr.aria-controls]="tab.id"
@@ -7,6 +9,7 @@
        [attr.aria-selected]="tab.expanded ? true : null"
        [class.is-selected]="tab.expanded"
        [href]="'#' + tab.id"
+       (keypress)="onKeypressHandler($event, tab.id)"
        (click)="tabClicked($event, tab.id)">{{ tab.title }}</a>
   </li>
 </ul>

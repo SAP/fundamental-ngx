@@ -1,0 +1,39 @@
+<div fd-form-item>
+    <fd-form-label [forValue]="'input-51'">
+        Normal Input
+    </fd-form-label>
+    <input fd-form-control [type]="'text'" id="input-51" placeholder="Field placeholder text">
+    <fd-form-message>Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+</div>
+<div fd-form-item>
+    <fd-form-label [forValue]="'input-52'">
+        Valid Input
+    </fd-form-label>
+    <input fd-form-control [state]="'valid'" [type]="'text'" id="input-52">
+</div>
+<div fd-form-item>
+    <fd-form-label [forValue]="'input-53'">
+        Invalid Input
+    </fd-form-label>
+    <input fd-form-control [state]="'invalid'" [type]="'text'" id="input-53" placeholder="Field placeholder text">
+    <fd-form-message [type]="'error'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+</div>
+<div fd-form-item>
+    <fd-form-label [forValue]="'input-54'">
+        Warning Input
+    </fd-form-label>
+    <input fd-form-control [state]="'warning'" [type]="'text'" id="input-54" placeholder="Field placeholder text">
+    <fd-form-message [type]="'warning'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+</div>
+<div fd-form-item>
+    <fd-form-label [forValue]="'input-55'">
+        Disables Input
+    </fd-form-label>
+    <input fd-form-control [type]="'text'" id="input-55" placeholder="Field placeholder text" disabled>
+</div>
+<div fd-form-item>
+    <fd-form-label [forValue]="'input-56'">
+        Readonly Input
+    </fd-form-label>
+    <input fd-form-control [type]="'text'" id="input-56" placeholder="Field placeholder text" readonly>
+</div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as tabSrc from '!raw-loader!./examples/tabs-example.component.html';
+import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
+
 @Component({
     selector: 'app-tabs',
     templateUrl: './tabs-docs.component.html'
@@ -80,29 +83,9 @@ export class TabsDocsComponent implements OnInit {
         }
     };
 
-    tabHtml = `<fd-tab-list>
-  <fd-tab [title]="'Link'">
-    Content Link
-  </fd-tab>
-  <fd-tab [title]="'Selected'" [disabled]="false">
-    Content Selected
-  </fd-tab>
-  <fd-tab [title]="'Link'" [disabled]="false">
-    Content Link Two
-  </fd-tab>
-  <fd-tab [title]="'Disabled'" [disabled]="true">
-    Disabled
-  </fd-tab>
-</fd-tab-list>`;
+    tabHtml = tabSrc;
 
-    selectTabByIdHtml = `<fd-tab-list #tabList>
-  <fd-tab id="tab1" [title]="'Tab 1'">
-    Tab 1
-  </fd-tab>
-  <fd-tab id="tab2" [title]="'Tab 2'">
-    Tab 2
-  </fd-tab>
-</fd-tab-list>`;
+    selectTabByIdHtml = tabSelectionSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tabs');

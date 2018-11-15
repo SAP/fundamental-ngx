@@ -8,15 +8,15 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     }
 })
 export class IdentifierDirective extends AbstractFdNgxClass {
-    @Input() size: string = '';
+    @Input() size: string;
 
-    @Input() circle: boolean = false;
+    @Input() circle: boolean;
 
-    @Input() transparent: boolean = false;
+    @Input() transparent: boolean;
 
-    @Input() colorAccent;
+    @Input() colorAccent: number;
 
-    @Input() glyph: string = '';
+    @Input() glyph: string;
 
     _setProperties() {
         if (this.size) {

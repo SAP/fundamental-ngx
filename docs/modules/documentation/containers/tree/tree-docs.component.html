@@ -1,13 +1,21 @@
 <header>Tree</header>
-<description>The Tree component is used to display hierarchical data in tabular way. Permitting the user to dig deeper into the data in an simple way. Along with displaying the hierarchy information it can also contain other data in the same node as well.</description>
-<import module="TreeModule" path="fundamental/tree/tree.module"></import>
+<description>The Tree component is used to display hierarchical data in tabular way. Permitting the user to dig deeper
+  into the data in an simple way. Along with displaying the hierarchy information it can also contain other data in the
+  same node as well.</description>
+<import module="TreeModule"
+        path="fundamental/tree/tree.module"></import>
 <separator></separator>
 
 <h1>&lt;fd-tree&gt;</h1>
 
-There are two different types of tree cells you can use, the 'simple' cells and the 'rich' cells.  Simple cells can only display text.  Rich cells can contain plain text or links.  The tree component requires only two root arguments, a 'headers' array and a 'treeData' array.  The children of the tree are generated recursively from data within the treeData array.
+There are two different types of tree cells you can use, the 'simple' cells and the 'rich' cells. Simple cells can only
+display text. Rich cells can contain plain text or links. The tree component requires only two root arguments, a
+'headers' array and a 'treeData' array. The children of the tree are generated recursively from data within the
+treeData array.
 <br><br>
-In a tree with simple cells, the treeData property is an array of objects that contain two properties, 'rowData' and optionally 'children'.  Simple cell rowData is an array of strings, each string being a cell in the tree.  The 'children' property is an array of objects that match this object's structure.
+In a tree with simple cells, the treeData property is an array of objects that contain two properties, 'rowData' and
+optionally 'children'. Simple cell rowData is an array of strings, each string being a cell in the tree. The 'children'
+property is an array of objects that match this object's structure.
 
 <separator></separator>
 
@@ -22,20 +30,23 @@ This is an example of a tree with simple cells, where the rowData is an array of
   }">
 </properties>
 <br>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-tree (editRowClicked)="editRowClicked($event)" (deleteRowClicked)="deleteRowClicked($event)" [displayTreeActions]="true" [headers]="data.properties.headers" [treeData]="data.properties.simpleTreeData">
+<component-example [name]="'ex1'">
+  <fd-tree (editRowClicked)="editRowClicked($event)"
+           (deleteRowClicked)="deleteRowClicked($event)"
+           [displayTreeActions]="true"
+           [headers]="data.properties.headers"
+           [treeData]="data.properties.simpleTreeData">
 
-    </fd-tree>
-  </div>
-</div>
+  </fd-tree>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleTreeHtml"></code></pre>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="simpleTreeJson"></code></pre>
 
 <separator></separator>
 
 <h2>Rich Tree</h2>
-This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one or both of the following properties:<br><br>
+This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one
+or both of the following properties:<br><br>
 <properties [properties]="{
     properties: [
     { name: 'displayText', description: 'The text to display in the cell.  If omitted, the link url will be displayed.' },
@@ -52,12 +63,11 @@ This is an example of a tree with rich cells, where the rowData is an array of o
   }">
 </properties>
 <br>
-<div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
-  <div class="fd-tile__content">
-    <fd-tree [headers]="data.properties.headers" [treeData]="data.properties.richTreeData">
+<component-example [name]="'ex2'">
+  <fd-tree [headers]="data.properties.headers"
+           [treeData]="data.properties.richTreeData">
 
-    </fd-tree>
-  </div>
-</div>
+  </fd-tree>
+</component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="richTreeHtml"></code></pre>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="richTreeJson"></code></pre>

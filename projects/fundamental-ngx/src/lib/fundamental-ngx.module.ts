@@ -15,7 +15,6 @@ import { ImageModule } from './image/image.module';
 import { InlineHelpModule } from './inline-help/inline-help.module';
 import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
-import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
 import { NavbarModule } from './navbar/navbar.module';
@@ -33,11 +32,10 @@ import { TimePickerModule } from './time-picker/time-picker.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './modal/modal.service';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, NgbModule.forRoot()],
+    imports: [CommonModule, RouterModule, FormsModule],
     declarations: [FundamentalNgxComponent],
     exports: [
         FundamentalNgxComponent,
@@ -57,7 +55,6 @@ import { ModalService } from './modal/modal.service';
         IdentifierModule,
         InputGroupModule,
         ListModule,
-        MegaMenuModule,
         MenuModule,
         ModalModule,
         NavbarModule,

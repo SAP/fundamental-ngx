@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
+
 @Component({
     selector: 'app-inline-help',
     templateUrl: './inline-help-docs.component.html'
@@ -38,33 +40,7 @@ export class InlineHelpDocsComponent implements OnInit {
         }
     };
 
-    defaultPositionHtml =
-        'Bottom Right (Default)\n' +
-        '\n' +
-        '<fd-inline-help>\n' +
-        '   Lorem ipsum dolor sit amet, consectetur adipiscing.\n' +
-        '</fd-inline-help>\n';
-
-    buttomLeftPositionHtml =
-        'Bottom Left\n' +
-        '\n' +
-        '<fd-inline-help [position]="\'bottom-left\'">\n' +
-        '   Lorem ipsum dolor sit amet, consectetur adipiscing.\n' +
-        '</fd-inline-help>\n';
-
-    rightPositionHtml =
-        'Right\n' +
-        '\n' +
-        '<fd-inline-help [position]="\'right\'">\n' +
-        '   Lorem ipsum dolor sit amet, consectetur adipiscing.\n' +
-        '</fd-inline-help>\n';
-
-    leftPositionHtml =
-        'Left\n' +
-        '\n' +
-        '<fd-inline-help [position]="\'left\'">\n' +
-        '   Lorem ipsum dolor sit amet, consectetur adipiscing.\n' +
-        '</fd-inline-help>\n';
+    inlineHelpHtml = inlineHelpSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inlineHelp');

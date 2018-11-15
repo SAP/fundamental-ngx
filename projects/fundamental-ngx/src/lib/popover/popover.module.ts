@@ -7,16 +7,8 @@ import { PopoverControlComponent } from './popover-control.component';
 import { PopoverBodyComponent } from './popover-body.component';
 
 @NgModule({
-    declarations: [
-        PopoverComponent,
-        PopoverControlComponent,
-        PopoverBodyComponent
-    ],
+    declarations: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent],
     imports: [CommonModule, UtilsModule],
-    exports: [
-        PopoverComponent,
-        PopoverControlComponent,
-        PopoverBodyComponent
-    ]
+    exports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class PopoverModule {}

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as paginationSrc from '!raw-loader!./examples/pagination-example.component.ts';
+
 @Component({
     selector: 'app-pagination',
     templateUrl: './pagination-docs.component.html'
@@ -37,10 +39,7 @@ export class PaginationDocsComponent {
         }
     };
 
-    paginationHtml =
-        '<fd-pagination [class]="\'fd-demo-pagination\'" ' +
-        '[pagination]="{totalItems: totalItems, itemsPerPage:  itemsPerPage, currentPage: currentPage}">' +
-        '</fd-pagination>';
+    paginationHtml = paginationSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('pagination');
