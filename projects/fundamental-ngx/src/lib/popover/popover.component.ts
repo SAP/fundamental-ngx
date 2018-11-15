@@ -25,12 +25,16 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     isTimePicker: boolean = false;
     @Input()
     glyph: string;
-    @Input()
+    @Input() // TODO: deprecated, leaving for backwards compatibility
     size: string;
     @Input()
     btnType: string = '';
     @Input()
     isOpen: boolean = false;
+    @Input()
+    compact: boolean = false;
+    @Input()
+    standard: boolean = false;
 
     @Output()
     popoverClosed: EventEmitter<any> = new EventEmitter<any>();

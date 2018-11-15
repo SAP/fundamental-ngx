@@ -95,7 +95,6 @@ import {
     DropdownContextualMenuExampleComponent,
     DropdownDefaultExampleComponent,
     DropdownIconsExampleComponent,
-    DropdownSizesExampleComponent,
     DropdownStateExampleComponent
 } from './containers/dropdown/examples/dropdown-examples.component';
 import {
@@ -313,7 +312,6 @@ const ROUTES: Routes = [
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
-        DropdownSizesExampleComponent,
         DropdownStateExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,
