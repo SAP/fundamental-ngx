@@ -2,20 +2,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
 
-xdescribe('NavbarComponent', () => {
+import { ModalService } from '../modal/modal.service';
+
+describe('NavbarComponent', () => {
     let component: NavbarComponent;
     let fixture: ComponentFixture<NavbarComponent>;
-    let ngbModalSpy: jasmine.SpyObj<NgbModal>;
+    let modalSpy: jasmine.SpyObj<ModalService>;
 
     beforeEach(async(() => {
-        const modalSpy = jasmine.createSpyObj('NgbModal', ['open']);
+        modalSpy = jasmine.createSpyObj('ModalService', ['open']);
 
         TestBed.configureTestingModule({
             declarations: [NavbarComponent],
-            providers: [{ provide: NgbModal, useValue: modalSpy }]
+            providers: [{ provide: ModalService, useValue: modalSpy }]
         }).compileComponents();
-
-        ngbModalSpy = TestBed.get(NgbModal);
     }));
 
     beforeEach(() => {

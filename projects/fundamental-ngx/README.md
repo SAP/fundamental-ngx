@@ -12,7 +12,7 @@ Fundamental NGX is intended for use with Angular 5 or newer.  We assume the user
 ## Download and Installation
 #### 1.  Download Fundamental NGX and its peer dependencies:
 
-`npm install --save fiori-fundamentals fundamental-ngx @ng-bootstrap/ng-bootstrap`
+`npm install --save fiori-fundamentals fundamental-ngx @angular/cdk @angular/cdk-experimental`
 
 #### 2.  Next you'll need to include the Fiori Fundamentals CSS in your Angular application.  Open your `angular.json` file and add the following to the `styles` array:
 
