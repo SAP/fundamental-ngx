@@ -19,7 +19,6 @@ export * from './lib/image/image.module';
 export * from './lib/inline-help/inline-help.module';
 export * from './lib/input-group/input-group.module';
 export * from './lib/list/list.module';
-export * from './lib/mega-menu/mega-menu.module';
 export * from './lib/menu/menu.module';
 export * from './lib/modal/modal.module';
 export * from './lib/modal/modal.service';
