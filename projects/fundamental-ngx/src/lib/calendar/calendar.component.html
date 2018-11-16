@@ -65,6 +65,7 @@
               *ngFor="let row of calendarGrid; let i = index;">
             <td class="fd-calendar__item"
                 role="gridcell"
+                aria-label="day of the month"
                 *ngFor="let cell of row; let cellIndex = index;"
                 [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
                           (cell.selected ? " is-selected": "") + 
