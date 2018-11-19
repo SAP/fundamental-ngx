@@ -4,6 +4,7 @@
             <div class="fd-input-group fd-input-group--after">
                 <input #datePicker
                        type="text"
+                       [attr.aria-label]="'date input'"
                        [value]="inputFieldDate"
                        placeholder="mm/dd/yyyy"
                        (change)="getInputValue(datePicker.value)"
@@ -11,7 +12,8 @@
                        (blur)="onBlurHandler()">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--secondary sap-icon--calendar"
-                            (click)="openCalendar(datePicker.value)"></button>
+                            (click)="openCalendar(datePicker.value)" aria-label="display calendar toggle"
+                            [attr.aria-expanded]="isOpen"></button>
                 </span>
             </div>
         </div>
