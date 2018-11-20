@@ -5,6 +5,7 @@
 Fundamental NGX is a set of Angular components that utilize the Fiori Fundamentals library, making it easy to start developing Angular Fundamental apps.
 
 View live demo [here](https://sap.github.io/fundamental-ngx/).
+[![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=develop)](https://travis-ci.org/SAP/fundamental-ngx)
 
 ## Requirements
 
