@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '../../../../../../projects/fundamental-ngx/src/lib/modal/modal.service';
+import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
 
 @Component({
     selector: 'fd-modal-example',
