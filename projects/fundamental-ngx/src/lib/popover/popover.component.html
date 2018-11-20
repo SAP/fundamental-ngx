@@ -1,5 +1,20 @@
-<div class="fd-popover">
-  <div #popoverControlWrapper *ngIf="!isDropdown; else dropdownTemplate"
+<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{'fd-dropdown--compact': compact}" #dropdownTemplate>
+    <div class="fd-popover">
+        <div class="fd-popover__control">
+            <button fd-button
+                    class="fd-dropdown__control fd-button"
+                    [ngClass]='(btnType ? " fd-button--" + btnType : "") + (glyph ? " sap-icon--" + glyph : "") + (size ? " fd-button--" + size : "") + (compact ? " fd-button--compact" : "") + (this.disabled ? " is-disabled" : "")'
+                    [attr.aria-expanded]="(this.disabled ? false : isOpen)"
+                    [attr.aria-disabled]="this.disabled"
+                    aria-haspopup="true">
+                <ng-content></ng-content>
+            </button>
+        </div>
+        <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
+    </div>
+</div>
+<div *ngIf="!isDropdown; else dropdownTemplate" class="fd-popover">
+  <div #popoverControlWrapper
        class="fd-popover__control"
        [attr.aria-expanded]="(this.disabled ? false : isOpen)"
        [attr.aria-disabled]="this.disabled"
@@ -9,22 +24,13 @@
        aria-haspopup="true">
     <ng-content select="fd-popover-control"></ng-content>
   </div>
-
-  <ng-template #dropdownTemplate>
-    <div class="fd-popover__control">
-      <button fd-button
-              *ngIf="isDropdown"
-              [ngClass]='(btnType ? " fd-button--" + btnType : "fd-button--toolbar") + (glyph ? " sap-icon--" + glyph : "") + (size ? " fd-button--" + size : "") + (this.disabled ? " is-disabled" : "")'
-              [attr.aria-expanded]="(this.disabled ? false : isOpen)"
-              [attr.aria-disabled]="this.disabled"
-              aria-haspopup="true">
-        <ng-content></ng-content>
-      </button>
-    </div>
-  </ng-template>
-
-  <div class="fd-popover__body"
-       [attr.aria-hidden]="(disabled ? true : !isOpen)">
-    <ng-content select="fd-popover-body"></ng-content>
-  </div>
+  <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
 </div>
+
+<ng-template #popoverBodyTpl>
+    <div class="fd-popover__body"
+         [ngClass]="{'fd-popover__body--no-arrow': isDropdown}"
+         [attr.aria-hidden]="(disabled ? true : !isOpen)">
+        <ng-content select="fd-popover-body"></ng-content>
+    </div>
+</ng-template>
