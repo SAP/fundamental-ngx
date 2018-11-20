@@ -6,7 +6,7 @@ In this guide, we'll explore the library and documentation code base and create 
 
 This repository contains two separate projects - the component library and the documentation application.  Different build tasks are used, depending on which project we're building.  However, the documentation app consumes the library source directly, so there's no need to compile the library to test changes you're making to a component - simply running the documentation app locally will serve changes to the library immediately.
 
-The documentation code base lies in the `docs` directory and the library source is in the `projects/fundamental-ngx/src` directory.
+The documentation code base lies in the `docs` directory and the library source is in the `library` directory.
 
 ## Generating a new component in the Documentation
 
@@ -42,9 +42,11 @@ You should see 'Poster' appear in the side navigation under 'Components'.  Click
 
 Next, let's generate an empty module in the library.  Each library component gets its own module, so end users can import only the modules for specific components they intend to use, if they don't want to import the entire library.
 
-Change directories back to the root of the repository.  The library's source lies in the `projects/fundamental-ngx` directory.  From the root of the repo, cd into the library source with:
+Change directories back to the root of the repository.  The library's source lies in the `library` directory.  From the root of the repo, cd into the library source with:
 
-`cd projects/fundamental-ngx`
+`cd library`
+
+Next, generate a new 'poster' module in the `src/lib` directory.
 
 `ng generate module src/lib/poster`
 
@@ -60,7 +62,7 @@ Open `poster.component.ts` and change the component's 'app' prefix to 'fd', like
 
 ![alt text](./readme-assets/empty-poster-code.png "Poster Empty Code")
 
-The documentation application is importing every component in the fundamental-ngx library source module.  Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add to the array of exports `PosterModule`.
+The documentation application is importing every component in the fundamental-ngx library module.  Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
 
 We must also add `export * from './lib/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file.
 
