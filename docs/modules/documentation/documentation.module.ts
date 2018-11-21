@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SchemaModule } from '../schema/schema.module';
 
 // modules
-import { FundamentalNgxModule } from '../../../projects/fundamental-ngx/src/lib/fundamental-ngx.module';
+import { FundamentalNgxModule } from '../../../library/src/lib/fundamental-ngx.module';
 
 // components
 import { DocumentationComponent } from './components/documentation/documentation.component';
@@ -95,7 +95,6 @@ import {
     DropdownContextualMenuExampleComponent,
     DropdownDefaultExampleComponent,
     DropdownIconsExampleComponent,
-    DropdownSizesExampleComponent,
     DropdownStateExampleComponent
 } from './containers/dropdown/examples/dropdown-examples.component';
 import {
@@ -313,7 +312,6 @@ const ROUTES: Routes = [
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
-        DropdownSizesExampleComponent,
         DropdownStateExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,

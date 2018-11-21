@@ -19,12 +19,6 @@ export class DropdownStateExampleComponent {}
 export class DropdownIconsExampleComponent {}
 
 @Component({
-    selector: 'fd-dropdown-sizes-example',
-    templateUrl: './dropdown-sizes-example.component.html'
-})
-export class DropdownSizesExampleComponent {}
-
-@Component({
     selector: 'fd-dropdown-contextual-menu-example',
     templateUrl: './dropdown-contextual-menu-example.component.html'
 })
