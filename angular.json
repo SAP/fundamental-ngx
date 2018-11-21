@@ -126,37 +126,37 @@
             }
         },
         "fundamental-ngx": {
-            "root": "projects/fundamental-ngx",
-            "sourceRoot": "projects/fundamental-ngx/src",
+            "root": "library",
+            "sourceRoot": "library/src",
             "projectType": "library",
             "prefix": "fd",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-ng-packagr:build",
                     "options": {
-                        "tsConfig": "projects/fundamental-ngx/tsconfig.lib.json",
-                        "project": "projects/fundamental-ngx/ng-package.json"
+                        "tsConfig": "library/tsconfig.lib.json",
+                        "project": "library/ng-package.json"
                     },
                     "configurations": {
                         "production": {
-                            "project": "projects/fundamental-ngx/ng-package.prod.json"
+                            "project": "library/ng-package.prod.json"
                         }
                     }
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "main": "projects/fundamental-ngx/src/test.ts",
-                        "tsConfig": "projects/fundamental-ngx/tsconfig.spec.json",
-                        "karmaConfig": "projects/fundamental-ngx/karma.conf.js"
+                        "main": "library/src/test.ts",
+                        "tsConfig": "library/tsconfig.spec.json",
+                        "karmaConfig": "library/karma.conf.js"
                     }
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
-                            "projects/fundamental-ngx/tsconfig.lib.json",
-                            "projects/fundamental-ngx/tsconfig.spec.json"
+                            "library/tsconfig.lib.json",
+                            "library/tsconfig.spec.json"
                         ],
                         "exclude": ["**/node_modules/**"]
                     }
