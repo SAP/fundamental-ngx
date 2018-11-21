@@ -1,4 +1,4 @@
-<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact }" #dropdownTemplate>
+<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact }">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <button
@@ -21,7 +21,7 @@
         <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
     </div>
 </div>
-<div class="fd-popover">
+<div *ngIf="!isDropdown" class="fd-popover">
     <div
         #popoverControlWrapper
         class="fd-popover__control"
