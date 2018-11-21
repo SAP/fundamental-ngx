@@ -114,8 +114,8 @@
             [schemaInitialValues]="data"
             (onFormChanges)="onSchemaValues($event)">
   <button fd-button
-          [fdType]="data.properties.type"
-          [semantic]="data.properties.semantic"
+          [fdType]="data.properties.fdType"
+          [options]="data.properties.options"
           [state]="data.properties.state"
           [compact]="data.properties.compact"
           [glyph]="data.properties.icon">

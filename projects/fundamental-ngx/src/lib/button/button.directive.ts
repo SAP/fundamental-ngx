@@ -11,7 +11,7 @@ export class ButtonDirective extends AbstractFdNgxClass {
 
     @Input() fdType: string;
 
-    @Input() semantic: string;
+    @Input() semantic: string; // TODO: deprecated, leaving for backwards compatibility
 
     @Input() state: string;
 
