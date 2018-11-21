@@ -1,4 +1,4 @@
-@import '~@angular/cdk/overlay';
+@import '~@angular/cdk/_overlay.scss';
 @include cdk-overlay;
 
 .fd-modal__body {
@@ -18,32 +18,4 @@
 .fd-modal--panel {
   background-color: #ffffff;
   border-radius: 4px;
-}
-
-// can be removed or used for changing the panelClass or backgroundClass
-/*!
-  * Bootstrap (http://getbootstrap.com)
-  * Copyright 2011-2018 Twitter, Inc.
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  */
-
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1040;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-open {
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    margin: auto;
-    width: fit-content;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.4);
 }
