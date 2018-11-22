@@ -11,6 +11,9 @@ export class TimePickerComponent {
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     @Input()
+    compact: boolean = false;
+
+    @Input()
     meridian: boolean;
 
     @Input()
