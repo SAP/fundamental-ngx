@@ -10,7 +10,8 @@
     { name: 'time', description: 'An object that contains three integer properties: \'hour\' (ranging from 0 to 23), \'minute\' (ranging from 0 to 59), and \'second\' (ranging from 0 to 59). ' },
     { name: 'meridian', description: 'When set to true, turns the time picker into a 12-hour clock with am/pm.  Default is false.'},
     { name: 'spinners', description: 'Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true.'},
-    { name: 'disabled', description: 'Disables the time picker.'}
+    { name: 'disabled', description: 'Disables the time picker.'},
+    { name: 'compact', description: 'Uses compact time picker.'}
   ]
 }"></properties>
 
@@ -45,3 +46,11 @@
   <fd-time-picker-disabled-example></fd-time-picker-disabled-example>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="disabledTimePickerHtml"></code></pre>
+
+<separator></separator>
+<h2>Compact Time Picker</h2>
+<description>Set <code>[compact]="true"</code> to use compact time-picker.</description>
+<component-example [name]="'ex5'">
+  <fd-time-picker-compact-example></fd-time-picker-compact-example>
+</component-example>
+<pre><code mwlHighlightJs language="HTML" [source]="compactTimePickerHtml"></code></pre>
