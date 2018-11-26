@@ -7,6 +7,7 @@ import * as inputGroupIconSrc from '!raw-loader!./examples/input-group-icon-exam
 import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example.component.html';
 import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
+import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
 
 @Component({
     selector: 'app-input-group',
@@ -704,6 +705,8 @@ export class InputGroupDocsComponent {
     numberInputHtml = inputGroupNumberSrc;
 
     searchInputHtml = inputGroupSearchSrc;
+
+    textCompactHtml = inputGroupTextCompactSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');
