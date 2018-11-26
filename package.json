@@ -11,7 +11,6 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "build-src": "gulp build-src",
-        "precommit": "ng test fundamental-ngx --browsers ChromeHeadless --watch=false",
         "build-deploy-docs": "ng build --prod --base-href=\"/fundamental-ngx/\" && angular-cli-ghpages --branch gh-pages",
         "build-deploy-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm publish && cd ../.."
     },
@@ -50,7 +49,6 @@
         "@types/jasminewd2": "^2.0.4",
         "@types/node": "^10.11.3",
         "codelyzer": "^4.4.4",
-        "husky": "^1.0.1",
         "jasmine-core": "^3.2.1",
         "jasmine-spec-reporter": "^4.2.1",
         "karma": "^3.0.0",
