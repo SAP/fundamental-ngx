@@ -20,11 +20,11 @@
     <button [disabled]="disabled"
             *ngIf="!glyph"
             (click)="buttonClicked($event)"
-            class="fd-button--secondary">{{addOnText}}</button>
+            class="fd-button--light">{{addOnText}}</button>
     <button [disabled]="disabled"
             *ngIf="glyph"
             (click)="buttonClicked($event)"
-            class="fd-button--icon fd-button--secondary"
+            class="fd-button--icon fd-button--light"
             [ngClass]="'sap-icon--' + glyph"></button>
   </span>
   <input [(ngModel)]="inputText"

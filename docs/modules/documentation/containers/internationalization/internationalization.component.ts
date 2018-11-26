@@ -14,54 +14,53 @@ export class InternationalizationDocsComponent implements OnInit {
 
     buttonHtmlType = `
     <button fd-button>
-    Primary Button
+        Action Button
     </button>
     <button fd-button
-            [fdType]="'main'">
-        Main Button
-    </button>
-    <button fd-button
-            [fdType]="'secondary'">
-        Secondary Button
-    </button>
-    <button fd-button
-            [fdType]="'toolbar'">
-        Toolbar Button
+            [fdType]="'standard'">
+        Standard Button
     </button>
     <button fd-button
             [fdType]="'positive'">
         Positive Button
     </button>
     <button fd-button
+            [fdType]="'medium'">
+        Medium Button
+    </button>
+    <button fd-button
             [fdType]="'negative'">
         Negative Button
+    </button>
+    <button fd-button
+            [options]="'emphasized'">
+        Emphasized Button
     </button>
   `;
 
     buttonHtmlTypeRTL = `
-<div dir="rtl">
     <button fd-button>
-    לחצן ראשי
+        לחצן ראשי
     </button>
     <button fd-button
-        [fdType]="'main'">
-    לחצן ראשי
+            [fdType]="'standard'">
+        לחצן ראשי
     </button>
     <button fd-button
-        [fdType]="'secondary'">
-    לחצן משני
+            [fdType]="'positive'">
+        לחצן משני
     </button>
     <button fd-button
-        [fdType]="'toolbar'">
-    לחצן סרגל הכלים
+            [fdType]="'medium'">
+        לחצן סרגל הכלים
     </button>
     <button fd-button
-        [fdType]="'positive'">
-    לחצן חיובי
+            [fdType]="'negative'">
+        לחצן חיובי
     </button>
     <button fd-button
-        [fdType]="'negative'">
-    לחצן שלילי
+            [options]="'emphasized'">
+        לחצן שלילי
     </button>
-</div>`;
+`;
 }
