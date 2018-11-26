@@ -16,6 +16,9 @@ export class DatePickerComponent implements OnInit {
     type: CalendarType = 'single';
 
     @Input()
+    compact: boolean = false;
+
+    @Input()
     disableFunction = function(d): boolean {
         return false;
     };
