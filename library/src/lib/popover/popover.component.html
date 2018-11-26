@@ -21,7 +21,8 @@
         <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
     </div>
 </div>
-<div *ngIf="!isDropdown" class="fd-popover">
+<div *ngIf="!isDropdown" class="fd-popover"
+    [ngClass]="{ 'fd-popover--right' : alignment == 'right'}">
     <div
         #popoverControlWrapper
         class="fd-popover__control"
@@ -40,7 +41,8 @@
 <ng-template #popoverBodyTpl>
     <div
         class="fd-popover__body"
-        [ngClass]="{ 'fd-popover__body--no-arrow': isDropdown }"
+        [ngClass]="{  'fd-popover__body--no-arrow': isDropdown || !arrow,
+                      'fd-popover__body--right' : alignment == 'right' }"
         [attr.aria-hidden]="disabled ? true : !isOpen"
     >
         <ng-content select="fd-popover-body"></ng-content>
