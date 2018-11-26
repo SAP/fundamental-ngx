@@ -1,7 +1,7 @@
 <fd-navbar>
     <div fd-navbar-group [position]="'left'">
         <div class="fd-global-nav__side-menu">
-            <button fd-button [fdType]="'secondary'"
+            <button fd-button [options]="'light'"
                     [glyph]="'menu2'" aria-label="BUTTON_LABEL"></button>
         </div>
         <div class="fd-global-nav__logo fd-has-margin-left-none"></div>
@@ -11,7 +11,7 @@
     </div>
 
     <div fd-navbar-group [hasLaunchpad]="true">
-        <button fd-button [fdType]="'secondary'"
+        <button fd-button [options]="'light'"
                 aria-label="BUTTON_LABEL" [attr.aria-haspopup]="true">Suite Name</button>
     </div>
 
@@ -32,9 +32,9 @@
         </div>
 
         <div fd-navbar-actions>
-            <button fd-button [fdType]="'secondary'"
+            <button fd-button [options]="'light'"
                     [glyph]="'search'" aria-label="BUTTON_LABEL"></button>
-            <button fd-button [fdType]="'secondary'"
+            <button fd-button [options]="'light'"
                     [glyph]="'action-settings'" aria-label="BUTTON_LABEL"></button>
             <span fd-identifier [size]="'s'" [circle]="true">WW</span>
         </div>

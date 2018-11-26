@@ -12,7 +12,7 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
                 Modal Body
             </fd-modal-body>
             <fd-modal-footer>
-                <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
+                <button fd-button (click)="c('No')" [options]="'light'">No</button>
                 <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
             </fd-modal-footer>
         </fd-modal>
