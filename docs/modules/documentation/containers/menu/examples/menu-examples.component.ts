@@ -11,3 +11,15 @@ export class MenuExampleComponent {}
     templateUrl: './menu-group-example.component.html'
 })
 export class MenuGroupExampleComponent {}
+
+@Component({
+    selector: 'fd-menu-separator-example',
+    templateUrl: './menu-separator-example.component.html'
+})
+export class MenuSeparatorExampleComponent {}
+
+@Component({
+    selector: 'fd-menu-addon-example',
+    templateUrl: './menu-addon-example.component.html'
+})
+export class MenuAddonExampleComponent {}
