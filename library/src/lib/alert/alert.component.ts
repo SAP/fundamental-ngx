@@ -10,7 +10,8 @@ import { HashService } from '../utils/hash.service';
         '[id]': 'id',
         '[class.fd-alert--dismissible]': 'dismissible == true',
         '[class.fd-alert--warning]': 'type == "warning"',
-        '[class.fd-alert--error]': 'type == "error"'
+        '[class.fd-alert--error]': 'type == "error"',
+        '[dir]': '(showRTL? "rtl" : "" )'
     },
     styleUrls: ['./alert.component.scss'],
     providers: [HashService]
@@ -19,6 +20,8 @@ export class AlertComponent implements OnInit {
     @Input() dismissible: boolean;
 
     @Input() type: string;
+
+    @Input() showRTL: boolean = false;
 
     @Output() close = new EventEmitter<string>();
 

@@ -8,7 +8,8 @@
 <properties [properties]="{
   inputs: [
     { name: 'type', description: 'Determines the type of alert - \'error\' (red) or \'warning\' (orange). Defaults to white if no type is provided.' },
-    { name: 'dismissible', description: 'Shows a dismissible button if set to true. Default is false.' }
+    { name: 'dismissible', description: 'Shows a dismissible button if set to true. Default is false.' },
+    { name: 'showRTL', description: 'Shows the alert from right to left if set to true. Default is false.'}
   ],
   outputs: [
     { name: 'close', description: 'Event - Emitted when the close button is clicked.' }
