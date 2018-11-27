@@ -89,6 +89,7 @@ import {
 } from './containers/button-group/examples/button-group-examples.component';
 import { CalendarRangeExampleComponent } from './containers/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from './containers/calendar/examples/calendar-single-example.component';
+import { CalendarMondayStartExampleComponent } from './containers/calendar/examples/calendar-monday-start-example.component';
 import { DatePickerRangeExampleComponent } from './containers/date-picker/examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from './containers/date-picker/examples/date-picker-single-example.component';
 import {
@@ -308,6 +309,7 @@ const ROUTES: Routes = [
         ButtonGroupDefaultExampleComponent,
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
+        CalendarMondayStartExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DropdownContextualMenuExampleComponent,

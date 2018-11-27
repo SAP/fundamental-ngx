@@ -10,6 +10,7 @@
 <properties [properties]="{
   inputs: [
     { name: 'calType',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
+    { name: 'mondayStartOfWeek', description: 'Set this boolean to \'true\' to have the calendar week start on Monday instead of Sunday.'},
     { name: 'disableFunction', description: 'A user defined function that specifies the days that should be disabled.'},
     { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked.'},
     { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
@@ -30,13 +31,19 @@
 <component-example [name]="'ex1'">
   <fd-calendar-single-example></fd-calendar-single-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="calendarSingleSource"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="calendarSingleSource"></code></pre>
 <separator></separator>
-<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="exampleFunctionsHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="exampleFunctionsHtml"></code></pre>
 <separator></separator>
 
 <h2>Calendar with range selection, selectedRangeFirst and selectedRangeLast</h2>
 <component-example [name]="'ex2'">
   <fd-calendar-range-example></fd-calendar-range-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'JavaScript'" [source]="calendarRangeSource"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="calendarRangeSource"></code></pre>
+
+<h2>Calendar with Monday start of week</h2>
+<component-example [name]="'ex3'">
+    <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="calendarMondayStartSource"></code></pre>
