@@ -76,7 +76,6 @@ import {
 import {
     ButtonIconsExampleComponent,
     ButtonOptionsExampleComponent,
-    ButtonRtlExampleComponent,
     ButtonSizesExampleComponent,
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
@@ -299,7 +298,6 @@ const ROUTES: Routes = [
         BreadcrumbRouterLinkExampleComponent,
         ButtonIconsExampleComponent,
         ButtonOptionsExampleComponent,
-        ButtonRtlExampleComponent,
         ButtonSizesExampleComponent,
         ButtonStateExampleComponent,
         ButtonTypesExampleComponent,

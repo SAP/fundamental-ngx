@@ -29,9 +29,3 @@ export class ButtonIconsExampleComponent {}
     templateUrl: './button-state-example.component.html'
 })
 export class ButtonStateExampleComponent {}
-
-@Component({
-    selector: 'fd-button-rtl-example',
-    templateUrl: './button-rtl-example.component.html'
-})
-export class ButtonRtlExampleComponent {}
