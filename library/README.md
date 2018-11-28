@@ -44,7 +44,7 @@ to the file that declares the module you're adding alerts to.  It can also be ad
 Click [here](https://github.com/SAP/fundamental-ngx/issues) to view the current issues.
 
 ## How to obtain support
-If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues)
+If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues) or write an email to fundamental@sap.com
 
 ## Contributing
 In case you want to contribute, please, check the [CONTRIBUTING.md](./CONTRIBUTING.md) doc for contribution guidelines.  Please adhere to the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)!
