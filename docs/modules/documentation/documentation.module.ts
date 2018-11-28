@@ -229,7 +229,7 @@ const ROUTES: Routes = [
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent },
-            { path: 'rtl', component: InternationalizationDocsComponent },
+            // { path: 'rtl', component: InternationalizationDocsComponent }, TODO: restore this route when fundamental is RTL ready
             { path: 'home', component: HomeDocsComponent }
         ]
     }
