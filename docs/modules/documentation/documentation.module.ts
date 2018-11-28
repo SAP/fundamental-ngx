@@ -123,7 +123,8 @@ import {
     InputGroupIconExampleComponent,
     InputGroupNumberExampleComponent,
     InputGroupSearchExampleComponent,
-    InputGroupTextExampleComponent
+    InputGroupTextExampleComponent,
+    InputGroupTextCompactExampleComponent
 } from './containers/input-group/examples/input-group-examples.component';
 import {
     ListActionsExampleComponent,
@@ -334,6 +335,7 @@ const ROUTES: Routes = [
         InputGroupNumberExampleComponent,
         InputGroupSearchExampleComponent,
         InputGroupTextExampleComponent,
+        InputGroupTextCompactExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,

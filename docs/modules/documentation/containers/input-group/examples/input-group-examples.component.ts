@@ -37,3 +37,9 @@ export class InputGroupSearchExampleComponent {
     templateUrl: './input-group-text-example.component.html'
 })
 export class InputGroupTextExampleComponent {}
+
+@Component({
+    selector: 'fd-input-group-text-compact-example',
+    templateUrl: './input-group-text-compact-example.component.html'
+})
+export class InputGroupTextCompactExampleComponent {}
