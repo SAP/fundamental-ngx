@@ -18,6 +18,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'button', name: 'Button' },
         { url: 'buttonGroup', name: 'Button Group' },
         { url: 'calendar', name: 'Calendar' },
+        { url: 'comboboxInput', name: 'Combobox Input'},
         { url: 'datePicker', name: 'Date Picker' },
         { url: 'dropdown', name: 'Dropdown' },
         { url: 'form', name: 'Form' },

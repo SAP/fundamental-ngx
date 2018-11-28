@@ -206,6 +206,7 @@ const ROUTES: Routes = [
             { path: 'button', component: ButtonDocsComponent },
             { path: 'buttonGroup', component: ButtonGroupDocsComponent },
             { path: 'calendar', component: CalendarDocsComponent },
+            { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
             { path: 'form', component: FormDocsComponent },
@@ -377,7 +378,8 @@ const ROUTES: Routes = [
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
-        TimePickerCompactExampleComponent
+        TimePickerCompactExampleComponent,
+        ComboboxInputDocsComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
@@ -394,3 +396,4 @@ const ROUTES: Routes = [
 export class DocumentationModule {}
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { ComboboxInputDocsComponent } from './containers/combobox-input/combobox-input-docs.component';
