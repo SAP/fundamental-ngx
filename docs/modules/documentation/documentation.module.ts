@@ -123,7 +123,8 @@ import {
     InputGroupIconExampleComponent,
     InputGroupNumberExampleComponent,
     InputGroupSearchExampleComponent,
-    InputGroupTextExampleComponent
+    InputGroupTextExampleComponent,
+    InputGroupTextCompactExampleComponent
 } from './containers/input-group/examples/input-group-examples.component';
 import {
     ListActionsExampleComponent,
@@ -174,7 +175,8 @@ import {
     TimePickerExampleComponent,
     TimePicker12ExampleComponent,
     TimePickerDisabledExampleComponent,
-    TimePickerNoSecondsExampleComponent
+    TimePickerNoSecondsExampleComponent,
+    TimePickerCompactExampleComponent
 } from './containers/time-picker/examples/time-picker-examples.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
@@ -333,6 +335,7 @@ const ROUTES: Routes = [
         InputGroupNumberExampleComponent,
         InputGroupSearchExampleComponent,
         InputGroupTextExampleComponent,
+        InputGroupTextCompactExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
@@ -373,7 +376,8 @@ const ROUTES: Routes = [
         TimePickerExampleComponent,
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,
-        TimePickerNoSecondsExampleComponent
+        TimePickerNoSecondsExampleComponent,
+        TimePickerCompactExampleComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

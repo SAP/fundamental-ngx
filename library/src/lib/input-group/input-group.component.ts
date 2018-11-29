@@ -21,6 +21,9 @@ export class InputGroupComponent implements ControlValueAccessor {
     placement: string;
 
     @Input()
+    compact: boolean = false;
+
+    @Input()
     inline: boolean;
 
     @Input()

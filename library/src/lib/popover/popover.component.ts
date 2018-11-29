@@ -18,6 +18,10 @@ import { HashService } from '../utils/hash.service';
 })
 export class PopoverComponent implements OnInit, AfterViewInit {
     @Input()
+    alignment: string = '';
+    @Input()
+    arrow: boolean = true;
+    @Input()
     disabled: boolean = false;
     @Input()
     isDropdown: boolean = false;

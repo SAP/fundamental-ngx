@@ -6,6 +6,8 @@ Fundamental NGX is a set of Angular components that utilize the Fiori Fundamenta
 
 View live demo [here](https://sap.github.io/fundamental-ngx/).
 [![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=develop)](https://travis-ci.org/SAP/fundamental-ngx)
+- [GitHub repo of Vue implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-vue)
+- [GitHub repo of React implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-react)
 
 ## Requirements
 

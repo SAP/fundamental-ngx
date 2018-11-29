@@ -24,11 +24,11 @@ export class ButtonDocsComponent implements OnInit {
                     },
                     fdType: {
                         type: 'string',
-                        enum: ['default', 'main', 'secondary', 'toolbar']
+                        enum: ['','standard', 'positive', 'medium', 'negative']
                     },
-                    semantic: {
+                    options: {
                         type: 'string',
-                        enum: ['default', 'positive', 'negative']
+                        enum: ['', 'emphasized', 'light']
                     },
                     compact: {
                         type: 'boolean'
@@ -676,7 +676,7 @@ export class ButtonDocsComponent implements OnInit {
         properties: {
             label: 'click here',
             fdType: 'default',
-            semantic: 'default',
+            option: 'default',
             size: 'default',
             icon: '',
             state: 'default'
