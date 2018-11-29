@@ -3,7 +3,6 @@ import { DialogModule } from '@angular/cdk-experimental/dialog';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ModalComponent } from './modal.component';
 import { ModalHeaderComponent } from './modal-header.component';
@@ -15,7 +14,7 @@ import { ModalService } from './modal.service';
 
 @NgModule({
     declarations: [ModalComponent, ModalClose, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent],
-    imports: [CommonModule, ButtonModule, DialogModule, IconModule, BrowserAnimationsModule],
+    imports: [CommonModule, ButtonModule, DialogModule, IconModule],
     exports: [ModalComponent, ModalClose, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent],
     providers: [ModalService]
 })

@@ -11,17 +11,14 @@ to create a method that calls ModalService's open() function. First, import the 
 <code>import {{ '{' }} ModalService } from 'fundamental-ngx';</code>. Then inject the service into your component's
 constructor with
 <code>private modalService: ModalService</code>. Then you'll need to call
-<code>this.modalService.open(modalName)</code>. Use
-<code>this.modalService.close()</code> to close the modal.
+<code>this.modalService.open(modalName)</code>.
+You will also need to import the <code>BrowserAnimationsModule</code> in your app module definition.
 <br>
 <br>
 <h1>&lt;fd-modal&gt;</h1>
 
 <h2>Informational Modal</h2>
-<p>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user
-  have to
-  acknowledge the information, actively, by clicking a button or closing the Modal.
-</p>
+<p>This is used to present information to the user when the Alert Component cannot fit all the information.</p>
 <component-example [name]="'ex1'">
   <fd-modal-example></fd-modal-example>
 </component-example>
@@ -30,9 +27,8 @@ constructor with
 <separator></separator>
 
 <h2>Confirmation Modal</h2>
-<p>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two
-  buttons
-  at the bottom. With the “positive” path always been the primary button.</p>
+<p>This is used to confirm with the user before continuing with a destructive or complex action. In this case, the modal
+    has action buttons at the bottom.</p>
 <component-example [name]="'ex2'">
   <fd-modal-confirmation-example></fd-modal-confirmation-example>
 </component-example>
