@@ -7,7 +7,6 @@ import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example
 import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
-import * as buttonRtlExample from '!raw-loader!./examples/button-rtl-example.component.html';
 
 @Component({
     selector: 'app-button',
@@ -692,8 +691,6 @@ export class ButtonDocsComponent implements OnInit {
     buttonHtmlIcon = buttonIconsExample;
 
     buttonHtmlState = buttonStateExample;
-
-    buttonHtmlRtl = buttonRtlExample;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');
