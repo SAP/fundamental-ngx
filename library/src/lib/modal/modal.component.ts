@@ -8,7 +8,7 @@ import { ModalService } from './modal.service';
     templateUrl: './modal.component.html'
 })
 export class ModalComponent {
-    // idea add directive for adding config in HTML and give it to modelService on open
+    // TODO: add directive for adding config in HTML and give it to modalService on open
     constructor(private modalService: ModalService) { }
 
     open(): any {

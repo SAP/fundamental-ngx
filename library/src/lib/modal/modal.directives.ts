@@ -2,7 +2,10 @@ import { ElementRef, Directive, OnChanges, OnInit, Input, Optional, SimpleChange
 import { DialogRef } from '@angular/cdk-experimental/dialog';
 import { ModalService } from './modal.service';
 
-/* Copied and modified to our needs from google material2 */
+/*
+ * Portions of this code have been copied and modified from angular/material2 which is copyrighted by Google LLC and governed by an
+ * MIT-style license that can be found here: https://angular.io/license
+*/
 
 /**
  * Button that will close the current dialog.
