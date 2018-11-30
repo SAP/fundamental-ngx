@@ -60,7 +60,7 @@ Click [here](https://github.com/SAP/fundamental-ngx/issues) to view the current 
 
 ## How to obtain support
 
-If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues)
+If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues) or write an email to fundamental@sap.com
 
 ## Contributing
 
