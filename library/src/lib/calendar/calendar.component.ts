@@ -61,6 +61,9 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         return false;
     };
 
+    @Input()
+    mondayStartOfWeek: boolean = false;
+
     @Output()
     updateDatePickerInput: EventEmitter<any> = new EventEmitter();
     @Output()
@@ -100,7 +103,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         'November',
         'December'
     ];
-    weekDays: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    weekDays: string[];
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     calendarGrid: CalendarDay[][] = [];
@@ -166,7 +169,12 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         let calendarMonth: CalendarDay[] = [];
 
         //Previous month days
-        let prevMonthLastDate: Date = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
+        let prevMonthLastDate;
+        if (this.mondayStartOfWeek) {
+            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), -1);
+        } else {
+            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
+        }
         let prevMonth: number = prevMonthLastDate.getMonth();
         let prevMonthYear: number = prevMonthLastDate.getFullYear();
         let prevMonthLastDay = prevMonthLastDate.getDate();
@@ -694,6 +702,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
             this.constructCalendar();
             this.constructCalendarYearsList();
         }
+        this.weekDays = this.mondayStartOfWeek ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     }
 
     ngOnInit() {

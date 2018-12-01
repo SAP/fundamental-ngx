@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
+import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
 
 @Component({
     selector: 'app-calendar',
@@ -11,6 +12,7 @@ export class CalendarDocsComponent implements OnInit {
 
     calendarSingleSource = calendarSingleSrc;
     calendarRangeSource = calendarRangeSrc;
+    calendarMondayStartSource = calendarMondayStartSrc;
 
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
