@@ -6,47 +6,27 @@
     border-top: 1px solid #eeeeef;
 }
 
-.fd-modal {
-    margin: 0 auto;
-}
+fd-modal {
+    .fd-modal {
+        position: fixed;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        z-index: 1000;
+        overflow: auto;
+    }
 
-/*!
-  * Bootstrap (http://getbootstrap.com)
-  * Copyright 2011-2018 Twitter, Inc.
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  */
-
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1040;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-open {
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    margin: auto;
-    width: 100%;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal {
-    position: fixed;
-    z-index: 9999;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    margin: auto;
-    width: 460px;
-    min-height: 150px;
-    outline: none;
-    border-radius: 4px;
+    .fd-modal-background {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        opacity: 0.5;
+        z-index: 900;
+    }
 }

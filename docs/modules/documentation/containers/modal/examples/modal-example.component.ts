@@ -3,16 +3,15 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
 
 @Component({
     selector: 'fd-modal-example',
-    template: `<ng-template #informationalModal>
-        <fd-modal>
-            <fd-modal-header>
-                Modal Header/Title
-            </fd-modal-header>
-            <fd-modal-body>
-                Modal Body
-            </fd-modal-body>
-        </fd-modal>
-    </ng-template>
+    template: `
+    <fd-modal #informationalModal>
+        <fd-modal-header>
+            Modal Header/Title
+        </fd-modal-header>
+        <fd-modal-body>
+            Modal Body
+        </fd-modal-body>
+    </fd-modal>
     <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>`,
     providers: [ModalService]
 })

@@ -1,22 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from './modal.service';
 
 import { ModalHeaderComponent } from './modal-header.component';
 
 describe('ModalHeaderComponent', () => {
     let component: ModalHeaderComponent;
     let fixture: ComponentFixture<ModalHeaderComponent>;
-    let ngbModalSpy: jasmine.SpyObj<NgbModal>;
 
     beforeEach(async(() => {
-        const modalSpy = jasmine.createSpyObj('NgbModal', ['open']);
+        const modalSpy = jasmine.createSpyObj('ModalService', ['close']);
 
         TestBed.configureTestingModule({
             declarations: [ModalHeaderComponent],
-            providers: [{ provide: NgbModal, useValue: modalSpy }]
+            providers: [{ provide: ModalService, useValue: modalSpy }]
         }).compileComponents();
-
-        ngbModalSpy = TestBed.get(NgbModal);
     }));
 
     beforeEach(() => {

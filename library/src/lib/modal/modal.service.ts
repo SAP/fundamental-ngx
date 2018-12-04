@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 @Injectable({
     providedIn: 'root'
 })
 export class ModalService {
-    modalRef;
+    private modalRef: any;
 
-    constructor(private modalService: NgbModal) {}
-
-    close(): any {
-        return this.modalRef.close();
+    close() {
+        this.modalRef.close();
     }
 
-    dismiss(): any {
-        return this.modalRef.dismiss();
+    dismiss() {
+        this.modalRef.dismiss();
     }
 
-    open(modalType): any {
-        this.modalRef = this.modalService.open(modalType);
-        return this.modalRef;
+    open(modalType) {
+        this.modalRef = modalType;
+        modalType.open();
     }
 }

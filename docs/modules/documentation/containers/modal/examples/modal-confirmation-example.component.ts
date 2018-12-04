@@ -3,20 +3,19 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
 
 @Component({
     selector: 'fd-modal-confirmation-example',
-    template: `<ng-template #confirmationModal let-c="close">
-        <fd-modal>
-            <fd-modal-header>
-                Modal Header/Title
-            </fd-modal-header>
-            <fd-modal-body>
-                Modal Body
-            </fd-modal-body>
-            <fd-modal-footer>
-                <button fd-button (click)="c('No')" [options]="'light'">No</button>
-                <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
-            </fd-modal-footer>
-        </fd-modal>
-    </ng-template>
+    template: `
+    <fd-modal #confirmationModal>
+        <fd-modal-header>
+            Modal Header/Title
+        </fd-modal-header>
+        <fd-modal-body>
+            Modal Body
+        </fd-modal-body>
+        <fd-modal-footer>
+            <button fd-button (click)="closeConfirmationModal('No')" [options]="'light'">No</button>
+            <button fd-button (click)="closeConfirmationModal('Yes')" [fdType]="'main'">Yes</button>
+        </fd-modal-footer>
+    </fd-modal>
     <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
     <separator *ngIf="confirmationReason"></separator>
     <span>{{confirmationReason}}</span>`,
@@ -25,19 +24,18 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
 export class ModalConfirmationExampleComponent {
     confirmationReason: string;
 
-    openConfirmationModal(modalType) {
-        this.modalService.open(modalType).result.then(
-            result => {
-                if (result === 'Yes') {
-                    this.confirmationReason = 'Modal closed with "Yes" button';
-                } else if (result === 'No') {
-                    this.confirmationReason = 'Modal closed with "No" button';
-                }
-            },
-            () => {
-                this.confirmationReason = 'Modal dismissed with the "X" button';
-            }
-        );
+    closeConfirmationModal(reason) {
+        this.modalService.close();
+        if (reason === 'Yes') {
+            this.confirmationReason = 'Modal closed with "Yes" button';
+        } else if (reason === 'No') {
+            this.confirmationReason = 'Modal closed with "No" button';
+        }
     }
+
+    openConfirmationModal(modalType) {
+        this.modalService.open(modalType);
+    }
+
     constructor(private modalService: ModalService) {}
 }

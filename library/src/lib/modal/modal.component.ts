@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, Inject } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, ViewEncapsulation, Inject, ElementRef, OnInit } from '@angular/core';
+import { ModalService } from './modal.service';
 
 @Component({
     selector: 'fd-modal',
@@ -7,10 +7,21 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['modal.component.scss'],
     templateUrl: './modal.component.html'
 })
-export class ModalComponent {
-    constructor(@Inject(NgbModal) private modalService: NgbModal) {}
+export class ModalComponent implements OnInit {
+    constructor(@Inject(ModalService) private modalService: ModalService, private elRef: ElementRef) {}
 
-    open(): any {
-        return this.modalService.open(ModalComponent);
+    close() {
+        this.elRef.nativeElement.style.display = 'none';
+    }
+
+    open() {
+        this.elRef.nativeElement.style.display = 'block';
+    }
+
+    ngOnInit() {
+        /*
+         modal should be hidden on init
+         */
+        this.elRef.nativeElement.style.display = 'none';
     }
 }
