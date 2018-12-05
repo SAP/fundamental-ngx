@@ -6,8 +6,9 @@ Fundamental NGX is a set of Angular components that utilize the Fiori Fundamenta
 
 View live demo [here](https://sap.github.io/fundamental-ngx/).
 [![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=develop)](https://travis-ci.org/SAP/fundamental-ngx)
-- [GitHub repo of Vue implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-vue)
-- [GitHub repo of React implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-react)
+
+-   [GitHub repo of Vue implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-vue)
+-   [GitHub repo of React implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-react)
 
 ## Requirements
 
@@ -18,9 +19,9 @@ Fundamental NGX is intended for use with Angular 5 or newer. You should have som
 
 ## Download and Installation
 
-#### 1. Download Fundamental NGX, Fiori Fundamentals and ng-bootstrap
+#### 1. Download Fundamental NGX and Fiori Fundamentals
 
-`npm install --save fiori-fundamentals fundamental-ngx @ng-bootstrap/ng-bootstrap`
+`npm install --save fiori-fundamentals fundamental-ngx`
 
 #### 2. Include the Fiori Fundamentals CSS in your Angular application. Open your `angular.json` file and add the following to the `styles` array:
 
