@@ -14,6 +14,10 @@ export class ModalComponent implements OnInit {
         this.elRef.nativeElement.style.display = 'none';
     }
 
+    dismiss() {
+        this.elRef.nativeElement.style.display = 'none';
+    }
+
     open() {
         this.elRef.nativeElement.style.display = 'block';
     }
