@@ -32,11 +32,10 @@ import { TimePickerModule } from './time-picker/time-picker.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './modal/modal.service';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, NgbModule.forRoot()],
+    imports: [CommonModule, RouterModule, FormsModule],
     declarations: [FundamentalNgxComponent],
     exports: [
         FundamentalNgxComponent,

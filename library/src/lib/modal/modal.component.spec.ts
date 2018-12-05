@@ -1,22 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { ModalComponent } from './modal.component';
 
 describe('ModalComponent', () => {
     let component: ModalComponent;
     let fixture: ComponentFixture<ModalComponent>;
-    let ngbModalSpy: jasmine.SpyObj<NgbModal>;
 
     beforeEach(async(() => {
-        const modalSpy = jasmine.createSpyObj('NgbModal', ['open']);
-
         TestBed.configureTestingModule({
-            declarations: [ModalComponent],
-            providers: [{ provide: NgbModal, useValue: modalSpy }]
+            declarations: [ModalComponent]
         }).compileComponents();
-
-        ngbModalSpy = TestBed.get(NgbModal);
     }));
 
     beforeEach(() => {
@@ -29,8 +21,11 @@ describe('ModalComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should call modal service open', () => {
+    it('should set styles', () => {
+        expect(fixture.debugElement.nativeElement.style.display).toBe('none');
         component.open();
-        expect(ngbModalSpy.open).toHaveBeenCalled();
+        expect(fixture.debugElement.nativeElement.style.display).toBe('block');
+        component.close();
+        expect(fixture.debugElement.nativeElement.style.display).toBe('none');
     });
 });
