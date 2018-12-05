@@ -1,0 +1,26 @@
+<div class="fd-combobox-input">
+    <fd-popover [arrow]="false">
+        <fd-popover-control>
+            <div
+                class="fd-combobox-control"
+                aria-label="Image label"
+                aria-controls="F4GcX348"
+                aria-expanded="false"
+                aria-haspopup="true"
+            >
+                <div class="fd-input-group fd-input-group--after" [ngClass]="{ 'fd-input-group--compact': compact }">
+                    <input
+                        type="text"
+                        class="fd-input"
+                        [placeholder]="placeholder"
+                        [ngClass]="{ 'fd-input--compact': compact }"
+                    />
+                    <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
+                        <button class=" fd-button--light sap-icon--navigation-down-arrow"></button>
+                    </span>
+                </div>
+            </div>
+        </fd-popover-control>
+        <fd-popover-body> <ng-content></ng-content> </fd-popover-body>
+    </fd-popover>
+</div>

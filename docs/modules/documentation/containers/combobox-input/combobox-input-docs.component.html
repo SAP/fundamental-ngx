@@ -1,7 +1,26 @@
 <header>Combobox Input</header>
-<description>The combobox input component is an opinionated composition of the "input-group" and "popover"
-  components to accomplish the UI pattern for a typical input dropdown, also known as combobox input.</description>
+<description>
+    The combobox input component is an opinionated composition of the "input-group" and "popover" components to
+    accomplish the UI pattern for a typical input dropdown, also known as combobox input.
+</description>
 <import module="ComboboxInputModule" path="fundamental/combobox-input/combobox-input.module"></import>
 <separator></separator>
 
-<fd-combobox-input></fd-combobox-input>
+<h1>&lt;fd-combobox-input&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'placeholder',  description: 'Placeholder string for the combobox input'},
+    { name: 'compact', description: 'Set this boolean to \'true\' to have the combobox input in compact mode.'}
+    ]
+}">
+</properties>
+
+<separator></separator>
+
+<component-example [name]="'ex1'">
+    <fd-combobox-input-example></fd-combobox-input-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="comboboxInputExampleHtmlSource"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="comboboxInputExampleJsSource"></code></pre>
+
