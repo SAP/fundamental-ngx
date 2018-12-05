@@ -399,3 +399,4 @@ const ROUTES: Routes = [
 export class DocumentationModule {}
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { ComboboxInputDocsComponent } from './containers/combobox-input/combobox-input-docs.component';
