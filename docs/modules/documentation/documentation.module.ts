@@ -147,7 +147,10 @@ import {
 } from './containers/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
+<<<<<<< HEAD
 import { SearchInputExampleComponent } from './containers/search-input/examples/search-input-example.component';
+=======
+>>>>>>> implement shellbar component
 import { ShellbarBasicExampleComponent } from './containers/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './containers/shellbar/examples/shellbar-collapsible-example.component';
 import {
@@ -226,7 +229,10 @@ const ROUTES: Routes = [
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
+<<<<<<< HEAD
             { path: 'searchInput', component: SearchInputDocsComponent },
+=======
+>>>>>>> implement shellbar component
             { path: 'shellbar', component: ShellbarDocsComponent },
             { path: 'sideNavigation', component: SideNavigationDocsComponent },
             { path: 'table', component: TableDocsComponent },
@@ -278,7 +284,10 @@ const ROUTES: Routes = [
         PopoverDocsComponent,
         CalendarDocsComponent,
         DatePickerDocsComponent,
+<<<<<<< HEAD
         SearchInputDocsComponent,
+=======
+>>>>>>> implement shellbar component
         ShellbarDocsComponent,
         SideNavigationDocsComponent,
         TileDocsComponent,
@@ -361,7 +370,10 @@ const ROUTES: Routes = [
         PanelRowColumnExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+<<<<<<< HEAD
         SearchInputExampleComponent,
+=======
+>>>>>>> implement shellbar component
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,

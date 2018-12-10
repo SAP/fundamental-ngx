@@ -5,15 +5,14 @@ import { Component } from '@angular/core';
     templateUrl: './shellbar-basic-example.component.html'
 })
 export class ShellbarBasicExampleComponent {
-
     user = {
         initials: 'WW',
         colorAccent: 11
     };
 
     userMenu = [
-        {text: 'Settings', callback: this.settingsCallback},
-        {text: 'Sign Out', callback: this.signOutCallback}
+        { text: 'Settings', callback: this.settingsCallback },
+        { text: 'Sign Out', callback: this.signOutCallback }
     ];
 
     settingsCallback() {
@@ -23,5 +22,4 @@ export class ShellbarBasicExampleComponent {
     signOutCallback() {
         alert('Sign Out Clicked');
     }
-
 }

@@ -6,7 +6,6 @@ import { SearchInputComponent } from '../search-input/search-input.component';
     templateUrl: './shellbar-action.component.html'
 })
 export class ShellbarActionComponent {
-
     @Input()
     glyph: string;
 
@@ -24,5 +23,4 @@ export class ShellbarActionComponent {
 
     @ContentChild(SearchInputComponent)
     searchInputComponent: SearchInputComponent;
-
 }

@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
     templateUrl: './documentation.component.html'
 })
 export class DocumentationComponent implements OnInit {
-
-    @ViewChild('content') contentElRef: ElementRef;
+    @ViewChild('content')
+    contentElRef: ElementRef;
 
     components = [
         { url: 'action-bar', name: 'Action Bar' },
