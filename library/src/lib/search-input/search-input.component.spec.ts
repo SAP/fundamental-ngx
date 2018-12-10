@@ -21,9 +21,7 @@ describe('SearchInputComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SearchInputComponent);
         component = fixture.componentInstance;
-        component.searchTerms = [
-            {text: 'Apple', callback: () => {}}
-        ];
+        component.searchTerms = [{ text: 'Apple', callback: () => {} }];
         component.searchFunction = () => {};
         pipe = new FdSearchPipe();
         fixture.detectChanges();
@@ -70,18 +68,10 @@ describe('SearchInputComponent', () => {
     });
 
     it('should test the search pipe', () => {
-        const searchTerms = [
-            {text: 'term1'},
-            {text: 'term2'}
-        ];
+        const searchTerms = [{ text: 'term1' }, { text: 'term2' }];
         let result = pipe.transform(searchTerms, 't');
-        expect(result).toEqual([
-            {text: 'term1'},
-            {text: 'term2'}
-        ]);
+        expect(result).toEqual([{ text: 'term1' }, { text: 'term2' }]);
         result = pipe.transform(searchTerms, 'term1');
-        expect(result).toEqual([
-            {text: 'term1'}
-        ]);
+        expect(result).toEqual([{ text: 'term1' }]);
     });
 });
