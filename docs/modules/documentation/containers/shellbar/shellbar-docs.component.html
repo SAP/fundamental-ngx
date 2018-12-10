@@ -1,0 +1,71 @@
+<header>Shellbar</header>
+<description></description>
+
+<import module="ShellbarModule" path="fundamental/shellbar/shellbar.module"></import>
+
+<separator></separator>
+
+<h1>&lt;fd-shellbar&gt;</h1>
+<description>
+    The shellbar offers consistent, responsive navigation across all products and applications. Includes support for branding, product navigation, search, notifications, user settings, and CoPilot. This is a composite component comprised of mandatory and optional elements.
+
+    Before getting started, here are some things to know.
+</description>
+
+<h3>How it works</h3>
+<description>
+    <ul>
+        <li>
+            The shellbar should be placed inside the shell layout container.
+        </li>
+        <li>
+            The shellbar is fluid and responsive by default with proper margins and padding built in.
+        </li>
+        <li>
+            The shellbar actions are duplicated into the overflow menu on mobile screens.
+        </li>
+    </ul>
+</description>
+
+<description>
+    Moving from left to right, the shellbar content will become more variable based on the product needs. See below for more details about child elements.
+</description>
+
+<properties [properties]="{
+    childComponents: [
+        {name: '<fd-shellbar-logo>', description: '(required) for company branding.'},
+        {name: '<fd-shellbar-title>', description: '(required) displays the current application when no product menu is used.'},
+        {name: '<fd-shellbar-subtitle>', description: '(optional) displays an application context. This should be used rarely'},
+        {name: '<fd-product-menu>', description: '(optional) holds product titles and navigation.'},
+        {name: '<fd-shellbar-actions>', description: '(required) holds all product actions and links.'},
+        {name: '<fd-shellbar-action>', description: '(required) an individual product actions or link.'},
+        {name: '<fd-shellbar-collapse>', description: '(optional) for product actions on mobile screens.'},
+        {name: '<fd-shellbar-copilot>', description: '(optional) for use with applications that utilize CoPilot.'},
+        {name: '<fd-user-menu>', description: '(required) for user settings and application meta links such as Sign Out.'},
+        {name: '<fd-product-switcher>', description: '(optional) for navigating between products.'},
+        {name: '<fd-product-switcher-product-icon>', description: '(optional) icon for a product in the product switcher.'},
+        {name: '<fd-product-switcher-product-title>', description: '(optional) title for a product in the product switcher.'}
+    ]
+}"></properties>
+
+<separator></separator>
+
+<h2>Basic Shellbar</h2>
+<description>
+    This example shows the minimum shellbar for a single application product with only user settings. If no user thumbnail is available then display initials.
+</description>
+<component-example [name]="'ex1'">
+    <fd-shellbar-basic-example></fd-shellbar-basic-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="shellbarBasicExampleHtml"></code></pre>
+
+<separator></separator>
+
+<h2>Links with collapsible menu, CoPilot and Product Switcher</h2>
+<description>
+    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens. All actions, except for the user menu, should be collapsed. See the placement of the <code>&lt;fd-shellbar-collapse></code> container below.
+</description>
+<component-example [name]="'ex2'">
+    <fd-shellbar-collapsible-example></fd-shellbar-collapsible-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="shellbarCollapsibleExampleHtml"></code></pre>

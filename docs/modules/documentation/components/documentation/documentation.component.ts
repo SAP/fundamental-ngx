@@ -33,6 +33,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'pagination', name: 'Pagination' },
         { url: 'panel', name: 'Panel' },
         { url: 'popover', name: 'Popover' },
+        { url: 'shellbar', name: 'Shellbar' },
         { url: 'sideNavigation', name: 'Side Navigation' },
         { url: 'table', name: 'Table' },
         { url: 'tabs', name: 'Tabs' },

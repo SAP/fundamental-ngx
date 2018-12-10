@@ -1,0 +1,8 @@
+<div class="fd-shellbar__actions">
+    <div *ngIf="actionsCollapsed" class="fd-shellbar__action fd-shellbar__action--collapse">
+        <div class="fd-shellbar-collapse">
+            <ng-content select="fd-shellbar-collapse"></ng-content>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</div>

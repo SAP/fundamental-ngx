@@ -25,6 +25,7 @@ export * from './lib/modal/modal.service';
 export * from './lib/navbar/navbar.module';
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';
+export * from './lib/shellbar/shellbar.module';
 export * from './lib/side-navigation/side-navigation.module';
 export * from './lib/table/table.module';
 export * from './lib/tabs/tabs.module';

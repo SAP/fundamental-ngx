@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
+import { ShellbarModule } from './shellbar/shellbar.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -61,6 +62,7 @@ import { ModalService } from './modal/modal.service';
         PaginationModule,
         PanelModule,
         PopoverModule,
+        ShellbarModule,
         SideNavigationModule,
         TableModule,
         TabsModule,
