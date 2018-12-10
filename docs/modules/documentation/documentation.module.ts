@@ -52,6 +52,7 @@ import { DatePickerDocsComponent } from './containers/date-picker/date-picker-do
 import { TimeDocsComponent } from './containers/time/time-docs.component';
 import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
 import { ShellbarDocsComponent } from './containers/shellbar/shellbar-docs.component';
+import { SearchInputDocsComponent } from './containers/search-input/search-input-docs.component';
 
 // examples
 import {
@@ -146,6 +147,7 @@ import {
 } from './containers/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
+import { SearchInputExampleComponent } from './containers/search-input/examples/search-input-example.component';
 import { ShellbarBasicExampleComponent } from './containers/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './containers/shellbar/examples/shellbar-collapsible-example.component';
 import {
@@ -224,6 +226,7 @@ const ROUTES: Routes = [
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
+            { path: 'searchInput', component: SearchInputDocsComponent },
             { path: 'shellbar', component: ShellbarDocsComponent },
             { path: 'sideNavigation', component: SideNavigationDocsComponent },
             { path: 'table', component: TableDocsComponent },
@@ -275,6 +278,7 @@ const ROUTES: Routes = [
         PopoverDocsComponent,
         CalendarDocsComponent,
         DatePickerDocsComponent,
+        SearchInputDocsComponent,
         ShellbarDocsComponent,
         SideNavigationDocsComponent,
         TileDocsComponent,
@@ -357,6 +361,7 @@ const ROUTES: Routes = [
         PanelRowColumnExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+        SearchInputExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,
