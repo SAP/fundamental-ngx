@@ -7,16 +7,13 @@ import { ShellbarSubtitleComponent } from './shellbar-subtitle.component';
 import { CopilotComponent } from './copilot.component';
 import { ShellbarActionsComponent } from './shellbar-actions.component';
 import { ShellbarActionComponent } from './shellbar-action.component';
-import { UserMenuComponent } from './user-menu.component';
-import { UserMenuControlComponent } from './user-menu-control.component';
-import { ProductSwitcherComponent } from './product-switcher.component';
-import { ProductSwitcherBodyComponent } from './product-switcher-body.component';
-import { ProductSwitcherProductIconComponent } from './product-switcher-product-icon.component';
-import { ProductSwitcherProductTitleComponent } from './product-switcher-product-title.component';
 import { ShellbarLogoComponent } from './shellbar-logo.component';
 import { ShellbarTitleComponent } from './shellbar-title.component';
 import { ShellbarCollapseComponent } from './shellbar-collapse.component';
 import { ShellbarCollapseControlComponent } from './shellbar-collapse-control.component';
+
+import { PopoverModule } from '../popover/popover.module';
+import { MenuModule } from '../menu/menu.module';
 
 @NgModule({
     declarations: [
@@ -27,18 +24,12 @@ import { ShellbarCollapseControlComponent } from './shellbar-collapse-control.co
         CopilotComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
-        UserMenuComponent,
-        UserMenuControlComponent,
-        ProductSwitcherComponent,
-        ProductSwitcherBodyComponent,
-        ProductSwitcherProductIconComponent,
-        ProductSwitcherProductTitleComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarCollapseComponent,
         ShellbarCollapseControlComponent
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, PopoverModule, MenuModule],
     exports: [
         ShellbarComponent,
         ProductMenuComponent,
@@ -47,12 +38,6 @@ import { ShellbarCollapseControlComponent } from './shellbar-collapse-control.co
         CopilotComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
-        UserMenuComponent,
-        UserMenuControlComponent,
-        ProductSwitcherComponent,
-        ProductSwitcherBodyComponent,
-        ProductSwitcherProductIconComponent,
-        ProductSwitcherProductTitleComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarCollapseComponent,

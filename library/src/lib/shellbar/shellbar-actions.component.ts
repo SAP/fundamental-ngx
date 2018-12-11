@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'fd-shellbar-actions',
@@ -6,6 +6,15 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class ShellbarActionsComponent implements OnInit {
     actionsCollapsed: boolean = false;
+
+    @Input()
+    productSwitcher: any[];
+
+    @Input()
+    user: {};
+
+    @Input()
+    userMenu: any[];
 
     @HostListener('window:resize', ['$event'])
     onResize() {
