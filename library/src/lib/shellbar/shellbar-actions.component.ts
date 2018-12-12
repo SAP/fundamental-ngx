@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, ContentChildren, HostListener, Input, OnInit, AfterContentChecked, QueryList } from '@angular/core';
+=======
+import { Component, ContentChildren, HostListener, Input, OnInit, QueryList } from '@angular/core';
+>>>>>>> shellbar progress
 import { ShellbarActionComponent } from './shellbar-action.component';
 
 @Component({
@@ -47,4 +51,8 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
         event.stopPropagation();
         this.showCollapsedProducts = !this.showCollapsedProducts;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> shellbar progress
 }
