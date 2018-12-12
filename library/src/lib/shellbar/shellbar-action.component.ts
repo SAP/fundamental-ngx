@@ -7,12 +7,18 @@ import { Component, Input } from '@angular/core';
 export class ShellbarActionComponent {
 
     @Input()
-    showAlways: boolean = false;
+    glyph: string;
 
     @Input()
-    collapsible: boolean = false;
+    callback: Function;
 
     @Input()
-    collapse: boolean = false;
+    label: string;
+
+    @Input()
+    notificationLabel: string;
+
+    @Input()
+    notificationCount: number;
 
 }

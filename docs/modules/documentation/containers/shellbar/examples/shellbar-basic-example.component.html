@@ -5,27 +5,5 @@
     <fd-shellbar-title>
         Corporate Portal
     </fd-shellbar-title>
-    <fd-shellbar-actions>
-        <fd-shellbar-action [showAlways]="true">
-            <fd-user-menu>
-                <fd-popover alignment="right">
-                    <fd-popover-control>
-                        <fd-user-menu-control>
-                            <span fd-identifier circle="true" size="s" [colorAccent]="'1'">WW</span>
-                        </fd-user-menu-control>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <fd-menu>
-                            <fd-menu-item>
-                                Settings
-                            </fd-menu-item>
-                            <fd-menu-item>
-                                Sign Out
-                            </fd-menu-item>
-                        </fd-menu>
-                    </fd-popover-body>
-                </fd-popover>
-            </fd-user-menu>
-        </fd-shellbar-action>
-    </fd-shellbar-actions>
+    <fd-shellbar-actions [user]="user" [userMenu]="userMenu"></fd-shellbar-actions>
 </fd-shellbar>

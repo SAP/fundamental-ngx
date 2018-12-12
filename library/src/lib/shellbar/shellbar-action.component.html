@@ -1,4 +1,7 @@
-<div class="fd-shellbar__action"
-     [ngClass]="{'fd-shellbar__action--collapsible': collapsible, 'fd-shellbar__action--show-always': showAlways}">
-    <ng-content></ng-content>
+<div class="fd-shellbar__action fd-shellbar__action--collapsible">
+    <button class="fd-button--shell" (click)="callback ? callback($event) : ''"
+            [ngClass]="(glyph ? ('sap-icon--' + glyph) : '')"
+            [attr.aria-label]="label">
+        <span *ngIf="notificationCount" class="fd-counter fd-counter--notification" [attr.aria-label]="notificationLabel">{{notificationCount}}</span>
+    </button>
 </div>

@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ContentChildren, HostListener, Input, OnInit, QueryList } from '@angular/core';
+import { ShellbarActionComponent } from './shellbar-action.component';
 
 @Component({
     selector: 'fd-shellbar-actions',
@@ -7,6 +8,20 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class ShellbarActionsComponent implements OnInit {
     actionsCollapsed: boolean = false;
 
+    showCollapsedProducts: boolean = false;
+
+    @Input()
+    productSwitcher: any[];
+
+    @Input()
+    user: {};
+
+    @Input()
+    userMenu: any[];
+
+    @ContentChildren(ShellbarActionComponent)
+    shellbarActions: QueryList<ShellbarActionComponent>;
+
     @HostListener('window:resize', ['$event'])
     onResize() {
         this.actionsCollapsed = window.innerWidth < 1024;
@@ -14,6 +29,12 @@ export class ShellbarActionsComponent implements OnInit {
 
     ngOnInit() {
         this.onResize();
+    }
+
+    toggleCollapsedProducts(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.showCollapsedProducts = !this.showCollapsedProducts;
     }
 
 }
