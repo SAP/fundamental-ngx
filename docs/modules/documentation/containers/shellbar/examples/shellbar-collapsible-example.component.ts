@@ -6,6 +6,22 @@ import { Component } from '@angular/core';
 })
 export class ShellbarCollapsibleExampleComponent {
 
+    user = {
+        initials: 'WW',
+        image: './assets/headshot-male.jpg'
+    };
+
+    userMenu = [
+        {text: 'Settings', callback: this.settingsCallback},
+        {text: 'Sign Out', callback: this.signOutCallback}
+    ];
+
+    actions = [
+        {glyph: 'bell', callback: this.actionNotificationCallback, label: 'Notifications',
+            notificationCount: 12, notificationLabel: 'Unread Notifications'},
+        {glyph: 'pool', callback: this.actionPoolCallback, label: 'Pool'}
+    ];
+
     applicationList = [
         {name: 'Application A'},
         {name: 'Application B'},
@@ -13,25 +29,56 @@ export class ShellbarCollapsibleExampleComponent {
         {name: 'Application D'}
     ];
 
-    collapsedItems = [
-        {name: 'Notifications'},
-        {name: 'Pool'},
-        {name: 'Product Switcher'}
+    productSwitcher = [
+        {title: 'Fiori Home', image: './assets/01.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
+        {title: 'S/4 HANA Cloud', image: './assets/02.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'S/4 HANA Cloud')}},
+        {title: 'Analytics Cloud', image: './assets/03.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Analytics Cloud')}},
+        {title: 'Ariba', image: './assets/04.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Ariba')}},
+        {title: 'SuccessFactors', image: './assets/05.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'SuccessFactors')}},
+        {title: 'Commerce Cloud', image: './assets/06.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Commerce Cloud')}},
+        {title: 'Gigya', image: './assets/07.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Gigya')}},
+        {title: 'Callidus Cloud', image: './assets/08.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Callidus Cloud')}},
+        {title: 'Fieldglass', image: './assets/09.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Fieldglass')}},
+        {title: 'Concur', image: './assets/10.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Concur')}},
+        {title: 'Cloud for Customer', image: './assets/11.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Cloud for Customer')}},
+        {title: 'Cloud Portal', image: './assets/12.png',
+            callback: ($event) => {this.productSwitcherCallback($event, 'Cloud Portal')}}
     ];
 
-    productSwitcherList = [
-        {name: 'Fiori Home', imagePath: './assets/01.png'},
-        {name: 'S/4 HANA Cloud', imagePath: './assets/02.png'},
-        {name: 'Analytics Cloud', imagePath: './assets/03.png'},
-        {name: 'Ariba', imagePath: './assets/04.png'},
-        {name: 'SuccessFactors', imagePath: './assets/05.png'},
-        {name: 'Commerce Cloud', imagePath: './assets/06.png'},
-        {name: 'Gigya', imagePath: './assets/07.png'},
-        {name: 'Callidus Cloud', imagePath: './assets/08.png'},
-        {name: 'Fieldglass', imagePath: './assets/09.png'},
-        {name: 'Concur', imagePath: './assets/10.png'},
-        {name: 'Cloud for Customer', imagePath: './assets/11.png'},
-        {name: 'Cloud Portal', imagePath: './assets/12.png'},
-    ];
+    settingsCallback($event) {
+        console.log($event);
+        alert('Settings Clicked');
+    }
+
+    signOutCallback($event) {
+        console.log($event);
+        alert('Sign Out Clicked');
+    }
+
+    actionNotificationCallback($event) {
+        console.log($event);
+        alert('Notification Action Clicked');
+    }
+
+    actionPoolCallback($event) {
+        console.log($event);
+        alert('Pool Action Clicked');
+    }
+
+    productSwitcherCallback($event, product) {
+        console.log($event);
+        alert(product + ' Product Clicked');
+    }
 
 }

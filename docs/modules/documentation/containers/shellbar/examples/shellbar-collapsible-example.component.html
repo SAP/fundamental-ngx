@@ -24,72 +24,9 @@
         Subtitle
     </fd-shellbar-subtitle>
     <fd-copilot></fd-copilot>
-    <fd-shellbar-actions>
-        <fd-shellbar-action [collapsible]="true">
-            <button fd-button [options]="'shell'" [glyph]="'bell'" aria-label="Notifications">
-                <span class="fd-counter fd-counter--notification" aria-label="Unread count">25</span>
-            </button>
-        </fd-shellbar-action>
-        <fd-shellbar-action [collapsible]="true">
-            <button fd-button [options]="'shell'" [glyph]="'pool'"></button>
-        </fd-shellbar-action>
-        <fd-shellbar-collapse>
-            <fd-popover alignment="right">
-                <fd-popover-control>
-                    <fd-shellbar-collapse-control [collapsedCount]="collapsedItems.length"></fd-shellbar-collapse-control>
-                </fd-popover-control>
-                <fd-popover-body>
-                    <fd-menu>
-                        <fd-menu-list>
-                            <fd-menu-item *ngFor="let collapsedItem of collapsedItems">
-                                {{collapsedItem.name}}
-                            </fd-menu-item>
-                        </fd-menu-list>
-                    </fd-menu>
-                </fd-popover-body>
-            </fd-popover>
-        </fd-shellbar-collapse>
-        <fd-shellbar-action [showAlways]="true">
-            <fd-user-menu>
-                <fd-popover alignment="right">
-                    <fd-popover-control>
-                        <fd-user-menu-control>
-                            <span fd-identifier circle="true" size="s" [colorAccent]="'1'">WW</span>
-                        </fd-user-menu-control>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <fd-menu>
-                            <fd-menu-item>
-                                Settings
-                            </fd-menu-item>
-                            <fd-menu-item>
-                                Sign Out
-                            </fd-menu-item>
-                        </fd-menu>
-                    </fd-popover-body>
-                </fd-popover>
-            </fd-user-menu>
-        </fd-shellbar-action>
-        <fd-shellbar-action [collapsible]="true">
-            <fd-product-switcher>
-                <fd-popover alignment="right">
-                    <fd-popover-control>
-                        <button fd-button [options]="'shell'" [glyph]="'grid'"></button>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <fd-product-switcher-body>
-                            <li *ngFor="let product of productSwitcherList">
-                                <fd-product-switcher-product-icon>
-                                    <img [src]="product.imagePath">
-                                </fd-product-switcher-product-icon>
-                                <fd-product-switcher-product-title>
-                                    {{product.name}}
-                                </fd-product-switcher-product-title>
-                            </li>
-                        </fd-product-switcher-body>
-                    </fd-popover-body>
-                </fd-popover>
-            </fd-product-switcher>
+    <fd-shellbar-actions [user]="user" [userMenu]="userMenu" [productSwitcher]="productSwitcher">
+        <fd-shellbar-action *ngFor="let action of actions" [glyph]="action.glyph" [callback]="action.callback"
+                            [label]="action.label" [notificationCount]="action.notificationCount" [notificationLabel]="action.notificationLabel">
         </fd-shellbar-action>
     </fd-shellbar-actions>
 </fd-shellbar>
