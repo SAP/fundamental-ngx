@@ -28,6 +28,7 @@ describe('ShellbarActionsComponent', () => {
     });
 
     it('should handle window resize', () => {
+        (<any>window).screen = { width: 1025};
         expect(component.actionsCollapsed).toBeFalsy();
         const resizeSpy = spyOn(component, 'onResize');
         window.dispatchEvent(new Event('resize'));
