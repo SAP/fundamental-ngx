@@ -29,6 +29,19 @@ export class ShellbarCollapsibleExampleComponent {
         {name: 'Application D'}
     ];
 
+    searchFunction() {
+        alert('Search Function called');
+    }
+
+    searchTerm = '';
+
+    searchTerms = [
+        {text: 'Apple', callback: () => {alert('Apple Clicked')}},
+        {text: 'Banana', callback: () => {alert('Banana Clicked')}},
+        {text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
+        {text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}}
+    ];
+
     productSwitcher = [
         {title: 'Fiori Home', image: './assets/01.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},

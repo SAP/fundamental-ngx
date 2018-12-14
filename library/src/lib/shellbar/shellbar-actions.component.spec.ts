@@ -8,11 +8,15 @@ import { PopoverModule } from '../popover/popover.module';
 describe('ShellbarActionsComponent', () => {
     let component: ShellbarActionsComponent;
     let fixture: ComponentFixture<ShellbarActionsComponent>;
+    const windowMock: Window = <any>{
+        innerWidth: 1024
+    };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ ShellbarActionsComponent ],
-            imports: [ MenuModule, PopoverModule ]
+            imports: [ MenuModule, PopoverModule ],
+            providers: [{ provide: 'Window', useFactory: (() => windowMock ) }]
         })
             .compileComponents();
     }));

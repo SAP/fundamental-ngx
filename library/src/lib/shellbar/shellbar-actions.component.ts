@@ -1,4 +1,4 @@
-import { Component, ContentChildren, HostListener, Input, OnInit, QueryList } from '@angular/core';
+import { Component, ContentChildren, HostListener, Inject, Input, OnInit, QueryList } from '@angular/core';
 import { ShellbarActionComponent } from './shellbar-action.component';
 
 @Component({
@@ -36,5 +36,7 @@ export class ShellbarActionsComponent implements OnInit {
         event.stopPropagation();
         this.showCollapsedProducts = !this.showCollapsedProducts;
     }
+
+    constructor( @Inject('Window') private window: Window) { }
 
 }
