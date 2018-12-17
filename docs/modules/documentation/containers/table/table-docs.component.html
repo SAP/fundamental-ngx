@@ -18,24 +18,7 @@
 <h2>Table</h2>
 <br>
 <component-example [name]="'ex1'">
-  <fd-table>
-    <fd-table-header>
-      <th>Column 1</th>
-      <th>Column 2</th>
-      <th>Column 3</th>
-      <th>Date</th>
-      <th>Type</th>
-    </fd-table-header>
-    <fd-table-body>
-      <tr *ngFor="let row of tableRows">
-        <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
-        <td>{{row.column2}}</td>
-        <td>{{row.column3}}</td>
-        <td>{{row.date}}</td>
-        <td><fd-icon [glyph]="row.type"></fd-icon></td>
-      </tr>
-    </fd-table-body>
-  </fd-table>
+  <fd-table-example></fd-table-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="tableHtml"></code></pre>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="tableJson"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="tableJs"></code></pre>

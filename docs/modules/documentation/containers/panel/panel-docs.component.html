@@ -27,41 +27,7 @@
 <separator></separator>
 <component-example [name]="'ex1'">
   <p>
-    <fd-panel>
-      <fd-panel-header>
-        <fd-panel-head>
-          <fd-panel-title>Panel Title</fd-panel-title>
-          <fd-panel-description>Panel Description</fd-panel-description>
-        </fd-panel-head>
-        <fd-panel-actions>
-          <button fd-button
-                  [size]="'s'"
-                  [glyph]="'add'">Add New Item</button>
-        </fd-panel-actions>
-      </fd-panel-header>
-      <fd-panel-filters>
-        <fd-popover [isDropdown]="true">
-          Color
-        </fd-popover>
-        <fd-popover [isDropdown]="true">
-          Size
-        </fd-popover>
-      </fd-panel-filters>
-      <fd-panel-filters>
-        <span class="fd-tag"
-              role="button">Blue</span>
-        <span class="fd-tag"
-              role="button">Small</span>
-        <button fd-modal-button-secondary
-                size="s">Clear All</button>
-      </fd-panel-filters>
-      <fd-panel-body>
-        Panel Content
-      </fd-panel-body>
-      <fd-panel-footer>
-        Panel Footer
-      </fd-panel-footer>
-    </fd-panel>
+    <fd-panel-example></fd-panel-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="panelHtml"></code></pre>
@@ -72,24 +38,7 @@
   This is useful for components like tables and trees.</p>
 <component-example [name]="'ex2'">
   <p>
-    <fd-panel>
-      <fd-panel-body [bleed]="true">
-        <fd-table>
-          <fd-table-header>
-            <th *ngFor="let header of tableHeaders">
-              {{header}}
-            </th>
-          </fd-table-header>
-          <fd-table-body>
-            <tr *ngFor="let row of tableData">
-              <td *ngFor="let cell of row.rowData">
-                {{cell}}
-              </td>
-            </tr>
-          </fd-table-body>
-        </fd-table>
-      </fd-panel-body>
-    </fd-panel>
+    <fd-panel-edge-bleed-example></fd-panel-edge-bleed-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="tableBleedHtml"></code></pre>
@@ -107,38 +56,7 @@
 <h2>Default Panel Grid (3 columns)</h2>
 <component-example [name]="'ex3'">
   <p>
-    <fd-panel-grid>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-    </fd-panel-grid>
+    <fd-panel-grid-example></fd-panel-grid-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="defaultPanelGridHtml"></code></pre>
@@ -152,29 +70,7 @@
   <code>[nogap]="true"</code> will remove the margins between the panels.</p>
 <component-example [name]="'ex3'">
   <p>
-    <fd-panel-grid [col]="2"
-                   [nogap]="true">
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-    </fd-panel-grid>
+    <fd-panel-grid-nogap-example></fd-panel-grid-nogap-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="nogapPanelGridHtml"></code></pre>
@@ -186,28 +82,7 @@
   <code>[col]="2"</code> renders a 2 column grid.</p>
 <component-example [name]="'ex4'">
   <p>
-    <fd-panel-grid [col]="2">
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-    </fd-panel-grid>
+    <fd-panel-columns-example></fd-panel-columns-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="twoColumnsPanelGridHtml"></code></pre>
@@ -217,79 +92,7 @@
 <h2>Panel Grid with row and column span</h2>
 <component-example [name]="'ex1'">
   <p>
-    <fd-panel-grid [col]="6">
-      <fd-panel [columnSpan]="2"
-                [rowSpan]="2">
-        <fd-panel-body>
-          Panel Content with span 2
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel [columnSpan]="2">
-        <fd-panel-body>
-          Panel Content with span 2
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel [columnSpan]="4">
-        <fd-panel-body>
-          Panel Content with span 4
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel [columnSpan]="5">
-        <fd-panel-body>
-          Panel Content with span 5
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel>
-        <fd-panel-body>
-          Panel Content
-        </fd-panel-body>
-      </fd-panel>
-      <fd-panel [columnSpan]="6">
-        <fd-panel-body>
-          Panel Content with span 6
-        </fd-panel-body>
-      </fd-panel>
-    </fd-panel-grid>
+    <fd-panel-row-column-example></fd-panel-row-column-example>
   </p>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="columnSpanPanelGridHtml"></code></pre>

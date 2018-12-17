@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as timeSrc from '!raw-loader!./examples/time-example.component.html';
+import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.component.html';
+import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.component.html';
+import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
+import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
+
 @Component({
     selector: 'app-time',
     templateUrl: './time-docs.component.html'
@@ -36,23 +42,15 @@ export class TimeDocsComponent {
         }
     };
 
-    timeHtml = `<fd-time [time]="timeObject"></fd-time>`;
+    timeHtml = timeSrc;
 
-    timeMeridianHtml = `<fd-time [meridian]="true" [time]="timeMeridianObject"></fd-time>`;
+    timeMeridianHtml = timeMeridianSrc;
 
-    timeDisabledHtml = `<fd-time [disabled]="true" [time]="{hour: 0, minute: 0, second: 0}"></fd-time>`;
+    timeDisabledHtml = timeDisabledSrc;
 
-    timeNoSpinnersHtml = `<fd-time [spinners]="false" [time]="timeNoSpinnersObject"></fd-time>`;
+    timeNoSpinnersHtml = timeNoSpinnersSrc;
 
-    timeNoSecondsHtml = `<fd-time [displaySeconds]="false" [time]="timeNoSecondsObject"></fd-time>`;
-
-    timeObject = { hour: 12, minute: 0, second: 0 };
-
-    timeMeridianObject = { hour: 12, minute: 0, second: 0 };
-
-    timeNoSpinnersObject = { hour: 12, minute: 0, second: 0 };
-
-    timeNoSecondsObject = { hour: 12, minute: 0, second: null };
+    timeNoSecondsHtml = timeNoSecondsSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

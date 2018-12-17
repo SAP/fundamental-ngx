@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+    - 8.9.0
+dist: trusty
+git:
+    depth: false
+branches:
+    only:
+        - develop
+        - "/^feature\\/.*$/"
+jobs:
+    include:
+        - stage: 'Fundamental-ngx build'
+          name: 'Unit tests'
+          script: './ci-scripts/unit-tests.sh'
+notifications:
+    email:
+        on_failure: always
+        on_success: change

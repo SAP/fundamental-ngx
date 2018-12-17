@@ -10,7 +10,8 @@
     { name: 'time', description: 'An object that contains three integer properties: \'hour\' (ranging from 0 to 23), \'minute\' (ranging from 0 to 59), and \'second\' (ranging from 0 to 59). ' },
     { name: 'meridian', description: 'When set to true, turns the time picker into a 12-hour clock with am/pm.  Default is false.'},
     { name: 'spinners', description: 'Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true.'},
-    { name: 'disabled', description: 'Disables the time picker.'}
+    { name: 'disabled', description: 'Disables the time picker.'},
+    { name: 'compact', description: 'Uses compact time picker.'}
   ]
 }"></properties>
 
@@ -18,8 +19,7 @@
 <h2>24-Hour Time Picker</h2>
 <description>This is the default time picker setting.</description>
 <component-example [name]="'ex1'">
-  <fd-time-picker [time]="timeObject"></fd-time-picker><br>
-  <span>timeObject: {{ '{' }}hour: {{timeObject.hour}}, minute: {{timeObject.minute}}, second: {{timeObject.second}}}</span>
+  <fd-time-picker-example></fd-time-picker-example>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timePickerHtml"></code></pre>
 
@@ -27,10 +27,7 @@
 <h2>12-Hour Time Picker with AM/PM</h2>
 <description>Set <code>[meridian]="true"</code> to use a 12-hour clock..</description>
 <component-example [name]="'ex2'">
-  <fd-time-picker [meridian]="true"
-                  [time]="timeMeridianObject"></fd-time-picker><br>
-  <span>timeMeridianObject: {{ '{' }}hour: {{timeMeridianObject.hour}}, minute: {{timeMeridianObject.minute}}, second:
-    {{timeMeridianObject.second}}}</span>
+  <fd-time-picker-12-example></fd-time-picker-12-example>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="meridianTimePickerHtml"></code></pre>
 
@@ -38,10 +35,7 @@
 <h2>Time Picker with No Seconds</h2>
 <description>Use <code>[displaySeconds]=false</code> to turn off seconds for the time picker.</description>
 <component-example [name]="'ex3'">
-  <fd-time-picker [displaySeconds]="false"
-                  [time]="timePickerNoSecondsObject"></fd-time-picker><br>
-  <span>timeObject: {{ '{' }}hour: {{timePickerNoSecondsObject.hour}}, minute: {{timePickerNoSecondsObject.minute}},
-    second: {{timePickerNoSecondsObject.second}}}</span>
+  <fd-time-picker-no-seconds-example></fd-time-picker-no-seconds-example>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="timePickerNoSecondsHtml"></code></pre>
 
@@ -49,7 +43,14 @@
 <h2>Disabled Time Picker</h2>
 <description>Set <code>[disabled]="true"</code> to disable the time picker.</description>
 <component-example [name]="'ex4'">
-  <fd-time-picker [disabled]="true"
-                  [time]="timeObject"></fd-time-picker><br>
+  <fd-time-picker-disabled-example></fd-time-picker-disabled-example>
 </component-example>
 <pre><code mwlHighlightJs language="HTML" [source]="disabledTimePickerHtml"></code></pre>
+
+<separator></separator>
+<h2>Compact Time Picker</h2>
+<description>Set <code>[compact]="true"</code> to use compact time-picker.</description>
+<component-example [name]="'ex5'">
+  <fd-time-picker-compact-example></fd-time-picker-compact-example>
+</component-example>
+<pre><code mwlHighlightJs language="HTML" [source]="compactTimePickerHtml"></code></pre>

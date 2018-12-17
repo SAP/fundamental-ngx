@@ -5,8 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'docs', loadChildren: '../modules/documentation/documentation.module#DocumentationModule' },
@@ -16,7 +14,6 @@ const routes: Routes = [
 @NgModule({
     declarations: [AppComponent, HomeComponent],
     imports: [BrowserAnimationsModule, RouterModule.forRoot(routes)],
-    providers: [NgbActiveModal],
     bootstrap: [AppComponent],
     entryComponents: []
 })

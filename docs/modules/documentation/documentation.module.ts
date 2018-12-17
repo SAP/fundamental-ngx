@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SchemaModule } from '../schema/schema.module';
 
 // modules
-import { FundamentalNgxModule } from '../../../projects/fundamental-ngx/src/lib/fundamental-ngx.module';
+import { FundamentalNgxModule } from '../../../library/src/lib/fundamental-ngx.module';
 
 // components
 import { DocumentationComponent } from './components/documentation/documentation.component';
@@ -41,7 +41,6 @@ import { ModalDocsComponent } from './containers/modal/modal-docs.component';
 import { TableDocsComponent } from './containers/table/table-docs.component';
 import { ActionBarDocsComponent } from './containers/action-bar/action-bar-docs.component';
 import { PanelDocsComponent } from './containers/panel/panel-docs.component';
-import { MegaMenuDocsComponent } from './containers/mega-menu/mega-menu-docs.component';
 import { MenuDocsComponent } from './containers/menu/menu-docs.component';
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
 import { FormDocsComponent } from './containers/form/form-docs.component';
@@ -52,6 +51,133 @@ import { CalendarDocsComponent } from './containers/calendar/calendar-docs.compo
 import { DatePickerDocsComponent } from './containers/date-picker/date-picker-docs.component';
 import { TimeDocsComponent } from './containers/time/time-docs.component';
 import { TimePickerDocsComponent } from './containers/time-picker/time-picker-docs.component';
+
+// examples
+import {
+    ActionBarBackExampleComponent,
+    ActionBarContextualMenuExampleComponent,
+    ActionBarNoBackExampleComponent,
+    ActionBarMobileExampleComponent
+} from './containers/action-bar/examples/action-bar-examples.component';
+import { AlertExampleComponent } from './containers/alert/examples/alert-example.component';
+import {
+    BadgeDefaultExampleComponent,
+    BadgeFilledExampleComponent,
+    BadgePillExampleComponent,
+    LabelBuildStatusExampleComponent,
+    LabelDefaultExampleComponent,
+    LabelIconStatusExampleComponent,
+    LabelStatusColorsExampleComponent
+} from './containers/badge-label/examples/badge-label-examples.component';
+import {
+    BreadcrumbHrefExampleComponent,
+    BreadcrumbRouterLinkExampleComponent
+} from './containers/breadcrumb/examples/breadcrumb-examples.component';
+import {
+    ButtonIconsExampleComponent,
+    ButtonOptionsExampleComponent,
+    ButtonSizesExampleComponent,
+    ButtonStateExampleComponent,
+    ButtonTypesExampleComponent
+} from './containers/button/examples/button-examples.component';
+import {
+    ButtonGroupXsExampleComponent,
+    ButtonGroupSmallExampleComponent,
+    ButtonGroupCompactExampleComponent,
+    ButtonGroupDefaultExampleComponent
+} from './containers/button-group/examples/button-group-examples.component';
+import { CalendarRangeExampleComponent } from './containers/calendar/examples/calendar-range-example.component';
+import { CalendarSingleExampleComponent } from './containers/calendar/examples/calendar-single-example.component';
+import { CalendarMondayStartExampleComponent } from './containers/calendar/examples/calendar-monday-start-example.component';
+import { DatePickerRangeExampleComponent } from './containers/date-picker/examples/date-picker-range-example.component';
+import { DatePickerSingleExampleComponent } from './containers/date-picker/examples/date-picker-single-example.component';
+import {
+    DropdownContextualMenuExampleComponent,
+    DropdownDefaultExampleComponent,
+    DropdownIconsExampleComponent,
+    DropdownStateExampleComponent
+} from './containers/dropdown/examples/dropdown-examples.component';
+import {
+    FormCheckboxExampleComponent,
+    FormExampleComponent,
+    FormInlineHelpExampleComponent,
+    FormRadioExampleComponent,
+    FormSelectExampleComponent,
+    FormStateExampleComponent
+} from './containers/form/examples/form-examples.component';
+import { IconExampleComponent } from './containers/icon/examples/icon-example.component';
+import {
+    CircleIdentifierExampleComponent,
+    ColorsIdentifierExampleComponent,
+    IconIdentifierExampleComponent,
+    InitialsIdentifierExampleComponent,
+    TransparentIdentifierExampleComponent
+} from './containers/identifier/examples/identifier-examples.component';
+import {
+    ImageShapesExampleComponent,
+    ImageSizesExampleComponent
+} from './containers/image/examples/image-examples.component';
+import { InlineHelpExampleComponent } from './containers/inline-help/examples/inline-help-examples.component';
+import {
+    InputGroupButtonExampleComponent,
+    InputGroupIconExampleComponent,
+    InputGroupNumberExampleComponent,
+    InputGroupSearchExampleComponent,
+    InputGroupTextExampleComponent,
+    InputGroupTextCompactExampleComponent
+} from './containers/input-group/examples/input-group-examples.component';
+import {
+    ListActionsExampleComponent,
+    ListCheckboxExampleComponent,
+    ListExampleComponent
+} from './containers/list/examples/list-examples.component';
+import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
+import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
+import { ModalConfirmationExampleComponent } from './containers/modal/examples/modal-confirmation-example.component';
+import { NavbarExampleComponent } from './containers/navbar/examples/navbar-example.component';
+import {
+    PanelColumnsExampleComponent,
+    PanelEdgeBleedExampleComponent,
+    PanelExampleComponent,
+    PanelGridExampleComponent,
+    PanelGridNoGapExampleComponent,
+    PanelRowColumnExampleComponent
+} from './containers/panel/examples/panel-examples.component';
+import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
+import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
+import {
+    SideNavigationCollapsedExampleComponent,
+    SideNavigationExampleComponent,
+    SideNavigationIconsExampleComponent,
+    SideNavigationLevelsExampleComponent,
+    SideNavigationTitlesExampleComponent
+} from './containers/side-navigation/examples/side-navigation-examples.component';
+import { TableExampleComponent } from './containers/table/examples/table-example.component';
+import { TabsExampleComponent, TabSelectionExampleComponent } from './containers/tabs/examples/tabs-examples-component';
+import {
+    TileActionsExampleComponent,
+    TileDisabledExampleComponent,
+    TileExampleComponent,
+    TileGridExampleComponent,
+    TileGridHelpersExampleComponent,
+    TileMediaExampleComponent,
+    TileProductExampleComponent,
+    TileButtonExampleComponent
+} from './containers/tile/examples/tile-examples.component';
+import {
+    TimeExampleComponent,
+    Time12ExampleComponent,
+    TimeDisabledExampleComponent,
+    TimeNoSecondsExampleComponent,
+    TimeNoSpinnersExampleComponent
+} from './containers/time/examples/time-examples.component';
+import {
+    TimePickerExampleComponent,
+    TimePicker12ExampleComponent,
+    TimePickerDisabledExampleComponent,
+    TimePickerNoSecondsExampleComponent,
+    TimePickerCompactExampleComponent
+} from './containers/time-picker/examples/time-picker-examples.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -89,7 +215,6 @@ const ROUTES: Routes = [
             { path: 'inlineHelp', component: InlineHelpDocsComponent },
             { path: 'inputGroup', component: InputGroupDocsComponent },
             { path: 'list', component: ListDocsComponent },
-            { path: 'megaMenu', component: MegaMenuDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
             { path: 'navbar', component: NavbarDocsComponent },
@@ -105,7 +230,7 @@ const ROUTES: Routes = [
             { path: 'tree', component: TreeDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent },
-            { path: 'rtl', component: InternationalizationDocsComponent },
+            // { path: 'rtl', component: InternationalizationDocsComponent }, TODO: restore this route when fundamental is RTL ready
             { path: 'home', component: HomeDocsComponent }
         ]
     }
@@ -135,7 +260,6 @@ const ROUTES: Routes = [
         InputGroupDocsComponent,
         ImageDocsComponent,
         ListDocsComponent,
-        MegaMenuDocsComponent,
         MenuDocsComponent,
         ModalDocsComponent,
         TabsDocsComponent,
@@ -148,7 +272,6 @@ const ROUTES: Routes = [
         CalendarDocsComponent,
         DatePickerDocsComponent,
         SideNavigationDocsComponent,
-        MegaMenuDocsComponent,
         TileDocsComponent,
         TimeDocsComponent,
         TimePickerDocsComponent,
@@ -159,7 +282,102 @@ const ROUTES: Routes = [
         HomeDocsComponent,
         DirectionalityComponent,
         ComponentExampleComponent,
-        ExampleBackgroundComponent
+        ExampleBackgroundComponent,
+        ActionBarBackExampleComponent,
+        ActionBarContextualMenuExampleComponent,
+        ActionBarMobileExampleComponent,
+        ActionBarNoBackExampleComponent,
+        AlertExampleComponent,
+        BadgeDefaultExampleComponent,
+        BadgeFilledExampleComponent,
+        BadgePillExampleComponent,
+        LabelBuildStatusExampleComponent,
+        LabelDefaultExampleComponent,
+        LabelIconStatusExampleComponent,
+        LabelStatusColorsExampleComponent,
+        BreadcrumbHrefExampleComponent,
+        BreadcrumbRouterLinkExampleComponent,
+        ButtonIconsExampleComponent,
+        ButtonOptionsExampleComponent,
+        ButtonSizesExampleComponent,
+        ButtonStateExampleComponent,
+        ButtonTypesExampleComponent,
+        ButtonGroupXsExampleComponent,
+        ButtonGroupSmallExampleComponent,
+        ButtonGroupCompactExampleComponent,
+        ButtonGroupDefaultExampleComponent,
+        CalendarRangeExampleComponent,
+        CalendarSingleExampleComponent,
+        CalendarMondayStartExampleComponent,
+        DatePickerRangeExampleComponent,
+        DatePickerSingleExampleComponent,
+        DropdownContextualMenuExampleComponent,
+        DropdownDefaultExampleComponent,
+        DropdownIconsExampleComponent,
+        DropdownStateExampleComponent,
+        FormCheckboxExampleComponent,
+        FormExampleComponent,
+        FormInlineHelpExampleComponent,
+        FormRadioExampleComponent,
+        FormSelectExampleComponent,
+        FormStateExampleComponent,
+        IconExampleComponent,
+        CircleIdentifierExampleComponent,
+        ColorsIdentifierExampleComponent,
+        IconIdentifierExampleComponent,
+        InitialsIdentifierExampleComponent,
+        TransparentIdentifierExampleComponent,
+        ImageShapesExampleComponent,
+        ImageSizesExampleComponent,
+        InlineHelpExampleComponent,
+        InputGroupButtonExampleComponent,
+        InputGroupIconExampleComponent,
+        InputGroupNumberExampleComponent,
+        InputGroupSearchExampleComponent,
+        InputGroupTextExampleComponent,
+        InputGroupTextCompactExampleComponent,
+        ListActionsExampleComponent,
+        ListCheckboxExampleComponent,
+        ListExampleComponent,
+        MenuExampleComponent,
+        MenuGroupExampleComponent,
+        ModalExampleComponent,
+        ModalConfirmationExampleComponent,
+        NavbarExampleComponent,
+        PanelColumnsExampleComponent,
+        PanelEdgeBleedExampleComponent,
+        PanelExampleComponent,
+        PanelGridExampleComponent,
+        PanelGridNoGapExampleComponent,
+        PanelRowColumnExampleComponent,
+        PaginationExampleComponent,
+        PopoverExampleComponent,
+        SideNavigationCollapsedExampleComponent,
+        SideNavigationExampleComponent,
+        SideNavigationIconsExampleComponent,
+        SideNavigationLevelsExampleComponent,
+        SideNavigationTitlesExampleComponent,
+        TableExampleComponent,
+        TabsExampleComponent,
+        TabSelectionExampleComponent,
+        TileActionsExampleComponent,
+        TileDisabledExampleComponent,
+        TileExampleComponent,
+        TileGridExampleComponent,
+        TileGridHelpersExampleComponent,
+        TileMediaExampleComponent,
+        TileProductExampleComponent,
+        TileButtonExampleComponent,
+        TimeExampleComponent,
+        Time12ExampleComponent,
+        TimeDisabledExampleComponent,
+        TimeNoSecondsExampleComponent,
+        TimeNoSpinnersExampleComponent,
+        TimePickerExampleComponent,
+        TimePicker12ExampleComponent,
+        TimePickerDisabledExampleComponent,
+        TimePickerNoSecondsExampleComponent,
+        TimePickerCompactExampleComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

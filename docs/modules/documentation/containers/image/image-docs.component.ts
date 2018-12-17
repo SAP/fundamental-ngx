@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as imageShapesSrc from '!raw-loader!./examples/image-shapes-example.component.html';
+import * as imageSizesSrc from '!raw-loader!./examples/image-sizes-example.component.html';
+
 @Component({
     selector: 'app-image',
     templateUrl: './image-docs.component.html'
@@ -38,15 +41,9 @@ export class ImageDocsComponent implements OnInit {
         }
     };
 
-    imageSizesHtml =
-        '<fd-image [size]="\'s\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-        '<fd-image [size]="\'m\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-        '<fd-image [size]="\'l\'" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
+    imageSizesHtml = imageSizesSrc;
 
-    imageShapesHtml =
-        '<fd-image [size]="\'s\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-        '<fd-image [size]="\'m\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n' +
-        '<fd-image [size]="\'l\'" [circle]="true" [photo]="\'https://placeimg.com/400/400/nature\'"></fd-image>\n';
+    imageShapesHtml = imageShapesSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('image');

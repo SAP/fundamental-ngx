@@ -23,20 +23,9 @@ constructor with
   acknowledge the information, actively, by clicking a button or closing the Modal.
 </p>
 <component-example [name]="'ex1'">
-  <ng-template #informationalModal>
-    <fd-modal>
-      <fd-modal-header>
-        Modal Header/Title
-      </fd-modal-header>
-      <fd-modal-body>
-        Modal Body
-      </fd-modal-body>
-    </fd-modal>
-  </ng-template>
-  <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>
+  <fd-modal-example></fd-modal-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="informationalModalHtml"></code></pre>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="informationalModalJs"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="informationalModalSource"></code></pre>
 
 <separator></separator>
 
@@ -45,23 +34,6 @@ constructor with
   buttons
   at the bottom. With the “positive” path always been the primary button.</p>
 <component-example [name]="'ex2'">
-  <ng-template #confirmationModal let-c="close">
-    <fd-modal>
-      <fd-modal-header>
-        Modal Header/Title
-      </fd-modal-header>
-      <fd-modal-body>
-        Modal Body
-      </fd-modal-body>
-      <fd-modal-footer>
-        <button fd-button (click)="c('No')" [fdType]="'secondary'">No</button>
-        <button fd-button (click)="c('Yes')" [fdType]="'main'">Yes</button>
-      </fd-modal-footer>
-    </fd-modal>
-  </ng-template>
-  <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
-  <separator></separator>
-  <span>{{confirmationReason}}</span>
+  <fd-modal-confirmation-example></fd-modal-confirmation-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="confirmationModalHtml"></code></pre>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="confirmationModalJs"></code></pre>
+<pre><code mwlHighlightJs [language]="'typescript'" [source]="confirmationModalSource"></code></pre>
