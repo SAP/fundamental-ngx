@@ -1,7 +1,10 @@
 <div class="fd-shellbar__action fd-shellbar__action--collapsible">
-    <button class="fd-button--shell" (click)="callback ? callback($event) : ''"
+    <button *ngIf="!searchInputComponent" class="fd-button--shell" (click)="callback ? callback($event) : ''"
             [ngClass]="(glyph ? ('sap-icon--' + glyph) : '')"
             [attr.aria-label]="label">
         <span *ngIf="notificationCount" class="fd-counter fd-counter--notification" [attr.aria-label]="notificationLabel">{{notificationCount}}</span>
     </button>
+    <div *ngIf="searchInputComponent" class="fd-search-input fd-search-input--closed">
+        <ng-content select="fd-search-input"></ng-content>
+    </div>
 </div>

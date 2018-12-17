@@ -4,10 +4,17 @@
 <separator></separator>
 
 <h1>&lt;fd-search-input&gt;</h1>
+<description>Search input with a list of results that filters automatically.</description>
 
 <properties [properties]="{
   inputs: [
-    { name: '', description: '' }
+    { name: 'ngModel', description: 'Text to be used in the input.  Should be used with two-way binding syntax.' },
+    { name: 'searchFunction', description: 'Function to be called when the user presses the \'Enter\' key.'},
+    { name: 'searchTerms', description: 'An array of objects, each containing a (string) \'text\' and (Function) \'callback\' property. The callback function is executed when the item is clicked.' },
+    { name: 'disabled', description: 'Boolean, disables the search input.'},
+    { name: 'placeholder', description: 'Placeholder for the search input.'},
+    { name: 'inShellbar', description: 'Boolean, set to \'true\' if this search is for use within the shellbar.'},
+    { name: 'compact', description: 'Boolean, set to \'true\' for the compact search input.'}
   ]
 }"></properties>
 
@@ -17,3 +24,4 @@
     <fd-search-input-example></fd-search-input-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="searchInputExampleHtml"></code></pre>
+<pre><code mwlHighlightJs [language]="'TypeScript'" [source]="searchInputExampleTs"></code></pre>

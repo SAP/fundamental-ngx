@@ -29,6 +29,15 @@ export class ShellbarCollapsibleExampleComponent {
         {name: 'Application D'}
     ];
 
+    searchTerm = '';
+
+    searchTerms = [
+        {text: 'Apple', callback: () => {alert('Apple Clicked')}},
+        {text: 'Banana', callback: () => {alert('Banana Clicked')}},
+        {text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
+        {text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}}
+    ];
+
     productSwitcher = [
         {title: 'Fiori Home', image: './assets/01.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
@@ -55,6 +64,10 @@ export class ShellbarCollapsibleExampleComponent {
         {title: 'Cloud Portal', image: './assets/12.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Cloud Portal')}}
     ];
+
+    exampleSearchFunction = () => {
+        alert('Search Function Called with search term: ' + this.searchTerm);
+    }
 
     settingsCallback($event) {
         console.log($event);

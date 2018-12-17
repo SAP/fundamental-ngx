@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, ContentChild, Input } from '@angular/core';
+import { SearchInputComponent } from '../search-input/search-input.component';
 
 @Component({
     selector: 'fd-shellbar-action',
@@ -20,5 +21,8 @@ export class ShellbarActionComponent {
 
     @Input()
     notificationCount: number;
+
+    @ContentChild(SearchInputComponent)
+    searchInputComponent: SearchInputComponent;
 
 }
