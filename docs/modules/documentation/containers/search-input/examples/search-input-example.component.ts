@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class SearchInputExampleComponent {
 
-    searchTerm = '';
+    searchTerm: string = '';
 
     searchTerms = [
         {text: 'Apple', callback: () => {alert('Apple Clicked')}},
@@ -15,8 +15,8 @@ export class SearchInputExampleComponent {
         {text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}}
     ];
 
-    searchFunction() {
-        alert('Search Function Called');
+    exampleSearchFunction = () => {
+        alert('Search Function Called with search term: ' + this.searchTerm);
     }
 
 }

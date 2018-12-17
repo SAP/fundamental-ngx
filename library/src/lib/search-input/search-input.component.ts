@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
     selector: 'fd-search-input',
     templateUrl: './search-input.component.html',
+    styleUrls: ['./search-input.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -30,6 +31,9 @@ export class SearchInputComponent implements ControlValueAccessor {
 
     @Input()
     searchFunction: Function;
+
+    @Input()
+    compact: boolean = false;
 
     isOpen: boolean = false;
 

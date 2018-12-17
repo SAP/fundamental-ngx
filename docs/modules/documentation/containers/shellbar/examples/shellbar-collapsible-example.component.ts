@@ -29,10 +29,6 @@ export class ShellbarCollapsibleExampleComponent {
         {name: 'Application D'}
     ];
 
-    searchFunction() {
-        alert('Search Function called');
-    }
-
     searchTerm = '';
 
     searchTerms = [
@@ -68,6 +64,10 @@ export class ShellbarCollapsibleExampleComponent {
         {title: 'Cloud Portal', image: './assets/12.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Cloud Portal')}}
     ];
+
+    exampleSearchFunction = () => {
+        alert('Search Function Called with search term: ' + this.searchTerm);
+    }
 
     settingsCallback($event) {
         console.log($event);
