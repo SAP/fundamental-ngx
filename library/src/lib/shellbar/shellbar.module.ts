@@ -36,9 +36,6 @@ import { MenuModule } from '../menu/menu.module';
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent
-    ],
-    providers: [
-        {provide: 'Window', useValue: window}
     ]
 })
 export class ShellbarModule {}

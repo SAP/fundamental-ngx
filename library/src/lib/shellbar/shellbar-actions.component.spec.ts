@@ -16,9 +16,8 @@ describe('ShellbarActionsComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ ShellbarActionsComponent ],
             imports: [ MenuModule, PopoverModule ],
-            providers: [{ provide: 'Window', useFactory: (() => windowMock ) }]
-        })
-            .compileComponents();
+            providers: [{ provide: 'window', useFactory: (() => windowMock ) }]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -1,11 +1,11 @@
-import { Component, ContentChildren, HostListener, Inject, Input, OnInit, QueryList } from '@angular/core';
+import { Component, ContentChildren, HostListener, Input, OnInit, AfterContentChecked, QueryList } from '@angular/core';
 import { ShellbarActionComponent } from './shellbar-action.component';
 
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html'
 })
-export class ShellbarActionsComponent implements OnInit {
+export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     actionsCollapsed: boolean = false;
 
     showCollapsedProducts: boolean = false;
@@ -14,7 +14,7 @@ export class ShellbarActionsComponent implements OnInit {
     productSwitcher: any[];
 
     @Input()
-    user: {};
+    user: any;
 
     @Input()
     userMenu: any[];
@@ -22,7 +22,9 @@ export class ShellbarActionsComponent implements OnInit {
     @ContentChildren(ShellbarActionComponent)
     shellbarActions: QueryList<ShellbarActionComponent>;
 
-    @HostListener('window:resize', ['$event'])
+    totalNotifications: number;
+
+    @HostListener('window:resize', [])
     onResize() {
         this.actionsCollapsed = window.innerWidth < 1024;
     }
@@ -31,12 +33,19 @@ export class ShellbarActionsComponent implements OnInit {
         this.onResize();
     }
 
+    ngAfterContentChecked() {
+        this.totalNotifications = 0;
+        this.shellbarActions.forEach((action) => {
+            if (action.notificationCount && typeof action.notificationCount === 'number') {
+                this.totalNotifications = this.totalNotifications + action.notificationCount;
+            }
+        });
+    }
+
     toggleCollapsedProducts(event) {
         event.preventDefault();
         event.stopPropagation();
         this.showCollapsedProducts = !this.showCollapsedProducts;
     }
-
-    constructor( @Inject('Window') private window: Window) { }
 
 }
