@@ -1,0 +1,41 @@
+<div class="fd-search-input" [ngClass]="{'fd-search-input--closed': inShellbar}">
+    <fd-popover (popoverClosed)="isOpen = false;" [isSearchInput]="true" [arrow]="false"
+                [ngClass]="{'fd-popover-body--display-none': (searchTerms | fdSearch:inputText).length < 1}">
+        <fd-popover-control>
+            <div *ngIf="!inShellbar" class="fd-combobox-control">
+                <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
+                    <input type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                           (keypress)="onInputKeypressHandler($event)"
+                           [disabled]="disabled"
+                           [(ngModel)]="inputText"
+                           placeholder="{{placeholder}}">
+                    <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
+                        <button class="fd-button--light sap-icon--search"></button>
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="inShellbar" class="fd-search-input__control">
+                <button tabindex="0" class="sap-icon--search fd-button--shell" [attr.aria-expanded]="isOpen"
+                        (click)="isOpen = !isOpen;"></button>
+                <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
+                    <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
+                        <input type="text" class="fd-input"
+                               (keypress)="onInputKeypressHandler($event)"
+                               [disabled]="disabled"
+                               [(ngModel)]="inputText"
+                               placeholder="{{placeholder}}">
+                    </div>
+                </div>
+            </div>
+        </fd-popover-control>
+        <fd-popover-body *ngIf="(searchTerms | fdSearch:inputText).length">
+            <fd-menu>
+                <fd-menu-list>
+                    <fd-menu-item *ngFor="let term of searchTerms | fdSearch:inputText" (click)="term.callback($event)" (keypress)="onMenuKeypressHandler($event, term)">
+                        <a tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
+                    </fd-menu-item>
+                </fd-menu-list>
+            </fd-menu>
+        </fd-popover-body>
+    </fd-popover>
+</div>

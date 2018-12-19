@@ -28,6 +28,8 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     @Input()
     isTimePicker: boolean = false;
     @Input()
+    isSearchInput: boolean = false;
+    @Input()
     glyph: string;
     @Input() // TODO: deprecated, leaving for backwards compatibility
     size: string;
@@ -63,7 +65,11 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     }
 
     onKeypressHandler(event) {
-        if (!this.popoverControlIsTabIndexed && (event.code === 'Space' || event.code === 'Enter')) {
+        if (this.isSearchInput) {
+            if (!this.isOpen) {
+                this.isOpen = true;
+            }
+        } else if (!this.popoverControlIsTabIndexed && (event.code === 'Space' || event.code === 'Enter')) {
             event.preventDefault();
             if (!this.isTimePicker) {
                 if (this.isOpen) {
@@ -78,11 +84,18 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     onClickHandler(e: MouseEvent) {
         const target = e.target;
         if (this.eRef.nativeElement.contains(target)) {
-            if (!this.isTimePicker) {
+            if (!this.isTimePicker && !this.isSearchInput) {
                 if (this.isOpen) {
                     this.popoverClosed.emit();
                 }
                 this.isOpen = !this.isOpen;
+            } else if (this.isSearchInput) {
+                const targetElement = <HTMLElement>target;
+                if (!this.isOpen) {
+                    this.isOpen = true;
+                } else if (this.isOpen && targetElement.classList && targetElement.classList.contains('sap-icon--search')) {
+                    this.isOpen = false;
+                }
             }
         } else {
             this.close();
