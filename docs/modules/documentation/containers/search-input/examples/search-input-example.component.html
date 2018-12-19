@@ -1,0 +1,12 @@
+<fd-search-input [(ngModel)]="searchTerm"
+                 [searchTerms]="searchTerms"
+                 [searchFunction]="exampleSearchFunction">
+</fd-search-input>
+<br/>
+<fd-search-input [(ngModel)]="searchTerm"
+                 [searchTerms]="searchTerms"
+                 [searchFunction]="exampleSearchFunction"
+                 [compact]="true">
+</fd-search-input>
+<br/>
+<span>searchTerm: {{searchTerm}}</span>

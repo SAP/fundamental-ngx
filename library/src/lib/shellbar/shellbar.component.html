@@ -1,0 +1,16 @@
+<div class="fd-shellbar">
+    <div class="fd-shellbar__group fd-shellbar__group--start">
+        <ng-content select="fd-shellbar-logo"></ng-content>
+        <div class="fd-shellbar__product">
+            <ng-content select="fd-shellbar-title"></ng-content>
+            <ng-content select="fd-product-menu"></ng-content>
+        </div>
+        <ng-content select="fd-shellbar-subtitle"></ng-content>
+    </div>
+    <div class="fd-shellbar__group fd-shellbar__group--middle">
+        <ng-content select="fd-copilot"></ng-content>
+    </div>
+    <div class="fd-shellbar__group fd-shellbar__group--end">
+        <ng-content select="fd-shellbar-actions"></ng-content>
+    </div>
+</div>

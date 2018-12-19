@@ -1,0 +1,35 @@
+<fd-shellbar>
+    <fd-shellbar-logo>
+        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+    </fd-shellbar-logo>
+    <fd-product-menu>
+        <fd-popover alignment="right">
+            <fd-popover-control>
+                <fd-product-menu-control>
+                    Corporate Portal
+                </fd-product-menu-control>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <fd-menu-list>
+                        <fd-menu-item *ngFor="let application of applicationList">
+                            {{application.name}}
+                        </fd-menu-item>
+                    </fd-menu-list>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-product-menu>
+    <fd-shellbar-subtitle>
+        Subtitle
+    </fd-shellbar-subtitle>
+    <fd-copilot></fd-copilot>
+    <fd-shellbar-actions [user]="user" [userMenu]="userMenu" [productSwitcher]="productSwitcher">
+        <fd-shellbar-action [label]="'Search'">
+            <fd-search-input [inShellbar]="true" [searchTerms]="searchTerms" [(ngModel)]="searchTerm" [searchFunction]="exampleSearchFunction"></fd-search-input>
+        </fd-shellbar-action>
+        <fd-shellbar-action *ngFor="let action of actions" [glyph]="action.glyph" [callback]="action.callback"
+                            [label]="action.label" [notificationCount]="action.notificationCount" [notificationLabel]="action.notificationLabel">
+        </fd-shellbar-action>
+    </fd-shellbar-actions>
+</fd-shellbar>
