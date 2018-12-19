@@ -8,7 +8,8 @@ import {
     Output,
     EventEmitter,
     ViewChild,
-    AfterViewInit, ChangeDetectorRef
+    AfterViewInit,
+    ChangeDetectorRef
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 
@@ -89,7 +90,11 @@ export class PopoverComponent implements OnInit, AfterViewInit {
         }
     }
 
-    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef, private cd: ChangeDetectorRef) {}
+    constructor(
+        @Inject(HashService) private hasher: HashService,
+        private eRef: ElementRef,
+        private cd: ChangeDetectorRef
+    ) {}
 
     ngOnInit() {
         this.id = this.hasher.hash();
@@ -100,13 +105,14 @@ export class PopoverComponent implements OnInit, AfterViewInit {
          check if the popover control contents have a tab index, and if not, add tabindex, role="button", and keypress handler (see HTML)
          */
         if (
-            this.popoverControl &&
-            this.popoverControl.nativeElement &&
-            this.popoverControl.nativeElement.children &&
-            this.popoverControl.nativeElement.children[0] &&
-            this.popoverControl.nativeElement.children[0].children &&
-            this.popoverControl.nativeElement.children[0].children[0] &&
-            this.popoverControl.nativeElement.children[0].children[0].tabIndex >= 0
+            (this.popoverControl &&
+                this.popoverControl.nativeElement &&
+                this.popoverControl.nativeElement.children &&
+                this.popoverControl.nativeElement.children[0] &&
+                this.popoverControl.nativeElement.children[0].children &&
+                this.popoverControl.nativeElement.children[0].children[0] &&
+                this.popoverControl.nativeElement.children[0].children[0].tabIndex >= 0) ||
+            this.isTimePicker
         ) {
             this.popoverControlIsTabIndexed = true;
         }

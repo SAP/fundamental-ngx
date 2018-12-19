@@ -17,6 +17,7 @@
            [ngClass]="{'fd-input-group--compact' : compact}">
         <input value="{{getFormattedTime()}}"
                (change)="timeInputChanged($event.currentTarget.value)"
+               (focus)="onFocusHandler()"
                [disabled]="disabled"
                type="text"
                [ngClass]="{ 'fd-input--compact': compact }"
