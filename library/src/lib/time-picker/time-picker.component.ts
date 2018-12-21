@@ -152,6 +152,12 @@ export class TimePickerComponent {
         }
     }
 
+    onFocusHandler() {
+        if (!this.isOpen) {
+            this.isOpen = true;
+        }
+    }
+
     addOnButtonClicked($event) {
         if (!this.disabled) {
             $event.stopPropagation();
