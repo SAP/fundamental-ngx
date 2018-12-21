@@ -45,7 +45,6 @@ import { MenuDocsComponent } from './containers/menu/menu-docs.component';
 import { TileDocsComponent } from './containers/tile/tile-docs.component';
 import { FormDocsComponent } from './containers/form/form-docs.component';
 import { SideNavigationDocsComponent } from './containers/side-navigation/side-navigation-docs.component';
-import { NavbarDocsComponent } from './containers/navbar/navbar-docs.component';
 import { PopoverDocsComponent } from './containers/popover/popover-docs.component';
 import { CalendarDocsComponent } from './containers/calendar/calendar-docs.component';
 import { DatePickerDocsComponent } from './containers/date-picker/date-picker-docs.component';
@@ -136,7 +135,6 @@ import {
 import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
 import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
 import { ModalConfirmationExampleComponent } from './containers/modal/examples/modal-confirmation-example.component';
-import { NavbarExampleComponent } from './containers/navbar/examples/navbar-example.component';
 import {
     PanelColumnsExampleComponent,
     PanelEdgeBleedExampleComponent,
@@ -222,7 +220,6 @@ const ROUTES: Routes = [
             { path: 'list', component: ListDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
-            { path: 'navbar', component: NavbarDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
@@ -284,7 +281,6 @@ const ROUTES: Routes = [
         TileDocsComponent,
         TimeDocsComponent,
         TimePickerDocsComponent,
-        NavbarDocsComponent,
         InstallationDocsComponent,
         UsageDocsComponent,
         InternationalizationDocsComponent,
@@ -352,7 +348,6 @@ const ROUTES: Routes = [
         MenuGroupExampleComponent,
         ModalExampleComponent,
         ModalConfirmationExampleComponent,
-        NavbarExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,

@@ -29,7 +29,6 @@ export class DocumentationComponent implements OnInit {
         { url: 'list', name: 'List' },
         { url: 'menu', name: 'Menu' },
         { url: 'modal', name: 'Modal' },
-        { url: 'navbar', name: 'Navbar' },
         { url: 'pagination', name: 'Pagination' },
         { url: 'panel', name: 'Panel' },
         { url: 'popover', name: 'Popover' },
