@@ -17,7 +17,6 @@ import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
-import { NavbarModule } from './navbar/navbar.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
 import { PopoverModule } from './popover/popover.module';
@@ -59,7 +58,6 @@ import { ModalService } from './modal/modal.service';
         ListModule,
         MenuModule,
         ModalModule,
-        NavbarModule,
         PaginationModule,
         PanelModule,
         PopoverModule,

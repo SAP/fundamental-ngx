@@ -22,7 +22,6 @@ export * from './lib/list/list.module';
 export * from './lib/menu/menu.module';
 export * from './lib/modal/modal.module';
 export * from './lib/modal/modal.service';
-export * from './lib/navbar/navbar.module';
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';
 export * from './lib/search-input/search-input.module';
