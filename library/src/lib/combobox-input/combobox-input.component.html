@@ -3,10 +3,7 @@
         <fd-popover-control>
             <div
                 class="fd-combobox-control"
-                aria-label="Image label"
-                aria-controls="F4GcX348"
-                aria-expanded="false"
-                aria-haspopup="true"
+                aria-label="label"
             >
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{ 'fd-input-group--compact': compact }">
                     <input
@@ -21,6 +18,8 @@
                 </div>
             </div>
         </fd-popover-control>
-        <fd-popover-body> <ng-content></ng-content> </fd-popover-body>
+        <fd-popover-body>
+            <ng-content></ng-content>
+        </fd-popover-body>
     </fd-popover>
 </div>

@@ -1,5 +1,5 @@
 
-<fd-combobox-input placeholder="Pick your fruit">
+<fd-combobox-input [placeholder]="'Pick your fruit'">
     <nav class="fd-menu">
         <ul class="fd-menu__list">
             <li *ngFor="let element of comboboxElements">
@@ -10,7 +10,7 @@
     </nav>
 </fd-combobox-input>
 <br />
-<fd-combobox-input placeholder="Pick your fruit" [compact]="true">
+<fd-combobox-input [placeholder]="'Pick your fruit'" [compact]="true">
     <nav class="fd-menu">
         <ul class="fd-menu__list">
             <li *ngFor="let element of comboboxElements">

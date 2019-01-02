@@ -4,13 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'fd-combobox-input-example',
   templateUrl: './combobox-input-example.component.html'
 })
-export class ComboboxInputExampleComponent implements OnInit {
+export class ComboboxInputExampleComponent {
   
-  comboboxElements: String[] = ['Pear', 'Strawberry', 'Raspberry'];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  comboboxElements: string[] = ['Pear', 'Strawberry', 'Raspberry'];
 
 }
