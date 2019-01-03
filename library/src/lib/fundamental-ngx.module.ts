@@ -35,6 +35,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
+import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -58,6 +59,7 @@ import { ModalService } from './modal/modal.service';
         IdentifierModule,
         InputGroupModule,
         ListModule,
+        LoadingSpinnerModule,
         MenuModule,
         ModalModule,
         PaginationModule,

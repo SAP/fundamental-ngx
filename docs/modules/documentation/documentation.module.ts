@@ -36,6 +36,7 @@ import { ImageDocsComponent } from './containers/image/image-docs.component';
 import { DropdownDocsComponent } from './containers/dropdown/dropdown-docs.component';
 import { PaginationDocsComponent } from './containers/pagination/pagination-docs.component';
 import { ListDocsComponent } from './containers/list/list-docs.component';
+import { LoadingSpinnerDocsComponent } from './containers/loading-spinner-docs/loading-spinner-docs.component';
 import { TabsDocsComponent } from './containers/tabs/tabs-docs.component';
 import { TreeDocsComponent } from './containers/tree/tree-docs.component';
 import { ModalDocsComponent } from './containers/modal/modal-docs.component';
@@ -221,6 +222,7 @@ const ROUTES: Routes = [
             { path: 'inlineHelp', component: InlineHelpDocsComponent },
             { path: 'inputGroup', component: InputGroupDocsComponent },
             { path: 'list', component: ListDocsComponent },
+            { path: 'loadingSpinner', component: LoadingSpinnerDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
@@ -389,7 +391,8 @@ const ROUTES: Routes = [
         TimePickerNoSecondsExampleComponent,
         TimePickerCompactExampleComponent,
         ComboboxInputDocsComponent,
-        ComboboxInputExampleComponent
+        ComboboxInputExampleComponent,
+        LoadingSpinnerDocsComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
@@ -405,4 +408,3 @@ const ROUTES: Routes = [
 })
 export class DocumentationModule {}
 
-import { DomSanitizer } from '@angular/platform-browser';
