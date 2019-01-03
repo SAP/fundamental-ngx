@@ -1,0 +1,14 @@
+<fd-combobox-input [(ngModel)]="comboboxInputVal"
+                   [dropdownValues]="dropdownValues"
+                   [searchFunction]="exampleSearchFunction"
+                   [newItemCallback]="newItemCallback">
+</fd-combobox-input>
+<br/>
+<fd-combobox-input [(ngModel)]="comboboxInputVal"
+                   [dropdownValues]="dropdownValues"
+                   [searchFunction]="exampleSearchFunction"
+                   [compact]="true"
+                   [newItemCallback]="newItemCallback">
+</fd-combobox-input>
+<br/>
+<span>comboboxInputVal: {{comboboxInputVal}}</span>

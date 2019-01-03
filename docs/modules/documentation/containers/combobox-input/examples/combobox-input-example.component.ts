@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-search-input-example',
-    templateUrl: './search-input-example.component.html'
+  selector: 'fd-combobox-input-example',
+  templateUrl: './combobox-input-example.component.html'
 })
-export class SearchInputExampleComponent {
+export class ComboboxInputExampleComponent {
 
-    searchTerm: string = '';
+    comboboxInputVal: string = '';
 
     dropdownValues = [
         {text: 'Apple', callback: () => {alert('Apple Clicked')}},
@@ -16,7 +16,11 @@ export class SearchInputExampleComponent {
     ];
 
     exampleSearchFunction = () => {
-        alert('Search Function Called with search term: ' + this.searchTerm);
-    }
+        alert('Search Function Called with search term: ' + this.comboboxInputVal);
+    };
+
+    newItemCallback = () => {
+        alert('New item callback function called');
+    };
 
 }

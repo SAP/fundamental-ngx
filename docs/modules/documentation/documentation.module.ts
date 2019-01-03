@@ -31,6 +31,7 @@ import { IconDocsComponent } from './containers/icon/icon-docs.component';
 import { IdentifierDocsComponent } from './containers/identifier/identifier-docs.component';
 import { InlineHelpDocsComponent } from './containers/inline-help/inline-help-docs.component';
 import { InputGroupDocsComponent } from './containers/input-group/input-group-docs.component';
+import { ComboboxInputDocsComponent } from './containers/combobox-input/combobox-input-docs.component';
 import { ImageDocsComponent } from './containers/image/image-docs.component';
 import { DropdownDocsComponent } from './containers/dropdown/dropdown-docs.component';
 import { PaginationDocsComponent } from './containers/pagination/pagination-docs.component';
@@ -90,6 +91,7 @@ import {
 import { CalendarRangeExampleComponent } from './containers/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from './containers/calendar/examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from './containers/calendar/examples/calendar-monday-start-example.component';
+import { ComboboxInputExampleComponent } from './containers/combobox-input/examples/combobox-input-example.component';
 import { DatePickerRangeExampleComponent } from './containers/date-picker/examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from './containers/date-picker/examples/date-picker-single-example.component';
 import {
@@ -209,6 +211,7 @@ const ROUTES: Routes = [
             { path: 'button', component: ButtonDocsComponent },
             { path: 'buttonGroup', component: ButtonGroupDocsComponent },
             { path: 'calendar', component: CalendarDocsComponent },
+            { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
             { path: 'form', component: FormDocsComponent },
@@ -384,7 +387,9 @@ const ROUTES: Routes = [
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
-        TimePickerCompactExampleComponent
+        TimePickerCompactExampleComponent,
+        ComboboxInputDocsComponent,
+        ComboboxInputExampleComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
