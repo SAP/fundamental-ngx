@@ -21,7 +21,7 @@ describe('SearchInputComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SearchInputComponent);
         component = fixture.componentInstance;
-        component.searchTerms = [
+        component.dropdownValues = [
             {text: 'Apple', callback: () => {}}
         ];
         component.searchFunction = () => {};
