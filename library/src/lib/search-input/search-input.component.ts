@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SearchInputComponent implements ControlValueAccessor {
     @Input()
-    searchTerms: any[];
+    dropdownValues: any[];
 
     @Input()
     disabled: boolean;
