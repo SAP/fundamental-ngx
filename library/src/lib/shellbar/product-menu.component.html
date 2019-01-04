@@ -1,3 +1,20 @@
 <div class="fd-product-menu">
-    <ng-content></ng-content>
+    <fd-popover [alignment]="productMenuCollapsed ? 'left' : 'right'">
+        <fd-popover-control>
+            <button class="fd-product-menu__control">
+                <span class="fd-shellbar__title fd-product-menu__title">
+                    {{control}}
+                </span>
+            </button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-menu>
+                <fd-menu-list>
+                    <fd-menu-item *ngFor="let item of items" (click)="item.callback($event)">
+                        {{item.name}}
+                    </fd-menu-item>
+                </fd-menu-list>
+            </fd-menu>
+        </fd-popover-body>
+    </fd-popover>
 </div>
