@@ -6,6 +6,15 @@ import { Component } from '@angular/core';
 })
 export class ShellbarCollapsibleExampleComponent {
 
+    productMenuControl = 'Corporate Portal';
+
+    productMenuItems = [
+        {name: 'Application A', callback: () => {alert('Application A Clicked')}},
+        {name: 'Application B', callback: () => {alert('Application B Clicked')}},
+        {name: 'Application C', callback: () => {alert('Application C Clicked')}},
+        {name: 'Application D', callback: () => {alert('Application D Clicked')}}
+    ];
+
     user = {
         initials: 'WW',
         image: './assets/headshot-male.jpg'
@@ -21,13 +30,6 @@ export class ShellbarCollapsibleExampleComponent {
             notificationCount: 12, notificationLabel: 'Unread Notifications'},
         {glyph: 'pool', callback: this.actionPoolCallback, label: 'Pool',
             notificationCount: 3, notificationLabel: 'Pool Count'}
-    ];
-
-    applicationList = [
-        {name: 'Application A'},
-        {name: 'Application B'},
-        {name: 'Application C'},
-        {name: 'Application D'}
     ];
 
     searchTerm = '';
