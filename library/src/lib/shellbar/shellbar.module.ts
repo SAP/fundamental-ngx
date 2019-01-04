@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShellbarComponent } from './shellbar.component';
 import { ProductMenuComponent } from './product-menu.component';
-import { ProductMenuControlComponent } from './product-menu-control.component';
 import { ShellbarSubtitleComponent } from './shellbar-subtitle.component';
 import { CopilotComponent } from './copilot.component';
 import { ShellbarActionsComponent } from './shellbar-actions.component';
@@ -17,7 +16,6 @@ import { MenuModule } from '../menu/menu.module';
     declarations: [
         ShellbarComponent,
         ProductMenuComponent,
-        ProductMenuControlComponent,
         ShellbarSubtitleComponent,
         CopilotComponent,
         ShellbarActionsComponent,
@@ -29,7 +27,6 @@ import { MenuModule } from '../menu/menu.module';
     exports: [
         ShellbarComponent,
         ProductMenuComponent,
-        ProductMenuControlComponent,
         ShellbarSubtitleComponent,
         CopilotComponent,
         ShellbarActionsComponent,

@@ -1,24 +1,24 @@
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'input-1'">Default Input</fd-form-label>
+        <fd-form-label [forValue]="'input-1'">Default Input:</fd-form-label>
         <input fd-form-control [type]="'text'" id="input-1" placeholder="Field placeholder text">
     </div>
 </div>
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'input-2'" [isRequired]="true">Required Input</fd-form-label>
-        <input fd-form-control [type]="'text'" id="input-2" placeholder="Field placeholder text">
+        <fd-form-label [forValue]="'input-2'">Required Input:*</fd-form-label>
+        <input fd-form-control [type]="'text'" id="input-2" placeholder="Field placeholder text" aria-required="true">
     </div>
 </div>
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'input-3'" [isRequired]="true">Password</fd-form-label>
-        <input fd-form-control [type]="'password'" id="input-3" placeholder="Field placeholder text">
+        <fd-form-label [forValue]="'input-3'">Password:*</fd-form-label>
+        <input fd-form-control [type]="'password'" id="input-3" placeholder="Field placeholder text" aria-required="true">
     </div>
 </div>
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'textarea-1'">Text area</fd-form-label>
+        <fd-form-label [forValue]="'textarea-1'">Text area:</fd-form-label>
         <textarea fd-form-control id="textarea-1">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc.</textarea>
     </div>
 </div>
