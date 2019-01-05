@@ -135,6 +135,8 @@ import {
     ListCheckboxExampleComponent,
     ListExampleComponent
 } from './containers/list/examples/list-examples.component';
+import { LoadingSpinnerExampleComponent } from './containers/loading-spinner-docs/examples/loading-spinner-example.component';
+import { LoadingSpinnerContainerExampleComponent } from './containers/loading-spinner-docs/examples/loading-spinner-container-example.component';
 import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
 import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
 import { ModalConfirmationExampleComponent } from './containers/modal/examples/modal-confirmation-example.component';
@@ -392,7 +394,9 @@ const ROUTES: Routes = [
         TimePickerCompactExampleComponent,
         ComboboxInputDocsComponent,
         ComboboxInputExampleComponent,
-        LoadingSpinnerDocsComponent
+        LoadingSpinnerDocsComponent,
+        LoadingSpinnerExampleComponent,
+        LoadingSpinnerContainerExampleComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
