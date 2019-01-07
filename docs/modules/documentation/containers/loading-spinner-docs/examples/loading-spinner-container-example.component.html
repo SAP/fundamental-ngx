@@ -1,0 +1,12 @@
+<div class="fd-panel" [attr.aria-busy]="loading">
+    <fd-loading-spinner [loading]="loading"></fd-loading-spinner>
+    <div class="fd-panel__header">
+        <h1 class="fd-panel__title">Lorem ipsum</h1>
+    </div>
+    <!-- Loaded content goes here -->
+    <div class="fd-panel__footer" *ngIf="!loading">
+        <p><em>Etiam pulvinar turpis sed velit porttitor vel adipiscing velit fringilla.</em></p>
+    </div>
+</div>
+<br/>
+<button fd-button (click)="loading = !loading;">Click to toggle loading</button>

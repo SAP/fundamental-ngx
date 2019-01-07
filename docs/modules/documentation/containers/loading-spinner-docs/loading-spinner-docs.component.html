@@ -1,0 +1,44 @@
+<header>Loading Spinner</header>
+<description>
+A loading spinner informs the user of an ongoing operation. Only one busy indicator should be shown at a time. The <code>loading</code> input on the component is used to hide and show the element.
+</description>
+<import module="LoadingSpinnerModule" path="fundamental-ngx"></import>
+
+<separator></separator>
+
+<properties [properties]="{
+    inputs: [
+        {name: 'loading', description: 'Boolean, set to \'true\' to display the loading spinner.'}
+    ]
+}"></properties>
+
+<separator></separator>
+
+<h2>
+    Loader element
+</h2>
+<description>
+    The loading element is used to display the loading indicator animation.
+</description>
+
+<component-example [name]="'ex1'">
+    <fd-loading-spinner-example></fd-loading-spinner-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="loadingSpinnerExampleHtml"></code></pre>
+
+<separator></separator>
+
+<h2>
+    Usage with other elements
+</h2>
+<description>
+    The loading indicator is most often used within another component to indicate the loading state. A container (even <code>ui-</code>, <code>app-</code>, and page-level) can be “activated” by setting <code>aria-busy="true"</code>.
+</description>
+<description>
+    The spinner should be included inside the container. The container's busy state and the spinner's loading state should always be the same, meaning if the spinner's <code>loading</code> property is true, the parent container's <code>[aria-busy]</code> should also be true.
+</description>
+
+<component-example [name]="'ex2'">
+    <fd-loading-spinner-container-example></fd-loading-spinner-container-example>
+</component-example>
+<pre><code mwlHighlightJs [language]="'HTML'" [source]="loadingSpinnerContainerExampleHtml"></code></pre>
