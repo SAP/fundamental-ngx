@@ -21,6 +21,9 @@ import { DirectionalityComponent } from './components/directionality/directional
 import { ComponentExampleComponent } from './components/component-example/component-example.component';
 import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
 
+// services
+import { CopyService } from './services/copy.service';
+
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
 import { BreadcrumbDocsComponent } from './containers/breadcrumb/breadcrumb-docs.component';
@@ -408,6 +411,9 @@ const ROUTES: Routes = [
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         FundamentalNgxModule
+    ],
+    providers: [
+        CopyService
     ]
 })
 export class DocumentationModule {}

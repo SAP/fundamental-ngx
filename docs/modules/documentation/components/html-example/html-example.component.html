@@ -1,6 +1,9 @@
-<pre>
-  <code class="highlight html">
-    {{ html }}
-  </code>
-</pre>
+<div class="docs-html-example-container">
+    <button fd-button (click)="copyText()" class="docs-example-copy-button" [glyph]="'copy'" [size]="'l'"
+    [title]="'Copy example to clipboard.'"></button>
+    <pre>
+        <code mwlHighlightJs [language]="'HTML'" [source]="html"></code>
+    </pre>
+</div>
+
 
