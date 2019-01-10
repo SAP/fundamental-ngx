@@ -28,6 +28,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'inlineHelp', name: 'Inline Help' },
         { url: 'inputGroup', name: 'Input Group' },
         { url: 'list', name: 'List' },
+        { url: 'loadingSpinner', name: 'Loading Spinner' },
         { url: 'menu', name: 'Menu' },
         { url: 'modal', name: 'Modal' },
         { url: 'pagination', name: 'Pagination' },

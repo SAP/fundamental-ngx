@@ -25,9 +25,10 @@
             The shellbar actions are duplicated into the overflow menu on mobile screens.
         </li>
         <li>
+            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component.
             The user, user menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component.
             Data for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component.
-            The response to clicks is handled via callback functions for each object.
+            The response to clicks on any of these items is handled via callback functions for each object.
             See the 'collapsible' example to gain an understanding of how this works.
         </li>
     </ul>
@@ -42,7 +43,7 @@
         {name: '<fd-shellbar-logo>', description: '(required) for company branding.'},
         {name: '<fd-shellbar-title>', description: '(required) displays the current application when no product menu is used.'},
         {name: '<fd-shellbar-subtitle>', description: '(optional) displays an application context. This should be used rarely'},
-        {name: '<fd-product-menu>', description: '(optional) holds product titles and navigation.'},
+        {name: '<fd-product-menu>', description: '(optional) holds product titles and navigation, which are passed as inputs to this component.'},
         {name: '<fd-shellbar-actions>', description: '(required) holds all product actions and links. User menu and product switcher are inputs on this component.'},
         {name: '<fd-shellbar-action>', description: '(required) an individual product actions or link.'},
         {name: '<fd-shellbar-copilot>', description: '(optional) for use with applications that utilize CoPilot.'}
