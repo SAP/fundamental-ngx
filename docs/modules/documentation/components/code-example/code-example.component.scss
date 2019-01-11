@@ -15,6 +15,7 @@
     border: none;
     display: none;
     color: #959595;
+    background-color: transparent;
 
     &:active {
         border: none;
@@ -29,6 +30,6 @@
     &:hover {
         border: none;
         color: inherit;
-        background-color: inherit;
+        background-color: transparent;
     }
 }
