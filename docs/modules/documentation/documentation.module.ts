@@ -12,7 +12,7 @@ import { FundamentalNgxModule } from '../../../library/src/lib/fundamental-ngx.m
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { PlayGroundComponent } from './components/playground/playground.component';
 import { PropertiesComponent } from './components/properties/properties.component';
-import { HtmlExampleComponent } from './components/html-example/html-example.component';
+import { CodeExampleComponent } from './components/code-example/code-example.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
@@ -254,7 +254,7 @@ const ROUTES: Routes = [
     declarations: [
         DocumentationComponent,
         PlayGroundComponent,
-        HtmlExampleComponent,
+        CodeExampleComponent,
         HeaderComponent,
         DescriptionComponent,
         PropertiesComponent,
