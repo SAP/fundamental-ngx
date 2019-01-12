@@ -24,6 +24,7 @@ export * from './lib/loading-spinner/loading-spinner.module';
 export * from './lib/menu/menu.module';
 export * from './lib/modal/modal.module';
 export * from './lib/modal/modal.service';
+export * from './lib/modal/modal.component';
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';
 export * from './lib/search-input/search-input.module';
