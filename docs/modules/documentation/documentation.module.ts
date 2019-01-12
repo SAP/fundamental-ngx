@@ -140,6 +140,8 @@ import { LoadingSpinnerContainerExampleComponent } from './containers/loading-sp
 import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
 import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
 import { ModalConfirmationExampleComponent } from './containers/modal/examples/modal-confirmation-example.component';
+import { ModalContentComponent } from './containers/modal/examples/modal-content.component';
+import { ModalComponentAsContentExampleComponent } from './containers/modal/examples/modal-component-as-content-example.component';
 import {
     PanelColumnsExampleComponent,
     PanelEdgeBleedExampleComponent,
@@ -355,6 +357,8 @@ const ROUTES: Routes = [
         MenuGroupExampleComponent,
         ModalExampleComponent,
         ModalConfirmationExampleComponent,
+        ModalContentComponent,
+        ModalComponentAsContentExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,
@@ -397,6 +401,9 @@ const ROUTES: Routes = [
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent
+    ],
+    entryComponents: [
+        ModalContentComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

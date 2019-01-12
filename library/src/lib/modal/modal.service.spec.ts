@@ -1,12 +1,22 @@
 import { ModalService } from './modal.service';
 import { TestBed } from '@angular/core/testing';
+import { ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
 
 describe('ModalService', () => {
-    let service;
+    let service, cfrMock, appRefMock, injectorMock;
+    cfrMock = jasmine.createSpyObj('ComponentFactoryResolver', ['']);
+    appRefMock = jasmine.createSpyObj('ApplicationRef', ['']);
+    injectorMock = jasmine.createSpyObj('Injector', ['']);
     beforeEach(() => {
-        TestBed.configureTestingModule({}).compileComponents();
+        TestBed.configureTestingModule({
+            providers: [
+                { provide: 'ComponentFactoryResolver', useFactory: (() => cfrMock ) },
+                { provide: 'ApplicationRef', useFactory: (() => appRefMock ) },
+                { provide: 'Injector', useFactory: (() => injectorMock ) }
+            ]
+        }).compileComponents();
 
-        service = new ModalService();
+        service = new ModalService(cfrMock, appRefMock, injectorMock);
     });
 
     it('should handle modal open and close', () => {

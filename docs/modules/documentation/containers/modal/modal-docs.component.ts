@@ -4,6 +4,8 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as modalSrc from '!raw-loader!./examples/modal-example.component.ts';
 import * as modalConfirmationSrc from '!raw-loader!./examples/modal-confirmation-example.component.ts';
+import * as componentAsContentSrc from '!raw-loader!./examples/modal-component-as-content-example.component.ts';
+import * as contentSrc from '!raw-loader!./examples/modal-content.component.ts';
 
 @Component({
     selector: 'app-modal',
@@ -51,6 +53,10 @@ export class ModalDocsComponent implements OnInit {
     informationalModalSource = modalSrc;
 
     confirmationModalSource = modalConfirmationSrc;
+
+    componentAsContentSource = componentAsContentSrc;
+
+    contentSource = contentSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('modal');
