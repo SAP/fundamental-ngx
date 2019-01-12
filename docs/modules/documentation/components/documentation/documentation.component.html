@@ -59,6 +59,7 @@
       <ng-container *ngFor="let component of components">
         <li *ngIf="search === '' || component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 || component.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
           <a class="nav-item"
+             [routerLink]="'/docs/' + component.url"
              (click)="selectComponent(component.url)"
              (keypress)="onKeypressHandler(component.url, $event)"
              tabindex="0"

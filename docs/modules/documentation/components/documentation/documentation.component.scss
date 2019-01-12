@@ -63,7 +63,7 @@
 .nav-item:focus,
 .nav-item--active {
     color: #424e5a;
-    border-left: 6px solid #2fd0c8;
+    box-shadow: inset 6px 0 0 0 #2fd0c8;
     padding-left: 34px;
     cursor: pointer;
 }
