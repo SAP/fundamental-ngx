@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnChanges } from '@angular/core';
 
 @Component({
-    selector: 'fd-menu-item',
+    selector: '[fd-menu-item]',
     templateUrl: './menu-item.component.html'
 })
 export class MenuItemComponent implements AfterViewInit, OnChanges {

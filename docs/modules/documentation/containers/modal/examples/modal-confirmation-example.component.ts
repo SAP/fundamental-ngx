@@ -12,29 +12,23 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
             Modal Body
         </fd-modal-body>
         <fd-modal-footer>
-            <button fd-button (click)="closeConfirmationModal('No')" [options]="'light'">No</button>
-            <button fd-button (click)="closeConfirmationModal('Yes')" [fdType]="'main'">Yes</button>
+            <button fd-button (click)="confirmationModal.close('No')" [options]="'light'">No</button>
+            <button fd-button (click)="confirmationModal.close('Yes')" [fdType]="'main'">Yes</button>
         </fd-modal-footer>
     </fd-modal>
     <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
     <separator *ngIf="confirmationReason"></separator>
-    <span>{{confirmationReason}}</span>`,
-    providers: [ModalService]
+    <span>{{confirmationReason}}</span>`
 })
 export class ModalConfirmationExampleComponent {
     confirmationReason: string;
 
-    closeConfirmationModal(reason) {
-        this.modalService.close();
-        if (reason === 'Yes') {
-            this.confirmationReason = 'Modal closed with "Yes" button';
-        } else if (reason === 'No') {
-            this.confirmationReason = 'Modal closed with "No" button';
-        }
-    }
-
     openConfirmationModal(modalType) {
-        this.modalService.open(modalType);
+        this.modalService.open(modalType).result.then((result) => {
+            this.confirmationReason = 'Modal closed with: ' + result;
+        }, (reason) => {
+            this.confirmationReason = 'Modal dismissed with: ' + reason;
+        });
     }
 
     constructor(private modalService: ModalService) {}
