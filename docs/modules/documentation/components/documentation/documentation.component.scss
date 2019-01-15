@@ -45,6 +45,7 @@
     font-size: 1.25rem;
     position: relative;
     padding: 13px 40px;
+    flex-grow: 1;
 }
 
 .nav-item:focus {
@@ -63,7 +64,7 @@
 .nav-item:focus,
 .nav-item--active {
     color: #424e5a;
-    border-left: 6px solid #2fd0c8;
+    box-shadow: inset 6px 0 0 0 #2fd0c8;
     padding-left: 34px;
     cursor: pointer;
 }
@@ -80,4 +81,11 @@
     max-width: 1600px;
     width: 80%;
     outline: 0;
+}
+
+.nav-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
 }

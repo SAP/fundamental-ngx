@@ -20,6 +20,7 @@ import { ImportComponent } from './components/import/import.component';
 import { DirectionalityComponent } from './components/directionality/directionality.component';
 import { ComponentExampleComponent } from './components/component-example/component-example.component';
 import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
+import { StatusIconComponent } from './components/status-icon/status-icon.component';
 
 // services
 import { CopyService } from './services/copy.service';
@@ -403,7 +404,8 @@ const ROUTES: Routes = [
         ComboboxInputExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
-        LoadingSpinnerContainerExampleComponent
+        LoadingSpinnerContainerExampleComponent,
+        StatusIconComponent
     ],
     entryComponents: [
         ModalContentComponent
