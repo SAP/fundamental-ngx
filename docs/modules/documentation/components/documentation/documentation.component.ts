@@ -42,7 +42,6 @@ export class DocumentationComponent implements OnInit {
         { url: 'tile', name: 'Tile', status: 'SAFE' },
         { url: 'time', name: 'Time', status: 'SAFE' },
         { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
-        { url: 'tree', name: 'Tree', status: 'SAFE' }
     ];
 
     search: string = '';
