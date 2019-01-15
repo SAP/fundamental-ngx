@@ -45,6 +45,7 @@
     font-size: 1.25rem;
     position: relative;
     padding: 13px 40px;
+    flex-grow: 1;
 }
 
 .nav-item:focus {
@@ -80,4 +81,11 @@
     max-width: 1600px;
     width: 80%;
     outline: 0;
+}
+
+.nav-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
 }
