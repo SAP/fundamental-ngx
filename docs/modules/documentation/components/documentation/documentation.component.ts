@@ -78,4 +78,9 @@ export class DocumentationComponent implements OnInit {
             this.selectComponent(url);
         }
     }
+
+    onActivate() {
+        this.skipNavClicked();
+        this.contentElRef.nativeElement.scrollIntoView();
+    }
 }

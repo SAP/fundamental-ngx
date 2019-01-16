@@ -77,6 +77,6 @@
 </div>
 <div class="content">
   <div tabindex="0" #content class="content-margin">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="onActivate()"></router-outlet>
   </div>
 </div>
