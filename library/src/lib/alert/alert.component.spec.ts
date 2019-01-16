@@ -31,7 +31,7 @@ describe('AlertComponent', () => {
 
     it('should get an ID and handle the close event for that ID', () => {
         component.ngOnInit();
-        expect(component.id).toBeDefined();
+        expect(component.generatedId).toBeDefined();
         component.close.subscribe(id => expect(id).toBe(component.id));
         component.handleClose();
     });
