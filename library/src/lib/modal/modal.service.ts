@@ -12,10 +12,12 @@ export class ModalService {
 
     close(result?) {
         this.modalRef.close(result);
+        this.modalRef = null;
     }
 
     dismiss(reason?) {
         this.modalRef.dismiss(reason);
+        this.modalRef = null;
     }
 
     open(modalType) {
