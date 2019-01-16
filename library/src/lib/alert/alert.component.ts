@@ -7,10 +7,12 @@ import { HashService } from '../utils/hash.service';
     host: {
         class: 'fd-alert',
         role: 'alert',
-        '[id]': 'id',
+        '[id]': 'this.getId()',
         '[class.fd-alert--dismissible]': 'dismissible == true',
         '[class.fd-alert--warning]': 'type == "warning"',
-        '[class.fd-alert--error]': 'type == "error"'
+        '[class.fd-alert--error]': 'type == "error"',
+        '[class.fd-alert--information]': 'type == "information"',
+        '[class.fd-alert--success]': 'type == "success"'
     },
     styleUrls: ['./alert.component.scss'],
     providers: [HashService]
@@ -20,14 +22,24 @@ export class AlertComponent implements OnInit {
 
     @Input() type: string;
 
+    @Input() id: string;
+
     @Output() close = new EventEmitter<string>();
 
-    id: string;
+    generatedId: string;
 
     constructor(@Inject(HashService) private hasher: HashService) {}
 
     ngOnInit() {
-        this.id = this.hasher.hash();
+        this.generatedId = this.hasher.hash();
+    }
+
+    getId() {
+        if(this.id) {
+            return this.id;
+        } else {
+            return this.generatedId;
+        }
     }
 
     handleClose() {
