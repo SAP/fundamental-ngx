@@ -3,6 +3,19 @@
         A dismissible warning type alert.
     </fd-alert>
 </p>
+
+<p>
+    <fd-alert [dismissible]="true" [type]="'success'" (close)="showAlert($event)" [id]="'success_alert_1'">      
+        A success error type alert.      
+    </fd-alert>
+</p>
+
+<p>
+    <fd-alert [dismissible]="true" [type]="'information'" (close)="showAlert($event)" [id]="'information_alert_1'">      
+        A dismissible information type alert.      
+    </fd-alert>
+</p>
+
 <p>
     <fd-alert [dismissible]="true" [type]="'error'" (close)="showAlert($event)">
         <div>
@@ -11,11 +24,13 @@
         </div>
     </fd-alert>
 </p>
+
 <p>
     <fd-alert [dismissible]="false">
         A normal type alert.
     </fd-alert>
 </p>
+
 <p>
     <fd-alert [dismissible]="false">
         An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a>

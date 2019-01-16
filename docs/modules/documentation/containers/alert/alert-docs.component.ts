@@ -24,7 +24,7 @@ export class AlertDocsComponent {
                 properties: {
                     block: {
                         type: 'string',
-                        enum: ['default', 'warning', 'error']
+                        enum: ['default', 'warning', 'error', 'success', 'information']
                     }
                 }
             }
