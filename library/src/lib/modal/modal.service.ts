@@ -24,6 +24,7 @@ export class ModalService {
         } else if (typeof modalType === 'function') { // component as content
             const componentRef = this.componentFactoryResolver.resolveComponentFactory(modalType).create(this.injector);
             this.modalRef = (componentRef.instance as any).modal;
+            this.modalRef.instance = componentRef.instance;
             this.appRef.attachView(componentRef.hostView);
             const domElem = (componentRef.hostView as EmbeddedViewRef < any > )
                 .rootNodes[0] as HTMLElement;
