@@ -20,9 +20,10 @@
 <component-example [name]="'ex1'">
   <fd-alert-example></fd-alert-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="alertHtml"></code></pre>
+<code-example [code]="alertHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <fd-alert [dismissible]="data.properties.dismissible" [type]="data.modifier.block" (close)="showAlert($event)">
     {{ messagePart1 + data.modifier.block + messagePart2 }}

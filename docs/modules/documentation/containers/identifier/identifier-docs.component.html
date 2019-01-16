@@ -23,7 +23,7 @@
     <fd-icon-identifier-example></fd-icon-identifier-example>
   </div>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="iconHtml"></code></pre>
+<code-example [code]="iconHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Initials</h2>
@@ -32,7 +32,7 @@
     <fd-initials-identifier-example></fd-initials-identifier-example>
   </div>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="initialsHtml"></code></pre>
+<code-example [code]="initialsHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Circle</h2>
@@ -42,7 +42,7 @@
     <fd-circle-identifier-example></fd-circle-identifier-example>
   </div>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="circleHtml"></code></pre>
+<code-example [code]="circleHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Transparent</h2>
@@ -52,7 +52,7 @@
     <fd-transparent-identifier-example></fd-transparent-identifier-example>
   </div>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="transparentHtml"></code></pre>
+<code-example [code]="transparentHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Accent Colors</h2>
@@ -62,7 +62,7 @@
     <fd-colors-identifier-example></fd-colors-identifier-example>
   </div>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="colorAccentHtml"></code></pre>
+<code-example [code]="colorAccentHtml" [language]="'HTML'"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <div *ngIf="data.properties.glyphs.length > 0 && data.properties.initials.length == 0;else initialsTemplate">

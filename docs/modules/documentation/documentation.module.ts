@@ -12,7 +12,7 @@ import { FundamentalNgxModule } from '../../../library/src/lib/fundamental-ngx.m
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { PlayGroundComponent } from './components/playground/playground.component';
 import { PropertiesComponent } from './components/properties/properties.component';
-import { HtmlExampleComponent } from './components/html-example/html-example.component';
+import { CodeExampleComponent } from './components/code-example/code-example.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
@@ -21,6 +21,9 @@ import { DirectionalityComponent } from './components/directionality/directional
 import { ComponentExampleComponent } from './components/component-example/component-example.component';
 import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
 import { StatusIconComponent } from './components/status-icon/status-icon.component';
+
+// services
+import { CopyService } from './services/copy.service';
 
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
@@ -254,7 +257,7 @@ const ROUTES: Routes = [
     declarations: [
         DocumentationComponent,
         PlayGroundComponent,
-        HtmlExampleComponent,
+        CodeExampleComponent,
         HeaderComponent,
         DescriptionComponent,
         PropertiesComponent,
@@ -417,6 +420,9 @@ const ROUTES: Routes = [
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         FundamentalNgxModule
+    ],
+    providers: [
+        CopyService
     ]
 })
 export class DocumentationModule {}
