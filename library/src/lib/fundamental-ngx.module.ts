@@ -36,6 +36,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
+import { ToggleModule } from './toggle/toggle.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -73,6 +74,7 @@ import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
         TileModule,
         TimeModule,
         TimePickerModule,
+        ToggleModule,
         TreeModule
     ],
     providers: [ModalService]

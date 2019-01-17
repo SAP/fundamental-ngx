@@ -11,7 +11,7 @@ export class DocumentationComponent implements OnInit {
     @ViewChild('content') contentElRef: ElementRef;
 
     components = [
-        { url: 'action-bar', name: 'Action Bar', status: 'SAFE' },
+        { url: 'action-bar', name: 'Action Bar', status: 'ACTIVE' },
         { url: 'alert', name: 'Alert', status: 'SAFE' },
         { url: 'badgeLabel', name: 'Badge', status: 'SAFE' },
         { url: 'breadcrumb', name: 'Breadcrumb', status: 'SAFE' },
@@ -27,7 +27,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'image', name: 'Image', status: 'SAFE' },
         { url: 'inlineHelp', name: 'Inline Help', status: 'SAFE' },
         { url: 'inputGroup', name: 'Input Group', status: 'ACTIVE' },
-        { url: 'list', name: 'List', status: 'SAFE' },
+        { url: 'list', name: 'List', status: 'ACTIVE' },
         { url: 'loadingSpinner', name: 'Loading Spinner', status: 'SAFE' },
         { url: 'menu', name: 'Menu', status: 'SAFE' },
         { url: 'modal', name: 'Modal', status: 'UNSAFE' },
@@ -37,11 +37,12 @@ export class DocumentationComponent implements OnInit {
         { url: 'searchInput', name: 'Search Input', status: 'SAFE' },
         { url: 'shellbar', name: 'Shellbar', status: 'ACTIVE' },
         { url: 'sideNavigation', name: 'Side Navigation', status: 'SAFE' },
-        { url: 'table', name: 'Table', status: 'ACTIVE' },
+        { url: 'table', name: 'Table', status: 'UNSAFE' },
         { url: 'tabs', name: 'Tabs', status: 'SAFE' },
         { url: 'tile', name: 'Tile', status: 'SAFE' },
         { url: 'time', name: 'Time', status: 'SAFE' },
         { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
+        { url: 'toggle', name: 'Toggle', status: 'ACTIVE'}
     ];
 
     search: string = '';
