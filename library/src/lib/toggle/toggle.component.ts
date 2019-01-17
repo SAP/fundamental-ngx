@@ -8,15 +8,20 @@ import { HashService } from '../utils/hash.service';
 })
 export class ToggleComponent implements OnInit {
 
-    @Input() size: string;
+    @Input()
+    size: string;
 
-    @Input() disabled: boolean = false;
+    @Input()
+    disabled: boolean = false;
 
-    @Input() isToggled: boolean = false;
+    @Input()
+    checked: boolean = false;
 
-    @Input() id: string;
+    @Input()
+    id: string;
 
-    @Output() onToggle = new EventEmitter<boolean>();
+    @Output()
+    checkedChange = new EventEmitter<boolean>();
 
     constructor(private hasher: HashService) {
     }
@@ -38,8 +43,8 @@ export class ToggleComponent implements OnInit {
     }
 
     toggle() {
-        this.isToggled = !this.isToggled;
-        this.onToggle.emit(this.isToggled);
+        this.checked = !this.checked;
+        this.checkedChange.emit(this.checked);
     }
 
 }
