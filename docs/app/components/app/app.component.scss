@@ -17,6 +17,7 @@ $github-icon-size: 2rem;
     right: $corner-padding;
     width: $github-icon-size;
     height: $github-icon-size;
+    z-index: 100;
 }
 
 .logo-github--white {

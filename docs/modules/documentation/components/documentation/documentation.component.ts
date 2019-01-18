@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -45,10 +45,13 @@ export class DocumentationComponent implements OnInit {
     ];
 
     search: string = '';
+    smallScreen: boolean = window.innerWidth < 992;
+    sideCollapsed: boolean = window.innerWidth < 576;
 
     constructor(private router: Router) {}
 
     ngOnInit() {
+
         // sort the list alphabetically
         this.components.sort((el1, el2) => {
             if (el1.name < el2.name) {
@@ -80,7 +83,26 @@ export class DocumentationComponent implements OnInit {
     }
 
     onActivate() {
+        if (this.smallScreen && !this.sideCollapsed) {
+            this.sideCollapsed = true;
+        }
+
         this.skipNavClicked();
         this.contentElRef.nativeElement.scrollIntoView();
+    }
+
+    checkIfCloseSidebar() {
+        if (!this.sideCollapsed) {
+            this.sideCollapsed = !this.sideCollapsed;
+        }
+    }
+
+    windowSize() {
+        this.smallScreen = window.innerWidth < 992;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.windowSize();
     }
 }
