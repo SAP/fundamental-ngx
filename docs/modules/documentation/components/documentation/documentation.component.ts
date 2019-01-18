@@ -99,7 +99,13 @@ export class DocumentationComponent implements OnInit {
     }
 
     windowSize() {
-        this.smallScreen = window.innerWidth < 992;
+        if (window.innerWidth < 992) {
+            this.smallScreen = true;
+            this.onActivate();
+        } else {
+            this.smallScreen = false;
+            this.sideCollapsed = false;
+        }
     }
 
     @HostListener('window:resize', ['$event'])
