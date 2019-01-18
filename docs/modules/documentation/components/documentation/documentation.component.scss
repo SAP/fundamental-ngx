@@ -35,7 +35,7 @@
     background-color: #f1f3f6;
     height: 100%;
     overflow-y: scroll;
-    transition: 0.4s margin ease-in-out, 0.4s box-shadow ease-in-out;
+    transition: 0.3s margin ease-in-out, 0.3s box-shadow ease-in-out;
     z-index: 3;
 }
 
@@ -100,7 +100,7 @@
     width: 100%;
     height: 100%;
     z-index: 2;
-    transition: 0.4s opacity ease-in-out;
+    transition: 0.3s opacity ease-in-out;
     visibility: hidden;
 
     @media screen and (min-width: 992px){
