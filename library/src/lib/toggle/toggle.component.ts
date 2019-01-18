@@ -30,11 +30,11 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     onChange: any = () => {};
     onTouched: any = () => {};
 
-    get inputText() {
+    get isChecked() {
         return this.checked;
     }
 
-    set inputText(value) {
+    set isChecked(value) {
         this.checked = value;
         this.onChange(value);
         this.onTouched();
