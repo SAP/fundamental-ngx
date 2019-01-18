@@ -1,0 +1,51 @@
+<header>Toggle</header>
+<description>The Toggle component is used to activate or deactivate an element. It uses a visual metaphor to inform the user of the state of the toggle.
+    <br/><br/>
+    Once focused, it can be toggled using the spacebar or the enter key.
+</description>
+<import module="ToggleModule"
+        path="fundamental-ngx"></import>
+<separator></separator>
+
+<h1>&lt;fd-toggle></h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'id', description: 'String, set the id to use for the input and label. If none is provided, it will be generated.'},
+    { name: 'size', description: 'Size of the toggle. The options include \'xs\', \'s\', default and \'l\'. If no size is provided, default will be used.\n'},
+    { name: 'disabled', description: 'Boolean, disables the toggle when set to true.'},
+    { name: 'checked', description: 'Boolean, the state of the toggle. Initially defaults to false.'}
+  ],
+  outputs: [
+    { name: 'checkedChange', description: 'Event fired when state of the toggle changes.' }
+  ]
+}"></properties>
+
+<separator></separator>
+<h2>Toggle Sizes</h2>
+<description>Options include 'xs', 's', 'l' and default. If no value is provided, default is used.</description>
+<component-example [name]="'ex1'">
+    <fd-toggle-sizes-example></fd-toggle-sizes-example>
+</component-example>
+<code-example [code]="toggleSizeHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Disabled State</h2>
+<description>Toggle can be in the disabled state, which prevents the user from interacting with it.</description>
+<component-example [name]="'ex2'">
+    <fd-disabled-toggle-example></fd-disabled-toggle-example>
+</component-example>
+<code-example [code]="toggleDisableHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Two-Way Binding</h2>
+<description>It is possible to two-way bind to the checked property of the fd-toggle.</description>
+<component-example [name]="'ex3'">
+    <fd-toggle-binding-example></fd-toggle-binding-example>
+</component-example>
+<code-example [code]="toggleBindingHtml" [language]="'HTML'"></code-example>
+<code-example [code]="toggleBindingTs" [language]="'typescript'"></code-example>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-toggle [disabled]="data.properties.disabled" [(checked)]="data.properties.checked" [size]="data.modifier.size">Example Toggle</fd-toggle>
+</playground>

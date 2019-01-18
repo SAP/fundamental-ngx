@@ -202,6 +202,10 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
+import { ToggleDocsComponent } from './containers/toggle/toggle-docs.component';
+import { ToggleSizesExampleComponent } from './containers/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
+import { DisabledToggleExampleComponent } from './containers/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
+import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -245,6 +249,7 @@ const ROUTES: Routes = [
             { path: 'time', component: TimeDocsComponent },
             { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
+            { path: 'toggle', component: ToggleDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent },
             // { path: 'rtl', component: InternationalizationDocsComponent }, TODO: restore this route when fundamental is RTL ready
@@ -295,6 +300,7 @@ const ROUTES: Routes = [
         TimeDocsComponent,
         TimePickerDocsComponent,
         InstallationDocsComponent,
+        ToggleDocsComponent,
         UsageDocsComponent,
         InternationalizationDocsComponent,
         HomeDocsComponent,
@@ -405,7 +411,10 @@ const ROUTES: Routes = [
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
-        StatusIconComponent
+        StatusIconComponent,
+        ToggleSizesExampleComponent,
+        DisabledToggleExampleComponent,
+        ToggleBindingExampleComponent
     ],
     entryComponents: [
         ModalContentComponent
