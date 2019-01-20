@@ -47,3 +47,12 @@ by the modal service's <code>open()</code> function.</p>
 </component-example>
 <code-example [code]="componentAsContentSource" [language]="'typescript'"></code-example>
 <code-example [code]="contentSource" [language]="'typescript'"></code-example>
+
+<h2>Modal in a Modal</h2>
+<p>The modal component heavily relies on the ModalService, which can only support one modal at a time. To get around this limitation, you can provide the ModalService inside the modal that you create first. This allows the modal to have a different instance of the ModalService, and hence allows it to support a different nested modal.</p>
+<component-example [name]="'ex4'">
+    <fd-modal-in-modal-example></fd-modal-in-modal-example>
+</component-example>
+<code-example [code]="modalInModalExample" [language]="'typescript'"></code-example>
+<code-example [code]="modalInModal" [language]="'typescript'"></code-example>
+<code-example [code]="modalInModalSecond" [language]="'typescript'"></code-example>
