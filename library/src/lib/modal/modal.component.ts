@@ -20,14 +20,22 @@ export class ModalComponent implements OnInit {
 
     constructor(@Inject(ModalService) private modalService: ModalService, private elRef: ElementRef) {}
 
-    close(result?) {
+    close(result?, closedByService: boolean = false) {
         this.elRef.nativeElement.style.display = 'none';
         this.resolve(result);
+
+        if (!closedByService) {
+            this.modalService.popModal();
+        }
     }
 
-    dismiss(reason?) {
+    dismiss(reason?, closedByService: boolean = false) {
         this.elRef.nativeElement.style.display = 'none';
         this.reject(reason);
+
+        if (!closedByService) {
+            this.modalService.popModal();
+        }
     }
 
     open() {

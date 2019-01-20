@@ -14,8 +14,7 @@ import { ModalComponent } from '../../../../../../library/src/lib/modal/modal.co
             <button fd-button (click)="openModal()" style="margin-right: 10px">Open Second Modal</button>
             <button fd-button (click)="modal.close()">Close Modal</button>
         </fd-modal-body>
-    </fd-modal>`,
-    providers: [ModalService]
+    </fd-modal>`
 })
 export class ModalInModalComponent {
     @ViewChild('modal') modal: ModalComponent;
@@ -28,6 +27,6 @@ export class ModalInModalComponent {
 
     openModal() {
         this.modalRef = this.modalService.open(ModalInModalSecondComponent);
-        this.modalRef.instance.title = 'Second Modal'
+        this.modalRef.instance.title = 'Second Modal';
     }
 }
