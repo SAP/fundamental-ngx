@@ -6,7 +6,11 @@ import { ComponentFactoryResolver, Injectable, ApplicationRef, Injector, Embedde
 export class ModalService {
     private modalRef;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) {
+    constructor(
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private appRef: ApplicationRef,
+        private injector: Injector
+    ) {
         this.componentFactoryResolver = componentFactoryResolver;
     }
 
@@ -20,16 +24,20 @@ export class ModalService {
         this.modalRef = null;
     }
 
-    open(modalType) {
-        if (typeof modalType === 'object') { // template reference variable
+    open(modalType, modalConfig?) {
+        if (typeof modalType === 'object') {
+            // template reference variable
             this.modalRef = modalType;
-        } else if (typeof modalType === 'function') { // component as content
-            const componentRef = this.componentFactoryResolver.resolveComponentFactory(modalType).create(this.injector);
+        } else if (typeof modalType === 'function') {
+            // component as content
+            let componentRef = this.componentFactoryResolver.resolveComponentFactory(modalType).create(this.injector);
             this.modalRef = (componentRef.instance as any).modal;
+            if (modalConfig) {
+                Object.keys(modalConfig).forEach(key => (componentRef.instance[key] = modalConfig[key]));
+            }
             this.modalRef.instance = componentRef.instance;
             this.appRef.attachView(componentRef.hostView);
-            const domElem = (componentRef.hostView as EmbeddedViewRef < any > )
-                .rootNodes[0] as HTMLElement;
+            const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
             document.body.appendChild(domElem);
             this.appRef.tick();
         }
