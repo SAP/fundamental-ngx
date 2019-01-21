@@ -192,6 +192,11 @@ import {
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent
 } from './containers/time-picker/examples/time-picker-examples.component';
+import { ToggleDocsComponent } from './containers/toggle/toggle-docs.component';
+import { ToggleSizesExampleComponent } from './containers/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
+import { DisabledToggleExampleComponent } from './containers/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
+import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { ListVirtualScrollExampleComponent } from './containers/list/examples/list-virtual-scroll-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -202,10 +207,9 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-import { ToggleDocsComponent } from './containers/toggle/toggle-docs.component';
-import { ToggleSizesExampleComponent } from './containers/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
-import { DisabledToggleExampleComponent } from './containers/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
-import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { VirtualScrollDirective } from '../../../library/src/lib/utils/virtual-scroll.directive';
+import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { DropdownVirtualScrollExampleComponent } from './containers/dropdown/examples/dropdown-virtual-scroll-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -339,6 +343,7 @@ const ROUTES: Routes = [
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
         DropdownStateExampleComponent,
+        DropdownVirtualScrollExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,
         FormInlineHelpExampleComponent,
@@ -363,6 +368,7 @@ const ROUTES: Routes = [
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
+        ListVirtualScrollExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
         ModalExampleComponent,
@@ -414,7 +420,7 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent
+        ToggleBindingExampleComponent,
     ],
     entryComponents: [
         ModalContentComponent
@@ -428,6 +434,7 @@ const ROUTES: Routes = [
         FormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
+        UtilsModule,
         FundamentalNgxModule
     ],
     providers: [
