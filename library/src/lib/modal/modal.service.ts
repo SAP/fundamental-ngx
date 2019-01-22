@@ -36,4 +36,8 @@ export class ModalService {
         this.modalRef[this.modalRef.length - 1].open();
         return this.modalRef[this.modalRef.length - 1];
     }
+
+    getModalCount() {
+        return this.modalRef.length;
+    }
 }

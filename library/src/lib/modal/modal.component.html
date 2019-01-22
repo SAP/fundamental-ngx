@@ -1,8 +1,8 @@
-<div class="fd-modal">
+<div class="fd-modal" [ngStyle]="{'z-index': 1000 * openModalCount}">
   <div class="fd-modal__content" role="document">
     <ng-content select="fd-modal-header"></ng-content>
     <ng-content select="fd-modal-body"></ng-content>
     <ng-content select="fd-modal-footer"></ng-content>
   </div>
 </div>
-<div class="fd-modal-background"></div>
+<div class="fd-modal-background" [ngStyle]="{'z-index': 900 * openModalCount}"></div>
