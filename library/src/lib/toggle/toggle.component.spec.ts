@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToggleComponent } from './toggle.component';
 import { UtilsModule } from '../utils/utils.module';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 describe('ToggleComponent', () => {
     let component: ToggleComponent;
@@ -11,7 +12,7 @@ describe('ToggleComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, UtilsModule],
+            imports: [CommonModule, UtilsModule, FormsModule],
             declarations: [ToggleComponent]
         })
             .compileComponents();
@@ -26,22 +27,6 @@ describe('ToggleComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should call onKeypressHandler when Enter key pressed', () => {
-        component.checked = false;
-        spyOn(component, 'onKeypressHandler');
-        input.dispatchEvent(new KeyboardEvent('keypress', {code: 'Enter'}));
-        fixture.detectChanges();
-        expect(component.onKeypressHandler).toHaveBeenCalled();
-    });
-
-    it('should toggle on click', () => {
-        component.checked = false;
-        spyOn(component, 'toggle');
-        input.click();
-        fixture.detectChanges();
-        expect(component.toggle).toHaveBeenCalled();
     });
 
 });

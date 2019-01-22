@@ -4,9 +4,7 @@
             <input type="checkbox"
                    [id]="this.id"
                    [disabled]="this.disabled"
-                   [checked]="this.checked"
-                   (change)="toggle()"
-                   (keypress)="onKeypressHandler($event)">
+                   [(ngModel)]="this.isChecked">
             <span class="fd-toggle__switch" role="presentation"></span>
         </span>
         <ng-content></ng-content>
