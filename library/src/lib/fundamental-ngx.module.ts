@@ -76,7 +76,6 @@ import { ToggleModule } from './toggle/toggle.module';
         TimePickerModule,
         ToggleModule,
         TreeModule
-    ],
-    providers: [ModalService]
+    ]
 })
 export class FundamentalNgxModule {}
