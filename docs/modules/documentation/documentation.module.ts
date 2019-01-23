@@ -198,6 +198,11 @@ import { DisabledToggleExampleComponent } from './containers/toggle/examples/dis
 import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
 import { ListInfiniteScrollExampleComponent } from './containers/list/examples/list-infinite-scroll-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './containers/dropdown/examples/dropdown-infinite-scroll-example.component';
+import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
+import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
+import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
+import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
+import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -209,9 +214,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
-import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
-import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -237,6 +239,7 @@ const ROUTES: Routes = [
             { path: 'icon', component: IconDocsComponent },
             { path: 'identifier', component: IdentifierDocsComponent },
             { path: 'image', component: ImageDocsComponent },
+            { path: 'infiniteScroll', component: InfiniteScrollDocsComponent },
             { path: 'inlineHelp', component: InlineHelpDocsComponent },
             { path: 'inputGroup', component: InputGroupDocsComponent },
             { path: 'list', component: ListDocsComponent },
@@ -425,7 +428,9 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent
+        ToggleBindingExampleComponent,
+        InfiniteScrollDocsComponent,
+        InfiniteScrollBasicExampleComponent
     ],
     entryComponents: [
         ModalContentComponent,

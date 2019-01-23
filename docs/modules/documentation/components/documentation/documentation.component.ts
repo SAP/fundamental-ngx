@@ -25,6 +25,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'icon', name: 'Icon', status: 'SAFE' },
         { url: 'identifier', name: 'Identifier', status: 'SAFE' },
         { url: 'image', name: 'Image', status: 'SAFE' },
+        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' },
         { url: 'inlineHelp', name: 'Inline Help', status: 'SAFE' },
         { url: 'inputGroup', name: 'Input Group', status: 'ACTIVE' },
         { url: 'list', name: 'List', status: 'ACTIVE' },
