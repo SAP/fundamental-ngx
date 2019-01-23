@@ -2,9 +2,9 @@ import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@ang
 import { fromEvent, Observable } from 'rxjs';
 
 @Directive({
-    selector: '[fdVirtualScroll]'
+    selector: '[fdInfiniteScroll]'
 })
-export class VirtualScrollDirective implements OnInit {
+export class InfiniteScrollDirective implements OnInit {
 
     @Output()
     onScrollAction = new EventEmitter<any>();

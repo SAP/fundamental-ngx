@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'fd-dropdown-virtual-scroll-example',
-    templateUrl: './dropdown-virtual-scroll-example.component.html'
+    selector: 'fd-list-infinite-scroll-example',
+    templateUrl: './list-infinite-scroll-example.component.html'
 })
-export class DropdownVirtualScrollExampleComponent implements OnInit {
+export class ListInfiniteScrollExampleComponent implements OnInit {
 
     // List that is displayed to the user
     displayedList = [

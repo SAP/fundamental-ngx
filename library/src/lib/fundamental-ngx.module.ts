@@ -37,7 +37,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { ToggleModule } from './toggle/toggle.module';
-import { VirtualScrollModule } from './utils/virtual-scroll.module';
+import { InfiniteScrollModule } from './utils/infinite-scroll.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -77,7 +77,7 @@ import { VirtualScrollModule } from './utils/virtual-scroll.module';
         TimePickerModule,
         ToggleModule,
         TreeModule,
-        VirtualScrollModule
+        InfiniteScrollModule
     ],
     providers: [ModalService]
 })

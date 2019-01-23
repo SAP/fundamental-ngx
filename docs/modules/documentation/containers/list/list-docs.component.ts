@@ -5,8 +5,8 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as listSrc from '!raw-loader!./examples/list-example.component.html';
 import * as listActionsSrc from '!raw-loader!./examples/list-actions-example.component.html';
 import * as listCheckboxSrc from '!raw-loader!./examples/list-checkbox-example.component.html';
-import * as virtualScrollSrcHtml from '!raw-loader!./examples/list-virtual-scroll-example.component.html';
-import * as virtualScrollSrcTs from '!raw-loader!./examples/list-virtual-scroll-example.component.ts';
+import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
+import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
 
 @Component({
     selector: 'app-list',
@@ -680,9 +680,9 @@ export class ListDocsComponent implements OnInit {
 
     listCheckboxesHtml = listCheckboxSrc;
 
-    virtualScrollCodeHTML = virtualScrollSrcHtml;
+    infiniteScrollCodeHTML = infiniteScrollSrcHtml;
 
-    virtualScrollCodeTS = virtualScrollSrcTs;
+    infiniteScrollCodeTS = infiniteScrollSrcTs;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('list');
