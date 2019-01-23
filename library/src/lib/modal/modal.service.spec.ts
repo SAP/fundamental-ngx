@@ -21,7 +21,8 @@ describe('ModalService', () => {
 
     it('should handle modal open and close', () => {
         const modalRefSpy = jasmine.createSpyObj(['open', 'close']);
-        service.open(modalRefSpy);
+        const modalRef = service.open(modalRefSpy, {testParam: 'testVal'});
+        expect(modalRef.testParam).toEqual('testVal');
         expect(modalRefSpy.open).toHaveBeenCalled();
         service.close();
         expect(modalRefSpy.close).toHaveBeenCalled();
