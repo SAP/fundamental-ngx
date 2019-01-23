@@ -59,6 +59,7 @@ import { InfiniteScrollModule } from './utils/infinite-scroll.module';
         ImageModule,
         InlineHelpModule,
         IdentifierModule,
+        InfiniteScrollModule,
         InputGroupModule,
         ListModule,
         LoadingSpinnerModule,
@@ -76,8 +77,7 @@ import { InfiniteScrollModule } from './utils/infinite-scroll.module';
         TimeModule,
         TimePickerModule,
         ToggleModule,
-        TreeModule,
-        InfiniteScrollModule
+        TreeModule
     ],
     providers: [ModalService]
 })

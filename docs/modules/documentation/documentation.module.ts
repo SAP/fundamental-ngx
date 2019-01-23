@@ -209,6 +209,9 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
+import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
+import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -374,6 +377,9 @@ const ROUTES: Routes = [
         ModalConfirmationExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
+        ModalInModalComponent,
+        ModalInModalSecondComponent,
+        ModalInModalExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,
@@ -422,7 +428,9 @@ const ROUTES: Routes = [
         ToggleBindingExampleComponent
     ],
     entryComponents: [
-        ModalContentComponent
+        ModalContentComponent,
+        ModalInModalComponent,
+        ModalInModalSecondComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
