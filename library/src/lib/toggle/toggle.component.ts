@@ -27,7 +27,8 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
     checked: boolean = false;
 
-    @Output() onToggle = new EventEmitter<boolean>();
+    @Output()
+    onToggle = new EventEmitter<boolean>();
 
     onChange: any = () => {};
     onTouched: any = () => {};
@@ -50,6 +51,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     registerOnChange(fn) {
         this.onChange = fn;
     }
+
     registerOnTouched(fn) {
         this.onTouched = fn;
     }

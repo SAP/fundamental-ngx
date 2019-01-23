@@ -203,6 +203,7 @@ import { ModalInModalSecondComponent } from './containers/modal/examples/modal-i
 import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
+import { ListSingleCheckboxExampleComponent } from './containers/list/examples/list-single-checkbox-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -374,6 +375,7 @@ const ROUTES: Routes = [
         ListCheckboxExampleComponent,
         ListExampleComponent,
         ListInfiniteScrollExampleComponent,
+        ListSingleCheckboxExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
         ModalExampleComponent,
