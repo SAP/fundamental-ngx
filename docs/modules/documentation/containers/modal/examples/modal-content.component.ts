@@ -9,14 +9,14 @@ import { ModalComponent } from '../../../../../../library/src/lib/modal/modal.co
             {{title}}
         </fd-modal-header>
         <fd-modal-body>
-            This modal was opened by passing the component to the modal open function.
+            {{description}}
         </fd-modal-body>
     </fd-modal>`
 })
 export class ModalContentComponent {
     @ViewChild('modal') modal: ModalComponent;
 
-    @Input() title: string;
+    @Input() description: string;
 
     constructor(public modalService: ModalService)  {}
 }
