@@ -1,12 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { HashService } from '../utils/hash.service';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fd-toggle',
     templateUrl: './toggle.component.html',
-    styleUrls: ['./toggle.component.scss']
+    styleUrls: ['./toggle.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ToggleComponent),
+            multi: true
+        }
+    ]
 })
-export class ToggleComponent implements OnInit {
+export class ToggleComponent implements OnInit, ControlValueAccessor {
 
     @Input()
     size: string;
@@ -15,13 +23,33 @@ export class ToggleComponent implements OnInit {
     disabled: boolean = false;
 
     @Input()
-    checked: boolean = false;
-
-    @Input()
     id: string;
 
-    @Output()
-    checkedChange = new EventEmitter<boolean>();
+    checked: boolean = false;
+
+    onChange: any = () => {};
+    onTouched: any = () => {};
+
+    get isChecked() {
+        return this.checked;
+    }
+
+    set isChecked(value) {
+        this.checked = value;
+        this.onChange(value);
+        this.onTouched();
+    }
+
+    writeValue(value: any) {
+        this.checked = value;
+    }
+
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
 
     constructor(private hasher: HashService) {
     }
@@ -34,17 +62,6 @@ export class ToggleComponent implements OnInit {
         if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
             this.size = null;
         }
-    }
-
-    onKeypressHandler(event) {
-        if (event.code === 'Enter') {
-            this.toggle();
-        }
-    }
-
-    toggle() {
-        this.checked = !this.checked;
-        this.checkedChange.emit(this.checked);
     }
 
 }

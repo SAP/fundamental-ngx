@@ -42,8 +42,19 @@ constructor with
 <p>A reference to a component can be passed to the modal service open function, rather than passing a template reference variable.</p>
 <p>The content component's inputs can be accessed through the <code>instance</code> property on the modal reference object that is returned
 by the modal service's <code>open()</code> function.</p>
+<p>Custom options can be passed as the second parameter of the <code>open</code> function. Additionally, inputs can be set on the modal reference's <code>instance</code> object.</p>
 <component-example [name]="'ex3'">
     <fd-modal-component-as-content-example></fd-modal-component-as-content-example>
 </component-example>
 <code-example [code]="componentAsContentSource" [language]="'typescript'"></code-example>
 <code-example [code]="contentSource" [language]="'typescript'"></code-example>
+
+<h2>Modal in a Modal</h2>
+<p>The modal component heavily relies on the ModalService, which contains every active Modal instance. To create nested modals, the service has an array of modal component references.</p>
+<p>It treats this array like a stack, adding new modals to the top and calling pop() when they are closed. For this reason, nested modals must be closed in the order they were first opened.</p>
+<component-example [name]="'ex4'">
+    <fd-modal-in-modal-example></fd-modal-in-modal-example>
+</component-example>
+<code-example [code]="modalInModalExample" [language]="'typescript'"></code-example>
+<code-example [code]="modalInModal" [language]="'typescript'"></code-example>
+<code-example [code]="modalInModalSecond" [language]="'typescript'"></code-example>

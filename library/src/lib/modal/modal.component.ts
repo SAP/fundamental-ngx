@@ -18,16 +18,28 @@ export class ModalComponent implements OnInit {
     private reject: Function;
     result: Promise<any>;
 
+    private openModalCount: number;
+
     constructor(@Inject(ModalService) private modalService: ModalService, private elRef: ElementRef) {}
 
-    close(result?) {
+    close(result?, closedByService: boolean = false) {
         this.elRef.nativeElement.style.display = 'none';
         this.resolve(result);
+
+        if (!closedByService) {
+            this.modalService.popModal();
+        }
+        this.openModalCount = this.modalService.getModalCount();
     }
 
-    dismiss(reason?) {
+    dismiss(reason?, closedByService: boolean = false) {
         this.elRef.nativeElement.style.display = 'none';
         this.reject(reason);
+
+        if (!closedByService) {
+            this.modalService.popModal();
+        }
+        this.openModalCount = this.modalService.getModalCount();
     }
 
     open() {
@@ -37,6 +49,7 @@ export class ModalComponent implements OnInit {
         });
         this.result.then(null, () => {});
         this.elRef.nativeElement.style.display = 'block';
+        this.openModalCount = this.modalService.getModalCount();
     }
 
     ngOnInit() {

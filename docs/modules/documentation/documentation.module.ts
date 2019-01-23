@@ -206,6 +206,9 @@ import { ToggleDocsComponent } from './containers/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from './containers/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
 import { DisabledToggleExampleComponent } from './containers/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
 import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
+import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
+import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -369,6 +372,9 @@ const ROUTES: Routes = [
         ModalConfirmationExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
+        ModalInModalComponent,
+        ModalInModalSecondComponent,
+        ModalInModalExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,
@@ -417,7 +423,9 @@ const ROUTES: Routes = [
         ToggleBindingExampleComponent
     ],
     entryComponents: [
-        ModalContentComponent
+        ModalContentComponent,
+        ModalInModalComponent,
+        ModalInModalSecondComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
