@@ -37,6 +37,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { ToggleModule } from './toggle/toggle.module';
+import { InfiniteScrollModule } from './utils/infinite-scroll.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -58,6 +59,7 @@ import { ToggleModule } from './toggle/toggle.module';
         ImageModule,
         InlineHelpModule,
         IdentifierModule,
+        InfiniteScrollModule,
         InputGroupModule,
         ListModule,
         LoadingSpinnerModule,
@@ -76,6 +78,7 @@ import { ToggleModule } from './toggle/toggle.module';
         TimePickerModule,
         ToggleModule,
         TreeModule
-    ]
+    ],
+    providers: [ModalService]
 })
 export class FundamentalNgxModule {}

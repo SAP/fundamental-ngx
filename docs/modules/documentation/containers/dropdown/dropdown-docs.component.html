@@ -14,11 +14,11 @@
 <separator></separator>
 
 <h2>Default Dropdown</h2>
-<p>
+<description>
   The dropdown is designed to resemble other Fundamental input components. The options can be divided in groups, which
   are
   visually separated and can have a small group header text.
-</p>
+</description>
 <component-example [name]="'ex1'">
   <fd-dropdown-default-example></fd-dropdown-default-example>
 </component-example>
@@ -35,7 +35,7 @@
 <separator></separator>
 
 <h2>Dropdown with Icon</h2>
-<p>It can also include complementary information like an icon.</p>
+<description>It can also include complementary information like an icon.</description>
 <component-example [name]="'ex3'">
   <fd-dropdown-icons-example></fd-dropdown-icons-example>
 </component-example>
@@ -43,7 +43,7 @@
 
 <separator></separator>
 
-<header>Contextual Menu</header>
+<h2>Contextual Menu</h2>
 <description>
   The contextual menu component is an opinionated composition of the “fd-popover” and “fd-menu” components with the use
   of
@@ -55,6 +55,16 @@
   <fd-dropdown-contextual-menu-example></fd-dropdown-contextual-menu-example>
 </component-example>
 <code-example [code]="contextualMenuDropdownHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Infinite Scroll Dropdown</h2>
+<description>It is possible to implement an infinite scroll function using the fdInfiniteScroll directive. It allows you to load more data as the user scrolls down the parent element. It is important to remember that the <code>InfiniteScrollModule</code> is required for this feature.</description>
+<component-example [name]="'ex6'">
+    <fd-dropdown-infinite-scroll-example></fd-dropdown-infinite-scroll-example>
+</component-example>
+<code-example [code]="infiniteScrollHtml" [language]="'HTML'"></code-example>
+<code-example [code]="infiniteScrollTs" [language]="'typescript'"></code-example>
 
 <style>
   ::ng-deep fd-popover {

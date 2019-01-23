@@ -20,7 +20,8 @@
 }"></properties>
 
 <separator></separator>
-<p>A simple list. The list item can contain plain text or links.</p>
+<h2>Simple List</h2>
+<description>A simple list. The list item can contain plain text or links.</description>
 <component-example [name]="'ex1'">
   <fd-list-example></fd-list-example>
 </component-example>
@@ -28,7 +29,8 @@
 
 <separator></separator>
 
-<p>The List items can also contain quick actions, such as: remove, edit, copy, etc.</p>
+<h2>Action List</h2>
+<description>The list items can also contain quick actions, such as: remove, edit, copy, etc.</description>
 <component-example [name]="'ex2'">
   <fd-list-actions-example></fd-list-actions-example>
 </component-example>
@@ -36,10 +38,19 @@
 
 <separator></separator>
 
-<p>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</p>
+<h2>Checkbox List</h2>
+<description>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</description>
 <component-example [name]="'ex3'">
   <fd-list-checkbox-example></fd-list-checkbox-example>
 </component-example>
 <code-example [code]="listCheckboxesHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
+
+<h2>Infinite Scroll List</h2>
+<description>It is possible to implement an infinite scroll function using the fdInfiniteScroll directive. It allows you to load more data as the user scrolls down the parent element. It is important to remember that the <code>InfiniteScrollModule</code> is required for this feature.</description>
+<component-example [name]="'ex4'">
+    <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
+</component-example>
+<code-example [code]="infiniteScrollCodeHTML" [language]="'HTML'"></code-example>
+<code-example [code]="infiniteScrollCodeTS" [language]="'typescript'"></code-example>
