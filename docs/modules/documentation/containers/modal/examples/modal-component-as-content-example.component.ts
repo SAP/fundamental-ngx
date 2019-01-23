@@ -11,8 +11,7 @@ export class ModalComponentAsContentExampleComponent {
     modalRef;
 
     openComponentAsContentModal() {
-        this.modalRef = this.modalService.open(ModalContentComponent);
-        this.modalRef.instance.title = 'Modal Title'
+        this.modalRef = this.modalService.open(ModalContentComponent, {title: 'Modal Title'});
     }
     constructor(private modalService: ModalService) {}
 }

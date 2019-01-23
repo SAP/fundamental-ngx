@@ -16,7 +16,5 @@ import { ModalComponent } from '../../../../../../library/src/lib/modal/modal.co
 export class ModalContentComponent {
     @ViewChild('modal') modal: ModalComponent;
 
-    @Input() title: string;
-
     constructor(public modalService: ModalService)  {}
 }

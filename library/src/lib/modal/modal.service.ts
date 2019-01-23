@@ -20,11 +20,17 @@ export class ModalService {
         return this.modalRef.pop();
     }
 
-    open(modalType) {
+    open(modalType, params?) {
         if (typeof modalType === 'object') { // template reference variable
+            if (params) {
+                Object.assign(modalType, params);
+            }
             this.modalRef.push(modalType);
         } else if (typeof modalType === 'function') { // component as content
             const componentRef = this.componentFactoryResolver.resolveComponentFactory(modalType).create(this.injector);
+            if (params) {
+                Object.assign(componentRef.instance, params);
+            }
             this.modalRef.push((componentRef.instance as any).modal);
             this.modalRef[this.modalRef.length - 1].instance = componentRef.instance;
             this.appRef.attachView(componentRef.hostView);
