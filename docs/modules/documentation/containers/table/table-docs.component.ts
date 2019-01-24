@@ -4,6 +4,8 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as tableHtmlSrc from '!raw-loader!./examples/table-example.component.html';
 import * as tableJsSrc from '!raw-loader!./examples/table-example.component.ts';
+import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example.component.html';
+import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
 
 @Component({
     selector: 'app-table',
@@ -35,6 +37,10 @@ export class TableDocsComponent {
     tableHtml = tableHtmlSrc;
 
     tableJs = tableJsSrc;
+
+    tableCheckboxesHtml = tableCheckHtml;
+
+    tableCheckboxesTs = tableCheckTs;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('table');
