@@ -27,12 +27,6 @@
 :open_book:
 </p>
 
-## Current Version
-
-```
-0.0.29-beta
-```
-
 ## Description
 
 Fundamental NGX is a set of [Angular](https://angular.io/) components that implement the styles and patterns of the [SAP Fiori Fundamentals library](https://sap.github.io/fundamental/). SAP Fiori Fundamentals is a design system and HTML/CSS component library that is used to build consistent user experiences throughout the SAP product family. Fundamental NGX facilitates the use of this library for Angular.
