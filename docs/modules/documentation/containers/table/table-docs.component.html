@@ -11,11 +11,18 @@
   childComponents: [
     { name: '<fd-table-header>', description: 'The table header, contains \'<th>\' header cell elements.'},
     { name: '<fd-table-body>', description: 'The table body. Use \'<tr *ngFor>\' to iterate over your collection.  Then construct a row using \'<td>\'s as you would for a standard HTML table.'}
+  ],
+  directives: [
+    { name: 'fdColumnSortable', description: 'Directive for handling sort functionality for a specific column.'}
   ]
 }"></properties><br>
 <separator></separator>
 
 <h2>Table</h2>
+<p>Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired column(s) to sort, set the <code>[sortDir]</code>
+input to the corresponding component variable that dictates sort direction, and use <code>(click)</code> to call the sorting algorithm on your component. Valid values
+for sort direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in this example that calling a sort function for
+one column will reset the sort direction for the other sortable column.</p>
 <br>
 <component-example [name]="'ex1'">
   <fd-table-example></fd-table-example>
