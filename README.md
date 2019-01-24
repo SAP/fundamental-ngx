@@ -1,67 +1,99 @@
-# Fundamental NGX - Angular components for [Fiori Fundamentals](https://github.com/SAP/fundamental)
+<p align="center">
+      <a href="https://github.com/SAP/fundamental-ngx" target="_blank" rel="noopener noreferrer">
+            <img src="./assets/images/readme/temp_logo_sap_2.png" alt="Fundamental NGX logo">
+      </a>
+</p>
+
+<p align="center">
+      Fundamental NGX is a lightweight Angular component library for <a href="https://github.com/SAP/fundamental">SAP Fiori Fundamentals</a>.
+</p>
+
+<p align="center">
+      <a href="https://travis-ci.org/SAP/fundamental-ngx">
+            <img src="https://travis-ci.org/SAP/fundamental-ngx.svg?branch=develop" alt="Build Status">
+      </a>
+      <a href="https://badge.fury.io/js/fundamental-ngx">
+            <img src="https://badge.fury.io/js/fundamental-ngx.svg" alt="npm version">
+      </a>
+      <a href="https://ui-fundamentals.slack.com">
+            <img src="https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack" alt="Slack Community">
+      </a>
+</p>
+
+
+<p align="center">
+:open_book:
+<strong><a href="https://sap.github.io/fundamental-ngx/docs/home">Component Documentation</a></strong>
+:open_book:
+</p>
 
 ## Description
 
-Fundamental NGX is a set of Angular components that utilize the Fiori Fundamentals library, making it easy to start developing Angular Fundamental apps.
+Fundamental NGX is a set of [Angular](https://angular.io/) components that implement the styles and patterns of the [SAP Fiori Fundamentals library](https://sap.github.io/fundamental/). SAP Fiori Fundamentals is a design system and HTML/CSS component library that is used to build consistent user experiences throughout the SAP product family. Fundamental NGX facilitates the use of this library for Angular.
 
-View documentation and examples of each component: [here](https://sap.github.io/fundamental-ngx/docs/home).
-[![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=develop)](https://travis-ci.org/SAP/fundamental-ngx)
-
--   [GitHub repo of Vue implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-vue)
--   [GitHub repo of React implementation of SAP Fiori Fundamentals](https://github.com/SAP/fundamental-react)
+The library is currently in beta and under heavy development.
 
 ## Requirements
 
-To download and use this library, you first need to install the node package manager.
-https://www.npmjs.com/get-npm
+To download and use Fundamental NGX, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental NGX is intended for use with Angular 5 or newer. You should have some knowledge of Angular before using this library.
+Fundamental NGX is intended for use with Angular 5 or newer.
 
-## Download and Installation
+Prior knowledge of Angular is recommended.
 
-#### 1. Download Fundamental NGX and Fiori Fundamentals
+## Getting Started
 
-`npm install --save fiori-fundamentals fundamental-ngx`
+For an existing Angular application,
 
-#### 2. Include the Fiori Fundamentals CSS in your Angular application. Open your `angular.json` file and add the following to the `styles` array:
+1. **Install Fundamental-ngx and Fiori Fundamentals.**
 
-`"./node_modules/fiori-fundamentals/dist/fiori-fundamentals.css"`
+      `npm install --save fiori-fundamentals fundamental-ngx`
 
-Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.
+2. **Include Fiori Fundamentals CSS in the `styles` array of the `angular.json` file.**
 
-#### 3. You can import all of Fundamental NGX at once, or you can import individual components as you need them. To import the whole library, add:
+      `"./node_modules/fiori-fundamentals/dist/fiori-fundamentals.css"`
 
-`import { FundamentalNgxModule } from 'fundamental-ngx';`
+      *Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.*
 
-To your app's module definition. Also add `FundamentalNgxModule` to the `imports` array in the @NgModule declaration.
+3. **Import the modules you want to use.**
 
-To include an individual Angular Fundamental component in your application, you only need to import the relevant module. For example, to use Alerts, add
+      To add the entire library, add
 
-`import { AlertModule } from 'fundamental-ngx/alert/alert.module';`
+      `import { FundamentalNgxModule } from 'fundamental-ngx';`
 
-to the file that declares the module you're adding alerts to. It can also be added to the app module declaration to be used site-wide. You also need to add `AlertModule` to your app or module's `imports` array.
+      to your app's module definition. Also add `FundamentalNgxModule` to the `imports` array in the @NgModule declaration.
 
-#### 4. Add the component to your HTML.
+      To include an individual Angular Fundamental component in your application, you only need to import the relevant module. 
+  
+      For example, to use Alerts, add 
 
-`<fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)"> A dismissible warning type alert. </fd-alert>`
+      `import { AlertModule } from 'fundamental-ngx/alert/alert.module';`
+
+      to the file that declares the module you're adding alerts to. It can also be added to the app module declaration to be used site-wide. You also need to add `AlertModule` to your app or module's `imports` array.
+
+4. **Add the component to your HTML.**
+
+      `<fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)"> A warning type alert. </fd-alert>`
 
 ## Demo Application
 
-This repository contains a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo app utilizes the Angular Fundamental source code in this repository, so changes you make to any component's source will be reflected in the demo app.
+The documentation serves as a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo application utilizes the Angular Fundamental source code in this repository, so changes you make to any component source will be reflected in the demo app.
 
-View live demo [here](https://sap.github.io/fundamental-ngx/).
+View the live demo [here](https://github.com/SAP/fundamental-ngx/tree/develop/docs).
 
 ## Tests
 
-To run the unit tests for the fundamental-ngx component library, run `ng test fundamental-ngx`. Append `--code-coverage` to generate code coverage documentation.
+Fundamental NGX makes use of Jasmine and Karma for its unit tests. 
+
+Run `ng test fundamental-ngx`. Append `--code-coverage` to generate code coverage documentation.
 
 ## Known Issues
 
-Click [here](https://github.com/SAP/fundamental-ngx/issues) to view the current issues.
+There are no known major issues. 
 
-## How to obtain support
+## Support
 
-If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues) or write an email to fundamental@sap.com
+If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues) or write an email to fundamental@sap.com.
 
 ## Contributing
 
@@ -72,4 +104,10 @@ Check out the [NEW_COMPONENT.md](./NEW_COMPONENT.md) guide on building a new com
 ## License
 
 Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE file](https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt)
+This file is licensed under the Apache Software License, v.2 except as noted otherwise in the [LICENSE file](https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt).
+
+## Similar Projects
+
+[Fundamental-react](https://github.com/SAP/fundamental-react)
+
+[Fundamental-vue](https://github.com/SAP/fundamental-vue)

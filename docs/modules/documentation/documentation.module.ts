@@ -214,6 +214,7 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -400,6 +401,7 @@ const ROUTES: Routes = [
         SideNavigationLevelsExampleComponent,
         SideNavigationTitlesExampleComponent,
         TableExampleComponent,
+        TableCheckboxesExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
         TileActionsExampleComponent,
