@@ -1,1 +1,2 @@
-<fd-time [time]="timeObject"></fd-time>
+<fd-time (ngModelChange)="timeChange($event)" [(ngModel)]="timeObject"></fd-time>
+{{timeObject.hour}}, {{timeObject.minute}}, {{timeObject.second}},
