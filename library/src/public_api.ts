@@ -19,6 +19,7 @@ export * from './lib/form/form.module';
 export * from './lib/icon/icon.module';
 export * from './lib/identifier/identifier.module';
 export * from './lib/image/image.module';
+export * from './lib/utils/infinite-scroll.module';
 export * from './lib/inline-help/inline-help.module';
 export * from './lib/input-group/input-group.module';
 export * from './lib/list/list.module';
