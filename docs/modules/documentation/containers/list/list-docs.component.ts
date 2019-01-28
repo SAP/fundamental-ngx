@@ -7,7 +7,8 @@ import * as listActionsSrc from '!raw-loader!./examples/list-actions-example.com
 import * as listCheckboxSrc from '!raw-loader!./examples/list-checkbox-example.component.html';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
-import * as listSingleHtml from '!raw-loader!./examples/list-single-checkbox-example.component.html';
+import * as listSingleHtml from '!raw-loader!./examples/list-single-select-example.component.html';
+import * as listSingleTs from '!raw-loader!./examples/list-single-select-example.component.ts';
 
 @Component({
     selector: 'app-list',
@@ -682,6 +683,8 @@ export class ListDocsComponent implements OnInit {
     listCheckboxesHtml = listCheckboxSrc;
 
     listSingleSelectHtml = listSingleHtml;
+
+    listSingleSelectTs = listSingleTs;
 
     infiniteScrollCodeHTML = infiniteScrollSrcHtml;
 
