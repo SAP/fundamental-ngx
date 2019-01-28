@@ -1,0 +1,13 @@
+<fd-list>
+
+    <li fd-list-item *ngFor="let number of [0, 1, 2, 3, 4]">
+
+        <input type="radio" name="list" [value]="number" [(ngModel)]="this.selectedItem"/>
+
+        <span style="padding-left: 10px;">List item {{number}}</span>
+
+    </li>
+
+</fd-list>
+
+Selected Item: {{selectedItem}}
