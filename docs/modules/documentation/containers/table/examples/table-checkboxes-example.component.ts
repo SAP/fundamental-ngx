@@ -1,12 +1,10 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-table-checkboxes-example',
     templateUrl: './table-checkboxes-example.component.html'
 })
 export class TableCheckboxesExampleComponent {
-
-    @ViewChildren('localCheckbox') checkboxes: QueryList<any>;
 
     selectedRows = [];
 
@@ -18,48 +16,53 @@ export class TableCheckboxesExampleComponent {
             column2: 'Row 1',
             column3: 'Row 1',
             date: '09-07-18',
-            type: 'search'
+            type: 'search',
+            checked: false
         },
         {
             column1: 'Row 2',
             column2: 'Row 2',
             column3: 'Row 2',
             date: '09-07-18',
-            type: 'cart'
+            type: 'cart',
+            checked: false
         },
         {
             column1: 'Row 3',
             column2: 'Row 3',
             column3: 'Row 3',
             date: '09-07-18',
-            type: 'calendar'
+            type: 'calendar',
+            checked: false
         },
         {
             column1: 'Row 4',
             column2: 'Row 4',
             column3: 'Row 4',
             date: '09-07-18',
-            type: 'search'
+            type: 'search',
+            checked: false
         },
         {
             column1: 'Row 5',
             column2: 'Row 5',
             column3: 'Row 5',
             date: '09-07-18',
-            type: 'search'
+            type: 'search',
+            checked: false
         }
     ];
 
     select(event: any, row: number): void {
         if (event.srcElement.checked) {
             this.selectedRows.push(row);
+            this.tableRows[row].checked = true;
         } else {
             this.selectedRows.splice(this.selectedRows.indexOf(row), 1);
+            this.tableRows[row].checked = false;
         }
 
-        if (this.checkIfAllSelected()) {
-            this.allSelected = true;
-        }
+        this.allSelected = this.checkIfAllSelected();
     }
 
     selectMaster() {
@@ -73,9 +76,9 @@ export class TableCheckboxesExampleComponent {
     }
 
     private selectAll(): void {
-        this.checkboxes.forEach((checkbox, index) => {
-            if (checkbox.nativeElement.checked === false) {
-                checkbox.nativeElement.checked = true;
+        this.tableRows.forEach((row, index) => {
+            if (row.checked === false) {
+                row.checked = true;
                 this.selectedRows.push(index);
             }
         });
@@ -83,8 +86,8 @@ export class TableCheckboxesExampleComponent {
     }
 
     private deselectAll(): void {
-        this.checkboxes.forEach(checkbox => {
-            checkbox.nativeElement.checked = false;
+        this.tableRows.forEach(row => {
+            row.checked = false;
         });
         this.allSelected = false;
         this.selectedRows = [];
@@ -92,8 +95,8 @@ export class TableCheckboxesExampleComponent {
 
     private checkIfAllSelected(): boolean {
         let state = true;
-        this.checkboxes.forEach(checkbox => {
-            if (checkbox.nativeElement.checked === false) {
+        this.tableRows.forEach(row => {
+            if (row.checked === false) {
                 state = false;
             }
         });

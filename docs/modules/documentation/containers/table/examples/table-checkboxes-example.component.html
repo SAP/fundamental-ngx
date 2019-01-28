@@ -10,7 +10,7 @@
     <fd-table-body>
         <tr *ngFor="let row of tableRows; let i = index">
             <td>
-                <input #localCheckbox type="checkbox" (change)="select($event, i)"/>
+                <input type="checkbox" [checked]="row.checked" (change)="select($event, i)"/>
             </td>
             <td>{{row.column1}}</td>
             <td>{{row.column2}}</td>

@@ -18,5 +18,7 @@ export class ModalContentComponent {
 
     @Input() description: string;
 
+    @Input() title = 'Modal Content';
+
     constructor(public modalService: ModalService)  {}
 }
