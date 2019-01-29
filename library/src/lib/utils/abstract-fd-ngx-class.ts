@@ -19,7 +19,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     abstract _setProperties(): void;
 
     _addClassToElement(className: string) {
-        (this._elementRef.nativeElement as HTMLElement).classList.add(className);
+        (this._elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
     }
 
     _addStyleToElement(attribute, value) {

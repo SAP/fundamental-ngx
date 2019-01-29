@@ -38,9 +38,19 @@
 
 <separator></separator>
 
+<h2>Single Select List</h2>
+<description>Some lists may require the user to only select one item. In those cases, a radio button is the best-fitting input. There is no formal support for this feature, though an example on how to accomplish it is provided below.</description>
+<component-example [name]="'ex3'">
+    <fd-single-select-example></fd-single-select-example>
+</component-example>
+<code-example [code]="listSingleSelectHtml" [language]="'HTML'"></code-example>
+<code-example [code]="listSingleSelectTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
 <h2>Checkbox List</h2>
 <description>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</description>
-<component-example [name]="'ex3'">
+<component-example [name]="'ex4'">
   <fd-list-checkbox-example></fd-list-checkbox-example>
 </component-example>
 <code-example [code]="listCheckboxesHtml" [language]="'HTML'"></code-example>
@@ -49,7 +59,7 @@
 
 <h2>Infinite Scroll List</h2>
 <description>It is possible to implement an infinite scroll function using the fdInfiniteScroll directive. It allows you to load more data as the user scrolls down the parent element. It is important to remember that the <code>InfiniteScrollModule</code> is required for this feature.</description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
 </component-example>
 <code-example [code]="infiniteScrollCodeHTML" [language]="'HTML'"></code-example>
