@@ -203,6 +203,8 @@ import { ModalInModalSecondComponent } from './containers/modal/examples/modal-i
 import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
+import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
+import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -214,7 +216,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -393,6 +394,7 @@ const ROUTES: Routes = [
         PaginationExampleComponent,
         PopoverExampleComponent,
         SearchInputExampleComponent,
+        SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,

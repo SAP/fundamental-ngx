@@ -1,12 +1,26 @@
-<fd-search-input [(ngModel)]="searchTerm"
-                 [dropdownValues]="dropdownValues"
-                 [searchFunction]="exampleSearchFunction">
-</fd-search-input>
-<br/>
+Standard
 <fd-search-input [(ngModel)]="searchTerm"
                  [dropdownValues]="dropdownValues"
                  [searchFunction]="exampleSearchFunction"
-                 [compact]="true">
+                 [placeholder]="'Type some text...'">
+</fd-search-input>
+<br/>
+
+No Highlighting
+<fd-search-input [(ngModel)]="searchTerm"
+                 [dropdownValues]="dropdownValues"
+                 [searchFunction]="exampleSearchFunction"
+                 [highlight]="false"
+                 [placeholder]="'Type some text...'">
+</fd-search-input>
+<br />
+
+Compact
+<fd-search-input [(ngModel)]="searchTerm"
+                 [dropdownValues]="dropdownValues"
+                 [searchFunction]="exampleSearchFunction"
+                 [compact]="true"
+                 [placeholder]="'Type some text...'">
 </fd-search-input>
 <br/>
 <span>searchTerm: {{searchTerm}}</span>
