@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FundamentalNgxComponent } from './fundamental-ngx.component';
 import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
+import { AlertService } from './alert/alert.service';
 import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
@@ -79,6 +80,6 @@ import { InfiniteScrollModule } from './utils/infinite-scroll.module';
         ToggleModule,
         TreeModule
     ],
-    providers: [ModalService]
+    providers: [AlertService, ModalService]
 })
 export class FundamentalNgxModule {}

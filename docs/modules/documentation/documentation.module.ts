@@ -67,6 +67,8 @@ import {
     ActionBarMobileExampleComponent
 } from './containers/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './containers/alert/examples/alert-example.component';
+import { AlertComponentAsContentExampleComponent } from './containers/alert/examples/alert-component-as-content-example.component';
+import { AlertContentComponent } from './containers/alert/examples/alert-content.component';
 import {
     BadgeDefaultExampleComponent,
     BadgeFilledExampleComponent,
@@ -322,6 +324,8 @@ const ROUTES: Routes = [
         ActionBarMobileExampleComponent,
         ActionBarNoBackExampleComponent,
         AlertExampleComponent,
+        AlertComponentAsContentExampleComponent,
+        AlertContentComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
@@ -437,7 +441,8 @@ const ROUTES: Routes = [
     entryComponents: [
         ModalContentComponent,
         ModalInModalComponent,
-        ModalInModalSecondComponent
+        ModalInModalSecondComponent,
+        AlertContentComponent
     ],
     imports: [
         HighlightJsModule.forRoot({

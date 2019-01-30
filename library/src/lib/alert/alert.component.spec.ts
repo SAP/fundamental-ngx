@@ -2,21 +2,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 import { HashService } from '../utils/hash.service';
+import { AlertService } from './alert.service';
 
 describe('AlertComponent', () => {
     let component: AlertComponent;
     let fixture: ComponentFixture<AlertComponent>;
-    let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
         const hashSpy = jasmine.createSpyObj('HashService', ['hash']);
+        const alertServiceSpy = jasmine.createSpyObj('AlertService', ['open', 'popAlert', 'getAlertCount']);
 
         TestBed.configureTestingModule({
             declarations: [AlertComponent],
-            providers: [{ provide: HashService, useValue: hashSpy }]
+            providers: [{ provide: HashService, useValue: hashSpy }, { provide: AlertService, useValue: alertServiceSpy }]
         }).compileComponents();
-
-        hashServiceSpy = TestBed.get(HashService);
     }));
 
     beforeEach(() => {
