@@ -42,8 +42,4 @@ export class AlertService {
         this.alertRef[this.alertRef.length - 1].open();
         return this.alertRef[this.alertRef.length - 1];
     }
-
-    getAlertCount() {
-        return this.alertRef.length;
-    }
 }

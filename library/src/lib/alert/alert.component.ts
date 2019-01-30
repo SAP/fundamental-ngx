@@ -6,8 +6,8 @@ import {
     Output,
     Inject,
     ElementRef,
-    QueryList,
-    ContentChildren, ChangeDetectorRef
+    ChangeDetectorRef,
+    ViewChild
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { AlertService } from './alert.service';
@@ -31,7 +31,12 @@ export class AlertComponent implements OnInit {
 
     generatedId: string;
 
-    constructor(@Inject(HashService) private hasher: HashService, private elRef: ElementRef, private alertService: AlertService, private cd: ChangeDetectorRef) {}
+    @ViewChild('alertDiv') alertDiv;
+
+    constructor(@Inject(HashService) private hasher: HashService,
+                private elRef: ElementRef,
+                private alertService: AlertService,
+                private cd: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.generatedId = this.hasher.hash();
@@ -39,8 +44,7 @@ export class AlertComponent implements OnInit {
          modal should be hidden on init
          */
         this.elRef.nativeElement.style.display = 'none';
-        const alertDiv = <HTMLElement>this.elRef.nativeElement.querySelector('.fd-alert');
-        alertDiv.style.display = 'none';
+        this.alertDiv.nativeElement.style.display = 'none';
     }
 
     getId() {
@@ -53,8 +57,7 @@ export class AlertComponent implements OnInit {
 
     handleClose(result?, fromService?) {
         this.elRef.nativeElement.style.display = 'none';
-        const alertDiv = <HTMLElement>this.elRef.nativeElement.querySelector('.fd-alert');
-        alertDiv.style.display = 'none';
+        this.alertDiv.nativeElement.style.display = 'none';
         this.close.emit(this.id);
         if (!fromService) {
             this.alertService.popAlert();
@@ -66,9 +69,8 @@ export class AlertComponent implements OnInit {
         if (this.elRef.nativeElement.style.display !== 'block') {
             const top = this.getTop();
             this.elRef.nativeElement.style.display = 'block';
-            const alertDiv = <HTMLElement>this.elRef.nativeElement.querySelector('.fd-alert');
-            alertDiv.style.display = 'block';
-            alertDiv.style.top = top;
+            this.alertDiv.nativeElement.style.display = 'block';
+            this.alertDiv.nativeElement.style.top = top;
             this.show = true;
             this.cd.detectChanges();
             setTimeout(() => {

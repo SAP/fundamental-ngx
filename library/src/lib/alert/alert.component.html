@@ -2,7 +2,7 @@
         'fd-alert--warning': (type === 'warning'),
         'fd-alert--error': (type === 'error'),
         'fd-alert--information': (type === 'information'),
-        'fd-alert--success': (type === 'success')}">
+        'fd-alert--success': (type === 'success')}" #alertDiv>
     <button class="fd-alert__close"
             *ngIf="dismissible"
             (click)="handleClose()"
