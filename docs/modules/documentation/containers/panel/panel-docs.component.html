@@ -19,7 +19,6 @@
   ],
   inputs: [
     { name: 'colSpan',   description: 'If this panel is part of a panel grid, this value dictates how many columns in the grid the panel will occupy.'},
-    { name: 'rowSpan',  description: 'If this panel is part of a panel grid, this value dictates how many rows in the grid the panel will occupy.'},
     { name: 'backgroundImage', description: 'Optional string URL for the panel background image.'}
   ]
 }"></properties>
@@ -92,7 +91,7 @@
 <h2>Panel Grid with row and column span</h2>
 <component-example [name]="'ex1'">
   <p>
-    <fd-panel-row-column-example></fd-panel-row-column-example>
+    <fd-panel-grid-column-span-example></fd-panel-grid-column-span-example>
   </p>
 </component-example>
 <code-example [code]="columnSpanPanelGridHtml" [language]="'HTML'"></code-example>
