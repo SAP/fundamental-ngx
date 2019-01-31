@@ -12,7 +12,7 @@
     "e2e": "ng e2e",
     "build-src": "gulp build-src",
     "build-deploy-docs": "ng build --prod --base-href=\"/fundamental-ngx/\" && angular-cli-ghpages --branch gh-pages",
-    "build-deploy-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm publish && cd ../..",
+    "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md && cd dist/fundamental-ngx && npm publish && cd ../..",
     "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../.."
   },
   "publishConfig": {
