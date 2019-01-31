@@ -204,6 +204,7 @@ import { ModalInModalExampleComponent } from './containers/modal/examples/modal-
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
+import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
 import { ListSingleSelectExampleComponent } from './containers/list/examples/list-single-select-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
@@ -395,6 +396,7 @@ const ROUTES: Routes = [
         PaginationExampleComponent,
         PopoverExampleComponent,
         SearchInputExampleComponent,
+        SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,

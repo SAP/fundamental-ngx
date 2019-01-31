@@ -94,7 +94,7 @@ export class PopoverComponent implements OnInit, AfterViewInit {
                 const targetElement = <HTMLElement>target;
                 if (!this.isOpen) {
                     this.isOpen = true;
-                } else if (this.isOpen && targetElement.classList && targetElement.classList.contains('sap-icon--search')) {
+                } else if (this.isOpen && targetElement.tagName === 'BUTTON') {
                     this.isOpen = false;
                 }
             }
