@@ -1,22 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 import { HashService } from '../utils/hash.service';
+import { AlertService } from './alert.service';
 
 describe('AlertComponent', () => {
     let component: AlertComponent;
     let fixture: ComponentFixture<AlertComponent>;
-    let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
         const hashSpy = jasmine.createSpyObj('HashService', ['hash']);
+        const alertServiceSpy = jasmine.createSpyObj('AlertService', ['open', 'popAlert']);
 
         TestBed.configureTestingModule({
             declarations: [AlertComponent],
-            providers: [{ provide: HashService, useValue: hashSpy }]
+            providers: [{ provide: HashService, useValue: hashSpy }, { provide: AlertService, useValue: alertServiceSpy }]
         }).compileComponents();
-
-        hashServiceSpy = TestBed.get(HashService);
     }));
 
     beforeEach(() => {
@@ -34,5 +33,35 @@ describe('AlertComponent', () => {
         expect(component.generatedId).toBeDefined();
         component.close.subscribe(id => expect(id).toBe(component.id));
         component.handleClose();
+        component.id = 'someId';
+        const id = component.getId();
+        expect(id).toEqual('someId');
+    });
+
+    it('should handle open function', fakeAsync(() => {
+        component.ngOnInit();
+        spyOn(component, 'getTop').and.returnValue('10px');
+        spyOn(component, 'handleClose');
+        component.open();
+        expect(component.getTop).toHaveBeenCalled();
+        expect(component.alertDiv.nativeElement.style.display).toEqual('block');
+        expect(component.alertDiv.nativeElement.style.top).toEqual('10px');
+        expect(component.show).toBeTruthy();
+        fixture.whenStable().then(() => {
+            tick(15000);
+            fixture.detectChanges();
+            expect(component.show).toBeFalsy();
+            tick(1000);
+            fixture.detectChanges();
+            expect(component.handleClose).toHaveBeenCalled();
+        });
+    }));
+
+    it('should handle getTop function', () => {
+        spyOn(document, 'querySelectorAll').and.returnValue([
+            {style: {display: 'block'}, offsetHeight: 10}
+        ]);
+        const retVal = component.getTop();
+        expect(retVal).toEqual('30px');
     });
 });

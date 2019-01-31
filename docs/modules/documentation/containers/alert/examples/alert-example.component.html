@@ -1,38 +1,27 @@
-<p>
-    <fd-alert [dismissible]="true" [type]="'warning'" (close)="showAlert($event)">
-        A dismissible warning type alert.
-    </fd-alert>
-</p>
-
-<p>
-    <fd-alert [dismissible]="true" [type]="'success'" (close)="showAlert($event)" [id]="'success_alert_1'">      
-        A success error type alert.      
-    </fd-alert>
-</p>
-
-<p>
-    <fd-alert [dismissible]="true" [type]="'information'" (close)="showAlert($event)" [id]="'information_alert_1'">      
-        A dismissible information type alert.      
-    </fd-alert>
-</p>
-
-<p>
-    <fd-alert [dismissible]="true" [type]="'error'" (close)="showAlert($event)">
-        <div>
-            <h3>A dismissible error type alert with template.</h3>
-            <p>More information...</p>
-        </div>
-    </fd-alert>
-</p>
-
-<p>
-    <fd-alert [dismissible]="false">
-        A normal type alert.
-    </fd-alert>
-</p>
-
-<p>
-    <fd-alert [dismissible]="false">
-        An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a>
-    </fd-alert>
-</p>
+<fd-alert [dismissible]="true" [type]="'warning'" (close)="closeAlert($event)" #warningAlert>
+    A dismissible warning type alert.
+</fd-alert>
+<fd-alert [dismissible]="true" [type]="'success'" (close)="closeAlert($event)" [id]="'success_alert_1'" #successAlert>
+    A success type alert.
+</fd-alert>
+<fd-alert [dismissible]="true" [type]="'information'" (close)="closeAlert($event)" [id]="'information_alert_1'" #informationAlert>
+    A dismissible information type alert.
+</fd-alert>
+<fd-alert [dismissible]="true" [type]="'error'" (close)="closeAlert($event)" #errorAlert>
+    <div>
+        <h3>A dismissible error type alert with template.</h3>
+        <p>More information...</p>
+    </div>
+</fd-alert>
+<fd-alert [dismissible]="false" #normalAlert>
+    A normal type alert.
+</fd-alert>
+<fd-alert [dismissible]="false" #linkAlert>
+    An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a>
+</fd-alert>
+<button fd-button (click)="showAlert(warningAlert)">Show Dismissible Warning Alert</button>
+<button fd-button (click)="showAlert(successAlert)">Show Success Alert</button>
+<button fd-button (click)="showAlert(informationAlert)">Show Dismissible Information Alert</button>
+<button fd-button (click)="showAlert(errorAlert)">Show Error Alert with Template</button>
+<button fd-button (click)="showAlert(normalAlert)">Show Normal Alert</button>
+<button fd-button (click)="showAlert(linkAlert)">Show Link Alert</button>
