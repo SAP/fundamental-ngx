@@ -12,7 +12,7 @@
       <a href="https://travis-ci.org/SAP/fundamental-ngx">
             <img src="https://travis-ci.org/SAP/fundamental-ngx.svg?branch=develop" alt="Build Status">
       </a>
-      <a href="https://badge.fury.io/js/fundamental-ngx">
+      <a href="https://www.npmjs.com/package/fundamental-ngx">
             <img src="https://badge.fury.io/js/fundamental-ngx.svg" alt="npm version">
       </a>
       <a href="https://ui-fundamentals.slack.com">

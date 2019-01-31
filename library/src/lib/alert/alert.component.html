@@ -1,7 +1,13 @@
-<button class="fd-alert__close"
-        *ngIf="dismissible"
-        (click)="handleClose()"
-        [attr.aria-controls]="id"
-        aria-label="Close">
-</button>
-<ng-content></ng-content>
+<div class="fd-alert fd-alert-fade" [class.fd-alert-show]="show" role="alert" [attr.id]="getId()" [ngClass]="{'fd-alert--dismissible': dismissible,
+        'fd-alert--warning': (type === 'warning'),
+        'fd-alert--error': (type === 'error'),
+        'fd-alert--information': (type === 'information'),
+        'fd-alert--success': (type === 'success')}" #alertDiv>
+    <button class="fd-alert__close"
+            *ngIf="dismissible"
+            (click)="handleClose()"
+            [attr.aria-controls]="id"
+            aria-label="Close">
+    </button>
+    <ng-content></ng-content>
+</div>

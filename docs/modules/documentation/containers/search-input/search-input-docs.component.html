@@ -4,7 +4,9 @@
 <separator></separator>
 
 <h1>&lt;fd-search-input&gt;</h1>
-<description>Search input with a list of results that filters automatically.</description>
+<description>
+    Search input with a list of results that filters automatically through a <strong>startsWith</strong> pipe.
+</description>
 
 <properties [properties]="{
   inputs: [
@@ -14,14 +16,31 @@
     { name: 'disabled', description: 'Boolean, disables the search input.'},
     { name: 'placeholder', description: 'Placeholder for the search input.'},
     { name: 'inShellbar', description: 'Boolean, set to \'true\' if this search is for use within the shellbar.'},
-    { name: 'compact', description: 'Boolean, set to \'true\' for the compact search input.'}
+    { name: 'compact', description: 'Boolean, set to \'true\' for the compact search input.'},
+    { name: 'glyph', description: 'String, use to select what icon appears in the button. Defaults to search.' },
+    { name: 'highlight', description: 'Boolean, whether to highlight the search term in the results, if it is included. Defaults to true.' },
+    { name: 'usingCustomFilter', description: 'Boolean, whether you are handling the filtration by yourself, or allowing the built-in pipe to do it. Defaults to false.' }
+  ],
+  outputs: [
+    { name: 'itemClicked', description: 'Fired when an item in the menu is clicked.'}
   ]
 }"></properties>
 
 <separator></separator>
 
+<h2>Standard Search Input</h2>
+<description>The standard version of the component that most people will likely use regularly.</description>
 <component-example [name]="'ex1'">
     <fd-search-input-example></fd-search-input-example>
 </component-example>
 <code-example [code]="searchInputExampleHtml" [language]="'HTML'"></code-example>
 <code-example [code]="searchInputExampleTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Custom Filter</h2>
+<description>The search input can be used with a custom filter that is decided outside the component.<br /><br />To accomplish this, you will need to set the <code>[usingCustomFilter]</code> flag to true, like shown below. To display nothing when the user first clicks inside, simply set the starting Subject value to an empty array.</description>
+<component-example [name]="'ex2'">
+    <fd-search-input-dynamic-example></fd-search-input-dynamic-example>
+</component-example>
+<code-example [code]="searchInputDynamicHtml" [language]="'HTML'"></code-example>
+<code-example [code]="searchInputDynamicTs" [language]="'typescript'"></code-example>

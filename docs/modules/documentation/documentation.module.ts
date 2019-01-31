@@ -67,6 +67,8 @@ import {
     ActionBarMobileExampleComponent
 } from './containers/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './containers/alert/examples/alert-example.component';
+import { AlertComponentAsContentExampleComponent } from './containers/alert/examples/alert-component-as-content-example.component';
+import { AlertContentComponent } from './containers/alert/examples/alert-content.component';
 import {
     BadgeDefaultExampleComponent,
     BadgeFilledExampleComponent,
@@ -203,6 +205,9 @@ import { ModalInModalSecondComponent } from './containers/modal/examples/modal-i
 import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
+import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
+import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
+import { ListSingleSelectExampleComponent } from './containers/list/examples/list-single-select-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -214,7 +219,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -322,6 +326,8 @@ const ROUTES: Routes = [
         ActionBarMobileExampleComponent,
         ActionBarNoBackExampleComponent,
         AlertExampleComponent,
+        AlertComponentAsContentExampleComponent,
+        AlertContentComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
@@ -375,6 +381,7 @@ const ROUTES: Routes = [
         ListCheckboxExampleComponent,
         ListExampleComponent,
         ListInfiniteScrollExampleComponent,
+        ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
         ModalExampleComponent,
@@ -393,6 +400,7 @@ const ROUTES: Routes = [
         PaginationExampleComponent,
         PopoverExampleComponent,
         SearchInputExampleComponent,
+        SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,
@@ -437,7 +445,8 @@ const ROUTES: Routes = [
     entryComponents: [
         ModalContentComponent,
         ModalInModalComponent,
-        ModalInModalSecondComponent
+        ModalInModalSecondComponent,
+        AlertContentComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
