@@ -43,7 +43,7 @@ export class PanelGridNoGapExampleComponent {}
 export class PanelColumnsExampleComponent {}
 
 @Component({
-    selector: 'fd-panel-row-column-example',
-    templateUrl: './panel-row-column-example.component.html'
+    selector: 'fd-panel-grid-column-span-example',
+    templateUrl: './panel-grid-column-span-example.component.html'
 })
-export class PanelRowColumnExampleComponent {}
+export class PanelGridColumnSpanExampleComponent {}

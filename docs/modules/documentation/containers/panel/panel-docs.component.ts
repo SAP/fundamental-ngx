@@ -5,7 +5,7 @@ import * as panelEdgeBleedSrc from '!raw-loader!./examples/panel-edge-bleed-exam
 import * as panelSrc from '!raw-loader!./examples/panel-example.component.html';
 import * as panelGridSrc from '!raw-loader!./examples/panel-grid-example.component.html';
 import * as panelGridNoGapSrc from '!raw-loader!./examples/panel-grid-nogap-example.component.html';
-import * as panelRowColumnSrc from '!raw-loader!./examples/panel-row-column-example.component.html';
+import * as panelRowColumnSrc from '!raw-loader!./examples/panel-grid-column-span-example.component.html';
 
 @Component({
     selector: 'app-panel',
