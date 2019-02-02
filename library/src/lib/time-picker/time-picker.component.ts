@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
