@@ -24,8 +24,10 @@ export class TabListComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         this.selected = this.tabs.first;
-        this.tabs.forEach(tab => {
-            tab === this.selected ? (tab.expanded = true) : (tab.expanded = false);
+        setTimeout(() => {
+            this.tabs.forEach(tab => {
+                tab === this.selected ? (tab.expanded = true) : (tab.expanded = false);
+            });
         });
     }
 
