@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, ViewChild } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ]
 })
-export class TimePickerComponent implements ControlValueAccessor {
+export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
@@ -43,8 +43,14 @@ export class TimePickerComponent implements ControlValueAccessor {
 
     isOpen: boolean;
 
-    onChange: Function = () => {};
+    placeholder: string;
+
+    onChange: Function = (time: TimeObject) => {};
     onTouched: Function = () => {};
+
+    ngOnInit(): void {
+        this.placeholder = this.getPlaceholder();
+    }
 
     getTime() {
         return this.time;
@@ -96,7 +102,7 @@ export class TimePickerComponent implements ControlValueAccessor {
             }
         }
 
-        return formattedTime;
+        return formattedTime !== undefined ? formattedTime : '';
     }
 
     timeInputChanged(timeFromInput) {
@@ -204,7 +210,7 @@ export class TimePickerComponent implements ControlValueAccessor {
         return retVal;
     }
 
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: (time: TimeObject) => void): void {
         this.onChange = fn;
     }
 

@@ -28,9 +28,6 @@ export class TimePickerNoSecondsExampleComponent {
 
     timePickerNoSecondsObject = { hour: 12, minute: 0, second: null };
 
-    changeTime() {
-        this.timePickerNoSecondsObject = { hour: ++this.timePickerNoSecondsObject.hour, minute: 0, second: null}
-    }
 }
 
 @Component({
