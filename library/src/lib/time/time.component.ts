@@ -30,13 +30,14 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     @Input() displaySeconds: boolean = true;
 
+    @Input()
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
     oldPeriod: string;
 
     periodInvalid: boolean;
 
     displayedHour: number;
-
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     @Input()
     setDisplayedHour() {
