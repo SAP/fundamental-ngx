@@ -9,10 +9,6 @@ export class TimeExampleComponent {
     @Input()
     timeObject = { hour: 14, minute: 3, second: 2 };
 
-    timeChange($event) {
-        console.log($event);
-    }
-
 }
 
 @Component({
@@ -21,8 +17,7 @@ export class TimeExampleComponent {
 })
 export class Time12ExampleComponent {
 
-    timeMeridianObject = { hour: 12, minute: 0, second: 0 };
-
+    timeMeridianObject = { hour: 9, minute: 0, second: 0 };
 }
 
 @Component({
