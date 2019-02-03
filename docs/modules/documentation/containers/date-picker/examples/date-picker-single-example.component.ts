@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 
 @Component({
 selector: 'fd-date-picker-single-example',
-template: ` <fd-date-picker [type]="'single'" [(selectedDay)]="selectedDay"></fd-date-picker>
+template: ` <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay"></fd-date-picker>
             <br/>
-            <div>Selected Date: {{selectedDay.date.toDateString()}}</div>
+            <div>Selected Date: {{selectedDay.selected.toDateString()}}</div>
             <br/>
-            <fd-date-picker [type]="'single'" [(selectedDay)]="selectedDay" compact="true"></fd-date-picker>
-            <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
+            <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay" compact="true"></fd-date-picker>
+            <div>Selected Date: {{selectedDay.selected.toDateString()}}</div>`
 })
 export class DatePickerSingleExampleComponent {
 
     selectedDay = {
-        date: new Date()
+        selected: new Date()
     };
 
 }

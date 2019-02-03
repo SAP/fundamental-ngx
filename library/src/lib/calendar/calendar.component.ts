@@ -640,7 +640,6 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         if (changes.dateFromDatePicker) {
             if (changes.dateFromDatePicker.currentValue.length > 0) {
                 let dateFromDatePickerInput = changes.dateFromDatePicker.currentValue;
-
                 if (this.calType === 'single') {
                     let singleDate = dateFromDatePickerInput.replace(/\s/g, '');
                     singleDate = singleDate.split(/[/]+/);
@@ -675,6 +674,10 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
                             this.selectedRangeFirst.date = fDate;
                             this.selectedRangeLast.date = lDate;
                         }
+                        this.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
+                        this.year = this.date.getFullYear();
+                        this.month = this.date.getMonth();
+                        this.monthName = this.monthsFullName[this.date.getMonth()];
                         this.isInvalidDateInput.emit(this.invalidDate);
                         this.constructCalendar();
                     } else {
