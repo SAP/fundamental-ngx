@@ -6,12 +6,13 @@ import {
     Output,
     HostListener,
     ElementRef,
-    SimpleChanges,
-    OnChanges,
     Inject,
-    AfterViewChecked
+    forwardRef,
+    OnDestroy, AfterViewChecked
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -40,15 +41,26 @@ export interface EmittedDate {
 @Component({
     selector: 'fd-calendar',
     templateUrl: './calendar.component.html',
-    styleUrls: ['calendar.component.scss']
+    styleUrls: ['calendar.component.scss'],
+    host: {
+        '(blur)': 'onTouched()'
+    },
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CalendarComponent),
+            multi: true
+        }
+    ]
 })
-export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
+export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor {
     calendarId: string;
 
     newFocusedDayId: string;
 
     @Input()
-    dateFromDatePicker: string;
+    dateFromDatePicker: BehaviorSubject<any>;
+
     @Input()
     calType: CalendarType = 'single';
 
@@ -122,6 +134,11 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     selectedMonth: number;
     firstYearCalendarList: number = this.year;
     selectCounter: number = 0;
+
+    onChange: Function = () => {
+    };
+    onTouched: Function = () => {
+    };
 
     @Input()
     selectedDay: CalendarDay = {
@@ -339,7 +356,33 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         }
 
         this.calendarGrid = calendarGrid;
-        this.updateDatePickerInputEmitter();
+
+        // TODO maybe remove?
+        //this.updateDatePickerInputEmitter();
+    }
+
+    refreshSelected() {
+        this.calendarGrid.forEach(grid => {
+            grid.forEach(day => {
+                day.selected =
+                    (this.selectedDay.date && day.date.toDateString() === this.selectedDay.date.toDateString()) ||
+                    (this.selectedRangeFirst.date &&
+                        day.date.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
+                    (this.selectedRangeLast.date &&
+                        day.date.toDateString() === this.selectedRangeLast.date.toDateString());
+                day.selectedFirst =
+                    this.selectedRangeFirst.date &&
+                    day.date.toDateString() === this.selectedRangeFirst.date.toDateString();
+                day.selectedLast =
+                    this.selectedRangeLast.date &&
+                    day.date.toDateString() === this.selectedRangeLast.date.toDateString();
+                day.selectedRange =
+                    this.selectedRangeFirst.date &&
+                    day.date.getTime() > this.selectedRangeFirst.date.getTime() &&
+                    this.selectedRangeLast.date &&
+                    day.date.getTime() < this.selectedRangeLast.date.getTime();
+            });
+        });
     }
 
     updateDatePickerInputEmitter() {
@@ -408,11 +451,16 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     }
 
     // Functions that handle selection (day, month, year)
-    selectDate(day) {
+    selectDate(day, formEvent: boolean = true) {
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDay = day;
                 this.selectedDayChange.emit(this.selectedDay);
+                this.refreshSelected();
+                this.updateDatePickerInputEmitter();
+                if (formEvent) {
+                    this.onChange({ date: day.date });
+                }
             } else {
                 if (this.selectCounter === 2) {
                     this.selectCounter = 0;
@@ -422,6 +470,11 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
                     this.selectedRangeLast = day;
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectCounter++;
+                    this.refreshSelected();
+                    this.updateDatePickerInputEmitter();
+                    if (formEvent) {
+                        this.onChange({ date: this.selectedRangeFirst.date, rangeEnd: day.date });
+                    }
                 }
 
                 if (this.selectCounter === 0) {
@@ -430,6 +483,11 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
                     this.selectedRangeFirst = day;
                     this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectCounter++;
+                    this.refreshSelected();
+                    this.updateDatePickerInputEmitter();
+                    if (formEvent) {
+                        this.onChange({ date: day.date, rangeEnd: day.date });
+                    }
                 }
 
                 if (this.selectedRangeFirst.date > this.selectedRangeLast.date) {
@@ -438,6 +496,11 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
                     this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectedRangeLast = tempSelectedRangeFirst;
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
+                    this.refreshSelected();
+                    this.updateDatePickerInputEmitter();
+                    if (formEvent) {
+                        this.onChange({ date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date });
+                    }
                 }
             }
         }
@@ -510,7 +573,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         }
     }
 
-    validateDateFromDatePicker(date: Array<number>): boolean {
+    validateDateFromDatePicker(date: Array<any>): boolean {
         let isInvalid: boolean = false;
         let month = date[0];
         let day = date[1];
@@ -636,73 +699,51 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         }
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.dateFromDatePicker) {
-            if (changes.dateFromDatePicker.currentValue.length > 0) {
-                let dateFromDatePickerInput = changes.dateFromDatePicker.currentValue;
+    updateFromDatePicker(date: any) {
+        if (this.calType === 'single') {
+            const singleDate = date.replace(/\s/g, '').split(/[/]+/);
+            this.invalidDate = this.validateDateFromDatePicker(singleDate);
+            if (!this.invalidDate) {
+                this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
+                this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
+                this.year = this.date.getFullYear();
+                this.month = this.date.getMonth();
+                this.monthName = this.monthsFullName[this.date.getMonth()];
+                this.isInvalidDateInput.emit(this.invalidDate);
+                this.constructCalendar();
+                this.updateDatePickerInputEmitter();
+            } else {
+                this.isInvalidDateInput.emit(this.invalidDate);
+                this.resetSelection();
+            }
+        } else {
+            const currentDates = date.replace(/\s/g, '').split(/[-,]+/);
+            const firstDate = currentDates[0].split(/[/]+/);
+            const secondDate = currentDates[1].split(/[/]+/);
+            this.invalidDate = this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
 
-                if (this.calType === 'single') {
-                    let singleDate = dateFromDatePickerInput.replace(/\s/g, '');
-                    singleDate = singleDate.split(/[/]+/);
-                    this.invalidDate = this.validateDateFromDatePicker(singleDate);
-
-                    if (!this.invalidDate) {
-                        this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
-                        this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
-                        this.year = this.date.getFullYear();
-                        this.month = this.date.getMonth();
-                        this.monthName = this.monthsFullName[this.date.getMonth()];
-                        this.isInvalidDateInput.emit(this.invalidDate);
-                        this.constructCalendar();
-                    } else {
-                        this.resetSelection();
-                        this.isInvalidDateInput.emit(this.invalidDate);
-                    }
+            if (!this.invalidDate) {
+                const fDate = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
+                const lDate = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
+                if (fDate.getTime() > lDate.getTime()) {
+                    this.selectedRangeFirst.date = lDate;
+                    this.selectedRangeLast.date = fDate;
                 } else {
-                    let currentDates = dateFromDatePickerInput.replace(/\s/g, '');
-                    currentDates = currentDates.split(/[-,]+/);
-                    let firstDate = currentDates[0].split(/[/]+/);
-                    let secondDate = currentDates[1].split(/[/]+/);
-                    this.invalidDate =
-                        this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
-                    if (!this.invalidDate) {
-                        let fDate = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
-                        let lDate = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
-                        if (fDate.getTime() > lDate.getTime()) {
-                            this.selectedRangeFirst.date = lDate;
-                            this.selectedRangeLast.date = fDate;
-                        } else {
-                            this.selectedRangeFirst.date = fDate;
-                            this.selectedRangeLast.date = lDate;
-                        }
-                        this.isInvalidDateInput.emit(this.invalidDate);
-                        this.constructCalendar();
-                    } else {
-                        this.resetSelection();
-                        this.isInvalidDateInput.emit(this.invalidDate);
-                    }
+                    this.selectedRangeFirst.date = fDate;
+                    this.selectedRangeLast.date = lDate;
                 }
+                this.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
+                this.year = this.date.getFullYear();
+                this.month = this.date.getMonth();
+                this.monthName = this.monthsFullName[this.date.getMonth()];
+                this.isInvalidDateInput.emit(this.invalidDate);
+                this.constructCalendar();
+                this.updateDatePickerInputEmitter();
+            } else {
+                this.resetSelection();
+                this.isInvalidDateInput.emit(this.invalidDate);
             }
         }
-        if (changes.selectedDay || changes.selectedRangeFirst || changes.selectedRangeLast) {
-            if (this.calType === 'single' && this.selectedDay) {
-                this.date = new Date(this.selectedDay.date);
-            }
-            if (this.calType === 'range' && changes.selectedRangeFirst) {
-                this.date = new Date(this.selectedRangeFirst.date);
-            }
-            if (this.calType === 'range' && changes.selectedRangeLast) {
-                this.date = new Date(this.selectedRangeLast.date);
-            }
-            this.month = this.date.getMonth();
-            this.monthName = this.monthsFullName[this.month];
-            this.year = this.date.getFullYear();
-            this.day = this.date.getDate();
-            this.firstYearCalendarList = this.year;
-            this.constructCalendar();
-            this.constructCalendarYearsList();
-        }
-        this.weekDays = this.mondayStartOfWeek ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     }
 
     ngOnInit() {
@@ -721,6 +762,14 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         } else {
             this.selectMonth(this.date.getFullYear());
         }
+
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.subscribe(date => {
+                if (date) {
+                    this.updateFromDatePicker(date);
+                }
+            });
+        }
     }
 
     ngAfterViewChecked() {
@@ -730,5 +779,64 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
         }
     }
 
-    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef) {}
+    ngOnDestroy() {
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.unsubscribe();
+        }
+    }
+
+    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef) {
+    }
+
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        // void
+    }
+
+    writeValue(selected: { date: Date, rangeEnd?: Date }): void {
+        if (selected && this.calType) {
+            if (selected.date && this.calType === 'single') {
+                this.singleFormsSetup(selected);
+            } else if (selected.date && selected.rangeEnd && this.calType === 'range') {
+                this.rangeFormsSetup(selected);
+            }
+        }
+    }
+
+    private singleFormsSetup(selected: { date: Date, rangeEnd?: Date }): void {
+        this.selectedDay.date = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
+        this.date = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
+        this.year = this.date.getFullYear();
+        this.month = this.date.getMonth();
+        this.monthName = this.monthsFullName[this.date.getMonth()];
+        this.firstYearCalendarList = this.year;
+        this.constructCalendar();
+        this.constructCalendarYearsList();
+    }
+
+    private rangeFormsSetup(selected: { date: Date, rangeEnd?: Date }): void {
+        const fDate = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
+        const lDate = new Date(selected.rangeEnd.getFullYear(), selected.rangeEnd.getMonth(), selected.rangeEnd.getDate());
+        if (fDate.getTime() > lDate.getTime()) {
+            this.selectedRangeFirst.date = lDate;
+            this.selectedRangeLast.date = fDate;
+        } else {
+            this.selectedRangeFirst.date = fDate;
+            this.selectedRangeLast.date = lDate;
+        }
+        this.date = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
+        this.year = this.date.getFullYear();
+        this.month = this.date.getMonth();
+        this.monthName = this.monthsFullName[this.date.getMonth()];
+        this.firstYearCalendarList = this.year;
+        this.constructCalendar();
+        this.constructCalendarYearsList();
+    }
 }
