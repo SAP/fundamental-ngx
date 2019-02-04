@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'fd-date-picker',
@@ -21,7 +22,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromDatePicker: string = '';
+    dateFromDatePicker = new BehaviorSubject<string>('');
 
     @Input()
     type: CalendarType = 'single';
@@ -99,7 +100,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
                 this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
                 this.selectedDay = d.selectedDay;
                 this.selectedDayChange.emit(this.selectedDay);
-                this.onChange({selected: this.selectedDay.date});
+                this.onChange({date: this.selectedDay.date});
             }
         } else {
             if (d.selectedFirstDay.date) {
@@ -108,7 +109,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
                 this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                 this.selectedRangeLastChange.emit(this.selectedRangeLast);
                 this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
-                this.onChange({selected: this.selectedRangeFirst.date, selectedSecond: this.selectedRangeLast.date});
+                this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
             }
         }
     }
@@ -118,7 +119,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     getInputValue(e) {
-        this.dateFromDatePicker = e;
+        this.dateFromDatePicker.next(e);
     }
 
     @HostListener('document:keydown.escape', [])
@@ -150,18 +151,17 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         // void for now
     }
 
-    writeValue(selected: {selected: Date, selectedSecond?: Date}): void {
+    writeValue(selected: {date: Date, rangeEnd?: Date}): void {
         if (!selected) {
             return;
         }
         if (this.type.toLocaleLowerCase() === 'single') {
-            this.selectedDay.date = selected.selected;
-            this.inputFieldDate = selected.selected.toLocaleDateString();
+            this.selectedDay.date = selected.date;
+            this.inputFieldDate = selected.date.toLocaleDateString();
         } else {
-            this.selectedRangeFirst.date = selected.selected;
-            this.selectedRangeLast.date = selected.selectedSecond;
-            this.inputFieldDate = selected.selected.toLocaleDateString() + ' - ' + selected.selectedSecond.toLocaleDateString();
-            this.dateFromDatePicker = this.inputFieldDate;
+            this.selectedRangeFirst.date = selected.date;
+            this.selectedRangeLast.date = selected.rangeEnd;
+            this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
         }
     }
 }

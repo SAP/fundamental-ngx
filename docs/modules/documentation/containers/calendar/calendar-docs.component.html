@@ -28,9 +28,11 @@
 
 <separator></separator>
 
-<h2>Calendar with single selection, disabled and blocked days</h2>
+<h2>Standard Calendar</h2>
 <description>
-  You can use two-way data binding to select a date or range of dates on a calendar.  Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
+  This example also features <strong>blocked</strong> and <strong>disabled</strong> days.
+  <br /><br />
+  You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
   To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
   Note that selecting a day (or range of days) in this manner will override any block/disable functions.
 </description>
@@ -44,13 +46,15 @@
 <code-example [code]="exampleFunctionsHtml" [language]="'typescript'"></code-example>
 <separator></separator>
 
-<h2>Calendar with range selection, selectedRangeFirst and selectedRangeLast</h2>
+<h2>Range Selection Calendar</h2>
+<description>Allows the selection of a range of dates. Only the first and last days of the range are passed back.</description>
 <component-example [name]="'ex2'">
   <fd-calendar-range-example></fd-calendar-range-example>
 </component-example>
 <code-example [code]="calendarRangeSource" [language]="'typescript'"></code-example>
 
-<h2>Calendar with Monday start of week</h2>
+<h2>Monday Start Calendar</h2>
+<description>Simply changes the order in which the days of the week appear.</description>
 <component-example [name]="'ex3'">
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
 </component-example>
