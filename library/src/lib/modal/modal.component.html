@@ -1,4 +1,4 @@
-<div class="fd-modal" [ngStyle]="{'z-index': 1001 * openModalCount}">
+<div class="fd-modal" [ngStyle]="{'z-index': 1001 * openModalCount}" (keydown)="onModalKeydown($event)">
   <div class="fd-modal__content" role="document">
     <ng-content select="fd-modal-header"></ng-content>
     <ng-content select="fd-modal-body"></ng-content>
