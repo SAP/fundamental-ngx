@@ -803,11 +803,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     writeValue(selected: { date: Date, rangeEnd?: Date }): void {
         if (selected && this.calType) {
             if (selected.date && this.calType === 'single') {
-                // this.selectDate({date: selected.date}, false);
                 this.singleFormsSetup(selected);
             } else if (selected.date && selected.rangeEnd && this.calType === 'range') {
-                // this.selectDate({date: selected.date}, false);
-                // this.selectDate({date: selected.rangeEnd}, false);
                 this.rangeFormsSetup(selected);
             }
         }
