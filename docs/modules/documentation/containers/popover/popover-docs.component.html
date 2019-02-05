@@ -33,6 +33,19 @@
 </component-example>
 <code-example [code]="popoverExampleHtml" [language]="'HTML'"></code-example>
 
+<separator></separator>
+
+<h2>Popover Programmatic Open/Close Example</h2>
+<description>
+    By assigning a template reference variable to a popover, we are able to open and close the popover programmatically. This also allows us to create our own
+    click or key handlers on the popover itself, overriding default behavior.
+</description>
+<component-example [name]="'ex2'">
+    <fd-popover-programmatic-open-example></fd-popover-programmatic-open-example>
+</component-example>
+<code-example [code]="popoverProgrammaticExampleHtml" [language]="'HTML'"></code-example>
+<code-example [code]="popoverProgrammaticExampleTs" [language]="'TypeScript'"></code-example>
+
 <style>
   ::ng-deep fd-popover {
     margin-right: 100px;
