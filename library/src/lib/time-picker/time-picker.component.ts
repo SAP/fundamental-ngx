@@ -121,7 +121,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
-                this.onChange(timeFromInput);
+                this.onChange(this.time);
             } else {
                 this.time.hour = null;
                 this.time.minute = null;
@@ -155,7 +155,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
-                this.onChange(timeFromInput);
+                this.onChange(this.time);
             } else {
                 this.time.hour = null;
                 this.time.minute = null;
