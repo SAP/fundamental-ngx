@@ -18,6 +18,9 @@ $github-icon-size: 2rem;
     width: $github-icon-size;
     height: $github-icon-size;
     z-index: 100;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .logo-github--white {

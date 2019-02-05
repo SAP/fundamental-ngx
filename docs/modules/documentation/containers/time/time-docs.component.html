@@ -37,7 +37,7 @@
 <separator></separator>
 
 <h2>12-Hour Clock</h2>
-<p>You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code></p>
+<p>You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>. The passed time object will still contain a 24-hour clock.</p>
 <component-example [name]="'ex2'">
   <p>
     <fd-time-12-example></fd-time-12-example>
@@ -47,7 +47,7 @@
 
 <separator></separator>
 
-<h2>Clock With No Spinners</h2>
+<h2>Clock Without Spinners</h2>
 <description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
 <component-example [name]="'ex3'">
   <p>
@@ -58,7 +58,7 @@
 
 <separator></separator>
 
-<h2>Clock With No Seconds</h2>
+<h2>Clock Without Seconds</h2>
 <description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
 <component-example [name]="'ex4'">
   <p>
@@ -70,7 +70,7 @@
 <separator></separator>
 
 <h2>Disabled State</h2>
-<p>You can disable the entire component by setting <code>[disabled]="true"</code></p>
+<p>You can disable the entire component by setting <code>[disabled]="true"</code>.</p>
 <component-example [name]="'ex5'">
   <p>
     <fd-time-disabled-example></fd-time-disabled-example>

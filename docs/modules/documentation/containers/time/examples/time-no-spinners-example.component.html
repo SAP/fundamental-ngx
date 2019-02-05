@@ -1,2 +1,4 @@
 <fd-time [spinners]="false"
-         [time]="timeNoSpinnersObject"></fd-time>
+         [(ngModel)]="timeNoSpinnersObject"></fd-time>
+<br />
+Selected Time: {{timeNoSpinnersObject.hour}}h {{timeNoSpinnersObject.minute}}m {{timeNoSpinnersObject.second}}s

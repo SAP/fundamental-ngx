@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'fd-time-example',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
 })
 export class TimeExampleComponent {
 
-    timeObject = { hour: 12, minute: 0, second: 0 };
+    @Input()
+    timeObject = { hour: 14, minute: 3, second: 2 };
 
 }
 
@@ -16,8 +17,7 @@ export class TimeExampleComponent {
 })
 export class Time12ExampleComponent {
 
-    timeMeridianObject = { hour: 12, minute: 0, second: 0 };
-
+    timeMeridianObject = { hour: 9, minute: 0, second: 0 };
 }
 
 @Component({
