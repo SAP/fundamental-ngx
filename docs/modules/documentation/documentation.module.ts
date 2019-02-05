@@ -158,6 +158,7 @@ import {
 } from './containers/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
+import { PopoverProgrammaticOpenExampleComponent } from './containers/popover/examples/popover-programmatic-open-example.component';
 import { SearchInputExampleComponent } from './containers/search-input/examples/search-input-example.component';
 import { ShellbarBasicExampleComponent } from './containers/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './containers/shellbar/examples/shellbar-collapsible-example.component';
@@ -399,6 +400,7 @@ const ROUTES: Routes = [
         PanelGridColumnSpanExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+        PopoverProgrammaticOpenExampleComponent,
         SearchInputExampleComponent,
         SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,

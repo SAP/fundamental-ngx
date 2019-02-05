@@ -60,6 +60,12 @@ export class PopoverComponent implements OnInit, AfterViewInit {
         }
     }
 
+    open() {
+        if (!this.isOpen) {
+            this.isOpen = true;
+        }
+    }
+
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
         this.close();
@@ -67,16 +73,15 @@ export class PopoverComponent implements OnInit, AfterViewInit {
 
     onKeypressHandler(event) {
         if (this.isSearchInput) {
-            if (!this.isOpen) {
-                this.isOpen = true;
-            }
+            this.open();
         } else if (!this.popoverControlIsTabIndexed && (event.code === 'Space' || event.code === 'Enter')) {
             event.preventDefault();
             if (!this.isTimePicker) {
                 if (this.isOpen) {
-                    this.popoverClosed.emit();
+                    this.close();
+                } else {
+                    this.open();
                 }
-                this.isOpen = !this.isOpen;
             }
         }
     }
@@ -87,15 +92,16 @@ export class PopoverComponent implements OnInit, AfterViewInit {
         if (this.eRef.nativeElement.contains(target)) {
             if (!this.isTimePicker && !this.isSearchInput) {
                 if (this.isOpen) {
-                    this.popoverClosed.emit();
+                    this.close();
+                } else {
+                    this.open();
                 }
-                this.isOpen = !this.isOpen;
             } else if (this.isSearchInput) {
                 const targetElement = <HTMLElement>target;
-                if (!this.isOpen) {
-                    this.isOpen = true;
-                } else if (this.isOpen && targetElement.tagName === 'BUTTON') {
-                    this.isOpen = false;
+                if (this.isOpen && targetElement.tagName === 'BUTTON') {
+                    this.close();
+                } else {
+                    this.open();
                 }
             }
         } else {

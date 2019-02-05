@@ -1,0 +1,22 @@
+<fd-popover #customPopover (click)="customPopoverToggle($event)">
+    <fd-popover-control>
+        <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-menu>
+            <fd-menu-list>
+                <li fd-menu-item>
+                    <a [attr.href]="'#'">Option 1</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'#'">Option 2</a>
+                </li>
+                <li fd-menu-item>
+                    Option 3
+                </li>
+            </fd-menu-list>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
+<button fd-button (click)="$event.stopPropagation(); customPopover.open();">Open Popover</button>
+<button fd-button (click)="$event.stopPropagation(); customPopover.close();">Close Popover</button>
