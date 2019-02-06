@@ -1,9 +1,9 @@
-<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact }">
+<div *ngIf="isDropdown" class="fd-dropdown fd-dropdown--standard" [ngClass]="{ 'fd-dropdown--compact': compact }">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <button
                 fd-button
-                class="fd-dropdown__control fd-button"
+                class="fd-dropdown__control fd-button fd-button--standard"
                 [ngClass]="
                     (btnType ? ' fd-button--' + btnType : '') +
                     (glyph ? ' sap-icon--' + glyph : '') +
