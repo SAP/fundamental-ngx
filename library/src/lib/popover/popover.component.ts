@@ -42,6 +42,8 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     compact: boolean = false;
     @Input()
     standard: boolean = false;
+    @Input()
+    toolbar: boolean = false;
 
     @Output()
     popoverClosed: EventEmitter<any> = new EventEmitter<any>();
