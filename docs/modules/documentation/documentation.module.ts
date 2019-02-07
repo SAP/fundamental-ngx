@@ -210,6 +210,10 @@ import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scrol
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
 import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
 import { ListSingleSelectExampleComponent } from './containers/list/examples/list-single-select-example.component';
+import { FileInputDocsComponent } from './containers/file-input/file-input-docs.component';
+import { FileInputExampleComponent } from './containers/file-input/examples/file-input-example/file-input-example.component';
+import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
+import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -221,9 +225,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { FileInputDocsComponent } from './containers/file-input/file-input-docs.component';
-import { FileInputExampleComponent } from './containers/file-input/examples/file-input-example/file-input-example.component';
-import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -364,6 +365,9 @@ const ROUTES: Routes = [
         DropdownStateExampleComponent,
         DropdownInfiniteScrollExampleComponent,
         DropdownToolbarExampleComponent,
+        FileInputExampleComponent,
+        FileInputCustomExampleComponent,
+        FileInputDragDisabledExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,
         FormInlineHelpExampleComponent,
@@ -378,6 +382,8 @@ const ROUTES: Routes = [
         TransparentIdentifierExampleComponent,
         ImageShapesExampleComponent,
         ImageSizesExampleComponent,
+        InfiniteScrollDocsComponent,
+        InfiniteScrollBasicExampleComponent,
         InlineHelpExampleComponent,
         InputGroupButtonExampleComponent,
         InputGroupIconExampleComponent,
@@ -447,11 +453,7 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent,
-        InfiniteScrollDocsComponent,
-        InfiniteScrollBasicExampleComponent,
-        FileInputExampleComponent,
-        FileInputCustomExampleComponent
+        ToggleBindingExampleComponent
     ],
     entryComponents: [
         ModalContentComponent,

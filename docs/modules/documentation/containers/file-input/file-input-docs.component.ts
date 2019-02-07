@@ -6,6 +6,11 @@ import * as fileInputT from '!raw-loader!./examples/file-input-example/file-inpu
 import * as fileInputCustomH from '!raw-loader!./examples/file-input-custom-example/file-input-custom-example.component.html';
 import * as fileInputCustomT from '!raw-loader!./examples/file-input-custom-example/file-input-custom-example.component.ts';
 
+import * as fileInputInvalidH from '!raw-loader!./examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component.html';
+import * as fileInputInvalidT from '!raw-loader!./examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component.ts';
+
+
+
 @Component({
     selector: 'app-file-input',
     templateUrl: './file-input-docs.component.html',
@@ -18,5 +23,8 @@ export class FileInputDocsComponent {
 
     fileInputCustomH = fileInputCustomH;
     fileInputCustomT = fileInputCustomT;
+
+    fileInvalidCustomH = fileInputInvalidH;
+    fileInvalidCustomT = fileInputInvalidT;
 
 }

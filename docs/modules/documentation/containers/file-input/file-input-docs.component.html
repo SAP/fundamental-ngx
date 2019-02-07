@@ -39,9 +39,19 @@
 
 <separator></separator>
 
+<h2>Invalid File Input</h2>
+<description>An event is fired when invalid files are added through the drag and drop feature. These files can be retrieved and displayed to the user at will.</description>
+<component-example [name]="'ex2'">
+    <fd-file-input-drag-disabled-example></fd-file-input-drag-disabled-example>
+</component-example>
+<code-example [code]="fileInvalidCustomH" [language]="'HTML'"></code-example>
+<code-example [code]="fileInvalidCustomT" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
 <h2>Dropzone File Input</h2>
 <description>The component outputs events that make it very simple to style a dropzone depending on the current state. The example below also allows deals with duplicates, concatenating consecutive files into a list, and then displays them with the option to delete.</description>
-<component-example [name]="'ex2'">
+<component-example [name]="'ex3'">
     <fd-file-input-custom-example></fd-file-input-custom-example>
 </component-example>
 <code-example [code]="fileInputCustomH" [language]="'HTML'"></code-example>
