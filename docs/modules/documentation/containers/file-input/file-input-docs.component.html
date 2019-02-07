@@ -1,0 +1,47 @@
+<header>File Input</header>
+<description>
+    A very flexible component that prompts the user for a file. Supports multiple selection, accept only certain extensions, and more.
+    The aim is to facilitate the use and styling of the native file input. The projected content can have a file dragged and dropped over.
+</description>
+<import module="FileInputModule" path="fundamental-ngx"></import>
+
+<separator></separator>
+
+<h1>&lt;fd-file-input&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'disabled', description: 'Boolean. Disabled the file input. Defaults to false.' },
+    { name: 'multiple', description: 'Boolean. Whether multiple files can be input at once. Defaults to false.' },
+    { name: 'accept', description: 'String. Allowed file extensions. Format: \'.ext,.png,.jpg\'.' },
+    { name: 'dragndrop', description: 'Boolean. Whether the drag and drop feature is enabled. Defaults to true.' }
+  ],
+  outputs: [
+      { name: 'onSelect', description: 'Fires when new files are selected. Use $event to retrieve.' },
+      { name: 'onInvalidFiles', description: 'Fires when some files are refused. Use $event to retrieve.' },
+      { name: 'onDragOver', description: 'Fires when a file is hovered over the component.' },
+      { name: 'onDragEnd', description: 'Fires when the user stops dragging a file.' },
+      { name: 'onDragStart', description: 'Fires when the user starts dragging a file.' },
+      { name: 'onDragLeave', description: 'Fires when the user leaves the dropzone with a file dragged.' }
+  ]
+}"></properties>
+
+<separator></separator>
+
+<h2>File Input</h2>
+<description>The standard version of the component that most people will likely use regularly.</description>
+<component-example [name]="'ex1'">
+    <fd-file-input-example></fd-file-input-example>
+</component-example>
+<code-example [code]="fileInputExampleHtml" [language]="'HTML'"></code-example>
+<code-example [code]="fileInputExampleTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Custom Content File Input</h2>
+<description>The component provides the ability to customize the inner content of the selection box.</description>
+<component-example [name]="'ex2'">
+    <fd-file-input-custom-example></fd-file-input-custom-example>
+</component-example>
+<code-example [code]="fileInputCustomH" [language]="'HTML'"></code-example>
+

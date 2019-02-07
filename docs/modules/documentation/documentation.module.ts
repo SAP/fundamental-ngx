@@ -219,6 +219,9 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { FileInputDocsComponent } from './containers/file-input/file-input-docs.component';
+import { FileInputExampleComponent } from './containers/file-input/examples/file-input-example/file-input-example.component';
+import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -240,6 +243,7 @@ const ROUTES: Routes = [
             { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
+            { path: 'file-input', component: FileInputDocsComponent },
             { path: 'form', component: FormDocsComponent },
             { path: 'icon', component: IconDocsComponent },
             { path: 'identifier', component: IdentifierDocsComponent },
@@ -289,6 +293,7 @@ const ROUTES: Routes = [
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
         DropdownDocsComponent,
+        FileInputDocsComponent,
         FormDocsComponent,
         IconDocsComponent,
         IdentifierDocsComponent,
@@ -440,7 +445,9 @@ const ROUTES: Routes = [
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
         InfiniteScrollDocsComponent,
-        InfiniteScrollBasicExampleComponent
+        InfiniteScrollBasicExampleComponent,
+        FileInputExampleComponent,
+        FileInputCustomExampleComponent
     ],
     entryComponents: [
         ModalContentComponent,

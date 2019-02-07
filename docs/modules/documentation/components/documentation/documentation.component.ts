@@ -21,6 +21,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'comboboxInput', name: 'Combobox Input', status: 'SAFE' },
         { url: 'datePicker', name: 'Date Picker', status: 'SAFE' },
         { url: 'dropdown', name: 'Dropdown', status: 'SAFE' },
+        { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
         { url: 'form', name: 'Form', status: 'SAFE' },
         { url: 'icon', name: 'Icon', status: 'SAFE' },
         { url: 'identifier', name: 'Identifier', status: 'SAFE' },

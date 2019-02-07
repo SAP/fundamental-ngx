@@ -10,6 +10,7 @@ import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { ComboboxInputModule } from './combobox-input/combobox-input.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
+import { FileInputModule } from './file-input/file-input.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { IdentifierModule } from './identifier/identifier.module';
@@ -54,6 +55,7 @@ import { InfiniteScrollModule } from './utils/infinite-scroll.module';
         CalendarModule,
         ComboboxInputModule,
         DatePickerModule,
+        FileInputModule,
         FormModule,
         IconModule,
         IdentifierModule,
