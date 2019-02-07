@@ -1,4 +1,4 @@
-<div style="display: inline-block"
+<div style="display: block"
      fdFileDragnDrop
      [accept]="this.accept"
      [dragndrop]="this.dragndrop"
@@ -6,7 +6,7 @@
      [multiple]="this.multiple"
      (onFileChange)="selectHandler($event)"
      (onInvalidFiles)="this.onInvalidFiles.emit($event)"
-     (onDragEnd)="this.onDragEnd.emit()"
+     (onDragEnter)="this.onDragEnter.emit()"
      (onDragLeave)="this.onDragLeave.emit()"
      (onDragOver)="this.onDragOver.emit()"
      (onDragStart)="this.onDragStart.emit()">

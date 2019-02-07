@@ -711,6 +711,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.monthName = this.monthsFullName[this.date.getMonth()];
                 this.isInvalidDateInput.emit(this.invalidDate);
                 this.constructCalendar();
+                this.constructCalendarYearsList();
                 this.updateDatePickerInputEmitter();
             } else {
                 this.isInvalidDateInput.emit(this.invalidDate);
@@ -738,6 +739,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.monthName = this.monthsFullName[this.date.getMonth()];
                 this.isInvalidDateInput.emit(this.invalidDate);
                 this.constructCalendar();
+                this.constructCalendarYearsList();
                 this.updateDatePickerInputEmitter();
             } else {
                 this.resetSelection();

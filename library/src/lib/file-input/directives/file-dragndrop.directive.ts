@@ -18,13 +18,13 @@ export class FileDragndropDirective {
     onDragStart: EventEmitter<null> = new EventEmitter<null>();
 
     @Output()
-    onDragEnd: EventEmitter<null> = new EventEmitter<null>();
+    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
 
     @Output()
     onDragLeave: EventEmitter<null> = new EventEmitter<null>();
 
     @Input()
-    multiple: boolean = false;
+    multiple: boolean = true;
 
     @Input()
     accept: string;
@@ -34,6 +34,13 @@ export class FileDragndropDirective {
 
     @Input()
     dragndrop: boolean = true;
+
+    @HostListener('document:dragenter', ['$event'])
+    public onDragstart() {
+        if (this.dragndrop) {
+            this.onDragStart.emit();
+        }
+    }
 
     @HostListener('dragover', ['$event'])
     public onDragover(event) {
@@ -45,23 +52,10 @@ export class FileDragndropDirective {
         }
     }
 
-    @HostListener('dragstart', ['$event'])
-    public onDragstart(event) {
+    @HostListener('dragenter', ['$event'])
+    public onDragenter() {
         if (this.dragndrop) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            this.onDragStart.emit();
-        }
-    }
-
-    @HostListener('dragend', ['$event'])
-    public onDragend(event) {
-        if (this.dragndrop) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            this.onDragEnd.emit();
+            this.onDragEnter.emit();
         }
     }
 

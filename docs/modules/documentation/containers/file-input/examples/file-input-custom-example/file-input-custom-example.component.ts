@@ -1,16 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-input-custom-example',
-    templateUrl: './file-input-custom-example.component.html',
-    styleUrls: ['./file-input-custom-example.component.scss']
+    templateUrl: './file-input-custom-example.component.html'
 })
-export class FileInputCustomExampleComponent implements OnInit {
+export class FileInputCustomExampleComponent {
 
-    constructor() {
+    files: File[] = [];
+    state: string = 'default';
+
+    selectHandler(passedFiles) {
+        passedFiles.forEach(file => {
+            console.log(file);
+            if (this.files.filter(eFile => (file.name === eFile.name)).length === 0) {
+                this.files.push(file);
+            }
+        });
+        this.state = 'default';
     }
 
-    ngOnInit() {
+    removeFile(index: number) {
+        this.files.splice(index, 1);
     }
 
 }

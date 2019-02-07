@@ -8,7 +8,7 @@ import { NgModel } from '@angular/forms';
 export class FileSelectDirective {
 
     @Input()
-    private multiple: boolean = false;
+    private multiple: boolean = true;
 
     @Output()
     onFileSelect: EventEmitter<File[]> = new EventEmitter<File[]>();

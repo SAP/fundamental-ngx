@@ -23,7 +23,7 @@ export class FileInputComponent implements ControlValueAccessor {
     disabled: boolean = false;
 
     @Input()
-    multiple: boolean = false;
+    multiple: boolean = true;
 
     @Input()
     accept: string;
@@ -44,7 +44,7 @@ export class FileInputComponent implements ControlValueAccessor {
     onDragStart: EventEmitter<null> = new EventEmitter<null>();
 
     @Output()
-    onDragEnd: EventEmitter<null> = new EventEmitter<null>();
+    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
 
     @Output()
     onDragLeave: EventEmitter<null> = new EventEmitter<null>();

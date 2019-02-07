@@ -12,15 +12,16 @@
 <properties [properties]="{
   inputs: [
     { name: 'disabled', description: 'Boolean. Disabled the file input. Defaults to false.' },
-    { name: 'multiple', description: 'Boolean. Whether multiple files can be input at once. Defaults to false.' },
+    { name: 'multiple', description: 'Boolean. Whether multiple files can be input at once. Defaults to true.' },
     { name: 'accept', description: 'String. Allowed file extensions. Format: \'.ext,.png,.jpg\'.' },
-    { name: 'dragndrop', description: 'Boolean. Whether the drag and drop feature is enabled. Defaults to true.' }
+    { name: 'dragndrop', description: 'Boolean. Whether the drag and drop feature is enabled. Defaults to true.' },
+    { name: 'ngModel', description: 'Files from the form. Should be used with two-way binding syntax.' }
   ],
   outputs: [
       { name: 'onSelect', description: 'Fires when new files are selected. Use $event to retrieve.' },
       { name: 'onInvalidFiles', description: 'Fires when some files are refused. Use $event to retrieve.' },
       { name: 'onDragOver', description: 'Fires when a file is hovered over the component.' },
-      { name: 'onDragEnd', description: 'Fires when the user stops dragging a file.' },
+      { name: 'onDragEnter', description: 'Fires when the user drags a file into the dropzone.' },
       { name: 'onDragStart', description: 'Fires when the user starts dragging a file.' },
       { name: 'onDragLeave', description: 'Fires when the user leaves the dropzone with a file dragged.' }
   ]
@@ -28,8 +29,8 @@
 
 <separator></separator>
 
-<h2>File Input</h2>
-<description>The standard version of the component that most people will likely use regularly.</description>
+<h2>Simple File Input</h2>
+<description>Used in this context, it will only allow a set of extensions to be added.</description>
 <component-example [name]="'ex1'">
     <fd-file-input-example></fd-file-input-example>
 </component-example>
@@ -38,10 +39,11 @@
 
 <separator></separator>
 
-<h2>Custom Content File Input</h2>
-<description>The component provides the ability to customize the inner content of the selection box.</description>
+<h2>Dropzone File Input</h2>
+<description>The component outputs events that make it very simple to style a dropzone depending on the current state. The example below also allows deals with duplicates, concatenating consecutive files into a list, and then displays them with the option to delete.</description>
 <component-example [name]="'ex2'">
     <fd-file-input-custom-example></fd-file-input-custom-example>
 </component-example>
 <code-example [code]="fileInputCustomH" [language]="'HTML'"></code-example>
+<code-example [code]="fileInputCustomT" [language]="'typescript'"></code-example>
 

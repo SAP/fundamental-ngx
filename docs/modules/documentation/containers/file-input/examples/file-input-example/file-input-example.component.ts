@@ -1,18 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-input-example',
-    templateUrl: './file-input-example.component.html',
-    styleUrls: ['./file-input-example.component.scss']
+    templateUrl: './file-input-example.component.html'
 })
-export class FileInputExampleComponent implements OnInit {
+export class FileInputExampleComponent {
 
-    files: FileList;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
+    files: FileList;    // You can also receive the files as a File[].
 
 }
