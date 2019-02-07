@@ -41,11 +41,12 @@
 
 <ng-template #popoverBodyTpl>
     <div
-        class="fd-popover__body"
-        [ngClass]="{  'fd-popover__body--no-arrow': isDropdown || !arrow,
+        [ngClass]="{  'fd-popover__body': popoverBodyHasContent,
+                      'fd-popover__body--no-arrow': isDropdown || !arrow,
                       'fd-popover__body--right' : alignment == 'right' }"
-        [attr.aria-hidden]="disabled ? true : !isOpen"
-    >
-        <ng-content select="fd-popover-body"></ng-content>
+        [attr.aria-hidden]="disabled ? true : !isOpen">
+        <div #popoverBodyContent>
+            <ng-content select="fd-popover-body"></ng-content>
+        </div>
     </div>
 </ng-template>

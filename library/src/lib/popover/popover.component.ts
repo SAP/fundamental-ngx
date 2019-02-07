@@ -9,7 +9,8 @@ import {
     EventEmitter,
     ViewChild,
     AfterViewInit,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    AfterViewChecked
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 
@@ -17,7 +18,7 @@ import { HashService } from '../utils/hash.service';
     selector: 'fd-popover',
     templateUrl: './popover.component.html'
 })
-export class PopoverComponent implements OnInit, AfterViewInit {
+export class PopoverComponent implements OnInit, AfterViewInit, AfterViewChecked {
     @Input()
     alignment: string = '';
     @Input()
@@ -45,6 +46,8 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     @Input()
     toolbar: boolean = false;
 
+    popoverBodyHasContent: boolean = false;
+
     @Output()
     popoverClosed: EventEmitter<any> = new EventEmitter<any>();
 
@@ -52,6 +55,9 @@ export class PopoverComponent implements OnInit, AfterViewInit {
 
     @ViewChild('popoverControlWrapper')
     popoverControl: ElementRef;
+
+    @ViewChild('popoverBodyContent')
+    popoverBodyContent;
 
     id: string;
 
@@ -136,6 +142,13 @@ export class PopoverComponent implements OnInit, AfterViewInit {
             this.isTimePicker
         ) {
             this.popoverControlIsTabIndexed = true;
+        }
+        this.cd.detectChanges();
+    }
+
+    ngAfterViewChecked() {
+        if (this.popoverBodyContent && this.popoverBodyContent.nativeElement.children.length) {
+            this.popoverBodyHasContent = true;
         }
         this.cd.detectChanges();
     }

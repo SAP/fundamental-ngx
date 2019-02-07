@@ -9,6 +9,10 @@
     <br/><br/>
     The popover can be opened via keyboard by pressing enter or the space bar when focused. Popover menu items are not
     automatically tab-indexed - see the Menu component documentation for more details.
+    <br/><br/>
+    If the items in your popover body are dynamic and the popover body could potentially appear empty, it is recommended
+    to place an <code>*ngIf</code> on the <code>&lt;fd-popover-body></code> component to check if the popover body contents
+    exist.  If the contents are empty and the popover body component still renders, an empty border will display.
 </description>
 
 <import module="PopoverModule" path="fundamental-ngx"></import>

@@ -1,16 +1,10 @@
 <fd-popover [isDropdown]="true" [disabled]="true">
     Dropdown
-    <fd-popover-body>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <fd-menu-list>
-                <li fd-menu-item>
-                    <a [attr.href]="'#'">Option 1</a>
-                </li>
-                <li fd-menu-item>
-                    <a [routerLink]="'#'">Option 2</a>
-                </li>
-                <li fd-menu-item>
-                    Option 3
+                <li fd-menu-item *ngFor="let option of menu1">
+                    <a [attr.href]="option.url">{{option.text}}</a>
                 </li>
             </fd-menu-list>
         </fd-menu>
