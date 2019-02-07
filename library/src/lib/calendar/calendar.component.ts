@@ -518,6 +518,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.selectedMonth = selectedMonth;
         this.setCurrentMonth(selectedMonth);
         this.constructCalendar();
+        this.openDaySelection(true);
     }
 
     setCurrentYear(year: number) {
@@ -529,9 +530,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.selectedMonth = this.month;
         this.setCurrentYear(selectedYear);
         this.constructCalendar();
+        this.openDaySelection(true);
     }
 
-    //Functions that handle the calendar content - show/hide calendar dates, months list, years list
+    // Functions that handle the calendar content - show/hide calendar dates, months list, years list
     openMonthSelection() {
         if (this.showCalendarYears) {
             this.showCalendarYears = false;
@@ -553,6 +555,22 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.showCalendarYears = !this.showCalendarYears;
             this.showCalendarMonths = false;
             this.showCalendarDates = !this.showCalendarDates;
+        }
+    }
+
+    openDaySelection(selectNewDate?) {
+        this.showCalendarMonths = false;
+        this.showCalendarYears = false;
+        this.showCalendarDates = true;
+        if (selectNewDate) {
+            this.calendarGrid.forEach((row) => {
+                row.forEach((cell) => {
+                    if (this.date.getDate() === cell.date.getDate() && this.date.getMonth() === cell.date.getMonth()
+                        && this.date.getFullYear() === cell.date.getFullYear()) {
+                        this.selectDate(cell);
+                    }
+                });
+            });
         }
     }
 
