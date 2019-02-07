@@ -1,12 +1,23 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fd-time-picker',
-    templateUrl: './time-picker.component.html'
+    templateUrl: './time-picker.component.html',
+    host: {
+        '(blur)': 'onTouched()'
+    },
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TimePickerComponent),
+            multi: true
+        }
+    ]
 })
-export class TimePickerComponent {
+export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
@@ -31,6 +42,15 @@ export class TimePickerComponent {
     period: string;
 
     isOpen: boolean;
+
+    placeholder: string;
+
+    onChange: Function = (time: TimeObject) => {};
+    onTouched: Function = () => {};
+
+    ngOnInit(): void {
+        this.placeholder = this.getPlaceholder();
+    }
 
     getTime() {
         return this.time;
@@ -82,7 +102,7 @@ export class TimePickerComponent {
             }
         }
 
-        return formattedTime;
+        return formattedTime !== undefined ? formattedTime : '';
     }
 
     timeInputChanged(timeFromInput) {
@@ -101,6 +121,7 @@ export class TimePickerComponent {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
+                this.onChange(this.time);
             } else {
                 this.time.hour = null;
                 this.time.minute = null;
@@ -134,6 +155,7 @@ export class TimePickerComponent {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
+                this.onChange(this.time);
             } else {
                 this.time.hour = null;
                 this.time.minute = null;
@@ -186,5 +208,24 @@ export class TimePickerComponent {
         }
 
         return retVal;
+    }
+
+    registerOnChange(fn: (time: TimeObject) => void): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
+    writeValue(time: TimeObject): void {
+        if (!time) {
+            return;
+        }
+        this.time = time;
     }
 }

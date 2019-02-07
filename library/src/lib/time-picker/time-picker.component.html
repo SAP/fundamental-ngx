@@ -15,13 +15,13 @@
       <div class="fd-input-group fd-input-group--after"
            (click)="inputGroupClicked($event)"
            [ngClass]="{'fd-input-group--compact' : compact}">
-        <input value="{{getFormattedTime()}}"
+        <input [value]="getFormattedTime()"
                (change)="timeInputChanged($event.currentTarget.value)"
                (focus)="onFocusHandler()"
                [disabled]="disabled"
                type="text"
                [ngClass]="{ 'fd-input--compact': compact }"
-               placeholder="{{getPlaceholder()}}">
+               [placeholder]="placeholder">
         <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon--after">
           <button [disabled]="disabled"
                   [ngClass]="{ 'fd-button--compact' : compact }" (click)="addOnButtonClicked($event)"
@@ -32,7 +32,7 @@
     <fd-popover-body>
       <fd-time [disabled]="disabled"
                [meridian]="meridian"
-               [time]="getTime()"
+               [(ngModel)]="time"
                [period]="period"
                [spinners]="spinners"
                [displaySeconds]="displaySeconds"></fd-time>

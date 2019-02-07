@@ -43,6 +43,7 @@ describe('DatePickerComponent', () => {
 
     it('should close the calendar', () => {
         component.isOpen = true;
+        component.isValidDateInput = true;
         component.closeCalendar();
         expect(component.inputFieldDate).toBeNull();
         expect(component.isOpen).not.toBeTruthy();

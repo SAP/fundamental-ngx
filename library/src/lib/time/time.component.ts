@@ -1,21 +1,24 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnChanges } from '@angular/core';
 import { TimeObject } from './time-object';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fd-time',
     templateUrl: './time.component.html',
-    styleUrls: ['./time.component.scss']
+    styleUrls: ['./time.component.scss'],
+    host: {
+        '(blur)': 'onTouched()'
+    },
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TimeComponent),
+            multi: true
+        }
+    ]
 })
-export class TimeComponent implements OnChanges {
+export class TimeComponent implements OnChanges, ControlValueAccessor {
     @Input() period: string;
-
-    oldPeriod: string;
-
-    periodInvalid: boolean;
-
-    displayedHour: number;
-
-    @Input() time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     @Input() meridian: boolean;
 
@@ -28,7 +31,17 @@ export class TimeComponent implements OnChanges {
     @Input() displaySeconds: boolean = true;
 
     @Input()
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
+    oldPeriod: string;
+
+    periodInvalid: boolean;
+
+    displayedHour: number;
+
+    @Input()
     setDisplayedHour() {
+
         if (this.time.hour === 0) {
             this.displayedHour = 12;
             this.period = 'am';
@@ -44,6 +57,9 @@ export class TimeComponent implements OnChanges {
         }
         this.oldPeriod = this.period;
     }
+
+    onChange = (time: TimeObject) => {};
+    onTouched = () => {};
 
     displayedHourChanged() {
         if (this.displayedHour === null && this.time) {
@@ -63,6 +79,7 @@ export class TimeComponent implements OnChanges {
                 }
             }
         }
+        this.onChange(this.time);
     }
 
     inputBlur(inputType) {
@@ -124,6 +141,7 @@ export class TimeComponent implements OnChanges {
         if (this.meridian) {
             this.setDisplayedHour();
         }
+        this.onChange(this.time);
     }
 
     decreaseHour() {
@@ -137,6 +155,7 @@ export class TimeComponent implements OnChanges {
         if (this.meridian) {
             this.setDisplayedHour();
         }
+        this.onChange(this.time);
     }
 
     increaseMinute() {
@@ -148,6 +167,7 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.minute = this.time.minute + 1;
         }
+        this.onChange(this.time);
     }
 
     decreaseMinute() {
@@ -159,6 +179,7 @@ export class TimeComponent implements OnChanges {
         } else {
             this.time.minute = this.time.minute - 1;
         }
+        this.onChange(this.time);
     }
 
     increaseSecond() {
@@ -172,6 +193,7 @@ export class TimeComponent implements OnChanges {
                 this.time.second = this.time.second + 1;
             }
         }
+        this.onChange(this.time);
     }
 
     decreaseSecond() {
@@ -185,6 +207,7 @@ export class TimeComponent implements OnChanges {
                 this.time.second = this.time.second - 1;
             }
         }
+        this.onChange(this.time);
     }
 
     togglePeriod() {
@@ -215,6 +238,27 @@ export class TimeComponent implements OnChanges {
             }
             this.periodInvalid = false;
         }
+        this.onChange(this.time);
+        this.setDisplayedHour();
+    }
+
+    registerOnChange(fn: (time: TimeObject) => void): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
+    writeValue(time: TimeObject): void {
+        if (!time) {
+            return;
+        }
+        this.time = time;
         this.setDisplayedHour();
     }
 }

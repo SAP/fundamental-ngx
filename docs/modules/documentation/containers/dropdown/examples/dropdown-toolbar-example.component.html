@@ -1,0 +1,53 @@
+<fd-popover [isDropdown]="true" [toolbar]="true">
+    Dropdown
+    <fd-popover-body>
+        <fd-menu>
+            <fd-menu-list>
+                <li fd-menu-item>
+                    <a [attr.href]="'#'">Option 1</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'#'">Option 2</a>
+                </li>
+                <li fd-menu-item>
+                    Option 3
+                </li>
+            </fd-menu-list>
+            <fd-menu-group>
+                <fd-menu-title>
+                    Group header
+                </fd-menu-title>
+                <fd-menu-list>
+                    <li fd-menu-item>
+                        Option 4
+                    </li>
+                    <li fd-menu-item>
+                        Option 5
+                    </li>
+                    <li fd-menu-item>
+                        Option 6
+                    </li>
+                </fd-menu-list>
+            </fd-menu-group>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
+
+<fd-popover [isDropdown]="true" [compact]="true" [toolbar]="true">
+    Compact Dropdown
+    <fd-popover-body>
+        <fd-menu>
+            <fd-menu-list>
+                <li fd-menu-item>
+                    <a [attr.href]="'#'">Option 1</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'#'">Option 2</a>
+                </li>
+                <li fd-menu-item>
+                    Option 3
+                </li>
+            </fd-menu-list>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
