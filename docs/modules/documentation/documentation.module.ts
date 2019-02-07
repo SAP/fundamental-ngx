@@ -105,7 +105,8 @@ import {
     DropdownContextualMenuExampleComponent,
     DropdownDefaultExampleComponent,
     DropdownIconsExampleComponent,
-    DropdownStateExampleComponent
+    DropdownStateExampleComponent,
+    DropdownToolbarExampleComponent
 } from './containers/dropdown/examples/dropdown-examples.component';
 import {
     FormCheckboxExampleComponent,
@@ -357,6 +358,7 @@ const ROUTES: Routes = [
         DropdownIconsExampleComponent,
         DropdownStateExampleComponent,
         DropdownInfiniteScrollExampleComponent,
+        DropdownToolbarExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,
         FormInlineHelpExampleComponent,

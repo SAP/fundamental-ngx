@@ -1,4 +1,4 @@
-<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact }">
+<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact, 'fd-dropdown--toolbar': toolbar }">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <button
@@ -9,7 +9,8 @@
                     (glyph ? ' sap-icon--' + glyph : '') +
                     (size ? ' fd-button--' + size : '') +
                     (compact ? ' fd-button--compact' : '') +
-                    (this.disabled ? ' is-disabled' : '')
+                    (this.disabled ? ' is-disabled' : '') +
+                    (toolbar ? ' fd-button--standard': '')
                 "
                 [attr.aria-expanded]="this.disabled ? false : isOpen"
                 [attr.aria-disabled]="this.disabled"

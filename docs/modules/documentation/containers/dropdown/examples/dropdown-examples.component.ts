@@ -23,3 +23,9 @@ export class DropdownIconsExampleComponent {}
     templateUrl: './dropdown-contextual-menu-example.component.html'
 })
 export class DropdownContextualMenuExampleComponent {}
+
+@Component({
+    selector: 'fd-dropdown-toolbar-example',
+    templateUrl: './dropdown-toolbar-example.component.html'
+})
+export class DropdownToolbarExampleComponent {}
