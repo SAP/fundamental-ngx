@@ -31,6 +31,9 @@ export class FileInputComponent implements ControlValueAccessor {
     @Input()
     dragndrop: boolean = true;
 
+    @Input()
+    maxFileSize: number;
+
     @Output()
     onSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
 
@@ -69,8 +72,28 @@ export class FileInputComponent implements ControlValueAccessor {
     }
 
     selectHandler(event: File[]) {
-        this.onChange(event);
-        this.onSelect.emit(event);
+
+        if (this.maxFileSize) {
+            const valid_files: File[] = [];
+            const invalid_files: File[] = [];
+            event.forEach(file => {
+                if (file.size < this.maxFileSize) {
+                    valid_files.push(file);
+                } else {
+                    invalid_files.push(file);
+                }
+            });
+            if (valid_files.length > 0) {
+                this.onChange(valid_files);
+                this.onSelect.emit(valid_files);
+            }
+            if (invalid_files.length > 0) {
+                this.onInvalidFiles.emit(invalid_files);
+            }
+        } else {
+            this.onChange(event);
+            this.onSelect.emit(event);
+        }
     }
 
     public open(): void {

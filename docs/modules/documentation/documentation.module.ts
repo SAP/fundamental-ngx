@@ -214,6 +214,7 @@ import { FileInputDocsComponent } from './containers/file-input/file-input-docs.
 import { FileInputExampleComponent } from './containers/file-input/examples/file-input-example/file-input-example.component';
 import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
+import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -368,6 +369,7 @@ const ROUTES: Routes = [
         FileInputExampleComponent,
         FileInputCustomExampleComponent,
         FileInputDragDisabledExampleComponent,
+        FileInputMaxExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,
         FormInlineHelpExampleComponent,

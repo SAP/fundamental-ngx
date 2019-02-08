@@ -9,7 +9,8 @@ import * as fileInputCustomT from '!raw-loader!./examples/file-input-custom-exam
 import * as fileInputInvalidH from '!raw-loader!./examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component.html';
 import * as fileInputInvalidT from '!raw-loader!./examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component.ts';
 
-
+import * as fileInputMaxT from '!raw-loader!./examples/file-input-max-example/file-input-max-example.component.ts';
+import * as fileInputMaxH from '!raw-loader!./examples/file-input-max-example/file-input-max-example.component.html';
 
 @Component({
     selector: 'app-file-input',
@@ -26,5 +27,8 @@ export class FileInputDocsComponent {
 
     fileInvalidCustomH = fileInputInvalidH;
     fileInvalidCustomT = fileInputInvalidT;
+
+    fileMaxSizeH = fileInputMaxH;
+    fileMaxSizeT = fileInputMaxT;
 
 }

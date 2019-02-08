@@ -1,6 +1,5 @@
 import { Directive, Input, Output, EventEmitter } from '@angular/core';
-import { HostListener, HostBinding, Host, Optional } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { HostListener, HostBinding } from '@angular/core';
 
 @Directive({
     selector: '[fdFileSelect]',
@@ -18,9 +17,6 @@ export class FileSelectDirective {
         return this.multiple ? '' : undefined;
     }
 
-    constructor(@Optional() @Host() private model: NgModel) {
-    }
-
     @HostListener('change', ['$event'])
     onChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
@@ -28,7 +24,7 @@ export class FileSelectDirective {
             const files: FileList = elRef.files;
             const fileArray: File[] = Array.from(files);
             if (files.length) {
-                this.model ? this.model.update.emit(fileArray) : this.onFileSelect.emit(fileArray);
+                this.onFileSelect.emit(fileArray);
             }
         }
     }

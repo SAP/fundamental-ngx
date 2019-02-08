@@ -11,10 +11,11 @@
 
 <properties [properties]="{
   inputs: [
-    { name: 'disabled', description: 'Boolean. Disabled the file input. Defaults to false.' },
+    { name: 'disabled', description: 'Boolean. Disable the file input. Defaults to false.' },
     { name: 'multiple', description: 'Boolean. Whether multiple files can be input at once. Defaults to true.' },
     { name: 'accept', description: 'String. Allowed file extensions. Format: \'.ext,.png,.jpg\'.' },
     { name: 'dragndrop', description: 'Boolean. Whether the drag and drop feature is enabled. Defaults to true.' },
+    { name: 'maxFileSize', description: 'Number. The maximum file size to allow in bytes.' },
     { name: 'ngModel', description: 'Files from the form. Should be used with two-way binding syntax.' }
   ],
   outputs: [
@@ -49,9 +50,24 @@
 
 <separator></separator>
 
+<h2>Max File Size</h2>
+<description>
+    It is possible to control the size of the file through the input <code>maxFileSize</code>. The number is in bytes.
+    This feature will keep casual users from entering larger files, but someone knowledgeable enough could potentially bypass this.
+    <br /><br />
+    <strong>NOTE: It is possible to bypass this client-side limit so a server-side check is still necessary.</strong>
+</description>
+<component-example [name]="'ex3'">
+    <fd-file-input-max-example></fd-file-input-max-example>
+</component-example>
+<code-example [code]="fileMaxSizeH" [language]="'HTML'"></code-example>
+<code-example [code]="fileMaxSizeT" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
 <h2>Dropzone File Input</h2>
 <description>The component outputs events that make it very simple to style a dropzone depending on the current state. The example below also allows deals with duplicates, concatenating consecutive files into a list, and then displays them with the option to delete.</description>
-<component-example [name]="'ex3'">
+<component-example [name]="'ex4'">
     <fd-file-input-custom-example></fd-file-input-custom-example>
 </component-example>
 <code-example [code]="fileInputCustomH" [language]="'HTML'"></code-example>

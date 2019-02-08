@@ -11,7 +11,6 @@ export class FileInputCustomExampleComponent {
 
     selectHandler(passedFiles) {
         passedFiles.forEach(file => {
-            console.log(file);
             if (this.files.filter(eFile => (file.name === eFile.name)).length === 0) {
                 this.files.push(file);
             }
