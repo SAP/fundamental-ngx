@@ -25,7 +25,6 @@ export class DocumentationComponent implements OnInit {
         { url: 'icon', name: 'Icon', status: 'SAFE' },
         { url: 'identifier', name: 'Identifier', status: 'SAFE' },
         { url: 'image', name: 'Image', status: 'SAFE' },
-        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' },
         { url: 'inlineHelp', name: 'Inline Help', status: 'SAFE' },
         { url: 'inputGroup', name: 'Input Group', status: 'ACTIVE' },
         { url: 'list', name: 'List', status: 'ACTIVE' },
@@ -33,7 +32,6 @@ export class DocumentationComponent implements OnInit {
         { url: 'menu', name: 'Menu', status: 'SAFE' },
         { url: 'modal', name: 'Modal', status: 'UNSAFE' },
         { url: 'pagination', name: 'Pagination', status: 'SAFE' },
-        { url: 'panel', name: 'Panel', status: 'SAFE' },
         { url: 'popover', name: 'Popover', status: 'ACTIVE' },
         { url: 'searchInput', name: 'Search Input', status: 'SAFE' },
         { url: 'shellbar', name: 'Shellbar', status: 'ACTIVE' },
@@ -44,6 +42,15 @@ export class DocumentationComponent implements OnInit {
         { url: 'time', name: 'Time', status: 'SAFE' },
         { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
         { url: 'toggle', name: 'Toggle', status: 'ACTIVE'}
+    ];
+
+    layouts = [
+        { url: 'panel', name: 'Panel', status: 'SAFE' }
+    ];
+
+    utilities = [
+        { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
+        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' }
     ];
 
     search: string = '';

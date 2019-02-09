@@ -58,6 +58,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     newFocusedDayId: string;
 
+    init = false;
+
     @Input()
     dateFromDatePicker: BehaviorSubject<any>;
 
@@ -386,7 +388,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     updateDatePickerInputEmitter() {
-        if (this.calType == 'single') {
+        if (this.calType === 'single') {
             this.emittedDate.selectedDay = this.selectedDay;
         } else {
             this.emittedDate.selectedFirstDay = this.selectedRangeFirst;
@@ -457,7 +459,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.selectedDay = day;
                 this.selectedDayChange.emit(this.selectedDay);
                 this.refreshSelected();
-                this.updateDatePickerInputEmitter();
+                if (this.init) {
+                    this.updateDatePickerInputEmitter();
+                }
                 if (formEvent) {
                     this.onChange({ date: day.date });
                 }
@@ -471,7 +475,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectCounter++;
                     this.refreshSelected();
-                    this.updateDatePickerInputEmitter();
+                    if (this.init) {
+                        this.updateDatePickerInputEmitter();
+                    }
                     if (formEvent) {
                         this.onChange({ date: this.selectedRangeFirst.date, rangeEnd: day.date });
                     }
@@ -484,7 +490,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectCounter++;
                     this.refreshSelected();
-                    this.updateDatePickerInputEmitter();
+                    if (this.init) {
+                        this.updateDatePickerInputEmitter();
+                    }
                     if (formEvent) {
                         this.onChange({ date: day.date, rangeEnd: day.date });
                     }
@@ -497,7 +505,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLast = tempSelectedRangeFirst;
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.refreshSelected();
-                    this.updateDatePickerInputEmitter();
+                    if (this.init) {
+                        this.updateDatePickerInputEmitter();
+                    }
                     if (formEvent) {
                         this.onChange({ date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date });
                     }
@@ -719,6 +729,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.monthName = this.monthsFullName[this.date.getMonth()];
                 this.isInvalidDateInput.emit(this.invalidDate);
                 this.constructCalendar();
+                this.constructCalendarYearsList();
                 this.updateDatePickerInputEmitter();
             } else {
                 this.isInvalidDateInput.emit(this.invalidDate);
@@ -746,6 +757,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.monthName = this.monthsFullName[this.date.getMonth()];
                 this.isInvalidDateInput.emit(this.invalidDate);
                 this.constructCalendar();
+                this.constructCalendarYearsList();
                 this.updateDatePickerInputEmitter();
             } else {
                 this.resetSelection();
@@ -778,6 +790,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 }
             });
         }
+        this.init = true;
     }
 
     ngAfterViewChecked() {
