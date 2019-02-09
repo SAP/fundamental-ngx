@@ -4,28 +4,79 @@ import { Component } from '@angular/core';
     selector: 'fd-dropdown-default-example',
     templateUrl: './dropdown-default-example.component.html'
 })
-export class DropdownDefaultExampleComponent {}
+export class DropdownDefaultExampleComponent {
+
+    menu1 = [
+        {text: 'Option 1', url: '#'},
+        {text: 'Option 2', url: '#'},
+        {text: 'Option 3', url: '#'}
+    ];
+
+    menu2 = [
+        {text: 'Option 3', url: '#'},
+        {text: 'Option 4', url: '#'},
+        {text: 'Option 5', url: '#'}
+    ];
+
+}
 
 @Component({
     selector: 'fd-dropdown-state-example',
     templateUrl: './dropdown-state-example.component.html'
 })
-export class DropdownStateExampleComponent {}
+export class DropdownStateExampleComponent {
+
+    menu1 = [
+        {text: 'Option 1', url: '#'},
+        {text: 'Option 2', url: '#'},
+        {text: 'Option 3', url: '#'}
+    ];
+
+}
 
 @Component({
     selector: 'fd-dropdown-icons-example',
     templateUrl: './dropdown-icons-example.component.html'
 })
-export class DropdownIconsExampleComponent {}
+export class DropdownIconsExampleComponent {
+
+    menu1 = [
+        {text: 'Option 1', url: '#'},
+        {text: 'Option 2', url: '#'},
+        {text: 'Option 3', url: '#'}
+    ];
+
+}
 
 @Component({
     selector: 'fd-dropdown-contextual-menu-example',
     templateUrl: './dropdown-contextual-menu-example.component.html'
 })
-export class DropdownContextualMenuExampleComponent {}
+export class DropdownContextualMenuExampleComponent {
+
+    menu1 = [
+        {text: 'Option 1', url: '#'},
+        {text: 'Option 2', url: '#'},
+        {text: 'Option 3', url: '#'}
+    ];
+
+}
 
 @Component({
     selector: 'fd-dropdown-toolbar-example',
     templateUrl: './dropdown-toolbar-example.component.html'
 })
-export class DropdownToolbarExampleComponent {}
+export class DropdownToolbarExampleComponent {
+
+    menu1 = [
+        {text: 'Option 1', url: '#'},
+        {text: 'Option 2', url: '#'},
+        {text: 'Option 3', url: '#'}
+    ];
+
+    menu2 = [
+        {text: 'Option 3', url: '#'},
+        {text: 'Option 4', url: '#'},
+        {text: 'Option 5', url: '#'}
+    ];
+}
