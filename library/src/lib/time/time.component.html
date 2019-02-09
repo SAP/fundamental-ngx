@@ -100,7 +100,7 @@
              [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}"
              class="fd-form__control"
              (blur)="inputBlur('period')"
-             (ngModelChange)="periodModelChange($event)"
+             (ngModelChange)="periodModelChange()"
              type="text"
              placeholder="am"
              aria-label="Period" />

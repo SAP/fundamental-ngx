@@ -35,7 +35,7 @@ export class FileDragndropDirective {
     @Input()
     dragndrop: boolean = true;
 
-    @HostListener('document:dragenter', ['$event'])
+    @HostListener('document:dragenter', [])
     public onDragstart() {
         if (this.dragndrop) {
             this.onDragStart.emit();
@@ -52,7 +52,7 @@ export class FileDragndropDirective {
         }
     }
 
-    @HostListener('dragenter', ['$event'])
+    @HostListener('dragenter', [])
     public onDragenter() {
         if (this.dragndrop) {
             this.onDragEnter.emit();
