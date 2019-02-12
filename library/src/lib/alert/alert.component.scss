@@ -1,4 +1,11 @@
 .fd-alert {
+    .fd-popover__body {
+        position: fixed;
+        top: auto;
+        left: auto;
+    }
+}
+.fd-alert-float {
     display: block;
     position: fixed;
     max-width: 33%;
@@ -6,11 +13,6 @@
     left: 0;
     margin: 0 auto;
     z-index: 1000;
-    .fd-popover__body {
-        position: fixed;
-        top: auto;
-        left: auto;
-    }
 }
 .fd-alert-show {
     opacity: 1 !important;

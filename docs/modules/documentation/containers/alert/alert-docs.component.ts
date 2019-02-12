@@ -6,6 +6,7 @@ import * as alertExampleHtml from '!raw-loader!./examples/alert-example.componen
 import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.ts';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
+import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
 
 @Component({
     selector: 'app-alert',
@@ -53,6 +54,7 @@ export class AlertDocsComponent {
     alertTs = alertExampleTs;
     alertContentTs = alertContent;
     alertComponentAsContentTs = alertComponentAsContentExample;
+    alertInlineHtml = alertInlineExampleHtml;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');

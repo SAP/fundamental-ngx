@@ -1,8 +1,11 @@
-<div class="fd-alert fd-alert-fade" [class.fd-alert-show]="show" role="alert" [attr.id]="getId()" [ngClass]="{'fd-alert--dismissible': dismissible,
+<div class="fd-alert" role="alert" [attr.id]="getId()" [ngClass]="{'fd-alert--dismissible': dismissible,
         'fd-alert--warning': (type === 'warning'),
         'fd-alert--error': (type === 'error'),
         'fd-alert--information': (type === 'information'),
-        'fd-alert--success': (type === 'success')}" #alertDiv>
+        'fd-alert--success': (type === 'success'),
+        'fd-alert-show': show,
+        'fd-alert-float': !inline,
+        'fd-alert-fade': !inline}" #alertDiv>
     <button class="fd-alert__close"
             *ngIf="dismissible"
             (click)="handleClose()"

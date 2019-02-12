@@ -67,6 +67,7 @@ import {
     ActionBarMobileExampleComponent
 } from './containers/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './containers/alert/examples/alert-example.component';
+import { AlertInlineExampleComponent } from './containers/alert/examples/alert-inline-example.component';
 import { AlertComponentAsContentExampleComponent } from './containers/alert/examples/alert-component-as-content-example.component';
 import { AlertContentComponent } from './containers/alert/examples/alert-content.component';
 import {
@@ -337,6 +338,7 @@ const ROUTES: Routes = [
         AlertExampleComponent,
         AlertComponentAsContentExampleComponent,
         AlertContentComponent,
+        AlertInlineExampleComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
