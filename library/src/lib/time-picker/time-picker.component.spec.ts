@@ -238,10 +238,10 @@ describe('TimePickerComponent', () => {
         component.time.minute = 1;
         component.time.hour = null;
         let retVal = component.getFormattedTime();
-        expect(retVal).toBeUndefined();
+        expect(retVal).toBe('');
         component.time.minute = null;
         retVal = component.getFormattedTime();
-        expect(retVal).toBeUndefined();
+        expect(retVal).toBe('');
         component.time.hour = 1;
         component.time.minute = 1;
         retVal = component.getFormattedTime();

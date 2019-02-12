@@ -12,7 +12,7 @@ import { FundamentalNgxModule } from '../../../library/src/lib/fundamental-ngx.m
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { PlayGroundComponent } from './components/playground/playground.component';
 import { PropertiesComponent } from './components/properties/properties.component';
-import { HtmlExampleComponent } from './components/html-example/html-example.component';
+import { CodeExampleComponent } from './components/code-example/code-example.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
@@ -20,6 +20,10 @@ import { ImportComponent } from './components/import/import.component';
 import { DirectionalityComponent } from './components/directionality/directionality.component';
 import { ComponentExampleComponent } from './components/component-example/component-example.component';
 import { ExampleBackgroundComponent } from './components/example-background/example-background.component';
+import { StatusIconComponent } from './components/status-icon/status-icon.component';
+
+// services
+import { CopyService } from './services/copy.service';
 
 // containers
 import { BadgeLabelDocsComponent } from './containers/badge-label/badge-label-docs.component';
@@ -63,6 +67,9 @@ import {
     ActionBarMobileExampleComponent
 } from './containers/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './containers/alert/examples/alert-example.component';
+import { AlertInlineExampleComponent } from './containers/alert/examples/alert-inline-example.component';
+import { AlertComponentAsContentExampleComponent } from './containers/alert/examples/alert-component-as-content-example.component';
+import { AlertContentComponent } from './containers/alert/examples/alert-content.component';
 import {
     BadgeDefaultExampleComponent,
     BadgeFilledExampleComponent,
@@ -99,7 +106,8 @@ import {
     DropdownContextualMenuExampleComponent,
     DropdownDefaultExampleComponent,
     DropdownIconsExampleComponent,
-    DropdownStateExampleComponent
+    DropdownStateExampleComponent,
+    DropdownToolbarExampleComponent
 } from './containers/dropdown/examples/dropdown-examples.component';
 import {
     FormCheckboxExampleComponent,
@@ -140,16 +148,19 @@ import { LoadingSpinnerContainerExampleComponent } from './containers/loading-sp
 import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
 import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
 import { ModalConfirmationExampleComponent } from './containers/modal/examples/modal-confirmation-example.component';
+import { ModalContentComponent } from './containers/modal/examples/modal-content.component';
+import { ModalComponentAsContentExampleComponent } from './containers/modal/examples/modal-component-as-content-example.component';
 import {
     PanelColumnsExampleComponent,
     PanelEdgeBleedExampleComponent,
     PanelExampleComponent,
     PanelGridExampleComponent,
     PanelGridNoGapExampleComponent,
-    PanelRowColumnExampleComponent
+    PanelGridColumnSpanExampleComponent
 } from './containers/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
+import { PopoverProgrammaticOpenExampleComponent } from './containers/popover/examples/popover-programmatic-open-example.component';
 import { SearchInputExampleComponent } from './containers/search-input/examples/search-input-example.component';
 import { ShellbarBasicExampleComponent } from './containers/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './containers/shellbar/examples/shellbar-collapsible-example.component';
@@ -186,6 +197,25 @@ import {
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent
 } from './containers/time-picker/examples/time-picker-examples.component';
+import { ToggleDocsComponent } from './containers/toggle/toggle-docs.component';
+import { ToggleSizesExampleComponent } from './containers/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
+import { DisabledToggleExampleComponent } from './containers/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
+import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { ListInfiniteScrollExampleComponent } from './containers/list/examples/list-infinite-scroll-example.component';
+import { DropdownInfiniteScrollExampleComponent } from './containers/dropdown/examples/dropdown-infinite-scroll-example.component';
+import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
+import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
+import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
+import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
+import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
+import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
+import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
+import { ListSingleSelectExampleComponent } from './containers/list/examples/list-single-select-example.component';
+import { FileInputDocsComponent } from './containers/file-input/file-input-docs.component';
+import { FileInputExampleComponent } from './containers/file-input/examples/file-input-example/file-input-example.component';
+import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
+import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
+import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -196,6 +226,7 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
+import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 
 export function highlightJsFactory() {
     return hljs;
@@ -217,10 +248,12 @@ const ROUTES: Routes = [
             { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
+            { path: 'file-input', component: FileInputDocsComponent },
             { path: 'form', component: FormDocsComponent },
             { path: 'icon', component: IconDocsComponent },
             { path: 'identifier', component: IdentifierDocsComponent },
             { path: 'image', component: ImageDocsComponent },
+            { path: 'infiniteScroll', component: InfiniteScrollDocsComponent },
             { path: 'inlineHelp', component: InlineHelpDocsComponent },
             { path: 'inputGroup', component: InputGroupDocsComponent },
             { path: 'list', component: ListDocsComponent },
@@ -239,6 +272,7 @@ const ROUTES: Routes = [
             { path: 'time', component: TimeDocsComponent },
             { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
+            { path: 'toggle', component: ToggleDocsComponent },
             { path: 'installation', component: InstallationDocsComponent },
             { path: 'usage', component: UsageDocsComponent },
             // { path: 'rtl', component: InternationalizationDocsComponent }, TODO: restore this route when fundamental is RTL ready
@@ -251,7 +285,7 @@ const ROUTES: Routes = [
     declarations: [
         DocumentationComponent,
         PlayGroundComponent,
-        HtmlExampleComponent,
+        CodeExampleComponent,
         HeaderComponent,
         DescriptionComponent,
         PropertiesComponent,
@@ -264,6 +298,7 @@ const ROUTES: Routes = [
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
         DropdownDocsComponent,
+        FileInputDocsComponent,
         FormDocsComponent,
         IconDocsComponent,
         IdentifierDocsComponent,
@@ -289,6 +324,7 @@ const ROUTES: Routes = [
         TimeDocsComponent,
         TimePickerDocsComponent,
         InstallationDocsComponent,
+        ToggleDocsComponent,
         UsageDocsComponent,
         InternationalizationDocsComponent,
         HomeDocsComponent,
@@ -300,6 +336,9 @@ const ROUTES: Routes = [
         ActionBarMobileExampleComponent,
         ActionBarNoBackExampleComponent,
         AlertExampleComponent,
+        AlertComponentAsContentExampleComponent,
+        AlertContentComponent,
+        AlertInlineExampleComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
@@ -327,6 +366,12 @@ const ROUTES: Routes = [
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
         DropdownStateExampleComponent,
+        DropdownInfiniteScrollExampleComponent,
+        DropdownToolbarExampleComponent,
+        FileInputExampleComponent,
+        FileInputCustomExampleComponent,
+        FileInputDragDisabledExampleComponent,
+        FileInputMaxExampleComponent,
         FormCheckboxExampleComponent,
         FormExampleComponent,
         FormInlineHelpExampleComponent,
@@ -341,6 +386,8 @@ const ROUTES: Routes = [
         TransparentIdentifierExampleComponent,
         ImageShapesExampleComponent,
         ImageSizesExampleComponent,
+        InfiniteScrollDocsComponent,
+        InfiniteScrollBasicExampleComponent,
         InlineHelpExampleComponent,
         InputGroupButtonExampleComponent,
         InputGroupIconExampleComponent,
@@ -351,19 +398,28 @@ const ROUTES: Routes = [
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
+        ListInfiniteScrollExampleComponent,
+        ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
         ModalExampleComponent,
         ModalConfirmationExampleComponent,
+        ModalContentComponent,
+        ModalComponentAsContentExampleComponent,
+        ModalInModalComponent,
+        ModalInModalSecondComponent,
+        ModalInModalExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,
         PanelGridExampleComponent,
         PanelGridNoGapExampleComponent,
-        PanelRowColumnExampleComponent,
+        PanelGridColumnSpanExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+        PopoverProgrammaticOpenExampleComponent,
         SearchInputExampleComponent,
+        SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,
@@ -372,6 +428,7 @@ const ROUTES: Routes = [
         SideNavigationLevelsExampleComponent,
         SideNavigationTitlesExampleComponent,
         TableExampleComponent,
+        TableCheckboxesExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
         TileActionsExampleComponent,
@@ -396,7 +453,17 @@ const ROUTES: Routes = [
         ComboboxInputExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
-        LoadingSpinnerContainerExampleComponent
+        LoadingSpinnerContainerExampleComponent,
+        StatusIconComponent,
+        ToggleSizesExampleComponent,
+        DisabledToggleExampleComponent,
+        ToggleBindingExampleComponent
+    ],
+    entryComponents: [
+        ModalContentComponent,
+        ModalInModalComponent,
+        ModalInModalSecondComponent,
+        AlertContentComponent
     ],
     imports: [
         HighlightJsModule.forRoot({
@@ -407,7 +474,11 @@ const ROUTES: Routes = [
         FormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
+        UtilsModule,
         FundamentalNgxModule
+    ],
+    providers: [
+        CopyService
     ]
 })
 export class DocumentationModule {}

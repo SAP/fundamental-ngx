@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-selector: 'fd-calendar-single-example',
-template: ` <fd-calendar [calType]="'single'" [(selectedDay)]="selectedDay"
-                        [blockFunction]="myBlockFunction" [disableFunction]="myDisableFunction">
-            </fd-calendar>
-            <br/>
-            <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
+    selector: 'fd-calendar-single-example',
+    template: `
+        <fd-calendar [calType]="'single'"
+                     [(ngModel)]="selectedDay"
+                     [blockFunction]="myBlockFunction"
+                     [disableFunction]="myDisableFunction">
+        </fd-calendar>
+        <br/>
+        <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
 })
 export class CalendarSingleExampleComponent {
     selectedDay = {

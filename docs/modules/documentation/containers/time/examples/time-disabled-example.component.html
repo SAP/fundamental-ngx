@@ -1,2 +1,4 @@
 <fd-time [disabled]="true"
-         [time]="{hour: 0, minute: 0, second: 0}"></fd-time>
+         [(ngModel)]="timeObject"></fd-time>
+<br />
+Selected Time: {{timeObject.hour}}h {{timeObject.minute}}m {{timeObject.second}}s

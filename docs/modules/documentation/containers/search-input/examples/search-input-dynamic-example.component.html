@@ -1,0 +1,11 @@
+<fd-search-input [ngModel]="searchTerm"
+                 (ngModelChange)="modelChange($event)"
+                 [dropdownValues]="dropdownSubject"
+                 [placeholder]="'Type to filter the list...'"
+                 (itemClicked)="selectItem($event)"
+                 [usingCustomFilter]="true"> <!-- This flag is important! -->
+</fd-search-input>
+<br />
+<span>Search Term: {{searchTerm}}</span>
+<br />
+<span>Selected: {{selected}}</span>

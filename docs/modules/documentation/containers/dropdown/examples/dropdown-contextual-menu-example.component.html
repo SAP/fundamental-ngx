@@ -2,18 +2,12 @@
     <fd-popover-control>
         <button fd-button [options]="'light'" [glyph]="'vertical-grip'"></button>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <fd-menu-list>
-                <fd-menu-item>
-                    <a [attr.href]="'#'">Option 1</a>
-                </fd-menu-item>
-                <fd-menu-item>
-                    <a [routerLink]="'#'">Option 2</a>
-                </fd-menu-item>
-                <fd-menu-item>
-                    Option 3
-                </fd-menu-item>
+                <li fd-menu-item *ngFor="let option of menu1">
+                    <a [attr.href]="option.url">{{option.text}}</a>
+                </li>
             </fd-menu-list>
         </fd-menu>
     </fd-popover-body>
@@ -23,18 +17,12 @@
     <fd-popover-control>
         <button fd-button>More</button>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <fd-menu-list>
-                <fd-menu-item>
-                    <a [attr.href]="'#'">Option 1</a>
-                </fd-menu-item>
-                <fd-menu-item>
-                    <a [routerLink]="'#'">Option 2</a>
-                </fd-menu-item>
-                <fd-menu-item>
-                    Option 3
-                </fd-menu-item>
+                <li fd-menu-item *ngFor="let option of menu1">
+                    <a [attr.href]="option.url">{{option.text}}</a>
+                </li>
             </fd-menu-list>
         </fd-menu>
     </fd-popover-body>
@@ -44,18 +32,12 @@
     <fd-popover-control>
         <button fd-button [options]="'light'">More</button>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <fd-menu-list>
-                <fd-menu-item>
-                    <a [attr.href]="'#'">Option 1</a>
-                </fd-menu-item>
-                <fd-menu-item>
-                    <a [routerLink]="'#'">Option 2</a>
-                </fd-menu-item>
-                <fd-menu-item>
-                    Option 3
-                </fd-menu-item>
+                <li fd-menu-item *ngFor="let option of menu1">
+                    <a [attr.href]="option.url">{{option.text}}</a>
+                </li>
             </fd-menu-list>
         </fd-menu>
     </fd-popover-body>

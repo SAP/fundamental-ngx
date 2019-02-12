@@ -1,0 +1,76 @@
+<style>
+    :host {
+        display: block;
+    }
+
+    .outer-div {
+        height: 200px;
+        background-color: white;
+        padding: 6px;
+    }
+
+    .inner-div {
+        height: 100%;
+        border: 2px lightgray dashed;
+        transition:
+            0.25s background-color ease-in-out,
+            0.25s border ease-in-out,
+            0.25s border-color ease-in-out,
+            0.25s color ease-in-out;
+    }
+
+    .state-over {
+        border: 2px solid #006eaf;
+        color: #006eaf;
+        background-color: #f1f7fa;
+    }
+
+    .content-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .delete-icon {
+        color: grey;
+        cursor: pointer;
+        transition: 0.25s color ease-in-out;
+    }
+
+    .delete-icon:hover {
+        color: #990100;
+    }
+</style>
+
+
+<fd-file-input #fdInput style="width: 100%;"
+               (onDragOver)="state = 'over'"
+               (onDragLeave)="state = 'default'"
+               (onSelect)="selectHandler($event)">
+    <div class="outer-div">
+        <div class="inner-div" [ngClass]="{'state-over': state === 'over'}">
+            <div class="content-div" *ngIf="!files || files.length === 0">
+                <fd-icon [glyph]="'upload-to-cloud'" [size]="'xl'"></fd-icon>
+                <span style="margin-top: 10px;">
+                    Drop files here, or
+                    <a style="cursor: pointer;" (click)="fdInput.open()">
+                        browse
+                    </a>.
+                </span>
+            </div>
+            <div class="content-div" *ngIf="files && files.length > 0">
+                <fd-list style="display: block; width: 100%; height: 100%; max-height: 100%; overflow: auto;">
+                    <li fd-list-item *ngFor="let file of files; let i = index;">
+                        {{file.name}}
+                        <span style="flex-grow: 1;"></span>
+                        <span class="delete-icon">
+                            <fd-icon [glyph]="'sys-cancel'" [size]="'l'" (click)="removeFile(i)"></fd-icon>
+                        </span>
+                    </li>
+                </fd-list>
+            </div>
+        </div>
+    </div>
+</fd-file-input>

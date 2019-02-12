@@ -9,7 +9,8 @@ import {
     EventEmitter,
     ViewChild,
     AfterViewInit,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    AfterViewChecked
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 
@@ -17,7 +18,7 @@ import { HashService } from '../utils/hash.service';
     selector: 'fd-popover',
     templateUrl: './popover.component.html'
 })
-export class PopoverComponent implements OnInit, AfterViewInit {
+export class PopoverComponent implements OnInit, AfterViewInit, AfterViewChecked {
     @Input()
     alignment: string = '';
     @Input()
@@ -42,6 +43,10 @@ export class PopoverComponent implements OnInit, AfterViewInit {
     compact: boolean = false;
     @Input()
     standard: boolean = false;
+    @Input()
+    toolbar: boolean = false;
+
+    popoverBodyHasContent: boolean = false;
 
     @Output()
     popoverClosed: EventEmitter<any> = new EventEmitter<any>();
@@ -50,6 +55,9 @@ export class PopoverComponent implements OnInit, AfterViewInit {
 
     @ViewChild('popoverControlWrapper')
     popoverControl: ElementRef;
+
+    @ViewChild('popoverBodyContent')
+    popoverBodyContent;
 
     id: string;
 
@@ -60,6 +68,12 @@ export class PopoverComponent implements OnInit, AfterViewInit {
         }
     }
 
+    open() {
+        if (!this.isOpen) {
+            this.isOpen = true;
+        }
+    }
+
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
         this.close();
@@ -67,16 +81,15 @@ export class PopoverComponent implements OnInit, AfterViewInit {
 
     onKeypressHandler(event) {
         if (this.isSearchInput) {
-            if (!this.isOpen) {
-                this.isOpen = true;
-            }
+            this.open();
         } else if (!this.popoverControlIsTabIndexed && (event.code === 'Space' || event.code === 'Enter')) {
             event.preventDefault();
             if (!this.isTimePicker) {
                 if (this.isOpen) {
-                    this.popoverClosed.emit();
+                    this.close();
+                } else {
+                    this.open();
                 }
-                this.isOpen = !this.isOpen;
             }
         }
     }
@@ -87,15 +100,16 @@ export class PopoverComponent implements OnInit, AfterViewInit {
         if (this.eRef.nativeElement.contains(target)) {
             if (!this.isTimePicker && !this.isSearchInput) {
                 if (this.isOpen) {
-                    this.popoverClosed.emit();
+                    this.close();
+                } else {
+                    this.open();
                 }
-                this.isOpen = !this.isOpen;
             } else if (this.isSearchInput) {
                 const targetElement = <HTMLElement>target;
-                if (!this.isOpen) {
-                    this.isOpen = true;
-                } else if (this.isOpen && targetElement.classList && targetElement.classList.contains('sap-icon--search')) {
-                    this.isOpen = false;
+                if (this.isOpen && targetElement.tagName === 'BUTTON') {
+                    this.close();
+                } else {
+                    this.open();
                 }
             }
         } else {
@@ -128,6 +142,13 @@ export class PopoverComponent implements OnInit, AfterViewInit {
             this.isTimePicker
         ) {
             this.popoverControlIsTabIndexed = true;
+        }
+        this.cd.detectChanges();
+    }
+
+    ngAfterViewChecked() {
+        if (this.popoverBodyContent && this.popoverBodyContent.nativeElement.children.length) {
+            this.popoverBodyHasContent = true;
         }
         this.cd.detectChanges();
     }

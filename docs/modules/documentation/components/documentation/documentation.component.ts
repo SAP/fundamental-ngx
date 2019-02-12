@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,44 +11,56 @@ export class DocumentationComponent implements OnInit {
     @ViewChild('content') contentElRef: ElementRef;
 
     components = [
-        { url: 'action-bar', name: 'Action Bar' },
-        { url: 'alert', name: 'Alert' },
-        { url: 'badgeLabel', name: 'Badge, Status & Label' },
-        { url: 'breadcrumb', name: 'Breadcrumb' },
-        { url: 'button', name: 'Button' },
-        { url: 'buttonGroup', name: 'Button Group' },
-        { url: 'calendar', name: 'Calendar' },
-        { url: 'comboboxInput', name: 'Combobox Input'},
-        { url: 'datePicker', name: 'Date Picker' },
-        { url: 'dropdown', name: 'Dropdown' },
-        { url: 'form', name: 'Form' },
-        { url: 'icon', name: 'Icon' },
-        { url: 'identifier', name: 'Identifier' },
-        { url: 'image', name: 'Image' },
-        { url: 'inlineHelp', name: 'Inline Help' },
-        { url: 'inputGroup', name: 'Input Group' },
-        { url: 'list', name: 'List' },
-        { url: 'loadingSpinner', name: 'Loading Spinner' },
-        { url: 'menu', name: 'Menu' },
-        { url: 'modal', name: 'Modal' },
-        { url: 'pagination', name: 'Pagination' },
-        { url: 'panel', name: 'Panel' },
-        { url: 'popover', name: 'Popover' },
-        { url: 'searchInput', name: 'Search Input' },
-        { url: 'shellbar', name: 'Shellbar' },
-        { url: 'sideNavigation', name: 'Side Navigation' },
-        { url: 'table', name: 'Table' },
-        { url: 'tabs', name: 'Tabs' },
-        { url: 'tile', name: 'Tile' },
-        { url: 'time', name: 'Time' },
-        { url: 'timePicker', name: 'Time Picker' }
+        { url: 'action-bar', name: 'Action Bar', status: 'ACTIVE' },
+        { url: 'alert', name: 'Alert', status: 'SAFE' },
+        { url: 'badgeLabel', name: 'Badge', status: 'SAFE' },
+        { url: 'breadcrumb', name: 'Breadcrumb', status: 'SAFE' },
+        { url: 'button', name: 'Button', status: 'ACTIVE' },
+        { url: 'buttonGroup', name: 'Button Group', status: 'SAFE' },
+        { url: 'calendar', name: 'Calendar', status: 'SAFE' },
+        { url: 'comboboxInput', name: 'Combobox Input', status: 'SAFE' },
+        { url: 'datePicker', name: 'Date Picker', status: 'SAFE' },
+        { url: 'dropdown', name: 'Dropdown', status: 'SAFE' },
+        { url: 'form', name: 'Form', status: 'SAFE' },
+        { url: 'icon', name: 'Icon', status: 'SAFE' },
+        { url: 'identifier', name: 'Identifier', status: 'SAFE' },
+        { url: 'image', name: 'Image', status: 'SAFE' },
+        { url: 'inlineHelp', name: 'Inline Help', status: 'SAFE' },
+        { url: 'inputGroup', name: 'Input Group', status: 'ACTIVE' },
+        { url: 'list', name: 'List', status: 'ACTIVE' },
+        { url: 'loadingSpinner', name: 'Loading Spinner', status: 'SAFE' },
+        { url: 'menu', name: 'Menu', status: 'SAFE' },
+        { url: 'modal', name: 'Modal', status: 'UNSAFE' },
+        { url: 'pagination', name: 'Pagination', status: 'SAFE' },
+        { url: 'popover', name: 'Popover', status: 'ACTIVE' },
+        { url: 'searchInput', name: 'Search Input', status: 'SAFE' },
+        { url: 'shellbar', name: 'Shellbar', status: 'ACTIVE' },
+        { url: 'sideNavigation', name: 'Side Navigation', status: 'SAFE' },
+        { url: 'table', name: 'Table', status: 'UNSAFE' },
+        { url: 'tabs', name: 'Tabs', status: 'SAFE' },
+        { url: 'tile', name: 'Tile', status: 'SAFE' },
+        { url: 'time', name: 'Time', status: 'SAFE' },
+        { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
+        { url: 'toggle', name: 'Toggle', status: 'ACTIVE'}
+    ];
+
+    layouts = [
+        { url: 'panel', name: 'Panel', status: 'SAFE' }
+    ];
+
+    utilities = [
+        { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
+        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' }
     ];
 
     search: string = '';
+    smallScreen: boolean = window.innerWidth < 992;
+    sideCollapsed: boolean = window.innerWidth < 576;
 
     constructor(private router: Router) {}
 
     ngOnInit() {
+
         // sort the list alphabetically
         this.components.sort((el1, el2) => {
             if (el1.name < el2.name) {
@@ -77,5 +89,35 @@ export class DocumentationComponent implements OnInit {
             event.preventDefault();
             this.selectComponent(url);
         }
+    }
+
+    onActivate() {
+        if (this.smallScreen && !this.sideCollapsed) {
+            this.sideCollapsed = true;
+        }
+
+        this.skipNavClicked();
+        this.contentElRef.nativeElement.scrollIntoView();
+    }
+
+    checkIfCloseSidebar() {
+        if (!this.sideCollapsed) {
+            this.sideCollapsed = !this.sideCollapsed;
+        }
+    }
+
+    windowSize() {
+        if (window.innerWidth < 992) {
+            this.smallScreen = true;
+            this.onActivate();
+        } else {
+            this.smallScreen = false;
+            this.sideCollapsed = false;
+        }
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.windowSize();
     }
 }

@@ -36,7 +36,7 @@ Next, open `documentation.component.ts` and add the following to the `components
 
 You should see 'Poster' appear in the side navigation under 'Components'.  Clicking the link will load this page:
 
-![alt text](./readme-assets/poster-docs-works.png "Poster Docs Works image")
+![alt text](assets/images/new_component/poster-docs-works.png "Poster Docs Works image")
 
 ## Generate a new module in the Library
 
@@ -56,11 +56,11 @@ Then, generate a 'poster' component in the new module:
 
 Create an `exports` array in the poster module and add the poster component, like so:
 
-![alt text](./readme-assets/poster-module.png "Poster Module Code")
+![alt text](assets/images/new_component/poster-module.png "Poster Module Code")
 
 Open `poster.component.ts` and change the component's 'app' prefix to 'fd', like so:
 
-![alt text](./readme-assets/empty-poster-code.png "Poster Empty Code")
+![alt text](assets/images/new_component/empty-poster-code.png "Poster Empty Code")
 
 The documentation application is importing every component in the fundamental-ngx library module.  Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
 
@@ -82,6 +82,6 @@ In the documentation project, open `poster-docs.component.html`, remove the defa
 
 Now, when you navigate to the Poster docs through the side navigation, you'll see our new Poster component!
 
-![alt text](./readme-assets/finished-poster-component.png "Finished Poster Component")
+![alt text](assets/images/new_component/finished-poster-component.png "Finished Poster Component")
 
 Refer to other component's documentation source to see how docs-related info is presented.

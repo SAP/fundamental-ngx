@@ -1,4 +1,4 @@
-<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact }">
+<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact, 'fd-dropdown--toolbar': toolbar }">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <button
@@ -9,7 +9,8 @@
                     (glyph ? ' sap-icon--' + glyph : '') +
                     (size ? ' fd-button--' + size : '') +
                     (compact ? ' fd-button--compact' : '') +
-                    (this.disabled ? ' is-disabled' : '')
+                    (this.disabled ? ' is-disabled' : '') +
+                    (toolbar ? ' fd-button--standard': '')
                 "
                 [attr.aria-expanded]="this.disabled ? false : isOpen"
                 [attr.aria-disabled]="this.disabled"
@@ -40,11 +41,12 @@
 
 <ng-template #popoverBodyTpl>
     <div
-        class="fd-popover__body"
-        [ngClass]="{  'fd-popover__body--no-arrow': isDropdown || !arrow,
+        [ngClass]="{  'fd-popover__body': popoverBodyHasContent,
+                      'fd-popover__body--no-arrow': isDropdown || !arrow,
                       'fd-popover__body--right' : alignment == 'right' }"
-        [attr.aria-hidden]="disabled ? true : !isOpen"
-    >
-        <ng-content select="fd-popover-body"></ng-content>
+        [attr.aria-hidden]="disabled ? true : !isOpen">
+        <div #popoverBodyContent>
+            <ng-content select="fd-popover-body"></ng-content>
+        </div>
     </div>
 </ng-template>

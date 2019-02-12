@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FundamentalNgxComponent } from './fundamental-ngx.component';
 import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
+import { AlertService } from './alert/alert.service';
 import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
@@ -9,6 +10,7 @@ import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { ComboboxInputModule } from './combobox-input/combobox-input.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
+import { FileInputModule } from './file-input/file-input.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
 import { IdentifierModule } from './identifier/identifier.module';
@@ -36,6 +38,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
+import { ToggleModule } from './toggle/toggle.module';
+import { InfiniteScrollModule } from './utils/infinite-scroll.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -51,12 +55,14 @@ import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
         CalendarModule,
         ComboboxInputModule,
         DatePickerModule,
+        FileInputModule,
         FormModule,
         IconModule,
         IdentifierModule,
         ImageModule,
         InlineHelpModule,
         IdentifierModule,
+        InfiniteScrollModule,
         InputGroupModule,
         ListModule,
         LoadingSpinnerModule,
@@ -73,8 +79,9 @@ import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
         TileModule,
         TimeModule,
         TimePickerModule,
+        ToggleModule,
         TreeModule
     ],
-    providers: [ModalService]
+    providers: [AlertService, ModalService]
 })
 export class FundamentalNgxModule {}

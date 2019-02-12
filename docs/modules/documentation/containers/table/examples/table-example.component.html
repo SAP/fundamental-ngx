@@ -1,9 +1,9 @@
 <fd-table>
     <fd-table-header>
-        <th>Column 1</th>
+        <th fdColumnSortable [sortDir]="column1SortDir" (click)="sortColumn1()">Column 1</th>
         <th>Column 2</th>
         <th>Column 3</th>
-        <th>Date</th>
+        <th fdColumnSortable [sortDir]="dateSortDir" (click)="sortDate()">Date</th>
         <th>Type</th>
     </fd-table-header>
     <fd-table-body>
