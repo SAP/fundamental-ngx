@@ -5,3 +5,10 @@
 .schema-block {
     display: block;
 }
+
+@media (max-width: 576px){
+    .playground-wrap {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}

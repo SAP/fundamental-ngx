@@ -12,8 +12,7 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
             Modal Body
         </fd-modal-body>
     </fd-modal>
-    <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>`,
-    providers: [ModalService]
+    <button fd-button (click)="openInfoModal(informationalModal)">Launch Demo</button>`
 })
 export class ModalExampleComponent {
     openInfoModal(modalType) {

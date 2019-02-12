@@ -23,7 +23,7 @@ export class ButtonDocsComponent implements OnInit {
                     },
                     fdType: {
                         type: 'string',
-                        enum: ['','standard', 'positive', 'medium', 'negative']
+                        enum: ['', 'standard', 'positive', 'medium', 'negative']
                     },
                     options: {
                         type: 'string',

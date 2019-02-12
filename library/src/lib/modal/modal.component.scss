@@ -1,5 +1,5 @@
 .fd-modal__body {
-    overflow: hidden;
+    overflow: auto;
 }
 
 .fd-modal__footer {
@@ -15,18 +15,17 @@ fd-modal {
         right: 0;
         left: 0;
         margin: 0 auto;
-        z-index: 1000;
-        overflow: auto;
+        .fd-popover__body {
+            position: fixed;
+            top: auto;
+            left: auto;
+        }
     }
 
-    .fd-modal-background {
-        position: fixed;
+    .fd-overlay {
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: black;
-        opacity: 0.5;
-        z-index: 900;
     }
 }

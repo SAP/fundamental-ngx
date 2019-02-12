@@ -1,10 +1,11 @@
 {
     "name": "fundamental-ngx",
-    "version": "0.0.18-beta",
+    "version": "0.0.27",
+    "description": "SAP Fiori Fundamentals, implemented in Angular",
     "license": "Apache-2.0",
     "peerDependencies": {
         "@angular/common": "^7.1.1",
         "@angular/core": "^7.1.1",
-        "fiori-fundamentals": "^1.4.0"
+        "fiori-fundamentals": "^1.4.1"
     }
 }

@@ -2,7 +2,7 @@
 <description>Form elements include field layout, checkboxes, radio buttons and states of a field. Use these components
   along with inline
   help and error state.</description>
-<import module="FormModule" path="fundamental/form/form.module"></import>
+<import module="FormModule" path="fundamental-ngx"></import>
 <separator></separator>
 
 <h1>&lt;fd-form-set&gt;</h1>
@@ -17,11 +17,11 @@
   ],
   inputs: [
     { name: 'forValue', description: 'This attribute is used to specify which form element the label is bound to.'},
-    { name: 'isRequired', description: 'Specifies a required field. The label is displayed in bold and noted by an asterisk (*) '},
     { name: 'type', description: 'Specifies the type of the form-message. Options include \'error\', \'warning\', and \'help\'. '},
     { name: 'state', description: 'Specifies the state of the input field. Options include \'normal\', \'valid\', \'invalid\', and \'warning\'. '},
     { name: 'isCheck', description: 'When set to \'true\', allows the form-items to be displayed as radio buttons and checkboxes.'},
-    { name: 'isInline', description: 'When set to \'true\', the component is displayed in a row.'}
+    { name: 'isInline', description: 'When set to \'true\', the component is displayed in a row.'},
+    { name: 'isRequired', description: 'Deprecated.'}
   ]
 }"></properties>
 
@@ -31,7 +31,7 @@
 <component-example [name]="'ex1'">
   <fd-form-example></fd-form-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="inputsFormHtml"></code></pre>
+<code-example [code]="inputsFormHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Inputs help elements</h2>
@@ -39,7 +39,7 @@
 <component-example [name]="'ex2'">
   <fd-form-inline-help-example></fd-form-inline-help-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="inputsHelpFormHtml"></code></pre>
+<code-example [code]="inputsHelpFormHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Input States</h2>
@@ -70,7 +70,7 @@
 <component-example [name]="'ex3'">
   <fd-form-state-example></fd-form-state-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="inputStatesFormHtml"></code></pre>
+<code-example [code]="inputStatesFormHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Select</h2>
@@ -80,26 +80,32 @@
 <component-example [name]="'ex4'">
   <fd-form-select-example></fd-form-select-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="selectFormHtml"></code></pre>
+<code-example [code]="selectFormHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Radio buttons</h2>
 <p>Radio buttons allow the user to see all options and select one. Generally, this is used when there are between 2-3
   options.
-  This component can also be disabled and displayed in a row.</p>
+  This component can also be disabled and displayed in a row.
+  <br/><br/>
+  Keyboard support for radio button selection is handled via the arrow keys.
+</p>
 
 <component-example [name]="'ex5'">
   <fd-form-radio-example></fd-form-radio-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="radioButtonsFormHtml"></code></pre>
+<code-example [code]="radioButtonsFormHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Checkbox</h2>
 <p>With checkboxes, all options are visible and the user can make one or more selections. This component can be set
   disabled
-  and also displayed in a row.</p>
+  and also displayed in a row.
+  <br/><br/>
+  Checkboxes are keyboard navigable via the tab key and selected with the space bar.
+</p>
 
 <component-example [name]="'ex6'">
   <fd-form-checkbox-example></fd-form-checkbox-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="checkboxFormHtml"></code></pre>
+<code-example [code]="checkboxFormHtml" [language]="'HTML'"></code-example>

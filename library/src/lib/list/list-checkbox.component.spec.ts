@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListCheckboxComponent } from './list-checkbox.component';
+import { FormsModule } from '@angular/forms';
+import { HashService } from '../utils/hash.service';
 
 describe('ListCheckboxComponent', () => {
     let component: ListCheckboxComponent;
@@ -8,7 +10,9 @@ describe('ListCheckboxComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ListCheckboxComponent]
+            declarations: [ListCheckboxComponent],
+            imports: [FormsModule],
+            providers: [HashService]
         }).compileComponents();
     }));
 

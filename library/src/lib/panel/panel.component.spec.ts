@@ -25,15 +25,12 @@ describe('PanelComponent', () => {
         expect(component).toBeTruthy();
         component.ngOnInit();
         expect(component._setProperties).toHaveBeenCalled();
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-panel');
     });
 
     it('should apply the appropriate classes', () => {
         component.columnSpan = 2;
-        component.rowSpan = 4;
         component.ngOnInit();
         expect(component._setProperties).toHaveBeenCalled();
         expect(component._addClassToElement).toHaveBeenCalledWith('fd-has-grid-column-span-2');
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-has-grid-row-span-4');
     });
 });

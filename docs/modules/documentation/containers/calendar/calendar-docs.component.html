@@ -1,7 +1,13 @@
 <header>Calendar</header>
-<description>Commonly used as the contents of a popover when composing “date-picker”, rarely used on its own as a
-  standalone component.</description>
-<import module="CalendarModule" path="fundamental/calendar/calendar.module"></import>
+<description>
+    Commonly used as the contents of a popover when composing “date-picker”, rarely used on its own as a standalone component.
+    <br/><br/>
+    The calendar header buttons are navigable with the tab key. Pressing enter or the space bar when the month or year is
+    focused will change the day selection grid to the month or year selection grid respectively. The user can then tab
+    into the day/month/year selection grid and use the arrow keys to navigate around the grid and make a selection with
+    the space bar or enter key.
+</description>
+<import module="CalendarModule" path="fundamental-ngx"></import>
 <separator></separator>
 
 <h1>&lt;fd-calendar&gt;</h1>
@@ -22,28 +28,34 @@
 
 <separator></separator>
 
-<h2>Calendar with single selection, disabled and blocked days</h2>
+<h2>Standard Calendar</h2>
 <description>
-  You can use two-way data binding to select a date or range of dates on a calendar.  Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
+  This example also features <strong>blocked</strong> and <strong>disabled</strong> days.
+  <br /><br />
+  You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
   To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
   Note that selecting a day (or range of days) in this manner will override any block/disable functions.
 </description>
 <component-example [name]="'ex1'">
   <fd-calendar-single-example></fd-calendar-single-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="calendarSingleSource"></code></pre>
-<separator></separator>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="exampleFunctionsHtml"></code></pre>
+
+<code-example [code]="calendarSingleSource" [language]="'typescript'"></code-example>
 <separator></separator>
 
-<h2>Calendar with range selection, selectedRangeFirst and selectedRangeLast</h2>
+<code-example [code]="exampleFunctionsHtml" [language]="'typescript'"></code-example>
+<separator></separator>
+
+<h2>Range Selection Calendar</h2>
+<description>Allows the selection of a range of dates. Only the first and last days of the range are passed back.</description>
 <component-example [name]="'ex2'">
   <fd-calendar-range-example></fd-calendar-range-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="calendarRangeSource"></code></pre>
+<code-example [code]="calendarRangeSource" [language]="'typescript'"></code-example>
 
-<h2>Calendar with Monday start of week</h2>
+<h2>Monday Start Calendar</h2>
+<description>Simply changes the order in which the days of the week appear.</description>
 <component-example [name]="'ex3'">
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="calendarMondayStartSource"></code></pre>
+<code-example [code]="calendarMondayStartSource" [language]="'typescript'"></code-example>

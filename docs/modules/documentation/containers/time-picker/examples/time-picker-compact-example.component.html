@@ -1,2 +1,4 @@
 <fd-time-picker [compact]="true"
-                [time]="timeObject"></fd-time-picker><br>
+                [(ngModel)]="timeObject"></fd-time-picker>
+<br />
+Selected Time: {{timeObject.hour}}h {{timeObject.minute}}m {{timeObject.second}}s

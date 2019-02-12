@@ -1,16 +1,28 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'fd-date-picker',
     templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.scss']
+    styleUrls: ['./date-picker.component.scss'],
+    host: {
+        '(blur)': 'onTouched()'
+    },
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DatePickerComponent),
+            multi: true
+        }
+    ]
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromDatePicker: string = '';
+    dateFromDatePicker = new BehaviorSubject<string>('');
 
     @Input()
     type: CalendarType = 'single';
@@ -47,6 +59,9 @@ export class DatePickerComponent implements OnInit {
     };
     @Output()
     selectedRangeLastChange = new EventEmitter();
+
+    onChange: any = (selected: any) => {};
+    onTouched: any = () => {};
 
     openCalendar(e) {
         this.isOpen = !this.isOpen;
@@ -85,6 +100,7 @@ export class DatePickerComponent implements OnInit {
                 this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
                 this.selectedDay = d.selectedDay;
                 this.selectedDayChange.emit(this.selectedDay);
+                this.onChange({date: this.selectedDay.date});
             }
         } else {
             if (d.selectedFirstDay.date) {
@@ -93,6 +109,7 @@ export class DatePickerComponent implements OnInit {
                 this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                 this.selectedRangeLastChange.emit(this.selectedRangeLast);
                 this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
+                this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
             }
         }
     }
@@ -102,7 +119,7 @@ export class DatePickerComponent implements OnInit {
     }
 
     getInputValue(e) {
-        this.dateFromDatePicker = e;
+        this.dateFromDatePicker.next(e);
     }
 
     @HostListener('document:keydown.escape', [])
@@ -121,4 +138,30 @@ export class DatePickerComponent implements OnInit {
     ngOnInit() {}
 
     constructor(private eRef: ElementRef) {}
+
+    registerOnChange(fn: (selected: any) => {void}): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        // void for now
+    }
+
+    writeValue(selected: {date: Date, rangeEnd?: Date}): void {
+        if (!selected) {
+            return;
+        }
+        if (this.type.toLocaleLowerCase() === 'single') {
+            this.selectedDay.date = selected.date;
+            this.inputFieldDate = selected.date.toLocaleDateString();
+        } else {
+            this.selectedRangeFirst.date = selected.date;
+            this.selectedRangeLast.date = selected.rangeEnd;
+            this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+        }
+    }
 }

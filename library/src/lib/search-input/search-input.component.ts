@@ -15,7 +15,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SearchInputComponent implements ControlValueAccessor {
     @Input()
-    searchTerms: any[];
+    dropdownValues: any[];
+
+    @Input()
+    usingCustomFilter: boolean = false;
 
     @Input()
     disabled: boolean;
@@ -26,14 +29,20 @@ export class SearchInputComponent implements ControlValueAccessor {
     @Input()
     inShellbar: boolean = false;
 
-    @Output()
-    popoverClosed: EventEmitter<any> = new EventEmitter<any>();
+    @Input()
+    glyph: string = 'search';
 
     @Input()
     searchFunction: Function;
 
     @Input()
     compact: boolean = false;
+
+    @Input()
+    highlight: boolean = true;
+
+    @Output()
+    itemClicked = new EventEmitter<any>();
 
     isOpen: boolean = false;
 
@@ -48,7 +57,15 @@ export class SearchInputComponent implements ControlValueAccessor {
     onMenuKeypressHandler(event, term) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
+            this.itemClicked.emit(term);
         }
+    }
+
+    onMenuClickHandler(event, term) {
+        if (term.callback) {
+            term.callback(event);
+        }
+        this.itemClicked.emit(term);
     }
 
     onChange: any = () => {};
@@ -71,6 +88,7 @@ export class SearchInputComponent implements ControlValueAccessor {
     registerOnChange(fn) {
         this.onChange = fn;
     }
+
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
@@ -82,9 +100,9 @@ export class SearchInputComponent implements ControlValueAccessor {
 export class FdSearchPipe implements PipeTransform {
     transform(value: any, input: string) {
         if (input) {
-            input = input.toLowerCase();
+            input = input.toLocaleLowerCase();
             return value.filter((result: any) => {
-                return result.text.toLowerCase().startsWith(input);
+                return result.text.toLocaleLowerCase().startsWith(input);
             });
         }
         return value;

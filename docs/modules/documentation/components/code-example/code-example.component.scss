@@ -1,0 +1,35 @@
+.docs-html-example-container {
+    position: relative;
+
+    &:hover {
+        .docs-example-copy-button {
+            display: block;
+        }
+    }
+}
+
+.docs-example-copy-button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border: none;
+    display: none;
+    color: #959595;
+    background-color: transparent;
+
+    &:active {
+        border: none;
+        opacity: 0.65;
+    }
+
+    &:focus {
+        border-radius: 50%;
+        box-shadow: none;
+    }
+
+    &:hover {
+        border: none;
+        color: inherit;
+        background-color: transparent;
+    }
+}

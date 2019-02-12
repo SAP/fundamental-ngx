@@ -5,9 +5,12 @@
   in the path by clicking on those levels. By clicking on the current page, a dropdown allows users to access other
   pages
   at that same level.
+  <br/><br/>
+  Breadcrumb links are keyboard-navigable via the tab key, provided they have a <code>[routerLink]</code> or <code>[attr.href]</code> attribute.
+
 </description>
 <import module="BreadcrumbModule"
-        path="fundamental/breadcrumb/breadcrumb.module"></import>
+        path="fundamental-ngx"></import>
 <separator></separator>
 
 <h1>&lt;fd-breadcrumb&gt;</h1>
@@ -19,7 +22,8 @@
 <component-example [name]="'ex1'">
   <fd-breadcrumb-routerLink-example></fd-breadcrumb-routerLink-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbRouterLinkHtml"></code></pre>
+<code-example [code]="breadcrumbRouterLinkHtml" [language]="'HTML'"></code-example>
+
 <separator></separator>
 
 <span>An example using <b>href</b></span>
@@ -27,3 +31,4 @@
   <fd-breadcrumb-href-example></fd-breadcrumb-href-example>
 </component-example>
 <pre><code mwlHighlightJs [language]="'HTML'" [source]="breadcrumbHrefHtml"></code></pre>
+<code-example [code]="breadcrumbHrefHtml" [language]="'HTML'"></code-example>

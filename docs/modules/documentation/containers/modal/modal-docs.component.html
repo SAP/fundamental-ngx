@@ -2,7 +2,7 @@
 <description>The modal is used as a container to be displayed in response to a action. It is commonly used to collect
   simple information
   with a short form, to get confirmation or display contextual information that does not require a page.</description>
-<import module="ModalModule" path="fundamental/modal/modal.module"></import>
+<import module="ModalModule" path="fundamental-ngx"></import>
 <separator></separator>
 
 The Modal component utilizes a singleton ModalService to handle opening/closing of the modal. In your component, you'll
@@ -25,7 +25,7 @@ constructor with
 <component-example [name]="'ex1'">
   <fd-modal-example></fd-modal-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="informationalModalSource"></code></pre>
+<code-example [code]="informationalModalSource" [language]="'typescript'"></code-example>
 
 <separator></separator>
 
@@ -36,4 +36,25 @@ constructor with
 <component-example [name]="'ex2'">
   <fd-modal-confirmation-example></fd-modal-confirmation-example>
 </component-example>
-<pre><code mwlHighlightJs [language]="'typescript'" [source]="confirmationModalSource"></code></pre>
+<code-example [code]="confirmationModalSource" [language]="'typescript'"></code-example>
+
+<h2>Component as Content</h2>
+<p>A reference to a component can be passed to the modal service open function, rather than passing a template reference variable.</p>
+<p>The content component's inputs can be accessed through the <code>instance</code> property on the modal reference object that is returned
+by the modal service's <code>open()</code> function.</p>
+<p>Custom options can be passed as the second parameter of the <code>open</code> function. Additionally, inputs can be set on the modal reference's <code>instance</code> object.</p>
+<component-example [name]="'ex3'">
+    <fd-modal-component-as-content-example></fd-modal-component-as-content-example>
+</component-example>
+<code-example [code]="componentAsContentSource" [language]="'typescript'"></code-example>
+<code-example [code]="contentSource" [language]="'typescript'"></code-example>
+
+<h2>Modal in a Modal</h2>
+<p>The modal component heavily relies on the ModalService, which contains every active Modal instance. To create nested modals, the service has an array of modal component references.</p>
+<p>It treats this array like a stack, adding new modals to the top and calling pop() when they are closed. For this reason, nested modals must be closed in the order they were first opened.</p>
+<component-example [name]="'ex4'">
+    <fd-modal-in-modal-example></fd-modal-in-modal-example>
+</component-example>
+<code-example [code]="modalInModalExample" [language]="'typescript'"></code-example>
+<code-example [code]="modalInModal" [language]="'typescript'"></code-example>
+<code-example [code]="modalInModalSecond" [language]="'typescript'"></code-example>

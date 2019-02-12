@@ -8,7 +8,7 @@ export class SearchInputExampleComponent {
 
     searchTerm: string = '';
 
-    searchTerms = [
+    dropdownValues = [
         {text: 'Apple', callback: () => {alert('Apple Clicked')}},
         {text: 'Banana', callback: () => {alert('Banana Clicked')}},
         {text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
