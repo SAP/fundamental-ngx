@@ -48,8 +48,6 @@ export class AlertComponent implements OnInit {
         if (!this.inline) {
             this.elRef.nativeElement.style.display = 'none';
             this.alertDiv.nativeElement.style.display = 'none';
-        } else {
-
         }
     }
 
