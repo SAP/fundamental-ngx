@@ -18,7 +18,10 @@
                             <li fd-menu-item *ngFor="let action of shellbarActions" (click)="action.callback($event)">
                                 {{action.label}}
                             </li>
-                            <li fd-menu-item *ngIf="productSwitcher" class="fd-menu__addon-before" (click)="toggleCollapsedProducts($event);">
+                            <div *ngIf="productSwitcher" class="fd-menu__addon-before">
+                                <span [ngClass]="'sap-icon--grid'"></span>
+                            </div>
+                            <li fd-menu-item *ngIf="productSwitcher" (click)="toggleCollapsedProducts($event);">
                                 Product Switcher
                             </li>
                         </fd-menu-list>
