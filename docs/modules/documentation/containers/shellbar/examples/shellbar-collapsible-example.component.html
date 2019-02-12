@@ -9,7 +9,7 @@
     </fd-shellbar-subtitle>
     <fd-copilot></fd-copilot>
     <fd-shellbar-actions [user]="user" [userMenu]="userMenu" [productSwitcher]="productSwitcher">
-        <fd-shellbar-action [label]="'Search'">
+        <fd-shellbar-action [label]="'Search'" [glyph]="'search'">
             <fd-search-input [inShellbar]="true" [dropdownValues]="searchTerms" [(ngModel)]="searchTerm" [searchFunction]="exampleSearchFunction"></fd-search-input>
         </fd-shellbar-action>
         <fd-shellbar-action *ngFor="let action of actions" [glyph]="action.glyph" [callback]="action.callback"
