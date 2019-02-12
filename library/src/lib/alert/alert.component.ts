@@ -27,6 +27,8 @@ export class AlertComponent implements OnInit {
 
     @Output() close = new EventEmitter<string>();
 
+    @Input() inline: boolean = false;
+
     show: boolean = false;
 
     generatedId: string;
@@ -43,8 +45,12 @@ export class AlertComponent implements OnInit {
         /*
          modal should be hidden on init
          */
-        this.elRef.nativeElement.style.display = 'none';
-        this.alertDiv.nativeElement.style.display = 'none';
+        if (!this.inline) {
+            this.elRef.nativeElement.style.display = 'none';
+            this.alertDiv.nativeElement.style.display = 'none';
+        } else {
+
+        }
     }
 
     getId() {
@@ -59,7 +65,7 @@ export class AlertComponent implements OnInit {
         this.elRef.nativeElement.style.display = 'none';
         this.alertDiv.nativeElement.style.display = 'none';
         this.close.emit(this.id);
-        if (!fromService) {
+        if (!fromService && !this.inline) {
             this.alertService.popAlert();
         }
     }
