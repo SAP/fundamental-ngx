@@ -46,7 +46,7 @@
 
 
 <fd-file-input #fdInput style="width: 100%;"
-               (onDragOver)="state = 'over'"
+               (onDragEnter)="state = 'over'"
                (onDragLeave)="state = 'default'"
                (onSelect)="selectHandler($event)">
     <div class="outer-div">

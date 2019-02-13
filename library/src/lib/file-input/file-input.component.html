@@ -7,9 +7,7 @@
      (onFileChange)="selectHandler($event)"
      (onInvalidFiles)="this.onInvalidFiles.emit($event)"
      (onDragEnter)="this.onDragEnter.emit()"
-     (onDragLeave)="this.onDragLeave.emit()"
-     (onDragOver)="this.onDragOver.emit()"
-     (onDragStart)="this.onDragStart.emit()">
+     (onDragLeave)="this.onDragLeave.emit()">
     <ng-content></ng-content>
 </div>
 <input #input
