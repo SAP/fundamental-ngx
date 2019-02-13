@@ -9,6 +9,7 @@ export * from './lib/fundamental-ngx.module';
 export * from './lib/action-bar/action-bar.module';
 export * from './lib/alert/alert.module';
 export * from './lib/alert/alert.service';
+export * from './lib/alert/alert.component';
 export * from './lib/badge-label/badge-label.module';
 export * from './lib/breadcrumb/breadcrumb.module';
 export * from './lib/button/button.module';
