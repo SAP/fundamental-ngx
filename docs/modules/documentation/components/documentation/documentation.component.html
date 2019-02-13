@@ -1,72 +1,67 @@
 <button (click)="skipNavClicked()" aria-label="skip navigation" class="skip-navigation">Skip Navigation</button>
-<div class="sidebar" [ngClass]="{'sidebar-collapsed': sideCollapsed}">
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
     <h1 class="logo">
-        <a routerLink="/"
-           class="logo-link">Fundamental
-            <span class="has-accent-color">NGX</span>
-        </a>
+        <a routerLink="/" class="logo-link">Fundamental <span class="has-accent-color">NGX</span> </a>
     </h1>
 
     <nav>
         <ul class="nav">
             <span class="side-nav__headers">Getting Started</span>
             <li>
-                <a class="nav-item"
-                   tabindex="0"
-                   role="button"
-                   (click)="selectComponent('home')"
-                   (keypress)="onKeypressHandler('home', $event)"
-                   routerLinkActive="nav-item--active">Home</a>
+                <a
+                    class="nav-item"
+                    tabindex="0"
+                    role="button"
+                    (click)="selectComponent('home')"
+                    (keypress)="onKeypressHandler('home', $event)"
+                    routerLinkActive="nav-item--active"
+                    >Home</a
+                >
             </li>
             <li>
-                <a class="nav-item"
-                   tabindex="0"
-                   role="button"
-                   (click)="selectComponent('installation')"
-                   (keypress)="onKeypressHandler('installation', $event)"
-                   routerLinkActive="nav-item--active">Installation</a>
+                <a
+                    class="nav-item"
+                    tabindex="0"
+                    role="button"
+                    (click)="selectComponent('new-component')"
+                    (keypress)="onKeypressHandler('home', $event)"
+                    routerLinkActive="nav-item--active"
+                    >New Component</a
+                >
             </li>
-            <li>
-                <a class="nav-item"
-                   tabindex="0"
-                   role="button"
-                   (click)="selectComponent('usage')"
-                   (keypress)="onKeypressHandler('usage', $event)"
-                   routerLinkActive="nav-item--active">Usage</a>
-            </li>
-            <!--li> TODO: restore this link when fundamental is RTL ready
-              <a class="nav-item"
-                 tabindex="0"
-                 role="button"
-                 (click)="selectComponent('rtl')"
-                 (keypress)="onKeypressHandler('rtl', $event)"
-                 routerLinkActive="nav-item--active">Internationalization</a>
-            </li-->
         </ul>
     </nav>
 
-
     <nav style="padding-bottom: 20px;">
-        <ul class="nav"
-            id="tn-components-selector">
+        <ul class="nav" id="tn-components-selector">
             <li class="side-nav__search">
-                <fd-input-group-search [disabled]="false"
-                                       [(ngModel)]="search"
-                                       placeholder="Search"></fd-input-group-search>
-
+                <fd-input-group-search
+                    [disabled]="false"
+                    [(ngModel)]="search"
+                    placeholder="Search"
+                ></fd-input-group-search>
             </li>
             <span class="side-nav__headers">Components</span>
             <ng-container *ngFor="let component of components">
-                <li *ngIf="search === '' || component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 || component.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
+                <li
+                    *ngIf="
+                        search === '' ||
+                        component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
+                        component.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                    "
+                >
                     <div class="nav-item-container">
-                        <a class="nav-item"
-                           [routerLink]="'/docs/' + component.url"
-                           (click)="selectComponent(component.url)"
-                           (keypress)="onKeypressHandler(component.url, $event)"
-                           tabindex="0"
-                           role="button"
-                           routerLinkActive="nav-item--active">
-                            {{ component.name }}</a>
+                        <a
+                            class="nav-item"
+                            [routerLink]="'/' + component.url"
+                            (click)="selectComponent(component.url)"
+                            (keypress)="onKeypressHandler(component.url, $event)"
+                            tabindex="0"
+                            role="button"
+                            routerLinkActive="nav-item--active"
+                        >
+                            {{ component.name }}</a
+                        >
                         <status-icon [status]="component.status"></status-icon>
                     </div>
                 </li>
@@ -74,16 +69,25 @@
 
             <span class="side-nav__headers">Layouts</span>
             <ng-container *ngFor="let layout of layouts">
-                <li *ngIf="search === '' || layout.url.toUpperCase().indexOf(search.toUpperCase()) != -1 || layout.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
+                <li
+                    *ngIf="
+                        search === '' ||
+                        layout.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
+                        layout.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                    "
+                >
                     <div class="nav-item-container">
-                        <a class="nav-item"
-                           [routerLink]="'/docs/' + layout.url"
-                           (click)="selectComponent(layout.url)"
-                           (keypress)="onKeypressHandler(layout.url, $event)"
-                           tabindex="0"
-                           role="button"
-                           routerLinkActive="nav-item--active">
-                            {{ layout.name }}</a>
+                        <a
+                            class="nav-item"
+                            [routerLink]="'/' + layout.url"
+                            (click)="selectComponent(layout.url)"
+                            (keypress)="onKeypressHandler(layout.url, $event)"
+                            tabindex="0"
+                            role="button"
+                            routerLinkActive="nav-item--active"
+                        >
+                            {{ layout.name }}</a
+                        >
                         <status-icon [status]="layout.status"></status-icon>
                     </div>
                 </li>
@@ -91,16 +95,25 @@
 
             <span class="side-nav__headers">Utilities</span>
             <ng-container *ngFor="let util of utilities">
-                <li *ngIf="search === '' || util.url.toUpperCase().indexOf(search.toUpperCase()) != -1 || util.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
+                <li
+                    *ngIf="
+                        search === '' ||
+                        util.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
+                        util.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                    "
+                >
                     <div class="nav-item-container">
-                        <a class="nav-item"
-                           [routerLink]="'/docs/' + util.url"
-                           (click)="selectComponent(util.url)"
-                           (keypress)="onKeypressHandler(util.url, $event)"
-                           tabindex="0"
-                           role="button"
-                           routerLinkActive="nav-item--active">
-                            {{ util.name }}</a>
+                        <a
+                            class="nav-item"
+                            [routerLink]="'/' + util.url"
+                            (click)="selectComponent(util.url)"
+                            (keypress)="onKeypressHandler(util.url, $event)"
+                            tabindex="0"
+                            role="button"
+                            routerLinkActive="nav-item--active"
+                        >
+                            {{ util.name }}</a
+                        >
                         <status-icon [status]="util.status"></status-icon>
                     </div>
                 </li>
@@ -111,17 +124,23 @@
 
 <div class="content">
     <div class="collapse-button-container">
-        <button class="collapse-button" [size]="'l'" fd-button *ngIf="this.smallScreen || this.sideCollapsed"
-                [fdType]="'standard'" [options]="'light'" [glyph]="'menu2'"
-                (click)="this.sideCollapsed = !this.sideCollapsed"></button>
+        <button
+            class="collapse-button"
+            [size]="'l'"
+            fd-button
+            *ngIf="this.smallScreen || this.sideCollapsed"
+            [fdType]="'standard'"
+            [options]="'light'"
+            [glyph]="'menu2'"
+            (click)="this.sideCollapsed = !this.sideCollapsed"
+        ></button>
     </div>
-    <div tabindex="0" #content class="content-margin">
-        <router-outlet (activate)="onActivate()"></router-outlet>
-    </div>
+    <div tabindex="0" #content class="content-margin"><router-outlet (activate)="onActivate()"></router-outlet></div>
 </div>
 
-<div class="collapsed-overlay"
-     [ngClass]="{'overlay-init': !this.sideCollapsed}"
-     *ngIf="this.smallScreen"
-     (click)="checkIfCloseSidebar()">
-</div>
+<div
+    class="collapsed-overlay"
+    [ngClass]="{ 'overlay-init': !this.sideCollapsed }"
+    *ngIf="this.smallScreen"
+    (click)="checkIfCloseSidebar()"
+></div>

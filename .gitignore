@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 
+docs/assets/README.md
+docs/assets/NEW_COMPONENT.md
 # dependencies
 **/node_modules
 

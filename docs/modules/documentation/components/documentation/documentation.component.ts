@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
     templateUrl: './documentation.component.html'
 })
 export class DocumentationComponent implements OnInit {
-
     @ViewChild('content') contentElRef: ElementRef;
 
     components = [
@@ -41,12 +40,10 @@ export class DocumentationComponent implements OnInit {
         { url: 'tile', name: 'Tile', status: 'SAFE' },
         { url: 'time', name: 'Time', status: 'SAFE' },
         { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
-        { url: 'toggle', name: 'Toggle', status: 'ACTIVE'}
+        { url: 'toggle', name: 'Toggle', status: 'ACTIVE' }
     ];
 
-    layouts = [
-        { url: 'panel', name: 'Panel', status: 'SAFE' }
-    ];
+    layouts = [{ url: 'panel', name: 'Panel', status: 'SAFE' }];
 
     utilities = [
         { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
@@ -60,7 +57,6 @@ export class DocumentationComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit() {
-
         // sort the list alphabetically
         this.components.sort((el1, el2) => {
             if (el1.name < el2.name) {
@@ -75,7 +71,7 @@ export class DocumentationComponent implements OnInit {
     }
 
     selectComponent(component) {
-        this.router.navigate(['/docs', component]).then(() => {
+        this.router.navigate(['/', component]).then(() => {
             this.skipNavClicked();
         });
     }

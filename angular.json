@@ -17,11 +17,8 @@
                         "tsConfig": "docs/tsconfig.app.json",
                         "polyfills": "docs/polyfills.ts",
                         "assets": ["docs/assets", "docs/favicon.ico"],
-                        "styles": [
-                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
-                            "docs/styles.scss"
-                        ],
-                        "scripts": []
+                        "styles": ["node_modules/fiori-fundamentals/dist/fiori-fundamentals.css", "docs/styles.scss"],
+                        "scripts": ["node_modules/marked/lib/marked.js"]
                     },
                     "configurations": {
                         "production": {
@@ -88,10 +85,7 @@
                         "polyfills": "docs/polyfills.ts",
                         "tsConfig": "docs/tsconfig.spec.json",
                         "scripts": [],
-                        "styles": [
-                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
-                            "docs/styles.scss"
-                        ],
+                        "styles": ["node_modules/fiori-fundamentals/dist/fiori-fundamentals.css", "docs/styles.scss"],
                         "assets": ["docs/assets", "docs/favicon.ico"]
                     }
                 },
@@ -154,10 +148,7 @@
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": [
-                            "library/tsconfig.lib.json",
-                            "library/tsconfig.spec.json"
-                        ],
+                        "tsConfig": ["library/tsconfig.lib.json", "library/tsconfig.spec.json"],
                         "exclude": ["**/node_modules/**"]
                     }
                 }

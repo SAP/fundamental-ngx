@@ -31,11 +31,15 @@ For an existing Angular application,
 
 1. **Install Fundamental-ngx and Fiori Fundamentals.**
 
-    `npm install --save fiori-fundamentals fundamental-ngx`
+    ```
+    npm install --save fiori-fundamentals fundamental-ngx
+    ```
 
 2. **Include Fiori Fundamentals CSS in the `styles` array of the `angular.json` file.**
 
-    `"./node_modules/fiori-fundamentals/dist/fiori-fundamentals.css"`
+    ```scss
+    "./node_modules/fiori-fundamentals/dist/fiori-fundamentals.min.css"
+    ```
 
     _Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root._
 
@@ -43,7 +47,9 @@ For an existing Angular application,
 
     To add the entire library, add
 
-    `import { FundamentalNgxModule } from 'fundamental-ngx';`
+    ```javascript
+    import { FundamentalNgxModule } from 'fundamental-ngx';
+    ```
 
     to your app's module definition. Also add `FundamentalNgxModule` to the `imports` array in the @NgModule declaration.
 
@@ -51,13 +57,17 @@ For an existing Angular application,
 
     For example, to use Alerts, add
 
-    `import { AlertModule } from 'fundamental-ngx/alert/alert.module';`
+    ```javascript
+    import { AlertModule } from 'fundamental-ngx/alert/alert.module';
+    ```
 
     to the file that declares the module you're adding alerts to. It can also be added to the app module declaration to be used site-wide. You also need to add `AlertModule` to your app or module's `imports` array.
 
 4. **Add the component to your HTML.**
 
-    `<fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)"> A warning type alert. </fd-alert>`
+    ```
+    <fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)"> A warning type alert. </fd-alert>
+    ```
 
 ## Demo Application
 
@@ -87,11 +97,11 @@ Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/dev
 
 ## License
 
-Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 This file is licensed under the Apache Software License, v.2 except as noted otherwise in the [LICENSE file](https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt).
 
 ## Similar Projects
 
-[Fundamental-react](https://github.com/SAP/fundamental-react)
+[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of SAP Fiori Fundamentals
 
-[Fundamental-vue](https://github.com/SAP/fundamental-vue)
+[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of SAP Fiori Fundamentals
