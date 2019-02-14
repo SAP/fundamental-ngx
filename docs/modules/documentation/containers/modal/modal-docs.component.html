@@ -13,9 +13,16 @@ constructor with
 <code>private modalService: ModalService</code>. Then you'll need to call
 <code>this.modalService.open(modalName)</code>. Use
 <code>this.modalService.close()</code> to close the modal.
-<br>
-<br>
+<separator></separator>
 <h1>&lt;fd-modal&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'width', description: 'String. Width of the modal. Defaults to 480px.' },
+    { name: 'height', description: 'String. Height of the modal. Defaults to content.'}
+  ]
+}"></properties>
+<separator></separator>
 
 <h2>Informational Modal</h2>
 <p>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user

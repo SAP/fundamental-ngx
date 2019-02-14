@@ -4,7 +4,7 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
 @Component({
     selector: 'fd-modal-example',
     template: `
-    <fd-modal #informationalModal>
+    <fd-modal #informationalModal [width]="'600px'" [height]="'200px'">
         <fd-modal-header>
             Modal Header/Title
         </fd-modal-header>
