@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { RouterModule, Routes } from '@angular/router';
 import { SchemaModule } from '../schema/schema.module';
@@ -217,10 +218,8 @@ import { FileInputCustomExampleComponent } from './containers/file-input/example
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
 
-import { InstallationDocsComponent } from './containers/installation/installation.component';
-import { UsageDocsComponent } from './containers/usage/usage.component';
-import { InternationalizationDocsComponent } from './containers/internationalization/internationalization.component';
 import { HomeDocsComponent } from './containers/home/home.component';
+import { NewComponentComponent } from './containers/new-component/new-component.component';
 
 import { COMPONENT_SCHEMAS } from './containers/schemas';
 
@@ -273,10 +272,8 @@ const ROUTES: Routes = [
             { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
             { path: 'toggle', component: ToggleDocsComponent },
-            { path: 'installation', component: InstallationDocsComponent },
-            { path: 'usage', component: UsageDocsComponent },
-            // { path: 'rtl', component: InternationalizationDocsComponent }, TODO: restore this route when fundamental is RTL ready
-            { path: 'home', component: HomeDocsComponent }
+            { path: 'home', component: HomeDocsComponent },
+            { path: 'new-component', component: NewComponentComponent }
         ]
     }
 ];
@@ -323,11 +320,9 @@ const ROUTES: Routes = [
         TileDocsComponent,
         TimeDocsComponent,
         TimePickerDocsComponent,
-        InstallationDocsComponent,
         ToggleDocsComponent,
-        UsageDocsComponent,
-        InternationalizationDocsComponent,
         HomeDocsComponent,
+        NewComponentComponent,
         DirectionalityComponent,
         ComponentExampleComponent,
         ExampleBackgroundComponent,
@@ -459,17 +454,13 @@ const ROUTES: Routes = [
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent
     ],
-    entryComponents: [
-        ModalContentComponent,
-        ModalInModalComponent,
-        ModalInModalSecondComponent,
-        AlertContentComponent
-    ],
+    entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
         HighlightJsModule.forRoot({
             provide: HIGHLIGHT_JS,
             useFactory: highlightJsFactory
         }),
+        MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
         RouterModule.forChild(ROUTES),
@@ -477,9 +468,6 @@ const ROUTES: Routes = [
         UtilsModule,
         FundamentalNgxModule
     ],
-    providers: [
-        CopyService
-    ]
+    providers: [CopyService]
 })
 export class DocumentationModule {}
-

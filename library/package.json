@@ -3,7 +3,7 @@
     "version": "0.0.27",
     "description": "SAP Fiori Fundamentals, implemented in Angular",
     "license": "Apache-2.0",
-    "homepage": "https://sap.github.io/fundamental-ngx/docs/home",
+    "homepage": "https://sap.github.io/fundamental-ngx/home",
     "repository": {
         "type": "git",
         "url": "https://github.com/SAP/fundamental-ngx"
