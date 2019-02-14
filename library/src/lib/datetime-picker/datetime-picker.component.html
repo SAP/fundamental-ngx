@@ -1,20 +1,20 @@
-<div class="fd-date-picker">
+<div class="fd-datetime">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <div class="fd-input-group fd-input-group--after"
                  [ngClass]="{'fd-input-group--compact' : compact}">
-                <input #datePicker
-                       type="text"
-                       [attr.aria-label]="'date input'"
+                <input type="text"
+                       [attr.aria-label]="'datetime input'"
                        [value]="inputFieldDate"
                        [placeholder]="placeholder"
-                       (change)="getInputValue(datePicker.value)"
+                       (change)="getInputValue(this.date.toLocaleDateString())"
                        (focus)="onFocusHandler()"
                        (blur)="onBlurHandler()"
-                       [ngClass]="{ 'fd-input--compact': compact }">
+                       [ngClass]="{ 'fd-input--compact': compact }"
+                       [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
-                    <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
-                            (click)="openCalendar(datePicker.value)" aria-label="display calendar toggle"
+                    <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"
+                            (click)="openPopover(this.date.toLocaleDateString())" aria-label="display datetime toggle"
                             [attr.aria-expanded]="isOpen"></button>
                 </span>
             </div>
@@ -22,13 +22,23 @@
         <div class="fd-popover__body"
              [attr.aria-expanded]="isOpen"
              [attr.aria-hidden]="!isOpen">
-            <fd-calendar calType="single"
-                         [disableFunction]="disableFunction ? disableFunction : null"
-                         [blockFunction]="blockFunction ? blockFunction : null"
-                         [(ngModel)]="selectedDay"
-                         (updateDatePickerInput)="updateDatePickerInputHandler($event)"
-                         (isInvalidDateInput)="isInvalidDateInputHandler($event)"
-                         [dateFromDatePicker]="dateFromInput"></fd-calendar>
+            <div class="fd-datetime__container">
+                <fd-calendar calType="single"
+                             [disableFunction]="disableFunction ? disableFunction : null"
+                             [blockFunction]="blockFunction ? blockFunction : null"
+                             [(ngModel)]="selectedDay"
+                             (updateDatePickerInput)="updateDatePickerInputHandler($event)"
+                             (isInvalidDateInput)="isInvalidDateInputHandler($event)"
+                             [dateFromDatePicker]="dateFromInput"></fd-calendar>
+                <div class="fd-datetime__separator"></div>
+                <fd-time [disabled]="disabled" [ngClass]="{'fd-time-container': !meridian}"
+                         [meridian]="meridian"
+                         [(ngModel)]="time"
+                         (ngModelChange)="setTime()"
+                         [period]="period"
+                         [spinners]="spinners"
+                         [displaySeconds]="displaySeconds"></fd-time>
+            </div>
         </div>
     </div>
 </div>

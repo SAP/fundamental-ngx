@@ -7,10 +7,11 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { FormsModule } from '@angular/forms';
 import { DatetimePickerComponent } from './datetime-picker.component';
 import { TimeModule } from '../time/time.module';
+import { ButtonGroupModule } from '../button-group/button-group.module';
 
 @NgModule({
     declarations: [DatetimePickerComponent],
-    imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule, TimeModule],
+    imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule, TimeModule, ButtonGroupModule],
     exports: [DatetimePickerComponent]
 })
 export class DatetimePickerModule {}

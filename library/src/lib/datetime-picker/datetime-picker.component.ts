@@ -2,6 +2,7 @@ import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Outpu
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { TimeObject } from '../time/time-object';
 
 @Component({
     selector: 'fd-datetime-picker',
@@ -24,8 +25,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     isOpen: boolean = false;
     dateFromInput = new BehaviorSubject<string>('');
 
-    @Input()
-    type: CalendarType = 'single';
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
+    selectedDay: CalendarDay = {
+        date: null
+    };
 
     @Input()
     placeholder: string = 'mm/dd/yyyy';
@@ -33,13 +37,29 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     @Input()
     compact: boolean = false;
 
+    @Input() period: string;
+
+    @Input() meridian: boolean = true;
+
+    @Input() validate: boolean = true;
+
+    @Input() disabled: boolean;
+
+    @Input() spinners: boolean = true;
+
+    @Input() displaySeconds: boolean = true;
+
     @Input()
-    selectedDay: CalendarDay = {
-        date: null
-    };
+    date: Date = new Date();
 
     @Output()
-    selectedDayChange = new EventEmitter();
+    dateChange: EventEmitter<Date> = new EventEmitter<Date>();
+
+    @Output()
+    calendarChange: EventEmitter<Date> = new EventEmitter<Date>();
+
+    @Output()
+    timeChange: EventEmitter<Date> = new EventEmitter<Date>();
 
     @Input()
     disableFunction = function(d): boolean {
@@ -54,7 +74,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     onChange: any = (selected: any) => {};
     onTouched: any = () => {};
 
-    openCalendar(e) {
+    openPopover(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
         if (this.isValidDateInput) {
@@ -62,7 +82,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    closeCalendar() {
+    closePopover() {
         if (this.isOpen) {
             if (this.isValidDateInput) {
                 this.inputFieldDate = null;
@@ -86,11 +106,14 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     updateDatePickerInputHandler(d) {
-        if (d.selectedDay.date) {
-            this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
+        if (d.selectedDay && d.selectedDay.date) {
             this.selectedDay = d.selectedDay;
-            this.selectedDayChange.emit(this.selectedDay);
-            this.onChange({date: this.selectedDay.date});
+            this.date = d.selectedDay.date;
+            this.setTime();
+
+            this.calendarChange.emit(this.date);
+            this.dateChange.emit(this.date);
+            this.onChange(this.date);
         }
     }
 
@@ -99,23 +122,32 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     getInputValue(e) {
+        // Need to set this.date here with new input?
+        // Also set selectedDay and time
+
         this.dateFromInput.next(e);
     }
 
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
-        this.closeCalendar();
+        this.closePopover();
     }
 
     @HostListener('document:click', ['$event.path'])
     public onGlobalClick(targetElementPath: Array<any>) {
         const elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
         if (!elementRefInPath) {
-            this.closeCalendar();
+            this.closePopover();
         }
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.date) {
+            this.selectedDay.date = this.date;
+            this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
+            this.inputFieldDate = this.date.toLocaleString();
+        }
+    }
 
     constructor(private eRef: ElementRef) {}
 
@@ -128,16 +160,27 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     setDisabledState(isDisabled: boolean): void {
-        // void for now
+        this.disabled = isDisabled;
     }
 
     writeValue(selected: Date): void {
         if (!selected) {
             return;
         }
-        if (this.type.toLocaleLowerCase() === 'single') {
-            this.selectedDay.date = selected;
-            this.inputFieldDate = selected.toLocaleDateString();
-        }
+        this.selectedDay.date = selected;
+        this.date = this.selectedDay.date;
+        this.setTime();
     }
+
+    setTime(): void {
+        this.date.setHours(this.time.hour);
+        this.date.setMinutes(this.time.minute);
+        this.date.setSeconds(this.time.second);
+        this.inputFieldDate = this.date.toLocaleString();
+
+        this.timeChange.emit(this.date);
+        this.dateChange.emit(this.date);
+        this.onChange(this.date);
+    }
+
 }
