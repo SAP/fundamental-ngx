@@ -84,7 +84,7 @@ export class FileDragndropDirective {
                     valid_files.push(file);
                 });
             } else {
-                const allowed_extensions = this.accept.replace(/[\s.]/g, '').split(',');
+                const allowed_extensions = this.accept.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
                 files.forEach((file: File) => {
                     const ext = file.name.split('.')[file.name.split('.').length - 1];
                     if (allowed_extensions.lastIndexOf(ext) !== -1) {
