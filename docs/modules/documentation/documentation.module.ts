@@ -216,6 +216,7 @@ import { FileInputExampleComponent } from './containers/file-input/examples/file
 import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
+import { DatetimePickerDocsComponent } from './containers/datetime-picker/datetime-picker-docs.component';
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -227,6 +228,7 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -247,6 +249,7 @@ const ROUTES: Routes = [
             { path: 'calendar', component: CalendarDocsComponent },
             { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
+            { path: 'datetime-picker', component: DatetimePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
             { path: 'file-input', component: FileInputDocsComponent },
             { path: 'form', component: FormDocsComponent },
@@ -298,6 +301,7 @@ const ROUTES: Routes = [
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
         DropdownDocsComponent,
+        DatetimePickerDocsComponent,
         FileInputDocsComponent,
         FormDocsComponent,
         IconDocsComponent,
@@ -457,7 +461,8 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent
+        ToggleBindingExampleComponent,
+        DatetimeExampleComponent,
     ],
     entryComponents: [
         ModalContentComponent,

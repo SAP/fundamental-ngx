@@ -22,14 +22,13 @@
         <div class="fd-popover__body"
              [attr.aria-expanded]="isOpen"
              [attr.aria-hidden]="!isOpen">
-            <fd-calendar [calType]="type"
+            <fd-calendar calType="single"
                          [disableFunction]="disableFunction ? disableFunction : null"
                          [blockFunction]="blockFunction ? blockFunction : null"
-                         [(selectedDay)]="selectedDay"
-                         [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"
+                         [(ngModel)]="selectedDay"
                          (updateDatePickerInput)="updateDatePickerInputHandler($event)"
                          (isInvalidDateInput)="isInvalidDateInputHandler($event)"
-                         [dateFromDatePicker]="dateFromDatePicker"></fd-calendar>
+                         [dateFromDatePicker]="dateFromInput"></fd-calendar>
         </div>
     </div>
 </div>

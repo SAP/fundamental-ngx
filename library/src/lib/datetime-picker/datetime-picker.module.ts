@@ -5,12 +5,12 @@ import { UtilsModule } from '../utils/utils.module';
 import { PopoverModule } from '../popover/popover.module';
 import { CalendarModule } from '../calendar/calendar.module';
 import { FormsModule } from '@angular/forms';
-
-import { DatePickerComponent } from './date-picker.component';
+import { DatetimePickerComponent } from './datetime-picker.component';
+import { TimeModule } from '../time/time.module';
 
 @NgModule({
-    declarations: [DatePickerComponent],
-    imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule],
-    exports: [DatePickerComponent]
+    declarations: [DatetimePickerComponent],
+    imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule, TimeModule],
+    exports: [DatetimePickerComponent]
 })
-export class DatePickerModule {}
+export class DatetimePickerModule {}

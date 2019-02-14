@@ -40,6 +40,7 @@ import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { ToggleModule } from './toggle/toggle.module';
 import { InfiniteScrollModule } from './utils/infinite-scroll.module';
+import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -55,6 +56,7 @@ import { InfiniteScrollModule } from './utils/infinite-scroll.module';
         CalendarModule,
         ComboboxInputModule,
         DatePickerModule,
+        DatetimePickerModule,
         FileInputModule,
         FormModule,
         IconModule,

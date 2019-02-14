@@ -1,28 +1,28 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-    selector: 'fd-date-picker',
-    templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.scss'],
+    selector: 'fd-datetime-picker',
+    templateUrl: './datetime-picker.component.html',
+    styleUrls: ['./datetime-picker.component.scss'],
     host: {
         '(blur)': 'onTouched()'
     },
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DatePickerComponent),
+            useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
         }
     ]
 })
-export class DatePickerComponent implements OnInit, ControlValueAccessor {
+export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromDatePicker = new BehaviorSubject<string>('');
+    dateFromInput = new BehaviorSubject<string>('');
 
     @Input()
     type: CalendarType = 'single';
@@ -42,25 +42,10 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     selectedDayChange = new EventEmitter();
 
     @Input()
-    selectedRangeFirst: CalendarDay = {
-        date: null
-    };
-
-    @Output()
-    selectedRangeFirstChange = new EventEmitter();
-
-    @Input()
-    selectedRangeLast: CalendarDay = {
-        date: null
-    };
-
-    @Output()
-    selectedRangeLastChange = new EventEmitter();
-
-    @Input()
     disableFunction = function(d): boolean {
         return false;
     };
+
     @Input()
     blockFunction = function(d): boolean {
         return false;
@@ -101,22 +86,11 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     updateDatePickerInputHandler(d) {
-        if (this.type === 'single') {
-            if (d.selectedDay.date) {
-                this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
-                this.selectedDay = d.selectedDay;
-                this.selectedDayChange.emit(this.selectedDay);
-                this.onChange({date: this.selectedDay.date});
-            }
-        } else {
-            if (d.selectedFirstDay.date) {
-                this.selectedRangeFirst = d.selectedFirstDay;
-                this.selectedRangeLast = d.selectedLastDay;
-                this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
-                this.selectedRangeLastChange.emit(this.selectedRangeLast);
-                this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
-                this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
-            }
+        if (d.selectedDay.date) {
+            this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
+            this.selectedDay = d.selectedDay;
+            this.selectedDayChange.emit(this.selectedDay);
+            this.onChange({date: this.selectedDay.date});
         }
     }
 
@@ -125,7 +99,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     getInputValue(e) {
-        this.dateFromDatePicker.next(e);
+        this.dateFromInput.next(e);
     }
 
     @HostListener('document:keydown.escape', [])
@@ -135,7 +109,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
     @HostListener('document:click', ['$event.path'])
     public onGlobalClick(targetElementPath: Array<any>) {
-        let elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
+        const elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
         if (!elementRefInPath) {
             this.closeCalendar();
         }
@@ -157,17 +131,13 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         // void for now
     }
 
-    writeValue(selected: {date: Date, rangeEnd?: Date}): void {
+    writeValue(selected: Date): void {
         if (!selected) {
             return;
         }
         if (this.type.toLocaleLowerCase() === 'single') {
-            this.selectedDay.date = selected.date;
-            this.inputFieldDate = selected.date.toLocaleDateString();
-        } else {
-            this.selectedRangeFirst.date = selected.date;
-            this.selectedRangeLast.date = selected.rangeEnd;
-            this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            this.selectedDay.date = selected;
+            this.inputFieldDate = selected.toLocaleDateString();
         }
     }
 }
