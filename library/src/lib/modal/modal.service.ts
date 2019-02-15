@@ -1,10 +1,5 @@
 import { ComponentFactoryResolver, Injectable, ApplicationRef, Injector, EmbeddedViewRef } from '@angular/core';
 
-class ModalRef {
-    componentInstance;
-    domReference?: HTMLElement;
-}
-
 @Injectable()
 export class ModalService {
     private modalRef = [];
