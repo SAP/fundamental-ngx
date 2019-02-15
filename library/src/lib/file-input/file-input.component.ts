@@ -41,12 +41,6 @@ export class FileInputComponent implements ControlValueAccessor {
     onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     @Output()
-    onDragOver: EventEmitter<null> = new EventEmitter<null>();
-
-    @Output()
-    onDragStart: EventEmitter<null> = new EventEmitter<null>();
-
-    @Output()
     onDragEnter: EventEmitter<null> = new EventEmitter<null>();
 
     @Output()

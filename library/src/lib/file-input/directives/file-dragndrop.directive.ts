@@ -12,12 +12,6 @@ export class FileDragndropDirective {
     onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     @Output()
-    onDragOver: EventEmitter<null> = new EventEmitter<null>();
-
-    @Output()
-    onDragStart: EventEmitter<null> = new EventEmitter<null>();
-
-    @Output()
     onDragEnter: EventEmitter<null> = new EventEmitter<null>();
 
     @Output()
@@ -35,42 +29,37 @@ export class FileDragndropDirective {
     @Input()
     dragndrop: boolean = true;
 
-    @HostListener('document:dragenter', [])
-    public onDragstart() {
-        if (this.dragndrop) {
-            this.onDragStart.emit();
-        }
-    }
+    private elementStateCounter: number = 0;
 
     @HostListener('dragover', ['$event'])
     public onDragover(event) {
         if (this.dragndrop) {
             event.preventDefault();
             event.stopPropagation();
-
-            this.onDragOver.emit();
         }
     }
 
     @HostListener('dragenter', [])
     public onDragenter() {
-        if (this.dragndrop) {
+        ++this.elementStateCounter;
+        if (this.dragndrop && this.elementStateCounter === 1) {
             this.onDragEnter.emit();
         }
     }
 
     @HostListener('dragleave', ['$event'])
     public onDragleave(event) {
-        if (this.dragndrop) {
+        --this.elementStateCounter;
+        if (this.dragndrop && this.elementStateCounter === 0) {
             event.preventDefault();
             event.stopPropagation();
-
             this.onDragLeave.emit();
         }
     }
 
     @HostListener('drop', ['$event'])
     public onDrop(event) {
+        this.elementStateCounter = 0;
 
         if (!this.dragndrop || this.disabled) {
             return;
@@ -95,7 +84,7 @@ export class FileDragndropDirective {
                     valid_files.push(file);
                 });
             } else {
-                const allowed_extensions = this.accept.replace(/[\s.]/g, '').split(',');
+                const allowed_extensions = this.accept.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
                 files.forEach((file: File) => {
                     const ext = file.name.split('.')[file.name.split('.').length - 1];
                     if (allowed_extensions.lastIndexOf(ext) !== -1) {
