@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ViewChild } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { TimeObject } from '../time/time-object';
+import { TimeComponent } from '../time/time.component';
 
 @Component({
     selector: 'fd-datetime-picker',
@@ -61,6 +62,9 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     @Output()
     timeChange: EventEmitter<Date> = new EventEmitter<Date>();
 
+    @ViewChild(TimeComponent)
+    child: TimeComponent;
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -71,12 +75,12 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         return false;
     };
 
-    onChange: any = (selected: any) => {};
+    onChange: any = () => {};
     onTouched: any = () => {};
 
     openPopover(e) {
         this.isOpen = !this.isOpen;
-        this.getInputValue(e);
+        this.inputValueChange(e);
         if (this.isValidDateInput) {
             this.inputFieldDate = null;
         }
@@ -107,13 +111,19 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
     updateDatePickerInputHandler(d) {
         if (d.selectedDay && d.selectedDay.date) {
+            d.selectedDay.date.setHours(this.date.getHours());
+            d.selectedDay.date.setMinutes(this.date.getMinutes());
+            d.selectedDay.date.setSeconds(this.date.getSeconds());
+            d.selectedDay.date.setMilliseconds(this.date.getMilliseconds());
+            const previous = this.date.getTime();
             this.selectedDay = d.selectedDay;
             this.date = d.selectedDay.date;
-            this.setTime();
-
-            this.calendarChange.emit(this.date);
-            this.dateChange.emit(this.date);
-            this.onChange(this.date);
+            this.inputFieldDate = this.date.toLocaleString();
+            if (this.date.getTime() !== previous) {
+                this.calendarChange.emit(this.date);
+                this.dateChange.emit(this.date);
+                this.onChange(this.date);
+            }
         }
     }
 
@@ -121,11 +131,18 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         this.isValidDateInput = e;
     }
 
-    getInputValue(e) {
-        // Need to set this.date here with new input?
-        // Also set selectedDay and time
-
-        this.dateFromInput.next(e);
+    inputValueChange(e): void {
+        const temp = new Date(e);
+        if (isNaN(temp.getTime())) {
+            this.inputFieldDate = this.date.toLocaleString();
+        } else {
+            const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
+            if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
+                this.time = newValue;
+                this.setTime(true);
+            }
+            this.dateFromInput.next(temp.toLocaleDateString());
+        }
     }
 
     @HostListener('document:keydown.escape', [])
@@ -168,19 +185,22 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
             return;
         }
         this.selectedDay.date = selected;
+        this.time = {hour: selected.getHours(), minute: selected.getMinutes(), second: selected.getSeconds()}
         this.date = this.selectedDay.date;
         this.setTime();
     }
 
-    setTime(): void {
+    setTime(fireEvents = false): void {
         this.date.setHours(this.time.hour);
         this.date.setMinutes(this.time.minute);
         this.date.setSeconds(this.time.second);
         this.inputFieldDate = this.date.toLocaleString();
 
-        this.timeChange.emit(this.date);
-        this.dateChange.emit(this.date);
-        this.onChange(this.date);
+        if (fireEvents) {
+            this.timeChange.emit(this.date);
+            this.dateChange.emit(this.date);
+            this.onChange(this.date);
+        }
     }
 
 }

@@ -11,7 +11,7 @@ import { ButtonGroupModule } from '../button-group/button-group.module';
 
 @NgModule({
     declarations: [DatetimePickerComponent],
-    imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule, TimeModule, ButtonGroupModule],
+    imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule, TimeModule],
     exports: [DatetimePickerComponent]
 })
 export class DatetimePickerModule {}

@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-datetime-example',
-  templateUrl: './datetime-example.component.html',
-  styleUrls: ['./datetime-example.component.scss']
+  templateUrl: './datetime-example.component.html'
 })
-export class DatetimeExampleComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class DatetimeExampleComponent {
+    date: Date = new Date();
 }
