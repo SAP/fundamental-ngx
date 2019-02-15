@@ -1,5 +1,10 @@
 import { ComponentFactoryResolver, Injectable, ApplicationRef, Injector, EmbeddedViewRef } from '@angular/core';
 
+class ModalRef {
+    componentInstance;
+    domReference?: HTMLElement;
+}
+
 @Injectable()
 export class ModalService {
     private modalRef = [];
@@ -13,11 +18,15 @@ export class ModalService {
     }
 
     close(result?) {
-        this.modalRef.pop().close(result, true);
+        this.modalRef.pop().componentInstance.close(result);
     }
 
     dismiss(reason?) {
-        this.modalRef.pop().dismiss(reason, true);
+        const modal = this.modalRef.pop();
+        modal.dismiss(reason, true);
+        if (modal.domReference) {
+            document.body.removeChild(modal.domReference);
+        }
     }
 
     popModal() {
@@ -37,6 +46,9 @@ export class ModalService {
             this.appRef.attachView(componentRef.hostView);
             const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
             document.body.appendChild(domElem);
+            this.modalRef[this.modalRef.length - 1].afterClosed.subscribe(() => {
+                document.body.removeChild(domElem);
+            });
             this.appRef.tick();
         }
         this.modalRef[this.modalRef.length - 1].open();
