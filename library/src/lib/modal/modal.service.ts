@@ -18,15 +18,11 @@ export class ModalService {
     }
 
     close(result?) {
-        this.modalRef.pop().componentInstance.close(result);
+        this.modalRef.pop().close(result, true);
     }
 
     dismiss(reason?) {
-        const modal = this.modalRef.pop();
-        modal.dismiss(reason, true);
-        if (modal.domReference) {
-            document.body.removeChild(modal.domReference);
-        }
+        this.modalRef.pop().dismiss(reason, true);
     }
 
     popModal() {

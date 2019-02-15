@@ -28,11 +28,14 @@ export class ModalComponent implements OnInit {
 
     constructor(@Inject(ModalService) private modalService: ModalService, private elRef: ElementRef) {}
 
-    close(result?) {
+    close(result?, closedByService: boolean = false) {
         this._focusTrapped = false;
         this.elRef.nativeElement.style.display = 'none';
         this.resolve(result);
-        this.modalService.popModal();
+
+        if (!closedByService) {
+            this.modalService.popModal();
+        }
 
         this._openModalCount = this.modalService.getModalCount();
         this.afterClosed.next();
