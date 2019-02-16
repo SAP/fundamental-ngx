@@ -217,6 +217,10 @@ import { FileInputCustomExampleComponent } from './containers/file-input/example
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
 import { DatetimePickerDocsComponent } from './containers/datetime-picker/datetime-picker-docs.component';
+import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
+import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
+import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
+
 
 import { InstallationDocsComponent } from './containers/installation/installation.component';
 import { UsageDocsComponent } from './containers/usage/usage.component';
@@ -228,7 +232,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -366,6 +369,9 @@ const ROUTES: Routes = [
         CalendarMondayStartExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
+        DatetimeExampleComponent,
+        DatetimeNonMeridianExampleComponent,
+        DatetimeProgramExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
@@ -462,7 +468,6 @@ const ROUTES: Routes = [
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
-        DatetimeExampleComponent,
     ],
     entryComponents: [
         ModalContentComponent,

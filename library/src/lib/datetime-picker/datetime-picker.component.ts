@@ -37,8 +37,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     @Input()
     compact: boolean = false;
 
-    @Input() period: string;
-
     @Input() meridian: boolean = true;
 
     @Input() disabled: boolean;
