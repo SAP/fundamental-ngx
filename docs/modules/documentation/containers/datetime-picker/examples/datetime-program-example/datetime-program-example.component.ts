@@ -8,6 +8,6 @@ export class DatetimeProgramExampleComponent {
     date = new Date();
 
     decrementMonth(): void {
-        this.date = new Date(this.date.getTime() - 8640000);
+        this.date = new Date(this.date.getTime() - 86400000);
     }
 }
