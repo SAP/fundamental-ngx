@@ -28,7 +28,7 @@
                              [disableFunction]="disableFunction ? disableFunction : null"
                              [blockFunction]="blockFunction ? blockFunction : null"
                              [(ngModel)]="selectedDay"
-                             (updateDatePickerInput)="updateDatePickerInputHandler($event)"
+                             (updateDatePickerInput)="updatePickerInputHandler($event)"
                              (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                              [dateFromDatePicker]="dateFromInput"></fd-calendar>
                 <div class="fd-datetime__separator"></div>

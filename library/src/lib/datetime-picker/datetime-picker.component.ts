@@ -1,9 +1,8 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ViewChild } from '@angular/core';
-import { CalendarDay, CalendarType } from '../calendar/calendar.component';
+import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
+import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { TimeObject } from '../time/time-object';
-import { TimeComponent } from '../time/time.component';
 
 @Component({
     selector: 'fd-datetime-picker',
@@ -33,7 +32,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     };
 
     @Input()
-    placeholder: string = 'mm/dd/yyyy';
+    placeholder: string = 'mm/dd/yyyy, hh:mm:ss am';
 
     @Input()
     compact: boolean = false;
@@ -41,8 +40,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     @Input() period: string;
 
     @Input() meridian: boolean = true;
-
-    @Input() validate: boolean = true;
 
     @Input() disabled: boolean;
 
@@ -61,9 +58,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
     @Output()
     timeChange: EventEmitter<Date> = new EventEmitter<Date>();
-
-    @ViewChild(TimeComponent)
-    child: TimeComponent;
 
     @Input()
     disableFunction = function(d): boolean {
@@ -109,7 +103,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    updateDatePickerInputHandler(d) {
+    updatePickerInputHandler(d) {
         if (d.selectedDay && d.selectedDay.date) {
             d.selectedDay.date.setHours(this.date.getHours());
             d.selectedDay.date.setMinutes(this.date.getMinutes());
