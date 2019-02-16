@@ -40,7 +40,8 @@ export class DocumentationComponent implements OnInit {
         { url: 'tile', name: 'Tile', status: 'SAFE' },
         { url: 'time', name: 'Time', status: 'SAFE' },
         { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
-        { url: 'toggle', name: 'Toggle', status: 'ACTIVE' }
+        { url: 'toggle', name: 'Toggle', status: 'ACTIVE' },
+        { url: 'token', name: 'Token', status: 'ACTIVE' },
     ];
 
     layouts = [{ url: 'panel', name: 'Panel', status: 'SAFE' }];

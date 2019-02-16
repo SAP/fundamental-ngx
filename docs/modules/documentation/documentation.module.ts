@@ -217,6 +217,8 @@ import { FileInputExampleComponent } from './containers/file-input/examples/file
 import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
+import { TokenDocsComponent } from './containers/token/token-docs.component';
+import { TokenExampleComponent } from './containers/token/examples/token-example/token-example.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -272,6 +274,7 @@ const ROUTES: Routes = [
             { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
             { path: 'toggle', component: ToggleDocsComponent },
+            { path: 'token', component: TokenDocsComponent },
             { path: 'home', component: HomeDocsComponent },
             { path: 'new-component', component: NewComponentComponent }
         ]
@@ -452,7 +455,9 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent
+        ToggleBindingExampleComponent,
+        TokenDocsComponent,
+        TokenExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

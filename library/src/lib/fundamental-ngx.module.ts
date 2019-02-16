@@ -32,14 +32,16 @@ import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
 import { TimePickerModule } from './time-picker/time-picker.module';
+import { ToggleModule } from './toggle/toggle.module';
+import { TokenComponent } from './token/token.component';
 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
-import { ToggleModule } from './toggle/toggle.module';
 import { InfiniteScrollModule } from './utils/infinite-scroll.module';
+import { TokenModule } from './token/token.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -80,6 +82,7 @@ import { InfiniteScrollModule } from './utils/infinite-scroll.module';
         TimeModule,
         TimePickerModule,
         ToggleModule,
+        TokenModule,
         TreeModule
     ],
     providers: [AlertService, ModalService]
