@@ -31,6 +31,7 @@ export * from './lib/menu/menu.module';
 export * from './lib/modal/modal.module';
 export * from './lib/modal/modal.service';
 export * from './lib/modal/modal.component';
+export * from './lib/multi-input/multi-input.module'
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';
 export * from './lib/popover/popover.module';

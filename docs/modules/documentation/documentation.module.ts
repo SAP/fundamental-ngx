@@ -219,6 +219,8 @@ import { FileInputDragDisabledExampleComponent } from './containers/file-input/e
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
 import { TokenDocsComponent } from './containers/token/token-docs.component';
 import { TokenExampleComponent } from './containers/token/examples/token-example/token-example.component';
+import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
+import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -261,6 +263,7 @@ const ROUTES: Routes = [
             { path: 'loadingSpinner', component: LoadingSpinnerDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
+            { path: 'multi-input', component: MultiInputDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
@@ -407,6 +410,8 @@ const ROUTES: Routes = [
         ModalInModalComponent,
         ModalInModalSecondComponent,
         ModalInModalExampleComponent,
+        MultiInputDocsComponent,
+        MultiInputExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,
