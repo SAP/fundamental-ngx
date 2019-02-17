@@ -9,8 +9,8 @@
 <h1>&lt;fd-token></h1>
 
 <properties [properties]="{
-  inputs: [],
-  outputs: [{name: 'onCloseClick', description: 'Fires when the close icon area is clicked. More specifically, any pseudo element.'}]
+  inputs: [{name: 'id', description: 'String. Id for the token which is passed back on close. If none is provided, one will be generated.'}],
+  outputs: [{name: 'onCloseClick', description: 'Fires when the close icon area is clicked. More specifically, any pseudo element. Returns the id of the token.'}]
 }"></properties>
 
 <separator></separator>

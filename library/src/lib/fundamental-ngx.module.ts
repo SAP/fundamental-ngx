@@ -42,10 +42,11 @@ import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { InfiniteScrollModule } from './utils/infinite-scroll.module';
 import { TokenModule } from './token/token.module';
+import { MultiInputComponent } from './multi-input/multi-input.component';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
-    declarations: [FundamentalNgxComponent],
+    declarations: [FundamentalNgxComponent, MultiInputComponent],
     exports: [
         FundamentalNgxComponent,
         ActionBarModule,
