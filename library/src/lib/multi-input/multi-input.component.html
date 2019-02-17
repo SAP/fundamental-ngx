@@ -1,0 +1,45 @@
+<div class="fd-multi-input">
+    <div class="fd-multi-input-field">
+        <fd-popover (popoverClosed)="isOpen = false" [isSearchInput]="true" [arrow]="false">
+            <fd-popover-control>
+                <div class="fd-combobox-control"
+                     [attr.aria-expanded]="isOpen"
+                     [attr.aria-haspopup]="true">
+                    <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
+                        <input type="text" class="fd-input"
+                               [ngClass]="{'fd-input-compact': compact}"
+                               [placeholder]="placeholder"
+                               [disabled]="disabled"
+                               [(ngModel)]="searchTerm"
+                               (ngModelChange)="searchTermChange.emit(searchTerm)">
+                        <span class="fd-input-group__addon fd-input-group__addon--after
+                        fd-input-group__addon--button">
+                            <button class="fd-button--light"
+                                    [ngClass]="('sap-icon--' + this.glyph)"
+                                    [disabled]="disabled"
+                                    (click)="isOpen = !isOpen"></button>
+                        </span>
+                    </div>
+                </div>
+            </fd-popover-control>
+            <fd-popover-body *ngIf="isOpen" [attr.aria-hidden]="!isOpen">
+                <fd-menu>
+                    <fd-menu-list>
+                        <li fd-menu-item *ngFor="let value of dropdownValues; let i = index">
+                            <label [attr.for]="'multi-input-item--' + i" class="fd-menu__item">
+                                <input type="checkbox" class="fd-checkbox" [id]="'multi-input-item--' + i">
+                                {{value}}
+                            </label>
+                        </li>
+                    </fd-menu-list>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-multi-input-tags" *ngFor="let token of tokens">
+        <span class="fd-token" role="button">Apple</span>
+        <span class="fd-token" role="button">Berry</span>
+        <span class="fd-token" role="button">Banana</span>
+    </div>
+</div>
+

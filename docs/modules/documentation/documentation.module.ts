@@ -225,6 +225,8 @@ import { DatetimeExampleComponent } from './containers/datetime-picker/examples/
 import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
 import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
 
+import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
+import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -268,6 +270,7 @@ const ROUTES: Routes = [
             { path: 'loadingSpinner', component: LoadingSpinnerDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
+            { path: 'multi-input', component: MultiInputDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
@@ -418,6 +421,8 @@ const ROUTES: Routes = [
         ModalInModalComponent,
         ModalInModalSecondComponent,
         ModalInModalExampleComponent,
+        MultiInputDocsComponent,
+        MultiInputExampleComponent,
         ModalFullscreenExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
@@ -467,7 +472,6 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent,
         ToggleBindingExampleComponent,
         TokenDocsComponent,
         TokenExampleComponent
