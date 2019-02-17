@@ -1,5 +1,6 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { HashService } from '../utils/hash.service';
 
 @Component({
     selector: 'fd-multi-input',
@@ -31,7 +32,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     glyph: string = 'navigation-down-arrow';
 
     @Input()
-    dropdownValues: string[] = [];
+    dropdownValues: any[] = [];
+
+    @Input()
+    displayWith: string;
 
     @Input()
     searchTerm: string;
@@ -43,10 +47,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
 
     tokens = [];
 
+    popoverBodyId: string = this.hash.hash();
+
     onChange: Function = () => {};
     onTouched: Function = () => {};
 
-    constructor() {
+    constructor(private hash: HashService, private elRef: ElementRef) {
     }
 
     ngOnInit() {
@@ -65,6 +71,13 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(obj: any): void {
+    }
+
+    @HostListener('document:click', ['$event'])
+    private clickHandler(event) {
+        if (!this.elRef.nativeElement.contains(event.target)) {
+            this.isOpen = false;
+        }
     }
 
 }

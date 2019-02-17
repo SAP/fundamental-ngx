@@ -5,10 +5,11 @@ import { TokenModule } from '../token/token.module';
 import { PopoverModule } from '../popover/popover.module';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
+import { UtilsModule } from '../utils/utils.module';
 
 @NgModule({
     declarations: [MultiInputComponent],
-    imports: [CommonModule, TokenModule, PopoverModule, FormsModule, MenuModule],
+    imports: [CommonModule, TokenModule, FormsModule, MenuModule, UtilsModule],
     exports: [MultiInputComponent]
 })
 export class MultiInputModule {}
