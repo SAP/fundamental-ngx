@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-multi-input-example',
-  templateUrl: './multi-input-example.component.html',
-  styleUrls: ['./multi-input-example.component.scss']
+    selector: 'app-multi-input-example',
+    templateUrl: './multi-input-example.component.html',
+    styleUrls: ['./multi-input-example.component.scss']
 })
-export class MultiInputExampleComponent implements OnInit {
+export class MultiInputExampleComponent {
 
-  constructor() { }
+    values = ['Apple', 'Banana', 'Pineapple', 'Tomato'];
 
-  ngOnInit() {
-  }
+    selected = [];
 
 }

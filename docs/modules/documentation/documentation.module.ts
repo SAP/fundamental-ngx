@@ -230,6 +230,8 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { MultiInputFilterExampleComponent } from './containers/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
+import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -462,7 +464,9 @@ const ROUTES: Routes = [
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
         TokenDocsComponent,
-        TokenExampleComponent
+        TokenExampleComponent,
+        MultiInputFilterExampleComponent,
+        MultiInputDisplaywithExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
