@@ -217,6 +217,11 @@ import { FileInputExampleComponent } from './containers/file-input/examples/file
 import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
+import { DatetimePickerDocsComponent } from './containers/datetime-picker/datetime-picker-docs.component';
+import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
+import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
+import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
+
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -246,6 +251,7 @@ const ROUTES: Routes = [
             { path: 'calendar', component: CalendarDocsComponent },
             { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
+            { path: 'datetime-picker', component: DatetimePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
             { path: 'file-input', component: FileInputDocsComponent },
             { path: 'form', component: FormDocsComponent },
@@ -295,6 +301,7 @@ const ROUTES: Routes = [
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
         DropdownDocsComponent,
+        DatetimePickerDocsComponent,
         FileInputDocsComponent,
         FormDocsComponent,
         IconDocsComponent,
@@ -357,6 +364,9 @@ const ROUTES: Routes = [
         CalendarMondayStartExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
+        DatetimeExampleComponent,
+        DatetimeNonMeridianExampleComponent,
+        DatetimeProgramExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
@@ -452,7 +462,7 @@ const ROUTES: Routes = [
         StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
-        ToggleBindingExampleComponent
+        ToggleBindingExampleComponent,
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

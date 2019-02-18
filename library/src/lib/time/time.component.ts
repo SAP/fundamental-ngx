@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -89,11 +89,13 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
                 if (this.displayedHour === 0) {
                     this.time.hour = 0;
                     this.setDisplayedHour();
+                    this.onChange(this.time);
                 } else if (this.displayedHour > 12 && this.displayedHour < 24) {
                     if (this.period === 'pm') {
                         this.time.hour = this.displayedHour - 12;
                     }
                     this.setDisplayedHour();
+                    this.onChange(this.time);
                 } else if (this.displayedHour >= 24) {
                     this.displayedHour = this.displayedHour % 12;
                     this.displayedHourChanged();
@@ -105,6 +107,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
                 this.time.hour = Math.round(this.time.hour) % 24;
                 if (this.time.hour < 0) {
                     this.time.hour = this.time.hour * -1;
+                    this.onChange(this.time);
                 }
             }
         } else if (inputType === 'minute') {
@@ -112,14 +115,17 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
             if (this.time.minute < 0) {
                 this.time.minute = this.time.minute * -1;
             }
+            this.onChange(this.time);
         } else if (inputType === 'second') {
             this.time.second = Math.round(this.time.second) % 60;
             if (this.time.second < 0) {
                 this.time.second = this.time.second * -1;
             }
+            this.onChange(this.time);
         } else if (inputType === 'period') {
             if (this.period !== 'am' && this.period !== 'pm') {
                 this.setDisplayedHour();
+                this.onChange(this.time);
             }
         }
     }
@@ -222,6 +228,30 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         }
     }
 
+    hourModelChange() {
+        if (this.meridian) {
+            if (!(this.time.hour > 12 || this.time.hour < 0) || !this.validate) {
+                this.onChange(this.time);
+            }
+        } else {
+            if (!(this.time.hour > 23 || this.time.hour < 0) || !this.validate) {
+                this.onChange(this.time);
+            }
+        }
+    }
+
+    minuteModelChange() {
+        if (!(this.time.minute > 59 || this.time.minute < 0) || !this.validate) {
+            this.onChange(this.time);
+        }
+    }
+
+    secondModelChange() {
+        if (!(this.time.second > 59 || this.time.second < 0) || !this.validate) {
+            this.onChange(this.time);
+        }
+    }
+
     periodModelChange() {
         this.period = this.period.toLowerCase();
         if (this.period !== 'am' && this.period !== 'pm') {
@@ -237,8 +267,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
                 }
             }
             this.periodInvalid = false;
+            this.onChange(this.time);
         }
-        this.onChange(this.time);
         this.setDisplayedHour();
     }
 

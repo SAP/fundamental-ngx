@@ -17,6 +17,7 @@ export * from './lib/button-group/button-group.module';
 export * from './lib/calendar/calendar.module';
 export * from './lib/combobox-input/combobox-input.module';
 export * from './lib/date-picker/date-picker.module';
+export * from './lib/datetime-picker/datetime-picker.module';
 export * from './lib/file-input/file-input.module';
 export * from './lib/form/form.module';
 export * from './lib/icon/icon.module';

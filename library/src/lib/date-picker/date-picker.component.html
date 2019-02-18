@@ -7,7 +7,7 @@
                        type="text"
                        [attr.aria-label]="'date input'"
                        [value]="inputFieldDate"
-                       placeholder="mm/dd/yyyy"
+                       [placeholder]="placeholder"
                        (change)="getInputValue(datePicker.value)"
                        (focus)="onFocusHandler()"
                        (blur)="onBlurHandler()"

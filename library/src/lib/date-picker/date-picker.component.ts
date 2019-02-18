@@ -28,7 +28,34 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     type: CalendarType = 'single';
 
     @Input()
+    placeholder: string = 'mm/dd/yyyy';
+
+    @Input()
     compact: boolean = false;
+
+    @Input()
+    selectedDay: CalendarDay = {
+        date: null
+    };
+
+    @Output()
+    selectedDayChange = new EventEmitter();
+
+    @Input()
+    selectedRangeFirst: CalendarDay = {
+        date: null
+    };
+
+    @Output()
+    selectedRangeFirstChange = new EventEmitter();
+
+    @Input()
+    selectedRangeLast: CalendarDay = {
+        date: null
+    };
+
+    @Output()
+    selectedRangeLastChange = new EventEmitter();
 
     @Input()
     disableFunction = function(d): boolean {
@@ -38,27 +65,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     blockFunction = function(d): boolean {
         return false;
     };
-
-    @Input()
-    selectedDay: CalendarDay = {
-        date: null
-    };
-    @Output()
-    selectedDayChange = new EventEmitter();
-
-    @Input()
-    selectedRangeFirst: CalendarDay = {
-        date: null
-    };
-    @Output()
-    selectedRangeFirstChange = new EventEmitter();
-
-    @Input()
-    selectedRangeLast: CalendarDay = {
-        date: null
-    };
-    @Output()
-    selectedRangeLastChange = new EventEmitter();
 
     onChange: any = (selected: any) => {};
     onTouched: any = () => {};
