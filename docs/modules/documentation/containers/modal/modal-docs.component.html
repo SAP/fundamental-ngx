@@ -13,15 +13,22 @@ constructor with
 <code>private modalService: ModalService</code>. Then you'll need to call
 <code>this.modalService.open(modalName)</code>. Use
 <code>this.modalService.close()</code> to close the modal.
-<br>
-<br>
+<separator></separator>
 <h1>&lt;fd-modal&gt;</h1>
 
+<properties [properties]="{
+  inputs: [
+    { name: 'width', description: 'String. Width of the modal. Defaults to 480px.' },
+    { name: 'height', description: 'String. Height of the modal. Defaults to size of content.'}
+  ]
+}"></properties>
+<separator></separator>
+
 <h2>Informational Modal</h2>
-<p>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user
+<description>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user
   have to
   acknowledge the information, actively, by clicking a button or closing the Modal.
-</p>
+</description>
 <component-example [name]="'ex1'">
   <fd-modal-example></fd-modal-example>
 </component-example>
@@ -30,29 +37,48 @@ constructor with
 <separator></separator>
 
 <h2>Confirmation Modal</h2>
-<p>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two
+<description>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two
   buttons
-  at the bottom. With the “positive” path always been the primary button.</p>
+  at the bottom. With the “positive” path always been the primary button.</description>
 <component-example [name]="'ex2'">
   <fd-modal-confirmation-example></fd-modal-confirmation-example>
 </component-example>
 <code-example [code]="confirmationModalSource" [language]="'typescript'"></code-example>
 
+<separator></separator>
+
 <h2>Component as Content</h2>
-<p>A reference to a component can be passed to the modal service open function, rather than passing a template reference variable.</p>
-<p>The content component's inputs can be accessed through the <code>instance</code> property on the modal reference object that is returned
-by the modal service's <code>open()</code> function.</p>
-<p>Custom options can be passed as the second parameter of the <code>open</code> function. Additionally, inputs can be set on the modal reference's <code>instance</code> object.</p>
+<description>
+    <p>A reference to a component can be passed to the modal service open function, rather than passing a template reference variable.</p>
+    <p>The content component's inputs can be accessed through the <code>instance</code> property on the modal reference object that is returned
+        by the modal service's <code>open()</code> function.</p>
+    <p>Custom options can be passed as the second parameter of the <code>open</code> function. Additionally, inputs can be set on the modal reference's <code>instance</code> object.</p>
+</description>
 <component-example [name]="'ex3'">
     <fd-modal-component-as-content-example></fd-modal-component-as-content-example>
 </component-example>
 <code-example [code]="componentAsContentSource" [language]="'typescript'"></code-example>
 <code-example [code]="contentSource" [language]="'typescript'"></code-example>
 
-<h2>Modal in a Modal</h2>
-<p>The modal component heavily relies on the ModalService, which contains every active Modal instance. To create nested modals, the service has an array of modal component references.</p>
-<p>It treats this array like a stack, adding new modals to the top and calling pop() when they are closed. For this reason, nested modals must be closed in the order they were first opened.</p>
+<separator></separator>
+
+<h2>Fullscreen Modal</h2>
+<description>
+    The modal dimensions can be controlled through the width and height inputs. These accept strings, so you may use whatever unit works best for your situation.
+</description>
 <component-example [name]="'ex4'">
+    <fd-modal-fullscreen></fd-modal-fullscreen>
+</component-example>
+<code-example [code]="fullScreenSource" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Modal in a Modal</h2>
+<description>
+    <p>The modal component heavily relies on the ModalService, which contains every active Modal instance. To create nested modals, the service has an array of modal component references.</p>
+    <p>It treats this array like a stack, adding new modals to the top and calling pop() when they are closed. For this reason, nested modals must be closed in the order they were first opened.</p>
+</description>
+<component-example [name]="'ex5'">
     <fd-modal-in-modal-example></fd-modal-in-modal-example>
 </component-example>
 <code-example [code]="modalInModalExample" [language]="'typescript'"></code-example>

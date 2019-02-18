@@ -207,6 +207,7 @@ import { DropdownInfiniteScrollExampleComponent } from './containers/dropdown/ex
 import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
 import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
 import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
+import { ModalFullscreenExampleComponent } from './containers/modal/examples/modal-fullscreen-example.component';
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
@@ -414,6 +415,7 @@ const ROUTES: Routes = [
         ModalInModalComponent,
         ModalInModalSecondComponent,
         ModalInModalExampleComponent,
+        ModalFullscreenExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,

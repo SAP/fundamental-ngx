@@ -76,4 +76,19 @@ describe('ModalComponent', () => {
         component.onModalKeydown({key: 'Tab'});
         expect(elemSpy1.focus).toHaveBeenCalled();
     });
+
+    it('should handle sizing', () => {
+        const width = 700;
+        const height = 200;
+        component.width = width + 'px';
+        component.height = height + 'px';
+        fixture.detectChanges();
+        component.open();
+
+        const fdModal = fixture.debugElement.nativeElement.querySelector('.fd-modal');
+        expect(fdModal.offsetWidth).toBe(width);
+
+        const fdModalContent = fixture.debugElement.nativeElement.querySelector('.fd-modal__content');
+        expect(fdModalContent.offsetHeight).toBe(height);
+    });
 });
