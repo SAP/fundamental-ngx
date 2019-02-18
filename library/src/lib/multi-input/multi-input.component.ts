@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { HashService } from '../utils/hash.service';
 
 @Component({
     selector: 'fd-multi-input',
@@ -29,6 +28,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     compact: boolean = false;
 
     @Input()
+    maxHeight: string;
+
+    @Input()
     glyph: string = 'navigation-down-arrow';
 
     @Input()
@@ -40,22 +42,36 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     @Input()
     searchTerm: string;
 
+    @Input()
+    selected: any[] = [];
+
+    @Input()
+    filterFn: Function = this.defaultFilter;
+
     @Output()
     searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
+    @Output()
+    selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
+
+    displayedValues: any[] = [];
+
     isOpen = false;
 
-    tokens = [];
-
-    popoverBodyId: string = this.hash.hash();
+    init = false;
 
     onChange: Function = () => {};
+
     onTouched: Function = () => {};
 
-    constructor(private hash: HashService, private elRef: ElementRef) {
-    }
+    constructor(private elRef: ElementRef) {}
 
     ngOnInit() {
+        this.init = true;
+
+        if (this.dropdownValues) {
+            this.displayedValues = this.dropdownValues;
+        }
     }
 
     registerOnChange(fn: any): void {
@@ -70,11 +86,39 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
         this.disabled = isDisabled;
     }
 
-    writeValue(obj: any): void {
+    writeValue(selected: []): void {
+        this.selected = selected;
+    }
+
+    handleSelect(checked: any, value: any): void {
+        if (checked) {
+            this.selected.push(value);
+        } else {
+            this.selected.splice(this.selected.indexOf(value), 1);
+        }
+        this.onChange(this.selected);
+        this.selectedChange.emit(this.selected);
+    }
+
+    handleSearchTermChange(): void {
+        this.searchTermChange.emit(this.searchTerm);
+        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+    }
+
+    private defaultFilter(contentArray: any[], searchTerm: string): any[] {
+        const searchLower = searchTerm.toLocaleLowerCase();
+        return contentArray.filter(item => {
+            if (item[this.displayWith]) {
+                return item[this.displayWith].toLocaleLowerCase().includes(searchLower);
+            } else {
+                return item.toLocaleLowerCase().includes(searchLower);
+            }
+        });
     }
 
     @HostListener('document:click', ['$event'])
     private clickHandler(event) {
+        event.stopPropagation();
         if (!this.elRef.nativeElement.contains(event.target)) {
             this.isOpen = false;
         }

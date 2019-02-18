@@ -2,15 +2,16 @@
     <div class="fd-multi-input-field">
         <div class="fd-popover">
             <div class="fd-popover__control">
-                <div class="fd-combobox-control" [attr.aria-label]="'multi-input-body'" [attr.aria-controls]="this.popoverBodyId"
-                     [attr.aria-expanded]="isOpen" [attr.aria-haspopup]="true">
+                <div class="fd-combobox-control"
+                     [attr.aria-label]="'multi input body'"
+                     [attr.aria-expanded]="isOpen">
                     <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
                         <input type="text" class="fd-input"
-                               [ngClass]="{'fd-input-compact': compact}"
+                               [ngClass]="{'fd-input--compact': compact}"
                                [placeholder]="placeholder"
                                [disabled]="disabled"
                                [(ngModel)]="searchTerm"
-                               (ngModelChange)="searchTermChange.emit(searchTerm)"
+                               (ngModelChange)="handleSearchTermChange()"
                                (click)="isOpen = !isOpen">
                         <span class="fd-input-group__addon fd-input-group__addon--after
                         fd-input-group__addon--button">
@@ -22,13 +23,17 @@
                     </div>
                 </div>
             </div>
-            <div class="fd-popover__body fd-popover__body--no-arrow" [attr.aria-hidden]="!isOpen" [id]="this.popoverBodyId">
-                <fd-menu *ngIf="dropdownValues.length">
+            <div *ngIf="init"
+                 [style.maxHeight]="this.maxHeight"
+                 [attr.aria-hidden]="!isOpen"
+                 class="fd-popover__body fd-popover__body--no-arrow fd-multi-input-popover-size">
+                <fd-menu *ngIf="displayedValues && displayedValues.length">
                     <fd-menu-list>
-                        <li fd-menu-item *ngFor="let value of dropdownValues; let i = index">
-                            <label [attr.for]="'multi-input-item--' + i" class="fd-menu__item">
-                                <input type="checkbox" class="fd-checkbox" [id]="'multi-input-item--' + i">
-                                {{value}}
+                        <li fd-menu-item *ngFor="let value of displayedValues">
+                            <label class="fd-menu__item">
+                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected.includes(value)"
+                                       (ngModelChange)="handleSelect($event, value)">
+                                {{value[displayWith] ? value[displayWith] : value}}
                             </label>
                         </li>
                     </fd-menu-list>
@@ -37,10 +42,12 @@
             </div>
         </div>
     </div>
-    <div class="fd-multi-input-tags" *ngFor="let token of tokens">
-        <span class="fd-token" role="button">Apple</span>
-        <span class="fd-token" role="button">Berry</span>
-        <span class="fd-token" role="button">Banana</span>
+    <div class="fd-multi-input-tags">
+        <fd-token *ngFor="let token of selected"
+                  (onCloseClick)="handleSelect(false, token)"
+                  class="fd-multi-input-token-spacing">
+            {{token[displayWith] ? token[displayWith] : token}}
+        </fd-token>
     </div>
 </div>
 
