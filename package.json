@@ -55,6 +55,7 @@
         "@types/jasmine": "^2.8.8",
         "@types/jasminewd2": "^2.0.4",
         "@types/node": "^10.12.18",
+        "angular-cli-ghpages": "^0.5.3",
         "codelyzer": "^4.5.0",
         "coveralls": "^3.0.2",
         "fs-extra": "^7.0.1",
