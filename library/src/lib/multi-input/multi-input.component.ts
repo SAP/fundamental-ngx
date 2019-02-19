@@ -86,7 +86,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
         this.disabled = isDisabled;
     }
 
-    writeValue(selected: []): void {
+    writeValue(selected: any[]): void {
         this.selected = selected;
     }
 

@@ -3,22 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
     selector: 'rtl-toggle',
     template: `
-        <span class="rtl-toggle--wrapper">
-            <label class="fd-form__label " for="{{id}}">
-            <span class="fd-toggle fd-toggle--s fd-form__control">
-                <input type="checkbox" name="" value="" id="{{id}}" class="toggle-rtl {{id}}" [attr.aria-controls]="label" (change)="onChange($event)" [(ngModel)]="isChecked">
-                <span class="fd-toggle__switch" role="presentation"></span>
-            </span>
-            Simulate RTL
-            </label>  
-        </span>`,
-    styles: [
-        `
-            .rtl-toggle--wrapper {
-                display: inline-block;
-            }
-        `
-    ]
+        <fd-toggle [size]="'xs'" [(ngModel)]="isChecked" (ngModelChange)="onChange()">Simulate RTL</fd-toggle>
+    `
 })
 export class DirectionalityComponent implements OnInit {
     id: string;
@@ -40,8 +26,8 @@ export class DirectionalityComponent implements OnInit {
         }
     }
 
-    onChange(event) {
-        let dirValue = this.isChecked ? 'rtl' : 'ltr';
+    onChange() {
+        const dirValue = this.isChecked ? 'rtl' : 'ltr';
         if (this.className) {
             Array.from(document.getElementsByClassName(this.className)).forEach(
                 (element: HTMLElement) => (element.dir = dirValue)
