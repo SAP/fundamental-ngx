@@ -8,6 +8,9 @@
         "type": "git",
         "url": "https://github.com/SAP/fundamental-ngx"
     },
+    "scripts": {
+        "std-version": "standard-version -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\""
+    },
     "peerDependencies": {
         "@angular/common": "^7.1.1",
         "@angular/core": "^7.1.1",
@@ -15,5 +18,8 @@
         "@angular/router": "^7.1.4",
         "fiori-fundamentals": "^1.4.1",
         "rxjs": "^6.3.3"
+    },
+    "devDependencies": {
+        "standard-version": "^5.0.0"
     }
 }
