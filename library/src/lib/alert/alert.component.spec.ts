@@ -50,9 +50,24 @@ describe('AlertComponent', () => {
         fixture.whenStable().then(() => {
             tick(15000);
             fixture.detectChanges();
-            expect(component.show).toBeFalsy();
+            expect(component.handleClose).toHaveBeenCalled();
             tick(1000);
             fixture.detectChanges();
+            expect(component.handleClose).toHaveBeenCalled();
+        });
+    }));
+
+    it('should handle open function when mousePersist is true', fakeAsync(() => {
+        component.ngOnInit();
+        spyOn(component, 'handleClose');
+        component.mousePersist = true;
+        component.open();
+        component.mouseInAlert = true;
+        fixture.whenStable().then(() => {
+            tick(15000);
+            expect(component.handleClose).not.toHaveBeenCalled();
+            component.mouseInAlert = false;
+            tick(600);
             expect(component.handleClose).toHaveBeenCalled();
         });
     }));
@@ -63,5 +78,12 @@ describe('AlertComponent', () => {
         ]);
         const retVal = component.getTop();
         expect(retVal).toEqual('30px');
+    });
+
+    it('should handle mouseenter/mouseleave events', () => {
+        component.handleAlertMouseEvent({type: 'mouseenter'});
+        expect(component.mouseInAlert).toBeTruthy();
+        component.handleAlertMouseEvent({type: 'mouseleave'});
+        expect(component.mouseInAlert).toBeFalsy();
     });
 });
