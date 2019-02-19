@@ -31,5 +31,7 @@ npm publish
 
 cd ../..
 
+npm install
+
 npm run build-docs
 npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
