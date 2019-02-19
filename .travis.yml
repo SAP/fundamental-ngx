@@ -12,7 +12,7 @@ jobs:
     include:
         - stage: 'Fundamental-ngx build'
           name: 'Unit tests'
-          script: './ci-scripts/unit-tests.sh'
+          script: npm run test && npm run test:coveralls
 notifications:
     email:
         on_failure: always
