@@ -12,6 +12,7 @@
                                [disabled]="disabled"
                                [(ngModel)]="searchTerm"
                                (ngModelChange)="handleSearchTermChange()"
+                               (keypress)="isOpen = true"
                                (click)="isOpen = !isOpen">
                         <span class="fd-input-group__addon fd-input-group__addon--after
                         fd-input-group__addon--button">
@@ -31,7 +32,7 @@
                     <fd-menu-list>
                         <li fd-menu-item *ngFor="let value of displayedValues">
                             <label class="fd-menu__item">
-                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected.includes(value)"
+                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.includes(value) : false"
                                        (ngModelChange)="handleSelect($event, value)">
                                 {{value[displayWith] ? value[displayWith] : value}}
                             </label>

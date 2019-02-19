@@ -124,6 +124,7 @@ describe('MultiInputComponent', () => {
 
     it('should select values', () => {
         spyOn(component.selectedChange, 'emit');
+        spyOn(component, 'onChange');
         spyOn(component, 'handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
@@ -138,11 +139,13 @@ describe('MultiInputComponent', () => {
         expect(component.selected[0]).toBe('test1');
         expect(fixture.nativeElement.querySelector('fd-token')).toBeTruthy();
         expect(component.selectedChange.emit).toHaveBeenCalledWith(component.selected);
+        expect(component.onChange).toHaveBeenCalledWith(component.selected);
         expect(component.handleSelect).toHaveBeenCalledWith(checkbox.checked, component.displayedValues[0]);
     });
 
     it('should de-select values', () => {
         spyOn(component.selectedChange, 'emit');
+        spyOn(component, 'onChange');
         spyOn(component, 'handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
@@ -162,6 +165,7 @@ describe('MultiInputComponent', () => {
         expect(component.selected.length).toBe(0);
         expect(fixture.nativeElement.querySelector('fd-token')).toBeFalsy();
         expect(component.selectedChange.emit).toHaveBeenCalledWith(component.selected);
+        expect(component.onChange).toHaveBeenCalledWith(component.selected);
         expect(component.handleSelect).toHaveBeenCalledWith(checkbox.checked, component.displayedValues[0]);
     });
 
