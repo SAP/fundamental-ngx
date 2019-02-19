@@ -7,17 +7,18 @@
 <fd-alert [dismissible]="true" [type]="'information'" (close)="closeAlert($event)" [id]="'information_alert_1'" #informationAlert>
     A dismissible information type alert.
 </fd-alert>
-<fd-alert [dismissible]="true" [type]="'error'" (close)="closeAlert($event)" #errorAlert>
+<fd-alert [dismissible]="true" [persist]="true" [type]="'error'" (close)="closeAlert($event)" #errorAlert>
     <div>
         <h3>A dismissible error type alert with template.</h3>
-        <p>More information...</p>
+        <p>This alert uses <code>[persist]="true"</code> and will not disappear automatically.</p>
     </div>
 </fd-alert>
-<fd-alert [dismissible]="false" #normalAlert>
-    A normal type alert.
+<fd-alert [dismissible]="false" [visibleTime]="5000" #normalAlert>
+    A normal type alert.  This alert uses <code>[visibleTime]="5000"</code> and will only be visible for 5 seconds.
 </fd-alert>
-<fd-alert [dismissible]="false" #linkAlert>
-    An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a>
+<fd-alert [dismissible]="false" [mousePersist]="true" #linkAlert>
+    <p>An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a><p>
+    <p>This alert uses <code>[mousePersist]="true"</code>.  This alert will remain visible while the mouse is hovered over it.
 </fd-alert>
 <button fd-button (click)="showAlert(warningAlert)">Show Dismissible Warning Alert</button>
 <button fd-button (click)="showAlert(successAlert)">Show Success Alert</button>

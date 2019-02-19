@@ -1,4 +1,5 @@
-<div class="fd-alert" role="alert" [attr.id]="getId()" [ngClass]="{'fd-alert--dismissible': dismissible,
+<div (mouseenter)="handleAlertMouseEvent($event)" (mouseleave)="handleAlertMouseEvent($event)"
+     class="fd-alert" role="alert" [attr.id]="getId()" [ngClass]="{'fd-alert--dismissible': dismissible,
         'fd-alert--warning': (type === 'warning'),
         'fd-alert--error': (type === 'error'),
         'fd-alert--information': (type === 'information'),
