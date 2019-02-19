@@ -9,7 +9,4 @@ export class MultiInputExampleComponent {
 
     selected = [];
 
-    callthisshit() {
-        this.selected = ['Apple'];
-    }
 }
