@@ -207,6 +207,7 @@ import { DropdownInfiniteScrollExampleComponent } from './containers/dropdown/ex
 import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
 import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
 import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
+import { ModalFullscreenExampleComponent } from './containers/modal/examples/modal-fullscreen-example.component';
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
@@ -221,6 +222,13 @@ import { TokenDocsComponent } from './containers/token/token-docs.component';
 import { TokenExampleComponent } from './containers/token/examples/token-example/token-example.component';
 import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
+import { MultiInputFilterExampleComponent } from './containers/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
+import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
+import { DatetimePickerDocsComponent } from './containers/datetime-picker/datetime-picker-docs.component';
+import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
+import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
+import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
+
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -230,8 +238,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { MultiInputFilterExampleComponent } from './containers/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
-import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -252,6 +258,7 @@ const ROUTES: Routes = [
             { path: 'calendar', component: CalendarDocsComponent },
             { path: 'comboboxInput', component: ComboboxInputDocsComponent },
             { path: 'datePicker', component: DatePickerDocsComponent },
+            { path: 'datetime-picker', component: DatetimePickerDocsComponent },
             { path: 'dropdown', component: DropdownDocsComponent },
             { path: 'file-input', component: FileInputDocsComponent },
             { path: 'form', component: FormDocsComponent },
@@ -303,6 +310,7 @@ const ROUTES: Routes = [
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
         DropdownDocsComponent,
+        DatetimePickerDocsComponent,
         FileInputDocsComponent,
         FormDocsComponent,
         IconDocsComponent,
@@ -365,6 +373,9 @@ const ROUTES: Routes = [
         CalendarMondayStartExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
+        DatetimeExampleComponent,
+        DatetimeNonMeridianExampleComponent,
+        DatetimeProgramExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
@@ -412,6 +423,7 @@ const ROUTES: Routes = [
         ModalInModalComponent,
         ModalInModalSecondComponent,
         ModalInModalExampleComponent,
+        ModalFullscreenExampleComponent,
         MultiInputDocsComponent,
         MultiInputExampleComponent,
         PanelColumnsExampleComponent,

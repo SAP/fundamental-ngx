@@ -1,0 +1,44 @@
+<div class="fd-datetime">
+    <div class="fd-popover">
+        <div class="fd-popover__control">
+            <div class="fd-input-group fd-input-group--after"
+                 [ngClass]="{'fd-input-group--compact' : compact}">
+                <input type="text"
+                       #dateTimeInput
+                       [attr.aria-label]="'datetime input'"
+                       [(ngModel)]="inputFieldDate"
+                       [placeholder]="placeholder"
+                       (change)="inputValueChange(dateTimeInput.value)"
+                       (focus)="onFocusHandler()"
+                       (blur)="onBlurHandler()"
+                       [ngClass]="{ 'fd-input--compact': compact }"
+                       [disabled]="disabled">
+                <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
+                    <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"
+                            (click)="openPopover(dateTimeInput.value)" aria-label="display datetime toggle"
+                            [attr.aria-expanded]="isOpen"></button>
+                </span>
+            </div>
+        </div>
+        <div class="fd-popover__body"
+             [attr.aria-expanded]="isOpen"
+             [attr.aria-hidden]="!isOpen">
+            <div class="fd-datetime__container">
+                <fd-calendar calType="single"
+                             [disableFunction]="disableFunction ? disableFunction : null"
+                             [blockFunction]="blockFunction ? blockFunction : null"
+                             [(ngModel)]="selectedDay"
+                             (updateDatePickerInput)="updatePickerInputHandler($event)"
+                             (isInvalidDateInput)="isInvalidDateInputHandler($event)"
+                             [dateFromDatePicker]="dateFromInput"></fd-calendar>
+                <div class="fd-datetime__separator"></div>
+                <fd-time [disabled]="disabled" [ngClass]="{'fd-time-container': !meridian}"
+                         [meridian]="meridian"
+                         [(ngModel)]="time"
+                         (ngModelChange)="setTime(true)"
+                         [spinners]="spinners"
+                         [displaySeconds]="displaySeconds"></fd-time>
+            </div>
+        </div>
+    </div>
+</div>

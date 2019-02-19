@@ -9,6 +9,7 @@ import * as contentSrc from '!raw-loader!./examples/modal-content.component.ts';
 import * as modalInModalExample from '!raw-loader!./examples/modal-in-modal-example.component.ts';
 import * as modalInModalComponent from '!raw-loader!./examples/modal-in-modal.component.ts';
 import * as modalInModalSecondComponent from '!raw-loader!./examples/modal-in-modal-second.component.ts';
+import * as fsModalSource from '!raw-loader!./examples/modal-fullscreen-example.component.ts';
 
 @Component({
     selector: 'app-modal',
@@ -66,6 +67,8 @@ export class ModalDocsComponent implements OnInit {
     modalInModal = modalInModalComponent;
 
     modalInModalSecond = modalInModalSecondComponent;
+
+    fullScreenSource = fsModalSource;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('modal');

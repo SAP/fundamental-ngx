@@ -788,6 +788,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 if (date) {
                     this.updateFromDatePicker(date);
                 }
+                this.constructCalendarYearsList();
             });
         }
         this.init = true;

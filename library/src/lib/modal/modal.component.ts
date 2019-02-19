@@ -3,7 +3,7 @@ import {
     ViewEncapsulation,
     Inject,
     ElementRef,
-    OnInit
+    OnInit, Input
 } from '@angular/core';
 import { ModalService } from './modal.service';
 
@@ -17,6 +17,12 @@ export class ModalComponent implements OnInit {
     resolve: Function;
     reject: Function;
     result: Promise<any>;
+
+    @Input()
+    width: string = '480px';
+
+    @Input()
+    height: string;
 
     private _openModalCount: number;
 
