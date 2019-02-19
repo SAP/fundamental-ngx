@@ -37,6 +37,9 @@ export class ModalService {
             this.appRef.attachView(componentRef.hostView);
             const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
             document.body.appendChild(domElem);
+            this.modalRef[this.modalRef.length - 1].afterClosed.subscribe(() => {
+                document.body.removeChild(domElem);
+            });
             this.appRef.tick();
         }
         this.modalRef[this.modalRef.length - 1].open();
