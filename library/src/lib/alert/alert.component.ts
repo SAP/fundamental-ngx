@@ -29,6 +29,14 @@ export class AlertComponent implements OnInit {
 
     @Input() inline: boolean = false;
 
+    @Input() persist: boolean = false;
+
+    @Input() visibleTime: number = 10000;
+
+    @Input() mousePersist: boolean = false;
+
+    mouseInAlert: boolean = false;
+
     show: boolean = false;
 
     generatedId: string;
@@ -52,7 +60,7 @@ export class AlertComponent implements OnInit {
     }
 
     getId() {
-        if(this.id) {
+        if (this.id) {
             return this.id;
         } else {
             return this.generatedId;
@@ -60,12 +68,15 @@ export class AlertComponent implements OnInit {
     }
 
     handleClose(result?, fromService?) {
-        this.elRef.nativeElement.style.display = 'none';
-        this.alertDiv.nativeElement.style.display = 'none';
+        this.show = false;
         this.close.emit(this.id);
-        if (!fromService && !this.inline) {
-            this.alertService.popAlert();
-        }
+        setTimeout(() => {
+            this.elRef.nativeElement.style.display = 'none';
+            this.alertDiv.nativeElement.style.display = 'none';
+            if (!fromService && !this.inline) {
+                this.alertService.popAlert();
+            }
+        }, 750)
     }
 
     open() {
@@ -77,12 +88,22 @@ export class AlertComponent implements OnInit {
             this.alertDiv.nativeElement.style.top = top;
             this.show = true;
             this.cd.detectChanges();
-            setTimeout(() => {
-                this.show = false;
+            if (!this.persist) {
                 setTimeout(() => {
-                    this.handleClose();
-                }, 750);
-            }, 10000);
+                    if (this.mousePersist) {
+                        const wait = () => {
+                            if (this.mouseInAlert === true) {
+                                setTimeout(wait, 500);
+                            } else {
+                                this.handleClose();
+                            }
+                        }
+                        wait();
+                    } else {
+                        this.handleClose();
+                    }
+                }, this.visibleTime);
+            }
         }
     }
 
@@ -97,5 +118,13 @@ export class AlertComponent implements OnInit {
             totalOffsetHeight = totalOffsetHeight + alert.offsetHeight + 10;
         });
         return totalOffsetHeight + 'px';
+    }
+
+    handleAlertMouseEvent(event) {
+        if (event.type === 'mouseenter') {
+            this.mouseInAlert = true;
+        } else if (event.type === 'mouseleave') {
+            this.mouseInAlert = false;
+        }
     }
 }
