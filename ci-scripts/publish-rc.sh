@@ -7,6 +7,8 @@ git config --global user.name "fundamental-bot"
 
 cd library
 
+npm install
+
 npm run std-version -- --prerelease rc --no-verify
 
 cd ..

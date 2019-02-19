@@ -10,6 +10,8 @@ git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /d
 
 cd library
 
+npm install
+
 std_ver=$(npm run std-version)
 release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
