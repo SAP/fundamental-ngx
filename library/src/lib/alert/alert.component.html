@@ -9,7 +9,7 @@
         'fd-alert-fade': !inline}" #alertDiv>
     <button class="fd-alert__close"
             *ngIf="dismissible"
-            (click)="handleClose()"
+            (click)="handleClose(undefined, undefined, 0)"
             [attr.aria-controls]="id"
             aria-label="Close">
     </button>
