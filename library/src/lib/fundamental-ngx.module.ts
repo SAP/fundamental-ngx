@@ -39,8 +39,9 @@ import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { ToggleModule } from './toggle/toggle.module';
-import { InfiniteScrollModule } from './utils/infinite-scroll.module';
+import { InfiniteScrollModule } from './infinite-scroll/infinite-scroll.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
+import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule],
@@ -73,6 +74,7 @@ import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
         PaginationModule,
         PanelModule,
         PopoverModule,
+        ScrollSpyModule,
         SearchInputModule,
         ShellbarModule,
         SideNavigationModule,

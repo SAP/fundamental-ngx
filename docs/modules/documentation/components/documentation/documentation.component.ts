@@ -48,7 +48,8 @@ export class DocumentationComponent implements OnInit {
 
     utilities = [
         { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
-        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' }
+        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' },
+        { url: 'scroll-spy', name: 'Scroll Spy', status: 'UNSAFE' }
     ];
 
     search: string = '';
