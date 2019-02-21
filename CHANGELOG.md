@@ -42,10 +42,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-# Change Log
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
 # [0.1.0](https://github.com/SAP/fundamental-ngx/compare/v0.1.0-rc.1...v0.1.0) (2019-02-19)
 
 
