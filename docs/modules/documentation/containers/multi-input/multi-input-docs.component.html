@@ -1,0 +1,58 @@
+<header>Multi Input</header>
+<description>
+    Input field with multiple selection enabled. Should be used when a user can select between a limited number of pre-defined options with a filter-enabled context.
+</description>
+<import module="MultiInputModule" path="fundamental-ngx"></import>
+
+<separator></separator>
+
+<h1>&lt;fd-multi-input&gt;</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'ngModel', description: 'Selected values. Should be used with two-way binding syntax.' },
+    { name: 'placeholder', description: 'String. Placeholder for the input.'},
+    { name: 'dropdownValues', description: 'Array. The collection of values to support in the multi input.' },
+    { name: 'disabled', description: 'Boolean. Disables the input.'},
+    { name: 'compact', description: 'Boolean. Set to \'true\' for the compact input.'},
+    { name: 'glyph', description: 'String. Use to select what icon appears in the button. Defaults to down arrow.' },
+    { name: 'maxHeight', description: 'String. Assigns the max height of the popover. Supports all css units.' },
+    { name: 'displayWith', description: 'String. Attribute of an object to display to the user.' },
+    { name: 'searchTerm', description: 'String. The value term of the input.' },
+    { name: 'selected', description: 'Array. The selected elements.' },
+    { name: 'filterFn', description: 'Function. Filter function to apply to the list. See example below.' }
+  ],
+  outputs: [
+    { name: 'searchTermChange', description: 'Fired when the input changes.'},
+    { name: 'selectedChange', description: 'Fired when the selected values change.'}
+  ]
+}"></properties>
+
+<separator></separator>
+
+<h2>Simple Multi Input</h2>
+<description>The standard version of the component that most people will use regularly. Width of the input can be controlled simply through the top-level component element sizing.</description>
+<component-example [name]="'ex1'">
+    <fd-multi-input-example></fd-multi-input-example>
+</component-example>
+<code-example [code]="simpleHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Display Object Property</h2>
+<description>The input supports objects through the <code>displayWith</code> input. Simply tell the component what field of the object should be displayed to the user.</description>
+<component-example [name]="'ex2'">
+    <fd-multi-input-displaywith-example></fd-multi-input-displaywith-example>
+</component-example>
+<code-example [code]="displayHtml" [language]="'HTML'"></code-example>
+<code-example [code]="displayTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Custom Filter</h2>
+<description>The input supports custom filters through the <code>filterFn</code> input function.</description>
+<component-example [name]="'ex3'">
+    <fd-multi-input-filter-example></fd-multi-input-filter-example>
+</component-example>
+<code-example [code]="filterHtml" [language]="'HTML'"></code-example>
+<code-example [code]="filterTs" [language]="'typescript'"></code-example>

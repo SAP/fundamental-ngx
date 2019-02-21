@@ -1,0 +1,18 @@
+<style>
+    fd-token {
+        margin-right: 20px;
+    }
+
+    .token {
+        background-color: lightgreen;
+        color: darkgreen;
+    }
+
+    .token::after {
+        color: darkgreen;
+    }
+</style>
+
+<fd-token>Filter</fd-token>
+<fd-token class="token">Stylable</fd-token>
+<fd-token *ngIf="isOpen" (onCloseClick)="isOpen = false">Closeable</fd-token>
