@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-date-picker'
     },
     providers: [
         {

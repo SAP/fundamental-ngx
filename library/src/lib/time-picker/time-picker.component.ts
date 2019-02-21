@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    styles: [':host {display: block;}']
+    styles: [':host {display: inline-block;}']
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
