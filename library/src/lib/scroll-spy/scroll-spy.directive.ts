@@ -1,9 +1,9 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Directive({
     selector: '[fdScrollSpy]'
 })
-export class ScrollSpyDirective implements OnInit {
+export class ScrollSpyDirective {
 
     @Input()
     public trackedTags: string[] = [];
@@ -17,12 +17,6 @@ export class ScrollSpyDirective implements OnInit {
     private currentTop: string;
 
     constructor(private elRef: ElementRef) {}
-
-    ngOnInit(): void {
-        if (this.trackedTags && this.trackedTags.length) {
-            this.trackedTags = this.trackedTags.map(item => item.toLocaleLowerCase());
-        }
-    }
 
     @HostListener('scroll', ['$event'])
     onScroll(event: any) {
