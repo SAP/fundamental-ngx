@@ -16,8 +16,8 @@
             <span class="side-nav__headers">Getting Started</span>
             <ng-container *ngFor="let guide of guides">
                 <li *ngIf="search === '' ||
-                guide.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                guide.name.toUpperCase().indexOf(search.toUpperCase()) != -1">
+                guide.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                guide.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1">
                     <div class="nav-item-container">
                         <a
                             class="nav-item"
@@ -43,8 +43,8 @@
                 <li
                     *ngIf="
                         search === '' ||
-                        component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                        component.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                        component.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                        component.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1
                     "
                 >
                     <div class="nav-item-container">
@@ -69,8 +69,8 @@
                 <li
                     *ngIf="
                         search === '' ||
-                        layout.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                        layout.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                        layout.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                        layout.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1
                     "
                 >
                     <div class="nav-item-container">
@@ -95,8 +95,8 @@
                 <li
                     *ngIf="
                         search === '' ||
-                        util.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                        util.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                        util.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                        util.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1
                     "
                 >
                     <div class="nav-item-container">
