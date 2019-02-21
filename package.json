@@ -36,7 +36,7 @@
         "@angular/router": "^7.1.4",
         "angular-highlight-js": "^2.0.1",
         "core-js": "^2.6.1",
-        "fiori-fundamentals": "^1.4.2",
+        "fiori-fundamentals": "^1.4.3",
         "highlight.js": "^9.13.1",
         "ngx-highlightjs": "^3.0.0",
         "ngx-markdown": "^7.1.3",
