@@ -37,9 +37,17 @@ export class AlertService {
             this.appRef.attachView(componentRef.hostView);
             const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
             document.body.appendChild(domElem);
+            const subscription = this.alertRef[this.alertRef.length - 1].afterClosed.subscribe(() => {
+                document.body.removeChild(domElem);
+                this.removeSubscription(subscription);
+            });
             this.appRef.tick();
         }
         this.alertRef[this.alertRef.length - 1].open();
         return this.alertRef[this.alertRef.length - 1];
+    }
+
+    removeSubscription(subscription) {
+        subscription.unsubscribe();
     }
 }

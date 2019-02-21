@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { AlertService } from './alert.service';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fd-alert',
@@ -19,6 +20,8 @@ import { AlertService } from './alert.service';
     providers: [HashService]
 })
 export class AlertComponent implements OnInit {
+    afterClosed = new Subject<any>();
+
     @Input() dismissible: boolean;
 
     @Input() type: string;
@@ -67,7 +70,10 @@ export class AlertComponent implements OnInit {
         }
     }
 
-    handleClose(result?, fromService?) {
+    handleClose(result?, fromService?, timeout?) {
+        if (!timeout && timeout !== 0) {
+            timeout = 750;
+        }
         this.show = false;
         this.close.emit(this.id);
         setTimeout(() => {
@@ -76,18 +82,19 @@ export class AlertComponent implements OnInit {
             if (!fromService && !this.inline) {
                 this.alertService.popAlert();
             }
-        }, 750)
+            this.afterClosed.next();
+        }, timeout)
     }
 
     open() {
         // check to make sure this alert is not already opened
         if (this.elRef.nativeElement.style.display !== 'block') {
+            this.show = true;
+            this.cd.detectChanges();
             const top = this.getTop();
             this.elRef.nativeElement.style.display = 'block';
             this.alertDiv.nativeElement.style.display = 'block';
             this.alertDiv.nativeElement.style.top = top;
-            this.show = true;
-            this.cd.detectChanges();
             if (!this.persist) {
                 setTimeout(() => {
                     if (this.mousePersist) {
