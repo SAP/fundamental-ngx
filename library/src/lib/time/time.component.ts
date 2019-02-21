@@ -7,7 +7,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     templateUrl: './time.component.html',
     styleUrls: ['./time.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-time'
     },
     providers: [
         {
@@ -15,7 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             useExisting: forwardRef(() => TimeComponent),
             multi: true
         }
-    ]
+    ],
+    styles: [':host {display: block;}']
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
     @Input() period: string;
