@@ -117,7 +117,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     }
 
     @HostListener('document:click', ['$event'])
-    private clickHandler(event) {
+    clickHandler(event) {
         event.stopPropagation();
         if (!this.elRef.nativeElement.contains(event.target)) {
             this.isOpen = false;

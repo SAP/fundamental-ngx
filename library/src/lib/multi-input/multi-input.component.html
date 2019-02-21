@@ -32,7 +32,7 @@
                     <fd-menu-list>
                         <li fd-menu-item *ngFor="let value of displayedValues">
                             <label class="fd-menu__item">
-                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.includes(value) : false"
+                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                        (ngModelChange)="handleSelect($event, value)">
                                 {{value[displayWith] ? value[displayWith] : value}}
                             </label>
