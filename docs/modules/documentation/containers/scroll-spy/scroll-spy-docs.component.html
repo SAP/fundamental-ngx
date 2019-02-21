@@ -1,0 +1,32 @@
+<header>Scroll Spy</header>
+<description>
+    Scroll Spy is a tool <strong>directive</strong> designed to help navigation elements determine the element currently in view of the user.
+    It takes in an array of tags to track, and when one of those tags goes over the top scroll limit, an event is fired.
+</description>
+<import module="ScrollSpyModule"
+        path="fundamental-ngx"></import>
+<separator></separator>
+
+<h1>fdScrollSpy</h1>
+
+<properties [properties]="{
+  inputs: [
+    { name: 'trackedTags', description: 'String array. The tags to track, such as \'div\'. Case insensitive.'},
+    { name: 'fireEmpty', description: 'Boolean. Whether the directive should fire empty events. Defaults to false.'}
+  ],
+  outputs: [
+    { name: 'topSpyChange', description: 'Fires when the top element being spied changes. Returns the id of the element.' }
+  ]
+}"></properties>
+
+<separator></separator>
+<h2>Standard Scroll Spy</h2>
+<description>
+    This example does not modify the <code>fireEmpty</code> input, so the navigation will always have an arrow.
+    To have the arrow not display if a user scrolls to the absolute top or bottom, set <code>fireEmpty</code> to true.
+</description>
+<component-example [name]="'ex1'">
+    <fd-scroll-spy-example></fd-scroll-spy-example>
+</component-example>
+<code-example [code]="scrollSpyHtml" [language]="'HTML'"></code-example>
+<code-example [code]="scrollSpyTs" [language]="'typescript'"></code-example>

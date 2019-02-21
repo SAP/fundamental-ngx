@@ -224,6 +224,8 @@ import { DatetimePickerDocsComponent } from './containers/datetime-picker/dateti
 import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
 import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
 import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
+import { ScrollSpyDocsComponent } from './containers/scroll-spy/scroll-spy-docs.component';
+import { ScrollSpyExampleComponent } from './containers/scroll-spy/examples/scroll-spy-example/scroll-spy-example.component';
 
 import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
@@ -276,6 +278,7 @@ const ROUTES: Routes = [
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
+            { path: 'scroll-spy', component: ScrollSpyDocsComponent },
             { path: 'searchInput', component: SearchInputDocsComponent },
             { path: 'shellbar', component: ShellbarDocsComponent },
             { path: 'sideNavigation', component: SideNavigationDocsComponent },
@@ -435,6 +438,8 @@ const ROUTES: Routes = [
         PaginationExampleComponent,
         PopoverExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
+        ScrollSpyDocsComponent,
+        ScrollSpyExampleComponent,
         SearchInputExampleComponent,
         SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,

@@ -23,7 +23,7 @@ export * from './lib/form/form.module';
 export * from './lib/icon/icon.module';
 export * from './lib/identifier/identifier.module';
 export * from './lib/image/image.module';
-export * from './lib/utils/infinite-scroll.module';
+export * from './lib/infinite-scroll/infinite-scroll.module';
 export * from './lib/inline-help/inline-help.module';
 export * from './lib/input-group/input-group.module';
 export * from './lib/list/list.module';
@@ -36,6 +36,7 @@ export * from './lib/multi-input/multi-input.module'
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';
 export * from './lib/popover/popover.module';
+export * from './lib/scroll-spy/scroll-spy.module';
 export * from './lib/search-input/search-input.module';
 export * from './lib/shellbar/shellbar.module';
 export * from './lib/side-navigation/side-navigation.module';
