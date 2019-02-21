@@ -1,19 +1,41 @@
 language: node_js
-node_js:
-    - 8.9.0
+node_js: 10.15.0
+cache: npm
 dist: trusty
 git:
-    depth: false
-branches:
-    only:
-        - develop
-        - "/^feature\\/.*$/"
+  depth: false
+script:
+  - npm run build
 jobs:
-    include:
-        - stage: 'Fundamental-ngx build'
-          name: 'Unit tests'
-          script: npm run test && npm run test:coveralls
+  include:
+  - stage: Lint and Test
+    script: npm run test && npm run test:coveralls
+  - stage: Pre-release
+    if: branch = master
+    before_deploy:
+    - git checkout master
+    - bash ./ci-scripts/setup-npm.sh
+    deploy:
+    - provider: script
+      script: bash ./ci-scripts/publish-rc.sh
+      skip_cleanup: true
+  - stage: Release
+    if: branch = tmp_branch_for_automated_release_do_not_use
+    before_deploy:
+    - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+    - git fetch
+    - git checkout master
+    - bash ./ci-scripts/setup-npm.sh
+    deploy:
+    - provider: script
+      script: bash ./ci-scripts/publish.sh
+      skip_cleanup: true
+      on:
+        all_branches: true
 notifications:
-    email:
-        on_failure: always
-        on_success: change
+  email:
+    on_failure: always
+    on_success: change
+  slack: 
+    rooms:
+      - ui-fundamentals:zVRyxlqkYnQFD7p8QHkWM8Fd#ngx-automated

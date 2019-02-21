@@ -73,7 +73,7 @@ For an existing Angular application,
 
 The documentation serves as a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo application utilizes the Angular Fundamental source code in this repository, so changes you make to any component source will be reflected in the demo app.
 
-View the live demo [here](https://github.com/SAP/fundamental-ngx/tree/develop/docs).
+View the live demo [here](https://github.com/SAP/fundamental-ngx/tree/master/docs).
 
 ## Tests
 
@@ -81,19 +81,25 @@ Fundamental NGX makes use of Jasmine and Karma for its unit tests.
 
 Run `ng test fundamental-ngx`. Append `--code-coverage` to generate code coverage documentation.
 
+## Versioning
+
+The `fundamental-ngx` library follows [Semantic Versioning](https://semver.org/). These components strictly adhere to the `[MAJOR].[MINOR].[PATCH]` numbering system (also known as `[BREAKING].[FEATURE].[FIX]`).
+
+Merges to the `master` branch will be published as a prerelease. Prereleases will include an **rc** version (_e.g._ `[MAJOR].[MINOR].[PATCH]-rc.[RC]`).
+
 ## Known Issues
 
 Please see [issues](https://github.com/SAP/fundamental-ngx/issues)
 
 ## Support
 
-If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues) or write an email to fundamental@sap.com.
+If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
 
 ## Contributing
 
-If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/develop/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
+If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
 
-Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/develop/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
+Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
 
 ## License
 

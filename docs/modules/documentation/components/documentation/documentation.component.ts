@@ -31,9 +31,10 @@ export class DocumentationComponent implements OnInit {
         { url: 'loadingSpinner', name: 'Loading Spinner', status: 'SAFE' },
         { url: 'menu', name: 'Menu', status: 'SAFE' },
         { url: 'modal', name: 'Modal', status: 'UNSAFE' },
+        { url: 'multi-input', name: 'Multi Input', status: 'UNSAFE' },
         { url: 'pagination', name: 'Pagination', status: 'SAFE' },
         { url: 'popover', name: 'Popover', status: 'ACTIVE' },
-        { url: 'searchInput', name: 'Search Input', status: 'SAFE' },
+        { url: 'searchInput', name: 'Search Input', status: 'ACTIVE' },
         { url: 'shellbar', name: 'Shellbar', status: 'ACTIVE' },
         { url: 'sideNavigation', name: 'Side Navigation', status: 'SAFE' },
         { url: 'table', name: 'Table', status: 'UNSAFE' },
@@ -41,14 +42,18 @@ export class DocumentationComponent implements OnInit {
         { url: 'tile', name: 'Tile', status: 'SAFE' },
         { url: 'time', name: 'Time', status: 'SAFE' },
         { url: 'timePicker', name: 'Time Picker', status: 'SAFE' },
-        { url: 'toggle', name: 'Toggle', status: 'ACTIVE' }
+        { url: 'toggle', name: 'Toggle', status: 'ACTIVE' },
+        { url: 'token', name: 'Token', status: 'ACTIVE' },
     ];
 
-    layouts = [{ url: 'panel', name: 'Panel', status: 'SAFE' }];
+    layouts = [
+        { url: 'panel', name: 'Panel', status: 'SAFE' }
+    ];
 
     utilities = [
         { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
-        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' }
+        { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' },
+        { url: 'scroll-spy', name: 'Scroll Spy', status: 'UNSAFE' }
     ];
 
     search: string = '';
