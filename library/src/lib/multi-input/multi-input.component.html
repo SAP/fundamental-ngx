@@ -1,0 +1,54 @@
+<div class="fd-multi-input">
+    <div class="fd-multi-input-field">
+        <div class="fd-popover">
+            <div class="fd-popover__control">
+                <div class="fd-combobox-control"
+                     [attr.aria-label]="'multi input body'"
+                     [attr.aria-expanded]="isOpen">
+                    <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
+                        <input type="text" class="fd-input"
+                               [ngClass]="{'fd-input--compact': compact}"
+                               [placeholder]="placeholder"
+                               [disabled]="disabled"
+                               [(ngModel)]="searchTerm"
+                               (ngModelChange)="handleSearchTermChange()"
+                               (keypress)="isOpen = true"
+                               (click)="isOpen = !isOpen">
+                        <span class="fd-input-group__addon fd-input-group__addon--after
+                        fd-input-group__addon--button">
+                            <button class="fd-button--light"
+                                    [ngClass]="('sap-icon--' + this.glyph)"
+                                    [disabled]="disabled"
+                                    (click)="isOpen = !isOpen"></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="init"
+                 [style.maxHeight]="this.maxHeight"
+                 [attr.aria-hidden]="!isOpen"
+                 class="fd-popover__body fd-popover__body--no-arrow fd-multi-input-popover-size">
+                <fd-menu *ngIf="displayedValues && displayedValues.length">
+                    <fd-menu-list>
+                        <li fd-menu-item *ngFor="let value of displayedValues">
+                            <label class="fd-menu__item">
+                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
+                                       (ngModelChange)="handleSelect($event, value)">
+                                {{value[displayWith] ? value[displayWith] : value}}
+                            </label>
+                        </li>
+                    </fd-menu-list>
+                </fd-menu>
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+    <div class="fd-multi-input-tags">
+        <fd-token *ngFor="let token of selected"
+                  (onCloseClick)="handleSelect(false, token)"
+                  class="fd-multi-input-token-spacing">
+            {{token[displayWith] ? token[displayWith] : token}}
+        </fd-token>
+    </div>
+</div>
+

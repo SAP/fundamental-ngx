@@ -1,0 +1,6 @@
+<fd-multi-input [dropdownValues]="values"
+                [placeholder]="'Search here...'"
+                [(ngModel)]="selected"
+                [displayWith]="'name'"></fd-multi-input>
+
+Selected: [<span *ngFor="let item of selected; let i = index">{{i === selected.length ? item.name : item.name + ','}}</span>]

@@ -218,11 +218,15 @@ import { FileInputExampleComponent } from './containers/file-input/examples/file
 import { FileInputCustomExampleComponent } from './containers/file-input/examples/file-input-custom-example/file-input-custom-example.component';
 import { FileInputDragDisabledExampleComponent } from './containers/file-input/examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import { FileInputMaxExampleComponent } from './containers/file-input/examples/file-input-max-example/file-input-max-example.component';
+import { TokenDocsComponent } from './containers/token/token-docs.component';
+import { TokenExampleComponent } from './containers/token/examples/token-example/token-example.component';
 import { DatetimePickerDocsComponent } from './containers/datetime-picker/datetime-picker-docs.component';
 import { DatetimeExampleComponent } from './containers/datetime-picker/examples/datetime-example/datetime-example.component';
 import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
 import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
 
+import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
+import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -232,6 +236,8 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { MultiInputFilterExampleComponent } from './containers/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
+import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -266,6 +272,7 @@ const ROUTES: Routes = [
             { path: 'loadingSpinner', component: LoadingSpinnerDocsComponent },
             { path: 'menu', component: MenuDocsComponent },
             { path: 'modal', component: ModalDocsComponent },
+            { path: 'multi-input', component: MultiInputDocsComponent },
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
@@ -279,6 +286,7 @@ const ROUTES: Routes = [
             { path: 'timePicker', component: TimePickerDocsComponent },
             { path: 'tree', component: TreeDocsComponent },
             { path: 'toggle', component: ToggleDocsComponent },
+            { path: 'token', component: TokenDocsComponent },
             { path: 'home', component: HomeDocsComponent },
             { path: 'new-component', component: NewComponentComponent }
         ]
@@ -415,6 +423,8 @@ const ROUTES: Routes = [
         ModalInModalComponent,
         ModalInModalSecondComponent,
         ModalInModalExampleComponent,
+        MultiInputDocsComponent,
+        MultiInputExampleComponent,
         ModalFullscreenExampleComponent,
         PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
@@ -465,6 +475,10 @@ const ROUTES: Routes = [
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
+        TokenDocsComponent,
+        TokenExampleComponent,
+        MultiInputFilterExampleComponent,
+        MultiInputDisplaywithExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

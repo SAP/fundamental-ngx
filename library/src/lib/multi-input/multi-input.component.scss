@@ -1,0 +1,15 @@
+:host {
+    display: block;
+}
+
+.fd-multi-input-token-spacing {
+    margin: 0 4px 4px 0;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.fd-multi-input-popover-size {
+    overflow-x: auto;
+}

@@ -20,6 +20,7 @@ import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
+import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
 import { PopoverModule } from './popover/popover.module';
@@ -32,13 +33,14 @@ import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
 import { TimePickerModule } from './time-picker/time-picker.module';
+import { ToggleModule } from './toggle/toggle.module';
+import { TokenModule } from './token/token.module';
 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
-import { ToggleModule } from './toggle/toggle.module';
 import { InfiniteScrollModule } from './utils/infinite-scroll.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 
@@ -70,6 +72,7 @@ import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
         LoadingSpinnerModule,
         MenuModule,
         ModalModule,
+        MultiInputModule,
         PaginationModule,
         PanelModule,
         PopoverModule,
@@ -82,6 +85,7 @@ import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
         TimeModule,
         TimePickerModule,
         ToggleModule,
+        TokenModule,
         TreeModule
     ],
     providers: [AlertService, ModalService]
