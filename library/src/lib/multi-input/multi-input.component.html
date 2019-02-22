@@ -34,7 +34,7 @@
                             <label class="fd-menu__item">
                                 <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                        (ngModelChange)="handleSelect($event, value)">
-                                {{value[displayWith] ? value[displayWith] : value}}
+                                {{displayFn(value)}}
                             </label>
                         </li>
                     </fd-menu-list>
@@ -47,7 +47,7 @@
         <fd-token *ngFor="let token of selected"
                   (onCloseClick)="handleSelect(false, token)"
                   class="fd-multi-input-token-spacing">
-            {{token[displayWith] ? token[displayWith] : token}}
+            {{displayFn(token)}}
         </fd-token>
     </div>
 </div>
