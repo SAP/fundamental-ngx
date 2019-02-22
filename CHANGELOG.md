@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0-rc.7"></a>
+# [0.2.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.6...v0.2.0-rc.7) (2019-02-22)
+
+
+### Bug Fixes
+
+* top-level div classes fixed for some components ([#561](https://github.com/SAP/fundamental-ngx/issues/561)) ([f56f9db](https://github.com/SAP/fundamental-ngx/commit/f56f9db))
+
+
+
 <a name="0.2.0-rc.6"></a>
 # [0.2.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.5...v0.2.0-rc.6) (2019-02-21)
 
