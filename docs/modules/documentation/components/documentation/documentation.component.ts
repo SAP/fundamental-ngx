@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
 export class DocumentationComponent implements OnInit {
     @ViewChild('content') contentElRef: ElementRef;
 
+    guides = [
+        { url: 'home', name: 'Home' },
+        { url: 'new-component', name: 'New Component' }
+    ];
+
     components = [
         { url: 'action-bar', name: 'Action Bar', status: 'ACTIVE' },
         { url: 'alert', name: 'Alert', status: 'UNSAFE' },
