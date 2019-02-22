@@ -114,8 +114,8 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
         });
     }
 
-    private defaultDisplay(obj: any): void {
-        return obj;
+    private defaultDisplay(str: string): string {
+        return str;
     }
 
     @HostListener('document:click', ['$event'])
