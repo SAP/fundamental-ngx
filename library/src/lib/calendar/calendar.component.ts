@@ -169,6 +169,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         selectedLastDay: this.selectedRangeLast
     };
 
+    @Output()
+    closeCalendar = new EventEmitter<any>();
+
     // A function that determines the number of days in a particular month
     determineDaysInMonth = function(month: number, year: number): number {
         if (month === 1) {
@@ -711,61 +714,65 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     onKeydownDayHandler(event, cell) {
-        // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
-        let lastDay = this.calendarGrid.length === 6 ? 66 : 56;
-        const currentId = parseInt(event.currentTarget.id.split('-').pop());
-        if (event.code === 'Space' || event.code === 'Enter') {
-            event.preventDefault();
-            this.selectDate(cell);
-            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
-        } else if (event.code === 'ArrowUp') {
-            event.preventDefault();
-            if (currentId >= 10 && currentId <= 16) {
-                // if first row, go to previous month
-                this.goToPreviousMonth();
-                const lastDigit = currentId.toString().split('').pop();
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
-            } else {
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
+        if (event.code === 'Tab' && !event.shiftKey) {
+            this.closeCalendar.emit();
+        } else {
+            // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
+            let lastDay = this.calendarGrid.length === 6 ? 66 : 56;
+            const currentId = parseInt(event.currentTarget.id.split('-').pop());
+            if (event.code === 'Space' || event.code === 'Enter') {
+                event.preventDefault();
+                this.selectDate(cell);
+                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
+            } else if (event.code === 'ArrowUp') {
+                event.preventDefault();
+                if (currentId >= 10 && currentId <= 16) {
+                    // if first row, go to previous month
+                    this.goToPreviousMonth();
+                    const lastDigit = currentId.toString().split('').pop();
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
+                }
+            } else if (event.code === 'ArrowDown') {
+                event.preventDefault();
+                if (currentId >= lastDay - 6 && currentId <= lastDay) {
+                    // if last row, go to next month
+                    this.goToNextMonth();
+                    const lastDigit = currentId.toString().split('').pop();
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-1' + lastDigit;
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
+                }
+            } else if (event.code === 'ArrowLeft') {
+                event.preventDefault();
+                if (currentId === 10) {
+                    // if the first day is selected, go to the last day of the previous month
+                    this.goToPreviousMonth();
+                    lastDay = this.calendarGrid.length === 6 ? 66 : 56;
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + lastDay;
+                } else if (currentId.toString().split('').pop() === '0') {
+                    // if the last digit is 0, skip to the last day of the previous week
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 4);
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
+                }
+            } else if (event.code === 'ArrowRight') {
+                event.preventDefault();
+                if (currentId === lastDay) {
+                    // if the last day is selected, go to the first day of the next month
+                    this.goToNextMonth();
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-10';
+                } else if (currentId.toString().split('').pop() === '6') {
+                    // else if the last digit is 6, skip to the first day of the next week
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 4);
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
+                }
             }
-        } else if (event.code === 'ArrowDown') {
-            event.preventDefault();
-            if (currentId >= lastDay - 6 && currentId <= lastDay) {
-                // if last row, go to next month
-                this.goToNextMonth();
-                const lastDigit = currentId.toString().split('').pop();
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-1' + lastDigit;
-            } else {
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
+            if (this.newFocusedDayId) {
+                this.focusElement(this.newFocusedDayId);
             }
-        } else if (event.code === 'ArrowLeft') {
-            event.preventDefault();
-            if (currentId === 10) {
-                // if the first day is selected, go to the last day of the previous month
-                this.goToPreviousMonth();
-                lastDay = this.calendarGrid.length === 6 ? 66 : 56;
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + lastDay;
-            } else if (currentId.toString().split('').pop() === '0') {
-                // if the last digit is 0, skip to the last day of the previous week
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 4);
-            } else {
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
-            }
-        } else if (event.code === 'ArrowRight') {
-            event.preventDefault();
-            if (currentId === lastDay) {
-                // if the last day is selected, go to the first day of the next month
-                this.goToNextMonth();
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-10';
-            } else if (currentId.toString().split('').pop() === '6') {
-                // else if the last digit is 6, skip to the first day of the next week
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 4);
-            } else {
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
-            }
-        }
-        if (this.newFocusedDayId) {
-            this.focusElement(this.newFocusedDayId);
         }
     }
 

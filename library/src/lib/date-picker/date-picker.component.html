@@ -22,7 +22,7 @@
         <div class="fd-popover__body"
              [attr.aria-expanded]="isOpen"
              [attr.aria-hidden]="!isOpen">
-            <fd-calendar [calType]="type"
+            <fd-calendar (closeCalendar)="isOpen = false;" [calType]="type"
                          [disableFunction]="disableFunction ? disableFunction : null"
                          [blockFunction]="blockFunction ? blockFunction : null"
                          [(selectedDay)]="selectedDay"
