@@ -15,7 +15,7 @@
             </li>
             <span class="side-nav__headers">Getting Started</span>
             <ng-container *ngFor="let guide of guides">
-                <li *ngIf="search === '' ||
+                <li *ngIf="search === '' || guide.url === 'home' ||
                 guide.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
                 guide.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1">
                     <div class="nav-item-container">
