@@ -7,7 +7,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-time-picker'
     },
     providers: [
         {
@@ -15,7 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             useExisting: forwardRef(() => TimePickerComponent),
             multi: true
         }
-    ]
+    ],
+    styles: [':host {display: inline-block;}']
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()

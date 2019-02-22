@@ -43,7 +43,8 @@ export interface EmittedDate {
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-calendar'
     },
     providers: [
         {

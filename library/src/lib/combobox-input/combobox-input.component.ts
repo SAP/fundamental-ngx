@@ -10,7 +10,10 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
         provide: NG_VALUE_ACCESSOR,
         useExisting: ComboboxInputComponent,
         multi: true
-    }]
+    }],
+    host: {
+        class: 'fd-combobox-input'
+    }
 })
 export class ComboboxInputComponent extends SearchInputComponent {
 
