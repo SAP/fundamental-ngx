@@ -37,9 +37,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     dropdownValues: any[] = [];
 
     @Input()
-    displayWith: string;
-
-    @Input()
     searchTerm: string;
 
     @Input()
@@ -47,6 +44,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
 
     @Input()
     filterFn: Function = this.defaultFilter;
+
+    @Input()
+    displayFn: Function = this.defaultDisplay;
 
     @Output()
     searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -108,12 +108,14 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter(item => {
-            if (item[this.displayWith]) {
-                return item[this.displayWith].toLocaleLowerCase().includes(searchLower);
-            } else {
-                return item.toLocaleLowerCase().includes(searchLower);
+            if (item) {
+                return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
             }
         });
+    }
+
+    private defaultDisplay(str: string): string {
+        return str;
     }
 
     @HostListener('document:click', ['$event'])
