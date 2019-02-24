@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0-rc.9"></a>
+# manual upgrade for bug fix  
+
+
+
 <a name="0.2.0-rc.8"></a>
 # manual upgrade for bug fix
 
