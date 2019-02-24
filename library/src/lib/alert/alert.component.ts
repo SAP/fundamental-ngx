@@ -83,7 +83,7 @@ export class AlertComponent implements OnInit {
                 this.alertService.popAlert();
             }
             this.afterClosed.next();
-        }, timeout)
+        }, timeout);
     }
 
     open() {
@@ -104,7 +104,7 @@ export class AlertComponent implements OnInit {
                             } else {
                                 this.handleClose();
                             }
-                        }
+                        };
                         wait();
                     } else {
                         this.handleClose();

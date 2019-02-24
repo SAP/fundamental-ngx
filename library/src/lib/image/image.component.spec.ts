@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
-import { browser, element, by } from 'protractor'
+import { browser, element, by } from 'protractor';
 
 import { By } from '@angular/platform-browser';
 

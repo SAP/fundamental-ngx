@@ -75,7 +75,7 @@ describe('ToggleComponent', () => {
         fixture.detectChanges();
 
         const toggle = fixture.nativeElement.querySelector('.fd-toggle');
-        expect(toggle.classList).toContain('fd-toggle--' + size)
+        expect(toggle.classList).toContain('fd-toggle--' + size);
     });
 
 });

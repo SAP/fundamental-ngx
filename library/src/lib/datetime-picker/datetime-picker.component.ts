@@ -177,7 +177,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
             return;
         }
         this.selectedDay.date = selected;
-        this.time = {hour: selected.getHours(), minute: selected.getMinutes(), second: selected.getSeconds()}
+        this.time = {hour: selected.getHours(), minute: selected.getMinutes(), second: selected.getSeconds()};
         this.date = this.selectedDay.date;
         this.setTime();
     }
