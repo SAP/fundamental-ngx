@@ -2,6 +2,8 @@
 <description>
     Scroll Spy is a tool <strong>directive</strong> designed to help navigation elements determine the element currently in view of the user.
     It takes in an array of tags to track, and when one of those tags goes over the top scroll limit, an event is fired.
+    <br /><br />
+    The examples below make use of the id to determine what element is spied on, but many other approaches are also possible.
 </description>
 <import module="ScrollSpyModule"
         path="fundamental-ngx"></import>
@@ -12,10 +14,11 @@
 <properties [properties]="{
   inputs: [
     { name: 'trackedTags', description: 'String array. The tags to track, such as \'div\'. Case insensitive.'},
-    { name: 'fireEmpty', description: 'Boolean. Whether the directive should fire empty events. Defaults to false.'}
+    { name: 'fireEmpty', description: 'Boolean. Whether the directive should fire empty events. Defaults to false.'},
+    { name: 'targetPercent', description: 'Number between 0 and 1. Percentage of the container at which to fire events. 0 is top, 1 is bottom.'}
   ],
   outputs: [
-    { name: 'topSpyChange', description: 'Fires when the top element being spied changes. Returns the id of the element.' }
+    { name: 'spyChange', description: 'Fires when the element being spied changes. Returns the element.' }
   ]
 }"></properties>
 
@@ -30,3 +33,14 @@
 </component-example>
 <code-example [code]="scrollSpyHtml" [language]="'HTML'"></code-example>
 <code-example [code]="scrollSpyTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Custom Detection Threshold</h2>
+<description>
+    The <code>targetPercent</code> property allows you to control at what location in the container the event is fired. For example, a value of <code>0.5</code> would fire the events in the middle of the container, <code>0</code> for the top and <code>1</code> for the bottom.
+</description>
+<component-example [name]="'ex2'">
+    <fd-scroll-spy-custom-example></fd-scroll-spy-custom-example>
+</component-example>
+<code-example [code]="scrollSpyCustomHtml" [language]="'HTML'"></code-example>
+<code-example [code]="scrollSpyCustomTs" [language]="'typescript'"></code-example>

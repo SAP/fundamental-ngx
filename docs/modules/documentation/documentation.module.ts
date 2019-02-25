@@ -226,7 +226,9 @@ import { DatetimeNonMeridianExampleComponent } from './containers/datetime-picke
 import { DatetimeProgramExampleComponent } from './containers/datetime-picker/examples/datetime-program-example/datetime-program-example.component';
 import { ScrollSpyDocsComponent } from './containers/scroll-spy/scroll-spy-docs.component';
 import { ScrollSpyExampleComponent } from './containers/scroll-spy/examples/scroll-spy-example/scroll-spy-example.component';
-
+import { ScrollSpyCustomExampleComponent } from './containers/scroll-spy/examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
+import { MultiInputFilterExampleComponent } from './containers/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
+import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
 
@@ -238,8 +240,6 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
-import { MultiInputFilterExampleComponent } from './containers/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
-import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -440,6 +440,7 @@ const ROUTES: Routes = [
         PopoverProgrammaticOpenExampleComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
+        ScrollSpyCustomExampleComponent,
         SearchInputExampleComponent,
         SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,

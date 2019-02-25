@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     height: 190px;
+    position: relative;
 }
 
 .item {
@@ -40,5 +41,17 @@
     font-weight: bold;
     .icon {
         opacity: 1;
+    }
+}
+
+.middle-marker-container {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 0;
+    width: calc(100% - 140px);
+    .marker {
+        height: 1px;
+        border: 0.5px dashed black;
     }
 }
