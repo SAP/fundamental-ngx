@@ -5,9 +5,9 @@ rules:
     arrow-return-shorthand: true
     callable-types: true
     class-name: true
-    # comment-format:
-    #     - true
-    #     - check-space
+    comment-format:
+        - true
+        - check-space
     component-selector:
         - true
         - attribute
@@ -24,14 +24,14 @@ rules:
         - spaces
     interface-over-type-literal: true
     label-position: true
-    # max-line-length:
-    #     - true
-    #     - 140
+    max-line-length:
+        - true
+        - 140
     member-access: false
-    # member-ordering:
-    #     - true
-    #     - static-before-instance
-    #     - variables-before-functions
+    member-ordering:
+        - true
+        - static-before-instance
+        - variables-before-functions
     no-arg: true
     no-bitwise: true
     no-console:
@@ -49,7 +49,7 @@ rules:
     no-eval: true
     no-misused-new: true
     no-non-null-assertion: true
-    # no-shadowed-variable: true
+    no-shadowed-variable: true
     no-string-literal: false
     no-string-throw: true
     no-switch-case-fall-through: true
@@ -64,16 +64,16 @@ rules:
         - check-catch
         - check-else
         - check-whitespace
-    # prefer-const: true
-    # quotemark:
-    #     - true
-    #     - single
-    # radix: true
+    prefer-const: true
+    quotemark:
+        - true
+        - single
+    radix: true
     semicolon:
         - always
-    # triple-equals:
-    #     - true
-    #     - allow-null-check
+    triple-equals:
+        - true
+        - allow-null-check
     typedef-whitespace:
         - true
         - call-signature: nospace
