@@ -9,7 +9,6 @@
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
                        (change)="inputValueChange(dateTimeInput.value)"
-                       (focus)="onFocusHandler()"
                        (blur)="onBlurHandler()"
                        [ngClass]="{ 'fd-input--compact': compact }"
                        [disabled]="disabled">
