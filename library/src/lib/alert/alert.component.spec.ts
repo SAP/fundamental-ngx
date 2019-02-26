@@ -14,7 +14,10 @@ describe('AlertComponent', () => {
 
         TestBed.configureTestingModule({
             declarations: [AlertComponent],
-            providers: [{ provide: HashService, useValue: hashSpy }, { provide: AlertService, useValue: alertServiceSpy }]
+            providers: [
+                { provide: HashService, useValue: hashSpy },
+                { provide: AlertService, useValue: alertServiceSpy }
+            ]
         }).compileComponents();
     }));
 
@@ -31,6 +34,7 @@ describe('AlertComponent', () => {
     it('should get an ID and handle the close event for that ID', () => {
         component.ngOnInit();
         expect(component.generatedId).toBeDefined();
+        // tslint:disable-next-line:no-shadowed-variable
         component.close.subscribe(id => expect(id).toBe(component.id));
         component.handleClose();
         component.id = 'someId';
@@ -73,17 +77,15 @@ describe('AlertComponent', () => {
     }));
 
     it('should handle getTop function', () => {
-        spyOn(document, 'querySelectorAll').and.returnValue([
-            {style: {display: 'block'}, offsetHeight: 10}
-        ]);
+        spyOn(document, 'querySelectorAll').and.returnValue([{ style: { display: 'block' }, offsetHeight: 10 }]);
         const retVal = component.getTop();
         expect(retVal).toEqual('30px');
     });
 
     it('should handle mouseenter/mouseleave events', () => {
-        component.handleAlertMouseEvent({type: 'mouseenter'});
+        component.handleAlertMouseEvent({ type: 'mouseenter' });
         expect(component.mouseInAlert).toBeTruthy();
-        component.handleAlertMouseEvent({type: 'mouseleave'});
+        component.handleAlertMouseEvent({ type: 'mouseleave' });
         expect(component.mouseInAlert).toBeFalsy();
     });
 });

@@ -12,7 +12,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             useExisting: forwardRef(() => ToggleComponent),
             multi: true
         }
-    ]
+    ],
+    host: {
+        class: 'fd-form__item fd-form__item--check'
+    }
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
 

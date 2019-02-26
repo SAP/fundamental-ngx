@@ -3,7 +3,11 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Component({
     selector: 'fd-panel',
-    templateUrl: './panel.component.html'
+    templateUrl: './panel.component.html',
+    host: {
+        class: 'fd-panel'
+    },
+    styles: [':host {display: block;}']
 })
 export class PanelComponent extends AbstractFdNgxClass {
     @Input() columnSpan: number;

@@ -2,6 +2,8 @@ import { Directive, Inject, ElementRef, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Directive({
+    // TODO to be discussed
+    // tslint:disable-next-line:directive-selector
     selector: '[fd-form-item]'
 })
 export class FormItemDirective extends AbstractFdNgxClass {

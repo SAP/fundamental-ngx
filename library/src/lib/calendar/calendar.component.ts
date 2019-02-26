@@ -6,9 +6,11 @@ import {
     Output,
     HostListener,
     ElementRef,
-    Inject,
     forwardRef,
-    OnDestroy, AfterViewChecked, ChangeDetectorRef
+    Inject,
+    OnDestroy,
+    AfterViewChecked,
+    ChangeDetectorRef
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -43,7 +45,8 @@ export interface EmittedDate {
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-calendar'
     },
     providers: [
         {
@@ -65,15 +68,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     @Input()
     calType: CalendarType = 'single';
-
-    @Input()
-    disableFunction = function(d): boolean {
-        return false;
-    };
-    @Input()
-    blockFunction = function(d): boolean {
-        return false;
-    };
 
     @Input()
     mondayStartOfWeek: boolean = false;
@@ -137,11 +131,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     firstYearCalendarList: number = this.year;
     selectCounter: number = 0;
 
-    onChange: Function = () => {
-    };
-    onTouched: Function = () => {
-    };
-
     @Input()
     selectedDay: CalendarDay = {
         date: null
@@ -172,6 +161,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Output()
     closeCalendar = new EventEmitter<any>();
 
+    @Input()
+    disableFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockFunction = function(d): boolean {
+        return false;
+    };
+
+    onChange: Function = () => {};
+    onTouched: Function = () => {};
+
     // A function that determines the number of days in a particular month
     determineDaysInMonth = function(month: number, year: number): number {
         if (month === 1) {
@@ -186,28 +187,28 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     };
 
     populateCalendar(): CalendarDay[] {
-        let idCounter: number = 100;
-        let numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
-        let calendarMonth: CalendarDay[] = [];
+        const idCounter: number = 100;
+        const numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
+        const calendarMonth: CalendarDay[] = [];
 
-        //Previous month days
+        // Previous month days
         let prevMonthLastDate;
         if (this.mondayStartOfWeek) {
             prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), -1);
         } else {
             prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
         }
-        let prevMonth: number = prevMonthLastDate.getMonth();
-        let prevMonthYear: number = prevMonthLastDate.getFullYear();
-        let prevMonthLastDay = prevMonthLastDate.getDate();
+        const prevMonth: number = prevMonthLastDate.getMonth();
+        const prevMonthYear: number = prevMonthLastDate.getFullYear();
+        const prevMonthLastDay = prevMonthLastDate.getDate();
         let prevMonthLastWeekDay = prevMonthLastDate.getDay();
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
-                let prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
-                let calDate = new Date(prevMonthYear, prevMonth, prevMonthDay);
+                const prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
+                const calDate = new Date(prevMonthYear, prevMonth, prevMonthDay);
 
-                let previousMonthCalendarDay: CalendarDay = {
+                const previousMonthCalendarDay: CalendarDay = {
                     date: calDate,
                     day: calDate.getDate(),
                     weekDay: calDate.getDay(),
@@ -238,12 +239,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
         }
 
-        //Current month days
+        // Current month days
         let foundSelected = false;
         for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
-            let calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
+            const calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
 
-            let currMonthCalendarDay: CalendarDay = {
+            const currMonthCalendarDay: CalendarDay = {
                 date: calDate,
                 day: calDate.getDate(),
                 weekDay: calDate.getDay(),
@@ -295,10 +296,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
         }
 
-        //Next month days
+        // Next month days
         let nextMonthDisplayedDays: number = 0;
 
-        //The calendar grid can have either 5 (35 days) or 6 (42 days) weeks depending on the week day of the first day of the current month and the number of days in the current month
+        // The calendar grid can have either 5 (35 days) or 6 (42 days) weeks
+        // depending on the week day of the first day of the current month
+        // and the number of days in the current month
         if (calendarMonth.length > 35) {
             nextMonthDisplayedDays = 42 - calendarMonth.length;
         } else {
@@ -308,18 +311,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         for (let nextD = 1; nextD <= nextMonthDisplayedDays; nextD++) {
             let nextMonthFirstDate: Date;
 
-            if (this.date.getMonth() == 11) {
+            if (this.date.getMonth() === 11) {
                 nextMonthFirstDate = new Date(this.date.getFullYear() + 1, 0, 1);
             } else {
                 nextMonthFirstDate = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
             }
 
-            let nextMonth: number = nextMonthFirstDate.getMonth();
-            let nextMonthYear: number = nextMonthFirstDate.getFullYear();
+            const nextMonth: number = nextMonthFirstDate.getMonth();
+            const nextMonthYear: number = nextMonthFirstDate.getFullYear();
 
-            let calDate = new Date(nextMonthYear, nextMonth, nextD);
+            const calDate = new Date(nextMonthYear, nextMonth, nextD);
 
-            let nextMonthCalendarDay: CalendarDay = {
+            const nextMonthCalendarDay: CalendarDay = {
                 date: calDate,
                 day: calDate.getDate(),
                 weekDay: calDate.getDay(),
@@ -363,7 +366,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.calendarGrid = calendarGrid;
 
         // TODO maybe remove?
-        //this.updateDatePickerInputEmitter();
+        // this.updateDatePickerInputEmitter();
     }
 
     refreshSelected() {
@@ -415,7 +418,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         } else {
             // if no year on the calendarYearsList is selected, tab index the first
             let foundYear = false;
-            this.calendarYearsList.forEach((yearFromList) => {
+            this.calendarYearsList.forEach(yearFromList => {
                 if (this.year === yearFromList) {
                     foundYear = true;
                 }
@@ -430,7 +433,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return retVal;
     }
 
-    //Functions that handle calendar navigation
+    // Functions that handle calendar navigation
     goToPreviousMonth() {
         this.setCurrentMonth(this.date.getMonth() - 1);
         this.selectedMonth = this.month;
@@ -502,7 +505,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 }
 
                 if (this.selectedRangeFirst.date > this.selectedRangeLast.date) {
-                    let tempSelectedRangeFirst = this.selectedRangeFirst;
+                    const tempSelectedRangeFirst = this.selectedRangeFirst;
                     this.selectedRangeFirst = this.selectedRangeLast;
                     this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectedRangeLast = tempSelectedRangeFirst;
@@ -596,9 +599,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     validateDateFromDatePicker(date: Array<any>): boolean {
         let isInvalid: boolean = false;
-        let month = date[0];
-        let day = date[1];
-        let year = date[2];
+        const month = date[0];
+        const day = date[1];
+        const year = date[2];
         let numOfDaysInMonth = 0;
 
         if (isNaN(month) || isNaN(day) || isNaN(year)) {
@@ -805,7 +808,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             const currentDates = date.replace(/\s/g, '').split(/[-,]+/);
             const firstDate = currentDates[0].split(/[/]+/);
             const secondDate = currentDates[1].split(/[/]+/);
-            this.invalidDate = this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
+            this.invalidDate =
+                this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
 
             if (!this.invalidDate) {
                 const fDate = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
@@ -888,7 +892,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         // void
     }
 
-    writeValue(selected: { date: Date, rangeEnd?: Date }): void {
+    writeValue(selected: { date: Date; rangeEnd?: Date }): void {
         if (selected && this.calType) {
             if (selected.date && this.calType === 'single') {
                 this.singleFormsSetup(selected);
@@ -898,8 +902,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    private singleFormsSetup(selected: { date: Date, rangeEnd?: Date }): void {
-        this.selectedDay.date = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
+    private singleFormsSetup(selected: { date: Date; rangeEnd?: Date }): void {
+        this.selectedDay.date = new Date(
+            selected.date.getFullYear(),
+            selected.date.getMonth(),
+            selected.date.getDate()
+        );
         this.date = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
         this.year = this.date.getFullYear();
         this.month = this.date.getMonth();
@@ -909,9 +917,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.constructCalendarYearsList();
     }
 
-    private rangeFormsSetup(selected: { date: Date, rangeEnd?: Date }): void {
+    private rangeFormsSetup(selected: { date: Date; rangeEnd?: Date }): void {
         const fDate = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
-        const lDate = new Date(selected.rangeEnd.getFullYear(), selected.rangeEnd.getMonth(), selected.rangeEnd.getDate());
+        const lDate = new Date(
+            selected.rangeEnd.getFullYear(),
+            selected.rangeEnd.getMonth(),
+            selected.rangeEnd.getDate()
+        );
         if (fDate.getTime() > lDate.getTime()) {
             this.selectedRangeFirst.date = lDate;
             this.selectedRangeLast.date = fDate;

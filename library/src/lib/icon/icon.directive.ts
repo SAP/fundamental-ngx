@@ -8,6 +8,8 @@ const BASE_ICON_CLASS = 'sap-icon';
 const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 
 @Directive({
+    // TODO to be discussed
+    // tslint:disable-next-line:directive-selector
     selector: 'fd-icon',
     host: {
         role: 'presentation'

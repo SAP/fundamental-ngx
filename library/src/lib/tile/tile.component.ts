@@ -4,7 +4,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 @Component({
     selector: 'fd-tile',
     host: {
-        '[attr.role]': "(this.isButton === true ? 'button' : '')"
+        '[attr.role]': '(this.isButton === true ? \'button\' : \'\')'
     },
     templateUrl: './tile.component.html'
 })

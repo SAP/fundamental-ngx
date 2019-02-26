@@ -1,12 +1,10 @@
-<div class="fd-form__item fd-form__item--check">
-    <label class="fd-form__label" [htmlFor]="this.id">
-        <span class="fd-toggle fd-form__control" [ngClass]="(this.size ? ('fd-toggle--' + this.size) : '')">
-            <input type="checkbox"
-                   [id]="this.id"
-                   [disabled]="this.disabled"
-                   [(ngModel)]="this.isChecked">
-            <span class="fd-toggle__switch" role="presentation"></span>
-        </span>
-        <ng-content></ng-content>
-    </label>
-</div>
+<label class="fd-form__label" [attr.for]="this.id">
+    <span class="fd-toggle fd-form__control" [ngClass]="(this.size ? ('fd-toggle--' + this.size) : '')">
+        <input type="checkbox"
+               [id]="this.id"
+               [disabled]="this.disabled"
+               [(ngModel)]="this.isChecked">
+        <span class="fd-toggle__switch" role="presentation"></span>
+    </span>
+    <ng-content></ng-content>
+</label>

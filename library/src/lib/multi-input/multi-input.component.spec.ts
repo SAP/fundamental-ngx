@@ -174,7 +174,7 @@ describe('MultiInputComponent', () => {
         component.dropdownValues = [{name: text}];
         component.ngOnInit();
         component.isOpen = false;
-        component.displayWith = 'name';
+        component.displayFn = (obj: any) => obj.name;
         fixture.detectChanges();
 
         const menuItem = fixture.nativeElement.querySelector('.fd-menu__item');

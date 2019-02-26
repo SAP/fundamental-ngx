@@ -1,5 +1,5 @@
 {
-    "extends": "../tslint.json",
+    "extends": "../tslint.yaml",
     "rules": {
         "directive-selector": [true, "attribute", "fd", "camelCase"],
         "component-selector": [true, "element", "fd", "kebab-case"]
