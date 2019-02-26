@@ -41,12 +41,11 @@ import { ToggleModule } from './toggle/toggle.module';
 import { TokenModule } from './token/token.module';
 
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal.service';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule],
+    imports: [CommonModule, FormsModule],
     declarations: [FundamentalNgxComponent],
     exports: [
         FundamentalNgxComponent,
