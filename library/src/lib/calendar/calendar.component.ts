@@ -694,6 +694,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.cd.detectChanges();
             }
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
+        } else if (event.code === 'Tab' && !event.shiftKey) {
+            event.preventDefault();
+            this.focusElement('#arrowLeft');
         }
         if (newFocusedYearId) {
             this.focusElement(newFocusedYearId);
@@ -725,6 +728,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             } else {
                 newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
             }
+        } else if (event.code === 'Tab' && !event.shiftKey) {
+            event.preventDefault();
+            this.focusElement('#arrowLeft');
         }
         if (newFocusedMonthId) {
             this.focusElement(newFocusedMonthId);
@@ -733,7 +739,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     onKeydownDayHandler(event, cell) {
         if (event.code === 'Tab' && !event.shiftKey) {
-            this.closeCalendar.emit();
+            event.preventDefault();
+            this.focusElement('#arrowLeft');
         } else {
             // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
             let lastDay = this.calendarGrid.length === 6 ? 66 : 56;

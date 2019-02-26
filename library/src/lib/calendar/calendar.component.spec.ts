@@ -341,6 +341,10 @@ describe('CalendarComponent', () => {
         component.calendarId = '';
         spyOn(component, 'selectYear');
         const focusSpy = spyOn(component, 'focusElement');
+        component.onKeydownDayHandler({code: 'Tab', preventDefault: () => {}}, {});
+        expect(component.focusElement).toHaveBeenCalledWith('#arrowLeft');
+
+        focusSpy.calls.reset();
 
         component.onKeydownYearHandler({code: 'Enter', preventDefault: () => {}}, 2019);
 
@@ -381,6 +385,10 @@ describe('CalendarComponent', () => {
         component.calendarId = '';
         spyOn(component, 'selectMonth');
         const focusSpy = spyOn(component, 'focusElement');
+        component.onKeydownMonthHandler({code: 'Tab', preventDefault: () => {}}, {});
+        expect(component.focusElement).toHaveBeenCalledWith('#arrowLeft');
+
+        focusSpy.calls.reset();
 
         component.onKeydownMonthHandler({code: 'Enter', preventDefault: () => {}}, 5);
 
@@ -412,12 +420,13 @@ describe('CalendarComponent', () => {
     it('should handle keydown day handler', () => {
         component.calendarId = '';
 
-        spyOn(component.closeCalendar, 'emit');
-        component.onKeydownDayHandler({code: 'Tab'}, {});
-        expect(component.closeCalendar.emit).toHaveBeenCalled();
+        const focusSpy = spyOn(component, 'focusElement');
+        component.onKeydownDayHandler({code: 'Tab', preventDefault: () => {}}, {});
+        expect(component.focusElement).toHaveBeenCalledWith('#arrowLeft');
+
+        focusSpy.calls.reset();
 
         spyOn(component, 'selectDate');
-        const focusSpy = spyOn(component, 'focusElement');
 
         component.calendarGrid = [
             [], [], [], [], []

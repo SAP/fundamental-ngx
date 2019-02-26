@@ -1,7 +1,7 @@
 <header class="fd-calendar__header">
     <div class="fd-calendar__navigation">
         <div class="fd-calendar__action">
-            <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
+            <button id="arrowLeft" class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
                     [attr.aria-label]="showCalendarYears ? 'previous year' : 'previous month'"
                     (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
         </div>
