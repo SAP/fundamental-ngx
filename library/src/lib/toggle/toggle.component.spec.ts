@@ -43,7 +43,7 @@ describe('ToggleComponent', () => {
 
     it('should toggle on click', () => {
         spyOn(component, 'onChange');
-        spyOn(component.onToggle, 'emit');
+        spyOn(component.checkedChange, 'emit');
 
         component.ngOnInit();
         component.checked = false;
@@ -53,13 +53,13 @@ describe('ToggleComponent', () => {
         fixture.detectChanges();
 
         expect(component.onChange).toHaveBeenCalledWith(true);
-        expect(component.onToggle.emit).toHaveBeenCalledWith(true);
+        expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
 
         input.click();
         fixture.detectChanges();
 
         expect(component.onChange).toHaveBeenCalledWith(false);
-        expect(component.onToggle.emit).toHaveBeenCalledWith(false);
+        expect(component.checkedChange.emit).toHaveBeenCalledWith(false);
     });
 
     it('should have a default size', () => {
