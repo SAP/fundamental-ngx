@@ -185,29 +185,25 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     };
 
-    populateCalendar(): CalendarDay[] {
-        let idCounter: number = 100;
-        let numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
-        let calendarMonth: CalendarDay[] = [];
-
-        //Previous month days
+    getPreviousMonthDays(calendarMonth) {
+        // Previous month days
         let prevMonthLastDate;
         if (this.mondayStartOfWeek) {
             prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), -1);
         } else {
             prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
         }
-        let prevMonth: number = prevMonthLastDate.getMonth();
-        let prevMonthYear: number = prevMonthLastDate.getFullYear();
-        let prevMonthLastDay = prevMonthLastDate.getDate();
+        const prevMonth: number = prevMonthLastDate.getMonth();
+        const prevMonthYear: number = prevMonthLastDate.getFullYear();
+        const prevMonthLastDay = prevMonthLastDate.getDate();
         let prevMonthLastWeekDay = prevMonthLastDate.getDay();
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
-                let prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
-                let calDate = new Date(prevMonthYear, prevMonth, prevMonthDay);
+                const prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
+                const calDate = new Date(prevMonthYear, prevMonth, prevMonthDay);
 
-                let previousMonthCalendarDay: CalendarDay = {
+                const previousMonthCalendarDay: CalendarDay = {
                     date: calDate,
                     day: calDate.getDate(),
                     weekDay: calDate.getDay(),
@@ -238,12 +234,20 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
         }
 
-        //Current month days
+        console.log('prevmonth');
+        console.log(calendarMonth);
+
+        return calendarMonth;
+    }
+
+    getCurrentMonthDays(calendarMonth) {
+        const numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
+        // Current month days
         let foundSelected = false;
         for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
-            let calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
+            const calDate = new Date(this.date.getFullYear(), this.date.getMonth(), d);
 
-            let currMonthCalendarDay: CalendarDay = {
+            const currMonthCalendarDay: CalendarDay = {
                 date: calDate,
                 day: calDate.getDate(),
                 weekDay: calDate.getDay(),
@@ -295,10 +299,17 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
         }
 
-        //Next month days
+        console.log('currmonth');
+        console.log(calendarMonth);
+
+        return calendarMonth;
+    }
+
+    getNextMonthDays(calendarMonth) {
+        // Next month days
         let nextMonthDisplayedDays: number = 0;
 
-        //The calendar grid can have either 5 (35 days) or 6 (42 days) weeks depending on the week day of the first day of the current month and the number of days in the current month
+        // The calendar grid can have either 5 (35 days) or 6 (42 days) weeks depending on the week day of the first day of the current month and the number of days in the current month
         if (calendarMonth.length > 35) {
             nextMonthDisplayedDays = 42 - calendarMonth.length;
         } else {
@@ -308,7 +319,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         for (let nextD = 1; nextD <= nextMonthDisplayedDays; nextD++) {
             let nextMonthFirstDate: Date;
 
-            if (this.date.getMonth() == 11) {
+            if (this.date.getMonth() === 11) {
                 nextMonthFirstDate = new Date(this.date.getFullYear() + 1, 0, 1);
             } else {
                 nextMonthFirstDate = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
@@ -348,6 +359,21 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             calendarMonth.push(nextMonthCalendarDay);
         }
 
+        console.log('nextmonth');
+        console.log(calendarMonth);
+
+        return calendarMonth;
+    }
+
+    populateCalendar(): CalendarDay[] {
+        let calendarMonth: CalendarDay[] = [];
+
+        calendarMonth = this.getPreviousMonthDays(calendarMonth);
+
+        calendarMonth = this.getCurrentMonthDays(calendarMonth);
+
+        calendarMonth = this.getNextMonthDays(calendarMonth);
+
         return calendarMonth;
     }
 
@@ -361,9 +387,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
 
         this.calendarGrid = calendarGrid;
-
-        // TODO maybe remove?
-        //this.updateDatePickerInputEmitter();
     }
 
     refreshSelected() {
