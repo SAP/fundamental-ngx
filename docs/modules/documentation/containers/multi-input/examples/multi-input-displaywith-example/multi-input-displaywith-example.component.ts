@@ -14,4 +14,8 @@ export class MultiInputDisplaywithExampleComponent {
     ];
 
     selected = [];
+
+    displayFunc(obj: any): string {
+        return obj.name.toLocaleUpperCase();
+    }
 }

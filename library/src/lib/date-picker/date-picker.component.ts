@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-date-picker'
     },
     providers: [
         {
@@ -135,7 +136,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
     @HostListener('document:click', ['$event.path'])
     public onGlobalClick(targetElementPath: Array<any>) {
-        let elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
+        const elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
         if (!elementRefInPath) {
             this.closeCalendar();
         }

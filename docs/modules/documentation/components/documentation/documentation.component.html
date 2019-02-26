@@ -6,34 +6,6 @@
 
     <nav>
         <ul class="nav">
-            <span class="side-nav__headers">Getting Started</span>
-            <li>
-                <a
-                    class="nav-item"
-                    tabindex="0"
-                    role="button"
-                    (click)="selectComponent('home')"
-                    (keypress)="onKeypressHandler('home', $event)"
-                    routerLinkActive="nav-item--active"
-                    >Home</a
-                >
-            </li>
-            <li>
-                <a
-                    class="nav-item"
-                    tabindex="0"
-                    role="button"
-                    (click)="selectComponent('new-component')"
-                    (keypress)="onKeypressHandler('home', $event)"
-                    routerLinkActive="nav-item--active"
-                    >New Component</a
-                >
-            </li>
-        </ul>
-    </nav>
-
-    <nav style="padding-bottom: 20px;">
-        <ul class="nav" id="tn-components-selector">
             <li class="side-nav__search">
                 <fd-input-group-search
                     [disabled]="false"
@@ -41,13 +13,38 @@
                     placeholder="Search"
                 ></fd-input-group-search>
             </li>
+            <span class="side-nav__headers">Getting Started</span>
+            <ng-container *ngFor="let guide of guides">
+                <li *ngIf="search === '' || guide.url === 'home' ||
+                guide.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                guide.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1">
+                    <div class="nav-item-container">
+                        <a
+                            class="nav-item"
+                            [routerLink]="'/' + guide.url"
+                            (click)="selectComponent(guide.url)"
+                            (keypress)="onKeypressHandler(guide.url, $event)"
+                            tabindex="0"
+                            role="button"
+                            routerLinkActive="nav-item--active"
+                        >
+                            {{ guide.name }}</a
+                        >
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </nav>
+
+    <nav style="padding-bottom: 20px;">
+        <ul class="nav" id="tn-components-selector">
             <span class="side-nav__headers">Components</span>
             <ng-container *ngFor="let component of components">
                 <li
                     *ngIf="
                         search === '' ||
-                        component.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                        component.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                        component.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                        component.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1
                     "
                 >
                     <div class="nav-item-container">
@@ -72,8 +69,8 @@
                 <li
                     *ngIf="
                         search === '' ||
-                        layout.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                        layout.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                        layout.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                        layout.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1
                     "
                 >
                     <div class="nav-item-container">
@@ -98,8 +95,8 @@
                 <li
                     *ngIf="
                         search === '' ||
-                        util.url.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
-                        util.name.toUpperCase().indexOf(search.toUpperCase()) != -1
+                        util.url.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1 ||
+                        util.name.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) != -1
                     "
                 >
                     <div class="nav-item-container">

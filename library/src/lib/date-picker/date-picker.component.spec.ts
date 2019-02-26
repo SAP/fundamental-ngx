@@ -97,7 +97,7 @@ describe('DatePickerComponent', () => {
 
     it('should handle document click', () => {
         spyOn(component, 'closeCalendar');
-        fixture.nativeElement.querySelector('.fd-date-picker').click();
+        fixture.nativeElement.click();
         expect(component.closeCalendar).not.toHaveBeenCalled();
         document.dispatchEvent(new MouseEvent('click'));
         expect(component.closeCalendar).toHaveBeenCalled();

@@ -7,8 +7,7 @@ import { HashService } from '../utils/hash.service';
     styleUrls: ['./token.component.scss'],
     host: {
         'class': 'fd-token',
-        'role': 'button',
-        'display': 'inline-block'
+        'role': 'button'
     }
 })
 export class TokenComponent implements OnInit {

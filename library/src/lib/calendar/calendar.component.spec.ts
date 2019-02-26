@@ -4,7 +4,7 @@ import { CalendarComponent, CalendarDay } from './calendar.component';
 import { HashService } from '../utils/hash.service';
 import { BehaviorSubject } from 'rxjs';
 
-fdescribe('CalendarComponent', () => {
+describe('CalendarComponent', () => {
     let component: CalendarComponent;
     let fixture: ComponentFixture<CalendarComponent>;
     let hashServiceSpy: jasmine.SpyObj<HashService>;
@@ -423,7 +423,7 @@ fdescribe('CalendarComponent', () => {
             [], [], [], [], []
         ];
 
-        let mockEvent = {
+        const mockEvent = {
             code: 'Enter',
             currentTarget: {
                 id: 'fd-test-1'
