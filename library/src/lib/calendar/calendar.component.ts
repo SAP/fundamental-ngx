@@ -722,7 +722,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         } else {
             // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
             let lastDay = this.calendarGrid.length === 6 ? 66 : 56;
-            const currentId = parseInt(event.currentTarget.id.split('-').pop());
+            const currentId = parseInt(event.currentTarget.id.split('-').pop(), 10);
             if (event.code === 'Space' || event.code === 'Enter') {
                 event.preventDefault();
                 this.selectDate(cell);
