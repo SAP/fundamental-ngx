@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0-rc.17"></a>
+# [0.2.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.16...v0.2.0-rc.17) (2019-02-27)
+
+
+### Bug Fixes
+
+* scroll spy threshold is customizable ([#578](https://github.com/SAP/fundamental-ngx/issues/578)) ([f1b7657](https://github.com/SAP/fundamental-ngx/commit/f1b7657))
+
+
+
 <a name="0.2.0-rc.16"></a>
 # [0.2.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.15...v0.2.0-rc.16) (2019-02-27)
 
