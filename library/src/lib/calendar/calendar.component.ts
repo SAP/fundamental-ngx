@@ -77,6 +77,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
+    @Input()
+    isDateTimePicker: boolean = false;
+
     invalidDate: boolean = false;
 
     showCalendarMonths: boolean = false;
@@ -486,6 +489,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 if (formEvent) {
                     this.onChange({ date: day.date });
                 }
+                this.closeCalendar.emit();
             } else {
                 if (this.selectCounter === 2) {
                     this.selectCounter = 0;
@@ -695,8 +699,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
         } else if (event.code === 'Tab' && !event.shiftKey) {
-            event.preventDefault();
-            this.focusElement('#arrowLeft');
+            if (!this.isDateTimePicker) {
+                event.preventDefault();
+                this.focusElement('#arrowLeft');
+            }
         }
         if (newFocusedYearId) {
             this.focusElement(newFocusedYearId);
@@ -729,8 +735,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
             }
         } else if (event.code === 'Tab' && !event.shiftKey) {
-            event.preventDefault();
-            this.focusElement('#arrowLeft');
+            if (!this.isDateTimePicker) {
+                event.preventDefault();
+                this.focusElement('#arrowLeft');
+            }
         }
         if (newFocusedMonthId) {
             this.focusElement(newFocusedMonthId);
@@ -739,8 +747,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     onKeydownDayHandler(event, cell) {
         if (event.code === 'Tab' && !event.shiftKey) {
-            event.preventDefault();
-            this.focusElement('#arrowLeft');
+            if (!this.isDateTimePicker) {
+                event.preventDefault();
+                this.focusElement('#arrowLeft');
+            }
         } else {
             // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
             let lastDay = this.calendarGrid.length === 6 ? 66 : 56;

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, Output } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -34,6 +34,12 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
+    @Input()
+    isDateTimePicker: boolean = false;
+
+    @Output()
+    focusArrowLeft: EventEmitter<any> = new EventEmitter<any>();
 
     oldPeriod: string;
 
@@ -292,5 +298,12 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         }
         this.time = time;
         this.setDisplayedHour();
+    }
+
+    lastButtonKeydown(event) {
+        if (event.code === 'Tab' && !event.shiftKey) {
+            event.preventDefault();
+            this.focusArrowLeft.emit();
+        }
     }
 }

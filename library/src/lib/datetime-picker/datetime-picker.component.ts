@@ -189,4 +189,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
+    focusArrowLeft() {
+        this.eRef.nativeElement.querySelector('#arrowLeft').focus();
+    }
+
 }
