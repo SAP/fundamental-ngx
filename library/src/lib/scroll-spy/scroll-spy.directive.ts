@@ -11,32 +11,35 @@ export class ScrollSpyDirective {
     @Input()
     public fireEmpty: boolean = false;
 
-    @Output()
-    public topSpyChange: EventEmitter<string> = new EventEmitter<string>();
+    @Input()
+    public targetPercent: number = 0;
 
-    private currentTop: string;
+    @Output()
+    public spyChange: EventEmitter<HTMLElement> = new EventEmitter<HTMLElement>();
+
+    private currentActive: HTMLElement;
 
     constructor(private elRef: ElementRef) {}
 
     @HostListener('scroll', ['$event'])
     onScroll(event: any) {
-        let topSpiedTag: string;
+        let spiedTag: HTMLElement;
         const children = this.elRef.nativeElement.children;
         const targetScrollTop = event.target.scrollTop;
         const targetOffsetTop = event.target.offsetTop;
 
         for (let i = 0; i < children.length; i++) {
-            const element = children[i];
-            if (this.trackedTags.some(tag => tag.toLocaleLowerCase() === element.tagName.toLocaleLowerCase())) {
-                if ((element.offsetTop - targetOffsetTop) <= targetScrollTop) {
-                    topSpiedTag = element.id;
+            const element: HTMLElement = children[i];
+            if (this.trackedTags.some(tag => tag.toLocaleUpperCase() === element.tagName.toLocaleUpperCase())) {
+                if ((element.offsetTop - targetOffsetTop) <= targetScrollTop + event.target.offsetHeight * this.targetPercent) {
+                    spiedTag = element;
                 }
             }
         }
 
-        if ((topSpiedTag || this.fireEmpty) && topSpiedTag !== this.currentTop) {
-            this.currentTop = topSpiedTag;
-            this.topSpyChange.emit(this.currentTop);
+        if ((spiedTag || this.fireEmpty) && spiedTag !== this.currentActive) {
+            this.currentActive = spiedTag;
+            this.spyChange.emit(this.currentActive);
         }
     }
 
