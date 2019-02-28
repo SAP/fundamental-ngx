@@ -12,11 +12,11 @@
     "std-version": "standard-version --infile ../CHANGELOG.md -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\""
   },
   "peerDependencies": {
-    "@angular/common": "^7.1.1",
-    "@angular/core": "^7.1.1",
-    "@angular/forms": "^7.1.4",
-    "fiori-fundamentals": "^1.4.1",
-    "rxjs": "^6.3.3"
+    "@angular/common": "^7.2.7",
+    "@angular/core": "^7.2.7",
+    "@angular/forms": "^7.2.7",
+    "fiori-fundamentals": "^1.4.3",
+    "rxjs": "^6.4.0"
   },
   "devDependencies": {
     "standard-version": "4.4.0"
