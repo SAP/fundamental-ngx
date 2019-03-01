@@ -1,137 +1,176 @@
 import {
     Component,
-    EventEmitter,
     Input,
     OnInit,
-    Output,
-    Inject,
     ElementRef,
     ChangeDetectorRef,
-    ViewChild
+    ViewChild,
+    ComponentFactoryResolver,
+    ComponentRef,
+    Type,
+    OnDestroy,
+    AfterViewInit,
+    ViewContainerRef,
+    TemplateRef,
+    Optional,
+    HostBinding
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
-import { AlertService } from './alert.service';
-import { Subject } from 'rxjs';
+import { AlertRef } from './alert-ref';
+import { alertFadeNgIf } from './alert-animations';
 
 @Component({
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    providers: [HashService]
+    providers: [HashService],
+    host: {
+        '[class]': '"fd-alert" + (type ? " fd-alert--" + type : "")',
+        '[attr.aria-labelledby]': 'ariaLabelledBy',
+        '[attr.aria-label]': 'ariaLabel',
+        '[style.width]': '(width ? width : "33vw")',
+        'role': 'alert',
+        '[attr.id]': 'id',
+        '(mouseenter)': 'handleAlertMouseEvent($event)',
+        '(mouseleave)': 'handleAlertMouseEvent($event)'
+    },
+    animations: [
+        alertFadeNgIf
+    ]
 })
-export class AlertComponent implements OnInit {
-    afterClosed = new Subject<any>();
+export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    @Input() dismissible: boolean;
+    @HostBinding('@fadeAlertNgIf')
 
-    @Input() type: string;
+    @ViewChild('container', {read: ViewContainerRef})
+    containerRef: ViewContainerRef;
 
-    @Input() id: string;
+    @Input()
+    dismissible: boolean;
 
-    @Output() close = new EventEmitter<string>();
+    @Input()
+    type: string;
 
-    @Input() inline: boolean = false;
+    @Input()
+    id: string;
 
-    @Input() persist: boolean = false;
+    @Input()
+    persist: boolean = false;
 
-    @Input() visibleTime: number = 10000;
+    @Input()
+    visibleTime: number = 10000;
 
-    @Input() mousePersist: boolean = false;
+    @Input()
+    mousePersist: boolean = false;
+
+    @Input()
+    ariaLabelledBy: string = null;
+
+    @Input()
+    ariaLabel: string = null;
+
+    @Input()
+    width: string;
+
+    @Input()
+    message: string;
+
+    @Input()
+    show: boolean = true;
 
     mouseInAlert: boolean = false;
 
-    show: boolean = false;
+    componentRef: ComponentRef<any>;
+    childComponentType: Type<any> | TemplateRef<any> | string;
 
-    generatedId: string;
-
-    @ViewChild('alertDiv') alertDiv;
-
-    constructor(@Inject(HashService) private hasher: HashService,
+    constructor(private hasher: HashService,
                 private elRef: ElementRef,
-                private alertService: AlertService,
-                private cd: ChangeDetectorRef) {}
+                private cd: ChangeDetectorRef,
+                private componentFactoryResolver: ComponentFactoryResolver,
+                @Optional() private alertRef: AlertRef) {}
 
-    ngOnInit() {
-        this.generatedId = this.hasher.hash();
-        /*
-         modal should be hidden on init
-         */
-        if (!this.inline) {
-            this.elRef.nativeElement.style.display = 'none';
-            this.alertDiv.nativeElement.style.display = 'none';
+    ngOnInit(): void {
+        if (!this.id) {
+            this.id = this.hasher.hash();
+        }
+
+        if (this.alertRef || this.show) {
+            this.open();
         }
     }
 
-    getId() {
-        if (this.id) {
-            return this.id;
-        } else {
-            return this.generatedId;
-        }
-    }
+    ngAfterViewInit(): void {
+        if (this.childComponentType) {
+            if (this.childComponentType instanceof Type) {
+                this.loadChildComponent(this.childComponentType);
+            } else if (this.childComponentType instanceof TemplateRef) {
 
-    handleClose(result?, fromService?, timeout?) {
-        if (!timeout && timeout !== 0) {
-            timeout = 750;
-        }
-        this.show = false;
-        this.close.emit(this.id);
-        setTimeout(() => {
-            this.elRef.nativeElement.style.display = 'none';
-            this.alertDiv.nativeElement.style.display = 'none';
-            if (!fromService && !this.inline) {
-                this.alertService.popAlert();
+            } else {
+                this.loadInnerString(this.childComponentType);
             }
-            this.afterClosed.next();
-        }, timeout)
+            this.cd.detectChanges();
+        }
     }
 
-    open() {
-        // check to make sure this alert is not already opened
-        if (this.elRef.nativeElement.style.display !== 'block') {
+    ngOnDestroy(): void {
+        // if (this.componentRef) {
+        //     this.componentRef.destroy();
+        // }
+    }
+
+    private loadChildComponent(componentType: Type<any>): void {
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
+        this.containerRef.clear();
+        this.componentRef = this.containerRef.createComponent(componentFactory);
+    }
+
+    private loadInnerString(contentString: string): void {
+        this.containerRef.clear();
+        this.message = contentString;
+    }
+
+    dismiss(manualDismiss: boolean = false): void {
+        if (manualDismiss) {
+            this.elRef.nativeElement.style.display = 'none';
+        }
+        if (this.alertRef) {
+            this.alertRef.dismiss();
+        } else {
+            this.show = false;
+            this.elRef.nativeElement.style.display = 'none';
+        }
+    }
+
+    open(): void {
+        if (!this.alertRef) {
             this.show = true;
             this.cd.detectChanges();
-            const top = this.getTop();
             this.elRef.nativeElement.style.display = 'block';
-            this.alertDiv.nativeElement.style.display = 'block';
-            this.alertDiv.nativeElement.style.top = top;
-            if (!this.persist) {
-                setTimeout(() => {
-                    if (this.mousePersist) {
-                        const wait = () => {
-                            if (this.mouseInAlert === true) {
-                                setTimeout(wait, 500);
-                            } else {
-                                this.handleClose();
-                            }
+        }
+        if (!this.persist) {
+            setTimeout(() => {
+                if (this.mousePersist) {
+                    const wait = () => {
+                        if (this.mouseInAlert === true) {
+                            setTimeout(wait, 500);
+                        } else {
+                            this.dismiss();
                         }
-                        wait();
-                    } else {
-                        this.handleClose();
-                    }
-                }, this.visibleTime);
-            }
+                    };
+                    wait();
+                } else {
+                    this.dismiss();
+                }
+            }, this.visibleTime);
         }
     }
 
-    getTop() {
-        // get the heights of each visible alert and return the top of the new alert
-        const alerts = document.querySelectorAll('.fd-alert');
-        const openAlerts = Array.prototype.filter.call(alerts, function(alert) {
-            return alert.style.display === 'block';
-        });
-        let totalOffsetHeight = 10;
-        openAlerts.forEach((alert) => {
-            totalOffsetHeight = totalOffsetHeight + alert.offsetHeight + 10;
-        });
-        return totalOffsetHeight + 'px';
-    }
-
-    handleAlertMouseEvent(event) {
+    handleAlertMouseEvent(event): void {
         if (event.type === 'mouseenter') {
             this.mouseInAlert = true;
         } else if (event.type === 'mouseleave') {
             this.mouseInAlert = false;
         }
     }
+
 }

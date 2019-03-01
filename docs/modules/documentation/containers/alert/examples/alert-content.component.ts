@@ -1,18 +1,21 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { AlertComponent } from '../../../../../../library/src/lib/alert/alert.component';
+import { Component, Input } from '@angular/core';
+import { AlertRef } from '../../../../../../library/src/lib/alert/alert-ref';
 
 @Component({
     selector: 'fd-alert-content',
     template: `
-        <fd-alert [dismissible]="true" [type]="alertType" #alert>
-            {{alertText}}
-        </fd-alert>
+        <div>yooooooooooo</div> <button fd-button (click)="ref.dismiss()">lol</button>
     `
 })
 export class AlertContentComponent {
-    @ViewChild('alert') alert: AlertComponent;
 
     @Input() alertText: string;
 
     @Input() alertType: string;
+
+    constructor(public ref: AlertRef) {}
+
+    ngOnInit(): void {
+
+    }
 }

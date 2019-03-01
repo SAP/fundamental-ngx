@@ -20,15 +20,21 @@ import { AlertContentComponent } from './alert-content.component';
 export class AlertComponentAsContentExampleComponent {
     openWarningComponentAsContentAlert() {
         this.alertService.open(AlertContentComponent, {
-            alertText: 'Example Warning Alert Text',
-            alertType: 'warning'
+            dismissible: true,
+            type: 'warning',
+            data: {
+                alertText: 'Example Error Alert Text'
+            }
         });
     }
 
     openErrorComponentAsContentAlert() {
-        this.alertService.open(AlertContentComponent, {
-            alertText: 'Example Error Alert Text',
-            alertType: 'error'
+        this.alertService.open('lol u suck', {
+            dismissible: true,
+            type: 'success',
+            data: {
+                alertText: 'Example Error Alert Text'
+            }
         });
     }
     constructor(private alertService: AlertService) {}
