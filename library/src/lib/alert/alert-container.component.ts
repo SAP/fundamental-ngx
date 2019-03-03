@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
 
 @Component({
@@ -16,10 +16,11 @@ import { alertContainerNgIf } from './alert-animations';
             left: 50%;
         }
     `],
+    host: {
+        '[@alertContainerNgIf]': ''
+    },
     animations: [
         alertContainerNgIf
     ]
 })
-export class AlertContainerComponent {
-    @HostBinding('@alertContainerNgIf') empty;
-}
+export class AlertContainerComponent {}

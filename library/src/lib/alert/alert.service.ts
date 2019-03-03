@@ -21,19 +21,22 @@ export class AlertService {
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private appRef: ApplicationRef,
-                private injector: Injector) {
-
-    }
+                private injector: Injector) {}
 
     public hasOpenAlerts(): boolean {
         return this.alerts && this.alerts.length > 0;
     }
 
-    public open(content: TemplateRef<any> | Type<any> | string, alertConfig?: AlertConfig): AlertRef {
+    public open(content: TemplateRef<any> | Type<any> | string, alertConfig: AlertConfig = new AlertConfig()): AlertRef {
 
         // If empty or undefined alert array, create container
         if (!this.alerts || this.alerts.length === 0) {
             this.openAlertContainer();
+        }
+
+        // Ensure default width
+        if (alertConfig && !alertConfig.width) {
+            alertConfig.width = '33vw';
         }
 
         // Config setup
@@ -102,37 +105,7 @@ export class AlertService {
     private destroyAlertContainer(): void {
         this.appRef.detachView(this.alertContainerRef.hostView);
         this.alertContainerRef.destroy();
+        this.alertContainerRef = undefined;
     }
 
-    // open(content: any, options: NgbModalOptions = {}): NgbModalRef {
-    //     const combinedOptions = Object.assign({}, this._config, options);
-    //     return this._modalStack.open(this._moduleCFR, this._injector, content, combinedOptions);
-    // }
-
-    // open(alertType, alertConfig?) {
-    //     if (typeof alertType === 'object') { // template reference variable
-    //         this.alertRef.push(alertType);
-    //     } else if (typeof alertType === 'function') { // component as content
-    //         const componentRef = this.componentFactoryResolver.resolveComponentFactory(alertType).create(this.injector);
-    //         this.alertRef.push((componentRef.instance as any).alert);
-    //         if (alertConfig) {
-    //             Object.keys(alertConfig).forEach(key => (componentRef.instance[key] = alertConfig[key]));
-    //         }
-    //         this.alertRef[this.alertRef.length - 1].instance = componentRef.instance;
-    //         this.appRef.attachView(componentRef.hostView);
-    //         const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-    //         document.body.appendChild(domElem);
-    //         const subscription = this.alertRef[this.alertRef.length - 1].afterClosed.subscribe(() => {
-    //             document.body.removeChild(domElem);
-    //             this.removeSubscription(subscription);
-    //         });
-    //         this.appRef.tick();
-    //     }
-    //     this.alertRef[this.alertRef.length - 1].open();
-    //     return this.alertRef[this.alertRef.length - 1];
-    // }
-    //
-    // removeSubscription(subscription) {
-    //     subscription.unsubscribe();
-    // }
 }

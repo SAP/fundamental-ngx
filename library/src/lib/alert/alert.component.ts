@@ -8,12 +8,10 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     Type,
-    OnDestroy,
     AfterViewInit,
     ViewContainerRef,
     TemplateRef,
-    Optional,
-    HostBinding
+    Optional, EmbeddedViewRef
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { AlertRef } from './alert-ref';
@@ -28,25 +26,24 @@ import { alertFadeNgIf } from './alert-animations';
         '[class]': '"fd-alert" + (type ? " fd-alert--" + type : "")',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
-        '[style.width]': '(width ? width : "33vw")',
+        '[style.width]': 'width',
         'role': 'alert',
         '[attr.id]': 'id',
         '(mouseenter)': 'handleAlertMouseEvent($event)',
-        '(mouseleave)': 'handleAlertMouseEvent($event)'
+        '(mouseleave)': 'handleAlertMouseEvent($event)',
+        '[@fadeAlertNgIf]': ''
     },
     animations: [
         alertFadeNgIf
     ]
 })
-export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
-
-    @HostBinding('@fadeAlertNgIf')
+export class AlertComponent implements OnInit, AfterViewInit {
 
     @ViewChild('container', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
     @Input()
-    dismissible: boolean;
+    dismissible: boolean = true;
 
     @Input()
     type: string;
@@ -75,17 +72,13 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input()
     message: string;
 
-    @Input()
-    show: boolean = true;
-
     mouseInAlert: boolean = false;
-
-    componentRef: ComponentRef<any>;
+    componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
     childComponentType: Type<any> | TemplateRef<any> | string;
 
     constructor(private hasher: HashService,
                 private elRef: ElementRef,
-                private cd: ChangeDetectorRef,
+                private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 @Optional() private alertRef: AlertRef) {}
 
@@ -94,7 +87,7 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
             this.id = this.hasher.hash();
         }
 
-        if (this.alertRef || this.show) {
+        if (this.alertRef) {
             this.open();
         }
     }
@@ -102,31 +95,14 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {
-                this.loadChildComponent(this.childComponentType);
+                this.loadFromComponent(this.childComponentType);
             } else if (this.childComponentType instanceof TemplateRef) {
-
+                this.loadFromTemplate(this.childComponentType);
             } else {
-                this.loadInnerString(this.childComponentType);
+                this.loadFromString(this.childComponentType);
             }
-            this.cd.detectChanges();
+            this.cdRef.detectChanges();
         }
-    }
-
-    ngOnDestroy(): void {
-        // if (this.componentRef) {
-        //     this.componentRef.destroy();
-        // }
-    }
-
-    private loadChildComponent(componentType: Type<any>): void {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-        this.containerRef.clear();
-        this.componentRef = this.containerRef.createComponent(componentFactory);
-    }
-
-    private loadInnerString(contentString: string): void {
-        this.containerRef.clear();
-        this.message = contentString;
     }
 
     dismiss(manualDismiss: boolean = false): void {
@@ -136,18 +112,16 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.alertRef) {
             this.alertRef.dismiss();
         } else {
-            this.show = false;
             this.elRef.nativeElement.style.display = 'none';
         }
     }
 
     open(): void {
         if (!this.alertRef) {
-            this.show = true;
-            this.cd.detectChanges();
             this.elRef.nativeElement.style.display = 'block';
         }
-        if (!this.persist) {
+
+        if (this.alertRef && !this.persist) {
             setTimeout(() => {
                 if (this.mousePersist) {
                     const wait = () => {
@@ -171,6 +145,24 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
         } else if (event.type === 'mouseleave') {
             this.mouseInAlert = false;
         }
+    }
+
+    private loadFromTemplate(template: TemplateRef<any>): void {
+        const context = {
+            $implicit: this.alertRef
+        };
+        this.componentRef = this.containerRef.createEmbeddedView(template, context);
+    }
+
+    private loadFromComponent(componentType: Type<any>): void {
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
+        this.containerRef.clear();
+        this.componentRef = this.containerRef.createComponent(componentFactory);
+    }
+
+    private loadFromString(contentString: string): void {
+        this.containerRef.clear();
+        this.message = contentString;
     }
 
 }
