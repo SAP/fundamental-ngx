@@ -11,7 +11,7 @@
                 </fd-popover-control>
                 <fd-popover-body>
                     <fd-menu>
-                        <fd-menu-list *ngIf="!showCollapsedProducts">
+                        <ul fd-menu-list *ngIf="!showCollapsedProducts">
                             <div *ngFor="let action of shellbarActions" class="fd-menu__addon-before">
                                 <span [ngClass]="'sap-icon--' + action.glyph"></span>
                             </div>
@@ -24,8 +24,8 @@
                             <li fd-menu-item *ngIf="productSwitcher" (click)="toggleCollapsedProducts($event);">
                                 Product Switcher
                             </li>
-                        </fd-menu-list>
-                        <fd-menu-list *ngIf="showCollapsedProducts">
+                        </ul>
+                        <ul fd-menu-list *ngIf="showCollapsedProducts">
                             <li fd-menu-item (click)="toggleCollapsedProducts($event)">
                                 <span class="fd-menu__item sap-icon--nav-back"></span>
                             </li>
@@ -33,7 +33,7 @@
                             <li fd-menu-item *ngFor="let product of productSwitcher" (click)="product.callback($event)">
                                 {{product.title}}
                             </li>
-                        </fd-menu-list>
+                        </ul>
                     </fd-menu>
                 </fd-popover-body>
             </fd-popover>
@@ -57,11 +57,11 @@
                     </fd-popover-control>
                     <fd-popover-body>
                         <fd-menu>
-                            <fd-menu-list>
+                            <ul fd-menu-list>
                                 <li fd-menu-item *ngFor="let item of userMenu" (click)="item.callback($event)">
                                     {{item.text}}
                                 </li>
-                            </fd-menu-list>
+                            </ul>
                         </fd-menu>
                     </fd-popover-body>
                 </fd-popover>

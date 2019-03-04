@@ -17,14 +17,14 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="(dropdownValues | fdSearch:inputText).length">
             <fd-menu>
-                <fd-menu-list>
+                <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let term of dropdownValues | fdSearch:inputText" (click)="term.callback($event)" (keypress)="onMenuKeypressHandler($event, term)">
                         <a tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
                     </li>
                     <li fd-menu-item (click)="newItemCallback($event)" (keypress)="newItemKeypressHandler($event)">
                         <a class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>
-                </fd-menu-list>
+                </ul>
             </fd-menu>
         </fd-popover-body>
     </fd-popover>
