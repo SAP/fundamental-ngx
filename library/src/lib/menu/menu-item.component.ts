@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnChanges } from '@angular/core';
 
 @Component({
+    // TODO to be discussed
+    // tslint:disable-next-line:component-selector
     selector: '[fd-menu-item]',
     templateUrl: './menu-item.component.html'
 })

@@ -8,6 +8,11 @@ rules:
     comment-format:
         - true
         - check-space
+    component-selector:
+        - true
+        - attribute
+        - fd
+        - kebab-case
     curly: true
     eofline: true
     forin: true
@@ -76,7 +81,6 @@ rules:
           parameter: nospace
           property-declaration: nospace
           variable-declaration: nospace
-    typeof-compare: true
     unified-signatures: true
     variable-name: false
     whitespace:
@@ -97,6 +101,3 @@ rules:
     no-output-rename: true
     use-life-cycle-interface: true
     use-pipe-transform-interface: true
-    no-access-missing-member: true
-    templates-use-public: true
-    invoke-injectable: true

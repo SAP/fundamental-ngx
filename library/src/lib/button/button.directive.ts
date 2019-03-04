@@ -2,6 +2,8 @@ import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Directive({
+    // TODO to be discussed
+    // tslint:disable-next-line:directive-selector
     selector: '[fd-button]'
 })
 export class ButtonDirective extends AbstractFdNgxClass {
@@ -43,7 +45,7 @@ export class ButtonDirective extends AbstractFdNgxClass {
             if (typeof this.options === 'string') {
                 this._addClassToElement('fd-button--' + this.options);
             } else if (Array.isArray(this.options)) {
-                this.options.forEach((option) => {
+                this.options.forEach(option => {
                     if (typeof option === 'string') {
                         this._addClassToElement('fd-button--' + option);
                     }

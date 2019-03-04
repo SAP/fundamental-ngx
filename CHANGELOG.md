@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.1-rc.0"></a>
+## [0.2.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.2.0...v0.2.1-rc.0) (2019-02-28)
+
+
+
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.17...v0.2.0) (2019-02-27)
+
+
+
+<a name="0.2.0-rc.17"></a>
+# [0.2.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.16...v0.2.0-rc.17) (2019-02-27)
+
+
+### Bug Fixes
+
+* scroll spy threshold is customizable ([#578](https://github.com/SAP/fundamental-ngx/issues/578)) ([f1b7657](https://github.com/SAP/fundamental-ngx/commit/f1b7657))
+
+
+
+<a name="0.2.0-rc.16"></a>
+# [0.2.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.15...v0.2.0-rc.16) (2019-02-27)
+
+
+
+<a name="0.2.0-rc.15"></a>
+# [0.2.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.14...v0.2.0-rc.15) (2019-02-26)
+
+
+
+<a name="0.2.0-rc.14"></a>
+# [0.2.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.13...v0.2.0-rc.14) (2019-02-26)
+
+
+
+<a name="0.2.0-rc.13"></a>
+# [0.2.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.12...v0.2.0-rc.13) (2019-02-26)
+
+
+
+<a name="0.2.0-rc.12"></a>
+# [0.2.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.11...v0.2.0-rc.12) (2019-02-26)
+
+
+
 <a name="0.2.0-rc.11"></a>
 # [0.2.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.2.0-rc.10...v0.2.0-rc.11) (2019-02-25)
 

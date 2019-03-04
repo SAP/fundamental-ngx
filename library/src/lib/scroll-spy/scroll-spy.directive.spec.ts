@@ -6,10 +6,10 @@ import { By } from '@angular/platform-browser';
 @Component({
     selector: 'fd-scroll-spy-test-component',
     template: `
-    <div fdScrollSpy [trackedTags]="['div']" (topSpyChange)="selectedSpy = $event">
-        <div style="top: 11px; position: absolute;" id="div1"></div>
-        <span style="top: 12px; position: absolute;" id="span1"></span>
-        <div style="top: 99px; position: absolute;" id="div2"></div>
+    <div fdScrollSpy [trackedTags]="['div']" (spyChange)="selectedSpy = $event.id">
+        <div id="div1"></div>
+        <span id="span1"></span>
+        <div id="div2"></div>
     </div>`
 })
 export class ScrollSpyTestComponent {
@@ -53,12 +53,13 @@ describe('ScrollSpyDirective', () => {
         const mockEvent = {
             target: {
                 scrollTop: 5,
-                offsetTop: 10
+                offsetTop: 700,
+                offsetHeight: 20
             }
         };
-        spyOn(directiveInstance.topSpyChange, 'emit');
+        spyOn(directiveInstance.spyChange, 'emit');
         directiveInstance.onScroll(mockEvent);
-        expect(directiveInstance.currentTop).toEqual('div1');
-        expect(directiveInstance.topSpyChange.emit).toHaveBeenCalledWith(directiveInstance.currentTop);
+        expect(directiveInstance.currentActive.id).toEqual('div2');
+        expect(directiveInstance.spyChange.emit).toHaveBeenCalledWith(directiveInstance.currentActive);
     });
 });
