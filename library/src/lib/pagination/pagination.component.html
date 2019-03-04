@@ -1,6 +1,6 @@
 <div class="fd-pagination"
      *ngIf="pagination.totalItems">
-    <span class="fd-pagination__total">{{ pagination.totalItems }} items</span>
+    <span class="fd-pagination__total" *ngIf="displayTotalItems">{{ pagination.totalItems }} items</span>
     <nav class="fd-pagination__nav">
         <a class="fd-pagination__link fd-pagination__link--previous"
            tabindex="0"

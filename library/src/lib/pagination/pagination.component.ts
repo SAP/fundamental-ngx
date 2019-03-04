@@ -11,6 +11,9 @@ export class PaginationComponent implements OnChanges {
     @Input()
     pagination: Pagination;
 
+    @Input()
+    displayTotalItems: boolean = true;
+
     @Output()
     selected = new EventEmitter<number>();
 

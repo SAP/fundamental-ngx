@@ -12,7 +12,8 @@
   inputs: [
     { name: 'totalItems', description: 'The total number items.' },
     { name: 'itemsPerPage', description: 'The number of items per page.' },
-    { name: 'currentPage', description: 'The current page.' }
+    { name: 'currentPage', description: 'The current page.' },
+    { name: 'displayTotalItems', description: 'Boolean, when set to true, will display the totalItems property next to the pagination links.  Default is true.'}
   ]
 }"></properties>
 <separator></separator>
@@ -23,5 +24,5 @@
 
 <separator></separator>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-pagination [class]="'fd-demo-pagination'" [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
+  <fd-pagination [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
 </playground>
