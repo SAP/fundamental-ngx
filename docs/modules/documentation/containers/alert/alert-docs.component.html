@@ -48,7 +48,7 @@
 <separator></separator>
 
 <h2>Alert as Overlay</h2>
-<description>To accomplish this, the <code>AlertService</code> should be injected. It accepts a component type, a template ref or a string as the alert content.</description>
+<description>The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a component type, a template ref or a string as the alert content.</description>
 <component-example [name]="'ex2'">
     <fd-alert-component-as-content-example></fd-alert-component-as-content-example>
 </component-example>
@@ -61,7 +61,7 @@
 <h2>Inline Alert</h2>
 <description>
     To make use of inputs such as <code>mousePersist</code> and <code>duration</code> in an inline alert, a call to the alert <code>open()</code> method is required.
-    Otherwise, the alert will simply by shown without any complex behaviour.
+    Otherwise, the alert will simply be shown without any complex behaviour.
     <br /><br />
     Note that inline alerts are not removed from the dom.
 </description>
