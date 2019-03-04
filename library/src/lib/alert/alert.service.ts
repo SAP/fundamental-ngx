@@ -86,7 +86,7 @@ export class AlertService {
         this.alerts = this.alerts.filter(item => item !== null && item !== undefined);
         alert.destroy();
 
-        if (!this.alertContainerRef && (!this.alerts || this.alerts.length === 0)) {
+        if (this.alertContainerRef && (!this.alerts || this.alerts.length === 0)) {
             this.destroyAlertContainer();
         }
     }
