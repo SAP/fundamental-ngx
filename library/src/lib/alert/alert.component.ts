@@ -73,7 +73,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
     message: string;
 
     @Output()
-    close: EventEmitter<undefined> = new EventEmitter<undefined>();
+    onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     mouseInAlert: boolean = false;
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
@@ -117,7 +117,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
         } else {
             this.elRef.nativeElement.style.display = 'none';
         }
-        this.close.emit();
+        this.onDismiss.emit();
     }
 
     open(): void {
