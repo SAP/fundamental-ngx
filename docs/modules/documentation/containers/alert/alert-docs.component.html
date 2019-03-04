@@ -48,7 +48,10 @@
 <separator></separator>
 
 <h2>Alert as Overlay</h2>
-<description>The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a component type, a template ref or a string as the alert content.</description>
+<description>
+    The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a component type, a template ref or a string as the alert content.
+    If opening through a component as content, the component should be added to the <code>entryComponents</code> of your application.
+</description>
 <component-example [name]="'ex2'">
     <fd-alert-component-as-content-example></fd-alert-component-as-content-example>
 </component-example>
