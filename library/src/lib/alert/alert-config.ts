@@ -5,7 +5,7 @@ export class AlertConfig {
     width?: string = '33vw';
     data?: any;
     persist?: boolean = false;
-    visibleTime?: number = 10000;
+    duration?: number = 10000;
     mousePersist?: boolean = false;
     ariaLabelledBy?: string = null;
     ariaLabel?: string = null;

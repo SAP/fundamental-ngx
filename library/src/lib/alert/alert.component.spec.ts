@@ -98,7 +98,7 @@ describe('AlertComponent', () => {
     });
 
     it('should persist', fakeAsync(() => {
-        service.open(TemplateTestComponent, {persist: true, visibleTime: 10});
+        service.open(TemplateTestComponent, {persist: true, duration: 10});
         service['alerts'][0].instance.ngOnInit();
         service['alerts'][0].instance.ngAfterViewInit();
         fixture.detectChanges();
@@ -109,7 +109,7 @@ describe('AlertComponent', () => {
     }));
 
     it('should support visibleTime', fakeAsync(() => {
-        service.open(TemplateTestComponent, {persist: false, visibleTime: 10});
+        service.open(TemplateTestComponent, {persist: false, duration: 10});
         service['alerts'][0].instance.ngOnInit();
         service['alerts'][0].instance.ngAfterViewInit();
         fixture.detectChanges();

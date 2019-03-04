@@ -6,6 +6,7 @@ import * as alertExampleHtml from '!raw-loader!./examples/alert-example.componen
 import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.ts';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
+import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
 
 @Component({
@@ -54,6 +55,7 @@ export class AlertDocsComponent {
     alertTs = alertExampleTs;
     alertContentTs = alertContent;
     alertComponentAsContentTs = alertComponentAsContentExample;
+    alertComponentAsContentHtml = alertComponentAsContentExampleH;
     alertInlineHtml = alertInlineExampleHtml;
 
     constructor(private schemaFactory: SchemaFactoryService) {

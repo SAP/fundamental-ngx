@@ -1,45 +1,49 @@
 import { Component } from '@angular/core';
 import { AlertService } from '../../../../../../library/src/lib/alert/alert.service';
 import { AlertContentComponent } from './alert-content.component';
-import { AlertConfig } from '../../../../../../library/src/lib/alert/alert-config';
 
 @Component({
     selector: 'fd-alert-component-as-content-example',
-    template: `
-        <button fd-button (click)="openWarningComponentAsContentAlert()">Launch Warning Component As Content Alert</button>
-        <button fd-button (click)="openErrorComponentAsContentAlert()">Launch Error Component As Content Alert</button>
-        <button fd-button (click)="openlol(template)">Launch from template</button>
-        <ng-template let-alert #template>
-            <button fd-button (click)="alertService.dismissAll()">Close</button>
-        </ng-template>
-    `,
-    styles: [
-        `
-            .fd-button {
-                display: block;
-                margin: 10px;
-            }
-        `
-    ]
+    templateUrl: './alert-component-as-content-example.component.html',
+    styles: ['button {margin-right: 12px;}']
 })
 export class AlertComponentAsContentExampleComponent {
-    openWarningComponentAsContentAlert() {
+
+    constructor(public alertService: AlertService) {}
+
+    openFromComponent() {
         this.alertService.open(AlertContentComponent, {
-            dismissible: true,
             type: 'warning',
+            mousePersist: true,
+            duration: 7500,
             data: {
-                alertText: 'Example Error Alert Text'
+                label: 'This alert was opened by providing a component as content!'
             }
         });
     }
 
-    openErrorComponentAsContentAlert() {
-        this.alertService.open('lol u suck', new AlertConfig());
+    openFromString() {
+        const alertContent = 'This is the content! The alert is not dismissible, but will disappear after 7500ms.';
+        this.alertService.open(alertContent, {
+            type: 'information',
+            dismissible: false,
+            duration: 7500
+        });
     }
 
-    openlol(template): void {
-        this.alertService.open(template, new AlertConfig());
-    }
+    openFromTemplate(template): void {
+        const alertRef = this.alertService.open(template, {
+            type: 'success',
+            persist: true,
+            data: {
+                firstLine: 'This alert passes data to the template.',
+                secondLine: 'It also has [persist]=true and will not disappear automatically.'
+            }
+        });
 
-    constructor(public alertService: AlertService) {}
+        alertRef.afterDismissed.subscribe(() => {
+            // Do something after closing
+            // You can also manually close this alert using alertRef.dismiss()
+        });
+    }
 }

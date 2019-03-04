@@ -11,7 +11,7 @@ import {
     AfterViewInit,
     ViewContainerRef,
     TemplateRef,
-    Optional, EmbeddedViewRef
+    Optional, EmbeddedViewRef, Output, EventEmitter
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { AlertRef } from './alert-ref';
@@ -55,7 +55,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
     persist: boolean = false;
 
     @Input()
-    visibleTime: number = 10000;
+    duration: number = 10000;
 
     @Input()
     mousePersist: boolean = false;
@@ -71,6 +71,9 @@ export class AlertComponent implements OnInit, AfterViewInit {
 
     @Input()
     message: string;
+
+    @Output()
+    close: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     mouseInAlert: boolean = false;
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
@@ -114,6 +117,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
         } else {
             this.elRef.nativeElement.style.display = 'none';
         }
+        this.close.emit();
     }
 
     open(): void {
@@ -121,7 +125,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
             this.elRef.nativeElement.style.display = 'block';
         }
 
-        if (this.alertRef && !this.persist) {
+        if (!this.persist) {
             setTimeout(() => {
                 if (this.mousePersist) {
                     const wait = () => {
@@ -135,7 +139,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
                 } else {
                     this.dismiss();
                 }
-            }, this.visibleTime);
+            }, this.duration);
         }
     }
 

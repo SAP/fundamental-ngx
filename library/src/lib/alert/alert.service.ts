@@ -52,7 +52,7 @@ export class AlertService {
         this.appRef.attachView(componentRef.hostView);
 
         // Subscription to close alert from ref
-        const refSub = alertRef.afterClosed.subscribe(() => {
+        const refSub = alertRef.afterDismissed.subscribe(() => {
             this.destroyAlertComponent(componentRef);
             refSub.unsubscribe();
         });
