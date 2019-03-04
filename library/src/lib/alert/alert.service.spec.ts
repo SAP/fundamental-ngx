@@ -63,7 +63,7 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open('teststring', {dismissible: false, persist: true});
+        const alertRef: AlertRef = service.open('teststring', {dismissible: false, duration: -1});
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
@@ -84,7 +84,7 @@ describe('AlertService', () => {
         expect(service['alertContainerRef']).toBeFalsy();
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const alertRef: AlertRef = service.open(fixtureElTmp, {dismissible: false, persist: true});
+        const alertRef: AlertRef = service.open(fixtureElTmp, {dismissible: false, duration: -1});
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
@@ -104,7 +104,7 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open(TemplateTestComponent, {dismissible: false, persist: true});
+        const alertRef: AlertRef = service.open(TemplateTestComponent, {dismissible: false, duration: -1});
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
