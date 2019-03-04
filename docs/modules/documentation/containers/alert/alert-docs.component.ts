@@ -48,9 +48,6 @@ export class AlertDocsComponent {
         }
     };
 
-    messagePart1: String = 'This is the ';
-    messagePart2: String = ' alert style.';
-
     alertHtml = alertExampleHtml;
     alertTs = alertExampleTs;
     alertContentTs = alertContent;
@@ -64,9 +61,5 @@ export class AlertDocsComponent {
 
     onSchemaValues(data) {
         this.data = data;
-    }
-
-    closeAlert(id: string) {
-        alert(`Alert with id ${id} has triggered a close event!`);
     }
 }

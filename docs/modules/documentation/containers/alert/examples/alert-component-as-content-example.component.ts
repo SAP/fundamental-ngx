@@ -34,10 +34,10 @@ export class AlertComponentAsContentExampleComponent {
     openFromTemplate(template): void {
         const alertRef = this.alertService.open(template, {
             type: 'success',
-            persist: true,
+            duration: -1,
             data: {
                 firstLine: 'This alert passes data to the template.',
-                secondLine: 'It also has [persist]=true and will not disappear automatically.'
+                secondLine: 'It also has [duration]="-1" and will not disappear automatically.'
             }
         });
 

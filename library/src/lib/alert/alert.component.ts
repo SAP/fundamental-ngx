@@ -128,7 +128,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
             this.elRef.nativeElement.style.display = 'block';
         }
 
-        if (!this.persist) {
+        if (this.duration >= 0) {
             setTimeout(() => {
                 if (this.mousePersist) {
                     const wait = () => {

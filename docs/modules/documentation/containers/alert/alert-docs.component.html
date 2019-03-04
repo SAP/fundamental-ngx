@@ -10,9 +10,8 @@
     { name: 'type', description: 'String. Determines the type of alert. View example below for options. Defaults to white if no type is provided.' },
     { name: 'id', description: 'String. The id of the alert. If omitted, an id will be generated.' },
     { name: 'dismissible', description: 'Boolean. Shows a dismiss button. Default is true.' },
-    { name: 'persist', description: 'Boolean. When set to true, the alert will not disappear after a set amount of time.  Default is false.'},
     { name: 'mousePersist', description: 'Boolean. When set to true, the alert will remain visible as long as the mouse is hovered over it. Default is false.'},
-    { name: 'duration', description: 'Number. Dictates how long in milliseconds the alert will be visible. Default is 10000.'},
+    { name: 'duration', description: 'Number. Dictates how long in milliseconds the alert will be visible. Default is 10000. If set to -1, it will not disappear.'},
     { name: 'ariaLabel', description: 'String. Aria-label attribute for the alert component.' },
     { name: 'ariaLabelledBy', description: 'String. Aria-labelledby attribute for the alert component.' },
     { name: 'width', description: 'String. Width of the alert. Supports all css units.' },
@@ -50,7 +49,7 @@
 <h2>Alert as Overlay</h2>
 <description>
     The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a component type, a template ref or a string as the alert content.
-    If opening through a component as content, the component should be added to the <code>entryComponents</code> of your application.
+    If a component is provided as content, it should be added to the <code>entryComponents</code> of your application.
 </description>
 <component-example [name]="'ex2'">
     <fd-alert-component-as-content-example></fd-alert-component-as-content-example>
