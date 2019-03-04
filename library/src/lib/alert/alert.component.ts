@@ -122,6 +122,9 @@ export class AlertComponent implements OnInit, AfterViewInit {
 
     open(): void {
         if (!this.alertRef) {
+            if (this.elRef.nativeElement.style.display === 'block') {
+                return;
+            }
             this.elRef.nativeElement.style.display = 'block';
         }
 
