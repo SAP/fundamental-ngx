@@ -11,11 +11,15 @@ import {
     AfterViewInit,
     ViewContainerRef,
     TemplateRef,
-    Optional, EmbeddedViewRef, Output, EventEmitter
+    Optional,
+    EmbeddedViewRef,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { AlertRef } from './alert-ref';
 import { alertFadeNgIf } from './alert-animations';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Component({
     selector: 'fd-alert',
@@ -23,7 +27,6 @@ import { alertFadeNgIf } from './alert-animations';
     styleUrls: ['./alert.component.scss'],
     providers: [HashService],
     host: {
-        '[class]': '"fd-alert" + (type ? " fd-alert--" + type : "")',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
@@ -37,7 +40,7 @@ import { alertFadeNgIf } from './alert-animations';
         alertFadeNgIf
     ]
 })
-export class AlertComponent implements OnInit, AfterViewInit {
+export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
     @ViewChild('container', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
@@ -83,7 +86,9 @@ export class AlertComponent implements OnInit, AfterViewInit {
                 private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
-                @Optional() private alertRef: AlertRef) {}
+                @Optional() private alertRef: AlertRef) {
+        super(elRef);
+    }
 
     ngOnInit(): void {
         if (!this.id) {
@@ -93,6 +98,7 @@ export class AlertComponent implements OnInit, AfterViewInit {
         if (this.alertRef) {
             this.open();
         }
+        this._setProperties();
     }
 
     ngAfterViewInit(): void {
@@ -151,6 +157,13 @@ export class AlertComponent implements OnInit, AfterViewInit {
             this.mouseInAlert = true;
         } else if (event.type === 'mouseleave') {
             this.mouseInAlert = false;
+        }
+    }
+
+    _setProperties(): void {
+        this._addClassToElement('fd-alert');
+        if (this.type) {
+            this._addClassToElement('fd-alert--' + this.type);
         }
     }
 

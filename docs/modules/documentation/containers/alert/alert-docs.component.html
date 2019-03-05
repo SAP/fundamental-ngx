@@ -77,13 +77,13 @@
 <playground [schema]="schema"
             [schemaInitialValues]="data"
             (onFormChanges)="onSchemaValues($event)">
-    <fd-alert #mainAlert
+    <fd-alert style="transition: 0.25s all ease-in-out;"
             [type]="data.modifier.type"
             [dismissible]="data.properties.dismissible"
             [width]="data.properties.width"
             [message]="data.properties.message">
     </fd-alert>
-    <fd-alert #alert style="display: none; margin-top: 12px;"
+    <fd-alert #alert style="display: none; margin-top: 12px; transition: 0.25s all ease-in-out;"
         [type]="data.modifier.type"
         [dismissible]="data.properties.dismissible"
         [width]="data.properties.width"
