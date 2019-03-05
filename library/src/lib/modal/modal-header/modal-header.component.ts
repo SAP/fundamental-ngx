@@ -1,9 +1,13 @@
 import { Component, Inject } from '@angular/core';
-import { ModalService } from './modal.service';
+import { ModalService } from '../modal.service';
 
 @Component({
     selector: 'fd-modal-header',
-    templateUrl: './modal-header.component.html'
+    templateUrl: './modal-header.component.html',
+    host: {
+        class: 'fd-modal__header'
+    },
+    styles: [':host {display: block;}']
 })
 export class ModalHeaderComponent {
     constructor(@Inject(ModalService) public modalService: ModalService) {}

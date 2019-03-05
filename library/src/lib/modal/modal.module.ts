@@ -4,9 +4,9 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
 import { ModalComponent } from './modal.component';
-import { ModalHeaderComponent } from './modal-header.component';
-import { ModalBodyComponent } from './modal-body.component';
-import { ModalFooterComponent } from './modal-footer.component';
+import { ModalHeaderComponent } from './modal-header/modal-header.component';
+import { ModalBodyComponent } from './modal-body/modal-body.component';
+import { ModalFooterComponent } from './modal-footer/modal-footer.component';
 
 import { ModalService } from './modal.service';
 

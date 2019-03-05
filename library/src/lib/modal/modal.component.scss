@@ -1,25 +1,16 @@
-.fd-modal__body {
-    overflow: auto;
-}
+:host {
+    position: fixed;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0;
+    left: 0;
+    margin: 0 auto;
 
-.fd-modal__footer {
-    border-top: 1px solid #eeeeef;
-}
-
-fd-modal {
-    .fd-modal {
+    .fd-popover__body {
         position: fixed;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 0;
-        left: 0;
-        margin: 0 auto;
-        .fd-popover__body {
-            position: fixed;
-            top: auto;
-            left: auto;
-        }
+        top: auto;
+        left: auto;
     }
 
     .fd-overlay {

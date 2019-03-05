@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ModalService } from './modal.service';
+import { ModalService } from '../modal.service';
 
 import { ModalHeaderComponent } from './modal-header.component';
 

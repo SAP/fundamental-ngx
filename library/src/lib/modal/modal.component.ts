@@ -1,6 +1,5 @@
 import {
     Component,
-    ViewEncapsulation,
     Inject,
     ElementRef,
     OnInit, Input
@@ -10,9 +9,16 @@ import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fd-modal',
-    encapsulation: ViewEncapsulation.None,
     styleUrls: ['modal.component.scss'],
-    templateUrl: './modal.component.html'
+    templateUrl: './modal.component.html',
+    host: {
+        class: 'fd-modal',
+        '[style.max-width]': 'width',
+        '(keydown)': 'onModalKeydown($event)',
+
+        // TODO Think about removing
+        '[style.z-index]': '1001 * openModalCount'
+    }
 })
 export class ModalComponent implements OnInit {
     resolve: Function;

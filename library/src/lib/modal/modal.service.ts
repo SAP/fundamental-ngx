@@ -4,13 +4,9 @@ import { ComponentFactoryResolver, Injectable, ApplicationRef, Injector, Embedde
 export class ModalService {
     private modalRef = [];
 
-    constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
-        private appRef: ApplicationRef,
-        private injector: Injector
-    ) {
-        this.componentFactoryResolver = componentFactoryResolver;
-    }
+    constructor(private componentFactoryResolver: ComponentFactoryResolver,
+                private appRef: ApplicationRef,
+                private injector: Injector) {}
 
     close(result?) {
         this.modalRef.pop().close(result, true);
