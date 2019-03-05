@@ -10,9 +10,9 @@
 
 <properties [properties]="{
   inputs: [
-    { name: 'totalItems', description: 'The total number items.' },
-    { name: 'itemsPerPage', description: 'The number of items per page.' },
-    { name: 'currentPage', description: 'The current page.' },
+    { name: 'totalItems', description: 'Required - the total number items.' },
+    { name: 'itemsPerPage', description: 'The number of items per page.  Default is 10.' },
+    { name: 'currentPage', description: 'The current page.  Default is 1.' },
     { name: 'displayTotalItems', description: 'Boolean, when set to true, will display the totalItems property next to the pagination links.  Default is true.'},
     { name: 'displayText', description: 'Text to use for the total items (addresses, products, etc).  Default is \'items\'.'}
   ]
