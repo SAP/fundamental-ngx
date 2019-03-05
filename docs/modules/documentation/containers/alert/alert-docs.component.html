@@ -71,3 +71,25 @@
     <fd-alert-inline-example></fd-alert-inline-example>
 </component-example>
 <code-example [code]="alertInlineHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<playground [schema]="schema"
+            [schemaInitialValues]="data"
+            (onFormChanges)="onSchemaValues($event)">
+    <fd-alert #mainAlert
+            [type]="data.modifier.type"
+            [dismissible]="data.properties.dismissible"
+            [width]="data.properties.width"
+            [message]="data.properties.message">
+    </fd-alert>
+    <fd-alert #alert style="display: none; margin-top: 12px;"
+        [type]="data.modifier.type"
+        [dismissible]="data.properties.dismissible"
+        [width]="data.properties.width"
+        [message]="data.properties.message"
+        [duration]="data.properties.duration"
+        [mousePersist]="data.properties.mousePersist">
+    </fd-alert>
+    <button style="margin-top: 12px;" fd-button (click)="alert.open()">Open Dynamic Alert</button>
+</playground>

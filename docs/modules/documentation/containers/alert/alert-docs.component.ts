@@ -21,13 +21,25 @@ export class AlertDocsComponent {
                 properties: {
                     dismissible: {
                         type: 'boolean'
+                    },
+                    mousePersist: {
+                        type: 'boolean'
+                    },
+                    width: {
+                        type: 'string'
+                    },
+                    message: {
+                        type: 'string'
+                    },
+                    duration: {
+                        type: 'string'
                     }
                 }
             },
             modifier: {
                 type: 'object',
                 properties: {
-                    block: {
+                    type: {
                         type: 'string',
                         enum: ['default', 'warning', 'error', 'success', 'information']
                     }
@@ -41,10 +53,14 @@ export class AlertDocsComponent {
 
     data: any = {
         properties: {
-            dismissible: true
+            dismissible: true,
+            width: '100%',
+            message: 'This is an alert message.',
+            duration: 10000,
+            mousePersist: true
         },
         modifier: {
-            block: 'default'
+            type: 'default'
         }
     };
 
