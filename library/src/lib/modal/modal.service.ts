@@ -1,48 +1,75 @@
-import { ComponentFactoryResolver, Injectable, ApplicationRef, Injector, EmbeddedViewRef } from '@angular/core';
+import {
+    ComponentFactoryResolver,
+    Injectable,
+    ApplicationRef,
+    Injector,
+    EmbeddedViewRef,
+    ComponentRef,
+    Type,
+    TemplateRef
+} from '@angular/core';
+import { ModalComponent } from './modal.component';
+import { ModalOverlayComponent } from './modal-overlay.component';
+import { ModalContainerComponent } from './modal-container.component';
+import { ModalConfig } from './modal-config';
+import { ModalRef } from './modal-ref';
 
 @Injectable()
 export class ModalService {
-    private modalRef = [];
+    private modals: {modalRef: ComponentRef<ModalComponent>, overlayRef?: ComponentRef<ModalOverlayComponent>}[] = [];
+    private modalContainerRef: ComponentRef<ModalContainerComponent>;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private appRef: ApplicationRef,
                 private injector: Injector) {}
 
-    close(result?) {
-        this.modalRef.pop().close(result, true);
+    public hasOpenModals(): boolean {
+        return this.modals && this.modals.length > 0;
     }
 
-    dismiss(reason?) {
-        this.modalRef.pop().dismiss(reason, true);
+    public dismissAll(): void {
+        this.modals.forEach(item => {
+            this.destroyModalComponent(item.modalRef);
+        });
     }
 
-    popModal() {
-        return this.modalRef.pop();
-    }
+    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: ModalConfig = new ModalConfig()): ModalRef {
 
-    open(modalType, modalConfig?) {
-        if (typeof modalType === 'object') { // template reference variable
-            this.modalRef.push(modalType);
-        } else if (typeof modalType === 'function') { // component as content
-            const componentRef = this.componentFactoryResolver.resolveComponentFactory(modalType).create(this.injector);
-            this.modalRef.push((componentRef.instance as any).modal);
-            if (modalConfig) {
-                Object.keys(modalConfig).forEach(key => (componentRef.instance[key] = modalConfig[key]));
-            }
-            this.modalRef[this.modalRef.length - 1].instance = componentRef.instance;
-            this.appRef.attachView(componentRef.hostView);
-            const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-            document.body.appendChild(domElem);
-            this.modalRef[this.modalRef.length - 1].afterClosed.subscribe(() => {
-                document.body.removeChild(domElem);
-            });
-            this.appRef.tick();
+        if (!this.modals || this.modals.length === 0) {
+            this.openModalContainer();
         }
-        this.modalRef[this.modalRef.length - 1].open();
-        return this.modalRef[this.modalRef.length - 1];
+
+
     }
 
-    getModalCount() {
-        return this.modalRef.length;
+    private destroyModalComponent(modal: ComponentRef<ModalComponent>) {
+        const arrayRef = this.modals.find((item) => item.modalRef === modal);
+        this.appRef.detachView(arrayRef.modalRef.hostView);
+        this.appRef.detachView(arrayRef.overlayRef.hostView);
+        arrayRef.modalRef.destroy();
+        arrayRef.overlayRef.destroy();
+        this.modals[this.modals.indexOf(arrayRef)] = null;
+        this.modals = this.modals.filter(item => item !== null && item !== undefined);
+
+        if (this.modalContainerRef && (!this.modals || this.modals.length === 0)) {
+            this.destroyModalContainer();
+        }
     }
+
+    private openModalContainer(): void {
+        const factory = this.componentFactoryResolver.resolveComponentFactory(ModalContainerComponent);
+        const componentRef = factory.create(this.injector);
+        this.appRef.attachView(componentRef.hostView);
+
+        const domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        document.body.appendChild(domElement);
+        this.modalContainerRef = componentRef;
+    }
+
+    private destroyModalContainer(): void {
+        this.appRef.detachView(this.modalContainerRef.hostView);
+        this.modalContainerRef.destroy();
+        this.modalContainerRef = undefined;
+    }
+
 }

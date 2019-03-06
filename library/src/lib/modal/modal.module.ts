@@ -9,11 +9,35 @@ import { ModalBodyComponent } from './modal-body/modal-body.component';
 import { ModalFooterComponent } from './modal-footer/modal-footer.component';
 
 import { ModalService } from './modal.service';
+import { ModalOverlayComponent } from './modal-overlay.component';
+import { ModalContainerComponent } from './modal-container.component';
 
 @NgModule({
-    declarations: [ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent],
-    imports: [CommonModule, ButtonModule, IconModule],
-    exports: [ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent],
+    declarations: [
+        ModalComponent,
+        ModalHeaderComponent,
+        ModalBodyComponent,
+        ModalFooterComponent,
+        ModalOverlayComponent,
+        ModalContainerComponent
+    ],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        IconModule
+    ],
+    exports: [
+        ModalComponent,
+        ModalHeaderComponent,
+        ModalBodyComponent,
+        ModalFooterComponent,
+        ModalOverlayComponent,
+        ModalContainerComponent
+    ],
+    entryComponents: [
+        ModalOverlayComponent,
+        ModalContainerComponent
+    ],
     providers: [ModalService]
 })
 export class ModalModule {}
