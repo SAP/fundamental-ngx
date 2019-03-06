@@ -84,6 +84,7 @@ export class AlertService {
     private destroyAlertComponent(alert: ComponentRef<AlertComponent>): void {
         this.alerts[this.alerts.indexOf(alert)] = null;
         this.alerts = this.alerts.filter(item => item !== null && item !== undefined);
+        this.appRef.detachView(alert.hostView);
         alert.destroy();
 
         if (this.alertContainerRef && (!this.alerts || this.alerts.length === 0)) {
