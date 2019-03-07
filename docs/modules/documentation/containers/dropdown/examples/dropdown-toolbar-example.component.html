@@ -2,20 +2,20 @@
     Dropdown
     <fd-popover-body *ngIf="menu1 && menu1.length || menu2 && menu2.length">
         <fd-menu>
-            <fd-menu-list>
+            <ul fd-menu-list>
                 <li fd-menu-item *ngFor="let option of menu1">
                     <a [attr.href]="option.url">{{option.text}}</a>
                 </li>
-            </fd-menu-list>
+            </ul>
             <fd-menu-group>
-                <fd-menu-title>
+                <h1 fd-menu-title>
                     Group header
-                </fd-menu-title>
-                <fd-menu-list>
+                </h1>
+                <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let option of menu2">
                         <a [attr.href]="option.url">{{option.text}}</a>
                     </li>
-                </fd-menu-list>
+                </ul>
             </fd-menu-group>
         </fd-menu>
     </fd-popover-body>
@@ -25,11 +25,11 @@
     Compact Dropdown
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
-            <fd-menu-list>
+            <ul fd-menu-list>
                 <li fd-menu-item *ngFor="let option of menu1">
                     <a [attr.href]="option.url">{{option.text}}</a>
                 </li>
-            </fd-menu-list>
+            </ul>
         </fd-menu>
     </fd-popover-body>
 </fd-popover>

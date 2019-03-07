@@ -29,7 +29,7 @@
                  [attr.aria-hidden]="!isOpen"
                  class="fd-popover__body fd-popover__body--no-arrow fd-multi-input-popover-size">
                 <fd-menu *ngIf="displayedValues && displayedValues.length">
-                    <fd-menu-list>
+                    <ul fd-menu-list>
                         <li fd-menu-item *ngFor="let value of displayedValues">
                             <label class="fd-menu__item">
                                 <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
@@ -37,7 +37,7 @@
                                 {{displayFn(value)}}
                             </label>
                         </li>
-                    </fd-menu-list>
+                    </ul>
                 </fd-menu>
                 <ng-content></ng-content>
             </div>

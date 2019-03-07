@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnChanges } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnChanges } from '@angular/core';
 
-@Component({
+@Directive({
     // TODO to be discussed
-    // tslint:disable-next-line:component-selector
+    // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-item]',
-    templateUrl: './menu-item.component.html'
 })
-export class MenuItemComponent implements AfterViewInit, OnChanges {
+export class MenuItemDirective implements AfterViewInit, OnChanges {
     constructor(private itemEl: ElementRef) {}
 
     ngAfterViewInit() {
