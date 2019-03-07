@@ -32,8 +32,11 @@ export class PaginationComponent implements OnChanges {
 
     ngOnChanges() {
         this.pages = this.paginationService.getPages(this.getPaginationObject());
-        if (!this.currentPage) {
+        const totalPages = this.paginationService.getTotalPages(this.getPaginationObject());
+        if (!this.currentPage || this.currentPage < 1) {
             this.currentPage = 1;
+        } else if (this.currentPage > totalPages) {
+            this.currentPage = totalPages;
         }
     }
 
