@@ -14,6 +14,5 @@ export class ModalInModalExampleComponent {
 
     openModal() {
         this.modalRef = this.modalService.open(ModalInModalComponent);
-        this.modalRef.instance.title = 'First Modal';
     }
 }

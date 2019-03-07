@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { ModalService } from '../modal.service';
+import { Component } from '@angular/core';
+import { ModalRef } from '../modal-ref';
 
 @Component({
     selector: 'fd-modal-header',
@@ -10,5 +10,9 @@ import { ModalService } from '../modal.service';
     styles: [':host {display: block;}']
 })
 export class ModalHeaderComponent {
-    constructor(@Inject(ModalService) public modalService: ModalService) {}
+    constructor(private modalRef: ModalRef) {}
+
+    dismiss(): void {
+        this.modalRef.dismiss('x');
+    }
 }

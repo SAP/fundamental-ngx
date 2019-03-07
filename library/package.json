@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "standard-version": "4.4.0"
+  },
+  "dependencies": {
+    "focus-trap": "^4.0.2"
   }
 }

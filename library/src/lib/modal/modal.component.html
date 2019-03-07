@@ -1,9 +1,7 @@
-<div class="fd-modal__content" role="document" [style.height]="this.height">
+<div class="fd-modal__content" role="document">
     <ng-content select="fd-modal-header"></ng-content>
     <ng-content select="fd-modal-body"></ng-content>
     <ng-content select="fd-modal-footer"></ng-content>
+    <ng-container #vc></ng-container>
     <ng-content></ng-content>
 </div>
-
-<!-- TODO remove -->
-<!--<div class="fd-overlay fd-overlay&#45;&#45;modal" [ngStyle]="{'z-index': 1000 * openModalCount}"></div>-->

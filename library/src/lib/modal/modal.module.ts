@@ -9,8 +9,8 @@ import { ModalBodyComponent } from './modal-body/modal-body.component';
 import { ModalFooterComponent } from './modal-footer/modal-footer.component';
 
 import { ModalService } from './modal.service';
-import { ModalOverlayComponent } from './modal-overlay.component';
-import { ModalContainerComponent } from './modal-container.component';
+import { ModalBackdrop } from './modal-backdrop';
+import { ModalContainer } from './modal-container';
 
 @NgModule({
     declarations: [
@@ -18,8 +18,8 @@ import { ModalContainerComponent } from './modal-container.component';
         ModalHeaderComponent,
         ModalBodyComponent,
         ModalFooterComponent,
-        ModalOverlayComponent,
-        ModalContainerComponent
+        ModalBackdrop,
+        ModalContainer
     ],
     imports: [
         CommonModule,
@@ -31,12 +31,13 @@ import { ModalContainerComponent } from './modal-container.component';
         ModalHeaderComponent,
         ModalBodyComponent,
         ModalFooterComponent,
-        ModalOverlayComponent,
-        ModalContainerComponent
+        ModalBackdrop,
+        ModalContainer
     ],
     entryComponents: [
-        ModalOverlayComponent,
-        ModalContainerComponent
+        ModalComponent,
+        ModalBackdrop,
+        ModalContainer
     ],
     providers: [ModalService]
 })

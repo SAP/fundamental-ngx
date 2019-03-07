@@ -1,24 +1,14 @@
-// TODO ideally remove all this
-
 :host {
-    position: fixed;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 0;
-    left: 0;
-    margin: 0 auto;
+    max-width: none;
+    z-index: 1000;
 
-    .fd-popover__body {
-        position: fixed;
-        top: auto;
-        left: auto;
-    }
-
-    .fd-overlay {
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+    .fd-modal__content {
+        height: inherit;
+        width: inherit;
+        min-height: inherit;
+        min-width: inherit;
+        max-height: inherit;
+        max-width: inherit;
+        display: block;
     }
 }

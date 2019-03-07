@@ -9,15 +9,20 @@ import {
     TemplateRef
 } from '@angular/core';
 import { ModalComponent } from './modal.component';
-import { ModalOverlayComponent } from './modal-overlay.component';
-import { ModalContainerComponent } from './modal-container.component';
+import { ModalBackdrop } from './modal-backdrop';
+import { ModalContainer } from './modal-container';
 import { ModalConfig } from './modal-config';
 import { ModalRef } from './modal-ref';
+import { ModalInjector } from './modal-injector';
 
 @Injectable()
 export class ModalService {
-    private modals: {modalRef: ComponentRef<ModalComponent>, overlayRef?: ComponentRef<ModalOverlayComponent>}[] = [];
-    private modalContainerRef: ComponentRef<ModalContainerComponent>;
+    private modals: {
+        modalRef: ComponentRef<ModalComponent>,
+        backdropRef?: ComponentRef<ModalBackdrop>,
+        containerRef?: ComponentRef<ModalContainer>
+    }[] = [];
+    // private modalContainerRef: ComponentRef<ModalContainer>;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private appRef: ApplicationRef,
@@ -35,41 +40,92 @@ export class ModalService {
 
     public open(contentType: Type<any> | TemplateRef<any>, modalConfig: ModalConfig = new ModalConfig()): ModalRef {
 
-        if (!this.modals || this.modals.length === 0) {
-            this.openModalContainer();
+        // Get default values from model
+        modalConfig = Object.assign(new ModalConfig(), modalConfig);
+
+        // Setup injectable data
+        const configMap = new WeakMap();
+        const modalRef = new ModalRef();
+        modalRef.data = (modalConfig ? modalConfig.data : undefined);
+        configMap.set(ModalRef, modalRef);
+
+        // Prepare container
+        const containerFactory = this.componentFactoryResolver.resolveComponentFactory(ModalContainer);
+        const containerRef = containerFactory.create(new ModalInjector(this.injector, configMap));
+        this.appRef.attachView(containerRef.hostView);
+
+        // Prepare modal
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
+        const componentRef = componentFactory.create(new ModalInjector(this.injector, configMap));
+        this.appRef.attachView(componentRef.hostView);
+
+        // Prepare backdrop
+        let backdropRef;
+        if (modalConfig.hasBackdrop) {
+            const backdropFactory = this.componentFactoryResolver.resolveComponentFactory(ModalBackdrop);
+            backdropRef = backdropFactory.create(new ModalInjector(this.injector, configMap));
+            this.appRef.attachView(backdropRef.hostView);
         }
 
+        // Subscribe to close of modalRef
+        const refSub = modalRef.afterClosed.subscribe(() => {
+            this.destroyModalComponent(componentRef);
+            refSub.unsubscribe();
+        }, () => {
+            this.destroyModalComponent(componentRef);
+            refSub.unsubscribe();
+        });
 
+        // Assign component attributes
+        const configObj = Object.assign({}, modalConfig);
+        Object.keys(configObj).forEach(key => {
+            if (key !== 'data') {
+                componentRef.instance[key] = configObj[key];
+
+                if (modalConfig.hasBackdrop) {
+                    backdropRef.instance[key] = configObj[key];
+                }
+            }
+        });
+        componentRef.instance.childComponentType = contentType;
+        componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
+        componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
+        componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
+        componentRef.location.nativeElement.style.maxHeight = configObj.maxHeight;
+
+        // Render container
+        const containerEl = (containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        document.body.appendChild(containerEl);
+
+        // Render backdrop
+        if (modalConfig.hasBackdrop) {
+            const domBackdrop = (backdropRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+            containerRef.location.nativeElement.appendChild(domBackdrop);
+        }
+
+        // Render modal
+        const domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        containerRef.location.nativeElement.appendChild(domElement);
+
+        this.modals.push({modalRef: componentRef, backdropRef: backdropRef, containerRef: containerRef});
+        return modalRef;
     }
 
     private destroyModalComponent(modal: ComponentRef<ModalComponent>) {
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
+        const indexOf = this.modals.indexOf(arrayRef);
         this.appRef.detachView(arrayRef.modalRef.hostView);
-        this.appRef.detachView(arrayRef.overlayRef.hostView);
+        this.appRef.detachView(arrayRef.containerRef.hostView);
+        arrayRef.containerRef.destroy();
         arrayRef.modalRef.destroy();
-        arrayRef.overlayRef.destroy();
-        this.modals[this.modals.indexOf(arrayRef)] = null;
-        this.modals = this.modals.filter(item => item !== null && item !== undefined);
 
-        if (this.modalContainerRef && (!this.modals || this.modals.length === 0)) {
-            this.destroyModalContainer();
+        if (arrayRef.backdropRef) {
+            this.appRef.detachView(arrayRef.backdropRef.hostView);
+            arrayRef.backdropRef.destroy();
         }
-    }
 
-    private openModalContainer(): void {
-        const factory = this.componentFactoryResolver.resolveComponentFactory(ModalContainerComponent);
-        const componentRef = factory.create(this.injector);
-        this.appRef.attachView(componentRef.hostView);
-
-        const domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        document.body.appendChild(domElement);
-        this.modalContainerRef = componentRef;
-    }
-
-    private destroyModalContainer(): void {
-        this.appRef.detachView(this.modalContainerRef.hostView);
-        this.modalContainerRef.destroy();
-        this.modalContainerRef = undefined;
+        this.modals[indexOf] = null;
+        this.modals = this.modals.filter(item => item !== null && item !== undefined);
     }
 
 }

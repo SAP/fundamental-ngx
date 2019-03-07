@@ -13,7 +13,8 @@ import { Component } from '@angular/core';
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 1000;
         }
     `]
 })
-export class ModalContainerComponent {}
+export class ModalContainer {}

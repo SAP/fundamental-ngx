@@ -13,9 +13,8 @@ export class ModalComponentAsContentExampleComponent {
 
     openComponentAsContentModal() {
         this.modalRef = this.modalService.open(ModalContentComponent, {
-            title: 'Modal Title'
+            data: {title: 'hello'}
         });
-        this.modalRef.instance.description = 'This modal was opened by passing the component to the modal open function.';
     }
     constructor(private modalService: ModalService) {}
 }

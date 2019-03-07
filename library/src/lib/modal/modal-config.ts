@@ -1,20 +1,18 @@
 export class ModalConfig {
     id?: string;
-
-    width?: number;
-    height?: number;
-    minWidth?: number;
-    minHeight?: number;
-    maxWidth?: number;
-    maxHeight?: number;
-
-    ariaLabel?: string;
-    ariaLabelledBy?: string;
-
-    hasBackdrop?: boolean;
+    width?: string;
+    height?: string;
+    minWidth?: string;
+    minHeight?: string;
+    maxWidth?: string;
+    maxHeight?: string;
+    ariaLabel?: string = null;
+    ariaLabelledBy?: string = null;
+    ariaDescribedBy?: string = null;
+    hasBackdrop?: boolean = true;
     backdropClass?: string = '';
     backdropClickCloseable?: boolean = true;
     escKeyCloseable?: boolean = true;
-
+    focusTrapped?: boolean = true;
     data?: any;
 }

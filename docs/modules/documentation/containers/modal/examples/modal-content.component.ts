@@ -1,24 +1,27 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
-import { ModalComponent } from '../../../../../../library/src/lib/modal/modal.component';
+import { ModalRef } from '../../../../../../library/src/lib/modal/modal-ref';
 
 @Component({
     selector: 'fd-modal-content',
-    template: `<fd-modal #modal>
+    template: `
         <fd-modal-header>
-            {{title}}
+            {{modalRef.data.title}}
         </fd-modal-header>
         <fd-modal-body>
-            {{description}}
-        </fd-modal-body>
-    </fd-modal>`
+            oh hi :D
+            <separator></separator>
+            <button fd-button>button 1</button>
+            <button fd-button>button 2</button>
+            <button fd-button>button 3</button>
+            <button fd-button>button 4</button>
+        </fd-modal-body>`
 })
 export class ModalContentComponent {
-    @ViewChild('modal') modal: ModalComponent;
 
     @Input() description: string;
 
     @Input() title = 'Modal Content';
 
-    constructor(public modalService: ModalService)  {}
+    constructor(public modalService: ModalService, public modalRef: ModalRef)  {}
 }
