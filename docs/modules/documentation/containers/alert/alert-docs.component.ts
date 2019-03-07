@@ -6,6 +6,7 @@ import * as alertExampleHtml from '!raw-loader!./examples/alert-example.componen
 import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.ts';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
+import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
 
 @Component({
@@ -20,13 +21,25 @@ export class AlertDocsComponent {
                 properties: {
                     dismissible: {
                         type: 'boolean'
+                    },
+                    mousePersist: {
+                        type: 'boolean'
+                    },
+                    width: {
+                        type: 'string'
+                    },
+                    message: {
+                        type: 'string'
+                    },
+                    duration: {
+                        type: 'string'
                     }
                 }
             },
             modifier: {
                 type: 'object',
                 properties: {
-                    block: {
+                    type: {
                         type: 'string',
                         enum: ['default', 'warning', 'error', 'success', 'information']
                     }
@@ -40,20 +53,22 @@ export class AlertDocsComponent {
 
     data: any = {
         properties: {
-            dismissible: true
+            dismissible: true,
+            width: '100%',
+            message: 'This is an alert message.',
+            duration: 10000,
+            mousePersist: true
         },
         modifier: {
-            block: 'default'
+            type: 'default'
         }
     };
-
-    messagePart1: String = 'This is the ';
-    messagePart2: String = ' alert style.';
 
     alertHtml = alertExampleHtml;
     alertTs = alertExampleTs;
     alertContentTs = alertContent;
     alertComponentAsContentTs = alertComponentAsContentExample;
+    alertComponentAsContentHtml = alertComponentAsContentExampleH;
     alertInlineHtml = alertInlineExampleHtml;
 
     constructor(private schemaFactory: SchemaFactoryService) {
@@ -62,9 +77,5 @@ export class AlertDocsComponent {
 
     onSchemaValues(data) {
         this.data = data;
-    }
-
-    closeAlert(id: string) {
-        alert(`Alert with id ${id} has triggered a close event!`);
     }
 }

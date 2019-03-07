@@ -1,28 +1,15 @@
-<fd-alert [dismissible]="true" [type]="'warning'" (close)="closeAlert($event)" #warningAlert>
-    A dismissible warning type alert.
+<fd-alert [type]="'warning'">
+    A dismissible warning alert.
 </fd-alert>
-<fd-alert [dismissible]="true" [type]="'success'" (close)="closeAlert($event)" [id]="'success_alert_1'" #successAlert>
-    A success type alert.
+<fd-alert [type]="'success'" [dismissible]="false" >
+    A non-dismissible success alert.
 </fd-alert>
-<fd-alert [dismissible]="true" [type]="'information'" (close)="closeAlert($event)" [id]="'information_alert_1'" #informationAlert>
-    A dismissible information type alert.
+<fd-alert [type]="'information'">
+    A dismissible information alert.
 </fd-alert>
-<fd-alert [dismissible]="true" [persist]="true" [type]="'error'" (close)="closeAlert($event)" #errorAlert>
-    <div>
-        <h3>A dismissible error type alert with template.</h3>
-        <p>This alert uses <code>[persist]="true"</code> and will not disappear automatically.</p>
-    </div>
+<fd-alert [type]="'error'" [dismissible]="false">
+    A non-dismissible error alert.
 </fd-alert>
-<fd-alert [dismissible]="false" [visibleTime]="5000" #normalAlert>
-    A normal type alert.  This alert uses <code>[visibleTime]="5000"</code> and will only be visible for 5 seconds.
+<fd-alert>
+    A dismissible normal alert.
 </fd-alert>
-<fd-alert [dismissible]="false" [mousePersist]="true" #linkAlert>
-    <p>An alert with a <a href="#" class="fd-link">link <fd-icon [glyph]="'arrow-right'" [size]="'s'"></fd-icon></a><p>
-    <p>This alert uses <code>[mousePersist]="true"</code>.  This alert will remain visible while the mouse is hovered over it.
-</fd-alert>
-<button fd-button (click)="showAlert(warningAlert)">Show Dismissible Warning Alert</button>
-<button fd-button (click)="showAlert(successAlert)">Show Success Alert</button>
-<button fd-button (click)="showAlert(informationAlert)">Show Dismissible Information Alert</button>
-<button fd-button (click)="showAlert(errorAlert)">Show Error Alert with Template</button>
-<button fd-button (click)="showAlert(normalAlert)">Show Normal Alert</button>
-<button fd-button (click)="showAlert(linkAlert)">Show Link Alert</button>

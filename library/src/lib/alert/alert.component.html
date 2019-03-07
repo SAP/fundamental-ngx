@@ -1,17 +1,8 @@
-<div (mouseenter)="handleAlertMouseEvent($event)" (mouseleave)="handleAlertMouseEvent($event)"
-     class="fd-alert" role="alert" [attr.id]="getId()" [ngClass]="{'fd-alert--dismissible': dismissible,
-        'fd-alert--warning': (type === 'warning'),
-        'fd-alert--error': (type === 'error'),
-        'fd-alert--information': (type === 'information'),
-        'fd-alert--success': (type === 'success'),
-        'fd-alert-show': show,
-        'fd-alert-float': !inline,
-        'fd-alert-fade': !inline}" #alertDiv>
-    <button class="fd-alert__close"
-            *ngIf="dismissible"
-            (click)="handleClose(undefined, undefined, 0)"
-            [attr.aria-controls]="id"
-            aria-label="Close">
-    </button>
-    <ng-content></ng-content>
-</div>
+<button class="fd-alert__close"
+        *ngIf="dismissible"
+        (click)="dismiss(true)"
+        [attr.aria-controls]="id"
+        aria-label="Dismiss">
+</button>
+<ng-container #container>{{message}}</ng-container>
+<ng-content></ng-content>

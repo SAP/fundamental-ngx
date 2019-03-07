@@ -3,27 +3,46 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { AlertComponent } from './alert.component';
 import { HashService } from '../utils/hash.service';
 import { AlertService } from './alert.service';
+import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
+import { AlertContainerComponent } from './alert-container.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+@Component({
+    template: `        
+            <ng-template #testTemplate let-alert>
+                <h1>test</h1>
+            </ng-template>
+    `
+})
+class TemplateTestComponent {
+    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+}
+
+@NgModule({
+    declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
+    imports: [CommonModule, BrowserModule, NoopAnimationsModule],
+    providers: [AlertService, HashService],
+    entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
+})
+class TestModule {}
 
 describe('AlertComponent', () => {
     let component: AlertComponent;
     let fixture: ComponentFixture<AlertComponent>;
+    let service: AlertService;
 
     beforeEach(async(() => {
-        const hashSpy = jasmine.createSpyObj('HashService', ['hash']);
-        const alertServiceSpy = jasmine.createSpyObj('AlertService', ['open', 'popAlert']);
-
         TestBed.configureTestingModule({
-            declarations: [AlertComponent],
-            providers: [
-                { provide: HashService, useValue: hashSpy },
-                { provide: AlertService, useValue: alertServiceSpy }
-            ]
+            imports: [TestModule],
         }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AlertComponent);
         component = fixture.componentInstance;
+        service = TestBed.get(AlertService);
         fixture.detectChanges();
     });
 
@@ -31,61 +50,80 @@ describe('AlertComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should get an ID and handle the close event for that ID', () => {
+    it('should get generated id', () => {
         component.ngOnInit();
-        expect(component.generatedId).toBeDefined();
-        // tslint:disable-next-line:no-shadowed-variable
-        component.close.subscribe(id => expect(id).toBe(component.id));
-        component.handleClose();
-        component.id = 'someId';
-        const id = component.getId();
-        expect(id).toEqual('someId');
+        expect(component.id).toBeDefined();
     });
 
-    it('should handle open function', fakeAsync(() => {
+    it('should load child component', () => {
+        spyOn<any>(component, 'loadFromComponent').and.callThrough();
+        component.childComponentType = TemplateTestComponent;
         component.ngOnInit();
-        spyOn(component, 'getTop').and.returnValue('10px');
-        spyOn(component, 'handleClose');
+        component.ngAfterViewInit();
+        expect((component as any).loadFromComponent).toHaveBeenCalled();
+        expect(component.componentRef).toBeTruthy();
+    });
+
+    it('should load child template', () => {
+        spyOn<any>(component, 'loadFromTemplate').and.callThrough();
+        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        component.ngOnInit();
+        component.ngAfterViewInit();
+        expect((component as any).loadFromTemplate).toHaveBeenCalled();
+        expect(component.componentRef).toBeTruthy();
+    });
+
+    it('should load child string', () => {
+        const tester = 'teststring';
+        spyOn<any>(component, 'loadFromString').and.callThrough();
+        component.childComponentType = tester;
+        component.ngOnInit();
+        component.ngAfterViewInit();
+        expect((component as any).loadFromString).toHaveBeenCalled();
+        expect(component.message).toBe(tester);
+    });
+
+    it('should dismiss', () => {
         component.open();
-        expect(component.getTop).toHaveBeenCalled();
-        expect(component.alertDiv.nativeElement.style.display).toEqual('block');
-        expect(component.alertDiv.nativeElement.style.top).toEqual('10px');
-        expect(component.show).toBeTruthy();
+        expect(fixture.nativeElement.style.display).toBe('block');
+        component.dismiss();
+        expect(fixture.nativeElement.style.display).toBe('none');
+    });
+
+    it('should open', () => {
+        component.dismiss();
+        expect(fixture.nativeElement.style.display).toBe('none');
+        component.open();
+        expect(fixture.nativeElement.style.display).toBe('block');
+    });
+
+    it('should persist', fakeAsync(() => {
+        service.open(TemplateTestComponent, {duration: -1});
+        service['alerts'][0].instance.ngOnInit();
+        service['alerts'][0].instance.ngAfterViewInit();
+        fixture.detectChanges();
+        tick(200);
         fixture.whenStable().then(() => {
-            tick(15000);
-            fixture.detectChanges();
-            expect(component.handleClose).toHaveBeenCalled();
-            tick(1000);
-            fixture.detectChanges();
-            expect(component.handleClose).toHaveBeenCalled();
+            expect(service.hasOpenAlerts()).toBe(true);
         });
     }));
 
-    it('should handle open function when mousePersist is true', fakeAsync(() => {
-        component.ngOnInit();
-        spyOn(component, 'handleClose');
-        component.mousePersist = true;
-        component.open();
-        component.mouseInAlert = true;
+    it('should support visibleTime', fakeAsync(() => {
+        service.open(TemplateTestComponent, {duration: 10});
+        service['alerts'][0].instance.ngOnInit();
+        service['alerts'][0].instance.ngAfterViewInit();
+        fixture.detectChanges();
+        expect(service.hasOpenAlerts()).toBe(true);
+        tick(20);
         fixture.whenStable().then(() => {
-            tick(15000);
-            expect(component.handleClose).not.toHaveBeenCalled();
-            component.mouseInAlert = false;
-            tick(600);
-            expect(component.handleClose).toHaveBeenCalled();
+            expect(service.hasOpenAlerts()).toBe(false);
         });
     }));
-
-    it('should handle getTop function', () => {
-        spyOn(document, 'querySelectorAll').and.returnValue([{ style: { display: 'block' }, offsetHeight: 10 }]);
-        const retVal = component.getTop();
-        expect(retVal).toEqual('30px');
-    });
 
     it('should handle mouseenter/mouseleave events', () => {
-        component.handleAlertMouseEvent({ type: 'mouseenter' });
+        component.handleAlertMouseEvent({type: 'mouseenter'});
         expect(component.mouseInAlert).toBeTruthy();
-        component.handleAlertMouseEvent({ type: 'mouseleave' });
+        component.handleAlertMouseEvent({type: 'mouseleave'});
         expect(component.mouseInAlert).toBeFalsy();
     });
 });

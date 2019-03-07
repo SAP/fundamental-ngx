@@ -4,32 +4,46 @@ import { AlertContentComponent } from './alert-content.component';
 
 @Component({
     selector: 'fd-alert-component-as-content-example',
-    template: `
-        <button fd-button (click)="openWarningComponentAsContentAlert()">Launch Warning Component As Content Alert</button>
-        <button fd-button (click)="openErrorComponentAsContentAlert()">Launch Error Component As Content Alert</button>
-    `,
-    styles: [
-        `
-            .fd-button {
-                display: block;
-                margin: 10px;
-            }
-        `
-    ]
+    templateUrl: './alert-component-as-content-example.component.html',
+    styles: ['button {margin-right: 12px;}']
 })
 export class AlertComponentAsContentExampleComponent {
-    openWarningComponentAsContentAlert() {
+
+    constructor(public alertService: AlertService) {}
+
+    openFromComponent() {
         this.alertService.open(AlertContentComponent, {
-            alertText: 'Example Warning Alert Text',
-            alertType: 'warning'
+            type: 'warning',
+            mousePersist: true,
+            duration: 7500,
+            data: {
+                label: 'This alert was opened by providing a component as content!'
+            }
         });
     }
 
-    openErrorComponentAsContentAlert() {
-        this.alertService.open(AlertContentComponent, {
-            alertText: 'Example Error Alert Text',
-            alertType: 'error'
+    openFromString() {
+        const alertContent = 'This is the content! The alert is not dismissible, but will disappear after 7500ms.';
+        this.alertService.open(alertContent, {
+            type: 'information',
+            dismissible: false,
+            duration: 7500
         });
     }
-    constructor(private alertService: AlertService) {}
+
+    openFromTemplate(template): void {
+        const alertRef = this.alertService.open(template, {
+            type: 'success',
+            duration: -1,
+            data: {
+                firstLine: 'This alert passes data to the template.',
+                secondLine: 'It also has [duration]="-1" and will not disappear automatically.'
+            }
+        });
+
+        alertRef.afterDismissed.subscribe(() => {
+            // Do something after closing
+            // You can also manually close this alert using alertRef.dismiss()
+        });
+    }
 }
