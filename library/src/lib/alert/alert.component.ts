@@ -1,137 +1,188 @@
 import {
     Component,
-    EventEmitter,
     Input,
     OnInit,
-    Output,
-    Inject,
     ElementRef,
     ChangeDetectorRef,
-    ViewChild
+    ViewChild,
+    ComponentFactoryResolver,
+    ComponentRef,
+    Type,
+    AfterViewInit,
+    ViewContainerRef,
+    TemplateRef,
+    Optional,
+    EmbeddedViewRef,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
-import { AlertService } from './alert.service';
-import { Subject } from 'rxjs';
+import { AlertRef } from './alert-ref';
+import { alertFadeNgIf } from './alert-animations';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Component({
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    providers: [HashService]
+    providers: [HashService],
+    host: {
+        '[attr.aria-labelledby]': 'ariaLabelledBy',
+        '[attr.aria-label]': 'ariaLabel',
+        '[style.width]': 'width',
+        'role': 'alert',
+        '[attr.id]': 'id',
+        '(mouseenter)': 'handleAlertMouseEvent($event)',
+        '(mouseleave)': 'handleAlertMouseEvent($event)',
+        '[@fadeAlertNgIf]': ''
+    },
+    animations: [
+        alertFadeNgIf
+    ]
 })
-export class AlertComponent implements OnInit {
-    afterClosed = new Subject<any>();
+export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
-    @Input() dismissible: boolean;
+    @ViewChild('container', {read: ViewContainerRef})
+    containerRef: ViewContainerRef;
 
-    @Input() type: string;
+    @Input()
+    dismissible: boolean = true;
 
-    @Input() id: string;
+    @Input()
+    type: string;
 
-    @Output() close = new EventEmitter<string>();
+    @Input()
+    id: string;
 
-    @Input() inline: boolean = false;
+    @Input()
+    persist: boolean = false;
 
-    @Input() persist: boolean = false;
+    @Input()
+    duration: number = 10000;
 
-    @Input() visibleTime: number = 10000;
+    @Input()
+    mousePersist: boolean = false;
 
-    @Input() mousePersist: boolean = false;
+    @Input()
+    ariaLabelledBy: string = null;
+
+    @Input()
+    ariaLabel: string = null;
+
+    @Input()
+    width: string;
+
+    @Input()
+    message: string;
+
+    @Output()
+    onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     mouseInAlert: boolean = false;
+    componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
+    childComponentType: Type<any> | TemplateRef<any> | string;
 
-    show: boolean = false;
-
-    generatedId: string;
-
-    @ViewChild('alertDiv') alertDiv;
-
-    constructor(@Inject(HashService) private hasher: HashService,
+    constructor(private hasher: HashService,
                 private elRef: ElementRef,
-                private alertService: AlertService,
-                private cd: ChangeDetectorRef) {}
+                private cdRef: ChangeDetectorRef,
+                private componentFactoryResolver: ComponentFactoryResolver,
+                @Optional() private alertRef: AlertRef) {
+        super(elRef);
+    }
 
-    ngOnInit() {
-        this.generatedId = this.hasher.hash();
-        /*
-         modal should be hidden on init
-         */
-        if (!this.inline) {
-            this.elRef.nativeElement.style.display = 'none';
-            this.alertDiv.nativeElement.style.display = 'none';
+    ngOnInit(): void {
+        if (!this.id) {
+            this.id = this.hasher.hash();
+        }
+
+        if (this.alertRef) {
+            this.open();
+        }
+        this._setProperties();
+    }
+
+    ngAfterViewInit(): void {
+        if (this.childComponentType) {
+            if (this.childComponentType instanceof Type) {
+                this.loadFromComponent(this.childComponentType);
+            } else if (this.childComponentType instanceof TemplateRef) {
+                this.loadFromTemplate(this.childComponentType);
+            } else {
+                this.loadFromString(this.childComponentType);
+            }
+            this.cdRef.detectChanges();
         }
     }
 
-    getId() {
-        if (this.id) {
-            return this.id;
+    dismiss(manualDismiss: boolean = false): void {
+        if (manualDismiss) {
+            this.elRef.nativeElement.style.display = 'none';
+        }
+        if (this.alertRef) {
+            this.alertRef.dismiss();
         } else {
-            return this.generatedId;
-        }
-    }
-
-    handleClose(result?, fromService?, timeout?) {
-        if (!timeout && timeout !== 0) {
-            timeout = 750;
-        }
-        this.show = false;
-        this.close.emit(this.id);
-        setTimeout(() => {
             this.elRef.nativeElement.style.display = 'none';
-            this.alertDiv.nativeElement.style.display = 'none';
-            if (!fromService && !this.inline) {
-                this.alertService.popAlert();
-            }
-            this.afterClosed.next();
-        }, timeout)
+        }
+        this.onDismiss.emit();
     }
 
-    open() {
-        // check to make sure this alert is not already opened
-        if (this.elRef.nativeElement.style.display !== 'block') {
-            this.show = true;
-            this.cd.detectChanges();
-            const top = this.getTop();
-            this.elRef.nativeElement.style.display = 'block';
-            this.alertDiv.nativeElement.style.display = 'block';
-            this.alertDiv.nativeElement.style.top = top;
-            if (!this.persist) {
-                setTimeout(() => {
-                    if (this.mousePersist) {
-                        const wait = () => {
-                            if (this.mouseInAlert === true) {
-                                setTimeout(wait, 500);
-                            } else {
-                                this.handleClose();
-                            }
-                        }
-                        wait();
-                    } else {
-                        this.handleClose();
-                    }
-                }, this.visibleTime);
+    open(): void {
+        if (!this.alertRef) {
+            if (this.elRef.nativeElement.style.display === 'block') {
+                return;
             }
+            this.elRef.nativeElement.style.display = 'block';
+        }
+
+        if (this.duration >= 0) {
+            setTimeout(() => {
+                if (this.mousePersist) {
+                    const wait = () => {
+                        if (this.mouseInAlert === true) {
+                            setTimeout(wait, 500);
+                        } else {
+                            this.dismiss();
+                        }
+                    };
+                    wait();
+                } else {
+                    this.dismiss();
+                }
+            }, this.duration);
         }
     }
 
-    getTop() {
-        // get the heights of each visible alert and return the top of the new alert
-        const alerts = document.querySelectorAll('.fd-alert');
-        const openAlerts = Array.prototype.filter.call(alerts, function(alert) {
-            return alert.style.display === 'block';
-        });
-        let totalOffsetHeight = 10;
-        openAlerts.forEach((alert) => {
-            totalOffsetHeight = totalOffsetHeight + alert.offsetHeight + 10;
-        });
-        return totalOffsetHeight + 'px';
-    }
-
-    handleAlertMouseEvent(event) {
+    handleAlertMouseEvent(event): void {
         if (event.type === 'mouseenter') {
             this.mouseInAlert = true;
         } else if (event.type === 'mouseleave') {
             this.mouseInAlert = false;
         }
     }
+
+    _setProperties(): void {
+        this._addClassToElement('fd-alert');
+        if (this.type) {
+            this._addClassToElement('fd-alert--' + this.type);
+        }
+    }
+
+    private loadFromTemplate(template: TemplateRef<any>): void {
+        const context = {
+            $implicit: this.alertRef
+        };
+        this.componentRef = this.containerRef.createEmbeddedView(template, context);
+    }
+
+    private loadFromComponent(componentType: Type<any>): void {
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
+        this.containerRef.clear();
+        this.componentRef = this.containerRef.createComponent(componentFactory);
+    }
+
+    private loadFromString(contentString: string): void {
+        this.containerRef.clear();
+        this.message = contentString;
+    }
+
 }

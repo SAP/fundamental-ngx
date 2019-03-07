@@ -5,11 +5,13 @@ import { UtilsModule } from '../utils/utils.module';
 
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert.service';
+import { AlertContainerComponent } from './alert-container.component';
 
 @NgModule({
-    declarations: [AlertComponent],
+    declarations: [AlertComponent, AlertContainerComponent],
     imports: [CommonModule, IconModule, UtilsModule],
-    exports: [AlertComponent],
+    exports: [AlertComponent, AlertContainerComponent],
+    entryComponents: [AlertContainerComponent, AlertComponent],
     providers: [AlertService]
 })
 export class AlertModule {}

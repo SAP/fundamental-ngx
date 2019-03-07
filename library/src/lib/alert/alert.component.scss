@@ -1,23 +1,11 @@
+:host {
+    display: block;
+}
+
 .fd-alert {
     .fd-popover__body {
         position: fixed;
         top: auto;
         left: auto;
     }
-}
-.fd-alert-float {
-    display: block;
-    position: fixed;
-    max-width: 33%;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    z-index: 1000;
-}
-.fd-alert-show {
-    opacity: 1 !important;
-}
-.fd-alert-fade {
-    opacity: 0;
-    transition: opacity .75s ease-in-out;
 }

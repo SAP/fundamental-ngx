@@ -1,5 +1,5 @@
 <fd-menu>
-    <fd-menu-list>
+    <ul fd-menu-list>
         <li fd-menu-item>
             <a [attr.href]="'#'">Option 1</a>
         </li>
@@ -9,12 +9,12 @@
         <li fd-menu-item>
             Option 3
         </li>
-    </fd-menu-list>
+    </ul>
     <fd-menu-group>
-        <fd-menu-title>
+        <h1 fd-menu-title>
             Group header
-        </fd-menu-title>
-        <fd-menu-list>
+        </h1>
+        <ul fd-menu-list>
             <li fd-menu-item>
                 <a [attr.href]="'#'">Option 4</a>
             </li>
@@ -24,6 +24,6 @@
             <li fd-menu-item>
                 Option 6
             </li>
-        </fd-menu-list>
+        </ul>
     </fd-menu-group>
 </fd-menu>
