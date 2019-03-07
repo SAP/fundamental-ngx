@@ -1,29 +1,127 @@
+import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { ModalService } from './modal.service';
-import { TestBed } from '@angular/core/testing';
-import { ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
+import { ModalModule } from './modal.module';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ModalRef } from './modal-ref';
+
+@Component({
+    template: `        
+            <ng-template #testTemplate let-alert>
+                <h1>test</h1>
+            </ng-template>
+    `
+})
+class TemplateTestComponent {
+    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+}
+
+@NgModule({
+    declarations: [TemplateTestComponent],
+    imports: [CommonModule, BrowserModule, ModalModule],
+    providers: [ModalService],
+    entryComponents: [TemplateTestComponent]
+})
+class TestModule {}
 
 describe('ModalService', () => {
-    let service, cfrMock, appRefMock, injectorMock;
-    cfrMock = jasmine.createSpyObj('ComponentFactoryResolver', ['']);
-    appRefMock = jasmine.createSpyObj('ApplicationRef', ['']);
-    injectorMock = jasmine.createSpyObj('Injector', ['']);
+    let service: ModalService;
+
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [
-                { provide: 'ComponentFactoryResolver', useFactory: (() => cfrMock ) },
-                { provide: 'ApplicationRef', useFactory: (() => appRefMock ) },
-                { provide: 'Injector', useFactory: (() => injectorMock ) }
-            ]
+            imports: [TestModule]
         }).compileComponents();
 
-        service = new ModalService(cfrMock, appRefMock, injectorMock);
+        service = TestBed.get(ModalService);
     });
 
-    it('should handle modal open and close', () => {
-        const modalRefSpy = jasmine.createSpyObj(['open', 'close']);
-        service.open(modalRefSpy);
-        expect(modalRefSpy.open).toHaveBeenCalled();
-        service.close();
-        expect(modalRefSpy.close).toHaveBeenCalled();
+    it('should create', () => {
+        expect(service).toBeDefined();
     });
+
+    it('should open modal from template', () => {
+        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+        expect(service['modals'].length).toBe(0);
+
+        const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        const modalRef: ModalRef = service.open(fixtureElTmp);
+        expect(service['modals'].length).toBe(1);
+        expect(service['modals'][0].modalRef).toBeTruthy();
+        expect(service['modals'][0].containerRef).toBeTruthy();
+        expect(service['modals'][0].backdropRef).toBeTruthy();
+
+        modalRef.dismiss();
+        expect((service as any).destroyModalComponent).toHaveBeenCalled();
+        expect(service['modals'].length).toBe(0);
+    });
+
+    it('should open modal from component', () => {
+        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+        expect(service['modals'].length).toBe(0);
+
+        const modalRef: ModalRef = service.open(TemplateTestComponent);
+        expect(service['modals'].length).toBe(1);
+        expect(service['modals'][0].modalRef).toBeTruthy();
+        expect(service['modals'][0].containerRef).toBeTruthy();
+        expect(service['modals'][0].backdropRef).toBeTruthy();
+
+        modalRef.dismiss();
+        expect((service as any).destroyModalComponent).toHaveBeenCalled();
+        expect(service['modals'].length).toBe(0);
+    });
+
+    it('should support disabled backdrop', () => {
+        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+        expect(service['modals'].length).toBe(0);
+
+        const modalRef: ModalRef = service.open(TemplateTestComponent, {hasBackdrop: false});
+        expect(service['modals'].length).toBe(1);
+        expect(service['modals'][0].modalRef).toBeTruthy();
+        expect(service['modals'][0].containerRef).toBeTruthy();
+        expect(service['modals'][0].backdropRef).toBeFalsy();
+
+        modalRef.dismiss();
+        expect((service as any).destroyModalComponent).toHaveBeenCalled();
+        expect(service['modals'].length).toBe(0);
+    });
+
+    it('should close modal on backdrop click', fakeAsync(() => {
+        expect(service['modals'].length).toBe(0);
+
+        const modalRef: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: true});
+        expect(service['modals'].length).toBe(1);
+        expect(service['modals'][0].modalRef).toBeTruthy();
+        expect(service['modals'][0].containerRef).toBeTruthy();
+        expect(service['modals'][0].backdropRef).toBeTruthy();
+
+        service['modals'][0].backdropRef.location.nativeElement.click();
+        tick();
+        expect(service['modals'].length).toBe(0);
+
+        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+
+        const modalRef2: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: false});
+        service['modals'][0].backdropRef.location.nativeElement.click();
+        tick();
+        expect((service as any).destroyModalComponent).not.toHaveBeenCalled();
+        expect(service['modals'].length).toBe(1);
+    }));
+
+    it('should dismiss all modals', () => {
+        service.open(TemplateTestComponent);
+        service.open(TemplateTestComponent);
+        service.open(TemplateTestComponent);
+        expect(service['modals'].length).toBe(3);
+
+        service.dismissAll();
+        expect(service['modals'].length).toBe(0);
+    });
+
+    it('should support hasOpenModals', () => {
+        expect(service.hasOpenModals()).toBe(false);
+        service.open(TemplateTestComponent);
+        expect(service.hasOpenModals()).toBe(true);
+    });
+
 });

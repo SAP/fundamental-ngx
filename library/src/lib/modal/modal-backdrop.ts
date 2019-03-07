@@ -1,13 +1,15 @@
 import { Component, ElementRef, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalRef } from './modal-ref';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { modalFadeNgIf } from './modal-animations';
 
 @Component({
     selector: 'fd-modal-overlay',
     template: ``,
     host: {
         class: 'fd-overlay',
-        'tabindex': '-1'
+        'tabindex': '-1',
+        '[@modalFadeNgIf]': ''
     },
     styles: [`        
         :host {
@@ -18,7 +20,10 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
             left: 0;
             z-index: 1000;
         }
-    `]
+    `],
+    animations: [
+        modalFadeNgIf
+    ]
 })
 export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
 

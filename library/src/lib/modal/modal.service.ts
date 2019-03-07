@@ -22,7 +22,6 @@ export class ModalService {
         backdropRef?: ComponentRef<ModalBackdrop>,
         containerRef?: ComponentRef<ModalContainer>
     }[] = [];
-    // private modalContainerRef: ComponentRef<ModalContainer>;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private appRef: ApplicationRef,

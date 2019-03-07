@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { modalFadeNgIf } from './modal-animations';
 
 @Component({
     selector: 'fd-modal-container',
@@ -15,6 +16,12 @@ import { Component } from '@angular/core';
             justify-content: center;
             z-index: 1000;
         }
-    `]
+    `],
+    host: {
+        '[@modalFadeNgIf]': ''
+    },
+    animations: [
+        modalFadeNgIf
+    ]
 })
 export class ModalContainer {}

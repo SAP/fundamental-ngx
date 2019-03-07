@@ -9,6 +9,7 @@
         min-width: inherit;
         max-height: inherit;
         max-width: inherit;
-        display: block;
+        display: flex;
+        overflow: auto;
     }
 }

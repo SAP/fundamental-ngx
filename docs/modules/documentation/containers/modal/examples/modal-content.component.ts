@@ -14,8 +14,19 @@ import { ModalRef } from '../../../../../../library/src/lib/modal/modal-ref';
             <button fd-button>button 1</button>
             <button fd-button>button 2</button>
             <button fd-button>button 3</button>
-            <button fd-button>button 4</button>
-        </fd-modal-body>`
+            <button fd-button (click)="modalRef.close()">Close Modal</button>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+            <div>hello</div>
+        </fd-modal-body>
+        <fd-modal-footer><button fd-button [options]="'emphasized'" (click)="this.modalRef.close()">Close Modal</button></fd-modal-footer>
+    `
 })
 export class ModalContentComponent {
 
@@ -23,5 +34,5 @@ export class ModalContentComponent {
 
     @Input() title = 'Modal Content';
 
-    constructor(public modalService: ModalService, public modalRef: ModalRef)  {}
+    constructor(public modalRef: ModalRef)  {}
 }

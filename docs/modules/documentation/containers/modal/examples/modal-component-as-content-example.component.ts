@@ -13,7 +13,8 @@ export class ModalComponentAsContentExampleComponent {
 
     openComponentAsContentModal() {
         this.modalRef = this.modalService.open(ModalContentComponent, {
-            data: {title: 'hello'}
+            data: {title: 'hello'},
+            maxHeight: '300px'
         });
     }
     constructor(private modalService: ModalService) {}

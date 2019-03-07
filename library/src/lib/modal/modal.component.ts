@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { ModalRef } from './modal-ref';
 import * as createFocusTrap from 'focus-trap';
+import { modalFadeNgIf } from './modal-animations';
 
 @Component({
     selector: 'fd-modal',
@@ -22,21 +23,27 @@ import * as createFocusTrap from 'focus-trap';
     templateUrl: './modal.component.html',
     host: {
         class: 'fd-modal',
+        'role': 'dialog',
+        'aria-modal': 'true',
         '[style.width]': 'width',
         '[style.height]': 'height',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-describedby]': 'ariaDescribedBy',
         '[attr.id]': 'id',
-    }
+        '[@modalFadeNgIf]': ''
+    },
+    animations: [
+        modalFadeNgIf
+    ]
 })
 export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    @Input()
-    id: string;
-
     @ViewChild('vc', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
+
+    @Input()
+    id: string;
 
     @Input()
     width: string;

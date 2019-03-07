@@ -1,17 +1,39 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalComponent } from './modal.component';
 import { ModalService } from './modal.service';
+import { ModalModule } from './modal.module';
+import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+@Component({
+    template: `        
+            <ng-template #testTemplate let-alert>
+                <h1>test</h1>
+            </ng-template>
+    `
+})
+class TemplateTestComponent {
+    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+}
+
+@NgModule({
+    declarations: [TemplateTestComponent],
+    imports: [CommonModule, BrowserModule, ModalModule, NoopAnimationsModule],
+    providers: [ModalService],
+    entryComponents: [TemplateTestComponent]
+})
+class TestModule {}
 
 describe('ModalComponent', () => {
     let component: ModalComponent;
     let fixture: ComponentFixture<ModalComponent>;
-    let modalServiceSpy;
+    let modalService: ModalService;
 
     beforeEach(async(() => {
-        modalServiceSpy = jasmine.createSpyObj('ModalService', ['getModalCount', 'popModal']);
         TestBed.configureTestingModule({
-            declarations: [ModalComponent],
-            providers: [{provide: ModalService, useValue: modalServiceSpy}]
+            imports: [TestModule]
         }).compileComponents();
     }));
 
@@ -19,76 +41,49 @@ describe('ModalComponent', () => {
         fixture = TestBed.createComponent(ModalComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        modalService = TestBed.get(ModalService);
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should set styles', () => {
-        expect(fixture.debugElement.nativeElement.style.display).toBe('none');
-        component.open();
-    });
-
-    it('should handle modal open', () => {
-        spyOn(component, 'focusModal');
-        component.open();
-        expect(component.result).toBeDefined();
-        expect(modalServiceSpy.getModalCount).toHaveBeenCalled();
-        expect(component.focusModal).toHaveBeenCalled();
-        expect(fixture.debugElement.nativeElement.style.display).toBe('block');
-    });
-
-    it('should handle close', () => {
-        component.open();
-        spyOn(component, 'resolve');
-        component.close();
-        expect(fixture.debugElement.nativeElement.style.display).toBe('none');
-        expect(modalServiceSpy.popModal).toHaveBeenCalled();
-        expect(modalServiceSpy.getModalCount).toHaveBeenCalled();
-        expect(component.resolve).toHaveBeenCalled();
-
-    });
-
-    it('should handle dismiss', () => {
-        component.open();
-        spyOn(component, 'reject');
-        component.dismiss();
-        expect(fixture.debugElement.nativeElement.style.display).toBe('none');
-        expect(modalServiceSpy.popModal).toHaveBeenCalled();
-        expect(modalServiceSpy.getModalCount).toHaveBeenCalled();
-        expect(component.reject).toHaveBeenCalled();
-    });
-
-    it('should focus the first element in the modal', () => {
-        const elemSpy = jasmine.createSpyObj(['focus']);
-        spyOn(fixture.debugElement.nativeElement, 'querySelectorAll').and.returnValue([elemSpy]);
-        component.focusModal();
-        expect(elemSpy.focus).toHaveBeenCalled();
-    });
-
-    it('should handle keydown', () => {
-        const elemSpy1 = jasmine.createSpyObj(['focus']);
-        const elemSpy2 = jasmine.createSpyObj(['focus']);
-        spyOn(document, 'activeElement').and.returnValue(elemSpy2);
-        spyOn(fixture.debugElement.nativeElement, 'querySelectorAll').and.returnValue([elemSpy1, elemSpy2]);
-        component.focusModal();
-        component.onModalKeydown({key: 'Tab'});
-        expect(elemSpy1.focus).toHaveBeenCalled();
-    });
-
-    it('should handle sizing', () => {
-        const width = 700;
-        const height = 200;
-        component.width = width + 'px';
-        component.height = height + 'px';
+    it('should generate component', () => {
+        spyOn<any>(component, 'loadFromComponent').and.callThrough();
+        component.childComponentType = TemplateTestComponent;
+        component.ngOnInit();
+        component.ngAfterViewInit();
         fixture.detectChanges();
-        component.open();
-
-        const fdModal = fixture.debugElement.nativeElement.querySelector('.fd-modal');
-        expect(fdModal.offsetWidth).toBe(width);
-
-        const fdModalContent = fixture.debugElement.nativeElement.querySelector('.fd-modal__content');
-        expect(fdModalContent.offsetHeight).toBe(height);
+        expect(component['componentRef']).toBeTruthy();
+        expect((component as any).loadFromComponent).toHaveBeenCalled();
     });
+
+    it('should generate template', () => {
+        spyOn<any>(component, 'loadFromTemplate').and.callThrough();
+        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        component.ngOnInit();
+        component.ngAfterViewInit();
+        fixture.detectChanges();
+        expect(component['componentRef']).toBeTruthy();
+        expect((component as any).loadFromTemplate).toHaveBeenCalled();
+    });
+
+    it('should trap focus', () => {
+        component['focusTrap'] = null;
+        component.focusTrapped = true;
+        expect(component['focusTrap']).toBeFalsy();
+        component.ngOnInit();
+        component.ngAfterViewInit();
+        expect(component['focusTrap']).toBeTruthy();
+    });
+
+    it('should skip trap focus', () => {
+        component['focusTrap'] = null;
+        component.focusTrapped = false;
+        expect(component['focusTrap']).toBeFalsy();
+        component.ngOnInit();
+        component.ngAfterViewInit();
+        expect(component['focusTrap']).toBeFalsy();
+    });
+
 });
