@@ -15,6 +15,9 @@
     { name: 'currentPage', description: 'The current page.  Default is 1.' },
     { name: 'displayTotalItems', description: 'Boolean, when set to true, will display the totalItems property next to the pagination links.  Default is true.'},
     { name: 'displayText', description: 'Text to use for the total items (addresses, products, etc).  Default is \'items\'.'}
+  ],
+  outputs: [
+    { name: 'selected', description: 'Event - fired when a new page is selected, passing the new page number as a parameter.'}
   ]
 }"></properties>
 <separator></separator>
