@@ -4,32 +4,34 @@ import { ModalService } from '../../../../../../library/src/lib/modal/modal.serv
 @Component({
     selector: 'fd-modal-confirmation-example',
     template: `
-    <fd-modal #confirmationModal>
+    <ng-template let-modal #confirmationModal>
         <fd-modal-header>
-            Modal Header/Title
+            Are you sure?
         </fd-modal-header>
         <fd-modal-body>
-            Modal Body
+            This action is permanent and cannot be undone. Do you wish to continue?
         </fd-modal-body>
         <fd-modal-footer>
-            <button fd-button (click)="confirmationModal.close('No')" [options]="'light'">No</button>
-            <button fd-button (click)="confirmationModal.close('Yes')" [fdType]="'main'">Yes</button>
+            <button fd-button (click)="modal.close('No')" [options]="'light'">No</button>
+            <button fd-button (click)="modal.close('Yes')" [fdType]="'main'">Yes</button>
         </fd-modal-footer>
-    </fd-modal>
-    <button fd-button (click)="openConfirmationModal(confirmationModal)">Launch Demo</button>
+    </ng-template>
+    <button fd-button (click)="openModal(confirmationModal)">Open from Template</button>
     <separator *ngIf="confirmationReason"></separator>
     <span>{{confirmationReason}}</span>`
 })
 export class ModalConfirmationExampleComponent {
     confirmationReason: string;
 
-    openConfirmationModal(modalType) {
-        this.modalService.open(modalType).result.then((result) => {
-            this.confirmationReason = 'Modal closed with: ' + result;
-        }, (reason) => {
-            this.confirmationReason = 'Modal dismissed with: ' + reason;
+    constructor(private modalService: ModalService) {}
+
+    openModal(modal): void {
+        const modalRef = this.modalService.open(modal);
+
+        modalRef.afterClosed.subscribe(result => {
+            this.confirmationReason = 'Modal closed with result: ' + result;
+        }, error => {
+            this.confirmationReason = 'Modal dismissed with result: ' + error;
         });
     }
-
-    constructor(private modalService: ModalService) {}
 }
