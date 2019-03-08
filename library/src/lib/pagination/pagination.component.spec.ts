@@ -1,19 +1,62 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PaginationModule } from './pagination.module';
-import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/icon.module';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination.component';
+import { PaginationService } from './pagination.service';
 
 describe('Pagination Test', () => {
-    let fixture: ComponentFixture<PaginationComponent>;
     let component: PaginationComponent;
+    let fixture: ComponentFixture<PaginationComponent>;
+    let paginationServiceSpy: jasmine.SpyObj<PaginationService>;
+
+    beforeEach(async(() => {
+        const paginationSpy = jasmine.createSpyObj('PaginationService', ['getTotalPages', 'getPages']);
+
+        TestBed.configureTestingModule({
+            declarations: [PaginationComponent],
+            providers: [
+                { provide: PaginationService, useValue: paginationSpy }
+            ]
+        }).compileComponents();
+
+        paginationServiceSpy = TestBed.get(PaginationService);
+    }));
 
     beforeEach(() => {
-        const bed = TestBed.configureTestingModule({
-            imports: [ButtonModule, IconModule, PaginationModule]
-        });
-
         fixture = TestBed.createComponent(PaginationComponent);
         component = fixture.componentInstance;
+        component.totalItems = 3;
+        component.currentPage = 1;
+        component.itemsPerPage = 2;
+        fixture.detectChanges();
     });
+
+    it('should handle keypress', () => {
+        const keyboardEvent = new KeyboardEvent('keypress', {
+            code: 'Enter'
+        });
+        spyOn(keyboardEvent, 'preventDefault');
+        spyOn(component, 'goToPage');
+
+        component.onKeypressHandler(1, keyboardEvent);
+
+        expect(keyboardEvent.preventDefault).toHaveBeenCalled();
+        expect(component.goToPage).toHaveBeenCalledWith(1)
+    });
+
+    it('should handle mouseevent', () => {
+        const mouseEvent = new MouseEvent('click');
+        spyOn(mouseEvent, 'preventDefault');
+        spyOn(component.selected, 'emit');
+
+        component.goToPage(1, mouseEvent);
+
+        expect(component.currentPage).toEqual(1);
+        expect(component.selected.emit).toHaveBeenCalledWith(1);
+    });
+
+    it('should get the pagination object for the service', () => {
+        const retVal = component.getPaginationObject();
+
+        expect(retVal).toEqual({totalItems: 3, currentPage: 1, itemsPerPage: 2});
+    });
+
 });

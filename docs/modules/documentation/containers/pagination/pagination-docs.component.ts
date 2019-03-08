@@ -22,6 +22,9 @@ export class PaginationDocsComponent {
                     },
                     currentPage: {
                         type: 'integer'
+                    },
+                    displayText: {
+                        type: 'string'
                     }
                 }
             }
@@ -35,7 +38,8 @@ export class PaginationDocsComponent {
         properties: {
             totalItems: 70,
             itemsPerPage: 2,
-            currentPage: 5
+            currentPage: 5,
+            displayText: 'items'
         }
     };
 

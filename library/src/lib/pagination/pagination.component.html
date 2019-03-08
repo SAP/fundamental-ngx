@@ -1,38 +1,35 @@
-<div class="fd-pagination"
-     *ngIf="pagination.totalItems">
-    <span class="fd-pagination__total">{{ pagination.totalItems }} items</span>
-    <nav class="fd-pagination__nav">
-        <a class="fd-pagination__link fd-pagination__link--previous"
-           tabindex="0"
-           role="button"
-           aria-label="Previous"
-           [attr.aria-disabled]="pagination.currentPage === 1 ? true : null"
-           (keypress)="onKeypressHandler(pagination.currentPage - 1, $event)"
-           (click)="goToPage(pagination.currentPage - 1)">
-        </a>
+<span class="fd-pagination__total" *ngIf="displayTotalItems && totalItems">{{ totalItems }} {{displayText}}</span>
+<nav class="fd-pagination__nav" *ngIf="totalItems && totalItems >= itemsPerPage">
+    <a class="fd-pagination__link fd-pagination__link--previous"
+       tabindex="0"
+       role="button"
+       aria-label="Previous"
+       [attr.aria-disabled]="currentPage === 1 ? true : null"
+       (keypress)="onKeypressHandler(currentPage - 1, $event)"
+       (click)="goToPage(currentPage - 1)">
+    </a>
+    <a class="fd-pagination__link"
+       *ngFor="let page of pages">
         <a class="fd-pagination__link"
-           *ngFor="let page of pages">
-            <a class="fd-pagination__link"
-               tabindex="0"
-               role="button"
-               (keypress)="onKeypressHandler(page, $event)"
-               (click)="goToPage(page, $event)"
-               *ngIf="page !== -1; else more"
-               [attr.aria-selected]="pagination.currentPage === page">{{page}}</a>
-            <ng-template #more>
-                <span class="fd-pagination__link fd-pagination__link--more"
-                      aria-hidden="true"
-                      aria-label="..."
-                      role="presentation"></span>
-            </ng-template>
-        </a>
-        <a class="fd-pagination__link fd-pagination__link--next"
-           aria-label="Next"
            tabindex="0"
            role="button"
-           [attr.aria-disabled]="isLastPage()"
-           (keypress)="onKeypressHandler(pagination.currentPage + 1, $event)"
-           (click)="goToPage(pagination.currentPage + 1)">
-        </a>
-    </nav>
-</div>
+           (keypress)="onKeypressHandler(page, $event)"
+           (click)="goToPage(page, $event)"
+           *ngIf="page !== -1; else more"
+           [attr.aria-selected]="currentPage === page">{{page}}</a>
+        <ng-template #more>
+            <span class="fd-pagination__link fd-pagination__link--more"
+                  aria-hidden="true"
+                  aria-label="..."
+                  role="presentation"></span>
+        </ng-template>
+    </a>
+    <a class="fd-pagination__link fd-pagination__link--next"
+       aria-label="Next"
+       tabindex="0"
+       role="button"
+       [attr.aria-disabled]="isLastPage()"
+       (keypress)="onKeypressHandler(currentPage + 1, $event)"
+       (click)="goToPage(currentPage + 1)">
+    </a>
+</nav>
