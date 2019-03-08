@@ -99,12 +99,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    onFocusHandler() {
-        if (!this.isOpen) {
-            this.isOpen = true;
-        }
-    }
-
     onBlurHandler() {
         if (this.isOpen) {
             if (this.isValidDateInput) {

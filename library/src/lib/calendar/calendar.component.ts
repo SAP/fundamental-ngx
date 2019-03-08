@@ -6,10 +6,12 @@ import {
     Output,
     HostListener,
     ElementRef,
-    Inject,
     forwardRef,
+    Inject,
     OnDestroy,
-    AfterViewChecked, HostBinding
+    AfterViewChecked,
+    ChangeDetectorRef,
+    HostBinding
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -77,6 +79,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     updateDatePickerInput: EventEmitter<any> = new EventEmitter();
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
+
+    @Input()
+    isDateTimePicker: boolean = false;
 
     invalidDate: boolean = false;
 
@@ -159,6 +164,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         selectedLastDay: this.selectedRangeLast
     };
 
+    @Output()
+    closeCalendar = new EventEmitter<any>();
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -184,11 +192,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     };
 
-    populateCalendar(): CalendarDay[] {
-        const idCounter: number = 100;
-        const numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
-        const calendarMonth: CalendarDay[] = [];
-
+    getPreviousMonthDays(calendarMonth) {
         // Previous month days
         let prevMonthLastDate;
         if (this.mondayStartOfWeek) {
@@ -237,6 +241,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
         }
 
+        return calendarMonth;
+    }
+
+    getCurrentMonthDays(calendarMonth) {
+        const numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
         // Current month days
         let foundSelected = false;
         for (let d = 1; d <= numOfDaysInCurrentMonth; d++) {
@@ -294,6 +303,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
         }
 
+
+        return calendarMonth;
+    }
+
+    getNextMonthDays(calendarMonth) {
         // Next month days
         let nextMonthDisplayedDays: number = 0;
 
@@ -352,6 +366,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return calendarMonth;
     }
 
+    populateCalendar(): CalendarDay[] {
+        let calendarMonth: CalendarDay[] = [];
+
+        calendarMonth = this.getPreviousMonthDays(calendarMonth);
+
+        calendarMonth = this.getCurrentMonthDays(calendarMonth);
+
+        calendarMonth = this.getNextMonthDays(calendarMonth);
+
+        return calendarMonth;
+    }
+
     // Construction functions
     constructCalendar(): void {
         const calendarDays = this.populateCalendar();
@@ -362,9 +388,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
 
         this.calendarGrid = calendarGrid;
-
-        // TODO maybe remove?
-        // this.updateDatePickerInputEmitter();
     }
 
     refreshSelected() {
@@ -469,6 +492,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 if (formEvent) {
                     this.onChange({ date: day.date });
                 }
+                this.closeCalendar.emit();
             } else {
                 if (this.selectCounter === 2) {
                     this.selectCounter = 0;
@@ -651,16 +675,37 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.selectYear(year);
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
+            if (this.calendarYearsList.indexOf(year) <= 3) {
+                this.loadPrevYearsList();
+                this.cd.detectChanges();
+            }
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 4);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
+            if (this.calendarYearsList.indexOf(year) >= 8) {
+                this.loadNextYearsList();
+                this.cd.detectChanges();
+            }
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 4);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
+            if (year === this.calendarYearsList[0]) {
+                this.loadPrevYearsList();
+                this.cd.detectChanges();
+            }
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 1);
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
+            if (year === this.calendarYearsList[this.calendarYearsList.length - 1]) {
+                this.loadNextYearsList();
+                this.cd.detectChanges();
+            }
             newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
+        } else if (event.code === 'Tab' && !event.shiftKey) {
+            if (!this.isDateTimePicker) {
+                event.preventDefault();
+                this.focusElement('#arrowLeft');
+            }
         }
         if (newFocusedYearId) {
             this.focusElement(newFocusedYearId);
@@ -680,10 +725,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 4);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
-            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 1);
+            if (month === 0) {
+                newFocusedMonthId = '#' + this.calendarId + '-fd-month-11';
+            } else {
+                newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 1);
+            }
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
-            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
+            if (month === 11) {
+                newFocusedMonthId = '#' + this.calendarId + '-fd-month-0'
+            } else {
+                newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
+            }
+        } else if (event.code === 'Tab' && !event.shiftKey) {
+            if (!this.isDateTimePicker) {
+                event.preventDefault();
+                this.focusElement('#arrowLeft');
+            }
         }
         if (newFocusedMonthId) {
             this.focusElement(newFocusedMonthId);
@@ -691,26 +749,68 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     onKeydownDayHandler(event, cell) {
-        const currentId = parseInt(event.currentTarget.id.split('-').pop(), 10);
-        if (event.code === 'Space' || event.code === 'Enter') {
-            event.preventDefault();
-            this.selectDate(cell);
-            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
-        } else if (event.code === 'ArrowUp') {
-            event.preventDefault();
-            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
-        } else if (event.code === 'ArrowDown') {
-            event.preventDefault();
-            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
-        } else if (event.code === 'ArrowLeft') {
-            event.preventDefault();
-            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
-        } else if (event.code === 'ArrowRight') {
-            event.preventDefault();
-            this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
-        }
-        if (this.newFocusedDayId) {
-            this.focusElement(this.newFocusedDayId);
+        if (event.code === 'Tab' && !event.shiftKey) {
+            if (!this.isDateTimePicker) {
+                event.preventDefault();
+                this.focusElement('#arrowLeft');
+            }
+        } else {
+            // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
+            let lastDay = this.calendarGrid.length === 6 ? 66 : 56;
+            const currentId = parseInt(event.currentTarget.id.split('-').pop(), 10);
+            if (event.code === 'Space' || event.code === 'Enter') {
+                event.preventDefault();
+                this.selectDate(cell);
+                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
+            } else if (event.code === 'ArrowUp') {
+                event.preventDefault();
+                if (currentId >= 10 && currentId <= 16) {
+                    // if first row, go to previous month
+                    this.goToPreviousMonth();
+                    const lastDigit = currentId.toString().split('').pop();
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
+                }
+            } else if (event.code === 'ArrowDown') {
+                event.preventDefault();
+                if (currentId >= lastDay - 6 && currentId <= lastDay) {
+                    // if last row, go to next month
+                    this.goToNextMonth();
+                    const lastDigit = currentId.toString().split('').pop();
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-1' + lastDigit;
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
+                }
+            } else if (event.code === 'ArrowLeft') {
+                event.preventDefault();
+                if (currentId === 10) {
+                    // if the first day is selected, go to the last day of the previous month
+                    this.goToPreviousMonth();
+                    lastDay = this.calendarGrid.length === 6 ? 66 : 56;
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + lastDay;
+                } else if (currentId.toString().split('').pop() === '0') {
+                    // if the last digit is 0, skip to the last day of the previous week
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 4);
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
+                }
+            } else if (event.code === 'ArrowRight') {
+                event.preventDefault();
+                if (currentId === lastDay) {
+                    // if the last day is selected, go to the first day of the next month
+                    this.goToNextMonth();
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-10';
+                } else if (currentId.toString().split('').pop() === '6') {
+                    // else if the last digit is 6, skip to the first day of the next week
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 4);
+                } else {
+                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
+                }
+            }
+            if (this.newFocusedDayId) {
+                this.focusElement(this.newFocusedDayId);
+            }
         }
     }
 
@@ -812,7 +912,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef) {}
+    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef, private cd: ChangeDetectorRef) {
+    }
 
     registerOnChange(fn: any): void {
         this.onChange = fn;

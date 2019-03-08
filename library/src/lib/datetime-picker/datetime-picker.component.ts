@@ -87,12 +87,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    onFocusHandler() {
-        if (!this.isOpen) {
-            this.isOpen = true;
-        }
-    }
-
     onBlurHandler() {
         if (this.isOpen) {
             if (this.isValidDateInput) {
@@ -193,6 +187,10 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
             this.dateChange.emit(this.date);
             this.onChange(this.date);
         }
+    }
+
+    focusArrowLeft() {
+        this.eRef.nativeElement.querySelector('#arrowLeft').focus();
     }
 
 }

@@ -8,20 +8,19 @@
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
                    (change)="getInputValue(datePicker.value)"
-                   (focus)="onFocusHandler()"
                    (blur)="onBlurHandler()"
                    [ngClass]="{ 'fd-input--compact': compact }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
                             (click)="openCalendar(datePicker.value)" aria-label="display calendar toggle"
                             [attr.aria-expanded]="isOpen"></button>
-                </span>
+            </span>
         </div>
     </div>
     <div class="fd-popover__body"
          [attr.aria-expanded]="isOpen"
          [attr.aria-hidden]="!isOpen">
-        <fd-calendar [calType]="type"
+        <fd-calendar (closeCalendar)="isOpen = false;" [calType]="type"
                      [disableFunction]="disableFunction ? disableFunction : null"
                      [blockFunction]="blockFunction ? blockFunction : null"
                      [(selectedDay)]="selectedDay"
