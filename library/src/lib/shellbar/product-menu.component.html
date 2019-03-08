@@ -9,11 +9,11 @@
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu>
-                <fd-menu-list>
+                <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let item of items" (click)="item.callback($event)">
                         {{item.name}}
                     </li>
-                </fd-menu-list>
+                </ul>
             </fd-menu>
         </fd-popover-body>
     </fd-popover>

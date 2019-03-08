@@ -37,6 +37,7 @@ export interface ComponentProperties {
                 font-size: 1rem;
                 vertical-align: text-top;
             }
+            
             .header {
                 margin-bottom: 0.5rem;
             }

@@ -55,18 +55,18 @@ For an existing Angular application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Alerts, add
+    For example, to use Toggles, add
 
     ```javascript
-    import { AlertModule } from 'fundamental-ngx/alert/alert.module';
+    import { ToggleModule } from 'fundamental-ngx/toggle/toggle.module';
     ```
 
-    to the file that declares the module you're adding alerts to. It can also be added to the app module declaration to be used site-wide. You also need to add `AlertModule` to your app or module's `imports` array.
+    to the file that declares the module you're adding toggles to. It can also be added to the app module declaration to be used site-wide. You also need to add `ToggleModule` to your app or module's `imports` array.
 
 4. **Add the component to your HTML.**
 
     ```
-    <fd-alert [dismissible]="true" type="warning" (close)="showAlert($event)"> A warning type alert. </fd-alert>
+    <fd-toggle [size]="'l'" [(ngModel)]="checked">Large Toggle</fd-toggle>
     ```
 
 ## Demo Application

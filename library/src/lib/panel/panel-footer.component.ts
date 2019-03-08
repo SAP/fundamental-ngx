@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'fd-panel-footer',
-    templateUrl: './panel-footer.component.html',
-    host: {
-        class: 'fd-panel__footer'
-    }
+    templateUrl: './panel-footer.component.html'
 })
-export class PanelFooterComponent {}
+export class PanelFooterComponent {
+    @HostBinding('class.fd-panel__footer') true;
+}

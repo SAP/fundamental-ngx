@@ -28,9 +28,11 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @Input()
     id: string;
 
+    @Input()
     checked: boolean = false;
 
-    @Output() onToggle = new EventEmitter<boolean>();
+    @Output()
+    checkedChange = new EventEmitter<boolean>();
 
     onChange: any = () => {};
     onTouched: any = () => {};
@@ -43,7 +45,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
         this.checked = value;
         this.onChange(value);
         this.onTouched();
-        this.onToggle.emit(value);
+        this.checkedChange.emit(value);
     }
 
     writeValue(value: any) {

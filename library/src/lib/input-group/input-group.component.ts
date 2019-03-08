@@ -1,12 +1,8 @@
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { InputGroupSearchComponent } from './input-group-search.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fd-input-group',
-    host: {
-        class: ''
-    },
     templateUrl: './input-group.component.html',
     providers: [
         {

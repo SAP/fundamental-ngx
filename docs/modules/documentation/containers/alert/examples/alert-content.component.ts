@@ -1,18 +1,14 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { AlertComponent } from '../../../../../../library/src/lib/alert/alert.component';
+import { Component } from '@angular/core';
+import { AlertRef } from '../../../../../../library/src/lib/alert/alert-ref';
 
 @Component({
     selector: 'fd-alert-content',
     template: `
-        <fd-alert [dismissible]="true" [type]="alertType" #alert>
-            {{alertText}}
-        </fd-alert>
+        <div>{{ref.data.label}}</div><br/>
+        <div>It will stay open when the mouse is hovered inside.</div><br/>
+        <div>Injecting AlertRef allows you to call <code>dismiss()</code> on the alert or access passed data.</div>
     `
 })
 export class AlertContentComponent {
-    @ViewChild('alert') alert: AlertComponent;
-
-    @Input() alertText: string;
-
-    @Input() alertType: string;
+    constructor(public ref: AlertRef) {}
 }

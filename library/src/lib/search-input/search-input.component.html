@@ -30,7 +30,7 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="(usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText).length">
             <fd-menu>
-                <fd-menu-list>
+                <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let term of (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText)" (click)="onMenuClickHandler($event, term)" (keypress)="onMenuKeypressHandler($event, term)">
                         <a tabindex="0">
                             <div *ngIf="highlight && inputTextValue">
@@ -41,7 +41,7 @@
                             </div>
                         </a>
                     </li>
-                </fd-menu-list>
+                </ul>
             </fd-menu>
         </fd-popover-body>
     </fd-popover>

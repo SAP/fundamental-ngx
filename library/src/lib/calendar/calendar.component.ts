@@ -10,7 +10,8 @@ import {
     Inject,
     OnDestroy,
     AfterViewChecked,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    HostBinding
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -62,6 +63,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     newFocusedDayId: string;
 
     init = false;
+
+    @HostBinding('class.fd-calendar') true;
 
     @Input()
     dateFromDatePicker: BehaviorSubject<any>;
