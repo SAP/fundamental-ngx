@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'fd-menu',
     templateUrl: './menu.component.html',
-    host: {
-        class: 'fd-menu'
-    },
     styles: [':host {display: block;}']
 })
-export class MenuComponent {}
+export class MenuComponent {
+    @HostBinding('class.fd-menu') true;
+}

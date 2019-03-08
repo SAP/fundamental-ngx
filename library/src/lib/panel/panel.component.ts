@@ -1,18 +1,17 @@
-import { Component, ElementRef, Inject, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 @Component({
     selector: 'fd-panel',
     templateUrl: './panel.component.html',
-    host: {
-        class: 'fd-panel'
-    },
     styles: [':host {display: block;}']
 })
 export class PanelComponent extends AbstractFdNgxClass {
     @Input() columnSpan: number;
 
     @Input() backgroundImage: string;
+
+    @HostBinding('class.fd-panel') true;
 
     _setProperties() {
         if (this.columnSpan) {

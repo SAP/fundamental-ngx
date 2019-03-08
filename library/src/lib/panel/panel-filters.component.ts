@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'fd-panel-filters',
     templateUrl: './panel-filters.component.html',
-    host: {
-        class: 'fd-panel__filters'
-    },
     styles: [':host {display: block}']
 })
-export class PanelFiltersComponent {}
+export class PanelFiltersComponent {
+    @HostBinding('class.fd-panel__filters') true;
+}
