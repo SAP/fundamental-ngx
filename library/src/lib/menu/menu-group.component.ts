@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'fd-menu-group',
     templateUrl: './menu-group.component.html',
-    host: {
-        class: 'fd-menu__group'
-    },
     styles: [':host {display: block;}']
 })
-export class MenuGroupComponent {}
+export class MenuGroupComponent {
+    @HostBinding('class.fd-menu__group') true;
+}

@@ -1,4 +1,15 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    HostListener,
+    ElementRef,
+    EventEmitter,
+    Output,
+    forwardRef,
+    ChangeDetectorRef,
+    HostBinding
+} from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -8,8 +19,7 @@ import { BehaviorSubject } from 'rxjs';
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()',
-        class: 'fd-date-picker'
+        '(blur)': 'onTouched()'
     },
     providers: [
         {
@@ -24,6 +34,8 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker = new BehaviorSubject<string>('');
+
+    @HostBinding('class.fd-date-picker') true;
 
     @Input()
     type: CalendarType = 'single';
