@@ -14,6 +14,7 @@ import { DocumentationComponent } from './components/documentation/documentation
 import { PlayGroundComponent } from './components/playground/playground.component';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { CodeExampleComponent } from './components/code-example/code-example.component';
+import { CodeExamplesComponent } from './components/code-examples/code-examples.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
 import { SeparatorComponent } from './components/seperator/seperator.component';
@@ -304,6 +305,7 @@ const ROUTES: Routes = [
         DocumentationComponent,
         PlayGroundComponent,
         CodeExampleComponent,
+        CodeExamplesComponent,
         HeaderComponent,
         DescriptionComponent,
         PropertiesComponent,

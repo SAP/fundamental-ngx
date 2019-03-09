@@ -1,9 +1,19 @@
 <div class="docs-html-example-container">
-    <button fd-button *ngIf="!this.smallScreen" (click)="copyText()" class="docs-example-copy-button" [glyph]="'copy'" [size]="'l'"
-    [title]="'Copy example to clipboard'"></button>
-    <pre>
+    <div class="docs-html-example-container__buttons">
+        <button fd-button (click)="toggleCode()">{{ !showCode ? 'Expand' : 'Collapse' }}</button>
+        <button
+            fd-button
+            [options]="'light'"
+            *ngIf="!this.smallScreen && showCode"
+            (click)="copyText()"
+            class="docs-example-copy-button"
+            [glyph]="'copy'"
+            [title]="'Copy example to clipboard'"
+        >
+            Copy
+        </button>
+    </div>
+    <pre *ngIf="showCode">
         <code mwlHighlightJs [language]="language" [source]="code"></code>
     </pre>
 </div>
-
-

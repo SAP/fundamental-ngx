@@ -62,7 +62,7 @@ fd-card {
 }
 
 pre {
-    margin: 25px 0px;
+    margin: 0;
     background-color: #fff !important;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
@@ -75,8 +75,9 @@ pre {
     line-height: 1.42857143;
     color: #333;
     word-break: break-all;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 
     code {
         display: block;
@@ -84,10 +85,14 @@ pre {
 }
 
 .docs-component {
-    margin-bottom: -28px;
+    //margin-bottom: -28px;
     border-radius: 4px 4px 0 0;
+    // border-bottom-left-radius: 0;
+    // border-bottom-right-radius: 0;
     padding-bottom: 4px;
-    border: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     transition: 0.25s background-color;
 
     pre {
@@ -185,7 +190,7 @@ a:focus {
     }
 
     pre {
-        margin: 25px 0px;
+        margin: 0;
         background-color: #fff !important;
         white-space: pre-wrap;
         white-space: -moz-pre-wrap;
@@ -198,8 +203,9 @@ a:focus {
         line-height: 1.42857143;
         color: #333;
         word-break: break-all;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        border-bottom: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
 
         code {
             display: block;

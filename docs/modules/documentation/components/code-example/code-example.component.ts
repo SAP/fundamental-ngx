@@ -9,6 +9,7 @@ import { CopyService } from '../../services/copy.service';
 export class CodeExampleComponent implements OnInit {
     @Input() code: string;
     @Input() language: string;
+    @Input() showCode: boolean = false;
 
     smallScreen: boolean;
 
@@ -16,6 +17,10 @@ export class CodeExampleComponent implements OnInit {
 
     copyText(): void {
         this.copyService.copyText(this.code);
+    }
+
+    toggleCode() {
+        this.showCode = !this.showCode;
     }
 
     ngOnInit() {
