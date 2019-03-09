@@ -9,7 +9,7 @@ import { modalFadeNgIf } from './modal-animations';
     host: {
         class: 'fd-overlay',
         'tabindex': '-1',
-        '[@modalFadeNgIf]': ''
+        '[@modal-fade]': ''
     },
     styles: [`        
         :host {

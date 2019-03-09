@@ -1,22 +1,22 @@
-import { Component, ViewChild } from '@angular/core';
-import { ModalComponent } from '../../../../../../library/src/lib/modal/modal.component';
-import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
+import { Component } from '@angular/core';
+import { ModalRef } from '../../../../../../library/src/lib/modal/modal-ref';
 
 @Component({
     selector: 'fd-modal-in-modal-second',
     template: `
         <fd-modal-header>
-            yooo
+            <h1 fd-modal-title>Second Modal</h1>
+            <button fd-modal-close-btn (click)="modalRef.dismiss()"></button>
         </fd-modal-header>
         <fd-modal-body>
-            This is the second modal! <br />
-            It needs to be closed before the first modal is closed.
-        </fd-modal-body>`
+            <p>This is the second modal!</p>
+            <p>It is completely independent from the first modal and can be controlled separately!</p>
+        </fd-modal-body>
+        <fd-modal-footer>
+            <button fd-button (click)="modalRef.close()" [options]="'emphasized'">Close</button>
+        </fd-modal-footer>
+    `
 })
 export class ModalInModalSecondComponent {
-
-    @ViewChild('modal') modal: ModalComponent;
-
-
-    constructor(public modalService: ModalService)  {}
+    constructor(public modalRef: ModalRef) {}
 }

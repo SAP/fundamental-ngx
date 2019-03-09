@@ -50,7 +50,7 @@ export class ModalService {
 
         // Prepare container
         const containerFactory = this.componentFactoryResolver.resolveComponentFactory(ModalContainer);
-        const containerRef = containerFactory.create(new ModalInjector(this.injector, configMap));
+        const containerRef = containerFactory.create(this.injector);
         this.appRef.attachView(containerRef.hostView);
 
         // Prepare modal

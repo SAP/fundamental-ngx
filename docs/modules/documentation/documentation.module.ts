@@ -148,7 +148,7 @@ import { LoadingSpinnerExampleComponent } from './containers/loading-spinner-doc
 import { LoadingSpinnerContainerExampleComponent } from './containers/loading-spinner-docs/examples/loading-spinner-container-example.component';
 import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
 import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
-import { ModalConfirmationExampleComponent } from './containers/modal/examples/modal-confirmation-example.component';
+import { ModalOpenTemplateExampleComponent } from './containers/modal/examples/modal-open-template-example.component';
 import { ModalContentComponent } from './containers/modal/examples/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from './containers/modal/examples/modal-component-as-content-example.component';
 import {
@@ -420,7 +420,7 @@ const ROUTES: Routes = [
         MenuExampleComponent,
         MenuGroupExampleComponent,
         ModalExampleComponent,
-        ModalConfirmationExampleComponent,
+        ModalOpenTemplateExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
         ModalInModalComponent,

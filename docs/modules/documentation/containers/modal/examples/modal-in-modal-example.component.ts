@@ -5,14 +5,14 @@ import { ModalInModalComponent } from './modal-in-modal.component';
 @Component({
     selector: 'fd-modal-in-modal-example',
     template: `
-    <button fd-button (click)="openModal()">Launch First Modal</button>`,
+        <button fd-button (click)="openModal()">Open First Modal</button>
+    `,
 })
 export class ModalInModalExampleComponent {
-    modalRef;
 
     constructor(private modalService: ModalService) {}
 
-    openModal() {
-        this.modalRef = this.modalService.open(ModalInModalComponent);
+    openModal(): void {
+        this.modalService.open(ModalInModalComponent);
     }
 }

@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'fd-modal-body',
     templateUrl: './modal-body.component.html',
-    host: {
-        class: 'fd-modal__body'
-    },
     styles: [`
         :host {
             display: block;
             overflow: auto;
+            flex-grow: 1;
         }
     `]
 })
-export class ModalBodyComponent {}
+export class ModalBodyComponent {
+    @HostBinding('class.fd-modal__body') modalBody = true;
+}

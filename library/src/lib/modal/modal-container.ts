@@ -18,7 +18,7 @@ import { modalFadeNgIf } from './modal-animations';
         }
     `],
     host: {
-        '[@modalFadeNgIf]': ''
+        '[@modal-fade]': ''
     },
     animations: [
         modalFadeNgIf

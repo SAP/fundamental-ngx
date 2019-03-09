@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'fd-modal-footer',
     templateUrl: './modal-footer.component.html',
-    host: {
-        class: 'fd-modal__footer'
-    },
     styles: [`
         :host {
             display: block;
@@ -13,4 +10,6 @@ import { Component } from '@angular/core';
         }
     `]
 })
-export class ModalFooterComponent {}
+export class ModalFooterComponent {
+    @HostBinding('class.fd-modal__footer') modalFooter = true;
+}

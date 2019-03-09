@@ -11,7 +11,7 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     EmbeddedViewRef,
-    Optional, ChangeDetectorRef, HostListener, OnDestroy
+    Optional, ChangeDetectorRef, HostListener, OnDestroy, ContentChild, ContentChildren, QueryList, forwardRef
 } from '@angular/core';
 import { ModalRef } from './modal-ref';
 import * as createFocusTrap from 'focus-trap';
@@ -31,7 +31,7 @@ import { modalFadeNgIf } from './modal-animations';
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-describedby]': 'ariaDescribedBy',
         '[attr.id]': 'id',
-        '[@modalFadeNgIf]': ''
+        '[@modal-fade]': ''
     },
     animations: [
         modalFadeNgIf
@@ -125,6 +125,7 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private loadFromTemplate(content: TemplateRef<any>): void {
+        this.containerRef.clear();
         const context = {
             $implicit: this.modalRef
         };

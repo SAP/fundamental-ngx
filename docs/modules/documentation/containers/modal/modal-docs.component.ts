@@ -3,13 +3,15 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as modalSrc from '!raw-loader!./examples/modal-example.component.ts';
-import * as modalConfirmationSrc from '!raw-loader!./examples/modal-confirmation-example.component.ts';
+import * as templateTs from '!raw-loader!./examples/modal-open-template-example.component.ts';
+import * as templateHtml from '!raw-loader!./examples/modal-open-template-example.component.html';
 import * as componentAsContentSrc from '!raw-loader!./examples/modal-component-as-content-example.component.ts';
 import * as contentSrc from '!raw-loader!./examples/modal-content.component.ts';
 import * as modalInModalExample from '!raw-loader!./examples/modal-in-modal-example.component.ts';
 import * as modalInModalComponent from '!raw-loader!./examples/modal-in-modal.component.ts';
 import * as modalInModalSecondComponent from '!raw-loader!./examples/modal-in-modal-second.component.ts';
-import * as fsModalSource from '!raw-loader!./examples/modal-fullscreen-example.component.ts';
+import * as fsModalSource from '!raw-loader!./examples/modal-fullscreen-example.component.html';
+import * as fsModalSourceT from '!raw-loader!./examples/modal-fullscreen-example.component.ts';
 
 @Component({
     selector: 'app-modal',
@@ -56,7 +58,9 @@ export class ModalDocsComponent implements OnInit {
 
     informationalModalSource = modalSrc;
 
-    confirmationModalSource = modalConfirmationSrc;
+    templateModalTs = templateTs;
+
+    templateModalHtml = templateHtml;
 
     componentAsContentSource = componentAsContentSrc;
 
@@ -69,6 +73,8 @@ export class ModalDocsComponent implements OnInit {
     modalInModalSecond = modalInModalSecondComponent;
 
     fullScreenSource = fsModalSource;
+
+    fullScreenSourceTs = fsModalSourceT;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('modal');
