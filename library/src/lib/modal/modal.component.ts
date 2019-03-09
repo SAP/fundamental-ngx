@@ -10,7 +10,7 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     EmbeddedViewRef,
-    ChangeDetectorRef, HostListener, OnDestroy
+    ChangeDetectorRef, HostListener, OnDestroy, Optional
 } from '@angular/core';
 import { ModalRef } from './modal-utils/modal-ref';
 import { modalFadeNgIf } from './modal-utils/modal-animations';
@@ -67,7 +67,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
-                private modalRef: ModalRef) {
+                @Optional() private modalRef: ModalRef) {
         super(elRef);
     }
 

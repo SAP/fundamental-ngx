@@ -29,8 +29,4 @@ describe('ModalHeaderComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should close modal', () => {
-        fixture.nativeElement.querySelector('button').click();
-        expect(modalRef.dismiss).toHaveBeenCalled();
-    });
 });

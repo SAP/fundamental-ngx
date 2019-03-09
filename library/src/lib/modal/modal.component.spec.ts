@@ -6,11 +6,15 @@ import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import createSpyObj = jasmine.createSpyObj;
+import { ModalRef } from './modal-utils/modal-ref';
 
 @Component({
     template: `        
-            <ng-template #testTemplate let-alert>
+            <ng-template #testTemplate let-modal>
                 <h1>test</h1>
+                <a href="#">testLink</a>
+                <button fd-button>testBtn</button>
             </ng-template>
     `
 })
@@ -30,10 +34,12 @@ describe('ModalComponent', () => {
     let component: ModalComponent;
     let fixture: ComponentFixture<ModalComponent>;
     let modalService: ModalService;
+    const modalRef = createSpyObj('modalRef', ['dismiss']);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule]
+            imports: [TestModule],
+            providers: [{provide: ModalRef, useValue: modalRef}]
         }).compileComponents();
     }));
 
@@ -68,22 +74,14 @@ describe('ModalComponent', () => {
         expect((component as any).loadFromTemplate).toHaveBeenCalled();
     });
 
-    it('should trap focus', () => {
-        component['focusTrap'] = null;
-        component.focusTrapped = true;
-        expect(component['focusTrap']).toBeFalsy();
+    it('should close after esc pressed', () => {
+        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngOnInit();
         component.ngAfterViewInit();
-        expect(component['focusTrap']).toBeTruthy();
-    });
-
-    it('should skip trap focus', () => {
-        component['focusTrap'] = null;
-        component.focusTrapped = false;
-        expect(component['focusTrap']).toBeFalsy();
-        component.ngOnInit();
-        component.ngAfterViewInit();
-        expect(component['focusTrap']).toBeFalsy();
+        fixture.detectChanges();
+        expect(component['componentRef']).toBeTruthy();
+        component['elRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', {key: 'Escape'}))
+        expect(modalRef.dismiss).toHaveBeenCalled();
     });
 
 });
