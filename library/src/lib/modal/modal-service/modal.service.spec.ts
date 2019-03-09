@@ -86,6 +86,33 @@ describe('ModalService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
+    it('should support set modal size', fakeAsync(() => {
+        const width = '400px';
+        const height = '200px';
+
+        service.open(TemplateTestComponent, {
+            maxWidth: width,
+            minWidth: width,
+            width: width,
+            maxHeight: height,
+            minHeight: height,
+            height: height
+        });
+
+        expect(service['modals'].length).toBe(1);
+        expect(service['modals'][0].modalRef.location.nativeElement.style.maxWidth).toBe(width);
+        expect(service['modals'][0].modalRef.location.nativeElement.style.minWidth).toBe(width);
+        expect(service['modals'][0].modalRef.location.nativeElement.style.width).toBe(width);
+        expect(service['modals'][0].modalRef.location.nativeElement.style.maxHeight).toBe(height);
+        expect(service['modals'][0].modalRef.location.nativeElement.style.minHeight).toBe(height);
+        expect(service['modals'][0].modalRef.location.nativeElement.style.height).toBe(height);
+
+        tick();
+
+        expect(service['modals'][0].modalRef.instance['elRef'].nativeElement.offsetHeight).toBe(200);
+        expect(service['modals'][0].modalRef.instance['elRef'].nativeElement.offsetWidth).toBe(400);
+    }));
+
     it('should close modal on backdrop click', fakeAsync(() => {
         expect(service['modals'].length).toBe(0);
 

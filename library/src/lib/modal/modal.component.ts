@@ -2,7 +2,6 @@ import {
     Component,
     ElementRef,
     OnInit,
-    Input,
     AfterViewInit,
     Type,
     TemplateRef,
@@ -11,25 +10,24 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     EmbeddedViewRef,
-    Optional, ChangeDetectorRef, HostListener, OnDestroy, ContentChild, ContentChildren, QueryList, forwardRef
+    ChangeDetectorRef, HostListener, OnDestroy
 } from '@angular/core';
 import { ModalRef } from './modal-utils/modal-ref';
-import * as createFocusTrap from 'focus-trap';
 import { modalFadeNgIf } from './modal-utils/modal-animations';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import focusTrap from 'focus-trap';
 
 @Component({
     selector: 'fd-modal',
     styleUrls: ['modal.component.scss'],
     templateUrl: './modal.component.html',
     host: {
-        class: 'fd-modal',
         'role': 'dialog',
-        'aria-modal': 'true',
-        '[style.width]': 'width',
-        '[style.height]': 'height',
+        '[class.fd-modal]': 'true',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-describedby]': 'ariaDescribedBy',
+        '[attr.aria-modal]': 'true',
         '[attr.id]': 'id',
         '[@modal-fade]': ''
     },
@@ -37,33 +35,21 @@ import { modalFadeNgIf } from './modal-utils/modal-animations';
         modalFadeNgIf
     ]
 })
-export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild('vc', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
-    @Input()
     id: string;
 
-    @Input()
-    width: string;
-
-    @Input()
-    height: string;
-
-    @Input()
     escKeyCloseable: boolean = true;
 
-    @Input()
     focusTrapped: boolean = true;
 
-    @Input()
     ariaLabelledBy: string = null;
 
-    @Input()
     ariaLabel: string = null;
 
-    @Input()
     ariaDescribedBy: string = null;
 
     childComponentType: TemplateRef<any> | Type<any>;
@@ -72,6 +58,8 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     hasBackdrop: boolean  = true;
 
+    modalPanelClass: string = '';
+
     private componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     private focusTrap: any;
@@ -79,9 +67,13 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
-                @Optional() private modalRef: ModalRef) {}
+                private modalRef: ModalRef) {
+        super(elRef);
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this._setProperties();
+    }
 
     ngOnDestroy(): void {
         if (this.focusTrap) {
@@ -99,7 +91,7 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         if (this.focusTrapped) {
             try {
-                this.focusTrap = (createFocusTrap as any)(this.elRef.nativeElement, {
+                this.focusTrap = focusTrap(this.elRef.nativeElement, {
                     clickOutsideDeactivates: this.backdropClickCloseable && this.hasBackdrop,
                     escapeDeactivates: false
                 });
@@ -130,5 +122,11 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
             $implicit: this.modalRef
         };
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
+    }
+
+    _setProperties(): void {
+        if (this.modalPanelClass) {
+            this._addClassToElement(this.modalPanelClass);
+        }
     }
 }

@@ -12,6 +12,7 @@ export class ModalConfig {
     hasBackdrop?: boolean = true;
     backdropClass?: string = '';
     backdropClickCloseable?: boolean = true;
+    modalPanelClass?: string = '';
     escKeyCloseable?: boolean = true;
     focusTrapped?: boolean = true;
     data?: any;

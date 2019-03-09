@@ -87,10 +87,14 @@ export class ModalService {
             }
         });
         componentRef.instance.childComponentType = contentType;
+
+        // Sizing
         componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
         componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
         componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
         componentRef.location.nativeElement.style.maxHeight = configObj.maxHeight;
+        componentRef.location.nativeElement.style.width = configObj.width;
+        componentRef.location.nativeElement.style.height = configObj.height;
 
         // Render container
         const containerEl = (containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;

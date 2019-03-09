@@ -14,7 +14,8 @@ export class BackdropExamplesComponent {
         this.modalService.open(modal, {
             hasBackdrop: false,
             data: 'This modal does not have a backdrop!',
-            maxWidth: '400px'
+            maxWidth: '400px',
+            modalPanelClass: 'modal-no-backdrop-custom-shadow'
         });
     }
 

@@ -30,7 +30,6 @@ import { ModalCloseButtonDirective, ModalTitleDirective } from './modal-utils/mo
         IconModule
     ],
     exports: [
-        ModalComponent,
         ModalHeaderComponent,
         ModalBodyComponent,
         ModalFooterComponent,

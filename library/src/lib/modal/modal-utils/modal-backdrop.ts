@@ -10,16 +10,6 @@ import { modalFadeNgIf } from './modal-animations';
         'tabindex': '-1',
         '[@modal-fade]': ''
     },
-    styles: [`        
-        :host {
-            background-color: var(--fd-overlay-background-color);
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            z-index: 1000;
-        }
-    `],
     animations: [
         modalFadeNgIf
     ]
@@ -30,6 +20,7 @@ export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
     backdropClickCloseable: boolean = true;
 
     @HostBinding('class.fd-overlay') overlayMain = true;
+    @HostBinding('class.fd-overlay--modal') overlayModal = true;
 
     constructor(private elRef: ElementRef,
                 private modalRef: ModalRef) {
