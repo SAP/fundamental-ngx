@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
+import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
 import { ModalContentComponent } from './modal-content.component';
 
 @Component({
@@ -7,7 +7,8 @@ import { ModalContentComponent } from './modal-content.component';
     template: `
         <button fd-button (click)="open()">Open from Component</button>
         <span style="margin-left: 24px;">{{closeReason}}</span>
-    `
+    `,
+    styles: ['.hello-friend {background-color: red;}']
 })
 export class ModalComponentAsContentExampleComponent {
 
@@ -24,7 +25,8 @@ export class ModalComponentAsContentExampleComponent {
                     'nearly one-third of the world\'s production of pineapples.',
                 thirdParagraph: 'The flesh and juice of the pineapple are used in cuisines around the world.'
             },
-            maxWidth: '300px'
+            maxWidth: '300px',
+            backdropClass: 'hello-friend'
         });
 
         // TODO Subscribe to result

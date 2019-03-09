@@ -147,10 +147,9 @@ import {
 import { LoadingSpinnerExampleComponent } from './containers/loading-spinner-docs/examples/loading-spinner-example.component';
 import { LoadingSpinnerContainerExampleComponent } from './containers/loading-spinner-docs/examples/loading-spinner-container-example.component';
 import { MenuExampleComponent, MenuGroupExampleComponent } from './containers/menu/examples/menu-examples.component';
-import { ModalExampleComponent } from './containers/modal/examples/modal-example.component';
-import { ModalOpenTemplateExampleComponent } from './containers/modal/examples/modal-open-template-example.component';
-import { ModalContentComponent } from './containers/modal/examples/modal-content.component';
-import { ModalComponentAsContentExampleComponent } from './containers/modal/examples/modal-component-as-content-example.component';
+import { ModalOpenTemplateExampleComponent } from './containers/modal/examples/template-as-content/modal-open-template-example.component';
+import { ModalContentComponent } from './containers/modal/examples/component-as-content/modal-content.component';
+import { ModalComponentAsContentExampleComponent } from './containers/modal/examples/component-as-content/modal-component-as-content-example.component';
 import {
     PanelColumnsExampleComponent,
     PanelEdgeBleedExampleComponent,
@@ -204,10 +203,10 @@ import { DisabledToggleExampleComponent } from './containers/toggle/examples/dis
 import { ToggleBindingExampleComponent } from './containers/toggle/examples/toggle-binding-example/toggle-binding-example.component';
 import { ListInfiniteScrollExampleComponent } from './containers/list/examples/list-infinite-scroll-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './containers/dropdown/examples/dropdown-infinite-scroll-example.component';
-import { ModalInModalComponent } from './containers/modal/examples/modal-in-modal.component';
-import { ModalInModalSecondComponent } from './containers/modal/examples/modal-in-modal-second.component';
-import { ModalInModalExampleComponent } from './containers/modal/examples/modal-in-modal-example.component';
-import { ModalFullscreenExampleComponent } from './containers/modal/examples/modal-fullscreen-example.component';
+import { ModalInModalComponent } from './containers/modal/examples/stackable-modals/modal-in-modal.component';
+import { ModalInModalSecondComponent } from './containers/modal/examples/stackable-modals/modal-in-modal-second.component';
+import { ModalInModalExampleComponent } from './containers/modal/examples/stackable-modals/modal-in-modal-example.component';
+import { ModalFullscreenExampleComponent } from './containers/modal/examples/fullscreen-modal/modal-fullscreen-example.component';
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
@@ -240,6 +239,7 @@ import { COMPONENT_SCHEMAS } from './containers/schemas';
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
+import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -419,7 +419,6 @@ const ROUTES: Routes = [
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
-        ModalExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
@@ -484,7 +483,8 @@ const ROUTES: Routes = [
         TokenDocsComponent,
         TokenExampleComponent,
         MultiInputFilterExampleComponent,
-        MultiInputDisplaywithExampleComponent
+        MultiInputDisplaywithExampleComponent,
+        BackdropExamplesComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

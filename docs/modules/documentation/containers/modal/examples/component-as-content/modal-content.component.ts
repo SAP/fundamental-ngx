@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
-import { ModalRef } from '../../../../../../library/src/lib/modal/modal-ref';
+import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
+import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal-content',

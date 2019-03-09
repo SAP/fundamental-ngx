@@ -8,12 +8,12 @@ import {
     Type,
     TemplateRef
 } from '@angular/core';
-import { ModalComponent } from './modal.component';
-import { ModalBackdrop } from './modal-backdrop';
-import { ModalContainer } from './modal-container';
-import { ModalConfig } from './modal-config';
-import { ModalRef } from './modal-ref';
-import { ModalInjector } from './modal-injector';
+import { ModalComponent } from '../modal.component';
+import { ModalBackdrop } from '../modal-utils/modal-backdrop';
+import { ModalContainer } from '../modal-utils/modal-container';
+import { ModalConfig } from '../modal-utils/modal-config';
+import { ModalRef } from '../modal-utils/modal-ref';
+import { ModalInjector } from '../modal-utils/modal-injector';
 
 @Injectable()
 export class ModalService {

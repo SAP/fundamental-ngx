@@ -1,5 +1,5 @@
 import { Component, HostBinding, Optional } from '@angular/core';
-import { ModalRef } from '../modal-ref';
+import { ModalRef } from '../modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal-header',

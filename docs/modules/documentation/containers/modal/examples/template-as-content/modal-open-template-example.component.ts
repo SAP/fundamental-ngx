@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
+import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
 
 @Component({
     selector: 'fd-modal-open-template-example',

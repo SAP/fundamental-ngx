@@ -42,7 +42,7 @@ import { TokenModule } from './token/token.module';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ModalService } from './modal/modal.service';
+import { ModalService } from './modal/modal-service/modal.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],

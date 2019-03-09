@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { ModalService } from '../../../../../../library/src/lib/modal/modal.service';
+import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
 import { ModalInModalSecondComponent } from './modal-in-modal-second.component';
-import { ModalRef } from '../../../../../../library/src/lib/modal/modal-ref';
+import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal-in-modal',

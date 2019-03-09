@@ -13,9 +13,9 @@ import {
     EmbeddedViewRef,
     Optional, ChangeDetectorRef, HostListener, OnDestroy, ContentChild, ContentChildren, QueryList, forwardRef
 } from '@angular/core';
-import { ModalRef } from './modal-ref';
+import { ModalRef } from './modal-utils/modal-ref';
 import * as createFocusTrap from 'focus-trap';
-import { modalFadeNgIf } from './modal-animations';
+import { modalFadeNgIf } from './modal-utils/modal-animations';
 
 @Component({
     selector: 'fd-modal',

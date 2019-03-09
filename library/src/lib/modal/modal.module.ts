@@ -8,10 +8,10 @@ import { ModalHeaderComponent } from './modal-header/modal-header.component';
 import { ModalBodyComponent } from './modal-body/modal-body.component';
 import { ModalFooterComponent } from './modal-footer/modal-footer.component';
 
-import { ModalService } from './modal.service';
-import { ModalBackdrop } from './modal-backdrop';
-import { ModalContainer } from './modal-container';
-import { ModalCloseButtonDirective, ModalTitleDirective } from './modal-directives';
+import { ModalService } from './modal-service/modal.service';
+import { ModalBackdrop } from './modal-utils/modal-backdrop';
+import { ModalContainer } from './modal-utils/modal-container';
+import { ModalCloseButtonDirective, ModalTitleDirective } from './modal-utils/modal-directives';
 
 @NgModule({
     declarations: [

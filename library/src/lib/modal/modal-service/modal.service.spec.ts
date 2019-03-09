@@ -2,9 +2,9 @@ import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalService } from './modal.service';
-import { ModalModule } from './modal.module';
+import { ModalModule } from '../modal.module';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ModalRef } from './modal-ref';
+import { ModalRef } from '../modal-utils/modal-ref';
 
 @Component({
     template: `        

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalRef } from '../../../../../../library/src/lib/modal/modal-ref';
+import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal-in-modal-second',
