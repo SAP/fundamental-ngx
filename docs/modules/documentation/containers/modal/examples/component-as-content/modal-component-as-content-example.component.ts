@@ -7,8 +7,7 @@ import { ModalContentComponent } from './modal-content.component';
     template: `
         <button fd-button (click)="open()">Open from Component</button>
         <span style="margin-left: 24px;">{{closeReason}}</span>
-    `,
-    styles: ['.hello-friend {background-color: red;}']
+    `
 })
 export class ModalComponentAsContentExampleComponent {
 
