@@ -80,7 +80,7 @@ describe('ModalComponent', () => {
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
-        component['elRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', {key: 'Escape'}))
+        component['elRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', {key: 'Escape'}));
         expect(modalRef.dismiss).toHaveBeenCalled();
     });
 
