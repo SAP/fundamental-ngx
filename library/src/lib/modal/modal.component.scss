@@ -2,6 +2,10 @@
     max-width: none;
     z-index: 1000;
 
+    &:focus {
+        outline: none;
+    }
+
     .fd-modal__content {
         height: inherit;
         width: inherit;

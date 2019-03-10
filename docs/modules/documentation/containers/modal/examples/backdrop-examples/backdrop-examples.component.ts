@@ -13,6 +13,7 @@ export class BackdropExamplesComponent {
     openDisabledBackdrop(modal): void {
         this.modalService.open(modal, {
             hasBackdrop: false,
+            backdropClickCloseable: false,      // <-- False by default if no backdrop is added
             data: 'This modal does not have a backdrop!',
             maxWidth: '400px',
             modalPanelClass: 'modal-no-backdrop-custom-shadow'

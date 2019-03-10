@@ -29,6 +29,7 @@ import focusTrap from 'focus-trap';
         '[attr.aria-describedby]': 'ariaDescribedBy',
         '[attr.aria-modal]': 'true',
         '[attr.id]': 'id',
+        'tabindex': '-1',
         '[@modal-fade]': ''
     },
     animations: [
@@ -93,7 +94,8 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
             try {
                 this.focusTrap = focusTrap(this.elRef.nativeElement, {
                     clickOutsideDeactivates: this.backdropClickCloseable && this.hasBackdrop,
-                    escapeDeactivates: false
+                    escapeDeactivates: false,
+                    initialFocus: this.elRef.nativeElement
                 });
                 this.focusTrap.activate();
             } catch (e) {
