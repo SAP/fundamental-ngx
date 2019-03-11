@@ -118,3 +118,24 @@
     { name: 'data', description: 'Any. The data which is available through the ModalRef.' }
   ]
 }"></properties>
+
+<separator></separator>
+
+<playground [schema]="schema"
+            [schemaInitialValues]="data"
+            (onFormChanges)="onSchemaValues($event)">
+    <button fd-button (click)="openModal(playgroundModal)">Open Modal</button>
+</playground>
+
+<ng-template #playgroundModal let-modal>
+    <fd-modal-header>
+        <h1 fd-modal-title>Playground Modal</h1>
+        <button fd-modal-close-btn (click)="modal.dismiss()"></button>
+    </fd-modal-header>
+    <fd-modal-body>
+        This is the modal playground body text!
+    </fd-modal-body>
+    <fd-modal-footer>
+        <button fd-button [options]="'emphasized'" (click)="modal.dismiss()">Close</button>
+    </fd-modal-footer>
+</ng-template>

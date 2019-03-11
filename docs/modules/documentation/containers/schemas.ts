@@ -32,6 +32,7 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     inputGroup: InputGroupDocsComponent.schema,
     image: ImageDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
+    modal: ModalDocsComponent.schema,
     list: ListDocsComponent.schema,
     tabs: TabsDocsComponent.schema,
     table: TableDocsComponent.schema,
