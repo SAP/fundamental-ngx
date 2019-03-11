@@ -1,7 +1,4 @@
 :host {
-    position: fixed;
-    top: 0;
-    left: 0;
     background-color: #354a5f;
     color: #fff;
     padding: 8px 20px;
@@ -11,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    flex-shrink: 0;
 }
 
 .fd-docs--toolbar {
@@ -19,6 +17,15 @@
         margin-left: -10px;
         margin-right: 10px;
         color: #fff;
+
+        &:active {
+            background-color: var(--fd-color-status-4);
+            color: black;
+        }
+
+        &:hover {
+            color: black;
+        }
     }
 
     &__home-logo {
@@ -30,16 +37,38 @@
         text-align: center;
         color: #fff;
 
-        @media (min-width: 600px) {
+        @media (min-width: 576px) {
             font-size: 24px;
         }
 
         &-framework {
-
+            color: #61dafb;
         }
     }
 
     &__spacer {
         flex: 1 1 auto;
+    }
+
+    &__version {
+        flex: 0 0 auto;
+        margin-left: 20px;
+        font-size: 1.2rem;
+        display: inline-block;
+
+        @media (max-width: 576px) {
+            display: none;
+        }
+    }
+}
+
+.logo-github {
+    width: 2rem;
+    height: 2rem;
+    fill: #ffffff;
+    vertical-align: middle;
+
+    &:hover {
+        cursor: pointer;
     }
 }
