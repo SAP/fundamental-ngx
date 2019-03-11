@@ -9,15 +9,17 @@
 <description>
     <p>
         Modals make use of a singleton service called <code>ModalService</code>.
-        It allows appending modals to the application body, which guarantees certain required modal behaviours.
-        The properties listed at the bottom of the page can be used in the <code>modalConfig</code> argument of the modal service <code>open()</code>
-        method.
+        It provides the ability to <code>open()</code> modal windows.
     </p>
     <p>
-        Modals can be opened by providing either a template or a component to the <code>open()</code> method. However, they cannot be used in an inline fashion.
+        The <code>open()</code> method accepts either a TemplateRef or Component as modal content. In addition, you may optionally provide a ModalConfig object to override some system-default modal window behaviours.
+    </p>
+    <p>
+        When a modal window is opened, the content is positioned in a parent element that is appended to the body.
     </p>
     <p>
         Importing one of <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
+        The first is the standard Angular animation module, it animates content as expected. NoopAnimationsModule mocks the animations and does not render them, potentially increasing performance.
     </p>
 </description>
 
