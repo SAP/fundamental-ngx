@@ -7,9 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ToolbarComponent {
 
-    @Input()
-    showBtn: boolean;
-
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 

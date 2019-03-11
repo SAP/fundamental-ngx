@@ -73,6 +73,10 @@
     overflow-y: scroll;
     padding-bottom: 2rem;
     background-color: #FFFFFF;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .content-margin {
@@ -131,6 +135,7 @@
 
 .fd-sidebar-container {
     position: relative;
+    flex-grow: 1;
 }
 
 @media (max-width: 992px){

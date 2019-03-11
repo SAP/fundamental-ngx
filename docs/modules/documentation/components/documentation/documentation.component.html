@@ -1,5 +1,4 @@
-<fd-docs-toolbar [showBtn]="this.smallScreen || this.sideCollapsed"
-                 (btnClicked)="sideCollapsed = !sideCollapsed"></fd-docs-toolbar>
+<fd-docs-toolbar (btnClicked)="sideCollapsed = !sideCollapsed"></fd-docs-toolbar>
 <div class="fd-flex-row fd-sidebar-container">
     <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
         <div class="fd-docs-search">
