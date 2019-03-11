@@ -2,15 +2,11 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .sidebar {
     color: #21262c;
     background-color: #f1f3f6;
-    height: 100%;
     transition: 0.3s margin ease-in-out, 0.3s box-shadow ease-in-out;
     z-index: 3;
     width: 265px;
@@ -22,13 +18,12 @@
 }
 
 .fd-docs-sidebar-content {
+    flex-grow: 1;
     overflow-y: scroll;
-    height: 100%;
 }
 
 .nav {
     list-style: none;
-    overflow-y: scroll;
 }
 
 .nav-item {
@@ -136,6 +131,15 @@
 .fd-sidebar-container {
     position: relative;
     flex-grow: 1;
+}
+
+.skip-navigation {
+    position: absolute;
+    left: -5000px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 
 @media (max-width: 992px){

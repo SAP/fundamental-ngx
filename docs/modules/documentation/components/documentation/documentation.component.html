@@ -1,3 +1,4 @@
+<button (click)="skipNavClicked()" aria-label="skip navigation" class="skip-navigation">Skip Navigation</button>
 <fd-docs-toolbar (btnClicked)="sideCollapsed = !sideCollapsed"></fd-docs-toolbar>
 <div class="fd-flex-row fd-sidebar-container">
     <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
