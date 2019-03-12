@@ -51,6 +51,7 @@ For an existing Angular application,
     import { FundamentalNgxModule } from 'fundamental-ngx';
     
     @NgModule({
+        ...
         imports: [FundamentalNgxModule],
     })
     ```
@@ -63,6 +64,7 @@ For an existing Angular application,
     import { ToggleModule } from 'fundamental-ngx/toggle/toggle.module';
     
     @NgModule({
+        ...
         imports: [ToggleModule],
     })
     ```
