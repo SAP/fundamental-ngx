@@ -1,5 +1,11 @@
 $gutter-size: 15px;
 
+html,
+body {
+    position: relative;
+    height: 100%;
+}
+
 body {
     background-color: white;
 }
@@ -79,9 +85,7 @@ pre {
 
 .docs-component {
     margin-bottom: -28px;
-    border-radius: 4px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: 4px 4px 0 0;
     padding-bottom: 4px;
     border: 1px solid #ccc;
     transition: 0.25s background-color;
@@ -170,14 +174,6 @@ pre {
     padding: 10px 10px 0 10px;
 }
 
-.skip-navigation {
-    position: absolute;
-    left: -5000px;
-    top: 0;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
 a:focus {
     text-decoration: underline;
 }
@@ -220,4 +216,14 @@ a:focus {
     margin-bottom: 1.5rem;
     font-size: 1rem;
     font-weight: 300;
+}
+
+.fd-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.fd-flex-col {
+    display: flex;
+    flex-direction: column;
 }

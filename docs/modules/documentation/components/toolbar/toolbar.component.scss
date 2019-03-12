@@ -1,0 +1,74 @@
+:host {
+    background-color: #354a5f;
+    color: #fff;
+    padding: 8px 20px;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,.5);
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.fd-docs--toolbar {
+
+    &__sidebar-btn {
+        margin-left: -10px;
+        margin-right: 10px;
+        color: #fff;
+
+        &:active {
+            background-color: var(--fd-color-status-4);
+            color: black;
+        }
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    &__home-logo {
+        flex: 0 0 auto;
+        font-size: 20px;
+        line-height: 1.5;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        color: #fff;
+
+        @media (min-width: 576px) {
+            font-size: 24px;
+        }
+
+        &-framework {
+            color: #61dafb;
+        }
+    }
+
+    &__spacer {
+        flex: 1 1 auto;
+    }
+
+    &__version {
+        flex: 0 0 auto;
+        margin-left: 20px;
+        font-size: 1.2rem;
+        display: inline-block;
+
+        @media (max-width: 576px) {
+            display: none;
+        }
+    }
+}
+
+.logo-github {
+    width: 2rem;
+    height: 2rem;
+    fill: #ffffff;
+    vertical-align: middle;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

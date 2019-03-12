@@ -231,6 +231,7 @@ import { MultiInputFilterExampleComponent } from './containers/multi-input/examp
 import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -483,6 +484,7 @@ const ROUTES: Routes = [
         ToggleBindingExampleComponent,
         TokenDocsComponent,
         TokenExampleComponent,
+        ToolbarComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent
     ],
