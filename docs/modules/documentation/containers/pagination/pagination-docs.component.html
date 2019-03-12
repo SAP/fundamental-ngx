@@ -10,9 +10,14 @@
 
 <properties [properties]="{
   inputs: [
-    { name: 'totalItems', description: 'The total number items.' },
-    { name: 'itemsPerPage', description: 'The number of items per page.' },
-    { name: 'currentPage', description: 'The current page.' }
+    { name: 'totalItems', description: 'Required - the total number items.' },
+    { name: 'itemsPerPage', description: 'The number of items per page.  Default is 10.  Must be greater than zero.  Page numbers will not display when itemsPerPage is greater than totalItems.' },
+    { name: 'currentPage', description: 'The current page.  Default is 1.' },
+    { name: 'displayTotalItems', description: 'Boolean, when set to true, will display the totalItems property next to the pagination links.  Default is true.'},
+    { name: 'displayText', description: 'Text to use for the total items (addresses, products, etc).  Default is \'items\'.'}
+  ],
+  outputs: [
+    { name: 'selected', description: 'Event - fired when a new page is selected, passing the new page number as a parameter.'}
   ]
 }"></properties>
 <separator></separator>
@@ -23,5 +28,6 @@
 
 <separator></separator>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-pagination [class]="'fd-demo-pagination'" [pagination]="{totalItems: data.properties.totalItems, itemsPerPage:  data.properties.itemsPerPage, currentPage: data.properties.currentPage}"></fd-pagination>
+  <fd-pagination [totalItems]="data.properties.totalItems" [itemsPerPage]="data.properties.itemsPerPage"
+                 [currentPage]="data.properties.currentPage" [displayText]="data.properties.displayText"></fd-pagination>
 </playground>

@@ -78,14 +78,15 @@
                class="fd-form__control"
                type="number"
                placeholder="ss"
-               aria-label="Seconds"/>
+               (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"aria-label="Seconds"/>
     </div>
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseSecond()"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
-                aria-label="Decrease seconds"></button>
+                aria-label="Decrease seconds"
+                (keydown)="!meridian ? lastButtonKeydown($event) : ''"></button>
     </div>
 </div>
 <div *ngIf="meridian"
@@ -112,6 +113,7 @@
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
-                aria-label="Decrease period"></button>
+                aria-label="Decrease period"
+                (keydown)="lastButtonKeydown($event)"></button>
     </div>
 </div>

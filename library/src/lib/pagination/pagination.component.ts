@@ -5,11 +5,23 @@ import { Pagination } from './pagination.model';
 @Component({
     selector: 'fd-pagination',
     templateUrl: './pagination.component.html',
-    providers: [PaginationService]
+    providers: [PaginationService],
+    host: {
+        class: 'fd-pagination'
+    }
 })
 export class PaginationComponent implements OnChanges {
     @Input()
-    pagination: Pagination;
+    totalItems: number;
+    @Input()
+    currentPage: number;
+    @Input()
+    itemsPerPage: number;
+
+    @Input()
+    displayTotalItems: boolean = true;
+    @Input()
+    displayText: string = 'items';
 
     @Output()
     selected = new EventEmitter<number>();
@@ -19,11 +31,17 @@ export class PaginationComponent implements OnChanges {
     constructor(private paginationService: PaginationService) {}
 
     ngOnChanges() {
-        this.pages = this.paginationService.getPages(this.pagination);
+        this.pages = this.paginationService.getPages(this.getPaginationObject());
+        const totalPages = this.paginationService.getTotalPages(this.getPaginationObject());
+        if (!this.currentPage || this.currentPage < 1) {
+            this.currentPage = 1;
+        } else if (this.currentPage > totalPages) {
+            this.currentPage = totalPages;
+        }
     }
 
     isLastPage(): boolean {
-        return this.pagination.currentPage === this.paginationService.getTotalPages(this.pagination);
+        return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
     }
 
     onKeypressHandler(page: number, $event: KeyboardEvent) {
@@ -37,11 +55,20 @@ export class PaginationComponent implements OnChanges {
         if ($event) {
             $event.preventDefault();
         }
-        if (page > this.paginationService.getTotalPages(this.pagination) || page < 1) {
+        if (page > this.paginationService.getTotalPages(this.getPaginationObject()) || page < 1) {
             return;
         }
-        this.pagination.currentPage = page;
-        this.pages = this.paginationService.getPages(this.pagination);
+        this.currentPage = page;
+        this.pages = this.paginationService.getPages(this.getPaginationObject());
         this.selected.emit(page);
+    }
+
+    getPaginationObject() {
+        const retVal = {
+            totalItems: this.totalItems,
+            currentPage: this.currentPage,
+            itemsPerPage: this.itemsPerPage
+        };
+        return retVal;
     }
 }

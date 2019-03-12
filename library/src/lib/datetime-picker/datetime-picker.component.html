@@ -9,7 +9,6 @@
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
                        (change)="inputValueChange(dateTimeInput.value)"
-                       (focus)="onFocusHandler()"
                        (blur)="onBlurHandler()"
                        [ngClass]="{ 'fd-input--compact': compact }"
                        [disabled]="disabled">
@@ -24,20 +23,23 @@
              [attr.aria-expanded]="isOpen"
              [attr.aria-hidden]="!isOpen">
             <div class="fd-datetime__container">
-                <fd-calendar calType="single"
+                <fd-calendar calType="single" (closeCalendar)="closePopover()"
                              [disableFunction]="disableFunction ? disableFunction : null"
                              [blockFunction]="blockFunction ? blockFunction : null"
                              [(ngModel)]="selectedDay"
                              (updateDatePickerInput)="updatePickerInputHandler($event)"
                              (isInvalidDateInput)="isInvalidDateInputHandler($event)"
-                             [dateFromDatePicker]="dateFromInput"></fd-calendar>
+                             [dateFromDatePicker]="dateFromInput"
+                             [isDateTimePicker]="true"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time [disabled]="disabled" [ngClass]="{'fd-time-container': !meridian}"
                          [meridian]="meridian"
                          [(ngModel)]="time"
                          (ngModelChange)="setTime(true)"
                          [spinners]="spinners"
-                         [displaySeconds]="displaySeconds"></fd-time>
+                         [displaySeconds]="displaySeconds"
+                         [isDateTimePicker]="true"
+                         (focusArrowLeft)="focusArrowLeft()"></fd-time>
             </div>
         </div>
     </div>

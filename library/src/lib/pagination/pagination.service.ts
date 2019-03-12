@@ -55,6 +55,9 @@ export class PaginationService {
     }
 
     public getTotalPages(pagination: Pagination): number {
+        if (pagination.itemsPerPage <= 0) {
+            pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
+        }
         return Math.ceil(pagination.totalItems / pagination.itemsPerPage);
     }
 
@@ -64,6 +67,8 @@ export class PaginationService {
         }
         if (!pagination.itemsPerPage) {
             pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
+        } else if (pagination.itemsPerPage < 0) {
+            console.error(`itemsPerPage must be greater than zero`);
         }
         if (!pagination.currentPage) {
             pagination.currentPage = 1;
