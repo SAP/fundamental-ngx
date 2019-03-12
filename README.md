@@ -45,7 +45,7 @@ For an existing Angular application,
 
 3. **Import the modules you want to use.**
 
-    To add the entire library, add the following code to your main application module.
+    To add the entire library, add the following import to your main application module.
 
     ```javascript
     import { FundamentalNgxModule } from 'fundamental-ngx';
@@ -58,7 +58,7 @@ For an existing Angular application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Toggles, add the following code to your main application module.
+    For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
     import { ToggleModule } from 'fundamental-ngx/toggle/toggle.module';
