@@ -1,10 +1,7 @@
-<div class="fd-modal"
-     [ngStyle]="{'z-index': 1001 * openModalCount}" [style.max-width]="this.width"
-     (keydown)="onModalKeydown($event)">
-  <div class="fd-modal__content" role="document" [style.height]="this.height">
+<div class="fd-modal__content" role="document">
     <ng-content select="fd-modal-header"></ng-content>
     <ng-content select="fd-modal-body"></ng-content>
     <ng-content select="fd-modal-footer"></ng-content>
-  </div>
+    <ng-container #vc></ng-container>
+    <ng-content></ng-content>
 </div>
-<div class="fd-overlay fd-overlay--modal" [ngStyle]="{'z-index': 1000 * openModalCount}"></div>

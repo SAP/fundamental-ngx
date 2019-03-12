@@ -1,31 +1,20 @@
-.fd-modal__body {
-    overflow: auto;
-}
+:host {
+    max-width: none;
+    z-index: 1000;
 
-.fd-modal__footer {
-    border-top: 1px solid #eeeeef;
-}
-
-fd-modal {
-    .fd-modal {
-        position: fixed;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 0;
-        left: 0;
-        margin: 0 auto;
-        .fd-popover__body {
-            position: fixed;
-            top: auto;
-            left: auto;
-        }
+    &:focus {
+        outline: none;
     }
 
-    .fd-overlay {
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+    .fd-modal__content {
+        height: 100%;
+        width: 100%;
+        min-height: inherit;
+        min-width: inherit;
+        max-height: inherit;
+        max-width: inherit;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
     }
 }

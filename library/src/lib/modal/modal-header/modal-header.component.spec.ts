@@ -1,18 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ModalService } from './modal.service';
 
 import { ModalHeaderComponent } from './modal-header.component';
+import { ModalRef } from '../modal-utils/modal-ref';
+import { ModalModule } from '../modal.module';
 
 describe('ModalHeaderComponent', () => {
     let component: ModalHeaderComponent;
     let fixture: ComponentFixture<ModalHeaderComponent>;
+    const modalRef = jasmine.createSpyObj('ModalRef', ['dismiss']);
 
     beforeEach(async(() => {
-        const modalSpy = jasmine.createSpyObj('ModalService', ['close']);
 
         TestBed.configureTestingModule({
-            declarations: [ModalHeaderComponent],
-            providers: [{ provide: ModalService, useValue: modalSpy }]
+            imports: [ModalModule],
+            providers: [
+                { provide: ModalRef, useValue: modalRef },
+            ]
         }).compileComponents();
     }));
 
@@ -25,4 +28,5 @@ describe('ModalHeaderComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
 });

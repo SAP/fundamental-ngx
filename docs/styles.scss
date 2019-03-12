@@ -227,3 +227,11 @@ a:focus {
     display: flex;
     flex-direction: column;
 }
+
+.modal-custom-overlay-example {
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.modal-no-backdrop-custom-shadow {
+    box-shadow: 0 4px 20px 0 grey
+}

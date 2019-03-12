@@ -32,8 +32,9 @@ export * from './lib/list/list.module';
 export * from './lib/loading-spinner/loading-spinner.module';
 export * from './lib/menu/menu.module';
 export * from './lib/modal/modal.module';
-export * from './lib/modal/modal.service';
-export * from './lib/modal/modal.component';
+export * from './lib/modal/modal-service/modal.service';
+export * from './lib/modal/modal-utils/modal-config';
+export * from './lib/modal/modal-utils/modal-ref';
 export * from './lib/multi-input/multi-input.module'
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';

@@ -3,5 +3,8 @@
     "dest": "../dist/fundamental-ngx",
     "lib": {
         "entryFile": "src/public_api.ts"
-    }
+    },
+    "whitelistedNonPeerDependencies": [
+        "focus-trap"
+    ]
 }

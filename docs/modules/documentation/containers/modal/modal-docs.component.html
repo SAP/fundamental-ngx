@@ -1,58 +1,52 @@
 <header>Modal</header>
 <description>The modal is used as a container to be displayed in response to a action. It is commonly used to collect
-  simple information
-  with a short form, to get confirmation or display contextual information that does not require a page.</description>
+    simple information
+    with a short form, to get confirmation or display contextual information that does not require a page.
+</description>
 <import module="ModalModule" path="fundamental-ngx"></import>
 <separator></separator>
 
-The Modal component utilizes a singleton ModalService to handle opening/closing of the modal. In your component, you'll
-need
-to create a method that calls ModalService's open() function. First, import the service with
-<code>import {{ '{' }} ModalService } from 'fundamental-ngx';</code>. Then inject the service into your component's
-constructor with
-<code>private modalService: ModalService</code>. Then you'll need to call
-<code>this.modalService.open(modalName)</code>. Use
-<code>this.modalService.close()</code> to close the modal.
-<separator></separator>
-<h1>&lt;fd-modal&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'width', description: 'String. Width of the modal. Defaults to 480px.' },
-    { name: 'height', description: 'String. Height of the modal. Defaults to size of content.'}
-  ]
-}"></properties>
-<separator></separator>
-
-<h2>Informational Modal</h2>
-<description>Used when you need to inform the user but the Alert Component doesn’t fit all the information. Also when the user
-  have to
-  acknowledge the information, actively, by clicking a button or closing the Modal.
+<description>
+    <p>
+        Modals make use of a singleton service called <code>ModalService</code>.
+        It provides the ability to <code>open()</code> modal windows.
+    </p>
+    <p>
+        The <code>open()</code> method accepts either a TemplateRef or Component as modal content. In addition, you may optionally provide a ModalConfig object to override some system-default modal window behaviours.
+    </p>
+    <p>
+        When a modal window is opened, the content is positioned in a parent element that is appended to the body.
+    </p>
+    <p>
+        Importing one of <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
+        The first is the standard Angular animation module, it animates content as expected. NoopAnimationsModule mocks the animations and does not render them, potentially increasing performance.
+    </p>
 </description>
-<component-example [name]="'ex1'">
-  <fd-modal-example></fd-modal-example>
-</component-example>
-<code-example [code]="informationalModalSource" [language]="'typescript'"></code-example>
 
 <separator></separator>
 
-<h2>Confirmation Modal</h2>
-<description>Used to confirm with the user before continuing with destructive or complex actions. In this case the modal have two
-  buttons
-  at the bottom. With the “positive” path always been the primary button.</description>
+<h2>Template as Content</h2>
+<description>
+    The ModalService allows passing in a template reference as the content of the modal. Add <code>let-modal</code> to
+    the template element to access the injected <code>ModalRef</code>.
+    <br/><br/>
+    The example also features a confirmation modal. Subscribe to <code>afterClosed</code> to access the returned value.
+    A dismissal will trigger an error on the observable, similar to rejecting a promise.
+</description>
 <component-example [name]="'ex2'">
-  <fd-modal-confirmation-example></fd-modal-confirmation-example>
+    <fd-modal-open-template-example></fd-modal-open-template-example>
 </component-example>
-<code-example [code]="confirmationModalSource" [language]="'typescript'"></code-example>
+<code-example [code]="templateModalHtml" [language]="'HTML'"></code-example>
+<code-example [code]="templateModalTs" [language]="'typescript'"></code-example>
 
 <separator></separator>
 
 <h2>Component as Content</h2>
 <description>
-    <p>A reference to a component can be passed to the modal service open function, rather than passing a template reference variable.</p>
-    <p>The content component's inputs can be accessed through the <code>instance</code> property on the modal reference object that is returned
-        by the modal service's <code>open()</code> function.</p>
-    <p>Custom options can be passed as the second parameter of the <code>open</code> function. Additionally, inputs can be set on the modal reference's <code>instance</code> object.</p>
+    A component type can be passed to the ModalService open method as the content of the modal. Inject
+    <code>ModalRef</code> inside the content component to access methods such as close and dismiss.
+    <br/><br/>
+    The example also features a modal with a scrollable body.
 </description>
 <component-example [name]="'ex3'">
     <fd-modal-component-as-content-example></fd-modal-component-as-content-example>
@@ -64,19 +58,23 @@ constructor with
 
 <h2>Fullscreen Modal</h2>
 <description>
-    The modal dimensions can be controlled through the width and height inputs. These accept strings, so you may use whatever unit works best for your situation.
+    The modal dimensions can be controlled through the width and height properties of the configuration object. These
+    accept strings, so you may use whatever unit works best for your situation.
 </description>
 <component-example [name]="'ex4'">
-    <fd-modal-fullscreen></fd-modal-fullscreen>
+    <fd-modal-fullscreen-example></fd-modal-fullscreen-example>
 </component-example>
-<code-example [code]="fullScreenSource" [language]="'typescript'"></code-example>
+<code-example [code]="fullScreenSource" [language]="'html'"></code-example>
+<code-example [code]="fullScreenSourceTs" [language]="'typescript'"></code-example>
 
 <separator></separator>
 
-<h2>Modal in a Modal</h2>
+<h2>Stacked Modals</h2>
 <description>
-    <p>The modal component heavily relies on the ModalService, which contains every active Modal instance. To create nested modals, the service has an array of modal component references.</p>
-    <p>It treats this array like a stack, adding new modals to the top and calling pop() when they are closed. For this reason, nested modals must be closed in the order they were first opened.</p>
+    <p>The ModalService supports limitless stacked modals. Each can be closed individually, there is no specific closing
+        order.</p>
+    <p>In the example below, it is accomplished via components as content. However, it is entirely possible with
+        templates through the same methodology.</p>
 </description>
 <component-example [name]="'ex5'">
     <fd-modal-in-modal-example></fd-modal-in-modal-example>
@@ -84,3 +82,62 @@ constructor with
 <code-example [code]="modalInModalExample" [language]="'typescript'"></code-example>
 <code-example [code]="modalInModal" [language]="'typescript'"></code-example>
 <code-example [code]="modalInModalSecond" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Backdrop Configuration</h2>
+<description>
+    The modal backdrop can be styled, disabled or even customized at will. Classes being applied to the backdrop must be
+    in the global styles file.
+</description>
+<component-example [name]="'ex6'">
+    <fd-backdrop-examples></fd-backdrop-examples>
+</component-example>
+<code-example [code]="backdropHtml" [language]="'html'"></code-example>
+<code-example [code]="backdropTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>ModalConfig</h2>
+<properties [properties]="{
+  properties: [
+    { name: 'id', description: 'String. The id of the modal element.' },
+    { name: 'width', description: 'String. Width of the modal.' },
+    { name: 'height', description: 'String. Height of the modal.' },
+    { name: 'maxWidth', description: 'String. Maximum width of the modal.' },
+    { name: 'maxHeight', description: 'String. Maximum height of the modal.' },
+    { name: 'minWidth', description: 'String. Minimum width of the modal.' },
+    { name: 'minHeight', description: 'String. Minimum height of the modal.' },
+    { name: 'ariaLabel', description: 'String. Aria-label attribute.' },
+    { name: 'ariaLabelledBy', description: 'String. Aria-labelledby attribute.' },
+    { name: 'ariaDescribedBy', description: 'String. Aria-describedby attribute.' },
+    { name: 'hasBackdrop', description: 'Boolean. Whether the modal should have a backdrop. Defaults to true.' },
+    { name: 'backdropClass', description: 'String. Global classes to apply to the backdrop.' },
+    { name: 'backdropClickCloseable', description: 'Boolean. Whether clicking the backdrop closes the modal. Defaults to true.' },
+    { name: 'modalPanelClass', description: 'String. Global classes to apply to the modal panel.' },
+    { name: 'escKeyCloseable', description: 'Boolean. Whether pressing the escape key closes the modal. Defaults to true.' },
+    { name: 'focusTrapped', description: 'Boolean. Whether the modal should be focus trapped. Defaults to true.' },
+    { name: 'data', description: 'Any. The data which is available through the ModalRef.' }
+  ]
+}"></properties>
+
+<separator></separator>
+
+<playground [schema]="schema"
+            [schemaInitialValues]="data"
+            (onFormChanges)="onSchemaValues($event)">
+    <button fd-button (click)="openModal(playgroundModal)">Open Modal</button>
+</playground>
+
+<ng-template #playgroundModal let-modal>
+    <fd-modal-header>
+        <h1 fd-modal-title>Playground Modal</h1>
+        <button fd-modal-close-btn (click)="modal.dismiss()"></button>
+    </fd-modal-header>
+    <fd-modal-body>
+        This is the modal playground body text!
+    </fd-modal-body>
+    <fd-modal-footer>
+        <button fd-button [options]="'emphasized'" (click)="modal.dismiss()">Close</button>
+    </fd-modal-footer>
+</ng-template>
