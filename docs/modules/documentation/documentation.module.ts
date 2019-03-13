@@ -241,6 +241,7 @@ import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
+import { HttpClientModule } from '@angular/common/http';
 
 export function highlightJsFactory() {
     return hljs;
@@ -500,7 +501,8 @@ const ROUTES: Routes = [
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         UtilsModule,
-        FundamentalNgxModule
+        FundamentalNgxModule,
+        HttpClientModule
     ],
     providers: [CopyService]
 })
