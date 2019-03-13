@@ -4,8 +4,8 @@
         <fd-popover-control>
             <div class="fd-combobox-control">
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                    <input type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
-                           (keypress)="onInputKeypressHandler($event)"
+                    <input #searchInputInput type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                           (keydown)="onInputKeydownHandler($event)"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
                            placeholder="{{placeholder}}">
@@ -18,11 +18,11 @@
         <fd-popover-body *ngIf="(dropdownValues | fdSearch:inputText).length">
             <fd-menu>
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let term of dropdownValues | fdSearch:inputText" (click)="term.callback($event)" (keypress)="onMenuKeypressHandler($event, term)">
+                    <li fd-menu-item *ngFor="let term of dropdownValues | fdSearch:inputText" (click)="term.callback($event)" (keydown)="onMenuKeydownHandler($event, term)">
                         <a tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
                     </li>
-                    <li fd-menu-item (click)="newItemCallback($event)" (keypress)="newItemKeypressHandler($event)">
-                        <a class="fd-menu__item fd-menu__link">+ New Item</a>
+                    <li fd-menu-item (click)="newItemCallback($event)" (keydown)="newItemKeydownHandler($event)">
+                        <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>
                 </ul>
             </fd-menu>
