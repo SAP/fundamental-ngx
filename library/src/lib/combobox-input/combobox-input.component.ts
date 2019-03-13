@@ -26,13 +26,13 @@ export class ComboboxInputComponent extends SearchInputComponent {
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
             let foundItem = false;
-            this.menuItems.forEach((item, index) => {
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
                 if (!foundItem) {
                     if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
                         this.searchInputInput.nativeElement.focus();
                         foundItem = true;
                     } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
-                        const menuItemsArray = this.menuItems.toArray();
                         if (menuItemsArray[index - 1]) {
                             menuItemsArray[index - 1].itemEl.nativeElement.children[0].focus();
                         }

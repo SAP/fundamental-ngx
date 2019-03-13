@@ -36,15 +36,23 @@ describe('SearchInputComponent', () => {
     it('should call searchFunction onInputKeydownHandler', () => {
         spyOn(component, 'searchFunction');
         const event = {
-            code: 'Enter'
+            code: 'Enter',
+            preventDefault: () => {}
         };
         component.onInputKeydownHandler(event);
         expect(component.searchFunction).toHaveBeenCalled();
+        event.code = 'ArrowDown';
+        spyOn(event, 'preventDefault');
+        spyOn(component.menuItems.first.itemEl.nativeElement.children[0], 'focus');
+        component.onInputKeydownHandler(event);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(component.menuItems.first.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
     });
 
-    it('should call search term callback onMenuKeydownHandler', () => {
+    it('should call search term callback onMenuKeydownHandler, arrow down', () => {
         const event = {
-            code: 'Enter'
+            code: 'Enter',
+            preventDefault: () => {}
         };
         const term = {
             callback: () => {}
@@ -52,6 +60,105 @@ describe('SearchInputComponent', () => {
         spyOn(term, 'callback');
         component.onMenuKeydownHandler(event, term);
         expect(term.callback).toHaveBeenCalled();
+        spyOn(event, 'preventDefault');
+        const item1 = {
+            itemEl: {
+                nativeElement: {
+                    children: [
+                        jasmine.createSpyObj(['focus'])
+                    ]
+                }
+            }
+        };
+        const item2 = {
+            itemEl: {
+                nativeElement: {
+                    children: [
+                        jasmine.createSpyObj(['focus'])
+                    ]
+                }
+            }
+        };
+        spyOn(component.menuItems, 'toArray').and.returnValue([
+            item1,
+            item2
+        ]);
+        spyOnProperty(document, 'activeElement').and.returnValue(item1.itemEl.nativeElement.children[0]);
+        event.code = 'ArrowDown';
+        component.onMenuKeydownHandler(event);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(item2.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
+    });
+
+    it('should handle onMenuKeydownHandler, arrow up', () => {
+        const event = {
+            code: 'ArrowUp',
+            preventDefault: () => {}
+        };
+        spyOn(event, 'preventDefault');
+        const item1 = {
+            itemEl: {
+                nativeElement: {
+                    children: [
+                        jasmine.createSpyObj(['focus'])
+                    ]
+                }
+            }
+        };
+        const item2 = {
+            itemEl: {
+                nativeElement: {
+                    children: [
+                        jasmine.createSpyObj(['focus'])
+                    ]
+                }
+            }
+        };
+        spyOn(component.menuItems, 'toArray').and.returnValue([
+            item1,
+            item2
+        ]);
+        spyOnProperty(document, 'activeElement').and.returnValue(item2.itemEl.nativeElement.children[0]);
+        event.code = 'ArrowUp';
+        component.onMenuKeydownHandler(event);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(item1.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
+    });
+
+    it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
+        const event = {
+            code: 'ArrowUp',
+            preventDefault: () => {}
+        };
+        spyOn(event, 'preventDefault');
+        const item1 = {
+            itemEl: {
+                nativeElement: {
+                    children: [
+                        jasmine.createSpyObj(['focus'])
+                    ]
+                }
+            }
+        };
+        const item2 = {
+            itemEl: {
+                nativeElement: {
+                    children: [
+                        jasmine.createSpyObj(['focus'])
+                    ]
+                }
+            }
+        };
+        spyOn(component.menuItems, 'toArray').and.returnValue([
+            item1,
+            item2
+        ]);
+        spyOnProperty(document, 'activeElement').and.returnValue(item1.itemEl.nativeElement.children[0]);
+        spyOn(component.searchInputInput.nativeElement, 'focus');
+        event.code = 'ArrowUp';
+        component.onMenuKeydownHandler(event);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(component.searchInputInput.nativeElement.focus).toHaveBeenCalled();
     });
 
     it('should set inputText', () => {

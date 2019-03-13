@@ -64,16 +64,16 @@ export class SearchInputComponent implements ControlValueAccessor {
         }
     }
 
-    onMenuKeydownHandler(event, term) {
+    onMenuKeydownHandler(event, term?) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
             this.itemClicked.emit(term);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             let foundItem = false;
-            this.menuItems.forEach((item, index) => {
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
                 if (document.activeElement === item.itemEl.nativeElement.children[0] && !foundItem) {
-                    const menuItemsArray = this.menuItems.toArray();
                     if (menuItemsArray[index + 1]) {
                         menuItemsArray[index + 1].itemEl.nativeElement.children[0].focus();
                     }
@@ -83,13 +83,13 @@ export class SearchInputComponent implements ControlValueAccessor {
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
             let foundItem = false;
-            this.menuItems.forEach((item, index) => {
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
                 if (!foundItem) {
                     if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
                         this.searchInputInput.nativeElement.focus();
                         foundItem = true;
                     } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
-                        const menuItemsArray = this.menuItems.toArray();
                         if (menuItemsArray[index - 1]) {
                             menuItemsArray[index - 1].itemEl.nativeElement.children[0].focus();
                         }
