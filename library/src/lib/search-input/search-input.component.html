@@ -4,8 +4,8 @@
         <fd-popover-control>
             <div *ngIf="!inShellbar" class="fd-combobox-control">
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                    <input type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
-                           (keypress)="onInputKeypressHandler($event)"
+                    <input #searchInputInput type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                           (keydown)="onInputKeydownHandler($event)"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
                            placeholder="{{placeholder}}">
@@ -19,8 +19,8 @@
                         (click)="isOpen = !isOpen;" [ngClass]="('sap-icon--' + this.glyph)"></button>
                 <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
                     <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
-                        <input type="text" class="fd-input"
-                               (keypress)="onInputKeypressHandler($event)"
+                        <input #searchInputInput type="text" class="fd-input"
+                               (keydown)="onInputKeydownHandler($event)"
                                [disabled]="disabled"
                                [(ngModel)]="inputText"
                                placeholder="{{placeholder}}">
@@ -31,7 +31,7 @@
         <fd-popover-body *ngIf="(usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText).length">
             <fd-menu>
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let term of (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText)" (click)="onMenuClickHandler($event, term)" (keypress)="onMenuKeypressHandler($event, term)">
+                    <li fd-menu-item *ngFor="let term of (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText)" (click)="onMenuClickHandler($event, term)" (keydown)="onMenuKeydownHandler($event, term)">
                         <a tabindex="0">
                             <div *ngIf="highlight && inputTextValue">
                                 {{ term.text.substr(0, term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase())) }}<strong>{{inputText}}</strong>{{ term.text.substring(term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase()) + inputText.length, term.text.length) }}

@@ -6,7 +6,7 @@ import { AfterViewInit, Directive, ElementRef, OnChanges } from '@angular/core';
     selector: '[fd-menu-item]',
 })
 export class MenuItemDirective implements AfterViewInit, OnChanges {
-    constructor(private itemEl: ElementRef) {}
+    constructor(public itemEl: ElementRef) {}
 
     ngAfterViewInit() {
         if (

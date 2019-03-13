@@ -1,5 +1,6 @@
-import { Component, EventEmitter, forwardRef, Input, Output, Pipe, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, Pipe, PipeTransform, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MenuItemDirective } from '../menu/menu-item.directive'
 
 @Component({
     selector: 'fd-search-input',
@@ -44,20 +45,58 @@ export class SearchInputComponent implements ControlValueAccessor {
     @Output()
     itemClicked = new EventEmitter<any>();
 
+    @ViewChildren(MenuItemDirective) menuItems: QueryList<MenuItemDirective>;
+
+    @ViewChild('searchInputInput') searchInputInput;
+
     isOpen: boolean = false;
 
     inputTextValue: string;
 
-    onInputKeypressHandler(event) {
+    onInputKeydownHandler(event) {
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            if (this.menuItems && this.menuItems.first) {
+                this.menuItems.first.itemEl.nativeElement.children[0].focus();
+            }
         }
     }
 
-    onMenuKeypressHandler(event, term) {
+    onMenuKeydownHandler(event, term) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
             this.itemClicked.emit(term);
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            let foundItem = false;
+            this.menuItems.forEach((item, index) => {
+                if (document.activeElement === item.itemEl.nativeElement.children[0] && !foundItem) {
+                    const menuItemsArray = this.menuItems.toArray();
+                    if (menuItemsArray[index + 1]) {
+                        menuItemsArray[index + 1].itemEl.nativeElement.children[0].focus();
+                    }
+                    foundItem = true;
+                }
+            })
+        } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
+            let foundItem = false;
+            this.menuItems.forEach((item, index) => {
+                if (!foundItem) {
+                    if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
+                        this.searchInputInput.nativeElement.focus();
+                        foundItem = true;
+                    } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
+                        const menuItemsArray = this.menuItems.toArray();
+                        if (menuItemsArray[index - 1]) {
+                            menuItemsArray[index - 1].itemEl.nativeElement.children[0].focus();
+                        }
+                        foundItem = true;
+                    }
+                }
+            });
         }
     }
 

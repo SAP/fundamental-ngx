@@ -33,16 +33,16 @@ describe('SearchInputComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should call searchFunction onInputKeypressHandler', () => {
+    it('should call searchFunction onInputKeydownHandler', () => {
         spyOn(component, 'searchFunction');
         const event = {
             code: 'Enter'
         };
-        component.onInputKeypressHandler(event);
+        component.onInputKeydownHandler(event);
         expect(component.searchFunction).toHaveBeenCalled();
     });
 
-    it('should call search term callback onMenuKeypressHandler', () => {
+    it('should call search term callback onMenuKeydownHandler', () => {
         const event = {
             code: 'Enter'
         };
@@ -50,7 +50,7 @@ describe('SearchInputComponent', () => {
             callback: () => {}
         };
         spyOn(term, 'callback');
-        component.onMenuKeypressHandler(event, term);
+        component.onMenuKeydownHandler(event, term);
         expect(term.callback).toHaveBeenCalled();
     });
 
