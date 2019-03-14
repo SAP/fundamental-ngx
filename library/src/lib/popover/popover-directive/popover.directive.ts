@@ -77,9 +77,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             this.destroyContainer();
         }
 
-        if (this.eventRef && this.eventRef.length > 0) {
-            this.destroyTriggerListeners();
-        }
+        this.destroyTriggerListeners();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
