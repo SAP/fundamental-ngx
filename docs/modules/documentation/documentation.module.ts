@@ -241,6 +241,7 @@ import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
+import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -437,6 +438,7 @@ const ROUTES: Routes = [
         PanelGridColumnSpanExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+        PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
