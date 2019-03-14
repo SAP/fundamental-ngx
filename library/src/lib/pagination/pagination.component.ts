@@ -8,7 +8,12 @@ import { Pagination } from './pagination.model';
     providers: [PaginationService],
     host: {
         class: 'fd-pagination'
-    }
+    },
+    styles: [`
+        a {
+            cursor: pointer;
+        }
+    `]
 })
 export class PaginationComponent implements OnChanges {
     @Input()
