@@ -39,6 +39,7 @@ export * from './lib/multi-input/multi-input.module'
 export * from './lib/pagination/pagination.module';
 export * from './lib/panel/panel.module';
 export * from './lib/popover/popover.module';
+export * from './lib/popover/popover-directive/popover.directive';
 export * from './lib/scroll-spy/scroll-spy.module';
 export * from './lib/search-input/search-input.module';
 export * from './lib/shellbar/shellbar.module';
