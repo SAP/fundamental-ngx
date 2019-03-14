@@ -33,10 +33,13 @@
         [attr.role]="popoverControlIsTabIndexed ? '' : 'button'"
         (keypress)="onKeypressHandler($event)"
         aria-haspopup="true"
-    >
+        [fdPopover]="popoverBody">
         <ng-content select="fd-popover-control"></ng-content>
     </div>
-    <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
+    <ng-template #popoverBody>
+        hello
+        <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
+    </ng-template>
 </div>
 
 <ng-template #popoverBodyTpl>
@@ -45,8 +48,6 @@
                       'fd-popover__body--no-arrow': isDropdown || !arrow,
                       'fd-popover__body--right' : alignment == 'right' }"
         [attr.aria-hidden]="disabled ? true : !isOpen">
-        <div #popoverBodyContent>
             <ng-content select="fd-popover-body"></ng-content>
-        </div>
     </div>
 </ng-template>
