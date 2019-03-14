@@ -5,7 +5,7 @@ import {
     ComponentRef,
     Directive,
     ElementRef, EmbeddedViewRef, EventEmitter, HostListener,
-    Injector, Input, OnDestroy, OnInit, Output, Renderer2,
+    Injector, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges,
     TemplateRef
 } from '@angular/core';
 import { PopoverContainer } from './popover-container';
@@ -14,7 +14,7 @@ import Popper, { PopperOptions } from 'popper.js';
 @Directive({
     selector: '[fdPopover]'
 })
-export class PopoverDirective implements OnInit, OnDestroy {
+export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     @Input('fdPopover')
     content: TemplateRef<any> | string;
@@ -26,7 +26,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     triggers: string[] = ['click'];
 
     @Input()
-    defaultArrow: boolean = false;
+    defaultArrow: boolean = true;
 
     @Input()
     focusTrapped: boolean = true;
@@ -65,13 +65,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
             this.open();
         }
 
-        if (this.triggers && this.triggers.length > 0) {
-            this.triggers.forEach(trigger => {
-                this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
-                    this.toggle();
-                }));
-            });
-        }
+        this.addTriggerListeners();
     }
 
     ngOnDestroy(): void {
@@ -84,9 +78,22 @@ export class PopoverDirective implements OnInit, OnDestroy {
         }
 
         if (this.eventRef && this.eventRef.length > 0) {
-            this.eventRef.forEach(event => {
-                event();
-            });
+            this.destroyTriggerListeners();
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.triggers) {
+            this.destroyTriggerListeners();
+            this.addTriggerListeners();
+        }
+
+        if (changes.isOpen) {
+            if (changes.isOpen.currentValue === true) {
+                this.open();
+            } else {
+                this.close();
+            }
         }
     }
 
@@ -143,6 +150,24 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
         const containerEl = (this.containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         document.body.appendChild(containerEl);
+    }
+
+    private destroyTriggerListeners(): void {
+        if (this.eventRef && this.eventRef.length > 0) {
+            this.eventRef.forEach(event => {
+                event();
+            });
+        }
+    }
+
+    private addTriggerListeners(): void {
+        if (this.triggers && this.triggers.length > 0) {
+            this.triggers.forEach(trigger => {
+                this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
+                    this.toggle();
+                }));
+            });
+        }
     }
 
     private destroyContainer(): void {
