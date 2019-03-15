@@ -15,7 +15,9 @@ import focusTrap from 'focus-trap';
     selector: 'fd-popover-container',
     template: `        
         <div class="fd-popover-default-arrow" *ngIf="defaultArrow" x-arrow></div>
-        <ng-container #vc></ng-container>
+        <ng-container #vc>
+            {{contentString}}
+        </ng-container>
     `,
     styleUrls: ['./popover-container.scss'],
     host: {
@@ -38,6 +40,8 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
 
     content: TemplateRef<any> | string;
 
+    contentString: string;
+
     context: any;
 
     focusTrapped: boolean;
@@ -55,9 +59,11 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         if (this.content instanceof TemplateRef) {
             this.loadFromTemplate(this.content);
-            this.setupFocusTrap();
-            this.cdRef.detectChanges();
+        } else {
+            this.contentString = this.content;
         }
+        this.setupFocusTrap();
+        this.cdRef.detectChanges();
         this.isSetup.emit();
     }
 

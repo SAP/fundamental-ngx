@@ -105,34 +105,31 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     public open(): void {
         if (!this.isOpen && !this.disabled) {
-            this.initializeContainer();
+            this.createContainer();
             this.isOpen = true;
-            this.isOpenChange.emit(this.isOpen);
         }
+        this.isOpenChange.emit(this.isOpen);
     }
 
     public close(): void {
         if (this.isOpen) {
             this.destroyContainer();
             this.isOpen = false;
-            this.isOpenChange.emit(this.isOpen);
         }
-    }
-
-    private initializeContainer(): void {
-        if (!this.containerRef) {
-            this.createContainer();
-        }
+        this.isOpenChange.emit(this.isOpen);
     }
 
     private createContainer(): void {
+        if (this.containerRef) {
+            return;
+        }
         const factory = this.resolver.resolveComponentFactory(PopoverContainer);
         this.containerRef = factory.create(this.injector);
         this.appRef.attachView(this.containerRef.hostView);
-        this.containerRef.instance.content = this.content;
 
         // Set instance properties
         this.containerRef.instance.context = this;
+        this.containerRef.instance.content = this.content;
         this.containerRef.instance.focusTrapped = this.focusTrapped;
         this.containerRef.instance.defaultArrow = this.defaultArrow;
         this.containerRef.instance.closeOnEscapeKey = this.closeOnEscapeKey;
@@ -155,6 +152,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             this.eventRef.forEach(event => {
                 event();
             });
+            this.eventRef = [];
         }
     }
 
@@ -169,11 +167,16 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     private destroyContainer(): void {
-        this.appRef.detachView(this.containerRef.hostView);
-        this.popper.destroy();
-        this.popper = null;
-        this.containerRef.destroy();
-        this.containerRef = null;
+        if (this.containerRef) {
+            this.appRef.detachView(this.containerRef.hostView);
+            this.containerRef.destroy();
+            this.containerRef = null;
+        }
+
+        if (this.popper) {
+            this.popper.destroy();
+            this.popper = null;
+        }
     }
 
     private createPopper(): void {
@@ -196,5 +199,4 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             this.close();
         }
     }
-
 }
