@@ -1,4 +1,15 @@
-import { Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    HostListener,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -16,7 +27,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ]
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor {
+export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
     @Input()
     placeholder: string = '';
@@ -71,6 +82,16 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
 
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+            if (this.searchTerm) {
+                this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+            } else {
+                this.displayedValues =  this.dropdownValues;
+            }
         }
     }
 
