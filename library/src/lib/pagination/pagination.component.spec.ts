@@ -45,12 +45,11 @@ describe('Pagination Test', () => {
     it('should handle mouseevent', () => {
         const mouseEvent = new MouseEvent('click');
         spyOn(mouseEvent, 'preventDefault');
-        spyOn(component.selected, 'emit');
+        spyOn(component.pageChangeStart, 'emit');
 
         component.goToPage(1, mouseEvent);
 
-        expect(component.currentPage).toEqual(1);
-        expect(component.selected.emit).toHaveBeenCalledWith(1);
+        expect(component.pageChangeStart.emit).toHaveBeenCalledWith(1);
     });
 
     it('should get the pagination object for the service', () => {

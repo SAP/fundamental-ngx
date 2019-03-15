@@ -8,8 +8,7 @@
        (keypress)="onKeypressHandler(currentPage - 1, $event)"
        (click)="goToPage(currentPage - 1)">
     </a>
-    <a class="fd-pagination__link"
-       *ngFor="let page of pages">
+    <ng-container *ngFor="let page of pages">
         <a class="fd-pagination__link"
            tabindex="0"
            role="button"
@@ -23,7 +22,7 @@
                   aria-label="..."
                   role="presentation"></span>
         </ng-template>
-    </a>
+    </ng-container>
     <a class="fd-pagination__link fd-pagination__link--next"
        aria-label="Next"
        tabindex="0"
