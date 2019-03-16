@@ -1,4 +1,5 @@
-<div *ngIf="isDropdown" class="fd-dropdown" [ngClass]="{ 'fd-dropdown--compact': compact, 'fd-dropdown--toolbar': toolbar }">
+<div *ngIf="isDropdown" class="fd-dropdown"
+     [ngClass]="{ 'fd-dropdown--compact': compact, 'fd-dropdown--toolbar': toolbar }">
     <div class="fd-popover">
         <div class="fd-popover__control">
             <button
@@ -7,47 +8,40 @@
                 [ngClass]="
                     (btnType ? ' fd-button--' + btnType : '') +
                     (glyph ? ' sap-icon--' + glyph : '') +
-                    (size ? ' fd-button--' + size : '') +
                     (compact ? ' fd-button--compact' : '') +
                     (this.disabled ? ' is-disabled' : '') +
                     (toolbar ? ' fd-button--standard': '')
                 "
                 [attr.aria-expanded]="this.disabled ? false : isOpen"
                 [attr.aria-disabled]="this.disabled"
-                aria-haspopup="true"
-            >
+                aria-haspopup="true">
                 <ng-content></ng-content>
             </button>
         </div>
         <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
     </div>
 </div>
-<div *ngIf="!isDropdown" class="fd-popover"
-    [ngClass]="{ 'fd-popover--right' : alignment == 'right'}">
-    <div
-        #popoverControlWrapper
-        class="fd-popover__control"
+<div *ngIf="!isDropdown" class="fd-popover" #popoverContainer>
+    <div class="fd-popover__control"
         [attr.aria-expanded]="this.disabled ? false : isOpen"
         [attr.aria-disabled]="this.disabled"
-        [attr.tabindex]="popoverControlIsTabIndexed ? -1 : 0"
-        [attr.role]="popoverControlIsTabIndexed ? '' : 'button'"
-        (keypress)="onKeypressHandler($event)"
         aria-haspopup="true"
-        [fdPopover]="popoverBody">
+        [fdPopover]="popoverBody"
+        [(isOpen)]="isOpen"
+        [defaultArrow]="arrow"
+        [disabled]="disabled"
+        [focusTrapped]="focusTrapped"
+        [options]="options"
+        [appendTo]="(appendTo ? appendTo : popoverContainer)">
         <ng-content select="fd-popover-control"></ng-content>
     </div>
     <ng-template #popoverBody>
-        hello
         <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
     </ng-template>
 </div>
 
 <ng-template #popoverBodyTpl>
-    <div
-        [ngClass]="{  'fd-popover__body': popoverBodyHasContent,
-                      'fd-popover__body--no-arrow': isDropdown || !arrow,
-                      'fd-popover__body--right' : alignment == 'right' }"
-        [attr.aria-hidden]="disabled ? true : !isOpen">
-            <ng-content select="fd-popover-body"></ng-content>
+    <div [attr.aria-hidden]="disabled ? true : !isOpen">
+        <ng-content select="fd-popover-body"></ng-content>
     </div>
 </ng-template>

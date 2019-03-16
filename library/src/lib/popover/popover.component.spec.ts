@@ -58,7 +58,6 @@ describe('PopoverComponent', () => {
 
     it('should handle document click for open, isTimePicker popover', () => {
         component.isOpen = true;
-        component.isTimePicker = true;
         fixture.nativeElement.querySelector('.fd-popover').click();
 
         expect(component.popoverClosed.emit).not.toHaveBeenCalled();
