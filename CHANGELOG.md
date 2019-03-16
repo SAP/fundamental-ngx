@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0-rc.10"></a>
+# [0.3.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.9...v0.3.0-rc.10) (2019-03-15)
+
+
+### Features
+
+* update pagination component to handle promises and provide documentat… ([#623](https://github.com/SAP/fundamental-ngx/issues/623)) ([765b7af](https://github.com/SAP/fundamental-ngx/commit/765b7af))
+
+
+
+<a name="0.3.0-rc.9"></a>
+# [0.3.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.8...v0.3.0-rc.9) (2019-03-15)
+
+
+
+<a name="0.3.0-rc.8"></a>
+# [0.3.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.7...v0.3.0-rc.8) (2019-03-14)
+
+
+
 <a name="0.3.0-rc.7"></a>
 # [0.3.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.6...v0.3.0-rc.7) (2019-03-12)
 

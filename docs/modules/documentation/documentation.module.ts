@@ -230,6 +230,7 @@ import { MultiInputFilterExampleComponent } from './containers/multi-input/examp
 import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
+import { MultiInputAsyncExampleComponent } from './containers/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
@@ -242,6 +243,7 @@ import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement-example.component';
+import { HttpClientModule } from '@angular/common/http';
 
 export function highlightJsFactory() {
     return hljs;
@@ -486,6 +488,7 @@ const ROUTES: Routes = [
         TokenDocsComponent,
         TokenExampleComponent,
         ToolbarComponent,
+        MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
         BackdropExamplesComponent
@@ -502,7 +505,8 @@ const ROUTES: Routes = [
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         UtilsModule,
-        FundamentalNgxModule
+        FundamentalNgxModule,
+        HttpClientModule
     ],
     providers: [CopyService]
 })
