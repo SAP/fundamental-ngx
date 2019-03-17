@@ -159,8 +159,9 @@ import {
     PanelGridColumnSpanExampleComponent
 } from './containers/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
-import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
-import { PopoverProgrammaticOpenExampleComponent } from './containers/popover/examples/popover-programmatic-open-example.component';
+import { PopoverExampleComponent } from './containers/popover/examples/popover-simple/popover-example.component';
+import { PopoverModalExampleComponent } from './containers/popover/examples/popover-modal/popover-modal-example.component';
+import { PopoverProgrammaticOpenExampleComponent } from './containers/popover/examples/popover-programmatic/popover-programmatic-open-example.component';
 import { SearchInputExampleComponent } from './containers/search-input/examples/search-input-example.component';
 import { ShellbarBasicExampleComponent } from './containers/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './containers/shellbar/examples/shellbar-collapsible-example.component';
@@ -242,7 +243,7 @@ import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
-import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement-example.component';
+import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
 
 export function highlightJsFactory() {
@@ -442,6 +443,7 @@ const ROUTES: Routes = [
         PopoverExampleComponent,
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
+        PopoverModalExampleComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,

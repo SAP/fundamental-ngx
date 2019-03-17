@@ -16,13 +16,6 @@ import Popper, { PopperOptions } from 'popper.js';
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
-    // Search Input, timepicker etc
-    //         this.options.modifiers.preventOverflow = {enabled: false};
-    //         this.options.modifiers.hide = {enabled: false};
-
-    // Modal
-    // options --> modifiers --> preventOverflow --> boundariesElement = 'window'
-
     @Input('fdPopover')
     content: TemplateRef<any> | string;
 
@@ -72,7 +65,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     ngOnInit(): void {
 
         if (this.isOpen) {
-            this.open(true);
+            this.open();
         }
 
         this.addTriggerListeners();
@@ -97,22 +90,28 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes.triggers) {
-            this.destroyTriggerListeners();
-            this.addTriggerListeners();
+            setTimeout(() => {
+                this.destroyTriggerListeners();
+                this.addTriggerListeners();
+            });
         }
 
         if (changes.isOpen) {
-            if (changes.isOpen.currentValue === true) {
-                this.isOpen = false;
-                this.open(true);
+            if (changes.isOpen.currentValue) {
+                setTimeout(() => {
+                    this.isOpen = false;
+                    this.open(false);
+                });
             } else {
-                this.isOpen = true;
-                this.close(true);
+                setTimeout(() => {
+                    this.isOpen = true;
+                    this.close(false);
+                });
             }
         }
     }
 
-    public toggle(fireEvent: boolean = false): void {
+    public toggle(fireEvent: boolean = true): void {
         if (this.isOpen) {
             this.close(fireEvent);
         } else {
@@ -120,7 +119,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    public open(fireEvent: boolean = false): void {
+    public open(fireEvent: boolean = true): void {
         if (!this.isOpen && !this.disabled) {
             this.createContainer();
             this.isOpen = true;
@@ -128,12 +127,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             if (fireEvent) {
                 this.isOpenChange.emit(this.isOpen);
             }
-            console.log('opening')
-            this.cdRef.detectChanges();
         }
     }
 
-    public close(fireEvent: boolean = false): void {
+    public close(fireEvent: boolean = true): void {
         if (this.isOpen) {
             this.destroyContainer();
             this.isOpen = false;
@@ -141,8 +138,12 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             if (fireEvent) {
                 this.isOpenChange.emit(this.isOpen);
             }
-            console.log('closing')
-            this.cdRef.detectChanges();
+        }
+    }
+
+    public updatePopper(): void {
+        if (this.popper) {
+            this.popper.scheduleUpdate();
         }
     }
 
@@ -165,7 +166,6 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
 
         this.appRef.attachView(this.containerRef.hostView);
-
         const setupRef = this.containerRef.instance.isSetup.subscribe(() => {
             this.createPopper();
             setupRef.unsubscribe();
@@ -194,7 +194,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         if (this.triggers && this.triggers.length > 0) {
             this.triggers.forEach(trigger => {
                 this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
-                    this.toggle(false);
+                    this.toggle();
                 }));
             });
         }
@@ -230,7 +230,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             !this.containerRef.location.nativeElement.contains(event.target)) {
             event.preventDefault();
             event.stopPropagation();
-            this.close(true);
+            this.close();
         }
     }
 }

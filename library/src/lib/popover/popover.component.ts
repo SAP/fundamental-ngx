@@ -1,14 +1,15 @@
 import {
     Component,
     Input,
-    ElementRef,
     OnInit,
     Output,
     EventEmitter,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    ViewChild
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import Popper, { PopperOptions } from 'popper.js';
+import { PopoverDirective } from './popover-directive/popover.directive';
 
 @Component({
     selector: 'fd-popover',
@@ -26,6 +27,9 @@ export class PopoverComponent implements OnInit {
 
     @Input()
     appendTo: HTMLElement | 'body';
+
+    @Input()
+    triggers: string[] = ['click'];
 
     @Input()
     glyph: string;
@@ -58,31 +62,38 @@ export class PopoverComponent implements OnInit {
     closeOnEscapeKey: boolean = true;
 
     @Output()
-    popoverClosed: EventEmitter<any> = new EventEmitter<any>();
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     id: string;
 
-    constructor(private hasher: HashService,
-                private eRef: ElementRef,
-                private cdRef: ChangeDetectorRef) {
-    }
+    private isSetup: boolean = false;
 
-    ngOnInit() {
+    constructor(private hasher: HashService) {}
+
+    ngOnInit(): void {
         this.id = this.hasher.hash();
+        this.isSetup = true;
     }
 
-    close(): void {
+    public toggle(): void {
         if (this.isOpen) {
-            this.isOpen = false;
-            this.popoverClosed.emit();
-            this.cdRef.detectChanges();
+            this.close();
+        } else {
+            this.open();
         }
     }
 
-    open(): void {
+    public close(): void {
+        if (this.isOpen) {
+            this.isOpen = false;
+            this.isOpenChange.emit(this.isOpen);
+        }
+    }
+
+    public open(): void {
         if (!this.isOpen) {
             this.isOpen = true;
-            this.cdRef.detectChanges();
+            this.isOpenChange.emit(this.isOpen);
         }
     }
 

@@ -1,5 +1,7 @@
 <div class="fd-search-input" [ngClass]="{'fd-search-input--closed': inShellbar}">
-    <fd-popover (popoverClosed)="isOpen = false" [arrow]="false"
+    <fd-popover [isOpen]="isOpen"
+                [options]="POPOVER_OPTIONS"
+                [focusTrapped]="false"
                 [ngClass]="{'fd-popover-body--display-none': (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText).length < 1}">
         <fd-popover-control>
             <div *ngIf="!inShellbar" class="fd-combobox-control">

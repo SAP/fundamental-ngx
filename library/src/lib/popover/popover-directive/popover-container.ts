@@ -3,7 +3,7 @@ import {
     ChangeDetectorRef,
     Component, ElementRef, EmbeddedViewRef,
     EventEmitter,
-    HostBinding, HostListener, OnDestroy,
+    HostListener, OnDestroy,
     Output,
     TemplateRef,
     ViewChild,

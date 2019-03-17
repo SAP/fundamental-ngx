@@ -1,5 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output, Pipe, PipeTransform } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-search-input',
@@ -48,7 +49,20 @@ export class SearchInputComponent implements ControlValueAccessor {
 
     inputTextValue: string;
 
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
+    };
+
     onInputKeypressHandler(event) {
+        this.isOpen = true;
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
         }

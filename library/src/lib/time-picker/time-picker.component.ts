@@ -2,6 +2,7 @@ import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-time-picker',
@@ -47,7 +48,19 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     placeholder: string;
 
-    onChange: Function = (time: TimeObject) => {};
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
+    };
+
+    onChange: Function = () => {};
     onTouched: Function = () => {};
 
     ngOnInit(): void {
