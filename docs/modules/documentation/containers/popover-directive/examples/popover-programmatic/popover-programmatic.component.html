@@ -1,0 +1,30 @@
+<button fd-button
+        [fdPopover]="clickTemplate"
+        [defaultArrow]="true"
+        [triggers]="[]"
+        [isOpen]="isOpenClick"
+        (click)="isOpenClick = !isOpenClick">
+    Click Custom Trigger
+</button>
+
+<button fd-button
+        [fdPopover]="hoverTemplate"
+        [defaultArrow]="true"
+        [triggers]="[]"
+        [isOpen]="isOpenHover"
+        (mouseenter)="isOpenHover = true"
+        (mouseleave)="isOpenHover = false">
+    Hover Custom Trigger
+</button>
+
+<ng-template #clickTemplate>
+    <p>
+        This popover was opened using a custom click trigger.
+    </p>
+</ng-template>
+
+<ng-template #hoverTemplate>
+    <p>
+        This popover was opened using a custom hover trigger.
+    </p>
+</ng-template>

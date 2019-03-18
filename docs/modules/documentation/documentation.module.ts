@@ -247,6 +247,8 @@ import { PopoverPlacementExampleComponent } from './containers/popover/examples/
 import { HttpClientModule } from '@angular/common/http';
 import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
 import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
+import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
+import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -449,6 +451,8 @@ const ROUTES: Routes = [
         PopoverModalExampleComponent,
         PopoverDirectiveDocsComponent,
         PopoverDirectiveExampleComponent,
+        PopoverTriggersComponent,
+        PopoverProgrammaticComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
