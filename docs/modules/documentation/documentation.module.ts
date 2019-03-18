@@ -245,6 +245,8 @@ import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
+import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -283,6 +285,7 @@ const ROUTES: Routes = [
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
+            { path: 'popover-directive', component: PopoverDirectiveDocsComponent },
             { path: 'scroll-spy', component: ScrollSpyDocsComponent },
             { path: 'searchInput', component: SearchInputDocsComponent },
             { path: 'shellbar', component: ShellbarDocsComponent },
@@ -444,6 +447,8 @@ const ROUTES: Routes = [
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
         PopoverModalExampleComponent,
+        PopoverDirectiveDocsComponent,
+        PopoverDirectiveExampleComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,

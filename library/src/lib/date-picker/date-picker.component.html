@@ -12,6 +12,7 @@
                    [placeholder]="placeholder"
                    (change)="getInputValue(datePicker.value)"
                    (blur)="onBlurHandler()"
+                   (click)="isOpen = true"
                    [ngClass]="{ 'fd-input--compact': compact }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"

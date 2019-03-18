@@ -1,5 +1,6 @@
 <fd-popover [isOpen]="isOpen"
             [focusTrapped]="false"
+            [triggers]="[]"
             [options]="POPOVER_OPTIONS">
     <fd-popover-control>
         <!--fd-input-group *ngIf="!meridian" (timeInputChanged)="timeInputChanged($event)" [type]="'time'"
@@ -11,11 +12,11 @@
                         [placeholder]="getPlaceholder()" [inputText]="getFormattedTime()" [disabled]="disabled"
                         (addOnButtonClicked)="addOnButtonClicked($event)"></fd-input-group-->
         <div class="fd-input-group fd-input-group--after"
-             (click)="inputGroupClicked($event)"
              [ngClass]="{'fd-input-group--compact' : compact}">
             <input [value]="getFormattedTime()"
                    (change)="timeInputChanged($event.currentTarget.value)"
                    (focus)="onFocusHandler()"
+                   (click)="inputGroupClicked($event)"
                    [disabled]="disabled"
                    type="text"
                    [ngClass]="{ 'fd-input--compact': compact }"

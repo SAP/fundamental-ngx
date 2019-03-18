@@ -1,19 +1,11 @@
-<header>Popover</header>
+<header>Popover Directive</header>
 <description>
     <p>
-        The popover is a wrapping component that accepts a “control” as well as a “body".
+        The popover directive is used by the fd-popover component.
+        It constitutes both an abstraction of Popper.js and Fundamental-ngx features.
     </p>
     <p>
-        A control can be anything that you want to trigger the interaction from. The body will be the contents of what
-        you reveal on the page after triggering the popover. Commonly used as the interaction/wrapping component when
-        composing “dropdowns”, “contextual menus”, “mega menu”, etc, when paired with the menu component.
-    </p>
-    <p>
-        As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one
-        popover should close all others to prevent multiple layers and collisions of several popovers.
-    </p>
-    <p>
-        Fundamental-ngx popovers use <a href="https://popper.js.org/index.html">Popper.js.</a>
+        In cases where the popover component is insufficient, or even unneeded, this directive can serve as a powerful alternative.
     </p>
 </description>
 
@@ -72,37 +64,3 @@
 <code-example [code]="popoverExampleHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
-
-<h2>Popover Placement</h2>
-<description>
-    Popper.js offers a variety of placements for users to choose from. These can be any of 'top', 'bottom', 'right', 'left', and then can be suffixed with '-start' or '-end'.
-</description>
-<component-example [name]="'ex2'">
-    <fd-popover-placement-example></fd-popover-placement-example>
-</component-example>
-<code-example [code]="popoverPlacementExampleHtml" [language]="'HTML'"></code-example>
-<code-example [code]="popoverPlacementExampleTs" [language]="'TypeScript'"></code-example>
-
-<separator></separator>
-
-<h2>Programmatic Control</h2>
-<description>
-    Controlling the popover through programmatic means is easy. Simply two-way bind the isOpen property and change it. There are also some methods such as <code>open()</code> and <code>close()</code> which can be called through reference variable.
-</description>
-<component-example [name]="'ex3'">
-    <fd-popover-programmatic-open-example></fd-popover-programmatic-open-example>
-</component-example>
-<code-example [code]="popoverProgrammaticExampleHtml" [language]="'HTML'"></code-example>
-<code-example [code]="popoverProgrammaticExampleTs" [language]="'TypeScript'"></code-example>
-
-<separator></separator>
-
-<h2>Popovers in Modals</h2>
-<description>
-    Operating popovers inside a modal requires a few extra configurations. Note that this assumes a scenario where scrolling within the modal is not required.
-</description>
-<component-example [name]="'ex4'">
-    <fd-popover-modal-example></fd-popover-modal-example>
-</component-example>
-<code-example [code]="popoverModalExampleHtml" [language]="'HTML'"></code-example>
-<code-example [code]="popoverModalExampleTs" [language]="'TypeScript'"></code-example>

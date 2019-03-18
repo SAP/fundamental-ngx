@@ -33,7 +33,7 @@ class TestStringComponent {
     imports: [PopoverModule]
 }) class TestModule {}
 
-fdescribe('PopoverDirective', () => {
+describe('PopoverDirective', () => {
     let fixtureTemplate: ComponentFixture<TestTemplateComponent>;
     let fixtureString: ComponentFixture<TestStringComponent>;
 
