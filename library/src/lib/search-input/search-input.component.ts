@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, Output, Pipe, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopperOptions } from 'popper.js';
 
@@ -14,7 +14,7 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor {
+export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     dropdownValues: any[];
 
@@ -105,6 +105,15 @@ export class SearchInputComponent implements ControlValueAccessor {
 
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+
+    ngOnInit() {
+        if (this.inShellbar) {
+            this.POPOVER_OPTIONS.modifiers.offset = {
+                enabled: true,
+                offset: -264
+            };
+        }
     }
 }
 
