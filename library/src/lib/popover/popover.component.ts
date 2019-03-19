@@ -73,6 +73,10 @@ export class PopoverComponent implements OnInit {
     ngOnInit(): void {
         this.id = this.hasher.hash();
         this.isSetup = true;
+
+        if (this.options.modifiers && this.options.modifiers.preventOverflow) {
+            this.options.modifiers.preventOverflow.escapeWithReference = true;
+        }
     }
 
     public toggle(): void {
