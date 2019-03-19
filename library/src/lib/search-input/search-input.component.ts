@@ -74,6 +74,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     };
 
     onInputKeypressHandler(event) {
+        console.log('called')
         this.isOpen = true;
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
@@ -96,17 +97,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
 
     shellbarSearchInputClicked(event) {
         event.stopPropagation();
-    }
-
-    @HostListener('document:click', ['$event'])
-    clickHandler(event: MouseEvent) {
-        if (this.isOpen &&
-            event.target !== this.elRef.nativeElement &&
-            !this.elRef.nativeElement.contains(event.target)) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.isOpen = false;
-        }
     }
 
     onChange: any = () => {};
