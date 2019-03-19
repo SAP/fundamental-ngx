@@ -30,7 +30,7 @@ export class ComboboxInputComponent extends SearchInputComponent {
             menuItemsArray.forEach((item, index) => {
                 if (!foundItem) {
                     if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
-                        this.searchInputInput.nativeElement.focus();
+                        this.searchInputElement.nativeElement.focus();
                         foundItem = true;
                     } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
                         if (menuItemsArray[index - 1]) {

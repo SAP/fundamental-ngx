@@ -110,10 +110,10 @@ describe('ComboboxInputComponent', () => {
             item2
         ]);
         spyOnProperty(document, 'activeElement').and.returnValue(item1.itemEl.nativeElement.children[0]);
-        spyOn(component.searchInputInput.nativeElement, 'focus');
+        spyOn(component.searchInputElement.nativeElement, 'focus');
         event.code = 'ArrowUp';
         component.newItemKeydownHandler(event);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.searchInputInput.nativeElement.focus).toHaveBeenCalled();
+        expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });
 });

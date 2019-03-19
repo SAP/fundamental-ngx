@@ -4,7 +4,7 @@
         <fd-popover-control>
             <div *ngIf="!inShellbar" class="fd-combobox-control">
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                    <input #searchInputInput type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                    <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
                            (keydown)="onInputKeydownHandler($event)"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
@@ -19,7 +19,7 @@
                         (click)="isOpen = !isOpen;" [ngClass]="('sap-icon--' + this.glyph)"></button>
                 <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
                     <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
-                        <input #searchInputInput type="text" class="fd-input"
+                        <input #searchInputElement type="text" class="fd-input"
                                (keydown)="onInputKeydownHandler($event)"
                                [disabled]="disabled"
                                [(ngModel)]="inputText"

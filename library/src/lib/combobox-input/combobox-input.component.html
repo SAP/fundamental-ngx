@@ -4,7 +4,7 @@
         <fd-popover-control>
             <div class="fd-combobox-control">
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                    <input #searchInputInput type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                    <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
                            (keydown)="onInputKeydownHandler($event)"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
