@@ -1,4 +1,16 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
+import {
+    Component,
+    ComponentRef,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    HostListener,
+    Input,
+    OnInit,
+    Output,
+    Pipe,
+    PipeTransform
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopperOptions } from 'popper.js';
 
@@ -82,6 +94,21 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
         this.itemClicked.emit(term);
     }
 
+    shellbarSearchInputClicked(event) {
+        event.stopPropagation();
+    }
+
+    @HostListener('document:click', ['$event'])
+    clickHandler(event: MouseEvent) {
+        if (this.isOpen &&
+            event.target !== this.elRef.nativeElement &&
+            !this.elRef.nativeElement.contains(event.target)) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.isOpen = false;
+        }
+    }
+
     onChange: any = () => {};
     onTouched: any = () => {};
 
@@ -115,6 +142,8 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
             };
         }
     }
+
+    constructor(private elRef: ElementRef) {}
 }
 
 @Pipe({

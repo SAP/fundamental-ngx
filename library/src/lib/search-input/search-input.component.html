@@ -1,6 +1,5 @@
 <div class="fd-search-input" [ngClass]="{'fd-search-input--closed': inShellbar}">
-    <fd-popover [isOpen]="isOpen"
-                [options]="POPOVER_OPTIONS"
+    <fd-popover [options]="POPOVER_OPTIONS"
                 [focusTrapped]="false"
                 [ngClass]="{'fd-popover-body--display-none': (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText).length < 1}">
         <fd-popover-control>
@@ -25,7 +24,8 @@
                                (keypress)="onInputKeypressHandler($event)"
                                [disabled]="disabled"
                                [(ngModel)]="inputText"
-                               placeholder="{{placeholder}}">
+                               placeholder="{{placeholder}}"
+                               (click)="shellbarSearchInputClicked($event)">
                     </div>
                 </div>
             </div>
