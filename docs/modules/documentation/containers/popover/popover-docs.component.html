@@ -1,18 +1,20 @@
 <header>Popover</header>
-<description>The popover is a wrapping component that accepts a "control" as well as a "body". A control can be
-    anything that you want to trigger the interaction from. The body will be the contents of what you reveal on the page
-    after triggering the popover. When paired with the menu component, the popover is commonly used as the
-    interaction/wrapping component for composing "dropdowns", "contextual menus", etc. <br />
-
-    As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one popover
-    should close all others to prevent multiple layers and collisions of several popovers.
-    <br/><br/>
-    The popover can be opened via keyboard by pressing enter or the space bar when focused. Popover menu items are not
-    automatically tab-indexed - see the Menu component documentation for more details.
-    <br/><br/>
-    If the items in your popover body are dynamic and the popover body could potentially appear empty, it is recommended
-    to place an <code>*ngIf</code> on the <code>&lt;fd-popover-body></code> component to check if the popover body contents
-    exist.  If the contents are empty and the popover body component still renders, an empty border will display.
+<description>
+    <p>
+        The popover is a wrapping component that accepts a “control” as well as a “body".
+    </p>
+    <p>
+        A control can be anything that you want to trigger the interaction from. The body will be the contents of what
+        you reveal on the page after triggering the popover. Commonly used as the interaction/wrapping component when
+        composing “dropdowns”, “contextual menus”, “mega menu”, etc, when paired with the menu component.
+    </p>
+    <p>
+        As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one
+        popover should close all others to prevent multiple layers and collisions of several popovers.
+    </p>
+    <p>
+        Fundamental-ngx popovers use <a href="https://popper.js.org/index.html">Popper.js.</a>
+    </p>
 </description>
 
 <import module="PopoverModule" path="fundamental-ngx"></import>
@@ -22,36 +24,85 @@
 <h1>&lt;fd-popover&gt;</h1>
 
 <properties [properties]="{
-  childComponents: [
-    { name: '<fd-popover>', description: 'Wrapper for the whole container. Contains <fd-popover-control> and <fd-popover-body>.' },
-    { name: '<fd-popover-control>', description: 'Control element to toggle the display of the popover.' },
-    { name: '<fd-popover-body>', description: 'Wrapper that contains the popover content.' }
-  ]
+    inputs: [
+        { name: 'arrow', description: 'Boolean. Whether an arrow should be shown next to the popover. Defaults to false.' },
+        { name: 'disabled', description: 'Boolean. Whether the popover is disabled from opening. Defaults to false.' },
+        { name: 'appendTo', description: 'HTMLElement or \'body\'. Which element the popover should be appended to. Optional.' },
+        { name: 'isOpen', description: 'Boolean. The open state of the popover. Defaults to false.' },
+        { name: 'options', description: 'PopperOptions. The options passed to Popper.js.' },
+        { name: 'triggers', description: 'String[]. An array of event labels that will toggle the popover state automatically. Defaults to [\'click\']' },
+        { name: 'focusTrapped', description: 'Boolean. Whether the popover focus should be trapped. Defaults to true.' },
+        { name: 'closeOnOutsideClick', description: 'Boolean. Whether the popover should close when the user clicks outside. Defaults to true.' },
+        { name: 'closeOnEscapeKey', description: 'Boolean. Whether the popover should close when the user presses escape. Defaults to true.' }
+    ],
+    outputs: [
+        { name: 'isOpenChange', description: 'Emitted when the state of the popover changes. Allows two-way binding to the isOpen input.' }
+    ],
+    childComponents: [
+        { name: '<fd-popover-control>', description: 'Control element to toggle the display of the popover.' },
+        { name: '<fd-popover-body>', description: 'Wrapper that contains the popover content.' }
+    ],
+    methods: [
+        { name: 'open()', description: 'Opens the popover.' },
+        { name: 'close()', description: 'Closes the popover.' },
+        { name: 'toggle()', description: 'Toggles the popover.' }
+    ]
 }"></properties>
 
 <separator></separator>
 
-<h2>Popover Example</h2>
+<description>
+    <p>
+        Under the hood, the Popover component makes use of <code>PopoverDirective</code>.
+        It abstracts some functionality in favor of consistency, but it may not be sufficient for every use case.
+        If more flexibility is required, we recommend the use of the directive which can be found <a
+        [routerLink]="['/popover-directive']">here</a>.
+    </p>
+</description>
+
+<separator></separator>
+
+<h2>Simple Popovers</h2>
+<description>
+    Making use of simple popovers is very easy. Open an fd-popover component, place a control and body inside. You are no required to keep track of the popover state.
+</description>
 <component-example [name]="'ex1'">
-  <fd-popover-example></fd-popover-example>
+    <fd-popover-example></fd-popover-example>
 </component-example>
 <code-example [code]="popoverExampleHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
-<h2>Popover Programmatic Open/Close Example</h2>
+<h2>Popover Placement</h2>
 <description>
-    By assigning a template reference variable to a popover, we are able to open and close the popover programmatically. This also allows us to create our own
-    click or key handlers on the popover itself, overriding default behavior.
+    Popper.js offers a variety of placements for users to choose from. These can be any of 'top', 'bottom', 'right', 'left', and then can be suffixed with '-start' or '-end'.
 </description>
 <component-example [name]="'ex2'">
+    <fd-popover-placement-example></fd-popover-placement-example>
+</component-example>
+<code-example [code]="popoverPlacementExampleHtml" [language]="'HTML'"></code-example>
+<code-example [code]="popoverPlacementExampleTs" [language]="'TypeScript'"></code-example>
+
+<separator></separator>
+
+<h2>Programmatic Control</h2>
+<description>
+    Controlling the popover through programmatic means is easy. Simply two-way bind the isOpen property and change it. There are also some methods such as <code>open()</code> and <code>close()</code> which can be called through reference variable.
+</description>
+<component-example [name]="'ex3'">
     <fd-popover-programmatic-open-example></fd-popover-programmatic-open-example>
 </component-example>
 <code-example [code]="popoverProgrammaticExampleHtml" [language]="'HTML'"></code-example>
 <code-example [code]="popoverProgrammaticExampleTs" [language]="'TypeScript'"></code-example>
 
-<style>
-  ::ng-deep fd-popover {
-    margin-right: 100px;
-  }
-</style>
+<separator></separator>
+
+<h2>Popovers in Modals</h2>
+<description>
+    Operating popovers inside a modal requires a few extra configurations. Note that this assumes a scenario where scrolling within the modal is not required.
+</description>
+<component-example [name]="'ex4'">
+    <fd-popover-modal-example></fd-popover-modal-example>
+</component-example>
+<code-example [code]="popoverModalExampleHtml" [language]="'HTML'"></code-example>
+<code-example [code]="popoverModalExampleTs" [language]="'TypeScript'"></code-example>

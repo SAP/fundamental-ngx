@@ -1,0 +1,32 @@
+<button fd-button (click)="modalService.open(template, {width: '300px'})">
+    Open Modal
+</button>
+
+<ng-template #template let-modal>
+    <fd-modal-header>
+        Popover Example
+        <button fd-modal-close-btn (click)="modal.dismiss()"></button>
+    </fd-modal-header>
+    <fd-modal-body>
+        <fd-popover [options]="options" appendTo="body">
+            <fd-popover-control>
+                <button fd-button>Click me!</button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item>
+                            <a [attr.href]="'#'">Option 1</a>
+                        </li>
+                        <li fd-menu-item>
+                            <a [routerLink]="'#'">Option 2</a>
+                        </li>
+                        <li fd-menu-item>
+                            Option 3
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-modal-body>
+</ng-template>

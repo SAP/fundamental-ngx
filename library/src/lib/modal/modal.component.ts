@@ -99,7 +99,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
                 });
                 this.focusTrap.activate();
             } catch (e) {
-                console.warn('Attempted to focus trap the modal, but no tabbable elements were found.')
+                console.warn('Attempted to focus trap the modal, but no tabbable elements were found.');
             }
         }
         this.cdRef.detectChanges();

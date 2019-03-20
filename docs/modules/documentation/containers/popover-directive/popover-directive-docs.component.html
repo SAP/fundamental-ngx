@@ -1,0 +1,75 @@
+<header>Popover Directive</header>
+<description>
+    <p>
+        The popover directive is used by the fd-popover component.
+        It constitutes both an abstraction of Popper.js and Fundamental-ngx features.
+    </p>
+    <p>
+        In cases where the popover component is insufficient, or even unneeded, this directive can serve as a powerful alternative.
+    </p>
+</description>
+
+<import module="PopoverModule" path="fundamental-ngx"></import>
+
+<separator></separator>
+
+<h1>fdPopover</h1>
+
+<properties [properties]="{
+    inputs: [
+        { name: 'fdPopover', description: 'TemplateRef or string. The content of the popover.' },
+        { name: 'disabled', description: 'Boolean. Whether the popover is disabled from opening. Defaults to false.' },
+        { name: 'appendTo', description: 'HTMLElement or \'body\'. Which element the popover should be appended to. Optional.' },
+        { name: 'isOpen', description: 'Boolean. The open state of the popover. Defaults to false.' },
+        { name: 'options', description: 'PopperOptions. The options passed to Popper.js.' },
+        { name: 'triggers', description: 'String[]. An array of event labels that will toggle the popover state automatically. Defaults to [\'click\']' },
+        { name: 'focusTrapped', description: 'Boolean. Whether the popover focus should be trapped. Defaults to true.' },
+        { name: 'closeOnOutsideClick', description: 'Boolean. Whether the popover should close when the user clicks outside. Defaults to true.' },
+        { name: 'closeOnEscapeKey', description: 'Boolean. Whether the popover should close when the user presses escape. Defaults to true.' },
+        { name: 'defaultArrow', description: 'Boolean. Whether the directive should generate an arrow. Defaults to false.' }
+    ],
+    outputs: [
+        { name: 'isOpenChange', description: 'Emitted when the state of the popover changes. Allows two-way binding to the isOpen input.' }
+    ],
+    methods: [
+        { name: 'open()', description: 'Opens the popover.' },
+        { name: 'close()', description: 'Closes the popover.' },
+        { name: 'toggle()', description: 'Toggles the popover.' },
+        { name: 'updatePopper()', description: 'Forces a popper update cycle.' }
+    ]
+}"></properties>
+
+<separator></separator>
+
+<h2>Simple Popovers</h2>
+<description>
+    Creating a popover is simple. Use a string or template as the content of the directive.
+</description>
+<component-example [name]="'ex1'">
+    <fd-popover-directive-example></fd-popover-directive-example>
+</component-example>
+<code-example [code]="simplePopoverH" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Different Triggers</h2>
+<description>
+    The directive provides a built-in trigger feature, which listens to the user-defined HTML events and toggles the popover.
+    This can also be implemented manually by the user by simply switching an <code>isOpen</code> property.
+</description>
+<component-example [name]="'ex2'">
+    <fd-popover-triggers></fd-popover-triggers>
+</component-example>
+<code-example [code]="simplePopoverH" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Programmatic Triggers</h2>
+<description>
+    A manual implementation of the built-in triggers is possible. Using two-way binding on the <code>isOpen</code> property also allows the use of both.
+</description>
+<component-example [name]="'ex3'">
+    <fd-popover-programmatic></fd-popover-programmatic>
+</component-example>
+<code-example [code]="programmaticPopoverH" [language]="'HTML'"></code-example>
+

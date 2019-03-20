@@ -1,4 +1,5 @@
-<fd-popover [isDropdown]="true" [glyph]="'filter'">
+<fd-popover [isDropdown]="true" [glyph]="'filter'"
+            [options]="{placement: 'bottom-start', modifiers: {preventOverflow: {enabled: false}, hide: {enabled: false}}}">
     Dropdown
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>

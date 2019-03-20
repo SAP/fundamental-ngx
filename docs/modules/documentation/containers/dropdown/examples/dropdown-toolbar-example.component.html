@@ -1,4 +1,6 @@
-<fd-popover [isDropdown]="true" [toolbar]="true">
+<fd-popover [isDropdown]="true"
+            [toolbar]="true"
+            [options]="{placement: 'bottom-start', modifiers: {preventOverflow: {enabled: false}, hide: {enabled: false}}}">
     Dropdown
     <fd-popover-body *ngIf="menu1 && menu1.length || menu2 && menu2.length">
         <fd-menu>
@@ -21,7 +23,10 @@
     </fd-popover-body>
 </fd-popover>
 
-<fd-popover [isDropdown]="true" [compact]="true" [toolbar]="true">
+<fd-popover [isDropdown]="true"
+            [compact]="true"
+            [toolbar]="true"
+            [options]="{placement: 'bottom-start', modifiers: {preventOverflow: {enabled: false}, hide: {enabled: false}}}">
     Compact Dropdown
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>

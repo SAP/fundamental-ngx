@@ -11,6 +11,7 @@ import {
     SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-multi-input',
@@ -39,7 +40,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     compact: boolean = false;
 
     @Input()
-    maxHeight: string;
+    maxHeight: string = '200px';
 
     @Input()
     glyph: string = 'navigation-down-arrow';
@@ -70,6 +71,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     isOpen = false;
 
     init = false;
+
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
+    };
 
     onChange: Function = () => {};
 

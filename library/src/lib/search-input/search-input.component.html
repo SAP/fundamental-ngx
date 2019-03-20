@@ -1,5 +1,7 @@
 <div class="fd-search-input" [ngClass]="{'fd-search-input--closed': inShellbar}">
-    <fd-popover (popoverClosed)="isOpen = false" [isSearchInput]="true" [arrow]="false"
+    <fd-popover [options]="POPOVER_OPTIONS"
+                [focusTrapped]="false"
+                [(isOpen)]="isOpen"
                 [ngClass]="{'fd-popover-body--display-none': (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText).length < 1}">
         <fd-popover-control>
             <div *ngIf="!inShellbar" class="fd-combobox-control">
@@ -16,14 +18,15 @@
             </div>
             <div *ngIf="inShellbar" class="fd-search-input__control">
                 <button tabindex="0" class="fd-button--shell" [attr.aria-expanded]="isOpen"
-                        (click)="isOpen = !isOpen;" [ngClass]="('sap-icon--' + this.glyph)"></button>
+                        [ngClass]="('sap-icon--' + this.glyph)"></button>
                 <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
                     <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
                         <input type="text" class="fd-input"
                                (keypress)="onInputKeypressHandler($event)"
                                [disabled]="disabled"
                                [(ngModel)]="inputText"
-                               placeholder="{{placeholder}}">
+                               placeholder="{{placeholder}}"
+                               (click)="shellbarSearchInputClicked($event)">
                     </div>
                 </div>
             </div>

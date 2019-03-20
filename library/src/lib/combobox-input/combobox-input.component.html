@@ -1,5 +1,5 @@
 <div class="fd-combobox-input">
-    <fd-popover (popoverClosed)="isOpen = false;" [isSearchInput]="true" [arrow]="false"
+    <fd-popover [options]="POPOVER_OPTIONS" [focusTrapped]="false"
                 [ngClass]="{'fd-popover-body--display-none': (dropdownValues | fdSearch:inputText).length < 1}">
         <fd-popover-control>
             <div class="fd-combobox-control">

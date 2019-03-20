@@ -1,6 +1,6 @@
 <div class="fd-datetime">
-    <div class="fd-popover">
-        <div class="fd-popover__control">
+    <fd-popover [isOpen]="isOpen" [triggers]="[]" [focusTrapped]="false" [options]="POPOVER_OPTIONS">
+        <fd-popover-control>
             <div class="fd-input-group fd-input-group--after"
                  [ngClass]="{'fd-input-group--compact' : compact}">
                 <input type="text"
@@ -10,6 +10,7 @@
                        [placeholder]="placeholder"
                        (change)="inputValueChange(dateTimeInput.value)"
                        (blur)="onBlurHandler()"
+                       (click)="isOpen = true"
                        [ngClass]="{ 'fd-input--compact': compact }"
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
@@ -18,12 +19,14 @@
                             [attr.aria-expanded]="isOpen"></button>
                 </span>
             </div>
-        </div>
-        <div class="fd-popover__body"
+        </fd-popover-control>
+        <fd-popover-body
              [attr.aria-expanded]="isOpen"
-             [attr.aria-hidden]="!isOpen">
+             [attr.aria-hidden]="!isOpen"
+             [style.display]="'block'">
             <div class="fd-datetime__container">
-                <fd-calendar calType="single" (closeCalendar)="closePopover()"
+                <fd-calendar calType="single"
+                             (closeCalendar)="closePopover()"
                              [disableFunction]="disableFunction ? disableFunction : null"
                              [blockFunction]="blockFunction ? blockFunction : null"
                              [(ngModel)]="selectedDay"
@@ -41,6 +44,6 @@
                          [isDateTimePicker]="true"
                          (focusArrowLeft)="focusArrowLeft()"></fd-time>
             </div>
-        </div>
-    </div>
+        </fd-popover-body>
+    </fd-popover>
 </div>

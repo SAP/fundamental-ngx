@@ -1,0 +1,202 @@
+<div class="fd-container">
+    <div class="fd-col--shift-3 fd-col--2 fd-has-text-align-center">
+        <fd-popover [options]="{placement: 'top-start'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-up-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--2 fd-has-text-align-center">
+        <fd-popover [options]="{placement: 'top'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-up-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--2 fd-has-text-align-center">
+        <fd-popover [options]="{placement: 'top-end'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-up-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>
+<div class="fd-container">
+    <div class="fd-col--shift-2 fd-col--2">
+        <fd-popover [options]="{placement: 'left-start'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-left-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--shift-4 fd-col--2 fd-has-text-align-right">
+        <fd-popover [options]="{placement: 'right-start'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-right-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>
+<div class="fd-container">
+    <div class="fd-col--shift-2 fd-col--2">
+        <fd-popover [options]="{placement: 'left'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-left-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--shift-4 fd-col--2 fd-has-text-align-right">
+        <fd-popover [options]="{placement: 'right'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-right-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>
+<div class="fd-container">
+    <div class="fd-col--shift-2 fd-col--2">
+        <fd-popover [options]="{placement: 'left-end'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-left-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--shift-4 fd-col--2 fd-has-text-align-right">
+        <fd-popover [options]="{placement: 'right-end'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-right-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>
+<div class="fd-container">
+    <div class="fd-col--shift-3 fd-col--2 fd-has-text-align-center">
+        <fd-popover [options]="{placement: 'bottom-start'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-down-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--2 fd-has-text-align-center">
+        <fd-popover [options]="{placement: 'bottom'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-down-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+    <div class="fd-col--2 fd-has-text-align-center">
+        <fd-popover [options]="{placement: 'bottom-end'}" [arrow]="true">
+            <fd-popover-control>
+                <button fd-button [glyph]="'navigation-down-arrow'"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item *ngFor="let option of menu1">
+                            <a [attr.href]="option.url">{{option.text}}</a>
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>

@@ -1,5 +1,18 @@
-import { Component, EventEmitter, forwardRef, Input, Output, Pipe, PipeTransform } from '@angular/core';
+import {
+    Component,
+    ComponentRef,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    HostListener,
+    Input,
+    OnInit,
+    Output,
+    Pipe,
+    PipeTransform
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-search-input',
@@ -13,7 +26,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor {
+export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     dropdownValues: any[];
 
@@ -48,7 +61,21 @@ export class SearchInputComponent implements ControlValueAccessor {
 
     inputTextValue: string;
 
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
+    };
+
     onInputKeypressHandler(event) {
+        console.log('called')
+        this.isOpen = true;
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
         }
@@ -66,6 +93,10 @@ export class SearchInputComponent implements ControlValueAccessor {
             term.callback(event);
         }
         this.itemClicked.emit(term);
+    }
+
+    shellbarSearchInputClicked(event) {
+        event.stopPropagation();
     }
 
     onChange: any = () => {};
@@ -92,6 +123,17 @@ export class SearchInputComponent implements ControlValueAccessor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
+
+    ngOnInit() {
+        if (this.inShellbar) {
+            this.POPOVER_OPTIONS.modifiers.offset = {
+                enabled: true,
+                offset: -264
+            };
+        }
+    }
+
+    constructor(private elRef: ElementRef) {}
 }
 
 @Pipe({

@@ -3,6 +3,7 @@ import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { TimeObject } from '../time/time-object';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-datetime-picker',
@@ -29,6 +30,18 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
     selectedDay: CalendarDay = {
         date: null
+    };
+
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
     };
 
     @Input()
