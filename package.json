@@ -5,7 +5,7 @@
     "main": "dist/fundamental-ngx/index.js",
     "scripts": {
         "build": "ng build",
-        "build-docs": "npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\"",
+        "build-docs": "npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md",
         "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../..",
         "build-src": "gulp build-src",
