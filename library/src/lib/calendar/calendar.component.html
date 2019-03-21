@@ -29,7 +29,7 @@
             <li class="fd-calendar__item"
                 *ngFor="let listYear of calendarYearsList; let i = index;"
                 [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
-                (click)="selectYear(listYear)">
+                (click)="selectYear(listYear, $event)">
                     <span role="button" [attr.tabIndex]="getYearTabIndex(listYear, i)"
                           [attr.id]="calendarId + '-fd-year-' + listYear"
                           (keydown)="onKeydownYearHandler($event, listYear)"
@@ -44,7 +44,7 @@
             <li class="fd-calendar__item"
                 *ngFor="let monthShortName of monthsShortName, let i=index"
                 [ngClass]='(i===todayMonth && year===todayYear ? " fd-calendar__item--current" : "") + (i===selectedMonth ? " is-selected" : "") '
-                (click)="selectMonth(i)">
+                (click)="selectMonth(i, $event)">
                     <span role="button" [attr.tabIndex]="i === selectedMonth ? 0 : -1"
                           [attr.id]="calendarId + '-fd-month-' + i" (keydown)="onKeydownMonthHandler($event, i)"
                           class="fd-calendar__text">{{monthShortName}}</span>
@@ -79,7 +79,7 @@
                           (cell.today ? " fd-calendar__item--current": "") + 
                           (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
-                    (click)="selectDate(cell)">
+                    (click)="selectDate(cell, true, $event)">
               <span class="fd-calendar__text" [attr.id]="calendarId + '-fd-day-' + (i + 1) + cellIndex"
                     role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
                     (keydown)="onKeydownDayHandler($event, cell)">{{cell.day}}</span>
