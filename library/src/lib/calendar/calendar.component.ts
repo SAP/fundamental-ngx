@@ -480,7 +480,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     // Functions that handle selection (day, month, year)
-    selectDate(day, formEvent: boolean = true) {
+    selectDate(day, formEvent: boolean = true, event?, closeCalendar?) {
+        if (event) {
+            event.stopPropagation();
+        }
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDay = day;
@@ -492,7 +495,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 if (formEvent) {
                     this.onChange({ date: day.date });
                 }
-                this.closeCalendar.emit();
+                if (closeCalendar) {
+                    this.closeCalendar.emit();
+                }
             } else {
                 if (this.selectCounter === 2) {
                     this.selectCounter = 0;
@@ -552,7 +557,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.year = this.date.getFullYear();
     }
 
-    selectMonth(selectedMonth) {
+    selectMonth(selectedMonth, event?) {
+        if (event) {
+            event.stopPropagation();
+        }
         this.selectedMonth = selectedMonth;
         this.setCurrentMonth(selectedMonth);
         this.constructCalendar();
@@ -564,7 +572,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.year = this.date.getFullYear();
     }
 
-    selectYear(selectedYear) {
+    selectYear(selectedYear, event?) {
+        if (event) {
+            event.stopPropagation();
+        }
         this.selectedMonth = this.month;
         this.setCurrentYear(selectedYear);
         this.constructCalendar();
@@ -760,7 +771,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             const currentId = parseInt(event.currentTarget.id.split('-').pop(), 10);
             if (event.code === 'Space' || event.code === 'Enter') {
                 event.preventDefault();
-                this.selectDate(cell);
+                const closeCalendarPopover = true;
+                this.selectDate(cell, true, null, closeCalendarPopover);
                 this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
             } else if (event.code === 'ArrowUp') {
                 event.preventDefault();
