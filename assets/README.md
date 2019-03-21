@@ -45,28 +45,34 @@ For an existing Angular application,
 
 3. **Import the modules you want to use.**
 
-    To add the entire library, add
+    To add the entire library, add the following import to your main application module.
 
     ```javascript
     import { FundamentalNgxModule } from 'fundamental-ngx';
+    
+    @NgModule({
+        ...
+        imports: [FundamentalNgxModule],
+    })
     ```
-
-    to your app's module definition. Also add `FundamentalNgxModule` to the `imports` array in the @NgModule declaration.
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Toggles, add
+    For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
     import { ToggleModule } from 'fundamental-ngx/toggle/toggle.module';
+    
+    @NgModule({
+        ...
+        imports: [ToggleModule],
+    })
     ```
-
-    to the file that declares the module you're adding toggles to. It can also be added to the app module declaration to be used site-wide. You also need to add `ToggleModule` to your app or module's `imports` array.
 
 4. **Add the component to your HTML.**
 
-    ```
-    <fd-toggle [size]="'l'" [(ngModel)]="checked">Large Toggle</fd-toggle>
+    ```html
+    <fd-toggle [size]="'l'" [(checked)]="checked">Large Toggle</fd-toggle>
     ```
 
 ## Demo Application
@@ -89,7 +95,7 @@ Merges to the `master` branch will be published as a prerelease. Prereleases wil
 
 ## Known Issues
 
-Please see [issues](https://github.com/SAP/fundamental-ngx/issues)
+Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
 
 ## Support
 
