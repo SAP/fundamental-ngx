@@ -16,6 +16,7 @@
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
+    padding-top: 52px;
 }
 
 .fd-docs-sidebar-content {
@@ -69,6 +70,7 @@
     overflow-y: scroll;
     padding-bottom: 2rem;
     background-color: #FFFFFF;
+    padding-top: 52px;
 
     &:focus {
         outline: none;
