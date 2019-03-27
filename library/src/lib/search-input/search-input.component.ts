@@ -72,7 +72,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     };
 
     onInputKeypressHandler(event) {
-        console.log('called')
         this.isOpen = true;
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();

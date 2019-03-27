@@ -14,7 +14,7 @@ export class SearchInputAsyncExampleComponent implements OnInit {
     dropdownValues;
 
     getDropdownValues(): Observable<string[]> {
-        return this.http.get<string[]>('./assets/search-input-values.json').pipe(
+        return this.http.get<any[]>('./assets/search-input-values.json').pipe(
             map(data => {
                 data.forEach(fruitObject => {
                     if (fruitObject.alertMessage) {
