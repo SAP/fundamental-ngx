@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/SAP/fundamental-ngx/compare/v0.3.1-rc.0...v0.3.1) (2019-03-25)
+
+
+
+<a name="0.3.1-rc.0"></a>
+## [0.3.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.0...v0.3.1-rc.0) (2019-03-25)
+
+
+
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.15...v0.3.0) (2019-03-21)
+
+
+
+<a name="0.3.0-rc.15"></a>
+# [0.3.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.14...v0.3.0-rc.15) (2019-03-21)
+
+
+
 <a name="0.3.0-rc.14"></a>
 # [0.3.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.13...v0.3.0-rc.14) (2019-03-21)
 
