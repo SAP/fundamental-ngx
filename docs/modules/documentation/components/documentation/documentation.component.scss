@@ -15,6 +15,8 @@
     flex-direction: column;
     flex-wrap: nowrap;
     white-space: nowrap;
+    overflow: hidden;
+    padding-top: 52px;
 }
 
 .fd-docs-sidebar-content {
@@ -68,6 +70,7 @@
     overflow-y: scroll;
     padding-bottom: 2rem;
     background-color: #FFFFFF;
+    padding-top: 52px;
 
     &:focus {
         outline: none;
@@ -131,6 +134,7 @@
 .fd-sidebar-container {
     position: relative;
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .skip-navigation {
@@ -146,6 +150,7 @@
     .sidebar {
         position: absolute;
         box-shadow: 2px 0 50px 0 #292929;
+        height: 100%;
     }
 
     .content-margin {

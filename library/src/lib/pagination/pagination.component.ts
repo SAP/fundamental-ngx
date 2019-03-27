@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { PaginationService } from './pagination.service';
 import { Pagination } from './pagination.model';
 
@@ -8,7 +8,12 @@ import { Pagination } from './pagination.model';
     providers: [PaginationService],
     host: {
         class: 'fd-pagination'
-    }
+    },
+    styles: [`
+        a {
+            cursor: pointer;
+        }
+    `]
 })
 export class PaginationComponent implements OnChanges {
     @Input()
@@ -24,13 +29,16 @@ export class PaginationComponent implements OnChanges {
     displayText: string = 'items';
 
     @Output()
-    selected = new EventEmitter<number>();
+    pageChangeStart = new EventEmitter<number>();
 
     pages: number[];
 
     constructor(private paginationService: PaginationService) {}
 
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes && changes.currentPage) {
+            this.currentPage = changes.currentPage.currentValue;
+        }
         this.pages = this.paginationService.getPages(this.getPaginationObject());
         const totalPages = this.paginationService.getTotalPages(this.getPaginationObject());
         if (!this.currentPage || this.currentPage < 1) {
@@ -58,9 +66,8 @@ export class PaginationComponent implements OnChanges {
         if (page > this.paginationService.getTotalPages(this.getPaginationObject()) || page < 1) {
             return;
         }
-        this.currentPage = page;
         this.pages = this.paginationService.getPages(this.getPaginationObject());
-        this.selected.emit(page);
+        this.pageChangeStart.emit(page);
     }
 
     getPaginationObject() {

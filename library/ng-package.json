@@ -6,6 +6,7 @@
         "entryFile": "src/public_api.ts"
     },
     "whitelistedNonPeerDependencies": [
-        "focus-trap"
+        "focus-trap",
+        "popper.js"
     ]
 }

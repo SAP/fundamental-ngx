@@ -1,0 +1,164 @@
+:host {
+    z-index: 1000;
+    transition: none;
+    background-color: white;
+
+    &:focus {
+        outline: none;
+    }
+
+    .fd-popover-default-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &[x-placement^="bottom"] {
+
+        margin-top: 8px;
+        .fd-popover-default-arrow {
+            width: 13px;
+        }
+        ::before {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 0 6.5px 8px 6.5px;
+            border-bottom-color: var(--fd-color-background-2);
+            border-left-color: transparent;
+            border-right-color: transparent;
+            content: "";
+            position: absolute;
+            top: -8px;
+            z-index: 4;
+        }
+
+        ::after {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 0 6.5px 8px 6.5px;
+            border-bottom-color: var(--fd-color-neutral-4);
+            border-left-color: transparent;
+            border-right-color: transparent;
+            content: "";
+            position: absolute;
+            top: -9px;
+            z-index: 3;
+        }
+    }
+
+    &[x-placement^="left"] {
+
+        margin-right: 8px;
+        .fd-popover-default-arrow {
+            left: 100%;
+            height: 13px;
+        }
+        ::before {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 6.5px 0 6.5px 8px;
+            border-left-color: var(--fd-color-background-2);
+            border-bottom-color: transparent;
+            border-top-color: transparent;
+            content: "";
+            position: absolute;
+            right: -8px;
+            z-index: 4;
+        }
+
+        ::after {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 6.5px 0 6.5px 8px;
+            border-left-color: var(--fd-color-neutral-4);
+            border-bottom-color: transparent;
+            border-top-color: transparent;
+            content: "";
+            position: absolute;
+            right: -9px;
+            z-index: 3;
+        }
+    }
+
+    &[x-placement^="top"] {
+
+        margin-bottom: 8px;
+        .fd-popover-default-arrow {
+            top: 100%;
+            width: 13px;
+        }
+        ::before {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 8px 6.5px 0 6.5px;
+            border-color: var(--fd-color-background-2);
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            border-left-color: transparent;
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            z-index: 4;
+        }
+
+        ::after {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 8px 6.5px 0 6.5px;
+            border-color: var(--fd-color-neutral-4);
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            border-left-color: transparent;
+            content: "";
+            position: absolute;
+            bottom: -9px;
+            z-index: 3;
+        }
+    }
+
+    &[x-placement^="right"] {
+
+        margin-left: 8px;
+        .fd-popover-default-arrow {
+            height: 13px;
+        }
+        ::before {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 6.5px 8px 6.5px 0;
+            border-color: var(--fd-color-background-2);
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            content: "";
+            position: absolute;
+            left: -8px;
+            z-index: 4;
+        }
+
+        ::after {
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 6.5px 8px 6.5px 0;
+            border-color: var(--fd-color-neutral-4);
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            content: "";
+            position: absolute;
+            left: -9px;
+            z-index: 3;
+        }
+    }
+}

@@ -159,8 +159,9 @@ import {
     PanelGridColumnSpanExampleComponent
 } from './containers/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './containers/pagination/examples/pagination-example.component';
-import { PopoverExampleComponent } from './containers/popover/examples/popover-example.component';
-import { PopoverProgrammaticOpenExampleComponent } from './containers/popover/examples/popover-programmatic-open-example.component';
+import { PopoverExampleComponent } from './containers/popover/examples/popover-simple/popover-example.component';
+import { PopoverModalExampleComponent } from './containers/popover/examples/popover-modal/popover-modal-example.component';
+import { PopoverProgrammaticOpenExampleComponent } from './containers/popover/examples/popover-programmatic/popover-programmatic-open-example.component';
 import { SearchInputExampleComponent } from './containers/search-input/examples/search-input-example.component';
 import { ShellbarBasicExampleComponent } from './containers/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './containers/shellbar/examples/shellbar-collapsible-example.component';
@@ -230,6 +231,7 @@ import { MultiInputFilterExampleComponent } from './containers/multi-input/examp
 import { MultiInputDisplaywithExampleComponent } from './containers/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
 import { MultiInputDocsComponent } from './containers/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
+import { MultiInputAsyncExampleComponent } from './containers/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
@@ -241,6 +243,12 @@ import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
+import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
+import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
+import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
+import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -279,6 +287,7 @@ const ROUTES: Routes = [
             { path: 'pagination', component: PaginationDocsComponent },
             { path: 'panel', component: PanelDocsComponent },
             { path: 'popover', component: PopoverDocsComponent },
+            { path: 'popover-directive', component: PopoverDirectiveDocsComponent },
             { path: 'scroll-spy', component: ScrollSpyDocsComponent },
             { path: 'searchInput', component: SearchInputDocsComponent },
             { path: 'shellbar', component: ShellbarDocsComponent },
@@ -437,7 +446,13 @@ const ROUTES: Routes = [
         PanelGridColumnSpanExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+        PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
+        PopoverModalExampleComponent,
+        PopoverDirectiveDocsComponent,
+        PopoverDirectiveExampleComponent,
+        PopoverTriggersComponent,
+        PopoverProgrammaticComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
@@ -484,6 +499,7 @@ const ROUTES: Routes = [
         TokenDocsComponent,
         TokenExampleComponent,
         ToolbarComponent,
+        MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
         BackdropExamplesComponent
@@ -500,7 +516,8 @@ const ROUTES: Routes = [
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         UtilsModule,
-        FundamentalNgxModule
+        FundamentalNgxModule,
+        HttpClientModule
     ],
     providers: [CopyService]
 })

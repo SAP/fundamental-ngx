@@ -1,5 +1,6 @@
 <div class="fd-product-menu">
-    <fd-popover [alignment]="productMenuCollapsed ? 'left' : 'right'">
+    <fd-popover [options]="{placement: 'bottom-end'}"
+                [focusTrapped]="false">
         <fd-popover-control>
             <button class="fd-product-menu__control">
                 <span class="fd-shellbar__title fd-product-menu__title">

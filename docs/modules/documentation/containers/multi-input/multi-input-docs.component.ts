@@ -9,6 +9,9 @@ import * as displayT from '!raw-loader!./examples/multi-input-displaywith-exampl
 import * as filterH from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.html';
 import * as filterT from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.ts';
 
+import * as asyncH from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.html';
+import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.ts';
+
 @Component({
   selector: 'app-multi-input-docs',
   templateUrl: './multi-input-docs.component.html',
@@ -24,5 +27,8 @@ export class MultiInputDocsComponent {
 
     filterHtml = filterH;
     filterTs = filterT;
+
+    asyncHtml = asyncH;
+    asyncTs = asyncT;
 
 }

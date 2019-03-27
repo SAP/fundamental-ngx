@@ -1,6 +1,20 @@
-import { Component, EventEmitter, forwardRef, Input, Output, Pipe, PipeTransform, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input,
+    OnInit,
+    Output,
+    Pipe,
+    PipeTransform,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MenuItemDirective } from '../menu/menu-item.directive'
+import { MenuItemDirective } from '../menu/menu-item.directive';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-search-input',
@@ -14,7 +28,7 @@ import { MenuItemDirective } from '../menu/menu-item.directive'
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor {
+export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     dropdownValues: any[];
 
@@ -52,6 +66,18 @@ export class SearchInputComponent implements ControlValueAccessor {
     isOpen: boolean = false;
 
     inputTextValue: string;
+
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
+    };
 
     onInputKeydownHandler(event) {
         if (event.code === 'Enter' && this.searchFunction) {
@@ -107,6 +133,10 @@ export class SearchInputComponent implements ControlValueAccessor {
         this.itemClicked.emit(term);
     }
 
+    shellbarSearchInputClicked(event) {
+        event.stopPropagation();
+    }
+
     onChange: any = () => {};
     onTouched: any = () => {};
 
@@ -131,6 +161,17 @@ export class SearchInputComponent implements ControlValueAccessor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
+
+    ngOnInit() {
+        if (this.inShellbar) {
+            this.POPOVER_OPTIONS.modifiers.offset = {
+                enabled: true,
+                offset: -264
+            };
+        }
+    }
+
+    constructor(private elRef: ElementRef) {}
 }
 
 @Pipe({

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopoverComponent } from './popover.component';
 import { HashService } from '../utils/hash.service';
+import { PopoverDirective } from './popover-directive/popover.directive';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;
@@ -14,7 +15,7 @@ describe('PopoverComponent', () => {
         });
 
         TestBed.configureTestingModule({
-            declarations: [PopoverComponent],
+            declarations: [PopoverComponent, PopoverDirective],
             providers: [{ provide: HashService, useValue: hashSpy }]
         }).compileComponents();
 
@@ -25,7 +26,6 @@ describe('PopoverComponent', () => {
         fixture = TestBed.createComponent(PopoverComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        spyOn(component.popoverClosed, 'emit');
     });
 
     it('should create and get an ID from the hasher', () => {
@@ -35,31 +35,28 @@ describe('PopoverComponent', () => {
         expect(component.id).toBe('1');
     });
 
-    it('should handle escape keydown if popover is open', () => {
-        component.isOpen = true;
-
-        const keyDownEvent = new KeyboardEvent('keydown', {
-            key: 'escape'
-        });
-        document.dispatchEvent(keyDownEvent);
-
-        expect(component.isOpen).toBe(false);
-        expect(component.popoverClosed.emit).toHaveBeenCalled();
+    it('should open', () => {
+        spyOn(component.isOpenChange, 'emit');
+        component.isOpen = false;
+        component.open();
+        expect(component.isOpen).toBe(true);
+        expect(component.isOpenChange.emit).toHaveBeenCalledWith(true);
     });
 
-    it('should handle document click for open, !isTimePicker popover', () => {
+    it('should close', () => {
+        spyOn(component.isOpenChange, 'emit');
         component.isOpen = true;
-        fixture.nativeElement.querySelector('.fd-popover').click();
-
-        expect(component.popoverClosed.emit).toHaveBeenCalled();
+        component.close();
         expect(component.isOpen).toBe(false);
+        expect(component.isOpenChange.emit).toHaveBeenCalledWith(false);
     });
 
-    it('should handle document click for open, isTimePicker popover', () => {
+    it('should toggle', () => {
         component.isOpen = true;
-        component.isTimePicker = true;
-        fixture.nativeElement.querySelector('.fd-popover').click();
+        component.toggle();
+        expect(component.isOpen).toBe(false);
 
-        expect(component.popoverClosed.emit).not.toHaveBeenCalled();
+        component.toggle();
+        expect(component.isOpen).toBe(true);
     });
 });

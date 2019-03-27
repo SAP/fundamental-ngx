@@ -442,7 +442,7 @@ describe('CalendarComponent', () => {
 
         component.onKeydownDayHandler(mockEvent, 'mockCell');
 
-        expect(component.selectDate).toHaveBeenCalledWith('mockCell');
+        expect(component.selectDate).toHaveBeenCalledWith('mockCell', true, null, true);
         expect(focusSpy).toHaveBeenCalledWith('#-fd-day-1');
 
         focusSpy.calls.reset();

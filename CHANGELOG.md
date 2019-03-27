@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/SAP/fundamental-ngx/compare/v0.3.1-rc.0...v0.3.1) (2019-03-25)
+
+
+
+<a name="0.3.1-rc.0"></a>
+## [0.3.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.0...v0.3.1-rc.0) (2019-03-25)
+
+
+
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.15...v0.3.0) (2019-03-21)
+
+
+
+<a name="0.3.0-rc.15"></a>
+# [0.3.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.14...v0.3.0-rc.15) (2019-03-21)
+
+
+
+<a name="0.3.0-rc.14"></a>
+# [0.3.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.13...v0.3.0-rc.14) (2019-03-21)
+
+
+
+<a name="0.3.0-rc.13"></a>
+# [0.3.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.12...v0.3.0-rc.13) (2019-03-21)
+
+
+
+<a name="0.3.0-rc.12"></a>
+# [0.3.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.11...v0.3.0-rc.12) (2019-03-20)
+
+
+
+<a name="0.3.0-rc.11"></a>
+# [0.3.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.10...v0.3.0-rc.11) (2019-03-20)
+
+
+### Features
+
+* popover improvements ([#633](https://github.com/SAP/fundamental-ngx/issues/633)) ([0796dfa](https://github.com/SAP/fundamental-ngx/commit/0796dfa)), closes [#627](https://github.com/SAP/fundamental-ngx/issues/627)
+
+
+
+<a name="0.3.0-rc.10"></a>
+# [0.3.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.9...v0.3.0-rc.10) (2019-03-15)
+
+
+### Features
+
+* update pagination component to handle promises and provide documentat… ([#623](https://github.com/SAP/fundamental-ngx/issues/623)) ([765b7af](https://github.com/SAP/fundamental-ngx/commit/765b7af))
+
+
+
+<a name="0.3.0-rc.9"></a>
+# [0.3.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.8...v0.3.0-rc.9) (2019-03-15)
+
+
+
+<a name="0.3.0-rc.8"></a>
+# [0.3.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.7...v0.3.0-rc.8) (2019-03-14)
+
+
+
 <a name="0.3.0-rc.7"></a>
 # [0.3.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.3.0-rc.6...v0.3.0-rc.7) (2019-03-12)
 

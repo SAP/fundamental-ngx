@@ -1,4 +1,4 @@
-<fd-popover #customPopover (click)="customPopoverToggle($event)">
+<fd-popover [(isOpen)]="isOpen">
     <fd-popover-control>
         <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
     </fd-popover-control>
@@ -18,5 +18,6 @@
         </fd-menu>
     </fd-popover-body>
 </fd-popover>
-<button fd-button (click)="$event.stopPropagation(); customPopover.open();">Open Popover</button>
-<button fd-button (click)="$event.stopPropagation(); customPopover.close();">Close Popover</button>
+
+<button fd-button (click)="this.isOpen = true">Open Popover</button>
+<button fd-button (click)="this.isOpen = false">Close Popover</button>

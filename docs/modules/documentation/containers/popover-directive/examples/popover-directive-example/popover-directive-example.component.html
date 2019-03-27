@@ -1,0 +1,20 @@
+<button fd-button
+        fdPopover="Hello, this is information."
+        [defaultArrow]="true">
+    Popover from String
+</button>
+
+<button fd-button
+        [fdPopover]="template"
+        [defaultArrow]="true">
+    Popover from Template
+</button>
+
+<ng-template #template>
+    <p>
+        This popover is created from a template!
+    </p>
+    <p>
+        It allows for more elaborate content structures.
+    </p>
+</ng-template>

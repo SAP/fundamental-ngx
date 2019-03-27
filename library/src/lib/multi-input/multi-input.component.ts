@@ -1,5 +1,17 @@
-import { Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    HostListener,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-multi-input',
@@ -16,7 +28,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ]
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor {
+export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
     @Input()
     placeholder: string = '';
@@ -28,7 +40,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
     compact: boolean = false;
 
     @Input()
-    maxHeight: string;
+    maxHeight: string = '200px';
 
     @Input()
     glyph: string = 'navigation-down-arrow';
@@ -60,6 +72,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
 
     init = false;
 
+    readonly POPOVER_OPTIONS: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: false
+            },
+            hide: {
+                enabled: false
+            }
+        }
+    };
+
     onChange: Function = () => {};
 
     onTouched: Function = () => {};
@@ -71,6 +95,16 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor {
 
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+            if (this.searchTerm) {
+                this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+            } else {
+                this.displayedValues =  this.dropdownValues;
+            }
         }
     }
 

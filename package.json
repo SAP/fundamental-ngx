@@ -5,7 +5,7 @@
     "main": "dist/fundamental-ngx/index.js",
     "scripts": {
         "build": "ng build",
-        "build-docs": "npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\"",
+        "build-docs": "npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md",
         "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../..",
         "build-src": "gulp build-src",
@@ -43,6 +43,7 @@
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^7.1.3",
         "npm": "^6.8.0",
+        "popper.js": "^1.14.7",
         "raw-loader": "^1.0.0",
         "rxjs": "^6.4.0",
         "zone.js": "^0.8.29"

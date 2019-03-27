@@ -12,6 +12,7 @@ export interface ComponentProperties {
     inputs: ComponentProperty[];
     outputs: ComponentProperty[];
     properties: ComponentProperty[];
+    methods: ComponentProperty[];
 }
 
 @Component({
@@ -53,7 +54,8 @@ export class PropertiesComponent implements OnInit {
         attributes: 'Attributes',
         inputs: 'Inputs',
         outputs: 'Outputs',
-        properties: 'Properties'
+        properties: 'Properties',
+        methods: 'Methods'
     };
 
     ngOnInit() {

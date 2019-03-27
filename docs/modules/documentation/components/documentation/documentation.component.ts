@@ -58,6 +58,7 @@ export class DocumentationComponent implements OnInit {
     utilities = [
         { url: 'file-input', name: 'File Input', status: 'UNSAFE' },
         { url: 'infiniteScroll', name: 'Infinite Scroll', status: 'UNSAFE' },
+        { url: 'popover-directive', name: 'Popover Helper', status: 'UNSAFE' },
         { url: 'scroll-spy', name: 'Scroll Spy', status: 'UNSAFE' }
     ];
 
