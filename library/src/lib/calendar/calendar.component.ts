@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -67,7 +67,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @HostBinding('class.fd-calendar') true;
 
     @Input()
-    dateFromDatePicker: BehaviorSubject<any>;
+    dateFromDatePicker: Subject<any>;
 
     @Input()
     calType: CalendarType = 'single';
@@ -75,8 +75,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Input()
     mondayStartOfWeek: boolean = false;
 
-    @Output()
-    updateDatePickerInput: EventEmitter<any> = new EventEmitter();
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
@@ -141,8 +139,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     selectedDay: CalendarDay = {
         date: null
     };
-    @Output()
-    selectedDayChange = new EventEmitter();
 
     @Input()
     selectedRangeFirst: CalendarDay = {
@@ -421,7 +417,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.emittedDate.selectedFirstDay = this.selectedRangeFirst;
             this.emittedDate.selectedLastDay = this.selectedRangeLast;
         }
-        this.updateDatePickerInput.emit(this.emittedDate);
+        this.dateFromDatePicker.next(this.emittedDate);
     }
 
     constructCalendarYearsList() {
@@ -487,7 +483,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDay = day;
-                this.selectedDayChange.emit(this.selectedDay);
                 this.refreshSelected();
                 if (this.init) {
                     this.updateDatePickerInputEmitter();
@@ -658,7 +653,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     resetSelection() {
         if (this.calType === 'single') {
             this.selectedDay = { date: null };
-            this.selectedDayChange.emit(this.selectedDay);
         } else {
             this.selectedRangeFirst = { date: null };
             this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
@@ -902,7 +896,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.subscribe(date => {
-                if (date) {
+                if (date && typeof date === 'string') {
+                    console.log('In calendar dateFromDatePicker.subscribe: ' + date);
                     this.updateFromDatePicker(date);
                 }
                 this.constructCalendarYearsList();

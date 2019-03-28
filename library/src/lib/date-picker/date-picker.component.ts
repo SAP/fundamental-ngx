@@ -7,12 +7,11 @@ import {
     EventEmitter,
     Output,
     forwardRef,
-    ChangeDetectorRef,
     HostBinding
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 
 @Component({
@@ -34,7 +33,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromDatePicker = new BehaviorSubject<string>('');
+    dateFromDatePicker: Subject<string> = new Subject();
 
     readonly POPOVER_OPTIONS: PopperOptions = {
         placement: 'bottom-start',
@@ -63,9 +62,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     selectedDay: CalendarDay = {
         date: null
     };
-
-    @Output()
-    selectedDayChange = new EventEmitter();
 
     @Input()
     selectedRangeFirst: CalendarDay = {
@@ -125,7 +121,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
             if (d.selectedDay.date) {
                 this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
                 this.selectedDay = d.selectedDay;
-                this.selectedDayChange.emit(this.selectedDay);
                 this.onChange({date: this.selectedDay.date});
             }
         } else {
@@ -161,7 +156,16 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.subscribe(date => {
+                if (date && typeof date === 'object') {
+                    console.log('In datepicker dateFromDatePicker.subscribe: ' + date);
+                    this.updateDatePickerInputHandler(date);
+                }
+            })
+        }
+    }
 
     constructor(private eRef: ElementRef) {}
 
