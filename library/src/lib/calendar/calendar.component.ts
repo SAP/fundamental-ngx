@@ -386,16 +386,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.calendarGrid.forEach(grid => {
             grid.forEach(day => {
                 day.selected =
-                    (this.selectedDay.date && day.date.toDateString() === this.selectedDay.date.toDateString()) ||
+                    (this.selectedDay.date && day.date && day.date.toDateString() === this.selectedDay.date.toDateString()) ||
                     (this.selectedRangeFirst.date &&
                         day.date.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
                     (this.selectedRangeLast.date &&
                         day.date.toDateString() === this.selectedRangeLast.date.toDateString());
                 day.selectedFirst =
-                    this.selectedRangeFirst.date &&
+                    this.selectedRangeFirst.date && day.date &&
                     day.date.toDateString() === this.selectedRangeFirst.date.toDateString();
                 day.selectedLast =
-                    this.selectedRangeLast.date &&
+                    this.selectedRangeLast.date && day.date &&
                     day.date.toDateString() === this.selectedRangeLast.date.toDateString();
                 day.selectedRange =
                     this.selectedRangeFirst.date &&
@@ -888,7 +888,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.subscribe(date => {
                 if (date && typeof date === 'string') {
-                    console.log('In calendar dateFromDatePicker.subscribe: ' + date);
                     this.updateFromDatePicker(date);
                 }
                 this.constructCalendarYearsList();

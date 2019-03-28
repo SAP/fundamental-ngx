@@ -4,8 +4,6 @@ import {
     OnInit,
     HostListener,
     ElementRef,
-    EventEmitter,
-    Output,
     forwardRef,
     HostBinding
 } from '@angular/core';
@@ -152,8 +150,19 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.subscribe(date => {
                 if (date && typeof date === 'object') {
-                    console.log('In datepicker dateFromDatePicker.subscribe: ' + date);
                     this.updateDatePickerInputHandler(date);
+                } else if (date === '') {
+                    if (this.type === 'single') {
+                        this.selectedDay.date = null;
+                        this.selectedDay.selected = null;
+                        this.onChange({date: this.selectedDay.date});
+                    } else {
+                        this.selectedRangeFirst.date = null;
+                        this.selectedRangeFirst.selected = null;
+                        this.selectedRangeLast.date = null;
+                        this.selectedRangeLast.selected = null;
+                        this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                    }
                 }
             })
         }
@@ -179,11 +188,19 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
         if (this.type.toLocaleLowerCase() === 'single') {
             this.selectedDay.date = selected.date;
-            this.inputFieldDate = selected.date.toLocaleDateString();
+            if (selected.date !== null) {
+                this.inputFieldDate = selected.date.toLocaleDateString();
+            } else {
+                this.inputFieldDate = '';
+            }
         } else {
             this.selectedRangeFirst.date = selected.date;
             this.selectedRangeLast.date = selected.rangeEnd;
-            this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            if (selected.date !== null) {
+                this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            } else {
+                this.inputFieldDate = '';
+            }
         }
     }
 }
