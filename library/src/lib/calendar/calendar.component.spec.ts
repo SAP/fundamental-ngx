@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarComponent, CalendarDay } from './calendar.component';
+import { CalendarComponent } from './calendar.component';
 import { HashService } from '../utils/hash.service';
-import { BehaviorSubject } from 'rxjs';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent;
@@ -116,12 +115,10 @@ describe('CalendarComponent', () => {
     });
 
     it('should updateDatePickerInputEmitter', () => {
-        spyOn(component.updateDatePickerInput, 'emit');
         component.calType = 'single';
         component.selectedDay = {date: new Date()};
         component.updateDatePickerInputEmitter();
         expect(component.emittedDate.selectedDay).toEqual(component.selectedDay);
-        expect(component.updateDatePickerInput.emit).toHaveBeenCalledWith(component.emittedDate);
         component.calType = 'range';
         component.selectedRangeFirst = {date: new Date()};
         component.selectedRangeLast = {date: new Date()};
@@ -192,12 +189,10 @@ describe('CalendarComponent', () => {
         };
         component.calType = 'single';
         component.init = true;
-        spyOn(component.selectedDayChange, 'emit');
         spyOn(component, 'onChange');
         spyOn(component, 'updateDatePickerInputEmitter');
         component.selectDate(mockDay);
         expect(component.selectedDay).toEqual(mockDay);
-        expect(component.selectedDayChange.emit).toHaveBeenCalledWith(component.selectedDay);
         expect(component.onChange).toHaveBeenCalledWith({date: mockDay.date});
         expect(component.updateDatePickerInputEmitter).toHaveBeenCalled();
     });
@@ -209,8 +204,6 @@ describe('CalendarComponent', () => {
         const refreshSpy = spyOn(component, 'refreshSelected');
         spyOn(component, 'onChange');
         const updateDatePickerInputEmitterSpy = spyOn(component, 'updateDatePickerInputEmitter');
-        spyOn(component.selectedRangeFirstChange, 'emit');
-        spyOn(component.selectedRangeLastChange, 'emit');
 
         component.selectCounter = 2;
         component.init = true;
@@ -220,8 +213,6 @@ describe('CalendarComponent', () => {
 
         expect(component.selectedRangeLast).toEqual(mockDay);
         expect(component.selectedRangeFirst).toEqual(mockDay);
-        expect(component.selectedRangeLastChange.emit).toHaveBeenCalledWith(component.selectedRangeLast);
-        expect(component.selectedRangeFirstChange.emit).toHaveBeenCalledWith(component.selectedRangeFirst);
         expect(updateDatePickerInputEmitterSpy).toHaveBeenCalled();
         expect(refreshSpy).toHaveBeenCalled();
         expect(component.onChange).toHaveBeenCalledWith({date: mockDay.date, rangeEnd: mockDay.date});
@@ -232,7 +223,6 @@ describe('CalendarComponent', () => {
         updateDatePickerInputEmitterSpy.calls.reset();
         component.selectDate(mockDay);
         expect(component.selectedRangeLast).toEqual(mockDay);
-        expect(component.selectedRangeLastChange.emit).toHaveBeenCalledWith(component.selectedRangeLast);
         expect(updateDatePickerInputEmitterSpy).toHaveBeenCalled();
         expect(refreshSpy).toHaveBeenCalled();
         expect(component.onChange).toHaveBeenCalledWith({date: component.selectedRangeFirst.date, rangeEnd: mockDay.date});
@@ -245,8 +235,6 @@ describe('CalendarComponent', () => {
         component.selectDate({date: new Date(0)});
         expect(refreshSpy).toHaveBeenCalled();
         expect(updateDatePickerInputEmitterSpy).toHaveBeenCalled();
-        expect(component.selectedRangeLastChange.emit).toHaveBeenCalledWith(component.selectedRangeLast);
-        expect(component.selectedRangeFirstChange.emit).toHaveBeenCalledWith(component.selectedRangeFirst);
 
     });
 
@@ -308,22 +296,16 @@ describe('CalendarComponent', () => {
     });
 
     it('should resetSelection', () => {
-        spyOn(component.selectedDayChange, 'emit');
-        spyOn(component.selectedRangeFirstChange, 'emit');
-        spyOn(component.selectedRangeLastChange, 'emit');
         spyOn(component, 'constructCalendarYearsList');
         spyOn(component, 'constructCalendar');
         component.calType = 'single';
         component.resetSelection();
         expect(component.selectedDay).toEqual({date: null});
-        expect(component.selectedDayChange.emit).toHaveBeenCalledWith(component.selectedDay);
 
         component.calType = 'range';
         component.resetSelection();
         expect(component.selectedRangeFirst).toEqual({date: null});
         expect(component.selectedRangeLast).toEqual({date: null});
-        expect(component.selectedRangeFirstChange.emit).toHaveBeenCalledWith(component.selectedRangeFirst);
-        expect(component.selectedRangeLastChange.emit).toHaveBeenCalledWith(component.selectedRangeLast);
 
         const today = new Date();
         expect(component.year).toEqual(today.getFullYear());

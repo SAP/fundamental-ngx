@@ -68,16 +68,10 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         date: null
     };
 
-    @Output()
-    selectedRangeFirstChange = new EventEmitter();
-
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
-
-    @Output()
-    selectedRangeLastChange = new EventEmitter();
 
     @Input()
     disableFunction = function(d): boolean {
@@ -127,8 +121,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
             if (d.selectedFirstDay.date) {
                 this.selectedRangeFirst = d.selectedFirstDay;
                 this.selectedRangeLast = d.selectedLastDay;
-                this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
-                this.selectedRangeLastChange.emit(this.selectedRangeLast);
                 this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
                 this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
             }

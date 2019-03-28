@@ -144,15 +144,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     selectedRangeFirst: CalendarDay = {
         date: null
     };
-    @Output()
-    selectedRangeFirstChange = new EventEmitter();
 
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
-    @Output()
-    selectedRangeLastChange = new EventEmitter();
 
     emittedDate: EmittedDate = {
         selectedDay: this.selectedDay,
@@ -417,7 +413,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.emittedDate.selectedFirstDay = this.selectedRangeFirst;
             this.emittedDate.selectedLastDay = this.selectedRangeLast;
         }
-        this.dateFromDatePicker.next(this.emittedDate);
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.next(this.emittedDate);
+        }
     }
 
     constructCalendarYearsList() {
@@ -500,7 +498,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
                 if (this.selectCounter === 1 && day.date !== this.selectedRangeLast.date) {
                     this.selectedRangeLast = day;
-                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectCounter++;
                     this.refreshSelected();
                     if (this.init) {
@@ -513,9 +510,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
                 if (this.selectCounter === 0) {
                     this.selectedRangeLast = day;
-                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectedRangeFirst = day;
-                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectCounter++;
                     this.refreshSelected();
                     if (this.init) {
@@ -529,9 +524,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 if (this.selectedRangeFirst.date > this.selectedRangeLast.date) {
                     const tempSelectedRangeFirst = this.selectedRangeFirst;
                     this.selectedRangeFirst = this.selectedRangeLast;
-                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectedRangeLast = tempSelectedRangeFirst;
-                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.refreshSelected();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
@@ -655,10 +648,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.selectedDay = { date: null };
         } else {
             this.selectedRangeFirst = { date: null };
-            this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
 
             this.selectedRangeLast = { date: null };
-            this.selectedRangeLastChange.emit(this.selectedRangeLast);
         }
         this.date = new Date();
         this.year = this.date.getFullYear();
