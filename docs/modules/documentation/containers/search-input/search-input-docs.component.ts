@@ -22,10 +22,10 @@ export class SearchInputDocsComponent {
     searchInputAsyncTs = searchInputAsyncTs;
 
     searchInputAsyncData = JSON.stringify([
-        {"text": "Apple", "alertMessage": "Apple Clicked"},
-        {"text": "Banana", "alertMessage": "Banana Clicked"},
-        {"text": "Mango", "alertMessage": "Mango Clicked"},
-        {"text": "Strawberry", "alertMessage": "Strawberry Clicked"}
+        {text: 'Apple', alertMessage: 'Apple Clicked'},
+        {text: 'Banana', alertMessage: 'Banana Clicked'},
+        {text: 'Mango', alertMessage: 'Mango Clicked'},
+        {text: 'Strawberry', alertMessage: 'Strawberry Clicked'}
     ]);
 
     constructor() {}

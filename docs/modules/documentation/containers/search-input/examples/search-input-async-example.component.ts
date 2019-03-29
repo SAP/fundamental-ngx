@@ -11,16 +11,16 @@ export class SearchInputAsyncExampleComponent implements OnInit {
 
     searchTerm: string = '';
 
-    dropdownValues;
+    dropdownValues: Observable<string[]>;
 
     getDropdownValues(): Observable<string[]> {
         return this.http.get<any[]>('./assets/search-input-values.json').pipe(
             map(data => {
                 data.forEach(fruitObject => {
                     if (fruitObject.alertMessage) {
-                        fruitObject.callback = (function () {
+                        fruitObject.callback = () => {
                             alert(fruitObject.alertMessage);
-                        });
+                        };
                     }
                 });
                 return data;
