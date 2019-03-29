@@ -8,6 +8,7 @@
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
                     <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
                            (keydown)="onInputKeydownHandler($event)"
+                           (keyup)="onInputKeyupHandler()"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
                            placeholder="{{placeholder}}">
@@ -23,6 +24,7 @@
                     <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
                         <input #searchInputElement type="text" class="fd-input"
                                (keydown)="onInputKeydownHandler($event)"
+                               (keyup)="onInputKeyupHandler()"
                                [disabled]="disabled"
                                [(ngModel)]="inputText"
                                placeholder="{{placeholder}}"

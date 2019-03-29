@@ -90,6 +90,12 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
         }
     }
 
+    onInputKeyupHandler() {
+        if (this.inputText.length) {
+            this.isOpen = true;
+        }
+    }
+
     onMenuKeydownHandler(event, term?) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
