@@ -185,7 +185,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
 })
 export class FdSearchPipe implements PipeTransform {
     transform(value: any, input: string) {
-        if (input) {
+        if (input && typeof input === 'string') {
             input = input.toLocaleLowerCase();
             return value.filter((result: any) => {
                 return result.text.toLocaleLowerCase().startsWith(input);
