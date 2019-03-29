@@ -1,10 +1,8 @@
 import {
     Component,
-    ComponentRef,
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostListener,
     Input,
     OnInit,
     Output,
@@ -74,7 +72,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     };
 
     onInputKeypressHandler(event) {
-        console.log('called')
         this.isOpen = true;
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
@@ -141,7 +138,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
 })
 export class FdSearchPipe implements PipeTransform {
     transform(value: any, input: string) {
-        if (input) {
+        if (input && typeof input === 'string') {
             input = input.toLocaleLowerCase();
             return value.filter((result: any) => {
                 return result.text.toLocaleLowerCase().startsWith(input);
