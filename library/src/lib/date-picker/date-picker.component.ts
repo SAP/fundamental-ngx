@@ -4,15 +4,14 @@ import {
     OnInit,
     HostListener,
     ElementRef,
-    EventEmitter,
-    Output,
     forwardRef,
-    ChangeDetectorRef,
-    HostBinding
+    HostBinding,
+    Output,
+    EventEmitter
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PopperOptions } from 'popper.js';
 
 @Component({
@@ -34,7 +33,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromDatePicker = new BehaviorSubject<string>('');
+    dateFromDatePicker: Subject<string> = new Subject();
 
     readonly POPOVER_OPTIONS: PopperOptions = {
         placement: 'bottom-start',
@@ -161,7 +160,27 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.subscribe(date => {
+                if (date && typeof date === 'object') {
+                    this.updateDatePickerInputHandler(date);
+                } else if (date === '') {
+                    if (this.type === 'single') {
+                        this.selectedDay.date = null;
+                        this.selectedDay.selected = null;
+                        this.onChange({date: this.selectedDay.date});
+                    } else {
+                        this.selectedRangeFirst.date = null;
+                        this.selectedRangeFirst.selected = null;
+                        this.selectedRangeLast.date = null;
+                        this.selectedRangeLast.selected = null;
+                        this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                    }
+                }
+            })
+        }
+    }
 
     constructor(private eRef: ElementRef) {}
 
@@ -183,11 +202,19 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
         if (this.type.toLocaleLowerCase() === 'single') {
             this.selectedDay.date = selected.date;
-            this.inputFieldDate = selected.date.toLocaleDateString();
+            if (selected.date !== null) {
+                this.inputFieldDate = selected.date.toLocaleDateString();
+            } else {
+                this.inputFieldDate = '';
+            }
         } else {
             this.selectedRangeFirst.date = selected.date;
             this.selectedRangeLast.date = selected.rangeEnd;
-            this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            if (selected.date !== null) {
+                this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            } else {
+                this.inputFieldDate = '';
+            }
         }
     }
 }
