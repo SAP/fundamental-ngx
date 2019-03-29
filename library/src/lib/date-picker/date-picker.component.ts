@@ -7,7 +7,8 @@ import {
     forwardRef,
     HostBinding,
     Output,
-    EventEmitter
+    EventEmitter,
+    OnDestroy
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -29,9 +30,9 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class DatePickerComponent implements OnInit, ControlValueAccessor {
+export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
     inputFieldDate = null;
-    isValidDateInput: boolean = false;
+    isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker: Subject<string> = new Subject();
 
@@ -97,14 +98,14 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     openCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
-        if (this.isValidDateInput) {
+        if (this.isInvalidDateInput) {
             this.inputFieldDate = null;
         }
     }
 
     closeCalendar() {
         if (this.isOpen) {
-            if (this.isValidDateInput) {
+            if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
             this.isOpen = false;
@@ -113,7 +114,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
     onBlurHandler() {
         if (this.isOpen) {
-            if (this.isValidDateInput) {
+            if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
         }
@@ -140,7 +141,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     isInvalidDateInputHandler(e) {
-        this.isValidDateInput = e;
+        this.isInvalidDateInput = e;
     }
 
     getInputValue(e) {
@@ -179,6 +180,12 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
                     }
                 }
             })
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.unsubscribe();
         }
     }
 
