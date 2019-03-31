@@ -22,7 +22,7 @@
     "standard-version": "4.4.0"
   },
   "dependencies": {
-    "focus-trap": "^4.0.2",
+    "focus-trap": "^5.0.0",
     "popper.js": "^1.14.7"
   }
 }
