@@ -2,7 +2,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, HostBinding,
     Input,
     OnInit,
     Output,
@@ -59,16 +59,14 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
 
     inputTextValue: string;
 
+    @HostBinding('class.fd-search-input')
+    searchInputClass = true;
+
+    @HostBinding('class.fd-search-input--closed')
+    shellBarClass = this.inShellbar;
+
     readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
+        placement: 'bottom-start'
     };
 
     onInputKeypressHandler(event) {

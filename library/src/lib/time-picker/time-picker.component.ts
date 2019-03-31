@@ -49,15 +49,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     placeholder: string;
 
     readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
+        placement: 'bottom-start'
     };
 
     onChange: Function = () => {};

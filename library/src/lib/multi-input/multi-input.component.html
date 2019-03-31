@@ -1,6 +1,11 @@
 <div class="fd-multi-input">
     <div class="fd-multi-input-field">
-        <fd-popover [isOpen]="isOpen" [focusTrapped]="false" [triggers]="[]" [options]="POPOVER_OPTIONS" [closeOnOutsideClick]="false">
+        <fd-popover [isOpen]="isOpen"
+                    [focusTrapped]="false"
+                    [triggers]="[]"
+                    [options]="POPOVER_OPTIONS"
+                    [fillControl]="true"
+                    [closeOnOutsideClick]="false">
             <fd-popover-control>
                 <div class="fd-combobox-control"
                      [attr.aria-label]="'multi input body'"
@@ -24,7 +29,7 @@
                     </div>
                 </div>
             </fd-popover-control>
-            <fd-popover-body *ngIf="init"
+            <fd-popover-body
                  [style.maxHeight]="this.maxHeight"
                  [attr.aria-hidden]="!isOpen">
                 <fd-menu *ngIf="displayedValues && displayedValues.length">

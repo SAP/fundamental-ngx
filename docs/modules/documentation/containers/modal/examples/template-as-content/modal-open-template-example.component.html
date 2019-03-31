@@ -5,6 +5,7 @@
     </fd-modal-header>
     <fd-modal-body>
         This action is permanent and cannot be undone. Do you wish to continue?
+        <fd-combobox-input [dropdownValues]="['mom', 'cook', 'lasagna', 'pls']"></fd-combobox-input>
     </fd-modal-body>
     <fd-modal-footer>
         <button class="action-button" fd-button (click)="modal.dismiss('cancel')" [options]="'light'">

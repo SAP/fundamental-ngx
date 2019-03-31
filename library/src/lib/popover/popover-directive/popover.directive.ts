@@ -23,7 +23,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     isOpen: boolean = false;
 
     @Input()
-    triggers: string[] = ['click'];
+    triggers: string[] = [];
 
     @Input()
     defaultArrow: boolean = false;
@@ -45,6 +45,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     @Input()
     options: PopperOptions = Popper.Defaults;
+
+    @Input()
+    fillControl: boolean = false;
 
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -214,11 +217,31 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     private createPopper(): void {
+
+        if (this.fillControl) {
+            this.options = {
+                modifiers: {
+                    fillReference: {
+                        enabled: true,
+                        fn: this.fillReference,
+                        order: 840
+                    }
+                }
+            };
+        }
+
         this.popper = new Popper(
             this.elRef.nativeElement as HTMLElement,
             this.containerRef.location.nativeElement as HTMLElement,
             this.options
         );
+    }
+
+    private fillReference(data): any {
+        data.offsets.popper.left = data.offsets.reference.left;
+        data.offsets.popper.right = data.offsets.reference.right;
+        data.offsets.popper.width = data.styles.width = data.offsets.reference.width;
+        return data;
     }
 
     @HostListener('document:click', ['$event'])

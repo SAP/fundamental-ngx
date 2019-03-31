@@ -73,15 +73,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     init = false;
 
     readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
+        placement: 'bottom-start'
     };
 
     onChange: Function = () => {};

@@ -29,7 +29,7 @@ export class PopoverComponent implements OnInit {
     appendTo: HTMLElement | 'body';
 
     @Input()
-    triggers: string[] = ['click'];
+    triggers: string[] = [];
 
     @Input()
     glyph: string;
@@ -56,6 +56,9 @@ export class PopoverComponent implements OnInit {
     focusTrapped: boolean = true;
 
     @Input()
+    fillControl: boolean = false;
+
+    @Input()
     closeOnOutsideClick: boolean = true;
 
     @Input()
@@ -73,10 +76,6 @@ export class PopoverComponent implements OnInit {
     ngOnInit(): void {
         this.id = this.hasher.hash();
         this.isSetup = true;
-
-        if (this.options.modifiers && this.options.modifiers.preventOverflow) {
-            this.options.modifiers.preventOverflow.escapeWithReference = true;
-        }
     }
 
     public toggle(): void {
