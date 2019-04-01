@@ -1,10 +1,12 @@
 <button fd-button
-        fdPopover="Hello, this is information."
+        placement="bottom"
+        fdPopover="This popover is created from a string!"
         [defaultArrow]="true">
     Popover from String
 </button>
 
 <button fd-button
+        placement="bottom"
         [fdPopover]="template"
         [defaultArrow]="true">
     Popover from Template

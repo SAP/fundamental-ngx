@@ -7,13 +7,11 @@ import {
     EventEmitter,
     Output,
     forwardRef,
-    ChangeDetectorRef,
     HostBinding
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-date-picker',
@@ -35,18 +33,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     isValidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker = new BehaviorSubject<string>('');
-
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
-    };
 
     @HostBinding('class.fd-date-picker') true;
 

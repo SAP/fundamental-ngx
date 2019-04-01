@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import * as simpleH from '!raw-loader!./examples/popover-directive-example/popover-directive-example.component.html';
 import * as triggerH from '!raw-loader!./examples/popover-triggers/popover-triggers.component.html';
 import * as programH from '!raw-loader!./examples/popover-programmatic/popover-programmatic.component.html';
+import * as fillH from '!raw-loader!./examples/popover-fill/popover-fill.component.html';
 
 @Component({
     selector: 'app-popover-directive',
@@ -13,4 +14,5 @@ export class PopoverDirectiveDocsComponent {
     simplePopoverH = simpleH;
     triggerPopoverH = triggerH;
     programmaticPopoverH = programH;
+    fillControlPopoverH = fillH;
 }

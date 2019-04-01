@@ -1,6 +1,6 @@
 <div *ngIf="isDropdown" class="fd-dropdown"
      [ngClass]="{ 'fd-dropdown--compact': compact, 'fd-dropdown--toolbar': toolbar }">
-    <div class="fd-popover" #popoverDropdownContainer>
+    <div #popoverDropdownContainer>
         <div class="fd-popover__control">
             <button
                 fd-button
@@ -20,9 +20,13 @@
                 [defaultArrow]="arrow"
                 [disabled]="disabled"
                 [triggers]="triggers"
+                [placement]="placement"
                 [focusTrapped]="focusTrapped"
                 (isOpenChange)="isOpenChange.emit($event)"
                 [options]="options"
+                [fillControl]="fillControl"
+                [closeOnOutsideClick]="closeOnOutsideClick"
+                [closeOnEscapeKey]="closeOnEscapeKey"
                 [appendTo]="(appendTo ? appendTo : popoverDropdownContainer)">
                 <ng-content></ng-content>
             </button>
@@ -32,7 +36,7 @@
         </ng-template>
     </div>
 </div>
-<div *ngIf="!isDropdown" class="fd-popover" #popoverContainer>
+<div *ngIf="!isDropdown" #popoverContainer>
     <div class="fd-popover__control"
          [attr.aria-expanded]="this.disabled ? false : isOpen"
          [attr.aria-disabled]="this.disabled"
@@ -43,8 +47,12 @@
          [defaultArrow]="arrow"
          [disabled]="disabled"
          [triggers]="triggers"
+         [placement]="placement"
          [focusTrapped]="focusTrapped"
          [options]="options"
+         [fillControl]="fillControl"
+         [closeOnOutsideClick]="closeOnOutsideClick"
+         [closeOnEscapeKey]="closeOnEscapeKey"
          [appendTo]="(appendTo ? appendTo : popoverContainer)">
         <ng-content select="fd-popover-control"></ng-content>
     </div>
