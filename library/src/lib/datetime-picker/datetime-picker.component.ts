@@ -32,18 +32,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
         date: null
     };
 
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
-    };
-
     @Input()
     placeholder: string = 'mm/dd/yyyy, hh:mm:ss am';
 

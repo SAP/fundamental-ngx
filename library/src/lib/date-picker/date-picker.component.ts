@@ -13,7 +13,6 @@ import {
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-date-picker',
@@ -35,18 +34,6 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker: Subject<string> = new Subject();
-
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
-    };
 
     @HostBinding('class.fd-date-picker') true;
 

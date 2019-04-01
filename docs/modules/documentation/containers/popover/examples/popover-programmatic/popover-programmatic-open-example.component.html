@@ -1,4 +1,8 @@
-<fd-popover [(isOpen)]="isOpen">
+<fd-popover [(isOpen)]="isOpen"
+            [triggers]="[]"
+            [focusTrapped]="false"
+            [closeOnOutsideClick]="false"
+            placement="bottom">
     <fd-popover-control>
         <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
     </fd-popover-control>

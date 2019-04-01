@@ -211,6 +211,7 @@ import { ModalFullscreenExampleComponent } from './containers/modal/examples/ful
 import { InfiniteScrollDocsComponent } from './containers/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
+import { SearchInputAsyncExampleComponent } from './containers/search-input/examples/search-input-async-example.component';
 import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
 import { ListSingleSelectExampleComponent } from './containers/list/examples/list-single-select-example.component';
 import { FileInputDocsComponent } from './containers/file-input/file-input-docs.component';
@@ -233,6 +234,12 @@ import { MultiInputDocsComponent } from './containers/multi-input/multi-input-do
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
 import { MultiInputAsyncExampleComponent } from './containers/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
+import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
+import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
+import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
+import { PopoverFillComponent } from './containers/popover-directive/examples/popover-fill/popover-fill.component';
+import { PopoverCFillComponent } from './containers/popover/examples/popover-c-fill/popover-c-fill.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -245,10 +252,6 @@ import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
-import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
-import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
-import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -453,10 +456,13 @@ const ROUTES: Routes = [
         PopoverDirectiveExampleComponent,
         PopoverTriggersComponent,
         PopoverProgrammaticComponent,
+        PopoverFillComponent,
+        PopoverCFillComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
         SearchInputExampleComponent,
+        SearchInputAsyncExampleComponent,
         SearchInputDynamicExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,

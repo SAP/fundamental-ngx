@@ -1,4 +1,7 @@
+import {version} from '../../library/package.json';
+
 export const environment = {
     production: true,
-    hmr: false
+    hmr: false,
+    version: version
 };
