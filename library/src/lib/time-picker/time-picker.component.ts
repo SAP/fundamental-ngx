@@ -48,10 +48,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     placeholder: string;
 
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start'
-    };
-
     onChange: Function = () => {};
     onTouched: Function = () => {};
 

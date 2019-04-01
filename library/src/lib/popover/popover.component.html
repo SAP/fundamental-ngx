@@ -20,10 +20,13 @@
                 [defaultArrow]="arrow"
                 [disabled]="disabled"
                 [triggers]="triggers"
+                [placement]="placement"
                 [focusTrapped]="focusTrapped"
                 (isOpenChange)="isOpenChange.emit($event)"
                 [options]="options"
                 [fillControl]="fillControl"
+                [closeOnOutsideClick]="closeOnOutsideClick"
+                [closeOnEscapeKey]="closeOnEscapeKey"
                 [appendTo]="(appendTo ? appendTo : popoverDropdownContainer)">
                 <ng-content></ng-content>
             </button>
@@ -44,9 +47,12 @@
          [defaultArrow]="arrow"
          [disabled]="disabled"
          [triggers]="triggers"
+         [placement]="placement"
          [focusTrapped]="focusTrapped"
          [options]="options"
          [fillControl]="fillControl"
+         [closeOnOutsideClick]="closeOnOutsideClick"
+         [closeOnEscapeKey]="closeOnEscapeKey"
          [appendTo]="(appendTo ? appendTo : popoverContainer)">
         <ng-content select="fd-popover-control"></ng-content>
     </div>

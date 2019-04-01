@@ -1,8 +1,7 @@
-<fd-popover [options]="POPOVER_OPTIONS"
-            [focusTrapped]="false"
+<fd-popover [focusTrapped]="false"
             [(isOpen)]="isOpen"
             [fillControl]="true"
-            [triggers]="['click']"
+            class="fd-search-input-popover-custom"
             [ngClass]="{'fd-popover-body--display-none': (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText) &&
                             (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText).length < 1}">
     <fd-popover-control>
@@ -14,8 +13,8 @@
                        [(ngModel)]="inputText"
                        placeholder="{{placeholder}}">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
-                        <button class="fd-button--light" [ngClass]="('sap-icon--' + this.glyph)"></button>
-                    </span>
+                    <button class="fd-button--light" [ngClass]="('sap-icon--' + this.glyph)"></button>
+                </span>
             </div>
         </div>
         <div *ngIf="inShellbar" class="fd-search-input__control">

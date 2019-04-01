@@ -2,16 +2,17 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, HostBinding,
     HostListener,
     Input,
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges
+    SimpleChanges, ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopperOptions } from 'popper.js';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
     selector: 'fd-multi-input',
@@ -29,6 +30,12 @@ import { PopperOptions } from 'popper.js';
     ]
 })
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
+
+    @ViewChild(PopoverComponent)
+    popoverRef: PopoverComponent;
+
+    @HostBinding('class.fd-multi-input')
+    multiInputClass = true;
 
     @Input()
     placeholder: string = '';
@@ -70,12 +77,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     isOpen = false;
 
-    init = false;
-
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start'
-    };
-
     onChange: Function = () => {};
 
     onTouched: Function = () => {};
@@ -83,8 +84,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     constructor(private elRef: ElementRef) {}
 
     ngOnInit() {
-        this.init = true;
-
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
@@ -117,11 +116,19 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     handleSelect(checked: any, value: any): void {
+        const previousLength = this.selected.length;
         if (checked) {
             this.selected.push(value);
         } else {
             this.selected.splice(this.selected.indexOf(value), 1);
         }
+
+        // Handle popover placement update
+        if ((previousLength === 0 && this.selected.length === 1) ||
+            (previousLength === 1 && this.selected.length === 0)) {
+            this.popoverRef.updatePopover();
+        }
+
         this.onChange(this.selected);
         this.selectedChange.emit(this.selected);
     }

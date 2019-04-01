@@ -1,7 +1,6 @@
-<fd-popover [isOpen]="isOpen"
+<fd-popover [(isOpen)]="isOpen"
             [focusTrapped]="false"
-            [triggers]="[]"
-            [options]="POPOVER_OPTIONS">
+            [triggers]="[]">
     <fd-popover-control>
         <div class="fd-input-group fd-input-group--after"
              [ngClass]="{'fd-input-group--compact' : compact}">

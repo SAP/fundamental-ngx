@@ -65,10 +65,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @HostBinding('class.fd-search-input--closed')
     shellBarClass = this.inShellbar;
 
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start'
-    };
-
     onInputKeypressHandler(event) {
         this.isOpen = true;
         if (event.code === 'Enter' && this.searchFunction) {
@@ -120,15 +116,18 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     }
 
     ngOnInit() {
+        console.log(this.POPOVER_OPTIONS);
         if (this.inShellbar) {
-            this.POPOVER_OPTIONS.modifiers.offset = {
-                enabled: true,
-                offset: -264
-            };
+            Object.assign(this.POPOVER_OPTIONS, {
+                modifiers: {
+                    offset: {
+                        enabled: true,
+                        offset: -264
+                    }
+                }
+            });
         }
     }
-
-    constructor(private elRef: ElementRef) {}
 }
 
 @Pipe({
