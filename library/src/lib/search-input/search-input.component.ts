@@ -1,16 +1,13 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef, HostBinding,
     Input,
-    OnInit,
     Output,
     Pipe,
     PipeTransform
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-search-input',
@@ -24,7 +21,7 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor, OnInit {
+export class SearchInputComponent implements ControlValueAccessor {
     @Input()
     dropdownValues: any[];
 
@@ -52,6 +49,12 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     highlight: boolean = true;
 
+    @Input()
+    closeOnSelect: boolean = true;
+
+    @Input()
+    fillOnSelect: boolean = true;
+
     @Output()
     itemClicked = new EventEmitter<any>();
 
@@ -75,6 +78,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     onMenuKeypressHandler(event, term) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
+            this.handleClickActions(term);
             this.itemClicked.emit(term);
         }
     }
@@ -82,8 +86,9 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     onMenuClickHandler(event, term) {
         if (term.callback) {
             term.callback(event);
+            this.handleClickActions(term);
+            this.itemClicked.emit(term);
         }
-        this.itemClicked.emit(term);
     }
 
     shellbarSearchInputClicked(event) {
@@ -115,8 +120,17 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
         this.onTouched = fn;
     }
 
-    ngOnInit() {
+    private handleClickActions(term: string): void {
+        if (this.closeOnSelect) {
+            this.isOpen = false;
+        }
+
+        if (this.fillOnSelect) {
+            console.log('lol')
+            this.inputText = term;
+        }
     }
+
 }
 
 @Pipe({
