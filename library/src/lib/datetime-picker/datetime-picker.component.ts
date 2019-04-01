@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
 import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { PopperOptions } from 'popper.js';
 
@@ -24,7 +24,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
     isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromInput = new BehaviorSubject<string>('');
+    dateFromInput: Subject<string> = new Subject();
 
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
@@ -162,6 +162,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
             this.selectedDay.date = this.date;
             this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
             this.inputFieldDate = this.date.toLocaleString();
+        }
+        if (this.dateFromInput) {
+            this.dateFromInput.subscribe(date => {
+                this.updatePickerInputHandler(date);
+            });
         }
     }
 
