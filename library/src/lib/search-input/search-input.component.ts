@@ -116,17 +116,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     }
 
     ngOnInit() {
-        console.log(this.POPOVER_OPTIONS);
-        if (this.inShellbar) {
-            Object.assign(this.POPOVER_OPTIONS, {
-                modifiers: {
-                    offset: {
-                        enabled: true,
-                        offset: -264
-                    }
-                }
-            });
-        }
     }
 }
 
