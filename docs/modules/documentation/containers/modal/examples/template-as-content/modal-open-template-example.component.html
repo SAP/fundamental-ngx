@@ -5,33 +5,6 @@
     </fd-modal-header>
     <fd-modal-body>
         This action is permanent and cannot be undone. Do you wish to continue?
-        <fd-popover>
-            <fd-popover-control>
-                <button fd-button>Click</button>
-            </fd-popover-control>
-            <fd-popover-body>
-                <fd-menu>
-                    <ul fd-menu-list>
-                        <li fd-menu-item>
-                            option
-                        </li>
-                        <li fd-menu-item>
-                            option
-                        </li>
-                        <li fd-menu-item>
-                            option
-                        </li>
-                        <li fd-menu-item>
-                            option
-                        </li>
-                        <li fd-menu-item>
-                            option
-                        </li>
-                    </ul>
-                </fd-menu>
-            </fd-popover-body>
-        </fd-popover>
-        <fd-multi-input [dropdownValues]="['mom', 'cook', 'lasagna', 'pls']"></fd-multi-input>
     </fd-modal-body>
     <fd-modal-footer>
         <button class="action-button" fd-button (click)="modal.dismiss('cancel')" [options]="'light'">

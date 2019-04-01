@@ -27,13 +27,15 @@
     inputs: [
         { name: 'arrow', description: 'Boolean. Whether an arrow should be shown next to the popover. Defaults to false.' },
         { name: 'disabled', description: 'Boolean. Whether the popover is disabled from opening. Defaults to false.' },
+        { name: 'placement', description: 'String. Placement of the popover. See examples below for options.' },
         { name: 'appendTo', description: 'HTMLElement or \'body\'. Which element the popover should be appended to. Optional.' },
         { name: 'isOpen', description: 'Boolean. The open state of the popover. Defaults to false.' },
         { name: 'options', description: 'PopperOptions. The options passed to Popper.js.' },
         { name: 'triggers', description: 'String[]. An array of event labels that will toggle the popover state automatically. Defaults to [\'click\']' },
-        { name: 'focusTrapped', description: 'Boolean. Whether the popover focus should be trapped. Defaults to true.' },
+        { name: 'focusTrapped', description: 'Boolean. Whether the popover focus should be trapped. Defaults to false.' },
         { name: 'closeOnOutsideClick', description: 'Boolean. Whether the popover should close when the user clicks outside. Defaults to true.' },
-        { name: 'closeOnEscapeKey', description: 'Boolean. Whether the popover should close when the user presses escape. Defaults to true.' }
+        { name: 'closeOnEscapeKey', description: 'Boolean. Whether the popover should close when the user presses escape. Defaults to true.' },
+        { name: 'fillControl', description: 'Boolean. Whether the popover should try to match the control element width. Defaults to false.' }
     ],
     outputs: [
         { name: 'isOpenChange', description: 'Emitted when the state of the popover changes. Allows two-way binding to the isOpen input.' }
@@ -45,7 +47,8 @@
     methods: [
         { name: 'open()', description: 'Opens the popover.' },
         { name: 'close()', description: 'Closes the popover.' },
-        { name: 'toggle()', description: 'Toggles the popover.' }
+        { name: 'toggle()', description: 'Toggles the popover.' },
+        { name: 'updatePopover()', description: 'Force a popover position update.' }
     ]
 }"></properties>
 
@@ -99,10 +102,21 @@
 
 <h2>Popovers in Modals</h2>
 <description>
-    Operating popovers inside a modal requires a few extra configurations. Note that this assumes a scenario where scrolling within the modal is not required.
+    Popovers are functional inside modals. The default behaviour is to overflow the modal, though that can be changed with the <code>options</code> input, which accepts Popper.js settings.
 </description>
 <component-example [name]="'ex4'">
     <fd-popover-modal-example></fd-popover-modal-example>
 </component-example>
 <code-example [code]="popoverModalExampleHtml" [language]="'HTML'"></code-example>
 <code-example [code]="popoverModalExampleTs" [language]="'TypeScript'"></code-example>
+
+<separator></separator>
+
+<h2>Fill Control Width</h2>
+<description>
+    A custom Popper modifier allows the directive to match its popover size to that of the control.
+</description>
+<component-example [name]="'ex5'">
+    <fd-popover-c-fill></fd-popover-c-fill>
+</component-example>
+<code-example [code]="popoverFillExampleH" [language]="'HTML'"></code-example>

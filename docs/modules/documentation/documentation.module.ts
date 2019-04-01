@@ -234,6 +234,12 @@ import { MultiInputDocsComponent } from './containers/multi-input/multi-input-do
 import { MultiInputExampleComponent } from './containers/multi-input/examples/multi-input-example/multi-input-example.component';
 import { MultiInputAsyncExampleComponent } from './containers/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
+import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
+import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
+import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
+import { PopoverFillComponent } from './containers/popover-directive/examples/popover-fill/popover-fill.component';
+import { PopoverCFillComponent } from './containers/popover/examples/popover-c-fill/popover-c-fill.component';
 
 import { HomeDocsComponent } from './containers/home/home.component';
 import { NewComponentComponent } from './containers/new-component/new-component.component';
@@ -246,10 +252,6 @@ import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PopoverDirectiveDocsComponent } from './containers/popover-directive/popover-directive-docs.component';
-import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
-import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
-import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -454,6 +456,8 @@ const ROUTES: Routes = [
         PopoverDirectiveExampleComponent,
         PopoverTriggersComponent,
         PopoverProgrammaticComponent,
+        PopoverFillComponent,
+        PopoverCFillComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,

@@ -4,11 +4,10 @@ import {
     OnInit,
     Output,
     EventEmitter,
-    ChangeDetectorRef,
     ViewChild
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
-import Popper, { Placement, PopperOptions } from 'popper.js';
+import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
 
 @Component({
@@ -75,7 +74,7 @@ export class PopoverComponent implements OnInit {
     };
 
     @Input()
-    focusTrapped: boolean = true;
+    focusTrapped: boolean = false;
 
     @Input()
     fillControl: boolean = false;

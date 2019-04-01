@@ -32,7 +32,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     placement: Placement;
 
     @Input()
-    focusTrapped: boolean = true;
+    focusTrapped: boolean = false;
 
     @Input()
     closeOnEscapeKey: boolean = true;

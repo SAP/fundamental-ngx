@@ -11,7 +11,6 @@ import {
     SimpleChanges, ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopperOptions } from 'popper.js';
 import { PopoverComponent } from '../popover/popover.component';
 
 @Component({

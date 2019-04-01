@@ -1,5 +1,4 @@
-<fd-popover [focusTrapped]="false"
-            [(isOpen)]="isOpen"
+<fd-popover [(isOpen)]="isOpen"
             [fillControl]="true"
             class="fd-combobox-popover-custom"
             [ngClass]="{'fd-popover-body--display-none': (dropdownValues | fdSearch:inputText).length < 1}">
