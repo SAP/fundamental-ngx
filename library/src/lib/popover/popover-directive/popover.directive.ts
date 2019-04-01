@@ -180,6 +180,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         if (this.containerRef) {
             return;
         }
+        
         const factory = this.resolver.resolveComponentFactory(PopoverContainer);
         this.containerRef = factory.create(this.injector);
 
