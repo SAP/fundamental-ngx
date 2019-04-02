@@ -120,14 +120,13 @@ export class SearchInputComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
-    private handleClickActions(term: string): void {
+    private handleClickActions(term): void {
         if (this.closeOnSelect) {
             this.isOpen = false;
         }
 
         if (this.fillOnSelect) {
-            console.log('lol')
-            this.inputText = term;
+            this.inputText = term.text;
         }
     }
 
