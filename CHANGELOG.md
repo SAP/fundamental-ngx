@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0-rc.0"></a>
+# [0.4.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.3...v0.4.0-rc.0) (2019-04-02)
+
+
+### Features
+
+* combobox improvements ([#668](https://github.com/SAP/fundamental-ngx/issues/668)) ([c0e00df](https://github.com/SAP/fundamental-ngx/commit/c0e00df))
+
+
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/SAP/fundamental-ngx/compare/v0.3.3-rc.0...v0.3.3) (2019-04-02)
 
