@@ -3,11 +3,11 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef, HostBinding,
-    Input,
+    Input, OnChanges,
     OnInit,
     Output,
     Pipe,
-    PipeTransform
+    PipeTransform, SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopperOptions } from 'popper.js';
@@ -24,12 +24,14 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor, OnInit {
+export class SearchInputComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input()
-    dropdownValues: any[];
+    dropdownValues: any[] = [];
 
     @Input()
-    usingCustomFilter: boolean = false;
+    filterFn: Function = this.defaultFilter;
+
+    displayedValues: any[] = [];
 
     @Input()
     disabled: boolean;
@@ -116,20 +118,31 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     }
 
     ngOnInit() {
-    }
-}
-
-@Pipe({
-    name: 'fdSearch'
-})
-export class FdSearchPipe implements PipeTransform {
-    transform(value: any, input: string) {
-        if (input && typeof input === 'string') {
-            input = input.toLocaleLowerCase();
-            return value.filter((result: any) => {
-                return result.text.toLocaleLowerCase().startsWith(input);
-            });
+        if (this.dropdownValues) {
+            this.displayedValues = this.dropdownValues;
         }
-        return value;
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+            if (this.inputText) {
+                this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+            } else {
+                this.displayedValues =  this.dropdownValues;
+            }
+        }
+    }
+
+    handleSearchTermChange(): void {
+        this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+    }
+
+    private defaultFilter(contentArray: any[], searchTerm: string): any[] {
+        const searchLower = searchTerm.toLocaleLowerCase();
+        return contentArray.filter(item => {
+            if (item) {
+                return item.text.toLocaleLowerCase().includes(searchLower);
+            }
+        });
     }
 }
