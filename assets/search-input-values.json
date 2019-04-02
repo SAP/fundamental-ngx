@@ -1,0 +1,6 @@
+[
+    {"text": "Apple", "alertMessage": "Apple Clicked"},
+    {"text": "Banana", "alertMessage": "Banana Clicked"},
+    {"text": "Mango", "alertMessage": "Mango Clicked"},
+    {"text": "Strawberry", "alertMessage": "Strawberry Clicked"}
+]
