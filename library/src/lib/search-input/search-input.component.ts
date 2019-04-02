@@ -78,7 +78,6 @@ export class SearchInputComponent implements ControlValueAccessor {
     onMenuKeypressHandler(event, term) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
-            this.handleClickActions(term);
             this.itemClicked.emit(term);
         }
     }
@@ -119,7 +118,6 @@ export class SearchInputComponent implements ControlValueAccessor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
-
     private handleClickActions(term): void {
         if (this.closeOnSelect) {
             this.isOpen = false;
@@ -129,7 +127,6 @@ export class SearchInputComponent implements ControlValueAccessor {
             this.inputText = term.text;
         }
     }
-
 }
 
 @Pipe({

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -67,7 +67,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @HostBinding('class.fd-calendar') true;
 
     @Input()
-    dateFromDatePicker: BehaviorSubject<any>;
+    dateFromDatePicker: Subject<any>;
 
     @Input()
     calType: CalendarType = 'single';
@@ -75,8 +75,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Input()
     mondayStartOfWeek: boolean = false;
 
-    @Output()
-    updateDatePickerInput: EventEmitter<any> = new EventEmitter();
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
@@ -394,16 +392,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.calendarGrid.forEach(grid => {
             grid.forEach(day => {
                 day.selected =
-                    (this.selectedDay.date && day.date.toDateString() === this.selectedDay.date.toDateString()) ||
+                    (this.selectedDay.date && day.date && day.date.toDateString() === this.selectedDay.date.toDateString()) ||
                     (this.selectedRangeFirst.date &&
                         day.date.toDateString() === this.selectedRangeFirst.date.toDateString()) ||
                     (this.selectedRangeLast.date &&
                         day.date.toDateString() === this.selectedRangeLast.date.toDateString());
                 day.selectedFirst =
-                    this.selectedRangeFirst.date &&
+                    this.selectedRangeFirst.date && day.date &&
                     day.date.toDateString() === this.selectedRangeFirst.date.toDateString();
                 day.selectedLast =
-                    this.selectedRangeLast.date &&
+                    this.selectedRangeLast.date && day.date &&
                     day.date.toDateString() === this.selectedRangeLast.date.toDateString();
                 day.selectedRange =
                     this.selectedRangeFirst.date &&
@@ -421,7 +419,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.emittedDate.selectedFirstDay = this.selectedRangeFirst;
             this.emittedDate.selectedLastDay = this.selectedRangeLast;
         }
-        this.updateDatePickerInput.emit(this.emittedDate);
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.next(this.emittedDate);
+        }
     }
 
     constructCalendarYearsList() {
@@ -902,7 +902,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.subscribe(date => {
-                if (date) {
+                if (date && typeof date === 'string') {
                     this.updateFromDatePicker(date);
                 }
                 this.constructCalendarYearsList();

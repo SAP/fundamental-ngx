@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.5...v0.3.2) (2019-04-02)
+
+
+
+<a name="0.3.2-rc.5"></a>
+## [0.3.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.4...v0.3.2-rc.5) (2019-04-02)
+
+
+### Bug Fixes
+
+* clear date picker subject refactor ([#665](https://github.com/SAP/fundamental-ngx/issues/665)) ([8e56c26](https://github.com/SAP/fundamental-ngx/commit/8e56c26))
+
+
+
+<a name="0.3.2-rc.4"></a>
+## [0.3.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.3...v0.3.2-rc.4) (2019-04-01)
+
+
+### Bug Fixes
+
+* fixed popovers to work in modals ([#664](https://github.com/SAP/fundamental-ngx/issues/664)) ([16e64b9](https://github.com/SAP/fundamental-ngx/commit/16e64b9))
+
+
+
 <a name="0.3.2-rc.3"></a>
 ## [0.3.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.2...v0.3.2-rc.3) (2019-04-01)
 

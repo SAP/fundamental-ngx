@@ -38,7 +38,7 @@ describe('DatePickerComponent', () => {
     it('should open the calendar', () => {
         spyOn(component, 'getInputValue');
         component.isOpen = false;
-        component.isValidDateInput = true;
+        component.isInvalidDateInput = true;
         component.openCalendar({});
         expect(component.getInputValue).toHaveBeenCalled();
         expect(component.isOpen).toBeTruthy();
@@ -47,7 +47,7 @@ describe('DatePickerComponent', () => {
 
     it('should close the calendar', () => {
         component.isOpen = true;
-        component.isValidDateInput = true;
+        component.isInvalidDateInput = true;
         component.closeCalendar();
         expect(component.inputFieldDate).toBeNull();
         expect(component.isOpen).not.toBeTruthy();
@@ -55,7 +55,7 @@ describe('DatePickerComponent', () => {
 
     it('should handle blur', () => {
         component.isOpen = true;
-        component.isValidDateInput = true;
+        component.isInvalidDateInput = true;
         component.onBlurHandler();
         expect(component.inputFieldDate).toBeNull();
     });

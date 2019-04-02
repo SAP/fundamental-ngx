@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarComponent, CalendarDay } from './calendar.component';
+import { CalendarComponent } from './calendar.component';
 import { HashService } from '../utils/hash.service';
-import { BehaviorSubject } from 'rxjs';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent;
@@ -116,12 +115,10 @@ describe('CalendarComponent', () => {
     });
 
     it('should updateDatePickerInputEmitter', () => {
-        spyOn(component.updateDatePickerInput, 'emit');
         component.calType = 'single';
         component.selectedDay = {date: new Date()};
         component.updateDatePickerInputEmitter();
         expect(component.emittedDate.selectedDay).toEqual(component.selectedDay);
-        expect(component.updateDatePickerInput.emit).toHaveBeenCalledWith(component.emittedDate);
         component.calType = 'range';
         component.selectedRangeFirst = {date: new Date()};
         component.selectedRangeLast = {date: new Date()};
