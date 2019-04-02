@@ -4,14 +4,15 @@ import {
     OnInit,
     HostListener,
     ElementRef,
-    EventEmitter,
-    Output,
     forwardRef,
-    HostBinding
+    HostBinding,
+    Output,
+    EventEmitter,
+    OnDestroy
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fd-date-picker',
@@ -28,11 +29,11 @@ import { BehaviorSubject } from 'rxjs';
         }
     ]
 })
-export class DatePickerComponent implements OnInit, ControlValueAccessor {
+export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
     inputFieldDate = null;
-    isValidDateInput: boolean = false;
+    isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromDatePicker = new BehaviorSubject<string>('');
+    dateFromDatePicker: Subject<string> = new Subject();
 
     @HostBinding('class.fd-date-picker') true;
 
@@ -84,14 +85,14 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     openCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
-        if (this.isValidDateInput) {
+        if (this.isInvalidDateInput) {
             this.inputFieldDate = null;
         }
     }
 
     closeCalendar() {
         if (this.isOpen) {
-            if (this.isValidDateInput) {
+            if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
             this.isOpen = false;
@@ -100,7 +101,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
     onBlurHandler() {
         if (this.isOpen) {
-            if (this.isValidDateInput) {
+            if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
         }
@@ -127,7 +128,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     isInvalidDateInputHandler(e) {
-        this.isValidDateInput = e;
+        this.isInvalidDateInput = e;
     }
 
     getInputValue(e) {
@@ -147,7 +148,33 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.subscribe(date => {
+                if (date && typeof date === 'object') {
+                    this.updateDatePickerInputHandler(date);
+                } else if (date === '') {
+                    if (this.type === 'single') {
+                        this.selectedDay.date = null;
+                        this.selectedDay.selected = null;
+                        this.onChange({date: this.selectedDay.date});
+                    } else {
+                        this.selectedRangeFirst.date = null;
+                        this.selectedRangeFirst.selected = null;
+                        this.selectedRangeLast.date = null;
+                        this.selectedRangeLast.selected = null;
+                        this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                    }
+                }
+            })
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.dateFromDatePicker) {
+            this.dateFromDatePicker.unsubscribe();
+        }
+    }
 
     constructor(private eRef: ElementRef) {}
 
@@ -169,11 +196,19 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
         }
         if (this.type.toLocaleLowerCase() === 'single') {
             this.selectedDay.date = selected.date;
-            this.inputFieldDate = selected.date.toLocaleDateString();
+            if (selected.date !== null) {
+                this.inputFieldDate = selected.date.toLocaleDateString();
+            } else {
+                this.inputFieldDate = '';
+            }
         } else {
             this.selectedRangeFirst.date = selected.date;
             this.selectedRangeLast.date = selected.rangeEnd;
-            this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            if (selected.date !== null) {
+                this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+            } else {
+                this.inputFieldDate = '';
+            }
         }
     }
 }
