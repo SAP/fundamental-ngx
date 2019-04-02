@@ -28,7 +28,7 @@
                 <ul fd-menu-list>
                     <li fd-menu-item
                         *ngFor="let term of dropdownValues | fdSearch:inputText"
-                        (click)="term.callback($event)"
+                        (click)="onMenuClickHandler($event, term)"
                         (keypress)="onMenuKeypressHandler($event, term)">
                         <a
                            tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>

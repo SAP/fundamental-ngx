@@ -4,10 +4,10 @@ import {
     OnInit,
     HostListener,
     ElementRef,
+    EventEmitter,
+    Output,
     forwardRef,
     HostBinding,
-    Output,
-    EventEmitter,
     OnDestroy
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
