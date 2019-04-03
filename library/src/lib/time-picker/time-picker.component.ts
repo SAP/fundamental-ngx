@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -132,6 +132,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 this.child.displayedHour = null;
                 this.child.period = 'am';
                 this.child.oldPeriod = 'am';
+                this.onChange(this.time);
             }
         } else if (this.meridian) {
             if (this.displaySeconds) {
@@ -166,6 +167,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 this.child.displayedHour = null;
                 this.child.period = 'am';
                 this.child.oldPeriod = 'am';
+                this.onChange(this.time);
             }
         }
     }
@@ -213,6 +215,11 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         return retVal;
     }
 
+    timeFromTimeComponentChanged() {
+        this.cd.detectChanges();
+        this.onChange(this.time);
+    }
+
     registerOnChange(fn: (time: TimeObject) => void): void {
         this.onChange = fn;
     }
@@ -231,4 +238,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         }
         this.time = time;
     }
+
+    constructor(private cd: ChangeDetectorRef) {}
 }
