@@ -20,7 +20,8 @@
         "release:create": "create-release",
         "start": "npm run build-doc && ng serve",
         "test": "ng test fundamental-ngx --watch false --code-coverage true --browsers=ChromeHeadless",
-        "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\""
+        "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
+        "poc-docs": "typedoc --out typedoc library/src/lib --module commonjs --mode file --theme markdown --exclude **/*.spec.ts --hideGenerator"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -79,6 +80,8 @@
         "tsickle": "^0.34.0",
         "tslib": "^1.9.3",
         "tslint": "^5.13.0",
+        "typedoc": "^0.14.2",
+        "typedoc-plugin-markdown": "^1.1.27",
         "typescript": "3.1.1"
     },
     "pre-commit": {
