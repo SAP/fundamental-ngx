@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { SearchInputComponent } from '../search-input/search-input.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -10,12 +10,12 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
         provide: NG_VALUE_ACCESSOR,
         useExisting: ComboboxInputComponent,
         multi: true
-    }],
-    host: {
-        class: 'fd-combobox-input'
-    }
+    }]
 })
 export class ComboboxInputComponent extends SearchInputComponent {
+
+    @HostBinding('class.fd-combobox-input')
+    comboboxClass = true;
 
     @Input()
     newItemCallback: Function;

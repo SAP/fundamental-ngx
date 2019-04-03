@@ -1,6 +1,7 @@
 <button fd-button
         fdPopover="This popover is only triggered by focus events."
         [defaultArrow]="true"
+        placement="bottom"
         [triggers]="['focus']"
         [focusTrapped]="false">
     Focus Trigger
@@ -8,6 +9,15 @@
 
 <button fd-button
         fdPopover="This popover is only triggered by click events."
+        placement="bottom"
         [defaultArrow]="true">
     Click Trigger
+</button>
+
+<button fd-button
+        fdPopover="This popover is only triggered by hover events."
+        placement="bottom"
+        [triggers]="['mouseenter', 'mouseleave']"
+        [defaultArrow]="true">
+    Hover Trigger
 </button>

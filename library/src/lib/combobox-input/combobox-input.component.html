@@ -1,5 +1,7 @@
 <div class="fd-combobox-input">
-    <fd-popover [options]="POPOVER_OPTIONS" [focusTrapped]="false"
+    <fd-popover [(isOpen)]="isOpen"
+                [fillControl]="true"
+                class="fd-combobox-popover-custom"
                 [ngClass]="{'fd-popover-body--display-none': (dropdownValues | fdSearch:inputText).length < 1}">
         <fd-popover-control>
             <div class="fd-combobox-control">
@@ -11,7 +13,10 @@
                            [(ngModel)]="inputText"
                            placeholder="{{placeholder}}">
                     <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
-                        <button class="fd-button--light sap-icon--navigation-down-arrow" type="button"></button>
+                        <button class="fd-button--light sap-icon--navigation-down-arrow"
+                                type="button"
+                                [disabled]="disabled">
+                        </button>
                     </span>
                 </div>
             </div>
@@ -19,11 +24,17 @@
         <fd-popover-body *ngIf="(dropdownValues | fdSearch:inputText).length">
             <fd-menu>
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let term of dropdownValues | fdSearch:inputText" (click)="term.callback($event)" (keydown)="onMenuKeydownHandler($event, term)">
-                        <a tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
+                    <li fd-menu-item
+                        *ngFor="let term of dropdownValues | fdSearch:inputText"
+                        (click)="onMenuClickHandler($event, term)"
+                        (keypress)="onMenuKeydownHandler($event, term)">
+                        <a
+                           tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
                     </li>
-                    <li fd-menu-item (click)="newItemCallback($event)" (keydown)="newItemKeydownHandler($event)">
-                        <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
+                    <li fd-menu-item
+                        (click)="newItemCallback($event)"
+                        (keypress)="newItemKeydownHandler($event)">
+                        <a class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>
                 </ul>
             </fd-menu>

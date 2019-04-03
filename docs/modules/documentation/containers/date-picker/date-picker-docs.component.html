@@ -19,6 +19,11 @@
     { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
     { name: 'selectedRangeFirst', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the first selected day in a range of dates on \'range\' type calendars.'},
     { name: 'selectedRangeLast', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the last selected day in a range of dates on \'range\' type calendars.'}
+  ],
+  outputs: [
+    { name: 'selectedDayChange', description: 'Fired when the selected date changes for a single type calendar.'},
+    { name: 'selectedRangeFirstChange', description: 'Fired when the first selected date for a range of dates changes.'},
+    { name: 'selectedRangeLastChange', description: 'Fired when the last selected date for a range of dates changes.'}
   ]
 }">
 </properties>

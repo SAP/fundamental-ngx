@@ -1,10 +1,8 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, HostBinding,
     Input,
-    OnInit,
     Output,
     Pipe,
     PipeTransform,
@@ -14,7 +12,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MenuItemDirective } from '../menu/menu-item.directive';
-import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-search-input',
@@ -28,7 +25,7 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor, OnInit {
+export class SearchInputComponent implements ControlValueAccessor {
     @Input()
     dropdownValues: any[];
 
@@ -56,6 +53,12 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     highlight: boolean = true;
 
+    @Input()
+    closeOnSelect: boolean = true;
+
+    @Input()
+    fillOnSelect: boolean = true;
+
     @Output()
     itemClicked = new EventEmitter<any>();
 
@@ -67,17 +70,11 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
 
     inputTextValue: string;
 
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
-    };
+    @HostBinding('class.fd-search-input')
+    searchInputClass = true;
+
+    @HostBinding('class.fd-search-input--closed')
+    shellBarClass = this.inShellbar;
 
     onInputKeydownHandler(event) {
         if (event.code === 'Enter' && this.searchFunction) {
@@ -135,8 +132,9 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     onMenuClickHandler(event, term) {
         if (term.callback) {
             term.callback(event);
+            this.handleClickActions(term);
+            this.itemClicked.emit(term);
         }
-        this.itemClicked.emit(term);
     }
 
     shellbarSearchInputClicked(event) {
@@ -167,17 +165,15 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
+    private handleClickActions(term): void {
+        if (this.closeOnSelect) {
+            this.isOpen = false;
+        }
 
-    ngOnInit() {
-        if (this.inShellbar) {
-            this.POPOVER_OPTIONS.modifiers.offset = {
-                enabled: true,
-                offset: -264
-            };
+        if (this.fillOnSelect) {
+            this.inputText = term.text;
         }
     }
-
-    constructor(private elRef: ElementRef) {}
 }
 
 @Pipe({

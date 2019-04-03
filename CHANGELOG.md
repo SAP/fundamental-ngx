@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0-rc.0"></a>
+# [0.4.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.3...v0.4.0-rc.0) (2019-04-02)
+
+
+### Features
+
+* combobox improvements ([#668](https://github.com/SAP/fundamental-ngx/issues/668)) ([c0e00df](https://github.com/SAP/fundamental-ngx/commit/c0e00df))
+
+
+
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/SAP/fundamental-ngx/compare/v0.3.3-rc.0...v0.3.3) (2019-04-02)
+
+
+
+<a name="0.3.3-rc.0"></a>
+## [0.3.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.2...v0.3.3-rc.0) (2019-04-02)
+
+
+
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.5...v0.3.2) (2019-04-02)
+
+
+
+<a name="0.3.2-rc.5"></a>
+## [0.3.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.4...v0.3.2-rc.5) (2019-04-02)
+
+
+### Bug Fixes
+
+* clear date picker subject refactor ([#665](https://github.com/SAP/fundamental-ngx/issues/665)) ([8e56c26](https://github.com/SAP/fundamental-ngx/commit/8e56c26))
+
+
+
+<a name="0.3.2-rc.4"></a>
+## [0.3.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.3...v0.3.2-rc.4) (2019-04-01)
+
+
+### Bug Fixes
+
+* fixed popovers to work in modals ([#664](https://github.com/SAP/fundamental-ngx/issues/664)) ([16e64b9](https://github.com/SAP/fundamental-ngx/commit/16e64b9))
+
+
+
+<a name="0.3.2-rc.3"></a>
+## [0.3.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.2...v0.3.2-rc.3) (2019-04-01)
+
+
+
+<a name="0.3.2-rc.2"></a>
+## [0.3.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.1...v0.3.2-rc.2) (2019-03-31)
+
+
+
+<a name="0.3.2-rc.1"></a>
+## [0.3.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.3.2-rc.0...v0.3.2-rc.1) (2019-03-30)
+
+
+
+<a name="0.3.2-rc.0"></a>
+## [0.3.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.3.1...v0.3.2-rc.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* search input observable support and examples ([#644](https://github.com/SAP/fundamental-ngx/issues/644)) ([57302fb](https://github.com/SAP/fundamental-ngx/commit/57302fb))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/SAP/fundamental-ngx/compare/v0.3.1-rc.0...v0.3.1) (2019-03-25)
 
