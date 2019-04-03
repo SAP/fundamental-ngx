@@ -1,16 +1,13 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef, HostBinding,
     Input, OnChanges,
     OnInit,
     Output,
-    Pipe,
-    PipeTransform, SimpleChanges
+    SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-search-input',
@@ -54,6 +51,12 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     @Input()
     highlight: boolean = true;
 
+    @Input()
+    closeOnSelect: boolean = true;
+
+    @Input()
+    fillOnSelect: boolean = true;
+
     @Output()
     itemClicked = new EventEmitter<any>();
 
@@ -84,8 +87,9 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     onMenuClickHandler(event, term) {
         if (term.callback) {
             term.callback(event);
+            this.handleClickActions(term);
+            this.itemClicked.emit(term);
         }
-        this.itemClicked.emit(term);
     }
 
     shellbarSearchInputClicked(event) {
@@ -115,6 +119,15 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+
+    private handleClickActions(term): void {
+        if (this.closeOnSelect) {
+            this.isOpen = false;
+        }
+        if (this.fillOnSelect) {
+            this.inputText = term.text;
+        }
     }
 
     ngOnInit() {

@@ -11,12 +11,12 @@ export class SearchInputDynamicExampleComponent {
     selected: string;
 
     dropdownValues = [
-        { text: 'Apple', callback: () => {alert('Apple Clicked')}},
-        { text: 'Banana', callback: () => {alert('Banana Clicked')}},
-        { text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
-        { text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}},
-        { text: 'Tomato', callback: () => {alert('Tomato Clicked')}},
-        { text: 'Pineapple', callback: () => {alert('Pineapple Clicked')}}
+        { text: 'Apple', callback: () => {alert('Apple Clicked!')} },
+        { text: 'Banana', callback: () => {alert('Banana Clicked!')} },
+        { text: 'Kiwi', callback: () => {alert('Kiwi Clicked!')} },
+        { text: 'Strawberry', callback: () => {alert('Strawberry Clicked!')} },
+        { text: 'Tomato', callback: () => {alert('Tomato Clicked!')} },
+        { text: 'Pineapple', callback: () => {alert('Pineapple Clicked!')} }
     ];
 
     selectItem(event: any) {
