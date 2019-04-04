@@ -176,6 +176,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
                 this.updatePickerInputHandler(date);
             });
         }
+        if (this.dateFromInput) {
+            this.dateFromInput.subscribe(date => {
+                this.updatePickerInputHandler(date);
+            });
+        }
     }
 
     constructor(private eRef: ElementRef) {}

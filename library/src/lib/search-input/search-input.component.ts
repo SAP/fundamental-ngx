@@ -1,16 +1,17 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef, HostBinding,
     Input,
-    OnInit,
     Output,
     Pipe,
-    PipeTransform
+    PipeTransform,
+    QueryList,
+    ViewChild,
+    ViewChildren
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopperOptions } from 'popper.js';
+import { MenuItemDirective } from '../menu/menu-item.directive';
 
 @Component({
     selector: 'fd-search-input',
@@ -24,7 +25,7 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor, OnInit {
+export class SearchInputComponent implements ControlValueAccessor {
     @Input()
     dropdownValues: any[];
 
@@ -52,8 +53,18 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     highlight: boolean = true;
 
+    @Input()
+    closeOnSelect: boolean = true;
+
+    @Input()
+    fillOnSelect: boolean = true;
+
     @Output()
     itemClicked = new EventEmitter<any>();
+
+    @ViewChildren(MenuItemDirective) menuItems: QueryList<MenuItemDirective>;
+
+    @ViewChild('searchInputElement') searchInputElement;
 
     isOpen: boolean = false;
 
@@ -65,25 +76,65 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @HostBinding('class.fd-search-input--closed')
     shellBarClass = this.inShellbar;
 
-    onInputKeypressHandler(event) {
-        this.isOpen = true;
+    onInputKeydownHandler(event) {
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            if (this.menuItems && this.menuItems.first) {
+                this.menuItems.first.itemEl.nativeElement.children[0].focus();
+            }
         }
     }
 
-    onMenuKeypressHandler(event, term) {
+    onInputKeyupHandler() {
+        if (this.inputText.length) {
+            this.isOpen = true;
+        }
+    }
+
+    onMenuKeydownHandler(event, term?) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
             this.itemClicked.emit(term);
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            let foundItem = false;
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
+                if (document.activeElement === item.itemEl.nativeElement.children[0] && !foundItem) {
+                    if (menuItemsArray[index + 1]) {
+                        menuItemsArray[index + 1].itemEl.nativeElement.children[0].focus();
+                    }
+                    foundItem = true;
+                }
+            })
+        } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
+            let foundItem = false;
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
+                if (!foundItem) {
+                    if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
+                        this.searchInputElement.nativeElement.focus();
+                        foundItem = true;
+                    } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
+                        if (menuItemsArray[index - 1]) {
+                            menuItemsArray[index - 1].itemEl.nativeElement.children[0].focus();
+                        }
+                        foundItem = true;
+                    }
+                }
+            });
         }
     }
 
     onMenuClickHandler(event, term) {
         if (term.callback) {
             term.callback(event);
+            this.handleClickActions(term);
+            this.itemClicked.emit(term);
         }
-        this.itemClicked.emit(term);
     }
 
     shellbarSearchInputClicked(event) {
@@ -114,8 +165,14 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
+    private handleClickActions(term): void {
+        if (this.closeOnSelect) {
+            this.isOpen = false;
+        }
 
-    ngOnInit() {
+        if (this.fillOnSelect) {
+            this.inputText = term.text;
+        }
     }
 }
 

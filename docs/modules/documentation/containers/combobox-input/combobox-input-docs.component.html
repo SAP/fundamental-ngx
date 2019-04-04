@@ -3,7 +3,7 @@
     The combobox input component is an opinionated composition of the "input-group" and "popover" components to
     accomplish the UI pattern for a typical input dropdown, also known as combobox input.
 </description>
-<import module="ComboboxInputModule" path="fundamental/combobox-input/combobox-input.module"></import>
+<import module="ComboboxInputModule" path="fundamental-ngx"></import>
 <separator></separator>
 
 <h1>&lt;fd-combobox-input&gt;</h1>
@@ -15,6 +15,8 @@
     { name: 'dropdownValues', description: 'An array of objects, each containing a (string) \'text\' and (Function) \'callback\' property. The callback function is executed when the item is clicked.' },
     { name: 'disabled', description: 'Boolean, disables the input.'},
     { name: 'placeholder', description: 'Placeholder for the input.'},
+    { name: 'fillOnSelect', description: 'Boolean, whether to automatically fill the input with the selected value. Defaults to true.' },
+    { name: 'closeOnSelect', description: 'Boolean, whether to automatically close the popover when a value is selected. Defaults to true.' },
     { name: 'compact', description: 'Boolean, set to \'true\' for the compact combobox input.'}
   ]
 }"></properties>
