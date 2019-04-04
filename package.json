@@ -21,7 +21,7 @@
         "start": "npm run build-doc && ng serve",
         "test": "ng test fundamental-ngx --watch false --code-coverage true --browsers=ChromeHeadless",
         "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
-        "poc-docs": "typedoc --out typedoc library/src/lib --module commonjs --mode file --theme markdown --exclude **/*.spec.ts --hideGenerator"
+        "poc-docs": "typedoc --out typedoc library/src/lib --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --mdHideSources --theme docs/fd-theme"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
