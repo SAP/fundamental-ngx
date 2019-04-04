@@ -1,0 +1,16 @@
+<header>Alert</header>
+<description>Alerts are used to display short messages that require user attention.</description>
+<import module="AlertModule" path="fundamental-ngx"></import>
+
+<ul class="fd-tabs">
+    <li class="fd-tabs__item">
+        <a class="fd-tabs__link" role="tab" [routerLink]="['./']" routerLinkActive="is-selected" [routerLinkActiveOptions]= "{exact: true}">Examples</a>
+    </li>
+    <li class="fd-tabs__item">
+        <a class="fd-tabs__link" role="tab" [routerLink]="['api']" routerLinkActive="is-selected">API</a>
+    </li>
+</ul>
+
+<separator style="margin-top: 0;"></separator>
+
+<router-outlet></router-outlet>

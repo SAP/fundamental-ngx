@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /typedoc
+/docs/assets/typedoc
 
 docs/assets/README.md
 docs/assets/NEW_COMPONENT.md

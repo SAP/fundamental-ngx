@@ -249,6 +249,10 @@ import { PopoverDirectiveDocsComponent } from './containers/popover-directive/po
 import { PopoverDirectiveExampleComponent } from './containers/popover-directive/examples/popover-directive-example/popover-directive-example.component';
 import { PopoverTriggersComponent } from './containers/popover-directive/examples/popover-triggers/popover-triggers.component';
 import { PopoverProgrammaticComponent } from './containers/popover-directive/examples/popover-programmatic/popover-programmatic.component';
+import { ApiComponent } from './components/api/api.component';
+import { AlertConfig } from '../../../library/src/lib/alert/alert-config';
+import { ApiDocsService } from './services/api-docs.service';
+import { AlertHeaderComponent } from './containers/alert/alert-header.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -261,7 +265,11 @@ const ROUTES: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'action-bar', component: ActionBarDocsComponent },
-            { path: 'alert', component: AlertDocsComponent },
+            { path: 'alert', component: AlertHeaderComponent, children: [
+                    { path: '', component: AlertDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {component: 'alert'}}
+                ]
+            },
             { path: 'badgeLabel', component: BadgeLabelDocsComponent },
             { path: 'breadcrumb', component: BreadcrumbDocsComponent },
             { path: 'button', component: ButtonDocsComponent },
@@ -502,7 +510,9 @@ const ROUTES: Routes = [
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
-        BackdropExamplesComponent
+        BackdropExamplesComponent,
+        ApiComponent,
+        AlertHeaderComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
@@ -519,6 +529,9 @@ const ROUTES: Routes = [
         FundamentalNgxModule,
         HttpClientModule
     ],
-    providers: [CopyService]
+    providers: [
+        CopyService,
+        ApiDocsService
+    ]
 })
 export class DocumentationModule {}

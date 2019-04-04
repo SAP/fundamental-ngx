@@ -17,7 +17,10 @@
                         "tsConfig": "docs/tsconfig.app.json",
                         "polyfills": "docs/polyfills.ts",
                         "assets": ["docs/assets", "docs/favicon.ico"],
-                        "styles": ["node_modules/fiori-fundamentals/dist/fiori-fundamentals.css", "docs/styles.scss"],
+                        "styles": [
+                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
+                            "docs/styles.scss"
+                        ],
                         "scripts": ["node_modules/marked/lib/marked.js"]
                     },
                     "configurations": {
