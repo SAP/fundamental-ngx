@@ -5,12 +5,10 @@
                 [ngClass]="{'fd-popover-body--display-none': (dropdownValues | fdSearch:inputText).length < 1}">
         <fd-popover-control>
             <div class="fd-combobox-control">
-                <div class="fd-input-group fd-input-group--after"
-                     [ngClass]="{'fd-input-group--compact': compact}">
-                    <input type="text"
-                           class="fd-input"
-                           [ngClass]="{'fd-input--compact': compact}"
-                           (keypress)="onInputKeypressHandler($event)"
+                <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
+                    <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                           (keydown)="onInputKeydownHandler($event)"
+                           (keyup)="onInputKeyupHandler()"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
                            placeholder="{{placeholder}}">
@@ -29,14 +27,14 @@
                     <li fd-menu-item
                         *ngFor="let term of dropdownValues | fdSearch:inputText"
                         (click)="onMenuClickHandler($event, term)"
-                        (keypress)="onMenuKeypressHandler($event, term)">
+                        (keydown)="onMenuKeydownHandler($event, term)">
                         <a
                            tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
                     </li>
                     <li fd-menu-item
                         (click)="newItemCallback($event)"
-                        (keypress)="newItemKeypressHandler($event)">
-                        <a class="fd-menu__item fd-menu__link">+ New Item</a>
+                        (keydown)="newItemKeydownHandler($event)">
+                        <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>
                 </ul>
             </fd-menu>

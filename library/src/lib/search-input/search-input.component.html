@@ -6,8 +6,9 @@
     <fd-popover-control>
         <div *ngIf="!inShellbar" class="fd-combobox-control">
             <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                <input type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
-                       (keypress)="onInputKeypressHandler($event)"
+                <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                       (keydown)="onInputKeydownHandler($event)"
+                       (keyup)="onInputKeyupHandler()"
                        [disabled]="disabled"
                        [(ngModel)]="inputText"
                        placeholder="{{placeholder}}">
@@ -22,7 +23,8 @@
             <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
                 <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
                     <input type="text" class="fd-input"
-                           (keypress)="onInputKeypressHandler($event)"
+                           (keydown)="onInputKeydownHandler($event)"
+                           (keyup)="onInputKeyupHandler()"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
                            placeholder="{{placeholder}}"
@@ -37,7 +39,7 @@
             <ul fd-menu-list>
                 <li fd-menu-item
                     *ngFor="let term of (usingCustomFilter ? dropdownValues : dropdownValues | fdSearch:inputText)"
-                    (click)="onMenuClickHandler($event, term)" (keypress)="onMenuKeypressHandler($event, term)">
+                    (click)="onMenuClickHandler($event, term)"  (keydown)="onMenuKeydownHandler($event, term)">
                     <a tabindex="0">
                         <div *ngIf="highlight && inputTextValue">
                             {{ term.text.substr(0, term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase())) }}
@@ -52,4 +54,3 @@
         </fd-menu>
     </fd-popover-body>
 </fd-popover>
-
