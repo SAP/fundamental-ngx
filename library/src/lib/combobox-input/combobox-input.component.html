@@ -27,14 +27,14 @@
                     <li fd-menu-item
                         *ngFor="let term of dropdownValues | fdSearch:inputText"
                         (click)="onMenuClickHandler($event, term)"
-                        (keypress)="onMenuKeydownHandler($event, term)">
+                        (keydown)="onMenuKeydownHandler($event, term)">
                         <a
                            tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
                     </li>
                     <li fd-menu-item
                         (click)="newItemCallback($event)"
-                        (keypress)="newItemKeydownHandler($event)">
-                        <a class="fd-menu__item fd-menu__link">+ New Item</a>
+                        (keydown)="newItemKeydownHandler($event)">
+                        <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>
                 </ul>
             </fd-menu>
