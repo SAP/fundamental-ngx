@@ -6,7 +6,7 @@
     <fd-popover-control>
         <div *ngIf="!inShellbar" class="fd-combobox-control">
             <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                <input type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+                <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
                        (keydown)="onInputKeydownHandler($event)"
                        (keyup)="onInputKeyupHandler()"
                        [disabled]="disabled"
