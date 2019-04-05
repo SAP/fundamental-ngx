@@ -1,8 +1,6 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { API_FILES } from '../../utilities/api-files';
 import { ApiDocsService } from '../../services/api-docs.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-api',
@@ -15,14 +13,13 @@ export class ApiComponent implements OnInit {
     result: string;
 
     constructor(private route: ActivatedRoute,
-                private apiService: ApiDocsService,
-                private sanitizer: DomSanitizer) {
+                private apiService: ApiDocsService) {
     }
 
     ngOnInit() {
-        this.files = API_FILES[this.route.snapshot.data.component];
-        this.apiService.getComponentHtml(this.files[0]).subscribe(data => {
-            this.result = this.sanitizer.sanitize(SecurityContext.HTML, data);
+        this.files = this.route.snapshot.data.content;
+        this.apiService.getComponentHtml(this.files[1]).subscribe(data => {
+            this.result = data;
         });
     }
 

@@ -4,6 +4,26 @@
 
     .fd-tsdoc-main-header {
         font-size: 1.75em;
+        margin: 0;
+    }
+
+    .tsd-panel {
+        margin-bottom: 0 !important;
+    }
+
+    .tsd-panel-group {
+        margin-top: 40px !important;
+        margin-bottom: 0 !important;
+    }
+
+    dl.tsd-comment-tags {
+        display: flex;
+        align-items: center;
+
+        .fd-tsd-comment-tag-pill {
+            text-transform: capitalize;
+            font-weight: bold;
+        }
     }
 
     /*! normalize.css v1.1.3 | MIT License | git.io/normalize */

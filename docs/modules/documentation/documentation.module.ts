@@ -253,6 +253,7 @@ import { ApiComponent } from './components/api/api.component';
 import { AlertConfig } from '../../../library/src/lib/alert/alert-config';
 import { ApiDocsService } from './services/api-docs.service';
 import { AlertHeaderComponent } from './containers/alert/alert-header.component';
+import { API_FILES } from './utilities/api-files';
 
 export function highlightJsFactory() {
     return hljs;
@@ -267,7 +268,7 @@ const ROUTES: Routes = [
             { path: 'action-bar', component: ActionBarDocsComponent },
             { path: 'alert', component: AlertHeaderComponent, children: [
                     { path: '', component: AlertDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {component: 'alert'}}
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.alert}}
                 ]
             },
             { path: 'badgeLabel', component: BadgeLabelDocsComponent },

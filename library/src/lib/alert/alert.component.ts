@@ -42,46 +42,60 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
+    /** @hidden */
     @ViewChild('container', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
+    /** @Input Whether the alert is dismissible. */
     @Input()
     dismissible: boolean = true;
 
+    /** The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     @Input()
     type: string;
 
+    /** Id for the alert component. If omitted, a unique one is generated. */
     @Input()
     id: string;
 
-    @Input()
-    persist: boolean = false;
-
+    /** Duration of time *in milliseconds* that the alert will be visible. */
     @Input()
     duration: number = 10000;
 
+    /** Whether the alert should stay open if the mouse is hovering over it. */
     @Input()
     mousePersist: boolean = false;
 
+    /** Id of the element that labels the alert. */
     @Input()
     ariaLabelledBy: string = null;
 
+    /** Aria label for the alert component element. */
     @Input()
     ariaLabel: string = null;
 
+    /** Width of the alert. */
     @Input()
     width: string;
 
+    /** Alternative way of passing in a message to the alert. */
     @Input()
     message: string;
 
+    /** Event fired when the alert is dismissed. */
     @Output()
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
+    /** @hidden */
     mouseInAlert: boolean = false;
+
+    /** @hidden */
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
+
+    /** @hidden */
     childComponentType: Type<any> | TemplateRef<any> | string;
 
+    /** @hidden */
     constructor(private hasher: HashService,
                 private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
@@ -90,6 +104,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         super(elRef);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
             this.id = this.hasher.hash();
@@ -101,6 +116,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this._setProperties();
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {
