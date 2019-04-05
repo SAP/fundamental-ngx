@@ -6,11 +6,9 @@ import { PopoverModule } from '../popover/popover.module';
 import { SearchInputModule } from '../search-input/search-input.module';
 
 import { ComboboxInputComponent } from './combobox-input.component';
-import { FdSearchPipe } from '../search-input/search-input.component';
 
 describe('ComboboxInputComponent', () => {
   let component: ComboboxInputComponent;
-  let pipe: FdSearchPipe;
   let fixture: ComponentFixture<ComboboxInputComponent>;
 
   beforeEach(async(() => {
@@ -27,7 +25,6 @@ describe('ComboboxInputComponent', () => {
             {text: 'Apple', callback: () => {}}
         ];
         component.searchFunction = () => {};
-        pipe = new FdSearchPipe();
         fixture.detectChanges();
     });
 

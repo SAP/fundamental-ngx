@@ -19,9 +19,9 @@
     { name: 'compact', description: 'Boolean, set to \'true\' for the compact search input.'},
     { name: 'glyph', description: 'String, use to select what icon appears in the button. Defaults to search.' },
     { name: 'highlight', description: 'Boolean, whether to highlight the search term in the results, if it is included. Defaults to true.' },
+    { name: 'filterFn', description: 'Function. Filter function to apply to the list. See example below.' },
     { name: 'fillOnSelect', description: 'Boolean, whether to automatically fill the input with the selected value. Defaults to true.' },
-    { name: 'closeOnSelect', description: 'Boolean, whether to automatically close the popover when a value is selected. Defaults to true.' },
-    { name: 'usingCustomFilter', description: 'Boolean, whether you are handling the filtration by yourself, or allowing the built-in pipe to do it. Defaults to false.' }
+    { name: 'closeOnSelect', description: 'Boolean, whether to automatically close the popover when a value is selected. Defaults to true.' }
   ],
   outputs: [
     { name: 'itemClicked', description: 'Fired when an item in the menu is clicked, or the enter key is pressed while the item is focused. Returns the term.'}
@@ -40,7 +40,7 @@
 
 <separator></separator>
 <h2>Custom Filter</h2>
-<description>The search input can be used with a custom filter that is decided outside the component.<br /><br />To accomplish this, you will need to set the <code>[usingCustomFilter]</code> flag to true, like shown below. To display nothing when the user first clicks inside, simply set the starting Subject value to an empty array.</description>
+<description>The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which accepts an array and a search term, and then returns the desired filtered array.</description>
 <component-example [name]="'ex2'">
     <fd-search-input-dynamic-example></fd-search-input-dynamic-example>
 </component-example>

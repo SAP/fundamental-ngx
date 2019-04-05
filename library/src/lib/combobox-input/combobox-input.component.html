@@ -2,7 +2,7 @@
     <fd-popover [(isOpen)]="isOpen"
                 [fillControl]="true"
                 class="fd-combobox-popover-custom"
-                [ngClass]="{'fd-popover-body--display-none': (dropdownValues | fdSearch:inputText).length < 1}">
+                [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
         <fd-popover-control>
             <div class="fd-combobox-control">
                 <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
@@ -11,6 +11,7 @@
                            (keyup)="onInputKeyupHandler()"
                            [disabled]="disabled"
                            [(ngModel)]="inputText"
+                           (ngModelChange)="handleSearchTermChange()"
                            placeholder="{{placeholder}}">
                     <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                         <button class="fd-button--light sap-icon--navigation-down-arrow"
@@ -21,16 +22,22 @@
                 </div>
             </div>
         </fd-popover-control>
-        <fd-popover-body *ngIf="(dropdownValues | fdSearch:inputText).length">
+        <fd-popover-body>
             <fd-menu>
                 <ul fd-menu-list>
-                    <li fd-menu-item
-                        *ngFor="let term of dropdownValues | fdSearch:inputText"
+                    <li fd-menu-item *ngFor="let term of displayedValues"
                         (click)="onMenuClickHandler($event, term)"
                         (keydown)="onMenuKeydownHandler($event, term)">
-                        <a
-                           tabindex="0"><strong>{{inputText}}</strong>{{inputText && inputText.length ? term.text.substr(inputText.length) : term.text}}</a>
+                        <a tabindex="0">
+                            <div *ngIf="highlight && inputTextValue && inputTextValue.toLocaleLowerCase">
+                                {{ term.text.substr(0, term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase())) }}<strong>{{term.text.substr(term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase()), inputText.length)}}</strong>{{ term.text.substring(term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase()) + inputText.length, term.text.length) }}
+                            </div>
+                            <div *ngIf="!highlight || !inputTextValue">
+                                {{ term.text }}
+                            </div>
+                        </a>
                     </li>
+
                     <li fd-menu-item
                         (click)="newItemCallback($event)"
                         (keydown)="newItemKeydownHandler($event)">
@@ -41,3 +48,4 @@
         </fd-popover-body>
     </fd-popover>
 </div>
+

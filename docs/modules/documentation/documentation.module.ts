@@ -213,6 +213,7 @@ import { InfiniteScrollBasicExampleComponent } from './containers/infinite-scrol
 import { TableCheckboxesExampleComponent } from './containers/table/examples/table-checkboxes-example.component';
 import { SearchInputAsyncExampleComponent } from './containers/search-input/examples/search-input-async-example.component';
 import { SearchInputDynamicExampleComponent } from './containers/search-input/examples/search-input-dynamic-example.component';
+import { SearchInputDisplaywithExampleComponent } from './containers/search-input/examples/search-input-displaywith-example.component';
 import { ListSingleSelectExampleComponent } from './containers/list/examples/list-single-select-example.component';
 import { FileInputDocsComponent } from './containers/file-input/file-input-docs.component';
 import { FileInputExampleComponent } from './containers/file-input/examples/file-input-example/file-input-example.component';
@@ -464,6 +465,7 @@ const ROUTES: Routes = [
         SearchInputExampleComponent,
         SearchInputAsyncExampleComponent,
         SearchInputDynamicExampleComponent,
+        SearchInputDisplaywithExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,

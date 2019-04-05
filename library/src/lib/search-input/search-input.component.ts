@@ -1,11 +1,13 @@
 import {
     Component,
     EventEmitter,
-    forwardRef, HostBinding,
+    forwardRef,
+    HostBinding,
     Input,
+    OnChanges,
+    OnInit,
     Output,
-    Pipe,
-    PipeTransform,
+    SimpleChanges,
     QueryList,
     ViewChild,
     ViewChildren
@@ -25,12 +27,14 @@ import { MenuItemDirective } from '../menu/menu-item.directive';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor {
+export class SearchInputComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input()
-    dropdownValues: any[];
+    dropdownValues: any[] = [];
 
     @Input()
-    usingCustomFilter: boolean = false;
+    filterFn: Function = this.defaultFilter;
+
+    displayedValues: any[] = [];
 
     @Input()
     disabled: boolean;
@@ -165,28 +169,42 @@ export class SearchInputComponent implements ControlValueAccessor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
+
     private handleClickActions(term): void {
         if (this.closeOnSelect) {
             this.isOpen = false;
         }
-
         if (this.fillOnSelect) {
             this.inputText = term.text;
         }
     }
-}
 
-@Pipe({
-    name: 'fdSearch'
-})
-export class FdSearchPipe implements PipeTransform {
-    transform(value: any, input: string) {
-        if (input && typeof input === 'string') {
-            input = input.toLocaleLowerCase();
-            return value.filter((result: any) => {
-                return result.text.toLocaleLowerCase().startsWith(input);
-            });
+    ngOnInit() {
+        if (this.dropdownValues) {
+            this.displayedValues = this.dropdownValues;
         }
-        return value;
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+            if (this.inputText) {
+                this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+            } else {
+                this.displayedValues =  this.dropdownValues;
+            }
+        }
+    }
+
+    handleSearchTermChange(): void {
+        this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+    }
+
+    private defaultFilter(contentArray: any[], searchTerm: string): any[] {
+        const searchLower = searchTerm.toLocaleLowerCase();
+        return contentArray.filter(item => {
+            if (item) {
+                return item.text.toLocaleLowerCase().includes(searchLower);
+            }
+        });
     }
 }
