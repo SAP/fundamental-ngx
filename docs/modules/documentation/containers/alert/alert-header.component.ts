@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
     styles: [`
         .fd-tabs {
             margin-bottom: 0;
+            margin-top: 24px;
         }
         
         .fd-tabs__item {
