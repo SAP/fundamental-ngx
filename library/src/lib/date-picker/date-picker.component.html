@@ -1,7 +1,5 @@
-<fd-popover [isOpen]="isOpen"
-            [focusTrapped]="false"
-            [triggers]="[]"
-            [options]="POPOVER_OPTIONS">
+<fd-popover [(isOpen)]="isOpen"
+            [triggers]="[]">
     <fd-popover-control>
         <div class="fd-input-group fd-input-group--after"
              [ngClass]="{'fd-input-group--compact' : compact}">
@@ -30,7 +28,6 @@
                      [blockFunction]="blockFunction ? blockFunction : null"
                      [(selectedDay)]="selectedDay"
                      [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"
-                     (updateDatePickerInput)="updateDatePickerInputHandler($event)"
                      (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                      [dateFromDatePicker]="dateFromDatePicker"></fd-calendar>
     </fd-popover-body>

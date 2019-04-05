@@ -16,6 +16,10 @@
         align-items: center;
     }
 
+    &[x-out-of-boundaries] {
+        display: none;
+    }
+
     &[x-placement^="bottom"] {
 
         margin-top: 8px;

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -10,4 +11,5 @@ export class ToolbarComponent {
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 
+    version: string = environment.version;
 }

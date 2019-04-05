@@ -9,7 +9,7 @@ import {
     TemplateRef
 } from '@angular/core';
 import { PopoverContainer } from './popover-container';
-import Popper, { PopperOptions } from 'popper.js';
+import Popper, { Placement, PopperOptions } from 'popper.js';
 
 @Directive({
     selector: '[fdPopover]'
@@ -29,7 +29,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     defaultArrow: boolean = false;
 
     @Input()
-    focusTrapped: boolean = true;
+    placement: Placement;
+
+    @Input()
+    focusTrapped: boolean = false;
 
     @Input()
     closeOnEscapeKey: boolean = true;
@@ -44,7 +47,19 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     appendTo: HTMLElement | 'body' = 'body';
 
     @Input()
-    options: PopperOptions = Popper.Defaults;
+    options: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: true,
+                escapeWithReference: true,
+                boundariesElement: 'scrollParent'
+            }
+        }
+    };
+
+    @Input()
+    fillControl: boolean = false;
 
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -63,10 +78,12 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit(): void {
-
         if (this.isOpen) {
             this.open();
         }
+
+        this.initFillControl();
+        this.initPlacement();
 
         this.addTriggerListeners();
         this.isSetup = true;
@@ -108,6 +125,18 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                     this.close(false);
                 });
             }
+        }
+
+        if (changes.placement) {
+            setTimeout(() => {
+                this.initPlacement();
+            });
+        }
+
+        if (changes.fillControl) {
+            setTimeout(() => {
+                this.initFillControl();
+            });
         }
     }
 
@@ -151,6 +180,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         if (this.containerRef) {
             return;
         }
+        
         const factory = this.resolver.resolveComponentFactory(PopoverContainer);
         this.containerRef = factory.create(this.injector);
 
@@ -221,10 +251,50 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         );
     }
 
+    private fillReference(data): any {
+        data.offsets.popper.left = data.offsets.reference.left;
+        data.offsets.popper.right = data.offsets.reference.right;
+        data.offsets.popper.width = data.styles.width = data.offsets.reference.width;
+        return data;
+    }
+
+    private initPlacement(): void {
+        if (this.placement) {
+            if (this.options) {
+                this.options.placement = this.placement;
+            } else {
+                this.options = {placement: this.placement}
+            }
+        }
+    }
+
+    private initFillControl(): void {
+        if (this.fillControl) {
+            if (this.options && this.options.modifiers) {
+                this.options.modifiers.fillReference = {
+                    enabled: true,
+                    fn: this.fillReference,
+                    order: 840
+                }
+            } else {
+                this.options = {
+                    modifiers: {
+                        fillReference: {
+                            enabled: true,
+                            fn: this.fillReference,
+                            order: 840
+                        }
+                    }
+                };
+            }
+        }
+    }
+
     @HostListener('document:click', ['$event'])
     clickHandler(event: MouseEvent): void {
         if (this.containerRef &&
             this.isOpen &&
+            this.closeOnOutsideClick &&
             event.target !== this.elRef.nativeElement &&
             !this.elRef.nativeElement.contains(event.target) &&
             !this.containerRef.location.nativeElement.contains(event.target)) {

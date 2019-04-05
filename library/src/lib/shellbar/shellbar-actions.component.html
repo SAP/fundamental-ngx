@@ -1,36 +1,50 @@
 <div class="fd-shellbar__actions">
-    <div *ngIf="actionsCollapsed && shellbarActions.length" class="fd-shellbar__action fd-shellbar__action--collapse">
+    <div *ngIf="actionsCollapsed && shellbarActions.length"
+         class="fd-shellbar__action fd-shellbar__action--collapse">
         <div class="fd-shellbar-collapse">
-            <fd-popover [options]="{placement: 'bottom-end'}" [focusTrapped]="false">
+            <fd-popover [options]="{placement: 'bottom-end'}"
+                        [focusTrapped]="false">
                 <fd-popover-control>
                     <div class="fd-shellbar-collapse--control">
-                        <button class="fd-button--shell sap-icon--overflow" aria-label="Collapsed Item Menu">
+                        <button class="fd-button--shell sap-icon--overflow"
+                                aria-label="Collapsed Item Menu">
                             <span class="fd-counter fd-counter--notification">{{totalNotifications}}</span>
                         </button>
                     </div>
                 </fd-popover-control>
                 <fd-popover-body>
                     <fd-menu>
-                        <ul fd-menu-list *ngIf="!showCollapsedProducts">
-                            <div *ngFor="let action of shellbarActions" class="fd-menu__addon-before">
+                        <ul fd-menu-list
+                            *ngIf="!showCollapsedProducts">
+                            <div *ngFor="let action of shellbarActions"
+                                 class="fd-menu__addon-before">
                                 <span [ngClass]="'sap-icon--' + action.glyph"></span>
                             </div>
-                            <li fd-menu-item *ngFor="let action of shellbarActions" (click)="action.callback($event)">
+                            <li fd-menu-item
+                                *ngFor="let action of shellbarActions"
+                                (click)="action.callback($event)">
                                 {{action.label}}
                             </li>
-                            <div *ngIf="productSwitcher" class="fd-menu__addon-before">
+                            <div *ngIf="productSwitcher"
+                                 class="fd-menu__addon-before">
                                 <span [ngClass]="'sap-icon--grid'"></span>
                             </div>
-                            <li fd-menu-item *ngIf="productSwitcher" (click)="toggleCollapsedProducts($event);">
+                            <li fd-menu-item
+                                *ngIf="productSwitcher"
+                                (click)="toggleCollapsedProducts($event);">
                                 Product Switcher
                             </li>
                         </ul>
-                        <ul fd-menu-list *ngIf="showCollapsedProducts">
-                            <li fd-menu-item (click)="toggleCollapsedProducts($event)">
+                        <ul fd-menu-list
+                            *ngIf="showCollapsedProducts">
+                            <li fd-menu-item
+                                (click)="toggleCollapsedProducts($event)">
                                 <span class="fd-menu__item sap-icon--nav-back"></span>
                             </li>
                             <hr>
-                            <li fd-menu-item *ngFor="let product of productSwitcher" (click)="product.callback($event)">
+                            <li fd-menu-item
+                                *ngFor="let product of productSwitcher"
+                                (click)="product.callback($event)">
                                 {{product.title}}
                             </li>
                         </ul>
@@ -39,6 +53,7 @@
             </fd-popover>
         </div>
     </div>
+    <ng-content></ng-content>
     <ng-content select="fd-shellbar-action"></ng-content>
     <ng-container *ngIf="user">
         <div class="fd-shellbar__action fd-shellbar__action--show-always">
@@ -47,11 +62,13 @@
                             [focusTrapped]="false">
                     <fd-popover-control>
                         <div class="fd-user-menu__control">
-                            <span *ngIf="!user.image" class="fd-identifier fd-identifier--xs fd-identifier--circle"
+                            <span *ngIf="!user.image"
+                                  class="fd-identifier fd-identifier--xs fd-identifier--circle"
                                   [ngClass]="(user.colorAccent ? 'fd-has-background-color-accent-' + user.colorAccent : '')">
                                 {{user.initials}}
                             </span>
-                            <span *ngIf="user.image" class="fd-identifier fd-identifier--xs fd-identifier--circle fd-identifier--thumbnail"
+                            <span *ngIf="user.image"
+                                  class="fd-identifier fd-identifier--xs fd-identifier--circle fd-identifier--thumbnail"
                                   [ngStyle]="{'background-image': 'url(' + user.image + ')'}">
                             </span>
                         </div>
@@ -59,7 +76,9 @@
                     <fd-popover-body>
                         <fd-menu>
                             <ul fd-menu-list>
-                                <li fd-menu-item *ngFor="let item of userMenu" (click)="item.callback($event)">
+                                <li fd-menu-item
+                                    *ngFor="let item of userMenu"
+                                    (click)="item.callback($event)">
                                     {{item.text}}
                                 </li>
                             </ul>
@@ -72,7 +91,8 @@
     <ng-container *ngIf="productSwitcher">
         <div class="fd-shellbar__action fd-shellbar__action--collapsible">
             <div class="fd-product-switcher">
-                <fd-popover [options]="{placement: 'bottom-end'}" [focusTrapped]="false">
+                <fd-popover [options]="{placement: 'bottom-end'}"
+                            [focusTrapped]="false">
                     <fd-popover-control>
                         <button class="fd-button--shell sap-icon--grid"></button>
                     </fd-popover-control>
@@ -80,7 +100,8 @@
                         <div class="fd-product-switcher__body">
                             <nav>
                                 <ul>
-                                    <li *ngFor="let product of productSwitcher" (click)="product.callback($event)">
+                                    <li *ngFor="let product of productSwitcher"
+                                        (click)="product.callback($event)">
                                         <span class="fd-product-switcher__product-icon">
                                             <img [src]="product.image">
                                         </span>

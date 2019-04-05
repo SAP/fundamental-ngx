@@ -7,6 +7,7 @@ import * as popoverPlacementHtmlSrc from '!raw-loader!./examples/popover-placeme
 import * as popoverPlacementTsSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.ts';
 import * as popoverModalHtmlSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.html';
 import * as popoverModalTsSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.ts';
+import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.html';
 
 
 @Component({
@@ -21,4 +22,5 @@ export class PopoverDocsComponent {
     popoverPlacementExampleTs = popoverPlacementTsSrc;
     popoverModalExampleHtml = popoverModalHtmlSrc;
     popoverModalExampleTs = popoverModalTsSrc;
+    popoverFillExampleH = popoverFillHSrc;
 }

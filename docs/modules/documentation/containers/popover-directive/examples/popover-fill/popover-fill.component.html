@@ -1,0 +1,14 @@
+<div style="border: 1px dashed black; padding: 24px;"
+     [fdPopover]="template"
+     [triggers]="['mouseenter', 'mouseleave']"
+     [fillControl]="true">
+    Control Element - Hover over me!
+</div>
+
+<ng-template #template>
+    <div style="padding: 12px;">
+        <p>This is a large popover!</p>
+        <br />
+        <p>It will try to match the width of the control element.</p>
+    </div>
+</ng-template>

@@ -7,26 +7,21 @@
         Popover Example
         <button fd-modal-close-btn (click)="modal.dismiss()"></button>
     </fd-modal-header>
-    <fd-modal-body>
-        <fd-popover [options]="options" appendTo="body">
-            <fd-popover-control>
-                <button fd-button>Click me!</button>
-            </fd-popover-control>
-            <fd-popover-body>
-                <fd-menu>
-                    <ul fd-menu-list>
-                        <li fd-menu-item>
-                            <a [attr.href]="'#'">Option 1</a>
-                        </li>
-                        <li fd-menu-item>
-                            <a [routerLink]="'#'">Option 2</a>
-                        </li>
-                        <li fd-menu-item>
-                            Option 3
-                        </li>
-                    </ul>
-                </fd-menu>
-            </fd-popover-body>
-        </fd-popover>
+    <fd-modal-body style="max-height: 200px">
+        <div style="height: 500px;">
+            <fd-popover [arrow]="true" placement="bottom">
+                <fd-popover-control>
+                    <button fd-button>Click me!</button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <div style="padding: 12px">
+                        This is the button's popover!
+                    </div>
+                </fd-popover-body>
+            </fd-popover>
+            <br /><br />
+            <fd-multi-input [dropdownValues]="['Pineapple', 'Apple', 'Pepper', 'Tomato']"></fd-multi-input>
+            <p>The popover disappears if the attached reference object is outside the view!</p>
+        </div>
     </fd-modal-body>
 </ng-template>
