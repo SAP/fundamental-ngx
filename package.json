@@ -62,7 +62,7 @@
         "codelyzer": "^4.5.0",
         "coveralls": "^3.0.2",
         "fs-extra": "^7.0.1",
-        "github-assistant": "^0.2.0",
+        "github-assistant": "^0.3.0",
         "jasmine-core": "^3.2.1",
         "jasmine-spec-reporter": "^4.2.1",
         "karma": "^3.0.0",
