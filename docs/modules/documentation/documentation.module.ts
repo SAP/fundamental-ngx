@@ -257,6 +257,7 @@ import { AlertConfig } from '../../../library/src/lib/alert/alert-config';
 import { ApiDocsService } from './services/api-docs.service';
 import { AlertHeaderComponent } from './containers/alert/alert-header.component';
 import { API_FILES } from './utilities/api-files';
+import { HeaderTabsComponent } from './components/header-tabs/header-tabs.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -519,7 +520,8 @@ const ROUTES: Routes = [
         MultiInputDisplaywithExampleComponent,
         BackdropExamplesComponent,
         ApiComponent,
-        AlertHeaderComponent
+        AlertHeaderComponent,
+        HeaderTabsComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

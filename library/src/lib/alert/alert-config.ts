@@ -10,7 +10,7 @@ export class AlertConfig {
     /** The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     type?: string;
 
-    /** Id for the alert component. If omitted, a unique one is generated.  */
+    /** Id for the alert component. If omitted, a unique one is generated. */
     id?: string;
 
     /** Width of the alert. */

@@ -1,23 +1,4 @@
-<h1>&lt;fd-alert&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'type', description: 'String. Determines the type of alert. The predefined types are \'info\', \'warning\', \'error\', \'success\', and default if no input is provided.' },
-    { name: 'id', description: 'String. The id of the alert. If omitted, an id will be generated.' },
-    { name: 'dismissible', description: 'Boolean. Shows a dismiss button. Default is true.' },
-    { name: 'mousePersist', description: 'Boolean. When set to true, the alert will remain visible as long as the mouse is hovered over it. Default is false.'},
-    { name: 'duration', description: 'Number. Dictates how long in milliseconds the alert will be visible. Default is 10000. If set to -1, it will not disappear.'},
-    { name: 'ariaLabel', description: 'String. Aria-label attribute for the alert component.' },
-    { name: 'ariaLabelledBy', description: 'String. Aria-labelledby attribute for the alert component.' },
-    { name: 'width', description: 'String. Width of the alert. Supports all css units.' },
-    { name: 'message', description: 'String. Alternative way of displaying the alert message.' }
-  ],
-  outputs: [
-    { name: 'close', description: 'Emitted when the close button is clicked.' }
-  ]
-}"></properties>
-
-<separator></separator>
+<h2>&lt;fd-alert&gt;</h2>
 
 <description>
     Alerts can either be inline or appended to the body as part of an overlay. The first behaviour is easy to achieve and only requires

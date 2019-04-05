@@ -21,6 +21,10 @@ import { AlertRef } from './alert-ref';
 import { alertFadeNgIf } from './alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+/**
+ * The component that represents an alert. It can be only be used inline.
+ * If the AlertService is used, this component is auto-generated.
+ */
 @Component({
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
@@ -50,39 +54,39 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     @Input()
     dismissible: boolean = true;
 
-    /** The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
+    /** @Input The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     @Input()
     type: string;
 
-    /** Id for the alert component. If omitted, a unique one is generated. */
+    /** @Input Id for the alert component. If omitted, a unique one is generated. */
     @Input()
     id: string;
 
-    /** Duration of time *in milliseconds* that the alert will be visible. */
+    /** @Input Duration of time *in milliseconds* that the alert will be visible. */
     @Input()
     duration: number = 10000;
 
-    /** Whether the alert should stay open if the mouse is hovering over it. */
+    /** @Input Whether the alert should stay open if the mouse is hovering over it. */
     @Input()
     mousePersist: boolean = false;
 
-    /** Id of the element that labels the alert. */
+    /** @Input Id of the element that labels the alert. */
     @Input()
     ariaLabelledBy: string = null;
 
-    /** Aria label for the alert component element. */
+    /** @Input Aria label for the alert component element. */
     @Input()
     ariaLabel: string = null;
 
-    /** Width of the alert. */
+    /** @Input Width of the alert. */
     @Input()
     width: string;
 
-    /** Alternative way of passing in a message to the alert. */
+    /** @Input Alternative way of passing in a message to the alert. */
     @Input()
     message: string;
 
-    /** Event fired when the alert is dismissed. */
+    /** @Output Event fired when the alert is dismissed. */
     @Output()
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
@@ -130,6 +134,11 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /**
+     * Dismisses the alert. If the alert was generated via the AlertService, it is removed from the DOM.
+     * Otherwise, it sets the display value to none. Fires the onDismiss event.
+     * @param manualDismiss Set to true to skip the dismiss animation.
+     */
     dismiss(manualDismiss: boolean = false): void {
         if (manualDismiss) {
             this.elRef.nativeElement.style.display = 'none';
@@ -142,6 +151,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.onDismiss.emit();
     }
 
+    /**
+     * Opens the alert.
+     */
     open(): void {
         if (!this.alertRef) {
             if (this.elRef.nativeElement.style.display === 'block') {
@@ -168,6 +180,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /** @hidden */
     handleAlertMouseEvent(event): void {
         if (event.type === 'mouseenter') {
             this.mouseInAlert = true;
@@ -176,6 +189,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-alert');
         if (this.type) {

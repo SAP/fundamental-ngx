@@ -10,16 +10,32 @@ import { ApiDocsService } from '../../services/api-docs.service';
 export class ApiComponent implements OnInit {
 
     files: string[];
+    activeFile: string;
     result: string;
+    openMenu: boolean = false;
 
     constructor(private route: ActivatedRoute,
                 private apiService: ApiDocsService) {
     }
 
     ngOnInit() {
-        this.files = this.route.snapshot.data.content;
-        this.apiService.getComponentHtml(this.files[1]).subscribe(data => {
+        if (this.route.snapshot.data) {
+            this.files = this.route.snapshot.data.content;
+        }
+
+        if (this.files) {
+            this.getFile(this.files[0]);
+            this.activeFile = this.files[0];
+        } else {
+            this.result = '<h2>No API files found.</h2>'
+        }
+    }
+
+    getFile(file: string): void {
+        this.apiService.getComponentHtml(file).subscribe(data => {
             this.result = data;
+            this.activeFile = file;
+            this.openMenu = false;
         });
     }
 
