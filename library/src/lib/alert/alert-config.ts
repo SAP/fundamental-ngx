@@ -19,7 +19,7 @@ export class AlertConfig {
     /** Data being injected into the child component or template. */
     data?: any;
 
-    /** Duration of time *in milliseconds* that the alert will be visible. */
+    /** Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     duration?: number = 10000;
 
     /** Whether the alert should stay open if the mouse is hovering over it. */

@@ -62,7 +62,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     @Input()
     id: string;
 
-    /** @Input Duration of time *in milliseconds* that the alert will be visible. */
+    /** @Input Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input()
     duration: number = 10000;
 

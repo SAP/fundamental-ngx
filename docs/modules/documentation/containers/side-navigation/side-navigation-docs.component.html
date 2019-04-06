@@ -1,29 +1,7 @@
-<header>Side Navigation</header>
-<description>The left navigation can always display or expand/collapse using the menu icon within the global
-    navigation.<br/><br/>
-    Side navigation anchors will be keyboard navigable via the tab key provided they have <code>[routerLink]</code> or
-    <code>[attr.href]</code> attributes.  Sub-levels of tiered side navigation can be opened with the
-    space bar or enter key.
-</description>
-<import module="SideNavigationModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-side-nav&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: 'fd-side-nav-group', description: 'Side navigation group contains a side navigation title and a side navigation list.'},
-    { name: 'fd-side-nav-title', description: 'The title of a side navigation group.'},
-    { name: 'fd-side-nav-list', description: 'A list of side navigation items.'},
-    { name: 'fd-side-nav-item', description: 'An item in the navigation list.'},
-    { name: 'fd-side-nav-link', description: 'A side navigation link.'},
-    { name: 'fd-side-nav-subitem', description: 'A second-tier subitem.  Must be a child of a fd-side-nav-link component.'}
-  ]
-}"></properties>
+<h2>&lt;fd-side-nav&gt;</h2>
 
 <separator></separator>
 <h2>Side navigation with one level</h2>
-
 <component-example [name]="'ex1'">
   <p>
     <fd-side-navigation-example></fd-side-navigation-example>

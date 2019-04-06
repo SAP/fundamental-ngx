@@ -1,16 +1,4 @@
-<header>Shellbar</header>
-<description></description>
-
-<import module="ShellbarModule" path="fundamental-ngx"></import>
-
-<separator></separator>
-
-<h1>&lt;fd-shellbar&gt;</h1>
-<description>
-    The shellbar offers consistent, responsive navigation across all products and applications. Includes support for branding, product navigation, search, notifications, user settings, and CoPilot. This is a composite component comprised of mandatory and optional elements.
-
-    Before getting started, here are some things to know.
-</description>
+<h2>&lt;fd-shellbar&gt;</h2>
 
 <h3>How it works</h3>
 <description>
@@ -33,22 +21,6 @@
         </li>
     </ul>
 </description>
-
-<description>
-    Moving from left to right, the shellbar content will become more variable based on the product needs. See below for more details about child elements.
-</description>
-
-<properties [properties]="{
-    childComponents: [
-        {name: '<fd-shellbar-logo>', description: '(required) for company branding.'},
-        {name: '<fd-shellbar-title>', description: '(required) displays the current application when no product menu is used.'},
-        {name: '<fd-shellbar-subtitle>', description: '(optional) displays an application context. This should be used rarely'},
-        {name: '<fd-product-menu>', description: '(optional) holds product titles and navigation, which are passed as inputs to this component.'},
-        {name: '<fd-shellbar-actions>', description: '(required) holds all product actions and links. User menu and product switcher are inputs on this component.'},
-        {name: '<fd-shellbar-action>', description: '(required) an individual product actions or link.'},
-        {name: '<fd-shellbar-copilot>', description: '(optional) for use with applications that utilize CoPilot.'}
-    ]
-}"></properties>
 
 <separator></separator>
 

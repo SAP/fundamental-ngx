@@ -23,7 +23,8 @@ export class ApiComponent implements OnInit {
             this.files = this.route.snapshot.data.content;
         }
 
-        if (this.files) {
+        if (this.files && this.files.length > 0) {
+            this.files.sort();
             this.getFile(this.files[0]);
             this.activeFile = this.files[0];
         } else {
@@ -36,6 +37,8 @@ export class ApiComponent implements OnInit {
             this.result = data;
             this.activeFile = file;
             this.openMenu = false;
+        }, error => {
+            console.warn('Did not find file ' + file + '.\nError: ' + error);
         });
     }
 

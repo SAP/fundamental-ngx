@@ -1,23 +1,8 @@
-<header>Identifier</header>
-<description></description>
-<import module="IdentifierModule" path="fundamental-ngx"></import>
-<separator></separator>
+<h2>&lt;fd-identifier&gt;</h2>
 
-<h1>&lt;fd-identifier&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'size', description: 'String - Three sizes are available: small (s) - 24px, medium (m) - 36px, and large (l) - 48px.' },
-    { name: 'circle', description: '(Optional) boolean - if set to true, a circle style is rendered. Default is set to false' },
-    { name: 'transparent', description: '(Optional) boolean - if set to true, a transperant style is rendered. Default is set to false' },
-    { name: 'colorAccent', description: '(Optional) number - applies a background color. Options include numbers from 1 to 9' },
-    { name: 'glyph', description: '(Optional) string - The name of the icon to include. See the icon page for the list of images.' }
-  ]
-}"></properties>
 <separator></separator>
 
 <h2>Icon</h2>
-
 <component-example [name]="'ex1'">
   <div class="grid identifier-grid">
     <fd-icon-identifier-example></fd-icon-identifier-example>

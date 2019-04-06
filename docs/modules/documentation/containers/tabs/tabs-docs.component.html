@@ -1,28 +1,4 @@
-<header>Tabs</header>
-<description>
-    Tabs organize content in separate views.
-    <br/><br/>
-    Tabs can be navigated through via the tab key and selected with the enter key or space bar.
-</description>
-<import module="TabsModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-tab-list&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: '<fd-tab>', description: 'An individual tab.'}
-  ],
-  inputs: [
-    { name: 'title', description: 'String - Text to display at the top of the tab.'},
-    { name: 'disabled', description: 'Boolean - Prevents the tab from being selected.'},
-    { name: 'id', description: 'String - Allows you to select a tab programmatically using the select() function.'}
-  ],
-  outputs: [
-    { name: 'tabChange', description: 'EventEmitter - emitted when the user selects a tab.  Emits the id of the newly selected tab.'}
-  ]
-}"></properties>
+<h2>&lt;fd-tab-list&gt;</h2>
 
 <separator></separator>
 

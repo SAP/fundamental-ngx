@@ -10,3 +10,7 @@
     align-items: center;
     justify-content: flex-start;
 }
+
+fd-popover /deep/ .fd-button {
+    margin-right: 0;
+}
