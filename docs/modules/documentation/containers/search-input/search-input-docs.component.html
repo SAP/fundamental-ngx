@@ -8,7 +8,7 @@
 
 <separator></separator>
 <h2>Custom Filter</h2>
-<description>The search input can be used with a custom filter that is decided outside the component.<br /><br />To accomplish this, you will need to set the <code>[usingCustomFilter]</code> flag to true, like shown below. To display nothing when the user first clicks inside, simply set the starting Subject value to an empty array.</description>
+<description>The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which accepts an array and a search term, and then returns the desired filtered array.</description>
 <component-example [name]="'ex2'">
     <fd-search-input-dynamic-example></fd-search-input-dynamic-example>
 </component-example>

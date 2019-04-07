@@ -19,15 +19,14 @@ export class SearchInputDynamicExampleComponent {
         { text: 'Pineapple', callback: () => {alert('Pineapple Clicked!')} }
     ];
 
-    dropdownSubject = this.dropdownValues;
-
-    modelChange(event: any): void {
-        this.searchTerm = event;
-        this.dropdownSubject = this.dropdownValues.filter(value =>
-                value.text.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()));
-    }
-
     selectItem(event: any) {
         this.selected = event.text;
+    }
+
+    customFilter(content: any[], searchTerm: string): any[] {
+        const search = searchTerm.toLocaleLowerCase();
+        return content.filter(item =>
+            item.text.toLocaleLowerCase().startsWith(search)
+        );
     }
 }

@@ -4,16 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 
-import { FdSearchPipe, SearchInputComponent } from './search-input.component';
+import { SearchInputComponent } from './search-input.component';
 
 describe('SearchInputComponent', () => {
     let component: SearchInputComponent;
-    let pipe: FdSearchPipe;
     let fixture: ComponentFixture<SearchInputComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FdSearchPipe, SearchInputComponent],
+            declarations: [SearchInputComponent],
             imports: [FormsModule, MenuModule, PopoverModule]
         }).compileComponents();
     }));
@@ -25,7 +24,6 @@ describe('SearchInputComponent', () => {
             {text: 'Apple', callback: () => {}}
         ];
         component.searchFunction = () => {};
-        pipe = new FdSearchPipe();
         fixture.detectChanges();
     });
 
@@ -174,21 +172,5 @@ describe('SearchInputComponent', () => {
         component.registerOnTouched('function');
         expect(component.onChange).toBe('function');
         expect(component.onTouched).toBe('function');
-    });
-
-    it('should test the search pipe', () => {
-        const searchTerms = [
-            {text: 'term1'},
-            {text: 'term2'}
-        ];
-        let result = pipe.transform(searchTerms, 't');
-        expect(result).toEqual([
-            {text: 'term1'},
-            {text: 'term2'}
-        ]);
-        result = pipe.transform(searchTerms, 'term1');
-        expect(result).toEqual([
-            {text: 'term1'}
-        ]);
     });
 });
