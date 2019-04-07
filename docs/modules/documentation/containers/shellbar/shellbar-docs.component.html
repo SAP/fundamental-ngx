@@ -1,29 +1,3 @@
-<h2>&lt;fd-shellbar&gt;</h2>
-
-<h3>How it works</h3>
-<description>
-    <ul>
-        <li>
-            The shellbar should be placed inside the shell layout container.
-        </li>
-        <li>
-            The shellbar is fluid and responsive by default with proper margins and padding built in.
-        </li>
-        <li>
-            The shellbar actions are duplicated into the overflow menu on mobile screens.
-        </li>
-        <li>
-            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component.
-            The user, user menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component.
-            Data for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component.
-            The response to clicks on any of these items is handled via callback functions for each object.
-            See the 'collapsible' example to gain an understanding of how this works.
-        </li>
-    </ul>
-</description>
-
-<separator></separator>
-
 <h2>Basic Shellbar</h2>
 <description>
     This example shows the minimum shellbar for a single application product with only user settings. If no user thumbnail is available then display initials.
@@ -45,3 +19,27 @@
 </component-example>
 <code-example [code]="shellbarCollapsibleExampleHtml" [language]="'HTML'"></code-example>
 <code-example [code]="shellbarCollapsibleExampleTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>How it works</h2>
+<description>
+    <ul>
+        <li>
+            The shellbar should be placed inside the shell layout container.
+        </li>
+        <li>
+            The shellbar is fluid and responsive by default with proper margins and padding built in.
+        </li>
+        <li>
+            The shellbar actions are duplicated into the overflow menu on mobile screens.
+        </li>
+        <li>
+            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component.
+            The user, user menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component.
+            Data for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component.
+            The response to clicks on any of these items is handled via callback functions for each object.
+            See the 'collapsible' example to gain an understanding of how this works.
+        </li>
+    </ul>
+</description>

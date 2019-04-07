@@ -1,19 +1,18 @@
-<h2>&lt;fd-tab-list&gt;</h2>
-
-<separator></separator>
-
+<h2>Simple Tabs</h2>
 <component-example [name]="'ex1'">
-  <fd-tabs-example></fd-tabs-example>
+    <fd-tabs-example></fd-tabs-example>
 </component-example>
 <code-example [code]="tabHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Selecting a tab programmatically by ID</h2>
-<p>You can set an
-  <code>id</code> on a tab and select it programmatically using the
-  <code>select()</code> function.</p>
+<description>
+    You can set an
+    <code>id</code> on a tab and select it programmatically using the
+    <code>select()</code> function.
+</description>
 <component-example [name]="'ex2'">
-  <fd-tab-selection-example></fd-tab-selection-example>
+    <fd-tab-selection-example></fd-tab-selection-example>
 </component-example>
 <code-example [code]="selectTabByIdHtml" [language]="'HTML'"></code-example>
 
@@ -22,18 +21,18 @@
 <playground [schema]="schema"
             [schemaInitialValues]="data"
             (onFormChanges)="onSchemaValues($event)">
-  <fd-tab-list>
-    <fd-tab [title]="data.properties.items.label"
-            [disabled]="data.state.disabled">
-      {{data.properties.panels.content}}
-    </fd-tab>
-    <fd-tab [title]="data.properties.items.label2"
-            [disabled]="data.state.disabled2">
-      {{data.properties.panels.content2}}
-    </fd-tab>
-    <fd-tab [title]="data.properties.items.label3"
-            [disabled]="data.state.disabled3">
-      {{data.properties.panels.content3}}
-    </fd-tab>
-  </fd-tab-list>
+    <fd-tab-list>
+        <fd-tab [title]="data.properties.items.label"
+                [disabled]="data.state.disabled">
+            {{data.properties.panels.content}}
+        </fd-tab>
+        <fd-tab [title]="data.properties.items.label2"
+                [disabled]="data.state.disabled2">
+            {{data.properties.panels.content2}}
+        </fd-tab>
+        <fd-tab [title]="data.properties.items.label3"
+                [disabled]="data.state.disabled3">
+            {{data.properties.panels.content3}}
+        </fd-tab>
+    </fd-tab-list>
 </playground>

@@ -3,7 +3,7 @@
     <span style="display: flex; flex-grow: 1;"></span>
     <fd-popover [(isOpen)]="openMenu"
                 [isDropdown]="true"
-                *ngIf="files.length > 0">
+                *ngIf="files.length > 1">
         Select a file ({{files.length}})
         <fd-popover-body>
             <fd-menu>

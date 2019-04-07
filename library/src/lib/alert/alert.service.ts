@@ -35,7 +35,7 @@ export class AlertService {
     }
 
     /**
-     * Opens an alert component with a content of type TemplateRef, Component or String.
+     * Opens an alert component with a content of type TemplateRef, Component Type or String.
      * @param content Content of the alert component.
      * @param alertConfig Configuration of the alert component.
      */
