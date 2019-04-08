@@ -2,5 +2,5 @@
 <fd-datetime-picker [(ngModel)]="this.date"></fd-datetime-picker>
 
 <span style="padding-left: 20px;">
-    Selected: {{date.toLocaleString()}}
+    Selected: {{date ? date.toLocaleString() : 'null'}}
 </span>

@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ViewChild } from '@angular/core';
 import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { TimeObject } from '../time/time-object';
-import { PopperOptions } from 'popper.js';
+import { TimeComponent } from '../time/time.component';
 
 @Component({
     selector: 'fd-datetime-picker',
@@ -58,6 +58,9 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     @Output()
     timeChange: EventEmitter<Date> = new EventEmitter<Date>();
 
+    @ViewChild(TimeComponent)
+    timeComponent;
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -106,11 +109,25 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
             this.selectedDay = d.selectedDay;
             this.date = d.selectedDay.date;
             this.inputFieldDate = this.date.toLocaleString();
+            this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
             if (this.date.getTime() !== previous) {
                 this.calendarChange.emit(this.date);
                 this.dateChange.emit(this.date);
                 this.onChange(this.date);
             }
+        } else if (d === '') {
+            this.selectedDay.date = null;
+            this.selectedDay.selected = null;
+            this.time.second = null;
+            this.time.minute = null;
+            this.time.hour = null;
+            this.timeComponent.displayedHour = null;
+            this.timeComponent.period = 'am';
+            this.timeComponent.oldPeriod = 'am';
+            this.calendarChange.emit(null);
+            this.timeChange.emit(null);
+            this.dateChange.emit(null);
+            this.onChange(this.selectedDay.date);
         }
     }
 
@@ -119,16 +136,20 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     inputValueChange(e): void {
-        const temp = new Date(e);
-        if (isNaN(temp.getTime())) {
-            this.inputFieldDate = this.date.toLocaleString();
-        } else {
-            const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
-            if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
-                this.time = newValue;
-                this.setTime(true);
+        if (e !== '') {
+            const temp = new Date(e);
+            if (isNaN(temp.getTime())) {
+                this.inputFieldDate = this.date.toLocaleString();
+            } else {
+                const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
+                if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
+                    this.time = newValue;
+                    this.setTime(true);
+                }
+                this.dateFromInput.next(temp.toLocaleDateString());
             }
-            this.dateFromInput.next(temp.toLocaleDateString());
+        } else {
+            this.dateFromInput.next('');
         }
     }
 
@@ -146,10 +167,14 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit() {
-        if (this.date) {
+        if (this.date && this.inputFieldDate !== null) {
             this.selectedDay.date = this.date;
             this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
-            this.inputFieldDate = this.date.toLocaleString();
+        }
+        if (this.dateFromInput) {
+            this.dateFromInput.subscribe(date => {
+                this.updatePickerInputHandler(date);
+            });
         }
         if (this.dateFromInput) {
             this.dateFromInput.subscribe(date => {

@@ -72,6 +72,21 @@ describe('DatetimePickerComponent', () => {
         expect(component.inputFieldDate).toEqual(d.selectedDay.date.toLocaleString());
     });
 
+    it('should update input from calendar for null value', () => {
+        spyOn(component, 'onChange');
+        component.updatePickerInputHandler('');
+        expect(component.selectedDay.date).toBe(null);
+        expect(component.selectedDay.selected).toBe(null);
+        expect(component.time.second).toBe(null);
+        expect(component.time.minute).toBe(null);
+        expect(component.time.hour).toBe(null);
+        expect(component.timeComponent.displayedHour).toBe(null);
+        expect(component.timeComponent.period).toBe('am');
+        expect(component.timeComponent.oldPeriod).toBe('am');
+        expect(component.inputFieldDate).toBe(null);
+        expect(component.onChange).toHaveBeenCalledWith(null);
+    });
+
     it('should update input from time', () => {
         spyOn(component, 'onChange');
         const dateVal = new Date();
