@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef } from '@angular/core';
 import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { PopperOptions } from 'popper.js';
 
@@ -22,26 +22,14 @@ import { PopperOptions } from 'popper.js';
 })
 export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     inputFieldDate = null;
-    isValidDateInput: boolean = false;
+    isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
-    dateFromInput = new BehaviorSubject<string>('');
+    dateFromInput: Subject<string> = new Subject();
 
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     selectedDay: CalendarDay = {
         date: null
-    };
-
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
     };
 
     @Input()
@@ -86,14 +74,14 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     openPopover(e) {
         this.isOpen = !this.isOpen;
         this.inputValueChange(e);
-        if (this.isValidDateInput) {
+        if (this.isInvalidDateInput) {
             this.inputFieldDate = null;
         }
     }
 
     closePopover() {
         if (this.isOpen) {
-            if (this.isValidDateInput) {
+            if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
             this.isOpen = false;
@@ -102,7 +90,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
     onBlurHandler() {
         if (this.isOpen) {
-            if (this.isValidDateInput) {
+            if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
         }
@@ -127,7 +115,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     isInvalidDateInputHandler(e) {
-        this.isValidDateInput = e;
+        this.isInvalidDateInput = e;
     }
 
     inputValueChange(e): void {
@@ -162,6 +150,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
             this.selectedDay.date = this.date;
             this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
             this.inputFieldDate = this.date.toLocaleString();
+        }
+        if (this.dateFromInput) {
+            this.dateFromInput.subscribe(date => {
+                this.updatePickerInputHandler(date);
+            });
         }
     }
 

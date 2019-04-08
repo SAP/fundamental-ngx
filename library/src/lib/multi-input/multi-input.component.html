@@ -1,53 +1,55 @@
-<div class="fd-multi-input">
-    <div class="fd-multi-input-field">
-        <fd-popover [isOpen]="isOpen" [focusTrapped]="false" [triggers]="[]" [options]="POPOVER_OPTIONS" [closeOnOutsideClick]="false">
-            <fd-popover-control>
-                <div class="fd-combobox-control"
-                     [attr.aria-label]="'multi input body'"
-                     [attr.aria-expanded]="isOpen">
-                    <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                        <input type="text" class="fd-input"
-                               [ngClass]="{'fd-input--compact': compact}"
-                               [placeholder]="placeholder"
-                               [disabled]="disabled"
-                               [(ngModel)]="searchTerm"
-                               (ngModelChange)="handleSearchTermChange()"
-                               (keypress)="isOpen = true"
-                               (click)="isOpen = !isOpen">
-                        <span class="fd-input-group__addon fd-input-group__addon--after
+<div class="fd-multi-input-field">
+    <fd-popover [(isOpen)]="isOpen"
+                [triggers]="[]"
+                [fillControl]="true"
+                class="fd-multi-input-popover-custom">
+        <fd-popover-control>
+            <div class="fd-combobox-control"
+                 [attr.aria-label]="'multi input body'"
+                 [attr.aria-expanded]="isOpen">
+                <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
+                    <input type="text" class="fd-input"
+                           [ngClass]="{'fd-input--compact': compact}"
+                           [placeholder]="placeholder"
+                           [disabled]="disabled"
+                           [(ngModel)]="searchTerm"
+                           (ngModelChange)="handleSearchTermChange()"
+                           (keypress)="isOpen = true"
+                           (click)="isOpen = !isOpen">
+                    <span class="fd-input-group__addon fd-input-group__addon--after
                         fd-input-group__addon--button">
                             <button class="fd-button--light" type="button"
                                     [ngClass]="('sap-icon--' + this.glyph)"
                                     [disabled]="disabled"
                                     (click)="isOpen = !isOpen"></button>
                         </span>
-                    </div>
                 </div>
-            </fd-popover-control>
-            <fd-popover-body *ngIf="init"
-                 [style.maxHeight]="this.maxHeight"
-                 [attr.aria-hidden]="!isOpen">
-                <fd-menu *ngIf="displayedValues && displayedValues.length">
-                    <ul fd-menu-list>
-                        <li fd-menu-item *ngFor="let value of displayedValues">
-                            <label class="fd-menu__item">
-                                <input type="checkbox" class="fd-checkbox" [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
-                                       (ngModelChange)="handleSelect($event, value)">
-                                {{displayFn(value)}}
-                            </label>
-                        </li>
-                    </ul>
-                </fd-menu>
-                <ng-content></ng-content>
-            </fd-popover-body>
-        </fd-popover>
-    </div>
-    <div class="fd-multi-input-tags">
-        <fd-token *ngFor="let token of selected"
-                  (onCloseClick)="handleSelect(false, token)"
-                  class="fd-multi-input-token-spacing">
-            {{displayFn(token)}}
-        </fd-token>
-    </div>
+            </div>
+        </fd-popover-control>
+        <fd-popover-body
+            [style.maxHeight]="this.maxHeight"
+            [attr.aria-hidden]="!isOpen">
+            <fd-menu *ngIf="displayedValues && displayedValues.length">
+                <ul fd-menu-list>
+                    <li fd-menu-item *ngFor="let value of displayedValues">
+                        <label class="fd-menu__item">
+                            <input type="checkbox" class="fd-checkbox"
+                                   [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
+                                   (ngModelChange)="handleSelect($event, value)">
+                            {{displayFn(value)}}
+                        </label>
+                    </li>
+                </ul>
+            </fd-menu>
+            <ng-content></ng-content>
+        </fd-popover-body>
+    </fd-popover>
+</div>
+<div class="fd-multi-input-tags">
+    <fd-token *ngFor="let token of selected"
+              (onCloseClick)="handleSelect(false, token)"
+              class="fd-multi-input-token-spacing">
+        {{displayFn(token)}}
+    </fd-token>
 </div>
 

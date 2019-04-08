@@ -4,18 +4,27 @@ import {
     OnInit,
     Output,
     EventEmitter,
-    ChangeDetectorRef,
     ViewChild
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
-import Popper, { PopperOptions } from 'popper.js';
+import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
 
 @Component({
     selector: 'fd-popover',
-    templateUrl: './popover.component.html'
+    templateUrl: './popover.component.html',
+    styles: [`        
+        :host {
+            margin-right: 0;
+            display: inline-block;
+        }
+    `]
 })
 export class PopoverComponent implements OnInit {
+
+    @ViewChild(PopoverDirective)
+    directiveRef: PopoverDirective;
+
     @Input()
     arrow: boolean = false;
 
@@ -30,6 +39,9 @@ export class PopoverComponent implements OnInit {
 
     @Input()
     triggers: string[] = ['click'];
+
+    @Input()
+    placement: Placement;
 
     @Input()
     glyph: string;
@@ -50,10 +62,22 @@ export class PopoverComponent implements OnInit {
     toolbar: boolean = false;
 
     @Input()
-    options: PopperOptions = Popper.Defaults;
+    options: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: true,
+                escapeWithReference: true,
+                boundariesElement: 'scrollParent'
+            }
+        }
+    };
 
     @Input()
-    focusTrapped: boolean = true;
+    focusTrapped: boolean = false;
+
+    @Input()
+    fillControl: boolean = false;
 
     @Input()
     closeOnOutsideClick: boolean = true;
@@ -66,17 +90,10 @@ export class PopoverComponent implements OnInit {
 
     id: string;
 
-    private isSetup: boolean = false;
-
     constructor(private hasher: HashService) {}
 
     ngOnInit(): void {
         this.id = this.hasher.hash();
-        this.isSetup = true;
-
-        if (this.options.modifiers && this.options.modifiers.preventOverflow) {
-            this.options.modifiers.preventOverflow.escapeWithReference = true;
-        }
     }
 
     public toggle(): void {
@@ -99,6 +116,10 @@ export class PopoverComponent implements OnInit {
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
         }
+    }
+
+    public updatePopover(): void {
+        this.directiveRef.updatePopper();
     }
 
 }

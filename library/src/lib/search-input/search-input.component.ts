@@ -1,16 +1,19 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef,
+    HostBinding,
     Input,
+    OnChanges,
     OnInit,
     Output,
-    Pipe,
-    PipeTransform
+    SimpleChanges,
+    QueryList,
+    ViewChild,
+    ViewChildren
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopperOptions } from 'popper.js';
+import { MenuItemDirective } from '../menu/menu-item.directive';
 
 @Component({
     selector: 'fd-search-input',
@@ -24,12 +27,14 @@ import { PopperOptions } from 'popper.js';
         }
     ]
 })
-export class SearchInputComponent implements ControlValueAccessor, OnInit {
+export class SearchInputComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input()
-    dropdownValues: any[];
+    dropdownValues: any[] = [];
 
     @Input()
-    usingCustomFilter: boolean = false;
+    filterFn: Function = this.defaultFilter;
+
+    displayedValues: any[] = [];
 
     @Input()
     disabled: boolean;
@@ -52,44 +57,88 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
     @Input()
     highlight: boolean = true;
 
+    @Input()
+    closeOnSelect: boolean = true;
+
+    @Input()
+    fillOnSelect: boolean = true;
+
     @Output()
     itemClicked = new EventEmitter<any>();
+
+    @ViewChildren(MenuItemDirective) menuItems: QueryList<MenuItemDirective>;
+
+    @ViewChild('searchInputElement') searchInputElement;
 
     isOpen: boolean = false;
 
     inputTextValue: string;
 
-    readonly POPOVER_OPTIONS: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: false
-            },
-            hide: {
-                enabled: false
-            }
-        }
-    };
+    @HostBinding('class.fd-search-input')
+    searchInputClass = true;
 
-    onInputKeypressHandler(event) {
-        this.isOpen = true;
+    @HostBinding('class.fd-search-input--closed')
+    shellBarClass = this.inShellbar;
+
+    onInputKeydownHandler(event) {
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            if (this.menuItems && this.menuItems.first) {
+                this.menuItems.first.itemEl.nativeElement.children[0].focus();
+            }
         }
     }
 
-    onMenuKeypressHandler(event, term) {
+    onInputKeyupHandler() {
+        if (this.inputText.length) {
+            this.isOpen = true;
+        }
+    }
+
+    onMenuKeydownHandler(event, term?) {
         if (event.code === 'Enter' && term.callback) {
             term.callback(event);
             this.itemClicked.emit(term);
+        } else if (event.code === 'ArrowDown') {
+            event.preventDefault();
+            let foundItem = false;
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
+                if (document.activeElement === item.itemEl.nativeElement.children[0] && !foundItem) {
+                    if (menuItemsArray[index + 1]) {
+                        menuItemsArray[index + 1].itemEl.nativeElement.children[0].focus();
+                    }
+                    foundItem = true;
+                }
+            })
+        } else if (event.code === 'ArrowUp') {
+            event.preventDefault();
+            let foundItem = false;
+            const menuItemsArray = this.menuItems.toArray();
+            menuItemsArray.forEach((item, index) => {
+                if (!foundItem) {
+                    if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
+                        this.searchInputElement.nativeElement.focus();
+                        foundItem = true;
+                    } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
+                        if (menuItemsArray[index - 1]) {
+                            menuItemsArray[index - 1].itemEl.nativeElement.children[0].focus();
+                        }
+                        foundItem = true;
+                    }
+                }
+            });
         }
     }
 
     onMenuClickHandler(event, term) {
         if (term.callback) {
             term.callback(event);
+            this.handleClickActions(term);
+            this.itemClicked.emit(term);
         }
-        this.itemClicked.emit(term);
     }
 
     shellbarSearchInputClicked(event) {
@@ -121,29 +170,41 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit {
         this.onTouched = fn;
     }
 
-    ngOnInit() {
-        if (this.inShellbar) {
-            this.POPOVER_OPTIONS.modifiers.offset = {
-                enabled: true,
-                offset: -264
-            };
+    private handleClickActions(term): void {
+        if (this.closeOnSelect) {
+            this.isOpen = false;
+        }
+        if (this.fillOnSelect) {
+            this.inputText = term.text;
         }
     }
 
-    constructor(private elRef: ElementRef) {}
-}
-
-@Pipe({
-    name: 'fdSearch'
-})
-export class FdSearchPipe implements PipeTransform {
-    transform(value: any, input: string) {
-        if (input && typeof input === 'string') {
-            input = input.toLocaleLowerCase();
-            return value.filter((result: any) => {
-                return result.text.toLocaleLowerCase().startsWith(input);
-            });
+    ngOnInit() {
+        if (this.dropdownValues) {
+            this.displayedValues = this.dropdownValues;
         }
-        return value;
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+            if (this.inputText) {
+                this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+            } else {
+                this.displayedValues =  this.dropdownValues;
+            }
+        }
+    }
+
+    handleSearchTermChange(): void {
+        this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+    }
+
+    private defaultFilter(contentArray: any[], searchTerm: string): any[] {
+        const searchLower = searchTerm.toLocaleLowerCase();
+        return contentArray.filter(item => {
+            if (item) {
+                return item.text.toLocaleLowerCase().includes(searchLower);
+            }
+        });
     }
 }

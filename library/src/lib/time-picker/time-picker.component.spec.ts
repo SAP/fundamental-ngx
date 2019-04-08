@@ -247,4 +247,11 @@ describe('TimePickerComponent', () => {
         retVal = component.getFormattedTime();
         expect(retVal).toBeDefined();
     });
+
+    it('should call onChange when time from time picker changes', () => {
+        spyOn(component, 'onChange');
+        component.time = {hour: 12, minute: 0, second: 0};
+        component.timeFromTimeComponentChanged();
+        expect(component.onChange).toHaveBeenCalledWith(component.time);
+    });
 });

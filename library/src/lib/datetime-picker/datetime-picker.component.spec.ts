@@ -34,7 +34,7 @@ describe('DatetimePickerComponent', () => {
     it('should open the popover', () => {
         spyOn(component, 'inputValueChange');
         component.isOpen = false;
-        component.isValidDateInput = true;
+        component.isInvalidDateInput = true;
         component.openPopover({});
         expect(component.inputValueChange).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
@@ -43,7 +43,7 @@ describe('DatetimePickerComponent', () => {
 
     it('should close the calendar', () => {
         component.isOpen = true;
-        component.isValidDateInput = true;
+        component.isInvalidDateInput = true;
         component.closePopover();
         expect(component.inputFieldDate).toBeNull();
         expect(component.isOpen).toBe(false);
@@ -51,7 +51,7 @@ describe('DatetimePickerComponent', () => {
 
     it('should handle blur', () => {
         component.isOpen = true;
-        component.isValidDateInput = true;
+        component.isInvalidDateInput = true;
         component.onBlurHandler();
         expect(component.inputFieldDate).toBeNull();
     });

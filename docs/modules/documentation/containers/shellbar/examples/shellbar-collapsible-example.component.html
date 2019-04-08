@@ -1,19 +1,28 @@
 <fd-shellbar>
     <fd-shellbar-logo>
-        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        <a href="#"
+           class="fd-shellbar__logo fd-shellbar__logo--image-replaced"
+           aria-label="SAP"></a>
     </fd-shellbar-logo>
-    <fd-product-menu [control]="productMenuControl" [items]="productMenuItems">
+    <fd-product-menu [control]="productMenuControl"
+                     [items]="productMenuItems">
     </fd-product-menu>
     <fd-shellbar-subtitle>
         Subtitle
     </fd-shellbar-subtitle>
     <fd-copilot></fd-copilot>
-    <fd-shellbar-actions [user]="user" [userMenu]="userMenu" [productSwitcher]="productSwitcher">
-        <fd-shellbar-action [label]="'Search'" [glyph]="'search'">
-            <fd-search-input [inShellbar]="true" [dropdownValues]="searchTerms" [(ngModel)]="searchTerm" [searchFunction]="exampleSearchFunction"></fd-search-input>
-        </fd-shellbar-action>
-        <fd-shellbar-action *ngFor="let action of actions" [glyph]="action.glyph" [callback]="action.callback"
-                            [label]="action.label" [notificationCount]="action.notificationCount" [notificationLabel]="action.notificationLabel">
+    <fd-shellbar-actions [user]="user"
+                         [userMenu]="userMenu"
+                         [productSwitcher]="productSwitcher">
+        <button fd-button
+                [fdType]="'standard'">Custom Button</button>
+
+        <fd-shellbar-action *ngFor="let action of actions"
+                            [glyph]="action.glyph"
+                            [callback]="action.callback"
+                            [label]="action.label"
+                            [notificationCount]="action.notificationCount"
+                            [notificationLabel]="action.notificationLabel">
         </fd-shellbar-action>
     </fd-shellbar-actions>
 </fd-shellbar>

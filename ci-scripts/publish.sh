@@ -21,8 +21,6 @@ cd ..
 
 git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" master > /dev/null 2>&1;
 
-npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
-
 npm run build-deploy-library
 
 cd dist/fundamental-ngx
@@ -30,6 +28,9 @@ cd dist/fundamental-ngx
 npm publish
 
 cd ../..
+
+# run this after publish to make sure GitHub finishes updating from the push
+npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
 
 npm run build-docs
 npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
