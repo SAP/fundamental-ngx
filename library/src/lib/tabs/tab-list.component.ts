@@ -1,19 +1,21 @@
 import {
-    AfterContentInit,
+    AfterContentChecked,
+    AfterContentInit, ChangeDetectorRef,
     Component,
     ContentChildren,
-    EventEmitter, Input, OnChanges,
+    EventEmitter, Input, OnChanges, OnDestroy,
     Output,
     QueryList, SimpleChanges
 } from '@angular/core';
-import { TabPanelComponent } from './tab.component';
+import { TabPanelComponent } from './tab/tab.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'fd-tab-list',
     templateUrl: './tab-list.component.html',
     styleUrls: ['./tab-list.component.scss']
 })
-export class TabListComponent implements AfterContentInit, OnChanges {
+export class TabListComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
 
     @ContentChildren(TabPanelComponent)
     tabs: QueryList<TabPanelComponent>;
@@ -24,20 +26,28 @@ export class TabListComponent implements AfterContentInit, OnChanges {
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
-    private isSetup = false;
+    private _tabsSubscription: Subscription;
+
+    constructor(private cdRef: ChangeDetectorRef) {}
+
+    ngAfterContentChecked(): void {
+        // Stuff to do after check, see angular material tab-group
+    }
 
     ngAfterContentInit(): void {
-        setTimeout(() => {
-            this.setupTabs();
-            this.isSetup = true;
+        this.setupTabs();
+
+        this._tabsSubscription = this.tabs.changes.subscribe(() => {
+            // new number of tabs, reset
         });
+        this.cdRef.detectChanges();
+    }
+
+    ngOnDestroy(): void {
+        this._tabsSubscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (!this.isSetup) {
-            return;
-        }
-
         if (changes.selectedIndex) {
             setTimeout(() => {
                 this.selectTab(changes.selectedIndex.currentValue);
@@ -46,29 +56,27 @@ export class TabListComponent implements AfterContentInit, OnChanges {
     }
 
     selectTab(tabIndex: number): void {
-        if (this.checkIndexInRange()) {
+        if (this.checkIndexInRange() && this.checkTargetTabEnabled(tabIndex)) {
             this.tabs.forEach((tab, index) => {
-                if (index === tabIndex) {
-                    tab.expanded = true;
-                } else {
-                    tab.expanded = false;
-                }
+                tab.expanded = index === tabIndex;
             });
             this.selectedIndex = tabIndex;
+            this.selectedIndexChange.emit(tabIndex);
         }
     }
 
     private setupTabs(): void {
         this.tabs.forEach((tab, index) => {
             tab.index = index;
-            tab.tabClicked.subscribe(result => {
-                this.selectTab(result);
-            });
         });
         this.selectTab(this.selectedIndex);
     }
 
     private checkIndexInRange(): boolean {
         return this.tabs && this.selectedIndex < this.tabs.length;
+    }
+
+    private checkTargetTabEnabled(index: number): boolean {
+        return !this.tabs.toArray()[index].disabled;
     }
 }
