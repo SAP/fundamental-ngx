@@ -10,25 +10,15 @@
     </fd-tab>
 </fd-tab-list>
 <br/>
+
+<!-- First method, requires maintaining a flag -->
 <button fd-button
-        [fdType]="'main'"
         (click)="selectedTab = 0">
     Select Tab 1
 </button>
+
+<!-- Second method, does not require a flag -->
 <button fd-button
-        [fdType]="'main'"
         (click)="tabList.selectTab(1)">
     Select Tab 2
-</button>
-
-<button fd-button
-        [fdType]="'main'"
-        (click)="tabList.selectTab(2)">
-    Select Tab 3 method 1
-</button>
-
-<button fd-button
-        [fdType]="'main'"
-        (click)="selectedTab = 2">
-    Select Tab 3 method 2
 </button>

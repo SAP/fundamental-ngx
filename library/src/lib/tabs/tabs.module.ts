@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TabPanelComponent } from './tab/tab.component';
+import { TabPanelComponent } from './tab/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 
 import { UtilsModule } from '../utils/utils.module';

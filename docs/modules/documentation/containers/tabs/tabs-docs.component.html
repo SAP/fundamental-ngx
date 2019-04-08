@@ -5,11 +5,10 @@
 <code-example [code]="tabHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
-<h2>Selecting a tab programmatically by ID</h2>
+<h2>Programmatic Selection</h2>
 <description>
-    You can set an
-    <code>id</code> on a tab and select it programmatically using the
-    <code>select()</code> function.
+    There are two ways of accomplishing this. First, the <code>selectedIndex</code> input can be used.
+    This requires maintaining a flag. The second method requires setting a template reference variable and then calling the <code>selectTab(index)</code> method.
 </description>
 <component-example [name]="'ex2'">
     <fd-tab-selection-example></fd-tab-selection-example>
@@ -17,6 +16,25 @@
 <code-example [code]="selectTabByIdHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
+<h2>Complex Tab Titles</h2>
+<description>
+    Use an ng-template with the <code>fd-tab-title</code> directive to access heavily customizable tab titles.
+</description>
+<component-example [name]="'ex3'">
+    <fd-complex-title-example></fd-complex-title-example>
+</component-example>
+<code-example [code]="complexH" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Adding and Removing Tabs</h2>
+<description>
+    The tab component is very flexible, and supports dynamically adding or removing tabs.
+</description>
+<component-example [name]="'ex3'">
+    <fd-adding-tab-example></fd-adding-tab-example>
+</component-example>
+<code-example [code]="addingH" [language]="'HTML'"></code-example>
+<code-example [code]="addingT" [language]="'typescript'"></code-example>
 
 <playground [schema]="schema"
             [schemaInitialValues]="data"

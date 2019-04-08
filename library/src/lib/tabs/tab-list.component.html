@@ -4,8 +4,8 @@
         *ngFor="let tab of tabs.toArray(); let i = index;">
         <a #tabLink
            role="tab"
-           tabindex="0"
            class="fd-tabs__link"
+           [attr.tabindex]="tab.disabled ? -1 : 0"
            [attr.aria-controls]="tab.id"
            [attr.aria-disabled]="tab.disabled"
            [attr.aria-selected]="tab.expanded ? true : null"

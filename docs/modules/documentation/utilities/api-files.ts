@@ -173,9 +173,9 @@ export const API_FILES = {
         'ColumnSortableDirective'
     ],
     tabs: [
-        'TabComponent',
+        'TabPanelComponent',
         'TabListComponent',
-        'TabsComponent'
+        'TabTitleDirective'
     ],
     tile: [
         'ProductTileComponent',

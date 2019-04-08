@@ -6,9 +6,12 @@ import {
     Output,
     QueryList, SimpleChanges, ViewChildren
 } from '@angular/core';
-import { TabPanelComponent } from './tab/tab.component';
+import { TabPanelComponent } from './tab/tab-panel.component';
 import { Subscription } from 'rxjs';
 
+/**
+ * Represents a list of tab-panels.
+ */
 @Component({
     selector: 'fd-tab-list',
     templateUrl: './tab-list.component.html',
@@ -16,20 +19,25 @@ import { Subscription } from 'rxjs';
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
+    /** @hidden */
     @ContentChildren(TabPanelComponent)
     tabs: QueryList<TabPanelComponent>;
 
+    /** @hidden */
     @ViewChildren('tabLink')
     tabLinks: QueryList<ElementRef>;
 
+    /** @Input Index of the selected tab panel. */
     @Input()
     selectedIndex: number = 0;
 
+    /** @Output Event emitted when the selected panel changes. */
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
     private _tabsSubscription: Subscription;
 
+    /** @hidden */
     ngAfterContentInit(): void {
         setTimeout(() => {
             this.selectTab(this.selectedIndex);
@@ -42,10 +50,12 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         });
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._tabsSubscription.unsubscribe();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.selectedIndex) {
             setTimeout(() => {
@@ -54,6 +64,10 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         }
     }
 
+    /**
+     * Function to select a new tab from an index.
+     * @param tabIndex Index of the tab to select.
+     */
     selectTab(tabIndex: number): void {
         if (this.isIndexInRange() && this.isTargetTabEnabled(tabIndex)) {
             this.tabs.forEach((tab, index) => {
@@ -64,12 +78,14 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         }
     }
 
+    /** @hidden */
     tabHeaderClickHandler(tabIndex: number): void {
         if (this.selectedIndex !== tabIndex) {
             this.selectTab(tabIndex);
         }
     }
 
+    /** @hidden */
     tabHeaderKeyHandler(index: number, event: any): void {
         switch (event.code) {
             case ('ArrowLeft'): {

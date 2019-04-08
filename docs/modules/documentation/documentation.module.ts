@@ -298,6 +298,8 @@ import { ToggleHeaderComponent } from './containers/toggle/toggle-header/toggle-
 import { TokenHeaderComponent } from './containers/token/token-header/token-header.component';
 import { TreeHeaderComponent } from './containers/tree/tree-header/tree-header.component';
 import { ROUTES } from './documentation.routes';
+import { ComplexTitleExampleComponent } from './containers/tabs/examples/complex-title-example/complex-title-example.component';
+import { AddingTabExampleComponent } from './containers/tabs/examples/adding-tab-example/adding-tab-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -544,7 +546,9 @@ export function highlightJsFactory() {
         TimePickerHeaderComponent,
         ToggleHeaderComponent,
         TokenHeaderComponent,
-        TreeHeaderComponent
+        TreeHeaderComponent,
+        ComplexTitleExampleComponent,
+        AddingTabExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
