@@ -1,13 +1,15 @@
 <fd-table>
-    <fd-table-header>
-        <th><input type="checkbox" [checked]="allSelected" (change)="selectMaster()"/></th>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
-        <th>Date</th>
-        <th>Type</th>
-    </fd-table-header>
-    <fd-table-body>
+    <thead fd-table-header>
+        <tr>
+            <th><input type="checkbox" [checked]="allSelected" (change)="selectMaster()"/></th>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Date</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
         <tr *ngFor="let row of tableRows; let i = index">
             <td>
                 <input type="checkbox" [checked]="row.checked" (change)="select($event, i)"/>
@@ -18,7 +20,7 @@
             <td>{{row.date}}</td>
             <td><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
-    </fd-table-body>
+    </tbody>
 </fd-table>
 
 Selected rows: {{ selectedRows.toString() }}
