@@ -5,11 +5,23 @@ import { TabPanelComponent } from './tab/tab.component';
 import { TabListComponent } from './tab-list.component';
 
 import { UtilsModule } from '../utils/utils.module';
-import { TabLabelDirective } from './tab-directives';
+import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-directives';
 
 @NgModule({
-    declarations: [TabListComponent, TabPanelComponent, TabLabelDirective],
-    imports: [CommonModule, UtilsModule],
-    exports: [TabListComponent, TabPanelComponent]
+    declarations: [
+        TabListComponent,
+        TabPanelComponent,
+        TabTitleDirective,
+        TabLoadTitleDirective
+    ],
+    imports: [
+        CommonModule,
+        UtilsModule
+    ],
+    exports: [
+        TabListComponent,
+        TabPanelComponent,
+        TabTitleDirective
+    ]
 })
 export class TabsModule {}

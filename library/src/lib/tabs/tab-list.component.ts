@@ -1,11 +1,10 @@
 import {
-    AfterContentChecked,
-    AfterContentInit, ChangeDetectorRef,
+    AfterContentInit,
     Component,
-    ContentChildren,
+    ContentChildren, ElementRef,
     EventEmitter, Input, OnChanges, OnDestroy,
     Output,
-    QueryList, SimpleChanges
+    QueryList, SimpleChanges, ViewChildren
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab.component';
 import { Subscription } from 'rxjs';
@@ -15,10 +14,13 @@ import { Subscription } from 'rxjs';
     templateUrl: './tab-list.component.html',
     styleUrls: ['./tab-list.component.scss']
 })
-export class TabListComponent implements AfterContentChecked, AfterContentInit, OnChanges, OnDestroy {
+export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
     @ContentChildren(TabPanelComponent)
     tabs: QueryList<TabPanelComponent>;
+
+    @ViewChildren('tabLink')
+    tabLinks: QueryList<ElementRef>;
 
     @Input()
     selectedIndex: number = 0;
@@ -28,19 +30,16 @@ export class TabListComponent implements AfterContentChecked, AfterContentInit, 
 
     private _tabsSubscription: Subscription;
 
-    constructor(private cdRef: ChangeDetectorRef) {}
-
-    ngAfterContentChecked(): void {
-        // Stuff to do after check, see angular material tab-group
-    }
-
     ngAfterContentInit(): void {
-        this.setupTabs();
+        setTimeout(() => {
+            this.selectTab(this.selectedIndex);
+        });
 
         this._tabsSubscription = this.tabs.changes.subscribe(() => {
-            // new number of tabs, reset
+            if (!this.isIndexInRange() || this.isTabContentEmpty()) {
+                this.resetTabHook();
+            }
         });
-        this.cdRef.detectChanges();
     }
 
     ngOnDestroy(): void {
@@ -56,7 +55,7 @@ export class TabListComponent implements AfterContentChecked, AfterContentInit, 
     }
 
     selectTab(tabIndex: number): void {
-        if (this.checkIndexInRange() && this.checkTargetTabEnabled(tabIndex)) {
+        if (this.isIndexInRange() && this.isTargetTabEnabled(tabIndex)) {
             this.tabs.forEach((tab, index) => {
                 tab.expanded = index === tabIndex;
             });
@@ -65,18 +64,71 @@ export class TabListComponent implements AfterContentChecked, AfterContentInit, 
         }
     }
 
-    private setupTabs(): void {
-        this.tabs.forEach((tab, index) => {
-            tab.index = index;
-        });
-        this.selectTab(this.selectedIndex);
+    tabHeaderClickHandler(tabIndex: number): void {
+        if (this.selectedIndex !== tabIndex) {
+            this.selectTab(tabIndex);
+        }
     }
 
-    private checkIndexInRange(): boolean {
-        return this.tabs && this.selectedIndex < this.tabs.length;
+    tabHeaderKeyHandler(index: number, event: any): void {
+        switch (event.code) {
+            case ('ArrowLeft'): {
+                if (index - 1 >= 0) {
+                    this.getTabLinkFromIndex(index - 1).focus();
+                } else {
+                    this.getTabLinkFromIndex(this.tabLinks.length - 1).focus();
+                }
+                break;
+            }
+            case ('ArrowRight'): {
+                if (index + 1 < this.tabLinks.length) {
+                    this.getTabLinkFromIndex(index + 1).focus();
+                } else {
+                    this.getTabLinkFromIndex(0).focus();
+                }
+                break;
+            }
+            case ('Space'): {
+                event.preventDefault();
+                if (index !== this.selectedIndex) {
+                    this.selectTab(index);
+                }
+                break;
+            }
+            case ('Enter'): {
+                if (index !== this.selectedIndex) {
+                    this.selectTab(index);
+                }
+            }
+        }
     }
 
-    private checkTargetTabEnabled(index: number): boolean {
+    private isIndexInRange(): boolean {
+        return this.tabs && this.tabs.length > 0 && this.selectedIndex < this.tabs.length;
+    }
+
+    private isTargetTabEnabled(index: number): boolean {
         return !this.tabs.toArray()[index].disabled;
+    }
+
+    private isTabContentEmpty(): boolean {
+        let result = true;
+        this.tabs.forEach(tab => {
+            if (tab.expanded) {
+                result = false;
+            }
+        });
+        return result;
+    }
+
+    private resetTabHook(): void {
+        this.selectedIndex = 0;
+        setTimeout(() => {
+            this.selectTab(this.selectedIndex);
+        });
+    }
+
+    private getTabLinkFromIndex(index: number): HTMLElement {
+        return this.tabLinks.toArray()[index].nativeElement as HTMLElement;
     }
 }

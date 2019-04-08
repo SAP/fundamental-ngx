@@ -1,0 +1,16 @@
+<fd-tab-list>
+    <fd-tab>
+        <ng-template fd-tab-title>
+            <fd-icon [glyph]="'delete'"></fd-icon>&nbsp;Delete
+        </ng-template>
+        Content 1
+    </fd-tab>
+    <fd-tab *ngIf="val" [title]="'Tab 2'">
+        Tab 2
+    </fd-tab>
+    <fd-tab [title]="'Tab 3'" [disabled]="true">
+        Tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<button (click)="val = !val">Val click</button>

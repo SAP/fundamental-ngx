@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 import { HashService } from '../../utils/hash.service';
+import { TabTitleDirective } from '../tab-utils/tab-directives';
 
 @Component({
     selector: 'fd-tab',
@@ -14,8 +15,18 @@ import { HashService } from '../../utils/hash.service';
     providers: [HashService]
 })
 export class TabPanelComponent implements OnInit {
+
+    @ContentChild(TabTitleDirective, {read: TemplateRef})
+    titleTemplate: TemplateRef<any>;
+
     @Input()
-    title: string | TemplateRef<any>;
+    title: string;
+
+    @Input()
+    ariaLabel: string;
+
+    @Input()
+    ariaLabelledBy: string;
 
     @Input()
     disabled: boolean;
