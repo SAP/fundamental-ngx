@@ -6,12 +6,4 @@ import { Component } from '@angular/core';
 })
 export class DatetimeExampleComponent {
     date: Date = new Date();
-
-    getSelectedDate() {
-        let retVal = 'null';
-        if (this.date && this.date.toLocaleString()) {
-            retVal = this.date.toLocaleString();
-        }
-        return retVal;
-    }
 }
