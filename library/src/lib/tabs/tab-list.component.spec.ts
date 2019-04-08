@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { TabListComponent } from './tab-list.component';
-import { TabPanelComponent } from './tabs.component';
+import { TabsModule } from './tabs.module';
 
 @Component({
     selector: 'fd-test-tabs',
@@ -29,7 +29,8 @@ describe('TabListComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent, TabListComponent, TabPanelComponent]
+            declarations: [TestWrapperComponent],
+            imports: [TabsModule]
         }).compileComponents();
     }));
 
@@ -45,13 +46,20 @@ describe('TabListComponent', () => {
 
     it('should handle ngAfterContentInit', () => {
         component.ngAfterContentInit();
-        expect(component.selected).toBe(component.tabs.first);
+        expect(component.selectedIndex).toBe(0);
         expect(component.tabs.length).toBe(4);
     });
 
     it('should handle tab select', () => {
         component.ngAfterContentInit();
-        component.tabChange.subscribe(id => expect(id).toBe('tab3'));
-        component.select('tab3');
+        component.selectedIndexChange.subscribe(id => expect(id).toBe(1));
+        component.selectTab(1);
     });
+
+    it('should not select disabled tabs', () => {
+        component.ngAfterContentInit();
+        component.selectedIndexChange.subscribe(id => expect(id).toBe(0));
+        component.selectTab(3);
+    });
+
 });

@@ -1,16 +1,26 @@
 <ul class="fd-tabs"
     role="tablist">
-  <li class="fd-tabs__item"
-      *ngFor="let tab of tabs">
-    <a role="tab"
-       class="fd-tabs__link"
-       [attr.aria-controls]="tab.id"
-       [attr.aria-disabled]="tab.disabled"
-       [attr.aria-selected]="tab.expanded ? true : null"
-       [class.is-selected]="tab.expanded"
-       [href]="'#' + tab.id"
-       (keypress)="onKeypressHandler($event, tab.id)"
-       (click)="tabClicked($event, tab.id)">{{ tab.title }}</a>
-  </li>
+    <li class="fd-tabs__item"
+        *ngFor="let tab of tabs.toArray(); let i = index;">
+        <a #tabLink
+           role="tab"
+           class="fd-tabs__link"
+           [attr.tabindex]="tab.disabled ? -1 : 0"
+           [attr.aria-controls]="tab.id"
+           [attr.aria-disabled]="tab.disabled"
+           [attr.aria-selected]="tab.expanded ? true : null"
+           [attr.aria-label]="tab.ariaLabel || null"
+           [attr.aria-labelledby]="(!tab.ariaLabel && tab.ariaLabelledBy) ? tab.ariaLabelledBy : null"
+           [class.is-selected]="tab.expanded"
+           (keydown)="tabHeaderKeyHandler(i, $event)"
+           (click)="tabHeaderClickHandler(i)">
+
+            <ng-container *ngIf="tab.titleTemplate">
+                <ng-container [fd-tab-load-title]="tab.titleTemplate"></ng-container>
+            </ng-container>
+            <ng-container *ngIf="!tab.titleTemplate">{{ tab.title }}</ng-container>
+        </a>
+    </li>
 </ul>
 <ng-content select="fd-tab"></ng-content>
+<ng-content></ng-content>

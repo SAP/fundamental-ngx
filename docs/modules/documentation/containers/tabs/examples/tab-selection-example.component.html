@@ -1,14 +1,24 @@
-<fd-tab-list #tabList>
-    <fd-tab id="tab1" [title]="'Tab 1'">
+<fd-tab-list [(selectedIndex)]="selectedTab" #tabList>
+    <fd-tab [title]="'Tab 1'">
         Tab 1
     </fd-tab>
-    <fd-tab id="tab2" [title]="'Tab 2'">
+    <fd-tab [title]="'Tab 2'">
         Tab 2
+    </fd-tab>
+    <fd-tab [title]="'Tab 3'" [disabled]="true">
+        Tab 3
     </fd-tab>
 </fd-tab-list>
 <br/>
+
+<!-- First method, requires maintaining a flag -->
 <button fd-button
-        [fdType]="'main.scss'"
-        (click)="this.tabList.select('tab2')">
+        (click)="selectedTab = 0">
+    Select Tab 1
+</button>
+
+<!-- Second method, does not require a flag -->
+<button fd-button
+        (click)="tabList.selectTab(1)">
     Select Tab 2
 </button>

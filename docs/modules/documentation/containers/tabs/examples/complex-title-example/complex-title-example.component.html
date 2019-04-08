@@ -1,0 +1,23 @@
+<fd-tab-list>
+    <fd-tab>
+        <ng-template fd-tab-title>
+            <fd-icon [glyph]="'delete'"></fd-icon>
+            <span style="margin-left: 12px;">Delete</span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title>
+            <fd-icon [glyph]="'edit'"></fd-icon>
+            <span style="margin-left: 12px;">Edit</span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab [title]="'Tab 3'">
+        <ng-template fd-tab-title>
+            <fd-icon [glyph]="'search'"></fd-icon>
+            <span style="margin-left: 12px;">Search</span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
