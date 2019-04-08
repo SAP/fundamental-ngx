@@ -10,4 +10,6 @@ export class TabsExampleComponent {}
     selector: 'fd-tab-selection-example',
     templateUrl: './tab-selection-example.component.html'
 })
-export class TabSelectionExampleComponent {}
+export class TabSelectionExampleComponent {
+    selectedTab = 0;
+}

@@ -1,14 +1,19 @@
-<fd-tab-list #tabList>
-    <fd-tab id="tab1" [title]="'Tab 1'">
+<fd-tab-list [(selectedIndex)]="selectedTab" #tabList>
+    <fd-tab [title]="'Tab 1'">
         Tab 1
     </fd-tab>
-    <fd-tab id="tab2" [title]="'Tab 2'">
+    <fd-tab [title]="'Tab 2'">
         Tab 2
     </fd-tab>
 </fd-tab-list>
 <br/>
 <button fd-button
         [fdType]="'main'"
-        (click)="this.tabList.select('tab2')">
+        (click)="selectedTab = 0">
+    Select Tab 1
+</button>
+<button fd-button
+        [fdType]="'main'"
+        (click)="tabList.selectTab(1)">
     Select Tab 2
 </button>

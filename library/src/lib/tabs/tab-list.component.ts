@@ -2,64 +2,73 @@ import {
     AfterContentInit,
     Component,
     ContentChildren,
-    EventEmitter,
+    EventEmitter, Input, OnChanges,
     Output,
-    QueryList,
-    ViewEncapsulation
+    QueryList, SimpleChanges
 } from '@angular/core';
-import { TabPanelComponent } from './tabs.component';
+import { TabPanelComponent } from './tab.component';
 
 @Component({
     selector: 'fd-tab-list',
-    encapsulation: ViewEncapsulation.None,
     templateUrl: './tab-list.component.html',
     styleUrls: ['./tab-list.component.scss']
 })
-export class TabListComponent implements AfterContentInit {
-    @ContentChildren(TabPanelComponent) tabs: QueryList<TabPanelComponent>;
+export class TabListComponent implements AfterContentInit, OnChanges {
 
-    @Output() tabChange = new EventEmitter<any>();
+    @ContentChildren(TabPanelComponent)
+    tabs: QueryList<TabPanelComponent>;
 
-    selected: TabPanelComponent;
+    @Input()
+    selectedIndex: number = 0;
 
-    ngAfterContentInit() {
-        this.selected = this.tabs.first;
+    @Output()
+    selectedIndexChange = new EventEmitter<number>();
+
+    private isSetup = false;
+
+    ngAfterContentInit(): void {
         setTimeout(() => {
-            this.tabs.forEach(tab => {
-                tab === this.selected ? (tab.expanded = true) : (tab.expanded = false);
+            this.setupTabs();
+            this.isSetup = true;
+        });
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!this.isSetup) {
+            return;
+        }
+
+        if (changes.selectedIndex) {
+            setTimeout(() => {
+                this.selectTab(changes.selectedIndex.currentValue);
+            });
+        }
+    }
+
+    selectTab(tabIndex: number): void {
+        if (this.checkIndexInRange()) {
+            this.tabs.forEach((tab, index) => {
+                if (index === tabIndex) {
+                    tab.expanded = true;
+                } else {
+                    tab.expanded = false;
+                }
+            });
+            this.selectedIndex = tabIndex;
+        }
+    }
+
+    private setupTabs(): void {
+        this.tabs.forEach((tab, index) => {
+            tab.index = index;
+            tab.tabClicked.subscribe(result => {
+                this.selectTab(result);
             });
         });
+        this.selectTab(this.selectedIndex);
     }
 
-    select(tabId) {
-        this.tabs.forEach(tab => {
-            if (tab.id === tabId) {
-                if (tab.disabled) {
-                    return;
-                } else {
-                    this.selected.expanded = false;
-                }
-
-                if (this.selected) {
-                    this.selected = tab;
-                    this.selected.expanded = true;
-                    this.tabChange.emit(tab.id);
-                }
-            }
-        });
-    }
-
-    tabClicked($event: MouseEvent, tabId) {
-        if ($event) {
-            $event.preventDefault();
-        }
-        this.select(tabId);
-    }
-
-    onKeypressHandler($event: KeyboardEvent, tabId) {
-        if ($event.code === 'Space' || $event.code === 'Enter') {
-            $event.preventDefault();
-            this.select(tabId);
-        }
+    private checkIndexInRange(): boolean {
+        return this.tabs && this.selectedIndex < this.tabs.length;
     }
 }

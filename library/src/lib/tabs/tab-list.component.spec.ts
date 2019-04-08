@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { TabListComponent } from './tab-list.component';
-import { TabPanelComponent } from './tabs.component';
+import { TabPanelComponent } from './tab.component';
 
 @Component({
     selector: 'fd-test-tabs',
