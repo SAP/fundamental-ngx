@@ -1,30 +1,3 @@
-<header>Modal</header>
-<description>The modal is used as a container to be displayed in response to a action. It is commonly used to collect
-    simple information
-    with a short form, to get confirmation or display contextual information that does not require a page.
-</description>
-<import module="ModalModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<description>
-    <p>
-        Modals make use of a singleton service called <code>ModalService</code>.
-        It provides the ability to <code>open()</code> modal windows.
-    </p>
-    <p>
-        The <code>open()</code> method accepts either a TemplateRef or Component as modal content. In addition, you may optionally provide a ModalConfig object to override some system-default modal window behaviours.
-    </p>
-    <p>
-        When a modal window is opened, the content is positioned in a parent element that is appended to the body.
-    </p>
-    <p>
-        Importing one of <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
-        The first is the standard Angular animation module, it animates content as expected. NoopAnimationsModule mocks the animations and does not render them, potentially increasing performance.
-    </p>
-</description>
-
-<separator></separator>
-
 <h2>Template as Content</h2>
 <description>
     The ModalService allows passing in a template reference as the content of the modal. Add <code>let-modal</code> to
@@ -98,28 +71,22 @@
 
 <separator></separator>
 
-<h2>ModalConfig</h2>
-<properties [properties]="{
-  properties: [
-    { name: 'id', description: 'String. The id of the modal element.' },
-    { name: 'width', description: 'String. Width of the modal.' },
-    { name: 'height', description: 'String. Height of the modal.' },
-    { name: 'maxWidth', description: 'String. Maximum width of the modal.' },
-    { name: 'maxHeight', description: 'String. Maximum height of the modal.' },
-    { name: 'minWidth', description: 'String. Minimum width of the modal.' },
-    { name: 'minHeight', description: 'String. Minimum height of the modal.' },
-    { name: 'ariaLabel', description: 'String. Aria-label attribute.' },
-    { name: 'ariaLabelledBy', description: 'String. Aria-labelledby attribute.' },
-    { name: 'ariaDescribedBy', description: 'String. Aria-describedby attribute.' },
-    { name: 'hasBackdrop', description: 'Boolean. Whether the modal should have a backdrop. Defaults to true.' },
-    { name: 'backdropClass', description: 'String. Global classes to apply to the backdrop.' },
-    { name: 'backdropClickCloseable', description: 'Boolean. Whether clicking the backdrop closes the modal. Defaults to true.' },
-    { name: 'modalPanelClass', description: 'String. Global classes to apply to the modal panel.' },
-    { name: 'escKeyCloseable', description: 'Boolean. Whether pressing the escape key closes the modal. Defaults to true.' },
-    { name: 'focusTrapped', description: 'Boolean. Whether the modal should be focus trapped. Defaults to true.' },
-    { name: 'data', description: 'Any. The data which is available through the ModalRef.' }
-  ]
-}"></properties>
+<description>
+    <p>
+        Modals make use of a singleton service called <code>ModalService</code>.
+        It provides the ability to <code>open()</code> modal windows.
+    </p>
+    <p>
+        The <code>open()</code> method accepts either a TemplateRef or Component as modal content. In addition, you may optionally provide a ModalConfig object to override some system-default modal window behaviours.
+    </p>
+    <p>
+        When a modal window is opened, the content is positioned in a parent element that is appended to the body.
+    </p>
+    <p>
+        Importing one of <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
+        The first is the standard Angular animation module, it animates content as expected. NoopAnimationsModule mocks the animations and does not render them, potentially increasing performance.
+    </p>
+</description>
 
 <separator></separator>
 

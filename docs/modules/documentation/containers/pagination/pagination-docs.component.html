@@ -1,28 +1,4 @@
-<header>Pagination</header>
-<description>Use pagination components in conjunction with Lists, Tables, and Trees to allow for more efficient
-    performance and quick access to specific records in the overall data set.<br/><br/>
-    Pagination links are navigable via the tab key and selected with the space bar or enter key.<br/><br/>
-    The pagination component's <code>currentPage</code> value must be updated from your component for the component to work properly.<br/><br/>
-    Pages can be selected programmatically by calling the <code>goToPage(pageNumber)</code> function on the pagination component.
-</description>
-<import module="PaginationModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-pagination&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'totalItems', description: 'Required - the total number items.' },
-    { name: 'itemsPerPage', description: 'The number of items per page.  Default is 10.  Must be greater than zero.  Page numbers will not display when itemsPerPage is greater than totalItems.' },
-    { name: 'currentPage', description: 'The current page.  Default is 1.' },
-    { name: 'displayTotalItems', description: 'Boolean, when set to true, will display the totalItems property next to the pagination links.  Default is true.'},
-    { name: 'displayText', description: 'Text to use for the total items (addresses, products, etc).  Default is \'items\'.'}
-  ],
-  outputs: [
-    { name: 'pageChangeStart', description: 'Event - fired when the user selects a new page, passing the new page number as a parameter.'}
-  ]
-}"></properties>
-<separator></separator>
+<h2>Pagination</h2>
 <component-example [name]="'ex1'">
   <fd-pagination-example></fd-pagination-example>
 </component-example>

@@ -1,43 +1,18 @@
-<header>Tabs</header>
-<description>
-    Tabs organize content in separate views.
-    <br/><br/>
-    Tabs can be navigated through via the tab key and selected with the enter key or space bar.
-</description>
-<import module="TabsModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-tab-list&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: '<fd-tab>', description: 'An individual tab.'}
-  ],
-  inputs: [
-    { name: 'title', description: 'String - Text to display at the top of the tab.'},
-    { name: 'disabled', description: 'Boolean - Prevents the tab from being selected.'},
-    { name: 'id', description: 'String - Allows you to select a tab programmatically using the select() function.'}
-  ],
-  outputs: [
-    { name: 'tabChange', description: 'EventEmitter - emitted when the user selects a tab.  Emits the id of the newly selected tab.'}
-  ]
-}"></properties>
-
-<separator></separator>
-
+<h2>Simple Tabs</h2>
 <component-example [name]="'ex1'">
-  <fd-tabs-example></fd-tabs-example>
+    <fd-tabs-example></fd-tabs-example>
 </component-example>
 <code-example [code]="tabHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Selecting a tab programmatically by ID</h2>
-<p>You can set an
-  <code>id</code> on a tab and select it programmatically using the
-  <code>select()</code> function.</p>
+<description>
+    You can set an
+    <code>id</code> on a tab and select it programmatically using the
+    <code>select()</code> function.
+</description>
 <component-example [name]="'ex2'">
-  <fd-tab-selection-example></fd-tab-selection-example>
+    <fd-tab-selection-example></fd-tab-selection-example>
 </component-example>
 <code-example [code]="selectTabByIdHtml" [language]="'HTML'"></code-example>
 
@@ -46,18 +21,18 @@
 <playground [schema]="schema"
             [schemaInitialValues]="data"
             (onFormChanges)="onSchemaValues($event)">
-  <fd-tab-list>
-    <fd-tab [title]="data.properties.items.label"
-            [disabled]="data.state.disabled">
-      {{data.properties.panels.content}}
-    </fd-tab>
-    <fd-tab [title]="data.properties.items.label2"
-            [disabled]="data.state.disabled2">
-      {{data.properties.panels.content2}}
-    </fd-tab>
-    <fd-tab [title]="data.properties.items.label3"
-            [disabled]="data.state.disabled3">
-      {{data.properties.panels.content3}}
-    </fd-tab>
-  </fd-tab-list>
+    <fd-tab-list>
+        <fd-tab [title]="data.properties.items.label"
+                [disabled]="data.state.disabled">
+            {{data.properties.panels.content}}
+        </fd-tab>
+        <fd-tab [title]="data.properties.items.label2"
+                [disabled]="data.state.disabled2">
+            {{data.properties.panels.content2}}
+        </fd-tab>
+        <fd-tab [title]="data.properties.items.label3"
+                [disabled]="data.state.disabled3">
+            {{data.properties.panels.content3}}
+        </fd-tab>
+    </fd-tab-list>
 </playground>

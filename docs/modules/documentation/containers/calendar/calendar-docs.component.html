@@ -1,38 +1,3 @@
-<header>Calendar</header>
-<description>
-    Commonly used as the contents of a popover when composing “date-picker”, rarely used on its own as a standalone component.
-    <br/><br/>
-    The calendar header buttons are navigable with the tab key. Pressing enter or the space bar when the month or year is
-    focused will change the day selection grid to the month or year selection grid respectively. The user can then tab
-    into the day/month/year selection grid and use the arrow keys to navigate around the grid and make a selection with
-    the space bar or enter key.
-</description>
-<import module="CalendarModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-calendar&gt;</h1>
-
-
-<properties [properties]="{
-  inputs: [
-    { name: 'calType',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
-    { name: 'mondayStartOfWeek', description: 'Set this boolean to \'true\' to have the calendar week start on Monday instead of Sunday.'},
-    { name: 'disableFunction', description: 'A user defined function that specifies the days that should be disabled.'},
-    { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked.'},
-    { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
-    { name: 'selectedRangeFirst', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the first selected day in a range of dates on \'range\' type calendars.'},
-    { name: 'selectedRangeLast', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the last selected day in a range of dates on \'range\' type calendars.'}
-  ],
-  outputs: [
-    { name: 'selectedDayChange', description: 'Fired when the selected date changes for a single type calendar.'},
-    { name: 'selectedRangeFirstChange', description: 'Fired when the first selected date for a range of dates changes.'},
-    { name: 'selectedRangeLastChange', description: 'Fired when the last selected date for a range of dates changes.'}
-  ]
-}">
-</properties>
-
-<separator></separator>
-
 <h2>Standard Calendar</h2>
 <description>
   This example also features <strong>blocked</strong> and <strong>disabled</strong> days.

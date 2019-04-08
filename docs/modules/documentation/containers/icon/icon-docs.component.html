@@ -1,39 +1,28 @@
-<header>Icon</header>
-<description>Icons are used throughout the UI to save space, allow for visual clarity and focus, and for fun. Icons can
-  be used adaptively
-  if desired, but at this point they are used more as visual elements within other components.</description>
-<import module="IconModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-icon&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'glyph', description: 'Icon name.' },
-    { name: 'size', description: 'Size of the icon.  The default options include \'xs\', \'s\', default, \'l\', and \'xl\'.  If no size is provided, default will be used.' }
-  ]
-}"></properties>
-<description>The inputs for <code>fd-icon</code> will be translated into classes attributed to fiori-fundamentals
-  guidelines.
-  <br>For example:
-  <br>if it is passed <code>accept</code> for glyph the class <code>sap-icon--accept</code> will be added to the
-  element.
-  <br>if it is passed <code>xs</code> for size the class <code>sap-icon--xs</code> will be added to the element.
-</description>
-<separator></separator>
-
-<h2>Extensibility</h2>
-<description>The icon implementation allows certain extensibility in terms of options for the inputs. <code>fd-icon</code>
-  inputs doesn't have a restriction for the predefined values.
-  <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, <code>xl</code>,
-  but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
-  <code>sap-icon--xxs</code>.
-</description>
-
+<h2>Icons</h2>
 <component-example [name]="'ex1'">
   <fd-icon-example></fd-icon-example>
 </component-example>
 <code-example [code]="iconHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<description>The inputs for <code>fd-icon</code> will be translated into classes attributed to fiori-fundamentals
+    guidelines.
+    <br>For example:
+    <br>if it is passed <code>accept</code> for glyph the class <code>sap-icon--accept</code> will be added to the
+    element.
+    <br>if it is passed <code>xs</code> for size the class <code>sap-icon--xs</code> will be added to the element.
+</description>
+
+<separator></separator>
+
+<h2>Extensibility</h2>
+<description>The icon implementation allows certain extensibility in terms of options for the inputs. <code>fd-icon</code>
+    inputs doesn't have a restriction for the predefined values.
+    <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, <code>xl</code>,
+    but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
+    <code>sap-icon--xxs</code>.
+</description>
 
 <separator></separator>
 

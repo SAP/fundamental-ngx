@@ -21,6 +21,10 @@ import { AlertRef } from './alert-ref';
 import { alertFadeNgIf } from './alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+/**
+ * The component that represents an alert. It can be only be used inline.
+ * If the AlertService is used, this component is auto-generated.
+ */
 @Component({
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
@@ -42,46 +46,60 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
+    /** @hidden */
     @ViewChild('container', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
+    /** @Input Whether the alert is dismissible. */
     @Input()
     dismissible: boolean = true;
 
+    /** @Input The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     @Input()
     type: string;
 
+    /** @Input Id for the alert component. If omitted, a unique one is generated. */
     @Input()
     id: string;
 
-    @Input()
-    persist: boolean = false;
-
+    /** @Input Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input()
     duration: number = 10000;
 
+    /** @Input Whether the alert should stay open if the mouse is hovering over it. */
     @Input()
     mousePersist: boolean = false;
 
+    /** @Input Id of the element that labels the alert. */
     @Input()
     ariaLabelledBy: string = null;
 
+    /** @Input Aria label for the alert component element. */
     @Input()
     ariaLabel: string = null;
 
+    /** @Input Width of the alert. */
     @Input()
     width: string;
 
+    /** @Input Alternative way of passing in a message to the alert. */
     @Input()
     message: string;
 
+    /** @Output Event fired when the alert is dismissed. */
     @Output()
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
+    /** @hidden */
     mouseInAlert: boolean = false;
+
+    /** @hidden */
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
+
+    /** @hidden */
     childComponentType: Type<any> | TemplateRef<any> | string;
 
+    /** @hidden */
     constructor(private hasher: HashService,
                 private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
@@ -90,6 +108,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         super(elRef);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
             this.id = this.hasher.hash();
@@ -101,6 +120,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this._setProperties();
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {
@@ -114,6 +134,11 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /**
+     * Dismisses the alert. If the alert was generated via the AlertService, it is removed from the DOM.
+     * Otherwise, it sets the display value to none. Fires the onDismiss event.
+     * @param manualDismiss Set to true to skip the dismiss animation.
+     */
     dismiss(manualDismiss: boolean = false): void {
         if (manualDismiss) {
             this.elRef.nativeElement.style.display = 'none';
@@ -126,6 +151,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.onDismiss.emit();
     }
 
+    /**
+     * Opens the alert.
+     */
     open(): void {
         if (!this.alertRef) {
             if (this.elRef.nativeElement.style.display === 'block') {
@@ -152,6 +180,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /** @hidden */
     handleAlertMouseEvent(event): void {
         if (event.type === 'mouseenter') {
             this.mouseInAlert = true;
@@ -160,6 +189,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-alert');
         if (this.type) {

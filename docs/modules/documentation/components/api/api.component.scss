@@ -1,0 +1,17 @@
+.api-main-header {
+    font-size: 1.75em;
+    margin: 0;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+}
+
+.api-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+fd-popover /deep/ .fd-button {
+    margin-right: 0;
+}

@@ -14,19 +14,31 @@ import { AlertConfig } from './alert-config';
 import { AlertInjector } from './alert-injector';
 import { AlertRef } from './alert-ref';
 
+/**
+ * Service used to dynamically generate an alert as an overlay.
+ */
 @Injectable()
 export class AlertService {
     private alerts: ComponentRef<AlertComponent>[] = [];
     private alertContainerRef: ComponentRef<AlertContainerComponent>;
 
+    /** @hidden */
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private appRef: ApplicationRef,
                 private injector: Injector) {}
 
+    /**
+     * Returns true if there are some alerts currently open. False otherwise.
+     */
     public hasOpenAlerts(): boolean {
         return this.alerts && this.alerts.length > 0;
     }
 
+    /**
+     * Opens an alert component with a content of type TemplateRef, Component Type or String.
+     * @param content Content of the alert component.
+     * @param alertConfig Configuration of the alert component.
+     */
     public open(content: TemplateRef<any> | Type<any> | string, alertConfig: AlertConfig = new AlertConfig()): AlertRef {
 
         // If empty or undefined alert array, create container
@@ -75,6 +87,9 @@ export class AlertService {
         return alertRef;
     }
 
+    /**
+     * Dismisses all service-opened alerts.
+     */
     public dismissAll(): void {
         this.alerts.forEach(ref => {
             this.destroyAlertComponent(ref);

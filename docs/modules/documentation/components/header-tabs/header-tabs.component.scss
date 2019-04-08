@@ -1,0 +1,20 @@
+:host {
+    display: block;
+}
+
+.fd-tabs {
+    margin-bottom: 0;
+    margin-top: 24px;
+}
+
+.fd-tabs__item {
+    padding: 0;
+    margin-right: 24px;
+}
+
+.fd-tabs__link {
+    min-width: 60px;
+    padding-right: 12px;
+    padding-left: 12px;
+    text-align: center;
+}

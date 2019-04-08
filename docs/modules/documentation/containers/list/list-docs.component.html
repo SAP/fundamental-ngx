@@ -1,25 +1,3 @@
-<header>List</header>
-<description>The List Component can be used to display a list of items with simple information such as scopes, names,
-    etc.
-    <br/><br/>
-    List item anchors will be keyboard navigable via the tab key provided they have <code>[routerLink]</code> or
-    <code>[attr.href]</code> attributes. List action buttons and checkboxes can be navigated via the tab key. List
-    checkboxes can be selected with the space bar.
-</description>
-<import module="ListModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-list&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: '<li fd-list-item>', description: 'A row in the list.  Must be a child of <fd-list>.' },
-    { name: '<fd-list-action>', description: 'Contextual dropdown for each list item.  Must be a child of <li fd-list-item>.' },
-    { name: '<fd-list-checkbox>', description: 'Adds a checkbox to the list item.  Must be a child of <li fd-list-item>.' }
-  ]
-}"></properties>
-
-<separator></separator>
 <h2>Simple List</h2>
 <description>A simple list. The list item can contain plain text or links.</description>
 <component-example [name]="'ex1'">

@@ -1,55 +1,28 @@
-<header>Badge and Label</header>
-<description>
-  <p>Badges and labels are used to indicate status. Colors, generally in combination with text, are used to easily
-    highlight
-    the state of an object.</p>
-  <p> - Black is used to indicate default or inactive status </p>
-  <p> - Green indicates positive status, used for active, published, approved </p>
-  <p> - Orange can be used for a warning status or to indicate that an action can be taken</p>
-  <p> - Red indicates error status</p>
-</description>
-<import module="BadgeLabelModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-badge&gt;</h1>
-<h1>&lt;fd-label&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'status',   description: 'The status of an object. Options include \'default\', \'success\', \'warning\', and \'error\'. Leave empty for default.'},
-    { name: 'modifier', description: 'Modifiers can be \'pill\' and \'filled\'. Leave empty for normal.'},
-    { name: 'isStatusLabel', description: 'When set to \'true\', the type of the label is \'Status Indicator Label\'. Leave empty for default type.'},
-    { name: 'statusIcon', description: 'Build-in status icon. Options include \'available\', \'away\', \'busy\', and \'offline\'.'},
-    { name: 'icon', description: 'The icon used with the status indicator. See the icon page for the list of icons.'}
-  ]
-}">
-</properties>
-
-<separator></separator>
-
 <h2>Default Badge</h2>
 <component-example [name]="'ex1'">
-  <fd-badge-default-example></fd-badge-default-example>
+    <fd-badge-default-example></fd-badge-default-example>
 </component-example>
 <code-example [code]="defaultBadgeHtmlType" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Pill Badge</h2>
-<p>
-  <code>fd-badge--pill</code> modifier can be used to render a pill version of the badge.</p>
+<description>
+    <code>fd-badge--pill</code> modifier can be used to render a pill version of the badge.
+</description>
 <component-example [name]="'ex2'">
-  <fd-badge-pill-example></fd-badge-pill-example>
+    <fd-badge-pill-example></fd-badge-pill-example>
 </component-example>
 <code-example [code]="pillBadgeHtmlType" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Filled Badge</h2>
-<p>
-  <code>fd-badge--filled</code> modifier can be used to render a filled version of the badge.</p>
+<description>
+    <code>fd-badge--filled</code> modifier can be used to render a filled version of the badge.
+</description>
 <component-example [name]="'ex3'">
-  <fd-badge-filled-example></fd-badge-filled-example>
+    <fd-badge-filled-example></fd-badge-filled-example>
 </component-example>
 <code-example [code]="filledBadgeHtmlType" [language]="'HTML'"></code-example>
 
@@ -57,7 +30,7 @@
 
 <h2>Label</h2>
 <component-example [name]="'ex4'">
-  <fd-label-default-example></fd-label-default-example>
+    <fd-label-default-example></fd-label-default-example>
 </component-example>
 <code-example [code]="labelHtmlType" [language]="'HTML'"></code-example>
 
@@ -65,7 +38,7 @@
 
 <h2>Status Indicator Label with build in status icons</h2>
 <component-example [name]="'ex5'">
-  <fd-label-build-status-example></fd-label-build-status-example>
+    <fd-label-build-status-example></fd-label-build-status-example>
 </component-example>
 <code-example [code]="statusIconLabelHtmlType" [language]="'HTML'"></code-example>
 
@@ -73,7 +46,7 @@
 
 <h2>Status Indicator Label with any icons</h2>
 <component-example [name]="'ex6'">
-  <fd-label-icon-status-example></fd-label-icon-status-example>
+    <fd-label-icon-status-example></fd-label-icon-status-example>
 </component-example>
 <code-example [code]="anyIconLabelHtmlType" [language]="'HTML'"></code-example>
 
@@ -81,28 +54,31 @@
 
 <h2>Status Indicator Label with sementic colors</h2>
 <component-example [name]="'ex7'">
-  <fd-label-status-colors-example></fd-label-status-colors-example>
+    <fd-label-status-colors-example></fd-label-status-colors-example>
 </component-example>
 <code-example [code]="semanticColorLabelHtmlType" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <div *ngIf="data.properties.type === 'badge'">
-    <fd-badge [status]="data.properties.status" [modifier]="data.properties.modifier">{{data.properties.text}}</fd-badge>
-  </div>
-  <div *ngIf="data.properties.type === 'label'">
-    <fd-label [status]="data.properties.status">{{data.properties.text}}</fd-label>
-  </div>
-  <div *ngIf="data.properties.type === 'status label'">
-    <fd-label *ngIf="!data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status" [statusIcon]="data.properties.statusIcon">{{data.properties.text}}</fd-label>
-    <fd-label *ngIf="data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status" [icon]="data.properties.icon">{{data.properties.text}}</fd-label>
-  </div>
+    <div *ngIf="data.properties.type === 'badge'">
+        <fd-badge [status]="data.properties.status"
+                  [modifier]="data.properties.modifier">{{data.properties.text}}</fd-badge>
+    </div>
+    <div *ngIf="data.properties.type === 'label'">
+        <fd-label [status]="data.properties.status">{{data.properties.text}}</fd-label>
+    </div>
+    <div *ngIf="data.properties.type === 'status label'">
+        <fd-label *ngIf="!data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
+                  [statusIcon]="data.properties.statusIcon">{{data.properties.text}}</fd-label>
+        <fd-label *ngIf="data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
+                  [icon]="data.properties.icon">{{data.properties.text}}</fd-label>
+    </div>
 </playground>
 
 <style>
-  ::ng-deep fd-badge,
-  ::ng-deep fd-label {
-    margin-right: 20px;
-  }
+    ::ng-deep fd-badge,
+    ::ng-deep fd-label {
+        margin-right: 20px;
+    }
 </style>

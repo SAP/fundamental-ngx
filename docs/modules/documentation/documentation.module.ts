@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { SchemaModule } from '../schema/schema.module';
 
 // modules
@@ -12,7 +12,6 @@ import { FundamentalNgxModule } from '../../../library/src/lib/fundamental-ngx.m
 // components
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { PlayGroundComponent } from './components/playground/playground.component';
-import { PropertiesComponent } from './components/properties/properties.component';
 import { CodeExampleComponent } from './components/code-example/code-example.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DescriptionComponent } from './components/description/description';
@@ -253,62 +252,56 @@ import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ApiComponent } from './components/api/api.component';
+import { AlertConfig } from '../../../library/src/lib/alert/alert-config';
+import { ApiDocsService } from './services/api-docs.service';
+import { AlertHeaderComponent } from './containers/alert/alert-header/alert-header.component';
+import { API_FILES } from './utilities/api-files';
+import { HeaderTabsComponent } from './components/header-tabs/header-tabs.component';
+import { ActionBarHeaderComponent } from './containers/action-bar/action-bar-header/action-bar-header.component';
+import { BadgeLabelHeaderComponent } from './containers/badge-label/badge-label-header/badge-label-header.component';
+import { BreadcrumbHeaderComponent } from './containers/breadcrumb/breadcrumb-header/breadcrumb-header.component';
+import { ButtonHeaderComponent } from './containers/button/button-header/button-header.component';
+import { ButtonGroupHeaderComponent } from './containers/button-group/button-group-header/button-group-header.component';
+import { CalendarHeaderComponent } from './containers/calendar/calendar-header/calendar-header.component';
+import { ComboboxInputHeaderComponent } from './containers/combobox-input/combobox-input-header/combobox-input-header.component';
+import { DatePickerHeaderComponent } from './containers/date-picker/date-picker-header/date-picker-header.component';
+import { DatetimePickerHeaderComponent } from './containers/datetime-picker/datetime-picker-header/datetime-picker-header.component';
+import { DropdownHeaderComponent } from './containers/dropdown/dropdown-header/dropdown-header.component';
+import { FileInputHeaderComponent } from './containers/file-input/file-input-header/file-input-header.component';
+import { FormHeaderComponent } from './containers/form/form-header/form-header.component';
+import { IconHeaderComponent } from './containers/icon/icon-header/icon-header.component';
+import { IdentifierHeaderComponent } from './containers/identifier/identifier-header/identifier-header.component';
+import { ImageHeaderComponent } from './containers/image/image-header/image-header.component';
+import { InfiniteScrollHeaderComponent } from './containers/infinite-scroll/infinite-scroll-header/infinite-scroll-header.component';
+import { InlineHelpHeaderComponent } from './containers/inline-help/inline-help-header/inline-help-header.component';
+import { InputGroupHeaderComponent } from './containers/input-group/input-group-header/input-group-header.component';
+import { ListHeaderComponent } from './containers/list/list-header/list-header.component';
+import { LoadingSpinnerHeaderComponent } from './containers/loading-spinner-docs/loading-spinner-header/loading-spinner-header.component';
+import { MenuHeaderComponent } from './containers/menu/menu-header/menu-header.component';
+import { ModalDocsHeaderComponent } from './containers/modal/modal-docs-header/modal-docs-header.component';
+import { MultiInputHeaderComponent } from './containers/multi-input/multi-input-header/multi-input-header.component';
+import { PaginationHeaderComponent } from './containers/pagination/pagination-header/pagination-header.component';
+import { PanelDocsHeaderComponent } from './containers/panel/panel-docs-header/panel-docs-header.component';
+import { PopoverHeaderComponent } from './containers/popover/popover-header/popover-header.component';
+import { PopoverDirectiveHeaderComponent } from './containers/popover-directive/popover-directive-header/popover-directive-header.component';
+import { ScrollSpyHeaderComponent } from './containers/scroll-spy/scroll-spy-header/scroll-spy-header.component';
+import { SearchInputHeaderComponent } from './containers/search-input/search-input-header/search-input-header.component';
+import { ShellbarDocsHeaderComponent } from './containers/shellbar/shellbar-docs-header/shellbar-docs-header.component';
+import { SideNavigationHeaderComponent } from './containers/side-navigation/side-navigation-header/side-navigation-header.component';
+import { TableDocsHeaderComponent } from './containers/table/table-docs-header/table-docs-header.component';
+import { TabsHeaderComponent } from './containers/tabs/tabs-header/tabs-header.component';
+import { TileDocsHeaderComponent } from './containers/tile/tile-docs-header/tile-docs-header.component';
+import { TimeHeaderComponent } from './containers/time/time-header/time-header.component';
+import { TimePickerHeaderComponent } from './containers/time-picker/time-picker-header/time-picker-header.component';
+import { ToggleHeaderComponent } from './containers/toggle/toggle-header/toggle-header.component';
+import { TokenHeaderComponent } from './containers/token/token-header/token-header.component';
+import { TreeHeaderComponent } from './containers/tree/tree-header/tree-header.component';
+import { ROUTES } from './documentation.routes';
 
 export function highlightJsFactory() {
     return hljs;
 }
-
-const ROUTES: Routes = [
-    {
-        path: '',
-        component: DocumentationComponent,
-        children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'action-bar', component: ActionBarDocsComponent },
-            { path: 'alert', component: AlertDocsComponent },
-            { path: 'badgeLabel', component: BadgeLabelDocsComponent },
-            { path: 'breadcrumb', component: BreadcrumbDocsComponent },
-            { path: 'button', component: ButtonDocsComponent },
-            { path: 'buttonGroup', component: ButtonGroupDocsComponent },
-            { path: 'calendar', component: CalendarDocsComponent },
-            { path: 'comboboxInput', component: ComboboxInputDocsComponent },
-            { path: 'datePicker', component: DatePickerDocsComponent },
-            { path: 'datetime-picker', component: DatetimePickerDocsComponent },
-            { path: 'dropdown', component: DropdownDocsComponent },
-            { path: 'file-input', component: FileInputDocsComponent },
-            { path: 'form', component: FormDocsComponent },
-            { path: 'icon', component: IconDocsComponent },
-            { path: 'identifier', component: IdentifierDocsComponent },
-            { path: 'image', component: ImageDocsComponent },
-            { path: 'infiniteScroll', component: InfiniteScrollDocsComponent },
-            { path: 'inlineHelp', component: InlineHelpDocsComponent },
-            { path: 'inputGroup', component: InputGroupDocsComponent },
-            { path: 'list', component: ListDocsComponent },
-            { path: 'loadingSpinner', component: LoadingSpinnerDocsComponent },
-            { path: 'menu', component: MenuDocsComponent },
-            { path: 'modal', component: ModalDocsComponent },
-            { path: 'multi-input', component: MultiInputDocsComponent },
-            { path: 'pagination', component: PaginationDocsComponent },
-            { path: 'panel', component: PanelDocsComponent },
-            { path: 'popover', component: PopoverDocsComponent },
-            { path: 'popover-directive', component: PopoverDirectiveDocsComponent },
-            { path: 'scroll-spy', component: ScrollSpyDocsComponent },
-            { path: 'searchInput', component: SearchInputDocsComponent },
-            { path: 'shellbar', component: ShellbarDocsComponent },
-            { path: 'sideNavigation', component: SideNavigationDocsComponent },
-            { path: 'table', component: TableDocsComponent },
-            { path: 'tabs', component: TabsDocsComponent },
-            { path: 'tile', component: TileDocsComponent },
-            { path: 'time', component: TimeDocsComponent },
-            { path: 'timePicker', component: TimePickerDocsComponent },
-            { path: 'tree', component: TreeDocsComponent },
-            { path: 'toggle', component: ToggleDocsComponent },
-            { path: 'token', component: TokenDocsComponent },
-            { path: 'home', component: HomeDocsComponent },
-            { path: 'new-component', component: NewComponentComponent }
-        ]
-    }
-];
 
 @NgModule({
     declarations: [
@@ -317,7 +310,6 @@ const ROUTES: Routes = [
         CodeExampleComponent,
         HeaderComponent,
         DescriptionComponent,
-        PropertiesComponent,
         SeparatorComponent,
         ImportComponent,
         ActionBarDocsComponent,
@@ -510,7 +502,49 @@ const ROUTES: Routes = [
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
-        BackdropExamplesComponent
+        BackdropExamplesComponent,
+        ApiComponent,
+        AlertHeaderComponent,
+        HeaderTabsComponent,
+        ActionBarHeaderComponent,
+        BadgeLabelHeaderComponent,
+        BreadcrumbHeaderComponent,
+        ButtonHeaderComponent,
+        ButtonGroupHeaderComponent,
+        CalendarHeaderComponent,
+        ComboboxInputHeaderComponent,
+        DatePickerHeaderComponent,
+        DatetimePickerHeaderComponent,
+        DropdownHeaderComponent,
+        FileInputHeaderComponent,
+        FormHeaderComponent,
+        IconHeaderComponent,
+        IdentifierHeaderComponent,
+        ImageHeaderComponent,
+        InfiniteScrollHeaderComponent,
+        InlineHelpHeaderComponent,
+        InputGroupHeaderComponent,
+        ListHeaderComponent,
+        LoadingSpinnerHeaderComponent,
+        MenuHeaderComponent,
+        ModalDocsHeaderComponent,
+        MultiInputHeaderComponent,
+        PaginationHeaderComponent,
+        PanelDocsHeaderComponent,
+        PopoverHeaderComponent,
+        PopoverDirectiveHeaderComponent,
+        ScrollSpyHeaderComponent,
+        SearchInputHeaderComponent,
+        ShellbarDocsHeaderComponent,
+        SideNavigationHeaderComponent,
+        TableDocsHeaderComponent,
+        TabsHeaderComponent,
+        TileDocsHeaderComponent,
+        TimeHeaderComponent,
+        TimePickerHeaderComponent,
+        ToggleHeaderComponent,
+        TokenHeaderComponent,
+        TreeHeaderComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
@@ -527,6 +561,10 @@ const ROUTES: Routes = [
         FundamentalNgxModule,
         HttpClientModule
     ],
-    providers: [CopyService]
+    providers: [
+        CopyService,
+        ApiDocsService
+    ]
 })
-export class DocumentationModule {}
+export class DocumentationModule {
+}

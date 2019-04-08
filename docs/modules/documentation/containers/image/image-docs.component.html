@@ -1,31 +1,4 @@
-<header>Image</header>
-<description>When using images you can use our helpers classes to adjust the size and the shape.</description>
-<import module="ImageModule" path="fundamental-ngx"></import>
-<separator></separator>
-<properties [properties]="{
-  inputs: [
-    { name: 'size', description: 'String - the size of the image. Size options include \'s\' (24x24), \'m\' (36x36), and \'l\' (48x48).' },
-    { name: 'photo', description: 'String - picture url.' },
-    { name: 'circle', description: 'Boolean - when set to true renders a round image.' }
-  ]
-}"></properties>
-<description>The inputs for <code>fd-image</code> will be translated into classes attributed to fiori-fundamentals
-  guidelines.
-  <br>For example:
-  <br>if it is passed <code>s</code> for size the class <code>fd-image--s</code> will be added to the element.
-</description>
-<separator></separator>
-
-<h2>Extensibility</h2>
-<description>The image implementation allows certain extensibility in terms of options for the inputs. <code>fd-image</code>
-  inputs doesn't have a restriction for the predefined values.
-  <br>The predefined values for the input <code>size</code> are <code>s</code>, <code>m</code>, <code>l</code>, but
-  <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
-  <code>fd-image--xxs</code>.
-</description>
-
 <h2>Sizes</h2>
-
 <component-example [name]="'ex1'">
   <fd-image-sizes-example></fd-image-sizes-example>
 </component-example>
@@ -34,11 +7,27 @@
 <separator></separator>
 
 <h2>Shapes</h2>
-
 <component-example [name]="'ex2'">
   <fd-image-shapes-example></fd-image-shapes-example>
 </component-example>
 <code-example [code]="imageShapesHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<description>The inputs for <code>fd-image</code> will be translated into classes attributed to fiori-fundamentals
+    guidelines.
+    <br>For example:
+    <br>if it is passed <code>s</code> for size the class <code>fd-image--s</code> will be added to the element.
+</description>
+<separator></separator>
+
+<h2>Extensibility</h2>
+<description>The image implementation allows certain extensibility in terms of options for the inputs. <code>fd-image</code>
+    inputs doesn't have a restriction for the predefined values.
+    <br>The predefined values for the input <code>size</code> are <code>s</code>, <code>m</code>, <code>l</code>, but
+    <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
+    <code>fd-image--xxs</code>.
+</description>
 
 <separator></separator>
 

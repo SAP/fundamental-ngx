@@ -15,6 +15,9 @@ import { ModalConfig } from '../modal-utils/modal-config';
 import { ModalRef } from '../modal-utils/modal-ref';
 import { ModalInjector } from '../modal-utils/modal-injector';
 
+/**
+ * Service used to dynamically generate a modal.
+ */
 @Injectable()
 export class ModalService {
     private modals: {
@@ -23,20 +26,33 @@ export class ModalService {
         containerRef?: ComponentRef<ModalContainer>
     }[] = [];
 
+    /** @hidden */
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private appRef: ApplicationRef,
                 private injector: Injector) {}
 
+    /**
+     * Status of the modal service.
+     * Returns true if there are open modals, false otherwise.
+     */
     public hasOpenModals(): boolean {
         return this.modals && this.modals.length > 0;
     }
 
+    /**
+     * Dismisses all currently open modals.
+     */
     public dismissAll(): void {
         this.modals.forEach(item => {
             this.destroyModalComponent(item.modalRef);
         });
     }
 
+    /**
+     * Opens a modal component with a content of type TemplateRef or a component type.
+     * @param contentType Content of the modal component.
+     * @param modalConfig Configuration of the modal component.
+     */
     public open(contentType: Type<any> | TemplateRef<any>, modalConfig: ModalConfig = new ModalConfig()): ModalRef {
 
         // Get default values from model

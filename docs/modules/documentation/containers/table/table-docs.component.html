@@ -1,38 +1,25 @@
-<header>Table</header>
-<description>The Table component is a common component used to display data that can be compared. Usually a set of item
-  of
-  the same type which data is divided on columns to facilitate the comparison between items.</description>
-<import module="TableModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-table&gt;</h1>
-<properties [properties]="{
-  childComponents: [
-    { name: '<fd-table-header>', description: 'The table header, contains \'<th>\' header cell elements.'},
-    { name: '<fd-table-body>', description: 'The table body. Use \'<tr *ngFor>\' to iterate over your collection.  Then construct a row using \'<td>\'s as you would for a standard HTML table.'}
-  ],
-  directives: [
-    { name: 'fdColumnSortable', description: 'Directive for handling sort functionality for a specific column.'}
-  ]
-}"></properties><br>
-<separator></separator>
-
 <h2>Table</h2>
-<p>Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired column(s) to sort, set the <code>[sortDir]</code>
-input to the corresponding component variable that dictates sort direction, and use <code>(click)</code> to call the sorting algorithm on your component. Valid values
-for sort direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in this example that calling a sort function for
-one column will reset the sort direction for the other sortable column.</p>
-<br>
+<description>
+    Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired
+    column(s) to sort, set the <code>[sortDir]</code>
+    input to the corresponding component variable that dictates sort direction, and use <code>(click)</code> to call the
+    sorting algorithm on your component. Valid values
+    for sort direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in
+    this example that calling a sort function for
+    one column will reset the sort direction for the other sortable column.
+</description>
 <component-example [name]="'ex1'">
-  <fd-table-example></fd-table-example>
+    <fd-table-example></fd-table-example>
 </component-example>
 <code-example [code]="tableHtml" [language]="'HTML'"></code-example>
 <code-example [code]="tableJs" [language]="'typescript'"></code-example>
 
 <separator></separator>
 <h2>Table with Checkboxes</h2>
-<description>While there is no formal support for row selection, fundamental-ngx does provide the tools to accomplish this. The following example is simply one of the many methods that can be used.</description>
+<description>
+    While there is no formal support for row selection, fundamental-ngx does provide the tools to accomplish
+    this. The following example is simply one of the many methods that can be used.
+</description>
 <component-example [name]="'ex2'">
     <fd-table-checkboxes-example></fd-table-checkboxes-example>
 </component-example>

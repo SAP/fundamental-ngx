@@ -1,30 +1,3 @@
-<header>Time</header>
-<description>
-    The time component is used for a single time value. Multiple components can be used in the time-picker to
-    assemble a clock time. A max of four will account for hours, minutes, seconds and period of the day. It will be rare
-    to see this component used outside of it being composed in the time-picker component.
-    <br/><br/>
-    Time component buttons are navigable via the tab key and can be pressed via the space bar or enter key.
-</description>
-<import module="TimeModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-time&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'time', description: 'An object that contains three integer properties: \'hour\' (ranging from 0 to 23), \'minute\' (ranging from 0 to 59), and \'second\' (ranging from 0 to 59). ' },
-    { name: 'meridian', description: 'Boolean, when set to true, uses the 24 hour clock (hours ranging from 0 to 23) and does not display a period control. Default is false.'},
-    { name: 'validate', description: 'Boolean, when set to false, does not set the input field to invalid state on invalid entry.  Default is true.'},
-    { name: 'spinners', description: 'Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true.'},
-    { name: 'displaySeconds', description: 'Boolean, when set to false, hides the input for seconds. Default is true.'},
-    { name: 'disabled', description: 'Disables the component.'}
-  ]
-}"></properties>
-
-<separator></separator>
-
 <h2>24-Hour Clock</h2>
 <description>This is the default clock setting.</description>
 <component-example [name]="'ex1'">
@@ -37,7 +10,10 @@
 <separator></separator>
 
 <h2>12-Hour Clock</h2>
-<p>You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>. The passed time object will still contain a 24-hour clock.</p>
+<description>
+    You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>.
+    The passed time object will still contain a 24-hour clock.
+</description>
 <component-example [name]="'ex2'">
   <p>
     <fd-time-12-example></fd-time-12-example>
@@ -70,7 +46,9 @@
 <separator></separator>
 
 <h2>Disabled State</h2>
-<p>You can disable the entire component by setting <code>[disabled]="true"</code>.</p>
+<description>
+    You can disable the entire component by setting <code>[disabled]="true"</code>.
+</description>
 <component-example [name]="'ex5'">
   <p>
     <fd-time-disabled-example></fd-time-disabled-example>

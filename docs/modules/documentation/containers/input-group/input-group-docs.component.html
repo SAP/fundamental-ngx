@@ -1,99 +1,63 @@
-<header>Input Group</header>
-<description>The Input groups component are form inputs with add-ons that allows the user to better understand the
-  information been entered.</description>
-<import module="InputGroupModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-input-group&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'ngModel', description: 'Text to be used in the input.  Should be used with two-way binding syntax.' },
-    { name: 'placement', description: 'Use \'before\' to place the add-on before the input and \'after\' to place it after.  Default is after. ' },
-    { name: 'inline', description: 'If true, the width of the input group does not take up the full screen.  Default is false.' },
-    { name: 'placeholder', description: 'Placeholder text for the input' },
-    { name: 'addOnText', description: 'Text to be used in the add-on.  Note that the addOnText will be hidden if a glyph icon is present.' },
-    { name: 'glyph', description: 'Icon to be used in the add-on.' },
-    { name: 'button', description: 'When set to true, this turns the add-on into a button, which fires an addOnButtonClicked event.' },
-    { name: 'disabled', description: 'Disables the input group.' },
-    { name: 'compact', description: 'Set to \'true\' for the compact input group.' }
-]
-}">
-</properties>
-
-<separator></separator>
-
 <h2>Text add-on</h2>
-<p>The Input with text add-on component is used mainly to specify the type of the data being entered, like: currency,
-  unit of measure, etc.
-  The informational add-on can be left or right aligned.</p>
+<description>
+    The Input with text add-on component is used mainly to specify the type of the data being entered, like: currency,
+    unit of measure, etc.
+    The informational add-on can be left or right aligned.
+</description>
 <component-example [name]="'ex1'">
-  <fd-input-group-text-example></fd-input-group-text-example>
+    <fd-input-group-text-example></fd-input-group-text-example>
 </component-example>
 <code-example [code]="textAddOnHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Icon add-on</h2>
-<p>An icon can be used instead of text by providing a 'glyph' attribute.</p>
+<description>
+    An icon can be used instead of text by providing a 'glyph' attribute.
+</description>
 <component-example [name]="'ex2'">
-  <fd-input-group-icon-example></fd-input-group-icon-example>
+    <fd-input-group-icon-example></fd-input-group-icon-example>
 </component-example>
 <code-example [code]="iconAddOnHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Button add-on</h2>
-<p>Adding <code>[button]="true"</code> to the component turns either the icon add-on or text add-on into a button,
-  which emits an event <code>addOnButtonClicked($event)</code>.</p>
+<description>
+    Adding <code>[button]="true"</code> to the component turns either the icon add-on or text add-on into a button,
+    which emits an event <code>addOnButtonClicked($event)</code>.
+</description>
 <component-example [name]="'ex3'">
-  <fd-input-group-button-example></fd-input-group-button-example>
+    <fd-input-group-button-example></fd-input-group-button-example>
 </component-example>
 <code-example [code]="buttonIconAddOnHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Compact mode</h2>
-<p>Adding <code>[compact]="true"</code> to the component makes the component compact.</p>
+<description>
+    Adding <code>[compact]="true"</code> to the component makes the component compact.
+</description>
 <component-example [name]="'ex4'">
-  <fd-input-group-text-compact-example></fd-input-group-text-compact-example>
+    <fd-input-group-text-compact-example></fd-input-group-text-compact-example>
 </component-example>
 <code-example [code]="textCompactHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
-<h1>&lt;fd-input-group-number&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'ngModel', description: 'Number to be used in the input.  Should be used with two-way binding syntax.' },
-    { name: 'disabled', description: 'Disables the input group.' }
-]
-}">
-</properties>
-
-<p>The user can increase or decrease a number value using the spinner add-on.</p>
+<h2>&lt;fd-input-group-number&gt;</h2>
+<description>The user can increase or decrease a number value using the spinner add-on.</description>
 <component-example [name]="'ex5'">
-  <fd-input-group-number-example></fd-input-group-number-example>
+    <fd-input-group-number-example></fd-input-group-number-example>
 </component-example>
 <code-example [code]="numberInputHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
-<h1>&lt;fd-input-group-search&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'ngModel', description: 'Text to be used in the input.  Should be used with two-way binding syntax.' },
-    { name: 'disabled', description: 'Disables the input group.' }
-]
-}">
-</properties>
-
-
-<p>This input group automatically shows a clear search button when the user has entered a value in the input.</p>
+<h2>&lt;fd-input-group-search&gt;</h2>
+<description>This input group automatically shows a clear search button when the user has entered a value in the input.</description>
 <component-example [name]="'ex6'">
-  <fd-input-group-search-example></fd-input-group-search-example>
+    <fd-input-group-search-example></fd-input-group-search-example>
 </component-example>
 <code-example [code]="searchInputHtml" [language]="'HTML'"></code-example>
 
@@ -101,8 +65,10 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
 
-  <fd-input-group [addOnText]="data.properties.addOnText" [placeholder]="data.properties.placeholder" [button]="data.properties.button"
-    [glyph]="data.properties.glyph" [inline]="data.properties.inline" [(ngModel)]="data.properties.ngModel"
-    [placement]="data.properties.placement" [disabled]="data.state.disabled"></fd-input-group>
+    <fd-input-group [addOnText]="data.properties.addOnText" [placeholder]="data.properties.placeholder"
+                    [button]="data.properties.button"
+                    [glyph]="data.properties.glyph" [inline]="data.properties.inline"
+                    [(ngModel)]="data.properties.ngModel"
+                    [placement]="data.properties.placement" [disabled]="data.state.disabled"></fd-input-group>
 
 </playground>
