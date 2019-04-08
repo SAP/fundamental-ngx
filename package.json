@@ -5,7 +5,7 @@
     "main": "dist/fundamental-ngx/index.js",
     "scripts": {
         "build": "ng build",
-        "build-docs": "npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
+        "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md",
         "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../..",
         "build-src": "gulp build-src",
@@ -20,7 +20,8 @@
         "release:create": "create-release",
         "start": "npm run build-doc && ng serve",
         "test": "ng test fundamental-ngx --watch false --code-coverage true --browsers=ChromeHeadless",
-        "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\""
+        "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
+        "compile-typedoc": "rm -rf docs/assets/typedoc && typedoc --out docs/assets/typedoc library/src/lib --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc-theme"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -79,6 +80,7 @@
         "tsickle": "^0.34.0",
         "tslib": "^1.9.3",
         "tslint": "^5.13.0",
+        "typedoc": "^0.14.2",
         "typescript": "3.1.1"
     },
     "pre-commit": {

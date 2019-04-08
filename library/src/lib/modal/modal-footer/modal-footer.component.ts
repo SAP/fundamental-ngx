@@ -1,5 +1,14 @@
 import { Component, HostBinding } from '@angular/core';
 
+/**
+ * Applies fundamental layout and styling to the contents of a modal footer.
+ *
+ * ```html
+ * <fd-modal-footer>
+ *     <button>Do action</button>
+ * </fd-modal-footer>
+ * ```
+ */
 @Component({
     selector: 'fd-modal-footer',
     templateUrl: './modal-footer.component.html',
@@ -11,5 +20,8 @@ import { Component, HostBinding } from '@angular/core';
     `]
 })
 export class ModalFooterComponent {
-    @HostBinding('class.fd-modal__footer') modalFooter = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-modal__footer')
+    modalFooter = true;
 }

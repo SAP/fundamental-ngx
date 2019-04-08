@@ -4,10 +4,10 @@ import {
     OnInit,
     HostListener,
     ElementRef,
-    EventEmitter,
-    Output,
     forwardRef,
     HostBinding,
+    Output,
+    EventEmitter,
     OnDestroy
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
@@ -132,7 +132,9 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     }
 
     getInputValue(e) {
-        this.dateFromDatePicker.next(e);
+        if (e !== this.inputFieldDate) {
+            this.dateFromDatePicker.next(e);
+        }
     }
 
     @HostListener('document:keydown.escape', [])

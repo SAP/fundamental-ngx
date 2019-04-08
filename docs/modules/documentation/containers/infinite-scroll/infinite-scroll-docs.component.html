@@ -1,29 +1,3 @@
-<header>Infinite Scroll</header>
-<description>
-    Infinite scroll is a generic <strong>directive</strong> which can be used to load more elements as the user scrolls
-    down a parent container. It is particularly useful when dealing with large lists which cannot be queried at the same
-    time. This directive allows you to only query more elements when the scrolling reaches a certain point.
-    <br/><br/>
-    Inside the ngOnInit method of the directive, an observable is created from the scroll event of the element which the
-    directive is attached to. It then monitors the scrolling and emits an event when the inputted percentage value is
-    reached.
-</description>
-<import module="InfiniteScrollModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>fdInfiniteScroll</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'scrollPercent', description: 'Number between 0 and 100, the scrolling percentage at which the onScrollAction event will be emitted.' }
-  ],
-  outputs: [
-    { name: 'onScrollAction', description: 'An event which is emitted when the user scrolls down to the provided percentage value.' }
-  ]
-}"></properties>
-
-<separator></separator>
 <h2>Basic Infinite Scroll</h2>
 <description>It can be used with more than just fundamental-ngx components! The example below uses standard divs.
 </description>
@@ -32,19 +6,3 @@
 </component-example>
 <code-example [code]="basicInfiniteScrollHtml" [language]="'HTML'"></code-example>
 <code-example [code]="basicInfiniteScrollTs" [language]="'typescript'"></code-example>
-
-<!--<separator></separator>-->
-<!--<h2>Disabled State</h2>-->
-<!--<description>Toggle can be in the disabled state, which prevents the user from interacting with it.</description>-->
-<!--<component-example [name]="'ex2'">-->
-    <!--<fd-disabled-toggle-example></fd-disabled-toggle-example>-->
-<!--</component-example>-->
-<!--<code-example [code]="toggleDisableHtml" [language]="'HTML'"></code-example>-->
-
-<!--<code-example [code]="toggleBindingTs" [language]="'typescript'"></code-example>-->
-
-<!--<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">-->
-    <!--<fd-toggle [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked" [size]="data.modifier.size">-->
-        <!--Example Toggle-->
-    <!--</fd-toggle>-->
-<!--</playground>-->

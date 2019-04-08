@@ -1,12 +1,4 @@
-<header>Tree</header>
-<description>The Tree component is used to display hierarchical data in tabular way. Permitting the user to dig deeper
-  into the data in an simple way. Along with displaying the hierarchy information it can also contain other data in the
-  same node as well.</description>
-<import module="TreeModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-tree&gt;</h1>
+<h2>&lt;fd-tree&gt;</h2>
 
 There are two different types of tree cells you can use, the 'simple' cells and the 'rich' cells. Simple cells can only
 display text. Rich cells can contain plain text or links. The tree component requires only two root arguments, a
@@ -21,14 +13,6 @@ property is an array of objects that match this object's structure.
 
 <h2>Simple Tree</h2>
 This is an example of a tree with simple cells, where the rowData is an array of strings.<br><br>
-<properties [properties]="{
-    inputs: [
-    { name: 'headers', description: 'Array of strings for the column headers of the tree' },
-    { name: 'treeData', description: 'Array of objects that contain two properties, rowData (an array of strings containing data for each column in the row), and children (an array of objects containing additional rows).'},
-    { name: 'displayTreeActions', description: 'Boolean value to show or hide an action button on each tree row that displays Edit and Delete options.  When clicked, these buttons emit the events editRowClicked and deleteRowClicked, respectively, passing the selected row as an argument.  You can catch these events in your component that is housing the tree component.'}
-  ]
-  }">
-</properties>
 <br>
 <component-example [name]="'ex1'">
   <fd-tree (editRowClicked)="editRowClicked($event)"
@@ -47,22 +31,6 @@ This is an example of a tree with simple cells, where the rowData is an array of
 <h2>Rich Tree</h2>
 This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one
 or both of the following properties:<br><br>
-<properties [properties]="{
-    properties: [
-    { name: 'displayText', description: 'The text to display in the cell.  If omitted, the link url will be displayed.' },
-    { name: 'linkUrl', description: 'If provided, this is the URL the link will navigate to.' }
-  ]
-  }">
-</properties>
-<br><br>
-<properties [properties]="{
-    inputs: [
-    { name: 'headers', description: 'Array of strings for the column headers of the tree' },
-    { name: 'treeData', description: 'Array of objects that contain two properties, rowData (an array of objects containing data for each column in the row), and children (an array of objects containing additional rows).'}
-  ]
-  }">
-</properties>
-<br>
 <component-example [name]="'ex2'">
   <fd-tree [headers]="data.properties.headers"
            [treeData]="data.properties.richTreeData">

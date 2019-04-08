@@ -1,35 +1,3 @@
-<header>Search Input</header>
-<description>
-    Search input with a list of results that filters automatically through a <strong>startsWith</strong> pipe.
-</description>
-<import module="SearchInputModule" path="fundamental-ngx"></import>
-
-<separator></separator>
-
-<h1>&lt;fd-search-input&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'ngModel', description: 'Text to be used in the input.  Should be used with two-way binding syntax.' },
-    { name: 'searchFunction', description: 'Function to be called when the user presses the \'Enter\' key.'},
-    { name: 'dropdownValues', description: 'An array of objects, each containing a (string) \'text\' and (Function) \'callback\' property. The callback function is executed when the item is clicked.' },
-    { name: 'disabled', description: 'Boolean, disables the search input.'},
-    { name: 'placeholder', description: 'Placeholder for the search input.'},
-    { name: 'inShellbar', description: 'Boolean, set to \'true\' if this search is for use within the shellbar.'},
-    { name: 'compact', description: 'Boolean, set to \'true\' for the compact search input.'},
-    { name: 'glyph', description: 'String, use to select what icon appears in the button. Defaults to search.' },
-    { name: 'highlight', description: 'Boolean, whether to highlight the search term in the results, if it is included. Defaults to true.' },
-    { name: 'filterFn', description: 'Function. Filter function to apply to the list. See example below.' },
-    { name: 'fillOnSelect', description: 'Boolean, whether to automatically fill the input with the selected value. Defaults to true.' },
-    { name: 'closeOnSelect', description: 'Boolean, whether to automatically close the popover when a value is selected. Defaults to true.' }
-  ],
-  outputs: [
-    { name: 'itemClicked', description: 'Fired when an item in the menu is clicked, or the enter key is pressed while the item is focused. Returns the term.'}
-  ]
-}"></properties>
-
-<separator></separator>
-
 <h2>Standard Search Input</h2>
 <description>The standard version of the component that most people will likely use regularly.</description>
 <component-example [name]="'ex1'">

@@ -1,33 +1,3 @@
-<header>File Input</header>
-<description>
-    A very flexible component that prompts the user for a file. Supports multiple selection, accept only certain extensions, and more.
-    The aim is to facilitate the use and styling of the native file input. The projected content can have a file dragged and dropped over.
-</description>
-<import module="FileInputModule" path="fundamental-ngx"></import>
-
-<separator></separator>
-
-<h1>&lt;fd-file-input&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'disabled', description: 'Boolean. Disable the file input. Defaults to false.' },
-    { name: 'multiple', description: 'Boolean. Whether multiple files can be input at once. Defaults to true.' },
-    { name: 'accept', description: 'String. Allowed file extensions. Format: \'.ext,.png,.jpg\'.' },
-    { name: 'dragndrop', description: 'Boolean. Whether the drag and drop feature is enabled. Defaults to true.' },
-    { name: 'maxFileSize', description: 'Number. The maximum file size to allow in bytes.' },
-    { name: 'ngModel', description: 'Files from the form. Should be used with two-way binding syntax.' }
-  ],
-  outputs: [
-      { name: 'onSelect', description: 'Fires when new files are selected. Use $event to retrieve.' },
-      { name: 'onInvalidFiles', description: 'Fires when some files are refused. Use $event to retrieve.' },
-      { name: 'onDragEnter', description: 'Fires once when the user drags a file into the dropzone.' },
-      { name: 'onDragLeave', description: 'Fires once when the user leaves the dropzone with a file dragged.' }
-  ]
-}"></properties>
-
-<separator></separator>
-
 <h2>Simple File Input</h2>
 <description>Used in this context, it will only allow a set of extensions to be added.</description>
 <component-example [name]="'ex1'">

@@ -1,23 +1,4 @@
-<header>Identifier</header>
-<description></description>
-<import module="IdentifierModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-identifier&gt;</h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'size', description: 'String - Three sizes are available: small (s) - 24px, medium (m) - 36px, and large (l) - 48px.' },
-    { name: 'circle', description: '(Optional) boolean - if set to true, a circle style is rendered. Default is set to false' },
-    { name: 'transparent', description: '(Optional) boolean - if set to true, a transperant style is rendered. Default is set to false' },
-    { name: 'colorAccent', description: '(Optional) number - applies a background color. Options include numbers from 1 to 9' },
-    { name: 'glyph', description: '(Optional) string - The name of the icon to include. See the icon page for the list of icons.' }
-  ]
-}"></properties>
-<separator></separator>
-
 <h2>Icon</h2>
-
 <component-example [name]="'ex1'">
   <div class="grid identifier-grid">
     <fd-icon-identifier-example></fd-icon-identifier-example>
@@ -36,7 +17,7 @@
 
 <separator></separator>
 <h2>Circle</h2>
-<p>A circle style can be rendered using the <code>--circle modifier</code></p>
+<description>A circle style can be rendered using the <code>--circle modifier</code></description>
 <component-example [name]="'ex3'">
   <div class="grid identifier-grid">
     <fd-circle-identifier-example></fd-circle-identifier-example>
@@ -46,7 +27,7 @@
 
 <separator></separator>
 <h2>Transparent</h2>
-<p>A transparent style can be rendered using the <code>--transparent modifier</code></p>
+<description>A transparent style can be rendered using the <code>--transparent modifier</code></description>
 <component-example [name]="'ex4'">
   <div class="grid identifier-grid">
     <fd-transparent-identifier-example></fd-transparent-identifier-example>
@@ -56,7 +37,7 @@
 
 <separator></separator>
 <h2>Accent Colors</h2>
-<p>Use helpers classes tp change the background colors, e.g., <code>.fd-has-background-color-accent-9</code></p>
+<description>Use helpers classes tp change the background colors, e.g., <code>.fd-has-background-color-accent-9</code></description>
 <component-example [name]="'ex5'">
   <div class="grid identifier-grid">
     <fd-colors-identifier-example></fd-colors-identifier-example>

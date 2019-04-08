@@ -1,27 +1,3 @@
-<header>Toggle</header>
-<description>The Toggle component is used to activate or deactivate an element. It uses a visual metaphor to inform the user of the state of the toggle.
-    <br/><br/>
-    Once focused, it can be toggled using the spacebar or the enter key.
-</description>
-<import module="ToggleModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-toggle></h1>
-
-<properties [properties]="{
-  inputs: [
-    { name: 'id', description: 'String, set the id to use for the input and label. If none is provided, it will be generated.'},
-    { name: 'size', description: 'Size of the toggle. The options include \'xs\', \'s\', default and \'l\'. If no size is provided, default will be used.\n'},
-    { name: 'disabled', description: 'Boolean, disables the toggle when set to true.'},
-    { name: 'checked', description: 'Boolean, the status of the toggle.' },
-    { name: 'ngModel', description: 'Boolean, the state of the toggle. Initially defaults to false. Requires FormsModule.'}  ],
-  outputs: [
-    { name: 'checkedChange', description: 'Fired when the value of the toggle is switched.' }
-  ]
-}"></properties>
-
-<separator></separator>
 <h2>Toggle Sizes</h2>
 <description>Options include 'xs', 's', 'l' and default. If no value is provided, default is used.</description>
 <component-example [name]="'ex1'">

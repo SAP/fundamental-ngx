@@ -1,70 +1,3 @@
-<header>Popover</header>
-<description>
-    <p>
-        The popover is a wrapping component that accepts a “control” as well as a “body".
-    </p>
-    <p>
-        A control can be anything that you want to trigger the interaction from. The body will be the contents of what
-        you reveal on the page after triggering the popover. Commonly used as the interaction/wrapping component when
-        composing “dropdowns”, “contextual menus”, “mega menu”, etc, when paired with the menu component.
-    </p>
-    <p>
-        As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one
-        popover should close all others to prevent multiple layers and collisions of several popovers.
-    </p>
-    <p>
-        Fundamental-ngx popovers use <a href="https://popper.js.org/index.html">Popper.js.</a>
-    </p>
-</description>
-
-<import module="PopoverModule" path="fundamental-ngx"></import>
-
-<separator></separator>
-
-<h1>&lt;fd-popover&gt;</h1>
-
-<properties [properties]="{
-    inputs: [
-        { name: 'arrow', description: 'Boolean. Whether an arrow should be shown next to the popover. Defaults to false.' },
-        { name: 'disabled', description: 'Boolean. Whether the popover is disabled from opening. Defaults to false.' },
-        { name: 'placement', description: 'String. Placement of the popover. See examples below for options.' },
-        { name: 'appendTo', description: 'HTMLElement or \'body\'. Which element the popover should be appended to. Optional.' },
-        { name: 'isOpen', description: 'Boolean. The open state of the popover. Defaults to false.' },
-        { name: 'options', description: 'PopperOptions. The options passed to Popper.js.' },
-        { name: 'triggers', description: 'String[]. An array of event labels that will toggle the popover state automatically. Defaults to [\'click\']' },
-        { name: 'focusTrapped', description: 'Boolean. Whether the popover focus should be trapped. Defaults to false.' },
-        { name: 'closeOnOutsideClick', description: 'Boolean. Whether the popover should close when the user clicks outside. Defaults to true.' },
-        { name: 'closeOnEscapeKey', description: 'Boolean. Whether the popover should close when the user presses escape. Defaults to true.' },
-        { name: 'fillControl', description: 'Boolean. Whether the popover should try to match the control element width. Defaults to false.' }
-    ],
-    outputs: [
-        { name: 'isOpenChange', description: 'Emitted when the state of the popover changes. Allows two-way binding to the isOpen input.' }
-    ],
-    childComponents: [
-        { name: '<fd-popover-control>', description: 'Control element to toggle the display of the popover.' },
-        { name: '<fd-popover-body>', description: 'Wrapper that contains the popover content.' }
-    ],
-    methods: [
-        { name: 'open()', description: 'Opens the popover.' },
-        { name: 'close()', description: 'Closes the popover.' },
-        { name: 'toggle()', description: 'Toggles the popover.' },
-        { name: 'updatePopover()', description: 'Force a popover position update.' }
-    ]
-}"></properties>
-
-<separator></separator>
-
-<description>
-    <p>
-        Under the hood, the Popover component makes use of <code>PopoverDirective</code>.
-        It abstracts some functionality in favor of consistency, but it may not be sufficient for every use case.
-        If more flexibility is required, we recommend the use of the directive which can be found <a
-        [routerLink]="['/popover-directive']">here</a>.
-    </p>
-</description>
-
-<separator></separator>
-
 <h2>Simple Popovers</h2>
 <description>
     Making use of simple popovers is very easy. Open an fd-popover component, place a control and body inside. You are no required to keep track of the popover state.
@@ -120,3 +53,14 @@
     <fd-popover-c-fill></fd-popover-c-fill>
 </component-example>
 <code-example [code]="popoverFillExampleH" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<description>
+    <p>
+        Under the hood, the Popover component makes use of <code>PopoverDirective</code>.
+        It abstracts some functionality in favor of consistency, but it may not be sufficient for every use case.
+        If more flexibility is required, we recommend the use of the directive which can be found <a
+        [routerLink]="['/popover-directive']">here</a>.
+    </p>
+</description>

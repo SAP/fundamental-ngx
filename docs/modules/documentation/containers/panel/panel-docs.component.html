@@ -1,88 +1,59 @@
-<header>Panel</header>
-<description>The Panel is a layout component that serves many formatting purposes.</description>
-<import module="PanelModule"
-        path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-panel&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: '[fd-panel-header]', description: 'The panel header. Contains a panel head and panel actions.' },
-    { name: '[fd-panel-head]', description: 'Contains a panel title and panel description.' },
-    { name: '[fd-panel-title]', description: 'The panel title. Must be placed within the panel head.' },
-    { name: '[fd-panel-description]', description: ' Title of the description. Must be placed within the panel head.' },
-    { name: '[fd-panel-actions]', description: 'The panel actions that appear to the right of the title. Must be placed within the panel header.' },
-    { name: '[fd-panel-filters]', description: 'The panel filters. These are placed between the header and the body.  Multiple rows of filters can be used.' },
-    { name: '[fd-panel-body]', description: 'The panel body.' },
-    { name: '[fd-panel-footer]', description: 'The panel footer.' }
-  ],
-  inputs: [
-    { name: 'colSpan',   description: 'If this panel is part of a panel grid, this value dictates how many columns in the grid the panel will occupy.'},
-    { name: 'backgroundImage', description: 'Optional string URL for the panel background image.'}
-  ]
-}"></properties>
-
-<separator></separator>
+<h2>Basic Panel Layout</h2>
 <component-example [name]="'ex1'">
-  <p>
-    <fd-panel-example></fd-panel-example>
-  </p>
+    <p>
+        <fd-panel-example></fd-panel-example>
+    </p>
 </component-example>
 <code-example [code]="panelHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
-<h2>Panel with edge bleed</h2>
-<p>Use <code>[bleed]="true"</code> on the panel body to have the contents of the panel body bleed to the outer edge.
-  This is useful for components like tables and trees.</p>
+<h2>Panel Edge Bleed</h2>
+<description>
+    Use <code>[bleed]="true"</code> on the panel body to have the contents of the panel body bleed to the outer edge.
+    This is useful for components like tables and trees.
+</description>
 <component-example [name]="'ex2'">
-  <p>
-    <fd-panel-edge-bleed-example></fd-panel-edge-bleed-example>
-  </p>
+    <p>
+        <fd-panel-edge-bleed-example></fd-panel-edge-bleed-example>
+    </p>
 </component-example>
 <code-example [code]="tableBleedHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
-<h1>&lt;fd-panel-grid&gt;</h1>
-<properties [properties]="{
-  inputs: [
-    { name: 'col',   description: 'The number of columns in the Panel Grid. Leave empty for default (3 columns).'},
-    { name: 'nogap', description: 'When set to \'true\' removes the margins between the panels.'}
-  ]
-}"></properties>
-
 <h2>Default Panel Grid (3 columns)</h2>
 <component-example [name]="'ex3'">
-  <p>
-    <fd-panel-grid-example></fd-panel-grid-example>
-  </p>
+    <p>
+        <fd-panel-grid-example></fd-panel-grid-example>
+    </p>
 </component-example>
 <code-example [code]="defaultPanelGridHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Panel Grid with
-  <code>[nogap]</code>
+    <code>[nogap]</code>
 </h2>
-<p>
-  <code>[nogap]="true"</code> will remove the margins between the panels.</p>
+<description>
+    <code>[nogap]="true"</code> will remove the margins between the panels.
+</description>
 <component-example [name]="'ex3'">
-  <p>
-    <fd-panel-grid-nogap-example></fd-panel-grid-nogap-example>
-  </p>
+    <p>
+        <fd-panel-grid-nogap-example></fd-panel-grid-nogap-example>
+    </p>
 </component-example>
 <code-example [code]="nogapPanelGridHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 
 <h2>Panel Grid with 2 columns</h2>
-<p>The
-  <code>[col]="2"</code> renders a 2 column grid.</p>
+<description>
+    The<code>[col]="2"</code> renders a 2 column grid.
+</description>
 <component-example [name]="'ex4'">
-  <p>
-    <fd-panel-columns-example></fd-panel-columns-example>
-  </p>
+    <p>
+        <fd-panel-columns-example></fd-panel-columns-example>
+    </p>
 </component-example>
 <code-example [code]="twoColumnsPanelGridHtml" [language]="'HTML'"></code-example>
 
@@ -90,8 +61,8 @@
 
 <h2>Panel Grid with row and column span</h2>
 <component-example [name]="'ex1'">
-  <p>
-    <fd-panel-grid-column-span-example></fd-panel-grid-column-span-example>
-  </p>
+    <p>
+        <fd-panel-grid-column-span-example></fd-panel-grid-column-span-example>
+    </p>
 </component-example>
 <code-example [code]="columnSpanPanelGridHtml" [language]="'HTML'"></code-example>

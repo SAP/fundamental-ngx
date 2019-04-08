@@ -30,7 +30,7 @@
                              (closeCalendar)="closePopover()"
                              [disableFunction]="disableFunction ? disableFunction : null"
                              [blockFunction]="blockFunction ? blockFunction : null"
-                             [(ngModel)]="selectedDay"
+                             [(selectedDay)]="selectedDay"
                              (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                              [dateFromDatePicker]="dateFromInput"
                              [isDateTimePicker]="true"></fd-calendar>

@@ -1,35 +1,3 @@
-<header>Date Picker</header>
-<description>
-    The date picker component is an opinionated composition of the "input-group", "popover" and "calendar" components to
-    accomplish the UI pattern for picking a date.
-    <br/><br/>
-    The date picker supports the same keyboard navigability as the calendar.  The calendar can be opened by focusing the
-    date picker input field and closed by focusing the calendar icon button and pressing enter or space.
-</description>
-<import module="DatePickerModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-date-picker&gt;</h1>
-<properties [properties]="{
-  inputs: [
-    { name: 'type',  description: 'Options include \'single\' for a date picker field populated with one date, and \'range\' for a date picker field populated with date range.'},
-    { name: 'disableFunction', description: 'A user defined function that specifies the days that should be disabled. See \'Calendar\' docs for more info.'},
-    { name: 'blockFunction', description: 'A user defined function that specifies the days that should be blocked. See \'Calendar\' docs for more info.'},
-    { name: 'compact', description: 'Option to have \'compact\' view for the date picker. '},
-    { name: 'selectedDay', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the selected day on \'single\' type calendars.'},
-    { name: 'selectedRangeFirst', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the first selected day in a range of dates on \'range\' type calendars.'},
-    { name: 'selectedRangeLast', description: 'A CalendarDay object, containing the property \'date\', a native JavaScript Date object for setting the last selected day in a range of dates on \'range\' type calendars.'}
-  ],
-  outputs: [
-    { name: 'selectedDayChange', description: 'Fired when the selected date changes for a single type calendar.'},
-    { name: 'selectedRangeFirstChange', description: 'Fired when the first selected date for a range of dates changes.'},
-    { name: 'selectedRangeLastChange', description: 'Fired when the last selected date for a range of dates changes.'}
-  ]
-}">
-</properties>
-
-<separator></separator>
-
 <h2>Simple Date Picker</h2>
 <description>
   You can use two-way data binding to select a date or range of dates on a calendar.  Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.

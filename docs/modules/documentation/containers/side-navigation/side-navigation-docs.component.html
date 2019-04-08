@@ -1,79 +1,53 @@
-<header>Side Navigation</header>
-<description>The left navigation can always display or expand/collapse using the menu icon within the global
-    navigation.<br/><br/>
-    Side navigation anchors will be keyboard navigable via the tab key provided they have <code>[routerLink]</code> or
-    <code>[attr.href]</code> attributes.  Sub-levels of tiered side navigation can be opened with the
-    space bar or enter key.
-</description>
-<import module="SideNavigationModule" path="fundamental-ngx"></import>
-<separator></separator>
-
-<h1>&lt;fd-side-nav&gt;</h1>
-
-<properties [properties]="{
-  childComponents: [
-    { name: 'fd-side-nav-group', description: 'Side navigation group contains a side navigation title and a side navigation list.'},
-    { name: 'fd-side-nav-title', description: 'The title of a side navigation group.'},
-    { name: 'fd-side-nav-list', description: 'A list of side navigation items.'},
-    { name: 'fd-side-nav-item', description: 'An item in the navigation list.'},
-    { name: 'fd-side-nav-link', description: 'A side navigation link.'},
-    { name: 'fd-side-nav-subitem', description: 'A second-tier subitem.  Must be a child of a fd-side-nav-link component.'}
-  ]
-}"></properties>
-
-<separator></separator>
 <h2>Side navigation with one level</h2>
-
 <component-example [name]="'ex1'">
-  <p>
-    <fd-side-navigation-example></fd-side-navigation-example>
-  </p>
+    <p>
+        <fd-side-navigation-example></fd-side-navigation-example>
+    </p>
 </component-example>
 <code-example [code]="oneLevelSideNavHtml" [language]="'HTML'"></code-example>
 
-
 <separator></separator>
 <h2>Side navigation with titles</h2>
-<p>Use this to group navigation. Titles are not clickable.</p>
-
+<description>Use this to group navigation. Titles are not clickable.</description>
 <component-example [name]="'ex2'">
-  <p>
-    <fd-side-navigation-titles-example></fd-side-navigation-titles-example>
-  </p>
+    <p>
+        <fd-side-navigation-titles-example></fd-side-navigation-titles-example>
+    </p>
 </component-example>
 <code-example [code]="titlesSideNavHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Side navigation with multiple levels</h2>
-<p>Use this when there is more than one level of hierarchy in the left navigation. Each level can be expanded and
-  collapsed.</p>
-
+<description>
+    Use this when there is more than one level of hierarchy in the left navigation. Each level can be expanded and
+    collapsed.
+</description>
 <component-example [name]="'ex3'">
-  <p>
-    <fd-side-navigation-levels-example></fd-side-navigation-levels-example>
-  </p>
+    <p>
+        <fd-side-navigation-levels-example></fd-side-navigation-levels-example>
+    </p>
 </component-example>
 <code-example [code]="multiLevelsSideNavHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Side navigation with icons</h2>
-
 <component-example [name]="'ex4'">
-  <p>
-    <fd-side-navigation-icons-example></fd-side-navigation-icons-example>
-  </p>
+    <p>
+        <fd-side-navigation-icons-example></fd-side-navigation-icons-example>
+    </p>
 </component-example>
 <code-example [code]="iconsSideNavHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Side navigation collapsed with icons</h2>
-<p>The user can identify which level they are on based on the icon displayed as selected when the navigation is
-  collapsed. Note that the suggested use is when there is only one level of navigation as the user can only see one
-  level of navigation when collapsed.</p>
-
+<description>
+    The user can identify which level they are on based on the icon displayed as selected when the navigation is
+    collapsed. Note that the suggested use is when there is only one level of navigation as the user can only see one
+    level of navigation when collapsed.
+</description>
 <component-example [name]="'ex5'">
-  <p>
-    <fd-side-navigation-collapsed-example></fd-side-navigation-collapsed-example>
-  </p>
+    <p>
+        <fd-side-navigation-collapsed-example></fd-side-navigation-collapsed-example>
+    </p>
 </component-example>
 <code-example [code]="collapsedSideNavHtml" [language]="'HTML'"></code-example>

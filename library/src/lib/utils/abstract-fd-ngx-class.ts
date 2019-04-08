@@ -7,30 +7,37 @@ import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
  overwritten.  By extending this class, we instead add library styles to the user's classList rather than replace them.
  */
 
+/** @hidden */
 export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     private _elementRef: ElementRef;
 
+    /** @hidden */
     @Input() class; // user's custom classes
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to
      the '_addClassToElement' function, passing the style names to be added with each call
      */
+    /** @hidden */
     abstract _setProperties(): void;
 
+    /** @hidden */
     _addClassToElement(className: string) {
         (this._elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
     }
 
+    /** @hidden */
     _addStyleToElement(attribute, value) {
         (this._elementRef.nativeElement as HTMLElement).style[attribute] = value;
     }
 
+    /** @hidden */
     protected constructor(elementRef: ElementRef) {
         this._elementRef = elementRef;
         this._setProperties();
     }
 
+    /** @hidden */
     ngOnChanges() {
         const classList = (this._elementRef.nativeElement as HTMLElement).classList;
         while (classList.length > 0) {
@@ -42,6 +49,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
         this._setProperties();
     }
 
+    /** @hidden */
     ngOnInit() {
         this._setProperties();
     }
