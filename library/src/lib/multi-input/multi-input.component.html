@@ -19,17 +19,17 @@
                     <span class="fd-input-group__addon fd-input-group__addon--after
                         fd-input-group__addon--button">
                             <button class="fd-button--light" type="button"
-                                    [ngClass]="('sap-icon--' + this.glyph)"
+                                    [ngClass]="('sap-icon--' + glyph)"
                                     [disabled]="disabled"
                                     (click)="isOpen = !isOpen"></button>
                         </span>
                 </div>
             </div>
         </fd-popover-control>
-        <fd-popover-body
-            [style.maxHeight]="this.maxHeight"
-            [attr.aria-hidden]="!isOpen">
-            <fd-menu *ngIf="displayedValues && displayedValues.length">
+        <fd-popover-body [attr.aria-hidden]="!isOpen">
+            <fd-menu class="fd-multi-input-menu-overflow"
+                     *ngIf="displayedValues && displayedValues.length"
+                     [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let value of displayedValues">
                         <label class="fd-menu__item">

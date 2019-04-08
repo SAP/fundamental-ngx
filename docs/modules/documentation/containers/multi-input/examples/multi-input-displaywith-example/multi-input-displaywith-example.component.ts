@@ -10,7 +10,11 @@ export class MultiInputDisplaywithExampleComponent {
         {name: 'Apple'},
         {name: 'Banana'},
         {name: 'Pineapple'},
-        {name: 'Tomato'}
+        {name: 'Tomato'},
+        {name: 'Kiwi'},
+        {name: 'Strawberry'},
+        {name: 'Blueberry'},
+        {name: 'Orange'},
     ];
 
     selected = [];
