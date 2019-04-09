@@ -176,6 +176,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
         }
         if (this.fillOnSelect) {
             this.inputText = term.text;
+            this.handleSearchTermChange();
         }
     }
 
