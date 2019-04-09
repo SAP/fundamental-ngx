@@ -1,0 +1,72 @@
+<div class="fd-tsdoc-container">
+<div class="tsd-panel tsd-typography">
+	<h1 id="fundamental-ngx">Fundamental NGX</h1>
+	<p><a href="//www.npmjs.com/package/fundamental-ngx"><img src="https://badge.fury.io/js/fundamental-ngx.svg" alt="npm version"></a>
+		<a href="https://bundlephobia.com/result?p=fundamental-ngx"><img src="https://badgen.net/bundlephobia/min/fundamental-ngx" alt="Minified Size"></a>
+		<a href="https://bundlephobia.com/result?p=fundamental-ngx"><img src="https://badgen.net/bundlephobia/minzip/fundamental-ngx" alt="Minzipped Size"></a>
+		<a href="https://travis-ci.org/SAP/fundamental-ngx"><img src="https://travis-ci.org/SAP/fundamental-ngx.svg?branch=master" alt="Build Status"></a>
+		<a href="https://coveralls.io/github/SAP/fundamental-ngx?branch=master"><img src="https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=master" alt="Coverage Status"></a>
+	<a href="https://ui-fundamentals.slack.com"><img src="https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack" alt="Slack"></a></p>
+	<h2 id="description">Description</h2>
+	<p>The <code>fundamental-ngx</code> library is a set of <a href="https://angular.io/">Angular</a> components built using <a href="https://sap.github.io/fundamental/">SAP Fiori Fundamentals</a>.</p>
+	<p>The SAP Fiori Fundamentals library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
+	<h2 id="api-reference">API Reference</h2>
+	<p>See <a href="https://sap.github.io/fundamental-ngx/docs/home">Component Documentation</a> for examples and API details.</p>
+	<h2 id="requirements">Requirements</h2>
+	<p>To download and use Fundamental NGX, you will first need to install the <a href="https://www.npmjs.com/get-npm">node package manager</a>.</p>
+	<p>Fundamental NGX is intended for use with Angular 5 or newer.</p>
+	<p>Prior knowledge of Angular is recommended.</p>
+	<h2 id="getting-started">Getting Started</h2>
+	<p>For an existing Angular application,</p>
+	<ol>
+		<li><p><strong>Install Fundamental-ngx and Fiori Fundamentals.</strong></p>
+		<pre><code> npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save fiori-fundamentals fundamental-ngx</span></code></pre></li>
+		<li><p><strong>Include Fiori Fundamentals CSS in the <code>styles</code> array of the <code>angular.json</code> file.</strong></p>
+			<pre><code class="language-scss"> &quot;./node_modules/fiori-fundamentals/dist/fiori-fundamentals.min.css&quot;</code></pre>
+			<p> <em>Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.</em></p>
+		</li>
+		<li><p><strong>Import the modules you want to use.</strong></p>
+			<p> To add the entire library, add the following import to your main application module.</p>
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { FundamentalNgxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'fundamental-ngx'</span>;
+
+ @NgModule({
+     ...
+     imports: [FundamentalNgxModule],
+ })</code></pre>
+			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
+			<p> For example, to use Toggles, add the following import to your main application module.</p>
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { ToggleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'fundamental-ngx/toggle/toggle.module'</span>;
+
+ @NgModule({
+     ...
+     imports: [ToggleModule],
+ })</code></pre>
+		</li>
+		<li><p><strong>Add the component to your HTML.</strong></p>
+			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-toggle</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"'l'"</span> [(<span class="hljs-attr">checked</span>)]=<span class="hljs-string">"checked"</span>&gt;</span>Large Toggle<span class="hljs-tag">&lt;/<span class="hljs-name">fd-toggle</span>&gt;</span></code></pre>
+		</li>
+	</ol>
+	<h2 id="demo-application">Demo Application</h2>
+	<p>The documentation serves as a demo application in the <code>docs/</code> directory. Run <code>ng serve</code> from the root of the repository to serve the app locally. The demo application utilizes the Angular Fundamental source code in this repository, so changes you make to any component source will be reflected in the demo app.</p>
+	<p>View the live demo <a href="https://github.com/SAP/fundamental-ngx/tree/master/docs">here</a>.</p>
+	<h2 id="tests">Tests</h2>
+	<p>Fundamental NGX makes use of Jasmine and Karma for its unit tests.</p>
+	<p>Run <code>ng test fundamental-ngx</code>. Append <code>--code-coverage</code> to generate code coverage documentation.</p>
+	<h2 id="versioning">Versioning</h2>
+	<p>The <code>fundamental-ngx</code> library follows <a href="https://semver.org/">Semantic Versioning</a>. These components strictly adhere to the <code>[MAJOR].[MINOR].[PATCH]</code> numbering system (also known as <code>[BREAKING].[FEATURE].[FIX]</code>).</p>
+	<p>Merges to the <code>master</code> branch will be published as a prerelease. Prereleases will include an <strong>rc</strong> version (<em>e.g.</em> <code>[MAJOR].[MINOR].[PATCH]-rc.[RC]</code>).</p>
+	<h2 id="known-issues">Known Issues</h2>
+	<p>Please see <a href="https://github.com/SAP/fundamental-ngx/issues">Issues</a>.</p>
+	<h2 id="support">Support</h2>
+	<p>If you encounter an issue, you can <a href="https://github.com/SAP/fundamental-ngx/issues">create a ticket</a>.</p>
+	<h2 id="contributing">Contributing</h2>
+	<p>If you want to contribute, please check the <a href="https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> documentation for contribution guidelines. Please follow the <a href="https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit">Angular commit message guidelines</a>.</p>
+	<p>Check out the <a href="https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md">NEW_COMPONENT.md</a> guide on building a new component for the library and creating the necessary documentation for your new component.</p>
+	<h2 id="license">License</h2>
+	<p>Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+	This file is licensed under the Apache Software License, v.2 except as noted otherwise in the <a href="https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt">LICENSE file</a>.</p>
+	<h2 id="similar-projects">Similar Projects</h2>
+	<p><a href="https://github.com/SAP/fundamental-react">Fundamental-react</a> - React implementation of SAP Fiori Fundamentals</p>
+	<p><a href="https://github.com/SAP/fundamental-vue">Fundamental-vue</a> - Vue implementation of SAP Fiori Fundamentals</p>
+</div>
+</div>
