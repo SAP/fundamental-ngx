@@ -1,13 +1,13 @@
 <div style="display: block"
      fdFileDragnDrop
-     [accept]="this.accept"
-     [dragndrop]="this.dragndrop"
-     [disabled]="this.disabled"
-     [multiple]="this.multiple"
+     [accept]="accept"
+     [dragndrop]="dragndrop"
+     [disabled]="disabled"
+     [multiple]="multiple"
      (onFileChange)="selectHandler($event)"
-     (onInvalidFiles)="this.onInvalidFiles.emit($event)"
-     (onDragEnter)="this.onDragEnter.emit()"
-     (onDragLeave)="this.onDragLeave.emit()">
+     (onInvalidFiles)="onInvalidFiles.emit($event)"
+     (onDragEnter)="onDragEnter.emit()"
+     (onDragLeave)="onDragLeave.emit()">
     <ng-content></ng-content>
 </div>
 <input #input

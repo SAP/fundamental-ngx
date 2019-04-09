@@ -1,36 +1,48 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
+/**
+ * Directive that handles the drag and drop feature of the file input.
+ */
 @Directive({
     selector: '[fdFileDragnDrop]'
 })
 export class FileDragndropDirective {
 
-    @Output()
-    onFileChange: EventEmitter<File[]> = new EventEmitter<File[]>();
-
-    @Output()
-    onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
-
-    @Output()
-    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
-
-    @Output()
-    onDragLeave: EventEmitter<null> = new EventEmitter<null>();
-
+    /** @Input Whether multiple files can be dropped at once. */
     @Input()
     multiple: boolean = true;
 
+    /** @Input Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
     accept: string;
 
+    /** @Input Whether selecting of new files is disabled. */
     @Input()
     disabled: boolean = false;
 
+    /** @hidden */
     @Input()
     dragndrop: boolean = true;
 
+    /** @Output Event emitted when files are selected. Passes back an array of files. */
+    @Output()
+    onFileChange: EventEmitter<File[]> = new EventEmitter<File[]>();
+
+    /** @Output Event emitted when invalid files are selected. Passes back an array of files. */
+    @Output()
+    onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
+
+    /** @Output Event emitted when the dragged file enters the dropzone. */
+    @Output()
+    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
+
+    /** @Output Event emitted when the dragged file exits the dropzone. */
+    @Output()
+    onDragLeave: EventEmitter<null> = new EventEmitter<null>();
+
     private elementStateCounter: number = 0;
 
+    /** @hidden */
     @HostListener('dragover', ['$event'])
     public onDragover(event) {
         if (this.dragndrop) {
@@ -39,6 +51,7 @@ export class FileDragndropDirective {
         }
     }
 
+    /** @hidden */
     @HostListener('dragenter', [])
     public onDragenter() {
         ++this.elementStateCounter;
@@ -47,6 +60,7 @@ export class FileDragndropDirective {
         }
     }
 
+    /** @hidden */
     @HostListener('dragleave', ['$event'])
     public onDragleave(event) {
         --this.elementStateCounter;
@@ -57,6 +71,7 @@ export class FileDragndropDirective {
         }
     }
 
+    /** @hidden */
     @HostListener('drop', ['$event'])
     public onDrop(event) {
         this.elementStateCounter = 0;
