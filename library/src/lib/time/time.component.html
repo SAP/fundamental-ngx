@@ -3,6 +3,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseHour()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 aria-label="Increase hours"></button>
     </div>
@@ -30,6 +31,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseHour()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 aria-label="Decrease hours"></button>
     </div>
@@ -40,6 +42,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseMinute()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 aria-label="Increase minutes"></button>
     </div>
@@ -57,6 +60,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseMinute()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 aria-label="Decrease minutes"></button>
     </div>
@@ -67,6 +71,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseSecond()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 aria-label="Increase seconds"></button>
     </div>
@@ -84,6 +89,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseSecond()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 aria-label="Decrease seconds"
                 (keydown)="!meridian ? lastButtonKeydown($event) : ''"></button>
@@ -95,6 +101,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 aria-label="Increase period"></button>
     </div>
@@ -112,6 +119,7 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
+                type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 aria-label="Decrease period"
                 (keydown)="lastButtonKeydown($event)"></button>
