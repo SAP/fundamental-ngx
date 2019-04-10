@@ -13,12 +13,7 @@ import { PopoverDirective } from './popover-directive/popover.directive';
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
-    styles: [`        
-        :host {
-            margin-right: 0;
-            display: inline-block;
-        }
-    `]
+    styleUrls: ['./popover.component.scss']
 })
 export class PopoverComponent implements OnInit {
 
