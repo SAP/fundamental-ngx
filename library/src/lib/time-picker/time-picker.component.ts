@@ -22,8 +22,14 @@ import { PopperOptions } from 'popper.js';
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
-    /** @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
-     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59).  */
+    /**
+     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
+     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
+     *
+     * ```json
+     * { hour: 12, minute: 0, second: 0 }
+     * ```
+     * */
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
@@ -31,20 +37,20 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     compact: boolean = false;
 
-    /** @Input Boolean, when set to true, uses the 24 hour clock (hours ranging from 0 to 23)
-     * and does not display a period control. Default is false. */
+    /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
+     * and does not display a period control. */
     @Input()
-    meridian: boolean;
+    meridian: boolean = false;
 
     /** @Input Disables the component. */
     @Input()
     disabled: boolean;
 
-    /** @Input Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true. */
+    /** @Input When set to false, hides the buttons that increment and decrement the corresponding input. */
     @Input()
     spinners: boolean = true;
 
-    /** @Input Boolean, when set to false, hides the input for seconds. Default is true. */
+    /** @Input When set to false, hides the input for seconds. */
     @Input()
     displaySeconds: boolean = true;
 
@@ -72,14 +78,14 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     }
 
     /**
-     * @returns Returns the current value of the time input.
+     * Returns the current value of the time input.
      */
-    getTime() {
+    getTime(): TimeObject {
         return this.time;
     }
 
     /** @hidden */
-    getFormattedTime() {
+    getFormattedTime(): string {
         let formattedHour, formattedMinute, formattedSecond;
         let formattedTime;
         let formattedMeridian;
@@ -222,7 +228,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     }
 
     /** @hidden */
-    getPlaceholder() {
+    getPlaceholder(): string {
         let retVal;
         if (this.displaySeconds) {
             if (this.meridian) {
