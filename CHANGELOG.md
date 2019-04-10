@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.3-rc.0"></a>
+## [0.4.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.4.2...v0.4.3-rc.0) (2019-04-10)
+
+
+### Bug Fixes
+
+* make dropdown position static inside modals ([#683](https://github.com/SAP/fundamental-ngx/issues/683)) ([f780461](https://github.com/SAP/fundamental-ngx/commit/f780461))
+
+
+
 <a name="0.4.2"></a>
 ## [0.4.2](https://github.com/SAP/fundamental-ngx/compare/v0.4.2-rc.0...v0.4.2) (2019-04-09)
 
