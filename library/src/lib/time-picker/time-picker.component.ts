@@ -21,45 +21,71 @@ import { PopperOptions } from 'popper.js';
     styles: [':host {display: inline-block;}']
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
+
+    /**
+     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
+     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
+     *
+     * ```json
+     * { hour: 12, minute: 0, second: 0 }
+     * ```
+     * */
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
+    /** @Input Uses compact time picker. */
     @Input()
     compact: boolean = false;
 
+    /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
+     * and does not display a period control. */
     @Input()
-    meridian: boolean;
+    meridian: boolean = false;
 
+    /** @Input Disables the component. */
     @Input()
     disabled: boolean;
 
+    /** @Input When set to false, hides the buttons that increment and decrement the corresponding input. */
     @Input()
     spinners: boolean = true;
 
+    /** @Input When set to false, hides the input for seconds. */
     @Input()
     displaySeconds: boolean = true;
 
+    /** @hidden */
     @ViewChild(TimeComponent)
     child: TimeComponent;
 
+    /** @hidden */
     period: string;
 
+    /** @hidden */
     isOpen: boolean;
 
+    /** @hidden */
     placeholder: string;
 
+    /** @hidden */
     onChange: Function = () => {};
+    /** @hidden */
     onTouched: Function = () => {};
 
+    /** @hidden */
     ngOnInit(): void {
         this.placeholder = this.getPlaceholder();
     }
 
-    getTime() {
+    /**
+     * Returns the current value of the time input.
+     */
+    getTime(): TimeObject {
         return this.time;
     }
 
-    getFormattedTime() {
+    /** @hidden */
+    getFormattedTime(): string {
         let formattedHour, formattedMinute, formattedSecond;
         let formattedTime;
         let formattedMeridian;
@@ -108,6 +134,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         return formattedTime !== undefined ? formattedTime : '';
     }
 
+    /** @hidden */
     timeInputChanged(timeFromInput) {
         // check for valid time input - 24-hour hh:mm:ss
         let regexp;
@@ -172,6 +199,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         }
     }
 
+    /** @hidden */
     inputGroupClicked($event) {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
@@ -179,12 +207,14 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         }
     }
 
+    /** @hidden */
     onFocusHandler() {
         if (!this.isOpen) {
             this.isOpen = true;
         }
     }
 
+    /** @hidden */
     addOnButtonClicked($event) {
         if (!this.disabled) {
             $event.stopPropagation();
@@ -192,11 +222,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         }
     }
 
+    /** @hidden */
     popoverClosed() {
         this.isOpen = false;
     }
 
-    getPlaceholder() {
+    /** @hidden */
+    getPlaceholder(): string {
         let retVal;
         if (this.displaySeconds) {
             if (this.meridian) {
@@ -215,23 +247,28 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         return retVal;
     }
 
+    /** @hidden */
     timeFromTimeComponentChanged() {
         this.cd.detectChanges();
         this.onChange(this.time);
     }
 
+    /** @hidden */
     registerOnChange(fn: (time: TimeObject) => void): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
+    /** @hidden */
     writeValue(time: TimeObject): void {
         if (!time) {
             return;
@@ -239,5 +276,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         this.time = time;
     }
 
+    /** @hidden */
     constructor(private cd: ChangeDetectorRef) {}
 }
