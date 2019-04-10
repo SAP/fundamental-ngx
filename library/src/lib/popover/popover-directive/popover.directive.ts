@@ -11,41 +11,65 @@ import {
 import { PopoverContainer } from './popover-container';
 import Popper, { Placement, PopperOptions } from 'popper.js';
 
+/**
+ * Directive which manages the popper and popover components of the library.
+ * It can be attached to any element. To bind it to a body, use the following syntax.
+ * ```html
+ * <div [fdPopover]="template">Control Element</div>
+ * <ng-template #template>
+ *     Popover Body
+ * </ng-template>
+ * ```
+ */
 @Directive({
     selector: '[fdPopover]'
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
+    /** @Input Content of the popover. Used through the actual directive tag. Accepts strings or TemplateRefs. */
     @Input('fdPopover')
     content: TemplateRef<any> | string;
 
+    /** @Input Whether the popover is open. Can be used through two-way binding. */
     @Input()
     isOpen: boolean = false;
 
+    /** @Input The trigger events that will open/close the popover.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
     triggers: string[] = ['click'];
 
+    /** @Input Whether the popover should display the default arrow. */
     @Input()
     defaultArrow: boolean = false;
 
+    /** @Input The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
     placement: Placement;
 
+    /** @Input Whether the popover should be focusTrapped. */
     @Input()
     focusTrapped: boolean = false;
 
+    /** @Input Whether the popover should close when the escape key is pressed. */
     @Input()
     closeOnEscapeKey: boolean = true;
 
+    /** @Input Whether the popover is disabled. */
     @Input()
     disabled: boolean = false;
 
+    /** @Input Whether the popover should close when a click is made outside its boundaries. */
     @Input()
     closeOnOutsideClick: boolean = true;
 
+    /** @Input The element to which the popover should be appended. */
     @Input()
     appendTo: HTMLElement | 'body' = 'body';
 
+    /** @Input The Popper.js options to attach to this popover.
+     * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
     options: PopperOptions = {
         placement: 'bottom-start',
@@ -58,9 +82,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     };
 
+    /** @Input Whether the Popover Body should try to have the same width as the Popover Control. */
     @Input()
     fillControl: boolean = false;
 
+    /** @Output Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -69,6 +95,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     private eventRef: Function[] = [];
     private isSetup: boolean = false;
 
+    /** @hidden */
     constructor(private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private resolver: ComponentFactoryResolver,
@@ -77,6 +104,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                 private renderer: Renderer2) {
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (this.isOpen) {
             this.open();
@@ -89,6 +117,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.isSetup = true;
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         if (this.popper) {
             this.popper.destroy();
@@ -101,6 +130,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.destroyTriggerListeners();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.isSetup) {
             return;
@@ -140,6 +170,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    /**
+     * Toggles the popover open state.
+     */
     public toggle(fireEvent: boolean = true): void {
         if (this.isOpen) {
             this.close(fireEvent);
@@ -148,6 +181,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    /**
+     * Opens the popover.
+     */
     public open(fireEvent: boolean = true): void {
         if (!this.isOpen && !this.disabled) {
             this.createContainer();
@@ -159,6 +195,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    /**
+     * Closes the popover.
+     */
     public close(fireEvent: boolean = true): void {
         if (this.isOpen) {
             this.destroyContainer();
@@ -170,6 +209,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    /**
+     * Forces an update of the popover's positioning calculation.
+     */
     public updatePopper(): void {
         if (this.popper) {
             this.popper.scheduleUpdate();
@@ -290,6 +332,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    /** @hidden */
     @HostListener('document:click', ['$event'])
     clickHandler(event: MouseEvent): void {
         if (this.containerRef &&
