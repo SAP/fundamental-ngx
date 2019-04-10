@@ -888,6 +888,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.date = new Date();
         }
         this.constructCalendar();
+        this.constructCalendarYearsList();
         this.calendarId = this.hasher.hash();
         if (this.month) {
             this.selectMonth(this.month);
