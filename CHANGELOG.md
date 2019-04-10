@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.3-rc.2"></a>
+## [0.4.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.4.3-rc.1...v0.4.3-rc.2) (2019-04-10)
+
+
+### Bug Fixes
+
+* refactor table to remove custom elements ([#689](https://github.com/SAP/fundamental-ngx/issues/689)) ([0db7d4d](https://github.com/SAP/fundamental-ngx/commit/0db7d4d))
+
+
+
 <a name="0.4.3-rc.1"></a>
 ## [0.4.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.4.3-rc.0...v0.4.3-rc.1) (2019-04-10)
 
