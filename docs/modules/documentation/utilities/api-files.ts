@@ -168,8 +168,8 @@ export const API_FILES = {
     ],
     table: [
         'TableComponent',
-        'TableBodyComponent',
-        'TableHeaderComponent',
+        'TableBodyDirective',
+        'TableHeaderDirective',
         'ColumnSortableDirective'
     ],
     tabs: [
