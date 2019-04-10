@@ -21,27 +21,30 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
 
-    /** @hidden */
-    @Input() period: string;
+    /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
+     * and does not display a period control. */
+    @Input() meridian: boolean = false;
 
-    /** @Input Boolean, when set to true, uses the 24 hour clock (hours ranging from 0 to 23)
-     * and does not display a period control. Default is false. */
-    @Input() meridian: boolean;
-
-    /** @Input Boolean, when set to false, does not set the input field to invalid state on invalid entry.  Default is true. */
+    /** @Input When set to false, does not set the input field to invalid state on invalid entry. */
     @Input() validate: boolean = true;
 
     /** @Input Disables the component. */
     @Input() disabled: boolean;
 
-    /** @Input Boolean, when set to false, hides the buttons that increment and decrement the corresponding input. Default is true. */
+    /** @Input When set to false, hides the buttons that increment and decrement the corresponding input. */
     @Input() spinners: boolean = true;
 
-    /** @Input Boolean, when set to false, hides the input for seconds. Default is true. */
+    /** @Input When set to false, hides the input for seconds. */
     @Input() displaySeconds: boolean = true;
 
-    /** @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
-     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59).  */
+    /**
+     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
+     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
+     *
+     * ```json
+     * { hour: 12, minute: 0, second: 0 }
+     * ```
+     * */
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
@@ -52,6 +55,9 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden */
     @Output()
     focusArrowLeft: EventEmitter<any> = new EventEmitter<any>();
+
+    /** @hidden */
+    period: string;
 
     /** @hidden */
     oldPeriod: string;
@@ -161,10 +167,12 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     ngOnChanges() {
         if (this.meridian) {
             this.setDisplayedHour();
+        } else {
+            this.displayedHour = this.time.hour;
         }
     }
 
-    /** @hidden */
+    /** Increases the hour value by one. */
     increaseHour() {
         if (this.time.hour === null) {
             this.time.hour = 0;
@@ -179,7 +187,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** Decreases the hour value by one. */
     decreaseHour() {
         if (this.time.hour === null) {
             this.time.hour = 0;
@@ -194,7 +202,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** Increases the minute value by one. */
     increaseMinute() {
         if (this.time.minute === null) {
             this.time.minute = 0;
@@ -207,7 +215,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** Decreases the minute value by one. */
     decreaseMinute() {
         if (this.time.minute === null) {
             this.time.minute = 0;
@@ -220,7 +228,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** Increases the second value by one. */
     increaseSecond() {
         if (this.displaySeconds) {
             if (this.time.second === null) {
@@ -235,7 +243,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** Decreases the second value by one. */
     decreaseSecond() {
         if (this.displaySeconds) {
             if (this.time.second === null) {
@@ -250,7 +258,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** Toggles the period (am/pm). */
     togglePeriod() {
         if (this.time.hour < 24 && this.time.hour >= 0) {
             if (this.period === 'am') {
