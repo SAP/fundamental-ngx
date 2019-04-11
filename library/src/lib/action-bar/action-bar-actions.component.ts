@@ -1,8 +1,17 @@
-import { Component, ElementRef, Inject } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
  * This component holds the right-aligned action buttons for the action bar.
+ *
+ * ```html
+ * <fd-action-bar>
+ *     <fd-action-bar-actions>
+ *         <button fd-button [fdType]="'primary'">Cancel</button>
+ *         <button fd-button [fdType]="'main'">Save</button>
+ *     </fd-action-bar-actions>
+ * <fd-action-bar>
+ * ```
  */
 @Component({
     selector: 'fd-action-bar-actions',
@@ -15,7 +24,7 @@ export class ActionBarActionsComponent extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 }
