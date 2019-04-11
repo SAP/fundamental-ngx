@@ -1,4 +1,14 @@
 <div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The popover is a wrapping component that accepts a <em>control</em> as well as a <em>body</em>.
+				The control is what will trigger the opening of the actual popover, which is called the body.
+				By default, popovers are triggered by click. This can be customized through the <em>triggers</em> input.
+			PopoverComponent is an abstraction of PopoverDirective.</p>
+		</div>
+	</div>
+</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
@@ -14,32 +24,6 @@
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Popover<wbr>Component<span class="tsd-signature-symbol">(</span>hasher<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HashService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PopoverComponent</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L91">popover/popover.component.ts:91</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>hasher: <span class="tsd-signature-type">HashService</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PopoverComponent</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="appendto" class="tsd-anchor"></a>
@@ -47,9 +31,16 @@
 		<div class="tsd-signature tsd-kind-icon">append<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"body"</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L38">popover/popover.component.ts:38</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L44">popover/popover.component.ts:44</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>The element to which the popover should be appended.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="arrow" class="tsd-anchor"></a>
@@ -57,9 +48,16 @@
 		<div class="tsd-signature tsd-kind-icon">arrow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L29">popover/popover.component.ts:29</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L32">popover/popover.component.ts:32</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover should have an arrow.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="btntype" class="tsd-anchor"></a>
@@ -67,9 +65,16 @@
 		<div class="tsd-signature tsd-kind-icon">btn<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L50">popover/popover.component.ts:50</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L62">popover/popover.component.ts:62</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Only to be used when the popover is used as a dropdown. The btnType to display.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="closeonescapekey" class="tsd-anchor"></a>
@@ -77,9 +82,16 @@
 		<div class="tsd-signature tsd-kind-icon">close<wbr>OnEscape<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L86">popover/popover.component.ts:86</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L104">popover/popover.component.ts:104</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover should close when the escape key is pressed.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="closeonoutsideclick" class="tsd-anchor"></a>
@@ -87,9 +99,16 @@
 		<div class="tsd-signature tsd-kind-icon">close<wbr>OnOutside<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L83">popover/popover.component.ts:83</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L100">popover/popover.component.ts:100</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover should close when a click is made outside its boundaries.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="compact" class="tsd-anchor"></a>
@@ -97,19 +116,16 @@
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L56">popover/popover.component.ts:56</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L70">popover/popover.component.ts:70</a></li>
 			</ul>
 		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="directiveref" class="tsd-anchor"></a>
-		<h3>directive<wbr>Ref</h3>
-		<div class="tsd-signature tsd-kind-icon">directive<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopoverDirective</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L26">popover/popover.component.ts:26</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Only to be used when the popover is used as a dropdown. Whether the dropdown is in compact format.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="disabled" class="tsd-anchor"></a>
@@ -117,9 +133,16 @@
 		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L32">popover/popover.component.ts:32</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L36">popover/popover.component.ts:36</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover is disabled.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="fillcontrol" class="tsd-anchor"></a>
@@ -127,9 +150,16 @@
 		<div class="tsd-signature tsd-kind-icon">fill<wbr>Control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L80">popover/popover.component.ts:80</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L96">popover/popover.component.ts:96</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the Popover Body should try to have the same width as the Popover Control.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="focustrapped" class="tsd-anchor"></a>
@@ -137,9 +167,16 @@
 		<div class="tsd-signature tsd-kind-icon">focus<wbr>Trapped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L77">popover/popover.component.ts:77</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L92">popover/popover.component.ts:92</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover should be focusTrapped.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="glyph" class="tsd-anchor"></a>
@@ -147,19 +184,16 @@
 		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L47">popover/popover.component.ts:47</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L58">popover/popover.component.ts:58</a></li>
 			</ul>
 		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="id" class="tsd-anchor"></a>
-		<h3>id</h3>
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L91">popover/popover.component.ts:91</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Only to be used when the popover is used as a dropdown. The glyph to display.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="isdropdown" class="tsd-anchor"></a>
@@ -167,9 +201,16 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Dropdown<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L35">popover/popover.component.ts:35</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L40">popover/popover.component.ts:40</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover should be treated as a dropdown.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="isopen" class="tsd-anchor"></a>
@@ -177,9 +218,16 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L53">popover/popover.component.ts:53</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L66">popover/popover.component.ts:66</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Whether the popover is open. Can be used through two-way binding.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="isopenchange" class="tsd-anchor"></a>
@@ -187,9 +235,16 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;boolean&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L89">popover/popover.component.ts:89</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L108">popover/popover.component.ts:108</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">output</dt>
+				<dd><p>Event emitted when the state of the isOpen property changes.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="placement" class="tsd-anchor"></a>
@@ -197,19 +252,17 @@
 		<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Placement</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L44">popover/popover.component.ts:44</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L54">popover/popover.component.ts:54</a></li>
 			</ul>
 		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="standard" class="tsd-anchor"></a>
-		<h3>standard</h3>
-		<div class="tsd-signature tsd-kind-icon">standard<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L59">popover/popover.component.ts:59</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+					bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="toolbar" class="tsd-anchor"></a>
@@ -217,9 +270,16 @@
 		<div class="tsd-signature tsd-kind-icon">toolbar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L62">popover/popover.component.ts:62</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L74">popover/popover.component.ts:74</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>Only to be used when the popover is used as a dropdown. Whether the dropdown is in a toolbar.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="triggers" class="tsd-anchor"></a>
@@ -227,9 +287,17 @@
 		<div class="tsd-signature tsd-kind-icon">triggers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;click&#x27;]</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L41">popover/popover.component.ts:41</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L49">popover/popover.component.ts:49</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>The trigger events that will open/close the popover.
+					Accepts any <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a>.</p>
+				</dd>
+			</dl>
+		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -244,26 +312,14 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L107">popover/popover.component.ts:107</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L135">popover/popover.component.ts:135</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngoninit" class="tsd-anchor"></a>
-		<h3>ng<wbr>OnInit</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L95">popover/popover.component.ts:95</a></li>
-					</ul>
-				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Closes the popover.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -278,9 +334,14 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L114">popover/popover.component.ts:114</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L145">popover/popover.component.ts:145</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Opens the popover.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -295,9 +356,14 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L99">popover/popover.component.ts:99</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L124">popover/popover.component.ts:124</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Toggles the popover open state.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -312,9 +378,14 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L121">popover/popover.component.ts:121</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L155">popover/popover.component.ts:155</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Forces an update of the popover&#39;s positioning calculation.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -328,16 +399,24 @@
 		<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L65">popover/popover.component.ts:65</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L79">popover/popover.component.ts:79</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">input</dt>
+				<dd><p>The Popper.js options to attach to this popover.
+					See the <a href="https://popper.js.org/popper-documentation.html">Popper.js Documentation</a> for details.</p>
+				</dd>
+			</dl>
+		</div>
 		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 			<a name="options.placement-1" class="tsd-anchor"></a>
 			<h3>placement</h3>
 			<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"bottom-start"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;bottom-start&quot;</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L66">popover/popover.component.ts:66</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L80">popover/popover.component.ts:80</a></li>
 				</ul>
 			</aside>
 		</section>
@@ -347,7 +426,7 @@
 			<div class="tsd-signature tsd-kind-icon">modifiers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L67">popover/popover.component.ts:67</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L81">popover/popover.component.ts:81</a></li>
 				</ul>
 			</aside>
 			<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
@@ -356,7 +435,7 @@
 				<div class="tsd-signature tsd-kind-icon">prevent<wbr>Overflow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L68">popover/popover.component.ts:68</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L82">popover/popover.component.ts:82</a></li>
 					</ul>
 				</aside>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -365,7 +444,7 @@
 					<div class="tsd-signature tsd-kind-icon">boundaries<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"scrollParent"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;scrollParent&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L71">popover/popover.component.ts:71</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L85">popover/popover.component.ts:85</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -375,7 +454,7 @@
 					<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L69">popover/popover.component.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L83">popover/popover.component.ts:83</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -385,7 +464,7 @@
 					<div class="tsd-signature tsd-kind-icon">escape<wbr>With<wbr>Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a90b955/library/src/lib/popover/popover.component.ts#L70">popover/popover.component.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/313a0da/library/src/lib/popover/popover.component.ts#L84">popover/popover.component.ts:84</a></li>
 						</ul>
 					</aside>
 				</section>
