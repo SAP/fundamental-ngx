@@ -1,5 +1,5 @@
 <fd-table>
-    <thead fd-table-header>
+    <thead>
         <tr>
             <th fdColumnSortable [sortDir]="column1SortDir" (click)="sortColumn1()">Column 1</th>
             <th>Column 2</th>
@@ -8,7 +8,7 @@
             <th>Type</th>
         </tr>
     </thead>
-    <tbody fd-table-body>
+    <tbody>
         <tr *ngFor="let row of tableRows">
             <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
             <td>{{row.column2}}</td>

@@ -1,5 +1,5 @@
 <fd-table>
-    <thead fd-table-header>
+    <thead>
         <tr>
             <th><input type="checkbox" [checked]="allSelected" (change)="selectMaster()"/></th>
             <th>Column 1</th>
@@ -9,7 +9,7 @@
             <th>Type</th>
         </tr>
     </thead>
-    <tbody fd-table-body>
+    <tbody>
         <tr *ngFor="let row of tableRows; let i = index">
             <td>
                 <input type="checkbox" [checked]="row.checked" (change)="select($event, i)"/>
