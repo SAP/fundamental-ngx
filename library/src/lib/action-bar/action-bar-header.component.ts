@@ -1,16 +1,28 @@
-import { Component, ElementRef, Inject } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+/**
+ * The action bar header, which contains the action bar's title and description components.
+ *
+ * ```html
+ * <fd-action-bar>
+ *     <fd-action-bar-header>
+ *     </fd-action-bar-header>
+ * <fd-action-bar>
+ * ```
+ */
 @Component({
     selector: 'fd-action-bar-header',
     templateUrl: './action-bar-header.component.html'
 })
 export class ActionBarHeaderComponent extends AbstractFdNgxClass {
+    /** @hidden */
     _setProperties() {
         this._addClassToElement('fd-action-bar__header');
     }
 
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    /** @hidden */
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 }
