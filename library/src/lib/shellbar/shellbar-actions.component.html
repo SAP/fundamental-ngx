@@ -8,7 +8,8 @@
                     <div class="fd-shellbar-collapse--control">
                         <button class="fd-button--shell sap-icon--overflow"
                                 aria-label="Collapsed Item Menu">
-                            <span class="fd-counter fd-counter--notification">{{totalNotifications}}</span>
+                            <span *ngIf="totalNotifications"
+                                  class="fd-counter fd-counter--notification">{{totalNotifications}}</span>
                         </button>
                     </div>
                 </fd-popover-control>
