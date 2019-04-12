@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.4-rc.5"></a>
+## [0.4.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.4.4-rc.4...v0.4.4-rc.5) (2019-04-12)
+
+
+### Bug Fixes
+
+* Provide HashService in popover ([#734](https://github.com/SAP/fundamental-ngx/issues/734)) ([eb200ce](https://github.com/SAP/fundamental-ngx/commit/eb200ce))
+
+
+
 <a name="0.4.4-rc.4"></a>
 ## [0.4.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.4.4-rc.3...v0.4.4-rc.4) (2019-04-12)
 
