@@ -253,7 +253,7 @@ import { BackdropExamplesComponent } from './containers/modal/examples/backdrop-
 import { PopoverPlacementExampleComponent } from './containers/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiComponent } from './components/api/api.component';
-import { AlertConfig } from '../../../library/src/lib/alert/alert-config';
+import { AlertConfig } from '../../../library/src/lib/alert/alert-utils/alert-config';
 import { ApiDocsService } from './services/api-docs.service';
 import { AlertHeaderComponent } from './containers/alert/alert-header/alert-header.component';
 import { API_FILES } from './utilities/api-files';

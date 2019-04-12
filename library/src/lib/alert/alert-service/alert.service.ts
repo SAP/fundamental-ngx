@@ -8,11 +8,11 @@ import {
     TemplateRef,
     Type
 } from '@angular/core';
-import { AlertComponent } from './alert.component';
-import { AlertContainerComponent } from './alert-container.component';
-import { AlertConfig } from './alert-config';
-import { AlertInjector } from './alert-injector';
-import { AlertRef } from './alert-ref';
+import { AlertComponent } from '../alert.component';
+import { AlertContainerComponent } from '../alert-utils/alert-container.component';
+import { AlertConfig } from '../alert-utils/alert-config';
+import { AlertInjector } from '../alert-utils/alert-injector';
+import { AlertRef } from '../alert-utils/alert-ref';
 
 /**
  * Service used to dynamically generate an alert as an overlay.

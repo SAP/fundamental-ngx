@@ -1,11 +1,11 @@
 import { AlertService } from './alert.service';
 import { TestBed } from '@angular/core/testing';
 import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
-import { AlertRef } from './alert-ref';
-import { AlertComponent } from './alert.component';
+import { AlertRef } from '../alert-utils/alert-ref';
+import { AlertComponent } from '../alert.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { AlertContainerComponent } from './alert-container.component';
+import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 
 @Component({
     template: `        

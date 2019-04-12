@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertService } from '../../../../../../library/src/lib/alert/alert.service';
+import { AlertService } from '../../../../../../library/src/lib/alert/alert-service/alert.service';
 import { AlertContentComponent } from './alert-content.component';
 
 @Component({

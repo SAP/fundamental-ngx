@@ -17,8 +17,8 @@ import {
     EventEmitter,
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
-import { AlertRef } from './alert-ref';
-import { alertFadeNgIf } from './alert-animations';
+import { AlertRef } from './alert-utils/alert-ref';
+import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
