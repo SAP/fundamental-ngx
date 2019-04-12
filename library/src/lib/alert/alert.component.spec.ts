@@ -2,9 +2,9 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 
 import { AlertComponent } from './alert.component';
 import { HashService } from '../utils/hash.service';
-import { AlertService } from './alert.service';
+import { AlertService } from './alert-service/alert.service';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
-import { AlertContainerComponent } from './alert-container.component';
+import { AlertContainerComponent } from './alert-utils/alert-container.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
