@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopoverComponent } from './popover.component';
 import { HashService } from '../utils/hash.service';
-import { PopoverDirective } from './popover-directive/popover.directive';
+import { PopoverModule } from './popover.module';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;
@@ -10,13 +10,8 @@ describe('PopoverComponent', () => {
     let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
-        const hashSpy = jasmine.createSpyObj('HashService', {
-            hash: '1'
-        });
-
         TestBed.configureTestingModule({
-            declarations: [PopoverComponent, PopoverDirective],
-            providers: [{ provide: HashService, useValue: hashSpy }]
+            imports: [PopoverModule]
         }).compileComponents();
 
         hashServiceSpy = TestBed.get(HashService);
@@ -26,13 +21,6 @@ describe('PopoverComponent', () => {
         fixture = TestBed.createComponent(PopoverComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    });
-
-    it('should create and get an ID from the hasher', () => {
-        expect(component).toBeTruthy();
-        component.ngOnInit();
-        expect(hashServiceSpy.hash).toHaveBeenCalled();
-        expect(component.id).toBe('1');
     });
 
     it('should open', () => {

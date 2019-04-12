@@ -7,11 +7,13 @@ import { PopoverControlComponent } from './popover-control/popover-control.compo
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverDirective } from './popover-directive/popover.directive';
 import { PopoverContainer } from './popover-directive/popover-container';
+import { HashService } from '../utils/hash.service';
 
 @NgModule({
     declarations: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, PopoverDirective, PopoverContainer],
     imports: [CommonModule, UtilsModule],
     exports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, PopoverDirective],
+    providers: [HashService],
     entryComponents: [PopoverContainer]
 })
 export class PopoverModule {}
