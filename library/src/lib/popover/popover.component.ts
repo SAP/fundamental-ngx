@@ -19,7 +19,8 @@ import { PopoverDirective } from './popover-directive/popover.directive';
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
-    styleUrls: ['./popover.component.scss']
+    styleUrls: ['./popover.component.scss'],
+    providers: [HashService]
 })
 export class PopoverComponent implements OnInit {
 
