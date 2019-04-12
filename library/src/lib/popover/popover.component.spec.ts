@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopoverComponent } from './popover.component';
 import { HashService } from '../utils/hash.service';
-import { PopoverDirective } from './popover-directive/popover.directive';
+import { PopoverModule } from './popover.module';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;
@@ -11,7 +11,7 @@ describe('PopoverComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [PopoverComponent, PopoverDirective]
+            imports: [PopoverModule]
         }).compileComponents();
 
         hashServiceSpy = TestBed.get(HashService);
