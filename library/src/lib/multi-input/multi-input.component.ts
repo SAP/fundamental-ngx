@@ -13,6 +13,12 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 
+/**
+ * Input field with multiple selection enabled. Should be used when a user can select between a
+ * limited number of pre-defined options with a filter-enabled context.
+ *
+ * Supports Angular Forms.
+ */
 @Component({
     selector: 'fd-multi-input',
     templateUrl: './multi-input.component.html',
@@ -30,64 +36,90 @@ import { PopoverComponent } from '../popover/popover.component';
 })
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
+    /** @hidden */
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
 
+    /** @hidden */
     @HostBinding('class.fd-multi-input')
     multiInputClass = true;
 
+    /** @Input Placeholder for the input field. */
     @Input()
     placeholder: string = '';
 
+    /** @Input Whether the input is disabled. */
     @Input()
     disabled: boolean = false;
 
+    /** @Input Whether the input is in compact mode. */
     @Input()
     compact: boolean = false;
 
+    /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string = '200px';
 
+    /** @Input Icon of the button on the right of the input field. */
     @Input()
     glyph: string = 'navigation-down-arrow';
 
+    /** @Input Values to be displayed in the unfiltered dropdown. */
     @Input()
     dropdownValues: any[] = [];
 
+    /** @Input Search term, or more specifically the value of the inner input field. */
     @Input()
     searchTerm: string;
 
+    /** @Input Selected dropdown items. */
     @Input()
     selected: any[] = [];
 
+    /** @Input Filter function. Accepts an array and a string as arguments, and outputs an array.
+     * An arrow function can be used to access the *this* keyword in the calling component.
+     * See multi input examples for details. */
     @Input()
     filterFn: Function = this.defaultFilter;
 
+    /** @Input Display function. Accepts an object of the same type as the
+     * items passed to dropdownValues as argument, and outputs a string..
+     * An arrow function can be used to access the *this* keyword in the calling component.
+     * See multi input examples for details. */
     @Input()
     displayFn: Function = this.defaultDisplay;
 
+    /** @Output Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
-    searchTermChange: EventEmitter<string> = new EventEmitter<string>();
+    readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
+    /** @Output Event emitted when the selected items change. Use *$event* to access the new selected array. */
     @Output()
-    selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
+    readonly selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
 
+    /** @hidden */
     displayedValues: any[] = [];
 
+    /** @hidden */
     isOpen = false;
 
+    /** @hidden */
     onChange: Function = () => {};
 
+    /** @hidden */
     onTouched: Function = () => {};
 
+    /** @hidden */
     constructor(private elRef: ElementRef) {}
 
+    /** @hidden */
     ngOnInit() {
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
         if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
             if (this.searchTerm) {
@@ -98,22 +130,27 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         }
     }
 
+    /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
+    /** @hidden */
     writeValue(selected: any[]): void {
         this.selected = selected;
     }
 
+    /** @hidden */
     handleSelect(checked: any, value: any): void {
         const previousLength = this.selected.length;
         if (checked) {
@@ -132,6 +169,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.selectedChange.emit(this.selected);
     }
 
+    /** @hidden */
     handleSearchTermChange(): void {
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
@@ -150,6 +188,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         return str;
     }
 
+    /** @hidden */
     @HostListener('document:click', ['$event'])
     clickHandler(event) {
         event.stopPropagation();
