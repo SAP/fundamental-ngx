@@ -47,7 +47,6 @@ describe('ButtonDirective', () => {
         directiveInstance.compact = 'true';
         directiveInstance.glyph = 'someGlyph';
         directiveInstance.fdType = 'someFdType';
-        directiveInstance.semantic = 'someSemantic';
         directiveInstance.state = 'someState';
         directiveInstance.options = 'someOption';
         directiveInstance.ngOnInit();
@@ -56,7 +55,6 @@ describe('ButtonDirective', () => {
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someFdType');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someSemantic');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('is-someState');
         expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption');
 
