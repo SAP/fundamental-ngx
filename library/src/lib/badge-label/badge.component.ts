@@ -1,6 +1,10 @@
 import { Input, Component, Inject, ElementRef } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+/**
+ * Badge component, used to indicate status.
+ * Colors, generally in combination with text, are used to easily highlight the state of an object.
+ */
 @Component({
     selector: 'fd-badge',
     templateUrl: './badge-label.component.html'
