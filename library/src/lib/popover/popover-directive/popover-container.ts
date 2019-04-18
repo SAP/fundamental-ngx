@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component, ElementRef, EmbeddedViewRef,
-    EventEmitter,
+    EventEmitter, HostBinding,
     HostListener, OnDestroy,
     Output,
     TemplateRef,
@@ -11,17 +11,20 @@ import {
 } from '@angular/core';
 import focusTrap from 'focus-trap';
 
+/**
+ * Not intended for external use.
+ */
 @Component({
     selector: 'fd-popover-container',
     template: `
-        <div class="fd-popover-default-arrow" *ngIf="defaultArrow" x-arrow></div>
+        <span class="fd-popover__arrow" x-arrow></span>
         <ng-container #vc>
             {{contentString}}
         </ng-container>
     `,
     styleUrls: ['./popover-container.scss'],
     host: {
-        class: 'fd-popover__body fd-popover__body--no-arrow',
+        class: 'fd-popover__popper',
         'tabindex': '-1'
     }
 })
@@ -29,6 +32,9 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
 
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
+
+    @HostBinding('class.fd-popover__popper--no-arrow')
+    noArrow: boolean = true;
 
     @Output()
     isSetup = new EventEmitter<undefined>();
@@ -39,9 +45,9 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
 
     context: any;
 
-    focusTrapped: boolean;
+    placement: string;
 
-    defaultArrow: boolean = false;
+    focusTrapped: boolean;
 
     closeOnEscapeKey: boolean;
 

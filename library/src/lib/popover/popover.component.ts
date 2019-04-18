@@ -29,7 +29,7 @@ export class PopoverComponent implements OnInit {
 
     /** @Input Whether the popover should have an arrow. */
     @Input()
-    arrow: boolean = false;
+    noArrow: boolean = true;
 
     /** @Input Whether the popover is disabled. */
     @Input()
