@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -14,10 +14,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ],
     host: {
-        class: 'fd-form__item fd-form__item--check'
+        class: 'fd-form__item fd-form__item--check',
+        '[id]': 'id',
     }
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
+    @ViewChild('input')
+    inputElement: ElementRef<HTMLInputElement>;
 
     @Input()
     size: string;
@@ -31,11 +34,37 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @Input()
     checked: boolean = false;
 
+    @Input()
+    ariaLabel: string = null;
+
+    @Input()
+    ariaLabelledby: string = null;
+
     @Output()
-    checkedChange = new EventEmitter<boolean>();
+    readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     onChange: any = () => {};
     onTouched: any = () => {};
+
+    constructor(private hasher: HashService) {}
+
+    ngOnInit() {
+        if (!this.id) {
+            this.id = this.hasher.hash();
+        }
+
+        if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
+            this.size = null;
+        }
+    }
+
+    public focus(): void {
+        this.inputElement.nativeElement.focus();
+    }
+
+    get innerInputId(): string {
+        return `${this.id}-input`;
+    }
 
     get isChecked() {
         return this.checked;
@@ -57,19 +86,6 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
     registerOnTouched(fn) {
         this.onTouched = fn;
-    }
-
-    constructor(private hasher: HashService) {
-    }
-
-    ngOnInit() {
-        if (!this.id) {
-            this.id = this.hasher.hash();
-        }
-
-        if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
-            this.size = null;
-        }
     }
 
 }
