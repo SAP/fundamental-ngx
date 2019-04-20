@@ -80,6 +80,13 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     @Input()
     fillOnSelect: boolean = true;
 
+    /** @Input Display function. Accepts an object of the same type as the
+     * items passed to dropdownValues as argument, and outputs a string.
+     * An arrow function can be used to access the *this* keyword in the calling component.
+     * See search input examples for details. */
+    @Input()
+    displayFn: Function = this.defaultDisplay;
+
     /** @Output Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     itemClicked = new EventEmitter<any>();
@@ -243,6 +250,10 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     /** @hidden */
     handleSearchTermChange(): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+    }
+
+    private defaultDisplay(str: any): string {
+        return str.text;
     }
 
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {

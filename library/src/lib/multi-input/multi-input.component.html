@@ -36,7 +36,7 @@
                             <input type="checkbox" class="fd-checkbox"
                                    [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                    (ngModelChange)="handleSelect($event, value)">
-                            <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlighting"></span>
+                            <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
                         </label>
                     </li>
                 </ul>

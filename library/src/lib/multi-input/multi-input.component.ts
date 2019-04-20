@@ -74,7 +74,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @Input Whether the search term should be highlighted in results. */
     @Input()
-    highlighting: boolean = true;
+    highlight: boolean = true;
 
     /** @Input Selected dropdown items. */
     @Input()
@@ -87,7 +87,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     filterFn: Function = this.defaultFilter;
 
     /** @Input Display function. Accepts an object of the same type as the
-     * items passed to dropdownValues as argument, and outputs a string..
+     * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
@@ -189,7 +189,6 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     private defaultDisplay(str: string): string {
-        console.log('called')
         return str;
     }
 

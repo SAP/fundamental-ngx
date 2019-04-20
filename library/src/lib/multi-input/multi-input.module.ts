@@ -5,12 +5,18 @@ import { TokenModule } from '../token/token.module';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
-import { SearchHighlightPipe } from '../utils/search-highlight.pipe';
-import { DisplayFnPipe } from '../utils/displayFn.pipe';
+import { PipeModule } from '../utils/pipes/pipe.module';
 
 @NgModule({
-    declarations: [MultiInputComponent, SearchHighlightPipe, DisplayFnPipe],
-    imports: [CommonModule, TokenModule, FormsModule, MenuModule, PopoverModule],
+    declarations: [MultiInputComponent],
+    imports: [
+        CommonModule,
+        TokenModule,
+        FormsModule,
+        MenuModule,
+        PopoverModule,
+        PipeModule
+    ],
     exports: [MultiInputComponent]
 })
 export class MultiInputModule {}
