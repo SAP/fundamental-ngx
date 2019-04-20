@@ -72,6 +72,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     searchTerm: string;
 
+    /** @Input Whether the search term should be highlighted in results. */
+    @Input()
+    highlighting: boolean = true;
+
     /** @Input Selected dropdown items. */
     @Input()
     selected: any[] = [];
@@ -185,6 +189,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     private defaultDisplay(str: string): string {
+        console.log('called')
         return str;
     }
 
