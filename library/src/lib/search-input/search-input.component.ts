@@ -62,7 +62,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '300px';
+    maxHeight: string = '200px';
 
     /** @Input Search function to execute when the right-side button is clicked. */
     @Input()

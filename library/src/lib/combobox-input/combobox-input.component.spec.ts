@@ -6,6 +6,7 @@ import { PopoverModule } from '../popover/popover.module';
 import { SearchInputModule } from '../search-input/search-input.module';
 
 import { ComboboxInputComponent } from './combobox-input.component';
+import { PipeModule } from '../utils/pipes/pipe.module';
 
 describe('ComboboxInputComponent', () => {
   let component: ComboboxInputComponent;
@@ -13,7 +14,13 @@ describe('ComboboxInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [FormsModule, MenuModule, PopoverModule, SearchInputModule],
+        imports: [
+            FormsModule,
+            MenuModule,
+            PopoverModule,
+            SearchInputModule,
+            PipeModule
+        ],
         declarations: [ComboboxInputComponent]
     }).compileComponents();
 }));

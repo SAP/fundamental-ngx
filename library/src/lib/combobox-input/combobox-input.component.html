@@ -24,7 +24,8 @@
             </div>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-menu>
+            <fd-menu class="fd-combobox-input-menu-overflow"
+                     [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let term of displayedValues"
                         (click)="onMenuClickHandler($event, term)"

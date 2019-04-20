@@ -5,6 +5,7 @@ import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 
 import { SearchInputComponent } from './search-input.component';
+import { PipeModule } from '../utils/pipes/pipe.module';
 
 describe('SearchInputComponent', () => {
     let component: SearchInputComponent;
@@ -13,7 +14,12 @@ describe('SearchInputComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SearchInputComponent],
-            imports: [FormsModule, MenuModule, PopoverModule]
+            imports: [
+                FormsModule,
+                MenuModule,
+                PopoverModule,
+                PipeModule
+            ]
         }).compileComponents();
     }));
 
@@ -47,17 +53,17 @@ describe('SearchInputComponent', () => {
         expect(component.menuItems.first.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
     });
 
-    it('should call search term callback onMenuKeydownHandler, arrow down', () => {
+    it('should fire selected event onMenuKeydownHandler, arrow down', () => {
+        component.inputText = 'test';
         const event = {
             code: 'Enter',
             preventDefault: () => {}
         };
-        const term = {
-            callback: () => {}
-        };
-        spyOn(term, 'callback');
+        const term = 'test';
+        component.dropdownValues = [term];
+        spyOn(component.itemClicked, 'emit');
         component.onMenuKeydownHandler(event, term);
-        expect(term.callback).toHaveBeenCalled();
+        expect(component.itemClicked.emit).toHaveBeenCalled();
         spyOn(event, 'preventDefault');
         const item1 = {
             itemEl: {

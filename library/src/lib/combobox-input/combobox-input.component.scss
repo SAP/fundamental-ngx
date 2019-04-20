@@ -2,10 +2,10 @@
     display: block;
 }
 
-.fd-popover-body--display-none ::ng-deep .fd-popover__body {
-    display: none;
-}
-
 .fd-combobox-popover-custom {
     display: block;
+}
+
+.fd-combobox-input-menu-overflow {
+    overflow: auto;
 }
