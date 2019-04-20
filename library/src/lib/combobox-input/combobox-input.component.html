@@ -1,6 +1,7 @@
 <div class="fd-combobox-input">
     <fd-popover [(isOpen)]="isOpen"
                 [fillControl]="true"
+                [disabled]="disabled"
                 class="fd-combobox-popover-custom"
                 [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
         <fd-popover-control>

@@ -60,6 +60,10 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     @Input()
     glyph: string = 'search';
 
+    /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
+    @Input()
+    maxHeight: string = '300px';
+
     /** @Input Search function to execute when the right-side button is clicked. */
     @Input()
     searchFunction: Function;
@@ -89,7 +93,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** @Output Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
-    itemClicked = new EventEmitter<any>();
+    itemClicked: EventEmitter<{item: any, index: number}> = new EventEmitter<{item: any, index: number}>();
 
     /** @hidden */
     @ViewChildren(MenuItemDirective)
@@ -137,9 +141,9 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** @hidden */
     onMenuKeydownHandler(event, term?) {
-        if (event.code === 'Enter' && term.callback) {
-            term.callback(event);
-            this.itemClicked.emit(term);
+        if (event.code === 'Enter' && term) {
+            this.handleClickActions(term);
+            this.itemClicked.emit({item: term, index: this.dropdownValues.indexOf(term)});
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             let foundItem = false;
@@ -174,10 +178,9 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** @hidden */
     onMenuClickHandler(event, term) {
-        if (term.callback) {
-            term.callback(event);
+        if (term) {
             this.handleClickActions(term);
-            this.itemClicked.emit(term);
+            this.itemClicked.emit({item: term, index: this.dropdownValues.indexOf(term)});
         }
     }
 
@@ -224,7 +227,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
             this.isOpen = false;
         }
         if (this.fillOnSelect) {
-            this.inputText = term.text;
+            this.inputText = this.displayFn(term);
             this.handleSearchTermChange();
         }
     }
@@ -253,15 +256,16 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     }
 
     private defaultDisplay(str: any): string {
-        return str.text;
+        return str;
     }
 
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter(item => {
             if (item) {
-                return item.text.toLocaleLowerCase().includes(searchLower);
+                return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
             }
         });
     }
+
 }

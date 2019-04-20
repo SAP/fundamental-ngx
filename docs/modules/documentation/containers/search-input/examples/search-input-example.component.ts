@@ -6,17 +6,16 @@ import { Component } from '@angular/core';
 })
 export class SearchInputExampleComponent {
 
-    searchTerm: string = '';
+    searchTermOne: string = '';
+    searchTermTwo: string = '';
+    searchTermThree: string = '';
 
     dropdownValues = [
-        {text: 'Apple', callback: () => {alert('Apple Clicked')}},
-        {text: 'Banana', callback: () => {alert('Banana Clicked')}},
-        {text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
-        {text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}}
+        'Apple',
+        'Pineapple',
+        'Banana',
+        'Kiwi',
+        'Strawberry'
     ];
-
-    exampleSearchFunction = () => {
-        alert('Search Function Called with search term: ' + this.searchTerm);
-    }
 
 }

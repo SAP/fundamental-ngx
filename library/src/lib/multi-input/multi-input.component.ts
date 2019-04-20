@@ -58,7 +58,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '200px';
+    maxHeight: string = '300px';
 
     /** @Input Icon of the button on the right of the input field. */
     @Input()

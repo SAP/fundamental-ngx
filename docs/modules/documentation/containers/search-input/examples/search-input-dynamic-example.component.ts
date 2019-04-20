@@ -9,24 +9,26 @@ export class SearchInputDynamicExampleComponent {
     searchTerm: string = '';
 
     selected: string;
+    selectedIndex: number;
 
     dropdownValues = [
-        { text: 'Apple', callback: () => {alert('Apple Clicked!')} },
-        { text: 'Banana', callback: () => {alert('Banana Clicked!')} },
-        { text: 'Kiwi', callback: () => {alert('Kiwi Clicked!')} },
-        { text: 'Strawberry', callback: () => {alert('Strawberry Clicked!')} },
-        { text: 'Tomato', callback: () => {alert('Tomato Clicked!')} },
-        { text: 'Pineapple', callback: () => {alert('Pineapple Clicked!')} }
+        'Apple',
+        'Banana',
+        'Kiwi',
+        'Strawberry',
+        'Tomato',
+        'Pineapple'
     ];
 
-    selectItem(event: any) {
-        this.selected = event.text;
+    selectItem(event: {item: any, index: number}) {
+        this.selected = event.item;
+        this.selectedIndex = event.index;
     }
 
     customFilter(content: any[], searchTerm: string): any[] {
         const search = searchTerm.toLocaleLowerCase();
         return content.filter(item =>
-            item.text.toLocaleLowerCase().startsWith(search)
+            item.toLocaleLowerCase().startsWith(search)
         );
     }
 }

@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
 })
 export class SearchInputDisplaywithExampleComponent {
     values = [
-        {text: 'Apple'},
-        {text: 'Banana'},
-        {text: 'Pineapple'},
-        {text: 'Tomato'}
+        'Apple',
+        'Banana',
+        'Pineapple',
+        'Tomato'
     ];
 
     searchTerm = '';
