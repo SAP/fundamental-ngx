@@ -34,7 +34,7 @@
                     </li>
 
                     <li fd-menu-item
-                        (click)="newItemCallback($event)"
+                        (click)="this.newItemClicked.emit()"
                         (keydown)="newItemKeydownHandler($event)">
                         <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>

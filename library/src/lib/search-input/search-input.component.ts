@@ -64,7 +64,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     @Input()
     maxHeight: string = '200px';
 
-    /** @Input Search function to execute when the right-side button is clicked. */
+    /** @Input Search function to execute when the Enter key is pressed on the main input. */
     @Input()
     searchFunction: Function;
 

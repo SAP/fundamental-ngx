@@ -17,7 +17,7 @@ export class ComboboxInputExampleComponent {
         'Strawberry'
     ];
 
-    newItemCallback = () => {
+    newItem = () => {
         alert('New item callback function called');
     };
 

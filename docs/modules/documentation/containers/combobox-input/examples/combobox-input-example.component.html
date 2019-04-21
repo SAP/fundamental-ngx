@@ -1,21 +1,21 @@
 <fd-combobox-input [(ngModel)]="comboboxInputValOne"
                    [placeholder]="'Search here...'"
                    [dropdownValues]="dropdownValues"
-                   [newItemCallback]="newItemCallback">
+                   (newItemClicked)="newItem()">
 </fd-combobox-input>
 <br />
 <fd-combobox-input [(ngModel)]="comboboxInputValTwo"
                    [dropdownValues]="dropdownValues"
                    [placeholder]="'Search here...'"
                    [disabled]="true"
-                   [newItemCallback]="newItemCallback">
+                   (newItemClicked)="newItem()">
 </fd-combobox-input>
 <br />
 <fd-combobox-input [(ngModel)]="comboboxInputValThree"
                    [dropdownValues]="dropdownValues"
                    [placeholder]="'Search here...'"
                    [compact]="true"
-                   [newItemCallback]="newItemCallback">
+                   (newItemClicked)="newItem()">
 </fd-combobox-input>
 <br />
 <span>Selected 1: {{comboboxInputValOne}}</span>

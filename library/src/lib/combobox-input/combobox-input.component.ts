@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { SearchInputComponent } from '../search-input/search-input.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -17,12 +17,12 @@ export class ComboboxInputComponent extends SearchInputComponent {
     @HostBinding('class.fd-combobox-input')
     comboboxClass = true;
 
-    @Input()
-    newItemCallback: Function;
+    @Output()
+    newItemClicked: EventEmitter<void> = new EventEmitter<void>();
 
     newItemKeydownHandler(event) {
-        if (event.code === 'Enter' && this.newItemCallback) {
-            this.newItemCallback(event);
+        if (event.code === 'Enter') {
+            this.newItemClicked.emit();
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
             let foundItem = false;
