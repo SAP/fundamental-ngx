@@ -40,14 +40,13 @@ describe('ComboboxInputComponent', () => {
     });
 
     it('should handle newItemKeydown', () => {
-        component.newItemCallback = () => {};
-        spyOn(component, 'newItemCallback');
+        spyOn(component.newItemClicked, 'emit');
         const event = {
             code: 'Enter',
             preventDefault: () => {}
         };
         component.newItemKeydownHandler(event);
-        expect(component.newItemCallback).toHaveBeenCalledWith(event);
+        expect(component.newItemClicked.emit).toHaveBeenCalled();
     });
 
     it('should handle onNewItemKeydownHandler, arrow up', () => {
