@@ -1,3 +1,7 @@
 :host {
     z-index: 1000;
+
+    &:focus {
+        outline: none;
+    }
 }
