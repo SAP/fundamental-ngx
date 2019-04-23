@@ -1,15 +1,13 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopperOptions } from 'popper.js';
 
 @Component({
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
     host: {
-        '(blur)': 'onTouched()',
-        class: 'fd-time-picker'
+        '(blur)': 'onTouched()'
     },
     providers: [
         {
@@ -18,9 +16,13 @@ import { PopperOptions } from 'popper.js';
             multi: true
         }
     ],
-    styles: [':host {display: inline-block;}']
+    styleUrls: ['./time-picker.component.scss']
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
+
+    /** @hidden */
+    @HostBinding('class.fd-time-picker')
+    timepickerclass = true;
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
