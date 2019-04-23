@@ -68,6 +68,12 @@ describe('ToggleComponent', () => {
         expect(component.size).toBeNull();
     });
 
+    it('should focus inner input element', () => {
+        spyOn(component.inputElement.nativeElement, 'focus');
+        component.focus();
+        expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
+    });
+
     it('should display size', () => {
         const size = 'l';
         component.size = size;

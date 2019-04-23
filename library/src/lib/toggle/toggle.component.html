@@ -1,8 +1,12 @@
-<label class="fd-form__label" [attr.for]="this.id">
+<label class="fd-form__label" [attr.for]="innerInputId">
     <span class="fd-toggle fd-form__control" [ngClass]="(this.size ? ('fd-toggle--' + this.size) : '')">
-        <input type="checkbox"
-               [id]="this.id"
+        <input #input
+               type="checkbox"
+               [id]="innerInputId"
                [disabled]="this.disabled"
+               [attr.aria-checked]="checked.toString()"
+               [attr.aria-label]="this.ariaLabel"
+               [attr.aria-labelledby]="this.ariaLabelledby"
                [(ngModel)]="this.isChecked">
         <span class="fd-toggle__switch" role="presentation"></span>
     </span>
