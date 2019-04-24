@@ -6,17 +6,23 @@ import { Component } from '@angular/core';
 })
 export class SearchInputDisplaywithExampleComponent {
     values = [
-        {text: 'Apple'},
-        {text: 'Banana'},
-        {text: 'Pineapple'},
-        {text: 'Tomato'}
+        { name: 'Apple' },
+        { name: 'Tomato' },
+        { name: 'Banana' },
+        { name: 'Grapes' },
+        { name: 'Pumpkin' },
+        { name: 'Kiwi' },
+        { name: 'Mango' },
+        { name: 'Cucumber' },
+        { name: 'Garlic' },
+        { name: 'Pear' },
     ];
 
     searchTerm = '';
 
-    displayFunc(obj: any): string {
+    displayFunc(obj: {name: string}): string {
         if (obj) {
-            return obj.toLocaleUpperCase();
+            return obj.name.toLocaleUpperCase();
         }
     }
 }

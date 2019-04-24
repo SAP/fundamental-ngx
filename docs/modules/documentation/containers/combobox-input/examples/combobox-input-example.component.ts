@@ -6,20 +6,18 @@ import { Component } from '@angular/core';
 })
 export class ComboboxInputExampleComponent {
 
-    comboboxInputVal: string = '';
+    comboboxInputValOne: string = '';
+    comboboxInputValTwo: string = '';
+    comboboxInputValThree: string = '';
 
     dropdownValues = [
-        {text: 'Apple', callback: () => {alert('Apple Clicked')}},
-        {text: 'Banana', callback: () => {alert('Banana Clicked')}},
-        {text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
-        {text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}}
+        'Apple',
+        'Banana',
+        'Kiwi',
+        'Strawberry'
     ];
 
-    exampleSearchFunction = () => {
-        alert('Search Function Called with search term: ' + this.comboboxInputVal);
-    };
-
-    newItemCallback = () => {
+    newItem = () => {
         alert('New item callback function called');
     };
 

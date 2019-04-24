@@ -17,6 +17,10 @@
     color: #959595;
     background-color: transparent;
 
+    &::before {
+        font-size: 1.35rem;
+    }
+
     &:active {
         border: none;
         opacity: 0.65;

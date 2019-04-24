@@ -58,7 +58,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
-    maxHeight: string = '200px';
+    maxHeight: string = '300px';
 
     /** @Input Icon of the button on the right of the input field. */
     @Input()
@@ -72,6 +72,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     searchTerm: string;
 
+    /** @Input Whether the search term should be highlighted in results. */
+    @Input()
+    highlight: boolean = true;
+
     /** @Input Selected dropdown items. */
     @Input()
     selected: any[] = [];
@@ -83,7 +87,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     filterFn: Function = this.defaultFilter;
 
     /** @Input Display function. Accepts an object of the same type as the
-     * items passed to dropdownValues as argument, and outputs a string..
+     * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()

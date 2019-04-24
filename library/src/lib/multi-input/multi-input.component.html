@@ -1,6 +1,7 @@
 <div class="fd-multi-input-field">
     <fd-popover [(isOpen)]="isOpen"
                 [triggers]="[]"
+                [disabled]="disabled"
                 [fillControl]="true"
                 class="fd-multi-input-popover-custom">
         <fd-popover-control>
@@ -36,7 +37,7 @@
                             <input type="checkbox" class="fd-checkbox"
                                    [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                    (ngModelChange)="handleSelect($event, value)">
-                            {{displayFn(value)}}
+                            <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
                         </label>
                     </li>
                 </ul>
@@ -49,7 +50,7 @@
     <fd-token *ngFor="let token of selected"
               (onCloseClick)="handleSelect(false, token)"
               class="fd-multi-input-token-spacing">
-        {{displayFn(token)}}
+        {{token | displayFnPipe:displayFn}}
     </fd-token>
 </div>
 

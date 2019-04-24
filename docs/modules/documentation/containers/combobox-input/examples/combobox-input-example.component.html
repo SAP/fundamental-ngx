@@ -1,21 +1,25 @@
-<fd-combobox-input [(ngModel)]="comboboxInputVal"
+<fd-combobox-input [(ngModel)]="comboboxInputValOne"
+                   [placeholder]="'Search here...'"
                    [dropdownValues]="dropdownValues"
-                   [searchFunction]="exampleSearchFunction"
-                   [newItemCallback]="newItemCallback">
+                   (newItemClicked)="newItem()">
 </fd-combobox-input>
 <br />
-<fd-combobox-input [(ngModel)]="comboboxInputVal"
+<fd-combobox-input [(ngModel)]="comboboxInputValTwo"
                    [dropdownValues]="dropdownValues"
+                   [placeholder]="'Search here...'"
                    [disabled]="true"
-                   [searchFunction]="exampleSearchFunction"
-                   [newItemCallback]="newItemCallback">
+                   (newItemClicked)="newItem()">
 </fd-combobox-input>
 <br />
-<fd-combobox-input [(ngModel)]="comboboxInputVal"
+<fd-combobox-input [(ngModel)]="comboboxInputValThree"
                    [dropdownValues]="dropdownValues"
-                   [searchFunction]="exampleSearchFunction"
+                   [placeholder]="'Search here...'"
                    [compact]="true"
-                   [newItemCallback]="newItemCallback">
+                   (newItemClicked)="newItem()">
 </fd-combobox-input>
 <br />
-<span>comboboxInputVal: {{comboboxInputVal}}</span>
+<span>Selected 1: {{comboboxInputValOne}}</span>
+<br />
+<span>Selected 2: {{comboboxInputValTwo}}</span>
+<br />
+<span>Selected 3: {{comboboxInputValThree}}</span>

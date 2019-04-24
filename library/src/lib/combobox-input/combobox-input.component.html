@@ -1,6 +1,7 @@
 <div class="fd-combobox-input">
     <fd-popover [(isOpen)]="isOpen"
                 [fillControl]="true"
+                [disabled]="disabled"
                 class="fd-combobox-popover-custom"
                 [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
         <fd-popover-control>
@@ -23,23 +24,17 @@
             </div>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-menu>
+            <fd-menu class="fd-combobox-input-menu-overflow"
+                     [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let term of displayedValues"
                         (click)="onMenuClickHandler($event, term)"
                         (keydown)="onMenuKeydownHandler($event, term)">
-                        <a tabindex="0">
-                            <div *ngIf="highlight && inputTextValue && inputTextValue.toLocaleLowerCase">
-                                {{ term.text.substr(0, term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase())) }}<strong>{{term.text.substr(term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase()), inputText.length)}}</strong>{{ term.text.substring(term.text.toLocaleLowerCase().indexOf(inputText.toLocaleLowerCase()) + inputText.length, term.text.length) }}
-                            </div>
-                            <div *ngIf="!highlight || !inputTextValue">
-                                {{ term.text }}
-                            </div>
-                        </a>
+                        <a tabindex="0" [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlight"></a>
                     </li>
 
                     <li fd-menu-item
-                        (click)="newItemCallback($event)"
+                        (click)="this.newItemClicked.emit()"
                         (keydown)="newItemKeydownHandler($event)">
                         <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
                     </li>
