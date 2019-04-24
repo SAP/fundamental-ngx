@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.5-rc.9"></a>
+## [0.4.5-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.4.5-rc.8...v0.4.5-rc.9) (2019-04-24)
+
+
+### Bug Fixes
+
+* improved search input performance ([#748](https://github.com/SAP/fundamental-ngx/issues/748)) ([d8ed08f](https://github.com/SAP/fundamental-ngx/commit/d8ed08f))
+
+
+
 <a name="0.4.5-rc.8"></a>
 ## [0.4.5-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.4.5-rc.7...v0.4.5-rc.8) (2019-04-24)
 
