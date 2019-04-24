@@ -48,18 +48,5 @@ describe('ScrollSpyDirective', () => {
     it('should create', () => {
         expect(directive).toBeTruthy();
     });
-
-    it('should handle scroll', () => {
-        const mockEvent = {
-            target: {
-                scrollTop: 5,
-                offsetTop: 700,
-                offsetHeight: 20
-            }
-        };
-        spyOn(directiveInstance.spyChange, 'emit');
-        directiveInstance.onScroll(mockEvent);
-        expect(directiveInstance.currentActive.id).toEqual('div2');
-        expect(directiveInstance.spyChange.emit).toHaveBeenCalledWith(directiveInstance.currentActive);
-    });
+    
 });
