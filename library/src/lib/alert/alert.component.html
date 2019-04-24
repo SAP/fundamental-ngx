@@ -1,6 +1,6 @@
 <button class="fd-alert__close"
         *ngIf="dismissible"
-        (click)="dismiss(true)"
+        (click)="dismiss(undefined, true)"
         [attr.aria-controls]="id"
         aria-label="Dismiss">
 </button>
