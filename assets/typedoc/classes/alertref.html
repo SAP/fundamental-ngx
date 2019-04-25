@@ -21,10 +21,10 @@
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="afterdismissed" class="tsd-anchor"></a>
 		<h3>after<wbr>Dismissed</h3>
-		<div class="tsd-signature tsd-kind-icon">after<wbr>Dismissed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;this._afterDismissed.asObservable()</span></div>
+		<div class="tsd-signature tsd-kind-icon">after<wbr>Dismissed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;this._afterDismissed.asObservable()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9c04060/library/src/lib/alert/alert-utils/alert-ref.ts#L13">alert/alert-utils/alert-ref.ts:13</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/alert/alert-utils/alert-ref.ts#L13">alert/alert-utils/alert-ref.ts:13</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -39,7 +39,7 @@
 		<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9c04060/library/src/lib/alert/alert-utils/alert-ref.ts#L16">alert/alert-utils/alert-ref.ts:16</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/alert/alert-utils/alert-ref.ts#L16">alert/alert-utils/alert-ref.ts:16</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -55,13 +55,13 @@
 		<a name="dismiss" class="tsd-anchor"></a>
 		<h3>dismiss</h3>
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">dismiss<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">dismiss<span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9c04060/library/src/lib/alert/alert-utils/alert-ref.ts#L21">alert/alert-utils/alert-ref.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/alert/alert-utils/alert-ref.ts#L23">alert/alert-utils/alert-ref.ts:23</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -69,6 +69,15 @@
 						<p>Dismisses the alert.</p>
 					</div>
 				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">any</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Data passed back to the calling component through the AfterDismissed observable.</p>
+						</div>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
