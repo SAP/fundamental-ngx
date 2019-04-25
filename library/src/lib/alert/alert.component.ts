@@ -137,14 +137,17 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     /**
      * Dismisses the alert. If the alert was generated via the AlertService, it is removed from the DOM.
      * Otherwise, it sets the display value to none. Fires the onDismiss event.
+     *
      * @param manualDismiss Set to true to skip the dismiss animation.
+     * @param reason Data to pass back to the calling component. Only usable if alert is opened using the Service.
+     *
      */
-    dismiss(manualDismiss: boolean = false): void {
+    dismiss(reason?: any, manualDismiss: boolean = false): void {
         if (manualDismiss) {
             this.elRef.nativeElement.style.display = 'none';
         }
         if (this.alertRef) {
-            this.alertRef.dismiss();
+            this.alertRef.dismiss(reason);
         } else {
             this.elRef.nativeElement.style.display = 'none';
         }
