@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
 
 @Component({
@@ -7,12 +7,16 @@ import { ModalService } from '../../../../../../../library/src/lib/modal/modal-s
     styles: ['.action-button {margin-left: 12px;}']
 })
 export class ModalOpenTemplateExampleComponent {
+
+    @ViewChild('cool')
+    element: ElementRef;
+
     confirmationReason: string;
 
     constructor(private modalService: ModalService) {}
 
     openModal(modal: TemplateRef<any>): void {
-        const modalRef = this.modalService.open(modal);
+        const modalRef = this.modalService.open(modal, {appendTo: this.element.nativeElement});
 
         modalRef.afterClosed.subscribe(result => {
             this.confirmationReason = 'Modal closed with result: ' + result;

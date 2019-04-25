@@ -54,4 +54,7 @@ export class ModalConfig {
 
     /** Data to pass along to the content through the ModalRef. */
     data?: any;
+
+    /** Modal is appended to this element. By default, it is appended to the body. */
+    appendTo?: HTMLElement | 'body' = 'body';
 }

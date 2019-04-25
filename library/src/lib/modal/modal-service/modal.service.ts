@@ -114,7 +114,11 @@ export class ModalService {
 
         // Render container
         const containerEl = (containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        document.body.appendChild(containerEl);
+        if (modalConfig.appendTo === 'body') {
+            document.body.appendChild(containerEl);
+        } else if (modalConfig.appendTo) {
+            modalConfig.appendTo.appendChild(containerEl);
+        }
 
         // Render backdrop
         if (modalConfig.hasBackdrop) {
