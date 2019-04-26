@@ -84,8 +84,13 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     registerOnChange(fn) {
         this.onChange = fn;
     }
+
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
     }
 
 }
