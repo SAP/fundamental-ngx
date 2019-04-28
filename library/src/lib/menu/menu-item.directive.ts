@@ -1,13 +1,18 @@
 import { AfterViewInit, Directive, ElementRef, OnChanges } from '@angular/core';
 
+/**
+ * The directive that represents a menu item.
+ */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-item]',
 })
 export class MenuItemDirective implements AfterViewInit, OnChanges {
-    constructor(public itemEl: ElementRef) {}
+    /** @hidden */
+    constructor(public itemEl: ElementRef) { }
 
+    /** @hidden */
     ngAfterViewInit() {
         if (
             // if the menu item contains a child anchor element, apply 'fd-menu__item' class to that anchor
@@ -29,6 +34,7 @@ export class MenuItemDirective implements AfterViewInit, OnChanges {
         }
     }
 
+    /** @hidden */
     ngOnChanges() {
         this.ngAfterViewInit();
     }
