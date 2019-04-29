@@ -21,4 +21,8 @@ describe('PanelActionsComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should have class assigned', () => {
+        expect(fixture.nativeElement.className).toBe('fd-panel__actions');
+    });
 });

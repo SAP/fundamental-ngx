@@ -128,7 +128,7 @@ export const API_FILES = {
         'PanelGridComponent',
         'PanelHeaderComponent',
         'PanelHeadComponent',
-        'PanelTitleComponent'
+        'PanelTitleDirective'
     ],
     popover: [
         'PopoverComponent',

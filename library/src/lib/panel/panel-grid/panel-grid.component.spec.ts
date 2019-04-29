@@ -25,7 +25,6 @@ describe('PanelGridComponent', () => {
         expect(component).toBeTruthy();
         component.ngOnInit();
         expect(component._setProperties).toHaveBeenCalled();
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-panel-grid');
     });
 
     it('should apply the appropriate classes', () => {
@@ -34,6 +33,5 @@ describe('PanelGridComponent', () => {
         component.ngOnInit();
         expect(component._setProperties).toHaveBeenCalled();
         expect(component._addClassToElement).toHaveBeenCalledWith('fd-panel-grid--2col');
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-panel-grid--nogap');
     });
 });

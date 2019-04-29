@@ -21,4 +21,14 @@ describe('PanelBodyComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should have body class', () => {
+        expect(fixture.nativeElement.className).toBe('fd-panel__body');
+    });
+
+    it('should support edge bleeding', () => {
+        component.bleed = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.className).toContain('fd-panel__body--bleed');
+    });
 });
