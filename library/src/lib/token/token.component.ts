@@ -17,11 +17,11 @@ export class TokenComponent implements OnInit {
     @ViewChild('contentContainer')
     contentContainer: ElementRef;
 
-    /** @Input Id of the element. Returned back through the onCloseClick event. */
+    /** Id of the element. Returned back through the onCloseClick event. */
     @Input()
     id: string;
 
-    /** @Output Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
+    /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
     onCloseClick: EventEmitter<string> = new EventEmitter<string>();
 
