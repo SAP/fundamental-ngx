@@ -19,10 +19,6 @@ export class TokenComponent {
     @ViewChild('contentContainer')
     contentContainer: ElementRef;
 
-    /** Id of the element. Returned back through the onCloseClick event. */
-    @Input()
-    id: string;
-
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
