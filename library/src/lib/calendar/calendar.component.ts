@@ -926,7 +926,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes && changes.disableFunction) {
+        if (changes && (changes.disableFunction || changes.blockFunction)) {
             this.constructCalendar();
         }
     }
