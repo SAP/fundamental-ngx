@@ -9,11 +9,11 @@ import { fromEvent, Observable } from 'rxjs';
 })
 export class InfiniteScrollDirective implements OnInit {
 
-    /** @Input Scroll percentage at which the onScrollAction event is fired. */
+    /** Scroll percentage at which the onScrollAction event is fired. */
     @Input()
     scrollPercent: number = 75;
 
-    /** @Output Event emitted when the scrollPercent threshold is met. */
+    /** Event emitted when the scrollPercent threshold is met. */
     @Output()
     onScrollAction = new EventEmitter<any>();
 
