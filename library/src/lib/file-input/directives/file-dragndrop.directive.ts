@@ -8,35 +8,35 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 })
 export class FileDragndropDirective {
 
-    /** @Input Whether multiple files can be dropped at once. */
+    /** Whether multiple files can be dropped at once. */
     @Input()
     multiple: boolean = true;
 
-    /** @Input Accepted file extensions. Format: `'.png,.jpg'`. */
+    /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
     accept: string;
 
-    /** @Input Whether selecting of new files is disabled. */
+    /** Whether selecting of new files is disabled. */
     @Input()
     disabled: boolean = false;
 
-    /** @hidden */
+    /** Whether drag and drop is enabled. Disables this directive. */
     @Input()
     dragndrop: boolean = true;
 
-    /** @Output Event emitted when files are selected. Passes back an array of files. */
+    /** Event emitted when files are selected. Passes back an array of files. */
     @Output()
     onFileChange: EventEmitter<File[]> = new EventEmitter<File[]>();
 
-    /** @Output Event emitted when invalid files are selected. Passes back an array of files. */
+    /** Event emitted when invalid files are selected. Passes back an array of files. */
     @Output()
     onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
 
-    /** @Output Event emitted when the dragged file enters the dropzone. */
+    /** Event emitted when the dragged file enters the dropzone. */
     @Output()
     onDragEnter: EventEmitter<null> = new EventEmitter<null>();
 
-    /** @Output Event emitted when the dragged file exits the dropzone. */
+    /** Event emitted when the dragged file exits the dropzone. */
     @Output()
     onDragLeave: EventEmitter<null> = new EventEmitter<null>();
 

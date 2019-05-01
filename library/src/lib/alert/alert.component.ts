@@ -50,43 +50,43 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     @ViewChild('container', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
-    /** @Input Whether the alert is dismissible. */
+    /** Whether the alert is dismissible. */
     @Input()
     dismissible: boolean = true;
 
-    /** @Input The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
+    /** The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     @Input()
     type: string;
 
-    /** @Input Id for the alert component. If omitted, a unique one is generated. */
+    /** Id for the alert component. If omitted, a unique one is generated. */
     @Input()
     id: string;
 
-    /** @Input Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
+    /** Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input()
     duration: number = 10000;
 
-    /** @Input Whether the alert should stay open if the mouse is hovering over it. */
+    /** Whether the alert should stay open if the mouse is hovering over it. */
     @Input()
     mousePersist: boolean = false;
 
-    /** @Input Id of the element that labels the alert. */
+    /** Id of the element that labels the alert. */
     @Input()
     ariaLabelledBy: string = null;
 
-    /** @Input Aria label for the alert component element. */
+    /** Aria label for the alert component element. */
     @Input()
     ariaLabel: string = null;
 
-    /** @Input Width of the alert. */
+    /** Width of the alert. */
     @Input()
     width: string;
 
-    /** @Input Alternative way of passing in a message to the alert. */
+    /** Alternative way of passing in a message to the alert. */
     @Input()
     message: string;
 
-    /** @Output Event fired when the alert is dismissed. */
+    /** Event fired when the alert is dismissed. */
     @Output()
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 

@@ -15,23 +15,23 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 })
 export class ButtonDirective extends AbstractFdNgxClass {
 
-    /** @Input Whether to apply compact mode to the button. */
+    /** Whether to apply compact mode to the button. */
     @Input() compact: boolean;
 
-    /** @Input The icon to include in the button. See the icon page for the list of icons. */
+    /** The icon to include in the button. See the icon page for the list of icons. */
     @Input() glyph: string;
 
-    /** @Input The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
+    /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
     @Input() fdType: string;
 
     /** @hidden */
     @Input() semantic: string; // TODO: deprecated, leaving for backwards compatibility
 
-    /** @Input The state of the button. Options include 'normal', 'selected', and 'disabled'. Leave empty for normal. */
+    /** The state of the button. Options include 'normal', 'selected', and 'disabled'. Leave empty for normal. */
     @Input() state: string;
 
-    /** @Input Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input() options: string | string[];
 
     /** @hidden */

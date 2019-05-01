@@ -35,63 +35,63 @@ import { MenuItemDirective } from '../menu/menu-item.directive';
 })
 export class SearchInputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
-    /** @Input Values to be filtered in the search input. */
+    /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
 
-    /** @Input Filter function. Accepts an array of objects and a search term as arguments
+    /** Filter function. Accepts an array of objects and a search term as arguments
      * and returns a string. See search input examples for details. */
     @Input()
     filterFn: Function = this.defaultFilter;
 
-    /** @Input Whether the search input is disabled. **/
+    /** Whether the search input is disabled. **/
     @Input()
     disabled: boolean;
 
-    /** @Input Placeholder of the search input. **/
+    /** Placeholder of the search input. **/
     @Input()
     placeholder: string;
 
-    /** @Input Whether the search input is in a shellbar **/
+    /** Whether the search input is in a shellbar **/
     @Input()
     inShellbar: boolean = false;
 
-    /** @Input Icon to display in the right-side button. */
+    /** Icon to display in the right-side button. */
     @Input()
     glyph: string = 'search';
 
-    /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
+    /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string = '200px';
 
-    /** @Input Search function to execute when the Enter key is pressed on the main input. */
+    /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
     searchFunction: Function;
 
-    /** @Input Whether the search input should be displayed in compact mode. */
+    /** Whether the search input should be displayed in compact mode. */
     @Input()
     compact: boolean = false;
 
-    /** @Input Whether the matching string should be highlighted during filtration. */
+    /** Whether the matching string should be highlighted during filtration. */
     @Input()
     highlight: boolean = true;
 
-    /** @Input Whether the popover should close when a user selects a result. */
+    /** Whether the popover should close when a user selects a result. */
     @Input()
     closeOnSelect: boolean = true;
 
-    /** @Input Whether the input field should be populated with the result picked by the user. */
+    /** Whether the input field should be populated with the result picked by the user. */
     @Input()
     fillOnSelect: boolean = true;
 
-    /** @Input Display function. Accepts an object of the same type as the
+    /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See search input examples for details. */
     @Input()
     displayFn: Function = this.defaultDisplay;
 
-    /** @Output Event emitted when an item is clicked. Use *$event* to retrieve it. */
+    /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     itemClicked: EventEmitter<{item: any, index: number}> = new EventEmitter<{item: any, index: number}>();
 

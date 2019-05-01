@@ -26,49 +26,49 @@ import Popper, { Placement, PopperOptions } from 'popper.js';
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
-    /** @Input Content of the popover. Used through the actual directive tag. Accepts strings or TemplateRefs. */
+    /** Content of the popover. Used through the actual directive tag. Accepts strings or TemplateRefs. */
     @Input('fdPopover')
     content: TemplateRef<any> | string;
 
-    /** @Input Whether the popover is open. Can be used through two-way binding. */
+    /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
     isOpen: boolean = false;
 
-    /** @Input The trigger events that will open/close the popover.
+    /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
     triggers: string[] = ['click'];
 
-    /** @Input Whether the popover should display the default arrow. */
+    /** Whether the popover should display the default arrow. */
     @Input()
     defaultArrow: boolean = false;
 
-    /** @Input The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
     placement: Placement;
 
-    /** @Input Whether the popover should be focusTrapped. */
+    /** Whether the popover should be focusTrapped. */
     @Input()
     focusTrapped: boolean = false;
 
-    /** @Input Whether the popover should close when the escape key is pressed. */
+    /** Whether the popover should close when the escape key is pressed. */
     @Input()
     closeOnEscapeKey: boolean = true;
 
-    /** @Input Whether the popover is disabled. */
+    /** Whether the popover is disabled. */
     @Input()
     disabled: boolean = false;
 
-    /** @Input Whether the popover should close when a click is made outside its boundaries. */
+    /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
     closeOnOutsideClick: boolean = true;
 
-    /** @Input The element to which the popover should be appended. */
+    /** The element to which the popover should be appended. */
     @Input()
     appendTo: HTMLElement | 'body' = 'body';
 
-    /** @Input The Popper.js options to attach to this popover.
+    /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
     options: PopperOptions = {
@@ -82,11 +82,11 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     };
 
-    /** @Input Whether the Popover Body should try to have the same width as the Popover Control. */
+    /** Whether the Popover Body should try to have the same width as the Popover Control. */
     @Input()
     fillControl: boolean = false;
 
-    /** @Output Event emitted when the state of the isOpen property changes. */
+    /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -55,5 +55,10 @@ module.exports = {
             }
         }
         return options.fn(this);
+    },
+    parseSelector: function (str) {
+        let selectorStr = str.match(/(selector: '(.*?)')/g) + '';
+        selectorStr = selectorStr.replace('selector: ', '').replace(/['\[\]]/g, '');
+        return selectorStr;
     }
 };

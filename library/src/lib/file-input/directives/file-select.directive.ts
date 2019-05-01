@@ -9,11 +9,11 @@ import { HostListener, HostBinding } from '@angular/core';
 })
 export class FileSelectDirective {
 
-    /** @Input Whether the input should accept multiple file selections. */
+    /** Whether the input should accept multiple file selections. */
     @Input()
     private multiple: boolean = true;
 
-    /** @Output Event emitted when files are selected. */
+    /** Event emitted when files are selected. */
     @Output()
     onFileSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
 
