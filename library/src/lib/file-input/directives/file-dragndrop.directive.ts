@@ -26,19 +26,19 @@ export class FileDragndropDirective {
 
     /** Event emitted when files are selected. Passes back an array of files. */
     @Output()
-    onFileChange: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onFileChange: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     /** Event emitted when invalid files are selected. Passes back an array of files. */
     @Output()
-    onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     /** Event emitted when the dragged file enters the dropzone. */
     @Output()
-    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
+    readonly onDragEnter: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted when the dragged file exits the dropzone. */
     @Output()
-    onDragLeave: EventEmitter<null> = new EventEmitter<null>();
+    readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
 
     private elementStateCounter: number = 0;
 

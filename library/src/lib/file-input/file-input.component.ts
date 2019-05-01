@@ -47,19 +47,19 @@ export class FileInputComponent implements ControlValueAccessor {
 
     /** Event fired when files are selected. Passed object is the array of files selected. */
     @Output()
-    onSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     /** Event fired when some invalid files are selected. Passed object is the array of invalid files. */
     @Output()
-    onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     /** Event fired when the dragged file enters the component boundaries. */
     @Output()
-    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
+    readonly onDragEnter: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event fired when the dragged file exits the component boundaries. */
     @Output()
-    onDragLeave: EventEmitter<null> = new EventEmitter<null>();
+    readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     onChange: Function = () => {};

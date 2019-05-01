@@ -15,7 +15,7 @@ export class FileSelectDirective {
 
     /** Event emitted when files are selected. */
     @Output()
-    onFileSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onFileSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
 
     /** @hidden */
     @HostBinding('attr.multiple')
