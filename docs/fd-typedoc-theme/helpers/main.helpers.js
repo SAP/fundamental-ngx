@@ -2,29 +2,58 @@ module.exports = {
     ifEquals: function (value1, value2, options) {
         return value1 === value2 ? options.fn(this) : options.inverse(this);
     },
+    ifNotEquals: function (value1, value2, options) {
+        return value1 !== value2 ? options.fn(this) : options.inverse(this);
+    },
     ifDecoratorsContain: function (element, compareValue, options) {
         if (!element || !element.decorators) {
             return options.inverse(this);
         }
-        const found = element.decorators.find(element => element.name.toLocaleUpperCase() === compareValue.toLocaleUpperCase());
+        const found = element.decorators.find(item => item.name.toLocaleUpperCase() === compareValue.toLocaleUpperCase());
         return found ? options.fn(this) : options.inverse(this);
     },
-    ifNotPreProcessedDecorator: function (element, options) {
-
+    ifNoDecorators: function (element, options) {
         if (!element || !element.decorators) {
+            return options.fn(this);
+        }
+
+        for (item of element.decorators) {
+            if (item.name.toLocaleUpperCase() === 'OUTPUT' || item.name.toLocaleUpperCase() === 'INPUT') {
+                return options.inverse(this);
+            }
+        }
+        return options.fn(this);
+    },
+    ifChildrenContainDecorator: function (array, compareValue, options) {
+        if (!array || array.length === 0) {
             return options.inverse(this);
         }
 
-        const preprocessedDecorators = [
-            'INPUT',
-            'OUTPUT'
-        ];
-
-        preprocessedDecorators.forEach(decorator => {
-            if (element.decorators.find(element => element.name.toLocaleUpperCase() === decorator)) {
-                return options.inverse(this);
+        for (item of array) {
+            if (item.decorators) {
+                for (dec of item.decorators) {
+                    if (dec && dec.name.toLocaleUpperCase() === compareValue.toLocaleUpperCase()) {
+                        return options.fn(this);
+                    }
+                }
             }
-        });
+        }
+        return options.inverse(this);
+    },
+    NOTifChildrenContainDecorator: function (array, options) {
+        if (!array || array.length === 0) {
+            return options.fn(this);
+        }
+
+        for (item of array) {
+            if (item.decorators) {
+                for (dec of item.decorators) {
+                    if (dec && (dec.name.toLocaleUpperCase() === 'INPUT' || dec.name.toLocaleUpperCase() === 'OUTPUT')) {
+                        return options.inverse(this);
+                    }
+                }
+            }
+        }
         return options.fn(this);
     }
 };

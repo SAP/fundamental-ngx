@@ -1,19 +1,51 @@
-<section class="tsd-panel-group tsd-member-group {{cssClasses}}">
-    <h2>{{title}}</h2>
-    {{#each children}}
-        {{#unless hasOwnDocument}}
-            {{> member}}
-        {{/unless}}
-    {{/each}}
-</section>
+{{#ifEquals title 'Properties'}}
+    {{#ifChildrenContainDecorator children 'Input'}}
+        <section class="tsd-panel-group tsd-member-group {{cssClasses}}">
+            <h2>Inputs</h2>
+            {{#each children}}
+                {{#ifDecoratorsContain this 'Input'}}
+                    {{#unless hasOwnDocument}}
+                        {{> member}}
+                    {{/unless}}
+                {{/ifDecoratorsContain}}
+            {{/each}}
+        </section>
+    {{/ifChildrenContainDecorator}}
 
-<section class="tsd-panel-group tsd-member-group {{cssClasses}}">
-    <h2>Inputs</h2>
-    {{#each children}}
-        {{#ifDecoratorsContain this 'Input'}}
+    {{#ifChildrenContainDecorator children 'Output'}}
+        <section class="tsd-panel-group tsd-member-group {{cssClasses}}">
+            <h2>Outputs</h2>
+            {{#each children}}
+                {{#ifDecoratorsContain this 'Output'}}
+                    {{#unless hasOwnDocument}}
+                        {{> member}}
+                    {{/unless}}
+                {{/ifDecoratorsContain}}
+            {{/each}}
+        </section>
+    {{/ifChildrenContainDecorator}}
+
+    {{#NOTifChildrenContainDecorator children}}
+        <section class="tsd-panel-group tsd-member-group {{cssClasses}}">
+            <h2>{{title}}</h2>
+            {{#each children}}
+                {{#ifNoDecorators this}}
+                    {{#unless hasOwnDocument}}
+                        {{> member}}
+                    {{/unless}}
+                {{/ifNoDecorators}}
+            {{/each}}
+        </section>
+    {{/NOTifChildrenContainDecorator}}
+{{/ifEquals}}
+
+{{#ifNotEquals title 'Properties'}}
+    <section class="tsd-panel-group tsd-member-group {{cssClasses}}">
+        <h2>{{title}}</h2>
+        {{#each children}}
             {{#unless hasOwnDocument}}
                 {{> member}}
             {{/unless}}
-        {{/ifDecoratorsContain}}
-    {{/each}}
-</section>
+        {{/each}}
+    </section>
+{{/ifNotEquals}}
