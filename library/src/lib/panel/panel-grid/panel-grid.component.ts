@@ -10,11 +10,11 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 })
 export class PanelGridComponent extends AbstractFdNgxClass {
 
-    /** @Input Number of columns for the grid. */
+    /** Number of columns for the grid. */
     @Input()
     col: number;
 
-    /** @Input Whether the grid shoul have a gap. */
+    /** Whether the grid shoul have a gap. */
     @Input()
     @HostBinding('class.fd-panel-grid--nogap')
     nogap: boolean = false;

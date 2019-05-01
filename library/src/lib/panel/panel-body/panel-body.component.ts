@@ -22,7 +22,7 @@ export class PanelBodyComponent {
     @HostBinding('class.fd-panel__body')
     fdPanelBodyClass: boolean = true;
 
-    /** @Input Whether the edges of the panel should have bleeding padding. */
+    /** Whether the edges of the panel should have bleeding padding. */
     @Input()
     @HostBinding('class.fd-panel__body--bleed')
     bleed: boolean = false;
