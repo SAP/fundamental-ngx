@@ -35,7 +35,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.scrollEvent) {
+        if (this.subscription) {
             this.subscription.unsubscribe();
         }
     }
