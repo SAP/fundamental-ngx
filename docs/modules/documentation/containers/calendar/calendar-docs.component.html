@@ -4,7 +4,7 @@
   <br /><br />
   You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
   To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
-  Note that selecting a day (or range of days) in this manner will override any block/disable functions.
+  Note that selecting a day (or range of days) in this manner will override any block/disable functions.  The <code>disableFunction</code> and <code>blockFunction</code> inputs can be changed and the calendar will automatically update (see example).
 </description>
 <component-example [name]="'ex1'">
   <fd-calendar-single-example></fd-calendar-single-example>

@@ -11,7 +11,7 @@ import {
     OnDestroy,
     AfterViewChecked,
     ChangeDetectorRef,
-    HostBinding
+    HostBinding, OnChanges, SimpleChanges
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -57,7 +57,7 @@ export interface EmittedDate {
         }
     ]
 })
-export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor {
+export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
     calendarId: string;
 
     newFocusedDayId: string;
@@ -922,6 +922,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     ngOnDestroy() {
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.unsubscribe();
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes && (changes.disableFunction || changes.blockFunction)) {
+            this.constructCalendar();
         }
     }
 
