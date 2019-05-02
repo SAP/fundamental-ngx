@@ -33,7 +33,8 @@
                              [(selectedDay)]="selectedDay"
                              (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                              [dateFromDatePicker]="dateFromInput"
-                             [isDateTimePicker]="true"></fd-calendar>
+                             [isDateTimePicker]="true"
+                             [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time [disabled]="disabled" [ngClass]="{'fd-time-container': !meridian}"
                          [meridian]="meridian"

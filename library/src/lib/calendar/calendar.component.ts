@@ -73,7 +73,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     calType: CalendarType = 'single';
 
     @Input()
-    mondayStartOfWeek: boolean = false;
+    startingDayOfWeek: number = 0;
 
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
@@ -190,14 +190,19 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     };
 
+    setWeekDaysOrder() {
+        this.weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        for (let i = this.startingDayOfWeek; i > 0; i--) {
+            this.weekDays.push(this.weekDays.shift());
+        }
+    }
+
     getPreviousMonthDays(calendarMonth) {
         // Previous month days
         let prevMonthLastDate;
-        if (this.mondayStartOfWeek) {
-            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), -1);
-        } else {
-            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
-        }
+        this.setWeekDaysOrder();
+        const startingDay = this.startingDayOfWeek * -1;
+        prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), startingDay);
         const prevMonth: number = prevMonthLastDate.getMonth();
         const prevMonthYear: number = prevMonthLastDate.getFullYear();
         const prevMonthLastDay = prevMonthLastDate.getDate();
