@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.6-rc.4"></a>
+## [0.4.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.3...v0.4.6-rc.4) (2019-05-02)
+
+
+### Bug Fixes
+
+* construct calendar when disable function changes ([#770](https://github.com/SAP/fundamental-ngx/issues/770)) ([6577ff2](https://github.com/SAP/fundamental-ngx/commit/6577ff2))
+
+
+
 <a name="0.4.6-rc.3"></a>
 ## [0.4.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.2...v0.4.6-rc.3) (2019-05-01)
 
