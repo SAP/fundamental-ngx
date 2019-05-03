@@ -12,7 +12,6 @@ class TestComponent {
     ref: ElementRef;
 }
 
-
 describe('FormLegendDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
