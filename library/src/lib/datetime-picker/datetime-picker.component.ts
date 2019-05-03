@@ -62,6 +62,9 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     timeComponent;
 
     @Input()
+    startingDayOfWeek: number = 0;
+
+    @Input()
     disableFunction = function(d): boolean {
         return false;
     };
