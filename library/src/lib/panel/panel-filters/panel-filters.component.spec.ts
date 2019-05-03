@@ -21,4 +21,8 @@ describe('PanelFiltersComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should have panel filters class', () => {
+        expect(fixture.nativeElement.className).toBe('fd-panel__filters');
+    });
 });

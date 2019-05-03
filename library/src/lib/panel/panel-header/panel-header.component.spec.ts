@@ -21,4 +21,8 @@ describe('PanelHeaderComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should have panel head class', () => {
+        expect(fixture.nativeElement.className).toBe('fd-panel__header');
+    });
 });
