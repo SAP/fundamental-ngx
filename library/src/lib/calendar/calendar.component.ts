@@ -205,12 +205,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         // Previous month days
         let prevMonthLastDate;
         this.setWeekDaysOrder();
-        const startingDay = this.startingDayOfWeek * -1;
-        prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), startingDay);
+        prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
         const prevMonth: number = prevMonthLastDate.getMonth();
         const prevMonthYear: number = prevMonthLastDate.getFullYear();
         const prevMonthLastDay = prevMonthLastDate.getDate();
-        let prevMonthLastWeekDay = prevMonthLastDate.getDay();
+        let prevMonthLastWeekDay = prevMonthLastDate.getDay() - this.startingDayOfWeek;
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
