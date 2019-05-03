@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormSetDirective } from './form-set/form-set.directive';
 import { FormControlDirective } from './form-control/form-control.directive';
 import { FormItemDirective } from './form-item/form-item.directive';
-import { FormLabelComponent } from './form-label/form-label.component';
-import { FormLegendComponent } from './form-legend/form-legend.component';
+import { FormLabelDirective } from './form-label/form-label.directive';
+import { FormLegendDirective } from './form-legend/form-legend.directive';
 import { FormMessageComponent } from './form-message/form-message.component';
 import { FormGroupComponent } from './form-group/form-group.component';
 
@@ -15,8 +15,8 @@ import { FormGroupComponent } from './form-group/form-group.component';
         FormSetDirective,
         FormControlDirective,
         FormItemDirective,
-        FormLabelComponent,
-        FormLegendComponent,
+        FormLabelDirective,
+        FormLegendDirective,
         FormMessageComponent,
         FormGroupComponent
     ],
@@ -24,8 +24,8 @@ import { FormGroupComponent } from './form-group/form-group.component';
         FormSetDirective,
         FormControlDirective,
         FormItemDirective,
-        FormLabelComponent,
-        FormLegendComponent,
+        FormLabelDirective,
+        FormLegendDirective,
         FormMessageComponent,
         FormGroupComponent
     ]

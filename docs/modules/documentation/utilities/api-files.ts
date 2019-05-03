@@ -59,8 +59,8 @@ export const API_FILES = {
         'FormControlDirective',
         'FormGroupComponent',
         'FormItemDirective',
-        'FormLabelComponent',
-        'FormLegendComponent',
+        'FormLabelDirective',
+        'FormLegendDirective',
         'FormMessageComponent',
         'FormSetDirective'
     ],

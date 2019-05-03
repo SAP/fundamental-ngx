@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormLegendComponent } from './form-legend.component';
+import { FormLegendDirective } from './form-legend.directive';
 
-describe('FormLegendComponent', () => {
-    let component: FormLegendComponent;
-    let fixture: ComponentFixture<FormLegendComponent>;
+describe('FormLegendDirective', () => {
+    let component: FormLegendDirective;
+    let fixture: ComponentFixture<FormLegendDirective>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FormLegendComponent]
+            declarations: [FormLegendDirective]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FormLegendComponent);
+        fixture = TestBed.createComponent(FormLegendDirective);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

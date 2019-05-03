@@ -1,26 +1,32 @@
-import { Directive, Inject, ElementRef, Input } from '@angular/core';
-import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { Directive, Input, HostBinding } from '@angular/core';
 
+/**
+ * Directive to be applied to the parent of a form control.
+ *
+ * ```html
+ * <div fd-form-item>
+ *     <input fd-form-control type="text" />
+ * </div>
+ * ```
+ */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
     selector: '[fd-form-item]'
 })
-export class FormItemDirective extends AbstractFdNgxClass {
-    @Input() isCheck: boolean = false;
-    @Input() isInline: boolean = false;
+export class FormItemDirective {
 
-    _setProperties() {
-        this._addClassToElement('fd-form__item');
-        if (this.isCheck) {
-            this._addClassToElement('fd-form__item--check');
-        }
-        if (this.isInline) {
-            this._addClassToElement('fd-form__item--inline');
-        }
-    }
+    /** Whether the form item is a checkbox. */
+    @Input()
+    @HostBinding('class.fd-form__item--check')
+    isCheck: boolean = false;
 
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
-        super(elementRef);
-    }
+    /** Whether the form item is inline. */
+    @Input()
+    @HostBinding('class.fd-form__item--inline')
+    isInline: boolean = false;
+
+    /** @hidden */
+    @HostBinding('class.fd-form__item')
+    fdFormItemClass: boolean = true;
 }
