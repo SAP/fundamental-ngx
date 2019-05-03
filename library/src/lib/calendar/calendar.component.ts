@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
+export type WeekDaysNumberRange = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface CalendarDay {
     date: Date;
@@ -73,7 +74,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     calType: CalendarType = 'single';
 
     @Input()
-    startingDayOfWeek: number = 0;
+    startingDayOfWeek: WeekDaysNumberRange = 0;
 
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
@@ -115,6 +116,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         'November',
         'December'
     ];
+
     weekDays: string[];
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
