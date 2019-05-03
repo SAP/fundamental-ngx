@@ -1,21 +1,25 @@
 import { FormItemDirective } from './form-item.directive';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<div fd-form-item="">FormItem</div>'
+    template: '<div #directiveElement fd-form-item [isCheck]="check" [isInline]="inline">FormItem</div>'
 })
-export class TestComponent {}
+export class TestComponent {
+    @ViewChild('directiveElement')
+    ref: ElementRef;
+
+    check: boolean = false;
+
+    inline: boolean = false;
+}
 
 describe('FormItemDirective', () => {
     let fixture: ComponentFixture<TestComponent>,
         component: TestComponent,
         debugElement: DebugElement,
         element: HTMLElement;
-
-    let directive, directiveInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -29,27 +33,25 @@ describe('FormItemDirective', () => {
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(FormItemDirective));
-        directiveInstance = directive.injector.get(FormItemDirective);
-
-        spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-form__item');
+        expect(component).toBeTruthy();
     });
 
-    it('should add appropriate classes', () => {
-        directiveInstance.isCheck = true;
-        directiveInstance.isInline = true;
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-form__item');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-form__item--check');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-form__item--inline');
+    it('should assign item class', () => {
+        expect(component.ref.nativeElement.className).toBe('fd-form__item');
+    });
+
+    it('should support isCheck', () => {
+        component.check = true;
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.className).toContain('fd-form__item--check');
+    });
+
+    it('should support isInline', () => {
+        component.inline = true;
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.className).toContain('fd-form__item--inline');
     });
 });

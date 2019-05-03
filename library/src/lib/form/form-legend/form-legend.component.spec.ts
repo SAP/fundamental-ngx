@@ -1,24 +1,40 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormModule } from '../form.module';
 
-import { FormLegendDirective } from './form-legend.directive';
+@Component({
+    template: `
+        <legend #directiveElement fd-form-legend>Test Text</legend>
+    `
+})
+class TestComponent {
+    @ViewChild('directiveElement')
+    ref: ElementRef;
+}
+
 
 describe('FormLegendDirective', () => {
-    let component: FormLegendDirective;
-    let fixture: ComponentFixture<FormLegendDirective>;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FormLegendDirective]
+            declarations: [TestComponent],
+            imports: [FormModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FormLegendDirective);
+        fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should assign class', () => {
+        expect(component.ref.nativeElement.className).toBe('fd-form__legend');
     });
 });
