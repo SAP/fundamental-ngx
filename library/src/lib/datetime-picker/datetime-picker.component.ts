@@ -74,9 +74,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Output()
     readonly timeChange: EventEmitter<Date> = new EventEmitter<Date>();
 
-    /** Event emitted when popover opens or closes. */
+    /** Event emitted when popover closes. */
     @Output()
-    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly onClose: EventEmitter<Date> = new EventEmitter<Date>();
 
     /**
      * @hidden Date of the input field. Internal use.
@@ -119,25 +119,39 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     onTouched: any = () => {};
 
-    /** Opens the popover */
-    openPopover(e) {
-        this.isOpen = !this.isOpen;
-        this.inputValueChange(e);
-        if (this.isInvalidDateInput) {
-            this.inputFieldDate = null;
+    /** Toggles the popover. */
+    togglePopover(): void {
+        if (this.isOpen) {
+            this.closePopover();
+        } else {
+            this.openPopover();
         }
     }
 
-    closePopover() {
+    /** Opens the popover. */
+    openPopover(): void {
+        if (!this.isOpen) {
+            this.isOpen = true;
+            this.inputValueChange(this.date);
+            if (this.isInvalidDateInput) {
+                this.inputFieldDate = null;
+            }
+        }
+    }
+
+    /** Closes the popover */
+    closePopover(): void {
         if (this.isOpen) {
             if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
             }
+            this.onClose.emit(this.date);
             this.isOpen = false;
         }
     }
 
-    onBlurHandler() {
+    /** @hidden */
+    onBlurHandler(): void {
         if (this.isOpen) {
             if (this.isInvalidDateInput) {
                 this.inputFieldDate = null;
@@ -145,7 +159,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    updatePickerInputHandler(d) {
+    /** @hidden */
+    updatePickerInputHandler(d): void {
         if (d.selectedDay && d.selectedDay.date) {
             d.selectedDay.date.setHours(this.date.getHours());
             d.selectedDay.date.setMinutes(this.date.getMinutes());
@@ -177,10 +192,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    isInvalidDateInputHandler(e) {
+    /** @hidden */
+    isInvalidDateInputHandler(e): void {
         this.isInvalidDateInput = e;
     }
 
+    /** @hidden */
     inputValueChange(e): void {
         if (e !== '') {
             const temp = new Date(e);
@@ -199,19 +216,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
+    /** @hidden */
     @HostListener('document:keydown.escape', [])
-    onEscapeKeydownHandler() {
+    onEscapeKeydownHandler(): void {
         this.closePopover();
     }
 
+    /** @hidden */
     @HostListener('document:click', ['$event.path'])
-    public onGlobalClick(targetElementPath: Array<any>) {
+    public onGlobalClick(targetElementPath: Array<any>): void {
         const elementRefInPath = targetElementPath.find(e => e === this.elRef.nativeElement);
         if (!elementRefInPath) {
             this.closePopover();
         }
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (this.date && this.inputFieldDate !== null) {
             this.selectedDay.date = this.date;
@@ -224,26 +244,32 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         if (this.dateFromInputSubscription) {
             this.dateFromInputSubscription.unsubscribe();
         }
     }
 
+    /** @hidden */
     constructor(private elRef: ElementRef) {}
 
+    /** @hidden */
     registerOnChange(fn: (selected: any) => {void}): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
+    /** @hidden */
     writeValue(selected: Date): void {
         if (!selected) {
             return;
@@ -254,6 +280,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.setTime();
     }
 
+    /** @hidden */
     setTime(fireEvents = false): void {
         this.date.setHours(this.time.hour);
         this.date.setMinutes(this.time.minute);
@@ -267,7 +294,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    focusArrowLeft() {
+    /** @hidden */
+    focusArrowLeft(): void {
         this.elRef.nativeElement.querySelector('#arrowLeft').focus();
     }
 
