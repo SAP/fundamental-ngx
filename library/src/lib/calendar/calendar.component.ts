@@ -192,8 +192,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     setWeekDaysOrder() {
         this.weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-        for (let i = this.startingDayOfWeek; i > 0; i--) {
-            this.weekDays.push(this.weekDays.shift());
+        if (this.startingDayOfWeek <= 6 && this.startingDayOfWeek >= 0) {
+            for (let i = this.startingDayOfWeek; i > 0; i--) {
+                this.weekDays.push(this.weekDays.shift());
+            }
         }
     }
 
