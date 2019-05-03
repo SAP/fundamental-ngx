@@ -1,5 +1,5 @@
-import { Directive, Input, ElementRef, Inject } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { Directive, Input, ElementRef } from '@angular/core';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 @Directive({
     // TODO to be discussed
@@ -7,7 +7,9 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: '[fd-form-control]'
 })
 export class FormControlDirective extends AbstractFdNgxClass {
-    @Input() state: string = '';
+
+    @Input()
+    state: string;
 
     _setProperties() {
         this._addClassToElement('fd-form__control');
@@ -16,7 +18,7 @@ export class FormControlDirective extends AbstractFdNgxClass {
         }
     }
 
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 }
