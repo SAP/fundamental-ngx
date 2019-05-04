@@ -36,7 +36,7 @@ describe('ButtonGroupedDirective', () => {
         directiveInstance = directive.injector.get(ButtonGroupedDirective);
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(directiveInstance, '_addClassToElement').and.callThrough();
     });
 
     it('should create', () => {
@@ -56,6 +56,7 @@ describe('ButtonGroupedDirective', () => {
     it('should support glyph', () => {
         const testIconLabel = 'icon';
         directiveInstance.glyph = testIconLabel;
+        directiveInstance.ngOnInit();
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('sap-icon--' + testIconLabel);
     });
@@ -63,13 +64,15 @@ describe('ButtonGroupedDirective', () => {
     it('should support state', () => {
         const testState = 'state';
         directiveInstance.state = testState;
+        directiveInstance.ngOnInit();
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('is-' + testState);
     });
 
     it('should support size', () => {
         const testSize = 'size';
-        directiveInstance.state = testSize;
+        directiveInstance.size = testSize;
+        directiveInstance.ngOnInit();
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('fd-button--' + testSize);
     });
