@@ -46,6 +46,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
     @Input() displaySeconds: boolean = true;
 
+    @Input() validate: boolean = true;
+
     @Input()
     date: Date = new Date();
 
@@ -80,25 +82,11 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     openPopover(e) {
         this.isOpen = !this.isOpen;
         this.inputValueChange(e);
-        if (this.isInvalidDateInput) {
-            this.inputFieldDate = null;
-        }
     }
 
     closePopover() {
         if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
             this.isOpen = false;
-        }
-    }
-
-    onBlurHandler() {
-        if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
         }
     }
 
@@ -139,19 +127,16 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     inputValueChange(e): void {
-        if (e !== '') {
-            const temp = new Date(e);
-            if (isNaN(temp.getTime())) {
-                this.inputFieldDate = this.date.toLocaleString();
-            } else {
-                const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
-                if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
-                    this.time = newValue;
-                    this.setTime(true);
-                }
-                this.dateFromInput.next(temp.toLocaleDateString());
+        const temp = new Date(e);
+        if (temp.toString() !== 'Invalid Date') {
+            const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
+            if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
+                this.time = newValue;
+                this.setTime(true);
             }
+            this.dateFromInput.next(temp.toLocaleDateString());
         } else {
+            this.isInvalidDateInput = true;
             this.dateFromInput.next('');
         }
     }
