@@ -7,7 +7,6 @@ import {
     HostListener,
     ElementRef,
     forwardRef,
-    Inject,
     OnDestroy,
     AfterViewChecked,
     ChangeDetectorRef,
@@ -16,6 +15,8 @@ import {
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { CalendarI18n } from './i18n/calendar-i18n';
+import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -33,6 +34,7 @@ export interface CalendarDay {
     selectedLast?: boolean;
     today?: boolean;
     isTabIndexed?: boolean;
+    ariaLabel?: string;
 }
 
 export interface EmittedDate {
@@ -231,7 +233,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                         this.selectedRangeFirst.date &&
                         calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
                         this.selectedRangeLast.date &&
-                        calDate.getTime() < this.selectedRangeLast.date.getTime()
+                        calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                    ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
                 };
 
                 calendarMonth.push(previousMonthCalendarDay);
@@ -925,7 +928,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef, private cd: ChangeDetectorRef) {
+    constructor(private hasher: HashService,
+                private eRef: ElementRef,
+                private cd: ChangeDetectorRef,
+                public calendarI18nLabels: CalendarI18nLabels,
+                public calendarI18n: CalendarI18n) {
     }
 
     registerOnChange(fn: any): void {
