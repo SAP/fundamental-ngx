@@ -1,6 +1,9 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { HashService } from '../utils/hash.service';
+import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
 
+/**
+ * A token is used to represent contextualizing information.
+ * They can be useful to show applied filters, selected values for form fields or object metadata.
+ */
 @Component({
     selector: 'fd-token',
     templateUrl: './token.component.html',
@@ -10,31 +13,27 @@ import { HashService } from '../utils/hash.service';
         'role': 'button'
     }
 })
-export class TokenComponent implements OnInit {
+export class TokenComponent {
 
+    /** @hidden */
     @ViewChild('contentContainer')
     contentContainer: ElementRef;
 
+    /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
-    onCloseClick: EventEmitter<string> = new EventEmitter<string>();
+    readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
-    @Input()
-    id: string;
+    /** @hidden */
+    constructor(private elRef: ElementRef) {
+    }
 
+    /** @hidden */
     @HostListener('click', ['$event'])
     clickHandler(event): void {
         if (this.contentContainer) {
             if (this.elRef.nativeElement.contains(event.target) && !this.contentContainer.nativeElement.contains(event.target)) {
-                this.onCloseClick.emit(this.id);
+                this.onCloseClick.emit();
             }
-        }
-    }
-
-    constructor(private elRef: ElementRef, private hash: HashService) {}
-
-    ngOnInit(): void {
-        if (!this.id) {
-            this.id = this.hash.hash();
         }
     }
 

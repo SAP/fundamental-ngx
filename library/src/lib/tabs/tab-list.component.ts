@@ -27,11 +27,11 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @ViewChildren('tabLink')
     tabLinks: QueryList<ElementRef>;
 
-    /** @Input Index of the selected tab panel. */
+    /** Index of the selected tab panel. */
     @Input()
     selectedIndex: number = 0;
 
-    /** @Output Event emitted when the selected panel changes. */
+    /** Event emitted when the selected panel changes. */
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 

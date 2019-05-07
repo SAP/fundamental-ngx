@@ -2,6 +2,91 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.1"></a>
+# [0.5.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.0...v0.5.0-rc.1) (2019-05-07)
+
+
+### Bug Fixes
+
+* added onClose event to datetime picker ([#778](https://github.com/SAP/fundamental-ngx/issues/778)) ([c1f6fb9](https://github.com/SAP/fundamental-ngx/commit/c1f6fb9))
+
+
+
+<a name="0.5.0-rc.0"></a>
+# [0.5.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.8...v0.5.0-rc.0) (2019-05-06)
+
+
+### Features
+
+* replaced useless form components with directives ([#777](https://github.com/SAP/fundamental-ngx/issues/777)) ([0beb619](https://github.com/SAP/fundamental-ngx/commit/0beb619))
+
+
+
+<a name="0.4.6-rc.8"></a>
+## [0.4.6-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.7...v0.4.6-rc.8) (2019-05-03)
+
+
+### Bug Fixes
+
+* allow user to set any day as starting day of week ([#772](https://github.com/SAP/fundamental-ngx/issues/772)) ([42e4b36](https://github.com/SAP/fundamental-ngx/commit/42e4b36))
+
+
+
+<a name="0.4.6-rc.7"></a>
+## [0.4.6-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.6...v0.4.6-rc.7) (2019-05-03)
+
+
+
+<a name="0.4.6-rc.6"></a>
+## [0.4.6-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.5...v0.4.6-rc.6) (2019-05-03)
+
+
+
+<a name="0.4.6-rc.5"></a>
+## [0.4.6-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.4...v0.4.6-rc.5) (2019-05-03)
+
+
+### Bug Fixes
+
+* allow different panel headers ([#765](https://github.com/SAP/fundamental-ngx/issues/765)) ([4c1de7e](https://github.com/SAP/fundamental-ngx/commit/4c1de7e))
+
+
+
+<a name="0.4.6-rc.4"></a>
+## [0.4.6-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.3...v0.4.6-rc.4) (2019-05-02)
+
+
+### Bug Fixes
+
+* construct calendar when disable function changes ([#770](https://github.com/SAP/fundamental-ngx/issues/770)) ([6577ff2](https://github.com/SAP/fundamental-ngx/commit/6577ff2))
+
+
+
+<a name="0.4.6-rc.3"></a>
+## [0.4.6-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.2...v0.4.6-rc.3) (2019-05-01)
+
+
+
+<a name="0.4.6-rc.2"></a>
+## [0.4.6-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.1...v0.4.6-rc.2) (2019-05-01)
+
+
+
+<a name="0.4.6-rc.1"></a>
+## [0.4.6-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.0...v0.4.6-rc.1) (2019-04-28)
+
+
+
+<a name="0.4.6-rc.0"></a>
+## [0.4.6-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.4.5...v0.4.6-rc.0) (2019-04-26)
+
+
+
+<a name="0.4.5"></a>
+## [0.4.5](https://github.com/SAP/fundamental-ngx/compare/v0.4.5-rc.11...v0.4.5) (2019-04-25)
+
+
+
 <a name="0.4.5-rc.11"></a>
 ## [0.4.5-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.4.5-rc.10...v0.4.5-rc.11) (2019-04-25)
 

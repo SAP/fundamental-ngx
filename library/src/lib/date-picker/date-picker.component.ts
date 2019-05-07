@@ -71,6 +71,9 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     selectedRangeLastChange = new EventEmitter();
 
     @Input()
+    startingDayOfWeek: number = 0;
+
+    @Input()
     disableFunction = function(d): boolean {
         return false;
     };

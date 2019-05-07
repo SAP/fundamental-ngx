@@ -1,18 +1,29 @@
-import { Component, ElementRef, HostBinding, Inject, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+/**
+ * Panels are used to encapsulate part of the content, form elements, lists, collections, etc., on a page.
+ */
 @Component({
     selector: 'fd-panel',
     templateUrl: './panel.component.html',
     styles: [':host {display: block;}']
 })
 export class PanelComponent extends AbstractFdNgxClass {
-    @Input() columnSpan: number;
 
-    @Input() backgroundImage: string;
+    /** @Input Column span for the panel in the grid system */
+    @Input()
+    columnSpan: number;
 
-    @HostBinding('class.fd-panel') true;
+    /** @Input Background image of the panel. */
+    @Input()
+    backgroundImage: string;
 
+    /** @hidden */
+    @HostBinding('class.fd-panel')
+    fdPanelClass: boolean = true;
+
+    /** @hidden */
     _setProperties() {
         if (this.columnSpan) {
             this._addClassToElement('fd-has-grid-column-span-' + this.columnSpan);
@@ -22,7 +33,8 @@ export class PanelComponent extends AbstractFdNgxClass {
         }
     }
 
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    /** @hidden */
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 }

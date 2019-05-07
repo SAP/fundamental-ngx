@@ -1,4 +1,14 @@
 {{#with comment}}
+    {{#with ../decorators}}
+        {{#each this}}
+            {{#ifEquals this.name 'Component'}}
+                <p class="lead"><strong>Selector:&nbsp;</strong>&lt;{{parseSelector this.arguments.obj}}&gt;</p>
+            {{/ifEquals}}
+            {{#ifEquals this.name 'Directive'}}
+                <p class="lead"><strong>Selector:&nbsp;</strong>{{parseSelector this.arguments.obj}}</p>
+            {{/ifEquals}}
+        {{/each}}
+    {{/with}}
     {{#if hasVisibleComponent}}
         <div class="tsd-comment tsd-typography">
             {{#if shortText}}

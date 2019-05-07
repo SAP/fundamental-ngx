@@ -10,16 +10,16 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     templateUrl: './badge-label.component.html'
 })
 export class LabelComponent extends AbstractFdNgxClass {
-    /** @Input Color coded status for the label. Options are 'success', 'warning', and 'error'. Leave empty for default label. */
+    /** Color coded status for the label. Options are 'success', 'warning', and 'error'. Leave empty for default label. */
     @Input() status: string = '';
 
-    /** @Input When set to 'true', the type of the label is 'Status Indicator Label'. Leave empty for default type. */
+    /** When set to 'true', the type of the label is 'Status Indicator Label'. Leave empty for default type. */
     @Input() isStatusLabel: boolean = false;
 
-    /** @Input Built-in status icon. Options include 'available', 'away', 'busy', and 'offline'. */
+    /** Built-in status icon. Options include 'available', 'away', 'busy', and 'offline'. */
     @Input() statusIcon: string = '';
 
-    /** @Input The icon used with the status indicator. See the icon page for the list of icons. */
+    /** The icon used with the status indicator. See the icon page for the list of icons. */
     @Input() icon: string = '';
 
     /** @hidden */

@@ -3,4 +3,4 @@
 <button style="margin-left: 20px;" fd-button (click)="decrementMonth()">-1 Day</button>
 
 <br /> <br />
-Selected: {{date.toLocaleString()}}
+Selected: {{date ? date.toLocaleString() : 'null'}}

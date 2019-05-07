@@ -1,22 +1,24 @@
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'input-41'">
+        <label fd-form-label for="input-41">
             Input with inline help
             <span class="fd-inline-help fd-has-float-right">
-        <span class="fd-inline-help__content fd-inline-help__content--bottom-right">
-          Lorem ipsum dolor sit amet, consectetur adipiscing.
-        </span>
-      </span>
-        </fd-form-label>
-        <input fd-form-control [type]="'text'" id="input-41">
+                <span class="fd-inline-help__content fd-inline-help__content--bottom-right">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                </span>
+            </span>
+        </label>
+        <input fd-form-control type="text" id="input-41">
     </div>
 </div>
 <div fd-form-set>
     <div fd-form-item>
-        <fd-form-label [forValue]="'input-42'">
+        <label fd-form-label for="input-42">
             Input with help message
-        </fd-form-label>
-        <input fd-form-control [type]="'text'" id="input-42">
-        <fd-form-message [type]="'help'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+        </label>
+        <input fd-form-control type="text" id="input-42">
+        <fd-form-message type="help">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        </fd-form-message>
     </div>
 </div>

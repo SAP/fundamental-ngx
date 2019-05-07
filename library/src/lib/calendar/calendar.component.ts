@@ -10,7 +10,7 @@ import {
     OnDestroy,
     AfterViewChecked,
     ChangeDetectorRef,
-    HostBinding
+    HostBinding, OnChanges, SimpleChanges
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -20,6 +20,7 @@ import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
+export type WeekDaysNumberRange = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface CalendarDay {
     date: Date;
@@ -59,7 +60,7 @@ export interface EmittedDate {
         }
     ]
 })
-export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor {
+export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
     calendarId: string;
 
     newFocusedDayId: string;
@@ -75,7 +76,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     calType: CalendarType = 'single';
 
     @Input()
-    mondayStartOfWeek: boolean = false;
+    startingDayOfWeek: WeekDaysNumberRange = 0;
 
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
@@ -117,6 +118,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         'November',
         'December'
     ];
+
     weekDays: string[];
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -192,18 +194,24 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     };
 
+    setWeekDaysOrder() {
+        this.weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        if (this.startingDayOfWeek <= 6 && this.startingDayOfWeek >= 0) {
+            for (let i = this.startingDayOfWeek; i > 0; i--) {
+                this.weekDays.push(this.weekDays.shift());
+            }
+        }
+    }
+
     getPreviousMonthDays(calendarMonth) {
         // Previous month days
         let prevMonthLastDate;
-        if (this.mondayStartOfWeek) {
-            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), -1);
-        } else {
-            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
-        }
+        this.setWeekDaysOrder();
+        prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
         const prevMonth: number = prevMonthLastDate.getMonth();
         const prevMonthYear: number = prevMonthLastDate.getFullYear();
         const prevMonthLastDay = prevMonthLastDate.getDate();
-        let prevMonthLastWeekDay = prevMonthLastDate.getDay();
+        let prevMonthLastWeekDay = prevMonthLastDate.getDay() - this.startingDayOfWeek;
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
@@ -925,6 +933,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     ngOnDestroy() {
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.unsubscribe();
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes && (changes.disableFunction || changes.blockFunction)) {
+            this.constructCalendar();
         }
     }
 

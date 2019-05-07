@@ -588,4 +588,15 @@ describe('CalendarComponent', () => {
         expect(component.init).toBeTruthy();
     });
 
+    it('should properly rearrange days when different startingDayOfWeek is used', () => {
+        component.setWeekDaysOrder();
+        expect(component.weekDays).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+        component.startingDayOfWeek = 1;
+        component.setWeekDaysOrder();
+        expect(component.weekDays).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+        component.startingDayOfWeek = 2;
+        component.setWeekDaysOrder();
+        expect(component.weekDays).toEqual(['T', 'W', 'T', 'F', 'S', 'S', 'M']);
+    });
+
 });

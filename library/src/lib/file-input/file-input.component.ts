@@ -25,41 +25,41 @@ export class FileInputComponent implements ControlValueAccessor {
     @ViewChild('input')
     inputRef: ElementRef;
 
-    /** @Input Whether the file input is disabled. */
+    /** Whether the file input is disabled. */
     @Input()
     disabled: boolean = false;
 
-    /** @Input Whether the file input should accept multiple files. */
+    /** Whether the file input should accept multiple files. */
     @Input()
     multiple: boolean = true;
 
-    /** @Input Accepted file extensions. Format: `'.png,.jpg'`. */
+    /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
     accept: string;
 
-    /** @Input Whether the file input accepts drag and dropped files. */
+    /** Whether the file input accepts drag and dropped files. */
     @Input()
     dragndrop: boolean = true;
 
-    /** @Input Max file size in bytes that the input will accept. */
+    /** Max file size in bytes that the input will accept. */
     @Input()
     maxFileSize: number;
 
-    /** @Output Event fired when files are selected. Passed object is the array of files selected. */
+    /** Event fired when files are selected. Passed object is the array of files selected. */
     @Output()
-    onSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onSelect: EventEmitter<File[]> = new EventEmitter<File[]>();
 
-    /** @Output Event fired when some invalid files are selected. Passed object is the array of invalid files. */
+    /** Event fired when some invalid files are selected. Passed object is the array of invalid files. */
     @Output()
-    onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
+    readonly onInvalidFiles: EventEmitter<File[]> = new EventEmitter<File[]>();
 
-    /** @Output Event fired when the dragged file enters the component boundaries. */
+    /** Event fired when the dragged file enters the component boundaries. */
     @Output()
-    onDragEnter: EventEmitter<null> = new EventEmitter<null>();
+    readonly onDragEnter: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @Output Event fired when the dragged file exits the component boundaries. */
+    /** Event fired when the dragged file exits the component boundaries. */
     @Output()
-    onDragLeave: EventEmitter<null> = new EventEmitter<null>();
+    readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     onChange: Function = () => {};

@@ -59,8 +59,8 @@ export const API_FILES = {
         'FormControlDirective',
         'FormGroupComponent',
         'FormItemDirective',
-        'FormLabelComponent',
-        'FormLegendComponent',
+        'FormLabelDirective',
+        'FormLegendDirective',
         'FormMessageComponent',
         'FormSetDirective'
     ],
@@ -128,7 +128,7 @@ export const API_FILES = {
         'PanelGridComponent',
         'PanelHeaderComponent',
         'PanelHeadComponent',
-        'PanelTitleComponent'
+        'PanelTitleDirective'
     ],
     popover: [
         'PopoverComponent',

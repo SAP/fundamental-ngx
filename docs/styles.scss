@@ -180,6 +180,12 @@ a:focus {
 }
 
 .fd-playground--markdown {
+
+    #fundamental-ngx {
+        margin-top: calc(2rem + 10px);
+        font-size: 2.2rem;
+    }
+
     ol,
     ul {
         padding-left: 2rem;
