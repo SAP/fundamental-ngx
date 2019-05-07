@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.1"></a>
+# [0.5.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.0...v0.5.0-rc.1) (2019-05-07)
+
+
+### Bug Fixes
+
+* added onClose event to datetime picker ([#778](https://github.com/SAP/fundamental-ngx/issues/778)) ([c1f6fb9](https://github.com/SAP/fundamental-ngx/commit/c1f6fb9))
+
+
+
 <a name="0.5.0-rc.0"></a>
 # [0.5.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.4.6-rc.8...v0.5.0-rc.0) (2019-05-06)
 

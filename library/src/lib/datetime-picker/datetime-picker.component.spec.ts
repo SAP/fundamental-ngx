@@ -35,7 +35,7 @@ describe('DatetimePickerComponent', () => {
         spyOn(component, 'inputValueChange');
         component.isOpen = false;
         component.isInvalidDateInput = true;
-        component.openPopover({});
+        component.openPopover();
         expect(component.inputValueChange).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
         expect(component.inputFieldDate).toBeNull();
