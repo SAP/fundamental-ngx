@@ -67,7 +67,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     init = false;
 
-    @HostBinding('class.fd-calendar') true;
+    @HostBinding('class.fd-calendar')
+    fdCalendarClass: boolean = true;
 
     @Input()
     dateFromDatePicker: Subject<any>;
@@ -1004,6 +1005,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.monthsFullName = this.calendarI18n.getAllFullMonthNames();
             this.monthsShortName = this.calendarI18n.getAllShortMonthNames();
             this.monthName = this.monthsFullName[this.month];
+            this.setWeekDaysOrder();
             this.cd.detectChanges();
         });
 

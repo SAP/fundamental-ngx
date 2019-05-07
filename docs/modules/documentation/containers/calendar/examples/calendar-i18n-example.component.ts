@@ -4,7 +4,7 @@ import { CalendarI18nLabels } from '../../../../../../library/src/lib/calendar/i
 
 const localized_values = {
     'fr': {
-        weekdays: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+        weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
         months: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
         fullMonths: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
             'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -53,6 +53,8 @@ export class CustomI18nLabels extends CalendarI18nLabels {
 @Component({
     selector: 'fd-calendar-i18n-example',
     template: `<fd-calendar [(ngModel)]="selectedDay"></fd-calendar>`,
+
+    // Note that this can be provided in the root of your application.
     providers: [
         {
             provide: CalendarI18n,
