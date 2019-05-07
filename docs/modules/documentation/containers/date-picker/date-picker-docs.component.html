@@ -10,10 +10,17 @@
 <code-example [code]="datePickerSingleJs" [language]="'typescript'"></code-example>
 
 <separator></separator>
-
 <h2>Range Date Picker</h2>
 <description>Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.</description>
 <component-example [name]="'ex2'">
   <fd-date-picker-range-example></fd-date-picker-range-example>
 </component-example>
 <code-example [code]="datePickerRangeJs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Internationalization</h2>
+<description>It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.</description>
+<component-example [name]="'ex3'">
+    <fd-datepicker-i18n-example></fd-datepicker-i18n-example>
+</component-example>
+<code-example [code]="datePickerI18NTs" [language]="'typescript'"></code-example>
