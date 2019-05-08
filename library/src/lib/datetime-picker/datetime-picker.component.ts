@@ -194,7 +194,18 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     inputValueChange(e): void {
         const temp = new Date(e);
-        if (temp.toString() !== 'Invalid Date') {
+        /*
+         Need to check if current locale toDateString contains AM or PM. If the current locale has it and it is absent
+         from the user's input, the meridian should be considered invalid
+         */
+        const localeMeridian = new Date().toLocaleTimeString().slice(-2);
+        let meridianValid = true;
+        if ((localeMeridian === 'AM' || localeMeridian === 'PM') &&
+            (e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
+            meridianValid = false;
+        }
+        
+        if (meridianValid && temp.toLocaleDateString() !== 'Invalid Date') {
             const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
             if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
                 this.time = newValue;
