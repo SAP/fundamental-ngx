@@ -12,12 +12,12 @@
         <div class="fd-input-group fd-input-group--after"
              [ngClass]="{'fd-input-group--compact' : compact}">
             <input [value]="getFormattedTime()"
-                   (change)="timeInputChanged($event.currentTarget.value)"
+                   (keyup)="timeInputChanged($event.currentTarget.value)"
                    (focus)="onFocusHandler()"
                    (click)="inputGroupClicked($event)"
                    [disabled]="disabled"
                    type="text"
-                   [ngClass]="{ 'fd-input--compact': compact }"
+                   [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidTimeInput && validate }"
                    [placeholder]="placeholder">
             <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon--after">
           <button [disabled]="disabled" type="button"

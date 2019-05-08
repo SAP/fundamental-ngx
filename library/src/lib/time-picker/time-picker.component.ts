@@ -56,6 +56,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     displaySeconds: boolean = true;
 
+    /** Whether to perform visual validation on the picker input. */
+    @Input()
+    validate: boolean = true;
+
+    /** @hidden Whether the input time is valid. Internal use. */
+    isInvalidTimeInput: boolean = false;
+
     /** @hidden */
     @ViewChild(TimeComponent)
     child: TimeComponent;
@@ -153,15 +160,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
+                this.isInvalidTimeInput = false;
                 this.onChange(this.time);
             } else {
-                this.time.hour = null;
-                this.time.minute = null;
-                this.time.second = null;
-                this.child.displayedHour = null;
-                this.child.period = 'am';
-                this.child.oldPeriod = 'am';
-                this.onChange(this.time);
+                this.isInvalidTimeInput = true;
             }
         } else if (this.meridian) {
             if (this.displaySeconds) {
@@ -188,15 +190,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
+                this.isInvalidTimeInput = false;
                 this.onChange(this.time);
             } else {
-                this.time.hour = null;
-                this.time.minute = null;
-                this.time.second = null;
-                this.child.displayedHour = null;
-                this.child.period = 'am';
-                this.child.oldPeriod = 'am';
-                this.onChange(this.time);
+                this.isInvalidTimeInput = true;
             }
         }
     }
