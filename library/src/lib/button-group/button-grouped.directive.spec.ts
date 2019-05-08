@@ -1,13 +1,16 @@
 import { ButtonGroupedDirective } from './button-grouped.directive';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button-grouped>ButtonGrouped</button>'
+    template: '<button #directive fd-button-grouped>ButtonGrouped</button>'
 })
-export class TestComponent {}
+export class TestComponent {
+    @ViewChild('directive')
+    ref: ElementRef;
+}
 
 describe('ButtonGroupedDirective', () => {
     let fixture: ComponentFixture<TestComponent>,
@@ -33,27 +36,45 @@ describe('ButtonGroupedDirective', () => {
         directiveInstance = directive.injector.get(ButtonGroupedDirective);
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(directiveInstance, '_addClassToElement').and.callThrough();
     });
 
     it('should create', () => {
         expect(directive).toBeTruthy();
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--grouped');
     });
 
-    it('should add appropriate classes', () => {
-        directiveInstance.size = 'someSize';
-        directiveInstance.glyph = 'someGlyph';
-        directiveInstance.compact = true;
-        directiveInstance.state = 'someState';
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--grouped');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someSize');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('is-someState');
+    it('should assign base class', () => {
+        expect(component.ref.nativeElement.className).toContain('fd-button--grouped');
     });
+
+    it ('should support compact mode', () => {
+        directiveInstance.compact = true;
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.className).toContain('fd-button--compact');
+    });
+
+    it('should support glyph', () => {
+        const testIconLabel = 'icon';
+        directiveInstance.glyph = testIconLabel;
+        directiveInstance.ngOnInit();
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.className).toContain('sap-icon--' + testIconLabel);
+    });
+
+    it('should support state', () => {
+        const testState = 'state';
+        directiveInstance.state = testState;
+        directiveInstance.ngOnInit();
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.className).toContain('is-' + testState);
+    });
+
+    it('should support size', () => {
+        const testSize = 'size';
+        directiveInstance.size = testSize;
+        directiveInstance.ngOnInit();
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.className).toContain('fd-button--' + testSize);
+    });
+
 });
