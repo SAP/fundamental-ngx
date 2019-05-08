@@ -1,39 +1,39 @@
 <div fd-form-item>
-    <fd-form-label [forValue]="'input-51'">
+    <label fd-form-label for="input-51">
         Normal Input
-    </fd-form-label>
-    <input fd-form-control [type]="'text'" id="input-51" placeholder="Field placeholder text">
+    </label>
+    <input fd-form-control type="text" id="input-51" placeholder="Field placeholder text">
     <fd-form-message>Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
 </div>
 <div fd-form-item>
-    <fd-form-label [forValue]="'input-52'">
+    <label fd-form-label for="input-52">
         Valid Input
-    </fd-form-label>
-    <input fd-form-control [state]="'valid'" [type]="'text'" id="input-52">
+    </label>
+    <input fd-form-control type="text" id="input-52" [state]="'valid'">
 </div>
 <div fd-form-item>
-    <fd-form-label [forValue]="'input-53'">
+    <label fd-form-label for="input-53">
         Invalid Input
-    </fd-form-label>
-    <input fd-form-control [state]="'invalid'" [type]="'text'" id="input-53" placeholder="Field placeholder text">
+    </label>
+    <input fd-form-control type="text" id="input-53" placeholder="Field placeholder text" [state]="'invalid'">
     <fd-form-message [type]="'error'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
 </div>
 <div fd-form-item>
-    <fd-form-label [forValue]="'input-54'">
+    <label fd-form-label for="input-54">
         Warning Input
-    </fd-form-label>
-    <input fd-form-control [state]="'warning'" [type]="'text'" id="input-54" placeholder="Field placeholder text">
+    </label>
+    <input fd-form-control type="text" id="input-54" placeholder="Field placeholder text" [state]="'warning'">
     <fd-form-message [type]="'warning'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
 </div>
 <div fd-form-item>
-    <fd-form-label [forValue]="'input-55'">
+    <label fd-form-label for="input-55">
         Disables Input
-    </fd-form-label>
-    <input fd-form-control [type]="'text'" id="input-55" placeholder="Field placeholder text" disabled>
+    </label>
+    <input fd-form-control type="text" id="input-55" placeholder="Field placeholder text" disabled>
 </div>
 <div fd-form-item>
-    <fd-form-label [forValue]="'input-56'">
+    <label fd-form-label for="input-56">
         Readonly Input
-    </fd-form-label>
-    <input fd-form-control [type]="'text'" id="input-56" placeholder="Field placeholder text" readonly>
+    </label>
+    <input fd-form-control type="text" id="input-56" placeholder="Field placeholder text" readonly>
 </div>

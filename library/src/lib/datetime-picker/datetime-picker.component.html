@@ -1,22 +1,23 @@
 <div class="fd-datetime">
     <fd-popover [(isOpen)]="isOpen"
+                [closeOnOutsideClick]="false"
+                [closeOnEscapeKey]="false"
                 [triggers]="[]">
         <fd-popover-control>
             <div class="fd-input-group fd-input-group--after"
                  [ngClass]="{'fd-input-group--compact' : compact}">
                 <input type="text"
-                       #dateTimeInput
                        [attr.aria-label]="'datetime input'"
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
-                       (change)="inputValueChange(dateTimeInput.value)"
+                       (change)="inputValueChange(inputFieldDate)"
                        (blur)="onBlurHandler()"
                        (click)="isOpen = true"
                        [ngClass]="{ 'fd-input--compact': compact }"
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"
-                            (click)="openPopover(dateTimeInput.value)" aria-label="display datetime toggle"
+                            (click)="togglePopover()" aria-label="display datetime toggle"
                             [attr.aria-expanded]="isOpen" type="button"></button>
                 </span>
             </div>
