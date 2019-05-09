@@ -8,10 +8,9 @@
                    [attr.aria-label]="'date input'"
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
-                   (change)="getInputValue(datePicker.value)"
-                   (blur)="onBlurHandler()"
+                   (keyup)="getInputValue(datePicker.value)"
                    (click)="isOpen = true"
-                   [ngClass]="{ 'fd-input--compact': compact }">
+                   [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
                             (click)="openCalendar(datePicker.value)" aria-label="display calendar toggle"

@@ -53,13 +53,6 @@ describe('DatePickerComponent', () => {
         expect(component.isOpen).not.toBeTruthy();
     });
 
-    it('should handle blur', () => {
-        component.isOpen = true;
-        component.isInvalidDateInput = true;
-        component.onBlurHandler();
-        expect(component.inputFieldDate).toBeNull();
-    });
-
     it('should update date picker input handler', () => {
         const dateVal = new Date();
         const firstDateVal = new Date();

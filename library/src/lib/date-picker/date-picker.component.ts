@@ -73,6 +73,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     startingDayOfWeek: number = 0;
 
+    @Input() validate: boolean = true;
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -88,25 +90,11 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     openCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
-        if (this.isInvalidDateInput) {
-            this.inputFieldDate = null;
-        }
     }
 
     closeCalendar() {
         if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
             this.isOpen = false;
-        }
-    }
-
-    onBlurHandler() {
-        if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
         }
     }
 
@@ -135,9 +123,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     }
 
     getInputValue(e) {
-        if (e !== this.inputFieldDate) {
-            this.dateFromDatePicker.next(e);
-        }
+        this.dateFromDatePicker.next(e);
     }
 
     @HostListener('document:keydown.escape', [])

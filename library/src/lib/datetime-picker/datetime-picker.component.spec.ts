@@ -49,13 +49,6 @@ describe('DatetimePickerComponent', () => {
         expect(component.isOpen).toBe(false);
     });
 
-    it('should handle blur', () => {
-        component.isOpen = true;
-        component.isInvalidDateInput = true;
-        component.onBlurHandler();
-        expect(component.inputFieldDate).toBeNull();
-    });
-
     it('should update input from calendar', () => {
         spyOn(component, 'onChange');
         component.date = new Date();

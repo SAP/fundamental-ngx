@@ -54,6 +54,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     displaySeconds: boolean = true;
 
+    /** Whether to perform visual validation on the picker input. */
+    @Input()
+    validate: boolean = true;
+
     /** Current selected date. Two-way binding is supported. */
     @Input()
     date: Date = new Date();
@@ -145,24 +149,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Closes the popover */
     closePopover(): void {
         if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
             this.onClose.emit(this.date);
             this.isOpen = false;
         }
     }
 
-    /** @hidden */
-    onBlurHandler(): void {
-        if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
-        }
-    }
-
-    /** @hidden */
     updatePickerInputHandler(d): void {
         if (d.selectedDay && d.selectedDay.date) {
             d.selectedDay.date.setHours(this.date.getHours());
@@ -202,19 +193,27 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     inputValueChange(e): void {
-        if (e !== '') {
-            const temp = new Date(e);
-            if (isNaN(temp.getTime())) {
-                this.inputFieldDate = this.date.toLocaleString();
-            } else {
-                const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
-                if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
-                    this.time = newValue;
-                    this.setTime(true);
-                }
-                this.dateFromInput.next(temp.toLocaleDateString());
+        const temp = new Date(e);
+        /*
+         Need to check if current locale toDateString contains AM or PM. If the current locale has it and it is absent
+         from the user's input, the meridian should be considered invalid
+         */
+        const localeMeridian = new Date().toLocaleTimeString().slice(-2);
+        let meridianValid = true;
+        if ((localeMeridian === 'AM' || localeMeridian === 'PM') &&
+            (e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
+            meridianValid = false;
+        }
+        
+        if (meridianValid && temp.toLocaleDateString() !== 'Invalid Date') {
+            const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
+            if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
+                this.time = newValue;
+                this.setTime(true);
             }
+            this.dateFromInput.next(temp.toLocaleDateString());
         } else {
+            this.isInvalidDateInput = true;
             this.dateFromInput.next('');
         }
     }

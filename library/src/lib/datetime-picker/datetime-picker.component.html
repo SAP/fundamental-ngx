@@ -10,10 +10,9 @@
                        [attr.aria-label]="'datetime input'"
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
-                       (change)="inputValueChange(inputFieldDate)"
-                       (blur)="onBlurHandler()"
+                       (keyup)="inputValueChange(inputFieldDate)"
                        (click)="isOpen = true"
-                       [ngClass]="{ 'fd-input--compact': compact }"
+                       [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }"
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"
