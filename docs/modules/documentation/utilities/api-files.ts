@@ -39,7 +39,10 @@ export const API_FILES = {
         'ButtonGroupedDirective'
     ],
     calendar: [
-        'CalendarComponent'
+        'CalendarComponent',
+        'CalendarI18n',
+        'CalendarI18nDefault',
+        'CalendarI18nLabels'
     ],
     comboboxInput: [
         'ComboboxInputComponent'
