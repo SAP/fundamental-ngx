@@ -27,33 +27,37 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @ViewChild('input')
     inputElement: ElementRef<HTMLInputElement>;
 
-    /** @Input The size of the toggle. 
+    /** 
+     * The size of the toggle. 
      * Can be one of the four *xs*, *s*, *l*, *error* or default. 
      */
     @Input()
     size: string;
 
-    /** @Input Whether the toggle is disabled. */
+    /** Whether the toggle is disabled. */
     @Input()
     disabled: boolean = false;
 
-    /** @Input Id for the toggle component. If omitted, a unique one is generated. */
+    /** Id for the toggle component. If omitted, a unique one is generated. */
     @Input()
     id: string;
 
-    /** @Input Whether the toggle is checked. */
+    /** Whether the toggle is checked. */
     @Input()
     checked: boolean = false;
 
-    /** @Input aria-label attribute. */
+    /** aria-label attribute of the inner input element. */
     @Input()
     ariaLabel: string = null;
 
-    /** @Input aria-labelledby attribute. */
+    /** aria-labelledby attribute of the inner input element. */
     @Input()
     ariaLabelledby: string = null;
 
-    /** @Output Event fired when the toggle is checked. */
+    /** 
+     * Event fired when the state of the toggle changes. 
+     * *$event* can be used to retrieve the new state of the toggle.
+     */
     @Output()
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -82,7 +86,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
         this.inputElement.nativeElement.focus();
     }
 
-    /** Get the innerInputId property of the toggle. */
+    /** Get the id of the inner input element of the toggle. */
     get innerInputId(): string {
         return `${this.id}-input`;
     }
@@ -101,6 +105,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
 
     /**
+     * @hidden 
      * @param value Sets the value of the *checked* property of the toggle.
      */
     writeValue(value: any) {
@@ -124,6 +129,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
 
     /**
+     * @hidden 
      * @param isDisabled Sets the value of the *disabled* property of the toggle.
      */
     setDisabledState(isDisabled: boolean): void {
