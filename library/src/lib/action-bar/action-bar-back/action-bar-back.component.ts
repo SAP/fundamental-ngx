@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
  * The left-aligned back button for the action bar.

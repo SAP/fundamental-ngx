@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
  * This component holds the right-aligned action buttons for the action bar.
