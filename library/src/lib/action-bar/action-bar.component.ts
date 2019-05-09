@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
  * <fd-action-bar-back>
  * <fd-action-bar-description>
  * <fd-action-bar-header>
- * <fd-action-bar-title>
  * ```
  */
 @Component({

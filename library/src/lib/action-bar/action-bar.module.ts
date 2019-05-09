@@ -4,17 +4,17 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
 import { ActionBarComponent } from './action-bar.component';
-import { ActionBarTitleComponent } from './action-bar-title.component';
-import { ActionBarDescriptionComponent } from './action-bar-description.component';
-import { ActionBarHeaderComponent } from './action-bar-header.component';
-import { ActionBarActionsComponent } from './action-bar-actions.component';
-import { ActionBarBackComponent } from './action-bar-back.component';
-import { ActionBarMobileComponent } from './action-bar-mobile.component';
+import { ActionBarTitleDirective } from './action-bar-title/action-bar-title.directive';
+import { ActionBarDescriptionComponent } from './action-bar-description/action-bar-description.component';
+import { ActionBarHeaderComponent } from './action-bar-header/action-bar-header.component';
+import { ActionBarActionsComponent } from './action-bar-actions/action-bar-actions.component';
+import { ActionBarBackComponent } from './action-bar-back/action-bar-back.component';
+import { ActionBarMobileComponent } from './action-bar-mobile/action-bar-mobile.component';
 
 @NgModule({
     declarations: [
         ActionBarComponent,
-        ActionBarTitleComponent,
+        ActionBarTitleDirective,
         ActionBarDescriptionComponent,
         ActionBarHeaderComponent,
         ActionBarActionsComponent,
@@ -24,7 +24,7 @@ import { ActionBarMobileComponent } from './action-bar-mobile.component';
     imports: [CommonModule, ButtonModule, IconModule],
     exports: [
         ActionBarComponent,
-        ActionBarTitleComponent,
+        ActionBarTitleDirective,
         ActionBarDescriptionComponent,
         ActionBarHeaderComponent,
         ActionBarActionsComponent,
