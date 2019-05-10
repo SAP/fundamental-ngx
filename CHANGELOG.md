@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.7"></a>
+# [0.5.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.6...v0.5.0-rc.7) (2019-05-09)
+
+
+
+<a name="0.5.0-rc.6"></a>
+# [0.5.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.5...v0.5.0-rc.6) (2019-05-09)
+
+
+
+<a name="0.5.0-rc.5"></a>
+# [0.5.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.4...v0.5.0-rc.5) (2019-05-09)
+
+
+
+<a name="0.5.0-rc.4"></a>
+# [0.5.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.3...v0.5.0-rc.4) (2019-05-09)
+
+
+### Features
+
+* calendar internationalization ([#786](https://github.com/SAP/fundamental-ngx/issues/786)) ([b7d47de](https://github.com/SAP/fundamental-ngx/commit/b7d47de))
+
+
+
+<a name="0.5.0-rc.3"></a>
+# [0.5.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.2...v0.5.0-rc.3) (2019-05-08)
+
+
+
+<a name="0.5.0-rc.2"></a>
+# [0.5.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.1...v0.5.0-rc.2) (2019-05-08)
+
+
+
 <a name="0.5.0-rc.1"></a>
 # [0.5.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.0...v0.5.0-rc.1) (2019-05-07)
 

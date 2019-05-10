@@ -1,23 +1,23 @@
 <header class="fd-calendar__header">
     <div class="fd-calendar__navigation">
         <div class="fd-calendar__action">
-            <button id="arrowLeft" class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
-                    [attr.aria-label]="showCalendarYears ? 'previous year' : 'previous month'"
+            <button id="arrowLeft" class="fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
+                    [attr.aria-label]="showCalendarYears ? calendarI18nLabels?.previousYearLabel : calendarI18nLabels?.previousMonthLabel"
                     (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
         </div>
         <div class="fd-calendar__action">
             <button class=" fd-button--light fd-button--s"
-                    aria-label="month selection"
+                    [attr.aria-label]="calendarI18nLabels?.monthSelectionLabel"
                     (click)="openMonthSelection()">{{monthName}}</button>
         </div>
         <div class="fd-calendar__action">
             <button class=" fd-button--light fd-button--s"
-                    aria-label="year selection"
+                    [attr.aria-label]="calendarI18nLabels?.yearSelectionLabel"
                     (click)="openYearSelection()">{{year}}</button>
         </div>
         <div class="fd-calendar__action">
-            <button class=" fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
-                    [attr.aria-label]="showCalendarYears ? 'next year' : 'next month'"
+            <button class="fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
+                    [attr.aria-label]="showCalendarYears ? calendarI18nLabels?.nextYearLabel : calendarI18nLabels?.nextMonthLabel"
                     (click)="showCalendarYears ? loadNextYearsList() : goToNextMonth()"></button>
         </div>
     </div>
@@ -69,7 +69,7 @@
                 *ngFor="let row of calendarGrid; let i = index;">
                 <td class="fd-calendar__item"
                     role="gridcell"
-                    aria-label="day of the month"
+                    [attr.aria-label]="cell.ariaLabel"
                     *ngFor="let cell of row; let cellIndex = index;"
                     [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
                           (cell.selected ? " is-selected": "") + 

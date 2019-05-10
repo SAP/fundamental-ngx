@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
  * The action bar header, which contains the action bar's title and description components.

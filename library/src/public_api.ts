@@ -2,8 +2,6 @@
  * Public API Surface of fundamental-ngx
  */
 
-export * from './lib/fundamental-ngx.service';
-export * from './lib/fundamental-ngx.component';
 export * from './lib/fundamental-ngx.module';
 
 export * from './lib/action-bar/action-bar.module';
@@ -17,6 +15,8 @@ export * from './lib/breadcrumb/breadcrumb.module';
 export * from './lib/button/button.module';
 export * from './lib/button-group/button-group.module';
 export * from './lib/calendar/calendar.module';
+export * from './lib/calendar/i18n/calendar-i18n'
+export * from './lib/calendar/i18n/calendar-i18n-labels'
 export * from './lib/combobox-input/combobox-input.module';
 export * from './lib/date-picker/date-picker.module';
 export * from './lib/datetime-picker/datetime-picker.module';

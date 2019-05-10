@@ -7,7 +7,6 @@ import {
     HostListener,
     ElementRef,
     forwardRef,
-    Inject,
     OnDestroy,
     AfterViewChecked,
     ChangeDetectorRef,
@@ -15,7 +14,9 @@ import {
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { CalendarI18n } from './i18n/calendar-i18n';
+import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -34,6 +35,7 @@ export interface CalendarDay {
     selectedLast?: boolean;
     today?: boolean;
     isTabIndexed?: boolean;
+    ariaLabel?: string;
 }
 
 export interface EmittedDate {
@@ -65,7 +67,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     init = false;
 
-    @HostBinding('class.fd-calendar') true;
+    @HostBinding('class.fd-calendar')
+    fdCalendarClass: boolean = true;
 
     @Input()
     dateFromDatePicker: Subject<any>;
@@ -88,34 +91,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     showCalendarYears: boolean = false;
     showCalendarDates: boolean = true;
 
-    monthsShortName: string[] = [
-        'Jan.',
-        'Feb.',
-        'Mar.',
-        'Apr.',
-        'May',
-        'Jun.',
-        'Jul.',
-        'Aug.',
-        'Sep.',
-        'Oct.',
-        'Nov.',
-        'Dec.'
-    ];
-    monthsFullName: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
+    monthsShortName: string[];
+    monthsFullName: string[];
 
     weekDays: string[];
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -129,7 +106,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     date: Date = new Date();
     month: number = this.date.getMonth();
-    monthName: string = this.monthsFullName[this.month];
+    monthName: string;
     year: number = this.date.getFullYear();
     day = this.date.getDate();
 
@@ -167,6 +144,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Output()
     closeCalendar = new EventEmitter<any>();
 
+    private i18nLocalSub: Subscription;
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -193,7 +172,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     };
 
     setWeekDaysOrder() {
-        this.weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        this.weekDays = this.calendarI18n.getAllShortWeekdays().map(item => item[0]);
         if (this.startingDayOfWeek <= 6 && this.startingDayOfWeek >= 0) {
             for (let i = this.startingDayOfWeek; i > 0; i--) {
                 this.weekDays.push(this.weekDays.shift());
@@ -239,7 +218,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                         this.selectedRangeFirst.date &&
                         calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
                         this.selectedRangeLast.date &&
-                        calDate.getTime() < this.selectedRangeLast.date.getTime()
+                        calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                    ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
                 };
 
                 calendarMonth.push(previousMonthCalendarDay);
@@ -282,7 +262,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLast.date &&
                     calDate.getTime() < this.selectedRangeLast.date.getTime(),
                 today: calDate.toDateString() === this.today.toDateString(),
-                isTabIndexed: false
+                isTabIndexed: false,
+                ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
             };
 
             // if a day is selected, it should be tab indexed
@@ -363,7 +344,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirst.date &&
                     calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
                     this.selectedRangeLast.date &&
-                    calDate.getTime() < this.selectedRangeLast.date.getTime()
+                    calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
             };
 
             calendarMonth.push(nextMonthCalendarDay);
@@ -892,6 +874,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     ngOnInit() {
+
+        // Localization setup
+        this.setupLocalization();
+
         if (!this.date) {
             this.date = new Date();
         }
@@ -931,6 +917,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.unsubscribe();
         }
+
+        if (this.i18nLocalSub) {
+            this.i18nLocalSub.unsubscribe();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -939,7 +929,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef, private cd: ChangeDetectorRef) {
+    constructor(private hasher: HashService,
+                private eRef: ElementRef,
+                private cd: ChangeDetectorRef,
+                public calendarI18nLabels: CalendarI18nLabels,
+                public calendarI18n: CalendarI18n) {
     }
 
     registerOnChange(fn: any): void {
@@ -1000,5 +994,21 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.firstYearCalendarList = this.year;
         this.constructCalendar();
         this.constructCalendarYearsList();
+    }
+
+    private setupLocalization(): void {
+        this.monthsFullName = this.calendarI18n.getAllFullMonthNames();
+        this.monthsShortName = this.calendarI18n.getAllShortMonthNames();
+        this.monthName = this.monthsFullName[this.month];
+
+        this.i18nLocalSub = this.calendarI18n.i18nChange.subscribe(() => {
+            this.monthsFullName = this.calendarI18n.getAllFullMonthNames();
+            this.monthsShortName = this.calendarI18n.getAllShortMonthNames();
+            this.monthName = this.monthsFullName[this.month];
+            this.setWeekDaysOrder();
+            this.cd.detectChanges();
+        });
+
+        // Will also need to subscribe to labelsChange when we go to OnPush change detection.
     }
 }
