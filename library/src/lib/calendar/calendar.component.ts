@@ -638,7 +638,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
 
         if (day < 1 || day > this.determineDaysInMonth(month, year)) {
-            console.log('invalid')
             return true;
         }
         return false;
@@ -823,10 +822,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     updateFromDatePicker(date: any) {
-        console.log(date);
         if (this.calType === 'single') {
             const singleDate = this.dateAdapter.parse(date);
-            console.log(singleDate);
             this.invalidDate = this.validateDateFromDatePicker(singleDate);
             if (!this.invalidDate) {
                 this.selectedDay.date = singleDate;
