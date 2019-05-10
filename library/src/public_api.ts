@@ -15,8 +15,9 @@ export * from './lib/breadcrumb/breadcrumb.module';
 export * from './lib/button/button.module';
 export * from './lib/button-group/button-group.module';
 export * from './lib/calendar/calendar.module';
-export * from './lib/calendar/i18n/calendar-i18n'
-export * from './lib/calendar/i18n/calendar-i18n-labels'
+export * from './lib/calendar/i18n/calendar-i18n';
+export * from './lib/calendar/format/date-parser';
+export * from './lib/calendar/i18n/calendar-i18n-labels';
 export * from './lib/combobox-input/combobox-input.module';
 export * from './lib/date-picker/date-picker.module';
 export * from './lib/datetime-picker/datetime-picker.module';
