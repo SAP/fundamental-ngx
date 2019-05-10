@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
+import { CalendarI18n } from '../i18n/calendar-i18n';
 
 @Component({
     selector: 'fd-calendar2',
@@ -9,7 +11,8 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 })
 export class Calendar2Component implements OnInit {
 
-    constructor() {
+    constructor(public calendarI18nLabels: CalendarI18nLabels,
+                public calendarI18n: CalendarI18n) {
     }
 
     ngOnInit() {
