@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.13"></a>
+# [0.5.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.12...v0.5.0-rc.13) (2019-05-10)
+
+
+### Bug Fixes
+
+* datepicker input validation console error ([#795](https://github.com/SAP/fundamental-ngx/issues/795)) ([2526521](https://github.com/SAP/fundamental-ngx/commit/2526521))
+
+
+
 <a name="0.5.0-rc.12"></a>
 # [0.5.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.11...v0.5.0-rc.12) (2019-05-10)
 
