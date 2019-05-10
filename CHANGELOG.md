@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.9"></a>
+# [0.5.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.8...v0.5.0-rc.9) (2019-05-10)
+
+
+### Bug Fixes
+
+* fixed datetime picker global listener ([#793](https://github.com/SAP/fundamental-ngx/issues/793)) ([eeab56c](https://github.com/SAP/fundamental-ngx/commit/eeab56c))
+
+
+
 <a name="0.5.0-rc.8"></a>
 # [0.5.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.7...v0.5.0-rc.8) (2019-05-10)
 
