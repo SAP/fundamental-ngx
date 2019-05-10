@@ -28,9 +28,6 @@ export class ButtonDirective extends AbstractFdNgxClass {
     /** @hidden */
     @Input() semantic: string; // TODO: deprecated, leaving for backwards compatibility
 
-    /** The state of the button. Options include 'normal', 'selected', and 'disabled'. Leave empty for normal. */
-    @Input() state: string;
-
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input() options: string | string[];
 
@@ -48,9 +45,6 @@ export class ButtonDirective extends AbstractFdNgxClass {
         }
         if (this.fdType) {
             this._addClassToElement('fd-button--' + this.fdType);
-        }
-        if (this.state) {
-            this._addClassToElement('is-' + this.state);
         }
         if (this.options) {
             if (typeof this.options === 'string') {
