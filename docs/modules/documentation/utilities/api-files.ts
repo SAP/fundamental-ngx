@@ -42,13 +42,17 @@ export const API_FILES = {
         'CalendarComponent',
         'CalendarI18n',
         'CalendarI18nDefault',
-        'CalendarI18nLabels'
+        'CalendarI18nLabels',
+        'DateFormatParser',
+        'DateFormatParserDefault'
     ],
     comboboxInput: [
         'ComboboxInputComponent'
     ],
     datePicker: [
-        'DatePickerComponent'
+        'DatePickerComponent',
+        'DateFormatParser',
+        'DateFormatParserDefault'
     ],
     datetimePicker: [
         'DatetimePickerComponent'
