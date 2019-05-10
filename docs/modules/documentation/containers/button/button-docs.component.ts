@@ -658,10 +658,6 @@ export class ButtonDocsComponent implements OnInit {
                             'zoom-in',
                             'zoom-out'
                         ]
-                    },
-                    state: {
-                        type: 'string',
-                        enum: ['default', 'selected', 'disabled']
                     }
                 }
             }
@@ -677,8 +673,7 @@ export class ButtonDocsComponent implements OnInit {
             fdType: 'default',
             option: 'default',
             size: 'default',
-            icon: '',
-            state: 'default'
+            icon: ''
         }
     };
 

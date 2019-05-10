@@ -28,9 +28,9 @@ export class ButtonSizesExampleComponent {}
 })
 export class ButtonIconsExampleComponent {}
 
-@Component({
-    selector: 'fd-button-state-example',
-    templateUrl: './button-state-example.component.html',
-    styleUrls: ['./button-examples.scss']
-})
+@Component({	
+    selector: 'fd-button-state-example',	
+    templateUrl: './button-state-example.component.html',	
+    styleUrls: ['./button-examples.scss']	
+})	
 export class ButtonStateExampleComponent {}

@@ -42,16 +42,14 @@
 </component-example>
 <code-example [code]="buttonHtmlIcon" [language]="'HTML'"></code-example>
 
-<separator></separator>
-<h2>Button State</h2>
-<description>
-  Use
-  <code class="code-snippet">[state]="'disabled'"</code> or
-  <code class="code-snippet">[state]="'selected'"</code> to set button state.
-</description>
-<component-example [name]="'ex4'">
-  <fd-button-state-example></fd-button-state-example>
-</component-example>
+<separator></separator>	
+<h2>Button State</h2>	
+<description>	
+  'disabled' and 'selected' state can be achieved through native 'diasbled' / 'aria-disabled' and 'aria-selected' attributes.
+</description>	
+<component-example [name]="'ex4'">	
+  <fd-button-state-example></fd-button-state-example>	
+</component-example>	
 <code-example [code]="buttonHtmlState" [language]="'HTML'"></code-example>
 
 <separator></separator>
@@ -69,8 +67,6 @@
 <h2>Extensibility</h2>
 <description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code>
     inputs don't have a restriction for the predefined values.
-    <br>For example, passing the value "someState" to the <code>state</code> input will result in the class
-    <code>fd-button--someState</code> being added to the button element.
     You can pass a number of custom options to the <code>options</code> input, which accepts as a parameter either a string
     or an array of strings.  For example, <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code>
     to the button.  If you'd like to add multiple options, you could use <code>[options]="['emphasized', 'option1', 'option2']"</code>.
@@ -86,7 +82,6 @@
   <button fd-button
           [fdType]="data.properties.fdType"
           [options]="data.properties.options"
-          [state]="data.properties.state"
           [compact]="data.properties.compact"
           [glyph]="data.properties.icon">
     {{data.properties.label}}
