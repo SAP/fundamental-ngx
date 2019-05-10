@@ -28,6 +28,14 @@ export class PaginationComponent implements OnChanges {
     @Input()
     displayText: string = 'items';
 
+    /** Label for the 'previous' page button. */
+    @Input()
+    previousLabel: string = 'Previous';
+
+    /** Label for the 'next' page button. */
+    @Input()
+    nextLabel: string = 'Next';
+
     @Output()
     pageChangeStart = new EventEmitter<number>();
 

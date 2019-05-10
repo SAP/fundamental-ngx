@@ -78,6 +78,10 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     @Input()
     ariaLabel: string = null;
 
+    /** Aria label for the dismiss button. */
+    @Input()
+    dismissLabel: string = 'Dismiss';
+
     /** Width of the alert. */
     @Input()
     width: string;

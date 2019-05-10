@@ -60,6 +60,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     validate: boolean = true;
 
+    /** Aria label for the time picker input. */
+    @Input()
+    timePickerInputLabel: string = 'Time picker input';
+
     /** @hidden Whether the input time is valid. Internal use. */
     isInvalidTimeInput: boolean = false;
 

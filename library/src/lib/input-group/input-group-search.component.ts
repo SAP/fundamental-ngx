@@ -31,6 +31,10 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     @Input()
     placeholder;
 
+    /** Aria label for the 'clear' button. */
+    @Input()
+    clearLabel: string = 'Clear';
+
     /** @hidden */
     inputTextValue: string;
 
@@ -61,7 +65,7 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     registerOnChange(fn) {
         this.onChange = fn;
     }
-    
+
     /** @hidden */
     registerOnTouched(fn) {
         this.onTouched = fn;

@@ -109,6 +109,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     startingDayOfWeek: number = 0;
 
+    /** Aria label for the datetime picker input. */
+    @Input()
+    datetimeInputLabel: string = 'Datetime input';
+
+    /** Aria label for the button to show/hide the calendar. */
+    @Input()
+    displayDatetimeToggleLabel: string = 'Display calendar toggle';
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -220,7 +228,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             (typeof e === 'string' && e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
             meridianValid = false;
         }
-        
+
         if (meridianValid && temp.toLocaleDateString() !== 'Invalid Date') {
             const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
             if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {

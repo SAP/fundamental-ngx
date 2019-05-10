@@ -302,6 +302,7 @@ import { ComplexTitleExampleComponent } from './containers/tabs/examples/complex
 import { AddingTabExampleComponent } from './containers/tabs/examples/adding-tab-example/adding-tab-example.component';
 import { CalendarI18nExampleComponent } from './containers/calendar/examples/calendar-i18n-example.component';
 import { DatePickerI18nExampleComponent } from './containers/date-picker/examples/date-picker-i18n-example.component';
+import { TimeI18nExampleComponent } from './containers/time/examples/time-i18n-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -486,6 +487,7 @@ export function highlightJsFactory() {
         TimeDisabledExampleComponent,
         TimeNoSecondsExampleComponent,
         TimeNoSpinnersExampleComponent,
+        TimeI18nExampleComponent,
         TimePickerExampleComponent,
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,

@@ -19,6 +19,10 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     @Input()
     userMenu: any[];
 
+    /** Label for the collapsed item menu. */
+    @Input()
+    collapsedItemMenuLabel: string = 'Collapsed Item Menu';
+
     @ContentChildren(ShellbarActionComponent)
     shellbarActions: QueryList<ShellbarActionComponent>;
 
