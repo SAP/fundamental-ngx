@@ -1,6 +1,14 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+/**
+ * The directive that represents an identifier. 
+ * Identifier is a way to visually present something using an icon or user initials.
+ *
+ * ```html
+ * <span fd-identifier [size]="'l'" [glyph]="'washing-machine'"></span>
+ * ```
+ */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
@@ -10,16 +18,30 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     }
 })
 export class IdentifierDirective extends AbstractFdNgxClass {
+    /** 
+     * The size of the identifier. 
+     * The predefined values for the size are *xxs*, *xs*, *s*, *m*, *l*, *xl* and *xxl*.
+     *  *size* can accept any other string, for example *xxxs*, which will be translated into class *fd-identifier--xxxs*.
+     */
     @Input() size: string;
 
+    /** 
+     * Whether to render a circle style for the identifier. 
+     */
     @Input() circle: boolean;
 
+    /** 
+     * Whether to render a transparent style for the identifier. 
+     */
     @Input() transparent: boolean;
 
+    /** A number specifying the background color of the identifier. */
     @Input() colorAccent: number;
 
+    /** The glyph name */
     @Input() glyph: string;
 
+    /** @hidden */
     _setProperties() {
         if (this.size) {
             this._addClassToElement('fd-identifier--' + this.size);
@@ -38,6 +60,7 @@ export class IdentifierDirective extends AbstractFdNgxClass {
         }
     }
 
+    /** @hidden */
     constructor(@Inject(ElementRef) elementRef: ElementRef) {
         super(elementRef);
     }
