@@ -4,6 +4,8 @@ import { DateFormatParser } from '../../../../../../library/src/lib/calendar/for
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {
 
+    rangeDelimiter: string = ' to ';
+
     public parse(value: string): Date {
         const values: number[] = value.split('-').map(Number);
 
@@ -26,10 +28,16 @@ export class DateFormatDashes extends DateFormatParser {
 
 @Component({
     selector: 'fd-date-picker-format-example',
-    template: ` 
-        <fd-date-picker [(ngModel)]="selectedDay"></fd-date-picker>
-            <br/>
-            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>
+    template: `
+        <fd-date-picker [(ngModel)]="selectedDay" placeholder="yyyy/mm/dd"></fd-date-picker>
+        <br/>
+        <div>Selected Date: {{selectedDay?.date?.toDateString()}}</div>
+        <br/>
+        <fd-date-picker style="width: 300px;" placeholder="yyyy/mm/dd to yyyy/mm/dd" 
+                        [type]="'range'" [(ngModel)]="selectedRange"></fd-date-picker>
+        <br />
+        <div>Selected First Date: {{selectedRange?.date?.toDateString()}}</div>
+        <div>Selected Last Date: {{selectedRange?.rangeEnd?.toDateString()}}</div>
     `,
     providers: [
         {
@@ -42,6 +50,11 @@ export class DatePickerFormatExampleComponent {
 
     selectedDay = {
         date: new Date()
+    };
+
+    selectedRange = {
+        date: new Date(),
+        rangeEnd: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
     };
 
 }
