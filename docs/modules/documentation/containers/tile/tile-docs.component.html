@@ -137,9 +137,9 @@
                         </fd-tile-media>
 
                         <fd-tile-content>
-                            <fd-tile-title>
+                            <h2 fd-tile-title>
                                 {{data.properties.title}}
-                            </fd-tile-title>
+                            </h2>
                 <p>{{data.properties.description}}</p>
                 </fd-tile-content>
 
@@ -168,7 +168,7 @@
                                  *ngIf="data.properties.type === 'product'">
                     <fd-product-tile-media [photo]="data.properties.imageUrl"></fd-product-tile-media>
                     <fd-product-tile-content>
-                        <fd-product-tile-title>{{data.properties.title}}</fd-product-tile-title>
+                        <h2 fd-product-tile-title>{{data.properties.title}}</h2>
                         <p>{{data.properties.description}}</p>
                     </fd-product-tile-content>
                 </fd-product-tile>

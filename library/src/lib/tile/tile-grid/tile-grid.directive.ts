@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Inject, Input } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 @Directive({
     // TODO to be discussed
