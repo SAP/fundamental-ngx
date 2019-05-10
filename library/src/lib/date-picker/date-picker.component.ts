@@ -131,10 +131,9 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         this.closeCalendar();
     }
 
-    @HostListener('document:click', ['$event.path'])
-    public onGlobalClick(targetElementPath: Array<any>) {
-        const elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
-        if (!elementRefInPath) {
+    @HostListener('document:click', ['$event'])
+    public onGlobalClick(event: MouseEvent) {
+        if (!this.eRef.nativeElement.contains(event.target)) {
             this.closeCalendar();
         }
     }
