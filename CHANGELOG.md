@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.15"></a>
+# [0.5.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.14...v0.5.0-rc.15) (2019-05-10)
+
+
+### Features
+
+* i18n labels for remaining components ([#801](https://github.com/SAP/fundamental-ngx/issues/801)) ([408cbf1](https://github.com/SAP/fundamental-ngx/commit/408cbf1))
+
+
+
 <a name="0.5.0-rc.14"></a>
 # [0.5.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.13...v0.5.0-rc.14) (2019-05-10)
 
