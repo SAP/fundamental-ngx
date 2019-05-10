@@ -2,6 +2,18 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 import { SearchInputComponent } from '../search-input/search-input.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/**
+ * The component that represents a combobox input.
+ * The combobox input is a composition of the "input-group" and "popover" components.
+ *
+ * ```html
+ * <fd-combobox-input [(ngModel)]="comboboxInputValOne"
+ *                    [placeholder]="'Search here...'"
+ *                    [dropdownValues]="dropdownValues"
+ *                    (newItemClicked)="newItem()">
+ * </fd-combobox-input>
+ * ```
+ */
 @Component({
     selector: 'fd-combobox-input',
     templateUrl: './combobox-input.component.html',
@@ -14,12 +26,15 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ComboboxInputComponent extends SearchInputComponent {
 
+    /** @hidden */
     @HostBinding('class.fd-combobox-input')
     comboboxClass = true;
 
+    /** Event emitted when a new item is clicked. */
     @Output()
     newItemClicked: EventEmitter<void> = new EventEmitter<void>();
 
+    /** @hidden */
     newItemKeydownHandler(event) {
         if (event.code === 'Enter') {
             this.newItemClicked.emit();
