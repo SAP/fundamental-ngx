@@ -20,6 +20,10 @@ export class ComboboxInputComponent extends SearchInputComponent {
     @Output()
     newItemClicked: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Text to use for the '+ New Item' option. */
+    @Input()
+    newItemText: string = '+ New Item';
+
     newItemKeydownHandler(event) {
         if (event.code === 'Enter') {
             this.newItemClicked.emit();

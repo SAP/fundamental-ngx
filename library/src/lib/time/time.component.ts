@@ -1,6 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, OnChanges, Output } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TimeI18nLabels } from './i18n/time-i18n-labels';
 
 @Component({
     selector: 'fd-time',
@@ -350,4 +351,6 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
             this.focusArrowLeft.emit();
         }
     }
+
+    constructor(public timeI18nLabels: TimeI18nLabels) {}
 }

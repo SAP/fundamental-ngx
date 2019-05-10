@@ -22,6 +22,14 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     @Input()
     placeholder: string;
 
+    /** Aria label for the 'step up' button. */
+    @Input()
+    stepUpLabel: string = 'Step up';
+
+    /** Aria label for the 'step down' button. */
+    @Input()
+    stepDownLabel: string = 'Step down';
+
     inputTextValue: number;
 
     onChange: any = () => {};

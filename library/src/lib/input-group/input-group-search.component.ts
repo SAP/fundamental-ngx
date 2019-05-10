@@ -22,6 +22,10 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     @Input()
     placeholder;
 
+    /** Aria label for the 'clear' button. */
+    @Input()
+    clearLabel: string = 'Clear';
+
     inputTextValue: string;
 
     onChange: any = () => {};

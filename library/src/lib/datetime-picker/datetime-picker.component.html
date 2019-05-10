@@ -7,7 +7,7 @@
             <div class="fd-input-group fd-input-group--after"
                  [ngClass]="{'fd-input-group--compact' : compact}">
                 <input type="text"
-                       [attr.aria-label]="'datetime input'"
+                       [attr.aria-label]="datetimeInputLabel"
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
                        (keyup)="inputValueChange(inputFieldDate)"
@@ -16,7 +16,7 @@
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"
-                            (click)="togglePopover()" aria-label="display datetime toggle"
+                            (click)="togglePopover()" [attr.aria-label]="displayDatetimeToggleLabel"
                             [attr.aria-expanded]="isOpen" type="button"></button>
                 </span>
             </div>

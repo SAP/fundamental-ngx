@@ -5,7 +5,7 @@
              [ngClass]="{'fd-input-group--compact' : compact}">
             <input #datePicker
                    type="text"
-                   [attr.aria-label]="'date input'"
+                   [attr.aria-label]="dateInputLabel"
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
                    (keyup)="getInputValue(datePicker.value)"
@@ -13,7 +13,7 @@
                    [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
-                            (click)="openCalendar(datePicker.value)" aria-label="display calendar toggle"
+                            (click)="openCalendar(datePicker.value)" [attr.aria-label]="displayCalendarToggleLabel"
                             [attr.aria-expanded]="isOpen" type="button"></button>
             </span>
         </div>

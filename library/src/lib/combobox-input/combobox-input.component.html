@@ -36,7 +36,7 @@
                     <li fd-menu-item
                         (click)="this.newItemClicked.emit()"
                         (keydown)="newItemKeydownHandler($event)">
-                        <a tabindex="0" class="fd-menu__item fd-menu__link">+ New Item</a>
+                        <a tabindex="0" class="fd-menu__item fd-menu__link">{{newItemText}}</a>
                     </li>
                 </ul>
             </fd-menu>

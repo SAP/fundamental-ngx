@@ -3,7 +3,7 @@
     <a class="fd-pagination__link fd-pagination__link--previous"
        tabindex="0"
        role="button"
-       aria-label="Previous"
+       [attr.aria-label]="previousLabel"
        [attr.aria-disabled]="currentPage === 1 ? true : null"
        (keypress)="onKeypressHandler(currentPage - 1, $event)"
        (click)="goToPage(currentPage - 1)">
@@ -24,7 +24,7 @@
         </ng-template>
     </ng-container>
     <a class="fd-pagination__link fd-pagination__link--next"
-       aria-label="Next"
+       [attr.aria-label]="nextLabel"
        tabindex="0"
        role="button"
        [attr.aria-disabled]="isLastPage()"

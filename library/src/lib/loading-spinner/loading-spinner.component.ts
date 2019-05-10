@@ -8,4 +8,8 @@ import { Component, Input } from '@angular/core';
 export class LoadingSpinnerComponent {
     @Input()
     loading: boolean = false;
+
+    /** Aria label for the 'loading' spinner. */
+    @Input()
+    loadingLabel: string = 'Loading';
 }
