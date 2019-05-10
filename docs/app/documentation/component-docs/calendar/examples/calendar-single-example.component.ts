@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Component({
     selector: 'fd-calendar-single-example',
@@ -8,6 +9,11 @@ import { Component } from '@angular/core';
                      [blockFunction]="myBlockFunction"
                      [disableFunction]="myDisableFunction">
         </fd-calendar>
+        
+        <fd-calendar2
+            [disableFunction]="myDisableFunction2"
+            [calType]="'range'"
+        ></fd-calendar2>
         <br/>
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
         <br/><br/>
@@ -20,6 +26,11 @@ export class CalendarSingleExampleComponent {
 
     myDisableFunction = function(d: Date): boolean {
         const day = d.getDay();
+        return day === 6 || day === 0;
+    };
+
+    myDisableFunction2 = function(d: FdDate): boolean {
+        const day = d.toDate().getDay();
         return day === 6 || day === 0;
     };
 

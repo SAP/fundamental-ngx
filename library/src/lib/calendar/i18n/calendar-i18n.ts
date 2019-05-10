@@ -65,14 +65,9 @@ export class CalendarI18nDefault extends CalendarI18n {
         super();
         if (locale) {
             const sundayStartWeekdays = getLocaleDayNames(locale, FormStyle.Standalone, TranslationWidth.Short);
-            this.weekdaysShort = sundayStartWeekdays.map((day, index) => sundayStartWeekdays[(index + 1) % 7]);
+            this.weekdaysShort = sundayStartWeekdays.map((day, index) => sundayStartWeekdays[index % 7]);
             this.monthsShort = getLocaleMonthNames(locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
             this.monthsFull = getLocaleMonthNames(locale, FormStyle.Standalone, TranslationWidth.Wide);
-
-            // Used to keep 0 = Sunday, 1 = Monday and so on.
-            if (this.weekdaysShort) {
-                this.weekdaysShort.unshift(this.weekdaysShort.pop());
-            }
         }
 
         this.checkForFallback();
