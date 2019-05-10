@@ -201,7 +201,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         const localeMeridian = new Date().toLocaleTimeString().slice(-2);
         let meridianValid = true;
         if ((localeMeridian === 'AM' || localeMeridian === 'PM') &&
-            (e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
+            (typeof e === 'string' && e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
             meridianValid = false;
         }
         
