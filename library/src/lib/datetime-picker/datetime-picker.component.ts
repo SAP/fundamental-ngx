@@ -225,10 +225,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     }
 
     /** @hidden */
-    @HostListener('document:click', ['$event.path'])
-    public onGlobalClick(targetElementPath: Array<any>): void {
-        const elementRefInPath = targetElementPath.find(e => e === this.elRef.nativeElement);
-        if (!elementRefInPath) {
+    @HostListener('document:click', ['$event'])
+    public onGlobalClick(event: MouseEvent): void {
+        if (!this.elRef.nativeElement.contains(event.target)) {
             this.closePopover();
         }
     }
