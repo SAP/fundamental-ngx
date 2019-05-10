@@ -119,6 +119,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     blockFunction = function(d): boolean {
         return false;
     };
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
+        return false;
+    };
 
     /** @hidden */
     onChange: any = () => {};

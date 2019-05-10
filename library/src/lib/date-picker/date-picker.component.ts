@@ -83,6 +83,22 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     blockFunction = function(d): boolean {
         return false;
     };
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
+        return false;
+    };
 
     onChange: any = (selected: any) => {};
     onTouched: any = () => {};
