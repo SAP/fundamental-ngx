@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.14"></a>
+# [0.5.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.13...v0.5.0-rc.14) (2019-05-10)
+
+
+### Features
+
+* range disable functions ([#783](https://github.com/SAP/fundamental-ngx/issues/783)) ([a7b74d1](https://github.com/SAP/fundamental-ngx/commit/a7b74d1))
+
+
+
 <a name="0.5.0-rc.13"></a>
 # [0.5.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.12...v0.5.0-rc.13) (2019-05-10)
 
