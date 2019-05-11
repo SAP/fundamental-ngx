@@ -18,7 +18,7 @@
                         "polyfills": "docs/polyfills.ts",
                         "assets": ["docs/assets", "docs/favicon.ico"],
                         "styles": [
-                            "docs/fd-typedoc-theme/assets/css/main.scss",
+                            "docs/fd-typedoc/assets/css/main.scss",
                             "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
                             "docs/styles.scss"
                         ],
