@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { AppComponent } from './components/app/app.component';
+import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
-    { path: '', loadChildren: '../modules/documentation/documentation.module#DocumentationModule' },
+    { path: '', loadChildren: './documentation/documentation.module#DocumentationModule' },
     { path: '**', redirectTo: '/home' }
 ];
 
