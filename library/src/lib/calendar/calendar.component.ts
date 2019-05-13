@@ -623,7 +623,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     validateDateFromDatePicker(date: Date): boolean {
         if (!date) {
-            return false;
+            return true;
         }
         const month = date.getMonth();
         const day = date.getDate();
@@ -633,7 +633,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             return true;
         }
 
-        if (year < 1000 || year > 3000 || month < 1 || month > 12) {
+        if (year < 1000 || year > 3000 || month < 0 || month > 11) {
             return true;
         }
 
@@ -826,8 +826,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             const singleDate = this.dateAdapter.parse(date);
             this.invalidDate = this.validateDateFromDatePicker(singleDate);
             if (!this.invalidDate) {
-                this.selectedDay.date = singleDate;
-                this.date = singleDate;
+                this.selectedDay.date = new Date(singleDate.getFullYear(), singleDate.getMonth(), singleDate.getDate());
+                this.date = new Date(singleDate.getFullYear(), singleDate.getMonth(), singleDate.getDate());
                 this.year = this.date.getFullYear();
                 this.month = this.date.getMonth();
                 this.monthName = this.monthsFullName[this.date.getMonth()];
@@ -879,6 +879,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         if (!this.date) {
             this.date = new Date();
         }
+
         this.constructCalendar();
         this.constructCalendarYearsList();
         this.calendarId = this.hasher.hash();
