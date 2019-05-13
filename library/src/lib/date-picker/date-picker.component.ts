@@ -76,12 +76,36 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     @Input() validate: boolean = true;
 
+    /** Aria label for the datepicker input. */
+    @Input()
+    dateInputLabel: string = 'Date input';
+
+    /** Aria label for the button to show/hide the calendar. */
+    @Input()
+    displayCalendarToggleLabel: string = 'Display calendar toggle';
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
     @Input()
     blockFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
         return false;
     };
 

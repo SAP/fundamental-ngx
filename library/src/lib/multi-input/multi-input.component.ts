@@ -93,6 +93,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     displayFn: Function = this.defaultDisplay;
 
+    /** Aria label for the multi input body. */
+    @Input()
+    multiInputBodyLabel: string = 'Multi input body';
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();

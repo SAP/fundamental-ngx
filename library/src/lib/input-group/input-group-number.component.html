@@ -7,10 +7,10 @@
                placeholder="{{placeholder}}" />
         <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon fd-input-group__addon--after">
                 <button class="fd-input-group__button fd-input-group__button--step-up sap-icon--slim-arrow-up"
-                        aria-label="Step up"
+                        [attr.aria-label]="stepUpLabel"
                         (click)="stepUpClicked()"></button>
                 <button class="fd-input-group__button fd-input-group__button--step-down sap-icon--slim-arrow-down"
-                        aria-label="Step down"
+                        [attr.aria-label]="stepDownLabel"
                         (click)="stepDownClicked()"></button>
         </span>
 </div>

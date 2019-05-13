@@ -109,6 +109,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     startingDayOfWeek: number = 0;
 
+    /** Aria label for the datetime picker input. */
+    @Input()
+    datetimeInputLabel: string = 'Datetime input';
+
+    /** Aria label for the button to show/hide the calendar. */
+    @Input()
+    displayDatetimeToggleLabel: string = 'Display calendar toggle';
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -117,6 +125,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** The blockFunction for the calendar. */
     @Input()
     blockFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
         return false;
     };
 
@@ -201,10 +225,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         const localeMeridian = new Date().toLocaleTimeString().slice(-2);
         let meridianValid = true;
         if ((localeMeridian === 'AM' || localeMeridian === 'PM') &&
-            (e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
+            (typeof e === 'string' && e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
             meridianValid = false;
         }
-        
+
         if (meridianValid && temp.toLocaleDateString() !== 'Invalid Date') {
             const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
             if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {

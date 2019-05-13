@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.16"></a>
+# [0.5.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.15...v0.5.0-rc.16) (2019-05-11)
+
+
+
+<a name="0.5.0-rc.15"></a>
+# [0.5.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.14...v0.5.0-rc.15) (2019-05-10)
+
+
+### Features
+
+* i18n labels for remaining components ([#801](https://github.com/SAP/fundamental-ngx/issues/801)) ([408cbf1](https://github.com/SAP/fundamental-ngx/commit/408cbf1))
+
+
+
+<a name="0.5.0-rc.14"></a>
+# [0.5.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.13...v0.5.0-rc.14) (2019-05-10)
+
+
+### Features
+
+* range disable functions ([#783](https://github.com/SAP/fundamental-ngx/issues/783)) ([a7b74d1](https://github.com/SAP/fundamental-ngx/commit/a7b74d1))
+
+
+
+<a name="0.5.0-rc.13"></a>
+# [0.5.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.12...v0.5.0-rc.13) (2019-05-10)
+
+
+### Bug Fixes
+
+* datepicker input validation console error ([#795](https://github.com/SAP/fundamental-ngx/issues/795)) ([2526521](https://github.com/SAP/fundamental-ngx/commit/2526521))
+
+
+
 <a name="0.5.0-rc.12"></a>
 # [0.5.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.11...v0.5.0-rc.12) (2019-05-10)
 

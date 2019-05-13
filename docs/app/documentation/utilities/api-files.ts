@@ -198,7 +198,8 @@ export const API_FILES = {
     ],
     time: [
         'TimeComponent',
-        'TimeObject'
+        'TimeObject',
+        'TimeI18nLabels'
     ],
     timePicker: [
         'TimePickerComponent'

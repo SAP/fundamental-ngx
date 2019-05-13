@@ -152,6 +152,22 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return false;
     };
     @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
     blockFunction = function(d): boolean {
         return false;
     };
@@ -223,6 +239,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
                 };
 
+                if (this.selectCounter === 0) {
+                    if (this.disableRangeStartFunction && !previousMonthCalendarDay.disabled) {
+                        previousMonthCalendarDay.disabled = this.disableRangeStartFunction(calDate);
+                    }
+                    if (this.blockRangeStartFunction && !previousMonthCalendarDay.blocked) {
+                        previousMonthCalendarDay.blocked = this.blockRangeStartFunction(calDate);
+                    }
+                } else if (this.selectCounter === 1) {
+                    if (this.disableRangeEndFunction && !previousMonthCalendarDay.disabled) {
+                        previousMonthCalendarDay.disabled = this.disableRangeEndFunction(calDate);
+                    }
+
+                    if (this.blockRangeEndFunction && !previousMonthCalendarDay.blocked) {
+                        previousMonthCalendarDay.blocked = this.blockRangeEndFunction(calDate);
+                    }
+                }
+
                 calendarMonth.push(previousMonthCalendarDay);
                 prevMonthLastWeekDay--;
             }
@@ -266,6 +299,22 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 isTabIndexed: false,
                 ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
             };
+
+            if (this.selectCounter === 0 || this.selectCounter === 2) {
+                if (this.disableRangeStartFunction && !currMonthCalendarDay.disabled) {
+                    currMonthCalendarDay.disabled = this.disableRangeStartFunction(calDate);
+                }
+                if (this.blockRangeStartFunction && !currMonthCalendarDay.blocked) {
+                    currMonthCalendarDay.blocked = this.blockRangeStartFunction(calDate);
+                }
+            } else if (this.selectCounter === 1) {
+                if (this.disableRangeEndFunction && !currMonthCalendarDay.disabled) {
+                    currMonthCalendarDay.disabled = this.disableRangeEndFunction(calDate);
+                }
+                if (this.blockRangeEndFunction && !currMonthCalendarDay.blocked) {
+                    currMonthCalendarDay.blocked = this.blockRangeEndFunction(calDate);
+                }
+            }
 
             // if a day is selected, it should be tab indexed
             if (currMonthCalendarDay.selected) {
@@ -348,6 +397,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     calDate.getTime() < this.selectedRangeLast.date.getTime(),
                 ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
             };
+
+            if (this.selectCounter === 0) {
+                if (this.disableRangeStartFunction && !nextMonthCalendarDay.disabled) {
+                    nextMonthCalendarDay.disabled = this.disableRangeStartFunction(calDate);
+                }
+                if (this.blockRangeStartFunction && !nextMonthCalendarDay.blocked) {
+                    nextMonthCalendarDay.blocked = this.blockRangeStartFunction(calDate);
+                }
+            } else if (this.selectCounter === 1) {
+                if (this.disableRangeEndFunction && !nextMonthCalendarDay.disabled) {
+                    nextMonthCalendarDay.disabled = this.disableRangeEndFunction(calDate);
+                }
+
+                if (this.blockRangeEndFunction && !nextMonthCalendarDay.blocked) {
+                    nextMonthCalendarDay.blocked = this.blockRangeEndFunction(calDate);
+                }
+            }
 
             calendarMonth.push(nextMonthCalendarDay);
         }
@@ -499,6 +565,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectCounter++;
                     this.refreshSelected();
+                    this.constructCalendar();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
                     }
@@ -514,6 +581,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectCounter++;
                     this.refreshSelected();
+                    this.constructCalendar();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
                     }
@@ -529,6 +597,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLast = tempSelectedRangeFirst;
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.refreshSelected();
+                    this.constructCalendar();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
                     }

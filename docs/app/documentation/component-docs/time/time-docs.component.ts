@@ -7,6 +7,7 @@ import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.compone
 import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.component.html';
 import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
+import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
 
 @Component({
     selector: 'app-time',
@@ -51,6 +52,8 @@ export class TimeDocsComponent {
     timeNoSpinnersHtml = timeNoSpinnersSrc;
 
     timeNoSecondsHtml = timeNoSecondsSrc;
+
+    timeI18nTs = timeI18nSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');
