@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-rc.17"></a>
+# [0.5.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.16...v0.5.0-rc.17) (2019-05-13)
+
+
+### Features
+
+* added formatting support to datepicker ([#807](https://github.com/SAP/fundamental-ngx/issues/807)) ([bf79ada](https://github.com/SAP/fundamental-ngx/commit/bf79ada))
+
+
+
 <a name="0.5.0-rc.16"></a>
 # [0.5.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.5.0-rc.15...v0.5.0-rc.16) (2019-05-11)
 
