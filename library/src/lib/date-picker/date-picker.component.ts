@@ -13,6 +13,7 @@ import {
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { DateFormatParser } from '../calendar/format/date-parser';
 
 @Component({
     selector: 'fd-date-picker',
@@ -125,7 +126,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     updateDatePickerInputHandler(d) {
         if (this.type === 'single') {
             if (d.selectedDay.date) {
-                this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
+                this.inputFieldDate = this.dateAdapter.format(d.selectedDay.date);
                 this.selectedDay = d.selectedDay;
                 this.selectedDayChange.emit(this.selectedDay);
                 this.onChange({date: this.selectedDay.date});
@@ -136,7 +137,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
                 this.selectedRangeLast = d.selectedLastDay;
                 this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                 this.selectedRangeLastChange.emit(this.selectedRangeLast);
-                this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
+                this.inputFieldDate = this.dateAdapter.format(d.selectedFirstDay.date) + this.dateAdapter.rangeDelimiter
+                    + this.dateAdapter.format(d.selectedLastDay.date);
                 this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
             }
         }
@@ -190,7 +192,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         }
     }
 
-    constructor(private eRef: ElementRef) {}
+    constructor(private eRef: ElementRef, public dateAdapter: DateFormatParser) {}
 
     registerOnChange(fn: (selected: any) => {void}): void {
         this.onChange = fn;
@@ -211,7 +213,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         if (this.type.toLocaleLowerCase() === 'single') {
             this.selectedDay.date = selected.date;
             if (selected.date !== null) {
-                this.inputFieldDate = selected.date.toLocaleDateString();
+                this.inputFieldDate = this.dateAdapter.format(selected.date);
             } else {
                 this.inputFieldDate = '';
             }
@@ -219,7 +221,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
             this.selectedRangeFirst.date = selected.date;
             this.selectedRangeLast.date = selected.rangeEnd;
             if (selected.date !== null) {
-                this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+                this.inputFieldDate = this.dateAdapter.format(selected.date) +
+                    this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.rangeEnd);
             } else {
                 this.inputFieldDate = '';
             }

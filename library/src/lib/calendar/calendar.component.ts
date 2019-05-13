@@ -17,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { CalendarI18n } from './i18n/calendar-i18n';
 import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
+import { DateFormatParser } from './format/date-parser';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
@@ -689,29 +690,26 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    validateDateFromDatePicker(date: Array<any>): boolean {
-        let isInvalid: boolean = false;
-        const month = date[0];
-        const day = date[1];
-        const year = date[2];
-        let numOfDaysInMonth = 0;
+    validateDateFromDatePicker(date: Date): boolean {
+        if (!date) {
+            return true;
+        }
+        const month = date.getMonth();
+        const day = date.getDate();
+        const year = date.getFullYear();
 
         if (isNaN(month) || isNaN(day) || isNaN(year)) {
-            isInvalid = true;
-            return isInvalid;
+            return true;
         }
 
-        if (year < 1000 || year > 3000 || month < 1 || month > 12) {
-            isInvalid = true;
-            return isInvalid;
-        } else {
-            numOfDaysInMonth = this.daysPerMonth[month - 1];
-            if (day < 1 || day > numOfDaysInMonth) {
-                isInvalid = true;
-                return isInvalid;
-            }
+        if (year < 1000 || year > 3000 || month < 0 || month > 11) {
+            return true;
         }
-        return isInvalid;
+
+        if (day < 1 || day > this.determineDaysInMonth(month, year)) {
+            return true;
+        }
+        return false;
     }
 
     resetSelection() {
@@ -894,11 +892,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     updateFromDatePicker(date: any) {
         if (this.calType === 'single') {
-            const singleDate = date.replace(/\s/g, '').split(/[/]+/);
+            const singleDate = this.dateAdapter.parse(date);
             this.invalidDate = this.validateDateFromDatePicker(singleDate);
             if (!this.invalidDate) {
-                this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
-                this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
+                this.selectedDay.date = new Date(singleDate.getFullYear(), singleDate.getMonth(), singleDate.getDate());
+                this.date = new Date(singleDate.getFullYear(), singleDate.getMonth(), singleDate.getDate());
                 this.year = this.date.getFullYear();
                 this.month = this.date.getMonth();
                 this.monthName = this.monthsFullName[this.date.getMonth()];
@@ -911,15 +909,15 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.resetSelection();
             }
         } else {
-            const currentDates = date.replace(/\s/g, '').split(/[-,]+/);
-            const firstDate = currentDates[0].split(/[/]+/);
-            const secondDate = currentDates[1].split(/[/]+/);
+            const currentDates = date.split(this.dateAdapter.rangeDelimiter);
+            const firstDate = this.dateAdapter.parse(currentDates[0]);
+            const secondDate = this.dateAdapter.parse(currentDates[1]);
             this.invalidDate =
                 this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
 
             if (!this.invalidDate) {
-                const fDate = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
-                const lDate = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
+                const fDate = firstDate;
+                const lDate = secondDate;
                 if (fDate.getTime() > lDate.getTime()) {
                     this.selectedRangeFirst.date = lDate;
                     this.selectedRangeLast.date = fDate;
@@ -927,7 +925,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirst.date = fDate;
                     this.selectedRangeLast.date = lDate;
                 }
-                this.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
+                this.date = firstDate;
                 this.year = this.date.getFullYear();
                 this.month = this.date.getMonth();
                 this.monthName = this.monthsFullName[this.date.getMonth()];
@@ -950,6 +948,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         if (!this.date) {
             this.date = new Date();
         }
+
         this.constructCalendar();
         this.constructCalendarYearsList();
         this.calendarId = this.hasher.hash();
@@ -1002,7 +1001,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 private eRef: ElementRef,
                 private cd: ChangeDetectorRef,
                 public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n) {
+                public calendarI18n: CalendarI18n,
+                public dateAdapter: DateFormatParser) {
     }
 
     registerOnChange(fn: any): void {

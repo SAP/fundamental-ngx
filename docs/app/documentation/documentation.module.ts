@@ -253,10 +253,8 @@ import { BackdropExamplesComponent } from './component-docs/modal/examples/backd
 import { PopoverPlacementExampleComponent } from './component-docs/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiComponent } from './core-helpers/api/api.component';
-import { AlertConfig } from '../../../library/src/lib/alert/alert-utils/alert-config';
 import { ApiDocsService } from './services/api-docs.service';
 import { AlertHeaderComponent } from './component-docs/alert/alert-header/alert-header.component';
-import { API_FILES } from './utilities/api-files';
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
 import { ActionBarHeaderComponent } from './component-docs/action-bar/action-bar-header/action-bar-header.component';
 import { BadgeLabelHeaderComponent } from './component-docs/badge-label/badge-label-header/badge-label-header.component';
@@ -303,6 +301,7 @@ import { AddingTabExampleComponent } from './component-docs/tabs/examples/adding
 import { CalendarI18nExampleComponent } from './component-docs/calendar/examples/calendar-i18n-example.component';
 import { DatePickerI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-i18n-example.component';
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
+import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -554,7 +553,8 @@ export function highlightJsFactory() {
         ComplexTitleExampleComponent,
         AddingTabExampleComponent,
         CalendarI18nExampleComponent,
-        DatePickerI18nExampleComponent
+        DatePickerI18nExampleComponent,
+        DatePickerFormatExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

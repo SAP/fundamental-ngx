@@ -290,18 +290,9 @@ describe('CalendarComponent', () => {
     });
 
     it('should validate date from date picker', () => {
-        let mockDate = [1, 1, 2019];
-        let retVal = component.validateDateFromDatePicker(mockDate);
+        const mockDate = new Date(2019, 4, 12);
+        const retVal = component.validateDateFromDatePicker(mockDate);
         expect(retVal).toBeFalsy();
-        mockDate = [0, 1, 2019];
-        retVal = component.validateDateFromDatePicker(mockDate);
-        expect(retVal).toBeTruthy();
-        mockDate = [undefined, 1, 2019];
-        retVal = component.validateDateFromDatePicker(mockDate);
-        expect(retVal).toBeTruthy();
-        mockDate = [1, 0, 2019];
-        retVal = component.validateDateFromDatePicker(mockDate);
-        expect(retVal).toBeTruthy();
     });
 
     it('should resetSelection', () => {
@@ -514,8 +505,8 @@ describe('CalendarComponent', () => {
         spyOn(component, 'validateDateFromDatePicker').and.returnValue(true);
         spyOn(component.isInvalidDateInput, 'emit');
         spyOn(component, 'resetSelection');
-        component.updateFromDatePicker('0');
-        expect(component.validateDateFromDatePicker).toHaveBeenCalledWith(['0']);
+        component.updateFromDatePicker(new Date());
+        expect(component.validateDateFromDatePicker).toHaveBeenCalled();
         expect(component.invalidDate).toEqual(true);
         expect(component.isInvalidDateInput.emit).toHaveBeenCalledWith(component.invalidDate);
         expect(component.resetSelection).toHaveBeenCalled();
@@ -528,7 +519,7 @@ describe('CalendarComponent', () => {
         spyOn(component, 'constructCalendar');
         spyOn(component, 'constructCalendarYearsList');
         spyOn(component, 'updateDatePickerInputEmitter');
-        component.updateFromDatePicker('1/1/2019');
+        component.updateFromDatePicker(new Date(2019, 0, 1));
         expect(component.selectedDay.date).toEqual(new Date(2019, 0, 1));
         expect(component.date).toEqual(new Date(2019, 0, 1));
         expect(component.year).toEqual(2019);
@@ -546,7 +537,7 @@ describe('CalendarComponent', () => {
         spyOn(component.isInvalidDateInput, 'emit');
         spyOn(component, 'resetSelection');
         component.updateFromDatePicker('0 - 1');
-        expect(component.validateDateFromDatePicker).toHaveBeenCalledWith(['0']);
+        expect(component.validateDateFromDatePicker).toHaveBeenCalled();
         expect(component.invalidDate).toEqual(true);
         expect(component.isInvalidDateInput.emit).toHaveBeenCalledWith(component.invalidDate);
         expect(component.resetSelection).toHaveBeenCalled();

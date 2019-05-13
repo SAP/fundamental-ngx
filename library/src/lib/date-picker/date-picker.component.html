@@ -30,7 +30,8 @@
                      [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
                      [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
                      [(selectedDay)]="selectedDay"
-                     [(selectedRangeFirst)]="selectedRangeFirst" [(selectedRangeLast)]="selectedRangeLast"
+                     [(selectedRangeFirst)]="selectedRangeFirst"
+                     [(selectedRangeLast)]="selectedRangeLast"
                      (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                      [dateFromDatePicker]="dateFromDatePicker"
                      [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
