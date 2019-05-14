@@ -3,13 +3,26 @@ import { Pagination } from './pagination.model';
 
 const DISPLAY_NUM_PAGES = 3;
 
+/**
+ * Service that is used to retrieve all the pages,
+ * the number of pages,
+ * and to validate the pagination object.
+ */
 @Injectable()
 export class PaginationService {
+    /** Constant representing the default number of items per page. */
     public DEFAULT_ITEMS_PER_PAGE = 10;
+    
+    /** @hidden */
     public MORE = -1;
 
+    /** @hidden */
     constructor() {}
 
+    /**
+     * Returns a number array representing the pages of the pagination object.
+     * @param pagination An object of type *Pagination*.
+     */
     public getPages(pagination: Pagination): number[] {
         const pages = [];
         this.validate(pagination);
@@ -54,6 +67,10 @@ export class PaginationService {
         return pages;
     }
 
+    /**
+     * Retrieves the total number of pages.
+     * @param pagination An object of type *Pagination*.
+     */
     public getTotalPages(pagination: Pagination): number {
         if (pagination.itemsPerPage <= 0) {
             pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
@@ -61,6 +78,10 @@ export class PaginationService {
         return Math.ceil(pagination.totalItems / pagination.itemsPerPage);
     }
 
+    /**
+     * Provides validation for the pagination object.
+     * @param pagination An object of type *Pagination*.
+     */
     public validate(pagination: Pagination) {
         if (!pagination.totalItems) {
             console.error(`No pages provided in the Pagination object; we cannot provide paging`);
