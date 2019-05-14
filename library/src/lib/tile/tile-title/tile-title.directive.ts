@@ -9,7 +9,6 @@ import { Directive, HostBinding } from '@angular/core';
  * <h3 fd-tile-title>Tile Title</h3>
  * ```
  */
-
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
