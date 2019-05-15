@@ -14,388 +14,59 @@
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 		<li><span class="tsd-signature-type">AfterViewChecked</span></li>
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Calendar<wbr>Component<span class="tsd-signature-symbol">(</span>hasher<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HashService</span>, eRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span>, cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarComponent</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L926">calendar/calendar.component.ts:926</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>hasher: <span class="tsd-signature-type">HashService</span></h5>
-					</li>
-					<li>
-						<h5>eRef: <span class="tsd-signature-type">ElementRef</span></h5>
-					</li>
-					<li>
-						<h5>cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CalendarComponent</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
+	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="caltype" class="tsd-anchor"></a>
 		<h3>cal<wbr>Type</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">cal<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarType</span><span class="tsd-signature-symbol"> =&nbsp;&quot;single&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L73">calendar/calendar.component.ts:73</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="calendargrid" class="tsd-anchor"></a>
-		<h3>calendar<wbr>Grid</h3>
-		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L121">calendar/calendar.component.ts:121</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="calendarid" class="tsd-anchor"></a>
-		<h3>calendar<wbr>Id</h3>
-		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L61">calendar/calendar.component.ts:61</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="calendaryearslist" class="tsd-anchor"></a>
-		<h3>calendar<wbr>Years<wbr>List</h3>
-		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Years<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L122">calendar/calendar.component.ts:122</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="closecalendar" class="tsd-anchor"></a>
-		<h3>close<wbr>Calendar</h3>
-		<div class="tsd-signature tsd-kind-icon">close<wbr>Calendar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;any&gt;()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L166">calendar/calendar.component.ts:166</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="date" class="tsd-anchor"></a>
-		<h3>date</h3>
-		<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> =&nbsp;new Date()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L128">calendar/calendar.component.ts:128</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L78">calendar/calendar.component.ts:78</a></li>
 			</ul>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="datefromdatepicker" class="tsd-anchor"></a>
 		<h3>date<wbr>From<wbr>Date<wbr>Picker</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">date<wbr>From<wbr>Date<wbr>Picker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L70">calendar/calendar.component.ts:70</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="day" class="tsd-anchor"></a>
-		<h3>day</h3>
-		<div class="tsd-signature tsd-kind-icon">day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.date.getDate()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L132">calendar/calendar.component.ts:132</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dayspermonth" class="tsd-anchor"></a>
-		<h3>days<wbr>Per<wbr>Month</h3>
-		<div class="tsd-signature tsd-kind-icon">days<wbr>Per<wbr>Month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L119">calendar/calendar.component.ts:119</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="firstyearcalendarlist" class="tsd-anchor"></a>
-		<h3>first<wbr>Year<wbr>Calendar<wbr>List</h3>
-		<div class="tsd-signature tsd-kind-icon">first<wbr>Year<wbr>Calendar<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.year</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L135">calendar/calendar.component.ts:135</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="init" class="tsd-anchor"></a>
-		<h3>init</h3>
-		<div class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L65">calendar/calendar.component.ts:65</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="invaliddate" class="tsd-anchor"></a>
-		<h3>invalid<wbr>Date</h3>
-		<div class="tsd-signature tsd-kind-icon">invalid<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L84">calendar/calendar.component.ts:84</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L75">calendar/calendar.component.ts:75</a></li>
 			</ul>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="isdatetimepicker" class="tsd-anchor"></a>
 		<h3>is<wbr>Date<wbr>Time<wbr>Picker</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Date<wbr>Time<wbr>Picker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L82">calendar/calendar.component.ts:82</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L87">calendar/calendar.component.ts:87</a></li>
 			</ul>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isinvaliddateinput" class="tsd-anchor"></a>
-		<h3>is<wbr>Invalid<wbr>Date<wbr>Input</h3>
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Invalid<wbr>Date<wbr>Input<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
+		<a name="startingdayofweek" class="tsd-anchor"></a>
+		<h3>starting<wbr>Day<wbr>OfWeek</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">starting<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WeekDaysNumberRange</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L79">calendar/calendar.component.ts:79</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L81">calendar/calendar.component.ts:81</a></li>
 			</ul>
 		</aside>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="mondaystartofweek" class="tsd-anchor"></a>
-		<h3>monday<wbr>Start<wbr>OfWeek</h3>
-		<div class="tsd-signature tsd-kind-icon">monday<wbr>Start<wbr>OfWeek<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L76">calendar/calendar.component.ts:76</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="month" class="tsd-anchor"></a>
-		<h3>month</h3>
-		<div class="tsd-signature tsd-kind-icon">month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.date.getMonth()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L129">calendar/calendar.component.ts:129</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="monthname" class="tsd-anchor"></a>
-		<h3>month<wbr>Name</h3>
-		<div class="tsd-signature tsd-kind-icon">month<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;this.monthsFullName[this.month]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L130">calendar/calendar.component.ts:130</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="monthsfullname" class="tsd-anchor"></a>
-		<h3>months<wbr>Full<wbr>Name</h3>
-		<div class="tsd-signature tsd-kind-icon">months<wbr>Full<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;January&#x27;,&#x27;February&#x27;,&#x27;March&#x27;,&#x27;April&#x27;,&#x27;May&#x27;,&#x27;June&#x27;,&#x27;July&#x27;,&#x27;August&#x27;,&#x27;September&#x27;,&#x27;October&#x27;,&#x27;November&#x27;,&#x27;December&#x27;]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L104">calendar/calendar.component.ts:104</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="monthsshortname" class="tsd-anchor"></a>
-		<h3>months<wbr>Short<wbr>Name</h3>
-		<div class="tsd-signature tsd-kind-icon">months<wbr>Short<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;Jan.&#x27;,&#x27;Feb.&#x27;,&#x27;Mar.&#x27;,&#x27;Apr.&#x27;,&#x27;May&#x27;,&#x27;Jun.&#x27;,&#x27;Jul.&#x27;,&#x27;Aug.&#x27;,&#x27;Sep.&#x27;,&#x27;Oct.&#x27;,&#x27;Nov.&#x27;,&#x27;Dec.&#x27;]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L90">calendar/calendar.component.ts:90</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="newfocuseddayid" class="tsd-anchor"></a>
-		<h3>new<wbr>Focused<wbr>Day<wbr>Id</h3>
-		<div class="tsd-signature tsd-kind-icon">new<wbr>Focused<wbr>Day<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L63">calendar/calendar.component.ts:63</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectcounter" class="tsd-anchor"></a>
-		<h3>select<wbr>Counter</h3>
-		<div class="tsd-signature tsd-kind-icon">select<wbr>Counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L136">calendar/calendar.component.ts:136</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selecteddaychange" class="tsd-anchor"></a>
-		<h3>selected<wbr>Day<wbr>Change</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Day<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L143">calendar/calendar.component.ts:143</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedmonth" class="tsd-anchor"></a>
-		<h3>selected<wbr>Month</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L134">calendar/calendar.component.ts:134</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedrangefirstchange" class="tsd-anchor"></a>
-		<h3>selected<wbr>Range<wbr>First<wbr>Change</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>First<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L150">calendar/calendar.component.ts:150</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedrangelastchange" class="tsd-anchor"></a>
-		<h3>selected<wbr>Range<wbr>Last<wbr>Change</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>Last<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L157">calendar/calendar.component.ts:157</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showcalendardates" class="tsd-anchor"></a>
-		<h3>show<wbr>Calendar<wbr>Dates</h3>
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Calendar<wbr>Dates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L88">calendar/calendar.component.ts:88</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showcalendarmonths" class="tsd-anchor"></a>
-		<h3>show<wbr>Calendar<wbr>Months</h3>
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Calendar<wbr>Months<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L86">calendar/calendar.component.ts:86</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showcalendaryears" class="tsd-anchor"></a>
-		<h3>show<wbr>Calendar<wbr>Years</h3>
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Calendar<wbr>Years<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L87">calendar/calendar.component.ts:87</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="today" class="tsd-anchor"></a>
-		<h3>today</h3>
-		<div class="tsd-signature tsd-kind-icon">today<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> =&nbsp;new Date()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L124">calendar/calendar.component.ts:124</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="todaymonth" class="tsd-anchor"></a>
-		<h3>today<wbr>Month</h3>
-		<div class="tsd-signature tsd-kind-icon">today<wbr>Month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.today.getMonth()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L125">calendar/calendar.component.ts:125</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="todayyear" class="tsd-anchor"></a>
-		<h3>today<wbr>Year</h3>
-		<div class="tsd-signature tsd-kind-icon">today<wbr>Year<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.today.getFullYear()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L126">calendar/calendar.component.ts:126</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="true" class="tsd-anchor"></a>
-		<h3>true</h3>
-		<div class="tsd-signature tsd-kind-icon">true<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L67">calendar/calendar.component.ts:67</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="weekdays" class="tsd-anchor"></a>
-		<h3>week<wbr>Days</h3>
-		<div class="tsd-signature tsd-kind-icon">week<wbr>Days<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L118">calendar/calendar.component.ts:118</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="year" class="tsd-anchor"></a>
-		<h3>year</h3>
-		<div class="tsd-signature tsd-kind-icon">year<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.date.getFullYear()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L131">calendar/calendar.component.ts:131</a></li>
-			</ul>
-		</aside>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="blockfunction" class="tsd-anchor"></a>
 		<h3>block<wbr>Function</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">block<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
@@ -403,7 +74,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L173">calendar/calendar.component.ts:173</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L171">calendar/calendar.component.ts:171</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -417,8 +88,609 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="blockrangeendfunction" class="tsd-anchor"></a>
+		<h3>block<wbr>Range<wbr>End<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">block<wbr>Range<wbr>End<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L167">calendar/calendar.component.ts:167</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="blockrangestartfunction" class="tsd-anchor"></a>
+		<h3>block<wbr>Range<wbr>Start<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">block<wbr>Range<wbr>Start<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L163">calendar/calendar.component.ts:163</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="disablefunction" class="tsd-anchor"></a>
+		<h3>disable<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">disable<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L151">calendar/calendar.component.ts:151</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="disablerangeendfunction" class="tsd-anchor"></a>
+		<h3>disable<wbr>Range<wbr>End<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">disable<wbr>Range<wbr>End<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L159">calendar/calendar.component.ts:159</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="disablerangestartfunction" class="tsd-anchor"></a>
+		<h3>disable<wbr>Range<wbr>Start<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">disable<wbr>Range<wbr>Start<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L155">calendar/calendar.component.ts:155</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
+		<a name="selectedday-1" class="tsd-anchor"></a>
+		<h3>selected<wbr>Day</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L119">calendar/calendar.component.ts:119</a></li>
+			</ul>
+		</aside>
+		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+			<a name="selectedday-1.date-1" class="tsd-anchor"></a>
+			<h3>date</h3>
+			<!-- {log decorators} -->
+			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+			<aside class="tsd-sources">
+				<ul>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L120">calendar/calendar.component.ts:120</a></li>
+				</ul>
+			</aside>
+		</section>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
+		<a name="selectedrangefirst" class="tsd-anchor"></a>
+		<h3>selected<wbr>Range<wbr>First</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>First<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L126">calendar/calendar.component.ts:126</a></li>
+			</ul>
+		</aside>
+		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+			<a name="selectedrangefirst.date-2" class="tsd-anchor"></a>
+			<h3>date</h3>
+			<!-- {log decorators} -->
+			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+			<aside class="tsd-sources">
+				<ul>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L127">calendar/calendar.component.ts:127</a></li>
+				</ul>
+			</aside>
+		</section>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
+		<a name="selectedrangelast" class="tsd-anchor"></a>
+		<h3>selected<wbr>Range<wbr>Last</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>Last<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L133">calendar/calendar.component.ts:133</a></li>
+			</ul>
+		</aside>
+		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+			<a name="selectedrangelast.date-3" class="tsd-anchor"></a>
+			<h3>date</h3>
+			<!-- {log decorators} -->
+			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+			<aside class="tsd-sources">
+				<ul>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L134">calendar/calendar.component.ts:134</a></li>
+				</ul>
+			</aside>
+		</section>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closecalendar" class="tsd-anchor"></a>
+		<h3>close<wbr>Calendar</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>Calendar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;any&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L146">calendar/calendar.component.ts:146</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isinvaliddateinput" class="tsd-anchor"></a>
+		<h3>is<wbr>Invalid<wbr>Date<wbr>Input</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Invalid<wbr>Date<wbr>Input<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L84">calendar/calendar.component.ts:84</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selecteddaychange" class="tsd-anchor"></a>
+		<h3>selected<wbr>Day<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Day<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L123">calendar/calendar.component.ts:123</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectedrangefirstchange" class="tsd-anchor"></a>
+		<h3>selected<wbr>Range<wbr>First<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>First<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L130">calendar/calendar.component.ts:130</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectedrangelastchange" class="tsd-anchor"></a>
+		<h3>selected<wbr>Range<wbr>Last<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>Last<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L137">calendar/calendar.component.ts:137</a></li>
+			</ul>
+		</aside>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Calendar<wbr>Component<span class="tsd-signature-symbol">(</span>hasher<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HashService</span>, eRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span>, cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, calendarI18nLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarI18nLabels</span>, calendarI18n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarI18n</span>, dateAdapter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DateFormatParser</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L998">calendar/calendar.component.ts:998</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>hasher: <span class="tsd-signature-type">HashService</span></h5>
+					</li>
+					<li>
+						<h5>eRef: <span class="tsd-signature-type">ElementRef</span></h5>
+					</li>
+					<li>
+						<h5>cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+					<li>
+						<h5>calendarI18nLabels: <span class="tsd-signature-type">CalendarI18nLabels</span></h5>
+					</li>
+					<li>
+						<h5>calendarI18n: <span class="tsd-signature-type">CalendarI18n</span></h5>
+					</li>
+					<li>
+						<h5>dateAdapter: <span class="tsd-signature-type">DateFormatParser</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CalendarComponent</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="calendargrid" class="tsd-anchor"></a>
+		<h3>calendar<wbr>Grid</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L101">calendar/calendar.component.ts:101</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="calendari18n" class="tsd-anchor"></a>
+		<h3>calendar<wbr>I18n</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">calendar<wbr>I18n<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarI18n</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1004">calendar/calendar.component.ts:1004</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="calendari18nlabels" class="tsd-anchor"></a>
+		<h3>calendar<wbr>I18n<wbr>Labels</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">calendar<wbr>I18n<wbr>Labels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarI18nLabels</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1003">calendar/calendar.component.ts:1003</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="calendarid" class="tsd-anchor"></a>
+		<h3>calendar<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L65">calendar/calendar.component.ts:65</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="calendaryearslist" class="tsd-anchor"></a>
+		<h3>calendar<wbr>Years<wbr>List</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Years<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L102">calendar/calendar.component.ts:102</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="date" class="tsd-anchor"></a>
+		<h3>date</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> =&nbsp;new Date()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L108">calendar/calendar.component.ts:108</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dateadapter" class="tsd-anchor"></a>
+		<h3>date<wbr>Adapter</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">date<wbr>Adapter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DateFormatParser</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1005">calendar/calendar.component.ts:1005</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="day" class="tsd-anchor"></a>
+		<h3>day</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.date.getDate()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L112">calendar/calendar.component.ts:112</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dayspermonth" class="tsd-anchor"></a>
+		<h3>days<wbr>Per<wbr>Month</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">days<wbr>Per<wbr>Month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L99">calendar/calendar.component.ts:99</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fdcalendarclass" class="tsd-anchor"></a>
+		<h3>fd<wbr>Calendar<wbr>Class</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fd<wbr>Calendar<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L72">calendar/calendar.component.ts:72</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="firstyearcalendarlist" class="tsd-anchor"></a>
+		<h3>first<wbr>Year<wbr>Calendar<wbr>List</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">first<wbr>Year<wbr>Calendar<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.year</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L115">calendar/calendar.component.ts:115</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="init" class="tsd-anchor"></a>
+		<h3>init</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L69">calendar/calendar.component.ts:69</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="invaliddate" class="tsd-anchor"></a>
+		<h3>invalid<wbr>Date</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">invalid<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L89">calendar/calendar.component.ts:89</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="month" class="tsd-anchor"></a>
+		<h3>month</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.date.getMonth()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L109">calendar/calendar.component.ts:109</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="monthname" class="tsd-anchor"></a>
+		<h3>month<wbr>Name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">month<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L110">calendar/calendar.component.ts:110</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="monthsfullname" class="tsd-anchor"></a>
+		<h3>months<wbr>Full<wbr>Name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">months<wbr>Full<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L96">calendar/calendar.component.ts:96</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="monthsshortname" class="tsd-anchor"></a>
+		<h3>months<wbr>Short<wbr>Name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">months<wbr>Short<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L95">calendar/calendar.component.ts:95</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="newfocuseddayid" class="tsd-anchor"></a>
+		<h3>new<wbr>Focused<wbr>Day<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">new<wbr>Focused<wbr>Day<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L67">calendar/calendar.component.ts:67</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectcounter" class="tsd-anchor"></a>
+		<h3>select<wbr>Counter</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">select<wbr>Counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L116">calendar/calendar.component.ts:116</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectedmonth" class="tsd-anchor"></a>
+		<h3>selected<wbr>Month</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L114">calendar/calendar.component.ts:114</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="showcalendardates" class="tsd-anchor"></a>
+		<h3>show<wbr>Calendar<wbr>Dates</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">show<wbr>Calendar<wbr>Dates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L93">calendar/calendar.component.ts:93</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="showcalendarmonths" class="tsd-anchor"></a>
+		<h3>show<wbr>Calendar<wbr>Months</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">show<wbr>Calendar<wbr>Months<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L91">calendar/calendar.component.ts:91</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="showcalendaryears" class="tsd-anchor"></a>
+		<h3>show<wbr>Calendar<wbr>Years</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">show<wbr>Calendar<wbr>Years<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L92">calendar/calendar.component.ts:92</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="today" class="tsd-anchor"></a>
+		<h3>today</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">today<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> =&nbsp;new Date()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L104">calendar/calendar.component.ts:104</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="todaymonth" class="tsd-anchor"></a>
+		<h3>today<wbr>Month</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">today<wbr>Month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.today.getMonth()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L105">calendar/calendar.component.ts:105</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="todayyear" class="tsd-anchor"></a>
+		<h3>today<wbr>Year</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">today<wbr>Year<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.today.getFullYear()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L106">calendar/calendar.component.ts:106</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="weekdays" class="tsd-anchor"></a>
+		<h3>week<wbr>Days</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">week<wbr>Days<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L98">calendar/calendar.component.ts:98</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="year" class="tsd-anchor"></a>
+		<h3>year</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">year<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.date.getFullYear()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L111">calendar/calendar.component.ts:111</a></li>
+			</ul>
+		</aside>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="constructcalendar" class="tsd-anchor"></a>
 		<h3>construct<wbr>Calendar</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">construct<wbr>Calendar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -426,7 +698,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L380">calendar/calendar.component.ts:380</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L437">calendar/calendar.component.ts:437</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -436,6 +708,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="constructcalendaryearslist" class="tsd-anchor"></a>
 		<h3>construct<wbr>Calendar<wbr>Years<wbr>List</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">construct<wbr>Calendar<wbr>Years<wbr>List<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -443,7 +716,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L427">calendar/calendar.component.ts:427</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L484">calendar/calendar.component.ts:484</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -453,6 +726,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="determinedaysinmonth" class="tsd-anchor"></a>
 		<h3>determine<wbr>Days<wbr>InMonth</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">determine<wbr>Days<wbr>InMonth<span class="tsd-signature-symbol">(</span>month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 		</ul>
@@ -460,7 +734,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L181">calendar/calendar.component.ts:181</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L179">calendar/calendar.component.ts:179</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -477,31 +751,9 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="disablefunction" class="tsd-anchor"></a>
-		<h3>disable<wbr>Function</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">disable<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L169">calendar/calendar.component.ts:169</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>d: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="focuselement" class="tsd-anchor"></a>
 		<h3>focus<wbr>Element</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">focus<wbr>Element<span class="tsd-signature-symbol">(</span>elementSelector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -509,7 +761,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L829">calendar/calendar.component.ts:829</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L886">calendar/calendar.component.ts:886</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -525,6 +777,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="getcurrentmonthdays" class="tsd-anchor"></a>
 		<h3>get<wbr>Current<wbr>Month<wbr>Days</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">get<wbr>Current<wbr>Month<wbr>Days<span class="tsd-signature-symbol">(</span>calendarMonth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 		</ul>
@@ -532,7 +785,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L245">calendar/calendar.component.ts:245</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L267">calendar/calendar.component.ts:267</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -548,6 +801,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="getnextmonthdays" class="tsd-anchor"></a>
 		<h3>get<wbr>Next<wbr>Month<wbr>Days</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">get<wbr>Next<wbr>Month<wbr>Days<span class="tsd-signature-symbol">(</span>calendarMonth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 		</ul>
@@ -555,7 +809,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L308">calendar/calendar.component.ts:308</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L347">calendar/calendar.component.ts:347</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -571,6 +825,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="getpreviousmonthdays" class="tsd-anchor"></a>
 		<h3>get<wbr>Previous<wbr>Month<wbr>Days</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">get<wbr>Previous<wbr>Month<wbr>Days<span class="tsd-signature-symbol">(</span>calendarMonth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 		</ul>
@@ -578,7 +833,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L193">calendar/calendar.component.ts:193</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L200">calendar/calendar.component.ts:200</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -594,6 +849,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="getyeartabindex" class="tsd-anchor"></a>
 		<h3>get<wbr>Year<wbr>Tab<wbr>Index</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">get<wbr>Year<wbr>Tab<wbr>Index<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 		</ul>
@@ -601,7 +857,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L434">calendar/calendar.component.ts:434</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L491">calendar/calendar.component.ts:491</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -620,6 +876,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="gotonextmonth" class="tsd-anchor"></a>
 		<h3>go<wbr>ToNext<wbr>Month</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">go<wbr>ToNext<wbr>Month<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -627,7 +884,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L464">calendar/calendar.component.ts:464</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L521">calendar/calendar.component.ts:521</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -637,6 +894,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="gotopreviousmonth" class="tsd-anchor"></a>
 		<h3>go<wbr>ToPrevious<wbr>Month</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">go<wbr>ToPrevious<wbr>Month<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -644,7 +902,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L458">calendar/calendar.component.ts:458</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L515">calendar/calendar.component.ts:515</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -654,6 +912,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="loadnextyearslist" class="tsd-anchor"></a>
 		<h3>load<wbr>Next<wbr>Years<wbr>List</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">load<wbr>Next<wbr>Years<wbr>List<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -661,7 +920,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L470">calendar/calendar.component.ts:470</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L527">calendar/calendar.component.ts:527</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -671,6 +930,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="loadprevyearslist" class="tsd-anchor"></a>
 		<h3>load<wbr>Prev<wbr>Years<wbr>List</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">load<wbr>Prev<wbr>Years<wbr>List<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -678,7 +938,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L476">calendar/calendar.component.ts:476</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L533">calendar/calendar.component.ts:533</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -688,6 +948,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="ngafterviewchecked" class="tsd-anchor"></a>
 		<h3>ng<wbr>After<wbr>View<wbr>Checked</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Checked<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -695,7 +956,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L915">calendar/calendar.component.ts:915</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L977">calendar/calendar.component.ts:977</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -703,8 +964,33 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="ngonchanges" class="tsd-anchor"></a>
+		<h3>ng<wbr>OnChanges</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnChanges<span class="tsd-signature-symbol">(</span>changes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SimpleChanges</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L994">calendar/calendar.component.ts:994</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>changes: <span class="tsd-signature-type">SimpleChanges</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="ngondestroy" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnDestroy</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnDestroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -712,7 +998,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L922">calendar/calendar.component.ts:922</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L984">calendar/calendar.component.ts:984</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -722,6 +1008,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="ngoninit" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnInit</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -729,7 +1016,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L886">calendar/calendar.component.ts:886</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L943">calendar/calendar.component.ts:943</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -739,6 +1026,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onchange" class="tsd-anchor"></a>
 		<h3>on<wbr>Change</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -746,7 +1034,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L177">calendar/calendar.component.ts:177</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L175">calendar/calendar.component.ts:175</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -756,6 +1044,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onclickhandler" class="tsd-anchor"></a>
 		<h3>on<wbr>Click<wbr>Handler</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Click<wbr>Handler<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -763,7 +1052,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L624">calendar/calendar.component.ts:624</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L684">calendar/calendar.component.ts:684</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -779,6 +1068,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onescapekeydownhandler" class="tsd-anchor"></a>
 		<h3>on<wbr>Escape<wbr>Keydown<wbr>Handler</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Escape<wbr>Keydown<wbr>Handler<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -786,7 +1076,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L617">calendar/calendar.component.ts:617</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L677">calendar/calendar.component.ts:677</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -796,6 +1086,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onkeydowndayhandler" class="tsd-anchor"></a>
 		<h3>on<wbr>Keydown<wbr>Day<wbr>Handler</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Keydown<wbr>Day<wbr>Handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, cell<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -803,7 +1094,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L762">calendar/calendar.component.ts:762</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L819">calendar/calendar.component.ts:819</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -822,6 +1113,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onkeydownmonthhandler" class="tsd-anchor"></a>
 		<h3>on<wbr>Keydown<wbr>Month<wbr>Handler</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Keydown<wbr>Month<wbr>Handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -829,7 +1121,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L726">calendar/calendar.component.ts:726</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L783">calendar/calendar.component.ts:783</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -848,6 +1140,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onkeydownyearhandler" class="tsd-anchor"></a>
 		<h3>on<wbr>Keydown<wbr>Year<wbr>Handler</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Keydown<wbr>Year<wbr>Handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -855,7 +1148,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L682">calendar/calendar.component.ts:682</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L739">calendar/calendar.component.ts:739</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -874,6 +1167,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="ontouched" class="tsd-anchor"></a>
 		<h3>on<wbr>Touched</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">on<wbr>Touched<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -881,7 +1175,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L178">calendar/calendar.component.ts:178</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L176">calendar/calendar.component.ts:176</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -891,6 +1185,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="opendayselection" class="tsd-anchor"></a>
 		<h3>open<wbr>Day<wbr>Selection</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">open<wbr>Day<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -898,7 +1193,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L610">calendar/calendar.component.ts:610</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L670">calendar/calendar.component.ts:670</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -908,6 +1203,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="openmonthselection" class="tsd-anchor"></a>
 		<h3>open<wbr>Month<wbr>Selection</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">open<wbr>Month<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -915,7 +1211,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L586">calendar/calendar.component.ts:586</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L646">calendar/calendar.component.ts:646</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -925,6 +1221,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="openyearselection" class="tsd-anchor"></a>
 		<h3>open<wbr>Year<wbr>Selection</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">open<wbr>Year<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -932,7 +1229,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L598">calendar/calendar.component.ts:598</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L658">calendar/calendar.component.ts:658</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -942,6 +1239,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="populatecalendar" class="tsd-anchor"></a>
 		<h3>populate<wbr>Calendar</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">populate<wbr>Calendar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol">[]</span></li>
 		</ul>
@@ -949,7 +1247,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L367">calendar/calendar.component.ts:367</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L424">calendar/calendar.component.ts:424</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -959,6 +1257,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="refreshselected" class="tsd-anchor"></a>
 		<h3>refresh<wbr>Selected</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">refresh<wbr>Selected<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -966,7 +1265,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L391">calendar/calendar.component.ts:391</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L448">calendar/calendar.component.ts:448</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -976,6 +1275,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="registeronchange" class="tsd-anchor"></a>
 		<h3>register<wbr>OnChange</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">register<wbr>OnChange<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -983,7 +1283,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L931">calendar/calendar.component.ts:931</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1008">calendar/calendar.component.ts:1008</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -999,6 +1299,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="registerontouched" class="tsd-anchor"></a>
 		<h3>register<wbr>OnTouched</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">register<wbr>OnTouched<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1006,7 +1307,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L935">calendar/calendar.component.ts:935</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1012">calendar/calendar.component.ts:1012</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1022,6 +1323,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="resetselection" class="tsd-anchor"></a>
 		<h3>reset<wbr>Selection</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">reset<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1029,7 +1331,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L658">calendar/calendar.component.ts:658</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L715">calendar/calendar.component.ts:715</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1039,6 +1341,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="selectdate" class="tsd-anchor"></a>
 		<h3>select<wbr>Date</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">select<wbr>Date<span class="tsd-signature-symbol">(</span>day<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, formEvent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, closeCalendar<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1046,7 +1349,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L483">calendar/calendar.component.ts:483</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L540">calendar/calendar.component.ts:540</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1071,6 +1374,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="selectmonth" class="tsd-anchor"></a>
 		<h3>select<wbr>Month</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">select<wbr>Month<span class="tsd-signature-symbol">(</span>selectedMonth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1078,7 +1382,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L560">calendar/calendar.component.ts:560</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L620">calendar/calendar.component.ts:620</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1097,6 +1401,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="selectyear" class="tsd-anchor"></a>
 		<h3>select<wbr>Year</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">select<wbr>Year<span class="tsd-signature-symbol">(</span>selectedYear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1104,7 +1409,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L575">calendar/calendar.component.ts:575</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L635">calendar/calendar.component.ts:635</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1123,6 +1428,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="setcurrentmonth" class="tsd-anchor"></a>
 		<h3>set<wbr>Current<wbr>Month</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">set<wbr>Current<wbr>Month<span class="tsd-signature-symbol">(</span>month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1130,7 +1436,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L553">calendar/calendar.component.ts:553</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L613">calendar/calendar.component.ts:613</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1146,6 +1452,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="setcurrentyear" class="tsd-anchor"></a>
 		<h3>set<wbr>Current<wbr>Year</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">set<wbr>Current<wbr>Year<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1153,7 +1460,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L570">calendar/calendar.component.ts:570</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L630">calendar/calendar.component.ts:630</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1169,6 +1476,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="setdisabledstate" class="tsd-anchor"></a>
 		<h3>set<wbr>Disabled<wbr>State</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">set<wbr>Disabled<wbr>State<span class="tsd-signature-symbol">(</span>isDisabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1176,7 +1484,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L939">calendar/calendar.component.ts:939</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1016">calendar/calendar.component.ts:1016</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1190,8 +1498,27 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="setweekdaysorder" class="tsd-anchor"></a>
+		<h3>set<wbr>Week<wbr>Days<wbr>Order</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Week<wbr>Days<wbr>Order<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L191">calendar/calendar.component.ts:191</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="updatedatepickerinputemitter" class="tsd-anchor"></a>
 		<h3>update<wbr>Date<wbr>Picker<wbr>Input<wbr>Emitter</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">update<wbr>Date<wbr>Picker<wbr>Input<wbr>Emitter<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1199,7 +1526,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L415">calendar/calendar.component.ts:415</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L472">calendar/calendar.component.ts:472</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1209,6 +1536,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="updatefromdatepicker" class="tsd-anchor"></a>
 		<h3>update<wbr>From<wbr>Date<wbr>Picker</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">update<wbr>From<wbr>Date<wbr>Picker<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1216,7 +1544,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L836">calendar/calendar.component.ts:836</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L893">calendar/calendar.component.ts:893</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1232,20 +1560,21 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="validatedatefromdatepicker" class="tsd-anchor"></a>
 		<h3>validate<wbr>Date<wbr>From<wbr>Date<wbr>Picker</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">validate<wbr>Date<wbr>From<wbr>Date<wbr>Picker<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon">validate<wbr>Date<wbr>From<wbr>Date<wbr>Picker<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L633">calendar/calendar.component.ts:633</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L693">calendar/calendar.component.ts:693</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>date: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<h5>date: <span class="tsd-signature-type">Date</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -1255,6 +1584,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="writevalue" class="tsd-anchor"></a>
 		<h3>write<wbr>Value</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>selected<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -1262,7 +1592,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L943">calendar/calendar.component.ts:943</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L1020">calendar/calendar.component.ts:1020</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1289,99 +1619,43 @@
 	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
 		<a name="emitteddate" class="tsd-anchor"></a>
 		<h3>emitted<wbr>Date</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">emitted<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L159">calendar/calendar.component.ts:159</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L139">calendar/calendar.component.ts:139</a></li>
 			</ul>
 		</aside>
 		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 			<a name="emitteddate.selectedday" class="tsd-anchor"></a>
 			<h3>selected<wbr>Day</h3>
+			<!-- {log decorators} -->
 			<div class="tsd-signature tsd-kind-icon">selected<wbr>Day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol"> =&nbsp;this.selectedDay</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L160">calendar/calendar.component.ts:160</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L140">calendar/calendar.component.ts:140</a></li>
 				</ul>
 			</aside>
 		</section>
 		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 			<a name="emitteddate.selectedfirstday" class="tsd-anchor"></a>
 			<h3>selected<wbr>First<wbr>Day</h3>
+			<!-- {log decorators} -->
 			<div class="tsd-signature tsd-kind-icon">selected<wbr>First<wbr>Day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol"> =&nbsp;this.selectedRangeFirst</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L161">calendar/calendar.component.ts:161</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L141">calendar/calendar.component.ts:141</a></li>
 				</ul>
 			</aside>
 		</section>
 		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 			<a name="emitteddate.selectedlastday" class="tsd-anchor"></a>
 			<h3>selected<wbr>Last<wbr>Day</h3>
+			<!-- {log decorators} -->
 			<div class="tsd-signature tsd-kind-icon">selected<wbr>Last<wbr>Day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarDay</span><span class="tsd-signature-symbol"> =&nbsp;this.selectedRangeLast</span></div>
 			<aside class="tsd-sources">
 				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L162">calendar/calendar.component.ts:162</a></li>
-				</ul>
-			</aside>
-		</section>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-		<a name="selectedday-1" class="tsd-anchor"></a>
-		<h3>selected<wbr>Day</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L139">calendar/calendar.component.ts:139</a></li>
-			</ul>
-		</aside>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="selectedday-1.date-1" class="tsd-anchor"></a>
-			<h3>date</h3>
-			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L140">calendar/calendar.component.ts:140</a></li>
-				</ul>
-			</aside>
-		</section>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-		<a name="selectedrangefirst" class="tsd-anchor"></a>
-		<h3>selected<wbr>Range<wbr>First</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>First<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L146">calendar/calendar.component.ts:146</a></li>
-			</ul>
-		</aside>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="selectedrangefirst.date-2" class="tsd-anchor"></a>
-			<h3>date</h3>
-			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L147">calendar/calendar.component.ts:147</a></li>
-				</ul>
-			</aside>
-		</section>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-		<a name="selectedrangelast" class="tsd-anchor"></a>
-		<h3>selected<wbr>Range<wbr>Last</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>Last<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L153">calendar/calendar.component.ts:153</a></li>
-			</ul>
-		</aside>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="selectedrangelast.date-3" class="tsd-anchor"></a>
-			<h3>date</h3>
-			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/calendar/calendar.component.ts#L154">calendar/calendar.component.ts:154</a></li>
+					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/calendar/calendar.component.ts#L142">calendar/calendar.component.ts:142</a></li>
 				</ul>
 			</aside>
 		</section>

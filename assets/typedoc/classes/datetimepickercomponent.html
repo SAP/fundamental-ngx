@@ -1,4 +1,13 @@
 <div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-datetime-picker&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The datetime picker component is an opinionated composition of the fd-popover,
+			fd-calendar and fd-time components to accomplish the UI pattern for picking a date and time.</p>
+		</div>
+	</div>
+</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
@@ -11,193 +20,208 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Datetime<wbr>Picker<wbr>Component<span class="tsd-signature-symbol">(</span>eRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DatetimePickerComponent</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L184">datetime-picker/datetime-picker.component.ts:184</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>eRef: <span class="tsd-signature-type">ElementRef</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DatetimePickerComponent</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="calendarchange" class="tsd-anchor"></a>
-		<h3>calendar<wbr>Change</h3>
-		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L56">datetime-picker/datetime-picker.component.ts:56</a></li>
-			</ul>
-		</aside>
-	</section>
+	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="compact" class="tsd-anchor"></a>
 		<h3>compact</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L39">datetime-picker/datetime-picker.component.ts:39</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L39">datetime-picker/datetime-picker.component.ts:39</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the component should be in compact mode.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="date" class="tsd-anchor"></a>
 		<h3>date</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> =&nbsp;new Date()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L50">datetime-picker/datetime-picker.component.ts:50</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L63">datetime-picker/datetime-picker.component.ts:63</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Current selected date. Two-way binding is supported.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="datechange" class="tsd-anchor"></a>
-		<h3>date<wbr>Change</h3>
-		<div class="tsd-signature tsd-kind-icon">date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
+		<a name="datetimeinputlabel" class="tsd-anchor"></a>
+		<h3>datetime<wbr>Input<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">datetime<wbr>Input<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Datetime input&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L53">datetime-picker/datetime-picker.component.ts:53</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L114">datetime-picker/datetime-picker.component.ts:114</a></li>
 			</ul>
 		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="datefrominput" class="tsd-anchor"></a>
-		<h3>date<wbr>From<wbr>Input</h3>
-		<div class="tsd-signature tsd-kind-icon">date<wbr>From<wbr>Input<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Subject()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L27">datetime-picker/datetime-picker.component.ts:27</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Aria label for the datetime picker input.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="disabled" class="tsd-anchor"></a>
 		<h3>disabled</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L43">datetime-picker/datetime-picker.component.ts:43</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L47">datetime-picker/datetime-picker.component.ts:47</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the component is disabled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="displaydatetimetogglelabel" class="tsd-anchor"></a>
+		<h3>display<wbr>Datetime<wbr>Toggle<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">display<wbr>Datetime<wbr>Toggle<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Display calendar toggle&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L118">datetime-picker/datetime-picker.component.ts:118</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Aria label for the button to show/hide the calendar.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="displayseconds" class="tsd-anchor"></a>
 		<h3>display<wbr>Seconds</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Seconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L47">datetime-picker/datetime-picker.component.ts:47</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L55">datetime-picker/datetime-picker.component.ts:55</a></li>
 			</ul>
 		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="inputfielddate" class="tsd-anchor"></a>
-		<h3>input<wbr>Field<wbr>Date</h3>
-		<div class="tsd-signature tsd-kind-icon">input<wbr>Field<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L24">datetime-picker/datetime-picker.component.ts:24</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isinvaliddateinput" class="tsd-anchor"></a>
-		<h3>is<wbr>Invalid<wbr>Date<wbr>Input</h3>
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Invalid<wbr>Date<wbr>Input<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L25">datetime-picker/datetime-picker.component.ts:25</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the time component shows seconds.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="isopen" class="tsd-anchor"></a>
 		<h3>is<wbr>Open</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L26">datetime-picker/datetime-picker.component.ts:26</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L67">datetime-picker/datetime-picker.component.ts:67</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover is open. Two-way binding is supported.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="meridian" class="tsd-anchor"></a>
 		<h3>meridian</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">meridian<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L41">datetime-picker/datetime-picker.component.ts:41</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L43">datetime-picker/datetime-picker.component.ts:43</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the time component should be meridian (am/pm).</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="placeholder" class="tsd-anchor"></a>
 		<h3>placeholder</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;mm/dd/yyyy, hh:mm:ss am&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L36">datetime-picker/datetime-picker.component.ts:36</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L35">datetime-picker/datetime-picker.component.ts:35</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Placeholder for the inner input element.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="spinners" class="tsd-anchor"></a>
 		<h3>spinners</h3>
+		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">spinners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L45">datetime-picker/datetime-picker.component.ts:45</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L51">datetime-picker/datetime-picker.component.ts:51</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the time component shows spinners for changing the time.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="timechange" class="tsd-anchor"></a>
-		<h3>time<wbr>Change</h3>
-		<div class="tsd-signature tsd-kind-icon">time<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
+		<a name="startingdayofweek" class="tsd-anchor"></a>
+		<h3>starting<wbr>Day<wbr>OfWeek</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">starting<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L59">datetime-picker/datetime-picker.component.ts:59</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L110">datetime-picker/datetime-picker.component.ts:110</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The disableFunction for the calendar.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="timecomponent" class="tsd-anchor"></a>
-		<h3>time<wbr>Component</h3>
-		<div class="tsd-signature tsd-kind-icon">time<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+		<a name="validate" class="tsd-anchor"></a>
+		<h3>validate</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L62">datetime-picker/datetime-picker.component.ts:62</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L59">datetime-picker/datetime-picker.component.ts:59</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to perform visual validation on the picker input.</p>
+			</div>
+		</div>
 	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="blockfunction" class="tsd-anchor"></a>
 		<h3>block<wbr>Function</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">block<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
@@ -205,7 +229,36 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L70">datetime-picker/datetime-picker.component.ts:70</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L127">datetime-picker/datetime-picker.component.ts:127</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The blockFunction for the calendar.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="blockrangeendfunction" class="tsd-anchor"></a>
+		<h3>block<wbr>Range<wbr>End<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">block<wbr>Range<wbr>End<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L143">datetime-picker/datetime-picker.component.ts:143</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -219,25 +272,33 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="closepopover" class="tsd-anchor"></a>
-		<h3>close<wbr>Popover</h3>
+		<a name="blockrangestartfunction" class="tsd-anchor"></a>
+		<h3>block<wbr>Range<wbr>Start<wbr>Function</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">close<wbr>Popover<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">block<wbr>Range<wbr>Start<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L85">datetime-picker/datetime-picker.component.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L139">datetime-picker/datetime-picker.component.ts:139</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 			</li>
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="disablefunction" class="tsd-anchor"></a>
 		<h3>disable<wbr>Function</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">disable<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
@@ -245,7 +306,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L65">datetime-picker/datetime-picker.component.ts:65</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L121">datetime-picker/datetime-picker.component.ts:121</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -259,172 +320,142 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="focusarrowleft" class="tsd-anchor"></a>
-		<h3>focus<wbr>Arrow<wbr>Left</h3>
+		<a name="disablerangeendfunction" class="tsd-anchor"></a>
+		<h3>disable<wbr>Range<wbr>End<wbr>Function</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">focus<wbr>Arrow<wbr>Left<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">disable<wbr>Range<wbr>End<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L223">datetime-picker/datetime-picker.component.ts:223</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="inputvaluechange" class="tsd-anchor"></a>
-		<h3>input<wbr>Value<wbr>Change</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">input<wbr>Value<wbr>Change<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L138">datetime-picker/datetime-picker.component.ts:138</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L135">datetime-picker/datetime-picker.component.ts:135</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>e: <span class="tsd-signature-type">any</span></h5>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 			</li>
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isinvaliddateinputhandler" class="tsd-anchor"></a>
-		<h3>is<wbr>Invalid<wbr>Date<wbr>Input<wbr>Handler</h3>
+		<a name="disablerangestartfunction" class="tsd-anchor"></a>
+		<h3>disable<wbr>Range<wbr>Start<wbr>Function</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Invalid<wbr>Date<wbr>Input<wbr>Handler<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">disable<wbr>Range<wbr>Start<wbr>Function<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L134">datetime-picker/datetime-picker.component.ts:134</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L131">datetime-picker/datetime-picker.component.ts:131</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>e: <span class="tsd-signature-type">any</span></h5>
+						<h5>d: <span class="tsd-signature-type">any</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 			</li>
 		</ul>
 	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="calendarchange" class="tsd-anchor"></a>
+		<h3>calendar<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">calendar<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L75">datetime-picker/datetime-picker.component.ts:75</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when the day changes from the calendar.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="datechange" class="tsd-anchor"></a>
+		<h3>date<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L71">datetime-picker/datetime-picker.component.ts:71</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when the date changes. This can be a time or day change.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="onclose" class="tsd-anchor"></a>
+		<h3>on<wbr>Close</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L83">datetime-picker/datetime-picker.component.ts:83</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when popover closes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="timechange" class="tsd-anchor"></a>
+		<h3>time<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">time<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;Date&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L79">datetime-picker/datetime-picker.component.ts:79</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when the time changes from the time component.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngoninit" class="tsd-anchor"></a>
-		<h3>ng<wbr>OnInit</h3>
+		<a name="closepopover" class="tsd-anchor"></a>
+		<h3>close<wbr>Popover</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">close<wbr>Popover<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L169">datetime-picker/datetime-picker.component.ts:169</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L174">datetime-picker/datetime-picker.component.ts:174</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onblurhandler" class="tsd-anchor"></a>
-		<h3>on<wbr>Blur<wbr>Handler</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Blur<wbr>Handler<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L94">datetime-picker/datetime-picker.component.ts:94</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onchange" class="tsd-anchor"></a>
-		<h3>on<wbr>Change</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L74">datetime-picker/datetime-picker.component.ts:74</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onescapekeydownhandler" class="tsd-anchor"></a>
-		<h3>on<wbr>Escape<wbr>Keydown<wbr>Handler</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Escape<wbr>Keydown<wbr>Handler<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L157">datetime-picker/datetime-picker.component.ts:157</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onglobalclick" class="tsd-anchor"></a>
-		<h3>on<wbr>Global<wbr>Click</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Global<wbr>Click<span class="tsd-signature-symbol">(</span>targetElementPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L162">datetime-picker/datetime-picker.component.ts:162</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>targetElementPath: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ontouched" class="tsd-anchor"></a>
-		<h3>on<wbr>Touched</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Touched<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L75">datetime-picker/datetime-picker.component.ts:75</a></li>
-					</ul>
-				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Closes the popover</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -432,137 +463,45 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="openpopover" class="tsd-anchor"></a>
 		<h3>open<wbr>Popover</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">open<wbr>Popover<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">open<wbr>Popover<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L77">datetime-picker/datetime-picker.component.ts:77</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L163">datetime-picker/datetime-picker.component.ts:163</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>e: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Opens the popover.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="registeronchange" class="tsd-anchor"></a>
-		<h3>register<wbr>OnChange</h3>
+		<a name="togglepopover" class="tsd-anchor"></a>
+		<h3>toggle<wbr>Popover</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">register<wbr>OnChange<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">toggle<wbr>Popover<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L188">datetime-picker/datetime-picker.component.ts:188</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L154">datetime-picker/datetime-picker.component.ts:154</a></li>
 					</ul>
 				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>fn: <span class="tsd-signature-type">function</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>selected<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>selected: <span class="tsd-signature-type">any</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
-										<ul class="tsd-parameters">
-											<li class="tsd-parameter">
-												<h5>void<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="registerontouched" class="tsd-anchor"></a>
-		<h3>register<wbr>OnTouched</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">register<wbr>OnTouched<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L192">datetime-picker/datetime-picker.component.ts:192</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>fn: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setdisabledstate" class="tsd-anchor"></a>
-		<h3>set<wbr>Disabled<wbr>State</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Disabled<wbr>State<span class="tsd-signature-symbol">(</span>isDisabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L196">datetime-picker/datetime-picker.component.ts:196</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>isDisabled: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="settime" class="tsd-anchor"></a>
-		<h3>set<wbr>Time</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Time<span class="tsd-signature-symbol">(</span>fireEvents<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L210">datetime-picker/datetime-picker.component.ts:210</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> fireEvents: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
-					</li>
-				</ul>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Toggles the popover.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -570,6 +509,7 @@
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="updatepickerinputhandler" class="tsd-anchor"></a>
 		<h3>update<wbr>Picker<wbr>Input<wbr>Handler</h3>
+		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon">update<wbr>Picker<wbr>Input<wbr>Handler<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
@@ -577,7 +517,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L102">datetime-picker/datetime-picker.component.ts:102</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/datetime-picker/datetime-picker.component.ts#L181">datetime-picker/datetime-picker.component.ts:181</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -589,92 +529,6 @@
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="writevalue" class="tsd-anchor"></a>
-		<h3>write<wbr>Value</h3>
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>selected<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L200">datetime-picker/datetime-picker.component.ts:200</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>selected: <span class="tsd-signature-type">Date</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Object literals</h2>
-	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-		<a name="selectedday" class="tsd-anchor"></a>
-		<h3>selected<wbr>Day</h3>
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L31">datetime-picker/datetime-picker.component.ts:31</a></li>
-			</ul>
-		</aside>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="selectedday.date-1" class="tsd-anchor"></a>
-			<h3>date</h3>
-			<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L32">datetime-picker/datetime-picker.component.ts:32</a></li>
-				</ul>
-			</aside>
-		</section>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-		<a name="time" class="tsd-anchor"></a>
-		<h3>time</h3>
-		<div class="tsd-signature tsd-kind-icon">time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L29">datetime-picker/datetime-picker.component.ts:29</a></li>
-			</ul>
-		</aside>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="time.hour" class="tsd-anchor"></a>
-			<h3>hour</h3>
-			<div class="tsd-signature tsd-kind-icon">hour<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L29">datetime-picker/datetime-picker.component.ts:29</a></li>
-				</ul>
-			</aside>
-		</section>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="time.minute" class="tsd-anchor"></a>
-			<h3>minute</h3>
-			<div class="tsd-signature tsd-kind-icon">minute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L29">datetime-picker/datetime-picker.component.ts:29</a></li>
-				</ul>
-			</aside>
-		</section>
-		<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-			<a name="time.second" class="tsd-anchor"></a>
-			<h3>second</h3>
-			<div class="tsd-signature tsd-kind-icon">second<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
-			<aside class="tsd-sources">
-				<ul>
-					<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/505b358/library/src/lib/datetime-picker/datetime-picker.component.ts#L29">datetime-picker/datetime-picker.component.ts:29</a></li>
-				</ul>
-			</aside>
-		</section>
 	</section>
 </section>
 </div>
