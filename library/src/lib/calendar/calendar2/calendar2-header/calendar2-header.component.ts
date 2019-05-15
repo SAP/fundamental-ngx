@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
-
-/** Type for the calendar view */
-export type FdCalendarView = 'day' | 'month' | 'year';
+import { FdCalendarView } from '../calendar2.component';
 
 /**
  * Internal use only.
+ * Header of the calendar component.
  */
 @Component({
     selector: 'fd-calendar2-header',
@@ -29,14 +28,17 @@ export class Calendar2HeaderComponent implements OnInit {
     @Input()
     currentDisplayedYear: number;
 
+    /** Event emitted when the active view should change. */
     @Output()
     readonly activeViewChange: EventEmitter<string>
         = new EventEmitter<string>();
 
+    /** Event emitted when the previous button is clicked. */
     @Output()
     readonly previousClicked: EventEmitter<void>
         = new EventEmitter<void>();
 
+    /** Event emitted when the next button is clicked. */
     @Output()
     readonly nextClicked: EventEmitter<void>
         = new EventEmitter<void>();
@@ -47,16 +49,19 @@ export class Calendar2HeaderComponent implements OnInit {
 
     ngOnInit() {}
 
+    /** Get the aria label for the previous button. Depends on the active view. */
     get previousLabel(): string {
         return this.activeView !== 'year' ? this.calendarI18nLabels.previousMonthLabel
             : this.calendarI18nLabels.previousYearLabel;
     }
 
+    /** Get the aria label for the next button. Depends on the active view. */
     get nextLabel(): string {
         return this.activeView !== 'year' ? this.calendarI18nLabels.nextMonthLabel
             : this.calendarI18nLabels.nextMonthLabel;
     }
 
+    /** Get aria label for the month shown. */
     get monthLabel(): string {
         return this.calendarI18n.getAllFullMonthNames()[this.currentDisplayedMonth - 1];
     }
