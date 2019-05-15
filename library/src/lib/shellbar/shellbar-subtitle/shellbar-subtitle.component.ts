@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+
+/**
+ * The component that represents a shellbar subtitle.
+ * The subtitle is optional and should be used rarely.
+ * ```html
+ *   <fd-shellbar-subtitle>
+ *      Corporate Portal
+ *   </fd-shellbar-subtitle>
+ * ```
+ */
+@Component({
+    selector: 'fd-shellbar-subtitle',
+    templateUrl: './shellbar-subtitle.component.html'
+})
+export class ShellbarSubtitleComponent {}

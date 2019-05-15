@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellbarActionsComponent } from './shellbar-actions.component';
 
-import { MenuModule } from '../menu/menu.module';
-import { PopoverModule } from '../popover/popover.module';
+import { MenuModule } from '../../menu/menu.module';
+import { PopoverModule } from '../../popover/popover.module';
 
 describe('ShellbarActionsComponent', () => {
     let component: ShellbarActionsComponent;
