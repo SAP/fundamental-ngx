@@ -1,21 +1,35 @@
 import { Component, Input, OnChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
+/**
+ * The component that represents a navigation link.
+ * ```html
+ *    <fd-side-nav-link>
+ *        <a [attr.href]="'#'">Link Item</a>
+ *    </fd-side-nav-link>
+ * ```
+ */
 @Component({
     selector: 'fd-side-nav-link',
     templateUrl: './side-navigation-link.component.html'
 })
 export class SideNavigationLinkComponent implements OnChanges, AfterViewInit {
+
+    /** Whether the link has a sublist. */
     @Input()
     hasSublist: boolean = false;
 
+    /** The href value. */
     @Input()
     href: string;
 
+    /** @hidden */
     @ViewChild('link')
     linkEl: ElementRef;
 
+    /** @hidden */
     sublistIsOpen: boolean = false;
 
+    /** @hidden */
     onKeypressHandler(event) {
         if (this.hasSublist && (event.code === 'Enter' || event.code === 'Space')) {
             event.preventDefault();
@@ -23,6 +37,7 @@ export class SideNavigationLinkComponent implements OnChanges, AfterViewInit {
         }
     }
 
+    /** @hidden */
     ngOnChanges() {
         /*
          this function determines what element has been placed in ng-content and applies the fd-side-nav__link class appropriately
@@ -45,6 +60,7 @@ export class SideNavigationLinkComponent implements OnChanges, AfterViewInit {
         }
     }
 
+    /** @hidden */
     ngAfterViewInit() {
         this.ngOnChanges();
     }
