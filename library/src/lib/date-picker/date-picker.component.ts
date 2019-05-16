@@ -114,9 +114,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     openCalendar(e) {
         this.isOpen = !this.isOpen;
-        if (e !== this.inputFieldDate) {
-            this.getInputValue(e);
-        }
+        this.getInputValue(e);
     }
 
     closeCalendar() {
