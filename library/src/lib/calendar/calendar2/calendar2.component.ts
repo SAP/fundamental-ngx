@@ -2,13 +2,18 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewEncaps
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
+import { CalendarCurrent } from './models/calendar-current';
 
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year';
 
-/** Currently displayed date information. */
-export type FdCalendarDisplayed = '';
+/** Type for the days of the week. */
+export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
+/**
+ * Months: 1 = January, 12 = december.
+ * Days: 1 = Sunday, 7 = Saturday
+ */
 @Component({
     selector: 'fd-calendar2',
     templateUrl: './calendar2.component.html',
@@ -17,22 +22,26 @@ export type FdCalendarDisplayed = '';
 })
 export class Calendar2Component implements OnInit {
 
-    @HostBinding('class.fd-calendar')
-    fdCalendarClass: boolean = true;
-
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
 
     @Input()
     public activeView: FdCalendarView = 'day';
 
+    @Input()
+    public startingDayOfWeek: DaysOfWeek = 1;
+
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView>
         = new EventEmitter<FdCalendarView>();
 
-    currentDisplayedMonth: number;
+    @HostBinding('class.fd-calendar')
+    private fdCalendarClass: boolean = true;
 
-    currentDisplayedYear: number;
+    @HostBinding('style.display')
+    private displayStyle: string = 'block';
+
+    currentlyDisplayed: CalendarCurrent;
 
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n) {
@@ -44,12 +53,10 @@ export class Calendar2Component implements OnInit {
 
     private prepareDisplayedView(): void {
         if (this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
-            this.currentDisplayedMonth = this.selectedDate.month;
-            this.currentDisplayedYear = this.selectedDate.year;
+            this.currentlyDisplayed = {month: this.selectedDate.month, year: this.selectedDate.year};
         } else {
             const tempDate = FdDate.getToday();
-            this.currentDisplayedMonth = tempDate.month;
-            this.currentDisplayedYear = tempDate.year;
+            this.currentlyDisplayed = {month: tempDate.month, year: tempDate.year};
         }
     }
 

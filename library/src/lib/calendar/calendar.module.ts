@@ -13,6 +13,6 @@ import { Calendar2YearViewComponent } from './calendar2/calendar2-views/calendar
     declarations: [CalendarComponent, Calendar2Component, Calendar2HeaderComponent,
         Calendar2DayViewComponent, Calendar2MonthViewComponent, Calendar2YearViewComponent],
     imports: [CommonModule, IconModule],
-    exports: [CalendarComponent]
+    exports: [CalendarComponent, Calendar2Component]
 })
 export class CalendarModule {}

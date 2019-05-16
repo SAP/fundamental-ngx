@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { FdCalendarView } from '../calendar2.component';
+import { CalendarCurrent } from '../models/calendar-current';
 
 /**
  * Internal use only.
@@ -19,13 +20,9 @@ export class Calendar2HeaderComponent implements OnInit {
     @Input()
     activeView: FdCalendarView;
 
-    /** Currently displayed month on the calendar. */
+    /** Currently displayed date on the calendar. */
     @Input()
-    currentDisplayedMonth: number;
-
-    /** Currently displayed year on the calendar. */
-    @Input()
-    currentDisplayedYear: number;
+    currentlyDisplayed: CalendarCurrent;
 
     /** Event emitted when the active view should change. */
     @Output()
@@ -62,7 +59,7 @@ export class Calendar2HeaderComponent implements OnInit {
 
     /** Get aria label for the month shown. */
     get monthLabel(): string {
-        return this.calendarI18n.getAllFullMonthNames()[this.currentDisplayedMonth - 1];
+        return this.calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
     }
 
     processViewChange(type: FdCalendarView): void {

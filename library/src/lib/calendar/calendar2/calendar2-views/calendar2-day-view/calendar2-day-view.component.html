@@ -1,9 +1,12 @@
 <table class="fd-calendar__table" role="grid">
     <thead class="fd-calendar__group">
     <tr class="fd-calendar__row">
-        <th class="fd-calendar__column-header">
-            <span class="fd-calendar__day-of-week">S</span>
+        <th class="fd-calendar__column-header" *ngFor="let day of shortWeekDays">
+            <span class="fd-calendar__day-of-week">{{day}}</span>
         </th>
     </tr>
     </thead>
+    <tbody class="fd-calendar__group">
+
+    </tbody>
 </table>
