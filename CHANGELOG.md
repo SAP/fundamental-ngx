@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1-rc.1"></a>
+## [0.5.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.5.1-rc.0...v0.5.1-rc.1) (2019-05-16)
+
+
+### Bug Fixes
+
+* only trigger onChange if input value changes ([#819](https://github.com/SAP/fundamental-ngx/issues/819)) ([8dda28a](https://github.com/SAP/fundamental-ngx/commit/8dda28a))
+
+
+
 <a name="0.5.1-rc.0"></a>
 ## [0.5.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.5.0...v0.5.1-rc.0) (2019-05-15)
 
