@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { FdCalendarView } from '../calendar2.component';
@@ -11,8 +11,7 @@ import { FdCalendarView } from '../calendar2.component';
     selector: 'fd-calendar2-header',
     templateUrl: './calendar2-header.component.html',
     styleUrls: ['./calendar2-header.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None
 })
 export class Calendar2HeaderComponent implements OnInit {
 

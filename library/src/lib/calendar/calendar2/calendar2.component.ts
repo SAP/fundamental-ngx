@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
@@ -6,12 +6,14 @@ import { FdDate } from './models/fd-date';
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year';
 
+/** Currently displayed date information. */
+export type FdCalendarDisplayed = '';
+
 @Component({
     selector: 'fd-calendar2',
     templateUrl: './calendar2.component.html',
     styleUrls: ['./calendar2.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None
 })
 export class Calendar2Component implements OnInit {
 
@@ -21,11 +23,16 @@ export class Calendar2Component implements OnInit {
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
 
+    @Input()
+    public activeView: FdCalendarView = 'day';
+
+    @Output()
+    public readonly activeViewChange: EventEmitter<FdCalendarView>
+        = new EventEmitter<FdCalendarView>();
+
     currentDisplayedMonth: number;
 
     currentDisplayedYear: number;
-
-    activeView: FdCalendarView = 'day';
 
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n) {

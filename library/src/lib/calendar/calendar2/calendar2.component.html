@@ -1,3 +1,9 @@
 <fd-calendar2-header [currentDisplayedMonth]="currentDisplayedMonth"
                      [currentDisplayedYear]="currentDisplayedYear"
                      [(activeView)]="activeView"></fd-calendar2-header>
+<ng-container [ngSwitch]="activeView">
+    <fd-calendar2-day-view *ngSwitchCase="'day'"></fd-calendar2-day-view>
+    <fd-calendar2-month-view *ngSwitchCase="'month'"></fd-calendar2-month-view>
+    <fd-calendar2-year-view *ngSwitchCase="'year'"></fd-calendar2-year-view>
+</ng-container>
+
