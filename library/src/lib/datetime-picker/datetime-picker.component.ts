@@ -217,7 +217,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     inputValueChange(e): void {
-        const temp = new Date(e);
+        const temp = new Date(e.replace(/-/g, '/'));
         /*
          Need to check if current locale toDateString contains AM or PM. If the current locale has it and it is absent
          from the user's input, the meridian should be considered invalid
