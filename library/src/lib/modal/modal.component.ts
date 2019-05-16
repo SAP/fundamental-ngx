@@ -1,16 +1,20 @@
 import {
-    Component,
-    ElementRef,
-    OnInit,
     AfterViewInit,
-    Type,
-    TemplateRef,
-    ViewContainerRef,
-    ViewChild,
+    ChangeDetectorRef,
+    Component,
     ComponentFactoryResolver,
     ComponentRef,
+    ElementRef,
     EmbeddedViewRef,
-    ChangeDetectorRef, HostListener, OnDestroy, Optional
+    HostListener,
+    OnDestroy,
+    OnInit,
+    Optional,
+    TemplateRef,
+    Type,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
 import { ModalRef } from './modal-utils/modal-ref';
 import { modalFadeNgIf } from './modal-utils/modal-animations';
@@ -24,6 +28,7 @@ import focusTrap from 'focus-trap';
     host: {
         'role': 'dialog',
         '[class.fd-modal]': 'true',
+        '[class.fd-modal-custom]': 'true',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-describedby]': 'ariaDescribedBy',
@@ -34,7 +39,8 @@ import focusTrap from 'focus-trap';
     },
     animations: [
         modalFadeNgIf
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 

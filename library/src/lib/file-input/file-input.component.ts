@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, HostBinding, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -18,8 +18,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         useExisting: forwardRef(() => FileInputComponent),
         multi: true,
     }],
+    encapsulation: ViewEncapsulation.None
 })
 export class FileInputComponent implements ControlValueAccessor {
+
+    @HostBinding('class.fd-file-input')
+    private fdFileInputClass: boolean = true;
 
     /** @hidden */
     @ViewChild('input')

@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { PaginationService } from './pagination.service';
-import { Pagination } from './pagination.model';
 
 /**
  * The component that is used to provide navigation between paged information.
@@ -20,10 +19,11 @@ import { Pagination } from './pagination.model';
         class: 'fd-pagination'
     },
     styles: [`
-        a {
+        .fd-pagination a {
             cursor: pointer;
         }
-    `]
+    `],
+    encapsulation: ViewEncapsulation.None
 })
 export class PaginationComponent implements OnChanges {
     /** Represents the total number of items. */

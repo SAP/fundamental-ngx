@@ -1,7 +1,7 @@
-:host {
-    display: inline-block;
+.fd-date-picker-custom {
+    display: inline-block !important;
 
     fd-popover {
-        display: block;
+        display: block !important;
     }
 }

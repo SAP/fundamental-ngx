@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents an image. 
@@ -9,7 +9,8 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
     selector: 'fd-image',
-    templateUrl: './image.component.html'
+    templateUrl: './image.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ImageComponent {
     /** 

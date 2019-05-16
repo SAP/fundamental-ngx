@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The action bar description.
@@ -13,6 +13,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-action-bar-description',
-    templateUrl: './action-bar-description.component.html'
+    templateUrl: './action-bar-description.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ActionBarDescriptionComponent {}

@@ -1,4 +1,4 @@
-:host {
+.fd-modal-custom {
     max-width: none;
     z-index: 1000;
 
@@ -6,15 +6,15 @@
         outline: none;
     }
 
-    .fd-modal__content {
-        height: 100%;
-        width: 100%;
-        min-height: inherit;
-        min-width: inherit;
-        max-height: inherit;
-        max-width: inherit;
-        display: flex;
-        flex-direction: column;
-    }
+}
 
+.fd-modal__content--overrides {
+    height: 100%;
+    width: 100%;
+    min-height: inherit;
+    min-width: inherit;
+    max-height: inherit;
+    max-width: inherit;
+    display: flex;
+    flex-direction: column;
 }

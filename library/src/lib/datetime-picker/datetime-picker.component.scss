@@ -1,30 +1,31 @@
-:host {
+.fd-datetime-host {
     display: inline-block;
     width: 230px;
-}
 
-.fd-datetime {
-    display: block;
-
-    &__container {
-        display: flex;
-        align-items: center;
-        margin: 0 16px;
-    }
-
-    &__separator {
-        background-color: lightgrey;
-        width: 1px;
-        margin: 42px 28px;
-        align-self: stretch;
-    }
-
-    fd-popover {
+    .fd-datetime {
         display: block;
-    }
-}
 
-// Fundamental bug workaround
-.fd-time-container {
-    width: 144px;
+        &__container {
+            display: flex;
+            align-items: center;
+            margin: 0 16px;
+        }
+
+        &__separator {
+            background-color: lightgrey;
+            width: 1px;
+            margin: 42px 28px;
+            align-self: stretch;
+        }
+
+        fd-popover {
+            display: block;
+        }
+    }
+
+    // Fundamental bug workaround
+    .fd-time-container {
+        width: 144px;
+    }
+
 }

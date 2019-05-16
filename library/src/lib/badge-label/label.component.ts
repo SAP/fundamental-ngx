@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input } from '@angular/core';
+import { Component, ElementRef, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -7,7 +7,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  */
 @Component({
     selector: 'fd-label',
-    templateUrl: './badge-label.component.html'
+    templateUrl: './badge-label.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class LabelComponent extends AbstractFdNgxClass {
     /** Color coded status for the label. Options are 'success', 'warning', and 'error'. Leave empty for default label. */

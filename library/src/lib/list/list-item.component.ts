@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a list item.
@@ -18,7 +18,8 @@ import { Component, HostBinding } from '@angular/core';
     selector: '[fd-list-item]',
     template: `
         <ng-content></ng-content>
-    `
+    `,
+    encapsulation: ViewEncapsulation.None
 })
 export class ListItemComponent {
     /** @hidden */

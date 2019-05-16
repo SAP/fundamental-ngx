@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
 
 @Component({
     selector: 'fd-alert-container',
     template: ``,
     styles: [`
-        :host {
+        .fd-alert-container {
             position: fixed;
             display: flex;
             flex-direction: column;
@@ -21,6 +21,11 @@ import { alertContainerNgIf } from './alert-animations';
     },
     animations: [
         alertContainerNgIf
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
-export class AlertContainerComponent {}
+export class AlertContainerComponent {
+
+    @HostBinding('class.fd-alert-container')
+    private fdAlertContainerClass: boolean = true;
+}

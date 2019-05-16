@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a menu.
@@ -6,9 +6,9 @@ import { Component, HostBinding } from '@angular/core';
 @Component({
     selector: 'fd-menu',
     templateUrl: './menu.component.html',
-    styles: [':host {display: block;}']
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuComponent {
-    /** @hidden */
-    @HostBinding('class.fd-menu') true;
+    @HostBinding('class.fd-menu')
+    private fdMenuClass: boolean = true;
 }

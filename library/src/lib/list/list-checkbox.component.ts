@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HashService } from '../utils/hash.service';
 
@@ -25,7 +25,8 @@ import { HashService } from '../utils/hash.service';
             useExisting: forwardRef(() => ListCheckboxComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
 

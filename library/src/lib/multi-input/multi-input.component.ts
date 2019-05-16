@@ -2,13 +2,16 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, HostBinding,
+    forwardRef,
+    HostBinding,
     HostListener,
     Input,
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges, ViewChild
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
@@ -24,7 +27,8 @@ import { PopoverComponent } from '../popover/popover.component';
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[class.fd-multi-input-custom]': 'true'
     },
     providers: [
         {
@@ -32,7 +36,8 @@ import { PopoverComponent } from '../popover/popover.component';
             useExisting: forwardRef(() => MultiInputComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 

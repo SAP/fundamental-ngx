@@ -12,7 +12,8 @@ import { modalFadeNgIf } from './modal-animations';
     },
     animations: [
         modalFadeNgIf
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
 

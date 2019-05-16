@@ -1,14 +1,15 @@
 import {
     Component,
-    Input,
-    OnInit,
-    HostListener,
     ElementRef,
+    EventEmitter,
     forwardRef,
     HostBinding,
+    HostListener,
+    Input,
+    OnDestroy,
+    OnInit,
     Output,
-    EventEmitter,
-    OnDestroy
+    ViewEncapsulation
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -28,7 +29,8 @@ import { DateFormatParser } from '../calendar/format/date-parser';
             useExisting: forwardRef(() => DatePickerComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
     inputFieldDate = null;
@@ -36,7 +38,9 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     isOpen: boolean = false;
     dateFromDatePicker: Subject<string> = new Subject();
 
-    @HostBinding('class.fd-date-picker') true;
+    @HostBinding('class.fd-date-picker')
+    @HostBinding('class.fd-date-picker-custom')
+    private fdDatepickerClass: boolean = true;
 
     @Input()
     type: CalendarType = 'single';

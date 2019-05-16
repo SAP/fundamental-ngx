@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a loading spinner. 
@@ -10,7 +10,8 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'fd-loading-spinner',
     templateUrl: './loading-spinner.component.html',
-    styleUrls: ['./loading-spinner.component.scss']
+    styleUrls: ['./loading-spinner.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class LoadingSpinnerComponent {
     /** Whether to display the loading indicator animation. */
