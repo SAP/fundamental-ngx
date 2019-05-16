@@ -113,6 +113,11 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     onTouched: any = () => {};
 
     openCalendar(e) {
+        this.isOpen = true;
+        this.getInputValue(e);
+    }
+
+    toggleCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
     }
@@ -126,20 +131,26 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     updateDatePickerInputHandler(d) {
         if (this.type === 'single') {
             if (d.selectedDay.date) {
-                this.inputFieldDate = this.dateAdapter.format(d.selectedDay.date);
-                this.selectedDay = d.selectedDay;
-                this.selectedDayChange.emit(this.selectedDay);
-                this.onChange({date: this.selectedDay.date});
+                const newInputDate = this.dateAdapter.format(d.selectedDay.date);
+                if (this.inputFieldDate !== newInputDate) {
+                    this.inputFieldDate = newInputDate;
+                    this.selectedDay = d.selectedDay;
+                    this.selectedDayChange.emit(this.selectedDay);
+                    this.onChange({date: this.selectedDay.date});
+                }
             }
         } else {
             if (d.selectedFirstDay.date) {
-                this.selectedRangeFirst = d.selectedFirstDay;
-                this.selectedRangeLast = d.selectedLastDay;
-                this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
-                this.selectedRangeLastChange.emit(this.selectedRangeLast);
-                this.inputFieldDate = this.dateAdapter.format(d.selectedFirstDay.date) + this.dateAdapter.rangeDelimiter
+                const newInputDates = this.dateAdapter.format(d.selectedFirstDay.date) + this.dateAdapter.rangeDelimiter
                     + this.dateAdapter.format(d.selectedLastDay.date);
-                this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                if (this.inputFieldDate !== newInputDates) {
+                    this.inputFieldDate = newInputDates;
+                    this.selectedRangeFirst = d.selectedFirstDay;
+                    this.selectedRangeLast = d.selectedLastDay;
+                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
+                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
+                    this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                }
             }
         }
     }

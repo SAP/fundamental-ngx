@@ -9,11 +9,11 @@
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
                    (keyup)="getInputValue(datePicker.value)"
-                   (click)="isOpen = true"
+                   (click)="openCalendar(datePicker.value)"
                    [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
-                            (click)="openCalendar(datePicker.value)" [attr.aria-label]="displayCalendarToggleLabel"
+                            (click)="toggleCalendar(datePicker.value)" [attr.aria-label]="displayCalendarToggleLabel"
                             [attr.aria-expanded]="isOpen" type="button"></button>
             </span>
         </div>
