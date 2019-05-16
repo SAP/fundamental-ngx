@@ -2,6 +2,7 @@ import { Directive, Input } from '@angular/core';
 
 /**
  * Directive used to achieve column sorting.
+ * The directive is placed on the the desired column(s) to sort,
  */
 @Directive({
     selector: '[fdColumnSortable]',

@@ -8,4 +8,4 @@ import { Component } from '@angular/core';
     selector: 'fd-table',
     templateUrl: './table.component.html'
 })
-export class TableComponent {}
+export class TableComponent { }
