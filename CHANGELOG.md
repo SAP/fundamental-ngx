@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1-rc.2"></a>
+## [0.5.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.5.1-rc.1...v0.5.1-rc.2) (2019-05-17)
+
+
+### Bug Fixes
+
+* bug where safari can't parse dates with hyphens ([#820](https://github.com/SAP/fundamental-ngx/issues/820)) ([2bc1f89](https://github.com/SAP/fundamental-ngx/commit/2bc1f89))
+
+
+
 <a name="0.5.1-rc.1"></a>
 ## [0.5.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.5.1-rc.0...v0.5.1-rc.1) (2019-05-16)
 
