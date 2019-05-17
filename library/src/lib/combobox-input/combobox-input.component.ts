@@ -19,7 +19,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     templateUrl: './combobox-input.component.html',
     styleUrls: ['./combobox-input.component.scss'],
     host: {
-        '[style.display]': '"block"'
+        '[class.fd-combobox-custom-class]': 'true'
     },
     providers: [{
         provide: NG_VALUE_ACCESSOR,

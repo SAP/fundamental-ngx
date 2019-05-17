@@ -21,7 +21,9 @@ import { DateFormatParser } from '../calendar/format/date-parser';
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[class.fd-date-picker]': 'true',
+        '[class.fd-date-picker-custom]': 'true'
     },
     providers: [
         {
@@ -37,10 +39,6 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker: Subject<string> = new Subject();
-
-    @HostBinding('class.fd-date-picker')
-    @HostBinding('class.fd-date-picker-custom')
-    private fdDatepickerClass: boolean = true;
 
     @Input()
     type: CalendarType = 'single';

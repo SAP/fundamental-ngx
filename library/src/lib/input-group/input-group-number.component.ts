@@ -11,9 +11,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  */
 @Component({
     selector: 'fd-input-group-number',
-    host: {
-        class: ''
-    },
     templateUrl: './input-group-number.component.html',
     providers: [
         {

@@ -6,8 +6,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  */
 @Component({
     selector: 'fd-panel',
-    templateUrl: './panel.component.html',
-    styles: [':host {display: block;}']
+    templateUrl: './panel.component.html'
 })
 export class PanelComponent extends AbstractFdNgxClass {
 

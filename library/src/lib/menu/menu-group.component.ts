@@ -8,7 +8,7 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     templateUrl: './menu-group.component.html',
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[style.display]': '"block"'
+        '[class.fd-has-display-block]': 'true'
     }
 })
 export class MenuGroupComponent {

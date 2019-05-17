@@ -51,7 +51,7 @@ export interface EmittedDate {
     styleUrls: ['calendar.component.scss'],
     host: {
         '(blur)': 'onTouched()',
-        '[style.display]': '"block"'
+        '[class.fd-has-display-block]': 'true'
     },
     providers: [
         {

@@ -26,7 +26,8 @@ import { TimeComponent } from '../time/time.component';
     templateUrl: './datetime-picker.component.html',
     styleUrls: ['./datetime-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[class.fd-datetime-host]': 'true'
     },
     providers: [
         {
@@ -38,9 +39,6 @@ import { TimeComponent } from '../time/time.component';
     encapsulation: ViewEncapsulation.None
 })
 export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
-
-    @HostBinding('class.fd-datetime-host')
-    private fdDatetimeClass: boolean = true;
 
     /** @hidden Reference to the inner time component. */
     @ViewChild(TimeComponent)

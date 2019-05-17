@@ -10,9 +10,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  */
 @Component({
     selector: 'fd-input-group-search',
-    host: {
-        class: ''
-    },
     templateUrl: './input-group-search.component.html',
     providers: [
         {
