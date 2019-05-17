@@ -175,8 +175,6 @@ export const API_FILES = {
     ],
     table: [
         'TableComponent',
-        'TableBodyDirective',
-        'TableHeaderDirective',
         'ColumnSortableDirective'
     ],
     tabs: [
