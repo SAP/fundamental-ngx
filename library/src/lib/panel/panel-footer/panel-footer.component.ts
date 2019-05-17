@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Panel footer can be utilized for pagination, secondary actions, add more data, etc.
@@ -13,7 +13,8 @@ import { Component, HostBinding } from '@angular/core';
  */
 @Component({
     selector: 'fd-panel-footer',
-    templateUrl: './panel-footer.component.html'
+    templateUrl: './panel-footer.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelFooterComponent {
 

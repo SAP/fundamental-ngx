@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, ViewEncapsulation } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
@@ -9,7 +9,7 @@ import { TimeI18nLabels } from './i18n/time-i18n-labels';
     styleUrls: ['./time.component.scss'],
     host: {
         '(blur)': 'onTouched()',
-        class: 'fd-time'
+        class: 'fd-time fd-has-display-block'
     },
     providers: [
         {
@@ -18,7 +18,7 @@ import { TimeI18nLabels } from './i18n/time-i18n-labels';
             multi: true
         }
     ],
-    styles: [':host {display: block;}']
+    encapsulation: ViewEncapsulation.None
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
 

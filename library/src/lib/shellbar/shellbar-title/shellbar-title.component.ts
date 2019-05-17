@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a shellbar title.
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-shellbar-title',
-    templateUrl: './shellbar-title.component.html'
+    templateUrl: './shellbar-title.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ShellbarTitleComponent { }

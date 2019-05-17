@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -18,9 +18,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ],
     host: {
-        class: 'fd-form__item fd-form__item--check',
+        class: 'fd-form__item fd-form__item--check fd-toggle-custom',
         '[id]': 'id',
-    }
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** @hidden */

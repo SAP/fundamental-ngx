@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a shellbar subtitle.
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-shellbar-subtitle',
-    templateUrl: './shellbar-subtitle.component.html'
+    templateUrl: './shellbar-subtitle.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ShellbarSubtitleComponent {}

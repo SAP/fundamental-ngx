@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Header of the panel. Contains a head and actions.
@@ -15,7 +15,8 @@ import { Component, HostBinding } from '@angular/core';
  */
 @Component({
     selector: 'fd-panel-header',
-    templateUrl: './panel-header.component.html'
+    templateUrl: './panel-header.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelHeaderComponent {
 

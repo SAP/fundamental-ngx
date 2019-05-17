@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a navigation item.
@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav-item',
-    templateUrl: './side-navigation-item.component.html'
+    templateUrl: './side-navigation-item.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationItemComponent {}

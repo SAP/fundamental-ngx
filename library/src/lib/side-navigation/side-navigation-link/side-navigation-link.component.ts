@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a navigation link.
@@ -10,7 +10,8 @@ import { Component, Input, OnChanges, ViewChild, ElementRef, AfterViewInit } fro
  */
 @Component({
     selector: 'fd-side-nav-link',
-    templateUrl: './side-navigation-link.component.html'
+    templateUrl: './side-navigation-link.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationLinkComponent implements OnChanges, AfterViewInit {
 

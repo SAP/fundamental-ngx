@@ -23,7 +23,7 @@ describe('PanelBodyComponent', () => {
     });
 
     it('should have body class', () => {
-        expect(fixture.nativeElement.className).toBe('fd-panel__body');
+        expect(fixture.nativeElement.className).toContain('fd-panel__body');
     });
 
     it('should support edge bleeding', () => {

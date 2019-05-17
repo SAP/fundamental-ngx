@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 
 /**
  * A token is used to represent contextualizing information.
@@ -9,9 +9,10 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } 
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
     host: {
-        'class': 'fd-token',
+        class: 'fd-token',
         'role': 'button'
-    }
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class TokenComponent {
 

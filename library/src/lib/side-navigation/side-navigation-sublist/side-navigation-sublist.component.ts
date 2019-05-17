@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 /**
  * The component that represents a navigation sublist structure.
  * ```html
@@ -14,6 +14,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav-sublist',
-    templateUrl: './side-navigation-sublist.component.html'
+    templateUrl: './side-navigation-sublist.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationSubListComponent {}

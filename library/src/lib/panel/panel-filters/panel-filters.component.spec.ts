@@ -23,6 +23,6 @@ describe('PanelFiltersComponent', () => {
     });
 
     it('should have panel filters class', () => {
-        expect(fixture.nativeElement.className).toBe('fd-panel__filters');
+        expect(fixture.nativeElement.className).toContain('fd-panel__filters');
     });
 });

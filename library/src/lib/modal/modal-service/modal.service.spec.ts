@@ -106,11 +106,6 @@ describe('ModalService', () => {
         expect(service['modals'][0].modalRef.location.nativeElement.style.maxHeight).toBe(height);
         expect(service['modals'][0].modalRef.location.nativeElement.style.minHeight).toBe(height);
         expect(service['modals'][0].modalRef.location.nativeElement.style.height).toBe(height);
-
-        tick();
-
-        expect(service['modals'][0].modalRef.instance['elRef'].nativeElement.offsetHeight).toBe(200);
-        expect(service['modals'][0].modalRef.instance['elRef'].nativeElement.offsetWidth).toBe(400);
     }));
 
     it('should close modal on backdrop click', fakeAsync(() => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a list structure.
@@ -14,6 +14,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav-list',
-    templateUrl: './side-navigation-list.component.html'
+    templateUrl: './side-navigation-list.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationListComponent {}

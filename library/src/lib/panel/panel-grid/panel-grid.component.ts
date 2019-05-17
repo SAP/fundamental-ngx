@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
@@ -6,7 +6,8 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
  */
 @Component({
     selector: 'fd-panel-grid',
-    templateUrl: './panel-grid.component.html'
+    templateUrl: './panel-grid.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelGridComponent extends AbstractFdNgxClass {
 
