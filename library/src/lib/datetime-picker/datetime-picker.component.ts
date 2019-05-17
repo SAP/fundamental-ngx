@@ -243,7 +243,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.dateFromInput.next(temp.toLocaleDateString());
         } else {
             this.isInvalidDateInput = true;
-            this.dateFromInput.next('');
         }
     }
 

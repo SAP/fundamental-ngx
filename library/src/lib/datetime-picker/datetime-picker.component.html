@@ -11,7 +11,7 @@
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
                        (keyup)="inputValueChange(inputFieldDate)"
-                       (click)="isOpen = true"
+                       (click)="openPopover()"
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }"
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
