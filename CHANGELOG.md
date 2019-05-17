@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1-rc.3"></a>
+## [0.5.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.5.1-rc.2...v0.5.1-rc.3) (2019-05-17)
+
+
+### Bug Fixes
+
+* datetime invalid time in input should not nullify ngModel ([#822](https://github.com/SAP/fundamental-ngx/issues/822)) ([053d897](https://github.com/SAP/fundamental-ngx/commit/053d897))
+
+
+
 <a name="0.5.1-rc.2"></a>
 ## [0.5.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.5.1-rc.1...v0.5.1-rc.2) (2019-05-17)
 
