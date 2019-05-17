@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Directive } from '@angular/core';
 
-@Component({
-    selector: 'fd-table',
-    templateUrl: './table.component.html'
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-table]',
+    host: {
+        class: 'fd-table'
+    }
 })
-export class TableComponent {}
+export class TableDirective {}
