@@ -9,6 +9,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class MenuComponent {
+
+    /** @hidden */
     @HostBinding('class.fd-menu')
-    private fdMenuClass: boolean = true;
+    fdMenuClass: boolean = true;
 }
