@@ -1,4 +1,16 @@
-import { Component, Input, OnInit, HostListener, ElementRef, EventEmitter, Output, forwardRef, ViewChild, OnDestroy } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef, HostBinding,
+    HostListener,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
@@ -14,7 +26,8 @@ import { TimeComponent } from '../time/time.component';
     templateUrl: './datetime-picker.component.html',
     styleUrls: ['./datetime-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[class.fd-datetime-host]': 'true'
     },
     providers: [
         {
@@ -22,7 +35,8 @@ import { TimeComponent } from '../time/time.component';
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
@@ -66,6 +80,18 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     isOpen: boolean = false;
 
+    /** The disableFunction for the calendar. */
+    @Input()
+    startingDayOfWeek: number = 0;
+
+    /** Aria label for the datetime picker input. */
+    @Input()
+    datetimeInputLabel: string = 'Datetime input';
+
+    /** Aria label for the button to show/hide the calendar. */
+    @Input()
+    displayDatetimeToggleLabel: string = 'Display calendar toggle';
+
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
     readonly dateChange: EventEmitter<Date> = new EventEmitter<Date>();
@@ -104,18 +130,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Subscription of the dateFromInput. */
     private dateFromInputSubscription: Subscription;
-
-    /** The disableFunction for the calendar. */
-    @Input()
-    startingDayOfWeek: number = 0;
-
-    /** Aria label for the datetime picker input. */
-    @Input()
-    datetimeInputLabel: string = 'Datetime input';
-
-    /** Aria label for the button to show/hide the calendar. */
-    @Input()
-    displayDatetimeToggleLabel: string = 'Display calendar toggle';
 
     @Input()
     disableFunction = function(d): boolean {

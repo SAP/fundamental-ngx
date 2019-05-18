@@ -10,7 +10,7 @@ import {
     OnDestroy,
     AfterViewChecked,
     ChangeDetectorRef,
-    HostBinding, OnChanges, SimpleChanges
+    HostBinding, OnChanges, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -51,7 +51,7 @@ export interface EmittedDate {
     styleUrls: ['calendar.component.scss'],
     host: {
         '(blur)': 'onTouched()',
-        class: 'fd-calendar'
+        '[class.fd-has-display-block]': 'true'
     },
     providers: [
         {
@@ -59,7 +59,8 @@ export interface EmittedDate {
             useExisting: forwardRef(() => CalendarComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
     calendarId: string;

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -18,7 +18,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     host: {
         '[attr.role]': '(this.isButton === true ? "button" : "")'
     },
-    templateUrl: './product-tile.component.html'
+    templateUrl: './product-tile.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ProductTileComponent extends AbstractFdNgxClass {
     /** Whether the product tile is disabled. */

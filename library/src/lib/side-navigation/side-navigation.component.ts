@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav',
-    templateUrl: './side-navigation.component.html'
+    templateUrl: './side-navigation.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationComponent {
 

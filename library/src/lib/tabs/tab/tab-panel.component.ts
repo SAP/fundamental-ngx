@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { HashService } from '../../utils/hash.service';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 
@@ -15,7 +15,8 @@ import { TabTitleDirective } from '../tab-utils/tab-directives';
         '[attr.aria-expanded]': 'expanded ? true : null',
         '[class.is-expanded]': 'expanded'
     },
-    providers: [HashService]
+    providers: [HashService],
+    encapsulation: ViewEncapsulation.None
 })
 export class TabPanelComponent implements OnInit {
 

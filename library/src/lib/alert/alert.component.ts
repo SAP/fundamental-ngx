@@ -14,7 +14,7 @@ import {
     Optional,
     EmbeddedViewRef,
     Output,
-    EventEmitter,
+    EventEmitter, ViewEncapsulation, HostListener
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { AlertRef } from './alert-utils/alert-ref';
@@ -34,15 +34,15 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
+        '[class.fd-has-display-block]': 'true',
         'role': 'alert',
         '[attr.id]': 'id',
-        '(mouseenter)': 'handleAlertMouseEvent($event)',
-        '(mouseleave)': 'handleAlertMouseEvent($event)',
         '[@fadeAlertNgIf]': ''
     },
     animations: [
         alertFadeNgIf
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
@@ -188,6 +188,8 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     }
 
     /** @hidden */
+    @HostListener('mouseenter', ['$event'])
+    @HostListener('mouseleave', ['$event'])
     handleAlertMouseEvent(event): void {
         if (event.type === 'mouseenter') {
             this.mouseInAlert = true;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -7,7 +7,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-timepicker-custom'
     },
     providers: [
         {
@@ -16,7 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    styleUrls: ['./time-picker.component.scss']
+    styleUrls: ['./time-picker.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
 

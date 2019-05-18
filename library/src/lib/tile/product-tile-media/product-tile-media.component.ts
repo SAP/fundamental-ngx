@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Component that represents a product tile media container.
@@ -9,7 +9,8 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
     selector: 'fd-product-tile-media',
-    templateUrl: './product-tile-media.component.html'
+    templateUrl: './product-tile-media.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ProductTileMediaComponent {
     /** The image url. */

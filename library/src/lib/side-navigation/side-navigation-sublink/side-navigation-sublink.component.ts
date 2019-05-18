@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a navigation sublink.
@@ -10,7 +10,8 @@ import { AfterViewInit, Component, ElementRef, OnChanges } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav-sublink',
-    templateUrl: './side-navigation-sublink.component.html'
+    templateUrl: './side-navigation-sublink.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationSubLinkComponent implements AfterViewInit, OnChanges {
     /** @hidden */

@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Container for title and description.
@@ -15,7 +15,8 @@ import { Component, HostBinding } from '@angular/core';
  */
 @Component({
     selector: 'fd-panel-head',
-    templateUrl: './panel-head.component.html'
+    templateUrl: './panel-head.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelHeadComponent {
 

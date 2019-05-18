@@ -1,4 +1,4 @@
-import { Component, ContentChildren, HostListener, Input, OnInit, AfterContentChecked, QueryList } from '@angular/core';
+import { Component, ContentChildren, HostListener, Input, OnInit, AfterContentChecked, QueryList, ViewEncapsulation } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 
 /**
@@ -23,7 +23,8 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
 
 @Component({
     selector: 'fd-shellbar-actions',
-    templateUrl: './shellbar-actions.component.html'
+    templateUrl: './shellbar-actions.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */

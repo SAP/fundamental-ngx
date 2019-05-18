@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Container for grouped buttons.
@@ -14,7 +14,8 @@ import { Component, HostBinding } from '@angular/core';
     templateUrl: './button-group.component.html',
     host: {
         'role': 'group'
-    }
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class ButtonGroupComponent {
 

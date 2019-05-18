@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input } from '@angular/core';
+import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
 import { SearchInputComponent } from '../../search-input/search-input.component';
 
 /**
@@ -15,7 +15,8 @@ import { SearchInputComponent } from '../../search-input/search-input.component'
  */
 @Component({
     selector: 'fd-shellbar-action',
-    templateUrl: './shellbar-action.component.html'
+    templateUrl: './shellbar-action.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ShellbarActionComponent {
 

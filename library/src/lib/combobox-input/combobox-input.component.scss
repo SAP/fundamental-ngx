@@ -1,11 +1,9 @@
-:host {
-    display: block;
-}
+.fd-combobox-custom-class {
+    .fd-combobox-popover-custom {
+        display: block;
+    }
 
-.fd-combobox-popover-custom {
-    display: block;
-}
-
-.fd-combobox-input-menu-overflow {
-    overflow: auto;
+    .fd-combobox-input-menu-overflow {
+        overflow: auto;
+    }
 }

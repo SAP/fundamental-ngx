@@ -4,7 +4,7 @@ import {
     OnInit,
     Output,
     EventEmitter,
-    ViewChild
+    ViewChild, ViewEncapsulation
 } from '@angular/core';
 import { HashService } from '../utils/hash.service';
 import { Placement, PopperOptions } from 'popper.js';
@@ -19,7 +19,11 @@ import { PopoverDirective } from './popover-directive/popover.directive';
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
-    styleUrls: ['./popover.component.scss']
+    styleUrls: ['./popover.component.scss'],
+    host: {
+        '[class.fd-popover-custom]': 'true'
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverComponent implements OnInit {
 

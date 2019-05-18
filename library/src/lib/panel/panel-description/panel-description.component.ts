@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Description of the panel title.
@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-panel-description',
-    templateUrl: './panel-description.component.html'
+    templateUrl: './panel-description.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelDescriptionComponent {}

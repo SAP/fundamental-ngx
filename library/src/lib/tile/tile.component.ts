@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -17,7 +17,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     host: {
         '[attr.role]': '(this.isButton === true ? \'button\' : \'\')'
     },
-    templateUrl: './tile.component.html'
+    templateUrl: './tile.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class TileComponent extends AbstractFdNgxClass {
     /** Whether the tile is disabled. */

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a shellbar logo.
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-shellbar-logo',
-    templateUrl: './shellbar-logo.component.html'
+    templateUrl: './shellbar-logo.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ShellbarLogoComponent {}

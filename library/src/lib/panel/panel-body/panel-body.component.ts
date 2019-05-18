@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Main content of the panel can that hold lists, table, tree, text, form or any other information.
@@ -14,7 +14,10 @@ import { Component, HostBinding, Input } from '@angular/core';
 @Component({
     selector: 'fd-panel-body',
     templateUrl: './panel-body.component.html',
-    styles: [':host {display: block;}']
+    host: {
+        '[class.fd-has-display-block]': 'true'
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelBodyComponent {
 

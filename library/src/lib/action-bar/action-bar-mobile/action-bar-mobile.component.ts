@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The action bar mobile component. This component should wrap all other action bar components, including the <fd-action-bar>.
@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-action-bar-mobile',
-    templateUrl: './action-bar-mobile.component.html'
+    templateUrl: './action-bar-mobile.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ActionBarMobileComponent {}

@@ -1,5 +1,6 @@
 import {
     Component,
+    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -7,10 +8,11 @@ import {
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges,
     QueryList,
+    SimpleChanges,
     ViewChild,
-    ViewChildren, ElementRef
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MenuItemDirective } from '../menu/menu-item.directive';
@@ -31,7 +33,11 @@ import { MenuItemDirective } from '../menu/menu-item.directive';
             useExisting: forwardRef(() => SearchInputComponent),
             multi: true
         }
-    ]
+    ],
+    host: {
+        class: 'fd-search-input-custom'
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class SearchInputComponent implements ControlValueAccessor, OnInit, OnChanges {
 

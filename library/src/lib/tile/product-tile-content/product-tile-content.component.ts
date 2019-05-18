@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Component that represents a product tile content. 
@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-product-tile-content',
-    templateUrl: './product-tile-content.component.html'
+    templateUrl: './product-tile-content.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ProductTileContentComponent {}

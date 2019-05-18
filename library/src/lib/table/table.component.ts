@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a table.
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-table',
-    templateUrl: './table.component.html'
+    templateUrl: './table.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class TableComponent { }

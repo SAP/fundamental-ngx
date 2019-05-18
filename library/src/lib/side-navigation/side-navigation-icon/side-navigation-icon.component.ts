@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a navigation icon.
@@ -8,7 +8,8 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav-icon',
-    templateUrl: './side-navigation-icon.component.html'
+    templateUrl: './side-navigation-icon.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationIconComponent {
     /** The glyph (icon) name. */

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a navigation group.
@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-side-nav-group',
-    templateUrl: './side-navigation-group.component.html'
+    templateUrl: './side-navigation-group.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationGroupComponent { }

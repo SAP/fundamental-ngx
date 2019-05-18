@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Tile level actions such as add, remove, delete, sort, etc.
@@ -13,6 +13,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-tile-actions',
-    templateUrl: './tile-actions.component.html'
+    templateUrl: './tile-actions.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class TileActionsComponent {}

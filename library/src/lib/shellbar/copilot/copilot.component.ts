@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a CoPilot.
@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-copilot',
-    templateUrl: './copilot.component.html'
+    templateUrl: './copilot.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class CopilotComponent { }

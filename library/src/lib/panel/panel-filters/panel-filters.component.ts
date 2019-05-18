@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Panel level filters that is specific to the data being displayed within the panel.
@@ -14,7 +14,10 @@ import { Component, HostBinding } from '@angular/core';
 @Component({
     selector: 'fd-panel-filters',
     templateUrl: './panel-filters.component.html',
-    styles: [':host {display: block}']
+    host: {
+        '[class.fd-has-display-block]': 'true'
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelFiltersComponent {
 

@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -10,9 +10,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  */
 @Component({
     selector: 'fd-input-group-search',
-    host: {
-        class: ''
-    },
     templateUrl: './input-group-search.component.html',
     providers: [
         {
@@ -20,7 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             useExisting: forwardRef(() => InputGroupSearchComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class InputGroupSearchComponent implements ControlValueAccessor {
     /** Whether the input is disabled. */

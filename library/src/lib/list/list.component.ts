@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a list.
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-list',
-    templateUrl: './list.component.html'
+    templateUrl: './list.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ListComponent {}

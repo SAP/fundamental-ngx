@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a product menu.
@@ -11,7 +11,8 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
  */
 @Component({
     selector: 'fd-product-menu',
-    templateUrl: './product-menu.component.html'
+    templateUrl: './product-menu.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ProductMenuComponent implements OnInit {
 

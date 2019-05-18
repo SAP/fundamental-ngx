@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Panel level actions such as add, remove, delete, sort, etc.
@@ -15,7 +15,8 @@ import { Component, HostBinding } from '@angular/core';
  */
 @Component({
     selector: 'fd-panel-actions',
-    templateUrl: './panel-actions.component.html'
+    templateUrl: './panel-actions.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PanelActionsComponent {
 

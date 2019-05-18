@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 import { SearchInputComponent } from '../search-input/search-input.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -18,17 +18,21 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'fd-combobox-input',
     templateUrl: './combobox-input.component.html',
     styleUrls: ['./combobox-input.component.scss'],
+    host: {
+        '[class.fd-combobox-custom-class]': 'true'
+    },
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: ComboboxInputComponent,
         multi: true
-    }]
+    }],
+    encapsulation: ViewEncapsulation.None
 })
 export class ComboboxInputComponent extends SearchInputComponent {
 
     /** @hidden */
     @HostBinding('class.fd-combobox-input')
-    comboboxClass = true;
+    private comboboxClass = true;
 
     /** Event emitted when a new item is clicked. */
     @Output()
