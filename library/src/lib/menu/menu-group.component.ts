@@ -12,6 +12,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     }
 })
 export class MenuGroupComponent {
+
+    /** @hidden */
     @HostBinding('class.fd-menu__group')
-    private fdMenuGroupClass: boolean = true;
+    fdMenuGroupClass: boolean = true;
 }

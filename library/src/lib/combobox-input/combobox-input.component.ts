@@ -32,7 +32,7 @@ export class ComboboxInputComponent extends SearchInputComponent {
 
     /** @hidden */
     @HostBinding('class.fd-combobox-input')
-    private comboboxClass = true;
+    comboboxClass = true;
 
     /** Event emitted when a new item is clicked. */
     @Output()

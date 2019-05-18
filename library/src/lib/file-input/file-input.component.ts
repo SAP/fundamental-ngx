@@ -22,8 +22,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class FileInputComponent implements ControlValueAccessor {
 
+    /** @hidden */
     @HostBinding('class.fd-file-input')
-    private fdFileInputClass: boolean = true;
+    fdFileInputClass: boolean = true;
 
     /** @hidden */
     @ViewChild('input')
