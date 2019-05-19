@@ -6,7 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
 
     transform(value: {url: string, name: string}, searchTerm: string): boolean {
-        return searchTerm === '' || value.url.toLocaleUpperCase().indexOf(searchTerm.toLocaleUpperCase()) !== -1 ||
+        return searchTerm === '' || !searchTerm || 
+            value.url.toLocaleUpperCase().indexOf(searchTerm.toLocaleUpperCase()) !== -1 ||
             value.name.toLocaleUpperCase().indexOf(searchTerm.toLocaleUpperCase()) !== -1;
     }
 

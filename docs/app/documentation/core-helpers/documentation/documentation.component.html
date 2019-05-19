@@ -14,7 +14,7 @@
                 <ul class="nav">
                     <div class="side-nav__headers">Getting Started</div>
                     <ng-container *ngFor="let guide of guides">
-                        <li *ngIf="guide.url === 'home' || guide | docsSearch:search">
+                        <li *ngIf="guide.url === 'home' || (guide | docsSearch:search)">
                             <div class="nav-item-container">
                                 <a class="nav-item"
                                    [routerLink]="'/' + guide.url"

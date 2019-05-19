@@ -15,51 +15,51 @@ export class DocumentationComponent implements OnInit {
     ];
 
     components = [
-        { url: 'action-bar', name: 'Action Bar'},
-        { url: 'alert', name: 'Alert'},
-        { url: 'badgeLabel', name: 'Badge'},
-        { url: 'breadcrumb', name: 'Breadcrumb'},
-        { url: 'button', name: 'Button'},
-        { url: 'buttonGroup', name: 'Button Group'},
-        { url: 'calendar', name: 'Calendar'},
-        { url: 'comboboxInput', name: 'Combobox Input'},
-        { url: 'datePicker', name: 'Date Picker'},
-        { url: 'datetime-picker', name: 'Datetime Picker'},
-        { url: 'dropdown', name: 'Dropdown'},
-        { url: 'form', name: 'Form'},
-        { url: 'icon', name: 'Icon'},
-        { url: 'identifier', name: 'Identifier'},
-        { url: 'image', name: 'Image'},
-        { url: 'inlineHelp', name: 'Inline Help'},
-        { url: 'inputGroup', name: 'Input Group'},
-        { url: 'list', name: 'List'},
-        { url: 'loadingSpinner', name: 'Loading Spinner'},
-        { url: 'menu', name: 'Menu'},
-        { url: 'modal', name: 'Modal'},
-        { url: 'multi-input', name: 'Multi Input'},
-        { url: 'pagination', name: 'Pagination'},
-        { url: 'popover', name: 'Popover'},
-        { url: 'searchInput', name: 'Search Input'},
-        { url: 'shellbar', name: 'Shellbar'},
-        { url: 'sideNavigation', name: 'Side Navigation'},
-        { url: 'table', name: 'Table'},
-        { url: 'tabs', name: 'Tabs'},
-        { url: 'tile', name: 'Tile'},
-        { url: 'time', name: 'Time'},
-        { url: 'timePicker', name: 'Time Picker'},
-        { url: 'toggle', name: 'Toggle'},
-        { url: 'token', name: 'Token'}
+        { url: 'action-bar', name: 'Action Bar' },
+        { url: 'alert', name: 'Alert' },
+        { url: 'badgeLabel', name: 'Badge' },
+        { url: 'breadcrumb', name: 'Breadcrumb' },
+        { url: 'button', name: 'Button' },
+        { url: 'buttonGroup', name: 'Button Group' },
+        { url: 'calendar', name: 'Calendar' },
+        { url: 'comboboxInput', name: 'Combobox Input' },
+        { url: 'datePicker', name: 'Date Picker' },
+        { url: 'datetime-picker', name: 'Datetime Picker' },
+        { url: 'dropdown', name: 'Dropdown' },
+        { url: 'form', name: 'Form' },
+        { url: 'icon', name: 'Icon' },
+        { url: 'identifier', name: 'Identifier' },
+        { url: 'image', name: 'Image' },
+        { url: 'inlineHelp', name: 'Inline Help' },
+        { url: 'inputGroup', name: 'Input Group' },
+        { url: 'list', name: 'List' },
+        { url: 'loadingSpinner', name: 'Loading Spinner' },
+        { url: 'menu', name: 'Menu' },
+        { url: 'modal', name: 'Modal' },
+        { url: 'multi-input', name: 'Multi Input' },
+        { url: 'pagination', name: 'Pagination' },
+        { url: 'popover', name: 'Popover' },
+        { url: 'searchInput', name: 'Search Input' },
+        { url: 'shellbar', name: 'Shellbar' },
+        { url: 'sideNavigation', name: 'Side Navigation' },
+        { url: 'table', name: 'Table' },
+        { url: 'tabs', name: 'Tabs' },
+        { url: 'tile', name: 'Tile' },
+        { url: 'time', name: 'Time' },
+        { url: 'timePicker', name: 'Time Picker' },
+        { url: 'toggle', name: 'Toggle' },
+        { url: 'token', name: 'Token' }
     ];
 
     layouts = [
-        { url: 'panel', name: 'Panel'}
+        { url: 'panel', name: 'Panel' }
     ];
 
     utilities = [
-        { url: 'file-input', name: 'File Input'},
-        { url: 'infiniteScroll', name: 'Infinite Scroll'},
-        { url: 'popover-directive', name: 'Popover Helper'},
-        { url: 'scroll-spy', name: 'Scroll Spy'}
+        { url: 'file-input', name: 'File Input' },
+        { url: 'infiniteScroll', name: 'Infinite Scroll' },
+        { url: 'popover-directive', name: 'Popover Helper' },
+        { url: 'scroll-spy', name: 'Scroll Spy' }
     ];
 
     search: string = '';
