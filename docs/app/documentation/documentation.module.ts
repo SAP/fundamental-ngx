@@ -20,7 +20,6 @@ import { ImportComponent } from './core-helpers/import/import.component';
 import { DirectionalityComponent } from './core-helpers/directionality/directionality.component';
 import { ComponentExampleComponent } from './core-helpers/component-example/component-example.component';
 import { ExampleBackgroundComponent } from './core-helpers/example-background/example-background.component';
-import { StatusIconComponent } from './core-helpers/status-icon/status-icon.component';
 
 // services
 import { CopyService } from './services/copy.service';
@@ -302,6 +301,7 @@ import { CalendarI18nExampleComponent } from './component-docs/calendar/examples
 import { DatePickerI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-i18n-example.component';
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
+import { SearchPipe } from './core-helpers/pipes/search.pipe';
 
 export function highlightJsFactory() {
     return hljs;
@@ -497,7 +497,6 @@ export function highlightJsFactory() {
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
-        StatusIconComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
@@ -554,7 +553,8 @@ export function highlightJsFactory() {
         AddingTabExampleComponent,
         CalendarI18nExampleComponent,
         DatePickerI18nExampleComponent,
-        DatePickerFormatExampleComponent
+        DatePickerFormatExampleComponent,
+        SearchPipe
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
