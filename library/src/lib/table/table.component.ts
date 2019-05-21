@@ -1,12 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-
+import { Directive } from '@angular/core';
 /**
- * The component that represents a table.
+ * The directive that represents a table.
  * A table is a set of tabular data. Line items can support data, images and actions.
  */
-@Component({
-    selector: 'fd-table',
-    templateUrl: './table.component.html',
-    encapsulation: ViewEncapsulation.None
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-table]',
+    host: {
+        class: 'fd-table'
+    }
 })
-export class TableComponent { }
+export class TableDirective {}

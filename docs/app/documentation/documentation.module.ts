@@ -302,6 +302,8 @@ import { DatePickerI18nExampleComponent } from './component-docs/date-picker/exa
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
+import { CdkTableModule } from '@angular/cdk/table';
+import { TableCdkExampleComponent } from './component-docs/table/examples/table-cdk-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -470,6 +472,7 @@ export function highlightJsFactory() {
         SideNavigationLevelsExampleComponent,
         SideNavigationTitlesExampleComponent,
         TableExampleComponent,
+        TableCdkExampleComponent,
         TableCheckboxesExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
@@ -569,7 +572,8 @@ export function highlightJsFactory() {
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         UtilsModule,
         FundamentalNgxModule,
-        HttpClientModule
+        HttpClientModule,
+        CdkTableModule
     ],
     providers: [
         CopyService,
