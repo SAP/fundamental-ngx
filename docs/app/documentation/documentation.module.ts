@@ -304,6 +304,7 @@ import { DatePickerFormatExampleComponent } from './component-docs/date-picker/e
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
 import { CdkTableModule } from '@angular/cdk/table';
 import { TableCdkExampleComponent } from './component-docs/table/examples/table-cdk-example.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 export function highlightJsFactory() {
     return hljs;
@@ -573,7 +574,8 @@ export function highlightJsFactory() {
         UtilsModule,
         FundamentalNgxModule,
         HttpClientModule,
-        CdkTableModule
+        CdkTableModule,
+        DragDropModule
     ],
     providers: [
         CopyService,

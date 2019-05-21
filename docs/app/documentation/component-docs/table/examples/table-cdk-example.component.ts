@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { DataSource } from '@angular/cdk/table';
+import { Component, ViewChild } from '@angular/core';
+import { CdkTable, DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 export interface CellData {
     column1: string;
@@ -22,15 +23,14 @@ const CELL_DATA: CellData[] = [
     templateUrl: './table-cdk-example.component.html'
 })
 export class TableCdkExampleComponent {
+
+    @ViewChild('table') table: CdkTable;
+
     displayedColumns: string[] = ['column1', 'column2', 'column3', 'date', 'type'];
-    dataSource = new ExampleDataSource();
-}
-export class ExampleDataSource extends DataSource<CellData> {
-    data = new BehaviorSubject<CellData[]>(CELL_DATA);
+    dataSource = CELL_DATA;
 
-    connect(): Observable<CellData[]> {
-        return this.data;
+    dropRow(event) {
+        moveItemInArray(this.dataSource, event.previousIndex, event.currentIndex);
+        this.table.renderRows();
     }
-
-    disconnect() {}
 }
