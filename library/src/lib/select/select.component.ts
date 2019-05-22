@@ -31,8 +31,6 @@ export class SelectComponent implements OnInit, AfterContentInit, ControlValueAc
     @ContentChildren(OptionComponent, { descendants: true })
     options: QueryList<OptionComponent>;
 
-
-
     @Input()
     disabled: boolean = false;
 
@@ -52,6 +50,8 @@ export class SelectComponent implements OnInit, AfterContentInit, ControlValueAc
     @Output()
     readonly valueChange: EventEmitter<any>
         = new EventEmitter<any>();
+
+    private selected: OptionComponent;
 
     onChange: Function = () => {};
     onTouched: Function = () => {};
@@ -78,7 +78,28 @@ export class SelectComponent implements OnInit, AfterContentInit, ControlValueAc
         this.disabled = isDisabled;
     }
 
-    writeValue(obj: any): void {
+    writeValue(value: any): void {
+        if (this.options) {
+            this.selectValue(value);
+        }
+    }
+
+    get triggerValue(): string {
+        return this.selected.viewValueText || this.placeholder;
+    }
+
+    private selectValue(value: any): OptionComponent | undefined {
+        const matchOption = this.options.find((option: OptionComponent) => {
+
+            // Todo implement custom comparator
+            return option.value != null && option.value === value;
+        });
+
+        if (matchOption) {
+            this.selected = matchOption;
+        }
+
+        return matchOption;
     }
 
 }
