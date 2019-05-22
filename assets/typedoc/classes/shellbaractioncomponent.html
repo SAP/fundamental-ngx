@@ -1,4 +1,19 @@
 <div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-shellbar-action&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The component that represents a shellbar action.</p>
+			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-shellbar-action</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let action of actions"</span>
+                     [<span class="hljs-attr">glyph</span>]=<span class="hljs-string">"action.glyph"</span>
+                     [<span class="hljs-attr">callback</span>]=<span class="hljs-string">"action.callback"</span>
+                     [<span class="hljs-attr">label</span>]=<span class="hljs-string">"action.label"</span>
+                     [<span class="hljs-attr">notificationCount</span>]=<span class="hljs-string">"action.notificationCount"</span>
+                     [<span class="hljs-attr">notificationLabel</span>]=<span class="hljs-string">"action.notificationLabel"</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-name">fd-shellbar-action</span>&gt;</span></code></pre>
+		</div>
+	</div>
+</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
@@ -16,9 +31,14 @@
 		<div class="tsd-signature tsd-kind-icon">callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/shellbar/shellbar-action.component.ts#L14">shellbar/shellbar-action.component.ts:14</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/64b0fae/library/src/lib/shellbar/shellbar-action/shellbar-action.component.ts#L29">shellbar/shellbar-action/shellbar-action.component.ts:29</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Callback that hanldles the response to clicks on any of the actions.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="glyph" class="tsd-anchor"></a>
@@ -27,9 +47,14 @@
 		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/shellbar/shellbar-action.component.ts#L11">shellbar/shellbar-action.component.ts:11</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/64b0fae/library/src/lib/shellbar/shellbar-action/shellbar-action.component.ts#L25">shellbar/shellbar-action/shellbar-action.component.ts:25</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The glyph (icon) name</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="label" class="tsd-anchor"></a>
@@ -38,9 +63,14 @@
 		<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/shellbar/shellbar-action.component.ts#L17">shellbar/shellbar-action.component.ts:17</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/64b0fae/library/src/lib/shellbar/shellbar-action/shellbar-action.component.ts#L33">shellbar/shellbar-action/shellbar-action.component.ts:33</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The action label.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="notificationcount" class="tsd-anchor"></a>
@@ -49,9 +79,14 @@
 		<div class="tsd-signature tsd-kind-icon">notification<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/shellbar/shellbar-action.component.ts#L23">shellbar/shellbar-action.component.ts:23</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/64b0fae/library/src/lib/shellbar/shellbar-action/shellbar-action.component.ts#L41">shellbar/shellbar-action/shellbar-action.component.ts:41</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Represents the number of notifications.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="notificationlabel" class="tsd-anchor"></a>
@@ -60,23 +95,14 @@
 		<div class="tsd-signature tsd-kind-icon">notification<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/shellbar/shellbar-action.component.ts#L20">shellbar/shellbar-action.component.ts:20</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/64b0fae/library/src/lib/shellbar/shellbar-action/shellbar-action.component.ts#L37">shellbar/shellbar-action/shellbar-action.component.ts:37</a></li>
 			</ul>
 		</aside>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="searchinputcomponent" class="tsd-anchor"></a>
-		<h3>search<wbr>Input<wbr>Component</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">search<wbr>Input<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SearchInputComponent</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/df615fa/library/src/lib/shellbar/shellbar-action.component.ts#L26">shellbar/shellbar-action.component.ts:26</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The notification label.</p>
+			</div>
+		</div>
 	</section>
 </section>
 </div>

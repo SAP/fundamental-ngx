@@ -23,7 +23,20 @@
 		<pre><code> npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save fiori-fundamentals fundamental-ngx</span></code></pre></li>
 		<li><p><strong>Include Fiori Fundamentals CSS in the <code>styles</code> array of the <code>angular.json</code> file.</strong></p>
 			<pre><code class="language-scss"> &quot;./node_modules/fiori-fundamentals/dist/fiori-fundamentals.min.css&quot;</code></pre>
-			<p> <em>Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root.</em></p>
+			<p> <em>Note the path may be different if your CLI configuration is not in the root of your project directory.</em></p>
+		</li>
+		<li><p><strong>Configure your animations.</strong></p>
+			<p> Install angular animations by running the following.</p>
+			<pre><code> <span class="hljs-built_in">npm</span> install @angular/animations</code></pre><p> Once the above package is installed, import <code>BrowserAnimationsModule</code> to enable the animations.</p>
+			<pre><code class="language-typescript"> <span class="hljs-keyword">import</span> {BrowserAnimationsModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser/animations'</span>;
+
+ <span class="hljs-meta">@NgModule</span>({
+   ...
+   imports: [BrowserAnimationsModule],
+   ...
+ })
+ <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoModule { }</code></pre>
+			<p> Alternatively, you can disable the animations by importing <code>NoopAnimationsModule</code> instead.</p>
 		</li>
 		<li><p><strong>Import the modules you want to use.</strong></p>
 			<p> To add the entire library, add the following import to your main application module.</p>
@@ -32,15 +45,17 @@
  @NgModule({
      ...
      imports: [FundamentalNgxModule],
- })</code></pre>
+ })
+ <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
 			<p> For example, to use Toggles, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { ToggleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'fundamental-ngx/toggle/toggle.module'</span>;
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { ToggleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'fundamental-ngx'</span>;
 
  @NgModule({
      ...
      imports: [ToggleModule],
- })</code></pre>
+ })
+  <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 		</li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
 			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-toggle</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"'l'"</span> [(<span class="hljs-attr">checked</span>)]=<span class="hljs-string">"checked"</span>&gt;</span>Large Toggle<span class="hljs-tag">&lt;/<span class="hljs-name">fd-toggle</span>&gt;</span></code></pre>

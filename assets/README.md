@@ -41,7 +41,29 @@ For an existing Angular application,
     "./node_modules/fiori-fundamentals/dist/fiori-fundamentals.min.css"
     ```
 
-    _Note the path may be different if your CLI configuration is not in the root of your project directory or if you have set a custom root._
+    _Note the path may be different if your CLI configuration is not in the root of your project directory._
+
+3. **Configure your animations.**
+
+    Install angular animations by running the following.
+    ```
+    npm install @angular/animations
+    ```
+    
+    Once the above package is installed, import `BrowserAnimationsModule` to enable the animations.
+    
+    ```typescript
+    import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+    
+    @NgModule({
+      ...
+      imports: [BrowserAnimationsModule],
+      ...
+    })
+    export class DemoModule { }
+    ```
+    
+    Alternatively, you can disable the animations by importing `NoopAnimationsModule` instead.
 
 3. **Import the modules you want to use.**
 
@@ -54,6 +76,7 @@ For an existing Angular application,
         ...
         imports: [FundamentalNgxModule],
     })
+    export class DemoModule { }
     ```
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
@@ -61,12 +84,13 @@ For an existing Angular application,
     For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from 'fundamental-ngx/toggle/toggle.module';
+    import { ToggleModule } from 'fundamental-ngx';
     
     @NgModule({
         ...
         imports: [ToggleModule],
     })
+     export class DemoModule { }
     ```
 
 4. **Add the component to your HTML.**
