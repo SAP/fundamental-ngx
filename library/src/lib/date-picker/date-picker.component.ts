@@ -187,6 +187,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
                 if (date && typeof date === 'object') {
                     this.updateDatePickerInputHandler(date);
                 } else if (date === '' && this.allowNull) {
+                    this.isInvalidDateInput = false;
                     if (this.type === 'single') {
                         this.selectedDay.date = null;
                         this.selectedDay.selected = null;
