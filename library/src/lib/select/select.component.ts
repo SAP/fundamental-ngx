@@ -3,7 +3,7 @@ import {
     Component,
     ContentChildren,
     EventEmitter, HostBinding,
-    Input,
+    Input, OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
+import { defer, merge, Observable, Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 // TODO
 // Custom trigger button (pass an ng-template, inject context)
@@ -23,7 +25,7 @@ import { OptionComponent } from './option/option.component';
     styleUrls: ['./select.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SelectComponent implements OnInit, AfterContentInit, ControlValueAccessor {
+export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
@@ -53,6 +55,19 @@ export class SelectComponent implements OnInit, AfterContentInit, ControlValueAc
 
     private selected: OptionComponent;
 
+    private readonly _destroy = new Subject<void>();
+
+    readonly optionsChanges: Observable<OptionComponent> = defer(() => {
+        const options = this.options;
+
+        if (options) {
+            return options.changes.pipe(
+                startWith(options),
+                switchMap(() => merge(...options.map(option => option.selectedChange)))
+            );
+        }
+    }) as Observable<OptionComponent>;
+
     onChange: Function = () => {};
     onTouched: Function = () => {};
 
@@ -63,7 +78,15 @@ export class SelectComponent implements OnInit, AfterContentInit, ControlValueAc
     }
 
     ngAfterContentInit(): void {
-        // Need to subscribe to changes of contentchildren for dynamic number of options
+        this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+            this.resetOptions();
+            this.initSelection();
+        });
+    }
+
+    ngOnDestroy(): void {
+        this._destroy.next();
+        this._destroy.complete();
     }
 
     registerOnChange(fn: any): void {
@@ -100,6 +123,14 @@ export class SelectComponent implements OnInit, AfterContentInit, ControlValueAc
         }
 
         return matchOption;
+    }
+
+    private resetOptions(): void {
+
+    }
+
+    private initSelection(): void {
+
     }
 
 }

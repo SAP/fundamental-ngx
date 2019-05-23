@@ -1,4 +1,4 @@
-<fd-popover>
+<fd-popover [(isOpen)]="isOpen">
     <fd-popover-control>
         <button class="fd-dropdown__control fd-button"
                 [attr.aria-expanded]="isOpen"
@@ -7,6 +7,6 @@
         </button>
     </fd-popover-control>
     <fd-popover-body>
-
+        <ng-content></ng-content>
     </fd-popover-body>
 </fd-popover>
