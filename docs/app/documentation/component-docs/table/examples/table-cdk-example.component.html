@@ -25,5 +25,5 @@
     </ng-container>
 
     <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-    <tr cdk-row cdkDrag [cdkDragData]="row" *cdkRowDef="let row; columns: displayedColumns;"></tr>
+    <tr cdk-row cdkDrag [cdkDragData]="row" *cdkRowDef="let row; columns: displayedColumns;" style="cursor: grab;"></tr>
 </table>

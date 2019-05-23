@@ -30,7 +30,8 @@ export class TableCdkExampleComponent {
     dataSource = CELL_DATA;
 
     dropRow(event) {
-        moveItemInArray(this.dataSource, event.previousIndex, event.currentIndex);
+        const previousIndex = this.dataSource.findIndex((d) => d === event.item.data);
+        moveItemInArray(this.dataSource, previousIndex, event.currentIndex);
         this.table.renderRows();
     }
 }
