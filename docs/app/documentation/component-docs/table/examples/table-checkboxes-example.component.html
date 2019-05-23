@@ -1,4 +1,4 @@
-<fd-table>
+<table fd-table>
     <thead>
         <tr>
             <th><input type="checkbox" [checked]="allSelected" (change)="selectMaster()"/></th>
@@ -21,6 +21,6 @@
             <td><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
     </tbody>
-</fd-table>
+</table>
 
 Selected rows: {{ selectedRows.toString() }}
