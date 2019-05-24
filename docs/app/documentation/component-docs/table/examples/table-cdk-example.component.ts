@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Component, ViewChild } from '@angular/core';
+import { CdkTable } from '@angular/cdk/table';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 export interface CellData {
     column1: string;
@@ -19,18 +19,30 @@ const CELL_DATA: CellData[] = [
 
 @Component({
     selector: 'fd-table-cdk-example',
-    templateUrl: './table-cdk-example.component.html'
+    templateUrl: './table-cdk-example.component.html',
+    styles: [
+        `.cdk-drag-preview {
+            background-color: white;
+            box-sizing: border-box;
+            border-radius: 4px;
+            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+            0 8px 10px 1px rgba(0, 0, 0, 0.14),
+            0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        .cdk-drag-preview td {
+            padding: 16px;
+        }`
+    ]
 })
 export class TableCdkExampleComponent {
+    @ViewChild('table') table: CdkTable<{}[]>;
+
     displayedColumns: string[] = ['column1', 'column2', 'column3', 'date', 'type'];
-    dataSource = new ExampleDataSource();
-}
-export class ExampleDataSource extends DataSource<CellData> {
-    data = new BehaviorSubject<CellData[]>(CELL_DATA);
+    dataSource = CELL_DATA;
 
-    connect(): Observable<CellData[]> {
-        return this.data;
+    dropRow(event) {
+        const previousIndex = this.dataSource.findIndex((d) => d === event.item.data);
+        moveItemInArray(this.dataSource, previousIndex, event.currentIndex);
+        this.table.renderRows();
     }
-
-    disconnect() {}
 }

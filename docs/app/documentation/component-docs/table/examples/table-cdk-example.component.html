@@ -1,7 +1,7 @@
-<table fd-table cdk-table [dataSource]="dataSource">
+<table fd-table cdk-table [dataSource]="dataSource" #table cdkDropList [cdkDropListData]="dataSource" (cdkDropListDropped)="dropRow($event)">
     <ng-container cdkColumnDef="column1">
         <th cdk-header-cell *cdkHeaderCellDef>Column 1</th>
-        <td cdk-cell *cdkCellDef="let cell" class="fd-has-font-weight-semi"><a href="#">{{cell.column1}}</a></td>
+        <td cdk-cell *cdkCellDef="let cell" cdkDragHandle class="fd-has-font-weight-semi"><a href="#">{{cell.column1}}</a></td>
     </ng-container>
 
     <ng-container cdkColumnDef="column2">
@@ -25,5 +25,5 @@
     </ng-container>
 
     <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+    <tr cdk-row cdkDrag [cdkDragData]="row" *cdkRowDef="let row; columns: displayedColumns;" style="cursor: grab;"></tr>
 </table>
