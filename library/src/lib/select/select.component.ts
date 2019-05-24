@@ -3,10 +3,10 @@ import {
     Component,
     ContentChildren,
     EventEmitter, HostBinding,
-    Input, OnDestroy,
+    Input, OnChanges, OnDestroy,
     OnInit,
     Output,
-    QueryList,
+    QueryList, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
@@ -23,9 +23,12 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
     selector: 'fd-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '[class.fd-select-custom]': 'true'
+    }
 })
-export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
@@ -77,10 +80,22 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     ngOnInit(): void {
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        // TODO implement for when value changes programatically
+        if (changes.value) {
+            setTimeout(() => {
+                console.log('changea value programmatically')
+                this.select();
+            });
+        }
+    }
+
     ngAfterContentInit(): void {
         this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+            console.log(this.options.changes);
             this.resetOptions();
             this.initSelection();
+            console.log('ContentChild subscribe');
         });
     }
 
@@ -108,29 +123,60 @@ export class SelectComponent implements OnInit, AfterContentInit, OnDestroy, Con
     }
 
     get triggerValue(): string {
-        return this.selected.viewValueText || this.placeholder;
+        return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
     private selectValue(value: any): OptionComponent | undefined {
+        console.log(value);
         const matchOption = this.options.find((option: OptionComponent) => {
 
             // Todo implement custom comparator
             return option.value != null && option.value === value;
         });
 
-        if (matchOption) {
+        if (matchOption && !this.isOptionActive(matchOption)) {
+            if (this.selected) {
+                this.selected.setSelected(false, false);
+            }
+            console.log('new option selected')
+            matchOption.setSelected(true, false);
             this.selected = matchOption;
+
+            // TODO Maybe put in separate method
+            this.value = this.selected.value;
+            this.valueChange.emit(this.value);
         }
 
         return matchOption;
     }
 
     private resetOptions(): void {
-
+        const destroyCurrentObs = merge(this.options.changes, this._destroy);
+        this.optionsChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
+            console.log('optionsChange subscribe');
+            this.selectValue(instance.value);
+        });
     }
 
     private initSelection(): void {
+        if (this.value) {
+            this.selected = undefined;
+            this.selectValue(this.value);
+        }
+    }
 
+    private select(): void {
+        if (this.value) {
+            this.selectValue(this.value);
+        }
+    }
+
+    private isOptionActive(option: OptionComponent): boolean {
+        if (option) {
+            // Todo implement custom comparator
+            return this.selected && this.selected.value === option.value && option.value === this.value;
+        }
+        return false;
     }
 
 }

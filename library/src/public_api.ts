@@ -43,6 +43,7 @@ export * from './lib/popover/popover.module';
 export * from './lib/popover/popover-directive/popover.directive';
 export * from './lib/scroll-spy/scroll-spy.module';
 export * from './lib/search-input/search-input.module';
+export * from './lib/select/select.module';
 export * from './lib/shellbar/shellbar.module';
 export * from './lib/side-navigation/side-navigation.module';
 export * from './lib/table/table.module';

@@ -1,0 +1,29 @@
+.fd-select-custom {
+    width: 100%;
+
+    .fd-select-popover-custom {
+        display: block;
+
+        fd-popover-container {
+            min-width: 100%;
+            max-width: 100%;
+            overflow: auto;
+        }
+    }
+
+    .fd-select-button-custom {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        &::after {
+            flex-shrink: 0;
+        }
+    }
+
+    .fd-select-text-custom {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-x: hidden;
+    }
+}

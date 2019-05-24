@@ -1,9 +1,10 @@
-<fd-popover [(isOpen)]="isOpen">
+<fd-popover [(isOpen)]="isOpen"
+            class="fd-select-popover-custom">
     <fd-popover-control>
-        <button class="fd-dropdown__control fd-button"
+        <button class="fd-dropdown__control fd-button fd-select-button-custom"
                 [attr.aria-expanded]="isOpen"
                 aria-haspopup="true">
-            {{triggerValue}}
+            <span class="fd-select-text-custom">{{triggerValue}}</span>
         </button>
     </fd-popover-control>
     <fd-popover-body>

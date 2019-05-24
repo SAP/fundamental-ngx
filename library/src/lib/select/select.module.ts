@@ -18,4 +18,4 @@ import { CommonModule } from '@angular/common';
         PopoverModule
     ]
 })
-export class UtilsModule {}
+export class SelectModule {}
