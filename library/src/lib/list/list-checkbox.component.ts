@@ -10,7 +10,7 @@ import { HashService } from '../utils/hash.service';
  *    <li fd-list-item>
  *       <fd-list-checkbox>List item 1</fd-list-checkbox>
  *    </li>
- * </fd-list> 
+ * </fd-list>
  * ```
  */
 @Component({
@@ -62,7 +62,7 @@ export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
-            this.id = this.hash.hash();
+            this.id = 'fd-list-checkbox-' + this.hash.hash();
 
         }
     }

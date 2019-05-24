@@ -16,7 +16,7 @@ import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-direct
     ],
     imports: [
         CommonModule,
-        UtilsModule
+        UtilsModule.forRoot()
     ],
     exports: [
         TabListComponent,

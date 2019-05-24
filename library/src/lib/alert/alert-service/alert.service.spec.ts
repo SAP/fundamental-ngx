@@ -6,6 +6,7 @@ import { AlertComponent } from '../alert.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
+import { HashService } from '../../utils/hash.service';
 
 @Component({
     template: `        
@@ -31,7 +32,8 @@ describe('AlertService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule]
+            imports: [TestModule],
+            providers: [HashService]
         }).compileComponents();
 
         service = TestBed.get(AlertService);

@@ -23,7 +23,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule, NoopAnimationsModule],
-    providers: [AlertService, HashService],
+    providers: [AlertService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
 class TestModule {}
@@ -36,6 +36,7 @@ describe('AlertComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
+            providers: [HashService]
         }).compileComponents();
     }));
 

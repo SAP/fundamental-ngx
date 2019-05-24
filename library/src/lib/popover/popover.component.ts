@@ -119,7 +119,7 @@ export class PopoverComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this.id = this.hasher.hash();
+        this.id = 'fd-popover-' + this.hasher.hash();
     }
 
     /**

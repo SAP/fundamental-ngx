@@ -15,7 +15,6 @@ import { TabTitleDirective } from '../tab-utils/tab-directives';
         '[attr.aria-expanded]': 'expanded ? true : null',
         '[class.is-expanded]': 'expanded'
     },
-    providers: [HashService],
     encapsulation: ViewEncapsulation.None
 })
 export class TabPanelComponent implements OnInit {
@@ -56,7 +55,7 @@ export class TabPanelComponent implements OnInit {
     /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
-            this.id = this.hasher.hash();
+            this.id = 'fd-tab-panel-' + this.hasher.hash();
         }
     }
 }

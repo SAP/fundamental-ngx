@@ -11,7 +11,7 @@ import { HashService } from '../utils/hash.service';
 
 @NgModule({
     declarations: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, PopoverDirective, PopoverContainer],
-    imports: [CommonModule, UtilsModule],
+    imports: [CommonModule, UtilsModule.forRoot()],
     exports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, PopoverDirective],
     providers: [HashService],
     entryComponents: [PopoverContainer]

@@ -9,7 +9,7 @@ import { AlertContainerComponent } from './alert-utils/alert-container.component
 
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent],
-    imports: [CommonModule, IconModule, UtilsModule],
+    imports: [CommonModule, IconModule, UtilsModule.forRoot()],
     exports: [AlertComponent, AlertContainerComponent],
     entryComponents: [AlertContainerComponent, AlertComponent],
     providers: [AlertService]

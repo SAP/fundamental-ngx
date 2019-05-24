@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class HashService {
-    hash(): string {
-        return 'FUI' + Math.floor(Math.random() * 1000000);
+
+    count: number = 0;
+
+    hash(): number {
+        this.count = this.count + 1;
+        return this.count;
     }
 }

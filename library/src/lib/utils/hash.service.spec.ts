@@ -7,7 +7,8 @@ describe('HashService', () => {
     });
 
     it('Should return "FUI" plus a generated hash value', () => {
-        spyOn(Math, 'random').and.returnValue(1);
-        expect(service.hash()).toBe('FUI1000000');
+        const retVal = service.hash();
+        const newVal = service.hash();
+        expect(newVal).toBe(retVal + 1);
     });
 });

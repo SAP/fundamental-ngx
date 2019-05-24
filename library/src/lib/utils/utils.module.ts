@@ -1,8 +1,13 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { HashService } from './hash.service';
 
-@NgModule({
-    providers: [HashService]
-})
-export class UtilsModule {}
+@NgModule({})
+export class UtilsModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: UtilsModule,
+            providers: [HashService]
+        }
+    }
+}

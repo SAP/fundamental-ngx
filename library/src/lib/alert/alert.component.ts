@@ -29,7 +29,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    providers: [HashService],
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
@@ -115,7 +114,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
-            this.id = this.hasher.hash();
+            this.id = 'fd-alert-' + this.hasher.hash();
         }
 
         if (this.alertRef) {

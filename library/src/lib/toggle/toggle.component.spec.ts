@@ -4,6 +4,7 @@ import { ToggleComponent } from './toggle.component';
 import { UtilsModule } from '../utils/utils.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HashService } from '../utils/hash.service';
 
 describe('ToggleComponent', () => {
     let component: ToggleComponent;
@@ -13,7 +14,8 @@ describe('ToggleComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, UtilsModule, FormsModule],
-            declarations: [ToggleComponent]
+            declarations: [ToggleComponent],
+            providers: [HashService]
         })
             .compileComponents();
     }));
