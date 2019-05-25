@@ -1,12 +1,12 @@
 import {
-    AfterContentInit,
+    AfterContentInit, AfterViewInit,
     Component,
     ContentChildren,
-    EventEmitter, HostBinding,
+    EventEmitter, HostBinding, HostListener,
     Input, OnChanges, OnDestroy,
     OnInit,
     Output,
-    QueryList, SimpleChanges,
+    QueryList, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
@@ -28,10 +28,13 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
         '[class.fd-select-custom]': 'true'
     }
 })
-export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
+
+    @ViewChild('customTrigger', {read: ViewContainerRef})
+    customTriggerContainer: ViewContainerRef;
 
     @ContentChildren(OptionComponent, { descendants: true })
     options: QueryList<OptionComponent>;
@@ -48,6 +51,9 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
     @Input()
     value: any;
 
+    @Input()
+    triggerTemplate: TemplateRef<any>;
+
     @Output()
     readonly isOpenChange: EventEmitter<boolean>
         = new EventEmitter<boolean>();
@@ -58,11 +64,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
 
     private selected: OptionComponent;
 
-    private readonly _destroy = new Subject<void>();
+    private readonly destroy = new Subject<void>();
 
-    readonly optionsChanges: Observable<OptionComponent> = defer(() => {
+    private readonly optionsChanges: Observable<OptionComponent> = defer(() => {
         const options = this.options;
-
         if (options) {
             return options.changes.pipe(
                 startWith(options),
@@ -71,8 +76,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }) as Observable<OptionComponent>;
 
-    onChange: Function = () => {};
-    onTouched: Function = () => {};
+    onChange: Function = () => {
+    };
+    onTouched: Function = () => {
+    };
 
     constructor() {
     }
@@ -81,27 +88,33 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        // TODO implement for when value changes programatically
         if (changes.value) {
             setTimeout(() => {
-                console.log('changea value programmatically')
                 this.select();
             });
         }
     }
 
+    ngAfterViewInit(): void {
+        if (this.triggerTemplate) {
+            this.customTriggerContainer.clear();
+            const context = {
+                $implicit: this.triggerValue
+            };
+            this.customTriggerContainer.createEmbeddedView(this.triggerTemplate, context);
+        }
+    }
+
     ngAfterContentInit(): void {
-        this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
-            console.log(this.options.changes);
+        this.options.changes.pipe(startWith(null), takeUntil(this.destroy)).subscribe(() => {
             this.resetOptions();
             this.initSelection();
-            console.log('ContentChild subscribe');
         });
     }
 
     ngOnDestroy(): void {
-        this._destroy.next();
-        this._destroy.complete();
+        this.destroy.next();
+        this.destroy.complete();
     }
 
     registerOnChange(fn: any): void {
@@ -126,8 +139,23 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        switch (event.code) {
+            case ('ArrowUp'): {
+                event.preventDefault();
+                this.decrementFocused();
+                break;
+            }
+            case ('ArrowDown'): {
+                event.preventDefault();
+                this.incrementFocused();
+                break;
+            }
+        }
+    }
+
     private selectValue(value: any): OptionComponent | undefined {
-        console.log(value);
         const matchOption = this.options.find((option: OptionComponent) => {
 
             // Todo implement custom comparator
@@ -138,7 +166,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
             if (this.selected) {
                 this.selected.setSelected(false, false);
             }
-            console.log('new option selected')
             matchOption.setSelected(true, false);
             this.selected = matchOption;
 
@@ -151,9 +178,8 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
     }
 
     private resetOptions(): void {
-        const destroyCurrentObs = merge(this.options.changes, this._destroy);
+        const destroyCurrentObs = merge(this.options.changes, this.destroy);
         this.optionsChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
-            console.log('optionsChange subscribe');
             this.selectValue(instance.value);
         });
     }
@@ -177,6 +203,60 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
             return this.selected && this.selected.value === option.value && option.value === this.value;
         }
         return false;
+    }
+
+    /** Method that focuses the next option in the list, or the first one if the last one is currently focused. */
+    private incrementFocused(): void {
+
+        // Get active focused element
+        const activeElement = document.activeElement;
+
+        // Get corresponding option element to the above
+        const correspondingOption = this.options.find(option => {
+            return option.getHtmlElement() === activeElement;
+        });
+
+        if (this.selected && correspondingOption) {
+            const arrayOptions = this.options.toArray();
+            const index = arrayOptions.indexOf(correspondingOption);
+
+            // If active option is the last option, focus the first one
+            // Otherwise, focus the next option.
+            if (index === this.options.length - 1) {
+                arrayOptions[0].focus();
+            } else {
+                arrayOptions[index + 1].focus();
+            }
+        } else if (this.options) {
+            this.options.first.focus();
+        }
+    }
+
+    /** Method that focuses the previous option in the list, or the last one if the last one is currently focused. */
+    private decrementFocused(): void {
+
+        // Get active focused element
+        const activeElement = document.activeElement;
+
+        // Get corresponding option element to the above
+        const correspondingOption = this.options.find(option => {
+            return option.getHtmlElement() === activeElement;
+        });
+
+        // If active option is the first option, focus the last one
+        // Otherwise, focus the previous option.
+        if (this.selected && correspondingOption) {
+            const arrayOptions = this.options.toArray();
+            const index = arrayOptions.indexOf(correspondingOption);
+
+            if (index === 0) {
+                arrayOptions[this.options.length - 1].focus();
+            } else {
+                arrayOptions[index - 1].focus();
+            }
+        } else if (this.options) {
+            this.options.first.focus();
+        }
     }
 
 }

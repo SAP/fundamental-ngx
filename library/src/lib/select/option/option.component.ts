@@ -6,7 +6,8 @@ import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, 
     styleUrls: ['./option.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[class.fd-option-default-custom]': 'true'
+        '[class.fd-option-default-custom]': 'true',
+        '[tabindex]': 'disabled ? -1 : 0'
     }
 })
 export class OptionComponent implements OnInit {
@@ -14,6 +15,10 @@ export class OptionComponent implements OnInit {
     /** @hidden */
     @HostBinding('class.fd-menu__item')
     fdMenuItemClass: boolean = true;
+
+    /** @hidden */
+    @HostBinding('class.is-selected')
+    selected: boolean = false;
 
     /** Value of the option. Similar to how a native select operates. */
     @Input()
@@ -32,13 +37,13 @@ export class OptionComponent implements OnInit {
     readonly selectedChange: EventEmitter<OptionComponent>
         = new EventEmitter<OptionComponent>();
 
-    /** @hidden */
-    @HostBinding('class.is-selected')
-    selected: boolean = false;
-
     constructor(private elRef: ElementRef) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.selected && !this.disabled) {
+            this.focus();
+        }
+    }
 
     get viewValueText(): string {
         return this.viewValue ? this.viewValue :
@@ -53,8 +58,17 @@ export class OptionComponent implements OnInit {
         }
     }
 
+    focus(): void {
+        (this.elRef.nativeElement as HTMLElement).focus();
+    }
+
+    getHtmlElement(): HTMLElement {
+        return this.elRef.nativeElement as HTMLElement;
+    }
+
+    @HostListener('keydown.enter')
     @HostListener('click')
-    onClickHandler(): void {
+    selectionHandler(): void {
         if (!this.selected) {
             this.selected = true;
             this.selectedChange.emit(this);
