@@ -15,9 +15,12 @@ import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 // TODO
-// Custom trigger button (pass an ng-template, inject context)
-// Default trigger with default label
 // Adding/removing options
+// ngForm support
+// On close, refocus the dropdown
+// On open, focus the selected element if it exists
+// Tests
+// Docs
 
 @Component({
     selector: 'fd-select',
@@ -25,6 +28,7 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
     styleUrls: ['./select.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
+        '(blur)': 'onTouched()',
         '[class.fd-select-custom]': 'true'
     }
 })
@@ -33,7 +37,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
 
-    @ViewChild('customTrigger', {read: ViewContainerRef})
+    @ViewChild('customTrigger', { read: ViewContainerRef })
     customTriggerContainer: ViewContainerRef;
 
     @ContentChildren(OptionComponent, { descendants: true })
@@ -66,7 +70,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     private readonly destroy = new Subject<void>();
 
-    private readonly optionsChanges: Observable<OptionComponent> = defer(() => {
+    private readonly optionsStatusChanges: Observable<OptionComponent> = defer(() => {
         const options = this.options;
         if (options) {
             return options.changes.pipe(
@@ -76,21 +80,19 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         }
     }) as Observable<OptionComponent>;
 
-    onChange: Function = () => {
-    };
-    onTouched: Function = () => {
-    };
+    onChange: Function = () => {};
+    onTouched: Function = () => {};
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.value) {
             setTimeout(() => {
-                this.select();
+                if (this.value) {
+                    this.selectValue(this.value);
+                }
             });
         }
     }
@@ -115,6 +117,28 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     ngOnDestroy(): void {
         this.destroy.next();
         this.destroy.complete();
+    }
+
+    toggle(): void {
+        if (this.isOpen && !this.disabled) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    open(): void {
+        if (!this.isOpen && !this.disabled) {
+            this.isOpen = true;
+            this.isOpenChange.emit(this.isOpen);
+        }
+    }
+
+    close(): void {
+        if (this.isOpen && !this.disabled) {
+            this.isOpen = false;
+            this.isOpenChange.emit(this.isOpen);
+        }
     }
 
     registerOnChange(fn: any): void {
@@ -170,29 +194,30 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             this.selected = matchOption;
 
             // TODO Maybe put in separate method
-            this.value = this.selected.value;
-            this.valueChange.emit(this.value);
+            this.updateValue();
+            this.close();
         }
 
         return matchOption;
     }
 
+    private updateValue(): void {
+        this.value = this.selected.value;
+        this.valueChange.emit(this.value);
+        this.onChange(this.value);
+    }
+
     private resetOptions(): void {
         const destroyCurrentObs = merge(this.options.changes, this.destroy);
-        this.optionsChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
+        this.optionsStatusChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
             this.selectValue(instance.value);
         });
     }
 
+    /** Selection initialization when a change occurs in options. */
     private initSelection(): void {
         if (this.value) {
             this.selected = undefined;
-            this.selectValue(this.value);
-        }
-    }
-
-    private select(): void {
-        if (this.value) {
             this.selectValue(this.value);
         }
     }

@@ -1,11 +1,12 @@
-<fd-popover [(isOpen)]="isOpen"
+<fd-popover [(isOpen)]="isOpen" (isOpenChange)="isOpenChange.emit($event)"
             class="fd-select-popover-custom">
     <fd-popover-control>
         <ng-container #customTrigger *ngIf="triggerTemplate"></ng-container>
         <ng-container *ngIf="!triggerTemplate">
             <button class="fd-dropdown__control fd-button fd-select-button-custom"
                     [attr.aria-expanded]="isOpen"
-                    aria-haspopup="true">
+                    aria-haspopup="true"
+                    [disabled]="disabled">
                 <span class="fd-select-text-custom">{{triggerValue}}</span>
             </button>
         </ng-container>
