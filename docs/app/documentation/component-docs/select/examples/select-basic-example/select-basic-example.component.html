@@ -1,0 +1,15 @@
+<fd-select [(value)]="selectOneValue" placeholder="Select an option...">
+    <fd-option value="apple">Apple</fd-option>
+    <fd-option value="pineapple">Pineapple</fd-option>
+    <fd-option value="tomato">Tomato</fd-option>
+    <fd-option value="strawberry">Strawberry</fd-option>
+</fd-select>
+<p>Selected Value: {{this.selectOneValue}}</p>
+
+<fd-select [(value)]="selectTwoValue" [disabled]="true" placeholder="Disabled select">
+    <fd-option value="apple">Apple</fd-option>
+    <fd-option value="pineapple">Pineapple</fd-option>
+    <fd-option value="tomato">Tomato</fd-option>
+    <fd-option value="strawberry">Strawberry</fd-option>
+</fd-select>
+<p>Selected Value: {{this.selectTwoValue}}</p>

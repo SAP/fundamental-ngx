@@ -21,6 +21,12 @@
         }
     }
 
+    .fd-select-button-custom {
+        &::after {
+            margin-top: 0;
+        }
+    }
+
     .fd-select-text-custom {
         text-overflow: ellipsis;
         white-space: nowrap;

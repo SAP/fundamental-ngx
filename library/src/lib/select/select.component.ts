@@ -1,5 +1,5 @@
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit, AfterViewInit, ChangeDetectorRef,
     Component,
     ContentChildren,
     EventEmitter, HostBinding, HostListener,
@@ -83,7 +83,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     onChange: Function = () => {};
     onTouched: Function = () => {};
 
-    constructor() {}
+    constructor(private cdRef: ChangeDetectorRef) {}
 
     ngOnInit(): void {}
 
@@ -101,9 +101,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         if (this.triggerTemplate) {
             this.customTriggerContainer.clear();
             const context = {
-                $implicit: this.triggerValue
+                $implicit: this
             };
             this.customTriggerContainer.createEmbeddedView(this.triggerTemplate, context);
+            this.cdRef.detectChanges();
         }
     }
 
@@ -186,6 +187,14 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             return option.value != null && option.value === value;
         });
 
+        // If not match is found, set everything to null
+        // This is mostly only for cases where a user removes an active option
+        if (!matchOption) {
+            this.unselectOptions();
+            return;
+        }
+
+        // If match is found, select the new value
         if (matchOption && !this.isOptionActive(matchOption)) {
             if (this.selected) {
                 this.selected.setSelected(false, false);
@@ -193,7 +202,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             matchOption.setSelected(true, false);
             this.selected = matchOption;
 
-            // TODO Maybe put in separate method
             this.updateValue();
             this.close();
         }
@@ -241,7 +249,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             return option.getHtmlElement() === activeElement;
         });
 
-        if (this.selected && correspondingOption) {
+        if (correspondingOption) {
             const arrayOptions = this.options.toArray();
             const index = arrayOptions.indexOf(correspondingOption);
 
@@ -270,7 +278,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
         // If active option is the first option, focus the last one
         // Otherwise, focus the previous option.
-        if (this.selected && correspondingOption) {
+        if (correspondingOption) {
             const arrayOptions = this.options.toArray();
             const index = arrayOptions.indexOf(correspondingOption);
 
@@ -282,6 +290,22 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
         } else if (this.options) {
             this.options.first.focus();
         }
+    }
+
+    /**
+     * Method used to handle cases where a user removes the currently active option.
+     * The timeout is required because this can happen after the view has been checked.
+     */
+    private unselectOptions(): void {
+        setTimeout(() => {
+            if (this.selected) {
+                this.selected.setSelected(false, false);
+            }
+            this.selected = undefined;
+            this.value = undefined;
+            this.valueChange.emit(undefined);
+            this.onChange(undefined);
+        });
     }
 
 }

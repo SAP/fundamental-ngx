@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeDocsComponent implements OnInit {
 
-    value: any = 'helloooooo';
-
     constructor() {}
 
     ngOnInit() {}
@@ -15,11 +13,4 @@ export class HomeDocsComponent implements OnInit {
     onLoad(event) {}
     onError(event) {}
 
-    changeValue() {
-        if (this.value === 'helloooooo') {
-            this.value = 'joohhhnnnnnn';
-        } else {
-            this.value = 'helloooooo';
-        }
-    }
 }

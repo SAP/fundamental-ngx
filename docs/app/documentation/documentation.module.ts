@@ -302,6 +302,15 @@ import { DatePickerI18nExampleComponent } from './component-docs/date-picker/exa
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
+import { SelectDocsComponent } from './component-docs/select/select-docs.component';
+import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
+import { SelectBasicExampleComponent } from './component-docs/select/examples/select-basic-example/select-basic-example.component';
+import { SelectProgrammaticExampleComponent } from './component-docs/select/examples/select-programmatic-example/select-programmatic-example.component';
+import { SelectNestedOptionsComponent } from './component-docs/select/examples/select-nested-options/select-nested-options.component';
+import { SelectCustomTriggerComponent } from './component-docs/select/examples/select-custom-trigger/select-custom-trigger.component';
+import { SelectComparatorComponent } from './component-docs/select/examples/select-comparator/select-comparator.component';
+import { SelectAddingExampleComponent } from './component-docs/select/examples/select-adding-example/select-adding-example.component';
+import { SelectFormsComponent } from './component-docs/select/examples/select-forms/select-forms.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -554,7 +563,16 @@ export function highlightJsFactory() {
         CalendarI18nExampleComponent,
         DatePickerI18nExampleComponent,
         DatePickerFormatExampleComponent,
-        SearchPipe
+        SearchPipe,
+        SelectDocsComponent,
+        SelectHeaderComponent,
+        SelectBasicExampleComponent,
+        SelectProgrammaticExampleComponent,
+        SelectNestedOptionsComponent,
+        SelectCustomTriggerComponent,
+        SelectComparatorComponent,
+        SelectAddingExampleComponent,
+        SelectFormsComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

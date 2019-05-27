@@ -1,0 +1,70 @@
+<h2>Standard Select</h2>
+<description>A basic example of the select component with no advanced features.</description>
+<component-example [name]="'ex1'">
+    <fd-select-basic-example></fd-select-basic-example>
+</component-example>
+<code-example [code]="selectBasicHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Nested Options</h2>
+<description>
+    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are.
+    It also includes having options inside options, for instance. This feature allows for some very flexible usage.
+    The example below showcases how to add a scrolling container around the options.
+</description>
+<component-example [name]="'ex2'">
+    <fd-select-nested-options></fd-select-nested-options>
+</component-example>
+<code-example [code]="selectNestedHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Programmatic Control</h2>
+<description>
+    Controlling the select through programmatic methods is possible by calling the select component
+    instance directly. Note that this can be done through ViewChild as well.
+</description>
+<component-example [name]="'ex3'">
+    <fd-select-programmatic-example></fd-select-programmatic-example>
+</component-example>
+<code-example [code]="selectProgHtml" [language]="'HTML'"></code-example>
+<code-example [code]="selectProgTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Custom Trigger</h2>
+<description>
+    The default trigger can be replaced by providing a template reference to the appropriate input.
+    Note that the top-level element must be tab-indexed for the keyboard support to function correctly.
+</description>
+<component-example [name]="'ex4'">
+    <fd-select-custom-trigger></fd-select-custom-trigger>
+</component-example>
+<code-example [code]="customTriggerHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Adding and Removing Options</h2>
+<description>
+    Adding and removing options dynamically is supported seamlessly, with very little extra work required
+    from the developer. By design, if the user removes the option that is currently selected, the value
+    will become undefined. This was implemented to prevent a user from keeping the active value of a previously
+    removed option.
+</description>
+<component-example [name]="'ex5'">
+    <fd-select-adding-example></fd-select-adding-example>
+</component-example>
+<code-example [code]="selectAddingHtml" [language]="'HTML'"></code-example>
+<code-example [code]="selectAddingTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Custom Comparator</h2>
+<description>
+    Equivalence between the values of the option elements can be defined by the developer through providing
+    a custom comparator function using the compareFn input.
+</description>
+<component-example [name]="'ex6'">
+    <fd-select-comparator></fd-select-comparator>
+</component-example>
+<code-example [code]="selectCompareHtml" [language]="'HTML'"></code-example>
+<code-example [code]="selectCompareTs" [language]="'typescript'"></code-example>
+
+<separator></separator>

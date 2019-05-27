@@ -7,7 +7,8 @@ import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, 
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.fd-option-default-custom]': 'true',
-        '[tabindex]': 'disabled ? -1 : 0'
+        '[class.is-disabled]': 'disabled',
+        '[tabindex]': '-1'
     }
 })
 export class OptionComponent implements OnInit {
@@ -69,7 +70,7 @@ export class OptionComponent implements OnInit {
     @HostListener('keydown.enter')
     @HostListener('click')
     selectionHandler(): void {
-        if (!this.selected) {
+        if (!this.selected && !this.disabled) {
             this.selected = true;
             this.selectedChange.emit(this);
         }
