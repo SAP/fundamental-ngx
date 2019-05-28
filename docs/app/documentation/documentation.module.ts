@@ -302,6 +302,11 @@ import { DatePickerI18nExampleComponent } from './component-docs/date-picker/exa
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
+import { CdkTableModule } from '@angular/cdk/table';
+import { TableCdkExampleComponent } from './component-docs/table/examples/table-cdk-example.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DatetimePickerAllowNullExampleComponent } from './component-docs/datetime-picker/examples/datetime-allow-null-example/datetime-allow-null-example.component';
+import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -386,9 +391,11 @@ export function highlightJsFactory() {
         CalendarMondayStartExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
+        DatePickerAllowNullExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
+        DatetimePickerAllowNullExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
