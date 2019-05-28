@@ -148,12 +148,14 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
      */
     dismiss(reason?: any, manualDismiss: boolean = false): void {
         if (manualDismiss) {
-            this.elRef.nativeElement.style.display = 'none';
+            this.elRef.nativeElement.classList.add('fd-alert-display-none');
+            this.elRef.nativeElement.classList.remove('fd-has-display-block');
         }
         if (this.alertRef) {
             this.alertRef.dismiss(reason);
         } else {
-            this.elRef.nativeElement.style.display = 'none';
+            this.elRef.nativeElement.classList.add('fd-alert-display-none');
+            this.elRef.nativeElement.classList.remove('fd-has-display-block');
         }
         this.onDismiss.emit();
     }
@@ -166,7 +168,8 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
             if (this.elRef.nativeElement.style.display === 'block') {
                 return;
             }
-            this.elRef.nativeElement.style.display = 'block';
+            this.elRef.nativeElement.classList.remove('fd-alert-display-none');
+            this.elRef.nativeElement.classList.add('fd-has-display-block');
         }
 
         if (this.duration >= 0) {
