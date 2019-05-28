@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+let toggleUniqueId = 0;
+
 /**
  * The Toggle component is used to activate or deactivate an element.
  * It uses a visual metaphor to inform the user of the state of the toggle.
@@ -18,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-toggle-custom',
-        '[id]': 'id',
+        '[attr.id]': 'id',
     },
     encapsulation: ViewEncapsulation.None
 })
@@ -40,7 +42,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
     /** Id for the toggle component. If omitted, a unique one is generated. */
     @Input()
-    id: string;
+    id: string = 'fd-toggle-' + toggleUniqueId++;
 
     /** Whether the toggle is checked. */
     @Input()
@@ -69,11 +71,6 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
     /** @hidden */
     ngOnInit() {
-        if (!this.id) {
-            this.id = 'fd-toggle-' + id;
-            id++;
-        }
-
         if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
             this.size = null;
         }
@@ -135,5 +132,3 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
 
 }
-
-let id = 0;

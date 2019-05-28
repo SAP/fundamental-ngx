@@ -1,5 +1,7 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
+
+let tabPanelUniqueId = 0;
 
 /**
  * Represents the body of a tab element. It also contains elements pertaining to the associated tab header.
@@ -16,7 +18,7 @@ import { TabTitleDirective } from '../tab-utils/tab-directives';
     },
     encapsulation: ViewEncapsulation.None
 })
-export class TabPanelComponent implements OnInit {
+export class TabPanelComponent {
 
     /** @hidden */
     @ContentChild(TabTitleDirective, {read: TemplateRef})
@@ -40,21 +42,11 @@ export class TabPanelComponent implements OnInit {
 
     /** Id of the tab. If none is provided, one will be generated. */
     @Input()
-    id: string;
+    id: string = 'fd-tab-panel' + tabPanelUniqueId++;
 
     /** @hidden */
     expanded = false;
 
     /** @hidden */
     index: number;
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (!this.id) {
-            this.id = 'fd-tab-panel-' + id;
-            id++;
-        }
-    }
 }
-
-let id = 0;

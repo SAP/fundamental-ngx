@@ -20,6 +20,8 @@ import { AlertRef } from './alert-utils/alert-ref';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+let alertUniqueId = 0;
+
 /**
  * The component that represents an alert. It can be only be used inline.
  * If the AlertService is used, this component is auto-generated.
@@ -58,7 +60,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Id for the alert component. If omitted, a unique one is generated. */
     @Input()
-    id: string;
+    id: string = 'fd-alert-' + alertUniqueId++;
 
     /** Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input()
@@ -111,11 +113,6 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** @hidden */
     ngOnInit(): void {
-        if (!this.id) {
-            this.id = 'fd-alert-' + id;
-            id++;
-        }
-
         if (this.alertRef) {
             this.open();
         }
@@ -223,5 +220,3 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     }
 
 }
-
-let id = 0;

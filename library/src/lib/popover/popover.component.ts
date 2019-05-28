@@ -1,13 +1,14 @@
 import {
     Component,
     Input,
-    OnInit,
     Output,
     EventEmitter,
     ViewChild, ViewEncapsulation
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
+
+let popoverUniqueId = 0;
 
 /**
  * The popover is a wrapping component that accepts a *control* as well as a *body*.
@@ -20,11 +21,12 @@ import { PopoverDirective } from './popover-directive/popover.directive';
     templateUrl: './popover.component.html',
     styleUrls: ['./popover.component.scss'],
     host: {
-        '[class.fd-popover-custom]': 'true'
+        '[class.fd-popover-custom]': 'true',
+        '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None
 })
-export class PopoverComponent implements OnInit {
+export class PopoverComponent {
 
     /** @hidden */
     @ViewChild(PopoverDirective)
@@ -111,15 +113,7 @@ export class PopoverComponent implements OnInit {
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    id: string;
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (!this.id) {
-            this.id = 'fd-popover-' + id;
-            id++;
-        }
-    }
+    id: string = 'fd-popover-' + popoverUniqueId++;
 
     /**
      * Toggles the popover open state.
@@ -160,5 +154,3 @@ export class PopoverComponent implements OnInit {
     }
 
 }
-
-let id = 0;

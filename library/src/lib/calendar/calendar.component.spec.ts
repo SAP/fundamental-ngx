@@ -319,7 +319,7 @@ describe('CalendarComponent', () => {
     });
 
     it('should handle keydown year handler', () => {
-        component.calendarId = '';
+        component.id = '';
         spyOn(component, 'selectYear');
         const focusSpy = spyOn(component, 'focusElement');
         component.onKeydownDayHandler({code: 'Tab', preventDefault: () => {}}, {});
@@ -363,7 +363,7 @@ describe('CalendarComponent', () => {
     });
 
     it('should handle month keydown events', () => {
-        component.calendarId = '';
+        component.id = '';
         spyOn(component, 'selectMonth');
         const focusSpy = spyOn(component, 'focusElement');
         component.onKeydownMonthHandler({code: 'Tab', preventDefault: () => {}}, {});
@@ -399,7 +399,7 @@ describe('CalendarComponent', () => {
     });
 
     it('should handle keydown day handler', () => {
-        component.calendarId = '';
+        component.id = '';
 
         const focusSpy = spyOn(component, 'focusElement');
         component.onKeydownDayHandler({code: 'Tab', preventDefault: () => {}}, {});
@@ -565,7 +565,7 @@ describe('CalendarComponent', () => {
         spyOn(component, 'constructCalendarYearsList');
         component.ngOnInit();
         expect(component.date).toBeTruthy();
-        expect(component.calendarId).toBeTruthy();
+        expect(component.id).toBeTruthy();
         expect(component.constructCalendar).toHaveBeenCalled();
         expect(component.selectMonth).toHaveBeenCalled();
         expect(component.selectYear).toHaveBeenCalled();

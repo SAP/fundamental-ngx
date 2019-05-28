@@ -1,5 +1,7 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+let listCheckboxUniqueId = 0;
 
 /**
  * The component that represents a checkbox list.
@@ -15,7 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
     selector: 'fd-list-checkbox',
     host: {
-        class: 'fd-form__item fd-form__item--check'
+        class: 'fd-form__item fd-form__item--check',
+        '[attr.id]': 'id'
     },
     templateUrl: './list-checkbox.component.html',
     providers: [
@@ -27,7 +30,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
+export class ListCheckboxComponent implements ControlValueAccessor {
 
     /** Whether the list item checkbox is checked. */
     @Input()
@@ -47,21 +50,13 @@ export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
 
     /** The id of the checkbox. */
     @Input()
-    id: string;
+    id: string = 'fd-list-checkbox-' + listCheckboxUniqueId++;
 
     /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
     onTouched: any = () => {};
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (!this.id) {
-            this.id = 'fd-list-checkbox-' + id;
-            id++;
-        }
-    }
 
     /** Set the value of the *isChecked* property. */
     get isChecked() {
@@ -96,5 +91,3 @@ export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
     }
 
 }
-
-let id = 0;
