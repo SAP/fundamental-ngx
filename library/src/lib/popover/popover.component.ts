@@ -6,7 +6,6 @@ import {
     EventEmitter,
     ViewChild, ViewEncapsulation
 } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
 
@@ -115,11 +114,11 @@ export class PopoverComponent implements OnInit {
     id: string;
 
     /** @hidden */
-    constructor(private hasher: HashService) {}
-
-    /** @hidden */
     ngOnInit(): void {
-        this.id = this.hasher.hash();
+        if (!this.id) {
+            this.id = 'fd-popover-' + id;
+            id++;
+        }
     }
 
     /**
@@ -161,3 +160,5 @@ export class PopoverComponent implements OnInit {
     }
 
 }
+
+let id = 0;

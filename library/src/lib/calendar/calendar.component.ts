@@ -12,7 +12,6 @@ import {
     ChangeDetectorRef,
     HostBinding, OnChanges, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { CalendarI18n } from './i18n/calendar-i18n';
@@ -952,7 +951,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
         this.constructCalendar();
         this.constructCalendarYearsList();
-        this.calendarId = this.hasher.hash();
+        this.calendarId = 'fd-calendar-' + calendarId;
+        calendarId++;
         if (this.month) {
             this.selectMonth(this.month);
         } else {
@@ -998,8 +998,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    constructor(private hasher: HashService,
-                private eRef: ElementRef,
+    constructor(private eRef: ElementRef,
                 private cd: ChangeDetectorRef,
                 public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n,
@@ -1082,3 +1081,5 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         // Will also need to subscribe to labelsChange when we go to OnPush change detection.
     }
 }
+
+let calendarId = 0;

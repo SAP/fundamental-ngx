@@ -1,23 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
-import { HashService } from '../utils/hash.service';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent;
     let fixture: ComponentFixture<CalendarComponent>;
-    let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
-        const hashSpy = jasmine.createSpyObj('HashService', {
-            hash: '1'
-        });
         TestBed.configureTestingModule({
-            declarations: [CalendarComponent, CalendarComponent],
-            providers: [{ provide: HashService, useValue: hashSpy }]
+            declarations: [CalendarComponent, CalendarComponent]
         }).compileComponents();
 
-        hashServiceSpy = TestBed.get(HashService);
     }));
 
     beforeEach(() => {

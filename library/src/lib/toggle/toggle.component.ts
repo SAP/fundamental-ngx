@@ -1,10 +1,9 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
- * The Toggle component is used to activate or deactivate an element. 
- * It uses a visual metaphor to inform the user of the state of the toggle. 
+ * The Toggle component is used to activate or deactivate an element.
+ * It uses a visual metaphor to inform the user of the state of the toggle.
  */
 @Component({
     selector: 'fd-toggle',
@@ -28,9 +27,9 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @ViewChild('input')
     inputElement: ElementRef<HTMLInputElement>;
 
-    /** 
-     * The size of the toggle. 
-     * Can be one of the four *xs*, *s*, *l*, *error* or default. 
+    /**
+     * The size of the toggle.
+     * Can be one of the four *xs*, *s*, *l*, *error* or default.
      */
     @Input()
     size: string;
@@ -55,8 +54,8 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @Input()
     ariaLabelledby: string = null;
 
-    /** 
-     * Event fired when the state of the toggle changes. 
+    /**
+     * Event fired when the state of the toggle changes.
      * *$event* can be used to retrieve the new state of the toggle.
      */
     @Output()
@@ -69,12 +68,10 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     onTouched: any = () => {};
 
     /** @hidden */
-    constructor(private hasher: HashService) {}
-
-    /** @hidden */
     ngOnInit() {
         if (!this.id) {
-            this.id = this.hasher.hash();
+            this.id = 'fd-toggle-' + id;
+            id++;
         }
 
         if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
@@ -106,23 +103,23 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
 
     /**
-     * @hidden 
+     * @hidden
      * @param value Sets the value of the *checked* property of the toggle.
      */
     writeValue(value: any) {
         this.checked = value;
     }
 
-    /** 
-     * @hidden 
+    /**
+     * @hidden
      * @param fn User defined function that handles the *onChange* event of the toggle.
      */
     registerOnChange(fn) {
         this.onChange = fn;
     }
 
-    /** 
-     * @hidden 
+    /**
+     * @hidden
      * @param fn User defined function that handles the *onTouch* event of the toggle.
      */
     registerOnTouched(fn) {
@@ -130,7 +127,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
 
     /**
-     * @hidden 
+     * @hidden
      * @param isDisabled Sets the value of the *disabled* property of the toggle.
      */
     setDisabledState(isDisabled: boolean): void {
@@ -138,3 +135,5 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     }
 
 }
+
+let id = 0;

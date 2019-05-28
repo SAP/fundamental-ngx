@@ -1,20 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopoverComponent } from './popover.component';
-import { HashService } from '../utils/hash.service';
 import { PopoverModule } from './popover.module';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;
     let fixture: ComponentFixture<PopoverComponent>;
-    let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [PopoverModule]
         }).compileComponents();
 
-        hashServiceSpy = TestBed.get(HashService);
     }));
 
     beforeEach(() => {

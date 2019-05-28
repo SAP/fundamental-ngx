@@ -1,6 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { HashService } from '../utils/hash.service';
 
 /**
  * The component that represents a checkbox list.
@@ -10,7 +9,7 @@ import { HashService } from '../utils/hash.service';
  *    <li fd-list-item>
  *       <fd-list-checkbox>List item 1</fd-list-checkbox>
  *    </li>
- * </fd-list> 
+ * </fd-list>
  * ```
  */
 @Component({
@@ -57,13 +56,10 @@ export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
     onTouched: any = () => {};
 
     /** @hidden */
-    constructor(private hash: HashService) {}
-
-    /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
-            this.id = this.hash.hash();
-
+            this.id = 'fd-list-checkbox-' + id;
+            id++;
         }
     }
 
@@ -100,3 +96,5 @@ export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
     }
 
 }
+
+let id = 0;

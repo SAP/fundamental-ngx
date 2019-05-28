@@ -1,7 +1,6 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
-import { HashService } from '../utils/hash.service';
 import { AlertService } from './alert-service/alert.service';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
@@ -23,7 +22,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule, NoopAnimationsModule],
-    providers: [AlertService, HashService],
+    providers: [AlertService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
 class TestModule {}

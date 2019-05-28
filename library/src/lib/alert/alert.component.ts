@@ -16,7 +16,6 @@ import {
     Output,
     EventEmitter, ViewEncapsulation, HostListener
 } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { AlertRef } from './alert-utils/alert-ref';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
@@ -29,7 +28,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    providers: [HashService],
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
@@ -104,8 +102,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     childComponentType: Type<any> | TemplateRef<any> | string;
 
     /** @hidden */
-    constructor(private hasher: HashService,
-                private elRef: ElementRef,
+    constructor(private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 @Optional() private alertRef: AlertRef) {
@@ -115,7 +112,8 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
-            this.id = this.hasher.hash();
+            this.id = 'fd-alert-' + id;
+            id++;
         }
 
         if (this.alertRef) {
@@ -225,3 +223,5 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     }
 
 }
+
+let id = 0;

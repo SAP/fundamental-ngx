@@ -1,5 +1,4 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { HashService } from '../../utils/hash.service';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 
 /**
@@ -15,7 +14,6 @@ import { TabTitleDirective } from '../tab-utils/tab-directives';
         '[attr.aria-expanded]': 'expanded ? true : null',
         '[class.is-expanded]': 'expanded'
     },
-    providers: [HashService],
     encapsulation: ViewEncapsulation.None
 })
 export class TabPanelComponent implements OnInit {
@@ -51,12 +49,12 @@ export class TabPanelComponent implements OnInit {
     index: number;
 
     /** @hidden */
-    constructor(private hasher: HashService) {}
-
-    /** @hidden */
     ngOnInit(): void {
         if (!this.id) {
-            this.id = this.hasher.hash();
+            this.id = 'fd-tab-panel-' + id;
+            id++;
         }
     }
 }
+
+let id = 0;
