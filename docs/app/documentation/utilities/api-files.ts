@@ -174,7 +174,7 @@ export const API_FILES = {
         'SideNavigationTitleComponent'
     ],
     table: [
-        'TableComponent',
+        'TableDirective',
         'ColumnSortableDirective'
     ],
     tabs: [

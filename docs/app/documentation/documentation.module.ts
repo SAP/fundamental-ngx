@@ -477,6 +477,7 @@ export function highlightJsFactory() {
         SideNavigationLevelsExampleComponent,
         SideNavigationTitlesExampleComponent,
         TableExampleComponent,
+        TableCdkExampleComponent,
         TableCheckboxesExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
@@ -576,7 +577,9 @@ export function highlightJsFactory() {
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         UtilsModule,
         FundamentalNgxModule,
-        HttpClientModule
+        HttpClientModule,
+        CdkTableModule,
+        DragDropModule
     ],
     providers: [
         CopyService,
