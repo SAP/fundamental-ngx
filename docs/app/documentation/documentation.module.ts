@@ -194,7 +194,7 @@ import {
     TimePicker12ExampleComponent,
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
-    TimePickerCompactExampleComponent
+    TimePickerCompactExampleComponent, TimePickerAllowNullExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
@@ -500,6 +500,7 @@ export function highlightJsFactory() {
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
         TimePickerCompactExampleComponent,
+        TimePickerAllowNullExampleComponent,
         ComboboxInputDocsComponent,
         ComboboxInputExampleComponent,
         LoadingSpinnerDocsComponent,
