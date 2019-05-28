@@ -34,7 +34,6 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
-        '[class.fd-has-display-block]': 'true',
         'role': 'alert',
         '[attr.id]': 'id',
         '[@fadeAlertNgIf]': ''
