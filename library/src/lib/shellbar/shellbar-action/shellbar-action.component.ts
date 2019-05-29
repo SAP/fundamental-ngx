@@ -1,5 +1,4 @@
 import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
-import { SearchInputComponent } from '../../search-input/search-input.component';
 
 /**
  * The component that represents a shellbar action.
@@ -39,9 +38,5 @@ export class ShellbarActionComponent {
     /** Represents the number of notifications. */
     @Input()
     notificationCount: number;
-
-    /** @hidden */
-    @ContentChild(SearchInputComponent)
-    searchInputComponent: SearchInputComponent;
 
 }

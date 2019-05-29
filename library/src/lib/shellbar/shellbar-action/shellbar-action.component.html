@@ -4,7 +4,4 @@
             [attr.aria-label]="label">
         <span *ngIf="notificationCount" class="fd-counter fd-counter--notification" [attr.aria-label]="notificationLabel">{{notificationCount}}</span>
     </button>
-    <div *ngIf="searchInputComponent" class="fd-search-input fd-search-input--closed">
-        <ng-content select="fd-search-input"></ng-content>
-    </div>
 </div>

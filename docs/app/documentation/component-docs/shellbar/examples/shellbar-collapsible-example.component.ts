@@ -26,10 +26,10 @@ export class ShellbarCollapsibleExampleComponent {
     ];
 
     actions = [
-        {glyph: 'bell', callback: this.actionNotificationCallback, label: 'Notifications',
-            notificationCount: 12, notificationLabel: 'Unread Notifications'},
         {glyph: 'pool', callback: this.actionPoolCallback, label: 'Pool',
-            notificationCount: 3, notificationLabel: 'Pool Count'}
+            notificationCount: 3, notificationLabel: 'Pool Count'},
+        {glyph: 'bell', callback: this.actionNotificationCallback, label: 'Notifications',
+            notificationCount: 12, notificationLabel: 'Unread Notifications'}
     ];
 
     searchTerm = '';
