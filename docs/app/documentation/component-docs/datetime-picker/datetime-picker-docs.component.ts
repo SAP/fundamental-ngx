@@ -9,6 +9,8 @@ import * as dateTimeNonMeridianTs from '!raw-loader!./examples/datetime-non-meri
 import * as dateTimeProgHtml from '!raw-loader!./examples/datetime-program-example/datetime-program-example.component.html';
 import * as dateTimeProgTs from '!raw-loader!./examples/datetime-program-example/datetime-program-example.component.ts';
 
+import * as dateTimePickerAllowNullTs from '!raw-loader!./examples/datetime-allow-null-example/datetime-allow-null-example.component.ts';
+
 
 @Component({
     selector: 'app-datetime-picker-docs',
@@ -25,5 +27,7 @@ export class DatetimePickerDocsComponent {
 
     datetimeProgramHtml = dateTimeProgHtml;
     datetimeProgramTs = dateTimeProgTs;
+
+    datetimePickerAllowNullTs = dateTimePickerAllowNullTs;
 
 }

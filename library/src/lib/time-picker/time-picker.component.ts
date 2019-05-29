@@ -66,6 +66,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     timePickerInputLabel: string = 'Time picker input';
 
+    /** Whether a null input is considered valid. */
+    @Input()
+    allowNull: boolean = true;
+
     /** @hidden Whether the input time is valid. Internal use. */
     isInvalidTimeInput: boolean = false;
 
@@ -167,6 +171,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                     this.time.second = parseInt(splitString[2], 10);
                 }
                 this.isInvalidTimeInput = false;
+                this.onChange(this.time);
+            } else if (timeFromInput === '' && this.allowNull) {
+                this.isInvalidTimeInput = false;
+                this.time.second = null;
+                this.time.minute = null;
+                this.time.hour = null;
+                this.child.setDisplayedHour();
                 this.onChange(this.time);
             } else {
                 this.isInvalidTimeInput = true;

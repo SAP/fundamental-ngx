@@ -34,11 +34,10 @@ describe('DatetimePickerComponent', () => {
     it('should open the popover', () => {
         spyOn(component, 'inputValueChange');
         component.isOpen = false;
-        component.isInvalidDateInput = true;
+        component.isInvalidDateInput = false;
         component.openPopover();
         expect(component.inputValueChange).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
-        expect(component.inputFieldDate).toBeNull();
     });
 
     it('should close the calendar', () => {
