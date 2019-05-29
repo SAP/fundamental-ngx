@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.2-rc.5"></a>
+## [0.5.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.5.2-rc.4...v0.5.2-rc.5) (2019-05-29)
+
+
+### Bug Fixes
+
+* allow datetime null ([#837](https://github.com/SAP/fundamental-ngx/issues/837)) ([baee9d9](https://github.com/SAP/fundamental-ngx/commit/baee9d9))
+
+
+
 <a name="0.5.2-rc.4"></a>
 ## [0.5.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.5.2-rc.3...v0.5.2-rc.4) (2019-05-29)
 
