@@ -247,7 +247,6 @@ import { COMPONENT_SCHEMAS } from './component-docs/schemas';
 
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './component-docs/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './component-docs/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -576,7 +575,6 @@ export function highlightJsFactory() {
         FormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
-        UtilsModule,
         FundamentalNgxModule,
         HttpClientModule,
         CdkTableModule,

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { TabPanelComponent } from './tab/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 
-import { UtilsModule } from '../utils/utils.module';
 import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-directives';
 
 @NgModule({
@@ -15,8 +14,7 @@ import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-direct
         TabLoadTitleDirective
     ],
     imports: [
-        CommonModule,
-        UtilsModule
+        CommonModule
     ],
     exports: [
         TabListComponent,

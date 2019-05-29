@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from '../calendar/calendar.component';
 import { DatePickerComponent } from './date-picker.component';
-import { HashService } from '../utils/hash.service';
 import { PopoverModule } from '../popover/popover.module';
 import { IconModule } from '../icon/icon.module';
 import { FormsModule } from '@angular/forms';
@@ -10,19 +9,13 @@ import { FormsModule } from '@angular/forms';
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent;
     let fixture: ComponentFixture<DatePickerComponent>;
-    let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
-        const hashSpy = jasmine.createSpyObj('HashService', {
-            hash: '1'
-        });
         TestBed.configureTestingModule({
             declarations: [CalendarComponent, DatePickerComponent],
-            imports: [PopoverModule, FormsModule, IconModule],
-            providers: [{ provide: HashService, useValue: hashSpy }]
+            imports: [PopoverModule, FormsModule, IconModule]
         }).compileComponents();
 
-        hashServiceSpy = TestBed.get(HashService);
     }));
 
     beforeEach(() => {

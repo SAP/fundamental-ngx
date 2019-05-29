@@ -1,6 +1,7 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { HashService } from '../utils/hash.service';
+
+let listCheckboxUniqueId: number = 0;
 
 /**
  * The component that represents a checkbox list.
@@ -10,13 +11,14 @@ import { HashService } from '../utils/hash.service';
  *    <li fd-list-item>
  *       <fd-list-checkbox>List item 1</fd-list-checkbox>
  *    </li>
- * </fd-list> 
+ * </fd-list>
  * ```
  */
 @Component({
     selector: 'fd-list-checkbox',
     host: {
-        class: 'fd-form__item fd-form__item--check'
+        class: 'fd-form__item fd-form__item--check',
+        '[attr.id]': 'id'
     },
     templateUrl: './list-checkbox.component.html',
     providers: [
@@ -28,7 +30,7 @@ import { HashService } from '../utils/hash.service';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
+export class ListCheckboxComponent implements ControlValueAccessor {
 
     /** Whether the list item checkbox is checked. */
     @Input()
@@ -48,24 +50,13 @@ export class ListCheckboxComponent implements OnInit, ControlValueAccessor {
 
     /** The id of the checkbox. */
     @Input()
-    id: string;
+    id: string = 'fd-list-checkbox-' + listCheckboxUniqueId++;
 
     /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
     onTouched: any = () => {};
-
-    /** @hidden */
-    constructor(private hash: HashService) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (!this.id) {
-            this.id = this.hash.hash();
-
-        }
-    }
 
     /** Set the value of the *isChecked* property. */
     get isChecked() {
