@@ -8,7 +8,7 @@ import {
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
 
-let popoverUniqueId = 0;
+let popoverUniqueId: number = 0;
 
 /**
  * The popover is a wrapping component that accepts a *control* as well as a *body*.

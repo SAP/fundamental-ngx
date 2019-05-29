@@ -44,7 +44,7 @@ export interface EmittedDate {
     selectedLastDay?: CalendarDay;
 }
 
-let calendarUniqueId = 0;
+let calendarUniqueId: number = 0;
 
 @Component({
     selector: 'fd-calendar',

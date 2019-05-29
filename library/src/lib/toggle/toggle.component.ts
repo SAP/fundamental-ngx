@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-let toggleUniqueId = 0;
+let toggleUniqueId: number = 0;
 
 /**
  * The Toggle component is used to activate or deactivate an element.

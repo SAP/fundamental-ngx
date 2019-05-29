@@ -1,7 +1,7 @@
 import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 
-let tabPanelUniqueId = 0;
+let tabPanelUniqueId: number = 0;
 
 /**
  * Represents the body of a tab element. It also contains elements pertaining to the associated tab header.

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-let listCheckboxUniqueId = 0;
+let listCheckboxUniqueId: number = 0;
 
 /**
  * The component that represents a checkbox list.

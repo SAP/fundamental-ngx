@@ -20,7 +20,7 @@ import { AlertRef } from './alert-utils/alert-ref';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
-let alertUniqueId = 0;
+let alertUniqueId: number = 0;
 
 /**
  * The component that represents an alert. It can be only be used inline.
