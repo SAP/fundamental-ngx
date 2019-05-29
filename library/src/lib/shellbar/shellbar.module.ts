@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ShellbarComponent } from './shellbar.component';
 import { ProductMenuComponent } from './product-menu/product-menu.component';
 import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
-import { CopilotComponent } from './copilot/copilot.component';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
 import { ShellbarLogoComponent } from './shellbar-logo/shellbar-logo.component';
@@ -17,7 +16,6 @@ import { MenuModule } from '../menu/menu.module';
         ShellbarComponent,
         ProductMenuComponent,
         ShellbarSubtitleComponent,
-        CopilotComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
@@ -28,7 +26,6 @@ import { MenuModule } from '../menu/menu.module';
         ShellbarComponent,
         ProductMenuComponent,
         ShellbarSubtitleComponent,
-        CopilotComponent,
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,

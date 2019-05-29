@@ -10,7 +10,6 @@
     <fd-shellbar-subtitle>
         Subtitle
     </fd-shellbar-subtitle>
-    <fd-copilot></fd-copilot>
     <fd-shellbar-actions [user]="user"
                          [userMenu]="userMenu"
                          [productSwitcher]="productSwitcher">
@@ -21,6 +20,6 @@
                             [notificationCount]="action.notificationCount"
                             [notificationLabel]="action.notificationLabel">
         </fd-shellbar-action>
-        <fd-search-input [inShellbar]="true"></fd-search-input>
+        <fd-search-input [inShellbar]="true" [dropdownValues]="searchTerms"></fd-search-input>
     </fd-shellbar-actions>
 </fd-shellbar>
