@@ -85,16 +85,20 @@ describe('AlertComponent', () => {
 
     it('should dismiss', () => {
         component.open();
-        expect(fixture.nativeElement.style.display).toBe('block');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(false);
         component.dismiss();
-        expect(fixture.nativeElement.style.display).toBe('none');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
     });
 
     it('should open', () => {
         component.dismiss();
-        expect(fixture.nativeElement.style.display).toBe('none');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
         component.open();
-        expect(fixture.nativeElement.style.display).toBe('block');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(false);
     });
 
     it('should persist', fakeAsync(() => {
