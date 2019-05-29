@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.2-rc.6"></a>
+## [0.5.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.5.2-rc.5...v0.5.2-rc.6) (2019-05-29)
+
+
+### Bug Fixes
+
+* remove utilsmodule, hashservice, refactor unique id approach ([#847](https://github.com/SAP/fundamental-ngx/issues/847)) ([ec9abc7](https://github.com/SAP/fundamental-ngx/commit/ec9abc7))
+
+
+
 <a name="0.5.2-rc.5"></a>
 ## [0.5.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.5.2-rc.4...v0.5.2-rc.5) (2019-05-29)
 
