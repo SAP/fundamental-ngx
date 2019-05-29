@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.2-rc.4"></a>
+## [0.5.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.5.2-rc.3...v0.5.2-rc.4) (2019-05-29)
+
+
+### Bug Fixes
+
+* dismissing alerts display: none style fix ([#848](https://github.com/SAP/fundamental-ngx/issues/848)) ([45a8dbe](https://github.com/SAP/fundamental-ngx/commit/45a8dbe))
+
+
+
 <a name="0.5.2-rc.3"></a>
 ## [0.5.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.5.2-rc.2...v0.5.2-rc.3) (2019-05-27)
 
