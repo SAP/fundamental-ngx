@@ -1,7 +1,6 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
-import { HashService } from '../utils/hash.service';
 import { AlertService } from './alert-service/alert.service';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
@@ -23,7 +22,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule, NoopAnimationsModule],
-    providers: [AlertService, HashService],
+    providers: [AlertService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
 class TestModule {}
@@ -85,16 +84,20 @@ describe('AlertComponent', () => {
 
     it('should dismiss', () => {
         component.open();
-        expect(fixture.nativeElement.style.display).toBe('block');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(false);
         component.dismiss();
-        expect(fixture.nativeElement.style.display).toBe('none');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
     });
 
     it('should open', () => {
         component.dismiss();
-        expect(fixture.nativeElement.style.display).toBe('none');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
         component.open();
-        expect(fixture.nativeElement.style.display).toBe('block');
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(true);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(false);
     });
 
     it('should persist', fakeAsync(() => {

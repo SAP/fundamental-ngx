@@ -92,6 +92,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     displayDatetimeToggleLabel: string = 'Display calendar toggle';
 
+    /** Whether a null input is considered valid. */
+    @Input()
+    allowNull: boolean = true;
+
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
     readonly dateChange: EventEmitter<Date> = new EventEmitter<Date>();
@@ -174,12 +178,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     }
 
     /** Opens the popover. */
-    openPopover(): void {
+    openPopover(inputFieldDate?: string): void {
         if (!this.isOpen) {
             this.isOpen = true;
-            this.inputValueChange(this.date);
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
+            if (inputFieldDate !== null && inputFieldDate !== '' && !this.isInvalidDateInput) {
+                this.inputValueChange(this.date);
             }
         }
     }
@@ -255,6 +258,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
                 this.setTime(true);
             }
             this.dateFromInput.next(temp.toLocaleDateString());
+        } else if (e === '' && this.allowNull) {
+            this.isInvalidDateInput = false;
+            this.dateFromInput.next('');
         } else {
             this.isInvalidDateInput = true;
         }

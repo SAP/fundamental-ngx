@@ -86,6 +86,10 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     displayCalendarToggleLabel: string = 'Display calendar toggle';
 
+    /** Whether a null input is considered valid. */
+    @Input()
+    allowNull: boolean = true;
+
     @Input()
     disableFunction = function(d): boolean {
         return false;
@@ -182,7 +186,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
             this.dateFromDatePicker.subscribe(date => {
                 if (date && typeof date === 'object') {
                     this.updateDatePickerInputHandler(date);
-                } else if (date === '') {
+                } else if (date === '' && this.allowNull) {
+                    this.isInvalidDateInput = false;
                     if (this.type === 'single') {
                         this.selectedDay.date = null;
                         this.selectedDay.selected = null;
@@ -194,6 +199,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
                         this.selectedRangeLast.selected = null;
                         this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
                     }
+                } else {
+                    this.isInvalidDateInput = true;
                 }
             })
         }

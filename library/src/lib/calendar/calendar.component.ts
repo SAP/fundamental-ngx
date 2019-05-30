@@ -12,7 +12,6 @@ import {
     ChangeDetectorRef,
     HostBinding, OnChanges, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { CalendarI18n } from './i18n/calendar-i18n';
@@ -45,13 +44,16 @@ export interface EmittedDate {
     selectedLastDay?: CalendarDay;
 }
 
+let calendarUniqueId: number = 0;
+
 @Component({
     selector: 'fd-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss'],
     host: {
         '(blur)': 'onTouched()',
-        '[class.fd-has-display-block]': 'true'
+        '[class.fd-has-display-block]': 'true',
+        '[attr.id]': 'id'
     },
     providers: [
         {
@@ -63,7 +65,7 @@ export interface EmittedDate {
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
-    calendarId: string;
+    id: string;
 
     newFocusedDayId: string;
 
@@ -748,28 +750,28 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.loadPrevYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 4);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year - 4);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             if (this.calendarYearsList.indexOf(year) >= 8) {
                 this.loadNextYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 4);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year + 4);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
             if (year === this.calendarYearsList[0]) {
                 this.loadPrevYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 1);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year - 1);
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
             if (year === this.calendarYearsList[this.calendarYearsList.length - 1]) {
                 this.loadNextYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year + 1);
         } else if (event.code === 'Tab' && !event.shiftKey) {
             if (!this.isDateTimePicker) {
                 event.preventDefault();
@@ -788,23 +790,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.selectMonth(month);
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
-            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 4);
+            newFocusedMonthId = '#' + this.id + '-fd-month-' + (month - 4);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
-            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 4);
+            newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 4);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
             if (month === 0) {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-11';
+                newFocusedMonthId = '#' + this.id + '-fd-month-11';
             } else {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 1);
+                newFocusedMonthId = '#' + this.id + '-fd-month-' + (month - 1);
             }
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
             if (month === 11) {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-0'
+                newFocusedMonthId = '#' + this.id + '-fd-month-0'
             } else {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
+                newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 1);
             }
         } else if (event.code === 'Tab' && !event.shiftKey) {
             if (!this.isDateTimePicker) {
@@ -831,16 +833,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 event.preventDefault();
                 const closeCalendarPopover = true;
                 this.selectDate(cell, true, null, closeCalendarPopover);
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
+                this.newFocusedDayId = '#' + this.id + '-fd-day-' + currentId;
             } else if (event.code === 'ArrowUp') {
                 event.preventDefault();
                 if (currentId >= 10 && currentId <= 16) {
                     // if first row, go to previous month
                     this.goToPreviousMonth();
                     const lastDigit = currentId.toString().split('').pop();
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 10);
                 }
             } else if (event.code === 'ArrowDown') {
                 event.preventDefault();
@@ -848,9 +850,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     // if last row, go to next month
                     this.goToNextMonth();
                     const lastDigit = currentId.toString().split('').pop();
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-1' + lastDigit;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-1' + lastDigit;
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 10);
                 }
             } else if (event.code === 'ArrowLeft') {
                 event.preventDefault();
@@ -858,24 +860,24 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     // if the first day is selected, go to the last day of the previous month
                     this.goToPreviousMonth();
                     lastDay = this.calendarGrid.length === 6 ? 66 : 56;
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + lastDay;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + lastDay;
                 } else if (currentId.toString().split('').pop() === '0') {
                     // if the last digit is 0, skip to the last day of the previous week
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 4);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 4);
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 1);
                 }
             } else if (event.code === 'ArrowRight') {
                 event.preventDefault();
                 if (currentId === lastDay) {
                     // if the last day is selected, go to the first day of the next month
                     this.goToNextMonth();
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-10';
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-10';
                 } else if (currentId.toString().split('').pop() === '6') {
                     // else if the last digit is 6, skip to the first day of the next week
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 4);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 4);
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 1);
                 }
             }
             if (this.newFocusedDayId) {
@@ -952,7 +954,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
         this.constructCalendar();
         this.constructCalendarYearsList();
-        this.calendarId = this.hasher.hash();
+        this.id = 'fd-calendar-' + calendarUniqueId++;
         if (this.month) {
             this.selectMonth(this.month);
         } else {
@@ -998,8 +1000,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    constructor(private hasher: HashService,
-                private eRef: ElementRef,
+    constructor(private eRef: ElementRef,
                 private cd: ChangeDetectorRef,
                 public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n,

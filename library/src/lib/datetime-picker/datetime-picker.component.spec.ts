@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatetimePickerComponent } from './datetime-picker.component';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '../icon/icon.module';
-import { UtilsModule } from '../utils/utils.module';
 import { PopoverModule } from '../popover/popover.module';
 import { CalendarModule } from '../calendar/calendar.module';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +15,7 @@ describe('DatetimePickerComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DatetimePickerComponent],
-            imports: [CommonModule, IconModule, UtilsModule, PopoverModule, CalendarModule, FormsModule, TimeModule]
+            imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, TimeModule]
         })
             .compileComponents();
     }));
@@ -34,11 +33,10 @@ describe('DatetimePickerComponent', () => {
     it('should open the popover', () => {
         spyOn(component, 'inputValueChange');
         component.isOpen = false;
-        component.isInvalidDateInput = true;
+        component.isInvalidDateInput = false;
         component.openPopover();
         expect(component.inputValueChange).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
-        expect(component.inputFieldDate).toBeNull();
     });
 
     it('should close the calendar', () => {

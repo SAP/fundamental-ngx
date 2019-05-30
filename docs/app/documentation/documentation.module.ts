@@ -194,7 +194,7 @@ import {
     TimePicker12ExampleComponent,
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
-    TimePickerCompactExampleComponent
+    TimePickerCompactExampleComponent, TimePickerAllowNullExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
@@ -247,7 +247,6 @@ import { COMPONENT_SCHEMAS } from './component-docs/schemas';
 
 import * as hljs from 'highlight.js';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-import { UtilsModule } from '../../../library/src/lib/utils/utils.module';
 import { BackdropExamplesComponent } from './component-docs/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './component-docs/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -311,6 +310,11 @@ import { SelectCustomTriggerComponent } from './component-docs/select/examples/s
 import { SelectComparatorComponent } from './component-docs/select/examples/select-comparator/select-comparator.component';
 import { SelectAddingExampleComponent } from './component-docs/select/examples/select-adding-example/select-adding-example.component';
 import { SelectFormsComponent } from './component-docs/select/examples/select-forms/select-forms.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { TableCdkExampleComponent } from './component-docs/table/examples/table-cdk-example.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DatetimePickerAllowNullExampleComponent } from './component-docs/datetime-picker/examples/datetime-allow-null-example/datetime-allow-null-example.component';
+import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -395,9 +399,11 @@ export function highlightJsFactory() {
         CalendarMondayStartExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
+        DatePickerAllowNullExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
+        DatetimePickerAllowNullExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
@@ -479,6 +485,7 @@ export function highlightJsFactory() {
         SideNavigationLevelsExampleComponent,
         SideNavigationTitlesExampleComponent,
         TableExampleComponent,
+        TableCdkExampleComponent,
         TableCheckboxesExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
@@ -501,6 +508,7 @@ export function highlightJsFactory() {
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
         TimePickerCompactExampleComponent,
+        TimePickerAllowNullExampleComponent,
         ComboboxInputDocsComponent,
         ComboboxInputExampleComponent,
         LoadingSpinnerDocsComponent,
@@ -586,9 +594,10 @@ export function highlightJsFactory() {
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
-        UtilsModule,
         FundamentalNgxModule,
-        HttpClientModule
+        HttpClientModule,
+        CdkTableModule,
+        DragDropModule
     ],
     providers: [
         CopyService,

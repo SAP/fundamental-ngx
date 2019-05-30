@@ -8,11 +8,10 @@ import { TimeModule } from '../time/time.module';
 
 import { TimePickerComponent } from './time-picker.component';
 
-import { UtilsModule } from '../utils/utils.module';
 
 @NgModule({
     declarations: [TimePickerComponent],
-    imports: [CommonModule, UtilsModule, FormsModule, PopoverModule, InputGroupModule, TimeModule],
+    imports: [CommonModule, FormsModule, PopoverModule, InputGroupModule, TimeModule],
     exports: [TimePickerComponent]
 })
 export class TimePickerModule {}

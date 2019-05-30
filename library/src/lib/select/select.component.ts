@@ -156,11 +156,16 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     }
 
     writeValue(value: any): void {
-        console.log('write value');
-        console.log(value);
         if (this.options) {
-            console.log('write value inside');
             this.selectValue(value);
+        } else {
+
+            // Defer the selection of the value
+            Promise.resolve().then(() => {
+                if (this.options) {
+                    this.selectValue(value);
+                }
+            });
         }
     }
 

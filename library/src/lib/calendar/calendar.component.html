@@ -31,7 +31,7 @@
                 [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
                 (click)="selectYear(listYear, $event)">
                     <span role="button" [attr.tabIndex]="getYearTabIndex(listYear, i)"
-                          [attr.id]="calendarId + '-fd-year-' + listYear"
+                          [attr.id]="id + '-fd-year-' + listYear"
                           (keydown)="onKeydownYearHandler($event, listYear)"
                           class="fd-calendar__text">{{listYear}}</span>
             </li>
@@ -46,7 +46,7 @@
                 [ngClass]='(i===todayMonth && year===todayYear ? " fd-calendar__item--current" : "") + (i===selectedMonth ? " is-selected" : "") '
                 (click)="selectMonth(i, $event)">
                     <span role="button" [attr.tabIndex]="i === selectedMonth ? 0 : -1"
-                          [attr.id]="calendarId + '-fd-month-' + i" (keydown)="onKeydownMonthHandler($event, i)"
+                          [attr.id]="id + '-fd-month-' + i" (keydown)="onKeydownMonthHandler($event, i)"
                           class="fd-calendar__text">{{monthShortName}}</span>
             </li>
         </ul>
@@ -64,7 +64,7 @@
                 </th>
             </tr>
             </thead>
-            <tbody class="fd-calendar__group" [attr.id]="calendarId + '-dates-table'">
+            <tbody class="fd-calendar__group" [attr.id]="id + '-dates-table'">
             <tr class="fd-calendar__row"
                 *ngFor="let row of calendarGrid; let i = index;">
                 <td class="fd-calendar__item"
@@ -72,15 +72,15 @@
                     [attr.aria-label]="cell.ariaLabel"
                     *ngFor="let cell of row; let cellIndex = index;"
                     [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
-                          (cell.selected ? " is-selected": "") + 
-                          (calType==="range" && cell.selectedLast && selectedRangeFirst != selectedRangeLast ? " is-selected-range-last": "") + 
-                          (calType==="range" && cell.selectedFirst && selectedRangeFirst != selectedRangeLast ? " is-selected-range-first": "") + 
+                          (cell.selected ? " is-selected": "") +
+                          (calType==="range" && cell.selectedLast && selectedRangeFirst != selectedRangeLast ? " is-selected-range-last": "") +
+                          (calType==="range" && cell.selectedFirst && selectedRangeFirst != selectedRangeLast ? " is-selected-range-first": "") +
                           (calType==="range" && cell.selectedRange && !cell.selectedFirst && !cell.selectedLast ? " is-selected-range": "") +
-                          (cell.today ? " fd-calendar__item--current": "") + 
+                          (cell.today ? " fd-calendar__item--current": "") +
                           (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
                     (click)="selectDate(cell, true, $event)">
-              <span class="fd-calendar__text" [attr.id]="calendarId + '-fd-day-' + (i + 1) + cellIndex"
+              <span class="fd-calendar__text" [attr.id]="id + '-fd-day-' + (i + 1) + cellIndex"
                     role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
                     (keydown)="onKeydownDayHandler($event, cell)">{{cell.day}}</span>
                 </td>

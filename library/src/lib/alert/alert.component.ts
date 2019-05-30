@@ -16,10 +16,11 @@ import {
     Output,
     EventEmitter, ViewEncapsulation, HostListener
 } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { AlertRef } from './alert-utils/alert-ref';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+
+let alertUniqueId: number = 0;
 
 /**
  * The component that represents an alert. It can be only be used inline.
@@ -29,12 +30,10 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    providers: [HashService],
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
-        '[class.fd-has-display-block]': 'true',
         'role': 'alert',
         '[attr.id]': 'id',
         '[@fadeAlertNgIf]': ''
@@ -60,7 +59,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Id for the alert component. If omitted, a unique one is generated. */
     @Input()
-    id: string;
+    id: string = 'fd-alert-' + alertUniqueId++;
 
     /** Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input()
@@ -104,8 +103,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     childComponentType: Type<any> | TemplateRef<any> | string;
 
     /** @hidden */
-    constructor(private hasher: HashService,
-                private elRef: ElementRef,
+    constructor(private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 @Optional() private alertRef: AlertRef) {
@@ -114,10 +112,6 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** @hidden */
     ngOnInit(): void {
-        if (!this.id) {
-            this.id = this.hasher.hash();
-        }
-
         if (this.alertRef) {
             this.open();
         }
@@ -148,12 +142,14 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
      */
     dismiss(reason?: any, manualDismiss: boolean = false): void {
         if (manualDismiss) {
-            this.elRef.nativeElement.style.display = 'none';
+            this.elRef.nativeElement.classList.add('fd-has-display-none');
+            this.elRef.nativeElement.classList.remove('fd-has-display-block');
         }
         if (this.alertRef) {
             this.alertRef.dismiss(reason);
         } else {
-            this.elRef.nativeElement.style.display = 'none';
+            this.elRef.nativeElement.classList.add('fd-has-display-none');
+            this.elRef.nativeElement.classList.remove('fd-has-display-block');
         }
         this.onDismiss.emit();
     }
@@ -166,7 +162,8 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
             if (this.elRef.nativeElement.style.display === 'block') {
                 return;
             }
-            this.elRef.nativeElement.style.display = 'block';
+            this.elRef.nativeElement.classList.remove('fd-has-display-none');
+            this.elRef.nativeElement.classList.add('fd-has-display-block');
         }
 
         if (this.duration >= 0) {
