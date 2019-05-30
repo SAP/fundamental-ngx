@@ -17,26 +17,24 @@
 <description>
     The state of the input field can reflect validity of the data entered, whether the input data is editable or
     disabled.
-    <br>
+    <br />
     <b>Normal:</b> The field is editable but no validation has occurred.
-    <br>
+    <br />
     <b>Valid:</b> The data format entered has been validated and it’s correct, such as an email address.
-    <br>
+    <br />
     <b>Invalid:</b> The data entered is not valid and must be corrected.
-    <br>
+    <br />
     <b>Warning:</b> The data entered is formatted correctly but there are other issues are problematic but will not stop
-    the user
-    from moving forward.
-    <br>
+    the user from moving forward.
+    <br />
     <b>Disabled:</b> This indicates the field is not editable. A common use case is that this field is dependent on a
-    previous
-    entry or selection within the form.
-    <br>
+    previous entry or selection within the form.
+    <br />
     <b>Read Only:</b> Used to display static information in the context of a form.
-    <br>
-    <br> Along with Invalid and Warning, error messages should be displayed below the field so the user can correct the
-    error and
-    move forward.
+    <br />
+    <br />
+    Along with Invalid and Warning, error messages should be displayed below the field so the user can correct the error
+    and move forward.
 </description>
 <component-example [name]="'ex3'">
     <fd-form-state-example></fd-form-state-example>
@@ -46,7 +44,8 @@
 <separator></separator>
 <h2>Select</h2>
 <description>
-    The Select component is similar to a dropdown but is more commonly used within a form. It can also be set to a disabled state.
+    The Select component is similar to a dropdown but is more commonly used within a form. It can also be set to a
+    disabled state.
 </description>
 <component-example [name]="'ex4'">
     <fd-form-select-example></fd-form-select-example>
@@ -55,10 +54,9 @@
 
 <separator></separator>
 <h2>Radio buttons</h2>
-<description>Radio buttons allow the user to see all options and select one. Generally, this is used when there are between 2-3
-    options.
-    This component can also be disabled and displayed in a row.
-    <br/><br/>
+<description
+    >Radio buttons allow the user to see all options and select one. Generally, this is used when there are between 2-3
+    options. This component can also be disabled and displayed in a row. <br /><br />
     Keyboard support for radio button selection is handled via the arrow keys.
 </description>
 <component-example [name]="'ex5'">
@@ -68,13 +66,21 @@
 
 <separator></separator>
 <h2>Checkbox</h2>
-<description>With checkboxes, all options are visible and the user can make one or more selections. This component can be set
-    disabled
-    and also displayed in a row.
-    <br/><br/>
+<description
+    >With checkboxes, all options are visible and the user can make one or more selections. This component can be set
+    disabled and also displayed in a row. <br /><br />
     Checkboxes are keyboard navigable via the tab key and selected with the space bar.
 </description>
 <component-example [name]="'ex6'">
     <fd-form-checkbox-example></fd-form-checkbox-example>
 </component-example>
 <code-example [code]="checkboxFormHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Form Group Input</h2>
+<description>Form Group Input </description>
+<component-example [name]="'ex7'">
+    <fd-form-group-input></fd-form-group-input>
+</component-example>
+<code-example [code]="formGroupInputHtml" [language]="'HTML'"></code-example>
+<code-example [code]="formGroupInputTs" [language]="'typescript'"></code-example>
