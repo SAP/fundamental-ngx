@@ -140,7 +140,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** @hidden */
     onInputKeyupHandler() {
-        if (this.inputText.length) {
+        if (this.inputText && this.inputText.length) {
             this.isOpen = true;
         }
     }

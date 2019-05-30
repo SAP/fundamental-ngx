@@ -35,6 +35,7 @@ import { SearchInputComponent } from '../../search-input/search-input.component'
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
+    styleUrls: ['./shellbar-actions.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
