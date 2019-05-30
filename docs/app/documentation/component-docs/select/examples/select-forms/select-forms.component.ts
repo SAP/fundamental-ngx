@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-select-forms',
+  selector: 'fd-select-forms',
   templateUrl: './select-forms.component.html',
   styleUrls: ['./select-forms.component.scss']
 })
-export class SelectFormsComponent implements OnInit {
+export class SelectFormsComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    customForm = new FormGroup({
+        selectControl: new FormControl('pineapple', Validators.required)
+    });
 
 }

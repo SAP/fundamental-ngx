@@ -15,9 +15,4 @@ export class SelectComparatorComponent {
         {id: 467543}
     ];
 
-    /** Case insensitive comparison of string value options. */
-    customCompareFn(val1: string, val2: string): boolean {
-        return val1.toLocaleUpperCase() === val2.toLocaleUpperCase();
-    }
-
 }

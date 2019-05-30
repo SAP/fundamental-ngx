@@ -1,17 +1,16 @@
-<!--<fd-alert [dismissible]="false" [type]="'information'" style="margin-bottom: 16px;">-->
-<!--    <strong>APPLE and apple are equivalent under this comparator.</strong>-->
-<!--    <br />-->
-<!--    <p>Both should be selected if one of the two is selected.</p>-->
-<!--</fd-alert>-->
+<fd-alert [dismissible]="false" [type]="'information'" style="margin-bottom: 16px;">
+    <strong>APPLE and apple are equivalent under this comparator.</strong>
+    <br />
+    <p>Both should be selected if one of the two is selected.</p>
+</fd-alert>
 
-<!--<fd-select [(value)]="value"-->
-<!--           [compareFn]="customCompareFn"-->
-<!--           placeholder="Select an option...">-->
+<fd-select [(value)]="value"
+           placeholder="Select an option...">
 
-<!--    &lt;!&ndash; apple and APPLE are equivalent under this comparator &ndash;&gt;-->
-<!--    <fd-option value="apple">Apple</fd-option>-->
-<!--    <fd-option value="APPLE">APPLE</fd-option>-->
-<!--    <fd-option value="tomato">Tomato</fd-option>-->
-<!--    <fd-option value="strawberry">Strawberry</fd-option>-->
-<!--</fd-select>-->
-<!--<p>Selected Value: {{this.value}}</p>-->
+    <!-- apple and APPLE are equivalent under this comparator -->
+    <fd-option value="apple">Apple</fd-option>
+    <fd-option value="apple">APPLE</fd-option>
+    <fd-option value="tomato">Tomato</fd-option>
+    <fd-option value="strawberry">Strawberry</fd-option>
+</fd-select>
+<p>Selected Value: {{this.value}}</p>

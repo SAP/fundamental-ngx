@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { RouterModule } from '@angular/router';
@@ -583,6 +583,7 @@ export function highlightJsFactory() {
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         UtilsModule,

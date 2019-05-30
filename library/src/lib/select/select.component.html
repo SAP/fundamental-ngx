@@ -1,4 +1,5 @@
-<fd-popover [(isOpen)]="isOpen" (isOpenChange)="isOpenChange.emit($event)"
+<fd-popover [(isOpen)]="isOpen"
+            (isOpenChange)="isOpenChange.emit($event)"
             class="fd-select-popover-custom">
     <fd-popover-control>
         <ng-container #customTrigger *ngIf="triggerTemplate"></ng-container>

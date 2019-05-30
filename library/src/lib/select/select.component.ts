@@ -2,31 +2,32 @@ import {
     AfterContentInit, AfterViewInit, ChangeDetectorRef,
     Component,
     ContentChildren,
-    EventEmitter, HostBinding, HostListener,
+    EventEmitter, forwardRef, HostBinding, HostListener,
     Input, OnChanges, OnDestroy,
     OnInit,
     Output,
     QueryList, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-// TODO
-// Adding/removing options
-// ngForm support
-// On close, refocus the dropdown
-// On open, focus the selected element if it exists
-// Tests
-// Docs
-
+// TODO writeValue is called before options have loaded
+// TODO allow picking options that have the same value
 @Component({
     selector: 'fd-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SelectComponent),
+            multi: true
+        }
+    ],
     host: {
         '(blur)': 'onTouched()',
         '[class.fd-select-custom]': 'true'
@@ -155,7 +156,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     }
 
     writeValue(value: any): void {
+        console.log('write value');
+        console.log(value);
         if (this.options) {
+            console.log('write value inside');
             this.selectValue(value);
         }
     }
@@ -182,8 +186,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     private selectValue(value: any): OptionComponent | undefined {
         const matchOption = this.options.find((option: OptionComponent) => {
-
-            // Todo implement custom comparator
             return option.value != null && option.value === value;
         });
 
@@ -232,7 +234,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
 
     private isOptionActive(option: OptionComponent): boolean {
         if (option) {
-            // Todo implement custom comparator
             return this.selected && this.selected.value === option.value && option.value === this.value;
         }
         return false;
