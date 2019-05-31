@@ -10,6 +10,10 @@
     }
 }
 
+.fd-option-default-custom.is-disabled {
+    // TODO
+}
+
 .fd-option-default-custom.is-selected {
     &:focus {
         background-color: var(--fd-color-background-selected-hover);

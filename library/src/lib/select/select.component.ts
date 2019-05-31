@@ -14,8 +14,8 @@ import { OptionComponent } from './option/option.component';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-// TODO writeValue is called before options have loaded
 // TODO allow picking options that have the same value
+// TODO Support disabled options, keyboard nav of options etc
 @Component({
     selector: 'fd-select',
     templateUrl: './select.component.html',
@@ -30,7 +30,8 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
     ],
     host: {
         '(blur)': 'onTouched()',
-        '[class.fd-select-custom]': 'true'
+        '[class.fd-select-custom]': 'true',
+        'role': 'listbox',
     }
 })
 export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {

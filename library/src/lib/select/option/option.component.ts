@@ -8,7 +8,8 @@ import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, 
     host: {
         '[class.fd-option-default-custom]': 'true',
         '[class.is-disabled]': 'disabled',
-        '[tabindex]': '-1'
+        '[tabindex]': 'disabled ? -1 : 0',
+        'role': 'option',
     }
 })
 export class OptionComponent implements OnInit {
