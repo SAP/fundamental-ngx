@@ -590,6 +590,9 @@ export function highlightJsFactory() {
         CdkTableModule,
         DragDropModule
     ],
-    providers: [CopyService, ApiDocsService]
+    providers: [
+        CopyService,
+        ApiDocsService
+    ]
 })
-export class DocumentationModule {}
+export class DocumentationModule { }
