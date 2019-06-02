@@ -99,12 +99,6 @@ For an existing Angular application,
     <fd-toggle [size]="'l'" [(checked)]="checked">Large Toggle</fd-toggle>
     ```
 
-## Demo Application
-
-The documentation serves as a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo application utilizes the Angular Fundamental source code in this repository, so changes you make to any component source will be reflected in the demo app.
-
-View the live demo [here](https://github.com/SAP/fundamental-ngx/tree/master/docs).
-
 ## Tests
 
 Fundamental NGX makes use of Jasmine and Karma for its unit tests.
