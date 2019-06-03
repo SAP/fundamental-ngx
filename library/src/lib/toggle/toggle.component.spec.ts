@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToggleComponent } from './toggle.component';
-import { UtilsModule } from '../utils/utils.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -12,7 +11,7 @@ describe('ToggleComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, UtilsModule, FormsModule],
+            imports: [CommonModule, FormsModule],
             declarations: [ToggleComponent]
         })
             .compileComponents();
@@ -66,6 +65,12 @@ describe('ToggleComponent', () => {
         component.size = 'test';
         component.ngOnInit();
         expect(component.size).toBeNull();
+    });
+
+    it('should focus inner input element', () => {
+        spyOn(component.inputElement.nativeElement, 'focus');
+        component.focus();
+        expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
     });
 
     it('should display size', () => {

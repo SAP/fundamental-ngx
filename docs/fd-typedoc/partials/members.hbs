@@ -1,0 +1,31 @@
+{{#getAllWithDecorator groups 'Input'}}
+    {{#if this}}
+        <section class="tsd-panel-group tsd-member-group {{cssClasses}}">
+            <h2>Inputs</h2>
+            {{#each this}}
+                {{#unless hasOwnDocument}}
+                    {{> member}}
+                {{/unless}}
+            {{/each}}
+        </section>
+    {{/if}}
+{{/getAllWithDecorator}}
+
+{{#getAllWithDecorator groups 'Output'}}
+    {{#if this}}
+        <section class="tsd-panel-group tsd-member-group {{cssClasses}}">
+            <h2>Outputs</h2>
+            {{#each this}}
+                {{#unless hasOwnDocument}}
+                    {{> member}}
+                {{/unless}}
+            {{/each}}
+        </section>
+    {{/if}}
+{{/getAllWithDecorator}}
+
+{{#each groups}}
+    {{#unless allChildrenHaveOwnDocument}}
+        {{> members.group}}
+    {{/unless}}
+{{/each}}

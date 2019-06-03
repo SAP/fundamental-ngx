@@ -1,7 +1,8 @@
-:host {
+.fd-popover-custom {
     margin-right: 0;
     display: inline-block;
-}
-.fd-dropdown {
-    position: static;
+
+    .fd-dropdown {
+        position: static;
+    }
 }

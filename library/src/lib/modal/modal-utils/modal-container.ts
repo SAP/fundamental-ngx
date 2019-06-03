@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { modalFadeNgIf } from './modal-animations';
 
 @Component({
     selector: 'fd-modal-container',
     template: ``,
     styles: [`
-        :host {
+        .fd-modal-container {
             position: fixed;
             top: 0;
             bottom: 0;
@@ -18,10 +18,12 @@ import { modalFadeNgIf } from './modal-animations';
         }
     `],
     host: {
-        '[@modal-fade]': ''
+        '[@modal-fade]': '',
+        '[class.fd-modal-container]': 'true'
     },
     animations: [
         modalFadeNgIf
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class ModalContainer {}

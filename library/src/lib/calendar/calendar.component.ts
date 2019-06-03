@@ -7,18 +7,20 @@ import {
     HostListener,
     ElementRef,
     forwardRef,
-    Inject,
     OnDestroy,
     AfterViewChecked,
     ChangeDetectorRef,
-    HostBinding
+    HostBinding, OnChanges, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
-import { HashService } from '../utils/hash.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { CalendarI18n } from './i18n/calendar-i18n';
+import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
+import { DateFormatParser } from './format/date-parser';
 
 export type CalendarType = 'single' | 'range';
 export type MonthStatus = 'previous' | 'current' | 'next';
+export type WeekDaysNumberRange = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface CalendarDay {
     date: Date;
@@ -33,6 +35,7 @@ export interface CalendarDay {
     selectedLast?: boolean;
     today?: boolean;
     isTabIndexed?: boolean;
+    ariaLabel?: string;
 }
 
 export interface EmittedDate {
@@ -41,13 +44,16 @@ export interface EmittedDate {
     selectedLastDay?: CalendarDay;
 }
 
+let calendarUniqueId: number = 0;
+
 @Component({
     selector: 'fd-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['calendar.component.scss'],
     host: {
         '(blur)': 'onTouched()',
-        class: 'fd-calendar'
+        '[class.fd-has-display-block]': 'true',
+        '[attr.id]': 'id'
     },
     providers: [
         {
@@ -55,16 +61,18 @@ export interface EmittedDate {
             useExisting: forwardRef(() => CalendarComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
-export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor {
-    calendarId: string;
+export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
+    id: string;
 
     newFocusedDayId: string;
 
     init = false;
 
-    @HostBinding('class.fd-calendar') true;
+    @HostBinding('class.fd-calendar')
+    fdCalendarClass: boolean = true;
 
     @Input()
     dateFromDatePicker: Subject<any>;
@@ -73,7 +81,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     calType: CalendarType = 'single';
 
     @Input()
-    mondayStartOfWeek: boolean = false;
+    startingDayOfWeek: WeekDaysNumberRange = 0;
 
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
@@ -87,34 +95,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     showCalendarYears: boolean = false;
     showCalendarDates: boolean = true;
 
-    monthsShortName: string[] = [
-        'Jan.',
-        'Feb.',
-        'Mar.',
-        'Apr.',
-        'May',
-        'Jun.',
-        'Jul.',
-        'Aug.',
-        'Sep.',
-        'Oct.',
-        'Nov.',
-        'Dec.'
-    ];
-    monthsFullName: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
+    monthsShortName: string[];
+    monthsFullName: string[];
+
     weekDays: string[];
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -127,7 +110,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     date: Date = new Date();
     month: number = this.date.getMonth();
-    monthName: string = this.monthsFullName[this.month];
+    monthName: string;
     year: number = this.date.getFullYear();
     day = this.date.getDate();
 
@@ -165,8 +148,26 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Output()
     closeCalendar = new EventEmitter<any>();
 
+    private i18nLocalSub: Subscription;
+
     @Input()
     disableFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
         return false;
     };
     @Input()
@@ -190,18 +191,24 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     };
 
+    setWeekDaysOrder() {
+        this.weekDays = this.calendarI18n.getAllShortWeekdays().map(item => item[0]);
+        if (this.startingDayOfWeek <= 6 && this.startingDayOfWeek >= 0) {
+            for (let i = this.startingDayOfWeek; i > 0; i--) {
+                this.weekDays.push(this.weekDays.shift());
+            }
+        }
+    }
+
     getPreviousMonthDays(calendarMonth) {
         // Previous month days
         let prevMonthLastDate;
-        if (this.mondayStartOfWeek) {
-            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), -1);
-        } else {
-            prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
-        }
+        this.setWeekDaysOrder();
+        prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
         const prevMonth: number = prevMonthLastDate.getMonth();
         const prevMonthYear: number = prevMonthLastDate.getFullYear();
         const prevMonthLastDay = prevMonthLastDate.getDate();
-        let prevMonthLastWeekDay = prevMonthLastDate.getDay();
+        let prevMonthLastWeekDay = prevMonthLastDate.getDay() - this.startingDayOfWeek;
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
@@ -231,8 +238,26 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                         this.selectedRangeFirst.date &&
                         calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
                         this.selectedRangeLast.date &&
-                        calDate.getTime() < this.selectedRangeLast.date.getTime()
+                        calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                    ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
                 };
+
+                if (this.selectCounter === 0) {
+                    if (this.disableRangeStartFunction && !previousMonthCalendarDay.disabled) {
+                        previousMonthCalendarDay.disabled = this.disableRangeStartFunction(calDate);
+                    }
+                    if (this.blockRangeStartFunction && !previousMonthCalendarDay.blocked) {
+                        previousMonthCalendarDay.blocked = this.blockRangeStartFunction(calDate);
+                    }
+                } else if (this.selectCounter === 1) {
+                    if (this.disableRangeEndFunction && !previousMonthCalendarDay.disabled) {
+                        previousMonthCalendarDay.disabled = this.disableRangeEndFunction(calDate);
+                    }
+
+                    if (this.blockRangeEndFunction && !previousMonthCalendarDay.blocked) {
+                        previousMonthCalendarDay.blocked = this.blockRangeEndFunction(calDate);
+                    }
+                }
 
                 calendarMonth.push(previousMonthCalendarDay);
                 prevMonthLastWeekDay--;
@@ -274,8 +299,25 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLast.date &&
                     calDate.getTime() < this.selectedRangeLast.date.getTime(),
                 today: calDate.toDateString() === this.today.toDateString(),
-                isTabIndexed: false
+                isTabIndexed: false,
+                ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
             };
+
+            if (this.selectCounter === 0 || this.selectCounter === 2) {
+                if (this.disableRangeStartFunction && !currMonthCalendarDay.disabled) {
+                    currMonthCalendarDay.disabled = this.disableRangeStartFunction(calDate);
+                }
+                if (this.blockRangeStartFunction && !currMonthCalendarDay.blocked) {
+                    currMonthCalendarDay.blocked = this.blockRangeStartFunction(calDate);
+                }
+            } else if (this.selectCounter === 1) {
+                if (this.disableRangeEndFunction && !currMonthCalendarDay.disabled) {
+                    currMonthCalendarDay.disabled = this.disableRangeEndFunction(calDate);
+                }
+                if (this.blockRangeEndFunction && !currMonthCalendarDay.blocked) {
+                    currMonthCalendarDay.blocked = this.blockRangeEndFunction(calDate);
+                }
+            }
 
             // if a day is selected, it should be tab indexed
             if (currMonthCalendarDay.selected) {
@@ -355,8 +397,26 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirst.date &&
                     calDate.getTime() > this.selectedRangeFirst.date.getTime() &&
                     this.selectedRangeLast.date &&
-                    calDate.getTime() < this.selectedRangeLast.date.getTime()
+                    calDate.getTime() < this.selectedRangeLast.date.getTime(),
+                ariaLabel: this.calendarI18n.getDayAriaLabel(calDate)
             };
+
+            if (this.selectCounter === 0) {
+                if (this.disableRangeStartFunction && !nextMonthCalendarDay.disabled) {
+                    nextMonthCalendarDay.disabled = this.disableRangeStartFunction(calDate);
+                }
+                if (this.blockRangeStartFunction && !nextMonthCalendarDay.blocked) {
+                    nextMonthCalendarDay.blocked = this.blockRangeStartFunction(calDate);
+                }
+            } else if (this.selectCounter === 1) {
+                if (this.disableRangeEndFunction && !nextMonthCalendarDay.disabled) {
+                    nextMonthCalendarDay.disabled = this.disableRangeEndFunction(calDate);
+                }
+
+                if (this.blockRangeEndFunction && !nextMonthCalendarDay.blocked) {
+                    nextMonthCalendarDay.blocked = this.blockRangeEndFunction(calDate);
+                }
+            }
 
             calendarMonth.push(nextMonthCalendarDay);
         }
@@ -508,6 +568,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.selectCounter++;
                     this.refreshSelected();
+                    this.constructCalendar();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
                     }
@@ -523,6 +584,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
                     this.selectCounter++;
                     this.refreshSelected();
+                    this.constructCalendar();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
                     }
@@ -538,6 +600,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeLast = tempSelectedRangeFirst;
                     this.selectedRangeLastChange.emit(this.selectedRangeLast);
                     this.refreshSelected();
+                    this.constructCalendar();
                     if (this.init) {
                         this.updateDatePickerInputEmitter();
                     }
@@ -630,29 +693,26 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    validateDateFromDatePicker(date: Array<any>): boolean {
-        let isInvalid: boolean = false;
-        const month = date[0];
-        const day = date[1];
-        const year = date[2];
-        let numOfDaysInMonth = 0;
+    validateDateFromDatePicker(date: Date): boolean {
+        if (!date) {
+            return true;
+        }
+        const month = date.getMonth();
+        const day = date.getDate();
+        const year = date.getFullYear();
 
         if (isNaN(month) || isNaN(day) || isNaN(year)) {
-            isInvalid = true;
-            return isInvalid;
+            return true;
         }
 
-        if (year < 1000 || year > 3000 || month < 1 || month > 12) {
-            isInvalid = true;
-            return isInvalid;
-        } else {
-            numOfDaysInMonth = this.daysPerMonth[month - 1];
-            if (day < 1 || day > numOfDaysInMonth) {
-                isInvalid = true;
-                return isInvalid;
-            }
+        if (year < 1000 || year > 3000 || month < 0 || month > 11) {
+            return true;
         }
-        return isInvalid;
+
+        if (day < 1 || day > this.determineDaysInMonth(month, year)) {
+            return true;
+        }
+        return false;
     }
 
     resetSelection() {
@@ -690,28 +750,28 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.loadPrevYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 4);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year - 4);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             if (this.calendarYearsList.indexOf(year) >= 8) {
                 this.loadNextYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 4);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year + 4);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
             if (year === this.calendarYearsList[0]) {
                 this.loadPrevYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year - 1);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year - 1);
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
             if (year === this.calendarYearsList[this.calendarYearsList.length - 1]) {
                 this.loadNextYearsList();
                 this.cd.detectChanges();
             }
-            newFocusedYearId = '#' + this.calendarId + '-fd-year-' + (year + 1);
+            newFocusedYearId = '#' + this.id + '-fd-year-' + (year + 1);
         } else if (event.code === 'Tab' && !event.shiftKey) {
             if (!this.isDateTimePicker) {
                 event.preventDefault();
@@ -730,23 +790,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             this.selectMonth(month);
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
-            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 4);
+            newFocusedMonthId = '#' + this.id + '-fd-month-' + (month - 4);
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
-            newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 4);
+            newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 4);
         } else if (event.code === 'ArrowLeft') {
             event.preventDefault();
             if (month === 0) {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-11';
+                newFocusedMonthId = '#' + this.id + '-fd-month-11';
             } else {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month - 1);
+                newFocusedMonthId = '#' + this.id + '-fd-month-' + (month - 1);
             }
         } else if (event.code === 'ArrowRight') {
             event.preventDefault();
             if (month === 11) {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-0'
+                newFocusedMonthId = '#' + this.id + '-fd-month-0'
             } else {
-                newFocusedMonthId = '#' + this.calendarId + '-fd-month-' + (month + 1);
+                newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 1);
             }
         } else if (event.code === 'Tab' && !event.shiftKey) {
             if (!this.isDateTimePicker) {
@@ -773,16 +833,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 event.preventDefault();
                 const closeCalendarPopover = true;
                 this.selectDate(cell, true, null, closeCalendarPopover);
-                this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + currentId;
+                this.newFocusedDayId = '#' + this.id + '-fd-day-' + currentId;
             } else if (event.code === 'ArrowUp') {
                 event.preventDefault();
                 if (currentId >= 10 && currentId <= 16) {
                     // if first row, go to previous month
                     this.goToPreviousMonth();
                     const lastDigit = currentId.toString().split('').pop();
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + this.calendarGrid.length.toString() + lastDigit;
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 10);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 10);
                 }
             } else if (event.code === 'ArrowDown') {
                 event.preventDefault();
@@ -790,9 +850,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     // if last row, go to next month
                     this.goToNextMonth();
                     const lastDigit = currentId.toString().split('').pop();
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-1' + lastDigit;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-1' + lastDigit;
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 10);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 10);
                 }
             } else if (event.code === 'ArrowLeft') {
                 event.preventDefault();
@@ -800,24 +860,24 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     // if the first day is selected, go to the last day of the previous month
                     this.goToPreviousMonth();
                     lastDay = this.calendarGrid.length === 6 ? 66 : 56;
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + lastDay;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + lastDay;
                 } else if (currentId.toString().split('').pop() === '0') {
                     // if the last digit is 0, skip to the last day of the previous week
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 4);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 4);
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId - 1);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 1);
                 }
             } else if (event.code === 'ArrowRight') {
                 event.preventDefault();
                 if (currentId === lastDay) {
                     // if the last day is selected, go to the first day of the next month
                     this.goToNextMonth();
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-10';
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-10';
                 } else if (currentId.toString().split('').pop() === '6') {
                     // else if the last digit is 6, skip to the first day of the next week
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 4);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 4);
                 } else {
-                    this.newFocusedDayId = '#' + this.calendarId + '-fd-day-' + (currentId + 1);
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 1);
                 }
             }
             if (this.newFocusedDayId) {
@@ -835,11 +895,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     updateFromDatePicker(date: any) {
         if (this.calType === 'single') {
-            const singleDate = date.replace(/\s/g, '').split(/[/]+/);
+            const singleDate = this.dateAdapter.parse(date);
             this.invalidDate = this.validateDateFromDatePicker(singleDate);
             if (!this.invalidDate) {
-                this.selectedDay.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
-                this.date = new Date(singleDate[2], singleDate[0] - 1, singleDate[1]);
+                this.selectedDay.date = new Date(singleDate.getFullYear(), singleDate.getMonth(), singleDate.getDate());
+                this.date = new Date(singleDate.getFullYear(), singleDate.getMonth(), singleDate.getDate());
                 this.year = this.date.getFullYear();
                 this.month = this.date.getMonth();
                 this.monthName = this.monthsFullName[this.date.getMonth()];
@@ -852,15 +912,15 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 this.resetSelection();
             }
         } else {
-            const currentDates = date.replace(/\s/g, '').split(/[-,]+/);
-            const firstDate = currentDates[0].split(/[/]+/);
-            const secondDate = currentDates[1].split(/[/]+/);
+            const currentDates = date.split(this.dateAdapter.rangeDelimiter);
+            const firstDate = this.dateAdapter.parse(currentDates[0]);
+            const secondDate = this.dateAdapter.parse(currentDates[1]);
             this.invalidDate =
                 this.validateDateFromDatePicker(firstDate) || this.validateDateFromDatePicker(secondDate);
 
             if (!this.invalidDate) {
-                const fDate = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
-                const lDate = new Date(secondDate[2], secondDate[0] - 1, secondDate[1]);
+                const fDate = firstDate;
+                const lDate = secondDate;
                 if (fDate.getTime() > lDate.getTime()) {
                     this.selectedRangeFirst.date = lDate;
                     this.selectedRangeLast.date = fDate;
@@ -868,7 +928,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                     this.selectedRangeFirst.date = fDate;
                     this.selectedRangeLast.date = lDate;
                 }
-                this.date = new Date(firstDate[2], firstDate[0] - 1, firstDate[1]);
+                this.date = firstDate;
                 this.year = this.date.getFullYear();
                 this.month = this.date.getMonth();
                 this.monthName = this.monthsFullName[this.date.getMonth()];
@@ -884,12 +944,17 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     ngOnInit() {
+
+        // Localization setup
+        this.setupLocalization();
+
         if (!this.date) {
             this.date = new Date();
         }
+
         this.constructCalendar();
         this.constructCalendarYearsList();
-        this.calendarId = this.hasher.hash();
+        this.id = 'fd-calendar-' + calendarUniqueId++;
         if (this.month) {
             this.selectMonth(this.month);
         } else {
@@ -923,9 +988,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.unsubscribe();
         }
+
+        if (this.i18nLocalSub) {
+            this.i18nLocalSub.unsubscribe();
+        }
     }
 
-    constructor(@Inject(HashService) private hasher: HashService, private eRef: ElementRef, private cd: ChangeDetectorRef) {
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes && (changes.disableFunction || changes.blockFunction)) {
+            this.constructCalendar();
+        }
+    }
+
+    constructor(private eRef: ElementRef,
+                private cd: ChangeDetectorRef,
+                public calendarI18nLabels: CalendarI18nLabels,
+                public calendarI18n: CalendarI18n,
+                public dateAdapter: DateFormatParser) {
     }
 
     registerOnChange(fn: any): void {
@@ -986,5 +1065,21 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.firstYearCalendarList = this.year;
         this.constructCalendar();
         this.constructCalendarYearsList();
+    }
+
+    private setupLocalization(): void {
+        this.monthsFullName = this.calendarI18n.getAllFullMonthNames();
+        this.monthsShortName = this.calendarI18n.getAllShortMonthNames();
+        this.monthName = this.monthsFullName[this.month];
+
+        this.i18nLocalSub = this.calendarI18n.i18nChange.subscribe(() => {
+            this.monthsFullName = this.calendarI18n.getAllFullMonthNames();
+            this.monthsShortName = this.calendarI18n.getAllShortMonthNames();
+            this.monthName = this.monthsFullName[this.month];
+            this.setWeekDaysOrder();
+            this.cd.detectChanges();
+        });
+
+        // Will also need to subscribe to labelsChange when we go to OnPush change detection.
     }
 }

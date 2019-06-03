@@ -7,18 +7,20 @@ import { Observable, Subject } from 'rxjs';
  */
 export class AlertRef {
     
-    private readonly _afterDismissed: Subject<undefined> = new Subject<undefined>();
+    private readonly _afterDismissed: Subject<any> = new Subject<any>();
 
     /** Observable that is triggered when the alert is dismissed. */
-    public afterDismissed: Observable<undefined> = this._afterDismissed.asObservable();
+    public afterDismissed: Observable<any> = this._afterDismissed.asObservable();
 
     /** Data passed from the service open method. */
     public data: any;
 
     /**
      * Dismisses the alert.
+     *
+     * @param reason Data passed back to the calling component through the AfterDismissed observable.
      */
-    dismiss(): void {
-        this._afterDismissed.next();
+    dismiss(reason?: any): void {
+        this._afterDismissed.next(reason);
     }
 }

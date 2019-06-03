@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShellbarComponent } from './shellbar.component';
-import { ProductMenuComponent } from './product-menu.component';
-import { ShellbarSubtitleComponent } from './shellbar-subtitle.component';
-import { CopilotComponent } from './copilot.component';
-import { ShellbarActionsComponent } from './shellbar-actions.component';
-import { ShellbarActionComponent } from './shellbar-action.component';
-import { ShellbarLogoComponent } from './shellbar-logo.component';
-import { ShellbarTitleComponent } from './shellbar-title.component';
+import { ProductMenuComponent } from './product-menu/product-menu.component';
+import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
+import { CopilotComponent } from './copilot/copilot.component';
+import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
+import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
+import { ShellbarLogoComponent } from './shellbar-logo/shellbar-logo.component';
+import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.component';
 
 import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';

@@ -7,7 +7,8 @@ import {
     Output,
     TemplateRef,
     ViewChild,
-    ViewContainerRef
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
 import focusTrap from 'focus-trap';
 
@@ -24,9 +25,10 @@ import focusTrap from 'focus-trap';
     `,
     styleUrls: ['./popover-container.scss'],
     host: {
-        class: 'fd-popover__popper',
+        class: 'fd-popover__popper fd-popover-container-custom',
         'tabindex': '-1'
-    }
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverContainer implements AfterViewInit, OnDestroy {
 

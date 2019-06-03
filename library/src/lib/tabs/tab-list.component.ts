@@ -1,10 +1,17 @@
 import {
     AfterContentInit,
     Component,
-    ContentChildren, ElementRef,
-    EventEmitter, Input, OnChanges, OnDestroy,
+    ContentChildren,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
     Output,
-    QueryList, SimpleChanges, ViewChildren
+    QueryList,
+    SimpleChanges,
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
 import { Subscription } from 'rxjs';
@@ -15,7 +22,11 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'fd-tab-list',
     templateUrl: './tab-list.component.html',
-    styleUrls: ['./tab-list.component.scss']
+    styleUrls: ['./tab-list.component.scss'],
+    host: {
+        class: 'fd-tabs-custom'
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
@@ -27,11 +38,11 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @ViewChildren('tabLink')
     tabLinks: QueryList<ElementRef>;
 
-    /** @Input Index of the selected tab panel. */
+    /** Index of the selected tab panel. */
     @Input()
     selectedIndex: number = 0;
 
-    /** @Output Event emitted when the selected panel changes. */
+    /** Event emitted when the selected panel changes. */
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 

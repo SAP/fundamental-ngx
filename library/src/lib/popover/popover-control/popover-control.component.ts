@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-popover-control',
-    templateUrl: './popover-control.component.html'
+    templateUrl: './popover-control.component.html',
+    styleUrls: ['./popover-control.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverControlComponent {}

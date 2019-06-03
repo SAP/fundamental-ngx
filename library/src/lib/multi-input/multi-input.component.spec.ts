@@ -6,6 +6,7 @@ import { TokenModule } from '../token/token.module';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
+import { PipeModule } from '../utils/pipes/pipe.module';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -14,7 +15,14 @@ describe('MultiInputComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [MultiInputComponent],
-            imports: [CommonModule, TokenModule, FormsModule, MenuModule, PopoverModule]
+            imports: [
+                CommonModule,
+                TokenModule,
+                FormsModule,
+                MenuModule,
+                PopoverModule,
+                PipeModule
+            ]
         })
             .compileComponents();
     }));

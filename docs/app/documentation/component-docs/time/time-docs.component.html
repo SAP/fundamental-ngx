@@ -1,0 +1,71 @@
+<h2>24-Hour Clock</h2>
+<description>This is the default clock setting.</description>
+<component-example [name]="'ex1'">
+  <p>
+    <fd-time-example></fd-time-example>
+  </p>
+</component-example>
+<code-example [code]="timeHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>12-Hour Clock</h2>
+<description>
+    You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>.
+    The passed time object will still contain a 24-hour clock.
+</description>
+<component-example [name]="'ex2'">
+  <p>
+    <fd-time-12-example></fd-time-12-example>
+  </p>
+</component-example>
+<code-example [code]="timeMeridianHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Clock Without Spinners</h2>
+<description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
+<component-example [name]="'ex3'">
+  <p>
+    <fd-time-no-spinners-example></fd-time-no-spinners-example>
+  </p>
+</component-example>
+<code-example [code]="timeNoSpinnersHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Clock Without Seconds</h2>
+<description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
+<component-example [name]="'ex4'">
+  <p>
+    <fd-time-no-seconds-example></fd-time-no-seconds-example>
+  </p>
+</component-example>
+<code-example [code]="timeNoSecondsHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Disabled State</h2>
+<description>
+    You can disable the entire component by setting <code>[disabled]="true"</code>.
+</description>
+<component-example [name]="'ex5'">
+  <p>
+    <fd-time-disabled-example></fd-time-disabled-example>
+  </p>
+</component-example>
+<code-example [code]="timeDisabledHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Internationalization</h2>
+<description>
+    The time component uses a custom service called TimeI18nLabels to give aria-labels to the buttons and inputs.
+    Inspect the HTML elements to see the Spanish aria-labels.
+</description>
+<component-example [name]="'ex6'">
+  <p>
+      <fd-time-i18n-example></fd-time-i18n-example>
+  </p>
+</component-example>
+<code-example [code]="timeI18nTs" [language]="'TypeScript'"></code-example>
