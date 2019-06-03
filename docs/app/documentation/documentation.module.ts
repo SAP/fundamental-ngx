@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { RouterModule } from '@angular/router';
@@ -306,6 +306,7 @@ import { TableCdkExampleComponent } from './component-docs/table/examples/table-
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DatetimePickerAllowNullExampleComponent } from './component-docs/datetime-picker/examples/datetime-allow-null-example/datetime-allow-null-example.component';
 import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
+import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -494,6 +495,7 @@ export function highlightJsFactory() {
         TimeNoSecondsExampleComponent,
         TimeNoSpinnersExampleComponent,
         TimeI18nExampleComponent,
+        TimeFormExampleComponent,
         TimePickerExampleComponent,
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,
@@ -573,6 +575,7 @@ export function highlightJsFactory() {
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         FundamentalNgxModule,
