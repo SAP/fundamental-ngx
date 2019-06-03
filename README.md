@@ -102,8 +102,9 @@ For an existing Angular application,
 ## Demo Application
 
 The documentation serves as a demo application in the `docs/` directory. Run `ng serve` from the root of the repository to serve the app locally. The demo application utilizes the Angular Fundamental source code in this repository, so changes you make to any component source will be reflected in the demo app.
+Running the demo application locally would be handy in case you want to check out older versions of Fundamental NGX.
 
-View the live demo [here](https://sap.github.io/fundamental-ngx/home).
+View the latest live demo [here](https://sap.github.io/fundamental-ngx/home).
 
 ## Tests
 
