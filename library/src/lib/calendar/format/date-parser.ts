@@ -42,7 +42,7 @@ export class DateFormatParserDefault extends DateFormatParser {
      * @param value String to convert to a date.
      */
     public parse(value: string): Date {
-        return new Date(value);
+        return new Date(value.split('.').reverse().join('.'));
     }
 
     /**
