@@ -614,7 +614,19 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     }
 
     setCurrentMonth(month: number) {
+        // get the current date of the month
+        const currentDate = this.date.getDate();
+        /*
+         set the date to the first for now, to prevent skipping a month
+         in the event that the currentDate is 31 and the next month has 30 days
+         */
+        this.date.setDate(1);
+        // set the month
         this.date.setMonth(month);
+        // get the number of days in this month
+        const daysInMonth = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
+        // restore the date to whichever number is lower, today's date or the number of days in this month
+        this.date.setDate(Math.min(currentDate, daysInMonth));
         this.month = this.date.getMonth();
         this.monthName = this.monthsFullName[this.date.getMonth()];
         this.year = this.date.getFullYear();
