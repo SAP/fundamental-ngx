@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { RouterModule } from '@angular/router';
@@ -116,6 +116,7 @@ import {
     FormSelectExampleComponent,
     FormStateExampleComponent
 } from './component-docs/form/examples/form-examples.component';
+import { FormGroupInputExampleComponent } from './component-docs/form/examples/form-group-input-example.component';
 import { IconExampleComponent } from './component-docs/icon/examples/icon-example.component';
 import {
     CircleIdentifierExampleComponent,
@@ -144,7 +145,10 @@ import {
 } from './component-docs/list/examples/list-examples.component';
 import { LoadingSpinnerExampleComponent } from './component-docs/loading-spinner-docs/examples/loading-spinner-example.component';
 import { LoadingSpinnerContainerExampleComponent } from './component-docs/loading-spinner-docs/examples/loading-spinner-container-example.component';
-import { MenuExampleComponent, MenuGroupExampleComponent } from './component-docs/menu/examples/menu-examples.component';
+import {
+    MenuExampleComponent,
+    MenuGroupExampleComponent
+} from './component-docs/menu/examples/menu-examples.component';
 import { ModalOpenTemplateExampleComponent } from './component-docs/modal/examples/template-as-content/modal-open-template-example.component';
 import { ModalContentComponent } from './component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from './component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
@@ -171,7 +175,10 @@ import {
     SideNavigationTitlesExampleComponent
 } from './component-docs/side-navigation/examples/side-navigation-examples.component';
 import { TableExampleComponent } from './component-docs/table/examples/table-example.component';
-import { TabsExampleComponent, TabSelectionExampleComponent } from './component-docs/tabs/examples/tabs-examples-component';
+import {
+    TabsExampleComponent,
+    TabSelectionExampleComponent
+} from './component-docs/tabs/examples/tabs-examples-component';
 import {
     TileActionsExampleComponent,
     TileDisabledExampleComponent,
@@ -194,7 +201,8 @@ import {
     TimePicker12ExampleComponent,
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
-    TimePickerCompactExampleComponent, TimePickerAllowNullExampleComponent
+    TimePickerCompactExampleComponent,
+    TimePickerAllowNullExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
@@ -411,6 +419,7 @@ export function highlightJsFactory() {
         FormRadioExampleComponent,
         FormSelectExampleComponent,
         FormStateExampleComponent,
+        FormGroupInputExampleComponent,
         IconExampleComponent,
         CircleIdentifierExampleComponent,
         ColorsIdentifierExampleComponent,
@@ -573,6 +582,7 @@ export function highlightJsFactory() {
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
         FundamentalNgxModule,
@@ -585,5 +595,4 @@ export function highlightJsFactory() {
         ApiDocsService
     ]
 })
-export class DocumentationModule {
-}
+export class DocumentationModule { }
