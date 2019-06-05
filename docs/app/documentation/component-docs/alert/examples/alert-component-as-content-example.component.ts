@@ -14,6 +14,7 @@ export class AlertComponentAsContentExampleComponent {
     openFromComponent() {
         this.alertService.open(AlertContentComponent, {
             type: 'warning',
+            minWidth: '400px',
             mousePersist: true,
             duration: 7500,
             data: {

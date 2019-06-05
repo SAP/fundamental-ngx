@@ -49,6 +49,11 @@ export class AlertService {
         // Get default values from alert model
         alertConfig = Object.assign(new AlertConfig(), alertConfig);
 
+        // Ensure default minimum width
+        if (alertConfig && !alertConfig.minWidth) {
+            alertConfig.minWidth = '300px';
+        }
+
         // Config setup
         const configMap = new WeakMap();
         const alertRef = new AlertRef();
