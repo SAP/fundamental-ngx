@@ -40,42 +40,53 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     isOpen: boolean = false;
     dateFromDatePicker: Subject<string> = new Subject();
 
+    /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     type: CalendarType = 'single';
 
+    /** Date picker input placeholder string */
     @Input()
     placeholder: string = 'mm/dd/yyyy';
 
+    /** Whether this is the compact input date picker */
     @Input()
     compact: boolean = false;
 
+    /** The currently selected CalendarDay model */
     @Input()
     selectedDay: CalendarDay = {
         date: null
     };
 
+    /** Fired when the selectedDay model changes */
     @Output()
     selectedDayChange = new EventEmitter();
 
+    /** The currently selected first CalendarDay in a range type calendar */
     @Input()
     selectedRangeFirst: CalendarDay = {
         date: null
     };
 
+    /** Fired when the selectedRangeFirst model changes */
     @Output()
     selectedRangeFirstChange = new EventEmitter();
 
+    /** The currently selected last CalendarDay in a range type calendar */
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
 
+    /** Fired when the selectedRangeLast model changes */
     @Output()
     selectedRangeLastChange = new EventEmitter();
 
+    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
     @Input()
     startingDayOfWeek: number = 0;
 
+    /** Whether to validate the date picker input. */
     @Input() validate: boolean = true;
 
     /** Aria label for the datepicker input. */
@@ -90,50 +101,62 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     allowNull: boolean = true;
 
+    /** @param d Function used to disable certain dates in the calendar. */
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
+    /** @param d Function used to block certain dates in the calendar. */
     @Input()
     blockFunction = function(d): boolean {
         return false;
     };
+    /** @param d Function used to disable certain dates in the calendar for the range start selection. */
     @Input()
     disableRangeStartFunction = function(d): boolean {
         return false;
     };
+    /** @param d Function used to disable certain dates in the calendar for the range end selection. */
     @Input()
     disableRangeEndFunction = function(d): boolean {
         return false;
     };
+    /** @param d Function used to block certain dates in the calendar for the range start selection. */
     @Input()
     blockRangeStartFunction = function(d): boolean {
         return false;
     };
+    /** @param d Function used to block certain dates in the calendar for the range end selection. */
     @Input()
     blockRangeEndFunction = function(d): boolean {
         return false;
     };
 
+    /** @hidden */
     onChange: any = (selected: any) => {};
+    /** @hidden */
     onTouched: any = () => {};
 
+    /** Opens the calendar */
     openCalendar(e) {
         this.isOpen = true;
         this.getInputValue(e);
     }
 
+    /** Toggles the calendar open or closed */
     toggleCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
     }
 
+    /** Closes the calendar if it is open */
     closeCalendar() {
         if (this.isOpen) {
             this.isOpen = false;
         }
     }
 
+    /** @hidden */
     updateDatePickerInputHandler(d) {
         if (this.type === 'single') {
             if (d.selectedDay.date) {
@@ -161,19 +184,23 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         }
     }
 
+    /** @hidden */
     isInvalidDateInputHandler(e) {
         this.isInvalidDateInput = e;
     }
 
+    /** @hidden */
     getInputValue(e) {
         this.dateFromDatePicker.next(e);
     }
 
+    /** @hidden */
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
         this.closeCalendar();
     }
 
+    /** @hidden */
     @HostListener('document:click', ['$event'])
     public onGlobalClick(event: MouseEvent) {
         if (!this.eRef.nativeElement.contains(event.target)) {
@@ -181,6 +208,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         }
     }
 
+    /** @hidden */
     ngOnInit() {
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.subscribe(date => {
@@ -206,6 +234,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         }
     }
 
+    /** @hidden */
     ngOnDestroy() {
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.unsubscribe();
@@ -214,18 +243,22 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     constructor(private eRef: ElementRef, public dateAdapter: DateFormatParser) {}
 
+    /** @hidden */
     registerOnChange(fn: (selected: any) => {void}): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         // void for now
     }
 
+    /** @hidden */
     writeValue(selected: {date: Date, rangeEnd?: Date}): void {
         if (!selected) {
             return;

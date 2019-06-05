@@ -195,44 +195,32 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     /** @hidden Subscription to the i18n service */
     private i18nLocalSub: Subscription;
 
-    /**
-     * @param d Function used to disable certain dates in the calendar.
-     */
+    /** @param d Function used to disable certain dates in the calendar. */
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
-    /**
-     * @param d Function used to disable certain dates in the calendar for the range start selection.
-     */
+    /** @param d Function used to disable certain dates in the calendar for the range start selection. */
     @Input()
     disableRangeStartFunction = function(d): boolean {
         return false;
     };
-    /**
-     * @param d Function used to disable certain dates in the calendar for the range end selection.
-     */
+    /** @param d Function used to disable certain dates in the calendar for the range end selection. */
     @Input()
     disableRangeEndFunction = function(d): boolean {
         return false;
     };
-    /**
-     * @param d Function used to block certain dates in the calendar for the range start selection.
-     */
+    /** @param d Function used to block certain dates in the calendar for the range start selection. */
     @Input()
     blockRangeStartFunction = function(d): boolean {
         return false;
     };
-    /**
-     * @param d Function used to block certain dates in the calendar for the range end selection.
-     */
+    /** @param d Function used to block certain dates in the calendar for the range end selection. */
     @Input()
     blockRangeEndFunction = function(d): boolean {
         return false;
     };
-    /**
-     * @param d Function used to block certain dates in the calendar.
-     */
+    /** @param d Function used to block certain dates in the calendar. */
     @Input()
     blockFunction = function(d): boolean {
         return false;
