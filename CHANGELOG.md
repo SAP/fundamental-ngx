@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.4"></a>
+## [0.5.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.3...v0.5.3-rc.4) (2019-06-05)
+
+
+### Bug Fixes
+
+* search shellbar position ([#853](https://github.com/SAP/fundamental-ngx/issues/853)) ([e5b9fd1](https://github.com/SAP/fundamental-ngx/commit/e5b9fd1))
+
+
+
 <a name="0.5.3-rc.3"></a>
 ## [0.5.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.2...v0.5.3-rc.3) (2019-06-05)
 
