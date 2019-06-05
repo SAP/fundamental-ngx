@@ -35,9 +35,13 @@ import { DateFormatParser } from '../calendar/format/date-parser';
     encapsulation: ViewEncapsulation.None
 })
 export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
+    /** @hidden The value of the input */
     inputFieldDate = null;
+    /** @hidden Whether the date input is invalid */
     isInvalidDateInput: boolean = false;
+    /** @hidden Whether the date picker is open */
     isOpen: boolean = false;
+    /** @hidden Subject the calendar subscribes to when the date value from the datePicker component changes. For internal use. */
     dateFromDatePicker: Subject<string> = new Subject();
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
