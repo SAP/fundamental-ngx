@@ -1,0 +1,10 @@
+<form [formGroup]="customForm">
+    <fd-time formControlName="time"></fd-time>
+</form>
+<br />
+
+Selected Time: <span *ngIf="customForm.controls.time.value">
+    {{ customForm.controls.time.value.hour }}h
+    {{ customForm.controls.time.value.minute }}m
+    {{ customForm.controls.time.value.second }}s
+</span>

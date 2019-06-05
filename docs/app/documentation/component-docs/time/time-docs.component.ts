@@ -8,6 +8,8 @@ import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.c
 import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
+import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html'
+import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts'
 
 @Component({
     selector: 'app-time',
@@ -54,6 +56,9 @@ export class TimeDocsComponent {
     timeNoSecondsHtml = timeNoSecondsSrc;
 
     timeI18nTs = timeI18nSrc;
+
+    timeFormHtml = timeFormHtmlSrc;
+    timeFormTs = timeFormTsSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

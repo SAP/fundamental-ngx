@@ -11,8 +11,8 @@
 
 <h2>12-Hour Clock</h2>
 <description>
-    You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>.
-    The passed time object will still contain a 24-hour clock.
+  You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>.
+  The passed time object will still contain a 24-hour clock.
 </description>
 <component-example [name]="'ex2'">
   <p>
@@ -47,7 +47,7 @@
 
 <h2>Disabled State</h2>
 <description>
-    You can disable the entire component by setting <code>[disabled]="true"</code>.
+  You can disable the entire component by setting <code>[disabled]="true"</code>.
 </description>
 <component-example [name]="'ex5'">
   <p>
@@ -60,12 +60,27 @@
 
 <h2>Internationalization</h2>
 <description>
-    The time component uses a custom service called TimeI18nLabels to give aria-labels to the buttons and inputs.
-    Inspect the HTML elements to see the Spanish aria-labels.
+  The time component uses a custom service called TimeI18nLabels to give aria-labels to the buttons and inputs.
+  Inspect the HTML elements to see the Spanish aria-labels.
 </description>
 <component-example [name]="'ex6'">
   <p>
-      <fd-time-i18n-example></fd-time-i18n-example>
+    <fd-time-i18n-example></fd-time-i18n-example>
   </p>
 </component-example>
 <code-example [code]="timeI18nTs" [language]="'TypeScript'"></code-example>
+
+<separator></separator>
+
+<h2>Time in Form</h2>
+<description>
+  The time component may also be used within a form. The values within the form may then be accessed through the
+  usual methods used for accessing data within Angular reactive forms.
+</description>
+<component-example [name]="'ex7'">
+  <p>
+    <fd-time-form-example></fd-time-form-example>
+  </p>
+</component-example>
+<code-example [code]="timeFormHtml" [language]="'HTML'"></code-example>
+<code-example [code]="timeFormTs" [language]="'TypeScript'"></code-example>
