@@ -26,19 +26,17 @@ export class ShellbarCollapsibleExampleComponent {
     ];
 
     actions = [
-        {glyph: 'bell', callback: this.actionNotificationCallback, label: 'Notifications',
-            notificationCount: 12, notificationLabel: 'Unread Notifications'},
         {glyph: 'pool', callback: this.actionPoolCallback, label: 'Pool',
-            notificationCount: 3, notificationLabel: 'Pool Count'}
+            notificationCount: 3, notificationLabel: 'Pool Count'},
+        {glyph: 'bell', callback: this.actionNotificationCallback, label: 'Notifications',
+            notificationCount: 12, notificationLabel: 'Unread Notifications'}
     ];
 
-    searchTerm = '';
-
     searchTerms = [
-        {text: 'Apple', callback: () => {alert('Apple Clicked')}},
-        {text: 'Banana', callback: () => {alert('Banana Clicked')}},
-        {text: 'Kiwi', callback: () => {alert('Kiwi Clicked')}},
-        {text: 'Strawberry', callback: () => {alert('Strawberry Clicked')}}
+        'Apple',
+        'Banana',
+        'Kiwi',
+        'Strawberry'
     ];
 
     productSwitcher = [
@@ -67,10 +65,6 @@ export class ShellbarCollapsibleExampleComponent {
         {title: 'Cloud Portal', image: './assets/12.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Cloud Portal')}}
     ];
-
-    exampleSearchFunction = () => {
-        alert('Search Function Called with search term: ' + this.searchTerm);
-    }
 
     settingsCallback($event) {
         console.log($event);
