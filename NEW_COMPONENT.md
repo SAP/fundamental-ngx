@@ -102,7 +102,7 @@ Note that we're using raw-loader to import the poster example code as raw text. 
 
 In `poster-docs.component.html`, we'll provide a brief explanation of the poster component, and we'll add the poster component itself, along with the code example.
 
-```
+```HTML
 <h2>Poster</h2>
 <description>
     The Poster component displays a photograph taken from an image placeholder site.
@@ -148,7 +148,7 @@ You will need to import `PosterComponent` and `PosterDocsComponent` in this file
 
 Next, open `documentation.component.ts` and add the following to the `components` array:
 
-```javascript
+```TypeScript
 { url: 'poster', name: 'Poster' }
 ```
 
@@ -159,7 +159,9 @@ You should see 'Poster' appear in the side navigation under 'Components'.  Click
 
 In the library source, open `poster.component.html`, remove the default code and add an image with a placeholder.
 
-```<img src="https://placeimg.com/400/600/nature'"/>```
+```HTML
+<img src="https://placeimg.com/400/600/nature'"/>
+```
 
 Now, when you navigate to the Poster docs through the side navigation, you'll see our new Poster component!
 
