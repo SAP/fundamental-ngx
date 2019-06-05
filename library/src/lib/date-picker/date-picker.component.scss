@@ -5,7 +5,8 @@
         display: block;
     }
 
-    // Added to fix popper migration style bugs. Should be fixed in fd.
+    // Added to fix popper migration style bugs. Temporary fix.
+    // PR is tracked here https://github.com/SAP/fundamental-styles/pull/9.
     fd-calendar {
         margin: 0 12px;
     }
