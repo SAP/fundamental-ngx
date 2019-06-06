@@ -8,10 +8,17 @@ import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
 import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.ts';
+import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-example.component.html';
+import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
 
 @Component({
     selector: 'app-table',
-    templateUrl: './table-docs.component.html'
+    templateUrl: './table-docs.component.html',
+    styles: [`
+        ::ng-deep app-table .fd-tile {
+            display: block;
+        }
+    `]
 })
 export class TableDocsComponent {
 
@@ -47,6 +54,10 @@ export class TableDocsComponent {
     tableCdkHtml = tableCdkHtml;
 
     tableCdkTs = tableCdkTs;
+
+    tableResponsiveHtml = tableResponsiveHtml;
+
+    tableResponsiveTs = tableResponsiveTs;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('table');
