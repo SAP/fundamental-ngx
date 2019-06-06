@@ -1,4 +1,4 @@
-:host {
+.fd-popover-container-custom {
     z-index: 1000;
     transition: none;
     background-color: white;
@@ -26,7 +26,8 @@
         .fd-popover-default-arrow {
             width: 13px;
         }
-        ::before {
+
+        .fd-popover-default-arrow::before {
             height: 0;
             width: 0;
             border-style: solid;
@@ -40,7 +41,7 @@
             z-index: 4;
         }
 
-        ::after {
+        .fd-popover-default-arrow::after {
             height: 0;
             width: 0;
             border-style: solid;
@@ -62,7 +63,8 @@
             left: 100%;
             height: 13px;
         }
-        ::before {
+
+        .fd-popover-default-arrow::before {
             height: 0;
             width: 0;
             border-style: solid;
@@ -76,7 +78,7 @@
             z-index: 4;
         }
 
-        ::after {
+        .fd-popover-default-arrow::after {
             height: 0;
             width: 0;
             border-style: solid;
@@ -98,7 +100,8 @@
             top: 100%;
             width: 13px;
         }
-        ::before {
+
+        .fd-popover-default-arrow::before {
             height: 0;
             width: 0;
             border-style: solid;
@@ -113,7 +116,7 @@
             z-index: 4;
         }
 
-        ::after {
+        .fd-popover-default-arrow::after {
             height: 0;
             width: 0;
             border-style: solid;
@@ -135,7 +138,8 @@
         .fd-popover-default-arrow {
             height: 13px;
         }
-        ::before {
+
+        .fd-popover-default-arrow::before {
             height: 0;
             width: 0;
             border-style: solid;
@@ -150,7 +154,7 @@
             z-index: 4;
         }
 
-        ::after {
+        .fd-popover-default-arrow::after {
             height: 0;
             width: 0;
             border-style: solid;

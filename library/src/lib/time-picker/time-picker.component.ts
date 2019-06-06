@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -7,7 +7,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-timepicker-custom'
     },
     providers: [
         {
@@ -16,7 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    styleUrls: ['./time-picker.component.scss']
+    styleUrls: ['./time-picker.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
@@ -55,6 +57,21 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     /** @Input When set to false, hides the input for seconds. */
     @Input()
     displaySeconds: boolean = true;
+
+    /** Whether to perform visual validation on the picker input. */
+    @Input()
+    validate: boolean = true;
+
+    /** Aria label for the time picker input. */
+    @Input()
+    timePickerInputLabel: string = 'Time picker input';
+
+    /** Whether a null input is considered valid. */
+    @Input()
+    allowNull: boolean = true;
+
+    /** @hidden Whether the input time is valid. Internal use. */
+    isInvalidTimeInput: boolean = false;
 
     /** @hidden */
     @ViewChild(TimeComponent)
@@ -153,15 +170,17 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
+                this.isInvalidTimeInput = false;
+                this.onChange(this.time);
+            } else if (timeFromInput === '' && this.allowNull) {
+                this.isInvalidTimeInput = false;
+                this.time.second = null;
+                this.time.minute = null;
+                this.time.hour = null;
+                this.child.setDisplayedHour();
                 this.onChange(this.time);
             } else {
-                this.time.hour = null;
-                this.time.minute = null;
-                this.time.second = null;
-                this.child.displayedHour = null;
-                this.child.period = 'am';
-                this.child.oldPeriod = 'am';
-                this.onChange(this.time);
+                this.isInvalidTimeInput = true;
             }
         } else if (this.meridian) {
             if (this.displaySeconds) {
@@ -188,15 +207,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
                 if (this.displaySeconds) {
                     this.time.second = parseInt(splitString[2], 10);
                 }
+                this.isInvalidTimeInput = false;
                 this.onChange(this.time);
             } else {
-                this.time.hour = null;
-                this.time.minute = null;
-                this.time.second = null;
-                this.child.displayedHour = null;
-                this.child.period = 'am';
-                this.child.oldPeriod = 'am';
-                this.onChange(this.time);
+                this.isInvalidTimeInput = true;
             }
         }
     }

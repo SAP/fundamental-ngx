@@ -1,25 +1,29 @@
 import {
     Component,
-    Input,
-    OnInit,
-    HostListener,
     ElementRef,
+    EventEmitter,
     forwardRef,
     HostBinding,
+    HostListener,
+    Input,
+    OnDestroy,
+    OnInit,
     Output,
-    EventEmitter,
-    OnDestroy
+    ViewEncapsulation
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { DateFormatParser } from '../calendar/format/date-parser';
 
 @Component({
     selector: 'fd-date-picker',
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[class.fd-date-picker]': 'true',
+        '[class.fd-date-picker-custom]': 'true'
     },
     providers: [
         {
@@ -27,15 +31,14 @@ import { Subject } from 'rxjs';
             useExisting: forwardRef(() => DatePickerComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
     inputFieldDate = null;
     isInvalidDateInput: boolean = false;
     isOpen: boolean = false;
     dateFromDatePicker: Subject<string> = new Subject();
-
-    @HostBinding('class.fd-date-picker') true;
 
     @Input()
     type: CalendarType = 'single';
@@ -71,6 +74,23 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     selectedRangeLastChange = new EventEmitter();
 
     @Input()
+    startingDayOfWeek: number = 0;
+
+    @Input() validate: boolean = true;
+
+    /** Aria label for the datepicker input. */
+    @Input()
+    dateInputLabel: string = 'Date input';
+
+    /** Aria label for the button to show/hide the calendar. */
+    @Input()
+    displayCalendarToggleLabel: string = 'Display calendar toggle';
+
+    /** Whether a null input is considered valid. */
+    @Input()
+    allowNull: boolean = true;
+
+    @Input()
     disableFunction = function(d): boolean {
         return false;
     };
@@ -78,51 +98,65 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     blockFunction = function(d): boolean {
         return false;
     };
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
+        return false;
+    };
 
     onChange: any = (selected: any) => {};
     onTouched: any = () => {};
 
     openCalendar(e) {
+        this.isOpen = true;
+        this.getInputValue(e);
+    }
+
+    toggleCalendar(e) {
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
-        if (this.isInvalidDateInput) {
-            this.inputFieldDate = null;
-        }
     }
 
     closeCalendar() {
         if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
             this.isOpen = false;
-        }
-    }
-
-    onBlurHandler() {
-        if (this.isOpen) {
-            if (this.isInvalidDateInput) {
-                this.inputFieldDate = null;
-            }
         }
     }
 
     updateDatePickerInputHandler(d) {
         if (this.type === 'single') {
             if (d.selectedDay.date) {
-                this.inputFieldDate = d.selectedDay.date.toLocaleDateString();
-                this.selectedDay = d.selectedDay;
-                this.selectedDayChange.emit(this.selectedDay);
-                this.onChange({date: this.selectedDay.date});
+                const newInputDate = this.dateAdapter.format(d.selectedDay.date);
+                if (this.inputFieldDate !== newInputDate) {
+                    this.inputFieldDate = newInputDate;
+                    this.selectedDay = d.selectedDay;
+                    this.selectedDayChange.emit(this.selectedDay);
+                    this.onChange({date: this.selectedDay.date});
+                }
             }
         } else {
             if (d.selectedFirstDay.date) {
-                this.selectedRangeFirst = d.selectedFirstDay;
-                this.selectedRangeLast = d.selectedLastDay;
-                this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
-                this.selectedRangeLastChange.emit(this.selectedRangeLast);
-                this.inputFieldDate = d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString();
-                this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                const newInputDates = this.dateAdapter.format(d.selectedFirstDay.date) + this.dateAdapter.rangeDelimiter
+                    + this.dateAdapter.format(d.selectedLastDay.date);
+                if (this.inputFieldDate !== newInputDates) {
+                    this.inputFieldDate = newInputDates;
+                    this.selectedRangeFirst = d.selectedFirstDay;
+                    this.selectedRangeLast = d.selectedLastDay;
+                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
+                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
+                    this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
+                }
             }
         }
     }
@@ -132,9 +166,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     }
 
     getInputValue(e) {
-        if (e !== this.inputFieldDate) {
-            this.dateFromDatePicker.next(e);
-        }
+        this.dateFromDatePicker.next(e);
     }
 
     @HostListener('document:keydown.escape', [])
@@ -142,10 +174,9 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         this.closeCalendar();
     }
 
-    @HostListener('document:click', ['$event.path'])
-    public onGlobalClick(targetElementPath: Array<any>) {
-        const elementRefInPath = targetElementPath.find(e => e === this.eRef.nativeElement);
-        if (!elementRefInPath) {
+    @HostListener('document:click', ['$event'])
+    public onGlobalClick(event: MouseEvent) {
+        if (!this.eRef.nativeElement.contains(event.target)) {
             this.closeCalendar();
         }
     }
@@ -155,7 +186,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
             this.dateFromDatePicker.subscribe(date => {
                 if (date && typeof date === 'object') {
                     this.updateDatePickerInputHandler(date);
-                } else if (date === '') {
+                } else if (date === '' && this.allowNull) {
+                    this.isInvalidDateInput = false;
                     if (this.type === 'single') {
                         this.selectedDay.date = null;
                         this.selectedDay.selected = null;
@@ -167,6 +199,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
                         this.selectedRangeLast.selected = null;
                         this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
                     }
+                } else {
+                    this.isInvalidDateInput = true;
                 }
             })
         }
@@ -178,7 +212,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         }
     }
 
-    constructor(private eRef: ElementRef) {}
+    constructor(private eRef: ElementRef, public dateAdapter: DateFormatParser) {}
 
     registerOnChange(fn: (selected: any) => {void}): void {
         this.onChange = fn;
@@ -199,7 +233,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         if (this.type.toLocaleLowerCase() === 'single') {
             this.selectedDay.date = selected.date;
             if (selected.date !== null) {
-                this.inputFieldDate = selected.date.toLocaleDateString();
+                this.inputFieldDate = this.dateAdapter.format(selected.date);
             } else {
                 this.inputFieldDate = '';
             }
@@ -207,7 +241,8 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
             this.selectedRangeFirst.date = selected.date;
             this.selectedRangeLast.date = selected.rangeEnd;
             if (selected.date !== null) {
-                this.inputFieldDate = selected.date.toLocaleDateString() + ' - ' + selected.rangeEnd.toLocaleDateString();
+                this.inputFieldDate = this.dateAdapter.format(selected.date) +
+                    this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.rangeEnd);
             } else {
                 this.inputFieldDate = '';
             }

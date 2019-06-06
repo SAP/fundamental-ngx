@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The parent action bar component.
@@ -9,11 +9,11 @@ import { Component } from '@angular/core';
  * <fd-action-bar-back>
  * <fd-action-bar-description>
  * <fd-action-bar-header>
- * <fd-action-bar-title>
  * ```
  */
 @Component({
     selector: 'fd-action-bar',
-    templateUrl: './action-bar.component.html'
+    templateUrl: './action-bar.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class ActionBarComponent {}

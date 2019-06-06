@@ -1,0 +1,16 @@
+<form [formGroup]="customForm">
+    <div fd-form-set>
+        <div fd-form-item>
+            <label fd-form-label for="input-1">Default Input:</label>
+            <input
+                formControlName="inputControl"
+                fd-form-control
+                type="text"
+                id="input-1"
+                placeholder="Field placeholder text"
+            />
+        </div>
+    </div>
+</form>
+
+Input Value: {{ customForm.controls.inputControl.value }}

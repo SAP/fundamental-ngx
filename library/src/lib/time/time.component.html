@@ -5,7 +5,7 @@
                 (click)="increaseHour()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
-                aria-label="Increase hours"></button>
+                [attr.aria-label]="timeI18nLabels?.increaseHoursLabel"></button>
     </div>
     <div class="fd-time__input">
         <input *ngIf="meridian"
@@ -16,7 +16,7 @@
                class="fd-form__control"
                type="number"
                placeholder="hh"
-               aria-label="Hours"/>
+               [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
         <input *ngIf="!meridian"
                (blur)="inputBlur('hour')"
                [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.hour > 23 || time.hour < 0) && validate)}"
@@ -25,7 +25,7 @@
                class="fd-form__control"
                type="number"
                placeholder="hh"
-               aria-label="Hours"/>
+               [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
     </div>
     <div class="fd-time__control">
         <button *ngIf="spinners"
@@ -33,7 +33,7 @@
                 (click)="decreaseHour()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
-                aria-label="Decrease hours"></button>
+                [attr.aria-label]="timeI18nLabels?.decreaseHoursLabel"></button>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
                 (click)="increaseMinute()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
-                aria-label="Increase minutes"></button>
+                [attr.aria-label]="timeI18nLabels?.increaseMinutesLabel"></button>
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="time.minute"
@@ -54,7 +54,7 @@
                class="fd-form__control"
                type="number"
                placeholder="mm"
-               aria-label="Minutes"/>
+               [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
     </div>
     <div class="fd-time__control">
         <button *ngIf="spinners"
@@ -62,7 +62,7 @@
                 (click)="decreaseMinute()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
-                aria-label="Decrease minutes"></button>
+                [attr.aria-label]="timeI18nLabels?.decreaseMinutesLabel"></button>
     </div>
 </div>
 <div *ngIf="displaySeconds"
@@ -73,7 +73,7 @@
                 (click)="increaseSecond()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
-                aria-label="Increase seconds"></button>
+                [attr.aria-label]="timeI18nLabels?.increaseSecondsLabel"></button>
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="time.second"
@@ -83,7 +83,8 @@
                class="fd-form__control"
                type="number"
                placeholder="ss"
-               (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"aria-label="Seconds"/>
+               (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"
+               [attr.aria-label]="timeI18nLabels?.secondsLabel"/>
     </div>
     <div class="fd-time__control">
         <button *ngIf="spinners"
@@ -91,7 +92,7 @@
                 (click)="decreaseSecond()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
-                aria-label="Decrease seconds"
+                [attr.aria-label]="timeI18nLabels?.decreaseSecondsLabel"
                 (keydown)="!meridian ? lastButtonKeydown($event) : ''"></button>
     </div>
 </div>
@@ -103,7 +104,7 @@
                 (click)="togglePeriod()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
-                aria-label="Increase period"></button>
+                [attr.aria-label]="timeI18nLabels?.increasePeriodLabel"></button>
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="period"
@@ -113,7 +114,7 @@
                (ngModelChange)="periodModelChange()"
                type="text"
                placeholder="am"
-               aria-label="Period"/>
+               [attr.aria-label]="timeI18nLabels?.periodLabel"/>
     </div>
     <div class="fd-time__control">
         <button *ngIf="spinners"
@@ -121,7 +122,7 @@
                 (click)="togglePeriod()"
                 type="button"
                 class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
-                aria-label="Decrease period"
+                [attr.aria-label]="timeI18nLabels?.decreasePeriodLabel"
                 (keydown)="lastButtonKeydown($event)"></button>
     </div>
 </div>

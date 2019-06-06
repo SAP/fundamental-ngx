@@ -123,12 +123,7 @@ describe('TimePickerComponent', () => {
         component.meridian = false;
         component.displaySeconds = false;
         component.timeInputChanged('asdf');
-        expect(component.time.hour).toBe(null);
-        expect(component.time.minute).toBe(null);
-        expect(component.time.second).toBe(null);
-        expect(component.child.displayedHour).toBe(null);
-        expect(component.child.period).toBe('am');
-        expect(component.child.oldPeriod).toBe('am');
+        expect(component.isInvalidTimeInput).toBeTruthy();
     });
 
     it('should handle timeInputChanged for meridian time picker with seconds', () => {
@@ -181,12 +176,7 @@ describe('TimePickerComponent', () => {
         component.meridian = false;
         component.displaySeconds = false;
         component.timeInputChanged('asdf');
-        expect(component.time.hour).toBe(null);
-        expect(component.time.minute).toBe(null);
-        expect(component.time.second).toBe(null);
-        expect(component.child.displayedHour).toBe(null);
-        expect(component.child.period).toBe('am');
-        expect(component.child.oldPeriod).toBe('am');
+        expect(component.isInvalidTimeInput).toBeTruthy();
     });
 
     it('should handle input group click', () => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-popover-body',
-    templateUrl: './popover-body.component.html'
+    templateUrl: './popover-body.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverBodyComponent {}

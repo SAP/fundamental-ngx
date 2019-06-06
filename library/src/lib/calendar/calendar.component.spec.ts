@@ -1,23 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
-import { HashService } from '../utils/hash.service';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent;
     let fixture: ComponentFixture<CalendarComponent>;
-    let hashServiceSpy: jasmine.SpyObj<HashService>;
 
     beforeEach(async(() => {
-        const hashSpy = jasmine.createSpyObj('HashService', {
-            hash: '1'
-        });
         TestBed.configureTestingModule({
-            declarations: [CalendarComponent, CalendarComponent],
-            providers: [{ provide: HashService, useValue: hashSpy }]
+            declarations: [CalendarComponent, CalendarComponent]
         }).compileComponents();
 
-        hashServiceSpy = TestBed.get(HashService);
     }));
 
     beforeEach(() => {
@@ -290,18 +283,9 @@ describe('CalendarComponent', () => {
     });
 
     it('should validate date from date picker', () => {
-        let mockDate = [1, 1, 2019];
-        let retVal = component.validateDateFromDatePicker(mockDate);
+        const mockDate = new Date(2019, 4, 12);
+        const retVal = component.validateDateFromDatePicker(mockDate);
         expect(retVal).toBeFalsy();
-        mockDate = [0, 1, 2019];
-        retVal = component.validateDateFromDatePicker(mockDate);
-        expect(retVal).toBeTruthy();
-        mockDate = [undefined, 1, 2019];
-        retVal = component.validateDateFromDatePicker(mockDate);
-        expect(retVal).toBeTruthy();
-        mockDate = [1, 0, 2019];
-        retVal = component.validateDateFromDatePicker(mockDate);
-        expect(retVal).toBeTruthy();
     });
 
     it('should resetSelection', () => {
@@ -335,7 +319,7 @@ describe('CalendarComponent', () => {
     });
 
     it('should handle keydown year handler', () => {
-        component.calendarId = '';
+        component.id = '';
         spyOn(component, 'selectYear');
         const focusSpy = spyOn(component, 'focusElement');
         component.onKeydownDayHandler({code: 'Tab', preventDefault: () => {}}, {});
@@ -379,7 +363,7 @@ describe('CalendarComponent', () => {
     });
 
     it('should handle month keydown events', () => {
-        component.calendarId = '';
+        component.id = '';
         spyOn(component, 'selectMonth');
         const focusSpy = spyOn(component, 'focusElement');
         component.onKeydownMonthHandler({code: 'Tab', preventDefault: () => {}}, {});
@@ -415,7 +399,7 @@ describe('CalendarComponent', () => {
     });
 
     it('should handle keydown day handler', () => {
-        component.calendarId = '';
+        component.id = '';
 
         const focusSpy = spyOn(component, 'focusElement');
         component.onKeydownDayHandler({code: 'Tab', preventDefault: () => {}}, {});
@@ -514,8 +498,8 @@ describe('CalendarComponent', () => {
         spyOn(component, 'validateDateFromDatePicker').and.returnValue(true);
         spyOn(component.isInvalidDateInput, 'emit');
         spyOn(component, 'resetSelection');
-        component.updateFromDatePicker('0');
-        expect(component.validateDateFromDatePicker).toHaveBeenCalledWith(['0']);
+        component.updateFromDatePicker(new Date());
+        expect(component.validateDateFromDatePicker).toHaveBeenCalled();
         expect(component.invalidDate).toEqual(true);
         expect(component.isInvalidDateInput.emit).toHaveBeenCalledWith(component.invalidDate);
         expect(component.resetSelection).toHaveBeenCalled();
@@ -528,7 +512,7 @@ describe('CalendarComponent', () => {
         spyOn(component, 'constructCalendar');
         spyOn(component, 'constructCalendarYearsList');
         spyOn(component, 'updateDatePickerInputEmitter');
-        component.updateFromDatePicker('1/1/2019');
+        component.updateFromDatePicker(new Date(2019, 0, 1));
         expect(component.selectedDay.date).toEqual(new Date(2019, 0, 1));
         expect(component.date).toEqual(new Date(2019, 0, 1));
         expect(component.year).toEqual(2019);
@@ -546,7 +530,7 @@ describe('CalendarComponent', () => {
         spyOn(component.isInvalidDateInput, 'emit');
         spyOn(component, 'resetSelection');
         component.updateFromDatePicker('0 - 1');
-        expect(component.validateDateFromDatePicker).toHaveBeenCalledWith(['0']);
+        expect(component.validateDateFromDatePicker).toHaveBeenCalled();
         expect(component.invalidDate).toEqual(true);
         expect(component.isInvalidDateInput.emit).toHaveBeenCalledWith(component.invalidDate);
         expect(component.resetSelection).toHaveBeenCalled();
@@ -581,11 +565,22 @@ describe('CalendarComponent', () => {
         spyOn(component, 'constructCalendarYearsList');
         component.ngOnInit();
         expect(component.date).toBeTruthy();
-        expect(component.calendarId).toBeTruthy();
+        expect(component.id).toBeTruthy();
         expect(component.constructCalendar).toHaveBeenCalled();
         expect(component.selectMonth).toHaveBeenCalled();
         expect(component.selectYear).toHaveBeenCalled();
         expect(component.init).toBeTruthy();
+    });
+
+    it('should properly rearrange days when different startingDayOfWeek is used', () => {
+        component.setWeekDaysOrder();
+        expect(component.weekDays).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+        component.startingDayOfWeek = 1;
+        component.setWeekDaysOrder();
+        expect(component.weekDays).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+        component.startingDayOfWeek = 2;
+        component.setWeekDaysOrder();
+        expect(component.weekDays).toEqual(['T', 'W', 'T', 'F', 'S', 'S', 'M']);
     });
 
 });

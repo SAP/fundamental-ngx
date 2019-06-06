@@ -1,0 +1,41 @@
+<h2>Simple Datetime Picker</h2>
+<description>
+    The simplest form of the datetime picker. It makes use of ngModel to bind to the desired value.
+    The alternative is to use the date input combined with the dateChange output.
+</description>
+<component-example [name]="'ex1'">
+    <app-datetime-example></app-datetime-example>
+</component-example>
+<code-example [code]="datetimePickerSingleHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Non-Meridian Datetime Picker</h2>
+<description>
+    Removing the am/pm from the time component. The string representation may or may not conserve it depending on locality.
+</description>
+<component-example [name]="'ex2'">
+    <app-datetime-non-meridian-example></app-datetime-non-meridian-example>
+</component-example>
+<code-example [code]="datetimeNonMerHtml" [language]="'HTML'"></code-example>
+<code-example [code]="datetimeNonMerTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Programmatic Change</h2>
+<description>
+    It is possible to programmatically change the value of the date of the datetime picker and still conserve full functionality.
+</description>
+<component-example [name]="'ex3'">
+    <app-datetime-program-example></app-datetime-program-example>
+</component-example>
+<code-example [code]="datetimeProgramHtml" [language]="'HTML'"></code-example>
+<code-example [code]="datetimeProgramTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Null Validity</h2>
+<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.</description>
+<component-example [name]="'ex4'">
+    <fd-date-time-picker-allow-null-example></fd-date-time-picker-allow-null-example>
+</component-example>
+<code-example [code]="datetimePickerAllowNullTs" [language]="'typescript'"></code-example>

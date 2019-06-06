@@ -1,4 +1,4 @@
-import { Input, Component, Inject, ElementRef } from '@angular/core';
+import { Input, Component, Inject, ElementRef, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -7,13 +7,14 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  */
 @Component({
     selector: 'fd-badge',
-    templateUrl: './badge-label.component.html'
+    templateUrl: './badge-label.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class BadgeComponent extends AbstractFdNgxClass {
-    /** @Input Color coded status for the badge. Options are 'success', 'warning', and 'error'. Leave empty for default badge. */
+    /** Color coded status for the badge. Options are 'success', 'warning', and 'error'. Leave empty for default badge. */
     @Input() status;
 
-    /** @Input Modifier for the badge. Options are 'pill' and 'filled'. Leave empty for normal. */
+    /** Modifier for the badge. Options are 'pill' and 'filled'. Leave empty for normal. */
     @Input() modifier;
 
     /** @hidden */

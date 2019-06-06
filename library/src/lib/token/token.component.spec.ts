@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TokenComponent } from './token.component';
-import { UtilsModule } from '../utils/utils.module';
 
 describe('TokenComponent', () => {
     let component: TokenComponent;
@@ -9,8 +8,7 @@ describe('TokenComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TokenComponent],
-            imports: [UtilsModule]
+            declarations: [TokenComponent]
         })
             .compileComponents();
     }));

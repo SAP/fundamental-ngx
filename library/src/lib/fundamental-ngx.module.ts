@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FundamentalNgxComponent } from './fundamental-ngx.component';
 import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
@@ -46,9 +45,7 @@ import { ModalService } from './modal/modal-service/modal.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
-    declarations: [FundamentalNgxComponent],
     exports: [
-        FundamentalNgxComponent,
         ActionBarModule,
         AlertModule,
         BadgeLabelModule,

@@ -2,13 +2,16 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, HostBinding,
+    forwardRef,
+    HostBinding,
     HostListener,
     Input,
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges, ViewChild
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
@@ -24,7 +27,8 @@ import { PopoverComponent } from '../popover/popover.component';
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        '[class.fd-multi-input-custom]': 'true'
     },
     providers: [
         {
@@ -32,7 +36,8 @@ import { PopoverComponent } from '../popover/popover.component';
             useExisting: forwardRef(() => MultiInputComponent),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
@@ -44,60 +49,64 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @HostBinding('class.fd-multi-input')
     multiInputClass = true;
 
-    /** @Input Placeholder for the input field. */
+    /** Placeholder for the input field. */
     @Input()
     placeholder: string = '';
 
-    /** @Input Whether the input is disabled. */
+    /** Whether the input is disabled. */
     @Input()
     disabled: boolean = false;
 
-    /** @Input Whether the input is in compact mode. */
+    /** Whether the input is in compact mode. */
     @Input()
     compact: boolean = false;
 
-    /** @Input Max height of the popover. Any overflowing elements will be accessible through scrolling. */
+    /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string = '300px';
 
-    /** @Input Icon of the button on the right of the input field. */
+    /** Icon of the button on the right of the input field. */
     @Input()
     glyph: string = 'navigation-down-arrow';
 
-    /** @Input Values to be displayed in the unfiltered dropdown. */
+    /** Values to be displayed in the unfiltered dropdown. */
     @Input()
     dropdownValues: any[] = [];
 
-    /** @Input Search term, or more specifically the value of the inner input field. */
+    /** Search term, or more specifically the value of the inner input field. */
     @Input()
     searchTerm: string;
 
-    /** @Input Whether the search term should be highlighted in results. */
+    /** Whether the search term should be highlighted in results. */
     @Input()
     highlight: boolean = true;
 
-    /** @Input Selected dropdown items. */
+    /** Selected dropdown items. */
     @Input()
     selected: any[] = [];
 
-    /** @Input Filter function. Accepts an array and a string as arguments, and outputs an array.
+    /** Filter function. Accepts an array and a string as arguments, and outputs an array.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
     filterFn: Function = this.defaultFilter;
 
-    /** @Input Display function. Accepts an object of the same type as the
+    /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
     displayFn: Function = this.defaultDisplay;
 
-    /** @Output Event emitted when the search term changes. Use *$event* to access the new term. */
+    /** Aria label for the multi input body. */
+    @Input()
+    multiInputBodyLabel: string = 'Multi input body';
+
+    /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
-    /** @Output Event emitted when the selected items change. Use *$event* to access the new selected array. */
+    /** Event emitted when the selected items change. Use *$event* to access the new selected array. */
     @Output()
     readonly selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
 

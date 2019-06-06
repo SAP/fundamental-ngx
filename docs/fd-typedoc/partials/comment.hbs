@@ -1,0 +1,32 @@
+{{#with comment}}
+    {{#with ../decorators}}
+        {{#each this}}
+            {{#ifEquals this.name 'Component'}}
+                <p class="lead"><strong>Selector:&nbsp;</strong>&lt;{{parseSelector this.arguments.obj}}&gt;</p>
+            {{/ifEquals}}
+            {{#ifEquals this.name 'Directive'}}
+                <p class="lead"><strong>Selector:&nbsp;</strong>{{parseSelector this.arguments.obj}}</p>
+            {{/ifEquals}}
+        {{/each}}
+    {{/with}}
+    {{#if hasVisibleComponent}}
+        <div class="tsd-comment tsd-typography">
+            {{#if shortText}}
+                <div class="lead">
+                    {{#markdown}}{{{shortText}}}{{/markdown}}
+                </div>
+            {{/if}}
+            {{#if text}}
+                {{#markdown}}{{{text}}}{{/markdown}}
+            {{/if}}
+            {{#if tags}}
+                <dl class="tsd-comment-tags">
+                    {{#each tags}}
+                        <dt class="fd-tsd-comment-tag-pill">{{tagName}}</dt>
+                        <dd>{{#markdown}}{{{text}}}{{/markdown}}</dd>
+                    {{/each}}
+                </dl>
+            {{/if}}
+        </div>
+    {{/if}}
+{{/with}}
