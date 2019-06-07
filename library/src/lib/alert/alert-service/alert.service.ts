@@ -46,10 +46,8 @@ export class AlertService {
             this.openAlertContainer();
         }
 
-        // Ensure default width
-        if (alertConfig && !alertConfig.width) {
-            alertConfig.width = '33vw';
-        }
+        // Get default values from alert model
+        alertConfig = Object.assign(new AlertConfig(), alertConfig);
 
         // Config setup
         const configMap = new WeakMap();
