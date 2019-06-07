@@ -1,0 +1,22 @@
+<div fd-table-responsive-wrapper>
+    <table fd-table>
+        <thead>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Date</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of tableRows">
+            <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
+            <td>{{row.column2}}</td>
+            <td>{{row.column3}}</td>
+            <td>{{row.date}}</td>
+            <td><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
