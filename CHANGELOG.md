@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.11"></a>
+## [0.5.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.10...v0.5.3-rc.11) (2019-06-07)
+
+
+### Bug Fixes
+
+* add possibility to include scrollable table + example in docs ([#869](https://github.com/SAP/fundamental-ngx/issues/869)) ([a5e1577](https://github.com/SAP/fundamental-ngx/commit/a5e1577))
+
+
+
 <a name="0.5.3-rc.10"></a>
 ## [0.5.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.9...v0.5.3-rc.10) (2019-06-07)
 
