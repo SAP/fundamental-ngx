@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { TableDirective } from './table.directive';
 import { ColumnSortableDirective } from './column-sortable.directive';
-import { TableFixedDirective } from './table-fixed.directive';
+import { TableResponsiveWrapperDirective } from './table-responsive-wrapper.directive';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [TableDirective, TableFixedDirective, ColumnSortableDirective],
-    exports: [TableDirective, TableFixedDirective, ColumnSortableDirective]
+    declarations: [TableDirective, TableResponsiveWrapperDirective, ColumnSortableDirective],
+    exports: [TableDirective, TableResponsiveWrapperDirective, ColumnSortableDirective]
 })
 export class TableModule {}

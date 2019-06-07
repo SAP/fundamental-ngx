@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
     selector: 'fd-table-responsive-example',
     templateUrl: './table-responsive-example.component.html',
     styles: [`
-        .fd-table--fixed {
-            padding-left: 0;
+        td {
+            min-width: 200px;
         }
     `]
 })
