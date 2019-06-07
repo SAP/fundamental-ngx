@@ -34,7 +34,7 @@ export class PopoverComponent {
 
     /** Whether the popover should have an arrow. */
     @Input()
-    arrow: boolean = false;
+    noArrow: boolean = true;
 
     /** Whether the popover is disabled. */
     @Input()

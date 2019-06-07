@@ -40,7 +40,7 @@
                              [isDateTimePicker]="true"
                              [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
-                <fd-time [disabled]="disabled" [ngClass]="{'fd-time-container': !meridian}"
+                <fd-time [disabled]="disabled"
                          [meridian]="meridian"
                          [(ngModel)]="time"
                          (ngModelChange)="setTime(true)"

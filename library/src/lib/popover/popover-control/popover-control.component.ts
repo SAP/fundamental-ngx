@@ -12,7 +12,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-popover-control',
     templateUrl: './popover-control.component.html',
-    styleUrls: ['./popover-control.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class PopoverControlComponent {}

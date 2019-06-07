@@ -1,7 +1,7 @@
 <button fd-button
         placement="bottom"
         [fdPopover]="clickTemplate"
-        [defaultArrow]="true"
+        [noArrow]="false"
         [triggers]="[]"
         [(isOpen)]="isOpenClick"
         (click)="isOpenClick = !isOpenClick">
@@ -11,7 +11,7 @@
 <button fd-button
         placement="bottom"
         [fdPopover]="hoverTemplate"
-        [defaultArrow]="true"
+        [noArrow]="false"
         [triggers]="[]"
         [(isOpen)]="isOpenHover"
         (mouseenter)="isOpenHover = true"
