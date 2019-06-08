@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.12"></a>
+## [0.5.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.11...v0.5.3-rc.12) (2019-06-08)
+
+
+### Bug Fixes
+
+* added modal container as a configuration option ([#872](https://github.com/SAP/fundamental-ngx/issues/872)) ([d14872c](https://github.com/SAP/fundamental-ngx/commit/d14872c))
+
+
+
 <a name="0.5.3-rc.11"></a>
 ## [0.5.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.10...v0.5.3-rc.11) (2019-06-07)
 
