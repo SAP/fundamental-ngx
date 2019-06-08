@@ -52,6 +52,9 @@ export class ModalConfig {
     /** Whether the modal should be focus trapped. */
     focusTrapped?: boolean = true;
 
+    /** The container that the modal is appended to. By default, it is appended to the body. */
+    container?: HTMLElement | 'body' = 'body';
+
     /** Data to pass along to the content through the ModalRef. */
     data?: any;
 }

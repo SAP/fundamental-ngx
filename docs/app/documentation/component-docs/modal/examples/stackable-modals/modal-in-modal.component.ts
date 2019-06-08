@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
 import { ModalInModalSecondComponent } from './modal-in-modal-second.component';
 import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';

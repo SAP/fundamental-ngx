@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
+import { Component } from '@angular/core';
 import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
 
 @Component({

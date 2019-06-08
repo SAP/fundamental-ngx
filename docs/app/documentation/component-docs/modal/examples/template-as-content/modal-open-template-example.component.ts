@@ -7,6 +7,7 @@ import { ModalService } from '../../../../../../../library/src/lib/modal/modal-s
     styles: ['.action-button {margin-left: 12px;}']
 })
 export class ModalOpenTemplateExampleComponent {
+
     confirmationReason: string;
 
     constructor(private modalService: ModalService) {}
