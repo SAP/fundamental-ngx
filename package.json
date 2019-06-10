@@ -63,7 +63,7 @@
         "@types/jasmine": "^2.8.8",
         "@types/jasminewd2": "^2.0.4",
         "angular-cli-ghpages": "^0.5.3",
-        "codelyzer": "^4.5.0",
+        "codelyzer": "^5.1.0",
         "coveralls": "^3.0.2",
         "fs-extra": "^7.0.1",
         "github-assistant": "^0.3.0",
