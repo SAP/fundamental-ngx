@@ -43,7 +43,7 @@
         "angular-highlight-js": "^2.0.1",
         "core-js": "^2.6.9",
         "fiori-fundamentals": "^1.5.7",
-        "focus-trap": "^5.0.0",
+        "focus-trap": "^5.0.1",
         "highlight.js": "^9.15.6",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^7.1.3",
