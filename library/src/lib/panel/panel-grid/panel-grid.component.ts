@@ -15,7 +15,7 @@ export class PanelGridComponent extends AbstractFdNgxClass {
     @Input()
     col: number;
 
-    /** Whether the grid shoul have a gap. */
+    /** Whether the grid should have a gap. */
     @Input()
     @HostBinding('class.fd-panel-grid--nogap')
     nogap: boolean = false;
@@ -31,6 +31,14 @@ export class PanelGridComponent extends AbstractFdNgxClass {
 
     /** @hidden */
     _setProperties() {
+        if (this.fdPanelGridClass) {
+            this._addClassToElement('fd-panel-grid');
+        }
+
+        if (this.nogap) {
+            this._addClassToElement('fd-panel-grid--nogap');
+        }
+
         if (this.col) {
             this._addClassToElement('fd-panel-grid--' + this.col + 'col');
         }
