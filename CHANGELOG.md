@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.16"></a>
+## [0.5.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.15...v0.5.3-rc.16) (2019-06-11)
+
+
+### Bug Fixes
+
+* Add min-width option on alerts with default value ([#863](https://github.com/SAP/fundamental-ngx/issues/863)) ([536ba06](https://github.com/SAP/fundamental-ngx/commit/536ba06))
+
+
+
 <a name="0.5.3-rc.15"></a>
 ## [0.5.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.14...v0.5.3-rc.15) (2019-06-10)
 
