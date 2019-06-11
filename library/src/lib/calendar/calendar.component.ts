@@ -47,7 +47,8 @@ export interface EmittedDate {
 let calendarUniqueId: number = 0;
 
 /**
- * Calendar component, typically used by the DatePicker and DateTimePicker components.
+ * Calendar component used for selecting dates, typically used by the DatePicker and DateTimePicker components.
+ * Supports the Angular forms module, enabling form validity, ngModel, etc.
  */
 @Component({
     selector: 'fd-calendar',
@@ -71,17 +72,17 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     /** @hidden id for the calendar */
     id: string;
 
-    /** @hidden The id of the newly focused day. Internal use */
+    /** @hidden The id of the newly focused day. Internal use. */
     newFocusedDayId: string;
 
-    /** @hidden Used to check if this is the calendar being initialized. Internal use */
+    /** @hidden Used to check if this is the calendar being initialized. Internal use. */
     init = false;
 
-    /** @hidden Applies the fd-calendar class to this component. Internal use */
+    /** @hidden Applies the fd-calendar class to this component. Internal use. */
     @HostBinding('class.fd-calendar')
     fdCalendarClass: boolean = true;
 
-    /** @hidden Subject the calendar subscribes to when the date value from the datePicker component changes. For internal use. */
+    /** @hidden Subject the calendar subscribes to when the date value from the datePicker component changes. Internal use. */
     @Input()
     dateFromDatePicker: Subject<any>;
 
@@ -101,126 +102,144 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Input()
     isDateTimePicker: boolean = false;
 
-    /** @hidden Whether the date is invalid. Internal use */
+    /** @hidden Whether the date is invalid. Internal use. */
     invalidDate: boolean = false;
 
-    /** @hidden Whether to show the month selection grid on the calendar. Internal use */
+    /** @hidden Whether to show the month selection grid on the calendar. Internal use. */
     showCalendarMonths: boolean = false;
-    /** @hidden Whether to show the year selection grid on the calendar. Internal use */
+    /** @hidden Whether to show the year selection grid on the calendar. Internal use. */
     showCalendarYears: boolean = false;
-    /** @hidden Whether to show the date selection grid on the calendar. Internal use */
+    /** @hidden Whether to show the date selection grid on the calendar. Internal use. */
     showCalendarDates: boolean = true;
 
-    /** @hidden For i18n, the list of month short names. Internal use */
+    /** @hidden For i18n, the list of month short names. Internal use. */
     monthsShortName: string[];
-    /** @hidden For i18n, the list of month full names. Internal use */
+    /** @hidden For i18n, the list of month full names. Internal use. */
     monthsFullName: string[];
 
-    /** @hidden For i18n, the list of weekday names. Internal use */
+    /** @hidden For i18n, the list of weekday names. Internal use. */
     weekDays: string[];
 
-    /** @hidden The typical number of days in each month. Internal use */
+    /** @hidden The typical number of days in each month. Internal use. */
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-    /** @hidden The displayed grid of calendar days. Internal use */
+    /** @hidden The displayed grid of calendar days. Internal use. */
     calendarGrid: CalendarDay[][] = [];
-    /** @hidden The years to display in the year selection grid. Internal use */
+    /** @hidden The years to display in the year selection grid. Internal use. */
     calendarYearsList: number[] = [];
 
-    /** @hidden Today's date. Internal use */
+    /** @hidden Today's date. Internal use. */
     today: Date = new Date();
-    /** @hidden Today's month. Internal use */
+    /** @hidden Today's month. Internal use. */
     todayMonth = this.today.getMonth();
-    /** @hidden Today's year. Internal use */
+    /** @hidden Today's year. Internal use. */
     todayYear = this.today.getFullYear();
 
-    /** @hidden Date used to navigate the calendar. Not to be confused with selectedDay which is the ngModel. Internal use */
+    /** @hidden Date used to navigate the calendar. Not to be confused with selectedDay which is the ngModel. Internal use. */
     date: Date = new Date();
-    /** @hidden Month used to navigate the calendar.Internal use */
+    /** @hidden Month used to navigate the calendar.Internal use. */
     month: number = this.date.getMonth();
-    /** @hidden Name of the month currently displayed. Internal use */
+    /** @hidden Name of the month currently displayed. Internal use. */
     monthName: string;
-    /** @hidden Year used to navigate the calendar. Internal use */
+    /** @hidden Year used to navigate the calendar. Internal use. */
     year: number = this.date.getFullYear();
-    /** @hidden Day of month used to navigate the calendar. Internal use */
+    /** @hidden Day of month used to navigate the calendar. Internal use. */
     day = this.date.getDate();
 
-    /** @hidden Number (0-11) of the selected month used to navigate the calendar. Internal use */
+    /** @hidden Number (0-11) of the selected month used to navigate the calendar. Internal use. */
     selectedMonth: number;
 
-    /** @hidden The first year to be displayed in the list of selectable years. Internal use */
+    /** @hidden The first year to be displayed in the list of selectable years. Internal use. */
     firstYearCalendarList: number = this.year;
 
-    /** @hidden The first year to be displayed in the list of selectable years. Internal use */
+    /** @hidden The first year to be displayed in the list of selectable years. Internal use. */
     selectCounter: number = 0;
 
-    /** The currently selected CalendarDay model */
+    /** The currently selected CalendarDay model. */
     @Input()
     selectedDay: CalendarDay = {
         date: null
     };
-    /** Fired when the selectedDay model changes */
+    /** Fired when a new date is selected. */
     @Output()
     selectedDayChange = new EventEmitter();
 
-    /** The currently selected first CalendarDay in a range type calendar */
+    /** The currently selected first CalendarDay in a range type calendar. */
     @Input()
     selectedRangeFirst: CalendarDay = {
         date: null
     };
-    /** Fired when the selectedRangeFirst model changes */
+    /** Fired when the user selects a new first date in a range of dates is selected. */
     @Output()
     selectedRangeFirstChange = new EventEmitter();
 
-    /** The currently selected last CalendarDay in a range type calendar */
+    /** The currently selected last CalendarDay in a range type calendar. */
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
-    /** Fired when the selectedRangeLast model changes */
+    /** Fired when the user selects a new last date in a range of dates is selected. */
     @Output()
     selectedRangeLastChange = new EventEmitter();
 
-    /** @hidden The date that gets emitted to the datePicker when the select day changes on the calendar. Internal use */
+    /** @hidden The date that gets emitted to the datePicker when the select day changes on the calendar. Internal use. */
     emittedDate: EmittedDate = {
         selectedDay: this.selectedDay,
         selectedFirstDay: this.selectedRangeFirst,
         selectedLastDay: this.selectedRangeLast
     };
 
-    /** Fired when the calendar is closed */
+    /** Fired when the calendar is closed. */
     @Output()
     closeCalendar = new EventEmitter<any>();
 
-    /** @hidden Subscription to the i18n service */
+    /** @hidden Subscription to the i18n service. */
     private i18nLocalSub: Subscription;
 
-    /** @param d Function used to disable certain dates in the calendar. */
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to disable certain dates in the calendar for the range start selection. */
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     disableRangeStartFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to disable certain dates in the calendar for the range end selection. */
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     disableRangeEndFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to block certain dates in the calendar for the range start selection. */
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     blockRangeStartFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to block certain dates in the calendar for the range end selection. */
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     blockRangeEndFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to block certain dates in the calendar. */
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     blockFunction = function(d): boolean {
         return false;
@@ -604,8 +623,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.constructCalendarYearsList();
     }
 
-    /** @hidden */
-    selectDate(day, formEvent: boolean = true, event?, closeCalendar?) {
+    /**
+     * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
+     * @param day CalendarDay object to be selected.
+     * @param formEvent If this function should emit an ngModelChange.
+     * @param event Event passed with this function call, typically the mouse click when selecting from the calendar grid.
+     * @param closeCalendar If the calendar should be closed when a date is selected, used with DatePicker and DateTimePicker.
+     */
+    selectDate(day: CalendarDay, formEvent: boolean = true, event?, closeCalendar?) {
         if (event) {
             event.stopPropagation();
         }
@@ -714,7 +739,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.openDaySelection();
     }
 
-    /** @hidden */
+    /**
+     * Displays the month selection grid.
+     */
     openMonthSelection() {
         if (this.showCalendarYears) {
             this.showCalendarYears = false;
@@ -727,7 +754,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    /** @hidden */
+
+    /**
+     * Displays the year selection grid.
+     */
     openYearSelection() {
         if (this.showCalendarMonths) {
             this.showCalendarMonths = false;
@@ -740,7 +770,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
-    /** @hidden */
+    /**
+     * Displays the date selection grid.
+     */
     openDaySelection() {
         this.showCalendarMonths = false;
         this.showCalendarYears = false;

@@ -62,27 +62,27 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         date: null
     };
 
-    /** Fired when the selectedDay model changes */
+    /** Fired when a new date is selected. */
     @Output()
     selectedDayChange = new EventEmitter();
 
-    /** The currently selected first CalendarDay in a range type calendar */
+    /** The currently selected first CalendarDay in a range type calendar. */
     @Input()
     selectedRangeFirst: CalendarDay = {
         date: null
     };
 
-    /** Fired when the selectedRangeFirst model changes */
+    /** Fired when the user selects a new first date in a range of dates is selected. */
     @Output()
     selectedRangeFirstChange = new EventEmitter();
 
-    /** The currently selected last CalendarDay in a range type calendar */
+    /** The currently selected last CalendarDay in a range type calendar. */
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
 
-    /** Fired when the selectedRangeLast model changes */
+    /** Fired when the user selects a new last date in a range of dates is selected. */
     @Output()
     selectedRangeLastChange = new EventEmitter();
 
@@ -105,32 +105,50 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     allowNull: boolean = true;
 
-    /** @param d Function used to disable certain dates in the calendar. */
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to block certain dates in the calendar. */
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     blockFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to disable certain dates in the calendar for the range start selection. */
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     disableRangeStartFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to disable certain dates in the calendar for the range end selection. */
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     disableRangeEndFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to block certain dates in the calendar for the range start selection. */
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     blockRangeStartFunction = function(d): boolean {
         return false;
     };
-    /** @param d Function used to block certain dates in the calendar for the range end selection. */
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     blockRangeEndFunction = function(d): boolean {
         return false;
