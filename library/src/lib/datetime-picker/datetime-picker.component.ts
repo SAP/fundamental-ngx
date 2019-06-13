@@ -16,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
+import { DateTimeFormatParser } from './format/datetime-parser';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -204,7 +205,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             const previous = this.date.getTime();
             this.selectedDay = d.selectedDay;
             this.date = d.selectedDay.date;
-            this.inputFieldDate = this.date.toLocaleString();
+            this.inputFieldDate = this.dateTimeAdapter.format(this.date);
             this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
             if (this.date.getTime() !== previous) {
                 this.calendarChange.emit(this.date);
@@ -236,7 +237,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     inputValueChange(e): void {
         let temp;
         if (typeof e === 'string') {
-            temp = new Date(e.replace(/-/g, '/'));
+            temp = this.dateTimeAdapter.parse(e);
         } else {
             temp = new Date(e);
         }
@@ -251,7 +252,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             meridianValid = false;
         }
 
-        if (meridianValid && temp.toLocaleDateString() !== 'Invalid Date') {
+        if (meridianValid && temp && temp.toLocaleDateString() !== 'Invalid Date') {
             const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
             if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
                 this.time = newValue;
@@ -301,7 +302,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     }
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {}
+    constructor(private elRef: ElementRef,
+                private dateTimeAdapter: DateTimeFormatParser
+    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => {void}): void {
@@ -334,7 +337,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.date.setHours(this.time.hour);
         this.date.setMinutes(this.time.minute);
         this.date.setSeconds(this.time.second);
-        this.inputFieldDate = this.date.toLocaleString();
+        this.inputFieldDate = this.dateTimeAdapter.format(this.date);
 
         if (fireEvents) {
             this.timeChange.emit(this.date);

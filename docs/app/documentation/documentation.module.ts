@@ -316,6 +316,7 @@ import { DatetimePickerAllowNullExampleComponent } from './component-docs/dateti
 import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
+import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -404,6 +405,7 @@ export function highlightJsFactory() {
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
+        DatetimeFormatExampleComponent,
         DatetimePickerAllowNullExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
