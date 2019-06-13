@@ -15,6 +15,7 @@ import { CalendarDay, CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DateFormatParser } from '../calendar/format/date-parser';
+import { Placement } from 'popper.js';
 
 @Component({
     selector: 'fd-date-picker',
@@ -104,6 +105,11 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     /** Whether a null input is considered valid. */
     @Input()
     allowNull: boolean = true;
+
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    @Input()
+    placement: Placement = 'auto';
 
     /**
      * Function used to disable certain dates in the calendar.
