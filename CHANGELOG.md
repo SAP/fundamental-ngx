@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.30"></a>
+## [0.5.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.29...v0.5.3-rc.30) (2019-06-13)
+
+
+### Bug Fixes
+
+* Add removed classes while changed on grid panel ([#881](https://github.com/SAP/fundamental-ngx/issues/881)) ([e34ae8a](https://github.com/SAP/fundamental-ngx/commit/e34ae8a))
+
+
+
 <a name="0.5.3-rc.29"></a>
 ## [0.5.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.28...v0.5.3-rc.29) (2019-06-13)
 
