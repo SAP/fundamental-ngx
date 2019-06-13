@@ -95,7 +95,7 @@ export const API_FILES = {
         'ListDirective',
         'ListActionDirective',
         'ListCheckboxComponent',
-        'ListItemComponent'
+        'ListItemDirective'
     ],
     loadingSpinner: [
         'LoadingSpinnerComponent'
