@@ -13,7 +13,7 @@ export class DateFormatDashes extends DateFormatParser {
         if (values[2] === 0) {
             values[1] = 14;
         }
-        return new Date(Number(values[0]), values[1] - 1, values[2]);
+        return new Date(Number(values[2]), values[1] - 1, values[0]);
     }
 
     public format(date: Date): string {
@@ -22,7 +22,7 @@ export class DateFormatDashes extends DateFormatParser {
             monthStr = '0' + monthStr;
         }
 
-        return date.getFullYear() + '-' + monthStr + '-' + date.getDate();
+        return date.getDate() + '-' + monthStr + '-' + date.getFullYear();
     }
 }
 
