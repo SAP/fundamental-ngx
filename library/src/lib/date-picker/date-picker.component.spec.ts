@@ -68,11 +68,14 @@ describe('DatePickerComponent', () => {
         };
         component.type = 'single';
         component.updateDatePickerInputHandler(d);
-        expect(component.inputFieldDate).toEqual(d.selectedDay.date.toLocaleDateString());
+        expect(component.inputFieldDate).toEqual(
+            (d.selectedDay.date.getMonth()) + 1 + '/' + d.selectedDay.date.getDate() + '/' + d.selectedDay.date.getFullYear());
         component.type = 'range';
         component.updateDatePickerInputHandler(d);
         expect(component.inputFieldDate).toEqual(
-            d.selectedFirstDay.date.toLocaleDateString() + ' - ' + d.selectedLastDay.date.toLocaleDateString()
+            (d.selectedFirstDay.date.getMonth()) + 1 + '/' + d.selectedFirstDay.date.getDate() + '/' + d.selectedFirstDay.date.getFullYear()
+            + ' - '
+            + (d.selectedLastDay.date.getMonth() + 1) + '/' + d.selectedLastDay.date.getDate() + '/' + d.selectedLastDay.date.getFullYear()
         );
     });
 

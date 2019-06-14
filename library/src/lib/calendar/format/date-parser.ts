@@ -50,6 +50,6 @@ export class DateFormatParserDefault extends DateFormatParser {
      * @param date Date object to convert to a string.
      */
     public format(date: Date): string {
-        return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+        return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
     }
 }
