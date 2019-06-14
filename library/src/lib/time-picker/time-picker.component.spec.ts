@@ -23,7 +23,6 @@ describe('TimePickerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TimePickerComponent);
         component = fixture.componentInstance;
-        component.timeAdapter.rangeDelimiter = ':';
         fixture.detectChanges();
     });
 
@@ -244,87 +243,5 @@ describe('TimePickerComponent', () => {
         component.time = {hour: 12, minute: 0, second: 0};
         component.timeFromTimeComponentChanged();
         expect(component.onChange).toHaveBeenCalledWith(component.time);
-    });
-
-    it('should get formatted time with other delimiter', () => {
-        const newDelimiter = '-';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        const newTime: TimeObject = { hour: 12, minute: 10, second: 11 };
-        component.time = newTime;
-        component.meridian = false;
-        const retVal = component.getFormattedTime();
-        expect(retVal).toBe('12' + newDelimiter + '10' + newDelimiter + '11');
-    });
-
-    it('should get meridian formatted time with other delimiter', () => {
-        const newDelimiter = '-';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        const newTime: TimeObject = { hour: 0, minute: 10, second: 11 };
-        component.time = newTime;
-        component.meridian = true;
-        const retVal = component.getFormattedTime();
-        expect(retVal).toBe('12' + newDelimiter + '10' + newDelimiter + '11 am');
-    });
-
-    it('should handle timeInputChanged for meridian time picker with PM/seconds with other delimiter', () => {
-        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
-        const newDelimiter = '-';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        component.time = newTime;
-        component.meridian = true;
-        component.displaySeconds = true;
-        component.timeInputChanged('11' + newDelimiter + '59' + newDelimiter + '59 pm');
-        expect(component.time.hour).toBe(23);
-        expect(component.time.minute).toBe(59);
-        expect(component.time.second).toBe(59);
-    });
-
-    it('should handle timeInputChanged for meridian time picker with PM without seconds with other delimiter', () => {
-        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
-        const newDelimiter = '-';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        component.time = newTime;
-        component.meridian = true;
-        component.displaySeconds = false;
-        component.timeInputChanged('11' + newDelimiter + '59 pm');
-        expect(component.time.hour).toBe(23);
-        expect(component.time.minute).toBe(59);
-        expect(component.time.second).toBe(0);
-    });
-
-    it('should handle timeInputChanged for time picker with seconds with other delimiter', () => {
-        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
-        const newDelimiter = '-';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        component.time = newTime;
-        component.displaySeconds = true;
-        component.timeInputChanged('11' + newDelimiter + '59' + newDelimiter + '59');
-        expect(component.time.hour).toBe(11);
-        expect(component.time.minute).toBe(59);
-        expect(component.time.second).toBe(59);
-    });
-
-    it('should handle timeInputChanged for time picker without seconds with other delimiter', () => {
-        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
-        const newDelimiter = '-';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        component.time = newTime;
-        component.displaySeconds = false;
-        component.timeInputChanged('11' + newDelimiter + '59');
-        expect(component.time.hour).toBe(11);
-        expect(component.time.minute).toBe(59);
-        expect(component.time.second).toBe(0);
-    });
-
-    it('should handle regexp fail for bad delimiter', () => {
-        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
-        const newDelimiter = '-';
-        const badDelimiter = ':';
-        component.timeAdapter.rangeDelimiter = newDelimiter;
-        component.time = newTime;
-        component.meridian = false;
-        component.displaySeconds = false;
-        component.timeInputChanged('11' + badDelimiter + '59');
-        expect(component.isInvalidTimeInput).toBeTruthy();
     });
 });

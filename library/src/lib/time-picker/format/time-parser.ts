@@ -15,11 +15,6 @@ export function TIME_FORMAT_FACTORY() {
 export abstract class TimeFormatParser {
 
     /**
-     * Delimiter for the range. This should not show up in the string representation of the time.
-     */
-    rangeDelimiter: string = ':';
-
-    /**
      * Should take in a string value and return a Time object.
      * @param value String to convert to a time object.
      * @param meridian boolean to define if string should be treated as a meridian.
@@ -52,17 +47,12 @@ export class TimeFormatParserDefault extends TimeFormatParser {
         let regexp;
         if (!meridian) {
             if (displaySeconds) {
-                regexp = new RegExp(
-                    '\^([0-1]?[0-9]|2[0-3])' +
-                    this.rangeDelimiter +
-                    '([0-5][0-9])(' +
-                    this.rangeDelimiter + '[0-5][0-9])\$'
-                );
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])$/;
             } else {
-                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' + this.rangeDelimiter + '([0-5][0-9])\$');
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/;
             }
             if (regexp.test(value)) {
-                const splitString = value.split(this.rangeDelimiter);
+                const splitString = value.split(':');
                 time.hour = parseInt(splitString[0], 10);
                 time.minute = parseInt(splitString[1], 10);
                 if (displaySeconds) {
@@ -74,18 +64,14 @@ export class TimeFormatParserDefault extends TimeFormatParser {
             }
         } else if (meridian) {
             if (displaySeconds) {
-                regexp = new RegExp(
-                    '\^([0-1]?[0-9]|2[0-3])' +
-                    this.rangeDelimiter + '([0-5][0-9])(' +
-                    this.rangeDelimiter + '[0-5][0-9]) [APap][mM]\$'
-                );
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9]) [APap][mM]$/;
             } else {
-                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' + this.rangeDelimiter + '([0-5][0-9]) [APap][mM]\$');
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]) [APap][mM]$/;
             }
             if (regexp.test(value)) {
                 const period = value.split(' ')[1];
 
-                const splitString = value.split(this.rangeDelimiter);
+                const splitString = value.split(':');
                 time.hour = parseInt(splitString[0], 10);
                 if (( period === 'pm' || period === 'PM' ) && time.hour < 12) {
                     time.hour = time.hour + 12;
@@ -141,9 +127,9 @@ export class TimeFormatParserDefault extends TimeFormatParser {
         if (formattedHour || formattedHour === 0) {
             formattedTime = formattedHour;
             if (formattedMinute || formattedMinute === '00') {
-                formattedTime = formattedTime + this.rangeDelimiter + formattedMinute;
+                formattedTime = formattedTime + ':' + formattedMinute;
                 if (formattedSecond || formattedSecond === '00') {
-                    formattedTime = formattedTime + this.rangeDelimiter + formattedSecond;
+                    formattedTime = formattedTime + ':' + formattedSecond;
                 }
             }
         }

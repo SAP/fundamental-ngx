@@ -6,8 +6,6 @@ import { TimeObject } from '../../../../../../library/src/lib/time/time-object';
 @Injectable()
 export class TimeFormatDashes extends TimeFormatParser {
 
-    public rangeDelimiter: string = '-';
-
     public parse(value: string, displaySeconds: boolean = true, meridian?: boolean): TimeObject {
         const time = new TimeObject();
         let regexp;
@@ -15,19 +13,25 @@ export class TimeFormatDashes extends TimeFormatParser {
             if (displaySeconds) {
                 regexp = new RegExp(
                     '\^([0-1]?[0-9]|2[0-3])' +
-                    this.rangeDelimiter +
+                    'h' +
                     '([0-5][0-9])(' +
-                    this.rangeDelimiter + '[0-5][0-9])\$'
+                    'm' +
+                    '[0-5][0-9])' +
+                    's\$'
                 );
             } else {
-                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' + this.rangeDelimiter + '([0-5][0-9])\$');
+                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' +
+                    'h' +
+                    '([0-5][0-9])(' +
+                    'm\$'
+                );
             }
             if (regexp.test(value)) {
-                const splitString = value.split(this.rangeDelimiter);
-                time.hour = parseInt(splitString[0], 10);
-                time.minute = parseInt(splitString[1], 10);
+                const minutes = value.split('h')[1].split('m')[0];
+                time.hour = parseInt(value.split('h')[0], 10);
+                time.minute = parseInt(minutes, 10);
                 if (displaySeconds) {
-                    time.second = parseInt(splitString[2], 10);
+                    time.second = parseInt(value.split('m')[1], 10);
                 }
                 return time;
             } else {
@@ -35,27 +39,39 @@ export class TimeFormatDashes extends TimeFormatParser {
             }
         } else if (meridian) {
             if (displaySeconds) {
+
+
                 regexp = new RegExp(
                     '\^([0-1]?[0-9]|2[0-3])' +
-                    this.rangeDelimiter + '([0-5][0-9])(' +
-                    this.rangeDelimiter + '[0-5][0-9]) [APap][mM]\$'
+                    'h' +
+                    '([0-5][0-9])(' +
+                    'm' +
+                    '[0-5][0-9])' +
+                    's' +
+                    ' [APap][mM]\$'
                 );
             } else {
-                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' + this.rangeDelimiter + '([0-5][0-9]) [APap][mM]\$');
+                regexp = new RegExp('\^([0-1]?[0-9]|2[0-3])' +
+                    'h' +
+                    '([0-5][0-9])(' +
+                    'm' +
+                    ' [APap][mM]\$'
+                );
             }
             if (regexp.test(value)) {
                 const period = value.split(' ')[1];
+                const _time = value.split(' ')[0];
 
-                const splitString = value.split(this.rangeDelimiter);
-                time.hour = parseInt(splitString[0], 10);
+                const minutes = _time.split('h')[1].split('m')[0];
+                time.hour = parseInt(_time.split('h')[0], 10);
+                time.minute = parseInt(minutes, 10);
+                if (displaySeconds) {
+                    time.second = parseInt(_time.split('m')[1], 10);
+                }
                 if (( period === 'pm' || period === 'PM' ) && time.hour < 12) {
                     time.hour = time.hour + 12;
                 } else if ( (period === 'am' || period === 'AM') && time.hour === 12 ) {
                     time.hour = 0;
-                }
-                time.minute = parseInt(splitString[1], 10);
-                if (displaySeconds) {
-                    time.second = parseInt(splitString[2], 10);
                 }
                 return time;
             } else {
@@ -100,11 +116,11 @@ export class TimeFormatDashes extends TimeFormatParser {
             formattedSecond = time.second < 10 ? '0' + time.second : time.second;
         }
         if (formattedHour || formattedHour === 0) {
-            formattedTime = formattedHour;
+            formattedTime = formattedHour + 'h';
             if (formattedMinute || formattedMinute === '00') {
-                formattedTime = formattedTime + this.rangeDelimiter + formattedMinute;
+                formattedTime = formattedTime + formattedMinute + 'm';
                 if (formattedSecond || formattedSecond === '00') {
-                    formattedTime = formattedTime + this.rangeDelimiter + formattedSecond;
+                    formattedTime = formattedTime + formattedSecond + 's';
                 }
             }
         }

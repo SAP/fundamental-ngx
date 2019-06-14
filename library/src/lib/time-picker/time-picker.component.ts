@@ -159,19 +159,18 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     /** @hidden */
     getPlaceholder(): string {
-        const delimiter = this.timeAdapter.rangeDelimiter;
         let retVal;
         if (this.displaySeconds) {
             if (this.meridian) {
-                retVal = 'hh' + delimiter + 'mm' + delimiter + 'ss am/pm';
+                retVal = 'hh' + ':' + 'mm' + ':' + 'ss am/pm';
             } else {
-                retVal = 'hh' + delimiter + 'mm' + delimiter + 'ss';
+                retVal = 'hh' + ':' + 'mm' + ':' + 'ss';
             }
         } else {
             if (this.meridian) {
-                retVal = 'hh' + delimiter + 'mm' + ' am/pm';
+                retVal = 'hh' + ':' + 'mm' + ' am/pm';
             } else {
-                retVal = 'hh' + delimiter + 'mm';
+                retVal = 'hh' + ':' + 'mm';
             }
         }
 
