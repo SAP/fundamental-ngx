@@ -209,6 +209,7 @@ import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.compone
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
 import { DisabledToggleExampleComponent } from './component-docs/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
 import { ToggleBindingExampleComponent } from './component-docs/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { ToggleFormsExampleComponent } from './component-docs/toggle/examples/toggle-form-example/toggle-forms-example.component';
 import { ListInfiniteScrollExampleComponent } from './component-docs/list/examples/list-infinite-scroll-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
 import { ModalInModalComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal.component';
@@ -527,6 +528,7 @@ export function highlightJsFactory() {
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
+        ToggleFormsExampleComponent,
         TokenDocsComponent,
         TokenExampleComponent,
         ToolbarComponent,
