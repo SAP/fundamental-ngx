@@ -2,6 +2,91 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.30"></a>
+## [0.5.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.29...v0.5.3-rc.30) (2019-06-13)
+
+
+### Bug Fixes
+
+* Add removed classes while changed on grid panel ([#881](https://github.com/SAP/fundamental-ngx/issues/881)) ([e34ae8a](https://github.com/SAP/fundamental-ngx/commit/e34ae8a))
+
+
+
+<a name="0.5.3-rc.29"></a>
+## [0.5.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.28...v0.5.3-rc.29) (2019-06-13)
+
+
+
+<a name="0.5.3-rc.28"></a>
+## [0.5.3-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.27...v0.5.3-rc.28) (2019-06-13)
+
+
+
+<a name="0.5.3-rc.27"></a>
+## [0.5.3-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.26...v0.5.3-rc.27) (2019-06-13)
+
+
+
+<a name="0.5.3-rc.26"></a>
+## [0.5.3-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.25...v0.5.3-rc.26) (2019-06-13)
+
+
+
+<a name="0.5.3-rc.25"></a>
+## [0.5.3-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.24...v0.5.3-rc.25) (2019-06-13)
+
+
+
+<a name="0.5.3-rc.24"></a>
+## [0.5.3-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.23...v0.5.3-rc.24) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.23"></a>
+## [0.5.3-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.22...v0.5.3-rc.23) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.22"></a>
+## [0.5.3-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.21...v0.5.3-rc.22) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.21"></a>
+## [0.5.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.20...v0.5.3-rc.21) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.20"></a>
+## [0.5.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.19...v0.5.3-rc.20) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.19"></a>
+## [0.5.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.18...v0.5.3-rc.19) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.18"></a>
+## [0.5.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.17...v0.5.3-rc.18) (2019-06-12)
+
+
+
+<a name="0.5.3-rc.17"></a>
+## [0.5.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.16...v0.5.3-rc.17) (2019-06-11)
+
+
+
+<a name="0.5.3-rc.16"></a>
+## [0.5.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.15...v0.5.3-rc.16) (2019-06-11)
+
+
+### Bug Fixes
+
+* Add min-width option on alerts with default value ([#863](https://github.com/SAP/fundamental-ngx/issues/863)) ([536ba06](https://github.com/SAP/fundamental-ngx/commit/536ba06))
+
+
+
 <a name="0.5.3-rc.15"></a>
 ## [0.5.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.14...v0.5.3-rc.15) (2019-06-10)
 
