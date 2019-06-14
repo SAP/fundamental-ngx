@@ -281,6 +281,7 @@ import { ImageHeaderComponent } from './component-docs/image/image-header/image-
 import { InfiniteScrollHeaderComponent } from './component-docs/infinite-scroll/infinite-scroll-header/infinite-scroll-header.component';
 import { InlineHelpHeaderComponent } from './component-docs/inline-help/inline-help-header/inline-help-header.component';
 import { InputGroupHeaderComponent } from './component-docs/input-group/input-group-header/input-group-header.component';
+import { InputGroupFormExampleComponent } from './component-docs/input-group/examples/input-group-form-example.component';
 import { ListHeaderComponent } from './component-docs/list/list-header/list-header.component';
 import { LoadingSpinnerHeaderComponent } from './component-docs/loading-spinner-docs/loading-spinner-header/loading-spinner-header.component';
 import { MenuHeaderComponent } from './component-docs/menu/menu-header/menu-header.component';
@@ -442,6 +443,7 @@ export function highlightJsFactory() {
         InputGroupSearchExampleComponent,
         InputGroupTextExampleComponent,
         InputGroupTextCompactExampleComponent,
+        InputGroupFormExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
