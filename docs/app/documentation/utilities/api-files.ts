@@ -92,10 +92,10 @@ export const API_FILES = {
         'InputGroupSearchComponent'
     ],
     list: [
-        'ListComponent',
+        'ListDirective',
         'ListActionDirective',
         'ListCheckboxComponent',
-        'ListItemComponent'
+        'ListItemDirective'
     ],
     loadingSpinner: [
         'LoadingSpinnerComponent'
