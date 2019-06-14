@@ -41,7 +41,7 @@
         "@angular/router": "^7.2.7",
         "@types/node": "^12.0.8",
         "angular-highlight-js": "^2.0.1",
-        "core-js": "^2.6.9",
+        "core-js": "^3.1.3",
         "fiori-fundamentals": "^1.6.0",
         "focus-trap": "^5.0.1",
         "highlight.js": "^9.15.6",
