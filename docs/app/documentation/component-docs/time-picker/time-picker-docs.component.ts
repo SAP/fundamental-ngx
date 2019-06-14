@@ -6,6 +6,8 @@ import * as timePickerDisabledSrc from '!raw-loader!./examples/time-picker-disab
 import * as timePickerNoSecondsSrc from '!raw-loader!./examples/time-picker-no-seconds-example.component.html';
 import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compact-example.component.html';
 import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
+import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
+import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts'
 
 @Component({
     selector: 'app-time-picker',
@@ -18,6 +20,8 @@ export class TimePickerDocsComponent {
     disabledTimePickerHtml = timePickerDisabledSrc;
     compactTimePickerHtml = timePickerCompactSrc;
     nullTimePickerHtml = timePickerNullSrc;
+    timePickerFormHtml = timePickerFormHtmlSrc;
+    timePickerFormTs = timePickerFormTsSrc;
 
-    constructor() {}
+    constructor() { }
 }
