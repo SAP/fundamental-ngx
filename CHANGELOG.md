@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.31"></a>
+## [0.5.3-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.30...v0.5.3-rc.31) (2019-06-14)
+
+
+### Bug Fixes
+
+* change list component to directive ([#901](https://github.com/SAP/fundamental-ngx/issues/901)) ([eab741b](https://github.com/SAP/fundamental-ngx/commit/eab741b))
+* split public_api ([#907](https://github.com/SAP/fundamental-ngx/issues/907)) ([0142308](https://github.com/SAP/fundamental-ngx/commit/0142308))
+
+
+
 <a name="0.5.3-rc.30"></a>
 ## [0.5.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.29...v0.5.3-rc.30) (2019-06-13)
 
