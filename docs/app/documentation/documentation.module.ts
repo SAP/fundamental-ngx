@@ -210,6 +210,7 @@ import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/to
 import { DisabledToggleExampleComponent } from './component-docs/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
 import { ToggleBindingExampleComponent } from './component-docs/toggle/examples/toggle-binding-example/toggle-binding-example.component';
 import { ListInfiniteScrollExampleComponent } from './component-docs/list/examples/list-infinite-scroll-example.component';
+import { ListCheckboxFormExampleComponent } from './component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
 import { ModalInModalComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal.component';
 import { ModalInModalSecondComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal-second.component';
@@ -448,6 +449,7 @@ export function highlightJsFactory() {
         ListCheckboxExampleComponent,
         ListExampleComponent,
         ListInfiniteScrollExampleComponent,
+        ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
