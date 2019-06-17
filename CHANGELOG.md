@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.38"></a>
+## [0.5.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.37...v0.5.3-rc.38) (2019-06-17)
+
+
+### Bug Fixes
+
+* add custom formatting to datetime picker ([#918](https://github.com/SAP/fundamental-ngx/issues/918)) ([8425549](https://github.com/SAP/fundamental-ngx/commit/8425549))
+
+
+
 <a name="0.5.3-rc.37"></a>
 ## [0.5.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.36...v0.5.3-rc.37) (2019-06-17)
 
