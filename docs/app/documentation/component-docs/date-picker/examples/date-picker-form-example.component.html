@@ -1,0 +1,5 @@
+<form [formGroup]="customForm">
+    <fd-date-picker formControlName="date"></fd-date-picker>
+</form>
+
+Selected Date: {{ customForm.controls.date.value.date | date: 'fullDate' }}

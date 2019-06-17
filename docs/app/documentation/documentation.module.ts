@@ -316,6 +316,7 @@ import { TableCdkExampleComponent } from './component-docs/table/examples/table-
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DatetimePickerAllowNullExampleComponent } from './component-docs/datetime-picker/examples/datetime-allow-null-example/datetime-allow-null-example.component';
 import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
+import { DatePickerFormExampleComponent } from './component-docs/date-picker/examples/date-picker-form-example.component';
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
 
@@ -405,6 +406,7 @@ export function highlightJsFactory() {
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
+        DatePickerFormExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
