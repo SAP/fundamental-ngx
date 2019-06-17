@@ -1,7 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Directive, ViewEncapsulation } from '@angular/core';
 
 /**
- * The component that represents a navigation group.
+ * The directive that represents a list group.
  * ```html
  * <fd-side-nav>
  *    <fd-side-nav-group>
@@ -15,9 +15,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
  * </fd-side-nav>
  * ```
  */
-@Component({
-    selector: 'fd-side-nav-group',
-    templateUrl: './side-navigation-group.component.html',
-    encapsulation: ViewEncapsulation.None
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-side-nav-list]',
+    host: {
+        class: 'fd-side-nav__list'
+    }
 })
-export class SideNavigationGroupComponent { }
+export class SideNavigationListDirective {}
