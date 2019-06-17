@@ -84,12 +84,12 @@ export class PaginationService {
      */
     public validate(pagination: Pagination) {
         if (!pagination.totalItems && isDevMode()) {
-            console.warn(`No pages provided in the Pagination object.`);
+            console.warn(`No pages provided in the Pagination object. This warning only appears in development mode.`);
         }
         if (!pagination.itemsPerPage) {
             pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
         } else if (pagination.itemsPerPage < 0 && isDevMode()) {
-            console.warn(`itemsPerPage must be greater than zero.`);
+            console.warn(`itemsPerPage must be greater than zero. This warning only appears in development mode.`);
         }
         if (!pagination.currentPage) {
             pagination.currentPage = 1;
