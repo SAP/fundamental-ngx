@@ -239,6 +239,7 @@ import { ScrollSpyExampleComponent } from './component-docs/scroll-spy/examples/
 import { ScrollSpyCustomExampleComponent } from './component-docs/scroll-spy/examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
 import { MultiInputFilterExampleComponent } from './component-docs/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
 import { MultiInputDisplaywithExampleComponent } from './component-docs/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
+import { MultiInputFormExampleComponent } from './component-docs/multi-input/examples/multi-input-form-example/multi-input-form-example.component';
 import { MultiInputDocsComponent } from './component-docs/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './component-docs/multi-input/examples/multi-input-example/multi-input-example.component';
 import { MultiInputAsyncExampleComponent } from './component-docs/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
@@ -535,6 +536,7 @@ export function highlightJsFactory() {
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
+        MultiInputFormExampleComponent,
         BackdropExamplesComponent,
         ApiComponent,
         AlertHeaderComponent,
