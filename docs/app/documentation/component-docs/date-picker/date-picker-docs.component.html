@@ -19,8 +19,7 @@
 
 <separator></separator>
 <h2>Internationalization</h2>
-<description>It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.
-    There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.</description>
+<description>It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.</description>
 <component-example [name]="'ex3'">
     <fd-datepicker-i18n-example></fd-datepicker-i18n-example>
 </component-example>
@@ -41,3 +40,11 @@
     <fd-date-picker-allow-null-example></fd-date-picker-allow-null-example>
 </component-example>
 <code-example [code]="datePickerAllowNullTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Position</h2>
+<description>There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.</description>
+<component-example name="'ex6'">
+    <fd-date-picker-position-example></fd-date-picker-position-example>
+</component-example>
+<code-example [code]="datePickerPositionTs" [language]="'typescript'"></code-example>
