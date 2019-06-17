@@ -1,4 +1,4 @@
-import { Input, Component, Inject, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Input, Component, Inject, ElementRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -7,8 +7,10 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  */
 @Component({
     selector: 'fd-badge',
-    templateUrl: './badge-label.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    template: `
+    <span><ng-content></ng-content></span>
+    `
 })
 export class BadgeComponent extends AbstractFdNgxClass {
     /** Color coded status for the badge. Options are 'success', 'warning', and 'error'. Leave empty for default badge. */
@@ -18,8 +20,11 @@ export class BadgeComponent extends AbstractFdNgxClass {
     @Input() modifier;
 
     /** @hidden */
+    @HostBinding('class.fd-badge')
+    fdBadgeClass: boolean = true;
+
+    /** @hidden */
     _setProperties() {
-        this._addClassToElement('fd-badge');
         if (this.status) {
             this._addClassToElement('fd-badge--' + this.status);
         }
@@ -29,7 +34,7 @@ export class BadgeComponent extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 }
