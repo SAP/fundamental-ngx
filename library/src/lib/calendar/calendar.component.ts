@@ -46,6 +46,10 @@ export interface EmittedDate {
 
 let calendarUniqueId: number = 0;
 
+/**
+ * Calendar component used for selecting dates, typically used by the DatePicker and DateTimePicker components.
+ * Supports the Angular forms module, enabling form validity, ngModel, etc.
+ */
 @Component({
     selector: 'fd-calendar',
     templateUrl: './calendar.component.html',
@@ -65,120 +69,188 @@ let calendarUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
+    /** @hidden id for the calendar */
     id: string;
 
+    /** @hidden The id of the newly focused day. Internal use. */
     newFocusedDayId: string;
 
+    /** @hidden Used to check if this is the calendar being initialized. Internal use. */
     init = false;
 
+    /** @hidden Applies the fd-calendar class to this component. Internal use. */
     @HostBinding('class.fd-calendar')
     fdCalendarClass: boolean = true;
 
+    /** @hidden Subject the calendar subscribes to when the date value from the datePicker component changes. Internal use. */
     @Input()
     dateFromDatePicker: Subject<any>;
 
+    /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     calType: CalendarType = 'single';
 
+    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
     @Input()
     startingDayOfWeek: WeekDaysNumberRange = 0;
 
+    /** Fired when the date input value is invalid. */
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
+    /** @hidden Used when this calendar is for a date time picker component. For internal use. */
     @Input()
     isDateTimePicker: boolean = false;
 
+    /** @hidden Whether the date is invalid. Internal use. */
     invalidDate: boolean = false;
 
+    /** @hidden Whether to show the month selection grid on the calendar. Internal use. */
     showCalendarMonths: boolean = false;
+    /** @hidden Whether to show the year selection grid on the calendar. Internal use. */
     showCalendarYears: boolean = false;
+    /** @hidden Whether to show the date selection grid on the calendar. Internal use. */
     showCalendarDates: boolean = true;
 
+    /** @hidden For i18n, the list of month short names. Internal use. */
     monthsShortName: string[];
+    /** @hidden For i18n, the list of month full names. Internal use. */
     monthsFullName: string[];
 
+    /** @hidden For i18n, the list of weekday names. Internal use. */
     weekDays: string[];
+
+    /** @hidden The typical number of days in each month. Internal use. */
     daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+    /** @hidden The displayed grid of calendar days. Internal use. */
     calendarGrid: CalendarDay[][] = [];
+    /** @hidden The years to display in the year selection grid. Internal use. */
     calendarYearsList: number[] = [];
 
+    /** @hidden Today's date. Internal use. */
     today: Date = new Date();
+    /** @hidden Today's month. Internal use. */
     todayMonth = this.today.getMonth();
+    /** @hidden Today's year. Internal use. */
     todayYear = this.today.getFullYear();
 
+    /** @hidden Date used to navigate the calendar. Not to be confused with selectedDay which is the ngModel. Internal use. */
     date: Date = new Date();
+    /** @hidden Month used to navigate the calendar.Internal use. */
     month: number = this.date.getMonth();
+    /** @hidden Name of the month currently displayed. Internal use. */
     monthName: string;
+    /** @hidden Year used to navigate the calendar. Internal use. */
     year: number = this.date.getFullYear();
+    /** @hidden Day of month used to navigate the calendar. Internal use. */
     day = this.date.getDate();
 
+    /** @hidden Number (0-11) of the selected month used to navigate the calendar. Internal use. */
     selectedMonth: number;
+
+    /** @hidden The first year to be displayed in the list of selectable years. Internal use. */
     firstYearCalendarList: number = this.year;
+
+    /** @hidden The first year to be displayed in the list of selectable years. Internal use. */
     selectCounter: number = 0;
 
+    /** The currently selected CalendarDay model. */
     @Input()
     selectedDay: CalendarDay = {
         date: null
     };
+    /** Fired when a new date is selected. */
     @Output()
     selectedDayChange = new EventEmitter();
 
+    /** The currently selected first CalendarDay in a range type calendar. */
     @Input()
     selectedRangeFirst: CalendarDay = {
         date: null
     };
+    /** Fired when the user selects a new first date in a range of dates is selected. */
     @Output()
     selectedRangeFirstChange = new EventEmitter();
 
+    /** The currently selected last CalendarDay in a range type calendar. */
     @Input()
     selectedRangeLast: CalendarDay = {
         date: null
     };
+    /** Fired when the user selects a new last date in a range of dates is selected. */
     @Output()
     selectedRangeLastChange = new EventEmitter();
 
+    /** @hidden The date that gets emitted to the datePicker when the select day changes on the calendar. Internal use. */
     emittedDate: EmittedDate = {
         selectedDay: this.selectedDay,
         selectedFirstDay: this.selectedRangeFirst,
         selectedLastDay: this.selectedRangeLast
     };
 
+    /** Fired when the calendar is closed. */
     @Output()
     closeCalendar = new EventEmitter<any>();
 
+    /** @hidden Subscription to the i18n service. */
     private i18nLocalSub: Subscription;
 
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     disableRangeStartFunction = function(d): boolean {
         return false;
     };
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     disableRangeEndFunction = function(d): boolean {
         return false;
     };
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     blockRangeStartFunction = function(d): boolean {
         return false;
     };
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     blockRangeEndFunction = function(d): boolean {
         return false;
     };
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     blockFunction = function(d): boolean {
         return false;
     };
 
+    /** @hidden */
     onChange: Function = () => {};
+    /** @hidden */
     onTouched: Function = () => {};
 
-    // A function that determines the number of days in a particular month
+    /** @hidden */
     determineDaysInMonth = function(month: number, year: number): number {
         if (month === 1) {
             if ((year % 100 !== 0 && year % 4 === 0) || year % 400 === 0) {
@@ -191,6 +263,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     };
 
+    /** @hidden */
     setWeekDaysOrder() {
         this.weekDays = this.calendarI18n.getAllShortWeekdays().map(item => item[0]);
         if (this.startingDayOfWeek <= 6 && this.startingDayOfWeek >= 0) {
@@ -200,6 +273,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     getPreviousMonthDays(calendarMonth) {
         // Previous month days
         let prevMonthLastDate;
@@ -267,6 +341,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return calendarMonth;
     }
 
+    /** @hidden */
     getCurrentMonthDays(calendarMonth) {
         const numOfDaysInCurrentMonth: number = this.determineDaysInMonth(this.month, this.year);
         // Current month days
@@ -347,6 +422,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return calendarMonth;
     }
 
+    /** @hidden */
     getNextMonthDays(calendarMonth) {
         // Next month days
         let nextMonthDisplayedDays: number = 0;
@@ -424,6 +500,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return calendarMonth;
     }
 
+    /** @hidden */
     populateCalendar(): CalendarDay[] {
         let calendarMonth: CalendarDay[] = [];
 
@@ -436,7 +513,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return calendarMonth;
     }
 
-    // Construction functions
+    /** @hidden */
     constructCalendar(): void {
         const calendarDays = this.populateCalendar();
         const calendarGrid: CalendarDay[][] = [];
@@ -448,6 +525,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.calendarGrid = calendarGrid;
     }
 
+    /** @hidden */
     refreshSelected() {
         this.calendarGrid.forEach(grid => {
             grid.forEach(day => {
@@ -472,6 +550,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         });
     }
 
+    /** @hidden */
     updateDatePickerInputEmitter() {
         if (this.calType === 'single') {
             this.emittedDate.selectedDay = this.selectedDay;
@@ -484,6 +563,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     constructCalendarYearsList() {
         this.calendarYearsList = [];
         for (let y = 0; y < 12; y++) {
@@ -491,6 +571,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     getYearTabIndex(year, i) {
         let retVal = -1;
         // tab index currently selected year
@@ -514,33 +595,42 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return retVal;
     }
 
-    // Functions that handle calendar navigation
+    /** @hidden */
     goToPreviousMonth() {
         this.setCurrentMonth(this.date.getMonth() - 1);
         this.selectedMonth = this.month;
         this.constructCalendar();
     }
 
+    /** @hidden */
     goToNextMonth() {
         this.setCurrentMonth(this.date.getMonth() + 1);
         this.selectedMonth = this.month;
         this.constructCalendar();
     }
 
+    /** @hidden */
     loadNextYearsList() {
         this.calendarYearsList = [];
         this.firstYearCalendarList += 12;
         this.constructCalendarYearsList();
     }
 
+    /** @hidden */
     loadPrevYearsList() {
         this.calendarYearsList = [];
         this.firstYearCalendarList -= 12;
         this.constructCalendarYearsList();
     }
 
-    // Functions that handle selection (day, month, year)
-    selectDate(day, formEvent: boolean = true, event?, closeCalendar?) {
+    /**
+     * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
+     * @param day CalendarDay object to be selected.
+     * @param formEvent If this function should emit an ngModelChange.
+     * @param event Event passed with this function call, typically the mouse click when selecting from the calendar grid.
+     * @param closeCalendar If the calendar should be closed when a date is selected, used with DatePicker and DateTimePicker.
+     */
+    selectDate(day: CalendarDay, formEvent: boolean = true, event?, closeCalendar?) {
         if (event) {
             event.stopPropagation();
         }
@@ -613,6 +703,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.isInvalidDateInput.emit(false);
     }
 
+    /** @hidden */
     setCurrentMonth(month: number) {
         this.date.setMonth(month);
         this.month = this.date.getMonth();
@@ -620,6 +711,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.year = this.date.getFullYear();
     }
 
+    /** @hidden */
     selectMonth(selectedMonth, event?) {
         if (event) {
             event.stopPropagation();
@@ -630,11 +722,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.openDaySelection();
     }
 
+    /** @hidden */
     setCurrentYear(year: number) {
         this.date.setFullYear(year);
         this.year = this.date.getFullYear();
     }
 
+    /** @hidden */
     selectYear(selectedYear, event?) {
         if (event) {
             event.stopPropagation();
@@ -645,7 +739,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.openDaySelection();
     }
 
-    // Functions that handle the calendar content - show/hide calendar dates, months list, years list
+    /**
+     * Displays the month selection grid.
+     */
     openMonthSelection() {
         if (this.showCalendarYears) {
             this.showCalendarYears = false;
@@ -658,6 +754,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+
+    /**
+     * Displays the year selection grid.
+     */
     openYearSelection() {
         if (this.showCalendarMonths) {
             this.showCalendarMonths = false;
@@ -670,12 +770,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /**
+     * Displays the date selection grid.
+     */
     openDaySelection() {
         this.showCalendarMonths = false;
         this.showCalendarYears = false;
         this.showCalendarDates = true;
     }
 
+    /** @hidden */
     @HostListener('document:keydown.escape', [])
     onEscapeKeydownHandler() {
         this.showCalendarDates = true;
@@ -683,6 +787,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.showCalendarYears = false;
     }
 
+    /** @hidden */
     @HostListener('document:click', ['$event'])
     onClickHandler(e: MouseEvent) {
         const target = e.target;
@@ -693,6 +798,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     validateDateFromDatePicker(date: Date): boolean {
         if (!date) {
             return true;
@@ -715,6 +821,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         return false;
     }
 
+    /** @hidden */
     resetSelection() {
         if (this.calType === 'single') {
             this.selectedDay = { date: null };
@@ -739,6 +846,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.constructCalendar();
     }
 
+    /** @hidden */
     onKeydownYearHandler(event, year) {
         let newFocusedYearId;
         if (event.code === 'Space' || event.code === 'Enter') {
@@ -783,6 +891,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     onKeydownMonthHandler(event, month) {
         let newFocusedMonthId;
         if (event.code === 'Space' || event.code === 'Enter') {
@@ -819,6 +928,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     onKeydownDayHandler(event, cell) {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (!this.isDateTimePicker) {
@@ -886,6 +996,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     focusElement(elementSelector) {
         const elementToFocus = this.eRef.nativeElement.querySelector(elementSelector);
         if (elementToFocus) {
@@ -893,6 +1004,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     updateFromDatePicker(date: any) {
         if (this.calType === 'single') {
             const singleDate = this.dateAdapter.parse(date);
@@ -943,6 +1055,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     ngOnInit() {
 
         // Localization setup
@@ -977,6 +1090,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.init = true;
     }
 
+    /** @hidden */
     ngAfterViewChecked() {
         if (this.newFocusedDayId) {
             this.focusElement(this.newFocusedDayId);
@@ -984,6 +1098,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     ngOnDestroy() {
         if (this.dateFromDatePicker) {
             this.dateFromDatePicker.unsubscribe();
@@ -994,6 +1109,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
         if (changes && (changes.disableFunction || changes.blockFunction)) {
             this.constructCalendar();
@@ -1007,18 +1123,22 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 public dateAdapter: DateFormatParser) {
     }
 
+    /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         // void
     }
 
+    /** @hidden */
     writeValue(selected: { date: Date; rangeEnd?: Date }): void {
         if (selected && this.calType) {
             if (selected.date && this.calType === 'single') {
@@ -1029,6 +1149,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         }
     }
 
+    /** @hidden */
     private singleFormsSetup(selected: { date: Date; rangeEnd?: Date }): void {
         this.selectedDay.date = new Date(
             selected.date.getFullYear(),
@@ -1044,6 +1165,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.constructCalendarYearsList();
     }
 
+    /** @hidden */
     private rangeFormsSetup(selected: { date: Date; rangeEnd?: Date }): void {
         const fDate = new Date(selected.date.getFullYear(), selected.date.getMonth(), selected.date.getDate());
         const lDate = new Date(
@@ -1067,6 +1189,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
         this.constructCalendarYearsList();
     }
 
+    /** @hidden */
     private setupLocalization(): void {
         this.monthsFullName = this.calendarI18n.getAllFullMonthNames();
         this.monthsShortName = this.calendarI18n.getAllShortMonthNames();

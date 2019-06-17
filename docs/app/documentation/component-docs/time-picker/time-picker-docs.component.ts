@@ -8,6 +8,8 @@ import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compac
 import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
 import * as timePickerOtherDelimiterSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.html';
 import * as timePickerOtherDelimiterTsSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.ts';
+import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
+import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts';
 
 @Component({
     selector: 'app-time-picker',
@@ -23,5 +25,8 @@ export class TimePickerDocsComponent {
     otherFormatTimePickerHtml = timePickerOtherDelimiterSrc;
     otherFormatTimePickerTs = timePickerOtherDelimiterTsSrc;
 
-    constructor() {}
+    timePickerFormHtml = timePickerFormHtmlSrc;
+    timePickerFormTs = timePickerFormTsSrc;
+
+    constructor() { }
 }

@@ -7,6 +7,7 @@ import { SearchInputModule } from '../search-input/search-input.module';
 
 import { ComboboxInputComponent } from './combobox-input.component';
 import { PipeModule } from '../utils/pipes/pipe.module';
+import { MenuItemDirective } from '../menu/menu-item.directive';
 
 describe('ComboboxInputComponent', () => {
   let component: ComboboxInputComponent;
@@ -55,23 +56,25 @@ describe('ComboboxInputComponent', () => {
             preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
-        const item1 = {
+        const item1 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
-        const item2 = {
+        const item2 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,
@@ -90,23 +93,25 @@ describe('ComboboxInputComponent', () => {
             preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
-        const item1 = {
+        const item1 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
-        const item2 = {
+        const item2 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,

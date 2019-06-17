@@ -205,6 +205,7 @@ import {
     TimePickerAllowNullExampleComponent,
 
 } from './component-docs/time-picker/examples/time-picker-examples.component';
+import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
 import { DisabledToggleExampleComponent } from './component-docs/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
@@ -281,6 +282,7 @@ import { ImageHeaderComponent } from './component-docs/image/image-header/image-
 import { InfiniteScrollHeaderComponent } from './component-docs/infinite-scroll/infinite-scroll-header/infinite-scroll-header.component';
 import { InlineHelpHeaderComponent } from './component-docs/inline-help/inline-help-header/inline-help-header.component';
 import { InputGroupHeaderComponent } from './component-docs/input-group/input-group-header/input-group-header.component';
+import { InputGroupFormExampleComponent } from './component-docs/input-group/examples/input-group-form-example.component';
 import { ListHeaderComponent } from './component-docs/list/list-header/list-header.component';
 import { LoadingSpinnerHeaderComponent } from './component-docs/loading-spinner-docs/loading-spinner-header/loading-spinner-header.component';
 import { MenuHeaderComponent } from './component-docs/menu/menu-header/menu-header.component';
@@ -318,6 +320,8 @@ import { DatePickerAllowNullExampleComponent } from './component-docs/date-picke
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
 import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
+
+
 
 export function highlightJsFactory() {
     return hljs;
@@ -441,6 +445,7 @@ export function highlightJsFactory() {
         InputGroupSearchExampleComponent,
         InputGroupTextExampleComponent,
         InputGroupTextCompactExampleComponent,
+        InputGroupFormExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
@@ -516,6 +521,7 @@ export function highlightJsFactory() {
         TimePickerCompactExampleComponent,
         TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
+        TimePickerFormExampleComponent,
         ComboboxInputDocsComponent,
         ComboboxInputExampleComponent,
         LoadingSpinnerDocsComponent,
