@@ -5,11 +5,9 @@ import { DateTimeFormatParser } from '../../../../../../../library/src/lib/datet
 export class DateTimeFormatExample extends DateTimeFormatParser {
 
     public parse(value: string): Date {
-
-        value = value.replace(/\//g, '-').replace(/ /g, '-');
+        value = value.replace(/[\/hms ]/g, '-');
         const values: number[] = value.split('-').map(Number);
-
-        return new Date(Number(values[0]), values[1] - 1, values[2], values[3], values[4], values[5]);
+        return new Date(Number(values[1] - 1), values[0], values[2], values[3], values[4], values[5]);
     }
 
     public format(date: Date): string {
@@ -17,9 +15,9 @@ export class DateTimeFormatExample extends DateTimeFormatParser {
         return date.getFullYear() + '-' +
             getAtLeastTwoDigits(date.getMonth() + 1) + '-' +
             date.getDate() + ' ' +
-            getAtLeastTwoDigits(date.getHours()) + '/' +
-            getAtLeastTwoDigits(date.getMinutes()) + '/' +
-            getAtLeastTwoDigits(date.getSeconds());
+            getAtLeastTwoDigits(date.getHours()) + 'h' +
+            getAtLeastTwoDigits(date.getMinutes()) + 'm' +
+            getAtLeastTwoDigits(date.getSeconds()) + 's'
     }
 }
 
