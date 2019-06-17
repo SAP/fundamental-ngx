@@ -27,7 +27,6 @@ describe('BadgeComponent', () => {
         expect(component).toBeTruthy();
         component.ngOnInit();
         expect(component._setProperties).toHaveBeenCalled();
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-badge');
         expect(component._addClassToElement).toHaveBeenCalledWith('fd-badge--someStatus');
         expect(component._addClassToElement).toHaveBeenCalledWith('fd-badge--someModifier');
     });
