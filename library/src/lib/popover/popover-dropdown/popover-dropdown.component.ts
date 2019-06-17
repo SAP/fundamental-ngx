@@ -5,9 +5,7 @@ import { PopoverComponent } from '../popover.component';
  * A component used to enforce a certain layout for the popover. With additional styling
  * ```html
  * <fd-popover>
- *     <fd-popover-control>
- *         <fd-dropdown>Dropdown</fd-dropdown>
- *     </fd-popover-control>
+ *     <fd-dropdown>Dropdown</fd-dropdown>
  *     <fd-popover-body>Popover Body</fd-popover-body>
  * </fd-popover>
  * ```

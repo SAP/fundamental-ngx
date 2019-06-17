@@ -5,7 +5,7 @@
          aria-haspopup="true"
          [fdPopover]="popoverBody"
          [(isOpen)]="isOpen"
-         (isOpenChange)="isOpenChange.emit($event)"
+         (isOpenChange)="openChanged($event)"
          [noArrow]="noArrow"
          [disabled]="disabled"
          [triggers]="triggers"
@@ -17,6 +17,7 @@
          [closeOnEscapeKey]="closeOnEscapeKey"
          [appendTo]="(appendTo ? appendTo : popoverContainer)">
         <ng-content select="fd-popover-control"></ng-content>
+        <ng-content select="fd-dropdown"></ng-content>
     </div>
     <ng-template #popoverBody>
         <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>

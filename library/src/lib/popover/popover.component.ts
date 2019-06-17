@@ -3,10 +3,11 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation
+    ViewChild, ViewEncapsulation, ContentChild
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
+import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
 let popoverUniqueId: number = 0;
 
@@ -31,6 +32,8 @@ export class PopoverComponent {
     /** @hidden */
     @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
+    /** @hidden */
+    @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
 
     /** Whether the popover should have an arrow. */
     @Input()
@@ -135,6 +138,24 @@ export class PopoverComponent {
      */
     public updatePopover(): void {
         this.directiveRef.updatePopper();
+    }
+
+    /**
+     * Function is called every time popover changes open attribute
+     */
+    public openChanged(isOpen: boolean) {
+        this.isOpenChange.emit(isOpen);
+        this.updateDropdownIsOpen(isOpen);
+    }
+
+
+    /** @hidden
+     *  Function that allows us to control aria-expanded on dropdown child
+     * */
+    private updateDropdownIsOpen(isOpen: boolean) {
+        if (this.dropdownComponent) {
+            this.dropdownComponent.isOpen = isOpen;
+        }
     }
 
 }
