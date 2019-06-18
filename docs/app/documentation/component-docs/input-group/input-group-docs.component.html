@@ -55,7 +55,8 @@
 <separator></separator>
 
 <h2>&lt;fd-input-group-search&gt;</h2>
-<description>This input group automatically shows a clear search button when the user has entered a value in the input.</description>
+<description>This input group automatically shows a clear search button when the user has entered a value in the input.
+</description>
 <component-example [name]="'ex6'">
     <fd-input-group-search-example></fd-input-group-search-example>
 </component-example>
@@ -63,12 +64,21 @@
 
 <separator></separator>
 
+<h2>&lt;fd-input-group-search&gt; Component Within Angular Reactive Form</h2>
+<description>It is possible to use the input-group-search component within an Angular Reactive Form.</description>
+<component-example [name]="'ex7'">
+    <fd-input-group-form-example></fd-input-group-form-example>
+</component-example>
+<code-example [code]="formInputTs" [language]="'Typescript'"></code-example>
+<code-example [code]="formInputHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
 
     <fd-input-group [addOnText]="data.properties.addOnText" [placeholder]="data.properties.placeholder"
-                    [button]="data.properties.button"
-                    [glyph]="data.properties.glyph" [inline]="data.properties.inline"
-                    [(ngModel)]="data.properties.ngModel"
-                    [placement]="data.properties.placement" [disabled]="data.state.disabled"></fd-input-group>
+        [button]="data.properties.button" [glyph]="data.properties.glyph" [inline]="data.properties.inline"
+        [(ngModel)]="data.properties.ngModel" [placement]="data.properties.placement" [disabled]="data.state.disabled">
+    </fd-input-group>
 
 </playground>

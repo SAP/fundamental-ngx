@@ -39,8 +39,18 @@
 
 <separator></separator>
 <h2>Null Validity</h2>
-<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.</description>
+<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
+  invalid.</description>
 <component-example [name]="'ex6'">
   <fd-time-picker-allow-null-example></fd-time-picker-allow-null-example>
 </component-example>
 <code-example [code]="nullTimePickerHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+<h2>Time Picker in Form</h2>
+<description>The time-picker component may also be used together with Angular reactive forms.</description>
+<component-example [name]="'ex7'">
+  <fd-time-picker-form-example></fd-time-picker-form-example>
+</component-example>
+<code-example [code]="timePickerFormHtml" [language]="'HTML'"></code-example>
+<code-example [code]="timePickerFormTs" [language]="'Typescript'"></code-example>

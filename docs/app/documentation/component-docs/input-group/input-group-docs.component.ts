@@ -8,6 +8,8 @@ import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-
 import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
+import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts'
+import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html'
 
 @Component({
     selector: 'app-input-group',
@@ -707,6 +709,9 @@ export class InputGroupDocsComponent {
     searchInputHtml = inputGroupSearchSrc;
 
     textCompactHtml = inputGroupTextCompactSrc;
+
+    formInputTs = formInputTsSrc;
+    formInputHtml = formInputHtmlSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');

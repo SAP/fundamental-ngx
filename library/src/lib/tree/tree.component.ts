@@ -64,11 +64,25 @@ export class TreeComponent implements OnInit, AfterContentInit {
     }
 
     handleEmptyTrailingCells(row) {
-        if (row && row.rowData && row.rowData.length && typeof row.rowData[0] !== 'object') {
+        if (
+            row &&
+            row.rowData &&
+            row.rowData.length &&
+            typeof row.rowData[0] !== 'object' &&
+            this.headers &&
+            this.headers.length
+        ) {
             while (row.rowData.length < this.headers.length) {
                 row.rowData.push('');
             }
-        } else if (row && row.rowData && row.rowData.length && typeof row.rowData[0] === 'object') {
+        } else if (
+            row &&
+            row.rowData &&
+            row.rowData.length &&
+            typeof row.rowData[0] === 'object' &&
+            this.headers &&
+            this.headers.length
+        ) {
             while (row.rowData.length < this.headers.length) {
                 row.rowData.push({
                     displayText: ''

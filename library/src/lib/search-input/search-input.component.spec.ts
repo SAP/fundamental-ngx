@@ -6,6 +6,7 @@ import { PopoverModule } from '../popover/popover.module';
 
 import { SearchInputComponent } from './search-input.component';
 import { PipeModule } from '../utils/pipes/pipe.module';
+import { MenuItemDirective } from '../menu/menu-item.directive';
 
 describe('SearchInputComponent', () => {
     let component: SearchInputComponent;
@@ -65,23 +66,25 @@ describe('SearchInputComponent', () => {
         component.onMenuKeydownHandler(event, term);
         expect(component.itemClicked.emit).toHaveBeenCalled();
         spyOn(event, 'preventDefault');
-        const item1 = {
+        const item1 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
-        const item2 = {
+        const item2 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,
@@ -100,23 +103,25 @@ describe('SearchInputComponent', () => {
             preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
-        const item1 = {
+        const item1 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
-        const item2 = {
+        const item2 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,
@@ -135,23 +140,25 @@ describe('SearchInputComponent', () => {
             preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
-        const item1 = {
+        const item1 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
-        const item2 = {
+        const item2 = <MenuItemDirective>{
             itemEl: {
                 nativeElement: {
                     children: [
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            }
+            },
+            ngAfterViewInit: () => {}
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,
