@@ -69,8 +69,6 @@ let calendarUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, ControlValueAccessor, OnChanges {
-    /** @hidden id for the calendar */
-    id: string;
 
     /** @hidden The id of the newly focused day. Internal use. */
     newFocusedDayId: string;
@@ -85,6 +83,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     /** @hidden Subject the calendar subscribes to when the date value from the datePicker component changes. Internal use. */
     @Input()
     dateFromDatePicker: Subject<any>;
+
+    /** Id of the calendar. If none is provided, one will be generated. */
+    @Input()
+    id = 'fd-calendar-' + calendarUniqueId++;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -1067,7 +1069,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
         this.constructCalendar();
         this.constructCalendarYearsList();
-        this.id = 'fd-calendar-' + calendarUniqueId++;
         if (this.month) {
             this.selectMonth(this.month);
         } else {
