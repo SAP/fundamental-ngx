@@ -57,7 +57,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
-    placement: Placement = 'auto';
+    placement: Placement = 'bottom-start';
 
     /** Whether the time component should be meridian (am/pm). */
     @Input()
