@@ -202,7 +202,8 @@ import {
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent
+    TimePickerAllowNullExampleComponent,
+
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
@@ -211,6 +212,7 @@ import { DisabledToggleExampleComponent } from './component-docs/toggle/examples
 import { ToggleBindingExampleComponent } from './component-docs/toggle/examples/toggle-binding-example/toggle-binding-example.component';
 import { ToggleFormsExampleComponent } from './component-docs/toggle/examples/toggle-form-example/toggle-forms-example.component';
 import { ListInfiniteScrollExampleComponent } from './component-docs/list/examples/list-infinite-scroll-example.component';
+import { ListCheckboxFormExampleComponent } from './component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
 import { ModalInModalComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal.component';
 import { ModalInModalSecondComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal-second.component';
@@ -321,8 +323,8 @@ import { DatePickerAllowNullExampleComponent } from './component-docs/date-picke
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
 import { DatePickerPositionExampleComponent } from './component-docs/date-picker/examples/date-picker-position-example.component';
+import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
 import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
-
 
 export function highlightJsFactory() {
     return hljs;
@@ -452,6 +454,7 @@ export function highlightJsFactory() {
         ListCheckboxExampleComponent,
         ListExampleComponent,
         ListInfiniteScrollExampleComponent,
+        ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
@@ -521,6 +524,7 @@ export function highlightJsFactory() {
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
         TimePickerCompactExampleComponent,
+        TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
         TimePickerFormExampleComponent,
         ComboboxInputDocsComponent,

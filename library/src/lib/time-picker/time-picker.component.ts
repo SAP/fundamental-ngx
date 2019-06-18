@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, V
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TimeFormatParser } from './format/time-parser';
 
 @Component({
     selector: 'fd-time-picker',
@@ -105,110 +106,23 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     /** @hidden */
     getFormattedTime(): string {
-        let formattedHour, formattedMinute, formattedSecond;
-        let formattedTime;
-        let formattedMeridian;
-        if (this.time.hour !== null) {
-            if (this.meridian) {
-                if (this.time.hour === 0) {
-                    formattedHour = 12;
-                    formattedMeridian = 'am';
-                } else if (this.time.hour > 12) {
-                    formattedHour = this.time.hour - 12;
-                    formattedMeridian = 'pm';
-                } else if (this.time.hour === 12) {
-                    formattedHour = 12;
-                    formattedMeridian = 'pm';
-                } else {
-                    formattedHour = this.time.hour;
-                    formattedMeridian = 'am';
-                }
-            } else {
-                formattedHour = this.time.hour;
-            }
-        }
-        if (this.time.minute < 10 && this.time.minute !== null) {
-            formattedMinute = '0' + this.time.minute;
-        } else {
-            formattedMinute = this.time.minute;
-        }
-        if (this.time.second < 10 && this.time.second !== null && this.displaySeconds) {
-            formattedSecond = '0' + this.time.second;
-        } else if (this.displaySeconds) {
-            formattedSecond = this.time.second;
-        }
-        if (formattedHour || formattedHour === 0) {
-            formattedTime = formattedHour;
-            if (formattedMinute || formattedMinute === '00') {
-                formattedTime = formattedHour + ':' + formattedMinute;
-                if (formattedSecond || formattedSecond === '00') {
-                    formattedTime = formattedTime + ':' + formattedSecond;
-                }
-            }
-            if (formattedMeridian) {
-                formattedTime = formattedTime + ' ' + formattedMeridian;
-            }
-        }
-
+        const formattedTime = this.timeAdapter.format(this.time, this.meridian);
         return formattedTime !== undefined ? formattedTime : '';
     }
 
     /** @hidden */
     timeInputChanged(timeFromInput) {
-        // check for valid time input - 24-hour hh:mm:ss
-        let regexp;
-        if (!this.meridian) {
-            if (this.displaySeconds) {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])$/;
-            } else {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/;
-            }
-            if (regexp.test(timeFromInput)) {
-                const splitString = timeFromInput.split(':');
-                this.time.hour = parseInt(splitString[0], 10);
-                this.time.minute = parseInt(splitString[1], 10);
-                if (this.displaySeconds) {
-                    this.time.second = parseInt(splitString[2], 10);
-                }
+        const time = this.timeAdapter.parse(timeFromInput, this.displaySeconds, this.meridian);
+        if (time) {
+            this.isInvalidTimeInput = false;
+            this.child.setDisplayedHour();
+            this.time = Object.assign(this.time, time);
+            this.onChange(time);
+        } else {
+            if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
-                this.onChange(this.time);
-            } else if (timeFromInput === '' && this.allowNull) {
-                this.isInvalidTimeInput = false;
-                this.time.second = null;
-                this.time.minute = null;
-                this.time.hour = null;
                 this.child.setDisplayedHour();
-                this.onChange(this.time);
-            } else {
-                this.isInvalidTimeInput = true;
-            }
-        } else if (this.meridian) {
-            if (this.displaySeconds) {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9]) [APap][mM]$/;
-            } else {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]) [APap][mM]$/;
-            }
-            if (regexp.test(timeFromInput)) {
-                const period = timeFromInput.split(' ')[1];
-                this.period = period;
-                const splitString = timeFromInput.split(':');
-                this.time.hour = parseInt(splitString[0], 10);
-                if (period === 'pm' || period === 'PM') {
-                    if (this.time.hour < 12) {
-                        this.time.hour = this.time.hour + 12;
-                    }
-                } else if (period === 'am' || period === 'AM') {
-                    if (this.time.hour === 12) {
-                        this.time.hour = 0;
-                    }
-                }
-                this.child.setDisplayedHour();
-                this.time.minute = parseInt(splitString[1], 10);
-                if (this.displaySeconds) {
-                    this.time.second = parseInt(splitString[2], 10);
-                }
-                this.isInvalidTimeInput = false;
-                this.onChange(this.time);
+                this.onChange({hour: null, minutes: null, seconds: null});
             } else {
                 this.isInvalidTimeInput = true;
             }
@@ -248,15 +162,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
         let retVal;
         if (this.displaySeconds) {
             if (this.meridian) {
-                retVal = 'hh:mm:ss am/pm';
+                retVal = 'hh' + ':' + 'mm' + ':' + 'ss am/pm';
             } else {
-                retVal = 'hh:mm:ss';
+                retVal = 'hh' + ':' + 'mm' + ':' + 'ss';
             }
         } else {
             if (this.meridian) {
-                retVal = 'hh:mm am/pm';
+                retVal = 'hh' + ':' + 'mm' + ' am/pm';
             } else {
-                retVal = 'hh:mm';
+                retVal = 'hh' + ':' + 'mm';
             }
         }
 
@@ -293,5 +207,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     }
 
     /** @hidden */
-    constructor(private cd: ChangeDetectorRef) {}
+    constructor(private cd: ChangeDetectorRef,
+                public timeAdapter: TimeFormatParser) {}
 }
