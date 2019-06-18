@@ -16,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
+import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
 
 /**
@@ -52,6 +53,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Whether the component should be in compact mode. */
     @Input()
     compact: boolean = false;
+
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    @Input()
+    placement: Placement = 'auto';
 
     /** Whether the time component should be meridian (am/pm). */
     @Input()
