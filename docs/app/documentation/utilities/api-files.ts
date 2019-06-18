@@ -7,12 +7,12 @@
  */
 export const API_FILES = {
     actionBar: [
-        'ActionBarComponent',
-        'ActionBarActionsComponent',
-        'ActionBarBackComponent',
-        'ActionBarDescriptionComponent',
-        'ActionBarHeaderComponent',
-        'ActionBarMobileComponent',
+        'ActionBarDirective',
+        'ActionBarActionsDirective',
+        'ActionBarBackDirective',
+        'ActionBarDescriptionDirective',
+        'ActionBarHeaderDirective',
+        'ActionBarMobileDirective',
         'ActionBarTitleComponent'
     ],
     alert: [

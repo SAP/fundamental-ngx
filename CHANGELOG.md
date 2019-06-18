@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.39"></a>
+## [0.5.3-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.38...v0.5.3-rc.39) (2019-06-18)
+
+
+
+<a name="0.5.3-rc.38"></a>
+## [0.5.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.37...v0.5.3-rc.38) (2019-06-17)
+
+
+### Bug Fixes
+
+* add custom formatting to datetime picker ([#918](https://github.com/SAP/fundamental-ngx/issues/918)) ([8425549](https://github.com/SAP/fundamental-ngx/commit/8425549))
+
+
+
+<a name="0.5.3-rc.37"></a>
+## [0.5.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.36...v0.5.3-rc.37) (2019-06-17)
+
+
+
+<a name="0.5.3-rc.36"></a>
+## [0.5.3-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.35...v0.5.3-rc.36) (2019-06-17)
+
+
+
+<a name="0.5.3-rc.35"></a>
+## [0.5.3-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.34...v0.5.3-rc.35) (2019-06-17)
+
+
+
+<a name="0.5.3-rc.34"></a>
+## [0.5.3-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.33...v0.5.3-rc.34) (2019-06-17)
+
+
+### Bug Fixes
+
+* **tree:** when using the <fd-tree> without a [header] this part of the code throws errors because this.header is undefined, practically making [header] a mandatory attribute even if you do not need headers (currently you need to provide an empty array). ([#933](https://github.com/SAP/fundamental-ngx/issues/933)) ([5ea350f](https://github.com/SAP/fundamental-ngx/commit/5ea350f))
+
+
+
 <a name="0.5.3-rc.33"></a>
 ## [0.5.3-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.32...v0.5.3-rc.33) (2019-06-14)
 

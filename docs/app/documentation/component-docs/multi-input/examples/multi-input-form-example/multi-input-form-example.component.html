@@ -1,0 +1,9 @@
+<form [formGroup]="customForm">
+    <fd-multi-input formControlName="selectedValues" [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+        [placeholder]="'Search Here...'">
+    </fd-multi-input>
+</form>
+
+Selected Values: <span *ngIf="customForm.controls.selectedValues.value">
+    {{ customForm.controls.selectedValues.value | json }}
+</span>
