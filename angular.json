@@ -22,7 +22,7 @@
                         ],
                         "styles": [
                             "docs/fd-typedoc/assets/css/main.scss",
-                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
+                            "node_modules/fundamental-styles/dist/fundamental-styles.min.css",
                             "docs/styles.scss"
                         ],
                         "scripts": [
