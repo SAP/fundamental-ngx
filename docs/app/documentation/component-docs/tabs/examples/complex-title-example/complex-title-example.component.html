@@ -1,23 +1,31 @@
-<fd-tab-list>
-    <fd-tab>
-        <ng-template fd-tab-title>
-            <fd-icon [glyph]="'delete'"></fd-icon>
-            <span style="margin-left: 12px;">Delete</span>
-        </ng-template>
-        Content for tab 1
-    </fd-tab>
-    <fd-tab>
-        <ng-template fd-tab-title>
-            <fd-icon [glyph]="'edit'"></fd-icon>
-            <span style="margin-left: 12px;">Edit</span>
-        </ng-template>
-        Content for tab 2
-    </fd-tab>
-    <fd-tab [title]="'Tab 3'">
-        <ng-template fd-tab-title>
-            <fd-icon [glyph]="'search'"></fd-icon>
-            <span style="margin-left: 12px;">Search</span>
-        </ng-template>
-        Content for tab 3
-    </fd-tab>
-</fd-tab-list>
+<fd-tab>
+    <nav fd-tab-list>
+        <div fd-tab-item >
+            <a fd-tab-link>
+                <fd-icon [glyph]="'delete'"></fd-icon>
+                <span style="margin-left: 12px;">Delete</span>
+            </a>
+            <ng-template fd-tab-content>
+                Content Link1
+            </ng-template>
+        </div>
+        <div fd-tab-item [active]="true">
+            <a fd-tab-link>
+                <fd-icon [glyph]="'edit'"></fd-icon>
+                <span style="margin-left: 12px;">Edit</span>
+            </a>
+            <ng-template fd-tab-content>
+                Content Link2
+            </ng-template>
+        </div>
+        <div fd-tab-item>
+            <a fd-tab-link>
+                <fd-icon [glyph]="'search'"></fd-icon>
+                <span style="margin-left: 12px;">Search</span>
+            </a>
+            <ng-template fd-tab-content>
+                Content Link3
+            </ng-template>
+        </div>
+    </nav>
+</fd-tab>

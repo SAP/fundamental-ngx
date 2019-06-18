@@ -16,10 +16,9 @@ import { Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRe
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-title]'
+    selector: '[fd-tab-content]'
 })
-export class TabTitleDirective {
-}
+export class TabContentDirective {}
 
 /**
  * Not for external use. Portal to render the complex title template.
@@ -27,11 +26,10 @@ export class TabTitleDirective {
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-load-title]'
+    selector: '[fd-tab-load-content]'
 })
-export class TabLoadTitleDirective implements OnInit {
-    @Input('fd-tab-load-title')
-    content: TemplateRef<any>;
+export class TabLoadContentDirective implements OnInit {
+    @Input('fd-tab-load-content') content: TemplateRef<any>;
 
     private contentRef: EmbeddedViewRef<any>;
 

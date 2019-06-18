@@ -1,0 +1,10 @@
+<ng-content select="[fd-tab-list]"></ng-content>
+<ng-container *ngFor="let tab of tabListComponent?.tabItems; index as index">
+    <fd-tab-panel
+        [ariaLabel]="tab.ariaLabel"
+        [ariaLabelledBy]="tab.ariaLabelledBy"
+        [id]="tab.id"
+        [ngClass]="{'fd-tab__panel--hidden': !tab.tabContent || !tabListComponent || index !== tabListComponent.selectedIndex}">
+        <ng-container [fd-tab-load-content]="tab.tabContent"></ng-container>
+    </fd-tab-panel>
+</ng-container>

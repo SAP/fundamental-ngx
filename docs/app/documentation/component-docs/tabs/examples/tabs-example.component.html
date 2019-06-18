@@ -1,14 +1,28 @@
-<fd-tab-list>
-    <fd-tab [title]="'Link'">
-        Content Link
-    </fd-tab>
-    <fd-tab [title]="'Selected'" [disabled]="false">
-        Content Selected
-    </fd-tab>
-    <fd-tab [title]="'Link'" [disabled]="false">
-        Content Link Two
-    </fd-tab>
-    <fd-tab [title]="'Disabled'" [disabled]="true">
-        Disabled
-    </fd-tab>
-</fd-tab-list>
+<fd-tab>
+    <nav fd-tab-list>
+        <div fd-tab-item >
+            <a fd-tab-link>link1</a>
+            <ng-template fd-tab-content>
+                    Content Link1
+            </ng-template>
+        </div>
+        <div fd-tab-item [active]="true">
+            <a fd-tab-link>link2</a>
+            <ng-template fd-tab-content>
+                    Content Link2
+            </ng-template>
+        </div>
+        <div fd-tab-item>
+            <a fd-tab-link>link2</a>
+            <ng-template fd-tab-content>
+                    Content Link3
+            </ng-template>
+        </div>
+        <div fd-tab-item [disabled]="true">
+            <a fd-tab-link>link4</a>
+            <ng-template fd-tab-content>
+                    Content Link4
+            </ng-template>
+        </div>
+    </nav>
+</fd-tab>

@@ -1,13 +1,11 @@
 import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { TabTitleDirective } from '../tab-utils/tab-directives';
-
-let tabPanelUniqueId: number = 0;
+import { TabItemDirective } from '../tab-item/tab-item.directive';
 
 /**
  * Represents the body of a tab element. It also contains elements pertaining to the associated tab header.
  */
 @Component({
-    selector: 'fd-tab',
+    selector: 'fd-tab-panel',
     templateUrl: './tab-panel.component.html',
     host: {
         role: 'tabpanel',
@@ -20,14 +18,6 @@ let tabPanelUniqueId: number = 0;
 })
 export class TabPanelComponent {
 
-    /** @hidden */
-    @ContentChild(TabTitleDirective, {read: TemplateRef})
-    titleTemplate: TemplateRef<any>;
-
-    /** The title of the tab header. */
-    @Input()
-    title: string;
-
     /** Aria-label of the tab. Also applied to the tab header. */
     @Input()
     ariaLabel: string;
@@ -36,13 +26,9 @@ export class TabPanelComponent {
     @Input()
     ariaLabelledBy: string;
 
-    /** Whether the tab is disabled. */
+    /** Id of the tab*/
     @Input()
-    disabled: boolean;
-
-    /** Id of the tab. If none is provided, one will be generated. */
-    @Input()
-    id: string = 'fd-tab-panel' + tabPanelUniqueId++;
+    id: string;
 
     /** @hidden */
     expanded = false;

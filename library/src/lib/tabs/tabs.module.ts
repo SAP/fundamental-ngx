@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TabPanelComponent } from './tab/tab-panel.component';
-import { TabListComponent } from './tab-list.component';
+import { TabPanelComponent } from './tab-panel/tab-panel.component';
+import { TabListComponent } from './tab-list/tab-list.component';
 
-import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-directives';
+import { TabContentDirective, TabLoadContentDirective } from './tab-utils/tab-directives';
+import { TabLinkDirective } from './tab-link/tab-link.directive';
+import { TabItemDirective } from './tab-item/tab-item.directive';
+import { TabNavDirective } from './tab-nav/tab-nav.directive';
+import { TabComponent } from './tab.component';
 
 @NgModule({
     declarations: [
         TabListComponent,
         TabPanelComponent,
-        TabTitleDirective,
-        TabLoadTitleDirective
+        TabLoadContentDirective,
+        TabLinkDirective,
+        TabItemDirective,
+        TabNavDirective,
+        TabContentDirective,
+        TabComponent
     ],
     imports: [
         CommonModule
@@ -19,7 +27,12 @@ import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-direct
     exports: [
         TabListComponent,
         TabPanelComponent,
-        TabTitleDirective
+        TabLoadContentDirective,
+        TabLinkDirective,
+        TabItemDirective,
+        TabNavDirective,
+        TabContentDirective,
+        TabComponent
     ]
 })
 export class TabsModule {}

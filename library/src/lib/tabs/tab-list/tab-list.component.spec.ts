@@ -1,0 +1,80 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+
+import { TabListComponent } from './tab-list.component';
+import { TabsModule } from '../tabs.module';
+
+@Component({
+    selector: 'fd-test-tabs',
+    template: `
+        <fd-tab>
+            <nav fd-tab-list>
+                <div fd-tab-item id="tab1">
+                    <a fd-tab-link>link1</a>
+                    <ng-template fd-tab-content>
+                        Content Link1
+                    </ng-template>
+                </div>
+                <div fd-tab-item [active]="true" id="tab2">
+                    <a fd-tab-link>link2</a>
+                    <ng-template fd-tab-content>
+                        Content Link2
+                    </ng-template>
+                </div>
+                <div fd-tab-item [disabled]="true" id="tab3">
+                    <a fd-tab-link>Disabled</a>
+                    <ng-template fd-tab-content>
+                        Disabled
+                    </ng-template>
+                </div>
+            </nav>
+        </fd-tab>
+    `
+})
+class TestWrapperComponent {}
+
+describe('TabListComponent', () => {
+    let component: TabListComponent;
+    let fixture: ComponentFixture<TestWrapperComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestWrapperComponent],
+            imports: [TabsModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestWrapperComponent);
+        component = fixture.debugElement.children[0].componentInstance.tabListComponent;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should handle ngAfterContentInit', () => {
+        component.ngAfterContentInit();
+        expect(component.selectedIndex).toBe(1);
+        expect(component.tabItems.length).toBe(3);
+    });
+
+    it('should handle tab select', () => {
+        component.ngAfterContentInit();
+        component.selectedIndexChange.subscribe(id => expect(id).toBe(1));
+        component.selectTab(1);
+    });
+
+    it('should not select disabled tabs', () => {
+        component.ngAfterContentInit();
+        component.selectedIndexChange.subscribe(id => expect(id).toBe(  0));
+        component.selectTab(2);
+    });
+
+    it('should select first tab if selected tab does not exist', () => {
+        component.ngAfterContentInit();
+        component.selectTab(10);
+        expect(component.getActiveTabItemIndex()).toBe(1);
+    });
+});

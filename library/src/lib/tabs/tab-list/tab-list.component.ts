@@ -1,8 +1,6 @@
 import {
     AfterContentInit,
-    Component,
-    ContentChildren,
-    ElementRef,
+    ContentChildren, Directive,
     EventEmitter,
     Input,
     OnChanges,
@@ -10,33 +8,25 @@ import {
     Output,
     QueryList,
     SimpleChanges,
-    ViewChildren,
-    ViewEncapsulation
 } from '@angular/core';
-import { TabPanelComponent } from './tab/tab-panel.component';
 import { Subscription } from 'rxjs';
+import { TabItemDirective } from '../tab-item/tab-item.directive';
 
 /**
  * Represents a list of tab-panels.
  */
-@Component({
-    selector: 'fd-tab-list',
-    templateUrl: './tab-list.component.html',
-    styleUrls: ['./tab-list.component.scss'],
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-tab-list]',
     host: {
-        class: 'fd-tabs-custom'
+        role: 'tablist',
+        class: 'fd-tabs'
     },
-    encapsulation: ViewEncapsulation.None
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
     /** @hidden */
-    @ContentChildren(TabPanelComponent)
-    tabs: QueryList<TabPanelComponent>;
-
-    /** @hidden */
-    @ViewChildren('tabLink')
-    tabLinks: QueryList<ElementRef>;
+    @ContentChildren(TabItemDirective) tabItems: QueryList<TabItemDirective>;
 
     /** Index of the selected tab panel. */
     @Input()
@@ -46,24 +36,38 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
+    /** @hidden */
     private _tabsSubscription: Subscription;
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        setTimeout(() => {
-            this.selectTab(this.selectedIndex);
-        });
+    private _tabsClickSubscription: Subscription[] = [];
 
-        this._tabsSubscription = this.tabs.changes.subscribe(() => {
-            if (!this.isIndexInRange() || this.isTabContentEmpty()) {
+    /** @hidden */
+    private _tabsKeyPressSubscription: Subscription[] = [];
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (!this.isAnyActiveTabItem()) {
+            this.selectTab(this.selectedIndex);
+        } else {
+            this.selectedIndexChange.emit(this.getActiveTabItemIndex());
+            this.selectedIndex = this.getActiveTabItemIndex();
+        }
+
+        this.refreshSubscriptions();
+        this._tabsSubscription = this.tabItems.changes.subscribe(() => {
+            if (!this.isListEmpty() && !this.isIndexInRange(this.selectedIndex) || this.isTabContentEmpty()) {
                 this.resetTabHook();
             }
+            this.refreshSubscriptions();
         });
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._tabsSubscription.unsubscribe();
+        this._tabsClickSubscription.forEach(tab => tab.unsubscribe());
+        this._tabsKeyPressSubscription.forEach(tab => tab.unsubscribe());
     }
 
     /** @hidden */
@@ -80,10 +84,8 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
      * @param tabIndex Index of the tab to select.
      */
     selectTab(tabIndex: number): void {
-        if (this.isIndexInRange() && this.isTargetTabEnabled(tabIndex)) {
-            this.tabs.forEach((tab, index) => {
-                tab.expanded = index === tabIndex;
-            });
+        if (this.isIndexInRange(tabIndex) && this.isTargetTabEnabled(tabIndex)) {
+            this.tabItems.forEach((tab, index) => tab.activateChange(index === tabIndex));
             this.selectedIndex = tabIndex;
             this.selectedIndexChange.emit(tabIndex);
         }
@@ -103,12 +105,12 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
                 if (index - 1 >= 0) {
                     this.getTabLinkFromIndex(index - 1).focus();
                 } else {
-                    this.getTabLinkFromIndex(this.tabLinks.length - 1).focus();
+                    this.getTabLinkFromIndex(this.tabItems.length - 1).focus();
                 }
                 break;
             }
             case ('ArrowRight'): {
-                if (index + 1 < this.tabLinks.length) {
+                if (index + 1 < this.tabItems.length) {
                     this.getTabLinkFromIndex(index + 1).focus();
                 } else {
                     this.getTabLinkFromIndex(0).focus();
@@ -130,18 +132,46 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         }
     }
 
-    private isIndexInRange(): boolean {
-        return this.tabs && this.tabs.length > 0 && this.selectedIndex < this.tabs.length;
+    /** Function that returns if there is any active tab*/
+    isAnyActiveTabItem(): boolean {
+        return !!this.tabItems.find(tab => tab.active);
+    }
+
+    /** Function that returns opened tab index*/
+    getActiveTabItemIndex(): number | null {
+        return this.tabItems.toArray().findIndex(item => item.active);
+    }
+
+    /** @hidden
+     *  When There are some changes at amount of tabs there is a need to reset subscription
+     * */
+    private refreshSubscriptions() {
+        this._tabsClickSubscription.forEach(tab => tab.unsubscribe());
+        this._tabsKeyPressSubscription.forEach(tab => tab.unsubscribe());
+        this._tabsClickSubscription = this.tabItems.map((tab, index) => tab.tabLink && tab.tabLink.clicked.subscribe(() =>
+            this.tabHeaderClickHandler(index))
+        );
+        this._tabsKeyPressSubscription = this.tabItems.map((tab, index) => tab.tabLink && tab.tabLink.keyPressed.subscribe((event) =>
+            this.tabHeaderKeyHandler(index, event))
+        );
+    }
+
+    private isIndexInRange(tabIndex): boolean {
+        return this.tabItems && tabIndex < this.tabItems.length;
+    }
+
+    private isListEmpty() {
+        return this.tabItems && this.tabItems.length === 0;
     }
 
     private isTargetTabEnabled(index: number): boolean {
-        return !this.tabs.toArray()[index].disabled;
+        return !this.tabItems.toArray()[index].disabled;
     }
 
     private isTabContentEmpty(): boolean {
         let result = true;
-        this.tabs.forEach(tab => {
-            if (tab.expanded) {
+        this.tabItems.forEach(tab => {
+            if (tab.active) {
                 result = false;
             }
         });
@@ -155,7 +185,7 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         });
     }
 
-    private getTabLinkFromIndex(index: number): HTMLElement {
-        return this.tabLinks.toArray()[index].nativeElement as HTMLElement;
+    private getTabLinkFromIndex(index: number): TabItemDirective {
+        return this.tabItems.toArray()[index];
     }
 }

@@ -1,23 +1,34 @@
-<fd-tab-list [(selectedIndex)]="selectedTab" #tabList>
-    <fd-tab [title]="'Tab 1'">
-        Tab 1
-    </fd-tab>
-    <fd-tab [title]="'Tab 2'">
-        Tab 2
-    </fd-tab>
-    <fd-tab [title]="'Tab 3'" [disabled]="true">
-        Tab 3
-    </fd-tab>
-</fd-tab-list>
+<fd-tab [(selectedIndex)]="selectedTab" #tabList>
+    <nav fd-tab-list>
+        <div fd-tab-item >
+            <a fd-tab-link>link1</a>
+            <ng-template fd-tab-content>
+                Content Link1
+            </ng-template>
+        </div>
+        <div fd-tab-item>
+            <a fd-tab-link>link2</a>
+            <ng-template fd-tab-content>
+                Content Link2
+            </ng-template>
+        </div>
+        <div fd-tab-item [disabled]="true">
+            <a fd-tab-link>link3</a>
+            <ng-template fd-tab-content>
+                Content Link 3
+            </ng-template>
+        </div>
+    </nav>
+</fd-tab>
 <br/>
 
-<!-- First method, requires maintaining a flag -->
+<!--First method, requires maintaining a flag-->
 <button fd-button
         (click)="selectedTab = 0">
     Select Tab 1
 </button>
 
-<!-- Second method, does not require a flag -->
+<!-- Second method, does not require a flag-->
 <button fd-button
         (click)="tabList.selectTab(1)">
     Select Tab 2

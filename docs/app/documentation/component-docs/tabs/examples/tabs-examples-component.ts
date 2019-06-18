@@ -16,5 +16,5 @@ export class TabsExampleComponent {}
     `]
 })
 export class TabSelectionExampleComponent {
-    selectedTab = 0;
+    selectedTab = 1;
 }
