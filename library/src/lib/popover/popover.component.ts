@@ -112,7 +112,8 @@ export class PopoverComponent {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** Id of the popover. If none is provided, one will be generated. */
+    @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
 
     /**
