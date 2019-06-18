@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.43"></a>
+## [0.5.3-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.42...v0.5.3-rc.43) (2019-06-18)
+
+
+### Bug Fixes
+
+* month gets skipped when the current date is the 31st and the user clicks next month button ([#862](https://github.com/SAP/fundamental-ngx/issues/862)) ([24d7b9f](https://github.com/SAP/fundamental-ngx/commit/24d7b9f))
+
+
+
 <a name="0.5.3-rc.42"></a>
 ## [0.5.3-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.41...v0.5.3-rc.42) (2019-06-18)
 
