@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.41"></a>
+## [0.5.3-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.40...v0.5.3-rc.41) (2019-06-18)
+
+
+### Bug Fixes
+
+* paging error is now a devmode warning ([#942](https://github.com/SAP/fundamental-ngx/issues/942)) ([41e01f1](https://github.com/SAP/fundamental-ngx/commit/41e01f1))
+
+
+
 <a name="0.5.3-rc.40"></a>
 ## [0.5.3-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.39...v0.5.3-rc.40) (2019-06-18)
 
