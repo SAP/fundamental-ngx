@@ -52,7 +52,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
 
 @Component({
     selector: 'fd-datepicker-i18n-example',
-    template: `<fd-date-picker [(ngModel)]="selectedDay" [placement]="'top-end'"></fd-date-picker>`,
+    template: `<fd-date-picker [(ngModel)]="selectedDay"></fd-date-picker>`,
 
     // Note that this can be provided in the root of your application.
     providers: [

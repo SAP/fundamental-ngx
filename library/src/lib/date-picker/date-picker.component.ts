@@ -109,7 +109,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
-    placement: Placement = 'auto';
+    placement: Placement = 'bottom-start';
 
     /**
      * Function used to disable certain dates in the calendar.
