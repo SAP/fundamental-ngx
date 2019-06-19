@@ -254,8 +254,6 @@ import { NewComponentComponent } from './component-docs/new-component/new-compon
 
 import { COMPONENT_SCHEMAS } from './component-docs/schemas';
 
-import * as hljs from 'highlight.js';
-import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { BackdropExamplesComponent } from './component-docs/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './component-docs/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -318,12 +316,7 @@ import { DatetimePickerAllowNullExampleComponent } from './component-docs/dateti
 import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
-
-
-
-export function highlightJsFactory() {
-    return hljs;
-}
+import { HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
     declarations: [
@@ -585,10 +578,6 @@ export function highlightJsFactory() {
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
-        HighlightJsModule.forRoot({
-            provide: HIGHLIGHT_JS,
-            useFactory: highlightJsFactory
-        }),
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
@@ -598,7 +587,8 @@ export function highlightJsFactory() {
         FundamentalNgxModule,
         HttpClientModule,
         CdkTableModule,
-        DragDropModule
+        DragDropModule,
+        HighlightModule
     ],
     providers: [
         CopyService,
