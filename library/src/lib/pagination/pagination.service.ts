@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Pagination } from './pagination.model';
 
 const DISPLAY_NUM_PAGES = 3;
@@ -83,13 +83,13 @@ export class PaginationService {
      * @param pagination An object of type *Pagination*.
      */
     public validate(pagination: Pagination) {
-        if (!pagination.totalItems) {
-            console.error(`No pages provided in the Pagination object; we cannot provide paging`);
+        if (!pagination.totalItems && isDevMode()) {
+            console.warn(`No pages provided in the Pagination object. This warning only appears in development mode.`);
         }
         if (!pagination.itemsPerPage) {
             pagination.itemsPerPage = this.DEFAULT_ITEMS_PER_PAGE;
-        } else if (pagination.itemsPerPage < 0) {
-            console.error(`itemsPerPage must be greater than zero`);
+        } else if (pagination.itemsPerPage < 0 && isDevMode()) {
+            console.warn(`itemsPerPage must be greater than zero. This warning only appears in development mode.`);
         }
         if (!pagination.currentPage) {
             pagination.currentPage = 1;

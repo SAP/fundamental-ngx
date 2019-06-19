@@ -6,8 +6,10 @@ import * as timePickerDisabledSrc from '!raw-loader!./examples/time-picker-disab
 import * as timePickerNoSecondsSrc from '!raw-loader!./examples/time-picker-no-seconds-example.component.html';
 import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compact-example.component.html';
 import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
+import * as timePickerOtherDelimiterSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.html';
+import * as timePickerOtherDelimiterTsSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.ts';
 import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
-import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts'
+import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts';
 
 @Component({
     selector: 'app-time-picker',
@@ -20,6 +22,9 @@ export class TimePickerDocsComponent {
     disabledTimePickerHtml = timePickerDisabledSrc;
     compactTimePickerHtml = timePickerCompactSrc;
     nullTimePickerHtml = timePickerNullSrc;
+    otherFormatTimePickerHtml = timePickerOtherDelimiterSrc;
+    otherFormatTimePickerTs = timePickerOtherDelimiterTsSrc;
+
     timePickerFormHtml = timePickerFormHtmlSrc;
     timePickerFormTs = timePickerFormTsSrc;
 

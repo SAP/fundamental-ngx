@@ -2,6 +2,7 @@
 <description>
     The simplest form of the datetime picker. It makes use of ngModel to bind to the desired value.
     The alternative is to use the date input combined with the dateChange output.
+    There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown
 </description>
 <component-example [name]="'ex1'">
     <app-datetime-example></app-datetime-example>
@@ -39,3 +40,12 @@
     <fd-date-time-picker-allow-null-example></fd-date-time-picker-allow-null-example>
 </component-example>
 <code-example [code]="datetimePickerAllowNullTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Formatting</h2>
+<description>Providing a custom format for the dates is possible through providing a service.</description>
+<component-example [name]="'ex5'">
+    <fd-datetime-format-example></fd-datetime-format-example>
+</component-example>
+<code-example [code]="datetimeFormatHtml" [language]="'HTML'"></code-example>
+<code-example [code]="datetimeFormatTs" [language]="'typescript'"></code-example>

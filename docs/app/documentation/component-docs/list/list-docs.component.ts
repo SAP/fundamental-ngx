@@ -9,6 +9,8 @@ import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scr
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
 import * as listSingleHtml from '!raw-loader!./examples/list-single-select-example.component.html';
 import * as listSingleTs from '!raw-loader!./examples/list-single-select-example.component.ts';
+import * as listCheckboxFormHtmlSrc from '!raw-loader!./examples/list-checkbox-form-example.component.html';
+import * as listCheckboxFormTsSrc from '!raw-loader!./examples/list-checkbox-form-example.component.ts';
 
 @Component({
     selector: 'app-list',
@@ -690,6 +692,12 @@ export class ListDocsComponent implements OnInit {
 
     infiniteScrollCodeTS = infiniteScrollSrcTs;
 
+    listCheckboxFormHtml = listCheckboxFormHtmlSrc;
+
+    listCheckboxFormTs = listCheckboxFormTsSrc;
+
+
+
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('list');
     }
@@ -698,5 +706,5 @@ export class ListDocsComponent implements OnInit {
         this.data = data;
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

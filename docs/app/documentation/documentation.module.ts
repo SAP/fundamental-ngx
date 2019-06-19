@@ -209,7 +209,9 @@ import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.compone
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
 import { DisabledToggleExampleComponent } from './component-docs/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
 import { ToggleBindingExampleComponent } from './component-docs/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { ToggleFormsExampleComponent } from './component-docs/toggle/examples/toggle-form-example/toggle-forms-example.component';
 import { ListInfiniteScrollExampleComponent } from './component-docs/list/examples/list-infinite-scroll-example.component';
+import { ListCheckboxFormExampleComponent } from './component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
 import { ModalInModalComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal.component';
 import { ModalInModalSecondComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal-second.component';
@@ -238,6 +240,7 @@ import { ScrollSpyExampleComponent } from './component-docs/scroll-spy/examples/
 import { ScrollSpyCustomExampleComponent } from './component-docs/scroll-spy/examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
 import { MultiInputFilterExampleComponent } from './component-docs/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
 import { MultiInputDisplaywithExampleComponent } from './component-docs/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
+import { MultiInputFormExampleComponent } from './component-docs/multi-input/examples/multi-input-form-example/multi-input-form-example.component';
 import { MultiInputDocsComponent } from './component-docs/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './component-docs/multi-input/examples/multi-input-example/multi-input-example.component';
 import { MultiInputAsyncExampleComponent } from './component-docs/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
@@ -316,6 +319,9 @@ import { DatetimePickerAllowNullExampleComponent } from './component-docs/dateti
 import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
+import { DatePickerPositionExampleComponent } from './component-docs/date-picker/examples/date-picker-position-example.component';
+import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
+import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
 import { HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
@@ -401,6 +407,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
+        DatetimeFormatExampleComponent,
         DatetimePickerAllowNullExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
@@ -441,6 +448,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         ListCheckboxExampleComponent,
         ListExampleComponent,
         ListInfiniteScrollExampleComponent,
+        ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
@@ -510,6 +518,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
         TimePickerCompactExampleComponent,
+        TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
         TimePickerFormExampleComponent,
         ComboboxInputDocsComponent,
@@ -520,12 +529,14 @@ import { HighlightModule } from 'ngx-highlightjs';
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
+        ToggleFormsExampleComponent,
         TokenDocsComponent,
         TokenExampleComponent,
         ToolbarComponent,
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
+        MultiInputFormExampleComponent,
         BackdropExamplesComponent,
         ApiComponent,
         AlertHeaderComponent,
@@ -573,6 +584,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         AddingTabExampleComponent,
         CalendarI18nExampleComponent,
         DatePickerI18nExampleComponent,
+        DatePickerPositionExampleComponent,
         DatePickerFormatExampleComponent,
         SearchPipe
     ],
