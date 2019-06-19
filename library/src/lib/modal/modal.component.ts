@@ -88,7 +88,6 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
-    // TODO(Matt): Using static: true allows us to do some parts of this in ngOnInit
     ngAfterViewInit(): void {
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {

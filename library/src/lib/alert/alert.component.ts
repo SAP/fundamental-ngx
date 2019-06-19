@@ -125,8 +125,6 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** @hidden */
     ngAfterViewInit(): void {
-
-        // TODO(Matt): Some of this can be done in ngOnInit using static: true
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {
                 this.loadFromComponent(this.childComponentType);
