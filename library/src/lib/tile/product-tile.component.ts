@@ -16,10 +16,16 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 @Component({
     selector: 'fd-product-tile',
     host: {
-        '[attr.role]': '(this.isButton === true ? "button" : "")'
+        '[attr.role]': '(this.isButton === true ? "button" : "")',
+        '[class.fd-product-tile-custom]': 'true'
     },
     templateUrl: './product-tile.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styles: [`
+        .fd-product-tile-custom {
+            display: block;
+        }
+    `]
 })
 export class ProductTileComponent extends AbstractFdNgxClass {
     /** Whether the product tile is disabled. */
