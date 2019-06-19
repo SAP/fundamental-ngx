@@ -6,11 +6,13 @@ import { PopoverModule } from '../popover.module';
 @Component({
     template: `
         <button fd-button [fdPopover]="template" [(isOpen)]="isOpen"></button>
-        <ng-template #template><div>Content Div</div></ng-template>
+        <ng-template #template>
+            <div>Content Div</div>
+        </ng-template>
     `
 })
 class TestTemplateComponent {
-    @ViewChild(PopoverDirective)
+    @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
 
     isOpen = false;
@@ -22,7 +24,7 @@ class TestTemplateComponent {
     `
 })
 class TestStringComponent {
-    @ViewChild(PopoverDirective)
+    @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
 
     isOpen = false;
@@ -31,7 +33,9 @@ class TestStringComponent {
 @NgModule({
     declarations: [TestStringComponent, TestTemplateComponent],
     imports: [PopoverModule]
-}) class TestModule {}
+})
+class TestModule {
+}
 
 describe('PopoverDirective', () => {
     let fixtureTemplate: ComponentFixture<TestTemplateComponent>;
@@ -86,7 +90,7 @@ describe('PopoverDirective', () => {
 
         fixtureTemplate.componentInstance.popoverDirective.close();
         fixtureTemplate.detectChanges();
-        expect(fixtureTemplate.componentInstance.isOpen).toBe(false)
+        expect(fixtureTemplate.componentInstance.isOpen).toBe(false);
     });
 
     it('should support multiple triggers', () => {

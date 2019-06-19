@@ -75,7 +75,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     isInvalidTimeInput: boolean = false;
 
     /** @hidden */
-    @ViewChild(TimeComponent)
+    @ViewChild(TimeComponent, { static: false })
     child: TimeComponent;
 
     /** @hidden */

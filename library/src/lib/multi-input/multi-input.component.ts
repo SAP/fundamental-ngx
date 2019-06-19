@@ -42,7 +42,7 @@ import { PopoverComponent } from '../popover/popover.component';
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
     /** @hidden */
-    @ViewChild(PopoverComponent)
+    @ViewChild(PopoverComponent, { static: true })
     popoverRef: PopoverComponent;
 
     /** @hidden */

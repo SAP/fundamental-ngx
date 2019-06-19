@@ -66,7 +66,7 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ContentChild(SearchInputComponent)
+    @ContentChild(SearchInputComponent, {static: false})
     searchInputComponent: SearchInputComponent;
 
     /** @hidden */

@@ -32,7 +32,7 @@ import focusTrap from 'focus-trap';
 })
 export class PopoverContainer implements AfterViewInit, OnDestroy {
 
-    @ViewChild('vc', { read: ViewContainerRef })
+    @ViewChild('vc', { read: ViewContainerRef, static: true })
     containerRef: ViewContainerRef;
 
     @HostBinding('class.fd-popover__popper--no-arrow')
@@ -60,6 +60,8 @@ export class PopoverContainer implements AfterViewInit, OnDestroy {
                 private cdRef: ChangeDetectorRef) {
     }
 
+
+    // TODO(Matt): Using static: true allows us to do this in ngOnInit
     ngAfterViewInit(): void {
         if (this.content instanceof TemplateRef) {
             this.loadFromTemplate(this.content);

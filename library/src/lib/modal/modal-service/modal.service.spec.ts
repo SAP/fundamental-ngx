@@ -7,14 +7,14 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ModalRef } from '../modal-utils/modal-ref';
 
 @Component({
-    template: `        
-            <ng-template #testTemplate let-alert>
-                <h1>test</h1>
-            </ng-template>
+    template: `
+        <ng-template #testTemplate let-alert>
+            <h1>test</h1>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: false }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({
@@ -23,7 +23,8 @@ class TemplateTestComponent {
     providers: [ModalService],
     entryComponents: [TemplateTestComponent]
 })
-class TestModule {}
+class TestModule {
+}
 
 describe('ModalService', () => {
     let service: ModalService;
@@ -75,7 +76,7 @@ describe('ModalService', () => {
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent, {hasBackdrop: false});
+        const modalRef: ModalRef = service.open(TemplateTestComponent, { hasBackdrop: false });
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -111,7 +112,7 @@ describe('ModalService', () => {
     it('should close modal on backdrop click', fakeAsync(() => {
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: true});
+        const modalRef: ModalRef = service.open(TemplateTestComponent, { backdropClickCloseable: true });
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -123,7 +124,7 @@ describe('ModalService', () => {
 
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
 
-        const modalRef2: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: false});
+        const modalRef2: ModalRef = service.open(TemplateTestComponent, { backdropClickCloseable: false });
         service['modals'][0].backdropRef.location.nativeElement.click();
         tick();
         expect((service as any).destroyModalComponent).not.toHaveBeenCalled();

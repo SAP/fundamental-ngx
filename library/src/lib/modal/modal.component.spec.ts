@@ -10,16 +10,16 @@ import createSpyObj = jasmine.createSpyObj;
 import { ModalRef } from './modal-utils/modal-ref';
 
 @Component({
-    template: `        
-            <ng-template #testTemplate let-modal>
-                <h1>test</h1>
-                <a href="#">testLink</a>
-                <button fd-button>testBtn</button>
-            </ng-template>
+    template: `
+        <ng-template #testTemplate let-modal>
+            <h1>test</h1>
+            <a href="#">testLink</a>
+            <button fd-button>testBtn</button>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({
@@ -28,7 +28,8 @@ class TemplateTestComponent {
     providers: [ModalService],
     entryComponents: [TemplateTestComponent]
 })
-class TestModule {}
+class TestModule {
+}
 
 describe('ModalComponent', () => {
     let component: ModalComponent;
@@ -39,7 +40,7 @@ describe('ModalComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            providers: [{provide: ModalRef, useValue: modalRef}]
+            providers: [{ provide: ModalRef, useValue: modalRef }]
         }).compileComponents();
     }));
 
@@ -80,7 +81,7 @@ describe('ModalComponent', () => {
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
-        component['elRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', {key: 'Escape'}));
+        component['elRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         expect(modalRef.dismiss).toHaveBeenCalled();
     });
 

@@ -29,7 +29,7 @@ let popoverUniqueId: number = 0;
 export class PopoverComponent {
 
     /** @hidden */
-    @ViewChild(PopoverDirective)
+    @ViewChild(PopoverDirective, { static: false })
     directiveRef: PopoverDirective;
 
     /** Whether the popover should have an arrow. */

@@ -19,7 +19,7 @@ export function hljsLanguages() {
 }
 
 const routes: Routes = [
-    { path: '', loadChildren: './documentation/documentation.module#DocumentationModule' },
+    { path: '', loadChildren: () => import('./documentation/documentation.module').then(m => m.DocumentationModule) },
     { path: '**', redirectTo: '/home' }
 ];
 

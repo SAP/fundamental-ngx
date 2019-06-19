@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
     template: '<button #directive fd-button-grouped>ButtonGrouped</button>'
 })
 export class TestComponent {
-    @ViewChild('directive')
+    @ViewChild('directive', { static: false })
     ref: ElementRef;
 }
 

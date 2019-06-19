@@ -12,6 +12,6 @@
     flex-wrap: wrap;
 }
 
-fd-popover /deep/ .fd-button {
+fd-popover ::ng-deep .fd-button {
     margin-right: 0;
 }

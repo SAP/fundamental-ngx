@@ -16,7 +16,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({

@@ -106,7 +106,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     menuItems: QueryList<MenuItemDirective>;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
+    @ViewChild('searchInputElement', { static: false})
     searchInputElement: ElementRef;
 
     /** @hidden */

@@ -43,7 +43,7 @@ import { DateTimeFormatParser } from './format/datetime-parser';
 export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
     /** @hidden Reference to the inner time component. */
-    @ViewChild(TimeComponent)
+    @ViewChild(TimeComponent, { static: false })
     timeComponent: TimeComponent;
 
     /** Placeholder for the inner input element. */

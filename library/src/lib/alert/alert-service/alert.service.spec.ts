@@ -8,14 +8,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 
 @Component({
-    template: `        
-            <ng-template #testTemplate let-alert>
-                <h1>test</h1>
-            </ng-template>
+    template: `
+        <ng-template #testTemplate let-alert>
+            <h1>test</h1>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: false }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({
@@ -24,7 +24,8 @@ class TemplateTestComponent {
     providers: [AlertService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
-class TestModule {}
+class TestModule {
+}
 
 describe('AlertService', () => {
     let service: AlertService;
@@ -63,7 +64,7 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open('teststring', {dismissible: false, duration: -1});
+        const alertRef: AlertRef = service.open('teststring', { dismissible: false, duration: -1 });
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
@@ -84,7 +85,7 @@ describe('AlertService', () => {
         expect(service['alertContainerRef']).toBeFalsy();
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const alertRef: AlertRef = service.open(fixtureElTmp, {dismissible: false, duration: -1});
+        const alertRef: AlertRef = service.open(fixtureElTmp, { dismissible: false, duration: -1 });
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
@@ -104,7 +105,7 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open(TemplateTestComponent, {dismissible: false, duration: -1});
+        const alertRef: AlertRef = service.open(TemplateTestComponent, { dismissible: false, duration: -1 });
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();

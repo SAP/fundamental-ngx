@@ -44,7 +44,7 @@ import focusTrap from 'focus-trap';
 })
 export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 
-    @ViewChild('vc', {read: ViewContainerRef})
+    @ViewChild('vc', { read: ViewContainerRef, static: true })
     containerRef: ViewContainerRef;
 
     id: string;
@@ -88,6 +88,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    // TODO(Matt): Using static: true allows us to do some parts of this in ngOnInit
     ngAfterViewInit(): void {
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {

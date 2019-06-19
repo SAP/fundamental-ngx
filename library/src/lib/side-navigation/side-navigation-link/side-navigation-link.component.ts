@@ -24,7 +24,7 @@ export class SideNavigationLinkComponent implements OnChanges, AfterViewInit {
     href: string;
 
     /** @hidden */
-    @ViewChild('link')
+    @ViewChild('link', { static: false })
     linkEl: ElementRef;
 
     /** @hidden */

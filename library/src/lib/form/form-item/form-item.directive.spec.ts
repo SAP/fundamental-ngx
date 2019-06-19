@@ -7,7 +7,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
     template: '<div #directiveElement fd-form-item [isCheck]="check" [isInline]="inline">FormItem</div>'
 })
 export class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 
     check: boolean = false;

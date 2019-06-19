@@ -17,7 +17,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, V
 export class TokenComponent {
 
     /** @hidden */
-    @ViewChild('contentContainer')
+    @ViewChild('contentContainer', { static: true })
     contentContainer: ElementRef;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
