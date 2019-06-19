@@ -325,6 +325,8 @@ import { TableResponsiveExampleComponent } from './component-docs/table/examples
 import { DatePickerPositionExampleComponent } from './component-docs/date-picker/examples/date-picker-position-example.component';
 import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
 import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
+import { DatePickerDisabledExampleComponent } from './component-docs/date-picker/examples/date-picker-disabled-example.component';
+import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 export function highlightJsFactory() {
     return hljs;
@@ -410,11 +412,13 @@ export function highlightJsFactory() {
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
+        DatePickerDisabledExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
         DatetimeFormatExampleComponent,
         DatetimePickerAllowNullExampleComponent,
+        DatetimeDisabledExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,

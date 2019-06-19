@@ -111,6 +111,10 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** Whether the date picker is disabled. */
+    @Input()
+    disabled: boolean;
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param d Date
