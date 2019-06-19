@@ -41,7 +41,6 @@
         "@angular/platform-browser-dynamic": "^7.2.7",
         "@angular/router": "^7.2.7",
         "@types/node": "^12.0.8",
-        "angular-highlight-js": "^2.0.1",
         "core-js": "^2.6.9",
         "focus-trap": "^5.0.1",
         "fundamental-styles": "^0.1.0",

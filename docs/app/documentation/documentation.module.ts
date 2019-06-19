@@ -202,8 +202,7 @@ import {
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent,
-
+    TimePickerAllowNullExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
@@ -258,8 +257,6 @@ import { NewComponentComponent } from './component-docs/new-component/new-compon
 
 import { COMPONENT_SCHEMAS } from './component-docs/schemas';
 
-import * as hljs from 'highlight.js';
-import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { BackdropExamplesComponent } from './component-docs/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './component-docs/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -328,9 +325,7 @@ import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker
 import { DatePickerDisabledExampleComponent } from './component-docs/date-picker/examples/date-picker-disabled-example.component';
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
-export function highlightJsFactory() {
-    return hljs;
-}
+import { HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
     declarations: [
@@ -600,10 +595,6 @@ export function highlightJsFactory() {
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
-        HighlightJsModule.forRoot({
-            provide: HIGHLIGHT_JS,
-            useFactory: highlightJsFactory
-        }),
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
@@ -613,7 +604,8 @@ export function highlightJsFactory() {
         FundamentalNgxModule,
         HttpClientModule,
         CdkTableModule,
-        DragDropModule
+        DragDropModule,
+        HighlightModule
     ],
     providers: [
         CopyService,
