@@ -171,8 +171,10 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** Opens the calendar */
     openCalendar(e) {
-        this.isOpen = true;
-        this.getInputValue(e);
+        if (!this.disabled) {
+            this.isOpen = true;
+            this.getInputValue(e);
+        }
     }
 
     /** Toggles the calendar open or closed */
@@ -287,7 +289,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        // void for now
+        this.disabled = isDisabled;
     }
 
     /** @hidden */
