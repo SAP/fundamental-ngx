@@ -3,7 +3,13 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fd-date-picker-form-example',
-    templateUrl: './date-picker-form-example.component.html'
+    template: `
+        <form [formGroup]="customForm">
+            <fd-date-picker formControlName="date"></fd-date-picker>
+        </form>
+
+        Selected Date: {{ customForm.controls.date.value.date | date: 'fullDate' }}
+    `
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
