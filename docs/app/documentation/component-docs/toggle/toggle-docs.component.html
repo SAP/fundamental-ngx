@@ -22,6 +22,16 @@
 <code-example [code]="toggleBindingHtml" [language]="'HTML'"></code-example>
 <code-example [code]="toggleBindingTs" [language]="'typescript'"></code-example>
 
+<separator></separator>
+<h2>Toggle used within Form</h2>
+<description>It is possible to use the fd-toggle component within Angular Reactive Forms</description>
+<component-example [name]="'ex4'">
+    <fd-toggle-forms-example></fd-toggle-forms-example>
+</component-example>
+<code-example [code]="toggleFormExampleHtml" [language]="'HTML'"></code-example>
+<code-example [code]="toggleFormExampleTs" [language]="'typescript'"></code-example>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-toggle [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked" [size]="data.modifier.size">Example Toggle</fd-toggle>
+    <fd-toggle [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked" [size]="data.modifier.size">
+        Example Toggle</fd-toggle>
 </playground>

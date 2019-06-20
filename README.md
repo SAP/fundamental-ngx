@@ -9,9 +9,9 @@
 
 ## Description
 
-The `fundamental-ngx` library is a set of [Angular](https://angular.io/) components built using [SAP Fiori Fundamentals](https://sap.github.io/fundamental/).
+The `fundamental-ngx` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
 
-The SAP Fiori Fundamentals library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
 ## API Reference
 
@@ -29,16 +29,16 @@ Prior knowledge of Angular is recommended.
 
 For an existing Angular application,
 
-1. **Install Fundamental-ngx and Fiori Fundamentals.**
+1. **Install Fundamental-ngx and Fundamental Styles.**
 
     ```
-    npm install --save fiori-fundamentals fundamental-ngx
+    npm install --save fundamental-styles fundamental-ngx
     ```
 
-2. **Include Fiori Fundamentals CSS in the `styles` array of the `angular.json` file.**
+2. **Include Fundamental Styles CSS in the `styles` array of the `angular.json` file.**
 
-    ```scss
-    "./node_modules/fiori-fundamentals/dist/fiori-fundamentals.min.css"
+    ```
+    "node_modules/fundamental-styles/dist/fundamental-styles.min.css"
     ```
 
     _Note the path may be different if your CLI configuration is not in the root of your project directory._

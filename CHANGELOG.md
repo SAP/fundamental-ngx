@@ -2,6 +2,121 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.49"></a>
+## [0.5.3-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.48...v0.5.3-rc.49) (2019-06-19)
+
+
+
+<a name="0.5.3-rc.48"></a>
+## [0.5.3-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.47...v0.5.3-rc.48) (2019-06-19)
+
+
+
+<a name="0.5.3-rc.47"></a>
+## [0.5.3-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.46...v0.5.3-rc.47) (2019-06-18)
+
+
+
+<a name="0.5.3-rc.46"></a>
+## [0.5.3-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.45...v0.5.3-rc.46) (2019-06-18)
+
+
+
+<a name="0.5.3-rc.45"></a>
+## [0.5.3-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.44...v0.5.3-rc.45) (2019-06-18)
+
+
+
+<a name="0.5.3-rc.44"></a>
+## [0.5.3-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.43...v0.5.3-rc.44) (2019-06-18)
+
+
+### Bug Fixes
+
+* date format bug ([#936](https://github.com/SAP/fundamental-ngx/issues/936)) ([88acb58](https://github.com/SAP/fundamental-ngx/commit/88acb58))
+
+
+
+<a name="0.5.3-rc.43"></a>
+## [0.5.3-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.42...v0.5.3-rc.43) (2019-06-18)
+
+
+### Bug Fixes
+
+* month gets skipped when the current date is the 31st and the user clicks next month button ([#862](https://github.com/SAP/fundamental-ngx/issues/862)) ([24d7b9f](https://github.com/SAP/fundamental-ngx/commit/24d7b9f))
+
+
+
+<a name="0.5.3-rc.42"></a>
+## [0.5.3-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.41...v0.5.3-rc.42) (2019-06-18)
+
+
+### Bug Fixes
+
+* Add placement option to date/datetime picker ([#925](https://github.com/SAP/fundamental-ngx/issues/925)) ([a7fcb10](https://github.com/SAP/fundamental-ngx/commit/a7fcb10))
+
+
+
+<a name="0.5.3-rc.41"></a>
+## [0.5.3-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.40...v0.5.3-rc.41) (2019-06-18)
+
+
+### Bug Fixes
+
+* paging error is now a devmode warning ([#942](https://github.com/SAP/fundamental-ngx/issues/942)) ([41e01f1](https://github.com/SAP/fundamental-ngx/commit/41e01f1))
+
+
+
+<a name="0.5.3-rc.40"></a>
+## [0.5.3-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.39...v0.5.3-rc.40) (2019-06-18)
+
+
+### Bug Fixes
+
+* Add timepicker formating following datepicker ([#894](https://github.com/SAP/fundamental-ngx/issues/894)) ([f417a5b](https://github.com/SAP/fundamental-ngx/commit/f417a5b))
+
+
+
+<a name="0.5.3-rc.39"></a>
+## [0.5.3-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.38...v0.5.3-rc.39) (2019-06-18)
+
+
+
+<a name="0.5.3-rc.38"></a>
+## [0.5.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.37...v0.5.3-rc.38) (2019-06-17)
+
+
+### Bug Fixes
+
+* add custom formatting to datetime picker ([#918](https://github.com/SAP/fundamental-ngx/issues/918)) ([8425549](https://github.com/SAP/fundamental-ngx/commit/8425549))
+
+
+
+<a name="0.5.3-rc.37"></a>
+## [0.5.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.36...v0.5.3-rc.37) (2019-06-17)
+
+
+
+<a name="0.5.3-rc.36"></a>
+## [0.5.3-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.35...v0.5.3-rc.36) (2019-06-17)
+
+
+
+<a name="0.5.3-rc.35"></a>
+## [0.5.3-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.34...v0.5.3-rc.35) (2019-06-17)
+
+
+
+<a name="0.5.3-rc.34"></a>
+## [0.5.3-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.33...v0.5.3-rc.34) (2019-06-17)
+
+
+### Bug Fixes
+
+* **tree:** when using the <fd-tree> without a [header] this part of the code throws errors because this.header is undefined, practically making [header] a mandatory attribute even if you do not need headers (currently you need to provide an empty array). ([#933](https://github.com/SAP/fundamental-ngx/issues/933)) ([5ea350f](https://github.com/SAP/fundamental-ngx/commit/5ea350f))
+
+
+
 <a name="0.5.3-rc.33"></a>
 ## [0.5.3-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.32...v0.5.3-rc.33) (2019-06-14)
 

@@ -6,6 +6,9 @@
   object. Then, using two-way binding syntax, set the selectedDay value to your new object.
   Note that selecting a day (or range of days) in this manner will override any block/disable functions.
 </description>
+<description>
+  The default format for the input is MM/DD/YYYY. See the 'Formatting' section for details on how to change this.
+</description>
 <component-example [name]="'ex1'">
   <fd-date-picker-single-example></fd-date-picker-single-example>
 </component-example>
@@ -53,3 +56,12 @@
   <fd-date-picker-form-example></fd-date-picker-form-example>
 </component-example>
 <code-example [code]="datePickerFormTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Position</h2>
+<description>There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.</description>
+<component-example name="'ex7'">
+    <fd-date-picker-position-example></fd-date-picker-position-example>
+</component-example>
+<code-example [code]="datePickerPositionTs" [language]="'typescript'"></code-example>
+

@@ -11,6 +11,9 @@ import * as dateTimeProgTs from '!raw-loader!./examples/datetime-program-example
 
 import * as dateTimePickerAllowNullTs from '!raw-loader!./examples/datetime-allow-null-example/datetime-allow-null-example.component.ts';
 
+import * as dateTimeFormatHtml from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.html';
+import * as dateTimeFormatTs from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.ts';
+
 
 @Component({
     selector: 'app-datetime-picker-docs',
@@ -27,6 +30,9 @@ export class DatetimePickerDocsComponent {
 
     datetimeProgramHtml = dateTimeProgHtml;
     datetimeProgramTs = dateTimeProgTs;
+
+    datetimeFormatHtml = dateTimeFormatHtml;
+    datetimeFormatTs = dateTimeFormatTs;
 
     datetimePickerAllowNullTs = dateTimePickerAllowNullTs;
 
