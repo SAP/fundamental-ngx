@@ -8,11 +8,11 @@ import { FormGroup, FormControl } from '@angular/forms';
             <fd-date-picker formControlName="date"></fd-date-picker>
         </form>
 
-        Selected Date: {{ customForm.controls.date.value.date | date: 'fullDate' }}
+        Selected Date: {{ customForm.controls.date.value.date ? customForm.controls.date.value.date.toDateString() : 'null' }}
     `
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl('')
+        date: new FormControl({ date: new Date() })
     });
 };
