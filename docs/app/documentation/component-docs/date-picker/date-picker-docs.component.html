@@ -1,7 +1,9 @@
 <h2>Simple Date Picker</h2>
 <description>
-  You can use two-way data binding to select a date or range of dates on a calendar.  Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
-  To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
+  You can use two-way data binding to select a date or range of dates on a calendar. Calendars internally utilize an
+  interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
+  To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date
+  object. Then, using two-way binding syntax, set the selectedDay value to your new object.
   Note that selecting a day (or range of days) in this manner will override any block/disable functions.
 </description>
 <description>
@@ -14,7 +16,8 @@
 
 <separator></separator>
 <h2>Range Date Picker</h2>
-<description>Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.</description>
+<description>Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.
+</description>
 <component-example [name]="'ex2'">
   <fd-date-picker-range-example></fd-date-picker-range-example>
 </component-example>
@@ -22,9 +25,10 @@
 
 <separator></separator>
 <h2>Internationalization</h2>
-<description>It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.</description>
+<description>It is possible to internationalize both the aria labels and the month names/weekdays through providing a
+  service.</description>
 <component-example [name]="'ex3'">
-    <fd-datepicker-i18n-example></fd-datepicker-i18n-example>
+  <fd-datepicker-i18n-example></fd-datepicker-i18n-example>
 </component-example>
 <code-example [code]="datePickerI18NTs" [language]="'typescript'"></code-example>
 
@@ -32,22 +36,32 @@
 <h2>Formatting</h2>
 <description>Providing a custom format for the dates is possible through providing a service.</description>
 <component-example [name]="'ex4'">
-    <fd-date-picker-format-example></fd-date-picker-format-example>
+  <fd-date-picker-format-example></fd-date-picker-format-example>
 </component-example>
 <code-example [code]="datePickerFormatTs" [language]="'typescript'"></code-example>
 
 <separator></separator>
 <h2>Null Validity</h2>
-<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.</description>
+<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
+  invalid.</description>
 <component-example [name]="'ex5'">
-    <fd-date-picker-allow-null-example></fd-date-picker-allow-null-example>
+  <fd-date-picker-allow-null-example></fd-date-picker-allow-null-example>
 </component-example>
 <code-example [code]="datePickerAllowNullTs" [language]="'typescript'"></code-example>
 
 <separator></separator>
+<h2>Date Picker in Form</h2>
+<description>The date-picker component may also be used within Angular Reactive Forms.</description>
+<component-example [name]="'ex6'">
+  <fd-date-picker-form-example></fd-date-picker-form-example>
+</component-example>
+<code-example [code]="datePickerFormTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
 <h2>Position</h2>
 <description>There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.</description>
-<component-example name="'ex6'">
+<component-example name="'ex7'">
     <fd-date-picker-position-example></fd-date-picker-position-example>
 </component-example>
 <code-example [code]="datePickerPositionTs" [language]="'typescript'"></code-example>
+
