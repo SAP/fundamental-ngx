@@ -7,7 +7,15 @@ import { CopyService } from '../../services/copy.service';
     styleUrls: ['./code-example.component.scss']
 })
 export class CodeExampleComponent implements OnInit {
+
+    /**
+     * Code to highlight.
+     */
     @Input() code: string;
+
+    /**
+     * Language to limit the auto-detection to.
+     */
     @Input() language: string;
 
     smallScreen: boolean;

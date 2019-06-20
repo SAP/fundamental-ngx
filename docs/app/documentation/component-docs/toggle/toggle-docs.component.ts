@@ -5,6 +5,8 @@ import * as toggleBindingExampleHtml from '!raw-loader!./examples/toggle-binding
 import * as toggleBindingExampleTs from '!raw-loader!./examples/toggle-binding-example/toggle-binding-example.component.ts';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
+import * as toggleFormExampleHtmlSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.html';
+import * as toggleFormExampleTsSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.ts';
 
 @Component({
     selector: 'app-toggle',
@@ -54,6 +56,8 @@ export class ToggleDocsComponent {
     toggleDisableHtml = toggleDisableExample;
     toggleBindingHtml = toggleBindingExampleHtml;
     toggleBindingTs = toggleBindingExampleTs;
+    toggleFormExampleHtml = toggleFormExampleHtmlSrc;
+    toggleFormExampleTs = toggleFormExampleTsSrc;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('toggle');

@@ -117,13 +117,13 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     isOpen = false;
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: Function = () => { };
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: Function = () => { };
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {}
+    constructor(private elRef: ElementRef) { }
 
     /** @hidden */
     ngOnInit() {
@@ -138,7 +138,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             if (this.searchTerm) {
                 this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
             } else {
-                this.displayedValues =  this.dropdownValues;
+                this.displayedValues = this.dropdownValues;
             }
         }
     }
@@ -160,7 +160,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     writeValue(selected: any[]): void {
-        this.selected = selected;
+        if (selected) {
+            this.selected = selected;
+        }
     }
 
     /** @hidden */

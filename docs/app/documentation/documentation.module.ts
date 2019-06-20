@@ -204,11 +204,14 @@ import {
     TimePickerCompactExampleComponent,
     TimePickerAllowNullExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
+import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from './component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
 import { DisabledToggleExampleComponent } from './component-docs/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
 import { ToggleBindingExampleComponent } from './component-docs/toggle/examples/toggle-binding-example/toggle-binding-example.component';
+import { ToggleFormsExampleComponent } from './component-docs/toggle/examples/toggle-form-example/toggle-forms-example.component';
 import { ListInfiniteScrollExampleComponent } from './component-docs/list/examples/list-infinite-scroll-example.component';
+import { ListCheckboxFormExampleComponent } from './component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from './component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
 import { ModalInModalComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal.component';
 import { ModalInModalSecondComponent } from './component-docs/modal/examples/stackable-modals/modal-in-modal-second.component';
@@ -237,6 +240,7 @@ import { ScrollSpyExampleComponent } from './component-docs/scroll-spy/examples/
 import { ScrollSpyCustomExampleComponent } from './component-docs/scroll-spy/examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
 import { MultiInputFilterExampleComponent } from './component-docs/multi-input/examples/multi-input-filter-example/multi-input-filter-example.component';
 import { MultiInputDisplaywithExampleComponent } from './component-docs/multi-input/examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
+import { MultiInputFormExampleComponent } from './component-docs/multi-input/examples/multi-input-form-example/multi-input-form-example.component';
 import { MultiInputDocsComponent } from './component-docs/multi-input/multi-input-docs.component';
 import { MultiInputExampleComponent } from './component-docs/multi-input/examples/multi-input-example/multi-input-example.component';
 import { MultiInputAsyncExampleComponent } from './component-docs/multi-input/examples/multi-input-async-example/multi-input-async-example.component';
@@ -253,8 +257,6 @@ import { NewComponentComponent } from './component-docs/new-component/new-compon
 
 import { COMPONENT_SCHEMAS } from './component-docs/schemas';
 
-import * as hljs from 'highlight.js';
-import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 import { BackdropExamplesComponent } from './component-docs/modal/examples/backdrop-examples/backdrop-examples.component';
 import { PopoverPlacementExampleComponent } from './component-docs/popover/examples/popover-placement/popover-placement-example.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -280,6 +282,7 @@ import { ImageHeaderComponent } from './component-docs/image/image-header/image-
 import { InfiniteScrollHeaderComponent } from './component-docs/infinite-scroll/infinite-scroll-header/infinite-scroll-header.component';
 import { InlineHelpHeaderComponent } from './component-docs/inline-help/inline-help-header/inline-help-header.component';
 import { InputGroupHeaderComponent } from './component-docs/input-group/input-group-header/input-group-header.component';
+import { InputGroupFormExampleComponent } from './component-docs/input-group/examples/input-group-form-example.component';
 import { ListHeaderComponent } from './component-docs/list/list-header/list-header.component';
 import { LoadingSpinnerHeaderComponent } from './component-docs/loading-spinner-docs/loading-spinner-header/loading-spinner-header.component';
 import { MenuHeaderComponent } from './component-docs/menu/menu-header/menu-header.component';
@@ -316,10 +319,10 @@ import { DatetimePickerAllowNullExampleComponent } from './component-docs/dateti
 import { DatePickerAllowNullExampleComponent } from './component-docs/date-picker/examples/date-picker-allow-null-example.component';
 import { TimeFormExampleComponent } from './component-docs/time/examples/time-form-example.component';
 import { TableResponsiveExampleComponent } from './component-docs/table/examples/table-responsive-example.component';
-
-export function highlightJsFactory() {
-    return hljs;
-}
+import { DatePickerPositionExampleComponent } from './component-docs/date-picker/examples/date-picker-position-example.component';
+import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
+import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
+import { HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
     declarations: [
@@ -404,6 +407,7 @@ export function highlightJsFactory() {
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
+        DatetimeFormatExampleComponent,
         DatetimePickerAllowNullExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
@@ -439,10 +443,12 @@ export function highlightJsFactory() {
         InputGroupSearchExampleComponent,
         InputGroupTextExampleComponent,
         InputGroupTextCompactExampleComponent,
+        InputGroupFormExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
         ListInfiniteScrollExampleComponent,
+        ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
@@ -512,7 +518,9 @@ export function highlightJsFactory() {
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
         TimePickerCompactExampleComponent,
+        TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
+        TimePickerFormExampleComponent,
         ComboboxInputDocsComponent,
         ComboboxInputExampleComponent,
         LoadingSpinnerDocsComponent,
@@ -521,12 +529,14 @@ export function highlightJsFactory() {
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
+        ToggleFormsExampleComponent,
         TokenDocsComponent,
         TokenExampleComponent,
         ToolbarComponent,
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
         MultiInputDisplaywithExampleComponent,
+        MultiInputFormExampleComponent,
         BackdropExamplesComponent,
         ApiComponent,
         AlertHeaderComponent,
@@ -574,15 +584,12 @@ export function highlightJsFactory() {
         AddingTabExampleComponent,
         CalendarI18nExampleComponent,
         DatePickerI18nExampleComponent,
+        DatePickerPositionExampleComponent,
         DatePickerFormatExampleComponent,
         SearchPipe
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
-        HighlightJsModule.forRoot({
-            provide: HIGHLIGHT_JS,
-            useFactory: highlightJsFactory
-        }),
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
@@ -592,7 +599,8 @@ export function highlightJsFactory() {
         FundamentalNgxModule,
         HttpClientModule,
         CdkTableModule,
-        DragDropModule
+        DragDropModule,
+        HighlightModule
     ],
     providers: [
         CopyService,

@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.5.3-rc.28",
+  "version": "0.5.3-rc.49",
   "description": "SAP Fiori Fundamentals, implemented in Angular",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx/home",
@@ -16,7 +16,7 @@
     "@angular/core": "^7.2.7",
     "@angular/forms": "^7.2.7",
     "@angular/animations": "^7.2.7",
-    "fiori-fundamentals": "^1.4.3",
+    "fundamental-styles": "^0.1.0",
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
