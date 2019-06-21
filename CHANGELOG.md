@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.51"></a>
+## [0.5.3-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.50...v0.5.3-rc.51) (2019-06-21)
+
+
+### Bug Fixes
+
+* remove isComponent ([#937](https://github.com/SAP/fundamental-ngx/issues/937)) ([53fbef3](https://github.com/SAP/fundamental-ngx/commit/53fbef3))
+
+
+
 <a name="0.5.3-rc.50"></a>
 ## [0.5.3-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.49...v0.5.3-rc.50) (2019-06-20)
 
