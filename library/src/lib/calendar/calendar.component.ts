@@ -100,9 +100,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     @Output()
     isInvalidDateInput: EventEmitter<any> = new EventEmitter();
 
-    /** @hidden Used when this calendar is for a date time picker component. For internal use. */
+    /** Whether wants to allow escape focus, otherwise it resets on beginning. */
     @Input()
-    isDateTimePicker: boolean = false;
+    allowFocusEscape: boolean = false;
 
     /** @hidden Whether the date is invalid. Internal use. */
     invalidDate: boolean = false;
@@ -899,7 +899,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
             }
             newFocusedYearId = '#' + this.id + '-fd-year-' + (year + 1);
         } else if (event.code === 'Tab' && !event.shiftKey) {
-            if (!this.isDateTimePicker) {
+            if (!this.allowFocusEscape) {
                 event.preventDefault();
                 this.focusElement('#arrowLeft');
             }
@@ -936,7 +936,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
                 newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 1);
             }
         } else if (event.code === 'Tab' && !event.shiftKey) {
-            if (!this.isDateTimePicker) {
+            if (!this.allowFocusEscape) {
                 event.preventDefault();
                 this.focusElement('#arrowLeft');
             }
@@ -949,7 +949,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
     /** @hidden */
     onKeydownDayHandler(event, cell) {
         if (event.code === 'Tab' && !event.shiftKey) {
-            if (!this.isDateTimePicker) {
+            if (!this.allowFocusEscape) {
                 event.preventDefault();
                 this.focusElement('#arrowLeft');
             }

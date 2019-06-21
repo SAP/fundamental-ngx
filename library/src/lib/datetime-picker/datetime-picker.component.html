@@ -38,7 +38,7 @@
                              [(selectedDay)]="selectedDay"
                              (isInvalidDateInput)="isInvalidDateInputHandler($event)"
                              [dateFromDatePicker]="dateFromInput"
-                             [isDateTimePicker]="true"
+                             [allowFocusEscape]="true"
                              [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time [disabled]="disabled"
@@ -47,7 +47,6 @@
                          (ngModelChange)="setTime(true)"
                          [spinners]="spinners"
                          [displaySeconds]="displaySeconds"
-                         [isDateTimePicker]="true"
                          (focusArrowLeft)="focusArrowLeft()"></fd-time>
             </div>
         </fd-popover-body>

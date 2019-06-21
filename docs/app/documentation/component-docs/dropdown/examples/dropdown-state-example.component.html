@@ -1,6 +1,5 @@
-<fd-popover [isDropdown]="true"
-            [disabled]="true">
-    Dropdown
+<fd-popover [disabled]="true">
+    <fd-dropdown-control [disabled]="true">Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>

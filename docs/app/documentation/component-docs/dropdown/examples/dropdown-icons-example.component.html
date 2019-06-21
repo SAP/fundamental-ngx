@@ -1,6 +1,5 @@
-<fd-popover [isDropdown]="true"
-            [glyph]="'filter'">
-    Dropdown
+<fd-popover>
+    <fd-dropdown-control [glyph]="'filter'">Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>
