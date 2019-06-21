@@ -5,10 +5,10 @@ import { TileComponent } from './tile.component';
 import { TileContentDirective } from './tile-content/tile-content.directive';
 import { TileTitleDirective } from './tile-title/tile-title.directive';
 import { TileMediaDirective } from './tile-media/tile-media.directive';
-import { TileActionsComponent } from './tile-actions/tile-actions.component';
+import { TileActionsDirective } from './tile-actions/tile-actions.directive';
 import { ProductTileComponent } from './product-tile.component';
-import { ProductTileMediaComponent } from './product-tile-media/product-tile-media.component';
-import { ProductTileContentComponent } from './product-tile-content/product-tile-content.component';
+import { ProductTileMediaDirective } from './product-tile-media/product-tile-media.directive';
+import { ProductTileContentDirective } from './product-tile-content/product-tile-content.directive';
 import { ProductTileTitleDirective } from './product-tile-title/product-tile-title.directive';
 import { TileGridDirective } from './tile-grid/tile-grid.directive';
 
@@ -19,10 +19,10 @@ import { TileGridDirective } from './tile-grid/tile-grid.directive';
         TileContentDirective,
         TileTitleDirective,
         TileMediaDirective,
-        TileActionsComponent,
+        TileActionsDirective,
         ProductTileComponent,
-        ProductTileMediaComponent,
-        ProductTileContentComponent,
+        ProductTileMediaDirective,
+        ProductTileContentDirective,
         ProductTileTitleDirective,
         TileGridDirective
     ],
@@ -31,10 +31,10 @@ import { TileGridDirective } from './tile-grid/tile-grid.directive';
         TileContentDirective,
         TileTitleDirective,
         TileMediaDirective,
-        TileActionsComponent,
+        TileActionsDirective,
         ProductTileComponent,
-        ProductTileMediaComponent,
-        ProductTileContentComponent,
+        ProductTileMediaDirective,
+        ProductTileContentDirective,
         ProductTileTitleDirective,
         TileGridDirective
     ]
