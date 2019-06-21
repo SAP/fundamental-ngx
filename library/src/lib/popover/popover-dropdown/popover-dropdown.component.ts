@@ -11,7 +11,7 @@ import { PopoverComponent } from '../popover.component';
  * ```
  */
 @Component({
-    selector: 'fd-dropdown',
+    selector: 'fd-dropdown-control',
     host: {
         class: 'fd-dropdown',
     },
