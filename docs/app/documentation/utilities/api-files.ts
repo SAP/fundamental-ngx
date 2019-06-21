@@ -22,9 +22,9 @@ export const API_FILES = {
         'AlertService'
     ],
     badgeLabel: [
-        'BadgeComponent',
+        'BadgeDirective',
         'BadgeLabelComponent',
-        'LabelComponent'
+        'LabelDirective'
     ],
     breadcrumb: [
         'BreadcrumbDirective',
