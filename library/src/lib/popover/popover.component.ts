@@ -34,7 +34,7 @@ export class PopoverComponent {
 
     /** Whether the popover should have an arrow. */
     @Input()
-    arrow: boolean = false;
+    noArrow: boolean = true;
 
     /** Whether the popover is disabled. */
     @Input()
@@ -112,7 +112,8 @@ export class PopoverComponent {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** Id of the popover. If none is provided, one will be generated. */
+    @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
 
     /**

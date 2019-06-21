@@ -2,7 +2,8 @@
     <fd-popover [(isOpen)]="isOpen"
                 [closeOnOutsideClick]="false"
                 [closeOnEscapeKey]="false"
-                [triggers]="[]">
+                [triggers]="[]"
+                [placement]="placement">
         <fd-popover-control>
             <div class="fd-input-group fd-input-group--after"
                  [ngClass]="{'fd-input-group--compact' : compact}">
@@ -40,7 +41,7 @@
                              [isDateTimePicker]="true"
                              [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
-                <fd-time [disabled]="disabled" [ngClass]="{'fd-time-container': !meridian}"
+                <fd-time [disabled]="disabled"
                          [meridian]="meridian"
                          [(ngModel)]="time"
                          (ngModelChange)="setTime(true)"

@@ -16,6 +16,9 @@ export class AlertConfig {
     /** Width of the alert. */
     width?: string = '33vw';
 
+    /** Minimum width of the alert. */
+    minWidth?: string = '300px';
+
     /** Data being injected into the child component or template. */
     data?: any;
 

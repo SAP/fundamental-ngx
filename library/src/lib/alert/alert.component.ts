@@ -34,6 +34,7 @@ let alertUniqueId: number = 0;
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
+        '[style.min-width]': 'minWidth',
         'role': 'alert',
         '[attr.id]': 'id',
         '[@fadeAlertNgIf]': ''
@@ -84,6 +85,10 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     /** Width of the alert. */
     @Input()
     width: string;
+
+    /** Minimum width of the alert. */
+    @Input()
+    minWidth: string;
 
     /** Alternative way of passing in a message to the alert. */
     @Input()

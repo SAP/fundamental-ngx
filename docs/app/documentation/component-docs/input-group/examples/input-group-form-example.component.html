@@ -1,0 +1,7 @@
+<form [formGroup]="customForm">
+    <label fd-form-label>Search Input</label>
+    <fd-input-group-search [placeholder]="'Search'" formControlName="searchQuery"></fd-input-group-search>
+</form>
+<br />
+
+Search Query Entered: {{ customForm.controls.searchQuery.value }}

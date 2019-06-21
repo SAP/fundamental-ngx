@@ -22,11 +22,12 @@ export class BackdropExamplesComponent {
 
     openCustomBackdrop(modal): void {
         this.modalService.open(modal, {
+            container: document.activeElement as HTMLElement,
             backdropClass: 'modal-custom-overlay-example',
             backdropClickCloseable: false,
             maxWidth: '400px',
             data: 'This modal has a custom backdrop! Classes applied to the backdrop' +
-                ' must be in your global styles file. You may also need to override some properties using !important.'
+                ' do not have to be in your global styles file.'
         });
     }
 }

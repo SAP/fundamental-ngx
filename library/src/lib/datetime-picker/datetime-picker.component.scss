@@ -21,11 +21,11 @@
         fd-popover {
             display: block;
         }
-    }
 
-    // Fundamental bug workaround
-    .fd-time-container {
-        width: 144px;
+        // Added to fix popper migration style bugs. Should be fixed in fd.
+        fd-time {
+            width: auto;
+        }
     }
 
 }

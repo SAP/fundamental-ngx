@@ -10,13 +10,9 @@
     <fd-shellbar-subtitle>
         Subtitle
     </fd-shellbar-subtitle>
-    <fd-copilot></fd-copilot>
     <fd-shellbar-actions [user]="user"
                          [userMenu]="userMenu"
                          [productSwitcher]="productSwitcher">
-        <button fd-button
-                [fdType]="'standard'">Custom Button</button>
-
         <fd-shellbar-action *ngFor="let action of actions"
                             [glyph]="action.glyph"
                             [callback]="action.callback"
@@ -24,5 +20,6 @@
                             [notificationCount]="action.notificationCount"
                             [notificationLabel]="action.notificationLabel">
         </fd-shellbar-action>
+        <fd-search-input [inShellbar]="true" [dropdownValues]="searchTerms"></fd-search-input>
     </fd-shellbar-actions>
 </fd-shellbar>

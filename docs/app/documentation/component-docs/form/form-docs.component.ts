@@ -6,6 +6,8 @@ import * as formInlineHelpHtml from '!raw-loader!./examples/form-inline-help-exa
 import * as formRadioHtml from '!raw-loader!./examples/form-radio-example.component.html';
 import * as formSelectHtml from '!raw-loader!./examples/form-select-example.component.html';
 import * as formStateHtml from '!raw-loader!./examples/form-state-example.component.html';
+import * as formGroupInputHtml from '!raw-loader!./examples/form-group-input-example.component.html';
+import * as formGroupInputTs from '!raw-loader!./examples/form-group-input-example.component.ts';
 
 @Component({
     selector: 'app-form',
@@ -23,4 +25,8 @@ export class FormDocsComponent {
     radioButtonsFormHtml = formRadioHtml;
 
     checkboxFormHtml = formCheckboxHtml;
+
+    formGroupInputHtml = formGroupInputHtml;
+
+    formGroupInputTs = formGroupInputTs;
 }

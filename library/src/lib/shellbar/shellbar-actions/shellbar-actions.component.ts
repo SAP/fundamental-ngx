@@ -1,5 +1,16 @@
-import { Component, ContentChildren, HostListener, Input, OnInit, AfterContentChecked, QueryList, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    ContentChildren,
+    HostListener,
+    Input,
+    OnInit,
+    AfterContentChecked,
+    QueryList,
+    ViewEncapsulation,
+    ContentChild
+} from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
+import { SearchInputComponent } from '../../search-input/search-input.component';
 
 /**
  * The component that represents shellbar actions.
@@ -24,6 +35,7 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
+    styleUrls: ['./shellbar-actions.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
@@ -52,6 +64,10 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)
     shellbarActions: QueryList<ShellbarActionComponent>;
+
+    /** @hidden */
+    @ContentChild(SearchInputComponent)
+    searchInputComponent: SearchInputComponent;
 
     /** @hidden */
     totalNotifications: number;
