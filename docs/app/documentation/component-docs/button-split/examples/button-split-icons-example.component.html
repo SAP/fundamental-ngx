@@ -1,0 +1,28 @@
+<fd-button-split [glyph]="'menu'" [mainActionTitle]="'Action Button'">
+    <div fd-button-split-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-button-split>
+<fd-button-split (primaryButtonClicked)="num = num + 1" [glyph]="'cart'" [mainActionTitle]="'Action Button'">
+    <div fd-button-split-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-button-split>

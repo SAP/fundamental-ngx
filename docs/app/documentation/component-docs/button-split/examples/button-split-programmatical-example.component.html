@@ -1,0 +1,21 @@
+<fd-button-split [(isOpen)]="isOpen"
+                 [focusTrapped]="false"
+                 [triggers]="['']"
+                 [closeOnOutsideClick]="false"
+                 [mainActionTitle]="'Action Button'">
+    <div fd-button-split-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-button-split>
+
+<button fd-button (click)="isOpen=true">Open</button>
+<button fd-button (click)="isOpen=false">Close</button>

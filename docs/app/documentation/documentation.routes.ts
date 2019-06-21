@@ -84,6 +84,8 @@ import { TimePickerHeaderComponent } from './component-docs/time-picker/time-pic
 import { TreeHeaderComponent } from './component-docs/tree/tree-header/tree-header.component';
 import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/toggle-header.component';
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
+import { ButtonSplitHeaderComponent } from './component-docs/button-split/button-split-header/button-split-header.component';
+import { ButtonSplitDocsComponent } from './component-docs/button-split/button-split-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -119,6 +121,11 @@ export const ROUTES: Routes = [
             { path: 'buttonGroup', component: ButtonGroupHeaderComponent, children: [
                     { path: '', component: ButtonGroupDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.buttonGroup}}
+                ]
+            },
+            { path: 'buttonSplit', component: ButtonSplitHeaderComponent, children: [
+                    { path: '', component: ButtonSplitDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.buttonSplit}}
                 ]
             },
             { path: 'calendar', component: CalendarHeaderComponent, children: [

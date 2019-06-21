@@ -9,6 +9,7 @@ export * from './lib/badge-label';
 export * from './lib/breadcrumb';
 export * from './lib/button';
 export * from './lib/button-group';
+export * from './lib/button-split';
 export * from './lib/calendar';
 export * from './lib/combobox-input';
 export * from './lib/date-picker';

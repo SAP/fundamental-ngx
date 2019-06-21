@@ -19,7 +19,8 @@ import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-direct
     exports: [
         TabListComponent,
         TabPanelComponent,
-        TabTitleDirective
+        TabTitleDirective,
+        TabLoadTitleDirective
     ]
 })
 export class TabsModule {}
