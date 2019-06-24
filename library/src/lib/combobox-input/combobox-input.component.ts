@@ -34,7 +34,9 @@ export class ComboboxInputComponent extends SearchInputComponent {
     @HostBinding('class.fd-combobox-input')
     comboboxClass = true;
 
-    /** Event emitted when a new item is clicked. */
+    /** Event emitted when a new item is clicked. Also When there is no listener for this event, then the last item
+     *  from list 'new item' won't be added
+     * */
     @Output()
     newItemClicked: EventEmitter<void> = new EventEmitter<void>();
 
@@ -64,6 +66,11 @@ export class ComboboxInputComponent extends SearchInputComponent {
                 }
             });
         }
+    }
+
+    /** @hidden */
+    public shouldShowNewItem(): boolean {
+        return this.newItemClicked.observers.length > 0;
     }
 
 }
