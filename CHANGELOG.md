@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.54"></a>
+## [0.5.3-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.53...v0.5.3-rc.54) (2019-06-25)
+
+
+### Bug Fixes
+
+* cleaned up badge/label component ([#946](https://github.com/SAP/fundamental-ngx/issues/946)) ([00d672f](https://github.com/SAP/fundamental-ngx/commit/00d672f))
+
+
+
 <a name="0.5.3-rc.53"></a>
 ## [0.5.3-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.52...v0.5.3-rc.53) (2019-06-25)
 
