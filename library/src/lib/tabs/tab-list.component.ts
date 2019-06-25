@@ -1,6 +1,6 @@
 import {
     AfterContentInit,
-    Component,
+    Component, ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
@@ -15,6 +15,8 @@ import {
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
 import { Subscription } from 'rxjs';
+import { TabNavDirective } from './tab-nav/tab-nav.directive';
+import { TabLinkDirective } from './tab-link/tab-link.directive';
 
 /**
  * Represents a list of tab-panels.
@@ -32,7 +34,11 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
     /** @hidden */
     @ContentChildren(TabPanelComponent)
-    tabs: QueryList<TabPanelComponent>;
+    panelTabs: QueryList<TabPanelComponent>;
+
+    /** @hidden */
+    @ContentChild(TabNavDirective)
+    tabNav: TabNavDirective;
 
     /** @hidden */
     @ViewChildren('tabLink')
@@ -47,23 +53,37 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     selectedIndexChange = new EventEmitter<number>();
 
     private _tabsSubscription: Subscription;
+    private _tabNavKeyDownSubscription: Subscription;
 
     /** @hidden */
     ngAfterContentInit(): void {
         setTimeout(() => {
-            this.selectTab(this.selectedIndex);
-        });
-
-        this._tabsSubscription = this.tabs.changes.subscribe(() => {
-            if (!this.isIndexInRange() || this.isTabContentEmpty()) {
-                this.resetTabHook();
+            if (!this.tabNav) {
+                this.selectTab(this.selectedIndex);
             }
         });
+
+        if (this.panelTabs) {
+            this._tabsSubscription = this.panelTabs.changes.subscribe(() => {
+                if (!this.isIndexInRange() || this.isTabContentEmpty()) {
+                    this.resetTabHook();
+                }
+            });
+        }
+
+        if (this.tabNav) {
+            this._tabNavKeyDownSubscription = this.tabNav.onKeyDown.subscribe(key => this.tabHeaderKeyHandler(key.index, key.event))
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._tabsSubscription.unsubscribe();
+        if (this._tabsSubscription) {
+            this._tabsSubscription.unsubscribe();
+        }
+        if (this._tabNavKeyDownSubscription) {
+            this._tabNavKeyDownSubscription.unsubscribe();
+        }
     }
 
     /** @hidden */
@@ -80,8 +100,10 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
      * @param tabIndex Index of the tab to select.
      */
     selectTab(tabIndex: number): void {
-        if (this.isIndexInRange() && this.isTargetTabEnabled(tabIndex)) {
-            this.tabs.forEach((tab, index) => {
+        if (this.tabNav) {
+            this.tabNav.tabLinks[tabIndex].elementRef.nativeElement.click();
+        } else if (this.isIndexInRange() && this.isTargetTabEnabled(tabIndex)) {
+            this.panelTabs.forEach((tab, index) => {
                 tab.expanded = index === tabIndex;
             });
             this.selectedIndex = tabIndex;
@@ -103,12 +125,12 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
                 if (index - 1 >= 0) {
                     this.getTabLinkFromIndex(index - 1).focus();
                 } else {
-                    this.getTabLinkFromIndex(this.tabLinks.length - 1).focus();
+                    this.getTabLinkFromIndex(this.tabs.length - 1).focus();
                 }
                 break;
             }
             case ('ArrowRight'): {
-                if (index + 1 < this.tabLinks.length) {
+                if (index + 1 < this.tabs.length) {
                     this.getTabLinkFromIndex(index + 1).focus();
                 } else {
                     this.getTabLinkFromIndex(0).focus();
@@ -130,17 +152,27 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         }
     }
 
+    public get tabs(): TabPanelComponent[] | TabLinkDirective[] {
+        if (this.tabNav) {
+            return this.tabNav.tabLinks;
+        } else if (this.panelTabs.length > 0) {
+            return this.panelTabs.toArray();
+        } else {
+            return [];
+        }
+    }
+
     private isIndexInRange(): boolean {
-        return this.tabs && this.tabs.length > 0 && this.selectedIndex < this.tabs.length;
+        return this.panelTabs && this.panelTabs.length > 0 && this.selectedIndex < this.panelTabs.length;
     }
 
     private isTargetTabEnabled(index: number): boolean {
-        return !this.tabs.toArray()[index].disabled;
+        return !this.panelTabs.toArray()[index].disabled;
     }
 
     private isTabContentEmpty(): boolean {
         let result = true;
-        this.tabs.forEach(tab => {
+        this.panelTabs.forEach(tab => {
             if (tab.expanded) {
                 result = false;
             }
@@ -156,6 +188,10 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     }
 
     private getTabLinkFromIndex(index: number): HTMLElement {
-        return this.tabLinks.toArray()[index].nativeElement as HTMLElement;
+        if (this.tabLinks.toArray().length > 0) {
+            return this.tabLinks.toArray()[index].nativeElement as HTMLElement;
+        } else if (this.tabNav) {
+            return this.tabNav.tabLinks[index].elementRef.nativeElement as HTMLElement;
+        }
     }
 }

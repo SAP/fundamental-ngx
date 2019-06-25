@@ -177,7 +177,7 @@ import {
 import { TableExampleComponent } from './component-docs/table/examples/table-example.component';
 import {
     TabsExampleComponent,
-    TabSelectionExampleComponent
+    TabSelectionExampleComponent, TabsNavigationModeExampleComponent
 } from './component-docs/tabs/examples/tabs-examples-component';
 import {
     TileActionsExampleComponent,
@@ -500,6 +500,7 @@ import { HighlightModule } from 'ngx-highlightjs';
         TableResponsiveExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
+        TabsNavigationModeExampleComponent,
         TileActionsExampleComponent,
         TileDisabledExampleComponent,
         TileExampleComponent,

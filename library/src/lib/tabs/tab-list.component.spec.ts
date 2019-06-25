@@ -61,5 +61,4 @@ describe('TabListComponent', () => {
         component.selectedIndexChange.subscribe(id => expect(id).toBe(0));
         component.selectTab(3);
     });
-
 });
