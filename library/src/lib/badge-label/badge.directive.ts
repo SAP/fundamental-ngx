@@ -1,16 +1,14 @@
-import { Input, Component, Inject, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Input, Component, Directive, Inject, ElementRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
- * Badge component, used to indicate status.
+ * Badge directive, used to indicate status.
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
  */
-@Component({
-    selector: 'fd-badge',
-    templateUrl: './badge-label.component.html',
-    encapsulation: ViewEncapsulation.None
+@Directive({
+    selector: '[fd-badge]'
 })
-export class BadgeComponent extends AbstractFdNgxClass {
+export class BadgeDirective extends AbstractFdNgxClass {
     /** Color coded status for the badge. Options are 'success', 'warning', and 'error'. Leave empty for default badge. */
     @Input() status;
 
@@ -18,8 +16,11 @@ export class BadgeComponent extends AbstractFdNgxClass {
     @Input() modifier;
 
     /** @hidden */
+    @HostBinding('class.fd-badge')
+    fdBadgeClass: boolean = true;
+
+    /** @hidden */
     _setProperties() {
-        this._addClassToElement('fd-badge');
         if (this.status) {
             this._addClassToElement('fd-badge--' + this.status);
         }
@@ -29,7 +30,7 @@ export class BadgeComponent extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef) {
         super(elementRef);
     }
 }
