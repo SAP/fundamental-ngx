@@ -6,6 +6,7 @@ import * as datePickeri18nSrc from '!raw-loader!./examples/date-picker-i18n-exam
 import * as datePickerFormatSrc from '!raw-loader!./examples/date-picker-format-example.component.ts';
 import * as datePickerAllowNullSrc from '!raw-loader!./examples/date-picker-allow-null-example.component.ts';
 import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-example.component.ts';
+import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
 
 @Component({
@@ -20,5 +21,7 @@ export class DatePickerDocsComponent {
     datePickerFormatTs = datePickerFormatSrc;
     datePickerAllowNullTs = datePickerAllowNullSrc;
     datePickerFormTs = datePickerFormTsSrc;
+    datePickerRangeFormTs = datePickerRangeFormTsSrc;
     datePickerPositionTs = datePickerPositionSrc;
+
 }
