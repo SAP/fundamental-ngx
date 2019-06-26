@@ -7,30 +7,25 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
  * ```html
  * <fd-tile-grid [col]="3">
  *      <fd-tile>
- *          <fd-tile-content>
+ *          <div fd-tile-content>
  *              <h2 fd-tile-title>Tile Tile 1</h2>
  *              <p>Tile Description</p>
- *          </fd-tile-content>
+ *          </div>
  *      </fd-tile>
  *      <fd-tile>
- *          <fd-tile-content>
+ *          <div fd-tile-content>
  *              <h2 fd-tile-title>Tile Tile 2</h2>
  *              <p>Tile Description</p>
- *          </fd-tile-content>
+ *          </div>
  *      </fd-tile>
  *      <fd-tile>
- *          <fd-tile-content>
- *              <h2 fd-tile-title>Tile Tile 3</h2>
- *              <p>Tile Description</p>
- *          </fd-tile-content>
- *      </fd-tile>
  * </fd-tile-grid>
  * ```
  */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: 'fd-tile-grid'
+    selector: '[fd-tile-grid]'
 })
 export class TileGridDirective extends AbstractFdNgxClass {
     /** 

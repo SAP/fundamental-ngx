@@ -327,6 +327,8 @@ import { DatePickerDisabledExampleComponent } from './component-docs/date-picker
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
+import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
+import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 
 @NgModule({
     declarations: [
@@ -410,10 +412,12 @@ import { HighlightModule } from 'ngx-highlightjs';
         DatePickerAllowNullExampleComponent,
         DatePickerDisabledExampleComponent,
         DatePickerFormExampleComponent,
+        DatePickerFormRangeExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
         DatetimeFormatExampleComponent,
+        DatetimeFormExampleComponent,
         DatetimePickerAllowNullExampleComponent,
         DatetimeDisabledExampleComponent,
         DropdownContextualMenuExampleComponent,

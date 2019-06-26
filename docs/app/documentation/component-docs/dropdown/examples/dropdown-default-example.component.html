@@ -1,6 +1,5 @@
-<fd-popover style="margin-right: 12px;"
-            [isDropdown]="true">
-    Dropdown
+<fd-popover style="margin-right: 12px;">
+    <fd-dropdown-control>Compact Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length || menu2 && menu2.length">
         <fd-menu>
             <ul fd-menu-list>
@@ -22,9 +21,8 @@
     </fd-popover-body>
 </fd-popover>
 
-<fd-popover [isDropdown]="true"
-            [compact]="true">
-    Compact Dropdown
+<fd-popover>
+    <fd-dropdown-control [compact]="true">Compact Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>

@@ -1,10 +1,8 @@
 <div class="api-main-container">
     <h2 class="api-main-header">{{activeFile}}</h2>
     <span style="display: flex; flex-grow: 1;"></span>
-    <fd-popover [(isOpen)]="openMenu"
-                [isDropdown]="true"
-                *ngIf="files.length > 1">
-        Select a file ({{files.length}})
+    <fd-popover [(isOpen)]="openMenu" *ngIf="files.length > 1">
+        <fd-dropdown-control [compact]="true" [isOpen]="openMenu">Select a file ({{files.length}})</fd-dropdown-control>
         <fd-popover-body>
             <fd-menu>
                 <ul fd-menu-list>
