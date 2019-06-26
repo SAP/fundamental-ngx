@@ -324,6 +324,7 @@ import { DatePickerPositionExampleComponent } from './component-docs/date-picker
 import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
 import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
 import { HighlightModule } from 'ngx-highlightjs';
+import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 
 @NgModule({
@@ -407,6 +408,7 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
         DatePickerFormExampleComponent,
+        DatePickerFormRangeExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
