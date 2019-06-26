@@ -318,7 +318,6 @@ import { SelectBasicExampleComponent } from './component-docs/select/examples/se
 import { SelectProgrammaticExampleComponent } from './component-docs/select/examples/select-programmatic-example/select-programmatic-example.component';
 import { SelectNestedOptionsComponent } from './component-docs/select/examples/select-nested-options/select-nested-options.component';
 import { SelectCustomTriggerComponent } from './component-docs/select/examples/select-custom-trigger/select-custom-trigger.component';
-import { SelectComparatorComponent } from './component-docs/select/examples/select-comparator/select-comparator.component';
 import { SelectAddingExampleComponent } from './component-docs/select/examples/select-adding-example/select-adding-example.component';
 import { SelectFormsComponent } from './component-docs/select/examples/select-forms/select-forms.component';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -604,7 +603,6 @@ import { HighlightModule } from 'ngx-highlightjs';
         SelectProgrammaticExampleComponent,
         SelectNestedOptionsComponent,
         SelectCustomTriggerComponent,
-        SelectComparatorComponent,
         SelectAddingExampleComponent,
         SelectFormsComponent
     ],

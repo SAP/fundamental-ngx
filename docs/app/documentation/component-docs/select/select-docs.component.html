@@ -6,28 +6,30 @@
 <code-example [code]="selectBasicHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
-<h2>Nested Options</h2>
-<description>
-    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are.
-    It also includes having options inside options, for instance. This feature allows for some very flexible usage.
-    The example below showcases how to add a scrolling container around the options.
-</description>
-<component-example [name]="'ex2'">
-    <fd-select-nested-options></fd-select-nested-options>
-</component-example>
-<code-example [code]="selectNestedHtml" [language]="'HTML'"></code-example>
-
-<separator></separator>
 <h2>Programmatic Control</h2>
 <description>
     Controlling the select through programmatic methods is possible by calling the select component
     instance directly. Note that this can be done through ViewChild as well.
 </description>
-<component-example [name]="'ex3'">
+<component-example [name]="'ex2'">
     <fd-select-programmatic-example></fd-select-programmatic-example>
 </component-example>
 <code-example [code]="selectProgHtml" [language]="'HTML'"></code-example>
 <code-example [code]="selectProgTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Nested Options</h2>
+<description>
+    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are.
+    It also includes having options inside options, for instance. This feature allows for some very flexible usage.
+    The example below showcases how to add a scrolling container around the options.
+
+    Note that accessibility generally requires some text-content to be present in the actual option element.
+</description>
+<component-example [name]="'ex3'">
+    <fd-select-nested-options></fd-select-nested-options>
+</component-example>
+<code-example [code]="selectNestedHtml" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Custom Trigger</h2>
@@ -53,18 +55,6 @@
 </component-example>
 <code-example [code]="selectAddingHtml" [language]="'HTML'"></code-example>
 <code-example [code]="selectAddingTs" [language]="'typescript'"></code-example>
-
-<separator></separator>
-<h2>Custom Comparator</h2>
-<description>
-    Equivalence between the values of the option elements can be defined by the developer through providing
-    a custom comparator function using the compareFn input.
-</description>
-<component-example [name]="'ex6'">
-    <fd-select-comparator></fd-select-comparator>
-</component-example>
-<code-example [code]="selectCompareHtml" [language]="'HTML'"></code-example>
-<code-example [code]="selectCompareTs" [language]="'typescript'"></code-example>
 
 <separator></separator>
 <h2>Form Usage</h2>

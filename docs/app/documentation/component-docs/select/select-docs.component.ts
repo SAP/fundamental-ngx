@@ -12,9 +12,6 @@ import * as customTriggerSrcH from '!raw-loader!./examples/select-custom-trigger
 import * as selectAddingSrcH from '!raw-loader!./examples/select-adding-example/select-adding-example.component.html';
 import * as selectAddingSrcT from '!raw-loader!./examples/select-adding-example/select-adding-example.component.ts';
 
-import * as selectCompareSrcH from '!raw-loader!./examples/select-comparator/select-comparator.component.html';
-import * as selectCompareSrcT from '!raw-loader!./examples/select-comparator/select-comparator.component.ts';
-
 import * as selectFormSrcH from '!raw-loader!./examples/select-forms/select-forms.component.html';
 import * as selectFormSrcT from '!raw-loader!./examples/select-forms/select-forms.component.ts';
 
@@ -32,8 +29,6 @@ export class SelectDocsComponent implements OnInit {
     customTriggerHtml = customTriggerSrcH;
     selectAddingHtml = selectAddingSrcH;
     selectAddingTs = selectAddingSrcT;
-    selectCompareHtml = selectCompareSrcH;
-    selectCompareTs = selectCompareSrcT;
     selectFormHtml = selectFormSrcH;
     selectFormTs = selectFormSrcT;
 
