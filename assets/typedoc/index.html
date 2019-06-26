@@ -8,8 +8,8 @@
 		<a href="https://coveralls.io/github/SAP/fundamental-ngx?branch=master"><img src="https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=master" alt="Coverage Status"></a>
 	<a href="https://ui-fundamentals.slack.com"><img src="https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack" alt="Slack"></a></p>
 	<h2 id="description">Description</h2>
-	<p>The <code>fundamental-ngx</code> library is a set of <a href="https://angular.io/">Angular</a> components built using <a href="https://sap.github.io/fundamental/">SAP Fiori Fundamentals</a>.</p>
-	<p>The SAP Fiori Fundamentals library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
+	<p>The <code>fundamental-ngx</code> library is a set of <a href="https://angular.io/">Angular</a> components built using <a href="https://sap.github.io/fundamental-styles/">SAP Fundamental Styles</a>.</p>
+	<p>The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
 	<h2 id="api-reference">API Reference</h2>
 	<p>See <a href="https://sap.github.io/fundamental-ngx/docs/home">Component Documentation</a> for examples and API details.</p>
 	<h2 id="requirements">Requirements</h2>
@@ -19,11 +19,10 @@
 	<h2 id="getting-started">Getting Started</h2>
 	<p>For an existing Angular application,</p>
 	<ol>
-		<li><p><strong>Install Fundamental-ngx and Fiori Fundamentals.</strong></p>
-		<pre><code> npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save fiori-fundamentals fundamental-ngx</span></code></pre></li>
-		<li><p><strong>Include Fiori Fundamentals CSS in the <code>styles</code> array of the <code>angular.json</code> file.</strong></p>
-			<pre><code class="language-scss"> &quot;./node_modules/fiori-fundamentals/dist/fiori-fundamentals.min.css&quot;</code></pre>
-			<p> <em>Note the path may be different if your CLI configuration is not in the root of your project directory.</em></p>
+		<li><p><strong>Install Fundamental-ngx and Fundamental Styles.</strong></p>
+		<pre><code> npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save fundamental-styles fundamental-ngx</span></code></pre></li>
+		<li><p><strong>Include Fundamental Styles CSS in the <code>styles</code> array of the <code>angular.json</code> file.</strong></p>
+			<pre><code> <span class="hljs-string">"node_modules/fundamental-styles/dist/fundamental-styles.min.css"</span></code></pre><p> <em>Note the path may be different if your CLI configuration is not in the root of your project directory.</em></p>
 		</li>
 		<li><p><strong>Configure your animations.</strong></p>
 			<p> Install angular animations by running the following.</p>
@@ -61,9 +60,6 @@
 			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-toggle</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"'l'"</span> [(<span class="hljs-attr">checked</span>)]=<span class="hljs-string">"checked"</span>&gt;</span>Large Toggle<span class="hljs-tag">&lt;/<span class="hljs-name">fd-toggle</span>&gt;</span></code></pre>
 		</li>
 	</ol>
-	<h2 id="demo-application">Demo Application</h2>
-	<p>The documentation serves as a demo application in the <code>docs/</code> directory. Run <code>ng serve</code> from the root of the repository to serve the app locally. The demo application utilizes the Angular Fundamental source code in this repository, so changes you make to any component source will be reflected in the demo app.</p>
-	<p>View the live demo <a href="https://github.com/SAP/fundamental-ngx/tree/master/docs">here</a>.</p>
 	<h2 id="tests">Tests</h2>
 	<p>Fundamental NGX makes use of Jasmine and Karma for its unit tests.</p>
 	<p>Run <code>ng test fundamental-ngx</code>. Append <code>--code-coverage</code> to generate code coverage documentation.</p>
