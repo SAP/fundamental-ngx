@@ -3,10 +3,11 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation
+    ViewChild, ViewEncapsulation, ContentChild
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective } from './popover-directive/popover.directive';
+import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
 let popoverUniqueId: number = 0;
 
@@ -31,6 +32,8 @@ export class PopoverComponent {
     /** @hidden */
     @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
+    /** @hidden */
+    @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
 
     /** Whether the popover should have an arrow. */
     @Input()
@@ -58,25 +61,9 @@ export class PopoverComponent {
     @Input()
     placement: Placement;
 
-    /** Only to be used when the popover is used as a dropdown. The glyph to display. */
-    @Input()
-    glyph: string;
-
-    /** Only to be used when the popover is used as a dropdown. The btnType to display. */
-    @Input()
-    btnType: string = '';
-
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
     isOpen: boolean = false;
-
-    /** Only to be used when the popover is used as a dropdown. Whether the dropdown is in compact format. */
-    @Input()
-    compact: boolean = false;
-
-    /** Only to be used when the popover is used as a dropdown. Whether the dropdown is in a toolbar. */
-    @Input()
-    toolbar: boolean = false;
 
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
@@ -152,6 +139,24 @@ export class PopoverComponent {
      */
     public updatePopover(): void {
         this.directiveRef.updatePopper();
+    }
+
+    /**
+     * Function is called every time popover changes open attribute
+     */
+    public openChanged(isOpen: boolean) {
+        this.isOpenChange.emit(isOpen);
+        this.updateDropdownIsOpen(isOpen);
+    }
+
+
+    /** @hidden
+     *  Function that allows us to control aria-expanded on dropdown child
+     * */
+    private updateDropdownIsOpen(isOpen: boolean) {
+        if (this.dropdownComponent) {
+            this.dropdownComponent.isOpen = isOpen;
+        }
     }
 
 }

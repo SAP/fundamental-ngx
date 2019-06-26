@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.55"></a>
+## [0.5.3-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.54...v0.5.3-rc.55) (2019-06-25)
+
+
+
+<a name="0.5.3-rc.54"></a>
+## [0.5.3-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.53...v0.5.3-rc.54) (2019-06-25)
+
+
+### Bug Fixes
+
+* cleaned up badge/label component ([#946](https://github.com/SAP/fundamental-ngx/issues/946)) ([00d672f](https://github.com/SAP/fundamental-ngx/commit/00d672f))
+
+
+
+<a name="0.5.3-rc.53"></a>
+## [0.5.3-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.52...v0.5.3-rc.53) (2019-06-25)
+
+
+
+<a name="0.5.3-rc.52"></a>
+## [0.5.3-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.51...v0.5.3-rc.52) (2019-06-24)
+
+
+
+<a name="0.5.3-rc.51"></a>
+## [0.5.3-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.50...v0.5.3-rc.51) (2019-06-21)
+
+
+### Bug Fixes
+
+* remove isComponent ([#937](https://github.com/SAP/fundamental-ngx/issues/937)) ([53fbef3](https://github.com/SAP/fundamental-ngx/commit/53fbef3))
+
+
+
+<a name="0.5.3-rc.50"></a>
+## [0.5.3-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.49...v0.5.3-rc.50) (2019-06-20)
+
+
+
+<a name="0.5.3-rc.49"></a>
+## [0.5.3-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.48...v0.5.3-rc.49) (2019-06-19)
+
+
+
+<a name="0.5.3-rc.48"></a>
+## [0.5.3-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.47...v0.5.3-rc.48) (2019-06-19)
+
+
+
 <a name="0.5.3-rc.47"></a>
 ## [0.5.3-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.46...v0.5.3-rc.47) (2019-06-18)
 

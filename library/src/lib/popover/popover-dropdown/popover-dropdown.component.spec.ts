@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { PopoverDropdownComponent } from './popover-dropdown.component';
 
-import { ProductTileContentComponent } from './product-tile-content.component';
 
-describe('ProductTileContentComponent', () => {
-    let component: ProductTileContentComponent;
-    let fixture: ComponentFixture<ProductTileContentComponent>;
+describe('PopoverControlComponent', () => {
+    let component: PopoverDropdownComponent;
+    let fixture: ComponentFixture<PopoverDropdownComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ProductTileContentComponent]
+            declarations: [PopoverDropdownComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ProductTileContentComponent);
+        fixture = TestBed.createComponent(PopoverDropdownComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

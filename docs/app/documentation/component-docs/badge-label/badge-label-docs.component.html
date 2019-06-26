@@ -62,23 +62,24 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <div *ngIf="data.properties.type === 'badge'">
-        <fd-badge [status]="data.properties.status"
-                  [modifier]="data.properties.modifier">{{data.properties.text}}</fd-badge>
+        <span fd-badge [status]="data.properties.status" [modifier]="data.properties.modifier">{{data.properties.text}}
+        </span>
     </div>
     <div *ngIf="data.properties.type === 'label'">
-        <fd-label [status]="data.properties.status">{{data.properties.text}}</fd-label>
+        <span fd-label [status]="data.properties.status">{{data.properties.text}}</span>
     </div>
     <div *ngIf="data.properties.type === 'status label'">
-        <fd-label *ngIf="!data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
-                  [statusIcon]="data.properties.statusIcon">{{data.properties.text}}</fd-label>
-        <fd-label *ngIf="data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
-                  [icon]="data.properties.icon">{{data.properties.text}}</fd-label>
+        <span fd-label *ngIf="!data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
+            [statusIcon]="data.properties.statusIcon">{{data.properties.text}}</span>
+        <span fd-label *ngIf="data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
+            [icon]="data.properties.icon">{{data.properties.text}}</span>
     </div>
 </playground>
 
 <style>
-    ::ng-deep fd-badge,
-    ::ng-deep fd-label {
+    ::ng-deep .fd-badge,
+    ::ng-deep .fd-label,
+    ::ng-deep .fd-status-label {
         margin-right: 20px;
     }
 </style>

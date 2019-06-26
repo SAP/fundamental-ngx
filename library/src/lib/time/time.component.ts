@@ -52,10 +52,6 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
     /** @hidden */
-    @Input()
-    isDateTimePicker: boolean = false;
-
-    /** @hidden */
     @Output()
     focusArrowLeft: EventEmitter<any> = new EventEmitter<any>();
 

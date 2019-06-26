@@ -128,12 +128,16 @@ pre {
 }
 
 //highlight overrides
-.hljs-tag {
+.hljs-tag, .hljs-name {
     color: #000080;
 }
 
-.hljs-name {
-    color: #000080;
+.hljs-keyword {
+    color: #00f;
+}
+
+.hljs-comment {
+    color: #008000;
 }
 
 .hljs-attr {
@@ -142,6 +146,10 @@ pre {
 
 .hljs-string {
     color: #d14;
+}
+
+.hljs-meta {
+    color: #2b91af
 }
 
 .side-nav__search {
