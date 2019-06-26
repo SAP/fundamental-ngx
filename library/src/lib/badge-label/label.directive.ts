@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, Inject, Input, ViewEncapsulation, HostBinding } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**

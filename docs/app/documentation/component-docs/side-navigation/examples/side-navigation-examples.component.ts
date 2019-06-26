@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-side-navigation-example',
@@ -8,7 +8,13 @@ export class SideNavigationExampleComponent {}
 
 @Component({
     selector: 'fd-side-navigation-collapsed-example',
-    templateUrl: './side-navigation-collapsed-example.component.html'
+    templateUrl: './side-navigation-collapsed-example.component.html',
+    styles: [`
+        .fd-side-nav--icons {
+            max-width: 65px;
+        }
+    `],
+    encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationCollapsedExampleComponent {}
 
