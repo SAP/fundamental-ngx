@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0-rc.0"></a>
+# [0.6.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.57...v0.6.0-rc.0) (2019-06-26)
+
+
+### Features
+
+* add disabled state for datepicker and datetimepicker ([#959](https://github.com/SAP/fundamental-ngx/issues/959)) ([8b2a242](https://github.com/SAP/fundamental-ngx/commit/8b2a242))
+
+
+
 <a name="0.5.3-rc.57"></a>
 ## [0.5.3-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.56...v0.5.3-rc.57) (2019-06-26)
 
