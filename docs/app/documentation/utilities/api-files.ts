@@ -72,7 +72,7 @@ export const API_FILES = {
         'FormSetDirective'
     ],
     icon: [
-        'IconDirective'
+        'IconComponent'
     ],
     identifier: [
         'IdentifierDirective'

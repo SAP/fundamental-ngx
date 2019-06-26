@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, Inject } from '@angular/core';
+import { Directive, Input, ElementRef, Inject, AfterContentInit, AfterViewInit, Component } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /** 
@@ -14,22 +14,27 @@ const BASE_ICON_CLASS = 'sap-icon';
 const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 
 /**
- * The directive that represents an icon. 
+ * The Component that represents an icon.
  *
  * ```html
  * <fd-icon [glyph]="cart-approval" [size]="'l'"></fd-icon>
- * ```
+ // * ```
+ // * Or
+ // * ```html
+ // * <fd-icon [size]="'l'">cart-approval</fd-icon>
+ // * ```
  */
-@Directive({
+@Component({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
     selector: 'fd-icon',
+    template: ``,
     host: {
         role: 'presentation'
     }
 })
-export class IconDirective extends AbstractFdNgxClass {
-    
+export class IconComponent extends AbstractFdNgxClass {
+
     /** The glyph name */
     @Input() glyph;
 
