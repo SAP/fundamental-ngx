@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3-rc.57"></a>
+## [0.5.3-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.56...v0.5.3-rc.57) (2019-06-26)
+
+
+### Bug Fixes
+
+* datepicker touched/dirty bugs ([#968](https://github.com/SAP/fundamental-ngx/issues/968)) ([bf69937](https://github.com/SAP/fundamental-ngx/commit/bf69937))
+
+
+
 <a name="0.5.3-rc.56"></a>
 ## [0.5.3-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.55...v0.5.3-rc.56) (2019-06-26)
 
