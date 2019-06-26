@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { LabelDirective } from './label.directive';
+import { StatusLabelDirective } from './status-label.directive';
 
 @Component({
     template: `
-        <span fd-label>Fd-badge test</span>
+        <span fd-status-label>Fd-badge test</span>
     `
 })
 
 export class TestComponent { }
 
-describe('LabelDirective', () => {
+describe('StatusLabelDirective', () => {
     let component: TestComponent,
         fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
@@ -21,7 +21,7 @@ describe('LabelDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LabelDirective, TestComponent]
+            declarations: [StatusLabelDirective, TestComponent]
         });
     }));
 
@@ -32,8 +32,8 @@ describe('LabelDirective', () => {
         element = debugElement.nativeElement;
 
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(LabelDirective));
-        directiveInstance = directive.injector.get(LabelDirective);
+        directive = debugElement.query(By.directive(StatusLabelDirective));
+        directiveInstance = directive.injector.get(StatusLabelDirective);
 
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
@@ -44,11 +44,15 @@ describe('LabelDirective', () => {
         expect(directive).toBeTruthy();
     });
 
-    it('should add label class', () => {
+    it('should add status labels class', () => {
         directiveInstance.status = 'someStatus';
+        directiveInstance.statusIcon = 'someStatusIcon';
+        directiveInstance.icon = 'someIcon';
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-label');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-label--someStatus');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatus');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatusIcon');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someIcon');
     });
 });
