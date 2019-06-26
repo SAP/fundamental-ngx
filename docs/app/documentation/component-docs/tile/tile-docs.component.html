@@ -112,7 +112,7 @@
                              [colorAccent]="data.properties.colorAccent"
                              *ngIf="data.properties.type !== 'product'">
 
-                        <fd-tile-media *ngIf="data.properties.type === 'media'">
+                        <div fd-tile-media *ngIf="data.properties.type === 'media'">
               <span *ngIf="data.properties.imageUrl.length === 0 ; else urlTemplate ">
                 <span *ngIf="data.properties.transparent === true ; else colorAccentTemplate"
                       fd-identifier
@@ -134,16 +134,16 @@
                                           [circle]="data.properties.circle"
                                           [photo]="data.properties.imageUrl"></fd-image>
                             </ng-template>
-                        </fd-tile-media>
+                        </div>
 
-                        <fd-tile-content>
+                        <div fd-tile-content>
                             <h2 fd-tile-title>
                                 {{data.properties.title}}
                             </h2>
-                <p>{{data.properties.description}}</p>
-                </fd-tile-content>
+                            <p>{{data.properties.description}}</p>
+                        </div>
 
-                <fd-tile-actions *ngIf="data.properties.hasActions === true">
+                <div fd-tile-actions *ngIf="data.properties.hasActions === true">
                     <fd-popover>
                         <fd-popover-control>
                             <button fd-button
@@ -160,17 +160,17 @@
                             </fd-menu>
                         </fd-popover-body>
                     </fd-popover>
-                </fd-tile-actions>
+                </div>
                 </fd-tile>
 
                 <fd-product-tile [disabled]="data.properties.disabled"
                                  [isButton]="data.properties.isButton"
                                  *ngIf="data.properties.type === 'product'">
-                    <fd-product-tile-media [photo]="data.properties.imageUrl"></fd-product-tile-media>
-                    <fd-product-tile-content>
+                    <div fd-product-tile-media [photo]="data.properties.imageUrl"></div>
+                    <div fd-product-tile-content>
                         <h2 fd-product-tile-title>{{data.properties.title}}</h2>
                         <p>{{data.properties.description}}</p>
-                    </fd-product-tile-content>
+                    </div>
                 </fd-product-tile>
                 </p>
             </div>
