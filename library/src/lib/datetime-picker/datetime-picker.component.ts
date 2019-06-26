@@ -187,8 +187,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Opens the popover. */
     openPopover(inputFieldDate?: string): void {
-        this.onTouched(this.selectedDay.date);
-        if (!this.isOpen) {
+        if (!this.isOpen && !this.disabled) {
+            this.onTouched(this.selectedDay.date);
             this.isOpen = true;
             if (inputFieldDate !== null && inputFieldDate !== '' && !this.isInvalidDateInput) {
                 this.inputValueChange(this.date);

@@ -111,6 +111,10 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** Whether the date picker is disabled. */
+    @Input()
+    disabled: boolean;
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param d Date
@@ -167,9 +171,11 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** Opens the calendar */
     openCalendar(e) {
-        this.onTouched({date: this.selectedDay.date});
-        this.isOpen = true;
-        this.getInputValue(e);
+        if (!this.disabled) {
+            this.onTouched({date: this.selectedDay.date});
+            this.isOpen = true;
+            this.getInputValue(e);
+        }
     }
 
     /** Toggles the calendar open or closed */
@@ -283,7 +289,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        // void for now
+        this.disabled = isDisabled;
     }
 
     /** @hidden */

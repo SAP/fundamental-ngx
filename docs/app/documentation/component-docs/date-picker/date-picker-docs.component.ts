@@ -8,6 +8,7 @@ import * as datePickerAllowNullSrc from '!raw-loader!./examples/date-picker-allo
 import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-example.component.ts';
 import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
+import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disabled-example.component.ts';
 
 @Component({
     selector: 'app-date-picker',
@@ -23,5 +24,6 @@ export class DatePickerDocsComponent {
     datePickerFormTs = datePickerFormTsSrc;
     datePickerRangeFormTs = datePickerRangeFormTsSrc;
     datePickerPositionTs = datePickerPositionSrc;
+    datePickerDisabledTs = datePickerDisabledSrc;
 
 }
