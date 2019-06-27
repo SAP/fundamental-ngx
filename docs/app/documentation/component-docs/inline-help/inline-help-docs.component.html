@@ -8,10 +8,20 @@
 
 <separator></separator>
 
+<h2>Inline Help with changed trigger event</h2>
+<component-example [name]="'ex2'">
+  <p class="fd-centered-content">
+    <fd-inline-help-trigger-example></fd-inline-help-trigger-example>
+  </p>
+</component-example>
+<code-example [code]="inlineHelpTriggerHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
   <p class="fd-centered-content">
     <span>{{data.properties.label}} </span>
-    <fd-inline-help [position]="data.properties.position">
+    <fd-inline-help [placement]="data.properties.position">
       {{data.properties.helpText}}
     </fd-inline-help>
   </p>

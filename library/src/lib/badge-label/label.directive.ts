@@ -6,6 +6,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
  */
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: '[fd-label]'
 })
 export class LabelDirective extends AbstractFdNgxClass {

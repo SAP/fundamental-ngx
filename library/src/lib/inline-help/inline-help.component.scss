@@ -1,0 +1,18 @@
+.fd-inline-help__content {
+
+    /** Simulate always hovered */
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+
+    /** Reset attributes provided already by popover */
+    position: relative;
+    top: 0;
+    right: 0;
+    border: none;
+
+    /** Do not show arrow */
+    &:before, &:after {
+        display: none;
+    }
+}
