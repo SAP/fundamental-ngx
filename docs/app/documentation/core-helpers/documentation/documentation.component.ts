@@ -17,7 +17,7 @@ export class DocumentationComponent implements OnInit {
     components = [
         { url: 'action-bar', name: 'Action Bar' },
         { url: 'alert', name: 'Alert' },
-        { url: 'badgeLabel', name: 'Badge' },
+        { url: 'badgeLabel', name: 'Status Indicator' },
         { url: 'breadcrumb', name: 'Breadcrumb' },
         { url: 'button', name: 'Button' },
         { url: 'buttonGroup', name: 'Button Group' },

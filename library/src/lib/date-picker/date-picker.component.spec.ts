@@ -38,6 +38,13 @@ describe('DatePickerComponent', () => {
         expect(component.inputFieldDate).toBeNull();
     });
 
+    it('should not open the calendar if the component is disabled', () => {
+        component.isOpen = false;
+        component.disabled = true;
+        component.openCalendar({});
+        expect(component.isOpen).toBeFalsy();
+    });
+
     it('should close the calendar', () => {
         component.isOpen = true;
         component.isInvalidDateInput = true;

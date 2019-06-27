@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/SAP/fundamental-ngx/compare/v0.6.0-rc.1...v0.6.0) (2019-06-26)
+
+
+
+<a name="0.6.0-rc.1"></a>
+# [0.6.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.6.0-rc.0...v0.6.0-rc.1) (2019-06-26)
+
+
+
+<a name="0.6.0-rc.0"></a>
+# [0.6.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.57...v0.6.0-rc.0) (2019-06-26)
+
+
+### Features
+
+* add disabled state for datepicker and datetimepicker ([#959](https://github.com/SAP/fundamental-ngx/issues/959)) ([8b2a242](https://github.com/SAP/fundamental-ngx/commit/8b2a242))
+
+
+
+<a name="0.5.3-rc.57"></a>
+## [0.5.3-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.56...v0.5.3-rc.57) (2019-06-26)
+
+
+### Bug Fixes
+
+* datepicker touched/dirty bugs ([#968](https://github.com/SAP/fundamental-ngx/issues/968)) ([bf69937](https://github.com/SAP/fundamental-ngx/commit/bf69937))
+
+
+
+<a name="0.5.3-rc.56"></a>
+## [0.5.3-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.55...v0.5.3-rc.56) (2019-06-26)
+
+
+
+<a name="0.5.3-rc.55"></a>
+## [0.5.3-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.54...v0.5.3-rc.55) (2019-06-25)
+
+
+
+<a name="0.5.3-rc.54"></a>
+## [0.5.3-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.53...v0.5.3-rc.54) (2019-06-25)
+
+
+### Bug Fixes
+
+* cleaned up badge/label component ([#946](https://github.com/SAP/fundamental-ngx/issues/946)) ([00d672f](https://github.com/SAP/fundamental-ngx/commit/00d672f))
+
+
+
+<a name="0.5.3-rc.53"></a>
+## [0.5.3-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.52...v0.5.3-rc.53) (2019-06-25)
+
+
+
+<a name="0.5.3-rc.52"></a>
+## [0.5.3-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.51...v0.5.3-rc.52) (2019-06-24)
+
+
+
 <a name="0.5.3-rc.51"></a>
 ## [0.5.3-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.5.3-rc.50...v0.5.3-rc.51) (2019-06-21)
 

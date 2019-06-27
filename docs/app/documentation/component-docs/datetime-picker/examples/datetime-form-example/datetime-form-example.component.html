@@ -1,0 +1,8 @@
+<form [formGroup]="customForm">
+    <fd-datetime-picker formControlName="date"></fd-datetime-picker>
+</form>
+
+Touched: {{customForm.controls.date.touched}}<br/>
+Dirty: {{customForm.controls.date.dirty}}<br/>
+
+Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}

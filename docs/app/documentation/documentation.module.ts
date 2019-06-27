@@ -323,6 +323,9 @@ import { TableResponsiveExampleComponent } from './component-docs/table/examples
 import { DatePickerPositionExampleComponent } from './component-docs/date-picker/examples/date-picker-position-example.component';
 import { TimePickerOtherDelimiterExampleComponent } from './component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
 import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
+import { DatePickerDisabledExampleComponent } from './component-docs/date-picker/examples/date-picker-disabled-example.component';
+import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
+
 import { HighlightModule } from 'ngx-highlightjs';
 import { ButtonSplitHeaderComponent } from './component-docs/button-split/button-split-header/button-split-header.component';
 import {
@@ -332,6 +335,8 @@ import {
     ButtonSplitTypesIconsComponent
 } from './component-docs/button-split/examples/button-split-examples.component';
 import { ButtonSplitDocsComponent } from './component-docs/button-split/button-split-docs.component';
+import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
+import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 
 @NgModule({
     declarations: [
@@ -419,12 +424,16 @@ import { ButtonSplitDocsComponent } from './component-docs/button-split/button-s
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
+        DatePickerDisabledExampleComponent,
         DatePickerFormExampleComponent,
+        DatePickerFormRangeExampleComponent,
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
         DatetimeFormatExampleComponent,
+        DatetimeFormExampleComponent,
         DatetimePickerAllowNullExampleComponent,
+        DatetimeDisabledExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
