@@ -10,7 +10,6 @@ import { SideNavigationLinkDirective } from './side-navigation-link/side-navigat
 import { SideNavigationSublistDirective } from './side-navigation-sublist/side-navigation-sublist.directive';
 import { SideNavigationSubitemDirective } from './side-navigation-subitem/side-navigation-subitem.directive';
 import { SideNavigationSublinkDirective } from './side-navigation-sublink/side-navigation-sublink.directive';
-import { SideNavigationIconComponent } from './side-navigation-icon/side-navigation-icon.component';
 
 @NgModule({
     imports: [CommonModule],
@@ -24,7 +23,6 @@ import { SideNavigationIconComponent } from './side-navigation-icon/side-navigat
         SideNavigationSublistDirective,
         SideNavigationSubitemDirective,
         SideNavigationSublinkDirective,
-        SideNavigationIconComponent
     ],
     declarations: [
         SideNavigationComponent,
@@ -36,7 +34,6 @@ import { SideNavigationIconComponent } from './side-navigation-icon/side-navigat
         SideNavigationSublistDirective,
         SideNavigationSubitemDirective,
         SideNavigationSublinkDirective,
-        SideNavigationIconComponent
     ]
 })
 export class SideNavigationModule {}
