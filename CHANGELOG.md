@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0-rc.1"></a>
+# [0.7.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.0...v0.7.0-rc.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* only handle input change on keyup.enter or blur for datepicker/dateti… ([#970](https://github.com/SAP/fundamental-ngx/issues/970)) ([0fb7c99](https://github.com/SAP/fundamental-ngx/commit/0fb7c99))
+
+
+
 <a name="0.7.0-rc.0"></a>
 # [0.7.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.6.0...v0.7.0-rc.0) (2019-06-27)
 
