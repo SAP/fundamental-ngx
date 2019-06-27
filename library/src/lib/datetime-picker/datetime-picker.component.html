@@ -12,7 +12,8 @@
                        [attr.aria-label]="datetimeInputLabel"
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
-                       (keyup)="inputValueChange(inputFieldDate)"
+                       (keyup.enter)="inputValueChange(inputFieldDate)"
+                       (blur)="inputValueChange(inputFieldDate)"
                        (click)="openPopover(inputFieldDate)"
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }"
                        [disabled]="disabled">

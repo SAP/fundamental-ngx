@@ -10,7 +10,8 @@
                    [attr.aria-label]="dateInputLabel"
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
-                   (keyup)="getInputValue(datePicker.value)"
+                   (keyup.enter)="getInputValue(datePicker.value)"
+                   (blur)="getInputValue(datePicker.value)"
                    (click)="openCalendar(datePicker.value)"
                    [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }">
