@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-side-navigation-example',
-    templateUrl: './side-navigation-example.component.html'
+    templateUrl: './side-navigation-example.component.html',
 })
 export class SideNavigationExampleComponent {}
 
@@ -20,7 +20,14 @@ export class SideNavigationCollapsedExampleComponent {}
 
 @Component({
     selector: 'fd-side-navigation-icons-example',
-    templateUrl: './side-navigation-icons-example.component.html'
+    templateUrl: './side-navigation-icons-example.component.html',
+    styles: [
+        `
+            fd-icon {
+                padding-right: 10px;
+            }
+        `
+    ]
 })
 export class SideNavigationIconsExampleComponent {}
 

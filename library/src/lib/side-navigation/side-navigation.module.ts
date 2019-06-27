@@ -4,13 +4,12 @@ import { CommonModule } from '@angular/common';
 import { SideNavigationComponent } from './side-navigation.component';
 import { SideNavigationGroupComponent } from './side-navigation-group/side-navigation-group.component';
 import { SideNavigationTitleDirective } from './side-navigation-title/side-navigation-title.directive';
-import { SideNavigationListComponent } from './side-navigation-list/side-navigation-list.component';
+import { SideNavigationListDirective } from './side-navigation-list/side-navigation-list.directive';
 import { SideNavigationItemComponent } from './side-navigation-item/side-navigation-item.component';
-import { SideNavigationLinkComponent } from './side-navigation-link/side-navigation-link.component';
-import { SideNavigationSubListComponent } from './side-navigation-sublist/side-navigation-sublist.component';
-import { SideNavigationSubItemComponent } from './side-navigation-subitem/side-navigation-subitem.component';
-import { SideNavigationSubLinkComponent } from './side-navigation-sublink/side-navigation-sublink.component';
-import { SideNavigationIconComponent } from './side-navigation-icon/side-navigation-icon.component';
+import { SideNavigationLinkDirective } from './side-navigation-link/side-navigation-link.directive';
+import { SideNavigationSublistDirective } from './side-navigation-sublist/side-navigation-sublist.directive';
+import { SideNavigationSubitemDirective } from './side-navigation-subitem/side-navigation-subitem.directive';
+import { SideNavigationSublinkDirective } from './side-navigation-sublink/side-navigation-sublink.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -18,25 +17,23 @@ import { SideNavigationIconComponent } from './side-navigation-icon/side-navigat
         SideNavigationComponent,
         SideNavigationGroupComponent,
         SideNavigationTitleDirective,
-        SideNavigationListComponent,
+        SideNavigationListDirective,
         SideNavigationItemComponent,
-        SideNavigationLinkComponent,
-        SideNavigationSubListComponent,
-        SideNavigationSubItemComponent,
-        SideNavigationSubLinkComponent,
-        SideNavigationIconComponent
+        SideNavigationLinkDirective,
+        SideNavigationSublistDirective,
+        SideNavigationSubitemDirective,
+        SideNavigationSublinkDirective,
     ],
     declarations: [
         SideNavigationComponent,
         SideNavigationGroupComponent,
         SideNavigationTitleDirective,
-        SideNavigationListComponent,
+        SideNavigationListDirective,
         SideNavigationItemComponent,
-        SideNavigationLinkComponent,
-        SideNavigationSubListComponent,
-        SideNavigationSubItemComponent,
-        SideNavigationSubLinkComponent,
-        SideNavigationIconComponent
+        SideNavigationLinkDirective,
+        SideNavigationSublistDirective,
+        SideNavigationSubitemDirective,
+        SideNavigationSublinkDirective,
     ]
 })
 export class SideNavigationModule {}
