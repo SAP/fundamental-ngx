@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as buttonTypesExample from '!raw-loader!./examples/button-split-types-example.component.html';
-import * as buttonSplitProgrammaticalyExample from '!raw-loader!./examples/button-split-programmatical-example.component.html';
-import * as buttonSplitOptionsExample from '!raw-loader!./examples/button-split-options-example.component.html';
-import * as buttonSplitIcons from '!raw-loader!./examples/button-split-icons-example.component.html';
-import * as buttonSplitTemplateExample from '!raw-loader!./examples/button-split-template-example.component.html';
+import * as buttonTypesExample from '!raw-loader!./examples/split-button-types-example.component.html';
+import * as buttonSplitProgrammaticalyExample from '!raw-loader!./examples/split-button-programmatical-example.component.html';
+import * as buttonSplitOptionsExample from '!raw-loader!./examples/split-button-options-example.component.html';
+import * as buttonSplitIcons from '!raw-loader!./examples/split-button-icons-example.component.html';
+import * as buttonSplitTemplateExample from '!raw-loader!./examples/split-button-template-example.component.html';
 
 @Component({
-    selector: 'app-button',
-    templateUrl: './button-split-docs.component.html'
+    selector: 'app-split-button',
+    templateUrl: './split-button-docs.component.html'
 })
-export class ButtonSplitDocsComponent implements OnInit {
+export class SplitButtonDocsComponent implements OnInit {
 
 
     schema: Schema;

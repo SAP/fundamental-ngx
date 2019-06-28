@@ -1,15 +1,14 @@
-import { Component, ContentChild, ElementRef, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
-import { ButtonSplitActionTitle } from './button-split-utils/button-split.directives';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
  * additional options.
  *
  * ```html
- *    <fd-button-split>
+ *    <fd-split-button>
  *        Action Button
- *        <div fd-button-split-menu>
+ *        <div fd-split-button-menu>
  *            <fd-menu>
  *                <ul fd-menu-list>
  *                    <li fd-menu-item>
@@ -21,19 +20,17 @@ import { ButtonSplitActionTitle } from './button-split-utils/button-split.direct
  *                </ul>
  *            </fd-menu>
  *        </div>
- *    </fd-button-split>
+ *    </fd-split-button>
  * ```
  */
 @Component({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
-    selector: 'fd-button-split',
-    templateUrl: 'button-split.component.html'
+    selector: 'fd-split-button',
+    templateUrl: 'split-button.component.html'
 })
-export class ButtonSplitComponent extends AbstractFdNgxClass {
+export class SplitButtonComponent {
 
     /** @hidden */
-    @ContentChild(ButtonSplitActionTitle, {read: TemplateRef})
+    @ContentChild(SplitButtonActionTitle, {read: TemplateRef})
     titleTemplate: TemplateRef<any>;
 
     /** The trigger events that will open/close the popover.
@@ -81,14 +78,9 @@ export class ButtonSplitComponent extends AbstractFdNgxClass {
     /** Event sent when primary button is clicked */
     @Output() primaryButtonClicked = new EventEmitter<boolean>();
 
-    /** @hidden */
-    _setProperties() {}
-
-    /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
-    }
-
+    /**
+     *  Handles primary button click
+     *  */
     public buttonClick($event) {
         this.primaryButtonClicked.emit();
         $event.stopPropagation();

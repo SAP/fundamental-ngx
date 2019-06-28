@@ -38,11 +38,6 @@ export const API_FILES = {
         'ButtonGroupComponent',
         'ButtonGroupedDirective',
     ],
-    buttonSplit: [
-        'ButtonSplitComponent',
-        'ButtonSplitMenuDirective',
-        'ButtonSplitActionTitle',
-    ],
     calendar: [
         'CalendarComponent',
         'CalendarI18n',
@@ -177,6 +172,11 @@ export const API_FILES = {
         'SideNavigationSublistComponent',
         'SideNavigationSublinkComponent',
         'SideNavigationTitleComponent'
+    ],
+    splitButton: [
+        'SplitButtonComponent',
+        'SplitButtonMenuDirective',
+        'SplitButtonActionTitle',
     ],
     table: [
         'TableDirective',

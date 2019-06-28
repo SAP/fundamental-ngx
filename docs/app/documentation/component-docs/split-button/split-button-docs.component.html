@@ -5,7 +5,7 @@
   <code class="code-snippet">[options]="'light'"</code> to set the option.
 </description>
 <component-example [name]="'ex0'">
-    <fd-button-split-options-example></fd-button-split-options-example>
+    <fd-split-button-options-example></fd-split-button-options-example>
 </component-example>
 <code-example [code]="buttonSplitOptionsExample" [language]="'HTML'"></code-example>
 
@@ -17,7 +17,7 @@
   <code class="code-snippet">[fdType]="'negative'"</code> to modify the type of the button.
 </description>
 <component-example [name]="'ex1'">
-    <fd-button-split-types-example></fd-button-split-types-example>
+    <fd-split-button-types-example></fd-split-button-types-example>
 </component-example>
 <code-example [code]="buttonHtmlType" [language]="'HTML'"></code-example>
 
@@ -28,7 +28,7 @@
   <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to change an icon of dropdown menu.
 </description>
 <component-example [name]="'ex3'">
-  <fd-button-split-icons-example></fd-button-split-icons-example>
+  <fd-split-button-icons-example></fd-split-button-icons-example>
 </component-example>
 <code-example [code]="buttonSplitIcons" [language]="'HTML'"></code-example>
 
@@ -38,39 +38,18 @@
     There is possibility to control open/close of popover by 2-ways data binding <code>[(isOpen)]</code>
 </description>
 <component-example [name]="'ex4'">
-    <fd-button-split-programmatical-example></fd-button-split-programmatical-example>
+    <fd-split-button-programmatical-example></fd-split-button-programmatical-example>
 </component-example>
 <code-example [code]="buttonSplitProgrammaticallyExample" [language]="'HTML'"></code-example>
 
 <separator></separator>
 <h2>Adding template to action button</h2>
 <description>
-    There is possibility to add some html template to action button with <code>fd-button-split-action-title</code> directive
+    There is possibility to add some html template to action button with <code>fd-split-button-action-title</code> directive
 </description>
 <component-example [name]="'ex5'">
-    <fd-button-split-template-example></fd-button-split-template-example>
+    <fd-split-button-template-example></fd-split-button-template-example>
 </component-example>
 <code-example [code]="buttonSplitTemplateExample" [language]="'HTML'"></code-example>
 
-<separator></separator>
-
-<description>The inputs for <code>button</code> will be translated into classes attributed to fiori-fundamentals
-    guidelines.
-    <br>For example:
-    <br>if <code>positive</code> is passed for <code>fdType</code>, the class <code>fd-button--positive</code> will be
-    added to the element.
-    <br>if <code>compact</code> is passed for <code>size</code>, the class <code>fd-button--compact</code> will be added to the
-    element.
-</description>
-
-<separator></separator>
-<h2>Extensibility</h2>
-<description>The button implementation allows certain extensibility in terms of options for the inputs. <code>button</code>
-    inputs don't have a restriction for the predefined values.
-    You can pass a number of custom options to the <code>options</code> input, which accepts as a parameter either a string
-    or an array of strings.  For example, <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code>
-    to the button.  If you'd like to add multiple options, you could use <code>[options]="['emphasized', 'option1', 'option2']"</code>.
-    This would result in 3 classes being added to the button: <code>fd-button--emphasized</code>, <code>fd-button--option1</code>,
-    and <code>fd-button--option2</code>.
-</description>
 <separator></separator>

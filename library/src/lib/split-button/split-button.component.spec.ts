@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonSplitComponent } from './button-split.component';
-import { ButtonSplitModule } from './button-split.module';
+import { SplitButtonComponent } from './split-button.component';
+import { SplitButtonModule } from './split-button.module';
 
-describe('ButtonSplitComponent', () => {
-    let component: ButtonSplitComponent;
-    let fixture: ComponentFixture<ButtonSplitComponent>;
+describe('SplitButtonComponent', () => {
+    let component: SplitButtonComponent;
+    let fixture: ComponentFixture<SplitButtonComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonSplitModule]
+            imports: [SplitButtonModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ButtonSplitComponent);
+        fixture = TestBed.createComponent(SplitButtonComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

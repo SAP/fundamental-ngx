@@ -1,5 +1,5 @@
-<fd-button-split [mainActionTitle]="'Action Button'">
-    <div fd-button-split-menu>
+<fd-split-button [disabled]="true" [mainActionTitle]="'Disabled Button'">
+    <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item>
@@ -11,9 +11,9 @@
             </ul>
         </fd-menu>
     </div>
-</fd-button-split>
-<fd-button-split [fdType]="'standard'" [mainActionTitle]="'Standard Button'">
-    <div fd-button-split-menu>
+</fd-split-button>
+<fd-split-button [mainActionTitle]="'Default Button'">
+    <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item>
@@ -25,9 +25,9 @@
             </ul>
         </fd-menu>
     </div>
-</fd-button-split>
-<fd-button-split [fdType]="'medium'" [mainActionTitle]="'Standard Button'">
-    <div fd-button-split-menu>
+</fd-split-button>
+<fd-split-button [options]="'emphasized'" [mainActionTitle]="'Emphasized Button'">
+    <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item>
@@ -39,4 +39,18 @@
             </ul>
         </fd-menu>
     </div>
-</fd-button-split>
+</fd-split-button>
+<fd-split-button [options]="'light'" [mainActionTitle]="'Light Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a [routerLink]="'/'">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>

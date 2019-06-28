@@ -327,16 +327,17 @@ import { DatePickerDisabledExampleComponent } from './component-docs/date-picker
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
-import { ButtonSplitHeaderComponent } from './component-docs/button-split/button-split-header/button-split-header.component';
+import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
 import {
     ButtonSplitOptionsExampleComponent,
-    ButtonSplitProgrammaticalExampleComponent, ButtonSplitTemplateExampleComponent,
+    ButtonSplitProgrammaticalExampleComponent,
+    ButtonSplitTemplateExampleComponent,
     ButtonSplitTypesExampleComponent,
     ButtonSplitTypesIconsComponent
-} from './component-docs/button-split/examples/button-split-examples.component';
-import { ButtonSplitDocsComponent } from './component-docs/button-split/button-split-docs.component';
+} from './component-docs/split-button/examples/split-button-examples.component';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
+import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 
 @NgModule({
     declarations: [
@@ -353,7 +354,7 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
         BreadcrumbDocsComponent,
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
-        ButtonSplitDocsComponent,
+        SplitButtonDocsComponent,
         DropdownDocsComponent,
         DatetimePickerDocsComponent,
         FileInputDocsComponent,
@@ -571,7 +572,7 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
         BreadcrumbHeaderComponent,
         ButtonHeaderComponent,
         ButtonGroupHeaderComponent,
-        ButtonSplitHeaderComponent,
+        SplitButtonHeaderComponent,
         CalendarHeaderComponent,
         ComboboxInputHeaderComponent,
         DatePickerHeaderComponent,

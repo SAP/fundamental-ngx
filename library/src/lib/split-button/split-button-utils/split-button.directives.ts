@@ -25,13 +25,12 @@ import { Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRe
  *</fd-button-split>
  *```
  */
-
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-button-split-action-title]'
+    selector: '[fd-split-button-action-title]'
 })
-export class ButtonSplitActionTitle {}
+export class SplitButtonActionTitle {}
 
 
 /**
@@ -55,12 +54,11 @@ export class ButtonSplitActionTitle {}
  *</fd-button-split>
  *```
  */
-
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-button-split-menu]',
+    selector: '[fd-split-button-menu]',
 })
-export class ButtonSplitMenuDirective {}
+export class SplitButtonMenuDirective {}
 
 
 
@@ -70,10 +68,10 @@ export class ButtonSplitMenuDirective {}
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-button-split-load-action-title]'
+    selector: '[fd-split-button-load-action-title]'
 })
-export class ButtonSplitLoadActionTitle implements OnInit {
-    @Input('fd-button-split-load-action-title')
+export class SplitButtonLoadActionTitle implements OnInit {
+    @Input('fd-split-button-load-action-title')
     content: TemplateRef<any>;
 
     private contentRef: EmbeddedViewRef<any>;

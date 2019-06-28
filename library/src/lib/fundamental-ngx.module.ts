@@ -42,7 +42,7 @@ import { TokenModule } from './token/token.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal-service/modal.service';
-import { ButtonSplitModule } from './button-split';
+import { SplitButtonModule } from './split-button';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -53,7 +53,7 @@ import { ButtonSplitModule } from './button-split';
         BreadcrumbModule,
         ButtonModule,
         ButtonGroupModule,
-        ButtonSplitModule,
+        SplitButtonModule,
         CalendarModule,
         ComboboxInputModule,
         DatePickerModule,

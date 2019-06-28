@@ -1,5 +1,5 @@
-<fd-button-split [glyph]="'menu'" [mainActionTitle]="'Action Button'">
-    <div fd-button-split-menu>
+<fd-split-button [glyph]="'menu'" [mainActionTitle]="'Action Button'">
+    <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item>
@@ -11,9 +11,9 @@
             </ul>
         </fd-menu>
     </div>
-</fd-button-split>
-<fd-button-split (primaryButtonClicked)="num = num + 1" [glyph]="'cart'" [mainActionTitle]="'Action Button'">
-    <div fd-button-split-menu>
+</fd-split-button>
+<fd-split-button [glyph]="'cart'" [mainActionTitle]="'Action Button'">
+    <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item>
@@ -25,4 +25,4 @@
             </ul>
         </fd-menu>
     </div>
-</fd-button-split>
+</fd-split-button>
