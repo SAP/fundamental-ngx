@@ -24,7 +24,8 @@ export const API_FILES = {
     badgeLabel: [
         'BadgeDirective',
         'BadgeLabelComponent',
-        'LabelDirective'
+        'LabelDirective',
+        'StatusLabelDirective'
     ],
     breadcrumb: [
         'BreadcrumbDirective',
