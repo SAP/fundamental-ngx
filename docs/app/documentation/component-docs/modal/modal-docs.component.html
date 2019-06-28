@@ -29,12 +29,24 @@
 
 <separator></separator>
 
+<h2>Modal Positioning</h2>
+<description>
+    The placement of the modal on the screen can be customized through the modal configuration.
+</description>
+<component-example [name]="'ex4'">
+    <fd-modal-position-example></fd-modal-position-example>
+</component-example>
+<code-example [code]="positionHtml" [language]="'html'"></code-example>
+<code-example [code]="positionTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
 <h2>Fullscreen Modal</h2>
 <description>
     The modal dimensions can be controlled through the width and height properties of the configuration object. These
     accept strings, so you may use whatever unit works best for your situation.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-modal-fullscreen-example></fd-modal-fullscreen-example>
 </component-example>
 <code-example [code]="fullScreenSource" [language]="'html'"></code-example>
@@ -49,7 +61,7 @@
     <p>In the example below, it is accomplished via components as content. However, it is entirely possible with
         templates through the same methodology.</p>
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-modal-in-modal-example></fd-modal-in-modal-example>
 </component-example>
 <code-example [code]="modalInModalExample" [language]="'typescript'"></code-example>
@@ -63,7 +75,7 @@
     The modal backdrop can be styled, disabled or even customized at will. Classes being applied
     to the element do not have to be in your global styles.
 </description>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex7'">
     <fd-backdrop-examples></fd-backdrop-examples>
 </component-example>
 <code-example [code]="backdropHtml" [language]="'html'"></code-example>
