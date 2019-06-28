@@ -5,14 +5,32 @@ import { Component } from '@angular/core';
     templateUrl: './split-button-types-example.component.html',
     styleUrls: ['./split-button-examples.scss']
 })
-export class ButtonSplitTypesExampleComponent {}
+export class ButtonSplitTypesExampleComponent {
+    itemClicked() {
+        alert('Item Clicked!');
+    }
+
+    primaryButtonClicked() {
+        alert('Primary Button Clicked!');
+    }
+
+}
 
 @Component({
     selector: 'fd-split-button-icons-example',
     templateUrl: './split-button-icons-example.component.html',
     styleUrls: ['./split-button-examples.scss']
 })
-export class ButtonSplitTypesIconsComponent {}
+export class ButtonSplitTypesIconsComponent {
+    itemClicked() {
+        alert('Item Clicked!');
+    }
+
+    primaryButtonClicked() {
+        alert('Primary Button Clicked!');
+    }
+
+}
 
 @Component({
     selector: 'fd-split-button-programmatical-example',
@@ -21,6 +39,15 @@ export class ButtonSplitTypesIconsComponent {}
 })
 export class ButtonSplitProgrammaticalExampleComponent {
     isOpen: boolean = false;
+
+    itemClicked() {
+        alert('Item Clicked!');
+    }
+
+    primaryButtonClicked() {
+        alert('Primary Button Clicked!');
+    }
+
 }
 
 @Component({
@@ -28,11 +55,29 @@ export class ButtonSplitProgrammaticalExampleComponent {
     templateUrl: './split-button-options-example.component.html',
     styleUrls: ['./split-button-examples.scss']
 })
-export class ButtonSplitOptionsExampleComponent {}
+export class ButtonSplitOptionsExampleComponent {
+    itemClicked() {
+        alert('Item Clicked!');
+    }
+
+    primaryButtonClicked() {
+        alert('Primary Button Clicked!');
+    }
+
+}
 
 @Component({
     selector: 'fd-split-button-template-example',
     templateUrl: './split-button-template-example.component.html',
     styleUrls: ['./split-button-examples.scss']
 })
-export class ButtonSplitTemplateExampleComponent {}
+export class ButtonSplitTemplateExampleComponent {
+    itemClicked() {
+        alert('Item Clicked!');
+    }
+
+    primaryButtonClicked() {
+        alert('Primary Button Clicked!');
+    }
+
+}

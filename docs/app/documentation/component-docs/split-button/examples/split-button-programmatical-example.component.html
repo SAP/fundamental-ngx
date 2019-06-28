@@ -1,4 +1,4 @@
-<fd-split-button [(isOpen)]="isOpen"
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [(isOpen)]="isOpen"
                  [focusTrapped]="false"
                  [triggers]="['']"
                  [closeOnOutsideClick]="false"
@@ -7,10 +7,10 @@
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item>
-                    <a [routerLink]="'/'">option</a>
+                    <a (click)="itemClicked()">option</a>
                 </li>
                 <li fd-menu-item>
-                    <a [routerLink]="'/'">option2</a>
+                    <a (click)="itemClicked()">option2</a>
                 </li>
             </ul>
         </fd-menu>
