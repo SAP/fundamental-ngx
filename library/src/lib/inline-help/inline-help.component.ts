@@ -1,6 +1,5 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Placement } from 'popper.js';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 /**
  * The component that represents an inline-help. 
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
@@ -17,7 +16,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['inline-help.component.scss']
 })
-export class InlineHelpComponent implements OnChanges {
+export class InlineHelpComponent {
 
     /** The placement of the inline help component. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
@@ -30,6 +29,4 @@ export class InlineHelpComponent implements OnChanges {
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
     triggers: string[] = ['mouseenter', 'mouseleave'];
-
-    ngOnChanges(changes: SimpleChanges): void {}
 }
