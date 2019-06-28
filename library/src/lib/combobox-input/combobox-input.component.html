@@ -34,6 +34,7 @@
                     </li>
 
                     <li fd-menu-item
+                        *ngIf="shouldShowNewItem()"
                         (click)="this.newItemClicked.emit()"
                         (keydown)="newItemKeydownHandler($event)">
                         <a tabindex="0" class="fd-menu__item fd-menu__link">{{newItemText}}</a>
