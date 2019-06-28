@@ -69,6 +69,10 @@ export class SplitButtonComponent {
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input() options: string | string[];
 
+    /** Whether the Menu should try to have the same width as the whole split button. */
+    @Input()
+    fillControl: boolean = true;
+
     /** @hidden */
     @Input() isOpen: boolean = false;
 
