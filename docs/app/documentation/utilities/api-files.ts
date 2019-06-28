@@ -114,6 +114,7 @@ export const API_FILES = {
         'ModalTitleDirective',
         'ModalCloseButtonDirective',
         'ModalConfig',
+        'ModalPosition',
         'ModalBodyComponent',
         'ModalHeaderComponent',
         'ModalFooterComponent'
