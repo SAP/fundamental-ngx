@@ -34,8 +34,8 @@ export class ComboboxInputComponent extends SearchInputComponent {
     @HostBinding('class.fd-combobox-input')
     comboboxClass = true;
 
-    /** Event emitted when a new item is clicked. Also When there is no listener for this event, then the last item
-     *  from list 'new item' won't be added
+    /**  accomplish the UI pattern for a typical input dropdown, also known as combobox input. There is a way to hide
+     * + New item, simply stop listening to the (newItemClicked) event.
      * */
     @Output()
     newItemClicked: EventEmitter<void> = new EventEmitter<void>();
