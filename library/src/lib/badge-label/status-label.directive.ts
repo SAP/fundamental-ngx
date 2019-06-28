@@ -2,8 +2,8 @@ import { Directive, ElementRef, Input} from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
- * Badge component, used to indicate status.
- * Colors, generally in combination with text, are used to easily highlight the state of an object.
+ * Status Label directive with some default icons based on status input used to indicate status.
+ * Icons are used to easily highlight the state of an object.
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
