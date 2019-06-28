@@ -1,30 +1,28 @@
-<fd-tab-list>
-    <nav fd-tab-nav>
-        <div fd-tab-item>
-            <a fd-tab-link
-               routerLinkActive
-               #rla="routerLinkActive"
-               [disabled]="true">
-                Link
-            </a>
-        </div>
-        <div fd-tab-item>
-            <a fd-tab-link
-               [active]="true"
-               [routerLink]="'#'"
-               routerLinkActive
-               #rla="routerLinkActive">
-                Link
-            </a>
-        </div>
-        <div fd-tab-item>
-            <a fd-tab-link
-               [routerLink]="'#'"
-               routerLinkActive
-               #rla="routerLinkActive"
-               [active]="rla.isActive">
-                Link
-            </a>
-        </div>
-    </nav>
-</fd-tab-list>
+<nav fd-tab-nav>
+    <div fd-tab-item>
+        <a fd-tab-link
+            [routerLink]="'#'"
+           routerLinkActive
+           #rla="routerLinkActive">
+            Link
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link
+           [active]="true"
+           [routerLink]="'#'"
+           routerLinkActive
+           #rla="routerLinkActive">
+            Link
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link
+           [routerLink]="'#'"
+           routerLinkActive
+           #rla="routerLinkActive"
+           [active]="rla.isActive">
+            Link
+        </a>
+    </div>
+</nav>

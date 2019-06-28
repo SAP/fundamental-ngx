@@ -2,13 +2,15 @@ import {
     AfterContentInit,
     ContentChildren,
     Directive,
-    EventEmitter,
+    EventEmitter, OnDestroy,
     Output,
     QueryList,
-    Renderer2,
+    Renderer2
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
+import { TabsService } from '../tabs.service';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -44,7 +46,7 @@ import { TabItemDirective } from '../tab-item/tab-item.directive';
         'role': 'tablist'
     }
 })
-export class TabNavDirective implements AfterContentInit {
+export class TabNavDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     @ContentChildren(TabLinkDirective) links: QueryList<TabLinkDirective>;
@@ -52,12 +54,16 @@ export class TabNavDirective implements AfterContentInit {
     /** @hidden */
     @ContentChildren(TabItemDirective) items: QueryList<TabItemDirective>;
 
+    /** @hidden */
+    private _tabSelectSubscription: Subscription;
+
     /** Event Thrown every time something is clicked */
     @Output() onKeyDown = new EventEmitter<{event: any, index: number}>();
 
     /** @hidden */
     constructor(
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private tabsService: TabsService
     ) {}
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
@@ -70,10 +76,27 @@ export class TabNavDirective implements AfterContentInit {
 
     /** @hidden */
     public ngAfterContentInit(): void {
+        this._tabSelectSubscription = this.tabsService.tabSelected.subscribe(index => {
+            this.selectTab(index);
+        });
+
         this.tabLinks.forEach((linkElement, index) => {
             this.renderer.listen(linkElement.elementRef.nativeElement, 'keydown', (event) => {
-                this.onKeyDown.emit({event: event, index: index});
+                this.tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement))
             }
         )})
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._tabSelectSubscription.unsubscribe();
+    }
+
+    /**
+     * Function to select a new tab from an index.
+     * @param tabIndex Index of the tab to select.
+     */
+    selectTab(tabIndex: number): void {
+        this.tabLinks[tabIndex].elementRef.nativeElement.click();
     }
 }

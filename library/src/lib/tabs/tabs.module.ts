@@ -8,6 +8,7 @@ import { TabLoadTitleDirective, TabTitleDirective } from './tab-utils/tab-direct
 import { TabNavDirective } from './tab-nav/tab-nav.directive';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
+import { TabsService } from './tabs.service';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,9 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabNavDirective,
         TabItemDirective,
         TabLinkDirective
+    ],
+    providers: [
+        TabsService
     ]
 })
 export class TabsModule {}
