@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, Inject, AfterContentInit, AfterViewInit, Component } from '@angular/core';
+import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /** 
@@ -31,11 +31,12 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
     template: ``,
     host: {
         role: 'presentation'
-    }
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class IconComponent extends AbstractFdNgxClass {
 
-    /** The glyph name */
+    /** The glyph name  */
     @Input() glyph;
 
     /** 

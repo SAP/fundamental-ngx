@@ -1,5 +1,5 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 
 import { IconModule } from './icon.module';
 import { IconComponent } from './icon.component';
