@@ -20,23 +20,18 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 })
 export class TabLinkDirective extends AbstractFdNgxClass {
 
-    /** Only visual Thing, to disable routerLink does not respect preventDefault/stopPropagation */
-    @Input() disabled: boolean;
-
     /** Whether the link is active */
-    @Input() active: boolean;
-
-    /** Whether the link is active */
+    @Input()
     @HostBinding('attr.aria-selected')
-    get _active(): boolean {
-        return this.active;
-    }
+    active: boolean;
 
-    /** Only visual Thing, to disable routerLink does not respect preventDefault/stopPropagation */
+    /**
+     * Only visual / accessibility thing on tab-nav mode
+     * RouterLink does not respect preventDefault/stopPropagation
+     */
+    @Input()
     @HostBinding('attr.aria-disabled')
-    get _disabled(): boolean {
-        return this.disabled;
-    }
+    disabled: boolean;
 
     /** @hidden */
     _setProperties() {

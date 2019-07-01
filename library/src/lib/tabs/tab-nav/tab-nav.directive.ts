@@ -44,7 +44,8 @@ import { Subscription } from 'rxjs';
     host: {
         'class': 'fd-tabs',
         'role': 'tablist'
-    }
+    },
+    providers: [TabsService]
 })
 export class TabNavDirective implements AfterContentInit, OnDestroy {
 

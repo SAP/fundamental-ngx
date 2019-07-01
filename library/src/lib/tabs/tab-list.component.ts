@@ -27,7 +27,8 @@ import { TabsService } from './tabs.service';
     host: {
         class: 'fd-tabs-custom'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [TabsService]
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
