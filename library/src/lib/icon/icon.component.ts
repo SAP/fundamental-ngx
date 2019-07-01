@@ -18,11 +18,7 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
  *
  * ```html
  * <fd-icon [glyph]="cart-approval" [size]="'l'"></fd-icon>
- // * ```
- // * Or
- // * ```html
- // * <fd-icon [size]="'l'">cart-approval</fd-icon>
- // * ```
+ * ```
  */
 @Component({
     // TODO to be discussed
