@@ -65,7 +65,7 @@
         "angular-cli-ghpages": "^0.5.3",
         "codelyzer": "^5.1.0",
         "coveralls": "^3.0.2",
-        "fs-extra": "^8.0.1",
+        "fs-extra": "^8.1.0",
         "github-assistant": "^0.3.0",
         "jasmine-core": "^3.4.0",
         "jasmine-spec-reporter": "^4.2.1",
