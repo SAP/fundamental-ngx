@@ -8,7 +8,7 @@ import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 
-describe('MultiInputComponent', () => {
+fdescribe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
 
@@ -47,6 +47,7 @@ describe('MultiInputComponent', () => {
 
     it('should handle search term change', () => {
         spyOn(component.searchTermChange, 'emit');
+        spyOn(component.popoverRef, 'updatePopover');
         spyOn(component, 'filterFn');
         component.ngOnInit();
 
@@ -59,6 +60,7 @@ describe('MultiInputComponent', () => {
         expect(component.searchTerm).toBe(text);
         expect(component.searchTermChange.emit).toHaveBeenCalled();
         expect(component.filterFn).toHaveBeenCalled();
+        expect(component.popoverRef.updatePopover).toHaveBeenCalled();
     });
 
     it('should filter dropdown values', () => {
