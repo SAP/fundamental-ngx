@@ -42,6 +42,8 @@ import { TokenModule } from './token/token.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './modal/modal-service/modal.service';
+import { LocalizationEditorComponent } from './localizator-editor/localization-editor.component';
+import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -67,6 +69,7 @@ import { ModalService } from './modal/modal-service/modal.service';
         InputGroupModule,
         ListModule,
         LoadingSpinnerModule,
+        LocalizationEditorModule,
         MenuModule,
         ModalModule,
         MultiInputModule,
@@ -86,6 +89,6 @@ import { ModalService } from './modal/modal-service/modal.service';
         TokenModule,
         TreeModule
     ],
-    providers: [AlertService, ModalService]
+    providers: [AlertService, ModalService],
 })
 export class FundamentalNgxModule {}

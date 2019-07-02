@@ -23,6 +23,7 @@ export * from './lib/inline-help';
 export * from './lib/input-group';
 export * from './lib/list';
 export * from './lib/loading-spinner';
+export * from './lib/localizator-editor';
 export * from './lib/menu';
 export * from './lib/modal';
 export * from './lib/multi-input';

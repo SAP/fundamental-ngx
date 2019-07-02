@@ -329,6 +329,13 @@ import { DatetimeDisabledExampleComponent } from './component-docs/datetime-pick
 import { HighlightModule } from 'ngx-highlightjs';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
+import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
+import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
+import {
+    LocalizationEditorExampleComponent,
+    LocalizationEditorTemplateExampleComponent, LocalizationEditorTextareaExampleComponent
+} from './component-docs/localization-editor/examples/localization-editor-examples.component';
+import { LocalizationEditorFormsExampleComponent } from './component-docs/localization-editor/examples/localization-editor-forms-example.component';
 
 @NgModule({
     declarations: [
@@ -537,6 +544,12 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
+        LocalizationEditorHeaderComponent,
+        LocalizationEditorDocsComponent,
+        LocalizationEditorExampleComponent,
+        LocalizationEditorTemplateExampleComponent,
+        LocalizationEditorTextareaExampleComponent,
+        LocalizationEditorFormsExampleComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,

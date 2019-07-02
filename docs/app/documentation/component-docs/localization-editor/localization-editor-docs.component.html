@@ -1,0 +1,56 @@
+<h2>Localization Editor</h2>
+
+<description>
+    Basic usage of Localization Editor, to add some text on add-on there is <code>[label]</code> input.
+</description>
+<component-example [name]="'ex1'">
+  <p>
+    <fd-localization-editor-example></fd-localization-editor-example>
+  </p>
+</component-example>
+<code-example [code]="localizationHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Forms in Localization Editor</h2>
+<description>
+    Forms usage inside localization editor.
+</description>
+<component-example [name]="'ex2'">
+  <p>
+    <fd-localization-editor-forms-example></fd-localization-editor-forms-example>
+  </p>
+</component-example>
+<code-example [code]="localizationFormsHtml" [language]="'HTML'"></code-example>
+<code-example [code]="localizationFormsTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Template in labels</h2>
+<description>
+    Instead of label there is also way to put whole template, which will be shown in add-on. To achieve it, it's needed to put
+    <code>ng-template</code> with <code>fd-localization-editor-label</code> directive.
+</description>
+<component-example [name]="'ex3'">
+  <p>
+    <fd-localization-editor-template-example></fd-localization-editor-template-example>
+  </p>
+</component-example>
+<code-example [code]="localizationTemplateHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+
+<h2>Textarea</h2>
+
+<description>
+    To use textarea, it's mandatory to add <code>[type]="'textarea'"</code> configuration to wrapper component.
+</description>
+<component-example [name]="'ex3'">
+  <p>
+    <fd-localization-editor-textarea-example></fd-localization-editor-textarea-example>
+  </p>
+</component-example>
+<code-example [code]="localizationTextareaHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>

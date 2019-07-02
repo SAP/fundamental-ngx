@@ -101,6 +101,11 @@ export const API_FILES = {
     loadingSpinner: [
         'LoadingSpinnerComponent'
     ],
+    localizationEditor: [
+        'LocalizationEditorComponent',
+        'localizationEditorItemComponent',
+        'localizationEditorMainComponent',
+    ],
     menu: [
         'MenuComponent',
         'MenuGroupComponent',

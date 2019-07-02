@@ -1,0 +1,142 @@
+import {
+    AfterContentInit,
+    Component,
+    ContentChild,
+    ContentChildren,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    QueryList,
+    SimpleChanges
+} from '@angular/core';
+import { Placement } from 'popper.js';
+import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
+import { LocalizationEditorItemComponent } from './localization-editor-item/localization-editor-item.component';
+
+/**
+ *  The component that represents a list of fields with add-ons inside popover
+ *  ```html
+ * <fd-localization-editor>
+ *    <fd-localization-editor-main [label]="'EN'">
+ *       <input fd-localization-editor-input type="text" placeholder="EN">
+ *    </fd-localization-editor-main>
+ *    <fd-localization-editor-item [label]="'DE'">
+ *       <input fd-localization-editor-input type="text" placeholder="DE">
+ *    </fd-localization-editor-item>
+ *    <fd-localization-editor-item [label]="'NL'">
+ *       <input fd-localization-editor-input type="text" placeholder="NL">
+ *    </fd-localization-editor-item>
+ *    <fd-localization-editor-item [label]="'PL'">
+ *       <input fd-localization-editor-input type="text" placeholder="PL">
+ *    </fd-localization-editor-item>
+ *    <fd-localization-editor-item [label]="'ER'">
+ *       <input fd-localization-editor-input type="text" placeholder="ER">
+ *    </fd-localization-editor-item>
+ * </fd-localization-editor>
+ *  ```
+ */
+@Component({
+    selector: 'fd-localization-editor',
+    templateUrl: './localization-editor.component.html',
+    host: {
+        'class': 'fd-localization-editor'
+    }
+})
+export class LocalizationEditorComponent implements OnChanges, AfterContentInit {
+
+    /**  @hidden*/
+    @ContentChild(LocalizationEditorMainComponent) mainElement: LocalizationEditorMainComponent;
+
+    /**  @hidden*/
+    @ContentChildren(LocalizationEditorItemComponent) listElements: QueryList<LocalizationEditorItemComponent>;
+
+
+    /** The trigger events that will open/close the popover.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    triggers: string[] = ['click'];
+
+    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    @Input()
+    placement: Placement;
+
+    /** Whether the popover is open. Can be used through two-way binding. */
+    @Input()
+    isOpen: boolean = false;
+
+    /** Whether the popover should close when a click is made outside its boundaries. */
+    @Input()
+    closeOnOutsideClick: boolean = true;
+
+    /** Whether the popover should close when the escape key is pressed. */
+    @Input()
+    closeOnEscapeKey: boolean = true;
+
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Whether to disable opening. */
+    @Input()
+    disabled: boolean;
+
+    /** Whether the inputs are in compact mode. */
+    @Input()
+    compact: boolean = false;
+
+    /* Define the field type ex. 'textarea'*/
+    @Input()
+    type: string;
+
+    /** @hidden */
+    public ngOnChanges(): void {
+        this.refreshChildren();
+    }
+
+    /** @hidden */
+    public ngAfterContentInit(): void {
+        this.refreshChildren();
+    }
+
+    /**
+     * Toggles the popover open state.
+     */
+    public toggle(): void {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    /**
+     * Closes the popover.
+     */
+    public close(): void {
+        if (this.isOpen) {
+            this.isOpen = false;
+            this.isOpenChange.emit(this.isOpen);
+        }
+    }
+
+    /**
+     * Opens the popover.
+     */
+    public open(): void {
+        if (!this.isOpen) {
+            this.isOpen = true;
+            this.isOpenChange.emit(this.isOpen);
+        }
+    }
+
+    private refreshChildren() {
+        if (this.mainElement) {
+            this.mainElement.setProperties(this.compact, this.type);
+        }
+        if (this.listElements) {
+            this.listElements.forEach(item => item.setProperties(this.compact, this.type));
+        }
+    }
+}
