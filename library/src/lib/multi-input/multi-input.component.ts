@@ -188,6 +188,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     handleSearchTermChange(): void {
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+        this.popoverRef.updatePopover();
     }
 
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
