@@ -47,6 +47,7 @@ describe('MultiInputComponent', () => {
 
     it('should handle search term change', () => {
         spyOn(component.searchTermChange, 'emit');
+        spyOn(component.popoverRef, 'updatePopover');
         spyOn(component, 'filterFn');
         component.ngOnInit();
 
@@ -59,6 +60,7 @@ describe('MultiInputComponent', () => {
         expect(component.searchTerm).toBe(text);
         expect(component.searchTermChange.emit).toHaveBeenCalled();
         expect(component.filterFn).toHaveBeenCalled();
+        expect(component.popoverRef.updatePopover).toHaveBeenCalled();
     });
 
     it('should filter dropdown values', () => {

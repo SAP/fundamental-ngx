@@ -22,9 +22,10 @@ export const API_FILES = {
         'AlertService'
     ],
     badgeLabel: [
-        'BadgeComponent',
+        'BadgeDirective',
         'BadgeLabelComponent',
-        'LabelComponent'
+        'LabelDirective',
+        'StatusLabelDirective'
     ],
     breadcrumb: [
         'BreadcrumbDirective',
@@ -166,8 +167,8 @@ export const API_FILES = {
         'SideNavigationGroupComponent',
         'SideNavigationIconComponent',
         'SideNavigationItemComponent',
-        'SideNavigationLinkComponent',
-        'SideNavigationListComponent',
+        'SideNavigationLinkDirective',
+        'SideNavigationListDirective',
         'SideNavigationSubitemComponent',
         'SideNavigationSublistComponent',
         'SideNavigationSublinkComponent',

@@ -39,6 +39,14 @@ describe('DatetimePickerComponent', () => {
         expect(component.isOpen).toBe(true);
     });
 
+    it('should not open the popover if the component is disabled', () => {
+        component.isOpen = false;
+        component.disabled = true;
+        component.isInvalidDateInput = false;
+        component.openPopover();
+        expect(component.isOpen).toBe(false);
+    });
+
     it('should close the calendar', () => {
         component.isOpen = true;
         component.isInvalidDateInput = true;

@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<fd-tile-grid>TileGrid</fd-tile-grid>'
+    template: '<div fd-tile-grid>TileGrid</div>'
 })
 export class TestComponent {}
 
