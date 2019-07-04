@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0-rc.7"></a>
+# [0.7.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.6...v0.7.0-rc.7) (2019-07-04)
+
+
+### Features
+
+* added position property to modal configuration ([#991](https://github.com/SAP/fundamental-ngx/issues/991)) ([b17df54](https://github.com/SAP/fundamental-ngx/commit/b17df54))
+
+
+
 <a name="0.7.0-rc.6"></a>
 # [0.7.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.5...v0.7.0-rc.6) (2019-07-02)
 
