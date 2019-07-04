@@ -25,6 +25,7 @@
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu class="fd-combobox-input-menu-overflow"
+                     [disableKeydownHandling]="true"
                      [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
                     <li fd-menu-item *ngFor="let term of displayedValues"
