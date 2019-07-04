@@ -129,7 +129,10 @@ import {
     ImageShapesExampleComponent,
     ImageSizesExampleComponent
 } from './component-docs/image/examples/image-examples.component';
-import { InlineHelpExampleComponent } from './component-docs/inline-help/examples/inline-help-examples.component';
+import {
+    InlineHelpExampleComponent,
+    InlineHelpTriggerExampleComponent
+} from './component-docs/inline-help/examples/inline-help-examples.component';
 import {
     InputGroupButtonExampleComponent,
     InputGroupIconExampleComponent,
@@ -449,6 +452,7 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         InfiniteScrollDocsComponent,
         InfiniteScrollBasicExampleComponent,
         InlineHelpExampleComponent,
+        InlineHelpTriggerExampleComponent,
         InputGroupButtonExampleComponent,
         InputGroupIconExampleComponent,
         InputGroupNumberExampleComponent,
