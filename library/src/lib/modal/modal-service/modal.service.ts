@@ -14,6 +14,7 @@ import { ModalContainer } from '../modal-utils/modal-container';
 import { ModalConfig } from '../modal-utils/modal-config';
 import { ModalRef } from '../modal-utils/modal-ref';
 import { ModalInjector } from '../modal-utils/modal-injector';
+import { ModalPosition } from '..';
 
 /**
  * Service used to dynamically generate a modal.
@@ -105,12 +106,10 @@ export class ModalService {
         componentRef.instance.childComponentType = contentType;
 
         // Sizing
-        componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
-        componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
-        componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
-        componentRef.location.nativeElement.style.maxHeight = configObj.maxHeight;
-        componentRef.location.nativeElement.style.width = configObj.width;
-        componentRef.location.nativeElement.style.height = configObj.height;
+        this.setModalSize(componentRef, configObj);
+
+        // Positioning
+        this.setModalPosition(componentRef, configObj.position);
 
         // Render container
         const containerEl = (containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
@@ -134,7 +133,7 @@ export class ModalService {
         return modalRef;
     }
 
-    private destroyModalComponent(modal: ComponentRef<ModalComponent>) {
+    private destroyModalComponent(modal: ComponentRef<ModalComponent>): void {
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
         const indexOf = this.modals.indexOf(arrayRef);
         this.appRef.detachView(arrayRef.modalRef.hostView);
@@ -149,6 +148,24 @@ export class ModalService {
 
         this.modals[indexOf] = null;
         this.modals = this.modals.filter(item => item !== null && item !== undefined);
+    }
+
+    private setModalSize(componentRef: ComponentRef<ModalComponent>, configObj: ModalConfig): void {
+        componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
+        componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
+        componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
+        componentRef.location.nativeElement.style.maxHeight = configObj.maxHeight;
+        componentRef.location.nativeElement.style.width = configObj.width;
+        componentRef.location.nativeElement.style.height = configObj.height;
+    }
+
+    private setModalPosition(componentRef: ComponentRef<ModalComponent>, position: ModalPosition): void {
+        if (position) {
+            componentRef.location.nativeElement.style.top = position.top;
+            componentRef.location.nativeElement.style.bottom = position.bottom;
+            componentRef.location.nativeElement.style.right = position.right;
+            componentRef.location.nativeElement.style.left = position.left;
+        }
     }
 
 }

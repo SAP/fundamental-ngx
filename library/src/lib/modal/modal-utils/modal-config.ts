@@ -1,7 +1,8 @@
-
 /**
  * Configuration for opening a modal with the ModalService.
  */
+import { ModalPosition } from './modal-position';
+
 export class ModalConfig {
 
     /** Id for the modal component. If omitted, a unique one is generated. */
@@ -24,6 +25,9 @@ export class ModalConfig {
 
     /** Maximum height of the modal. */
     maxHeight?: string;
+
+    /** Position of the modal. */
+    position?: ModalPosition;
 
     /** Aria label for the modal component element. */
     ariaLabel?: string = null;
