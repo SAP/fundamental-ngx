@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../../../../../../../library/src/lib/modal';
+import { ModalService } from '../../../../../../../library/src/lib/modal/public_api';
 
 @Component({
   selector: 'fd-modal-position-example',
