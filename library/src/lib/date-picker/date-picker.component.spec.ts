@@ -71,12 +71,12 @@ describe('DatePickerComponent', () => {
         const dateStrStart = component.dateAdapter.format(dateStart);
         const dateStrLast = component.dateAdapter.format(dateLast);
         component.inputFieldDate = '';
-        component.handleRangeDateChange({start: dateStart, end: dateLast});
+        component.handleRangeDateChange({ start: dateStart, end: dateLast });
         expect(component.inputFieldDate).toBe(
             dateStrStart + component.dateAdapter.rangeDelimiter + dateStrLast
         );
-        expect(component.onChange).toHaveBeenCalledWith({start: dateStart, end: dateLast});
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith( { start: dateStart, end: dateLast });
+        expect(component.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
 
     it('Should handle correct write value for single mode', () => {
@@ -99,8 +99,8 @@ describe('DatePickerComponent', () => {
         const dateStrStart = component.dateAdapter.format(dateStart);
         const dateEnd = FdDate.getToday(); dateEnd.month = 12;
         const dateStrEnd = component.dateAdapter.format(dateEnd);
-        component.writeValue({start: dateStart, end: dateEnd});
-        expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
+        component.writeValue({ start: dateStart, end: dateEnd });
+        expect(component.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
         expect(component.inputFieldDate).toBe(
             dateStrStart + component.dateAdapter.rangeDelimiter + dateStrEnd
         );
@@ -110,8 +110,8 @@ describe('DatePickerComponent', () => {
         component.type = 'range';
         const dateStart = null;
         const dateEnd = null;
-        component.writeValue({start: dateStart, end: dateEnd});
-        expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
+        component.writeValue({ start: dateStart, end: dateEnd });
+        expect(component.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
         expect(component.inputFieldDate).toBe('');
     });
 
@@ -132,7 +132,7 @@ describe('DatePickerComponent', () => {
         const start: FdDate = component.dateAdapter.parse('33333333');
         const end: FdDate = component.dateAdapter.parse('3000000');
         expect(component.isInvalidDateInput).toBe(true);
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({start: start, end: end});
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: start, end: end });
         expect(component.isModelValid()).toBe(false);
     });
 
@@ -191,5 +191,45 @@ describe('DatePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
+    });
+});
+@Component({
+    selector: 'fd-form-test-component',
+    template: `
+        <form [formGroup]="customForm">
+            <fd-date-picker id="datePicker" formControlName="date"></fd-date-picker>
+        </form>
+    `
+})
+export class FormTestComponent {
+    allowNull = true;
+
+    customForm = new FormGroup({
+        date: new FormControl({ date: new Date() })
+    });
+}
+
+describe('DatePickerFormTest', () => {
+    let fixture: ComponentFixture<FormTestComponent>,
+        component: FormTestComponent;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [FormTestComponent],
+            imports: [ReactiveFormsModule, DatePickerModule]
+        });
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(FormTestComponent);
+        component = fixture.componentInstance;
+    });
+
+    it('form and controls should be valid and clean by default', () => {
+        const datePickerControl = component.customForm.get('date');
+        expect(datePickerControl.valid).toBeTruthy();
+        expect(component.customForm.valid).toBeTruthy();
+        expect(component.customForm.touched).toBeFalsy();
+        expect(component.customForm.dirty).toBeFalsy();
     });
 });
