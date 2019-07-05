@@ -83,6 +83,19 @@
 
 <separator></separator>
 
+<h2>Custom Container</h2>
+<description>
+    The modal can be appended to whatever DOM element you choose. Simply pass an HTMLElement to the container configuration option.
+    Note that there is no visual distinction between parents. This functionality can be used to apply a select set of style rules to a specific modal, for example.
+</description>
+<component-example [name]="'ex8'">
+    <fd-container></fd-container>
+</component-example>
+<code-example [code]="containerHtml" [language]="'html'"></code-example>
+<code-example [code]="containerTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
 <description>
     <p>
         Modals make use of a singleton service called <code>ModalService</code>.

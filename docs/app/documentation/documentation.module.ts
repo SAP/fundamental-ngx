@@ -333,6 +333,7 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
+import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
 
 @NgModule({
     declarations: [
@@ -603,7 +604,8 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         DatePickerPositionExampleComponent,
         DatePickerFormatExampleComponent,
         SearchPipe,
-        ModalPositionExampleComponent
+        ModalPositionExampleComponent,
+        ContainerComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
