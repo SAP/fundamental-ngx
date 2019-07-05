@@ -69,9 +69,9 @@
         <span fd-label [status]="data.properties.status">{{data.properties.text}}</span>
     </div>
     <div *ngIf="data.properties.type === 'status label'">
-        <span fd-label *ngIf="!data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
+        <span fd-status-label *ngIf="!data.properties.icon" [status]="data.properties.status"
             [statusIcon]="data.properties.statusIcon">{{data.properties.text}}</span>
-        <span fd-label *ngIf="data.properties.icon" [isStatusLabel]="true" [status]="data.properties.status"
+        <span fd-status-label *ngIf="data.properties.icon" [status]="data.properties.status"
             [icon]="data.properties.icon">{{data.properties.text}}</span>
     </div>
 </playground>

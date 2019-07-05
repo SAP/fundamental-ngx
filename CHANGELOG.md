@@ -2,6 +2,86 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0-rc.8"></a>
+# [0.7.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.7...v0.7.0-rc.8) (2019-07-04)
+
+
+### Bug Fixes
+
+* make inline help component using popover component ([#986](https://github.com/SAP/fundamental-ngx/issues/986)) ([4db1d9e](https://github.com/SAP/fundamental-ngx/commit/4db1d9e))
+
+
+
+<a name="0.7.0-rc.7"></a>
+# [0.7.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.6...v0.7.0-rc.7) (2019-07-04)
+
+
+### Features
+
+* added position property to modal configuration ([#991](https://github.com/SAP/fundamental-ngx/issues/991)) ([b17df54](https://github.com/SAP/fundamental-ngx/commit/b17df54))
+
+
+
+<a name="0.7.0-rc.6"></a>
+# [0.7.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.5...v0.7.0-rc.6) (2019-07-02)
+
+
+### Bug Fixes
+
+* fd-multi-input does not update its position upon typing ([#996](https://github.com/SAP/fundamental-ngx/issues/996)) ([12a2347](https://github.com/SAP/fundamental-ngx/commit/12a2347))
+
+
+
+<a name="0.7.0-rc.5"></a>
+# [0.7.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.4...v0.7.0-rc.5) (2019-07-01)
+
+
+
+<a name="0.7.0-rc.4"></a>
+# [0.7.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.3...v0.7.0-rc.4) (2019-06-30)
+
+
+
+<a name="0.7.0-rc.3"></a>
+# [0.7.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.2...v0.7.0-rc.3) (2019-06-28)
+
+
+### Features
+
+* Refactor isStatus input on label into directive ([#980](https://github.com/SAP/fundamental-ngx/issues/980)) ([fe26185](https://github.com/SAP/fundamental-ngx/commit/fe26185))
+
+
+
+<a name="0.7.0-rc.2"></a>
+# [0.7.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.1...v0.7.0-rc.2) (2019-06-28)
+
+
+### Bug Fixes
+
+* combobox input add way to hide new item ([#975](https://github.com/SAP/fundamental-ngx/issues/975)) ([2a5ecd8](https://github.com/SAP/fundamental-ngx/commit/2a5ecd8))
+
+
+
+<a name="0.7.0-rc.1"></a>
+# [0.7.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.0...v0.7.0-rc.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* only handle input change on keyup.enter or blur for datepicker/dateti… ([#970](https://github.com/SAP/fundamental-ngx/issues/970)) ([0fb7c99](https://github.com/SAP/fundamental-ngx/commit/0fb7c99))
+
+
+
+<a name="0.7.0-rc.0"></a>
+# [0.7.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.6.0...v0.7.0-rc.0) (2019-06-27)
+
+
+### Features
+
+* Refactor Side navigation ([#943](https://github.com/SAP/fundamental-ngx/issues/943)) ([70778eb](https://github.com/SAP/fundamental-ngx/commit/70778eb))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/SAP/fundamental-ngx/compare/v0.6.0-rc.1...v0.6.0) (2019-06-26)
 

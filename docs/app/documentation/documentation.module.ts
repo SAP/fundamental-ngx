@@ -129,7 +129,10 @@ import {
     ImageShapesExampleComponent,
     ImageSizesExampleComponent
 } from './component-docs/image/examples/image-examples.component';
-import { InlineHelpExampleComponent } from './component-docs/inline-help/examples/inline-help-examples.component';
+import {
+    InlineHelpExampleComponent,
+    InlineHelpTriggerExampleComponent
+} from './component-docs/inline-help/examples/inline-help-examples.component';
 import {
     InputGroupButtonExampleComponent,
     InputGroupIconExampleComponent,
@@ -338,6 +341,7 @@ import {
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
+import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 
 @NgModule({
     declarations: [
@@ -463,6 +467,7 @@ import { SplitButtonDocsComponent } from './component-docs/split-button/split-bu
         InfiniteScrollDocsComponent,
         InfiniteScrollBasicExampleComponent,
         InlineHelpExampleComponent,
+        InlineHelpTriggerExampleComponent,
         InputGroupButtonExampleComponent,
         InputGroupIconExampleComponent,
         InputGroupNumberExampleComponent,
@@ -614,6 +619,7 @@ import { SplitButtonDocsComponent } from './component-docs/split-button/split-bu
         DatePickerPositionExampleComponent,
         DatePickerFormatExampleComponent,
         SearchPipe,
+        ModalPositionExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

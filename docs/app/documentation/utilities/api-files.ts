@@ -24,7 +24,8 @@ export const API_FILES = {
     badgeLabel: [
         'BadgeDirective',
         'BadgeLabelComponent',
-        'LabelDirective'
+        'LabelDirective',
+        'StatusLabelDirective'
     ],
     breadcrumb: [
         'BreadcrumbDirective',
@@ -113,6 +114,7 @@ export const API_FILES = {
         'ModalTitleDirective',
         'ModalCloseButtonDirective',
         'ModalConfig',
+        'ModalPosition',
         'ModalBodyComponent',
         'ModalHeaderComponent',
         'ModalFooterComponent'
@@ -166,8 +168,8 @@ export const API_FILES = {
         'SideNavigationGroupComponent',
         'SideNavigationIconComponent',
         'SideNavigationItemComponent',
-        'SideNavigationLinkComponent',
-        'SideNavigationListComponent',
+        'SideNavigationLinkDirective',
+        'SideNavigationListDirective',
         'SideNavigationSubitemComponent',
         'SideNavigationSublistComponent',
         'SideNavigationSublinkComponent',
