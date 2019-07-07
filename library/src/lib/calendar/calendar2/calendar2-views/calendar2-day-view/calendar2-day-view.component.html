@@ -7,6 +7,25 @@
     </tr>
     </thead>
     <tbody class="fd-calendar__group">
+        <tr class="fd-calendar__row"
+            *ngFor="let row of dayViewGrid; let i = index;"
+        >
+            <td class="fd-calendar__item"
+                role="gridcell"
+                [attr.aria-label]="cell.ariaLabel"
+                *ngFor="let cell of row; let cellIndex = index;"
+                [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
+                          (cell.selected ? " is-selected": "") +
+                          (cell.selectedLast ? " is-selected-range-last": "") +
+                          (cell.selectedFirst ? " is-selected-range-first": "") +
+                          (cell.selectedRange && !cell.selectedFirst && !cell.selectedLast ? " is-selected-range": "") +
+                          (cell.today ? " fd-calendar__item--current": "") +
+                          (cell.disabled ? " is-disabled": "") +
+                          (cell.blocked ? " is-blocked": "")'
+            >
+                {{cell.date.day}}
+            </td>
 
+        </tr>
     </tbody>
 </table>

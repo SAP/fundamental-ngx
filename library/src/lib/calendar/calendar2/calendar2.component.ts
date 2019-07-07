@@ -35,6 +35,56 @@ export class Calendar2Component implements OnInit {
     public readonly activeViewChange: EventEmitter<FdCalendarView>
         = new EventEmitter<FdCalendarView>();
 
+
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param d Date
+     */
+    @Input()
+    disableFunction = function(d): boolean {
+        return false;
+    };
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
+    @Input()
+    disableRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
+    @Input()
+    disableRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
+    @Input()
+    blockRangeStartFunction = function(d): boolean {
+        return false;
+    };
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
+    @Input()
+    blockRangeEndFunction = function(d): boolean {
+        return false;
+    };
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param d Date
+     */
+    @Input()
+    blockFunction = function(d): boolean {
+        return false;
+    };
+
     @HostBinding('class.fd-calendar')
     private fdCalendarClass: boolean = true;
 
@@ -51,12 +101,28 @@ export class Calendar2Component implements OnInit {
         this.prepareDisplayedView();
     }
 
+    public displayNextMonth() {
+        if (this.currentlyDisplayed.month === 12) {
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
+        } else {
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month + 1 };
+        }
+    }
+
+    public displayPreviousMonth() {
+        if (this.currentlyDisplayed.month <= 1) {
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
+        } else {
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
+        }
+    }
+
     private prepareDisplayedView(): void {
         if (this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
-            this.currentlyDisplayed = {month: this.selectedDate.month, year: this.selectedDate.year};
+            this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
         } else {
             const tempDate = FdDate.getToday();
-            this.currentlyDisplayed = {month: tempDate.month, year: tempDate.year};
+            this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };
         }
     }
 
