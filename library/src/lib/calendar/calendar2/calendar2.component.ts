@@ -39,6 +39,14 @@ export class Calendar2Component implements OnInit {
     @Input()
     calType: CalendarType = 'single';
 
+    @HostBinding('class.fd-calendar')
+    private fdCalendarClass: boolean = true;
+
+    @HostBinding('style.display')
+    private displayStyle: string = 'block';
+
+    currentlyDisplayed: CalendarCurrent;
+
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView>
         = new EventEmitter<FdCalendarView>();
@@ -92,14 +100,6 @@ export class Calendar2Component implements OnInit {
     blockFunction = function(d): boolean {
         return false;
     };
-
-    @HostBinding('class.fd-calendar')
-    private fdCalendarClass: boolean = true;
-
-    @HostBinding('style.display')
-    private displayStyle: string = 'block';
-
-    currentlyDisplayed: CalendarCurrent;
 
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n) {

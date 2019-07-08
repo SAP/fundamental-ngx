@@ -13,4 +13,5 @@ export interface CalendarDay {
     today?: boolean;
     isTabIndexed?: boolean;
     ariaLabel?: string;
+    id?: string;
 }

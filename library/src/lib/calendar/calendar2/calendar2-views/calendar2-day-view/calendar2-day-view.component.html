@@ -24,9 +24,9 @@
                           (cell.blocked ? " is-blocked": "")'
                 (click)="selectDate(cell)"
             >
-                <span class="fd-calendar__text" [attr.id]="id + '-fd-day-' + (i + 1) + cellIndex"
+                <span class="fd-calendar__text" [attr.id]="cell.id"
                       role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
-                      (keydown)="onKeydownDayHandler($event, cell)">{{cell.date.day}}
+                      (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: i })">{{cell.date.day}}
                 </span>
 
             </td>

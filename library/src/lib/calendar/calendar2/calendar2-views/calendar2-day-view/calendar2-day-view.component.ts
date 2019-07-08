@@ -22,6 +22,7 @@ import { CalendarDay } from '../../models/calendar-day';
     encapsulation: ViewEncapsulation.None
 })
 export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
+
     get currentlyDisplayed(): CalendarCurrent {
         return this._currentlyDisplayed;
     }
@@ -58,11 +59,11 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     @Input()
     calType: CalendarType = 'single';
 
-    @Output()
-    selectedDateChange = new EventEmitter<FdDate>();
-
     /** Id of the calendar. If none is provided, one will be generated. */
     @Input() id: string;
+
+    @Input()
+    focusEscapeFunction: Function;
 
     @Output()
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
@@ -73,8 +74,8 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     @Output()
     previousMonthSelect = new EventEmitter();
 
-    @Input()
-    focusEscapeFunction: Function;
+    @Output()
+    selectedDateChange = new EventEmitter<FdDate>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -179,72 +180,72 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         }
     }
 
-    onKeydownDayHandler(event, cell) {
+    onKeydownDayHandler(event, cell: CalendarDay, grid: { x: number, y: number }) {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
                 event.preventDefault();
                 this.focusEscapeFunction();
             } else {
-                // Default Escape Function
-                this.focusElement('#arrowLeft');
+                this.focusElement('arrowLeft');
             }
         } else {
-            // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
-            let lastDay = this.dayViewGrid.length === 6 ? 66 : 56;
-            const currentId = parseInt(event.currentTarget.id.split('-').pop(), 10);
-            if (event.code === 'Space' || event.code === 'Enter') {
-                event.preventDefault();
-                this.selectDate(cell);
-                this.newFocusedDayId = '#' + this.id + '-fd-day-' + currentId;
-            } else if (event.code === 'ArrowUp') {
-                event.preventDefault();
-                if (currentId >= 10 && currentId <= 16) {
-                    // if first row, go to previous month
-                    this.selectPreviousMonth();
-                    const lastDigit = currentId.toString().split('').pop();
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + this.dayViewGrid.length.toString() + lastDigit;
-                } else {
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 10);
+
+            switch (event.code) {
+                case('Space'):
+                case('Enter'): {
+                    event.preventDefault();
+                    this.selectDate(cell);
+                    this.newFocusedDayId = cell.id;
+                    break;
                 }
-            } else if (event.code === 'ArrowDown') {
-                event.preventDefault();
-                if (currentId >= lastDay - 6 && currentId <= lastDay) {
-                    // if last row, go to next month
-                    this.selectNextMonth();
-                    const lastDigit = currentId.toString().split('').pop();
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-1' + lastDigit;
-                } else {
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 10);
+
+                case('ArrowUp'): {
+                    event.preventDefault();
+                    if (grid.y > 0) {
+                        this.newFocusedDayId = this.dayViewGrid[grid.y - 1][grid.x].id;
+                    } else {
+                        this.selectPreviousMonth();
+                        this.newFocusedDayId = this.dayViewGrid[this.dayViewGrid.length - 1][grid.x].id;
+                    }
+                    break;
                 }
-            } else if (event.code === 'ArrowLeft') {
-                event.preventDefault();
-                if (currentId === 10) {
-                    // if the first day is selected, go to the last day of the previous month
-                    this.selectPreviousMonth();
-                    lastDay = this.dayViewGrid.length === 6 ? 66 : 56;
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + lastDay;
-                } else if (currentId.toString().split('').pop() === '0') {
-                    // if the last digit is 0, skip to the last day of the previous week
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 4);
-                } else {
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 1);
+                case('ArrowDown'): {
+                    event.preventDefault();
+                    if (grid.y < this.dayViewGrid.length - 1) {
+                        this.newFocusedDayId = this.dayViewGrid[grid.y + 1][grid.x].id;
+                    } else {
+                        this.selectNextMonth();
+                        this.newFocusedDayId = this.dayViewGrid[0][grid.x].id;
+                    }
+                    break;
                 }
-            } else if (event.code === 'ArrowRight') {
-                event.preventDefault();
-                if (currentId === lastDay) {
-                    // if the last day is selected, go to the first day of the next month
-                    this.selectNextMonth();
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-10';
-                } else if (currentId.toString().split('').pop() === '6') {
-                    // else if the last digit is 6, skip to the first day of the next week
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 4);
-                } else {
-                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 1);
+                case('ArrowLeft'): {
+                    event.preventDefault();
+                    if (grid.x > 0) {
+                        this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x - 1].id;
+                    } else {
+                        this.selectPreviousMonth();
+                        const newY = this.dayViewGrid.length <= grid.y ? grid.y - 1 : grid.y;
+                        this.newFocusedDayId = this.dayViewGrid[newY][this.dayViewGrid[0].length - 1].id;
+                    }
+                    break;
+                }
+                case('ArrowRight'): {
+                    event.preventDefault();
+                    if (grid.x < this.dayViewGrid[0].length - 1) {
+                        this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x + 1].id;
+                    } else {
+                        this.selectNextMonth();
+                        const newY = this.dayViewGrid.length <= grid.y ? grid.y - 1 : grid.y;
+                        this.newFocusedDayId = this.dayViewGrid[newY][0].id;
+                    }
+                    break;
                 }
             }
-            if (this.newFocusedDayId) {
-                this.focusElement(this.newFocusedDayId);
-            }
+        }
+
+        if (this.newFocusedDayId) {
+            this.focusElement(this.newFocusedDayId);
         }
     }
 
@@ -271,7 +272,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         if (this.currentlyDisplayed.month > 1) {
             this._currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
         } else {
-            this._currentlyDisplayed = { year: this.currentlyDisplayed.year + 1 , month: 1 };
+            this._currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         }
         this.buildDayViewGrid();
         this.nextMonthSelect.emit();
@@ -279,7 +280,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     }
 
     private focusElement(elementSelector) {
-        const elementToFocus = this.eRef.nativeElement.querySelector(elementSelector);
+        const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
         if (elementToFocus) {
             elementToFocus.focus();
         }
@@ -291,6 +292,8 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         calendar = this.getPreviousMonthDays(calendar);
         calendar = calendar.concat(this.getCurrentMonthDays());
         calendar = this.getNextMonthDays(calendar);
+
+        calendar.forEach((call, index: number) => call.id = this.id + '-fd-day-' + (Math.floor(index / 7) + 1) + '' + (index % 7));
 
         return calendar;
     }
@@ -332,7 +335,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     private getCurrentMonthDays(): CalendarDay[] {
         const month = this._currentlyDisplayed.month;
         const year = this._currentlyDisplayed.year;
-        let calendarDays: CalendarDay[] = [];
+        const calendarDays: CalendarDay[] = [];
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
             const fdDate: FdDate = new FdDate(year, month, dayNumber);
@@ -403,12 +406,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
-                (this.calType === 'single' && Calendar2DayViewComponent.equals(fdDate, this.selectedDate)) ||
-                (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.start)) ||
-                (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.end))
+                (this.calType === 'single' && this.datesEqual(fdDate, this.selectedDate)) ||
+                (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.start)) ||
+                (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.end))
             ),
-            selectedFirst: (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.start)),
-            selectedLast: (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.end)),
+            selectedFirst: (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.start)),
+            selectedLast: (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
                 (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
                 (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))
@@ -436,7 +439,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         return day;
     }
 
-    static equals(date1: FdDate, date2: FdDate): boolean {
+    private datesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
             return false;
         } else {
