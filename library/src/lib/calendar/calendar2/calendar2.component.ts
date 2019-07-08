@@ -4,6 +4,7 @@ import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
 
+let calendarUniqueId: number = 0;
 
 /** Type of calendar */
 export type CalendarType = 'single' | 'range';
@@ -46,6 +47,10 @@ export class Calendar2Component implements OnInit {
     private displayStyle: string = 'block';
 
     currentlyDisplayed: CalendarCurrent;
+
+    /** Id of the calendar. If none is provided, one will be generated. */
+    @Input()
+    id = 'fd-calendar-' + calendarUniqueId++;
 
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView>

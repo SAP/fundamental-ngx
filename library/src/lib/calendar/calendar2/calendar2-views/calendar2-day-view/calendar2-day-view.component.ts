@@ -223,10 +223,13 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
                     event.preventDefault();
                     if (grid.x > 0) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x - 1].id;
+                    } else if (grid.y > 0) {
+                        this.newFocusedDayId = this.dayViewGrid[grid.y - 1][this.dayViewGrid[0].length - 1].id
                     } else {
                         this.selectPreviousMonth();
-                        const newY = this.dayViewGrid.length <= grid.y ? grid.y - 1 : grid.y;
-                        this.newFocusedDayId = this.dayViewGrid[newY][this.dayViewGrid[0].length - 1].id;
+                        this.newFocusedDayId =
+                            this.dayViewGrid[this.dayViewGrid.length - 1][this.dayViewGrid[0].length - 1].id
+                        ;
                     }
                     break;
                 }
@@ -234,10 +237,11 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
                     event.preventDefault();
                     if (grid.x < this.dayViewGrid[0].length - 1) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x + 1].id;
+                    } else if (grid.y < this.dayViewGrid.length - 1) {
+                        this.newFocusedDayId = this.dayViewGrid[grid.y + 1][0].id
                     } else {
                         this.selectNextMonth();
-                        const newY = this.dayViewGrid.length <= grid.y ? grid.y - 1 : grid.y;
-                        this.newFocusedDayId = this.dayViewGrid[newY][0].id;
+                        this.newFocusedDayId = this.dayViewGrid[0][0].id;
                     }
                     break;
                 }
@@ -279,7 +283,8 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         return;
     }
 
-    private focusElement(elementSelector) {
+    /** @hidden */
+    public focusElement(elementSelector) {
         const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
         if (elementToFocus) {
             elementToFocus.focus();
@@ -299,6 +304,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     }
 
     private buildDayViewGrid(): void {
+        if (!this._currentlyDisplayed) {
+            this._currentlyDisplayed = { month: FdDate.getToday().month, year: FdDate.getToday().year };
+        }
 
         const calendarDays = this.populateCalendar();
         const dayViewGrid: CalendarDay[][] = [];
