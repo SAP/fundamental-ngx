@@ -86,6 +86,10 @@ import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/tog
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
 import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
+import {
+    TabNavigationExampleChildFirst,
+    TabNavigationExampleChildSecond, TabNavigationExampleChildThird
+} from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 
 export const ROUTES: Routes = [
     {
@@ -264,8 +268,14 @@ export const ROUTES: Routes = [
                 ]
             },
             { path: 'tabs', component: TabsHeaderComponent, children: [
-                    { path: '', component: TabsDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs}}
+                    { path: '', component: TabsDocsComponent,
+                        children: [
+                            {path: 'tab1', component: TabNavigationExampleChildFirst},
+                            {path: 'tab2', component: TabNavigationExampleChildSecond},
+                            {path: 'tab3', component: TabNavigationExampleChildThird},
+                        ]
+                    },
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs }}
                 ]
             },
             { path: 'tile', component: TileDocsHeaderComponent, children: [

@@ -187,7 +187,9 @@ export const API_FILES = {
     tabs: [
         'TabPanelComponent',
         'TabListComponent',
-        'TabTitleDirective'
+        'TabTitleDirective',
+        'TabLinkDirective',
+        'TabNavDirective'
     ],
     tile: [
         'ProductTileComponent',

@@ -14,7 +14,7 @@ import { ModalContainer } from '../modal-utils/modal-container';
 import { ModalConfig } from '../modal-utils/modal-config';
 import { ModalRef } from '../modal-utils/modal-ref';
 import { ModalInjector } from '../modal-utils/modal-injector';
-import { ModalPosition } from '..';
+import { ModalPosition } from '../modal-utils/modal-position';
 
 /**
  * Service used to dynamically generate a modal.
