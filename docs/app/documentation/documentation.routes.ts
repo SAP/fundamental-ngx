@@ -84,6 +84,8 @@ import { TimePickerHeaderComponent } from './component-docs/time-picker/time-pic
 import { TreeHeaderComponent } from './component-docs/tree/tree-header/tree-header.component';
 import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/toggle-header.component';
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
+import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
+import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import {
     TabNavigationExampleChildFirst,
     TabNavigationExampleChildSecond, TabNavigationExampleChildThird
@@ -253,6 +255,11 @@ export const ROUTES: Routes = [
             { path: 'sideNavigation', component: SideNavigationHeaderComponent, children: [
                     { path: '', component: SideNavigationDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.sideNavigation}}
+                ]
+            },
+            { path: 'splitButton', component: SplitButtonHeaderComponent, children: [
+                    { path: '', component: SplitButtonDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.splitButton}}
                 ]
             },
             { path: 'table', component: TableDocsHeaderComponent, children: [

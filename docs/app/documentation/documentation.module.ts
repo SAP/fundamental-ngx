@@ -330,13 +330,21 @@ import { DatePickerDisabledExampleComponent } from './component-docs/date-picker
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
+import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
+import {
+    ButtonSplitOptionsExampleComponent,
+    ButtonSplitProgrammaticalExampleComponent,
+    ButtonSplitTemplateExampleComponent,
+    ButtonSplitTypesExampleComponent,
+    ButtonSplitTypesIconsComponent
+} from './component-docs/split-button/examples/split-button-examples.component';
 import {
     TabNavigationExampleChildFirst, TabNavigationExampleChildSecond,
     TabNavigationExampleChildThird
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
-
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
+import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 
 @NgModule({
@@ -354,6 +362,7 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         BreadcrumbDocsComponent,
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
+        SplitButtonDocsComponent,
         DropdownDocsComponent,
         DatetimePickerDocsComponent,
         FileInputDocsComponent,
@@ -407,8 +416,13 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         ButtonIconsExampleComponent,
         ButtonOptionsExampleComponent,
         ButtonSizesExampleComponent,
-        ButtonStateExampleComponent,
         ButtonTypesExampleComponent,
+        ButtonStateExampleComponent,
+        ButtonSplitTypesExampleComponent,
+        ButtonSplitTypesIconsComponent,
+        ButtonSplitProgrammaticalExampleComponent,
+        ButtonSplitOptionsExampleComponent,
+        ButtonSplitTemplateExampleComponent,
         ButtonGroupXsExampleComponent,
         ButtonGroupSmallExampleComponent,
         ButtonGroupCompactExampleComponent,
@@ -571,6 +585,7 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         BreadcrumbHeaderComponent,
         ButtonHeaderComponent,
         ButtonGroupHeaderComponent,
+        SplitButtonHeaderComponent,
         CalendarHeaderComponent,
         ComboboxInputHeaderComponent,
         DatePickerHeaderComponent,
