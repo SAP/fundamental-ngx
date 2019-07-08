@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0-rc.0"></a>
+# [0.8.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.7.1-rc.0...v0.8.0-rc.0) (2019-07-08)
+
+
+### Features
+
+* Add navigation mode for tabs ([#976](https://github.com/SAP/fundamental-ngx/issues/976)) ([0eb44d7](https://github.com/SAP/fundamental-ngx/commit/0eb44d7))
+
+
+
 <a name="0.7.1-rc.0"></a>
 ## [0.7.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.7.0...v0.7.1-rc.0) (2019-07-08)
 
