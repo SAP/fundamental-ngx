@@ -26,7 +26,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabListComponent,
         TabPanelComponent,
         TabTitleDirective,
-        TabLoadTitleDirective
+        TabLoadTitleDirective,
         TabNavDirective,
         TabItemDirective,
         TabLinkDirective
