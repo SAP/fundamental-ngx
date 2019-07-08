@@ -1109,7 +1109,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, C
 
     /** @hidden */
     ngAfterViewChecked() {
+        console.log(123);
         if (this.newFocusedDayId) {
+            console.log('focus');
             this.focusElement(this.newFocusedDayId);
             this.newFocusedDayId = null;
         }

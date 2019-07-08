@@ -1,4 +1,14 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewChecked,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnInit,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { CalendarI18n } from '../../../i18n/calendar-i18n';
 import { FdDate } from '../../models/fd-date';
 import { CalendarCurrent } from '../../models/calendar-current';
@@ -11,16 +21,17 @@ import { CalendarDay } from '../../models/calendar-day';
     styleUrls: ['./calendar2-day-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2DayViewComponent implements OnInit {
+export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     get currentlyDisplayed(): CalendarCurrent {
         return this._currentlyDisplayed;
     }
 
     @Input()
     set currentlyDisplayed(value: CalendarCurrent) {
-        console.log(value);
-        this._currentlyDisplayed = value;
-        this.buildDayViewGrid();
+        if (this._currentlyDisplayed !== value) {
+            this._currentlyDisplayed = value;
+            this.buildDayViewGrid();
+        }
     }
 
     private _currentlyDisplayed: CalendarCurrent;
@@ -29,6 +40,7 @@ export class Calendar2DayViewComponent implements OnInit {
     private fdCalendarDateViewClass: boolean = true;
 
     dayViewGrid: CalendarDay[][];
+    newFocusedDayId: string = '';
 
     @Input()
     public selectedDate: FdDate;
@@ -54,6 +66,15 @@ export class Calendar2DayViewComponent implements OnInit {
 
     @Output()
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
+
+    @Output()
+    nextMonthSelect = new EventEmitter();
+
+    @Output()
+    previousMonthSelect = new EventEmitter();
+
+    @Input()
+    focusEscapeFunction: Function;
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -104,12 +125,14 @@ export class Calendar2DayViewComponent implements OnInit {
         return false;
     };
 
-    constructor(private calendarI18n: CalendarI18n) {
+    constructor(
+        private calendarI18n: CalendarI18n,
+        private eRef: ElementRef
+    ) {
     }
 
     selectDate(day: CalendarDay) {
         if (!day.blocked && !day.disabled) {
-            console.log(this.calType);
             if (this.calType === 'single') {
                 this.selectedDate = day.date;
                 this.selectedDateChange.emit(day.date);
@@ -119,8 +142,6 @@ export class Calendar2DayViewComponent implements OnInit {
                     this.selectedRangeDate = { start: day.date, end: null };
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                     this.buildDayViewGrid();
-                    console.log(this.selectCounter + ' Selected');
-                    console.log(this.selectedRangeDate);
                 } else if (this.selectCounter === 1) {
                     // Check if date picked is lower than already chosen
                     if (this.selectedRangeDate.start.toDate().getTime() < day.date.toDate().getTime()) {
@@ -128,8 +149,6 @@ export class Calendar2DayViewComponent implements OnInit {
                     } else {
                         this.selectedRangeDate = { start: day.date, end: null };
                     }
-                    console.log(this.selectCounter + ' Selected');
-                    console.log(this.selectedRangeDate);
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                     this.buildDayViewGrid();
                 }
@@ -160,11 +179,117 @@ export class Calendar2DayViewComponent implements OnInit {
         }
     }
 
+    onKeydownDayHandler(event, cell) {
+        if (event.code === 'Tab' && !event.shiftKey) {
+            if (this.focusEscapeFunction) {
+                event.preventDefault();
+                this.focusEscapeFunction();
+            } else {
+                // Default Escape Function
+                this.focusElement('#arrowLeft');
+            }
+        } else {
+            // if the grid has 6 rows, the last cell id is 66, if it has 5 rows it's 56
+            let lastDay = this.dayViewGrid.length === 6 ? 66 : 56;
+            const currentId = parseInt(event.currentTarget.id.split('-').pop(), 10);
+            if (event.code === 'Space' || event.code === 'Enter') {
+                event.preventDefault();
+                this.selectDate(cell);
+                this.newFocusedDayId = '#' + this.id + '-fd-day-' + currentId;
+            } else if (event.code === 'ArrowUp') {
+                event.preventDefault();
+                if (currentId >= 10 && currentId <= 16) {
+                    // if first row, go to previous month
+                    this.selectPreviousMonth();
+                    const lastDigit = currentId.toString().split('').pop();
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + this.dayViewGrid.length.toString() + lastDigit;
+                } else {
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 10);
+                }
+            } else if (event.code === 'ArrowDown') {
+                event.preventDefault();
+                if (currentId >= lastDay - 6 && currentId <= lastDay) {
+                    // if last row, go to next month
+                    this.selectNextMonth();
+                    const lastDigit = currentId.toString().split('').pop();
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-1' + lastDigit;
+                } else {
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 10);
+                }
+            } else if (event.code === 'ArrowLeft') {
+                event.preventDefault();
+                if (currentId === 10) {
+                    // if the first day is selected, go to the last day of the previous month
+                    this.selectPreviousMonth();
+                    lastDay = this.dayViewGrid.length === 6 ? 66 : 56;
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + lastDay;
+                } else if (currentId.toString().split('').pop() === '0') {
+                    // if the last digit is 0, skip to the last day of the previous week
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 4);
+                } else {
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId - 1);
+                }
+            } else if (event.code === 'ArrowRight') {
+                event.preventDefault();
+                if (currentId === lastDay) {
+                    // if the last day is selected, go to the first day of the next month
+                    this.selectNextMonth();
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-10';
+                } else if (currentId.toString().split('').pop() === '6') {
+                    // else if the last digit is 6, skip to the first day of the next week
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 4);
+                } else {
+                    this.newFocusedDayId = '#' + this.id + '-fd-day-' + (currentId + 1);
+                }
+            }
+            if (this.newFocusedDayId) {
+                this.focusElement(this.newFocusedDayId);
+            }
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewChecked() {
+        if (this.newFocusedDayId) {
+            this.focusElement(this.newFocusedDayId);
+            this.newFocusedDayId = null;
+        }
+    }
+
+    private selectPreviousMonth() {
+        if (this.currentlyDisplayed.month > 1) {
+            this._currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month - 1 };
+        } else {
+            this._currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
+        }
+        this.buildDayViewGrid();
+        this.previousMonthSelect.emit();
+        return;
+    }
+
+    private selectNextMonth() {
+        if (this.currentlyDisplayed.month > 1) {
+            this._currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
+        } else {
+            this._currentlyDisplayed = { year: this.currentlyDisplayed.year + 1 , month: 1 };
+        }
+        this.buildDayViewGrid();
+        this.nextMonthSelect.emit();
+        return;
+    }
+
+    private focusElement(elementSelector) {
+        const elementToFocus = this.eRef.nativeElement.querySelector(elementSelector);
+        if (elementToFocus) {
+            elementToFocus.focus();
+        }
+    }
+
     private populateCalendar(): CalendarDay[] {
         let calendar: CalendarDay[] = [];
 
         calendar = this.getPreviousMonthDays(calendar);
-        calendar = this.getCurrentMonthDays(calendar);
+        calendar = calendar.concat(this.getCurrentMonthDays());
         calendar = this.getNextMonthDays(calendar);
 
         return calendar;
@@ -180,12 +305,14 @@ export class Calendar2DayViewComponent implements OnInit {
         }
 
         this.dayViewGrid = dayViewGrid;
+
+        return;
     }
 
     private getDaysInMonth(month: number, year: number): number {
         if (month === 2) {
             return this.isLeapYear(year) ? 29 : 28;
-        } else if (month % 2 === 0) {
+        } else if ((month % 2 === 0 && month < 8) || (month % 2 === 1 && month > 8)) {
             return 30;
         } else {
             return 31;
@@ -202,9 +329,10 @@ export class Calendar2DayViewComponent implements OnInit {
         }
     }
 
-    private getCurrentMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
+    private getCurrentMonthDays(): CalendarDay[] {
         const month = this._currentlyDisplayed.month;
         const year = this._currentlyDisplayed.year;
+        let calendarDays: CalendarDay[] = [];
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
             const fdDate: FdDate = new FdDate(year, month, dayNumber);
@@ -214,7 +342,18 @@ export class Calendar2DayViewComponent implements OnInit {
                 today: fdDate.toDate().toDateString() === FdDate.getToday().toDate().toDateString()
             });
         }
+        this.getActiveCell(calendarDays).isTabIndexed = true;
         return calendarDays;
+    }
+
+    private getActiveCell(calendarDays: CalendarDay[]): CalendarDay {
+        if (calendarDays.find(cell => cell.selected)) {
+            return calendarDays.find(cell => cell.selected);
+        } else if (calendarDays.find(cell => cell.today)) {
+            return calendarDays.find(cell => cell.today);
+        } else {
+            return calendarDays[0];
+        }
     }
 
     private getPreviousMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
@@ -222,7 +361,7 @@ export class Calendar2DayViewComponent implements OnInit {
         const year = this._currentlyDisplayed.month > 1 ? this._currentlyDisplayed.year : this._currentlyDisplayed.year - 1;
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
         const prevMonthLastDate = new FdDate(year, month, amountOfDaysInCurrentMonth + 1);
-        const prevMonthLastDay = amountOfDaysInCurrentMonth + 1;
+        const prevMonthLastDay = amountOfDaysInCurrentMonth;
         let prevMonthLastWeekDay = prevMonthLastDate.toDate().getDay() - this.startingDayOfWeek;
 
         if (prevMonthLastWeekDay < 6) {
@@ -271,8 +410,8 @@ export class Calendar2DayViewComponent implements OnInit {
             selectedFirst: (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.start)),
             selectedLast: (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
-                (this.selectedRangeDate.start && ( this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime()) ) &&
-                (this.selectedRangeDate.end && ( this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()) )
+                (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
+                (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))
             )),
             ariaLabel: this.calendarI18n.getDayAriaLabel(fdDate.toDate())
         };
