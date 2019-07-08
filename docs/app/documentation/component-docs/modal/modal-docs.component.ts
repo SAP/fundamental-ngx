@@ -13,6 +13,8 @@ import * as backdropT from '!raw-loader!./examples/backdrop-examples/backdrop-ex
 import * as backdropH from '!raw-loader!./examples/backdrop-examples/backdrop-examples.component.html';
 import * as positionH from '!raw-loader!./examples/modal-position/modal-position-example.component.html';
 import * as positionT from '!raw-loader!./examples/modal-position/modal-position-example.component.ts';
+import * as containerH from '!raw-loader!./examples/container/container.component.html';
+import * as containerT from '!raw-loader!./examples/container/container.component.ts';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { ModalService } from '../../../../../library/src/lib/modal/modal-service/modal.service';
@@ -83,6 +85,9 @@ export class ModalDocsComponent {
 
     positionHtml = positionH;
     positionTs = positionT;
+
+    containerHtml = containerH;
+    containerTs = containerT;
 
     constructor(private schemaFactory: SchemaFactoryService, private modalService: ModalService) {
         this.schema = this.schemaFactory.getComponent('modal');
