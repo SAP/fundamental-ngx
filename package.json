@@ -46,7 +46,7 @@
         "fundamental-styles": "^0.1.0",
         "highlight.js": "^9.15.6",
         "ngx-highlightjs": "^3.0.3",
-        "ngx-markdown": "^8.0.2",
+        "ngx-markdown": "^8.1.0",
         "npm": "^6.10.0",
         "popper.js": "^1.15.0",
         "raw-loader": "^1.0.0",
