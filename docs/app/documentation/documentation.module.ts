@@ -180,7 +180,7 @@ import {
 import { TableExampleComponent } from './component-docs/table/examples/table-example.component';
 import {
     TabsExampleComponent,
-    TabSelectionExampleComponent
+    TabSelectionExampleComponent, TabsNavigationModeExampleComponent
 } from './component-docs/tabs/examples/tabs-examples-component';
 import {
     TileActionsExampleComponent,
@@ -330,6 +330,11 @@ import { DatePickerDisabledExampleComponent } from './component-docs/date-picker
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
+import {
+    TabNavigationExampleChildFirst, TabNavigationExampleChildSecond,
+    TabNavigationExampleChildThird
+} from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
+
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
@@ -514,6 +519,10 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         TableResponsiveExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
+        TabsNavigationModeExampleComponent,
+        TabNavigationExampleChildFirst,
+        TabNavigationExampleChildSecond,
+        TabNavigationExampleChildThird,
         TileActionsExampleComponent,
         TileDisabledExampleComponent,
         TileExampleComponent,

@@ -7,6 +7,7 @@ import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.c
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
+import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
 
 @Component({
     selector: 'app-tabs',
@@ -89,6 +90,8 @@ export class TabsDocsComponent implements OnInit {
     tabHtml = tabSrc;
 
     complexH = complexTabH;
+
+    navigationTab = navigationTab;
 
     addingH = tabAddH;
     addingT = tabAddT;

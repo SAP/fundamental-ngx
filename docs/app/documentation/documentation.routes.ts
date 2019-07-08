@@ -84,6 +84,10 @@ import { TimePickerHeaderComponent } from './component-docs/time-picker/time-pic
 import { TreeHeaderComponent } from './component-docs/tree/tree-header/tree-header.component';
 import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/toggle-header.component';
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
+import {
+    TabNavigationExampleChildFirst,
+    TabNavigationExampleChildSecond, TabNavigationExampleChildThird
+} from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 
 export const ROUTES: Routes = [
     {
@@ -257,8 +261,14 @@ export const ROUTES: Routes = [
                 ]
             },
             { path: 'tabs', component: TabsHeaderComponent, children: [
-                    { path: '', component: TabsDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs}}
+                    { path: '', component: TabsDocsComponent,
+                        children: [
+                            {path: 'tab1', component: TabNavigationExampleChildFirst},
+                            {path: 'tab2', component: TabNavigationExampleChildSecond},
+                            {path: 'tab3', component: TabNavigationExampleChildThird},
+                        ]
+                    },
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs }}
                 ]
             },
             { path: 'tile', component: TileDocsHeaderComponent, children: [
