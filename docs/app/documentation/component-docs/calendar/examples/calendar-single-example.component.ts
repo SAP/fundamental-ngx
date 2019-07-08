@@ -12,6 +12,7 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/mod
         
         <fd-calendar2
             [disableFunction]="myDisableFunction2"
+            [calType]="'range'"
         ></fd-calendar2>
         <br/>
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>

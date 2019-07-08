@@ -1,8 +1,8 @@
-import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CalendarI18n } from '../../../i18n/calendar-i18n';
 import { FdDate } from '../../models/fd-date';
 import { CalendarCurrent } from '../../models/calendar-current';
-import { DaysOfWeek } from '../../calendar2.component';
+import { CalendarType, DaysOfWeek } from '../../calendar2.component';
 import { CalendarDay } from '../../models/calendar-day';
 
 @Component({
@@ -39,9 +39,21 @@ export class Calendar2DayViewComponent implements OnInit {
     @Input()
     public selectedRangeDate: { start: FdDate, end: FdDate };
 
-
     @Input()
     public startingDayOfWeek: DaysOfWeek;
+
+    /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
+    @Input()
+    calType: CalendarType = 'single';
+
+    @Output()
+    selectedDateChange = new EventEmitter<FdDate>();
+
+    /** Id of the calendar. If none is provided, one will be generated. */
+    @Input() id: string;
+
+    @Output()
+    selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -95,6 +107,36 @@ export class Calendar2DayViewComponent implements OnInit {
     constructor(private calendarI18n: CalendarI18n) {
     }
 
+    selectDate(day: CalendarDay) {
+        if (!day.blocked && !day.disabled) {
+            console.log(this.calType);
+            if (this.calType === 'single') {
+                this.selectedDate = day.date;
+                this.selectedDateChange.emit(day.date);
+                this.buildDayViewGrid();
+            } else {
+                if (this.selectCounter === 0 || this.selectCounter === 2) {
+                    this.selectedRangeDate = { start: day.date, end: null };
+                    this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                    this.buildDayViewGrid();
+                    console.log(this.selectCounter + ' Selected');
+                    console.log(this.selectedRangeDate);
+                } else if (this.selectCounter === 1) {
+                    // Check if date picked is lower than already chosen
+                    if (this.selectedRangeDate.start.toDate().getTime() < day.date.toDate().getTime()) {
+                        this.selectedRangeDate = { start: this.selectedRangeDate.start, end: day.date };
+                    } else {
+                        this.selectedRangeDate = { start: day.date, end: null };
+                    }
+                    console.log(this.selectCounter + ' Selected');
+                    console.log(this.selectedRangeDate);
+                    this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                    this.buildDayViewGrid();
+                }
+
+            }
+        }
+    }
 
     ngOnInit() {
         this.buildDayViewGrid();
@@ -166,7 +208,11 @@ export class Calendar2DayViewComponent implements OnInit {
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
             const fdDate: FdDate = new FdDate(year, month, dayNumber);
-            calendarDays.push(this.getDay(fdDate));
+            calendarDays.push({
+                ...this.getDay(fdDate),
+                monthStatus: 'current',
+                today: fdDate.toDate().toDateString() === FdDate.getToday().toDate().toDateString()
+            });
         }
         return calendarDays;
     }
@@ -218,20 +264,20 @@ export class Calendar2DayViewComponent implements OnInit {
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
-                Calendar2DayViewComponent.equals(fdDate, this.selectedDate) ||
+                (this.calType === 'single' && Calendar2DayViewComponent.equals(fdDate, this.selectedDate)) ||
                 (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.start)) ||
                 (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.end))
             ),
             selectedFirst: (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.start)),
             selectedLast: (this.selectedRangeDate && Calendar2DayViewComponent.equals(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
-                (this.selectedRangeDate.start && this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime()) ||
-                (this.selectedRangeDate.end && this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime())
+                (this.selectedRangeDate.start && ( this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime()) ) &&
+                (this.selectedRangeDate.end && ( this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()) )
             )),
             ariaLabel: this.calendarI18n.getDayAriaLabel(fdDate.toDate())
         };
 
-        if (this.range && (this.selectCounter === 0 || this.selectCounter === 2)) {
+        if (this.calType === 'range' && (this.selectCounter === 0 || this.selectCounter === 2)) {
             if (this.disableRangeStartFunction && !day.disabled) {
                 day.disabled = this.disableRangeStartFunction(day.date);
             }

@@ -22,8 +22,13 @@
                           (cell.today ? " fd-calendar__item--current": "") +
                           (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
+                (click)="selectDate(cell)"
             >
-                {{cell.date.day}}
+                <span class="fd-calendar__text" [attr.id]="id + '-fd-day-' + (i + 1) + cellIndex"
+                      role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
+                      (keydown)="onKeydownDayHandler($event, cell)">{{cell.date.day}}
+                </span>
+
             </td>
 
         </tr>

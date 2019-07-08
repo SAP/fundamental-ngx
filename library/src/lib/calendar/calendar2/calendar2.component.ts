@@ -4,6 +4,10 @@ import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
 
+
+/** Type of calendar */
+export type CalendarType = 'single' | 'range';
+
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year';
 
@@ -30,6 +34,10 @@ export class Calendar2Component implements OnInit {
 
     @Input()
     public startingDayOfWeek: DaysOfWeek = 1;
+
+    /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
+    @Input()
+    calType: CalendarType = 'single';
 
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView>
