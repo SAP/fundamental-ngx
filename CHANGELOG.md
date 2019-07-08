@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0-rc.1"></a>
+# [0.8.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.0...v0.8.0-rc.1) (2019-07-08)
+
+
+### Features
+
+* Add split button component ([#974](https://github.com/SAP/fundamental-ngx/issues/974)) ([2472733](https://github.com/SAP/fundamental-ngx/commit/2472733))
+
+
+
 <a name="0.8.0-rc.0"></a>
 # [0.8.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.7.1-rc.0...v0.8.0-rc.0) (2019-07-08)
 
