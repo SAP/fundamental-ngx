@@ -1,11 +1,16 @@
 <fd-calendar2-header [currentlyDisplayed]="currentlyDisplayed"
                      [(activeView)]="activeView"
+                     [id]="id"
                     (nextClicked)="displayNextMonth()"
                     (previousClicked)="displayPreviousMonth()"
 ></fd-calendar2-header>
 <ng-container [ngSwitch]="activeView">
     <fd-calendar2-day-view *ngSwitchCase="'day'"
+                           #dayViewComponent
                            [selectedDate]="selectedDate"
+                           (selectedDateChange)="selectedDateChanged($event)"
+                           [selectedRangeDate]="selectedRangeDate"
+                           (selectedRangeDateChange)="selectedRangeDateChanged($event)"
                            [currentlyDisplayed]="currentlyDisplayed"
                            [startingDayOfWeek]="startingDayOfWeek"
                            [blockFunction]="blockFunction"
@@ -15,6 +20,8 @@
                            [disableRangeStartFunction]="disableRangeStartFunction"
                            [blockRangeStartFunction]="blockRangeStartFunction"
                            [calType]="calType"
+                           [id]="id"
+                           [focusEscapeFunction]="escapeFocusFunction"
                            (nextMonthSelect)="displayNextMonth()"
                            (previousMonthSelect)="displayPreviousMonth()"
     ></fd-calendar2-day-view>
