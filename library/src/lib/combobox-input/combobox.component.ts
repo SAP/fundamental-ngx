@@ -3,8 +3,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
-    Input, isDevMode,
+    Input,
     OnChanges,
     OnInit,
     Output,
@@ -16,30 +15,31 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MenuItemDirective } from '../menu/menu-item.directive';
+import { ComboboxItem } from './combobox-item';
 
 /**
- * Allows users to filter through results and select.
- * Can also be customized to execute a search function.
+ * Allows users to filter through results and select a value.
  *
  * Supports Angular Forms.
  */
 @Component({
-    selector: 'fd-search-input',
-    templateUrl: './search-input.component.html',
-    styleUrls: ['./search-input.component.scss'],
+    selector: 'fd-combobox',
+    templateUrl: './combobox.component.html',
+    styleUrls: ['./combobox.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => SearchInputComponent),
+            useExisting: forwardRef(() => ComboboxComponent),
             multi: true
         }
     ],
     host: {
-        class: 'fd-search-input-custom'
+        '[class.fd-combobox-custom-class]': 'true',
+        '[class.fd-combobox-input]': 'true'
     },
     encapsulation: ViewEncapsulation.None
 })
-export class SearchInputComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges {
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -58,13 +58,9 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     @Input()
     placeholder: string;
 
-    /** Whether the search input is in a shellbar **/
-    @Input()
-    inShellbar: boolean = false;
-
     /** Icon to display in the right-side button. */
     @Input()
-    glyph: string = 'search';
+    glyph: string = 'navigation-down-arrow';
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
@@ -99,7 +95,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
-    itemClicked: EventEmitter<{item: any, index: number}> = new EventEmitter<{item: any, index: number}>();
+    itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
 
     /** @hidden */
     @ViewChildren(MenuItemDirective)
@@ -119,12 +115,28 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     inputTextValue: string;
 
     /** @hidden */
-    @HostBinding('class.fd-search-input')
-    searchInputClass = true;
+    onChange: any = () => {};
 
     /** @hidden */
-    @HostBinding('class.fd-search-input--closed')
-    shellBarClass = this.inShellbar;
+    onTouched: any = () => {};
+
+    /** @hidden */
+    ngOnInit() {
+        if (this.dropdownValues) {
+            this.displayedValues = this.dropdownValues;
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
+            if (this.inputText) {
+                this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+            } else {
+                this.displayedValues =  this.dropdownValues;
+            }
+        }
+    }
 
     /** @hidden */
     onInputKeydownHandler(event) {
@@ -190,17 +202,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
         }
     }
 
-    /** @hidden */
-    shellbarSearchInputClicked(event) {
-        event.stopPropagation();
-    }
-
-    /** @hidden */
-    onChange: any = () => {};
-
-    /** @hidden */
-    onTouched: any = () => {};
-
     /** Get the input text of the input. */
     get inputText() {
         return this.inputTextValue;
@@ -228,38 +229,6 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
         this.onTouched = fn;
     }
 
-    private handleClickActions(term): void {
-        if (this.closeOnSelect) {
-            this.isOpen = false;
-        }
-        if (this.fillOnSelect) {
-            this.inputText = this.displayFn(term);
-            this.handleSearchTermChange();
-        }
-    }
-
-    /** @hidden */
-    ngOnInit() {
-        if (this.dropdownValues) {
-            this.displayedValues = this.dropdownValues;
-        }
-
-        if (isDevMode()) {
-            console.warn('Search Input is deprecated. Please use Combobox instead. Visit the fundamental-ngx wiki for more information.')
-        }
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
-        if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
-            if (this.inputText) {
-                this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
-            } else {
-                this.displayedValues =  this.dropdownValues;
-            }
-        }
-    }
-
     /** @hidden */
     handleSearchTermChange(): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
@@ -276,6 +245,16 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
                 return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
             }
         });
+    }
+
+    private handleClickActions(term): void {
+        if (this.closeOnSelect) {
+            this.isOpen = false;
+        }
+        if (this.fillOnSelect) {
+            this.inputText = this.displayFn(term);
+            this.handleSearchTermChange();
+        }
     }
 
 }

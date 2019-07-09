@@ -1,10 +1,10 @@
 <fd-popover [(isOpen)]="isOpen"
             [fillControl]="true"
             [disabled]="disabled"
-            class="fd-search-input-popover-custom"
+            class="fd-combobox-popover-custom"
             [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
     <fd-popover-control>
-        <div *ngIf="!inShellbar" class="fd-combobox-control">
+        <div class="fd-combobox-control">
             <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
                 <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
                        (keydown)="onInputKeydownHandler($event)"
@@ -14,29 +14,18 @@
                        (ngModelChange)="handleSearchTermChange()"
                        placeholder="{{placeholder}}">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
-                    <button type="button" class="fd-button--light" [ngClass]="('sap-icon--' + this.glyph)"></button>
+                    <button fd-button
+                            type="button"
+                            [fdType]="'light'"
+                            [glyph]="glyph"
+                            [disabled]="disabled">
+                    </button>
                 </span>
-            </div>
-        </div>
-        <div *ngIf="inShellbar" class="fd-search-input__control">
-            <button tabindex="0" type="button" class="fd-button--shell" [attr.aria-expanded]="isOpen"
-                    [ngClass]="('sap-icon--' + this.glyph)"></button>
-            <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
-                <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
-                    <input type="text" class="fd-input"
-                           (keydown)="onInputKeydownHandler($event)"
-                           (keyup)="onInputKeyupHandler()"
-                           [disabled]="disabled"
-                           [(ngModel)]="inputText"
-                           (ngModelChange)="handleSearchTermChange()"
-                           placeholder="{{placeholder}}"
-                           (click)="shellbarSearchInputClicked($event)">
-                </div>
             </div>
         </div>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
-        <fd-menu class="fd-search-input-menu-overflow"
+        <fd-menu class="fd-combobox-input-menu-overflow"
                  [style.maxHeight]="maxHeight">
             <ul fd-menu-list>
                 <li fd-menu-item *ngFor="let term of displayedValues"
@@ -45,6 +34,8 @@
                     <a tabindex="0" [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></a>
                 </li>
             </ul>
+            <ng-content></ng-content>
         </fd-menu>
     </fd-popover-body>
 </fd-popover>
+

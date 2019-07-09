@@ -34,7 +34,7 @@ import { IconDocsComponent } from './component-docs/icon/icon-docs.component';
 import { IdentifierDocsComponent } from './component-docs/identifier/identifier-docs.component';
 import { InlineHelpDocsComponent } from './component-docs/inline-help/inline-help-docs.component';
 import { InputGroupDocsComponent } from './component-docs/input-group/input-group-docs.component';
-import { ComboboxInputDocsComponent } from './component-docs/combobox-input/combobox-input-docs.component';
+import { ComboboxDocsComponent } from './component-docs/combobox/combobox-docs.component';
 import { ImageDocsComponent } from './component-docs/image/image-docs.component';
 import { DropdownDocsComponent } from './component-docs/dropdown/dropdown-docs.component';
 import { PaginationDocsComponent } from './component-docs/pagination/pagination-docs.component';
@@ -98,7 +98,7 @@ import {
 import { CalendarRangeExampleComponent } from './component-docs/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from './component-docs/calendar/examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from './component-docs/calendar/examples/calendar-monday-start-example.component';
-import { ComboboxInputExampleComponent } from './component-docs/combobox-input/examples/combobox-input-example.component';
+import { ComboboxExampleComponent } from './component-docs/combobox/examples/combobox-example.component';
 import { DatePickerRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from './component-docs/date-picker/examples/date-picker-single-example.component';
 import {
@@ -273,7 +273,7 @@ import { BreadcrumbHeaderComponent } from './component-docs/breadcrumb/breadcrum
 import { ButtonHeaderComponent } from './component-docs/button/button-header/button-header.component';
 import { ButtonGroupHeaderComponent } from './component-docs/button-group/button-group-header/button-group-header.component';
 import { CalendarHeaderComponent } from './component-docs/calendar/calendar-header/calendar-header.component';
-import { ComboboxInputHeaderComponent } from './component-docs/combobox-input/combobox-input-header/combobox-input-header.component';
+import { ComboboxHeaderComponent } from './component-docs/combobox/combobox-header/combobox-header.component';
 import { DatePickerHeaderComponent } from './component-docs/date-picker/date-picker-header/date-picker-header.component';
 import { DatetimePickerHeaderComponent } from './component-docs/datetime-picker/datetime-picker-header/datetime-picker-header.component';
 import { DropdownHeaderComponent } from './component-docs/dropdown/dropdown-header/dropdown-header.component';
@@ -347,6 +347,9 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
+import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
+import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
+import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 
 @NgModule({
     declarations: [
@@ -561,8 +564,11 @@ import { ContainerComponent } from './component-docs/modal/examples/container/co
         TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
         TimePickerFormExampleComponent,
-        ComboboxInputDocsComponent,
-        ComboboxInputExampleComponent,
+        ComboboxDocsComponent,
+        ComboboxAsyncExampleComponent,
+        ComboboxDisplaywithExampleComponent,
+        ComboboxDynamicExampleComponent,
+        ComboboxExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
@@ -588,7 +594,7 @@ import { ContainerComponent } from './component-docs/modal/examples/container/co
         ButtonGroupHeaderComponent,
         SplitButtonHeaderComponent,
         CalendarHeaderComponent,
-        ComboboxInputHeaderComponent,
+        ComboboxHeaderComponent,
         DatePickerHeaderComponent,
         DatetimePickerHeaderComponent,
         DropdownHeaderComponent,

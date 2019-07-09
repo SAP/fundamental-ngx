@@ -1,1 +1,1 @@
-export * from './combobox-input.module';
+export * from './combobox.module';
