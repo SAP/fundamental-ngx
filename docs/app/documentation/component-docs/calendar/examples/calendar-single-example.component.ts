@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-calendar-single-example',
@@ -14,16 +15,42 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/mod
         <fd-calendar2
             [disableFunction]="myDisableFunction2"
             [calType]="'single'"
+            [(selectedDate)]="selectedDay2"
         ></fd-calendar2>
+
+        <form [formGroup]="customForm">
+            <fd-calendar2 formControlName="date"></fd-calendar2>
+        </form>
+
+        Touched: {{customForm.controls.date.touched}}<br/>
+        Dirty: {{customForm.controls.date.dirty}}<br/>
+
+        Selected Date: {{ customForm.controls.date?.value?.date?.toDate() ? customForm.controls.date.value.date.toDate().toDateString() : 'null' }}
+        
+        <form [formGroup]="customForm">
+            <fd-calendar2 formControlName="dateRange" [calType]="'range'"></fd-calendar2>
+        </form>
+
+        Touched: {{customForm.controls.dateRange.touched}}<br/>
+        Dirty: {{customForm.controls.dateRange.dirty}}<br/>
+
+        Selected Date start: {{ customForm.controls.dateRange?.value?.start?.toDate() ? customForm.controls.dateRange.value.start.toDate().toDateString() : 'null' }}
+        <br/>
+        Selected Date end: {{ customForm.controls.dateRange?.value?.end?.toDate() ? customForm.controls.dateRange.value.end.toDate().toDateString() : 'null' }}
         <br/>
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
         <br/><br/>
-        <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
+        <div>Selected Date: {{selectedDay.date.toDateString()}}</div>
+        <div>Selected Date: {{selectedDay2.toDate().toDateString()}}</div>`
 })
 export class CalendarSingleExampleComponent {
     selectedDay = {
         date: new Date()
     };
+    customForm = new FormGroup({
+        date: new FormControl({ date: FdDate.getToday() }),
+        dateRange: new FormControl({ start: null, end: null })
+    });
 
     selectedDay2: FdDate = new FdDate(2018, 10, 30);
 
@@ -49,5 +76,9 @@ export class CalendarSingleExampleComponent {
             const day = d.getDay();
             return day === 3;
         };
+        this.myDisableFunction2 = function(d: FdDate) {
+            const day = d.toDate().getDay();
+            return day === 3;
+        }
     }
 }

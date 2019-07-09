@@ -1,8 +1,9 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 let calendarUniqueId: number = 0;
 
@@ -23,12 +24,22 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     selector: 'fd-calendar2',
     templateUrl: './calendar2.component.html',
     styleUrls: ['./calendar2.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => Calendar2Component),
+            multi: true
+        }
+    ]
 })
-export class Calendar2Component implements OnInit {
+export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
+
+    @Input()
+    public selectedRangeDate: { start: FdDate, end: FdDate };
 
     @Input()
     public activeView: FdCalendarView = 'day';
@@ -56,6 +67,11 @@ export class Calendar2Component implements OnInit {
     public readonly activeViewChange: EventEmitter<FdCalendarView>
         = new EventEmitter<FdCalendarView>();
 
+    @Output()
+    selectedDateChange = new EventEmitter<FdDate>();
+
+    @Output()
+    selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -106,12 +122,54 @@ export class Calendar2Component implements OnInit {
         return false;
     };
 
+    /** @hidden */
+    onChange: Function = () => {};
+    /** @hidden */
+    onTouched: Function = () => {};
+
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n) {
     }
 
     ngOnInit() {
         this.prepareDisplayedView();
+    }
+
+    /** Function that provides  */
+    writeValue(selected: { date?: FdDate, start?: FdDate, end?: FdDate }): void {
+        if (selected) {
+            console.log(selected);
+            if (selected.date && this.calType === 'single') {
+                this.selectedDate = selected.date;
+            }
+            if ((selected.start || selected.end) && this.calType === 'range') {
+                this.selectedRangeDate = { start: selected.start, end: selected.end };
+            }
+        }
+    }
+
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState?(isDisabled: boolean): void {
+        // Not needed
+    }
+
+    public selectedDateChanged(date: FdDate) {
+        this.selectedDate = date;
+        this.onChange({date: date});
+        this.selectedDateChange.emit(date);
+    }
+
+    public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
+        this.selectedRangeDate = dates;
+        this.onChange(dates);
+        this.selectedRangeDateChange.emit(dates);
     }
 
     public displayNextMonth() {
