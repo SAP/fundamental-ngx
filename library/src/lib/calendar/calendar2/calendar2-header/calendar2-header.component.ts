@@ -24,6 +24,10 @@ export class Calendar2HeaderComponent implements OnInit {
     @Input()
     currentlyDisplayed: CalendarCurrent;
 
+    /** Id */
+    @Input()
+    id: string;
+
     /** Event emitted when the active view should change. */
     @Output()
     readonly activeViewChange: EventEmitter<string>

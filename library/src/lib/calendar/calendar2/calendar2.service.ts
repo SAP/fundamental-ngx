@@ -11,6 +11,14 @@ export class Calendar2Service {
         }
     }
 
+    public datesEqual(date1: FdDate, date2: FdDate): boolean {
+        if (!date1 || !date2) {
+            return false;
+        } else {
+            return date1.toDate().toDateString() === date2.toDate().toDateString();
+        }
+    }
+
     public convertDateToFDDate(date: Date): FdDate {
         return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
     }

@@ -1,5 +1,6 @@
 <fd-calendar2-header [currentlyDisplayed]="currentlyDisplayed"
                      [(activeView)]="activeView"
+                     [id]="id"
                     (nextClicked)="displayNextMonth()"
                     (previousClicked)="displayPreviousMonth()"
 ></fd-calendar2-header>
@@ -20,6 +21,7 @@
                            [blockRangeStartFunction]="blockRangeStartFunction"
                            [calType]="calType"
                            [id]="id"
+                           [focusEscapeFunction]="escapeFocusFunction"
                            (nextMonthSelect)="displayNextMonth()"
                            (previousMonthSelect)="displayPreviousMonth()"
     ></fd-calendar2-day-view>

@@ -195,8 +195,6 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             if (this.focusEscapeFunction) {
                 event.preventDefault();
                 this.focusEscapeFunction();
-            } else {
-                this.focusElement('arrowLeft');
             }
         } else {
             switch (event.code) {
@@ -393,6 +391,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         const prevMonthLastDay = amountOfDaysInCurrentMonth;
         let prevMonthLastWeekDay = prevMonthLastDate.toDate().getDay() - this.startingDayOfWeek;
 
+        /** Checking if there are some days cut by startingDayOfWeek option
+         *  If yes, there is whole week added, to avoid hiding
+         * */
         if (prevMonthLastWeekDay < 0) {
             prevMonthLastWeekDay = prevMonthLastWeekDay + 7;
         }
@@ -436,12 +437,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
-                (this.calType === 'single' && this.datesEqual(fdDate, this.selectedDate)) ||
-                (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.start)) ||
-                (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.end))
+                (this.calType === 'single' && this.service.datesEqual(fdDate, this.selectedDate)) ||
+                (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.start)) ||
+                (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.end))
             ),
-            selectedFirst: (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.start)),
-            selectedLast: (this.selectedRangeDate && this.datesEqual(fdDate, this.selectedRangeDate.end)),
+            selectedFirst: (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.start)),
+            selectedLast: (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
                 (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
                 (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))
@@ -467,13 +468,5 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
 
         return day;
-    }
-
-    private datesEqual(date1: FdDate, date2: FdDate): boolean {
-        if (!date1 || !date2) {
-            return false;
-        } else {
-            return date1.toDate().toDateString() === date2.toDate().toDateString();
-        }
     }
 }

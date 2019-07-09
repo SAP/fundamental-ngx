@@ -5,7 +5,7 @@ import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Calendar2DayViewComponent } from './calendar2-views/calendar2-day-view/calendar2-day-view.component';
-import { DateFormatParser } from '..';
+import { DateFormatParser } from '../format/date-parser';
 import { Calendar2Service } from './calendar2.service';
 
 let calendarUniqueId: number = 0;
@@ -87,7 +87,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
     @Output()
-    dateStringChanged = new EventEmitter<string>();
+    dateValidityChanged = new EventEmitter<{isValid: boolean}>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -142,6 +142,13 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     onChange: Function = () => {};
     /** @hidden */
     onTouched: Function = () => {};
+
+    @Input()
+    escapeFocusFunction: Function = () => {
+        if (document.getElementById(this.id + '-left-arrow')) {
+            document.getElementById(this.id + '-left-arrow').focus();
+        }
+    };
 
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n,
@@ -203,20 +210,20 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
         }
-        this.dayViewComponent.focusActiveDay();
     }
 
     /** @hidden */
     dateStringUpdate(date: string) {
         if (this.calType === 'single') {
             const fdDate = this.service.convertDateToFDDate(this.dateAdapter.parse(date));
-            console.log(fdDate);
+
             this.invalidDate = !this.validateDateFromDatePicker(fdDate);
             if (!this.invalidDate) {
                 this.selectedDate = fdDate;
+                this.setCurrentlyDisplayed(fdDate)
             } else {
-                // this.isInvalidDateInput.emit(this.invalidDate);
-                // this.resetSelection();
+                this.selectedDate = FdDate.getToday();
+                this.setCurrentlyDisplayed(this.selectedDate);
             }
         } else {
             const currentDates = date.split(this.dateAdapter.rangeDelimiter);
@@ -231,11 +238,16 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
                 } else {
                     this.selectedRangeDate = { start: secondDate, end: firstDate }
                 }
-            } else {
-                // this.resetSelection();
-                // this.isInvalidDateInput.emit(this.invalidDate);
+                this.setCurrentlyDisplayed(this.selectedRangeDate.start);
             }
         }
+
+        this.dateValidityChanged.emit({isValid: !this.invalidDate});
+
+    }
+
+    private setCurrentlyDisplayed(fdDate: FdDate) {
+        this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
     }
 
     private validateDateFromDatePicker(date: FdDate): boolean {
