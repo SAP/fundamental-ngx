@@ -31,7 +31,7 @@ import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { SearchInputModule } from './search-input/search-input.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
-import { SplitButtonModule } from './split-button';
+import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
 import { TileModule } from './tile/tile.module';
@@ -53,7 +53,6 @@ import { FormsModule } from '@angular/forms';
         BreadcrumbModule,
         ButtonModule,
         ButtonGroupModule,
-        SplitButtonModule,
         CalendarModule,
         ComboboxModule,
         DatePickerModule,
@@ -79,6 +78,7 @@ import { FormsModule } from '@angular/forms';
         SearchInputModule,
         ShellbarModule,
         SideNavigationModule,
+        SplitButtonModule,
         TableModule,
         TabsModule,
         TileModule,
