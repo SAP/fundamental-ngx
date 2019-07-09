@@ -1,9 +1,12 @@
-import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Calendar2DayViewComponent } from './calendar2-views/calendar2-day-view/calendar2-day-view.component';
+import { DateFormatParser } from '..';
+import { Calendar2Service } from './calendar2.service';
 
 let calendarUniqueId: number = 0;
 
@@ -35,6 +38,10 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 })
 export class Calendar2Component implements OnInit, ControlValueAccessor {
 
+    @ViewChild('dayViewComponent') dayViewComponent: Calendar2DayViewComponent;
+
+    invalidDate: boolean = false;
+
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
 
@@ -44,8 +51,14 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     @Input()
     public activeView: FdCalendarView = 'day';
 
+    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
     @Input()
     public startingDayOfWeek: DaysOfWeek = 1;
+
+    @Input()
+    public set stringDate(str: string) {
+        this.dateStringUpdate(str);
+    }
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -72,6 +85,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     @Output()
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
+
+    @Output()
+    dateStringChanged = new EventEmitter<string>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -128,7 +144,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     onTouched: Function = () => {};
 
     constructor(public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n) {
+                public calendarI18n: CalendarI18n,
+                public dateAdapter: DateFormatParser,
+                private service: Calendar2Service) {
     }
 
     ngOnInit() {
@@ -138,7 +156,6 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     /** Function that provides  */
     writeValue(selected: { date?: FdDate, start?: FdDate, end?: FdDate }): void {
         if (selected) {
-            console.log(selected);
             if (selected.date && this.calType === 'single') {
                 this.selectedDate = selected.date;
             }
@@ -186,6 +203,59 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
         }
+        this.dayViewComponent.focusActiveDay();
+    }
+
+    /** @hidden */
+    dateStringUpdate(date: string) {
+        if (this.calType === 'single') {
+            const fdDate = this.service.convertDateToFDDate(this.dateAdapter.parse(date));
+            console.log(fdDate);
+            this.invalidDate = !this.validateDateFromDatePicker(fdDate);
+            if (!this.invalidDate) {
+                this.selectedDate = fdDate;
+            } else {
+                // this.isInvalidDateInput.emit(this.invalidDate);
+                // this.resetSelection();
+            }
+        } else {
+            const currentDates = date.split(this.dateAdapter.rangeDelimiter);
+            const firstDate = this.service.convertDateToFDDate(this.dateAdapter.parse(currentDates[0]));
+            const secondDate = this.service.convertDateToFDDate(this.dateAdapter.parse(currentDates[1]));
+            this.invalidDate =
+                !this.validateDateFromDatePicker(firstDate) || !this.validateDateFromDatePicker(secondDate);
+
+            if (!this.invalidDate) {
+                if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
+                    this.selectedRangeDate = { start: firstDate, end: secondDate }
+                } else {
+                    this.selectedRangeDate = { start: secondDate, end: firstDate }
+                }
+            } else {
+                // this.resetSelection();
+                // this.isInvalidDateInput.emit(this.invalidDate);
+            }
+        }
+    }
+
+    private validateDateFromDatePicker(date: FdDate): boolean {
+        if (!date) {
+            return false;
+        }
+
+        if (!date.year || !date.month || !date.day) {
+            return false;
+        }
+
+        if (date.year < 1000 || date.year > 3000 || date.month < 1 || date.month > 12) {
+            return false;
+        }
+
+        if (date.day < 1 || date.day > this.service.getDaysInMonth(date.month, date.year)) {
+            return false;
+        }
+
+        return true;
     }
 
     private prepareDisplayedView(): void {

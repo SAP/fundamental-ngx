@@ -38,6 +38,14 @@ import { FormControl, FormGroup } from '@angular/forms';
         <br/>
         Selected Date end: {{ customForm.controls.dateRange?.value?.end?.toDate() ? customForm.controls.dateRange.value.end.toDate().toDateString() : 'null' }}
         <br/>
+        
+        <fd-calendar2
+            [stringDate]="str"
+        ></fd-calendar2>
+        <input [(ngModel)]="str" type="text">
+        <button fd-button>Get Date</button>
+        
+        
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
         <br/><br/>
         <div>Selected Date: {{selectedDay.date.toDateString()}}</div>
@@ -51,6 +59,8 @@ export class CalendarSingleExampleComponent {
         date: new FormControl({ date: FdDate.getToday() }),
         dateRange: new FormControl({ start: null, end: null })
     });
+
+    str
 
     selectedDay2: FdDate = new FdDate(2018, 10, 30);
 

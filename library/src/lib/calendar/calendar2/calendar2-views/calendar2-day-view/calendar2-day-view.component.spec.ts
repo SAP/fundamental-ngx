@@ -190,9 +190,10 @@ describe('Calendar2DayViewComponent', () => {
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: component.dayViewGrid.length - 1 });
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[0][2].id);
+        expect(component.currentlyDisplayed.month).toBe(11);
     });
 
-    it('Should Switch to next month and focus last row cell with ArrowUp', () => {
+    it('Should Switch to previous month and focus last row cell with ArrowUp', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
 
@@ -207,6 +208,7 @@ describe('Calendar2DayViewComponent', () => {
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 0, y: 0 });
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[component.dayViewGrid.length - 1][0].id);
+        expect(component.currentlyDisplayed.month).toBe(9);
     });
 
     it('Should Switch to next month and focus first cell after ArrowRight on last cell', () => {
@@ -226,6 +228,7 @@ describe('Calendar2DayViewComponent', () => {
             { x: component.dayViewGrid[0].length - 1, y: component.dayViewGrid.length - 1 }
         );
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[0][0].id);
+        expect(component.currentlyDisplayed.month).toBe(11);
     });
 
     it('Should Switch to previous month and focus last cell after ArrowLeft on first cell', () => {
@@ -245,5 +248,6 @@ describe('Calendar2DayViewComponent', () => {
         expect(focusSpy).toHaveBeenCalledWith(
             component.dayViewGrid[component.dayViewGrid.length - 1][component.dayViewGrid[0].length - 1].id
         );
+        expect(component.currentlyDisplayed.month).toBe(9);
     });
 });

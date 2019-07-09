@@ -14,6 +14,7 @@ import { FdDate } from '../../models/fd-date';
 import { CalendarCurrent } from '../../models/calendar-current';
 import { CalendarType, DaysOfWeek } from '../../calendar2.component';
 import { CalendarDay } from '../../models/calendar-day';
+import { Calendar2Service } from '../../calendar2.service';
 
 @Component({
     selector: 'fd-calendar2-day-view',
@@ -23,25 +24,29 @@ import { CalendarDay } from '../../models/calendar-day';
 })
 export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnChanges {
 
-
+    /** Currently displayed month and year for days */
     @Input()
     public currentlyDisplayed: CalendarCurrent;
 
+    /** @hidden */
     @HostBinding('class.fd-calendar__dates')
     private fdCalendarDateViewClass: boolean = true;
 
-    dayViewGrid: CalendarDay[][];
-    newFocusedDayId: string = '';
+    /** Actual day grid with previous/current/next month days */
+    public dayViewGrid: CalendarDay[][];
 
+    /** @hidden */
+    public newFocusedDayId: string = '';
+
+    /** The currently selected FdDate model in single mode. */
     @Input()
     public selectedDate: FdDate;
 
-    @Input()
-    public range: boolean = false;
-
+    /** The currently selected FdDates model start and end in range mode. */
     @Input()
     public selectedRangeDate: { start: FdDate, end: FdDate };
 
+    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
     @Input()
     public startingDayOfWeek: DaysOfWeek;
 
@@ -52,18 +57,23 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     /** Id of the calendar. If none is provided, one will be generated. */
     @Input() id: string;
 
+    /** Function that allows to specify which function would be called, when focus wants to escape */
     @Input()
     focusEscapeFunction: Function;
 
+    /** Event emitted always, when model is changed in range mode */
     @Output()
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
+    /** Event emitted always, when next month is selected, by focus */
     @Output()
     nextMonthSelect = new EventEmitter();
 
+    /** Event emitted always, when previous month is selected, by focus */
     @Output()
     previousMonthSelect = new EventEmitter();
 
+    /** Event emitted always, when model is changed in single mode */
     @Output()
     selectedDateChange = new EventEmitter<FdDate>();
 
@@ -116,11 +126,17 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         return false;
     };
 
+    /** @hidden */
     constructor(
         private calendarI18n: CalendarI18n,
-        private eRef: ElementRef
+        private eRef: ElementRef,
+        private service: Calendar2Service
     ) {}
 
+    /**
+     * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
+     * @param day CalendarDay object to be selected.
+     */
     selectDate(day: CalendarDay) {
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
@@ -147,10 +163,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
     }
 
+    /** @hidden */
     ngOnInit() {
         this.buildDayViewGrid();
     }
 
+    /** @hidden */
     get shortWeekDays(): string[] {
         return this.calendarI18n.getAllShortWeekdays()
             .slice(this.startingDayOfWeek)
@@ -160,10 +178,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             .map(weekday => weekday[0].toLocaleUpperCase());
     }
 
-    get daysInCurentMonth() {
-        return this.getDaysInMonth(this.currentlyDisplayed.month, this.currentlyDisplayed.year);
-    }
-
+    /** @hidden */
     get selectCounter(): number {
         if (!this.selectedRangeDate || !this.selectedRangeDate.start) {
             return 0;
@@ -174,6 +189,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
     }
 
+    /** @hidden */
     onKeydownDayHandler(event, cell: CalendarDay, grid: { x: number, y: number }) {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
@@ -245,6 +261,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
     }
 
+    /** @hidden */
     public ngOnChanges(changes: SimpleChanges): void {
         this.buildDayViewGrid();
     }
@@ -255,6 +272,31 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             this.focusElement(this.newFocusedDayId);
             this.newFocusedDayId = null;
         }
+    }
+
+    /** @hidden */
+    public focusElement(elementSelector) {
+        const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
+        if (elementToFocus) {
+            elementToFocus.focus();
+        }
+    }
+
+    /** Active day means that with tabindex = 0, it's selected day or today or first day*/
+    public focusActiveDay() {
+        this.newFocusedDayId = this.getActiveCell(
+            this.calendarDayList.filter(cell => cell.monthStatus === 'current')
+        ).id;
+    }
+
+    /** Function that gives array of all displayed CalendarDays  */
+    public get calendarDayList(): CalendarDay[] {
+        return this.dayViewGrid.reduce((a: CalendarDay[], b: CalendarDay[]) => {
+            if (!b) {
+                b = [];
+            }
+            return b.concat(a);
+        });
     }
 
     private selectPreviousMonth() {
@@ -277,14 +319,6 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         this.buildDayViewGrid();
         this.nextMonthSelect.emit();
         return;
-    }
-
-    /** @hidden */
-    public focusElement(elementSelector) {
-        const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
-        if (elementToFocus) {
-            elementToFocus.focus();
-        }
     }
 
     private populateCalendar(): CalendarDay[] {
@@ -320,23 +354,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     private getDaysInMonth(month: number, year: number): number {
-        if (month === 2) {
-            return this.isLeapYear(year) ? 29 : 28;
-        } else if ((month % 2 === 0 && month < 8) || (month % 2 === 1 && month > 8)) {
-            return 30;
-        } else {
-            return 31;
-        }
-    }
-
-    private isLeapYear(year: number): boolean {
-        if (year % 4 !== 0) {
-            return false;
-        } else if (year % 400 === 0) {
-            return true;
-        } else {
-            return year % 100 !== 0;
-        }
+        return this.service.getDaysInMonth(month, year);
     }
 
     private getCurrentMonthDays(): CalendarDay[] {

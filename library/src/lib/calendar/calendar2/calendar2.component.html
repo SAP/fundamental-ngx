@@ -5,6 +5,7 @@
 ></fd-calendar2-header>
 <ng-container [ngSwitch]="activeView">
     <fd-calendar2-day-view *ngSwitchCase="'day'"
+                           #dayViewComponent
                            [selectedDate]="selectedDate"
                            (selectedDateChange)="selectedDateChanged($event)"
                            [selectedRangeDate]="selectedRangeDate"
