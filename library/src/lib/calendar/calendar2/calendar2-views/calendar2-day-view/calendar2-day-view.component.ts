@@ -4,9 +4,9 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    Input,
+    Input, OnChanges,
     OnInit,
-    Output,
+    Output, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarI18n } from '../../../i18n/calendar-i18n';
@@ -21,21 +21,11 @@ import { CalendarDay } from '../../models/calendar-day';
     styleUrls: ['./calendar2-day-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
+export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnChanges {
 
-    get currentlyDisplayed(): CalendarCurrent {
-        return this._currentlyDisplayed;
-    }
 
     @Input()
-    set currentlyDisplayed(value: CalendarCurrent) {
-        if (this._currentlyDisplayed !== value) {
-            this._currentlyDisplayed = value;
-            this.buildDayViewGrid();
-        }
-    }
-
-    private _currentlyDisplayed: CalendarCurrent;
+    public currentlyDisplayed: CalendarCurrent;
 
     @HostBinding('class.fd-calendar__dates')
     private fdCalendarDateViewClass: boolean = true;
@@ -129,8 +119,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     constructor(
         private calendarI18n: CalendarI18n,
         private eRef: ElementRef
-    ) {
-    }
+    ) {}
 
     selectDate(day: CalendarDay) {
         if (!day.blocked && !day.disabled) {
@@ -163,11 +152,16 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     }
 
     get shortWeekDays(): string[] {
-        return this.calendarI18n.getAllShortWeekdays().map(weekday => weekday[0].toLocaleUpperCase());
+        return this.calendarI18n.getAllShortWeekdays()
+            .slice(this.startingDayOfWeek)
+            .concat(
+                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek
+                ))
+            .map(weekday => weekday[0].toLocaleUpperCase());
     }
 
     get daysInCurentMonth() {
-        return this.getDaysInMonth(this._currentlyDisplayed.month, this._currentlyDisplayed.year);
+        return this.getDaysInMonth(this.currentlyDisplayed.month, this.currentlyDisplayed.year);
     }
 
     get selectCounter(): number {
@@ -189,7 +183,6 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
                 this.focusElement('arrowLeft');
             }
         } else {
-
             switch (event.code) {
                 case('Space'):
                 case('Enter'): {
@@ -198,7 +191,6 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
                     this.newFocusedDayId = cell.id;
                     break;
                 }
-
                 case('ArrowUp'): {
                     event.preventDefault();
                     if (grid.y > 0) {
@@ -253,6 +245,10 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         }
     }
 
+    public ngOnChanges(changes: SimpleChanges): void {
+        this.buildDayViewGrid();
+    }
+
     /** @hidden */
     ngAfterViewChecked() {
         if (this.newFocusedDayId) {
@@ -263,9 +259,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
 
     private selectPreviousMonth() {
         if (this.currentlyDisplayed.month > 1) {
-            this._currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month - 1 };
+            this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month - 1 };
         } else {
-            this._currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         }
         this.buildDayViewGrid();
         this.previousMonthSelect.emit();
@@ -274,9 +270,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
 
     private selectNextMonth() {
         if (this.currentlyDisplayed.month > 1) {
-            this._currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
+            this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
         } else {
-            this._currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         }
         this.buildDayViewGrid();
         this.nextMonthSelect.emit();
@@ -304,8 +300,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     }
 
     private buildDayViewGrid(): void {
-        if (!this._currentlyDisplayed) {
-            this._currentlyDisplayed = { month: FdDate.getToday().month, year: FdDate.getToday().year };
+        if (!this.currentlyDisplayed) {
+            if (this.selectedDate) {
+                this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
+            } else {
+                this.currentlyDisplayed = { month: FdDate.getToday().month, year: FdDate.getToday().year };
+            }
         }
 
         const calendarDays = this.populateCalendar();
@@ -316,7 +316,6 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
         }
 
         this.dayViewGrid = dayViewGrid;
-
         return;
     }
 
@@ -341,8 +340,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     }
 
     private getCurrentMonthDays(): CalendarDay[] {
-        const month = this._currentlyDisplayed.month;
-        const year = this._currentlyDisplayed.year;
+
+        const month = this.currentlyDisplayed.month;
+        const year = this.currentlyDisplayed.year;
         const calendarDays: CalendarDay[] = [];
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
@@ -368,12 +368,16 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
     }
 
     private getPreviousMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
-        const month = this._currentlyDisplayed.month > 1 ? this._currentlyDisplayed.month - 1 : 12;
-        const year = this._currentlyDisplayed.month > 1 ? this._currentlyDisplayed.year : this._currentlyDisplayed.year - 1;
+        const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
+        const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
-        const prevMonthLastDate = new FdDate(year, month, amountOfDaysInCurrentMonth + 1);
+        const prevMonthLastDate = new FdDate(year, month, amountOfDaysInCurrentMonth);
         const prevMonthLastDay = amountOfDaysInCurrentMonth;
         let prevMonthLastWeekDay = prevMonthLastDate.toDate().getDay() - this.startingDayOfWeek;
+
+        if (prevMonthLastWeekDay < 0) {
+            prevMonthLastWeekDay = prevMonthLastWeekDay + 7;
+        }
 
         if (prevMonthLastWeekDay < 6) {
             while (prevMonthLastWeekDay >= 0) {
@@ -388,8 +392,8 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked {
 
     private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         let nextMonthDisplayedDays: number = 0;
-        const month = this._currentlyDisplayed.month > 1 ? this._currentlyDisplayed.month - 1 : 12;
-        const year = this._currentlyDisplayed.month > 1 ? this._currentlyDisplayed.year : this._currentlyDisplayed.year - 1;
+        const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
+        const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
 
         // The calendar grid can have either 5 (35 days) or 6 (42 days) weeks
         // depending on the week day of the first day of the current month

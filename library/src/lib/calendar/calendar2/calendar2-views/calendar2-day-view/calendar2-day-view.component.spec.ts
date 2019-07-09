@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Calendar2DayViewComponent } from './calendar2-day-view.component';
 import { FdDate } from '../../models/fd-date';
+import { CalendarDay } from '../../models/calendar-day';
 
 describe('Calendar2DayViewComponent', () => {
     let component: Calendar2DayViewComponent;
@@ -32,6 +33,20 @@ describe('Calendar2DayViewComponent', () => {
             expect(date.toDate().toDateString).toBe(dayPicked.date.toDate().toDateString)
         );
         component.selectDate(dayPicked);
+    });
+
+    it('Should mark selected single date', () => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.selectedDate = new FdDate(2018, 10, 20);
+        component.ngOnInit();
+        const calendarDays: CalendarDay[] = component.dayViewGrid.reduce((a: CalendarDay[], b: CalendarDay[]) => {
+            if (!b) {
+                b = [];
+            }
+            return b.concat(a);
+        });
+        const selected = calendarDays.find(cell => cell.selected);
+        expect(selected.date.toDate().toDateString).toBe(component.selectedDate.toDate().toDateString);
     });
 
     it('Should Select Proper First Range Date', () => {
@@ -102,7 +117,8 @@ describe('Calendar2DayViewComponent', () => {
         component.ngAfterViewChecked();
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowDown', preventDefault: () => {}
+            code: 'ArrowDown', preventDefault: () => {
+            }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[3][2].id);
@@ -118,7 +134,8 @@ describe('Calendar2DayViewComponent', () => {
         component.ngAfterViewChecked();
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowUp', preventDefault: () => {}
+            code: 'ArrowUp', preventDefault: () => {
+            }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[1][2].id);
@@ -134,7 +151,8 @@ describe('Calendar2DayViewComponent', () => {
         component.ngAfterViewChecked();
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {}
+            code: 'ArrowLeft', preventDefault: () => {
+            }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[2][1].id);
@@ -150,7 +168,8 @@ describe('Calendar2DayViewComponent', () => {
         component.ngAfterViewChecked();
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {}
+            code: 'ArrowRight', preventDefault: () => {
+            }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
         expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[2][3].id);
@@ -200,7 +219,8 @@ describe('Calendar2DayViewComponent', () => {
         component.ngAfterViewChecked();
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {}
+            code: 'ArrowRight', preventDefault: () => {
+            }
         };
         component.onKeydownDayHandler(event, focusFirstCell,
             { x: component.dayViewGrid[0].length - 1, y: component.dayViewGrid.length - 1 }
@@ -218,7 +238,8 @@ describe('Calendar2DayViewComponent', () => {
         component.ngAfterViewChecked();
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {}
+            code: 'ArrowLeft', preventDefault: () => {
+            }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 0, y: 0 });
         expect(focusSpy).toHaveBeenCalledWith(

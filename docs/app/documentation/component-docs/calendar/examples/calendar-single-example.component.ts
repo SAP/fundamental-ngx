@@ -7,12 +7,13 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/mod
         <fd-calendar [calType]="'single'"
                      [(ngModel)]="selectedDay"
                      [blockFunction]="myBlockFunction"
+                     [startingDayOfWeek]="4"
                      [disableFunction]="myDisableFunction">
         </fd-calendar>
         
         <fd-calendar2
             [disableFunction]="myDisableFunction2"
-            [calType]="'range'"
+            [calType]="'single'"
         ></fd-calendar2>
         <br/>
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
@@ -23,6 +24,8 @@ export class CalendarSingleExampleComponent {
     selectedDay = {
         date: new Date()
     };
+
+    selectedDay2: FdDate = new FdDate(2018, 10, 30);
 
     myDisableFunction = function(d: Date): boolean {
         const day = d.getDay();
