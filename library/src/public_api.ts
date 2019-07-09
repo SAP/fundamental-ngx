@@ -10,7 +10,7 @@ export * from './lib/breadcrumb/public_api';
 export * from './lib/button/public_api';
 export * from './lib/button-group/public_api';
 export * from './lib/calendar/public_api';
-export * from './lib/combobox-input/public_api';
+export * from './lib/combobox/public_api';
 export * from './lib/date-picker/public_api';
 export * from './lib/datetime-picker/public_api';
 export * from './lib/file-input/public_api';

@@ -7,7 +7,7 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { ComboboxModule } from './combobox-input/combobox.module';
+import { ComboboxModule } from './combobox/combobox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
