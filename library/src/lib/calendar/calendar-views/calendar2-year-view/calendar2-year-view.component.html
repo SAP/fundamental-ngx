@@ -1,3 +1,4 @@
-<p>
-  calendar2-year-view works!
-</p>
+<ul class="fd-calendar__list">
+  <li *ngFor=" let calendarYear of calendarYearList" (click)="selectYear(calendarYear)" class="fd-calendar__item">
+    {{ calendarYear }}</li>
+</ul>
