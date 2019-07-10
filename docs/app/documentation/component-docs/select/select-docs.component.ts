@@ -15,6 +15,9 @@ import * as selectAddingSrcT from '!raw-loader!./examples/select-adding-example/
 import * as selectFormSrcH from '!raw-loader!./examples/select-forms/select-forms.component.html';
 import * as selectFormSrcT from '!raw-loader!./examples/select-forms/select-forms.component.ts';
 
+import * as selectViewValueH from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.html';
+import * as selectViewValueT from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.ts';
+
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
@@ -31,6 +34,8 @@ export class SelectDocsComponent implements OnInit {
     selectAddingTs = selectAddingSrcT;
     selectFormHtml = selectFormSrcH;
     selectFormTs = selectFormSrcT;
+    selectViewValueHtml = selectViewValueH;
+    selectViewValueTs = selectViewValueT;
 
     constructor() {
     }

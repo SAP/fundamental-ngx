@@ -22,4 +22,34 @@ describe('OptionComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should be focusable', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should have the appropriate classes applied', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should be selectable programmatically', () => {
+        // Include event test
+        expect(component).toBeTruthy();
+    });
+
+    it('should be selectable by click', () => {
+        // Include event test
+        expect(component).toBeTruthy();
+    });
+
+    it('should be selectable by keyboard', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should make HTML Element available', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should support custom view value', () => {
+        expect(component).toBeTruthy();
+    });
 });

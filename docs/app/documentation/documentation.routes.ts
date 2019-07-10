@@ -259,6 +259,11 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.sideNavigation}}
                 ]
             },
+            { path: 'select', component: SelectHeaderComponent, children: [
+                    { path: '', component: SelectDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.select}}
+                ]
+            },
             { path: 'splitButton', component: SplitButtonHeaderComponent, children: [
                     { path: '', component: SplitButtonDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.splitButton}}

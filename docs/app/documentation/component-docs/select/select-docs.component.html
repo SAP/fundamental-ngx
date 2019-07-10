@@ -18,6 +18,17 @@
 <code-example [code]="selectProgTs" [language]="'typescript'"></code-example>
 
 <separator></separator>
+<h2>Custom View Value</h2>
+<description>
+    The value which appears inside the trigger can be customized easily through the <code>viewValue</code> input.
+</description>
+<component-example [name]="'ex3'">
+    <fd-select-view-value-example></fd-select-view-value-example>
+</component-example>
+<code-example [code]="selectViewValueHtml" [language]="'HTML'"></code-example>
+<code-example [code]="selectViewValueTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
 <h2>Nested Options</h2>
 <description>
     Instances of the fd-option component will be found regardless of how deep in the hierarchy they are.
@@ -26,7 +37,7 @@
 
     Note that accessibility generally requires some text-content to be present in the actual option element.
 </description>
-<component-example [name]="'ex3'">
+<component-example [name]="'ex4'">
     <fd-select-nested-options></fd-select-nested-options>
 </component-example>
 <code-example [code]="selectNestedHtml" [language]="'HTML'"></code-example>
@@ -37,7 +48,7 @@
     The default trigger can be replaced by providing a template reference to the appropriate input.
     Note that the top-level element must be tab-indexed for the keyboard support to function correctly.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-select-custom-trigger></fd-select-custom-trigger>
 </component-example>
 <code-example [code]="customTriggerHtml" [language]="'HTML'"></code-example>
@@ -50,7 +61,7 @@
     will become undefined. This was implemented to prevent a user from keeping the active value of a previously
     removed option.
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-select-adding-example></fd-select-adding-example>
 </component-example>
 <code-example [code]="selectAddingHtml" [language]="'HTML'"></code-example>

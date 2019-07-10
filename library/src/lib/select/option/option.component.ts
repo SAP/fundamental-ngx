@@ -7,7 +7,7 @@ import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, 
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.fd-option-default-custom]': 'true',
-        '[class.is-disabled]': 'disabled',
+        '[attr.aria-disabled]': 'disabled',
         '[tabindex]': 'disabled ? -1 : 0',
         'role': 'option',
     }
@@ -41,7 +41,7 @@ export class OptionComponent implements OnInit {
 
     constructor(private elRef: ElementRef) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (this.selected && !this.disabled) {
             this.focus();
         }

@@ -1,12 +1,12 @@
 import {
-    AfterContentInit, AfterViewInit, ChangeDetectorRef,
+    AfterContentInit,
     Component,
     ContentChildren,
     EventEmitter, forwardRef, HostBinding, HostListener,
     Input, OnChanges, OnDestroy,
     OnInit,
     Output,
-    QueryList, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef,
+    QueryList, SimpleChanges, TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -14,7 +14,10 @@ import { OptionComponent } from './option/option.component';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-// TODO allow picking options that have the same value
+// TODO allow picking options that have the same value, maybe by comparing value & index?
+// TODO Add tests
+// TODO add popover options
+// TODO add min-width option for popover instead of strict width
 // TODO Support disabled options, keyboard nav of options etc
 @Component({
     selector: 'fd-select',
@@ -34,13 +37,10 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
         'role': 'listbox',
     }
 })
-export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
-
-    @ViewChild('customTrigger', { read: ViewContainerRef })
-    customTriggerContainer: ViewContainerRef;
 
     @ContentChildren(OptionComponent, { descendants: true })
     options: QueryList<OptionComponent>;
@@ -85,7 +85,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
     onChange: Function = () => {};
     onTouched: Function = () => {};
 
-    constructor(private cdRef: ChangeDetectorRef) {}
+    constructor() {}
 
     ngOnInit(): void {}
 
@@ -96,17 +96,6 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
                     this.selectValue(this.value);
                 }
             });
-        }
-    }
-
-    ngAfterViewInit(): void {
-        if (this.triggerTemplate) {
-            this.customTriggerContainer.clear();
-            const context = {
-                $implicit: this
-            };
-            this.customTriggerContainer.createEmbeddedView(this.triggerTemplate, context);
-            this.cdRef.detectChanges();
         }
     }
 
@@ -161,7 +150,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterViewInit, AfterC
             this.selectValue(value);
         } else {
 
-            // Defer the selection of the value
+            // Defer the selection of the value to support forms
             Promise.resolve().then(() => {
                 if (this.options) {
                     this.selectValue(value);
