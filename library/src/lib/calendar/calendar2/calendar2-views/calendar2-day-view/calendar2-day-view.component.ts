@@ -131,13 +131,18 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         private calendarI18n: CalendarI18n,
         private eRef: ElementRef,
         private service: Calendar2Service
-    ) {}
+    ) {
+    }
 
     /**
      * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
      * @param day CalendarDay object to be selected.
      */
-    selectDate(day: CalendarDay) {
+    selectDate(day: CalendarDay, event?: MouseEvent) {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDate = day.date;
@@ -182,7 +187,11 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     get selectCounter(): number {
         if (!this.selectedRangeDate || !this.selectedRangeDate.start) {
             return 0;
-        } else if (this.selectedRangeDate.start && !this.selectedRangeDate.end) {
+        } else if (this.selectedRangeDate.start &&
+            (!this.selectedRangeDate.end ||
+                this.service.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
+            )
+        ) {
             return 1;
         } else if (this.selectedRangeDate.start && this.selectedRangeDate.end) {
             return 2;
@@ -230,7 +239,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
                     if (grid.x > 0) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x - 1].id;
                     } else if (grid.y > 0) {
-                        this.newFocusedDayId = this.dayViewGrid[grid.y - 1][this.dayViewGrid[0].length - 1].id
+                        this.newFocusedDayId = this.dayViewGrid[grid.y - 1][this.dayViewGrid[0].length - 1].id;
                     } else {
                         this.selectPreviousMonth();
                         this.newFocusedDayId =
@@ -244,7 +253,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
                     if (grid.x < this.dayViewGrid[0].length - 1) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x + 1].id;
                     } else if (grid.y < this.dayViewGrid.length - 1) {
-                        this.newFocusedDayId = this.dayViewGrid[grid.y + 1][0].id
+                        this.newFocusedDayId = this.dayViewGrid[grid.y + 1][0].id;
                     } else {
                         this.selectNextMonth();
                         this.newFocusedDayId = this.dayViewGrid[0][0].id;

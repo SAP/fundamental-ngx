@@ -1,4 +1,15 @@
-import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    forwardRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit,
+    Output, SimpleChanges,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
@@ -36,7 +47,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
         }
     ]
 })
-export class Calendar2Component implements OnInit, ControlValueAccessor {
+export class Calendar2Component implements OnInit, ControlValueAccessor, OnChanges {
 
     @ViewChild('dayViewComponent') dayViewComponent: Calendar2DayViewComponent;
 
@@ -44,6 +55,12 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
+
+    @Input()
+    public selectedRangeFirst: FdDate;
+
+    @Input()
+    public selectedRangeLast: FdDate;
 
     @Input()
     public selectedRangeDate: { start: FdDate, end: FdDate };
@@ -77,17 +94,26 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     id = 'fd-calendar-' + calendarUniqueId++;
 
     @Output()
-    public readonly activeViewChange: EventEmitter<FdCalendarView>
-        = new EventEmitter<FdCalendarView>();
+    public readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
     @Output()
     selectedDateChange = new EventEmitter<FdDate>();
 
     @Output()
+    selectedRangeFirstChange = new EventEmitter<FdDate>();
+
+    @Output()
+    selectedRangeLastChange = new EventEmitter<FdDate>();
+
+    @Output()
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
     @Output()
-    dateValidityChanged = new EventEmitter<{isValid: boolean}>();
+    dateValidityChange = new EventEmitter<{ isValid: boolean }>();
+
+
+    @Output()
+    closeCalendar = new EventEmitter();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -139,9 +165,11 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     };
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: Function = () => {
+    };
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: Function = () => {
+    };
 
     @Input()
     escapeFocusFunction: Function = () => {
@@ -158,6 +186,12 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     ngOnInit() {
         this.prepareDisplayedView();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.stringDate) {
+
+        }
     }
 
     /** Function that provides  */
@@ -186,14 +220,24 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     public selectedDateChanged(date: FdDate) {
         this.selectedDate = date;
-        this.onChange({date: date});
+        this.onChange({ date: date });
         this.selectedDateChange.emit(date);
+        this.closeCalendar.emit();
     }
 
     public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
-        this.selectedRangeDate = dates;
-        this.onChange(dates);
-        this.selectedRangeDateChange.emit(dates);
+        if (dates) {
+            if (dates.start && !this.service.datesEqual(dates.start, this.selectedRangeFirst)) {
+                this.selectedRangeFirst = dates.start;
+                this.selectedRangeFirstChange.emit(dates.start);
+            }
+            if (dates.end &&  !this.service.datesEqual(dates.end, this.selectedRangeLast)) {
+                this.selectedRangeLast = dates.end;
+                this.selectedRangeLastChange.emit(dates.end);
+            }
+            this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
+            this.selectedRangeDateChange.emit({ start: dates.start, end: dates.end ? dates.end : dates.start });
+        }
     }
 
     public displayNextMonth() {
@@ -214,36 +258,46 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     /** @hidden */
     dateStringUpdate(date: string) {
-        if (this.calType === 'single') {
-            const fdDate = this.service.convertDateToFDDate(this.dateAdapter.parse(date));
+        console.log(date);
+        if (date) {
+            if (this.calType === 'single') {
+                const fdDate = this.dateAdapter.parse(date);
 
-            this.invalidDate = !this.validateDateFromDatePicker(fdDate);
-            if (!this.invalidDate) {
-                this.selectedDate = fdDate;
-                this.setCurrentlyDisplayed(fdDate)
-            } else {
-                this.selectedDate = FdDate.getToday();
-                this.setCurrentlyDisplayed(this.selectedDate);
-            }
-        } else {
-            const currentDates = date.split(this.dateAdapter.rangeDelimiter);
-            const firstDate = this.service.convertDateToFDDate(this.dateAdapter.parse(currentDates[0]));
-            const secondDate = this.service.convertDateToFDDate(this.dateAdapter.parse(currentDates[1]));
-            this.invalidDate =
-                !this.validateDateFromDatePicker(firstDate) || !this.validateDateFromDatePicker(secondDate);
-
-            if (!this.invalidDate) {
-                if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
-                    this.selectedRangeDate = { start: firstDate, end: secondDate }
+                this.invalidDate = !this.validateDateFromDatePicker(fdDate);
+                if (!this.invalidDate) {
+                    this.selectedDate = fdDate;
+                    this.setCurrentlyDisplayed(fdDate);
+                    this.selectedDateChange.emit(this.selectedDate);
                 } else {
-                    this.selectedRangeDate = { start: secondDate, end: firstDate }
+                    this.selectedDate = FdDate.getToday();
+                    this.setCurrentlyDisplayed(this.selectedDate);
                 }
-                this.setCurrentlyDisplayed(this.selectedRangeDate.start);
+            } else {
+                const currentDates = date.split(this.dateAdapter.rangeDelimiter);
+                const firstDate = this.dateAdapter.parse(currentDates[0]);
+                const secondDate = this.dateAdapter.parse(currentDates[1]);
+                this.invalidDate =
+                    !this.validateDateFromDatePicker(firstDate) || !this.validateDateFromDatePicker(secondDate);
+
+                if (!this.invalidDate) {
+                    if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
+                        this.selectedRangeLast = firstDate;
+                        this.selectedRangeFirst = secondDate;
+                    } else {
+                        this.selectedRangeLast = secondDate;
+                        this.selectedRangeFirst = firstDate;
+                    }
+                    this.selectedRangeDate = {
+                        start: this.selectedRangeFirst,
+                        end: this.selectedRangeLast ? this.selectedRangeLast : this.selectedRangeFirst
+                    };
+                    this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                    this.setCurrentlyDisplayed(this.selectedRangeFirst);
+                }
             }
+
+            this.dateValidityChange.emit({ isValid: !this.invalidDate });
         }
-
-        this.dateValidityChanged.emit({isValid: !this.invalidDate});
-
     }
 
     private setCurrentlyDisplayed(fdDate: FdDate) {

@@ -16,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DateFormatParser } from '../calendar/format/date-parser';
 import { Placement } from 'popper.js';
+import { FdDate } from '../calendar/calendar2/models/fd-date';
 
 @Component({
     selector: 'fd-date-picker',
@@ -35,7 +36,7 @@ import { Placement } from 'popper.js';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class DatePickerComponent implements ControlValueAccessor {
     /** @hidden The value of the input */
     inputFieldDate = null;
     /** @hidden Whether the date input is invalid */
@@ -59,9 +60,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** The currently selected CalendarDay model */
     @Input()
-    selectedDay: CalendarDay = {
-        date: null
-    };
+    selectedDay: FdDate;
 
     /** Fired when a new date is selected. */
     @Output()
@@ -69,9 +68,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** The currently selected first CalendarDay in a range type calendar. */
     @Input()
-    selectedRangeFirst: CalendarDay = {
-        date: null
-    };
+    selectedRangeFirst: FdDate;
 
     /** Fired when the user selects a new first date in a range of dates is selected. */
     @Output()
@@ -79,9 +76,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** The currently selected last CalendarDay in a range type calendar. */
     @Input()
-    selectedRangeLast: CalendarDay = {
-        date: null
-    };
+    selectedRangeLast: FdDate;
 
     /** Fired when the user selects a new last date in a range of dates is selected. */
     @Output()
@@ -169,60 +164,72 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     /** @hidden */
     onTouched: any = () => {};
 
+    /** @hidden */
+    public closeFromCalendar() {
+        if (this.type  === 'single') {
+            console.log(this.type);
+            this.closeCalendar();
+        }
+    }
+
     /** Opens the calendar */
     openCalendar(e) {
         if (!this.disabled) {
-            this.onTouched({date: this.selectedDay.date});
+            this.onTouched({date: this.selectedDay});
             this.isOpen = true;
             this.getInputValue(e);
         }
     }
 
     /** Toggles the calendar open or closed */
-    toggleCalendar(e) {
-        this.onTouched({date: this.selectedDay.date});
+    public toggleCalendar(e) {
+        this.onTouched({date: this.selectedDay});
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
     }
 
     /** Closes the calendar if it is open */
-    closeCalendar() {
+    public closeCalendar() {
         if (this.isOpen) {
             this.isOpen = false;
         }
     }
 
-    /** @hidden */
-    updateDatePickerInputHandler(d) {
-        if (this.type === 'single') {
-            if (d.selectedDay.date) {
-                const newInputDate = this.dateAdapter.format(d.selectedDay.date);
-                if (this.inputFieldDate !== newInputDate) {
-                    this.inputFieldDate = newInputDate;
-                    this.selectedDay = d.selectedDay;
-                    this.selectedDayChange.emit(this.selectedDay);
-                    this.onChange({date: this.selectedDay.date});
-                }
-            }
-        } else {
-            if (d.selectedFirstDay.date) {
-                const newInputDates = this.dateAdapter.format(d.selectedFirstDay.date) + this.dateAdapter.rangeDelimiter
-                    + this.dateAdapter.format(d.selectedLastDay.date);
-                if (this.inputFieldDate !== newInputDates) {
-                    this.inputFieldDate = newInputDates;
-                    this.selectedRangeFirst = d.selectedFirstDay;
-                    this.selectedRangeLast = d.selectedLastDay;
-                    this.selectedRangeFirstChange.emit(this.selectedRangeFirst);
-                    this.selectedRangeLastChange.emit(this.selectedRangeLast);
-                    this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
-                }
-            }
+    public handleSingleDateChange(date: FdDate) {
+        if (date) {
+            const newInputDate = this.dateAdapter.format(date);
+            this.inputFieldDate = newInputDate;
+            this.selectedDay = date;
+            this.selectedDayChange.emit(date);
+            console.log(date, 'changed');
+            this.onChange({ date: date });
         }
     }
 
+    public handleRangeDateChange(dates: { start: FdDate, end: FdDate }) {
+        if (dates) {
+            const newInputDates = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
+                + this.dateAdapter.format(dates.end)
+            ;
+            this.inputFieldDate = newInputDates;
+            this.selectedRangeFirst = dates.start;
+            this.selectedRangeLast = dates.end;
+            this.selectedRangeFirstChange.emit(dates.start);
+            this.selectedRangeLastChange.emit(dates.end);
+            this.onChange({ date: dates.start, rangeEnd: dates.end });
+        }
+    }
+
+    public handleInputChange(strDate: string) {
+        this.inputFieldDate = strDate;
+    }
+
     /** @hidden */
-    isInvalidDateInputHandler(e) {
-        this.isInvalidDateInput = e;
+    isInvalidDateInputHandler(event: {isValid: boolean}) {
+        if (event) {
+            console.log(event);
+            this.isInvalidDateInput = !event.isValid;
+        }
     }
 
     /** @hidden */
@@ -236,46 +243,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
         this.closeCalendar();
     }
 
-    /** @hidden */
-    @HostListener('document:click', ['$event'])
-    public onGlobalClick(event: MouseEvent) {
-        if (!this.eRef.nativeElement.contains(event.target)) {
-            this.closeCalendar();
-        }
-    }
-
-    /** @hidden */
-    ngOnInit() {
-        if (this.dateFromDatePicker) {
-            this.dateFromDatePicker.subscribe(date => {
-                if (date && typeof date === 'object') {
-                    this.updateDatePickerInputHandler(date);
-                } else if (date === '' && this.allowNull) {
-                    this.isInvalidDateInput = false;
-                    if (this.type === 'single') {
-                        this.selectedDay.date = null;
-                        this.selectedDay.selected = null;
-                    } else {
-                        this.selectedRangeFirst.date = null;
-                        this.selectedRangeFirst.selected = null;
-                        this.selectedRangeLast.date = null;
-                        this.selectedRangeLast.selected = null;
-                    }
-                } else {
-                    this.isInvalidDateInput = true;
-                }
-            })
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy() {
-        if (this.dateFromDatePicker) {
-            this.dateFromDatePicker.unsubscribe();
-        }
-    }
-
-    constructor(private eRef: ElementRef, public dateAdapter: DateFormatParser) {}
+    constructor(public dateAdapter: DateFormatParser) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => {void}): void {
@@ -293,20 +261,20 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     }
 
     /** @hidden */
-    writeValue(selected: {date: Date, rangeEnd?: Date}): void {
+    writeValue(selected: {date: FdDate, rangeEnd?: FdDate}): void {
         if (!selected) {
             return;
         }
         if (this.type.toLocaleLowerCase() === 'single') {
-            this.selectedDay.date = selected.date;
+            this.selectedDay = selected.date;
             if (selected.date !== null) {
                 this.inputFieldDate = this.dateAdapter.format(selected.date);
             } else {
                 this.inputFieldDate = '';
             }
         } else {
-            this.selectedRangeFirst.date = selected.date;
-            this.selectedRangeLast.date = selected.rangeEnd;
+            this.selectedRangeFirst = selected.date;
+            this.selectedRangeLast = selected.rangeEnd;
             if (selected.date !== null) {
                 this.inputFieldDate = this.dateAdapter.format(selected.date) +
                     this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.rangeEnd);

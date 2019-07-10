@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Component({
 selector: 'fd-date-picker-single-example',
 template: ` <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay"></fd-date-picker>
             <br/>
-            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>
+            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDate().toDateString() : 'null'}}</div>
             <br/>
             <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay" compact="true"></fd-date-picker>
-            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>`
+            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDate().toDateString() : 'null'}}</div>`
 })
 export class DatePickerSingleExampleComponent {
 
     selectedDay = {
-        date: new Date()
+        date: new FdDate(2019, 10, 10)
     };
 
 }
