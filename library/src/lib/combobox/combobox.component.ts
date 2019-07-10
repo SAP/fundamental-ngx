@@ -8,9 +8,9 @@ import {
     OnInit,
     Output,
     QueryList,
-    SimpleChanges,
+    SimpleChanges, TemplateRef,
     ViewChild,
-    ViewChildren,
+    ViewChildren, ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -61,6 +61,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** Icon to display in the right-side button. */
     @Input()
     glyph: string = 'navigation-down-arrow';
+
+    /**
+     * The template with which to display the individual listed items.
+     * Use it by passing an ng-template with implicit content. See examples for more info.
+     */
+    @Input()
+    itemTemplate: TemplateRef<any>;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
@@ -115,10 +122,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     inputTextValue: string;
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => {
+    };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => {
+    };
 
     /** @hidden */
     ngOnInit() {
@@ -133,7 +142,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             if (this.inputText) {
                 this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
             } else {
-                this.displayedValues =  this.dropdownValues;
+                this.displayedValues = this.dropdownValues;
             }
         }
     }
@@ -161,7 +170,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     onMenuKeydownHandler(event, term?) {
         if (event.code === 'Enter' && term) {
             this.handleClickActions(term);
-            this.itemClicked.emit({item: term, index: this.dropdownValues.indexOf(term)});
+            this.itemClicked.emit({ item: term, index: this.dropdownValues.indexOf(term) });
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             let foundItem = false;
@@ -173,7 +182,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                     }
                     foundItem = true;
                 }
-            })
+            });
         } else if (event.code === 'ArrowUp') {
             event.preventDefault();
             let foundItem = false;
@@ -198,7 +207,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     onMenuClickHandler(event, term) {
         if (term) {
             this.handleClickActions(term);
-            this.itemClicked.emit({item: term, index: this.dropdownValues.indexOf(term)});
+            this.itemClicked.emit({ item: term, index: this.dropdownValues.indexOf(term) });
         }
     }
 

@@ -31,7 +31,11 @@
                 <li fd-menu-item *ngFor="let term of displayedValues"
                     (click)="onMenuClickHandler($event, term)"
                     (keydown)="onMenuKeydownHandler($event, term)">
-                    <a tabindex="0" [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></a>
+                    <ng-container *ngIf="itemTemplate">
+                        <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
+                    </ng-container>
+                    <a *ngIf="!itemTemplate" tabindex="0"
+                       [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></a>
                 </li>
             </ul>
             <ng-content></ng-content>
