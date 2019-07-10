@@ -73,13 +73,11 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     public startingDayOfWeek: DaysOfWeek = 1;
 
     @Input()
-    public set stringDate(str: string) {
-        this.dateStringUpdate(str);
-    }
+    public stringDate: string;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    calType: CalendarType = 'single';
+    public calType: CalendarType = 'single';
 
     @HostBinding('class.fd-calendar')
     private fdCalendarClass: boolean = true;
@@ -190,7 +188,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.stringDate) {
-
+            if (changes.stringDate.currentValue !== changes.stringDate.previousValue) {
+                this.dateStringUpdate(changes.stringDate.currentValue);
+            }
         }
     }
 
@@ -219,10 +219,12 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     }
 
     public selectedDateChanged(date: FdDate) {
-        this.selectedDate = date;
-        this.onChange({ date: date });
-        this.selectedDateChange.emit(date);
-        this.closeCalendar.emit();
+        if (!this.service.datesEqual(this.selectedDate, date)) {
+            this.selectedDate = date;
+            this.onChange({ date: date });
+            this.selectedDateChange.emit(date);
+            this.closeCalendar.emit();
+        }
     }
 
     public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
@@ -258,15 +260,14 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
 
     /** @hidden */
     dateStringUpdate(date: string) {
-        console.log(date);
         if (date) {
             if (this.calType === 'single') {
                 const fdDate = this.dateAdapter.parse(date);
-
                 this.invalidDate = !this.validateDateFromDatePicker(fdDate);
                 if (!this.invalidDate) {
                     this.selectedDate = fdDate;
                     this.setCurrentlyDisplayed(fdDate);
+                    console.log('emit');
                     this.selectedDateChange.emit(this.selectedDate);
                 } else {
                     this.selectedDate = FdDate.getToday();

@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -201,7 +202,6 @@ export class DatePickerComponent implements ControlValueAccessor {
             this.inputFieldDate = newInputDate;
             this.selectedDay = date;
             this.selectedDayChange.emit(date);
-            console.log(date, 'changed');
             this.onChange({ date: date });
         }
     }
@@ -227,8 +227,8 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** @hidden */
     isInvalidDateInputHandler(event: {isValid: boolean}) {
         if (event) {
-            console.log(event);
             this.isInvalidDateInput = !event.isValid;
+            this.changeDetRef.detectChanges();
         }
     }
 
@@ -243,7 +243,10 @@ export class DatePickerComponent implements ControlValueAccessor {
         this.closeCalendar();
     }
 
-    constructor(public dateAdapter: DateFormatParser) {}
+    constructor(
+        public dateAdapter: DateFormatParser,
+        private changeDetRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => {void}): void {
@@ -262,6 +265,8 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** @hidden */
     writeValue(selected: {date: FdDate, rangeEnd?: FdDate}): void {
+        console.log('write');
+        console.log(selected);
         if (!selected) {
             return;
         }
