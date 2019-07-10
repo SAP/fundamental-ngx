@@ -87,14 +87,14 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
     @Output()
-    dateValidityChanged = new EventEmitter<{isValid: boolean}>();
+    dateValidityChanged = new EventEmitter<{ isValid: boolean }>();
 
     /**
      * Function used to disable certain dates in the calendar.
      * @param d Date
      */
     @Input()
-    disableFunction = function(d): boolean {
+    disableFunction = function (d): boolean {
         return false;
     };
     /**
@@ -102,7 +102,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    disableRangeStartFunction = function(d): boolean {
+    disableRangeStartFunction = function (d): boolean {
         return false;
     };
     /**
@@ -110,7 +110,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    disableRangeEndFunction = function(d): boolean {
+    disableRangeEndFunction = function (d): boolean {
         return false;
     };
     /**
@@ -118,7 +118,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    blockRangeStartFunction = function(d): boolean {
+    blockRangeStartFunction = function (d): boolean {
         return false;
     };
     /**
@@ -126,7 +126,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    blockRangeEndFunction = function(d): boolean {
+    blockRangeEndFunction = function (d): boolean {
         return false;
     };
     /**
@@ -134,14 +134,14 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    blockFunction = function(d): boolean {
+    blockFunction = function (d): boolean {
         return false;
     };
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: Function = () => { };
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: Function = () => { };
 
     @Input()
     escapeFocusFunction: Function = () => {
@@ -151,9 +151,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     };
 
     constructor(public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n,
-                public dateAdapter: DateFormatParser,
-                private service: Calendar2Service) {
+        public calendarI18n: CalendarI18n,
+        public dateAdapter: DateFormatParser,
+        private service: Calendar2Service) {
     }
 
     ngOnInit() {
@@ -186,7 +186,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     public selectedDateChanged(date: FdDate) {
         this.selectedDate = date;
-        this.onChange({date: date});
+        this.onChange({ date: date });
         this.selectedDateChange.emit(date);
     }
 
@@ -242,7 +242,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
             }
         }
 
-        this.dateValidityChanged.emit({isValid: !this.invalidDate});
+        this.dateValidityChanged.emit({ isValid: !this.invalidDate });
 
     }
 
@@ -277,6 +277,12 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
             const tempDate = FdDate.getToday();
             this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };
         }
+    }
+
+    public selectedYear(yearSelected: number) {
+        console.log(`you clicked ${yearSelected}`);
+        this.activeView = 'day';
+        this.currentlyDisplayed.year = yearSelected;
     }
 
 }

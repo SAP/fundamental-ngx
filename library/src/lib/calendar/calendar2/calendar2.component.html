@@ -1,31 +1,14 @@
-<fd-calendar2-header [currentlyDisplayed]="currentlyDisplayed"
-                     [(activeView)]="activeView"
-                     [id]="id"
-                    (nextClicked)="displayNextMonth()"
-                    (previousClicked)="displayPreviousMonth()"
-></fd-calendar2-header>
+<fd-calendar2-header [currentlyDisplayed]="currentlyDisplayed" [(activeView)]="activeView" [id]="id"
+    (nextClicked)="displayNextMonth()" (previousClicked)="displayPreviousMonth()"></fd-calendar2-header>
 <ng-container [ngSwitch]="activeView">
-    <fd-calendar2-day-view *ngSwitchCase="'day'"
-                           #dayViewComponent
-                           [selectedDate]="selectedDate"
-                           (selectedDateChange)="selectedDateChanged($event)"
-                           [selectedRangeDate]="selectedRangeDate"
-                           (selectedRangeDateChange)="selectedRangeDateChanged($event)"
-                           [currentlyDisplayed]="currentlyDisplayed"
-                           [startingDayOfWeek]="startingDayOfWeek"
-                           [blockFunction]="blockFunction"
-                           [disableFunction]="disableFunction"
-                           [disableRangeEndFunction]="disableRangeEndFunction"
-                           [blockRangeEndFunction]="blockRangeEndFunction"
-                           [disableRangeStartFunction]="disableRangeStartFunction"
-                           [blockRangeStartFunction]="blockRangeStartFunction"
-                           [calType]="calType"
-                           [id]="id"
-                           [focusEscapeFunction]="escapeFocusFunction"
-                           (nextMonthSelect)="displayNextMonth()"
-                           (previousMonthSelect)="displayPreviousMonth()"
-    ></fd-calendar2-day-view>
+    <fd-calendar2-day-view *ngSwitchCase="'day'" #dayViewComponent [selectedDate]="selectedDate"
+        (selectedDateChange)="selectedDateChanged($event)" [selectedRangeDate]="selectedRangeDate"
+        (selectedRangeDateChange)="selectedRangeDateChanged($event)" [currentlyDisplayed]="currentlyDisplayed"
+        [startingDayOfWeek]="startingDayOfWeek" [blockFunction]="blockFunction" [disableFunction]="disableFunction"
+        [disableRangeEndFunction]="disableRangeEndFunction" [blockRangeEndFunction]="blockRangeEndFunction"
+        [disableRangeStartFunction]="disableRangeStartFunction" [blockRangeStartFunction]="blockRangeStartFunction"
+        [calType]="calType" [id]="id" [focusEscapeFunction]="escapeFocusFunction" (nextMonthSelect)="displayNextMonth()"
+        (previousMonthSelect)="displayPreviousMonth()"></fd-calendar2-day-view>
     <fd-calendar2-month-view *ngSwitchCase="'month'"></fd-calendar2-month-view>
-    <fd-calendar2-year-view *ngSwitchCase="'year'"></fd-calendar2-year-view>
+    <fd-calendar2-year-view *ngSwitchCase="'year'" (yearClicked)="selectedYear($event)"></fd-calendar2-year-view>
 </ng-container>
-
