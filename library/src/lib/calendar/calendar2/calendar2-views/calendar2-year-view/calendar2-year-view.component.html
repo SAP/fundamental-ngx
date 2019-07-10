@@ -1,4 +1,5 @@
 <ul class="fd-calendar__list">
-  <li *ngFor=" let calendarYear of calendarYearList" (click)="selectYear(calendarYear)" class="fd-calendar__item">
+  <li *ngFor=" let calendarYear of calendarYearList" (click)="selectYear(calendarYear)" class="fd-calendar__item"
+    [ngClass]='(calendarYear == yearSelected ? "is-selected" : "") + (calendarYear == 2019 ? "fd-calendar__item--current" : "")'>
     {{ calendarYear }}</li>
 </ul>

@@ -27,8 +27,7 @@ export class Calendar2YearViewComponent implements OnInit {
 
     }
 
-    selectYear(yearSelected: number) {
-        this.yearSelected = yearSelected;
-        this.yearClicked.emit(this.yearSelected);
+    selectYear(calendarYearClicked: number) {
+        this.yearClicked.emit(calendarYearClicked);
     }
 }
