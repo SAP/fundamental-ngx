@@ -161,13 +161,15 @@ export class DatePickerComponent implements ControlValueAccessor {
     };
 
     /** @hidden */
-    onChange: any = (selected: any) => {};
+    onChange: any = (selected: any) => {
+    };
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => {
+    };
 
     /** @hidden */
     public closeFromCalendar() {
-        if (this.type  === 'single') {
+        if (this.type === 'single') {
             console.log(this.type);
             this.closeCalendar();
         }
@@ -176,7 +178,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** Opens the calendar */
     openCalendar(e) {
         if (!this.disabled) {
-            this.onTouched({date: this.selectedDay});
+            this.onTouched({ date: this.selectedDay });
             this.isOpen = true;
             this.getInputValue(e);
         }
@@ -184,7 +186,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** Toggles the calendar open or closed */
     public toggleCalendar(e) {
-        this.onTouched({date: this.selectedDay});
+        this.onTouched({ date: this.selectedDay });
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
     }
@@ -199,10 +201,15 @@ export class DatePickerComponent implements ControlValueAccessor {
     public handleSingleDateChange(date: FdDate) {
         if (date) {
             const newInputDate = this.dateAdapter.format(date);
-            this.inputFieldDate = newInputDate;
+            if (this.inputFieldDate !== newInputDate) {
+                this.inputFieldDate = newInputDate;
+            }
             this.selectedDay = date;
             this.selectedDayChange.emit(date);
-            this.onChange({ date: date });
+            // Of Course it will be changed, but without it, it throws: ExpressionChangedAfterItHasBeenCheckedError
+            setTimeout(() => {
+                this.onChange({ date: date });
+            }, 0);
         }
     }
 
@@ -211,12 +218,17 @@ export class DatePickerComponent implements ControlValueAccessor {
             const newInputDates = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
                 + this.dateAdapter.format(dates.end)
             ;
-            this.inputFieldDate = newInputDates;
+            if (this.inputFieldDate !== newInputDates) {
+                this.inputFieldDate = newInputDates;
+            }
             this.selectedRangeFirst = dates.start;
             this.selectedRangeLast = dates.end;
             this.selectedRangeFirstChange.emit(dates.start);
             this.selectedRangeLastChange.emit(dates.end);
-            this.onChange({ date: dates.start, rangeEnd: dates.end });
+            // Of Course it will be changed, but without it, it throws: ExpressionChangedAfterItHasBeenCheckedError
+            setTimeout(() => {
+                this.onChange({ date: dates.start, rangeEnd: dates.end });
+            }, 0);
         }
     }
 
@@ -225,7 +237,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    isInvalidDateInputHandler(event: {isValid: boolean}) {
+    isInvalidDateInputHandler(event: { isValid: boolean }) {
         if (event) {
             this.isInvalidDateInput = !event.isValid;
             this.changeDetRef.detectChanges();
@@ -246,10 +258,11 @@ export class DatePickerComponent implements ControlValueAccessor {
     constructor(
         public dateAdapter: DateFormatParser,
         private changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
-    registerOnChange(fn: (selected: any) => {void}): void {
+    registerOnChange(fn: (selected: any) => { void }): void {
         this.onChange = fn;
     }
 
@@ -264,9 +277,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    writeValue(selected: {date: FdDate, rangeEnd?: FdDate}): void {
-        console.log('write');
-        console.log(selected);
+    writeValue(selected: { date: FdDate, rangeEnd?: FdDate }): void {
         if (!selected) {
             return;
         }

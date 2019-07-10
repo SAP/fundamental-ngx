@@ -3,25 +3,14 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/mod
 
 @Component({
 selector: 'fd-date-picker-single-example',
-template: ` <fd-date-picker [type]="'single'" [ngModel]="selectedDay" (ngModelChange)="changed($event)"></fd-date-picker>
+template: ` <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay"></fd-date-picker>
             <br/>
-            <div (click)="click()">Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>
+            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>
             <br/>
-<!--            <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay" compact="true"></fd-date-picker>-->
-<!--            <div>Selected Date: {{selectedDay.date?.toDateString() }}</div>-->`
+            <fd-date-picker [type]="'single'" [(ngModel)]="selectedDay" compact="true"></fd-date-picker>
+            <div>Selected Date: {{selectedDay.date?.toDateString() }}</div>`
 })
 export class DatePickerSingleExampleComponent {
-
-    public changed(c) {
-        console.log(c, 'changed form ex ');
-        // this.selectedDay = c;
-    }
-
-    public click() {
-        const date = FdDate.getToday();
-        date.month = date.month + 1;
-        this.selectedDay.date = date;
-    }
 
     selectedDay = {
         date: FdDate.getToday()

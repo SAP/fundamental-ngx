@@ -219,12 +219,10 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     }
 
     public selectedDateChanged(date: FdDate) {
-        if (!this.service.datesEqual(this.selectedDate, date)) {
-            this.selectedDate = date;
-            this.onChange({ date: date });
-            this.selectedDateChange.emit(date);
-            this.closeCalendar.emit();
-        }
+        this.selectedDate = date;
+        this.onChange({ date: date });
+        this.selectedDateChange.emit(date);
+        this.closeCalendar.emit();
     }
 
     public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
