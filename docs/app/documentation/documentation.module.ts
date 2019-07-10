@@ -350,6 +350,7 @@ import { ContainerComponent } from './component-docs/modal/examples/container/co
 import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
+import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
 
 @NgModule({
     declarations: [
@@ -569,6 +570,7 @@ import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examp
         ComboboxDisplaywithExampleComponent,
         ComboboxDynamicExampleComponent,
         ComboboxExampleComponent,
+        ComboboxTemplateExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,

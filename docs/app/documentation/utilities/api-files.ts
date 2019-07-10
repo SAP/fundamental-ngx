@@ -47,8 +47,8 @@ export const API_FILES = {
         'DateFormatParser',
         'DateFormatParserDefault'
     ],
-    comboboxInput: [
-        'ComboboxInputComponent'
+    combobox: [
+        'ComboboxComponent'
     ],
     datePicker: [
         'DatePickerComponent',
