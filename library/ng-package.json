@@ -7,6 +7,7 @@
     },
     "whitelistedNonPeerDependencies": [
         "focus-trap",
-        "popper.js"
+        "popper.js",
+        "fundamental-styles"
     ]
 }

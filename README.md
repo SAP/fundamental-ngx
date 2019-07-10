@@ -32,7 +32,7 @@ For an existing Angular application,
 1. **Install Fundamental-ngx and Fundamental Styles.**
 
     ```
-    npm install --save fundamental-styles fundamental-ngx
+    npm install --save fundamental-ngx
     ```
 
 2. **Include Fundamental Styles CSS in the `styles` array of the `angular.json` file.**

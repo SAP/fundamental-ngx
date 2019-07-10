@@ -9,7 +9,7 @@
         "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-docs-netlify": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/\" ",
         "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md",
-        "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../..",
+        "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../.. && npm run build:lib-schematics",
         "build-src": "gulp build-src",
         "copy-docs": "cp README.md docs/assets/README.md && cp NEW_COMPONENT.md docs/assets/NEW_COMPONENT.md",
         "deploy-docs": "angular-cli-ghpages --branch gh-pages",
@@ -24,7 +24,8 @@
         "test": "ng test fundamental-ngx --watch false --code-coverage true --browsers=ChromeHeadless",
         "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
         "compile-typedoc": "rm -rf docs/assets/typedoc && typedoc --out docs/assets/typedoc library/src/lib --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc",
-        "compile-typedoc-json": "typedoc --json docs/assets/typedoc/typedoc.json --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc library/src/lib"
+        "compile-typedoc-json": "typedoc --json docs/assets/typedoc/typedoc.json --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc library/src/lib",
+        "build:lib-schematics": "cd library && npm run build"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
