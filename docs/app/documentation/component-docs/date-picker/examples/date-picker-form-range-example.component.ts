@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Component({
     selector: 'fd-date-picker-form-range-example',
@@ -17,9 +18,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class DatePickerFormRangeExampleComponent {
 
-    today: Date = new Date();
-
     customForm = new FormGroup({
-        dates: new FormControl({ date: this.today, rangeEnd: new Date(this.today.getTime() + 432000000) })
+        dates: new FormControl({
+            date: FdDate.getToday(),
+            rangeEnd: FdDate.getModelFromDate(new Date(new Date().getTime() + 432000000))
+        })
     });
 };

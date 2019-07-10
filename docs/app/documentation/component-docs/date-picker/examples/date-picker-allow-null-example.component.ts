@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Component({
     selector: 'fd-date-picker-allow-null-example',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
 export class DatePickerAllowNullExampleComponent {
 
     selectedDay = {
-        date: new Date()
+        date: FdDate.getToday()
     };
 
 }

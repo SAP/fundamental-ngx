@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Component({
     selector: 'fd-date-picker-range-example',
@@ -12,22 +13,22 @@ import { Component } from '@angular/core';
 export class DatePickerRangeExampleComponent {
 
     selectedRange = {
-        date: new Date(),
-        rangeEnd: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
+        date: FdDate.getToday(),
+        rangeEnd: FdDate.getModelFromDate(new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000))
     };
 
     getSelectedFirstDate() {
         let retVal = 'null';
-        if (this.selectedRange.date && this.selectedRange.date.toDateString()) {
-            retVal = this.selectedRange.date.toDateString();
+        if (this.selectedRange.date && this.selectedRange.date.toDate()) {
+            retVal = this.selectedRange.date.toDate().toDateString();
         }
         return retVal;
     }
 
     getSelectedLastDate() {
         let retVal = 'null';
-        if (this.selectedRange.rangeEnd && this.selectedRange.rangeEnd.toDateString()) {
-            retVal = this.selectedRange.rangeEnd.toDateString();
+        if (this.selectedRange.rangeEnd && this.selectedRange.rangeEnd.toDate().toDateString()) {
+            retVal = this.selectedRange.rangeEnd.toDate().toDateString();
         }
         return retVal;
     }

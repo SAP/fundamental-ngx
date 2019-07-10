@@ -1,28 +1,24 @@
 import { Component, Injectable } from '@angular/core';
 import { DateFormatParser } from '../../../../../../library/src/lib/calendar/format/date-parser';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {
 
     rangeDelimiter: string = ' to ';
 
-    public parse(value: string): Date {
+    public parse(value: string): FdDate {
         const values: number[] = value.split('-').map(Number);
 
         // If date is 0, set the date to invalid by setting month to 14
         if (values[2] === 0) {
             values[1] = 14;
         }
-        return new Date(Number(values[2]), values[1] - 1, values[0]);
+        return FdDate.getModelFromDate(new Date(Number(values[2]), values[1] - 1, values[0]));
     }
 
-    public format(date: Date): string {
-        let monthStr = (date.getMonth() + 1).toLocaleString();
-        if (monthStr.length === 1) {
-            monthStr = '0' + monthStr;
-        }
-
-        return date.getDate() + '-' + monthStr + '-' + date.getFullYear();
+    public format(date: FdDate): string {
+        return date.day + '-' + date.monthStr + '-' + date.year;
     }
 }
 
@@ -49,12 +45,12 @@ export class DateFormatDashes extends DateFormatParser {
 export class DatePickerFormatExampleComponent {
 
     selectedDay = {
-        date: new Date()
+        date: FdDate.getToday()
     };
 
     selectedRange = {
-        date: new Date(),
-        rangeEnd: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
+        date: FdDate.getToday(),
+        rangeEnd: FdDate.getModelFromDate(new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000))
     };
 
 }

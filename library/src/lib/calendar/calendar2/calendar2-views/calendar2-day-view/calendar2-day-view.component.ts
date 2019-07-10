@@ -46,7 +46,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     @Input()
     public selectedRangeDate: { start: FdDate, end: FdDate };
 
-    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
+    /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
     public startingDayOfWeek: DaysOfWeek;
 
@@ -131,13 +131,18 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         private calendarI18n: CalendarI18n,
         private eRef: ElementRef,
         private service: Calendar2Service
-    ) {}
+    ) {
+    }
 
     /**
      * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
      * @param day CalendarDay object to be selected.
      */
-    selectDate(day: CalendarDay) {
+    selectDate(day: CalendarDay, event?: MouseEvent) {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDate = day.date;
@@ -171,9 +176,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     /** @hidden */
     get shortWeekDays(): string[] {
         return this.calendarI18n.getAllShortWeekdays()
-            .slice(this.startingDayOfWeek)
+            .slice(this.startingDayOfWeek - 1)
             .concat(
-                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek
+                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1
                 ))
             .map(weekday => weekday[0].toLocaleUpperCase());
     }
@@ -182,7 +187,11 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     get selectCounter(): number {
         if (!this.selectedRangeDate || !this.selectedRangeDate.start) {
             return 0;
-        } else if (this.selectedRangeDate.start && !this.selectedRangeDate.end) {
+        } else if (this.selectedRangeDate.start &&
+            (!this.selectedRangeDate.end ||
+                this.service.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
+            )
+        ) {
             return 1;
         } else if (this.selectedRangeDate.start && this.selectedRangeDate.end) {
             return 2;
@@ -230,7 +239,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
                     if (grid.x > 0) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x - 1].id;
                     } else if (grid.y > 0) {
-                        this.newFocusedDayId = this.dayViewGrid[grid.y - 1][this.dayViewGrid[0].length - 1].id
+                        this.newFocusedDayId = this.dayViewGrid[grid.y - 1][this.dayViewGrid[0].length - 1].id;
                     } else {
                         this.selectPreviousMonth();
                         this.newFocusedDayId =
@@ -244,7 +253,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
                     if (grid.x < this.dayViewGrid[0].length - 1) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x + 1].id;
                     } else if (grid.y < this.dayViewGrid.length - 1) {
-                        this.newFocusedDayId = this.dayViewGrid[grid.y + 1][0].id
+                        this.newFocusedDayId = this.dayViewGrid[grid.y + 1][0].id;
                     } else {
                         this.selectNextMonth();
                         this.newFocusedDayId = this.dayViewGrid[0][0].id;
@@ -411,8 +420,8 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
 
     private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         let nextMonthDisplayedDays: number = 0;
-        const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
-        const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
+        const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 0;
+        const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
 
         // The calendar grid can have either 5 (35 days) or 6 (42 days) weeks
         // depending on the week day of the first day of the current month

@@ -22,7 +22,7 @@
                           (cell.today ? " fd-calendar__item--current": "") +
                           (cell.disabled ? " is-disabled": "") +
                           (cell.blocked ? " is-blocked": "")'
-                (click)="selectDate(cell)"
+                (click)="selectDate(cell, $event)"
             >
                 <span class="fd-calendar__text" [attr.id]="cell.id"
                       role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"

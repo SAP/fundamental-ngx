@@ -26,6 +26,12 @@ export class FdDate {
         return new FdDate(tempDate.getFullYear(), tempDate.getMonth() + 1, tempDate.getDate());
     }
 
+    static getModelFromDate(date: Date): FdDate {
+        if (date) {
+            return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        }
+    }
+
     /**
      * Constructor to build a FdDate object from a year, month and day.
      * @param year The year of the date.
@@ -36,6 +42,24 @@ export class FdDate {
         this.year = year;
         this.month = month;
         this.day = day;
+    }
+
+    public toDateString(): string {
+        if (this.date) {
+            return this.date.toDateString();
+        } else {
+            return 'null';
+        }
+    }
+
+    public get monthStr(): string {
+        if (this.month) {
+            return (this.month < 10 ? '0' : '') + this.month;
+        }
+    }
+
+    public get date(): Date {
+        return this.toDate();
     }
 
     /**

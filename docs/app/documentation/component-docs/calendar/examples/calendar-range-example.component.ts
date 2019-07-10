@@ -1,40 +1,41 @@
 import { Component } from '@angular/core';
+import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
 
 @Component({
     selector: 'fd-calendar-range-example',
     template: `
-        <fd-calendar [calType]="'range'" 
+        <fd-calendar2 [calType]="'range'" 
                      [disableFunction]="myDisableFunction2"
                      [disableRangeStartFunction]="myDisableStartFunction"
                      [disableRangeEndFunction]="myDisableEndFunction"
                      [(ngModel)]="selected">
-        </fd-calendar>
+        </fd-calendar2>
         <br/>
-        <div>Selected First Date: {{selected.date.toDateString()}}</div>
+        <div>Selected First Date: {{selected.start.toDateString()}}</div>
         <br/>
-        <div>Selected Last Date: {{selected.rangeEnd.toDateString()}}</div>`
+        <div>Selected Last Date: {{selected.end.toDateString()}}</div>`
 })
 export class CalendarRangeExampleComponent {
 
     selected = {
-        date: new Date(2019, 9, 11),
-        rangeEnd: new Date(new Date(2019, 9, 11).getTime() + 5 * 24 * 60 * 60 * 1000)
+        start: new FdDate(2019, 9, 11),
+        end: new FdDate(2019, 10, 11)
     };
 
-    myDisableFunction2 = function(d: Date): boolean {
-        const day = d.getDay();
+    myDisableFunction2 = function(d: FdDate): boolean {
+        const day = d.toDate().getDay();
         return day === 1;
     };
 
-    myDisableStartFunction = function(d: Date): boolean {
-        const time = d.getTime();
-        const currentTime = new Date(2019, 9, 10).getTime();
+    myDisableStartFunction = function(d: FdDate): boolean {
+        const time = d.toDate().getTime();
+        const currentTime = new FdDate(2019, 9, 10).toDate().getTime();
         return time > currentTime;
     };
 
-    myDisableEndFunction = function(d: Date): boolean {
-        const time = d.getTime();
-        const currentTime = new Date(2019, 9, 20).getTime();
+    myDisableEndFunction = function(d: FdDate): boolean {
+        const time = d.toDate().getTime();
+        const currentTime = new FdDate(2019, 9, 20).toDate().getTime();
         return time < currentTime;
     };
 }
