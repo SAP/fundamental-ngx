@@ -89,6 +89,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     @Output()
     dateValidityChanged = new EventEmitter<{ isValid: boolean }>();
 
+    calendarYearList: number[];
+    currentYear = new Date().getFullYear();
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param d Date
@@ -158,6 +161,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     ngOnInit() {
         this.prepareDisplayedView();
+        this.constructYearList();
     }
 
     /** Function that provides  */
@@ -196,6 +200,32 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         this.selectedRangeDateChange.emit(dates);
     }
 
+    public handleNextClicked() {
+        switch (this.activeView) {
+            case ('day'): {
+                this.displayNextMonth();
+                break;
+            }
+            case ('year'): {
+                this.displayNextYearSet();
+                break;
+            }
+        }
+    }
+
+    public handlePreviousClicked() {
+        switch (this.activeView) {
+            case ('day'): {
+                this.displayPreviousMonth();
+                break;
+            }
+            case ('year'): {
+                this.displayPreviousYearSet();
+                break;
+            }
+        }
+    }
+
     public displayNextMonth() {
         if (this.currentlyDisplayed.month === 12) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
@@ -210,6 +240,23 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
         }
+    }
+
+    private constructYearList() {
+        this.calendarYearList = [];
+        for (let x = 0; x < 12; x++) {
+            this.calendarYearList.push(this.currentYear + x);
+        }
+    }
+
+    public displayNextYearSet() {
+        this.currentYear += 12;
+        this.constructYearList();
+    }
+
+    public displayPreviousYearSet() {
+        this.currentYear -= 12;
+        this.constructYearList();
     }
 
     /** @hidden */

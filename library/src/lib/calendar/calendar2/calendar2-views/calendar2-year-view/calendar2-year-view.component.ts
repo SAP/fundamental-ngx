@@ -17,26 +17,18 @@ export class Calendar2YearViewComponent implements OnInit {
     @Input()
     isActive: boolean;
 
-    currentYear = new Date().getFullYear();
+    @Input()
     calendarYearList: number[];
 
     constructor() {
     }
 
     ngOnInit() {
-        this.constructYearList();
+
     }
 
     selectYear(yearSelected: number) {
         this.yearSelected = yearSelected;
         this.yearClicked.emit(this.yearSelected);
     }
-
-    private constructYearList() {
-        this.calendarYearList = [];
-        for (let x = 0; x < 12; x++) {
-            this.calendarYearList.push(this.currentYear + x);
-        }
-    }
-
 }
