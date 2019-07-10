@@ -7,7 +7,7 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { ComboboxInputModule } from './combobox-input/combobox-input.module';
+import { ComboboxModule } from './combobox/combobox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
@@ -22,6 +22,7 @@ import { ListModule } from './list/list.module';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
+import { ModalService } from './modal/modal-service/modal.service';
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
@@ -42,7 +43,6 @@ import { TokenModule } from './token/token.module';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ModalService } from './modal/modal-service/modal.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -54,7 +54,7 @@ import { ModalService } from './modal/modal-service/modal.service';
         ButtonModule,
         ButtonGroupModule,
         CalendarModule,
-        ComboboxInputModule,
+        ComboboxModule,
         DatePickerModule,
         DatetimePickerModule,
         FileInputModule,
