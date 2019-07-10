@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BadgeComponent } from './badge.component';
-import { LabelComponent } from './label.component';
+import { BadgeDirective } from './badge.directive';
+import { LabelDirective } from './label.directive';
+import { StatusLabelDirective } from './status-label.directive';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [BadgeComponent, LabelComponent],
-    declarations: [BadgeComponent, LabelComponent]
+    exports: [BadgeDirective, LabelDirective, StatusLabelDirective],
+    declarations: [BadgeDirective, LabelDirective, StatusLabelDirective]
 })
-export class BadgeLabelModule {}
+export class BadgeLabelModule { }

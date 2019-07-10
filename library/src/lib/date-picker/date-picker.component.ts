@@ -111,6 +111,10 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** Whether the date picker is disabled. */
+    @Input()
+    disabled: boolean;
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param d Date
@@ -167,12 +171,16 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** Opens the calendar */
     openCalendar(e) {
-        this.isOpen = true;
-        this.getInputValue(e);
+        if (!this.disabled) {
+            this.onTouched({date: this.selectedDay.date});
+            this.isOpen = true;
+            this.getInputValue(e);
+        }
     }
 
     /** Toggles the calendar open or closed */
     toggleCalendar(e) {
+        this.onTouched({date: this.selectedDay.date});
         this.isOpen = !this.isOpen;
         this.getInputValue(e);
     }
@@ -247,13 +255,11 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
                     if (this.type === 'single') {
                         this.selectedDay.date = null;
                         this.selectedDay.selected = null;
-                        this.onChange({date: this.selectedDay.date});
                     } else {
                         this.selectedRangeFirst.date = null;
                         this.selectedRangeFirst.selected = null;
                         this.selectedRangeLast.date = null;
                         this.selectedRangeLast.selected = null;
-                        this.onChange({date: this.selectedRangeFirst.date, rangeEnd: this.selectedRangeLast.date});
                     }
                 } else {
                     this.isInvalidDateInput = true;
@@ -283,7 +289,7 @@ export class DatePickerComponent implements OnInit, OnDestroy, ControlValueAcces
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        // void for now
+        this.disabled = isDisabled;
     }
 
     /** @hidden */

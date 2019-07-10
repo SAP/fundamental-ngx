@@ -18,27 +18,33 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .row {
     display: flex;
     margin-right: -15px;
     margin-left: -15px;
 }
+
 .col {
     padding-right: 15px;
     padding-left: 15px;
     flex: 1;
 }
+
 .navbar {
     background-color: #eee;
     margin-bottom: 20px;
 }
+
 .nav {
     list-style-type: none;
 }
+
 .nav-item {
     margin-bottom: 0;
     display: inline-block;
 }
+
 .nav-link {
     display: block;
     padding: 10px 15px;
@@ -91,10 +97,6 @@ pre {
     border: 1px solid #ccc;
     transition: 0.25s background-color;
 
-    pre {
-        background-color: #fff;
-    }
-
     ul {
         list-style: none;
         margin-left: 0;
@@ -106,34 +108,6 @@ pre {
         }
     }
 
-    .fd-side-nav {
-        max-width: 250px;
-    }
-
-    .fd-side-nav__link {
-        color: inherit;
-    }
-
-    .fd-side-nav--icons {
-        max-width: 65px;
-    }
-
-    .fd-product-tile {
-        min-width: 30%;
-        float: left;
-        margin-right: 20px;
-    }
-
-    .fd-tile-grid {
-        .fd-product-tile {
-            margin-right: 0;
-        }
-    }
-
-    .fd-tile__content {
-        padding: 20px;
-    }
-
     a[aria-disabled='true']:hover,
     a[aria-disabled='true']:visited,
     a[aria-disabled='true']:active,
@@ -142,10 +116,6 @@ pre {
         color: rgba(10, 110, 209, 0.4);
         cursor: not-allowed;
         text-decoration: none;
-    }
-
-    .fd-breadcrumb {
-        margin-bottom: 8px;
     }
 }
 
@@ -224,6 +194,7 @@ a:focus {
         }
     }
 }
+
 .fd-playground--markdown > h1 {
     margin: 0 0 12px;
     font-size: 2.2rem;

@@ -22,9 +22,10 @@ export const API_FILES = {
         'AlertService'
     ],
     badgeLabel: [
-        'BadgeComponent',
+        'BadgeDirective',
         'BadgeLabelComponent',
-        'LabelComponent'
+        'LabelDirective',
+        'StatusLabelDirective'
     ],
     breadcrumb: [
         'BreadcrumbDirective',
@@ -36,7 +37,7 @@ export const API_FILES = {
     ],
     buttonGroup: [
         'ButtonGroupComponent',
-        'ButtonGroupedDirective'
+        'ButtonGroupedDirective',
     ],
     calendar: [
         'CalendarComponent',
@@ -113,6 +114,7 @@ export const API_FILES = {
         'ModalTitleDirective',
         'ModalCloseButtonDirective',
         'ModalConfig',
+        'ModalPosition',
         'ModalBodyComponent',
         'ModalHeaderComponent',
         'ModalFooterComponent'
@@ -170,12 +172,17 @@ export const API_FILES = {
         'SideNavigationGroupComponent',
         'SideNavigationIconComponent',
         'SideNavigationItemComponent',
-        'SideNavigationLinkComponent',
-        'SideNavigationListComponent',
+        'SideNavigationLinkDirective',
+        'SideNavigationListDirective',
         'SideNavigationSubitemComponent',
         'SideNavigationSublistComponent',
         'SideNavigationSublinkComponent',
         'SideNavigationTitleComponent'
+    ],
+    splitButton: [
+        'SplitButtonComponent',
+        'SplitButtonMenuDirective',
+        'SplitButtonActionTitle',
     ],
     table: [
         'TableDirective',
@@ -184,7 +191,9 @@ export const API_FILES = {
     tabs: [
         'TabPanelComponent',
         'TabListComponent',
-        'TabTitleDirective'
+        'TabTitleDirective',
+        'TabLinkDirective',
+        'TabNavDirective'
     ],
     tile: [
         'ProductTileComponent',

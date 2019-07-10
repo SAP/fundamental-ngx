@@ -1,49 +1,11 @@
-<div *ngIf="isDropdown" class="fd-dropdown"
-     [ngClass]="{ 'fd-dropdown--compact': compact, 'fd-dropdown--toolbar': toolbar }">
-    <div #popoverDropdownContainer>
-        <div class="fd-popover__control">
-            <button
-                fd-button
-                class="fd-dropdown__control fd-button"
-                [ngClass]="
-                    (btnType ? ' fd-button--' + btnType : '') +
-                    (glyph ? ' sap-icon--' + glyph : '') +
-                    (compact ? ' fd-button--compact' : '') +
-                    (this.disabled ? ' is-disabled' : '') +
-                    (toolbar ? ' fd-button--standard': '')
-                "
-                [attr.aria-expanded]="this.disabled ? false : isOpen"
-                [attr.aria-disabled]="this.disabled"
-                aria-haspopup="true"
-                [fdPopover]="popoverDropdownBody"
-                [(isOpen)]="isOpen"
-                [noArrow]="noArrow"
-                [disabled]="disabled"
-                [triggers]="triggers"
-                [placement]="placement"
-                [focusTrapped]="focusTrapped"
-                (isOpenChange)="isOpenChange.emit($event)"
-                [options]="options"
-                [fillControl]="fillControl"
-                [closeOnOutsideClick]="closeOnOutsideClick"
-                [closeOnEscapeKey]="closeOnEscapeKey"
-                [appendTo]="(appendTo ? appendTo : popoverDropdownContainer)">
-                <ng-content></ng-content>
-            </button>
-        </div>
-        <ng-template #popoverDropdownBody>
-            <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>
-        </ng-template>
-    </div>
-</div>
-<div *ngIf="!isDropdown" #popoverContainer>
+<div #popoverContainer>
     <div class="fd-popover__control"
          [attr.aria-expanded]="this.disabled ? false : isOpen"
          [attr.aria-disabled]="this.disabled"
          aria-haspopup="true"
          [fdPopover]="popoverBody"
          [(isOpen)]="isOpen"
-         (isOpenChange)="isOpenChange.emit($event)"
+         (isOpenChange)="openChanged($event)"
          [noArrow]="noArrow"
          [disabled]="disabled"
          [triggers]="triggers"
@@ -55,6 +17,7 @@
          [closeOnEscapeKey]="closeOnEscapeKey"
          [appendTo]="(appendTo ? appendTo : popoverContainer)">
         <ng-content select="fd-popover-control"></ng-content>
+        <ng-content select="fd-dropdown-control"></ng-content>
     </div>
     <ng-template #popoverBody>
         <ng-container *ngTemplateOutlet="popoverBodyTpl"></ng-container>

@@ -1,0 +1,28 @@
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [glyph]="'menu'" [mainActionTitle]="'Action Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [glyph]="'cart'" [mainActionTitle]="'Action Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>

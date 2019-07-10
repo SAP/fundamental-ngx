@@ -1,3 +1,13 @@
-<span [ngClass]="(position ? 'fd-inline-help__content fd-inline-help__content--' + position : 'fd-inline-help__content fd-inline-help__content--bottom-right')">
-  <ng-content></ng-content>
-</span>
+<fd-popover [noArrow]="false"
+            [placement]="placement"
+            [triggers]="triggers"
+    >
+        <fd-popover-control>
+            <span class="fd-inline-help" role="alert"></span>
+        </fd-popover-control>
+        <fd-popover-body>
+            <span class="fd-inline-help__content">
+                <ng-content></ng-content>
+            </span>
+        </fd-popover-body>
+</fd-popover>

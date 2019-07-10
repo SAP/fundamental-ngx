@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InlineHelpComponent } from './inline-help.component';
+import { InlineHelpModule } from './inline-help.module';
 
 describe('InlineHelpComponent', () => {
     let component: InlineHelpComponent;
@@ -8,7 +9,7 @@ describe('InlineHelpComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [InlineHelpComponent]
+            imports: [InlineHelpModule]
         }).compileComponents();
     }));
 

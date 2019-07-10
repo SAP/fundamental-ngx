@@ -47,7 +47,7 @@ describe('TabListComponent', () => {
     it('should handle ngAfterContentInit', () => {
         component.ngAfterContentInit();
         expect(component.selectedIndex).toBe(0);
-        expect(component.tabs.length).toBe(4);
+        expect(component.tabLinks.length).toBe(4);
     });
 
     it('should handle tab select', () => {
@@ -61,5 +61,4 @@ describe('TabListComponent', () => {
         component.selectedIndexChange.subscribe(id => expect(id).toBe(0));
         component.selectTab(3);
     });
-
 });

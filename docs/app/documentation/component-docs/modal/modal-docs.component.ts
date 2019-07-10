@@ -11,6 +11,10 @@ import * as fsModalSource from '!raw-loader!./examples/fullscreen-modal/modal-fu
 import * as fsModalSourceT from '!raw-loader!./examples/fullscreen-modal/modal-fullscreen-example.component.ts';
 import * as backdropT from '!raw-loader!./examples/backdrop-examples/backdrop-examples.component.ts';
 import * as backdropH from '!raw-loader!./examples/backdrop-examples/backdrop-examples.component.html';
+import * as positionH from '!raw-loader!./examples/modal-position/modal-position-example.component.html';
+import * as positionT from '!raw-loader!./examples/modal-position/modal-position-example.component.ts';
+import * as containerH from '!raw-loader!./examples/container/container.component.html';
+import * as containerT from '!raw-loader!./examples/container/container.component.ts';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { ModalService } from '../../../../../library/src/lib/modal/modal-service/modal.service';
@@ -78,6 +82,12 @@ export class ModalDocsComponent {
 
     backdropHtml = backdropH;
     backdropTs = backdropT;
+
+    positionHtml = positionH;
+    positionTs = positionT;
+
+    containerHtml = containerH;
+    containerTs = containerT;
 
     constructor(private schemaFactory: SchemaFactoryService, private modalService: ModalService) {
         this.schema = this.schemaFactory.getComponent('modal');

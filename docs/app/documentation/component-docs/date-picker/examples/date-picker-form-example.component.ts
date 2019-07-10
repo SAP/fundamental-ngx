@@ -7,6 +7,9 @@ import { FormGroup, FormControl } from '@angular/forms';
         <form [formGroup]="customForm">
             <fd-date-picker formControlName="date"></fd-date-picker>
         </form>
+        
+        Touched: {{customForm.controls.date.touched}}<br/>
+        Dirty: {{customForm.controls.date.dirty}}<br/>
 
         Selected Date: {{ customForm.controls.date.value.date ? customForm.controls.date.value.date.toDateString() : 'null' }}
     `

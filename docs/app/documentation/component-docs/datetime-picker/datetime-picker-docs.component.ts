@@ -14,6 +14,10 @@ import * as dateTimePickerAllowNullTs from '!raw-loader!./examples/datetime-allo
 import * as dateTimeFormatHtml from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.html';
 import * as dateTimeFormatTs from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.ts';
 
+import * as dateTimeDisabledHtml from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.html';
+import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.ts';
+import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
+import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.ts';
 
 @Component({
     selector: 'app-datetime-picker-docs',
@@ -33,6 +37,12 @@ export class DatetimePickerDocsComponent {
 
     datetimeFormatHtml = dateTimeFormatHtml;
     datetimeFormatTs = dateTimeFormatTs;
+
+    datetimeDisabledHtml = dateTimeDisabledHtml;
+    datetimeDisabledTs = dateTimeDisabledTs;
+
+    datetimeFormHtml = dateTimeFormHtml;
+    datetimeFormTs = dateTimeFormTs;
 
     datetimePickerAllowNullTs = dateTimePickerAllowNullTs;
 
