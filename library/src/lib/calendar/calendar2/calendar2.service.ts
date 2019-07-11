@@ -23,6 +23,27 @@ export class Calendar2Service {
         return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
     }
 
+    public validateDateFromDatePicker(date: FdDate): boolean {
+        if (!date) {
+            return false;
+        }
+
+        if (!date.year || !date.month || !date.day) {
+            return false;
+        }
+
+        if (date.year < 1000 || date.year > 3000 || date.month < 1 || date.month > 12) {
+            return false;
+        }
+
+        if (date.day < 1 || date.day > this.getDaysInMonth(date.month, date.year)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
     private isLeapYear(year: number): boolean {
         if (year % 4 !== 0) {
             return false;

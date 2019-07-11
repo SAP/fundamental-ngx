@@ -1,6 +1,7 @@
 <fd-popover [(isOpen)]="isOpen"
             [triggers]="[]"
             [placement]="placement"
+            [closeOnEscapeKey]="true"
             [disabled]="disabled">
     <fd-popover-control>
         <div class="fd-input-group fd-input-group--after"
@@ -34,12 +35,10 @@
                      [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
                      [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
                      [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
-                     [selectedDate]="selectedDay"
-                     [selectedRangeFirst]="selectedRangeFirst"
-                     [selectedRangeLast]="selectedRangeLast"
-                      (selectedRangeDateChange)="handleRangeDateChange($event)"
-                      (selectedDateChange)="handleSingleDateChange($event)"
-                     (dateValidityChange)="isInvalidDateInputHandler($event)"
+                     [selectedDate]="selectedDate"
+                     [selectedRangeDate]="selectedRangeDate"
+                    (selectedRangeDateChange)="handleRangeDateChange($event)"
+                    (selectedDateChange)="handleSingleDateChange($event)"
                      [stringDate]="inputFieldDate"
                      [startingDayOfWeek]="startingDayOfWeek"></fd-calendar2>
     </fd-popover-body>

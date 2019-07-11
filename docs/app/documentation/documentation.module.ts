@@ -335,6 +335,7 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
 import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
+import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 
 @NgModule({
     declarations: [
@@ -415,6 +416,7 @@ import { CalendarFormRangeExampleComponent } from './component-docs/calendar/exa
         CalendarMondayStartExampleComponent,
         CalendarFormSingleExampleComponent,
         CalendarFormRangeExampleComponent,
+        CalendarProgrammaticallyChangeExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
