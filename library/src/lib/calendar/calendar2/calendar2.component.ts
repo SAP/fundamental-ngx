@@ -45,7 +45,12 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
             useExisting: forwardRef(() => Calendar2Component),
             multi: true
         }
-    ]
+    ],
+    host: {
+        '(blur)': 'onTouched()',
+        '[class.fd-has-display-block]': 'true',
+        '[attr.id]': 'id'
+    }
 })
 export class Calendar2Component implements OnInit, ControlValueAccessor, OnChanges {
 
@@ -53,18 +58,23 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
 
     invalidDate: boolean = false;
 
+    /** The currently selected FdDate model in single mode. */
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
 
+    /** The currently selected FdDates model start date in range mode. */
     @Input()
     public selectedRangeFirst: FdDate;
 
+    /** The currently selected FdDates model end date in range mode. */
     @Input()
     public selectedRangeLast: FdDate;
 
+    /** The currently selected FdDates model start and end in range mode. */
     @Input()
     public selectedRangeDate: { start: FdDate, end: FdDate };
 
+    /** Actually shown active view one of 'day' | 'month' | 'year' */
     @Input()
     public activeView: FdCalendarView = 'day';
 
@@ -72,6 +82,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     @Input()
     public startingDayOfWeek: DaysOfWeek = 1;
 
+    /** String date which can be interpreted by calendar and shown in grid */
     @Input()
     public stringDate: string;
 
@@ -79,11 +90,14 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     @Input()
     public calType: CalendarType = 'single';
 
+    /** @hidden */
     @HostBinding('class.fd-calendar')
     private fdCalendarClass: boolean = true;
 
+    /** @hidden */
     @HostBinding('style.display')
     private displayStyle: string = 'block';
+
 
     currentlyDisplayed: CalendarCurrent;
 
@@ -91,25 +105,31 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     @Input()
     id = 'fd-calendar-' + calendarUniqueId++;
 
+    /** Event thrown every time active view is changed */
     @Output()
     public readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
+    /** Event thrown every time selected date in single mode is changed */
     @Output()
     selectedDateChange = new EventEmitter<FdDate>();
 
+    /** Event thrown every time selected first date in range mode is changed */
     @Output()
     selectedRangeFirstChange = new EventEmitter<FdDate>();
 
+    /** Event thrown every time selected last date in range mode is changed */
     @Output()
     selectedRangeLastChange = new EventEmitter<FdDate>();
 
+    /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
     selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
 
+    /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
     dateValidityChange = new EventEmitter<{ isValid: boolean }>();
 
-
+    /** Event thrown every time when calendar should be closed */
     @Output()
     closeCalendar = new EventEmitter();
 
@@ -169,6 +189,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     onTouched: Function = () => {
     };
 
+    /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
     escapeFocusFunction: Function = () => {
         if (document.getElementById(this.id + '-left-arrow')) {
@@ -176,16 +197,19 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
         }
     };
 
+    /** @hidden */
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n,
                 public dateAdapter: DateFormatParser,
                 private service: Calendar2Service) {
     }
 
+    /** @hidden */
     ngOnInit() {
         this.prepareDisplayedView();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.stringDate) {
             if (changes.stringDate.currentValue !== changes.stringDate.previousValue) {
@@ -194,66 +218,93 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
         }
     }
 
-    /** Function that provides  */
+    /** Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms */
     writeValue(selected: { date?: FdDate, start?: FdDate, end?: FdDate }): void {
+        let valid: boolean = true;
         if (selected) {
             if (selected.date && this.calType === 'single') {
-                this.selectedDate = selected.date;
+                valid = this.validateDateFromDatePicker(selected.date);
+                if (valid) {
+                    this.selectedDate = selected.date;
+                    this.prepareDisplayedView();
+                }
             }
             if ((selected.start || selected.end) && this.calType === 'range') {
-                this.selectedRangeDate = { start: selected.start, end: selected.end };
+                valid = !
+                    (!selected.start || !this.validateDateFromDatePicker(selected.start) ||
+                        (!selected.end || !this.validateDateFromDatePicker(selected.end))
+                    );
+                if (valid) {
+                    this.selectedRangeDate = { start: selected.start, end: selected.end };
+                    this.prepareDisplayedView();
+                }
             }
         }
+        this.invalidDate = !valid;
+        this.dateValidityChange.emit({isValid: valid});
     }
 
+    /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState?(isDisabled: boolean): void {
         // Not needed
     }
 
+    /** @hidden */
     public selectedDateChanged(date: FdDate) {
         this.selectedDate = date;
         this.onChange({ date: date });
+        this.onTouched();
         this.selectedDateChange.emit(date);
         this.closeCalendar.emit();
     }
 
+    /** @hidden */
     public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
         if (dates) {
             if (dates.start && !this.service.datesEqual(dates.start, this.selectedRangeFirst)) {
                 this.selectedRangeFirst = dates.start;
                 this.selectedRangeFirstChange.emit(dates.start);
             }
-            if (dates.end &&  !this.service.datesEqual(dates.end, this.selectedRangeLast)) {
+            if (dates.end && !this.service.datesEqual(dates.end, this.selectedRangeLast)) {
                 this.selectedRangeLast = dates.end;
                 this.selectedRangeLastChange.emit(dates.end);
             }
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
-            this.selectedRangeDateChange.emit({ start: dates.start, end: dates.end ? dates.end : dates.start });
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+            this.onChange(this.selectedRangeDate);
+            this.onTouched();
+            this.closeCalendar.emit();
         }
     }
 
+    /** Function that allows to switch actual view to next month */
     public displayNextMonth() {
         if (this.currentlyDisplayed.month === 12) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month + 1 };
         }
+        this.onTouched();
     }
 
+    /** Function that allows to switch actual view to previous month */
     public displayPreviousMonth() {
         if (this.currentlyDisplayed.month <= 1) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
         }
+        this.onTouched();
     }
 
     /** @hidden */
@@ -265,7 +316,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
                 if (!this.invalidDate) {
                     this.selectedDate = fdDate;
                     this.setCurrentlyDisplayed(fdDate);
-                    console.log('emit');
+                    this.onChange({ date: this.selectedDate });
                     this.selectedDateChange.emit(this.selectedDate);
                 } else {
                     this.selectedDate = FdDate.getToday();
@@ -291,6 +342,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
                         end: this.selectedRangeLast ? this.selectedRangeLast : this.selectedRangeFirst
                     };
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                    this.onChange(this.selectedRangeDate);
                     this.setCurrentlyDisplayed(this.selectedRangeFirst);
                 }
             }
@@ -324,8 +376,18 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     }
 
     private prepareDisplayedView(): void {
-        if (this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
+        if (this.calType === 'single' && this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
             this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
+        } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
+            this.currentlyDisplayed = {
+                month: this.selectedRangeDate.start.month,
+                year: this.selectedRangeDate.start.year
+            };
+        } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
+            this.currentlyDisplayed = {
+                month: this.selectedRangeDate.end.month,
+                year: this.selectedRangeDate.end.year
+            };
         } else {
             const tempDate = FdDate.getToday();
             this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };

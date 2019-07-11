@@ -46,7 +46,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     @Input()
     public selectedRangeDate: { start: FdDate, end: FdDate };
 
-    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
+    /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
     public startingDayOfWeek: DaysOfWeek;
 
@@ -176,9 +176,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     /** @hidden */
     get shortWeekDays(): string[] {
         return this.calendarI18n.getAllShortWeekdays()
-            .slice(this.startingDayOfWeek)
+            .slice(this.startingDayOfWeek - 1)
             .concat(
-                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek
+                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1
                 ))
             .map(weekday => weekday[0].toLocaleUpperCase());
     }
@@ -420,8 +420,8 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
 
     private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         let nextMonthDisplayedDays: number = 0;
-        const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
-        const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
+        const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 0;
+        const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
 
         // The calendar grid can have either 5 (35 days) or 6 (42 days) weeks
         // depending on the week day of the first day of the current month

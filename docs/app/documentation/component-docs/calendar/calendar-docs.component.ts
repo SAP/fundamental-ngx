@@ -4,6 +4,8 @@ import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
 import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
 import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.component.ts';
+import * as calendarSingleFormSource from '!raw-loader!./examples/calendar-form-single-example.component.ts';
+import * as calendarRangeFormSource from '!raw-loader!./examples/calendar-form-range-example.component.ts';
 
 @Component({
     selector: 'app-calendar',
@@ -15,6 +17,8 @@ export class CalendarDocsComponent implements OnInit {
     calendarRangeSource = calendarRangeSrc;
     calendarMondayStartSource = calendarMondayStartSrc;
     calendari18nTs = calendarIntlSrc;
+    calendarSingleFormSource = calendarSingleFormSource;
+    calendarRangeFormSource = calendarRangeFormSource;
 
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 

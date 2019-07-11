@@ -23,13 +23,13 @@ export abstract class DateFormatParser {
      * Should take in a string value and return a date object.
      * @param value String to concert to a date object.
      */
-    abstract parse(value: string): FdDate;
+    abstract parse(value: string): any;
 
     /**
      * Should take in a date object and return a string representation.
      * @param date String to concert to a date object.
      */
-    abstract format(date: FdDate): string;
+    abstract format(date: any): string;
 }
 
 /**

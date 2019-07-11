@@ -11,15 +11,15 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/mod
                      [(ngModel)]="selected">
         </fd-calendar2>
         <br/>
-        <div>Selected First Date: {{selected.date.toDateString()}}</div>
+        <div>Selected First Date: {{selected.start.toDateString()}}</div>
         <br/>
-        <div>Selected Last Date: {{selected.rangeEnd.toDateString()}}</div>`
+        <div>Selected Last Date: {{selected.end.toDateString()}}</div>`
 })
 export class CalendarRangeExampleComponent {
 
     selected = {
-        date: new FdDate(2019, 9, 11),
-        rangeEnd: new FdDate(2019, 10, 11)
+        start: new FdDate(2019, 9, 11),
+        end: new FdDate(2019, 10, 11)
     };
 
     myDisableFunction2 = function(d: FdDate): boolean {

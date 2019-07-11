@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Calendar2DayViewComponent } from './calendar2-day-view.component';
 import { FdDate } from '../../models/fd-date';
 import { CalendarDay } from '../../models/calendar-day';
+import { Calendar2Service } from '../../calendar2.service';
 
 describe('Calendar2DayViewComponent', () => {
     let component: Calendar2DayViewComponent;
@@ -10,7 +11,8 @@ describe('Calendar2DayViewComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [Calendar2DayViewComponent]
+            declarations: [Calendar2DayViewComponent],
+            providers: [Calendar2Service]
         })
             .compileComponents();
     }));
@@ -249,5 +251,17 @@ describe('Calendar2DayViewComponent', () => {
             component.dayViewGrid[component.dayViewGrid.length - 1][component.dayViewGrid[0].length - 1].id
         );
         expect(component.currentlyDisplayed.month).toBe(9);
+    });
+
+    it('should properly rearrange days when different startingDayOfWeek is used', () => {
+        component.startingDayOfWeek = 1;
+        component.ngOnInit();
+        expect(component.shortWeekDays).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+        component.startingDayOfWeek = 2;
+        component.ngOnInit();
+        expect(component.shortWeekDays).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+        component.startingDayOfWeek = 3;
+        component.ngOnInit();
+        expect(component.shortWeekDays).toEqual(['T', 'W', 'T', 'F', 'S', 'S', 'M']);
     });
 });

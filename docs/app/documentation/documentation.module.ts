@@ -333,6 +333,8 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
+import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
+import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
 
 @NgModule({
     declarations: [
@@ -411,6 +413,8 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
+        CalendarFormSingleExampleComponent,
+        CalendarFormRangeExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
