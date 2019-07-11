@@ -1,3 +1,22 @@
-<p>
-  calendar2-month-view works!
-</p>
+<div class="fd-calendar__months">
+    <ul class="fd-calendar__list">
+        <li
+            class="fd-calendar__item"
+            *ngFor="let month of monthNames; let i = index"
+            [ngClass]="
+                (i + 1 === currentMonth ? ' fd-calendar__item--current' : '') +
+                (i + 1 === monthSelected ? ' is-selected' : '')
+            "
+            (click)="selectMonth(i, $event)"
+        >
+            <span
+                role="button"
+                [attr.tabIndex]="i + 1 == monthSelected ? 0 : -1"
+                [attr.id]="id + '-fd-month-' + i"
+                (keydown)="onKeydownMonthHandler($event, i)"
+                class="fd-calendar__text"
+                >{{ month }}</span
+            >
+        </li>
+    </ul>
+</div>

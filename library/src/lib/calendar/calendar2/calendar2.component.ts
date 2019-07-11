@@ -5,10 +5,13 @@ import {
     HostBinding,
     Input,
     OnChanges,
-    OnInit,
-    Output, SimpleChanges,
+    SimpleChanges,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    OnInit,
+    Output,
+    OnDestroy,
+    ChangeDetectorRef
 } from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
@@ -18,6 +21,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Calendar2DayViewComponent } from './calendar2-views/calendar2-day-view/calendar2-day-view.component';
 import { DateFormatParser } from '../format/date-parser';
 import { Calendar2Service } from './calendar2.service';
+import { Subscription } from 'rxjs';
 
 let calendarUniqueId: number = 0;
 
@@ -52,7 +56,17 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
         '[attr.id]': 'id'
     }
 })
-export class Calendar2Component implements OnInit, ControlValueAccessor {
+export class Calendar2Component implements OnInit, OnDestroy, ControlValueAccessor {
+
+    // --------------- CODE CONCERNING THE MONTH VIEW --------------- 
+    /** @hidden For i18n, the list of month names. Internal use. */
+    monthNames: string[];
+
+    /** @hidden Subscription to the i18n service. */
+    private i18nLocalSub: Subscription;
+
+    // --------------- CODE CONCERNING THE MONTH VIEW --------------- 
+
 
     @ViewChild('dayViewComponent') dayViewComponent: Calendar2DayViewComponent;
 
@@ -122,7 +136,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    disableFunction = function(d): boolean {
+    disableFunction = function (d): boolean {
         return false;
     };
     /**
@@ -130,7 +144,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    disableRangeStartFunction = function(d): boolean {
+    disableRangeStartFunction = function (d): boolean {
         return false;
     };
     /**
@@ -138,7 +152,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    disableRangeEndFunction = function(d): boolean {
+    disableRangeEndFunction = function (d): boolean {
         return false;
     };
     /**
@@ -146,7 +160,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    blockRangeStartFunction = function(d): boolean {
+    blockRangeStartFunction = function (d): boolean {
         return false;
     };
     /**
@@ -154,7 +168,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    blockRangeEndFunction = function(d): boolean {
+    blockRangeEndFunction = function (d): boolean {
         return false;
     };
     /**
@@ -162,7 +176,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
      * @param d Date
      */
     @Input()
-    blockFunction = function(d): boolean {
+    blockFunction = function (d): boolean {
         return false;
     };
 
@@ -183,13 +197,15 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     /** @hidden */
     constructor(public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n,
-                public dateAdapter: DateFormatParser,
-                private calendarService: Calendar2Service) {
+        public calendarI18n: CalendarI18n,
+        public dateAdapter: DateFormatParser,
+        private calendarService: Calendar2Service,
+        private cd: ChangeDetectorRef) {
     }
 
     /** @hidden */
     ngOnInit() {
+        this.setupLocalization(); // MONTH VIEW
         this.prepareDisplayedView();
     }
 
@@ -216,7 +232,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
             }
         }
         this.invalidDate = !valid;
-        this.dateValidityChange.emit({isValid: valid});
+        this.dateValidityChange.emit({ isValid: valid });
     }
 
     /** @hidden */
@@ -296,5 +312,25 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
             this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };
         }
     }
+
+    // --------------- CODE CONCERNING THE MONTH VIEW --------------- 
+    /** @hidden */
+    private setupLocalization(): void {
+        this.monthNames = this.calendarI18n.getAllShortMonthNames();
+
+        this.i18nLocalSub = this.calendarI18n.i18nChange.subscribe(() => {
+            this.monthNames = this.calendarI18n.getAllShortMonthNames();
+            this.cd.detectChanges();
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy() {
+        if (this.i18nLocalSub) {
+            this.i18nLocalSub.unsubscribe();
+        }
+    }
+
+    // --------------- CODE CONCERNING THE MONTH VIEW --------------- 
 
 }
