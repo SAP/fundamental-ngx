@@ -361,6 +361,7 @@ import { ComboboxAsyncExampleComponent } from './component-docs/combobox/example
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
+import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 
 @NgModule({
     declarations: [
@@ -447,6 +448,7 @@ import { ComboboxTemplateExampleComponent } from './component-docs/combobox/exam
         CalendarMondayStartExampleComponent,
         CalendarFormSingleExampleComponent,
         CalendarFormRangeExampleComponent,
+        CalendarProgrammaticallyChangeExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,

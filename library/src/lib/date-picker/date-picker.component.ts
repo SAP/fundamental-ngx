@@ -9,7 +9,7 @@ import {
     Input,
     OnDestroy,
     OnInit,
-    Output,
+    Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarDay, CalendarType } from '../calendar/calendar.component';
@@ -18,6 +18,9 @@ import { Subject } from 'rxjs';
 import { DateFormatParser } from '../calendar/format/date-parser';
 import { Placement } from 'popper.js';
 import { FdDate } from '../calendar/calendar2/models/fd-date';
+import { Calendar2Service } from '../calendar/calendar2/calendar2.service';
+import { Calendar2Component } from '../calendar/calendar2/calendar2.component';
+import { FdRangeDate } from '../calendar/calendar2/models/fd-range-date';
 
 @Component({
     selector: 'fd-date-picker',
@@ -38,14 +41,15 @@ import { FdDate } from '../calendar/calendar2/models/fd-date';
     encapsulation: ViewEncapsulation.None
 })
 export class DatePickerComponent implements ControlValueAccessor {
+
+    @ViewChild(Calendar2Component) calendarComponent: Calendar2Component;
+
     /** @hidden The value of the input */
     inputFieldDate = null;
     /** @hidden Whether the date input is invalid */
     isInvalidDateInput: boolean = false;
     /** @hidden Whether the date picker is open */
     isOpen: boolean = false;
-    /** @hidden Subject the calendar subscribes to when the date value from the datePicker component changes. For internal use. */
-    dateFromDatePicker: Subject<string> = new Subject();
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -61,27 +65,19 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** The currently selected CalendarDay model */
     @Input()
-    selectedDay: FdDate;
+    selectedDate: FdDate;
+
+    /** The currently selected FdDates model start and end in range mode. */
+    @Input()
+    public selectedRangeDate: FdRangeDate = { start: null, end: null };
 
     /** Fired when a new date is selected. */
     @Output()
-    selectedDayChange = new EventEmitter();
+    public readonly selectedDateChange = new EventEmitter<FdDate>();
 
-    /** The currently selected first CalendarDay in a range type calendar. */
-    @Input()
-    selectedRangeFirst: FdDate;
-
-    /** Fired when the user selects a new first date in a range of dates is selected. */
+    /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    selectedRangeFirstChange = new EventEmitter();
-
-    /** The currently selected last CalendarDay in a range type calendar. */
-    @Input()
-    selectedRangeLast: FdDate;
-
-    /** Fired when the user selects a new last date in a range of dates is selected. */
-    @Output()
-    selectedRangeLastChange = new EventEmitter();
+    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
 
     /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
     @Input()
@@ -168,98 +164,67 @@ export class DatePickerComponent implements ControlValueAccessor {
     };
 
     /** @hidden */
-    public closeFromCalendar() {
+    public closeFromCalendar(): void {
         if (this.type === 'single') {
-            console.log(this.type);
             this.closeCalendar();
         }
     }
 
     /** Opens the calendar */
-    openCalendar(e) {
+    openCalendar(): void {
         if (!this.disabled) {
-            this.onTouched({ date: this.selectedDay });
+            this.onTouched({ date: this.selectedDate });
             this.isOpen = true;
-            this.getInputValue(e);
         }
     }
 
     /** Toggles the calendar open or closed */
-    public toggleCalendar(e) {
-        this.onTouched({ date: this.selectedDay });
+    public toggleCalendar(): void {
+        this.onTouched({ date: this.selectedDate });
         this.isOpen = !this.isOpen;
-        this.getInputValue(e);
     }
 
     /** Closes the calendar if it is open */
-    public closeCalendar() {
+    public closeCalendar(): void {
         if (this.isOpen) {
             this.isOpen = false;
         }
     }
 
-    public handleSingleDateChange(date: FdDate) {
+    /** @hidden */
+    public handleSingleDateChange(date: FdDate): void {
         if (date) {
-            const newInputDate = this.dateAdapter.format(date);
-            if (this.inputFieldDate !== newInputDate) {
-                this.inputFieldDate = newInputDate;
-            }
-            this.selectedDay = date;
-            this.selectedDayChange.emit(date);
-            // Of Course it will be changed, but without it, it throws: ExpressionChangedAfterItHasBeenCheckedError
-            setTimeout(() => {
-                this.onChange({ date: date });
-            }, 0);
+            this.inputFieldDate = this.dateAdapter.format(date);
+            this.selectedDate = date;
+            this.selectedDateChange.emit(date);
+            this.onChange({ date: date });
         }
     }
 
-    public handleRangeDateChange(dates: { start: FdDate, end: FdDate }) {
-        if (dates) {
-            const newInputDates = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
+    /** @hidden */
+    public handleRangeDateChange(dates: FdRangeDate): void {
+        if (dates &&
+            (!Calendar2Service.datesEqual(this.selectedRangeDate.start, dates.start) ||
+                !Calendar2Service.datesEqual(this.selectedRangeDate.end, dates.end))
+        ) {
+            this.inputFieldDate = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
                 + this.dateAdapter.format(dates.end)
             ;
-            if (this.inputFieldDate !== newInputDates) {
-                this.inputFieldDate = newInputDates;
-            }
-            this.selectedRangeFirst = dates.start;
-            this.selectedRangeLast = dates.end;
-            this.selectedRangeFirstChange.emit(dates.start);
-            this.selectedRangeLastChange.emit(dates.end);
-            // Of Course it will be changed, but without it, it throws: ExpressionChangedAfterItHasBeenCheckedError
-            setTimeout(() => {
-                this.onChange({ date: dates.start, rangeEnd: dates.end });
-            }, 0);
-        }
-    }
-
-    public handleInputChange(strDate: string) {
-        this.inputFieldDate = strDate;
-    }
-
-    /** @hidden */
-    isInvalidDateInputHandler(event: { isValid: boolean }) {
-        if (event) {
-            this.isInvalidDateInput = !event.isValid;
-            this.changeDetRef.detectChanges();
+            this.selectedRangeDate = { start: dates.start, end: dates.end };
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+            this.onChange({ date: dates.start, rangeEnd: dates.end });
         }
     }
 
     /** @hidden */
-    getInputValue(e) {
-        this.dateFromDatePicker.next(e);
+    public handleInputChange(strDate: string): void {
+        this.dateStringUpdate(strDate);
     }
 
     /** @hidden */
-    @HostListener('document:keydown.escape', [])
-    onEscapeKeydownHandler() {
-        this.closeCalendar();
-    }
-
     constructor(
-        public dateAdapter: DateFormatParser,
-        private changeDetRef: ChangeDetectorRef
-    ) {
-    }
+        public dateAdapter: DateFormatParser
+    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -282,16 +247,17 @@ export class DatePickerComponent implements ControlValueAccessor {
             return;
         }
         if (this.type.toLocaleLowerCase() === 'single') {
-            this.selectedDay = selected.date;
+            this.selectedDate = selected.date;
             if (selected.date !== null) {
+                this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
                 this.inputFieldDate = this.dateAdapter.format(selected.date);
             } else {
                 this.inputFieldDate = '';
             }
         } else {
-            this.selectedRangeFirst = selected.date;
-            this.selectedRangeLast = selected.rangeEnd;
+            this.selectedRangeDate = { start: selected.date, end: selected.rangeEnd };
             if (selected.date !== null) {
+                this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
                 this.inputFieldDate = this.dateAdapter.format(selected.date) +
                     this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.rangeEnd);
             } else {
@@ -299,4 +265,49 @@ export class DatePickerComponent implements ControlValueAccessor {
             }
         }
     }
+
+    /** @hidden */
+    dateStringUpdate(date: string): void {
+        if (date) {
+            if (this.type === 'single') {
+                const fdDate = this.dateAdapter.parse(date);
+                this.isInvalidDateInput = !fdDate.isDateValid()
+
+                // If is correct and data is not exactly the same
+                if (!this.isInvalidDateInput && !Calendar2Service.datesEqual(fdDate, this.selectedDate)) {
+                    this.selectedDate = fdDate;
+                    this.calendarComponent.setCurrentlyDisplayed(fdDate);
+                    this.onChange({ date: this.selectedDate });
+                    this.selectedDateChange.emit(this.selectedDate);
+                } else {
+                    this.selectedDate = FdDate.getToday();
+                    this.calendarComponent.setCurrentlyDisplayed(fdDate);
+                }
+            } else {
+                const currentDates = date.split(this.dateAdapter.rangeDelimiter);
+                const firstDate = this.dateAdapter.parse(currentDates[0]);
+                const secondDate = this.dateAdapter.parse(currentDates[1]);
+                this.isInvalidDateInput =
+                    !firstDate.isDateValid() ||
+                    !secondDate.isDateValid();
+
+                // If is correct and data is not exactly the same
+                if (!this.isInvalidDateInput &&
+                    (!Calendar2Service.datesEqual(firstDate, this.selectedRangeDate.start) ||
+                        !Calendar2Service.datesEqual(secondDate, this.selectedRangeDate.end))) {
+
+                    if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
+                        this.selectedRangeDate = { start: secondDate, end: firstDate };
+                    } else {
+                        this.selectedRangeDate = { start: firstDate, end: secondDate };
+                    }
+
+                    this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                    this.onChange({ date: this.selectedRangeDate.start, rangeEnd: this.selectedRangeDate.end });
+                    this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
+                }
+            }
+        }
+    }
+
 }

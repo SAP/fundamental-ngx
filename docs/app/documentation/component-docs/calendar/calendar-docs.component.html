@@ -35,9 +35,19 @@
 <code-example [code]="calendarRangeSource" [language]="'typescript'"></code-example>
 
 <separator></separator>
+<h2>Programmatically date change</h2>
+<description>
+    -
+</description>
+<component-example [name]="'ex3'">
+  <fd-calendar-programmatically-change-example></fd-calendar-programmatically-change-example>
+</component-example>
+<code-example [code]="calendarProgrammaticallySource" [language]="'typescript'"></code-example>
+
+<separator></separator>
 <h2>Monday Start Calendar</h2>
 <description>Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 0 is for Sunday, 1 is Monday, 2 is Tuesday, etc.</description>
-<component-example [name]="'ex3'">
+<component-example [name]="'ex4'">
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
 </component-example>
 <code-example [code]="calendarMondayStartSource" [language]="'typescript'"></code-example>
@@ -48,7 +58,7 @@
     The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc.
     It also uses a separate service called CalendarI18nLabels to populate aria labels in the component itself.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
 </component-example>
 <code-example [code]="calendari18nTs" [language]="'typescript'"></code-example>

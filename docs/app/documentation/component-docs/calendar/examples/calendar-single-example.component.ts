@@ -8,7 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
         <fd-calendar2 [calType]="'single'"
                      [(ngModel)]="selectedDay"
                      [blockFunction]="myBlockFunction"
-                     [startingDayOfWeek]="4"
                      [disableFunction]="myDisableFunction">
         </fd-calendar2>
         

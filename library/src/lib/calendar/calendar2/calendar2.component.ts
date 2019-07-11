@@ -16,8 +16,7 @@ import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Calendar2DayViewComponent } from './calendar2-views/calendar2-day-view/calendar2-day-view.component';
-import { DateFormatParser } from '../format/date-parser';
-import { Calendar2Service } from './calendar2.service';
+import { FdRangeDate } from './models/fd-range-date';
 
 let calendarUniqueId: number = 0;
 
@@ -33,6 +32,9 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 /**
  * Months: 1 = January, 12 = december.
  * Days: 1 = Sunday, 7 = Saturday
+ *
+ * Calendar component used for selecting dates, typically used by the DatePicker and DateTimePicker components.
+ * Supports the Angular forms module, enabling form validity, ngModel, etc.
  */
 @Component({
     selector: 'fd-calendar2',
@@ -52,7 +54,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
         '[attr.id]': 'id'
     }
 })
-export class Calendar2Component implements OnInit, ControlValueAccessor, OnChanges {
+export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     @ViewChild('dayViewComponent') dayViewComponent: Calendar2DayViewComponent;
 
@@ -62,17 +64,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
 
-    /** The currently selected FdDates model start date in range mode. */
-    @Input()
-    public selectedRangeFirst: FdDate;
-
-    /** The currently selected FdDates model end date in range mode. */
-    @Input()
-    public selectedRangeLast: FdDate;
-
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: { start: FdDate, end: FdDate };
+    public selectedRangeDate: FdRangeDate;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' */
     @Input()
@@ -82,10 +76,6 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     @Input()
     public startingDayOfWeek: DaysOfWeek = 1;
 
-    /** String date which can be interpreted by calendar and shown in grid */
-    @Input()
-    public stringDate: string;
-
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     public calType: CalendarType = 'single';
@@ -94,11 +84,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     @HostBinding('class.fd-calendar')
     private fdCalendarClass: boolean = true;
 
-    /** @hidden */
-    @HostBinding('style.display')
-    private displayStyle: string = 'block';
-
-
+    /** Currently displayed days depending on month and year */
     currentlyDisplayed: CalendarCurrent;
 
     /** Id of the calendar. If none is provided, one will be generated. */
@@ -111,27 +97,19 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
 
     /** Event thrown every time selected date in single mode is changed */
     @Output()
-    selectedDateChange = new EventEmitter<FdDate>();
-
-    /** Event thrown every time selected first date in range mode is changed */
-    @Output()
-    selectedRangeFirstChange = new EventEmitter<FdDate>();
-
-    /** Event thrown every time selected last date in range mode is changed */
-    @Output()
-    selectedRangeLastChange = new EventEmitter<FdDate>();
+    public readonly selectedDateChange = new EventEmitter<FdDate>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
+    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
-    dateValidityChange = new EventEmitter<{ isValid: boolean }>();
+    public readonly isValidDateChange = new EventEmitter<boolean>();
 
     /** Event thrown every time when calendar should be closed */
     @Output()
-    closeCalendar = new EventEmitter();
+    public readonly closeCalendar = new EventEmitter<void>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -198,24 +176,11 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     };
 
     /** @hidden */
-    constructor(public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n,
-                public dateAdapter: DateFormatParser,
-                private service: Calendar2Service) {
-    }
+    constructor(public calendarI18n: CalendarI18n) {}
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.prepareDisplayedView();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.stringDate) {
-            if (changes.stringDate.currentValue !== changes.stringDate.previousValue) {
-                this.dateStringUpdate(changes.stringDate.currentValue);
-            }
-        }
     }
 
     /** Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms */
@@ -223,17 +188,19 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
         let valid: boolean = true;
         if (selected) {
             if (selected.date && this.calType === 'single') {
-                valid = this.validateDateFromDatePicker(selected.date);
-                if (valid) {
+                valid = selected.date.isDateValid();
+                if (selected.date.isDateValid()) {
                     this.selectedDate = selected.date;
                     this.prepareDisplayedView();
                 }
             }
             if ((selected.start || selected.end) && this.calType === 'range') {
-                valid = !
-                    (!selected.start || !this.validateDateFromDatePicker(selected.start) ||
-                        (!selected.end || !this.validateDateFromDatePicker(selected.end))
-                    );
+                if (selected.start && !selected.start.isDateValid()) {
+                    valid = false;
+                }
+                if (selected.end && !selected.end.isDateValid()) {
+                    valid = false;
+                }
                 if (valid) {
                     this.selectedRangeDate = { start: selected.start, end: selected.end };
                     this.prepareDisplayedView();
@@ -241,7 +208,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
             }
         }
         this.invalidDate = !valid;
-        this.dateValidityChange.emit({isValid: valid});
+        this.isValidDateChange.emit(valid);
     }
 
     /** @hidden */
@@ -269,16 +236,8 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     }
 
     /** @hidden */
-    public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
+    public selectedRangeDateChanged(dates: FdRangeDate): void {
         if (dates) {
-            if (dates.start && !this.service.datesEqual(dates.start, this.selectedRangeFirst)) {
-                this.selectedRangeFirst = dates.start;
-                this.selectedRangeFirstChange.emit(dates.start);
-            }
-            if (dates.end && !this.service.datesEqual(dates.end, this.selectedRangeLast)) {
-                this.selectedRangeLast = dates.end;
-                this.selectedRangeLastChange.emit(dates.end);
-            }
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
@@ -288,7 +247,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     }
 
     /** Function that allows to switch actual view to next month */
-    public displayNextMonth() {
+    public displayNextMonth(): void {
         if (this.currentlyDisplayed.month === 12) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         } else {
@@ -298,7 +257,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
     }
 
     /** Function that allows to switch actual view to previous month */
-    public displayPreviousMonth() {
+    public displayPreviousMonth(): void {
         if (this.currentlyDisplayed.month <= 1) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         } else {
@@ -307,72 +266,11 @@ export class Calendar2Component implements OnInit, ControlValueAccessor, OnChang
         this.onTouched();
     }
 
-    /** @hidden */
-    dateStringUpdate(date: string) {
-        if (date) {
-            if (this.calType === 'single') {
-                const fdDate = this.dateAdapter.parse(date);
-                this.invalidDate = !this.validateDateFromDatePicker(fdDate);
-                if (!this.invalidDate) {
-                    this.selectedDate = fdDate;
-                    this.setCurrentlyDisplayed(fdDate);
-                    this.onChange({ date: this.selectedDate });
-                    this.selectedDateChange.emit(this.selectedDate);
-                } else {
-                    this.selectedDate = FdDate.getToday();
-                    this.setCurrentlyDisplayed(this.selectedDate);
-                }
-            } else {
-                const currentDates = date.split(this.dateAdapter.rangeDelimiter);
-                const firstDate = this.dateAdapter.parse(currentDates[0]);
-                const secondDate = this.dateAdapter.parse(currentDates[1]);
-                this.invalidDate =
-                    !this.validateDateFromDatePicker(firstDate) || !this.validateDateFromDatePicker(secondDate);
-
-                if (!this.invalidDate) {
-                    if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
-                        this.selectedRangeLast = firstDate;
-                        this.selectedRangeFirst = secondDate;
-                    } else {
-                        this.selectedRangeLast = secondDate;
-                        this.selectedRangeFirst = firstDate;
-                    }
-                    this.selectedRangeDate = {
-                        start: this.selectedRangeFirst,
-                        end: this.selectedRangeLast ? this.selectedRangeLast : this.selectedRangeFirst
-                    };
-                    this.selectedRangeDateChange.emit(this.selectedRangeDate);
-                    this.onChange(this.selectedRangeDate);
-                    this.setCurrentlyDisplayed(this.selectedRangeFirst);
-                }
-            }
-
-            this.dateValidityChange.emit({ isValid: !this.invalidDate });
-        }
-    }
-
-    private setCurrentlyDisplayed(fdDate: FdDate) {
+    /** Function that allows to change currently displayed month/year configuration,
+     * which are connected to days displayed
+     * */
+    public setCurrentlyDisplayed(fdDate: FdDate): void {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
-    }
-
-    private validateDateFromDatePicker(date: FdDate): boolean {
-        if (!date) {
-            return false;
-        }
-
-        if (!date.year || !date.month || !date.day) {
-            return false;
-        }
-
-        if (date.year < 1000 || date.year > 3000 || date.month < 1 || date.month > 12) {
-            return false;
-        }
-
-        if (date.day < 1 || date.day > this.service.getDaysInMonth(date.month, date.year)) {
-            return false;
-        }
-
-        return true;
     }
 
     private prepareDisplayedView(): void {

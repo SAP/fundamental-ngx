@@ -1,6 +1,6 @@
-<fd-datetime-picker [(ngModel)]="this.date"></fd-datetime-picker>
+<fd-datetime-picker [(ngModel)]="date"></fd-datetime-picker>
 
-<button style="margin-left: 20px;" fd-button (click)="decrementMonth()">-1 Day</button>
+<button style="margin-left: 20px;" fd-button (click)="changeDay()">Change</button>
 
 <br /> <br />
-Selected: {{date ? date.toLocaleString() : 'null'}}
+Selected: {{date ? date.toLocaleDateString() : 'null'}}
