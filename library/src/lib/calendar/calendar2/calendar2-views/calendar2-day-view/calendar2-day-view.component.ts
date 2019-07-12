@@ -15,6 +15,7 @@ import { CalendarCurrent } from '../../models/calendar-current';
 import { CalendarType, DaysOfWeek } from '../../calendar2.component';
 import { CalendarDay } from '../../models/calendar-day';
 import { Calendar2Service } from '../../calendar2.service';
+import { FdRangeDate } from '../../models/fd-range-date';
 
 @Component({
     selector: 'fd-calendar2-day-view',
@@ -44,7 +45,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: { start: FdDate, end: FdDate };
+    public selectedRangeDate: FdRangeDate;
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -63,19 +64,19 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
 
     /** Event emitted always, when model is changed in range mode */
     @Output()
-    selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
+    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
 
     /** Event emitted always, when next month is selected, by focus */
     @Output()
-    nextMonthSelect = new EventEmitter();
+    public readonly nextMonthSelect = new EventEmitter();
 
     /** Event emitted always, when previous month is selected, by focus */
     @Output()
-    previousMonthSelect = new EventEmitter();
+    public readonly previousMonthSelect = new EventEmitter();
 
     /** Event emitted always, when model is changed in single mode */
     @Output()
-    selectedDateChange = new EventEmitter<FdDate>();
+    public readonly selectedDateChange = new EventEmitter<FdDate>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -138,7 +139,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
      * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
      * @param day CalendarDay object to be selected.
      */
-    selectDate(day: CalendarDay, event?: MouseEvent) {
+    selectDate(day: CalendarDay, event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -199,7 +200,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     /** @hidden */
-    onKeydownDayHandler(event, cell: CalendarDay, grid: { x: number, y: number }) {
+    onKeydownDayHandler(event, cell: CalendarDay, grid: { x: number, y: number }): void {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
                 event.preventDefault();
@@ -274,7 +275,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     /** @hidden */
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         if (this.newFocusedDayId) {
             this.focusElement(this.newFocusedDayId);
             this.newFocusedDayId = null;
@@ -282,7 +283,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     /** @hidden */
-    public focusElement(elementSelector) {
+    public focusElement(elementSelector): void {
         const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
         if (elementToFocus) {
             elementToFocus.focus();
@@ -290,7 +291,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     /** Active day means that with tabindex = 0, it's selected day or today or first day*/
-    public focusActiveDay() {
+    public focusActiveDay(): void {
         this.newFocusedDayId = this.getActiveCell(
             this.calendarDayList.filter(cell => cell.monthStatus === 'current')
         ).id;
@@ -306,7 +307,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         });
     }
 
-    private selectPreviousMonth() {
+    private selectPreviousMonth(): void {
         if (this.currentlyDisplayed.month > 1) {
             this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month - 1 };
         } else {
@@ -314,10 +315,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
         this.buildDayViewGrid();
         this.previousMonthSelect.emit();
-        return;
     }
 
-    private selectNextMonth() {
+    private selectNextMonth(): void {
         if (this.currentlyDisplayed.month > 1) {
             this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
         } else {
@@ -325,7 +325,6 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
         this.buildDayViewGrid();
         this.nextMonthSelect.emit();
-        return;
     }
 
     private populateCalendar(): CalendarDay[] {

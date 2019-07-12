@@ -19,10 +19,6 @@ export class Calendar2Service {
         }
     }
 
-    public convertDateToFDDate(date: Date): FdDate {
-        return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
-    }
-
     public validateDateFromDatePicker(date: FdDate): boolean {
         if (!date) {
             return false;

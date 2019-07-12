@@ -18,7 +18,7 @@ export class DateFormatDashes extends DateFormatParser {
     }
 
     public format(date: FdDate): string {
-        return date.day + '-' + date.monthStr + '-' + date.year;
+        return date.day + '-' + (date.month < 10 ? '0' : '') + date.month + '-' + date.year;
     }
 }
 

@@ -18,6 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Calendar2DayViewComponent } from './calendar2-views/calendar2-day-view/calendar2-day-view.component';
 import { DateFormatParser } from '../format/date-parser';
 import { Calendar2Service } from './calendar2.service';
+import { FdRangeDate } from './models/fd-range-date';
 
 let calendarUniqueId: number = 0;
 
@@ -64,7 +65,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: { start: FdDate, end: FdDate };
+    public selectedRangeDate: FdRangeDate;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' */
     @Input()
@@ -74,10 +75,6 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     @Input()
     public startingDayOfWeek: DaysOfWeek = 1;
 
-    /** String date which can be interpreted by calendar and shown in grid */
-    @Input()
-    public stringDate: string;
-
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     public calType: CalendarType = 'single';
@@ -85,11 +82,6 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     /** @hidden */
     @HostBinding('class.fd-calendar')
     private fdCalendarClass: boolean = true;
-
-    /** @hidden */
-    @HostBinding('style.display')
-    private displayStyle: string = 'block';
-
 
     currentlyDisplayed: CalendarCurrent;
 
@@ -103,19 +95,19 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     /** Event thrown every time selected date in single mode is changed */
     @Output()
-    selectedDateChange = new EventEmitter<FdDate>();
+    public readonly selectedDateChange = new EventEmitter<FdDate>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
+    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
-    dateValidityChange = new EventEmitter<{ isValid: boolean }>();
+    public readonly dateValidityChange = new EventEmitter<{ isValid: boolean }>();
 
     /** Event thrown every time when calendar should be closed */
     @Output()
-    closeCalendar = new EventEmitter();
+    public readonly closeCalendar = new EventEmitter<void>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -184,12 +176,11 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     /** @hidden */
     constructor(public calendarI18nLabels: CalendarI18nLabels,
                 public calendarI18n: CalendarI18n,
-                public dateAdapter: DateFormatParser,
                 private calendarService: Calendar2Service) {
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.prepareDisplayedView();
     }
 
@@ -244,7 +235,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     }
 
     /** @hidden */
-    public selectedRangeDateChanged(dates: { start: FdDate, end: FdDate }) {
+    public selectedRangeDateChanged(dates: FdRangeDate): void {
         if (dates) {
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
@@ -255,7 +246,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     }
 
     /** Function that allows to switch actual view to next month */
-    public displayNextMonth() {
+    public displayNextMonth(): void {
         if (this.currentlyDisplayed.month === 12) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         } else {
@@ -265,7 +256,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     }
 
     /** Function that allows to switch actual view to previous month */
-    public displayPreviousMonth() {
+    public displayPreviousMonth(): void {
         if (this.currentlyDisplayed.month <= 1) {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         } else {
@@ -274,7 +265,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         this.onTouched();
     }
 
-    public setCurrentlyDisplayed(fdDate: FdDate) {
+    public setCurrentlyDisplayed(fdDate: FdDate): void {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
     }
 

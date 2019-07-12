@@ -68,4 +68,16 @@ describe('CalendarService', () => {
         expect(result).not.toBeTruthy();
     });
 
+    it('Validation Should return false, when incorrect date', () => {
+        const date = new FdDate(2019, 12, 32);
+        const result = service.validateDateFromDatePicker(date);
+        expect(result).not.toBeTruthy();
+    });
+
+    it('Validation Should return true, when date', () => {
+        const date = new FdDate(2019, 12, 31);
+        const result = service.validateDateFromDatePicker(date);
+        expect(result).toBeTruthy();
+    });
+
 });

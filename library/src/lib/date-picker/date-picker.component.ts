@@ -20,6 +20,7 @@ import { Placement } from 'popper.js';
 import { FdDate } from '../calendar/calendar2/models/fd-date';
 import { Calendar2Service } from '../calendar/calendar2/calendar2.service';
 import { Calendar2Component } from '../calendar/calendar2/calendar2.component';
+import { FdRangeDate } from '../calendar/calendar2/models/fd-range-date';
 
 @Component({
     selector: 'fd-date-picker',
@@ -68,7 +69,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: { start: FdDate, end: FdDate } = { start: null, end: null };
+    public selectedRangeDate: FdRangeDate = { start: null, end: null };
 
     /** Fired when a new date is selected. */
     @Output()
@@ -76,7 +77,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    public readonly selectedRangeDateChange = new EventEmitter<{ start: FdDate, end: FdDate }>();
+    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
 
     /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
     @Input()
@@ -163,7 +164,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     };
 
     /** @hidden */
-    public closeFromCalendar() {
+    public closeFromCalendar(): void {
         if (this.type === 'single') {
             console.log(this.type);
             this.closeCalendar();
@@ -171,7 +172,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** Opens the calendar */
-    openCalendar(e) {
+    openCalendar(): void {
         if (!this.disabled) {
             this.onTouched({ date: this.selectedDate });
             this.isOpen = true;
@@ -179,20 +180,20 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** Toggles the calendar open or closed */
-    public toggleCalendar(e) {
+    public toggleCalendar(): void {
         this.onTouched({ date: this.selectedDate });
         this.isOpen = !this.isOpen;
     }
 
     /** Closes the calendar if it is open */
-    public closeCalendar() {
+    public closeCalendar(): void {
         if (this.isOpen) {
             this.isOpen = false;
         }
     }
 
     /** @hidden */
-    public handleSingleDateChange(date: FdDate) {
+    public handleSingleDateChange(date: FdDate): void {
         if (date) {
             this.inputFieldDate = this.dateAdapter.format(date);
             this.selectedDate = date;
@@ -202,7 +203,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    public handleRangeDateChange(dates: { start: FdDate, end: FdDate }) {
+    public handleRangeDateChange(dates: FdRangeDate): void {
         if (dates &&
             (!this.calendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
                 !this.calendarService.datesEqual(this.selectedRangeDate.end, dates.end))
@@ -217,7 +218,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    public handleInputChange(strDate: string) {
+    public handleInputChange(strDate: string): void {
         this.dateStringUpdate(strDate);
     }
 
@@ -226,8 +227,7 @@ export class DatePickerComponent implements ControlValueAccessor {
         public dateAdapter: DateFormatParser,
         private changeDetRef: ChangeDetectorRef,
         private calendarService: Calendar2Service
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -270,7 +270,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    dateStringUpdate(date: string) {
+    dateStringUpdate(date: string): void {
         if (date) {
             if (this.type === 'single') {
                 const fdDate = this.dateAdapter.parse(date);

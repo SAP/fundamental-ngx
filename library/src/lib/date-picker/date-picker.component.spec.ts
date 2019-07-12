@@ -172,4 +172,20 @@ describe('DatePickerComponent', () => {
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
         expect(component.onChange).toHaveBeenCalledWith({ date: date1, rangeEnd: date2 });
     });
+
+    it('Should handle valid reversed range string date', () => {
+        spyOn(component.selectedRangeDateChange, 'emit');
+        spyOn(component, 'onChange');
+        const date1 = new FdDate(2011, 10, 10);
+        const date2 = new FdDate(2000, 10, 10);
+        const strDate1 = component.dateAdapter.format(date1);
+        const strDate2 = component.dateAdapter.format(date2);
+        component.type = 'range';
+        component.dateStringUpdate(strDate1 + component.dateAdapter.rangeDelimiter + strDate2);
+        expect(component.isInvalidDateInput).toBe(false);
+        expect(component.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
+        expect(component.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
+        expect(component.onChange).toHaveBeenCalledWith({ date: date1, rangeEnd: date2 });
+    });
 });

@@ -52,12 +52,6 @@ export class FdDate {
         }
     }
 
-    public get monthStr(): string {
-        if (this.month) {
-            return (this.month < 10 ? '0' : '') + this.month;
-        }
-    }
-
     public get date(): Date {
         return this.toDate();
     }
