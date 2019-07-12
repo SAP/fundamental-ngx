@@ -47,7 +47,7 @@
         "highlight.js": "^9.15.6",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^8.1.0",
-        "npm": "^6.10.0",
+        "npm": "^6.10.1",
         "popper.js": "^1.15.0",
         "raw-loader": "^1.0.0",
         "rxjs": "^6.4.0",
