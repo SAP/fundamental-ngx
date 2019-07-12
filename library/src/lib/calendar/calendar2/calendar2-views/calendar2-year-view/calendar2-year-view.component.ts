@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter } from '@angular/core';
+import { CalendarDay } from '../../models/calendar-day';
 
 @Component({
     selector: 'fd-calendar2-year-view',
@@ -6,13 +7,7 @@ import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter } fro
     styleUrls: ['./calendar2-year-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2YearViewComponent implements OnInit {
-
-    @Output()
-    yearClicked: EventEmitter<any> = new EventEmitter();
-
-    @Input()
-    yearSelected: number;
+export class Calendar2YearViewComponent {
 
     @Input()
     isActive: boolean;
@@ -20,14 +15,26 @@ export class Calendar2YearViewComponent implements OnInit {
     @Input()
     calendarYearList: number[];
 
-    constructor() {
+    @Input()
+    yearSelected: number;
+
+    @Output()
+    yearClicked: EventEmitter<any> = new EventEmitter();
+
+    currentYear: number = new Date().getFullYear();
+
+    constructor() { }
+
+    onKeydownYearHandler(event) {
+        event.preventDefault();
+        console.log('keyup triggered!');
     }
 
-    ngOnInit() {
-
-    }
-
-    selectYear(calendarYearClicked: number) {
-        this.yearClicked.emit(calendarYearClicked);
+    selectYear(selectedYear: number, event?: MouseEvent) {
+        if (event) {
+            event.stopPropagation();
+        }
+        this.yearSelected = selectedYear;
+        this.yearClicked.emit(this.yearSelected);
     }
 }
