@@ -16,9 +16,9 @@ export class Calendar2MonthViewComponent {
     /** @hidden A number (1-12) representing the selected month */
     @Input() monthSelected: number;
 
-    /** @hidden When set to true allows escape focus, otherwise resets on beginning. */
+    /** @hidden A function that handles escape focus. */
     @Input()
-    allowFocusEscape: boolean = false;
+    focusEscapeFunction: Function;
 
     /** @hidden An event fired when a new month is selected. */
     @Output()
@@ -82,9 +82,9 @@ export class Calendar2MonthViewComponent {
                 break;
             }
             case 'Tab': {
-                if (!event.shiftKey && !this.allowFocusEscape) {
+                if (this.focusEscapeFunction) {
                     event.preventDefault();
-                    this.focusElement('#arrowLeft');
+                    this.focusEscapeFunction();
                 }
                 break;
             }
