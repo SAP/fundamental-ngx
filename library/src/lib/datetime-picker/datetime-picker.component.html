@@ -13,8 +13,8 @@
                        [attr.aria-label]="datetimeInputLabel"
                        [value]="inputFieldDate"
                        [placeholder]="placeholder"
-                       (keyup.enter)="inputValueChange(dateTimePicker.value)"
-                       (blur)="inputValueChange(dateTimePicker.value)"
+                       (keyup.enter)="handleInputChange(dateTimePicker.value)"
+                       (blur)="handleInputChange(dateTimePicker.value)"
                        (click)="openPopover()"
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }"
                        [disabled]="disabled">

@@ -130,8 +130,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     /** @hidden */
     constructor(
         private calendarI18n: CalendarI18n,
-        private eRef: ElementRef,
-        private service: Calendar2Service
+        private eRef: ElementRef
     ) {
     }
 
@@ -190,7 +189,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             return 0;
         } else if (this.selectedRangeDate.start &&
             (!this.selectedRangeDate.end ||
-                this.service.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
+                Calendar2Service.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
             )
         ) {
             return 1;
@@ -360,7 +359,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     private getDaysInMonth(month: number, year: number): number {
-        return this.service.getDaysInMonth(month, year);
+        return Calendar2Service.getDaysInMonth(month, year);
     }
 
     private getCurrentMonthDays(): CalendarDay[] {
@@ -445,12 +444,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
-                (this.calType === 'single' && this.service.datesEqual(fdDate, this.selectedDate)) ||
-                (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.start)) ||
-                (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.end))
+                (this.calType === 'single' && Calendar2Service.datesEqual(fdDate, this.selectedDate)) ||
+                (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.start)) ||
+                (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.end))
             ),
-            selectedFirst: (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.start)),
-            selectedLast: (this.selectedRangeDate && this.service.datesEqual(fdDate, this.selectedRangeDate.end)),
+            selectedFirst: (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.start)),
+            selectedLast: (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
                 (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
                 (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))

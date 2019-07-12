@@ -134,7 +134,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     inputFieldDate: string = null;
 
     /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    isInvalidDateInput: boolean = false;;
+    isInvalidDateInput: boolean = false;
 
     /** @hidden The Time object which interacts with the inner Time component. Internal use. */
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
@@ -210,58 +210,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    // updatePickerInputHandler(d): void {
-    //     if (d.selectedDay && d.selectedDay.date) {
-    //         d.selectedDay.date.setHours(this.date.getHours());
-    //         d.selectedDay.date.setMinutes(this.date.getMinutes());
-    //         d.selectedDay.date.setSeconds(this.date.getSeconds());
-    //         d.selectedDay.date.setMilliseconds(this.date.getMilliseconds());
-    //         const previous = this.date.getTime();
-    //         this.selectedDay = d.selectedDay;
-    //         this.date = d.selectedDay.date;
-    //         this.inputFieldDate = this.dateTimeAdapter.format(this.date);
-    //         this.time = { hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds() };
-    //         if (this.date.getTime() !== previous) {
-    //             this.calendarChange.emit(this.date);
-    //             this.dateChange.emit(this.date);
-    //             this.onChange(this.date);
-    //         }
-    //     } else if (d === '') {
-    //         this.selectedDay.date = null;
-    //         this.selectedDay.selected = null;
-    //         this.time.second = null;
-    //         this.time.minute = null;
-    //         this.time.hour = null;
-    //         this.timeComponent.displayedHour = null;
-    //         this.timeComponent.period = 'am';
-    //         this.timeComponent.oldPeriod = 'am';
-    //         this.calendarChange.emit(null);
-    //         this.timeChange.emit(null);
-    //         this.dateChange.emit(null);
-    //         this.onChange(this.selectedDay.date);
-    //     }
-    // }
-    //
     /** @hidden */
     isInvalidDateInputHandler(e): void {
         this.isInvalidDateInput = e;
-    }
-
-    /** @hidden */
-    inputValueChange(strDateTime: string): void {
-        /*
-         Need to check if current locale toDateString contains AM or PM. If the current locale has it and it is absent
-         from the user's input, the meridian should be considered invalid
-         */
-        const meridian = this.extractMeridian(strDateTime);
-        if (meridian || !this.meridian) {
-            this.handleInputChange(strDateTime);
-        } else if (strDateTime === '' && this.allowNull) {
-            this.isInvalidDateInput = false;
-            this.handleInputChange('');
-        } else {
-            this.isInvalidDateInput = true;
-        }
     }
 
     /** @hidden */
@@ -281,8 +232,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     ngOnInit(): void {
         if (this.date && this.inputFieldDate !== null) {
-            this.selectedDay.date = this.date;
-            this.time = { hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds() };
+            this.selectedDate = this.date.date;
+            this.time = this.date.time;
         }
     }
 
@@ -295,8 +246,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     constructor(private elRef: ElementRef,
-                private dateTimeAdapter: DateTimeFormatParser,
-                private calendarService: Calendar2Service
+                public dateTimeAdapter: DateTimeFormatParser
     ) {
     }
 
@@ -320,36 +270,32 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (!selected) {
             return;
         }
-        if (selected.time) {
+        if (selected.isDateValid() && selected.isTimeValid()) {
+            this.selectedDate = selected.date;
             this.time = selected.time;
-        } else {
-
-        }
-        if (selected.date) {
-            this.selectedDate = selected.date
+            this.date = new FdDatetime(this.selectedDate, this.time);
+            this.calendarComponent.setCurrentlyDisplayed(this.date.date);
+            this.setInput(this.date);
         }
     }
 
     /** @hidden */
     handleDateChange(date: FdDate): void {
-        if (!this.calendarService.datesEqual(date, this.selectedDate)) {
-            console.log('Date Changed Handler');
+        if (!Calendar2Service.datesEqual(date, this.selectedDate)) {
             this.selectedDate = date;
-            const fdTimeDate = new FdDatetime(this.selectedDate, this.time);
-            this.setInput(fdTimeDate);
-            console.log(fdTimeDate);
-            this.onChange(fdTimeDate);
+            this.date = new FdDatetime(this.selectedDate, this.time);
+            this.setInput(this.date);
+            this.onChange(this.date);
         }
     }
 
     /** @hidden */
     handleTimeChange(time: TimeObject): void {
         // TODO: Add equals function
-        console.log('Time Changed Handler');
         this.time = time;
-        const fdTimeDate = new FdDatetime(this.selectedDate, this.time);
-        this.setInput(fdTimeDate);
-        this.onChange(fdTimeDate);
+        this.date = new FdDatetime(this.selectedDate, this.time);
+        this.setInput(this.date);
+        this.onChange(this.date);
     }
 
     /** @hidden */
@@ -359,34 +305,37 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     handleInputChange(date: string): void {
         if (date) {
-            console.log('Input Changed Handler');
             const fdTimeDate = this.dateTimeAdapter.parse(date);
-            this.isInvalidDateInput = !this.calendarService.validateDateFromDatePicker(fdTimeDate.date);
-
-            // If is correct and data is not exactly the same
+            console.log(fdTimeDate);
+            console.log(fdTimeDate.isDateValid());
+            console.log(fdTimeDate.isTimeValid());
+            this.isInvalidDateInput = !(fdTimeDate.isDateValid() && fdTimeDate.isTimeValid());
             if (!this.isInvalidDateInput) {
                 this.selectedDate = fdTimeDate.date;
                 this.time = fdTimeDate.time;
                 this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
-                this.onChange({ date: fdTimeDate });
+                this.date = new FdDatetime(this.selectedDate, this.time);
+                console.log(123456789);
+                this.onChange(fdTimeDate);
             } else {
-                // this.selectedDate = FdDate.getToday();
-                // this.calendarComponent.setCurrentlyDisplayed(fdDate);
+                // holy guacamole
             }
+        } else if (this.allowNull) {
+            console.log('allownulallownulallownulallownul');
+            this.isInvalidDateInput = false;
+            this.date = FdDatetime.GetToday();
+            this.selectedDate = this.date.date;
+            this.time = this.date.time;
+            this.calendarComponent.setCurrentlyDisplayed(this.date.date);
+            this.onChange(null);
+        } else {
+            console.log('notvalidnotvalidnotvalidnotvalid');
+            this.isInvalidDateInput = true;
         }
     }
 
     private setInput(fdDateTime: FdDatetime): void {
         this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
-    }
-
-    private extractMeridian(str: string): string {
-        if (typeof str === 'string') {
-            if (str.slice(-2) === 'AM' || str.slice(-2) === 'am' || str.slice(-2) === 'PM' || str.slice(-2) === 'pm') {
-                return str.slice(-2);
-            }
-        }
-        return null;
     }
 
 }

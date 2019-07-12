@@ -48,7 +48,7 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
             const dateStr = value.split(',')[0];
             if (dateStr) {
                 const dateSplitStr = dateStr.split('.').map(Number);
-                date = new FdDate(dateSplitStr[0], dateSplitStr[1], dateSplitStr[2]);
+                date = new FdDate(dateSplitStr[2], dateSplitStr[1], dateSplitStr[0]);
             }
             const timeStr = value.split(',')[1];
             if (timeStr) {
@@ -56,7 +56,6 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
                 time = { hour: timeSplitStr[0], minute: timeSplitStr[1], second: timeSplitStr[2] };
             }
             if (date) {
-                console.log(new FdDatetime(date, time));
                 return new FdDatetime(date, time);
             }
         }
@@ -67,6 +66,12 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
      * @param date Date object to convert to a string.
      */
     public format(date: FdDatetime): string {
-        return date.toDate().toLocaleString();
+        return date.day + '.' +
+            date.month + '.' +
+            date.year + ', ' +
+            date.hour + ':' +
+            date.minute + ':' +
+            date.second
+        ;
     }
 }

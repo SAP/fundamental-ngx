@@ -1,6 +1,8 @@
 /**
  * Default date model used by the fundamental components.
  */
+import { Calendar2Service } from '../calendar2.service';
+
 export class FdDate {
 
     /**
@@ -61,6 +63,26 @@ export class FdDate {
      */
     public toDate(): Date {
         return new Date(this.year, this.month - 1, this.day);
+    }
+    
+    public isDateValid(): boolean {
+        if (!this) {
+            return false;
+        }
+
+        if (!this.year || !this.month || !this.day) {
+            return false;
+        }
+
+        if (this.year < 1000 || this.year > 3000 || this.month < 1 || this.month > 12) {
+            return false;
+        }
+
+        if (this.day < 1 || this.day > Calendar2Service.getDaysInMonth(this.month, this.year)) {
+            return false;
+        }
+
+        return true;
     }
 
 }

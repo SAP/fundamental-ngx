@@ -166,7 +166,6 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** @hidden */
     public closeFromCalendar(): void {
         if (this.type === 'single') {
-            console.log(this.type);
             this.closeCalendar();
         }
     }
@@ -205,8 +204,8 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** @hidden */
     public handleRangeDateChange(dates: FdRangeDate): void {
         if (dates &&
-            (!this.calendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
-                !this.calendarService.datesEqual(this.selectedRangeDate.end, dates.end))
+            (!Calendar2Service.datesEqual(this.selectedRangeDate.start, dates.start) ||
+                !Calendar2Service.datesEqual(this.selectedRangeDate.end, dates.end))
         ) {
             this.inputFieldDate = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
                 + this.dateAdapter.format(dates.end)
@@ -274,10 +273,10 @@ export class DatePickerComponent implements ControlValueAccessor {
         if (date) {
             if (this.type === 'single') {
                 const fdDate = this.dateAdapter.parse(date);
-                this.isInvalidDateInput = !this.calendarService.validateDateFromDatePicker(fdDate);
+                this.isInvalidDateInput = !fdDate.isDateValid()
 
                 // If is correct and data is not exactly the same
-                if (!this.isInvalidDateInput && !this.calendarService.datesEqual(fdDate, this.selectedDate)) {
+                if (!this.isInvalidDateInput && !Calendar2Service.datesEqual(fdDate, this.selectedDate)) {
                     this.selectedDate = fdDate;
                     this.calendarComponent.setCurrentlyDisplayed(fdDate);
                     this.onChange({ date: this.selectedDate });
@@ -291,13 +290,13 @@ export class DatePickerComponent implements ControlValueAccessor {
                 const firstDate = this.dateAdapter.parse(currentDates[0]);
                 const secondDate = this.dateAdapter.parse(currentDates[1]);
                 this.isInvalidDateInput =
-                    !this.calendarService.validateDateFromDatePicker(firstDate) ||
-                    !this.calendarService.validateDateFromDatePicker(secondDate);
+                    !firstDate.isDateValid() ||
+                    !secondDate.isDateValid();
 
                 // If is correct and data is not exactly the same
                 if (!this.isInvalidDateInput &&
-                    (!this.calendarService.datesEqual(firstDate, this.selectedRangeDate.start) ||
-                        !this.calendarService.datesEqual(secondDate, this.selectedRangeDate.end))) {
+                    (!Calendar2Service.datesEqual(firstDate, this.selectedRangeDate.start) ||
+                        !Calendar2Service.datesEqual(secondDate, this.selectedRangeDate.end))) {
 
                     if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
                         this.selectedRangeDate = { start: secondDate, end: firstDate };

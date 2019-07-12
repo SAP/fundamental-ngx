@@ -17,22 +17,22 @@ describe('CalendarService', () => {
     });
 
     it('Should return good day amount for july', () => {
-        const amount = service.getDaysInMonth(7, 2019);
+        const amount = Calendar2Service.getDaysInMonth(7, 2019);
         expect(amount).toBe(31);
     });
 
     it('Should return good day amount for june', () => {
-        const amount = service.getDaysInMonth(6, 2019);
+        const amount = Calendar2Service.getDaysInMonth(6, 2019);
         expect(amount).toBe(30);
     });
 
     it('Should return good day amount for pivot year on february ', () => {
-        const amount = service.getDaysInMonth(2, 2016);
+        const amount = Calendar2Service.getDaysInMonth(2, 2016);
         expect(amount).toBe(29);
     });
 
     it('Should return good day amount for non pivot year on february ', () => {
-        const amount = service.getDaysInMonth(2, 2018);
+        const amount = Calendar2Service.getDaysInMonth(2, 2018);
         expect(amount).toBe(28);
     });
 
@@ -40,7 +40,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2019, 10, 10);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = service.datesEqual(date1, date2);
+        const result = Calendar2Service.datesEqual(date1, date2);
         expect(result).toBeTruthy();
     });
 
@@ -48,7 +48,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2020, 10, 10);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = service.datesEqual(date1, date2);
+        const result = Calendar2Service.datesEqual(date1, date2);
         expect(result).not.toBeTruthy();
     });
 
@@ -56,7 +56,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2019, 11, 10);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = service.datesEqual(date1, date2);
+        const result = Calendar2Service.datesEqual(date1, date2);
         expect(result).not.toBeTruthy();
     });
 
@@ -64,20 +64,18 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2019, 10, 11);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = service.datesEqual(date1, date2);
+        const result = Calendar2Service.datesEqual(date1, date2);
         expect(result).not.toBeTruthy();
     });
 
     it('Validation Should return false, when incorrect date', () => {
         const date = new FdDate(2019, 12, 32);
-        const result = service.validateDateFromDatePicker(date);
-        expect(result).not.toBeTruthy();
+        expect(date.isDateValid()).not.toBeTruthy();
     });
 
     it('Validation Should return true, when date', () => {
         const date = new FdDate(2019, 12, 31);
-        const result = service.validateDateFromDatePicker(date);
-        expect(result).toBeTruthy();
+        expect(date.isDateValid()).toBeTruthy();
     });
 
 });

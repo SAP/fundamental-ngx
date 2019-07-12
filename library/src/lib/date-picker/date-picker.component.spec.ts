@@ -33,7 +33,7 @@ describe('DatePickerComponent', () => {
     it('should open the calendar', () => {
         component.isOpen = false;
         component.isInvalidDateInput = true;
-        component.openCalendar({});
+        component.openCalendar();
         expect(component.isOpen).toBeTruthy();
         expect(component.inputFieldDate).toBeNull();
     });
@@ -41,7 +41,7 @@ describe('DatePickerComponent', () => {
     it('should not open the calendar if the component is disabled', () => {
         component.isOpen = false;
         component.disabled = true;
-        component.openCalendar({});
+        component.openCalendar();
         expect(component.isOpen).toBeFalsy();
     });
 
@@ -183,9 +183,9 @@ describe('DatePickerComponent', () => {
         component.type = 'range';
         component.dateStringUpdate(strDate1 + component.dateAdapter.rangeDelimiter + strDate2);
         expect(component.isInvalidDateInput).toBe(false);
-        expect(component.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
-        expect(component.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
-        expect(component.onChange).toHaveBeenCalledWith({ date: date1, rangeEnd: date2 });
+        expect(component.calendarComponent.currentlyDisplayed.month).toBe(date2.month);
+        expect(component.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
+        expect(component.onChange).toHaveBeenCalledWith({ date: date2, rangeEnd: date1 });
     });
 });

@@ -175,8 +175,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     /** @hidden */
     constructor(public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n,
-                private calendarService: Calendar2Service) {
+                public calendarI18n: CalendarI18n) {
     }
 
     /** @hidden */
@@ -189,17 +188,19 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         let valid: boolean = true;
         if (selected) {
             if (selected.date && this.calType === 'single') {
-                valid = this.calendarService.validateDateFromDatePicker(selected.date);
-                if (valid) {
+                valid = selected.date.isDateValid();
+                if (selected.date.isDateValid()) {
                     this.selectedDate = selected.date;
                     this.prepareDisplayedView();
                 }
             }
             if ((selected.start || selected.end) && this.calType === 'range') {
-                valid = !
-                    (!selected.start || !this.calendarService.validateDateFromDatePicker(selected.start) ||
-                        (!selected.end || !this.calendarService.validateDateFromDatePicker(selected.end))
-                    );
+                if (selected.start && !selected.start.isDateValid()) {
+                    valid = false;
+                }
+                if (selected.end && !selected.end.isDateValid()) {
+                    valid = false;
+                }
                 if (valid) {
                     this.selectedRangeDate = { start: selected.start, end: selected.end };
                     this.prepareDisplayedView();
@@ -207,7 +208,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
             }
         }
         this.invalidDate = !valid;
-        this.dateValidityChange.emit({isValid: valid});
+        this.dateValidityChange.emit({ isValid: valid });
     }
 
     /** @hidden */
