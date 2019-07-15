@@ -4,7 +4,7 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Input,
+    Input, isDevMode,
     OnChanges,
     OnInit,
     Output,
@@ -80,7 +80,7 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
 
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
-    highlight: boolean = true;
+    highlighting: boolean = true;
 
     /** Whether the popover should close when a user selects a result. */
     @Input()
@@ -242,6 +242,10 @@ export class SearchInputComponent implements ControlValueAccessor, OnInit, OnCha
     ngOnInit() {
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
+        }
+
+        if (isDevMode()) {
+            console.warn('Search Input is deprecated. Please use Combobox instead. Visit the fundamental-ngx wiki for more information.')
         }
     }
 

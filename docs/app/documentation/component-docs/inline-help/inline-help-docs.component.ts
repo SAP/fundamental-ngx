@@ -3,6 +3,8 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
+import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
+import Popper from 'popper.js';
 
 @Component({
     selector: 'app-inline-help',
@@ -22,7 +24,7 @@ export class InlineHelpDocsComponent implements OnInit {
                     },
                     position: {
                         type: 'string',
-                        enum: ['default', 'bottom-left', 'right', 'left']
+                        enum: Array.from(Popper.placements)
                     }
                 }
             }
@@ -36,11 +38,12 @@ export class InlineHelpDocsComponent implements OnInit {
         properties: {
             label: 'Inline Help',
             helpText: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
-            position: 'default'
+            position: 'bottom-start'
         }
     };
 
     inlineHelpHtml = inlineHelpSrc;
+    inlineHelpTriggerHtml = inlineHelpTriggerHtml;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inlineHelp');

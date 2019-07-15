@@ -11,7 +11,7 @@ import { BreadcrumbDocsComponent } from './component-docs/breadcrumb/breadcrumb-
 import { ButtonDocsComponent } from './component-docs/button/button-docs.component';
 import { ButtonGroupDocsComponent } from './component-docs/button-group/button-group-docs.component';
 import { CalendarDocsComponent } from './component-docs/calendar/calendar-docs.component';
-import { ComboboxInputDocsComponent } from './component-docs/combobox-input/combobox-input-docs.component';
+import { ComboboxDocsComponent } from './component-docs/combobox/combobox-docs.component';
 import { DatePickerDocsComponent } from './component-docs/date-picker/date-picker-docs.component';
 import { DatetimePickerDocsComponent } from './component-docs/datetime-picker/datetime-picker-docs.component';
 import { DropdownDocsComponent } from './component-docs/dropdown/dropdown-docs.component';
@@ -51,7 +51,7 @@ import { BreadcrumbHeaderComponent } from './component-docs/breadcrumb/breadcrum
 import { ButtonHeaderComponent } from './component-docs/button/button-header/button-header.component';
 import { ButtonGroupHeaderComponent } from './component-docs/button-group/button-group-header/button-group-header.component';
 import { CalendarHeaderComponent } from './component-docs/calendar/calendar-header/calendar-header.component';
-import { ComboboxInputHeaderComponent } from './component-docs/combobox-input/combobox-input-header/combobox-input-header.component';
+import { ComboboxHeaderComponent } from './component-docs/combobox/combobox-header/combobox-header.component';
 import { DatePickerHeaderComponent } from './component-docs/date-picker/date-picker-header/date-picker-header.component';
 import { DatetimePickerHeaderComponent } from './component-docs/datetime-picker/datetime-picker-header/datetime-picker-header.component';
 import { DropdownHeaderComponent } from './component-docs/dropdown/dropdown-header/dropdown-header.component';
@@ -86,6 +86,12 @@ import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/tog
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
 import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
 import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
+import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
+import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
+import {
+    TabNavigationExampleChildFirst,
+    TabNavigationExampleChildSecond, TabNavigationExampleChildThird
+} from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 
 export const ROUTES: Routes = [
     {
@@ -128,8 +134,8 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.calendar}}
                 ]
             },
-            { path: 'comboboxInput', component: ComboboxInputHeaderComponent, children: [
-                    { path: '', component: ComboboxInputDocsComponent},
+            { path: 'combobox', component: ComboboxHeaderComponent, children: [
+                    { path: '', component: ComboboxDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.comboboxInput}}
                 ]
             },
@@ -258,14 +264,25 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.sideNavigation}}
                 ]
             },
+            { path: 'splitButton', component: SplitButtonHeaderComponent, children: [
+                    { path: '', component: SplitButtonDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.splitButton}}
+                ]
+            },
             { path: 'table', component: TableDocsHeaderComponent, children: [
                     { path: '', component: TableDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.table}}
                 ]
             },
             { path: 'tabs', component: TabsHeaderComponent, children: [
-                    { path: '', component: TabsDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs}}
+                    { path: '', component: TabsDocsComponent,
+                        children: [
+                            {path: 'tab1', component: TabNavigationExampleChildFirst},
+                            {path: 'tab2', component: TabNavigationExampleChildSecond},
+                            {path: 'tab3', component: TabNavigationExampleChildThird},
+                        ]
+                    },
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs }}
                 ]
             },
             { path: 'tile', component: TileDocsHeaderComponent, children: [

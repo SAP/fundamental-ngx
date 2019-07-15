@@ -1,6 +1,7 @@
 .fd-modal-custom {
     max-width: none;
     z-index: 1000;
+    position: absolute;
 
     &:focus {
         outline: none;

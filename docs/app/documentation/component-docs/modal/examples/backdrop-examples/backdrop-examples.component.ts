@@ -22,7 +22,6 @@ export class BackdropExamplesComponent {
 
     openCustomBackdrop(modal): void {
         this.modalService.open(modal, {
-            container: document.activeElement as HTMLElement,
             backdropClass: 'modal-custom-overlay-example',
             backdropClickCloseable: false,
             maxWidth: '400px',

@@ -1,0 +1,35 @@
+<h2>Standard Combobox</h2>
+<description>The standard version of the component that most people will likely use regularly.</description>
+<component-example [name]="'ex1'">
+    <fd-combobox-example></fd-combobox-example>
+</component-example>
+<code-example [code]="comboboxExampleHtml" [language]="'HTML'"></code-example>
+<code-example [code]="comboboxExampleTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Custom Filter</h2>
+<description>The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which accepts an array and a search term, and then returns the desired filtered array.</description>
+<component-example [name]="'ex2'">
+    <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
+</component-example>
+<code-example [code]="comboboxDynamicHtml" [language]="'HTML'"></code-example>
+<code-example [code]="comboboxDynamicTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Display Object Property</h2>
+<description>Passing object arrays to the Combobox is supported through the <code>displayFn</code> input function. To access the <code>this</code> keyword inside the passed function, use an arrow function.</description>
+<component-example [name]="'ex3'">
+    <fd-combobox-displaywith-example></fd-combobox-displaywith-example>
+</component-example>
+<code-example [code]="displayHtml" [language]="'HTML'"></code-example>
+<code-example [code]="displayTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Observable Async Example</h2>
+<description>The <code>dropdownValues</code> input can accept an Observable with the async pipe, which could be useful for autocomplete.</description>
+<description>This example also demonstrates how to create a callback function from data returned by the observable.</description>
+<component-example [name]="'ex4'">
+    <fd-combobox-async-example></fd-combobox-async-example>
+</component-example>
+<code-example [code]="comboboxAsyncHtml" [language]="'HTML'"></code-example>
+<code-example [code]="comboboxAsyncTs" [language]="'typescript'"></code-example>

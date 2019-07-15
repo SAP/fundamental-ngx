@@ -1,17 +1,15 @@
 <ul class="fd-tabs"
     role="tablist">
-    <li class="fd-tabs__item"
-        *ngFor="let tab of tabs.toArray(); let i = index;">
+    <li fd-tab-item
+        *ngFor="let tab of panelTabs.toArray(); let i = index;">
         <a #tabLink
-           role="tab"
-           class="fd-tabs__link"
+           fd-tab-link
+           [disabled]="tab.disabled"
+           [active]="tab.expanded"
            [attr.tabindex]="tab.disabled ? -1 : 0"
            [attr.aria-controls]="tab.id"
-           [attr.aria-disabled]="tab.disabled"
-           [attr.aria-selected]="tab.expanded ? true : null"
            [attr.aria-label]="tab.ariaLabel || null"
            [attr.aria-labelledby]="(!tab.ariaLabel && tab.ariaLabelledBy) ? tab.ariaLabelledBy : null"
-           [class.is-selected]="tab.expanded"
            (keydown)="tabHeaderKeyHandler(i, $event)"
            (click)="tabHeaderClickHandler(i)">
 

@@ -2,6 +2,106 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0-rc.8"></a>
+# [0.8.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.7...v0.8.0-rc.8) (2019-07-12)
+
+
+
+<a name="0.8.0-rc.7"></a>
+# [0.8.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.6...v0.8.0-rc.7) (2019-07-11)
+
+
+
+<a name="0.8.0-rc.6"></a>
+# [0.8.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.5...v0.8.0-rc.6) (2019-07-11)
+
+
+
+<a name="0.8.0-rc.5"></a>
+# [0.8.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.4...v0.8.0-rc.5) (2019-07-10)
+
+
+### Features
+
+* deprecate search input and rename combobox-input to combobox ([#1015](https://github.com/SAP/fundamental-ngx/issues/1015)) ([4804c2b](https://github.com/SAP/fundamental-ngx/commit/4804c2b))
+
+
+
+<a name="0.8.0-rc.4"></a>
+# [0.8.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.3...v0.8.0-rc.4) (2019-07-09)
+
+
+
+<a name="0.8.0-rc.3"></a>
+# [0.8.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.2...v0.8.0-rc.3) (2019-07-09)
+
+
+
+<a name="0.8.0-rc.2"></a>
+# [0.8.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.1...v0.8.0-rc.2) (2019-07-08)
+
+
+
+<a name="0.8.0-rc.1"></a>
+# [0.8.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.0...v0.8.0-rc.1) (2019-07-08)
+
+
+### Features
+
+* Add split button component ([#974](https://github.com/SAP/fundamental-ngx/issues/974)) ([2472733](https://github.com/SAP/fundamental-ngx/commit/2472733))
+
+
+
+<a name="0.8.0-rc.0"></a>
+# [0.8.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.7.1-rc.0...v0.8.0-rc.0) (2019-07-08)
+
+
+### Features
+
+* Add navigation mode for tabs ([#976](https://github.com/SAP/fundamental-ngx/issues/976)) ([0eb44d7](https://github.com/SAP/fundamental-ngx/commit/0eb44d7))
+
+
+
+<a name="0.7.1-rc.0"></a>
+## [0.7.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.7.0...v0.7.1-rc.0) (2019-07-08)
+
+
+
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.10...v0.7.0) (2019-07-05)
+
+
+
+<a name="0.7.0-rc.10"></a>
+# [0.7.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.9...v0.7.0-rc.10) (2019-07-05)
+
+
+
+<a name="0.7.0-rc.9"></a>
+# [0.7.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.8...v0.7.0-rc.9) (2019-07-05)
+
+
+
+<a name="0.7.0-rc.8"></a>
+# [0.7.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.7...v0.7.0-rc.8) (2019-07-04)
+
+
+### Bug Fixes
+
+* make inline help component using popover component ([#986](https://github.com/SAP/fundamental-ngx/issues/986)) ([4db1d9e](https://github.com/SAP/fundamental-ngx/commit/4db1d9e))
+
+
+
+<a name="0.7.0-rc.7"></a>
+# [0.7.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.6...v0.7.0-rc.7) (2019-07-04)
+
+
+### Features
+
+* added position property to modal configuration ([#991](https://github.com/SAP/fundamental-ngx/issues/991)) ([b17df54](https://github.com/SAP/fundamental-ngx/commit/b17df54))
+
+
+
 <a name="0.7.0-rc.6"></a>
 # [0.7.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.7.0-rc.5...v0.7.0-rc.6) (2019-07-02)
 

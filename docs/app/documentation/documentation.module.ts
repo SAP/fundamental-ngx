@@ -34,7 +34,7 @@ import { IconDocsComponent } from './component-docs/icon/icon-docs.component';
 import { IdentifierDocsComponent } from './component-docs/identifier/identifier-docs.component';
 import { InlineHelpDocsComponent } from './component-docs/inline-help/inline-help-docs.component';
 import { InputGroupDocsComponent } from './component-docs/input-group/input-group-docs.component';
-import { ComboboxInputDocsComponent } from './component-docs/combobox-input/combobox-input-docs.component';
+import { ComboboxDocsComponent } from './component-docs/combobox/combobox-docs.component';
 import { ImageDocsComponent } from './component-docs/image/image-docs.component';
 import { DropdownDocsComponent } from './component-docs/dropdown/dropdown-docs.component';
 import { PaginationDocsComponent } from './component-docs/pagination/pagination-docs.component';
@@ -98,7 +98,7 @@ import {
 import { CalendarRangeExampleComponent } from './component-docs/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from './component-docs/calendar/examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from './component-docs/calendar/examples/calendar-monday-start-example.component';
-import { ComboboxInputExampleComponent } from './component-docs/combobox-input/examples/combobox-input-example.component';
+import { ComboboxExampleComponent } from './component-docs/combobox/examples/combobox-example.component';
 import { DatePickerRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from './component-docs/date-picker/examples/date-picker-single-example.component';
 import {
@@ -129,7 +129,10 @@ import {
     ImageShapesExampleComponent,
     ImageSizesExampleComponent
 } from './component-docs/image/examples/image-examples.component';
-import { InlineHelpExampleComponent } from './component-docs/inline-help/examples/inline-help-examples.component';
+import {
+    InlineHelpExampleComponent,
+    InlineHelpTriggerExampleComponent
+} from './component-docs/inline-help/examples/inline-help-examples.component';
 import {
     InputGroupButtonExampleComponent,
     InputGroupIconExampleComponent,
@@ -177,7 +180,7 @@ import {
 import { TableExampleComponent } from './component-docs/table/examples/table-example.component';
 import {
     TabsExampleComponent,
-    TabSelectionExampleComponent
+    TabSelectionExampleComponent, TabsNavigationModeExampleComponent
 } from './component-docs/tabs/examples/tabs-examples-component';
 import {
     TileActionsExampleComponent,
@@ -270,7 +273,7 @@ import { BreadcrumbHeaderComponent } from './component-docs/breadcrumb/breadcrum
 import { ButtonHeaderComponent } from './component-docs/button/button-header/button-header.component';
 import { ButtonGroupHeaderComponent } from './component-docs/button-group/button-group-header/button-group-header.component';
 import { CalendarHeaderComponent } from './component-docs/calendar/calendar-header/calendar-header.component';
-import { ComboboxInputHeaderComponent } from './component-docs/combobox-input/combobox-input-header/combobox-input-header.component';
+import { ComboboxHeaderComponent } from './component-docs/combobox/combobox-header/combobox-header.component';
 import { DatePickerHeaderComponent } from './component-docs/date-picker/date-picker-header/date-picker-header.component';
 import { DatetimePickerHeaderComponent } from './component-docs/datetime-picker/datetime-picker-header/datetime-picker-header.component';
 import { DropdownHeaderComponent } from './component-docs/dropdown/dropdown-header/dropdown-header.component';
@@ -327,6 +330,18 @@ import { DatePickerDisabledExampleComponent } from './component-docs/date-picker
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
+import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
+import {
+    ButtonSplitOptionsExampleComponent,
+    ButtonSplitProgrammaticalExampleComponent,
+    ButtonSplitTemplateExampleComponent,
+    ButtonSplitTypesExampleComponent,
+    ButtonSplitTypesIconsComponent
+} from './component-docs/split-button/examples/split-button-examples.component';
+import {
+    TabNavigationExampleChildFirst, TabNavigationExampleChildSecond,
+    TabNavigationExampleChildThird
+} from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
@@ -336,6 +351,12 @@ import {
     LocalizationEditorTemplateExampleComponent, LocalizationEditorTextareaExampleComponent
 } from './component-docs/localization-editor/examples/localization-editor-examples.component';
 import { LocalizationEditorFormsExampleComponent } from './component-docs/localization-editor/examples/localization-editor-forms-example.component';
+import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
+import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
+import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
+import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
+import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
+import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 
 @NgModule({
     declarations: [
@@ -352,6 +373,7 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         BreadcrumbDocsComponent,
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
+        SplitButtonDocsComponent,
         DropdownDocsComponent,
         DatetimePickerDocsComponent,
         FileInputDocsComponent,
@@ -405,8 +427,13 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         ButtonIconsExampleComponent,
         ButtonOptionsExampleComponent,
         ButtonSizesExampleComponent,
-        ButtonStateExampleComponent,
         ButtonTypesExampleComponent,
+        ButtonStateExampleComponent,
+        ButtonSplitTypesExampleComponent,
+        ButtonSplitTypesIconsComponent,
+        ButtonSplitProgrammaticalExampleComponent,
+        ButtonSplitOptionsExampleComponent,
+        ButtonSplitTemplateExampleComponent,
         ButtonGroupXsExampleComponent,
         ButtonGroupSmallExampleComponent,
         ButtonGroupCompactExampleComponent,
@@ -455,6 +482,7 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         InfiniteScrollDocsComponent,
         InfiniteScrollBasicExampleComponent,
         InlineHelpExampleComponent,
+        InlineHelpTriggerExampleComponent,
         InputGroupButtonExampleComponent,
         InputGroupIconExampleComponent,
         InputGroupNumberExampleComponent,
@@ -516,6 +544,10 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         TableResponsiveExampleComponent,
         TabsExampleComponent,
         TabSelectionExampleComponent,
+        TabsNavigationModeExampleComponent,
+        TabNavigationExampleChildFirst,
+        TabNavigationExampleChildSecond,
+        TabNavigationExampleChildThird,
         TileActionsExampleComponent,
         TileDisabledExampleComponent,
         TileExampleComponent,
@@ -539,8 +571,11 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
         TimePickerFormExampleComponent,
-        ComboboxInputDocsComponent,
-        ComboboxInputExampleComponent,
+        ComboboxDocsComponent,
+        ComboboxAsyncExampleComponent,
+        ComboboxDisplaywithExampleComponent,
+        ComboboxDynamicExampleComponent,
+        ComboboxExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
@@ -570,8 +605,9 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         BreadcrumbHeaderComponent,
         ButtonHeaderComponent,
         ButtonGroupHeaderComponent,
+        SplitButtonHeaderComponent,
         CalendarHeaderComponent,
-        ComboboxInputHeaderComponent,
+        ComboboxHeaderComponent,
         DatePickerHeaderComponent,
         DatetimePickerHeaderComponent,
         DropdownHeaderComponent,
@@ -610,7 +646,9 @@ import { LocalizationEditorFormsExampleComponent } from './component-docs/locali
         DatePickerI18nExampleComponent,
         DatePickerPositionExampleComponent,
         DatePickerFormatExampleComponent,
-        SearchPipe
+        SearchPipe,
+        ModalPositionExampleComponent,
+        ContainerComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

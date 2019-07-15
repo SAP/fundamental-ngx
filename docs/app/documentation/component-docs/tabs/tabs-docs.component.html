@@ -26,11 +26,22 @@
 <code-example [code]="complexH" [language]="'HTML'"></code-example>
 
 <separator></separator>
+<h2>Tab Navigation Mode</h2>
+<description>
+    It is possible to use the tabs in navigation mode. While there is no option to provide some content in this mode,
+    it does allow the use of a <code>router-outlet</code> with <code>[routerLink]</code> or <code>[href]</code> attributes.
+</description>
+<component-example [name]="'ex4'">
+    <fd-tabs-navigation-mode-example></fd-tabs-navigation-mode-example>
+</component-example>
+<code-example [code]="navigationTab" [language]="'HTML'"></code-example>
+
+<separator></separator>
 <h2>Adding and Removing Tabs</h2>
 <description>
     The tab component is very flexible, and supports dynamically adding or removing tabs.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-adding-tab-example></fd-adding-tab-example>
 </component-example>
 <code-example [code]="addingH" [language]="'HTML'"></code-example>

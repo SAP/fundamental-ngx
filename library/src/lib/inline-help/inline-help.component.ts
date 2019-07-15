@@ -1,10 +1,11 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Placement } from 'popper.js';
 /**
  * The component that represents an inline-help. 
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
  *
  * ```html
- * <fd-inline-help [position]="'bottom-left'">
+ * <fd-inline-help [placement]="'bottom-left'">
  *      Lorem ipsum dolor sit amet, consectetur adipiscing.
  * </fd-inline-help>
  * ```
@@ -12,18 +13,20 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-inline-help',
     templateUrl: './inline-help.component.html',
-    host: {
-        class: 'fd-inline-help',
-        role: 'alert'
-    },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['inline-help.component.scss']
 })
 export class InlineHelpComponent {
-    /** 
-     * The position of the inline help component.
-     * Options include *bottom-right*, *bottom-left*, *bottom-center*, *right*, and *left*.
-     * The default position is *bottom right* 
+
+    /** The placement of the inline help component. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
+     *   The default placement is *bottom start*
      */
     @Input()
-    position: string;
+    placement: Placement = 'bottom-start';
+
+    /** The trigger events that will open/close the inline help component.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    triggers: string[] = ['mouseenter', 'mouseleave'];
 }

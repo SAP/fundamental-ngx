@@ -7,7 +7,7 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { ComboboxInputModule } from './combobox-input/combobox-input.module';
+import { ComboboxModule } from './combobox/combobox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
@@ -22,6 +22,7 @@ import { ListModule } from './list/list.module';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
 import { ModalModule } from './modal/modal.module';
+import { ModalService } from './modal/modal-service/modal.service';
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
@@ -30,6 +31,7 @@ import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { SearchInputModule } from './search-input/search-input.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
+import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
 import { TileModule } from './tile/tile.module';
@@ -55,7 +57,7 @@ import { LocalizationEditorModule } from './localizator-editor/localization-edit
         ButtonModule,
         ButtonGroupModule,
         CalendarModule,
-        ComboboxInputModule,
+        ComboboxModule,
         DatePickerModule,
         DatetimePickerModule,
         FileInputModule,
@@ -80,6 +82,7 @@ import { LocalizationEditorModule } from './localizator-editor/localization-edit
         SearchInputModule,
         ShellbarModule,
         SideNavigationModule,
+        SplitButtonModule,
         TableModule,
         TabsModule,
         TileModule,
