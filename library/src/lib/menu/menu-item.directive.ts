@@ -11,15 +11,14 @@ import { Subject } from 'rxjs';
 })
 export class MenuItemDirective implements AfterViewInit, OnChanges {
 
-    public onKeyDown = new Subject<any>();
-    public onClick = new Subject();
-
+    public onKeyDown: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
+    public onClick: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor (public itemEl: ElementRef) {}
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         if (
             // if the menu item contains a child anchor element, apply 'fd-menu__item' class to that anchor
             this.isChildElementAnchor()
@@ -34,7 +33,7 @@ export class MenuItemDirective implements AfterViewInit, OnChanges {
         }
     }
 
-    public focus() {
+    public focus(): void {
         if (this.getChildrenElements() && this.getChildrenElements()[0]) {
             this.getChildrenElements()[0].focus();
         }
@@ -52,14 +51,14 @@ export class MenuItemDirective implements AfterViewInit, OnChanges {
     }
 
 
-    public click() {
+    public click(): void {
         if (this.getChildrenElements() && this.getChildrenElements()[0]) {
             this.getChildrenElements()[0].click();
         }
     }
 
     /** @hidden */
-    ngOnChanges() {
+    ngOnChanges(): void {
         this.ngAfterViewInit();
     }
 
@@ -67,12 +66,6 @@ export class MenuItemDirective implements AfterViewInit, OnChanges {
         return this.getChildrenElements() &&
         this.getChildrenElements()[0] &&
         this.getChildrenElements()[0].tagName === 'A'
-    }
-
-    public getChildElement(): any {
-        return this.getChildrenElements() &&
-            this.getChildrenElements()[0]
-        ;
     }
 
     private getChildrenElements(): any {

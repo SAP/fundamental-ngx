@@ -24,22 +24,28 @@ import { Subscription } from 'rxjs';
 export class MenuComponent implements AfterContentInit, OnDestroy {
 
     /** @hidden */
-    @ContentChildren(MenuGroupComponent) menuGroup: QueryList<MenuGroupComponent>;
+    @ContentChildren(MenuGroupComponent)
+    menuGroup: QueryList<MenuGroupComponent>;
 
     /** @hidden */
-    @ContentChildren(MenuListDirective) menuList: QueryList<MenuListDirective>;
+    @ContentChildren(MenuListDirective)
+    menuList: QueryList<MenuListDirective>;
 
     /** Event thrown always, when item link is clicked */
-    @Output() itemClicked = new EventEmitter<number>();
+    @Output()
+    public readonly itemClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /** Whether user wants to remove default keyboard handling */
-    @Input() disableKeydownHandling: boolean = false;
+    @Input()
+    disableKeydownHandling: boolean = false;
 
-    /** Whether user wants to define own function, that is supposed to be called, when focus escape before list*/
-    @Input() focusEscapeBeforeList: Function;
+    /** Function that is supposed to be called, when focus escape before list */
+    @Input()
+    focusEscapeBeforeList: Function;
 
-    /** Whether user wants to define own function, that is supposed to be called, when focus escape after list*/
-    @Input() focusEscapeAfterList: Function;
+    /** Function that is supposed to be called, when focus escape after list */
+    @Input()
+    focusEscapeAfterList: Function;
 
     private onItemKeyDownSubscription: Subscription[];
     private onItemClickSubscription: Subscription[];
@@ -58,19 +64,19 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     }
 
     /** Focuses first menu-item element which has anchor element */
-    public focusFirst() {
+    public focusFirst(): void {
         this.focus(0);
     }
 
     /** Focuses n menu-item element which has anchor element */
-    public focus(index: number) {
+    public focus(index: number): void {
         if (this.links[index]) {
             this.links[index].focus();
         }
     }
 
     /** @hidden */
-    keyDownHandler(event: any, index: number) {
+    keyDownHandler(event: KeyboardEvent, index: number): void {
 
         if (this.disableKeydownHandling) {
             return;
@@ -120,7 +126,7 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
         }
     }
 
-    private refreshList() {
+    private refreshList(): void {
         this.onItemKeyDownSubscription = [];
         this.onItemClickSubscription = [];
         this.links.forEach((link, index) => {
