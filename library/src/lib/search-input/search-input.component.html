@@ -42,7 +42,7 @@
                 <li fd-menu-item *ngFor="let term of displayedValues"
                     (click)="onMenuClickHandler($event, term)"
                     (keydown)="onMenuKeydownHandler($event, term)">
-                    <a tabindex="0" [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlight"></a>
+                    <a tabindex="0" [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></a>
                 </li>
             </ul>
         </fd-menu>

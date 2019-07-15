@@ -2,7 +2,7 @@
     "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
     "schematics": {
         "ng-add": {
-            "description": "Add fundamental-ngx to the project.",
+            "description": "Adds fundamental-ngx to the project.",
             "factory": "./ng-add/index#ngAdd"
         }
     }

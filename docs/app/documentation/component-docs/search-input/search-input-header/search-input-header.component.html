@@ -4,5 +4,13 @@
 </description>
 <import module="SearchInputModule" path="fundamental-ngx"></import>
 
+<!-- Warning for search input deprecation -->
+<fd-alert [type]="'warning'" [dismissible]="false" style="margin-top: 32px;">
+    <strong>Search Input is deprecated.</strong>
+    <br/>
+    It will still work for a few versions, but will soon be removed from the library.
+    Please use <a [routerLink]="'/combobox'">Combobox</a> instead.
+</fd-alert>
+
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

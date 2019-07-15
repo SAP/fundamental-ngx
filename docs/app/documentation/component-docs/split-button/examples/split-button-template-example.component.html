@@ -1,0 +1,18 @@
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()">
+    <ng-template fd-split-button-action-title>
+        <fd-icon [glyph]="'home'"></fd-icon>
+        Action
+    </ng-template>
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>

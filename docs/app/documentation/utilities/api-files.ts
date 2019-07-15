@@ -37,7 +37,7 @@ export const API_FILES = {
     ],
     buttonGroup: [
         'ButtonGroupComponent',
-        'ButtonGroupedDirective'
+        'ButtonGroupedDirective',
     ],
     calendar: [
         'CalendarComponent',
@@ -73,7 +73,7 @@ export const API_FILES = {
         'FormSetDirective'
     ],
     icon: [
-        'IconDirective'
+        'IconComponent'
     ],
     identifier: [
         'IdentifierDirective'
@@ -174,6 +174,11 @@ export const API_FILES = {
         'SideNavigationSublistComponent',
         'SideNavigationSublinkComponent',
         'SideNavigationTitleComponent'
+    ],
+    splitButton: [
+        'SplitButtonComponent',
+        'SplitButtonMenuDirective',
+        'SplitButtonActionTitle',
     ],
     table: [
         'TableDirective',
