@@ -4,6 +4,12 @@ import { TimeObject } from '../../time/time-object';
 export class FdDatetime {
     date: FdDate;
     time: TimeObject;
+    
+    static GetToday(): FdDatetime {
+        const date: Date = new Date();
+        const time: TimeObject = {hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()};
+        return new FdDatetime(FdDate.getToday(), time);
+    }
 
     constructor(
         date: FdDate,
@@ -30,12 +36,6 @@ export class FdDatetime {
         } else {
             return null;
         }
-    }
-
-    static GetToday(): FdDatetime {
-        const date: Date = new Date();
-        const time: TimeObject = {hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()};
-        return new FdDatetime(FdDate.getToday(), time);
     }
 
     public isTimeValid(): boolean {

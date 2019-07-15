@@ -223,9 +223,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** @hidden */
     constructor(
-        public dateAdapter: DateFormatParser,
-        private changeDetRef: ChangeDetectorRef,
-        private calendarService: Calendar2Service
+        public dateAdapter: DateFormatParser
     ) {}
 
     /** @hidden */

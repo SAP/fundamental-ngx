@@ -145,41 +145,58 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Subscription of the dateFromInput. */
     private dateFromInputSubscription: Subscription;
 
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     disableFunction = function(d): boolean {
         return false;
     };
-
-    /** The blockFunction for the calendar. */
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param d Date
+     */
     @Input()
     blockFunction = function(d): boolean {
         return false;
     };
-
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     disableRangeStartFunction = function(d): boolean {
         return false;
     };
-
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     disableRangeEndFunction = function(d): boolean {
         return false;
     };
-
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param d Date
+     */
     @Input()
     blockRangeStartFunction = function(d): boolean {
         return false;
     };
-
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param d Date
+     */
     @Input()
     blockRangeEndFunction = function(d): boolean {
         return false;
     };
 
     /** @hidden */
-    onChange: any = () => {
+    onChange: any = (selected: any) => {
     };
-
     /** @hidden */
     onTouched: any = () => {
     };
@@ -291,7 +308,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     handleTimeChange(time: TimeObject): void {
-        // TODO: Add equals function
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.setInput(this.date);
@@ -305,6 +321,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
+    /** @hidden */
     handleInputChange(date: string): void {
         if (date) {
             const fdTimeDate = this.dateTimeAdapter.parse(date);
@@ -316,8 +333,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
                 this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
                 this.date = new FdDatetime(this.selectedDate, this.time);
                 this.onChange(fdTimeDate);
-            } else {
-                // holy guacamole
             }
         } else if (this.allowNull) {
             this.isInvalidDateInput = false;

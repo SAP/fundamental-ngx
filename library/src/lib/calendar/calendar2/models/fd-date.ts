@@ -28,6 +28,9 @@ export class FdDate {
         return new FdDate(tempDate.getFullYear(), tempDate.getMonth() + 1, tempDate.getDate());
     }
 
+    /**
+     *  Static function allowing convert js date object to FdDate model
+     * */
     static getModelFromDate(date: Date): FdDate {
         if (date) {
             return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());

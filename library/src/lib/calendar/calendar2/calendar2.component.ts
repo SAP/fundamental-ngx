@@ -16,8 +16,6 @@ import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Calendar2DayViewComponent } from './calendar2-views/calendar2-day-view/calendar2-day-view.component';
-import { DateFormatParser } from '../format/date-parser';
-import { Calendar2Service } from './calendar2.service';
 import { FdRangeDate } from './models/fd-range-date';
 
 let calendarUniqueId: number = 0;
@@ -34,6 +32,9 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 /**
  * Months: 1 = January, 12 = december.
  * Days: 1 = Sunday, 7 = Saturday
+ *
+ * Calendar component used for selecting dates, typically used by the DatePicker and DateTimePicker components.
+ * Supports the Angular forms module, enabling form validity, ngModel, etc.
  */
 @Component({
     selector: 'fd-calendar2',
@@ -83,6 +84,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     @HostBinding('class.fd-calendar')
     private fdCalendarClass: boolean = true;
 
+    /** Currently displayed days depending on month and year */
     currentlyDisplayed: CalendarCurrent;
 
     /** Id of the calendar. If none is provided, one will be generated. */
@@ -174,9 +176,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
     };
 
     /** @hidden */
-    constructor(public calendarI18nLabels: CalendarI18nLabels,
-                public calendarI18n: CalendarI18n) {
-    }
+    constructor(public calendarI18n: CalendarI18n) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -266,6 +266,9 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         this.onTouched();
     }
 
+    /** Function that allows to change currently displayed month/year configuration,
+     * which are connected to days displayed
+     * */
     public setCurrentlyDisplayed(fdDate: FdDate): void {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
     }
