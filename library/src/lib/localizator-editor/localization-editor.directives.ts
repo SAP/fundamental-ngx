@@ -13,9 +13,26 @@ export class LocalizationEditorInputDirective {
 
 @Directive({
     // tslint:disable-next-line:directive-selector
+    selector: '[fd-localization-editor-textarea]',
+    host: {
+        '[class.fd-input--compact]': 'compact'
+    }
+})
+export class LocalizationEditorTextareaDirective {
+    public compact: boolean;
+}
+
+@Directive({
+    // tslint:disable-next-line:directive-selector
     selector: '[fd-localization-editor-label]',
 })
 export class LocalizationEditorLabel {}
+
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-localization-editor-element]',
+})
+export class LocalizationEditorElement {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector

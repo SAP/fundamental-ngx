@@ -103,8 +103,8 @@ export const API_FILES = {
     ],
     localizationEditor: [
         'LocalizationEditorComponent',
-        'localizationEditorItemComponent',
-        'localizationEditorMainComponent',
+        'LocalizationEditorItemComponent',
+        'LocalizationEditorMainComponent',
     ],
     menu: [
         'MenuComponent',

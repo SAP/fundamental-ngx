@@ -6,7 +6,11 @@ import { FormModule } from '../form';
 import { InputGroupModule } from '../input-group';
 import { MenuModule } from '../menu';
 import {
-    LocalizationEditorInputDirective, LocalizationEditorLabel, LocalizationEditorLoadLabel
+    LocalizationEditorInputDirective,
+    LocalizationEditorLabel,
+    LocalizationEditorElement,
+    LocalizationEditorLoadLabel,
+    LocalizationEditorTextareaDirective
 } from './localization-editor.directives';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 import { LocalizationEditorItemComponent } from './localization-editor-item/localization-editor-item.component';
@@ -18,7 +22,9 @@ import { LocalizationEditorItemComponent } from './localization-editor-item/loca
         LocalizationEditorItemComponent,
         LocalizationEditorInputDirective,
         LocalizationEditorLabel,
-        LocalizationEditorLoadLabel
+        LocalizationEditorLoadLabel,
+        LocalizationEditorTextareaDirective,
+        LocalizationEditorElement
     ],
     exports: [
         LocalizationEditorComponent,
@@ -26,7 +32,9 @@ import { LocalizationEditorItemComponent } from './localization-editor-item/loca
         LocalizationEditorMainComponent,
         LocalizationEditorInputDirective,
         LocalizationEditorLabel,
-        LocalizationEditorLoadLabel
+        LocalizationEditorLoadLabel,
+        LocalizationEditorTextareaDirective,
+        LocalizationEditorElement
     ],
     imports: [CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule]
 })

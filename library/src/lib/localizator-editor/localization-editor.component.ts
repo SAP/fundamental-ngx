@@ -24,15 +24,6 @@ import { LocalizationEditorItemComponent } from './localization-editor-item/loca
  *    <fd-localization-editor-item [label]="'DE'">
  *       <input fd-localization-editor-input type="text" placeholder="DE">
  *    </fd-localization-editor-item>
- *    <fd-localization-editor-item [label]="'NL'">
- *       <input fd-localization-editor-input type="text" placeholder="NL">
- *    </fd-localization-editor-item>
- *    <fd-localization-editor-item [label]="'PL'">
- *       <input fd-localization-editor-input type="text" placeholder="PL">
- *    </fd-localization-editor-item>
- *    <fd-localization-editor-item [label]="'ER'">
- *       <input fd-localization-editor-input type="text" placeholder="ER">
- *    </fd-localization-editor-item>
  * </fd-localization-editor>
  *  ```
  */
@@ -43,14 +34,11 @@ import { LocalizationEditorItemComponent } from './localization-editor-item/loca
         'class': 'fd-localization-editor'
     }
 })
-export class LocalizationEditorComponent implements OnChanges, AfterContentInit {
+export class LocalizationEditorComponent {
 
-    /**  @hidden*/
-    @ContentChild(LocalizationEditorMainComponent) mainElement: LocalizationEditorMainComponent;
-
-    /**  @hidden*/
-    @ContentChildren(LocalizationEditorItemComponent) listElements: QueryList<LocalizationEditorItemComponent>;
-
+    /** @hidden */
+    @ContentChild(LocalizationEditorMainComponent)
+    mainElement: LocalizationEditorMainComponent;
 
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -86,20 +74,6 @@ export class LocalizationEditorComponent implements OnChanges, AfterContentInit 
     @Input()
     compact: boolean = false;
 
-    /* Define the field type ex. 'textarea'*/
-    @Input()
-    type: string;
-
-    /** @hidden */
-    public ngOnChanges(): void {
-        this.refreshChildren();
-    }
-
-    /** @hidden */
-    public ngAfterContentInit(): void {
-        this.refreshChildren();
-    }
-
     /**
      * Toggles the popover open state.
      */
@@ -131,12 +105,13 @@ export class LocalizationEditorComponent implements OnChanges, AfterContentInit 
         }
     }
 
-    private refreshChildren() {
+    /**
+     * @hidden
+     * Event handled always, when the popup is opened or closed.
+     */
+    public handleOpenChange(opened: boolean) {
         if (this.mainElement) {
-            this.mainElement.setProperties(this.compact, this.type);
-        }
-        if (this.listElements) {
-            this.listElements.forEach(item => item.setProperties(this.compact, this.type));
+            this.mainElement.expanded = opened;
         }
     }
 }

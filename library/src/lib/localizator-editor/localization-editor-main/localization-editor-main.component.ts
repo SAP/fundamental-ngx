@@ -1,8 +1,9 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 import { LocalizationEditorInputDirective, LocalizationEditorLabel } from '../localization-editor.directives';
+import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
 
 /**
- *  Component that represents main field with add-on and is always visible
+ *  Component that represents the field which is always visible and is rendered outside the popover.
  *  ```html
  *  <fd-localization-editor-main [label]="'EN'">
  *       <input fd-localization-editor-input type="text" placeholder="EN">
@@ -13,34 +14,11 @@ import { LocalizationEditorInputDirective, LocalizationEditorLabel } from '../lo
     selector: 'fd-localization-editor-main',
     templateUrl: './localization-editor-main.component.html'
 })
-export class LocalizationEditorMainComponent implements OnInit {
+export class LocalizationEditorMainComponent extends LocalizationEditorItemComponent {
 
-    /** The text for the right add-on. */
-    @Input() label: string;
-
-    /** @hidden */
-    type: string;
-
-    /** @hidden */
-    compact: boolean;
-
-    /** @hidden */
-    @ContentChild(LocalizationEditorInputDirective) input: LocalizationEditorInputDirective;
-
-    /** @hidden */
-    @ContentChild(LocalizationEditorLabel, { read: TemplateRef }) labelTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    ngOnInit() {
-        if (this.input) {
-            this.input.compact = this.compact;
-        }
-    }
-
-    /** @hidden */
-    public setProperties(compact: boolean, type: string) {
-        this.compact = compact;
-        this.type = type;
-        this.ngOnInit();
-    }
+    /**
+     * @hidden
+     * This variable is controlled by parent component
+     * */
+    expanded: boolean;
 }

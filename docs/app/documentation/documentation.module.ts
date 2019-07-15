@@ -347,10 +347,11 @@ import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/e
 import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
 import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
 import {
-    LocalizationEditorExampleComponent,
-    LocalizationEditorTemplateExampleComponent, LocalizationEditorTextareaExampleComponent
-} from './component-docs/localization-editor/examples/localization-editor-examples.component';
+    LocalizationEditorExampleComponent
+} from './component-docs/localization-editor/examples/localization-editor-example.component';
 import { LocalizationEditorFormsExampleComponent } from './component-docs/localization-editor/examples/localization-editor-forms-example.component';
+import { LocalizationEditorTemplateExampleComponent } from './component-docs/localization-editor/examples/localization-editor-template-example.component';
+import { LocalizationEditorTextareaExampleComponent } from './component-docs/localization-editor/examples/localization-editor-textarea-example.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';

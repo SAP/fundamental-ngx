@@ -1,11 +1,15 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { LocalizationEditorInputDirective, LocalizationEditorLabel } from '../localization-editor.directives';
+import { AfterContentInit, Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import {
+    LocalizationEditorInputDirective,
+    LocalizationEditorLabel,
+    LocalizationEditorTextareaDirective
+} from '../localization-editor.directives';
 
 /**
- *  Component that represents field with add-on. It is made to be inside popover.
+ *  Component that represents field with add-on.
  *  ```html
  *  <fd-localization-editor-item [label]="'EN'">
- *       <input fd-localization-editor-input type="text" placeholder="EN">
+ *      <input fd-localization-editor-input type="text" placeholder="EN">
  *  </fd-localization-editor-item>
  *  ```
  */
@@ -13,34 +17,52 @@ import { LocalizationEditorInputDirective, LocalizationEditorLabel } from '../lo
   selector: 'fd-localization-editor-item',
   templateUrl: './localization-editor-item.component.html',
 })
-export class LocalizationEditorItemComponent implements OnInit {
-
-    /** The text for the right add-on. */
-    @Input() label: string;
+export class LocalizationEditorItemComponent implements OnInit, AfterContentInit, OnChanges {
 
     /** @hidden */
     type: string;
 
-    /** @hidden */
+    /** The text for the add-on on the right side. */
+    @Input()
+    label: string;
+
+    /** Whether to apply compact mode to to field. */
+    @Input()
     compact: boolean;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorInputDirective) input: LocalizationEditorInputDirective;
+    @ContentChild(LocalizationEditorInputDirective)
+    input: LocalizationEditorInputDirective;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorLabel, {read: TemplateRef}) labelTemplate: TemplateRef<any>;
+    @ContentChild(LocalizationEditorTextareaDirective)
+    textarea: LocalizationEditorTextareaDirective;
+
+    /** @hidden */
+    @ContentChild(LocalizationEditorLabel, {read: TemplateRef})
+    labelTemplate: TemplateRef<any>;
 
     /** @hidden */
     ngOnInit() {
-        if (this.input) {
-            this.input.compact = this.compact;
+        this.refreshChildInput();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.refreshChildInput();
+    }
+
+    ngAfterContentInit(): void {
+        if (this.textarea) {
+            this.type = 'textarea';
         }
     }
 
-    /** @hidden */
-    public setProperties(compact: boolean, type: string) {
-        this.compact = compact;
-        this.type = type;
-        this.ngOnInit();
+    private refreshChildInput() {
+        if (this.input) {
+            this.input.compact = this.compact;
+        }
+        if (this.textarea) {
+            this.textarea.compact = this.compact;
+        }
     }
 }

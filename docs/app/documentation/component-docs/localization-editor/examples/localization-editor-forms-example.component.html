@@ -1,20 +1,13 @@
 <form [formGroup]="customForm">
-    <fd-localization-editor [compact]="true">
-        <fd-localization-editor-main [label]="'EN'">
+    <fd-localization-editor>
+        <fd-localization-editor-main [label]="'EN'" [compact]="true">
             <input fd-localization-editor-input formControlName="en" type="text" placeholder="EN">
         </fd-localization-editor-main>
-        <fd-localization-editor-item [label]="'DE'">
-            <input fd-localization-editor-input formControlName="de" type="text"  placeholder="DE">
-        </fd-localization-editor-item>
-        <fd-localization-editor-item [label]="'NL'">
-            <input fd-localization-editor-input formControlName="pl" type="text" placeholder="NL">
-        </fd-localization-editor-item>
-        <fd-localization-editor-item [label]="'PL'">
-            <input fd-localization-editor-input formControlName="ca" type="text" placeholder="PL">
-        </fd-localization-editor-item>
-        <fd-localization-editor-item [label]="'ER'">
-            <input fd-localization-editor-input formControlName="nl" type="text" placeholder="ER">
-        </fd-localization-editor-item>
+        <li fd-localization-editor-element *ngFor="let key of getCustomFormKeys()">
+            <fd-localization-editor-item [label]="key | uppercase" [compact]="true">
+                <input fd-localization-editor-input formControlName="{{key}}" type="text"  placeholder="{{key | uppercase}}">
+            </fd-localization-editor-item>
+        </li>
     </fd-localization-editor>
 </form>
 <ng-container *ngFor="let key of getCustomFormKeys()">

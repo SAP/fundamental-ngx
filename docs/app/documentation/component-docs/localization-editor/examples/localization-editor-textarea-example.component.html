@@ -1,17 +1,10 @@
-<fd-localization-editor [type]="'textarea'">
+<fd-localization-editor>
     <fd-localization-editor-main [label]="'EN'">
-        <textarea fd-localization-editor-input placeholder="EN"></textarea>
+        <textarea fd-localization-editor-textarea placeholder="EN"></textarea>
     </fd-localization-editor-main>
-    <fd-localization-editor-item [label]="'DE'">
-        <textarea fd-localization-editor-input placeholder="DE"></textarea>
-    </fd-localization-editor-item>
-    <fd-localization-editor-item [label]="'NL'">
-        <textarea fd-localization-editor-input placeholder="NL"></textarea>
-    </fd-localization-editor-item>
-    <fd-localization-editor-item [label]="'PL'">
-        <textarea fd-localization-editor-input placeholder="PL"></textarea>
-    </fd-localization-editor-item>
-    <fd-localization-editor-item [label]="'ER'">
-        <textarea fd-localization-editor-input placeholder="ER"></textarea>
-    </fd-localization-editor-item>
+    <li fd-localization-editor-element *ngFor="let field of fields">
+        <fd-localization-editor-item [label]="field.label">
+            <textarea fd-localization-editor-textarea placeholder="{{field.placeholder}}"></textarea>
+        </fd-localization-editor-item>
+    </li>
 </fd-localization-editor>
