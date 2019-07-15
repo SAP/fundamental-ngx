@@ -1,18 +1,12 @@
 import {
-    AfterContentInit,
     Component,
     ContentChild,
-    ContentChildren,
     EventEmitter,
     Input,
-    OnChanges,
-    Output,
-    QueryList,
-    SimpleChanges
+    Output
 } from '@angular/core';
 import { Placement } from 'popper.js';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
-import { LocalizationEditorItemComponent } from './localization-editor-item/localization-editor-item.component';
 
 /**
  *  The component that represents a list of fields with add-ons inside popover
@@ -109,7 +103,7 @@ export class LocalizationEditorComponent {
      * @hidden
      * Event handled always, when the popup is opened or closed.
      */
-    public handleOpenChange(opened: boolean) {
+    public handleOpenChange(opened: boolean): void {
         if (this.mainElement) {
             this.mainElement.expanded = opened;
         }

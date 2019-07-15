@@ -1,5 +1,4 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { LocalizationEditorInputDirective, LocalizationEditorLabel } from '../localization-editor.directives';
+import { Component } from '@angular/core';
 import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
 
 /**
