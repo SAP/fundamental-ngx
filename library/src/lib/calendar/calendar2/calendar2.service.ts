@@ -4,14 +4,14 @@ export class Calendar2Service {
     public static getDaysInMonth(month: number, year: number): number {
 
         const isLeapYear = (_year: number): boolean => {
-            if (year % 4 !== 0) {
+            if (_year % 4 !== 0) {
                 return false;
-            } else if (year % 400 === 0) {
+            } else if (_year % 400 === 0) {
                 return true;
             } else {
-                return year % 100 !== 0;
+                return _year % 100 !== 0;
             }
-        }
+        };
 
         if (month === 2) {
             return isLeapYear(year) ? 29 : 28;

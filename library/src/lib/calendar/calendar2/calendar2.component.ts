@@ -103,7 +103,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
-    public readonly dateValidityChange = new EventEmitter<{ isValid: boolean }>();
+    public readonly isValidDateChange = new EventEmitter<boolean>();
 
     /** Event thrown every time when calendar should be closed */
     @Output()
@@ -208,7 +208,7 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
             }
         }
         this.invalidDate = !valid;
-        this.dateValidityChange.emit({ isValid: valid });
+        this.isValidDateChange.emit(valid);
     }
 
     /** @hidden */

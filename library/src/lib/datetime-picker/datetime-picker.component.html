@@ -40,7 +40,7 @@
                               [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
                               [selectedDate]="selectedDate"
                               (selectedDateChange)="handleDateChange($event)"
-                              (dateValidityChange)="isInvalidDateInputHandler($event)"
+                              (isValidDateChange)="isInvalidDateInputHandler($event)"
                               [escapeFocusFunction]="null"
                               [startingDayOfWeek]="startingDayOfWeek"></fd-calendar2>
                 <div class="fd-datetime__separator"></div>

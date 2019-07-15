@@ -300,28 +300,26 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     focusArrowLeft(): void {
-        this.elRef.nativeElement.querySelector('#arrowLeft').focus();
+        if (this.elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow')) {
+            this.elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow').focus();
+        }
     }
 
     handleInputChange(date: string): void {
         if (date) {
             const fdTimeDate = this.dateTimeAdapter.parse(date);
-            console.log(fdTimeDate);
-            console.log(fdTimeDate.isDateValid());
-            console.log(fdTimeDate.isTimeValid());
             this.isInvalidDateInput = !(fdTimeDate.isDateValid() && fdTimeDate.isTimeValid());
+
             if (!this.isInvalidDateInput) {
                 this.selectedDate = fdTimeDate.date;
                 this.time = fdTimeDate.time;
                 this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
                 this.date = new FdDatetime(this.selectedDate, this.time);
-                console.log(123456789);
                 this.onChange(fdTimeDate);
             } else {
                 // holy guacamole
             }
         } else if (this.allowNull) {
-            console.log('allownulallownulallownulallownul');
             this.isInvalidDateInput = false;
             this.date = FdDatetime.GetToday();
             this.selectedDate = this.date.date;
@@ -329,7 +327,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.calendarComponent.setCurrentlyDisplayed(this.date.date);
             this.onChange(null);
         } else {
-            console.log('notvalidnotvalidnotvalidnotvalid');
             this.isInvalidDateInput = true;
         }
     }

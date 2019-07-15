@@ -1,6 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CalendarComponent } from '../calendar/calendar.component';
 import { DatePickerComponent } from './date-picker.component';
 import { PopoverModule } from '../popover/popover.module';
 import { IconModule } from '../icon/icon.module';

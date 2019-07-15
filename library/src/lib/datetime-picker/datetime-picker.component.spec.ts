@@ -121,4 +121,13 @@ describe('DatetimePickerComponent', () => {
         );
     });
 
+    it('should handle correct write value function', () => {
+        const dateTime = FdDatetime.GetToday();
+        component.writeValue(dateTime);
+        expect(component.selectedDate).toEqual(dateTime.date);
+        expect(component.time).toEqual(dateTime.time);
+        expect(component.date).toEqual(dateTime);
+        expect(component.calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
+    });
+
 });
