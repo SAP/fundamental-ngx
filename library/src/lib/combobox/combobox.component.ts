@@ -122,12 +122,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     inputTextValue: string;
 
     /** @hidden */
-    onChange: any = () => {
-    };
+    onChange: any = () => {};
 
     /** @hidden */
-    onTouched: any = () => {
-    };
+    onTouched: any = () => {};
 
     /** @hidden */
     ngOnInit() {
