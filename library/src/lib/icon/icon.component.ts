@@ -14,15 +14,13 @@ const BASE_ICON_CLASS = 'sap-icon';
 const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 
 /**
- * The Component that represents an icon.
+ * The component that represents an icon.
  *
  * ```html
  * <fd-icon [glyph]="cart-approval" [size]="'l'"></fd-icon>
  * ```
  */
 @Component({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
     selector: 'fd-icon',
     template: ``,
     host: {
@@ -32,7 +30,9 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 })
 export class IconComponent extends AbstractFdNgxClass {
 
-    /** The glyph name  */
+    /** The icon name to display. See the icon page for the list of icons
+     * here: https://sap.github.io/fundamental-ngx/icon
+     * */
     @Input() glyph;
 
     /** 
