@@ -259,6 +259,16 @@ export class Calendar2Component implements OnInit, ControlValueAccessor {
         this.constructYearList();
     }
 
+    public handleRegenerateYearList(direction: string) {
+        if (direction === 'nextSet') {
+            this.displayNextYearSet();
+
+        } else if (direction === 'previousSet') {
+            this.displayPreviousYearSet();
+        }
+    }
+
+
     /** @hidden */
     dateStringUpdate(date: string) {
         if (this.calType === 'single') {
