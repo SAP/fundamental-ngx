@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocalizationEditorComponent } from './localization-editor.component';
-import { PopoverModule } from '../popover';
-import { FormModule } from '../form';
-import { InputGroupModule } from '../input-group';
-import { MenuModule } from '../menu';
+import { PopoverModule } from '../popover/popover.module';
+import { FormModule } from '../form/form.module';
+import { InputGroupModule } from '../input-group/input-group.module';
+import { MenuModule } from '../menu/menu.module';
 import {
     LocalizationEditorInputDirective,
     LocalizationEditorLabel,
