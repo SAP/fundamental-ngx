@@ -27,7 +27,7 @@ class TestWrapperComponent {
     wrapperValue: string;
 }
 
-fdescribe('SelectComponent', () => {
+describe('SelectComponent', () => {
     let component: SelectComponent;
     let element: ElementRef;
     let fixture: ComponentFixture<TestWrapperComponent>;
