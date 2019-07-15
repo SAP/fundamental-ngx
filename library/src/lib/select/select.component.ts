@@ -14,9 +14,10 @@ import { OptionComponent } from './option/option.component';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-// TODO allow picking options that have the same value, maybe by comparing value & index?
+// TODO allow picking options that have the same value, maybe by comparing value & index? Assign an id?
 // TODO Add tests
 // TODO add popover options
+// TODO Add onTouched properly
 // TODO add min-width option for popover instead of strict width
 // TODO Support disabled options, keyboard nav of options etc
 @Component({
