@@ -1,4 +1,4 @@
-import { Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 /**
  * Directive which is used along with input elements, inside the localization editor item or main.
@@ -10,10 +10,7 @@ import { Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRe
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-localization-editor-input]',
-    host: {
-        '[class.fd-input--compact]': 'compact'
-    }
+    selector: '[fd-localization-editor-input]'
 })
 export class LocalizationEditorInputDirective {
 
@@ -21,6 +18,7 @@ export class LocalizationEditorInputDirective {
      * @hidden
      *  Variable is controlled by parent component and define if there should be used compact mode
      * */
+    @HostBinding('class.fd-input--compact')
     public compact: boolean;
 }
 
@@ -34,10 +32,7 @@ export class LocalizationEditorInputDirective {
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-localization-editor-textarea]',
-    host: {
-        '[class.fd-input--compact]': 'compact'
-    }
+    selector: '[fd-localization-editor-textarea]'
 })
 export class LocalizationEditorTextareaDirective {
 
@@ -45,6 +40,7 @@ export class LocalizationEditorTextareaDirective {
      * @hidden
      *  Variable is controlled by parent component and define if there should be used compact mode
      * */
+    @HostBinding('class.fd-input--compact')
     public compact: boolean;
 }
 

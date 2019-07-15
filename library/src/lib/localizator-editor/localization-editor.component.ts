@@ -1,7 +1,7 @@
 import {
     Component,
     ContentChild,
-    EventEmitter,
+    EventEmitter, HostBinding,
     Input,
     Output
 } from '@angular/core';
@@ -23,12 +23,12 @@ import { LocalizationEditorMainComponent } from './localization-editor-main/loca
  */
 @Component({
     selector: 'fd-localization-editor',
-    templateUrl: './localization-editor.component.html',
-    host: {
-        'class': 'fd-localization-editor'
-    }
+    templateUrl: './localization-editor.component.html'
 })
 export class LocalizationEditorComponent {
+
+    @HostBinding('class.fd-localization-editor')
+    fdLocalizationEditorClass: boolean = true;
 
     /** @hidden */
     @ContentChild(LocalizationEditorMainComponent)

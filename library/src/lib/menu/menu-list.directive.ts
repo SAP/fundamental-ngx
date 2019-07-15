@@ -6,9 +6,10 @@ import { Directive, HostBinding } from '@angular/core';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-list]',
-    host: {
-        'class': 'fd-menu__list'
-    }
+    selector: '[fd-menu-list]'
 })
-export class MenuListDirective {}
+export class MenuListDirective {
+    /** @hidden */
+    @HostBinding('class.fd-menu_list')
+    fdMenuListClass: boolean = true;
+}
