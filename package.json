@@ -64,6 +64,7 @@
         "@types/jasmine": "^3.3.13",
         "@types/jasminewd2": "^2.0.4",
         "angular-cli-ghpages": "^0.5.3",
+        "chalk": "^2.4.2",
         "codelyzer": "^5.1.0",
         "coveralls": "^3.0.5",
         "fs-extra": "^8.1.0",
