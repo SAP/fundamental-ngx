@@ -48,7 +48,6 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     ],
     host: {
         '(blur)': 'onTouched()',
-        '[class.fd-has-display-block]': 'true',
         '[attr.id]': 'id'
     }
 })
@@ -80,7 +79,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
 
     /** @hidden */
     @HostBinding('class.fd-calendar')
-    public fdCalendarClass: boolean = true;
+    fdCalendarClass: boolean = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-has-display-block')
+    fdHasDisplayBlockClass: boolean = true;
 
     /** Currently displayed days depending on month and year */
     currentlyDisplayed: CalendarCurrent;
@@ -181,7 +184,10 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         this.prepareDisplayedView();
     }
 
-    /** Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms */
+    /**
+     * @hidden
+     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
+     * */
     writeValue(selected: { date?: FdDate, start?: FdDate, end?: FdDate }): void {
         let valid: boolean = true;
         if (selected) {
@@ -224,8 +230,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         // Not needed
     }
 
-    /** @hidden */
-    public selectedDateChanged(date: FdDate) {
+    /**
+     * @hidden
+     * Method that is triggered by events from day view component, when there is selected single date changed
+     * */
+    selectedDateChanged(date: FdDate) {
         this.selectedDate = date;
         this.onChange({ date: date });
         this.onTouched();
@@ -233,7 +242,10 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         this.closeCalendar.emit();
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from day view component, when there is selected range date changed
+     * */
     public selectedRangeDateChanged(dates: FdRangeDate): void {
         if (dates) {
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
@@ -271,6 +283,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
     }
 
+    /**
+     * @hidden
+     * Method that sets up the currently displayed variables, like shown month and year.
+     * Day grid is based on currently displayed month and year
+     * */
     private prepareDisplayedView(): void {
         if (this.calType === 'single' && this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
             this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };

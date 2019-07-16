@@ -281,7 +281,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
+     */
     writeValue(selected: FdDatetime): void {
         if (!selected) {
             return;
@@ -294,8 +297,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.setInput(this.date);
         }
     }
-
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from calendar component, when there is selected date changed
+     * */
     handleDateChange(date: FdDate): void {
         if (!CalendarService.datesEqual(date, this.selectedDate)) {
             this.selectedDate = date;
@@ -305,7 +310,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from time component, when there is selected time changed
+     * */
     handleTimeChange(time: TimeObject): void {
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
@@ -320,7 +328,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method, which is responsible for transforming string to datetime, depending on type or
+     * validation the results are different. It also changes to state of isInvalidDateInput
+     * */
     handleInputChange(date: string): void {
         if (date) {
             const fdTimeDate = this.dateTimeAdapter.parse(date);

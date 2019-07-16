@@ -184,7 +184,10 @@ export class DatePickerComponent implements ControlValueAccessor {
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from calendar component, when there is selected single date changed
+     * */
     public handleSingleDateChange(date: FdDate): void {
         if (date) {
             this.inputFieldDate = this.dateAdapter.format(date);
@@ -194,7 +197,10 @@ export class DatePickerComponent implements ControlValueAccessor {
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from calendar component, when there is selected range date changed
+     * */
     public handleRangeDateChange(dates: FdRangeDate): void {
         if (dates &&
             (!CalendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
@@ -209,7 +215,10 @@ export class DatePickerComponent implements ControlValueAccessor {
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered when the text input is confirmed to ba changed, by clicking enter, or blur
+     * */
     public handleInputChange(strDate: string): void {
         this.dateStringUpdate(strDate);
     }
@@ -234,7 +243,10 @@ export class DatePickerComponent implements ControlValueAccessor {
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
+     */
     writeValue(selected: { date: FdDate, rangeEnd?: FdDate }): void {
         if (!selected) {
             return;
@@ -259,7 +271,11 @@ export class DatePickerComponent implements ControlValueAccessor {
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method, which is responsible for transforming string to date, depending on type or
+     * validation the results are different. It also changes to state of isInvalidDateInput
+     * */
     dateStringUpdate(date: string): void {
         if (date) {
             if (this.type === 'single') {

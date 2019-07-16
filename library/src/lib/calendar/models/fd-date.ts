@@ -49,6 +49,9 @@ export class FdDate {
         this.day = day;
     }
 
+    /**
+     * Get native date object converted to string from FdDate.
+     */
     public toDateString(): string {
         if (this.date) {
             return this.date.toDateString();
@@ -57,6 +60,9 @@ export class FdDate {
         }
     }
 
+    /**
+     * Get native date object from FdDate.
+     */
     public get date(): Date {
         return this.toDate();
     }
@@ -67,7 +73,11 @@ export class FdDate {
     public toDate(): Date {
         return new Date(this.year, this.month - 1, this.day);
     }
-    
+
+
+    /**
+     * Method that checks validity of current FdDate object.
+     */
     public isDateValid(): boolean {
         if (!this) {
             return false;

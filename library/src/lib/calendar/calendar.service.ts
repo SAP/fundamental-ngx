@@ -1,6 +1,13 @@
 import { FdDate } from './models/fd-date';
 
 export class CalendarService {
+
+    /**
+     * Method that provides, amount of day depending on month and year passed
+     * @param month which is number 1-12
+     * @param year which is number
+     * */
+
     public static getDaysInMonth(month: number, year: number): number {
 
         const isLeapYear = (_year: number): boolean => {
@@ -22,6 +29,9 @@ export class CalendarService {
         }
     }
 
+    /**
+     * Method that check equality of 2 dates.
+     * */
     static datesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
             return false;
