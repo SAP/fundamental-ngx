@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0-rc.11"></a>
+# [0.8.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.10...v0.8.0-rc.11) (2019-07-16)
+
+
+### Features
+
+* added item templating to combobox ([#1020](https://github.com/SAP/fundamental-ngx/issues/1020)) ([9648718](https://github.com/SAP/fundamental-ngx/commit/9648718))
+
+
+
 <a name="0.8.0-rc.10"></a>
 # [0.8.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.9...v0.8.0-rc.10) (2019-07-16)
 
