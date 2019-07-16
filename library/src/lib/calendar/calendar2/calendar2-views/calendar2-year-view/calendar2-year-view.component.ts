@@ -32,10 +32,6 @@ export class Calendar2YearViewComponent {
     constructor(private eRef: ElementRef) { }
 
     onKeydownYearHandler(event, year: number, index: number) {
-        // remove these 2 lines after testing
-        console.log(`keydown triggered on year ${year}`);
-        console.log(index);
-
         let newFocusedYearId: string;
 
         switch (event.code) {
@@ -48,53 +44,54 @@ export class Calendar2YearViewComponent {
             case 'ArrowLeft': {
                 event.preventDefault();
                 if (index === 0) {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + 11;
                     this.reGenerateYearList.emit('previousSet');
+                    newFocusedYearId = this.id + '-fd-year-' + 11;
                 } else {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + (index - 1);
+                    newFocusedYearId = this.id + '-fd-year-' + (index - 1);
                 }
                 break;
             }
             case 'ArrowRight': {
                 event.preventDefault();
                 if (index === 11) {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + 0;
                     this.reGenerateYearList.emit('nextSet');
+                    newFocusedYearId = this.id + '-fd-year-' + 0;
                 } else {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + (index + 1);
+                    newFocusedYearId = this.id + '-fd-year-' + (index + 1);
                 }
                 break;
             }
             case 'ArrowUp': {
                 event.preventDefault();
                 if (index <= 3) {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + (index + 8);
                     this.reGenerateYearList.emit('previousSet');
+                    newFocusedYearId = this.id + '-fd-year-' + (index + 8);
                 } else {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + (index - 4);
+                    newFocusedYearId = this.id + '-fd-year-' + (index - 4);
                 }
                 break;
             }
             case 'ArrowDown': {
                 event.preventDefault();
                 if (index >= 8) {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + (index - 8);
                     this.reGenerateYearList.emit('nextSet');
+                    newFocusedYearId = this.id + '-fd-year-' + (index - 8);
                 } else {
-                    newFocusedYearId = '#' + this.id + '-fd-year-' + (index + 4);
+                    newFocusedYearId = this.id + '-fd-year-' + (index + 4);
                 }
                 break;
             }
         }
-
         this.focusElement(newFocusedYearId);
     }
 
     focusElement(elementSelector: string): void {
-        const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector(elementSelector);
-        if (elementToFocus) {
-            elementToFocus.focus();
-        }
+        const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
+        setTimeout(() => {
+            if (elementToFocus) {
+                this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
+            }
+        }, 0);
     }
 
     selectYear(selectedYear: number, event?: MouseEvent) {
