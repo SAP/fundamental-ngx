@@ -1,6 +1,6 @@
 import { FdDate } from './models/fd-date';
 
-export class Calendar2Service {
+export class CalendarService {
     public static getDaysInMonth(month: number, year: number): number {
 
         const isLeapYear = (_year: number): boolean => {

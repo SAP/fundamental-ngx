@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { DateFormatParser } from '../../../../../../library/src/lib/calendar/format/date-parser';
-import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {

@@ -1,7 +1,7 @@
 /**
  * Default date model used by the fundamental components.
  */
-import { Calendar2Service } from '../calendar2.service';
+import { CalendarService } from '../calendar.service';
 
 export class FdDate {
 
@@ -81,7 +81,7 @@ export class FdDate {
             return false;
         }
 
-        if (this.day < 1 || this.day > Calendar2Service.getDaysInMonth(this.month, this.year)) {
+        if (this.day < 1 || this.day > CalendarService.getDaysInMonth(this.month, this.year)) {
             return false;
         }
 

@@ -2,7 +2,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, HostBinding,
+    forwardRef,
     HostListener,
     Input,
     OnDestroy,
@@ -11,16 +11,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
-import { FdDate } from '../calendar/calendar2/models/fd-date';
-import { Calendar2Service } from '../calendar/calendar2/calendar2.service';
-import { Calendar2Component } from '../calendar/calendar2/calendar2.component';
+import { FdDate } from '../calendar/models/fd-date';
+import { CalendarService } from '../calendar/calendar.service';
+import { CalendarComponent } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
 
 /**
@@ -51,8 +50,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     timeComponent: TimeComponent;
 
     /** @hidden Reference to the inner calendar component. */
-    @ViewChild(Calendar2Component)
-    calendarComponent: Calendar2Component;
+    @ViewChild(CalendarComponent)
+    calendarComponent: CalendarComponent;
 
     /** Placeholder for the inner input element. */
     @Input()
@@ -298,7 +297,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     handleDateChange(date: FdDate): void {
-        if (!Calendar2Service.datesEqual(date, this.selectedDate)) {
+        if (!CalendarService.datesEqual(date, this.selectedDate)) {
             this.selectedDate = date;
             this.date = new FdDatetime(this.selectedDate, this.time);
             this.setInput(this.date);

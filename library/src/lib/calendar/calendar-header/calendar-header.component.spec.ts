@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Calendar2HeaderComponent } from './calendar2-header.component';
+import { CalendarHeaderComponent } from './calendar-header.component';
 
 describe('Calendar2HeaderComponent', () => {
-    let component: Calendar2HeaderComponent;
-    let fixture: ComponentFixture<Calendar2HeaderComponent>;
+    let component: CalendarHeaderComponent;
+    let fixture: ComponentFixture<CalendarHeaderComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [Calendar2HeaderComponent]
+            declarations: [CalendarHeaderComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(Calendar2HeaderComponent);
+        fixture = TestBed.createComponent(CalendarHeaderComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

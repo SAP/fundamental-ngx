@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
-import { CalendarI18n } from '../../i18n/calendar-i18n';
-import { FdCalendarView } from '../calendar2.component';
+import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
+import { CalendarI18n } from '../i18n/calendar-i18n';
+import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 
 /**
@@ -9,12 +9,12 @@ import { CalendarCurrent } from '../models/calendar-current';
  * Header of the calendar component.
  */
 @Component({
-    selector: 'fd-calendar2-header',
-    templateUrl: './calendar2-header.component.html',
-    styleUrls: ['./calendar2-header.component.scss'],
+    selector: 'fd-calendar-header',
+    templateUrl: './calendar-header.component.html',
+    styleUrls: ['./calendar-header.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2HeaderComponent implements OnInit {
+export class CalendarHeaderComponent implements OnInit {
 
     /** Currently active view. Needed for a11y labels. */
     @Input()

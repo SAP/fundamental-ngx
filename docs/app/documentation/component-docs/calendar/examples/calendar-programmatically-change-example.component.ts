@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
     selector: 'fd-calendar-programmatically-change-example',
     template: `
-        <fd-calendar2 [calType]="'single'"
-                      [(ngModel)]="selectedDay"
+        <fd-calendar [calType]="'single'"
+                     [(ngModel)]="selectedDay"
         >
-        </fd-calendar2>
+        </fd-calendar>
 
         <button fd-button (click)="changeDay()">Go to other day</button>
         <br/><br/>

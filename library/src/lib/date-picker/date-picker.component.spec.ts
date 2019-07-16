@@ -3,7 +3,7 @@ import { DatePickerComponent } from './date-picker.component';
 import { PopoverModule } from '../popover/popover.module';
 import { IconModule } from '../icon/icon.module';
 import { FormsModule } from '@angular/forms';
-import { FdDate } from '../calendar/calendar2/models/fd-date';
+import { FdDate } from '../calendar/models/fd-date';
 import { CalendarModule } from '../calendar';
 
 describe('DatePickerComponent', () => {

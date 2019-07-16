@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FdDatetime } from '../models/fd-datetime';
-import { FdDate } from '../../calendar/calendar2/models/fd-date';
+import { FdDate } from '../../calendar/models/fd-date';
 import { TimeObject } from '../../time/time-object';
 
 export function DATE_TIME_FORMAT_FACTORY() {

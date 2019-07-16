@@ -1,4 +1,4 @@
-import { FdDate } from '../../calendar/calendar2/models/fd-date';
+import { FdDate } from '../../calendar/models/fd-date';
 import { TimeObject } from '../../time/time-object';
 
 export class FdDatetime {

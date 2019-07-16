@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Calendar2DayViewComponent } from './calendar2-day-view.component';
+import { CalendarDayViewComponent } from './calendar-day-view.component';
 import { FdDate } from '../../models/fd-date';
 import { CalendarDay } from '../../models/calendar-day';
-import { Calendar2Service } from '../../calendar2.service';
+import { CalendarService } from '../../calendar.service';
 
 describe('Calendar2DayViewComponent', () => {
-    let component: Calendar2DayViewComponent;
-    let fixture: ComponentFixture<Calendar2DayViewComponent>;
+    let component: CalendarDayViewComponent;
+    let fixture: ComponentFixture<CalendarDayViewComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [Calendar2DayViewComponent],
-            providers: [Calendar2Service]
+            declarations: [CalendarDayViewComponent],
+            providers: [CalendarService]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(Calendar2DayViewComponent);
+        fixture = TestBed.createComponent(CalendarDayViewComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -9,21 +9,21 @@ import {
     Output, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarI18n } from '../../../i18n/calendar-i18n';
+import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { FdDate } from '../../models/fd-date';
 import { CalendarCurrent } from '../../models/calendar-current';
-import { CalendarType, DaysOfWeek } from '../../calendar2.component';
+import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
-import { Calendar2Service } from '../../calendar2.service';
+import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
 
 @Component({
-    selector: 'fd-calendar2-day-view',
-    templateUrl: './calendar2-day-view.component.html',
-    styleUrls: ['./calendar2-day-view.component.scss'],
+    selector: 'fd-calendar-day-view',
+    templateUrl: './calendar-day-view.component.html',
+    styleUrls: ['./calendar-day-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnChanges {
+export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
 
     /** Currently displayed month and year for days */
     @Input()
@@ -31,7 +31,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
 
     /** @hidden */
     @HostBinding('class.fd-calendar__dates')
-    private fdCalendarDateViewClass: boolean = true;
+    public fdCalendarDateViewClass: boolean = true;
 
     /** Actual day grid with previous/current/next month days */
     public dayViewGrid: CalendarDay[][];
@@ -189,7 +189,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             return 0;
         } else if (this.selectedRangeDate.start &&
             (!this.selectedRangeDate.end ||
-                Calendar2Service.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
+                CalendarService.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
             )
         ) {
             return 1;
@@ -359,7 +359,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     private getDaysInMonth(month: number, year: number): number {
-        return Calendar2Service.getDaysInMonth(month, year);
+        return CalendarService.getDaysInMonth(month, year);
     }
 
     private getCurrentMonthDays(): CalendarDay[] {
@@ -437,12 +437,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
-                (this.calType === 'single' && Calendar2Service.datesEqual(fdDate, this.selectedDate)) ||
-                (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.start)) ||
-                (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.end))
+                (this.calType === 'single' && CalendarService.datesEqual(fdDate, this.selectedDate)) ||
+                (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.start)) ||
+                (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.end))
             ),
-            selectedFirst: (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.start)),
-            selectedLast: (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.end)),
+            selectedFirst: (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.start)),
+            selectedLast: (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
                 (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
                 (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))

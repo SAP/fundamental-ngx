@@ -1,26 +1,19 @@
 import {
-    ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
-    HostListener,
     Input,
-    OnDestroy,
-    OnInit,
     Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarDay, CalendarType } from '../calendar/calendar.component';
+import { CalendarType } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { DateFormatParser } from '../calendar/format/date-parser';
 import { Placement } from 'popper.js';
-import { FdDate } from '../calendar/calendar2/models/fd-date';
-import { Calendar2Service } from '../calendar/calendar2/calendar2.service';
-import { Calendar2Component } from '../calendar/calendar2/calendar2.component';
-import { FdRangeDate } from '../calendar/calendar2/models/fd-range-date';
+import { FdDate } from '../calendar/models/fd-date';
+import { CalendarService } from '../calendar/calendar.service';
+import { CalendarComponent } from '../calendar/calendar.component';
+import { FdRangeDate } from '../calendar/models/fd-range-date';
+import { DateFormatParser } from './format/date-parser';
 
 @Component({
     selector: 'fd-date-picker',
@@ -42,7 +35,7 @@ import { FdRangeDate } from '../calendar/calendar2/models/fd-range-date';
 })
 export class DatePickerComponent implements ControlValueAccessor {
 
-    @ViewChild(Calendar2Component) calendarComponent: Calendar2Component;
+    @ViewChild(CalendarComponent) calendarComponent: CalendarComponent;
 
     /** @hidden The value of the input */
     inputFieldDate = null;
@@ -204,8 +197,8 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** @hidden */
     public handleRangeDateChange(dates: FdRangeDate): void {
         if (dates &&
-            (!Calendar2Service.datesEqual(this.selectedRangeDate.start, dates.start) ||
-                !Calendar2Service.datesEqual(this.selectedRangeDate.end, dates.end))
+            (!CalendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
+                !CalendarService.datesEqual(this.selectedRangeDate.end, dates.end))
         ) {
             this.inputFieldDate = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
                 + this.dateAdapter.format(dates.end)
@@ -274,7 +267,7 @@ export class DatePickerComponent implements ControlValueAccessor {
                 this.isInvalidDateInput = !fdDate.isDateValid()
 
                 // If is correct and data is not exactly the same
-                if (!this.isInvalidDateInput && !Calendar2Service.datesEqual(fdDate, this.selectedDate)) {
+                if (!this.isInvalidDateInput && !CalendarService.datesEqual(fdDate, this.selectedDate)) {
                     this.selectedDate = fdDate;
                     this.calendarComponent.setCurrentlyDisplayed(fdDate);
                     this.onChange({ date: this.selectedDate });
@@ -293,8 +286,8 @@ export class DatePickerComponent implements ControlValueAccessor {
 
                 // If is correct and data is not exactly the same
                 if (!this.isInvalidDateInput &&
-                    (!Calendar2Service.datesEqual(firstDate, this.selectedRangeDate.start) ||
-                        !Calendar2Service.datesEqual(secondDate, this.selectedRangeDate.end))) {
+                    (!CalendarService.datesEqual(firstDate, this.selectedRangeDate.start) ||
+                        !CalendarService.datesEqual(secondDate, this.selectedRangeDate.end))) {
 
                     if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
                         this.selectedRangeDate = { start: secondDate, end: firstDate };
