@@ -25,7 +25,7 @@
                           (nextMonthSelect)="displayNextMonth()"
                           (previousMonthSelect)="displayPreviousMonth()"
     ></fd-calendar-day-view>
-    <fd-calendar2-month-view *ngSwitchCase="'month'"></fd-calendar2-month-view>
+    <fd-calendar2-month-view *ngSwitchCase="'month'" [id]="id"></fd-calendar2-month-view>
     <fd-calendar2-year-view *ngSwitchCase="'year'"></fd-calendar2-year-view>
 </ng-container>
 
