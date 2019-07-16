@@ -234,7 +234,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
      * @hidden
      * Method that is triggered by events from day view component, when there is selected single date changed
      * */
-    selectedDateChanged(date: FdDate) {
+    selectedDateChanged(date: FdDate): void {
         this.selectedDate = date;
         this.onChange({ date: date });
         this.onTouched();
