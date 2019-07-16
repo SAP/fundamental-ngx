@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker/models/fd-datetime';
-import { FdDate } from '../../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FdDate } from '../../../../../../../library/src/lib/calendar/models/fd-date';
 
 @Component({
     selector: 'app-datetime-program-example',

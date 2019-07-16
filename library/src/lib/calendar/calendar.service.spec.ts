@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { Calendar2Service } from './calendar2.service';
+import { CalendarService } from './calendar.service';
 import { FdDate } from './models/fd-date';
 
 describe('CalendarService', () => {
-    let service: Calendar2Service;
+    let service: CalendarService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [Calendar2Service]
+            providers: [CalendarService]
         });
-        service = TestBed.get(Calendar2Service);
+        service = TestBed.get(CalendarService);
     });
 
     it('should be created', () => {
@@ -17,22 +17,22 @@ describe('CalendarService', () => {
     });
 
     it('Should return good day amount for july', () => {
-        const amount = Calendar2Service.getDaysInMonth(7, 2019);
+        const amount = CalendarService.getDaysInMonth(7, 2019);
         expect(amount).toBe(31);
     });
 
     it('Should return good day amount for june', () => {
-        const amount = Calendar2Service.getDaysInMonth(6, 2019);
+        const amount = CalendarService.getDaysInMonth(6, 2019);
         expect(amount).toBe(30);
     });
 
     it('Should return good day amount for pivot year on february ', () => {
-        const amount = Calendar2Service.getDaysInMonth(2, 2016);
+        const amount = CalendarService.getDaysInMonth(2, 2016);
         expect(amount).toBe(29);
     });
 
     it('Should return good day amount for non pivot year on february ', () => {
-        const amount = Calendar2Service.getDaysInMonth(2, 2018);
+        const amount = CalendarService.getDaysInMonth(2, 2018);
         expect(amount).toBe(28);
     });
 
@@ -40,7 +40,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2019, 10, 10);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = Calendar2Service.datesEqual(date1, date2);
+        const result = CalendarService.datesEqual(date1, date2);
         expect(result).toBeTruthy();
     });
 
@@ -48,7 +48,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2020, 10, 10);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = Calendar2Service.datesEqual(date1, date2);
+        const result = CalendarService.datesEqual(date1, date2);
         expect(result).not.toBeTruthy();
     });
 
@@ -56,7 +56,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2019, 11, 10);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = Calendar2Service.datesEqual(date1, date2);
+        const result = CalendarService.datesEqual(date1, date2);
         expect(result).not.toBeTruthy();
     });
 
@@ -64,7 +64,7 @@ describe('CalendarService', () => {
         const date1 = new FdDate(2019, 10, 11);
         const date2 = new FdDate(2019, 10, 10);
 
-        const result = Calendar2Service.datesEqual(date1, date2);
+        const result = CalendarService.datesEqual(date1, date2);
         expect(result).not.toBeTruthy();
     });
 

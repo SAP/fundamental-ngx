@@ -1,7 +1,7 @@
 import { Component, Injectable } from '@angular/core';
 import { DateTimeFormatParser } from '../../../../../../../library/src/lib/datetime-picker/format/datetime-parser';
 import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker/models/fd-datetime';
-import { FdDate } from '../../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FdDate } from '../../../../../../../library/src/lib/calendar/models/fd-date';
 
 @Injectable()
 export class DateTimeFormatExample extends DateTimeFormatParser {

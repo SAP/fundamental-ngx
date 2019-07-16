@@ -27,8 +27,8 @@
         [style.display]="'block'"
         [attr.aria-expanded]="isOpen"
         [attr.aria-hidden]="!isOpen">
-        <fd-calendar2 (closeCalendar)="closeFromCalendar()"
-                      [calType]="type"
+        <fd-calendar (closeCalendar)="closeFromCalendar()"
+                     [calType]="type"
                      [disableFunction]="disableFunction ? disableFunction : null"
                      [blockFunction]="blockFunction ? blockFunction : null"
                      [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
@@ -37,8 +37,8 @@
                      [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
                      [selectedDate]="selectedDate"
                      [selectedRangeDate]="selectedRangeDate"
-                    (selectedRangeDateChange)="handleRangeDateChange($event)"
-                    (selectedDateChange)="handleSingleDateChange($event)"
-                     [startingDayOfWeek]="startingDayOfWeek"></fd-calendar2>
+                     (selectedRangeDateChange)="handleRangeDateChange($event)"
+                     (selectedDateChange)="handleSingleDateChange($event)"
+                     [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
     </fd-popover-body>
 </fd-popover>

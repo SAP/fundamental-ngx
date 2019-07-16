@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 
 @Component({
 selector: 'fd-date-picker-single-example',

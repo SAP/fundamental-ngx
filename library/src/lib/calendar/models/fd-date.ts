@@ -1,7 +1,7 @@
 /**
  * Default date model used by the fundamental components.
  */
-import { Calendar2Service } from '../calendar2.service';
+import { CalendarService } from '../calendar.service';
 
 export class FdDate {
 
@@ -49,6 +49,9 @@ export class FdDate {
         this.day = day;
     }
 
+    /**
+     * Get native date object converted to string from FdDate.
+     */
     public toDateString(): string {
         if (this.date) {
             return this.date.toDateString();
@@ -57,6 +60,9 @@ export class FdDate {
         }
     }
 
+    /**
+     * Get native date object from FdDate.
+     */
     public get date(): Date {
         return this.toDate();
     }
@@ -67,7 +73,11 @@ export class FdDate {
     public toDate(): Date {
         return new Date(this.year, this.month - 1, this.day);
     }
-    
+
+
+    /**
+     * Method that checks validity of current FdDate object.
+     */
     public isDateValid(): boolean {
         if (!this) {
             return false;
@@ -81,7 +91,7 @@ export class FdDate {
             return false;
         }
 
-        if (this.day < 1 || this.day > Calendar2Service.getDaysInMonth(this.month, this.year)) {
+        if (this.day < 1 || this.day > CalendarService.getDaysInMonth(this.month, this.year)) {
             return false;
         }
 

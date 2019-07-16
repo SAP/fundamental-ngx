@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FdDate } from '../calendar2/models/fd-date';
+import { FdDate } from '../../calendar/models/fd-date';
 
 export function DATE_FORMAT_FACTORY() {
     return new DateFormatParserDefault();
@@ -20,16 +20,16 @@ export abstract class DateFormatParser {
     rangeDelimiter: string = ' - ';
 
     /**
-     * Should take in a string value and return a date object.
-     * @param value String to concert to a date object.
+     * Should take in a string value and return a FdDate model object.
+     * @param value String to concert to a FdDate model object.
      */
-    abstract parse(value: string): any;
+    abstract parse(value: string): FdDate;
 
     /**
-     * Should take in a date object and return a string representation.
-     * @param date String to concert to a date object.
+     * Should take in a FdDate model object and return a string representation.
+     * @param date FdDate to format to string value.
      */
-    abstract format(date: any): string;
+    abstract format(date: FdDate): string;
 }
 
 /**
@@ -39,16 +39,16 @@ export abstract class DateFormatParser {
 export class DateFormatParserDefault extends DateFormatParser {
 
     /**
-     * Takes in a string representation of a date and returns a Date object.
-     * @param value String to convert to a date.
+     * Takes in a string value and return a FdDate model object.
+     * @param value String to concert to a FdDate model object.
      */
     public parse(value: string): FdDate {
         return FdDate.getModelFromDate(new Date(value));
     }
 
     /**
-     * Takes in a date object and returns the string representation.
-     * @param date Date object to convert to a string.
+     * Takes in a FdDate model object and return a string representation.
+     * @param date FdDate to format to string value.
      */
     public format(date: FdDate): string {
         return date.month + '/' + date.day + '/' + date.year;

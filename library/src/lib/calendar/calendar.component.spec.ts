@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Calendar2Component } from './calendar2.component';
-import { CalendarModule } from '../calendar.module';
+import { CalendarComponent } from './calendar.component';
+import { CalendarModule } from './calendar.module';
 import { FdDate } from './models/fd-date';
 
 
 describe('Calendar2Component', () => {
-    let component: Calendar2Component;
-    let fixture: ComponentFixture<Calendar2Component>;
+    let component: CalendarComponent;
+    let fixture: ComponentFixture<CalendarComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe('Calendar2Component', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(Calendar2Component);
+        fixture = TestBed.createComponent(CalendarComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

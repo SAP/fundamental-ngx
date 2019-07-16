@@ -2,7 +2,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, HostBinding,
+    forwardRef,
     HostListener,
     Input,
     OnDestroy,
@@ -11,16 +11,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
-import { FdDate } from '../calendar/calendar2/models/fd-date';
-import { Calendar2Service } from '../calendar/calendar2/calendar2.service';
-import { Calendar2Component } from '../calendar/calendar2/calendar2.component';
+import { FdDate } from '../calendar/models/fd-date';
+import { CalendarService } from '../calendar/calendar.service';
+import { CalendarComponent } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
 
 /**
@@ -51,8 +50,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     timeComponent: TimeComponent;
 
     /** @hidden Reference to the inner calendar component. */
-    @ViewChild(Calendar2Component)
-    calendarComponent: Calendar2Component;
+    @ViewChild(CalendarComponent)
+    calendarComponent: CalendarComponent;
 
     /** Placeholder for the inner input element. */
     @Input()
@@ -282,7 +281,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
+     */
     writeValue(selected: FdDatetime): void {
         if (!selected) {
             return;
@@ -295,10 +297,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.setInput(this.date);
         }
     }
-
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from calendar component, when there is selected date changed
+     * */
     handleDateChange(date: FdDate): void {
-        if (!Calendar2Service.datesEqual(date, this.selectedDate)) {
+        if (!CalendarService.datesEqual(date, this.selectedDate)) {
             this.selectedDate = date;
             this.date = new FdDatetime(this.selectedDate, this.time);
             this.setInput(this.date);
@@ -306,7 +310,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method that is triggered by events from time component, when there is selected time changed
+     * */
     handleTimeChange(time: TimeObject): void {
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
@@ -321,7 +328,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Method, which is responsible for transforming string to datetime, depending on type or
+     * validation the results are different. It also changes to state of isInvalidDateInput
+     * */
     handleInputChange(date: string): void {
         if (date) {
             const fdTimeDate = this.dateTimeAdapter.parse(date);

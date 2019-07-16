@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { FdDate } from '../../../../../../library/src/lib/calendar/calendar2/models/fd-date';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 
 @Component({
     selector: 'fd-calendar-range-example',
     template: `
-        <fd-calendar2 [calType]="'range'" 
+        <fd-calendar [calType]="'range'"
                      [disableFunction]="myDisableFunction2"
                      [disableRangeStartFunction]="myDisableStartFunction"
                      [disableRangeEndFunction]="myDisableEndFunction"
                      [(ngModel)]="selected">
-        </fd-calendar2>
+        </fd-calendar>
         <br/>
         <div>Selected First Date: {{selected.start.toDateString()}}</div>
         <br/>

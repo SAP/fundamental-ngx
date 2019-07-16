@@ -9,21 +9,21 @@ import {
     Output, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarI18n } from '../../../i18n/calendar-i18n';
+import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { FdDate } from '../../models/fd-date';
 import { CalendarCurrent } from '../../models/calendar-current';
-import { CalendarType, DaysOfWeek } from '../../calendar2.component';
+import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
-import { Calendar2Service } from '../../calendar2.service';
+import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
 
 @Component({
-    selector: 'fd-calendar2-day-view',
-    templateUrl: './calendar2-day-view.component.html',
-    styleUrls: ['./calendar2-day-view.component.scss'],
+    selector: 'fd-calendar-day-view',
+    templateUrl: './calendar-day-view.component.html',
+    styleUrls: ['./calendar-day-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnChanges {
+export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
 
     /** Currently displayed month and year for days */
     @Input()
@@ -31,7 +31,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
 
     /** @hidden */
     @HostBinding('class.fd-calendar__dates')
-    private fdCalendarDateViewClass: boolean = true;
+    public fdCalendarDateViewClass: boolean = true;
 
     /** Actual day grid with previous/current/next month days */
     public dayViewGrid: CalendarDay[][];
@@ -140,6 +140,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
      */
     selectDate(day: CalendarDay, event?: MouseEvent): void {
         if (event) {
+            /**
+             * There are some problems with popup integration. After clicking inside day component, the popover closes.
+             * */
             event.stopPropagation();
             event.preventDefault();
         }
@@ -154,7 +157,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                     this.buildDayViewGrid();
                 } else if (this.selectCounter === 1) {
-                    // Check if date picked is lower than already chosen
+                    // Check if date picked is higher than already chosen, otherwise just first one
                     if (this.selectedRangeDate.start.toDate().getTime() < day.date.toDate().getTime()) {
                         this.selectedRangeDate = { start: this.selectedRangeDate.start, end: day.date };
                     } else {
@@ -183,13 +186,18 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             .map(weekday => weekday[0].toLocaleUpperCase());
     }
 
-    /** @hidden */
+    /** @hidden
+     *  Amount of selected days
+     *  0, when none,
+     *  1, when only startDate, or endDate same as startDate,
+     *  2, when both
+     * */
     get selectCounter(): number {
         if (!this.selectedRangeDate || !this.selectedRangeDate.start) {
             return 0;
         } else if (this.selectedRangeDate.start &&
             (!this.selectedRangeDate.end ||
-                Calendar2Service.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
+                CalendarService.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
             )
         ) {
             return 1;
@@ -281,7 +289,9 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
     }
 
-    /** @hidden */
+    /** @hidden
+     *  Method that allow to focus elements inside this component
+     * */
     public focusElement(elementSelector): void {
         const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
         if (elementToFocus) {
@@ -289,14 +299,14 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         }
     }
 
-    /** Active day means that with tabindex = 0, it's selected day or today or first day*/
+    /** Active day means that with tabindex = 0, it's selected day or today or first day */
     public focusActiveDay(): void {
         this.newFocusedDayId = this.getActiveCell(
             this.calendarDayList.filter(cell => cell.monthStatus === 'current')
         ).id;
     }
 
-    /** Function that gives array of all displayed CalendarDays  */
+    /** Function that gives array of all displayed CalendarDays */
     public get calendarDayList(): CalendarDay[] {
         return this.dayViewGrid.reduce((a: CalendarDay[], b: CalendarDay[]) => {
             if (!b) {
@@ -306,6 +316,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         });
     }
 
+    /** Method that selects previous month */
     private selectPreviousMonth(): void {
         if (this.currentlyDisplayed.month > 1) {
             this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month - 1 };
@@ -316,6 +327,7 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         this.previousMonthSelect.emit();
     }
 
+    /** Method that selects next month */
     private selectNextMonth(): void {
         if (this.currentlyDisplayed.month > 1) {
             this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
@@ -326,6 +338,10 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         this.nextMonthSelect.emit();
     }
 
+    /**
+     * Method that creates array of CalendarDay models which will be shown on day grid,
+     * depending on current month and year.
+     */
     private populateCalendar(): CalendarDay[] {
         let calendar: CalendarDay[] = [];
 
@@ -338,6 +354,10 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         return calendar;
     }
 
+    /**
+     * Method that builds 2 dimensions day view grid, also set up currently displayed month, or year,
+     * when there is not any.
+     */
     private buildDayViewGrid(): void {
         if (!this.currentlyDisplayed) {
             if (this.selectedDate) {
@@ -359,11 +379,10 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     private getDaysInMonth(month: number, year: number): number {
-        return Calendar2Service.getDaysInMonth(month, year);
+        return CalendarService.getDaysInMonth(month, year);
     }
 
     private getCurrentMonthDays(): CalendarDay[] {
-
         const month = this.currentlyDisplayed.month;
         const year = this.currentlyDisplayed.year;
         const calendarDays: CalendarDay[] = [];
@@ -380,6 +399,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         return calendarDays;
     }
 
+    /**
+     * Method that returns active cell, which means:
+     * if there is any selected day, return selected day
+     * if there is no selected day, but there is today day, return today day
+     * if there is no today, or selected, return first one
+     */
     private getActiveCell(calendarDays: CalendarDay[]): CalendarDay {
         if (calendarDays.find(cell => cell.selected)) {
             return calendarDays.find(cell => cell.selected);
@@ -430,6 +455,10 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
         return calendarDays;
     }
 
+    /**
+     * Method that generates whole day model basing on fdDate, disabling functions, block functions, and actually
+     * chosen range / single date.
+     * */
     private getDay(fdDate: FdDate): CalendarDay {
         const day: CalendarDay = {
             date: fdDate,
@@ -437,12 +466,12 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
-                (this.calType === 'single' && Calendar2Service.datesEqual(fdDate, this.selectedDate)) ||
-                (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.start)) ||
-                (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.end))
+                (this.calType === 'single' && CalendarService.datesEqual(fdDate, this.selectedDate)) ||
+                (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.start)) ||
+                (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.end))
             ),
-            selectedFirst: (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.start)),
-            selectedLast: (this.selectedRangeDate && Calendar2Service.datesEqual(fdDate, this.selectedRangeDate.end)),
+            selectedFirst: (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.start)),
+            selectedLast: (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
                 (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
                 (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))

@@ -8,7 +8,7 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { FormsModule } from '@angular/forms';
 import { TimeModule } from '../time/time.module';
 import { FdDatetime } from './models/fd-datetime';
-import { FdDate } from '../calendar/calendar2/models/fd-date';
+import { FdDate } from '../calendar/models/fd-date';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent;
