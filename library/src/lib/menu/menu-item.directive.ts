@@ -7,12 +7,9 @@ import { Subject } from 'rxjs';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-item]'
+    selector: '[fd-menu-item]',
 })
-export class MenuItemDirective implements AfterViewInit, OnChanges {
-
-    public onKeyDown: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
-    public onClick: Subject<void> = new Subject<void>();
+export class MenuItemDirective implements AfterViewInit {
 
     /** @hidden */
     constructor (public itemEl: ElementRef) {}
@@ -24,42 +21,28 @@ export class MenuItemDirective implements AfterViewInit, OnChanges {
             this.isChildElementAnchor()
         ) {
             this.getChildrenElements()[0].classList.add('fd-menu__item');
-        } else if (
-            // if the menu item does not contain a child element, apply 'fd-menu__item' class to the fd-menu-item component
-            this.getChildrenElements() &&
-            this.getChildrenElements().length === 0
-        ) {
+            this.getChildrenElements()[0].setAttribute('tabindex', '0');
+        } else {
+        // if the menu item does not contain a anchor child element, apply 'fd-menu__item' class to the fd-menu-item component {
             this.itemEl.nativeElement.classList.add('fd-menu__item');
+            this.itemEl.nativeElement.setAttribute('tabindex', '0');
         }
     }
 
     public focus(): void {
         if (this.getChildrenElements() && this.getChildrenElements()[0]) {
             this.getChildrenElements()[0].focus();
+        } else {
+            this.itemEl.nativeElement.focus();
         }
     }
-
-    @HostListener('keydown', ['$event'])
-    keyDown(event: KeyboardEvent): void {
-        this.onKeyDown.next(event);
-    }
-
-
-    @HostListener('click')
-    clicked(): void {
-        this.onClick.next();
-    }
-
 
     public click(): void {
         if (this.getChildrenElements() && this.getChildrenElements()[0]) {
             this.getChildrenElements()[0].click();
+        } else {
+            this.itemEl.nativeElement.click();
         }
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.ngAfterViewInit();
     }
 
     public isChildElementAnchor(): boolean {

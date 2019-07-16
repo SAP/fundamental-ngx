@@ -79,7 +79,7 @@ describe('MenuComponent', () => {
     it('should focus second element', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[1], 'focus');
-        const event = { code: 'ArrowDown', preventDefault: () => {} };
+        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
         component.keyDownHandler(event, 0);
         expect(list[1].focus).toHaveBeenCalled();
     });
@@ -87,7 +87,7 @@ describe('MenuComponent', () => {
     it('Should select fourth element, ignoring element without anchor', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[3], 'focus');
-        const event = { code: 'ArrowDown', preventDefault: () => {} };
+        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
         component.keyDownHandler(event, 1);
         expect(list[3].focus).toHaveBeenCalled();
     });
@@ -95,7 +95,7 @@ describe('MenuComponent', () => {
     it('Should use default function and select last element, when encounter a beginning and arrow up', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[3], 'focus');
-        const event = { code: 'ArrowUp', preventDefault: () => {} };
+        const event: any = { code: 'ArrowUp', preventDefault: () => {} };
         component.keyDownHandler(event, 0);
         expect(list[3].focus).toHaveBeenCalled();
     });
@@ -104,7 +104,7 @@ describe('MenuComponent', () => {
         const _elementOutOfScope = elementOutOfScope.nativeElement;
         component.focusEscapeAfterList = () => { _elementOutOfScope.focus(); };
         spyOn(_elementOutOfScope, 'focus');
-        const event = { code: 'ArrowDown', preventDefault: () => {} };
+        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
         component.keyDownHandler(event, 3);
         expect(_elementOutOfScope.focus).toHaveBeenCalled();
     });
@@ -113,7 +113,7 @@ describe('MenuComponent', () => {
         const _elementOutOfScope = elementOutOfScope.nativeElement;
         component.focusEscapeBeforeList = () => { _elementOutOfScope.focus(); };
         spyOn(_elementOutOfScope, 'focus');
-        const event = { code: 'ArrowUp', preventDefault: () => {} };
+        const event: any = { code: 'ArrowUp', preventDefault: () => {} };
         component.keyDownHandler(event, 0);
         expect(_elementOutOfScope.focus).toHaveBeenCalled();
     });

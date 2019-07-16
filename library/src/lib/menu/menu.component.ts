@@ -1,14 +1,15 @@
 import {
     AfterContentInit,
     Component,
-    ContentChildren, EventEmitter,
+    ContentChildren, EventEmitter, HostBinding,
     Input, OnDestroy, Output, QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { MenuGroupComponent } from './menu-group.component';
 import { MenuListDirective } from './menu-list.directive';
 import { MenuItemDirective } from './menu-item.directive';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 /**
  * The component that represents a menu. Provides some keyboard event default handler.
@@ -16,12 +17,9 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'fd-menu',
     templateUrl: './menu.component.html',
-    encapsulation: ViewEncapsulation.None,
-    host: {
-        'class': 'fd-menu'
-    }
+    encapsulation: ViewEncapsulation.None
 })
-export class MenuComponent implements AfterContentInit, OnDestroy {
+export class MenuComponent implements AfterContentInit {
 
     /** @hidden */
     @ContentChildren(MenuGroupComponent)
@@ -31,7 +29,11 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     @ContentChildren(MenuListDirective)
     menuList: QueryList<MenuListDirective>;
 
-    /** Event thrown always, when item link is clicked */
+    /** @hidden */
+    @HostBinding('class.fd-menu')
+    fdMenuClass: boolean = true;
+
+    /** Event emitted when an item link is clicked.*/
     @Output()
     public readonly itemClicked: EventEmitter<number> = new EventEmitter<number>();
 
@@ -47,20 +49,21 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     @Input()
     focusEscapeAfterList: Function;
 
-    private onItemKeyDownSubscription: Subscription[];
-    private onItemClickSubscription: Subscription[];
+    private itemEventsSubscription: Subscription[];
+
+    private readonly destroy = new Subject<void>();
 
     /** @hidden */
     public ngAfterContentInit(): void {
-        this.refreshList();
-        this.menuList.forEach(list => list.listRefresh.subscribe(() => this.refreshList()));
-        this.menuGroup.forEach(list => list.menuList.listRefresh.subscribe(() => this.refreshList()));
-    }
 
-    /** @hidden */
-    public ngOnDestroy(): void {
-        this.onItemKeyDownSubscription = [];
-        this.onItemClickSubscription = [];
+        this.menuList.forEach(list => list.listRefresh
+            .pipe(startWith(null), takeUntil(this.destroy))
+            .subscribe(() => this.refreshList()))
+        ;
+        this.menuGroup.forEach(list => list.menuList.listRefresh
+            .pipe(startWith(null), takeUntil(this.destroy))
+            .subscribe(() => this.refreshList()))
+        ;
     }
 
     /** Focuses first menu-item element which has anchor element */
@@ -73,6 +76,18 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
         if (this.links[index]) {
             this.links[index].focus();
         }
+    }
+
+    /** Method that returns all menu-item directives inside menu component */
+    public get links(): MenuItemDirective[] {
+        let items: MenuItemDirective[] = [];
+        this.menuGroup.filter(group => !!group.menuList).forEach(group =>
+            items = items.concat(group.menuList.menuItemsWithAnchors)
+        );
+        this.menuList.forEach(list =>
+            items = items.concat(list.menuItemsWithAnchors)
+        );
+        return items;
     }
 
     /** @hidden */
@@ -127,27 +142,20 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     }
 
     private refreshList(): void {
-        this.onItemKeyDownSubscription = [];
-        this.onItemClickSubscription = [];
+        this.itemEventsSubscription = [];
+
         this.links.forEach((link, index) => {
-                this.onItemKeyDownSubscription.push(
-                    link.onKeyDown.subscribe(event => this.keyDownHandler(event, index))
+                this.itemEventsSubscription.push(
+                    fromEvent(link.itemEl.nativeElement, 'keydown')
+                        .pipe(takeUntil(this.destroy))
+                        .subscribe((event: KeyboardEvent) => this.keyDownHandler(event, index))
                 );
-                this.onItemClickSubscription.push(
-                    link.onClick.subscribe(() => this.itemClicked.emit(index))
+                this.itemEventsSubscription.push(
+                    fromEvent(link.itemEl.nativeElement, 'click')
+                        .pipe(takeUntil(this.destroy))
+                        .subscribe(() => this.itemClicked.emit(index))
                 );
             }
         )
-    }
-
-    public get links(): MenuItemDirective[] {
-        let items: MenuItemDirective[] = [];
-        this.menuGroup.filter(group => !!group.menuList).forEach(group =>
-            items = items.concat(group.menuList.menuItemsWithAnchors)
-        );
-        this.menuList.forEach(list =>
-            items = items.concat(list.menuItemsWithAnchors)
-        );
-        return items;
     }
 }

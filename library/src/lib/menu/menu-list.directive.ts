@@ -1,4 +1,4 @@
-import { AfterContentInit, ContentChildren, Directive, EventEmitter, OnDestroy, Output, QueryList } from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, EventEmitter, HostBinding, OnDestroy, Output, QueryList } from '@angular/core';
 import { MenuItemDirective } from './menu-item.directive';
 import { Subscription } from 'rxjs';
 
@@ -8,24 +8,29 @@ import { Subscription } from 'rxjs';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-list]',
-    host: {
-        'class': 'fd-menu__list'
-    }
+    selector: '[fd-menu-list]'
 })
 export class MenuListDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
-    @ContentChildren(MenuItemDirective) menuItems: QueryList<MenuItemDirective>;
+    @ContentChildren(MenuItemDirective)
+    menuItems: QueryList<MenuItemDirective>;
+
+    /** @hidden */
+    @HostBinding('class.fd-menu__list')
+    fdMenuListClass: boolean = true;
+
+    /** @hidden
+     *  Event emitted when the list of items is changed.
+     * */
+    @Output()
+    public readonly listRefresh: EventEmitter<void> = new EventEmitter<void>();
+
+    private onMenuItemsChangeSubscription: Subscription;
 
     /** @hidden */
     public get menuItemsWithAnchors(): MenuItemDirective[] {
         return this.menuItems.filter(item => item.isChildElementAnchor());
     }
-
-    /** @hidden */
-    @Output() listRefresh = new EventEmitter();
-
-    private onMenuItemsChangeSubscription: Subscription;
 
     /** @hidden */
     public ngAfterContentInit(): void {
@@ -34,7 +39,9 @@ export class MenuListDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     public ngOnDestroy(): void {
-        this.onMenuItemsChangeSubscription.unsubscribe();
+        if (this.onMenuItemsChangeSubscription) {
+            this.onMenuItemsChangeSubscription.unsubscribe();
+        }
     }
 
 }

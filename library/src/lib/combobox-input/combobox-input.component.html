@@ -25,12 +25,9 @@
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu class="fd-combobox-input-menu-overflow"
-                     [disableKeydownHandling]="true"
                      [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let term of displayedValues"
-                        (click)="onMenuClickHandler($event, term)"
-                        (keydown)="onMenuKeydownHandler($event, term)">
+                    <li fd-menu-item *ngFor="let term of displayedValues">
                         <a tabindex="0" [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlight"></a>
                     </li>
 
