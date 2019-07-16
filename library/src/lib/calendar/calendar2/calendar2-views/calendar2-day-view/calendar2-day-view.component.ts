@@ -417,18 +417,11 @@ export class Calendar2DayViewComponent implements OnInit, AfterViewChecked, OnCh
     }
 
     private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
-        let nextMonthDisplayedDays: number = 0;
         const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 0;
         const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
 
-        // The calendar grid can have either 5 (35 days) or 6 (42 days) weeks
-        // depending on the week day of the first day of the current month
-        // and the number of days in the current month
-        if (calendarDays.length > 35) {
-            nextMonthDisplayedDays = 42 - calendarDays.length;
-        } else {
-            nextMonthDisplayedDays = 35 - calendarDays.length;
-        }
+        // The calendar grid can have 6 (42 days) weeks
+        const nextMonthDisplayedDays = 42 - calendarDays.length;
 
         for (let nextD = 1; nextD <= nextMonthDisplayedDays; nextD++) {
             const fdDate = new FdDate(year, month, nextD);
