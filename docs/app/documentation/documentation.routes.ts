@@ -134,7 +134,7 @@ export const ROUTES: Routes = [
             },
             { path: 'combobox', component: ComboboxHeaderComponent, children: [
                     { path: '', component: ComboboxDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.comboboxInput}}
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
                 ]
             },
             { path: 'datePicker', component: DatePickerHeaderComponent, children: [
