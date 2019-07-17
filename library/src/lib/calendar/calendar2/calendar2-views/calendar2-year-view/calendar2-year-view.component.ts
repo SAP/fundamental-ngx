@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef } from '@angular/core';
-import { CalendarDay } from '../../models/calendar-day';
+import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 
 @Component({
     selector: 'fd-calendar2-year-view',
@@ -7,7 +6,21 @@ import { CalendarDay } from '../../models/calendar-day';
     styleUrls: ['./calendar2-year-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2YearViewComponent {
+export class Calendar2YearViewComponent implements AfterViewChecked {
+
+
+    // ----------------------- Jedrzej's push
+    /** @hidden */
+    newFocusedYearId: string;
+
+    /** @hidden */
+    ngAfterViewChecked() {
+        if (this.newFocusedYearId) {
+            this.focusElement(this.newFocusedYearId);
+            this.newFocusedYearId = null;
+        }
+    }
+    // ----------------------- Jedrzej's push
 
     @Input()
     id: string;
@@ -32,7 +45,6 @@ export class Calendar2YearViewComponent {
     constructor(private eRef: ElementRef) { }
 
     onKeydownYearHandler(event, year: number, index: number) {
-        let newFocusedYearId: string;
 
         switch (event.code) {
             case 'Enter':
@@ -45,9 +57,9 @@ export class Calendar2YearViewComponent {
                 event.preventDefault();
                 if (index === 0) {
                     this.reGenerateYearList.emit('previousSet');
-                    newFocusedYearId = this.id + '-fd-year-' + 11;
+                    this.newFocusedYearId = this.id + '-fd-year-' + 11;
                 } else {
-                    newFocusedYearId = this.id + '-fd-year-' + (index - 1);
+                    this.newFocusedYearId = this.id + '-fd-year-' + (index - 1);
                 }
                 break;
             }
@@ -55,9 +67,9 @@ export class Calendar2YearViewComponent {
                 event.preventDefault();
                 if (index === 11) {
                     this.reGenerateYearList.emit('nextSet');
-                    newFocusedYearId = this.id + '-fd-year-' + 0;
+                    this.newFocusedYearId = this.id + '-fd-year-' + 0;
                 } else {
-                    newFocusedYearId = this.id + '-fd-year-' + (index + 1);
+                    this.newFocusedYearId = this.id + '-fd-year-' + (index + 1);
                 }
                 break;
             }
@@ -65,9 +77,9 @@ export class Calendar2YearViewComponent {
                 event.preventDefault();
                 if (index <= 3) {
                     this.reGenerateYearList.emit('previousSet');
-                    newFocusedYearId = this.id + '-fd-year-' + (index + 8);
+                    this.newFocusedYearId = this.id + '-fd-year-' + (index + 8);
                 } else {
-                    newFocusedYearId = this.id + '-fd-year-' + (index - 4);
+                    this.newFocusedYearId = this.id + '-fd-year-' + (index - 4);
                 }
                 break;
             }
@@ -75,23 +87,21 @@ export class Calendar2YearViewComponent {
                 event.preventDefault();
                 if (index >= 8) {
                     this.reGenerateYearList.emit('nextSet');
-                    newFocusedYearId = this.id + '-fd-year-' + (index - 8);
+                    this.newFocusedYearId = this.id + '-fd-year-' + (index - 8);
                 } else {
-                    newFocusedYearId = this.id + '-fd-year-' + (index + 4);
+                    this.newFocusedYearId = this.id + '-fd-year-' + (index + 4);
                 }
                 break;
             }
         }
-        this.focusElement(newFocusedYearId);
+        this.focusElement(this.newFocusedYearId);
     }
 
     focusElement(elementSelector: string): void {
         const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
-        setTimeout(() => {
-            if (elementToFocus) {
-                this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
-            }
-        }, 0);
+        if (elementToFocus) {
+            this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
+        }
     }
 
     selectYear(selectedYear: number, event?: MouseEvent) {
