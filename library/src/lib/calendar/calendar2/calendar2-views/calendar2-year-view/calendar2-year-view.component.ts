@@ -14,6 +14,10 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
     @Input()
     id: string;
 
+    /** Function that allows to specify which function would be called, when focus wants to escape */
+    @Input()
+    focusEscapeFunction: Function;
+
     @Input()
     isActive: boolean;
 
@@ -43,55 +47,62 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
 
     onKeydownYearHandler(event, year: number, index: number) {
 
-        switch (event.code) {
-            case 'Enter':
-            case 'Space': {
+        if (event.code === 'Tab' && !event.shiftKey) {
+            if (this.focusEscapeFunction) {
                 event.preventDefault();
-                this.selectYear(year);
-                break;
+                this.focusEscapeFunction();
             }
-            case 'ArrowLeft': {
-                event.preventDefault();
-                if (index === 0) {
-                    this.reGenerateYearList.emit('previousSet');
-                    this.newFocusedYearId = this.id + '-fd-year-' + 11;
-                } else {
-                    this.newFocusedYearId = this.id + '-fd-year-' + (index - 1);
+        } else {
+            switch (event.code) {
+                case 'Enter':
+                case 'Space': {
+                    event.preventDefault();
+                    this.selectYear(year);
+                    break;
                 }
-                break;
-            }
-            case 'ArrowRight': {
-                event.preventDefault();
-                if (index === 11) {
-                    this.reGenerateYearList.emit('nextSet');
-                    this.newFocusedYearId = this.id + '-fd-year-' + 0;
-                } else {
-                    this.newFocusedYearId = this.id + '-fd-year-' + (index + 1);
+                case 'ArrowLeft': {
+                    event.preventDefault();
+                    if (index === 0) {
+                        this.reGenerateYearList.emit('previousSet');
+                        this.newFocusedYearId = this.id + '-fd-year-' + 11;
+                    } else {
+                        this.newFocusedYearId = this.id + '-fd-year-' + (index - 1);
+                    }
+                    break;
                 }
-                break;
-            }
-            case 'ArrowUp': {
-                event.preventDefault();
-                if (index <= 3) {
-                    this.reGenerateYearList.emit('previousSet');
-                    this.newFocusedYearId = this.id + '-fd-year-' + (index + 8);
-                } else {
-                    this.newFocusedYearId = this.id + '-fd-year-' + (index - 4);
+                case 'ArrowRight': {
+                    event.preventDefault();
+                    if (index === 11) {
+                        this.reGenerateYearList.emit('nextSet');
+                        this.newFocusedYearId = this.id + '-fd-year-' + 0;
+                    } else {
+                        this.newFocusedYearId = this.id + '-fd-year-' + (index + 1);
+                    }
+                    break;
                 }
-                break;
-            }
-            case 'ArrowDown': {
-                event.preventDefault();
-                if (index >= 8) {
-                    this.reGenerateYearList.emit('nextSet');
-                    this.newFocusedYearId = this.id + '-fd-year-' + (index - 8);
-                } else {
-                    this.newFocusedYearId = this.id + '-fd-year-' + (index + 4);
+                case 'ArrowUp': {
+                    event.preventDefault();
+                    if (index <= 3) {
+                        this.reGenerateYearList.emit('previousSet');
+                        this.newFocusedYearId = this.id + '-fd-year-' + (index + 8);
+                    } else {
+                        this.newFocusedYearId = this.id + '-fd-year-' + (index - 4);
+                    }
+                    break;
                 }
-                break;
+                case 'ArrowDown': {
+                    event.preventDefault();
+                    if (index >= 8) {
+                        this.reGenerateYearList.emit('nextSet');
+                        this.newFocusedYearId = this.id + '-fd-year-' + (index - 8);
+                    } else {
+                        this.newFocusedYearId = this.id + '-fd-year-' + (index + 4);
+                    }
+                    break;
+                }
             }
+            this.focusElement(this.newFocusedYearId);
         }
-        this.focusElement(this.newFocusedYearId);
     }
 
     focusElement(elementSelector: string): void {
