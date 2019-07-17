@@ -15,3 +15,18 @@
   </p>
 </component-example>
 <code-example [code]="menuGroupHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Menu with keyboard support</h2>
+<description>
+    Menu keyboard support can be added on every component, which is using <code>MenuComponent</code>. It simulates
+    click event on <code>Enter</code> or <code>Space</code> key down. Also it's possible to overwrite functions, which
+    are responsible for situation, when focus escape before <code>focusEscapeBeforeList</code> or after
+    <code>focusEscapeAfterList</code> list. To try it, use arrow up/down.
+</description>
+<component-example [name]="'ex3'">
+    <fd-menu-keyboard-support-example></fd-menu-keyboard-support-example>
+</component-example>
+<code-example [code]="menuKeyboardHtml" [language]="'HTML'"></code-example>
+<code-example [code]="menuKeyboardTs" [language]="'typescript'"></code-example>

@@ -28,11 +28,6 @@ export class MenuListDirective implements AfterContentInit, OnDestroy {
     private onMenuItemsChangeSubscription: Subscription;
 
     /** @hidden */
-    public get menuItemsWithAnchors(): MenuItemDirective[] {
-        return this.menuItems.filter(item => item.isChildElementAnchor());
-    }
-
-    /** @hidden */
     public ngAfterContentInit(): void {
         this.onMenuItemsChangeSubscription = this.menuItems.changes.subscribe(() => this.listRefresh.emit());
     }

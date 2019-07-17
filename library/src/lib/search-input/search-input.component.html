@@ -37,7 +37,6 @@
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
         <fd-menu class="fd-search-input-menu-overflow"
-                 [disableKeydownHandling]="true"
                  [style.maxHeight]="maxHeight">
             <ul fd-menu-list>
                 <li fd-menu-item *ngFor="let term of displayedValues"

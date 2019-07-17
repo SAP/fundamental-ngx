@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MenuComponent } from './menu.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuModule } from './menu.module';
+import { MenuKeyboardService } from './menu-keyboard.service';
 
 @Component({
     selector: 'fd-menu-test',
@@ -43,6 +44,7 @@ describe('MenuComponent', () => {
     let fixture: ComponentFixture<TestMenuComponent>;
     let elements: ElementRef[];
     let elementOutOfScope: ElementRef;
+    let service: MenuKeyboardService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -63,6 +65,8 @@ describe('MenuComponent', () => {
         ];
         elementOutOfScope = fixture.componentInstance.elementOutOfScope;
         fixture.detectChanges();
+        service = new MenuKeyboardService();
+        service.initialise(component);
     });
 
     it('should create', () => {
@@ -72,7 +76,7 @@ describe('MenuComponent', () => {
     it('should focus first element', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[0], 'focus');
-        component.focusFirst();
+        service.focusFirst();
         expect(list[0].focus).toHaveBeenCalled();
     });
 
@@ -80,7 +84,7 @@ describe('MenuComponent', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[1], 'focus');
         const event: any = { code: 'ArrowDown', preventDefault: () => {} };
-        component.keyDownHandler(event, 0);
+        service.keyDownHandler(event, 0);
         expect(list[1].focus).toHaveBeenCalled();
     });
 
@@ -88,7 +92,7 @@ describe('MenuComponent', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[3], 'focus');
         const event: any = { code: 'ArrowDown', preventDefault: () => {} };
-        component.keyDownHandler(event, 1);
+        service.keyDownHandler(event, 1);
         expect(list[3].focus).toHaveBeenCalled();
     });
 
@@ -96,25 +100,25 @@ describe('MenuComponent', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[3], 'focus');
         const event: any = { code: 'ArrowUp', preventDefault: () => {} };
-        component.keyDownHandler(event, 0);
+        service.keyDownHandler(event, 0);
         expect(list[3].focus).toHaveBeenCalled();
     });
 
     it('Should use custom after focus function which and focus out of scope element', () => {
         const _elementOutOfScope = elementOutOfScope.nativeElement;
-        component.focusEscapeAfterList = () => { _elementOutOfScope.focus(); };
+        service.focusEscapeAfterList = () => { _elementOutOfScope.focus(); };
         spyOn(_elementOutOfScope, 'focus');
         const event: any = { code: 'ArrowDown', preventDefault: () => {} };
-        component.keyDownHandler(event, 3);
+        service.keyDownHandler(event, 3);
         expect(_elementOutOfScope.focus).toHaveBeenCalled();
     });
 
     it('Should use custom before focus function which and focus out of scope element', () => {
         const _elementOutOfScope = elementOutOfScope.nativeElement;
-        component.focusEscapeBeforeList = () => { _elementOutOfScope.focus(); };
+        service.focusEscapeBeforeList = () => { _elementOutOfScope.focus(); };
         spyOn(_elementOutOfScope, 'focus');
         const event: any = { code: 'ArrowUp', preventDefault: () => {} };
-        component.keyDownHandler(event, 0);
+        service.keyDownHandler(event, 0);
         expect(_elementOutOfScope.focus).toHaveBeenCalled();
     });
 });

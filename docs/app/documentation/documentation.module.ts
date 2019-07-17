@@ -333,6 +333,7 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
+import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
 
 @NgModule({
     declarations: [
@@ -468,6 +469,7 @@ import { ModalPositionExampleComponent } from './component-docs/modal/examples/m
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
+        MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
