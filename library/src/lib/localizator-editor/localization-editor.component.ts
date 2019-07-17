@@ -1,10 +1,4 @@
-import {
-    Component,
-    ContentChild,
-    EventEmitter, HostBinding,
-    Input,
-    Output
-} from '@angular/core';
+import { Component, ContentChild, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { Placement } from 'popper.js';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 
@@ -23,7 +17,8 @@ import { LocalizationEditorMainComponent } from './localization-editor-main/loca
  */
 @Component({
     selector: 'fd-localization-editor',
-    templateUrl: './localization-editor.component.html'
+    templateUrl: './localization-editor.component.html',
+    styleUrls: ['localization-editor.component.scss']
 })
 export class LocalizationEditorComponent {
 

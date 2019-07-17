@@ -32,7 +32,7 @@ export class LocalizationEditorInputDirective {
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-localization-editor-textarea]'
+    selector: '[fd-localization-editor-textarea]',
 })
 export class LocalizationEditorTextareaDirective {
 
@@ -42,6 +42,12 @@ export class LocalizationEditorTextareaDirective {
      * */
     @HostBinding('class.fd-input--compact')
     public compact: boolean;
+
+    /**
+     * @hidden
+     */
+    @HostBinding('class.fd-localization-editor-textarea')
+    public fdLocalizationEditorTextareaClass: boolean = true;
 }
 
 /**
