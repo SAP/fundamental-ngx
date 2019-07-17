@@ -18,8 +18,8 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
 export class CalendarRangeExampleComponent {
 
     selected = {
-        start: new FdDate(2019, 9, 11),
-        end: new FdDate(2019, 10, 11)
+        start: new FdDate(2019, 10, 11),
+        end: new FdDate(2019, 10, 19)
     };
 
     myDisableFunction2 = function(d: FdDate): boolean {
@@ -29,13 +29,13 @@ export class CalendarRangeExampleComponent {
 
     myDisableStartFunction = function(d: FdDate): boolean {
         const time = d.toDate().getTime();
-        const currentTime = new FdDate(2019, 9, 10).toDate().getTime();
+        const currentTime = new FdDate(2019, 10, 10).toDate().getTime();
         return time > currentTime;
     };
 
     myDisableEndFunction = function(d: FdDate): boolean {
         const time = d.toDate().getTime();
-        const currentTime = new FdDate(2019, 9, 20).toDate().getTime();
+        const currentTime = new FdDate(2019, 10, 20).toDate().getTime();
         return time < currentTime;
     };
 }

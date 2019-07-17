@@ -45,7 +45,8 @@ export const API_FILES = {
         'CalendarI18nDefault',
         'CalendarI18nLabels',
         'DateFormatParser',
-        'DateFormatParserDefault'
+        'DateFormatParserDefault',
+        'FdDate'
     ],
     comboboxInput: [
         'ComboboxInputComponent'
@@ -56,7 +57,8 @@ export const API_FILES = {
         'DateFormatParserDefault'
     ],
     datetimePicker: [
-        'DatetimePickerComponent'
+        'DatetimePickerComponent',
+        'FdDateTime'
     ],
     fileInput: [
         'FileInputComponent',
