@@ -4,7 +4,6 @@
  * Include the suffix i.e. Directive or Component.
  * Names are sorted in the ApiComponent so order does not matter.
  */
-import { MenuKeyboardService } from '../../../../library/src/lib/menu/menu-keyboard.service';
 
 export const API_FILES = {
     actionBar: [
