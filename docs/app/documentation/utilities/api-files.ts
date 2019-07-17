@@ -37,7 +37,7 @@ export const API_FILES = {
     ],
     buttonGroup: [
         'ButtonGroupComponent',
-        'ButtonGroupedDirective'
+        'ButtonGroupedDirective',
     ],
     calendar: [
         'CalendarComponent',
@@ -47,8 +47,8 @@ export const API_FILES = {
         'DateFormatParser',
         'DateFormatParserDefault'
     ],
-    comboboxInput: [
-        'ComboboxInputComponent'
+    combobox: [
+        'ComboboxComponent'
     ],
     datePicker: [
         'DatePickerComponent',
@@ -73,7 +73,7 @@ export const API_FILES = {
         'FormSetDirective'
     ],
     icon: [
-        'IconDirective'
+        'IconComponent'
     ],
     identifier: [
         'IdentifierDirective'
@@ -176,6 +176,11 @@ export const API_FILES = {
         'SideNavigationSublinkComponent',
         'SideNavigationTitleComponent'
     ],
+    splitButton: [
+        'SplitButtonComponent',
+        'SplitButtonMenuDirective',
+        'SplitButtonActionTitle',
+    ],
     table: [
         'TableDirective',
         'ColumnSortableDirective'
@@ -183,7 +188,9 @@ export const API_FILES = {
     tabs: [
         'TabPanelComponent',
         'TabListComponent',
-        'TabTitleDirective'
+        'TabTitleDirective',
+        'TabLinkDirective',
+        'TabNavDirective'
     ],
     tile: [
         'ProductTileComponent',

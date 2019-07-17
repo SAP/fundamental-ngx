@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./icon-docs.component.scss']
 })
 export class IconExampleComponent {
+
     icons: any = [
         'accelerated',
         'accept',

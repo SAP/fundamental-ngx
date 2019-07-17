@@ -1,0 +1,56 @@
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [disabled]="true" [mainActionTitle]="'Disabled Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [mainActionTitle]="'Default Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [options]="'emphasized'" [mainActionTitle]="'Emphasized Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [options]="'light'" [mainActionTitle]="'Light Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option</a>
+                </li>
+                <li fd-menu-item>
+                    <a (click)="itemClicked()">option2</a>
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>

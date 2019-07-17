@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
 export class TabsExampleComponent {}
 
 @Component({
+    selector: 'fd-tabs-navigation-mode-example',
+    templateUrl: './tabs-navigation-mode-example.component.html'
+})
+export class TabsNavigationModeExampleComponent {}
+
+@Component({
     selector: 'fd-tab-selection-example',
     templateUrl: './tab-selection-example.component.html',
     styles: [`
@@ -18,3 +24,5 @@ export class TabsExampleComponent {}
 export class TabSelectionExampleComponent {
     selectedTab = 0;
 }
+
+
