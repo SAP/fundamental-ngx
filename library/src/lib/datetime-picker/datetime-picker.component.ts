@@ -297,6 +297,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.setInput(this.date);
         }
     }
+
     /**
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected date changed
@@ -305,8 +306,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (!CalendarService.datesEqual(date, this.selectedDate)) {
             this.selectedDate = date;
             this.date = new FdDatetime(this.selectedDate, this.time);
+            if (!this.date.isTimeValid()) {
+                this.date = new FdDatetime(this.selectedDate, FdDatetime.GetToday().time);
+            }
+            this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
             this.setInput(this.date);
             this.onChange(this.date);
+
         }
     }
 
@@ -317,6 +323,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     handleTimeChange(time: TimeObject): void {
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
+        this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -337,7 +344,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (date) {
             const fdTimeDate = this.dateTimeAdapter.parse(date);
             this.isInvalidDateInput = !(fdTimeDate.isDateValid() && fdTimeDate.isTimeValid());
-
             if (!this.isInvalidDateInput) {
                 this.selectedDate = fdTimeDate.date;
                 this.time = fdTimeDate.time;

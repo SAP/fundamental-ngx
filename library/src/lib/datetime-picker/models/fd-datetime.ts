@@ -62,19 +62,24 @@ export class FdDatetime {
      * Method that checks validity of time on FdDateTime object.
      */
     public isTimeValid(): boolean {
-        if (!this.time) {
+
+        if (!this.time ||
+            this.hour === undefined ||
+            this.minute === undefined ||
+            this.second === undefined
+        ) {
             return false;
         }
 
-        if (this.time.hour > 23 || this.time.hour < 0) {
+        if (this.hour > 23 || this.hour < 0) {
             return false;
         }
 
-        if (this.time.minute > 59 || this.time.minute < 0) {
+        if (this.minute > 59 || this.minute < 0) {
             return false;
         }
 
-        if (this.time.second > 59 || this.time.second < 0) {
+        if (this.second > 59 || this.second < 0) {
             return false;
         }
 

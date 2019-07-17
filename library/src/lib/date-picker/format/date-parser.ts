@@ -43,7 +43,12 @@ export class DateFormatParserDefault extends DateFormatParser {
      * @param value String to concert to a FdDate model object.
      */
     public parse(value: string): FdDate {
-        return FdDate.getModelFromDate(new Date(value));
+        if (value) {
+            const str = value.toString().split('/').map(Number);
+            return new FdDate(str[2], str[0], str[1])
+        } else {
+            return null;
+        }
     }
 
     /**
