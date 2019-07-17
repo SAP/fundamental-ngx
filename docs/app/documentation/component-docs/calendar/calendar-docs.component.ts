@@ -25,48 +25,48 @@ export class CalendarDocsComponent implements OnInit {
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
 // Disable the weekends
-myDisableFunction = function (d: Date): boolean {
-    let day = d.getDay();
+myDisableFunction = function (d: FdDate): boolean {
+    let day = d.toDate().getDay();
     return day === 6 || day === 0;
 }
 
 // Disable any weekday (Monday)
-myDisableFunction2 = function(d: Date): boolean {
-    let day = d.getDay();
+myDisableFunction2 = function(d: FdDate): boolean {
+    let day = d.toDate().getDay();
     return day === 1;
 }
 
 // Disable past selection
-myDisableFunction = function(d: Date): boolean {
+myDisableFunction = function(d: FdDate): boolean {
     let today = new Date();
     today.setHours(0,0,0,0);
-    return d.getTime() < today.getTime();
+    return d.toDate().getTime() < today.getTime();
 }
 
 // Disable future selection
-myDisableFunction = function(d: Date): boolean {
+myDisableFunction = function(d: FdDate): boolean {
     let today = new Date();
     today.setHours(0,0,0,0); 
-    return d.getTime() > today.getTime()
+    return d.toDate().getTime() > today.getTime()
 }
 
 // Disable days before a particular day
-myDisableFunction = function(d: Date): boolean {
+myDisableFunction = function(d: FdDate): boolean {
     let day = new Date(2018, 9, 15);
-    return d.getTime() < day.getTime();
+    return d.toDate().getTime() < day.getTime();
 }
 
 // Disable days after a particular day
-myDisableFunction = function(d: Date): boolean {
+myDisableFunction = function(d: FdDate): boolean {
     let day = new Date(2018, 9, 5);
-    return d.getTime() > day.getTime()
+    return d.toDate().getTime() > day.getTime()
 }
 
 // Disable days within a range
-myDisableFunction = function(d: Date): boolean {
+myDisableFunction = function(d: FdDate): boolean {
     let firstDay = new Date(2018, 7, 5);
     let lastDay = new Date(2018, 7, 20);
-    return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
+    return d.toDate().getTime() > firstDay.getTime() && d.toDate().getTime() < lastDay.getTime()
 }`;
 
     constructor() {}

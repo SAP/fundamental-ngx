@@ -226,7 +226,8 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** @hidden */
     constructor(
         public dateAdapter: DateFormatParser
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -280,7 +281,7 @@ export class DatePickerComponent implements ControlValueAccessor {
         if (date) {
             if (this.type === 'single') {
                 const fdDate = this.dateAdapter.parse(date);
-                this.isInvalidDateInput = !fdDate.isDateValid()
+                this.isInvalidDateInput = !fdDate.isDateValid();
 
                 // If is correct and data is not exactly the same
                 if (!this.isInvalidDateInput && !CalendarService.datesEqual(fdDate, this.selectedDate)) {
@@ -289,8 +290,7 @@ export class DatePickerComponent implements ControlValueAccessor {
                     this.onChange({ date: this.selectedDate });
                     this.selectedDateChange.emit(this.selectedDate);
                 } else {
-                    this.selectedDate = FdDate.getToday();
-                    this.calendarComponent.setCurrentlyDisplayed(fdDate);
+
                 }
             } else {
                 const currentDates = date.split(this.dateAdapter.rangeDelimiter);
@@ -316,6 +316,8 @@ export class DatePickerComponent implements ControlValueAccessor {
                     this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
                 }
             }
+        } else if (!this.allowNull) {
+            this.isInvalidDateInput = true;
         }
     }
 
