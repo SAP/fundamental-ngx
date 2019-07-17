@@ -37,6 +37,7 @@ export class MenuKeyboardService implements OnDestroy {
      * list of items is refreshed so it's possible to use it even on dynamic lists, for example in combobox.
      * */
     initialise(menuComponent: MenuComponent): void {
+        this.refreshList();
         if (menuComponent && menuComponent.menuList) {
             this.menuList = menuComponent.menuList;
             this.menuList.forEach(list => list.listRefresh
@@ -51,7 +52,6 @@ export class MenuKeyboardService implements OnDestroy {
                 .subscribe(() => this.refreshList()))
             ;
         }
-        this.refreshList();
     }
 
     /** Focuses first menu-item element which has anchor element */

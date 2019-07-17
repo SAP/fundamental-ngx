@@ -10,19 +10,19 @@ import { MenuKeyboardService } from './menu-keyboard.service';
     template: `
         <fd-menu #menuComponent>
             <ul fd-menu-list>
-                <li fd-menu-item>
-                    <a #element1 [attr.href]="'#'">Option 1</a>
+                <li fd-menu-item #element1>
+                    Option 1
                 </li>
-                <li fd-menu-item>
-                    <a #element2 [attr.href]="'#'">Option 2</a>
+                <li fd-menu-item #element2>
+                    Option 2
                 </li>
                 <li fd-menu-item #element3>
                     Option 3
                 </li>
             </ul>
             <ul fd-menu-list>
-                <li fd-menu-item>
-                    <a #element4 [attr.href]="'#'">Option 4</a>
+                <li fd-menu-item #element4>
+                    Option 4
                 </li>
             </ul>
         </fd-menu>
@@ -87,15 +87,7 @@ describe('MenuComponent', () => {
         service.keyDownHandler(event, 0);
         expect(list[1].focus).toHaveBeenCalled();
     });
-
-    it('Should select fourth element, ignoring element without anchor', () => {
-        const list = elements.map(element => element.nativeElement);
-        spyOn(list[3], 'focus');
-        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
-        service.keyDownHandler(event, 1);
-        expect(list[3].focus).toHaveBeenCalled();
-    });
-
+    
     it('Should use default function and select last element, when encounter a beginning and arrow up', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[3], 'focus');
