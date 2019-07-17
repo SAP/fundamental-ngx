@@ -8,19 +8,8 @@ import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, Elem
 })
 export class Calendar2YearViewComponent implements AfterViewChecked {
 
-
-    // ----------------------- Jedrzej's push
     /** @hidden */
     newFocusedYearId: string;
-
-    /** @hidden */
-    ngAfterViewChecked() {
-        if (this.newFocusedYearId) {
-            this.focusElement(this.newFocusedYearId);
-            this.newFocusedYearId = null;
-        }
-    }
-    // ----------------------- Jedrzej's push
 
     @Input()
     id: string;
@@ -41,6 +30,14 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
     reGenerateYearList: EventEmitter<any> = new EventEmitter();
 
     currentYear: number = new Date().getFullYear();
+
+    /** @hidden */
+    ngAfterViewChecked() {
+        if (this.newFocusedYearId) {
+            this.focusElement(this.newFocusedYearId);
+            this.newFocusedYearId = null;
+        }
+    }
 
     constructor(private eRef: ElementRef) { }
 
