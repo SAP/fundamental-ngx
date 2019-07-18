@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-calendar-single-example',
@@ -16,6 +15,7 @@ import { FormControl, FormGroup } from '@angular/forms';
         <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
 })
 export class CalendarSingleExampleComponent {
+
     selectedDay = {
         date: FdDate.getToday()
     };

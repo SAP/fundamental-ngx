@@ -32,6 +32,8 @@
             <div class="fd-datetime__container">
                 <fd-calendar calType="single"
                              (closeCalendar)="closePopover()"
+                             [activeView]="activeView"
+                             (activeViewChange)="handleCalendarActiveViewChange($event)"
                              [disableFunction]="disableFunction ? disableFunction : null"
                              [blockFunction]="blockFunction ? blockFunction : null"
                              [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"

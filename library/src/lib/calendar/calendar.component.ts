@@ -231,6 +231,13 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     }
 
     /**
+     * Method that handle active view change and throws event.
+     * */
+    public handleActiveViewChange(activeView: FdCalendarView): void {
+        this.activeViewChange.emit(activeView);
+    }
+
+    /**
      * @hidden
      * Method that is triggered by events from day view component, when there is selected single date changed
      * */
@@ -256,6 +263,38 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         }
     }
 
+    /** Function that handles next arrow icon click, depending on current view it changes month, year or list of years */
+    public handleNextArrowClick(): void {
+        switch (this.activeView) {
+            case 'day':
+                this.displayNextMonth();
+                break;
+            case 'month':
+                this.displayNextYear();
+                break;
+            case 'year':
+                this.displayNextYearList();
+                break;
+        }
+        this.onTouched();
+    }
+
+    /** Function that handles previous arrow icon click, depending on current view it changes month, year or list of years */
+    public handlePreviousArrowClick(): void {
+        switch (this.activeView) {
+            case 'day':
+                this.displayPreviousMonth();
+                break;
+            case 'month':
+                this.displayPreviousYear();
+                break;
+            case 'year':
+                this.displayPreviousYearList();
+                break;
+        }
+        this.onTouched();
+    }
+
     /** Function that allows to switch actual view to next month */
     public displayNextMonth(): void {
         if (this.currentlyDisplayed.month === 12) {
@@ -263,7 +302,6 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month + 1 };
         }
-        this.onTouched();
     }
 
     /** Function that allows to switch actual view to previous month */
@@ -273,7 +311,24 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         } else {
             this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
         }
-        this.onTouched();
+    }
+
+    /** Function that allows to switch actual view to next year */
+    public displayNextYear(): void {
+        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 }
+    }
+
+    /** Function that allows to switch actual view to previous year */
+    public displayPreviousYear(): void {
+        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 }
+    }
+
+    /** Function that allows to switch actually displayed list of year to next year list*/
+    public displayNextYearList(): void {
+    }
+
+    /** Function that allows to switch actually displayed list of year to previous year list*/
+    public displayPreviousYearList(): void {
     }
 
     /** Function that allows to change currently displayed month/year configuration,

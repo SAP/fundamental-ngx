@@ -6,7 +6,7 @@ import {
     Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarType } from '../calendar/calendar.component';
+import { CalendarType, FdCalendarView } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Placement } from 'popper.js';
 import { FdDate } from '../calendar/models/fd-date';
@@ -91,6 +91,10 @@ export class DatePickerComponent implements ControlValueAccessor {
     @Input()
     allowNull: boolean = true;
 
+    /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
+    @Input()
+    public activeView: FdCalendarView = 'day';
+
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
     @Input()
@@ -99,6 +103,11 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** Whether the date picker is disabled. */
     @Input()
     disabled: boolean;
+
+
+    /** Event thrown every time calendar active view is changed */
+    @Output()
+    public readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -148,13 +157,19 @@ export class DatePickerComponent implements ControlValueAccessor {
     blockRangeEndFunction = function(d): boolean {
         return false;
     };
-
     /** @hidden */
     onChange: any = (selected: any) => {
     };
     /** @hidden */
     onTouched: any = () => {
     };
+
+    /**
+     * Method that handle calendar active view change and throws event.
+     */
+    public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
+        this.activeViewChange.emit(activeView);
+    }
 
     /** @hidden */
     public closeFromCalendar(): void {
@@ -187,7 +202,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     /**
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected single date changed
-     * */
+     */
     public handleSingleDateChange(date: FdDate): void {
         if (date) {
             this.inputFieldDate = this.dateAdapter.format(date);
@@ -200,7 +215,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     /**
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected range date changed
-     * */
+     */
     public handleRangeDateChange(dates: FdRangeDate): void {
         if (dates &&
             (!CalendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
@@ -218,7 +233,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     /**
      * @hidden
      * Method that is triggered when the text input is confirmed to ba changed, by clicking enter, or blur
-     * */
+     */
     public handleInputChange(strDate: string): void {
         this.dateStringUpdate(strDate);
     }
