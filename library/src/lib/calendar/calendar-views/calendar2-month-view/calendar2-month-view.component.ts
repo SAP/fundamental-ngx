@@ -79,7 +79,7 @@ export class Calendar2MonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method for handling the keyboard events (a11y) */
-    onKeydownMonthHandler(event: KeyboardEvent, month: number): void {
+    onKeydownMonthHandler(event, month: number): void {
         let newFocusedMonthId: string;
 
         switch (event.code) {
