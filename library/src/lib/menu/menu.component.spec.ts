@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuModule } from './menu.module';
 import { MenuKeyboardService } from './menu-keyboard.service';
+import { MenuItemDirective } from './menu-item.directive';
 
 @Component({
     selector: 'fd-menu-test',
     template: `
-        <fd-menu #menuComponent>
+        <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item #element1>
                     Option 1
@@ -29,18 +30,20 @@ import { MenuKeyboardService } from './menu-keyboard.service';
         <a href="#" #elementOutOfScope>OutOfScope</a>
     `
 })
-export class TestMenuComponent {
+export class TestMenuComponent implements AfterViewInit {
     @ViewChild('element1') element1: ElementRef;
     @ViewChild('element2') element2: ElementRef;
     @ViewChild('element3') element3: ElementRef;
     @ViewChild('element4') element4: ElementRef;
     @ViewChild('elementOutOfScope') elementOutOfScope: ElementRef;
-    @ViewChild('menuComponent') menuComponent: MenuComponent;
+    @ViewChildren(MenuItemDirective)
+    menuItems: QueryList<MenuItemDirective>;
+    public ngAfterViewInit(): void {}
 }
 
 
 describe('MenuComponent', () => {
-    let component: MenuComponent;
+    let items: QueryList<MenuItemDirective>;
     let fixture: ComponentFixture<TestMenuComponent>;
     let elements: ElementRef[];
     let elementOutOfScope: ElementRef;
@@ -55,7 +58,7 @@ describe('MenuComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuComponent);
-        component = fixture.componentInstance.menuComponent;
+        fixture.detectChanges();
         const componentInstance = fixture.componentInstance;
         elements = [
             componentInstance.element1,
@@ -64,19 +67,14 @@ describe('MenuComponent', () => {
             componentInstance.element4
         ];
         elementOutOfScope = fixture.componentInstance.elementOutOfScope;
-        fixture.detectChanges();
+        items = fixture.componentInstance.menuItems;
         service = new MenuKeyboardService();
-        service.initialise(component);
-    });
-
-    it('should create', () => {
-        expect(component).toBeTruthy();
     });
 
     it('should focus first element', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[0], 'focus');
-        service.focusFirst();
+        fixture.componentInstance.menuItems.first.focus();
         expect(list[0].focus).toHaveBeenCalled();
     });
 
@@ -84,7 +82,7 @@ describe('MenuComponent', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[1], 'focus');
         const event: any = { code: 'ArrowDown', preventDefault: () => {} };
-        service.keyDownHandler(event, 0);
+        service.keyDownHandler(event, 0, items.toArray());
         expect(list[1].focus).toHaveBeenCalled();
     });
     
@@ -92,7 +90,7 @@ describe('MenuComponent', () => {
         const list = elements.map(element => element.nativeElement);
         spyOn(list[3], 'focus');
         const event: any = { code: 'ArrowUp', preventDefault: () => {} };
-        service.keyDownHandler(event, 0);
+        service.keyDownHandler(event, 0, items.toArray());
         expect(list[3].focus).toHaveBeenCalled();
     });
 
@@ -101,7 +99,7 @@ describe('MenuComponent', () => {
         service.focusEscapeAfterList = () => { _elementOutOfScope.focus(); };
         spyOn(_elementOutOfScope, 'focus');
         const event: any = { code: 'ArrowDown', preventDefault: () => {} };
-        service.keyDownHandler(event, 3);
+        service.keyDownHandler(event, 3, items.toArray());
         expect(_elementOutOfScope.focus).toHaveBeenCalled();
     });
 
@@ -110,7 +108,7 @@ describe('MenuComponent', () => {
         service.focusEscapeBeforeList = () => { _elementOutOfScope.focus(); };
         spyOn(_elementOutOfScope, 'focus');
         const event: any = { code: 'ArrowUp', preventDefault: () => {} };
-        service.keyDownHandler(event, 0);
+        service.keyDownHandler(event, 0, items.toArray());
         expect(_elementOutOfScope.focus).toHaveBeenCalled();
     });
 });

@@ -1,12 +1,8 @@
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { MenuItemDirective } from './menu-item.directive';
-import { OnDestroy, Output, QueryList } from '@angular/core';
-import { MenuListDirective } from './menu-list.directive';
-import { MenuGroupComponent } from './menu-group.component';
-import { MenuComponent } from './menu.component';
+import { Output } from '@angular/core';
 
-export class MenuKeyboardService implements OnDestroy {
+export class MenuKeyboardService {
 
     /** Event emitted when an item link is clicked.*/
     @Output()
@@ -21,69 +17,14 @@ export class MenuKeyboardService implements OnDestroy {
     /** Function that is supposed to be called, when focus escape after list */
     focusEscapeAfterList: Function;
 
-    private menuGroup: QueryList<MenuGroupComponent>;
-    private menuList: QueryList<MenuListDirective>;
-    private itemEventsSubscription: Subscription[];
-
-    private readonly destroy = new Subject<void>();
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.destroy.next();
-    }
-
-    /**
-     * This function starts to provide support for keyboard for menu items, anytime there are any changes,
-     * list of items is refreshed so it's possible to use it even on dynamic lists, for example in combobox.
+    /** Function that should be called every time, keydown event is used on some menu item,
+     * it provides whole functionality for handling
+     * ArrowDown - focus, ArrowUp - focus, Space bar - simulate click, Enter key - simulate click.
+     * @param event KeyboardEvent
+     * @param index index of items starts from 0
+     * @param menuItems array of menu item directives
      * */
-    initialise(menuComponent: MenuComponent): void {
-        this.refreshList();
-        if (menuComponent && menuComponent.menuList) {
-            this.menuList = menuComponent.menuList;
-            this.menuList.forEach(list => list.listRefresh
-                .pipe(takeUntil(this.destroy))
-                .subscribe(() => this.refreshList()))
-            ;
-        }
-        if (menuComponent && menuComponent.menuGroup) {
-            this.menuGroup = menuComponent.menuGroup;
-            this.menuGroup.forEach(list => list.menuList.listRefresh
-                .pipe(takeUntil(this.destroy))
-                .subscribe(() => this.refreshList()))
-            ;
-        }
-    }
-
-    /** Focuses first menu-item element which has anchor element */
-    public focusFirst(): void {
-        this.focus(0);
-    }
-
-    /** Focuses n menu-item element which has anchor element */
-    public focus(index: number): void {
-        if (this.links[index]) {
-            this.links[index].focus();
-        }
-    }
-
-    /** Method that returns all menu-item directives inside menu component */
-    public get links(): MenuItemDirective[] {
-        let items: MenuItemDirective[] = [];
-        if (this.menuGroup) {
-            this.menuGroup.filter(group => !!group.menuList).forEach(group =>
-                items = items.concat(group.menuList.menuItems.toArray())
-            );
-        }
-        if (this.menuList) {
-            this.menuList.forEach(list =>
-                items = items.concat(list.menuItems.toArray())
-            );
-        }
-        return items;
-    }
-
-    /** @hidden */
-    keyDownHandler(event: KeyboardEvent, index: number): void {
+    keyDownHandler(event: KeyboardEvent, index: number, menuItems: MenuItemDirective[]): void {
 
         if (this.disableKeydownHandling) {
             return;
@@ -91,13 +32,13 @@ export class MenuKeyboardService implements OnDestroy {
 
         switch (event.code) {
             case ('ArrowDown'): {
-                if (this.links.length > index + 1) {
-                    this.focus(index + 1);
+                if (menuItems.length > index + 1) {
+                    menuItems[index + 1].focus();
                 } else {
                     if (this.focusEscapeAfterList) {
                         this.focusEscapeAfterList();
                     } else {
-                        this.focus(0);
+                        menuItems[0].focus();
                     }
                 }
                 event.preventDefault();
@@ -105,48 +46,31 @@ export class MenuKeyboardService implements OnDestroy {
             }
             case ('ArrowUp'): {
                 if (index > 0) {
-                    this.focus(index - 1);
+                    menuItems[index - 1].focus();
                 } else {
                     if (this.focusEscapeBeforeList) {
                         this.focusEscapeBeforeList();
                     } else {
-                        this.focus(this.links.length - 1);
+                        menuItems[menuItems.length - 1].focus();
                     }
                 }
                 event.preventDefault();
                 break;
             }
             case ('Space'): {
-                if (this.links[index]) {
-                    this.links[index].click();
+                if (menuItems[index]) {
+                    menuItems[index].click();
                     event.preventDefault();
                 }
                 break;
             }
             case ('Enter'): {
-                if (this.links[index]) {
-                    this.links[index].click();
+                if (menuItems[index]) {
+                    menuItems[index].click();
                     event.preventDefault();
                 }
                 break;
             }
         }
-    }
-
-    private refreshList(): void {
-        this.itemEventsSubscription = [];
-        this.links.forEach((link, index) => {
-                this.itemEventsSubscription.push(
-                    fromEvent(link.itemEl.nativeElement, 'keydown')
-                        .pipe(takeUntil(this.destroy))
-                        .subscribe((event: KeyboardEvent) => this.keyDownHandler(event, index))
-                );
-                this.itemEventsSubscription.push(
-                    fromEvent(link.itemEl.nativeElement, 'click')
-                        .pipe(takeUntil(this.destroy))
-                        .subscribe(() => this.itemClicked.next(index))
-                );
-            }
-        )
     }
 }

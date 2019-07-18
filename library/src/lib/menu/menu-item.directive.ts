@@ -1,5 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, OnChanges } from '@angular/core';
-import { Subject } from 'rxjs';
+import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
 /**
  * The directive that represents a menu item.

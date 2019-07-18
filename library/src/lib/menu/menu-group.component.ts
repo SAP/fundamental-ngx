@@ -1,5 +1,4 @@
-import { Component, ContentChild, HostBinding, ViewEncapsulation } from '@angular/core';
-import { MenuListDirective } from './menu-list.directive';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a menu group.
@@ -10,10 +9,6 @@ import { MenuListDirective } from './menu-list.directive';
     encapsulation: ViewEncapsulation.None
 })
 export class MenuGroupComponent {
-    /** @hidden */
-    @ContentChild(MenuListDirective)
-    menuList: MenuListDirective;
-
     /** @hidden*/
     @HostBinding('class.fd-has-display-block')
     fdHasDisplayBlockClass: boolean = true;

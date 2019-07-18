@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
 import { MenuKeyboardService } from '../../../../../../library/src/lib/menu/menu-keyboard.service';
-import { MenuComponent } from '../../../../../../library/src/lib/menu/menu.component';
+import { MenuItemDirective } from '../../../../../../library/src/lib/menu/menu-item.directive';
 
 @Component({
     selector: 'fd-menu-keyboard-support-example',
@@ -11,13 +11,13 @@ import { MenuComponent } from '../../../../../../library/src/lib/menu/menu.compo
 })
 export class MenuKeyboardSupportExampleComponent implements AfterViewInit {
 
-    @ViewChild(MenuComponent)
-    menuComponent: MenuComponent;
+    @ViewChildren(MenuItemDirective)
+    menuItems: QueryList<MenuItemDirective>;
 
     constructor (private menuKeyboardService: MenuKeyboardService) {}
 
     public focusFirst() {
-        this.menuKeyboardService.focusFirst();
+        this.menuItems.first.focus();
     }
 
     public escapeAfterListFunction = () => {
@@ -28,8 +28,11 @@ export class MenuKeyboardSupportExampleComponent implements AfterViewInit {
         alert('Element clicked');
     }
 
+    public handleKeyDown(event: KeyboardEvent, index: number): void {
+        this.menuKeyboardService.keyDownHandler(event, index, this.menuItems.toArray());
+    }
+
     ngAfterViewInit(): void {
-        this.menuKeyboardService.initialise(this.menuComponent);
         this.menuKeyboardService.focusEscapeAfterList = this.escapeAfterListFunction;
     }
 }
