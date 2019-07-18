@@ -1,4 +1,14 @@
-import { AfterContentInit, Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ContentChild,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import {
     LocalizationEditorInputDirective,
     LocalizationEditorLabel,
@@ -14,8 +24,9 @@ import {
  *  ```
  */
 @Component({
-  selector: 'fd-localization-editor-item',
-  templateUrl: './localization-editor-item.component.html',
+    selector: 'fd-localization-editor-item',
+    templateUrl: './localization-editor-item.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class LocalizationEditorItemComponent implements OnInit, AfterContentInit, OnChanges {
 
@@ -39,15 +50,15 @@ export class LocalizationEditorItemComponent implements OnInit, AfterContentInit
     textarea: LocalizationEditorTextareaDirective;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorLabel, {read: TemplateRef})
+    @ContentChild(LocalizationEditorLabel, { read: TemplateRef })
     labelTemplate: TemplateRef<any>;
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.refreshChildInput();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.refreshChildInput();
     }
 
@@ -57,7 +68,7 @@ export class LocalizationEditorItemComponent implements OnInit, AfterContentInit
         }
     }
 
-    private refreshChildInput() {
+    private refreshChildInput(): void {
         if (this.input) {
             this.input.compact = this.compact;
         }

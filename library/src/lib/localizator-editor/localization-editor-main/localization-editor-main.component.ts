@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
 
 /**
@@ -11,7 +11,8 @@ import { LocalizationEditorItemComponent } from '../localization-editor-item/loc
  */
 @Component({
     selector: 'fd-localization-editor-main',
-    templateUrl: './localization-editor-main.component.html'
+    templateUrl: './localization-editor-main.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class LocalizationEditorMainComponent extends LocalizationEditorItemComponent {
 

@@ -1,4 +1,4 @@
-import { Component, ContentChild, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 import { Placement } from 'popper.js';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 
@@ -18,10 +18,12 @@ import { LocalizationEditorMainComponent } from './localization-editor-main/loca
 @Component({
     selector: 'fd-localization-editor',
     templateUrl: './localization-editor.component.html',
-    styleUrls: ['localization-editor.component.scss']
+    styleUrls: ['localization-editor.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class LocalizationEditorComponent {
 
+    /** @hidden */
     @HostBinding('class.fd-localization-editor')
     fdLocalizationEditorClass: boolean = true;
 
@@ -53,7 +55,7 @@ export class LocalizationEditorComponent {
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Whether to disable opening. */
     @Input()

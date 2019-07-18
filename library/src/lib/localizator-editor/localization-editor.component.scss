@@ -1,5 +1,3 @@
-::ng-deep {
-    .fd-localization-editor-textarea {
-        min-height: calc(var(--fd-button-line-height) + 4px);
-    }
+.fd-localization-editor-textarea {
+    min-height: calc(var(--fd-button-line-height) + 4px);
 }

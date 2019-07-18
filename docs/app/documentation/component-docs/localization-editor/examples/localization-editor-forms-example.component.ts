@@ -15,8 +15,5 @@ export class LocalizationEditorFormsExampleComponent {
         nl: new FormControl('')
     });
 
-    getCustomFormKeys(): string[] {
-        return Object.keys(this.customForm.controls);
-    }
-
+    customFormKeys: string[] = ['en', 'de', 'pl', 'ca', 'nl'];
 }
