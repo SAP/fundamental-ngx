@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, HostBinding } from '@angular/core';
 
 /**
  * The directive that represents a menu item.
@@ -8,16 +8,18 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-item]',
 })
-export class MenuItemDirective implements AfterViewInit {
+export class MenuItemDirective {
+
+    /** @hidden*/
+    @HostBinding('class.fd-menu__item')
+    fdMenuItemClass: boolean = true;
+
+    /** @hidden*/
+    @HostBinding('attr.tabindex')
+    tabIndex: number = 0;
 
     /** @hidden */
     constructor (public itemEl: ElementRef) {}
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.itemEl.nativeElement.classList.add('fd-menu__item');
-        this.itemEl.nativeElement.setAttribute('tabindex', '0');
-    }
 
     public focus(): void {
         this.itemEl.nativeElement.focus();
