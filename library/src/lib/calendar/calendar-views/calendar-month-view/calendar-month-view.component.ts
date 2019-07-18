@@ -6,15 +6,15 @@ import { takeUntil } from 'rxjs/operators';
 
 /** Component representing the month view of the calendar. */
 @Component({
-    selector: 'fd-calendar2-month-view',
-    templateUrl: './calendar2-month-view.component.html',
-    styleUrls: ['./calendar2-month-view.component.scss'],
+    selector: 'fd-calendar-month-view',
+    templateUrl: './calendar-month-view.component.html',
+    styleUrls: ['./calendar-month-view.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.id]': 'id + "-month-view"'    
-    },
+        '[attr.id]': 'id + "-month-view"'
+    }
 })
-export class Calendar2MonthViewComponent implements OnInit, OnDestroy {
+export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;
@@ -29,7 +29,7 @@ export class Calendar2MonthViewComponent implements OnInit, OnDestroy {
 
     /** An event fired when a new month is selected */
     @Output()
-    monthClicked: EventEmitter<number> = new EventEmitter<number>();
+    readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /** A list of month names (short names) */
     monthNames: string[];
@@ -40,8 +40,7 @@ export class Calendar2MonthViewComponent implements OnInit, OnDestroy {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private eRef: ElementRef, private cdRef: ChangeDetectorRef, private calendarI18n: CalendarI18n) {
-    }
+    constructor(private eRef: ElementRef, private cdRef: ChangeDetectorRef, private calendarI18n: CalendarI18n) {}
 
     ngOnInit() {
         this.monthNames = this.calendarI18n.getAllShortMonthNames();
@@ -61,12 +60,12 @@ export class Calendar2MonthViewComponent implements OnInit, OnDestroy {
 
     /** Get a number (1-12) representing the current month  */
     get currentMonth(): number {
-        return FdDate.getToday().month
+        return FdDate.getToday().month;
     }
 
     /**  Getter for the private class member _monthOffset */
-      get monthOffset(): number {
-        return this._monthOffset
+    get monthOffset(): number {
+        return this._monthOffset;
     }
 
     /** Method for handling the mouse click event when a month is selected  */
@@ -111,7 +110,7 @@ export class Calendar2MonthViewComponent implements OnInit, OnDestroy {
             case 'ArrowRight': {
                 event.preventDefault();
                 if (month === 11) {
-                    newFocusedMonthId = '#' + this.id + '-fd-month-0'
+                    newFocusedMonthId = '#' + this.id + '-fd-month-0';
                 } else {
                     newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 1);
                 }

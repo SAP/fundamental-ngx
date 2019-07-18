@@ -234,6 +234,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
      * Method that handle active view change and throws event.
      * */
     public handleActiveViewChange(activeView: FdCalendarView): void {
+        this.activeView = activeView;
         this.activeViewChange.emit(activeView);
     }
 
@@ -336,6 +337,16 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
      * */
     public setCurrentlyDisplayed(fdDate: FdDate): void {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
+    }
+
+    /**
+     * @hidden
+     * Function that handles changes from month view child component, changes actual view and changes currently displayed month
+     * */
+    public handleMonthViewChange(month: number): void {
+        this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
+        this.activeView = 'day';
+        this.activeViewChange.emit(this.activeView);
     }
 
     /**
