@@ -30,8 +30,8 @@ export class CalendarHeaderComponent implements OnInit {
 
     /** Event emitted when the active view should change. */
     @Output()
-    readonly activeViewChange: EventEmitter<string>
-        = new EventEmitter<string>();
+    readonly activeViewChange: EventEmitter<FdCalendarView>
+        = new EventEmitter<FdCalendarView>();
 
     /** Event emitted when the previous button is clicked. */
     @Output()

@@ -145,6 +145,8 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
              * */
             event.stopPropagation();
             event.preventDefault();
+            this.newFocusedDayId = day.id;
+            this.focusElement(this.newFocusedDayId);
         }
         if (!day.blocked && !day.disabled) {
             if (this.calType === 'single') {

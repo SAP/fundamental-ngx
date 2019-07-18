@@ -19,7 +19,7 @@ import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarService } from '../calendar/calendar.service';
-import { CalendarComponent } from '../calendar/calendar.component';
+import { CalendarComponent, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
 
 /**
@@ -98,6 +98,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     startingDayOfWeek: number = 0;
 
+    /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
+    @Input()
+    public activeView: FdCalendarView = 'day';
+
     /** Aria label for the datetime picker input. */
     @Input()
     datetimeInputLabel: string = 'Datetime input';
@@ -109,6 +113,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Whether a null input is considered valid. */
     @Input()
     allowNull: boolean = true;
+
+    /** Event thrown every time calendar active view is changed */
+    @Output()
+    public readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
@@ -208,6 +216,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         } else {
             this.openPopover();
         }
+    }
+
+    /**
+     * Method that handle calendar active view change and throws event.
+     * */
+    public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
+        this.activeViewChange.emit(activeView);
     }
 
     /** Opens the popover. */

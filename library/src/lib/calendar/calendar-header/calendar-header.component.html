@@ -10,6 +10,7 @@
         <div class="fd-calendar__action">
             <button class="fd-button--light fd-button--compact"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel"
+                    [attr.aria-selected]="activeView === 'month'"
                     (click)="processViewChange('month')">
                 {{monthLabel}}
             </button>
@@ -17,6 +18,7 @@
         <div class="fd-calendar__action">
             <button class="fd-button--light fd-button--compact"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel"
+                    [attr.aria-selected]="activeView === 'year'"
                     (click)="processViewChange('year')">
                 {{currentlyDisplayed.year}}
             </button>

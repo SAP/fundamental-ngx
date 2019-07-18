@@ -119,4 +119,48 @@ describe('Calendar2Component', () => {
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.selectedDate).not.toBe(invalidDate);
     });
+
+    it('Should change to next month, when on day view an next arrow click', () => {
+        component.currentlyDisplayed = { month: 10, year: 2000 };
+        component.activeView = 'day';
+        component.handleNextArrowClick();
+        expect(component.currentlyDisplayed).toEqual({ month: 11, year: 2000 });
+    });
+
+    it('Should change to previous month, when on day view an previous arrow click', () => {
+        component.currentlyDisplayed = { month: 10, year: 2000 };
+        component.activeView = 'day';
+        component.handlePreviousArrowClick();
+        expect(component.currentlyDisplayed).toEqual({ month: 9, year: 2000 });
+    });
+
+    it('Should change to next year, when on month view an next arrow click', () => {
+        component.currentlyDisplayed = { month: 10, year: 2000 };
+        component.activeView = 'month';
+        component.handleNextArrowClick();
+        expect(component.currentlyDisplayed).toEqual({ month: 10, year: 2001 });
+    });
+
+    it('Should change to previous month, when on month view an previous arrow click', () => {
+        component.currentlyDisplayed = { month: 10, year: 2000 };
+        component.activeView = 'month';
+        component.handlePreviousArrowClick();
+        expect(component.currentlyDisplayed).toEqual({ month: 10, year: 1999 });
+    });
+
+    it('Should call next year list function, when on year view an next arrow click', () => {
+        spyOn(component, 'displayNextYearList');
+        component.activeView = 'year';
+        component.handleNextArrowClick();
+        expect(component.displayNextYearList).toHaveBeenCalled();
+    });
+
+    it('Should call previous year list function, when on year view an next arrow click', () => {
+        spyOn(component, 'displayPreviousYearList');
+        component.activeView = 'year';
+        component.handlePreviousArrowClick();
+        expect(component.displayPreviousYearList).toHaveBeenCalled();
+    });
+
+    it('Should call ')
 });
