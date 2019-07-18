@@ -15,9 +15,8 @@ import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 // TODO allow picking options that have the same value, maybe by comparing value & index? Assign an id?
-// TODO Add tests
 // TODO add popover options
-// TODO Add onTouched properly
+// TODO Add onTouched properly, fix form behaviour generally
 // TODO add min-width option for popover instead of strict width
 // TODO Support disabled options, keyboard nav of options etc
 @Component({
@@ -33,7 +32,6 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
         }
     ],
     host: {
-        '(blur)': 'onTouched()',
         '[class.fd-select-custom]': 'true',
         'role': 'listbox',
     }
@@ -71,7 +69,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
 
     private selected: OptionComponent;
 
-    private readonly destroy = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     private readonly optionsStatusChanges: Observable<OptionComponent> = defer(() => {
         const options = this.options;
@@ -94,22 +92,22 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         if (changes.value) {
             setTimeout(() => {
                 if (this.value) {
-                    this.selectValue(this.value);
+                    this.selectValue(this.value, false);
                 }
             });
         }
     }
 
     ngAfterContentInit(): void {
-        this.options.changes.pipe(startWith(null), takeUntil(this.destroy)).subscribe(() => {
+        this.options.changes.pipe(startWith(null), takeUntil(this.destroy$)).subscribe(() => {
             this.resetOptions();
             this.initSelection();
         });
     }
 
     ngOnDestroy(): void {
-        this.destroy.next();
-        this.destroy.complete();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     toggle(): void {
@@ -148,13 +146,12 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
 
     writeValue(value: any): void {
         if (this.options) {
-            this.selectValue(value);
+            this.selectValue(value, false);
         } else {
-
             // Defer the selection of the value to support forms
             Promise.resolve().then(() => {
                 if (this.options) {
-                    this.selectValue(value);
+                    this.selectValue(value, false);
                 }
             });
         }
@@ -180,7 +177,21 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
-    private selectValue(value: any): OptionComponent | undefined {
+    private selectOption(option: OptionComponent, fireEvents: boolean = true): OptionComponent | undefined {
+        if (!this.isOptionActive(option)) {
+            if (this.selected) {
+                this.selected.setSelected(false, false);
+            }
+            option.setSelected(true, false);
+            this.selected = option;
+            this.updateValue(fireEvents);
+            this.close();
+            return option;
+        }
+        return;
+    }
+
+    private selectValue(value: any, fireEvents: boolean = true): OptionComponent | undefined {
         const matchOption = this.options.find((option: OptionComponent) => {
             return option.value != null && option.value === value;
         });
@@ -200,23 +211,26 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
             matchOption.setSelected(true, false);
             this.selected = matchOption;
 
-            this.updateValue();
+            this.updateValue(fireEvents);
             this.close();
         }
 
         return matchOption;
     }
 
-    private updateValue(): void {
+    private updateValue(fireEvents: boolean = true): void {
         this.value = this.selected.value;
-        this.valueChange.emit(this.value);
-        this.onChange(this.value);
+        if (fireEvents) {
+            this.valueChange.emit(this.value);
+            this.onChange(this.value);
+            this.onTouched();
+        }
     }
 
     private resetOptions(): void {
-        const destroyCurrentObs = merge(this.options.changes, this.destroy);
+        const destroyCurrentObs = merge(this.options.changes, this.destroy$);
         this.optionsStatusChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
-            this.selectValue(instance.value);
+            this.selectOption(instance);
         });
     }
 
@@ -224,15 +238,12 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
     private initSelection(): void {
         if (this.value) {
             this.selected = undefined;
-            this.selectValue(this.value);
+            this.selectValue(this.value, false);
         }
     }
 
     private isOptionActive(option: OptionComponent): boolean {
-        if (option) {
-            return this.selected && this.selected.value === option.value && option.value === this.value;
-        }
-        return false;
+        return option && this.selected && option === this.selected;
     }
 
     /** Method that focuses the next option in the list, or the first one if the last one is currently focused. */
