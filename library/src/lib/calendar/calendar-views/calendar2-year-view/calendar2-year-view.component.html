@@ -3,7 +3,7 @@
         <li
             class="fd-calendar__item"
             *ngFor="let year of calendarYearList; let i = index"
-            [ngClass]='(year == yearSelected ? " is-selected" : "") + (year == currentYear ? " fd-calendar__item--current" : "")'
+            [ngClass]="{' is-selected': (year == yearSelected), ' fd-calendar__item--current': (year == currentYear)}"
             (click)="selectYear(year, $event)"
         >
             <span
