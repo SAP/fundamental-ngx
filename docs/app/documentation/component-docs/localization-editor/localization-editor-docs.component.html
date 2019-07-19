@@ -1,0 +1,51 @@
+<h2>Basic Localization Editor</h2>
+<description>
+    Basic usage of the localization editor. The add-on content on the right-side can be customized through the
+    <code>[label]</code> input.
+</description>
+<component-example [name]="'ex1'">
+    <fd-localization-editor-example></fd-localization-editor-example>
+</component-example>
+<code-example [code]="localizationHtml" [language]="'HTML'"></code-example>
+<code-example [code]="localizationTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Forms in Localization Editor</h2>
+<description>
+    The localization editor component is compatible with Angular forms.
+</description>
+<component-example [name]="'ex2'">
+    <fd-localization-editor-forms-example></fd-localization-editor-forms-example>
+</component-example>
+<code-example [code]="localizationFormsHtml" [language]="'HTML'"></code-example>
+<code-example [code]="localizationFormsTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Complex Add-On content</h2>
+<description>
+    As a more flexible alternative to the <code>[label]</code> input, attaching the
+        <code>fd-localization-editor-label</code> directive to an <code>ng-template</code> allows for complex content to be
+        displayed in the add-on space.
+</description>
+<component-example [name]="'ex3'">
+    <fd-localization-editor-template-example></fd-localization-editor-template-example>
+</component-example>
+<code-example [code]="localizationTemplateHtml" [language]="'HTML'"></code-example>
+<code-example [code]="localizationTemplateTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+
+<h2>Textarea</h2>
+<description>
+    The localization component can be used with <code>textarea</code>. Textarea element should be used with
+    <code>fd-localization-editor-textarea</code> directive.
+</description>
+<component-example [name]="'ex4'">
+    <fd-localization-editor-textarea-example></fd-localization-editor-textarea-example>
+</component-example>
+<code-example [code]="localizationTextareaHtml" [language]="'HTML'"></code-example>
+<code-example [code]="localizationTextareaTs" [language]="'typescript'"></code-example>
+
+<separator></separator>

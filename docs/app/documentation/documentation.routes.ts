@@ -84,6 +84,8 @@ import { TimePickerHeaderComponent } from './component-docs/time-picker/time-pic
 import { TreeHeaderComponent } from './component-docs/tree/tree-header/tree-header.component';
 import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/toggle-header.component';
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
+import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
+import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
 import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import {
@@ -200,6 +202,11 @@ export const ROUTES: Routes = [
             { path: 'loadingSpinner', component: LoadingSpinnerHeaderComponent, children: [
                     { path: '', component: LoadingSpinnerDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.loadingSpinner}}
+                ]
+            },
+            { path: 'localizationEditor', component: LocalizationEditorHeaderComponent, children: [
+                    { path: '', component: LocalizationEditorDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.localizationEditor}}
                 ]
             },
             { path: 'menu', component: MenuHeaderComponent, children: [
