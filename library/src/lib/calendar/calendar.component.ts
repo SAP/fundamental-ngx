@@ -373,4 +373,9 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         }
     }
 
+    public selectedYear(yearSelected: number) {
+        this.activeView = 'day';
+        this.currentlyDisplayed.year = yearSelected;
+    }
+
 }

@@ -6,7 +6,7 @@ import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, Elem
     styleUrls: ['./calendar2-year-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2YearViewComponent implements AfterViewChecked {
+export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
 
     /** @hidden */
     newFocusedYearId: string;
@@ -20,7 +20,6 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
     focusEscapeFunction: Function;
 
     /** Parameter that stores the dozen of years that are currently being displayed */
-    @Input()
     calendarYearList: number[];
 
     /** Parameter holding the year that is currently selected */
@@ -37,6 +36,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
 
     /** Parameter storing the year of the present day */
     currentYear: number = new Date().getFullYear();
+    firstYearInList: number = this.currentYear;
 
     /** @hidden */
     ngAfterViewChecked() {
@@ -46,7 +46,19 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
         }
     }
 
+    ngOnInit(): void {
+        this.firstYearInList = this.yearSelected;
+        this.constructYearList();
+    }
+
     constructor(private eRef: ElementRef) { }
+
+    private constructYearList() {
+        this.calendarYearList = [];
+        for (let x = 0; x < 12; x++) {
+            this.calendarYearList.push(this.firstYearInList + x);
+        }
+    }
 
     /** Method for handling the keyboard navigation */
     onKeydownYearHandler(event, year: number, index: number) {
@@ -66,7 +78,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
                 case 'ArrowLeft': {
                     event.preventDefault();
                     if (index === 0) {
-                        this.reGenerateYearList.emit('previousSet');
+                        this.loadPreviousYearList()
                         this.newFocusedYearId = this.id + '-fd-year-' + 11;
                     } else {
                         this.newFocusedYearId = this.id + '-fd-year-' + (index - 1);
@@ -76,7 +88,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
                 case 'ArrowRight': {
                     event.preventDefault();
                     if (index === 11) {
-                        this.reGenerateYearList.emit('nextSet');
+                        this.loadNextYearList()
                         this.newFocusedYearId = this.id + '-fd-year-' + 0;
                     } else {
                         this.newFocusedYearId = this.id + '-fd-year-' + (index + 1);
@@ -86,7 +98,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
                 case 'ArrowUp': {
                     event.preventDefault();
                     if (index <= 3) {
-                        this.reGenerateYearList.emit('previousSet');
+                        this.loadPreviousYearList()
                         this.newFocusedYearId = this.id + '-fd-year-' + (index + 8);
                     } else {
                         this.newFocusedYearId = this.id + '-fd-year-' + (index - 4);
@@ -96,7 +108,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
                 case 'ArrowDown': {
                     event.preventDefault();
                     if (index >= 8) {
-                        this.reGenerateYearList.emit('nextSet');
+                        this.loadNextYearList()
                         this.newFocusedYearId = this.id + '-fd-year-' + (index - 8);
                     } else {
                         this.newFocusedYearId = this.id + '-fd-year-' + (index + 4);
@@ -123,5 +135,15 @@ export class Calendar2YearViewComponent implements AfterViewChecked {
         }
         this.yearSelected = selectedYear;
         this.yearClicked.emit(this.yearSelected);
+    }
+
+    loadNextYearList() {
+        this.firstYearInList += 12;
+        this.constructYearList();
+    }
+
+    loadPreviousYearList() {
+        this.firstYearInList -= 12;
+        this.constructYearList();
     }
 }
