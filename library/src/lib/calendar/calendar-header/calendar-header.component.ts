@@ -48,9 +48,7 @@ export class CalendarHeaderComponent implements OnInit {
         public calendarI18n: CalendarI18n
     ) {}
 
-    ngOnInit() {
-        this.currentlyDisplayed.year = new Date().getFullYear();
-    }
+    ngOnInit() {}
 
     /** Get the aria label for the previous button. Depends on the active view. */
     get previousLabel(): string {
