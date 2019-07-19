@@ -31,10 +31,6 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
 
-    /** Event fired when the next/previous dozen of years must be displayed */
-    @Output()
-    reGenerateYearList: EventEmitter<any> = new EventEmitter();
-
     /** Parameter storing the year of the present day */
     currentYear: number = new Date().getFullYear();
     firstYearInList: number = this.currentYear;
