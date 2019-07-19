@@ -301,7 +301,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
     writeValue(selected: FdDatetime): void {
-        if (!selected) {
+        console.log('change value');
+        if (!selected || !(selected instanceof FdDatetime)) {
             return;
         }
         if (selected.isDateValid() && selected.isTimeValid()) {
@@ -318,17 +319,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * Method that is triggered by events from calendar component, when there is selected date changed
      * */
     handleDateChange(date: FdDate): void {
-        if (!CalendarService.datesEqual(date, this.selectedDate)) {
-            this.selectedDate = date;
-            this.date = new FdDatetime(this.selectedDate, this.time);
-            if (!this.date.isTimeValid()) {
-                this.date = new FdDatetime(this.selectedDate, FdDatetime.GetToday().time);
-            }
-            this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
-            this.setInput(this.date);
-            this.onChange(this.date);
-
-        }
+        console.log('change date');
+        this.selectedDate = date;
+        this.date = new FdDatetime(this.selectedDate, this.time);
+        this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
+        this.setInput(this.date);
+        this.onChange(this.date);
     }
 
     /**
@@ -336,6 +332,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * Method that is triggered by events from time component, when there is selected time changed
      * */
     handleTimeChange(time: TimeObject): void {
+        console.log('change time');
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
@@ -356,6 +353,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * validation the results are different. It also changes to state of isInvalidDateInput
      * */
     handleInputChange(date: string): void {
+        console.log('change input');
         if (date) {
             const fdTimeDate = this.dateTimeAdapter.parse(date);
             this.isInvalidDateInput = !(fdTimeDate.isDateValid() && fdTimeDate.isTimeValid());

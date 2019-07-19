@@ -3,7 +3,7 @@
   This example also features <strong>blocked</strong> and <strong>disabled</strong> days.
   <br /><br />
   You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
-  To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
+  To select a date you will create a new object that contains the property date, whose value is a FdDate model  object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
   Note that selecting a day (or range of days) in this manner will override any block/disable functions.  The <code>disableFunction</code> and <code>blockFunction</code> inputs can be changed and the calendar will automatically update (see example).
 </description>
 <component-example [name]="'ex1'">
@@ -40,7 +40,7 @@
 
 <separator></separator>
 <h2>Monday Start Calendar</h2>
-<description>Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 0 is for Sunday, 1 is Monday, 2 is Tuesday, etc.</description>
+<description>Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for Sunday, 2 is Monday, 3 is Tuesday, etc.</description>
 <component-example [name]="'ex4'">
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
 </component-example>

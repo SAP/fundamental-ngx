@@ -130,4 +130,38 @@ describe('DatetimePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
     });
 
+    it('should ignore invalid date picked on time change and show valid on input', () => {
+        const dateTime = FdDatetime.GetToday();
+        component.writeValue(dateTime);
+        const time = {hour: 10, minute: 30, second: 20};
+        const invalidDate = new FdDatetime(new FdDate(2010, 40, 30), dateTime.time);
+        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
+        component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
+        component.handleTimeChange(time);
+        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter.format(new FdDatetime(dateTime.date, time)));
+        expect(component.isInvalidDateInput).not.toBeTruthy();
+    });
+
+    it('should reset time on date change and show valid on input', () => {
+        const dateTime = FdDatetime.GetToday();
+        component.writeValue(dateTime);
+        const invalidTime = {hour: 50, minute: 30, second: 20};
+        const invalidDate = new FdDatetime(dateTime.date, invalidTime);
+        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
+        component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
+        component.handleDateChange(dateTime.date);
+        expect(component.inputFieldDate).toEqual(
+            component.dateTimeAdapter.format(
+                new FdDatetime(dateTime.date, FdDatetime.GetToday().time)
+            )
+        );
+        expect(component.isInvalidDateInput).not.toBeTruthy();
+    });
+
+    it('should handle other types than FdTimeDate', () => {
+        const dateTimeString: any = 'asdsad';
+        component.writeValue(dateTimeString);
+        expect(component.inputFieldDate).not.toBe(dateTimeString);
+    });
+
 });
