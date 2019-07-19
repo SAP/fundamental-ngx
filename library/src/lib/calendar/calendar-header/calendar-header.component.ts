@@ -43,9 +43,10 @@ export class CalendarHeaderComponent implements OnInit {
     readonly nextClicked: EventEmitter<void>
         = new EventEmitter<void>();
 
-    constructor(public calendarI18nLabels: CalendarI18nLabels,
-        public calendarI18n: CalendarI18n) {
-    }
+    constructor(
+        public calendarI18nLabels: CalendarI18nLabels,
+        public calendarI18n: CalendarI18n
+    ) {}
 
     ngOnInit() {
         this.currentlyDisplayed.year = new Date().getFullYear();
