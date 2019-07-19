@@ -29,7 +29,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
 
     /** Event fired when a year is selected */
     @Output()
-    yearClicked: EventEmitter<any> = new EventEmitter();
+    readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /** Event fired when the next/previous dozen of years must be displayed */
     @Output()
