@@ -16,7 +16,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
     @Input()
     id: string;
 
-    /** Function that allows to specify which function would be called, when focus wants to escape. */
+    /** Function that is called when the focus would escape the element. */
     @Input()
     focusEscapeFunction: Function;
 
