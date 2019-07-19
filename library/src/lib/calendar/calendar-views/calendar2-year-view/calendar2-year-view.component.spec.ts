@@ -1,7 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Calendar2YearViewComponent } from './calendar2-year-view.component';
-import { By } from '@angular/platform-browser';
-import { CalendarComponent } from '../../../calendar.component';
 
 describe('Calendar2YearViewComponent', () => {
     let component: Calendar2YearViewComponent;

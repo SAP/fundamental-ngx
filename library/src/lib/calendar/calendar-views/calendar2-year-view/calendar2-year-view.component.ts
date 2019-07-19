@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 
+/** Component representing the YearView of the Calendar Component */
 @Component({
     selector: 'fd-calendar2-year-view',
     templateUrl: './calendar2-year-view.component.html',
@@ -46,13 +47,16 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.firstYearInList = this.yearSelected;
         this.constructYearList();
     }
 
+    /** @hidden */
     constructor(private eRef: ElementRef) { }
 
+    /** @hidden */
     private constructYearList() {
         this.calendarYearList = [];
         for (let x = 0; x < 12; x++) {
@@ -128,7 +132,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    /** Method used */
+    /** Method that sends the year to the parent component when it is clicked */
     selectYear(selectedYear: number, event?: MouseEvent) {
         if (event) {
             event.stopPropagation();
@@ -137,11 +141,13 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         this.yearClicked.emit(this.yearSelected);
     }
 
+    /** Method used to load the previous 12 years to be displayed */
     loadNextYearList() {
         this.firstYearInList += 12;
         this.constructYearList();
     }
 
+    /** Method used to load the next 12 years to be displayed */
     loadPreviousYearList() {
         this.firstYearInList -= 12;
         this.constructYearList();
