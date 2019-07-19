@@ -38,10 +38,11 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     private readonly _monthOffset: number = 1;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private onDestroy$: Subject<void> = new Subject<void>();
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(private eRef: ElementRef, private cdRef: ChangeDetectorRef, private calendarI18n: CalendarI18n) {}
 
+    /** @hidden */
     ngOnInit() {
         this.monthNames = this.calendarI18n.getAllShortMonthNames();
 
@@ -50,9 +51,11 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
             .subscribe(() => {
                 this.monthNames = this.calendarI18n.getAllShortMonthNames();
                 this.cdRef.detectChanges();
-            });
+            })
+        ;
     }
 
+    /** @hidden */
     ngOnDestroy() {
         this.onDestroy$.next();
         this.onDestroy$.complete();

@@ -16,6 +16,8 @@ import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-calendar-day-view',
@@ -24,6 +26,9 @@ import { FdRangeDate } from '../../models/fd-range-date';
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
+
+    /** @hidden */
+    shortWeekDays: string[];
 
     /** Currently displayed month and year for days */
     @Input()
@@ -77,6 +82,9 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** Event emitted always, when model is changed in single mode */
     @Output()
     public readonly selectedDateChange = new EventEmitter<FdDate>();
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -176,16 +184,11 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** @hidden */
     ngOnInit() {
         this.buildDayViewGrid();
-    }
-
-    /** @hidden */
-    get shortWeekDays(): string[] {
-        return this.calendarI18n.getAllShortWeekdays()
-            .slice(this.startingDayOfWeek - 1)
-            .concat(
-                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1
-                ))
-            .map(weekday => weekday[0].toLocaleUpperCase());
+        this.shortWeekDays = this.getShortWeekDays();
+        this.calendarI18n.i18nChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.shortWeekDays = this.getShortWeekDays())
+        ;
     }
 
     /** @hidden
@@ -280,7 +283,15 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
 
     /** @hidden */
     public ngOnChanges(changes: SimpleChanges): void {
-        this.buildDayViewGrid();
+        if (!changes) {
+            return;
+        }
+        // To Prevent from multiple refreshing of calendar grid.
+        const keys = Object.keys(changes);
+        const isAnyChanged: boolean = !!keys.find(key => changes[key].currentValue !== changes[key].previousValue);
+        if (isAnyChanged) {
+            this.buildDayViewGrid();
+        }
     }
 
     /** @hidden */
@@ -375,7 +386,6 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         while (calendarDays.length > 0) {
             dayViewGrid.push(calendarDays.splice(0, 7));
         }
-
         this.dayViewGrid = dayViewGrid;
         return;
     }
@@ -444,7 +454,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     }
 
     private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
-        const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 0;
+        const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 1;
         const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
 
         // The calendar grid can have 6 (42 days) weeks
@@ -499,5 +509,13 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         }
 
         return day;
+    }
+
+    /** @hidden */
+    private getShortWeekDays(): string[] {
+        return this.calendarI18n.getAllShortWeekdays()
+            .slice(this.startingDayOfWeek - 1)
+            .concat(this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1))
+            .map(weekday => weekday[0].toLocaleUpperCase());
     }
 }

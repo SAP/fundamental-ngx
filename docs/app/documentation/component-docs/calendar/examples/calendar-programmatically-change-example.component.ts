@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
-import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
         >
         </fd-calendar>
 
-        <button fd-button (click)="changeDay()">Go to other day</button>
+        <button fd-button (click)="changeDay()">Next Day</button>
         <br/><br/>
         <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
 })
@@ -21,6 +20,6 @@ export class CalendarProgrammaticallyChangeExampleComponent {
     };
 
     public changeDay() {
-        this.selectedDay = {date: new FdDate(2018, 10, 10)};
+        this.selectedDay = {date: this.selectedDay.date.nextDay()};
     }
 }

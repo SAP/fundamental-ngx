@@ -170,7 +170,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
-    escapeFocusFunction: Function = () => {
+    escapeFocusFunction: Function = (): void => {
         if (document.getElementById(this.id + '-left-arrow')) {
             document.getElementById(this.id + '-left-arrow').focus();
         }

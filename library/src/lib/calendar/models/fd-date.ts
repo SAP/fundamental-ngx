@@ -3,6 +3,10 @@
  */
 import { CalendarService } from '../calendar.service';
 
+export const YearToMilliseconds: number = 31556952000;
+export const MonthToMilliseconds: number = 2592000000;
+export const DayToMilliseconds: number = 86400000;
+
 export class FdDate {
 
     /**
@@ -61,10 +65,49 @@ export class FdDate {
     }
 
     /**
+     * Get amount of milliseconds from 01.01.1970
+     * */
+    public getTimeStamp(): number {
+        return (this.year - 1970) * YearToMilliseconds +
+            (this.month - 1) * MonthToMilliseconds +
+            (this.day - 1) * DayToMilliseconds
+            ;
+    }
+
+    /**
+     * Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
+     * */
+    public getDay(): number {
+        const d = this.day;
+        const m = this.month;
+        const y = this.year - ((m < 3) ? 1 : 0);
+        const t: number[] = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+        return Math.ceil((y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7);
+    }
+
+    /**
      * Get native date object from FdDate.
      */
     public get date(): Date {
         return this.toDate();
+    }
+
+    /** Get next day */
+    public nextDay(): FdDate {
+        const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
+        const day = this.day >= maxDays ? 1 : this.day + 1;
+        const month = day !== 1 ? this.month : (this.month > 11 ? 1 : this.month + 1);
+        const year = month !== 1 ? this.year : this.year + 1;
+        return new FdDate(year, month, day);
+    }
+
+    /** Get previous day  */
+    public previousDay(): FdDate {
+        const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
+        const day = this.day === 1 ? maxDays : this.day + 1;
+        const month = day !== maxDays ? this.month : (this.month === 1 ? 12 : this.month - 1);
+        const year = month !== 12 ? this.year : this.year - 1;
+        return new FdDate(year, month, day);
     }
 
     /**

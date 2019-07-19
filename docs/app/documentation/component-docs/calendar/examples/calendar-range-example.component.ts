@@ -23,19 +23,19 @@ export class CalendarRangeExampleComponent {
     };
 
     myDisableFunction2 = function(d: FdDate): boolean {
-        const day = d.toDate().getDay();
+        const day = d.getDay();
         return day === 1;
     };
 
     myDisableStartFunction = function(d: FdDate): boolean {
-        const time = d.toDate().getTime();
-        const currentTime = new FdDate(2019, 10, 10).toDate().getTime();
+        const time = d.getTimeStamp();
+        const currentTime = new FdDate(2019, 10, 10).getTimeStamp();
         return time > currentTime;
     };
 
     myDisableEndFunction = function(d: FdDate): boolean {
-        const time = d.toDate().getTime();
-        const currentTime = new FdDate(2019, 10, 20).toDate().getTime();
+        const time = d.getTimeStamp();
+        const currentTime = new FdDate(2019, 10, 20).getTimeStamp();
         return time < currentTime;
     };
 }

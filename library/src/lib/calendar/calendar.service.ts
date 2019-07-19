@@ -7,7 +7,6 @@ export class CalendarService {
      * @param month which is number 1-12
      * @param year which is number
      * */
-
     public static getDaysInMonth(month: number, year: number): number {
 
         const isLeapYear = (_year: number): boolean => {
