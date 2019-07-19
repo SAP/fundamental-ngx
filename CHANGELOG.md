@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0-rc.12"></a>
+# [0.8.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.11...v0.8.0-rc.12) (2019-07-19)
+
+
+### Features
+
+* Added Localization Editor Component ([#997](https://github.com/SAP/fundamental-ngx/issues/997)) ([04a6e65](https://github.com/SAP/fundamental-ngx/commit/04a6e65))
+
+
+
 <a name="0.8.0-rc.11"></a>
 # [0.8.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.10...v0.8.0-rc.11) (2019-07-16)
 
