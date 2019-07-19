@@ -16,6 +16,8 @@ import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-calendar-day-view',
@@ -24,6 +26,9 @@ import { FdRangeDate } from '../../models/fd-range-date';
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
+
+    /** @hidden */
+    shortWeekDays: string[];
 
     /** Currently displayed month and year for days */
     @Input()
@@ -77,6 +82,9 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** Event emitted always, when model is changed in single mode */
     @Output()
     public readonly selectedDateChange = new EventEmitter<FdDate>();
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -176,16 +184,11 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** @hidden */
     ngOnInit() {
         this.buildDayViewGrid();
-    }
-
-    /** @hidden */
-    get shortWeekDays(): string[] {
-        return this.calendarI18n.getAllShortWeekdays()
-            .slice(this.startingDayOfWeek - 1)
-            .concat(
-                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1
-                ))
-            .map(weekday => weekday[0].toLocaleUpperCase());
+        this.shortWeekDays = this.getShortWeekDays();
+        this.calendarI18n.i18nChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.shortWeekDays = this.getShortWeekDays())
+        ;
     }
 
     /** @hidden
@@ -499,5 +502,15 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         }
 
         return day;
+    }
+
+    /** @hidden */
+    private getShortWeekDays(): string[] {
+        return this.calendarI18n.getAllShortWeekdays()
+            .slice(this.startingDayOfWeek - 1)
+            .concat(
+                this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1
+                ))
+            .map(weekday => weekday[0].toLocaleUpperCase());
     }
 }

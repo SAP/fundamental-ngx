@@ -161,6 +161,4 @@ describe('Calendar2Component', () => {
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
     });
-
-    it('Should call ')
 });
