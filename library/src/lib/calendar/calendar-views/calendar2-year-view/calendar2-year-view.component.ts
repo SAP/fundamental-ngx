@@ -10,7 +10,7 @@ import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, Elem
 export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
 
     /** @hidden */
-    newFocusedYearId: string;
+    private newFocusedYearId: string;
 
     /** Parameter used for key */
     @Input()
