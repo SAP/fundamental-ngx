@@ -37,7 +37,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
     firstYearInList: number = this.currentYear;
 
     /** @hidden */
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         if (this.newFocusedYearId) {
             this.focusElement(this.newFocusedYearId);
             this.newFocusedYearId = null;
