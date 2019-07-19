@@ -9,7 +9,8 @@ import {
 @Component({
     selector: 'fd-menu',
     templateUrl: './menu.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['menu.component.scss']
 })
 export class MenuComponent {
     /** @hidden */

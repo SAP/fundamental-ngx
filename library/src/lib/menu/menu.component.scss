@@ -1,0 +1,5 @@
+.fd-menu__item {
+    &:focus {
+        outline: var(--fd-color-action-focus) dotted 1px;
+    }
+}
