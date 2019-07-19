@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
+import { FdDate } from '../../models/fd-date';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -32,7 +33,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /** Parameter storing the year of the present day. */
-    currentYear: number = new Date().getFullYear();
+    currentYear: number = FdDate.getToday().year;
     firstYearInList: number = this.currentYear;
 
     /** @hidden */
@@ -120,6 +121,18 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
     }
 
+    /** Method used to load the previous 12 years to be displayed. */
+    loadNextYearList() {
+        this.firstYearInList += 12;
+        this.constructYearList();
+    }
+
+    /** Method used to load the next 12 years to be displayed. */
+    loadPreviousYearList() {
+        this.firstYearInList -= 12;
+        this.constructYearList();
+    }
+
     /** Method allowing focusing on elements within this component. */
     focusElement(elementSelector: string): void {
         const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
@@ -135,17 +148,5 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
         this.yearSelected = selectedYear;
         this.yearClicked.emit(this.yearSelected);
-    }
-
-    /** Method used to load the previous 12 years to be displayed. */
-    loadNextYearList() {
-        this.firstYearInList += 12;
-        this.constructYearList();
-    }
-
-    /** Method used to load the next 12 years to be displayed. */
-    loadPreviousYearList() {
-        this.firstYearInList -= 12;
-        this.constructYearList();
     }
 }
