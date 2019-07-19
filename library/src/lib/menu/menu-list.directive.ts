@@ -12,5 +12,4 @@ export class MenuListDirective {
     /** @hidden */
     @HostBinding('class.fd-menu__list')
     fdMenuListClass: boolean = true;
-
 }
