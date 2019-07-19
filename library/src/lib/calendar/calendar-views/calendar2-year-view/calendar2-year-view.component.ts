@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 
-/** Component representing the YearView of the Calendar Component */
+/** Component representing the YearView of the Calendar Component. */
 @Component({
     selector: 'fd-calendar2-year-view',
     templateUrl: './calendar2-year-view.component.html',
@@ -12,26 +12,26 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
     /** @hidden */
     private newFocusedYearId: string;
 
-    /** Parameter used for key */
+    /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
     id: string;
 
-    /** Function that allows to specify which function would be called, when focus wants to escape */
+    /** Function that allows to specify which function would be called, when focus wants to escape. */
     @Input()
     focusEscapeFunction: Function;
 
-    /** Parameter that stores the dozen of years that are currently being displayed */
+    /** Parameter that stores the dozen of years that are currently being displayed. */
     calendarYearList: number[];
 
-    /** Parameter holding the year that is currently selected */
+    /** Parameter holding the year that is currently selected. */
     @Input()
     yearSelected: number;
 
-    /** Event fired when a year is selected */
+    /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
 
-    /** Parameter storing the year of the present day */
+    /** Parameter storing the year of the present day. */
     currentYear: number = new Date().getFullYear();
     firstYearInList: number = this.currentYear;
 
@@ -60,7 +60,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    /** Method for handling the keyboard navigation */
+    /** Method for handling the keyboard navigation. */
     onKeydownYearHandler(event, year: number, index: number) {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
@@ -120,7 +120,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    /** Method allowing focusing on elements within this component */
+    /** Method allowing focusing on elements within this component. */
     focusElement(elementSelector: string): void {
         const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
         if (elementToFocus) {
@@ -128,7 +128,7 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    /** Method that sends the year to the parent component when it is clicked */
+    /** Method that sends the year to the parent component when it is clicked. */
     selectYear(selectedYear: number, event?: MouseEvent) {
         if (event) {
             event.stopPropagation();
@@ -137,13 +137,13 @@ export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
         this.yearClicked.emit(this.yearSelected);
     }
 
-    /** Method used to load the previous 12 years to be displayed */
+    /** Method used to load the previous 12 years to be displayed. */
     loadNextYearList() {
         this.firstYearInList += 12;
         this.constructYearList();
     }
 
-    /** Method used to load the next 12 years to be displayed */
+    /** Method used to load the next 12 years to be displayed. */
     loadPreviousYearList() {
         this.firstYearInList -= 12;
         this.constructYearList();
