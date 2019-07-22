@@ -313,14 +313,15 @@ export class DatePickerComponent implements ControlValueAccessor {
                 const secondDate = this.dateAdapter.parse(currentDates[1]);
                 this.isInvalidDateInput =
                     !firstDate.isDateValid() ||
-                    !secondDate.isDateValid();
+                    !secondDate.isDateValid()
+                ;
 
                 // If is correct and data is not exactly the same
                 if (!this.isInvalidDateInput &&
                     (!CalendarService.datesEqual(firstDate, this.selectedRangeDate.start) ||
                         !CalendarService.datesEqual(secondDate, this.selectedRangeDate.end))) {
 
-                    if (firstDate.toDate().getTime() > secondDate.toDate().getTime()) {
+                    if (firstDate.getTimeStamp() > secondDate.getTimeStamp()) {
                         this.selectedRangeDate = { start: secondDate, end: firstDate };
                     } else {
                         this.selectedRangeDate = { start: firstDate, end: secondDate };

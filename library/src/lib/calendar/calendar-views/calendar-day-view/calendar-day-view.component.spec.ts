@@ -32,7 +32,7 @@ describe('Calendar2DayViewComponent', () => {
         component.ngOnInit();
         const dayPicked = component.dayViewGrid[2][3];
         component.selectedDateChange.subscribe((date: FdDate) =>
-            expect(date.toDate().toDateString).toBe(dayPicked.date.toDate().toDateString)
+            expect(date.toDateString()).toBe(dayPicked.date.toDateString())
         );
         component.selectDate(dayPicked);
     });
@@ -48,7 +48,7 @@ describe('Calendar2DayViewComponent', () => {
             return b.concat(a);
         });
         const selected = calendarDays.find(cell => cell.selected);
-        expect(selected.date.toDate().toDateString).toBe(component.selectedDate.toDate().toDateString);
+        expect(selected.date.toDateString()).toBe(component.selectedDate.toDateString());
     });
 
     it('Should Select Proper First Range Date', () => {
@@ -57,7 +57,7 @@ describe('Calendar2DayViewComponent', () => {
         component.ngOnInit();
         const dayPicked = component.dayViewGrid[2][3];
         component.selectedRangeDateChange.subscribe((date: { start: FdDate, end: FdDate }) =>
-            expect(date.start.toDate().toDateString).toBe(dayPicked.date.toDate().toDateString)
+            expect(date.start.toDateString()).toBe(dayPicked.date.toDateString())
         );
         component.selectDate(dayPicked);
     });
@@ -70,7 +70,7 @@ describe('Calendar2DayViewComponent', () => {
         const dayEndPicked = component.dayViewGrid[3][3];
         component.selectedRangeDate = { start: dayStartPicked.date, end: null };
         component.selectedRangeDateChange.subscribe((date: { start: FdDate, end: FdDate }) =>
-            expect(date.end.toDate().toDateString).toBe(dayEndPicked.date.toDate().toDateString)
+            expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString())
         );
         component.selectDate(dayEndPicked);
     });

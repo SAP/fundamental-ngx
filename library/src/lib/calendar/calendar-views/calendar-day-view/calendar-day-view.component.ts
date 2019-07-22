@@ -139,8 +139,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     constructor(
         private calendarI18n: CalendarI18n,
         private eRef: ElementRef
-    ) {
-    }
+    ) {}
 
     /**
      * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
@@ -168,7 +167,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
                     this.buildDayViewGrid();
                 } else if (this.selectCounter === 1) {
                     // Check if date picked is higher than already chosen, otherwise just first one
-                    if (this.selectedRangeDate.start.toDate().getTime() < day.date.toDate().getTime()) {
+                    if (this.selectedRangeDate.start.getTimeStamp() < day.date.getTimeStamp()) {
                         this.selectedRangeDate = { start: this.selectedRangeDate.start, end: day.date };
                     } else {
                         this.selectedRangeDate = { start: day.date, end: null };
@@ -404,7 +403,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
             calendarDays.push({
                 ...this.getDay(fdDate),
                 monthStatus: 'current',
-                today: fdDate.toDate().toDateString() === FdDate.getToday().toDate().toDateString()
+                today: CalendarService.datesEqual(FdDate.getToday(), fdDate)
             });
         }
         this.getActiveCell(calendarDays).isTabIndexed = true;
@@ -474,7 +473,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     private getDay(fdDate: FdDate): CalendarDay {
         const day: CalendarDay = {
             date: fdDate,
-            weekDay: fdDate.toDate().getDay(),
+            weekDay: fdDate.getDay(),
             disabled: this.disableFunction(fdDate),
             blocked: this.blockFunction(fdDate),
             selected: (
@@ -485,8 +484,8 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
             selectedFirst: (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.start)),
             selectedLast: (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.end)),
             selectedRange: (this.selectedRangeDate && (
-                (this.selectedRangeDate.start && (this.selectedRangeDate.start.toDate().getTime() < fdDate.toDate().getTime())) &&
-                (this.selectedRangeDate.end && (this.selectedRangeDate.end.toDate().getTime() > fdDate.toDate().getTime()))
+                (this.selectedRangeDate.start && (this.selectedRangeDate.start.getTimeStamp() < fdDate.getTimeStamp())) &&
+                (this.selectedRangeDate.end && (this.selectedRangeDate.end.getTimeStamp() > fdDate.getTimeStamp()))
             )),
             ariaLabel: this.calendarI18n.getDayAriaLabel(fdDate.toDate())
         };

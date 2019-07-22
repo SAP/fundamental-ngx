@@ -21,7 +21,7 @@ export class CalendarSingleExampleComponent {
     };
 
     myDisableFunction = function(d: FdDate): boolean {
-        const day = d.toDate().getDay();
+        const day = d.getDay();
         return day === 6 || day === 0;
     };
 

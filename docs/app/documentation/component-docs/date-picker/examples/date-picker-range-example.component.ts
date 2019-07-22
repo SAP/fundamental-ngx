@@ -19,16 +19,16 @@ export class DatePickerRangeExampleComponent {
 
     getSelectedFirstDate() {
         let retVal = 'null';
-        if (this.selectedRange.date && this.selectedRange.date.toDate()) {
-            retVal = this.selectedRange.date.toDate().toDateString();
+        if (this.selectedRange.date) {
+            retVal = this.selectedRange.date.toDateString();
         }
         return retVal;
     }
 
     getSelectedLastDate() {
         let retVal = 'null';
-        if (this.selectedRange.rangeEnd && this.selectedRange.rangeEnd.toDate().toDateString()) {
-            retVal = this.selectedRange.rangeEnd.toDate().toDateString();
+        if (this.selectedRange.rangeEnd) {
+            retVal = this.selectedRange.rangeEnd.toDateString();
         }
         return retVal;
     }

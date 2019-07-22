@@ -23,6 +23,7 @@
     "standard-version": "4.4.0"
   },
   "dependencies": {
+    "luxon": "^1.17.1",
     "focus-trap": "^5.0.0",
     "popper.js": "^1.14.7"
   }

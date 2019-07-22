@@ -35,7 +35,7 @@ export class CalendarService {
         if (!date1 || !date2) {
             return false;
         } else {
-            return date1.toDate().toDateString() === date2.toDate().toDateString();
+            return date1.toDateString() === date2.toDateString();
         }
     }
 }

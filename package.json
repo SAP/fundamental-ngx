@@ -45,6 +45,7 @@
         "focus-trap": "^5.0.1",
         "fundamental-styles": "^0.1.0",
         "highlight.js": "^9.15.6",
+        "luxon": "^1.17.1",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^8.1.0",
         "npm": "^6.10.1",

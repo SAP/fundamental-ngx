@@ -2,6 +2,8 @@
  * Default date model used by the fundamental components.
  */
 import { CalendarService } from '../calendar.service';
+import { DateTime } from 'luxon';
+
 
 export const YearToMilliseconds: number = 31556952000;
 export const MonthToMilliseconds: number = 2592000000;
@@ -54,13 +56,13 @@ export class FdDate {
     }
 
     /**
-     * Get native date object converted to string from FdDate.
+     * Get Luxon date object converted to string from FdDate.
      */
     public toDateString(): string {
-        if (this.date) {
-            return this.date.toDateString();
+        if (this.year && this.month && this.day) {
+            return this.getDateObject().toLocaleString();
         } else {
-            return 'null';
+            return '';
         }
     }
 
@@ -68,28 +70,14 @@ export class FdDate {
      * Get amount of milliseconds from 01.01.1970
      * */
     public getTimeStamp(): number {
-        return (this.year - 1970) * YearToMilliseconds +
-            (this.month - 1) * MonthToMilliseconds +
-            (this.day - 1) * DayToMilliseconds
-            ;
+        return this.getDateObject().valueOf();
     }
 
     /**
      * Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
      * */
     public getDay(): number {
-        const d = this.day;
-        const m = this.month;
-        const y = this.year - ((m < 3) ? 1 : 0);
-        const t: number[] = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
-        return Math.ceil((y + y / 4 - y / 100 + y / 400 + t[m - 1] + d) % 7);
-    }
-
-    /**
-     * Get native date object from FdDate.
-     */
-    public get date(): Date {
-        return this.toDate();
+        return this.getDateObject().weekday % 7 + 1;
     }
 
     /** Get next day */
@@ -117,7 +105,6 @@ export class FdDate {
         return new Date(this.year, this.month - 1, this.day);
     }
 
-
     /**
      * Method that checks validity of current FdDate object.
      */
@@ -139,6 +126,14 @@ export class FdDate {
         }
 
         return true;
+    }
+
+    /**
+     * Provides Luxon object made from actual data in FdDate model.
+     * To get whole documentation, visit: https://moment.github.io/luxon/index.html
+     */
+    public getDateObject(): any  {
+        return DateTime.local(this.year, this.month, this.day);
     }
 
 }
