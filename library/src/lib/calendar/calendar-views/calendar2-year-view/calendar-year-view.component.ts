@@ -3,12 +3,12 @@ import { FdDate } from '../../models/fd-date';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
-    selector: 'fd-calendar2-year-view',
-    templateUrl: './calendar2-year-view.component.html',
-    styleUrls: ['./calendar2-year-view.component.scss'],
+    selector: 'fd-calendar-year-view',
+    templateUrl: './calendar-year-view.component.html',
+    styleUrls: ['./calendar-year-view.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Calendar2YearViewComponent implements AfterViewChecked, OnInit {
+export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
 
     /** @hidden */
     private newFocusedYearId: string;

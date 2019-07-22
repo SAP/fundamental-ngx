@@ -33,12 +33,12 @@
                                 [focusEscapeFunction]="escapeFocusFunction"
                                 (monthClicked)="handleMonthViewChange($event)"
         ></fd-calendar-month-view>
-        <fd-calendar2-year-view *ngSwitchCase="'year'"
-                                (yearClicked)="selectedYear($event)"
-                                [yearSelected]="currentlyDisplayed.year"
-                                [id]="id"
-                                [focusEscapeFunction]="escapeFocusFunction">
-        </fd-calendar2-year-view>
+        <fd-calendar-year-view *ngSwitchCase="'year'"
+                               (yearClicked)="selectedYear($event)"
+                               [yearSelected]="currentlyDisplayed.year"
+                               [id]="id"
+                               [focusEscapeFunction]="escapeFocusFunction">
+        </fd-calendar-year-view>
     </div>
 </ng-container>
 

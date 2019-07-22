@@ -15,6 +15,7 @@ import { CalendarCurrent } from './models/calendar-current';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { FdRangeDate } from './models/fd-range-date';
+import { CalendarYearViewComponent } from './calendar-views/calendar2-year-view/calendar-year-view.component';
 
 let calendarUniqueId: number = 0;
 
@@ -53,7 +54,8 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 })
 export class CalendarComponent implements OnInit, ControlValueAccessor {
 
-    @ViewChild('dayViewComponent') dayViewComponent: CalendarDayViewComponent;
+    @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent;
+    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
 
     invalidDate: boolean = false;
 
@@ -326,10 +328,12 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
 
     /** Function that allows to switch actually displayed list of year to next year list*/
     public displayNextYearList(): void {
+        this.yearViewComponent.loadNextYearList();
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
     public displayPreviousYearList(): void {
+        this.yearViewComponent.loadPreviousYearList();
     }
 
     /** Function that allows to change currently displayed month/year configuration,

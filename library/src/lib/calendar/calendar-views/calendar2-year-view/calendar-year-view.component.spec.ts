@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Calendar2YearViewComponent } from './calendar2-year-view.component';
+import { CalendarYearViewComponent } from './calendar-year-view.component';
 
 describe('Calendar2YearViewComponent', () => {
-    let component: Calendar2YearViewComponent;
-    let fixture: ComponentFixture<Calendar2YearViewComponent>;
+    let component: CalendarYearViewComponent;
+    let fixture: ComponentFixture<CalendarYearViewComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [Calendar2YearViewComponent]
+          declarations: [CalendarYearViewComponent]
         })
           .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(Calendar2YearViewComponent);
+        fixture = TestBed.createComponent(CalendarYearViewComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
