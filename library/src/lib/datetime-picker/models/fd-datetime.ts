@@ -4,7 +4,6 @@
 
 import { FdDate } from '../../calendar/models/fd-date';
 import { TimeObject } from '../../time/time-object';
-import { DateTime } from 'luxon';
 
 export class FdDatetime {
 
@@ -19,7 +18,6 @@ export class FdDatetime {
         const time: TimeObject = {hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()};
         return new FdDatetime(FdDate.getToday(), time);
     }
-
 
     /**
      * Constructor to build a FdDateTime object from a FdDate and TimeObject.
@@ -38,10 +36,8 @@ export class FdDatetime {
      * Get Luxon date object converted to string from FdDate.
      */
     public toLocaleDateString(): string {
-        if (this.getDateObject()) {
-            return this.getDateObject().toLocaleString({
-                weekday: 'short', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'
-            });
+        if (this.toDate()) {
+            return this.toDate().toLocaleString();
         } else {
             return null;
         }
@@ -107,10 +103,9 @@ export class FdDatetime {
     }
 
     /**
-     * Provides Luxon object made from actual data in FdDate model.
-     * To get whole documentation, visit: https://moment.github.io/luxon/index.html
+     * Get native date object from FdDate.
      */
-    public getDateObject(): any  {
-        return DateTime.local(this.year, this.month, this.day, this.hour, this.minute, this.second);
+    public toDate(): Date {
+        return new Date(this.year, this.month - 1, this.day, this.hour, this.minute, this.second);
     }
 }

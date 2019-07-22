@@ -15,7 +15,7 @@ import { CalendarCurrent } from './models/calendar-current';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { FdRangeDate } from './models/fd-range-date';
-import { CalendarYearViewComponent } from './calendar-views/calendar2-year-view/calendar-year-view.component';
+import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 
 let calendarUniqueId: number = 0;
 
@@ -54,10 +54,11 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 })
 export class CalendarComponent implements OnInit, ControlValueAccessor {
 
+    /** @hidden */
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent;
-    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
 
-    invalidDate: boolean = false;
+    /** @hidden */
+    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
 
     /** The currently selected FdDate model in single mode. */
     @Input()
@@ -213,7 +214,6 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
                 }
             }
         }
-        this.invalidDate = !valid;
         this.isValidDateChange.emit(valid);
     }
 

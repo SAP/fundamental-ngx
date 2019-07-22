@@ -19,6 +19,7 @@ import { FdRangeDate } from '../../models/fd-range-date';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+/** Component representing the day view of the calendar. */
 @Component({
     selector: 'fd-calendar-day-view',
     templateUrl: './calendar-day-view.component.html',

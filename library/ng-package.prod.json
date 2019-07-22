@@ -6,7 +6,6 @@
     },
     "whitelistedNonPeerDependencies": [
         "focus-trap",
-        "popper.js",
-        "luxon"
+        "popper.js"
     ]
 }

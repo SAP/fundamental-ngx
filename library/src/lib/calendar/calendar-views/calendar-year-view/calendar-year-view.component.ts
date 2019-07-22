@@ -6,7 +6,10 @@ import { FdDate } from '../../models/fd-date';
     selector: 'fd-calendar-year-view',
     templateUrl: './calendar-year-view.component.html',
     styleUrls: ['./calendar-year-view.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '[attr.id]': 'id + "-year-view"'
+    }
 })
 export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
 

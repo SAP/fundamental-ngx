@@ -2,12 +2,6 @@
  * Default date model used by the fundamental components.
  */
 import { CalendarService } from '../calendar.service';
-import { DateTime } from 'luxon';
-
-
-export const YearToMilliseconds: number = 31556952000;
-export const MonthToMilliseconds: number = 2592000000;
-export const DayToMilliseconds: number = 86400000;
 
 export class FdDate {
 
@@ -60,7 +54,7 @@ export class FdDate {
      */
     public toDateString(): string {
         if (this.year && this.month && this.day) {
-            return this.getDateObject().toLocaleString();
+            return this.toDate().toDateString();
         } else {
             return '';
         }
@@ -70,14 +64,14 @@ export class FdDate {
      * Get amount of milliseconds from 01.01.1970
      * */
     public getTimeStamp(): number {
-        return this.getDateObject().valueOf();
+        return this.toDate().valueOf();
     }
 
     /**
      * Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
      * */
     public getDay(): number {
-        return this.getDateObject().weekday % 7 + 1;
+        return this.toDate().getDay() % 7 + 1;
     }
 
     /** Get next day */
@@ -126,14 +120,6 @@ export class FdDate {
         }
 
         return true;
-    }
-
-    /**
-     * Provides Luxon object made from actual data in FdDate model.
-     * To get whole documentation, visit: https://moment.github.io/luxon/index.html
-     */
-    public getDateObject(): any  {
-        return DateTime.local(this.year, this.month, this.day);
     }
 
 }
