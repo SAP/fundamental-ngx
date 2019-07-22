@@ -35,6 +35,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'inputGroup', name: 'Input Group' },
         { url: 'list', name: 'List' },
         { url: 'loadingSpinner', name: 'Loading Spinner' },
+        { url: 'localizationEditor', name: 'Localization Editor' },
         { url: 'menu', name: 'Menu' },
         { url: 'modal', name: 'Modal' },
         { url: 'multi-input', name: 'Multi Input' },

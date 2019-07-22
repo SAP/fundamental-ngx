@@ -47,8 +47,8 @@ export const API_FILES = {
         'DateFormatParser',
         'DateFormatParserDefault'
     ],
-    comboboxInput: [
-        'ComboboxInputComponent'
+    combobox: [
+        'ComboboxComponent'
     ],
     datePicker: [
         'DatePickerComponent',
@@ -73,7 +73,7 @@ export const API_FILES = {
         'FormSetDirective'
     ],
     icon: [
-        'IconDirective'
+        'IconComponent'
     ],
     identifier: [
         'IdentifierDirective'
@@ -100,6 +100,11 @@ export const API_FILES = {
     ],
     loadingSpinner: [
         'LoadingSpinnerComponent'
+    ],
+    localizationEditor: [
+        'LocalizationEditorComponent',
+        'LocalizationEditorItemComponent',
+        'LocalizationEditorMainComponent',
     ],
     menu: [
         'MenuComponent',

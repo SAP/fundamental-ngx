@@ -8,6 +8,8 @@ import * as comboboxAsyncHtml from '!raw-loader!./examples/combobox-async-exampl
 import * as comboboxAsyncTs from '!raw-loader!./examples/combobox-async-example.component.ts';
 import * as comboboxDisplayHtml from '!raw-loader!./examples/combobox-displaywith-example.component.html';
 import * as comboboxDisplayTs from '!raw-loader!./examples/combobox-displaywith-example.component.ts';
+import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-example.component.html';
+import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
 
 @Component({
     selector: 'fd-combobox-docs',
@@ -25,6 +27,9 @@ export class ComboboxDocsComponent {
 
     displayHtml = comboboxDisplayHtml;
     displayTs = comboboxDisplayTs;
+
+    comboboxTemplateHtml = comboboxTemplateH;
+    comboboxTemplateTs = comboboxTemplateT;
 
     constructor() {}
 }

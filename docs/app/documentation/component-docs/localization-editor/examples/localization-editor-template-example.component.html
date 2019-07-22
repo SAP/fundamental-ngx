@@ -1,0 +1,16 @@
+<fd-localization-editor>
+    <fd-localization-editor-main>
+        <ng-template fd-localization-editor-label>
+            <fd-icon [glyph]="'menu'"></fd-icon>
+        </ng-template>
+        <input fd-localization-editor-input type="text" placeholder="Menu">
+    </fd-localization-editor-main>
+    <li fd-localization-editor-element *ngFor="let field of fields">
+        <fd-localization-editor-item>
+            <ng-template fd-localization-editor-label>
+                <fd-icon [glyph]="field.glyph"></fd-icon>
+            </ng-template>
+            <input fd-localization-editor-input type="text" placeholder="{{field.placeholder}}">
+        </fd-localization-editor-item>
+    </li>
+</fd-localization-editor>

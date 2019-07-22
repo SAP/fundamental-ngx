@@ -352,12 +352,21 @@ import {
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
+import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
+import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
+import {
+    LocalizationEditorExampleComponent
+} from './component-docs/localization-editor/examples/localization-editor-example.component';
+import { LocalizationEditorFormsExampleComponent } from './component-docs/localization-editor/examples/localization-editor-forms-example.component';
+import { LocalizationEditorTemplateExampleComponent } from './component-docs/localization-editor/examples/localization-editor-template-example.component';
+import { LocalizationEditorTextareaExampleComponent } from './component-docs/localization-editor/examples/localization-editor-textarea-example.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
 import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
+import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
 
 @NgModule({
@@ -578,9 +587,16 @@ import { SelectViewValueExampleComponent } from './component-docs/select/example
         ComboboxDisplaywithExampleComponent,
         ComboboxDynamicExampleComponent,
         ComboboxExampleComponent,
+        ComboboxTemplateExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
+        LocalizationEditorHeaderComponent,
+        LocalizationEditorDocsComponent,
+        LocalizationEditorExampleComponent,
+        LocalizationEditorTemplateExampleComponent,
+        LocalizationEditorTextareaExampleComponent,
+        LocalizationEditorFormsExampleComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
