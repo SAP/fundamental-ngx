@@ -50,7 +50,7 @@ export class DatePickerFormatExampleComponent {
 
     selectedRange = {
         date: FdDate.getToday(),
-        rangeEnd: FdDate.getModelFromDate(new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000))
+        rangeEnd: FdDate.getToday().nextDay()
     };
 
 }

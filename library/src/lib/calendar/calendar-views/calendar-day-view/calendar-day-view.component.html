@@ -8,7 +8,7 @@
     </thead>
     <tbody class="fd-calendar__group">
         <tr class="fd-calendar__row"
-            *ngFor="let row of dayViewGrid; let i = index;">
+            *ngFor="let row of dayViewGrid; let rowIndex = index;">
 
             <td class="fd-calendar__item"
                 role="gridcell"
@@ -26,7 +26,7 @@
 
                 <span class="fd-calendar__text" [attr.id]="cell.id"
                       role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
-                      (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: i })">{{cell.date.day}}
+                      (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: rowIndex })">{{cell.date.day}}
                 </span>
             </td>
         </tr>

@@ -41,9 +41,6 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** Actual day grid with previous/current/next month days */
     public dayViewGrid: CalendarDay[][];
 
-    /** @hidden */
-    public newFocusedDayId: string = '';
-
     /** The currently selected FdDate model in single mode. */
     @Input()
     public selectedDate: FdDate;
@@ -82,6 +79,9 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** Event emitted always, when model is changed in single mode */
     @Output()
     public readonly selectedDateChange = new EventEmitter<FdDate>();
+
+    /** @hidden */
+    newFocusedDayId: string = '';
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
@@ -433,7 +433,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         const amountOfDaysInCurrentMonth: number = this.getDaysInMonth(month, year);
         const prevMonthLastDate = new FdDate(year, month, amountOfDaysInCurrentMonth);
         const prevMonthLastDay = amountOfDaysInCurrentMonth;
-        let prevMonthLastWeekDay = prevMonthLastDate.toDate().getDay() - this.startingDayOfWeek;
+        let prevMonthLastWeekDay = prevMonthLastDate.getDay() - this.startingDayOfWeek;
 
         /** Checking if there are some days cut by startingDayOfWeek option
          *  If yes, there is whole week added, to avoid hiding

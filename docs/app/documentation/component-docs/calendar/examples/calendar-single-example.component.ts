@@ -29,13 +29,13 @@ export class CalendarSingleExampleComponent {
     myBlockFunction = function(d: FdDate): boolean {
         const firstDay = new FdDate(2019, 7, 21);
         const lastDay = new FdDate(2019, 7, 30);
-        return d.toDate().getTime() > firstDay.toDate().getTime() && d.toDate().getTime() < lastDay.toDate().getTime();
+        return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp();
     };
 
     disableWednesday() {
         this.myDisableFunction = function(d: FdDate): boolean {
-            const day = d.toDate().getDay();
-            return day === 3;
+            const day = d.getDay();
+            return day === 4;
         };
     }
 }

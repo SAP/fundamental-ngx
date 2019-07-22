@@ -21,7 +21,7 @@ export class DatePickerFormRangeExampleComponent {
     customForm = new FormGroup({
         dates: new FormControl({
             date: FdDate.getToday(),
-            rangeEnd: FdDate.getModelFromDate(new Date(new Date().getTime() + 432000000))
+            rangeEnd: FdDate.getToday().nextDay()
         })
     });
 };
