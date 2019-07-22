@@ -25,7 +25,9 @@
         "rxjs": "^6.4.0"
     },
     "devDependencies": {
-        "standard-version": "4.4.0"
+        "standard-version": "4.4.0",
+        "@schematics/angular": "^7.3.9",
+        "chalk": "^2.4.2"
     },
     "dependencies": {
         "focus-trap": "^5.0.0",
