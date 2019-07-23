@@ -11,6 +11,8 @@ import {
 import { PopoverContainer } from './popover-container';
 import Popper, { Placement, PopperOptions } from 'popper.js';
 
+export type PopoverFillMode = 'at-least' | 'equal';
+
 /**
  * Directive which manages the popper and popover components of the library.
  * It can be attached to any element. To bind it to a body, use the following syntax.
@@ -82,9 +84,14 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     };
 
-    /** Whether the Popover Body should try to have the same width as the Popover Control. */
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
     @Input()
-    fillControl: boolean = false;
+    fillControlMode: PopoverFillMode;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -110,7 +117,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
             this.open();
         }
 
-        this.initFillControl();
+        this.setupFillBehaviour();
         this.initPlacement();
 
         this.addTriggerListeners();
@@ -165,7 +172,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
         if (changes.fillControl) {
             setTimeout(() => {
-                this.initFillControl();
+                this.setupFillBehaviour();
             });
         }
     }
@@ -296,6 +303,13 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         return data;
     }
 
+    private atLeastReference(data): any {
+        data.offsets.popper.left = data.offsets.reference.left;
+        data.offsets.popper.right = data.offsets.reference.right;
+        data.styles.minWidth = data.offsets.reference.width + 'px';
+        return data;
+    }
+
     private initPlacement(): void {
         if (this.placement) {
             if (this.options) {
@@ -306,12 +320,12 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    private initFillControl(): void {
-        if (this.fillControl) {
+    private setupFillBehaviour(): void {
+        if (this.fillControlMode) {
             if (this.options && this.options.modifiers) {
                 this.options.modifiers.fillReference = {
                     enabled: true,
-                    fn: this.fillReference,
+                    fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
                     order: 840
                 }
             } else {
@@ -319,7 +333,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                     modifiers: {
                         fillReference: {
                             enabled: true,
-                            fn: this.fillReference,
+                            fn: this.fillControlMode === 'equal' ? this.fillReference : this.atLeastReference,
                             order: 840
                         }
                     }

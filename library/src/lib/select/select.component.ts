@@ -4,7 +4,6 @@ import {
     ContentChildren,
     EventEmitter, forwardRef, HostBinding, HostListener,
     Input, OnChanges, OnDestroy,
-    OnInit,
     Output,
     QueryList, SimpleChanges, TemplateRef,
     ViewEncapsulation
@@ -13,12 +12,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { PopperOptions } from 'popper.js';
+import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 
-// TODO allow picking options that have the same value, maybe by comparing value & index? Assign an id?
-// TODO add popover options
-// TODO Add onTouched properly, fix form behaviour generally
-// TODO add min-width option for popover instead of strict width
-// TODO Support disabled options, keyboard nav of options etc
+/**
+ * Select component intended to mimic the behaviour of the native select element.
+ */
 @Component({
     selector: 'fd-select',
     templateUrl: './select.component.html',
@@ -36,41 +35,79 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
         'role': 'listbox',
     }
 })
-export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
+    /** @hidden */
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
 
+    /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
     options: QueryList<OptionComponent>;
 
+    /** Whether the select component is disabled. */
     @Input()
     disabled: boolean = false;
 
+    /** Placeholder for the select. Appears in the triggerbox if no option is selected. */
     @Input()
     placeholder: string;
 
+    /** Open state of the select. */
     @Input()
     isOpen: boolean = false;
 
+    /** Current value of the selected option. */
     @Input()
     value: any;
 
+    /** Popper.js options of the popover. */
+    @Input()
+    popperOptions: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: true,
+                escapeWithReference: true,
+                boundariesElement: 'scrollParent'
+            }
+        }
+    };
+
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
+
+    /** Template with which to display the trigger box. */
     @Input()
     triggerTemplate: TemplateRef<any>;
 
+    /** The element to which the popover should be appended. */
+    @Input()
+    appendTo: HTMLElement | 'body';
+
+    /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean>
         = new EventEmitter<boolean>();
 
+    /** Event emitted when the selected value of the select changes. */
     @Output()
     readonly valueChange: EventEmitter<any>
         = new EventEmitter<any>();
 
+    /** Current selected option component reference. */
     private selected: OptionComponent;
 
+    /** Subject triggered when the component is destroyed. */
     private readonly destroy$ = new Subject<void>();
 
+    /** Observable triggered when an option has its selectedChange event fire. */
     private readonly optionsStatusChanges: Observable<OptionComponent> = defer(() => {
         const options = this.options;
         if (options) {
@@ -81,13 +118,13 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }) as Observable<OptionComponent>;
 
+    /** @hidden */
     onChange: Function = () => {};
+
+    /** @hidden */
     onTouched: Function = () => {};
 
-    constructor() {}
-
-    ngOnInit(): void {}
-
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.value) {
             setTimeout(() => {
@@ -98,18 +135,23 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
+
+        // If the observable state changes, reset the options and initialize selection.
         this.options.changes.pipe(startWith(null), takeUntil(this.destroy$)).subscribe(() => {
             this.resetOptions();
             this.initSelection();
         });
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
+    /** Toggles the open state of the select. */
     toggle(): void {
         if (this.isOpen && !this.disabled) {
             this.close();
@@ -118,6 +160,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /** Opens the select popover body. */
     open(): void {
         if (!this.isOpen && !this.disabled) {
             this.isOpen = true;
@@ -125,6 +168,7 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /** Closes the select popover body. */
     close(): void {
         if (this.isOpen && !this.disabled) {
             this.isOpen = false;
@@ -132,18 +176,22 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
+    /** @hidden */
     writeValue(value: any): void {
         if (this.options) {
             this.selectValue(value, false);
@@ -157,10 +205,12 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
     get triggerValue(): string {
         return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         switch (event.code) {
@@ -177,6 +227,11 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /**
+     * Selects an option by option component reference. Preferred method of selection.
+     * @param option The option component to search for.
+     * @param fireEvents Whether to fire change events.
+     */
     private selectOption(option: OptionComponent, fireEvents: boolean = true): OptionComponent | undefined {
         if (!this.isOptionActive(option)) {
             if (this.selected) {
@@ -191,6 +246,12 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         return;
     }
 
+    /**
+     * Selects an option by value. If two components have the same value, the first one found is selected.
+     * Recommend using selectOption generally.
+     * @param value Value to search for.
+     * @param fireEvents Whether to fire change events.
+     */
     private selectValue(value: any, fireEvents: boolean = true): OptionComponent | undefined {
         const matchOption = this.options.find((option: OptionComponent) => {
             return option.value != null && option.value === value;
@@ -218,6 +279,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         return matchOption;
     }
 
+    /**
+     * Updates the value parameter with optional events.
+     * @param fireEvents If true, function fires valueChange, onChange and onTouched events.
+     */
     private updateValue(fireEvents: boolean = true): void {
         this.value = this.selected.value;
         if (fireEvents) {
@@ -227,8 +292,15 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /**
+     * Function used to reset the options state.
+     */
     private resetOptions(): void {
+        // Create observable that fires when the options change or the component is destroyed.
         const destroyCurrentObs = merge(this.options.changes, this.destroy$);
+
+        // Subscribe to observable defined in component properties which fires when an option is clicked.
+        // Destroy if the observable defined above triggers.
         this.optionsStatusChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
             this.selectOption(instance);
         });
@@ -242,6 +314,10 @@ export class SelectComponent implements OnInit, OnChanges, AfterContentInit, OnD
         }
     }
 
+    /**
+     * Function that tests whether the tested option is currently selected.
+     * @param option Option to test against the selected option.
+     */
     private isOptionActive(option: OptionComponent): boolean {
         return option && this.selected && option === this.selected;
     }

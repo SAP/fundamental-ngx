@@ -1,5 +1,8 @@
 <fd-popover [(isOpen)]="isOpen"
             (isOpenChange)="isOpenChange.emit($event)"
+            [options]="popperOptions"
+            [fillControlMode]="fillControlMode"
+            [appendTo]="appendTo"
             class="fd-select-popover-custom">
     <fd-popover-control>
         <ng-container *ngIf="triggerTemplate">
