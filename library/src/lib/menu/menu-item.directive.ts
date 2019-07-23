@@ -14,10 +14,6 @@ export class MenuItemDirective {
     @HostBinding('class.fd-menu__item')
     fdMenuItemClass: boolean = true;
 
-    /** @hidden*/
-    @HostBinding('attr.tabindex')
-    tabIndex: number = 0;
-
     /** @hidden */
     constructor (public itemEl: ElementRef) {}
 
