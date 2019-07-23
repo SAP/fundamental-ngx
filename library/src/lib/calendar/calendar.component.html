@@ -8,7 +8,6 @@
 <ng-container [ngSwitch]="activeView">
     <div class="fd-calendar__container">
         <fd-calendar-day-view *ngSwitchCase="'day'"
-                              #dayViewComponent
                               [selectedDate]="selectedDate"
                               (selectedDateChange)="selectedDateChanged($event)"
                               [selectedRangeDate]="selectedRangeDate"

@@ -5,13 +5,16 @@
                     [attr.id]="id + '-left-arrow'"
                     [attr.aria-label]="previousLabel"
                     [attr.aria-disabled]="false"
-                    (click)="previousClicked.emit()"></button>
+                    type="button"
+                    (click)="previousClicked.emit()">
+            </button>
         </div>
         <div class="fd-calendar__action">
             <button class="fd-button--light fd-button--compact"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel"
                     [attr.aria-selected]="activeView === 'month'"
-                    (click)="processViewChange('month')">
+                    (click)="processViewChange('month')"
+                    type="button">
                 {{monthLabel}}
             </button>
         </div>
@@ -19,7 +22,8 @@
             <button class="fd-button--light fd-button--compact"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel"
                     [attr.aria-selected]="activeView === 'year'"
-                    (click)="processViewChange('year')">
+                    (click)="processViewChange('year')"
+                    type="button">
                 {{currentlyDisplayed.year}}
             </button>
         </div>
@@ -28,7 +32,9 @@
                     [attr.id]="id + '-right-arrow'"
                     [attr.aria-label]="nextLabel"
                     [attr.aria-disabled]="false"
-                    (click)="nextClicked.emit()"></button>
+                    (click)="nextClicked.emit()"
+                    type="button">
+            </button>
         </div>
     </div>
 </header>
