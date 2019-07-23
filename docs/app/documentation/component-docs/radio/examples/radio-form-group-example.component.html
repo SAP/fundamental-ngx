@@ -1,0 +1,27 @@
+<form [formGroup]="customForm">
+    <div fd-form-set>
+        <div fd-form-item [isCheck]="true">
+            <label fd-form-label for="radio-13">
+                <input fd-form-control formControlName="radioInput" name="radioInput" value="option1" type="radio"
+                       id="radio-13">
+                Option 1
+            </label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+            <label fd-form-label for="radio-14">
+                <input fd-form-control formControlName="radioInput" name="radioInput" value="option2" type="radio"
+                       id="radio-14">
+                Option 2
+            </label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+            <label fd-form-label for="radio-15">
+                <input fd-form-control formControlName="radioInput" name="radioInput" value="option3" type="radio"
+                       id="radio-15">
+                Option 3
+            </label>
+        </div>
+    </div>
+</form>
+<br><br>
+Radio Button Value: {{ customForm.controls.radioInput.value }} <br>

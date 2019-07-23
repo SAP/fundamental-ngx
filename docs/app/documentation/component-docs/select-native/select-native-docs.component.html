@@ -1,0 +1,54 @@
+<h2>Select</h2>
+<component-example [name]="'ex1'">
+    <fd-select-example></fd-select-example>
+</component-example>
+<code-example [code]="selectFormHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Select help elements</h2>
+<component-example [name]="'ex2'">
+    <fd-select-inline-help-example></fd-select-inline-help-example>
+</component-example>
+<code-example [code]="selectHelpFormHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Select States</h2>
+<description>
+    The state of the select field can reflect validity of the data entered, whether the select data is editable or
+    disabled.
+    <br/>
+    <b>Normal:</b> The field is editable but no validation has occurred.
+    <br/>
+    <b>Valid:</b> The data format entered has been validated and it’s correct.
+    <br/>
+    <b>Invalid:</b> The data entered is not valid and must be corrected.
+    <br/>
+    <b>Warning:</b> The data entered is formatted correctly but there are other issues are problematic but will not stop
+    the user from moving forward.
+    <br/>
+    <b>Disabled:</b> This indicates the field is not editable. A common use case is that this field is dependent on a
+    previous entry or selection within the form.
+    <br/>
+    <br/>
+    Along with Invalid and Warning, error messages should be displayed below the field so the user can correct the error
+    and move forward.
+</description>
+<component-example [name]="'ex3'">
+    <fd-select-state-example></fd-select-state-example>
+</component-example>
+<code-example [code]="selectStatesFormHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Form Select</h2>
+<description>
+    The select element, like several other native html elements, support Angular reactive forms. Using the select within
+    the form element greatly simplifies select value access and validation.
+</description>
+<component-example [name]="'ex4'">
+    <fd-select-form-group></fd-select-form-group>
+</component-example>
+<code-example [code]="formGroupSelectHtml" [language]="'HTML'"></code-example>
+<code-example [code]="formGroupSelectTs" [language]="'typescript'"></code-example>

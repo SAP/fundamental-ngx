@@ -1,0 +1,14 @@
+<form [formGroup]="customForm">
+    <div fd-form-set>
+        <div fd-form-item>
+            <label fd-form-label for="select-1">Default select:</label>
+            <select fd-form-control formControlName="selectControl" id="select-1" name="">
+                <option value="Duis malesuada odio volutpat elementum">Duis malesuada odio volutpat elementum</option>
+                <option value="Suspendisse ante ligula">Suspendisse ante ligula</option>
+                <option value="Sed bibendum sapien at posuere interdum">Sed bibendum sapien at posuere interdum</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+Select Value: {{ customForm.controls.selectControl.value }}
