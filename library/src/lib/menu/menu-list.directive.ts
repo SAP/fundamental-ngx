@@ -10,6 +10,6 @@ import { Directive, HostBinding } from '@angular/core';
 })
 export class MenuListDirective {
     /** @hidden */
-    @HostBinding('class.fd-menu_list')
+    @HostBinding('class.fd-menu__list')
     fdMenuListClass: boolean = true;
 }
