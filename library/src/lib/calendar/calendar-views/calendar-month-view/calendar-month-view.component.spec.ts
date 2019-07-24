@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarMonthViewComponent } from './calendar-month-view.component';
 import { By } from '@angular/platform-browser';
+import { CalendarService } from '../../calendar.service';
 
 
 describe('Calendar2MonthViewComponent', () => {
@@ -11,7 +12,8 @@ describe('Calendar2MonthViewComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [CalendarMonthViewComponent]
+            declarations: [CalendarMonthViewComponent],
+            providers: [CalendarService]
         })
             .compileComponents();
     }));
@@ -53,8 +55,7 @@ describe('Calendar2MonthViewComponent', () => {
     it('Should focus the month below with ArrowDown', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowDown', preventDefault: () => {
-            }
+            code: 'ArrowDown', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-9');
@@ -63,8 +64,7 @@ describe('Calendar2MonthViewComponent', () => {
     it('Should focus the month above with ArrowUp', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowUp', preventDefault: () => {
-            }
+            code: 'ArrowUp', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-1');
@@ -73,8 +73,7 @@ describe('Calendar2MonthViewComponent', () => {
     it('Should focus the month to the left with ArrowLeft', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {
-            }
+            code: 'ArrowLeft', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-4');
@@ -83,8 +82,7 @@ describe('Calendar2MonthViewComponent', () => {
     it('Should focus the month to the right with ArrowRight', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {
-            }
+            code: 'ArrowRight', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-6');
@@ -92,8 +90,7 @@ describe('Calendar2MonthViewComponent', () => {
 
     it('Should select a month with Enter', () => {
         const event = {
-            code: 'Enter', preventDefault: () => {
-            }
+            code: 'Enter', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
@@ -102,8 +99,7 @@ describe('Calendar2MonthViewComponent', () => {
     it('Should select a month with Space', () => {
 
         const event = {
-            code: 'Space', preventDefault: () => {
-            }
+            code: 'Space', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);

@@ -6,7 +6,7 @@ import {
     HostBinding,
     Input, OnChanges,
     OnInit,
-    Output, SimpleChanges,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
@@ -290,10 +290,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     }
 
     /** @hidden */
-    public ngOnChanges(changes: SimpleChanges): void {
-        if (!changes) {
-            return;
-        }
+    public ngOnChanges(): void {
         this.buildDayViewGrid();
     }
 

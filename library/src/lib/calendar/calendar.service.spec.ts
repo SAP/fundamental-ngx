@@ -78,4 +78,35 @@ describe('CalendarService', () => {
         expect(date.isDateValid()).toBeTruthy();
     });
 
+    it('Keydown handler should handle enter key', () => {
+        spyOn(service.onKeySelect, 'next');
+        const keyboardEvent: any = { code: 'Enter', preventDefault: () => {} };
+        service.onKeydownHandler(keyboardEvent, 10);
+        expect(service.onKeySelect.next).toHaveBeenCalledWith(10);
+    });
+
+    it('Keydown handler should handle space key', () => {
+        spyOn(service.onKeySelect, 'next');
+        const keyboardEvent: any = { code: 'Space', preventDefault: () => {} };
+        service.onKeydownHandler(keyboardEvent, 10);
+        expect(service.onKeySelect.next).toHaveBeenCalledWith(10);
+    });
+
+    it('Keydown handler should end of list approach', () => {
+        spyOn(service.onListEndApproach, 'next');
+        spyOn(service.onFocusIdChange, 'next');
+        const keyboardEvent: any = { code: 'ArrowDown', preventDefault: () => {} };
+        service.onKeydownHandler(keyboardEvent, 10);
+        expect(service.onListEndApproach.next).toHaveBeenCalled();
+        expect(service.onFocusIdChange.next).toHaveBeenCalledWith(2);
+    });
+
+    it('Keydown handler should start of list approach', () => {
+        spyOn(service.onListStartApproach, 'next');
+        spyOn(service.onFocusIdChange, 'next');
+        const keyboardEvent: any = { code: 'ArrowUp', preventDefault: () => {} };
+        service.onKeydownHandler(keyboardEvent, 2);
+        expect(service.onListStartApproach.next).toHaveBeenCalled();
+        expect(service.onFocusIdChange.next).toHaveBeenCalledWith(10);
+    });
 });

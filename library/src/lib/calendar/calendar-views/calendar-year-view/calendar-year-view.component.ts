@@ -1,5 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
 import { FdDate } from '../../models/fd-date';
+import { takeUntil } from 'rxjs/operators';
+import { CalendarI18n } from '../../i18n/calendar-i18n';
+import { CalendarService } from '../../calendar.service';
+import { Subject } from 'rxjs';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -11,7 +15,7 @@ import { FdDate } from '../../models/fd-date';
         '[attr.id]': 'id + "-year-view"'
     }
 })
-export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
+export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
 
     /** Parameter that stores the dozen of years that are currently being displayed. */
     calendarYearList: number[];
@@ -21,6 +25,9 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
 
     /** Parameter storing first shown year on list */
     firstYearInList: number = this.currentYear;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     private newFocusedYearId: string;
@@ -53,10 +60,40 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     ngOnInit(): void {
         this.firstYearInList = this.yearSelected;
         this.constructYearList();
+
+        this.calendarService.onFocusIdChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => {
+                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.focusElement(this.newFocusedYearId);
+            })
+        ;
+        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+        this.calendarService.onKeySelect
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => this.selectYear(this.calendarYearList[index]))
+        ;
+
+        this.calendarService.onListStartApproach
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.loadPreviousYearList())
+        ;
+
+        this.calendarService.onListEndApproach
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.loadNextYearList())
+        ;
     }
 
     /** @hidden */
-    constructor(private eRef: ElementRef) { }
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
+    }
+
+    /** @hidden */
+    constructor(private eRef: ElementRef, private calendarService: CalendarService) { }
 
     /** @hidden */
     private constructYearList(): void {
@@ -67,63 +104,8 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     }
 
     /** Method for handling the keyboard navigation. */
-    onKeydownYearHandler(event, year: number, index: number): void {
-        if (event.code === 'Tab' && !event.shiftKey) {
-            if (this.focusEscapeFunction) {
-                event.preventDefault();
-                this.focusEscapeFunction();
-            }
-        } else {
-            switch (event.code) {
-                case 'Enter':
-                case 'Space': {
-                    event.preventDefault();
-                    this.selectYear(year);
-                    break;
-                }
-                case 'ArrowLeft': {
-                    event.preventDefault();
-                    if (index === 0) {
-                        this.loadPreviousYearList();
-                        this.newFocusedYearId = this.id + '-fd-year-' + 11;
-                    } else {
-                        this.newFocusedYearId = this.id + '-fd-year-' + (index - 1);
-                    }
-                    break;
-                }
-                case 'ArrowRight': {
-                    event.preventDefault();
-                    if (index === 11) {
-                        this.loadNextYearList();
-                        this.newFocusedYearId = this.id + '-fd-year-' + 0;
-                    } else {
-                        this.newFocusedYearId = this.id + '-fd-year-' + (index + 1);
-                    }
-                    break;
-                }
-                case 'ArrowUp': {
-                    event.preventDefault();
-                    if (index <= 3) {
-                        this.loadPreviousYearList()
-                        this.newFocusedYearId = this.id + '-fd-year-' + (index + 8);
-                    } else {
-                        this.newFocusedYearId = this.id + '-fd-year-' + (index - 4);
-                    }
-                    break;
-                }
-                case 'ArrowDown': {
-                    event.preventDefault();
-                    if (index >= 8) {
-                        this.loadNextYearList()
-                        this.newFocusedYearId = this.id + '-fd-year-' + (index - 8);
-                    } else {
-                        this.newFocusedYearId = this.id + '-fd-year-' + (index + 4);
-                    }
-                    break;
-                }
-            }
-            this.focusElement(this.newFocusedYearId);
-        }
+    onKeydownYearHandler(event, index: number): void {
+        this.calendarService.onKeydownHandler(event, index);
     }
 
     /** Method used to load the previous 12 years to be displayed. */

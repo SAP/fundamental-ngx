@@ -3,6 +3,7 @@ import { FdDate } from '../../models/fd-date';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CalendarService } from '../../calendar.service';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -15,6 +16,16 @@ import { takeUntil } from 'rxjs/operators';
     }
 })
 export class CalendarMonthViewComponent implements OnInit, OnDestroy {
+
+    /** A list of month names (short names) */
+    monthNames: string[];
+
+    /** A number offset used to achieve the 1-12 representation of the calendar */
+    private readonly _monthOffset: number = 1;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;
@@ -31,16 +42,12 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     @Output()
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
-    /** A list of month names (short names) */
-    monthNames: string[];
-
-    /** A number offset used to achieve the 1-12 representation of the calendar */
-    private readonly _monthOffset: number = 1;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
-
-    constructor(private eRef: ElementRef, private cdRef: ChangeDetectorRef, private calendarI18n: CalendarI18n) {}
+    constructor(
+        private eRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private calendarI18n: CalendarI18n,
+        private calendarService: CalendarService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -52,6 +59,18 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
                 this.monthNames = this.calendarI18n.getAllShortMonthNames();
                 this.cdRef.detectChanges();
             })
+        ;
+
+        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+        this.calendarService.onFocusIdChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => this.focusElement('#' + this.id + '-fd-month-' + index))
+        ;
+
+        this.calendarService.onKeySelect
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => this.selectMonth(index))
         ;
     }
 
@@ -81,55 +100,8 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method for handling the keyboard events (a11y) */
-    onKeydownMonthHandler(event, month: number): void {
-        let newFocusedMonthId: string;
-
-        switch (event.code) {
-            case 'Space':
-            case 'Enter': {
-                event.preventDefault();
-                this.selectMonth(month);
-                break;
-            }
-            case 'ArrowUp': {
-                event.preventDefault();
-                newFocusedMonthId = '#' + this.id + '-fd-month-' + (month - 4);
-                break;
-            }
-            case 'ArrowDown': {
-                event.preventDefault();
-                newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 4);
-                break;
-            }
-            case 'ArrowLeft': {
-                event.preventDefault();
-                if (month === 0) {
-                    newFocusedMonthId = '#' + this.id + '-fd-month-11';
-                } else {
-                    newFocusedMonthId = '#' + this.id + '-fd-month-' + (month - 1);
-                }
-                break;
-            }
-            case 'ArrowRight': {
-                event.preventDefault();
-                if (month === 11) {
-                    newFocusedMonthId = '#' + this.id + '-fd-month-0';
-                } else {
-                    newFocusedMonthId = '#' + this.id + '-fd-month-' + (month + 1);
-                }
-                break;
-            }
-            case 'Tab': {
-                if (this.focusEscapeFunction) {
-                    event.preventDefault();
-                    this.focusEscapeFunction();
-                }
-                break;
-            }
-        }
-        if (newFocusedMonthId) {
-            this.focusElement(newFocusedMonthId);
-        }
+    onKeydownMonthHandler(event, index: number): void {
+       this.calendarService.onKeydownHandler(event, index)
     }
 
     /** Method that allows to focus elements inside this component */
