@@ -134,7 +134,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Event thrown every time calendar active view is changed */
     @Output()
-    public readonly activeViewChange = new EventEmitter<FdCalendarView>();
+    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()

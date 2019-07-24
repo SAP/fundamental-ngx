@@ -127,13 +127,13 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     }
 
     /** Method used to load the previous 12 years to be displayed. */
-    loadNextYearList() {
+    loadNextYearList(): void {
         this.firstYearInList += 12;
         this.constructYearList();
     }
 
     /** Method used to load the next 12 years to be displayed. */
-    loadPreviousYearList() {
+    loadPreviousYearList(): void {
         this.firstYearInList -= 12;
         this.constructYearList();
     }

@@ -14,7 +14,7 @@ import { CalendarCurrent } from '../models/calendar-current';
     styleUrls: ['./calendar-header.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.id]': 'id' + '"-header"'
+        '[attr.id]': 'id + "-header"'
     }
 })
 export class CalendarHeaderComponent {

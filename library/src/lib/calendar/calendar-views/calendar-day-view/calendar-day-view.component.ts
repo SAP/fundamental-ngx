@@ -26,7 +26,7 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./calendar-day-view.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.id]': 'id' + '"-day-view"'
+        '[attr.id]': 'id + "-day-view"'
     }
 })
 export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
@@ -190,7 +190,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.buildDayViewGrid();
         this.shortWeekDays = this.getShortWeekDays();
         this.calendarI18n.i18nChange

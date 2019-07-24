@@ -16,6 +16,7 @@ describe('Calendar2HeaderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(CalendarHeaderComponent);
         component = fixture.componentInstance;
+        component.currentlyDisplayed = { month: 10, year: 2018 };
         fixture.detectChanges();
     });
 

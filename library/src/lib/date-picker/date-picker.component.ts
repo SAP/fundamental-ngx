@@ -101,15 +101,15 @@ export class DatePickerComponent implements ControlValueAccessor {
 
     /** Fired when a new date is selected. */
     @Output()
-    public readonly selectedDateChange = new EventEmitter<FdDate>();
+    public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
+    public readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
-    public readonly activeViewChange = new EventEmitter<FdCalendarView>();
+    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** @hidden */
     onChange: any = (selected: any) => {

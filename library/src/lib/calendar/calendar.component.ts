@@ -97,23 +97,23 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
 
     /** Event thrown every time active view is changed */
     @Output()
-    public readonly activeViewChange = new EventEmitter<FdCalendarView>();
+    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event thrown every time selected date in single mode is changed */
     @Output()
-    public readonly selectedDateChange = new EventEmitter<FdDate>();
+    public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
+    public readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
-    public readonly isValidDateChange = new EventEmitter<boolean>();
+    public readonly isValidDateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event thrown every time when calendar should be closed */
     @Output()
-    public readonly closeCalendar = new EventEmitter<void>();
+    public readonly closeCalendar: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     onChange: Function = () => {
