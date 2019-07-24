@@ -53,6 +53,24 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @ViewChild(CalendarComponent)
     calendarComponent: CalendarComponent;
 
+    /**
+     * @hidden Date of the input field. Internal use.
+     * For programmatic selection, use two-way binding on the date input.
+     */
+    inputFieldDate: string = null;
+
+    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
+    isInvalidDateInput: boolean = false;
+
+    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
+    /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
+    selectedDate: FdDate;
+
+    /** Subscription of the dateFromInput. */
+    private dateFromInputSubscription: Subscription;
+
     /** Placeholder for the inner input element. */
     @Input()
     placeholder: string = 'mm/dd/yyyy, hh:mm:ss am';
@@ -88,7 +106,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Current selected date. Two-way binding is supported. */
     @Input()
-    date: FdDatetime = FdDatetime.GetToday();
+    date: FdDatetime = FdDatetime.getToday();
 
     /** Whether the popover is open. Two-way binding is supported. */
     @Input()
@@ -134,78 +152,66 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Output()
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
-    /**
-     * @hidden Date of the input field. Internal use.
-     * For programmatic selection, use two-way binding on the date input.
-     */
-    inputFieldDate: string = null;
-
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    isInvalidDateInput: boolean = false;
-
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
-
-    /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
-    selectedDate: FdDate;
-
-    /** Subscription of the dateFromInput. */
-    private dateFromInputSubscription: Subscription;
-
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param d Date
-     */
-    @Input()
-    disableFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to block certain dates in the calendar.
-     * @param d Date
-     */
-    @Input()
-    blockFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param d Date
-     */
-    @Input()
-    disableRangeStartFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param d Date
-     */
-    @Input()
-    disableRangeEndFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param d Date
-     */
-    @Input()
-    blockRangeStartFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param d Date
-     */
-    @Input()
-    blockRangeEndFunction = function(d): boolean {
-        return false;
-    };
-
     /** @hidden */
     onChange: any = (selected: any) => {
     };
+
     /** @hidden */
     onTouched: any = () => {
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableRangeStartFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockRangeStartFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockRangeEndFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockFunction = function(fdDate: FdDate): boolean {
+        return false;
     };
 
     /** Toggles the popover. */
@@ -362,7 +368,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             }
         } else if (this.allowNull) {
             this.isInvalidDateInput = false;
-            this.date = FdDatetime.GetToday();
+            this.date = FdDatetime.getToday();
             this.selectedDate = this.date.date;
             this.time = this.date.time;
             this.calendarComponent.setCurrentlyDisplayed(this.date.date);

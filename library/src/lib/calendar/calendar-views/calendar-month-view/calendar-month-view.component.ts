@@ -43,7 +43,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     constructor(private eRef: ElementRef, private cdRef: ChangeDetectorRef, private calendarI18n: CalendarI18n) {}
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.monthNames = this.calendarI18n.getAllShortMonthNames();
 
         this.calendarI18n.i18nChange
@@ -56,7 +56,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.onDestroy$.next();
         this.onDestroy$.complete();
     }

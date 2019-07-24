@@ -6,5 +6,5 @@ import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker
     templateUrl: './datetime-non-meridian-example.component.html'
 })
 export class DatetimeNonMeridianExampleComponent {
-    date = FdDatetime.GetToday();
+    date = FdDatetime.getToday();
 }

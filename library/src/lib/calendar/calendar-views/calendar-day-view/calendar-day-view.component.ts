@@ -24,23 +24,32 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'fd-calendar-day-view',
     templateUrl: './calendar-day-view.component.html',
     styleUrls: ['./calendar-day-view.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '[attr.id]': 'id' + '"-day-view"'
+    }
 })
 export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
 
     /** @hidden */
+    newFocusedDayId: string = '';
+
+    /** @hidden */
     shortWeekDays: string[];
 
-    /** Currently displayed month and year for days */
-    @Input()
-    public currentlyDisplayed: CalendarCurrent;
+    /** Actual day grid with previous/current/next month days */
+    public dayViewGrid: CalendarDay[][];
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     @HostBinding('class.fd-calendar__dates')
     public fdCalendarDateViewClass: boolean = true;
 
-    /** Actual day grid with previous/current/next month days */
-    public dayViewGrid: CalendarDay[][];
+    /** Currently displayed month and year for days */
+    @Input()
+    public currentlyDisplayed: CalendarCurrent;
 
     /** The currently selected FdDate model in single mode. */
     @Input()
@@ -67,72 +76,71 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
 
     /** Event emitted always, when model is changed in range mode */
     @Output()
-    public readonly selectedRangeDateChange = new EventEmitter<FdRangeDate>();
+    public readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
 
     /** Event emitted always, when next month is selected, by focus */
     @Output()
-    public readonly nextMonthSelect = new EventEmitter();
+    public readonly nextMonthSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted always, when previous month is selected, by focus */
     @Output()
-    public readonly previousMonthSelect = new EventEmitter();
+    public readonly previousMonthSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted always, when model is changed in single mode */
     @Output()
-    public readonly selectedDateChange = new EventEmitter<FdDate>();
-
-    /** @hidden */
-    newFocusedDayId: string = '';
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param d Date
+     * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(d: FdDate): boolean {
+    disableFunction = function(fdDate: FdDate): boolean {
         return false;
     };
+
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param d Date
+     * @param fdDate FdDate
      */
     @Input()
-    disableRangeStartFunction = function(d: FdDate): boolean {
+    disableRangeStartFunction = function(fdDate: FdDate): boolean {
         return false;
     };
+
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param d Date
+     * @param fdDate FdDate
      */
     @Input()
-    disableRangeEndFunction = function(d: FdDate): boolean {
+    disableRangeEndFunction = function(fdDate: FdDate): boolean {
         return false;
     };
+
     /**
      * Function used to block certain dates in the calendar for the range start selection.
-     * @param d Date
+     * @param fdDate FdDate
      */
     @Input()
-    blockRangeStartFunction = function(d): boolean {
+    blockRangeStartFunction = function(fdDate: FdDate): boolean {
         return false;
     };
+
     /**
      * Function used to block certain dates in the calendar for the range end selection.
-     * @param d Date
+     * @param fdDate FdDate
      */
     @Input()
-    blockRangeEndFunction = function(d): boolean {
+    blockRangeEndFunction = function(fdDate: FdDate): boolean {
         return false;
     };
+
     /**
      * Function used to block certain dates in the calendar.
-     * @param d Date
+     * @param fdDate FdDate
      */
     @Input()
-    blockFunction = function(d: FdDate): boolean {
+    blockFunction = function(fdDate: FdDate): boolean {
         return false;
     };
 
@@ -286,12 +294,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         if (!changes) {
             return;
         }
-        // To Prevent from multiple refreshing of calendar grid.
-        const keys = Object.keys(changes);
-        const isAnyChanged: boolean = !!keys.find(key => changes[key].currentValue !== changes[key].previousValue);
-        if (isAnyChanged) {
-            this.buildDayViewGrid();
-        }
+        this.buildDayViewGrid();
     }
 
     /** @hidden */
@@ -321,11 +324,11 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
 
     /** Function that gives array of all displayed CalendarDays */
     public get calendarDayList(): CalendarDay[] {
-        return this.dayViewGrid.reduce((a: CalendarDay[], b: CalendarDay[]) => {
-            if (!b) {
-                b = [];
+        return this.dayViewGrid.reduce((totalCalendarRows: CalendarDay[], calendarRow: CalendarDay[]) => {
+            if (!calendarRow) {
+                calendarRow = [];
             }
-            return b.concat(a);
+            return calendarRow.concat(totalCalendarRows);
         });
     }
 

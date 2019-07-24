@@ -6,8 +6,7 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
     selector: 'fd-calendar-programmatically-change-example',
     template: `
         <fd-calendar [calType]="'single'"
-                     [(ngModel)]="selectedDay"
-        >
+                     [(ngModel)]="selectedDay">
         </fd-calendar>
 
         <button fd-button (click)="changeDay()">Next Day</button>

@@ -7,7 +7,7 @@ import { FdDate } from '../../../../../../../library/src/lib/calendar/models/fd-
     templateUrl: './datetime-program-example.component.html'
 })
 export class DatetimeProgramExampleComponent {
-    date = FdDatetime.GetToday();
+    date = FdDatetime.getToday();
 
     changeDay(): void {
         this.date = new FdDatetime(new FdDate(2018, 10, 10), this.date.time);

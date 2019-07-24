@@ -6,5 +6,5 @@ import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker
   templateUrl: './datetime-example.component.html'
 })
 export class DatetimeExampleComponent {
-    date: FdDatetime = FdDatetime.GetToday();
+    date: FdDatetime = FdDatetime.getToday();
 }

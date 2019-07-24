@@ -8,6 +8,6 @@ import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker
 })
 export class DatetimeFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDatetime.GetToday())
+        date: new FormControl(FdDatetime.getToday())
     });
 }

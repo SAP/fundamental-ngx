@@ -35,5 +35,5 @@ export class DateTimeFormatExample extends DateTimeFormatParser {
     ]
 })
 export class DatetimeFormatExampleComponent {
-    date = FdDatetime.GetToday();
+    date = FdDatetime.getToday();
 }

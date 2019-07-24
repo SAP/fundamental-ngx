@@ -8,6 +8,6 @@ import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker
 })
 export class DatetimePickerAllowNullExampleComponent {
 
-    selectedDay: FdDatetime = FdDatetime.GetToday();
+    selectedDay: FdDatetime = FdDatetime.getToday();
 
 }

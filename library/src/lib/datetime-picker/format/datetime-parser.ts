@@ -41,7 +41,7 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
      */
     public parse(value: string): FdDatetime {
         if (!value) {
-            return FdDatetime.GetToday();
+            return FdDatetime.getToday();
         } else {
             let time: TimeObject;
             let date: FdDate;

@@ -13,7 +13,7 @@ export class FdDatetime {
     /**
      * Static function to get the current date in FdDateTime form.
      */
-    static GetToday(): FdDatetime {
+    static getToday(): FdDatetime {
         const date: Date = new Date();
         const time: TimeObject = {hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()};
         return new FdDatetime(FdDate.getToday(), time);

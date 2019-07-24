@@ -60,6 +60,17 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
     @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
 
+    /** @hidden */
+    @HostBinding('class.fd-calendar')
+    fdCalendarClass: boolean = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-has-display-block')
+    fdHasDisplayBlockClass: boolean = true;
+
+    /** Currently displayed days depending on month and year */
+    currentlyDisplayed: CalendarCurrent;
+
     /** The currently selected FdDate model in single mode. */
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
@@ -79,17 +90,6 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     public calType: CalendarType = 'single';
-
-    /** @hidden */
-    @HostBinding('class.fd-calendar')
-    fdCalendarClass: boolean = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-has-display-block')
-    fdHasDisplayBlockClass: boolean = true;
-
-    /** Currently displayed days depending on month and year */
-    currentlyDisplayed: CalendarCurrent;
 
     /** Id of the calendar. If none is provided, one will be generated. */
     @Input()
@@ -115,60 +115,65 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     @Output()
     public readonly closeCalendar = new EventEmitter<void>();
 
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param d Date
-     */
-    @Input()
-    disableFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param d Date
-     */
-    @Input()
-    disableRangeStartFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param d Date
-     */
-    @Input()
-    disableRangeEndFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param d Date
-     */
-    @Input()
-    blockRangeStartFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param d Date
-     */
-    @Input()
-    blockRangeEndFunction = function(d): boolean {
-        return false;
-    };
-    /**
-     * Function used to block certain dates in the calendar.
-     * @param d Date
-     */
-    @Input()
-    blockFunction = function(d): boolean {
-        return false;
-    };
-
     /** @hidden */
     onChange: Function = () => {
     };
     /** @hidden */
     onTouched: Function = () => {
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableRangeStartFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockRangeStartFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockRangeEndFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockFunction = function(fdDate: FdDate): boolean {
+        return false;
     };
 
     /** That allows to define function that should happen, when focus should normally escape of component */

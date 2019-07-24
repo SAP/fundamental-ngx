@@ -13,6 +13,15 @@ import { FdDate } from '../../models/fd-date';
 })
 export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
 
+    /** Parameter that stores the dozen of years that are currently being displayed. */
+    calendarYearList: number[];
+
+    /** Parameter storing the year of the present day. */
+    currentYear: number = FdDate.getToday().year;
+
+    /** Parameter storing first shown year on list */
+    firstYearInList: number = this.currentYear;
+
     /** @hidden */
     private newFocusedYearId: string;
 
@@ -24,9 +33,6 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     @Input()
     focusEscapeFunction: Function;
 
-    /** Parameter that stores the dozen of years that are currently being displayed. */
-    calendarYearList: number[];
-
     /** Parameter holding the year that is currently selected. */
     @Input()
     yearSelected: number;
@@ -34,10 +40,6 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
-
-    /** Parameter storing the year of the present day. */
-    currentYear: number = FdDate.getToday().year;
-    firstYearInList: number = this.currentYear;
 
     /** @hidden */
     ngAfterViewChecked(): void {
@@ -57,7 +59,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     constructor(private eRef: ElementRef) { }
 
     /** @hidden */
-    private constructYearList() {
+    private constructYearList(): void {
         this.calendarYearList = [];
         for (let x = 0; x < 12; x++) {
             this.calendarYearList.push(this.firstYearInList + x);
@@ -65,7 +67,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
     }
 
     /** Method for handling the keyboard navigation. */
-    onKeydownYearHandler(event, year: number, index: number) {
+    onKeydownYearHandler(event, year: number, index: number): void {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
                 event.preventDefault();
@@ -82,7 +84,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
                 case 'ArrowLeft': {
                     event.preventDefault();
                     if (index === 0) {
-                        this.loadPreviousYearList()
+                        this.loadPreviousYearList();
                         this.newFocusedYearId = this.id + '-fd-year-' + 11;
                     } else {
                         this.newFocusedYearId = this.id + '-fd-year-' + (index - 1);
@@ -92,7 +94,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit {
                 case 'ArrowRight': {
                     event.preventDefault();
                     if (index === 11) {
-                        this.loadNextYearList()
+                        this.loadNextYearList();
                         this.newFocusedYearId = this.id + '-fd-year-' + 0;
                     } else {
                         this.newFocusedYearId = this.id + '-fd-year-' + (index + 1);

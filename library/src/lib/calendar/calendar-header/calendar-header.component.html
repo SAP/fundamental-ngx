@@ -12,7 +12,7 @@
         <div class="fd-calendar__action">
             <button class="fd-button--light fd-button--compact"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel"
-                    [attr.aria-selected]="activeView === 'month'"
+                    [attr.aria-selected]="isOnMonthView()"
                     (click)="processViewChange('month')"
                     type="button">
                 {{monthLabel}}
@@ -21,7 +21,7 @@
         <div class="fd-calendar__action">
             <button class="fd-button--light fd-button--compact"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel"
-                    [attr.aria-selected]="activeView === 'year'"
+                    [attr.aria-selected]="isOnYearView()"
                     (click)="processViewChange('year')"
                     type="button">
                 {{currentlyDisplayed.year}}

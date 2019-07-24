@@ -12,9 +12,12 @@ import { CalendarCurrent } from '../models/calendar-current';
     selector: 'fd-calendar-header',
     templateUrl: './calendar-header.component.html',
     styleUrls: ['./calendar-header.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '[attr.id]': 'id' + '"-header"'
+    }
 })
-export class CalendarHeaderComponent implements OnInit {
+export class CalendarHeaderComponent {
 
     /** Currently active view. Needed for a11y labels. */
     @Input()
@@ -48,8 +51,6 @@ export class CalendarHeaderComponent implements OnInit {
         public calendarI18n: CalendarI18n
     ) {}
 
-    ngOnInit() {}
-
     /** Get the aria label for the previous button. Depends on the active view. */
     get previousLabel(): string {
         return this.activeView !== 'year' ? this.calendarI18nLabels.previousMonthLabel
@@ -65,6 +66,14 @@ export class CalendarHeaderComponent implements OnInit {
     /** Get aria label for the month shown. */
     get monthLabel(): string {
         return this.calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
+    }
+
+    isOnMonthView(): boolean {
+        return this.activeView === 'month';
+    }
+
+    isOnYearView(): boolean {
+        return this.activeView === 'year';
     }
 
     processViewChange(type: FdCalendarView): void {

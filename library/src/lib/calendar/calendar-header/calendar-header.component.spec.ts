@@ -19,7 +19,29 @@ describe('Calendar2HeaderComponent', () => {
         fixture.detectChanges();
     });
 
-    // it('should create', () => {
-    //     expect(component).toBeTruthy();
-    // });
+    it('Should switch to year view, when changed to year and not no year view', () => {
+        spyOn(component.activeViewChange, 'emit');
+        component.activeView = 'day';
+        component.processViewChange('year');
+        expect(component.activeViewChange.emit).toHaveBeenCalledWith('year');
+        expect(component.activeView).toBe('year');
+        expect(component.isOnYearView()).toBeTruthy();
+    });
+
+    it('Should switch to day view, when changed to year and on year view', () => {
+        spyOn(component.activeViewChange, 'emit');
+        component.activeView = 'year';
+        component.processViewChange('year');
+        expect(component.activeViewChange.emit).toHaveBeenCalledWith('day');
+        expect(component.activeView).toBe('day');
+    });
+
+    it('Should switch to month view, changed to month and not no month view', () => {
+        spyOn(component.activeViewChange, 'emit');
+        component.activeView = 'day';
+        component.processViewChange('month');
+        expect(component.activeViewChange.emit).toHaveBeenCalledWith('month');
+        expect(component.activeView).toBe('month');
+        expect(component.isOnMonthView()).toBeTruthy();
+    });
 });
