@@ -24,12 +24,12 @@
                     'is-disabled': cell.disabled,
                     'is-blocked': cell.blocked
                 }"
-                (click)="selectDate(cell, $event)">
-
-                <span class="fd-calendar__text" [attr.id]="cell.id"
-                      role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
-                      (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: rowIndex })">{{cell.date.day}}
-                </span>
+                [attr.id]="cell.id"
+                [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
+                (click)="selectDate(cell, $event)"
+                (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: rowIndex })"
+            >
+                <span class="fd-calendar__text" role="button">{{cell.date.day}}</span>
             </td>
         </tr>
     </tbody>
