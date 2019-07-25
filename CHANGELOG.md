@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.1-rc.4"></a>
+## [0.8.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.3...v0.8.1-rc.4) (2019-07-25)
+
+
+
+<a name="0.8.1-rc.3"></a>
+## [0.8.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.2...v0.8.1-rc.3) (2019-07-25)
+
+
+### Bug Fixes
+
+* add keyboard support to menu component ([#1005](https://github.com/SAP/fundamental-ngx/issues/1005)) ([dac28a8](https://github.com/SAP/fundamental-ngx/commit/dac28a8))
+
+
+
+<a name="0.8.1-rc.2"></a>
+## [0.8.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.1...v0.8.1-rc.2) (2019-07-24)
+
+
+
+<a name="0.8.1-rc.1"></a>
+## [0.8.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.0...v0.8.1-rc.1) (2019-07-24)
+
+
+
+<a name="0.8.1-rc.0"></a>
+## [0.8.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.8.0...v0.8.1-rc.0) (2019-07-24)
+
+
+
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.22...v0.8.0) (2019-07-24)
+
+
+
+<a name="0.8.0-rc.22"></a>
+# [0.8.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.21...v0.8.0-rc.22) (2019-07-24)
+
+
+
+<a name="0.8.0-rc.21"></a>
+# [0.8.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.20...v0.8.0-rc.21) (2019-07-24)
+
+
+
+<a name="0.8.0-rc.20"></a>
+# [0.8.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.19...v0.8.0-rc.20) (2019-07-23)
+
+
+
+<a name="0.8.0-rc.19"></a>
+# [0.8.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.18...v0.8.0-rc.19) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.18"></a>
+# [0.8.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.17...v0.8.0-rc.18) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.17"></a>
+# [0.8.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.16...v0.8.0-rc.17) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.16"></a>
+# [0.8.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.15...v0.8.0-rc.16) (2019-07-22)
+
+
+
 <a name="0.8.0-rc.15"></a>
 # [0.8.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.14...v0.8.0-rc.15) (2019-07-21)
 

@@ -6,14 +6,15 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-menu-group',
     templateUrl: './menu-group.component.html',
-    encapsulation: ViewEncapsulation.None,
-    host: {
-        '[class.fd-has-display-block]': 'true'
-    }
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuGroupComponent {
+    /** @hidden*/
+    @HostBinding('class.fd-has-display-block')
+    fdHasDisplayBlockClass: boolean = true;
 
-    /** @hidden */
+    /** @hidden*/
     @HostBinding('class.fd-menu__group')
     fdMenuGroupClass: boolean = true;
+
 }

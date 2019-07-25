@@ -15,3 +15,18 @@
   </p>
 </component-example>
 <code-example [code]="menuGroupHtml" [language]="'HTML'"></code-example>
+
+<separator></separator>
+
+<h2>Keyboard Support</h2>
+<description>
+    Keyboard support can be added on every component which uses the <code>MenuComponent</code>. It simulates
+    click event on <code>Enter</code> or <code>Space</code> key down. It is also possible to override functions for a
+    variety of situations. For example, when the focus should escape the element. Use the up and down arrows to test
+        the component below. To enable focusing on non-focusable elements, change value of <code>tabIndex</code> to 0.
+</description>
+<component-example [name]="'ex3'">
+    <fd-menu-keyboard-support-example></fd-menu-keyboard-support-example>
+</component-example>
+<code-example [code]="menuKeyboardHtml" [language]="'HTML'"></code-example>
+<code-example [code]="menuKeyboardTs" [language]="'typescript'"></code-example>

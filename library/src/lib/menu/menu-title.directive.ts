@@ -12,4 +12,5 @@ export class MenuTitleDirective {
     /** @hidden */
     @HostBinding('class')
     elementClass = 'fd-menu__title';
+
 }
