@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
+import { FdRangeDate } from '../../../../../../library/src/lib/calendar/models/fd-range-date';
 
 @Component({
     selector: 'fd-calendar-range-example',
@@ -17,7 +18,7 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
 })
 export class CalendarRangeExampleComponent {
 
-    selected = {
+    selected: FdRangeDate = {
         start: new FdDate(2019, 10, 11),
         end: new FdDate(2019, 10, 19)
     };

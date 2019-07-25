@@ -5,20 +5,18 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
     selector: 'fd-calendar-single-example',
     template: `
         <fd-calendar [calType]="'single'"
-                     [(ngModel)]="selectedDay"
+                     [(ngModel)]="date"
                      [blockFunction]="myBlockFunction"
                      [disableFunction]="myDisableFunction">
         </fd-calendar>
 
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
         <br/><br/>
-        <div>Selected Date: {{selectedDay.date.toDateString()}}</div>`
+        <div>Selected Date: {{date.toDateString()}}</div>`
 })
 export class CalendarSingleExampleComponent {
 
-    selectedDay = {
-        date: FdDate.getToday()
-    };
+    date = FdDate.getToday();
 
     myDisableFunction = function(d: FdDate): boolean {
         const day = d.getDay();

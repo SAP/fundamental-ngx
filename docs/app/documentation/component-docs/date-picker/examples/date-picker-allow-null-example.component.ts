@@ -3,14 +3,13 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
 
 @Component({
     selector: 'fd-date-picker-allow-null-example',
-    template: ` <fd-date-picker [allowNull]="false" [type]="'single'" [(ngModel)]="selectedDay"></fd-date-picker>
-            <br/>
-            <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>`
+    template: `
+        <fd-date-picker [allowNull]="false" [type]="'single'" [(ngModel)]="date"></fd-date-picker>
+        <br/>
+        <div>Selected Date: {{date ? date.toDateString() : 'null'}}</div>`
 })
 export class DatePickerAllowNullExampleComponent {
 
-    selectedDay = {
-        date: FdDate.getToday()
-    };
+    date = FdDate.getToday();
 
 }

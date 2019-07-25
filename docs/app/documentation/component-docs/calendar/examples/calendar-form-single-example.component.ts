@@ -13,14 +13,14 @@ import { FormControl, FormGroup } from '@angular/forms';
         Touched: {{customForm.controls.date.touched}}<br/>
         Dirty: {{customForm.controls.date.dirty}}<br/>
 
-        Selected Date: {{ customForm.controls.date.value.date.toDateString() ? 
-            customForm.controls.date.value.date.toDateString() : 
+        Selected Date: {{ customForm.controls.date.value.toDateString() ? 
+            customForm.controls.date.value.toDateString() : 
             'null' 
         }}
     `
 })
 export class CalendarFormSingleExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl({ date: FdDate.getToday() })
+        date: new FormControl(FdDate.getToday())
     });
 }

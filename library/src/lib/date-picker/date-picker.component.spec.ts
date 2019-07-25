@@ -59,7 +59,7 @@ describe('DatePickerComponent', () => {
         component.inputFieldDate = '';
         component.handleSingleDateChange(date);
         expect(component.inputFieldDate).toBe(dateStr);
-        expect(component.onChange).toHaveBeenCalledWith({date: date});
+        expect(component.onChange).toHaveBeenCalledWith(date);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
@@ -75,21 +75,21 @@ describe('DatePickerComponent', () => {
         expect(component.inputFieldDate).toBe(
             dateStrStart + component.dateAdapter.rangeDelimiter + dateStrLast
         );
-        expect(component.onChange).toHaveBeenCalledWith({date: dateStart, rangeEnd: dateLast});
+        expect(component.onChange).toHaveBeenCalledWith({start: dateStart, end: dateLast});
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith( { start: dateStart, end: dateLast });
     });
 
     it('Should handle correct write value for single mode', () => {
         const date = FdDate.getToday();
         const dateStr = component.dateAdapter.format(date);
-        component.writeValue({date: date});
+        component.writeValue( date);
         expect(component.selectedDate).toEqual(date);
         expect(component.inputFieldDate).toBe(dateStr)
     });
 
     it('Should handle null write value for single mode', () => {
-        component.writeValue({date: null});
-        expect(component.selectedDate).toEqual(null);
+        component.writeValue(null);
+        expect(component.selectedDate).toBeUndefined();
         expect(component.inputFieldDate).toBe('')
     });
 
@@ -99,7 +99,7 @@ describe('DatePickerComponent', () => {
         const dateStrStart = component.dateAdapter.format(dateStart);
         const dateEnd = FdDate.getToday(); dateEnd.month = 12;
         const dateStrEnd = component.dateAdapter.format(dateEnd);
-        component.writeValue({date: dateStart, rangeEnd: dateEnd});
+        component.writeValue({start: dateStart, end: dateEnd});
         expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
         expect(component.inputFieldDate).toBe(
             dateStrStart + component.dateAdapter.rangeDelimiter + dateStrEnd
@@ -110,7 +110,7 @@ describe('DatePickerComponent', () => {
         component.type = 'range';
         const dateStart = null;
         const dateEnd = null;
-        component.writeValue({date: dateStart, rangeEnd: dateEnd});
+        component.writeValue({start: dateStart, end: dateEnd});
         expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
         expect(component.inputFieldDate).toBe('');
     });
@@ -152,7 +152,7 @@ describe('DatePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.month).toBe(date.month);
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(date.year);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
-        expect(component.onChange).toHaveBeenCalledWith({ date: date });
+        expect(component.onChange).toHaveBeenCalledWith(date);
     });
 
     it('Should handle valid range string date', () => {
@@ -168,7 +168,7 @@ describe('DatePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
-        expect(component.onChange).toHaveBeenCalledWith({ date: date1, rangeEnd: date2 });
+        expect(component.onChange).toHaveBeenCalledWith({ start: date1, end: date2 });
     });
 
     it('Should handle valid reversed range string date', () => {
@@ -184,6 +184,6 @@ describe('DatePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.month).toBe(date2.month);
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
-        expect(component.onChange).toHaveBeenCalledWith({ date: date2, rangeEnd: date1 });
+        expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
 });

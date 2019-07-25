@@ -8,7 +8,7 @@ const localized_values = {
         weekdays: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
         months: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
         fullMonths: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
-            'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     }
 };
 
@@ -21,6 +21,7 @@ export class CustomCalendarI18n extends CalendarI18n {
     getDayAriaLabel(date: Date): string {
         return date.getDate() + ' ' + localized_values[this.language].fullMonths[date.getMonth()] + ' ' + date.getFullYear();
     }
+
     getAllFullMonthNames(): string[] {
         return localized_values[this.language].fullMonths;
     }
@@ -53,7 +54,8 @@ export class CustomI18nLabels extends CalendarI18nLabels {
 
 @Component({
     selector: 'fd-datepicker-i18n-example',
-    template: `<fd-date-picker [(ngModel)]="selectedDay"></fd-date-picker>`,
+    template: `
+        <fd-date-picker [(ngModel)]="date"></fd-date-picker>`,
 
     // Note that this can be provided in the root of your application.
     providers: [
@@ -68,7 +70,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class DatePickerI18nExampleComponent {
-    selectedDay = {
-        date: FdDate.getToday()
-    };
+
+    date = FdDate.getToday();
+
 }

@@ -118,6 +118,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
     onChange: Function = () => {
     };
+
     /** @hidden */
     onTouched: Function = () => {
     };
@@ -196,17 +197,24 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      * */
-    writeValue(selected: { date?: FdDate, start?: FdDate, end?: FdDate }): void {
+    writeValue(selected: FdRangeDate | FdDate): void {
         let valid: boolean = true;
         if (selected) {
-            if (selected.date && this.calType === 'single') {
-                valid = selected.date.isDateValid();
-                if (selected.date.isDateValid()) {
-                    this.selectedDate = selected.date;
+            if (this.calType === 'single') {
+                selected = <FdDate>selected;
+
+                valid = selected.isDateValid();
+
+                if (selected.isDateValid()) {
+                    this.selectedDate = selected;
                     this.prepareDisplayedView();
                 }
-            }
-            if ((selected.start || selected.end) && this.calType === 'range') {
+            } else if (this.calType === 'range') {
+                selected = <FdRangeDate>selected;
+
+                if (!selected.start || !selected.end) {
+                    valid = false;
+                }
                 if (selected.start && !selected.start.isDateValid()) {
                     valid = false;
                 }
@@ -251,7 +259,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
      * */
     selectedDateChanged(date: FdDate): void {
         this.selectedDate = date;
-        this.onChange({ date: date });
+        this.onChange(date);
         this.onTouched();
         this.selectedDateChange.emit(date);
         this.closeCalendar.emit();

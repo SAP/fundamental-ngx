@@ -12,11 +12,11 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
         Touched: {{customForm.controls.date.touched}}<br/>
         Dirty: {{customForm.controls.date.dirty}}<br/>
 
-        Selected Date: {{ customForm.controls.date.value.date ? customForm.controls.date.value.date.toDateString() : 'null' }}
+        Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
     `
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl({ date: FdDate.getToday() })
+        date: new FormControl(FdDate.getToday())
     });
 };

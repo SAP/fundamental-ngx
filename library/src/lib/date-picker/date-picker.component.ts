@@ -190,14 +190,14 @@ export class DatePickerComponent implements ControlValueAccessor {
     /** Opens the calendar */
     openCalendar(): void {
         if (!this.disabled) {
-            this.onTouched({ date: this.selectedDate });
+            this.onTouched();
             this.isOpen = true;
         }
     }
 
     /** Toggles the calendar open or closed */
     public toggleCalendar(): void {
-        this.onTouched({ date: this.selectedDate });
+        this.onTouched();
         this.isOpen = !this.isOpen;
     }
 
@@ -217,7 +217,7 @@ export class DatePickerComponent implements ControlValueAccessor {
             this.inputFieldDate = this.dateAdapter.format(date);
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
-            this.onChange({ date: date });
+            this.onChange(date);
         }
     }
 
@@ -235,7 +235,7 @@ export class DatePickerComponent implements ControlValueAccessor {
             ;
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
-            this.onChange({ date: dates.start, rangeEnd: dates.end });
+            this.onChange(this.selectedRangeDate);
         }
     }
 
@@ -272,24 +272,24 @@ export class DatePickerComponent implements ControlValueAccessor {
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
-    writeValue(selected: { date: FdDate, rangeEnd?: FdDate }): void {
+    writeValue(selected: FdRangeDate | FdDate): void {
         if (!selected) {
+            this.inputFieldDate = '';
             return;
         }
         if (this.type.toLocaleLowerCase() === 'single') {
-            this.selectedDate = selected.date;
-            if (selected.date !== null) {
-                this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
-                this.inputFieldDate = this.dateAdapter.format(selected.date);
-            } else {
-                this.inputFieldDate = '';
-            }
+            selected = <FdDate>selected;
+            this.selectedDate = selected;
+            this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
+            this.inputFieldDate = this.dateAdapter.format(selected);
         } else {
-            this.selectedRangeDate = { start: selected.date, end: selected.rangeEnd };
-            if (selected.date !== null) {
+            selected = <FdRangeDate>selected;
+            if (selected.start) {
+                this.selectedRangeDate = { start: selected.start, end: selected.end };
                 this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
-                this.inputFieldDate = this.dateAdapter.format(selected.date) +
-                    this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.rangeEnd);
+                this.inputFieldDate = this.dateAdapter.format(selected.start) +
+                    this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end)
+                ;
             } else {
                 this.inputFieldDate = '';
             }
@@ -311,7 +311,7 @@ export class DatePickerComponent implements ControlValueAccessor {
                 if (!this.isInvalidDateInput && !CalendarService.datesEqual(fdDate, this.selectedDate)) {
                     this.selectedDate = fdDate;
                     this.calendarComponent.setCurrentlyDisplayed(fdDate);
-                    this.onChange({ date: this.selectedDate });
+                    this.onChange(this.selectedDate);
                     this.selectedDateChange.emit(this.selectedDate);
                 } else {
 
@@ -337,7 +337,7 @@ export class DatePickerComponent implements ControlValueAccessor {
                     }
 
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
-                    this.onChange({ date: this.selectedRangeDate.start, rangeEnd: this.selectedRangeDate.end });
+                    this.onChange({ start: this.selectedRangeDate.start, end: this.selectedRangeDate.end });
                     this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
                 }
             }

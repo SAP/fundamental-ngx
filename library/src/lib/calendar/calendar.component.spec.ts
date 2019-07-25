@@ -32,7 +32,7 @@ describe('Calendar2Component', () => {
         spyOn(component.closeCalendar, 'emit');
         spyOn(component, 'onChange');
         component.selectedDateChanged(date);
-        expect(component.onChange).toHaveBeenCalledWith({ date: date });
+        expect(component.onChange).toHaveBeenCalledWith(date);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.closeCalendar.emit).toHaveBeenCalled();
     });
@@ -63,7 +63,7 @@ describe('Calendar2Component', () => {
     it('Should handle write value for single mode when correct', () => {
         spyOn(component.isValidDateChange, 'emit');
         const date = new FdDate(2000, 10, 10);
-        component.writeValue({ date: date });
+        component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
         expect(component.currentlyDisplayed.month).toBe(date.month);
         expect(component.currentlyDisplayed.year).toBe(date.year);
@@ -73,7 +73,7 @@ describe('Calendar2Component', () => {
     it('Should handle write value for single mode when not correct', () => {
         spyOn(component.isValidDateChange, 'emit');
         const invalidDate = new FdDate(2000, 50, 50);
-        component.writeValue({ date: invalidDate });
+        component.writeValue(invalidDate);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.selectedDate).not.toBe(invalidDate);
     });

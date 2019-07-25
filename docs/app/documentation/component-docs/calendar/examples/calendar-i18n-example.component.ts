@@ -54,7 +54,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
 @Component({
     selector: 'fd-calendar-i18n-example',
     template: `
-        <fd-calendar [(ngModel)]="selectedDay"></fd-calendar>`,
+        <fd-calendar [(ngModel)]="date"></fd-calendar>`,
 
     // Note that this can be provided in the root of your application.
     providers: [
@@ -69,7 +69,5 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class CalendarI18nExampleComponent {
-    selectedDay = {
-        date: FdDate.getToday()
-    };
+        date = FdDate.getToday();
 }

@@ -12,16 +12,16 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
         Touched: {{customForm.controls.dates.touched}}<br/>
         Dirty: {{customForm.controls.dates.dirty}}<br/>
 
-        Range Start Date: {{ customForm.controls.dates.value.date ? customForm.controls.dates.value.date.toDateString() : 'null' }}<br/>
-        Range End Date: {{ customForm.controls.dates.value.rangeEnd ? customForm.controls.dates.value.rangeEnd.toDateString() : 'null' }}
+        Range Start Date: {{ customForm.controls.dates.value.start ? customForm.controls.dates.value.start.toDateString() : 'null' }}<br/>
+        Range End Date: {{ customForm.controls.dates.value.end ? customForm.controls.dates.value.end.toDateString() : 'null' }}
     `
 })
 export class DatePickerFormRangeExampleComponent {
 
     customForm = new FormGroup({
         dates: new FormControl({
-            date: FdDate.getToday(),
-            rangeEnd: FdDate.getToday().nextDay()
+            start: FdDate.getToday(),
+            end: FdDate.getToday().nextDay()
         })
     });
 };

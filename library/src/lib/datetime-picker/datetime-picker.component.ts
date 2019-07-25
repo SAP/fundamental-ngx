@@ -18,8 +18,7 @@ import { TimeComponent } from '../time/time.component';
 import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
-import { CalendarService } from '../calendar/calendar.service';
-import { CalendarComponent, FdCalendarView } from '../calendar/calendar.component';
+import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
 
 /**
@@ -114,7 +113,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** The disableFunction for the calendar. */
     @Input()
-    startingDayOfWeek: number = 0;
+    startingDayOfWeek: DaysOfWeek = 1;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
