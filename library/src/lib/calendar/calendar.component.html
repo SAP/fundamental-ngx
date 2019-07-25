@@ -6,7 +6,7 @@
                     (previousClicked)="handlePreviousArrowClick()"
 ></fd-calendar-header>
 <ng-container [ngSwitch]="activeView">
-    <div class="fd-calendar__container">
+    <div class="fd-calendar__content">
         <fd-calendar-day-view *ngSwitchCase="'day'"
                               [selectedDate]="selectedDate"
                               (selectedDateChange)="selectedDateChanged($event)"

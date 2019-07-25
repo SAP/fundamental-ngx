@@ -20,7 +20,7 @@ export class CalendarSingleExampleComponent {
 
     myDisableFunction = function(d: FdDate): boolean {
         const day = d.getDay();
-        return day === 6 || day === 0;
+        return day === 6 || day === 7;
     };
 
     // Block days before/after any day

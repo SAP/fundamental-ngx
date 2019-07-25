@@ -15,7 +15,7 @@
                 [attr.aria-label]="cell.ariaLabel"
                 *ngFor="let cell of row; let cellIndex = index;"
                 [ngClass]="{
-                    'fd-calendar__item-other-month': cell.monthStatus !== 'current',
+                    'fd-calendar__item--other-month': cell.monthStatus !== 'current',
                     'is-selected': cell.selected,
                     'is-selected-range-last': cell.selectedLast,
                     'is-selected-range-first': cell.selectedFirst,
