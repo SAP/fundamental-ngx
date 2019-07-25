@@ -1,4 +1,3 @@
-
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -111,7 +110,8 @@ export const API_FILES = {
         'MenuGroupComponent',
         'MenuItemDirective',
         'MenuListDirective',
-        'MenuTitleDirective'
+        'MenuTitleDirective',
+        'MenuKeyboardService'
     ],
     modal: [
         'ModalRef',

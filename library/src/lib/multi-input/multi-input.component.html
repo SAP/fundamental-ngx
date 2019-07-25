@@ -32,8 +32,8 @@
                      *ngIf="displayedValues && displayedValues.length"
                      [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let value of displayedValues">
-                        <label class="fd-menu__item">
+                    <li *ngFor="let value of displayedValues">
+                        <label fd-menu-item>
                             <input type="checkbox" class="fd-checkbox"
                                    [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                    (ngModelChange)="handleSelect($event, value)">

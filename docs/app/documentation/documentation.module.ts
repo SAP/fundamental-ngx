@@ -354,6 +354,9 @@ import { LocalizationEditorTemplateExampleComponent } from './component-docs/loc
 import { LocalizationEditorTextareaExampleComponent } from './component-docs/localization-editor/examples/localization-editor-textarea-example.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
+
+import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
+
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
 import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
@@ -500,6 +503,7 @@ import { ComboboxTemplateExampleComponent } from './component-docs/combobox/exam
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
+        MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
