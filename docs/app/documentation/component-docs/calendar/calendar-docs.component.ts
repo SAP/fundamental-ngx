@@ -26,47 +26,47 @@ export class CalendarDocsComponent implements OnInit {
 
 // Disable the weekends
 myDisableFunction = function (d: FdDate): boolean {
-    let day = d.toDate().getDay();
+    let day = d.getDay();
     return day === 6 || day === 0;
 }
 
 // Disable any weekday (Monday)
 myDisableFunction2 = function(d: FdDate): boolean {
-    let day = d.toDate().getDay();
+    let day = d.getDay();
     return day === 1;
 }
 
 // Disable past selection
 myDisableFunction = function(d: FdDate): boolean {
-    let today = new Date();
+    let today = FdDate.getToday();
     today.setHours(0,0,0,0);
-    return d.toDate().getTime() < today.getTime();
+    return d.getTimeStamp() < today.getTimeStamp();
 }
 
 // Disable future selection
 myDisableFunction = function(d: FdDate): boolean {
-    let today = new Date();
+    let today = FdDate.getToday();
     today.setHours(0,0,0,0); 
-    return d.toDate().getTime() > today.getTime()
+    return d.getTimeStamp() > today.getTimeStamp()
 }
 
 // Disable days before a particular day
 myDisableFunction = function(d: FdDate): boolean {
-    let day = new Date(2018, 9, 15);
-    return d.toDate().getTime() < day.getTime();
+    let day = new FdDate(2018, 9, 15);
+    return d.getTimeStamp() < day.getTimeStamp();
 }
 
 // Disable days after a particular day
 myDisableFunction = function(d: FdDate): boolean {
-    let day = new Date(2018, 9, 5);
-    return d.toDate().getTime() > day.getTime()
+    let day = new FdDate(2018, 9, 5);
+    return d.getTimeStamp() > day.getTimeStamp()
 }
 
 // Disable days within a range
 myDisableFunction = function(d: FdDate): boolean {
-    let firstDay = new Date(2018, 7, 5);
-    let lastDay = new Date(2018, 7, 20);
-    return d.toDate().getTime() > firstDay.getTime() && d.toDate().getTime() < lastDay.getTime()
+    let firstDay = new FdDate(2018, 7, 5);
+    let lastDay = new FdDate(2018, 7, 20);
+    return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp()
 }`;
 
     constructor() {}

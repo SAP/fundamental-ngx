@@ -64,7 +64,7 @@ export class FdDate {
      * Get amount of milliseconds from 01.01.1970
      * */
     public getTimeStamp(): number {
-        return this.toDate().valueOf();
+        return this.toDate().getTime();
     }
 
     /**
