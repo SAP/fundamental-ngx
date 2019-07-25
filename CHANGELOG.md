@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.1-rc.3"></a>
+## [0.8.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.2...v0.8.1-rc.3) (2019-07-25)
+
+
+### Bug Fixes
+
+* add keyboard support to menu component ([#1005](https://github.com/SAP/fundamental-ngx/issues/1005)) ([dac28a8](https://github.com/SAP/fundamental-ngx/commit/dac28a8))
+
+
+
 <a name="0.8.1-rc.2"></a>
 ## [0.8.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.1...v0.8.1-rc.2) (2019-07-24)
 
