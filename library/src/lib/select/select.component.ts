@@ -105,7 +105,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     private selected: OptionComponent;
 
     /** Subject triggered when the component is destroyed. */
-    private readonly destroy$ = new Subject<void>();
+    private readonly destroy$: Subject<void> = new Subject<void>();
 
     /** Observable triggered when an option has its selectedChange event fire. */
     private readonly optionsStatusChanges: Observable<OptionComponent> = defer(() => {

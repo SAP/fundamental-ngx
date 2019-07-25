@@ -6,7 +6,7 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    HostListener, isDevMode,
+    HostListener,
     OnDestroy,
     OnInit,
     Optional,
