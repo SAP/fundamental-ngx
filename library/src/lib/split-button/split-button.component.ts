@@ -1,5 +1,6 @@
 import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
+import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -51,36 +52,50 @@ export class SplitButtonComponent {
     focusTrapped: boolean = false;
 
     /** Whether to apply compact mode to the button. */
-    @Input() compact: boolean;
+    @Input()
+    compact: boolean;
 
     /** The icon to include in the button. See the icon page for the list of icons. */
-    @Input() glyph: string = 'slim-arrow-down';
+    @Input()
+    glyph: string = 'slim-arrow-down';
 
     /** The icon to include in the button. See the icon page for the list of icons. */
-    @Input() disabled: boolean;
+    @Input()
+    disabled: boolean;
 
     /** The Title for main  action button */
-    @Input() mainActionTitle: string;
+    @Input()
+    mainActionTitle: string;
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
-    @Input() fdType: string;
+    @Input()
+    fdType: string;
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() options: string | string[];
-
-    /** Whether the Menu should try to have the same width as the whole split button. */
     @Input()
-    fillControl: boolean = true;
+    options: string | string[];
+
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
 
     /** @hidden */
-    @Input() isOpen: boolean = false;
+    @Input()
+    isOpen: boolean = false;
 
     /** Event sent when is open popover changed */
-    @Output() isOpenChange = new EventEmitter<boolean>();
+    @Output()
+    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event sent when primary button is clicked */
-    @Output() primaryButtonClicked = new EventEmitter<boolean>();
+    @Output()
+    readonly primaryButtonClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      *  Handles primary button click

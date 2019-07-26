@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
+import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -101,6 +102,15 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** Aria label for the multi input body. */
     @Input()
     multiInputBodyLabel: string = 'Multi input body';
+
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()

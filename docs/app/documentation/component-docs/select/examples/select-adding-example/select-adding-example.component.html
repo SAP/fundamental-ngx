@@ -1,0 +1,14 @@
+<div class="example-div">
+    <button fd-button (click)="addOption()">Add Option</button>
+    <button fd-button (click)="removeOption()">Remove Option</button>
+    <p>Selected Value: {{selectValue}}</p>
+</div>
+
+<fd-select [(value)]="selectValue" placeholder="Select an option...">
+    <div style="max-height: 200px; overflow: auto;">
+        <fd-option *ngFor="let option of options"
+                   [value]="option">
+            {{option}}
+        </fd-option>
+    </div>
+</fd-select>

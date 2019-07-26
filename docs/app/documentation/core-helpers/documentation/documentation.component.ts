@@ -42,6 +42,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'pagination', name: 'Pagination' },
         { url: 'popover', name: 'Popover' },
         { url: 'searchInput', name: 'Search Input' },
+        { url: 'select', name: 'Select' },
         { url: 'shellbar', name: 'Shellbar' },
         { url: 'sideNavigation', name: 'Side Navigation' },
         { url: 'table', name: 'Table' },

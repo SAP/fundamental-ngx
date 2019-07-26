@@ -1,0 +1,24 @@
+<p>Selected Value: {{this.value}}</p>
+<fd-select [(value)]="value" placeholder="Select an option...">
+    <div style="max-height: 200px; overflow: auto;">
+        <div>
+            <p class="fd-menu__title">
+                <fd-icon [glyph]="'arrow-right'"></fd-icon>
+                Some random text
+            </p>
+            <fd-option value="Salad">
+                Salad
+            </fd-option>
+            <p class="fd-menu__title">
+                <fd-icon [glyph]="'arrow-right'"></fd-icon>
+                Some more random text
+            </p>
+        </div>
+
+        <!-- From an array of strings in the ts file -->
+        <fd-option *ngFor="let option of options"
+                   [value]="option.value" [viewValue]="option.viewValue">
+            {{option.name}}
+        </fd-option>
+    </div>
+</fd-select>

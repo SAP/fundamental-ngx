@@ -22,6 +22,7 @@
         "release:create": "create-release",
         "start": "npm run build-doc && ng serve",
         "test": "ng test fundamental-ngx --watch false --code-coverage true --browsers=ChromeHeadless",
+        "active-test": "ng test fundamental-ngx --watch true --browsers=ChromeHeadless",
         "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
         "compile-typedoc": "rm -rf docs/assets/typedoc && typedoc --out docs/assets/typedoc library/src/lib --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc",
         "compile-typedoc-json": "typedoc --json docs/assets/typedoc/typedoc.json --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc library/src/lib"

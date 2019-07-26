@@ -92,6 +92,8 @@ import {
     TabNavigationExampleChildFirst,
     TabNavigationExampleChildSecond, TabNavigationExampleChildThird
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
+import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
+import { SelectDocsComponent } from './component-docs/select/select-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -262,6 +264,11 @@ export const ROUTES: Routes = [
             { path: 'sideNavigation', component: SideNavigationHeaderComponent, children: [
                     { path: '', component: SideNavigationDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.sideNavigation}}
+                ]
+            },
+            { path: 'select', component: SelectHeaderComponent, children: [
+                    { path: '', component: SelectDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.select}}
                 ]
             },
             { path: 'splitButton', component: SplitButtonHeaderComponent, children: [
