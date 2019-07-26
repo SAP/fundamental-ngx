@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { CopyService } from '../../services/copy.service';
+import { ExampleFile } from './example-file';
 
 @Component({
     selector: 'code-example',
@@ -9,24 +10,27 @@ import { CopyService } from '../../services/copy.service';
 export class CodeExampleComponent implements OnInit {
 
     /**
-     * Code to highlight.
+     * List of files to display in this code example.
      */
-    @Input() code: string;
-
-    /**
-     * Language to limit the auto-detection to.
-     */
-    @Input() language: string;
+    @Input()
+    exampleFiles: ExampleFile[] = [];
 
     smallScreen: boolean;
+
+    selectedFileIndex: number = 0;
 
     constructor(private element: ElementRef, private copyService: CopyService) {}
 
     copyText(): void {
-        this.copyService.copyText(this.code);
+        this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code);
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        this.smallScreen = window.innerWidth <= 768;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize() {
         this.smallScreen = window.innerWidth <= 768;
     }
 }

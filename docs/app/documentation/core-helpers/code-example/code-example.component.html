@@ -1,14 +1,28 @@
 <div class="docs-html-example-container">
-    <button fd-button
-            *ngIf="!this.smallScreen"
-            (click)="copyText()"
-            class="docs-example-copy-button"
-            [glyph]="'copy'"
-            [title]="'Copy example to clipboard'">
-    </button>
-    <pre>
-        <code [highlight]="code" [languages]="[language]"></code>
-    </pre>
+    <div class="docs-code-example-toolbar">
+        <button fd-button fdType="light">
+            <fd-icon [glyph]="'navigation-down-arrow'"></fd-icon>
+            Show Code
+        </button>
+        <div>
+            <button fd-button glyph="copy"
+                    title="Copy example to clipboard"
+                    (click)="copyText()">
+                Copy
+            </button>
+            <button fd-button glyph="play">Run</button>
+        </div>
+    </div>
+    <div class="docs-code-example-content">
+        <fd-tab-list [(selectedIndex)]="selectedFileIndex">
+            <fd-tab *ngFor="let file of exampleFiles"
+                    [title]="file.name">
+                <pre>
+                    <code [highlight]="file.code" [languages]="[file.language]"></code>
+                </pre>
+            </fd-tab>
+        </fd-tab-list>
+    </div>
 </div>
 
 
