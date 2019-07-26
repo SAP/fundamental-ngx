@@ -30,7 +30,8 @@ describe('ComboboxComponent', () => {
         fixture = TestBed.createComponent(ComboboxComponent);
         component = fixture.componentInstance;
         component.dropdownValues = [
-            {text: 'Apple', callback: () => {}}
+            'Apple',
+            'Banana'
         ];
         component.searchFunction = () => {};
         fixture.detectChanges();
@@ -50,120 +51,53 @@ describe('ComboboxComponent', () => {
         expect(component.searchFunction).toHaveBeenCalled();
         event.code = 'ArrowDown';
         spyOn(event, 'preventDefault');
-        spyOn(component.menuItems.first.itemEl.nativeElement.children[0], 'focus');
+        spyOn(component.menuItems.first, 'focus');
         component.onInputKeydownHandler(event);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.menuItems.first.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
+        expect(component.menuItems.first.focus).toHaveBeenCalled();
     });
 
     it('should fire selected event onMenuKeydownHandler, arrow down', () => {
         component.inputText = 'test';
-        const event = {
+        const event: any = {
             code: 'Enter',
             preventDefault: () => {}
         };
         const term = 'test';
         component.dropdownValues = [term];
         spyOn(component.itemClicked, 'emit');
-        component.onMenuKeydownHandler(event, term);
+        component.onMenuKeydownHandler(event, 0);
         expect(component.itemClicked.emit).toHaveBeenCalled();
         spyOn(event, 'preventDefault');
-        const item1 = <MenuItemDirective>{
-            itemEl: {
-                nativeElement: {
-                    children: [
-                        jasmine.createSpyObj(['focus'])
-                    ]
-                }
-            }
-        };
-        const item2 = <MenuItemDirective>{
-            itemEl: {
-                nativeElement: {
-                    children: [
-                        jasmine.createSpyObj(['focus'])
-                    ]
-                }
-            }
-        };
-        spyOn(component.menuItems, 'toArray').and.returnValue([
-            item1,
-            item2
-        ]);
-        spyOnProperty(document, 'activeElement').and.returnValue(item1.itemEl.nativeElement.children[0]);
+        spyOn(component.menuItems.toArray()[1], 'focus');
         event.code = 'ArrowDown';
-        component.onMenuKeydownHandler(event);
+        component.onMenuKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(item2.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
+        expect(component.menuItems.toArray()[1].focus).toHaveBeenCalled();
     });
 
     it('should handle onMenuKeydownHandler, arrow up', () => {
-        const event = {
+        const event: any = {
             code: 'ArrowUp',
             preventDefault: () => {}
         };
+        spyOn(component.menuItems.first, 'focus');
         spyOn(event, 'preventDefault');
-        const item1 = <MenuItemDirective>{
-            itemEl: {
-                nativeElement: {
-                    children: [
-                        jasmine.createSpyObj(['focus'])
-                    ]
-                }
-            }
-        };
-        const item2 = <MenuItemDirective>{
-            itemEl: {
-                nativeElement: {
-                    children: [
-                        jasmine.createSpyObj(['focus'])
-                    ]
-                }
-            }
-        };
-        spyOn(component.menuItems, 'toArray').and.returnValue([
-            item1,
-            item2
-        ]);
-        spyOnProperty(document, 'activeElement').and.returnValue(item2.itemEl.nativeElement.children[0]);
         event.code = 'ArrowUp';
-        component.onMenuKeydownHandler(event);
+        component.onMenuKeydownHandler(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(item1.itemEl.nativeElement.children[0].focus).toHaveBeenCalled();
+        expect(component.menuItems.first.focus).toHaveBeenCalled();
     });
 
     it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
-        const event = {
+        const event: any = {
             code: 'ArrowUp',
             preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
-        const item1 = <MenuItemDirective>{
-            itemEl: {
-                nativeElement: {
-                    children: [
-                        jasmine.createSpyObj(['focus'])
-                    ]
-                }
-            }
-        };
-        const item2 = <MenuItemDirective>{
-            itemEl: {
-                nativeElement: {
-                    children: [
-                        jasmine.createSpyObj(['focus'])
-                    ]
-                }
-            }
-        };
-        spyOn(component.menuItems, 'toArray').and.returnValue([
-            item1,
-            item2
-        ]);
-        spyOnProperty(document, 'activeElement').and.returnValue(item1.itemEl.nativeElement.children[0]);
         spyOn(component.searchInputElement.nativeElement, 'focus');
         event.code = 'ArrowUp';
-        component.onMenuKeydownHandler(event);
+        component.onMenuKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });
