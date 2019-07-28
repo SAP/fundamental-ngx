@@ -1,8 +1,9 @@
 <div class="docs-code-example-toolbar">
-    <button fd-button fdType="light"
+    <button fd-button
+            fdType="light"
             [glyph]="expandIcon"
             (click)="isOpen = !isOpen">
-        Show Code
+        {{isOpen ? 'Hide' : 'Show'}} Code
     </button>
     <div>
         <button fd-button glyph="copy"
