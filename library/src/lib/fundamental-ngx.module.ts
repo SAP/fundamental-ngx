@@ -31,6 +31,7 @@ import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { SearchInputModule } from './search-input/search-input.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
+import { SelectModule } from './select/select.module';
 import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
@@ -78,6 +79,7 @@ import { LocalizationEditorModule } from './localizator-editor/localization-edit
         PopoverModule,
         ScrollSpyModule,
         SearchInputModule,
+        SelectModule,
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,

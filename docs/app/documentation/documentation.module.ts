@@ -315,6 +315,14 @@ import { DatePickerI18nExampleComponent } from './component-docs/date-picker/exa
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
+import { SelectDocsComponent } from './component-docs/select/select-docs.component';
+import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
+import { SelectBasicExampleComponent } from './component-docs/select/examples/select-basic-example/select-basic-example.component';
+import { SelectProgrammaticExampleComponent } from './component-docs/select/examples/select-programmatic-example/select-programmatic-example.component';
+import { SelectNestedOptionsComponent } from './component-docs/select/examples/select-nested-options/select-nested-options.component';
+import { SelectCustomTriggerComponent } from './component-docs/select/examples/select-custom-trigger/select-custom-trigger.component';
+import { SelectAddingExampleComponent } from './component-docs/select/examples/select-adding-example/select-adding-example.component';
+import { SelectFormsComponent } from './component-docs/select/examples/select-forms/select-forms.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { TableCdkExampleComponent } from './component-docs/table/examples/table-cdk-example.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -362,6 +370,7 @@ import { ComboboxAsyncExampleComponent } from './component-docs/combobox/example
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
+import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
 
 @NgModule({
     declarations: [
@@ -655,7 +664,16 @@ import { ComboboxTemplateExampleComponent } from './component-docs/combobox/exam
         DatePickerFormatExampleComponent,
         SearchPipe,
         ModalPositionExampleComponent,
-        ContainerComponent
+        ContainerComponent,
+        SelectDocsComponent,
+        SelectHeaderComponent,
+        SelectBasicExampleComponent,
+        SelectProgrammaticExampleComponent,
+        SelectNestedOptionsComponent,
+        SelectCustomTriggerComponent,
+        SelectAddingExampleComponent,
+        SelectFormsComponent,
+        SelectViewValueExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

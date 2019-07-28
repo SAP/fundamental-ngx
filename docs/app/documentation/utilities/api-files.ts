@@ -158,6 +158,10 @@ export const API_FILES = {
     searchInput: [
         'SearchInputComponent'
     ],
+    select: [
+        'SelectComponent',
+        'OptionComponent'
+    ],
     shellbar: [
         'CopilotComponent',
         'ProductMenuComponent',

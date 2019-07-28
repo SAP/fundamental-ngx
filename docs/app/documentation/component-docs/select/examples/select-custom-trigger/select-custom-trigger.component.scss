@@ -1,0 +1,13 @@
+.example-trigger {
+    padding: 8px 12px;
+    display: block;
+    border-radius: 6px;
+    border: 1px dashed grey;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.example-trigger:focus {
+    outline: none;
+    border: 1px solid var(--fd-color-action-hover);
+}

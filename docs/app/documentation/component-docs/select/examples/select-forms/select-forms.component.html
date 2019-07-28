@@ -1,0 +1,12 @@
+<form [formGroup]="customForm">
+    <fd-select formControlName="selectControl">
+        <fd-option value="apple">Apple</fd-option>
+        <fd-option value="pineapple">Pineapple</fd-option>
+        <fd-option value="kiwi">Kiwi</fd-option>
+        <fd-option value="strawberry">Strawberry</fd-option>
+    </fd-select>
+</form>
+
+Selected Value: {{customForm.controls.selectControl.value}} <br />
+Touched: {{customForm.touched}} <br />
+Dirty: {{customForm.dirty}} <br />

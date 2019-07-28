@@ -1,0 +1,21 @@
+.fd-option-default-custom {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+
+    &:focus {
+        color: var(--fd-color-text-1);
+        background-color: var(--fd-color-background-hover);
+        outline: none;
+    }
+}
+
+.fd-option-default-custom.is-disabled {
+    // TODO
+}
+
+.fd-option-default-custom.is-selected {
+    &:focus {
+        background-color: var(--fd-color-background-selected-hover);
+    }
+}

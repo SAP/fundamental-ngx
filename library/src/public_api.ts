@@ -34,6 +34,7 @@ export * from './lib/scroll-spy/public_api';
 export * from './lib/search-input/public_api';
 export * from './lib/shellbar/public_api';
 export * from './lib/side-navigation/public_api';
+export * from './lib/select/public_api';
 export * from './lib/split-button/public_api';
 export * from './lib/table/public_api';
 export * from './lib/tabs/public_api';

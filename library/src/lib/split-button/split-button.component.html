@@ -1,12 +1,18 @@
-<fd-popover [(isOpen)]="isOpen" [focusTrapped]="focusTrapped"
-            [closeOnEscapeKey]="closeOnEscapeKey" [closeOnOutsideClick]="closeOnOutsideClick"
-            [disabled]="disabled" [triggers]="triggers" [fillControl]="fillControl" >
+<fd-popover [(isOpen)]="isOpen"
+            [focusTrapped]="focusTrapped"
+            [closeOnEscapeKey]="closeOnEscapeKey"
+            [closeOnOutsideClick]="closeOnOutsideClick"
+            [disabled]="disabled"
+            [triggers]="triggers"
+            [fillControlMode]="fillControlMode">
     <fd-popover-control>
         <div class="fd-button-split">
-            <button fd-button [fdType]="fdType" [options]="options"
+            <button fd-button
+                    [fdType]="fdType"
+                    [options]="options"
                     [compact]="compact"
-                    (click)="buttonClick($event)" [disabled]="disabled"
-            >
+                    (click)="buttonClick($event)"
+                    [disabled]="disabled">
                 <ng-container *ngIf="titleTemplate">
                     <ng-container [fd-split-button-load-action-title]="titleTemplate"></ng-container>
                 </ng-container>
@@ -18,7 +24,9 @@
                     [attr.aria-expanded]="disabled ? false : isOpen"
                     [attr.aria-disabled]="disabled"
                     aria-haspopup="true"
-                    [fdType]="fdType" [options]="options" [compact]="compact"
+                    [fdType]="fdType"
+                    [options]="options"
+                    [compact]="compact"
                     [glyph]="glyph">
             </button>
         </div>
