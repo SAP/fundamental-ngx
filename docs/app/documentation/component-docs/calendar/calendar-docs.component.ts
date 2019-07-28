@@ -63,7 +63,7 @@ myDisableFunction = function(d: Date): boolean {
         language: 'typescript',
         code: calendarSingleSrc
     }, {
-        language: 'html',
+        language: 'typescript',
         code: this.exampleFunctionsHtml,
         name: 'Example Block/Disable Functions'
     }];
