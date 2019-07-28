@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
 
@@ -17,30 +17,72 @@ import * as selectFormSrcT from '!raw-loader!./examples/select-forms/select-form
 
 import * as selectViewValueH from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.html';
 import * as selectViewValueT from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
     styleUrls: ['./select-docs.component.scss']
 })
-export class SelectDocsComponent implements OnInit {
+export class SelectDocsComponent {
 
-    selectBasicHtml = selectBasicSrc;
-    selectProgHtml = selectProgSrcH;
-    selectProgTs = selectProgSrcT;
-    selectNestedHtml = selectNestedSrcH;
-    customTriggerHtml = customTriggerSrcH;
-    selectAddingHtml = selectAddingSrcH;
-    selectAddingTs = selectAddingSrcT;
-    selectFormHtml = selectFormSrcH;
-    selectFormTs = selectFormSrcT;
-    selectViewValueHtml = selectViewValueH;
-    selectViewValueTs = selectViewValueT;
+    selectBasic: ExampleFile[] = [{
+        language: 'html',
+        code: selectBasicSrc
+    }];
 
-    constructor() {
-    }
+    selectProg: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectProgSrcH,
+        },
+        {
+            language: 'typescript',
+            code: selectProgSrcT
+        }
+    ];
 
-    ngOnInit() {
-    }
+    selectNested: ExampleFile[] = [{
+        language: 'html',
+        code: selectNestedSrcH
+    }];
+
+    customTrigger: ExampleFile[] = [{
+        language: 'html',
+        code: customTriggerSrcH
+    }];
+
+    selectAdding: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectAddingSrcH,
+        },
+        {
+            language: 'typescript',
+            code: selectAddingSrcT
+        }
+    ];
+
+    selectForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectFormSrcH,
+        },
+        {
+            language: 'typescript',
+            code: selectFormSrcT
+        }
+    ];
+
+    selectViewValue: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectViewValueH,
+        },
+        {
+            language: 'typescript',
+            code: selectViewValueT
+        }
+    ];
 
 }
