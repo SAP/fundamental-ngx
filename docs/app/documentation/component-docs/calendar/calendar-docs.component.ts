@@ -4,17 +4,13 @@ import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
 import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
 import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html'
 })
 export class CalendarDocsComponent implements OnInit {
-
-    calendarSingleSource = calendarSingleSrc;
-    calendarRangeSource = calendarRangeSrc;
-    calendarMondayStartSource = calendarMondayStartSrc;
-    calendari18nTs = calendarIntlSrc;
 
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
@@ -62,6 +58,30 @@ myDisableFunction = function(d: Date): boolean {
     let lastDay = new Date(2018, 7, 20);
     return d.getTime() > firstDay.getTime() && d.getTime() < lastDay.getTime()
 }`;
+
+    calendarSingleSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarSingleSrc
+    }, {
+        language: 'html',
+        code: this.exampleFunctionsHtml,
+        name: 'Example Block/Disable Functions'
+    }];
+
+    calendarRangeSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarRangeSrc
+    }];
+
+    calendarMondayStartSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarMondayStartSrc
+    }];
+
+    calendari18n: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarIntlSrc
+    }];
 
     constructor() {}
 

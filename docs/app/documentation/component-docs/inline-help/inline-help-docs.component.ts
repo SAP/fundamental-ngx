@@ -5,6 +5,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
 import Popper from 'popper.js';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-inline-help',
@@ -42,8 +43,15 @@ export class InlineHelpDocsComponent implements OnInit {
         }
     };
 
-    inlineHelpHtml = inlineHelpSrc;
-    inlineHelpTriggerHtml = inlineHelpTriggerHtml;
+    inlineHelpBasic: ExampleFile[] = [{
+        language: 'html',
+        code: inlineHelpSrc
+    }];
+
+    inlineHelpTrigger: ExampleFile[] = [{
+        language: 'html',
+        code: inlineHelpTriggerHtml
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inlineHelp');
@@ -53,5 +61,6 @@ export class InlineHelpDocsComponent implements OnInit {
         this.data = data;
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 }

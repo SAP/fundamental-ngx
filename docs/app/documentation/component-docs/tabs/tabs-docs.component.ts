@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -8,12 +8,13 @@ import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-e
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
 import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-tabs',
     templateUrl: './tabs-docs.component.html'
 })
-export class TabsDocsComponent implements OnInit {
+export class TabsDocsComponent {
     static schema: Schema = {
         properties: {
             properties: {
@@ -87,16 +88,36 @@ export class TabsDocsComponent implements OnInit {
         }
     };
 
-    tabHtml = tabSrc;
+    tabExample: ExampleFile[] = [{
+        language: 'html',
+        code: tabSrc
+    }];
 
-    complexH = complexTabH;
+    complexHeader: ExampleFile[] = [{
+        language: 'html',
+        code: complexTabH
+    }];
 
-    navigationTab = navigationTab;
+    navigationTab: ExampleFile[] = [{
+        language: 'html',
+        code: navigationTab
+    }];
 
-    addingH = tabAddH;
-    addingT = tabAddT;
+    addingTab: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabAddH,
+        },
+        {
+            language: 'typescript',
+            code: tabAddT
+        }
+    ];
 
-    selectTabByIdHtml = tabSelectionSrc;
+    tabSelection: ExampleFile[] = [{
+        language: 'html',
+        code: tabSelectionSrc
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tabs');
@@ -105,5 +126,5 @@ export class TabsDocsComponent implements OnInit {
     onSchemaValues(data) {
         this.data = data;
     }
-    ngOnInit() {}
+
 }

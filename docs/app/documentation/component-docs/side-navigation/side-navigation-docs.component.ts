@@ -1,27 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-example.component.html';
 import * as sideNavigationCollapsedSrc from '!raw-loader!./examples/side-navigation-collapsed-example.component.html';
 import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
 import * as sideNavigationLevelsSrc from '!raw-loader!./examples/side-navigation-levels-example.component.html';
 import * as sideNavigationTitlesSrc from '!raw-loader!./examples/side-navigation-titles-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-side-navigation',
     templateUrl: './side-navigation-docs.component.html'
 })
-export class SideNavigationDocsComponent implements OnInit {
-    oneLevelSideNavHtml = sideNavigationSrc;
+export class SideNavigationDocsComponent {
 
-    titlesSideNavHtml = sideNavigationTitlesSrc;
+    oneLevelSideNav: ExampleFile[] = [{
+        language: 'html',
+        code: sideNavigationSrc
+    }];
 
-    multiLevelsSideNavHtml = sideNavigationLevelsSrc;
+    titlesSideNav: ExampleFile[] = [{
+        language: 'html',
+        code: sideNavigationTitlesSrc
+    }];
 
-    iconsSideNavHtml = sideNavigationIconsSrc;
+    multiLevelsSideNav: ExampleFile[] = [{
+        language: 'html',
+        code: sideNavigationLevelsSrc
+    }];
 
-    collapsedSideNavHtml = sideNavigationCollapsedSrc;
+    iconsSideNav: ExampleFile[] = [{
+        language: 'html',
+        code: sideNavigationIconsSrc
+    }];
 
-    constructor() {}
+    collapsedSideNav: ExampleFile[] = [{
+        language: 'html',
+        code: sideNavigationCollapsedSrc
+    }];
 
-    ngOnInit() {}
 }

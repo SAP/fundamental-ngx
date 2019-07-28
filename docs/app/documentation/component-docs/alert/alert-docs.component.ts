@@ -8,6 +8,7 @@ import * as alertContent from '!raw-loader!./examples/alert-content.component.ts
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
 import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-alert',
@@ -64,12 +65,37 @@ export class AlertDocsComponent {
         }
     };
 
-    alertHtml = alertExampleHtml;
-    alertTs = alertExampleTs;
-    alertContentTs = alertContent;
-    alertComponentAsContentTs = alertComponentAsContentExample;
-    alertComponentAsContentHtml = alertComponentAsContentExampleH;
-    alertInlineHtml = alertInlineExampleHtml;
+    alertBasicExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: alertExampleHtml
+        },
+        {
+            language: 'typescript',
+            code: alertExampleTs
+        }
+    ];
+
+    alertComponentContentExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: alertComponentAsContentExampleH
+        },
+        {
+            language: 'typescript',
+            code: alertComponentAsContentExample
+        },
+        {
+            language: 'typescript',
+            code: alertContent,
+            name: 'Alert Content'
+        }
+    ];
+
+    alertInlineExample: ExampleFile[] = [{
+        language: 'html',
+        code: alertInlineExampleHtml
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');

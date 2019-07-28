@@ -4,6 +4,7 @@ import * as simpleH from '!raw-loader!./examples/popover-directive-example/popov
 import * as triggerH from '!raw-loader!./examples/popover-triggers/popover-triggers.component.html';
 import * as programH from '!raw-loader!./examples/popover-programmatic/popover-programmatic.component.html';
 import * as fillH from '!raw-loader!./examples/popover-fill/popover-fill.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-popover-directive',
@@ -11,8 +12,25 @@ import * as fillH from '!raw-loader!./examples/popover-fill/popover-fill.compone
     styleUrls: ['./popover-directive-docs.component.scss']
 })
 export class PopoverDirectiveDocsComponent {
-    simplePopoverH = simpleH;
-    triggerPopoverH = triggerH;
-    programmaticPopoverH = programH;
-    fillControlPopoverH = fillH;
+
+    simplePopover: ExampleFile[] = [{
+        language: 'html',
+        code: simpleH
+    }];
+
+    triggerPopover: ExampleFile[] = [{
+        language: 'html',
+        code: triggerH
+    }];
+
+    programmaticPopover: ExampleFile[] = [{
+        language: 'html',
+        code: programH
+    }];
+
+    fillControlPopover: ExampleFile[] = [{
+        language: 'html',
+        code: fillH
+    }];
+
 }

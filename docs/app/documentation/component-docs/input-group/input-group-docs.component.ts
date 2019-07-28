@@ -10,6 +10,7 @@ import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-exam
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
 import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts'
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html'
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-input-group',
@@ -698,20 +699,46 @@ export class InputGroupDocsComponent {
         }
     };
 
-    textAddOnHtml = inputGroupTextSrc;
+    textAddOn: ExampleFile[] = [{
+        language: 'html',
+        code: inputGroupTextSrc
+    }];
 
-    iconAddOnHtml = inputGroupIconSrc;
+    iconAddOn: ExampleFile[] = [{
+        language: 'html',
+        code: inputGroupIconSrc
+    }];
 
-    buttonIconAddOnHtml = inputGroupButtonSrc;
+    buttonIconAddOn: ExampleFile[] = [{
+        language: 'html',
+        code: inputGroupButtonSrc
+    }];
 
-    numberInputHtml = inputGroupNumberSrc;
+    numberInput: ExampleFile[] = [{
+        language: 'html',
+        code: inputGroupNumberSrc
+    }];
 
-    searchInputHtml = inputGroupSearchSrc;
+    searchInput: ExampleFile[] = [{
+        language: 'html',
+        code: inputGroupSearchSrc
+    }];
 
-    textCompactHtml = inputGroupTextCompactSrc;
+    textCompact: ExampleFile[] = [{
+        language: 'html',
+        code: inputGroupTextCompactSrc
+    }];
 
-    formInputTs = formInputTsSrc;
-    formInputHtml = formInputHtmlSrc;
+    formInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formInputHtmlSrc
+        },
+        {
+            language: 'typescript',
+            code: formInputTsSrc
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inputGroup');

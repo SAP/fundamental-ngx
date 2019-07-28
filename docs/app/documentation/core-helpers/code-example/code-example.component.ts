@@ -1,11 +1,15 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
+import { AlertService } from '../../../../../library/src/lib/alert/alert-service/alert.service';
+import { height } from '../../utilities/animations/collapse';
 
 @Component({
     selector: 'code-example',
     templateUrl: './code-example.component.html',
-    styleUrls: ['./code-example.component.scss']
+    styleUrls: ['./code-example.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [height({time: 200})]
 })
 export class CodeExampleComponent implements OnInit {
 
@@ -19,10 +23,19 @@ export class CodeExampleComponent implements OnInit {
 
     selectedFileIndex: number = 0;
 
-    constructor(private element: ElementRef, private copyService: CopyService) {}
+    isOpen: boolean = false;
+
+    constructor(private element: ElementRef,
+                private copyService: CopyService,
+                private alertService: AlertService) {}
+
+    get expandIcon(): string {
+        return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
+    }
 
     copyText(): void {
         this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code);
+        this.alertService.open('Code copied!', {type: 'success', duration: 5000});
     }
 
     ngOnInit(): void {
