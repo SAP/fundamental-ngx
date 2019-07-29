@@ -24,7 +24,7 @@
                (ngModelChange)="hourModelChange()"
                class="fd-form__control"
                type="number"
-               placeholder="hh"
+               placeholder="{{timeI18n?.hoursPlaceholder}}"
                [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
     </div>
     <div class="fd-time__control">
@@ -53,7 +53,7 @@
                [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
                class="fd-form__control"
                type="number"
-               placeholder="mm"
+               placeholder="{{timeI18n?.minutesPlaceholder}}"
                [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
     </div>
     <div class="fd-time__control">
@@ -82,7 +82,7 @@
                [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
                class="fd-form__control"
                type="number"
-               placeholder="ss"
+               placeholder="{{timeI18n?.secondsPlaceholder}}"
                (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"
                [attr.aria-label]="timeI18nLabels?.secondsLabel"/>
     </div>
@@ -107,13 +107,13 @@
                 [attr.aria-label]="timeI18nLabels?.increasePeriodLabel"></button>
     </div>
     <div class="fd-time__input">
-        <input [(ngModel)]="period"
+        <input [ngModel]="period"
                [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}"
                class="fd-form__control"
                (blur)="inputBlur('period')"
-               (ngModelChange)="periodModelChange()"
+               (ngModelChange)="periodModelChange($event)"
                type="text"
-               placeholder="am"
+               placeholder="{{timeI18n.meridianPlaceholder}}"
                [attr.aria-label]="timeI18nLabels?.periodLabel"/>
     </div>
     <div class="fd-time__control">
