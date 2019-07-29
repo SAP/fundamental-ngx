@@ -1,0 +1,18 @@
+<div class="fd-calendar__years">
+    <ul class="fd-calendar__list">
+        <li class="fd-calendar__item"
+            *ngFor="let year of calendarYearList; let i = index"
+            [ngClass]="{
+                'is-selected': (year == yearSelected),
+                'fd-calendar__item--current': (year == currentYear)
+            }"
+            [attr.id]="id + '-fd-year-' + i"
+            [attr.tabindex]="year === yearSelected ? 0 : -1"
+            (keydown)="onKeydownYearHandler($event, i)"
+            (click)="selectYear(year, $event)">
+            <span role="button" class="fd-calendar__text">
+                {{ year }}
+            </span>
+        </li>
+    </ul>
+</div>

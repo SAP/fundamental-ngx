@@ -1,6 +1,7 @@
 <fd-popover [(isOpen)]="isOpen"
             [triggers]="[]"
             [placement]="placement"
+            [closeOnEscapeKey]="true"
             [disabled]="disabled">
     <fd-popover-control>
         <div class="fd-input-group fd-input-group--after"
@@ -10,14 +11,14 @@
                    [attr.aria-label]="dateInputLabel"
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
-                   (keyup.enter)="getInputValue(datePicker.value)"
-                   (blur)="getInputValue(datePicker.value)"
-                   (click)="openCalendar(datePicker.value)"
+                   (keyup.enter)="handleInputChange(datePicker.value)"
+                   (blur)="handleInputChange(datePicker.value)"
+                   (click)="openCalendar()"
                    [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button [disabled]="disabled" class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
-                            (click)="toggleCalendar(datePicker.value)" [attr.aria-label]="displayCalendarToggleLabel"
+                            (click)="toggleCalendar()" [attr.aria-label]="displayCalendarToggleLabel"
                             [attr.aria-expanded]="isOpen" type="button"></button>
             </span>
         </div>
@@ -26,18 +27,20 @@
         [style.display]="'block'"
         [attr.aria-expanded]="isOpen"
         [attr.aria-hidden]="!isOpen">
-        <fd-calendar (closeCalendar)="isOpen = false;" [calType]="type"
+        <fd-calendar (closeCalendar)="closeFromCalendar()"
+                     [activeView]="activeView"
+                     (activeViewChange)="handleCalendarActiveViewChange($event)"
+                     [calType]="type"
                      [disableFunction]="disableFunction ? disableFunction : null"
                      [blockFunction]="blockFunction ? blockFunction : null"
                      [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
                      [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
                      [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
                      [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
-                     [(selectedDay)]="selectedDay"
-                     [(selectedRangeFirst)]="selectedRangeFirst"
-                     [(selectedRangeLast)]="selectedRangeLast"
-                     (isInvalidDateInput)="isInvalidDateInputHandler($event)"
-                     [dateFromDatePicker]="dateFromDatePicker"
+                     [selectedDate]="selectedDate"
+                     [selectedRangeDate]="selectedRangeDate"
+                     (selectedRangeDateChange)="handleRangeDateChange($event)"
+                     (selectedDateChange)="handleSingleDateChange($event)"
                      [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
     </fd-popover-body>
 </fd-popover>

@@ -1,13 +1,17 @@
 <h2>Standard Calendar</h2>
 <description>
-  This example also features <strong>blocked</strong> and <strong>disabled</strong> days.
-  <br /><br />
-  You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
-  To select a date you will create a new object that contains the property date, whose value is a native JavaScript Date object.  Then, using two-way binding syntax, set the selectedDay value to your new object.
-  Note that selecting a day (or range of days) in this manner will override any block/disable functions.  The <code>disableFunction</code> and <code>blockFunction</code> inputs can be changed and the calendar will automatically update (see example).
+    This example also features <strong>blocked</strong> and <strong>disabled</strong> days.
+    <br /><br />
+    You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars
+    internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
+    To select a date you will create a new object that contains the property date, whose value is a FdDate model object.
+    Then, using two-way binding syntax, set the selectedDay value to your new object.
+    Note that selecting a day (or range of days) in this manner will override any block/disable functions. The
+    <code>disableFunction</code>
+    and <code>blockFunction</code> inputs can be changed and the calendar will automatically update (see example).
 </description>
 <component-example [name]="'ex1'">
-  <fd-calendar-single-example></fd-calendar-single-example>
+    <fd-calendar-single-example></fd-calendar-single-example>
 </component-example>
 
 <code-example [code]="calendarSingleSource" [language]="'typescript'"></code-example>
@@ -20,18 +24,36 @@
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
     <br /><br />
-    The <code>disableRangeStartFunction</code>, <code>disableRangeEndFunction</code>, <code>blockRangeStartFunction</code> and <code>blockRangeEndFunction</code> inputs can be used in addition to the <code>disableFunction</code> and <code>blockFunction</code> inputs to set independent rules for the start and end dates.
-    In this example, the user can only select a start date on or before October 10, 2019, and an end date on or after October 20, 2019.
+    The <code>disableRangeStartFunction</code>, <code>disableRangeEndFunction</code>,
+    <code>blockRangeStartFunction</code> and <code>blockRangeEndFunction</code> inputs can be used in addition to the
+    <code>disableFunction</code> and <code>blockFunction</code> inputs to set independent rules for the start and end
+    dates.
+    In this example, the user can only select a start date on or before October 10, 2019, and an end date on or after
+    October 20, 2019.
 </description>
 <component-example [name]="'ex2'">
-  <fd-calendar-range-example></fd-calendar-range-example>
+    <fd-calendar-range-example></fd-calendar-range-example>
 </component-example>
 <code-example [code]="calendarRangeSource" [language]="'typescript'"></code-example>
 
 <separator></separator>
-<h2>Monday Start Calendar</h2>
-<description>Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 0 is for Sunday, 1 is Monday, 2 is Tuesday, etc.</description>
+<h2>Programmatic date change</h2>
+<description>
+    Makes it possible to programmatically change the value of the currently selected date. The <code>selectedDay</code>
+    property stores the date that the calendar highlights as the one that is currently selected. By programmatically
+    changing the value of this property, the date that is highlighted on the calendar will change accordingly.
+</description>
 <component-example [name]="'ex3'">
+    <fd-calendar-programmatically-change-example></fd-calendar-programmatically-change-example>
+</component-example>
+<code-example [code]="calendarProgrammaticallySource" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Monday Start Calendar</h2>
+<description>Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is
+    for Sunday, 2 is Monday, 3 is Tuesday, etc.
+</description>
+<component-example [name]="'ex4'">
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
 </component-example>
 <code-example [code]="calendarMondayStartSource" [language]="'typescript'"></code-example>
@@ -42,7 +64,23 @@
     The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc.
     It also uses a separate service called CalendarI18nLabels to populate aria labels in the component itself.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
 </component-example>
 <code-example [code]="calendari18nTs" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Single Mode Calendar in Form</h2>
+<description>The Calendar component may also be used within Angular Reactive Forms.</description>
+<component-example [name]="'ex6'">
+    <fd-calendar-form-single-example></fd-calendar-form-single-example>
+</component-example>
+<code-example [code]="calendarSingleFormSource" [language]="'typescript'"></code-example>
+
+<separator></separator>
+<h2>Range Mode Calendar in Form</h2>
+<description>The Calendar component may also be used within Angular Reactive Forms.</description>
+<component-example [name]="'ex7'">
+    <fd-calendar-form-range-example></fd-calendar-form-range-example>
+</component-example>
+<code-example [code]="calendarRangeFormSource" [language]="'typescript'"></code-example>

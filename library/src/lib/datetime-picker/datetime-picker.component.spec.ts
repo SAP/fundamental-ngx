@@ -7,6 +7,8 @@ import { PopoverModule } from '../popover/popover.module';
 import { CalendarModule } from '../calendar/calendar.module';
 import { FormsModule } from '@angular/forms';
 import { TimeModule } from '../time/time.module';
+import { FdDatetime } from './models/fd-datetime';
+import { FdDate } from '../calendar/models/fd-date';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent;
@@ -31,11 +33,9 @@ describe('DatetimePickerComponent', () => {
     });
 
     it('should open the popover', () => {
-        spyOn(component, 'inputValueChange');
         component.isOpen = false;
         component.isInvalidDateInput = false;
         component.openPopover();
-        expect(component.inputValueChange).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
     });
 
@@ -55,74 +55,111 @@ describe('DatetimePickerComponent', () => {
         expect(component.isOpen).toBe(false);
     });
 
+    it('should update from input', () => {
+        spyOn(component, 'onChange');
+        component.date = FdDatetime.getToday();
+
+        const dateStr = component.dateTimeAdapter.format(component.date);
+
+        component.handleInputChange(dateStr);
+
+        expect(component.calendarComponent.currentlyDisplayed.month).toBe(component.date.month);
+        expect(component.calendarComponent.currentlyDisplayed.year).toBe(component.date.year);
+        expect(component.onChange).toHaveBeenCalledWith(component.date);
+    });
+
+    it('should update from input for null value', () => {
+        spyOn(component, 'onChange');
+        component.allowNull = true;
+        component.handleInputChange('');
+        const today = FdDatetime.getToday();
+        expect(component.onChange).toHaveBeenCalledWith(null);
+        expect(component.date).toEqual(today);
+    });
+
+    it('should update input from time but no date', () => {
+        spyOn(component, 'onChange');
+        component.selectedDate = FdDate.getToday();
+        const timeModel = { hour: 12, minute: 30, second: 45 };
+        const dateTime = new FdDatetime(component.selectedDate, timeModel);
+        component.handleTimeChange(timeModel);
+
+        expect(component.onChange).toHaveBeenCalledWith(dateTime);
+        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter
+            .format(new FdDatetime(component.selectedDate, timeModel))
+        );
+    });
+
+    it('should not update input with invalid time', () => {
+        spyOn(component, 'onChange');
+        const timeModel = { hour: 30, minute: 30, second: 45 };
+        const dateTime = new FdDatetime(component.date.date, timeModel);
+        component.handleInputChange(component.dateTimeAdapter.format(dateTime));
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.isInvalidDateInput).toEqual(true);
+    });
+
+    it('should not update input with invalid date', () => {
+        spyOn(component, 'onChange');
+        const date = new FdDate(2018, 45, 10);
+        const dateTime = new FdDatetime(date, component.date.time);
+        component.handleInputChange(component.dateTimeAdapter.format(dateTime));
+        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.isInvalidDateInput).toEqual(true);
+    });
+
     it('should update input from calendar', () => {
         spyOn(component, 'onChange');
-        component.date = new Date();
-        component.date.setTime(component.date.getTime() - 86400000);
-        const dateVal = new Date();
-        const d = {
-            selectedDay: {
-                id: 1,
-                date: dateVal
-            }
-        };
-        component.updatePickerInputHandler(d);
-        expect(component.onChange).toHaveBeenCalled();
-        expect(component.inputFieldDate).toEqual(d.selectedDay.date.toLocaleString());
+        component.time = FdDatetime.getToday().time;
+        const date = new FdDate(2018, 10, 10);
+        const dateTime = new FdDatetime(date, component.time);
+        component.handleDateChange(date);
+
+        expect(component.onChange).toHaveBeenCalledWith(dateTime);
+        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter
+            .format(new FdDatetime(date, component.time))
+        );
     });
 
-    it('should update input from calendar for null value', () => {
-        spyOn(component, 'onChange');
-        component.updatePickerInputHandler('');
-        expect(component.selectedDay.date).toBe(null);
-        expect(component.selectedDay.selected).toBe(null);
-        expect(component.time.second).toBe(null);
-        expect(component.time.minute).toBe(null);
-        expect(component.time.hour).toBe(null);
-        expect(component.timeComponent.displayedHour).toBe(null);
-        expect(component.timeComponent.period).toBe('am');
-        expect(component.timeComponent.oldPeriod).toBe('am');
-        expect(component.inputFieldDate).toBe(null);
-        expect(component.onChange).toHaveBeenCalledWith(null);
+    it('should handle correct write value function', () => {
+        const dateTime = FdDatetime.getToday();
+        component.writeValue(dateTime);
+        expect(component.selectedDate).toEqual(dateTime.date);
+        expect(component.time).toEqual(dateTime.time);
+        expect(component.date).toEqual(dateTime);
+        expect(component.calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
     });
 
-    it('should update input from time', () => {
-        spyOn(component, 'onChange');
-        const dateVal = new Date();
-        component.time = {hour: dateVal.getHours(), minute: dateVal.getMinutes(), second: dateVal.getSeconds()};
-        component.setTime(true);
-        expect(component.onChange).toHaveBeenCalled();
-        expect(component.inputFieldDate).toEqual(dateVal.toLocaleString());
+    it('should ignore invalid date picked on time change and show valid on input', () => {
+        const dateTime = FdDatetime.getToday();
+        component.writeValue(dateTime);
+        const time = {hour: 10, minute: 30, second: 20};
+        const invalidDate = new FdDatetime(new FdDate(2010, 40, 30), dateTime.time);
+        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
+        component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
+        component.handleTimeChange(time);
+        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter.format(new FdDatetime(dateTime.date, time)));
+        expect(component.isInvalidDateInput).not.toBeTruthy();
     });
 
-    it('should handle escape keydown', () => {
-        spyOn(component, 'closePopover');
-        const keyDownEvent = new KeyboardEvent('keydown', {
-            key: 'escape'
-        });
-        document.dispatchEvent(keyDownEvent);
-        expect(component.closePopover).toHaveBeenCalled();
+    it('should reset time on date change and show valid on input', () => {
+        const dateTime = FdDatetime.getToday();
+        component.writeValue(dateTime);
+        const invalidTime = {hour: 50, minute: 30, second: 20};
+        const invalidDate = new FdDatetime(dateTime.date, invalidTime);
+        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
+        component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
+        component.handleDateChange(dateTime.date);
+        expect(component.inputFieldDate).toEqual(
+            component.dateTimeAdapter.format(dateTime)
+        );
+        expect(component.isInvalidDateInput).not.toBeTruthy();
     });
 
-    it('should handle document click', () => {
-        spyOn(component, 'closePopover');
-        fixture.nativeElement.querySelector('.fd-datetime').click();
-        expect(component.closePopover).not.toHaveBeenCalled();
-        document.dispatchEvent(new MouseEvent('click'));
-        expect(component.closePopover).toHaveBeenCalled();
+    it('should handle other types than FdTimeDate', () => {
+        const dateTimeString: any = 'asdsad';
+        component.writeValue(dateTimeString);
+        expect(component.inputFieldDate).not.toBe(dateTimeString);
     });
 
-    it('should write value', () => {
-        spyOn(component, 'setTime');
-        const dateVal = new Date();
-        dateVal.setTime(dateVal.getTime() - 86400000);
-        component.writeValue(dateVal);
-
-        expect(component.selectedDay.date.getTime()).toEqual(dateVal.getTime());
-        expect(component.date.getTime()).toEqual(dateVal.getTime());
-        expect(component.time.hour).toEqual(dateVal.getHours());
-        expect(component.time.minute).toEqual(dateVal.getMinutes());
-        expect(component.time.second).toEqual(dateVal.getSeconds());
-        expect(component.setTime).toHaveBeenCalled();
-    });
 });

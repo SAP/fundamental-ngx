@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker/models/fd-datetime';
 
 @Component({
     selector: 'fd-datetime-form-example',
@@ -7,6 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DatetimeFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(new Date())
+        date: new FormControl(FdDatetime.getToday())
     });
 }

@@ -363,14 +363,18 @@ import { LocalizationEditorTextareaExampleComponent } from './component-docs/loc
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
+import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
+import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
 
+import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
 import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
+import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
+
 
 @NgModule({
     declarations: [
@@ -455,6 +459,9 @@ import { SelectViewValueExampleComponent } from './component-docs/select/example
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
+        CalendarFormSingleExampleComponent,
+        CalendarFormRangeExampleComponent,
+        CalendarProgrammaticallyChangeExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,

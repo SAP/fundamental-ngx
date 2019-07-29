@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 
 @Component({
     selector: 'fd-date-picker-position-example',
-    template: ` <fd-date-picker [placement]="'top-end'" [(ngModel)]="selectedDay"></fd-date-picker>
+    template: ` <fd-date-picker [placement]="'top-end'" [(ngModel)]="date"></fd-date-picker>
                 <br/>
-                <div>Selected Date: {{selectedDay.date ? selectedDay.date.toDateString() : 'null'}}</div>`
+                <div>Selected Date: {{date ? date.toDateString() : 'null'}}</div>`
 })
 export class DatePickerPositionExampleComponent {
 
-    selectedDay = {
-        date: new Date()
-    };
+        date = FdDate.getToday();
 
 }
