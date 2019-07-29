@@ -151,9 +151,7 @@ describe('DatetimePickerComponent', () => {
         component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
         component.handleDateChange(dateTime.date);
         expect(component.inputFieldDate).toEqual(
-            component.dateTimeAdapter.format(
-                new FdDatetime(dateTime.date, FdDatetime.getToday().time)
-            )
+            component.dateTimeAdapter.format(dateTime)
         );
         expect(component.isInvalidDateInput).not.toBeTruthy();
     });
