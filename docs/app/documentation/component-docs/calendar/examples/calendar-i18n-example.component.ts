@@ -1,6 +1,7 @@
 import { CalendarI18n } from '../../../../../../library/src/lib/calendar/i18n/calendar-i18n';
 import { Component, Injectable } from '@angular/core';
 import { CalendarI18nLabels } from '../../../../../../library/src/lib/calendar/i18n/calendar-i18n-labels';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 
 const localized_values = {
     'fr': {
@@ -52,7 +53,8 @@ export class CustomI18nLabels extends CalendarI18nLabels {
 
 @Component({
     selector: 'fd-calendar-i18n-example',
-    template: `<fd-calendar [(ngModel)]="selectedDay"></fd-calendar>`,
+    template: `
+        <fd-calendar [(ngModel)]="date"></fd-calendar>`,
 
     // Note that this can be provided in the root of your application.
     providers: [
@@ -67,7 +69,5 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class CalendarI18nExampleComponent {
-    selectedDay = {
-        date: new Date()
-    };
+        date = FdDate.getToday();
 }

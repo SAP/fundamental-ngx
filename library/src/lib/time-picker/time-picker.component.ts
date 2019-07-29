@@ -145,9 +145,8 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     }
 
     /** @hidden */
-    addOnButtonClicked($event) {
+    addOnButtonClicked() {
         if (!this.disabled) {
-            $event.stopPropagation();
             this.isOpen = !this.isOpen;
         }
     }

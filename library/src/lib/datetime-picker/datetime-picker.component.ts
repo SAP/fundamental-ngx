@@ -1,8 +1,9 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, HostBinding,
+    forwardRef,
     HostListener,
     Input,
     OnDestroy,
@@ -11,13 +12,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarDay } from '../calendar/calendar.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { Placement } from 'popper.js';
 import { DateTimeFormatParser } from './format/datetime-parser';
+import { FdDate } from '../calendar/models/fd-date';
+import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
+import { FdDatetime } from './models/fd-datetime';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -45,6 +48,28 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden Reference to the inner time component. */
     @ViewChild(TimeComponent)
     timeComponent: TimeComponent;
+
+    /** @hidden Reference to the inner calendar component. */
+    @ViewChild(CalendarComponent)
+    calendarComponent: CalendarComponent;
+
+    /**
+     * @hidden Date of the input field. Internal use.
+     * For programmatic selection, use two-way binding on the date input.
+     */
+    inputFieldDate: string = null;
+
+    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
+    isInvalidDateInput: boolean = false;
+
+    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
+    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+
+    /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
+    selectedDate: FdDate;
+
+    /** Subscription of the dateFromInput. */
+    private dateFromInputSubscription: Subscription;
 
     /** Placeholder for the inner input element. */
     @Input()
@@ -81,7 +106,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Current selected date. Two-way binding is supported. */
     @Input()
-    date: Date = new Date();
+    date: FdDatetime = FdDatetime.getToday();
 
     /** Whether the popover is open. Two-way binding is supported. */
     @Input()
@@ -89,7 +114,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** The disableFunction for the calendar. */
     @Input()
-    startingDayOfWeek: number = 0;
+    startingDayOfWeek: DaysOfWeek = 1;
+
+    /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
+    @Input()
+    public activeView: FdCalendarView = 'day';
 
     /** Aria label for the datetime picker input. */
     @Input()
@@ -103,81 +132,91 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     allowNull: boolean = true;
 
+    /** Event thrown every time calendar active view is changed */
+    @Output()
+    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
-    readonly dateChange: EventEmitter<Date> = new EventEmitter<Date>();
+    readonly dateChange: EventEmitter<FdDatetime> = new EventEmitter<FdDatetime>();
 
     /** Event emitted when the day changes from the calendar. */
     @Output()
-    readonly calendarChange: EventEmitter<Date> = new EventEmitter<Date>();
+    readonly calendarChange: EventEmitter<FdDatetime> = new EventEmitter<FdDatetime>();
 
     /** Event emitted when the time changes from the time component. */
     @Output()
-    readonly timeChange: EventEmitter<Date> = new EventEmitter<Date>();
+    readonly timeChange: EventEmitter<FdDatetime> = new EventEmitter<FdDatetime>();
 
     /** Event emitted when popover closes. */
     @Output()
-    readonly onClose: EventEmitter<Date> = new EventEmitter<Date>();
+    readonly onClose: EventEmitter<void> = new EventEmitter<void>();
+
+    /** @hidden */
+    onChange: any = (selected: any) => {
+    };
+
+    /** @hidden */
+    onTouched: any = () => {
+    };
 
     /**
-     * @hidden Date of the input field. Internal use.
-     * For programmatic selection, use two-way binding on the date input.
+     * Function used to disable certain dates in the calendar.
+     * @param fdDate FdDate
      */
-    inputFieldDate = null;
-
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    isInvalidDateInput: boolean = false;
-
-    /** @hidden Observable used internally. */
-    dateFromInput: Subject<string> = new Subject();
-
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
-
-    /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
-    selectedDay: CalendarDay = {
-        date: null
-    };
-
-    /** Subscription of the dateFromInput. */
-    private dateFromInputSubscription: Subscription;
-
     @Input()
-    disableFunction = function(d): boolean {
+    disableFunction = function(fdDate: FdDate): boolean {
         return false;
     };
 
-    /** The blockFunction for the calendar. */
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param fdDate FdDate
+     */
     @Input()
-    blockFunction = function(d): boolean {
-        return false;
-    };
-    @Input()
-    disableRangeStartFunction = function(d): boolean {
-        return false;
-    };
-    @Input()
-    disableRangeEndFunction = function(d): boolean {
-        return false;
-    };
-    @Input()
-    blockRangeStartFunction = function(d): boolean {
-        return false;
-    };
-    @Input()
-    blockRangeEndFunction = function(d): boolean {
+    disableRangeStartFunction = function(fdDate: FdDate): boolean {
         return false;
     };
 
-    /** @hidden */
-    onChange: any = () => {};
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
 
-    /** @hidden */
-    onTouched: any = () => {};
+    /**
+     * Function used to block certain dates in the calendar for the range start selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockRangeStartFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar for the range end selection.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockRangeEndFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
+
+    /**
+     * Function used to block certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    blockFunction = function(fdDate: FdDate): boolean {
+        return false;
+    };
 
     /** Toggles the popover. */
     togglePopover(): void {
-        this.onTouched(this.selectedDay.date);
+        this.onTouched();
         if (this.isOpen) {
             this.closePopover();
         } else {
@@ -185,94 +224,32 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
+    /**
+     * Method that handle calendar active view change and throws event.
+     * */
+    public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
+        this.activeViewChange.emit(activeView);
+    }
+
     /** Opens the popover. */
-    openPopover(inputFieldDate?: string): void {
+    openPopover(): void {
         if (!this.isOpen && !this.disabled) {
-            this.onTouched(this.selectedDay.date);
+            this.onTouched();
             this.isOpen = true;
-            if (inputFieldDate !== null && inputFieldDate !== '' && !this.isInvalidDateInput) {
-                this.inputValueChange(this.date);
-            }
         }
     }
 
     /** Closes the popover */
     closePopover(): void {
         if (this.isOpen) {
-            this.onClose.emit(this.date);
+            this.onClose.emit();
             this.isOpen = false;
-        }
-    }
-
-    updatePickerInputHandler(d): void {
-        if (d.selectedDay && d.selectedDay.date) {
-            d.selectedDay.date.setHours(this.date.getHours());
-            d.selectedDay.date.setMinutes(this.date.getMinutes());
-            d.selectedDay.date.setSeconds(this.date.getSeconds());
-            d.selectedDay.date.setMilliseconds(this.date.getMilliseconds());
-            const previous = this.date.getTime();
-            this.selectedDay = d.selectedDay;
-            this.date = d.selectedDay.date;
-            this.inputFieldDate = this.dateTimeAdapter.format(this.date);
-            this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
-            if (this.date.getTime() !== previous) {
-                this.calendarChange.emit(this.date);
-                this.dateChange.emit(this.date);
-                this.onChange(this.date);
-            }
-        } else if (d === '') {
-            this.selectedDay.date = null;
-            this.selectedDay.selected = null;
-            this.time.second = null;
-            this.time.minute = null;
-            this.time.hour = null;
-            this.timeComponent.displayedHour = null;
-            this.timeComponent.period = 'am';
-            this.timeComponent.oldPeriod = 'am';
-            this.calendarChange.emit(null);
-            this.timeChange.emit(null);
-            this.dateChange.emit(null);
-            this.onChange(this.selectedDay.date);
         }
     }
 
     /** @hidden */
     isInvalidDateInputHandler(e): void {
         this.isInvalidDateInput = e;
-    }
-
-    /** @hidden */
-    inputValueChange(e): void {
-        let temp;
-        if (typeof e === 'string') {
-            temp = this.dateTimeAdapter.parse(e);
-        } else {
-            temp = new Date(e);
-        }
-        /*
-         Need to check if current locale toDateString contains AM or PM. If the current locale has it and it is absent
-         from the user's input, the meridian should be considered invalid
-         */
-        const localeMeridian = new Date().toLocaleTimeString().slice(-2);
-        let meridianValid = true;
-        if ((localeMeridian === 'AM' || localeMeridian === 'PM') &&
-            (typeof e === 'string' && e.slice(-2) !== 'AM' && e.slice(-2) !== 'PM')) {
-            meridianValid = false;
-        }
-
-        if (meridianValid && temp && temp.toLocaleDateString() !== 'Invalid Date') {
-            const newValue = {hour: temp.getHours(), minute: temp.getMinutes(), second: temp.getSeconds()};
-            if (newValue.hour !== this.time.hour || newValue.minute !== this.time.minute || newValue.second !== this.time.second) {
-                this.time = newValue;
-                this.setTime(true);
-            }
-            this.dateFromInput.next(temp.toLocaleDateString());
-        } else if (e === '' && this.allowNull) {
-            this.isInvalidDateInput = false;
-            this.dateFromInput.next('');
-        } else {
-            this.isInvalidDateInput = true;
-        }
     }
 
     /** @hidden */
@@ -292,13 +269,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     ngOnInit(): void {
         if (this.date && this.inputFieldDate !== null) {
-            this.selectedDay.date = this.date;
-            this.time = {hour: this.date.getHours(), minute: this.date.getMinutes(), second: this.date.getSeconds()};
-        }
-        if (this.dateFromInput) {
-            this.dateFromInputSubscription = this.dateFromInput.subscribe(date => {
-                this.updatePickerInputHandler(date);
-            });
+            this.selectedDate = this.date.date;
+            this.time = this.date.time;
         }
     }
 
@@ -311,11 +283,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     constructor(private elRef: ElementRef,
-                private dateTimeAdapter: DateTimeFormatParser
-    ) {}
+                private changeDetRef: ChangeDetectorRef,
+                public dateTimeAdapter: DateTimeFormatParser,
+    ) {
+    }
 
     /** @hidden */
-    registerOnChange(fn: (selected: any) => {void}): void {
+    registerOnChange(fn: (selected: any) => { void }): void {
         this.onChange = fn;
     }
 
@@ -329,34 +303,85 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
-    writeValue(selected: Date): void {
-        if (!selected) {
+    /**
+     * @hidden
+     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
+     */
+    writeValue(selected: FdDatetime): void {
+        if (!selected || !(selected instanceof FdDatetime)) {
             return;
         }
-        this.selectedDay.date = selected;
-        this.time = {hour: selected.getHours(), minute: selected.getMinutes(), second: selected.getSeconds()}
-        this.date = this.selectedDay.date;
-        this.setTime();
+        if (selected.isDateValid() && selected.isTimeValid()) {
+            this.selectedDate = selected.date;
+            this.time = selected.time;
+            this.date = new FdDatetime(this.selectedDate, this.time);
+            this.calendarComponent.setCurrentlyDisplayed(this.date.date);
+            this.setInput(this.date);
+        }
     }
 
-    /** @hidden */
-    setTime(fireEvents = false): void {
-        this.date.setHours(this.time.hour);
-        this.date.setMinutes(this.time.minute);
-        this.date.setSeconds(this.time.second);
-        this.inputFieldDate = this.dateTimeAdapter.format(this.date);
+    /**
+     * @hidden
+     * Method that is triggered by events from calendar component, when there is selected date changed
+     * */
+    handleDateChange(date: FdDate): void {
+        this.selectedDate = date;
+        this.date = new FdDatetime(this.selectedDate, this.time);
+        this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
+        this.setInput(this.date);
+        this.onChange(this.date);
+    }
 
-        if (fireEvents) {
-            this.timeChange.emit(this.date);
-            this.dateChange.emit(this.date);
-            this.onChange(this.date);
-        }
+    /**
+     * @hidden
+     * Method that is triggered by events from time component, when there is selected time changed
+     * */
+    handleTimeChange(time: TimeObject): void {
+        this.time = time;
+        this.date = new FdDatetime(this.selectedDate, this.time);
+        this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
+        this.setInput(this.date);
+        this.onChange(this.date);
     }
 
     /** @hidden */
     focusArrowLeft(): void {
-        this.elRef.nativeElement.querySelector('#arrowLeft').focus();
+        if (this.elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow')) {
+            this.elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow').focus();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method, which is responsible for transforming string to datetime, depending on type or
+     * validation the results are different. It also changes to state of isInvalidDateInput
+     * */
+    handleInputChange(date: string): void {
+        if (date) {
+            const fdTimeDate = this.dateTimeAdapter.parse(date);
+            this.isInvalidDateInput = !(fdTimeDate.isDateValid() && fdTimeDate.isTimeValid());
+            if (!this.isInvalidDateInput) {
+                this.selectedDate = fdTimeDate.date;
+                this.time = fdTimeDate.time;
+                this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
+                this.date = new FdDatetime(this.selectedDate, this.time);
+                this.onChange(fdTimeDate);
+            }
+        } else if (this.allowNull) {
+            this.isInvalidDateInput = false;
+            this.date = FdDatetime.getToday();
+            this.selectedDate = this.date.date;
+            this.time = this.date.time;
+            this.calendarComponent.setCurrentlyDisplayed(this.date.date);
+            this.onChange(null);
+        } else {
+            this.isInvalidDateInput = true;
+        }
+    }
+
+    private setInput(fdDateTime: FdDatetime): void {
+        this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
+        this.changeDetRef.detectChanges();
     }
 
 }

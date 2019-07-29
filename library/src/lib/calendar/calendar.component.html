@@ -1,91 +1,43 @@
-<header class="fd-calendar__header">
-    <div class="fd-calendar__navigation">
-        <div class="fd-calendar__action">
-            <button id="arrowLeft" class="fd-button--toolbar fd-button--xs sap-icon--slim-arrow-left"
-                    [attr.aria-label]="showCalendarYears ? calendarI18nLabels?.previousYearLabel : calendarI18nLabels?.previousMonthLabel"
-                    (click)="showCalendarYears ? loadPrevYearsList() : goToPreviousMonth()"></button>
-        </div>
-        <div class="fd-calendar__action">
-            <button class=" fd-button--light fd-button--s"
-                    [attr.aria-label]="calendarI18nLabels?.monthSelectionLabel"
-                    (click)="openMonthSelection()">{{monthName}}</button>
-        </div>
-        <div class="fd-calendar__action">
-            <button class=" fd-button--light fd-button--s"
-                    [attr.aria-label]="calendarI18nLabels?.yearSelectionLabel"
-                    (click)="openYearSelection()">{{year}}</button>
-        </div>
-        <div class="fd-calendar__action">
-            <button class="fd-button--toolbar fd-button--xs sap-icon--slim-arrow-right"
-                    [attr.aria-label]="showCalendarYears ? calendarI18nLabels?.nextYearLabel : calendarI18nLabels?.nextMonthLabel"
-                    (click)="showCalendarYears ? loadNextYearsList() : goToNextMonth()"></button>
-        </div>
+<fd-calendar-header [currentlyDisplayed]="currentlyDisplayed"
+                    [activeView]="activeView"
+                    (activeViewChange)="handleActiveViewChange($event)"
+                    [id]="id"
+                    (nextClicked)="handleNextArrowClick()"
+                    (previousClicked)="handlePreviousArrowClick()"
+></fd-calendar-header>
+<ng-container [ngSwitch]="activeView">
+    <div class="fd-calendar__content">
+        <fd-calendar-day-view *ngSwitchCase="'day'"
+                              [selectedDate]="selectedDate"
+                              (selectedDateChange)="selectedDateChanged($event)"
+                              [selectedRangeDate]="selectedRangeDate"
+                              (selectedRangeDateChange)="selectedRangeDateChanged($event)"
+                              [currentlyDisplayed]="currentlyDisplayed"
+                              [startingDayOfWeek]="startingDayOfWeek"
+                              [blockFunction]="blockFunction"
+                              [disableFunction]="disableFunction"
+                              [disableRangeEndFunction]="disableRangeEndFunction"
+                              [blockRangeEndFunction]="blockRangeEndFunction"
+                              [disableRangeStartFunction]="disableRangeStartFunction"
+                              [blockRangeStartFunction]="blockRangeStartFunction"
+                              [calType]="calType"
+                              [id]="id"
+                              [focusEscapeFunction]="escapeFocusFunction"
+                              (nextMonthSelect)="displayNextMonth()"
+                              (previousMonthSelect)="displayPreviousMonth()"
+        ></fd-calendar-day-view>
+        <fd-calendar-month-view *ngSwitchCase="'month'"
+                                [monthSelected]="currentlyDisplayed?.month"
+                                [id]="id"
+                                [focusEscapeFunction]="escapeFocusFunction"
+                                (monthClicked)="handleMonthViewChange($event)"
+        ></fd-calendar-month-view>
+        <fd-calendar-year-view *ngSwitchCase="'year'"
+                               (yearClicked)="selectedYear($event)"
+                               [yearSelected]="currentlyDisplayed.year"
+                               [id]="id"
+                               [focusEscapeFunction]="escapeFocusFunction">
+        </fd-calendar-year-view>
     </div>
-</header>
-<div class="fd-calendar__content">
-    <div class="fd-calendar__years"
-         *ngIf="showCalendarYears">
-        <ul class="fd-calendar__list">
-            <li class="fd-calendar__item"
-                *ngFor="let listYear of calendarYearsList; let i = index;"
-                [ngClass]='(listYear===todayYear ? " fd-calendar__item--current" : "") + (listYear===year ? " is-selected" : "")'
-                (click)="selectYear(listYear, $event)">
-                    <span role="button" [attr.tabIndex]="getYearTabIndex(listYear, i)"
-                          [attr.id]="id + '-fd-year-' + listYear"
-                          (keydown)="onKeydownYearHandler($event, listYear)"
-                          class="fd-calendar__text">{{listYear}}</span>
-            </li>
-        </ul>
-    </div>
+</ng-container>
 
-    <div class="fd-calendar__months"
-         *ngIf="showCalendarMonths">
-        <ul class="fd-calendar__list">
-            <li class="fd-calendar__item"
-                *ngFor="let monthShortName of monthsShortName, let i=index"
-                [ngClass]='(i===todayMonth && year===todayYear ? " fd-calendar__item--current" : "") + (i===selectedMonth ? " is-selected" : "") '
-                (click)="selectMonth(i, $event)">
-                    <span role="button" [attr.tabIndex]="i === selectedMonth ? 0 : -1"
-                          [attr.id]="id + '-fd-month-' + i" (keydown)="onKeydownMonthHandler($event, i)"
-                          class="fd-calendar__text">{{monthShortName}}</span>
-            </li>
-        </ul>
-    </div>
-
-    <div class="fd-calendar__dates"
-         *ngIf="showCalendarDates">
-        <table class="fd-calendar__table"
-               role="grid">
-            <thead class="fd-calendar__group">
-            <tr class="fd-calendar__row">
-                <th class="fd-calendar__column-header"
-                    *ngFor="let day of weekDays">
-                    <span class="fd-calendar__day-of-week">{{day}}</span>
-                </th>
-            </tr>
-            </thead>
-            <tbody class="fd-calendar__group" [attr.id]="id + '-dates-table'">
-            <tr class="fd-calendar__row"
-                *ngFor="let row of calendarGrid; let i = index;">
-                <td class="fd-calendar__item"
-                    role="gridcell"
-                    [attr.aria-label]="cell.ariaLabel"
-                    *ngFor="let cell of row; let cellIndex = index;"
-                    [ngClass]='(cell.monthStatus !== "current" ? " fd-calendar__item--other-month": "") +
-                          (cell.selected ? " is-selected": "") +
-                          (calType==="range" && cell.selectedLast && selectedRangeFirst != selectedRangeLast ? " is-selected-range-last": "") +
-                          (calType==="range" && cell.selectedFirst && selectedRangeFirst != selectedRangeLast ? " is-selected-range-first": "") +
-                          (calType==="range" && cell.selectedRange && !cell.selectedFirst && !cell.selectedLast ? " is-selected-range": "") +
-                          (cell.today ? " fd-calendar__item--current": "") +
-                          (cell.disabled ? " is-disabled": "") +
-                          (cell.blocked ? " is-blocked": "")'
-                    (click)="selectDate(cell, true, $event)">
-              <span class="fd-calendar__text" [attr.id]="id + '-fd-day-' + (i + 1) + cellIndex"
-                    role="button" [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
-                    (keydown)="onKeydownDayHandler($event, cell)">{{cell.day}}</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>

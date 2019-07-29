@@ -9,12 +9,13 @@
             <div class="fd-input-group fd-input-group--after"
                  [ngClass]="{'fd-input-group--compact' : compact}">
                 <input type="text"
+                       #dateTimePicker
                        [attr.aria-label]="datetimeInputLabel"
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
-                       (keyup.enter)="inputValueChange(inputFieldDate)"
-                       (blur)="inputValueChange(inputFieldDate)"
-                       (click)="openPopover(inputFieldDate)"
+                       (keyup.enter)="handleInputChange(dateTimePicker.value)"
+                       (blur)="handleInputChange(dateTimePicker.value)"
+                       (click)="openPopover()"
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }"
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
@@ -25,28 +26,29 @@
             </div>
         </fd-popover-control>
         <fd-popover-body
-             [attr.aria-expanded]="isOpen"
-             [attr.aria-hidden]="!isOpen"
-             [style.display]="'block'">
+            [attr.aria-expanded]="isOpen"
+            [attr.aria-hidden]="!isOpen"
+            [style.display]="'block'">
             <div class="fd-datetime__container">
                 <fd-calendar calType="single"
-                             (closeCalendar)="closePopover()"
+                             [activeView]="activeView"
+                             (activeViewChange)="handleCalendarActiveViewChange($event)"
                              [disableFunction]="disableFunction ? disableFunction : null"
                              [blockFunction]="blockFunction ? blockFunction : null"
                              [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
                              [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
                              [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
                              [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
-                             [(selectedDay)]="selectedDay"
-                             (isInvalidDateInput)="isInvalidDateInputHandler($event)"
-                             [dateFromDatePicker]="dateFromInput"
-                             [allowFocusEscape]="true"
+                             [selectedDate]="selectedDate"
+                             (selectedDateChange)="handleDateChange($event)"
+                             (isValidDateChange)="isInvalidDateInputHandler($event)"
+                             [escapeFocusFunction]="null"
                              [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time [disabled]="disabled"
                          [meridian]="meridian"
-                         [(ngModel)]="time"
-                         (ngModelChange)="setTime(true)"
+                         [ngModel]="time"
+                         (ngModelChange)="handleTimeChange($event)"
                          [spinners]="spinners"
                          [displaySeconds]="displaySeconds"
                          (focusArrowLeft)="focusArrowLeft()"></fd-time>
