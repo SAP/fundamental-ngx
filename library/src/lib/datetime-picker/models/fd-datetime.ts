@@ -79,27 +79,39 @@ export class FdDatetime {
     }
 
     public get year(): number {
-        return this.date && this.date.year
+        if (this.date) {
+            return this.date.year;
+        }
     }
 
     public get month(): number {
-        return this.date && this.date.month
+        if (this.date) {
+            return this.date.month;
+        }
     }
 
     public get day(): number {
-        return this.date && this.date.day
+        if (this.date) {
+            return this.date.day;
+        }
     }
 
     public get hour(): number {
-        return this.time && this.time.hour
+        if (this.time) {
+            return this.time.hour;
+        }
     }
 
     public get minute(): number {
-        return this.time && this.time.minute
+        if (this.time) {
+            return this.time.minute;
+        }
     }
 
     public get second(): number {
-        return this.time && this.time.second
+        if (this.time) {
+            return this.time.second;
+        }
     }
 
     /**

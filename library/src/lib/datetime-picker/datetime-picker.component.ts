@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -282,7 +283,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     constructor(private elRef: ElementRef,
-                public dateTimeAdapter: DateTimeFormatParser
+                private changeDetRef: ChangeDetectorRef,
+                public dateTimeAdapter: DateTimeFormatParser,
     ) {
     }
 
@@ -379,6 +381,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     private setInput(fdDateTime: FdDatetime): void {
         this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
+        this.changeDetRef.detectChanges();
     }
 
 }
