@@ -6,7 +6,7 @@ import {
     ViewChild, ViewEncapsulation, ContentChild
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
-import { PopoverDirective } from './popover-directive/popover.directive';
+import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
 let popoverUniqueId: number = 0;
@@ -83,9 +83,14 @@ export class PopoverComponent {
     @Input()
     focusTrapped: boolean = false;
 
-    /** Whether the Popover Body should try to have the same width as the Popover Control. */
+    /**
+     * Preset options for the popover body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
     @Input()
-    fillControl: boolean = false;
+    fillControlMode: PopoverFillMode;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
