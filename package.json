@@ -84,7 +84,7 @@
         "tsickle": "^0.36.0",
         "tslib": "^1.10.0",
         "tslint": "^5.18.0",
-        "typedoc": "^0.14.2",
+        "typedoc": "^0.15.0",
         "typescript": "3.2.4"
     },
     "pre-commit": {
