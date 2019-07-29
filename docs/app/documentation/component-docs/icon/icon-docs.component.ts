@@ -3,6 +3,7 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-icon',
@@ -667,7 +668,10 @@ export class IconDocsComponent implements OnInit {
         }
     };
 
-    iconHtml = iconSrc;
+    iconExample: ExampleFile[] = [{
+        language: 'html',
+        code: iconSrc
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('icon');

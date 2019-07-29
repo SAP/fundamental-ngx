@@ -7,8 +7,9 @@ import * as badgeFilledExample from '!raw-loader!./examples/badge-filled-example
 import * as badgePillExample from '!raw-loader!./examples/badge-pill-example.component.html';
 import * as labelBuildStatusExample from '!raw-loader!./examples/label-build-status-example.component.html';
 import * as labelDefaultExample from '!raw-loader!./examples/label-default-example.component.html';
-import * as labeliconStatusExample from '!raw-loader!./examples/label-icon-status-example.component.html';
+import * as labelIconStatusExample from '!raw-loader!./examples/label-icon-status-example.component.html';
 import * as labelStatusColorsExample from '!raw-loader!./examples/label-status-colors-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-badge-label',
@@ -683,19 +684,40 @@ export class BadgeLabelDocsComponent implements OnInit {
         }
     };
 
-    defaultBadgeHtmlType = badgeDefaultExample;
+    defaultBadgeHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: badgeDefaultExample
+    }];
 
-    pillBadgeHtmlType = badgePillExample;
+    pillBadgeHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: badgePillExample
+    }];
 
-    filledBadgeHtmlType = badgeFilledExample;
+    filledBadgeHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: badgeFilledExample
+    }];
 
-    labelHtmlType = labelDefaultExample;
+    labelHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: labelDefaultExample
+    }];
 
-    statusIconLabelHtmlType = labelBuildStatusExample;
+    statusIconLabelHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: labelBuildStatusExample
+    }];
 
-    anyIconLabelHtmlType = labeliconStatusExample;
+    anyIconLabelHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: labelIconStatusExample
+    }];
 
-    semanticColorLabelHtmlType = labelStatusColorsExample;
+    semanticColorLabelHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: labelStatusColorsExample
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('badgeLabel');

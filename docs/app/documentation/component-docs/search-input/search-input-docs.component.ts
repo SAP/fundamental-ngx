@@ -8,23 +8,56 @@ import * as searchInputAsyncHtml from '!raw-loader!./examples/search-input-async
 import * as searchInputAsyncTs from '!raw-loader!./examples/search-input-async-example.component.ts';
 import * as searchInputDisplayHtml from '!raw-loader!./examples/search-input-displaywith-example.component.html';
 import * as searchInputDisplayTs from '!raw-loader!./examples/search-input-displaywith-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-search-input',
     templateUrl: './search-input-docs.component.html'
 })
 export class SearchInputDocsComponent {
-    searchInputExampleHtml = searchInputHTMLSrc;
-    searchInputExampleTs = searchInputTSSrc;
 
-    searchInputDynamicHtml = searchInputDynHtml;
-    searchInputDynamicTs = searchInputDynTs;
+    searchInputExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: searchInputHTMLSrc,
+        },
+        {
+            language: 'typescript',
+            code: searchInputTSSrc
+        }
+    ];
 
-    searchInputAsyncHtml = searchInputAsyncHtml;
-    searchInputAsyncTs = searchInputAsyncTs;
+    searchInputDynamic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: searchInputDynHtml,
+        },
+        {
+            language: 'typescript',
+            code: searchInputDynTs
+        }
+    ];
 
-    displayHtml = searchInputDisplayHtml;
-    displayTs = searchInputDisplayTs;
+    searchInputAsync: ExampleFile[] = [
+        {
+            language: 'html',
+            code: searchInputAsyncHtml,
+        },
+        {
+            language: 'typescript',
+            code: searchInputAsyncTs
+        }
+    ];
 
-    constructor() {}
+    display: ExampleFile[] = [
+        {
+            language: 'html',
+            code: searchInputDisplayHtml,
+        },
+        {
+            language: 'typescript',
+            code: searchInputDisplayTs
+        }
+    ];
+
 }

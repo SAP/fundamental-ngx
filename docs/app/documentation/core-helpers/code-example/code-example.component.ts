@@ -1,32 +1,49 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CopyService } from '../../services/copy.service';
+import { ExampleFile } from './example-file';
+import { AlertService } from '../../../../../library/src/lib/alert/alert-service/alert.service';
+import { height } from '../../utilities/animations/collapse';
 
 @Component({
     selector: 'code-example',
     templateUrl: './code-example.component.html',
-    styleUrls: ['./code-example.component.scss']
+    styleUrls: ['./code-example.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [height({time: 200})]
 })
 export class CodeExampleComponent implements OnInit {
 
     /**
-     * Code to highlight.
+     * List of files to display in this code example.
      */
-    @Input() code: string;
-
-    /**
-     * Language to limit the auto-detection to.
-     */
-    @Input() language: string;
+    @Input()
+    exampleFiles: ExampleFile[] = [];
 
     smallScreen: boolean;
 
-    constructor(private element: ElementRef, private copyService: CopyService) {}
+    selectedFileIndex: number = 0;
 
-    copyText(): void {
-        this.copyService.copyText(this.code);
+    isOpen: boolean = false;
+
+    constructor(private element: ElementRef,
+                private copyService: CopyService,
+                private alertService: AlertService) {}
+
+    get expandIcon(): string {
+        return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
     }
 
-    ngOnInit() {
+    copyText(): void {
+        this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code);
+        this.alertService.open('Code copied!', {type: 'success', duration: 5000});
+    }
+
+    ngOnInit(): void {
+        this.smallScreen = window.innerWidth <= 768;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize() {
         this.smallScreen = window.innerWidth <= 768;
     }
 }

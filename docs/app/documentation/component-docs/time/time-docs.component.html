@@ -1,11 +1,9 @@
 <h2>24-Hour Clock</h2>
 <description>This is the default clock setting.</description>
 <component-example [name]="'ex1'">
-  <p>
     <fd-time-example></fd-time-example>
-  </p>
 </component-example>
-<code-example [code]="timeHtml" [language]="'HTML'"></code-example>
+<code-example [exampleFiles]="timeBasic"></code-example>
 
 <separator></separator>
 
@@ -15,33 +13,27 @@
   The passed time object will still contain a 24-hour clock.
 </description>
 <component-example [name]="'ex2'">
-  <p>
     <fd-time-12-example></fd-time-12-example>
-  </p>
 </component-example>
-<code-example [code]="timeMeridianHtml" [language]="'HTML'"></code-example>
+<code-example [exampleFiles]="timeMeridian"></code-example>
 
 <separator></separator>
 
 <h2>Clock Without Spinners</h2>
 <description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
 <component-example [name]="'ex3'">
-  <p>
     <fd-time-no-spinners-example></fd-time-no-spinners-example>
-  </p>
 </component-example>
-<code-example [code]="timeNoSpinnersHtml" [language]="'HTML'"></code-example>
+<code-example [exampleFiles]="timeNoSpinners"></code-example>
 
 <separator></separator>
 
 <h2>Clock Without Seconds</h2>
 <description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
 <component-example [name]="'ex4'">
-  <p>
     <fd-time-no-seconds-example></fd-time-no-seconds-example>
-  </p>
 </component-example>
-<code-example [code]="timeNoSecondsHtml" [language]="'HTML'"></code-example>
+<code-example [exampleFiles]="timeNoSeconds"></code-example>
 
 <separator></separator>
 
@@ -50,11 +42,9 @@
   You can disable the entire component by setting <code>[disabled]="true"</code>.
 </description>
 <component-example [name]="'ex5'">
-  <p>
     <fd-time-disabled-example></fd-time-disabled-example>
-  </p>
 </component-example>
-<code-example [code]="timeDisabledHtml" [language]="'HTML'"></code-example>
+<code-example [exampleFiles]="timeDisabled"></code-example>
 
 <separator></separator>
 
@@ -64,11 +54,9 @@
   Inspect the HTML elements to see the Spanish aria-labels.
 </description>
 <component-example [name]="'ex6'">
-  <p>
     <fd-time-i18n-example></fd-time-i18n-example>
-  </p>
 </component-example>
-<code-example [code]="timeI18nTs" [language]="'TypeScript'"></code-example>
+<code-example [exampleFiles]="timeI18n"></code-example>
 
 <separator></separator>
 
@@ -78,9 +66,6 @@
   usual methods used for accessing data within Angular reactive forms.
 </description>
 <component-example [name]="'ex7'">
-  <p>
     <fd-time-form-example></fd-time-form-example>
-  </p>
 </component-example>
-<code-example [code]="timeFormHtml" [language]="'HTML'"></code-example>
-<code-example [code]="timeFormTs" [language]="'TypeScript'"></code-example>
+<code-example [exampleFiles]="timeForm"></code-example>

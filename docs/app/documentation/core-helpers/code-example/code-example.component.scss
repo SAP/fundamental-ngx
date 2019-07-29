@@ -8,32 +8,38 @@
     }
 }
 
-.docs-example-copy-button {
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    border: none;
-    display: none;
-    color: #959595;
-    background-color: transparent;
+.docs-code-example-toolbar {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
 
-    &::before {
-        font-size: 1.35rem;
+.fd-tabs__panel.is-expanded {
+    width: 100%;
+}
+
+.fd-tabs__item {
+    padding: 0;
+    .fd-tabs__link {
+        padding: 16px;
     }
+}
 
-    &:active {
-        border: none;
-        opacity: 0.65;
-    }
-
-    &:focus {
-        border-radius: 50%;
-        box-shadow: none;
-    }
-
-    &:hover {
-        border: none;
-        color: inherit;
+code-example {
+    ul.fd-tabs {
+        margin-bottom: 0;
+        margin-block-end: 0;
+        border-bottom: 1px solid #ccc;
         background-color: transparent;
     }
+}
+
+.docs-code-example-content {
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
 }

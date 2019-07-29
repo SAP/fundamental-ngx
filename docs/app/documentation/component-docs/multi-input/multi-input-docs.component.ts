@@ -14,27 +14,68 @@ import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-
 
 import * as formH from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.html';
 import * as formT from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
-  selector: 'app-multi-input-docs',
-  templateUrl: './multi-input-docs.component.html',
-  styleUrls: ['./multi-input-docs.component.scss']
+    selector: 'app-multi-input-docs',
+    templateUrl: './multi-input-docs.component.html',
+    styleUrls: ['./multi-input-docs.component.scss']
 })
 export class MultiInputDocsComponent {
 
-  simpleHtml = simpleH;
-  simpleTs = simpleT;
+    multiInputBasic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: simpleH,
+        },
+        {
+            language: 'typescript',
+            code: simpleT
+        }
+    ];
 
-  displayHtml = displayH;
-  displayTs = displayT;
+    display: ExampleFile[] = [
+        {
+            language: 'html',
+            code: displayH,
+        },
+        {
+            language: 'typescript',
+            code: displayT
+        }
+    ];
 
-  filterHtml = filterH;
-  filterTs = filterT;
+    filter: ExampleFile[] = [
+        {
+            language: 'html',
+            code: filterH,
+        },
+        {
+            language: 'typescript',
+            code: filterT
+        }
+    ];
 
-  asyncHtml = asyncH;
-  asyncTs = asyncT;
+    async: ExampleFile[] = [
+        {
+            language: 'html',
+            code: asyncH,
+        },
+        {
+            language: 'typescript',
+            code: asyncT
+        }
+    ];
 
-  formHtml = formH;
-  formTs = formT;
+    form: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formH,
+        },
+        {
+            language: 'typescript',
+            code: formT
+        }
+    ];
 
 }

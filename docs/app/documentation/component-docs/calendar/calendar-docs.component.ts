@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
@@ -7,20 +7,13 @@ import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.c
 import * as calendarSingleFormSource from '!raw-loader!./examples/calendar-form-single-example.component.ts';
 import * as calendarRangeFormSource from '!raw-loader!./examples/calendar-form-range-example.component.ts';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html'
 })
-export class CalendarDocsComponent implements OnInit {
-
-    calendarSingleSource = calendarSingleSrc;
-    calendarRangeSource = calendarRangeSrc;
-    calendarMondayStartSource = calendarMondayStartSrc;
-    calendari18nTs = calendarIntlSrc;
-    calendarSingleFormSource = calendarSingleFormSource;
-    calendarRangeFormSource = calendarRangeFormSource;
-    calendarProgrammaticallySource = calendarProgrammaticallySource;
+export class CalendarDocsComponent {
 
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
@@ -69,7 +62,46 @@ myDisableFunction = function(d: FdDate): boolean {
     return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp()
 }`;
 
-    constructor() {}
+    calendarSingleSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: calendarSingleSrc
+        },
+        {
+            language: 'typescript',
+            code: this.exampleFunctionsHtml,
+            name: 'Example Block/Disable Functions'
+        }
+    ];
 
-    ngOnInit() {}
+    calendarRangeSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarRangeSrc
+    }];
+
+    calendarMondayStartSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarMondayStartSrc
+    }];
+
+    calendari18n: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarIntlSrc
+    }];
+
+    calendarSingleFormSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarSingleFormSource
+    }];
+
+    calendarRangeFormSource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarRangeFormSource
+    }];
+
+    calendarProgrammaticallySource: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarProgrammaticallySource
+    }];
+
 }

@@ -18,6 +18,7 @@ import * as containerT from '!raw-loader!./examples/container/container.componen
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { ModalService } from '../../../../../library/src/lib/modal/modal-service/modal.service';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-modal',
@@ -67,27 +68,89 @@ export class ModalDocsComponent {
         }
     };
 
-    templateModalTs = templateTs;
-    templateModalHtml = templateHtml;
+    templateModal: ExampleFile[] = [
+        {
+            language: 'html',
+            code: templateHtml
+        },
+        {
+            language: 'typescript',
+            code: templateTs
+        }
+    ];
 
-    componentAsContentSource = componentAsContentSrc;
-    contentSource = contentSrc;
+    componentAsContentSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: componentAsContentSrc,
+        },
+        {
+            language: 'typescript',
+            code: contentSrc,
+            name: 'Modal Content'
+        }
+    ];
 
-    modalInModalExample = modalInModalExample;
-    modalInModal = modalInModalComponent;
-    modalInModalSecond = modalInModalSecondComponent;
+    modalInModalExample: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: modalInModalExample,
+        },
+        {
+            language: 'typescript',
+            code: modalInModalComponent,
+            name: 'First Modal'
+        },
+        {
+            language: 'typescript',
+            code: modalInModalSecondComponent,
+            name: 'Second Modal'
+        }
+    ];
 
-    fullScreenSource = fsModalSource;
-    fullScreenSourceTs = fsModalSourceT;
+    fullScreenSource: ExampleFile[] = [
+        {
+            language: 'html',
+            code: fsModalSource,
+        },
+        {
+            language: 'typescript',
+            code: fsModalSourceT
+        }
+    ];
 
-    backdropHtml = backdropH;
-    backdropTs = backdropT;
+    backdrop: ExampleFile[] = [
+        {
+            language: 'html',
+            code: backdropH,
+        },
+        {
+            language: 'typescript',
+            code: backdropT
+        }
+    ];
 
-    positionHtml = positionH;
-    positionTs = positionT;
+    position: ExampleFile[] = [
+        {
+            language: 'html',
+            code: positionH,
+        },
+        {
+            language: 'typescript',
+            code: positionT
+        }
+    ];
 
-    containerHtml = containerH;
-    containerTs = containerT;
+    container: ExampleFile[] = [
+        {
+            language: 'html',
+            code: containerH,
+        },
+        {
+            language: 'typescript',
+            code: containerT
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService, private modalService: ModalService) {
         this.schema = this.schemaFactory.getComponent('modal');

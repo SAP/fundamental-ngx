@@ -4,6 +4,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as imageShapesSrc from '!raw-loader!./examples/image-shapes-example.component.html';
 import * as imageSizesSrc from '!raw-loader!./examples/image-sizes-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-image',
@@ -41,9 +42,15 @@ export class ImageDocsComponent implements OnInit {
         }
     };
 
-    imageSizesHtml = imageSizesSrc;
+    imageSizesHtml: ExampleFile[] = [{
+        language: 'html',
+        code: imageSizesSrc
+    }];
 
-    imageShapesHtml = imageShapesSrc;
+    imageShapesHtml: ExampleFile[] = [{
+        language: 'html',
+        code: imageShapesSrc
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('image');

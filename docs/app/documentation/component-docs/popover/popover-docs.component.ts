@@ -8,19 +8,54 @@ import * as popoverPlacementTsSrc from '!raw-loader!./examples/popover-placement
 import * as popoverModalHtmlSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.html';
 import * as popoverModalTsSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.ts';
 import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.html';
-
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-popover',
     templateUrl: './popover-docs.component.html'
 })
 export class PopoverDocsComponent {
-    popoverExampleHtml = popoverSrc;
-    popoverProgrammaticExampleHtml = popoverProgrammaticHtmlSrc;
-    popoverProgrammaticExampleTs = popoverProgrammaticTsSrc;
-    popoverPlacementExampleHtml = popoverPlacementHtmlSrc;
-    popoverPlacementExampleTs = popoverPlacementTsSrc;
-    popoverModalExampleHtml = popoverModalHtmlSrc;
-    popoverModalExampleTs = popoverModalTsSrc;
-    popoverFillExampleH = popoverFillHSrc;
+
+    popoverExample: ExampleFile[] = [{
+        language: 'html',
+        code: popoverSrc
+    }];
+
+    popoverProgrammaticExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverProgrammaticHtmlSrc,
+        },
+        {
+            language: 'typescript',
+            code: popoverProgrammaticTsSrc
+        }
+    ];
+
+    popoverPlacementExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverPlacementHtmlSrc,
+        },
+        {
+            language: 'typescript',
+            code: popoverPlacementTsSrc
+        }
+    ];
+
+    popoverModalExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverModalHtmlSrc,
+        },
+        {
+            language: 'typescript',
+            code: popoverModalTsSrc
+        }
+    ];
+
+    popoverFillExample: ExampleFile[] = [{
+        language: 'html',
+        code: popoverFillHSrc
+    }];
 }
