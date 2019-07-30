@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import * as formHtml from '!raw-loader!./examples/radio-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/radio-form-group-example.component.html';
 import * as formGroupInputTs from '!raw-loader!./examples/radio-form-group-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import * as formStateHtml from "!raw-loader!*";
 
 @Component({
     selector: 'app-radio',
@@ -10,9 +12,22 @@ import * as formGroupInputTs from '!raw-loader!./examples/radio-form-group-examp
 })
 export class RadioDocsComponent {
 
-    checkboxFormHtml = formHtml;
+    radioFormHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formHtml,
+        }
+    ];
 
-    formGroupInputHtml = formGroupInputHtml;
+    formGroupRadioInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formGroupInputHtml,
+        },
+        {
+            language: 'typescript',
+            code: formGroupInputTs,
+        }
+    ];
 
-    formGroupInputTs = formGroupInputTs;
 }

@@ -5,6 +5,7 @@ import * as formInlineHelpHtml from '!raw-loader!./examples/textarea-inline-help
 import * as formStateHtml from '!raw-loader!./examples/textarea-state-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/textarea-form-group-example.component.html';
 import * as formGroupInputTs from '!raw-loader!./examples/textarea-form-group-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-input',
@@ -12,13 +13,37 @@ import * as formGroupInputTs from '!raw-loader!./examples/textarea-form-group-ex
 })
 export class TextareaDocsComponent {
 
-    inputsFormHtml = formHtml;
 
-    inputsHelpFormHtml = formInlineHelpHtml;
+    textareaHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formHtml,
+        }
+    ];
 
-    inputStatesFormHtml = formStateHtml;
+    textareaHelpHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formInlineHelpHtml,
+        }
+    ];
 
-    formGroupInputHtml = formGroupInputHtml;
+    textareaStatesHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formStateHtml,
+        }
+    ];
 
-    formGroupInputTs = formGroupInputTs;
+    textareaFormGroup: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formGroupInputHtml,
+        },
+        {
+            language: 'typescript',
+            code: formGroupInputTs,
+        }
+    ];
+
 }

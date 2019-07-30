@@ -5,6 +5,7 @@ import * as formInlineHelpHtml from '!raw-loader!./examples/input-inline-help-ex
 import * as formStateHtml from '!raw-loader!./examples/input-state-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/input-form-group-example.component.html';
 import * as formGroupInputTs from '!raw-loader!./examples/input-form-group-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-input',
@@ -12,13 +13,35 @@ import * as formGroupInputTs from '!raw-loader!./examples/input-form-group-examp
 })
 export class InputDocsComponent {
 
-    inputsFormHtml = formHtml;
+    inputsFormHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formHtml,
+        }
+    ];
+    inputsHelpFormHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formInlineHelpHtml,
+        }
+    ];
 
-    inputsHelpFormHtml = formInlineHelpHtml;
+    inputStatesFormHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formStateHtml,
+        }
+    ];
 
-    inputStatesFormHtml = formStateHtml;
+    formGroupInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formGroupInputHtml,
+        },
+        {
+            language: 'typescript',
+            code: formGroupInputTs,
+        }
+    ];
 
-    formGroupInputHtml = formGroupInputHtml;
-
-    formGroupInputTs = formGroupInputTs;
 }
