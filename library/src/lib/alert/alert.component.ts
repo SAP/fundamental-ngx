@@ -206,6 +206,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         if (this.type) {
             this._addClassToElement('fd-alert--' + this.type);
         }
+        if (this.dismissible) {
+            this._addClassToElement('fd-alert--dismissible');
+        }
     }
 
     private loadFromTemplate(template: TemplateRef<any>): void {
