@@ -314,7 +314,6 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
             this.periodInvalid = false;
             this.onChange(this.time);
         }
-        return ;
     }
 
     /** @hidden */
