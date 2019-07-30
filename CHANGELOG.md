@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0-rc.2"></a>
+# [0.9.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.1...v0.9.0-rc.2) (2019-07-30)
+
+
+### Features
+
+* Calendar Refactor ([#1048](https://github.com/SAP/fundamental-ngx/issues/1048)) ([8542733](https://github.com/SAP/fundamental-ngx/commit/8542733))
+
+
+
 <a name="0.9.0-rc.1"></a>
 # [0.9.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.0...v0.9.0-rc.1) (2019-07-29)
 
