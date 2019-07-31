@@ -5,8 +5,8 @@
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>
-                <li fd-menu-item *ngFor="let option of menu1">
-                    <a [attr.href]="option.url">{{option.text}}</a>
+                <li *ngFor="let option of menu1">
+                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
                 </li>
             </ul>
         </fd-menu>
@@ -20,8 +20,8 @@
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>
-                <li fd-menu-item *ngFor="let option of menu1">
-                    <a [attr.href]="option.url">{{option.text}}</a>
+                <li *ngFor="let option of menu1">
+                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
                 </li>
             </ul>
         </fd-menu>
@@ -35,8 +35,8 @@
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>
-                <li fd-menu-item *ngFor="let option of menu1">
-                    <a [attr.href]="option.url">{{option.text}}</a>
+                <li *ngFor="let option of menu1">
+                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
                 </li>
             </ul>
         </fd-menu>

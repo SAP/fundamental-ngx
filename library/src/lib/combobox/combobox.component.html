@@ -29,15 +29,25 @@
                  [style.maxHeight]="maxHeight">
             <ng-content></ng-content>
             <ul fd-menu-list>
-                <li *ngFor="let term of displayedValues; let index = index;"
-                    (click)="onMenuClickHandler(index)"
-                    (keydown)="onMenuKeydownHandler($event, index)">
-                    <ng-container *ngIf="itemTemplate">
+                <ng-container *ngIf="!itemTemplate">
+                    <li *ngFor="let term of displayedValues; let index = index;"
+                        (click)="onMenuClickHandler(index)"
+                        (keydown)="onMenuKeydownHandler($event, index)"
+                    >
+                        <a fd-menu-item tabindex="0"
+                           [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting">
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="itemTemplate">
+                    <li *ngFor="let term of displayedValues; let index = index;"
+                        (click)="onMenuClickHandler(index)"
+                        (keydown)="onMenuKeydownHandler($event, index)"
+                        fd-menu-item tabindex="0"
+                    >
                         <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
-                    </ng-container>
-                    <a fd-menu-item *ngIf="!itemTemplate" tabindex="0"
-                       [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></a>
-                </li>
+                    </li>
+                </ng-container>
             </ul>
         </fd-menu>
     </fd-popover-body>

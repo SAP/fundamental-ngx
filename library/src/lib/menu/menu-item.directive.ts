@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 /**
  * The directive that represents a menu item.
