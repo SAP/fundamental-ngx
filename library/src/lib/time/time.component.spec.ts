@@ -29,6 +29,7 @@ describe('TimeComponent', () => {
     });
 
     it('should set the displayed hour', () => {
+        component.meridian = true;
         component.time.hour = 0;
         component.setDisplayedHour();
         expect(component.period).toBe('am');
@@ -51,9 +52,8 @@ describe('TimeComponent', () => {
     });
 
     it('should handle displayedHourChanged', () => {
-        component.displayedHour = null;
-        component.displayedHourChanged();
-        expect(component.time.hour).toBe(null);
+
+        component.meridian = true;
 
         component.displayedHour = 12;
         component.period = 'am';
@@ -74,37 +74,47 @@ describe('TimeComponent', () => {
         component.period = 'pm';
         component.displayedHourChanged();
         expect(component.time.hour).toBe(13);
+
+        component.meridian = false;
+
+        component.displayedHour = 12;
+        component.displayedHourChanged();
+        expect(component.time.hour).toBe(12);
+
+        component.displayedHour = 1;
+        component.displayedHourChanged();
+        expect(component.time.hour).toBe(1);
     });
 
     it('should handle input blur for displayedHour === 0, meridian', () => {
-        spyOn(component, 'setDisplayedHour').and.callThrough();
         component.meridian = true;
         component.displayedHour = 0;
         component.inputBlur('hour');
         expect(component.time.hour).toBe(0);
-        expect(component.setDisplayedHour).toHaveBeenCalled();
+        expect(component.period).toBe('am');
     });
 
     it('should handle input blur for non-meridian big numbers', () => {
-        component.time.hour = -100.123;
+        component.displayedHour = -100.123;
         component.inputBlur('hour');
         expect(component.time.hour).toBe(4);
     });
 
     it('should handle input blur for displayedHour > 12, < 24', () => {
-        spyOn(component, 'displayedHourChanged');
         spyOn(component, 'setDisplayedHour');
         component.meridian = true;
         component.period = 'pm';
         component.displayedHour = 16;
         component.inputBlur('hour');
-        expect(component.time.hour).toBe(4);
-        expect(component.setDisplayedHour).toHaveBeenCalled();
+        expect(component.time.hour).toBe(16);
+        expect(component.displayedHour).toBe(4);
         component.meridian = true;
         component.period = 'am';
         component.displayedHour = 16;
         component.inputBlur('hour');
-        expect(component.setDisplayedHour).toHaveBeenCalled();
+        expect(component.time.hour).toBe(16);
+        expect(component.displayedHour).toBe(4);
+        expect(component.period).toBe('pm');
     });
 
     it('should handle input blur for displayedHour > 24', () => {
@@ -113,19 +123,17 @@ describe('TimeComponent', () => {
         component.meridian = true;
         component.displayedHour = 37;
         component.inputBlur('hour');
-        expect(component.displayedHourChanged).toHaveBeenCalled();
         expect(component.displayedHour).toBe(1);
     });
 
     it('should handle input blur for displayedHour > 12, pm', () => {
-        spyOn(component, 'setDisplayedHour').and.callThrough();
         component.meridian = true;
         component.displayedHour = 13;
         component.time.hour = 13;
         component.period = 'pm';
         component.inputBlur('hour');
-        expect(component.time.hour).toBe(1);
-        expect(component.setDisplayedHour).toHaveBeenCalled();
+        expect(component.displayedHour).toBe(1);
+        expect(component.time.hour).toBe(13);
     });
 
     it('should handle input blur for minute', () => {
@@ -138,13 +146,6 @@ describe('TimeComponent', () => {
         component.time.second = -1.123;
         component.inputBlur('second');
         expect(component.time.second).toBe(1);
-    });
-
-    it('should handle input blur for period', () => {
-        spyOn(component, 'setDisplayedHour');
-        component.period = 'asdf';
-        component.inputBlur('period');
-        expect(component.setDisplayedHour).toHaveBeenCalled();
     });
 
     it('should handle ngOnChanges', () => {

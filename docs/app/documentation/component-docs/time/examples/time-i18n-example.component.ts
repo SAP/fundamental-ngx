@@ -24,9 +24,6 @@ export class CustomI18nLabels extends TimeI18nLabels {
 
     decreaseSecondsLabel: string = 'Disminuir segundos';
 
-    meridianAmLabel: string = 'A.m.';
-
-    meridianPmLabel: string = 'P.m.';
 }
 
 @Injectable()
@@ -43,6 +40,8 @@ export class CustomI18n extends TimeI18n {
     minutesPlaceholder: string = 'mm';
 
     secondsPlaceholder: string = 'zz';
+
+    meridianCaseSensitive: boolean = true;
 
 }
 

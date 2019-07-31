@@ -38,4 +38,9 @@ export class TimeI18n {
      * */
     secondsPlaceholder: string = 'ss';
 
+    /**
+     * Defines if the meridian validation should be case sensitive.
+     * */
+    meridianCaseSensitive: boolean = false;
+
 }
