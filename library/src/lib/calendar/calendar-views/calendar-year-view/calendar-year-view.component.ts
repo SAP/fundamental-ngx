@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
 
     /** @hidden
-     *  This variable is used to define which year should be possible to focus (tabindex = 0)
+     *  This variable is used to define which year from calendarYearList should be focusable by tab key
      * */
     activeYear: number;
 
@@ -107,13 +107,17 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
      * if there is no current year, or selected, return first one
      */
     private getActiveYear(): number {
-        if (this.calendarYearList.find(year => year === this.yearSelected)) {
-            return this.calendarYearList.find(year => year === this.yearSelected);
-        } else if (this.calendarYearList.find(year => year === this.currentYear)) {
-            return this.calendarYearList.find(year => year === this.currentYear);
-        } else {
-            return this.calendarYearList[0];
+        const selectedYear: number = this.calendarYearList.find(year => year === this.yearSelected);
+        if (selectedYear) {
+            return selectedYear;
         }
+
+        const currentYear: number = this.calendarYearList.find(year => year === this.currentYear);
+        if (currentYear) {
+            return currentYear;
+        }
+
+        return this.calendarYearList[0];
     }
 
     /** Method for handling the keyboard navigation. */
@@ -152,8 +156,9 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
 
     /** @hidden */
     private constructYearList(): void {
+        const displayedYearsAmount: number = 12;
         this.calendarYearList = [];
-        for (let x = 0; x < 12; x++) {
+        for (let x = 0; x < displayedYearsAmount; ++x) {
             this.calendarYearList.push(this.firstYearInList + x);
         }
         this.activeYear = this.getActiveYear();

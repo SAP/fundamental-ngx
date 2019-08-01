@@ -12,7 +12,8 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
 
         <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
         <br/><br/>
-        <div>Selected Date: {{date.toDateString()}}</div>`
+        <div>Selected Date: {{date.toDateString()}}</div>
+    `
 })
 export class CalendarSingleExampleComponent {
 

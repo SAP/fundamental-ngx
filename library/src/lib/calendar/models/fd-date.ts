@@ -62,25 +62,27 @@ export class FdDate {
 
     /**
      * Get amount of milliseconds from 01.01.1970
-     * 0 is thrown when some some of properties (day,month,year) are not defined
+     * -1 is thrown when some some of properties (day,month,year) are not defined
      * */
     public getTimeStamp(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getTime();
         } else {
-            return 0;
+            return -1;
         }
     }
 
     /**
      * Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
-     * 0 is thrown when some some of properties (day,month,year) are not defined
+     * -1 is thrown when some some of properties (day,month,year) are not defined
+     * Native javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it's needed to increment value
+     *
      * */
     public getDay(): number {
         if (this.year && this.month && this.day) {
-            return this.toDate().getDay() % 7 + 1;
+            return this.toDate().getDay() + 1;
         } else {
-            return 0;
+            return -1;
         }
     }
 
