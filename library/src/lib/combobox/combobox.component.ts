@@ -157,6 +157,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     ngOnDestroy(): void {
         this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 
     /** @hidden */
