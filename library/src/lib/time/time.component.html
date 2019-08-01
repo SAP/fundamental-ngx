@@ -100,11 +100,11 @@
                 [attr.aria-label]="timeI18nLabels?.increasePeriodLabel"></button>
     </div>
     <div class="fd-time__input">
-        <input [ngModel]="period"
+        <input [(ngModel)]="period"
                [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}"
                class="fd-form__control"
                (blur)="inputBlur('period')"
-               (ngModelChange)="periodModelChange($event)"
+               (ngModelChange)="periodModelChange()"
                type="text"
                placeholder="{{timeI18n?.meridianPlaceholder}}"
                [attr.aria-label]="timeI18nLabels?.periodLabel"/>

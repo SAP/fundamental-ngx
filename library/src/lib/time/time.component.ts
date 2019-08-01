@@ -280,9 +280,11 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     togglePeriod(): void {
         if (this.time.hour < 24 && this.time.hour >= 0) {
             if (this.isAm(this.period)) {
-                this.periodModelChange(this.timeI18n.meridianPm);
+                this.period = this.timeI18n.meridianPm;
+                this.periodModelChange();
             } else if (this.isPm(this.period)) {
-                this.periodModelChange(this.timeI18n.meridianAm);
+                this.period = this.timeI18n.meridianAm;
+                this.periodModelChange();
             }
         }
     }
@@ -308,24 +310,21 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles period model change. depending on current hour and new period changes hours by +/- 12
      * */
-    periodModelChange(newPeriod: string): void {
+    periodModelChange(): void {
         if (this.time && !this.time.hour) {
             this.time.hour = 0;
         }
-        if (!newPeriod ||
-            (!this.isPm(newPeriod) && !this.isAm(newPeriod))
+        if (!this.period ||
+            (!this.isPm(this.period) && !this.isAm(this.period))
         ) {
             this.periodInvalid = true;
         } else if (this.time.hour < 24 && this.time.hour >= 0) {
             this.periodInvalid = false;
-            this.period = newPeriod;
-
-            if (this.isPm(newPeriod) && this.time.hour < 12) {
+            if (this.isPm(this.period) && this.time.hour < 12) {
                 this.time.hour = this.time.hour + 12;
-            } else if (this.time.hour >= 12 && this.isAm(newPeriod)) {
+            } else if (this.time.hour >= 12 && this.isAm(this.period)) {
                 this.time.hour = this.time.hour - 12;
             }
-
             this.onChange(this.time);
         }
     }
