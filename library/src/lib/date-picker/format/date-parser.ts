@@ -45,9 +45,9 @@ export class DateFormatParserDefault extends DateFormatParser {
     public parse(value: string): FdDate {
         if (value) {
             const str = value.toString().split('/').map(Number);
-            return new FdDate(str[2], str[0], str[1])
+            return new FdDate(str[2], str[0], str[1]);
         } else {
-            return null;
+            return new FdDate(null, null, null);
         }
     }
 

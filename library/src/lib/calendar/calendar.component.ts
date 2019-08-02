@@ -13,7 +13,7 @@ import {
 import { CalendarI18n } from './i18n/calendar-i18n';
 import { FdDate } from './models/fd-date';
 import { CalendarCurrent } from './models/calendar-current';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { FdRangeDate } from './models/fd-range-date';
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
@@ -46,6 +46,11 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => CalendarComponent),
             multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => CalendarComponent),
+            multi: true
         }
     ],
     host: {
@@ -53,7 +58,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
         '[attr.id]': 'id'
     }
 })
-export class CalendarComponent implements OnInit, ControlValueAccessor {
+export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
 
     /** @hidden */
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent;
@@ -208,9 +213,9 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
                 selected = <FdDate>selected;
 
                 valid = selected.isDateValid();
+                this.selectedDate = selected;
 
                 if (selected.isDateValid()) {
-                    this.selectedDate = selected;
                     this.prepareDisplayedView();
                 }
             } else if (this.calType === 'range') {
@@ -225,13 +230,27 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
                 if (selected.end && !selected.end.isDateValid()) {
                     valid = false;
                 }
+                this.selectedRangeDate = { start: selected.start, end: selected.end };
                 if (valid) {
-                    this.selectedRangeDate = { start: selected.start, end: selected.end };
                     this.prepareDisplayedView();
                 }
             }
         }
         this.isValidDateChange.emit(valid);
+    }
+
+    /**
+     * @hidden
+     * Function that implements Validator Interface, adds validation support for forms
+     * */
+    validate(control: AbstractControl): {
+        [key: string]: any
+    } {
+        return this.isModelValid() ? null : {
+            dateValidation: {
+                valid: false
+            }
+        };
     }
 
     /** @hidden */
@@ -335,12 +354,12 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
 
     /** Function that allows to switch actual view to next year */
     public displayNextYear(): void {
-        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 }
+        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 };
     }
 
     /** Function that allows to switch actual view to previous year */
     public displayPreviousYear(): void {
-        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 }
+        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
@@ -372,6 +391,35 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         this.dayViewComponent.focusActiveDay();
     }
 
+    public selectedYear(yearSelected: number) {
+        this.activeView = 'day';
+        this.currentlyDisplayed.year = yearSelected;
+        this.changeDetectorRef.detectChanges();
+        this.dayViewComponent.focusActiveDay();
+    }
+
+    /** Method that provides information if model selected date/dates have properly types and are valid */
+    public isModelValid(): boolean {
+        if (this.calType === 'single') {
+            return this.selectedDate &&
+                this.selectedDate instanceof FdDate &&
+                this.selectedDate.isDateValid()
+                ;
+        } else {
+            return this.selectedRangeDate &&
+                (
+                    this.selectedRangeDate.start &&
+                    this.selectedRangeDate.start instanceof FdDate &&
+                    this.selectedRangeDate.start.isDateValid()
+                ) && (
+                    this.selectedRangeDate.end &&
+                    this.selectedRangeDate.end instanceof FdDate &&
+                    this.selectedRangeDate.start.isDateValid()
+                )
+                ;
+        }
+    }
+
     /**
      * @hidden
      * Method that sets up the currently displayed variables, like shown month and year.
@@ -394,13 +442,6 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
             const tempDate = FdDate.getToday();
             this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };
         }
-    }
-
-    public selectedYear(yearSelected: number) {
-        this.activeView = 'day';
-        this.currentlyDisplayed.year = yearSelected;
-        this.changeDetectorRef.detectChanges();
-        this.dayViewComponent.focusActiveDay();
     }
 
 }

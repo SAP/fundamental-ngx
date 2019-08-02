@@ -11,6 +11,7 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
         
         Touched: {{customForm.controls.date.touched}}<br/>
         Dirty: {{customForm.controls.date.dirty}}<br/>
+        Valid: {{customForm.controls.date.valid}}<br/>
 
         Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
     `
@@ -19,4 +20,4 @@ export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
         date: new FormControl(FdDate.getToday())
     });
-};
+}

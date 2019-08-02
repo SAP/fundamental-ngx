@@ -1,5 +1,6 @@
 <div class="fd-datetime">
     <fd-popover [(isOpen)]="isOpen"
+                (isOpenChange)="handleInputChange(dateTimePicker.value)"
                 [closeOnOutsideClick]="false"
                 [closeOnEscapeKey]="false"
                 [triggers]="[]"
@@ -14,9 +15,8 @@
                        [(ngModel)]="inputFieldDate"
                        [placeholder]="placeholder"
                        (keyup.enter)="handleInputChange(dateTimePicker.value)"
-                       (blur)="handleInputChange(dateTimePicker.value)"
                        (click)="openPopover()"
-                       [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }"
+                       [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }"
                        [disabled]="disabled">
                 <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"

@@ -53,7 +53,7 @@ export class FdDate {
      * Get Luxon date object converted to string from FdDate.
      */
     public toDateString(): string {
-        if (this.year && this.month && this.day) {
+        if (this.year && this.month && this.day && this.isDateValid()) {
             return this.toDate().toDateString();
         } else {
             return '';

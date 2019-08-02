@@ -5,7 +5,7 @@ import { CalendarModule } from './calendar.module';
 import { FdDate } from './models/fd-date';
 
 
-describe('Calendar2Component', () => {
+describe('CalendarComponent', () => {
     let component: CalendarComponent;
     let fixture: ComponentFixture<CalendarComponent>;
 
@@ -75,7 +75,8 @@ describe('Calendar2Component', () => {
         const invalidDate = new FdDate(2000, 50, 50);
         component.writeValue(invalidDate);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
-        expect(component.selectedDate).not.toBe(invalidDate);
+        expect(component.isModelValid()).toBe(false);
+        expect(component.selectedDate).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when correct', () => {
@@ -107,17 +108,19 @@ describe('Calendar2Component', () => {
         component.calType = 'range';
         component.writeValue({ start: validDate, end: invalidDate });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
-        expect(component.selectedDate).not.toBe(invalidDate);
+        expect(component.selectedRangeDate.end).toBe(invalidDate);
     });
 
-    it('Should handle write value for range mode when end date not correct', () => {
+    it('Should handle write value for range mode when both dates not correct', () => {
         spyOn(component.isValidDateChange, 'emit');
         const invalidDate = new FdDate(2000, 50, 50);
         const invalidDate2 = new FdDate(2000, 50, 50);
         component.calType = 'range';
         component.writeValue({ start: invalidDate, end: invalidDate2 });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
-        expect(component.selectedDate).not.toBe(invalidDate);
+        expect(component.isModelValid()).toBe(false);
+        expect(component.selectedRangeDate.start).toBe(invalidDate);
+        expect(component.selectedRangeDate.end).toBe(invalidDate2);
     });
 
     it('Should change to next month, when on day view an next arrow click', () => {
