@@ -21,7 +21,6 @@ import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
-import { CalendarService } from '../calendar/calendar.service';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -336,20 +335,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.date = new FdDatetime(this.selectedDate, this.time);
         if (this.isModelValid()) {
             this.calendarComponent.setCurrentlyDisplayed(this.date.date);
-            console.log('set');
             this.setInput(this.date);
         }
     }
 
     /**
      * @hidden
-     * Method that is triggered by events from calendar component, when there is selected date changed
+     * Method that is triggered by events from calendar component, when there is selected date changed.
+     * If invalid time model is detected, it takes time model data from TimeComponent.
      * */
     handleDateChange(date: FdDate): void {
         this.selectedDate = date;
+        if (!this.date.isTimeValid()) {
+            this.time = this.timeComponent.time;
+        }
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.isModelValid();
-        console.log('set');
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -362,7 +363,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.isModelValid();
-        console.log('set');
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -377,7 +377,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /**
      * @hidden
      * Method, which is responsible for transforming string to datetime, depending on type or
-     * validation the results are different. It also changes to state of isInvalidDateInput
+     * validation the results are different. It also changes to state of isInvalidDateInput.
      * */
     handleInputChange(date: string): void {
         const fdTimeDate = this.dateTimeAdapter.parse(date);

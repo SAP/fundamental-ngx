@@ -36,7 +36,7 @@ export class FdDatetime {
      * Get Luxon date object converted to string from FdDate.
      */
     public toLocaleDateString(): string {
-        if (this.toDate()) {
+        if (this.toDate() && this.isTimeValid() && this.isDateValid()) {
             return this.toDate().toLocaleString();
         } else {
             return null;
@@ -111,6 +111,26 @@ export class FdDatetime {
     public get second(): number {
         if (this.time) {
             return this.time.second;
+        }
+    }
+
+    /**
+     * Sets invalid properties from TimeObject to default values if any of them is undefined.
+     * Default Values: hour = 12, minute = 0, second = 0
+     * Also if TimeObject is
+     * */
+    public resetInvalidTimeProperties() {
+        if (!this.time) {
+            this.time = { hour: 12, minute: 0, second: 0 };
+        }
+        if (!this.hour && this.hour !== 0) {
+            this.time.hour = 12;
+        }
+        if (!this.minute && this.minute !== 0) {
+            this.time.minute = 0;
+        }
+        if (!this.second && this.second !== 0) {
+            this.time.second = 0;
         }
     }
 
