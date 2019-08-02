@@ -115,26 +115,6 @@ export class FdDatetime {
     }
 
     /**
-     * Sets invalid properties from TimeObject to default values if any of them is undefined.
-     * Default Values: hour = 12, minute = 0, second = 0
-     * Also if TimeObject is
-     * */
-    public resetInvalidTimeProperties() {
-        if (!this.time) {
-            this.time = { hour: 12, minute: 0, second: 0 };
-        }
-        if (!this.hour && this.hour !== 0) {
-            this.time.hour = 12;
-        }
-        if (!this.minute && this.minute !== 0) {
-            this.time.minute = 0;
-        }
-        if (!this.second && this.second !== 0) {
-            this.time.second = 0;
-        }
-    }
-
-    /**
      * Get native date object from FdDate.
      */
     public toDate(): Date {
