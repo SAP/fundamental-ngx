@@ -332,7 +332,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
             if (!calendarRow) {
                 calendarRow = [];
             }
-            return calendarRow.concat(totalCalendarRows);
+            return totalCalendarRows.concat(calendarRow);
         });
     }
 

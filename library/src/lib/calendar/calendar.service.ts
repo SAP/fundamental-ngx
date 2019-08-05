@@ -111,7 +111,7 @@ export class CalendarService {
                 break;
             }
             case 'Tab': {
-                if (this.focusEscapeFunction) {
+                if (this.focusEscapeFunction && !event.shiftKey) {
                     event.preventDefault();
                     this.focusEscapeFunction();
                 }
