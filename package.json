@@ -8,7 +8,7 @@
         "build": "ng build",
         "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-docs-netlify": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/\" ",
-        "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md",
+        "build-deploy-library": "ng build --prod fundamental-ngx && npm run build:schematics && cp README.md dist/fundamental-ngx/README.md",
         "build-pack-library": "ng build --prod fundamental-ngx && npm run build:schematics && cd dist/fundamental-ngx && npm pack && cd ../..",
         "build-src": "gulp build-src",
         "copy-docs": "cp README.md docs/assets/README.md && cp NEW_COMPONENT.md docs/assets/NEW_COMPONENT.md",
