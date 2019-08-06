@@ -2,6 +2,7 @@ import { Tree, SchematicsException } from '@angular-devkit/schematics';
 
 import * as ts from 'typescript';
 
+// Gets the ts source file from a path
 export function getSourceFile(host: Tree, path: string): ts.SourceFile {
     const buffer = host.read(path);
     if (!buffer) {
@@ -10,6 +11,7 @@ export function getSourceFile(host: Tree, path: string): ts.SourceFile {
     return ts.createSourceFile(path, buffer.toString(), ts.ScriptTarget.Latest, true);
 }
 
+// Get the version of a package name
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
     if (!tree.exists('package.json')) {
         return null;
@@ -25,6 +27,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
     return null;
 }
 
+// Check if a package exists in the package.json
 export function hasPackage(tree: Tree, name: string): boolean | null {
     if (!tree.exists('package.json')) {
         return null;

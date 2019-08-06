@@ -5,6 +5,7 @@ import { InsertChange } from '@schematics/angular/utility/change';
 
 import * as ts from 'typescript';
 
+// Adds an import to the root module.
 export function addImportToRootModule(tree: Tree, moduleName: string, src: string, modulePath: string) {
     const moduleSource = getSourceFile(tree, modulePath);
     if (!moduleSource) {
@@ -23,6 +24,7 @@ export function addImportToRootModule(tree: Tree, moduleName: string, src: strin
     tree.commitUpdate(recorder);
 }
 
+// Checks if an import is included in the module.
 export function hasModuleImport(tree: Tree, modulePath: string, className: string): boolean {
     const moduleFileContent = tree.read(modulePath);
 
@@ -53,6 +55,7 @@ export function hasModuleImport(tree: Tree, modulePath: string, className: strin
     return false;
 }
 
+// Borrowed from the Angular CDK
 function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | null {
     // Add immediate child nodes of the root node to the queue.
     const nodeQueue: ts.Node[] = [...rootNode.getChildren()];
@@ -72,6 +75,7 @@ function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | n
     return null;
 }
 
+// Borrowed from the Angular CDK
 function resolveIdentifierOfExpression(expression: ts.Expression): ts.Identifier | null {
     if (ts.isIdentifier(expression)) {
         return expression;
@@ -81,6 +85,7 @@ function resolveIdentifierOfExpression(expression: ts.Expression): ts.Identifier
     return null;
 }
 
+// Borrowed from the Angular CDK
 function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
     if (!callExpression.arguments.length ||
         !ts.isObjectLiteralExpression(callExpression.arguments[0])) {

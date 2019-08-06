@@ -22,6 +22,7 @@ export function ngAdd(options: any): Rule {
     ]);
 }
 
+// Runs npm install. Called as the last rule.
 function endInstallTask(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         context.addTask(new NodePackageInstallTask());
@@ -29,6 +30,7 @@ function endInstallTask(): Rule {
     };
 }
 
+// Adds missing dependencies to the project.
 function addDependencies(): Rule {
     return (tree: Tree) => {
         const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
@@ -51,6 +53,7 @@ function addDependencies(): Rule {
     };
 }
 
+// Configures browser animations.
 function addAnimations(options: any): Rule {
     return (tree: Tree) => {
         // tslint:disable-next-line:no-non-null-assertion
@@ -74,12 +77,13 @@ function addAnimations(options: any): Rule {
     };
 }
 
+// Adds the style path to the angular.json.
 function addStylePathToConfig(options: any): Rule {
     return (tree: Tree) => {
         const angularConfigPath = '/angular.json';
         const workspaceConfig = tree.read('/angular.json');
         if (!workspaceConfig) {
-            throw new SchematicsException(`Unable to find angular.json.`);
+            throw new SchematicsException(`Unable to find angular.json. Please manually configure your styles array.`);
         }
         const workspaceJson: WorkspaceSchema = JSON.parse(workspaceConfig.toString());
 
@@ -96,7 +100,7 @@ function addStylePathToConfig(options: any): Rule {
                 return tree;
             }
         } catch (e) {
-            throw new SchematicsException(`Unable to find angular.json project styles.`);
+            throw new SchematicsException(`Unable to find angular.json project styles. Please manually configure your styles array.`);
         }
         tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
         console.log(chalk.green(`✅️ Added fundamental-styles path to angular.json.`));
