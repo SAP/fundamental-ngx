@@ -1,6 +1,6 @@
 import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { getPackageVersionFromPackageJson } from '../utils/package-utils';
+import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { addImportToRootModule, hasModuleImport } from '../utils/ng-module-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
@@ -10,6 +10,7 @@ import chalk from 'chalk';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
+const fdStylesPath = 'node_modules/fundamental-styles/dist/fundamental-styles.min.css';
 
 export function ngAdd(options: any): Rule {
     return chain([
@@ -29,10 +30,15 @@ function endInstallTask(): Rule {
 function addDependencies(): Rule {
     return (tree: Tree) => {
         const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
-        const dependencies: NodeDependency[] = [
-            { type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/forms' },
-            { type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/animations' }
-        ];
+        const dependencies: NodeDependency[] = [];
+
+        if (!hasPackage(tree, '@angular/forms')) {
+            dependencies.push({ type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/forms' })
+        }
+
+        if (!hasPackage(tree, '@angular/animations')) {
+            dependencies.push({ type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/animations' })
+        }
 
         dependencies.forEach(dependency => {
             addPackageJsonDependency(tree, dependency);
@@ -45,6 +51,8 @@ function addDependencies(): Rule {
 
 function addAnimations(options: any): Rule {
     return (tree: Tree) => {
+        // tslint:disable-next-line:no-non-null-assertion
+        console.log(getProject(tree, options.project)!.architect!.build!.options);
         // tslint:disable-next-line:no-non-null-assertion
         const modulePath = getAppModulePath(tree, getProject(tree, options.project)!.architect!.build!.options!.main);
 
@@ -62,6 +70,13 @@ function addAnimations(options: any): Rule {
                 '@angular/platform-browser/animations', modulePath);
             console.log(chalk.green(`✅️ Added ${noopAnimationsModuleName} to root module.`));
         }
+        return tree;
+    };
+}
+
+function addStylePathToConfig(options: any): Rule {
+    return (tree: Tree) => {
+
         return tree;
     };
 }

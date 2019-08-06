@@ -24,3 +24,14 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 
     return null;
 }
+
+export function hasPackage(tree: Tree, name: string): boolean | null {
+    if (!tree.exists('package.json')) {
+        return null;
+    }
+
+    // tslint:disable-next-line:no-non-null-assertion
+    const packageJson = JSON.parse(tree.read('package.json')!.toString('utf-8'));
+
+    return packageJson.dependencies && packageJson.dependencies[name];
+}
