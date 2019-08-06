@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -7,12 +7,13 @@ import * as buttonSplitProgrammaticalyExample from '!raw-loader!./examples/split
 import * as buttonSplitOptionsExample from '!raw-loader!./examples/split-button-options-example.component.html';
 import * as buttonSplitIcons from '!raw-loader!./examples/split-button-icons-example.component.html';
 import * as buttonSplitTemplateExample from '!raw-loader!./examples/split-button-template-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-split-button',
     templateUrl: './split-button-docs.component.html'
 })
-export class SplitButtonDocsComponent implements OnInit {
+export class SplitButtonDocsComponent {
 
 
     schema: Schema;
@@ -27,11 +28,30 @@ export class SplitButtonDocsComponent implements OnInit {
         }
     };
 
-    buttonHtmlType = buttonTypesExample;
-    buttonSplitProgrammaticallyExample = buttonSplitProgrammaticalyExample;
-    buttonSplitTemplateExample = buttonSplitTemplateExample;
-    buttonSplitOptionsExample = buttonSplitOptionsExample;
-    buttonSplitIcons = buttonSplitIcons;
+    buttonHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: buttonTypesExample
+    }];
+
+    buttonSplitProgrammaticallyExample: ExampleFile[] = [{
+        language: 'html',
+        code: buttonSplitProgrammaticalyExample
+    }];
+
+    buttonSplitTemplateExample: ExampleFile[] = [{
+        language: 'html',
+        code: buttonSplitTemplateExample
+    }];
+
+    buttonSplitOptionsExample: ExampleFile[] = [{
+        language: 'html',
+        code: buttonSplitOptionsExample
+    }];
+
+    buttonSplitIcons: ExampleFile[] = [{
+        language: 'html',
+        code: buttonSplitIcons
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');
@@ -41,5 +61,4 @@ export class SplitButtonDocsComponent implements OnInit {
         this.data = data;
     }
 
-    ngOnInit() {}
 }

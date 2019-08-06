@@ -11,6 +11,7 @@ import * as listSingleHtml from '!raw-loader!./examples/list-single-select-examp
 import * as listSingleTs from '!raw-loader!./examples/list-single-select-example.component.ts';
 import * as listCheckboxFormHtmlSrc from '!raw-loader!./examples/list-checkbox-form-example.component.html';
 import * as listCheckboxFormTsSrc from '!raw-loader!./examples/list-checkbox-form-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-list',
@@ -678,25 +679,53 @@ export class ListDocsComponent implements OnInit {
         }
     };
 
-    simpleListHtml = listSrc;
+    simpleList: ExampleFile[] = [{
+        language: 'html',
+        code: listSrc
+    }];
 
-    listActionsHtml = listActionsSrc;
+    listActions: ExampleFile[] = [{
+        language: 'html',
+        code: listActionsSrc
+    }];
 
-    listCheckboxesHtml = listCheckboxSrc;
+    listCheckboxes: ExampleFile[] = [{
+        language: 'html',
+        code: listCheckboxSrc
+    }];
 
-    listSingleSelectHtml = listSingleHtml;
+    listSingleSelect: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listSingleHtml
+        },
+        {
+            language: 'typescript',
+            code: listSingleTs
+        }
+    ];
 
-    listSingleSelectTs = listSingleTs;
+    infiniteScrollCode: ExampleFile[] = [
+        {
+            language: 'html',
+            code: infiniteScrollSrcHtml
+        },
+        {
+            language: 'typescript',
+            code: infiniteScrollSrcTs
+        }
+    ];
 
-    infiniteScrollCodeHTML = infiniteScrollSrcHtml;
-
-    infiniteScrollCodeTS = infiniteScrollSrcTs;
-
-    listCheckboxFormHtml = listCheckboxFormHtmlSrc;
-
-    listCheckboxFormTs = listCheckboxFormTsSrc;
-
-
+    listCheckboxForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listCheckboxFormHtmlSrc
+        },
+        {
+            language: 'typescript',
+            code: listCheckboxFormTsSrc
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('list');

@@ -193,8 +193,7 @@ describe('TimePickerComponent', () => {
         component.disabled = false;
         const event = { stopPropagation: function() {} };
         spyOn(event, 'stopPropagation').and.callThrough();
-        component.addOnButtonClicked(event);
-        expect(event.stopPropagation).toHaveBeenCalled();
+        component.addOnButtonClicked();
         expect(component.isOpen).toBe(true);
     });
 

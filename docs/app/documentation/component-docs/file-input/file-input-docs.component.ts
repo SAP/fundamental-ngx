@@ -11,6 +11,7 @@ import * as fileInputInvalidT from '!raw-loader!./examples/file-input-drag-disab
 
 import * as fileInputMaxT from '!raw-loader!./examples/file-input-max-example/file-input-max-example.component.ts';
 import * as fileInputMaxH from '!raw-loader!./examples/file-input-max-example/file-input-max-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-file-input',
@@ -19,16 +20,48 @@ import * as fileInputMaxH from '!raw-loader!./examples/file-input-max-example/fi
 })
 export class FileInputDocsComponent {
 
-    fileInputExampleHtml = fileInputH;
-    fileInputExampleTs = fileInputT;
+    fileInputExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: fileInputH
+        },
+        {
+            language: 'typescript',
+            code: fileInputT
+        }
+    ];
 
-    fileInputCustomH = fileInputCustomH;
-    fileInputCustomT = fileInputCustomT;
+    fileInputCustom: ExampleFile[] = [
+        {
+            language: 'html',
+            code: fileInputCustomH
+        },
+        {
+            language: 'typescript',
+            code: fileInputCustomT
+        }
+    ];
 
-    fileInvalidCustomH = fileInputInvalidH;
-    fileInvalidCustomT = fileInputInvalidT;
+    fileInvalidCustom: ExampleFile[] = [
+        {
+            language: 'html',
+            code: fileInputInvalidH
+        },
+        {
+            language: 'typescript',
+            code: fileInputInvalidT
+        }
+    ];
 
-    fileMaxSizeH = fileInputMaxH;
-    fileMaxSizeT = fileInputMaxT;
+    fileMaxSize: ExampleFile[] = [
+        {
+            language: 'html',
+            code: fileInputMaxH
+        },
+        {
+            language: 'typescript',
+            code: fileInputMaxT
+        }
+    ];
 
 }

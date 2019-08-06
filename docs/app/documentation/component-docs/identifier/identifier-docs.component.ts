@@ -7,6 +7,7 @@ import * as colorsSrc from '!raw-loader!./examples/colors-identifier-example.com
 import * as iconSrc from '!raw-loader!./examples/icon-identifier-example.component.html';
 import * as initialsSrc from '!raw-loader!./examples/initials-identifier-example.component.html';
 import * as transparentSrc from '!raw-loader!./examples/transparent-identifier-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-identifier',
@@ -682,15 +683,30 @@ export class IdentifierDocsComponent implements OnInit {
         }
     };
 
-    iconHtml = iconSrc;
+    iconHtml: ExampleFile[] = [{
+        language: 'html',
+        code: iconSrc
+    }];
 
-    initialsHtml = initialsSrc;
+    initialsHtml: ExampleFile[] = [{
+        language: 'html',
+        code: initialsSrc
+    }];
 
-    circleHtml = circleSrc;
+    circleHtml: ExampleFile[] = [{
+        language: 'html',
+        code: circleSrc
+    }];
 
-    transparentHtml = transparentSrc;
+    transparentHtml: ExampleFile[] = [{
+        language: 'html',
+        code: transparentSrc
+    }];
 
-    colorAccentHtml = colorsSrc;
+    colorAccentHtml: ExampleFile[] = [{
+        language: 'html',
+        code: colorsSrc
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('identifier');

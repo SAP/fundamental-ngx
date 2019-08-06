@@ -1,4 +1,3 @@
-
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -45,10 +44,11 @@ export const API_FILES = {
         'CalendarI18nDefault',
         'CalendarI18nLabels',
         'DateFormatParser',
-        'DateFormatParserDefault'
+        'DateFormatParserDefault',
+        'FdDate'
     ],
-    comboboxInput: [
-        'ComboboxInputComponent'
+    combobox: [
+        'ComboboxComponent'
     ],
     datePicker: [
         'DatePickerComponent',
@@ -56,7 +56,8 @@ export const API_FILES = {
         'DateFormatParserDefault'
     ],
     datetimePicker: [
-        'DatetimePickerComponent'
+        'DatetimePickerComponent',
+        'FdDateTime'
     ],
     fileInput: [
         'FileInputComponent',
@@ -101,12 +102,18 @@ export const API_FILES = {
     loadingSpinner: [
         'LoadingSpinnerComponent'
     ],
+    localizationEditor: [
+        'LocalizationEditorComponent',
+        'LocalizationEditorItemComponent',
+        'LocalizationEditorMainComponent',
+    ],
     menu: [
         'MenuComponent',
         'MenuGroupComponent',
         'MenuItemDirective',
         'MenuListDirective',
-        'MenuTitleDirective'
+        'MenuTitleDirective',
+        'MenuKeyboardService'
     ],
     modal: [
         'ModalRef',
@@ -152,6 +159,10 @@ export const API_FILES = {
     ],
     searchInput: [
         'SearchInputComponent'
+    ],
+    select: [
+        'SelectComponent',
+        'OptionComponent'
     ],
     shellbar: [
         'CopilotComponent',

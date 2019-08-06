@@ -1,0 +1,15 @@
+<form [formGroup]="customForm">
+    <fd-localization-editor>
+        <fd-localization-editor-main [label]="'EN'" [compact]="true">
+            <input fd-localization-editor-input formControlName="en" type="text" placeholder="EN">
+        </fd-localization-editor-main>
+        <li fd-localization-editor-element *ngFor="let key of customFormKeys">
+            <fd-localization-editor-item [label]="key | uppercase" [compact]="true">
+                <input fd-localization-editor-input formControlName="{{key}}" type="text"  placeholder="{{key | uppercase}}">
+            </fd-localization-editor-item>
+        </li>
+    </fd-localization-editor>
+</form>
+<ng-container *ngFor="let key of customFormKeys">
+    <br/>{{key | uppercase}}: {{customForm.get(key).value}}
+</ng-container>

@@ -84,12 +84,16 @@ import { TimePickerHeaderComponent } from './component-docs/time-picker/time-pic
 import { TreeHeaderComponent } from './component-docs/tree/tree-header/tree-header.component';
 import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/toggle-header.component';
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
+import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
+import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
 import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import {
     TabNavigationExampleChildFirst,
     TabNavigationExampleChildSecond, TabNavigationExampleChildThird
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
+import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
+import { SelectDocsComponent } from './component-docs/select/select-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -134,7 +138,7 @@ export const ROUTES: Routes = [
             },
             { path: 'combobox', component: ComboboxHeaderComponent, children: [
                     { path: '', component: ComboboxDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.comboboxInput}}
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
                 ]
             },
             { path: 'datePicker', component: DatePickerHeaderComponent, children: [
@@ -202,6 +206,11 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.loadingSpinner}}
                 ]
             },
+            { path: 'localizationEditor', component: LocalizationEditorHeaderComponent, children: [
+                    { path: '', component: LocalizationEditorDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.localizationEditor}}
+                ]
+            },
             { path: 'menu', component: MenuHeaderComponent, children: [
                     { path: '', component: MenuDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.menu}}
@@ -255,6 +264,11 @@ export const ROUTES: Routes = [
             { path: 'sideNavigation', component: SideNavigationHeaderComponent, children: [
                     { path: '', component: SideNavigationDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.sideNavigation}}
+                ]
+            },
+            { path: 'select', component: SelectHeaderComponent, children: [
+                    { path: '', component: SelectDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.select}}
                 ]
             },
             { path: 'splitButton', component: SplitButtonHeaderComponent, children: [

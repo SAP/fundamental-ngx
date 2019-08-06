@@ -73,8 +73,7 @@ describe('SearchInputComponent', () => {
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            },
-            ngAfterViewInit: () => {}
+            }
         };
         const item2 = <MenuItemDirective>{
             itemEl: {
@@ -83,8 +82,7 @@ describe('SearchInputComponent', () => {
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            },
-            ngAfterViewInit: () => {}
+            }
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,
@@ -110,8 +108,7 @@ describe('SearchInputComponent', () => {
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            },
-            ngAfterViewInit: () => {}
+            }
         };
         const item2 = <MenuItemDirective>{
             itemEl: {
@@ -120,8 +117,7 @@ describe('SearchInputComponent', () => {
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            },
-            ngAfterViewInit: () => {}
+            }
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,
@@ -147,8 +143,7 @@ describe('SearchInputComponent', () => {
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            },
-            ngAfterViewInit: () => {}
+            }
         };
         const item2 = <MenuItemDirective>{
             itemEl: {
@@ -157,8 +152,7 @@ describe('SearchInputComponent', () => {
                         jasmine.createSpyObj(['focus'])
                     ]
                 }
-            },
-            ngAfterViewInit: () => {}
+            }
         };
         spyOn(component.menuItems, 'toArray').and.returnValue([
             item1,

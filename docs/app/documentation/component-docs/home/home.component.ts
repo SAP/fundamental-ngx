@@ -5,10 +5,12 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './home.component.html'
 })
 export class HomeDocsComponent implements OnInit {
+
     constructor() {}
 
     ngOnInit() {}
 
     onLoad(event) {}
     onError(event) {}
+
 }

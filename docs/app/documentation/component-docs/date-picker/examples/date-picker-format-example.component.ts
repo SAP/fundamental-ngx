@@ -1,43 +1,40 @@
 import { Component, Injectable } from '@angular/core';
-import { DateFormatParser } from '../../../../../../library/src/lib/calendar/format/date-parser';
+import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
+import { DateFormatParser } from '../../../../../../library/src/lib/date-picker/format/date-parser';
+import { FdRangeDate } from '../../../../../../library/src/lib/calendar/models/fd-range-date';
 
 @Injectable()
 export class DateFormatDashes extends DateFormatParser {
 
     rangeDelimiter: string = ' to ';
 
-    public parse(value: string): Date {
+    public parse(value: string): FdDate {
         const values: number[] = value.split('-').map(Number);
 
         // If date is 0, set the date to invalid by setting month to 14
         if (values[2] === 0) {
             values[1] = 14;
         }
-        return new Date(Number(values[2]), values[1] - 1, values[0]);
+        return FdDate.getModelFromDate(new Date(Number(values[2]), values[1] - 1, values[0]));
     }
 
-    public format(date: Date): string {
-        let monthStr = (date.getMonth() + 1).toLocaleString();
-        if (monthStr.length === 1) {
-            monthStr = '0' + monthStr;
-        }
-
-        return date.getDate() + '-' + monthStr + '-' + date.getFullYear();
+    public format(date: FdDate): string {
+        return date.day + '-' + (date.month < 10 ? '0' : '') + date.month + '-' + date.year;
     }
 }
 
 @Component({
     selector: 'fd-date-picker-format-example',
     template: `
-        <fd-date-picker [(ngModel)]="selectedDay" placeholder="yyyy/mm/dd"></fd-date-picker>
+        <fd-date-picker [(ngModel)]="date" placeholder="yyyy/mm/dd"></fd-date-picker>
         <br/>
-        <div>Selected Date: {{selectedDay?.date?.toDateString()}}</div>
+        <div>Selected Date: {{date?.toDateString()}}</div>
         <br/>
-        <fd-date-picker style="width: 300px;" placeholder="yyyy/mm/dd to yyyy/mm/dd" 
+        <fd-date-picker style="width: 300px;" placeholder="yyyy/mm/dd to yyyy/mm/dd"
                         [type]="'range'" [(ngModel)]="selectedRange"></fd-date-picker>
-        <br />
-        <div>Selected First Date: {{selectedRange?.date?.toDateString()}}</div>
-        <div>Selected Last Date: {{selectedRange?.rangeEnd?.toDateString()}}</div>
+        <br/>
+        <div>Selected First Date: {{selectedRange?.start?.toDateString()}}</div>
+        <div>Selected Last Date: {{selectedRange?.end?.toDateString()}}</div>
     `,
     providers: [
         {
@@ -48,13 +45,11 @@ export class DateFormatDashes extends DateFormatParser {
 })
 export class DatePickerFormatExampleComponent {
 
-    selectedDay = {
-        date: new Date()
-    };
+    date = FdDate.getToday();
 
-    selectedRange = {
-        date: new Date(),
-        rangeEnd: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
+    selectedRange: FdRangeDate = {
+        start: FdDate.getToday(),
+        end: FdDate.getToday().nextDay()
     };
 
 }

@@ -9,6 +9,7 @@ import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-ex
 import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
 import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disabled-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-date-picker',
@@ -16,14 +17,49 @@ import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disab
 })
 export class DatePickerDocsComponent {
 
-    datePickerSingleJs = datePickerSingleSrc;
-    datePickerRangeJs = datePickerRangeSrc;
-    datePickerI18NTs = datePickeri18nSrc;
-    datePickerFormatTs = datePickerFormatSrc;
-    datePickerAllowNullTs = datePickerAllowNullSrc;
-    datePickerFormTs = datePickerFormTsSrc;
-    datePickerRangeFormTs = datePickerRangeFormTsSrc;
-    datePickerPositionTs = datePickerPositionSrc;
-    datePickerDisabledTs = datePickerDisabledSrc;
+    datePickerSingle: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerSingleSrc
+    }];
+
+    datePickerRange: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerRangeSrc
+    }];
+
+    datePickerI18N: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickeri18nSrc
+    }];
+
+    datePickerFormat: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerFormatSrc
+    }];
+
+    datePickerAllowNull: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerAllowNullSrc
+    }];
+
+    datePickerForm: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerFormTsSrc
+    }];
+
+    datePickerRangeForm: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerRangeFormTsSrc
+    }];
+
+    datePickerPosition: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerPositionSrc
+    }];
+
+    datePickerDisabled: ExampleFile[] = [{
+        language: 'typescript',
+        code: datePickerDisabledSrc
+    }];
 
 }

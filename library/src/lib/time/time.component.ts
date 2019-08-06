@@ -2,8 +2,6 @@ import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, ViewEnca
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
-import { DateFormatParser } from '../calendar/format/date-parser';
-import { TimeFormatParser } from '../time-picker/format/time-parser';
 
 @Component({
     selector: 'fd-time',

@@ -31,6 +31,7 @@ import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { SearchInputModule } from './search-input/search-input.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
+import { SelectModule } from './select/select.module';
 import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
@@ -43,6 +44,7 @@ import { TokenModule } from './token/token.module';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -68,6 +70,7 @@ import { FormsModule } from '@angular/forms';
         InputGroupModule,
         ListModule,
         LoadingSpinnerModule,
+        LocalizationEditorModule,
         MenuModule,
         ModalModule,
         MultiInputModule,
@@ -76,6 +79,7 @@ import { FormsModule } from '@angular/forms';
         PopoverModule,
         ScrollSpyModule,
         SearchInputModule,
+        SelectModule,
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,
@@ -88,6 +92,6 @@ import { FormsModule } from '@angular/forms';
         TokenModule,
         TreeModule
     ],
-    providers: [AlertService, ModalService]
+    providers: [AlertService, ModalService],
 })
 export class FundamentalNgxModule {}

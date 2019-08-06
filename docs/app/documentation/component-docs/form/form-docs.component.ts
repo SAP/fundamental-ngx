@@ -8,25 +8,53 @@ import * as formSelectHtml from '!raw-loader!./examples/form-select-example.comp
 import * as formStateHtml from '!raw-loader!./examples/form-state-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/form-group-input-example.component.html';
 import * as formGroupInputTs from '!raw-loader!./examples/form-group-input-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form-docs.component.html'
 })
 export class FormDocsComponent {
-    inputsFormHtml = formHtml;
 
-    inputsHelpFormHtml = formInlineHelpHtml;
+    inputsForm: ExampleFile[] = [{
+        language: 'html',
+        code: formHtml
+    }];
 
-    inputStatesFormHtml = formStateHtml;
+    inputsHelpForm: ExampleFile[] = [{
+        language: 'html',
+        code: formInlineHelpHtml
+    }];
 
-    selectFormHtml = formSelectHtml;
+    inputStatesForm: ExampleFile[] = [{
+        language: 'html',
+        code: formStateHtml
+    }];
 
-    radioButtonsFormHtml = formRadioHtml;
+    selectForm: ExampleFile[] = [{
+        language: 'html',
+        code: formSelectHtml
+    }];
 
-    checkboxFormHtml = formCheckboxHtml;
+    radioButtonsForm: ExampleFile[] = [{
+        language: 'html',
+        code: formRadioHtml
+    }];
 
-    formGroupInputHtml = formGroupInputHtml;
+    checkboxForm: ExampleFile[] = [{
+        language: 'html',
+        code: formCheckboxHtml
+    }];
 
-    formGroupInputTs = formGroupInputTs;
+    formGroupInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formGroupInputHtml
+        },
+        {
+            language: 'typescript',
+            code: formGroupInputTs
+        }
+    ];
+
 }

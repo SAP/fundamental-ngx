@@ -7,6 +7,8 @@ import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example
 import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import * as breadcrumbHrefExample from "!raw-loader!*";
 
 @Component({
     selector: 'app-button',
@@ -677,15 +679,30 @@ export class ButtonDocsComponent implements OnInit {
         }
     };
 
-    buttonHtmlOptions = buttonOptionsExample;
+    buttonHtmlOptions: ExampleFile[] = [{
+        language: 'html',
+        code: buttonOptionsExample
+    }];
 
-    buttonHtmlType = buttonTypesExample;
+    buttonHtmlType: ExampleFile[] = [{
+        language: 'html',
+        code: buttonTypesExample
+    }];
 
-    buttonHtmlSize = buttonSizesExample;
+    buttonHtmlSize: ExampleFile[] = [{
+        language: 'html',
+        code: buttonSizesExample
+    }];
 
-    buttonHtmlIcon = buttonIconsExample;
+    buttonHtmlIcon: ExampleFile[] = [{
+        language: 'html',
+        code: buttonIconsExample
+    }];
 
-    buttonHtmlState = buttonStateExample;
+    buttonHtmlState: ExampleFile[] = [{
+        language: 'html',
+        code: buttonStateExample
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');

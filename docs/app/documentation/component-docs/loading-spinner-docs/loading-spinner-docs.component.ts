@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import * as loadingSpinnerHtml from '!raw-loader!./examples/loading-spinner-example.component.html';
 import * as loadingSpinnerContainerHtml from '!raw-loader!./examples/loading-spinner-container-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
   selector: 'app-loading-spinner-docs',
@@ -10,8 +11,14 @@ import * as loadingSpinnerContainerHtml from '!raw-loader!./examples/loading-spi
 })
 export class LoadingSpinnerDocsComponent {
 
-    loadingSpinnerExampleHtml = loadingSpinnerHtml;
+    loadingSpinnerExample: ExampleFile[] = [{
+        language: 'html',
+        code: loadingSpinnerHtml
+    }];
 
-    loadingSpinnerContainerExampleHtml = loadingSpinnerContainerHtml;
+    loadingSpinnerContainerExample: ExampleFile[] = [{
+        language: 'html',
+        code: loadingSpinnerContainerHtml
+    }];
 
 }

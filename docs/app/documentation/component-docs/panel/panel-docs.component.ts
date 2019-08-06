@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as panelColumnsSrc from '!raw-loader!./examples/panel-columns-example.component.html';
 import * as panelEdgeBleedSrc from '!raw-loader!./examples/panel-edge-bleed-example.component.html';
@@ -6,23 +6,42 @@ import * as panelSrc from '!raw-loader!./examples/panel-example.component.html';
 import * as panelGridSrc from '!raw-loader!./examples/panel-grid-example.component.html';
 import * as panelGridNoGapSrc from '!raw-loader!./examples/panel-grid-nogap-example.component.html';
 import * as panelRowColumnSrc from '!raw-loader!./examples/panel-grid-column-span-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-panel',
     templateUrl: './panel-docs.component.html'
 })
-export class PanelDocsComponent implements OnInit {
-    panelHtml = panelSrc;
+export class PanelDocsComponent {
 
-    tableBleedHtml = panelEdgeBleedSrc;
+    panelBasic: ExampleFile[] = [{
+        language: 'html',
+        code: panelSrc
+    }];
 
-    defaultPanelGridHtml = panelGridSrc;
+    tableBleed: ExampleFile[] = [{
+        language: 'html',
+        code: panelEdgeBleedSrc
+    }];
 
-    nogapPanelGridHtml = panelGridNoGapSrc;
+    defaultPanelGrid: ExampleFile[] = [{
+        language: 'html',
+        code: panelGridSrc
+    }];
 
-    twoColumnsPanelGridHtml = panelColumnsSrc;
+    nogapPanelGrid: ExampleFile[] = [{
+        language: 'html',
+        code: panelGridNoGapSrc
+    }];
 
-    columnSpanPanelGridHtml = panelRowColumnSrc;
+    twoColumnsPanelGrid: ExampleFile[] = [{
+        language: 'html',
+        code: panelColumnsSrc
+    }];
 
-    ngOnInit() {}
+    columnSpanPanelGrid: ExampleFile[] = [{
+        language: 'html',
+        code: panelRowColumnSrc
+    }];
+
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import * as basicTokenH from '!raw-loader!./examples/token-example/token-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-token-docs',
@@ -8,5 +9,10 @@ import * as basicTokenH from '!raw-loader!./examples/token-example/token-example
     styleUrls: ['./token-docs.component.scss']
 })
 export class TokenDocsComponent {
-    basicTokenHtml = basicTokenH;
+
+    basicToken: ExampleFile[] = [{
+        language: 'html',
+        code: basicTokenH
+    }];
+
 }

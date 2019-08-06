@@ -2,6 +2,191 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0-rc.9"></a>
+# [0.9.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.8...v0.9.0-rc.9) (2019-08-05)
+
+
+### Bug Fixes
+
+* improved focus on calendar ([#1069](https://github.com/SAP/fundamental-ngx/issues/1069)) ([ed633ef](https://github.com/SAP/fundamental-ngx/commit/ed633ef))
+
+
+
+<a name="0.9.0-rc.8"></a>
+# [0.9.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.7...v0.9.0-rc.8) (2019-08-03)
+
+
+
+<a name="0.9.0-rc.7"></a>
+# [0.9.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.6...v0.9.0-rc.7) (2019-08-02)
+
+
+
+<a name="0.9.0-rc.6"></a>
+# [0.9.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.5...v0.9.0-rc.6) (2019-08-01)
+
+
+### Bug Fixes
+
+* Add TimeObject, FdDate, FdRangeDate, FdDateTime to public apis ([#1076](https://github.com/SAP/fundamental-ngx/issues/1076)) ([72fc738](https://github.com/SAP/fundamental-ngx/commit/72fc738))
+
+
+
+<a name="0.9.0-rc.5"></a>
+# [0.9.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.4...v0.9.0-rc.5) (2019-07-31)
+
+
+
+<a name="0.9.0-rc.4"></a>
+# [0.9.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.3...v0.9.0-rc.4) (2019-07-31)
+
+
+
+<a name="0.9.0-rc.3"></a>
+# [0.9.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.2...v0.9.0-rc.3) (2019-07-30)
+
+
+### Bug Fixes
+
+* adds missing fd-alert--dismissible class ([#1072](https://github.com/SAP/fundamental-ngx/issues/1072)) ([d13ed4e](https://github.com/SAP/fundamental-ngx/commit/d13ed4e))
+
+
+
+<a name="0.9.0-rc.2"></a>
+# [0.9.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.1...v0.9.0-rc.2) (2019-07-30)
+
+
+### Features
+
+* Calendar Refactor ([#1048](https://github.com/SAP/fundamental-ngx/issues/1048)) ([8542733](https://github.com/SAP/fundamental-ngx/commit/8542733))
+
+
+
+<a name="0.9.0-rc.1"></a>
+# [0.9.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.0...v0.9.0-rc.1) (2019-07-29)
+
+
+
+<a name="0.9.0-rc.0"></a>
+# [0.9.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.4...v0.9.0-rc.0) (2019-07-26)
+
+
+### Features
+
+* Added Select Component ([#1049](https://github.com/SAP/fundamental-ngx/issues/1049)) ([49bdfe1](https://github.com/SAP/fundamental-ngx/commit/49bdfe1))
+
+
+
+<a name="0.8.1-rc.4"></a>
+## [0.8.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.3...v0.8.1-rc.4) (2019-07-25)
+
+
+
+<a name="0.8.1-rc.3"></a>
+## [0.8.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.2...v0.8.1-rc.3) (2019-07-25)
+
+
+### Bug Fixes
+
+* add keyboard support to menu component ([#1005](https://github.com/SAP/fundamental-ngx/issues/1005)) ([dac28a8](https://github.com/SAP/fundamental-ngx/commit/dac28a8))
+
+
+
+<a name="0.8.1-rc.2"></a>
+## [0.8.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.1...v0.8.1-rc.2) (2019-07-24)
+
+
+
+<a name="0.8.1-rc.1"></a>
+## [0.8.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.8.1-rc.0...v0.8.1-rc.1) (2019-07-24)
+
+
+
+<a name="0.8.1-rc.0"></a>
+## [0.8.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.8.0...v0.8.1-rc.0) (2019-07-24)
+
+
+
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.22...v0.8.0) (2019-07-24)
+
+
+
+<a name="0.8.0-rc.22"></a>
+# [0.8.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.21...v0.8.0-rc.22) (2019-07-24)
+
+
+
+<a name="0.8.0-rc.21"></a>
+# [0.8.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.20...v0.8.0-rc.21) (2019-07-24)
+
+
+
+<a name="0.8.0-rc.20"></a>
+# [0.8.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.19...v0.8.0-rc.20) (2019-07-23)
+
+
+
+<a name="0.8.0-rc.19"></a>
+# [0.8.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.18...v0.8.0-rc.19) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.18"></a>
+# [0.8.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.17...v0.8.0-rc.18) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.17"></a>
+# [0.8.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.16...v0.8.0-rc.17) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.16"></a>
+# [0.8.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.15...v0.8.0-rc.16) (2019-07-22)
+
+
+
+<a name="0.8.0-rc.15"></a>
+# [0.8.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.14...v0.8.0-rc.15) (2019-07-21)
+
+
+
+<a name="0.8.0-rc.14"></a>
+# [0.8.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.13...v0.8.0-rc.14) (2019-07-21)
+
+
+
+<a name="0.8.0-rc.13"></a>
+# [0.8.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.12...v0.8.0-rc.13) (2019-07-19)
+
+
+
+<a name="0.8.0-rc.12"></a>
+# [0.8.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.11...v0.8.0-rc.12) (2019-07-19)
+
+
+### Features
+
+* Added Localization Editor Component ([#997](https://github.com/SAP/fundamental-ngx/issues/997)) ([04a6e65](https://github.com/SAP/fundamental-ngx/commit/04a6e65))
+
+
+
+<a name="0.8.0-rc.11"></a>
+# [0.8.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.10...v0.8.0-rc.11) (2019-07-16)
+
+
+### Features
+
+* added item templating to combobox ([#1020](https://github.com/SAP/fundamental-ngx/issues/1020)) ([9648718](https://github.com/SAP/fundamental-ngx/commit/9648718))
+
+
+
+<a name="0.8.0-rc.10"></a>
+# [0.8.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.9...v0.8.0-rc.10) (2019-07-16)
+
+
+
 <a name="0.8.0-rc.9"></a>
 # [0.8.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.8.0-rc.8...v0.8.0-rc.9) (2019-07-15)
 

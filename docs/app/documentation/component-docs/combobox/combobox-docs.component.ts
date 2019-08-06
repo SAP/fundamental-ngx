@@ -8,23 +8,69 @@ import * as comboboxAsyncHtml from '!raw-loader!./examples/combobox-async-exampl
 import * as comboboxAsyncTs from '!raw-loader!./examples/combobox-async-example.component.ts';
 import * as comboboxDisplayHtml from '!raw-loader!./examples/combobox-displaywith-example.component.html';
 import * as comboboxDisplayTs from '!raw-loader!./examples/combobox-displaywith-example.component.ts';
+import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-example.component.html';
+import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html'
 })
 export class ComboboxDocsComponent {
-    comboboxExampleHtml = comboboxHTMLSrc;
-    comboboxExampleTs = comboboxTSSrc;
 
-    comboboxDynamicHtml = comboboxDynHtml;
-    comboboxDynamicTs = comboboxDynTs;
+    comboboxBasicExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxHTMLSrc
+        },
+        {
+            language: 'typescript',
+            code: comboboxTSSrc
+        }
+    ];
 
-    comboboxAsyncHtml = comboboxAsyncHtml;
-    comboboxAsyncTs = comboboxAsyncTs;
+    comboboxDynamicExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxDynHtml
+        },
+        {
+            language: 'typescript',
+            code: comboboxDynTs
+        }
+    ];
 
-    displayHtml = comboboxDisplayHtml;
-    displayTs = comboboxDisplayTs;
+    comboboxAsyncExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxAsyncHtml
+        },
+        {
+            language: 'typescript',
+            code: comboboxAsyncTs
+        }
+    ];
 
-    constructor() {}
+    comboboxDisplayExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxDisplayHtml
+        },
+        {
+            language: 'typescript',
+            code: comboboxDisplayTs
+        }
+    ];
+
+    comboboxTemplateExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxTemplateH
+        },
+        {
+            language: 'typescript',
+            code: comboboxTemplateT
+        }
+    ];
+
 }

@@ -18,6 +18,7 @@ import * as dateTimeDisabledHtml from '!raw-loader!./examples/datetime-disabled-
 import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.ts';
 import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
 import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-datetime-picker-docs',
@@ -26,24 +27,75 @@ import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/da
 })
 export class DatetimePickerDocsComponent {
 
-    datetimePickerSingleHtml = dateTimeSimpleHtml;
-    datetimePickerSingleTs = dateTimeSimpleTs;
+    datetimePickerSingle: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeSimpleHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeSimpleTs
+        }
+    ];
 
-    datetimeNonMerHtml = dateTimeNonMeridianHtml;
-    datetimeNonMerTs = dateTimeNonMeridianTs;
+    datetimeNonMer: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeNonMeridianHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeNonMeridianTs
+        }
+    ];
 
-    datetimeProgramHtml = dateTimeProgHtml;
-    datetimeProgramTs = dateTimeProgTs;
+    datetimeProgram: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeProgHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeProgTs
+        }
+    ];
 
-    datetimeFormatHtml = dateTimeFormatHtml;
-    datetimeFormatTs = dateTimeFormatTs;
+    datetimeFormat: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeFormatHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeFormatTs
+        }
+    ];
 
-    datetimeDisabledHtml = dateTimeDisabledHtml;
-    datetimeDisabledTs = dateTimeDisabledTs;
+    datetimeDisabled: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeDisabledHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeDisabledTs
+        }
+    ];
 
-    datetimeFormHtml = dateTimeFormHtml;
-    datetimeFormTs = dateTimeFormTs;
+    datetimeForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeFormHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeFormTs
+        }
+    ];
 
-    datetimePickerAllowNullTs = dateTimePickerAllowNullTs;
+    datetimePickerAllowNull: ExampleFile[] = [{
+        language: 'typescript',
+        code: dateTimePickerAllowNullTs
+    }];
 
 }

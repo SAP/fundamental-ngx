@@ -5,6 +5,7 @@ import * as standardT from '!raw-loader!./examples/scroll-spy-example/scroll-spy
 
 import * as customH from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.html';
 import * as customT from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-scroll-spy-docs',
@@ -13,9 +14,26 @@ import * as customT from '!raw-loader!./examples/scroll-spy-custom-example/scrol
 })
 export class ScrollSpyDocsComponent {
 
-    scrollSpyHtml = standardH;
-    scrollSpyTs = standardT;
+    scrollSpy: ExampleFile[] = [
+        {
+            language: 'html',
+            code: standardH,
+        },
+        {
+            language: 'typescript',
+            code: standardT
+        }
+    ];
 
-    scrollSpyCustomHtml = customH;
-    scrollSpyCustomTs = customT;
+    scrollSpyCustom: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customH,
+        },
+        {
+            language: 'typescript',
+            code: customT
+        }
+    ];
+
 }

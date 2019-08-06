@@ -1,0 +1,17 @@
+<div class="example-div">
+    <button fd-button (click)="changeValue()">Change Value</button>
+    <button fd-button (click)="select.open()">Open</button>
+    <button fd-button (click)="select.close()">Close</button>
+    <p>
+        Selected Value: {{this.value}}
+    </p>
+</div>
+
+<fd-select #select [(value)]="value" placeholder="Click here!">
+    <fd-option value="apple">Apple</fd-option>
+    <fd-option value="pineapple">Pineapple</fd-option>
+    <fd-option value="tomato">Tomato</fd-option>
+    <fd-option value="strawberry">Strawberry</fd-option>
+</fd-select>
+
+

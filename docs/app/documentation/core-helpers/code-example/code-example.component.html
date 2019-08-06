@@ -1,14 +1,31 @@
-<div class="docs-html-example-container">
+<div class="docs-code-example-toolbar">
     <button fd-button
-            *ngIf="!this.smallScreen"
-            (click)="copyText()"
-            class="docs-example-copy-button"
-            [glyph]="'copy'"
-            [title]="'Copy example to clipboard'">
+            fdType="light"
+            [glyph]="expandIcon"
+            (click)="isOpen = !isOpen">
+        {{isOpen ? 'Hide' : 'Show'}} Code
     </button>
-    <pre>
-        <code [highlight]="code" [languages]="[language]"></code>
-    </pre>
+    <div>
+        <button fd-button glyph="copy"
+                title="Copy example to clipboard"
+                fdType="light"
+                (click)="copyText()"
+                *ngIf="isOpen">
+            Copy
+        </button>
+    </div>
+</div>
+<div class="docs-html-example-container" [@height]="isOpen">
+    <div class="docs-code-example-content">
+        <fd-tab-list [(selectedIndex)]="selectedFileIndex">
+            <fd-tab *ngFor="let file of exampleFiles"
+                    [title]="file.name || file.language | titlecase">
+                <pre>
+                    <code [highlight]="file.code" [languages]="[file.language]"></code>
+                </pre>
+            </fd-tab>
+        </fd-tab-list>
+    </div>
 </div>
 
 

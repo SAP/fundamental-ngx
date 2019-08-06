@@ -1,0 +1,36 @@
+<table class="fd-calendar__table" role="grid">
+    <thead class="fd-calendar__group">
+    <tr class="fd-calendar__row">
+        <th class="fd-calendar__column-header" *ngFor="let day of shortWeekDays">
+            <span class="fd-calendar__day-of-week">{{day}}</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody class="fd-calendar__group">
+        <tr class="fd-calendar__row"
+            *ngFor="let row of dayViewGrid; let rowIndex = index;">
+
+            <td class="fd-calendar__item"
+                role="gridcell"
+                [attr.aria-label]="cell.ariaLabel"
+                *ngFor="let cell of row; let cellIndex = index;"
+                [ngClass]="{
+                    'fd-calendar__item--other-month': cell.monthStatus !== 'current',
+                    'is-selected': cell.selected,
+                    'is-selected-range-last': cell.selectedLast,
+                    'is-selected-range-first': cell.selectedFirst,
+                    'is-selected-range': cell.selectedRange && !cell.selectedFirst && !cell.selectedLast,
+                    'fd-calendar__item--current': cell.today,
+                    'is-disabled': cell.disabled,
+                    'is-blocked': cell.blocked
+                }"
+                [attr.id]="cell.id"
+                [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
+                (click)="selectDate(cell, $event)"
+                (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: rowIndex })"
+            >
+                <span class="fd-calendar__text" role="button">{{cell.date.day}}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

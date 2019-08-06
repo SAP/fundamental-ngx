@@ -1,0 +1,19 @@
+<div class="fd-input-group fd-input-group--after"
+     [ngClass]="{'fd-input-group--compact' : compact}"
+>
+    <ng-content select="[fd-localization-editor-input]"></ng-content>
+    <ng-content select="[fd-localization-editor-textarea]"></ng-content>
+    <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button"
+          [ngClass]="(type ? 'fd-input-group__addon--' + type : '')">
+        <button class="fd-button--light fd-localization-editor__button" aria-haspopup="true"
+                [attr.aria-expanded]="expanded">
+            <ng-container *ngIf="labelTemplate">
+                <ng-container [fd-localization-editor-load-label]="labelTemplate"></ng-container>
+            </ng-container>
+            <ng-container *ngIf="!labelTemplate">
+                {{label}}
+            </ng-container>
+        </button>
+    </span>
+</div>
+<ng-content></ng-content>

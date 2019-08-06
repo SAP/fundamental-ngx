@@ -3,6 +3,7 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as paginationSrc from '!raw-loader!./examples/pagination-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-pagination',
@@ -43,7 +44,10 @@ export class PaginationDocsComponent {
         }
     };
 
-    paginationHtml = paginationSrc;
+    paginationBasic: ExampleFile[] = [{
+        language: 'typescript',
+        code: paginationSrc
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('pagination');

@@ -315,6 +315,14 @@ import { DatePickerI18nExampleComponent } from './component-docs/date-picker/exa
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
+import { SelectDocsComponent } from './component-docs/select/select-docs.component';
+import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
+import { SelectBasicExampleComponent } from './component-docs/select/examples/select-basic-example/select-basic-example.component';
+import { SelectProgrammaticExampleComponent } from './component-docs/select/examples/select-programmatic-example/select-programmatic-example.component';
+import { SelectNestedOptionsComponent } from './component-docs/select/examples/select-nested-options/select-nested-options.component';
+import { SelectCustomTriggerComponent } from './component-docs/select/examples/select-custom-trigger/select-custom-trigger.component';
+import { SelectAddingExampleComponent } from './component-docs/select/examples/select-adding-example/select-adding-example.component';
+import { SelectFormsComponent } from './component-docs/select/examples/select-forms/select-forms.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { TableCdkExampleComponent } from './component-docs/table/examples/table-cdk-example.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -344,12 +352,29 @@ import {
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
+import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
+import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
+import {
+    LocalizationEditorExampleComponent
+} from './component-docs/localization-editor/examples/localization-editor-example.component';
+import { LocalizationEditorFormsExampleComponent } from './component-docs/localization-editor/examples/localization-editor-forms-example.component';
+import { LocalizationEditorTemplateExampleComponent } from './component-docs/localization-editor/examples/localization-editor-template-example.component';
+import { LocalizationEditorTextareaExampleComponent } from './component-docs/localization-editor/examples/localization-editor-textarea-example.component';
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
+
+import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
+import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
+
+import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
 import { ComboboxAsyncExampleComponent } from './component-docs/combobox/examples/combobox-async-example.component';
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
+import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
+import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
+import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
+
 
 @NgModule({
     declarations: [
@@ -434,6 +459,9 @@ import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examp
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
+        CalendarFormSingleExampleComponent,
+        CalendarFormRangeExampleComponent,
+        CalendarProgrammaticallyChangeExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
@@ -491,6 +519,7 @@ import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examp
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
+        MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
         ModalComponentAsContentExampleComponent,
@@ -569,9 +598,16 @@ import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examp
         ComboboxDisplaywithExampleComponent,
         ComboboxDynamicExampleComponent,
         ComboboxExampleComponent,
+        ComboboxTemplateExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
+        LocalizationEditorHeaderComponent,
+        LocalizationEditorDocsComponent,
+        LocalizationEditorExampleComponent,
+        LocalizationEditorTemplateExampleComponent,
+        LocalizationEditorTextareaExampleComponent,
+        LocalizationEditorFormsExampleComponent,
         ToggleSizesExampleComponent,
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
@@ -635,7 +671,16 @@ import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examp
         DatePickerFormatExampleComponent,
         SearchPipe,
         ModalPositionExampleComponent,
-        ContainerComponent
+        ContainerComponent,
+        SelectDocsComponent,
+        SelectHeaderComponent,
+        SelectBasicExampleComponent,
+        SelectProgrammaticExampleComponent,
+        SelectNestedOptionsComponent,
+        SelectCustomTriggerComponent,
+        SelectAddingExampleComponent,
+        SelectFormsComponent,
+        SelectViewValueExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

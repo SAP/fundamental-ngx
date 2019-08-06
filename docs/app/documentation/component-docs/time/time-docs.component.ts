@@ -10,6 +10,7 @@ import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-exampl
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
 import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html'
 import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts'
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-time',
@@ -45,20 +46,46 @@ export class TimeDocsComponent {
         }
     };
 
-    timeHtml = timeSrc;
+    timeBasic: ExampleFile[] = [{
+        language: 'html',
+        code: timeSrc
+    }];
 
-    timeMeridianHtml = timeMeridianSrc;
+    timeMeridian: ExampleFile[] = [{
+        language: 'html',
+        code: timeMeridianSrc
+    }];
 
-    timeDisabledHtml = timeDisabledSrc;
+    timeDisabled: ExampleFile[] = [{
+        language: 'html',
+        code: timeDisabledSrc
+    }];
 
-    timeNoSpinnersHtml = timeNoSpinnersSrc;
+    timeNoSpinners: ExampleFile[] = [{
+        language: 'html',
+        code: timeNoSpinnersSrc
+    }];
 
-    timeNoSecondsHtml = timeNoSecondsSrc;
+    timeNoSeconds: ExampleFile[] = [{
+        language: 'html',
+        code: timeNoSecondsSrc
+    }];
 
-    timeI18nTs = timeI18nSrc;
+    timeI18n: ExampleFile[] = [{
+        language: 'typescript',
+        code: timeI18nSrc
+    }];
 
-    timeFormHtml = timeFormHtmlSrc;
-    timeFormTs = timeFormTsSrc;
+    timeForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeFormHtmlSrc,
+        },
+        {
+            language: 'typescript',
+            code: timeFormTsSrc
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('time');

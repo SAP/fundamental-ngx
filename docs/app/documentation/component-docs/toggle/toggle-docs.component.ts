@@ -7,6 +7,7 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as toggleFormExampleHtmlSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.html';
 import * as toggleFormExampleTsSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-toggle',
@@ -52,12 +53,37 @@ export class ToggleDocsComponent {
         }
     };
 
-    toggleSizeHtml = toggleSizeExample;
-    toggleDisableHtml = toggleDisableExample;
-    toggleBindingHtml = toggleBindingExampleHtml;
-    toggleBindingTs = toggleBindingExampleTs;
-    toggleFormExampleHtml = toggleFormExampleHtmlSrc;
-    toggleFormExampleTs = toggleFormExampleTsSrc;
+    toggleSize: ExampleFile[] = [{
+        language: 'html',
+        code: toggleSizeExample
+    }];
+
+    toggleDisable: ExampleFile[] = [{
+        language: 'html',
+        code: toggleDisableExample
+    }];
+
+    toggleBinding: ExampleFile[] = [
+        {
+            language: 'html',
+            code: toggleBindingExampleHtml,
+        },
+        {
+            language: 'typescript',
+            code: toggleBindingExampleTs
+        }
+    ];
+
+    toggleFormExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: toggleFormExampleHtmlSrc,
+        },
+        {
+            language: 'typescript',
+            code: toggleFormExampleTsSrc
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('toggle');

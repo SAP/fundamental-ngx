@@ -1,0 +1,76 @@
+import { Subject } from 'rxjs';
+import { MenuItemDirective } from './menu-item.directive';
+import { Output } from '@angular/core';
+
+export class MenuKeyboardService {
+
+    /** Event emitted when an item link is clicked.*/
+    @Output()
+    public readonly itemClicked: Subject<number> = new Subject<number>();
+
+    /** Whether user wants to remove keyboard handling */
+    disableKeydownHandling: boolean = false;
+
+    /** Function that is supposed to be called, when focus escape before list */
+    focusEscapeBeforeList: Function;
+
+    /** Function that is supposed to be called, when focus escape after list */
+    focusEscapeAfterList: Function;
+
+    /** Function that should be called every time, keydown event is used on some menu item,
+     * it provides whole functionality for handling
+     * ArrowDown - focus, ArrowUp - focus, Space bar - simulate click, Enter key - simulate click.
+     * @param event KeyboardEvent
+     * @param index index of items starts from 0
+     * @param menuItems array of menu item directives
+     * */
+    keyDownHandler(event: KeyboardEvent, index: number, menuItems: MenuItemDirective[]): void {
+
+        if (this.disableKeydownHandling) {
+            return;
+        }
+
+        switch (event.code) {
+            case ('ArrowDown'): {
+                if (menuItems.length > index + 1) {
+                    menuItems[index + 1].focus();
+                } else {
+                    if (this.focusEscapeAfterList) {
+                        this.focusEscapeAfterList();
+                    } else {
+                        menuItems[0].focus();
+                    }
+                }
+                event.preventDefault();
+                break;
+            }
+            case ('ArrowUp'): {
+                if (index > 0) {
+                    menuItems[index - 1].focus();
+                } else {
+                    if (this.focusEscapeBeforeList) {
+                        this.focusEscapeBeforeList();
+                    } else {
+                        menuItems[menuItems.length - 1].focus();
+                    }
+                }
+                event.preventDefault();
+                break;
+            }
+            case ('Space'): {
+                if (menuItems[index]) {
+                    menuItems[index].click();
+                    event.preventDefault();
+                }
+                break;
+            }
+            case ('Enter'): {
+                if (menuItems[index]) {
+                    menuItems[index].click();
+                    event.preventDefault();
+                }
+                break;
+            }
+        }
+    }
+}

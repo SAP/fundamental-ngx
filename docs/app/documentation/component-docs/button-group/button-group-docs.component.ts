@@ -6,6 +6,7 @@ import * as buttonGroupCompactExample from '!raw-loader!./examples/button-group-
 import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
 import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
 import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-button-group',
@@ -1965,13 +1966,25 @@ export class ButtonGroupDocsComponent implements OnInit {
         }
     };
 
-    xsSizeHtml = buttonGroupXsExample;
+    xsSizeHtml: ExampleFile[] = [{
+        language: 'html',
+        code: buttonGroupXsExample
+    }];
 
-    sSizeHtml = buttonGroupSmallExample;
+    sSizeHtml: ExampleFile[] = [{
+        language: 'html',
+        code: buttonGroupSmallExample
+    }];
 
-    compactSizeHtml = buttonGroupCompactExample;
+    compactSizeHtml: ExampleFile[] = [{
+        language: 'html',
+        code: buttonGroupCompactExample
+    }];
 
-    defaultSizeHtml = buttonGroupDefaultExample;
+    defaultSizeHtml: ExampleFile[] = [{
+        language: 'html',
+        code: buttonGroupDefaultExample
+    }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('buttonGroup');
