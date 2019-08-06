@@ -8,8 +8,10 @@ import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-
 import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
-import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts'
-import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html'
+import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
+import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
+import * as formInputNumberTsSrc from '!raw-loader!./examples/input-group-number-form-example.component.ts'
+import * as formInputNumberHtmlSrc from '!raw-loader!./examples/input-group-number-form-example.component.html'
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -737,6 +739,17 @@ export class InputGroupDocsComponent {
         {
             language: 'typescript',
             code: formInputTsSrc
+        }
+    ];
+
+    formNumberInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formInputNumberHtmlSrc
+        },
+        {
+            language: 'typescript',
+            code: formInputNumberTsSrc
         }
     ];
 
