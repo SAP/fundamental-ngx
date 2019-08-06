@@ -1,10 +1,11 @@
-import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { addImportToRootModule, hasModuleImport } from '../utils/ng-module-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { getProject } from '@schematics/angular/utility/project';
+import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import chalk from 'chalk';
 
@@ -16,6 +17,7 @@ export function ngAdd(options: any): Rule {
     return chain([
         addDependencies(),
         addAnimations(options),
+        addStylePathToConfig(options),
         endInstallTask()
     ]);
 }
@@ -52,8 +54,6 @@ function addDependencies(): Rule {
 function addAnimations(options: any): Rule {
     return (tree: Tree) => {
         // tslint:disable-next-line:no-non-null-assertion
-        console.log(getProject(tree, options.project)!.architect!.build!.options);
-        // tslint:disable-next-line:no-non-null-assertion
         const modulePath = getAppModulePath(tree, getProject(tree, options.project)!.architect!.build!.options!.main);
 
         if (options.animations) {
@@ -76,7 +76,30 @@ function addAnimations(options: any): Rule {
 
 function addStylePathToConfig(options: any): Rule {
     return (tree: Tree) => {
+        const angularConfigPath = '/angular.json';
+        const workspaceConfig = tree.read('/angular.json');
+        if (!workspaceConfig) {
+            throw new SchematicsException(`Unable to find angular.json.`);
+        }
+        const workspaceJson: WorkspaceSchema = JSON.parse(workspaceConfig.toString());
 
+        try {
+            // tslint:disable-next-line:no-non-null-assertion
+            const stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
+
+            if (!stylesArray.includes(fdStylesPath)) {
+                stylesArray.push(fdStylesPath);
+                // tslint:disable-next-line:no-non-null-assertion
+                (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
+            } else {
+                console.log(chalk.green(`✅️ Found duplicate style path in angular.json. Skipping.`));
+                return tree;
+            }
+        } catch (e) {
+            throw new SchematicsException(`Unable to find angular.json project styles.`);
+        }
+        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
+        console.log(chalk.green(`✅️ Added fundamental-styles path to angular.json.`));
         return tree;
     };
 }
