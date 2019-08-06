@@ -1,10 +1,67 @@
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { getPackageVersionFromPackageJson } from '../utils/package-utils';
+import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import { addImportToRootModule, hasModuleImport } from '../utils/ng-module-utils';
+import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
+import { getProject } from '@schematics/angular/utility/project';
 
-// Just return the tree
-export function ngAdd(_options: any): Rule {
-    return (tree: Tree, _context: SchematicContext) => {
-        _context.addTask(new NodePackageInstallTask());
+import chalk from 'chalk';
+
+const browserAnimationsModuleName = 'BrowserAnimationsModule';
+const noopAnimationsModuleName = 'NoopAnimationsModule';
+
+export function ngAdd(options: any): Rule {
+    return chain([
+        addDependencies(),
+        addAnimations(options),
+        endInstallTask()
+    ]);
+}
+
+function endInstallTask(): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        context.addTask(new NodePackageInstallTask());
+        return tree;
+    };
+}
+
+function addDependencies(): Rule {
+    return (tree: Tree) => {
+        const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
+        const dependencies: NodeDependency[] = [
+            { type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/forms' },
+            { type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/animations' }
+        ];
+
+        dependencies.forEach(dependency => {
+            addPackageJsonDependency(tree, dependency);
+            console.log(chalk.green(`✅️ Added ${dependency.name} to ${dependency.type}.`));
+        });
+
+        return tree;
+    };
+}
+
+function addAnimations(options: any): Rule {
+    return (tree: Tree) => {
+        // tslint:disable-next-line:no-non-null-assertion
+        const modulePath = getAppModulePath(tree, getProject(tree, options.project)!.architect!.build!.options!.main);
+
+        if (options.animations) {
+            if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
+                return console.warn(chalk.red(`Could not set up "${chalk.bold(browserAnimationsModuleName)}" ` +
+                    `because "${chalk.bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
+                    `set up browser animations.`));
+            }
+            addImportToRootModule(tree, browserAnimationsModuleName,
+                '@angular/platform-browser/animations', modulePath);
+            console.log(chalk.green(`✅️ Added ${browserAnimationsModuleName} to root module.`));
+        } else if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
+            addImportToRootModule(tree, noopAnimationsModuleName,
+                '@angular/platform-browser/animations', modulePath);
+            console.log(chalk.green(`✅️ Added ${noopAnimationsModuleName} to root module.`));
+        }
         return tree;
     };
 }

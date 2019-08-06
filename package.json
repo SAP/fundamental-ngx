@@ -9,7 +9,7 @@
         "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-docs-netlify": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/\" ",
         "build-deploy-library": "ng build --prod fundamental-ngx && cp README.md dist/fundamental-ngx/README.md",
-        "build-pack-library": "ng build --prod fundamental-ngx && cd dist/fundamental-ngx && npm pack && cd ../.. && npm run build:lib-schematics",
+        "build-pack-library": "ng build --prod fundamental-ngx && npm run build:schematics && cd dist/fundamental-ngx && npm pack && cd ../..",
         "build-src": "gulp build-src",
         "copy-docs": "cp README.md docs/assets/README.md && cp NEW_COMPONENT.md docs/assets/NEW_COMPONENT.md",
         "deploy-docs": "angular-cli-ghpages --branch gh-pages",
@@ -25,7 +25,11 @@
         "test:coveralls": "cat ./coverage/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
         "compile-typedoc": "rm -rf docs/assets/typedoc && typedoc --out docs/assets/typedoc library/src/lib --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc",
         "compile-typedoc-json": "typedoc --json docs/assets/typedoc/typedoc.json --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc library/src/lib",
-        "build:lib-schematics": "cd library && npm run build"
+        "build:schematics": "./node_modules/.bin/tsc -p ./library/tsconfig.schematics.json && npm run copy:schemas && npm run copy:collection",
+        "copy:schemas": "cp library/schematics/ng-add/schema.json dist/fundamental-ngx/schematics/ng-add/schema.json",
+        "copy:collection": "cp library/schematics/collection.json dist/fundamental-ngx/schematics/collection.json",
+        "postbuild": "npm run copy:schemas && npm run copy:collection",
+        "temporary": "npm run build-pack-library && cp -r dist/fundamental-ngx ../schematics-tester && cd ../schematics-tester && npm uninstall fundamental-ngx && rm -rf random && mv fundamental-ngx random"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -57,6 +61,7 @@
     "devDependencies": {
         "@angular-devkit/build-angular": "^0.13.8",
         "@angular-devkit/build-ng-packagr": "^0.13.3",
+        "@angular-devkit/core": "^7.3.9",
         "@angular/cli": "^7.3.3",
         "@angular/compiler-cli": "^7.2.7",
         "@angular/language-service": "^7.2.7",

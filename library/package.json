@@ -17,15 +17,15 @@
         "postbuild": "npm run copy:schemas && npm run copy:collection"
     },
     "peerDependencies": {
-        "@angular/common": "^7.2.7",
-        "@angular/core": "^7.2.7",
-        "@angular/forms": "^7.2.7",
-        "@angular/animations": "^7.2.7",
-        "fundamental-styles": "^0.1.0",
+        "@angular/common": ">=7.2.7",
+        "@angular/core": ">=7.2.7",
+        "@angular/forms": ">=7.2.7",
+        "@angular/animations": ">=7.2.7",
         "rxjs": "^6.4.0"
     },
     "devDependencies": {
         "standard-version": "4.4.0",
+        "@angular-devkit/core": "^7.3.9",
         "@schematics/angular": "^7.3.9",
         "chalk": "^2.4.2"
     },
