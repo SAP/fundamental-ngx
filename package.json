@@ -28,7 +28,7 @@
         "compile-typedoc-json": "typedoc --json docs/assets/typedoc/typedoc.json --module commonjs --mode file --exclude **/*.spec.ts --hideGenerator --excludePrivate --theme docs/fd-typedoc library/src/lib",
         "build:schematics": "./node_modules/.bin/tsc -p ./library/tsconfig.schematics.json && npm run copy:schemas && npm run copy:collection",
         "copy:schemas": "cp library/schematics/ng-add/schema.json dist/fundamental-ngx/schematics/ng-add/schema.json",
-        "copy:collection": "cp library/schematics/collection.json dist/fundamental-ngx/schematics/collection.json",
+        "copy:collection": "cp library/schematics/collection.json dist/fundamental-ngx/schematics/collection.json"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
