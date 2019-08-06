@@ -28,8 +28,7 @@
         "build:schematics": "./node_modules/.bin/tsc -p ./library/tsconfig.schematics.json && npm run copy:schemas && npm run copy:collection",
         "copy:schemas": "cp library/schematics/ng-add/schema.json dist/fundamental-ngx/schematics/ng-add/schema.json",
         "copy:collection": "cp library/schematics/collection.json dist/fundamental-ngx/schematics/collection.json",
-        "postbuild": "npm run copy:schemas && npm run copy:collection",
-        "temporary": "npm run build-pack-library && cp -r dist/fundamental-ngx ../schematics-tester && cd ../schematics-tester && npm uninstall fundamental-ngx && rm -rf random && mv fundamental-ngx random"
+        "postbuild": "npm run copy:schemas && npm run copy:collection"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
