@@ -19,20 +19,20 @@ export class CalendarSingleExampleComponent {
 
     date = FdDate.getToday();
 
-    myDisableFunction = function(d: FdDate): boolean {
+    myDisableFunction = function (d: FdDate): boolean {
         const day = d.getDay();
         return day === 6 || day === 7;
     };
 
     // Block days before/after any day
-    myBlockFunction = function(d: FdDate): boolean {
-        const firstDay = new FdDate(2019, 7, 21);
-        const lastDay = new FdDate(2019, 7, 30);
+    myBlockFunction = function (d: FdDate): boolean {
+        const firstDay = FdDate.getToday();
+        const lastDay = new FdDate(firstDay.year, firstDay.month, firstDay.day + 7);
         return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp();
     };
 
     disableWednesday() {
-        this.myDisableFunction = function(d: FdDate): boolean {
+        this.myDisableFunction = function (d: FdDate): boolean {
             const day = d.getDay();
             return day === 4;
         };
