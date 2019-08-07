@@ -3,8 +3,8 @@
     <fd-popover-body *ngIf="menu1 && menu1.length || menu2 && menu2.length">
         <fd-menu>
             <ul fd-menu-list>
-                <li fd-menu-item *ngFor="let option of menu1">
-                    <a [attr.href]="option.url">{{option.text}}</a>
+                <li *ngFor="let option of menu1">
+                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
                 </li>
             </ul>
             <fd-menu-group>
@@ -12,8 +12,8 @@
                     Group header
                 </h1>
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let option of menu2">
-                        <a [attr.href]="option.url">{{option.text}}</a>
+                    <li *ngFor="let option of menu2">
+                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
                     </li>
                 </ul>
             </fd-menu-group>
@@ -26,8 +26,8 @@
     <fd-popover-body *ngIf="menu1 && menu1.length">
         <fd-menu>
             <ul fd-menu-list>
-                <li fd-menu-item *ngFor="let option of menu1">
-                    <a [attr.href]="option.url">{{option.text}}</a>
+                <li *ngFor="let option of menu1">
+                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
                 </li>
             </ul>
         </fd-menu>
