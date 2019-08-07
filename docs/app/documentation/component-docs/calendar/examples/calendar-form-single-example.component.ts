@@ -18,7 +18,9 @@ import { FormControl, FormGroup } from '@angular/forms';
             customForm.controls.date.value.toDateString() : 
             'null' 
         }}
-        <button (click)="setInvalid()">XD</button>
+        <br/>
+        <br/>
+        <button fd-button (click)="setInvalid()">Set Invalid Date</button>
     `
 })
 export class CalendarFormSingleExampleComponent {
