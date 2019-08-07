@@ -16,10 +16,15 @@ import { FormControl, FormGroup } from '@angular/forms';
         Selected Start Date: {{ customForm.controls.date.value.start ? customForm.controls.date.value.start.toDateString() : 'null' }} <br/>
         Selected End Date: {{ customForm.controls.date.value.end ? customForm.controls.date.value.end.toDateString() : 'null' }} <br/>
         Valid: {{ customForm.controls.date.valid }} <br/>
-
-        <br/>
         <button fd-button (click)="setInvalid()">Set Invalid Date</button>
-    `
+    `,
+    styles: [
+        `
+            button {
+                margin-top: 1rem;
+            }
+        `
+    ]
 })
 export class CalendarFormRangeExampleComponent {
     customForm = new FormGroup({

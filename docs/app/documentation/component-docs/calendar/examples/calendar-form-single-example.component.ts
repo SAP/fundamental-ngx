@@ -19,9 +19,15 @@ import { FormControl, FormGroup } from '@angular/forms';
             'null' 
         }}
         <br/>
-        <br/>
         <button fd-button (click)="setInvalid()">Set Invalid Date</button>
-    `
+    `,
+    styles: [
+        `
+            button {
+                margin-top: 1rem;
+            }
+        `
+    ]
 })
 export class CalendarFormSingleExampleComponent {
     customForm = new FormGroup({
