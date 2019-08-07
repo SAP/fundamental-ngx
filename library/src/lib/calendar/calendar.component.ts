@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     forwardRef,
@@ -186,7 +187,10 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     };
 
     /** @hidden */
-    constructor(public calendarI18n: CalendarI18n) {}
+    constructor(
+        public calendarI18n: CalendarI18n,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -364,6 +368,8 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
         this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
         this.activeView = 'day';
         this.activeViewChange.emit(this.activeView);
+        this.changeDetectorRef.detectChanges();
+        this.dayViewComponent.focusActiveDay();
     }
 
     /**
@@ -393,6 +399,8 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
     public selectedYear(yearSelected: number) {
         this.activeView = 'day';
         this.currentlyDisplayed.year = yearSelected;
+        this.changeDetectorRef.detectChanges();
+        this.dayViewComponent.focusActiveDay();
     }
 
 }

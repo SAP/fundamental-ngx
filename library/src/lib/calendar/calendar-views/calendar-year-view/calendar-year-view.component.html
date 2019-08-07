@@ -7,7 +7,7 @@
                 'fd-calendar__item--current': (year == currentYear)
             }"
             [attr.id]="id + '-fd-year-' + i"
-            [attr.tabindex]="year === yearSelected ? 0 : -1"
+            [attr.tabindex]="year === activeYear ? 0 : -1"
             (keydown)="onKeydownYearHandler($event, i)"
             (click)="selectYear(year, $event)">
             <span role="button" class="fd-calendar__text">

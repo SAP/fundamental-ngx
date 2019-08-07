@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
 import { FdDate } from '../../models/fd-date';
 import { takeUntil } from 'rxjs/operators';
-import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { CalendarService } from '../../calendar.service';
 import { Subject } from 'rxjs';
 
@@ -16,6 +15,11 @@ import { Subject } from 'rxjs';
     }
 })
 export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
+
+    /** @hidden
+     *  This variable is used to define which year from calendarYearList should be focusable by tab key
+     * */
+    activeYear: number;
 
     /** Parameter that stores the dozen of years that are currently being displayed. */
     calendarYearList: number[];
@@ -47,6 +51,10 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
+
+    /** @hidden */
+    constructor(private eRef: ElementRef, private calendarService: CalendarService) {
+    }
 
     /** @hidden */
     ngAfterViewChecked(): void {
@@ -92,15 +100,24 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         this.onDestroy$.complete();
     }
 
-    /** @hidden */
-    constructor(private eRef: ElementRef, private calendarService: CalendarService) { }
-
-    /** @hidden */
-    private constructYearList(): void {
-        this.calendarYearList = [];
-        for (let x = 0; x < 12; x++) {
-            this.calendarYearList.push(this.firstYearInList + x);
+    /**
+     * Method that returns active cell, which means:
+     * if there is any selected year, return selected year
+     * if there is no selected year, but there is current year, return current year
+     * if there is no current year, or selected, return first one
+     */
+    private getActiveYear(): number {
+        const selectedYear: number = this.calendarYearList.find(year => year === this.yearSelected);
+        if (selectedYear) {
+            return selectedYear;
         }
+
+        const currentYear: number = this.calendarYearList.find(year => year === this.currentYear);
+        if (currentYear) {
+            return currentYear;
+        }
+
+        return this.calendarYearList[0];
     }
 
     /** Method for handling the keyboard navigation. */
@@ -135,5 +152,15 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         }
         this.yearSelected = selectedYear;
         this.yearClicked.emit(this.yearSelected);
+    }
+
+    /** @hidden */
+    private constructYearList(): void {
+        const displayedYearsAmount: number = 12;
+        this.calendarYearList = [];
+        for (let x = 0; x < displayedYearsAmount; ++x) {
+            this.calendarYearList.push(this.firstYearInList + x);
+        }
+        this.activeYear = this.getActiveYear();
     }
 }
