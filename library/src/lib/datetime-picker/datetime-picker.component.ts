@@ -84,8 +84,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     compact: boolean = false;
 
-    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
-     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    /**
+     *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
+     */
     @Input()
     placement: Placement = 'bottom-start';
 
@@ -222,7 +224,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /**
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
-     * */
+     */
     validate(control: AbstractControl): {
         [key: string]: any
     } {
@@ -245,7 +247,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /**
      * Method that handle calendar active view change and throws event.
-     * */
+     */
     public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
         this.activeViewChange.emit(activeView);
     }
@@ -343,7 +345,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected date changed.
      * If invalid time model is detected, it takes time model data from TimeComponent.
-     * */
+     */
     handleDateChange(date: FdDate): void {
         this.selectedDate = date;
         if (!this.date.isTimeValid()) {
@@ -358,7 +360,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /**
      * @hidden
      * Method that is triggered by events from time component, when there is selected time changed
-     * */
+     */
     handleTimeChange(time: TimeObject): void {
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
@@ -378,7 +380,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @hidden
      * Method, which is responsible for transforming string to datetime, depending on type or
      * validation the results are different. It also changes to state of isInvalidDateInput.
-     * */
+     */
     handleInputChange(date: string): void {
         const fdTimeDate = this.dateTimeAdapter.parse(date);
         this.selectedDate = fdTimeDate.date;
@@ -405,8 +407,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     public isModelValid(): boolean {
         return this.date &&
             this.date instanceof FdDatetime &&
-            this.date.isDateValid() && this.date.isTimeValid()
-        ;
+            this.date.isDateValid() && this.date.isTimeValid();
     }
 
     private setInput(fdDateTime: FdDatetime): void {

@@ -18,7 +18,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
 
     /** @hidden
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
-     * */
+     */
     activeYear: number;
 
     /** Parameter that stores the dozen of years that are currently being displayed. */

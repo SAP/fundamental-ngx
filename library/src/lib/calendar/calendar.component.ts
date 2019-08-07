@@ -205,7 +205,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /**
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
-     * */
+     */
     writeValue(selected: FdRangeDate | FdDate): void {
         let valid: boolean = true;
         if (selected) {
@@ -242,7 +242,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /**
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
-     * */
+     */
     validate(control: AbstractControl): {
         [key: string]: any
     } {
@@ -270,7 +270,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /**
      * Method that handle active view change and throws event.
-     * */
+     */
     public handleActiveViewChange(activeView: FdCalendarView): void {
         this.activeView = activeView;
         this.activeViewChange.emit(activeView);
@@ -279,7 +279,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /**
      * @hidden
      * Method that is triggered by events from day view component, when there is selected single date changed
-     * */
+     */
     selectedDateChanged(date: FdDate): void {
         this.selectedDate = date;
         this.onChange(date);
@@ -291,7 +291,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /**
      * @hidden
      * Method that is triggered by events from day view component, when there is selected range date changed
-     * */
+     */
     public selectedRangeDateChanged(dates: FdRangeDate): void {
         if (dates) {
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
@@ -374,7 +374,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** Function that allows to change currently displayed month/year configuration,
      * which are connected to days displayed
-     * */
+     */
     public setCurrentlyDisplayed(fdDate: FdDate): void {
         this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
     }
@@ -382,7 +382,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /**
      * @hidden
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
-     * */
+     */
     public handleMonthViewChange(month: number): void {
         this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
         this.activeView = 'day';
@@ -403,8 +403,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         if (this.calType === 'single') {
             return this.selectedDate &&
                 this.selectedDate instanceof FdDate &&
-                this.selectedDate.isDateValid()
-                ;
+                this.selectedDate.isDateValid();
         } else {
             return this.selectedRangeDate &&
                 (
@@ -415,8 +414,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
                     this.selectedRangeDate.end &&
                     this.selectedRangeDate.end instanceof FdDate &&
                     this.selectedRangeDate.start.isDateValid()
-                )
-                ;
+                );
         }
     }
 
@@ -424,7 +422,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Method that sets up the currently displayed variables, like shown month and year.
      * Day grid is based on currently displayed month and year
-     * */
+     */
     private prepareDisplayedView(): void {
         if (this.calType === 'single' && this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
             this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
