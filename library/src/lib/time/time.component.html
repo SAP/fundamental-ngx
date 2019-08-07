@@ -30,7 +30,8 @@
     </div>
 </div>
 
-<div class="fd-time__item">
+<div *ngIf="displayMinutes"
+    class="fd-time__item">
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"

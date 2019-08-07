@@ -4,6 +4,7 @@ import * as timePickerSrc from '!raw-loader!./examples/time-picker-example.compo
 import * as timePickerMeridianSrc from '!raw-loader!./examples/time-picker-12-example.component.html';
 import * as timePickerDisabledSrc from '!raw-loader!./examples/time-picker-disabled-example.component.html';
 import * as timePickerNoSecondsSrc from '!raw-loader!./examples/time-picker-no-seconds-example.component.html';
+import * as timePickerOnlyHoursSrc from '!raw-loader!./examples/time-picker-only-hours-example.component.html';
 import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compact-example.component.html';
 import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
 import * as timePickerOtherDelimiterSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.html';
@@ -31,6 +32,11 @@ export class TimePickerDocsComponent {
     timePickerNoSeconds: ExampleFile[] = [{
         language: 'html',
         code: timePickerNoSecondsSrc
+    }];
+
+    timePickerOnlyHours: ExampleFile[] = [{
+        language: 'html',
+        code: timePickerOnlyHoursSrc
     }];
 
     disabledTimePicker: ExampleFile[] = [{

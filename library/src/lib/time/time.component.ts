@@ -49,6 +49,12 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      */
     @Input() displaySeconds: boolean = true;
 
+    /** @Input
+     * When set to false, hides the input for minutes
+     */
+    @Input()
+    displayMinutes: boolean = true;
+
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
      * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
