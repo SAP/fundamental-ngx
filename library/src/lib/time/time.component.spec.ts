@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TimeObject } from './time-object';
 
 import { TimeComponent } from './time.component';
+import { SimpleChange, SimpleChanges } from '@angular/core';
 
 describe('TimeComponent', () => {
     let component: TimeComponent;
@@ -151,7 +152,8 @@ describe('TimeComponent', () => {
     it('should handle ngOnChanges', () => {
         spyOn(component, 'setDisplayedHour');
         component.meridian = true;
-        component.ngOnChanges();
+        const meridianChange: SimpleChange = new SimpleChange(false, true, true);
+        component.ngOnChanges({meridian: meridianChange});
         expect(component.setDisplayedHour).toHaveBeenCalled();
     });
 

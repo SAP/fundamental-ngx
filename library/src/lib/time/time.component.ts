@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
@@ -23,20 +23,30 @@ import { TimeI18n } from './i18n/time-i18n';
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
 
-    /** @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
-     * and does not display a period control. */
+    /**
+     * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
+     * and does not display a period control.
+     */
     @Input() meridian: boolean = false;
 
-    /** @Input When set to false, does not set the input field to invalid state on invalid entry. */
+    /**
+     *  @Input When set to false, does not set the input field to invalid state on invalid entry.
+     */
     @Input() validate: boolean = true;
 
-    /** @Input Disables the component. */
+    /**
+     * @Input Disables the component.
+     */
     @Input() disabled: boolean;
 
-    /** @Input When set to false, hides the buttons that increment and decrement the corresponding input. */
+    /**
+     * @Input When set to false, hides the buttons that increment and decrement the corresponding input.
+     */
     @Input() spinners: boolean = true;
 
-    /** @Input When set to false, hides the input for seconds. */
+    /**
+     * @Input When set to false, hides the input for seconds.
+     */
     @Input() displaySeconds: boolean = true;
 
     /**
@@ -46,7 +56,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      * ```json
      * { hour: 12, minute: 0, second: 0 }
      * ```
-     * */
+     */
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 
@@ -55,21 +65,21 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     readonly focusArrowLeft: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden
-     * Used only in meridian mode, stores information if it's AM or PM
-     * */
+     * Used only in meridian mode. Stores information the current am/pm state.
+     */
     period: string;
 
     /** @hidden
      * Defines if actually written meridian is invalid
-     * */
+     */
     periodInvalid: boolean;
 
     /** @hidden
      * Variable that is displayed as an hour.
      * For meridian mode ranging from 0 to 12,
      * For non-meridian mode ranging from 0 to 23, and reflects the hour value
-     * */
-    displayedHour: number;
+     */
+    displayedHour: number = 0;
 
     /** @hidden */
     onChange = (time: TimeObject) => {
@@ -108,15 +118,18 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.setDisplayedHour();
     }
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.setDisplayedHour();
-        this.displayedHour = this.time.hour;
+    /** @hidden
+     * Reacts only when there is meridian or time input change
+     */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.meridian || changes.time) {
+            this.setDisplayedHour();
+        }
     }
 
     /** @hidden
      * Changes displayed hour value, used mostly when the model hour is changed
-     * */
+     */
     setDisplayedHour(): void {
         if (!this.meridian) {
             this.displayedHour = this.time.hour;
@@ -137,7 +150,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     /** @hidden
      * Handles changes of displayed hour value from template.
-     * */
+     */
     displayedHourChanged(): void {
         if (!this.meridian) {
             this.time.hour = this.displayedHour;
@@ -162,7 +175,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles the blur events from inputs. Also rewrite values if they are incorrect, prevents from negative or too big
      * values. Also changes period if it's on meridian type and hour is bigger than 12.
-     * */
+     */
     inputBlur(inputType: string): void {
         switch (inputType) {
             case 'hour': {
@@ -309,7 +322,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     /** @hidden
      * Handles period model change. depending on current hour and new period changes hours by +/- 12
-     * */
+     */
     periodModelChange(): void {
         if (this.time && !this.time.hour) {
             this.time.hour = 0;
@@ -331,7 +344,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     /** @hidden
      * Handles last button keyboard events
-     * */
+     */
     lastButtonKeydown(event: KeyboardEvent): void {
         if (event.code === 'Tab' && !event.shiftKey) {
             event.preventDefault();
@@ -342,20 +355,20 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /**
      * @hidden
      * Defines if period is PM, Considers the fact that period should be case sensitive
-     * */
+     */
     private isPm(period: string): boolean {
-        const pmMeridian = this.timeI18n.meridianCaseSensitive ? this.timeI18n.meridianPm : this.timeI18n.meridianPm.toLowerCase();
-        period = this.timeI18n.meridianCaseSensitive ? period : period.toLowerCase();
+        const pmMeridian = this.timeI18n.meridianCaseSensitive ? this.timeI18n.meridianPm : this.timeI18n.meridianPm.toLocaleUpperCase();
+        period = this.timeI18n.meridianCaseSensitive ? period : period.toLocaleUpperCase();
         return period === pmMeridian;
     }
 
     /**
      * @hidden
      * Defines if period is AM, Considers the fact that period should be case sensitive
-     * */
+     */
     private isAm(period: string): boolean {
-        const amMeridian = this.timeI18n.meridianCaseSensitive ? this.timeI18n.meridianAm : this.timeI18n.meridianAm.toLowerCase();
-        period = this.timeI18n.meridianCaseSensitive ? period : period.toLowerCase();
+        const amMeridian = this.timeI18n.meridianCaseSensitive ? this.timeI18n.meridianAm : this.timeI18n.meridianAm.toLocaleUpperCase();
+        period = this.timeI18n.meridianCaseSensitive ? period : period.toLocaleUpperCase();
         return period === amMeridian;
     }
 }
