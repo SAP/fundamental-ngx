@@ -132,6 +132,6 @@ This file is licensed under the Apache Software License, v.2 except as noted oth
 
 ## Similar Projects
 
-[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of SAP Fiori Fundamentals
+[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of SAP Fundamental Styles
 
-[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of SAP Fiori Fundamentals
+[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of SAP Fundamental Styles

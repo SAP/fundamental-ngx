@@ -95,7 +95,7 @@
                         "tsConfig": "docs/tsconfig.spec.json",
                         "scripts": [],
                         "styles": [
-                            "node_modules/fiori-fundamentals/dist/fiori-fundamentals.css",
+                            "node_modules/fundamental-styles/dist/fundamental-styles.css",
                             "docs/styles.scss"
                         ],
                         "assets": [

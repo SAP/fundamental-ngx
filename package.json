@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "license": "Apache-2.0",
     "main": "dist/fundamental-ngx/index.js",
-    "description": "SAP Fundamentals, implemented in Angular",
+    "description": "SAP Fundamental Styles, implemented in Angular",
     "scripts": {
         "build": "ng build",
         "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
