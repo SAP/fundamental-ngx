@@ -49,9 +49,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      */
     @Input() displaySeconds: boolean = true;
 
-    /** @Input
-     * When set to false, hides the input for minutes
-     */
+    /** @Input When set to false, hides the input for minutes. */
     @Input()
     displayMinutes: boolean = true;
 
