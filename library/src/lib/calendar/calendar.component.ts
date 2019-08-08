@@ -204,7 +204,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /**
      * @hidden
-     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
+     * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
     writeValue(selected: FdRangeDate | FdDate): void {
         let valid: boolean = true;
