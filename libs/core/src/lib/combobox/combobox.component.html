@@ -1,23 +1,31 @@
-<fd-popover [isOpen]="isOpen"
-            (isOpenChange)="isOpenChangeHandle($event)"
+<fd-popover [(isOpen)]="isOpen"
             [fillControlMode]="'at-least'"
-            [triggers]="triggers"
             [disabled]="disabled"
             class="fd-combobox-popover-custom"
             [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
     <fd-popover-control>
-        <div class="fd-combobox-control">
-            <fd-input-group [glyph]="glyph" [compact]="compact" [button]="true"
-                            (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="false">
-                <input #searchInputElement type="text" class="fd-input" fd-input-group-input
-                       [ngClass]="{'fd-input--compact': compact}"
-                       (keydown)="onInputKeydownHandler($event)"
-                       (keyup)="onInputKeyupHandler($event)"
-                       [disabled]="disabled"
-                       [(ngModel)]="inputText"
-                       (ngModelChange)="handleSearchTermChange()"
-                       placeholder="{{placeholder}}">
-            </fd-input-group>
+        <div *ngIf="!inShellbar" class="fd-combobox-control">
+            <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
+                <ng-container *ngTemplateOutlet="searchInput"></ng-container>
+                <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
+                    <button fd-button
+                            tabindex="-1"
+                            type="button"
+                            [fdType]="'light'"
+                            [glyph]="glyph"
+                            [disabled]="disabled">
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div *ngIf="inShellbar" class="fd-search-input__control">
+            <button tabindex="0" type="button" class="fd-button--shell" [attr.aria-expanded]="isOpen"
+                    [ngClass]="('sap-icon--' + this.glyph)"></button>
+            <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
+                <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
+                    <ng-container *ngTemplateOutlet="searchInput"></ng-container>
+                </div>
+            </div>
         </div>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
@@ -42,3 +50,13 @@
     </fd-popover-body>
 </fd-popover>
 
+<ng-template #searchInput>
+    <input #searchInputElement id="searchInputElement" type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
+           (keydown)="onInputKeydownHandler($event)"
+           (keyup)="onInputKeyupHandler()"
+           [disabled]="disabled"
+           [(ngModel)]="inputText"
+           (ngModelChange)="handleSearchTermChange()"
+           (click)="$event.stopPropagation()"
+           placeholder="{{placeholder}}">
+</ng-template>

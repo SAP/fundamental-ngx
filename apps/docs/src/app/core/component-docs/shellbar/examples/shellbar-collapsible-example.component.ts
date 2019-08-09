@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ShellbarMenuItem } from '../../../../../../library/src/lib/shellbar/model/shellbar-menu-item';
+import { ShellbarProduct } from '../../../../../../library/src/lib/shellbar/model/shellbar-product';
+import { ShellbarUser } from '../../../../../../library/src/lib/shellbar/model/shellbar-user';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
@@ -10,19 +13,19 @@ export class ShellbarCollapsibleExampleComponent {
 
     productMenuControl = 'Corporate Portal';
 
-    productMenuItems = [
-        {name: 'Application A', callback: () => {alert('Application A Clicked')}},
-        {name: 'Application B', callback: () => {alert('Application B Clicked')}},
-        {name: 'Application C', callback: () => {alert('Application C Clicked')}},
-        {name: 'Application D', callback: () => {alert('Application D Clicked')}}
+    productMenuItems: ShellbarMenuItem[] = [
+        {text: 'Application A', callback: () => {alert('Application A Clicked')}},
+        {text: 'Application B', callback: () => {alert('Application B Clicked')}},
+        {text: 'Application C', callback: () => {alert('Application C Clicked')}},
+        {text: 'Application D', callback: () => {alert('Application D Clicked')}}
     ];
 
-    user = {
+    user: ShellbarUser = {
         initials: 'WW',
         image: './assets/headshot-male.jpg'
     };
 
-    userMenu = [
+    userMenu: ShellbarMenuItem[] = [
         {text: 'Settings', callback: this.settingsCallback},
         {text: 'Sign Out', callback: this.signOutCallback}
     ];
@@ -38,10 +41,10 @@ export class ShellbarCollapsibleExampleComponent {
         'Apple',
         'Banana',
         'Kiwi',
-        'Strawberry'
+        'Strawberry',
     ];
 
-    productSwitcher = [
+    productSwitcher: ShellbarProduct[] = [
         {title: 'Fiori Home', image: './assets/01.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
         {title: 'S/4 HANA Cloud', image: './assets/02.png',

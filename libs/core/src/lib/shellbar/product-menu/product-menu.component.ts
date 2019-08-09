@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { PopoverComponent } from '../../popover/popover.component';
 
 /**
@@ -30,7 +31,7 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
 
     /** The items in the product menu. */
     @Input()
-    items: any[];
+    items: ShellbarMenuItem[];
 
     /** @hidden */
     productMenuCollapsed: boolean = false;
@@ -41,13 +42,13 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
 
     /** @hidden */
     @HostListener('window:resize', [])
-    onResize() {
+    onResize(): void {
         const mq = window.matchMedia('(max-width: 601px)');
         mq.matches ? this.productMenuCollapsed = true : this.productMenuCollapsed = false;
     }
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         this.onResize();
     }
 
