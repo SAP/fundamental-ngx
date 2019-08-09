@@ -260,9 +260,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    /** Closes the popover */
+    /** Closes the popover and refresh model */
     closePopover(): void {
         if (this.isOpen) {
+            this.handleInputChange(this.inputFieldDate);
             this.onClose.emit();
             this.isOpen = false;
         }

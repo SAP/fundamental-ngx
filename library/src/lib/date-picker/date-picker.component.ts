@@ -302,24 +302,23 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         }
         if (this.type === 'single') {
             /**
-             * For single mode, if the date is invalid, model is changed, but it does not refresh currently
-             * displayed day view, or input field text
+             * For single mode, if the date is invalid, model is changed, it refresh currently
+             * input field text, but it does not refresh currently displayed day
              */
             selected = <FdDate>selected;
             this.selectedDate = selected;
-
+            this.inputFieldDate = this.dateAdapter.format(selected);
             if (this.isModelValid()) {
                 this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
-                this.inputFieldDate = this.dateAdapter.format(selected);
             }
 
         } else {
-
             /**
              * For range mode, if the date is invalid, model is changed, but it does not refresh currently
              * displayed day view, or input field text
              */
             selected = <FdRangeDate>selected;
+
             if (selected.start) {
                 this.selectedRangeDate = { start: selected.start, end: selected.end };
 
@@ -328,11 +327,11 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                     this.inputFieldDate = this.dateAdapter.format(selected.start) +
                         this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end);
                 }
-
             } else {
                 this.inputFieldDate = '';
             }
         }
+        this.isInvalidDateInput = !this.isModelValid();
     }
 
     /**
