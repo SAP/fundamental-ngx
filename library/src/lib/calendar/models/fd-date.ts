@@ -123,7 +123,7 @@ export class FdDate {
             return false;
         }
 
-        if (this.year < 1000 || this.year > 3000 || this.month < 1 || this.month > 12) {
+        if (this.year > 0 || this.month < 1 || this.month > 12) {
             return false;
         }
 
