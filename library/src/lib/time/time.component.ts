@@ -70,11 +70,6 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     period: string;
 
     /** @hidden
-     * Defines if actually written meridian is invalid
-     */
-    periodInvalid: boolean;
-
-    /** @hidden
      * Variable that is displayed as an hour.
      * For meridian mode ranging from 0 to 12,
      * For non-meridian mode ranging from 0 to 23, and reflects the hour value
@@ -203,6 +198,16 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
                 this.time.second = Math.abs(Math.round(this.time.second) % 60);
                 break;
             }
+            case 'period': {
+                /**
+                 * When there is invalid period, function changes period to valid basing on actual hour
+                 */
+                if (!this.period ||
+                    (!this.isPm(this.period) && !this.isAm(this.period))
+                ) {
+                    this.setDisplayedHour();
+                }
+            }
         }
         this.onChange(this.time);
     }
@@ -327,12 +332,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         if (this.time && !this.time.hour) {
             this.time.hour = 0;
         }
-        if (!this.period ||
-            (!this.isPm(this.period) && !this.isAm(this.period))
-        ) {
-            this.periodInvalid = true;
-        } else if (this.time.hour < 24 && this.time.hour >= 0) {
-            this.periodInvalid = false;
+        if (this.time.hour < 24 && this.time.hour >= 0) {
             if (this.isPm(this.period) && this.time.hour < 12) {
                 this.time.hour = this.time.hour + 12;
             } else if (this.time.hour >= 12 && this.isAm(this.period)) {

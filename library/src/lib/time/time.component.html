@@ -101,7 +101,7 @@
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="period"
-               [ngClass]="{'is-disabled': disabled, 'is-invalid': periodInvalid}"
+               [ngClass]="{'is-disabled': disabled}"
                class="fd-form__control"
                (blur)="inputBlur('period')"
                (ngModelChange)="periodModelChange()"

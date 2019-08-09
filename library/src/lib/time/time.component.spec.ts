@@ -277,7 +277,8 @@ describe('TimeComponent', () => {
     });
 
     it('should handle period model change', () => {
-        spyOn(component, 'setDisplayedHour');
+        component.meridian = true;
+
         component.period = 'am';
         component.time.hour = 0;
         component.period = 'pm';
@@ -300,6 +301,13 @@ describe('TimeComponent', () => {
 
         component.period = 'asdf';
         component.periodModelChange();
-        expect(component.periodInvalid).toBe(true);
+        component.inputBlur('period');
+        expect(component.period).toBe('am');
+
+        component.time.hour = 16;
+        component.period = 'asdf';
+        component.periodModelChange();
+        component.inputBlur('period');
+        expect(component.period).toBe('pm');
     });
 });
