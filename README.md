@@ -33,7 +33,7 @@ For an existing Angular CLI application,
 
     `ng add fundamental-ngx`
     
-    *If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide-%5B0.9.0%5D).*
+    *If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide).*
 
 3. **Import the modules you want to use.**
 
