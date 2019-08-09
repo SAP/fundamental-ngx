@@ -7,10 +7,11 @@ import {
     AfterContentChecked,
     QueryList,
     ViewEncapsulation,
-    ContentChild
+    ContentChild, ViewChildren
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { SearchInputComponent } from '../../search-input/search-input.component';
+import { PopoverComponent } from '../../popover/popover.component';
 
 /**
  * The component that represents shellbar actions.
@@ -39,6 +40,7 @@ import { SearchInputComponent } from '../../search-input/search-input.component'
     encapsulation: ViewEncapsulation.None
 })
 export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
+
     /** @hidden */
     actionsCollapsed: boolean = false;
 
@@ -57,6 +59,10 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     @Input()
     userMenu: any[];
 
+    /** When set to true, popover list will be closed after selecting the option */
+    @Input()
+    closePopoverOnSelect: boolean = false;
+
     /** Label for the collapsed item menu. */
     @Input()
     collapsedItemMenuLabel: string = 'Collapsed Item Menu';
@@ -64,6 +70,10 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)
     shellbarActions: QueryList<ShellbarActionComponent>;
+
+    /** @hidden */
+    @ViewChildren(PopoverComponent)
+    popoverComponents: QueryList<PopoverComponent>;
 
     /** @hidden */
     @ContentChild(SearchInputComponent)
@@ -76,6 +86,16 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     @HostListener('window:resize', [])
     onResize() {
         this.actionsCollapsed = window.innerWidth < 1024;
+    }
+
+    /**
+     * @hidden
+     */
+    itemClicked(item: any, event: any): void {
+        if (this.closePopoverOnSelect) {
+            this.popoverComponents.forEach(popover => popover.close());
+        }
+        item.callback(event);
     }
 
     /** @hidden */

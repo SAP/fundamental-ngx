@@ -28,7 +28,7 @@
                             </div>
                             <li fd-menu-item
                                 *ngFor="let action of shellbarActions"
-                                (click)="action.callback($event)">
+                                (click)="itemClicked(action, $event)">
                                 {{action.label}}
                             </li>
                             <div *ngIf="productSwitcher"
@@ -50,7 +50,7 @@
                             <hr>
                             <li fd-menu-item
                                 *ngFor="let product of productSwitcher"
-                                (click)="product.callback($event)">
+                                (click)="itemClicked(product, $event)">
                                 {{product.title}}
                             </li>
                         </ul>
@@ -84,7 +84,7 @@
                             <ul fd-menu-list>
                                 <li fd-menu-item
                                     *ngFor="let item of userMenu"
-                                    (click)="item.callback($event)">
+                                    (click)="itemClicked(item, $event)">
                                     {{item.text}}
                                 </li>
                             </ul>
@@ -107,7 +107,7 @@
                             <nav>
                                 <ul>
                                     <li *ngFor="let product of productSwitcher"
-                                        (click)="product.callback($event)">
+                                        (click)="itemClicked(product, $event)">
                                         <span class="fd-product-switcher__product-icon">
                                             <img [src]="product.image">
                                         </span>
