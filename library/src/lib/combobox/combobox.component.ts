@@ -1,10 +1,11 @@
 import {
+    AfterViewInit,
     Component,
     ElementRef,
     EventEmitter,
     forwardRef,
     Input,
-    OnChanges,
+    OnChanges, OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -16,6 +17,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MenuItemDirective } from '../menu/menu-item.directive';
 import { ComboboxItem } from './combobox-item';
+import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 /**
  * Allows users to filter through results and select a value.
@@ -31,7 +35,8 @@ import { ComboboxItem } from './combobox-item';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => ComboboxComponent),
             multi: true
-        }
+        },
+        MenuKeyboardService
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
@@ -39,7 +44,7 @@ import { ComboboxItem } from './combobox-item';
     },
     encapsulation: ViewEncapsulation.None
 })
-export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -122,10 +127,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     inputTextValue: string;
 
     /** @hidden */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
     onTouched: any = () => {};
+
+    constructor(private menuKeyboardService: MenuKeyboardService) {}
 
     /** @hidden */
     ngOnInit() {
@@ -145,6 +155,20 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
     }
 
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.menuKeyboardService.itemClicked
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => this.onMenuClickHandler(index));
+        this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
+        this.menuKeyboardService.focusEscapeAfterList = () => {};
+    }
+
     /** @hidden */
     onInputKeydownHandler(event) {
         if (event.code === 'Enter' && this.searchFunction) {
@@ -152,7 +176,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else if (event.code === 'ArrowDown') {
             event.preventDefault();
             if (this.menuItems && this.menuItems.first) {
-                this.menuItems.first.itemEl.nativeElement.children[0].focus();
+                this.menuItems.first.focus();
             }
         }
     }
@@ -165,47 +189,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    onMenuKeydownHandler(event, term?) {
-        if (event.code === 'Enter' && term) {
-            this.handleClickActions(term);
-            this.itemClicked.emit({ item: term, index: this.dropdownValues.indexOf(term) });
-        } else if (event.code === 'ArrowDown') {
-            event.preventDefault();
-            let foundItem = false;
-            const menuItemsArray = this.menuItems.toArray();
-            menuItemsArray.forEach((item, index) => {
-                if (document.activeElement === item.itemEl.nativeElement.children[0] && !foundItem) {
-                    if (menuItemsArray[index + 1]) {
-                        menuItemsArray[index + 1].itemEl.nativeElement.children[0].focus();
-                    }
-                    foundItem = true;
-                }
-            });
-        } else if (event.code === 'ArrowUp') {
-            event.preventDefault();
-            let foundItem = false;
-            const menuItemsArray = this.menuItems.toArray();
-            menuItemsArray.forEach((item, index) => {
-                if (!foundItem) {
-                    if (document.activeElement === item.itemEl.nativeElement.children[0] && index === 0) {
-                        this.searchInputElement.nativeElement.focus();
-                        foundItem = true;
-                    } else if (document.activeElement === item.itemEl.nativeElement.children[0]) {
-                        if (menuItemsArray[index - 1]) {
-                            menuItemsArray[index - 1].itemEl.nativeElement.children[0].focus();
-                        }
-                        foundItem = true;
-                    }
-                }
-            });
-        }
+    onMenuKeydownHandler(event: KeyboardEvent, index: number) {
+        this.menuKeyboardService.keyDownHandler(event, index, this.menuItems.toArray());
     }
 
     /** @hidden */
-    onMenuClickHandler(event, term) {
-        if (term) {
-            this.handleClickActions(term);
-            this.itemClicked.emit({ item: term, index: this.dropdownValues.indexOf(term) });
+    onMenuClickHandler(index: number) {
+        const selectedItem = this.displayedValues[index];
+        if (selectedItem) {
+            this.handleClickActions(selectedItem);
+            this.itemClicked.emit({ item: selectedItem, index: index });
         }
     }
 

@@ -30,14 +30,17 @@
                  [style.maxHeight]="maxHeight">
             <ng-content></ng-content>
             <ul fd-menu-list>
-                <li fd-menu-item *ngFor="let term of displayedValues"
-                    (click)="onMenuClickHandler($event, term)"
-                    (keydown)="onMenuKeydownHandler($event, term)">
+                <li *ngFor="let term of displayedValues; let index = index;"
+                    (click)="onMenuClickHandler(index)"
+                    (keydown)="onMenuKeydownHandler($event, index)"
+                    fd-menu-item
+                    tabindex="0">
+                    <span *ngIf="!itemTemplate"
+                          [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"
+                    ></span>
                     <ng-container *ngIf="itemTemplate">
                         <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
                     </ng-container>
-                    <a *ngIf="!itemTemplate" tabindex="0"
-                       [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></a>
                 </li>
             </ul>
         </fd-menu>
