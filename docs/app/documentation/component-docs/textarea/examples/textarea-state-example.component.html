@@ -1,0 +1,41 @@
+<div fd-form-item>
+    <label fd-form-label for="textarea-51">
+        Normal Textarea
+    </label>
+    <textarea fd-form-control id="textarea-51" placeholder="Field placeholder text"></textarea>
+    <fd-form-message>Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="textarea-52">
+        Valid Textarea
+    </label>
+    <textarea fd-form-control id="textarea-52" [state]="'valid'"></textarea>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="textarea-53">
+        Invalid Textarea
+    </label>
+    <textarea fd-form-control id="textarea-53" placeholder="Field placeholder text" [state]="'invalid'"></textarea>
+    <fd-form-message [type]="'error'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+    </fd-form-message>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="textarea-54">
+        Warning Textarea
+    </label>
+    <textarea fd-form-control id="textarea-54" placeholder="Field placeholder text" [state]="'warning'"></textarea>
+    <fd-form-message [type]="'warning'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+    </fd-form-message>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="textarea-55">
+        Disabled Textarea
+    </label>
+    <textarea fd-form-control id="textarea-55" placeholder="Field placeholder text" disabled></textarea>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="textarea-56">
+        Readonly Textarea
+    </label>
+    <textarea fd-form-control id="textarea-56" placeholder="Field placeholder text" readonly></textarea>
+</div>

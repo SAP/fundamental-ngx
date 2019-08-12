@@ -16,7 +16,6 @@ import { DatePickerDocsComponent } from './component-docs/date-picker/date-picke
 import { DatetimePickerDocsComponent } from './component-docs/datetime-picker/datetime-picker-docs.component';
 import { DropdownDocsComponent } from './component-docs/dropdown/dropdown-docs.component';
 import { FileInputDocsComponent } from './component-docs/file-input/file-input-docs.component';
-import { FormDocsComponent } from './component-docs/form/form-docs.component';
 import { IconDocsComponent } from './component-docs/icon/icon-docs.component';
 import { IdentifierDocsComponent } from './component-docs/identifier/identifier-docs.component';
 import { ImageDocsComponent } from './component-docs/image/image-docs.component';
@@ -56,7 +55,6 @@ import { DatePickerHeaderComponent } from './component-docs/date-picker/date-pic
 import { DatetimePickerHeaderComponent } from './component-docs/datetime-picker/datetime-picker-header/datetime-picker-header.component';
 import { DropdownHeaderComponent } from './component-docs/dropdown/dropdown-header/dropdown-header.component';
 import { FileInputHeaderComponent } from './component-docs/file-input/file-input-header/file-input-header.component';
-import { FormHeaderComponent } from './component-docs/form/form-header/form-header.component';
 import { IconHeaderComponent } from './component-docs/icon/icon-header/icon-header.component';
 import { IdentifierHeaderComponent } from './component-docs/identifier/identifier-header/identifier-header.component';
 import { ImageHeaderComponent } from './component-docs/image/image-header/image-header.component';
@@ -92,6 +90,16 @@ import {
     TabNavigationExampleChildFirst,
     TabNavigationExampleChildSecond, TabNavigationExampleChildThird
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
+import { InputHeaderComponent } from './component-docs/input/input-header/input-header.component';
+import { InputDocsComponent } from './component-docs/input/input-docs.component';
+import { SelectNativeHeaderComponent } from './component-docs/select-native/select-native-header/select-native-header.component';
+import { SelectNativeDocsComponent } from './component-docs/select-native/select-native-docs.component';
+import { TextareaHeaderComponent } from './component-docs/textarea/textarea-header/textarea-header.component';
+import { TextareaDocsComponent } from './component-docs/textarea/textarea-docs.component';
+import { CheckboxHeaderComponent } from './component-docs/checkbox/checkbox-header/checkbox-header.component';
+import { CheckboxDocsComponent } from './component-docs/checkbox/checkbox-docs.component';
+import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
 import { SelectDocsComponent } from './component-docs/select/select-docs.component';
 
@@ -136,6 +144,11 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.calendar}}
                 ]
             },
+            { path: 'checkbox', component: CheckboxHeaderComponent, children: [
+                    { path: '', component: CheckboxDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+                ]
+            },
             { path: 'combobox', component: ComboboxHeaderComponent, children: [
                     { path: '', component: ComboboxDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
@@ -161,11 +174,6 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.fileInput}}
                 ]
             },
-            { path: 'form', component: FormHeaderComponent, children: [
-                    { path: '', component: FormDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
-                ]
-            },
             { path: 'icon', component: IconHeaderComponent, children: [
                     { path: '', component: IconDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.icon}}
@@ -189,6 +197,11 @@ export const ROUTES: Routes = [
             { path: 'inlineHelp', component: InlineHelpHeaderComponent, children: [
                     { path: '', component: InlineHelpDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.inlineHelp}}
+                ]
+            },
+            { path: 'input', component: InputHeaderComponent, children: [
+                    { path: '', component: InputDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.inputGroup}}
                 ]
             },
             { path: 'inputGroup', component: InputGroupHeaderComponent, children: [
@@ -246,6 +259,16 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.popoverDirective}}
                 ]
             },
+            { path: 'radio', component: RadioHeaderComponent, children: [
+                    { path: '', component: RadioDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+                ]
+            },
+            { path: 'select-native', component: SelectNativeHeaderComponent, children: [
+                    { path: '', component: SelectNativeDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+                ]
+            },
             { path: 'scroll-spy', component: ScrollSpyHeaderComponent, children: [
                     { path: '', component: ScrollSpyDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.scrollSpy}}
@@ -290,6 +313,11 @@ export const ROUTES: Routes = [
                         ]
                     },
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs }}
+                ]
+            },
+            { path: 'textarea', component: TextareaHeaderComponent, children: [
+                    { path: '', component: TextareaDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
                 ]
             },
             { path: 'tile', component: TileDocsHeaderComponent, children: [

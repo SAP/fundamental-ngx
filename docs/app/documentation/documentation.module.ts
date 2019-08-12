@@ -48,7 +48,6 @@ import { ActionBarDocsComponent } from './component-docs/action-bar/action-bar-d
 import { PanelDocsComponent } from './component-docs/panel/panel-docs.component';
 import { MenuDocsComponent } from './component-docs/menu/menu-docs.component';
 import { TileDocsComponent } from './component-docs/tile/tile-docs.component';
-import { FormDocsComponent } from './component-docs/form/form-docs.component';
 import { SideNavigationDocsComponent } from './component-docs/side-navigation/side-navigation-docs.component';
 import { PopoverDocsComponent } from './component-docs/popover/popover-docs.component';
 import { CalendarDocsComponent } from './component-docs/calendar/calendar-docs.component';
@@ -108,15 +107,6 @@ import {
     DropdownStateExampleComponent,
     DropdownToolbarExampleComponent
 } from './component-docs/dropdown/examples/dropdown-examples.component';
-import {
-    FormCheckboxExampleComponent,
-    FormExampleComponent,
-    FormInlineHelpExampleComponent,
-    FormRadioExampleComponent,
-    FormSelectExampleComponent,
-    FormStateExampleComponent
-} from './component-docs/form/examples/form-examples.component';
-import { FormGroupInputExampleComponent } from './component-docs/form/examples/form-group-input-example.component';
 import { IconExampleComponent } from './component-docs/icon/examples/icon-example.component';
 import {
     CircleIdentifierExampleComponent,
@@ -278,7 +268,6 @@ import { DatePickerHeaderComponent } from './component-docs/date-picker/date-pic
 import { DatetimePickerHeaderComponent } from './component-docs/datetime-picker/datetime-picker-header/datetime-picker-header.component';
 import { DropdownHeaderComponent } from './component-docs/dropdown/dropdown-header/dropdown-header.component';
 import { FileInputHeaderComponent } from './component-docs/file-input/file-input-header/file-input-header.component';
-import { FormHeaderComponent } from './component-docs/form/form-header/form-header.component';
 import { IconHeaderComponent } from './component-docs/icon/icon-header/icon-header.component';
 import { IdentifierHeaderComponent } from './component-docs/identifier/identifier-header/identifier-header.component';
 import { ImageHeaderComponent } from './component-docs/image/image-header/image-header.component';
@@ -376,6 +365,37 @@ import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
 import { InputGroupNumberFormExampleComponent } from './component-docs/input-group/examples/input-group-number-form-example.component';
 
+import { InputFormGroupExampleComponent } from './component-docs/input/examples/input-form-group-example.component';
+import {
+    InputExampleComponent,
+    InputInlineHelpExampleComponent,
+    InputStateExampleComponent
+} from './component-docs/input/examples/input-examples.component';
+import { InputHeaderComponent } from './component-docs/input/input-header/input-header.component';
+import { InputDocsComponent } from './component-docs/input/input-docs.component';
+import { SelectNativeDocsComponent } from './component-docs/select-native/select-native-docs.component';
+import {
+    SelectNativeExampleComponent,
+    SelectNativeInlineHelpExampleComponent,
+    SelectNativeStateExampleComponent
+} from './component-docs/select-native/examples/select-native-examples.component';
+import { SelectNativeFormGroupExampleComponent } from './component-docs/select-native/examples/select-native-form-group-example.component';
+import { SelectNativeHeaderComponent } from './component-docs/select-native/select-native-header/select-native-header.component';
+import { TextareaDocsComponent } from './component-docs/textarea/textarea-docs.component';
+import {
+    TextareaExampleComponent,
+    TextareaInlineHelpExampleComponent, TextareaStateExampleComponent
+} from './component-docs/textarea/examples/textarea-examples.component';
+import { TextareaFormGroupExampleComponent } from './component-docs/textarea/examples/textarea-form-group-example.component';
+import { TextareaHeaderComponent } from './component-docs/textarea/textarea-header/textarea-header.component';
+import { CheckboxHeaderComponent } from './component-docs/checkbox/checkbox-header/checkbox-header.component';
+import { CheckboxExamplesComponent } from './component-docs/checkbox/examples/checkbox-examples.component';
+import { CheckboxFormGroupExampleComponent } from './component-docs/checkbox/examples/checkbox-form-group-example.component';
+import { CheckboxDocsComponent } from './component-docs/checkbox/checkbox-docs.component';
+import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/radio-form-group-example.component';
+import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
+import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
+import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
 
 @NgModule({
     declarations: [
@@ -392,26 +412,30 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         BreadcrumbDocsComponent,
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
+        CheckboxDocsComponent,
         SplitButtonDocsComponent,
         DropdownDocsComponent,
         DatetimePickerDocsComponent,
         FileInputDocsComponent,
-        FormDocsComponent,
         IconDocsComponent,
         IdentifierDocsComponent,
         InlineHelpDocsComponent,
+        InputDocsComponent,
         InputGroupDocsComponent,
         ImageDocsComponent,
         ListDocsComponent,
         MenuDocsComponent,
         ModalDocsComponent,
+        SelectNativeDocsComponent,
         TabsDocsComponent,
         TableDocsComponent,
+        TextareaDocsComponent,
         TileDocsComponent,
         TreeDocsComponent,
         PaginationDocsComponent,
         PanelDocsComponent,
         PopoverDocsComponent,
+        RadioDocsComponent,
         CalendarDocsComponent,
         DatePickerDocsComponent,
         SearchInputDocsComponent,
@@ -463,6 +487,8 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         CalendarFormSingleExampleComponent,
         CalendarFormRangeExampleComponent,
         CalendarProgrammaticallyChangeExampleComponent,
+        CheckboxExamplesComponent,
+        CheckboxFormGroupExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
@@ -486,13 +512,6 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         FileInputCustomExampleComponent,
         FileInputDragDisabledExampleComponent,
         FileInputMaxExampleComponent,
-        FormCheckboxExampleComponent,
-        FormExampleComponent,
-        FormInlineHelpExampleComponent,
-        FormRadioExampleComponent,
-        FormSelectExampleComponent,
-        FormStateExampleComponent,
-        FormGroupInputExampleComponent,
         IconExampleComponent,
         CircleIdentifierExampleComponent,
         ColorsIdentifierExampleComponent,
@@ -512,6 +531,10 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         InputGroupTextExampleComponent,
         InputGroupTextCompactExampleComponent,
         InputGroupFormExampleComponent,
+        InputFormGroupExampleComponent,
+        InputInlineHelpExampleComponent,
+        InputStateExampleComponent,
+        InputExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
@@ -547,9 +570,15 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         PopoverProgrammaticComponent,
         PopoverFillComponent,
         PopoverCFillComponent,
+        RadioFormGroupExampleComponent,
+        RadioExamplesComponent,
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
+        SelectNativeExampleComponent,
+        SelectNativeFormGroupExampleComponent,
+        SelectNativeInlineHelpExampleComponent,
+        SelectNativeStateExampleComponent,
         SearchInputExampleComponent,
         SearchInputAsyncExampleComponent,
         SearchInputDynamicExampleComponent,
@@ -571,6 +600,10 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         TabNavigationExampleChildFirst,
         TabNavigationExampleChildSecond,
         TabNavigationExampleChildThird,
+        TextareaExampleComponent,
+        TextareaFormGroupExampleComponent,
+        TextareaInlineHelpExampleComponent,
+        TextareaStateExampleComponent,
         TileActionsExampleComponent,
         TileDisabledExampleComponent,
         TileExampleComponent,
@@ -631,18 +664,19 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         ButtonGroupHeaderComponent,
         SplitButtonHeaderComponent,
         CalendarHeaderComponent,
+        CheckboxHeaderComponent,
         ComboboxHeaderComponent,
         DatePickerHeaderComponent,
         DatetimePickerHeaderComponent,
         DropdownHeaderComponent,
         FileInputHeaderComponent,
-        FormHeaderComponent,
         IconHeaderComponent,
         IdentifierHeaderComponent,
         ImageHeaderComponent,
         InfiniteScrollHeaderComponent,
         InlineHelpHeaderComponent,
         InputGroupHeaderComponent,
+        InputHeaderComponent,
         ListHeaderComponent,
         LoadingSpinnerHeaderComponent,
         MenuHeaderComponent,
@@ -652,12 +686,15 @@ import { InputGroupNumberFormExampleComponent } from './component-docs/input-gro
         PanelDocsHeaderComponent,
         PopoverHeaderComponent,
         PopoverDirectiveHeaderComponent,
+        RadioHeaderComponent,
         ScrollSpyHeaderComponent,
         SearchInputHeaderComponent,
+        SelectNativeHeaderComponent,
         ShellbarDocsHeaderComponent,
         SideNavigationHeaderComponent,
         TableDocsHeaderComponent,
         TabsHeaderComponent,
+        TextareaHeaderComponent,
         TileDocsHeaderComponent,
         TimeHeaderComponent,
         TimePickerHeaderComponent,

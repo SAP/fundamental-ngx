@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'fd-form-group-input',
-    templateUrl: './form-group-input-example.component.html',
-    styleUrls: ['form-group-input-example.component.scss']
+    selector: 'fd-textarea-form-group',
+    templateUrl: './textarea-form-group-example.component.html',
+    styleUrls: ['textarea-form-group-example.component.scss']
 })
-export class FormGroupInputExampleComponent {
+export class TextareaFormGroupExampleComponent {
     customForm = new FormGroup({
         inputControl: new FormControl('', Validators.required)
     });
