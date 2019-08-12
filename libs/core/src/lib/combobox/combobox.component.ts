@@ -67,7 +67,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     disabled: boolean;
 
-    /** */
+    /** Whether the combobox is used inside shellbar */
     @Input()
     inShellbar: boolean;
 
