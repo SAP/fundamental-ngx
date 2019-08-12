@@ -8,21 +8,21 @@ mergeable:
           regex: ^\[WIP\]
           message: This is work in progress. Do not merge yet.
         must_include:
-          regex: ^(feat|docs|chore|fix|test)(\(\w+\))?:.+$
+          regex: ^(feat|docs|chore|fix|test)(\(\w+\))?(:|\().+$
           message: Semantic release conventions must be followed.
       - do: description
         must_exclude:
           regex: \[ \]
           message: There are incomplete TODO task(s) unchecked.
       - do: approvals
-        min:
-          count: 2
-        or: 
+        or:
           - required:
-              reviewers: [ 'InnaAtanasova' ] 
+              reviewers: [ 'InnaAtanasova' ]
           - required:
-              reviewers: [ 'droshev' ]  
+              reviewers: [ 'droshev' ]
           - required:
-              reviewers: [ 'MattL75' ]  
+              reviewers: [ 'MattL75' ]
           - required:
-              reviewers: [ 'JKMarkowski' ]  
+              reviewers: [ 'JKMarkowski' ]
+          - min:
+              count: 2
