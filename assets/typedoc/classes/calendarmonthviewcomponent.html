@@ -1,0 +1,295 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-calendar-month-view&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>Component representing the month view of the calendar.</p>
+		</div>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">CalendarMonthViewComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="focusescapefunction" class="tsd-anchor"></a>
+		<h3>focus<wbr>Escape<wbr>Function</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">focus<wbr>Escape<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L39">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:39</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>A function that handles escape focus</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L31">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:31</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The id of the calendar passed from the parent component</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="monthselected" class="tsd-anchor"></a>
+		<h3>month<wbr>Selected</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">month<wbr>Selected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L35">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:35</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>A number (1-12) representing the selected month</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="monthclicked" class="tsd-anchor"></a>
+		<h3>month<wbr>Clicked</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">month<wbr>Clicked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;number&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L43">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:43</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>An event fired when a new month is selected</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Calendar<wbr>Month<wbr>View<wbr>Component<span class="tsd-signature-symbol">(</span>eRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span>, cdRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, calendarI18n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarI18n</span>, calendarService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CalendarMonthViewComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L43">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:43</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>eRef: <span class="tsd-signature-type">ElementRef</span></h5>
+					</li>
+					<li>
+						<h5>cdRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+					<li>
+						<h5>calendarI18n: <span class="tsd-signature-type">CalendarI18n</span></h5>
+					</li>
+					<li>
+						<h5>calendarService: <span class="tsd-signature-type">CalendarService</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CalendarMonthViewComponent</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="monthnames" class="tsd-anchor"></a>
+		<h3>month<wbr>Names</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">month<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L21">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:21</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>A list of month names (short names)</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+		<a name="currentmonth" class="tsd-anchor"></a>
+		<h3>current<wbr>Month</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> currentMonth<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L84">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:84</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Get a number (1-12) representing the current month</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+		<a name="monthoffset" class="tsd-anchor"></a>
+		<h3>month<wbr>Offset</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> monthOffset<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L89">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:89</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Getter for the private class member _monthOffset</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="focuselement" class="tsd-anchor"></a>
+		<h3>focus<wbr>Element</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">focus<wbr>Element<span class="tsd-signature-symbol">(</span>elementSelector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L108">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:108</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Method that allows to focus elements inside this component</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>elementSelector: <span class="tsd-signature-type">string</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="onkeydownmonthhandler" class="tsd-anchor"></a>
+		<h3>on<wbr>Keydown<wbr>Month<wbr>Handler</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">on<wbr>Keydown<wbr>Month<wbr>Handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L103">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:103</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Method for handling the keyboard events (a11y)</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>event: <span class="tsd-signature-type">any</span></h5>
+					</li>
+					<li>
+						<h5>index: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="selectmonth" class="tsd-anchor"></a>
+		<h3>select<wbr>Month</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">select<wbr>Month<span class="tsd-signature-symbol">(</span>selectedMonth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts#L94">calendar/calendar-views/calendar-month-view/calendar-month-view.component.ts:94</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Method for handling the mouse click event when a month is selected</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>selectedMonth: <span class="tsd-signature-type">number</span></h5>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> event: <span class="tsd-signature-type">MouseEvent</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

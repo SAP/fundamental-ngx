@@ -29,7 +29,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from <span>DateFormatParser</span>.<span>rangeDelimiter</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3516658/library/src/lib/calendar/format/date-parser.ts#L19">calendar/format/date-parser.ts:19</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/date-picker/format/date-parser.ts#L20">date-picker/format/date-parser.ts:20</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -46,27 +46,27 @@
 		<h3>format</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+			<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<p>Overrides <span>DateFormatParser</span>.<span>format</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3516658/library/src/lib/calendar/format/date-parser.ts#L52">calendar/format/date-parser.ts:52</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/date-picker/format/date-parser.ts#L58">date-picker/format/date-parser.ts:58</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Takes in a date object and returns the string representation.</p>
+						<p>Takes in a FdDate model object and return a string representation.</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>date: <span class="tsd-signature-type">Date</span></h5>
+						<h5>date: <span class="tsd-signature-type">FdDate</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<p>Date object to convert to a string.</p>
+							<p>FdDate to format to string value.</p>
 						</div>
 					</li>
 				</ul>
@@ -79,19 +79,19 @@
 		<h3>parse</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<p>Overrides <span>DateFormatParser</span>.<span>parse</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3516658/library/src/lib/calendar/format/date-parser.ts#L44">calendar/format/date-parser.ts:44</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a3859cc/library/src/lib/date-picker/format/date-parser.ts#L45">date-picker/format/date-parser.ts:45</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Takes in a string representation of a date and returns a Date object.</p>
+						<p>Takes in a string value and return a FdDate model object.</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -99,11 +99,11 @@
 					<li>
 						<h5>value: <span class="tsd-signature-type">string</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<p>String to convert to a date.</p>
+							<p>String to concert to a FdDate model object.</p>
 						</div>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>
 			</li>
 		</ul>
 	</section>
