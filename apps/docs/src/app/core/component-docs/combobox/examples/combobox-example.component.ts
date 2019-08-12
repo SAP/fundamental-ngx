@@ -15,6 +15,7 @@ export class ComboboxExampleComponent {
         'Pineapple',
         'Banana',
         'Kiwi',
+        'Strawberry'
     ];
 
 }
