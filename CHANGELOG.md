@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0-rc.20"></a>
+# [0.9.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.19...v0.9.0-rc.20) (2019-08-12)
+
+
+### Bug Fixes
+
+* Refactor Time Component, Add AM/PM and placeholder i18n ([#1070](https://github.com/SAP/fundamental-ngx/issues/1070)) ([fa16889](https://github.com/SAP/fundamental-ngx/commit/fa16889))
+
+
+### Features
+
+* Add calendar components form validation ([#1098](https://github.com/SAP/fundamental-ngx/issues/1098)) ([f8aea36](https://github.com/SAP/fundamental-ngx/commit/f8aea36))
+
+
+
 <a name="0.9.0-rc.19"></a>
 # [0.9.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.9.0-rc.18...v0.9.0-rc.19) (2019-08-12)
 
