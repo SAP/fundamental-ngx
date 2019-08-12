@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Provides i18n support for labels inside the time component.
+ */
 @Injectable({providedIn: 'root'})
 export class TimeI18nLabels {
 
