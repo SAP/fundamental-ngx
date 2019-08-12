@@ -27,43 +27,13 @@ Prior knowledge of Angular is recommended.
 
 ## Getting Started
 
-For an existing Angular application,
+For an existing Angular CLI application,
 
-1. **Install Fundamental-ngx and Fundamental Styles.**
+1. **Install Fundamental-NGX.**
 
-    ```
-    npm install --save fundamental-styles fundamental-ngx
-    ```
-
-2. **Include Fundamental Styles CSS in the `styles` array of the `angular.json` file.**
-
-    ```
-    "node_modules/fundamental-styles/dist/fundamental-styles.min.css"
-    ```
-
-    _Note the path may be different if your CLI configuration is not in the root of your project directory._
-
-3. **Configure your animations.**
-
-    Install angular animations by running the following.
-    ```
-    npm install @angular/animations
-    ```
+    `ng add fundamental-ngx`
     
-    Once the above package is installed, import `BrowserAnimationsModule` to enable the animations.
-    
-    ```typescript
-    import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-    
-    @NgModule({
-      ...
-      imports: [BrowserAnimationsModule],
-      ...
-    })
-    export class DemoModule { }
-    ```
-    
-    Alternatively, you can disable the animations by importing `NoopAnimationsModule` instead.
+    *If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide).*
 
 3. **Import the modules you want to use.**
 

@@ -1,29 +1,33 @@
 {
-  "name": "fundamental-ngx",
-  "version": "0.9.0-rc.18",
-  "description": "SAP Fiori Fundamentals, implemented in Angular",
-  "license": "Apache-2.0",
-  "homepage": "https://sap.github.io/fundamental-ngx/home",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SAP/fundamental-ngx"
-  },
-  "scripts": {
-    "std-version": "standard-version --infile ../CHANGELOG.md -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\""
-  },
-  "peerDependencies": {
-    "@angular/common": "^7.2.15",
-    "@angular/core": "^7.2.15",
-    "@angular/forms": "^7.2.15",
-    "@angular/animations": "^7.2.15",
-    "fundamental-styles": "^0.1.0",
-    "rxjs": "^6.5.2"
-  },
-  "devDependencies": {
-    "standard-version": "4.4.0"
-  },
-  "dependencies": {
-    "focus-trap": "^5.0.2",
-    "popper.js": "^1.15.0"
-  }
+    "name": "fundamental-ngx",
+    "version": "0.9.0-rc.18",
+    "schematics": "./schematics/collection.json",
+    "description": "SAP Fundamentals, implemented in Angular",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx/home",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SAP/fundamental-ngx"
+    },
+    "scripts": {
+        "std-version": "standard-version --infile ../CHANGELOG.md -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\""
+    },
+    "peerDependencies": {
+        "@angular/common": "^7.2.15",
+        "@angular/core": "^7.2.15",
+        "@angular/forms": "^7.2.15",
+        "@angular/animations": "^7.2.15",
+        "rxjs": "^6.5.2"
+    },
+    "devDependencies": {
+        "standard-version": "4.4.0",
+        "@angular-devkit/core": "^7.3.9",
+        "@schematics/angular": "^7.3.9",
+        "chalk": "^2.4.2"
+    },
+    "dependencies": {
+        "focus-trap": "^5.0.2",
+        "popper.js": "^1.15.0",
+        "fundamental-styles": "^0.1.0"
+    }
 }
