@@ -12,15 +12,30 @@ import { FormControl, FormGroup } from '@angular/forms';
 
         Touched: {{customForm.controls.date.touched}}<br/>
         Dirty: {{customForm.controls.date.dirty}}<br/>
+        Valid: {{customForm.controls.date.valid}}<br/>
 
         Selected Date: {{ customForm.controls.date.value.toDateString() ? 
             customForm.controls.date.value.toDateString() : 
             'null' 
         }}
-    `
+        <br/>
+        <button fd-button (click)="setInvalid()">Set Invalid Date</button>
+    `,
+    styles: [
+        `
+            button {
+                margin-top: 1rem;
+            }
+        `
+    ]
 })
 export class CalendarFormSingleExampleComponent {
     customForm = new FormGroup({
         date: new FormControl(FdDate.getToday())
     });
+
+    setInvalid() {
+        this.customForm.controls['date'].setValue(new FdDate(null, null, null));
+    }
+
 }

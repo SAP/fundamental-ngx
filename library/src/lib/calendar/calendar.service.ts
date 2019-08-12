@@ -22,7 +22,7 @@ export class CalendarService {
      * Method that provides, amount of day depending on month and year passed
      * @param month which is number 1-12
      * @param year which is number
-     * */
+     */
     static getDaysInMonth(month: number, year: number): number {
 
         const isLeapYear = (_year: number): boolean => {
@@ -46,7 +46,7 @@ export class CalendarService {
 
     /**
      * Method that check equality of 2 dates.
-     * */
+     */
     static datesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
             return false;
@@ -61,7 +61,7 @@ export class CalendarService {
      * Triggers also event, when the element is selected by enter key, or space bar.
      * @param event KeyboardEvent
      * @param index which is number (0 - 11)
-     * */
+     */
     public onKeydownHandler(event: KeyboardEvent, index: number): void {
         switch (event.code) {
             case 'Enter':

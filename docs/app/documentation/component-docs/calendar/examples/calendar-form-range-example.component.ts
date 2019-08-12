@@ -13,12 +13,25 @@ import { FormControl, FormGroup } from '@angular/forms';
         Touched: {{customForm.controls.date.touched}}<br/>
         Dirty: {{customForm.controls.date.dirty}}<br/>
 
-        Selected Date: {{ customForm.controls.date.value.start ? customForm.controls.date.value.start.toDateString() : 'null' }}
-        Selected Date: {{ customForm.controls.date.value.end ? customForm.controls.date.value.end.toDateString() : 'null' }}
-    `
+        Selected Start Date: {{ customForm.controls.date.value.start ? customForm.controls.date.value.start.toDateString() : 'null' }} <br/>
+        Selected End Date: {{ customForm.controls.date.value.end ? customForm.controls.date.value.end.toDateString() : 'null' }} <br/>
+        Valid: {{ customForm.controls.date.valid }} <br/>
+        <button fd-button (click)="setInvalid()">Set Invalid Date</button>
+    `,
+    styles: [
+        `
+            button {
+                margin-top: 1rem;
+            }
+        `
+    ]
 })
 export class CalendarFormRangeExampleComponent {
     customForm = new FormGroup({
         date: new FormControl({ start: FdDate.getToday(), end: FdDate.getToday() }),
     });
+
+    setInvalid() {
+        this.customForm.controls['date'].setValue({start: null, end: null});
+    }
 }

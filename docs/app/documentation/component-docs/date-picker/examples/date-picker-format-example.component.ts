@@ -15,7 +15,7 @@ export class DateFormatDashes extends DateFormatParser {
         if (values[2] === 0) {
             values[1] = 14;
         }
-        return FdDate.getModelFromDate(new Date(Number(values[2]), values[1] - 1, values[0]));
+        return new FdDate(values[2], values[1], values[0]);
     }
 
     public format(date: FdDate): string {

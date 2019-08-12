@@ -34,7 +34,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
      * ```json
      * { hour: 12, minute: 0, second: 0 }
      * ```
-     * */
+     */
     @Input()
     time: TimeObject = { hour: 0, minute: 0, second: 0 };
 

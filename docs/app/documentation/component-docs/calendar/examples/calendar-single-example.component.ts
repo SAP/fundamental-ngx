@@ -9,11 +9,17 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
                      [blockFunction]="myBlockFunction"
                      [disableFunction]="myDisableFunction">
         </fd-calendar>
-
-        <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
-        <br/><br/>
+        <br/>
         <div>Selected Date: {{date.toDateString()}}</div>
-    `
+        <button fd-button (click)="disableWednesday()">Disable Wednesday</button>
+    `,
+    styles: [
+        `
+            button {
+                margin-top: 1rem;
+            }
+        `
+    ]
 })
 export class CalendarSingleExampleComponent {
 

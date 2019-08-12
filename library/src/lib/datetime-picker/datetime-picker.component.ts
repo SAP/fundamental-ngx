@@ -12,7 +12,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
@@ -39,11 +39,16 @@ import { FdDatetime } from './models/fd-datetime';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => DatetimePickerComponent),
+            multi: true
         }
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
     /** @hidden Reference to the inner time component. */
     @ViewChild(TimeComponent)
@@ -79,8 +84,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     compact: boolean = false;
 
-    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
-     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
+    /**
+     *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
+     */
     @Input()
     placement: Placement = 'bottom-start';
 
@@ -102,7 +109,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Whether to perform visual validation on the picker input. */
     @Input()
-    validate: boolean = true;
+    useValidation: boolean = true;
 
     /** Current selected date. Two-way binding is supported. */
     @Input()
@@ -214,6 +221,20 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         return false;
     };
 
+    /**
+     * @hidden
+     * Function that implements Validator Interface, adds validation support for forms
+     */
+    validate(control: AbstractControl): {
+        [key: string]: any
+    } {
+        return this.isModelValid() ? null : {
+            dateValidation: {
+                valid: false
+            }
+        };
+    }
+
     /** Toggles the popover. */
     togglePopover(): void {
         this.onTouched();
@@ -226,7 +247,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /**
      * Method that handle calendar active view change and throws event.
-     * */
+     */
     public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
         this.activeViewChange.emit(activeView);
     }
@@ -239,9 +260,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
     }
 
-    /** Closes the popover */
+    /** Closes the popover and refresh model */
     closePopover(): void {
         if (this.isOpen) {
+            this.handleInputChange(this.inputFieldDate);
             this.onClose.emit();
             this.isOpen = false;
         }
@@ -284,7 +306,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     constructor(private elRef: ElementRef,
                 private changeDetRef: ChangeDetectorRef,
-                public dateTimeAdapter: DateTimeFormatParser,
+                public dateTimeAdapter: DateTimeFormatParser
     ) {
     }
 
@@ -311,10 +333,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         if (!selected || !(selected instanceof FdDatetime)) {
             return;
         }
-        if (selected.isDateValid() && selected.isTimeValid()) {
-            this.selectedDate = selected.date;
-            this.time = selected.time;
-            this.date = new FdDatetime(this.selectedDate, this.time);
+        this.selectedDate = selected.date;
+        this.time = selected.time;
+        this.date = new FdDatetime(this.selectedDate, this.time);
+        if (this.isModelValid()) {
             this.calendarComponent.setCurrentlyDisplayed(this.date.date);
             this.setInput(this.date);
         }
@@ -322,12 +344,16 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /**
      * @hidden
-     * Method that is triggered by events from calendar component, when there is selected date changed
-     * */
+     * Method that is triggered by events from calendar component, when there is selected date changed.
+     * If invalid time model is detected, it takes time model data from TimeComponent.
+     */
     handleDateChange(date: FdDate): void {
         this.selectedDate = date;
+        if (!this.date.isTimeValid()) {
+            this.time = this.timeComponent.time;
+        }
         this.date = new FdDatetime(this.selectedDate, this.time);
-        this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
+        this.isInvalidDateInput = !this.isModelValid();
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -335,11 +361,11 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /**
      * @hidden
      * Method that is triggered by events from time component, when there is selected time changed
-     * */
+     */
     handleTimeChange(time: TimeObject): void {
         this.time = time;
         this.date = new FdDatetime(this.selectedDate, this.time);
-        this.isInvalidDateInput = !this.date.isTimeValid() || !this.date.isDateValid();
+        this.isInvalidDateInput = !this.isModelValid();
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -354,29 +380,35 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /**
      * @hidden
      * Method, which is responsible for transforming string to datetime, depending on type or
-     * validation the results are different. It also changes to state of isInvalidDateInput
-     * */
+     * validation the results are different. It also changes to state of isInvalidDateInput.
+     */
     handleInputChange(date: string): void {
-        if (date) {
-            const fdTimeDate = this.dateTimeAdapter.parse(date);
-            this.isInvalidDateInput = !(fdTimeDate.isDateValid() && fdTimeDate.isTimeValid());
-            if (!this.isInvalidDateInput) {
-                this.selectedDate = fdTimeDate.date;
-                this.time = fdTimeDate.time;
-                this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
-                this.date = new FdDatetime(this.selectedDate, this.time);
-                this.onChange(fdTimeDate);
-            }
-        } else if (this.allowNull) {
+        const fdTimeDate = this.dateTimeAdapter.parse(date);
+        this.selectedDate = fdTimeDate.date;
+        this.time = fdTimeDate.time;
+        this.date = new FdDatetime(this.selectedDate, this.time);
+        this.isInvalidDateInput = !this.isModelValid();
+        this.onChange(fdTimeDate);
+        if (!this.isInvalidDateInput) {
+            this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
+        }
+        if (!date && this.allowNull) {
             this.isInvalidDateInput = false;
             this.date = FdDatetime.getToday();
             this.selectedDate = this.date.date;
             this.time = this.date.time;
             this.calendarComponent.setCurrentlyDisplayed(this.date.date);
             this.onChange(null);
-        } else {
+        } else if (!this.allowNull) {
             this.isInvalidDateInput = true;
         }
+    }
+
+    /** Method that provides information if model selected date/dates have properly types and are valid */
+    public isModelValid(): boolean {
+        return this.date &&
+            this.date instanceof FdDatetime &&
+            this.date.isDateValid() && this.date.isTimeValid();
     }
 
     private setInput(fdDateTime: FdDatetime): void {

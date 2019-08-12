@@ -159,7 +159,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         if (event) {
             /**
              * There are some problems with popup integration. After clicking inside day component, the popover closes.
-             * */
+             */
             event.stopPropagation();
             event.preventDefault();
             this.newFocusedDayId = day.id;
@@ -205,7 +205,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      *  0, when none,
      *  1, when only startDate, or endDate same as startDate,
      *  2, when both
-     * */
+     */
     get selectCounter(): number {
         if (!this.selectedRangeDate || !this.selectedRangeDate.start) {
             return 0;
@@ -226,7 +226,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param event KeyboardEvent
      * @param cell CalendarDay
      * @param grid with specified column and row as a x and y
-     * */
+     */
     onKeydownDayHandler(event, cell: CalendarDay, grid: { x: number, y: number }): void {
         if (event.code === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
@@ -311,7 +311,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
 
     /** @hidden
      *  Method that allow to focus elements inside this component
-     * */
+     */
     public focusElement(elementSelector): void {
         const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
         if (elementToFocus) {
@@ -340,7 +340,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * Method that selects previous month
      * Triggered only when the month is changed during changing focus
      * Also triggers event to parent calendar component and rebuilds day view grid
-     * */
+     */
     private selectPreviousMonth(): void {
         if (this.currentlyDisplayed.month > 1) {
             this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month - 1 };
@@ -355,7 +355,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * Method that selects next month
      * Triggered only when the month is changed during changing focus
      * Also triggers event to parent calendar component and rebuilds day view grid
-     * */
+     */
     private selectNextMonth(): void {
         if (this.currentlyDisplayed.month > 1) {
             this.currentlyDisplayed = { ...this.currentlyDisplayed, month: this.currentlyDisplayed.month + 1 };
@@ -407,7 +407,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
 
     /**
      * Method which provides array of CalendarDay, which contains every single day of currently shown month/year.
-     * */
+     */
     private getCurrentMonthDays(): CalendarDay[] {
         const month = this.currentlyDisplayed.month;
         const year = this.currentlyDisplayed.year;
@@ -444,7 +444,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /**
      * Method which provides array of CalendarDay, which contains last 0-6 days of previous month/year. Theses days
      * fills the gap between starting startingDayOfWeek and first day of current month
-     * */
+     */
     private getPreviousMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         const month = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.month - 1 : 12;
         const year = this.currentlyDisplayed.month > 1 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year - 1;
@@ -455,7 +455,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
 
         /** Checking if there are some days cut by startingDayOfWeek option
          *  If yes, there is whole week added, to avoid hiding
-         * */
+         */
         if (prevMonthLastWeekDay < 0) {
             prevMonthLastWeekDay = prevMonthLastWeekDay + 7;
         }
@@ -474,7 +474,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /**
      * Method which provides array of CalendarDay, which contains first days of next month/year. Theses days
      * fills the gap between last day of current day and end of 6-weeks calendar grid.
-     * */
+     */
     private getNextMonthDays(calendarDays: CalendarDay[]): CalendarDay[] {
         const month = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.month + 1 : 1;
         const year = this.currentlyDisplayed.month < 12 ? this.currentlyDisplayed.year : this.currentlyDisplayed.year + 1;
@@ -492,7 +492,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /**
      * Method that generates whole day model basing on fdDate, disabling functions, block functions, and actually
      * chosen range / single date.
-     * */
+     */
     private getDay(fdDate: FdDate): CalendarDay {
         const day: CalendarDay = {
             date: fdDate,
@@ -536,7 +536,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /**
      * Method that returns first letter of every weekday, basing on CalendarI18nDefault. Can be changed by user by
      * providing other class which implements CalendarI18n
-     * */
+     */
     private getShortWeekDays(): string[] {
         return this.calendarI18n.getAllShortWeekdays()
             .slice(this.startingDayOfWeek - 1)

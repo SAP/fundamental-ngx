@@ -25,6 +25,8 @@ describe('DatetimePickerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(DatetimePickerComponent);
         component = fixture.componentInstance;
+        component.date = new FdDatetime(FdDate.getToday().nextDay(), FdDatetime.getToday().time);
+        component.selectedDate = FdDate.getToday().nextDay();
         fixture.detectChanges();
     });
 
@@ -95,7 +97,7 @@ describe('DatetimePickerComponent', () => {
         const timeModel = { hour: 30, minute: 30, second: 45 };
         const dateTime = new FdDatetime(component.date.date, timeModel);
         component.handleInputChange(component.dateTimeAdapter.format(dateTime));
-        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.isInvalidDateInput).toEqual(true);
     });
 
@@ -104,7 +106,7 @@ describe('DatetimePickerComponent', () => {
         const date = new FdDate(2018, 45, 10);
         const dateTime = new FdDatetime(date, component.date.time);
         component.handleInputChange(component.dateTimeAdapter.format(dateTime));
-        expect(component.onChange).not.toHaveBeenCalled();
+        expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.isInvalidDateInput).toEqual(true);
     });
 
@@ -130,20 +132,19 @@ describe('DatetimePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
     });
 
-    it('should ignore invalid date picked on time change and show valid on input', () => {
+    it('should handle invalid date picked on time change and show it on input', () => {
         const dateTime = FdDatetime.getToday();
         component.writeValue(dateTime);
-        const time = {hour: 10, minute: 30, second: 20};
         const invalidDate = new FdDatetime(new FdDate(2010, 40, 30), dateTime.time);
         component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
         component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
-        component.handleTimeChange(time);
-        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter.format(new FdDatetime(dateTime.date, time)));
-        expect(component.isInvalidDateInput).not.toBeTruthy();
+        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter.format(invalidDate));
+        expect(component.isInvalidDateInput).toBeTruthy();
     });
 
-    it('should reset time on date change and show valid on input', () => {
+    it('should take time from TimeComponent on date change and show valid on input', () => {
         const dateTime = FdDatetime.getToday();
+        component.timeComponent.time = { hour: 12, minute: 11, second: 10 };
         component.writeValue(dateTime);
         const invalidTime = {hour: 50, minute: 30, second: 20};
         const invalidDate = new FdDatetime(dateTime.date, invalidTime);
@@ -151,7 +152,7 @@ describe('DatetimePickerComponent', () => {
         component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
         component.handleDateChange(dateTime.date);
         expect(component.inputFieldDate).toEqual(
-            component.dateTimeAdapter.format(dateTime)
+            component.dateTimeAdapter.format(new FdDatetime(dateTime.date, component.timeComponent.time))
         );
         expect(component.isInvalidDateInput).not.toBeTruthy();
     });

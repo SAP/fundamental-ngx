@@ -82,7 +82,7 @@ describe('DatePickerComponent', () => {
     it('Should handle correct write value for single mode', () => {
         const date = FdDate.getToday();
         const dateStr = component.dateAdapter.format(date);
-        component.writeValue( date);
+        component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
         expect(component.inputFieldDate).toBe(dateStr)
     });
@@ -119,20 +119,26 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         component.type = 'single';
         component.dateStringUpdate('33333333');
+        const date: FdDate = component.dateAdapter.parse('33333333');
         expect(component.isInvalidDateInput).toBe(true);
-        expect(component.selectedDateChange.emit).not.toHaveBeenCalled();
+        expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
+        expect(component.isModelValid()).toBe(false);
     });
 
     it('Should register invalid string date and not call event for range mode', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         component.type = 'range';
         component.dateStringUpdate('33333333 - 3000000');
+        const start: FdDate = component.dateAdapter.parse('33333333');
+        const end: FdDate = component.dateAdapter.parse('3000000');
         expect(component.isInvalidDateInput).toBe(true);
-        expect(component.selectedRangeDateChange.emit).not.toHaveBeenCalled();
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({start: start, end: end});
+        expect(component.isModelValid()).toBe(false);
     });
 
     it('Should handle valid string date', () => {
         spyOn(component.selectedDateChange, 'emit');
+        component.selectedDate = new FdDate(2018, 10, 10);
         const date = new FdDate(2000, 10, 10);
         const strDate = component.dateAdapter.format(date);
         component.type = 'single';

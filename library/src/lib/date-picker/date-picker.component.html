@@ -1,4 +1,5 @@
 <fd-popover [(isOpen)]="isOpen"
+            (isOpenChange)="handleInputChange(datePicker.value)"
             [triggers]="[]"
             [placement]="placement"
             [closeOnEscapeKey]="true"
@@ -12,10 +13,9 @@
                    [value]="inputFieldDate"
                    [placeholder]="placeholder"
                    (keyup.enter)="handleInputChange(datePicker.value)"
-                   (blur)="handleInputChange(datePicker.value)"
                    (click)="openCalendar()"
                    [disabled]="disabled"
-                   [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && validate }">
+                   [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }">
             <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                     <button [disabled]="disabled" class="fd-popover__control fd-button--icon fd-button--light sap-icon--calendar"
                             (click)="toggleCalendar()" [attr.aria-label]="displayCalendarToggleLabel"

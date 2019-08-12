@@ -8,10 +8,17 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
         <fd-calendar [calType]="'single'"
                      [(ngModel)]="date">
         </fd-calendar>
-
+        <br/>
+        <div>Selected Date: {{date.toDateString()}}</div>
         <button fd-button (click)="changeDay()">Next Day</button>
-        <br/><br/>
-        <div>Selected Date: {{date.toDateString()}}</div>`
+    `,
+    styles: [
+        `
+            button {
+                margin-top: 1rem;
+            }
+        `
+    ]
 })
 export class CalendarProgrammaticallyChangeExampleComponent {
 

@@ -36,7 +36,7 @@ export class FdDatetime {
      * Get Luxon date object converted to string from FdDate.
      */
     public toLocaleDateString(): string {
-        if (this.toDate()) {
+        if (this.toDate() && this.isTimeValid() && this.isDateValid()) {
             return this.toDate().toLocaleString();
         } else {
             return null;

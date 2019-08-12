@@ -30,7 +30,7 @@ export class FdDate {
 
     /**
      *  Static function allowing convert js date object to FdDate model
-     * */
+     */
     static getModelFromDate(date: Date): FdDate {
         if (date) {
             return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
@@ -53,7 +53,7 @@ export class FdDate {
      * Get Luxon date object converted to string from FdDate.
      */
     public toDateString(): string {
-        if (this.year && this.month && this.day) {
+        if (this.year && this.month && this.day && this.isDateValid()) {
             return this.toDate().toDateString();
         } else {
             return '';
@@ -63,7 +63,7 @@ export class FdDate {
     /**
      * Get amount of milliseconds from 01.01.1970
      * -1 is thrown when some some of properties (day,month,year) are not defined
-     * */
+     */
     public getTimeStamp(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getTime();
@@ -77,7 +77,7 @@ export class FdDate {
      * -1 is thrown when some some of properties (day,month,year) are not defined
      * Native javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it's needed to increment value
      *
-     * */
+     */
     public getDay(): number {
         if (this.year && this.month && this.day) {
             return this.toDate().getDay() + 1;
@@ -123,7 +123,7 @@ export class FdDate {
             return false;
         }
 
-        if (this.year < 1000 || this.year > 3000 || this.month < 1 || this.month > 12) {
+        if (this.year <= 0 || this.month < 1 || this.month > 12) {
             return false;
         }
 
