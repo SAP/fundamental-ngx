@@ -60,9 +60,12 @@ import { SearchInputDocsComponent } from './component-docs/search-input/search-i
 // examples
 import {
     ActionBarBackExampleComponent,
+    ActionBarLongStringTitleTruncationExampleComponent,
     ActionBarContextualMenuExampleComponent,
     ActionBarNoBackExampleComponent,
-    ActionBarMobileExampleComponent
+    ActionBarMobileExampleComponent,
+
+
 } from './component-docs/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './component-docs/alert/examples/alert-example.component';
 import { AlertInlineExampleComponent } from './component-docs/alert/examples/alert-inline-example.component';
@@ -451,6 +454,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ComponentExampleComponent,
         ExampleBackgroundComponent,
         ActionBarBackExampleComponent,
+        ActionBarLongStringTitleTruncationExampleComponent,
         ActionBarContextualMenuExampleComponent,
         ActionBarMobileExampleComponent,
         ActionBarNoBackExampleComponent,
