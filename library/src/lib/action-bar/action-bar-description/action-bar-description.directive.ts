@@ -13,6 +13,9 @@ import { Directive } from '@angular/core';
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-action-bar-description]'
+    selector: '[fd-action-bar-description]',
+    host: {
+        class: 'fd-action-bar__description'
+    }
 })
-export class ActionBarDescriptionDirective {}
+export class ActionBarDescriptionDirective { }
