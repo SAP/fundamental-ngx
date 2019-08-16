@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.1-rc.6"></a>
+## [0.9.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.5...v0.9.1-rc.6) (2019-08-16)
+
+
+### Bug Fixes
+
+* adds missing class for Action Bar description, updates the tests, updates the documentation ([#1136](https://github.com/SAP/fundamental-ngx/issues/1136)) ([0c37e4d](https://github.com/SAP/fundamental-ngx/commit/0c37e4d))
+
+
+
 <a name="0.9.1-rc.5"></a>
 ## [0.9.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.4...v0.9.1-rc.5) (2019-08-16)
 
