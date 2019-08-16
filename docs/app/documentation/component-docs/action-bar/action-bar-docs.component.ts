@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import * as backButtonExample from '!raw-loader!./examples/action-bar-back-example.component.html';
+import * as titleTruncationExample from '!raw-loader!./examples/action-bar-long-string-title-truncation-example.component.html';
 import * as contextualMenuExample from '!raw-loader!./examples/action-bar-contextual-menu-example.component.html';
 import * as mobileExample from '!raw-loader!./examples/action-bar-mobile-example.component.html';
 import * as noBackButtonExample from '!raw-loader!./examples/action-bar-no-back-example.component.html';
@@ -17,6 +18,11 @@ export class ActionBarDocsComponent {
         language: 'html',
         code: backButtonExample
     }];
+
+    titleTruncationExample: ExampleFile[] = [{
+        language: 'html',
+        code: titleTruncationExample
+    }]
 
     noBackButtonExample: ExampleFile[] = [{
         language: 'html',
