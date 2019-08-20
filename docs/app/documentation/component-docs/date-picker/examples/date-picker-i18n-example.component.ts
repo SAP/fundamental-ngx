@@ -3,6 +3,7 @@ import { Component, Injectable } from '@angular/core';
 import { CalendarI18nLabels } from '../../../../../../library/src/lib/calendar/i18n/calendar-i18n-labels';
 import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-date';
 
+// The weekdays translations have to start with Sunday
 const localized_values = {
     'fr': {
         weekdays: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
@@ -39,13 +40,8 @@ export class LanguageService {
 @Injectable()
 export class CustomCalendarI18n extends CalendarI18n {
 
-    // You could also define a custom service and inject it here
-    //language: string = 'fr';
-    languageService: LanguageService;
-
-    constructor(languageService: LanguageService) {
+    constructor(private languageService: LanguageService) {
         super();
-        this.languageService = languageService;
     }
 
     getDayAriaLabel(date: Date): string {
@@ -87,9 +83,9 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     template: `
         <label fd-form-label for="language">Select language:</label>
         <fd-button-group id="language" style="margin-bottom:20px">
-            <button fd-button-grouped [size]="'xs'" (click)="setFrench()" [state]="selected === 1 ? 'selected' : ''">French</button>
-            <button fd-button-grouped [size]="'xs'" (click)="setGerman()" [state]="selected === 2 ? 'selected' : ''">German</button>
-            <button fd-button-grouped [size]="'xs'" (click)="setBulgarian()" [state]="selected === 3 ? 'selected' : ''">Bulgarian</button>
+            <button fd-button-grouped [size]="'xs'" (click)="setFrench()" [state]="isSelected('fr')">French</button>
+            <button fd-button-grouped [size]="'xs'" (click)="setGerman()" [state]="isSelected('de')">German</button>
+            <button fd-button-grouped [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">Bulgarian</button>
         </fd-button-group>
         <br>
         <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="2"></fd-date-picker>
@@ -108,14 +104,27 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class DatePickerI18nExampleComponent {
-    languageService: LanguageService;
+
     selected: number = 3;
 
-    constructor(languageService: LanguageService) {
-        this.languageService = languageService;
+    constructor(private languageService: LanguageService) {
     }
 
     date = FdDate.getToday();
+
+    isSelected(language: string) {
+        switch (language) {
+            case 'fr': {
+                return this.selected === 1 ? 'selected' : '';
+            }
+            case 'de': {
+                return this.selected === 2 ? 'selected' : '';
+            }
+            case 'bg': {
+                return this.selected === 3 ? 'selected' : '';
+            }
+        }
+    }
 
     setGerman() {
         this.selected = 2;
