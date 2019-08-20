@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroupComponent } from './form-group.component';
 import { By } from '@angular/platform-browser';
 
-fdescribe('FormGroupComponent', () => {
+describe('FormGroupComponent', () => {
     let component: FormGroupComponent;
     let fixture: ComponentFixture<FormGroupComponent>;
 
