@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.1-rc.8"></a>
+## [0.9.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.7...v0.9.1-rc.8) (2019-08-21)
+
+
+### Bug Fixes
+
+* datepicker update all fields after changing the locale ([#1142](https://github.com/SAP/fundamental-ngx/issues/1142)) ([b4a9f27](https://github.com/SAP/fundamental-ngx/commit/b4a9f27))
+
+
+
 <a name="0.9.1-rc.7"></a>
 ## [0.9.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.6...v0.9.1-rc.7) (2019-08-21)
 
