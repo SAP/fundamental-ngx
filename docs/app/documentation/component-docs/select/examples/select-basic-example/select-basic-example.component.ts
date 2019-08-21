@@ -11,6 +11,8 @@ export class SelectBasicExampleComponent implements OnInit {
 
     selectTwoValue: string;
 
+    selectThreeValue: string;
+
     constructor() {
     }
 

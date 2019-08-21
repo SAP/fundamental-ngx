@@ -9,6 +9,16 @@
 
 <fd-select class="fd-select-example"
            [(value)]="selectTwoValue"
+           [compact]="true"
+           placeholder="Compact select">
+    <fd-option value="apple">Apple</fd-option>
+    <fd-option value="pineapple">Pineapple</fd-option>
+    <fd-option value="tomato">Tomato</fd-option>
+    <fd-option value="strawberry">Strawberry</fd-option>
+</fd-select>
+
+<fd-select class="fd-select-example"
+           [(value)]="selectThreeValue"
            [disabled]="true"
            placeholder="Disabled select">
     <fd-option value="apple">Apple</fd-option>
