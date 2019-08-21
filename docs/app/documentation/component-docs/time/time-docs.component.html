@@ -37,11 +37,22 @@
 
 <separator></separator>
 
+<h2>Clock Without Minutes and Seconds</h2>
+<description>Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or <code>[displayHours]="false"</code>
+    to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
+</description>
+<component-example [name]="'ex5'">
+    <fd-time-only-hours-example></fd-time-only-hours-example>
+</component-example>
+<code-example [exampleFiles]="timeOnlyHours"></code-example>
+
+<separator></separator>
+
 <h2>Disabled State</h2>
 <description>
     You can disable the entire component by setting <code>[disabled]="true"</code>.
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-time-disabled-example></fd-time-disabled-example>
 </component-example>
 <code-example [exampleFiles]="timeDisabled"></code-example>
@@ -57,7 +68,7 @@
     Also it is possible to modify placeholders of the inputs, such as hours, minutes, seconds, and meridian. Besides
     service allows to define if meridian modifier should be validated case sensitive.
 </description>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex7'">
     <fd-time-i18n-example></fd-time-i18n-example>
 </component-example>
 <code-example [exampleFiles]="timeI18n"></code-example>
@@ -69,7 +80,7 @@
     The time component may also be used within a form. The values within the form may then be accessed through the
     usual methods used for accessing data within Angular reactive forms.
 </description>
-<component-example [name]="'ex7'">
+<component-example [name]="'ex8'">
     <fd-time-form-example></fd-time-form-example>
 </component-example>
 <code-example [exampleFiles]="timeForm"></code-example>

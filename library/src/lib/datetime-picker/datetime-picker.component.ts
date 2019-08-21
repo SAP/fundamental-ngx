@@ -107,6 +107,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     displaySeconds: boolean = true;
 
+    /** Whether the time component shows minutes. */
+    @Input()
+    displayMinutes: boolean = true;
+
+    /** Whether the time component shows hours. */
+    @Input()
+    displayHours: boolean = true;
+
     /** Whether to perform visual validation on the picker input. */
     @Input()
     useValidation: boolean = true;
