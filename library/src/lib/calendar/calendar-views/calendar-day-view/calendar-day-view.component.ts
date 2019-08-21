@@ -16,8 +16,6 @@ import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 /** Component representing the day view of the calendar. */
 @Component({

@@ -89,7 +89,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     @Input()
     public activeView: FdCalendarView = 'day';
 
-    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
+    /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
     public startingDayOfWeek: DaysOfWeek = 1;
 

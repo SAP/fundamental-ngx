@@ -88,7 +88,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
             <button fd-button-grouped [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">Bulgarian</button>
         </fd-button-group>
         <br>
-        <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="2"></fd-date-picker>
+        <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1"></fd-date-picker>
         `,
 
     // Note that this can be provided in the root of your application.
