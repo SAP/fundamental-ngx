@@ -5,7 +5,7 @@ import { FdDate } from '../../models/fd-date';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
 
-describe('Calendar2DayViewComponent', () => {
+describe('CalendarDayViewComponent', () => {
     let component: CalendarDayViewComponent;
     let fixture: ComponentFixture<CalendarDayViewComponent>;
 
