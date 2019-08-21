@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.1-rc.7"></a>
+## [0.9.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.6...v0.9.1-rc.7) (2019-08-21)
+
+
+### Bug Fixes
+
+* Add displayMinutes option to time component ([#1097](https://github.com/SAP/fundamental-ngx/issues/1097)) ([d5c5c4a](https://github.com/SAP/fundamental-ngx/commit/d5c5c4a))
+
+
+
 <a name="0.9.1-rc.6"></a>
 ## [0.9.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.5...v0.9.1-rc.6) (2019-08-16)
 
