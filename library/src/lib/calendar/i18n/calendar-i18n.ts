@@ -16,12 +16,8 @@ export function CALENDAR_I18N_FACTORY(locale) {
 })
 export abstract class CalendarI18n {
 
-    /** Stream to call if the values are changed dynamically. Calendar subscribes to this internally. */
-    readonly i18nChange: Subject<void> = new Subject<void>();
-
     /**
      * Aria label for a specific date.
-     *
      * @param date Native date object to use for the label.
      */
     abstract getDayAriaLabel(date: Date): string;

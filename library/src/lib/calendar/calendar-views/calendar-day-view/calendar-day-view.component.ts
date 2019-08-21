@@ -37,9 +37,6 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** Actual day grid with previous/current/next month days */
     public dayViewGrid: CalendarDay[][];
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
-
     /** @hidden */
     @HostBinding('class.fd-calendar__dates')
     public fdCalendarDateViewClass: boolean = true;
