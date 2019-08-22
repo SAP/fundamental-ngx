@@ -12,7 +12,7 @@
         <fd-popover-body>
             <fd-menu>
                 <ul fd-menu-list>
-                    <li fd-menu-item *ngFor="let item of items" (click)="item.callback($event)">
+                    <li fd-menu-item *ngFor="let item of items" (click)="itemClicked(item, $event)">
                         {{item.name}}
                     </li>
                 </ul>
