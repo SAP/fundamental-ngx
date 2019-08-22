@@ -3,7 +3,7 @@
         <h3 fd-action-bar-title>Page Title</h3>
     </div>
     <div fd-action-bar-actions>
-        <fd-popover placement="bottom">
+        <fd-popover placement="bottom-end">
             <fd-popover-control>
                 <button fd-button aria-label="More" aria-haspopup="true" [fdType]="'light'"
                     [glyph]="'overflow'"></button>
@@ -11,7 +11,7 @@
             <fd-popover-body>
                 <fd-menu>
                     <ul fd-menu-list>
-                        <li fd-menu-item>
+                        <li fd-menu-item class="is-disabled">
                             Edit
                         </li>
                         <li fd-menu-item>
