@@ -399,6 +399,9 @@ import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/
 import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
+import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
+import { MegaMenuExampleComponent, MegaMenuGroupExampleComponent } from './component-docs/mega-menu/examples/mega-menu-examples.component';
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
 
 @NgModule({
@@ -429,6 +432,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         ImageDocsComponent,
         ListDocsComponent,
         MenuDocsComponent,
+        MegaMenuDocsComponent,
         ModalDocsComponent,
         SelectNativeDocsComponent,
         TabsDocsComponent,
@@ -547,6 +551,8 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
+        MegaMenuExampleComponent,
+        MegaMenuGroupExampleComponent,
         MenuGroupExampleComponent,
         MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
@@ -688,6 +694,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         ListHeaderComponent,
         LoadingSpinnerHeaderComponent,
         MenuHeaderComponent,
+        MegaMenuHeaderComponent,
         ModalDocsHeaderComponent,
         MultiInputHeaderComponent,
         PaginationHeaderComponent,

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MegaMenuComponent } from './mega-menu.component';
+import { MegaMenuGroupComponent } from './mega-menu-group.component';
 
-describe('MegaMenuComponent', () => {
-    let component: MegaMenuComponent;
-    let fixture: ComponentFixture<MegaMenuComponent>;
+describe('MegaMenuGroupComponent', () => {
+    let component: MegaMenuGroupComponent;
+    let fixture: ComponentFixture<MegaMenuGroupComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MegaMenuComponent]
+            declarations: [MegaMenuGroupComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(MegaMenuComponent);
+        fixture = TestBed.createComponent(MegaMenuGroupComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

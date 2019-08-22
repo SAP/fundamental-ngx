@@ -1,3 +1,10 @@
-<p>
-  mega-menu-item works!
-</p>
+<li class="fd-mega-menu__item" (click)="toggleOpen()" #parentElement>
+    <ng-content select="[fd-mega-menu-link]"></ng-content>
+    <ng-content></ng-content>
+    <ul class="fd-mega-menu__sublist"
+        #subList
+        (click)="$event.stopPropagation()"
+        [attr.aria-hidden]="!isShow()">
+        <ng-content select="[fd-mega-menu-subitem]"></ng-content>
+    </ul>
+</li>

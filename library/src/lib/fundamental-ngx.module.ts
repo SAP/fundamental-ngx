@@ -45,7 +45,7 @@ import { TokenModule } from './token/token.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
-import { MegaMenuComponent } from './mega-menu/mega-menu.component';
+import { MegaMenuModule } from './mega-menu/mega-menu.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -72,6 +72,7 @@ import { MegaMenuComponent } from './mega-menu/mega-menu.component';
         ListModule,
         LoadingSpinnerModule,
         LocalizationEditorModule,
+        MegaMenuModule,
         MenuModule,
         ModalModule,
         MultiInputModule,
