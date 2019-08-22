@@ -143,7 +143,8 @@ import { LoadingSpinnerExampleComponent } from './component-docs/loading-spinner
 import { LoadingSpinnerContainerExampleComponent } from './component-docs/loading-spinner-docs/examples/loading-spinner-container-example.component';
 import {
     MenuExampleComponent,
-    MenuGroupExampleComponent
+    MenuGroupExampleComponent,
+    MenuSeparatorExampleComponent
 } from './component-docs/menu/examples/menu-examples.component';
 import { ModalOpenTemplateExampleComponent } from './component-docs/modal/examples/template-as-content/modal-open-template-example.component';
 import { ModalContentComponent } from './component-docs/modal/examples/component-as-content/modal-content.component';
@@ -547,6 +548,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
         MenuGroupExampleComponent,
+        MenuSeparatorExampleComponent,
         MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
