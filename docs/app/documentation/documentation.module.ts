@@ -399,6 +399,7 @@ import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/
 import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
 
 @NgModule({
     declarations: [
@@ -637,6 +638,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ComboboxAsyncExampleComponent,
         ComboboxDisplaywithExampleComponent,
         ComboboxDynamicExampleComponent,
+        ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
         LoadingSpinnerDocsComponent,
