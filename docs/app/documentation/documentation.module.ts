@@ -190,7 +190,7 @@ import {
     Time12ExampleComponent,
     TimeDisabledExampleComponent,
     TimeNoSecondsExampleComponent,
-    TimeNoSpinnersExampleComponent
+    TimeNoSpinnersExampleComponent, TimeOnlyHoursExampleComponent
 } from './component-docs/time/examples/time-examples.component';
 import {
     TimePickerExampleComponent,
@@ -198,7 +198,7 @@ import {
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent
+    TimePickerAllowNullExampleComponent, TimePickerOnlyHoursExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
@@ -399,6 +399,7 @@ import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/
 import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
 
 @NgModule({
     declarations: [
@@ -620,6 +621,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         Time12ExampleComponent,
         TimeDisabledExampleComponent,
         TimeNoSecondsExampleComponent,
+        TimeOnlyHoursExampleComponent,
         TimeNoSpinnersExampleComponent,
         TimeI18nExampleComponent,
         TimeFormExampleComponent,
@@ -627,6 +629,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
+        TimePickerOnlyHoursExampleComponent,
         TimePickerCompactExampleComponent,
         TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
@@ -635,6 +638,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ComboboxAsyncExampleComponent,
         ComboboxDisplaywithExampleComponent,
         ComboboxDynamicExampleComponent,
+        ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
         LoadingSpinnerDocsComponent,

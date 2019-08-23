@@ -2,11 +2,9 @@
     <div fd-form-item>
         <label fd-form-label for="input-41">
             Input with inline help
-            <span class="fd-inline-help fd-has-float-right">
-                <span class="fd-inline-help__content fd-inline-help__content--bottom-right">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing.
-                </span>
-            </span>
+                <fd-inline-help [placement]="'right'">
+                 Lorem ipsum dolor sit amet, consectetur adipiscing.
+                </fd-inline-help>
         </label>
         <input fd-form-control type="text" id="input-41">
     </div>

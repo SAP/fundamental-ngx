@@ -31,8 +31,8 @@ describe('Calendar2MonthViewComponent', () => {
     });
 
     it('Should have 12 months', () => {
-        expect(component.monthNames).toBeDefined();
-        expect(component.monthNames.length).toBe(12);
+        expect(component.shortMonthNames).toBeDefined();
+        expect(component.shortMonthNames.length).toBe(12);
     });
 
     it('Should trigger a click event', () => {

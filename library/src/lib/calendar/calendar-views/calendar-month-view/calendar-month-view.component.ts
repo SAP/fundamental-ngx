@@ -17,9 +17,6 @@ import { CalendarService } from '../../calendar.service';
 })
 export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
-    /** A list of month names (short names) */
-    monthNames: string[];
-
     /** A number offset used to achieve the 1-12 representation of the calendar */
     private readonly _monthOffset: number = 1;
 
@@ -51,16 +48,6 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this.monthNames = this.calendarI18n.getAllShortMonthNames();
-
-        this.calendarI18n.i18nChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => {
-                this.monthNames = this.calendarI18n.getAllShortMonthNames();
-                this.cdRef.detectChanges();
-            })
-        ;
-
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
         this.calendarService.onFocusIdChange
@@ -110,5 +97,10 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         if (elementToFocus) {
             elementToFocus.focus();
         }
+    }
+
+    /** Method that returns list of short month names from currently provided calendarI18n service */
+    get shortMonthNames(): string[] {
+        return this.calendarI18n.getAllShortMonthNames();
     }
 }

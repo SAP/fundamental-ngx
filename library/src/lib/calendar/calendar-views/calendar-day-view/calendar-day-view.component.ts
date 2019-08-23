@@ -16,8 +16,6 @@ import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -34,14 +32,8 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** @hidden */
     newFocusedDayId: string = '';
 
-    /** @hidden */
-    shortWeekDays: string[];
-
     /** Actual day grid with previous/current/next month days */
     public dayViewGrid: CalendarDay[][];
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     @HostBinding('class.fd-calendar__dates')
@@ -95,7 +87,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(fdDate: FdDate): boolean {
+    disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -104,7 +96,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeStartFunction = function(fdDate: FdDate): boolean {
+    disableRangeStartFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -113,7 +105,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+    disableRangeEndFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -122,7 +114,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param fdDate FdDate
      */
     @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
+    blockRangeStartFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -131,7 +123,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param fdDate FdDate
      */
     @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
+    blockRangeEndFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -140,7 +132,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * @param fdDate FdDate
      */
     @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
+    blockFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -193,11 +185,6 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** @hidden */
     ngOnInit(): void {
         this.buildDayViewGrid();
-        this.shortWeekDays = this.getShortWeekDays();
-        this.calendarI18n.i18nChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.shortWeekDays = this.getShortWeekDays())
-        ;
     }
 
     /** @hidden
@@ -235,14 +222,14 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
             }
         } else {
             switch (event.code) {
-                case('Space'):
-                case('Enter'): {
+                case ('Space'):
+                case ('Enter'): {
                     event.preventDefault();
                     this.selectDate(cell);
                     this.newFocusedDayId = cell.id;
                     break;
                 }
-                case('ArrowUp'): {
+                case ('ArrowUp'): {
                     event.preventDefault();
                     if (grid.y > 0) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y - 1][grid.x].id;
@@ -252,7 +239,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
                     }
                     break;
                 }
-                case('ArrowDown'): {
+                case ('ArrowDown'): {
                     event.preventDefault();
                     if (grid.y < this.dayViewGrid.length - 1) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y + 1][grid.x].id;
@@ -262,7 +249,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
                     }
                     break;
                 }
-                case('ArrowLeft'): {
+                case ('ArrowLeft'): {
                     event.preventDefault();
                     if (grid.x > 0) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x - 1].id;
@@ -272,11 +259,11 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
                         this.selectPreviousMonth();
                         this.newFocusedDayId =
                             this.dayViewGrid[this.dayViewGrid.length - 1][this.dayViewGrid[0].length - 1].id
-                        ;
+                            ;
                     }
                     break;
                 }
-                case('ArrowRight'): {
+                case ('ArrowRight'): {
                     event.preventDefault();
                     if (grid.x < this.dayViewGrid[0].length - 1) {
                         this.newFocusedDayId = this.dayViewGrid[grid.y][grid.x + 1].id;
@@ -537,7 +524,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
      * Method that returns first letter of every weekday, basing on CalendarI18nDefault. Can be changed by user by
      * providing other class which implements CalendarI18n
      */
-    private getShortWeekDays(): string[] {
+    get shortWeekDays(): string[] {
         return this.calendarI18n.getAllShortWeekdays()
             .slice(this.startingDayOfWeek - 1)
             .concat(this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1))

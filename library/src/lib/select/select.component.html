@@ -10,8 +10,9 @@
         </ng-container>
         <ng-container *ngIf="!triggerTemplate">
             <button class="fd-dropdown__control fd-button fd-select-button-custom"
-                    [attr.aria-expanded]="isOpen"
                     aria-haspopup="true"
+                    [ngClass]="{'fd-button--compact': compact}"
+                    [attr.aria-expanded]="isOpen"
                     [disabled]="disabled">
                 <span class="fd-select-text-custom">{{triggerValue}}</span>
             </button>

@@ -7,6 +7,7 @@ import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.compone
 import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.component.html';
 import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
+import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
 import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html'
 import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts'
@@ -69,6 +70,11 @@ export class TimeDocsComponent {
     timeNoSeconds: ExampleFile[] = [{
         language: 'html',
         code: timeNoSecondsSrc
+    }];
+
+    timeOnlyHours: ExampleFile[] = [{
+        language: 'html',
+        code: timeOnlyHoursSrc
     }];
 
     timeI18n: ExampleFile[] = [{

@@ -61,6 +61,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     @Input()
     value: any;
 
+    /** Whether the select is in compact mode. */
+    @Input()
+    compact: boolean = false;
+
     /** Popper.js options of the popover. */
     @Input()
     popperOptions: PopperOptions = {

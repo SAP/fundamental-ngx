@@ -2,6 +2,101 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.3-rc.2"></a>
+## [0.9.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.9.3-rc.1...v0.9.3-rc.2) (2019-08-23)
+
+
+### Bug Fixes
+
+* combobox primary button click ([#1165](https://github.com/SAP/fundamental-ngx/issues/1165)) ([0ad23e9](https://github.com/SAP/fundamental-ngx/commit/0ad23e9))
+
+
+
+<a name="0.9.3-rc.1"></a>
+## [0.9.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.9.3-rc.0...v0.9.3-rc.1) (2019-08-23)
+
+
+### Bug Fixes
+
+* action bar fix for the responsiveness of menu list ([#1150](https://github.com/SAP/fundamental-ngx/issues/1150)) ([92ad44d](https://github.com/SAP/fundamental-ngx/commit/92ad44d))
+
+
+
+<a name="0.9.3-rc.0"></a>
+## [0.9.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.9.2...v0.9.3-rc.0) (2019-08-23)
+
+
+
+<a name="0.9.2"></a>
+## [0.9.2](https://github.com/SAP/fundamental-ngx/compare/v0.9.2-rc.5...v0.9.2) (2019-08-23)
+
+
+
+<a name="0.9.2-rc.5"></a>
+## [0.9.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.9.2-rc.4...v0.9.2-rc.5) (2019-08-23)
+
+
+
+<a name="0.9.2-rc.4"></a>
+## [0.9.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.9.2-rc.3...v0.9.2-rc.4) (2019-08-23)
+
+
+
+<a name="0.9.2-rc.3"></a>
+## [0.9.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.9.2-rc.2...v0.9.2-rc.3) (2019-08-23)
+
+
+
+<a name="0.9.2-rc.2"></a>
+## [0.9.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.9.2-rc.1...v0.9.2-rc.2) (2019-08-22)
+
+
+
+<a name="0.9.2-rc.1"></a>
+## [0.9.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.9.2-rc.0...v0.9.2-rc.1) (2019-08-22)
+
+
+
+<a name="0.9.2-rc.0"></a>
+## [0.9.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.9.1...v0.9.2-rc.0) (2019-08-22)
+
+
+
+<a name="0.9.1"></a>
+## [0.9.1](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.10...v0.9.1) (2019-08-21)
+
+
+
+<a name="0.9.1-rc.10"></a>
+## [0.9.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.9...v0.9.1-rc.10) (2019-08-21)
+
+
+
+<a name="0.9.1-rc.9"></a>
+## [0.9.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.8...v0.9.1-rc.9) (2019-08-21)
+
+
+
+<a name="0.9.1-rc.8"></a>
+## [0.9.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.7...v0.9.1-rc.8) (2019-08-21)
+
+
+### Bug Fixes
+
+* datepicker update all fields after changing the locale ([#1142](https://github.com/SAP/fundamental-ngx/issues/1142)) ([b4a9f27](https://github.com/SAP/fundamental-ngx/commit/b4a9f27))
+
+
+
+<a name="0.9.1-rc.7"></a>
+## [0.9.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.6...v0.9.1-rc.7) (2019-08-21)
+
+
+### Bug Fixes
+
+* Add displayMinutes option to time component ([#1097](https://github.com/SAP/fundamental-ngx/issues/1097)) ([d5c5c4a](https://github.com/SAP/fundamental-ngx/commit/d5c5c4a))
+
+
+
 <a name="0.9.1-rc.6"></a>
 ## [0.9.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.9.1-rc.5...v0.9.1-rc.6) (2019-08-16)
 
