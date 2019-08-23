@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.3-rc.1"></a>
+## [0.9.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.9.3-rc.0...v0.9.3-rc.1) (2019-08-23)
+
+
+### Bug Fixes
+
+* action bar fix for the responsiveness of menu list ([#1150](https://github.com/SAP/fundamental-ngx/issues/1150)) ([92ad44d](https://github.com/SAP/fundamental-ngx/commit/92ad44d))
+
+
+
 <a name="0.9.3-rc.0"></a>
 ## [0.9.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.9.2...v0.9.3-rc.0) (2019-08-23)
 
