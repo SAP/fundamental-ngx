@@ -8,10 +8,12 @@ import * as comboboxAsyncHtml from '!raw-loader!./examples/combobox-async-exampl
 import * as comboboxAsyncTs from '!raw-loader!./examples/combobox-async-example.component.ts';
 import * as comboboxDisplayHtml from '!raw-loader!./examples/combobox-displaywith-example.component.html';
 import * as comboboxDisplayTs from '!raw-loader!./examples/combobox-displaywith-example.component.ts';
-import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-example.component.html';
-import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
+import * as comboboxHeightHtml from '!raw-loader!./examples/combobox-height-example.component.html';
+import * as comboboxHeightTs from '!raw-loader!./examples/combobox-height-example.component.ts';
 import * as comboboxSeaTs from '!raw-loader!./examples/combobox-search-function-example.component.ts';
 import * as comboboxSeaHtml from '!raw-loader!./examples/combobox-search-function-example.component.html';
+import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-example.component.html';
+import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -83,6 +85,17 @@ export class ComboboxDocsComponent {
         {
             language: 'typescript',
             code: comboboxTemplateT
+        }
+    ];
+
+    comboboxHeightExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxHeightHtml
+        },
+        {
+            language: 'typescript',
+            code: comboboxHeightTs
         }
     ];
 
