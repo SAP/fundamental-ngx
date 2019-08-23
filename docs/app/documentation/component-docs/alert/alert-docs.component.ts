@@ -8,6 +8,7 @@ import * as alertContent from '!raw-loader!./examples/alert-content.component.ts
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
 import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
+import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -95,6 +96,11 @@ export class AlertDocsComponent {
     alertInlineExample: ExampleFile[] = [{
         language: 'html',
         code: alertInlineExampleHtml
+    }];
+
+    alertWidthExample: ExampleFile[] = [{
+        language: 'html',
+        code: alertWidthExampleHtml
     }];
 
     constructor(private schemaFactory: SchemaFactoryService) {
