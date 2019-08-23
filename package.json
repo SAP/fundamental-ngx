@@ -48,10 +48,10 @@
         "core-js": "^2.6.9",
         "focus-trap": "^5.0.2",
         "fundamental-styles": "^0.1.0",
-        "highlight.js": "^9.15.9",
+        "highlight.js": "^9.15.10",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^8.1.0",
-        "npm": "^6.10.3",
+        "npm": "^6.11.1",
         "popper.js": "^1.15.0",
         "rxjs": "^6.5.2",
         "zone.js": "^0.8.29"
@@ -88,7 +88,7 @@
         "ts-node": "^8.3.0",
         "tsickle": "^0.36.0",
         "tslib": "^1.10.0",
-        "tslint": "^5.18.0",
+        "tslint": "^5.19.0",
         "typedoc": "^0.15.0",
         "typescript": "3.2.4"
     },
