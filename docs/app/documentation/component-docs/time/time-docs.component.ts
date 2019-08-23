@@ -11,6 +11,8 @@ import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-exampl
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
 import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html'
 import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts'
+import * as timeBlockedHtmlSrc from '!raw-loader!./examples/time-blocked-example.component.html'
+import * as timeBlockedTsSrc from '!raw-loader!./examples/time-blocked-example.component.ts'
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -90,6 +92,17 @@ export class TimeDocsComponent {
         {
             language: 'typescript',
             code: timeFormTsSrc
+        }
+    ];
+
+    timeBlocked: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeBlockedHtmlSrc,
+        },
+        {
+            language: 'typescript',
+            code: timeBlockedTsSrc,
         }
     ];
 

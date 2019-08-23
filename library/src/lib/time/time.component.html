@@ -11,7 +11,7 @@
     <div class="fd-time__input">
         <input [(ngModel)]="displayedHour"
                [ngClass]="{
-                'is-disabled': disabled,
+                'is-disabled': disabled || blocked,
                 'is-invalid': ((displayedHour > 24 || displayedHour < 0) && validate)
                }"
                (ngModelChange)="displayedHourChanged()"
@@ -45,7 +45,7 @@
         <input [(ngModel)]="time.minute"
                (ngModelChange)="minuteModelChange()"
                (blur)="inputBlur('minute')"
-               [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
+               [ngClass]="{'is-disabled': disabled || blocked, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
                class="fd-form__control"
                type="number"
                placeholder="{{timeI18n?.minutesPlaceholder}}"
@@ -74,7 +74,7 @@
         <input [(ngModel)]="time.second"
                (ngModelChange)="secondModelChange()"
                (blur)="inputBlur('second')"
-               [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
+               [ngClass]="{'is-disabled': disabled || blocked, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
                class="fd-form__control"
                type="number"
                placeholder="{{timeI18n?.secondsPlaceholder}}"

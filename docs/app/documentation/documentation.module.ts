@@ -305,6 +305,7 @@ import { AddingTabExampleComponent } from './component-docs/tabs/examples/adding
 import { CalendarI18nExampleComponent } from './component-docs/calendar/examples/calendar-i18n-example.component';
 import { DatePickerI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-i18n-example.component';
 import { TimeI18nExampleComponent } from './component-docs/time/examples/time-i18n-example.component';
+import { TimeBlockedExampleComponent } from './component-docs/time/examples/time-blocked-example.component';
 import { DatePickerFormatExampleComponent } from './component-docs/date-picker/examples/date-picker-format-example.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
 import { SelectDocsComponent } from './component-docs/select/select-docs.component';
@@ -625,6 +626,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         TimeNoSpinnersExampleComponent,
         TimeI18nExampleComponent,
         TimeFormExampleComponent,
+        TimeBlockedExampleComponent,
         TimePickerExampleComponent,
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,

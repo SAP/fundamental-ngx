@@ -3,6 +3,7 @@ import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
 import { TimeI18n } from './i18n/time-i18n';
+import { FdDate } from '../calendar/models/fd-date';
 
 @Component({
     selector: 'fd-time',
@@ -58,6 +59,9 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      */
     @Input()
     displayHours: boolean = true;
+
+    @Input()
+    blocked: boolean = false;
 
     /**
      * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),

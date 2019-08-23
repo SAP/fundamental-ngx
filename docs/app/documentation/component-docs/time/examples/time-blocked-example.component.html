@@ -1,0 +1,5 @@
+<fd-time [blocked]="foo"
+         [(ngModel)]="timeObject"></fd-time>
+<br />
+<div *ngIf="foo" style="font-size: 12px; font-style: italic;">Time slot unavailable</div>
+Selected Time: {{timeObject.hour}}h {{timeObject.minute}}m {{timeObject.second}}s
