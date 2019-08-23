@@ -25,7 +25,7 @@ export class MenuKeyboardSupportExampleComponent implements AfterViewInit {
     };
 
     public onClick() {
-        // alert('Element clicked');
+        alert('Element clicked');
     }
 
     public handleKeyDown(event: KeyboardEvent, index: number): void {
