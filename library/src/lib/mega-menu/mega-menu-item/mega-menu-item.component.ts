@@ -4,13 +4,12 @@ import {
     ContentChild,
     ContentChildren, ElementRef,
     EventEmitter,
-    HostBinding, HostListener,
+    HostListener,
     Input, OnDestroy,
     Output,
     QueryList, ViewChild
 } from '@angular/core';
 import { MegaMenuSubitemDirective } from '../mega-menu-subitem.directive';
-import { MegaMenuSublinkDirective } from '../mega-menu-sublink.directive';
 import { MegaMenuLinkDirective } from '../mega-menu-link/mega-menu-link.directive';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
@@ -95,7 +94,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     /** @hidden */
-    @HostListener('window:resize', ['$event'])
+    @HostListener('window:resize')
     onResize(): void {
         if (this.open) {
             this.changeDetectionRef.detectChanges();

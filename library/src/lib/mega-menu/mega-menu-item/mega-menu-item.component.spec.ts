@@ -61,7 +61,6 @@ describe('MegaMenuItemComponent', () => {
     });
 
     it('should throw arrow up event', () => {
-        console.log(component);
         spyOn(component.keyDown, 'emit');
         const event: any = {code: 'ArrowUp', preventDefault: () => {}};
         component.handleKeyboardEvent(event);
