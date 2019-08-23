@@ -234,6 +234,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
     }
 
+    /** @hidden */
+    onPrimaryButtonClick(): void {
+        if (this.searchFunction) {
+            this.searchFunction();
+        }
+    }
+
     private defaultDisplay(str: any): string {
         return str;
     }
