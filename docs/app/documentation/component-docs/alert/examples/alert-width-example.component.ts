@@ -38,7 +38,7 @@ export class AlertWidthExampleComponent {
             minWidth: '200px',
             width: '50%',
             dismissible: false,
-            duration: 75000000
+            duration: 7500
         });
     }
 
