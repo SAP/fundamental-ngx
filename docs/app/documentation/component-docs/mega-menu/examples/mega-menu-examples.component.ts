@@ -16,7 +16,7 @@ export class MegaMenuGroupExampleComponent {}
 @Component({
     selector: 'fd-mega-menu-position-example',
     templateUrl: './mega-menu-position-example.component.html',
-    styles: [`        
+    styles: [`
         .mega-menu-right-position {
             display: flex;
             justify-content: flex-end;

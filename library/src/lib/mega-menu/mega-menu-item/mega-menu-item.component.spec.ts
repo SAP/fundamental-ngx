@@ -46,18 +46,40 @@ describe('MegaMenuItemComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should open sublist', () => {
+    it('should open sublist and focus first sub element', () => {
         spyOn(component, 'openSubList');
+        spyOn(component.subItems.first, 'focus');
         const event: any = {code: 'ArrowRight', preventDefault: () => {}};
         component.handleKeyboardEvent(event);
         expect(component.openSubList).toHaveBeenCalled();
+        expect(component.subItems.first.focus).toHaveBeenCalled();
     });
 
-    it('should open sublist', () => {
+    it('should close sublist and focus parent element', () => {
         spyOn(component, 'closeSubList');
+        spyOn(component.link, 'focus');
         const event: any = {code: 'ArrowLeft', preventDefault: () => {}};
         component.handleKeyboardEvent(event);
         expect(component.closeSubList).toHaveBeenCalled();
+        expect(component.link.focus).toHaveBeenCalled();
+    });
+
+    it('should open sublist and focus first sub element', () => {
+        spyOn(component, 'openSubList');
+        spyOn(component.subItems.first, 'focus');
+        const event: any = {code: 'Enter', preventDefault: () => {}};
+        component.handleKeyboardEvent(event);
+        expect(component.openSubList).toHaveBeenCalled();
+        expect(component.subItems.first.focus).toHaveBeenCalled();
+    });
+
+    it('should open sublist and focus first sub element', () => {
+        spyOn(component, 'openSubList');
+        spyOn(component.subItems.first, 'focus');
+        const event: any = {code: 'Space', preventDefault: () => {}};
+        component.handleKeyboardEvent(event);
+        expect(component.openSubList).toHaveBeenCalled();
+        expect(component.subItems.first.focus).toHaveBeenCalled();
     });
 
     it('should throw arrow up event', () => {

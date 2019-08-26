@@ -25,5 +25,4 @@ export class MegaMenuDocsComponent {
         language: 'html',
         code: menuPositionSrc
     }];
-
 }

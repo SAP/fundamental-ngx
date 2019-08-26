@@ -47,7 +47,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     @ViewChild('parentElement')
     parentElement: ElementRef;
 
-    /**  */
+    /**  Event thrown, when there is some keyboard event detected on mega menu item */
     @Output()
     readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
@@ -58,6 +58,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     @Input()
     open: boolean = false;
 
+    /** Defines what should be position for sublist */
     @Input()
     subListPosition: MenuSubListPosition = 'right';
 
@@ -74,7 +75,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
+    handleKeyboardEvent(event: KeyboardEvent): void {
         switch (event.code) {
             case ('ArrowLeft'): {
                 this.closeSubList();
@@ -89,7 +90,6 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
                 if (this.subItems.first) {
                     this.subItems.first.focus();
                 }
-                event.stopPropagation();
                 event.preventDefault();
                 break;
             }
