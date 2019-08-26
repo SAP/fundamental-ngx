@@ -29,7 +29,10 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     @Input()
     control: string;
 
-    /** The items in the product menu. */
+    /**
+     *  The items in the product menu. If the value is not passed or there is empty array,
+     * the template changes and shows only control
+     */
     @Input()
     items: ShellbarMenuItem[];
 
