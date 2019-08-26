@@ -69,6 +69,7 @@ import {
 } from './component-docs/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './component-docs/alert/examples/alert-example.component';
 import { AlertInlineExampleComponent } from './component-docs/alert/examples/alert-inline-example.component';
+import { AlertWidthExampleComponent} from './component-docs/alert/examples/alert-width-example.component';
 import { AlertComponentAsContentExampleComponent } from './component-docs/alert/examples/alert-component-as-content-example.component';
 import { AlertContentComponent } from './component-docs/alert/examples/alert-content.component';
 import {
@@ -464,6 +465,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         AlertComponentAsContentExampleComponent,
         AlertContentComponent,
         AlertInlineExampleComponent,
+        AlertWidthExampleComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
