@@ -32,30 +32,30 @@ export class AlertWidthExampleComponent {
     }
 
     openAlert2() {
-        const alertContent = 'A non-dismissible success-type alert with customizable width of 50%';
+        const alertContent = 'A non-dismissible information-type alert with customizable width of 550px';
         this.alertService.open(alertContent, {
-            type: 'success',
-            minWidth: '200px',
-            width: '50%',
+            type: 'information',
+            width: '550px',
             dismissible: false,
             duration: 7500
         });
     }
 
     openAlert3() {
-        const alertContent = 'A dismissible information-type alert with customizable width of 550px';
+        const alertContent = 'A dismissible success-type alert with customizable width of 70vw';
         this.alertService.open(alertContent, {
-            type: 'information',
-            width: '550px',
+            type: 'success',
+            width: '70vw',
             dismissible: true,
             duration: 7500
         });
     }
 
     openAlert4() {
-        const alertContent = ' A non-dismissible error-type alert with customizable (default) width of 100%';
+        const alertContent = ' A non-dismissible error-type alert with customizable (default) width of 100vw';
         this.alertService.open(alertContent, {
             type: 'error',
+            width: '100vw',
             dismissible: false,
             duration: 7500
         });
