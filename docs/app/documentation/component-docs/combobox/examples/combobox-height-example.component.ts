@@ -17,7 +17,14 @@ export class ComboboxHeightExampleComponent {
         'Raspberries',
         'Watermelons',
         'Nectarines',
-        'Oranges'
+        'Oranges',
+        'Pear',
+        'Grape',
+        'Cherry',
+        'Blueberry',
+        'Avocado',
+        'Fig',
+        'Pomegranate'
     ];
 
 }
