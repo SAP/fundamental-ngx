@@ -1,17 +1,4 @@
-<fd-alert [type]="'warning'" [width]="'250px'">
-    A dismissible warning-type alert with customizable width of 250px.
-</fd-alert>
-
-<fd-alert [type]="'success'" [width]="'50%'" [dismissible]="false">
-    A non-dismissible success-type alert with customizable width of 50%.
-</fd-alert>
-
-<fd-alert [type]="'information'" [width]="'550px'">
-    A dismissible information-type alert with customizable width of 550px.
-</fd-alert>
-
-<fd-alert [type]="'error'" [dismissible]="false">
-    A non-dismissible error-type alert with customizable (default) width of 100%.
-</fd-alert>
-
-<button fd-button (click)="openDynamicAlert()">Open Dynamic Alert</button>
+<button fd-button (click)="openAlert1()">Open 250px Alert</button>
+<button fd-button (click)="openAlert2()">Open 50% Alert</button>
+<button fd-button (click)="openAlert3()">Open 550px Alert</button>
+<button fd-button (click)="openAlert4()">Open 100% Alert</button>

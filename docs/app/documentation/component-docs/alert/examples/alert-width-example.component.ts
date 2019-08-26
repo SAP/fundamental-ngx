@@ -13,6 +13,7 @@ import { AlertService } from '../../../../../../library/src/lib/alert/alert-serv
         }
         button {
             margin-top: 12px;
+            margin-right: 12px;
         }
     `]
 })
@@ -20,11 +21,42 @@ export class AlertWidthExampleComponent {
 
     constructor(public alertService: AlertService) {}
 
-    openDynamicAlert() {
-        const alertContent = 'This dismissible information-type alert with customizable width of 75%.';
+    openAlert1() {
+        const alertContent = 'A dismissible warning-type alert with customizable width of 250px.';
+        this.alertService.open(alertContent, {
+            type: 'warning',
+            width: '250px',
+            dismissible: true,
+            duration: 7500
+        });
+    }
+
+    openAlert2() {
+        const alertContent = 'A non-dismissible success-type alert with customizable width of 50%';
+        this.alertService.open(alertContent, {
+            type: 'success',
+            minWidth: '200px',
+            width: '50%',
+            dismissible: false,
+            duration: 75000000
+        });
+    }
+
+    openAlert3() {
+        const alertContent = 'A dismissible information-type alert with customizable width of 550px';
         this.alertService.open(alertContent, {
             type: 'information',
+            width: '550px',
             dismissible: true,
+            duration: 7500
+        });
+    }
+
+    openAlert4() {
+        const alertContent = ' A non-dismissible error-type alert with customizable (default) width of 100%';
+        this.alertService.open(alertContent, {
+            type: 'error',
+            dismissible: false,
             duration: 7500
         });
     }
