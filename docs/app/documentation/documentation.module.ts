@@ -401,7 +401,11 @@ import { RadioDocsComponent } from './component-docs/radio/radio-docs.component'
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
 import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
 import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
-import { MegaMenuExampleComponent, MegaMenuGroupExampleComponent } from './component-docs/mega-menu/examples/mega-menu-examples.component';
+import {
+    MegaMenuExampleComponent,
+    MegaMenuGroupExampleComponent,
+    MegaMenuPositionExampleComponent
+} from './component-docs/mega-menu/examples/mega-menu-examples.component';
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
 
 @NgModule({
@@ -553,6 +557,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         MenuExampleComponent,
         MegaMenuExampleComponent,
         MegaMenuGroupExampleComponent,
+        MegaMenuPositionExampleComponent,
         MenuGroupExampleComponent,
         MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,

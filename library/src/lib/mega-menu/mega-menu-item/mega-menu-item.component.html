@@ -3,8 +3,9 @@
     <ng-content></ng-content>
     <ul class="fd-mega-menu__sublist"
         #subList
-        (click)="$event.stopPropagation()"
-        [attr.aria-hidden]="!isShow()">
+        [attr.aria-hidden]="!isShow()"
+        [ngClass]="{'fd-mega-menu__sublist--left': !isSubListPositionRight()}"
+        (click)="$event.stopPropagation()">
         <ng-content select="[fd-mega-menu-subitem]"></ng-content>
     </ul>
 </li>

@@ -1,13 +1,18 @@
 import {
-    AfterContentInit, ChangeDetectorRef,
+    AfterContentInit,
+    ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren, ElementRef,
+    ContentChildren,
+    ElementRef,
     EventEmitter,
     HostListener,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     Output,
-    QueryList, ViewChild
+    QueryList,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { MegaMenuSubitemDirective } from '../mega-menu-subitem.directive';
 import { MegaMenuLinkDirective } from '../mega-menu-link/mega-menu-link.directive';
@@ -16,10 +21,13 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DefaultMenuItem } from '../../menu/default-menu-item';
 
+export type MenuSubListPosition = 'left' | 'right';
+
 @Component({
     selector: 'fd-mega-menu-item',
     templateUrl: './mega-menu-item.component.html',
-    styleUrls: ['./mega-menu-item.component.scss']
+    styleUrls: ['./mega-menu-item.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, DefaultMenuItem {
 
@@ -50,6 +58,9 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     @Input()
     open: boolean = false;
 
+    @Input()
+    subListPosition: MenuSubListPosition = 'right';
+
     /** Event that is thrown always, when the open variable is changed */
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -70,12 +81,16 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
                 this.link.focus();
                 break;
             }
-            case ('ArrowRight'): {
+            case ('ArrowRight'):
+            case ('Space'):
+            case ('Enter'): {
                 this.openSubList();
                 this.changeDetectionRef.detectChanges();
                 if (this.subItems.first) {
                     this.subItems.first.focus();
                 }
+                event.stopPropagation();
+                event.preventDefault();
                 break;
             }
             default: {
@@ -96,7 +111,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     /** @hidden */
     @HostListener('window:resize')
     onResize(): void {
-        if (this.open) {
+        if (this.open && this.isSubListPositionRight()) {
             this.changeDetectionRef.detectChanges();
             let distanceFromCorner = this.subList.nativeElement.getBoundingClientRect().right;
 
@@ -156,6 +171,11 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     /** @hidden */
     focus(): void {
         this.link.focus();
+    }
+
+    /** Method that informs if actual position of sublist is set to right */
+    public isSubListPositionRight(): boolean {
+        return this.subListPosition === 'right';
     }
 
     /** Method that changes state of open variable */

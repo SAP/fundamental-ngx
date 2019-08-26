@@ -1,4 +1,17 @@
 .fd-mega-menu__sublist {
     right: initial;
     left: 100%;
+
+    &--left {
+        right: 100%;
+        left: initial;
+    }
+}
+
+.fd-mega-menu__item {
+    cursor: pointer;
+
+    .fd-mega-menu__item {
+        cursor: pointer;
+    }
 }
