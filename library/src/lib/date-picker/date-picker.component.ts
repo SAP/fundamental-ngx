@@ -92,6 +92,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     allowNull: boolean = true;
 
+    /** */
+    @Input()
+    dateFormat: string = 'm/d/yyyy';
+
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
     public activeView: FdCalendarView = 'day';
@@ -222,7 +226,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     public handleSingleDateChange(date: FdDate): void {
         if (date) {
-            this.inputFieldDate = this.dateAdapter.format(date);
+            this.inputFieldDate = this.dateAdapter.format(date, this.dateFormat);
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
@@ -238,8 +242,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             (!CalendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
                 !CalendarService.datesEqual(this.selectedRangeDate.end, dates.end))
         ) {
-            this.inputFieldDate = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
-                + this.dateAdapter.format(dates.end)
+            this.inputFieldDate = this.dateAdapter.format(dates.start, this.dateFormat) +
+                this.dateAdapter.rangeDelimiter +
+                this.dateAdapter.format(dates.end, this.dateFormat)
             ;
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
@@ -307,7 +312,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
              */
             selected = <FdDate>selected;
             this.selectedDate = selected;
-            this.inputFieldDate = this.dateAdapter.format(selected);
+            this.inputFieldDate = this.dateAdapter.format(selected, this.dateFormat);
             if (this.isModelValid()) {
                 this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
             }
@@ -324,8 +329,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
                 if (this.isModelValid()) {
                     this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
-                    this.inputFieldDate = this.dateAdapter.format(selected.start) +
-                        this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end);
+                    this.inputFieldDate = this.dateAdapter.format(selected.start, this.dateFormat) +
+                        this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end, this.dateFormat);
                 }
             } else {
                 this.inputFieldDate = '';
@@ -343,7 +348,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         /** Case when there is single mode */
         if (this.type === 'single') {
 
-            const fdDate = this.dateAdapter.parse(date);
+            const fdDate = this.dateAdapter.parse(date, this.dateFormat);
 
             /**
              * Check if dates are equal, if dates are the same there is no need to make any changes
@@ -365,8 +370,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             /** Case when there is range mode */
         } else {
             const currentDates = date.split(this.dateAdapter.rangeDelimiter);
-            const firstDate = this.dateAdapter.parse(currentDates[0]);
-            const secondDate = this.dateAdapter.parse(currentDates[1]);
+            const firstDate = this.dateAdapter.parse(currentDates[0], this.dateFormat);
+            const secondDate = this.dateAdapter.parse(currentDates[1], this.dateFormat);
 
             /**
              * Check if dates are equal, if dates are the same there is no need to make any changes

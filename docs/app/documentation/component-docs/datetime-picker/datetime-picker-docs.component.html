@@ -16,7 +16,8 @@
 
 <h2>Non-Meridian Datetime Picker</h2>
 <description>
-    Removing the am/pm from the time component. The string representation may or may not conserve it depending on locality.
+    Removing the am/pm from the time component. The string representation may or may not conserve it depending on
+    locality.
 </description>
 <component-example [name]="'ex2'">
     <app-datetime-non-meridian-example></app-datetime-non-meridian-example>
@@ -27,7 +28,8 @@
 
 <h2>Programmatic Change</h2>
 <description>
-    It is possible to programmatically change the value of the date of the datetime picker and still conserve full functionality.
+    It is possible to programmatically change the value of the date of the datetime picker and still conserve full
+    functionality.
 </description>
 <component-example [name]="'ex3'">
     <app-datetime-program-example></app-datetime-program-example>
@@ -36,16 +38,38 @@
 
 <separator></separator>
 <h2>Null Validity</h2>
-<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.</description>
+<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
+    invalid.
+</description>
 <component-example [name]="'ex4'">
     <fd-date-time-picker-allow-null-example></fd-date-time-picker-allow-null-example>
 </component-example>
 <code-example [exampleFiles]="datetimePickerAllowNull"></code-example>
 
 <separator></separator>
+<h2>Default Formatting</h2>
+<description>Providing a <code>[dateTimeFormat]</code> for DateTimePicker allows to change date formats without
+    providing any
+    service. The default dateFormat is <code>mm/dd/yyyy, HH:MM:SS</code>. The date time format parser is case sensitive.
+    The valid options: <br/>
+    Years -> yyyy(ex.2010) <br/>
+    Months -> mm(ex. 08), or m(ex. 8) <br/>
+    Days -> mm(ex. 02), or m(ex. 2) <br/>
+    Hours -> HH(ex. 02), or H(ex. 2) <br/>
+    Minutes -> MM(ex. 02), or M(ex. 2) <br/>
+    Seconds -> SS(ex. 02), or S(ex. 2) <br/>
+    <code>Comma</code> separator is mandatory to be used between <code>date</code> and <code>time</code> format. <br/>
+    Separators between are also mandatory. It can not be any word / digit character.
+</description>
+<component-example [name]="'ex5'">
+    <fd-datetime-default-format-example></fd-datetime-default-format-example>
+</component-example>
+<code-example [exampleFiles]="dateTimeDefaultFormat"></code-example>
+
+<separator></separator>
 <h2>Formatting</h2>
 <description>Providing a custom format for the dates is possible through providing a service.</description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-datetime-format-example></fd-datetime-format-example>
 </component-example>
 <code-example [exampleFiles]="datetimeFormat"></code-example>
@@ -53,7 +77,7 @@
 <separator></separator>
 
 <h2>Disabled State</h2>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex7'">
     <fd-datetime-disabled-example></fd-datetime-disabled-example>
 </component-example>
 <code-example [exampleFiles]="datetimeDisabled"></code-example>
@@ -62,7 +86,7 @@
 
 <h2>Date Time Picker in Reactive Form</h2>
 <description>The date-time-picker component may also be used within Angular Reactive Forms.</description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex8'">
     <fd-datetime-form-example></fd-datetime-form-example>
 </component-example>
 <code-example [exampleFiles]="datetimeForm"></code-example>

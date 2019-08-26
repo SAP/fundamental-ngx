@@ -61,7 +61,7 @@ describe('DatetimePickerComponent', () => {
         spyOn(component, 'onChange');
         component.date = FdDatetime.getToday();
 
-        const dateStr = component.dateTimeAdapter.format(component.date);
+        const dateStr = component.dateTimeAdapter.format(component.date, component.dateTimeFormat);
 
         component.handleInputChange(dateStr);
 
@@ -88,7 +88,7 @@ describe('DatetimePickerComponent', () => {
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.inputFieldDate).toEqual(component.dateTimeAdapter
-            .format(new FdDatetime(component.selectedDate, timeModel))
+            .format(new FdDatetime(component.selectedDate, timeModel), component.dateTimeFormat)
         );
     });
 
@@ -96,7 +96,7 @@ describe('DatetimePickerComponent', () => {
         spyOn(component, 'onChange');
         const timeModel = { hour: 30, minute: 30, second: 45 };
         const dateTime = new FdDatetime(component.date.date, timeModel);
-        component.handleInputChange(component.dateTimeAdapter.format(dateTime));
+        component.handleInputChange(component.dateTimeAdapter.format(dateTime, component.dateTimeFormat));
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.isInvalidDateInput).toEqual(true);
     });
@@ -105,7 +105,7 @@ describe('DatetimePickerComponent', () => {
         spyOn(component, 'onChange');
         const date = new FdDate(2018, 45, 10);
         const dateTime = new FdDatetime(date, component.date.time);
-        component.handleInputChange(component.dateTimeAdapter.format(dateTime));
+        component.handleInputChange(component.dateTimeAdapter.format(dateTime, component.dateTimeFormat));
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.isInvalidDateInput).toEqual(true);
     });
@@ -119,7 +119,7 @@ describe('DatetimePickerComponent', () => {
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.inputFieldDate).toEqual(component.dateTimeAdapter
-            .format(new FdDatetime(date, component.time))
+            .format(new FdDatetime(date, component.time), component.dateTimeFormat)
         );
     });
 
@@ -136,9 +136,9 @@ describe('DatetimePickerComponent', () => {
         const dateTime = FdDatetime.getToday();
         component.writeValue(dateTime);
         const invalidDate = new FdDatetime(new FdDate(2010, 40, 30), dateTime.time);
-        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
-        component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
-        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter.format(invalidDate));
+        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate, component.dateTimeFormat);
+        component.handleInputChange(component.dateTimeAdapter.format(invalidDate, component.dateTimeFormat));
+        expect(component.inputFieldDate).toEqual(component.dateTimeAdapter.format(invalidDate, component.dateTimeFormat));
         expect(component.isInvalidDateInput).toBeTruthy();
     });
 
@@ -146,13 +146,13 @@ describe('DatetimePickerComponent', () => {
         const dateTime = FdDatetime.getToday();
         component.timeComponent.time = { hour: 12, minute: 11, second: 10 };
         component.writeValue(dateTime);
-        const invalidTime = {hour: 50, minute: 30, second: 20};
+        const invalidTime = { hour: 50, minute: 30, second: 20 };
         const invalidDate = new FdDatetime(dateTime.date, invalidTime);
-        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
-        component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
+        component.inputFieldDate = component.dateTimeAdapter.format(invalidDate, component.dateTimeFormat);
+        component.handleInputChange(component.dateTimeAdapter.format(invalidDate, component.dateTimeFormat));
         component.handleDateChange(dateTime.date);
         expect(component.inputFieldDate).toEqual(
-            component.dateTimeAdapter.format(new FdDatetime(dateTime.date, component.timeComponent.time))
+            component.dateTimeAdapter.format(new FdDatetime(dateTime.date, component.timeComponent.time), component.dateTimeFormat)
         );
         expect(component.isInvalidDateInput).not.toBeTruthy();
     });

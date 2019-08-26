@@ -85,6 +85,22 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     compact: boolean = false;
 
     /**
+     * Whether the component should have other date format than the default one. There is also way to provide own service.
+     * The date will be formatted from FdDateTime to string and from string to FdDateTime following this pattern.
+     * It also has some restrictions on using:
+     * Years -> yyyy
+     * Months -> mm(ex. 08), or m(ex. 8)
+     * Days -> mm(ex. 02), or m(ex. 2)
+     * Hours -> HH(ex.02), or H(ex. 2)
+     * Minutes -> MM(ex. 02), or M(ex. 2)
+     * Seconds -> SS(ex. 02), or S(ex. 2)
+     * Date and Time pattern has to be separated by comma.
+     * Date Pattern and Time pattern has to contain non-digit/non-word separators between elements.
+     */
+    @Input()
+    dateTimeFormat: string = 'm/d/yyyy, H:M:S';
+
+    /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
      */
@@ -394,7 +410,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * validation the results are different. It also changes to state of isInvalidDateInput.
      */
     handleInputChange(date: string): void {
-        const fdTimeDate = this.dateTimeAdapter.parse(date);
+        const fdTimeDate = this.dateTimeAdapter.parse(date, this.dateTimeFormat);
         this.selectedDate = fdTimeDate.date;
         this.time = fdTimeDate.time;
         this.date = new FdDatetime(this.selectedDate, this.time);
@@ -423,7 +439,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     }
 
     private setInput(fdDateTime: FdDatetime): void {
-        this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
+        this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime, this.dateTimeFormat);
         this.changeDetRef.detectChanges();
     }
 

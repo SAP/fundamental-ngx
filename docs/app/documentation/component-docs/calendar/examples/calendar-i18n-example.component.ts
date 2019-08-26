@@ -18,9 +18,11 @@ export class CustomCalendarI18n extends CalendarI18n {
     // You could also define a custom service and inject it here
     language: string = 'fr';
 
+
     getDayAriaLabel(date: Date): string {
         return date.getDate() + ' ' + localized_values[this.language].fullMonths[date.getMonth()] + ' ' + date.getFullYear();
     }
+
     getAllFullMonthNames(): string[] {
         return localized_values[this.language].fullMonths;
     }
@@ -69,5 +71,5 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     ]
 })
 export class CalendarI18nExampleComponent {
-        date = FdDate.getToday();
+    date = FdDate.getToday();
 }

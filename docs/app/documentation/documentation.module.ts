@@ -403,6 +403,8 @@ import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/
 import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { DatePickerDefaultFormatsExampleComponent } from './component-docs/date-picker/examples/date-picker-default-formats-example.component';
+import { DatetimeDefaultFormatExampleComponent } from './component-docs/datetime-picker/examples/datetime-default-format-example.component';
 import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
 import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
 import {
@@ -517,6 +519,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         DatetimeExampleComponent,
         DatetimeNonMeridianExampleComponent,
         DatetimeProgramExampleComponent,
+        DatetimeDefaultFormatExampleComponent,
         DatetimeFormatExampleComponent,
         DatetimeFormExampleComponent,
         DatetimePickerAllowNullExampleComponent,
@@ -738,6 +741,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         DatePickerI18nExampleComponent,
         DatePickerPositionExampleComponent,
         DatePickerFormatExampleComponent,
+        DatePickerDefaultFormatsExampleComponent,
         SearchPipe,
         ModalPositionExampleComponent,
         ContainerComponent,

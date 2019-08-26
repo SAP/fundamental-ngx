@@ -48,14 +48,6 @@ export class FdDatetime {
      */
     public isTimeValid(): boolean {
 
-        if (!this.time ||
-            this.hour === undefined ||
-            this.minute === undefined ||
-            this.second === undefined
-        ) {
-            return false;
-        }
-
         if (this.hour > 23 || this.hour < 0) {
             return false;
         }
@@ -99,18 +91,24 @@ export class FdDatetime {
     public get hour(): number {
         if (this.time) {
             return this.time.hour;
+        } else {
+            return 0;
         }
     }
 
     public get minute(): number {
         if (this.time) {
             return this.time.minute;
+        } else {
+            return 0;
         }
     }
 
     public get second(): number {
         if (this.time) {
             return this.time.second;
+        } else {
+            return 0;
         }
     }
 

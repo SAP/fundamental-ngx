@@ -36,9 +36,24 @@
 <code-example [exampleFiles]="datePickerI18N"></code-example>
 
 <separator></separator>
+<h2>Default Formatting</h2>
+<description>Providing a <code>[dateFormat]</code> for datepicker allows to change date formats without providing any
+    service. The default dateFormat is <code>mm/dd/yyyy</code>. The date format parser is case sensitive.
+    The valid options: <br/>
+    Years -> yyyy(ex.2010) <br/>
+    Months -> mm(ex. 08), or m(ex. 8) <br/>
+    Days -> mm(ex. 02), or m(ex. 2) <br/>
+    Separators between are mandatory can't be any word / digit character.
+</description>
+<component-example [name]="'ex4'">
+  <fd-date-picker-default-formats-example></fd-date-picker-default-formats-example>
+</component-example>
+<code-example [exampleFiles]="datePickerDefaultFormat"></code-example>
+
+<separator></separator>
 <h2>Formatting</h2>
 <description>Providing a custom format for the dates is possible through providing a service.</description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
   <fd-date-picker-format-example></fd-date-picker-format-example>
 </component-example>
 <code-example [exampleFiles]="datePickerFormat"></code-example>
@@ -47,7 +62,7 @@
 <h2>Null Validity</h2>
 <description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
   invalid.</description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
   <fd-date-picker-allow-null-example></fd-date-picker-allow-null-example>
 </component-example>
 <code-example [exampleFiles]="datePickerAllowNull"></code-example>
@@ -55,14 +70,14 @@
 <separator></separator>
 <h2>Date Picker in Reactive Form</h2>
 <description>The date-picker component may also be used within Angular Reactive Forms.</description>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex7'">
   <fd-date-picker-form-example></fd-date-picker-form-example>
 </component-example>
 <code-example [exampleFiles]="datePickerForm"></code-example>
 
 <separator></separator>
 <h2>Date Picker in Reactive Form with a Range of Dates</h2>
-<component-example [name]="'ex7'">
+<component-example [name]="'ex8'">
   <fd-date-picker-form-range-example></fd-date-picker-form-range-example>
 </component-example>
 <code-example [exampleFiles]="datePickerRangeForm"></code-example>
@@ -70,14 +85,14 @@
 <separator></separator>
 <h2>Position</h2>
 <description>There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.</description>
-<component-example name="'ex8'">
+<component-example name="'ex9'">
     <fd-date-picker-position-example></fd-date-picker-position-example>
 </component-example>
 <code-example [exampleFiles]="datePickerPosition"></code-example>
 
 <separator></separator>
 <h2>Disabled State</h2>
-<component-example name="'ex7'">
+<component-example name="'ex10'">
     <fd-date-picker-disabled-example></fd-date-picker-disabled-example>
 </component-example>
 <code-example [exampleFiles]="datePickerDisabled"></code-example>
