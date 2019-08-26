@@ -365,6 +365,7 @@ import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/e
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
 import { ComboboxHeightExampleComponent } from './component-docs/combobox/examples/combobox-height-example.component';
+import { ComboboxDisabledExampleComponent } from './component-docs/combobox/examples/combobox-disabled-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
 import { InputGroupNumberFormExampleComponent } from './component-docs/input-group/examples/input-group-number-form-example.component';
@@ -642,6 +643,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
+        ComboboxDisabledExampleComponent,
         ComboboxHeightExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,

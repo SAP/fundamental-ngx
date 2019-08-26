@@ -130,12 +130,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => { };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => { };
 
-    constructor(private menuKeyboardService: MenuKeyboardService) {}
+    constructor(private menuKeyboardService: MenuKeyboardService) { }
 
     /** @hidden */
     ngOnInit() {
@@ -166,7 +166,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => this.onMenuClickHandler(index));
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
-        this.menuKeyboardService.focusEscapeAfterList = () => {};
+        this.menuKeyboardService.focusEscapeAfterList = () => { };
     }
 
     /** @hidden */
@@ -239,6 +239,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (this.searchFunction) {
             this.searchFunction();
         }
+    }
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
     }
 
     private defaultDisplay(str: any): string {

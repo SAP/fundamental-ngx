@@ -1,0 +1,13 @@
+<form [formGroup]="customForm">
+    <div fd-form-set>
+        <div fd-form-item>
+            <label fd-form-label for="form-combo-1">Selected Value:</label>
+            <fd-combobox
+                formControlName="comboControl"
+                fd-form-control
+                id="form-control-1"></fd-combobox>
+        </div>
+    </div>
+</form>
+
+Disabled: {{ customForm.controls.comboControl.disabled }}
