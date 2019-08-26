@@ -1,6 +1,7 @@
 .fd-mega-menu__sublist {
     right: initial;
     left: 100%;
+    z-index: 2;
 
     &--left {
         right: 100%;
@@ -10,8 +11,10 @@
 
 .fd-mega-menu__item {
     cursor: pointer;
-
-    .fd-mega-menu__item {
-        cursor: pointer;
+    .fd-mega-menu__link {
+        position: relative;
+        &:focus {
+            z-index: 1;
+        }
     }
 }
