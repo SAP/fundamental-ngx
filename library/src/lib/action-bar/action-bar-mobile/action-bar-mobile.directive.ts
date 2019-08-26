@@ -12,9 +12,6 @@ import { Directive } from '@angular/core';
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-action-bar-mobile]',
-    host: {
-        style: 'width: 319px;'
-    }
+    selector: '[fd-action-bar-mobile]'
 })
-export class ActionBarMobileDirective {}
+export class ActionBarMobileDirective { }

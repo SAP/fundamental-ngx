@@ -17,12 +17,23 @@
 <code-example [exampleFiles]="comboboxDynamicExample"></code-example>
 
 <separator></separator>
+<h2>Custom Search Function</h2>
+<description>
+    Custom search function can be provided by <code>[searchFunction]</code> to combobox. It will be called on mouse
+    click on combobox's primary button, or on enter key press, while focused on combobox input.
+</description>
+<component-example [name]="'ex3'">
+    <fd-combobox-search-function-example></fd-combobox-search-function-example>
+</component-example>
+<code-example [exampleFiles]="comboboxSearchFunctionExample"></code-example>
+
+<separator></separator>
 <h2>Display Object Property</h2>
 <description>
     Passing object arrays to the Combobox is supported through the <code>displayFn</code> input function. To
     access the <code>this</code> keyword inside the passed function, use an arrow function.
 </description>
-<component-example [name]="'ex3'">
+<component-example [name]="'ex4'">
     <fd-combobox-displaywith-example></fd-combobox-displaywith-example>
 </component-example>
 <code-example [exampleFiles]="comboboxDisplayExample"></code-example>
@@ -36,7 +47,7 @@
 <description>
     This example also demonstrates how to create a callback function from data returned by the observable.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-combobox-async-example></fd-combobox-async-example>
 </component-example>
 <code-example [exampleFiles]="comboboxAsyncExample"></code-example>
@@ -47,7 +58,7 @@
     The way the items are rendered in the popover list can be customized through providing an <code>itemTemplate</code>
     to the component.
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-combobox-template-example></fd-combobox-template-example>
 </component-example>
 <code-example [exampleFiles]="comboboxTemplateExample"></code-example>

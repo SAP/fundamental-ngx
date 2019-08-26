@@ -1,0 +1,7 @@
+<fd-combobox [(ngModel)]="searchTerm"
+             [dropdownValues]="dropdownValues"
+             [searchFunction]="customSearchFunction"
+             [placeholder]="'Type to filter the list...'">
+</fd-combobox>
+<br/>
+<span>Search Term: {{searchTerm}}</span>
