@@ -49,6 +49,7 @@
         "focus-trap": "^5.0.2",
         "fundamental-styles": "^0.1.0",
         "highlight.js": "^9.15.10",
+        "moment": "^2.24.0",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^8.1.0",
         "npm": "^6.11.2",

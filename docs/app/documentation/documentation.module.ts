@@ -400,6 +400,7 @@ import { RadioExamplesComponent } from './component-docs/radio/examples/radio-ex
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
+import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/examples/calendar--i18n-moment-example.component';
 
 @NgModule({
     declarations: [
@@ -727,7 +728,8 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
-        InputGroupNumberFormExampleComponent
+        InputGroupNumberFormExampleComponent,
+        CalendarI18nMomentExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
