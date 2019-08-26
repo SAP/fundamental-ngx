@@ -2,6 +2,7 @@
     right: initial;
     left: 100%;
     z-index: 2;
+    margin-top: 4px;
 
     &--left {
         right: 100%;
@@ -17,4 +18,9 @@
             z-index: 1;
         }
     }
+}
+
+// Just to have higher hierarchy than docs.scss component
+ul.fd-mega-menu__sublist {
+    margin-left: -4px;
 }
