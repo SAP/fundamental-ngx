@@ -1,10 +1,8 @@
 import {
     Component, HostBinding,
     ViewEncapsulation,
-    Input,
-    ElementRef
+    Input
 } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
  * The component that represents a menu.
@@ -15,24 +13,15 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['menu.component.scss']
 })
-export class MenuComponent extends AbstractFdNgxClass {
+export class MenuComponent {
     /** @hidden */
     @HostBinding('class.fd-menu')
     fdMenuClass: boolean = true;
 
-    /** The separator line for each menu item. When set to true at list level, it adds a separator below each menu item in the list. 
+    /** The separator line for each menu item. When set to true, it adds a separator below each menu item in the list. 
      * False by default. Leave empty for default. */
     @Input()
+    @HostBinding('class.fd-menu__list--separated')
     separator: boolean = false;
 
-    /** @hidden */
-    constructor(public itemEl: ElementRef) {
-        super(itemEl);
-    }
-    /** @hidden */
-    _setProperties(): void {
-        if (this.separator) {
-            this._addClassToElement('fd-menu__list-separator');
-        }
-    }
 }
