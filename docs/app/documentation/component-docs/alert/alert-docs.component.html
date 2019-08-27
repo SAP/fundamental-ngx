@@ -33,6 +33,17 @@
 
 <separator></separator>
 
+<h2>Alert with Customizable Width</h2>
+<description>
+    Alert width can be customized by adding the <code>[width]</code> attribute on the selector.
+</description>
+<component-example [name]="'ex4'">
+    <fd-alert-width-example></fd-alert-width-example>
+</component-example>
+<code-example [exampleFiles]="alertWidthExample"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema"
             [schemaInitialValues]="data"
             (onFormChanges)="onSchemaValues($event)">
