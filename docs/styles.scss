@@ -105,6 +105,12 @@ pre {
         }
     }
 
+    li.is-disabled{
+        color: rgba(128, 128, 128, 0.4);
+        cursor: not-allowed;
+        text-decoration: none;
+    }
+
     a[aria-disabled='true']:hover,
     a[aria-disabled='true']:visited,
     a[aria-disabled='true']:active,
@@ -114,6 +120,8 @@ pre {
         cursor: not-allowed;
         text-decoration: none;
     }
+
+   
 }
 
 .fd-centered-content {
