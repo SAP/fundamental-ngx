@@ -44,24 +44,27 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
      * @param dateTimeFormat string that defines how the date string look like
      */
     public parse(value: string, dateTimeFormat: string): FdDatetime {
-        if (!value || !dateTimeFormat) {
+        if (!value) {
             return FdDatetime.getToday();
+        } else if (!dateTimeFormat || !dateTimeFormat.includes(',')) {
+            // If there is invalid date time format, just call the same function with default format
+            return this.parse(value, 'm/d/yyyy, H:M:S');
         } else {
             let date: FdDate;
             let time: TimeObject;
             const dateFormat: string = dateTimeFormat.split(',')[0];
             const timeFormat: string = dateTimeFormat.split(',')[1];
             const dateStr = value.split(',')[0];
-            if (dateStr && dateStr.trim() && dateTimeFormat && DateTimeFormatParsers.isDateFormatValid(dateFormat)) {
+            if (dateStr && dateStr.trim() && DateTimeFormatParsers.isDateFormatValid(dateFormat)) {
                 date = DateTimeFormatParsers.parseDateWithDateFormat(dateStr, dateFormat);
             }
             const timeStr = value.split(',')[1];
-            if (timeStr && timeStr.trim() && dateTimeFormat && DateTimeFormatParsers.isTimeFormatValid(timeFormat)) {
+            if (timeStr && timeStr.trim() && DateTimeFormatParsers.isTimeFormatValid(timeFormat)) {
                 time = DateTimeFormatParsers.parseTimeWithTimeFormat(timeStr, timeFormat);
             }
-            if (date) {
-                return new FdDatetime(date, time);
-            }
+
+            // If there is anything missing, just take today's date and time.
+            return new FdDatetime(date || FdDate.getToday(), time || FdDatetime.getToday().time);
         }
     }
 
@@ -71,19 +74,20 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
      * @param dateTimeFormat string that defines how the date string should look like
      */
     public format(date: FdDatetime, dateTimeFormat: string): string {
-        if (dateTimeFormat) {
+        if (dateTimeFormat && dateTimeFormat.includes(',')) {
             const dateFormat: string = dateTimeFormat.split(',')[0];
             const timeFormat: string = dateTimeFormat.split(',')[1];
-            return DateTimeFormatParsers.formatDateWithDateFormat(date.date, dateFormat) + ',' +
-                (date.time ? DateTimeFormatParsers.formatTimeWithTimeFormat(date.time, timeFormat) : '')
-                ;
+            let dateString: string;
+            let timeString: string;
+            if (dateFormat && dateFormat.trim() && DateTimeFormatParsers.isDateFormatValid(dateFormat)) {
+                dateString = DateTimeFormatParsers.formatDateWithDateFormat(date.date, dateFormat);
+            }
+            if (timeFormat && timeFormat.trim() && DateTimeFormatParsers.isTimeFormatValid(timeFormat)) {
+                timeString = DateTimeFormatParsers.formatTimeWithTimeFormat(date.time, timeFormat);
+            }
+            return dateString + ',' + (timeString || '') ;
         } else {
-            return date.day + '.' +
-                date.month + '.' +
-                date.year + ', ' +
-                date.hour + ':' +
-                date.minute + ':' +
-                date.second;
+            return this.format(date, 'm/d/yyyy, H:M:S');
         }
     }
 }

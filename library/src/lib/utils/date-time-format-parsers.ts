@@ -8,7 +8,7 @@ export class DateTimeFormatParsers {
 
     /** Defines if date format is valid */
     public static isDateFormatValid(dateFormat: string): boolean {
-        if (dateFormat && typeof dateFormat === 'string') {
+        if (dateFormat && typeof dateFormat === 'string' && dateFormat.trim()) {
             return DateTimeFormatParsers.dateRegex.test(dateFormat.toLocaleLowerCase());
         }
         return false;
@@ -16,7 +16,7 @@ export class DateTimeFormatParsers {
 
     /** Defines if time format is valid */
     public static isTimeFormatValid(timeFormat: string): boolean {
-        if (timeFormat && typeof timeFormat === 'string') {
+        if (timeFormat && typeof timeFormat === 'string' && timeFormat.trim()) {
             return DateTimeFormatParsers.timeRegexp.test(timeFormat.toLocaleLowerCase());
         }
         return false;
@@ -100,6 +100,9 @@ export class DateTimeFormatParsers {
         const FINAL_SEPARATOR = ',';
         if (!str) {
             return [];
+        }
+        if (!separators) {
+            return [str];
         }
         separators.forEach(separator => {
             if (separator) {

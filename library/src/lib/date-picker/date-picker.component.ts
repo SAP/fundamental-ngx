@@ -92,7 +92,15 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     allowNull: boolean = true;
 
-    /** */
+    /**
+     * Whether the component should have other date format than the default one. There is also way to provide own service.
+     * The date will be formatted from FdDate to string and from string to FdDate following this pattern.
+     * It also has some restrictions on using:
+     * Years -> yyyy
+     * Months -> mm(ex. 08), or m(ex. 8)
+     * Days -> mm(ex. 02), or m(ex. 2)
+     * Date Pattern has to contain non-digit/non-word separators between elements.
+     */
     @Input()
     dateFormat: string = 'm/d/yyyy';
 
@@ -230,6 +238,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
+
+            /** Check date thrown by calendar  */
+            this.isInvalidDateInput = this.isModelValid();
         }
     }
 
@@ -249,6 +260,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
+
+            /** Check date thrown by calendar  */
+            this.isInvalidDateInput = this.isModelValid();
         }
     }
 

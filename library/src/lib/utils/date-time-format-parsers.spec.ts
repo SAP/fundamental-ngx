@@ -1,6 +1,5 @@
 import { FdDate } from '../calendar/models/fd-date';
 import { DateTimeFormatParsers } from './date-time-format-parsers';
-import { FdDatetime } from '../datetime-picker/models/fd-datetime';
 import { TimeObject } from '../time/time-object';
 
 describe('DateParsersWithFormat', () => {
@@ -70,23 +69,23 @@ describe('DateParsersWithFormat', () => {
         const timeFormat = 'HH:MM:SS';
         const timeString = DateTimeFormatParsers.formatTimeWithTimeFormat(time, timeFormat);
         expect(timeString).toBe('12:23:34');
-    })
+    });
 
     it('Should work for "MM:HH:SS"', () => {
         const timeFormat = 'MM:HH:SS';
         const timeString = DateTimeFormatParsers.formatTimeWithTimeFormat(time, timeFormat);
         expect(timeString).toBe('23:12:34');
-    })
+    });
 
     it('Should work for "HH:MM"', () => {
         const timeFormat = 'HH:MM';
         const timeString = DateTimeFormatParsers.formatTimeWithTimeFormat(time, timeFormat);
         expect(timeString).toBe('12:23');
-    })
+    });
 
     it('Should work for "HH"', () => {
         const timeFormat = 'HH';
         const timeString = DateTimeFormatParsers.formatTimeWithTimeFormat(time, timeFormat);
         expect(timeString).toBe('12');
-    })
+    });
 });

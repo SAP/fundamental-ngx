@@ -5,9 +5,16 @@ import { FdRangeDate } from '../../../../../../library/src/lib/calendar/models/f
 @Component({
     selector: 'fd-date-picker-default-formats-example',
     template: `
+        <div fd-form-item class="fd-docs-form-item-date-picker">
+            <label fd-form-label for="date-picker-input-type">
+                Date Format
+            </label>
+            <input fd-form-control type="text" [(ngModel)]="dateFormat" id="date-picker-input-type">
+        </div>
+        
         <fd-date-picker [(ngModel)]="date"
                         placeholder="yyyy.mm.dd"
-                        [dateFormat]="'yyyy.mm.dd'">
+                        [dateFormat]="dateFormat">
         </fd-date-picker>
         <br/>
         
@@ -15,7 +22,7 @@ import { FdRangeDate } from '../../../../../../library/src/lib/calendar/models/f
         <br/>
         <fd-date-picker style="width: 300px;"
                         placeholder="yyyy.mm.dd to yyyy.mm.dd" 
-                        [dateFormat]="'yyyy.mm.dd'"
+                        [dateFormat]="dateFormat"
                         [type]="'range'" 
                         [(ngModel)]="selectedRange">
         </fd-date-picker>
@@ -23,7 +30,12 @@ import { FdRangeDate } from '../../../../../../library/src/lib/calendar/models/f
         
         <div>Selected First Date: {{selectedRange?.start?.toDateString()}}</div>
         <div>Selected Last Date: {{selectedRange?.end?.toDateString()}}</div>
-    `
+    `,
+    styles: [`
+        .fd-docs-form-item-date-picker {
+            width: 200px;
+        }
+    `]
 })
 export class DatePickerDefaultFormatsExampleComponent {
 
@@ -33,5 +45,7 @@ export class DatePickerDefaultFormatsExampleComponent {
         start: FdDate.getToday(),
         end: FdDate.getToday().nextDay()
     };
+
+    dateFormat: string = 'yyyy.mm.dd';
 
 }
