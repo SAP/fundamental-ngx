@@ -108,9 +108,11 @@ export const API_FILES = {
         'LocalizationEditorMainComponent',
     ],
     menu: [
+        'MenuAddonDirective',
         'MenuComponent',
         'MenuGroupComponent',
         'MenuItemDirective',
+        'MenuItemAddonDirective',
         'MenuListDirective',
         'MenuTitleDirective',
         'MenuKeyboardService'
