@@ -24,6 +24,8 @@ export class DateTimeFormatParsers {
 
     public static formatDateWithDateFormat(date: FdDate, dateFormat: string): string {
         let dateString = dateFormat.toLocaleLowerCase();
+
+        /** Date format is being replaced by real day values, ex. (dd is being replaced by 12) */
         dateString = dateString.replace('dd', this.numberFormat(date.day, 2));
         dateString = dateString.replace('d', date.day + '');
         dateString = dateString.replace('mm', this.numberFormat(date.month, 2));
@@ -34,6 +36,8 @@ export class DateTimeFormatParsers {
 
     public static formatTimeWithTimeFormat(time: TimeObject, timeFormat: string): string {
         let timeString = timeFormat.toLocaleLowerCase();
+
+        /** Time format is being replaced by real day values, ex. (hh is being replaced by 12) */
         timeString = timeString.replace('hh', this.numberFormat(time.hour, 2));
         timeString = timeString.replace('h', time.hour + '');
         timeString = timeString.replace('mm', this.numberFormat(time.minute, 2));
