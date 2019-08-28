@@ -23,42 +23,23 @@ export class DateTimeFormatParsers {
     }
 
     public static formatDateWithDateFormat(date: FdDate, dateFormat: string): string {
-
-        const numberFormat = (num: number, width: number): string => {
-            let _num: string = '' + num;
-            while (_num.length < width) {
-                _num = '0' + _num;
-            }
-            return _num;
-        };
-
-        let dateString = dateFormat.toLocaleLowerCase().replace('dd', numberFormat(date.day, 2));
+        let dateString = dateFormat.toLocaleLowerCase();
+        dateString = dateString.replace('dd', this.numberFormat(date.day, 2));
         dateString = dateString.replace('d', date.day + '');
-        dateString = dateString.replace('mm', numberFormat(date.month, 2));
-        dateString = dateString.replace('m', '' + date.month);
-        dateString = dateString.replace('yyyy', numberFormat(date.year, 4));
-        dateString = dateString.replace('yyy', numberFormat(date.year, 3));
-        dateString = dateString.replace('yy', numberFormat(date.year, 2));
-        dateString = dateString.replace('y', numberFormat(date.year, 1));
+        dateString = dateString.replace('mm', this.numberFormat(date.month, 2));
+        dateString = dateString.replace('m', date.month + '');
+        dateString = dateString.replace('yyyy', this.numberFormat(date.year, 4));
         return dateString;
     }
 
     public static formatTimeWithTimeFormat(time: TimeObject, timeFormat: string): string {
-
-        const numberFormat = (num: number, width: number): string => {
-            let _num: string = '' + num;
-            while (_num.length < width) {
-                _num = '0' + _num;
-            }
-            return _num;
-        };
-
-        let timeString = timeFormat.toLocaleLowerCase().replace('hh', numberFormat(time.hour, 2));
+        let timeString = timeFormat.toLocaleLowerCase();
+        timeString = timeString.replace('hh', this.numberFormat(time.hour, 2));
         timeString = timeString.replace('h', time.hour + '');
-        timeString = timeString.replace('mm', numberFormat(time.minute, 2));
-        timeString = timeString.replace('m', '' + time.minute);
-        timeString = timeString.replace('ss', numberFormat(time.second, 2));
-        timeString = timeString.replace('s', numberFormat(time.second, 1));
+        timeString = timeString.replace('mm', this.numberFormat(time.minute, 2));
+        timeString = timeString.replace('m', time.minute + '');
+        timeString = timeString.replace('ss', this.numberFormat(time.second, 2));
+        timeString = timeString.replace('s', this.numberFormat(time.second, 1));
         return timeString;
     }
 
@@ -101,6 +82,16 @@ export class DateTimeFormatParsers {
         };
     }
 
+    /** Adds specified(width minus length of num) amount of zeros to begin of number */
+    public static numberFormat(num: number, width: number): string {
+        let _num: string = '' + num;
+        while (_num.length < width) {
+            _num = '0' + _num;
+        }
+        return _num;
+    };
+
+    /** function that provides splitting by more than 1 separators */
     public static splitByMultipleSeparators(separators: string[], str: string): string[] {
         const FINAL_SEPARATOR = ',';
         if (!str) {
