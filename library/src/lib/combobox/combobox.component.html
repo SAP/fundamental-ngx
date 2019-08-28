@@ -1,7 +1,7 @@
 <fd-popover [isOpen]="isOpen"
             (isOpenChange)="isOpenChangeHandle($event)"
             [fillControlMode]="'at-least'"
-            [triggers]=""
+            [triggers]="triggers"
             [disabled]="disabled"
             class="fd-combobox-popover-custom"
             [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">

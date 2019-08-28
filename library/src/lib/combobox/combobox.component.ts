@@ -69,8 +69,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     glyph: string = 'navigation-down-arrow';
 
     /**
-     *  The trigger events that will open/close the popover, when .
-     *
+     *  The trigger events that will open/close the options popover, by default it is click, so if user click on
+     *  input field, the popover with options will open or close
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
     @Input()
