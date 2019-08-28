@@ -55,7 +55,7 @@ export class SideNavigationLinkDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    @HostListener('keypress', ['$event.target'])
+    @HostListener('keypress', ['$event'])
     onKeypressHandler(event) {
         if (this.hasSublist && (event.code === 'Enter' || event.code === 'Space')) {
             event.preventDefault();
