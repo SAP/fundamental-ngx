@@ -1,5 +1,5 @@
 <fd-popover [(isOpen)]="isOpen"
-            (isOpenChange)="isOpenChange.emit($event)"
+            (isOpenChange)="isOpenChangeHandle($event)"
             [options]="popperOptions"
             [fillControlMode]="fillControlMode"
             [appendTo]="appendTo"
@@ -18,7 +18,9 @@
             </button>
         </ng-container>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body
+        class="fd-select-popover-body-custom"
+        [style.maxHeight]="maxHeight || (calculatedMaxHeight + 'px')">
         <ng-content></ng-content>
     </fd-popover-body>
 </fd-popover>

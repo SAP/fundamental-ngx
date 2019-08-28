@@ -402,6 +402,7 @@ import { RadioExamplesComponent } from './component-docs/radio/examples/radio-ex
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
+import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 
 @NgModule({
     declarations: [
@@ -731,6 +732,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
+        SelectMaxHeightExampleComponent,
         InputGroupNumberFormExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
