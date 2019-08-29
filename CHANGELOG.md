@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0-rc.0"></a>
+# [0.10.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.6...v0.10.0-rc.0) (2019-08-29)
+
+
+### Features
+
+* created directives for menu addon ([#1183](https://github.com/SAP/fundamental-ngx/issues/1183)) ([8a137eb](https://github.com/SAP/fundamental-ngx/commit/8a137eb)), closes [#1132](https://github.com/SAP/fundamental-ngx/issues/1132) [#1132](https://github.com/SAP/fundamental-ngx/issues/1132) [#1132](https://github.com/SAP/fundamental-ngx/issues/1132) [#1132](https://github.com/SAP/fundamental-ngx/issues/1132)
+
+
+
 <a name="0.9.4-rc.6"></a>
 ## [0.9.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.5...v0.9.4-rc.6) (2019-08-29)
 
