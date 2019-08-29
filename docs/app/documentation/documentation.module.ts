@@ -147,6 +147,7 @@ import {
     MenuGroupExampleComponent,
     MenuSeparatorExampleComponent
 } from './component-docs/menu/examples/menu-examples.component';
+import { MenuAddonExampleComponent } from './component-docs/menu/examples/menu-addon-examples.component';
 import { ModalOpenTemplateExampleComponent } from './component-docs/modal/examples/template-as-content/modal-open-template-example.component';
 import { ModalContentComponent } from './component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from './component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
@@ -552,6 +553,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
+        MenuAddonExampleComponent,
         MenuGroupExampleComponent,
         MenuSeparatorExampleComponent,
         MenuKeyboardSupportExampleComponent,
