@@ -281,6 +281,7 @@ import { InfiniteScrollHeaderComponent } from './component-docs/infinite-scroll/
 import { InlineHelpHeaderComponent } from './component-docs/inline-help/inline-help-header/inline-help-header.component';
 import { InputGroupHeaderComponent } from './component-docs/input-group/input-group-header/input-group-header.component';
 import { InputGroupFormExampleComponent } from './component-docs/input-group/examples/input-group-form-example.component';
+import { InputDisabledFormExampleComponent } from './component-docs/input/examples/input-disabled-form-example.component';
 import { ListHeaderComponent } from './component-docs/list/list-header/list-header.component';
 import { LoadingSpinnerHeaderComponent } from './component-docs/loading-spinner-docs/loading-spinner-header/loading-spinner-header.component';
 import { MenuHeaderComponent } from './component-docs/menu/menu-header/menu-header.component';
@@ -737,7 +738,8 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
-        InputGroupNumberFormExampleComponent
+        InputGroupNumberFormExampleComponent,
+        InputDisabledFormExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

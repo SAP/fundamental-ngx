@@ -5,6 +5,8 @@ import * as formInlineHelpHtml from '!raw-loader!./examples/input-inline-help-ex
 import * as formStateHtml from '!raw-loader!./examples/input-state-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/input-form-group-example.component.html';
 import * as formGroupInputTs from '!raw-loader!./examples/input-form-group-example.component.ts';
+import * as inputDisabledFormHtml from '!raw-loader!./examples/input-disabled-form-example.component.html';
+import * as inputDisabledFormTs from '!raw-loader!./examples/input-disabled-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -41,6 +43,17 @@ export class InputDocsComponent {
         {
             language: 'typescript',
             code: formGroupInputTs,
+        }
+    ];
+
+    inputDisabledForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputDisabledFormHtml,
+        },
+        {
+            language: 'typescript',
+            code: inputDisabledFormTs,
         }
     ];
 
