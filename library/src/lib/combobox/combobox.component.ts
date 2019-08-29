@@ -136,9 +136,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     inputTextValue: string;
 
     /** @hidden */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    public focusTrap: FocusTrap;
 
-    private focusTrap: FocusTrap;
+    /** @hidden */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     onChange: any = () => { };
@@ -303,11 +304,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
 
     private setupFocusTrap(): void {
-        this.focusTrap = focusTrap(this.elRef.nativeElement, {
-            clickOutsideDeactivates: true,
-            returnFocusOnDeactivate: true,
-            escapeDeactivates: false
-        });
+        try {
+            this.focusTrap = focusTrap(this.elRef.nativeElement, {
+                clickOutsideDeactivates: true,
+                returnFocusOnDeactivate: true,
+                escapeDeactivates: false
+            });
+        } catch (e) {
+            console.warn('Unsuccessful attempting to focus trap the Combobox.');
+        }
     }
 
 }
