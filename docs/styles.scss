@@ -221,3 +221,33 @@ a:focus {
 .modal-no-backdrop-custom-shadow {
     box-shadow: 0 4px 20px 0 grey
 }
+
+
+//this is the style for the link
+// .docs-markdown-a {
+//     visibility: hidden;
+//     margin-left: -25px;
+// }
+
+// .docs-header-link:hover .docs-markdown-a {
+//     visibility: visible;
+// }
+
+
+.docs-header-link {
+    position: relative;
+    display: inline-block;
+}
+
+.docs-header-link .docs-markdown-a {
+    visibility: hidden;
+    text-align: center;
+    text-decoration: none;
+    margin-left: -25px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.docs-header-link:hover .docs-markdown-a {
+    visibility: visible;
+}
