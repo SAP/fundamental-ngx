@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.4-rc.6"></a>
+## [0.9.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.5...v0.9.4-rc.6) (2019-08-29)
+
+
+### Bug Fixes
+
+* Add focus trap to combobox ([#1190](https://github.com/SAP/fundamental-ngx/issues/1190)) ([26c9ccc](https://github.com/SAP/fundamental-ngx/commit/26c9ccc))
+
+
+
 <a name="0.9.4-rc.5"></a>
 ## [0.9.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.4...v0.9.4-rc.5) (2019-08-29)
 
