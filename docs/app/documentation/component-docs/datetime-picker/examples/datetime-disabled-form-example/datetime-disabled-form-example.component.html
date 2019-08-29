@@ -1,0 +1,7 @@
+<form [formGroup]="disabledCustomForm">
+    <fd-datetime-picker formControlName="date"></fd-datetime-picker>
+</form>
+<br/>
+Disabled: {{disabledCustomForm.controls.date.disabled}}<br/>
+
+Selected Date: {{ disabledCustomForm.controls.date.value ? disabledCustomForm.controls.date.value.toLocaleDateString() : 'null' }}

@@ -18,6 +18,8 @@ import * as dateTimeDisabledHtml from '!raw-loader!./examples/datetime-disabled-
 import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.ts';
 import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
 import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.ts';
+import * as dateTimeDisabledFormHtml from '!raw-loader!./examples/datetime-disabled-form-example/datetime-disabled-form-example.component.html';
+import * as dateTimeDisabledFormTs from '!raw-loader!./examples/datetime-disabled-form-example/datetime-disabled-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -90,6 +92,17 @@ export class DatetimePickerDocsComponent {
         {
             language: 'typescript',
             code: dateTimeFormTs
+        }
+    ];
+
+    datetimeDisabledForm: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dateTimeDisabledFormHtml
+        },
+        {
+            language: 'typescript',
+            code: dateTimeDisabledFormTs
         }
     ];
 

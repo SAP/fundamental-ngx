@@ -347,6 +347,7 @@ import {
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
+import { DatetimeDisabledFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-form-example/datetime-disabled-form-example.component';
 import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
 import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
 import {
@@ -513,6 +514,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         DatetimeFormExampleComponent,
         DatetimePickerAllowNullExampleComponent,
         DatetimeDisabledExampleComponent,
+        DatetimeDisabledFormExampleComponent,
         DropdownContextualMenuExampleComponent,
         DropdownDefaultExampleComponent,
         DropdownIconsExampleComponent,
