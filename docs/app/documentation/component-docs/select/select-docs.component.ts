@@ -18,7 +18,7 @@ import * as selectFormSrcT from '!raw-loader!./examples/select-forms/select-form
 import * as selectViewValueH from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.html';
 import * as selectViewValueT from '!raw-loader!./examples/select-view-value-example/select-view-value-example.component.ts';
 
-import * as selectMaxHeightH from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
+import * as selectMaxHeightH from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
