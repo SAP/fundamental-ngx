@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.4-rc.5"></a>
+## [0.9.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.4...v0.9.4-rc.5) (2019-08-29)
+
+
+### Bug Fixes
+
+* added optional separator line to menu list items ([#1180](https://github.com/SAP/fundamental-ngx/issues/1180)) ([d16ed29](https://github.com/SAP/fundamental-ngx/commit/d16ed29))
+
+
+
 <a name="0.9.4-rc.4"></a>
 ## [0.9.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.3...v0.9.4-rc.4) (2019-08-28)
 
