@@ -1,12 +1,10 @@
 import { Directive, HostBinding } from '@angular/core';
 
 /**
- * The directive that represents a listing structure of the menu.
+ * The directive for menu item addon(for icons).
  */
 @Directive({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-item-addon]'
+    selector: '[fd-menu-item-addon], [fdMenuItemAddon]'
 })
 export class MenuItemAddonDirective {
     /** @hidden */
