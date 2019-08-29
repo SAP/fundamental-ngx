@@ -1,12 +1,39 @@
 <fd-popover>
     <fd-dropdown-control [glyph]="'filter'">Dropdown</fd-dropdown-control>
-    <fd-popover-body *ngIf="menu1 && menu1.length">
+    <fd-popover-body *ngIf="values && values.length">
         <fd-menu>
             <ul fd-menu-list>
-                <li *ngFor="let option of menu1">
-                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                <li *ngFor="let option of values">
+                    <fd-icon size="l" [glyph]="option.icon" class="fd-template-icon"></fd-icon>
+                    <a fd-menu-item>{{option.name}}</a>
                 </li>
             </ul>
         </fd-menu>
     </fd-popover-body>
 </fd-popover>
+
+<!-- Additional styles -->
+<style>
+    .fd-template-container-div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .fd-template-container-div:hover {
+        background-color: var(--fd-color-background-hover);
+    }
+
+    .fd-menu__item {
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px;
+        background-color: var(--fd-menu-item-background-color);
+        color: var(--fd-menu-item-color);
+        font-weight: 400;
+    }
+
+    .fd-template-icon {
+        padding-left: 10px;
+    }
+</style>

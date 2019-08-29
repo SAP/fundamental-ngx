@@ -7,15 +7,15 @@ import { Component } from '@angular/core';
 export class DropdownDefaultExampleComponent {
 
     menu1 = [
-        {text: 'Option 1', url: '#'},
-        {text: 'Option 2', url: '#'},
-        {text: 'Option 3', url: '#'}
+        { text: 'Option 1', url: '#' },
+        { text: 'Option 2', url: '#' },
+        { text: 'Option 3', url: '#' }
     ];
 
     menu2 = [
-        {text: 'Option 3', url: '#'},
-        {text: 'Option 4', url: '#'},
-        {text: 'Option 5', url: '#'}
+        { text: 'Option 3', url: '#' },
+        { text: 'Option 4', url: '#' },
+        { text: 'Option 5', url: '#' }
     ];
 
 }
@@ -27,9 +27,9 @@ export class DropdownDefaultExampleComponent {
 export class DropdownStateExampleComponent {
 
     menu1 = [
-        {text: 'Option 1', url: '#'},
-        {text: 'Option 2', url: '#'},
-        {text: 'Option 3', url: '#'}
+        { text: 'Option 1', url: '#' },
+        { text: 'Option 2', url: '#' },
+        { text: 'Option 3', url: '#' }
     ];
 
 }
@@ -40,10 +40,13 @@ export class DropdownStateExampleComponent {
 })
 export class DropdownIconsExampleComponent {
 
-    menu1 = [
-        {text: 'Option 1', url: '#'},
-        {text: 'Option 2', url: '#'},
-        {text: 'Option 3', url: '#'}
+    values = [
+        { name: 'Photo Voltaic', icon: 'photo-voltaic' },
+        { name: 'Settings', icon: 'settings' },
+        { name: 'Database', icon: 'database' },
+        { name: 'Passenger Train', icon: 'passenger-train' },
+        { name: 'World', icon: 'world' },
+        { name: 'Shield', icon: 'shield' }
     ];
 
 }
@@ -55,9 +58,9 @@ export class DropdownIconsExampleComponent {
 export class DropdownContextualMenuExampleComponent {
 
     menu1 = [
-        {text: 'Option 1', url: '#'},
-        {text: 'Option 2', url: '#'},
-        {text: 'Option 3', url: '#'}
+        { text: 'Option 1', url: '#' },
+        { text: 'Option 2', url: '#' },
+        { text: 'Option 3', url: '#' }
     ];
 
 }
@@ -69,14 +72,14 @@ export class DropdownContextualMenuExampleComponent {
 export class DropdownToolbarExampleComponent {
 
     menu1 = [
-        {text: 'Option 1', url: '#'},
-        {text: 'Option 2', url: '#'},
-        {text: 'Option 3', url: '#'}
+        { text: 'Option 1', url: '#' },
+        { text: 'Option 2', url: '#' },
+        { text: 'Option 3', url: '#' }
     ];
 
     menu2 = [
-        {text: 'Option 3', url: '#'},
-        {text: 'Option 4', url: '#'},
-        {text: 'Option 5', url: '#'}
+        { text: 'Option 3', url: '#' },
+        { text: 'Option 4', url: '#' },
+        { text: 'Option 5', url: '#' }
     ];
 }
