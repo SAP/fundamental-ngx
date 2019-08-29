@@ -7,14 +7,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CheckboxFormGroupExampleComponent {
     customForm = new FormGroup({
-        firstOption: new FormControl(true),
-        secondOption: new FormControl(false),
-        thirdOption: new FormControl(false)
-    });
-
-    disabledCustomForm = new FormGroup({
-        disabledFirstOption: new FormControl({value: false, disabled: true}, Validators.required),
-        disabledSecondOption: new FormControl({value: false, disabled: true}, Validators.required),
-        disabledThirdOption: new FormControl({value: true, disabled: true }, Validators.required),
+        firstOption: new FormControl({value: true, disabled: false}, Validators.required),
+        secondOption: new FormControl({value: false, disabled: false}, Validators.required),
+        thirdOption: new FormControl({value: false, disabled: true }, Validators.required)
     });
 }

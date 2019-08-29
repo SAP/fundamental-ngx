@@ -25,37 +25,6 @@
     </div>
 </form>
 <br>
-Option 1 Value: {{ customForm.controls.firstOption.value }} <br>
-Option 2 Value: {{ customForm.controls.secondOption.value }} <br>
-Option 3 Value: {{ customForm.controls.thirdOption.value }} <br>
-<br>
-<p>Checkboxes disabled</p>
-<form [formGroup]="disabledCustomForm">
-    <div fd-form-set>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="checkbox-16">
-                <input fd-form-control formControlName="disabledFirstOption" type="checkbox" id="checkbox-16"
-                       name="checkbox-name-6">
-                Option 1
-            </label>
-        </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="checkbox-17">
-                <input fd-form-control formControlName="disabledSecondOption" type="checkbox" id="checkbox-17"
-                       name="checkbox-name-6">
-                Option 2
-            </label>
-        </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="checkbox-18">
-                <input fd-form-control formControlName="disabledThirdOption" type="checkbox" id="checkbox-18"
-                       name="checkbox-name-6">
-                Option 3
-            </label>
-        </div>
-    </div>
-</form>
-<br>
-Option 1 Value: {{ disabledCustomForm.controls.disabledFirstOption.value }} Disabled: {{ disabledCustomForm.controls.disabledFirstOption.disabled }} <br>
-Option 2 Value: {{ disabledCustomForm.controls.disabledSecondOption.value }} Disabled: {{ disabledCustomForm.controls.disabledSecondOption.disabled }} <br>
-Option 3 Value: {{ disabledCustomForm.controls.disabledThirdOption.value }} Disabled: {{ disabledCustomForm.controls.disabledThirdOption.disabled }}
+Option 1 Value: {{ customForm.controls.firstOption.value }} Disabled: {{ customForm.controls.firstOption.disabled }} <br>
+Option 2 Value: {{ customForm.controls.secondOption.value }} Disabled: {{ customForm.controls.secondOption.disabled }} <br>
+Option 3 Value: {{ customForm.controls.thirdOption.value }} Disabled: {{ customForm.controls.thirdOption.disabled }}
