@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0-rc.1"></a>
+# [0.10.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.0...v0.10.0-rc.1) (2019-08-29)
+
+
+### Bug Fixes
+
+* Protractor no longer waits for Alert timeout to be completed ([#1194](https://github.com/SAP/fundamental-ngx/issues/1194)) ([a7d58c8](https://github.com/SAP/fundamental-ngx/commit/a7d58c8))
+
+
+
 <a name="0.10.0-rc.0"></a>
 # [0.10.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.9.4-rc.6...v0.10.0-rc.0) (2019-08-29)
 
