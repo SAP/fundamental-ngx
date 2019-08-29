@@ -9,6 +9,7 @@ import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-ex
 import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
 import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disabled-example.component.ts';
+import * as datePickerDisabledFormSrc from '!raw-loader!./examples/date-picker-disabled-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -62,4 +63,8 @@ export class DatePickerDocsComponent {
         code: datePickerDisabledSrc
     }];
 
+    datePickerDisabledForm: ExampleFile[] =[{
+        language: 'typescript',
+        code: datePickerDisabledFormSrc
+    }];
 }
