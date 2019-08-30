@@ -10,4 +10,8 @@ export class InputFormGroupExampleComponent {
     customForm = new FormGroup({
         inputControl: new FormControl('', Validators.required)
     });
+
+    disabledCustomForm = new FormGroup({
+        inputControl: new FormControl({value: '', disabled: true}, Validators.required)
+    });
 }

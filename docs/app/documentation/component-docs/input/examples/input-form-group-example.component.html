@@ -14,3 +14,22 @@
 </form>
 
 Input Value: {{ customForm.controls.inputControl.value }}
+<br/><br/>
+<p>Disabled State</p>
+<form [formGroup]="disabledCustomForm">
+    <div fd-form-set>
+        <div fd-form-item>
+            <label fd-form-label for="form-input-2">Default Input:</label>
+            <input
+                formControlName="inputControl"
+                fd-form-control
+                type="text"
+                id="form-input-2"
+                placeholder="Field placeholder text"
+            />
+        </div>
+    </div>
+</form>
+
+Input Value: {{ disabledCustomForm.controls.inputControl.value }} <br/>
+Disabled: {{ disabledCustomForm.controls.inputControl.disabled }}
