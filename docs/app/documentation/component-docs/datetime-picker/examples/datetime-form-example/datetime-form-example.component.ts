@@ -10,4 +10,8 @@ export class DatetimeFormExampleComponent {
     customForm = new FormGroup({
         date: new FormControl(FdDatetime.getToday())
     });
+
+    disabledCustomForm = new FormGroup({
+        date: new FormControl({value: FdDatetime.getToday(), disabled: true})
+    });
 }

@@ -7,3 +7,15 @@ Dirty: {{customForm.controls.date.dirty}}<br/>
 Valid: {{customForm.controls.date.valid}}<br/>
 
 Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toLocaleDateString() : 'null' }}
+<br/><br/>
+<p>Disabled State</p>
+<form [formGroup]="disabledCustomForm">
+    <fd-datetime-picker formControlName="date"></fd-datetime-picker>
+</form>
+<br/>
+Touched: {{disabledCustomForm.controls.date.touched}}<br/>
+Dirty: {{disabledCustomForm.controls.date.dirty}}<br/>
+Valid: {{disabledCustomForm.controls.date.valid}}<br/>
+Disabled: {{disabledCustomForm.controls.date.disabled}}<br/>
+
+Selected Date: {{ disabledCustomForm.controls.date.value ? disabledCustomForm.controls.date.value.toLocaleDateString() : 'null' }}
