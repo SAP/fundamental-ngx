@@ -7,3 +7,15 @@ Selected Time: <span *ngIf="customForm.controls.time.value">
     {{ customForm.controls.time.value.minute }}m
     {{ customForm.controls.time.value.second }}s
 </span>
+<br/><br/>
+
+<form [formGroup]="disabledCustomForm">
+    <fd-time-picker formControlName="time"></fd-time-picker>
+</form>
+
+Selected Time: <span *ngIf="disabledCustomForm.controls.time.value">
+    {{ disabledCustomForm.controls.time.value.hour }}h
+    {{ disabledCustomForm.controls.time.value.minute }}m
+    {{ disabledCustomForm.controls.time.value.second }}s
+</span><br />
+Disabled: {{ disabledCustomForm.controls.time.disabled }}

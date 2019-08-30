@@ -9,4 +9,8 @@ export class TimePickerFormExampleComponent {
     customForm = new FormGroup({
         time: new FormControl('')
     });
-};
+
+    disabledCustomForm = new FormGroup({
+        time: new FormControl({value: '', disabled: true})
+    });
+}
