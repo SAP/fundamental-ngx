@@ -26,6 +26,18 @@
 </component-example>
 <code-example [exampleFiles]="selectViewValue"></code-example>
 
+
+<separator></separator>
+<h2>Select Max Height</h2>
+<description>
+    The select component allows to define <code>[maxHeight]</code>. It can be useful when there are a lot of options,
+    the select body is be scrollable. By default maximum height of select body is 45% of browsers window inner height.
+</description>
+<component-example [name]="'ex4'">
+    <fd-select-max-height-example></fd-select-max-height-example>
+</component-example>
+<code-example [exampleFiles]="selectMaxHeight"></code-example>
+
 <separator></separator>
 <h2>Nested Options</h2>
 <description>
@@ -35,7 +47,7 @@
 
     Note that accessibility generally requires some text-content to be present in the actual option element.
 </description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-select-nested-options></fd-select-nested-options>
 </component-example>
 <code-example [exampleFiles]="selectNested"></code-example>
@@ -46,7 +58,7 @@
     The default trigger can be replaced by providing a template reference to the appropriate input.
     Note that the top-level element must be tab-indexed for the keyboard support to function correctly.
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-select-custom-trigger></fd-select-custom-trigger>
 </component-example>
 <code-example [exampleFiles]="customTrigger"></code-example>
@@ -59,7 +71,7 @@
     will become undefined. This was implemented to prevent a user from keeping the active value of a previously
     removed option.
 </description>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex7'">
     <fd-select-adding-example></fd-select-adding-example>
 </component-example>
 <code-example [exampleFiles]="selectAdding"></code-example>
@@ -69,7 +81,7 @@
 <description>
     The select component can be used inside Angular reactive forms.
 </description>
-<component-example [name]="'ex7'">
+<component-example [name]="'ex8'">
     <fd-select-forms></fd-select-forms>
 </component-example>
 <code-example [exampleFiles]="selectForm"></code-example>
