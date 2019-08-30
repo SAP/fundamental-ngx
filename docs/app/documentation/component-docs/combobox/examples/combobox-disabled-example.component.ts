@@ -8,6 +8,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ComboboxDisabledExampleComponent {
 
     customForm = new FormGroup({
+        comboControl: new FormControl( 'Nancy', Validators.required)
+    });
+
+    disabledCustomForm = new FormGroup({
         comboControl: new FormControl({ value: 'Nancy', disabled: true }, Validators.required)
     });
 

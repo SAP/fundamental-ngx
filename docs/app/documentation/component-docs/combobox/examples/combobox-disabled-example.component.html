@@ -5,9 +5,21 @@
             <fd-combobox
                 formControlName="comboControl"
                 fd-form-control
-                id="form-control-1"></fd-combobox>
+                id="form-combo-1"></fd-combobox>
+        </div>
+    </div>
+</form>
+<br/>
+<form [formGroup]="disabledCustomForm">
+    <div fd-form-set>
+        <div fd-form-item>
+            <label fd-form-label for="form-combo-2">Selected Value:</label>
+            <fd-combobox
+                formControlName="comboControl"
+                fd-form-control
+                id="form-combo-2"></fd-combobox>
         </div>
     </div>
 </form>
 
-Disabled: {{ customForm.controls.comboControl.disabled }}
+Disabled: {{ disabledCustomForm.controls.comboControl.disabled }}
