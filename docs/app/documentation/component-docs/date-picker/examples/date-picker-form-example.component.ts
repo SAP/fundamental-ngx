@@ -15,8 +15,7 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
 
         Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
         <br/><br/>
-
-        <p>Disabled State</p>
+        
         <form [formGroup]="disabledCustomForm">
             <fd-date-picker formControlName="date"></fd-date-picker>
         </form>

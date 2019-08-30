@@ -8,7 +8,6 @@ Valid: {{customForm.controls.date.valid}}<br/>
 
 Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toLocaleDateString() : 'null' }}
 <br/><br/>
-<p>Disabled State</p>
 <form [formGroup]="disabledCustomForm">
     <fd-datetime-picker formControlName="date"></fd-datetime-picker>
 </form>

@@ -8,7 +8,6 @@ Selected Values: <span *ngIf="customForm.controls.selectedValues.value">
     {{ customForm.controls.selectedValues.value | json }}
 </span>
 <br/><br/>
-<p>Disabled State</p>
 <form [formGroup]="disabledCustomForm">
     <fd-multi-input formControlName="selectedValues" [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
                     [placeholder]="'Search Here...'">
