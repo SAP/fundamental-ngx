@@ -10,4 +10,8 @@ export class SelectNativeFormGroupExampleComponent {
     customForm = new FormGroup({
         selectControl: new FormControl('', Validators.required)
     });
+
+    disabledCustomForm = new FormGroup({
+        selectControl: new FormControl({value: '', disabled: true}, Validators.required)
+    });
 }
