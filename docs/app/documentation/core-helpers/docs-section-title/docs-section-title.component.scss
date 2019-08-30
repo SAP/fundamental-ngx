@@ -1,0 +1,17 @@
+.docs-header-link {
+    position: relative;
+    display: inline-block;
+}
+
+.docs-header-link .docs-markdown-a {
+    visibility: hidden;
+    text-align: center;
+    text-decoration: none;
+    margin-left: -25px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.docs-header-link:hover .docs-markdown-a {
+    visibility: visible;
+}
