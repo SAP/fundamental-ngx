@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalHeaderComponent } from './modal-header.component';
-import { ModalRef } from '../modal-utils/modal-ref';
 import { ModalModule } from '../modal.module';
+import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
 
 describe('ModalHeaderComponent', () => {
     let component: ModalHeaderComponent;
     let fixture: ComponentFixture<ModalHeaderComponent>;
-    const modalRef = jasmine.createSpyObj('ModalRef', ['dismiss']);
+    const modalRef = jasmine.createSpyObj('PopupRef', ['dismiss']);
 
     beforeEach(async(() => {
 
         TestBed.configureTestingModule({
             imports: [ModalModule],
             providers: [
-                { provide: ModalRef, useValue: modalRef },
+                { provide: DynamicComponentRef, useValue: modalRef },
             ]
         }).compileComponents();
     }));

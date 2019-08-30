@@ -1,8 +1,9 @@
-
 /**
  * Configuration for opening an alert with the AlertService.
  */
-export class AlertConfig {
+import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
+
+export class AlertConfig implements DynamicComponentConfig {
 
     /** Whether the alert is dismissible. */
     dismissible?: boolean = true;
@@ -33,4 +34,7 @@ export class AlertConfig {
 
     /** Aria label for the alert component element. */
     ariaLabel?: string = null;
+
+    /** The container that the Alert is appended to. By default, it is appended to the body. */
+    container?: HTMLElement | 'body' = 'body';
 }

@@ -17,7 +17,6 @@ export const API_FILES = {
     alert: [
         'AlertComponent',
         'AlertConfig',
-        'AlertRef',
         'AlertService'
     ],
     badgeLabel: [
@@ -116,7 +115,6 @@ export const API_FILES = {
         'MenuKeyboardService'
     ],
     modal: [
-        'ModalRef',
         'ModalService',
         'ModalTitleDirective',
         'ModalCloseButtonDirective',

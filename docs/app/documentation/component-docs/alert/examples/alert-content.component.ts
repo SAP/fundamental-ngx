@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertRef } from '../../../../../../library/src/lib/alert/alert-utils/alert-ref';
+import { DynamicComponentRef } from '../../../../../../library/src/lib/utils/dynamic-component/dynamic-component-ref';
 
 @Component({
     selector: 'fd-alert-content',
@@ -10,5 +10,5 @@ import { AlertRef } from '../../../../../../library/src/lib/alert/alert-utils/al
     `
 })
 export class AlertContentComponent {
-    constructor(public ref: AlertRef) {}
+    constructor(public ref: DynamicComponentRef) {}
 }

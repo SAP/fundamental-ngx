@@ -42,7 +42,7 @@ export class AlertComponentAsContentExampleComponent {
             }
         });
 
-        alertRef.afterDismissed.subscribe((data) => {
+        alertRef.afterClosed.subscribe((data) => {
             // Do something after closing, receive data
             // You can also manually close this alert using alertRef.dismiss()
         });

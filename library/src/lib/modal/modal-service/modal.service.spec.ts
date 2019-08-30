@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ModalService } from './modal.service';
 import { ModalModule } from '../modal.module';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ModalRef } from '../modal-utils/modal-ref';
+import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
 
 @Component({
     template: `        
@@ -45,7 +45,7 @@ describe('ModalService', () => {
         expect(service['modals'].length).toBe(0);
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const modalRef: ModalRef = service.open(fixtureElTmp);
+        const modalRef: DynamicComponentRef = service.open(fixtureElTmp);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -60,7 +60,7 @@ describe('ModalService', () => {
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent);
+        const modalRef: DynamicComponentRef = service.open(TemplateTestComponent);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -75,7 +75,7 @@ describe('ModalService', () => {
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent, {hasBackdrop: false});
+        const modalRef: DynamicComponentRef = service.open(TemplateTestComponent, {hasBackdrop: false});
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -128,7 +128,7 @@ describe('ModalService', () => {
     it('should close modal on backdrop click', fakeAsync(() => {
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: true});
+        const modalRef: DynamicComponentRef = service.open(TemplateTestComponent, {backdropClickCloseable: true});
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -140,7 +140,7 @@ describe('ModalService', () => {
 
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
 
-        const modalRef2: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: false});
+        const modalRef2: DynamicComponentRef = service.open(TemplateTestComponent, {backdropClickCloseable: false});
         service['modals'][0].backdropRef.location.nativeElement.click();
         tick();
         expect((service as any).destroyModalComponent).not.toHaveBeenCalled();

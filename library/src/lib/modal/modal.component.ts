@@ -16,10 +16,10 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ModalRef } from './modal-utils/modal-ref';
 import { modalFadeNgIf } from './modal-utils/modal-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import focusTrap from 'focus-trap';
+import { DynamicComponentRef } from '../utils/dynamic-component/dynamic-component-ref';
 
 @Component({
     selector: 'fd-modal',
@@ -74,7 +74,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
-                @Optional() private modalRef: ModalRef) {
+                @Optional() private modalRef: DynamicComponentRef) {
         super(elRef);
     }
 
@@ -119,12 +119,14 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     }
 
     private loadFromComponent(content: Type<any>): void {
+        console.log('component');
         this.containerRef.clear();
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
 
     private loadFromTemplate(content: TemplateRef<any>): void {
+        console.log('template');
         this.containerRef.clear();
         const context = {
             $implicit: this.modalRef

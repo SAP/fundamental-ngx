@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalService } from '../../../../../../../library/src/lib/modal/modal-service/modal.service';
 import { ModalInModalSecondComponent } from './modal-in-modal-second.component';
-import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
+import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/dynamic-component/dynamic-component-ref';
 
 @Component({
     selector: 'fd-modal-in-modal',
@@ -20,7 +20,7 @@ import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils
 })
 export class ModalInModalComponent {
 
-    constructor(public modalService: ModalService, public modalRef: ModalRef)  {}
+    constructor(public modalService: ModalService, public modalRef: DynamicComponentRef)  {}
 
     openModal() {
         this.modalService.open(ModalInModalSecondComponent, {

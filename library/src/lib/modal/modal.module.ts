@@ -12,6 +12,7 @@ import { ModalService } from './modal-service/modal.service';
 import { ModalBackdrop } from './modal-utils/modal-backdrop';
 import { ModalContainer } from './modal-utils/modal-container';
 import { ModalCloseButtonDirective, ModalTitleDirective } from './modal-utils/modal-directives';
+import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,6 @@ import { ModalCloseButtonDirective, ModalTitleDirective } from './modal-utils/mo
         ModalBackdrop,
         ModalContainer
     ],
-    providers: [ModalService]
+    providers: [ModalService, DynamicComponentService]
 })
 export class ModalModule {}

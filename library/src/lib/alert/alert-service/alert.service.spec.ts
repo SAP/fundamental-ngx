@@ -1,11 +1,11 @@
 import { AlertService } from './alert.service';
 import { TestBed } from '@angular/core/testing';
 import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
-import { AlertRef } from '../alert-utils/alert-ref';
 import { AlertComponent } from '../alert.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
+import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
 
 @Component({
     template: `        
@@ -63,12 +63,12 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open('teststring', {dismissible: false, duration: -1});
+        const alertRef: DynamicComponentRef = service.open('teststring', {dismissible: false, duration: -1});
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
-        alertRef.dismiss();
+        alertRef.close();
         expect((service as any).destroyAlertContainer).toHaveBeenCalled();
         expect((service as any).destroyAlertComponent).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(0);
@@ -84,12 +84,12 @@ describe('AlertService', () => {
         expect(service['alertContainerRef']).toBeFalsy();
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const alertRef: AlertRef = service.open(fixtureElTmp, {dismissible: false, duration: -1});
+        const alertRef: DynamicComponentRef = service.open(fixtureElTmp, {dismissible: false, duration: -1});
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
-        alertRef.dismiss();
+        alertRef.close();
         expect((service as any).destroyAlertContainer).toHaveBeenCalled();
         expect((service as any).destroyAlertComponent).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(0);
@@ -104,12 +104,12 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open(TemplateTestComponent, {dismissible: false, duration: -1});
+        const alertRef: DynamicComponentRef = service.open(TemplateTestComponent, {dismissible: false, duration: -1});
         expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
-        alertRef.dismiss();
+        alertRef.close();
         expect((service as any).destroyAlertContainer).toHaveBeenCalled();
         expect((service as any).destroyAlertComponent).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(0);
