@@ -3,10 +3,19 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fd-multi-input-form-example',
-    templateUrl: './multi-input-form-example.component.html'
+    templateUrl: './multi-input-form-example.component.html',
+    styles: [`
+        p {
+            font-weight: bold;
+        }
+    `]
 })
 export class MultiInputFormExampleComponent {
     customForm = new FormGroup({
         selectedValues: new FormControl('')
     });
-};
+
+    disabledCustomForm = new FormGroup({
+        selectedValues: new FormControl({value: '', disabled: true})
+    });
+}
