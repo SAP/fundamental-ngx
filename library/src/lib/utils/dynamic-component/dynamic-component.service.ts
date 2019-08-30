@@ -8,13 +8,7 @@ import {
     Type, TemplateRef
 } from '@angular/core';
 import { DynamicComponentInjector } from './dynamic-component-injector';
-import { DynamicComponentRef } from './dynamic-component-ref';
 import { DynamicComponentConfig } from './dynamic-component-config';
-
-export interface DynamicComponentResult<T> {
-    component: ComponentRef<T>,
-    dynamicComponentReference: DynamicComponentRef
-}
 
 /**
  * Service used to dynamically generate a modal.
@@ -35,14 +29,15 @@ export class DynamicComponentService {
     public createDynamicComponent<T>(
         contentType: TemplateRef<any> | Type<any> | string,
         componentType: Type<any>,
-        config: DynamicComponentConfig
-    ): DynamicComponentResult<T> {
+        config: DynamicComponentConfig,
+        services?: any[]
+    ): ComponentRef<T> {
 
-        // Setup injectable data
+        // Dynamically inject services to component
         const configMap = new WeakMap();
-        const popupRef = new DynamicComponentRef();
-        popupRef.data = config.data;
-        configMap.set(DynamicComponentRef, popupRef);
+        if (services) {
+            services.forEach(service => configMap.set(service.constructor, service))
+        }
 
         // Prepare component
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
@@ -66,7 +61,7 @@ export class DynamicComponentService {
             document.body.appendChild(componentEl);
         }
 
-        return {component: componentRef, dynamicComponentReference: popupRef};
+        return componentRef;
     }
 
     /** Function that destroys dynamic component */

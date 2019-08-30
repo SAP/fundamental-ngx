@@ -15,7 +15,8 @@ export class ModalPositionExampleComponent implements OnInit {
 
   openModal(template): void {
       this.modalService.open(template, {
-          position: {bottom: '100px', right: '100px'}
+          position: {bottom: '100px', right: '100px'},
+          data: 'asdasdasdasdasdasdsadasdasd'
       });
   }
 

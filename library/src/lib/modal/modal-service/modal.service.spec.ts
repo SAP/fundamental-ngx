@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ModalService } from './modal.service';
 import { ModalModule } from '../modal.module';
 import { TestBed } from '@angular/core/testing';
-import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { ModalRef } from '../modal-utils/modal-ref';
 
 @Component({
     template: `        
@@ -46,7 +46,7 @@ describe('ModalService', () => {
         expect(service['modals'].length).toBe(0);
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const modalRef: DynamicComponentRef = service.open(fixtureElTmp);
+        const modalRef: ModalRef = service.open(fixtureElTmp);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -61,7 +61,7 @@ describe('ModalService', () => {
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: DynamicComponentRef = service.open(TemplateTestComponent);
+        const modalRef: ModalRef = service.open(TemplateTestComponent);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -76,7 +76,7 @@ describe('ModalService', () => {
         spyOn<any>(service, 'destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: DynamicComponentRef = service.open(TemplateTestComponent, {hasBackdrop: false});
+        const modalRef: ModalRef = service.open(TemplateTestComponent, {hasBackdrop: false});
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();

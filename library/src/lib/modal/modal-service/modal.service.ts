@@ -9,8 +9,8 @@ import { ModalBackdrop } from '../modal-utils/modal-backdrop';
 import { ModalContainer } from '../modal-utils/modal-container';
 import { ModalConfig } from '../modal-utils/modal-config';
 import { ModalPosition } from '../modal-utils/modal-position';
-import { DynamicComponentResult, DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
+import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { ModalRef } from '../modal-utils/modal-ref';
 
 /**
  * Service used to dynamically generate a modal.
@@ -50,14 +50,16 @@ export class ModalService {
      * @param contentType Content of the modal component.
      * @param modalConfig Configuration of the modal component.
      */
-    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: ModalConfig = new ModalConfig()): DynamicComponentRef {
+    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: ModalConfig = new ModalConfig()): ModalRef {
 
         // Get default values from model
         modalConfig = Object.assign(new ModalConfig(), modalConfig);
+        const service: ModalRef = new ModalRef();
+        service.data = modalConfig.data;
 
         // Create Container
         const container: ComponentRef<ModalContainer> = this.dynamicComponentService.createDynamicComponent
-            <ModalContainer>(contentType, ModalContainer, modalConfig).component
+            < ModalContainer > (contentType, ModalContainer, modalConfig)
         ;
 
         // Define Container to put backdrop and component to container
@@ -67,37 +69,42 @@ export class ModalService {
         let backdrop: ComponentRef<ModalBackdrop>;
         if (modalConfig.hasBackdrop) {
             backdrop = this.dynamicComponentService.createDynamicComponent<ModalBackdrop>
-                (contentType, ModalBackdrop, modalConfig).component
+                (contentType, ModalBackdrop, modalConfig, [service])
             ;
         }
 
         // Create Component
-        const component: DynamicComponentResult<ModalComponent> = this.dynamicComponentService.createDynamicComponent
-            <ModalComponent>(contentType, ModalComponent, modalConfig)
+        const component = this.dynamicComponentService.createDynamicComponent
+            < ModalComponent > (contentType, ModalComponent, modalConfig, [service])
         ;
 
         // Sizing
-        this.setModalSize(component.component, modalConfig);
+        this.setModalSize(component, modalConfig);
 
         // Positioning
-        this.setModalPosition(component.component, modalConfig.position);
+        this.setModalPosition(component, modalConfig.position);
 
         this.modals.push({
-            modalRef: component.component,
+            modalRef: component,
             containerRef: container,
             backdropRef: backdrop
         });
 
-        console.log(component.dynamicComponentReference);
-        const refSub = component.dynamicComponentReference.afterClosed.subscribe(() => {
-            this.destroyModalComponent(component.component);
+        const defaultBehaviourOnClose = () => {
+            this.destroyModalComponent(component);
             refSub.unsubscribe();
-        }, () => {
-            this.destroyModalComponent(component.component);
-            refSub.unsubscribe();
-        });
+        };
 
-        return component.dynamicComponentReference;
+
+        const refSub = service.afterClosed
+            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+
+        if (backdrop) {
+            refSub.add(service.afterClosed
+                .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose));
+        }
+
+        return service;
     }
 
     private destroyModalComponent(modal: ComponentRef<ModalComponent>): void {

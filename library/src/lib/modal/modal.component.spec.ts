@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import createSpyObj = jasmine.createSpyObj;
-import { DynamicComponentRef } from '../utils/dynamic-component/dynamic-component-ref';
+import { ModalRef } from '../utils/dynamic-component/dynamic-component-ref';
 
 @Component({
     template: `        
@@ -39,7 +39,7 @@ describe('ModalComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            providers: [{provide: DynamicComponentRef, useValue: modalRef}]
+            providers: [{provide: ModalRef, useValue: modalRef}]
         }).compileComponents();
     }));
 

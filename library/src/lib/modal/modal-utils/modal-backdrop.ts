@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostBinding, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 import { modalFadeNgIf } from './modal-animations';
-import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
+import { ModalRef } from './modal-ref';
 
 @Component({
     selector: 'fd-modal-overlay',
@@ -24,7 +24,7 @@ export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
     @HostBinding('class.fd-overlay--modal') overlayModal = true;
 
     constructor(private elRef: ElementRef,
-                private modalRef: DynamicComponentRef) {
+                private modalRef: ModalRef) {
         super(elRef);
     }
 
@@ -40,7 +40,6 @@ export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
 
     @HostListener('click')
     closeModal(): void {
-        console.log(this.backdropClickCloseable);
         if (this.backdropClickCloseable) {
             this.modalRef.dismiss('backdrop');
         }
