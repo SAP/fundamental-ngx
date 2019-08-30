@@ -12,4 +12,8 @@ export class SelectFormsComponent {
         selectControl: new FormControl('pineapple', Validators.required)
     });
 
+    disabledCustomForm = new FormGroup({
+        selectControl: new FormControl({value: 'pineapple', disabled: true}, Validators.required)
+    });
+
 }
