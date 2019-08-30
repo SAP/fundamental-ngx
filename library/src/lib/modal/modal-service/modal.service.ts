@@ -88,6 +88,7 @@ export class ModalService {
             backdropRef: backdrop
         });
 
+        console.log(component.dynamicComponentReference);
         const refSub = component.dynamicComponentReference.afterClosed.subscribe(() => {
             this.destroyModalComponent(component.component);
             refSub.unsubscribe();
@@ -100,6 +101,7 @@ export class ModalService {
     }
 
     private destroyModalComponent(modal: ComponentRef<ModalComponent>): void {
+
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
         const indexOf = this.modals.indexOf(arrayRef);
         this.dynamicComponentService.destroyComponent(arrayRef.modalRef);
@@ -114,6 +116,7 @@ export class ModalService {
 
         this.modals[indexOf] = null;
         this.modals = this.modals.filter(item => item !== null && item !== undefined);
+
     }
 
     private setModalSize(componentRef: ComponentRef<ModalComponent>, configObj: ModalConfig): void {

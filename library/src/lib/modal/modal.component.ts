@@ -119,14 +119,12 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     }
 
     private loadFromComponent(content: Type<any>): void {
-        console.log('component');
         this.containerRef.clear();
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
 
     private loadFromTemplate(content: TemplateRef<any>): void {
-        console.log('template');
         this.containerRef.clear();
         const context = {
             $implicit: this.modalRef

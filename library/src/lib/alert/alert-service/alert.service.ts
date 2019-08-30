@@ -57,9 +57,11 @@ export class AlertService {
 
         // Subscription to close alert from ref
         const refSub = component.dynamicComponentReference.afterClosed.subscribe(() => {
+            console.log(123);
             this.destroyAlertComponent(component.component);
             refSub.unsubscribe();
         }, () => {
+            console.log(456);
             this.destroyAlertComponent(component.component);
             refSub.unsubscribe();
         });

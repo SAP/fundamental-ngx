@@ -7,7 +7,7 @@ import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-compo
 describe('ModalHeaderComponent', () => {
     let component: ModalHeaderComponent;
     let fixture: ComponentFixture<ModalHeaderComponent>;
-    const modalRef = jasmine.createSpyObj('PopupRef', ['dismiss']);
+    const modalRef = jasmine.createSpyObj('DynamicComponentRef', ['dismiss']);
 
     beforeEach(async(() => {
 

@@ -40,6 +40,7 @@ export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
 
     @HostListener('click')
     closeModal(): void {
+        console.log(this.backdropClickCloseable);
         if (this.backdropClickCloseable) {
             this.modalRef.dismiss('backdrop');
         }

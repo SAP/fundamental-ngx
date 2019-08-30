@@ -23,6 +23,6 @@ export class DynamicComponentRef {
      * @param reason Value passed back to the observable as an error.
      */
     dismiss(reason?: any): void {
-        this._afterClosed.error(reason);
+        this._afterClosed.next(reason);
     }
 }

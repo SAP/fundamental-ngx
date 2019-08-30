@@ -5,19 +5,19 @@ import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/
     selector: 'fd-modal-content',
     template: `
         <fd-modal-header>
-            <h1 fd-modal-title>{{popupRef.data.title}}</h1>
-            <button fd-modal-close-btn (click)="popupRef.dismiss('x')"></button>
+            <h1 fd-modal-title>{{modalRef.data.title}}</h1>
+            <button fd-modal-close-btn (click)="modalRef.dismiss('x')"></button>
         </fd-modal-header>
         <fd-modal-body style="max-height: 100px;">
-            <p>{{popupRef.data.firstParagraph}}</p>
-            <p>{{popupRef.data.secondParagraph}}</p>
-            <p>{{popupRef.data.thirdParagraph}}</p>
+            <p>{{modalRef.data.firstParagraph}}</p>
+            <p>{{modalRef.data.secondParagraph}}</p>
+            <p>{{modalRef.data.thirdParagraph}}</p>
         </fd-modal-body>
         <fd-modal-footer>
-            <button class="action-button" fd-button [fdType]="'light'" (click)="popupRef.dismiss('cancel')">
+            <button class="action-button" fd-button [fdType]="'light'" (click)="modalRef.dismiss('cancel')">
                 Cancel
             </button>
-            <button class="action-button"  fd-button [options]="'emphasized'" (click)="popupRef.close('success')">
+            <button class="action-button"  fd-button [options]="'emphasized'" (click)="modalRef.close('success')">
                 Buy
             </button>
         </fd-modal-footer>
@@ -26,5 +26,5 @@ import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/
 })
 export class ModalContentComponent {
 
-    constructor(public popupRef: DynamicComponentRef)  {}
+    constructor(public modalRef: DynamicComponentRef)  {}
 }

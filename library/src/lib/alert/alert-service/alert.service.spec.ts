@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
+import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 
 @Component({
     template: `        
@@ -21,7 +22,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule],
-    providers: [AlertService],
+    providers: [AlertService, DynamicComponentService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })
 class TestModule {}
@@ -42,42 +43,27 @@ describe('AlertService', () => {
     });
 
     it('should open alert container', () => {
-        expect(service['alertContainerRef']).toBeFalsy();
-        (service as any).openAlertContainer();
+        const alertRef: DynamicComponentRef = service.open('teststring', {dismissible: false, duration: -1});
         expect(service['alertContainerRef']).toBeTruthy();
-    });
-
-    it('should destroy alert container', () => {
-        expect(service['alertContainerRef']).toBeFalsy();
-        (service as any).openAlertContainer();
-        expect(service['alertContainerRef']).toBeTruthy();
-        (service as any).destroyAlertContainer();
-        expect(service['alertContainerRef']).toBeFalsy();
     });
 
     it('should open alerts from string', () => {
-        spyOn<any>(service, 'openAlertContainer').and.callThrough();
-        spyOn<any>(service, 'destroyAlertContainer').and.callThrough();
         spyOn<any>(service, 'destroyAlertComponent').and.callThrough();
 
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
         const alertRef: DynamicComponentRef = service.open('teststring', {dismissible: false, duration: -1});
-        expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
         alertRef.close();
-        expect((service as any).destroyAlertContainer).toHaveBeenCalled();
         expect((service as any).destroyAlertComponent).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
     });
 
     it('should open alerts from template', () => {
-        spyOn<any>(service, 'openAlertContainer').and.callThrough();
-        spyOn<any>(service, 'destroyAlertContainer').and.callThrough();
         spyOn<any>(service, 'destroyAlertComponent').and.callThrough();
 
         expect(service['alerts'].length).toBe(0);
@@ -85,32 +71,26 @@ describe('AlertService', () => {
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         const alertRef: DynamicComponentRef = service.open(fixtureElTmp, {dismissible: false, duration: -1});
-        expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
         alertRef.close();
-        expect((service as any).destroyAlertContainer).toHaveBeenCalled();
         expect((service as any).destroyAlertComponent).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
     });
 
     it('should open alerts from component', () => {
-        spyOn<any>(service, 'openAlertContainer').and.callThrough();
-        spyOn<any>(service, 'destroyAlertContainer').and.callThrough();
         spyOn<any>(service, 'destroyAlertComponent').and.callThrough();
 
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
         const alertRef: DynamicComponentRef = service.open(TemplateTestComponent, {dismissible: false, duration: -1});
-        expect((service as any).openAlertContainer).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 
         alertRef.close();
-        expect((service as any).destroyAlertContainer).toHaveBeenCalled();
         expect((service as any).destroyAlertComponent).toHaveBeenCalled();
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
@@ -130,16 +110,5 @@ describe('AlertService', () => {
         expect(service.hasOpenAlerts()).toBe(false);
         service.open('teststring');
         expect(service.hasOpenAlerts()).toBe(true);
-    });
-
-    it('should destroy alert container after last alert destroyed', () => {
-        spyOn<any>(service, 'openAlertContainer').and.callThrough();
-        spyOn<any>(service, 'destroyAlertContainer').and.callThrough();
-
-        service.open('teststring');
-        expect((service as any).openAlertContainer).toHaveBeenCalled();
-
-        service.dismissAll();
-        expect((service as any).destroyAlertContainer).toHaveBeenCalled();
     });
 });
