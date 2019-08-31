@@ -1,20 +1,13 @@
 <form [formGroup]="customForm">
-    <fd-datetime-picker formControlName="date"></fd-datetime-picker>
+    <fd-datetime-picker formControlName="date"></fd-datetime-picker><br/>
+    Touched: {{customForm.controls.date.touched}}<br/>
+    Dirty: {{customForm.controls.date.dirty}}<br/>
+    Valid: {{customForm.controls.date.valid}}<br/>
+    Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toLocaleDateString() : 'null' }} <br/>
+    <fd-datetime-picker formControlName="disabledDate"></fd-datetime-picker>
+    Touched: {{customForm.controls.disabledDate.touched}}<br/>
+    Dirty: {{customForm.controls.disabledDate.dirty}}<br/>
+    Valid: {{customForm.controls.disabledDate.valid}}<br/>
+    Disabled: {{customForm.controls.disabledDate.disabled}}<br/>
+    Selected Date: {{ customForm.controls.disabledDate.value ? customForm.controls.disabledDate.value.toLocaleDateString() : 'null' }}
 </form>
-<br/>
-Touched: {{customForm.controls.date.touched}}<br/>
-Dirty: {{customForm.controls.date.dirty}}<br/>
-Valid: {{customForm.controls.date.valid}}<br/>
-
-Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toLocaleDateString() : 'null' }}
-<br/><br/>
-<form [formGroup]="disabledCustomForm">
-    <fd-datetime-picker formControlName="date"></fd-datetime-picker>
-</form>
-<br/>
-Touched: {{disabledCustomForm.controls.date.touched}}<br/>
-Dirty: {{disabledCustomForm.controls.date.dirty}}<br/>
-Valid: {{disabledCustomForm.controls.date.valid}}<br/>
-Disabled: {{disabledCustomForm.controls.date.disabled}}<br/>
-
-Selected Date: {{ disabledCustomForm.controls.date.value ? disabledCustomForm.controls.date.value.toLocaleDateString() : 'null' }}

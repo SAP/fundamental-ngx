@@ -8,10 +8,7 @@ import { FdDatetime } from '../../../../../../../library/src/lib/datetime-picker
 })
 export class DatetimeFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDatetime.getToday())
-    });
-
-    disabledCustomForm = new FormGroup({
-        date: new FormControl({value: FdDatetime.getToday(), disabled: true})
+        date: new FormControl(FdDatetime.getToday()),
+        disabledDate: new FormControl({ value: FdDatetime.getToday(), disabled: true })
     });
 }
