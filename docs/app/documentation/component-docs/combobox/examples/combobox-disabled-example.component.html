@@ -1,25 +1,25 @@
 <form [formGroup]="customForm">
     <div fd-form-set>
         <div fd-form-item>
-            <label fd-form-label for="form-combo-1">Selected Value:</label>
+            <label fd-form-label for="form-combo-1">Select Fruit:</label>
             <fd-combobox
                 formControlName="comboControl"
+                [dropdownValues]="dropdownValues"
                 fd-form-control
                 id="form-combo-1"></fd-combobox>
+            Disabled: {{ customForm.controls.comboControl.disabled }}
+            Selected Value: {{ customForm.controls.comboControl.value }}
         </div>
-    </div>
-</form>
-<br/>
-<form [formGroup]="disabledCustomForm">
-    <div fd-form-set>
         <div fd-form-item>
-            <label fd-form-label for="form-combo-2">Selected Value:</label>
+            <label fd-form-label for="form-combo-2">Select Fruit:</label>
             <fd-combobox
-                formControlName="comboControl"
+                formControlName="disabledComboControl"
                 fd-form-control
                 id="form-combo-2"></fd-combobox>
+            Disabled: {{ customForm.controls.disabledComboControl.disabled }}
+            Selected Value: {{ customForm.controls.disabledComboControl.value }}
         </div>
     </div>
 </form>
 
-Disabled: {{ disabledCustomForm.controls.comboControl.disabled }}
+
