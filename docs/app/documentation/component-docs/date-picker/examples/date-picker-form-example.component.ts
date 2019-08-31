@@ -6,34 +6,24 @@ import { FdDate } from '../../../../../../library/src/lib/calendar/models/fd-dat
     selector: 'fd-date-picker-form-example',
     template: `
         <form [formGroup]="customForm">
-            <fd-date-picker formControlName="date"></fd-date-picker>
+            <fd-date-picker formControlName="date"></fd-date-picker><br/>
+            Touched: {{customForm.controls.date.touched}}<br/>
+            Dirty: {{customForm.controls.date.dirty}}<br/>
+            Valid: {{customForm.controls.date.valid}}<br/>
+            Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
+            <br>
+            <fd-date-picker formControlName="disabledDate"></fd-date-picker><br/>
+            Touched: {{customForm.controls.disabledDate.touched}}<br/>
+            Dirty: {{customForm.controls.disabledDate.dirty}}<br/>
+            Valid: {{customForm.controls.disabledDate.valid}}<br/>
+            Disabled: {{customForm.controls.disabledDate.disabled}} <br/>
+            Selected Date: {{ customForm.controls.disabledDate.value ? customForm.controls.date.value.toDateString() : 'null' }}
         </form>
-        
-        Touched: {{customForm.controls.date.touched}}<br/>
-        Dirty: {{customForm.controls.date.dirty}}<br/>
-        Valid: {{customForm.controls.date.valid}}<br/>
-
-        Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
-        <br/><br/>
-        
-        <form [formGroup]="disabledCustomForm">
-            <fd-date-picker formControlName="date"></fd-date-picker>
-        </form>
-
-        Touched: {{disabledCustomForm.controls.date.touched}}<br/>
-        Dirty: {{disabledCustomForm.controls.date.dirty}}<br/>
-        Valid: {{disabledCustomForm.controls.date.valid}}<br/>
-        Disabled: {{disabledCustomForm.controls.date.disabled}} <br/>
-
-        Selected Date: {{ disabledCustomForm.controls.date.value ? disabledCustomForm.controls.date.value.toDateString() : 'null' }}
     `
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDate.getToday())
-    });
-
-    disabledCustomForm = new FormGroup({
-        date: new FormControl({value: FdDate.getToday(), disabled: true})
+        date: new FormControl(FdDate.getToday()),
+        disabledDate: new FormControl({ value: FdDate.getToday(), disabled: true })
     });
 }
