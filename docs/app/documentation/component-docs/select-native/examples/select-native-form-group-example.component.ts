@@ -8,10 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SelectNativeFormGroupExampleComponent {
     customForm = new FormGroup({
-        selectControl: new FormControl('', Validators.required)
-    });
-
-    disabledCustomForm = new FormGroup({
-        selectControl: new FormControl({value: '', disabled: true}, Validators.required)
+        selectControl: new FormControl({ value: 'option3', disabled: false }, Validators.required),
+        disabledSelectControl: new FormControl({ value: 'option2', disabled: true }, Validators.required)
     });
 }
