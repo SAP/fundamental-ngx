@@ -7,10 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class MultiInputFormExampleComponent {
     customForm = new FormGroup({
-        selectedValues: new FormControl('')
-    });
-
-    disabledCustomForm = new FormGroup({
-        selectedValues: new FormControl({value: '', disabled: true})
+        selectedValues: new FormControl({ value: ['Apple', 'Banana'], disabled: false }),
+        disabledSelectedValues: new FormControl({ value: ['Pineapple', 'Tomato'], disabled: true })
     });
 }
