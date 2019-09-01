@@ -69,7 +69,7 @@ import {
 } from './component-docs/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './component-docs/alert/examples/alert-example.component';
 import { AlertInlineExampleComponent } from './component-docs/alert/examples/alert-inline-example.component';
-import { AlertWidthExampleComponent} from './component-docs/alert/examples/alert-width-example.component';
+import { AlertWidthExampleComponent } from './component-docs/alert/examples/alert-width-example.component';
 import { AlertComponentAsContentExampleComponent } from './component-docs/alert/examples/alert-component-as-content-example.component';
 import { AlertContentComponent } from './component-docs/alert/examples/alert-content.component';
 import {
@@ -358,8 +358,7 @@ import { LocalizationEditorTextareaExampleComponent } from './component-docs/loc
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
-import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
+import { CalendarFormExamplesComponent } from './component-docs/calendar/examples/calendar-form-examples.component';
 
 import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
@@ -371,7 +370,6 @@ import { ComboboxHeightExampleComponent } from './component-docs/combobox/exampl
 import { ComboboxDisabledExampleComponent } from './component-docs/combobox/examples/combobox-disabled-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
-import { InputGroupNumberFormExampleComponent } from './component-docs/input-group/examples/input-group-number-form-example.component';
 
 import { InputFormGroupExampleComponent } from './component-docs/input/examples/input-form-group-example.component';
 import {
@@ -496,8 +494,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
-        CalendarFormSingleExampleComponent,
-        CalendarFormRangeExampleComponent,
+        CalendarFormExamplesComponent,
         CalendarProgrammaticallyChangeExampleComponent,
         CheckboxExamplesComponent,
         CheckboxFormGroupExampleComponent,
@@ -738,8 +735,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
-        SelectMaxHeightExampleComponent,
-        InputGroupNumberFormExampleComponent
+        SelectMaxHeightExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

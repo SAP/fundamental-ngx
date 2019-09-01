@@ -1,13 +1,25 @@
 <form [formGroup]="customForm">
-    <div fd-form-set>
+    <div fd-form-set class="flex-form">
         <div fd-form-item>
-            <label fd-form-label for="form-combo-1">Selected Value:</label>
+            <label fd-form-label for="form-combo-1">Select Fruit:</label>
             <fd-combobox
                 formControlName="comboControl"
+                [dropdownValues]="dropdownValues"
                 fd-form-control
-                id="form-control-1"></fd-combobox>
+                id="form-combo-1"></fd-combobox>
+            Disabled: {{ customForm.controls.comboControl.disabled }}<br/>
+            Selected Value: {{ customForm.controls.comboControl.value }}
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="form-combo-2">Select Fruit:</label>
+            <fd-combobox
+                formControlName="disabledComboControl"
+                fd-form-control
+                id="form-combo-2"></fd-combobox>
+            Disabled: {{ customForm.controls.disabledComboControl.disabled }}<br/>
+            Selected Value: {{ customForm.controls.disabledComboControl.value }}
         </div>
     </div>
 </form>
 
-Disabled: {{ customForm.controls.comboControl.disabled }}
+

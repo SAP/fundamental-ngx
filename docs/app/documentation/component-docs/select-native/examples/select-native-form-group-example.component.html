@@ -1,14 +1,23 @@
 <form [formGroup]="customForm">
-    <div fd-form-set>
+    <div fd-form-set class="flex-form-set">
         <div fd-form-item>
             <label fd-form-label for="select-1">Default select:</label>
             <select fd-form-control formControlName="selectControl" id="select-1" name="">
-                <option value="Duis malesuada odio volutpat elementum">Duis malesuada odio volutpat elementum</option>
-                <option value="Suspendisse ante ligula">Suspendisse ante ligula</option>
-                <option value="Sed bibendum sapien at posuere interdum">Sed bibendum sapien at posuere interdum</option>
-            </select>
+                <option value="option1">Duis malesuada odio volutpat elementum</option>
+                <option value="option2">Suspendisse ante ligula</option>
+                <option value="option3">Sed bibendum sapien at posuere interdum</option>
+            </select><br />
+            Select Value: {{ customForm.controls.selectControl.value }} <br />
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="select-2">Default select:</label>
+            <select fd-form-control formControlName="disabledSelectControl" id="select-2" name="">
+                <option value="option1">Duis malesuada odio volutpat elementum</option>
+                <option value="option2">Suspendisse ante ligula</option>
+                <option value="option3">Sed bibendum sapien at posuere interdum</option>
+            </select><br />
+            Select Value: {{ customForm.controls.disabledSelectControl.value }} <br />
+            Disabled: {{ customForm.controls.disabledSelectControl.disabled }}
         </div>
     </div>
 </form>
-
-Select Value: {{ customForm.controls.selectControl.value }}

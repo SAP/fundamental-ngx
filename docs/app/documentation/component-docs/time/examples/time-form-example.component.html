@@ -1,10 +1,18 @@
-<form [formGroup]="customForm">
-    <fd-time formControlName="time"></fd-time>
+<form [formGroup]="customForm" class="flex-form">
+    <div>
+        <label fd-form-label for="time-1">Select Time:</label><br>
+        <fd-time formControlName="time" id="time-1"></fd-time>
+        Enabled Time: 
+        <span *ngIf="customForm.controls.time.value">
+            {{ customForm.controls.time.value.hour }}h
+            {{ customForm.controls.time.value.minute }}m
+            {{ customForm.controls.time.value.second }}s
+        </span>
+    </div>
+    <div>
+        <label fd-form-label for="time-2">Disabled Time:</label><br>
+        <fd-time formControlName="disabledTime" id="time-2"></fd-time>
+    </div>
 </form>
 <br />
 
-Selected Time: <span *ngIf="customForm.controls.time.value">
-    {{ customForm.controls.time.value.hour }}h
-    {{ customForm.controls.time.value.minute }}m
-    {{ customForm.controls.time.value.second }}s
-</span>

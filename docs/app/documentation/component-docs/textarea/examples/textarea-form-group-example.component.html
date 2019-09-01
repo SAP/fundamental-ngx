@@ -1,15 +1,25 @@
 <form [formGroup]="customForm">
     <div fd-form-set>
         <div fd-form-item>
-            <label fd-form-label for="textarea-1">Default textarea:</label>
+            <label fd-form-label for="textarea-1">Textarea:</label>
             <textarea
-                formControlName="inputControl"
+                formControlName="textAreaControl"
                 fd-form-control
                 id="textarea-1"
                 placeholder="Field placeholder text"
             ></textarea>
+            Textarea Value: {{ customForm.controls.textAreaControl.value }}
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="textarea-2">Disabled Textarea:</label>
+            <textarea
+                formControlName="disabledTextAreaControl"
+                fd-form-control
+                id="textarea-2"
+                placeholder="Field placeholder text"
+            ></textarea>
+            Textarea Value: {{ customForm.controls.disabledTextAreaControl.value }}
         </div>
     </div>
 </form>
 
-Textarea Value: {{ customForm.controls.inputControl.value }}
