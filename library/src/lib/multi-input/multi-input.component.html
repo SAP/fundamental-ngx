@@ -47,9 +47,11 @@
     </fd-popover>
 </div>
 <div class="fd-multi-input-tags">
-    <fd-token *ngFor="let token of selected"
-              (onCloseClick)="handleSelect(false, token)"
-              class="fd-multi-input-token-spacing">
+    <fd-token 
+            *ngFor="let token of selected"
+            [disabled]=this.disabled
+            (onCloseClick)="handleSelect(false, token)"
+            class="fd-multi-input-token-spacing">
         {{token | displayFnPipe:displayFn}}
     </fd-token>
 </div>
