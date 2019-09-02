@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0-rc.7"></a>
+# [0.10.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.6...v0.10.0-rc.7) (2019-09-02)
+
+
+### Features
+
+* introduce disabled token and fix disabled multi input ([#1205](https://github.com/SAP/fundamental-ngx/issues/1205)) ([fc35e9c](https://github.com/SAP/fundamental-ngx/commit/fc35e9c)), closes [#1204](https://github.com/SAP/fundamental-ngx/issues/1204)
+
+
+
 <a name="0.10.0-rc.6"></a>
 # [0.10.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.5...v0.10.0-rc.6) (2019-09-02)
 
