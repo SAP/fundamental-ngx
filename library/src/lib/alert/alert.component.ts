@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
-import { DynamicComponentRef } from '../utils/dynamic-component/dynamic-component-ref';
+import { AlertRef } from './alert-utils/alert-ref';
 
 let alertUniqueId: number = 0;
 
@@ -111,7 +111,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     constructor(private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
-                @Optional() private alertRef: DynamicComponentRef) {
+                @Optional() private alertRef: AlertRef) {
         super(elRef);
     }
 
@@ -151,7 +151,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
             this.elRef.nativeElement.classList.remove('fd-has-display-block');
         }
         if (this.alertRef) {
-            this.alertRef.close(reason);
+            this.alertRef.dismiss(reason);
         } else {
             this.elRef.nativeElement.classList.add('fd-has-display-none');
             this.elRef.nativeElement.classList.remove('fd-has-display-block');

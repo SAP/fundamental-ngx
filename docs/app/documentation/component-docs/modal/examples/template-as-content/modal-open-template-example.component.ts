@@ -14,7 +14,6 @@ export class ModalOpenTemplateExampleComponent {
 
     openModal(modal: TemplateRef<any>): void {
         const modalRef = this.modalService.open(modal);
-        console.log(modalRef);
 
         modalRef.afterClosed.subscribe(result => {
             this.confirmationReason = 'Modal closed with result: ' + result;

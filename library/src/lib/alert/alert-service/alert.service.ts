@@ -7,8 +7,8 @@ import {
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { AlertConfig } from '../alert-utils/alert-config';
-import { DynamicComponentRef } from '../../utils/dynamic-component/dynamic-component-ref';
-import { DynamicComponentResult, DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { AlertRef } from '../alert-utils/alert-ref';
 
 /**
  * Service used to dynamically generate an alert as an overlay.
@@ -35,38 +35,39 @@ export class AlertService {
      * @param content Content of the alert component.
      * @param alertConfig Configuration of the alert component.
      */
-    public open(content: TemplateRef<any> | Type<any> | string, alertConfig: AlertConfig = new AlertConfig()): DynamicComponentRef {
+    public open(content: TemplateRef<any> | Type<any> | string, alertConfig: AlertConfig = new AlertConfig()): AlertRef {
 
         // Get default values from alert model
         alertConfig = Object.assign(new AlertConfig(), alertConfig);
 
+        // Instantiate alert ref service
+        const service: AlertRef = new AlertRef();
+        service.data = alertConfig.data;
+
         // If empty or undefined alert array, create container
         if (!this.alerts || this.alerts.length === 0 || !this.alertContainerRef) {
             this.alertContainerRef = this.dynamicComponentService.createDynamicComponent
-                < AlertContainerComponent > (content, AlertContainerComponent, alertConfig).component
+                < AlertContainerComponent > (content, AlertContainerComponent, alertConfig)
             ;
         }
 
         // Define Container to put backdrop and component to container
         alertConfig.container = this.alertContainerRef.location.nativeElement;
 
-        const component: DynamicComponentResult<AlertComponent> = this.dynamicComponentService.createDynamicComponent
-            <AlertComponent>(content, AlertComponent, alertConfig);
+        const component = this.dynamicComponentService.createDynamicComponent
+            <AlertComponent>(content, AlertComponent, alertConfig, [service]);
 
-        component.component.location.nativeElement.style.marginTop = '10px';
+        component.location.nativeElement.style.marginTop = '10px';
 
         // Subscription to close alert from ref
-        const refSub = component.dynamicComponentReference.afterClosed.subscribe(() => {
-            this.destroyAlertComponent(component.component);
-            refSub.unsubscribe();
-        }, () => {
-            this.destroyAlertComponent(component.component);
+        const refSub = service.afterDismissed.subscribe(() => {
+            this.destroyAlertComponent(component);
             refSub.unsubscribe();
         });
 
         // Log new component
-        this.alerts.push(component.component);
-        return component.dynamicComponentReference;
+        this.alerts.push(component);
+        return service;
     }
 
     /**

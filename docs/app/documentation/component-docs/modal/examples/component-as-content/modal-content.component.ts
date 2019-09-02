@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/dynamic-component/dynamic-component-ref';
+import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal-content',
@@ -14,10 +14,10 @@ import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/
             <p>{{modalRef.data.thirdParagraph}}</p>
         </fd-modal-body>
         <fd-modal-footer>
-            <button class="action-button" fd-button [fdType]="'light'" (click)="modalRef.dismiss('cancel')">
+            <button class="action-button" fd-button [fdType]="'light'" (click)="this.modalRef.dismiss('cancel')">
                 Cancel
             </button>
-            <button class="action-button"  fd-button [options]="'emphasized'" (click)="modalRef.close('success')">
+            <button class="action-button"  fd-button [options]="'emphasized'" (click)="this.modalRef.close('success')">
                 Buy
             </button>
         </fd-modal-footer>
@@ -26,5 +26,5 @@ import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/
 })
 export class ModalContentComponent {
 
-    constructor(public modalRef: DynamicComponentRef)  {}
+    constructor(public modalRef: ModalRef)  {}
 }

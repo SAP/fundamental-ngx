@@ -24,7 +24,11 @@ export class DynamicComponentService {
     ) {}
 
     /**
-     * Function that creates dynamic component and injects DynamicComponentRef service to allow communication between component and outside
+     * Function that creates dynamic component and injects services to allow communication between component and outside
+     * @param contentType Content of the component.
+     * @param componentType Type of component that should be rendered.
+     * @param config Configuration that will be passed to the component.
+     * @param services Services that will be injected to the component.
      */
     public createDynamicComponent<T>(
         contentType: TemplateRef<any> | Type<any> | string,

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import createSpyObj = jasmine.createSpyObj;
-import { ModalRef } from '../utils/dynamic-component/dynamic-component-ref';
+import { ModalRef } from './modal-utils/modal-ref';
 
 @Component({
     template: `        

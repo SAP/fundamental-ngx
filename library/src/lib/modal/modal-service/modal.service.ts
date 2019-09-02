@@ -54,6 +54,8 @@ export class ModalService {
 
         // Get default values from model
         modalConfig = Object.assign(new ModalConfig(), modalConfig);
+
+        // Instantiate modal ref service
         const service: ModalRef = new ModalRef();
         service.data = modalConfig.data;
 
@@ -95,14 +97,9 @@ export class ModalService {
             refSub.unsubscribe();
         };
 
-
         const refSub = service.afterClosed
-            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
-
-        if (backdrop) {
-            refSub.add(service.afterClosed
-                .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose));
-        }
+            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose)
+        ;
 
         return service;
     }

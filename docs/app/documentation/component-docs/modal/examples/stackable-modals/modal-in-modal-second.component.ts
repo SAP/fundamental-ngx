@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/dynamic-component/dynamic-component-ref';
+import { ModalRef } from '../../../../../../../library/src/lib/modal/modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal-in-modal-second',
@@ -18,5 +18,5 @@ import { DynamicComponentRef } from '../../../../../../../library/src/lib/utils/
     `
 })
 export class ModalInModalSecondComponent {
-    constructor(public modalRef: DynamicComponentRef) {}
+    constructor(public modalRef: ModalRef) {}
 }

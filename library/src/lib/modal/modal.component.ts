@@ -92,10 +92,8 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
         if (this.childComponentType) {
             if (this.childComponentType instanceof Type) {
                 this.loadFromComponent(this.childComponentType);
-                console.log('component');
             } else if (this.childComponentType instanceof TemplateRef) {
                 this.loadFromTemplate(this.childComponentType);
-                console.log('template');
             }
         }
         if (this.focusTrapped) {
