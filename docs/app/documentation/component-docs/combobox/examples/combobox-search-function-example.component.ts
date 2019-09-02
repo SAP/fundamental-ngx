@@ -13,7 +13,11 @@ export class ComboboxSearchFunctionExampleComponent {
         'Pineapple',
         'Banana',
         'Kiwi',
-        'Strawberry'
+        'Strawberry',
+        'Raspberries',
+        'Watermelons',
+        'Nectarines',
+        'Oranges'
     ];
 
     customSearchFunction: Function = () => {

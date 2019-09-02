@@ -65,6 +65,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     @Input()
     compact: boolean = false;
 
+    /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
+    @Input()
+    maxHeight: string;
+
     /** Popper.js options of the popover. */
     @Input()
     popperOptions: PopperOptions = {
@@ -105,6 +109,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     readonly valueChange: EventEmitter<any>
         = new EventEmitter<any>();
 
+    /** @hidden */
+    calculatedMaxHeight: number;
+
     /** Current selected option component reference. */
     private selected: OptionComponent;
 
@@ -127,6 +134,13 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /** @hidden */
     onTouched: Function = () => {};
+
+    /** @hidden */
+    isOpenChangeHandle(isOpen: boolean): void {
+        this.isOpen = isOpen;
+        this.isOpenChange.emit(isOpen);
+        this.resizeScrollHandler();
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -229,6 +243,12 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
                 break;
             }
         }
+    }
+
+    /** @hidden */
+    @HostListener('window:resize')
+    resizeScrollHandler() {
+        this.calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
     /**

@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class TextareaFormGroupExampleComponent {
     customForm = new FormGroup({
-        inputControl: new FormControl('', Validators.required)
+        textAreaControl: new FormControl('', Validators.required),
+        disabledTextAreaControl: new FormControl({ value: 'Some text...', disabled: true }, Validators.required)
     });
 }

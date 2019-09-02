@@ -7,8 +7,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ToggleFormsExampleComponent {
     customForm = new FormGroup({
-        toggle1: new FormControl(false),
-        toggle2: new FormControl(false),
-        toggle3: new FormControl(false)
+        toggle1: new FormControl({ value: false, disabled: false }),
+        toggle2: new FormControl({ value: true, disabled: false, }),
+        toggle3: new FormControl({ value: false, disabled: true }),
+        toggle4: new FormControl({ value: true, disabled: true })
     });
 };

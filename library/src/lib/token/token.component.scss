@@ -1,3 +1,7 @@
 .fd-token-content {
     display: inline-block;
 }
+//temporary fix until fundamental styles introduces a disabled token
+.fd-token__disabled::after{
+    cursor: not-allowed;
+}

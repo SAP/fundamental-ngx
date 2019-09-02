@@ -14,7 +14,7 @@ import {
     Optional,
     EmbeddedViewRef,
     Output,
-    EventEmitter, ViewEncapsulation, HostListener
+    EventEmitter, ViewEncapsulation, HostListener, NgZone
 } from '@angular/core';
 import { AlertRef } from './alert-utils/alert-ref';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
@@ -111,6 +111,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     constructor(private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
+                private ngZone: NgZone,
                 @Optional() private alertRef: AlertRef) {
         super(elRef);
     }
@@ -172,20 +173,22 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
 
         if (this.duration >= 0) {
-            setTimeout(() => {
-                if (this.mousePersist) {
-                    const wait = () => {
-                        if (this.mouseInAlert === true) {
-                            setTimeout(wait, 500);
-                        } else {
-                            this.dismiss();
-                        }
-                    };
-                    wait();
-                } else {
-                    this.dismiss();
-                }
-            }, this.duration);
+            this.ngZone.runOutsideAngular(() => {
+                setTimeout(() => {
+                    if (this.mousePersist) {
+                        const wait = () => {
+                            if (this.mouseInAlert === true) {
+                                setTimeout(wait, 500);
+                            } else {
+                                this.ngZone.run(() => this.dismiss());
+                            }
+                        };
+                        wait();
+                    } else {
+                        this.ngZone.run(() => this.dismiss());
+                    }
+                }, this.duration);
+            });
         }
     }
 
