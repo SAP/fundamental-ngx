@@ -17,7 +17,8 @@ export const API_FILES = {
     alert: [
         'AlertComponent',
         'AlertConfig',
-        'AlertService'
+        'AlertService',
+        'AlertRef'
     ],
     badgeLabel: [
         'BadgeDirective',
@@ -122,7 +123,8 @@ export const API_FILES = {
         'ModalPosition',
         'ModalBodyComponent',
         'ModalHeaderComponent',
-        'ModalFooterComponent'
+        'ModalFooterComponent',
+        'ModalRef'
     ],
     multiInput: [
         'MultiInputComponent'
