@@ -1,27 +1,47 @@
-<form [formGroup]="customForm">
+<form [formGroup]="customForm" class="flex-form">
     <div fd-form-set>
         <div fd-form-item [isCheck]="true">
             <label fd-form-label for="radio-13">
                 <input fd-form-control formControlName="radioInput" name="radioInput" value="option1" type="radio"
-                       id="radio-13">
-                Option 1
+                       id="radio-13">Option 1
             </label>
         </div>
         <div fd-form-item [isCheck]="true">
             <label fd-form-label for="radio-14">
                 <input fd-form-control formControlName="radioInput" name="radioInput" value="option2" type="radio"
-                       id="radio-14">
-                Option 2
+                       id="radio-14">Option 2
             </label>
         </div>
         <div fd-form-item [isCheck]="true">
             <label fd-form-label for="radio-15">
                 <input fd-form-control formControlName="radioInput" name="radioInput" value="option3" type="radio"
-                       id="radio-15">
-                Option 3
+                       id="radio-15">Option 3
             </label>
         </div>
+        Radio Button Value: {{ customForm.controls.radioInput.value }}
+    </div>
+
+    <div fd-form-set>
+        <div fd-form-item [isCheck]="true">
+            <label fd-form-label for="radio-23">
+                <input fd-form-control formControlName="disabledRadio" name="disabledRadio" value="option11" type="radio"
+                       id="radio-23">Option 11
+            </label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+            <label fd-form-label for="radio-24">
+                <input fd-form-control formControlName="disabledRadio" name="disabledRadio" value="option12" type="radio"
+                       id="radio-24">Option 12
+            </label>
+        </div>
+        <div fd-form-item [isCheck]="true">
+            <label fd-form-label for="radio-25">
+                <input fd-form-control formControlName="disabledRadio" name="disabledRadio" value="option13" type="radio"
+                       id="radio-25">Option 13
+            </label>
+        </div>
+        Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}
     </div>
 </form>
 <br><br>
-Radio Button Value: {{ customForm.controls.radioInput.value }} <br>
+

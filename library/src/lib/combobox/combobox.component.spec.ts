@@ -35,6 +35,14 @@ describe('ComboboxComponent', () => {
         ];
         component.searchFunction = () => {};
         fixture.detectChanges();
+
+        /** That's focus trap testing workaround */
+        component.focusTrap = {
+            activate: () => {},
+            deactivate: () => {},
+            pause: () => {},
+            unpause: () => {},
+        }
     });
 
     it('should create', () => {

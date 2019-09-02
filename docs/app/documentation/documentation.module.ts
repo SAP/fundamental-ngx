@@ -69,6 +69,7 @@ import {
 } from './component-docs/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './component-docs/alert/examples/alert-example.component';
 import { AlertInlineExampleComponent } from './component-docs/alert/examples/alert-inline-example.component';
+import { AlertWidthExampleComponent } from './component-docs/alert/examples/alert-width-example.component';
 import { AlertComponentAsContentExampleComponent } from './component-docs/alert/examples/alert-component-as-content-example.component';
 import { AlertContentComponent } from './component-docs/alert/examples/alert-content.component';
 import {
@@ -143,8 +144,10 @@ import { LoadingSpinnerExampleComponent } from './component-docs/loading-spinner
 import { LoadingSpinnerContainerExampleComponent } from './component-docs/loading-spinner-docs/examples/loading-spinner-container-example.component';
 import {
     MenuExampleComponent,
-    MenuGroupExampleComponent
+    MenuGroupExampleComponent,
+    MenuSeparatorExampleComponent
 } from './component-docs/menu/examples/menu-examples.component';
+import { MenuAddonExampleComponent } from './component-docs/menu/examples/menu-addon-examples.component';
 import { ModalOpenTemplateExampleComponent } from './component-docs/modal/examples/template-as-content/modal-open-template-example.component';
 import { ModalContentComponent } from './component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from './component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
@@ -355,8 +358,7 @@ import { LocalizationEditorTextareaExampleComponent } from './component-docs/loc
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
-import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
+import { CalendarFormExamplesComponent } from './component-docs/calendar/examples/calendar-form-examples.component';
 
 import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
@@ -364,9 +366,10 @@ import { ComboboxAsyncExampleComponent } from './component-docs/combobox/example
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
+import { ComboboxHeightExampleComponent } from './component-docs/combobox/examples/combobox-height-example.component';
+import { ComboboxDisabledExampleComponent } from './component-docs/combobox/examples/combobox-disabled-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
-import { InputGroupNumberFormExampleComponent } from './component-docs/input-group/examples/input-group-number-form-example.component';
 
 import { InputFormGroupExampleComponent } from './component-docs/input/examples/input-form-group-example.component';
 import {
@@ -407,6 +410,7 @@ import {
     MegaMenuPositionExampleComponent
 } from './component-docs/mega-menu/examples/mega-menu-examples.component';
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
+import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 
 @NgModule({
     declarations: [
@@ -471,6 +475,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         AlertComponentAsContentExampleComponent,
         AlertContentComponent,
         AlertInlineExampleComponent,
+        AlertWidthExampleComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
@@ -497,8 +502,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
-        CalendarFormSingleExampleComponent,
-        CalendarFormRangeExampleComponent,
+        CalendarFormExamplesComponent,
         CalendarProgrammaticallyChangeExampleComponent,
         CheckboxExamplesComponent,
         CheckboxFormGroupExampleComponent,
@@ -558,7 +562,9 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         MegaMenuExampleComponent,
         MegaMenuGroupExampleComponent,
         MegaMenuPositionExampleComponent,
+        MenuAddonExampleComponent,
         MenuGroupExampleComponent,
+        MenuSeparatorExampleComponent,
         MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
@@ -652,6 +658,8 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
+        ComboboxDisabledExampleComponent,
+        ComboboxHeightExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
@@ -739,7 +747,7 @@ import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobo
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
-        InputGroupNumberFormExampleComponent
+        SelectMaxHeightExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

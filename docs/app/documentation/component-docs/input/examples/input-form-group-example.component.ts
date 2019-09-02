@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class InputFormGroupExampleComponent {
     customForm = new FormGroup({
-        inputControl: new FormControl('', Validators.required)
+        inputControl: new FormControl('', Validators.required),
+        disabledInputControl: new FormControl({ value: 'initial value', disabled: true }, Validators.required)
     });
 }

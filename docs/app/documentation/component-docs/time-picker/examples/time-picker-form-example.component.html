@@ -1,9 +1,24 @@
-<form [formGroup]="customForm">
-    <fd-time-picker formControlName="time"></fd-time-picker>
+<form [formGroup]="customForm" class="flex-form">
+    <div fd-form-item>
+        <fd-time-picker formControlName="time"></fd-time-picker> <br />
+        Selected Time: 
+        <span *ngIf="customForm.controls.time.value">
+            {{ customForm.controls.time.value.hour }}h
+            {{ customForm.controls.time.value.minute }}m
+            {{ customForm.controls.time.value.second }}s
+        </span>
+    </div>
+    <div fd-form-item>
+        <fd-time-picker formControlName="disabledTime"></fd-time-picker> <br />
+        Selected Time: 
+        <span *ngIf="customForm.controls.disabledTime.value">
+            {{ customForm.controls.disabledTime.value.hour }}h
+            {{ customForm.controls.disabledTime.value.minute }}m
+            {{ customForm.controls.disabledTime.value.second }}s
+        </span><br />
+        Disabled: {{ customForm.controls.disabledTime.disabled }}
+    </div>
 </form>
 
-Selected Time: <span *ngIf="customForm.controls.time.value">
-    {{ customForm.controls.time.value.hour }}h
-    {{ customForm.controls.time.value.minute }}m
-    {{ customForm.controls.time.value.second }}s
-</span>
+
+

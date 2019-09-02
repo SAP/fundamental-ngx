@@ -117,9 +117,11 @@ export const API_FILES = {
         'MegaMenuSublinkDirective'
     ],
     menu: [
+        'MenuAddonDirective',
         'MenuComponent',
         'MenuGroupComponent',
         'MenuItemDirective',
+        'MenuItemAddonDirective',
         'MenuListDirective',
         'MenuTitleDirective',
         'MenuKeyboardService'

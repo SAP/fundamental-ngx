@@ -1,5 +1,7 @@
-<fd-popover [(isOpen)]="isOpen"
+<fd-popover [isOpen]="isOpen"
+            (isOpenChange)="isOpenChangeHandle($event)"
             [fillControlMode]="'at-least'"
+            [triggers]="triggers"
             [disabled]="disabled"
             class="fd-combobox-popover-custom"
             [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
@@ -8,7 +10,7 @@
             <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
                 <input #searchInputElement type="text" class="fd-input" [ngClass]="{'fd-input--compact': compact}"
                        (keydown)="onInputKeydownHandler($event)"
-                       (keyup)="onInputKeyupHandler()"
+                       (keyup)="onInputKeyupHandler($event)"
                        [disabled]="disabled"
                        [(ngModel)]="inputText"
                        (ngModelChange)="handleSearchTermChange()"

@@ -1,5 +1,5 @@
 <form [formGroup]="customForm">
-    <div fd-form-set>
+    <div fd-form-set class="flex-form-set">
         <div fd-form-item>
             <label fd-form-label for="form-input-1">Default Input:</label>
             <input
@@ -9,8 +9,22 @@
                 id="form-input-1"
                 placeholder="Field placeholder text"
             />
+            Input Value: {{ customForm.controls.inputControl.value }}
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="form-input-2">Default Input:</label>
+            <input
+                formControlName="disabledInputControl"
+                fd-form-control
+                type="text"
+                id="form-input-2"
+                placeholder="Field placeholder text"
+            />
+            Input Value: {{ customForm.controls.disabledInputControl.value }} <br/>
+            Disabled: {{ customForm.controls.disabledInputControl.disabled }}
         </div>
     </div>
 </form>
 
-Input Value: {{ customForm.controls.inputControl.value }}
+
+

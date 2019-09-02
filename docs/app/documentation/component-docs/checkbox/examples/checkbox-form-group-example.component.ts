@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'fd-checkbox-form-group',
@@ -7,8 +7,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class CheckboxFormGroupExampleComponent {
     customForm = new FormGroup({
-        firstOption: new FormControl(true),
-        secondOption: new FormControl(false),
-        thirdOption: new FormControl(false)
+        firstOption: new FormControl({value: true, disabled: false}, Validators.required),
+        secondOption: new FormControl({value: false, disabled: false}, Validators.required),
+        thirdOption: new FormControl({value: false, disabled: true }, Validators.required)
     });
 }
