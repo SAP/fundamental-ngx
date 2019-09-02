@@ -736,8 +736,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
-        InputGroupNumberFormExampleComponent,
-        CalendarI18nMomentExampleComponent
+        CalendarI18nMomentExampleComponent,
         SelectMaxHeightExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
