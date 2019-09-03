@@ -1,5 +1,4 @@
 import { Subject } from 'rxjs';
-import { MenuItemDirective } from './menu-item.directive';
 import { Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item';
 

@@ -36,6 +36,7 @@ export * from './lib/shellbar/public_api';
 export * from './lib/side-navigation/public_api';
 export * from './lib/select/public_api';
 export * from './lib/split-button/public_api';
+export * from './lib/utils/public_api';
 export * from './lib/table/public_api';
 export * from './lib/tabs/public_api';
 export * from './lib/tile/public_api';

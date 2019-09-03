@@ -5,7 +5,6 @@ import {
     Input,
     OnChanges,
     OnInit,
-    SimpleChanges,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';

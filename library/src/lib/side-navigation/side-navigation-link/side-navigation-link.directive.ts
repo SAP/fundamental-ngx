@@ -3,7 +3,7 @@ import {
     ElementRef,
     Output,
     EventEmitter,
-    Directive, HostListener, Inject, OnInit, HostBinding
+    Directive, HostListener, Inject, HostBinding
 } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 

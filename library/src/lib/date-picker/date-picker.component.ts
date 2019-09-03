@@ -15,6 +15,15 @@ import { CalendarComponent } from '../calendar/calendar.component';
 import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
 
+/**
+ * The datetime picker component is an opinionated composition of the fd-popover and
+ * fd-calendar components to accomplish the UI pattern for picking a date.
+ *
+ * Supports Angular Forms.
+ * ```html
+ * <fd-date-picker [(ngModel)]="date"></fd-date-picker>
+ * ```
+ */
 @Component({
     selector: 'fd-date-picker',
     templateUrl: './date-picker.component.html',
@@ -328,7 +337,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedDate = selected;
             this.inputFieldDate = this.dateAdapter.format(selected, this.dateFormat);
             if (this.isModelValid()) {
+                this.inputFieldDate = this.dateAdapter.format(selected);
                 this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
+            } else {
+                this.inputFieldDate = '';
             }
 
         } else {
@@ -345,6 +357,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                     this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
                     this.inputFieldDate = this.dateAdapter.format(selected.start, this.dateFormat) +
                         this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end, this.dateFormat);
+                    this.inputFieldDate = this.dateAdapter.format(selected.start) +
+                        this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end);
+                } else {
+                    this.inputFieldDate = '';
                 }
             } else {
                 this.inputFieldDate = '';

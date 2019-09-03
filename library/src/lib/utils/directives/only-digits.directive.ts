@@ -30,5 +30,4 @@ export class OnlyDigitsDirective {
             e.preventDefault();
         }
     }
-
 }

@@ -1,4 +1,4 @@
-import { Component, Directive, ViewEncapsulation } from '@angular/core';
+import { Directive } from '@angular/core';
 
 /**
  * The component that represents a sub item.
