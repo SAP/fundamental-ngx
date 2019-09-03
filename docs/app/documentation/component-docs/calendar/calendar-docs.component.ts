@@ -4,6 +4,7 @@ import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
 import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
 import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.component.ts';
+import * as calendarIntlMomentSrc from '!raw-loader!./examples/calendar--i18n-moment-example.component.ts';
 import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-examples.component.ts';
 import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-examples.component.html';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
@@ -87,6 +88,11 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18n: ExampleFile[] = [{
         language: 'typescript',
         code: calendarIntlSrc
+    }];
+
+    calendari18nMoment: ExampleFile[] = [{
+        language: 'typescript',
+        code: calendarIntlMomentSrc
     }];
 
     calendarFormSource: ExampleFile[] = [
