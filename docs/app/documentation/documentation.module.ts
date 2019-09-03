@@ -370,6 +370,7 @@ import { ComboboxHeightExampleComponent } from './component-docs/combobox/exampl
 import { ComboboxDisabledExampleComponent } from './component-docs/combobox/examples/combobox-disabled-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
+import { ComboboxFormsExampleComponent } from './component-docs/combobox/examples/combobox-forms-example.component';
 
 import { InputFormGroupExampleComponent } from './component-docs/input/examples/input-form-group-example.component';
 import {
@@ -403,7 +404,15 @@ import { RadioExamplesComponent } from './component-docs/radio/examples/radio-ex
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
 import { DocsSectionTitleComponent } from './core-helpers/docs-section-title/docs-section-title.component';
+import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
+import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
+import {
+    MegaMenuExampleComponent,
+    MegaMenuGroupExampleComponent,
+    MegaMenuPositionExampleComponent
+} from './component-docs/mega-menu/examples/mega-menu-examples.component';
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
+import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/examples/calendar--i18n-moment-example.component';
 import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 
 @NgModule({
@@ -434,6 +443,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         ImageDocsComponent,
         ListDocsComponent,
         MenuDocsComponent,
+        MegaMenuDocsComponent,
         ModalDocsComponent,
         SelectNativeDocsComponent,
         TabsDocsComponent,
@@ -552,6 +562,9 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
+        MegaMenuExampleComponent,
+        MegaMenuGroupExampleComponent,
+        MegaMenuPositionExampleComponent,
         MenuAddonExampleComponent,
         MenuGroupExampleComponent,
         MenuSeparatorExampleComponent,
@@ -648,6 +661,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
+        ComboboxFormsExampleComponent,
         ComboboxDisabledExampleComponent,
         ComboboxHeightExampleComponent,
         LoadingSpinnerDocsComponent,
@@ -697,6 +711,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         ListHeaderComponent,
         LoadingSpinnerHeaderComponent,
         MenuHeaderComponent,
+        MegaMenuHeaderComponent,
         ModalDocsHeaderComponent,
         MultiInputHeaderComponent,
         PaginationHeaderComponent,
@@ -737,7 +752,9 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         SelectFormsComponent,
         SelectViewValueExampleComponent,
         SelectMaxHeightExampleComponent,
-        DocsSectionTitleComponent
+        DocsSectionTitleComponent,
+        CalendarI18nMomentExampleComponent,
+        SelectMaxHeightExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

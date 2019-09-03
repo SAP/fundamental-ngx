@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
 export class MultiInputExampleComponent {
 
     selected = [];
+    secondSelected = ['Pineapple'];
 
 }

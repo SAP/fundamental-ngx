@@ -1,5 +1,4 @@
-import { Component, Directive, ElementRef, HostBinding, Inject, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { Directive, ElementRef } from '@angular/core';
 /**
  * The component that represents a navigation group.
  * ```html

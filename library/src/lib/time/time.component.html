@@ -10,6 +10,7 @@
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="displayedHour"
+               fd-only-digits
                [ngClass]="{
                 'is-disabled': disabled,
                 'is-invalid': ((displayedHour > 24 || displayedHour < 0) && validate)
@@ -43,6 +44,7 @@
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="time.minute"
+               fd-only-digits
                (ngModelChange)="minuteModelChange()"
                (blur)="inputBlur('minute')"
                [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
@@ -72,6 +74,7 @@
     </div>
     <div class="fd-time__input">
         <input [(ngModel)]="time.second"
+               fd-only-digits
                (ngModelChange)="secondModelChange()"
                (blur)="inputBlur('second')"
                [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"

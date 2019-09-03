@@ -12,6 +12,8 @@ import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-exa
 import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
 import * as comboboxDisabledTemplateH from '!raw-loader!./examples/combobox-disabled-example.component.html';
 import * as comboboxDisabledTemplateT from '!raw-loader!./examples/combobox-disabled-example.component.ts';
+import * as comboboxFormT from '!raw-loader!./examples/combobox-forms-example.component.ts';
+import * as comboboxFormH from '!raw-loader!./examples/combobox-forms-example.component.html';
 import * as comboboxHeightHtml from '!raw-loader!./examples/combobox-height-example.component.html';
 import * as comboboxHeightTs from '!raw-loader!./examples/combobox-height-example.component.ts';
 import * as comboboxSeaTs from '!raw-loader!./examples/combobox-search-function-example.component.ts';
@@ -109,6 +111,17 @@ export class ComboboxDocsComponent {
         {
             language: 'typescript',
             code: comboboxHeightTs
+        }
+    ];
+
+    comboboxFormExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxFormH
+        },
+        {
+            language: 'typescript',
+            code: comboboxFormT
         }
     ];
 

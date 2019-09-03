@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0-rc.13"></a>
+# [0.10.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.12...v0.10.0-rc.13) (2019-09-03)
+
+
+
+<a name="0.10.0-rc.12"></a>
+# [0.10.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.11...v0.10.0-rc.12) (2019-09-03)
+
+
+
+<a name="0.10.0-rc.11"></a>
+# [0.10.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.10...v0.10.0-rc.11) (2019-09-03)
+
+
+
+<a name="0.10.0-rc.10"></a>
+# [0.10.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.9...v0.10.0-rc.10) (2019-09-03)
+
+
+### Features
+
+* Mega Menu ([#1164](https://github.com/SAP/fundamental-ngx/issues/1164)) ([11762d6](https://github.com/SAP/fundamental-ngx/commit/11762d6))
+
+
+
+<a name="0.10.0-rc.9"></a>
+# [0.10.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.8...v0.10.0-rc.9) (2019-09-03)
+
+
+### Features
+
+* added option in combobox to return whole object; added forms example ([#1077](https://github.com/SAP/fundamental-ngx/issues/1077)) ([4b392ef](https://github.com/SAP/fundamental-ngx/commit/4b392ef))
+
+
+
+<a name="0.10.0-rc.8"></a>
+# [0.10.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.7...v0.10.0-rc.8) (2019-09-02)
+
+
+
+<a name="0.10.0-rc.7"></a>
+# [0.10.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.6...v0.10.0-rc.7) (2019-09-02)
+
+
+### Features
+
+* introduce disabled token and fix disabled multi input ([#1205](https://github.com/SAP/fundamental-ngx/issues/1205)) ([fc35e9c](https://github.com/SAP/fundamental-ngx/commit/fc35e9c)), closes [#1204](https://github.com/SAP/fundamental-ngx/issues/1204)
+
+
+
+<a name="0.10.0-rc.6"></a>
+# [0.10.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.5...v0.10.0-rc.6) (2019-09-02)
+
+
+
 <a name="0.10.0-rc.5"></a>
 # [0.10.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.4...v0.10.0-rc.5) (2019-09-01)
 

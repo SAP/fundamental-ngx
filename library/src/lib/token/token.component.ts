@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, ViewEncapsulation, Input } from '@angular/core';
 
 /**
  * A token is used to represent contextualizing information.
@@ -10,6 +10,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, V
     styleUrls: ['./token.component.scss'],
     host: {
         class: 'fd-token',
+        '[class.fd-token__disabled]': 'disabled',
         'role': 'button'
     },
     encapsulation: ViewEncapsulation.None
@@ -19,6 +20,10 @@ export class TokenComponent {
     /** @hidden */
     @ViewChild('contentContainer')
     contentContainer: ElementRef;
+
+    /** Whether the token is disabled. */
+    @Input()
+    disabled: boolean = false;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
@@ -31,7 +36,7 @@ export class TokenComponent {
     /** @hidden */
     @HostListener('click', ['$event'])
     clickHandler(event): void {
-        if (this.contentContainer) {
+        if (this.contentContainer && !this.disabled) {
             if (this.elRef.nativeElement.contains(event.target) && !this.contentContainer.nativeElement.contains(event.target)) {
                 this.onCloseClick.emit();
             }
