@@ -316,9 +316,11 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
              */
             selected = <FdDate>selected;
             this.selectedDate = selected;
-            this.inputFieldDate = this.dateAdapter.format(selected);
             if (this.isModelValid()) {
+                this.inputFieldDate = this.dateAdapter.format(selected);
                 this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
+            } else {
+                this.inputFieldDate = '';
             }
 
         } else {
@@ -335,6 +337,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                     this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
                     this.inputFieldDate = this.dateAdapter.format(selected.start) +
                         this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end);
+                } else {
+                    this.inputFieldDate = '';
                 }
             } else {
                 this.inputFieldDate = '';
