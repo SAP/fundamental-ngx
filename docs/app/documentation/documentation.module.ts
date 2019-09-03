@@ -370,6 +370,7 @@ import { ComboboxHeightExampleComponent } from './component-docs/combobox/exampl
 import { ComboboxDisabledExampleComponent } from './component-docs/combobox/examples/combobox-disabled-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
+import { ComboboxFormsExampleComponent } from './component-docs/combobox/examples/combobox-forms-example.component';
 
 import { InputFormGroupExampleComponent } from './component-docs/input/examples/input-form-group-example.component';
 import {
@@ -647,6 +648,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
+        ComboboxFormsExampleComponent,
         ComboboxDisabledExampleComponent,
         ComboboxHeightExampleComponent,
         LoadingSpinnerDocsComponent,

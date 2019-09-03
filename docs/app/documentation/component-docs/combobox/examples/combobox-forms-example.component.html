@@ -1,0 +1,29 @@
+<form [formGroup]="customForm">
+    Combobox with communication via Objects
+    <fd-combobox [dropdownValues]="dropdownValues"
+                 [placeholder]="'Type some text...'"
+                 [displayFn]="myDisplayFunction"
+                 [communicateByObject]="true"
+                 formControlName="itemOnDropdownMode">
+    </fd-combobox>
+</form><br/>
+
+Touched: {{customForm.controls.itemOnDropdownMode.touched}}<br/>
+Dirty: {{customForm.controls.itemOnDropdownMode.dirty}}<br/>
+Json Value: {{customForm.controls.itemOnDropdownMode.value | json}}
+<br/><br/>
+
+<form [formGroup]="customForm">
+    Combobox with communication via displayed value
+    <fd-combobox [dropdownValues]="dropdownValues"
+                 [placeholder]="'Type some text...'"
+                 [displayFn]="myDisplayFunction"
+                 formControlName="item">
+    </fd-combobox>
+</form><br/>
+
+Touched: {{customForm.controls.item.touched}}<br/>
+Dirty: {{customForm.controls.item.dirty}}<br/>
+Json Value: {{customForm.controls.item.value | json}}
+
+

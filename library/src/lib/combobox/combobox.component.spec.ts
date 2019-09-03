@@ -30,10 +30,11 @@ describe('ComboboxComponent', () => {
         fixture = TestBed.createComponent(ComboboxComponent);
         component = fixture.componentInstance;
         component.dropdownValues = [
-            'Apple',
-            'Banana'
+            { value: 'value', displayedValue: 'displayedValue' },
+            { value: 'value2', displayedValue: 'displayedValue2' }
         ];
-        component.searchFunction = () => {};
+        component.searchFunction = () => {
+        };
         fixture.detectChanges();
 
         /** That's focus trap testing workaround */
@@ -53,7 +54,8 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'searchFunction');
         const event = {
             code: 'Enter',
-            preventDefault: () => {}
+            preventDefault: () => {
+            }
         };
         component.onInputKeydownHandler(event);
         expect(component.searchFunction).toHaveBeenCalled();
@@ -66,16 +68,16 @@ describe('ComboboxComponent', () => {
     });
 
     it('should fire selected event onMenuKeydownHandler, arrow down', () => {
-        component.inputText = 'test';
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
         const event: any = {
             code: 'Enter',
             preventDefault: () => {}
         };
-        const term = 'test';
-        component.dropdownValues = [term];
-        spyOn(component.itemClicked, 'emit');
+        spyOn(component, 'onChange');
         component.onMenuKeydownHandler(event, 0);
-        expect(component.itemClicked.emit).toHaveBeenCalled();
+        expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
         spyOn(event, 'preventDefault');
         spyOn(component.menuItems.toArray()[1], 'focus');
         event.code = 'ArrowDown';
@@ -100,7 +102,8 @@ describe('ComboboxComponent', () => {
     it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
         const event: any = {
             code: 'ArrowUp',
-            preventDefault: () => {}
+            preventDefault: () => {
+            }
         };
         spyOn(event, 'preventDefault');
         spyOn(component.searchInputElement.nativeElement, 'focus');
@@ -118,10 +121,48 @@ describe('ComboboxComponent', () => {
         expect(component.onTouched).toHaveBeenCalled();
     });
 
+    it('should write value not on dropdown mode', () => {
+        component.writeValue('someValue');
+        expect(component.inputText).toBe('someValue');
+    });
+
     it('should registerOnChange and registerOnTouched', () => {
         component.registerOnChange('function');
         component.registerOnTouched('function');
         expect(component.onChange).toBe('function');
         expect(component.onTouched).toBe('function');
+    });
+
+    it('should handle input entry on dropdown mode', () => {
+        spyOn(component, 'onChange');
+        component.communicateByObject = true;
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.inputText = 'displayedValue2';
+        expect(component.onChange).toHaveBeenCalledWith({ value: 'value2', displayedValue: 'displayedValue2' });
+    });
+
+    it('should handle wrong input entry on dropdown mode', () => {
+        spyOn(component, 'onChange');
+        component.communicateByObject = true;
+        component.displayFn = (item: any): string => {
+            if (item) {
+                return item.displayedValue;
+            } else {
+                return '';
+            }
+        };
+        component.inputText = 'otherDisplayedValue';
+        expect(component.onChange).toHaveBeenCalledWith(undefined);
+    });
+
+    it('should handle write value from outside on dropdown mode', () => {
+        component.communicateByObject = true;
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.writeValue({ value: 'value2', displayedValue: 'displayedValue2' });
+        expect(component.inputTextValue).toBe('displayedValue2');
     });
 });
