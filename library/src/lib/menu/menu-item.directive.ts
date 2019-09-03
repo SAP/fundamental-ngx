@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostBinding } from '@angular/core';
+import { DefaultMenuItem } from './default-menu-item';
 
 /**
  * The directive that represents a menu item.
@@ -8,7 +9,7 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-item]',
 })
-export class MenuItemDirective {
+export class MenuItemDirective implements DefaultMenuItem {
 
     /** @hidden*/
     @HostBinding('class.fd-menu__item')

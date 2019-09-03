@@ -1,3 +1,4 @@
+<p>Checkboxes</p>
 <form [formGroup]="customForm">
     <div fd-form-set>
         <div fd-form-item [isCheck]="true">
@@ -23,7 +24,7 @@
         </div>
     </div>
 </form>
-<br><br>
-Option 1 Value: {{ customForm.controls.firstOption.value }} <br>
-Option 2 Value: {{ customForm.controls.secondOption.value }} <br>
-Option 3 Value: {{ customForm.controls.thirdOption.value }}
+<br>
+Option 1 Value: {{ customForm.controls.firstOption.value }} Disabled: {{ customForm.controls.firstOption.disabled }} <br>
+Option 2 Value: {{ customForm.controls.secondOption.value }} Disabled: {{ customForm.controls.secondOption.disabled }} <br>
+Option 3 Value: {{ customForm.controls.thirdOption.value }} Disabled: {{ customForm.controls.thirdOption.disabled }}

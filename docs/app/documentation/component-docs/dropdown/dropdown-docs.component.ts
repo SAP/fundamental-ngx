@@ -7,25 +7,59 @@ import * as dropdownStateMenuHtml from '!raw-loader!./examples/dropdown-state-ex
 import * as dropdownInfiniteScrollHtml from '!raw-loader!./examples/dropdown-infinite-scroll-example.component.html';
 import * as dropdownInfiniteScrollTs from '!raw-loader!./examples/dropdown-infinite-scroll-example.component.ts';
 import * as dropdownToolbarHtml from '!raw-loader!./examples/dropdown-toolbar-example.component.html';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-dropdown',
     templateUrl: './dropdown-docs.component.html'
 })
 export class DropdownDocsComponent {
-    textDropdownHtml = dropdownDefaultMenuHtml;
 
-    disabledDropdownHtml = dropdownStateMenuHtml;
+    textDropdownHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownDefaultMenuHtml,
+        }
+    ];
 
-    iconDropdownHtml = dropdownIconsMenuHtml;
+    disabledDropdownHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownStateMenuHtml,
+        }
+    ];
 
-    contextualMenuDropdownHtml = dropdownContextualMenuHtml;
+    iconDropdownHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownIconsMenuHtml,
+        }
+    ];
 
-    infiniteScrollHtml = dropdownInfiniteScrollHtml;
+    contextualMenuDropdownHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownContextualMenuHtml,
+        }
+    ];
 
-    infiniteScrollTs = dropdownInfiniteScrollTs;
+    infiniteScrollHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownInfiniteScrollHtml,
+        },
+        {
+            language: 'typescript',
+            code: dropdownInfiniteScrollTs,
+        }
+    ];
 
-    toolbarDropdownHtml = dropdownToolbarHtml;
+    toolbarDropdownHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownToolbarHtml,
+        }
+    ];
 
-    constructor() {}
+    constructor() { }
 }

@@ -1,9 +1,22 @@
 <form [formGroup]="customForm">
-    <fd-multi-input formControlName="selectedValues" [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
-        [placeholder]="'Search Here...'">
-    </fd-multi-input>
+    <div fd-form-set class="flex-form-set">
+        <div fd-form-item>
+            <fd-multi-input formControlName="selectedValues" [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+                [placeholder]="'Search Here...'">
+            </fd-multi-input>
+        </div>
+        <div fd-form-item>
+            <fd-multi-input formControlName="disabledSelectedValues" [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+                    [placeholder]="'Search Here...'">
+            </fd-multi-input>
+        </div>
+    </div>
 </form>
 
 Selected Values: <span *ngIf="customForm.controls.selectedValues.value">
     {{ customForm.controls.selectedValues.value | json }}
+</span>
+
+Selected Values: <span *ngIf="customForm.controls.disabledSelectedValues.value">
+    {{ customForm.controls.disabledSelectedValues.value | json }}
 </span>

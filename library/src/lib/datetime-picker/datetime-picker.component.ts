@@ -107,6 +107,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     displaySeconds: boolean = true;
 
+    /** Whether the time component shows minutes. */
+    @Input()
+    displayMinutes: boolean = true;
+
+    /** Whether the time component shows hours. */
+    @Input()
+    displayHours: boolean = true;
+
     /** Whether to perform visual validation on the picker input. */
     @Input()
     useValidation: boolean = true;
@@ -364,6 +372,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      */
     handleTimeChange(time: TimeObject): void {
         this.time = time;
+        if (!this.selectedDate || !this.selectedDate.isDateValid()) {
+            this.selectedDate = FdDate.getToday();
+        }
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.isModelValid();
         this.setInput(this.date);

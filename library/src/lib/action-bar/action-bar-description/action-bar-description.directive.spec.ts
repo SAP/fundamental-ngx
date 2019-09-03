@@ -32,4 +32,8 @@ describe('ActionBarDescription', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should assign class', () => {
+        expect(component.ref.nativeElement.className).toBe('fd-action-bar__description');
+    });
 });

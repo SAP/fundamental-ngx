@@ -37,6 +37,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'list', name: 'List' },
         { url: 'loadingSpinner', name: 'Loading Spinner' },
         { url: 'localizationEditor', name: 'Localization Editor' },
+        { url: 'mega-menu', name: 'Mega Menu' },
         { url: 'menu', name: 'Menu' },
         { url: 'modal', name: 'Modal' },
         { url: 'multi-input', name: 'Multi Input' },

@@ -6,7 +6,7 @@ import {
     Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarType, FdCalendarView } from '../calendar/calendar.component';
+import { CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Placement } from 'popper.js';
 import { FdDate } from '../calendar/models/fd-date';
@@ -72,9 +72,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     public selectedRangeDate: FdRangeDate = { start: null, end: null };
 
-    /** The day of the week the calendar should start on. 0 represents Sunday, 1 is Monday, 2 is Tuesday, and so on. */
+    /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
-    startingDayOfWeek: number = 0;
+    startingDayOfWeek: DaysOfWeek = 1;
 
     /** Whether to validate the date picker input. */
     @Input()

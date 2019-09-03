@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TimeComponent } from './time.component';
+import { OnlyDigitsDirective } from '../utils/directives/only-digits.directive';
 
 
 @NgModule({
-    declarations: [TimeComponent],
+    declarations: [TimeComponent, OnlyDigitsDirective],
     imports: [CommonModule, FormsModule],
-    exports: [TimeComponent]
+    exports: [TimeComponent, OnlyDigitsDirective]
 })
 export class TimeModule {}

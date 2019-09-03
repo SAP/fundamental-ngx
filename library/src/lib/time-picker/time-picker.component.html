@@ -27,12 +27,14 @@
         </span>
         </div>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
         <fd-time [disabled]="disabled"
                  [meridian]="meridian"
                  [(ngModel)]="time"
                  (ngModelChange)="timeFromTimeComponentChanged()"
                  [spinners]="spinners"
-                 [displaySeconds]="displaySeconds"></fd-time>
+                 [displayMinutes]="displayMinutes"
+                 [displaySeconds]="displaySeconds"
+                 [displayHours]="displayHours"></fd-time>
     </fd-popover-body>
 </fd-popover>

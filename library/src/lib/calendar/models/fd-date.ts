@@ -98,7 +98,7 @@ export class FdDate {
     /** Get previous day  */
     public previousDay(): FdDate {
         const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
-        const day = this.day === 1 ? maxDays : this.day + 1;
+        const day = this.day === 1 ? maxDays : this.day - 1;
         const month = day !== maxDays ? this.month : (this.month === 1 ? 12 : this.month - 1);
         const year = month !== 12 ? this.year : this.year - 1;
         return new FdDate(year, month, day);

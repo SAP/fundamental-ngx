@@ -60,12 +60,16 @@ import { SearchInputDocsComponent } from './component-docs/search-input/search-i
 // examples
 import {
     ActionBarBackExampleComponent,
+    ActionBarLongStringTitleTruncationExampleComponent,
     ActionBarContextualMenuExampleComponent,
     ActionBarNoBackExampleComponent,
-    ActionBarMobileExampleComponent
+    ActionBarMobileExampleComponent,
+
+
 } from './component-docs/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './component-docs/alert/examples/alert-example.component';
 import { AlertInlineExampleComponent } from './component-docs/alert/examples/alert-inline-example.component';
+import { AlertWidthExampleComponent } from './component-docs/alert/examples/alert-width-example.component';
 import { AlertComponentAsContentExampleComponent } from './component-docs/alert/examples/alert-component-as-content-example.component';
 import { AlertContentComponent } from './component-docs/alert/examples/alert-content.component';
 import {
@@ -140,8 +144,10 @@ import { LoadingSpinnerExampleComponent } from './component-docs/loading-spinner
 import { LoadingSpinnerContainerExampleComponent } from './component-docs/loading-spinner-docs/examples/loading-spinner-container-example.component';
 import {
     MenuExampleComponent,
-    MenuGroupExampleComponent
+    MenuGroupExampleComponent,
+    MenuSeparatorExampleComponent
 } from './component-docs/menu/examples/menu-examples.component';
+import { MenuAddonExampleComponent } from './component-docs/menu/examples/menu-addon-examples.component';
 import { ModalOpenTemplateExampleComponent } from './component-docs/modal/examples/template-as-content/modal-open-template-example.component';
 import { ModalContentComponent } from './component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from './component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
@@ -187,7 +193,7 @@ import {
     Time12ExampleComponent,
     TimeDisabledExampleComponent,
     TimeNoSecondsExampleComponent,
-    TimeNoSpinnersExampleComponent
+    TimeNoSpinnersExampleComponent, TimeOnlyHoursExampleComponent
 } from './component-docs/time/examples/time-examples.component';
 import {
     TimePickerExampleComponent,
@@ -195,7 +201,7 @@ import {
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent
+    TimePickerAllowNullExampleComponent, TimePickerOnlyHoursExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
@@ -352,8 +358,7 @@ import { LocalizationEditorTextareaExampleComponent } from './component-docs/loc
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from './component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { CalendarFormSingleExampleComponent } from './component-docs/calendar/examples/calendar-form-single-example.component';
-import { CalendarFormRangeExampleComponent } from './component-docs/calendar/examples/calendar-form-range-example.component';
+import { CalendarFormExamplesComponent } from './component-docs/calendar/examples/calendar-form-examples.component';
 
 import { MenuKeyboardSupportExampleComponent } from './component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from './component-docs/modal/examples/container/container.component';
@@ -361,9 +366,11 @@ import { ComboboxAsyncExampleComponent } from './component-docs/combobox/example
 import { ComboboxDisplaywithExampleComponent } from './component-docs/combobox/examples/combobox-displaywith-example.component';
 import { ComboboxDynamicExampleComponent } from './component-docs/combobox/examples/combobox-dynamic-example.component';
 import { ComboboxTemplateExampleComponent } from './component-docs/combobox/examples/combobox-template-example.component';
+import { ComboboxHeightExampleComponent } from './component-docs/combobox/examples/combobox-height-example.component';
+import { ComboboxDisabledExampleComponent } from './component-docs/combobox/examples/combobox-disabled-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './component-docs/calendar/examples/calendar-programmatically-change-example.component';
 import { SelectViewValueExampleComponent } from './component-docs/select/examples/select-view-value-example/select-view-value-example.component';
-import { InputGroupNumberFormExampleComponent } from './component-docs/input-group/examples/input-group-number-form-example.component';
+import { ComboboxFormsExampleComponent } from './component-docs/combobox/examples/combobox-forms-example.component';
 
 import { InputFormGroupExampleComponent } from './component-docs/input/examples/input-form-group-example.component';
 import {
@@ -396,6 +403,16 @@ import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/
 import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
+import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
+import {
+    MegaMenuExampleComponent,
+    MegaMenuGroupExampleComponent,
+    MegaMenuPositionExampleComponent
+} from './component-docs/mega-menu/examples/mega-menu-examples.component';
+import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
+import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/examples/calendar--i18n-moment-example.component';
+import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 
 @NgModule({
     declarations: [
@@ -425,6 +442,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ImageDocsComponent,
         ListDocsComponent,
         MenuDocsComponent,
+        MegaMenuDocsComponent,
         ModalDocsComponent,
         SelectNativeDocsComponent,
         TabsDocsComponent,
@@ -451,6 +469,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ComponentExampleComponent,
         ExampleBackgroundComponent,
         ActionBarBackExampleComponent,
+        ActionBarLongStringTitleTruncationExampleComponent,
         ActionBarContextualMenuExampleComponent,
         ActionBarMobileExampleComponent,
         ActionBarNoBackExampleComponent,
@@ -458,6 +477,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         AlertComponentAsContentExampleComponent,
         AlertContentComponent,
         AlertInlineExampleComponent,
+        AlertWidthExampleComponent,
         BadgeDefaultExampleComponent,
         BadgeFilledExampleComponent,
         BadgePillExampleComponent,
@@ -484,8 +504,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
-        CalendarFormSingleExampleComponent,
-        CalendarFormRangeExampleComponent,
+        CalendarFormExamplesComponent,
         CalendarProgrammaticallyChangeExampleComponent,
         CheckboxExamplesComponent,
         CheckboxFormGroupExampleComponent,
@@ -542,7 +561,12 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ListCheckboxFormExampleComponent,
         ListSingleSelectExampleComponent,
         MenuExampleComponent,
+        MegaMenuExampleComponent,
+        MegaMenuGroupExampleComponent,
+        MegaMenuPositionExampleComponent,
+        MenuAddonExampleComponent,
         MenuGroupExampleComponent,
+        MenuSeparatorExampleComponent,
         MenuKeyboardSupportExampleComponent,
         ModalOpenTemplateExampleComponent,
         ModalContentComponent,
@@ -616,6 +640,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         Time12ExampleComponent,
         TimeDisabledExampleComponent,
         TimeNoSecondsExampleComponent,
+        TimeOnlyHoursExampleComponent,
         TimeNoSpinnersExampleComponent,
         TimeI18nExampleComponent,
         TimeFormExampleComponent,
@@ -623,6 +648,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         TimePicker12ExampleComponent,
         TimePickerDisabledExampleComponent,
         TimePickerNoSecondsExampleComponent,
+        TimePickerOnlyHoursExampleComponent,
         TimePickerCompactExampleComponent,
         TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
@@ -631,8 +657,12 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ComboboxAsyncExampleComponent,
         ComboboxDisplaywithExampleComponent,
         ComboboxDynamicExampleComponent,
+        ComboboxSearchFunctionExampleComponent,
         ComboboxExampleComponent,
         ComboboxTemplateExampleComponent,
+        ComboboxFormsExampleComponent,
+        ComboboxDisabledExampleComponent,
+        ComboboxHeightExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,
@@ -680,6 +710,7 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         ListHeaderComponent,
         LoadingSpinnerHeaderComponent,
         MenuHeaderComponent,
+        MegaMenuHeaderComponent,
         ModalDocsHeaderComponent,
         MultiInputHeaderComponent,
         PaginationHeaderComponent,
@@ -719,7 +750,8 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
-        InputGroupNumberFormExampleComponent
+        CalendarI18nMomentExampleComponent,
+        SelectMaxHeightExampleComponent
     ],
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [

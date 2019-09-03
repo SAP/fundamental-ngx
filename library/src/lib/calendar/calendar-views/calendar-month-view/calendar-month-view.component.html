@@ -1,7 +1,7 @@
 <div class="fd-calendar__months">
     <ul class="fd-calendar__list">
         <li class="fd-calendar__item"
-            *ngFor="let month of monthNames; let i = index"
+            *ngFor="let month of shortMonthNames; let i = index"
             [ngClass]="{
                 'fd-calendar__item--current': i + monthOffset === currentMonth,
                 'is-selected': i + monthOffset === monthSelected

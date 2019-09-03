@@ -59,6 +59,14 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     displaySeconds: boolean = true;
 
+    /** @Input When set to false, hides the input for minutes. */
+    @Input()
+    displayMinutes: boolean = true;
+
+    /** @Input When set to false, hides the input for hours. */
+    @Input()
+    displayHours: boolean = true;
+
     /** Whether to perform visual validation on the picker input. */
     @Input()
     validate: boolean = true;

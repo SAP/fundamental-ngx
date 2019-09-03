@@ -102,6 +102,8 @@ import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { SelectHeaderComponent } from './component-docs/select/select-header/select-header.component';
 import { SelectDocsComponent } from './component-docs/select/select-docs.component';
+import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
+import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -222,6 +224,11 @@ export const ROUTES: Routes = [
             { path: 'localizationEditor', component: LocalizationEditorHeaderComponent, children: [
                     { path: '', component: LocalizationEditorDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.localizationEditor}}
+                ]
+            },
+            { path: 'mega-menu', component: MegaMenuHeaderComponent, children: [
+                    { path: '', component: MegaMenuDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.megaMenu}}
                 ]
             },
             { path: 'menu', component: MenuHeaderComponent, children: [
