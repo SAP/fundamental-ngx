@@ -7,7 +7,6 @@ import { FdRangeDate } from '../../../../../../library/src/lib/calendar/models/f
     template: ` <fd-date-picker [type]="'range'" [(ngModel)]="selectedRange">
                 </fd-date-picker>
                 <br/>
-                <br/>
                 <div>Selected First Date: {{getSelectedFirstDate()}}</div>
                 <br/>
                 <div>Selected Last Date: {{getSelectedLastDate()}}</div>`
