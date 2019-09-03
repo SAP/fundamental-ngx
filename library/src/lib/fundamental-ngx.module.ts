@@ -45,6 +45,7 @@ import { TokenModule } from './token/token.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
+import { MegaMenuModule } from './mega-menu/mega-menu.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -71,6 +72,7 @@ import { LocalizationEditorModule } from './localizator-editor/localization-edit
         ListModule,
         LoadingSpinnerModule,
         LocalizationEditorModule,
+        MegaMenuModule,
         MenuModule,
         ModalModule,
         MultiInputModule,
@@ -92,6 +94,6 @@ import { LocalizationEditorModule } from './localizator-editor/localization-edit
         TokenModule,
         TreeModule
     ],
-    providers: [AlertService, ModalService],
+    providers: [AlertService, ModalService]
 })
 export class FundamentalNgxModule {}

@@ -1,19 +1,16 @@
 import { Directive, ElementRef, HostBinding } from '@angular/core';
-import { DefaultMenuItem } from './default-menu-item';
 
-/**
- * The directive that represents a menu item.
- */
 @Directive({
-    // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-menu-item]',
+    selector: '[fd-mega-menu-sublink]',
+    host: {
+        'tabindex': '0'
+    }
 })
-export class MenuItemDirective implements DefaultMenuItem {
-
-    /** @hidden*/
-    @HostBinding('class.fd-menu__item')
-    fdMenuItemClass: boolean = true;
+export class MegaMenuSublinkDirective {
+    /** @hidden */
+    @HostBinding('class.fd-mega-menu__sublink')
+    fdMegaMenuClass: boolean = true;
 
     /** @hidden */
     constructor (public itemEl: ElementRef) {}
