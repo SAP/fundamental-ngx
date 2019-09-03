@@ -11,6 +11,25 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 
+/**
+ *  Directive represents mega menu list, which contains items.
+ *  ```html
+ *  <ul fd-mega-menu-list>
+ *      <fd-mega-menu-item>
+ *          <a fd-mega-menu-link>Item 0</a>
+ *          <li fd-mega-menu-subitem>
+ *              <a fd-mega-menu-sublink>Sub Item 1</a>
+ *          </li>
+ *          <li fd-mega-menu-subitem>
+ *              <a fd-mega-menu-sublink>Sub Item 2</a>
+ *          </li>
+ *          <li fd-mega-menu-subitem>
+ *              <a fd-mega-menu-sublink>Sub Item 3</a>
+ *          </li>
+ *      </fd-mega-menu-item>
+ *  </ul>
+ *  ```
+ * */
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-mega-menu-list]'

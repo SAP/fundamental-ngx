@@ -1,5 +1,11 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
+/**
+ *  Directive represents mega menu link.
+ *  ```html
+ * <a fd-mega-menu-link href="#">Link</a>
+ *  ```
+ * */
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-mega-menu-link]',

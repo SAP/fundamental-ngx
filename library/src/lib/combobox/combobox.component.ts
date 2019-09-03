@@ -26,6 +26,13 @@ import focusTrap, { FocusTrap } from 'focus-trap';
  * Allows users to filter through results and select a value.
  *
  * Supports Angular Forms.
+ * ```html
+ * <fd-combobox
+ *      [(ngModel)]="searchTerm"
+ *      [dropdownValues]="dropdownValues"
+ *      [placeholder]="'Type some text...'">
+ * </fd-combobox>
+ * ```
  */
 @Component({
     selector: 'fd-combobox',

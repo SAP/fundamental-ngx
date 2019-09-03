@@ -1,4 +1,4 @@
-import { Component, Directive, ViewEncapsulation } from '@angular/core';
+import { Directive } from '@angular/core';
 
 /**
  * The directive that represents a list group.

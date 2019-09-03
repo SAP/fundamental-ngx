@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { SideNavigationLinkDirective } from '../side-navigation-link/side-navigation-link.directive';
 import { Subscription } from 'rxjs';
 import { SideNavigationSublistDirective } from '../side-navigation-sublist/side-navigation-sublist.directive';

@@ -23,6 +23,23 @@ import { DefaultMenuItem } from '../../menu/default-menu-item';
 
 export type MenuSubListPosition = 'left' | 'right';
 
+/**
+ *  Component represents mega menu item, which contains subitems and link.
+ *  ```html
+ *  <fd-mega-menu-item>
+ *      <a fd-mega-menu-link>Item 0</a>
+ *      <li fd-mega-menu-subitem>
+ *          <a fd-mega-menu-sublink>Sub Item 1</a>
+ *      </li>
+ *      <li fd-mega-menu-subitem>
+ *          <a fd-mega-menu-sublink>Sub Item 2</a>
+ *      </li>
+ *      <li fd-mega-menu-subitem>
+ *          <a fd-mega-menu-sublink>Sub Item 3</a>
+ *      </li>
+ *  </fd-mega-menu-item>
+ *  ```
+ * */
 @Component({
     selector: 'fd-mega-menu-item',
     templateUrl: './mega-menu-item.component.html',

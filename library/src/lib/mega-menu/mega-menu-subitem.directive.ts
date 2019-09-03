@@ -2,6 +2,14 @@ import { ContentChild, Directive, EventEmitter, HostBinding, HostListener, Outpu
 import { DefaultMenuItem } from '../menu/default-menu-item';
 import { MegaMenuSublinkDirective } from './mega-menu-sublink.directive';
 
+/**
+ *  Directive represents mega menu subitem, which can contain sublink.
+ *  ```html
+ * <li fd-mega-menu-subitem>
+ *      <a fd-mega-menu-sublink>Sub Item 2</a>
+ * </li>
+ *  ```
+ * */
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-mega-menu-subitem]'
