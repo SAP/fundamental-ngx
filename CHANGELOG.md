@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0-rc.10"></a>
+# [0.10.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.9...v0.10.0-rc.10) (2019-09-03)
+
+
+### Features
+
+* Mega Menu ([#1164](https://github.com/SAP/fundamental-ngx/issues/1164)) ([11762d6](https://github.com/SAP/fundamental-ngx/commit/11762d6))
+
+
+
 <a name="0.10.0-rc.9"></a>
 # [0.10.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.8...v0.10.0-rc.9) (2019-09-03)
 
