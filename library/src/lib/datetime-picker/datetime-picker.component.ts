@@ -25,6 +25,10 @@ import { FdDatetime } from './models/fd-datetime';
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
  * fd-calendar and fd-time components to accomplish the UI pattern for picking a date and time.
+ * Supports Angular Forms.
+ * ```html
+ * <fd-date-time-picker [(ngModel)]="dateTime"></fd-date-time-picker>
+ * ```
  */
 @Component({
     selector: 'fd-datetime-picker',
