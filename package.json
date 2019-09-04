@@ -52,7 +52,7 @@
         "moment": "^2.24.0",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^8.1.0",
-        "npm": "^6.11.2",
+        "npm": "^6.11.3",
         "popper.js": "^1.15.0",
         "rxjs": "^6.5.2",
         "zone.js": "^0.8.29"
