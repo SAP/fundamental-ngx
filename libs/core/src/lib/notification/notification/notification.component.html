@@ -1,0 +1,9 @@
+<div class="fd-notification"
+     [ngClass]='(size ? "fd-notification--" + size : "") + (type ? " fd-notification--" + type : "")'
+>
+    <ng-content select="fd-notification-header" #element></ng-content>
+    <ng-content select="fd-notification-body"></ng-content>
+    <ng-content select="fd-notification-footer"></ng-content>
+    <ng-content select="fd-notification-default"></ng-content>
+    <ng-container #vc></ng-container>
+</div>

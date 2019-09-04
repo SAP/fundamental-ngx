@@ -1,0 +1,3 @@
+<div [ngClass]="['fd-notification__indicator--' + type]" *ngIf="type"></div>
+<ng-content select="[fd-notification-title]"></ng-content>
+<button class="fd-button--light sap-icon--decline fd-notification__close" (click)="closeButtonClicked()"></button>

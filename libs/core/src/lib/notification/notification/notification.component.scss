@@ -1,0 +1,495 @@
+/*!
+ * Fundamental Styles v0.2.0-rc.87
+ * Copyright (c) 2019 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/master/LICENSE)
+ */
+@charset "UTF-8";
+.fd-notification {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    max-width: 60rem;
+    background-color: var(--sapList_Background,#fff);
+    -webkit-box-shadow: var(--sapContent_Shadow0,0 0 0 .0625rem rgba(0,0,0,.1),0 .125rem .5rem 0 rgba(0,0,0,.1));
+    box-shadow: var(--sapContent_Shadow0,0 0 0 .0625rem rgba(0,0,0,.1),0 .125rem .5rem 0 rgba(0,0,0,.1));
+    border-radius: .25rem;
+    border-left: .375rem solid;
+    border-left-color: var(--sapNeutralBorderColor,#6a6d70);
+    margin-bottom: .5rem
+}
+.fd-notification::after,
+.fd-notification::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification[dir=rtl],
+[dir=rtl] .fd-notification {
+    border-left: none;
+    border-right: .375rem solid;
+    border-right-color: var(--sapNeutralBorderColor,#6a6d70)
+}
+.fd-notification__header {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-shadow: inset 0 -.0625rem var(--sapPageHeader_BorderColor,#d9d9d9);
+    box-shadow: inset 0 -.0625rem var(--sapPageHeader_BorderColor,#d9d9d9)
+}
+.fd-notification__header::after,
+.fd-notification__header::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__indicator--error {
+    margin-top: 1px;
+    padding: 1rem .5rem 0 1rem;
+    color: var(--sapErrorColor,#b00)
+}
+.fd-notification__indicator--error::before {
+    font-family: SAP-icons;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: inherit;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none
+}
+.fd-notification__indicator--error::before {
+    content: ""
+}
+.fd-notification__indicator--error::before {
+    font-size: 16px;
+    line-height: 1
+}
+.fd-notification__indicator--success {
+    margin-top: 1px;
+    padding: 1rem .5rem 0 1rem;
+    color: var(--sapSuccessColor,#107e3e)
+}
+.fd-notification__indicator--success::before {
+    font-family: SAP-icons;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: inherit;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none
+}
+.fd-notification__indicator--success::before {
+    content: ""
+}
+.fd-notification__indicator--success::before {
+    font-size: 16px;
+    line-height: 1
+}
+.fd-notification__indicator--warning {
+    margin-top: 1px;
+    padding: 1rem .5rem 0 1rem;
+    color: var(--sapWarningColor,#e9730c)
+}
+.fd-notification__indicator--warning::before {
+    font-family: SAP-icons;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: inherit;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none
+}
+.fd-notification__indicator--warning::before {
+    content: ""
+}
+.fd-notification__indicator--warning::before {
+    font-size: 16px;
+    line-height: 1
+}
+.fd-notification__indicator--information {
+    margin-top: 1px;
+    padding: 1rem .5rem 0 1rem;
+    color: var(--sapInformationColor,#0a6ed1)
+}
+.fd-notification__indicator--information::before {
+    font-family: SAP-icons;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: inherit;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none
+}
+.fd-notification__indicator--information::before {
+    content: ""
+}
+.fd-notification__indicator--information::before {
+    font-size: 16px;
+    line-height: 1
+}
+.fd-notification__title {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: var(--sapGroup_TitleTextColor,#32363a);
+    padding: 1rem 0;
+    margin-right: 1rem;
+    font-weight: 700;
+    width: 100%
+}
+.fd-notification__title::after,
+.fd-notification__title::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__title[dir=rtl],
+[dir=rtl] .fd-notification__title {
+    margin-right: 0;
+    margin-left: 1rem
+}
+.fd-notification__title:first-child {
+    padding-left: 1rem
+}
+.fd-notification__title:first-child[dir=rtl],
+[dir=rtl] .fd-notification__title:first-child {
+    padding-left: 0;
+    padding-right: 1rem
+}
+.fd-notification__close {
+    position: relative;
+    top: .35rem;
+    right: .35rem;
+    min-width: 36px;
+    min-height: 36px;
+    width: 36px;
+    height: 36px
+}
+.fd-notification__close[dir=rtl],
+[dir=rtl] .fd-notification__close {
+    right: -.35rem
+}
+.fd-notification__body {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    width: 100%
+}
+.fd-notification__body::after,
+.fd-notification__body::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__content {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1rem;
+    width: 60%
+}
+.fd-notification__content::after,
+.fd-notification__content::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__avatar {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    margin-right: 1rem;
+    min-width: 2rem;
+    min-height: 2rem
+}
+.fd-notification__avatar::after,
+.fd-notification__avatar::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__avatar[dir=rtl],
+[dir=rtl] .fd-notification__avatar {
+    margin-right: 0;
+    margin-left: 1rem
+}
+.fd-notification__text {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+.fd-notification__text::after,
+.fd-notification__text::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__description {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: var(--sapContent_LabelColor,#6a6d70)
+}
+.fd-notification__description::after,
+.fd-notification__description::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__metadata {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: var(--sapContent_LabelColor,#6a6d70);
+    padding-top: .375rem
+}
+.fd-notification__metadata::after,
+.fd-notification__metadata::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__footer {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 40%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: .5rem .5rem .5rem 1rem
+}
+.fd-notification__footer::after,
+.fd-notification__footer::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__footer > :not(:last-child) {
+    margin: .25rem
+}
+.fd-notification__actions {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: var(--fd-color-text-1,#32363a);
+    font-family: '72',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+.fd-notification__actions::after,
+.fd-notification__actions::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
+}
+.fd-notification__actions > * {
+    margin: .25rem
+}
+.fd-notification--error {
+    border-left-color: var(--sapErrorBorderColor,#b00)
+}
+.fd-notification--error[dir=rtl],
+[dir=rtl] .fd-notification--error {
+    border-right-color: var(--sapErrorBorderColor,#b00)
+}
+.fd-notification--success {
+    border-left-color: var(--sapSuccessBorderColor,#107e3e)
+}
+.fd-notification--success[dir=rtl],
+[dir=rtl] .fd-notification--success {
+    border-right-color: var(--sapSuccessBorderColor,#107e3e)
+}
+.fd-notification--warning {
+    border-left-color: var(--sapWarningBorderColor,#e9730c)
+}
+.fd-notification--warning[dir=rtl],
+[dir=rtl] .fd-notification--warning {
+    border-right-color: var(--sapWarningBorderColor,#e9730c)
+}
+.fd-notification--information {
+    border-left-color: var(--sapInformationBorderColor,#0a6ed1)
+}
+.fd-notification--information[dir=rtl],
+[dir=rtl] .fd-notification--information {
+    border-right-color: var(--sapInformationBorderColor,#0a6ed1)
+}
+.fd-notification--m .fd-notification__body,
+.fd-notification--s .fd-notification__body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    width: 100%
+}
+.fd-notification--m .fd-notification__content,
+.fd-notification--s .fd-notification__content {
+    width: 100%
+}
+.fd-notification--m .fd-notification__footer,
+.fd-notification--s .fd-notification__footer {
+    width: 100%
+}
+.fd-notification--m {
+    max-width: 640px;
+    min-width: 320px
+}
+.fd-notification--s {
+    width: 320px
+}
+.fd-notification--group > * {
+    border-radius: 0
+}
+.fd-notification--group > :not(:first-child) {
+    background-color: #fafafa
+}
+.fd-notification--group > :not(:first-child) .fd-notification__header {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+.fd-notification--group .fd-notification {
+    margin-bottom: 0
+}
+.fd-notification--group .fd-notification:first-child {
+    border-radius: .25rem .25rem 0 0
+}
+.fd-notification--group .fd-notification:last-child {
+    border-radius: 0 0 .25rem .25rem
+}
+.fd-notification--group .fd-notification:only-child {
+    border-radius: .25rem
+}
+.fd-notification--group .fd-notification__content {
+    padding-top: .75rem;
+    padding-bottom: .5rem
+}
+.fd-notification--group .fd-notification__title {
+    padding: .75rem 0
+}
+.fd-notification--group .fd-notification__close {
+    top: .1875rem;
+    right: .1875rem
+}
+.fd-notification--group[dir=rtl] .fd-notification__close,
+[dir=rtl] .fd-notification--group .fd-notification__close {
+    right: -.1875rem
+}
+.fd-notification--group .fd-notification__indicator--error,
+.fd-notification--group .fd-notification__indicator--information,
+.fd-notification--group .fd-notification__indicator--success,
+.fd-notification--group .fd-notification__indicator--warning {
+    padding-top: .75rem;
+    padding-bottom: .75rem
+}
