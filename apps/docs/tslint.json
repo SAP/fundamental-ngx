@@ -1,0 +1,22 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "eofline": false,
+    "max-line-length": [
+      true,
+      160
+    ],
+    "directive-selector": [
+      true,
+      "attribute",
+      "fd",
+      "camelCase"
+    ],
+    "component-selector": [
+      false,
+      "element",
+      "fd",
+      "kebab-case"
+    ]
+  }
+}

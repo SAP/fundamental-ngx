@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "module": "es2015",
+    "outDir": "../../dist/out-tsc/apps/docs",
+    "types": ["node"]
+  },
+  "exclude": ["src/test.ts", "**/*.spec.ts"]
+}
