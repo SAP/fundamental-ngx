@@ -4,7 +4,7 @@ import { TimeObject } from '../time/time-object';
 export class DateTimeFormatParsers {
 
     public static dateRegex = new RegExp('(d{1,2}|m{1,2}|y{1,4})(\\W)(d{1,2}|m{1,2}|y{1,4})(\\W)(d{1,2}|m{1,2}|y{1,4})');
-    public static timeRegexp = new RegExp('(([hms]{1,2}|)?)(\\W?)(([hms]{1,2})?)(\\W?)(([hms]{1,2})?)');
+    public static timeRegexp = new RegExp('([hms]{1,2})((\\W+([hms]{1,2}))?)((\\W+([hms]{1,2}))?)');
 
     /** Defines if date format is valid */
     public static isDateFormatValid(dateFormat: string): boolean {
@@ -22,8 +22,22 @@ export class DateTimeFormatParsers {
         return false;
     }
 
+    /** Returns matching string from time format */
+    public static getMatchingTimeFormat(timeFormat: string): string {
+        if (this.timeRegexp.exec(timeFormat)) {
+            return this.timeRegexp.exec(timeFormat)[0];
+        }
+    }
+
+    /** Returns matching string from date format */
+    public static getMatchingDateFormat(dateFormat: string): string {
+        if (this.dateRegex.exec(dateFormat)) {
+            return this.dateRegex.exec(dateFormat)[0];
+        }
+    }
+
     public static formatDateWithDateFormat(date: FdDate, dateFormat: string): string {
-        let dateString = dateFormat.toLocaleLowerCase();
+        let dateString = this.getMatchingDateFormat(dateFormat.toLocaleLowerCase());
 
         /** Date format is being replaced by real day values, ex. (dd is being replaced by 12) */
         dateString = dateString.replace('dd', this.numberFormat(date.day, 2));
@@ -35,7 +49,7 @@ export class DateTimeFormatParsers {
     }
 
     public static formatTimeWithTimeFormat(time: TimeObject, timeFormat: string): string {
-        let timeString = timeFormat.toLocaleLowerCase();
+        let timeString = this.getMatchingTimeFormat(timeFormat.toLocaleLowerCase());
 
         /** Time format is being replaced by real day values, ex. (hh is being replaced by 12) */
         timeString = timeString.replace('hh', this.numberFormat(time.hour, 2));
@@ -49,7 +63,7 @@ export class DateTimeFormatParsers {
 
     public static parseDateWithDateFormat(value: string, dateFormat: string): FdDate {
         // Remove white space and user toLowerCase
-        dateFormat = dateFormat.toLocaleLowerCase().trim();
+        dateFormat = this.getMatchingDateFormat(dateFormat.toLocaleLowerCase().trim());
 
         // Matching all non-word, non-digit separators
         const separators = dateFormat.match(/[^a-zA-Z\d]/g);
@@ -69,7 +83,7 @@ export class DateTimeFormatParsers {
 
     public static parseTimeWithTimeFormat(value: string, timeFormat: string): TimeObject {
         // Remove white space and user toLowerCase
-        timeFormat = timeFormat.toLocaleLowerCase().trim();
+        timeFormat = this.getMatchingTimeFormat(timeFormat.toLocaleLowerCase().trim());
 
         // Matching all non-word, non-digit separators
         const separators = timeFormat.match(/[^a-zA-Z\d]/g);

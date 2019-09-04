@@ -85,7 +85,7 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
             if (timeFormat && timeFormat.trim() && DateTimeFormatParsers.isTimeFormatValid(timeFormat)) {
                 timeString = DateTimeFormatParsers.formatTimeWithTimeFormat(date.time, timeFormat);
             }
-            return dateString + ',' + (timeString || '') ;
+            return dateString + ', ' + (timeString || '') ;
         } else {
             return this.format(date, 'm/d/yyyy, H:M:S');
         }
