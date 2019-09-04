@@ -403,6 +403,7 @@ import { RadioFormGroupExampleComponent } from './component-docs/radio/examples/
 import { RadioExamplesComponent } from './component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from './component-docs/radio/radio-docs.component';
 import { RadioHeaderComponent } from './component-docs/radio/radio-header/radio-header.component';
+import { DocsSectionTitleComponent } from './core-helpers/docs-section-title/docs-section-title.component';
 import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
 import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
 import {
@@ -750,6 +751,8 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         SelectAddingExampleComponent,
         SelectFormsComponent,
         SelectViewValueExampleComponent,
+        SelectMaxHeightExampleComponent,
+        DocsSectionTitleComponent,
         CalendarI18nMomentExampleComponent,
         SelectMaxHeightExampleComponent
     ],
