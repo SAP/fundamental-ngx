@@ -44,7 +44,7 @@
         "@angular/platform-browser": "^7.2.7",
         "@angular/platform-browser-dynamic": "^7.2.7",
         "@angular/router": "^7.2.7",
-        "@types/node": "^12.7.3",
+        "@types/node": "^12.7.4",
         "core-js": "^2.6.9",
         "focus-trap": "^5.0.2",
         "fundamental-styles": "^0.1.0",
@@ -52,9 +52,9 @@
         "moment": "^2.24.0",
         "ngx-highlightjs": "^3.0.3",
         "ngx-markdown": "^8.1.0",
-        "npm": "^6.11.2",
+        "npm": "^6.11.3",
         "popper.js": "^1.15.0",
-        "rxjs": "^6.5.2",
+        "rxjs": "^6.5.3",
         "zone.js": "^0.8.29"
     },
     "devDependencies": {
