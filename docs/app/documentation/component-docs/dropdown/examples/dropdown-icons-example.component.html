@@ -1,12 +1,16 @@
 <fd-popover>
     <fd-dropdown-control [glyph]="'filter'">Dropdown</fd-dropdown-control>
-    <fd-popover-body *ngIf="menu1 && menu1.length">
-        <fd-menu>
+    <fd-popover-body *ngIf="values && values.length">
+        <fd-menu fd-menu-addon>
             <ul fd-menu-list>
-                <li *ngFor="let option of menu1">
-                    <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
-                </li>
+                <li *ngFor="let option of values">
+                    <div fd-menu-item-addon>
+                        <fd-icon size="l" [glyph]="option.icon" class="fd-template-icon"></fd-icon>
+                    </div>
+                    <a href="" fd-menu-item>{{option.name}}</a>
+
             </ul>
+
         </fd-menu>
     </fd-popover-body>
 </fd-popover>
