@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0-rc.19"></a>
+# [0.10.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.18...v0.10.0-rc.19) (2019-09-05)
+
+
+### Features
+
+* split modal alert service ([#1209](https://github.com/SAP/fundamental-ngx/issues/1209)) ([c4cd55a](https://github.com/SAP/fundamental-ngx/commit/c4cd55a))
+
+
+
 <a name="0.10.0-rc.18"></a>
 # [0.10.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.10.0-rc.17...v0.10.0-rc.18) (2019-09-05)
 
