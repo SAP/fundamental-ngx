@@ -16,9 +16,9 @@ import {
     Output,
     EventEmitter, ViewEncapsulation, HostListener, NgZone
 } from '@angular/core';
-import { AlertRef } from './alert-utils/alert-ref';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { AlertRef } from './alert-utils/alert-ref';
 
 let alertUniqueId: number = 0;
 

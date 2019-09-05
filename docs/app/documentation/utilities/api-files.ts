@@ -17,8 +17,8 @@ export const API_FILES = {
     alert: [
         'AlertComponent',
         'AlertConfig',
-        'AlertRef',
-        'AlertService'
+        'AlertService',
+        'AlertRef'
     ],
     badgeLabel: [
         'BadgeDirective',
@@ -127,7 +127,6 @@ export const API_FILES = {
         'MenuKeyboardService'
     ],
     modal: [
-        'ModalRef',
         'ModalService',
         'ModalTitleDirective',
         'ModalCloseButtonDirective',
@@ -135,7 +134,8 @@ export const API_FILES = {
         'ModalPosition',
         'ModalBodyComponent',
         'ModalHeaderComponent',
-        'ModalFooterComponent'
+        'ModalFooterComponent',
+        'ModalRef'
     ],
     multiInput: [
         'MultiInputComponent'

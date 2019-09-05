@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalHeaderComponent } from './modal-header.component';
-import { ModalRef } from '../modal-utils/modal-ref';
 import { ModalModule } from '../modal.module';
+import { ModalRef } from '../modal-utils/modal-ref';
 
 describe('ModalHeaderComponent', () => {
     let component: ModalHeaderComponent;

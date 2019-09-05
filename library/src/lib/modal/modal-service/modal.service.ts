@@ -1,20 +1,16 @@
 import {
-    ComponentFactoryResolver,
     Injectable,
-    ApplicationRef,
-    Injector,
-    EmbeddedViewRef,
     ComponentRef,
     Type,
-    TemplateRef
+    TemplateRef, Inject
 } from '@angular/core';
 import { ModalComponent } from '../modal.component';
 import { ModalBackdrop } from '../modal-utils/modal-backdrop';
 import { ModalContainer } from '../modal-utils/modal-container';
 import { ModalConfig } from '../modal-utils/modal-config';
-import { ModalRef } from '../modal-utils/modal-ref';
-import { ModalInjector } from '../modal-utils/modal-injector';
 import { ModalPosition } from '../modal-utils/modal-position';
+import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { ModalRef } from '../modal-utils/modal-ref';
 
 /**
  * Service used to dynamically generate a modal.
@@ -28,9 +24,9 @@ export class ModalService {
     }[] = [];
 
     /** @hidden */
-    constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private appRef: ApplicationRef,
-                private injector: Injector) {}
+    constructor(
+        @Inject(DynamicComponentService) private dynamicComponentService: DynamicComponentService
+    ) {}
 
     /**
      * Status of the modal service.
@@ -59,95 +55,72 @@ export class ModalService {
         // Get default values from model
         modalConfig = Object.assign(new ModalConfig(), modalConfig);
 
-        // Setup injectable data
-        const configMap = new WeakMap();
-        const modalRef = new ModalRef();
-        modalRef.data = (modalConfig ? modalConfig.data : undefined);
-        configMap.set(ModalRef, modalRef);
+        // Instantiate modal ref service
+        const service: ModalRef = new ModalRef();
+        service.data = modalConfig.data;
 
-        // Prepare container
-        const containerFactory = this.componentFactoryResolver.resolveComponentFactory(ModalContainer);
-        const containerRef = containerFactory.create(this.injector);
-        this.appRef.attachView(containerRef.hostView);
+        // Create Container
+        const container: ComponentRef<ModalContainer> = this.dynamicComponentService.createDynamicComponent
+            < ModalContainer > (contentType, ModalContainer, modalConfig)
+        ;
 
-        // Prepare modal
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
-        const componentRef = componentFactory.create(new ModalInjector(this.injector, configMap));
-        this.appRef.attachView(componentRef.hostView);
+        // Define Container to put backdrop and component to container
+        modalConfig.container = container.location.nativeElement;
 
-        // Prepare backdrop
-        let backdropRef;
+        // Create Backdrop
+        let backdrop: ComponentRef<ModalBackdrop>;
         if (modalConfig.hasBackdrop) {
-            const backdropFactory = this.componentFactoryResolver.resolveComponentFactory(ModalBackdrop);
-            backdropRef = backdropFactory.create(new ModalInjector(this.injector, configMap));
-            this.appRef.attachView(backdropRef.hostView);
+            backdrop = this.dynamicComponentService.createDynamicComponent<ModalBackdrop>
+                (contentType, ModalBackdrop, modalConfig, [service])
+            ;
         }
 
-        // Subscribe to close of modalRef
-        const refSub = modalRef.afterClosed.subscribe(() => {
-            this.destroyModalComponent(componentRef);
-            refSub.unsubscribe();
-        }, () => {
-            this.destroyModalComponent(componentRef);
-            refSub.unsubscribe();
-        });
-
-        // Assign component attributes
-        const configObj = Object.assign({}, modalConfig);
-        Object.keys(configObj).forEach(key => {
-            if (key !== 'data') {
-                componentRef.instance[key] = configObj[key];
-
-                if (modalConfig.hasBackdrop) {
-                    backdropRef.instance[key] = configObj[key];
-                }
-            }
-        });
-        componentRef.instance.childComponentType = contentType;
+        // Create Component
+        const component = this.dynamicComponentService.createDynamicComponent
+            < ModalComponent > (contentType, ModalComponent, modalConfig, [service])
+        ;
 
         // Sizing
-        this.setModalSize(componentRef, configObj);
+        this.setModalSize(component, modalConfig);
 
         // Positioning
-        this.setModalPosition(componentRef, configObj.position);
+        this.setModalPosition(component, modalConfig.position);
 
-        // Render container
-        const containerEl = (containerRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        if (modalConfig.container !== 'body') {
-            modalConfig.container.appendChild(containerEl);
-        } else {
-            document.body.appendChild(containerEl);
-        }
+        this.modals.push({
+            modalRef: component,
+            containerRef: container,
+            backdropRef: backdrop
+        });
 
-        // Render backdrop
-        if (modalConfig.hasBackdrop) {
-            const domBackdrop = (backdropRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-            containerRef.location.nativeElement.appendChild(domBackdrop);
-        }
+        const defaultBehaviourOnClose = () => {
+            this.destroyModalComponent(component);
+            refSub.unsubscribe();
+        };
 
-        // Render modal
-        const domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        containerRef.location.nativeElement.appendChild(domElement);
+        const refSub = service.afterClosed
+            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose)
+        ;
 
-        this.modals.push({modalRef: componentRef, backdropRef: backdropRef, containerRef: containerRef});
-        return modalRef;
+        return service;
     }
 
     private destroyModalComponent(modal: ComponentRef<ModalComponent>): void {
+
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
         const indexOf = this.modals.indexOf(arrayRef);
-        this.appRef.detachView(arrayRef.modalRef.hostView);
-        this.appRef.detachView(arrayRef.containerRef.hostView);
+        this.dynamicComponentService.destroyComponent(arrayRef.modalRef);
+        this.dynamicComponentService.destroyComponent(arrayRef.containerRef);
         arrayRef.containerRef.destroy();
         arrayRef.modalRef.destroy();
 
         if (arrayRef.backdropRef) {
-            this.appRef.detachView(arrayRef.backdropRef.hostView);
+            this.dynamicComponentService.destroyComponent(arrayRef.backdropRef);
             arrayRef.backdropRef.destroy();
         }
 
         this.modals[indexOf] = null;
         this.modals = this.modals.filter(item => item !== null && item !== undefined);
+
     }
 
     private setModalSize(componentRef: ComponentRef<ModalComponent>, configObj: ModalConfig): void {
@@ -167,5 +140,4 @@ export class ModalService {
             componentRef.location.nativeElement.style.left = position.left;
         }
     }
-
 }

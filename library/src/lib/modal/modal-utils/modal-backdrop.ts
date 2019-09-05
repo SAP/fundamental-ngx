@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostBinding, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { ModalRef } from './modal-ref';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 import { modalFadeNgIf } from './modal-animations';
+import { ModalRef } from './modal-ref';
 
 @Component({
     selector: 'fd-modal-overlay',

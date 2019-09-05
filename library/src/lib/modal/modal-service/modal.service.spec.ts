@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalService } from './modal.service';
 import { ModalModule } from '../modal.module';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { ModalRef } from '../modal-utils/modal-ref';
 
 @Component({
@@ -20,7 +21,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [TemplateTestComponent],
     imports: [CommonModule, BrowserModule, ModalModule],
-    providers: [ModalService],
+    providers: [ModalService, DynamicComponentService],
     entryComponents: [TemplateTestComponent]
 })
 class TestModule {}
@@ -86,7 +87,7 @@ describe('ModalService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
-    it('should support setting modal size', fakeAsync(() => {
+    it('should support setting modal size', () => {
         const width = '400px';
         const height = '200px';
 
@@ -106,9 +107,9 @@ describe('ModalService', () => {
         expect(service['modals'][0].modalRef.location.nativeElement.style.maxHeight).toBe(height);
         expect(service['modals'][0].modalRef.location.nativeElement.style.minHeight).toBe(height);
         expect(service['modals'][0].modalRef.location.nativeElement.style.height).toBe(height);
-    }));
+    });
 
-    it('should support setting modal position', fakeAsync(() => {
+    it('should support setting modal position', () => {
         const top = '400px';
         const bottom = '300px';
         const right = '200px';
@@ -123,29 +124,29 @@ describe('ModalService', () => {
         expect(service['modals'][0].modalRef.location.nativeElement.style.bottom).toBe(bottom);
         expect(service['modals'][0].modalRef.location.nativeElement.style.right).toBe(right);
         expect(service['modals'][0].modalRef.location.nativeElement.style.left).toBe(left);
-    }));
+    });
 
-    it('should close modal on backdrop click', fakeAsync(() => {
-        expect(service['modals'].length).toBe(0);
+    it('should close modal on backdrop click', () => {
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: true});
-        expect(service['modals'].length).toBe(1);
+        expect(service.hasOpenModals()).toBe(false);
+
+        service.open(TemplateTestComponent, {backdropClickCloseable: true});
+
+        expect(service.hasOpenModals()).toBeTruthy();
+
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         service['modals'][0].backdropRef.location.nativeElement.click();
-        tick();
-        expect(service['modals'].length).toBe(0);
+        expect(service.hasOpenModals()).toBe(false);
 
-        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
-
-        const modalRef2: ModalRef = service.open(TemplateTestComponent, {backdropClickCloseable: false});
+        service.open(TemplateTestComponent, {backdropClickCloseable: false});
         service['modals'][0].backdropRef.location.nativeElement.click();
-        tick();
-        expect((service as any).destroyModalComponent).not.toHaveBeenCalled();
-        expect(service['modals'].length).toBe(1);
-    }));
+
+        expect(service.hasOpenModals()).toBeTruthy();
+
+    });
 
     it('should dismiss all modals', () => {
         service.open(TemplateTestComponent);

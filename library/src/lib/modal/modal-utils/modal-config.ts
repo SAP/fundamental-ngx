@@ -2,8 +2,9 @@
  * Configuration for opening a modal with the ModalService.
  */
 import { ModalPosition } from './modal-position';
+import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
 
-export class ModalConfig {
+export class ModalConfig implements DynamicComponentConfig {
 
     /** Id for the modal component. If omitted, a unique one is generated. */
     id?: string;

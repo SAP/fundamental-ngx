@@ -16,10 +16,10 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ModalRef } from './modal-utils/modal-ref';
 import { modalFadeNgIf } from './modal-utils/modal-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import focusTrap from 'focus-trap';
+import { ModalRef } from './modal-utils/modal-ref';
 
 @Component({
     selector: 'fd-modal',
