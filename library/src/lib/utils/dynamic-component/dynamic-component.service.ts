@@ -11,7 +11,7 @@ import { DynamicComponentInjector } from './dynamic-component-injector';
 import { DynamicComponentConfig } from './dynamic-component-config';
 
 /**
- * Service used to dynamically generate a modal.
+ * Service used to dynamically generate components like modals/alerts/notifications
  */
 @Injectable()
 export class DynamicComponentService {
@@ -25,7 +25,7 @@ export class DynamicComponentService {
 
     /**
      * Function that creates dynamic component and injects services to allow communication between component and outside
-     * @param contentType Content of the component.
+     * @param contentType Type of the component content
      * @param componentType Type of component that should be rendered.
      * @param config Configuration that will be passed to the component.
      * @param services Services that will be injected to the component.
