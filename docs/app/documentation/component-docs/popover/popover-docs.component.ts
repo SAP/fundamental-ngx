@@ -8,6 +8,8 @@ import * as popoverPlacementTsSrc from '!raw-loader!./examples/popover-placement
 import * as popoverModalHtmlSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.html';
 import * as popoverModalTsSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.ts';
 import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.html';
+import * as popoverDynamicHSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.html';
+import * as popoverDynamicTSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -51,6 +53,17 @@ export class PopoverDocsComponent {
         {
             language: 'typescript',
             code: popoverModalTsSrc
+        }
+    ];
+
+    popoverDynamicExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverDynamicHSrc,
+        },
+        {
+            language: 'typescript',
+            code: popoverDynamicTSrc
         }
     ];
 

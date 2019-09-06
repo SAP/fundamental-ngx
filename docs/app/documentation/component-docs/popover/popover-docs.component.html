@@ -53,6 +53,19 @@
 
 <separator></separator>
 
+<h2>Dynamic Body Height</h2>
+<description>
+    In case of height change inside popover body, the position of popover is not automatically changed, mostly cause of
+    optimization reasons. To force change of the position, it is needed to call <code>updatePopover()</code> method inside
+    popover, as it is on example. There is used <code>SideNavigation</code> component.
+</description>
+<component-example [name]="'ex6'">
+    <fd-popover-dynamic-example></fd-popover-dynamic-example>
+</component-example>
+<code-example [exampleFiles]="popoverDynamicExample"></code-example>
+
+<separator></separator>
+
 <description>
     <p>
         Under the hood, the Popover component makes use of <code>PopoverDirective</code>.

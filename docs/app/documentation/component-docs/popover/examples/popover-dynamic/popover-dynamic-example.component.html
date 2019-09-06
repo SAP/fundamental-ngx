@@ -1,0 +1,18 @@
+<fd-popover #popoverComponent [closeOnOutsideClick]="true" [focusTrapped]="true" placement="top"
+            [noArrow]="false" title="top">
+    <fd-popover-control>
+        <button fd-button [glyph]="'add'" class="fd-image--circle"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-side-nav *ngFor="let component of componentWithTasks">
+            <fd-side-nav-item>
+                <a fd-side-nav-link [hasSublist]="true" (onSubListOpenChange)="popoverComponent.updatePopover()">{{component.name}}</a>
+                <div fd-side-nav-sublist>
+                    <div fd-side-nav-subitem *ngFor="let task of component.tasks">
+                        <a fd-side-nav-sublink>{{task.name}}</a>
+                    </div>
+                </div>
+            </fd-side-nav-item>
+        </fd-side-nav>
+    </fd-popover-body>
+</fd-popover>

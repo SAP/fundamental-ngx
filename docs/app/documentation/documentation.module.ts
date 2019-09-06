@@ -414,6 +414,7 @@ import {
 import { ComboboxSearchFunctionExampleComponent } from './component-docs/combobox/examples/combobox-search-function-example.component';
 import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/examples/calendar--i18n-moment-example.component';
 import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
+import { PopoverDynamicExampleComponent } from './component-docs/popover/examples/popover-dynamic/popover-dynamic-example.component';
 
 @NgModule({
     declarations: [
@@ -586,6 +587,7 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
         PanelGridColumnSpanExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
+        PopoverDynamicExampleComponent,
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
         PopoverModalExampleComponent,
