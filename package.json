@@ -12,7 +12,7 @@
         "build-deploy-library": "ng build core && npm run build:schematics && cp README.md dist/libs/core/README.md",
         "build-pack-library": "ng build core && npm run build:schematics && cd dist/libs/core/ && npm pack && cd ../..",
         "copy-docs": "cp README.md apps/docs/src/assets/README.md && cp NEW_COMPONENT.md apps/docs/src/assets/NEW_COMPONENT.md",
-        "deploy-docs": "angular-cli-ghpages --branch gh-pages",
+        "deploy-docs": "angular-cli-ghpages -d dist/apps/docs --branch gh-pages",
         "e2e": "ng e2e",
         "hmr": "ng serve --hmr -e=hmr",
         "lint": "ng lint docs && ng lint core",
