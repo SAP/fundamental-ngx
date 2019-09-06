@@ -1,7 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { PopoverModule } from './popover.module';
-export { PopoverDirective } from './popover-directive/popover.directive';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BmdW5kYW1lbnRhbC1uZ3gvY29yZS8iLCJzb3VyY2VzIjpbImxpYi9wb3BvdmVyL3B1YmxpY19hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDhCQUFjLGtCQUFrQixDQUFDO0FBQ2pDLGlDQUFjLHVDQUF1QyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9wb3BvdmVyLm1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL3BvcG92ZXItZGlyZWN0aXZlL3BvcG92ZXIuZGlyZWN0aXZlJztcbiJdfQ==

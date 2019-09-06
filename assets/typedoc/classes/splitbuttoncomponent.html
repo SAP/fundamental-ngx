@@ -1,0 +1,356 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-split-button&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
+			additional options.</p>
+		</div>
+		<pre><code class="language-html">   <span class="hljs-tag">&lt;<span class="hljs-name">fd-split-button</span>&gt;</span>
+       Action Button
+       <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">fd-split-button-menu</span>&gt;</span>
+           <span class="hljs-tag">&lt;<span class="hljs-name">fd-menu</span>&gt;</span>
+               <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">fd-menu-list</span>&gt;</span>
+                   <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">fd-menu-item</span>&gt;</span>
+                      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"'/'"</span>&gt;</span>option<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                   <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                   <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">fd-menu-item</span>&gt;</span>
+                      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"'/'"</span>&gt;</span>option2<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                   <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+               <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+           <span class="hljs-tag">&lt;/<span class="hljs-name">fd-menu</span>&gt;</span>
+       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-name">fd-split-button</span>&gt;</span></code></pre>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">SplitButtonComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closeonescapekey" class="tsd-anchor"></a>
+		<h3>close<wbr>OnEscape<wbr>Key</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>OnEscape<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L48">split-button/split-button.component.ts:48</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover should close when the escape key is pressed.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closeonoutsideclick" class="tsd-anchor"></a>
+		<h3>close<wbr>OnOutside<wbr>Click</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>OnOutside<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L44">split-button/split-button.component.ts:44</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover should close when a click is made outside its boundaries.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L56">split-button/split-button.component.ts:56</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to apply compact mode to the button.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="disabled" class="tsd-anchor"></a>
+		<h3>disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L64">split-button/split-button.component.ts:64</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The icon to include in the button. See the icon page for the list of icons.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fdtype" class="tsd-anchor"></a>
+		<h3>fd<wbr>Type</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fd<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L73">split-button/split-button.component.ts:73</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The type of the button. Types include &#39;standard&#39;, &#39;positive&#39;, &#39;medium&#39;, and &#39;negative&#39;.
+				Leave empty for default (Action button).&#39;</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fillcontrolmode" class="tsd-anchor"></a>
+		<h3>fill<wbr>Control<wbr>Mode</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fill<wbr>Control<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopoverFillMode</span><span class="tsd-signature-symbol"> =&nbsp;&quot;at-least&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L86">split-button/split-button.component.ts:86</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Preset options for the popover body width.</p>
+				<ul>
+					<li><code>at-least</code> will apply a minimum width to the body equivalent to the width of the control.</li>
+					<li><code>equal</code> will apply a width to the body equivalent to the width of the control.</li>
+					<li>Leave blank for no effect.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="focustrapped" class="tsd-anchor"></a>
+		<h3>focus<wbr>Trapped</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">focus<wbr>Trapped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L52">split-button/split-button.component.ts:52</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the popover should be focusTrapped.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="glyph" class="tsd-anchor"></a>
+		<h3>glyph</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;slim-arrow-down&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L60">split-button/split-button.component.ts:60</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The icon to include in the button. See the icon page for the list of icons.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="mainactiontitle" class="tsd-anchor"></a>
+		<h3>main<wbr>Action<wbr>Title</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">main<wbr>Action<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L68">split-button/split-button.component.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The Title for main  action button</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="options" class="tsd-anchor"></a>
+		<h3>options</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L77">split-button/split-button.component.ts:77</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Button options.  Options include &#39;emphasized&#39; and &#39;light&#39;. Leave empty for default.&#39;</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="triggers" class="tsd-anchor"></a>
+		<h3>triggers</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">triggers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;click&#x27;]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L40">split-button/split-button.component.ts:40</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The trigger events that will open/close the popover.
+				Accepts any <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a>.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isopenchange" class="tsd-anchor"></a>
+		<h3>is<wbr>Open<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;boolean&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L94">split-button/split-button.component.ts:94</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event sent when is open popover changed</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="primarybuttonclicked" class="tsd-anchor"></a>
+		<h3>primary<wbr>Button<wbr>Clicked</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">primary<wbr>Button<wbr>Clicked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;boolean&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L98">split-button/split-button.component.ts:98</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event sent when primary button is clicked</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="buttonclick" class="tsd-anchor"></a>
+		<h3>button<wbr>Click</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">button<wbr>Click<span class="tsd-signature-symbol">(</span>$event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L103">split-button/split-button.component.ts:103</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p> Handles primary button click</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>$event: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="close" class="tsd-anchor"></a>
+		<h3>close</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L122">split-button/split-button.component.ts:122</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Closes the popover.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="open" class="tsd-anchor"></a>
+		<h3>open</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L132">split-button/split-button.component.ts:132</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Opens the popover.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="toggle" class="tsd-anchor"></a>
+		<h3>toggle</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">toggle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/split-button/split-button.component.ts#L111">split-button/split-button.component.ts:111</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Toggles the popover open state.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

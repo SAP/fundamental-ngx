@@ -1,9 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { ShellbarModule } from './shellbar.module';
-export { ProductMenuComponent } from './product-menu/product-menu.component';
-export { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
-export { ShellbarComponent } from './shellbar.component';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BmdW5kYW1lbnRhbC1uZ3gvY29yZS8iLCJzb3VyY2VzIjpbImxpYi9zaGVsbGJhci9wdWJsaWNfYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSwrQkFBYyxtQkFBbUIsQ0FBQztBQUNsQyxxQ0FBYyx1Q0FBdUMsQ0FBQztBQUN0RCx5Q0FBYywrQ0FBK0MsQ0FBQztBQUM5RCxrQ0FBYyxzQkFBc0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vc2hlbGxiYXIubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vcHJvZHVjdC1tZW51L3Byb2R1Y3QtbWVudS5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9zaGVsbGJhci1hY3Rpb25zL3NoZWxsYmFyLWFjdGlvbnMuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vc2hlbGxiYXIuY29tcG9uZW50JztcbiJdfQ==

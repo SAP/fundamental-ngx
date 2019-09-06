@@ -1,0 +1,161 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-list-checkbox&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The component that represents a checkbox list.</p>
+		</div>
+		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-list</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">fd-list-item</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">fd-list-checkbox</span>&gt;</span>List item 1<span class="hljs-tag">&lt;/<span class="hljs-name">fd-list-checkbox</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">fd-list</span>&gt;</span></code></pre>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">ListCheckboxComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="checked" class="tsd-anchor"></a>
+		<h3>checked</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">checked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L37">list/list-checkbox.component.ts:37</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the list item checkbox is checked.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="disabled" class="tsd-anchor"></a>
+		<h3>disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L41">list/list-checkbox.component.ts:41</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the list item checkbox is disabled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x27;fd-list-checkbox-&#x27; + listCheckboxUniqueId++</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L53">list/list-checkbox.component.ts:53</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The id of the checkbox.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="onactivated" class="tsd-anchor"></a>
+		<h3>on<wbr>Activated</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Activated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;string&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L49">list/list-checkbox.component.ts:49</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event fired when the checkbox becomes active.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="ontoggle" class="tsd-anchor"></a>
+		<h3>on<wbr>Toggle</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Toggle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new EventEmitter&lt;{id: string, value: boolean}&gt;()</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L45">list/list-checkbox.component.ts:45</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event fired when the state of the checkbox changes. Passes back the id and the value.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="ischecked" class="tsd-anchor"></a>
+		<h3>is<wbr>Checked</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isChecked<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> isChecked<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L62">list/list-checkbox.component.ts:62</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Set the value of the <em>isChecked</em> property.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/list/list-checkbox.component.ts#L67">list/list-checkbox.component.ts:67</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Set the value of the <em>isChecked</em> property.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

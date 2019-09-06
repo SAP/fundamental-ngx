@@ -1,8 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { SelectModule } from './select.module';
-export { SelectComponent } from './select.component';
-export { OptionComponent } from './option/option.component';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BmdW5kYW1lbnRhbC1uZ3gvY29yZS8iLCJzb3VyY2VzIjpbImxpYi9zZWxlY3QvcHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsNkJBQWMsaUJBQWlCLENBQUM7QUFDaEMsZ0NBQWMsb0JBQW9CLENBQUM7QUFDbkMsZ0NBQWMsMkJBQTJCLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3NlbGVjdC5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9zZWxlY3QuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vb3B0aW9uL29wdGlvbi5jb21wb25lbnQnXG4iXX0=

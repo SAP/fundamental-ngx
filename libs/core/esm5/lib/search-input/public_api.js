@@ -1,7 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { SearchInputModule } from './search-input.module';
-export { SearchInputComponent } from './search-input.component';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BmdW5kYW1lbnRhbC1uZ3gvY29yZS8iLCJzb3VyY2VzIjpbImxpYi9zZWFyY2gtaW5wdXQvcHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsa0NBQWMsdUJBQXVCLENBQUM7QUFDdEMscUNBQWMsMEJBQTBCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3NlYXJjaC1pbnB1dC5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9zZWFyY2gtaW5wdXQuY29tcG9uZW50JztcbiJdfQ==

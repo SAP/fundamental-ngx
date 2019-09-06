@@ -1,8 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { TimePickerModule } from './time-picker.module';
-export { TimePickerComponent } from './time-picker.component';
-export { TIME_FORMAT_FACTORY, TimeFormatParser, TimeFormatParserDefault } from './format/time-parser';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BmdW5kYW1lbnRhbC1uZ3gvY29yZS8iLCJzb3VyY2VzIjpbImxpYi90aW1lLXBpY2tlci9wdWJsaWNfYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxpQ0FBYyxzQkFBc0IsQ0FBQztBQUNyQyxvQ0FBYyx5QkFBeUIsQ0FBQztBQUN4QywrRUFBYyxzQkFBc0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vdGltZS1waWNrZXIubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vdGltZS1waWNrZXIuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vZm9ybWF0L3RpbWUtcGFyc2VyJztcbiJdfQ==

@@ -1,0 +1,122 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-shellbar-actions&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The component that represents shellbar actions.
+			It is a container wrapper for all product actions and links (required element).</p>
+			<p>```html
+				&lt;fd-shellbar-actions [user]=&quot;user&quot;
+				[userMenu]=&quot;userMenu&quot;
+				[productSwitcher]=&quot;productSwitcher&quot;&gt;
+			&lt;button fd-button [fdType]=&quot;&#39;standard&#39;&quot;&gt;Custom Button</button></p>
+		</div>
+		<pre><code>   &lt;fd-shellbar-action *ngFor=<span class="hljs-string">"let action of actions"</span>
+                       <span class="hljs-string">[glyph]</span>=<span class="hljs-string">"action.glyph"</span>
+                       <span class="hljs-string">[callback]</span>=<span class="hljs-string">"action.callback"</span>
+                       <span class="hljs-string">[label]</span>=<span class="hljs-string">"action.label"</span>
+                       <span class="hljs-string">[notificationCount]</span>=<span class="hljs-string">"action.notificationCount"</span>
+                       <span class="hljs-string">[notificationLabel]</span>=<span class="hljs-string">"action.notificationLabel"</span>&gt;
+   &lt;/fd-shellbar-action&gt;</code></pre></fd-shellbar-actions>
+		```
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">ShellbarActionsComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">AfterContentChecked</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closepopoveronselect" class="tsd-anchor"></a>
+		<h3>close<wbr>Popover<wbr>OnSelect</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>Popover<wbr>OnSelect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L64">shellbar/shellbar-actions/shellbar-actions.component.ts:64</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>When set to true, popover list will be closed after selecting the option</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="collapseditemmenulabel" class="tsd-anchor"></a>
+		<h3>collapsed<wbr>Item<wbr>Menu<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">collapsed<wbr>Item<wbr>Menu<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Collapsed Item Menu&quot;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L68">shellbar/shellbar-actions/shellbar-actions.component.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Label for the collapsed item menu.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="productswitcher" class="tsd-anchor"></a>
+		<h3>product<wbr>Switcher</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">product<wbr>Switcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L52">shellbar/shellbar-actions/shellbar-actions.component.ts:52</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The product switcher data.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="user" class="tsd-anchor"></a>
+		<h3>user</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L56">shellbar/shellbar-actions/shellbar-actions.component.ts:56</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The user data.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="usermenu" class="tsd-anchor"></a>
+		<h3>user<wbr>Menu</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">user<wbr>Menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3f2125cb/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L60">shellbar/shellbar-actions/shellbar-actions.component.ts:60</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The user menu data.</p>
+			</div>
+		</div>
+	</section>
+</section>
+</div>
