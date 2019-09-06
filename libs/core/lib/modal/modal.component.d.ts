@@ -1,0 +1,30 @@
+import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ElementRef, OnDestroy, OnInit, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { ModalRef } from './modal-utils/modal-ref';
+export declare class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
+    private elRef;
+    private componentFactoryResolver;
+    private cdRef;
+    private modalRef;
+    containerRef: ViewContainerRef;
+    id: string;
+    escKeyCloseable: boolean;
+    focusTrapped: boolean;
+    ariaLabelledBy: string;
+    ariaLabel: string;
+    ariaDescribedBy: string;
+    childComponentType: TemplateRef<any> | Type<any>;
+    backdropClickCloseable: boolean;
+    hasBackdrop: boolean;
+    modalPanelClass: string;
+    private componentRef;
+    private focusTrap;
+    constructor(elRef: ElementRef, componentFactoryResolver: ComponentFactoryResolver, cdRef: ChangeDetectorRef, modalRef: ModalRef);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    ngAfterViewInit(): void;
+    closeModalEsc(event: KeyboardEvent): void;
+    private loadFromComponent;
+    private loadFromTemplate;
+    _setProperties(): void;
+}

@@ -1,0 +1,26 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IconModule } from '../icon/icon.module';
+import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
+import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
+import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
+import { CalendarService } from './calendar.service';
+import { CalendarComponent } from './calendar.component';
+export class CalendarModule {
+}
+CalendarModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [CalendarComponent, CalendarHeaderComponent,
+                    CalendarDayViewComponent, CalendarMonthViewComponent, CalendarYearViewComponent],
+                imports: [CommonModule, IconModule],
+                exports: [CalendarComponent, CalendarDayViewComponent,
+                    CalendarHeaderComponent, CalendarYearViewComponent, CalendarMonthViewComponent],
+                providers: [CalendarService]
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FsZW5kYXIubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQGZ1bmRhbWVudGFsLW5neC9jb3JlLyIsInNvdXJjZXMiOlsibGliL2NhbGVuZGFyL2NhbGVuZGFyLm1vZHVsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFDL0MsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLHFCQUFxQixDQUFDO0FBRWpELE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RGLE9BQU8sRUFBRSx3QkFBd0IsRUFBRSxNQUFNLGdFQUFnRSxDQUFDO0FBQzFHLE9BQU8sRUFBRSwwQkFBMEIsRUFBRSxNQUFNLG9FQUFvRSxDQUFDO0FBQ2hILE9BQU8sRUFBRSx5QkFBeUIsRUFBRSxNQUFNLGtFQUFrRSxDQUFDO0FBQzdHLE9BQU8sRUFBRSxlQUFlLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQUNyRCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQVV6RCxNQUFNLE9BQU8sY0FBYzs7O1lBUjFCLFFBQVEsU0FBQztnQkFDTixZQUFZLEVBQUUsQ0FBQyxpQkFBaUIsRUFBRSx1QkFBdUI7b0JBQ3JELHdCQUF3QixFQUFFLDBCQUEwQixFQUFFLHlCQUF5QixDQUFDO2dCQUNwRixPQUFPLEVBQUUsQ0FBQyxZQUFZLEVBQUUsVUFBVSxDQUFDO2dCQUNuQyxPQUFPLEVBQUUsQ0FBQyxpQkFBaUIsRUFBRSx3QkFBd0I7b0JBQ2pELHVCQUF1QixFQUFFLHlCQUF5QixFQUFFLDBCQUEwQixDQUFDO2dCQUNuRixTQUFTLEVBQUUsQ0FBQyxlQUFlLENBQUM7YUFDL0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ29tbW9uTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29tbW9uJztcbmltcG9ydCB7IEljb25Nb2R1bGUgfSBmcm9tICcuLi9pY29uL2ljb24ubW9kdWxlJztcblxuaW1wb3J0IHsgQ2FsZW5kYXJIZWFkZXJDb21wb25lbnQgfSBmcm9tICcuL2NhbGVuZGFyLWhlYWRlci9jYWxlbmRhci1oZWFkZXIuY29tcG9uZW50JztcbmltcG9ydCB7IENhbGVuZGFyRGF5Vmlld0NvbXBvbmVudCB9IGZyb20gJy4vY2FsZW5kYXItdmlld3MvY2FsZW5kYXItZGF5LXZpZXcvY2FsZW5kYXItZGF5LXZpZXcuY29tcG9uZW50JztcbmltcG9ydCB7IENhbGVuZGFyTW9udGhWaWV3Q29tcG9uZW50IH0gZnJvbSAnLi9jYWxlbmRhci12aWV3cy9jYWxlbmRhci1tb250aC12aWV3L2NhbGVuZGFyLW1vbnRoLXZpZXcuY29tcG9uZW50JztcbmltcG9ydCB7IENhbGVuZGFyWWVhclZpZXdDb21wb25lbnQgfSBmcm9tICcuL2NhbGVuZGFyLXZpZXdzL2NhbGVuZGFyLXllYXItdmlldy9jYWxlbmRhci15ZWFyLXZpZXcuY29tcG9uZW50JztcbmltcG9ydCB7IENhbGVuZGFyU2VydmljZSB9IGZyb20gJy4vY2FsZW5kYXIuc2VydmljZSc7XG5pbXBvcnQgeyBDYWxlbmRhckNvbXBvbmVudCB9IGZyb20gJy4vY2FsZW5kYXIuY29tcG9uZW50JztcblxuQE5nTW9kdWxlKHtcbiAgICBkZWNsYXJhdGlvbnM6IFtDYWxlbmRhckNvbXBvbmVudCwgQ2FsZW5kYXJIZWFkZXJDb21wb25lbnQsXG4gICAgICAgIENhbGVuZGFyRGF5Vmlld0NvbXBvbmVudCwgQ2FsZW5kYXJNb250aFZpZXdDb21wb25lbnQsIENhbGVuZGFyWWVhclZpZXdDb21wb25lbnRdLFxuICAgIGltcG9ydHM6IFtDb21tb25Nb2R1bGUsIEljb25Nb2R1bGVdLFxuICAgIGV4cG9ydHM6IFtDYWxlbmRhckNvbXBvbmVudCwgQ2FsZW5kYXJEYXlWaWV3Q29tcG9uZW50LFxuICAgICAgICBDYWxlbmRhckhlYWRlckNvbXBvbmVudCwgQ2FsZW5kYXJZZWFyVmlld0NvbXBvbmVudCwgQ2FsZW5kYXJNb250aFZpZXdDb21wb25lbnRdLFxuICAgIHByb3ZpZGVyczogW0NhbGVuZGFyU2VydmljZV1cbn0pXG5leHBvcnQgY2xhc3MgQ2FsZW5kYXJNb2R1bGUge31cbiJdfQ==
