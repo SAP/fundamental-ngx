@@ -1,15 +1,19 @@
 language: node_js
+sudo: required
 node_js: 10.15.0
 cache: npm
 dist: trusty
+addons:
+    chrome: stable
+
 git:
   depth: false
 script:
-  - npm run build
+  - npm run build-all
 jobs:
   include:
   - stage: Lint and Test
-    script: npm run test && npm run test:coveralls && npm run build-pack-library
+    script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
   - stage: Pre-release
     if: branch = master
     before_deploy:

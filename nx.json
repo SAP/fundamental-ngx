@@ -1,0 +1,21 @@
+{
+  "npmScope": "fundamental-ngx",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "docs": {
+      "tags": ["fd"]
+    },
+    "docs-e2e": {
+      "tags": []
+    },
+    "core": {
+      "tags": ["fd"]
+    }
+  }
+}
