@@ -12,6 +12,7 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-button-group',
     templateUrl: './button-group.component.html',
+    styleUrls: ['./button-group.component.scss'],
     host: {
         'role': 'group'
     },

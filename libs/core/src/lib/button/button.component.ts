@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -8,12 +8,15 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  * <button fd-button>Button Text</button>
  * ```
  */
-@Directive({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-button]'
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: `button[fd-button], a[fd-buton]`,
+    exportAs: 'fd-button',
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./button.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class ButtonDirective extends AbstractFdNgxClass {
+export class ButtonComponent extends AbstractFdNgxClass {
 
     /** Whether to apply compact mode to the button. */
     @Input() compact: boolean;
