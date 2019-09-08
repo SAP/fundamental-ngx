@@ -25,7 +25,6 @@
                         "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"],
                         "styles": [
                             "apps/docs/src/fd-typedoc/assets/css/main.scss",
-                            "node_modules/fundamental-styles/dist/fundamental-styles.min.css",
                             "apps/docs/src/styles.scss"
                         ],
                         "scripts": ["node_modules/marked/lib/marked.js"],

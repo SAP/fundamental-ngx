@@ -23,7 +23,8 @@ import { PaginationService } from './pagination.service';
             cursor: pointer;
         }
     `],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnChanges {
     /** Represents the total number of items. */

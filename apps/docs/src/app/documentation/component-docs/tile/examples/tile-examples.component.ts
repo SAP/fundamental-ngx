@@ -31,18 +31,6 @@ export class TileProductExampleComponent {}
 export class TileDisabledExampleComponent {}
 
 @Component({
-    selector: 'fd-tile-grid-example',
-    templateUrl: './tile-grid-example.component.html'
-})
-export class TileGridExampleComponent {}
-
-@Component({
-    selector: 'fd-tile-grid-helpers-example',
-    templateUrl: './tile-grid-helpers-example.component.html'
-})
-export class TileGridHelpersExampleComponent {}
-
-@Component({
     selector: 'fd-tile-button-example',
     templateUrl: './tile-button-example.component.html'
 })

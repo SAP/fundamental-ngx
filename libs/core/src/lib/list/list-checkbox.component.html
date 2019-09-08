@@ -1,11 +1,11 @@
-<div class="fd-form__item fd-form__item--check">
+<div fd-form-item [isCheck]="true">
     <label fd-form-label
-           [htmlFor]="this.id">
-        <input class="fd-form__control"
+           [htmlFor]="id">
+        <input fd-form-control
                type="checkbox"
-               [id]="this.id"
-               [(ngModel)]="this.isChecked"
-               [disabled]="this.disabled">
+               [id]="id"
+               [(ngModel)]="isChecked"
+               [disabled]="disabled">
         <ng-content></ng-content>
     </label>
 </div>

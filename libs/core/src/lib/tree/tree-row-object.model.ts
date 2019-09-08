@@ -1,5 +1,5 @@
 export interface TreeRowObject {
     rowData: any[];
-    children: TreeRowObject[];
-    sublevelClass: string;
+    children?: TreeRowObject[];
+    sublevelClass?: string;
 }

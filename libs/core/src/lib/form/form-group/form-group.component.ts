@@ -15,11 +15,12 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-form-group',
     templateUrl: './form-group.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./form-group.component.scss']
 })
 export class FormGroupComponent {
 
     /** @hidden */
-    @HostBinding('class.fd-form__group')
+    @HostBinding('class.fd-form-group')
     fdFormGroupClass: boolean = true;
 }

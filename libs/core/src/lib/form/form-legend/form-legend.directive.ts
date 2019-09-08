@@ -13,6 +13,6 @@ import { Directive, HostBinding } from '@angular/core';
 export class FormLegendDirective {
 
     /** @hidden */
-    @HostBinding('class.fd-form__legend')
+    @HostBinding('class.fd-form-legend')
     fdFormLegendClass: boolean = true;
 }

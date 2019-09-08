@@ -23,6 +23,7 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 @Component({
     selector: 'fd-icon',
     template: ``,
+    styleUrls: ['./icon.component.scss'],
     host: {
         role: 'presentation'
     },

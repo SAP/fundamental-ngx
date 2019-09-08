@@ -1,4 +1,5 @@
 import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { InputGroupInputDirective } from '../input-group/input-group-directives';
 
 /**
  * Directive which is used along with input elements, inside the localization editor item or main.
@@ -13,6 +14,10 @@ import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, Vi
     selector: '[fd-localization-editor-input]'
 })
 export class LocalizationEditorInputDirective {
+
+    /** @hidden */
+    @HostBinding('attr.fd-input-group-input')
+    inputGroupDirective: InputGroupInputDirective = new InputGroupInputDirective();
 
     /**
      * @hidden
@@ -35,6 +40,10 @@ export class LocalizationEditorInputDirective {
     selector: '[fd-localization-editor-textarea]',
 })
 export class LocalizationEditorTextareaDirective {
+
+    /** @hidden */
+    @HostBinding('attr.fd-input-group-input')
+    inputGroupDirective: InputGroupInputDirective = new InputGroupInputDirective();
 
     /**
      * @hidden

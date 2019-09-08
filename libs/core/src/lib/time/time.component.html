@@ -5,29 +5,33 @@
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseHour()"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
+                fd-button
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
+                [size]="'xs'"
                 [attr.aria-label]="timeI18nLabels?.increaseHoursLabel"></button>
     </div>
-    <div class="fd-time__input">
-        <input [(ngModel)]="displayedHour"
-               fd-only-digits
-               [ngClass]="{
-                'is-disabled': disabled,
-                'is-invalid': ((displayedHour > 24 || displayedHour < 0) && validate)
-               }"
-               (ngModelChange)="displayedHourChanged()"
-               (blur)="inputBlur('hour')"
-               class="fd-form__control"
-               type="number"
-               placeholder="{{timeI18n?.hoursPlaceholder}}"
-               [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
-    </div>
+    <input [(ngModel)]="displayedHour"
+            fd-only-digits
+            [ngClass]="{
+            'is-disabled': disabled,
+            'is-invalid': ((displayedHour > 24 || displayedHour < 0) && validate)
+            }"
+            (ngModelChange)="displayedHourChanged()"
+            (blur)="inputBlur('hour')"
+            class="fd-input fd-time__input"
+            type="number"
+            placeholder="{{timeI18n?.hoursPlaceholder}}"
+            [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseHour()"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
+                fd-button
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
+                [size]="'xs'"
                 [attr.aria-label]="timeI18nLabels?.decreaseHoursLabel"></button>
     </div>
 </div>
@@ -38,27 +42,31 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseMinute()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 [attr.aria-label]="timeI18nLabels?.increaseMinutesLabel"></button>
     </div>
-    <div class="fd-time__input">
-        <input [(ngModel)]="time.minute"
-               fd-only-digits
-               (ngModelChange)="minuteModelChange()"
-               (blur)="inputBlur('minute')"
-               [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
-               class="fd-form__control"
-               type="number"
-               placeholder="{{timeI18n?.minutesPlaceholder}}"
-               [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
-    </div>
+    <input [(ngModel)]="time.minute"
+            fd-only-digits
+            (ngModelChange)="minuteModelChange()"
+            (blur)="inputBlur('minute')"
+            [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
+            class="fd-input fd-time__input"
+            type="number"
+            placeholder="{{timeI18n?.minutesPlaceholder}}"
+            [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseMinute()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 [attr.aria-label]="timeI18nLabels?.decreaseMinutesLabel"></button>
     </div>
 </div>
@@ -68,28 +76,32 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseSecond()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 [attr.aria-label]="timeI18nLabels?.increaseSecondsLabel"></button>
     </div>
-    <div class="fd-time__input">
-        <input [(ngModel)]="time.second"
-               fd-only-digits
-               (ngModelChange)="secondModelChange()"
-               (blur)="inputBlur('second')"
-               [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
-               class="fd-form__control"
-               type="number"
-               placeholder="{{timeI18n?.secondsPlaceholder}}"
-               (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"
-               [attr.aria-label]="timeI18nLabels?.secondsLabel"/>
-    </div>
+    <input [(ngModel)]="time.second"
+            fd-only-digits
+            (ngModelChange)="secondModelChange()"
+            (blur)="inputBlur('second')"
+            [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
+            class="fd-input fd-time__input"
+            type="number"
+            placeholder="{{timeI18n?.secondsPlaceholder}}"
+            (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"
+            [attr.aria-label]="timeI18nLabels?.secondsLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseSecond()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 [attr.aria-label]="timeI18nLabels?.decreaseSecondsLabel"
                 (keydown)="!meridian ? lastButtonKeydown($event) : ''"></button>
     </div>
@@ -100,26 +112,30 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 [attr.aria-label]="timeI18nLabels?.increasePeriodLabel"></button>
     </div>
-    <div class="fd-time__input">
-        <input [(ngModel)]="period"
-               [ngClass]="{'is-disabled': disabled}"
-               class="fd-form__control"
-               (blur)="inputBlur('period')"
-               (ngModelChange)="periodModelChange()"
-               type="text"
-               placeholder="{{timeI18n?.meridianPlaceholder}}"
-               [attr.aria-label]="timeI18nLabels?.periodLabel"/>
-    </div>
+    <input [(ngModel)]="period"
+            [ngClass]="{'is-disabled': disabled}"
+            class="fd-input fd-time__input"
+            (blur)="inputBlur('period')"
+            (ngModelChange)="periodModelChange()"
+            type="text"
+            placeholder="{{timeI18n?.meridianPlaceholder}}"
+            [attr.aria-label]="timeI18nLabels?.periodLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 [attr.aria-label]="timeI18nLabels?.decreasePeriodLabel"
                 (keydown)="lastButtonKeydown($event)"></button>
     </div>

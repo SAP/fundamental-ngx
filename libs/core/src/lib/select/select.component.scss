@@ -12,18 +12,73 @@
     }
 
     .fd-select-button-custom {
+        padding-right: 0;
         display: flex;
-        align-items: flex-end;
         justify-content: space-between;
+        align-items: stretch;
+        width: 100%;
+        border-color: var(--sapUiFieldBorderColor, #89919a);
+        color: var(--sapUiFieldTextColor, #32363a);
+        border-radius: 0.125rem;
 
         &::after {
-            flex-shrink: 0;
+            font-family: 'SAP-icons';
+            content: '\e1e2';
+            color: var(--sapUiContentIconColor, #0854a0);
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            text-decoration: inherit;
+            text-transform: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            speak: none;
+            width: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-    }
 
-    .fd-select-button-custom {
-        &::after {
-            margin-top: 0;
+        &:hover {
+            border-color: var(--sapUiFieldHoverBorderColor, #0854a0);
+            background-color: var(--sapUiFieldBackground, #ffffff);
+            color: var(--sapUiFieldTextColor, #32363a);
+
+            &::after {
+                background-color: var(--sapUiButtonLiteHoverBackground, #ebf5fe);
+            }
+        }
+
+        &:active,
+        &.is-active,
+        &[aria-expanded='true'] {
+            border-color: var(--sapUiFieldActiveBorderColor, #0854a0);
+
+            &::after {
+                color: var(--sapUiButtonActiveTextColor, #ffffff);
+                background-color: var(--sapButton_Lite_Active_Background, #0854a0);
+            }
+        }
+
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            padding-left: 0;
+            padding-right: 12px;
+        }
+
+        &[aria-disabled='true'],
+        &.is-disabled,
+        &:disabled {
+            cursor: not-allowed;
+            &:hover {
+                border-color: var(--sapUiFieldBorderColor, #89919a);
+                background-color: var(--sapUiFieldBackground, #ffffff);
+                color: var(--sapUiFieldTextColor, #32363a);
+
+                &::after {
+                    background-color: var(--sapUiFieldBackground, #ffffff);
+                }
+            }
         }
     }
 
