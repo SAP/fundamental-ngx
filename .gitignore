@@ -5,10 +5,10 @@
 /tmp
 /out-tsc
 /typedoc
-/docs/assets/typedoc
+/apps/docs/src/assets/typedoc
 
-docs/assets/README.md
-docs/assets/NEW_COMPONENT.md
+/apps/docs/src/assets/README.md
+/apps/docs/src/assets/NEW_COMPONENT.md
 # dependencies
 **/node_modules
 
