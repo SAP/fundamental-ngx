@@ -2,6 +2,7 @@
     <span class="fd-toggle fd-form__control" [ngClass]="(this.size ? ('fd-toggle--' + this.size) : '')">
         <input #input
                type="checkbox"
+               class="fd-toggle__input"
                [id]="innerInputId"
                [disabled]="this.disabled"
                [attr.aria-checked]="checked"
