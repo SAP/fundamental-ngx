@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -11,12 +11,17 @@ import { Directive } from '@angular/core';
  * </fd-breadcrumb>
  * ```
  */
-@Directive({
+@Component({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // tslint:disable-next-line:directive-component
     selector: 'fd-breadcrumb',
     host: {
         class: 'fd-breadcrumb'
-    }
+    },
+    template: `
+        <ng-content></ng-content>`,
+    styleUrls: ['./breadcrumb.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class BreadcrumbDirective {}
+export class BreadcrumbComponent {
+}

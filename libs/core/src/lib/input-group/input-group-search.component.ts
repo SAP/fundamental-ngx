@@ -19,7 +19,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./input-group.component.scss']
 })
 export class InputGroupSearchComponent implements ControlValueAccessor {
     /** Whether the input is disabled. */

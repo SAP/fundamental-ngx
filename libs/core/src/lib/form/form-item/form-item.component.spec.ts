@@ -1,4 +1,4 @@
-import { FormItemDirective } from './form-item.directive';
+import { FormItemComponent } from './form-item.component';
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -23,7 +23,7 @@ describe('FormItemDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FormItemDirective, TestComponent]
+            declarations: [FormItemComponent, TestComponent]
         });
     }));
 

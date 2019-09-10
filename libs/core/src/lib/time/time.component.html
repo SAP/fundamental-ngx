@@ -36,8 +36,11 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseMinute()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 [attr.aria-label]="timeI18nLabels?.increaseMinutesLabel"></button>
     </div>
     <input [(ngModel)]="time.minute"
@@ -53,8 +56,11 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseMinute()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 [attr.aria-label]="timeI18nLabels?.decreaseMinutesLabel"></button>
     </div>
 </div>
@@ -64,8 +70,11 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseSecond()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 [attr.aria-label]="timeI18nLabels?.increaseSecondsLabel"></button>
     </div>
     <input [(ngModel)]="time.second"
@@ -82,8 +91,11 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseSecond()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 [attr.aria-label]="timeI18nLabels?.decreaseSecondsLabel"
                 (keydown)="!meridian ? lastButtonKeydown($event) : ''"></button>
     </div>
@@ -94,8 +106,11 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
                 [attr.aria-label]="timeI18nLabels?.increasePeriodLabel"></button>
     </div>
     <input [(ngModel)]="period"
@@ -110,8 +125,11 @@
         <button *ngIf="spinners"
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="togglePeriod()"
+                fd-button
+                [size]="'xs'"
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
                 [attr.aria-label]="timeI18nLabels?.decreasePeriodLabel"
                 (keydown)="lastButtonKeydown($event)"></button>
     </div>

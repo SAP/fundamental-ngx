@@ -1,4 +1,4 @@
-import { IdentifierDirective } from './identifier.directive';
+import { IdentifierComponent } from './identifier.component';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -19,7 +19,7 @@ describe('IdentifierDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [IdentifierDirective, TestComponent]
+            declarations: [IdentifierComponent, TestComponent]
         });
     }));
 
@@ -29,8 +29,8 @@ describe('IdentifierDirective', () => {
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(IdentifierDirective));
-        directiveInstance = directive.injector.get(IdentifierDirective);
+        directive = debugElement.query(By.directive(IdentifierComponent));
+        directiveInstance = directive.injector.get(IdentifierComponent);
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
         spyOn(directiveInstance, '_addClassToElement');

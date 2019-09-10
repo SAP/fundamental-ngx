@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Inject, Input } from '@angular/core';
+import { Component, ElementRef, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -9,15 +9,19 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  * <span fd-identifier [size]="'l'" [glyph]="'washing-machine'"></span>
  * ```
  */
-@Directive({
+@Component({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // tslint:disable-next-line:component-selector
     selector: '[fd-identifier]',
     host: {
-        role: 'presentation'
-    }
+        role: 'presentation',
+        '[class.fd-identifier]': 'true'
+    },
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./identifier.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class IdentifierDirective extends AbstractFdNgxClass {
+export class IdentifierComponent extends AbstractFdNgxClass {
     /** 
      * The size of the identifier. 
      * The predefined values for the size are *xxs*, *xs*, *s*, *m*, *l*, *xl* and *xxl*.

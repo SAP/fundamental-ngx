@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The parent action bar directive.
@@ -13,11 +13,16 @@ import { Directive } from '@angular/core';
  * <h1 fd-action-bar-title>
  * ```
  */
-@Directive({
-    // tslint:disable-next-line:directive-selector
+@Component({
+    // tslint:disable-next-line:component-selector
     selector: '[fd-action-bar]',
+    template: `
+        <ng-content></ng-content>`,
     host: {
         class: 'fd-action-bar'
-    }
+    },
+    styleUrls: ['./action-bar.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class ActionBarDirective {}
+export class ActionBarComponent {
+}

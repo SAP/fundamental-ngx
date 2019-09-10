@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
-import { ActionBarDirective } from './action-bar.directive';
+import { ActionBarComponent } from './action-bar.component';
 import { ActionBarTitleDirective } from './action-bar-title/action-bar-title.directive';
 import { ActionBarDescriptionDirective } from './action-bar-description/action-bar-description.directive';
 import { ActionBarHeaderDirective } from './action-bar-header/action-bar-header.directive';
@@ -13,7 +13,7 @@ import { ActionBarMobileDirective } from './action-bar-mobile/action-bar-mobile.
 
 @NgModule({
     declarations: [
-        ActionBarDirective,
+        ActionBarComponent,
         ActionBarTitleDirective,
         ActionBarDescriptionDirective,
         ActionBarHeaderDirective,
@@ -23,7 +23,7 @@ import { ActionBarMobileDirective } from './action-bar-mobile/action-bar-mobile.
     ],
     imports: [CommonModule, ButtonModule, IconModule],
     exports: [
-        ActionBarDirective,
+        ActionBarComponent,
         ActionBarTitleDirective,
         ActionBarDescriptionDirective,
         ActionBarHeaderDirective,
