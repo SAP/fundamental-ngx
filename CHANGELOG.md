@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0-rc.5"></a>
+# [0.11.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.4...v0.11.0-rc.5) (2019-09-10)
+
+
+### Bug Fixes
+
+* removes the pointer events from the span within the button ([#1242](https://github.com/SAP/fundamental-ngx/issues/1242)) ([ad7b685](https://github.com/SAP/fundamental-ngx/commit/ad7b685))
+
+
+
 <a name="0.11.0-rc.4"></a>
 # [0.11.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.3...v0.11.0-rc.4) (2019-09-10)
 
