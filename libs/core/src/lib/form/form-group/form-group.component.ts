@@ -15,6 +15,7 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-form-group',
     templateUrl: './form-group.component.html',
+    styleUrls: ['./form-group.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class FormGroupComponent {

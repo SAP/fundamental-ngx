@@ -13,6 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
     selector: 'fd-input-group',
     templateUrl: './input-group.component.html',
+    styleUrls: ['./input-group.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -66,10 +67,10 @@ export class InputGroupComponent implements ControlValueAccessor {
     inputTextValue: string;
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => { };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => { };
 
     /** Get the value of the text input. */
     get inputText() {
