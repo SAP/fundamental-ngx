@@ -8,8 +8,12 @@
             <div class="fd-combobox-control"
                  [attr.aria-label]="multiInputBodyLabel"
                  [attr.aria-expanded]="isOpen">
-                <div class="fd-input-group fd-input-group--after" [ngClass]="{'fd-input-group--compact': compact}">
-                    <input type="text" class="fd-input"
+                <fd-input-group
+                    [compact]="compact"
+                    [button]="true"
+                    [glyph]="glyph"
+                    (addOnButtonClicked)="isOpen = !isOpen">
+                    <input type="text" class="fd-input" fd-input-group-input
                            [ngClass]="{'fd-input--compact': compact}"
                            [placeholder]="placeholder"
                            [disabled]="disabled"
@@ -17,14 +21,7 @@
                            (ngModelChange)="handleSearchTermChange()"
                            (keypress)="isOpen = true"
                            (click)="isOpen = !isOpen">
-                    <span class="fd-input-group__addon fd-input-group__addon--after
-                        fd-input-group__addon--button">
-                            <button class="fd-button--light" type="button"
-                                    [ngClass]="('sap-icon--' + glyph)"
-                                    [disabled]="disabled"
-                                    (click)="isOpen = !isOpen"></button>
-                        </span>
-                </div>
+                </fd-input-group>
             </div>
         </fd-popover-control>
         <fd-popover-body [attr.aria-hidden]="!isOpen">

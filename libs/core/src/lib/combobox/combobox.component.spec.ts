@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MenuItemDirective } from '../menu/menu-item.directive';
 import { ComboboxComponent } from './combobox.component';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '../popover/popover.module';

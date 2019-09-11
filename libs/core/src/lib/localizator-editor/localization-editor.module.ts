@@ -14,6 +14,7 @@ import {
 } from './localization-editor.directives';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 import { LocalizationEditorItemComponent } from './localization-editor-item/localization-editor-item.component';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,6 @@ import { LocalizationEditorItemComponent } from './localization-editor-item/loca
         LocalizationEditorTextareaDirective,
         LocalizationEditorElement
     ],
-    imports: [CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule]
+    imports: [CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule, ButtonModule]
 })
 export class LocalizationEditorModule {}
