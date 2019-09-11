@@ -18,6 +18,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
         '[attr.role]': '(this.isButton === true ? \'button\' : \'\')'
     },
     templateUrl: './tile.component.html',
+    styleUrls: ['./tile.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class TileComponent extends AbstractFdNgxClass {
