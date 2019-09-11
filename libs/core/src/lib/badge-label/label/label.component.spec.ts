@@ -1,16 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { BadgeDirective } from './badge.directive';
+import { LabelComponent } from './label.component';
 
 @Component({
     template: `
-        <span fd-badge>Fd-badge test</span>
+        <span fd-label>Fd-badge test</span>
     `
 })
+
 export class TestComponent { }
 
-describe('BadgeDirective', () => {
+describe('LabelComponent', () => {
     let component: TestComponent,
         fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
@@ -20,7 +21,7 @@ describe('BadgeDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [BadgeDirective, TestComponent]
+            declarations: [LabelComponent, TestComponent]
         });
     }));
 
@@ -31,9 +32,9 @@ describe('BadgeDirective', () => {
         element = debugElement.nativeElement;
 
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(BadgeDirective));
-        directiveInstance = directive.injector.get(BadgeDirective);
-        fixture = TestBed.createComponent(TestComponent);
+        directive = debugElement.query(By.directive(LabelComponent));
+        directiveInstance = directive.injector.get(LabelComponent);
+
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
         spyOn(directiveInstance, '_addClassToElement');
@@ -41,13 +42,13 @@ describe('BadgeDirective', () => {
 
     it('should create', () => {
         expect(directive).toBeTruthy();
+    });
 
+    it('should add label class', () => {
         directiveInstance.status = 'someStatus';
-        directiveInstance.modifier = 'someModifier';
-
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someStatus');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someModifier');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-label');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-label--someStatus');
     });
 });

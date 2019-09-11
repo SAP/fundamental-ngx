@@ -1,17 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { StatusLabelDirective } from './status-label.directive';
+import { BadgeComponent } from './badge.component';
 
 @Component({
     template: `
-        <span fd-status-label>Fd-badge test</span>
+        <span fd-badge>Fd-badge test</span>
     `
 })
-
 export class TestComponent { }
 
-describe('StatusLabelDirective', () => {
+describe('BadgeComponent', () => {
     let component: TestComponent,
         fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
@@ -21,7 +20,7 @@ describe('StatusLabelDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [StatusLabelDirective, TestComponent]
+            declarations: [BadgeComponent, TestComponent]
         });
     }));
 
@@ -32,9 +31,9 @@ describe('StatusLabelDirective', () => {
         element = debugElement.nativeElement;
 
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(StatusLabelDirective));
-        directiveInstance = directive.injector.get(StatusLabelDirective);
-
+        directive = debugElement.query(By.directive(BadgeComponent));
+        directiveInstance = directive.injector.get(BadgeComponent);
+        fixture = TestBed.createComponent(TestComponent);
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
         spyOn(directiveInstance, '_addClassToElement');
@@ -42,17 +41,13 @@ describe('StatusLabelDirective', () => {
 
     it('should create', () => {
         expect(directive).toBeTruthy();
-    });
 
-    it('should add status labels class', () => {
         directiveInstance.status = 'someStatus';
-        directiveInstance.statusIcon = 'someStatusIcon';
-        directiveInstance.icon = 'someIcon';
+        directiveInstance.modifier = 'someModifier';
+
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatus');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatusIcon');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someIcon');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someStatus');
+        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someModifier');
     });
 });

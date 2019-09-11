@@ -1,15 +1,18 @@
-import { Directive, ElementRef, Input} from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
  * Status Label directive with some default icons based on status input used to indicate status.
  * Icons are used to easily highlight the state of an object.
  */
-@Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-status-label]'
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-status-label]',
+    template: `<ng-content></ng-content>`,
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./status-label.component.scss']
 })
-export class StatusLabelDirective extends AbstractFdNgxClass {
+export class StatusLabelComponent extends AbstractFdNgxClass {
     /** Color coded status for the label. Options are 'success', 'warning', and 'error'. Leave empty for default label. */
     @Input() status: string = '';
 

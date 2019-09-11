@@ -4,15 +4,15 @@ import { ActionBarModule } from './action-bar.module';
 
 @Component({
     template: `
-        <div #directiveElement fd-action-bar>Action Bar Parent Test Text</div>
+        <div #componentElement fd-action-bar>Action Bar Parent Test Text</div>
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('componentElement')
     ref: ElementRef;
 }
 
-describe('Action Bar Parent Directive', () => {
+describe('Action Bar Parent Component', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
