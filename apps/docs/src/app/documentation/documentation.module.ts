@@ -179,8 +179,6 @@ import {
     TileActionsExampleComponent,
     TileDisabledExampleComponent,
     TileExampleComponent,
-    TileGridExampleComponent,
-    TileGridHelpersExampleComponent,
     TileMediaExampleComponent,
     TileProductExampleComponent,
     TileButtonExampleComponent
@@ -632,8 +630,6 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         TileActionsExampleComponent,
         TileDisabledExampleComponent,
         TileExampleComponent,
-        TileGridExampleComponent,
-        TileGridHelpersExampleComponent,
         TileMediaExampleComponent,
         TileProductExampleComponent,
         TileButtonExampleComponent,

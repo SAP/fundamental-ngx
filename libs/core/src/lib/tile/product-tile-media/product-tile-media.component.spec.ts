@@ -4,15 +4,15 @@ import { TileModule } from '../tile.module';
 
 @Component({
     template: `
-        <h2 #directiveElement fd-product-tile-media>Product Tile Media Test</h2>
+        <h2 #componentElement fd-product-tile-media>Product Tile Media Test</h2>
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('componentElement')
     ref: ElementRef;
 }
 
-describe('ProductTileMediaDirective', () => {
+describe('ProductTileMediaComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 

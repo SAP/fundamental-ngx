@@ -2,41 +2,45 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TileComponent } from './tile.component';
-import { TileContentDirective } from './tile-content/tile-content.directive';
-import { TileTitleDirective } from './tile-title/tile-title.directive';
-import { TileMediaDirective } from './tile-media/tile-media.directive';
-import { TileActionsDirective } from './tile-actions/tile-actions.directive';
+import { TileContentComponent } from './tile-content/tile-content.component';
+import { TileTextComponent } from './tile-text/tile-text.component';
+import { TileTitleComponent } from './tile-title/tile-title.component';
+import { TileMediaComponent } from './tile-media/tile-media.component';
+import { TileActionsComponent } from './tile-actions/tile-actions.component';
 import { ProductTileComponent } from './product-tile.component';
-import { ProductTileMediaDirective } from './product-tile-media/product-tile-media.directive';
-import { ProductTileContentDirective } from './product-tile-content/product-tile-content.directive';
-import { ProductTileTitleDirective } from './product-tile-title/product-tile-title.directive';
-import { TileGridDirective } from './tile-grid/tile-grid.directive';
+import { ProductTileMediaComponent } from './product-tile-media/product-tile-media.component';
+import { ProductTileContentComponent } from './product-tile-content/product-tile-content.component';
+import { ProductTileTextComponent } from './product-tile-text/product-tile-text.component';
+import { ProductTileTitleComponent } from './product-tile-title/product-tile-title.component';
 
 @NgModule({
     imports: [CommonModule],
     exports: [
         TileComponent,
-        TileContentDirective,
-        TileTitleDirective,
-        TileMediaDirective,
-        TileActionsDirective,
+        TileContentComponent,
+        TileTextComponent,
+        TileTitleComponent,
+        TileMediaComponent,
+        TileActionsComponent,
         ProductTileComponent,
-        ProductTileMediaDirective,
-        ProductTileContentDirective,
-        ProductTileTitleDirective,
-        TileGridDirective
+        ProductTileMediaComponent,
+        ProductTileContentComponent,
+        ProductTileTextComponent,
+        ProductTileTitleComponent
+        
     ],
     declarations: [
         TileComponent,
-        TileContentDirective,
-        TileTitleDirective,
-        TileMediaDirective,
-        TileActionsDirective,
+        TileContentComponent,
+        TileTextComponent,
+        TileTitleComponent,
+        TileMediaComponent,
+        TileActionsComponent,
         ProductTileComponent,
-        ProductTileMediaDirective,
-        ProductTileContentDirective,
-        ProductTileTitleDirective,
-        TileGridDirective
+        ProductTileMediaComponent,
+        ProductTileContentComponent,
+        ProductTileTextComponent,
+        ProductTileTitleComponent
     ]
 })
 export class TileModule {}

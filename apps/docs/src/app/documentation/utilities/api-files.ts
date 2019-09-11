@@ -217,13 +217,15 @@ export const API_FILES = {
         'ProductTileComponent',
         'ProductTileContentComponent',
         'ProductTileMediaComponent',
+        'ProductTileTextComponent',
         'ProductTileTitleComponent',
         'TileComponent',
         'TileActionsComponent',
-        'TileContentDirective',
-        'TileGridDirective',
-        'TileMediaDirective',
+        'TileContentComponent',
+        'TileMediaComponent',
+        'TileTextComponent',
         'TileTitleComponent'
+        
     ],
     time: [
         'TimeComponent',

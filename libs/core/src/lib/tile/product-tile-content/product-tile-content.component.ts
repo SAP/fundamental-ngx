@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Component that represents a product tile content. 
@@ -8,11 +8,13 @@ import { Directive } from '@angular/core';
  * </div>
  * ```
  */
-@Directive({
-    // tslint:disable-next-line:directive-selector
+@Component({
+    // tslint:disable-next-line:component-selector
     selector: '[fd-product-tile-content]',
     host: {
         'class': 'fd-product-tile__content'
-    }
+    },
+    template: `<ng-content></ng-content>`,
+    encapsulation: ViewEncapsulation.None
 })
-export class ProductTileContentDirective {}
+export class ProductTileContentComponent {}

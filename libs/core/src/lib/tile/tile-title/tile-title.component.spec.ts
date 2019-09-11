@@ -1,18 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TileModule } from '../tile.module';
+import { TileTitleComponent } from './tile-title.component';
 
 @Component({
     template: `
-        <h2 #directiveElement fd-tile-actions>Product Tile Actions Test</h2>
+        <h2 #componentElement fd-tile-title>Tile Title Test</h2>
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('componentElement')
     ref: ElementRef;
 }
 
-describe('ProductTileActionsDirective', () => {
+describe('TileTitleComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -34,6 +35,6 @@ describe('ProductTileActionsDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-tile__actions');
+        expect(component.ref.nativeElement.className).toBe('fd-tile__title');
     });
 });

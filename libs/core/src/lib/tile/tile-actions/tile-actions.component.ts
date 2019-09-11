@@ -1,4 +1,4 @@
-import { Component, Directive, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Tile level actions such as add, remove, delete, sort, etc.
@@ -11,11 +11,13 @@ import { Component, Directive, ViewEncapsulation } from '@angular/core';
  * </fd-tile>
  * ```
  */
-@Directive({
-    // tslint:disable-next-line:directive-selector
+@Component({
+    // tslint:disable-next-line:component-selector
     selector: '[fd-tile-actions]',
     host: {
         class: 'fd-tile__actions'
-    }
+    },
+    template: `<ng-content></ng-content>`,
+    encapsulation: ViewEncapsulation.None
 })
-export class TileActionsDirective {}
+export class TileActionsComponent {}
