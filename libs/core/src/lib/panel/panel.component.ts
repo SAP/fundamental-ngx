@@ -10,7 +10,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     host: {
         '[class.fd-has-display-block]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent extends AbstractFdNgxClass {
 
