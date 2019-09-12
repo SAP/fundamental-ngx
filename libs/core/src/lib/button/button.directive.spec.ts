@@ -11,11 +11,10 @@ export class TestComponent {}
 
 describe('ButtonDirective', () => {
     let fixture: ComponentFixture<TestComponent>,
-        component: TestComponent,
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let directive, directiveInstance;
+    let component, componentInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -25,41 +24,40 @@ describe('ButtonDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(ButtonComponent));
-        directiveInstance = directive.injector.get(ButtonComponent);
+        component = debugElement.query(By.directive(ButtonComponent));
+        componentInstance = component.injector.get(ButtonComponent);
 
-        spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(componentInstance, '_setProperties').and.callThrough();
+        spyOn(componentInstance, '_addClassToElement');
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
+        expect(component).toBeTruthy();
+        componentInstance.ngOnInit();
+        expect(componentInstance._setProperties).toHaveBeenCalled();
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
     });
 
     it('should add appropriate classes', () => {
-        directiveInstance.compact = 'true';
-        directiveInstance.glyph = 'someGlyph';
-        directiveInstance.fdType = 'someFdType';
-        directiveInstance.options = 'someOption';
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someFdType');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption');
+        componentInstance.compact = 'true';
+        componentInstance.glyph = 'someGlyph';
+        componentInstance.fdType = 'someFdType';
+        componentInstance.options = 'someOption';
+        componentInstance.ngOnInit();
+        expect(componentInstance._setProperties).toHaveBeenCalled();
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someFdType');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption');
 
         // should handle an array of options
-        directiveInstance.options = ['someOption1', 'someOption2'];
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption1');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption2');
+        componentInstance.options = ['someOption1', 'someOption2'];
+        componentInstance.ngOnInit();
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption1');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption2');
     });
 });
