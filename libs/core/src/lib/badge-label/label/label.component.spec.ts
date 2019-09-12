@@ -12,12 +12,11 @@ import { LabelComponent } from './label.component';
 export class TestComponent { }
 
 describe('LabelComponent', () => {
-    let component: TestComponent,
-        fixture: ComponentFixture<TestComponent>,
+    let fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let directive, directiveInstance;
+    let component, componentInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -32,23 +31,23 @@ describe('LabelComponent', () => {
         element = debugElement.nativeElement;
 
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(LabelComponent));
-        directiveInstance = directive.injector.get(LabelComponent);
+        component = debugElement.query(By.directive(LabelComponent));
+        componentInstance = component.injector.get(LabelComponent);
 
 
-        spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(componentInstance, '_setProperties').and.callThrough();
+        spyOn(componentInstance, '_addClassToElement');
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
+        expect(component).toBeTruthy();
     });
 
     it('should add label class', () => {
-        directiveInstance.status = 'someStatus';
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-label');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-label--someStatus');
+        componentInstance.status = 'someStatus';
+        componentInstance.ngOnInit();
+        expect(componentInstance._setProperties).toHaveBeenCalled();
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-label');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-label--someStatus');
     });
 });

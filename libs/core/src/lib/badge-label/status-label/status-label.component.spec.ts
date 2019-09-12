@@ -12,12 +12,11 @@ import { StatusLabelComponent } from './status-label.component';
 export class TestComponent { }
 
 describe('StatusLabelComponent', () => {
-    let component: TestComponent,
-        fixture: ComponentFixture<TestComponent>,
+    let fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let directive, directiveInstance;
+    let component, componentInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -32,27 +31,27 @@ describe('StatusLabelComponent', () => {
         element = debugElement.nativeElement;
 
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(StatusLabelComponent));
-        directiveInstance = directive.injector.get(StatusLabelComponent);
+        component = debugElement.query(By.directive(StatusLabelComponent));
+        componentInstance = component.injector.get(StatusLabelComponent);
 
 
-        spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(componentInstance, '_setProperties').and.callThrough();
+        spyOn(componentInstance, '_addClassToElement');
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
+        expect(component).toBeTruthy();
     });
 
     it('should add status labels class', () => {
-        directiveInstance.status = 'someStatus';
-        directiveInstance.statusIcon = 'someStatusIcon';
-        directiveInstance.icon = 'someIcon';
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatus');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatusIcon');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someIcon');
+        componentInstance.status = 'someStatus';
+        componentInstance.statusIcon = 'someStatusIcon';
+        componentInstance.icon = 'someIcon';
+        componentInstance.ngOnInit();
+        expect(componentInstance._setProperties).toHaveBeenCalled();
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatus');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-status-label--someStatusIcon');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someIcon');
     });
 });

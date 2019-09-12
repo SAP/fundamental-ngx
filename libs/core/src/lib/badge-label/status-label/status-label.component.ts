@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
- * Status Label directive with some default icons based on status input used to indicate status.
+ * Status Label component with some default icons based on status input used to indicate status.
  * Icons are used to easily highlight the state of an object.
  */
 @Component({

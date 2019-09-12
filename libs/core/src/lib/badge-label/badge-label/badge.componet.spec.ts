@@ -11,12 +11,11 @@ import { BadgeComponent } from './badge.component';
 export class TestComponent { }
 
 describe('BadgeComponent', () => {
-    let component: TestComponent,
-        fixture: ComponentFixture<TestComponent>,
+    let fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let directive, directiveInstance;
+    let component, componentInstance;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -31,23 +30,23 @@ describe('BadgeComponent', () => {
         element = debugElement.nativeElement;
 
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(BadgeComponent));
-        directiveInstance = directive.injector.get(BadgeComponent);
+        component = debugElement.query(By.directive(BadgeComponent));
+        componentInstance = component.injector.get(BadgeComponent);
         fixture = TestBed.createComponent(TestComponent);
 
-        spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(componentInstance, '_setProperties').and.callThrough();
+        spyOn(componentInstance, '_addClassToElement');
     });
 
     it('should create', () => {
-        expect(directive).toBeTruthy();
+        expect(component).toBeTruthy();
 
-        directiveInstance.status = 'someStatus';
-        directiveInstance.modifier = 'someModifier';
+        componentInstance.status = 'someStatus';
+        componentInstance.modifier = 'someModifier';
 
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someStatus');
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someModifier');
+        componentInstance.ngOnInit();
+        expect(componentInstance._setProperties).toHaveBeenCalled();
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someStatus');
+        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-badge--someModifier');
     });
 });

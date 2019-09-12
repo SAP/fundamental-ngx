@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
- * Label directive, used to indicate status, without any background or border
+ * Label component, used to indicate status, without any background or border
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
  */
 @Component({

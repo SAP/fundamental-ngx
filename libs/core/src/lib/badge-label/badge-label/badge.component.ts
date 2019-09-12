@@ -2,7 +2,7 @@ import { Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@a
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
- * Badge directive, used to indicate status.
+ * Badge component, used to indicate status.
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
  */
 @Component({
