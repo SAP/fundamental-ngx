@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0-rc.9"></a>
+# [0.11.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.8...v0.11.0-rc.9) (2019-09-12)
+
+
+### Features
+
+* Changing default selector prefix for "platform" project ([#1259](https://github.com/SAP/fundamental-ngx/issues/1259)) ([60a2acd](https://github.com/SAP/fundamental-ngx/commit/60a2acd))
+
+
+
 <a name="0.11.0-rc.8"></a>
 # [0.11.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.7...v0.11.0-rc.8) (2019-09-11)
 
