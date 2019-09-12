@@ -10,7 +10,7 @@ import {
     ContentChild, ViewChildren
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { SearchInputComponent } from '../../search-input/search-input.component';
+import { ComboboxComponent } from '../../combobox/combobox.component';
 import { PopoverComponent } from '../../popover/popover.component';
 
 /**
@@ -76,8 +76,8 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     popoverComponents: QueryList<PopoverComponent>;
 
     /** @hidden */
-    @ContentChild(SearchInputComponent)
-    searchInputComponent: SearchInputComponent;
+    @ContentChild(ComboboxComponent)
+    comboboxComponent: ComboboxComponent;
 
     /** @hidden */
     totalNotifications: number;
