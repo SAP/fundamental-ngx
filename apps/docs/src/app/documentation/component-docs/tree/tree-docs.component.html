@@ -1,4 +1,4 @@
-<h2>&lt;fd-tree&gt;</h2>
+<h2>Tree</h2>
 
 There are two different types of tree cells you can use, the 'simple' cells and the 'rich' cells. Simple cells can only
 display text. Rich cells can contain plain text or links. The tree component requires only two root arguments, a
@@ -15,27 +15,17 @@ property is an array of objects that match this object's structure.
 This is an example of a tree with simple cells, where the rowData is an array of strings.<br><br>
 <br>
 <component-example [name]="'ex1'">
-  <fd-tree (editRowClicked)="editRowClicked($event)"
-           (deleteRowClicked)="deleteRowClicked($event)"
-           [displayTreeActions]="true"
-           [headers]="data.properties.headers"
-           [treeData]="data.properties.simpleTreeData">
-
-  </fd-tree>
+    <fd-simple-tree-example></fd-simple-tree-example>
 </component-example>
-<!--<code-example [code]="simpleTreeHtml" [language]="'HTML'"></code-example>-->
-<!--<code-example [code]="simpleTreeJson" [language]="'HTML'"></code-example>-->
+<code-example [exampleFiles]="simpleTreeTs"></code-example>
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<h2>Rich Tree</h2>
-This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one
-or both of the following properties:<br><br>
-<component-example [name]="'ex2'">
-  <fd-tree [headers]="data.properties.headers"
-           [treeData]="data.properties.richTreeData">
-
-  </fd-tree>
-</component-example>
+<!--<h2>Rich Tree</h2>-->
+<!--This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one-->
+<!--or both of the following properties:<br><br>-->
+<!--<component-example [name]="'ex1'">-->
+<!--    <fd-simple-tree-example></fd-simple-tree-example>-->
+<!--</component-example>-->
 <!--<code-example [code]="richTreeHtml" [language]="'HTML'"></code-example>-->
 <!--<code-example [code]="richTreeJson" [language]="'HTML'"></code-example>-->
