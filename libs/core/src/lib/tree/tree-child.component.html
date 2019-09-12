@@ -10,6 +10,7 @@
               *ngIf="row.children && i === 0"
               class="fd-tree__control"
               aria-label="Expand"
+              [ngClass]="{'is-pressed' : !hideChildren}"
               [attr.aria-pressed]="!hideChildren"></button>
       <ng-container *ngIf="typeOf(cell) === 'string'">
         {{cell}}
@@ -59,6 +60,7 @@
     <fd-tree-child *ngFor="let child of row.children"
                    [displayTreeActions]="displayTreeActions"
                    [row]="child"
-                   [ngClass]="child.sublevelClass"></fd-tree-child>
+                   [ngClass]="child.sublevelClass">
+    </fd-tree-child>
   </ul>
 </li>

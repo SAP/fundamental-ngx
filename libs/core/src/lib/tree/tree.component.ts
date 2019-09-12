@@ -1,12 +1,13 @@
 import {
-    Component,
-    Input,
-    Output,
-    OnInit,
     AfterContentInit,
-    ViewChildren,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
     QueryList,
-    EventEmitter
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { TreeRowObject } from './tree-row-object.model';
@@ -14,7 +15,9 @@ import { TreeChildComponent } from './tree-child.component';
 
 @Component({
     selector: 'fd-tree',
-    templateUrl: './tree.component.html'
+    templateUrl: './tree.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./tree.component.scss']
 })
 export class TreeComponent implements OnInit, AfterContentInit {
     @Input() headers: string[];

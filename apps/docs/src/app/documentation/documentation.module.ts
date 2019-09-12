@@ -412,6 +412,7 @@ import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/ex
 import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 import { PopoverDynamicExampleComponent } from './component-docs/popover/examples/popover-dynamic/popover-dynamic-example.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { SimpleTreeExampleComponent } from './component-docs/tree/examples/simple-tree-example.component';
 
 
 @NgModule({
@@ -654,6 +655,7 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         TimePickerOtherDelimiterExampleComponent,
         TimePickerAllowNullExampleComponent,
         TimePickerFormExampleComponent,
+        SimpleTreeExampleComponent,
         ComboboxDocsComponent,
         ComboboxAsyncExampleComponent,
         ComboboxDisplaywithExampleComponent,

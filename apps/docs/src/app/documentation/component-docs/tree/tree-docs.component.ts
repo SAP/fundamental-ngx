@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
+import * as simpleTree from '!raw-loader!./examples/simple-tree-example.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-tree',
     templateUrl: './tree-docs.component.html'
 })
 export class TreeDocsComponent {
-    static schema: Schema = {
+
+
+
+
+    simpleTreeTs: ExampleFile[] = [{
+        language: 'typescript',
+        code: simpleTree
+    }];
+
+
+
+    schema: Schema = {
         properties: {
             properties: {
                 type: 'object',
