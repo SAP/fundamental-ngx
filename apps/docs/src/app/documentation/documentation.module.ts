@@ -149,12 +149,8 @@ import { ModalOpenTemplateExampleComponent } from './component-docs/modal/exampl
 import { ModalContentComponent } from './component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from './component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
 import {
-    PanelColumnsExampleComponent,
     PanelEdgeBleedExampleComponent,
-    PanelExampleComponent,
-    PanelGridExampleComponent,
-    PanelGridNoGapExampleComponent,
-    PanelGridColumnSpanExampleComponent
+    PanelExampleComponent
 } from './component-docs/panel/examples/panel-examples.component';
 import { PaginationExampleComponent } from './component-docs/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from './component-docs/popover/examples/popover-simple/popover-example.component';
@@ -410,6 +406,13 @@ import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/ex
 import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 import { PopoverDynamicExampleComponent } from './component-docs/popover/examples/popover-dynamic/popover-dynamic-example.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import {
+    LayoutColumnsExampleComponent, LayoutGridColumnSpanExampleComponent,
+    LayoutGridGapSizeExample, LayoutGridExampleComponent,
+    LayoutGridNoGapExampleComponent
+} from './component-docs/layout-grid/examples/layout-grid-examples.component';
+import { LayoutGridDocsHeaderComponent } from './component-docs/layout-grid/layout-grid-docs-header/layout-grid-docs-header.component';
+import { LayoutGridDocsComponent } from './component-docs/layout-grid/layout-grid-docs.component';
 import { SimpleTreeExampleComponent } from './component-docs/tree/examples/simple-tree-example.component';
 
 
@@ -553,6 +556,11 @@ import { SimpleTreeExampleComponent } from './component-docs/tree/examples/simpl
         InputInlineHelpExampleComponent,
         InputStateExampleComponent,
         InputExampleComponent,
+        LayoutGridGapSizeExample,
+        LayoutGridExampleComponent,
+        LayoutGridNoGapExampleComponent,
+        LayoutColumnsExampleComponent,
+        LayoutGridColumnSpanExampleComponent,
         ListActionsExampleComponent,
         ListCheckboxExampleComponent,
         ListExampleComponent,
@@ -576,12 +584,8 @@ import { SimpleTreeExampleComponent } from './component-docs/tree/examples/simpl
         MultiInputDocsComponent,
         MultiInputExampleComponent,
         ModalFullscreenExampleComponent,
-        PanelColumnsExampleComponent,
         PanelEdgeBleedExampleComponent,
         PanelExampleComponent,
-        PanelGridExampleComponent,
-        PanelGridNoGapExampleComponent,
-        PanelGridColumnSpanExampleComponent,
         PaginationExampleComponent,
         PopoverExampleComponent,
         PopoverDynamicExampleComponent,
@@ -706,6 +710,8 @@ import { SimpleTreeExampleComponent } from './component-docs/tree/examples/simpl
         InlineHelpHeaderComponent,
         InputGroupHeaderComponent,
         InputHeaderComponent,
+        LayoutGridDocsHeaderComponent,
+        LayoutGridDocsComponent,
         ListHeaderComponent,
         LoadingSpinnerHeaderComponent,
         MenuHeaderComponent,

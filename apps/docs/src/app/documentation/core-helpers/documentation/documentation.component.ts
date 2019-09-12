@@ -61,7 +61,8 @@ export class DocumentationComponent implements OnInit {
     ];
 
     layouts = [
-        { url: 'panel', name: 'Panel' }
+        { url: 'panel', name: 'Panel' },
+        { url: 'layoutGrid', name: 'Layout Grid' }
     ];
 
     utilities = [
