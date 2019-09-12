@@ -5,7 +5,10 @@
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseHour()"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-up-arrow"
+                fd-button
+                [glyph]="'navigation-up-arrow'"
+                [options]="'light'"
+                [size]="'xs'"
                 [attr.aria-label]="timeI18nLabels?.increaseHoursLabel"></button>
     </div>
     <input [(ngModel)]="displayedHour"
@@ -25,7 +28,10 @@
                 [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseHour()"
                 type="button"
-                class=" fd-button--light fd-button--xs sap-icon--navigation-down-arrow"
+                fd-button
+                [glyph]="'navigation-down-arrow'"
+                [options]="'light'"
+                [size]="'xs'"
                 [attr.aria-label]="timeI18nLabels?.decreaseHoursLabel"></button>
     </div>
 </div>

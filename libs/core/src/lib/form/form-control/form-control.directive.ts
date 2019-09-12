@@ -28,6 +28,9 @@ export class FormControlDirective extends AbstractFdNgxClass {
 
     /** @hidden */
     _setProperties() {
+
+        console.log(123);
+
         this._addClassToElement('fd-form-control');
         if (this.state) {
             this._addClassToElement('is-' + this.state);

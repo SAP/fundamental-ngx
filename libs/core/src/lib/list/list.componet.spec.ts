@@ -4,15 +4,15 @@ import { ListModule } from './list.module';
 
 @Component({
     template: `
-        <ul #directiveElement fd-list>Action Bar Title Test Text</ul>
+        <ul #componentElement fd-list>Action Bar Title Test Text</ul>
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 }
 
-describe('ListDirective', () => {
+describe('ListComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 

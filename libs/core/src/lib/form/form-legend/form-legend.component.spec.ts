@@ -34,6 +34,6 @@ describe('FormLegendDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-form__legend');
+        expect(component.ref.nativeElement.className).toBe('fd-form-legend');
     });
 });

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListCheckboxComponent } from './list-checkbox.component';
 import { FormsModule } from '@angular/forms';
+import { FormModule } from '@fundamental-ngx/core';
 
 describe('ListCheckboxComponent', () => {
     let component: ListCheckboxComponent;
@@ -10,7 +11,7 @@ describe('ListCheckboxComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ListCheckboxComponent],
-            imports: [FormsModule]
+            imports: [FormsModule, FormModule]
         }).compileComponents();
     }));
 
