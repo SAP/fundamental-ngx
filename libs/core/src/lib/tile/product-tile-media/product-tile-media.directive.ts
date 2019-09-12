@@ -4,7 +4,7 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 /**
  * Component that represents a product tile media container.
  * ```html
- * <div fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'">
+ * <div fd-product-tile-media [photo]="'https://placeimg.com/800/400/nature'">
  * </div>
  * ```
  */

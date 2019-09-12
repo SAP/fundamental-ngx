@@ -31,6 +31,7 @@ declare let hljs: any;
 
             .fd-tile-content-example {
                 padding: 20px;
+                background-color: #eeeeef;
             }
         `
     ]
