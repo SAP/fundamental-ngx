@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 
 import { InputGroupComponent } from './input-group.component';
+import { InputGroupModule } from '@fundamental-ngx/core';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -9,8 +9,7 @@ describe('InputGroupComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [InputGroupComponent]
+            imports: [InputGroupModule]
         }).compileComponents();
     }));
 

@@ -1,4 +1,4 @@
-import { ButtonDirective } from './button.directive';
+import { ButtonComponent } from './button.component';
 import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -19,7 +19,7 @@ describe('ButtonDirective', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonDirective, TestComponent]
+            declarations: [ButtonComponent, TestComponent]
         });
     }));
 
@@ -29,8 +29,8 @@ describe('ButtonDirective', () => {
         debugElement = fixture.debugElement;
         element = debugElement.nativeElement;
         fixture.detectChanges();
-        directive = debugElement.query(By.directive(ButtonDirective));
-        directiveInstance = directive.injector.get(ButtonDirective);
+        directive = debugElement.query(By.directive(ButtonComponent));
+        directiveInstance = directive.injector.get(ButtonComponent);
 
         spyOn(directiveInstance, '_setProperties').and.callThrough();
         spyOn(directiveInstance, '_addClassToElement');

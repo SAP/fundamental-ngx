@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-action-bar-back-example',
     templateUrl: './action-bar-back-example.component.html'
 })
-export class ActionBarBackExampleComponent { }
+export class ActionBarBackExampleComponent {}
 
 @Component({
     selector: 'fd-action-bar-long-string-title-truncation-example',

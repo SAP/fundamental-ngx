@@ -4,16 +4,16 @@ import { FormModule } from '../form.module';
 
 @Component({
     template: `
-        <label #directiveElement fd-form-label>Test Text</label>
+        <label #componentElement fd-form-label>Test Text</label>
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 }
 
 
-describe('FormLabelDirective', () => {
+describe('FormLabelComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -35,6 +35,6 @@ describe('FormLabelDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-form__label');
+        expect(component.ref.nativeElement.className).toBe('fd-form-label');
     });
 });

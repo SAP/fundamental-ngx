@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { TimeModule } from '../time/time.module';
 import { FdDatetime } from './models/fd-datetime';
 import { FdDate } from '../calendar/models/fd-date';
+import { ButtonModule, InputGroupModule } from '@fundamental-ngx/core';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent;
@@ -17,7 +18,16 @@ describe('DatetimePickerComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DatetimePickerComponent],
-            imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, TimeModule]
+            imports: [
+                CommonModule,
+                IconModule,
+                PopoverModule,
+                CalendarModule,
+                FormsModule,
+                TimeModule,
+                InputGroupModule,
+                ButtonModule
+            ]
         })
             .compileComponents();
     }));
@@ -146,7 +156,7 @@ describe('DatetimePickerComponent', () => {
         const dateTime = FdDatetime.getToday();
         component.timeComponent.time = { hour: 12, minute: 11, second: 10 };
         component.writeValue(dateTime);
-        const invalidTime = {hour: 50, minute: 30, second: 20};
+        const invalidTime = { hour: 50, minute: 30, second: 20 };
         const invalidDate = new FdDatetime(dateTime.date, invalidTime);
         component.inputFieldDate = component.dateTimeAdapter.format(invalidDate);
         component.handleInputChange(component.dateTimeAdapter.format(invalidDate));
