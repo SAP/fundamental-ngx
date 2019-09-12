@@ -1,4 +1,6 @@
-<h2>Standard Select</h2>
+<fd-docs-section-title [id]="'standard'" [componentName]="'select'">
+    Standard Select
+</fd-docs-section-title>
 <description>A basic example of the select component with no advanced features.</description>
 <component-example [name]="'ex1'">
     <fd-select-basic-example></fd-select-basic-example>
@@ -6,10 +8,14 @@
 <code-example [exampleFiles]="selectBasic"></code-example>
 
 <separator></separator>
-<h2>Programmatic Control</h2>
+
+<fd-docs-section-title [id]="'programmaticControl'" [componentName]="'select'">
+    Programmatic Control
+</fd-docs-section-title>
+
 <description>
-    Controlling the select through programmatic methods is possible by calling the select component
-    instance directly. Note that this can be done through ViewChild as well.
+    Controlling the select through programmatic methods is possible by calling the select component instance directly.
+    Note that this can be done through ViewChild as well.
 </description>
 <component-example [name]="'ex2'">
     <fd-select-programmatic-example></fd-select-programmatic-example>
@@ -17,7 +23,10 @@
 <code-example [exampleFiles]="selectProg"></code-example>
 
 <separator></separator>
-<h2>Custom View Value</h2>
+
+<fd-docs-section-title [id]="'customViewValue'" [componentName]="'select'">
+    Custom View Value
+</fd-docs-section-title>
 <description>
     The value which appears inside the trigger can be customized easily through the <code>viewValue</code> input.
 </description>
@@ -26,9 +35,11 @@
 </component-example>
 <code-example [exampleFiles]="selectViewValue"></code-example>
 
-
 <separator></separator>
-<h2>Select Max Height</h2>
+
+<fd-docs-section-title [id]="'selectMaxHeight'" [componentName]="'select'">
+    Select Max Height
+</fd-docs-section-title>
 <description>
     The select component allows to define <code>[maxHeight]</code>. It can be useful when there are a lot of options,
     the select body is be scrollable. By default maximum height of select body is 45% of browsers window inner height.
@@ -39,13 +50,15 @@
 <code-example [exampleFiles]="selectMaxHeight"></code-example>
 
 <separator></separator>
-<h2>Nested Options</h2>
-<description>
-    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are.
-    It also includes having options inside options, for instance. This feature allows for some very flexible usage.
-    The example below showcases how to add a scrolling container around the options.
 
-    Note that accessibility generally requires some text-content to be present in the actual option element.
+<fd-docs-section-title [id]="'nestedOptions'" [componentName]="'select'">
+    Nested Options
+</fd-docs-section-title>
+<description>
+    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are. It also
+    includes having options inside options, for instance. This feature allows for some very flexible usage. The example
+    below showcases how to add a scrolling container around the options. Note that accessibility generally requires some
+    text-content to be present in the actual option element.
 </description>
 <component-example [name]="'ex5'">
     <fd-select-nested-options></fd-select-nested-options>
@@ -53,10 +66,13 @@
 <code-example [exampleFiles]="selectNested"></code-example>
 
 <separator></separator>
-<h2>Custom Trigger</h2>
+
+<fd-docs-section-title [id]="'customTrigger'" [componentName]="'select'">
+    Custom Trigger
+</fd-docs-section-title>
 <description>
-    The default trigger can be replaced by providing a template reference to the appropriate input.
-    Note that the top-level element must be tab-indexed for the keyboard support to function correctly.
+    The default trigger can be replaced by providing a template reference to the appropriate input. Note that the
+    top-level element must be tab-indexed for the keyboard support to function correctly.
 </description>
 <component-example [name]="'ex6'">
     <fd-select-custom-trigger></fd-select-custom-trigger>
@@ -64,12 +80,14 @@
 <code-example [exampleFiles]="customTrigger"></code-example>
 
 <separator></separator>
-<h2>Adding and Removing Options</h2>
+
+<fd-docs-section-title [id]="'addingRemovingOptions'" [componentName]="'select'">
+    Adding and Removing Options
+</fd-docs-section-title>
 <description>
-    Adding and removing options dynamically is supported seamlessly, with very little extra work required
-    from the developer. By design, if the user removes the option that is currently selected, the value
-    will become undefined. This was implemented to prevent a user from keeping the active value of a previously
-    removed option.
+    Adding and removing options dynamically is supported seamlessly, with very little extra work required from the
+    developer. By design, if the user removes the option that is currently selected, the value will become undefined.
+    This was implemented to prevent a user from keeping the active value of a previously removed option.
 </description>
 <component-example [name]="'ex7'">
     <fd-select-adding-example></fd-select-adding-example>
@@ -77,7 +95,11 @@
 <code-example [exampleFiles]="selectAdding"></code-example>
 
 <separator></separator>
-<h2>Select In A Reactive Form</h2>
+
+<fd-docs-section-title [id]="'reactiveForm'" [componentName]="'select'">
+    Select In A Reactive Form
+</fd-docs-section-title>
+Select In A Reactive Form
 <description>
     The select component can be used inside Angular reactive forms.
 </description>

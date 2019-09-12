@@ -1,4 +1,7 @@
-<h2>Toggle Sizes</h2>
+<fd-docs-section-title [id]="'sizes'" [componentName]="'toggle'">
+    Toggle Sizes
+</fd-docs-section-title>
+
 <description>Options include 'xs', 's', 'l' and default. If no value is provided, default is used.</description>
 <component-example [name]="'ex1'">
     <fd-toggle-sizes-example></fd-toggle-sizes-example>
@@ -6,7 +9,10 @@
 <code-example [exampleFiles]="toggleSize"></code-example>
 
 <separator></separator>
-<h2>Disabled State</h2>
+
+<fd-docs-section-title [id]="'disabled'" [componentName]="'toggle'">
+    Disabled State
+</fd-docs-section-title>
 <description>Toggle can be in the disabled state, which prevents the user from interacting with it.</description>
 <component-example [name]="'ex2'">
     <fd-disabled-toggle-example></fd-disabled-toggle-example>
@@ -14,7 +20,10 @@
 <code-example [exampleFiles]="toggleDisable"></code-example>
 
 <separator></separator>
-<h2>Two-Way Binding</h2>
+
+<fd-docs-section-title [id]="'twoWayBinding'" [componentName]="'toggle'">
+    Two-Way Binding
+</fd-docs-section-title>
 <description>It is possible to two-way bind to the checked property of the fd-toggle.</description>
 <component-example [name]="'ex3'">
     <fd-toggle-binding-example></fd-toggle-binding-example>
@@ -22,7 +31,10 @@
 <code-example [exampleFiles]="toggleBinding"></code-example>
 
 <separator></separator>
-<h2>Toggle used within Reactive Form</h2>
+
+<fd-docs-section-title [id]="'withReactiveForm'" [componentName]="'toggle'">
+    Toggle used within Reactive Form
+</fd-docs-section-title>
 <description>It is possible to use the fd-toggle component within Angular Reactive Forms</description>
 <component-example [name]="'ex4'">
     <fd-toggle-forms-example></fd-toggle-forms-example>
@@ -31,5 +43,6 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-toggle [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked" [size]="data.modifier.size">
-        Example Toggle</fd-toggle>
+        Example Toggle</fd-toggle
+    >
 </playground>

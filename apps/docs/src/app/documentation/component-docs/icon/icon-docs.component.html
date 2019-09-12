@@ -1,32 +1,35 @@
-<h2>Icons</h2>
+<fd-docs-section-title [id]="'icon-default'" [componentName]="'icon'">
+    Icons
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
-  <fd-icon-example></fd-icon-example>
+    <fd-icon-example></fd-icon-example>
 </component-example>
 <code-example [exampleFiles]="iconExample"></code-example>
 
 <separator></separator>
 
-<description>The inputs for <code>fd-icon</code> will be translated into classes attributed to fundamental-styles
-    guidelines.
-    <br>For example:
-    <br>if it is passed <code>accept</code> for glyph the class <code>sap-icon--accept</code> will be added to the
-    element.
-    <br>if it is passed <code>xs</code> for size the class <code>sap-icon--xs</code> will be added to the element.
+<description
+    >The inputs for <code>fd-icon</code> will be translated into classes attributed to fundamental-styles guidelines.
+    <br />For example: <br />if it is passed <code>accept</code> for glyph the class <code>sap-icon--accept</code> will
+    be added to the element. <br />if it is passed <code>xs</code> for size the class <code>sap-icon--xs</code> will be
+    added to the element.
 </description>
 
 <separator></separator>
 
-<h2>Extensibility</h2>
-<description>The icon implementation allows certain extensibility in terms of options for the inputs. <code>fd-icon</code>
+<fd-docs-section-title [id]="'icon-extensibility'" [componentName]="'icon'">
+    Extensibility
+</fd-docs-section-title>
+<description>
+    The icon implementation allows certain extensibility in terms of options for the inputs. <code>fd-icon</code>
     inputs doesn't have a restriction for the predefined values.
-    <br>The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>, <code>xl</code>,
-    but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
-    <code>sap-icon--xxs</code>.
+    <br />The predefined values for the input <code>size</code> are <code>xs</code>, <code>s</code>, <code>l</code>,
+    <code>xl</code>, but <code>size</code> can accept any other string, for example <code>xxs</code>, which will be
+    translated into class <code>sap-icon--xxs</code>.
 </description>
 
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-icon [glyph]="data.properties.glyphs" [size]="data.modifier.block">
-  </fd-icon>
+    <fd-icon [glyph]="data.properties.glyphs" [size]="data.modifier.block"> </fd-icon>
 </playground>

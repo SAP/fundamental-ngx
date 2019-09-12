@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
@@ -9,13 +9,14 @@ import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-examp
 import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-examples.component.html';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html'
 })
-export class CalendarDocsComponent {
-
+export class CalendarDocsComponent implements OnInit, AfterViewInit {
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
 // Disable the weekends
@@ -75,39 +76,68 @@ myDisableFunction = function(d: FdDate): boolean {
         }
     ];
 
-    calendarRangeSource: ExampleFile[] = [{
-        language: 'typescript',
-        code: calendarRangeSrc
-    }];
+    calendarRangeSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: calendarRangeSrc
+        }
+    ];
 
-    calendarMondayStartSource: ExampleFile[] = [{
-        language: 'typescript',
-        code: calendarMondayStartSrc
-    }];
+    calendarMondayStartSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: calendarMondayStartSrc
+        }
+    ];
 
-    calendari18n: ExampleFile[] = [{
-        language: 'typescript',
-        code: calendarIntlSrc
-    }];
+    calendari18n: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: calendarIntlSrc
+        }
+    ];
 
-    calendari18nMoment: ExampleFile[] = [{
-        language: 'typescript',
-        code: calendarIntlMomentSrc
-    }];
+    calendari18nMoment: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: calendarIntlMomentSrc
+        }
+    ];
 
     calendarFormSource: ExampleFile[] = [
         {
             language: 'typescript',
             code: calendarFormSourceT
-        }, {
+        },
+        {
             language: 'html',
             code: calendarFormSourceH
         }
     ];
 
-    calendarProgrammaticallySource: ExampleFile[] = [{
-        language: 'typescript',
-        code: calendarProgrammaticallySource
-    }];
+    calendarProgrammaticallySource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: calendarProgrammaticallySource
+        }
+    ];
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
+    constructor(private route: ActivatedRoute) {}
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
+    }
 }

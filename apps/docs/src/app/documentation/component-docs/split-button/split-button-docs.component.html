@@ -1,8 +1,10 @@
-<h2>Button Options</h2>
+<fd-docs-section-title [id]="'buttonOptions'" [componentName]="'splitButton'">
+    Button Options
+</fd-docs-section-title>
 <description>
-  There are three emphasis styles used to indicate the importance of the button on the page. Do not provide a value for
-  the default option. Use <code class="code-snippet">[options]="'emphasized'"</code> or
-  <code class="code-snippet">[options]="'light'"</code> to set the option.
+    There are three emphasis styles used to indicate the importance of the button on the page. Do not provide a value
+    for the default option. Use <code class="code-snippet">[options]="'emphasized'"</code> or
+    <code class="code-snippet">[options]="'light'"</code> to set the option.
 </description>
 <component-example [name]="'ex0'">
     <fd-split-button-options-example></fd-split-button-options-example>
@@ -10,11 +12,14 @@
 <code-example [exampleFiles]="buttonSplitOptionsExample"></code-example>
 
 <separator></separator>
-<h2>Button Types</h2>
+
+<fd-docs-section-title [id]="'buttonTypes'" [componentName]="'splitButton'">
+    Button Types
+</fd-docs-section-title>
 <description>
-  The default button type is "action", no modifier is required. Use
-  <code class="code-snippet">[fdType]="'standard'", [fdType]="'positive'", [fdType]="'medium'"</code>, or
-  <code class="code-snippet">[fdType]="'negative'"</code> to modify the type of the button.
+    The default button type is "action", no modifier is required. Use
+    <code class="code-snippet">[fdType]="'standard'", [fdType]="'positive'", [fdType]="'medium'"</code>, or
+    <code class="code-snippet">[fdType]="'negative'"</code> to modify the type of the button.
 </description>
 <component-example [name]="'ex1'">
     <fd-split-button-types-example></fd-split-button-types-example>
@@ -22,20 +27,27 @@
 <code-example [exampleFiles]="buttonHtmlType"></code-example>
 
 <separator></separator>
-<h2>Buttons with Icons</h2>
+
+<fd-docs-section-title [id]="'buttonsWithIcons'" [componentName]="'splitButton'">
+    Buttons with Icons
+</fd-docs-section-title>
 <description>
-  Use
-  <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to change an icon of dropdown menu.
+    Use
+    <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to change an icon of dropdown menu.
 </description>
 <component-example [name]="'ex3'">
-  <fd-split-button-icons-example></fd-split-button-icons-example>
+    <fd-split-button-icons-example></fd-split-button-icons-example>
 </component-example>
 <code-example [exampleFiles]="buttonSplitIcons"></code-example>
 
 <separator></separator>
-<h2>Open/Close Programmatically</h2>
+
+<fd-docs-section-title [id]="'openCloseProg'" [componentName]="'splitButton'">
+    Open/Close Programmatically
+</fd-docs-section-title>
 <description>
-    It is possible to control the open state of the popover through two-way binding to the <code>[(isOpen)]</code> property.
+    It is possible to control the open state of the popover through two-way binding to the
+    <code>[(isOpen)]</code> property.
 </description>
 <component-example [name]="'ex4'">
     <fd-split-button-programmatical-example></fd-split-button-programmatical-example>
@@ -43,9 +55,13 @@
 <code-example [exampleFiles]="buttonSplitProgrammaticallyExample"></code-example>
 
 <separator></separator>
-<h2>Custom Template for Action Button</h2>
+
+<fd-docs-section-title [id]="'customTemplate'" [componentName]="'splitButton'">
+    Custom Template for Action Button
+</fd-docs-section-title>
 <description>
-    It is possible to add a custom template to the action button through the <code>fd-split-button-action-title</code> directive.
+    It is possible to add a custom template to the action button through the
+    <code>fd-split-button-action-title</code> directive.
 </description>
 <component-example [name]="'ex5'">
     <fd-split-button-template-example></fd-split-button-template-example>

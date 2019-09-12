@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-icon',
     templateUrl: './icon-docs.component.html'
 })
-export class IconDocsComponent implements OnInit {
-
+export class IconDocsComponent implements OnInit, AfterViewInit {
     static schema: any = {
         properties: {
             properties: {
@@ -668,18 +669,36 @@ export class IconDocsComponent implements OnInit {
         }
     };
 
-    iconExample: ExampleFile[] = [{
-        language: 'html',
-        code: iconSrc
-    }];
+    iconExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: iconSrc
+        }
+    ];
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
+
+    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
         this.schema = this.schemaFactory.getComponent('icon');
+    }
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
     }
 
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() {}
 }

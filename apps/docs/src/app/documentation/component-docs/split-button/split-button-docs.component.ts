@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -8,14 +8,14 @@ import * as buttonSplitOptionsExample from '!raw-loader!./examples/split-button-
 import * as buttonSplitIcons from '!raw-loader!./examples/split-button-icons-example.component.html';
 import * as buttonSplitTemplateExample from '!raw-loader!./examples/split-button-template-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-split-button',
     templateUrl: './split-button-docs.component.html'
 })
-export class SplitButtonDocsComponent {
-
-
+export class SplitButtonDocsComponent implements OnInit, AfterViewInit {
     schema: Schema;
 
     data: any = {
@@ -28,37 +28,64 @@ export class SplitButtonDocsComponent {
         }
     };
 
-    buttonHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: buttonTypesExample
-    }];
+    buttonHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonTypesExample
+        }
+    ];
 
-    buttonSplitProgrammaticallyExample: ExampleFile[] = [{
-        language: 'html',
-        code: buttonSplitProgrammaticalyExample
-    }];
+    buttonSplitProgrammaticallyExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSplitProgrammaticalyExample
+        }
+    ];
 
-    buttonSplitTemplateExample: ExampleFile[] = [{
-        language: 'html',
-        code: buttonSplitTemplateExample
-    }];
+    buttonSplitTemplateExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSplitTemplateExample
+        }
+    ];
 
-    buttonSplitOptionsExample: ExampleFile[] = [{
-        language: 'html',
-        code: buttonSplitOptionsExample
-    }];
+    buttonSplitOptionsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSplitOptionsExample
+        }
+    ];
 
-    buttonSplitIcons: ExampleFile[] = [{
-        language: 'html',
-        code: buttonSplitIcons
-    }];
+    buttonSplitIcons: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSplitIcons
+        }
+    ];
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
+
+    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
         this.schema = this.schemaFactory.getComponent('button');
+    }
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
     }
 
     onSchemaValues(data) {
         this.data = data;
     }
-
 }

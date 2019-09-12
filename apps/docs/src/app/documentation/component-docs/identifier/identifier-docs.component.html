@@ -1,57 +1,83 @@
-<h2>Icon</h2>
+<fd-docs-section-title [id]="'identifier-icons'" [componentName]="'identifier'">
+    Icon
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
-  <div class="grid identifier-grid">
-    <fd-icon-identifier-example></fd-icon-identifier-example>
-  </div>
+    <div class="grid identifier-grid">
+        <fd-icon-identifier-example></fd-icon-identifier-example>
+    </div>
 </component-example>
 <code-example [exampleFiles]="iconHtml"></code-example>
 
 <separator></separator>
-<h2>Initials</h2>
+<fd-docs-section-title [id]="'identifier-initials'" [componentName]="'identifier'">
+    Initials
+</fd-docs-section-title>
 <component-example [name]="'ex2'">
-  <div class="grid identifier-grid">
-    <fd-initials-identifier-example></fd-initials-identifier-example>
-  </div>
+    <div class="grid identifier-grid">
+        <fd-initials-identifier-example></fd-initials-identifier-example>
+    </div>
 </component-example>
 <code-example [exampleFiles]="initialsHtml"></code-example>
 
 <separator></separator>
-<h2>Circle</h2>
+
+<fd-docs-section-title [id]="'identifier-circle'" [componentName]="'identifier'">
+    Circle
+</fd-docs-section-title>
 <description>A circle style can be rendered using the <code>--circle modifier</code></description>
 <component-example [name]="'ex3'">
-  <div class="grid identifier-grid">
-    <fd-circle-identifier-example></fd-circle-identifier-example>
-  </div>
+    <div class="grid identifier-grid">
+        <fd-circle-identifier-example></fd-circle-identifier-example>
+    </div>
 </component-example>
 <code-example [exampleFiles]="circleHtml"></code-example>
 
 <separator></separator>
-<h2>Transparent</h2>
+<fd-docs-section-title [id]="'identifier-transparent'" [componentName]="'identifier'">
+    Transparent
+</fd-docs-section-title>
 <description>A transparent style can be rendered using the <code>--transparent modifier</code></description>
 <component-example [name]="'ex4'">
-  <div class="grid identifier-grid">
-    <fd-transparent-identifier-example></fd-transparent-identifier-example>
-  </div>
+    <div class="grid identifier-grid">
+        <fd-transparent-identifier-example></fd-transparent-identifier-example>
+    </div>
 </component-example>
 <code-example [exampleFiles]="transparentHtml"></code-example>
 
 <separator></separator>
-<h2>Accent Colors</h2>
-<description>Use helpers classes tp change the background colors, e.g., <code>.fd-has-background-color-accent-9</code></description>
+<fd-docs-section-title [id]="'identifier-accentColors'" [componentName]="'identifier'">
+    Accent Colors
+</fd-docs-section-title>
+<description>
+    Use helpers classes tp change the background colors, e.g.,
+    <code>.fd-has-background-color-accent-9</code>
+</description>
 <component-example [name]="'ex5'">
-  <div class="grid identifier-grid">
-    <fd-colors-identifier-example></fd-colors-identifier-example>
-  </div>
+    <div class="grid identifier-grid">
+        <fd-colors-identifier-example></fd-colors-identifier-example>
+    </div>
 </component-example>
 <code-example [exampleFiles]="colorAccentHtml"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <div *ngIf="data.properties.glyphs.length > 0 && data.properties.initials.length == 0;else initialsTemplate">
-    <span fd-identifier [size]="data.properties.size" [glyph]="data.properties.glyphs" [colorAccent]="data.properties.colorAccent"
-      [transparent]="data.properties.transparent" [circle]="data.properties.circle"></span>
-  </div>
-  <ng-template #initialsTemplate>
-    <span fd-identifier [size]="data.properties.size" [colorAccent]="data.properties.colorAccent" [transparent]="data.properties.transparent"
-      [circle]="data.properties.circle">{{data.properties.initials}}</span>
-  </ng-template>
+    <div *ngIf="data.properties.glyphs.length > 0 && data.properties.initials.length == 0; else initialsTemplate">
+        <span
+            fd-identifier
+            [size]="data.properties.size"
+            [glyph]="data.properties.glyphs"
+            [colorAccent]="data.properties.colorAccent"
+            [transparent]="data.properties.transparent"
+            [circle]="data.properties.circle"
+        ></span>
+    </div>
+    <ng-template #initialsTemplate>
+        <span
+            fd-identifier
+            [size]="data.properties.size"
+            [colorAccent]="data.properties.colorAccent"
+            [transparent]="data.properties.transparent"
+            [circle]="data.properties.circle"
+            >{{ data.properties.initials }}</span
+        >
+    </ng-template>
 </playground>

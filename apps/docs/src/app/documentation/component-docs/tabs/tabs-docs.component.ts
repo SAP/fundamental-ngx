@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -9,12 +9,14 @@ import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-e
 import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
 import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-tabs',
     templateUrl: './tabs-docs.component.html'
 })
-export class TabsDocsComponent {
+export class TabsDocsComponent implements OnInit, AfterViewInit {
     static schema: Schema = {
         properties: {
             properties: {
@@ -88,25 +90,31 @@ export class TabsDocsComponent {
         }
     };
 
-    tabExample: ExampleFile[] = [{
-        language: 'html',
-        code: tabSrc
-    }];
+    tabExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabSrc
+        }
+    ];
 
-    complexHeader: ExampleFile[] = [{
-        language: 'html',
-        code: complexTabH
-    }];
+    complexHeader: ExampleFile[] = [
+        {
+            language: 'html',
+            code: complexTabH
+        }
+    ];
 
-    navigationTab: ExampleFile[] = [{
-        language: 'html',
-        code: navigationTab
-    }];
+    navigationTab: ExampleFile[] = [
+        {
+            language: 'html',
+            code: navigationTab
+        }
+    ];
 
     addingTab: ExampleFile[] = [
         {
             language: 'html',
-            code: tabAddH,
+            code: tabAddH
         },
         {
             language: 'typescript',
@@ -114,17 +122,36 @@ export class TabsDocsComponent {
         }
     ];
 
-    tabSelection: ExampleFile[] = [{
-        language: 'html',
-        code: tabSelectionSrc
-    }];
+    tabSelection: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabSelectionSrc
+        }
+    ];
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
+
+    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
         this.schema = this.schemaFactory.getComponent('tabs');
+    }
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
     }
 
     onSchemaValues(data) {
         this.data = data;
     }
-
 }

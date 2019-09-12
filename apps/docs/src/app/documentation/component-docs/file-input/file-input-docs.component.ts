@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as fileInputH from '!raw-loader!./examples/file-input-example/file-input-example.component.html';
 import * as fileInputT from '!raw-loader!./examples/file-input-example/file-input-example.component.ts';
@@ -12,14 +12,15 @@ import * as fileInputInvalidT from '!raw-loader!./examples/file-input-drag-disab
 import * as fileInputMaxT from '!raw-loader!./examples/file-input-max-example/file-input-max-example.component.ts';
 import * as fileInputMaxH from '!raw-loader!./examples/file-input-max-example/file-input-max-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-file-input',
     templateUrl: './file-input-docs.component.html',
     styleUrls: ['./file-input-docs.component.scss']
 })
-export class FileInputDocsComponent {
-
+export class FileInputDocsComponent implements OnInit, AfterViewInit {
     fileInputExample: ExampleFile[] = [
         {
             language: 'html',
@@ -64,4 +65,23 @@ export class FileInputDocsComponent {
         }
     ];
 
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
+
+    constructor(private route: ActivatedRoute) {}
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
+    }
 }

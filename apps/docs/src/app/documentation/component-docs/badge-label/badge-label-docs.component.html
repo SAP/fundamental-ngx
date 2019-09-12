@@ -1,4 +1,6 @@
-<h2>Default Badge</h2>
+<fd-docs-section-title [id]="'default'" [componentName]="'badgeLabel'">
+    Default Badge
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
     <fd-badge-default-example></fd-badge-default-example>
 </component-example>
@@ -6,10 +8,10 @@
 
 <separator></separator>
 
-<h2>Pill Badge</h2>
-<description>
-    <code>fd-badge--pill</code> modifier can be used to render a pill version of the badge.
-</description>
+<fd-docs-section-title [id]="'pill'" [componentName]="'badgeLabel'">
+    Pill Badge
+</fd-docs-section-title>
+<description> <code>fd-badge--pill</code> modifier can be used to render a pill version of the badge. </description>
 <component-example [name]="'ex2'">
     <fd-badge-pill-example></fd-badge-pill-example>
 </component-example>
@@ -17,10 +19,10 @@
 
 <separator></separator>
 
-<h2>Filled Badge</h2>
-<description>
-    <code>fd-badge--filled</code> modifier can be used to render a filled version of the badge.
-</description>
+<fd-docs-section-title [id]="'filled'" [componentName]="'badgeLabel'">
+    Filled Badge
+</fd-docs-section-title>
+<description> <code>fd-badge--filled</code> modifier can be used to render a filled version of the badge. </description>
 <component-example [name]="'ex3'">
     <fd-badge-filled-example></fd-badge-filled-example>
 </component-example>
@@ -28,7 +30,9 @@
 
 <separator></separator>
 
-<h2>Label</h2>
+<fd-docs-section-title [id]="'label'" [componentName]="'badgeLabel'">
+    Label
+</fd-docs-section-title>
 <component-example [name]="'ex4'">
     <fd-label-default-example></fd-label-default-example>
 </component-example>
@@ -36,7 +40,9 @@
 
 <separator></separator>
 
-<h2>Status Indicator Label with build in status icons</h2>
+<fd-docs-section-title [id]="'statusIndicatorWithStatusIcons'" [componentName]="'badgeLabel'">
+    Status Indicator Label with build in status icons
+</fd-docs-section-title>
 <component-example [name]="'ex5'">
     <fd-label-build-status-example></fd-label-build-status-example>
 </component-example>
@@ -44,7 +50,9 @@
 
 <separator></separator>
 
-<h2>Status Indicator Label with any icons</h2>
+<fd-docs-section-title [id]="'statusIndicatorWithAnyIcons'" [componentName]="'badgeLabel'">
+    Status Indicator Label with any icons
+</fd-docs-section-title>
 <component-example [name]="'ex6'">
     <fd-label-icon-status-example></fd-label-icon-status-example>
 </component-example>
@@ -52,7 +60,9 @@
 
 <separator></separator>
 
-<h2>Status Indicator Label with sementic colors</h2>
+<fd-docs-section-title [id]="'statusIndicatorWithColors'" [componentName]="'badgeLabel'">
+    Status Indicator Label with sementic colors
+</fd-docs-section-title>
 <component-example [name]="'ex7'">
     <fd-label-status-colors-example></fd-label-status-colors-example>
 </component-example>
@@ -62,17 +72,28 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <div *ngIf="data.properties.type === 'badge'">
-        <span fd-badge [status]="data.properties.status" [modifier]="data.properties.modifier">{{data.properties.text}}
+        <span fd-badge [status]="data.properties.status" [modifier]="data.properties.modifier"
+            >{{ data.properties.text }}
         </span>
     </div>
     <div *ngIf="data.properties.type === 'label'">
-        <span fd-label [status]="data.properties.status">{{data.properties.text}}</span>
+        <span fd-label [status]="data.properties.status">{{ data.properties.text }}</span>
     </div>
     <div *ngIf="data.properties.type === 'status label'">
-        <span fd-status-label *ngIf="!data.properties.icon" [status]="data.properties.status"
-            [statusIcon]="data.properties.statusIcon">{{data.properties.text}}</span>
-        <span fd-status-label *ngIf="data.properties.icon" [status]="data.properties.status"
-            [icon]="data.properties.icon">{{data.properties.text}}</span>
+        <span
+            fd-status-label
+            *ngIf="!data.properties.icon"
+            [status]="data.properties.status"
+            [statusIcon]="data.properties.statusIcon"
+            >{{ data.properties.text }}</span
+        >
+        <span
+            fd-status-label
+            *ngIf="data.properties.icon"
+            [status]="data.properties.status"
+            [icon]="data.properties.icon"
+            >{{ data.properties.text }}</span
+        >
     </div>
 </playground>
 

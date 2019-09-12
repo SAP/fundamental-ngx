@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -12,12 +12,14 @@ import * as listSingleTs from '!raw-loader!./examples/list-single-select-example
 import * as listCheckboxFormHtmlSrc from '!raw-loader!./examples/list-checkbox-form-example.component.html';
 import * as listCheckboxFormTsSrc from '!raw-loader!./examples/list-checkbox-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-list',
     templateUrl: './list-docs.component.html'
 })
-export class ListDocsComponent implements OnInit {
+export class ListDocsComponent implements OnInit, AfterViewInit {
     static schema: any = {
         properties: {
             properties: {
@@ -679,20 +681,26 @@ export class ListDocsComponent implements OnInit {
         }
     };
 
-    simpleList: ExampleFile[] = [{
-        language: 'html',
-        code: listSrc
-    }];
+    simpleList: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listSrc
+        }
+    ];
 
-    listActions: ExampleFile[] = [{
-        language: 'html',
-        code: listActionsSrc
-    }];
+    listActions: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listActionsSrc
+        }
+    ];
 
-    listCheckboxes: ExampleFile[] = [{
-        language: 'html',
-        code: listCheckboxSrc
-    }];
+    listCheckboxes: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listCheckboxSrc
+        }
+    ];
 
     listSingleSelect: ExampleFile[] = [
         {
@@ -727,13 +735,29 @@ export class ListDocsComponent implements OnInit {
         }
     ];
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
+
+    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
         this.schema = this.schemaFactory.getComponent('list');
+    }
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
     }
 
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() { }
 }

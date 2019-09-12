@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -11,12 +11,14 @@ import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-te
 import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-input-group',
     templateUrl: './input-group-docs.component.html'
 })
-export class InputGroupDocsComponent {
+export class InputGroupDocsComponent implements OnInit, AfterViewInit {
     static schema: any = {
         properties: {
             properties: {
@@ -699,35 +701,47 @@ export class InputGroupDocsComponent {
         }
     };
 
-    textAddOn: ExampleFile[] = [{
-        language: 'html',
-        code: inputGroupTextSrc
-    }];
+    textAddOn: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupTextSrc
+        }
+    ];
 
-    iconAddOn: ExampleFile[] = [{
-        language: 'html',
-        code: inputGroupIconSrc
-    }];
+    iconAddOn: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupIconSrc
+        }
+    ];
 
-    buttonIconAddOn: ExampleFile[] = [{
-        language: 'html',
-        code: inputGroupButtonSrc
-    }];
+    buttonIconAddOn: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupButtonSrc
+        }
+    ];
 
-    numberInput: ExampleFile[] = [{
-        language: 'html',
-        code: inputGroupNumberSrc
-    }];
+    numberInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupNumberSrc
+        }
+    ];
 
-    searchInput: ExampleFile[] = [{
-        language: 'html',
-        code: inputGroupSearchSrc
-    }];
+    searchInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupSearchSrc
+        }
+    ];
 
-    textCompact: ExampleFile[] = [{
-        language: 'html',
-        code: inputGroupTextCompactSrc
-    }];
+    textCompact: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inputGroupTextCompactSrc
+        }
+    ];
 
     formInput: ExampleFile[] = [
         {
@@ -740,8 +754,26 @@ export class InputGroupDocsComponent {
         }
     ];
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    private fragment: any;
+    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
+
+    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
         this.schema = this.schemaFactory.getComponent('inputGroup');
+    }
+
+    ngOnInit() {
+        this.route.fragment.subscribe(fragment => {
+            this.fragment = fragment;
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const myArr = this.myList.toArray();
+        for (let i = 0; i < myArr.length; i++) {
+            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
+                myArr[i].nativeElement.scrollIntoView();
+            }
+        }
     }
 
     onSchemaValues(data) {

@@ -1,4 +1,6 @@
-<h2>Simple File Input</h2>
+<fd-docs-section-title [id]="'file-input-simple'" [componentName]="'file-input'">
+    Simple File Input
+</fd-docs-section-title>
 <description>Used in this context, it will only allow a set of extensions to be added.</description>
 <component-example [name]="'ex1'">
     <fd-file-input-example></fd-file-input-example>
@@ -7,8 +9,13 @@
 
 <separator></separator>
 
-<h2>Invalid File Input</h2>
-<description>An event is fired when invalid files are added through the drag and drop feature. These files can be retrieved and displayed to the user at will.</description>
+<fd-docs-section-title [id]="'file-input-invalid'" [componentName]="'file-input'">
+    Invalid File Input
+</fd-docs-section-title>
+<description>
+    An event is fired when invalid files are added through the drag and drop feature. These files can be retrieved and
+    displayed to the user at will.
+</description>
 <component-example [name]="'ex2'">
     <fd-file-input-drag-disabled-example></fd-file-input-drag-disabled-example>
 </component-example>
@@ -16,11 +23,13 @@
 
 <separator></separator>
 
-<h2>Max File Size</h2>
+<fd-docs-section-title [id]="'file-input-maxSize'" [componentName]="'file-input'">
+    Max File Size
+</fd-docs-section-title>
 <description>
     It is possible to control the size of the file through the input <code>maxFileSize</code>. The number is in bytes.
-    This feature will keep casual users from entering larger files, but someone knowledgeable enough could potentially bypass this.
-    <br /><br />
+    This feature will keep casual users from entering larger files, but someone knowledgeable enough could potentially
+    bypass this. <br /><br />
     <strong>NOTE: It is possible to bypass this client-side limit so a server-side check is still necessary.</strong>
 </description>
 <component-example [name]="'ex3'">
@@ -30,10 +39,16 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'file-input-dropzone'" [componentName]="'file-input'">
+    Dropzone File Input
+</fd-docs-section-title>
 <h2>Dropzone File Input</h2>
-<description>The component outputs events that make it very simple to style a dropzone depending on the current state. The example below also allows deals with duplicates, concatenating consecutive files into a list, and then displays them with the option to delete.</description>
+<description
+    >The component outputs events that make it very simple to style a dropzone depending on the current state. The
+    example below also allows deals with duplicates, concatenating consecutive files into a list, and then displays them
+    with the option to delete.</description
+>
 <component-example [name]="'ex4'">
     <fd-file-input-custom-example></fd-file-input-custom-example>
 </component-example>
 <code-example [exampleFiles]="fileInputCustom"></code-example>
-

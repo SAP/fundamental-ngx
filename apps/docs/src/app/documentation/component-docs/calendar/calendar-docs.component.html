@@ -1,15 +1,16 @@
-<h2>Standard Calendar</h2>
+<fd-docs-section-title [id]="'calendar-standard'" [componentName]="'calendar'">
+    Standard Calendar
+</fd-docs-section-title>
 <description>
-    This example also features <strong>blocked</strong> and <strong>disabled</strong> days.
-    <br/><br/>
+    This example also features <strong>blocked</strong> and <strong>disabled</strong> days. <br /><br />
     You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars
-    internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
-    To select a date you will create a new object that contains the property date, whose value is a FdDate model object.
-    Then, using two-way binding syntax, set the selectedDay value to your new object.
-    Note that selecting a day (or range of days) in this manner will override any block/disable functions. The
+    internally utilize an interface called <code>CalendarDay</code>, which contains the property <code>date</code>. To
+    select a date you will create a new object that contains the property date, whose value is a FdDate model object.
+    Then, using two-way binding syntax, set the selectedDay value to your new object. Note that selecting a day (or
+    range of days) in this manner will override any block/disable functions. The
     <code>disableFunction</code>
     and <code>blockFunction</code> inputs can be changed and the calendar will automatically update (see example).
-    <br/><br/>
+    <br /><br />
     A disabled date or range of dates cannot be selected, usually applied to a large range of past or future dates. A
     blocked date or range of dates cannot be selected, usually applied to blackout or booked dates mixed in with
     available dates.
@@ -20,16 +21,18 @@
 <code-example [exampleFiles]="calendarSingleSource"></code-example>
 
 <separator></separator>
-<h2>Range Selection Calendar</h2>
+
+<fd-docs-section-title [id]="'calendar-range'" [componentName]="'calendar'">
+    Range Selection Calendar
+</fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
-    <br/><br/>
+    <br /><br />
     The <code>disableRangeStartFunction</code>, <code>disableRangeEndFunction</code>,
     <code>blockRangeStartFunction</code> and <code>blockRangeEndFunction</code> inputs can be used in addition to the
     <code>disableFunction</code> and <code>blockFunction</code> inputs to set independent rules for the start and end
-    dates.
-    In this example, the user can only select a start date on or before October 10, 2019, and an end date on or after
-    October 20, 2019.
+    dates. In this example, the user can only select a start date on or before October 10, 2019, and an end date on or
+    after October 20, 2019.
 </description>
 <component-example [name]="'ex2'">
     <fd-calendar-range-example></fd-calendar-range-example>
@@ -37,6 +40,9 @@
 <code-example [exampleFiles]="calendarRangeSource"></code-example>
 
 <separator></separator>
+<fd-docs-section-title [id]="'calendar-prog-dateChange'" [componentName]="'calendar'">
+    Programmatic Date Change
+</fd-docs-section-title>
 <h2>Programmatic Date Change</h2>
 <description>
     Makes it possible to programmatically change the value of the currently selected date. The <code>selectedDay</code>
@@ -49,9 +55,12 @@
 <code-example [exampleFiles]="calendarProgrammaticallySource"></code-example>
 
 <separator></separator>
-<h2>Monday Start Calendar</h2>
-<description>Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is
-    for Sunday, 2 is Monday, 3 is Tuesday, etc.
+<fd-docs-section-title [id]="'calendar-mondayStart'" [componentName]="'calendar'">
+    Monday Start Calendar
+</fd-docs-section-title>
+<description
+    >Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for
+    Sunday, 2 is Monday, 3 is Tuesday, etc.
 </description>
 <component-example [name]="'ex4'">
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
@@ -59,10 +68,13 @@
 <code-example [exampleFiles]="calendarMondayStartSource"></code-example>
 
 <separator></separator>
-<h2>Internationalization</h2>
+
+<fd-docs-section-title [id]="'calendar-internationalization'" [componentName]="'calendar'">
+    Internationalization
+</fd-docs-section-title>
 <description>
-    The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc.
-    It also uses a separate service called CalendarI18nLabels to populate aria labels in the component itself.
+    The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc. It also uses a
+    separate service called CalendarI18nLabels to populate aria labels in the component itself.
 </description>
 <component-example [name]="'ex5'">
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
@@ -70,11 +82,14 @@
 <code-example [exampleFiles]="calendari18n"></code-example>
 
 <separator></separator>
-<h2>Internationalization With Moment.js</h2>
+
+<fd-docs-section-title [id]="'calendar-internationalization-momentJs'" [componentName]="'calendar'">
+    Internationalization With Moment.js
+</fd-docs-section-title>
 <description>
-    The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc.
-    It can be used along with moment.js library with locale package. The moment.js library contains a lot of languages
-    and allows to change language while page is rendered.
+    The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc. It can be used
+    along with moment.js library with locale package. The moment.js library contains a lot of languages and allows to
+    change language while page is rendered.
 </description>
 <component-example [name]="'ex6'">
     <fd-calendar-i18n-moment-example></fd-calendar-i18n-moment-example>
@@ -82,7 +97,10 @@
 <code-example [exampleFiles]="calendari18nMoment"></code-example>
 
 <separator></separator>
-<h2>Calendar in Reactive Form</h2>
+
+<fd-docs-section-title [id]="'calendar-reactiveForm'" [componentName]="'calendar'">
+    Calendar in Reactive Form
+</fd-docs-section-title>
 <description>The Calendar component may also be used within Angular Reactive Forms.</description>
 <component-example [name]="'ex6'">
     <fd-calendar-form-example></fd-calendar-form-example>

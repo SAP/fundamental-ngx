@@ -1,11 +1,16 @@
-<h2>Basic Panel Layout</h2>
+<fd-docs-section-title [id]="'basicPanelLayout'" [componentName]="'panel'">
+    Basic Panel Layout
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
     <fd-panel-example></fd-panel-example>
 </component-example>
 <code-example [exampleFiles]="panelBasic"></code-example>
 
 <separator></separator>
-<h2>Panel Edge Bleed</h2>
+
+<fd-docs-section-title [id]="'panelEdgeBleed'" [componentName]="'panel'">
+    Panel Edge Bleed
+</fd-docs-section-title>
 <description>
     Use <code>[bleed]="true"</code> on the panel body to have the contents of the panel body bleed to the outer edge.
     This is useful for components like tables and trees.
@@ -17,7 +22,9 @@
 
 <separator></separator>
 
-<h2>Default Panel Grid (3 columns)</h2>
+<fd-docs-section-title [id]="'DefaultPanelGrid'" [componentName]="'panel'">
+    Default Panel Grid (3 columns)
+</fd-docs-section-title>
 <component-example [name]="'ex3'">
     <fd-panel-grid-example></fd-panel-grid-example>
 </component-example>
@@ -25,12 +32,11 @@
 
 <separator></separator>
 
-<h2>Panel Grid with
+<fd-docs-section-title [id]="'GridNoGap'" [componentName]="'panel'">
+    Panel Grid with
     <code>[nogap]</code>
-</h2>
-<description>
-    <code>[nogap]="true"</code> will remove the margins between the panels.
-</description>
+</fd-docs-section-title>
+<description> <code>[nogap]="true"</code> will remove the margins between the panels. </description>
 <component-example [name]="'ex3'">
     <fd-panel-grid-nogap-example></fd-panel-grid-nogap-example>
 </component-example>
@@ -38,10 +44,10 @@
 
 <separator></separator>
 
-<h2>Panel Grid with 2 columns</h2>
-<description>
-    The<code>[col]="2"</code> renders a 2 column grid.
-</description>
+<fd-docs-section-title [id]="'panelGrid2Columns'" [componentName]="'panel'">
+    Panel Grid with 2 columns
+</fd-docs-section-title>
+<description> The<code>[col]="2"</code> renders a 2 column grid. </description>
 <component-example [name]="'ex4'">
     <fd-panel-columns-example></fd-panel-columns-example>
 </component-example>
@@ -49,7 +55,9 @@
 
 <separator></separator>
 
-<h2>Panel Grid with row and column span</h2>
+<fd-docs-section-title [id]="'rowNColumnSpan'" [componentName]="'panel'">
+    Panel Grid with row and column span
+</fd-docs-section-title>
 <component-example [name]="'ex5'">
     <fd-panel-grid-column-span-example></fd-panel-grid-column-span-example>
 </component-example>
