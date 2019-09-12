@@ -10,7 +10,6 @@ import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PanelFiltersComponent } from './panel-filters/panel-filters.component';
 import { PanelBodyComponent } from './panel-body/panel-body.component';
 import { PanelFooterComponent } from './panel-footer/panel-footer.component';
-import { PanelGridComponent } from './panel-grid/panel-grid.component';
 @NgModule({
     declarations: [
         PanelComponent,
@@ -22,7 +21,6 @@ import { PanelGridComponent } from './panel-grid/panel-grid.component';
         PanelFiltersComponent,
         PanelBodyComponent,
         PanelFooterComponent,
-        PanelGridComponent
     ],
     imports: [CommonModule],
     exports: [
@@ -35,7 +33,6 @@ import { PanelGridComponent } from './panel-grid/panel-grid.component';
         PanelFiltersComponent,
         PanelBodyComponent,
         PanelFooterComponent,
-        PanelGridComponent
     ]
 })
 export class PanelModule {}
