@@ -114,7 +114,7 @@
         "typescript": "3.2.4",
         "@ngrx/store-devtools": "7.2.0",
         "ngrx-store-freeze": "0.2.4",
-        "@nrwl/schematics": "7.8.7",
+        "@nrwl/schematics": "8.5.0",
         "jasmine-marbles": "0.4.0"
     },
     "pre-commit": {
