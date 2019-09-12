@@ -1,9 +1,5 @@
-<div class="fd-input-group fd-input-group--after"
-     [ngClass]="{'fd-input-group--compact' : compact}">
-    <ng-content select="[fd-localization-editor-input]"></ng-content>
-    <ng-content select="[fd-localization-editor-textarea]"></ng-content>
-    <span class="fd-input-group__addon fd-input-group__addon--after"
-          [ngClass]="(type ? 'fd-input-group__addon--' + type : '')">
+<fd-input-group [compact]="compact" [inputTemplate]="input">
+    <span fd-input-group-addon [type]="type">
         <ng-container *ngIf="labelTemplate">
             <ng-container [fd-localization-editor-load-label]="labelTemplate"></ng-container>
         </ng-container>
@@ -11,5 +7,9 @@
             {{label}}
         </ng-container>
     </span>
-</div>
+</fd-input-group>
+<ng-template #input>
+    <ng-content select="[fd-localization-editor-input]"></ng-content>
+    <ng-content select="[fd-localization-editor-textarea]"></ng-content>
+</ng-template>
 <ng-content></ng-content>

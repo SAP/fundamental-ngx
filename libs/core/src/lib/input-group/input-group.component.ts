@@ -1,5 +1,19 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    forwardRef,
+    ViewEncapsulation,
+    ContentChild,
+    TemplateRef,
+    AfterContentInit
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputGroupAddOnDirective, InputGroupInputDirective } from '@fundamental-ngx/core/src/lib/input-group/input-group-directives';
+
+export type InputGroupPlacement = 'before' | 'after';
+
 
 /**
  * The component that represents an input group.
@@ -11,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * ```
  */
 @Component({
-    selector: 'fd-input-group',
+    selector: ' fd-input-group',
     templateUrl: './input-group.component.html',
     styleUrls: ['./input-group.component.scss'],
     providers: [
@@ -24,12 +38,25 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupComponent implements ControlValueAccessor {
+
+    /** @hidden */
+    @ContentChild(InputGroupInputDirective)
+    inputElement: InputGroupInputDirective;
+
+    /** @hidden */
+    @ContentChild(InputGroupAddOnDirective)
+    addOnElement: InputGroupAddOnDirective;
+
+    /** Input template */
+    @Input()
+    inputTemplate: TemplateRef<any>;
+
     /** 
      * The placement of the add-on. 
      * Options include *before* and *after*
      */
     @Input()
-    placement: string;
+    placement: InputGroupPlacement = 'after';
 
     /** Whether the input group is in compact mode. */
     @Input()
@@ -46,6 +73,18 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** The text for the add-on. */
     @Input()
     addOnText: string;
+
+    /** Whether Button should be focusable */
+    @Input()
+    buttonFocusable: boolean = true;
+
+    /**
+     * The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
+     * Leave empty for default (Action button).'*/
+    @Input() buttonType: string;
+
+    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+    @Input() buttonOptions: string | string[];
 
     /** The icon value for the add-on. */
     @Input()

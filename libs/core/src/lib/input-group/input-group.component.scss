@@ -1,1 +1,18 @@
 @import url("~fundamental-styles/dist/input-group.css");
+@import url("~fundamental-styles/dist/input.css");
+@import url("~fundamental-styles/dist/textarea.css");
+
+input.fd-input-group__default-input {
+    width: auto;
+}
+
+input[fd-input-group-input] {
+    width: auto;
+}
+
+fd-input-group {
+    .fd-input-group__addon--button > *{
+        max-height: 100%;
+        height: 100%;
+    }
+}
