@@ -1,6 +1,6 @@
 import { Directive, ElementRef, forwardRef, HostBinding, Input } from '@angular/core';
-import { AbstractFdNgxClass } from '@fundamental-ngx/core/src/lib/utils/abstract-fd-ngx-class';
-import { InputGroupPlacement } from '@fundamental-ngx/core/src/lib/input-group/input-group.component';
+import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { InputGroupPlacement } from './input-group.component';
 
 @Directive({
     // tslint:disable-next-line:directive-selector

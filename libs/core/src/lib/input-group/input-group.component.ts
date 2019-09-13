@@ -7,10 +7,9 @@ import {
     ViewEncapsulation,
     ContentChild,
     TemplateRef,
-    AfterContentInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputGroupAddOnDirective, InputGroupInputDirective } from '@fundamental-ngx/core/src/lib/input-group/input-group-directives';
+import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 
 export type InputGroupPlacement = 'before' | 'after';
 

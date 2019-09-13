@@ -11,7 +11,7 @@ import {
     InputGroupAddOnDirective,
     InputGroupInputDirective,
     InputGroupTextareaDirective
-} from '@fundamental-ngx/core/src/lib/input-group/input-group-directives';
+} from './input-group-directives';
 
 @NgModule({
     declarations: [
@@ -20,7 +20,7 @@ import {
         InputGroupComponent,
         InputGroupInputDirective,
         InputGroupTextareaDirective,
-        InputGroupAddOnDirective
+        InputGroupAddOnDirective,
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule],
     exports: [
