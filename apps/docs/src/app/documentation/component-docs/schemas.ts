@@ -38,7 +38,7 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     table: TableDocsComponent.schema,
     tile: TileDocsComponent.schema,
     time: TimeDocsComponent.schema,
-    tree: TreeDocsComponent.schema,
+    // tree: TreeDocsComponent.schema,
     toggle: ToggleDocsComponent.schema,
     media: {
         properties: {

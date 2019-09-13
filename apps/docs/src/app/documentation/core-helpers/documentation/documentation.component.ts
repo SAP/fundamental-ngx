@@ -57,7 +57,7 @@ export class DocumentationComponent implements OnInit {
         { url: 'timePicker', name: 'Time Picker' },
         { url: 'toggle', name: 'Toggle' },
         { url: 'token', name: 'Token' },
-        { url: 'tree', name: 'Tree' }
+        // { url: 'tree', name: 'Tree' }
     ];
 
     layouts = [

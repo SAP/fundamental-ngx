@@ -45,7 +45,6 @@ export class TreeDocsComponent {
         type: 'object'
     };
 
-    schema: Schema;
     data: any = {
         properties: {
             headers: ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'],
