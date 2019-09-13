@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/select-native-example.component.html';
 import * as formInlineHelpHtml from '!raw-loader!./examples/select-native-inline-help-example.component.html';
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-select',
     templateUrl: './select-native-docs.component.html'
 })
-export class SelectNativeDocsComponent implements OnInit, AfterViewInit {
+export class SelectNativeDocsComponent implements OnInit {
     selectFormHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -51,18 +51,7 @@ export class SelectNativeDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

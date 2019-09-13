@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as panelColumnsSrc from '!raw-loader!./examples/panel-columns-example.component.html';
 import * as panelEdgeBleedSrc from '!raw-loader!./examples/panel-edge-bleed-example.component.html';
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-panel',
     templateUrl: './panel-docs.component.html'
 })
-export class PanelDocsComponent implements OnInit, AfterViewInit {
+export class PanelDocsComponent implements OnInit {
     panelBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -62,18 +62,7 @@ export class PanelDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

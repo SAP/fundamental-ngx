@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as dropdownContextualMenuHtml from '!raw-loader!./examples/dropdown-contextual-menu-example.component.html';
 import * as dropdownDefaultMenuHtml from '!raw-loader!./examples/dropdown-default-example.component.html';
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-dropdown',
     templateUrl: './dropdown-docs.component.html'
 })
-export class DropdownDocsComponent implements OnInit, AfterViewInit {
+export class DropdownDocsComponent implements OnInit {
     textDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -67,18 +67,7 @@ export class DropdownDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

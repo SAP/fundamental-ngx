@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as timePickerSrc from '!raw-loader!./examples/time-picker-example.component.html';
 import * as timePickerMeridianSrc from '!raw-loader!./examples/time-picker-12-example.component.html';
@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-time-picker',
     templateUrl: './time-picker-docs.component.html'
 })
-export class TimePickerDocsComponent implements OnInit, AfterViewInit {
+export class TimePickerDocsComponent implements OnInit {
     timePicker: ExampleFile[] = [
         {
             language: 'html',
@@ -97,18 +97,7 @@ export class TimePickerDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

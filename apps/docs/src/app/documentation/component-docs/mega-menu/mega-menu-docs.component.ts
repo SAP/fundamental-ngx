@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as menuSrc from '!raw-loader!./examples/mega-menu-example.component.html';
 import * as menuGroupSrc from '!raw-loader!./examples/mega-menu-group-example.component.html';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-mega-menu',
     templateUrl: './mega-menu-docs.component.html'
 })
-export class MegaMenuDocsComponent implements OnInit, AfterViewInit {
+export class MegaMenuDocsComponent implements OnInit {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -38,18 +38,7 @@ export class MegaMenuDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

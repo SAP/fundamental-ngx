@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/radio-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/radio-form-group-example.component.html';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-radio',
     templateUrl: './radio-docs.component.html'
 })
-export class RadioDocsComponent implements OnInit, AfterViewInit {
+export class RadioDocsComponent implements OnInit {
     radioFormHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -35,18 +35,7 @@ export class RadioDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

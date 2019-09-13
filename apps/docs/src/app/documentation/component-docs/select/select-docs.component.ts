@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
 
@@ -28,7 +28,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './select-docs.component.html',
     styleUrls: ['./select-docs.component.scss']
 })
-export class SelectDocsComponent implements OnInit, AfterViewInit {
+export class SelectDocsComponent implements OnInit {
     selectBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -106,18 +106,7 @@ export class SelectDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

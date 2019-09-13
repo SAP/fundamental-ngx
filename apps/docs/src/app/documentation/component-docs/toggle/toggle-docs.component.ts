@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import * as toggleSizeExample from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.html';
 import * as toggleDisableExample from '!raw-loader!./examples/disabled-toggle-example/disabled-toggle-example.component.html';
 import * as toggleBindingExampleHtml from '!raw-loader!./examples/toggle-binding-example/toggle-binding-example.component.html';
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-toggle',
     templateUrl: './toggle-docs.component.html'
 })
-export class ToggleDocsComponent implements OnInit, AfterViewInit {
+export class ToggleDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -93,24 +93,12 @@ export class ToggleDocsComponent implements OnInit, AfterViewInit {
     private fragment: any;
     @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
-        this.schema = this.schemaFactory.getComponent('toggle');
+constructor(private schemaFactory: SchemaFactoryService) {        this.schema = this.schemaFactory.getComponent('toggle');
     }
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 
     onSchemaValues(data) {
         this.data = data;

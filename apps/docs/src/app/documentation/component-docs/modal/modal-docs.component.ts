@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as templateTs from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.ts';
 import * as templateHtml from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.html';
@@ -26,7 +26,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-modal',
     templateUrl: './modal-docs.component.html'
 })
-export class ModalDocsComponent implements OnInit, AfterViewInit {
+export class ModalDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -163,20 +163,9 @@ export class ModalDocsComponent implements OnInit, AfterViewInit {
         this.schema = this.schemaFactory.getComponent('modal');
     }
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 
     onSchemaValues(data) {
         this.data = data;

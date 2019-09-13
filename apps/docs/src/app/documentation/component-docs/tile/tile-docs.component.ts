@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html'
 })
-export class TileDocsComponent implements OnInit, AfterViewInit {
+export class TileDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -769,10 +769,7 @@ export class TileDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
-
-    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
+    constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tile');
     }
 
@@ -780,18 +777,5 @@ export class TileDocsComponent implements OnInit, AfterViewInit {
         this.data = data;
     }
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
-
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+    ngOnInit() {}
 }

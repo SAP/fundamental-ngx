@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as loadingSpinnerHtml from '!raw-loader!./examples/loading-spinner-example.component.html';
 import * as loadingSpinnerContainerHtml from '!raw-loader!./examples/loading-spinner-container-example.component.html';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './loading-spinner-docs.component.html',
     styleUrls: ['./loading-spinner-docs.component.scss']
 })
-export class LoadingSpinnerDocsComponent implements OnInit, AfterViewInit {
+export class LoadingSpinnerDocsComponent implements OnInit {
     loadingSpinnerExample: ExampleFile[] = [
         {
             language: 'html',
@@ -31,18 +31,7 @@ export class LoadingSpinnerDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

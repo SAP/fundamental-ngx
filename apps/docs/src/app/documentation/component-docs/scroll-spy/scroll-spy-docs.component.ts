@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as standardH from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.html';
 import * as standardT from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.ts';
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './scroll-spy-docs.component.html',
     styleUrls: ['./scroll-spy-docs.component.scss']
 })
-export class ScrollSpyDocsComponent implements OnInit, AfterViewInit {
+export class ScrollSpyDocsComponent implements OnInit {
     scrollSpy: ExampleFile[] = [
         {
             language: 'html',
@@ -42,18 +42,7 @@ export class ScrollSpyDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

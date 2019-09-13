@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as basicTokenH from '!raw-loader!./examples/token-example/token-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './token-docs.component.html',
     styleUrls: ['./token-docs.component.scss']
 })
-export class TokenDocsComponent implements OnInit, AfterViewInit {
+export class TokenDocsComponent implements OnInit {
     basicToken: ExampleFile[] = [
         {
             language: 'html',
@@ -23,18 +23,7 @@ export class TokenDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './action-bar-docs.component.html',
     styleUrls: ['action-bar-docs.component.scss']
 })
-export class ActionBarDocsComponent implements OnInit, AfterViewInit {
+export class ActionBarDocsComponent implements OnInit {
     backButtonExample: ExampleFile[] = [
         {
             language: 'html',
@@ -54,18 +54,7 @@ export class ActionBarDocsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }
