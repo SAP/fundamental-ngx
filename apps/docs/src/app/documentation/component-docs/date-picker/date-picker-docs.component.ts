@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as datePickerRangeSrc from '!raw-loader!./examples/date-picker-range-example.component.ts';
 import * as datePickerSingleSrc from '!raw-loader!./examples/date-picker-single-example.component.ts';
@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-date-picker',
     templateUrl: './date-picker-docs.component.html'
 })
-export class DatePickerDocsComponent implements OnInit, AfterViewInit {
+export class DatePickerDocsComponent implements OnInit {
     datePickerSingle: ExampleFile[] = [
         {
             language: 'typescript',
@@ -80,23 +80,9 @@ export class DatePickerDocsComponent implements OnInit, AfterViewInit {
             code: datePickerDisabledSrc
         }
     ];
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

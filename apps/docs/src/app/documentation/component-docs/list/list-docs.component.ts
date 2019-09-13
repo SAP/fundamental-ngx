@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -19,7 +19,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-list',
     templateUrl: './list-docs.component.html'
 })
-export class ListDocsComponent implements OnInit, AfterViewInit {
+export class ListDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -738,24 +738,12 @@ export class ListDocsComponent implements OnInit, AfterViewInit {
     private fragment: any;
     @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private schemaFactory: SchemaFactoryService, private route: ActivatedRoute) {
-        this.schema = this.schemaFactory.getComponent('list');
+constructor(private schemaFactory: SchemaFactoryService) {        this.schema = this.schemaFactory.getComponent('list');
     }
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 
     onSchemaValues(data) {
         this.data = data;

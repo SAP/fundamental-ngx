@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/textarea-example.component.html';
 import * as formInlineHelpHtml from '!raw-loader!./examples/textarea-inline-help-example.component.html';
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-input',
     templateUrl: './textarea-docs.component.html'
 })
-export class TextareaDocsComponent implements OnInit, AfterViewInit {
+export class TextareaDocsComponent implements OnInit {
     textareaHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -46,23 +46,9 @@ export class TextareaDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

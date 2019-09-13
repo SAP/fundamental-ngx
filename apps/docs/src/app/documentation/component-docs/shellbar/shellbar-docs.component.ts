@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as shellbarBasicHTMLSrc from '!raw-loader!./examples/shellbar-basic-example.component.html';
 import * as shellbarBasicTSSrc from '!raw-loader!./examples/shellbar-basic-example.component.ts';
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-shellbar',
     templateUrl: './shellbar-docs.component.html'
 })
-export class ShellbarDocsComponent implements OnInit, AfterViewInit {
+export class ShellbarDocsComponent implements OnInit {
     shellbarBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -35,23 +35,9 @@ export class ShellbarDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

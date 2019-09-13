@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as fileInputH from '!raw-loader!./examples/file-input-example/file-input-example.component.html';
 import * as fileInputT from '!raw-loader!./examples/file-input-example/file-input-example.component.ts';
@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './file-input-docs.component.html',
     styleUrls: ['./file-input-docs.component.scss']
 })
-export class FileInputDocsComponent implements OnInit, AfterViewInit {
+export class FileInputDocsComponent implements OnInit {
     fileInputExample: ExampleFile[] = [
         {
             language: 'html',
@@ -65,23 +65,9 @@ export class FileInputDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

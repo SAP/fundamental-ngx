@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
 import * as menuAddon from '!raw-loader!./examples/menu-addon-example.component.html';
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-menu',
     templateUrl: './menu-docs.component.html'
 })
-export class MenuDocsComponent implements OnInit, AfterViewInit {
+export class MenuDocsComponent implements OnInit {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -54,23 +54,9 @@ export class MenuDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

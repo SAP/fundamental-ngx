@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as searchInputHTMLSrc from '!raw-loader!./examples/search-input-example.component.html';
 import * as searchInputTSSrc from '!raw-loader!./examples/search-input-example.component.ts';
@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-search-input',
     templateUrl: './search-input-docs.component.html'
 })
-export class SearchInputDocsComponent implements OnInit, AfterViewInit {
+export class SearchInputDocsComponent implements OnInit {
     searchInputExample: ExampleFile[] = [
         {
             language: 'html',
@@ -61,23 +61,9 @@ export class SearchInputDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }

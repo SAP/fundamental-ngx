@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import * as basicInfiniteTs from '!raw-loader!./examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component.ts';
 import * as basicInfiniteHtml from '!raw-loader!./examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'infinite-scroll-docs',
     templateUrl: './infinite-scroll-docs.component.html'
 })
-export class InfiniteScrollDocsComponent implements OnInit, AfterViewInit {
+export class InfiniteScrollDocsComponent implements OnInit {
     basicInfiniteExample: ExampleFile[] = [
         {
             language: 'html',
@@ -21,23 +21,7 @@ export class InfiniteScrollDocsComponent implements OnInit, AfterViewInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
-
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+    ngOnInit() {}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html'
 })
-export class CalendarDocsComponent implements OnInit, AfterViewInit {
+export class CalendarDocsComponent implements OnInit {
     exampleFunctionsHtml = `Example Disable and Block Functions: 
 
 // Disable the weekends
@@ -121,23 +121,9 @@ myDisableFunction = function(d: FdDate): boolean {
             code: calendarProgrammaticallySource
         }
     ];
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
-    constructor(private route: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.route.fragment.subscribe(fragment => {
-            this.fragment = fragment;
-        });
-    }
+     ngOnInit() {}
 
-    ngAfterViewInit(): void {
-        const myArr = this.myList.toArray();
-        for (let i = 0; i < myArr.length; i++) {
-            if (myArr[i].nativeElement.firstChild.id === this.fragment) {
-                myArr[i].nativeElement.scrollIntoView();
-            }
-        }
-    }
+ 
 }
