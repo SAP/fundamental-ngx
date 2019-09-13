@@ -9,7 +9,7 @@ import { By } from '@angular/platform-browser';
 })
 export class TestComponent {}
 
-describe('ButtonDirective', () => {
+describe('ButtonComponent', () => {
     let fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
         element: HTMLElement;
