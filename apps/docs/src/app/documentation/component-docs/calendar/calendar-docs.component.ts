@@ -122,8 +122,5 @@ myDisableFunction = function(d: FdDate): boolean {
         }
     ];
 
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }
