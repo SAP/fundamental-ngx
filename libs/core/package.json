@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/core",
-  "version": "0.11.0-rc.9",
+  "version": "0.11.0-rc.10",
   "schematics": "./schematics/collection.json",
   "description": "SAP Fundamentals, implemented in Angular",
   "license": "Apache-2.0",
