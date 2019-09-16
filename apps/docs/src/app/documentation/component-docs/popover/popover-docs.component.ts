@@ -77,9 +77,5 @@ export class PopoverDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

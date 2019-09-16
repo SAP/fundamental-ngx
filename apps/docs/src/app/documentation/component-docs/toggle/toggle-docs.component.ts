@@ -90,16 +90,11 @@ export class ToggleDocsComponent implements OnInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
-
-constructor(private schemaFactory: SchemaFactoryService) {        this.schema = this.schemaFactory.getComponent('toggle');
+    constructor(private schemaFactory: SchemaFactoryService) {
+        this.schema = this.schemaFactory.getComponent('toggle');
     }
 
-     ngOnInit() {}
-
- 
-
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

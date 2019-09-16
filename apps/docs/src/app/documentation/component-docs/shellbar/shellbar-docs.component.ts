@@ -35,9 +35,5 @@ export class ShellbarDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

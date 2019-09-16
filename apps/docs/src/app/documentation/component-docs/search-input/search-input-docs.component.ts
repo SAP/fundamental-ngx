@@ -61,9 +61,5 @@ export class SearchInputDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

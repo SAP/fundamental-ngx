@@ -57,9 +57,5 @@ export class PanelDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

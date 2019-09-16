@@ -92,9 +92,5 @@ export class TimePickerDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

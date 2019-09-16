@@ -25,9 +25,5 @@ export class BreadcrumbDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

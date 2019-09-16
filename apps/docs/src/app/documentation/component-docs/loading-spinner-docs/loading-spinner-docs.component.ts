@@ -26,9 +26,5 @@ export class LoadingSpinnerDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

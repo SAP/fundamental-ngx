@@ -152,8 +152,6 @@ export class ModalDocsComponent implements OnInit {
             code: containerT
         }
     ];
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
 
     constructor(
         private schemaFactory: SchemaFactoryService,
@@ -163,10 +161,7 @@ export class ModalDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('modal');
     }
 
-     ngOnInit() {}
-
- 
-
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

@@ -61,9 +61,5 @@ export class LocalizationEditorDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

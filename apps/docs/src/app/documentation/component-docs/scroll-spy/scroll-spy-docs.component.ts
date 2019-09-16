@@ -37,9 +37,5 @@ export class ScrollSpyDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

@@ -126,8 +126,5 @@ export class ComboboxDocsComponent implements OnInit {
         }
     ];
 
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

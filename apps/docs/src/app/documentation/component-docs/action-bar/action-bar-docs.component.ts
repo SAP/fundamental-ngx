@@ -50,8 +50,5 @@ export class ActionBarDocsComponent implements OnInit {
         }
     ];
 
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

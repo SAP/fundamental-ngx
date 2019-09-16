@@ -81,8 +81,5 @@ export class DatePickerDocsComponent implements OnInit {
         }
     ];
 
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

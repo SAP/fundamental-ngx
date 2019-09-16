@@ -129,16 +129,11 @@ export class TabsDocsComponent implements OnInit {
         }
     ];
 
-    private fragment: any;
-    @ViewChildren(DocsSectionTitleComponent, { read: ElementRef }) myList: QueryList<ElementRef>;
-
-constructor(private schemaFactory: SchemaFactoryService) {        this.schema = this.schemaFactory.getComponent('tabs');
+    constructor(private schemaFactory: SchemaFactoryService) {
+        this.schema = this.schemaFactory.getComponent('tabs');
     }
 
-     ngOnInit() {}
-
- 
-
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

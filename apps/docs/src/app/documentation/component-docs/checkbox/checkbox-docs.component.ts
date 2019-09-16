@@ -30,8 +30,5 @@ export class CheckboxDocsComponent implements OnInit {
         }
     ];
 
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }

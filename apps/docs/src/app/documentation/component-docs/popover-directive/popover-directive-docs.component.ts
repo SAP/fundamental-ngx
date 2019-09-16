@@ -42,9 +42,5 @@ export class PopoverDirectiveDocsComponent implements OnInit {
         }
     ];
 
-
-
-     ngOnInit() {}
-
- 
+    ngOnInit() {}
 }
