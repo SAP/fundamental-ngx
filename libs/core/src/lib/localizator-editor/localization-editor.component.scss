@@ -1,4 +1,4 @@
-@import "~fundamental-styles/dist/localization-editor";
+@import url("~fundamental-styles/dist/localization-editor.css");
 
 .fd-localization-editor-textarea {
     min-height: calc(var(--fd-button-line-height) + 4px);

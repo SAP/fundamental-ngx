@@ -1,5 +1,5 @@
-@import "~fundamental-styles/dist/input";
-@import "~fundamental-styles/dist/time";
+@import url("~fundamental-styles/dist/input.css");
+@import url("~fundamental-styles/dist/time.css");
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
