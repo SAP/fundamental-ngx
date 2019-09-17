@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0-rc.11"></a>
+# [0.11.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.10...v0.11.0-rc.11) (2019-09-17)
+
+
+### Bug Fixes
+
+* **button:** Add typings to buttons Inputs ([#1267](https://github.com/SAP/fundamental-ngx/issues/1267)) ([4263a3f](https://github.com/SAP/fundamental-ngx/commit/4263a3f))
+
+
+### Features
+
+* **platform:** Changing platform module name to "FundamentaNgxPlatformModule" ([#1274](https://github.com/SAP/fundamental-ngx/issues/1274)) ([34c9288](https://github.com/SAP/fundamental-ngx/commit/34c9288))
+
+
+
 <a name="0.11.0-rc.10"></a>
 # [0.11.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.9...v0.11.0-rc.10) (2019-09-16)
 
