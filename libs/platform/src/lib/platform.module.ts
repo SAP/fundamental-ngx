@@ -8,5 +8,5 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         FundamentalNgxCoreModule
     ]
 })
-export class PlatformModule {
+export class FundamentalNgxPlatformModule {
 }
