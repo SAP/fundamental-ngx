@@ -1,6 +1,9 @@
-<h2>Simple Popovers</h2>
+<fd-docs-section-title [id]="'simple'" [componentName]="'popover'">
+    Simple Popovers
+</fd-docs-section-title>
 <description>
-    Making use of simple popovers is very easy. Open an fd-popover component, place a control and body inside. You are no required to keep track of the popover state.
+    Making use of simple popovers is very easy. Open an fd-popover component, place a control and body inside. You are
+    no required to keep track of the popover state.
 </description>
 <component-example [name]="'ex1'">
     <fd-popover-example></fd-popover-example>
@@ -9,9 +12,12 @@
 
 <separator></separator>
 
-<h2>Popover Placement</h2>
+<fd-docs-section-title [id]="'placement'" [componentName]="'popover'">
+    Popover Placement
+</fd-docs-section-title>
 <description>
-    Popper.js offers a variety of placements for users to choose from. These can be any of 'top', 'bottom', 'right', 'left', and then can be suffixed with '-start' or '-end'.
+    Popper.js offers a variety of placements for users to choose from. These can be any of 'top', 'bottom', 'right',
+    'left', and then can be suffixed with '-start' or '-end'.
 </description>
 <component-example [name]="'ex2'">
     <fd-popover-placement-example></fd-popover-placement-example>
@@ -20,9 +26,13 @@
 
 <separator></separator>
 
-<h2>Programmatic Control</h2>
+<fd-docs-section-title [id]="'programmaticControl'" [componentName]="'popover'">
+    Programmatic Control
+</fd-docs-section-title>
 <description>
-    Controlling the popover through programmatic means is easy. Simply two-way bind the isOpen property and change it. There are also some methods such as <code>open()</code> and <code>close()</code> which can be called through reference variable.
+    Controlling the popover through programmatic means is easy. Simply two-way bind the isOpen property and change it.
+    There are also some methods such as <code>open()</code> and <code>close()</code> which can be called through
+    reference variable.
 </description>
 <component-example [name]="'ex3'">
     <fd-popover-programmatic-open-example></fd-popover-programmatic-open-example>
@@ -31,9 +41,12 @@
 
 <separator></separator>
 
-<h2>Popovers in Modals</h2>
+<fd-docs-section-title [id]="'popoversModals'" [componentName]="'popover'">
+    Popovers in Modals
+</fd-docs-section-title>
 <description>
-    Popovers are functional inside modals. The default behaviour is to overflow the modal, though that can be changed with the <code>options</code> input, which accepts Popper.js settings.
+    Popovers are functional inside modals. The default behaviour is to overflow the modal, though that can be changed
+    with the <code>options</code> input, which accepts Popper.js settings.
 </description>
 <component-example [name]="'ex4'">
     <fd-popover-modal-example></fd-popover-modal-example>
@@ -42,7 +55,9 @@
 
 <separator></separator>
 
-<h2>Fill Control Width</h2>
+<fd-docs-section-title [id]="'fillControlWidth'" [componentName]="'popover'">
+    Fill Control Width
+</fd-docs-section-title>
 <description>
     A custom Popper modifier allows the directive to match its popover size to that of the control.
 </description>
@@ -53,11 +68,13 @@
 
 <separator></separator>
 
-<h2>Dynamic Body Height</h2>
+<fd-docs-section-title [id]="'dynamicBodyHeight'" [componentName]="'popover'">
+    Dynamic Body Height
+</fd-docs-section-title>
 <description>
     In case of height change inside popover body, the position of popover is not automatically changed, mostly cause of
-    optimization reasons. To force change of the position, it is needed to call <code>updatePopover()</code> method inside
-    popover, as it is on example. There is used <code>SideNavigation</code> component.
+    optimization reasons. To force change of the position, it is needed to call <code>updatePopover()</code> method
+    inside popover, as it is on example. There is used <code>SideNavigation</code> component.
 </description>
 <component-example [name]="'ex6'">
     <fd-popover-dynamic-example></fd-popover-dynamic-example>
@@ -68,9 +85,9 @@
 
 <description>
     <p>
-        Under the hood, the Popover component makes use of <code>PopoverDirective</code>.
-        It abstracts some functionality in favor of consistency, but it may not be sufficient for every use case.
-        If more flexibility is required, we recommend the use of the directive which can be found <a
-        [routerLink]="['/popover-directive']">here</a>.
+        Under the hood, the Popover component makes use of <code>PopoverDirective</code>. It abstracts some
+        functionality in favor of consistency, but it may not be sufficient for every use case. If more flexibility is
+        required, we recommend the use of the directive which can be found
+        <a [routerLink]="['/popover-directive']">here</a>.
     </p>
 </description>

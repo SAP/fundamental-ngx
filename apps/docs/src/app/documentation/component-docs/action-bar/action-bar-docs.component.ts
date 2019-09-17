@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren, ElementRef, QueryList, OnInit, AfterViewInit } from '@angular/core';
 
 import * as backButtonExample from '!raw-loader!./examples/action-bar-back-example.component.html';
 import * as titleTruncationExample from '!raw-loader!./examples/action-bar-long-string-title-truncation-example.component.html';
@@ -6,36 +6,49 @@ import * as contextualMenuExample from '!raw-loader!./examples/action-bar-contex
 import * as mobileExample from '!raw-loader!./examples/action-bar-mobile-example.component.html';
 import * as noBackButtonExample from '!raw-loader!./examples/action-bar-no-back-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-toolbar',
     templateUrl: './action-bar-docs.component.html',
     styleUrls: ['action-bar-docs.component.scss']
 })
-export class ActionBarDocsComponent {
+export class ActionBarDocsComponent implements OnInit {
+    backButtonExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: backButtonExample
+        }
+    ];
 
-    backButtonExample: ExampleFile[] = [{
-        language: 'html',
-        code: backButtonExample
-    }];
+    titleTruncationExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: titleTruncationExample
+        }
+    ];
 
-    titleTruncationExample: ExampleFile[] = [{
-        language: 'html',
-        code: titleTruncationExample
-    }]
+    noBackButtonExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: noBackButtonExample
+        }
+    ];
 
-    noBackButtonExample: ExampleFile[] = [{
-        language: 'html',
-        code: noBackButtonExample
-    }];
+    actionsContextualMenuHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: contextualMenuExample
+        }
+    ];
 
-    actionsContextualMenuHtml: ExampleFile[] = [{
-        language: 'html',
-        code: contextualMenuExample
-    }];
+    mobileViewHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: mobileExample
+        }
+    ];
 
-    mobileViewHtml: ExampleFile[] = [{
-        language: 'html',
-        code: mobileExample
-    }];
+    ngOnInit() {}
 }

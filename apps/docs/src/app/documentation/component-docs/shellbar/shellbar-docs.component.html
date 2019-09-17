@@ -1,6 +1,9 @@
-<h2>Basic Shellbar</h2>
+<fd-docs-section-title [id]="'basic'" [componentName]="'shellbar'">
+    Basic
+</fd-docs-section-title>
 <description>
-    This example shows the minimum shellbar for a single application product with only user settings. If no user thumbnail is available then display initials.
+    This example shows the minimum shellbar for a single application product with only user settings. If no user
+    thumbnail is available then display initials.
 </description>
 <component-example [name]="'ex1'">
     <fd-shellbar-basic-example></fd-shellbar-basic-example>
@@ -9,9 +12,13 @@
 
 <separator></separator>
 
-<h2>Links with collapsible menu and product switcher.</h2>
+<fd-docs-section-title [id]="'linksCollapseProductSwitcher'" [componentName]="'shellbar'">
+    Links with collapsible menu and product switcher.
+</fd-docs-section-title>
 <description>
-    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens. All actions, except for the user menu, should be collapsed. See the placement of the <code>&lt;fd-shellbar-collapse></code> container below.
+    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens. All
+    actions, except for the user menu, should be collapsed. See the placement of the
+    <code>&lt;fd-shellbar-collapse></code> container below.
 </description>
 <component-example [name]="'ex2'">
     <fd-shellbar-collapsible-example></fd-shellbar-collapsible-example>
@@ -20,7 +27,9 @@
 
 <separator></separator>
 
-<h2>How it works</h2>
+<fd-docs-section-title [id]="'howItWorks'" [componentName]="'shellbar'">
+    How it works
+</fd-docs-section-title>
 <description>
     <ul>
         <li>
@@ -33,11 +42,11 @@
             The shellbar actions are duplicated into the overflow menu on mobile screens.
         </li>
         <li>
-            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component.
-            The user, user menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component.
-            Data for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component.
-            The response to clicks on any of these items is handled via callback functions for each object.
-            See the 'collapsible' example to gain an understanding of how this works.
+            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component. The user, user
+            menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component. Data
+            for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component. The response to
+            clicks on any of these items is handled via callback functions for each object. See the 'collapsible'
+            example to gain an understanding of how this works.
         </li>
     </ul>
 </description>

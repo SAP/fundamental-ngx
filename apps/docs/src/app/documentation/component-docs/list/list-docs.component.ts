@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -12,6 +12,8 @@ import * as listSingleTs from '!raw-loader!./examples/list-single-select-example
 import * as listCheckboxFormHtmlSrc from '!raw-loader!./examples/list-checkbox-form-example.component.html';
 import * as listCheckboxFormTsSrc from '!raw-loader!./examples/list-checkbox-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-list',
@@ -679,20 +681,26 @@ export class ListDocsComponent implements OnInit {
         }
     };
 
-    simpleList: ExampleFile[] = [{
-        language: 'html',
-        code: listSrc
-    }];
+    simpleList: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listSrc
+        }
+    ];
 
-    listActions: ExampleFile[] = [{
-        language: 'html',
-        code: listActionsSrc
-    }];
+    listActions: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listActionsSrc
+        }
+    ];
 
-    listCheckboxes: ExampleFile[] = [{
-        language: 'html',
-        code: listCheckboxSrc
-    }];
+    listCheckboxes: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listCheckboxSrc
+        }
+    ];
 
     listSingleSelect: ExampleFile[] = [
         {
@@ -731,9 +739,8 @@ export class ListDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('list');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() { }
 }

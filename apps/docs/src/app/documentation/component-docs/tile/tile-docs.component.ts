@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -11,12 +11,14 @@ import * as tileGridHelpersSrc from '!raw-loader!./examples/tile-grid-helpers-ex
 import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
 import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html'
 })
-export class TileDocsComponent {
+export class TileDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -711,45 +713,61 @@ export class TileDocsComponent {
         }
     };
 
-    simpleTile: ExampleFile[] = [{
-        language: 'html',
-        code: tileSrc
-    }];
+    simpleTile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileSrc
+        }
+    ];
 
-    mediaTile: ExampleFile[] = [{
-        language: 'html',
-        code: tileMediaSrc
-    }];
+    mediaTile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileMediaSrc
+        }
+    ];
 
-    actionsTile: ExampleFile[] = [{
-        language: 'html',
-        code: tileActionsSrc
-    }];
+    actionsTile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileActionsSrc
+        }
+    ];
 
-    buttonTile: ExampleFile[] = [{
-        language: 'html',
-        code: tileButtonSrc
-    }];
+    buttonTile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileButtonSrc
+        }
+    ];
 
-    productTile: ExampleFile[] = [{
-        language: 'html',
-        code: tileProductSrc
-    }];
+    productTile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileProductSrc
+        }
+    ];
 
-    disabledTile: ExampleFile[] = [{
-        language: 'html',
-        code: tileDisabledSrc
-    }];
+    disabledTile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileDisabledSrc
+        }
+    ];
 
-    defaultGrid: ExampleFile[] = [{
-        language: 'html',
-        code: tileGridSrc
-    }];
+    defaultGrid: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileGridSrc
+        }
+    ];
 
-    gridWithHelpers: ExampleFile[] = [{
-        language: 'html',
-        code: tileGridHelpersSrc
-    }];
+    gridWithHelpers: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tileGridHelpersSrc
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('tile');
@@ -759,4 +777,5 @@ export class TileDocsComponent {
         this.data = data;
     }
 
+    ngOnInit() {}
 }

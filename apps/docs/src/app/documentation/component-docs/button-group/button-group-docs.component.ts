@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -7,6 +7,8 @@ import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-
 import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
 import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-button-group',
@@ -1966,33 +1968,41 @@ export class ButtonGroupDocsComponent implements OnInit {
         }
     };
 
-    xsSizeHtml: ExampleFile[] = [{
-        language: 'html',
-        code: buttonGroupXsExample
-    }];
+    xsSizeHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonGroupXsExample
+        }
+    ];
 
-    sSizeHtml: ExampleFile[] = [{
-        language: 'html',
-        code: buttonGroupSmallExample
-    }];
+    sSizeHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonGroupSmallExample
+        }
+    ];
 
-    compactSizeHtml: ExampleFile[] = [{
-        language: 'html',
-        code: buttonGroupCompactExample
-    }];
+    compactSizeHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonGroupCompactExample
+        }
+    ];
 
-    defaultSizeHtml: ExampleFile[] = [{
-        language: 'html',
-        code: buttonGroupDefaultExample
-    }];
+    defaultSizeHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonGroupDefaultExample
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('buttonGroup');
     }
 
+    ngOnInit() {}
+
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() {}
 }

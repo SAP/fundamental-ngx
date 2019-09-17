@@ -1,4 +1,6 @@
-<h2>24-Hour Time Picker</h2>
+<fd-docs-section-title [id]="'24HourClock'" [componentName]="'timePicker'">
+    24-Hour Time Picker
+</fd-docs-section-title>
 <description>This is the default time picker setting.</description>
 <component-example [name]="'ex1'">
     <fd-time-picker-example></fd-time-picker-example>
@@ -6,7 +8,10 @@
 <code-example [exampleFiles]="timePicker"></code-example>
 
 <separator></separator>
-<h2>12-Hour Time Picker</h2>
+
+<fd-docs-section-title [id]="'12HourTimePicker'" [componentName]="'time'">
+    12-Hour Time Picker
+</fd-docs-section-title>
 <description>Set <code>[meridian]="true"</code> to use a 12-hour clock.</description>
 <component-example [name]="'ex2'">
     <fd-time-picker-12-example></fd-time-picker-12-example>
@@ -14,7 +19,10 @@
 <code-example [exampleFiles]="meridianTimePicker"></code-example>
 
 <separator></separator>
-<h2>Time Picker Without Seconds</h2>
+
+<fd-docs-section-title [id]="'timePickerWithoutSpinners'" [componentName]="'time'">
+    Time Picker Without Spinners
+</fd-docs-section-title>
 <description>Use <code>[displaySeconds]=false</code> to turn off seconds for the time picker.</description>
 <component-example [name]="'ex3'">
     <fd-time-picker-no-seconds-example></fd-time-picker-no-seconds-example>
@@ -22,8 +30,13 @@
 <code-example [exampleFiles]="timePickerNoSeconds"></code-example>
 
 <separator></separator>
-<h2>Time Picker Without Minutes and Seconds</h2>
-<description>Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or <code>[displayHours]="false"</code>
+
+<fd-docs-section-title [id]="'timePickerWithoutMinutesSeconds'" [componentName]="'time'">
+    Time Picker Without Minutes and Seconds
+</fd-docs-section-title>
+<description
+    >Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
+    <code>[displayHours]="false"</code>
     to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
 </description>
 <component-example [name]="'ex4'">
@@ -32,7 +45,10 @@
 <code-example [exampleFiles]="timePickerOnlyHours"></code-example>
 
 <separator></separator>
-<h2>Disabled Time Picker</h2>
+
+<fd-docs-section-title [id]="'disabled'" [componentName]="'time'">
+    Disabled Time Picker
+</fd-docs-section-title>
 <description>Set <code>[disabled]="true"</code> to disable the time picker.</description>
 <component-example [name]="'ex5'">
     <fd-time-picker-disabled-example></fd-time-picker-disabled-example>
@@ -40,7 +56,10 @@
 <code-example [exampleFiles]="disabledTimePicker"></code-example>
 
 <separator></separator>
-<h2>Compact Time Picker</h2>
+
+<fd-docs-section-title [id]="'compact'" [componentName]="'time'">
+    Compact Time Picker
+</fd-docs-section-title>
 <description>Set <code>[compact]="true"</code> to use compact time-picker.</description>
 <component-example [name]="'ex6'">
     <fd-time-picker-compact-example></fd-time-picker-compact-example>
@@ -48,9 +67,12 @@
 <code-example [exampleFiles]="compactTimePicker"></code-example>
 
 <separator></separator>
-<h2>Null Validity</h2>
-<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
-    invalid.
+
+<fd-docs-section-title [id]="'null'" [componentName]="'time'">
+    Null Validity
+</fd-docs-section-title>
+<description
+    >Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.
 </description>
 <component-example [name]="'ex7'">
     <fd-time-picker-allow-null-example></fd-time-picker-allow-null-example>
@@ -58,7 +80,10 @@
 <code-example [exampleFiles]="nullTimePicker"></code-example>
 
 <separator></separator>
-<h2>Formatting</h2>
+
+<fd-docs-section-title [id]="'formatting'" [componentName]="'time'">
+    Formatting
+</fd-docs-section-title>
 <description>Providing a custom format for time is possible through providing service</description>
 <component-example [name]="'ex8'">
     <fd-time-picker-other-delimiter-example></fd-time-picker-other-delimiter-example>
@@ -66,7 +91,10 @@
 <code-example [exampleFiles]="otherFormatTimePicker"></code-example>
 
 <separator></separator>
-<h2>Time Picker in Form</h2>
+
+<fd-docs-section-title [id]="'inForm'" [componentName]="'time'">
+    Time Picker in Form
+</fd-docs-section-title>
 <description>The time-picker component may also be used together with Angular reactive forms.</description>
 <component-example [name]="'ex9'">
     <fd-time-picker-form-example></fd-time-picker-form-example>

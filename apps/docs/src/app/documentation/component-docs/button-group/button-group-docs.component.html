@@ -1,57 +1,87 @@
-<h2>Extra Small Size (XS)</h2>
+<fd-docs-section-title [id]="'Button-xs'" [componentName]="'buttonGroup'"> Extra Small Size (XS)</fd-docs-section-title>
 <component-example [name]="'ex1'">
-  <fd-button-group-xs-example></fd-button-group-xs-example>
+    <fd-button-group-xs-example></fd-button-group-xs-example>
 </component-example>
 <code-example [exampleFiles]="xsSizeHtml"></code-example>
 
 <separator></separator>
 
-<h2>Small Size (S)</h2>
+<fd-docs-section-title [id]="'Button-s'" [componentName]="'buttonGroup'">Small Size (S)</fd-docs-section-title>
 <component-example [name]="'ex2'">
-  <fd-button-group-s-example></fd-button-group-s-example>
+    <fd-button-group-s-example></fd-button-group-s-example>
 </component-example>
 <code-example [exampleFiles]="sSizeHtml"></code-example>
 
 <separator></separator>
 
-<h2>Compact Size</h2>
+<fd-docs-section-title [id]="'Button-compact'" [componentName]="'buttonGroup'"> Compact Size</fd-docs-section-title>
 <component-example [name]="'ex3'">
-  <fd-button-group-compact-example></fd-button-group-compact-example>
+    <fd-button-group-compact-example></fd-button-group-compact-example>
 </component-example>
 <code-example [exampleFiles]="compactSizeHtml"></code-example>
 
 <separator></separator>
 
-<h2>Default Size (Large)</h2>
+<fd-docs-section-title [id]="'Button-l'" [componentName]="'buttonGroup'"> Default Size (Large)</fd-docs-section-title>
 <component-example [name]="'ex4'">
-  <fd-button-group-default-example></fd-button-group-default-example>
+    <fd-button-group-default-example></fd-button-group-default-example>
 </component-example>
 <code-example [exampleFiles]="defaultSizeHtml"></code-example>
 
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-button-group>
-    <button *ngIf="data.properties.label1.length > 0" fd-button-grouped [size]="data.properties.size" [compact]="data.properties.compact"
-      [state]="data.properties.state1">
-      {{data.properties.label1}}
-    </button>
-    <button *ngIf="data.properties.label2.length > 0" fd-button-grouped [size]="data.properties.size" [compact]="data.properties.compact"
-      [state]="data.properties.state2">
-      {{data.properties.label2}}
-    </button>
-    <button *ngIf="data.properties.label3.length > 0" fd-button-grouped [size]="data.properties.size" [compact]="data.properties.compact"
-      [state]="data.properties.state3">
-      {{data.properties.label3}}
-    </button>
-    <button *ngIf="data.properties.icon1.length > 0" fd-button-grouped [size]="data.properties.size" [glyph]="data.properties.icon1"
-      [compact]="data.properties.compact" [state]="data.properties.state4">
-    </button>
-    <button *ngIf="data.properties.icon2.length > 0" fd-button-grouped [size]="data.properties.size" [glyph]="data.properties.icon2"
-      [compact]="data.properties.compact" [state]="data.properties.state5">
-    </button>
-    <button *ngIf="data.properties.icon3.length > 0" fd-button-grouped [size]="data.properties.size" [glyph]="data.properties.icon3"
-      [compact]="data.properties.compact" [state]="data.properties.state6">
-    </button>
-  </fd-button-group>
+    <fd-button-group>
+        <button
+            *ngIf="data.properties.label1.length > 0"
+            fd-button-grouped
+            [size]="data.properties.size"
+            [compact]="data.properties.compact"
+            [state]="data.properties.state1"
+        >
+            {{ data.properties.label1 }}
+        </button>
+        <button
+            *ngIf="data.properties.label2.length > 0"
+            fd-button-grouped
+            [size]="data.properties.size"
+            [compact]="data.properties.compact"
+            [state]="data.properties.state2"
+        >
+            {{ data.properties.label2 }}
+        </button>
+        <button
+            *ngIf="data.properties.label3.length > 0"
+            fd-button-grouped
+            [size]="data.properties.size"
+            [compact]="data.properties.compact"
+            [state]="data.properties.state3"
+        >
+            {{ data.properties.label3 }}
+        </button>
+        <button
+            *ngIf="data.properties.icon1.length > 0"
+            fd-button-grouped
+            [size]="data.properties.size"
+            [glyph]="data.properties.icon1"
+            [compact]="data.properties.compact"
+            [state]="data.properties.state4"
+        ></button>
+        <button
+            *ngIf="data.properties.icon2.length > 0"
+            fd-button-grouped
+            [size]="data.properties.size"
+            [glyph]="data.properties.icon2"
+            [compact]="data.properties.compact"
+            [state]="data.properties.state5"
+        ></button>
+        <button
+            *ngIf="data.properties.icon3.length > 0"
+            fd-button-grouped
+            [size]="data.properties.size"
+            [glyph]="data.properties.icon3"
+            [compact]="data.properties.compact"
+            [state]="data.properties.state6"
+        ></button>
+    </fd-button-group>
 </playground>

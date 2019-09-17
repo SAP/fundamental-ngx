@@ -1,12 +1,12 @@
-<h2>Table</h2>
+<fd-docs-section-title [id]="'Default'" [componentName]="'table'">
+    Table
+</fd-docs-section-title>
 <description>
     Column sorting is achieved using the <code>fdColumnSortable</code> directive. Place this directive on the desired
-    column(s) to sort, set the <code>[sortDir]</code>
-    input to the corresponding component variable that dictates sort direction, and use <code>(click)</code> to call the
-    sorting algorithm on your component. Valid values
-    for sort direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in
-    this example that calling a sort function for
-    one column will reset the sort direction for the other sortable column.
+    column(s) to sort, set the <code>[sortDir]</code> input to the corresponding component variable that dictates sort
+    direction, and use <code>(click)</code> to call the sorting algorithm on your component. Valid values for sort
+    direction are <code>'asc'</code>, <code>'desc'</code>, <code>'dsc'</code> or <code>'none'</code>. Note in this
+    example that calling a sort function for one column will reset the sort direction for the other sortable column.
 </description>
 <component-example [name]="'ex1'">
     <fd-table-example></fd-table-example>
@@ -14,10 +14,13 @@
 <code-example [exampleFiles]="tableExample"></code-example>
 
 <separator></separator>
-<h2>Table with Checkboxes</h2>
+
+<fd-docs-section-title [id]="'withCheckboxes'" [componentName]="'table'">
+    Table with Checkboxes
+</fd-docs-section-title>
 <description>
-    While there is no formal support for row selection, fundamental-ngx does provide the tools to accomplish
-    this. The following example is simply one of the many methods that can be used.
+    While there is no formal support for row selection, fundamental-ngx does provide the tools to accomplish this. The
+    following example is simply one of the many methods that can be used.
 </description>
 <component-example [name]="'ex2'">
     <fd-table-checkboxes-example></fd-table-checkboxes-example>
@@ -25,14 +28,17 @@
 <code-example [exampleFiles]="tableCheckboxes"></code-example>
 
 <separator></separator>
-<h2>Table with Angular CDK</h2>
+
+<fd-docs-section-title [id]="'withAngularCDK'" [componentName]="'table'">
+    Table with Angular CDK
+</fd-docs-section-title>
 <description>
-    The <code>fd-table</code> directive can be used in conjunction with the Angular CDK, granting the functionality of the
-    CDK table with the style of the Fundamentals table.
+    The <code>fd-table</code> directive can be used in conjunction with the Angular CDK, granting the functionality of
+    the CDK table with the style of the Fundamentals table.
 </description>
 <description>
-    CDK's Drag and Drop feature can be used along with the Fundamental NGX table. You can rearrange rows, columns, or cells,
-    subscribe to events and handle data changes in your component accordingly.
+    CDK's Drag and Drop feature can be used along with the Fundamental NGX table. You can rearrange rows, columns, or
+    cells, subscribe to events and handle data changes in your component accordingly.
 </description>
 <component-example [name]="'ex3'">
     <fd-table-cdk-example></fd-table-cdk-example>
@@ -40,10 +46,13 @@
 <code-example [exampleFiles]="tableCdk"></code-example>
 
 <separator></separator>
-<h2>Responsive Table</h2>
+
+<fd-docs-section-title [id]="'responsive'" [componentName]="'table'">
+    Responsive Table
+</fd-docs-section-title>
 <description>
-    The <code>fd-table-responsive-wrapper</code> directive can be used in along with <code>fd-table</code> directive inside which makes
-    table easy to read even on smaller devices.
+    The <code>fd-table-responsive-wrapper</code> directive can be used in along with <code>fd-table</code> directive
+    inside which makes table easy to read even on smaller devices.
 </description>
 <description>
     To test it, reduce size of screen

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
 import * as menuAddon from '!raw-loader!./examples/menu-addon-example.component.html';
@@ -8,26 +8,33 @@ import * as menuKeyboardSrcT from '!raw-loader!./examples/menu-keyboard-support-
 import * as menuSeparatorSrc from '!raw-loader!./examples/menu-separator-example.component.html';
 
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './menu-docs.component.html'
 })
-export class MenuDocsComponent {
+export class MenuDocsComponent implements OnInit {
+    menuBasic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: menuSrc
+        }
+    ];
+    menuAddon: ExampleFile[] = [
+        {
+            language: 'html',
+            code: menuAddon
+        }
+    ];
 
-    menuBasic: ExampleFile[] = [{
-        language: 'html',
-        code: menuSrc
-    }];
-    menuAddon: ExampleFile[] = [{
-        language: 'html',
-        code: menuAddon
-    }];
-
-    menuGroup: ExampleFile[] = [{
-        language: 'html',
-        code: menuGroupSrc
-    }];
+    menuGroup: ExampleFile[] = [
+        {
+            language: 'html',
+            code: menuGroupSrc
+        }
+    ];
 
     menuKeyboard: ExampleFile[] = [
         {
@@ -40,8 +47,12 @@ export class MenuDocsComponent {
         }
     ];
 
-    menuSeparator: ExampleFile[] = [{
-        language: 'html',
-        code: menuSeparatorSrc
-    }];
+    menuSeparator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: menuSeparatorSrc
+        }
+    ];
+
+    ngOnInit() {}
 }

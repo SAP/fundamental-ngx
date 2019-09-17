@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as dateTimeSimpleHtml from '!raw-loader!./examples/datetime-example/datetime-example.component.html';
 import * as dateTimeSimpleTs from '!raw-loader!./examples/datetime-example/datetime-example.component.ts';
@@ -19,14 +19,15 @@ import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-ex
 import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
 import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-datetime-picker-docs',
     templateUrl: './datetime-picker-docs.component.html',
     styleUrls: ['./datetime-picker-docs.component.scss']
 })
-export class DatetimePickerDocsComponent {
-
+export class DatetimePickerDocsComponent implements OnInit {
     datetimePickerSingle: ExampleFile[] = [
         {
             language: 'html',
@@ -93,9 +94,12 @@ export class DatetimePickerDocsComponent {
         }
     ];
 
-    datetimePickerAllowNull: ExampleFile[] = [{
-        language: 'typescript',
-        code: dateTimePickerAllowNullTs
-    }];
+    datetimePickerAllowNull: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: dateTimePickerAllowNullTs
+        }
+    ];
 
+    ngOnInit() {}
 }

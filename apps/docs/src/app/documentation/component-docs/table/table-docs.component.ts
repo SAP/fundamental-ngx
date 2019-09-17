@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -11,18 +11,21 @@ import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.
 import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-example.component.html';
 import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-table',
     templateUrl: './table-docs.component.html',
-    styles: [`
-        ::ng-deep app-table .fd-tile {
-            display: block;
-        }
-    `]
+    styles: [
+        `
+            ::ng-deep app-table .fd-tile {
+                display: block;
+            }
+        `
+    ]
 })
-export class TableDocsComponent {
-
+export class TableDocsComponent implements OnInit {
     static schema: Schema = {
         properties: {
             state: {
@@ -47,7 +50,7 @@ export class TableDocsComponent {
     tableExample: ExampleFile[] = [
         {
             language: 'html',
-            code: tableHtmlSrc,
+            code: tableHtmlSrc
         },
         {
             language: 'typescript',
@@ -58,7 +61,7 @@ export class TableDocsComponent {
     tableCheckboxes: ExampleFile[] = [
         {
             language: 'html',
-            code: tableCheckHtml,
+            code: tableCheckHtml
         },
         {
             language: 'typescript',
@@ -69,7 +72,7 @@ export class TableDocsComponent {
     tableCdk: ExampleFile[] = [
         {
             language: 'html',
-            code: tableCdkHtml,
+            code: tableCdkHtml
         },
         {
             language: 'typescript',
@@ -80,7 +83,7 @@ export class TableDocsComponent {
     tableResponsive: ExampleFile[] = [
         {
             language: 'html',
-            code: tableResponsiveHtml,
+            code: tableResponsiveHtml
         },
         {
             language: 'typescript',
@@ -92,8 +95,8 @@ export class TableDocsComponent {
         this.schema = this.schemaFactory.getComponent('table');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
-
 }
