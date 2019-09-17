@@ -3,7 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-toggle-forms-example',
-    templateUrl: './toggle-forms-example.component.html'
+    templateUrl: './toggle-forms-example.component.html',
+    styleUrls: ['./toggle-forms-example.component.scss']
 })
 export class ToggleFormsExampleComponent {
     customForm = new FormGroup({
