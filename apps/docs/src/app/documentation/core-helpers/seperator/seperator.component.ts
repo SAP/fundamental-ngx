@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         `
             :host {
                 display: block;
-                margin-top: 50px;
+                margin-top: 2rem;
                 border-bottom: 1px solid #e3e3e3;
             }
         `
