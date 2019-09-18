@@ -6,8 +6,8 @@ import { PopoverComponent } from '../../popover/popover.component';
  * and Vice Versa
  * */
 @Component({
-  selector: 'fd-shellbar-user-menu',
-  templateUrl: './shellbar-user-menu.component.html',
+    selector: 'fd-shellbar-user-menu',
+    templateUrl: './shellbar-user-menu.component.html'
 })
 export class ShellbarUserMenuComponent extends PopoverComponent {
 
