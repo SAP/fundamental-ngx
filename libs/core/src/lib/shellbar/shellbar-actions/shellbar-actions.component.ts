@@ -106,6 +106,12 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
      * @hidden
      */
     itemClicked(item: any, event: any): void {
+        this.triggerItems();
+        item.callback(event);
+    }
+
+    /** @hidden */
+    triggerItems(): void {
         if (this.closePopoverOnSelect) {
             if (this.userComponentView) {
                 this.userComponentView.close();
@@ -120,7 +126,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
                 this.productSwitcherComponentView.close();
             }
         }
-        item.callback(event);
     }
 
     /** @hidden */
