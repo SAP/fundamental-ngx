@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -8,6 +8,8 @@ import * as iconSrc from '!raw-loader!./examples/icon-identifier-example.compone
 import * as initialsSrc from '!raw-loader!./examples/initials-identifier-example.component.html';
 import * as transparentSrc from '!raw-loader!./examples/transparent-identifier-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-identifier',
@@ -683,38 +685,47 @@ export class IdentifierDocsComponent implements OnInit {
         }
     };
 
-    iconHtml: ExampleFile[] = [{
-        language: 'html',
-        code: iconSrc
-    }];
+    iconHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: iconSrc
+        }
+    ];
 
-    initialsHtml: ExampleFile[] = [{
-        language: 'html',
-        code: initialsSrc
-    }];
+    initialsHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: initialsSrc
+        }
+    ];
 
-    circleHtml: ExampleFile[] = [{
-        language: 'html',
-        code: circleSrc
-    }];
+    circleHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: circleSrc
+        }
+    ];
 
-    transparentHtml: ExampleFile[] = [{
-        language: 'html',
-        code: transparentSrc
-    }];
+    transparentHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: transparentSrc
+        }
+    ];
 
-    colorAccentHtml: ExampleFile[] = [{
-        language: 'html',
-        code: colorsSrc
-    }];
+    colorAccentHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: colorsSrc
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('identifier');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() {}
 }

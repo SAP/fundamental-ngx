@@ -60,9 +60,7 @@ import {
     ActionBarLongStringTitleTruncationExampleComponent,
     ActionBarContextualMenuExampleComponent,
     ActionBarNoBackExampleComponent,
-    ActionBarMobileExampleComponent,
-
-
+    ActionBarMobileExampleComponent
 } from './component-docs/action-bar/examples/action-bar-examples.component';
 import { AlertExampleComponent } from './component-docs/alert/examples/alert-example.component';
 import { AlertInlineExampleComponent } from './component-docs/alert/examples/alert-inline-example.component';
@@ -173,7 +171,8 @@ import {
 import { TableExampleComponent } from './component-docs/table/examples/table-example.component';
 import {
     TabsExampleComponent,
-    TabSelectionExampleComponent, TabsNavigationModeExampleComponent
+    TabSelectionExampleComponent,
+    TabsNavigationModeExampleComponent
 } from './component-docs/tabs/examples/tabs-examples-component';
 import {
     TileActionsExampleComponent,
@@ -190,7 +189,8 @@ import {
     Time12ExampleComponent,
     TimeDisabledExampleComponent,
     TimeNoSecondsExampleComponent,
-    TimeNoSpinnersExampleComponent, TimeOnlyHoursExampleComponent
+    TimeNoSpinnersExampleComponent,
+    TimeOnlyHoursExampleComponent
 } from './component-docs/time/examples/time-examples.component';
 import {
     TimePickerExampleComponent,
@@ -198,7 +198,8 @@ import {
     TimePickerDisabledExampleComponent,
     TimePickerNoSecondsExampleComponent,
     TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent, TimePickerOnlyHoursExampleComponent
+    TimePickerAllowNullExampleComponent,
+    TimePickerOnlyHoursExampleComponent
 } from './component-docs/time-picker/examples/time-picker-examples.component';
 import { TimePickerFormExampleComponent } from './component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
@@ -339,16 +340,15 @@ import {
     ButtonSplitTypesIconsComponent
 } from './component-docs/split-button/examples/split-button-examples.component';
 import {
-    TabNavigationExampleChildFirst, TabNavigationExampleChildSecond,
+    TabNavigationExampleChildFirst,
+    TabNavigationExampleChildSecond,
     TabNavigationExampleChildThird
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 import { DatePickerFormRangeExampleComponent } from './component-docs/date-picker/examples/date-picker-form-range-example.component';
 import { DatetimeFormExampleComponent } from './component-docs/datetime-picker/examples/datetime-form-example/datetime-form-example.component';
 import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
 import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
-import {
-    LocalizationEditorExampleComponent
-} from './component-docs/localization-editor/examples/localization-editor-example.component';
+import { LocalizationEditorExampleComponent } from './component-docs/localization-editor/examples/localization-editor-example.component';
 import { LocalizationEditorFormsExampleComponent } from './component-docs/localization-editor/examples/localization-editor-forms-example.component';
 import { LocalizationEditorTemplateExampleComponent } from './component-docs/localization-editor/examples/localization-editor-template-example.component';
 import { LocalizationEditorTextareaExampleComponent } from './component-docs/localization-editor/examples/localization-editor-textarea-example.component';
@@ -388,7 +388,8 @@ import { SelectNativeHeaderComponent } from './component-docs/select-native/sele
 import { TextareaDocsComponent } from './component-docs/textarea/textarea-docs.component';
 import {
     TextareaExampleComponent,
-    TextareaInlineHelpExampleComponent, TextareaStateExampleComponent
+    TextareaInlineHelpExampleComponent,
+    TextareaStateExampleComponent
 } from './component-docs/textarea/examples/textarea-examples.component';
 import { TextareaFormGroupExampleComponent } from './component-docs/textarea/examples/textarea-form-group-example.component';
 import { TextareaHeaderComponent } from './component-docs/textarea/textarea-header/textarea-header.component';
@@ -412,7 +413,7 @@ import { CalendarI18nMomentExampleComponent } from './component-docs/calendar/ex
 import { SelectMaxHeightExampleComponent } from './component-docs/select/examples/select-height/select-max-height-example.component';
 import { PopoverDynamicExampleComponent } from './component-docs/popover/examples/popover-dynamic/popover-dynamic-example.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-
+import { ExtraOptions } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -756,6 +757,7 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         CalendarI18nMomentExampleComponent,
         SelectMaxHeightExampleComponent
     ],
+
     entryComponents: [ModalContentComponent, ModalInModalComponent, ModalInModalSecondComponent, AlertContentComponent],
     imports: [
         MarkdownModule.forChild(),
@@ -763,16 +765,15 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
+
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
+
         FundamentalNgxCoreModule,
         HttpClientModule,
         CdkTableModule,
         DragDropModule,
         HighlightModule
     ],
-    providers: [
-        CopyService,
-        ApiDocsService
-    ]
+    providers: [CopyService, ApiDocsService]
 })
-export class DocumentationModule { }
+export class DocumentationModule {}

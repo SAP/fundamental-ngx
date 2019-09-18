@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import * as toggleSizeExample from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.html';
 import * as toggleDisableExample from '!raw-loader!./examples/disabled-toggle-example/disabled-toggle-example.component.html';
 import * as toggleBindingExampleHtml from '!raw-loader!./examples/toggle-binding-example/toggle-binding-example.component.html';
@@ -8,13 +8,14 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as toggleFormExampleHtmlSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.html';
 import * as toggleFormExampleTsSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-toggle',
     templateUrl: './toggle-docs.component.html'
 })
-export class ToggleDocsComponent {
-
+export class ToggleDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -53,20 +54,24 @@ export class ToggleDocsComponent {
         }
     };
 
-    toggleSize: ExampleFile[] = [{
-        language: 'html',
-        code: toggleSizeExample
-    }];
+    toggleSize: ExampleFile[] = [
+        {
+            language: 'html',
+            code: toggleSizeExample
+        }
+    ];
 
-    toggleDisable: ExampleFile[] = [{
-        language: 'html',
-        code: toggleDisableExample
-    }];
+    toggleDisable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: toggleDisableExample
+        }
+    ];
 
     toggleBinding: ExampleFile[] = [
         {
             language: 'html',
-            code: toggleBindingExampleHtml,
+            code: toggleBindingExampleHtml
         },
         {
             language: 'typescript',
@@ -77,7 +82,7 @@ export class ToggleDocsComponent {
     toggleFormExample: ExampleFile[] = [
         {
             language: 'html',
-            code: toggleFormExampleHtmlSrc,
+            code: toggleFormExampleHtmlSrc
         },
         {
             language: 'typescript',
@@ -89,6 +94,7 @@ export class ToggleDocsComponent {
         this.schema = this.schemaFactory.getComponent('toggle');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

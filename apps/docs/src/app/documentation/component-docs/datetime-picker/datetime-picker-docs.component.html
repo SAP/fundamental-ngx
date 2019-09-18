@@ -1,8 +1,10 @@
-<h2>Simple Datetime Picker</h2>
+<fd-docs-section-title [id]="'datetime-picker-simple'" [componentName]="'datetime-picker'">
+    Simple Datetime Picker
+</fd-docs-section-title>
 <description>
-    The simplest form of the datetime picker. It makes use of ngModel to bind to the desired value.
-    The alternative is to use the date input combined with the dateChange output.
-    There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown
+    The simplest form of the datetime picker. It makes use of ngModel to bind to the desired value. The alternative is
+    to use the date input combined with the dateChange output. There is also added <code>[position]</code> attribute
+    which allows us to decide where popup should be shown
 </description>
 <description>
     The value for the input only changes the model on blur or an enter/return keystroke.
@@ -14,9 +16,12 @@
 
 <separator></separator>
 
-<h2>Non-Meridian Datetime Picker</h2>
+<fd-docs-section-title [id]="'datetime-picker-NonMeridian'" [componentName]="'datetime-picker'">
+    Non-Meridian Datetime Picker
+</fd-docs-section-title>
 <description>
-    Removing the am/pm from the time component. The string representation may or may not conserve it depending on locality.
+    Removing the am/pm from the time component. The string representation may or may not conserve it depending on
+    locality.
 </description>
 <component-example [name]="'ex2'">
     <app-datetime-non-meridian-example></app-datetime-non-meridian-example>
@@ -25,9 +30,12 @@
 
 <separator></separator>
 
-<h2>Programmatic Change</h2>
+<fd-docs-section-title [id]="'datetime-picker-progChange'" [componentName]="'datetime-picker'">
+    Programmatic Change
+</fd-docs-section-title>
 <description>
-    It is possible to programmatically change the value of the date of the datetime picker and still conserve full functionality.
+    It is possible to programmatically change the value of the date of the datetime picker and still conserve full
+    functionality.
 </description>
 <component-example [name]="'ex3'">
     <app-datetime-program-example></app-datetime-program-example>
@@ -35,15 +43,21 @@
 <code-example [exampleFiles]="datetimeProgram"></code-example>
 
 <separator></separator>
-<h2>Null Validity</h2>
-<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.</description>
+<fd-docs-section-title [id]="'datetime-picker-null'" [componentName]="'datetime-picker'">
+    Null Validity
+</fd-docs-section-title>
+<description>
+    Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.
+</description>
 <component-example [name]="'ex4'">
     <fd-date-time-picker-allow-null-example></fd-date-time-picker-allow-null-example>
 </component-example>
 <code-example [exampleFiles]="datetimePickerAllowNull"></code-example>
 
 <separator></separator>
-<h2>Formatting</h2>
+<fd-docs-section-title [id]="'datetime-picker-formatting'" [componentName]="'datetime-picker'">
+    Formatting
+</fd-docs-section-title>
 <description>Providing a custom format for the dates is possible through providing a service.</description>
 <component-example [name]="'ex5'">
     <fd-datetime-format-example></fd-datetime-format-example>
@@ -52,7 +66,9 @@
 
 <separator></separator>
 
-<h2>Disabled State</h2>
+<fd-docs-section-title [id]="'datetime-picker-disabled'" [componentName]="'datetime-picker'">
+    Disabled State
+</fd-docs-section-title>
 <component-example [name]="'ex6'">
     <fd-datetime-disabled-example></fd-datetime-disabled-example>
 </component-example>
@@ -60,7 +76,9 @@
 
 <separator></separator>
 
-<h2>Date Time Picker in Reactive Form</h2>
+<fd-docs-section-title [id]="'datetime-picker-inReactiveForm'" [componentName]="'datetime-picker'">
+    Date Time Picker in Reactive Form
+</fd-docs-section-title>
 <description>The date-time-picker component may also be used within Angular Reactive Forms.</description>
 <component-example [name]="'ex5'">
     <fd-datetime-form-example></fd-datetime-form-example>

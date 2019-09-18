@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
 import * as popoverProgrammaticHtmlSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.html';
@@ -11,22 +11,25 @@ import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-
 import * as popoverDynamicHSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.html';
 import * as popoverDynamicTSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-popover',
     templateUrl: './popover-docs.component.html'
 })
-export class PopoverDocsComponent {
-
-    popoverExample: ExampleFile[] = [{
-        language: 'html',
-        code: popoverSrc
-    }];
+export class PopoverDocsComponent implements OnInit {
+    popoverExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverSrc
+        }
+    ];
 
     popoverProgrammaticExample: ExampleFile[] = [
         {
             language: 'html',
-            code: popoverProgrammaticHtmlSrc,
+            code: popoverProgrammaticHtmlSrc
         },
         {
             language: 'typescript',
@@ -37,7 +40,7 @@ export class PopoverDocsComponent {
     popoverPlacementExample: ExampleFile[] = [
         {
             language: 'html',
-            code: popoverPlacementHtmlSrc,
+            code: popoverPlacementHtmlSrc
         },
         {
             language: 'typescript',
@@ -48,7 +51,7 @@ export class PopoverDocsComponent {
     popoverModalExample: ExampleFile[] = [
         {
             language: 'html',
-            code: popoverModalHtmlSrc,
+            code: popoverModalHtmlSrc
         },
         {
             language: 'typescript',
@@ -59,7 +62,7 @@ export class PopoverDocsComponent {
     popoverDynamicExample: ExampleFile[] = [
         {
             language: 'html',
-            code: popoverDynamicHSrc,
+            code: popoverDynamicHSrc
         },
         {
             language: 'typescript',
@@ -67,8 +70,12 @@ export class PopoverDocsComponent {
         }
     ];
 
-    popoverFillExample: ExampleFile[] = [{
-        language: 'html',
-        code: popoverFillHSrc
-    }];
+    popoverFillExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverFillHSrc
+        }
+    ];
+
+    ngOnInit() {}
 }

@@ -1,4 +1,6 @@
-<h2>Menu</h2>
+<fd-docs-section-title [id]="'def'" [componentName]="'menu'">
+    Menu
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
     <fd-menu-example></fd-menu-example>
 </component-example>
@@ -6,10 +8,13 @@
 
 <separator></separator>
 
-<h2>Menu with Addon</h2>
-<description>This is an additional container that can be used for an icon
-or checkbox before the meni item text. This can be achieved with the directives
-<code>fd-menu-item-addon</code> and <code>fd-menu-addon</code> </description>
+<fd-docs-section-title [id]="'addon'" [componentName]="'menu'">
+    Menu with Addon
+</fd-docs-section-title>
+<description
+    >This is an additional container that can be used for an icon or checkbox before the meni item text. This can be
+    achieved with the directives <code>fd-menu-item-addon</code> and <code>fd-menu-addon</code>
+</description>
 <component-example [name]="'ex10'">
     <fd-menu-addon-example></fd-menu-addon-example>
 </component-example>
@@ -17,7 +22,9 @@ or checkbox before the meni item text. This can be achieved with the directives
 
 <separator></separator>
 
-<h2>Menu with Group</h2>
+<fd-docs-section-title [id]="'group'" [componentName]="'menu'">
+    Menu with Group
+</fd-docs-section-title>
 <component-example [name]="'ex2'">
     <fd-menu-group-example></fd-menu-group-example>
 </component-example>
@@ -25,7 +32,9 @@ or checkbox before the meni item text. This can be achieved with the directives
 
 <separator></separator>
 
-<h2>Menu with Optional Separator</h2>
+<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">
+    Menu with Optional Separator
+</fd-docs-section-title>
 <description>Each menu item can have an optional separator shown as a line beneath the item.</description>
 <component-example [name]="'ex4'">
     <fd-menu-separator-example></fd-menu-separator-example>
@@ -34,12 +43,14 @@ or checkbox before the meni item text. This can be achieved with the directives
 
 <separator></separator>
 
-<h2>Keyboard Support</h2>
+<fd-docs-section-title [id]="'keyboard'" [componentName]="'menu'">
+    Keyboard Support
+</fd-docs-section-title>
 <description>
-    Keyboard support can be added on every component which uses the <code>MenuComponent</code>. It simulates
-    click event on <code>Enter</code> or <code>Space</code> key down. It is also possible to override functions for a
-    variety of situations. For example, when the focus should escape the element. Use the up and down arrows to test
-    the component below. To enable focusing on non-focusable elements, change value of <code>tabIndex</code> to 0.
+    Keyboard support can be added on every component which uses the <code>MenuComponent</code>. It simulates click event
+    on <code>Enter</code> or <code>Space</code> key down. It is also possible to override functions for a variety of
+    situations. For example, when the focus should escape the element. Use the up and down arrows to test the component
+    below. To enable focusing on non-focusable elements, change value of <code>tabIndex</code> to 0.
 </description>
 <component-example [name]="'ex3'">
     <fd-menu-keyboard-support-example></fd-menu-keyboard-support-example>

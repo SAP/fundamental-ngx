@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -9,15 +9,17 @@ import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-exam
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
-import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html'
-import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts'
+import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html';
+import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-time',
     templateUrl: './time-docs.component.html'
 })
-export class TimeDocsComponent {
+export class TimeDocsComponent implements OnInit {
     static schema: Schema = {
         properties: {
             properties: {
@@ -47,45 +49,59 @@ export class TimeDocsComponent {
         }
     };
 
-    timeBasic: ExampleFile[] = [{
-        language: 'html',
-        code: timeSrc
-    }];
+    timeBasic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeSrc
+        }
+    ];
 
-    timeMeridian: ExampleFile[] = [{
-        language: 'html',
-        code: timeMeridianSrc
-    }];
+    timeMeridian: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeMeridianSrc
+        }
+    ];
 
-    timeDisabled: ExampleFile[] = [{
-        language: 'html',
-        code: timeDisabledSrc
-    }];
+    timeDisabled: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeDisabledSrc
+        }
+    ];
 
-    timeNoSpinners: ExampleFile[] = [{
-        language: 'html',
-        code: timeNoSpinnersSrc
-    }];
+    timeNoSpinners: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeNoSpinnersSrc
+        }
+    ];
 
-    timeNoSeconds: ExampleFile[] = [{
-        language: 'html',
-        code: timeNoSecondsSrc
-    }];
+    timeNoSeconds: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeNoSecondsSrc
+        }
+    ];
 
-    timeOnlyHours: ExampleFile[] = [{
-        language: 'html',
-        code: timeOnlyHoursSrc
-    }];
+    timeOnlyHours: ExampleFile[] = [
+        {
+            language: 'html',
+            code: timeOnlyHoursSrc
+        }
+    ];
 
-    timeI18n: ExampleFile[] = [{
-        language: 'typescript',
-        code: timeI18nSrc
-    }];
+    timeI18n: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: timeI18nSrc
+        }
+    ];
 
     timeForm: ExampleFile[] = [
         {
             language: 'html',
-            code: timeFormHtmlSrc,
+            code: timeFormHtmlSrc
         },
         {
             language: 'typescript',
@@ -97,6 +113,7 @@ export class TimeDocsComponent {
         this.schema = this.schemaFactory.getComponent('time');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

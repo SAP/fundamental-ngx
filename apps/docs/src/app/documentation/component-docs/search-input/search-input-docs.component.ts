@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as searchInputHTMLSrc from '!raw-loader!./examples/search-input-example.component.html';
 import * as searchInputTSSrc from '!raw-loader!./examples/search-input-example.component.ts';
@@ -9,17 +9,18 @@ import * as searchInputAsyncTs from '!raw-loader!./examples/search-input-async-e
 import * as searchInputDisplayHtml from '!raw-loader!./examples/search-input-displaywith-example.component.html';
 import * as searchInputDisplayTs from '!raw-loader!./examples/search-input-displaywith-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-search-input',
     templateUrl: './search-input-docs.component.html'
 })
-export class SearchInputDocsComponent {
-
+export class SearchInputDocsComponent implements OnInit {
     searchInputExample: ExampleFile[] = [
         {
             language: 'html',
-            code: searchInputHTMLSrc,
+            code: searchInputHTMLSrc
         },
         {
             language: 'typescript',
@@ -30,7 +31,7 @@ export class SearchInputDocsComponent {
     searchInputDynamic: ExampleFile[] = [
         {
             language: 'html',
-            code: searchInputDynHtml,
+            code: searchInputDynHtml
         },
         {
             language: 'typescript',
@@ -41,7 +42,7 @@ export class SearchInputDocsComponent {
     searchInputAsync: ExampleFile[] = [
         {
             language: 'html',
-            code: searchInputAsyncHtml,
+            code: searchInputAsyncHtml
         },
         {
             language: 'typescript',
@@ -52,7 +53,7 @@ export class SearchInputDocsComponent {
     display: ExampleFile[] = [
         {
             language: 'html',
-            code: searchInputDisplayHtml,
+            code: searchInputDisplayHtml
         },
         {
             language: 'typescript',
@@ -60,4 +61,5 @@ export class SearchInputDocsComponent {
         }
     ];
 
+    ngOnInit() {}
 }

@@ -1,82 +1,113 @@
-<h2>Simple Date Picker</h2>
+<fd-docs-section-title [id]="'combobox-simple'" [componentName]="'datePicker'">
+    Simple Date Picker
+</fd-docs-section-title>
 <description>
-  You can use two-way data binding to select a date or range of dates on a calendar. Calendars internally utilize an
-  interface called <code>CalendarDay</code>, which contains the property <code>date</code>.
-  To select a date you will create a new object that contains the property date, whose value is a FdDate model object.
-    Then, using two-way binding syntax, set the selectedDay value to your new object.
-  Note that selecting a day (or range of days) in this manner will override any block/disable functions.
+    You can use two-way data binding to select a date or range of dates on a calendar. Calendars internally utilize an
+    interface called <code>CalendarDay</code>, which contains the property <code>date</code>. To select a date you will
+    create a new object that contains the property date, whose value is a FdDate model object. Then, using two-way
+    binding syntax, set the selectedDay value to your new object. Note that selecting a day (or range of days) in this
+    manner will override any block/disable functions.
 </description>
 <description>
-  The default format for the input is MM/DD/YYYY. See the 'Formatting' section for details on how to change this.
+    The default format for the input is MM/DD/YYYY. See the 'Formatting' section for details on how to change this.
 </description>
 <description>
     The value for the input only changes the model on blur or an enter/return keystroke.
 </description>
 <component-example [name]="'ex1'">
-  <fd-date-picker-single-example></fd-date-picker-single-example>
+    <fd-date-picker-single-example></fd-date-picker-single-example>
 </component-example>
 <code-example [exampleFiles]="datePickerSingle"></code-example>
 
 <separator></separator>
-<h2>Range Date Picker</h2>
-<description>Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.
+
+<fd-docs-section-title [id]="'combobox-range'" [componentName]="'datePicker'">
+    Range Date Picker
+</fd-docs-section-title>
+<description>
+    Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.
 </description>
 <component-example [name]="'ex2'">
-  <fd-date-picker-range-example></fd-date-picker-range-example>
+    <fd-date-picker-range-example></fd-date-picker-range-example>
 </component-example>
 <code-example [exampleFiles]="datePickerRange"></code-example>
 
 <separator></separator>
-<h2>Internationalization</h2>
-<description>It is possible to internationalize both the aria labels and the month names/weekdays through providing a
-  service.</description>
+
+<fd-docs-section-title [id]="'combobox-internationalization'" [componentName]="'datePicker'">
+    Internationalization
+</fd-docs-section-title>
+<description>
+    It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.
+</description>
 <component-example [name]="'ex3'">
-  <fd-datepicker-i18n-example></fd-datepicker-i18n-example>
+    <fd-datepicker-i18n-example></fd-datepicker-i18n-example>
 </component-example>
 <code-example [exampleFiles]="datePickerI18N"></code-example>
 
 <separator></separator>
-<h2>Formatting</h2>
+
+<fd-docs-section-title [id]="'combobox-formatting'" [componentName]="'datePicker'">
+    Formatting
+</fd-docs-section-title>
 <description>Providing a custom format for the dates is possible through providing a service.</description>
 <component-example [name]="'ex4'">
-  <fd-date-picker-format-example></fd-date-picker-format-example>
+    <fd-date-picker-format-example></fd-date-picker-format-example>
 </component-example>
 <code-example [exampleFiles]="datePickerFormat"></code-example>
 
 <separator></separator>
-<h2>Null Validity</h2>
-<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
-  invalid.</description>
+
+<fd-docs-section-title [id]="'combobox-null'" [componentName]="'datePicker'">
+    Null Validity
+</fd-docs-section-title>
+<description>
+    Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.
+</description>
 <component-example [name]="'ex5'">
-  <fd-date-picker-allow-null-example></fd-date-picker-allow-null-example>
+    <fd-date-picker-allow-null-example></fd-date-picker-allow-null-example>
 </component-example>
 <code-example [exampleFiles]="datePickerAllowNull"></code-example>
 
 <separator></separator>
-<h2>Date Picker in Reactive Form</h2>
+
+<fd-docs-section-title [id]="'combobox-reactiveForm'" [componentName]="'datePicker'">
+    Date Picker in Reactive Form
+</fd-docs-section-title>
 <description>The date-picker component may also be used within Angular Reactive Forms.</description>
 <component-example [name]="'ex6'">
-  <fd-date-picker-form-example></fd-date-picker-form-example>
+    <fd-date-picker-form-example></fd-date-picker-form-example>
 </component-example>
 <code-example [exampleFiles]="datePickerForm"></code-example>
 
 <separator></separator>
-<h2>Date Picker in Reactive Form with a Range of Dates</h2>
+
+<fd-docs-section-title [id]="'combobox-reactiveForm-rangeOfDates'" [componentName]="'datePicker'">
+    Date Picker in Reactive Form with a Range of Dates
+</fd-docs-section-title>
 <component-example [name]="'ex7'">
-  <fd-date-picker-form-range-example></fd-date-picker-form-range-example>
+    <fd-date-picker-form-range-example></fd-date-picker-form-range-example>
 </component-example>
 <code-example [exampleFiles]="datePickerRangeForm"></code-example>
 
 <separator></separator>
-<h2>Position</h2>
-<description>There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.</description>
+
+<fd-docs-section-title [id]="'combobox-position'" [componentName]="'datePicker'">
+    Position
+</fd-docs-section-title>
+<description>
+    There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.
+</description>
 <component-example name="'ex8'">
     <fd-date-picker-position-example></fd-date-picker-position-example>
 </component-example>
 <code-example [exampleFiles]="datePickerPosition"></code-example>
 
 <separator></separator>
-<h2>Disabled State</h2>
+
+<fd-docs-section-title [id]="'combobox-disabled'" [componentName]="'datePicker'">
+    Disabled State
+</fd-docs-section-title>
 <component-example name="'ex7'">
     <fd-date-picker-disabled-example></fd-date-picker-disabled-example>
 </component-example>

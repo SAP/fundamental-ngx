@@ -1,14 +1,20 @@
-<h2>Simple Tabs</h2>
+<fd-docs-section-title [id]="'simple'" [componentName]="'tabs'">
+    Simple Tabs
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
     <fd-tabs-example></fd-tabs-example>
 </component-example>
 <code-example [exampleFiles]="tabExample"></code-example>
 
 <separator></separator>
-<h2>Programmatic Selection</h2>
+
+<fd-docs-section-title [id]="'programmaticSelection'" [componentName]="'tabs'">
+    Programmatic Selection
+</fd-docs-section-title>
 <description>
-    There are two ways of accomplishing this. First, the <code>selectedIndex</code> input can be used.
-    This requires maintaining a flag. The second method requires setting a template reference variable and then calling the <code>selectTab(index)</code> method.
+    There are two ways of accomplishing this. First, the <code>selectedIndex</code> input can be used. This requires
+    maintaining a flag. The second method requires setting a template reference variable and then calling the
+    <code>selectTab(index)</code> method.
 </description>
 <component-example [name]="'ex2'">
     <fd-tab-selection-example></fd-tab-selection-example>
@@ -16,7 +22,10 @@
 <code-example [exampleFiles]="tabSelection"></code-example>
 
 <separator></separator>
-<h2>Complex Tab Titles</h2>
+
+<fd-docs-section-title [id]="'complexTabTitles'" [componentName]="'tabs'">
+    Complex Tab Titles
+</fd-docs-section-title>
 <description>
     Use an ng-template with the <code>fd-tab-title</code> directive to access heavily customizable tab titles.
 </description>
@@ -26,10 +35,13 @@
 <code-example [exampleFiles]="complexHeader"></code-example>
 
 <separator></separator>
-<h2>Tab Navigation Mode</h2>
+
+<fd-docs-section-title [id]="'tabNavigationMode'" [componentName]="'tabs'">
+    Tab Navigation Mode
+</fd-docs-section-title>
 <description>
-    It is possible to use the tabs in navigation mode. While there is no option to provide some content in this mode,
-    it does allow the use of a <code>router-outlet</code> with <code>[routerLink]</code> or <code>[href]</code> attributes.
+    It is possible to use the tabs in navigation mode. While there is no option to provide some content in this mode, it
+    does allow the use of a <code>router-outlet</code> with <code>[routerLink]</code> or <code>[href]</code> attributes.
 </description>
 <component-example [name]="'ex4'">
     <fd-tabs-navigation-mode-example></fd-tabs-navigation-mode-example>
@@ -37,7 +49,10 @@
 <code-example [exampleFiles]="navigationTab"></code-example>
 
 <separator></separator>
-<h2>Adding and Removing Tabs</h2>
+
+<fd-docs-section-title [id]="'addingRemovingTabs'" [componentName]="'tabs'">
+    Adding and Removing Tabs
+</fd-docs-section-title>
 <description>
     The tab component is very flexible, and supports dynamically adding or removing tabs.
 </description>
@@ -46,21 +61,16 @@
 </component-example>
 <code-example [exampleFiles]="addingTab"></code-example>
 
-<playground [schema]="schema"
-            [schemaInitialValues]="data"
-            (onFormChanges)="onSchemaValues($event)">
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-tab-list>
-        <fd-tab [title]="data.properties.items.label"
-                [disabled]="data.state.disabled">
-            {{data.properties.panels.content}}
+        <fd-tab [title]="data.properties.items.label" [disabled]="data.state.disabled">
+            {{ data.properties.panels.content }}
         </fd-tab>
-        <fd-tab [title]="data.properties.items.label2"
-                [disabled]="data.state.disabled2">
-            {{data.properties.panels.content2}}
+        <fd-tab [title]="data.properties.items.label2" [disabled]="data.state.disabled2">
+            {{ data.properties.panels.content2 }}
         </fd-tab>
-        <fd-tab [title]="data.properties.items.label3"
-                [disabled]="data.state.disabled3">
-            {{data.properties.panels.content3}}
+        <fd-tab [title]="data.properties.items.label3" [disabled]="data.state.disabled3">
+            {{ data.properties.panels.content3 }}
         </fd-tab>
     </fd-tab-list>
 </playground>

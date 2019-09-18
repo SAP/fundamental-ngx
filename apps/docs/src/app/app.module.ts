@@ -11,11 +11,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 
 export function hljsLanguages() {
-    return [
-        {name: 'typescript', func: typescript},
-        {name: 'scss', func: scss},
-        {name: 'html', func: xml},
-    ];
+    return [{ name: 'typescript', func: typescript }, { name: 'scss', func: scss }, { name: 'html', func: xml }];
 }
 
 const routes: Routes = [
@@ -27,7 +23,10 @@ const routes: Routes = [
     declarations: [AppComponent],
     imports: [
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, {
+            scrollPositionRestoration: 'enabled',
+            anchorScrolling: 'enabled'
+        }),
         HttpClientModule,
         MarkdownModule.forRoot({ loader: HttpClient }),
         HighlightModule.forRoot({ languages: hljsLanguages })

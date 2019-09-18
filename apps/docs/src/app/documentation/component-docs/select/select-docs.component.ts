@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
 
@@ -20,23 +20,26 @@ import * as selectViewValueT from '!raw-loader!./examples/select-view-value-exam
 
 import * as selectMaxHeightH from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
     styleUrls: ['./select-docs.component.scss']
 })
-export class SelectDocsComponent {
-
-    selectBasic: ExampleFile[] = [{
-        language: 'html',
-        code: selectBasicSrc
-    }];
+export class SelectDocsComponent implements OnInit {
+    selectBasic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectBasicSrc
+        }
+    ];
 
     selectProg: ExampleFile[] = [
         {
             language: 'html',
-            code: selectProgSrcH,
+            code: selectProgSrcH
         },
         {
             language: 'typescript',
@@ -44,20 +47,24 @@ export class SelectDocsComponent {
         }
     ];
 
-    selectNested: ExampleFile[] = [{
-        language: 'html',
-        code: selectNestedSrcH
-    }];
+    selectNested: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectNestedSrcH
+        }
+    ];
 
-    customTrigger: ExampleFile[] = [{
-        language: 'html',
-        code: customTriggerSrcH
-    }];
+    customTrigger: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customTriggerSrcH
+        }
+    ];
 
     selectAdding: ExampleFile[] = [
         {
             language: 'html',
-            code: selectAddingSrcH,
+            code: selectAddingSrcH
         },
         {
             language: 'typescript',
@@ -68,7 +75,7 @@ export class SelectDocsComponent {
     selectForm: ExampleFile[] = [
         {
             language: 'html',
-            code: selectFormSrcH,
+            code: selectFormSrcH
         },
         {
             language: 'typescript',
@@ -79,14 +86,14 @@ export class SelectDocsComponent {
     selectMaxHeight: ExampleFile[] = [
         {
             language: 'html',
-            code: selectMaxHeightH,
-        },
+            code: selectMaxHeightH
+        }
     ];
 
     selectViewValue: ExampleFile[] = [
         {
             language: 'html',
-            code: selectViewValueH,
+            code: selectViewValueH
         },
         {
             language: 'typescript',
@@ -94,4 +101,5 @@ export class SelectDocsComponent {
         }
     ];
 
+    ngOnInit() {}
 }

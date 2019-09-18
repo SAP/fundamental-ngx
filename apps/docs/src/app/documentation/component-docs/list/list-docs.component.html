@@ -1,55 +1,70 @@
-<h2>Simple List</h2>
+<fd-docs-section-title [id]="'list-simple'" [componentName]="'list'">
+    Simple List
+</fd-docs-section-title>
 <description>A simple list. The list item can contain plain text or links.</description>
 <component-example [name]="'ex1'">
-  <fd-list-example></fd-list-example>
+    <fd-list-example></fd-list-example>
 </component-example>
 <code-example [exampleFiles]="simpleList"></code-example>
 
 <separator></separator>
 
-<h2>Action List</h2>
+<fd-docs-section-title [id]="'actionList'" [componentName]="'list'">
+    Action List
+</fd-docs-section-title>
 <description>The list items can also contain quick actions, such as: remove, edit, copy, etc.</description>
 <component-example [name]="'ex2'">
-  <fd-list-actions-example></fd-list-actions-example>
+    <fd-list-actions-example></fd-list-actions-example>
 </component-example>
 <code-example [exampleFiles]="listActions"></code-example>
 
 <separator></separator>
 
-<h2>Single Select List</h2>
-<description>Some lists may require the user to only select one item. In those cases, a radio button is the best-fitting
-  input. There is no formal support for this feature, though an example on how to accomplish it is provided below.
+<fd-docs-section-title [id]="'singleSelectList'" [componentName]="'list'">
+    Single Select List
+</fd-docs-section-title>
+<description
+    >Some lists may require the user to only select one item. In those cases, a radio button is the best-fitting input.
+    There is no formal support for this feature, though an example on how to accomplish it is provided below.
 </description>
 <component-example [name]="'ex3'">
-  <fd-single-select-example></fd-single-select-example>
+    <fd-single-select-example></fd-single-select-example>
 </component-example>
 <code-example [exampleFiles]="listSingleSelect"></code-example>
 
 <separator></separator>
 
-<h2>Checkbox List</h2>
+<fd-docs-section-title [id]="'checkbox List'" [componentName]="'list'">
+    Checkbox List
+</fd-docs-section-title>
 <description>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</description>
 <component-example [name]="'ex4'">
-  <fd-list-checkbox-example></fd-list-checkbox-example>
+    <fd-list-checkbox-example></fd-list-checkbox-example>
 </component-example>
 <code-example [exampleFiles]="listCheckboxes"></code-example>
 
 <separator></separator>
 
-<h2>Infinite Scroll List</h2>
-<description>It is possible to implement an infinite scroll function using the fdInfiniteScroll directive. It allows you
-  to load more data as the user scrolls down the parent element. It is important to remember that the
-  <code>InfiniteScrollModule</code> is required for this feature.</description>
+<fd-docs-section-title [id]="'infiniteScrollList'" [componentName]="'list'">
+    Infinite Scroll List
+</fd-docs-section-title>
+<description>
+    It is possible to implement an infinite scroll function using the fdInfiniteScroll directive. It allows you to load
+    more data as the user scrolls down the parent element. It is important to remember that the
+    <code>InfiniteScrollModule</code> is required for this feature.
+</description>
 <component-example [name]="'ex5'">
-  <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
+    <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
 </component-example>
 <code-example [exampleFiles]="infiniteScrollCode"></code-example>
 
 <separator></separator>
 
-<h2>Checkbox List in Form</h2>
+<fd-docs-section-title [id]="'checkboxListForm'" [componentName]="'list'">
+    Checkbox List in Form
+</fd-docs-section-title>
 <description>It is possible to use the fd-list-checkbox component within Angular Reactive Forms</description>
 <component-example [name]="'ex6'">
-  <fd-list-checkbox-form-example></fd-list-checkbox-form-example>
+    <fd-list-checkbox-form-example></fd-list-checkbox-form-example>
 </component-example>
 <code-example [exampleFiles]="listCheckboxForm"></code-example>

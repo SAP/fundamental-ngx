@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -10,6 +10,8 @@ import * as labelDefaultExample from '!raw-loader!./examples/label-default-examp
 import * as labelIconStatusExample from '!raw-loader!./examples/label-icon-status-example.component.html';
 import * as labelStatusColorsExample from '!raw-loader!./examples/label-status-colors-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-badge-label',
@@ -684,48 +686,61 @@ export class BadgeLabelDocsComponent implements OnInit {
         }
     };
 
-    defaultBadgeHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: badgeDefaultExample
-    }];
+    defaultBadgeHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: badgeDefaultExample
+        }
+    ];
 
-    pillBadgeHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: badgePillExample
-    }];
+    pillBadgeHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: badgePillExample
+        }
+    ];
 
-    filledBadgeHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: badgeFilledExample
-    }];
+    filledBadgeHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: badgeFilledExample
+        }
+    ];
 
-    labelHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: labelDefaultExample
-    }];
+    labelHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: labelDefaultExample
+        }
+    ];
 
-    statusIconLabelHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: labelBuildStatusExample
-    }];
+    statusIconLabelHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: labelBuildStatusExample
+        }
+    ];
 
-    anyIconLabelHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: labelIconStatusExample
-    }];
+    anyIconLabelHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: labelIconStatusExample
+        }
+    ];
 
-    semanticColorLabelHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: labelStatusColorsExample
-    }];
+    semanticColorLabelHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: labelStatusColorsExample
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('badgeLabel');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() {}
 }

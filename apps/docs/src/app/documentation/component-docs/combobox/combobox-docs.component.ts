@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as comboboxHTMLSrc from '!raw-loader!./examples/combobox-example.component.html';
 import * as comboboxTSSrc from '!raw-loader!./examples/combobox-example.component.ts';
@@ -19,13 +19,14 @@ import * as comboboxHeightTs from '!raw-loader!./examples/combobox-height-exampl
 import * as comboboxSeaTs from '!raw-loader!./examples/combobox-search-function-example.component.ts';
 import * as comboboxSeaHtml from '!raw-loader!./examples/combobox-search-function-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html'
 })
-export class ComboboxDocsComponent {
-
+export class ComboboxDocsComponent implements OnInit {
     comboboxBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -125,4 +126,5 @@ export class ComboboxDocsComponent {
         }
     ];
 
+    ngOnInit() {}
 }

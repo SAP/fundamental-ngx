@@ -1,4 +1,6 @@
-<h2>24-Hour Clock</h2>
+<fd-docs-section-title [id]="'24HourClock'" [componentName]="'time'">
+    24-Hour Clock
+</fd-docs-section-title>
 <description>This is the default clock setting.</description>
 <component-example [name]="'ex1'">
     <fd-time-example></fd-time-example>
@@ -7,10 +9,12 @@
 
 <separator></separator>
 
-<h2>12-Hour Clock</h2>
+<fd-docs-section-title [id]="'12HourClock'" [componentName]="'time'">
+    12-Hour Clock
+</fd-docs-section-title>
 <description>
-    You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>.
-    The passed time object will still contain a 24-hour clock.
+    You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>. The passed time object will still
+    contain a 24-hour clock.
 </description>
 <component-example [name]="'ex2'">
     <fd-time-12-example></fd-time-12-example>
@@ -19,7 +23,9 @@
 
 <separator></separator>
 
-<h2>Clock Without Spinners</h2>
+<fd-docs-section-title [id]="'clockWithoutSpinners'" [componentName]="'time'">
+    Clock Without Spinners
+</fd-docs-section-title>
 <description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
 <component-example [name]="'ex3'">
     <fd-time-no-spinners-example></fd-time-no-spinners-example>
@@ -28,7 +34,9 @@
 
 <separator></separator>
 
-<h2>Clock Without Seconds</h2>
+<fd-docs-section-title [id]="'clockWithoutSeconds'" [componentName]="'time'">
+    Clock Without Seconds
+</fd-docs-section-title>
 <description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
 <component-example [name]="'ex4'">
     <fd-time-no-seconds-example></fd-time-no-seconds-example>
@@ -37,8 +45,12 @@
 
 <separator></separator>
 
-<h2>Clock Without Minutes and Seconds</h2>
-<description>Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or <code>[displayHours]="false"</code>
+<fd-docs-section-title [id]="'clockWithoutMinutesSeconds'" [componentName]="'time'">
+    Clock Without Minutes and Seconds
+</fd-docs-section-title>
+<description
+    >Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
+    <code>[displayHours]="false"</code>
     to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
 </description>
 <component-example [name]="'ex5'">
@@ -48,10 +60,10 @@
 
 <separator></separator>
 
-<h2>Disabled State</h2>
-<description>
-    You can disable the entire component by setting <code>[disabled]="true"</code>.
-</description>
+<fd-docs-section-title [id]="'disabled'" [componentName]="'time'">
+    Disabled State
+</fd-docs-section-title>
+<description> You can disable the entire component by setting <code>[disabled]="true"</code>. </description>
 <component-example [name]="'ex6'">
     <fd-time-disabled-example></fd-time-disabled-example>
 </component-example>
@@ -59,14 +71,15 @@
 
 <separator></separator>
 
-<h2>Internationalization</h2>
+<fd-docs-section-title [id]="'24HourClock'" [componentName]="'time'">
+    Internationalization
+</fd-docs-section-title>
 <description>
     The time component uses a custom service called TimeI18nLabels to give aria-labels to the buttons and inputs.
-    Inspect the HTML elements to see the Spanish aria-labels.
-    The time component also uses a custom service called TimeI18n to allow the possibility of changing the name of the
-    meridian modifier. In the example below, the german vorm. and nach. are shown.
-    Also it is possible to modify placeholders of the inputs, such as hours, minutes, seconds, and meridian. Besides
-    service allows to define if meridian modifier should be validated case sensitive.
+    Inspect the HTML elements to see the Spanish aria-labels. The time component also uses a custom service called
+    TimeI18n to allow the possibility of changing the name of the meridian modifier. In the example below, the german
+    vorm. and nach. are shown. Also it is possible to modify placeholders of the inputs, such as hours, minutes,
+    seconds, and meridian. Besides service allows to define if meridian modifier should be validated case sensitive.
 </description>
 <component-example [name]="'ex7'">
     <fd-time-i18n-example></fd-time-i18n-example>
@@ -75,10 +88,12 @@
 
 <separator></separator>
 
-<h2>Time in Reactive Form</h2>
+<fd-docs-section-title [id]="'reactiveForm'" [componentName]="'time'">
+    Time in Reactive Form
+</fd-docs-section-title>
 <description>
-    The time component may also be used within a form. The values within the form may then be accessed through the
-    usual methods used for accessing data within Angular reactive forms.
+    The time component may also be used within a form. The values within the form may then be accessed through the usual
+    methods used for accessing data within Angular reactive forms.
 </description>
 <component-example [name]="'ex8'">
     <fd-time-form-example></fd-time-form-example>

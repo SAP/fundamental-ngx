@@ -10,5 +10,5 @@ import { ButtonComponent } from './components/button/button.component';
     ],
     declarations: [ButtonComponent]
 })
-export class PlatformModule {
+export class FundamentalNgxPlatformModule {
 }

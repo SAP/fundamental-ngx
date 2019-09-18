@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -8,6 +8,8 @@ import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-button',
@@ -678,38 +680,47 @@ export class ButtonDocsComponent implements OnInit {
         }
     };
 
-    buttonHtmlOptions: ExampleFile[] = [{
-        language: 'html',
-        code: buttonOptionsExample
-    }];
+    buttonHtmlOptions: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonOptionsExample
+        }
+    ];
 
-    buttonHtmlType: ExampleFile[] = [{
-        language: 'html',
-        code: buttonTypesExample
-    }];
+    buttonHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonTypesExample
+        }
+    ];
 
-    buttonHtmlSize: ExampleFile[] = [{
-        language: 'html',
-        code: buttonSizesExample
-    }];
+    buttonHtmlSize: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSizesExample
+        }
+    ];
 
-    buttonHtmlIcon: ExampleFile[] = [{
-        language: 'html',
-        code: buttonIconsExample
-    }];
+    buttonHtmlIcon: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonIconsExample
+        }
+    ];
 
-    buttonHtmlState: ExampleFile[] = [{
-        language: 'html',
-        code: buttonStateExample
-    }];
+    buttonHtmlState: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonStateExample
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() {}
 }

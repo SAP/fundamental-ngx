@@ -1,6 +1,10 @@
-<h2>Simple Multi Input</h2>
-<description>The standard version of the component that most people will use regularly. Width of the input can be
-    controlled simply through the top-level component element sizing.</description>
+<fd-docs-section-title [id]="'simpleMultiInput'" [componentName]="'multi-input'">
+    Simple Multi Input
+</fd-docs-section-title>
+<description>
+    The standard version of the component that most people will use regularly. Width of the input can be controlled
+    simply through the top-level component element sizing.
+</description>
 <component-example [name]="'ex1'">
     <fd-multi-input-example></fd-multi-input-example>
 </component-example>
@@ -8,10 +12,14 @@
 
 <separator></separator>
 
-<h2>Display Object Property</h2>
-<description>The input supports objects through the <code>displayFn</code> input. The way the object is displayed to the
-    user is fully customizable through providing a function that accepts the object and returns the string to be
-    displayed. The example below shows displaying an object field in full uppercase.</description>
+<fd-docs-section-title [id]="'displayObjectProperty'" [componentName]="'multi-input'">
+    Display Object Property
+</fd-docs-section-title>
+<description>
+    The input supports objects through the <code>displayFn</code> input. The way the object is displayed to the user is
+    fully customizable through providing a function that accepts the object and returns the string to be displayed. The
+    example below shows displaying an object field in full uppercase.
+</description>
 <component-example [name]="'ex2'">
     <fd-multi-input-displaywith-example></fd-multi-input-displaywith-example>
 </component-example>
@@ -19,9 +27,13 @@
 
 <separator></separator>
 
-<h2>Custom Filter</h2>
-<description>The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function
-    which accepts an array and a search term, and then returns the desired filtered array.</description>
+<fd-docs-section-title [id]="'customFilter'" [componentName]="'multi-input'">
+    Custom Filter
+</fd-docs-section-title>
+<description>
+    The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
+    accepts an array and a search term, and then returns the desired filtered array.
+</description>
 <component-example [name]="'ex3'">
     <fd-multi-input-filter-example></fd-multi-input-filter-example>
 </component-example>
@@ -29,9 +41,13 @@
 
 <separator></separator>
 
-<h2>Observable Async Example</h2>
-<description>The <code>dropdownValues</code> input can accept an Observable with the async pipe, which could be useful
-    for autocomplete.</description>
+<fd-docs-section-title [id]="'observableAsyncExample'" [componentName]="'multi-input'">
+    Observable Async Example
+</fd-docs-section-title>
+<description>
+    The <code>dropdownValues</code> input can accept an Observable with the async pipe, which could be useful for
+    autocomplete.
+</description>
 <component-example [name]="'ex4'">
     <fd-multi-input-async-example></fd-multi-input-async-example>
 </component-example>
@@ -39,7 +55,9 @@
 
 <separator></separator>
 
-<h2>Multi Input in Reactive Form</h2>
+<fd-docs-section-title [id]="'reactiveForm'" [componentName]="'multi-input'">
+    Multi Input in Reactive Form
+</fd-docs-section-title>
 <description>The multi-input component may also be used within an angular reactive form.</description>
 <component-example [name]="'ex5'">
     <fd-multi-input-form-example></fd-multi-input-form-example>

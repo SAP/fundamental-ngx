@@ -1,11 +1,17 @@
-<h2>Pagination</h2>
+<fd-docs-section-title [id]="'def'" [componentName]="'pagination'">
+    Pagination
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
-  <fd-pagination-example></fd-pagination-example>
+    <fd-pagination-example></fd-pagination-example>
 </component-example>
 <code-example [exampleFiles]="paginationBasic"></code-example>
 
 <separator></separator>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-pagination [totalItems]="data.properties.totalItems" [itemsPerPage]="data.properties.itemsPerPage"
-                 [currentPage]="data.properties.currentPage" [displayText]="data.properties.displayText"></fd-pagination>
+    <fd-pagination
+        [totalItems]="data.properties.totalItems"
+        [itemsPerPage]="data.properties.itemsPerPage"
+        [currentPage]="data.properties.currentPage"
+        [displayText]="data.properties.displayText"
+    ></fd-pagination>
 </playground>

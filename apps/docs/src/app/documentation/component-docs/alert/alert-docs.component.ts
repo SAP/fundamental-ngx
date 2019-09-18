@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-
 import * as alertExampleHtml from '!raw-loader!./examples/alert-example.component.html';
 import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.ts';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
@@ -10,12 +9,14 @@ import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-c
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
 import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { ActivatedRoute } from '@angular/router';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-alert',
     templateUrl: './alert-docs.component.html'
 })
-export class AlertDocsComponent {
+export class AlertDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -50,8 +51,6 @@ export class AlertDocsComponent {
         },
         type: 'object'
     };
-
-    schema: Schema;
 
     data: any = {
         properties: {
@@ -93,20 +92,27 @@ export class AlertDocsComponent {
         }
     ];
 
-    alertInlineExample: ExampleFile[] = [{
-        language: 'html',
-        code: alertInlineExampleHtml
-    }];
+    alertInlineExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: alertInlineExampleHtml
+        }
+    ];
 
-    alertWidthExample: ExampleFile[] = [{
-        language: 'html',
-        code: alertWidthExampleHtml
-    }];
+    alertWidthExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: alertWidthExampleHtml
+        }
+    ];
+
+    schema: Schema;
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
