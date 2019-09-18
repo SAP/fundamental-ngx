@@ -1,7 +1,7 @@
-import { AfterContentInit, Component, ElementRef, HostBinding, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 
 /**
- * The component that represents a table wrapper, it will add fd-table class to its kids.
+ * The component that represents a table wrapper, it will add fd-table class to its first child.
  * A table is a set of tabular data. Line items can support data, images and actions.
  * ```html
  * <table-wrapper>
