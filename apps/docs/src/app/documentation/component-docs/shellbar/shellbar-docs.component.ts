@@ -7,14 +7,12 @@ import * as shellbarCollapsibleTSSrc from '!raw-loader!./examples/shellbar-colla
 import * as advancedShellbarTs from '!raw-loader!./examples/shellbar-advanced/shellbar-advanced-example.component.ts';
 import * as advancedShellbarHtml from '!raw-loader!./examples/shellbar-advanced/shellbar-advanced-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-shellbar',
     templateUrl: './shellbar-docs.component.html'
 })
-export class ShellbarDocsComponent implements OnInit {
+export class ShellbarDocsComponent {
     shellbarBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -36,8 +34,6 @@ export class ShellbarDocsComponent implements OnInit {
             code: shellbarCollapsibleTSSrc
         }
     ];
-
-    ngOnInit() {}
 
     advancedShellbar: ExampleFile[] = [
         {
