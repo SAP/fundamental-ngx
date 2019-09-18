@@ -46,7 +46,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {LocalizationEditorModule} from './localizator-editor/localization-editor.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
-import { LayoutGridModule } from '@fundamental-ngx/core/src/lib/layout-grid/layout-grid.module';
+import { LayoutGridModule } from './layout-grid/layout-grid.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],

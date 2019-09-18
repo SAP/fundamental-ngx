@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutGridSpanDirective } from '@fundamental-ngx/core/src/lib/layout-grid/layout-grid-span.directive';
+import { LayoutGridSpanDirective } from './layout-grid-span.directive';
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
