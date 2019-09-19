@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0-rc.14"></a>
+# [0.11.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.13...v0.11.0-rc.14) (2019-09-19)
+
+
+### Bug Fixes
+
+* extend shellbar ([#1277](https://github.com/SAP/fundamental-ngx/issues/1277)) ([64e83c5](https://github.com/SAP/fundamental-ngx/commit/64e83c5))
+
+
+
 <a name="0.11.0-rc.13"></a>
 # [0.11.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.12...v0.11.0-rc.13) (2019-09-17)
 
