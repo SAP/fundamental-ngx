@@ -1,0 +1,33 @@
+<div class="fd-shellbar__action fd-shellbar__action--collapsible">
+    <div class="fd-product-switcher">
+        <fd-popover [options]="{placement: 'bottom-end'}"
+                    [closeOnEscapeKey]="closeOnEscapeKey"
+                    [closeOnOutsideClick]="closeOnOutsideClick"
+                    [(isOpen)]="isOpen"
+                    (isOpenChange)="openChanged($event)"
+                    [disabled]="disabled"
+                    [triggers]="triggers"
+                    [isDropdown]="isDropdown"
+                    [focusTrapped]="false">
+            <fd-popover-control>
+                <button class="fd-button--shell sap-icon--grid"></button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <div class="fd-product-switcher__body">
+                    <nav>
+                        <ul>
+                            <li *ngFor="let product of productSwitcher" (click)="itemClick(product, $event)">
+                                <span class="fd-product-switcher__product-icon">
+                                    <img [src]="product.image">
+                                </span>
+                                <span class="fd-product-switcher__product-title">
+                                    {{product.title}}
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>

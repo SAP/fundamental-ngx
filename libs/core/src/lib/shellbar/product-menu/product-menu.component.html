@@ -1,7 +1,13 @@
 <div class="fd-product-menu">
     <fd-popover [options]="{placement: 'bottom-end'}"
-                [focusTrapped]="false"
-                [disabled]="!items || items.length === 0" >
+                [disabled]="!items || items.length === 0 || disabled"
+                [closeOnEscapeKey]="closeOnEscapeKey"
+                [closeOnOutsideClick]="closeOnOutsideClick"
+                [(isOpen)]="isOpen"
+                (isOpenChange)="openChanged($event)"
+                [isDropdown]="isDropdown"
+                [triggers]="triggers"
+                [focusTrapped]="false">
         <fd-popover-control>
             <button class="fd-product-menu__control">
                 <span class="fd-shellbar__title fd-product-menu__title">

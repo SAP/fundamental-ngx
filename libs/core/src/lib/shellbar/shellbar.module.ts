@@ -10,6 +10,8 @@ import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.componen
 
 import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';
+import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
+import { ShellbarProductSwitcherComponent } from './shellbar-product-switcher/shellbar-product-switcher.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { MenuModule } from '../menu/menu.module';
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
-        ShellbarTitleComponent
+        ShellbarTitleComponent,
+        ShellbarProductSwitcherComponent,
+        ShellbarUserMenuComponent
     ],
     imports: [CommonModule, PopoverModule, MenuModule],
     exports: [
@@ -29,7 +33,9 @@ import { MenuModule } from '../menu/menu.module';
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ShellbarLogoComponent,
-        ShellbarTitleComponent
+        ShellbarTitleComponent,
+        ShellbarProductSwitcherComponent,
+        ShellbarUserMenuComponent
     ]
 })
 export class ShellbarModule {}

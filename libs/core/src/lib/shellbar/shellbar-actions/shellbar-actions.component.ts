@@ -7,11 +7,13 @@ import {
     AfterContentChecked,
     QueryList,
     ViewEncapsulation,
-    ContentChild, ViewChildren
+    ContentChild, ViewChildren, ViewChild
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { SearchInputComponent } from '../../search-input/search-input.component';
 import { PopoverComponent } from '../../popover/popover.component';
+import { ShellbarProductSwitcherComponent } from '../shellbar-product-switcher/shellbar-product-switcher.component';
+import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
 /**
  * The component that represents shellbar actions.
@@ -72,8 +74,20 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ViewChildren(PopoverComponent)
-    popoverComponents: QueryList<PopoverComponent>;
+    @ContentChild(ShellbarProductSwitcherComponent)
+    productSwitcherComponent: ShellbarProductSwitcherComponent;
+
+    /** @hidden */
+    @ContentChild(ShellbarUserMenuComponent)
+    userComponent: ShellbarUserMenuComponent;
+
+    /** @hidden */
+    @ViewChild(ShellbarUserMenuComponent)
+    userComponentView: ShellbarUserMenuComponent;
+
+    /** @hidden */
+    @ViewChild(ShellbarProductSwitcherComponent)
+    productSwitcherComponentView: ShellbarProductSwitcherComponent;
 
     /** @hidden */
     @ContentChild(SearchInputComponent)
@@ -92,10 +106,26 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
      * @hidden
      */
     itemClicked(item: any, event: any): void {
-        if (this.closePopoverOnSelect) {
-            this.popoverComponents.forEach(popover => popover.close());
-        }
+        this.triggerItems();
         item.callback(event);
+    }
+
+    /** @hidden */
+    triggerItems(): void {
+        if (this.closePopoverOnSelect) {
+            if (this.userComponentView) {
+                this.userComponentView.close();
+            }
+            if (this.userComponent) {
+                this.userComponent.close();
+            }
+            if (this.productSwitcherComponent) {
+                this.productSwitcherComponent.close();
+            }
+            if (this.productSwitcherComponentView) {
+                this.productSwitcherComponentView.close();
+            }
+        }
     }
 
     /** @hidden */
@@ -118,6 +148,22 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
         event.preventDefault();
         event.stopPropagation();
         this.showCollapsedProducts = !this.showCollapsedProducts;
+    }
+
+    public get productSwitcherItems(): any[] {
+        if (this.productSwitcherComponent && this.productSwitcherComponent.productSwitcher) {
+            return this.productSwitcherComponent.productSwitcher;
+        } else {
+            return this.productSwitcher;
+        }
+    }
+
+    public get userItem(): any {
+        if (this.userComponent) {
+            return this.userComponent.user;
+        } else {
+            return this.user;
+        }
     }
 
 }
