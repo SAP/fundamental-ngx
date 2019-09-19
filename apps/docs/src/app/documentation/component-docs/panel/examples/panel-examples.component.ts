@@ -23,27 +23,3 @@ export class PanelEdgeBleedExampleComponent {
     ];
 
 }
-
-@Component({
-    selector: 'fd-panel-grid-example',
-    templateUrl: './panel-grid-example.component.html'
-})
-export class PanelGridExampleComponent {}
-
-@Component({
-    selector: 'fd-panel-grid-nogap-example',
-    templateUrl: './panel-grid-nogap-example.component.html'
-})
-export class PanelGridNoGapExampleComponent {}
-
-@Component({
-    selector: 'fd-panel-columns-example',
-    templateUrl: './panel-columns-example.component.html'
-})
-export class PanelColumnsExampleComponent {}
-
-@Component({
-    selector: 'fd-panel-grid-column-span-example',
-    templateUrl: './panel-grid-column-span-example.component.html'
-})
-export class PanelGridColumnSpanExampleComponent {}

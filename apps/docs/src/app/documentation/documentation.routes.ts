@@ -104,6 +104,8 @@ import { SelectHeaderComponent } from './component-docs/select/select-header/sel
 import { SelectDocsComponent } from './component-docs/select/select-docs.component';
 import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-header/mega-menu-header.component';
 import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
+import { LayoutGridDocsHeaderComponent } from './component-docs/layout-grid/layout-grid-docs-header/layout-grid-docs-header.component';
+import { LayoutGridDocsComponent } from './component-docs/layout-grid/layout-grid-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -209,6 +211,11 @@ export const ROUTES: Routes = [
             { path: 'inputGroup', component: InputGroupHeaderComponent, children: [
                     { path: '', component: InputGroupDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.inputGroup}}
+                ]
+            },
+            { path: 'layoutGrid', component: LayoutGridDocsHeaderComponent, children: [
+                    { path: '', component: LayoutGridDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.layoutGrid}}
                 ]
             },
             { path: 'list', component: ListHeaderComponent, children: [

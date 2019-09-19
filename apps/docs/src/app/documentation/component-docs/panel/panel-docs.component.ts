@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 
-import * as panelColumnsSrc from '!raw-loader!./examples/panel-columns-example.component.html';
 import * as panelEdgeBleedSrc from '!raw-loader!./examples/panel-edge-bleed-example.component.html';
 import * as panelSrc from '!raw-loader!./examples/panel-example.component.html';
-import * as panelGridSrc from '!raw-loader!./examples/panel-grid-example.component.html';
-import * as panelGridNoGapSrc from '!raw-loader!./examples/panel-grid-nogap-example.component.html';
-import * as panelRowColumnSrc from '!raw-loader!./examples/panel-grid-column-span-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 
 @Component({
@@ -22,26 +18,6 @@ export class PanelDocsComponent {
     tableBleed: ExampleFile[] = [{
         language: 'html',
         code: panelEdgeBleedSrc
-    }];
-
-    defaultPanelGrid: ExampleFile[] = [{
-        language: 'html',
-        code: panelGridSrc
-    }];
-
-    nogapPanelGrid: ExampleFile[] = [{
-        language: 'html',
-        code: panelGridNoGapSrc
-    }];
-
-    twoColumnsPanelGrid: ExampleFile[] = [{
-        language: 'html',
-        code: panelColumnsSrc
-    }];
-
-    columnSpanPanelGrid: ExampleFile[] = [{
-        language: 'html',
-        code: panelRowColumnSrc
     }];
 
 }
