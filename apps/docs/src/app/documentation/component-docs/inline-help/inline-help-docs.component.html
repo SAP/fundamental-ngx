@@ -1,28 +1,32 @@
-<h2>Inline Help</h2>
+<fd-docs-section-title [id]="'inline-help-def'" [componentName]="'inlineHelp'">
+    Inline Help
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
-  <p class="fd-centered-content">
-    <fd-inline-help-example></fd-inline-help-example>
-  </p>
+    <p class="fd-centered-content">
+        <fd-inline-help-example></fd-inline-help-example>
+    </p>
 </component-example>
 <code-example [exampleFiles]="inlineHelpBasic"></code-example>
 
 <separator></separator>
 
-<h2>Inline Help with changed trigger event</h2>
+<fd-docs-section-title [id]="'inline-help-triggerEvent'" [componentName]="'inlineHelp'">
+    Inline Help with changed trigger event
+</fd-docs-section-title>
 <component-example [name]="'ex2'">
-  <p class="fd-centered-content">
-    <fd-inline-help-trigger-example></fd-inline-help-trigger-example>
-  </p>
+    <p class="fd-centered-content">
+        <fd-inline-help-trigger-example></fd-inline-help-trigger-example>
+    </p>
 </component-example>
 <code-example [exampleFiles]="inlineHelpTrigger"></code-example>
 
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <p class="fd-centered-content">
-    <span>{{data.properties.label}} </span>
-    <fd-inline-help [placement]="data.properties.position">
-      {{data.properties.helpText}}
-    </fd-inline-help>
-  </p>
+    <p class="fd-centered-content">
+        <span>{{ data.properties.label }} </span>
+        <fd-inline-help [placement]="data.properties.position">
+            {{ data.properties.helpText }}
+        </fd-inline-help>
+    </p>
 </playground>

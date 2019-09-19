@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -6,6 +6,8 @@ import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.compo
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
 import Popper from 'popper.js';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-inline-help',
@@ -43,24 +45,26 @@ export class InlineHelpDocsComponent implements OnInit {
         }
     };
 
-    inlineHelpBasic: ExampleFile[] = [{
-        language: 'html',
-        code: inlineHelpSrc
-    }];
+    inlineHelpBasic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inlineHelpSrc
+        }
+    ];
 
-    inlineHelpTrigger: ExampleFile[] = [{
-        language: 'html',
-        code: inlineHelpTriggerHtml
-    }];
+    inlineHelpTrigger: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inlineHelpTriggerHtml
+        }
+    ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('inlineHelp');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
-    }
-
-    ngOnInit() {
     }
 }

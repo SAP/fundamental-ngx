@@ -1,16 +1,22 @@
-<h2>Alert Types</h2>
-<description>A number of alert types are available. They offer preset styling for different contextual situations.</description>
+<fd-docs-section-title [id]="'alert-types'" [componentName]="'alert'">
+    Alert Types
+</fd-docs-section-title>
+<description
+    >A number of alert types are available. They offer preset styling for different contextual situations.</description
+>
 <component-example [name]="'ex1'">
-  <fd-alert-example></fd-alert-example>
+    <fd-alert-example></fd-alert-example>
 </component-example>
 <code-example [exampleFiles]="alertBasicExample"></code-example>
-
 <separator></separator>
 
-<h2>Alert as Overlay</h2>
+<fd-docs-section-title [id]="'alert-overlay'" [componentName]="'alert'">
+    Alert as Overlay
+</fd-docs-section-title>
 <description>
-    The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a component type, a template ref or a string as the alert content.
-    If a component is provided as content, it should be added to the <code>entryComponents</code> of your application.
+    The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a
+    component type, a template ref or a string as the alert content. If a component is provided as content, it should be
+    added to the <code>entryComponents</code> of your application.
 </description>
 <component-example [name]="'ex2'">
     <fd-alert-component-as-content-example></fd-alert-component-as-content-example>
@@ -19,11 +25,11 @@
 
 <separator></separator>
 
-<h2>Inline Alert</h2>
-<description>
-    To make use of inputs such as <code>mousePersist</code> and <code>duration</code> in an inline alert, a call to the alert <code>open()</code> method is required.
-    Otherwise, the alert will simply be shown without any complex behaviour.
-    <br /><br />
+<fd-docs-section-title [id]="'alert-inline'" [componentName]="'alert'"> Inline Alert </fd-docs-section-title
+><description>
+    To make use of inputs such as <code>mousePersist</code> and <code>duration</code> in an inline alert, a call to the
+    alert <code>open()</code> method is required. Otherwise, the alert will simply be shown without any complex
+    behaviour. <br /><br />
     Note that inline alerts are not removed from the dom.
 </description>
 <component-example [name]="'ex3'">
@@ -33,10 +39,10 @@
 
 <separator></separator>
 
-<h2>Alert with Customizable Width</h2>
-<description>
-    Alert width can be customized by adding the <code>[width]</code> attribute on the selector.
-</description>
+<fd-docs-section-title [id]="'alert-customizableWidth'" [componentName]="'alert'">
+    Alert with Customizable Width
+</fd-docs-section-title>
+<description> Alert width can be customized by adding the <code>[width]</code> attribute on the selector. </description>
 <component-example [name]="'ex4'">
     <fd-alert-width-example></fd-alert-width-example>
 </component-example>
@@ -44,22 +50,25 @@
 
 <separator></separator>
 
-<playground [schema]="schema"
-            [schemaInitialValues]="data"
-            (onFormChanges)="onSchemaValues($event)">
-    <fd-alert style="transition: 0.25s all ease-in-out;"
-            [type]="data.modifier.type"
-            [dismissible]="data.properties.dismissible"
-            [width]="data.properties.width"
-            [message]="data.properties.message">
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-alert
+        style="transition: 0.25s all ease-in-out;"
+        [type]="data.modifier.type"
+        [dismissible]="data.properties.dismissible"
+        [width]="data.properties.width"
+        [message]="data.properties.message"
+    >
     </fd-alert>
-    <fd-alert #alert style="display: none; margin-top: 12px; transition: 0.25s all ease-in-out;"
+    <fd-alert
+        #alert
+        style="display: none; margin-top: 12px; transition: 0.25s all ease-in-out;"
         [type]="data.modifier.type"
         [dismissible]="data.properties.dismissible"
         [width]="data.properties.width"
         [message]="data.properties.message"
         [duration]="data.properties.duration"
-        [mousePersist]="data.properties.mousePersist">
+        [mousePersist]="data.properties.mousePersist"
+    >
     </fd-alert>
     <button style="margin-top: 12px;" fd-button (click)="alert.open()">Open Dynamic Alert</button>
 </playground>

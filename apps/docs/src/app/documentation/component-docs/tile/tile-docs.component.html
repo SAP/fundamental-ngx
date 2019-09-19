@@ -1,4 +1,6 @@
-<h2>Simple Tile</h2>
+<fd-docs-section-title [id]="'simple'" [componentName]="'tile'">
+    Simple Tile
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
     <div class="grid">
         <fd-tile-example></fd-tile-example>
@@ -8,10 +10,10 @@
 
 <separator></separator>
 
-<h2>
+<fd-docs-section-title [id]="'withMediaContainer'" [componentName]="'tile'">
     Tile with
     <code>.fd-media</code> container
-</h2>
+</fd-docs-section-title>
 <component-example [name]="'ex2'">
     <div class="grid">
         <fd-tile-media-example></fd-tile-media-example>
@@ -21,8 +23,10 @@
 
 <separator></separator>
 
-<h2>Tile with
-    <code>.fd-actions</code> container</h2>
+<fd-docs-section-title [id]="'withActionsContainer'" [componentName]="'tile'">
+    Tile with
+    <code>.fd-actions</code> container
+</fd-docs-section-title>
 <component-example [name]="'ex3'">
     <div class="grid">
         <fd-tile-actions-example></fd-tile-actions-example>
@@ -32,10 +36,10 @@
 
 <separator></separator>
 
-<h2>Tile as a Button</h2>
-<description>
-    Add <code>[isButton]="true"</code> to rendering a tile as a button
-</description>
+<fd-docs-section-title [id]="'asButton'" [componentName]="'tile'">
+    Tile as a Button
+</fd-docs-section-title>
+<description> Add <code>[isButton]="true"</code> to rendering a tile as a button </description>
 <component-example [name]="'ex4'">
     <div class="grid">
         <p>
@@ -47,7 +51,9 @@
 
 <separator></separator>
 
-<h2>Product Tile</h2>
+<fd-docs-section-title [id]="'product'" [componentName]="'tile'">
+    Product Tile
+</fd-docs-section-title>
 <component-example [name]="'ex5'">
     <div class="grid">
         <p>
@@ -59,9 +65,10 @@
 
 <separator></separator>
 
-<h2>Disabled state</h2>
-<p>Add
-    <code>[disabled]="true"</code> for disabled state</p>
+<fd-docs-section-title [id]="'disabled'" [componentName]="'tile'">
+    Disabled state
+</fd-docs-section-title>
+<p>Add <code>[disabled]="true"</code> for disabled state</p>
 <component-example [name]="'ex6'">
     <div class="grid">
         <fd-tile-disabled-example></fd-tile-disabled-example>
@@ -71,11 +78,11 @@
 
 <separator></separator>
 
-<h2>Tile Grid</h2>
-<p>A Tile Gird is a collection of
-    <code>fd-tile</code> components in a gird layout. The default is 3-col grid.</p>
-<p>It's also available as a modifier class
-    <code>[col]="3"</code> .</p>
+<fd-docs-section-title [id]="'tileGrid'" [componentName]="'tile'">
+    Tile Grid
+</fd-docs-section-title>
+<p>A Tile Gird is a collection of <code>fd-tile</code> components in a gird layout. The default is 3-col grid.</p>
+<p>It's also available as a modifier class <code>[col]="3"</code> .</p>
 <component-example [name]="'ex7'">
     <div class="grid">
         <fd-tile-grid-example></fd-tile-grid-example>
@@ -85,12 +92,11 @@
 
 <separator></separator>
 
-<h2>A Tile Gird with helpers</h2>
-<p>Shows use of helper classes
-    <code>[rowSpan]="numberOfRows"</code> and
-    <code>[columnSpan]="numberOfColumns"</code></p>
-<p>Use
-    <code>[colorAccent]="colorAccentNumber"</code> to add background to the tile.</p>
+<fd-docs-section-title [id]="'tileGridHelpers'" [componentName]="'tile'">
+    A Tile Grid with helpers
+</fd-docs-section-title>
+<p>Shows use of helper classes <code>[rowSpan]="numberOfRows"</code> and <code>[columnSpan]="numberOfColumns"</code></p>
+<p>Use <code>[colorAccent]="colorAccentNumber"</code> to add background to the tile.</p>
 <component-example [name]="'ex8'">
     <div class="grid">
         <fd-tile-grid-helpers-example></fd-tile-grid-helpers-example>
@@ -100,78 +106,83 @@
 
 <separator></separator>
 
-<playground [schema]="schema"
-            [schemaInitialValues]="data"
-            (onFormChanges)="onSchemaValues($event)">
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
         <div class="fd-tile__content">
             <div class="grid">
                 <p>
-                    <fd-tile [disabled]="data.properties.disabled"
-                             [isButton]="data.properties.isButton"
-                             [colorAccent]="data.properties.colorAccent"
-                             *ngIf="data.properties.type !== 'product'">
-
-                        <div fd-tile-media *ngIf="data.properties.type === 'media'">
-              <span *ngIf="data.properties.imageUrl.length === 0 ; else urlTemplate ">
-                <span *ngIf="data.properties.transparent === true ; else colorAccentTemplate"
-                      fd-identifier
-                      [size]="data.properties.size"
-                      [glyph]="data.properties.glyphs"
-                      [transparent]="data.properties.transparent"></span>
-
-                <ng-template #colorAccentTemplate>
-                  <span fd-identifier
-                        [size]="data.properties.size"
-                        [glyph]="data.properties.glyphs"
+                    <fd-tile
+                        [disabled]="data.properties.disabled"
+                        [isButton]="data.properties.isButton"
                         [colorAccent]="data.properties.colorAccent"
-                        [circle]="data.properties.circle"></span>
-                </ng-template>
-              </span>
+                        *ngIf="data.properties.type !== 'product'"
+                    >
+                        <div fd-tile-media *ngIf="data.properties.type === 'media'">
+                            <span *ngIf="data.properties.imageUrl.length === 0; else urlTemplate">
+                                <span
+                                    *ngIf="data.properties.transparent === true; else colorAccentTemplate"
+                                    fd-identifier
+                                    [size]="data.properties.size"
+                                    [glyph]="data.properties.glyphs"
+                                    [transparent]="data.properties.transparent"
+                                ></span>
+
+                                <ng-template #colorAccentTemplate>
+                                    <span
+                                        fd-identifier
+                                        [size]="data.properties.size"
+                                        [glyph]="data.properties.glyphs"
+                                        [colorAccent]="data.properties.colorAccent"
+                                        [circle]="data.properties.circle"
+                                    ></span>
+                                </ng-template>
+                            </span>
 
                             <ng-template #urlTemplate>
-                                <fd-image [size]="data.properties.size"
-                                          [circle]="data.properties.circle"
-                                          [photo]="data.properties.imageUrl"></fd-image>
+                                <fd-image
+                                    [size]="data.properties.size"
+                                    [circle]="data.properties.circle"
+                                    [photo]="data.properties.imageUrl"
+                                ></fd-image>
                             </ng-template>
                         </div>
 
                         <div fd-tile-content>
                             <h2 fd-tile-title>
-                                {{data.properties.title}}
+                                {{ data.properties.title }}
                             </h2>
-                            <p>{{data.properties.description}}</p>
+                            <p>{{ data.properties.description }}</p>
                         </div>
 
-                <div fd-tile-actions *ngIf="data.properties.hasActions === true">
-                    <fd-popover>
-                        <fd-popover-control>
-                            <button fd-button
-                                    [options]="'light'"
-                                    [glyph]="'vertical-grip'"></button>
-                        </fd-popover-control>
-                        <fd-popover-body>
-                            <fd-menu>
-                                <ul fd-menu-list>
-                                    <li fd-menu-item>Option 1</li>
-                                    <li fd-menu-item>Option 2</li>
-                                    <li fd-menu-item>Option 3</li>
-                                </ul>
-                            </fd-menu>
-                        </fd-popover-body>
-                    </fd-popover>
-                </div>
-                </fd-tile>
+                        <div fd-tile-actions *ngIf="data.properties.hasActions === true">
+                            <fd-popover>
+                                <fd-popover-control>
+                                    <button fd-button [options]="'light'" [glyph]="'vertical-grip'"></button>
+                                </fd-popover-control>
+                                <fd-popover-body>
+                                    <fd-menu>
+                                        <ul fd-menu-list>
+                                            <li fd-menu-item>Option 1</li>
+                                            <li fd-menu-item>Option 2</li>
+                                            <li fd-menu-item>Option 3</li>
+                                        </ul>
+                                    </fd-menu>
+                                </fd-popover-body>
+                            </fd-popover>
+                        </div>
+                    </fd-tile>
 
-                <fd-product-tile [disabled]="data.properties.disabled"
-                                 [isButton]="data.properties.isButton"
-                                 *ngIf="data.properties.type === 'product'">
-                    <div fd-product-tile-media [photo]="data.properties.imageUrl"></div>
-                    <div fd-product-tile-content>
-                        <h2 fd-product-tile-title>{{data.properties.title}}</h2>
-                        <p>{{data.properties.description}}</p>
-                    </div>
-                </fd-product-tile>
+                    <fd-product-tile
+                        [disabled]="data.properties.disabled"
+                        [isButton]="data.properties.isButton"
+                        *ngIf="data.properties.type === 'product'"
+                    >
+                        <div fd-product-tile-media [photo]="data.properties.imageUrl"></div>
+                        <div fd-product-tile-content>
+                            <h2 fd-product-tile-title>{{ data.properties.title }}</h2>
+                            <p>{{ data.properties.description }}</p>
+                        </div>
+                    </fd-product-tile>
                 </p>
             </div>
         </div>

@@ -8,4 +8,5 @@ import { SearchInput2Component } from './components/search-input/search-input.co
     declarations: [SearchInput2Component],
     exports: [SearchInput2Component]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule {
+}

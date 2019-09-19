@@ -1,30 +1,38 @@
-<h2>Sizes</h2>
+<fd-docs-section-title [id]="'image-sizes'" [componentName]="'image'">
+    Sizes
+</fd-docs-section-title>
 <component-example [name]="'ex1'">
-  <fd-image-sizes-example></fd-image-sizes-example>
+    <fd-image-sizes-example></fd-image-sizes-example>
 </component-example>
 <code-example [exampleFiles]="imageSizesHtml"></code-example>
 
 <separator></separator>
 
-<h2>Shapes</h2>
+<fd-docs-section-title [id]="'image-shapes'" [componentName]="'image'">
+    Shapes
+</fd-docs-section-title>
 <component-example [name]="'ex2'">
-  <fd-image-shapes-example></fd-image-shapes-example>
+    <fd-image-shapes-example></fd-image-shapes-example>
 </component-example>
 <code-example [exampleFiles]="imageShapesHtml"></code-example>
 
 <separator></separator>
 
-<description>The inputs for <code>fd-image</code> will be translated into classes attributed to fundamental-styles
-    guidelines.
-    <br>For example:
-    <br>if it is passed <code>s</code> for size the class <code>fd-image--s</code> will be added to the element.
+<description
+    >The inputs for <code>fd-image</code> will be translated into classes attributed to fundamental-styles guidelines.
+    <br />For example: <br />if it is passed <code>s</code> for size the class <code>fd-image--s</code> will be added to
+    the element.
 </description>
 <separator></separator>
 
 <h2>Extensibility</h2>
-<description>The image implementation allows certain extensibility in terms of options for the inputs. <code>fd-image</code>
+<fd-docs-section-title [id]="'image-extensibility'" [componentName]="'image'">
+    Extensibility
+</fd-docs-section-title>
+<description
+    >The image implementation allows certain extensibility in terms of options for the inputs. <code>fd-image</code>
     inputs doesn't have a restriction for the predefined values.
-    <br>The predefined values for the input <code>size</code> are <code>s</code>, <code>m</code>, <code>l</code>, but
+    <br />The predefined values for the input <code>size</code> are <code>s</code>, <code>m</code>, <code>l</code>, but
     <code>size</code> can accept any other string, for example <code>xxs</code>, which will be translated into class
     <code>fd-image--xxs</code>.
 </description>
@@ -32,5 +40,9 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-  <fd-image [size]="data.properties.size" [circle]="data.properties.isCircle" [photo]="data.properties.photo"></fd-image>
+    <fd-image
+        [size]="data.properties.size"
+        [circle]="data.properties.isCircle"
+        [photo]="data.properties.photo"
+    ></fd-image>
 </playground>

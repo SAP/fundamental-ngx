@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as templateTs from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.ts';
 import * as templateHtml from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.html';
@@ -19,13 +19,14 @@ import { ModalService } from '@fundamental-ngx/core';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { Schema } from '../../../schema/models/schema.model';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-modal',
     templateUrl: './modal-docs.component.html'
 })
-export class ModalDocsComponent {
-
+export class ModalDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -64,7 +65,7 @@ export class ModalDocsComponent {
             escKeyCloseable: true,
             focusTrapped: true,
             width: '40%',
-            height: '40%',
+            height: '40%'
         }
     };
 
@@ -82,7 +83,7 @@ export class ModalDocsComponent {
     componentAsContentSource: ExampleFile[] = [
         {
             language: 'typescript',
-            code: componentAsContentSrc,
+            code: componentAsContentSrc
         },
         {
             language: 'typescript',
@@ -94,7 +95,7 @@ export class ModalDocsComponent {
     modalInModalExample: ExampleFile[] = [
         {
             language: 'typescript',
-            code: modalInModalExample,
+            code: modalInModalExample
         },
         {
             language: 'typescript',
@@ -111,7 +112,7 @@ export class ModalDocsComponent {
     fullScreenSource: ExampleFile[] = [
         {
             language: 'html',
-            code: fsModalSource,
+            code: fsModalSource
         },
         {
             language: 'typescript',
@@ -122,7 +123,7 @@ export class ModalDocsComponent {
     backdrop: ExampleFile[] = [
         {
             language: 'html',
-            code: backdropH,
+            code: backdropH
         },
         {
             language: 'typescript',
@@ -133,7 +134,7 @@ export class ModalDocsComponent {
     position: ExampleFile[] = [
         {
             language: 'html',
-            code: positionH,
+            code: positionH
         },
         {
             language: 'typescript',
@@ -144,7 +145,7 @@ export class ModalDocsComponent {
     container: ExampleFile[] = [
         {
             language: 'html',
-            code: containerH,
+            code: containerH
         },
         {
             language: 'typescript',
@@ -152,10 +153,15 @@ export class ModalDocsComponent {
         }
     ];
 
-    constructor(private schemaFactory: SchemaFactoryService, private modalService: ModalService) {
+    constructor(
+        private schemaFactory: SchemaFactoryService,
+        private modalService: ModalService,
+        private route: ActivatedRoute
+    ) {
         this.schema = this.schemaFactory.getComponent('modal');
     }
 
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }

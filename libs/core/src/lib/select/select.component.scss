@@ -31,6 +31,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow-x: hidden;
+        pointer-events: none;
     }
 
     .fd-select-popover-body-custom {

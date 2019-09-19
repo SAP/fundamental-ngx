@@ -5,7 +5,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
  * Product tile is used to display product information.
  * ```html
  * <fd-product-tile>
- *     <fd-product-tile-media [photo]="'https://techne.yaas.io/images/product-thumbnail-wide.png'">
+ *     <fd-product-tile-media [photo]="'https://placeimg.com/600/600/nature'">
  *     </fd-product-tile-media>
  *     <fd-product-tile-content>
  *         <h2 fd-product-tile-title>Default Product Tile</h2>
@@ -21,11 +21,13 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     },
     templateUrl: './product-tile.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [`
-        .fd-product-tile-custom {
-            display: block;
-        }
-    `]
+    styles: [
+        `
+            .fd-product-tile-custom {
+                display: block;
+            }
+        `
+    ]
 })
 export class ProductTileComponent extends AbstractFdNgxClass {
     /** Whether the product tile is disabled. */
