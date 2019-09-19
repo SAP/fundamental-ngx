@@ -21,6 +21,10 @@
     <fd-popover-body
         class="fd-select-popover-body-custom"
         [style.maxHeight]="maxHeight || (calculatedMaxHeight + 'px')">
-        <ng-content></ng-content>
+        <fd-menu>
+            <ul fd-menu-list>
+                <ng-content></ng-content>
+            </ul>
+        </fd-menu>
     </fd-popover-body>
 </fd-popover>

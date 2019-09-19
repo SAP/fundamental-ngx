@@ -19,7 +19,7 @@
             </div>
         </div>
         <div *ngIf="inShellbar" class="fd-search-input__control">
-            <button tabindex="0" type="button" class="fd-button--shell" [attr.aria-expanded]="isOpen"
+            <button tabindex="0" type="button" class="fd-shellbar__button" [attr.aria-expanded]="isOpen"
                     [ngClass]="('sap-icon--' + this.glyph)"></button>
             <div class="fd-search-input__closedcontrol" [attr.aria-hidden]="!isOpen">
                 <div class="fd-search-input__controlinput" [attr.aria-expanded]="isOpen" aria-haspopup="true">
