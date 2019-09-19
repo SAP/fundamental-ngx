@@ -1,0 +1,26 @@
+/*
+my calculation is as follows:
+1. icon element height = 28px
+item height = 40px
+therefore, space between element and item = 40-28 = 12px, or 6px top and 6px bottom.
+
+2. icon padding top-bottom = 8+8=16px
+therefore, between icon and item, space should be (icon padding top-bottom + space between element and item top-bottom) or (8+6 = 14px).
+*/
+.fd-menu__addon-before{ //fd-menu__addon-before represents the add-on icon element
+    // padding: 8px 0px 8px 8px;
+    width: 28px;
+    height: 28px;
+    padding: 8px; //center-aligned icon, therefore 8px
+    margin: 6px 4px 6px 8px;
+    color: #0A6ED1;
+    display: block;
+  }
+  // .fd-menu__addon-before [class*=sap-icon]::before{    //works with or without this
+  //     width: 12px;
+  //     height: 12px;
+  // }
+  
+  .fd-menu--addon-before .fd-menu__item{  //fd-menu--addon-before represents the container of the menu item
+    padding-left: 0px;
+  }

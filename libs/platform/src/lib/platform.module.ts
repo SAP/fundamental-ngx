@@ -6,14 +6,7 @@ import { PlatformSearchInputModule } from './components/search-input/search-inpu
 import { ActionBarModule } from './components/action-bar/action-bar.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FundamentalNgxCoreModule
-    ],
-    exports: [
-        PlatformButtonModule,
-        PlatformSearchInputModule,
-        ActionBarModule
-    ]
+    imports: [CommonModule, FundamentalNgxCoreModule],
+    exports: [PlatformButtonModule, PlatformSearchInputModule, ActionBarModule]
 })
-export class FundamentalNgxPlatformModule { }
+export class FundamentalNgxPlatformModule {}
