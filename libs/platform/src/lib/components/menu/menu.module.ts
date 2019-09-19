@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu-comp/menu.component';
 import { MenuItemComponent } from './menu-comp/menu-item.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MenuComponent, MenuItemComponent],

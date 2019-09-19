@@ -14,9 +14,6 @@ import {
   AfterViewInit
 } from '@angular/core';
 import {
-  CONSTANTS
-} from '../../constants';
-import {
   ActiveDescendantKeyManager
 } from '@angular/cdk/a11y';
 import {
