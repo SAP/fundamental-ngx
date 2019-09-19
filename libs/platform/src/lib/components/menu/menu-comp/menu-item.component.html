@@ -1,0 +1,25 @@
+
+<ng-container *ngTemplateOutlet="selectable ? selectableItemTemplate : itemTemplate; context: { label: label, i: index, selected: selected, active: _isActive, item: item, group: group}"></ng-container>
+
+<ng-template #itemTemplate let-label="label" let-i="index" let-active="active">
+  <li data-tag="menu-item" [attr.data-index]="index">
+    <div class="fd-menu__addon-before" *ngIf="icon"><span [ngClass]="icon" data-tag="menu-item__icon"></span></div>
+    <span class="fd-menu__item"
+      [ngClass]="{'is-selected': active}"
+      (click)="onItemClick()"
+      role="button"
+      data-tag="menu-item__button">{{label}}</span>
+  </li>
+</ng-template>
+
+<ng-template #selectableItemTemplate let-label="label" let-i="index" let-selected="selected" let-active="active">
+  <li data-tag="menu-item" [attr.data-index]="index">
+    <div class="fd-menu__addon-before"><span *ngIf="selected" [ngClass]="icon ? icon : 'sap-icon--accept'" data-tag="menu-item__icon"></span></div>
+    <span class="fd-menu__item"
+      [ngClass]="{'is-selected': active}"
+      (click)="onItemClick()"
+      [attr.aria-selected]="selected ? 'true' : 'false'"
+      role="button"
+      data-tag="menu-item__button">{{label}}</span>
+  </li>
+</ng-template>

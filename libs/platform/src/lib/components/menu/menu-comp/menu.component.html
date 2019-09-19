@@ -1,0 +1,31 @@
+<div class="fd-menu" data-tag="menu" [ngClass]="{ 'columns': useColumns }" [style.text-align]="textAlign">
+  <ng-container *ngFor="let group of groups; let i = index;">
+    <ng-container
+      *ngTemplateOutlet="group.label ? listWithGroupTitleTemplate : listWithoutGroupTitleTemplate; context: { group: group, i: i}">
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #listWithoutGroupTitleTemplate let-group="group" let-i="i">
+  <ul class="fd-menu__list" [ngClass]="{ 'fd-menu__list--separated': separateItems }" data-tag="menu__list"
+    [attr.data-index]="i">
+    <ng-container *ngFor="let item of group.children; let j = index">
+      <afi-menu-item [label]="item.label" [selectable]="item.selectable" [selected]="item.selected"
+        [icon]="item.icon || group.icon" [item]="item" [group]="group" [index]="j"
+        (itemClick)="onItemClick(item, group)"></afi-menu-item>
+    </ng-container>
+  </ul>
+</ng-template>
+
+<ng-template #listWithGroupTitleTemplate let-group="group" let-i="i">
+  <div class="fd-menu__group" data-tag="menu__group" [attr.data-index]="i">
+    <h3 class="fd-menu__title" data-tag="menu__group--title">{{group.label}}</h3>
+    <ul class="fd-menu__list" [ngClass]="{ 'fd-menu__list--separated': separateItems }" data-tag="menu__list">
+      <ng-container *ngFor="let item of group.children; let j = index">
+        <afi-menu-item [label]="item.label" [selectable]="item.selectable" [selected]="item.selected"
+          [icon]="item.icon || group.icon" [item]="item" [group]="group" [index]="j"
+          (itemClick)="onItemClick(item, group)"></afi-menu-item>
+      </ng-container>
+    </ul>
+  </div>
+</ng-template>
