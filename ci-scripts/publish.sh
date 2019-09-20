@@ -13,7 +13,7 @@ echo "#### STAGE ${TRAVIS_BUILD_STAGE_NAME}"
 
 
 
-if [ ${TRAVIS_BUILD_STAGE_NAME} == "Lint and Test" ]; then
+if [ "$TRAVIS_BUILD_STAGE_NAME" == "Lint and Test" ]; then
    echo "################ Running Master deploy tasks ################"
    CURRENT_BRANCH=master
 
@@ -44,7 +44,7 @@ cat dist/libs/platform/package.json
 
 
 cd dist/libs
-NPM_BIN=${which npm}
+NPM_BIN="$(which npm)"
 
 echo "NPM PATH:::: ${NPM_BIN}"
 
