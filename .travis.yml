@@ -13,9 +13,9 @@ script:
 
 jobs:
   include:
-  - stage: Lint and Test
+  - stage: "Lint and Test"
     script: bash ./ci-scripts/publish.sh master
-  - stage: Pre-release
+  - stage: "Pre-release"
     if: branch = master
     before_deploy:
     - git checkout master
@@ -24,7 +24,7 @@ jobs:
     - provider: script
       script: bash ./ci-scripts/publish.sh rc
       skip_cleanup: true
-  - stage: Release
+  - stage: "Release"
     if: branch = tmp_branch_for_automated_release_do_not_use
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
