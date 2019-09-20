@@ -1,28 +1,9 @@
 #!/usr/bin/env bash
 
 set -u -e
-args=("$@")
-
-if [ $# -eq 0 ]
-  then
-    printf "No arguments supplied\n"
-    exit 1
-fi
-
-
-if [[ ${args[0]}  != "rc"  &&  ${args[0]}  != "master" ]]; then
-
-    echo "Missing mandatory argument: . "
-    echo " - Usage: ./publish.sh  [deploy type]  "
-    echo "      type: rc | master"
-    exit 1
-fi
-
 
 git config --global user.email "fundamental@sap.com"
 git config --global user.name "fundamental-bot"
-
-
 
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
@@ -32,7 +13,7 @@ echo "#### STAGE ${TRAVIS_BUILD_STAGE_NAME}"
 
 
 
-if [ ${args[0]} == "master" ]; then
+if [ ${TRAVIS_BUILD_STAGE_NAME} == "Lint and Test" ]; then
    echo "################ Running Master deploy tasks ################"
    CURRENT_BRANCH=master
 
@@ -53,17 +34,17 @@ else
 fi
 
 
+echo "CURRENT_BRANCH $CURRENT_BRANCH"
 
 ## git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null 2>&1;
 npm run build-deploy-library
 
 
+cat dist/libs/platform/package.json
+
+
 cd dist/libs
-
-ls -l
-
-
-NPM_BIN='which npm'
+NPM_BIN=${which npm}
 
 echo "NPM PATH:::: ${NPM_BIN}"
 
