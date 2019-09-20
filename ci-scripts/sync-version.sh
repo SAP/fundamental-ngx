@@ -1,7 +1,8 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 set -u -e
 
+npm -v
 
 #
 # Update Package version in the library package.json from root package.json
@@ -14,6 +15,10 @@ ANGULAR_VERSION=$(node -p "require('./package.json').dependencies['@angular/core
 RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
 
 cd ./dist
+
+perl --version
+grep --version
+
 
 grep -rl 'VERSION_PLACEHOLDER' . | xargs  perl -p -i -e "s/VERSION_PLACEHOLDER/${NEW_VERSION}/g"
 grep -rl 'ANGULAR_VER_PLACEHOLDER' . | xargs  perl -p -i -e "s/ANGULAR_VER_PLACEHOLDER/${ANGULAR_VERSION}/g"
