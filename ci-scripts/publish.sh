@@ -57,31 +57,21 @@ echo "Running GIT PUSH: $CURRENT_BRANCH"
 
 
 
+echo "PRINTING PACKAGE.JSON BEFORE RENAME"
+
+ng build core
+ng build platform
+
+cat dist/libs/core/package.json
+cat dist/libs/plaform/package.json
+
+
 echo "Building libraries and applications"
 npm run build-deploy-library
 
 
-#
-# Update Package version in the library package.json from root package.json
-#
-NEW_VERSION=$(node -p "require('./package.json').version")
-echo "Updating packages.json under dist/libs with version ${NEW_VERSION}"
-
-ANGULAR_VERSION=$(node -p "require('./package.json').dependencies['@angular/core']")
-RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
 
 cd ./dist
-
-
-
-cat libs/core/package.json
-cat libs/platform/package.json
-
-
-grep -rl 'VERSION_PLACEHOLDER' . | xargs  perl -p -i -e "s/VERSION_PLACEHOLDER/${NEW_VERSION}/g"
-grep -rl 'ANGULAR_VER_PLACEHOLDER' . | xargs  perl -p -i -e "s/ANGULAR_VER_PLACEHOLDER/${ANGULAR_VERSION}/g"
-grep -rl 'RXJS_VER_PLACEHOLDER' . | xargs  perl -p -i -e "s/RXJS_VER_PLACEHOLDER/${RXJS_VERSION}/g"
-
 
 cat libs/core/package.json
 cat libs/platform/package.json
@@ -90,6 +80,11 @@ cat libs/platform/package.json
 cd ../
 
 cd dist/libs
+
+
+
+echo "NPM PATH::::"
+which npm
 
 for P in ${PACKAGES[@]};
 do
