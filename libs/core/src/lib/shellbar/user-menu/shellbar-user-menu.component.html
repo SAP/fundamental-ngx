@@ -1,0 +1,38 @@
+<div class="fd-shellbar__action fd-shellbar__action--show-always" *ngIf="user">
+    <div class="fd-user-menu">
+        <fd-popover [options]="options || {placement: 'bottom-end'}"
+                    [closeOnEscapeKey]="closeOnEscapeKey"
+                    [closeOnOutsideClick]="closeOnOutsideClick"
+                    [(isOpen)]="isOpen"
+                    [triggers]="triggers"
+                    (isOpenChange)="openChanged($event)"
+                    [disabled]="disabled"
+                    [isDropdown]="isDropdown"
+                    [focusTrapped]="false">
+            <fd-popover-control>
+                <div class="fd-user-menu__control">
+                    <span *ngIf="!user.image"
+                          class="fd-identifier fd-identifier--xs fd-identifier--circle"
+                          [ngClass]="(user.colorAccent ? 'fd-has-background-color-accent-' + user.colorAccent : '')">
+                        {{user.initials}}
+                    </span>
+                    <span *ngIf="user.image"
+                          class="fd-identifier fd-identifier--xs fd-identifier--circle fd-identifier--thumbnail"
+                          [ngStyle]="{'background-image': 'url(' + user.image + ')'}">
+                    </span>
+                </div>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list>
+                        <li fd-menu-item
+                            *ngFor="let item of userMenu"
+                            (click)="itemClick(item, $event)">
+                            {{item.text}}
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>

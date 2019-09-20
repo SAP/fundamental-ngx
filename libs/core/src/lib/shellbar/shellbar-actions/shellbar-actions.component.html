@@ -43,13 +43,12 @@
                         </ul>
                         <ul fd-menu-list
                             *ngIf="showCollapsedProducts">
-                            <li fd-menu-item
-                                (click)="toggleCollapsedProducts($event)">
-                                <span class="fd-menu__item sap-icon--nav-back"></span>
+                            <li (click)="toggleCollapsedProducts($event)">
+                                <span fd-menu-item class="sap-icon--nav-back"></span>
                             </li>
                             <hr>
                             <li fd-menu-item
-                                *ngFor="let product of productSwitcher"
+                                *ngFor="let product of productSwitcherItems"
                                 (click)="itemClicked(product, $event)">
                                 {{product.title}}
                             </li>
@@ -61,66 +60,31 @@
     </div>
     <ng-content></ng-content>
     <ng-content select="fd-shellbar-action"></ng-content>
-    <ng-container *ngIf="user">
-        <div class="fd-shellbar__action fd-shellbar__action--show-always">
-            <div class="fd-user-menu">
-                <fd-popover [options]="{placement: 'bottom-end'}"
-                            [focusTrapped]="false">
-                    <fd-popover-control>
-                        <div class="fd-user-menu__control">
-                            <span *ngIf="!user.image"
-                                  class="fd-identifier fd-identifier--xs fd-identifier--circle"
-                                  [ngClass]="(user.colorAccent ? 'fd-has-background-color-accent-' + user.colorAccent : '')">
-                                {{user.initials}}
-                            </span>
-                            <span *ngIf="user.image"
-                                  class="fd-identifier fd-identifier--xs fd-identifier--circle fd-identifier--thumbnail"
-                                  [ngStyle]="{'background-image': 'url(' + user.image + ')'}">
-                            </span>
-                        </div>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <fd-menu>
-                            <ul fd-menu-list>
-                                <li fd-menu-item
-                                    *ngFor="let item of userMenu"
-                                    (click)="itemClicked(item, $event)">
-                                    {{item.text}}
-                                </li>
-                            </ul>
-                        </fd-menu>
-                    </fd-popover-body>
-                </fd-popover>
-            </div>
-        </div>
+    <ng-container *ngIf="userItem">
+        <ng-container *ngIf="!userComponent">
+            <fd-shellbar-user-menu (itemClicked)="triggerItems()"
+                                   [options]="{placement: 'bottom-end'}"
+                                   [focusTrapped]="false"
+                                   [user]="user"
+                                   [userMenu]="userMenu"
+            ></fd-shellbar-user-menu>
+        </ng-container>
+        <ng-container *ngIf="userComponent">
+            <ng-content select="fd-shellbar-user-menu"></ng-content>
+        </ng-container>
     </ng-container>
-    <ng-container *ngIf="productSwitcher">
-        <div class="fd-shellbar__action fd-shellbar__action--collapsible">
-            <div class="fd-product-switcher">
-                <fd-popover [options]="{placement: 'bottom-end'}"
-                            [focusTrapped]="false">
-                    <fd-popover-control>
-                        <button class="fd-button--shell sap-icon--grid"></button>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <div class="fd-product-switcher__body">
-                            <nav>
-                                <ul>
-                                    <li *ngFor="let product of productSwitcher"
-                                        (click)="itemClicked(product, $event)">
-                                        <span class="fd-product-switcher__product-icon">
-                                            <img [src]="product.image">
-                                        </span>
-                                        <span class="fd-product-switcher__product-title">
-                                            {{product.title}}
-                                        </span>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </fd-popover-body>
-                </fd-popover>
-            </div>
-        </div>
+
+
+    <ng-container *ngIf="productSwitcherItems">
+        <ng-container *ngIf="productSwitcherComponent">
+            <ng-content select="fd-shellbar-product-switcher"></ng-content>
+        </ng-container>
+        <ng-container *ngIf="!productSwitcherComponent">
+            <fd-shellbar-product-switcher (itemClicked)="triggerItems()"
+                                          [options]="{placement: 'bottom-end'}"
+                                          [productSwitcher]="productSwitcher"
+                                          [focusTrapped]="false">
+            </fd-shellbar-product-switcher>
+        </ng-container>
     </ng-container>
 </div>

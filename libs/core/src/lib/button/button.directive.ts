@@ -1,6 +1,10 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
+
+export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative';
+export type ButtonOptions = 'light' | 'emphasized';
+
 /**
  * Button directive, used to enhance standard HTML buttons.
  *
@@ -23,13 +27,13 @@ export class ButtonDirective extends AbstractFdNgxClass {
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
-    @Input() fdType: string;
+    @Input() fdType: ButtonType;
 
     /** @hidden */
     @Input() semantic: string; // TODO: deprecated, leaving for backwards compatibility
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() options: string | string[];
+    @Input() options: ButtonOptions | ButtonOptions[];
 
     /** @hidden */
     @Input() size: string; // TODO: deprecated, leaving for backwards compatibility
@@ -64,3 +68,5 @@ export class ButtonDirective extends AbstractFdNgxClass {
         super(elementRef);
     }
 }
+
+

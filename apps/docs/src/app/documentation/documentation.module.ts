@@ -415,6 +415,9 @@ import { PopoverDynamicExampleComponent } from './component-docs/popover/example
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { ExtraOptions } from '@angular/router';
 
+import { ShellbarAdvancedExampleComponent } from './component-docs/shellbar/examples/shellbar-advanced/shellbar-advanced-example.component';
+
+
 @NgModule({
     declarations: [
         DocumentationComponent,
@@ -610,6 +613,7 @@ import { ExtraOptions } from '@angular/router';
         SearchInputDynamicExampleComponent,
         SearchInputDisplaywithExampleComponent,
         ShellbarBasicExampleComponent,
+        ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,
         SideNavigationExampleComponent,
