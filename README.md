@@ -31,17 +31,17 @@ For an existing Angular CLI application,
 
 1. **Install Fundamental-NGX.**
 
-    `ng add fundamental-ngx`
-    
-    *If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide).*
+    `ng add @fundamental-ngx/core`
 
-3. **Import the modules you want to use.**
+    _If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)._
+
+2. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
 
     ```javascript
-    import { FundamentalNgxModule } from 'fundamental-ngx';
-    
+    import { FundamentalNgxModule } from '@fundamental-ngx/core’';
+
     @NgModule({
         ...
         imports: [FundamentalNgxModule],
@@ -54,8 +54,8 @@ For an existing Angular CLI application,
     For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from 'fundamental-ngx';
-    
+    import { ToggleModule } from '@fundamental-ngx/core’';
+
     @NgModule({
         ...
         imports: [ToggleModule],
@@ -63,10 +63,10 @@ For an existing Angular CLI application,
      export class DemoModule { }
     ```
 
-4. **Add the component to your HTML.**
+3. **Add the component to your HTML.**
 
     ```html
-    <fd-toggle [size]="'l'" [(checked)]="checked">Large Toggle</fd-toggle>
+    <fd-toggle [size]="'l'" [(checked)]="myValue">Large Toggle</fd-toggle>
     ```
 
 ## Tests
