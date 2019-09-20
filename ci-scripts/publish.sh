@@ -5,7 +5,7 @@ set -u -e
 git config --global user.email "fundamental@sap.com"
 git config --global user.name "fundamental-bot"
 
-PACKAGES=(core platform)
+PACKAGES=(platform)
 CURRENT_BRANCH=master
 
 
@@ -13,7 +13,7 @@ echo "#### STAGE ${TRAVIS_BUILD_STAGE_NAME}"
 
 
 
-if [ "$TRAVIS_BUILD_STAGE_NAME" == "Lint and Test" ]; then
+if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Lint and Test" ]]; then
    echo "################ Running Master deploy tasks ################"
    CURRENT_BRANCH=master
 
@@ -25,11 +25,13 @@ if [ "$TRAVIS_BUILD_STAGE_NAME" == "Lint and Test" ]; then
 ##  echo "New release version: $std_ver"
 
 
-else
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
 
    CURRENT_BRANCH=${TRAVIS_BRANCH}
 ## npm run std-version -- --prerelease rc --no-verify
+else
+   echo "NO Match"
 
 fi
 
@@ -40,26 +42,24 @@ echo "CURRENT_BRANCH $CURRENT_BRANCH"
 npm run build-deploy-library
 
 
-cat dist/libs/platform/package.json
+
 
 
 cd dist/libs
 NPM_BIN="$(which npm)"
 
-echo "NPM PATH:::: ${NPM_BIN}"
-
 for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    $NPM_BIN publish --help
+    $NPM_BIN publish --access public
     cd ..
 done
 
 cd ../../
 
 
-if [ ${args[0]} == "master" ]; then
+if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
     echo "Run after publish to make sure GitHub finishes updating from the push"
 ##    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
 
