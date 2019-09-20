@@ -1,3 +1,6 @@
+backward_branch: archive-ngx-core-ng7
+backward_temp_branch: archive_tmp_branch_for_automated_release_do_not_use
+
 language: node_js
 sudo: required
 node_js: 10.15.0
@@ -23,6 +26,17 @@ jobs:
     - provider: script
       script: bash ./ci-scripts/publish-rc.sh
       skip_cleanup: true
+
+  - stage: Archive-Pre-release
+    if: branch = "{{backward_branch}}"
+    before_deploy:
+    - git checkout "{{backward_branch}}"
+    - bash ./ci-scripts/setup-npm.sh
+    deploy:
+    - provider: script
+      script: bash ./ci-scripts/publish-rc.sh
+      skip_cleanup: true
+
   - stage: Release
     if: branch = tmp_branch_for_automated_release_do_not_use
     before_deploy:
@@ -40,6 +54,6 @@ notifications:
   email:
     on_failure: always
     on_success: change
-  slack: 
+  slack:
     rooms:
       - ui-fundamentals:zVRyxlqkYnQFD7p8QHkWM8Fd#ngx-automated

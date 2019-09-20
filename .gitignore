@@ -13,6 +13,7 @@
 **/node_modules
 
 # IDEs and editors
+.editorconfig
 /.idea
 .project
 .classpath
