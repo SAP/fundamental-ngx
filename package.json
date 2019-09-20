@@ -90,7 +90,7 @@
         "@types/jasminewd2": "^2.0.4",
         "angular-cli-ghpages": "^0.5.3",
         "chalk": "^2.4.2",
-        "codelyzer": "^5.1.0",
+        "codelyzer": "^5.1.1",
         "coveralls": "^3.0.6",
         "fs-extra": "^8.1.0",
         "github-assistant": "^0.3.0",
