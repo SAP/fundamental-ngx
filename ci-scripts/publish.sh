@@ -67,8 +67,7 @@ npm run build-deploy-library
 #
 ./ci-scripts/sync-version.sh
 
-
-cd "libs"
+cd "dist/libs"
 
 pwd
 for P in ${PACKAGES[@]};
@@ -79,6 +78,7 @@ do
     cd ..
 done
 
+cd ../../
 
 
 if [ ${args[0]} == "master" ]; then
