@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 set -u -e
 args=("$@")
@@ -60,21 +60,27 @@ git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT
 echo "Building libraries and applications"
 npm run build-deploy-library
 
-
+npm -v
 
 #
 # Update Package version in the library package.json from root package.json
 #
+echo "current directory"
+pwd
 ./ci-scripts/sync-version.sh
 
-cd "dist/libs"
-
+echo "current directory"
 pwd
+
+cd dist/libs
+pwd
+
 for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    npm publish --access public
+    pwd
+    npm publish
     cd ..
 done
 
