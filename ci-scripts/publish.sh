@@ -28,6 +28,9 @@ PACKAGES=(core platform)
 CURRENT_BRANCH=master
 
 
+echo "#### STAGE ${TRAVIS_BUILD_STAGE_NAME}"
+
+
 
 if [ ${args[0]} == "master" ]; then
    echo "################ Running Master deploy tasks ################"
@@ -35,8 +38,6 @@ if [ ${args[0]} == "master" ]; then
 
   # delete temp branch
 ##  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
-
-  echo "Running standard version"
 ##  std_ver=$(npm run std-version)
 ##  release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
@@ -52,45 +53,25 @@ else
 fi
 
 
-echo "Running GIT PUSH: $CURRENT_BRANCH"
+
 ## git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null 2>&1;
-
-
-
-echo "PRINTING PACKAGE.JSON BEFORE RENAME"
-ng build core
-ng build platform
-
-
-cat dist/libs/core/package.json
-cat dist/libs/platform/package.json
-
-
-echo "Building libraries and applications"
 npm run build-deploy-library
 
 
-
-cd ./dist
-
-cat libs/core/package.json
-cat libs/platform/package.json
-
-
-cd ../
-
 cd dist/libs
 
+ls -l
 
 
-echo "NPM PATH::::"
-which npm
+NPM_BIN='which npm'
+
+echo "NPM PATH:::: ${NPM_BIN}"
 
 for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    ../../node_modules/.bin/npm publish --help
+    $NPM_BIN publish --help
     cd ..
 done
 
