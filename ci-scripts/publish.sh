@@ -72,8 +72,10 @@ RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
 
 cd ./dist
 
-perl --version
-grep --version
+
+
+cat libs/core/package.json
+cat libs/platform/package.json
 
 
 grep -rl 'VERSION_PLACEHOLDER' . | xargs  perl -p -i -e "s/VERSION_PLACEHOLDER/${NEW_VERSION}/g"
@@ -81,11 +83,9 @@ grep -rl 'ANGULAR_VER_PLACEHOLDER' . | xargs  perl -p -i -e "s/ANGULAR_VER_PLACE
 grep -rl 'RXJS_VER_PLACEHOLDER' . | xargs  perl -p -i -e "s/RXJS_VER_PLACEHOLDER/${RXJS_VERSION}/g"
 
 
+cat libs/core/package.json
+cat libs/platform/package.json
 
-CHANGED_VERSION=$(node -p "require('./libs/core/package.json').version")
-
-
-echo "#### Changed version ${CHANGED_VERSION} "
 
 cd ../
 
@@ -95,7 +95,7 @@ for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    npm publish --help
+    ../../node_modules/.bin/npm publish --help
     cd ..
 done
 
