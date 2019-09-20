@@ -9,7 +9,7 @@
             <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
         </ng-container>
         <ng-container *ngIf="!triggerTemplate">
-            <button class="fd-dropdown__control fd-button fd-select-button-custom"
+            <button class="fd-button fd-select-button-custom"
                     aria-haspopup="true"
                     [ngClass]="{'fd-button--compact': compact}"
                     [attr.aria-expanded]="isOpen"
