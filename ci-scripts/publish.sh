@@ -58,12 +58,12 @@ echo "Running GIT PUSH: $CURRENT_BRANCH"
 
 
 echo "PRINTING PACKAGE.JSON BEFORE RENAME"
-
 ng build core
 ng build platform
 
+
 cat dist/libs/core/package.json
-cat dist/libs/plaform/package.json
+cat dist/libs/platform/package.json
 
 
 echo "Building libraries and applications"
