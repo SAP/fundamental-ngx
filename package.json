@@ -1,21 +1,22 @@
 {
     "name": "fundamental-ngx",
-    "version": "0.0.0",
+    "version": "0.11.0-rc.14",
     "license": "Apache-2.0",
     "main": "dist/libs/core/index.js",
     "description": "SAP Fundamental Styles, implemented in Angular",
     "scripts": {
         "build": "ng build",
-        "build-all": "ng build core && ng build docs",
+        "build-all": "ng build core && ng build platform && ng build docs",
         "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
         "build-docs-netlify": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/\" ",
-        "build-deploy-library": "ng build core && npm run build:schematics && cp README.md dist/libs/core/README.md",
-        "build-pack-library": "ng build core && npm run build:schematics && cd dist/libs/core/ && npm pack && cd ../..",
+        "build-deploy-library": "ng build core && ng build platform && npm run build:schematics && npm run sync-versions && cp README.md dist/libs/core/README.md",
+        "build-pack-library": "ng build core && ng build platform && npm run build:schematics && npm run sync-versions && cd dist/libs/core/ && npm pack && cd ../platform && npm pack && cd ../..",
         "copy-docs": "cp README.md apps/docs/src/assets/README.md && cp NEW_COMPONENT.md apps/docs/src/assets/NEW_COMPONENT.md",
         "deploy-docs": "angular-cli-ghpages -d dist/apps/docs --branch gh-pages",
+        "sync-versions": "./ci-scripts/sync-version.sh",
         "e2e": "ng e2e",
         "hmr": "ng serve --hmr -e=hmr",
-        "lint": "ng lint docs && ng lint core",
+        "lint": "ng lint docs && ng lint core && ng lint platform",
         "lint:pre-commit": "printf \"running pre-commit lint...\"  && npm run lint && printf \"done!\n\"",
         "ng": "ng",
         "release": "./scripts/publish-release.sh",
@@ -44,7 +45,8 @@
         "update:check": "ng update",
         "dep-graph": "./node_modules/.bin/nx dep-graph",
         "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
-        "help": "./node_modules/.bin/nx help"
+        "help": "./node_modules/.bin/nx help",
+        "std-version": "standard-version --infile ./CHANGELOG.md -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\""
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -106,6 +108,7 @@
         "pre-commit": "^1.2.2",
         "prettier": "^1.18.2",
         "protractor": "^5.4.2",
+        "standard-version": "4.4.0",
         "ts-node": "^8.4.1",
         "tsickle": "^0.37.0",
         "tslib": "^1.10.0",

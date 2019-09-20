@@ -21,7 +21,7 @@ jobs:
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
-      script: bash ./ci-scripts/publish-rc.sh
+      script: bash ./ci-scripts/publish.sh rc
       skip_cleanup: true
   - stage: Release
     if: branch = tmp_branch_for_automated_release_do_not_use
@@ -32,7 +32,7 @@ jobs:
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
-      script: bash ./ci-scripts/publish.sh
+      script: bash ./ci-scripts/publish.sh master
       skip_cleanup: true
       on:
         all_branches: true
