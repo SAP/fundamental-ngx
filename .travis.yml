@@ -28,9 +28,9 @@ jobs:
       skip_cleanup: true
 
   - stage: Archive-Pre-release
-    if: branch = "{{backward_branch}}"
+    if: branch = archive-ngx-core-ng7
     before_deploy:
-    - git checkout "{{backward_branch}}"
+    - git checkout archive-ngx-core-ng7
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
