@@ -47,7 +47,7 @@ for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    $NPM_BIN  publish
+    $NPM_BIN  publish --access public
     cd ..
 done
 
