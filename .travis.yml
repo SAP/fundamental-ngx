@@ -12,18 +12,18 @@ script:
   - npm run build-all
 jobs:
   include:
-  - stage: Lint and Test
+  - stage: "Lint and Test"
     script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
-  - stage: Pre-release
+  - stage: "Pre-release"
     if: branch = master
     before_deploy:
     - git checkout master
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
-      script: bash ./ci-scripts/publish.sh rc
+      script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
-  - stage: Release
+  - stage: "Release"
     if: branch = tmp_branch_for_automated_release_do_not_use
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
@@ -32,7 +32,7 @@ jobs:
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
-      script: bash ./ci-scripts/publish.sh master
+      script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
       on:
         all_branches: true
