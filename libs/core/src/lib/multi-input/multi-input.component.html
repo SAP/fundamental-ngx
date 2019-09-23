@@ -52,7 +52,7 @@
             [disabled]=this.disabled
             (onCloseClick)="handleSelect(false, token)"
             class="fd-multi-input-token-spacing">
-        {{token | displayFnPipe:displayFn}}
+        <span [innerHtml]="token | displayFnPipe:displayFn"></span>
     </fd-token>
 </div>
 

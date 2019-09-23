@@ -417,6 +417,9 @@ import { ExtraOptions } from '@angular/router';
 import { PosterExampleComponent } from './component-docs/poster/examples/poster-example.component';
 import { PosterDocsComponent } from './component-docs/poster/poster-docs.component';
 
+import { ShellbarAdvancedExampleComponent } from './component-docs/shellbar/examples/shellbar-advanced/shellbar-advanced-example.component';
+
+
 @NgModule({
     declarations: [
         DocumentationComponent,
@@ -613,6 +616,7 @@ import { PosterDocsComponent } from './component-docs/poster/poster-docs.compone
         SearchInputDynamicExampleComponent,
         SearchInputDisplaywithExampleComponent,
         ShellbarBasicExampleComponent,
+        ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent,
         SideNavigationCollapsedExampleComponent,
         SideNavigationExampleComponent,

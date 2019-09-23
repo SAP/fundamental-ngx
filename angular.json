@@ -33,12 +33,10 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "apps/docs/src/environments/environment.ts",
-                                    "with": "apps/docs/src/environments/environment.prod.ts"
-                                }
-                            ],
+                            "fileReplacements": [{
+                                "replace": "apps/docs/src/environments/environment.ts",
+                                "with": "apps/docs/src/environments/environment.prod.ts"
+                            }],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -48,13 +46,11 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                }
-                            ]
+                            "budgets": [{
+                                "type": "initial",
+                                "maximumWarning": "2mb",
+                                "maximumError": "5mb"
+                            }]
                         },
                         "hmr": {
                             "optimization": true,
@@ -66,12 +62,10 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "fileReplacements": [
-                                {
-                                    "replace": "apps/docs/src/environments/environment.ts",
-                                    "with": "apps/docs/src/environments/environment.prod.ts"
-                                }
-                            ]
+                            "fileReplacements": [{
+                                "replace": "apps/docs/src/environments/environment.ts",
+                                "with": "apps/docs/src/environments/environment.prod.ts"
+                            }]
                         }
                     }
                 },
@@ -184,7 +178,7 @@
             "root": "libs/platform",
             "sourceRoot": "libs/platform/src",
             "projectType": "library",
-            "prefix": "fundamental-ngx",
+            "prefix": "fdp",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-ng-packagr:build",

@@ -2,6 +2,96 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0-rc.14"></a>
+# [0.11.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.13...v0.11.0-rc.14) (2019-09-19)
+
+
+### Bug Fixes
+
+* extend shellbar ([#1277](https://github.com/SAP/fundamental-ngx/issues/1277)) ([64e83c5](https://github.com/SAP/fundamental-ngx/commit/64e83c5))
+
+
+
+<a name="0.11.0-rc.13"></a>
+# [0.11.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.12...v0.11.0-rc.13) (2019-09-17)
+
+
+
+<a name="0.11.0-rc.12"></a>
+# [0.11.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.11...v0.11.0-rc.12) (2019-09-17)
+
+
+
+<a name="0.11.0-rc.11"></a>
+# [0.11.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.10...v0.11.0-rc.11) (2019-09-17)
+
+
+### Bug Fixes
+
+* **button:** Add typings to buttons Inputs ([#1267](https://github.com/SAP/fundamental-ngx/issues/1267)) ([4263a3f](https://github.com/SAP/fundamental-ngx/commit/4263a3f))
+
+
+### Features
+
+* **platform:** Changing platform module name to "FundamentaNgxPlatformModule" ([#1274](https://github.com/SAP/fundamental-ngx/issues/1274)) ([34c9288](https://github.com/SAP/fundamental-ngx/commit/34c9288))
+
+
+
+<a name="0.11.0-rc.10"></a>
+# [0.11.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.9...v0.11.0-rc.10) (2019-09-16)
+
+
+
+<a name="0.11.0-rc.9"></a>
+# [0.11.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.8...v0.11.0-rc.9) (2019-09-12)
+
+
+### Features
+
+* Changing default selector prefix for "platform" project ([#1259](https://github.com/SAP/fundamental-ngx/issues/1259)) ([60a2acd](https://github.com/SAP/fundamental-ngx/commit/60a2acd))
+
+
+
+<a name="0.11.0-rc.8"></a>
+# [0.11.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.7...v0.11.0-rc.8) (2019-09-11)
+
+
+
+<a name="0.11.0-rc.7"></a>
+# [0.11.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.6...v0.11.0-rc.7) (2019-09-11)
+
+
+
+<a name="0.11.0-rc.6"></a>
+# [0.11.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.5...v0.11.0-rc.6) (2019-09-10)
+
+
+
+<a name="0.11.0-rc.5"></a>
+# [0.11.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.4...v0.11.0-rc.5) (2019-09-10)
+
+
+### Bug Fixes
+
+* removes the pointer events from the span within the button ([#1242](https://github.com/SAP/fundamental-ngx/issues/1242)) ([ad7b685](https://github.com/SAP/fundamental-ngx/commit/ad7b685))
+
+
+
+<a name="0.11.0-rc.4"></a>
+# [0.11.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.3...v0.11.0-rc.4) (2019-09-10)
+
+
+
+<a name="0.11.0-rc.3"></a>
+# [0.11.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.2...v0.11.0-rc.3) (2019-09-09)
+
+
+
+<a name="0.11.0-rc.2"></a>
+# [0.11.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.1...v0.11.0-rc.2) (2019-09-09)
+
+
+
 <a name="0.11.0-rc.1"></a>
 # [0.11.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.0...v0.11.0-rc.1) (2019-09-09)
 
