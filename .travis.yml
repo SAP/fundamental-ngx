@@ -47,7 +47,6 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
-
   - stage: "Archive-Release"
     if: branch = archive_tmp_branch_for_automated_release_do_not_use
     before_deploy:
