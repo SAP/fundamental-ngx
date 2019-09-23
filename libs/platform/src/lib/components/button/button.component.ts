@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main' | '';
 export type ButtonOptions = 'light' | 'emphasized' | '';
@@ -9,10 +9,7 @@ export type ButtonOptions = 'light' | 'emphasized' | '';
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ButtonComponent {
-    /** id to the button. */
-    @Input() id: string;
-
+export class ButtonComponent implements OnInit {
     /** Whether to apply compact mode to the button. */
     @Input() compact: boolean;
 
@@ -25,4 +22,7 @@ export class ButtonComponent {
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input() options: ButtonOptions | ButtonOptions[];
+    constructor() {}
+
+    ngOnInit() {}
 }
