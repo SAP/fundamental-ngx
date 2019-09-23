@@ -6,17 +6,17 @@ In this guide, we'll explore the library and documentation code base and create 
 
 This repository contains two separate projects - the component library and the documentation application. Different build tasks are used, depending on which project we're building. However, the documentation app consumes the library source directly, so there's no need to compile the library to test changes you're making to a component - simply running the documentation app locally will serve changes to the library immediately.
 
-The documentation code base lies in the `docs` directory and the library source is in the `library` directory.
+The documentation code base lies in the `docs` directory and the library source is in the `libs` directory.
 
 ## Create a new module in the Library
 
 First, let's generate an empty module in the library. Each library component gets its own module, so end users can import only the modules for specific components they intend to use, if they don't want to import the entire library.
 
-## Step1: Cd library
+## Step1: Cd libs
 
-The library's source lies in the `library` directory. From the root of the repo, cd into the library source:
+The library's source lies in the `libs` directory. From the root of the repo, cd into the library source:
 
-`cd library`
+`cd libs`
 
 ## Step2: Build module & component within libs directory
 
@@ -75,7 +75,26 @@ Next let's create a directory for our poster docs.
 
 `mkdir poster`
 
-Create two new files in the `poster` directory, `poster-docs.component.ts` and `poster-docs.component.html`. Then create the directory `examples` as well. The components we create in this directory will not only be rendered on their example page, but the raw source from these files will be used for the code examples.
+Create two new files in the `poster` directory, `poster-docs.component.ts` and `poster-docs.component.html`. Then create the directory `examples` as well. Create the component `poster-header`.
+
+`ng g c poster-header`
+
+The components we create in this directory will not only be rendered on their example page, but the raw source from these files will be used for the code examples.
+
+## Step8: Change the poster-header.component.html file
+
+In poster-header.component.html Copy/paste the code here:
+
+```Typescript
+<header>Poster</header>
+<description>
+    <p>The poster shows an image</p>
+</description>
+<import module="PosterModule" path="fundamental-ngx"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>
+```
 
 ## Step7: Change poster-example.ts file
 
@@ -135,6 +154,7 @@ Now that we've got our documentation files for the poster, add them to the docum
 ```TypeScript
     declarations: [
         PosterDocsComponent,
+        PosterHeaderComponent
         PosterExampleComponent,
 ```
 
@@ -157,14 +177,14 @@ Let's add a poster route, and put a link for the new docs in the 'Components' si
 Open `documentation.routes.ts` and add the following to the `children` in the `ROUTES` array:
 
 ```TypeScript
-{ path: 'poster', component: PosterComponent, children: [
+{ path: 'poster', component: PosterHeaderComponent, children: [
         { path: '', component: PosterDocsComponent},
         { path: 'api', component: ApiComponent, data: {content: API_FILES.poster}}
     ]
 },
 ```
 
-You will need to import `PosterComponent` and `PosterDocsComponent` in this file as well.
+You will need to import `PosterHeaderComponent` and `PosterDocsComponent` in this file as well.
 
 ## Step13: Add poster url
 

@@ -248,7 +248,7 @@ import { PopoverTriggersComponent } from './component-docs/popover-directive/exa
 import { PopoverProgrammaticComponent } from './component-docs/popover-directive/examples/popover-programmatic/popover-programmatic.component';
 import { PopoverFillComponent } from './component-docs/popover-directive/examples/popover-fill/popover-fill.component';
 import { PopoverCFillComponent } from './component-docs/popover/examples/popover-c-fill/popover-c-fill.component';
-
+import { PosterHeaderComponent } from './component-docs/poster/poster-header/poster-header.component';
 import { HomeDocsComponent } from './component-docs/home/home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
@@ -414,6 +414,8 @@ import { SelectMaxHeightExampleComponent } from './component-docs/select/example
 import { PopoverDynamicExampleComponent } from './component-docs/popover/examples/popover-dynamic/popover-dynamic-example.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { ExtraOptions } from '@angular/router';
+import { PosterExampleComponent } from './component-docs/poster/examples/poster-example.component';
+import { PosterDocsComponent } from './component-docs/poster/poster-docs.component';
 
 @NgModule({
     declarations: [
@@ -596,6 +598,7 @@ import { ExtraOptions } from '@angular/router';
         PopoverProgrammaticComponent,
         PopoverFillComponent,
         PopoverCFillComponent,
+        PosterExampleComponent,
         RadioFormGroupExampleComponent,
         RadioExamplesComponent,
         ScrollSpyDocsComponent,
@@ -719,6 +722,8 @@ import { ExtraOptions } from '@angular/router';
         PanelDocsHeaderComponent,
         PopoverHeaderComponent,
         PopoverDirectiveHeaderComponent,
+        PosterHeaderComponent,
+        PosterDocsComponent,
         RadioHeaderComponent,
         ScrollSpyHeaderComponent,
         SearchInputHeaderComponent,
