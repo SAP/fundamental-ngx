@@ -4,15 +4,15 @@ import * as shellbarBasicHTMLSrc from '!raw-loader!./examples/shellbar-basic-exa
 import * as shellbarBasicTSSrc from '!raw-loader!./examples/shellbar-basic-example.component.ts';
 import * as shellbarCollapsibleHTMLSrc from '!raw-loader!./examples/shellbar-collapsible-example.component.html';
 import * as shellbarCollapsibleTSSrc from '!raw-loader!./examples/shellbar-collapsible-example.component.ts';
+import * as advancedShellbarTs from '!raw-loader!./examples/shellbar-advanced/shellbar-advanced-example.component.ts';
+import * as advancedShellbarHtml from '!raw-loader!./examples/shellbar-advanced/shellbar-advanced-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-shellbar',
     templateUrl: './shellbar-docs.component.html'
 })
-export class ShellbarDocsComponent implements OnInit {
+export class ShellbarDocsComponent {
     shellbarBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -35,5 +35,15 @@ export class ShellbarDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit() {}
+    advancedShellbar: ExampleFile[] = [
+        {
+            language: 'html',
+            code: advancedShellbarHtml,
+        },
+        {
+            language: 'typescript',
+            code: advancedShellbarTs
+        }
+    ];
+
 }

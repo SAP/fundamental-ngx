@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, QueryList, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
 
 /**
@@ -15,7 +15,7 @@ import { PopoverComponent } from '../../popover/popover.component';
     templateUrl: './product-menu.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class ProductMenuComponent implements OnInit {
+export class ProductMenuComponent extends PopoverComponent implements OnInit {
 
     /** @hidden */
     @ViewChild(PopoverComponent)
