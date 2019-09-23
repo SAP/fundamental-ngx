@@ -24,7 +24,7 @@ jobs:
       script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
   - stage: "Archive-pre-release"
-    if: branch = archive-ngx-core-ng7
+    if: branch = archive-ngx-core-ng*
     before_deploy:
     - git checkout archive-ngx-core-ng7
     - bash ./ci-scripts/setup-npm.sh
