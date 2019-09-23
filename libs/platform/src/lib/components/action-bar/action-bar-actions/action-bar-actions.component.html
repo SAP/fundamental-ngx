@@ -1,0 +1,19 @@
+<button class="action-button-margin" *ngFor="let action of buttonItems" fd-button [fdType]="action.type"
+    (click)="action.label=='Rename'?onRename():onItemClick(action)">{{action.label}}</button>
+
+<fd-popover class="action-button-margin" placement={{placement}}>
+    <fd-popover-control>
+        <button fd-button aria-label="More" *ngIf="menuItems?.length>0" aria-haspopup="true" [fdType]="'light'"
+            [glyph]="'overflow'"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li role="button" data-tag="menu-item__button" *ngFor="let menu of menuItems" fd-menu-item
+                    (click)="menu.label=='Rename'?onRename():onItemClick(menu)" [title]="menu.label">
+                    {{menu.label}}
+                </li>
+            </ul>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
