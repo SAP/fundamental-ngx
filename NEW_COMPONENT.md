@@ -22,11 +22,11 @@ The library's source lies in the `libs` directory. From the root of the repo, cd
 
 We're going to be building a component called 'Poster' that displays images. Generate a new 'poster' module in the `src/lib` directory.
 
-`ng generate module src/lib/poster`
+`ng generate module core/src/lib/poster`
 
 Then, generate a 'poster' component in the new module:
 
-`ng generate component src/lib/poster --module=src/lib/poster/poster.module`
+`ng generate component /coresrc/lib/poster --module=core/src/lib/poster/poster.module`
 
 ## Step3: Create an exports array
 
