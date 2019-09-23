@@ -29,7 +29,7 @@ elif [ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]; then
   echo "New release version: $std_ver"
 
 
-elif [[ $TRAVIS_BUILD_STAGE_NAME == "Pre-release" || $TRAVIS_BUILD_STAGE_NAME == "Archive-Pre-release" ]]; then
+elif [[ $TRAVIS_BUILD_STAGE_NAME == "Pre-release" || $TRAVIS_BUILD_STAGE_NAME == "Archive-pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
 
    CURRENT_BRANCH=${TRAVIS_BRANCH}
