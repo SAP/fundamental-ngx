@@ -2,38 +2,36 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActionBarHeaderComponent } from './action-bar-header.component';
 import { ActionbarService } from '../actionbar.service';
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 @Component({
   selector: 'fdp-test-component',
   template: `<fdp-action-bar
   [actionbarTitle]="actionbarTitle"
-  [showBackButton]="showBackButton" 
-  [actionbarDescription]="actionbardescription" (backButtonClick)="onBackButtonClick()" #actionbar>
+  [showBackButton]="showBackButton"
+  [editMode]="editMode"
+  [actionbarDescription]="actionbarDescription" (backButtonClick)="onBackButtonClick()" #actionbar>
   </fdp-action-bar>`
 })
 class TestComponent {
 
   @Input() actionbarTitle: string;
-  @Input() actionbardescription: string;
+  @Input() actionbarDescription: string;
   @Input() showBackButton = false;
-  @Input() editTitle = false;
+  @Input() editMode = false;
   @ViewChild('actionbar') actionbar: ActionBarHeaderComponent;
-
+  @Output() onRenameTitle: EventEmitter<string> = new EventEmitter<string>();
   public backButtonClicked = false;
-  public
-
-
   onBackButtonClick() {
     this.backButtonClicked = true;
   }
 }
 
-describe('ActionBarComponent', () => {
-  let component: ActionBarHeaderComponent;
-  let fixture: ComponentFixture<ActionBarHeaderComponent>;
-  let service: ActionbarService;
+describe('ActionBarHeaderComponent', () => {
+  let component: TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,9 +43,8 @@ describe('ActionBarComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActionBarHeaderComponent);
+    fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(ActionbarService);
     fixture.detectChanges();
   });
 
@@ -58,47 +55,47 @@ describe('ActionBarComponent', () => {
   it('should be able to show the action bar title', () => {
     component.actionbarTitle = 'Page Title';
     fixture.detectChanges();
-    const title = fixture.debugElement.query(By.css('[data-tag="actionbar__title"]'));
-    expect(title.nativeElement.textContent).toBe('Page Title');
+    const title = fixture.debugElement.query(By.css('.fd-action-bar__title'));
+    expect(title.nativeElement.textContent).toBe(' Page Title');
   });
 
   it('should be able to show the action bar description', () => {
     component.actionbarDescription = 'Action bar description';
     fixture.detectChanges();
-    const title = fixture.debugElement.query(By.css('[data-tag="actionbar__description"]'));
-    expect(title.nativeElement.textContent).toBe('Action bar description');
+    const title = fixture.debugElement.query(By.css('.fd-action-bar__description'));
+    expect(title.nativeElement.textContent).toBe(' Action bar description');
   });
 
   it('should show the "back" button if "showBackButton" is true', () => {
     component.showBackButton = true;
     fixture.detectChanges();
 
-    let backButton = fixture.debugElement.queryAll(By.css('[data-tag="actionbar__back-button"]'));
+    let backButton = fixture.debugElement.queryAll(By.css('.sap-icon--nav-back'));
     expect(backButton.length).toBe(1);
 
     component.showBackButton = false;
     fixture.detectChanges();
 
-    backButton = fixture.debugElement.queryAll(By.css('[data-tag="actionbar__back-button"]'));
+    backButton = fixture.debugElement.queryAll(By.css('.sap-icon--nav-back'));
     expect(backButton.length).toBe(0);
   });
 
   it('should emit a "backButtonClick" event when back button is pressed', () => {
     component.showBackButton = true;
     fixture.detectChanges();
-    const backButton = fixture.debugElement.query(By.css('[data-tag="actionbar__back-button"]'));
+    const backButton = fixture.debugElement.query(By.css('.sap-icon--nav-back'));
     backButton.nativeElement.click();
-    expect(component.backButtonClick).toBeTruthy();
+    expect(component.backButtonClicked).toBeTruthy();
   });
 
   it('Should show the input text box when editmode is on', () => {
     component.editMode = true;
     fixture.detectChanges();
-    let inputText = fixture.debugElement.queryAll(By.css('[data-tag="actionbar__input"]'));
+    let inputText = fixture.debugElement.queryAll(By.css('.edit-actionbar-title'));
     expect(inputText.length).toBe(1);
     component.editMode = false;
     fixture.detectChanges();
-    inputText = fixture.debugElement.queryAll(By.css('[data-tag="actionbar__input"]'));
+    inputText = fixture.debugElement.queryAll(By.css('.edit-actionbar-title'));
     expect(inputText.length).toBe(0);
 
   });
@@ -106,14 +103,14 @@ describe('ActionBarComponent', () => {
   it('should emit a "onRenameTitle" event when back button is pressed', () => {
     component.editMode = true;
     fixture.detectChanges();
-    let inputText = fixture.debugElement.query(By.css('[data-tag="actionbar__input"]')).nativeElement;
-    inputText.value = "New Page title";
-    inputText.focusout();
-    component.onFocusOut();
+    const inputText = fixture.debugElement.query(By.css('.edit-actionbar-title'));
+    inputText.nativeElement.value = 'New Page title';
+    inputText.nativeElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    expect(component.renameTitle).toBeTruthy();
-    const title = fixture.debugElement.query(By.css('[data-tag="actionbar__title"]'));
-    expect(title.nativeElement.textContent).toBe('New Page title');
+    component.editMode = false;
+    fixture.detectChanges();
+    const title = fixture.debugElement.query(By.css('.fd-action-bar__title'));
+    expect(title.nativeElement.textContent).toBe(' New Page title');
   });
 
 });

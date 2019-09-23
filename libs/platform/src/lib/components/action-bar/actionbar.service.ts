@@ -19,7 +19,7 @@ export class ActionbarService {
   }
 
   setEditMode(isEditModeOn: boolean) {
-    console.log("From service:", isEditModeOn);
+    console.log('From service:', isEditModeOn);
     this.isEditModeOn.next(isEditModeOn);
   }
 

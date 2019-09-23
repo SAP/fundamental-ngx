@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActionBarHeaderComponent, AutofocusDirective } from './action-bar-header/action-bar-header.component';
+import { ActionBarHeaderComponent } from './action-bar-header/action-bar-header.component';
 import { FormsModule } from '@angular/forms';
 import { ActionBarActionsComponent } from './action-bar-actions/action-bar-actions.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
@@ -10,7 +10,6 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 @NgModule({
   declarations: [ActionBarHeaderComponent,
     ActionBarActionsComponent,
-    AutofocusDirective
   ],
   imports: [
     CommonModule,
@@ -20,7 +19,6 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
   exports: [
     ActionBarHeaderComponent,
     ActionBarActionsComponent,
-    AutofocusDirective
 
   ]
 })
