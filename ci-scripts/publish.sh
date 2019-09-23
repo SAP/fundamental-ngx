@@ -8,17 +8,13 @@ git config --global user.name "fundamental-bot"
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
 
-if [[ $TRAVIS_BUILD_STAGE_NAME == "Release" ]]; then
-   echo "################ Running Master deploy tasks ################"
-   CURRENT_BRANCH=master
+if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-pre-release" ]]; then
+   echo "################ Running RC Archive deploy tasks ################"
 
-  # delete temp branch
-  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
-  std_ver=$(npm run std-version)
-  release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
-  echo "New release version: $std_ver"
+   CURRENT_BRANCH=${ARCHIVE_BRANCH}
+   npm run std-version -- --prerelease rc --no-verify
 
-elif [ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]; then
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-release" ]]; then
   echo "################ Running ${ARCHIVE_BRANCH} deploy tasks ################"
   CURRENT_BRANCH=$ARCHIVE_BRANCH
 
@@ -28,19 +24,21 @@ elif [ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]; then
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
   echo "New release version: $std_ver"
 
-
-elif [[ $TRAVIS_BUILD_STAGE_NAME == "Pre-release" ]]; then
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
 
    CURRENT_BRANCH=${TRAVIS_BRANCH}
    npm run std-version -- --prerelease rc --no-verify
 
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
+   echo "################ Running Master deploy tasks ################"
+   CURRENT_BRANCH=master
 
-elif [[ $TRAVIS_BUILD_STAGE_NAME == "Archive-pre-release" ]]; then
-   echo "################ Running RC Archive deploy tasks ################"
-
-   CURRENT_BRANCH=${ARCHIVE_BRANCH}
-   npm run std-version -- --prerelease rc --no-verify
+  # delete temp branch
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
+  std_ver=$(npm run std-version)
+  release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
+  echo "New release version: $std_ver"
 
 else
    echo  "${TRAVIS_BUILD_STAGE_NAME}"
