@@ -23,10 +23,10 @@ jobs:
     - provider: script
       script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
-  - stage: "Archive-Pre-release"
-    if: branch = $ARCHIVE_BRANCH
+  - stage: "Archive-pre-release"
+    if: branch = archive-ngx-core-ng7
     before_deploy:
-    - git checkout $ARCHIVE_BRANCH
+    - git checkout archive-ngx-core-ng7
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
@@ -47,13 +47,12 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
-
   - stage: "Archive-Release"
     if: branch = archive_tmp_branch_for_automated_release_do_not_use
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
-    - git checkout $ARCHIVE_BRANCH
+    - git checkout archive-ngx-core-ng7
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script

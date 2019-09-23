@@ -29,13 +29,21 @@ elif [ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]; then
   echo "New release version: $std_ver"
 
 
-elif [[ $TRAVIS_BUILD_STAGE_NAME == "Pre-release" || $TRAVIS_BUILD_STAGE_NAME == "Archive-Pre-release" ]]; then
+elif [[ $TRAVIS_BUILD_STAGE_NAME == "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
 
    CURRENT_BRANCH=${TRAVIS_BRANCH}
    npm run std-version -- --prerelease rc --no-verify
 
+
+elif [[ $TRAVIS_BUILD_STAGE_NAME == "Archive-pre-release" ]]; then
+   echo "################ Running RC Archive deploy tasks ################"
+
+   CURRENT_BRANCH=${ARCHIVE_BRANCH}
+   npm run std-version -- --prerelease rc --no-verify
+
 else
+   echo  "${TRAVIS_BUILD_STAGE_NAME}"
    echo "Missing required stage name"
    exit 1
 fi
@@ -70,10 +78,5 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]]; then
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $ARCHIVE_BRANCH
     npm run build-docs
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
-fi
-
-
-if [ ${args[0]} == $ARCHIVE_BRANCH ]; then
-    echo "Run after publish to make sure GitHub finishes updating from the push"
 fi
 
