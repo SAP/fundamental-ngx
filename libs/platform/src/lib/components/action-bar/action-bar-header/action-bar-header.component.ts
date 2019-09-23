@@ -1,27 +1,15 @@
-import { Component, OnInit, Directive, AfterContentInit, ChangeDetectionStrategy, Input, Output, Inject, EventEmitter, ChangeDetectorRef, HostListener, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component, OnInit, Directive, AfterContentInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { ActionbarService } from '../actionbar.service';
-//import { HTMLDirectionObserverService } from '../../../common/html-direction-observer.service';
-// {
-// DOCUMENT
-//} from '@angular/common';
 
-
-@Directive({
-  selector: 'fdpAutofocus'
-})
-export class AutofocusDirective implements AfterContentInit {
-
-  @Input() autoFocus: boolean;
-  constructor(private el: ElementRef) {
-  }
-  ngAfterContentInit() {
-    setTimeout(() => {
-      this.el.nativeElement.focus();
-    }, 500)
-
-  }
-
-}
 
 @Component({
   host: {
@@ -40,7 +28,7 @@ export class ActionBarHeaderComponent implements OnInit {
   @Input() actionbarTitle: string;
 
 
-  editMode: boolean = false;
+  @Input() editMode: boolean = false;
 
   /**
    * Actionbar description
@@ -75,18 +63,11 @@ export class ActionBarHeaderComponent implements OnInit {
 
   @ViewChild('inputTitle') inputTitle: ElementRef;
 
-  //public direction = 'ltr';
+
 
   constructor(
-    public cd: ChangeDetectorRef, private actionbarservice: ActionbarService) {
+    public cd: ChangeDetectorRef, private actionbarservice: ActionbarService) { }
 
-    // document.addEventListener('click', this.outSideClick);
-    // this.htmlDirectionObserverService.getSubject().subscribe(dir => {
-    // this.direction = dir;
-    // this.cd.detectChanges();
-    // });
-
-  }
 
   ngOnInit() {
     this.actionbarservice.castEditMode.subscribe(editModeOn => {

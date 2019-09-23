@@ -64,37 +64,31 @@ export class ActionBarActionsComponent implements OnInit {
   splitActionItems() {
     let j = 0;
     for (let i = 0; i < this.orderedActionItems.length; i++) {
-      if (i < 3)
+      if (i < 3) {
         this.buttonItems[i] = this.orderedActionItems[i];
+      }
       else {
 
         this.menuItems[j++] = this.orderedActionItems[i];
 
       }
     }
-    console.log("button", this.buttonItems);
-    console.log("menu", this.menuItems);
-  }
-  onButtonClick(): void {
-
-    this.cd.detectChanges();
-    this.itemClick.emit();
-    console.log("action clicked")
+    console.log('button', this.buttonItems);
+    console.log('menu', this.menuItems);
   }
 
   onItemClick(item: ActionItem): void {
 
     this.cd.detectChanges();
     this.itemClick.emit();
-    console.log("action clicked")
+    console.log('action clicked');
     item.callback();
   }
   onRename() {
-    console.log("Rename Clicked");
+    console.log('Rename Clicked');
     this.isEditModeOn = true;
     this.actionbarservice.setEditMode(this.isEditModeOn);
     this.cd.detectChanges();
-
   }
 
 }

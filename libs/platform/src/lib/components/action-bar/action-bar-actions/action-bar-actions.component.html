@@ -1,5 +1,5 @@
-<button class="action-button-margin" *ngFor="let action of buttonItems" fd-button [fdType]="action.type"
-    (click)="action.label=='Rename'?onRename():onItemClick(action)">{{action.label}}</button>
+<button class="action-button-margin" title="action.label" *ngFor="let action of buttonItems" fd-button
+    [fdType]="action.type" (click)="action.label=='Rename'?onRename():onItemClick(action)">{{action.label}}</button>
 
 <fd-popover class="action-button-margin" placement={{placement}}>
     <fd-popover-control>
@@ -10,7 +10,7 @@
         <fd-menu>
             <ul fd-menu-list>
                 <li role="button" data-tag="menu-item__button" *ngFor="let menu of menuItems" fd-menu-item
-                    (click)="menu.label=='Rename'?onRename():onItemClick(menu)" [title]="menu.label">
+                    (click)="menu.label=='Rename'?onRename():onItemClick(menu)" title="menu.label">
                     {{menu.label}}
                 </li>
             </ul>
