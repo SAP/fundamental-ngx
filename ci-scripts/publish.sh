@@ -8,7 +8,29 @@ git config --global user.name "fundamental-bot"
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
 
-if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
+if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-pre-release" ]]; then
+   echo "################ Running RC Archive deploy tasks ################"
+
+   CURRENT_BRANCH=${ARCHIVE_BRANCH}
+   npm run std-version -- --prerelease rc --no-verify
+
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-release" ]]; then
+  echo "################ Running ${ARCHIVE_BRANCH} deploy tasks ################"
+  CURRENT_BRANCH=$ARCHIVE_BRANCH
+
+  # delete temp branch
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
+  std_ver=$(npm run std-version)
+  release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
+  echo "New release version: $std_ver"
+
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
+   echo "################ Running RC deploy tasks ################"
+
+   CURRENT_BRANCH=${TRAVIS_BRANCH}
+   npm run std-version -- --prerelease rc --no-verify
+
+elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    echo "################ Running Master deploy tasks ################"
    CURRENT_BRANCH=master
 
@@ -18,18 +40,8 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
   echo "New release version: $std_ver"
 
-
-
-
-elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
-   echo "################ Running RC deploy tasks ################"
-
-   CURRENT_BRANCH=${TRAVIS_BRANCH}
-   npm run std-version -- --prerelease rc --no-verify
-
-
-
 else
+   echo  "${TRAVIS_BUILD_STAGE_NAME}"
    echo "Missing required stage name"
    exit 1
 fi
@@ -57,6 +69,11 @@ cd ../../
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
 
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
+    npm run build-docs
+    npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
+elif [[ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]]; then
+
+    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $ARCHIVE_BRANCH
     npm run build-docs
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 fi
