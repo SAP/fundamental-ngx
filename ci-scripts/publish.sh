@@ -36,6 +36,7 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME == "Pre-release" || $TRAVIS_BUILD_STAGE_NAME ==
    npm run std-version -- --prerelease rc --no-verify
 
 else
+    echo  "${TRAVIS_BUILD_STAGE_NAME}"
    echo "Missing required stage name"
    exit 1
 fi
