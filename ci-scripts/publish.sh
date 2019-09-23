@@ -8,6 +8,8 @@ git config --global user.name "fundamental-bot"
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
 
+echo $ARCHIVE_BRANCH
+
 if [[ $TRAVIS_BUILD_STAGE_NAME == "Release" ]]; then
    echo "################ Running Master deploy tasks ################"
    CURRENT_BRANCH=master
@@ -54,7 +56,8 @@ for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    $NPM_BIN  publish --access public
+#    $NPM_BIN  publish --access public
+    echo Published
     cd ..
 done
 
