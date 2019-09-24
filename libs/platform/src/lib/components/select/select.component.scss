@@ -1,0 +1,71 @@
+.fd-select-custom {
+    display: inline-block;
+    margin-left: 10px;
+    width: 192px;
+
+    .fd-select-popover-custom {
+        display: block;
+
+        fd-popover-container {
+            min-width: 100%;
+            overflow: auto;
+        }
+    }
+
+    .fd-select-button-custom {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        &::after {
+            flex-shrink: 0;
+        }
+    }
+
+    .fd-select-button-custom {
+        &::after {
+            margin-top: 0;
+        }
+    }
+
+    .fd-select-text-custom {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-x: hidden;
+        pointer-events: none;
+    }
+
+    .fd-select-popover-body-custom {
+        display: block;
+    }
+}
+.fd-button--noBorder{
+    border-style: none;
+}
+.fd-button--noBorder::after{
+    border-left-style: none;
+    background-color: #ffffff;
+
+}
+
+.fd-button--regularBorder{
+    border-style: solid;
+}
+.fd-button--regularBorder::after{
+    border-left-style: none;
+    background-color: #ffffff;
+
+}
+.fd-button--default{
+    border-style: solid;
+}
+.fd-button--default::after{
+    border-left-style: solid;
+    background-color: #ffffff;
+
+}
+.fd-dropdown_truncation{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
+}
