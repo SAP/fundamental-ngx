@@ -1,15 +1,15 @@
 # Fundamental NGX
 
-[![npm version](https://badge.fury.io/js/fundamental-ngx.svg)](//www.npmjs.com/package/fundamental-ngx)
-[![Minified Size](https://badgen.net/bundlephobia/min/fundamental-ngx)](https://bundlephobia.com/result?p=fundamental-ngx)
-[![Minzipped Size](https://badgen.net/bundlephobia/minzip/fundamental-ngx)](https://bundlephobia.com/result?p=fundamental-ngx)
+[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx.core)
+[![Minified Size](https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
+[![Minzipped Size](https://badgen.net/bundlephobia/minzip/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
 [![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=master)](https://travis-ci.org/SAP/fundamental-ngx)
 [![Coverage Status](https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=master)](https://coveralls.io/github/SAP/fundamental-ngx?branch=master)
 [![Slack](https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack)](https://ui-fundamentals.slack.com)
 
 ## Description
 
-The `fundamental-ngx` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
+The `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
 
 The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
@@ -40,7 +40,7 @@ For an existing Angular CLI application,
     To add the entire library, add the following import to your main application module.
 
     ```javascript
-    import { FundamentalNgxModule } from 'fundamental-ngx';
+    import { FundamentalNgxModule } from '@fundamental-ngx/core';
     
     @NgModule({
         ...
@@ -54,7 +54,7 @@ For an existing Angular CLI application,
     For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from 'fundamental-ngx';
+    import { ToggleModule } from '@fundamental-ngx/core';
     
     @NgModule({
         ...
