@@ -4,52 +4,52 @@
       <ng-container [ngSwitch]="control.type">
         <ng-container *ngSwitchCase="'string'">
           <ng-container *ngIf="control.enum; else noEnum">
-            <div class="form-group">
-              <label>{{ control.key }}</label>
-              <select class="form-control" [formControl]="control.control">
+            <div fd-form-item class="form-group">
+              <label fd-form-label>{{ control.key }}</label>
+              <select fd-form-control class="form-control" [formControl]="control.control">
                 <option *ngFor="let value of control.enum" [value]="value">{{ value }}</option>
               </select>
             </div>
           </ng-container>
           <ng-template #noEnum>
-            <div class="form-group">
-              <label>{{ control.key }}</label>
-              <input type="text" class="form-control" [formControl]="control.control">
+            <div fd-form-item class="form-group">
+              <label fd-form-label>{{ control.key }}</label>
+              <input fd-form-control type="text" class="form-control" [formControl]="control.control">
             </div>
           </ng-template>
         </ng-container>
         <ng-container *ngSwitchCase="'string[]'">
-          <div class="form-group">
-            <label>Row data</label>
+          <div fd-form-item class="form-group">
+            <label fd-form-label>Row data</label>
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'integer'">
           <ng-container *ngIf="control.enum; else noEnum">
-            <div class="form-group">
-              <label>{{ control.key }}</label>
+            <div fd-form-item class="form-group">
+              <label fd-form-label>{{ control.key }}</label>
               <select class="form-control" [formControl]="control.control">
                 <option *ngFor="let value of control.enum" [value]="value">{{ value }}</option>
               </select>
             </div>
           </ng-container>
           <ng-template #noEnum>
-            <div class="form-group">
-              <label>{{ control.key }}</label>
-              <input type="number" class="form-control" [formControl]="control.control">
+            <div fd-form-item class="form-group">
+              <label fd-form-label>{{ control.key }}</label>
+              <input fd-form-control type="number" class="form-control" [formControl]="control.control">
             </div>
           </ng-template>
         </ng-container>
         <ng-container *ngSwitchCase="'boolean'">
-          <div class="form-group checkbox">
-            <input type="checkbox" [formControl]="control.control" [id]="control.key">
+          <div fd-form-item [isCheck]="true" class="form-group checkbox">
+            <input fd-form-control type="checkbox" [formControl]="control.control" [id]="control.key">
             <label class="tn-form__label" [for]="control.key">
               {{ control.key }}
             </label>
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'enum'">
-          <div class="form-group checkbox">
-            <input type="checkbox" [formControl]="control.control">
+          <div fd-form-item [isCheck]="true" class="form-group checkbox">
+            <input fd-form-control type="checkbox" [formControl]="control.control">
             <label class="tn-form__label">
               {{ control.key }}
             </label>

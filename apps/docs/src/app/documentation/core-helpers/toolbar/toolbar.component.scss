@@ -9,6 +9,7 @@
     justify-content: space-between;
     width: 100%;
     flex-shrink: 0;
+    box-sizing: border-box;
     position: fixed;
 }
 
@@ -37,6 +38,7 @@
         margin: 0;
         text-align: center;
         color: #fff;
+        text-decoration: none;
 
         @media (min-width: 576px) {
             font-size: 24px;
