@@ -1,42 +1,33 @@
 .fd-menu.columns {
   display: flex;
 }
-/*BEGIN- GENERAL SPECIFICATION*/
-.fd-menu__item {
-      //BEGIN- GENERAL BEHAVIOUR AND INTERACTIONS. Hover, focus, active should always be in that order.
-      &:hover{    //hover state
-          font-weight: bold;
-          background-color: #FAFAFA;
-      }
-      &:focus {   //selected state
-          outline: var(--fd-color-action-focus) dotted 1px;
-          background-color: rgba(10, 110, 209, 0.07);
-      }
-      &:hover:focus{      //selected hover, combining when focused state is hovered upon
-          font-weight: bold;
-          background-color: rgba(10, 110, 209, 0.1);
-      }
-    //END- GENERAL BEHAVIOUR AND INTERACTIONS
-  text-overflow: ellipsis;
-  min-width: 164px; //192-28 for icon
-  height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
-  // background-color: #FFFFFF;
-  overflow: hidden;
-  // color: #515559; //color is correct in styles itself. REMOVE THIS
-  background-color:transparent;
-  // padding: fd-space("tiny") fd-space("small");
-  padding: 12px 16px; //figure out how to use fd-menu-padding-small or tiny  or such variables from scss into here //top-bottom 8px or 12px, read 1 comment on invsion
-  // padding: var(--fd-menu-title-padding) var(--fd-menu-item-padding-y);
-}
+/*BEGIN- GENERAL SPECIFICATION should we keep it here or in menu item scss?*/
 
 .fd-menu{
-  background-color: #FFFFFF;//background-color is correct in styles itself. REMOVE THIS
+//  background-color: #FFFFFF;//background-color is correct in styles itself. REMOVE THIS
   border-radius: 4px;
   border: 1px solid #d9d9d9;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
+ 
+// .fd-menu--addon-before .fd-menu__item{  //fd-menu--addon-before represents the container of the menu item
+//   padding-left: 0px;
+// }
 
+// .fd-menu > .fd-menu__list--separated{
+//   color: red;
+// }
+// .fd-menu
 
 /*END- GENERAL SPECIFICATION*/
 
+.scrolling-menu{
+  overflow-y: scroll;
+}
+
+.fd-menu__title{
+  font-weight: bold;
+  height: 32px;
+  padding: 10px 16px; //32px -12 px font-size = 20px /2 =10px top/bottom
+}

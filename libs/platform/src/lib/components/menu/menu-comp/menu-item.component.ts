@@ -13,8 +13,9 @@ import {
 import { Highlightable } from '@angular/cdk/a11y';
 
 @Component({
-  selector: 'afi-menu-item',
-  templateUrl: './menu-item.component.html'
+  selector: 'fdp-menu-item',
+  templateUrl: './menu-item.component.html',
+  styleUrls: ['./menu-item.component.scss']
 })
 export class MenuItemComponent implements OnInit, OnDestroy, Highlightable {
 
@@ -23,15 +24,18 @@ export class MenuItemComponent implements OnInit, OnDestroy, Highlightable {
   @Input() public icon: string;
   @Input() public selectable: boolean;
   @Input() public selected: boolean;
+  @Input() public secondaryIcon: string;
 
   @Input() public item: MenuItem;
   @Input() public group: MenuGroup;
 
+  @Input() public separated: boolean;
+
   public _isActive = false;
 
-  @Output() itemClick: EventEmitter < void > = new EventEmitter();
+  @Output() itemClick: EventEmitter<void> = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
 

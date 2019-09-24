@@ -1,4 +1,6 @@
-<div class="fd-menu" data-tag="menu" [ngClass]="{ 'columns': useColumns }" [style.text-align]="textAlign">
+<div class="fd-menu" data-tag="menu"
+  [ngClass]="{ 'columns': useColumns, 'fd-menu__list--separated': separator, 'scrolling-menu': scrolling, 'fd-menu--addon-before': isIconPresent(), 'fd-menu--addon-after': isIconPresent() }"
+  [ngStyle]="{ height: (scrollLimit * 40 + 8) +'px'}" [style.text-align]="textAlign">
   <ng-container *ngFor="let group of groups; let i = index;">
     <ng-container
       *ngTemplateOutlet="group.label ? listWithGroupTitleTemplate : listWithoutGroupTitleTemplate; context: { group: group, i: i}">
@@ -7,24 +9,26 @@
 </div>
 
 <ng-template #listWithoutGroupTitleTemplate let-group="group" let-i="i">
-  <ul class="fd-menu__list" [ngClass]="{ 'fd-menu__list--separated': separateItems }" data-tag="menu__list"
-    [attr.data-index]="i">
+  <ul class="fd-menu__list" data-tag="menu__list" [attr.data-index]="i"
+    [ngClass]="{ 'fd-menu__list--separated': separator, 'fd-menu--addon-before': isIconPresent() }">
     <ng-container *ngFor="let item of group.children; let j = index">
-      <afi-menu-item [label]="item.label" [selectable]="item.selectable" [selected]="item.selected"
-        [icon]="item.icon || group.icon" [item]="item" [group]="group" [index]="j"
-        (itemClick)="onItemClick(item, group)"></afi-menu-item>
+      <fdp-menu-item [label]="item.label" [selectable]="item.selectable" [selected]="item.selected"
+        [icon]="item.icon || group.icon" [secondaryIcon]="item.secondaryIcon" [item]="item" [group]="group" [index]="j"
+        (itemClick)="onItemClick(item, group)" [separated]="separator">
+      </fdp-menu-item>
     </ng-container>
   </ul>
 </ng-template>
 
-<ng-template #listWithGroupTitleTemplate let-group="group" let-i="i">
+<!-- separator works in this -->
+<ng-template #listWithGroupTitleTemplate let-group=" group" let-i="i">
   <div class="fd-menu__group" data-tag="menu__group" [attr.data-index]="i">
-    <h3 class="fd-menu__title" data-tag="menu__group--title">{{group.label}}</h3>
-    <ul class="fd-menu__list" [ngClass]="{ 'fd-menu__list--separated': separateItems }" data-tag="menu__list">
+    <h3 class="fd-menu__title" data-tag="menu__group--title" [attr.title]="group.label">{{group.label}}</h3>
+    <ul class="fd-menu__list" [ngClass]="{ 'fd-menu__list--separated': separator }" data-tag="menu__list">
       <ng-container *ngFor="let item of group.children; let j = index">
-        <afi-menu-item [label]="item.label" [selectable]="item.selectable" [selected]="item.selected"
-          [icon]="item.icon || group.icon" [item]="item" [group]="group" [index]="j"
-          (itemClick)="onItemClick(item, group)"></afi-menu-item>
+        <fdp-menu-item [label]="item.label" [selectable]="item.selectable" [selected]="item.selected"
+          [icon]="item.icon || group.icon" [secondaryIcon]="item.secondaryIcon" [item]="item" [group]="group"
+          [index]="j" (itemClick)="onItemClick(item, group)" [separated]="separator"></fdp-menu-item>
       </ng-container>
     </ul>
   </div>

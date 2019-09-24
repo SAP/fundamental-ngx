@@ -15,15 +15,15 @@ import {
 } from '@angular/platform-browser';
 
 @Component({
-  selector: 'afi-test-component',
+  selector: 'fdp-test-component',
   template: `<div>
-      <afi-menu-item
+      <fdp-menu-item
         [label]="label"
         [index]="index"
         [selectable]="selectable"
         [selected]="selected"
         [icon]="icon"
-        (itemClick)="onItemClick($event)"></afi-menu-item>
+        (itemClick)="onItemClick($event)"></fdp-menu-item>
     </div>`
 })
 class TestComponent {
@@ -36,7 +36,7 @@ class TestComponent {
 
   public itemClicked = false;
 
-  constructor() {}
+  constructor() { }
 
   onItemClick() {
     this.itemClicked = true;
@@ -45,15 +45,15 @@ class TestComponent {
 
 describe('MenuItemComponent', () => {
   let component: TestComponent;
-  let fixture: ComponentFixture < TestComponent > ;
+  let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async (() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-        declarations: [
-          TestComponent,
-          MenuItemComponent
-        ]
-      })
+      declarations: [
+        TestComponent,
+        MenuItemComponent
+      ]
+    })
       .compileComponents();
   }));
 

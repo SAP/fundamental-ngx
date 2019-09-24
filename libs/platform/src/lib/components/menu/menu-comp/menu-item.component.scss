@@ -1,3 +1,30 @@
+.fd-menu__item {
+    //BEGIN- GENERAL BEHAVIOUR AND INTERACTIONS. Hover, focus, active should always be in that order.
+    &:hover{    //hover state
+        font-weight: bold;
+        background-color: #FAFAFA;
+    }
+    &:focus {   //selected state
+        outline: var(--fd-color-action-focus) dotted 1px;
+        background-color: rgba(10, 110, 209, 0.07);
+    }
+    &:hover:focus{      //selected hover, combining when focused state is hovered upon
+        font-weight: bold;
+        background-color: rgba(10, 110, 209, 0.1);
+    }
+  //END- GENERAL BEHAVIOUR AND INTERACTIONS
+  text-overflow: ellipsis;
+  min-width: 192px; //192-28 for icon
+  height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
+  // background-color: #FFFFFF;
+  overflow: hidden;
+  // color: #515559; //color is correct in styles itself. REMOVE THIS
+  background-color:transparent;
+  // padding: fd-space("tiny") fd-space("small");
+  padding: 12px 16px; //figure out how to use fd-menu-padding-small or tiny  or such variables from scss into here //top-bottom 8px or 12px, read 1 comment on invsion
+  // padding: var(--fd-menu-title-padding) var(--fd-menu-item-padding-y);
+}
+
 /*
 my calculation is as follows:
 1. icon element height = 28px
@@ -12,15 +39,40 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     width: 28px;
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
+    align-items: center;
     margin: 6px 4px 6px 8px;
     color: #0A6ED1;
     display: block;
+    .fd-menu__item{
+        padding-left: 0px;
+    }
   }
-  // .fd-menu__addon-before [class*=sap-icon]::before{    //works with or without this
-  //     width: 12px;
-  //     height: 12px;
-  // }
-  
-  .fd-menu--addon-before .fd-menu__item{  //fd-menu--addon-before represents the container of the menu item
-    padding-left: 0px;
-  }
+// .fd-menu__addon-before [class*=sap-icon]::before{    //works with or without this
+//       width: 12px;
+//       height: 12px;
+//   }
+
+// .fd-menu--addon-before > .fd-menu__item{  //fd-menu--addon-before represents the container of the menu item
+//     padding-left: 0px;
+//   }
+
+.fd-menu__addon-after{
+    width: 28px;
+    height: 28px;
+    padding: 8px; //center-aligned icon, therefore 8px
+    margin: 6px 4px 6px 8px;
+    color: #0A6ED1;
+    display: block;
+    float: right;
+    clear: right;
+    // @include fd-rtl() {
+    //     float: right;
+    //     clear: right;
+    // }
+    justify-content: center;
+    align-items: center;
+    
+}
+.fd-menu--addon-after > .fd-menu__item{
+    padding-right: 36px;
+}
