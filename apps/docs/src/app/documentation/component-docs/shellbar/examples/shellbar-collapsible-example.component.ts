@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 })
 export class ShellbarCollapsibleExampleComponent {
 
+    searchTerm: string;
+
     productMenuControl = 'Corporate Portal';
 
     productMenuItems = [
