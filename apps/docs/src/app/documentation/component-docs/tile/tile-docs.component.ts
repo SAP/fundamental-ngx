@@ -9,8 +9,6 @@ import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
 import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
 import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-tile',
