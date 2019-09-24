@@ -32,12 +32,12 @@ export class ActionBarActionsComponent implements OnInit {
   @Input() placement: string;
   buttonItems: ActionItem[] = [];
   menuItems: ActionItem[] = [];
-
+  MAX_BUTTONS = 3;
   @Input() actionItems: [any];
 
   orderedActionItems: [any];
 
-  @Output() itemClick: EventEmitter<void> = new EventEmitter();
+  @Output() itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
 
   @Output() rename: EventEmitter<boolean> = new EventEmitter();
 
@@ -64,7 +64,7 @@ export class ActionBarActionsComponent implements OnInit {
   splitActionItems() {
     let j = 0;
     for (let i = 0; i < this.orderedActionItems.length; i++) {
-      if (i < 3) {
+      if (i < this.MAX_BUTTONS) {
         this.buttonItems[i] = this.orderedActionItems[i];
       }
       else {
@@ -79,10 +79,10 @@ export class ActionBarActionsComponent implements OnInit {
 
   onItemClick(item: ActionItem): void {
 
+    this.itemClick.emit(item);
     this.cd.detectChanges();
-    this.itemClick.emit();
-    console.log('action clicked');
     item.callback();
+    console.log('action clicked', item.label);
   }
   onRename() {
     console.log('Rename Clicked');
