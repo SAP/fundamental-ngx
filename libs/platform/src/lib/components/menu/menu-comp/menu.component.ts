@@ -49,6 +49,9 @@ export interface MenuItem {
    */
   icon?: string;
 
+
+  secondaryIcon?: string;
+
   /**
    * Callback function which will execute when menu item is clicked.
    */
@@ -86,13 +89,13 @@ export interface MenuGroup {
  * options.
  *
  * ```html
- * <af-menu separate-items="true" use-columns="true"></af-menu>
+ * <fdp-menu separate-items="true" use-columns="true"></fdp-menu>
  * ```
  *
- * Menu item/group data should be provided to `<af-menu>` using its `load` method.
+ * Menu item/group data should be provided to `<fdp-menu>` using its `load` method.
  *
  * ```javascript
- * var menu = document.getElementByTagName('af-menu')[0];
+ * var menu = document.getElementByTagName('fdp-menu')[0];
  * var data = [{
  *   label: 'Item One',
  *   callback: () => {
@@ -116,14 +119,14 @@ export interface MenuGroup {
   //   @import "${CONSTANTS.FIORI_FUNDAMENTALS_CSS_IE_PATH}";
   // `],
   styleUrls: ['./menu.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   /**
    * Add separating line between menu items. [Default: false]
    */
-  @Input() public separateItems = false;
+  @Input() public separator = false;
 
   /**
    * Display menu groups as columns. [Default: false]
@@ -136,8 +139,21 @@ export class MenuComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
    */
   @Input() public textAlign: string;
 
+  /**
+   * Specify if items are to scroll 
+   */
+  @Input() public scrolling: boolean = false;
+
+
+  /**
+   * Specify the number of items after which scroll must begin
+   */
+  @Input() public scrollLimit: number;
+
   public groups: MenuGroup[];
   private target: ElementRef;
+  private isIcon: boolean = false;
+  private numberOfItems: number = 0;
 
   @ViewChildren(MenuItemComponent) public menuItems: QueryList<MenuItemComponent>;
   private keyManager: ActiveDescendantKeyManager<MenuItemComponent>;
@@ -167,7 +183,7 @@ export class MenuComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
   ) { }
 
   ngOnInit() {
-    console.log("@@@@@@ in menu oninit");
+    this.scrollLimit = this.numberOfItems; //default
   }
 
   ngOnDestroy() {
@@ -187,8 +203,12 @@ export class MenuComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
 
   onTargetKeyup($event: any) {
     if ($event.keyCode === UP_ARROW || $event.keyCode === DOWN_ARROW) {
+      console.log('key up or down');
+
       this.keyManager.onKeydown($event);
     } else if ($event.keyCode === ENTER) {
+      console.log('enter pressed');
+
       const activeItem = this.keyManager.activeItem;
       if (activeItem) {
         this.onItemClick(activeItem.item, activeItem.group);
@@ -227,22 +247,50 @@ export class MenuComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
     data.forEach(record => {
       if (this.isMenuGroup(record)) {
         if (newGroup.length > 0) {
+          this.numberOfItems++;
           groups.push({
             children: newGroup
           });
           newGroup = [];
         }
+        this.numberOfItems++;
         groups.push(record);
       } else {
+        this.numberOfItems++;
         newGroup.push(record);
       }
     });
+    //if no group headers present
     if (newGroup.length > 0) {
+      // this.numberOfItems++;
       groups.push({
         children: newGroup
       });
     }
     return groups;
+  }
+
+  isIconPresent() {
+    // for (const group of this.groups) {
+    //   console.log('group icon: ' + group.icon);
+    //   if (group.icon) {
+    //     this.isIcon = true;
+    //     break;
+    //   } else if (group.children) {
+    //     for (const item of group.children) {
+    //       console.log('item icon: ' + item.icon);
+    //       if (item.icon) {
+    //         this.isIcon = true;
+    //         break;
+    //       }
+    //     }
+    //   } else {
+    //     this.isIcon = false;
+    //     break;
+    //   }
+    // }
+    // return this.isIcon;
+    return true;
   }
 
 }

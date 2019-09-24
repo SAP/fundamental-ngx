@@ -13,36 +13,36 @@ import { By } from '@angular/platform-browser';
 import { MenuItemComponent } from './menu-item.component';
 
 @Component({
-  selector: 'afi-test-component',
-  template: `<afi-menu id="test-menu"
-    [separateItems]="separateItems"
+  selector: 'fdp-test-component',
+  template: `<fdp-menu id="test-menu"
+    [separator]="separator"
     [useColumns]="useColumns"
     [textAlign]="textAlign"
-  #menu></afi-menu>`
+  #menu></fdp-menu>`
 })
 class TestComponent {
   @ViewChild(MenuComponent) menu: MenuComponent;
 
-  public separateItems = false;
+  public separator = false;
   public useColumns = false;
   public textAlign: string;
 
-  constructor() {}
+  constructor() { }
 }
 
 describe('MenuComponent', () => {
 
   let component: TestComponent;
-  let fixture: ComponentFixture < TestComponent > ;
+  let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async (() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-        declarations: [
-          TestComponent,
-          MenuComponent,
-          MenuItemComponent
-        ]
-      })
+      declarations: [
+        TestComponent,
+        MenuComponent,
+        MenuItemComponent
+      ]
+    })
       .compileComponents();
   }));
 
@@ -51,7 +51,7 @@ describe('MenuComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    component.separateItems = false;
+    component.separator = false;
     component.useColumns = false;
   });
 
@@ -122,8 +122,8 @@ describe('MenuComponent', () => {
       expect(menuList.nativeElement.classList.contains('fd-menu__list--separated')).toBeFalsy();
     });
 
-    it('should separate items if "separateItems" is true', () => {
-      component.separateItems = true;
+    it('should separate items if "separator" is true', () => {
+      component.separator = true;
       fixture.detectChanges();
       const menuList = fixture.debugElement.query(By.css('[data-tag="menu__list'));
       expect(menuList.nativeElement.classList.contains('fd-menu__list--separated')).toBeTruthy();
