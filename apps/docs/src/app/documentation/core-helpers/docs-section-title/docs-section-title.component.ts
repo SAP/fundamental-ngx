@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'fd-docs-section-title',
     template: `
         <h2 [id]="id" #title class="docs-header-link">
-            <a class="docs-markdown-a" [attr.aria-describedby]="id" href="/{{ componentName }}#{{ id }}">
+            <a class="docs-markdown-a" [attr.aria-describedby]="id" href="/fundamental-ngx/{{ componentName }}#{{ id }}">
                 <span class="sap-icon--chain-link"></span>
             </a>
             <ng-content></ng-content>
