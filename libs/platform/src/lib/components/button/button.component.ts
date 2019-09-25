@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main' | '';
 export type ButtonOptions = 'light' | 'emphasized' | '';
@@ -6,10 +6,10 @@ export type ButtonOptions = 'light' | 'emphasized' | '';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
+    private _elementRef: ElementRef;
     /** Whether to apply compact mode to the button. */
     @Input() compact: boolean;
 
@@ -22,7 +22,9 @@ export class ButtonComponent implements OnInit {
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input() options: ButtonOptions | ButtonOptions[];
-    constructor() {}
 
-    ngOnInit() {}
+    /** @hidden */
+    constructor(private elementRef: ElementRef) {
+        this._elementRef = elementRef;
+    }
 }
