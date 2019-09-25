@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, Input, ViewEncapsulation } from '@angula
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
- * The directive that represents an identifier. 
+ * The directive that represents an identifier.
  * Identifier is a way to visually present something using an icon or user initials.
  *
  * ```html
@@ -15,27 +15,26 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     selector: '[fd-identifier]',
     host: {
         role: 'presentation',
-        '[class.fd-identifier]': 'true'
     },
     template: `<ng-content></ng-content>`,
     styleUrls: ['./identifier.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class IdentifierComponent extends AbstractFdNgxClass {
-    /** 
-     * The size of the identifier. 
+    /**
+     * The size of the identifier.
      * The predefined values for the size are *xxs*, *xs*, *s*, *m*, *l*, *xl* and *xxl*.
      *  *size* can accept any other string, for example *xxxs*, which will be translated into class *fd-identifier--xxxs*.
      */
     @Input() size: string;
 
-    /** 
-     * Whether to render a circle style for the identifier. 
+    /**
+     * Whether to render a circle style for the identifier.
      */
     @Input() circle: boolean;
 
-    /** 
-     * Whether to render a transparent style for the identifier. 
+    /**
+     * Whether to render a transparent style for the identifier.
      */
     @Input() transparent: boolean;
 
@@ -47,6 +46,7 @@ export class IdentifierComponent extends AbstractFdNgxClass {
 
     /** @hidden */
     _setProperties() {
+        this._addClassToElement('fd-identifier');
         if (this.size) {
             this._addClassToElement('fd-identifier--' + this.size);
         }

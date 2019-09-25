@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 
-export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative';
+export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main' | 'half';
 export type ButtonOptions = 'light' | 'emphasized';
 
 /**
@@ -14,7 +14,7 @@ export type ButtonOptions = 'light' | 'emphasized';
  */
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: `button[fd-button], a[fd-buton]`,
+    selector: `button[fd-button], a[fd-button]`,
     exportAs: 'fd-button',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./button.component.scss'],
@@ -28,7 +28,7 @@ export class ButtonComponent extends AbstractFdNgxClass {
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input() glyph: string;
 
-    /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
+    /** The type of the button. Types include 'standard', 'positive', 'medium', 'negative', 'toolbar', 'main', 'half'.
      * Leave empty for default (Action button).'*/
     @Input() fdType: ButtonType;
 

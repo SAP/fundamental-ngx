@@ -6,8 +6,7 @@
             (addOnButtonClicked)="addOnButtonClicked()"
             [button]="true"
             [disabled]="disabled"
-            [glyph]="'fob-watch'"
-        >
+            [glyph]="'fob-watch'">
             <input [value]="getFormattedTime()"
                    fd-input-group-input
                    (keyup)="timeInputChanged($event.currentTarget.value)"
