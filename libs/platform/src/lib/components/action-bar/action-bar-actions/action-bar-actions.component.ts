@@ -1,7 +1,6 @@
 import {
   Component, OnInit, Input, QueryList, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy
 } from '@angular/core';
-import { ActionbarService } from '../actionbar.service';
 
 
 
@@ -26,20 +25,24 @@ export class ActionBarActionsComponent implements OnInit {
 
 
   constructor(
-    public cd: ChangeDetectorRef, private actionbarservice: ActionbarService) {
+    public cd: ChangeDetectorRef) {
   }
 
-  @Input() placement: string;
+
   buttonItems: ActionItem[] = [];
   menuItems: ActionItem[] = [];
   MAX_BUTTONS = 3;
+  @Input() placement: string;
+
   @Input() actionItems: [any];
+
+  @Input() displayOnlyMenu: boolean;
 
   orderedActionItems: [any];
 
   @Output() itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
 
-  @Output() rename: EventEmitter<boolean> = new EventEmitter();
+  @Output() editMode: EventEmitter<boolean> = new EventEmitter();
 
   isEditTitle: boolean;
   isEditModeOn: boolean;
@@ -47,12 +50,6 @@ export class ActionBarActionsComponent implements OnInit {
   ngOnInit() {
     this.orderActionItem();
     this.splitActionItems();
-    this.actionbarservice.castEditTitle.subscribe(editTitle => {
-      this.isEditTitle = editTitle;
-      this.cd.detectChanges();
-    });
-
-
   }
 
   orderActionItem() {
@@ -64,7 +61,7 @@ export class ActionBarActionsComponent implements OnInit {
   splitActionItems() {
     let j = 0;
     for (let i = 0; i < this.orderedActionItems.length; i++) {
-      if (i < this.MAX_BUTTONS) {
+      if (i < this.MAX_BUTTONS && !this.displayOnlyMenu) {
         this.buttonItems[i] = this.orderedActionItems[i];
       }
       else {
@@ -73,8 +70,6 @@ export class ActionBarActionsComponent implements OnInit {
 
       }
     }
-    console.log('button', this.buttonItems);
-    console.log('menu', this.menuItems);
   }
 
   onItemClick(item: ActionItem): void {
@@ -82,12 +77,10 @@ export class ActionBarActionsComponent implements OnInit {
     this.itemClick.emit(item);
     this.cd.detectChanges();
     item.callback();
-    console.log('action clicked', item.label);
+
   }
-  onRename() {
-    console.log('Rename Clicked');
-    this.isEditModeOn = true;
-    this.actionbarservice.setEditMode(this.isEditModeOn);
+  onRenameClick() {
+    this.editMode.emit(true);
     this.cd.detectChanges();
   }
 

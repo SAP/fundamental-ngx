@@ -1,31 +1,30 @@
 <div #actionbar class="fd-action-bar action-bar-display">
 
   <div class="fd-action-bar__back" *ngIf="showBackButton" (click)="backButtonClick.emit($event)">
-    <button id="actionbar__back-button" class="fd-button--light fd-button--compact sap-icon--nav-back"
-      [attr.aria-label]="backButtonLabel" data-tag="actionbar__back-button" [attr.title]="backButtonLabel"></button>
+    <button class="fd-button--light fd-button--compact sap-icon--nav-back" [attr.aria-label]="backButtonLabel"
+      data-tag="actionbar__back-button" [attr.title]="backButtonLabel"></button>
   </div>
-  <ng-container *ngTemplateOutlet="actionbarContent">
+  <ng-container *ngTemplateOutlet="actionBarContent">
   </ng-container>
-  <div class="fd-action-bar__actions">
-    <ng-content select="fdp-action-bar-actions" data-tag="fdp-action-bar-actions">
-    </ng-content>
-  </div>
+
+  <fdp-action-bar-actions [actionItems]="actionItems" [displayOnlyMenu]="displayOnlyMenu"
+    (editMode)="enableEditTitle($event)" [placement]="placement">
+  </fdp-action-bar-actions>
+
 </div>
 
-<ng-template #actionbarContent>
+<ng-template #actionBarContent>
   <div class="fd-action-bar__header">
-    <h3 class="fd-action-bar__title" id="actionbar__title" *ngIf="!editMode" [attr.title]="actionbarTitle"
-      data-tag="actionbar__title">
-      {{actionbarTitle}}</h3>
+    <h3 class="fd-action-bar__title" *ngIf="!editMode" [attr.title]="actionBarTitle" data-tag="actionbar__title">
+      {{actionBarTitle}}</h3>
     <div fd-form-set *ngIf="editMode">
       <div fd-form-item>
-        <input id="actionbar__input" *ngIf="editMode" class="fd-input edit-actionbar-title" fd-form-control
-          (focusout)="onFocusOut()" (keydown.enter)="$event.target.blur()" [(ngModel)]="actionbarTitle"
-          aria-required="true" data-tag="actionbar__input" />
+        <input *ngIf="editMode" class="fd-input edit-actionbar-title" fd-form-control (focusout)="onFocusOut()"
+          (keydown.enter)="$event.target.blur()" [(ngModel)]="actionBarTitle" aria-required="true"
+          data-tag="actionbar__input" />
       </div>
     </div>
-    <p id="actionbar__description" class="fd-action-bar__description" [attr.title]="actionbarDescription"
-      data-tag="actionbar__description">
-      {{actionbarDescription}}</p>
+    <p class="fd-action-bar__description" [attr.title]="actionBarDescription" data-tag="actionbar__description">
+      {{actionBarDescription}}</p>
   </div>
 </ng-template>
