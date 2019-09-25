@@ -1,25 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActionBarHeaderComponent } from './action-bar-header.component';
-import { ActionbarService } from '../actionbar.service';
 import { Component, Input, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { ActionBarActionsComponent } from '../action-bar-actions/action-bar-actions.component';
+
 @Component({
   selector: 'fdp-test-component',
   template: `<fdp-action-bar
-  [actionbarTitle]="actionbarTitle"
+  [actionBarTitle]="actionBarTitle"
   [showBackButton]="showBackButton"
   [editMode]="editMode"
-  [actionbarDescription]="actionbarDescription" (backButtonClick)="onBackButtonClick()" #actionbar>
+  [actionBarDescription]="actionBarDescription" [actionItems]="actionItems"  [placement]="'bottom-end'" (backButtonClick)="onBackButtonClick()" #actionbar>
   </fdp-action-bar>`
 })
 class TestComponent {
 
-  @Input() actionbarTitle: string;
-  @Input() actionbarDescription: string;
+  @Input() actionBarTitle: string;
+  @Input() actionBarDescription: string;
   @Input() showBackButton = false;
   @Input() editMode = false;
+  @Input() actionItems = [];
+  @Input() placement: string;
   @ViewChild('actionbar') actionbar: ActionBarHeaderComponent;
   @Output() onRenameTitle: EventEmitter<string> = new EventEmitter<string>();
   public backButtonClicked = false;
@@ -35,9 +38,9 @@ describe('ActionBarHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ActionBarHeaderComponent, TestComponent],
+      declarations: [ActionBarHeaderComponent, ActionBarActionsComponent, TestComponent],
       imports: [FormsModule, FundamentalNgxCoreModule],
-      providers: [ActionbarService]
+
     })
       .compileComponents();
   }));
@@ -45,7 +48,52 @@ describe('ActionBarHeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
+
+    const data = [
+      {
+        label: 'Save',
+        type: 'main',
+        priority: 1,
+        callback: () => {
+          alert('Save')
+        }
+      }, {
+        label: 'Cancel',
+        type: 'primary',
+        priority: 2,
+        callback: () => {
+          alert('Cancel')
+        }
+      },
+
+      {
+        label: 'Rename',
+        type: 'main',
+        priority: 3,
+        callback: () => {
+          alert('Rename')
+        }
+      },
+      {
+        label: 'Demo1',
+        type: 'main',
+        priority: 4,
+        callback: () => {
+          alert('Demo1')
+        }
+      },
+      {
+        label: 'Demo2',
+        type: 'main',
+        priority: 5,
+        callback: () => {
+          alert('Demo2')
+        }
+      }
+    ];
+    component.actionItems = data;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
@@ -53,14 +101,14 @@ describe('ActionBarHeaderComponent', () => {
   });
 
   it('should be able to show the action bar title', () => {
-    component.actionbarTitle = 'Page Title';
+    component.actionBarTitle = 'Page Title';
     fixture.detectChanges();
     const title = fixture.debugElement.query(By.css('.fd-action-bar__title'));
     expect(title.nativeElement.textContent).toBe(' Page Title');
   });
 
   it('should be able to show the action bar description', () => {
-    component.actionbarDescription = 'Action bar description';
+    component.actionBarDescription = 'Action bar description';
     fixture.detectChanges();
     const title = fixture.debugElement.query(By.css('.fd-action-bar__description'));
     expect(title.nativeElement.textContent).toBe(' Action bar description');

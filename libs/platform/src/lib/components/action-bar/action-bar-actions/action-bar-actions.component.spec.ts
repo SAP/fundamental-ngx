@@ -3,7 +3,6 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { ActionBarActionsComponent, ActionItem } from './action-bar-actions.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { By } from '@angular/platform-browser';
-import { ActionbarService } from '../actionbar.service';
 @Component({
   selector: 'fdp-test-action-bar-actions',
   template: `<fdp-action-bar-actions #actionbaractions [actionItems]="actionItems"  (itemClick)="onItemClick($event)" [placement]="'bottom-end'"></fdp-action-bar-actions>'
@@ -20,17 +19,7 @@ class TestComponent {
   onItemClick(item: ActionItem) {
     this.actionClicked = true;
   }
-  constructor(private actionbarservice: ActionbarService) { }
 
-  checkEditMode = () => {
-
-    this.actionbarservice.castEditMode.subscribe(editModeOn => {
-      this.editMode = editModeOn;
-
-
-    });
-
-  }
 }
 
 describe('ActionBarActionsComponent', () => {
@@ -107,17 +96,6 @@ describe('ActionBarActionsComponent', () => {
     buttonaction[0].nativeElement.click();
     fixture.detectChanges();
     expect(component.actionClicked).toBeTruthy();
-  });
-
-
-  it('check for rename button', () => {
-
-    fixture.detectChanges();
-    const buttonaction = fixture.debugElement.queryAll(By.css('.fdp-action-button'));
-    buttonaction[2].nativeElement.click();
-    fixture.detectChanges();
-    component.checkEditMode();
-    expect(component.editMode).toBeTruthy();
   });
 
   it('check for over flow', () => {
