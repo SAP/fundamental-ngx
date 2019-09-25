@@ -22,17 +22,15 @@ export class ActionBarHeaderComponent implements OnInit {
   /**
    * Actionbar title
    */
-  @Input() actionBarTitle: string;
+  @Input() title: string;
 
 
   @Input() editMode: boolean = false;
 
-  @Input() editTitle: boolean = false;
-
   /**
    * Actionbar description
    */
-  @Input() actionBarDescription: string;
+  @Input() description: string;
   /**
    * Show "back" button.
    */
@@ -79,7 +77,7 @@ export class ActionBarHeaderComponent implements OnInit {
   }
   onFocusOut() {
     this.editMode = false;
-    this.titleRenamed.emit(this.actionBarTitle);
+    this.titleRenamed.emit(this.title);
     this.cd.detectChanges();
   }
   outSideClick = ($event: Event) => {

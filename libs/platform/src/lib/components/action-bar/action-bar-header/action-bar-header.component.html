@@ -15,16 +15,15 @@
 
 <ng-template #actionBarContent>
   <div class="fd-action-bar__header">
-    <h3 class="fd-action-bar__title" *ngIf="!editMode" [attr.title]="actionBarTitle" data-tag="actionbar__title">
-      {{actionBarTitle}}</h3>
+    <h3 class="fd-action-bar__title" *ngIf="!editMode" [attr.title]="title" data-tag="actionbar__title">
+      {{title}}</h3>
     <div fd-form-set *ngIf="editMode">
       <div fd-form-item>
         <input *ngIf="editMode" class="fd-input edit-actionbar-title" fd-form-control (focusout)="onFocusOut()"
-          (keydown.enter)="$event.target.blur()" [(ngModel)]="actionBarTitle" aria-required="true"
-          data-tag="actionbar__input" />
+          (keydown.enter)="$event.target.blur()" [(ngModel)]="title" aria-required="true" data-tag="actionbar__input" />
       </div>
     </div>
-    <p class="fd-action-bar__description" [attr.title]="actionBarDescription" data-tag="actionbar__description">
-      {{actionBarDescription}}</p>
+    <p class="fd-action-bar__description" [attr.title]="description" data-tag="actionbar__description">
+      {{description}}</p>
   </div>
 </ng-template>

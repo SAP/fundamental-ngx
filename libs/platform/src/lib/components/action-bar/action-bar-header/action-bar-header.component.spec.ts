@@ -9,10 +9,10 @@ import { ActionBarActionsComponent } from '../action-bar-actions/action-bar-acti
 @Component({
   selector: 'fdp-test-component',
   template: `<fdp-action-bar
-  [actionBarTitle]="actionBarTitle"
+  [title]="actionBarTitle"
   [showBackButton]="showBackButton"
   [editMode]="editMode"
-  [actionBarDescription]="actionBarDescription" [actionItems]="actionItems"  [placement]="'bottom-end'" (backButtonClick)="onBackButtonClick()" #actionbar>
+  [description]="actionBarDescription" [actionItems]="actionItems"  [placement]="'bottom-end'" (backButtonClick)="onBackButtonClick()" #actionbar>
   </fdp-action-bar>`
 })
 class TestComponent {
