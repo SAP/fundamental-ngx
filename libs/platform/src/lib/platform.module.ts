@@ -7,10 +7,10 @@ import { SelectModule } from './components/select/select.module';
     imports: [
         CommonModule,
         FundamentalNgxCoreModule
-    ], exports: [
+    ],
+    exports: [
         SelectModule
     ]
-
 })
 export class FundamentalNgxPlatformModule {
 }

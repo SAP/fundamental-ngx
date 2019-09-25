@@ -39,21 +39,21 @@
         display: block;
     }
 }
-.fd-button--noBorder{
+.fd-button--noborder{
     border-style: none;
 }
-.fd-button--noBorder::after{
+.fd-button--noborder::after{
     border-left-style: none;
-    background-color: #ffffff;
+    background-color:var(--fd-color-action-2);
 
 }
 
-.fd-button--regularBorder{
+.fd-button--regularborder{
     border-style: solid;
 }
-.fd-button--regularBorder::after{
+.fd-button--regularborder::after{
     border-left-style: none;
-    background-color: #ffffff;
+    background-color: var(--fd-color-action-2);
 
 }
 .fd-button--default{
@@ -61,7 +61,7 @@
 }
 .fd-button--default::after{
     border-left-style: solid;
-    background-color: #ffffff;
+    background-color: var(--fd-color-action-2);
 
 }
 .fd-dropdown_truncation{
