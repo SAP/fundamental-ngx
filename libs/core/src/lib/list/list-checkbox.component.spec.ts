@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListCheckboxComponent } from './list-checkbox.component';
 import { FormsModule } from '@angular/forms';
-import { FormModule } from '@fundamental-ngx/core';
+import { FormModule } from '../form/form.module';
 
 describe('ListCheckboxComponent', () => {
     let component: ListCheckboxComponent;

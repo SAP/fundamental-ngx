@@ -5,7 +5,7 @@ import { TimeObject } from './time-object';
 
 import { TimeComponent } from './time.component';
 import { SimpleChange } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../button/button.module';
 
 describe('TimeComponent', () => {
     let component: TimeComponent;

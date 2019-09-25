@@ -9,7 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { TimeModule } from '../time/time.module';
 import { FdDatetime } from './models/fd-datetime';
 import { FdDate } from '../calendar/models/fd-date';
-import { ButtonModule, InputGroupModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../button/button.module';
+import { InputGroupModule } from '../input-group/input-group.module';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent;

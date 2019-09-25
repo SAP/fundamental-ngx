@@ -5,7 +5,8 @@ import { IconModule } from '../icon/icon.module';
 import { FormsModule } from '@angular/forms';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarModule } from '../calendar/calendar.module';
-import { ButtonModule, InputGroupModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../button/button.module';
+import { InputGroupModule } from '../input-group/input-group.module';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent;

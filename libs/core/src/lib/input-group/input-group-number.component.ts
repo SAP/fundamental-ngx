@@ -23,10 +23,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupNumberComponent implements ControlValueAccessor {
-    constructor() {
-        console.log('input-group-constructor');
-    }
-
     /** Whether the input is disabled. */
     @Input()
     disabled: boolean;

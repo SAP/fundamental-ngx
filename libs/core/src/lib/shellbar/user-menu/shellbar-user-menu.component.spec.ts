@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellbarUserMenuComponent } from './shellbar-user-menu.component';
-import { MenuModule, PopoverModule } from '@fundamental-ngx/core';
+import { MenuModule } from '../../menu/menu.module';
+import { PopoverModule } from '../../popover/popover.module';
 
 describe('UserMenuComponent', () => {
     let component: ShellbarUserMenuComponent;

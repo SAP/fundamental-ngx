@@ -1,7 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputGroupComponent } from './input-group.component';
-import { InputGroupModule } from '@fundamental-ngx/core';
+import { FormsModule } from '@angular/forms';
+import { InputGroupAddOnDirective, InputGroupInputDirective, InputGroupTextareaDirective } from './input-group-directives';
+import { ButtonModule } from '../button/button.module';
+import { IconModule } from '../icon/icon.module';
+
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -9,7 +13,13 @@ describe('InputGroupComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [InputGroupModule]
+            imports: [FormsModule, ButtonModule, IconModule],
+            declarations: [
+                InputGroupInputDirective,
+                InputGroupAddOnDirective,
+                InputGroupTextareaDirective,
+                InputGroupComponent
+            ]
         }).compileComponents();
     }));
 

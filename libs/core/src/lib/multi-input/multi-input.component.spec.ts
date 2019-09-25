@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
-import { InputGroupModule } from '@fundamental-ngx/core';
+import { InputGroupModule } from '../input-group/input-group.module';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;

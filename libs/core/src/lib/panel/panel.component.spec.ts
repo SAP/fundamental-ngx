@@ -26,11 +26,4 @@ describe('PanelComponent', () => {
         component.ngOnInit();
         expect(component._setProperties).toHaveBeenCalled();
     });
-
-    it('should apply the appropriate classes', () => {
-        component.columnSpan = 2;
-        component.ngOnInit();
-        expect(component._setProperties).toHaveBeenCalled();
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-has-grid-column-span-2');
-    });
 });

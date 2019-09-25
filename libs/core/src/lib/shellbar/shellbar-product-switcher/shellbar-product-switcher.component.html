@@ -10,13 +10,15 @@
                     [isDropdown]="isDropdown"
                     [focusTrapped]="false">
             <fd-popover-control>
-                <button class="fd-button--shell sap-icon--grid"></button>
+                <button fd-button class="fd-shellbar__button" [glyph]="'grid'"></button>
             </fd-popover-control>
             <fd-popover-body>
                 <div class="fd-product-switcher__body">
                     <nav>
-                        <ul>
-                            <li *ngFor="let product of productSwitcher" (click)="itemClick(product, $event)">
+                        <ul class="fd-product-switcher__body--list">
+                            <li *ngFor="let product of productSwitcher"
+                                class="fd-product-switcher__body--list-item"
+                                (click)="itemClick(product, $event)">
                                 <span class="fd-product-switcher__product-icon">
                                     <img [src]="product.image">
                                 </span>

@@ -8,7 +8,9 @@ import { TimeComponent } from '../time/time.component';
 
 import { TimePickerComponent } from './time-picker.component';
 import { TimeObject } from '../time/time-object';
-import { ButtonModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../button/button.module';
+
+
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent;
