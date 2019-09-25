@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-import { ActionBarModule } from './components/action-bar/actionbar.module'
+import { ActionBarModule } from './components/action-bar/action-bar.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FundamentalNgxCoreModule
-    ],
-    exports: [
-        ActionBarModule
-    ]
+    imports: [CommonModule, FundamentalNgxCoreModule],
+    exports: [ActionBarModule]
 })
-export class FundamentalNgxPlatformModule {
-}
+export class FundamentalNgxPlatformModule {}
