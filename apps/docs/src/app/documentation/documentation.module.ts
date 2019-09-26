@@ -52,7 +52,6 @@ import { DatePickerDocsComponent } from './component-docs/date-picker/date-picke
 import { TimeDocsComponent } from './component-docs/time/time-docs.component';
 import { TimePickerDocsComponent } from './component-docs/time-picker/time-picker-docs.component';
 import { ShellbarDocsComponent } from './component-docs/shellbar/shellbar-docs.component';
-import { SearchInputDocsComponent } from './component-docs/search-input/search-input-docs.component';
 
 // examples
 import {
@@ -154,7 +153,6 @@ import { PaginationExampleComponent } from './component-docs/pagination/examples
 import { PopoverExampleComponent } from './component-docs/popover/examples/popover-simple/popover-example.component';
 import { PopoverModalExampleComponent } from './component-docs/popover/examples/popover-modal/popover-modal-example.component';
 import { PopoverProgrammaticOpenExampleComponent } from './component-docs/popover/examples/popover-programmatic/popover-programmatic-open-example.component';
-import { SearchInputExampleComponent } from './component-docs/search-input/examples/search-input-example.component';
 import { ShellbarBasicExampleComponent } from './component-docs/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './component-docs/shellbar/examples/shellbar-collapsible-example.component';
 import {
@@ -211,9 +209,6 @@ import { ModalFullscreenExampleComponent } from './component-docs/modal/examples
 import { InfiniteScrollDocsComponent } from './component-docs/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './component-docs/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { TableCheckboxesExampleComponent } from './component-docs/table/examples/table-checkboxes-example.component';
-import { SearchInputAsyncExampleComponent } from './component-docs/search-input/examples/search-input-async-example.component';
-import { SearchInputDynamicExampleComponent } from './component-docs/search-input/examples/search-input-dynamic-example.component';
-import { SearchInputDisplaywithExampleComponent } from './component-docs/search-input/examples/search-input-displaywith-example.component';
 import { ListSingleSelectExampleComponent } from './component-docs/list/examples/list-single-select-example.component';
 import { FileInputDocsComponent } from './component-docs/file-input/file-input-docs.component';
 import { FileInputExampleComponent } from './component-docs/file-input/examples/file-input-example/file-input-example.component';
@@ -283,7 +278,6 @@ import { PanelDocsHeaderComponent } from './component-docs/panel/panel-docs-head
 import { PopoverHeaderComponent } from './component-docs/popover/popover-header/popover-header.component';
 import { PopoverDirectiveHeaderComponent } from './component-docs/popover-directive/popover-directive-header/popover-directive-header.component';
 import { ScrollSpyHeaderComponent } from './component-docs/scroll-spy/scroll-spy-header/scroll-spy-header.component';
-import { SearchInputHeaderComponent } from './component-docs/search-input/search-input-header/search-input-header.component';
 import { ShellbarDocsHeaderComponent } from './component-docs/shellbar/shellbar-docs-header/shellbar-docs-header.component';
 import { SideNavigationHeaderComponent } from './component-docs/side-navigation/side-navigation-header/side-navigation-header.component';
 import { TableDocsHeaderComponent } from './component-docs/table/table-docs-header/table-docs-header.component';
@@ -461,7 +455,6 @@ import { ShellbarAdvancedExampleComponent } from './component-docs/shellbar/exam
         RadioDocsComponent,
         CalendarDocsComponent,
         DatePickerDocsComponent,
-        SearchInputDocsComponent,
         ShellbarDocsComponent,
         SideNavigationDocsComponent,
         TileDocsComponent,
@@ -610,10 +603,6 @@ import { ShellbarAdvancedExampleComponent } from './component-docs/shellbar/exam
         SelectNativeFormGroupExampleComponent,
         SelectNativeInlineHelpExampleComponent,
         SelectNativeStateExampleComponent,
-        SearchInputExampleComponent,
-        SearchInputAsyncExampleComponent,
-        SearchInputDynamicExampleComponent,
-        SearchInputDisplaywithExampleComponent,
         ShellbarBasicExampleComponent,
         ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent,
@@ -728,7 +717,6 @@ import { ShellbarAdvancedExampleComponent } from './component-docs/shellbar/exam
         PopoverDirectiveHeaderComponent,
         RadioHeaderComponent,
         ScrollSpyHeaderComponent,
-        SearchInputHeaderComponent,
         SelectNativeHeaderComponent,
         ShellbarDocsHeaderComponent,
         SideNavigationHeaderComponent,

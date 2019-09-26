@@ -32,7 +32,6 @@ import { PanelDocsComponent } from './component-docs/panel/panel-docs.component'
 import { PopoverDocsComponent } from './component-docs/popover/popover-docs.component';
 import { PopoverDirectiveDocsComponent } from './component-docs/popover-directive/popover-directive-docs.component';
 import { ScrollSpyDocsComponent } from './component-docs/scroll-spy/scroll-spy-docs.component';
-import { SearchInputDocsComponent } from './component-docs/search-input/search-input-docs.component';
 import { ShellbarDocsComponent } from './component-docs/shellbar/shellbar-docs.component';
 import { SideNavigationDocsComponent } from './component-docs/side-navigation/side-navigation-docs.component';
 import { TableDocsComponent } from './component-docs/table/table-docs.component';
@@ -71,7 +70,6 @@ import { PanelDocsHeaderComponent } from './component-docs/panel/panel-docs-head
 import { PopoverHeaderComponent } from './component-docs/popover/popover-header/popover-header.component';
 import { PopoverDirectiveHeaderComponent } from './component-docs/popover-directive/popover-directive-header/popover-directive-header.component';
 import { ScrollSpyHeaderComponent } from './component-docs/scroll-spy/scroll-spy-header/scroll-spy-header.component';
-import { SearchInputHeaderComponent } from './component-docs/search-input/search-input-header/search-input-header.component';
 import { ShellbarDocsHeaderComponent } from './component-docs/shellbar/shellbar-docs-header/shellbar-docs-header.component';
 import { SideNavigationHeaderComponent } from './component-docs/side-navigation/side-navigation-header/side-navigation-header.component';
 import { TableDocsHeaderComponent } from './component-docs/table/table-docs-header/table-docs-header.component';
@@ -286,11 +284,6 @@ export const ROUTES: Routes = [
             { path: 'scroll-spy', component: ScrollSpyHeaderComponent, children: [
                     { path: '', component: ScrollSpyDocsComponent},
                     { path: 'api', component: ApiComponent, data: {content: API_FILES.scrollSpy}}
-                ]
-            },
-            { path: 'searchInput', component: SearchInputHeaderComponent, children: [
-                    { path: '', component: SearchInputDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.searchInput}}
                 ]
             },
             { path: 'shellbar', component: ShellbarDocsHeaderComponent, children: [

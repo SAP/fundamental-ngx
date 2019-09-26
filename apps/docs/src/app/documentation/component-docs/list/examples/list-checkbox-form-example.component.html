@@ -1,16 +1,20 @@
 <form [formGroup]="customForm">
     <ul fd-list>
         <li fd-list-item>
-            <fd-list-checkbox formControlName="listItem1">List Item 1</fd-list-checkbox>
+            <input type="checkbox" formControlName="listItem1" fd-form-control [id]="'listItem1'"/>
+            <label [for]="'listItem1'" style="padding-left: 10px;">List item 1</label>
         </li>
         <li fd-list-item>
-            <fd-list-checkbox formControlName="listItem2">List Item 2</fd-list-checkbox>
+            <input type="checkbox" formControlName="listItem2" fd-form-control [id]="'listItem2'"/>
+            <label [for]="'listItem2'" style="padding-left: 10px;">List item 2</label>
         </li>
         <li fd-list-item>
-            <fd-list-checkbox formControlName="listItem3">List Item 3</fd-list-checkbox>
+            <input type="checkbox" formControlName="listItem3" fd-form-control [id]="'listItem3'"/>
+            <label [for]="'listItem3'" style="padding-left: 10px;">List item 3</label>
         </li>
         <li fd-list-item>
-            <fd-list-checkbox formControlName="listItem4">List Item 4</fd-list-checkbox>
+            <input type="checkbox" formControlName="listItem4" fd-form-control [id]="'listItem3'"/>
+            <label [for]="'listItem4'" style="padding-left: 10px;">List item 4</label>
         </li>
     </ul>
 </form>
