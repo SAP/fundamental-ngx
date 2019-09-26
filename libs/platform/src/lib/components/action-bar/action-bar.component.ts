@@ -13,6 +13,8 @@ export interface ActionItem {
     type: string;
     priority: number;
     editTitle: boolean;
+    options: string;
+    compact: boolean;
 }
 
 @Component({
