@@ -4,6 +4,8 @@
     *ngFor="let action of buttonItems"
     fd-button
     [fdType]="action.type"
+    [options]="action.options"
+    [compact]="action.compact"
     (click)="action.editTitle ? onRenameClick() : onItemClick(action)"
 >
     {{ action.label }}

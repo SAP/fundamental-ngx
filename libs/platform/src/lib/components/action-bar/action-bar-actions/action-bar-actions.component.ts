@@ -2,7 +2,6 @@ import {
     Component,
     OnInit,
     Input,
-    QueryList,
     Output,
     EventEmitter,
     ChangeDetectorRef,
@@ -12,7 +11,6 @@ import {
 import { ActionItem } from '../action-bar.component';
 
 const MAX_BUTTONS = 3;
-
 @Component({
     selector: 'fdp-action-bar-actions',
     templateUrl: './action-bar-actions.component.html',
