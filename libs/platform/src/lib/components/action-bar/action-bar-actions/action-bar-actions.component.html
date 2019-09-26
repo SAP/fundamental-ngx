@@ -1,42 +1,44 @@
-<button
-    class="action-button-margin fdp-action-button"
-    [attr.title]="action.label"
-    *ngFor="let action of buttonItems"
-    fd-button
-    [fdType]="action.type"
-    [options]="action.options"
-    [compact]="action.compact"
-    (click)="action.editTitle ? onRenameClick() : onItemClick(action)"
->
-    {{ action.label }}
-</button>
+<div fd-action-bar-actions>
+    <button
+        class="action-button-margin fdp-action-button"
+        [attr.title]="action.label"
+        *ngFor="let action of buttonItems"
+        fd-button
+        [fdType]="action.type"
+        [options]="action.options"
+        [compact]="action.compact"
+        (click)="action.editTitle ? onRenameClick() : onItemClick(action)"
+    >
+        {{ action.label }}
+    </button>
 
-<fd-popover class="action-button-margin" placement="{{ placement }}">
-    <fd-popover-control>
-        <button
-            class="fdp-action-popover-button"
-            fd-button
-            aria-label="More"
-            *ngIf="menuItems?.length > 0"
-            aria-haspopup="true"
-            [fdType]="'light'"
-            [glyph]="'overflow'"
-        ></button>
-    </fd-popover-control>
-    <fd-popover-body>
-        <fd-menu>
-            <ul fd-menu-list>
-                <li
-                    role="button"
-                    data-tag="menu-item__button"
-                    *ngFor="let menu of menuItems"
-                    fd-menu-item
-                    (click)="menu.editTitle ? onRenameClick() : onItemClick(menu)"
-                    [attr.title]="menu.label"
-                >
-                    {{ menu.label }}
-                </li>
-            </ul>
-        </fd-menu>
-    </fd-popover-body>
-</fd-popover>
+    <fd-popover class="action-button-margin" placement="{{ placement }}">
+        <fd-popover-control>
+            <button
+                class="fdp-action-popover-button"
+                fd-button
+                aria-label="More"
+                *ngIf="menuItems?.length > 0"
+                aria-haspopup="true"
+                [fdType]="'light'"
+                [glyph]="'overflow'"
+            ></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-menu>
+                <ul fd-menu-list>
+                    <li
+                        role="button"
+                        data-tag="menu-item__button"
+                        *ngFor="let menu of menuItems"
+                        fd-menu-item
+                        (click)="menu.editTitle ? onRenameClick() : onItemClick(menu)"
+                        [attr.title]="menu.label"
+                    >
+                        {{ menu.label }}
+                    </li>
+                </ul>
+            </fd-menu>
+        </fd-popover-body>
+    </fd-popover>
+</div>
