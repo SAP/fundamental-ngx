@@ -65,8 +65,7 @@ export class ActionBarComponent implements OnInit {
     /**
      * Emitted event when action button is clicked.
      */
-    @Output() actionClick: EventEmitter<void> = new EventEmitter();
-
+    @Output() itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
     constructor(public cd: ChangeDetectorRef) {}
 
     ngOnInit() {}
@@ -75,6 +74,12 @@ export class ActionBarComponent implements OnInit {
         this.editMode = editmode;
         this.cd.markForCheck();
     }
+
+    actionItemClicked(item: ActionItem) {
+        this.itemClick.emit(item);
+        this.cd.markForCheck();
+    }
+
     onFocusOut() {
         this.editMode = false;
         this.titleRenamed.emit(this.title);
