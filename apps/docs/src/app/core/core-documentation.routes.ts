@@ -276,8 +276,8 @@ export const ROUTES: Routes = [
                 path: 'layoutGrid', 
                 component: LayoutGridDocsHeaderComponent, 
                 children: [
-                { path: '', component: LayoutGridDocsComponent},
-                { path: 'api', component: ApiComponent, data: {content: API_FILES.layoutGrid}}
+                    { path: '', component: LayoutGridDocsComponent},
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.layoutGrid}}
             ]
             },
             { 
