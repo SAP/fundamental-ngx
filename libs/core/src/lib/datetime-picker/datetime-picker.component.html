@@ -20,7 +20,8 @@
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }"
                        [disabled]="disabled">
                 <span fd-input-group-addon [button]="true">
-                    <button [disabled]="disabled" fd-button class="fd-popover__control" [glyph]="'date-time'"
+                    <button [disabled]="disabled" fd-button [glyph]="'date-time'"
+                            [options]="'light'"
                             [compact]="compact"
                             (click)="togglePopover()" [attr.aria-label]="displayDatetimeToggleLabel"
                             [attr.aria-expanded]="isOpen">

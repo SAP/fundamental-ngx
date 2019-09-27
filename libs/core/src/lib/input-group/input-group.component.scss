@@ -20,3 +20,10 @@ fd-input-group {
         height: 100%;
     }
 }
+.fd-input-group {
+    .fd-input-group__addon--button > * {
+        border-color: var(--fd-forms-border-color, #89919a);
+        height: 100%;
+        max-height: 100%;
+    }
+}

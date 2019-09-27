@@ -18,7 +18,8 @@
                    [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }">
             <span fd-input-group-addon [button]="true">
-                <button [disabled]="disabled" fd-button class="fd-popover__control" [glyph]="'calendar'"
+                <button [disabled]="disabled" fd-button [glyph]="'calendar'"
+                        [options]="'light'"
                         [compact]="compact"
                         (click)="toggleCalendar()" [attr.aria-label]="displayCalendarToggleLabel"
                         [attr.aria-expanded]="isOpen">

@@ -50,8 +50,8 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     inputTemplate: TemplateRef<any>;
 
-    /** 
-     * The placement of the add-on. 
+    /**
+     * The placement of the add-on.
      * Options include *before* and *after*
      */
     @Input()
@@ -83,7 +83,7 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input() buttonType: string;
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() buttonOptions: string | string[];
+    @Input() buttonOptions: string | string[] = 'light';
 
     /** The icon value for the add-on. */
     @Input()

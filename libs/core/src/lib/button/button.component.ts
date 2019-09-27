@@ -22,6 +22,9 @@ export type ButtonOptions = 'light' | 'emphasized';
 })
 export class ButtonComponent extends AbstractFdNgxClass {
 
+    /** Defines if there will be added fd-button class. Enabled by default. */
+    @Input() fdButtonClass: boolean = true;
+
     /** Whether to apply compact mode to the button. */
     @Input() compact: boolean;
 
@@ -43,7 +46,9 @@ export class ButtonComponent extends AbstractFdNgxClass {
 
     /** @hidden */
     _setProperties() {
-        this._addClassToElement('fd-button');
+        if (this.fdButtonClass) {
+            this._addClassToElement('fd-button');
+        }
         if (this.compact) {
             this._addClassToElement('fd-button--compact');
         }
