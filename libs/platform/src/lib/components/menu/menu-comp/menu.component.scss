@@ -1,16 +1,12 @@
-.fd-menu.columns {
-  display: flex;
-}
 /*BEGIN- GENERAL SPECIFICATION should we keep it here or in menu item scss?*/
 
-.fd-menu{
-//  background-color: #FFFFFF;//background-color is correct in styles itself. REMOVE THIS
-  border-radius: 4px;
-  border: 1px solid #d9d9d9;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.05);
+.fd-menu {
+    //  background-color: #FFFFFF;//background-color is correct in styles itself. REMOVE THIS
+    border-radius: 4px;
+    border: 1px solid #d9d9d9; //need to specify it explicitly
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
- 
 // .fd-menu--addon-before .fd-menu__item{  //fd-menu--addon-before represents the container of the menu item
 //   padding-left: 0px;
 // }
@@ -22,12 +18,20 @@
 
 /*END- GENERAL SPECIFICATION*/
 
-.scrolling-menu{
-  overflow-y: scroll;
+.scrolling-menu {
+    overflow-y: scroll;
 }
 
-.fd-menu__title{
-  font-weight: bold;
-  height: 32px;
-  padding: 10px 16px; //32px -12 px font-size = 20px /2 =10px top/bottom
+.fd-menu__title {
+    height: 32px;
+    padding: 10px 16px; //32px -12 px font-size = 20px /2 =10px top/bottom
+}
+
+.separator-items > * {
+    border-top-style: solid;
+    border-top-width: 1px;
+    color: var(--fd-menu-item-separator-color);
+    &:first-child {
+        border-top-width: 0;
+    }
 }
