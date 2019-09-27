@@ -3,7 +3,7 @@ import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angula
 @Component({
     selector: 'component-example',
     template: `
-        <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1" id="{{id}}">
+        <div class="fd-tile docs-component fd-tile-example-background" id="{{id}}">
             <div class="fd-tile__content fd-tile-content-example">
                 <div class="component-example__features">
                     <rtl-toggle [label]="id2"></rtl-toggle>
