@@ -1,3 +1,4 @@
-<button fd-button [options]="'emphasized'">
+<button fd-button [options]="options" [size]="size" [glyph]="glyph" [disabled]="disabled" (click)="onBtnClick($event)"
+    [fdType]="type">
     <ng-content></ng-content>
 </button>
