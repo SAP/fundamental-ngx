@@ -1,14 +1,14 @@
 <div class="fd-dropdown">
     <button
         fd-button
-        class="fd-dropdown__control fd-button"
+        class="fd-dropdown__control"
+        [fdType]="btnType"
+        [glyph]="glyph"
+        [compact]="compact"
         [ngClass]="
-                    (btnType ? ' fd-button--' + btnType : '') +
-                    (glyph ? ' sap-icon--' + glyph : '') +
-                    (compact ? ' fd-button--compact' : '') +
-                    (this.disabled ? ' is-disabled' : '') +
-                    (toolbar ? ' fd-button--standard': '')
-                "
+            (this.disabled ? ' is-disabled' : '') +
+            (toolbar ? ' fd-button--standard': '')
+        "
         [attr.aria-expanded]="this.disabled ? false : isOpen"
         [attr.aria-disabled]="this.disabled"
         aria-haspopup="true"
