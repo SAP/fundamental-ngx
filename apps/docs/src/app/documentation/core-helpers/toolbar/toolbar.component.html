@@ -1,6 +1,10 @@
 <button aria-expanded="false"
+        fd-button
+        [options]="'light'"
+        [fdType]="'standard'"
+        [glyph]="'menu2'"
         aria-label="Toggle Navigation" (click)="this.btnClicked.emit()"
-        class="fd-button--light fd-button--standard sap-icon--menu2 fd-docs--toolbar__sidebar-btn"></button>
+        class="fd-docs--toolbar__sidebar-btn"></button>
 <a aria-label="Home" class="fd-docs--toolbar__home-logo" href="/">
     Fundamental
     <span class="fd-docs--toolbar__home-logo-framework">
