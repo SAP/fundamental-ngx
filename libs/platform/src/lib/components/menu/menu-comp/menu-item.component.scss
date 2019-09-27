@@ -1,28 +1,35 @@
 .fd-menu__item {
     //BEGIN- GENERAL BEHAVIOUR AND INTERACTIONS. Hover, focus, active should always be in that order.
-    &:hover{    //hover state
+    &:hover {
+        //hover state
         font-weight: bold;
-        background-color: #FAFAFA;
+        // background-color: #fafafa;
+        background-color: var(--fd-color-background-hover);
     }
-    &:focus {   //selected state
+    &:focus {
+        //selected state
         outline: var(--fd-color-action-focus) dotted 1px;
-        background-color: rgba(10, 110, 209, 0.07);
+        // background-color: rgba(10, 110, 209, 0.07);
+        background-color: var(--fd-color-action-hover);
     }
-    &:hover:focus{      //selected hover, combining when focused state is hovered upon
+    &:hover:focus {
+        //selected hover, combining when focused state is hovered upon
         font-weight: bold;
-        background-color: rgba(10, 110, 209, 0.1);
+        // background-color: rgba(10, 110, 209, 0.1);
+        background-color: var(--fd-color-action-selected);
     }
-  //END- GENERAL BEHAVIOUR AND INTERACTIONS
-  text-overflow: ellipsis;
-  min-width: 192px; //192-28 for icon
-  height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
-  // background-color: #FFFFFF;
-  overflow: hidden;
-  // color: #515559; //color is correct in styles itself. REMOVE THIS
-  background-color:transparent;
-  // padding: fd-space("tiny") fd-space("small");
-  padding: 12px 16px; //figure out how to use fd-menu-padding-small or tiny  or such variables from scss into here //top-bottom 8px or 12px, read 1 comment on invsion
-  // padding: var(--fd-menu-title-padding) var(--fd-menu-item-padding-y);
+    //END- GENERAL BEHAVIOUR AND INTERACTIONS
+    text-overflow: ellipsis;
+    min-width: 192px; //192-28 for icon
+    height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
+    // background-color: #FFFFFF;
+    overflow: hidden;
+    // color: #515559; //color is correct in styles itself. REMOVE THIS
+    background-color: transparent;
+    // padding: fd-space("tiny") fd-space("small");
+    padding: 12px 16px; //figure out how to use fd-menu-padding-small or tiny  or such variables from scss into here //top-bottom 8px or 12px, read 1 comment on invsion
+    // padding: var(--fd-menu-title-padding) var(--fd-menu-item-padding-y);
+    color: var(--fd-menu-item-color);
 }
 
 /*
@@ -34,34 +41,38 @@ therefore, space between element and item = 40-28 = 12px, or 6px top and 6px bot
 2. icon padding top-bottom = 8+8=16px
 therefore, between icon and item, space should be (icon padding top-bottom + space between element and item top-bottom) or (8+6 = 14px).
 */
-.fd-menu__addon-before{ //fd-menu__addon-before represents the add-on icon element
+.fd-menu__addon-before {
+    //fd-menu__addon-before represents the add-on icon element
     // padding: 8px 0px 8px 8px;
     width: 28px;
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
     align-items: center;
     margin: 6px 4px 6px 8px;
-    color: #0A6ED1;
+    // color: #0a6ed1;
+    color: var(--fd-color-action);
     display: block;
-    .fd-menu__item{
-        padding-left: 0px;
-    }
-  }
+    // .fd-menu__item {
+    //     padding-left: 0px;
+    // }
+}
 // .fd-menu__addon-before [class*=sap-icon]::before{    //works with or without this
 //       width: 12px;
 //       height: 12px;
 //   }
 
-// .fd-menu--addon-before > .fd-menu__item{  //fd-menu--addon-before represents the container of the menu item
-//     padding-left: 0px;
-//   }
+.fd-menu--addon-before > .fd-menu__item {
+    //fd-menu--addon-before represents the container of the menu item
+    padding-left: 0px;
+}
 
-.fd-menu__addon-after{
+.fd-menu__addon-after {
     width: 28px;
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
     margin: 6px 4px 6px 8px;
-    color: #0A6ED1;
+    // color: #0a6ed1;
+    color: var(--fd-color-action);
     display: block;
     float: right;
     clear: right;
@@ -71,8 +82,17 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     // }
     justify-content: center;
     align-items: center;
-    
 }
-.fd-menu--addon-after > .fd-menu__item{
+.fd-menu--addon-after > .fd-menu__item {
     padding-right: 36px;
+}
+
+.is-disabled,
+.is-disabled:hover,
+.is-disabled:focus,
+.is-disabled:active {
+    color: rgba(81, 85, 89, 0.6);
+    cursor: not-allowed;
+    text-decoration: none;
+    pointer-events: none;
 }
