@@ -28,7 +28,7 @@ import { TabNavDirective } from './tab-nav.directive';
     `
 })
 class TestNavWrapperComponent {
-    @ViewChild(TabNavDirective)
+    @ViewChild(TabNavDirective, { static: false })
     tabNavDirective: TabNavDirective;
 }
 

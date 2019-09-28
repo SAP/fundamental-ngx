@@ -53,15 +53,15 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     subItems: QueryList<MegaMenuSubitemDirective>;
 
     /** @hidden */
-    @ContentChild(MegaMenuLinkDirective)
+    @ContentChild(MegaMenuLinkDirective, { static: false })
     link: MegaMenuLinkDirective;
 
     /** @hidden */
-    @ViewChild('subList')
+    @ViewChild('subList', { static: false })
     subList: ElementRef;
 
     /** @hidden */
-    @ViewChild('parentElement')
+    @ViewChild('parentElement', { static: false })
     parentElement: ElementRef;
 
     /**  Event thrown, when there is some keyboard event detected on mega menu item */

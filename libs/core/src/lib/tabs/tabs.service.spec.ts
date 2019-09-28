@@ -10,9 +10,9 @@ import { TabsService } from './tabs.service';
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate1') anchor1: ElementRef;
-    @ViewChild('testTemplate2') anchor2: ElementRef;
-    @ViewChild('testTemplate3') anchor3: ElementRef;
+    @ViewChild('testTemplate1', { static: true }) anchor1: ElementRef;
+    @ViewChild('testTemplate2', { static: true }) anchor2: ElementRef;
+    @ViewChild('testTemplate3', { static: true }) anchor3: ElementRef;
 }
 
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-wrapper-select',
@@ -18,10 +18,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
     `
 })
 class TestWrapperComponent {
-    @ViewChild(SelectComponent)
+    @ViewChild(SelectComponent, { static: true })
     selectRef: SelectComponent;
 
-    @ViewChild(SelectComponent, { read: ElementRef })
+    @ViewChild(SelectComponent, { read: ElementRef, static: true  })
     selectElement: ElementRef;
 
     wrapperValue: string;
@@ -45,6 +45,7 @@ describe('SelectComponent', () => {
         component = fixture.componentInstance.selectRef;
         element = fixture.componentInstance.selectElement;
         fixture.detectChanges();
+
     });
 
     it('should create', () => {

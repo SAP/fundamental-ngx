@@ -21,7 +21,7 @@ let tabPanelUniqueId: number = 0;
 export class TabPanelComponent {
 
     /** @hidden */
-    @ContentChild(TabTitleDirective, {read: TemplateRef})
+    @ContentChild(TabTitleDirective, { read: TemplateRef, static: false })
     titleTemplate: TemplateRef<any>;
 
     /** The title of the tab header. */

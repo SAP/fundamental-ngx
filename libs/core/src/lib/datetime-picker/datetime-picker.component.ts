@@ -55,11 +55,11 @@ import { FdDatetime } from './models/fd-datetime';
 export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
     /** @hidden Reference to the inner time component. */
-    @ViewChild(TimeComponent)
+    @ViewChild(TimeComponent, { static: false })
     timeComponent: TimeComponent;
 
     /** @hidden Reference to the inner calendar component. */
-    @ViewChild(CalendarComponent)
+    @ViewChild(CalendarComponent, { static: false })
     calendarComponent: CalendarComponent;
 
     /**

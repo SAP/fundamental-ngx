@@ -9,7 +9,7 @@ import { SideNavigationModule } from '../side-navigation.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 }
 

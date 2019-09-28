@@ -9,7 +9,7 @@ import { TileTitleDirective } from './tile-title.directive';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 }
 

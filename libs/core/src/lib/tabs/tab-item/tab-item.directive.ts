@@ -21,5 +21,5 @@ import { TabLinkDirective } from '../tab-link/tab-link.directive';
 export class TabItemDirective {
 
     /** @hidden */
-    @ContentChild(TabLinkDirective) linkItem: TabLinkDirective;
+    @ContentChild(TabLinkDirective, { static: false }) linkItem: TabLinkDirective;
 }

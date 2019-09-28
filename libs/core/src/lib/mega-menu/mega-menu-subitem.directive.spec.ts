@@ -10,7 +10,7 @@ import { MegaMenuSubitemDirective } from './mega-menu-subitem.directive';
 })
 
 export class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 }
 
