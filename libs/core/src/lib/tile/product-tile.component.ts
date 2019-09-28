@@ -20,14 +20,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
         '[class.fd-product-tile-custom]': 'true'
     },
     templateUrl: './product-tile.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styles: [
-        `
-            .fd-product-tile-custom {
-                display: block;
-            }
-        `
-    ]
+    styleUrls: ['./product-tile.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ProductTileComponent extends AbstractFdNgxClass {
     /** Whether the product tile is disabled. */

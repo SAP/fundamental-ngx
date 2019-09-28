@@ -1,14 +1,6 @@
 <ul fd-list>
-    <li fd-list-item>
-        <fd-list-checkbox>List item 1</fd-list-checkbox>
-    </li>
-    <li fd-list-item>
-        <fd-list-checkbox>List item 2</fd-list-checkbox>
-    </li>
-    <li fd-list-item>
-        <fd-list-checkbox>List item 3</fd-list-checkbox>
-    </li>
-    <li fd-list-item>
-        <fd-list-checkbox>List item 4</fd-list-checkbox>
+    <li fd-list-item *ngFor="let num of [1, 2, 3, 4]">
+        <input type="checkbox" fd-form-control [id]="num"/>
+        <label [for]="num" style="padding-left: 10px;">List item {{num}}</label>
     </li>
 </ul>

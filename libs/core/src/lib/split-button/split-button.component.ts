@@ -26,12 +26,13 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
  */
 @Component({
     selector: 'fd-split-button',
-    templateUrl: 'split-button.component.html'
+    templateUrl: 'split-button.component.html',
+    styleUrls: ['./split-button.component.scss']
 })
 export class SplitButtonComponent {
 
     /** @hidden */
-    @ContentChild(SplitButtonActionTitle, {read: TemplateRef})
+    @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
     /** The trigger events that will open/close the popover.

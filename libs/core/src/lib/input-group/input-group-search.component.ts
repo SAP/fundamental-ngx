@@ -11,6 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
     selector: 'fd-input-group-search',
     templateUrl: './input-group-search.component.html',
+    styleUrls: ['./input-group.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -18,7 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupSearchComponent implements ControlValueAccessor {
     /** Whether the input is disabled. */
@@ -37,10 +38,10 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     inputTextValue: string;
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => { };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => { };
 
     /** Get the value of the text input. */
     get inputText() {

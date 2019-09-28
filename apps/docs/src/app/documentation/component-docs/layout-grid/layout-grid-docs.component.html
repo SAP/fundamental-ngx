@@ -1,0 +1,51 @@
+<h2>Default Layout Grid (3 columns)</h2>
+<component-example [name]="'ex1'">
+    <fd-layout-grid-example></fd-layout-grid-example>
+</component-example>
+<code-example [exampleFiles]="defaultLayoutGrid"></code-example>
+
+<separator></separator>
+
+<h2>Layout Grid with <code>[gapSize]</code></h2>
+<description>
+    <code>[gapSize]</code> allows to define the size of gaps between items.
+</description>
+<component-example [name]="'ex2'">
+    <fd-layout-gap-size-example></fd-layout-gap-size-example>
+</component-example>
+<code-example [exampleFiles]="layoutGridGapSize"></code-example>
+
+<separator></separator>
+
+<h2>Layout Grid with <code>[nogap]</code>
+</h2>
+<description>
+    <code>[nogap]="true"</code> will remove the margins between the panels.
+</description>
+<component-example [name]="'ex3'">
+    <fd-layout-grid-nogap-example></fd-layout-grid-nogap-example>
+</component-example>
+<code-example [exampleFiles]="noGapLayoutGrid"></code-example>
+
+<separator></separator>
+
+<h2>Layout Grid with 2 columns</h2>
+<description>
+    The <code>[col]="2"</code> renders a 2 column grid.
+</description>
+<component-example [name]="'ex4'">
+    <fd-layout-columns-example></fd-layout-columns-example>
+</component-example>
+<code-example [exampleFiles]="twoColumnsLayoutGrid"></code-example>
+
+<separator></separator>
+
+<h2>Layout Grid with row and column span</h2>
+<description>
+    To change span size of column spans use <code>fd-layout-grid-span</code> directive, with <code>[columnSpan]</code>
+    input
+</description>
+<component-example [name]="'ex5'">
+    <fd-layout-grid-column-span-example></fd-layout-grid-column-span-example>
+</component-example>
+<code-example [exampleFiles]="columnSpanLayoutGrid"></code-example>

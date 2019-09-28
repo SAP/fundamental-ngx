@@ -28,7 +28,6 @@ import {PaginationModule} from './pagination/pagination.module';
 import {PanelModule} from './panel/panel.module';
 import {PopoverModule} from './popover/popover.module';
 import {ScrollSpyModule} from './scroll-spy/scroll-spy.module';
-import {SearchInputModule} from './search-input/search-input.module';
 import {ShellbarModule} from './shellbar/shellbar.module';
 import {SideNavigationModule} from './side-navigation/side-navigation.module';
 import {SelectModule} from './select/select.module';
@@ -46,6 +45,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {LocalizationEditorModule} from './localizator-editor/localization-editor.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
+import { LayoutGridModule } from './layout-grid/layout-grid.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -69,6 +69,7 @@ import { MegaMenuModule } from './mega-menu/mega-menu.module';
     IdentifierModule,
     InfiniteScrollModule,
     InputGroupModule,
+    LayoutGridModule,
     ListModule,
     LoadingSpinnerModule,
     LocalizationEditorModule,
@@ -80,7 +81,6 @@ import { MegaMenuModule } from './mega-menu/mega-menu.module';
     PanelModule,
     PopoverModule,
     ScrollSpyModule,
-    SearchInputModule,
     SelectModule,
     ShellbarModule,
     SideNavigationModule,

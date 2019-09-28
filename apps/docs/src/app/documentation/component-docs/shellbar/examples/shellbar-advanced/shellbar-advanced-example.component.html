@@ -33,7 +33,12 @@
                                       [productSwitcher]="productSwitcher"
                                       [triggers]="[]"
         ></fd-shellbar-product-switcher>
-        <fd-search-input [inShellbar]="true" [dropdownValues]="searchTerms"></fd-search-input>
+        <fd-combobox [(ngModel)]="searchTerm"
+                     [glyph]="'search'"
+                     [dropdownValues]="searchTerms"
+                     [placeholder]="'Type some text...'"
+                     [maxHeight]="'250px'">
+        </fd-combobox>
     </fd-shellbar-actions>
 </fd-shellbar>
 

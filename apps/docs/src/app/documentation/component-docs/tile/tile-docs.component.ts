@@ -6,13 +6,9 @@ import * as tileActionsSrc from '!raw-loader!./examples/tile-actions-example.com
 import * as tileButtonSrc from '!raw-loader!./examples/tile-button-example.component.html';
 import * as tileDisabledSrc from '!raw-loader!./examples/tile-disabled-example.component.html';
 import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
-import * as tileGridSrc from '!raw-loader!./examples/tile-grid-example.component.html';
-import * as tileGridHelpersSrc from '!raw-loader!./examples/tile-grid-helpers-example.component.html';
 import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
 import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-tile',
@@ -752,20 +748,6 @@ export class TileDocsComponent implements OnInit {
         {
             language: 'html',
             code: tileDisabledSrc
-        }
-    ];
-
-    defaultGrid: ExampleFile[] = [
-        {
-            language: 'html',
-            code: tileGridSrc
-        }
-    ];
-
-    gridWithHelpers: ExampleFile[] = [
-        {
-            language: 'html',
-            code: tileGridHelpersSrc
         }
     ];
 

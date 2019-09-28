@@ -93,6 +93,10 @@ export const API_FILES = {
         'InputGroupNumberComponent',
         'InputGroupSearchComponent'
     ],
+    layoutGrid: [
+        'LayoutGridComponent',
+        'LayoutGridSpanDirective',
+    ],
     list: [
         'ListDirective',
         'ListActionDirective',
@@ -152,7 +156,6 @@ export const API_FILES = {
         'PanelDescriptionComponent',
         'PanelFiltersComponent',
         'PanelFooterComponent',
-        'PanelGridComponent',
         'PanelHeaderComponent',
         'PanelHeadComponent',
         'PanelTitleDirective'
@@ -217,12 +220,14 @@ export const API_FILES = {
         'ProductTileComponent',
         'ProductTileContentComponent',
         'ProductTileMediaComponent',
+        'ProductTileTextComponent',
         'ProductTileTitleComponent',
         'TileComponent',
         'TileActionsComponent',
         'TileContentDirective',
         'TileGridDirective',
         'TileMediaDirective',
+        'TileTextComponent',
         'TileTitleComponent'
     ],
     time: [

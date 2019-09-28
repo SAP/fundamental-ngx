@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 })
 export class ShellbarAdvancedExampleComponent {
 
+    searchTerm: string = '';
+
     productMenuControl = 'Corporate Portal';
 
     productMenuItems = [

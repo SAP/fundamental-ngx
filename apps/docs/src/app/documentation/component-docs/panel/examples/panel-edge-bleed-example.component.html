@@ -1,16 +1,16 @@
 <fd-panel>
     <fd-panel-body [bleed]="true">
         <table fd-table>
-            <thead>
-                <tr>
-                    <th *ngFor="let header of tableHeaders">
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell *ngFor="let header of tableHeaders">
                         {{header}}
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let row of tableData">
-                    <td *ngFor="let cell of row.rowData">
+            <tbody fd-table-body>
+                <tr fd-table-row *ngFor="let row of tableData">
+                    <td fd-table-cell *ngFor="let cell of row.rowData">
                         {{cell}}
                     </td>
                 </tr>

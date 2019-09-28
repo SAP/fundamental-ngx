@@ -1,4 +1,8 @@
 .fd-search-input--closed .fd-popover__popper {
-    width: 300px !important;
-    left: -264px !important;
+  width: 300px !important;
+  left: -264px !important;
+}
+
+fd-shellbar-actions {
+  display: flex;
 }

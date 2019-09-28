@@ -10,7 +10,7 @@ import {
     ContentChild, ViewChildren, ViewChild
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { SearchInputComponent } from '../../search-input/search-input.component';
+import { ComboboxComponent } from '../../combobox/combobox.component';
 import { PopoverComponent } from '../../popover/popover.component';
 import { ShellbarProductSwitcherComponent } from '../shellbar-product-switcher/shellbar-product-switcher.component';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
@@ -90,8 +90,8 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     productSwitcherComponentView: ShellbarProductSwitcherComponent;
 
     /** @hidden */
-    @ContentChild(SearchInputComponent)
-    searchInputComponent: SearchInputComponent;
+    @ContentChild(ComboboxComponent)
+    comboboxComponent: ComboboxComponent;
 
     /** @hidden */
     totalNotifications: number;

@@ -11,6 +11,7 @@ describe('InlineHelpComponent', () => {
         TestBed.configureTestingModule({
             imports: [InlineHelpModule]
         }).compileComponents();
+
     }));
 
     beforeEach(() => {

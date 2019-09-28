@@ -1,0 +1,21 @@
+.component-example__features {
+    display: flex;
+    justify-content: flex-start;
+    .fd-toggle {
+        margin-right: 10px;
+    }
+}
+
+
+rtl-toggle {
+    padding-right: 20px;
+}
+
+.fd-tile-content-example {
+    padding: 16px;
+}
+
+.fd-tile.fd-tile-example-background {
+    background-color: #f7f7f7;
+    //background-color: var(--sapBackgroundColor);
+}

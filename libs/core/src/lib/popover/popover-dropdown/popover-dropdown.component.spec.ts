@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverDropdownComponent } from './popover-dropdown.component';
+import { ButtonModule } from '../../button/button.module';
 
 
 describe('PopoverControlComponent', () => {
@@ -8,6 +9,7 @@ describe('PopoverControlComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [ButtonModule],
             declarations: [PopoverDropdownComponent]
         }).compileComponents();
     }));

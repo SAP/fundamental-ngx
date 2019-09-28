@@ -6,10 +6,12 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { FormsModule } from '@angular/forms';
 
 import { DatePickerComponent } from './date-picker.component';
+import { InputGroupModule } from '../input-group/input-group.module';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [DatePickerComponent],
-    imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule],
+    imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, InputGroupModule, ButtonModule],
     exports: [DatePickerComponent]
 })
 export class DatePickerModule {}

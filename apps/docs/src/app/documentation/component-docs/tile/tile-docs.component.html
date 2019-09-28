@@ -78,36 +78,8 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'tileGrid'" [componentName]="'tile'">
-    Tile Grid
-</fd-docs-section-title>
-<p>A Tile Gird is a collection of <code>fd-tile</code> components in a gird layout. The default is 3-col grid.</p>
-<p>It's also available as a modifier class <code>[col]="3"</code> .</p>
-<component-example [name]="'ex7'">
-    <div class="grid">
-        <fd-tile-grid-example></fd-tile-grid-example>
-    </div>
-</component-example>
-<code-example [exampleFiles]="defaultGrid"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'tileGridHelpers'" [componentName]="'tile'">
-    A Tile Grid with helpers
-</fd-docs-section-title>
-<p>Shows use of helper classes <code>[rowSpan]="numberOfRows"</code> and <code>[columnSpan]="numberOfColumns"</code></p>
-<p>Use <code>[colorAccent]="colorAccentNumber"</code> to add background to the tile.</p>
-<component-example [name]="'ex8'">
-    <div class="grid">
-        <fd-tile-grid-helpers-example></fd-tile-grid-helpers-example>
-    </div>
-</component-example>
-<code-example [exampleFiles]="gridWithHelpers"></code-example>
-
-<separator></separator>
-
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1">
+    <div class="fd-tile docs-component fd-has-background-color-background-1">
         <div class="fd-tile__content">
             <div class="grid">
                 <p>
@@ -115,8 +87,7 @@
                         [disabled]="data.properties.disabled"
                         [isButton]="data.properties.isButton"
                         [colorAccent]="data.properties.colorAccent"
-                        *ngIf="data.properties.type !== 'product'"
-                    >
+                        *ngIf="data.properties.type !== 'product'">
                         <div fd-tile-media *ngIf="data.properties.type === 'media'">
                             <span *ngIf="data.properties.imageUrl.length === 0; else urlTemplate">
                                 <span

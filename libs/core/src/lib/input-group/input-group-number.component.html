@@ -1,16 +1,25 @@
 <div class="fd-input-group fd-input-group--after">
-        <input class=""
-               type="number"
-               name=""
-               [disabled]="disabled"
-               [(ngModel)]="inputText"
-               placeholder="{{placeholder}}" />
-        <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon fd-input-group__addon--after">
-                <button class="fd-input-group__button fd-input-group__button--step-up sap-icon--slim-arrow-up"
-                        [attr.aria-label]="stepUpLabel"
-                        (click)="stepUpClicked()"></button>
-                <button class="fd-input-group__button fd-input-group__button--step-down sap-icon--slim-arrow-down"
-                        [attr.aria-label]="stepDownLabel"
-                        (click)="stepDownClicked()"></button>
-        </span>
+    <input type="number"
+           class="fd-input fd-input-group__default-input"
+           [disabled]="disabled"
+           [(ngModel)]="inputText"
+           placeholder="{{placeholder}}"/>
+    <span fd-input-group-addon [button]="true" [placement]="'after'">
+        <button fd-button
+                [glyph]="'slim-arrow-up'"
+                [fdType]="'half'"
+                [options]="'light'"
+                class="fd-input-group__button"
+                [attr.aria-label]="stepUpLabel"
+                (click)="stepUpClicked()">
+        </button>
+        <button fd-button
+                [glyph]="'slim-arrow-down'"
+                [fdType]="'half'"
+                [options]="'light'"
+                class="fd-input-group__button"
+                [attr.aria-label]="stepDownLabel"
+                (click)="stepDownClicked()">
+        </button>
+    </span>
 </div>

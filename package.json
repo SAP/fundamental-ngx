@@ -65,7 +65,7 @@
     "@types/node": "^12.7.8",
     "core-js": "^2.6.9",
     "focus-trap": "^5.0.2",
-    "fundamental-styles": "^0.1.0",
+    "fundamental-styles": "~0.3.0-rc.1",
     "highlight.js": "^9.15.10",
     "moment": "^2.24.0",
     "ngx-highlightjs": "^3.0.3",

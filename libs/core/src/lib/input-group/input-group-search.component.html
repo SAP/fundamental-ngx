@@ -1,12 +1,20 @@
-<div class="fd-input-group">
-      <input type="search"
-             [disabled]="disabled"
-             [(ngModel)]="inputText"
-             placeholder="{{placeholder}}" />
-      <span class="fd-input-group__addon fd-input-group__addon--button fd-input-group__addon">
-            <button *ngIf="inputText"
-                    class="fd-input-group__button fd-input-group__button--clear"
+<div class="fd-input-group fd-input-group--after">
+    <input type="search"
+           class="fd-input fd-input-group__default-input"
+           [disabled]="disabled"
+           [(ngModel)]="inputText"
+           placeholder="{{placeholder}}"/>
+
+    <span *ngIf="inputText"
+          fd-input-group-addon
+          [button]="true"
+          [placement]="'after'">
+            <button [disabled]="disabled"
+                    [options]="'light'"
+                    fd-button
                     [attr.aria-label]="clearLabel"
-                    (click)="inputText = '';"></button>
-      </span>
+                    [glyph]="'decline'"
+                    (click)="inputText = '';">
+            </button>
+        </span>
 </div>

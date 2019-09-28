@@ -9,7 +9,8 @@
             <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
         </ng-container>
         <ng-container *ngIf="!triggerTemplate">
-            <button class="fd-dropdown__control fd-button fd-select-button-custom"
+            <button class="fd-select-button-custom"
+                    fd-button
                     aria-haspopup="true"
                     [ngClass]="{'fd-button--compact': compact}"
                     [attr.aria-expanded]="isOpen"
@@ -21,6 +22,10 @@
     <fd-popover-body
         class="fd-select-popover-body-custom"
         [style.maxHeight]="maxHeight || (calculatedMaxHeight + 'px')">
-        <ng-content></ng-content>
+        <fd-menu>
+            <ul fd-menu-list>
+                <ng-content></ng-content>
+            </ul>
+        </fd-menu>
     </fd-popover-body>
 </fd-popover>

@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { InputGroupNumberComponent } from './input-group-number.component';
+import { ButtonModule } from '../button/button.module';
+import { InputGroupAddOnDirective } from '@fundamental-ngx/core';
 
 describe('InputGroupNumberComponent', () => {
     let component: InputGroupNumberComponent;
@@ -9,8 +11,8 @@ describe('InputGroupNumberComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [InputGroupNumberComponent]
+            imports: [FormsModule, ButtonModule],
+            declarations: [InputGroupNumberComponent, InputGroupAddOnDirective]
         }).compileComponents();
     }));
 

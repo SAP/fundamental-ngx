@@ -1,10 +1,10 @@
 <fd-localization-editor>
     <fd-localization-editor-main [label]="'EN'">
-        <input fd-localization-editor-input type="text" placeholder="EN">
+        <input fd-form-control fd-localization-editor-input type="text" placeholder="EN">
     </fd-localization-editor-main>
     <li fd-localization-editor-element *ngFor="let field of fields">
         <fd-localization-editor-item [label]="field.label">
-            <input fd-localization-editor-input type="text" placeholder="{{field.placeholder}}">
+            <input fd-form-control fd-localization-editor-input type="text" placeholder="{{field.placeholder}}">
         </fd-localization-editor-item>
     </li>
 </fd-localization-editor>

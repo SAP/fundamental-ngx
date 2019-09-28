@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { TimeObject } from './time-object';
 
 import { TimeComponent } from './time.component';
-import { SimpleChange, SimpleChanges } from '@angular/core';
+import { SimpleChange } from '@angular/core';
+import { ButtonModule } from '../button/button.module';
 
 describe('TimeComponent', () => {
     let component: TimeComponent;
@@ -12,7 +13,7 @@ describe('TimeComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
+            imports: [FormsModule, ButtonModule],
             declarations: [TimeComponent]
         }).compileComponents();
     }));

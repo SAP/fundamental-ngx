@@ -1,21 +1,21 @@
 <div fd-table-responsive-wrapper>
     <table fd-table>
-        <thead>
-        <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-            <th>Column 3</th>
-            <th>Date</th>
-            <th>Type</th>
+        <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Date</th>
+            <th fd-table-cell>Type</th>
         </tr>
         </thead>
-        <tbody>
-        <tr *ngFor="let row of tableRows">
-            <td class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
-            <td>{{row.column2}}</td>
-            <td>{{row.column3}}</td>
-            <td>{{row.date}}</td>
-            <td><fd-icon [glyph]="row.type"></fd-icon></td>
+        <tbody fd-table-body>
+        <tr *ngFor="let row of tableRows" fd-table-row>
+            <td fd-table-cell class="fd-has-font-weight-semi"><a href="#">{{row.column1}}</a></td>
+            <td fd-table-cell>{{row.column2}}</td>
+            <td fd-table-cell>{{row.column3}}</td>
+            <td fd-table-cell>{{row.date}}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
         </tbody>
     </table>

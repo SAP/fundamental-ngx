@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-tree',
@@ -34,7 +31,6 @@ export class TreeDocsComponent implements OnInit {
         type: 'object'
     };
 
-    schema: Schema;
     data: any = {
         properties: {
             headers: ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'],
@@ -167,11 +163,8 @@ export class TreeDocsComponent implements OnInit {
               }
             ]
           }
-        ]`;
-
-    constructor(private schemaFactory: SchemaFactoryService) {
-        this.schema = this.schemaFactory.getComponent('tree');
-    }
+        ]`
+    ;
 
     ngOnInit() {}
 

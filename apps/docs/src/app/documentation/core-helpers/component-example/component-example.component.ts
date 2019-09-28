@@ -1,12 +1,9 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-declare let hljs: any;
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'component-example',
     template: `
-        <div class="fd-tile docs-component docs-component__ fd-has-background-color-background-1" id="{{id}}">
+        <div class="fd-tile docs-component fd-tile-example-background" id="{{id}}">
             <div class="fd-tile__content fd-tile-content-example">
                 <div class="component-example__features">
                     <rtl-toggle [label]="id2"></rtl-toggle>
@@ -18,22 +15,8 @@ declare let hljs: any;
             </div>
         </div>
     `,
-    styles: [
-            `
-            .component-example__features {
-                display: flex;
-                justify-content: flex-start;
-            }
-
-            rtl-toggle {
-                padding-right: 20px;
-            }
-
-            .fd-tile-content-example {
-                padding: 20px;
-            }
-        `
-    ]
+    styleUrls: ['./component-example.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ComponentExampleComponent implements OnInit {
     @Input()
@@ -41,9 +24,6 @@ export class ComponentExampleComponent implements OnInit {
 
     id: string;
     id2: string;
-
-    constructor(private element: ElementRef, private activatedRoute: ActivatedRoute) {
-    }
 
     ngOnInit() {
         this.id = '' + Date.now() + '_wrapper_' + this.name;

@@ -16,7 +16,7 @@ import { Directive } from '@angular/core';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-form-set]',
     host: {
-        class: 'fd-form__set'
+        class: 'fd-form-set'
     }
 })
 export class FormSetDirective {}
