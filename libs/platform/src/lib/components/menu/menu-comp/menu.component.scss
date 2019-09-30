@@ -27,11 +27,13 @@
     padding: 10px 16px; //32px -12 px font-size = 20px /2 =10px top/bottom
 }
 
-.separator-items > * {
-    border-top-style: solid;
-    border-top-width: 1px;
+.fd-menu__list--separated>.fd-menu__list > * > *, //without groups
+.fd-menu__list--separated>.fd-menu__group>.fd-menu__list > * > * //with groups
+ {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
     color: var(--fd-menu-item-separator-color);
-    &:first-child {
-        border-top-width: 0;
-    }
+    // &:first-child {
+    //     border-top-width: 0;
+    // }
 }
