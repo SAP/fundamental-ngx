@@ -1,2 +1,2 @@
 export * from './identifier.module';
-export * from './identifier.directive';
+export * from './identifier.component';

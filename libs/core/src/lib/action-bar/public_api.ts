@@ -1,5 +1,5 @@
 export * from './action-bar.module';
-export * from './action-bar.directive';
+export * from './action-bar.component';
 export * from './action-bar-actions/action-bar-actions.directive';
 export * from './action-bar-description/action-bar-description.directive';
 export * from './action-bar-header/action-bar-header.directive';

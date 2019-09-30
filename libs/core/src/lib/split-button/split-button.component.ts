@@ -1,7 +1,7 @@
 import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { ButtonOptions, ButtonType } from '../button/button.directive';
+import { ButtonOptions, ButtonType } from '../button/button.component';
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with

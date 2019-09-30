@@ -1,4 +1,4 @@
 export * from './badge-label.module';
-export * from './badge.directive';
-export * from './status-label.directive';
-export * from './label.directive';
+export * from './badge-label/badge.component';
+export * from './status-label/status-label.component';
+export * from './label/label.component';
