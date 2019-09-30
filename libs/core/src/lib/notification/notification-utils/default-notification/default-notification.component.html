@@ -20,16 +20,16 @@
         </div>
     </div>
     <fd-notification-footer>
-        <button class="fd-button--light" *ngIf="defaultConfigurationNotification?.moreInfo">
+        <button fd-button [options]="'light'" *ngIf="defaultConfigurationNotification?.moreInfo">
             {{defaultConfigurationNotification?.moreInfo}}
         </button>
         <div fd-notification-actions>
-            <button class="fd-button--positive"
+            <button fd-button [fdType]="'positive'"
                     *ngIf="defaultConfigurationNotification?.approve"
                     (click)="defaultConfigurationNotification?.approveCallback && defaultConfigurationNotification?.approveCallback()">
                 {{defaultConfigurationNotification?.approve}}
             </button>
-            <button class="fd-button--negative"
+            <button fd-button [fdType]="'negative'"
                     *ngIf="defaultConfigurationNotification?.cancel"
                     (click)="defaultConfigurationNotification?.cancelCallback && defaultConfigurationNotification.cancelCallback()">
                 {{defaultConfigurationNotification?.cancel}}

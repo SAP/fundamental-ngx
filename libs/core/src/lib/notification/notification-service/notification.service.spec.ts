@@ -10,7 +10,7 @@ import { NotificationModule, NotificationRef, NotificationService } from '@funda
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({

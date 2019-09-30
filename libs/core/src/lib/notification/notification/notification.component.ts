@@ -47,7 +47,7 @@ export class NotificationComponent implements AfterViewInit {
     @Input()
     type: NotificationType;
 
-    @ViewChild('vc', { read: ViewContainerRef })
+    @ViewChild('vc', { read: ViewContainerRef, static: false })
     containerRef: ViewContainerRef;
 
     id: string;
@@ -70,9 +70,9 @@ export class NotificationComponent implements AfterViewInit {
 
     hasBackdrop: boolean = true;
 
-    modalPanelClass: string = '';
+    notificationPanelClass: string = '';
 
-    private componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
+    public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
@@ -94,7 +94,7 @@ export class NotificationComponent implements AfterViewInit {
     }
 
     @HostListener('keyup', ['$event'])
-    closeModalEsc(event: KeyboardEvent): void {
+    closeNotificationEsc(event: KeyboardEvent): void {
         if (this.escKeyCloseable && event.key === 'Escape') {
             this.notificationRef.dismiss('escape');
         }

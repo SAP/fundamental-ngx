@@ -9,7 +9,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 }
 describe('NotificationActionsDirective', () => {

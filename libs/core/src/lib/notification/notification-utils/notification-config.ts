@@ -5,7 +5,7 @@ import { NotificationSize, NotificationType } from '../notification/notification
 
 export class NotificationConfig {
 
-    /** Id for the modal component. If omitted, a unique one is generated. */
+    /** Id for the notification component. If omitted, a unique one is generated. */
     id?: string;
 
     /** size of notification: 's' | 'm' */
@@ -14,13 +14,13 @@ export class NotificationConfig {
     /** Type of notification: 'success' | 'warning' | 'information' | 'error' */
     type?: NotificationType;
 
-    /** Aria label for the modal component element. */
+    /** Aria label for the notification component element. */
     ariaLabel?: string = null;
 
-    /** Id of the element that labels the modal. */
+    /** Id of the element that labels the notification. */
     ariaLabelledBy?: string = null;
 
-    /** Id of the element that describes the modal. */
+    /** Id of the element that describes the notification. */
     ariaDescribedBy?: string = null;
 
     /** The container that the notification is appended to. By default, it is appended to the body. */

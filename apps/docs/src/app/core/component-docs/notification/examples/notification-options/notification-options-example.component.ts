@@ -18,7 +18,7 @@ import { NotificationService } from '@fundamental-ngx/core';
 })
 export class NotificationOptionsExampleComponent {
 
-    @ViewChild('vc', { read: ViewContainerRef })
+    @ViewChild('vc', { read: ViewContainerRef, static: false })
     ref: ViewContainerRef;
 
     data = {

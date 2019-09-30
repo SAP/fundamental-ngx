@@ -17,7 +17,7 @@
     The NotificationService allows passing in a template reference as the content of the notification. Add <code>let-notification</code> to
     the template element to access the injected <code>NotificationRef</code>.
     <br/><br/>
-    The example also features a confirmation modal. Subscribe to <code>afterClosed</code> to access the returned value.
+    The example also features a confirmation notification. Subscribe to <code>afterClosed</code> to access the returned value.
     A dismissal will trigger an error on the observable, similar to rejecting a promise.
 </description>
 <component-example [name]="'ex2'">
@@ -29,7 +29,7 @@
 
 <h2>Component as Content</h2>
 <description>
-    A component type can be passed to the NotificationService open method as the content of the modal. Inject
+    A component type can be passed to the NotificationService open method as the content of the notification. Inject
     <code>NotificationRef</code> inside the content component to access methods such as close and dismiss.
 </description>
 <component-example [name]="'ex3'">

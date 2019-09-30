@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationHeaderComponent } from './notification-header.component';
+import { ButtonModule } from '@fundamental-ngx/core';
 
 describe('NotificationHeaderComponent', () => {
     let component: NotificationHeaderComponent;
@@ -8,6 +9,7 @@ describe('NotificationHeaderComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [ButtonModule],
             declarations: [NotificationHeaderComponent]
         })
             .compileComponents();
@@ -23,3 +25,4 @@ describe('NotificationHeaderComponent', () => {
         expect(component).toBeTruthy();
     });
 });
+

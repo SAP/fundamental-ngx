@@ -16,9 +16,10 @@ import { NotificationTextDirective } from './directives/notification-text.direct
 import { NotificationActionsDirective } from './directives/notification-actions.directive';
 import { NotificationService } from './notification-service/notification.service';
 import { DefaultNotificationComponent } from './notification-utils/default-notification/default-notification.component';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, ButtonModule],
     declarations: [
         NotificationGroupComponent,
         NotificationComponent,

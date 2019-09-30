@@ -1,11 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationComponent } from './notification.component';
-import { ModalService, NotificationDefault, NotificationModule, NotificationService } from '@fundamental-ngx/core';
+import { NotificationService } from '../notification-service/notification.service';
+import { ButtonModule, NotificationDefault } from '@fundamental-ngx/core';
+import { NotificationModule } from '../notification.module';
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ModalComponent } from '../../modal/modal.component';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 
 
@@ -19,12 +20,12 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({
     declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, NotificationModule],
+    imports: [CommonModule, BrowserModule, NotificationModule, ButtonModule],
     entryComponents: [TemplateTestComponent]
 })
 class TestModule {}
@@ -37,7 +38,7 @@ describe('NotificationComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            providers: [NotificationService, DynamicComponentService]
+            providers: [DynamicComponentService, NotificationService]
         })
             .compileComponents();
     }));
