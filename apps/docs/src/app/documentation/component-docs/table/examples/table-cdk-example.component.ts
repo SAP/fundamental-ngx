@@ -35,7 +35,7 @@ const CELL_DATA: CellData[] = [
     ]
 })
 export class TableCdkExampleComponent {
-    @ViewChild('table') table: CdkTable<{}[]>;
+    @ViewChild('table', {static: false }) table: CdkTable<{}[]>;
 
     displayedColumns: string[] = ['column1', 'column2', 'column3', 'date', 'type'];
     dataSource = CELL_DATA;

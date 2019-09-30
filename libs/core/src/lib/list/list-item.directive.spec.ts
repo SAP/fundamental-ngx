@@ -8,7 +8,7 @@ import { ListModule } from './list.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', {static: true })
     ref: ElementRef;
 }
 

@@ -43,7 +43,7 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
     /** @hidden */
-    @ViewChild(PopoverComponent)
+    @ViewChild(PopoverComponent, { static: false })
     popoverRef: PopoverComponent;
 
     /** @hidden */

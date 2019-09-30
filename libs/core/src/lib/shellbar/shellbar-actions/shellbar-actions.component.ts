@@ -74,23 +74,23 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarProductSwitcherComponent)
+    @ContentChild(ShellbarProductSwitcherComponent, { static: false })
     productSwitcherComponent: ShellbarProductSwitcherComponent;
 
     /** @hidden */
-    @ContentChild(ShellbarUserMenuComponent)
+    @ContentChild(ShellbarUserMenuComponent, { static: false })
     userComponent: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarUserMenuComponent)
+    @ViewChild(ShellbarUserMenuComponent, { static: false })
     userComponentView: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarProductSwitcherComponent)
+    @ViewChild(ShellbarProductSwitcherComponent, { static: false })
     productSwitcherComponentView: ShellbarProductSwitcherComponent;
 
     /** @hidden */
-    @ContentChild(ComboboxComponent)
+    @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */

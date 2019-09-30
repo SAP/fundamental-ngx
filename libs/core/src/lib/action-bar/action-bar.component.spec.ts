@@ -8,7 +8,7 @@ import { ActionBarModule } from './action-bar.module';
     `
 })
 class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef })
+    @ViewChild('componentElement', { read: ElementRef, static: false })
     ref: ElementRef;
 }
 

@@ -26,7 +26,7 @@ let toggleUniqueId: number = 0;
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
-    @ViewChild('input')
+    @ViewChild('input', { static: false })
     inputElement: ElementRef<HTMLInputElement>;
 
     /**

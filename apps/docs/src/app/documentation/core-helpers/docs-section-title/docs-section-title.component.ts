@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, TemplateRef } from '@angular/core';
 import { Renderer } from 'marked';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     private idFromUrl: any;
 
-    @ViewChild('title', { read: ElementRef }) sectionTitle: ElementRef;
+    @ViewChild('title', { read: ElementRef, static: false  }) sectionTitle: ElementRef;
 
     @Input() id: string = '';
 

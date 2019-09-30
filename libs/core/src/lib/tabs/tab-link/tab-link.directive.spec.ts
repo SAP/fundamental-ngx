@@ -8,7 +8,7 @@ import { TabsModule } from '../tabs.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 }
 

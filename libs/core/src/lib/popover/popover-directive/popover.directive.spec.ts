@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverDirective } from './popover.directive';
-import { Component, NgModule, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, NgModule, ViewChild } from '@angular/core';
 import { PopoverModule } from '../popover.module';
 
 @Component({
@@ -10,7 +10,7 @@ import { PopoverModule } from '../popover.module';
     `
 })
 class TestTemplateComponent {
-    @ViewChild(PopoverDirective)
+    @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
 
     isOpen = false;
@@ -22,7 +22,7 @@ class TestTemplateComponent {
     `
 })
 class TestStringComponent {
-    @ViewChild(PopoverDirective)
+    @ViewChild(PopoverDirective, { static: true })
     popoverDirective: PopoverDirective;
 
     isOpen = false;
@@ -44,6 +44,8 @@ describe('PopoverDirective', () => {
 
         fixtureTemplate = TestBed.createComponent(TestTemplateComponent);
         fixtureString = TestBed.createComponent(TestStringComponent);
+        fixtureTemplate.detectChanges();
+        fixtureString.detectChanges();
     });
 
     it('should create', () => {
@@ -78,26 +80,21 @@ describe('PopoverDirective', () => {
     });
 
     it('should two-way bind isOpen', () => {
-        spyOn(fixtureTemplate.componentInstance.popoverDirective, 'open').and.callThrough();
         fixtureTemplate.componentInstance.isOpen = true;
         fixtureTemplate.detectChanges();
         expect(fixtureTemplate.componentInstance.popoverDirective.isOpen).toBe(true);
-        expect(fixtureTemplate.componentInstance.popoverDirective.open).toHaveBeenCalled();
-
         fixtureTemplate.componentInstance.popoverDirective.close();
         fixtureTemplate.detectChanges();
         expect(fixtureTemplate.componentInstance.isOpen).toBe(false)
     });
 
     it('should support multiple triggers', () => {
-        spyOn<any>(fixtureTemplate.componentInstance.popoverDirective, 'addTriggerListeners').and.callThrough();
         fixtureTemplate.componentInstance.popoverDirective.triggers = ['click', 'hover'];
         fixtureTemplate.componentInstance.popoverDirective['eventRef'] = [];
-        fixtureTemplate.componentInstance.popoverDirective.open();
+        fixtureTemplate.componentInstance.popoverDirective.ngOnInit();
         fixtureTemplate.detectChanges();
 
         expect(fixtureTemplate.componentInstance.popoverDirective['eventRef'].length).toBe(2);
-        expect((fixtureTemplate.componentInstance.popoverDirective as any).addTriggerListeners).toHaveBeenCalled();
     });
 
     it('should support string content', () => {

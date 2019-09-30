@@ -17,7 +17,7 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({
@@ -104,6 +104,7 @@ describe('AlertComponent', () => {
     it('should persist', fakeAsync(() => {
         service.open(TemplateTestComponent, {duration: -1});
         service['alerts'][0].instance.ngOnInit();
+        fixture.detectChanges();
         service['alerts'][0].instance.ngAfterViewInit();
         fixture.detectChanges();
         tick(200);
@@ -115,6 +116,7 @@ describe('AlertComponent', () => {
     it('should support visibleTime', fakeAsync(() => {
         service.open(TemplateTestComponent, {duration: 10});
         service['alerts'][0].instance.ngOnInit();
+        fixture.detectChanges();
         service['alerts'][0].instance.ngAfterViewInit();
         fixture.detectChanges();
         expect(service.hasOpenAlerts()).toBe(true);

@@ -32,7 +32,7 @@ import focusTrap from 'focus-trap';
 })
 export class PopoverContainer implements AfterViewInit, OnDestroy {
 
-    @ViewChild('vc', { read: ViewContainerRef })
+    @ViewChild('vc', { read: ViewContainerRef, static: false })
     containerRef: ViewContainerRef;
 
     @HostBinding('class.fd-popover__popper--no-arrow')

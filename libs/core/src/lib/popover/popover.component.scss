@@ -10,3 +10,11 @@
         position: static;
     }
 }
+
+//TODO to be reviewed and if needed to be moved in fd-styles
+fd-popover-body {
+    .fd-menu {
+        width: auto;
+        display: block;
+    }
+}

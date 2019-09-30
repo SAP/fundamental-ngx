@@ -9,7 +9,7 @@ import { ActionBarModule } from '../action-bar.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement')
+    @ViewChild('directiveElement', { static: false })
     ref: ElementRef;
 }
 

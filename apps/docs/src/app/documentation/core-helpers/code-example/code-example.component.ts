@@ -1,8 +1,19 @@
-import { Component, ElementRef, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    OnInit,
+    QueryList,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
 import { height } from '../../utilities/animations/collapse';
 import { AlertService } from '@fundamental-ngx/core';
+import hljs from 'highlight.js/lib'
 
 @Component({
     selector: 'code-example',
@@ -11,7 +22,9 @@ import { AlertService } from '@fundamental-ngx/core';
     encapsulation: ViewEncapsulation.None,
     animations: [height({time: 200})]
 })
-export class CodeExampleComponent implements OnInit {
+export class CodeExampleComponent implements OnInit, AfterViewInit {
+
+    @ViewChildren('code') codeElements: QueryList<ElementRef>;
 
     /**
      * List of files to display in this code example.
@@ -45,5 +58,10 @@ export class CodeExampleComponent implements OnInit {
     @HostListener('window:resize', ['$event'])
     onResize() {
         this.smallScreen = window.innerWidth <= 768;
+    }
+
+    ngAfterViewInit() {
+        /** Highlight.js init */
+        this.codeElements.forEach(element => hljs.highlightBlock(element.nativeElement));
     }
 }

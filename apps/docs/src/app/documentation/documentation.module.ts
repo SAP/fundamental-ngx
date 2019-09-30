@@ -318,7 +318,6 @@ import { DatetimeFormatExampleComponent } from './component-docs/datetime-picker
 import { DatePickerDisabledExampleComponent } from './component-docs/date-picker/examples/date-picker-disabled-example.component';
 import { DatetimeDisabledExampleComponent } from './component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
-import { HighlightModule } from 'ngx-highlightjs';
 import { SplitButtonHeaderComponent } from './component-docs/split-button/split-button-header/split-button-header.component';
 import {
     ButtonSplitOptionsExampleComponent,
@@ -766,8 +765,7 @@ import { ShellbarAdvancedExampleComponent } from './component-docs/shellbar/exam
         FundamentalNgxCoreModule,
         HttpClientModule,
         CdkTableModule,
-        DragDropModule,
-        HighlightModule
+        DragDropModule
     ],
     providers: [CopyService, ApiDocsService]
 })
