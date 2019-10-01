@@ -1,21 +1,9 @@
-@import "~fundamental-styles/dist/input-group";
-@import "~fundamental-styles/dist/input";
-@import "~fundamental-styles/dist/textarea";
-
-input.fd-input-group__default-input {
-    width: auto;
-}
-
-textarea.fd-input-group__default-input {
-    width: auto;
-}
-
-input[fd-input-group-input] {
-    width: auto;
-}
+@import '~fundamental-styles/dist/input-group';
+@import '~fundamental-styles/dist/input';
+@import '~fundamental-styles/dist/textarea';
 
 fd-input-group {
-    .fd-input-group__addon--button.fd-input-group__addon--textarea > *{
+    .fd-input-group__addon--button.fd-input-group__addon--textarea > * {
         max-height: 100%;
         height: 100%;
     }
