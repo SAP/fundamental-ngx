@@ -1,5 +1,7 @@
 export interface ExampleFile {
-    code: string;
+    code: {
+        default: string
+    };
     name?: string;
     language?: string;
 }

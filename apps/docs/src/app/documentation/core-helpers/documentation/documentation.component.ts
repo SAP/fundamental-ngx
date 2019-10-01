@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     templateUrl: './documentation.component.html'
 })
 export class DocumentationComponent implements OnInit {
-    @ViewChild('content', {static: false }) contentElRef: ElementRef;
+    @ViewChild('content', {static: true }) contentElRef: ElementRef;
 
     guides = [
         { url: 'home', name: 'Home' },

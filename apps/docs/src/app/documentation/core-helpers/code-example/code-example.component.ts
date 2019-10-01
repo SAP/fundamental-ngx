@@ -47,7 +47,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     }
 
     copyText(): void {
-        this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code);
+        this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code.default);
         this.alertService.open('Code copied!', {type: 'success', duration: 5000});
     }
 
