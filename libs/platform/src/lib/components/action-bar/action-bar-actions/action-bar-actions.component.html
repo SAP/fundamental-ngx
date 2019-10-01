@@ -22,18 +22,20 @@
                 aria-haspopup="true"
                 [fdType]="'light'"
                 [glyph]="'overflow'"
+                (click)="focusFirst()"
             ></button>
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu>
                 <ul fd-menu-list>
                     <li
-                        role="button"
-                        data-tag="menu-item__button"
-                        *ngFor="let menu of menuItems"
                         fd-menu-item
+                        *ngFor="let menu of menuItems; let i = index"
                         (click)="menu.editTitle ? onRenameClick() : onItemClick(menu)"
-                        [attr.title]="menu.label"
+                        (keydown)="handleKeyPress($event, i)"
+                        tabIndex="0"
+                        role="button"
+                        class="menu-item__button"
                     >
                         {{ menu.label }}
                     </li>
