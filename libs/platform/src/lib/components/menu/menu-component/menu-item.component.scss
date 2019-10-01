@@ -1,27 +1,23 @@
 .fd-menu__item {
     //BEGIN- GENERAL BEHAVIOUR AND INTERACTIONS. Hover, focus, active should always be in that order.
-    // &:hover {
-    //     //hover state
-    //     font-weight: bold;
-    //     // background-color: #fafafa;
-    //     background-color: var(--fd-color-background-hover);
-    // }
     &:hover {
-        //don't apply hover properties on only label item, we need it over entire item
-        background-color: transparent;
+        //hover state
+        font-weight: bold;
+        // background-color: #fafafa;
+        background-color: var(--fd-color-background-hover);
     }
-    // &:focus {
-    //     //selected state
-    //     outline: var(--fd-color-action-focus) dotted 1px;
-    //     // background-color: rgba(10, 110, 209, 0.07);
-    //     background-color: var(--fd-color-action-hover);
-    // }
-    // &:hover:focus {
-    //     //selected hover, combining when focused state is hovered upon
-    //     font-weight: bold;
-    //     // background-color: rgba(10, 110, 209, 0.1);
-    //     background-color: var(--fd-color-action-selected);
-    // }
+    &:focus {
+        //selected state
+        outline: var(--fd-color-action-focus) dotted 1px;
+        // background-color: rgba(10, 110, 209, 0.07);
+        background-color: var(--fd-color-action-hover);
+    }
+    &:hover:focus {
+        //selected hover, combining when focused state is hovered upon
+        font-weight: bold;
+        // background-color: rgba(10, 110, 209, 0.1);
+        background-color: var(--fd-color-action-selected);
+    }
     //END- GENERAL BEHAVIOUR AND INTERACTIONS
     text-overflow: ellipsis;
     min-width: 192px; //192-28 for icon
@@ -34,14 +30,6 @@
     padding: 12px 16px; //figure out how to use fd-menu-padding-small or tiny  or such variables from scss into here //top-bottom 8px or 12px, read 1 comment on invsion
     // padding: var(--fd-menu-title-padding) var(--fd-menu-item-padding-y);
     color: var(--fd-menu-item-color);
-}
-
-.fd-menu__item[aria-selected='true'] {
-    background-color: transparent;
-    // &:hover {
-    //     font-weight: bold;
-    //     background-color: transparent;
-    // }
 }
 
 /*
@@ -108,40 +96,13 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
 .is-disabled:hover,
 .is-disabled:focus,
 .is-disabled:active {
+    color: rgba(81, 85, 89, 0.6);
     cursor: not-allowed;
     text-decoration: none;
     pointer-events: none;
-    .fd-menu__item,
-    .fd-menu__addon-before,
-    .fd-menu__addon-after {
-        color: rgba(81, 85, 89, 0.6);
-    }
 }
 
 //inline-flex cannot be used in conjunction with overflow:hidden. This is a workaround to have both.
 .fd-menu__label-truncation {
     display: inline-flex;
-}
-
-/**truncation not happening */
-.selected-item-state {
-    background-color: var(--fd-color-background-selected);
-    &:hover {
-        .fd-menu__item {
-            font-weight: bold;
-        }
-        background-color: var(--fd-color-background-selected-hover);
-    }
-}
-
-.normal-item-state {
-    &:hover {
-        //hover state
-        // font-weight: bold;
-        // background-color: #fafafa;
-        background-color: var(--fd-color-background-hover);
-        .fd-menu__item {
-            font-weight: bold;
-        }
-    }
 }

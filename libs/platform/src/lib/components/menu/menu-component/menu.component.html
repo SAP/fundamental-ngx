@@ -2,12 +2,11 @@
     class="fd-menu"
     data-tag="menu"
     [ngClass]="{
-        'fd-menu__list--separated': showSeparator,
-        'scrolling-menu': isScrolling
+        'fd-menu__list--separated': separator,
+        'scrolling-menu': scrolling
     }"
     [ngStyle]="{ height: scrollLimit * 40 + 8 + 'px', width: width }"
 >
-    <!-- todo handle null width to default to 100% -->
     <ng-container *ngFor="let group of groups; let i = index">
         <ng-container
             *ngTemplateOutlet="
@@ -24,10 +23,9 @@
         <!-- 
           separator class in ul does not make any difference
           do not add , 'fd-menu--addon-before': isIconPresent() in <ul> it simply does 32px padding  -->
-        <ng-container *ngFor="let item of group.groupItems; let j = index">
+        <ng-container *ngFor="let item of group.children; let j = index">
             <!-- making component of {{ item.label }} value of i {{ i }} and j {{ j }} unique index is
-            {{ i * group.groupItems.length + j }} -->
-            <!-- value of j:{{ j }} -->
+            {{ i * group.children.length + j }} -->
             <fdp-menu-item
                 [label]="item.label"
                 [selectable]="item.selectable"
@@ -36,14 +34,13 @@
                 [secondaryIcon]="item.secondaryIcon"
                 [item]="item"
                 [group]="group"
-                [index]="item.id"
-                [separated]="showSeparator"
+                [index]="j"
+                [separated]="separator"
                 [disabled]="item.disabled"
                 [customLabel]="item.customLabel || group.customLabel"
                 [itemWidth]="width"
-                [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
                 (itemClick)="onItemClick(item, group)"
-                tabindex="0"
+                (keyup)="onTargetKeyup($event)"
             >
             </fdp-menu-item>
         </ng-container>
@@ -62,10 +59,9 @@
         </h3>
         <ul class="fd-menu__list" data-tag="menu__list">
             <!-- not having separator here fails the test, but no diff to ui. so fix the test instead -->
-            <ng-container *ngFor="let item of group.groupItems; let j = index">
+            <ng-container *ngFor="let item of group.children; let j = index">
                 <!-- making component of {{ item.label }} value of i {{ i }} and j {{ j }} unique index is
-                {{ i * group.groupItems.length + j }} changing index to this will fail tests-->
-                <!-- value of j:{{ j }} -->
+                {{ i * group.children.length + j }} -->
                 <fdp-menu-item
                     [label]="item.label"
                     [selectable]="item.selectable"
@@ -74,14 +70,13 @@
                     [secondaryIcon]="item.secondaryIcon"
                     [item]="item"
                     [group]="group"
-                    [index]="item.id"
-                    [separated]="showSeparator"
+                    [index]="j"
+                    [separated]="separator"
                     [disabled]="item.disabled"
                     [itemWidth]="width"
-                    [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
                     [customLabel]="item.customLabel || group.customLabel"
                     (itemClick)="onItemClick(item, group)"
-                    tabindex="0"
+                    (keyup)="onTargetKeyup($event)"
                 ></fdp-menu-item>
             </ng-container>
         </ul>
