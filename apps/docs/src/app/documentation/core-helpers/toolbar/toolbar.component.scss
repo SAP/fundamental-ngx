@@ -63,6 +63,15 @@
             display: none;
         }
     }
+
+    &__lib {
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        @media only screen and (max-width:640px) {
+            display: none;
+        }
+    }
 }
 
 .logo-github {

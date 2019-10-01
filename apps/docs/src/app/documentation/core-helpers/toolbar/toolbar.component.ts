@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -12,4 +13,12 @@ export class ToolbarComponent {
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     version: string = environment.version;
+
+    public isOnCore: boolean = false;
+
+    constructor (
+        private routerService: Router
+    ) {
+        this.isOnCore = this.routerService.url && this.routerService.url.includes('core/');
+    }
 }
