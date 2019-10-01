@@ -1,22 +1,55 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SearchInput2Component } from './search-input.component';
+import { SearchInput2Component, SearchInput, SuggestionItem, SearchInputSize, ValueLabelItem } from './search-input.component';
 import { Component, ViewChild } from '@angular/core';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { ComboboxComponent, ComboboxModule, PopoverModule, MenuModule } from '@fundamental-ngx/core';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'fp-test',
+    selector: 'fdp-test',
     template: `
-        <fp-search-input #component [placeholder]="placeholder" [dropdownValues]="dropdownValues"> </fp-search-input>
+        <fdp-search-input #component
+            [placeholder]="placeholder"
+            [suggestions]="suggestions"
+            [categories]="categories"
+            [categoryLabel]="categoryLabel"
+            [hideCategoryLabel]="hideCategoryLabel"
+            [size]="size"
+            [isLoading]="isLoading"
+            (inputChange)="onInputChange($event)"
+            (searchSubmit)="onSearchSubmit($event)"> </fdp-search-input>
     `
 })
 class TestComponent {
     @ViewChild('component') component: SearchInput2Component;
     public placeholder: string;
-    public dropdownValues: any[];
-    constructor() {}
+    public suggestions: SuggestionItem[];
+    public categories: ValueLabelItem[];
+    public categoryLabel: string;
+    public hideCategoryLabel = false;
+    public size: SearchInputSize;
+    public isLoading = false;
+
+    public inputValue: SearchInput;
+    public submitValue: SearchInput;
+
+    constructor() { }
+
+    onInputChange($event) {
+        this.inputValue = $event;
+    }
+
+    onSearchSubmit($event) {
+        this.submitValue = $event;
+    }
 }
+
+const CATEGORIES: ValueLabelItem[] = [
+    { value: 'Fruits', label: 'Fruits' },
+    { value: 'Vegetables', label: 'Vegetables' },
+    { value: 'Nuts', label: 'Nuts' }
+];
 
 describe('SearchInputComponent', () => {
     let component: SearchInput2Component;
@@ -26,7 +59,7 @@ describe('SearchInputComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, SearchInput2Component],
-            imports: [FormsModule, FundamentalNgxCoreModule]
+            imports: [CommonModule, FormsModule, ComboboxModule, PopoverModule, MenuModule]
         }).compileComponents();
     }));
 
@@ -52,20 +85,208 @@ describe('SearchInputComponent', () => {
     it('should allow "dropdown" string list to be set', () => {
         // set type ahead list
         host.placeholder = 'Search';
-        host.dropdownValues = ['Apple', 'Banana', 'Carrot'];
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         fixture.detectChanges();
+
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        expect(combobox.dropdownValues.length).toBe(3);
+        expect(combobox.dropdownValues[0]).toBe('Apple');
+        expect(combobox.dropdownValues[1]).toBe('Banana');
+        expect(combobox.dropdownValues[2]).toBe('Carrot');
+    });
+
+    it('should show the "category dropdown" if "categories" is set with one or more items', () => {
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.categories = CATEGORIES;
+        host.categoryLabel = 'Category';
+        fixture.detectChanges();
+
+        const categoryDropdown = fixture.debugElement.queryAll(By.css('.search-input__category-dropdown'));
+        expect(categoryDropdown.length).toBe(1);
+
+        const categoryLabel = fixture.debugElement.query(By.css('.search-input__category-label'));
+        expect(categoryLabel.nativeElement.textContent).toBe('Category');
+    });
+
+    it('should allow the user to set the text of the category label', () => {
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.categories = CATEGORIES;
+        host.categoryLabel = 'Categoría';
+        fixture.detectChanges();
+
+        const categoryLabel = fixture.debugElement.query(By.css('.search-input__category-label'));
+        expect(categoryLabel.nativeElement.textContent).toBe('Categoría');
+    });
+
+    it('should allow the user to hide the category label', () => {
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.categories = CATEGORIES;
+        host.categoryLabel = 'Category';
+        host.hideCategoryLabel = true;
+        fixture.detectChanges();
+
+        const categoryLabel = fixture.debugElement.queryAll(By.css('.search-input__category-label'));
+        expect(categoryLabel.length).toBe(0);
+    });
+
+    it('should not show the "category dropdown" if "categoryValues" is set with no items', () => {
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.categories = [];
+        fixture.detectChanges();
+
+        const categoryDropdown = fixture.debugElement.queryAll(By.css('.search-input__category-dropdown'));
+        expect(categoryDropdown.length).toBe(0);
+    });
+
+    it('should change the category label to the selected category', () => {
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.categories = CATEGORIES;
+        host.categoryLabel = 'Category';
+        fixture.detectChanges();
+
+        component.setCurrentCategory(CATEGORIES[2]);
+        fixture.detectChanges();
+
+        expect(component.currentCategory).toEqual(CATEGORIES[2]);
+        let categoryLabel = fixture.debugElement.query(By.css('.search-input__category-label'));
+        expect(categoryLabel.nativeElement.textContent).toBe('Nuts');
+
+        component.setCurrentCategory(CATEGORIES[1]);
+        fixture.detectChanges();
+
+        expect(component.currentCategory).toEqual(CATEGORIES[1]);
+        categoryLabel = fixture.debugElement.query(By.css('.search-input__category-label'));
+        expect(categoryLabel.nativeElement.textContent).toBe('Vegetables');
+    });
+
+    it('should close dropdown on select of item', () => {
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        expect(combobox.closeOnSelect).toBeTruthy();
+    });
+
+    it('should allow user to set the size of the component', () => {
+        let combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        expect(combobox.compact).toBeFalsy();
+
+        host.size = 'small';
+        fixture.detectChanges();
+        combobox = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        expect(combobox.compact).toBeTruthy();
+    });
+
+    it('should open "dropdown" on keyboard entry', () => {
+        // set type ahead list
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        fixture.detectChanges();
+
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
 
         // simulate keyboard entry
-        const textInput = fixture.debugElement.query(By.css('input'));
         textInput.nativeElement.value = 'a';
-        const keyPress = new KeyboardEvent('keyup', {
-            key: 'a'
-        });
-        textInput.nativeElement.dispatchEvent(keyPress);
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        const test = fixture.debugElement.query(By.css('fd-popover-container'));
-        console.log(test.nativeElement);
-        // expect(listItems[0].nativeElement.textContent).toBe('Apple');
+        expect(combobox.isOpen).toBeTruthy();
     });
+
+    it('should emit an "inputChange" event when user types in the input field', () => {
+        // set type ahead list
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        fixture.detectChanges();
+
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+
+        // simulate input entry
+        textInput.nativeElement.value = 'a';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        textInput.triggerEventHandler('keyup', { key: 'a' });
+        fixture.detectChanges();
+
+        expect(host.inputValue).toEqual({ text: 'a', category: null });
+    });
+
+    it('should emit a "inputChange" event when user changes the category', () => {
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.categories = CATEGORIES;
+        host.categoryLabel = 'Category';
+        fixture.detectChanges();
+
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+
+        // simulate input entry
+        textInput.nativeElement.value = 'a';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        textInput.triggerEventHandler('keyup', { key: 'a' });
+        fixture.detectChanges();
+
+        component.setCurrentCategory({ value: 'Nuts', label: 'Nuts' });
+        fixture.detectChanges();
+
+        expect(host.inputValue).toEqual({ text: 'a', category: 'Nuts' });
+    });
+
+    it('should emit a "searchSubmit" event when user selects from dropdown', () => {
+
+        // set type ahead list
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        fixture.detectChanges();
+
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+
+        // simulate input entry
+        textInput.nativeElement.value = 'a';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        textInput.triggerEventHandler('keyup', { key: 'a' });
+        fixture.detectChanges();
+
+        // select second item
+        combobox.onMenuKeydownHandler(new KeyboardEvent('keydown', {
+            code: 'Enter'
+        }), 1);
+        fixture.detectChanges();
+        expect(host.submitValue).toEqual({ text: 'Banana', category: null });
+    });
+
+    it('should emit a "searchSubmit" event when user clicks keyboard enter in input field', () => {
+
+        // set type ahead list
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        fixture.detectChanges();
+
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+
+        // simulate input entry
+        textInput.nativeElement.value = 'appl';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        textInput.triggerEventHandler('keydown', { code: 'Enter' });
+        fixture.detectChanges();
+
+        expect(host.submitValue).toEqual({ text: 'appl', category: null });
+    });
+
+    it('should be able to be put into "isLoading" state', () => {
+        // set up component
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.isLoading = true;
+        fixture.detectChanges();
+
+        const wrapper = fixture.debugElement.query(By.css('.search-input'));
+        expect(wrapper.classes['is-loading']).toBeTruthy();
+    });
+
 });

@@ -1,0 +1,27 @@
+.search-input__category-dropdown {
+    display: inline-block;
+    vertical-align: middle;
+
+    ::ng-deep button {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+}
+
+.with-categories {
+    ::ng-deep input {
+        margin-left: -1px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+}
+
+.is-loading ::ng-deep .fd-input-group__addon:hover .fd-button:before {
+    color: red;
+    content: "\e03e";
+}
+
+fd-combobox {
+    display: inline-block;
+    vertical-align: middle;
+}

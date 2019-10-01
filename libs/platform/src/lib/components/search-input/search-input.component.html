@@ -1,2 +1,20 @@
-<fd-combobox glyph="search" [placeholder]="placeholder" [dropdownValues]="dropdownValues">
-</fd-combobox>
+<div class="search-input" [ngClass]="{'with-categories': showCategoryDropdown, 'is-loading': isLoading}">
+    <fd-popover *ngIf="showCategoryDropdown" class="search-input__category-dropdown">
+        <fd-dropdown-control [toolbar]="true" [disabled]="isLoading">
+            <span class="search-input__category-label"
+                *ngIf="!hideCategoryLabel">{{currentCategory ? currentCategory.label : categoryLabel}}</span>
+        </fd-dropdown-control>
+        <fd-popover-body>
+            <fd-menu>
+                <ul fd-menu-list class="search-input__category-menu">
+                    <li *ngFor="let category of categories" (click)="setCurrentCategory(category)"><span
+                            fd-menu-item>{{category.label}}</span></li>
+                </ul>
+            </fd-menu>
+        </fd-popover-body>
+    </fd-popover>
+    <fd-combobox [glyph]="isLoading ? 'synchronize' : 'search'" [placeholder]="placeholder"
+        [dropdownValues]="dropdownValues" [compact]="compact" [triggers]="[]" [(ngModel)]="inputText"
+        (ngModelChange)="onValueChange($event)" (itemClicked)="onItemClick($event)" [searchFunction]="onSearchSubmit">
+    </fd-combobox>
+</div>
