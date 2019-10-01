@@ -11,7 +11,8 @@
             separated: separated,
             secondaryIcon: secondaryIcon,
             disabled: disabled,
-            customLabel: customLabel
+            customLabel: customLabel,
+            itemWidth: itemWidth
         }
     "
     [ngClass]="{ 'fd-menu__list--separated': separated }"
@@ -25,16 +26,19 @@
                 <!-- removed from span , separated ? 'fd-menu__list--separated' : '' -->
             </span>
         </div>
-        <span
-            class="fd-menu__item"
-            [ngClass]="[active ? 'is-selected' : '', disabled ? 'is-disabled' : '']"
-            (click)="onItemClick()"
-            role="button"
-            data-tag="menu-item__button"
-            [attr.title]="customLabel ? customLabel : label"
-        >
-            {{ label }}
-        </span>
+        <div class="fd-menu__label-truncation">
+            <span
+                class="fd-menu__item"
+                [ngClass]="[active ? 'is-selected' : '', disabled ? 'is-disabled' : '']"
+                [ngStyle]="{ width: getItemWidth() }"
+                (click)="onItemClick()"
+                role="button"
+                data-tag="menu-item__button"
+                [attr.title]="customLabel ? customLabel : label"
+            >
+                {{ label }}
+            </span>
+        </div>
         <div class="fd-menu__addon-after" *ngIf="secondaryIcon; else noIcon">
             <span
                 [ngClass]="[secondaryIcon ? secondaryIcon : '']"
@@ -61,17 +65,20 @@
                 <!-- removed from span , separated ? 'fd-menu__list--separated' : '' -->
             </span>
         </div>
-        <span
-            class="fd-menu__item"
-            [ngClass]="[active ? 'is-selected' : '', disabled ? 'is-disabled' : '']"
-            (click)="onItemClick()"
-            [attr.aria-selected]="selected ? 'true' : 'false'"
-            role="button"
-            data-tag="menu-item__button"
-            [attr.title]="customLabel ? customLabel : label"
-        >
-            {{ label }}
-        </span>
+        <div class="fd-menu__label-truncation">
+            <span
+                class="fd-menu__item"
+                [ngClass]="[active ? 'is-selected' : '', disabled ? 'is-disabled' : '']"
+                (click)="onItemClick()"
+                [ngStyle]="{ width: getItemWidth() }"
+                [attr.aria-selected]="selected ? 'true' : 'false'"
+                role="button"
+                data-tag="menu-item__button"
+                [attr.title]="customLabel ? customLabel : label"
+            >
+                {{ label }}
+            </span>
+        </div>
     </li>
 </ng-template>
 

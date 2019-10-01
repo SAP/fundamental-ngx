@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from './menu-comp/menu.component';
-import { MenuItemComponent } from './menu-comp/menu-item.component';
+import { MenuComponent } from './menu-component/menu.component';
+import { MenuItemComponent } from './menu-component/menu-item.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 
 @NgModule({
-  declarations: [MenuComponent, MenuItemComponent],
-  imports: [
-    CommonModule,
-    FundamentalNgxCoreModule
-  ],
-  exports: [MenuComponent, MenuItemComponent]
+    declarations: [MenuComponent, MenuItemComponent],
+    imports: [CommonModule, FundamentalNgxCoreModule],
+    exports: [MenuComponent, MenuItemComponent]
 })
-export class MenuModule { }
+export class MenuModule {}

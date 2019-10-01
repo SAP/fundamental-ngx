@@ -6,7 +6,6 @@
         'scrolling-menu': scrolling
     }"
     [ngStyle]="{ height: scrollLimit * 40 + 8 + 'px', width: width }"
-    [style.text-align]="textAlign"
 >
     <ng-container *ngFor="let group of groups; let i = index">
         <ng-container
@@ -39,6 +38,7 @@
                 [separated]="separator"
                 [disabled]="item.disabled"
                 [customLabel]="item.customLabel || group.customLabel"
+                [itemWidth]="width"
                 (itemClick)="onItemClick(item, group)"
                 (keyup)="onTargetKeyup($event)"
             >
@@ -73,6 +73,7 @@
                     [index]="j"
                     [separated]="separator"
                     [disabled]="item.disabled"
+                    [itemWidth]="width"
                     [customLabel]="item.customLabel || group.customLabel"
                     (itemClick)="onItemClick(item, group)"
                     (keyup)="onTargetKeyup($event)"

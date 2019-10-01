@@ -32,6 +32,7 @@ export class MenuItemComponent implements OnInit, OnDestroy, /*DefaultMenuItem, 
     @Input() public separated: boolean;
     @Input() public disabled: boolean;
     @Input() public customLabel: string;
+    @Input() public itemWidth: string;
 
     public _isActive = false;
 
@@ -59,5 +60,16 @@ export class MenuItemComponent implements OnInit, OnDestroy, /*DefaultMenuItem, 
 
     onItemClick() {
         this.itemClick.emit();
+    }
+
+    getItemWidth(): string {
+        const itemWidthNumber: number = Number(this.itemWidth.split('px')[0]);
+        let finalItemWidth: string = this.itemWidth;
+        if (this.item.secondaryIcon !== undefined || this.item.secondaryIcon !== '') {
+            // secondary icon exists
+            finalItemWidth = itemWidthNumber - 85 + 'px';
+        }
+        console.log(finalItemWidth + 'is finalItemWidth and itemWidth ' + itemWidthNumber);
+        return finalItemWidth;
     }
 }

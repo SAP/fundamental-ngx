@@ -51,7 +51,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     margin: 6px 4px 6px 8px;
     // color: #0a6ed1;
     color: var(--fd-color-action);
-    display: block;
+    // display: block;
     // .fd-menu__item {
     //     padding-left: 0px;
     // }
@@ -73,7 +73,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     margin: 6px 4px 6px 8px;
     // color: #0a6ed1;
     color: var(--fd-color-action);
-    display: block;
+    display: flex;
     float: right;
     clear: right;
     // @include fd-rtl() {
@@ -82,6 +82,11 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     // }
     justify-content: center;
     align-items: center;
+}
+
+[dir='rtl'] .fd-menu__addon-after {
+    float: left;
+    clear: left;
 }
 .fd-menu--addon-after > .fd-menu__item {
     padding-right: 36px;
@@ -95,4 +100,9 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     cursor: not-allowed;
     text-decoration: none;
     pointer-events: none;
+}
+
+//inline-flex cannot be used in conjunction with overflow:hidden. This is a workaround to have both.
+.fd-menu__label-truncation {
+    display: inline-flex;
 }
