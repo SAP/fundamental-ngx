@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.1"></a>
+# [0.12.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.0...v0.12.0-rc.1) (2019-10-01)
+
+
+### Features
+
+* angular 8 version ([#1296](https://github.com/SAP/fundamental-ngx/issues/1296)) ([c5ff369](https://github.com/SAP/fundamental-ngx/commit/c5ff369))
+
+
+
 <a name="0.12.0-rc.0"></a>
 # [0.12.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.11.1-rc.4...v0.12.0-rc.0) (2019-09-28)
 
