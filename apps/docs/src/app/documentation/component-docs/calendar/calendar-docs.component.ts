@@ -9,8 +9,6 @@ import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-examp
 import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-examples.component.html';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
 import { ExampleFile } from '../../core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-calendar',
@@ -71,7 +69,7 @@ myDisableFunction = function(d: FdDate): boolean {
         },
         {
             language: 'typescript',
-            code: this.exampleFunctionsHtml,
+            code: { default: this.exampleFunctionsHtml },
             name: 'Example Block/Disable Functions'
         }
     ];
@@ -122,5 +120,6 @@ myDisableFunction = function(d: FdDate): boolean {
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 }
