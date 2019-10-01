@@ -21,7 +21,7 @@
     "ng": "ng",
     "release": "./scripts/publish-release.sh",
     "release:create": "create-release",
-    "start": "npm run build-doc && ng serve",
+    "start": "npm run build-docs && ng serve",
     "test": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",
     "active-test": "ng test core --watch true --browsers=ChromeHeadless",
     "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
