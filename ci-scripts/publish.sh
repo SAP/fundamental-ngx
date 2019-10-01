@@ -46,11 +46,8 @@ else
    exit 1
 fi
 
-
 git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null 2>&1;
 npm run build-deploy-library
-
-
 
 cd dist/libs
 NPM_BIN="$(which npm)"
@@ -59,7 +56,11 @@ for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    $NPM_BIN  publish --access public
+    if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-pre-release" || $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
+      $NPM_BIN  publish --tag prerelease --access public
+    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" || $TRAVIS_BUILD_STAGE_NAME =~ "Archive-release" ]]; then
+      $NPM_BIN  publish --access public
+    fi
     cd ..
 done
 
