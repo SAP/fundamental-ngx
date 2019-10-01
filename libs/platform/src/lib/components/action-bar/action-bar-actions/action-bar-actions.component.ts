@@ -5,9 +5,12 @@ import {
     Output,
     EventEmitter,
     ChangeDetectorRef,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ViewChildren,
+    QueryList,
+    AfterViewInit
 } from '@angular/core';
-
+import { MenuItemDirective, MenuKeyboardService } from '@fundamental-ngx/core';
 import { ActionItem } from '../action-bar.component';
 
 const MAX_BUTTONS = 3;
@@ -18,11 +21,12 @@ const MAX_BUTTONS = 3;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionBarActionsComponent implements OnInit {
-    constructor(public cd: ChangeDetectorRef) {}
+    constructor(public cd: ChangeDetectorRef, public menuKeyboardService: MenuKeyboardService) {}
 
     buttonItems: ActionItem[] = [];
     menuItems: ActionItem[] = [];
-
+    @ViewChildren(MenuItemDirective)
+    menulist: QueryList<MenuItemDirective>;
     @Input() placement: string;
 
     @Input() actionItems: ActionItem[];
@@ -67,5 +71,13 @@ export class ActionBarActionsComponent implements OnInit {
     onRenameClick() {
         this.editMode.emit(true);
         this.cd.markForCheck();
+    }
+
+    handleKeyPress(event: KeyboardEvent, index: number) {
+        this.menuKeyboardService.keyDownHandler(event, index, this.menulist.toArray());
+    }
+
+    focusFirst() {
+        setTimeout(() => this.menulist.first.focus(), 0);
     }
 }
