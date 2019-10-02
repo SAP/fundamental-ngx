@@ -235,6 +235,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
+            this.isInvalidDateInput = !this.isModelValid();
         }
     }
 
@@ -253,6 +254,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
+            this.isInvalidDateInput = !this.isModelValid();
         }
     }
 
