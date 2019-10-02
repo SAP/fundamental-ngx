@@ -23,6 +23,7 @@ export class ModalRef {
      */
     close(result?: any): void {
         this._afterClosed.next(result);
+        this._afterClosed.complete();
     }
 
     /**
