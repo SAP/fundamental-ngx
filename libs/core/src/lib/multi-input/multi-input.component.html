@@ -9,6 +9,7 @@
                  [attr.aria-label]="multiInputBodyLabel"
                  [attr.aria-expanded]="isOpen">
                 <fd-input-group
+                    [disabled]="disabled"
                     [compact]="compact"
                     [button]="true"
                     [glyph]="glyph"
@@ -44,7 +45,7 @@
     </fd-popover>
 </div>
 <div class="fd-multi-input-tags">
-    <fd-token 
+    <fd-token
             *ngFor="let token of selected"
             [disabled]=this.disabled
             (onCloseClick)="handleSelect(false, token)"
