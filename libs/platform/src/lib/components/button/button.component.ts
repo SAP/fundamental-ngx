@@ -1,8 +1,7 @@
-import { Component, Input, ElementRef, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, ElementRef, Output, EventEmitter, OnInit, HostBinding } from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
 export type ButtonOptions = 'light' | 'emphasized' | '';
-export type sizeType = 'small' | '';
 
 @Component({
     selector: 'fdp-button',
@@ -12,13 +11,17 @@ export type sizeType = 'small' | '';
 export class ButtonComponent {
     private _elementRef: ElementRef;
 
-    /** Whether to apply size of the button. */
-    @Input() size: sizeType;
+    /** Whether to compress the button. */
+    @Input() compact: boolean;
+
+    /** Whether the button content should be in truncated form this width. */
+    @Input()
+    width: string;
 
     /** The icon to include in the button */
     @Input() glyph: string;
 
-    /** Whether the date picker is disabled. */
+    /** Whether the button is disabled. */
     @Input()
     disabled: boolean;
 
@@ -48,17 +51,5 @@ export class ButtonComponent {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-    }
-
-    /** @hidden */
-    _addClassToElement(className: string) {
-        (this._elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
-    }
-    // /** @hidden */
-    _setProperties() {
-        this._addClassToElement('fd-button');
-        if (this.size === 'small') {
-            this._addClassToElement('fd-button--compact');
-        }
     }
 }
