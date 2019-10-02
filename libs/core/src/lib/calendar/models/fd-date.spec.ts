@@ -1,14 +1,39 @@
 import { FdDate } from './fd-date';
 
 describe('FdDateSpec', () => {
-    it('should handle next day', () => {
+    it('should handle next day on year end', () => {
         const fdDate = new FdDate(2018, 12, 31);
         expect(fdDate.nextDay()).toEqual(new FdDate(2019, 1, 1));
     });
 
-    it('should handle previous day', () => {
+    it('should handle next day on month end', () => {
+        const fdDate = new FdDate(2018, 9, 31);
+        expect(fdDate.nextDay()).toEqual(new FdDate(2018, 10, 1));
+    });
+
+    it('should handle next day', () => {
+        const fdDate = new FdDate(2020, 2, 29);
+        expect(fdDate.nextDay()).toEqual(new FdDate(2020, 3, 1));
+    });
+
+    it('should handle previous day on year end', () => {
         const fdDate = new FdDate(2019, 1, 1);
         expect(fdDate.previousDay()).toEqual(new FdDate(2018, 12, 31));
+    });
+
+    it('should handle previous day on month end', () => {
+        const fdDate = new FdDate(2019, 10, 1);
+        expect(fdDate.previousDay()).toEqual(new FdDate(2019, 9, 30));
+    });
+
+    it('should handle previous day', () => {
+        const fdDate = new FdDate(2019, 10, 10);
+        expect(fdDate.previousDay()).toEqual(new FdDate(2019, 10, 9));
+    });
+
+    it('should handle previous on leap year on feb day', () => {
+        const fdDate = new FdDate(2020, 3, 1);
+        expect(fdDate.previousDay()).toEqual(new FdDate(2020, 2, 29));
     });
 
     it('should return sunday (1)', () => {
