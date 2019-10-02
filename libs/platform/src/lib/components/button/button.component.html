@@ -1,4 +1,5 @@
-<button fd-button [options]="options" [size]="size" [glyph]="glyph" [disabled]="disabled" (click)="onBtnClick($event)"
-    [fdType]="type">
+<button fd-button [options]="options" [compact]="compact" [glyph]="glyph" [disabled]="disabled"
+    class="truncate_btn__txt" (click)="onBtnClick($event)" [fdType]="type" [style.width]="width"
+    [ngStyle]="{ width: width + 'em' }">
     <ng-content></ng-content>
 </button>

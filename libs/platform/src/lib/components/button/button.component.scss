@@ -1,1 +1,6 @@
-
+.truncate_btn__txt {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
