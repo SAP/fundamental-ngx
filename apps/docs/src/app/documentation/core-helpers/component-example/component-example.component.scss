@@ -6,7 +6,6 @@
     }
 }
 
-
 rtl-toggle {
     padding-right: 20px;
 }
@@ -18,4 +17,9 @@ rtl-toggle {
 .fd-tile.fd-tile-example-background {
     background-color: #f7f7f7;
     //background-color: var(--sapBackgroundColor);
+}
+
+span.fd-badge,
+span.fd-status-label {
+    margin-right: 16px;
 }

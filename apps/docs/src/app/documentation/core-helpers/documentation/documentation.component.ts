@@ -45,7 +45,6 @@ export class DocumentationComponent implements OnInit {
         { url: 'popover', name: 'Popover' },
         { url: 'radio', name: 'Radio Button' },
         { url: 'select-native', name: 'Select Native' },
-        { url: 'searchInput', name: 'Search Input' },
         { url: 'select', name: 'Select' },
         { url: 'shellbar', name: 'Shellbar' },
         { url: 'sideNavigation', name: 'Side Navigation' },
