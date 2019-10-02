@@ -66,7 +66,7 @@
     "@types/node": "^12.7.5",
     "core-js": "^2.6.9",
     "focus-trap": "^5.0.2",
-    "fundamental-styles": "^0.3.0-rc.3",
+    "fundamental-styles": "^0.3.0-rc.5",
     "jasminewd2": "^2.0.6",
     "highlight.js": "^9.15.10",
     "moment": "^2.24.0",
