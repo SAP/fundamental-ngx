@@ -21,4 +21,12 @@ export class ToolbarComponent {
     ) {
         this.isOnCore = this.routerService.url && this.routerService.url.includes('core/');
     }
+
+    changeLibChange(): void {
+        if (this.isOnCore) {
+            this.routerService.navigate(['platform/home']);
+        } else {
+            this.routerService.navigate(['core/home']);
+        }
+    }
 }
