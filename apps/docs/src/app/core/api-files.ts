@@ -6,13 +6,13 @@
  */
 export const API_FILES = {
     actionBar: [
-        'ActionBarDirective',
+        'ActionBarComponent',
         'ActionBarActionsDirective',
         'ActionBarBackDirective',
         'ActionBarDescriptionDirective',
         'ActionBarHeaderDirective',
         'ActionBarMobileDirective',
-        'ActionBarTitleComponent'
+        'ActionBarTitleDirective'
     ],
     alert: [
         'AlertComponent',
@@ -21,18 +21,17 @@ export const API_FILES = {
         'AlertRef'
     ],
     badgeLabel: [
-        'BadgeDirective',
-        'BadgeLabelComponent',
-        'LabelDirective',
-        'StatusLabelDirective'
+        'BadgeComponent',
+        'LabelComponent',
+        'StatusLabelComponent'
     ],
     breadcrumb: [
-        'BreadcrumbDirective',
+        'BreadcrumbComponent',
         'BreadcrumbItemDirective',
         'BreadcrumbLinkDirective'
     ],
     button: [
-        'ButtonDirective'
+        'ButtonComponent'
     ],
     buttonGroup: [
         'ButtonGroupComponent',
@@ -40,6 +39,10 @@ export const API_FILES = {
     ],
     calendar: [
         'CalendarComponent',
+        'CalendarDayViewComponent',
+        'CalendarMonthViewComponent',
+        'CalendarYearViewComponent',
+        'CalendarHeaderViewComponent',
         'CalendarI18n',
         'CalendarI18nDefault',
         'CalendarI18nLabels',
@@ -53,11 +56,17 @@ export const API_FILES = {
     datePicker: [
         'DatePickerComponent',
         'DateFormatParser',
-        'DateFormatParserDefault'
+        'DateFormatParserDefault',
+        'FdDate'
     ],
     datetimePicker: [
         'DatetimePickerComponent',
-        'FdDateTime'
+        'FdDateTime',
+        'DateTimeFormatParser',
+        'DateTimeFormatParserDefault'
+    ],
+    dropdown: [
+        'PopoverDropdownComponent'
     ],
     fileInput: [
         'FileInputComponent',
@@ -67,8 +76,8 @@ export const API_FILES = {
     form: [
         'FormControlDirective',
         'FormGroupComponent',
-        'FormItemDirective',
-        'FormLabelDirective',
+        'FormItemComponent',
+        'FormLabelComponent',
         'FormLegendDirective',
         'FormMessageComponent',
         'FormSetDirective'
@@ -77,7 +86,7 @@ export const API_FILES = {
         'IconComponent'
     ],
     identifier: [
-        'IdentifierDirective'
+        'IdentifierComponent'
     ],
     image: [
         'ImageComponent'
@@ -98,9 +107,8 @@ export const API_FILES = {
         'LayoutGridSpanDirective',
     ],
     list: [
-        'ListDirective',
+        'ListComponent',
         'ListActionDirective',
-        'ListCheckboxComponent',
         'ListItemDirective'
     ],
     loadingSpinner: [
@@ -110,6 +118,9 @@ export const API_FILES = {
         'LocalizationEditorComponent',
         'LocalizationEditorItemComponent',
         'LocalizationEditorMainComponent',
+        'LocalizationEditorInputDirective',
+        'LocalizationEditorTextareaDirective',
+        'LocalizationEditorLabel'
     ],
     megaMenu: [
         'MegaMenuComponent',
@@ -163,23 +174,20 @@ export const API_FILES = {
     popover: [
         'PopoverComponent',
         'PopoverBodyComponent',
-        'PopoverControlComponent'
+        'PopoverControlComponent',
+        'PopoverDropdownComponent',
     ],
     popoverDirective: [
-        'PopoverDirective'
+        'PopoverDirective',
     ],
     scrollSpy: [
         'ScrollSpyDirective'
-    ],
-    searchInput: [
-        'SearchInputComponent'
     ],
     select: [
         'SelectComponent',
         'OptionComponent'
     ],
     shellbar: [
-        'CopilotComponent',
         'ProductMenuComponent',
         'ShellbarComponent',
         'ShellbarActionComponent',
@@ -191,14 +199,13 @@ export const API_FILES = {
     sideNavigation: [
         'SideNavigationComponent',
         'SideNavigationGroupComponent',
-        'SideNavigationIconComponent',
         'SideNavigationItemComponent',
         'SideNavigationLinkDirective',
         'SideNavigationListDirective',
-        'SideNavigationSubitemComponent',
-        'SideNavigationSublistComponent',
-        'SideNavigationSublinkComponent',
-        'SideNavigationTitleComponent'
+        'SideNavigationSubitemDirective',
+        'SideNavigationSublistDirective',
+        'SideNavigationSublinkDirective',
+        'SideNavigationTitleDirective'
     ],
     splitButton: [
         'SplitButtonComponent',
@@ -206,7 +213,13 @@ export const API_FILES = {
         'SplitButtonActionTitle',
     ],
     table: [
-        'TableDirective',
+        'TableBodyDirective',
+        'TableCellDirective',
+        'TableHeaderDirective',
+        'TableRowDirective',
+        'TableComponent',
+        'TableResponsiveWrapperDirective',
+        'TableWrapperComponent',
         'ColumnSortableDirective'
     ],
     tabs: [
@@ -214,29 +227,34 @@ export const API_FILES = {
         'TabListComponent',
         'TabTitleDirective',
         'TabLinkDirective',
-        'TabNavDirective'
+        'TabNavComponent'
     ],
     tile: [
         'ProductTileComponent',
-        'ProductTileContentComponent',
-        'ProductTileMediaComponent',
-        'ProductTileTextComponent',
-        'ProductTileTitleComponent',
+        'ProductTileContentDirective',
+        'ProductTileMediaDirective',
+        'ProductTileTextDirective',
+        'ProductTileTitleDirective',
         'TileComponent',
-        'TileActionsComponent',
+        'TileActionsDirective',
         'TileContentDirective',
         'TileGridDirective',
         'TileMediaDirective',
-        'TileTextComponent',
+        'TileTextDirective',
         'TileTitleComponent'
     ],
     time: [
         'TimeComponent',
-        'TimeObject',
-        'TimeI18nLabels'
+        'TimeI18nLabels',
+        'TimeFormatParser',
+        'TimeFormatParserDefault',
+        'TimeObject'
     ],
     timePicker: [
-        'TimePickerComponent'
+        'TimePickerComponent',
+        'TimeFormatParser',
+        'TimeFormatParserDefault',
+        'TimeObject',
     ],
     toggle: [
         'ToggleComponent'
