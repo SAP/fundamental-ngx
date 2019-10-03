@@ -108,7 +108,7 @@ import { LayoutGridDocsComponent } from './component-docs/layout-grid/layout-gri
 
 export const ROUTES: Routes = [
     {
-        path: '/core',
+        path: '',
         component: CoreDocumentationComponent,
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -272,22 +272,22 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.inputGroup } }
                 ]
             },
-            { 
-                path: 'layoutGrid', 
-                component: LayoutGridDocsHeaderComponent, 
+            {
+                path: 'layoutGrid',
+                component: LayoutGridDocsHeaderComponent,
                 children: [
-                    { path: '', component: LayoutGridDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.layoutGrid}}
-            ]
+                    { path: '', component: LayoutGridDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.layoutGrid } }
+                ]
             },
-            { 
-                path: 'list', 
-                component: ListHeaderComponent, 
+            {
+                path: 'list',
+                component: ListHeaderComponent,
                 children: [
-                    { path: '', component: ListDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.list}}
-            ]
-          },
+                    { path: '', component: ListDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.list } }
+                ]
+            },
             {
                 path: 'loadingSpinner',
                 component: LoadingSpinnerHeaderComponent,
