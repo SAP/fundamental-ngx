@@ -168,7 +168,7 @@ export const ROUTES: Routes = [
             },
             { path: 'dropdown', component: DropdownHeaderComponent, children: [
                     { path: '', component: DropdownDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: []}}
+                    { path: 'api', component: ApiComponent, data: {content: API_FILES.dropdown}}
                 ]
             },
             { path: 'file-input', component: FileInputHeaderComponent, children: [
