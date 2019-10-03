@@ -29,14 +29,6 @@ describe('ButtonComponent', () => {
         expect(component.setDisabledState).toHaveBeenCalled();
     });
 
-    it('size should set to small', () => {
-        component.size = 'small';
-        spyOn(component, '_setProperties').and.callThrough();
-        spyOn(component, '_addClassToElement');
-        component._setProperties();
-        expect(component._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
-    });
-
     it('button onclick should be called', () => {
         spyOn(component, 'onBtnClick');
         component.onBtnClick(event);
