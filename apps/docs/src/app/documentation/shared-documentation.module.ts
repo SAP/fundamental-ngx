@@ -29,6 +29,8 @@ import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
 import { ToolbarComponent } from './core-helpers/toolbar/toolbar.component';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
+import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
+import { ApiComponent } from './core-helpers/api/api.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sectio
         DocsSectionTitleComponent,
         SearchPipe,
         ToolbarComponent,
-        SectionsToolbarComponent
+        SectionsToolbarComponent,
+        HeaderTabsComponent,
+        ApiComponent
     ],
 
     imports: [
@@ -82,7 +86,9 @@ import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sectio
         SchemaModule,
         SearchPipe,
         ToolbarComponent,
-        SectionsToolbarComponent
+        SectionsToolbarComponent,
+        HeaderTabsComponent,
+        ApiComponent
     ]
 })
 export class SharedDocumentationModule {}

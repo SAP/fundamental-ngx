@@ -1,11 +1,13 @@
 import {
     AfterContentInit,
+    Component,
     ContentChildren,
-    Directive,
-    EventEmitter, OnDestroy,
+    EventEmitter,
+    OnDestroy,
     Output,
     QueryList,
-    Renderer2
+    Renderer2,
+    ViewEncapsulation
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
@@ -38,16 +40,19 @@ import { Subscription } from 'rxjs';
  * ```
  */
 
-@Directive({
-    // tslint:disable-next-line:directive-selector
+@Component({
+    // tslint:disable-next-line:component-selector
     selector: '[fd-tab-nav]',
     host: {
         'class': 'fd-tabs',
         'role': 'tablist'
     },
-    providers: [TabsService]
+    template: `<ng-content></ng-content>`,
+    providers: [TabsService],
+    styleUrls: ['./tab-nav.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class TabNavDirective implements AfterContentInit, OnDestroy {
+export class TabNavComponent implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     @ContentChildren(TabLinkDirective) links: QueryList<TabLinkDirective>;

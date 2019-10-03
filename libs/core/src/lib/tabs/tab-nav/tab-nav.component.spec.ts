@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { TabsModule } from '../tabs.module';
-import { TabNavDirective } from './tab-nav.directive';
+import { TabNavComponent } from './tab-nav.component';
 
 
 @Component({
@@ -28,12 +28,12 @@ import { TabNavDirective } from './tab-nav.directive';
     `
 })
 class TestNavWrapperComponent {
-    @ViewChild(TabNavDirective, { static: false })
-    tabNavDirective: TabNavDirective;
+    @ViewChild(TabNavComponent, { static: false })
+    tabNavDirective: TabNavComponent;
 }
 
 describe('TabNavDirective', () => {
-    let component: TabNavDirective;
+    let component: TabNavComponent;
     let fixture: ComponentFixture<TestNavWrapperComponent>;
 
     beforeEach(async(() => {
