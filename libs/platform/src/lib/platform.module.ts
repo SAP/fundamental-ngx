@@ -4,7 +4,10 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule } from './components/button/button.module';
 
 @NgModule({
-    imports: [CommonModule, FundamentalNgxCoreModule],
+    imports: [
+        CommonModule,
+        FundamentalNgxCoreModule
+    ],
     exports: [PlatformButtonModule]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule { }
