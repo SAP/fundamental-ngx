@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.13"></a>
+# [0.12.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.12...v0.12.0-rc.13) (2019-10-04)
+
+
+### Features
+
+* **platform: new:** button as standalone component (instantiable) ([#1352](https://github.com/SAP/fundamental-ngx/issues/1352)) ([a813485](https://github.com/SAP/fundamental-ngx/commit/a813485))
+
+
+
 <a name="0.12.0-rc.12"></a>
 # [0.12.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.11...v0.12.0-rc.12) (2019-10-03)
 
