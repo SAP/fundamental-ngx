@@ -117,7 +117,19 @@ describe('TimePickerComponent', () => {
         component.timeInputChanged('12:00');
         expect(component.time.hour).toBe(12);
         expect(component.time.minute).toBe(0);
-        expect(component.time.second).toBe(0);
+        expect(component.time.second).toBeFalsy();
+    });
+
+    it('should handle timeInputChanged for 24 hour time picker without minutes', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = false;
+        component.displaySeconds = false;
+        component.displayMinutes = false;
+        component.timeInputChanged('12');
+        expect(component.time.hour).toBe(12);
+        expect(component.time.minute).toBeFalsy();
+        expect(component.time.second).toBeFalsy();
     });
 
     it('should handle regexp fail for 24 hour clock', () => {
@@ -148,7 +160,19 @@ describe('TimePickerComponent', () => {
         component.timeInputChanged('11:59 am');
         expect(component.time.hour).toBe(11);
         expect(component.time.minute).toBe(59);
-        expect(component.time.second).toBe(0);
+        expect(component.time.second).toBeFalsy();
+    });
+
+    it('should handle timeInputChanged for 24 hour time picker without minutes', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = true;
+        component.displaySeconds = false;
+        component.displayMinutes = false;
+        component.timeInputChanged('11 am');
+        expect(component.time.hour).toBe(11);
+        expect(component.time.minute).toBeFalsy();
+        expect(component.time.second).toBeFalsy();
     });
 
     it('should handle timeInputChanged for meridian time picker with PM/seconds', () => {
@@ -162,15 +186,28 @@ describe('TimePickerComponent', () => {
         expect(component.time.second).toBe(59);
     });
 
-    it('should handle timeInputChanged for meridian time picker without seconds where hour is 12', () => {
+    it('should handle timeInputChanged for meridian time picker without seconds and minutes where hour is 12', () => {
         const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
         component.time = newTime;
         component.meridian = true;
         component.displaySeconds = false;
-        component.timeInputChanged('12:59 am');
+        component.displayMinutes = false;
+        component.timeInputChanged('12 am');
         expect(component.time.hour).toBe(0);
-        expect(component.time.minute).toBe(59);
-        expect(component.time.second).toBe(0);
+        expect(component.time.minute).toBeFalsy();
+        expect(component.time.second).toBeFalsy();
+    });
+
+    it('should handle timeInputChanged for meridian time picker without seconds and minutes where hour is 11', () => {
+        const newTime: TimeObject = { hour: 0, minute: 0, second: 0 };
+        component.time = newTime;
+        component.meridian = true;
+        component.displaySeconds = false;
+        component.displayMinutes = false;
+        component.timeInputChanged('11 pm');
+        expect(component.time.hour).toBe(23);
+        expect(component.time.minute).toBeFalsy();
+        expect(component.time.second).toBeFalsy();
     });
 
     it('should handle regexp fail for meridian clock', () => {

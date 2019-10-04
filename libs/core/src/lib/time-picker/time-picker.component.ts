@@ -114,23 +114,22 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     /** @hidden */
     getFormattedTime(): string {
-        const formattedTime = this.timeAdapter.format(this.time, this.meridian);
+        const formattedTime = this.timeAdapter.format(this.time, this.displaySeconds, this.displayMinutes, this.meridian);
         return formattedTime !== undefined ? formattedTime : '';
     }
 
     /** @hidden */
     timeInputChanged(timeFromInput) {
-        const time = this.timeAdapter.parse(timeFromInput, this.displaySeconds, this.meridian);
+        const time = this.timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
         if (time) {
             this.isInvalidTimeInput = false;
-            this.child.setDisplayedHour();
-            this.time = Object.assign(this.time, time);
+            this.time = time;
             this.onChange(time);
         } else {
             if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
-                this.child.setDisplayedHour();
                 this.onChange({hour: null, minutes: null, seconds: null});
+                this.child.setDisplayedHour();
             } else {
                 this.isInvalidTimeInput = true;
             }
@@ -166,19 +165,18 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
     /** @hidden */
     getPlaceholder(): string {
-        let retVal;
+        let retVal = '';
+        if (this.displayHours) {
+            retVal = retVal + 'hh'
+        }
+        if (this.displayMinutes) {
+            retVal = retVal + ':mm'
+        }
         if (this.displaySeconds) {
-            if (this.meridian) {
-                retVal = 'hh' + ':' + 'mm' + ':' + 'ss am/pm';
-            } else {
-                retVal = 'hh' + ':' + 'mm' + ':' + 'ss';
-            }
-        } else {
-            if (this.meridian) {
-                retVal = 'hh' + ':' + 'mm' + ' am/pm';
-            } else {
-                retVal = 'hh' + ':' + 'mm';
-            }
+            retVal = retVal + ':ss'
+        }
+        if (this.meridian) {
+            retVal = retVal + ' am/pm';
         }
 
         return retVal;
@@ -188,6 +186,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     timeFromTimeComponentChanged() {
         this.cd.detectChanges();
         this.onChange(this.time);
+        this.isInvalidTimeInput = false;
     }
 
     /** @hidden */
