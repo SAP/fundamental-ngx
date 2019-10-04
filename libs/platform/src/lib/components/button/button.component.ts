@@ -9,17 +9,17 @@ export type ButtonOptions = 'light' | 'emphasized' | '';
     styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-    private _elementRef: ElementRef;
-
-    /** Whether to compress the button. */
-    @Input() compact: boolean;
+    /** Whether to compact the button. */
+    @Input()
+    compact: boolean;
 
     /** Whether the button content should be in truncated form this width. */
     @Input()
     width: string;
 
     /** The icon to include in the button */
-    @Input() glyph: string;
+    @Input()
+    glyph: string;
 
     /** Whether the button is disabled. */
     @Input()
@@ -27,10 +27,12 @@ export class ButtonComponent {
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
-    @Input() type: ButtonType;
+    @Input()
+    type: ButtonType;
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() options: ButtonOptions | ButtonOptions[];
+    @Input()
+    options: ButtonOptions | ButtonOptions[];
 
     /** Event sent when button is clicked */
     @Output()
@@ -41,11 +43,6 @@ export class ButtonComponent {
      */
     public onBtnClick($event: any) {
         this.buttonClicked.emit();
-    }
-
-    /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        this._elementRef = elementRef;
     }
 
     /** @hidden */
