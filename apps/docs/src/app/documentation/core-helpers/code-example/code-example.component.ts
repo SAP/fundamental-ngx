@@ -13,14 +13,19 @@ import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
 import { height } from '../../utilities/animations/collapse';
 import { AlertService } from '@fundamental-ngx/core';
-import hljs from 'highlight.js/lib'
+import hljs from 'highlight.js/lib';
+import sdk from '@stackblitz/sdk';
+import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
+import * as maints from '!raw-loader!./code-example-stack/main.ts';
+
+
 
 @Component({
     selector: 'code-example',
     templateUrl: './code-example.component.html',
     styleUrls: ['./code-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: [height({time: 200})]
+    animations: [height({ time: 200 })]
 })
 export class CodeExampleComponent implements OnInit, AfterViewInit {
 
@@ -32,15 +37,46 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     @Input()
     exampleFiles: ExampleFile[] = [];
 
+    @Input() fileName: string;
+
+    @Input() component: string;
+
+
     smallScreen: boolean;
 
     selectedFileIndex: number = 0;
 
     isOpen: boolean = false;
+    parameters = {
+        html_tag: '',
+        app_module: '',
+        app_module_file: '',
+        app_component: '',
+        app_component_basis: '',
+        app_component_html: '',
+        app_component_ts: '',
+        app_component_html_path: '',
+        app_component_ts_path: ''
+    };
 
-    constructor(private element: ElementRef,
-                private copyService: CopyService,
-                private alertService: AlertService) {}
+    app_app_component = ``// TODO make non inline
+
+
+    project = {
+        files: {},
+        title: 'Fundamental-NGX Example',
+        description: 'Generated for you by fundamental-ngx team',
+        template: 'angular-cli',
+        tags: ['stackblitz', 'sdk'],
+        dependencies: {
+            moment: '*',
+            '@fundamental-ngx/core': 'v0.12.0-rc.5',
+            'fundamental-styles': 'v0.3.0-rc.6',
+            '@angular/animations': '*'
+        }
+    };
+
+    constructor(private element: ElementRef, private copyService: CopyService, private alertService: AlertService) { }
 
     get expandIcon(): string {
         return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
@@ -48,7 +84,112 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
     copyText(): void {
         this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code.default);
-        this.alertService.open('Code copied!', {type: 'success', duration: 5000});
+        this.alertService.open('Code copied!', { type: 'success', duration: 5000 });
+    }
+
+    openCode(): void {
+
+
+        if (this.fileName && this.component) {
+            this.parameters.html_tag = 'fd-' + this.fileName;
+            this.parameters.app_module = 'AppModule';
+            this.parameters.app_module_file = 'app.module';
+            this.parameters.app_component = this.component;
+            this.parameters.app_component_basis = this.fileName + '.component';
+            this.parameters.app_component_html = this.fileName + '.component.html';
+            this.parameters.app_component_ts = this.fileName + '.component.ts';
+            this.parameters.app_component_html_path = 'src/app/' + this.fileName + '.component.html';
+            this.parameters.app_component_ts_path = 'src/app/' + this.fileName + '.component.ts';
+        } // wait up
+
+        this.app_app_component = `
+        import { Component } from '@angular/core';
+        
+        @Component({
+            selector: '${this.parameters.html_tag}',
+            templateUrl: './${this.parameters.app_component_html}'
+        })
+        export class ${this.parameters.app_component} {
+            title = 'my-fd-ngx-dream-app';
+        }
+        `;
+        // TODO make non inline
+
+        this.project = {
+            files: {
+                'src/main.ts': maints.default,
+                'src/polyfills.ts': polyfills.default,
+                'src/styles.scss': '',
+                [`src/app/${this.fileName}.component.ts`]: this.app_app_component,
+            },
+            title: 'Fundamental-NGX Example',
+            description: 'Generated for you by fundamental-ngx team',
+            template: 'angular-cli',
+            tags: ['stackblitz', 'sdk'],
+            dependencies: {
+                moment: '*',
+                '@fundamental-ngx/core': 'v0.12.0-rc.5',
+                'fundamental-styles': 'v0.3.0-rc.6',
+                '@angular/animations': '*'
+            }
+        };
+        if (this.fileName) {
+            this.exampleFiles.forEach(example => {
+                if (example.language === 'html') {
+                    const _pathHTML = `src/app/${this.fileName}.component.html`;
+                    this.project.files[_pathHTML] = example.code.default;
+                }
+                if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined)) {
+                    const _pathTS = `src/app/${this.fileName}.component.ts`;
+                    this.project.files[_pathTS] = example.code.default;
+                }
+                else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined)) {
+                    const _pathTS3 = `src/app/${example.secondFile}.component.ts`;
+                    this.project.files[_pathTS3] = example.code.default;
+                }
+                else if (example.language === 'typescript' && example.thirdFile !== undefined) {
+                    this.project.files[example.thirdFile] = example.code.default;
+                }
+                if (example.tagname) {
+                    this.parameters.html_tag = example.tagname;
+                    this.parameters.app_component = example.component;
+                }
+            });
+        }
+
+        this.project.files['src/index.html'] = `
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css">
+            <${this.parameters.html_tag}></${this.parameters.html_tag}>
+        `;
+        // TODO make non inline
+
+
+        this.project.files['src/app/app.module.ts'] = `
+        import { BrowserModule } from '@angular/platform-browser';
+        import { NgModule } from '@angular/core';
+        import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+        import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+        import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
+        
+        @NgModule({
+          declarations: [
+            ${this.parameters.app_component}
+          ],
+          imports: [
+            BrowserModule,
+            FundamentalNgxCoreModule,
+            BrowserAnimationsModule
+          ],
+          providers: [],
+          bootstrap: [${this.parameters.app_component}]
+        })
+        export class ${this.parameters.app_module} { }
+        `;
+        // TODO make non inline
+
+
+        // console.log(this.project);
+        sdk.openProject(this.project);
     }
 
     ngOnInit(): void {
@@ -65,3 +206,5 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         this.codeElements.forEach(element => hljs.highlightBlock(element.nativeElement));
     }
 }
+
+const app_component_module = ``;
