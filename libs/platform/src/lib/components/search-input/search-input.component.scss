@@ -5,7 +5,24 @@
     ::ng-deep button {
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
+
+        &:disabled {
+            opacity: 1.0;
+        }
+
+        &::after {
+            color: #0a6ed1;
+            color: var(--fd-color-action-1);
+        }
     }
+}
+
+.search-input {
+    ::ng-deep input:disabled {
+        border-color: #89919a;
+        border-color: var(--fd-color-neutral-4);
+    }
+
 }
 
 .with-categories {
@@ -16,9 +33,55 @@
     }
 }
 
+.hide-category-label {
+    ::ng-deep input {
+        border-left: none;
+        padding-left: 0px;
+    }
+
+    .search-input__category-dropdown ::ng-deep button {
+        border-right: none;
+
+        &:after {
+            margin-left: 10px;
+        }
+    }
+}
+
+::ng-deep {
+    [dir="rtl"] .search-input__category-dropdown button {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        margin-right: 1px;
+    }
+
+    [dir="rtl"] .with-categories .fd-input-group input {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+}
+
+.is-loading ::ng-deep .fd-button:before {
+    animation: sap-icon-spin 2s infinite linear;
+}
+
 .is-loading ::ng-deep .fd-input-group__addon:hover .fd-button:before {
-    color: red;
     content: "\e03e";
+    animation: none;
+}
+
+@keyframes sap-icon-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(359deg);
+    }
 }
 
 fd-combobox {

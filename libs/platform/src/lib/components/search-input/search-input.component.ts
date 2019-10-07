@@ -77,6 +77,11 @@ export class SearchInput2Component implements OnInit, OnChanges {
     @Output() searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
 
     /**
+     * Cancel search event.
+     */
+    @Output() cancelSearch: EventEmitter<void> = new EventEmitter();
+
+    /**
      * List of string values taken from `suggestions` to populate dropdown menu.
      * @hidden
      */
@@ -161,10 +166,14 @@ export class SearchInput2Component implements OnInit, OnChanges {
      * @hidden
      */
     onSearchSubmit = () => {
-        this.searchSubmit.emit({
-            text: this.inputText,
-            category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
-        });
+        if (this.isLoading) {
+            this.cancelSearch.emit();
+        } else {
+            this.searchSubmit.emit({
+                text: this.inputText,
+                category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
+            });
+        }
     };
 
     /**

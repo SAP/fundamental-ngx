@@ -18,7 +18,8 @@ import { CommonModule } from '@angular/common';
             [size]="size"
             [isLoading]="isLoading"
             (inputChange)="onInputChange($event)"
-            (searchSubmit)="onSearchSubmit($event)"> </fdp-search-input>
+            (searchSubmit)="onSearchSubmit($event)"
+            (cancelSearch)="onCancelSearch($event)"> </fdp-search-input>
     `
 })
 class TestComponent {
@@ -33,6 +34,7 @@ class TestComponent {
 
     public inputValue: SearchInput;
     public submitValue: SearchInput;
+    public isSearchCanceled = false;
 
     constructor() { }
 
@@ -42,6 +44,10 @@ class TestComponent {
 
     onSearchSubmit($event) {
         this.submitValue = $event;
+    }
+
+    onCancelSearch($event) {
+        this.isSearchCanceled = true;
     }
 }
 
@@ -267,7 +273,6 @@ describe('SearchInputComponent', () => {
         fixture.detectChanges();
 
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
-        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
 
         // simulate input entry
         textInput.nativeElement.value = 'appl';
@@ -287,6 +292,20 @@ describe('SearchInputComponent', () => {
 
         const wrapper = fixture.debugElement.query(By.css('.search-input'));
         expect(wrapper.classes['is-loading']).toBeTruthy();
+    });
+
+    it('should emit a "cancelSearch" event when the user clicks the cancel button while in "loading" state', () => {
+        // set up component
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.isLoading = true;
+        fixture.detectChanges();
+
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        combobox.onPrimaryButtonClick();
+        fixture.detectChanges();
+
+        expect(host.isSearchCanceled).toBeTruthy();
     });
 
 });
