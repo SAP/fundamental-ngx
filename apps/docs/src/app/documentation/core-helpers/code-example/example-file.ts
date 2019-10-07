@@ -4,4 +4,8 @@ export interface ExampleFile {
     };
     name?: string;
     language?: string;
+    tagname?: string;
+    secondFile?: string;
+    thirdFile?: string;
+    component?: string;
 }
