@@ -86,7 +86,8 @@ import { SplitButtonHeaderComponent } from './component-docs/split-button/split-
 import { SplitButtonDocsComponent } from './component-docs/split-button/split-button-docs.component';
 import {
     TabNavigationExampleChildFirst,
-    TabNavigationExampleChildSecond, TabNavigationExampleChildThird
+    TabNavigationExampleChildSecond,
+    TabNavigationExampleChildThird
 } from './component-docs/tabs/examples/tab-navigation-children/tab-navigation-children';
 import { InputHeaderComponent } from './component-docs/input/input-header/input-header.component';
 import { InputDocsComponent } from './component-docs/input/input-docs.component';
@@ -111,250 +112,396 @@ export const ROUTES: Routes = [
         component: CoreDocumentationComponent,
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'action-bar', component: ActionBarHeaderComponent, children: [
-                    { path: '', component: ActionBarDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.actionBar}}
+            {
+                path: 'action-bar',
+                component: ActionBarHeaderComponent,
+                children: [
+                    { path: '', component: ActionBarDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionBar } }
                 ]
             },
-            { path: 'alert', component: AlertHeaderComponent, children: [
-                    { path: '', component: AlertDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.alert}}
+            {
+                path: 'alert',
+                component: AlertHeaderComponent,
+                children: [
+                    { path: '', component: AlertDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.alert } }
                 ]
             },
-            { path: 'badgeLabel', component: BadgeLabelHeaderComponent, children: [
-                    { path: '', component: BadgeLabelDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.badgeLabel}}
+            {
+                path: 'badgeLabel',
+                component: BadgeLabelHeaderComponent,
+                children: [
+                    { path: '', component: BadgeLabelDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.badgeLabel } }
                 ]
             },
-            { path: 'breadcrumb', component: BreadcrumbHeaderComponent, children: [
-                    { path: '', component: BreadcrumbDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.breadcrumb}}
+            {
+                path: 'breadcrumb',
+                component: BreadcrumbHeaderComponent,
+                children: [
+                    { path: '', component: BreadcrumbDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.breadcrumb } }
                 ]
             },
-            { path: 'button', component: ButtonHeaderComponent, children: [
-                    { path: '', component: ButtonDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.button}}
+            {
+                path: 'button',
+                component: ButtonHeaderComponent,
+                children: [
+                    { path: '', component: ButtonDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
                 ]
             },
-            { path: 'buttonGroup', component: ButtonGroupHeaderComponent, children: [
-                    { path: '', component: ButtonGroupDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.buttonGroup}}
+            {
+                path: 'buttonGroup',
+                component: ButtonGroupHeaderComponent,
+                children: [
+                    { path: '', component: ButtonGroupDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.buttonGroup } }
                 ]
             },
-            { path: 'calendar', component: CalendarHeaderComponent, children: [
-                    { path: '', component: CalendarDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.calendar}}
+            {
+                path: 'calendar',
+                component: CalendarHeaderComponent,
+                children: [
+                    { path: '', component: CalendarDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.calendar } }
                 ]
             },
-            { path: 'checkbox', component: CheckboxHeaderComponent, children: [
-                    { path: '', component: CheckboxDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+            {
+                path: 'checkbox',
+                component: CheckboxHeaderComponent,
+                children: [
+                    { path: '', component: CheckboxDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
                 ]
             },
-            { path: 'combobox', component: ComboboxHeaderComponent, children: [
-                    { path: '', component: ComboboxDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
+            {
+                path: 'combobox',
+                component: ComboboxHeaderComponent,
+                children: [
+                    { path: '', component: ComboboxDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } }
                 ]
             },
-            { path: 'datePicker', component: DatePickerHeaderComponent, children: [
-                    { path: '', component: DatePickerDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.datePicker}}
+            {
+                path: 'datePicker',
+                component: DatePickerHeaderComponent,
+                children: [
+                    { path: '', component: DatePickerDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.datePicker } }
                 ]
             },
-            { path: 'datetime-picker', component: DatetimePickerHeaderComponent, children: [
-                    { path: '', component: DatetimePickerDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.datetimePicker}}
+            {
+                path: 'datetime-picker',
+                component: DatetimePickerHeaderComponent,
+                children: [
+                    { path: '', component: DatetimePickerDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.datetimePicker } }
                 ]
             },
-            { path: 'dropdown', component: DropdownHeaderComponent, children: [
-                    { path: '', component: DropdownDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.dropdown}}
+            {
+                path: 'dropdown',
+                component: DropdownHeaderComponent,
+                children: [
+                    { path: '', component: DropdownDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: [] } }
                 ]
             },
-            { path: 'file-input', component: FileInputHeaderComponent, children: [
-                    { path: '', component: FileInputDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.fileInput}}
+            {
+                path: 'file-input',
+                component: FileInputHeaderComponent,
+                children: [
+                    { path: '', component: FileInputDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.fileInput } }
                 ]
             },
-            { path: 'icon', component: IconHeaderComponent, children: [
-                    { path: '', component: IconDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.icon}}
+            {
+                path: 'icon',
+                component: IconHeaderComponent,
+                children: [
+                    { path: '', component: IconDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.icon } }
                 ]
             },
-            { path: 'identifier', component: IdentifierHeaderComponent, children: [
-                    { path: '', component: IdentifierDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.identifier}}
+            {
+                path: 'identifier',
+                component: IdentifierHeaderComponent,
+                children: [
+                    { path: '', component: IdentifierDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.identifier } }
                 ]
             },
-            { path: 'image', component: ImageHeaderComponent, children: [
-                    { path: '', component: ImageDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.image}}
+            {
+                path: 'image',
+                component: ImageHeaderComponent,
+                children: [
+                    { path: '', component: ImageDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.image } }
                 ]
             },
-            { path: 'infiniteScroll', component: InfiniteScrollHeaderComponent, children: [
-                    { path: '', component: InfiniteScrollDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.infiniteScroll}}
+            {
+                path: 'infiniteScroll',
+                component: InfiniteScrollHeaderComponent,
+                children: [
+                    { path: '', component: InfiniteScrollDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.infiniteScroll } }
                 ]
             },
-            { path: 'inlineHelp', component: InlineHelpHeaderComponent, children: [
-                    { path: '', component: InlineHelpDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.inlineHelp}}
+            {
+                path: 'inlineHelp',
+                component: InlineHelpHeaderComponent,
+                children: [
+                    { path: '', component: InlineHelpDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.inlineHelp } }
                 ]
             },
-            { path: 'input', component: InputHeaderComponent, children: [
-                    { path: '', component: InputDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.inputGroup}}
+            {
+                path: 'input',
+                component: InputHeaderComponent,
+                children: [
+                    { path: '', component: InputDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.inputGroup } }
                 ]
             },
-            { path: 'inputGroup', component: InputGroupHeaderComponent, children: [
-                    { path: '', component: InputGroupDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.inputGroup}}
+            {
+                path: 'inputGroup',
+                component: InputGroupHeaderComponent,
+                children: [
+                    { path: '', component: InputGroupDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.inputGroup } }
                 ]
             },
-            { path: 'layoutGrid', component: LayoutGridDocsHeaderComponent, children: [
-                    { path: '', component: LayoutGridDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.layoutGrid}}
+            {
+                path: 'layoutGrid',
+                component: LayoutGridDocsHeaderComponent,
+                children: [
+                    { path: '', component: LayoutGridDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.layoutGrid } }
                 ]
             },
-            { path: 'list', component: ListHeaderComponent, children: [
-                    { path: '', component: ListDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.list}}
+            {
+                path: 'list',
+                component: ListHeaderComponent,
+                children: [
+                    { path: '', component: ListDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.list } }
                 ]
             },
-            { path: 'loadingSpinner', component: LoadingSpinnerHeaderComponent, children: [
-                    { path: '', component: LoadingSpinnerDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.loadingSpinner}}
+            {
+                path: 'loadingSpinner',
+                component: LoadingSpinnerHeaderComponent,
+                children: [
+                    { path: '', component: LoadingSpinnerDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.loadingSpinner } }
                 ]
             },
-            { path: 'localizationEditor', component: LocalizationEditorHeaderComponent, children: [
-                    { path: '', component: LocalizationEditorDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.localizationEditor}}
+            {
+                path: 'localizationEditor',
+                component: LocalizationEditorHeaderComponent,
+                children: [
+                    { path: '', component: LocalizationEditorDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.localizationEditor } }
                 ]
             },
-            { path: 'mega-menu', component: MegaMenuHeaderComponent, children: [
-                    { path: '', component: MegaMenuDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.megaMenu}}
+            {
+                path: 'mega-menu',
+                component: MegaMenuHeaderComponent,
+                children: [
+                    { path: '', component: MegaMenuDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.megaMenu } }
                 ]
             },
-            { path: 'menu', component: MenuHeaderComponent, children: [
-                    { path: '', component: MenuDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.menu}}
+            {
+                path: 'menu',
+                component: MenuHeaderComponent,
+                children: [
+                    { path: '', component: MenuDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             },
-            { path: 'modal', component: ModalDocsHeaderComponent, children: [
-                    { path: '', component: ModalDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.modal}}
+            {
+                path: 'modal',
+                component: ModalDocsHeaderComponent,
+                children: [
+                    { path: '', component: ModalDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.modal } }
                 ]
             },
-            { path: 'multi-input', component: MultiInputHeaderComponent, children: [
-                    { path: '', component: MultiInputDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.multiInput}}
+            {
+                path: 'multi-input',
+                component: MultiInputHeaderComponent,
+                children: [
+                    { path: '', component: MultiInputDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.multiInput } }
                 ]
             },
-            { path: 'pagination', component: PaginationHeaderComponent, children: [
-                    { path: '', component: PaginationDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.pagination}}
+            {
+                path: 'pagination',
+                component: PaginationHeaderComponent,
+                children: [
+                    { path: '', component: PaginationDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.pagination } }
                 ]
             },
-            { path: 'panel', component: PanelDocsHeaderComponent, children: [
-                    { path: '', component: PanelDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.panel}}
+            {
+                path: 'panel',
+                component: PanelDocsHeaderComponent,
+                children: [
+                    { path: '', component: PanelDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.panel } }
                 ]
             },
-            { path: 'popover', component: PopoverHeaderComponent, children: [
-                    { path: '', component: PopoverDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.popover}}
+            {
+                path: 'popover',
+                component: PopoverHeaderComponent,
+                children: [
+                    { path: '', component: PopoverDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.popover } }
                 ]
             },
-            { path: 'popover-directive', component: PopoverDirectiveHeaderComponent, children: [
-                    { path: '', component: PopoverDirectiveDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.popoverDirective}}
+            {
+                path: 'popover-directive',
+                component: PopoverDirectiveHeaderComponent,
+                children: [
+                    { path: '', component: PopoverDirectiveDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.popoverDirective } }
                 ]
             },
-            { path: 'radio', component: RadioHeaderComponent, children: [
-                    { path: '', component: RadioDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+            {
+                path: 'radio',
+                component: RadioHeaderComponent,
+                children: [
+                    { path: '', component: RadioDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
                 ]
             },
-            { path: 'select-native', component: SelectNativeHeaderComponent, children: [
-                    { path: '', component: SelectNativeDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+            {
+                path: 'select-native',
+                component: SelectNativeHeaderComponent,
+                children: [
+                    { path: '', component: SelectNativeDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
                 ]
             },
-            { path: 'scroll-spy', component: ScrollSpyHeaderComponent, children: [
-                    { path: '', component: ScrollSpyDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.scrollSpy}}
+            {
+                path: 'scroll-spy',
+                component: ScrollSpyHeaderComponent,
+                children: [
+                    { path: '', component: ScrollSpyDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.scrollSpy } }
                 ]
             },
-            { path: 'shellbar', component: ShellbarDocsHeaderComponent, children: [
-                    { path: '', component: ShellbarDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.shellbar}}
+            {
+                path: 'shellbar',
+                component: ShellbarDocsHeaderComponent,
+                children: [
+                    { path: '', component: ShellbarDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.shellbar } }
                 ]
             },
-            { path: 'sideNavigation', component: SideNavigationHeaderComponent, children: [
-                    { path: '', component: SideNavigationDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.sideNavigation}}
+            {
+                path: 'sideNavigation',
+                component: SideNavigationHeaderComponent,
+                children: [
+                    { path: '', component: SideNavigationDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.sideNavigation } }
                 ]
             },
-            { path: 'select', component: SelectHeaderComponent, children: [
-                    { path: '', component: SelectDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.select}}
+            {
+                path: 'select',
+                component: SelectHeaderComponent,
+                children: [
+                    { path: '', component: SelectDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.select } }
                 ]
             },
-            { path: 'splitButton', component: SplitButtonHeaderComponent, children: [
-                    { path: '', component: SplitButtonDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.splitButton}}
+            {
+                path: 'splitButton',
+                component: SplitButtonHeaderComponent,
+                children: [
+                    { path: '', component: SplitButtonDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.splitButton } }
                 ]
             },
-            { path: 'table', component: TableDocsHeaderComponent, children: [
-                    { path: '', component: TableDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.table}}
+            {
+                path: 'table',
+                component: TableDocsHeaderComponent,
+                children: [
+                    { path: '', component: TableDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.table } }
                 ]
             },
-            { path: 'tabs', component: TabsHeaderComponent, children: [
-                    { path: '', component: TabsDocsComponent,
+            {
+                path: 'tabs',
+                component: TabsHeaderComponent,
+                children: [
+                    {
+                        path: '',
+                        component: TabsDocsComponent,
                         children: [
-                            {path: 'tab1', component: TabNavigationExampleChildFirst},
-                            {path: 'tab2', component: TabNavigationExampleChildSecond},
-                            {path: 'tab3', component: TabNavigationExampleChildThird},
+                            { path: 'tab1', component: TabNavigationExampleChildFirst },
+                            { path: 'tab2', component: TabNavigationExampleChildSecond },
+                            { path: 'tab3', component: TabNavigationExampleChildThird }
                         ]
                     },
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tabs }}
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.tabs } }
                 ]
             },
-            { path: 'textarea', component: TextareaHeaderComponent, children: [
-                    { path: '', component: TextareaDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+            {
+                path: 'textarea',
+                component: TextareaHeaderComponent,
+                children: [
+                    { path: '', component: TextareaDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
                 ]
             },
-            { path: 'tile', component: TileDocsHeaderComponent, children: [
-                    { path: '', component: TileDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tile}}
+            {
+                path: 'tile',
+                component: TileDocsHeaderComponent,
+                children: [
+                    { path: '', component: TileDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.tile } }
                 ]
             },
-            { path: 'time', component: TimeHeaderComponent, children: [
-                    { path: '', component: TimeDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.time}}
+            {
+                path: 'time',
+                component: TimeHeaderComponent,
+                children: [
+                    { path: '', component: TimeDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.time } }
                 ]
             },
-            { path: 'timePicker', component: TimePickerHeaderComponent, children: [
-                    { path: '', component: TimePickerDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.timePicker}}
+            {
+                path: 'timePicker',
+                component: TimePickerHeaderComponent,
+                children: [
+                    { path: '', component: TimePickerDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.timePicker } }
                 ]
             },
-            { path: 'tree', component: TreeHeaderComponent, children: [
-                    { path: '', component: TreeDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.tree}}
+            {
+                path: 'tree',
+                component: TreeHeaderComponent,
+                children: [
+                    { path: '', component: TreeDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.tree } }
                 ]
             },
-            { path: 'toggle', component: ToggleHeaderComponent, children: [
-                    { path: '', component: ToggleDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.toggle}}
+            {
+                path: 'toggle',
+                component: ToggleHeaderComponent,
+                children: [
+                    { path: '', component: ToggleDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.toggle } }
                 ]
             },
-            { path: 'token', component: TokenHeaderComponent, children: [
-                    { path: '', component: TokenDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.token}}
+            {
+                path: 'token',
+                component: TokenHeaderComponent,
+                children: [
+                    { path: '', component: TokenDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.token } }
                 ]
             },
             { path: 'home', component: HomeDocsComponent },

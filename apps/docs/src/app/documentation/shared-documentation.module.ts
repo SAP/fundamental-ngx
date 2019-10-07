@@ -91,4 +91,4 @@ import { ApiComponent } from './core-helpers/api/api.component';
         ApiComponent
     ]
 })
-export class SharedDocumentationModule {}
+export class SharedDocumentationModule { }
