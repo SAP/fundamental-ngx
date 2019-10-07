@@ -1,12 +1,11 @@
 import {
-    AfterViewChecked,
     Component,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input, OnChanges,
     OnInit,
-    Output,
+    Output, Renderer2, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
@@ -27,7 +26,7 @@ import { FdRangeDate } from '../../models/fd-range-date';
         '[attr.id]': 'id + "-day-view"'
     }
 })
-export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnChanges {
+export class CalendarDayViewComponent implements OnInit, OnChanges {
 
     /** @hidden */
     newFocusedDayId: string = '';
@@ -139,8 +138,11 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     /** @hidden */
     constructor(
         private calendarI18n: CalendarI18n,
-        private eRef: ElementRef
+        private eRef: ElementRef,
     ) {
+    }
+
+    getFocusedElement() {
     }
 
     /**
@@ -284,25 +286,22 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
     }
 
     /** @hidden */
-    public ngOnChanges(): void {
+    public ngOnChanges(changes: SimpleChanges): void {
         this.buildDayViewGrid();
-    }
-
-    /** @hidden */
-    ngAfterViewChecked(): void {
-        if (this.newFocusedDayId) {
-            this.focusElement(this.newFocusedDayId);
-            this.newFocusedDayId = null;
-        }
     }
 
     /** @hidden
      *  Method that allow to focus elements inside this component
      */
     public focusElement(elementSelector): void {
-        const elementToFocus = this.eRef.nativeElement.querySelector('#' + elementSelector);
-        if (elementToFocus) {
-            elementToFocus.focus();
+        if (this.newFocusedDayId) {
+            this.newFocusedDayId = '';
+            setTimeout(() => {
+                const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
+                if (elementToFocus) {
+                    elementToFocus.focus();
+                }
+            }, 0);
         }
     }
 
@@ -311,6 +310,7 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
         this.newFocusedDayId = this.getActiveCell(
             this.calendarDayList.filter(cell => cell.monthStatus === 'current')
         ).id;
+        this.focusElement(this.newFocusedDayId);
     }
 
     /** Function that gives array of all displayed CalendarDays */
