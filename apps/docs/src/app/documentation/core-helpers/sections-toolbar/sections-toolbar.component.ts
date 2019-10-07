@@ -7,17 +7,12 @@ import { SectionInterface } from './section.interface';
     templateUrl: './sections-toolbar.component.html'
 })
 export class SectionsToolbarComponent {
-    @ViewChild('content', {static: true }) contentElRef: ElementRef;
 
     @Input() sections: SectionInterface[];
 
     search: string = '';
     smallScreen: boolean = window.innerWidth < 992;
     sideCollapsed: boolean = window.innerWidth < 576;
-
-    skipNavClicked() {
-        this.contentElRef.nativeElement.focus();
-    }
 
     onKeypressHandler(event: KeyboardEvent) {
         if (event.code === 'Enter' || event.code === 'Space') {
@@ -31,8 +26,6 @@ export class SectionsToolbarComponent {
         if (this.smallScreen && !this.sideCollapsed) {
             this.sideCollapsed = true;
         }
-        this.contentElRef.nativeElement.scrollTop = 0;
-        this.skipNavClicked();
     }
 
     windowSize() {

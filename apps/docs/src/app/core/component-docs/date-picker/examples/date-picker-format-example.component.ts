@@ -28,7 +28,7 @@ export class DateFormatDashes extends DateFormatParser {
         <br/>
         <div>Selected Date: {{date?.toDateString()}}</div>
         <br/>
-        <fd-date-picker style="width: 300px;" placeholder="yyyy/mm/dd to yyyy/mm/dd"
+        <fd-date-picker placeholder="yyyy/mm/dd to yyyy/mm/dd"
                         [type]="'range'" [(ngModel)]="selectedRange"></fd-date-picker>
         <br/>
         <div>Selected First Date: {{selectedRange?.start?.toDateString()}}</div>
