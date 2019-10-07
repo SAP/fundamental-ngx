@@ -2,10 +2,10 @@
     class="fd-time__item">
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
                 (click)="increaseHour()"
                 type="button"
                 fd-button
+                [disabled]="disabled"
                 [glyph]="'navigation-up-arrow'"
                 [options]="'light'"
                 [size]="'xs'"
@@ -25,10 +25,10 @@
             [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
                 (click)="decreaseHour()"
                 type="button"
                 fd-button
+                [disabled]="disabled"
                 [glyph]="'navigation-down-arrow'"
                 [options]="'light'"
                 [size]="'xs'"
@@ -40,7 +40,7 @@
     class="fd-time__item">
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
+                [disabled]="disabled"
                 (click)="increaseMinute()"
                 fd-button
                 [size]="'xs'"
@@ -60,7 +60,7 @@
             [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
+                [disabled]="disabled"
                 (click)="decreaseMinute()"
                 fd-button
                 [size]="'xs'"
@@ -74,7 +74,7 @@
      class="fd-time__item">
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
+                [disabled]="disabled"
                 (click)="increaseSecond()"
                 fd-button
                 [size]="'xs'"
@@ -95,7 +95,7 @@
             [attr.aria-label]="timeI18nLabels?.secondsLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
+                [disabled]="disabled"
                 (click)="decreaseSecond()"
                 fd-button
                 [size]="'xs'"
@@ -110,7 +110,7 @@
      class="fd-time__item">
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
+                [disabled]="disabled"
                 (click)="togglePeriod()"
                 fd-button
                 [size]="'xs'"
@@ -129,7 +129,7 @@
             [attr.aria-label]="timeI18nLabels?.periodLabel"/>
     <div class="fd-time__control">
         <button *ngIf="spinners"
-                [ngClass]="{'is-disabled': disabled}"
+                [disabled]="disabled"
                 (click)="togglePeriod()"
                 fd-button
                 [size]="'xs'"
