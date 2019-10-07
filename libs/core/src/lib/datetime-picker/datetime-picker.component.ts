@@ -349,7 +349,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.time = selected.time;
         this.date = new FdDatetime(this.selectedDate, this.time);
         if (this.isModelValid()) {
-            this.calendarComponent.setCurrentlyDisplayed(this.date.date);
+            this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.setInput(this.date);
         }
     }
@@ -405,14 +405,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.isInvalidDateInput = !this.isModelValid();
         this.onChange(fdTimeDate);
         if (!this.isInvalidDateInput) {
-            this.calendarComponent.setCurrentlyDisplayed(fdTimeDate.date);
+            this.refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
         }
         if (!date && this.allowNull) {
             this.isInvalidDateInput = false;
             this.date = FdDatetime.getToday();
             this.selectedDate = this.date.date;
             this.time = this.date.time;
-            this.calendarComponent.setCurrentlyDisplayed(this.date.date);
+            this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.onChange(null);
         } else if (!this.allowNull) {
             this.isInvalidDateInput = true;
@@ -429,6 +429,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private setInput(fdDateTime: FdDatetime): void {
         this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
         this.changeDetRef.detectChanges();
+    }
+
+    /** @hidden */
+    private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
+        if (this.calendarComponent) {
+            this.calendarComponent.setCurrentlyDisplayed(date);
+        }
     }
 
 }
