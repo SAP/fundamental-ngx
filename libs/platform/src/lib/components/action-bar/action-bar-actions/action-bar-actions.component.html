@@ -1,8 +1,8 @@
 <div fd-action-bar-actions>
     <button
+        *ngFor="let action of buttonItems"
         class="action-button-margin fdp-action-button"
         [attr.title]="action.label"
-        *ngFor="let action of buttonItems"
         fd-button
         [fdType]="action.type"
         [options]="action.options"
@@ -15,10 +15,10 @@
     <fd-popover class="action-button-margin" placement="{{ placement }}">
         <fd-popover-control>
             <button
+                *ngIf="menuItems?.length > 0"
                 class="fdp-action-popover-button"
                 fd-button
                 aria-label="More"
-                *ngIf="menuItems?.length > 0"
                 aria-haspopup="true"
                 [fdType]="'light'"
                 [glyph]="'overflow'"
@@ -29,8 +29,8 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li
-                        fd-menu-item
                         *ngFor="let menu of menuItems; let i = index"
+                        fd-menu-item
                         (click)="menu.editTitle ? onRenameClick() : onItemClick(menu)"
                         (keydown)="handleKeyPress($event, i)"
                         tabIndex="0"
