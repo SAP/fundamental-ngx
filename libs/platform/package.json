@@ -1,10 +1,16 @@
 {
     "name": "@fundamental-ngx/platform",
     "version": "VERSION_PLACEHOLDER",
+    "license": "Apache-2.0",
+    "homepage": "https://sap.github.io/fundamental-ngx/home",
     "description": "SAP Fundamentals platform, implemented in Angular",
     "peerDependencies": {
         "@angular/common": "ANGULAR_VER_PLACEHOLDER",
         "@angular/core": "ANGULAR_VER_PLACEHOLDER"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SAP/fundamental-ngx"
     },
     "dependencies": {
         "@fundamental-ngx/core": "VERSION_PLACEHOLDER"
