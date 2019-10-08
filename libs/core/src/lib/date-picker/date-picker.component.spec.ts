@@ -5,6 +5,8 @@ import { IconModule } from '../icon/icon.module';
 import { FormsModule } from '@angular/forms';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarModule } from '../calendar/calendar.module';
+import { ButtonModule } from '../button/button.module';
+import { InputGroupModule } from '../input-group/input-group.module';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent;
@@ -13,7 +15,7 @@ describe('DatePickerComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DatePickerComponent],
-            imports: [CalendarModule, PopoverModule, FormsModule, IconModule]
+            imports: [CalendarModule, PopoverModule, FormsModule, IconModule, InputGroupModule, ButtonModule]
         }).compileComponents();
 
     }));

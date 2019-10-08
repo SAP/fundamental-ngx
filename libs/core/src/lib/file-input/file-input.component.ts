@@ -27,7 +27,7 @@ export class FileInputComponent implements ControlValueAccessor {
     fdFileInputClass: boolean = true;
 
     /** @hidden */
-    @ViewChild('input')
+    @ViewChild('input', { static: false })
     inputRef: ElementRef;
 
     /** Whether the file input is disabled. */

@@ -1,4 +1,4 @@
-import {version} from '../../../../libs/core/package.json';
+import {version} from '../../../../package.json';
 
 export const environment = {
     production: true,

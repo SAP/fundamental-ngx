@@ -1,90 +1,89 @@
-<div class="fd-shellbar__actions">
-    <div *ngIf="searchInputComponent" class="fd-shellbar__action fd-shellbar__action--collapsible">
-        <div class="fd-search-input fd-search-input--closed">
-            <ng-content select="fd-search-input"></ng-content>
-        </div>
+<div *ngIf="comboboxComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
+    <div class="fd-search-input">
+        <ng-content select="fd-combobox"></ng-content>
     </div>
-    <div *ngIf="actionsCollapsed && shellbarActions.length"
-         class="fd-shellbar__action fd-shellbar__action--collapse">
-        <div class="fd-shellbar-collapse">
-            <fd-popover [options]="{placement: 'bottom-end'}"
-                        [focusTrapped]="false">
-                <fd-popover-control>
-                    <div class="fd-shellbar-collapse--control">
-                        <button class="fd-button--shell sap-icon--overflow"
-                                [attr.aria-label]="collapsedItemMenuLabel">
-                            <span *ngIf="totalNotifications"
-                                  class="fd-counter fd-counter--notification">{{totalNotifications}}</span>
-                        </button>
-                    </div>
-                </fd-popover-control>
-                <fd-popover-body>
-                    <fd-menu>
-                        <ul fd-menu-list
-                            *ngIf="!showCollapsedProducts">
-                            <div *ngFor="let action of shellbarActions"
-                                 class="fd-menu__addon-before">
-                                <span [ngClass]="'sap-icon--' + action.glyph"></span>
-                            </div>
-                            <li fd-menu-item
-                                *ngFor="let action of shellbarActions"
-                                (click)="itemClicked(action, $event)">
-                                {{action.label}}
-                            </li>
-                            <div *ngIf="productSwitcher"
-                                 class="fd-menu__addon-before">
-                                <span [ngClass]="'sap-icon--grid'"></span>
-                            </div>
-                            <li fd-menu-item
-                                *ngIf="productSwitcher"
-                                (click)="toggleCollapsedProducts($event);">
-                                Product Switcher
-                            </li>
-                        </ul>
-                        <ul fd-menu-list
-                            *ngIf="showCollapsedProducts">
-                            <li (click)="toggleCollapsedProducts($event)">
-                                <span fd-menu-item class="sap-icon--nav-back"></span>
-                            </li>
-                            <hr>
-                            <li fd-menu-item
-                                *ngFor="let product of productSwitcherItems"
-                                (click)="itemClicked(product, $event)">
-                                {{product.title}}
-                            </li>
-                        </ul>
-                    </fd-menu>
-                </fd-popover-body>
-            </fd-popover>
-        </div>
-    </div>
-    <ng-content></ng-content>
-    <ng-content select="fd-shellbar-action"></ng-content>
-    <ng-container *ngIf="userItem">
-        <ng-container *ngIf="!userComponent">
-            <fd-shellbar-user-menu (itemClicked)="triggerItems()"
-                                   [options]="{placement: 'bottom-end'}"
-                                   [focusTrapped]="false"
-                                   [user]="user"
-                                   [userMenu]="userMenu"
-            ></fd-shellbar-user-menu>
-        </ng-container>
-        <ng-container *ngIf="userComponent">
-            <ng-content select="fd-shellbar-user-menu"></ng-content>
-        </ng-container>
-    </ng-container>
-
-
-    <ng-container *ngIf="productSwitcherItems">
-        <ng-container *ngIf="productSwitcherComponent">
-            <ng-content select="fd-shellbar-product-switcher"></ng-content>
-        </ng-container>
-        <ng-container *ngIf="!productSwitcherComponent">
-            <fd-shellbar-product-switcher (itemClicked)="triggerItems()"
-                                          [options]="{placement: 'bottom-end'}"
-                                          [productSwitcher]="productSwitcher"
-                                          [focusTrapped]="false">
-            </fd-shellbar-product-switcher>
-        </ng-container>
-    </ng-container>
 </div>
+
+<div *ngIf="actionsCollapsed && shellbarActions.length"
+        class="fd-shellbar__action fd-shellbar__action--mobile">
+    <div class="fd-shellbar-collapse">
+        <fd-popover [options]="{placement: 'bottom-end'}"
+                    [focusTrapped]="false">
+            <fd-popover-control>
+                <div class="fd-shellbar-collapse--control">
+                    <button fd-button [glyph]="'overflow'" class="fd-shellbar__button"
+                            [attr.aria-label]="collapsedItemMenuLabel">
+                        <span *ngIf="totalNotifications"
+                                class="fd-counter fd-counter--notification">{{totalNotifications}}</span>
+                    </button>
+                </div>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-menu>
+                    <ul fd-menu-list
+                        *ngIf="!showCollapsedProducts">
+                        <div *ngFor="let action of shellbarActions"
+                                class="fd-menu__addon-before">
+                            <span [ngClass]="'sap-icon--' + action.glyph"></span>
+                        </div>
+                        <li fd-menu-item
+                            *ngFor="let action of shellbarActions"
+                            (click)="itemClicked(action, $event)">
+                            {{action.label}}
+                        </li>
+                        <div *ngIf="productSwitcher"
+                                class="fd-menu__addon-before">
+                            <span [ngClass]="'sap-icon--grid'"></span>
+                        </div>
+                        <li fd-menu-item
+                            *ngIf="productSwitcher"
+                            (click)="toggleCollapsedProducts($event);">
+                            Product Switcher
+                        </li>
+                    </ul>
+                    <ul fd-menu-list
+                        *ngIf="showCollapsedProducts">
+                        <li (click)="toggleCollapsedProducts($event)">
+                            <span fd-menu-item class="sap-icon--nav-back"></span>
+                        </li>
+                        <hr>
+                        <li fd-menu-item
+                            *ngFor="let product of productSwitcherItems"
+                            (click)="itemClicked(product, $event)">
+                            {{product.title}}
+                        </li>
+                    </ul>
+                </fd-menu>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>
+<ng-content></ng-content>
+<ng-content select="fd-shellbar-action"></ng-content>
+<ng-container *ngIf="userItem">
+    <ng-container *ngIf="!userComponent">
+        <fd-shellbar-user-menu (itemClicked)="triggerItems()"
+                               [options]="{placement: 'bottom-end'}"
+                               [focusTrapped]="false"
+                               [user]="user"
+                               [userMenu]="userMenu"
+        ></fd-shellbar-user-menu>
+    </ng-container>
+    <ng-container *ngIf="userComponent">
+        <ng-content select="fd-shellbar-user-menu"></ng-content>
+    </ng-container>
+</ng-container>
+
+
+<ng-container *ngIf="productSwitcherItems">
+    <ng-container *ngIf="productSwitcherComponent">
+        <ng-content select="fd-shellbar-product-switcher"></ng-content>
+    </ng-container>
+    <ng-container *ngIf="!productSwitcherComponent">
+        <fd-shellbar-product-switcher (itemClicked)="triggerItems()"
+                                      [options]="{placement: 'bottom-end'}"
+                                      [productSwitcher]="productSwitcher"
+                                      [focusTrapped]="false">
+        </fd-shellbar-product-switcher>
+    </ng-container>
+</ng-container>

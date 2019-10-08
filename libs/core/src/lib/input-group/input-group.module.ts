@@ -7,10 +7,30 @@ import { InputGroupNumberComponent } from './input-group-number.component';
 import { InputGroupSearchComponent } from './input-group-search.component';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
+import {
+    InputGroupAddOnDirective,
+    InputGroupInputDirective,
+    InputGroupTextareaDirective
+} from './input-group-directives';
 
 @NgModule({
-    declarations: [InputGroupSearchComponent, InputGroupNumberComponent, InputGroupComponent],
+    declarations: [
+        InputGroupSearchComponent,
+        InputGroupNumberComponent,
+        InputGroupComponent,
+        InputGroupInputDirective,
+        InputGroupTextareaDirective,
+        InputGroupAddOnDirective,
+    ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule],
-    exports: [InputGroupSearchComponent, InputGroupNumberComponent, InputGroupComponent]
+    exports: [
+        InputGroupSearchComponent,
+        InputGroupNumberComponent,
+        InputGroupComponent,
+        InputGroupInputDirective,
+        InputGroupTextareaDirective,
+        InputGroupAddOnDirective
+    ]
 })
-export class InputGroupModule {}
+export class InputGroupModule {
+}

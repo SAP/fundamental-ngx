@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MenuItemDirective } from '../menu/menu-item.directive';
 import { ComboboxComponent } from './combobox.component';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '../popover/popover.module';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
-import { ButtonModule } from '../button/button.module';
+import { InputGroupModule } from '../input-group/input-group.module';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -16,12 +15,12 @@ describe('ComboboxComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ComboboxComponent],
             imports: [
+                InputGroupModule,
                 CommonModule,
                 PopoverModule,
                 FormsModule,
                 MenuModule,
                 PipeModule,
-                ButtonModule
             ]
         }).compileComponents();
     }));

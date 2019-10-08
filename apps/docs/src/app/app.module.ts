@@ -5,33 +5,23 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { HighlightModule } from 'ngx-highlightjs';
-import scss from 'highlight.js/lib/languages/scss';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
-
-export function hljsLanguages() {
-    return [{ name: 'typescript', func: typescript }, { name: 'scss', func: scss }, { name: 'html', func: xml }];
-}
 
 const routes: Routes = [
-    { path: '', loadChildren: './documentation/documentation.module#DocumentationModule' },
-    { path: '**', redirectTo: '/home' }
+    { path: 'core', loadChildren: () => import('./core/core-documentation.module').then(m => m.CoreDocumentationModule) },
+    { path: 'platform', loadChildren: () => import('./platform/platform-documentation.module').then(m => m.PlatformDocumentationModule) },
+    { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes, {
-            scrollPositionRestoration: 'enabled',
-            anchorScrolling: 'enabled'
-        }),
+        RouterModule.forRoot(routes, { useHash: true }),
         HttpClientModule,
         MarkdownModule.forRoot({ loader: HttpClient }),
-        HighlightModule.forRoot({ languages: hljsLanguages })
     ],
     bootstrap: [AppComponent],
+
     entryComponents: []
 })
-export class AppModule {}
+export class AppModule { }

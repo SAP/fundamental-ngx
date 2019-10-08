@@ -1,8 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocalizationEditorComponent } from './localization-editor.component';
-import { LocalizationEditorModule } from './localization-editor.module';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from '../button/button.module';
+import { PopoverModule } from '../popover/popover.module';
+import { MenuModule } from '../menu/menu.module';
+import { FormModule } from '../form/form.module';
+import { InputGroupModule } from '../input-group/input-group.module';
 
 describe('LocalizatorEditorComponent', () => {
     let component: LocalizationEditorComponent;
@@ -11,8 +15,10 @@ describe('LocalizatorEditorComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                LocalizationEditorModule,
-                CommonModule
+                CommonModule, PopoverModule, FormModule, InputGroupModule, MenuModule, ButtonModule,
+            ],
+            declarations: [
+                LocalizationEditorComponent
             ]
         })
             .compileComponents();

@@ -136,7 +136,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     menuItems: QueryList<MenuItemDirective>;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
+    @ViewChild('searchInputElement', { static: false })
     searchInputElement: ElementRef;
 
     /** @hidden */

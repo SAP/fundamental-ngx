@@ -1,6 +1,7 @@
 import { Component, Host, Inject, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PopoverComponent } from '../popover.component';
+import { ButtonType } from '../../button/button.component';
 /**
  * A component used to enforce a certain layout for the popover. With additional styling
  * ```html
@@ -33,7 +34,7 @@ export class PopoverDropdownComponent {
 
     /** The btnType to display. */
     @Input()
-    btnType: string = '';
+    btnType: ButtonType;
 
     /** Whether the dropdown is in compact format. */
     @Input()

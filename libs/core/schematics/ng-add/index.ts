@@ -11,7 +11,8 @@ import chalk from 'chalk';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
-const fdStylesPath = 'node_modules/fundamental-styles/dist/fundamental-styles.min.css';
+const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
+const fdStylesFontsPath = 'node_modules/fundamental-styles/dist/fonts.css';
 
 export function ngAdd(options: any): Rule {
     return chain([
@@ -89,10 +90,11 @@ function addStylePathToConfig(options: any): Rule {
 
         try {
             // tslint:disable-next-line:no-non-null-assertion
-            const stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
+            let stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
 
-            if (!stylesArray.includes(fdStylesPath)) {
-                stylesArray.push(fdStylesPath);
+            if (!stylesArray.includes(fdStylesIconPath) || !stylesArray.includes(fdStylesFontsPath)) {
+                stylesArray = pushStylesToArray(stylesArray, fdStylesFontsPath);
+                stylesArray = pushStylesToArray(stylesArray, fdStylesIconPath);
                 // tslint:disable-next-line:no-non-null-assertion
                 (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
             } else {
@@ -106,4 +108,11 @@ function addStylePathToConfig(options: any): Rule {
         console.log(chalk.green(`✅️ Added fundamental-styles path to angular.json.`));
         return tree;
     };
+}
+
+function pushStylesToArray(stylesArray: any, path: string): any {
+    if (!stylesArray.includes(path)) {
+        stylesArray.push(path);
+    }
+    return stylesArray;
 }

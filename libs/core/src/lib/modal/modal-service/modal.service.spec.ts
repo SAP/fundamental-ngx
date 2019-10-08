@@ -15,7 +15,7 @@ import { ModalRef } from '../modal-utils/modal-ref';
     `
 })
 class TemplateTestComponent {
-    @ViewChild('testTemplate') templateRef: TemplateRef<any>;
+    @ViewChild('testTemplate', { static: false }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'rtl-toggle',
     template: `
         <fd-toggle [size]="'xs'" [(ngModel)]="isChecked" (ngModelChange)="onChange()">Simulate RTL</fd-toggle>
-    `
+    `,
+    encapsulation: ViewEncapsulation.None
 })
 export class DirectionalityComponent implements OnInit {
     id: string;

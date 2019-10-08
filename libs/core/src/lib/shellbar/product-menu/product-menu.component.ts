@@ -18,12 +18,12 @@ import { PopoverComponent } from '../../popover/popover.component';
 export class ProductMenuComponent extends PopoverComponent implements OnInit {
 
     /** @hidden */
-    @ViewChild(PopoverComponent)
+    @ViewChild(PopoverComponent, { static: false })
     popoverComponent: PopoverComponent;
 
-    /** 
+    /**
      * The control element to toggle the product menu,
-     * represented by the name of the current application. 
+     * represented by the name of the current application.
      */
     @Input()
     control: string;

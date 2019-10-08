@@ -10,7 +10,7 @@ import {
     ContentChild, ViewChildren, ViewChild
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { SearchInputComponent } from '../../search-input/search-input.component';
+import { ComboboxComponent } from '../../combobox/combobox.component';
 import { PopoverComponent } from '../../popover/popover.component';
 import { ShellbarProductSwitcherComponent } from '../shellbar-product-switcher/shellbar-product-switcher.component';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
@@ -74,24 +74,24 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarProductSwitcherComponent)
+    @ContentChild(ShellbarProductSwitcherComponent, { static: false })
     productSwitcherComponent: ShellbarProductSwitcherComponent;
 
     /** @hidden */
-    @ContentChild(ShellbarUserMenuComponent)
+    @ContentChild(ShellbarUserMenuComponent, { static: false })
     userComponent: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarUserMenuComponent)
+    @ViewChild(ShellbarUserMenuComponent, { static: false })
     userComponentView: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarProductSwitcherComponent)
+    @ViewChild(ShellbarProductSwitcherComponent, { static: false })
     productSwitcherComponentView: ShellbarProductSwitcherComponent;
 
     /** @hidden */
-    @ContentChild(SearchInputComponent)
-    searchInputComponent: SearchInputComponent;
+    @ContentChild(ComboboxComponent, { static: false })
+    comboboxComponent: ComboboxComponent;
 
     /** @hidden */
     totalNotifications: number;

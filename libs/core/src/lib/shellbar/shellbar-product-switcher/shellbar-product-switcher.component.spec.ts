@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellbarProductSwitcherComponent } from './shellbar-product-switcher.component';
-import { PopoverModule } from '@fundamental-ngx/core';
+import { PopoverModule } from '../../popover/popover.module';
+import { ButtonModule } from '../../button/button.module';
 
 describe('ShellbarProductSwitcherComponent', () => {
     let component: ShellbarProductSwitcherComponent;
@@ -9,7 +10,7 @@ describe('ShellbarProductSwitcherComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule],
+            imports: [PopoverModule, ButtonModule],
             declarations: [ShellbarProductSwitcherComponent]
         })
             .compileComponents();

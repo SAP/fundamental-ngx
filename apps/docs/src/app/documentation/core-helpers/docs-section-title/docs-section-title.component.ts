@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, TemplateRef } from '@angular/core';
 import { Renderer } from 'marked';
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'fd-docs-section-title',
     template: `
         <h2 [id]="id" #title class="docs-header-link">
-            <a class="docs-markdown-a" [attr.aria-describedby]="id" href="/{{ componentName }}#{{ id }}">
+            <a class="docs-markdown-a" [attr.aria-describedby]="id" href="/fundamental-ngx/{{ componentName }}#{{ id }}">
                 <span class="sap-icon--chain-link"></span>
             </a>
             <ng-content></ng-content>
@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     private idFromUrl: any;
 
-    @ViewChild('title', { read: ElementRef }) sectionTitle: ElementRef;
+    @ViewChild('title', { read: ElementRef, static: false  }) sectionTitle: ElementRef;
 
     @Input() id: string = '';
 

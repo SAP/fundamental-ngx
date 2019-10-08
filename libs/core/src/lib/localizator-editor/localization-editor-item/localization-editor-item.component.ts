@@ -41,15 +41,15 @@ export class LocalizationEditorItemComponent implements OnInit, AfterContentInit
     compact: boolean;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorInputDirective)
+    @ContentChild(LocalizationEditorInputDirective, { static: false })
     input: LocalizationEditorInputDirective;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorTextareaDirective)
+    @ContentChild(LocalizationEditorTextareaDirective, { static: false })
     textarea: LocalizationEditorTextareaDirective;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorLabel, { read: TemplateRef })
+    @ContentChild(LocalizationEditorLabel, { read: TemplateRef, static: false })
     labelTemplate: TemplateRef<any>;
 
     /** @hidden */

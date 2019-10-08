@@ -7,6 +7,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-side-nav',
     templateUrl: './side-navigation.component.html',
+    styleUrls: ['./side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationComponent {

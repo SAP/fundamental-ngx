@@ -18,7 +18,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, V
 export class TokenComponent {
 
     /** @hidden */
-    @ViewChild('contentContainer')
+    @ViewChild('contentContainer', { static: false })
     contentContainer: ElementRef;
 
     /** Whether the token is disabled. */

@@ -1,12 +1,24 @@
 <button aria-expanded="false"
+        fd-button
+        [options]="'light'"
+        [fdType]="'standard'"
+        [glyph]="'menu2'"
         aria-label="Toggle Navigation" (click)="this.btnClicked.emit()"
-        class="fd-button--light fd-button--standard sap-icon--menu2 fd-docs--toolbar__sidebar-btn"></button>
+        class="fd-docs--toolbar__sidebar-btn"></button>
 <a aria-label="Home" class="fd-docs--toolbar__home-logo" href="/">
     Fundamental
     <span class="fd-docs--toolbar__home-logo-framework">
         NGX
     </span>
 </a>
+
+<!-- Let's wait for platform to allow switcher. -->
+<!--<div class="fd-docs&#45;&#45;toolbar__lib">-->
+<!--    <span>Platform</span>-->
+<!--    <fd-toggle [ngModel]="isOnCore" [size]="'s'" (ngModelChange)="changeLibChange()"></fd-toggle>-->
+<!--    <span>Core</span>-->
+<!--</div>-->
+
 <span class="fd-docs--toolbar__spacer"></span>
 <span class="fd-docs--toolbar__version">v{{version}}</span>
 <a href="https://github.com/SAP/fundamental-ngx" title="Find us on Github!">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -7,7 +7,9 @@ import { Component } from '@angular/core';
  */
 @Component({
     selector: 'fd-shellbar',
-    templateUrl: './shellbar.component.html'
+    templateUrl: './shellbar.component.html',
+    styleUrls: ['./shellbar.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ShellbarComponent {
 }

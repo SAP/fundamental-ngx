@@ -1,38 +1,58 @@
 <div class="fd-input-group"
-     [ngClass]="{'fd-input-group--after': placement !== 'before',
-        'fd-input-group--before': placement === 'before', 'fd-input-group--inline': inline === true,
+     [ngClass]="{
+        'fd-input-group--after': placement === 'after',
+        'fd-input-group--before': placement === 'before',
+        'fd-input-group--inline': inline === true,
         'fd-input-group--compact' : compact}">
-  <input [(ngModel)]="inputText"
-         [disabled]="disabled"
-         type="text"
-         *ngIf="placement !== 'before'"
-         placeholder="{{placeholder}}"
-         [ngClass]="{'fd-input--compact' : compact}">
-  <span *ngIf="!button"
-        class="fd-input-group__addon"
-        [ngClass]="{'fd-input-group__addon--after': placement !== 'before',
-          'fd-input-group__addon--before': placement === 'before'}">
-    <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
-    <span *ngIf="glyph"
-          [ngClass]="'sap-icon--' + glyph"></span>
-  </span>
-  <span *ngIf="button"
-        class="fd-input-group__addon fd-input-group__addon--button"
-        [ngClass]="{'fd-input-group__addon--after': placement !== 'before', 'fd-input-group__addon--before': placement === 'before'}">
-    <button [disabled]="disabled"
-            *ngIf="!glyph"
-            (click)="buttonClicked($event)"
-            class="fd-button--light">{{addOnText}}</button>
-    <button [disabled]="disabled"
-            *ngIf="glyph"
-            (click)="buttonClicked($event)"
-            class="fd-button--icon fd-button--light"
-            [ngClass]="'sap-icon--' + glyph"></button>
-  </span>
-  <input [(ngModel)]="inputText"
-         *ngIf="placement === 'before'"
-         [disabled]="disabled"
-         type="text"
-         placeholder="{{placeholder}}"
-         [ngClass]="{'fd-input--compact' : compact}">
+
+    <ng-container *ngIf="placement !== 'before'">
+        <ng-container *ngTemplateOutlet="input"></ng-container>
+    </ng-container>
+
+
+    <ng-content *ngIf="addOnElement" select="[fd-input-group-addon]"></ng-content>
+
+    <ng-container *ngIf="!addOnElement">
+
+        <span *ngIf="button"
+              fd-input-group-addon
+              [button]="true"
+              [placement]="placement">
+            <button [disabled]="disabled"
+                    fd-button
+                    [compact]="compact"
+                    [attr.tabindex]="buttonFocusable ? 0 : -1"
+                    [fdType]="buttonType"
+                    [options]="buttonOptions"
+                    [glyph]="glyph"
+                    (click)="buttonClicked($event)">
+                <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
+            </button>
+        </span>
+
+        <span *ngIf="!button"
+              fd-input-group-addon
+              [placement]="placement">
+            <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
+            <span *ngIf="glyph" [ngClass]="'sap-icon--' + glyph"></span>
+    </span>
+    </ng-container>
+
+    <ng-container *ngIf="placement === 'before'">
+        <ng-container *ngTemplateOutlet="input"></ng-container>
+    </ng-container>
 </div>
+
+<ng-template #input>
+    <ng-content *ngIf="inputElement" select="[fd-input-group-input]"></ng-content>
+    <ng-container *ngIf="inputTemplate">
+        <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+    </ng-container>
+    <input [(ngModel)]="inputText"
+           [disabled]="disabled"
+           type="text"
+           *ngIf="!inputElement && !inputTemplate"
+           placeholder="{{placeholder}}"
+           class="fd-input fd-input-group__default-input"
+           [ngClass]="{'fd-input--compact' : compact}">
+</ng-template>

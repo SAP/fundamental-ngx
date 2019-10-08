@@ -97,10 +97,21 @@ export class FdDate {
 
     /** Get previous day  */
     public previousDay(): FdDate {
-        const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
+
+        /** Check if should switch month to previous one */
+        const prevMonth: boolean = this.day === 1;
+
+        /** Check if should switch year to previous one */
+        const prevYear: boolean = ( this.month === 1 ) && prevMonth;
+
+        const year = prevYear ? this.year - 1 : this.year;
+        const month = prevYear ? 12 : ( prevMonth ? this.month - 1 : this.month );
+
+        /** Amount of days in month */
+        const maxDays: number = CalendarService.getDaysInMonth(month, year);
+
         const day = this.day === 1 ? maxDays : this.day - 1;
-        const month = day !== maxDays ? this.month : (this.month === 1 ? 12 : this.month - 1);
-        const year = month !== 12 ? this.year : this.year - 1;
+
         return new FdDate(year, month, day);
     }
 

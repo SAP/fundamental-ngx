@@ -1,0 +1,169 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar {
+    height: 100vh;
+    color: #21262c;
+    background-color: #f1f3f6;
+    transition: 0.3s margin ease-in-out, 0.3s box-shadow ease-in-out;
+    z-index: 3;
+    width: 265px;
+    min-width: 265px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 52px;
+}
+
+.fd-docs-sidebar-content {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.nav {
+    list-style: none;
+    padding-left: 0;
+}
+
+.nav-item {
+    color: #21262c;
+    font-size: 1.05rem;
+    position: relative;
+    padding: 13px 0 13px 40px;
+    flex-grow: 1;
+    transition: 250ms all ease-in-out;
+
+    &:hover {
+        background-color: #fafafa;
+        color: #085caf;
+    }
+
+    &:focus {
+        background-color: #fafafa;
+        color: #085caf;
+        text-decoration: none;
+    }
+
+}
+
+.nav-item--active {
+    color: #424e5a;
+    box-shadow: inset 6px 0 0 0 #61dafb;
+    cursor: pointer;
+    background-color: #fff;
+    font-weight: 700;
+}
+
+.side-nav__headers {
+    color: #424e5a;
+    padding: 15px 20px;
+    display: block;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding-bottom: 2rem;
+    background-color: #FFFFFF;
+    padding-top: 52px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.content-margin {
+    padding: 12px 40px 80px 60px;
+    width: 80%;
+    outline: 0;
+    transition: 0.5s padding ease-in-out;
+}
+
+.fd-docs-search {
+    flex: 0 0 auto;
+    padding: 15px 20px;
+    box-shadow: -2px 2px 4px rgba(0,0,0,.25);
+}
+
+
+.nav-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.collapsed-overlay {
+    background-color: black;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: 0.3s opacity ease-in-out;
+    visibility: hidden;
+
+    @media screen and (min-width: 992px){
+        display: none;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+.overlay-init {
+    opacity: 0.7;
+    visibility: visible;
+}
+
+.sidebar-collapsed {
+    margin-left: -265px;
+    box-shadow: none !important;
+}
+
+.fd-sidebar-container {
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.skip-navigation {
+    position: absolute;
+    left: -5000px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+@media (max-width: 992px){
+    .sidebar {
+        position: absolute;
+        box-shadow: 2px 0 50px 0 #292929;
+        height: 100%;
+    }
+
+    .content-margin {
+        padding: 10px 60px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px){
+    .content-margin {
+        padding: 10px 40px;
+    }
+}
+
+@media (max-width: 576px){
+    .content-margin {
+        padding: 10px 20px;
+    }
+}

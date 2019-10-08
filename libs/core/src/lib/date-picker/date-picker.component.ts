@@ -59,7 +59,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     isOpen: boolean = false;
 
     /** @hidden */
-    @ViewChild(CalendarComponent) calendarComponent: CalendarComponent;
+    @ViewChild(CalendarComponent, { static: false })
+    calendarComponent: CalendarComponent;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -235,6 +236,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
+            this.isInvalidDateInput = !this.isModelValid();
         }
     }
 
@@ -253,6 +255,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
+            this.isInvalidDateInput = !this.isModelValid();
         }
     }
 
@@ -318,7 +321,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             this.selectedDate = selected;
             if (this.isModelValid()) {
                 this.inputFieldDate = this.dateAdapter.format(selected);
-                this.calendarComponent.setCurrentlyDisplayed(this.selectedDate);
+                this.refreshCurrentlyDisplayedCalendarDate(selected);
             } else {
                 this.inputFieldDate = '';
             }
@@ -334,7 +337,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 this.selectedRangeDate = { start: selected.start, end: selected.end };
 
                 if (this.isModelValid()) {
-                    this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
+                    this.refreshCurrentlyDisplayedCalendarDate(selected.start);
                     this.inputFieldDate = this.dateAdapter.format(selected.start) +
                         this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end);
                 } else {
@@ -370,7 +373,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
                 /** Check if date is valid, if it's not, there is no need to refresh calendar */
                 if (!this.isInvalidDateInput) {
-                    this.calendarComponent.setCurrentlyDisplayed(fdDate);
+                    this.refreshCurrentlyDisplayedCalendarDate(this.selectedDate);
                 }
             }
 
@@ -402,7 +405,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
                 /** Check if dates are valid, if it's not, there is no need o refresh calendar */
                 if (!this.isInvalidDateInput) {
-                    this.calendarComponent.setCurrentlyDisplayed(this.selectedRangeDate.start);
+                    this.refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
                 }
             }
         }
@@ -429,6 +432,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                     this.selectedRangeDate.end instanceof FdDate &&
                     this.selectedRangeDate.end.isDateValid()
                 );
+        }
+    }
+
+    /** @hidden */
+    private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
+        if (this.calendarComponent) {
+            this.calendarComponent.setCurrentlyDisplayed(date);
         }
     }
 

@@ -7,9 +7,10 @@
                 [disabled]="disabled"
                 [placement]="placement">
         <fd-popover-control>
-            <div class="fd-input-group fd-input-group--after"
-                 [ngClass]="{'fd-input-group--compact' : compact}">
+            <fd-input-group [compact]="compact">
                 <input type="text"
+                       class="fd-input"
+                       fd-input-group-input
                        #dateTimePicker
                        [attr.aria-label]="datetimeInputLabel"
                        [(ngModel)]="inputFieldDate"
@@ -18,12 +19,15 @@
                        (click)="openPopover()"
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }"
                        [disabled]="disabled">
-                <span class="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
-                    <button class="fd-popover__control fd-button--icon fd-button--light sap-icon--date-time"
+                <span fd-input-group-addon [button]="true">
+                    <button [disabled]="disabled" fd-button [glyph]="'date-time'"
+                            [options]="'light'"
+                            [compact]="compact"
                             (click)="togglePopover()" [attr.aria-label]="displayDatetimeToggleLabel"
-                            [attr.aria-expanded]="isOpen" type="button" [disabled]="disabled"></button>
+                            [attr.aria-expanded]="isOpen">
+                    </button>
                 </span>
-            </div>
+            </fd-input-group>
         </fd-popover-control>
         <fd-popover-body
             [attr.aria-expanded]="isOpen"

@@ -7,6 +7,7 @@ import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverDirective } from './popover-directive/popover.directive';
 import { PopoverContainer } from './popover-directive/popover-container';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,7 @@ import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.co
         PopoverContainer,
         PopoverDropdownComponent,
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, ButtonModule],
     exports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, PopoverDirective, PopoverDropdownComponent],
     entryComponents: [PopoverContainer]
 })
