@@ -5,6 +5,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import * as iconTsCode from '!raw-loader!./examples/icon-example.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -672,7 +673,11 @@ export class IconDocsComponent implements OnInit {
     iconExample: ExampleFile[] = [
         {
             language: 'html',
-            code: iconSrc
+            code: iconSrc,
+            fileName: 'icon-example',
+            secondFile: 'icon-example',
+            typescriptFileCode: iconTsCode
+
         }
     ];
 
@@ -680,7 +685,7 @@ export class IconDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('icon');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

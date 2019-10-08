@@ -5,7 +5,11 @@ export interface ExampleFile {
     name?: string;
     language?: string;
     tagname?: string;
-    secondFile?: string;
+    typescriptFileCode?: {
+        default: string
+    };
     thirdFile?: string;
+    secondFile?: string;
     component?: string;
+    fileName?: string
 }

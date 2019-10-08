@@ -21,65 +21,74 @@ export class DatePickerDocsComponent implements OnInit {
     datePickerSingle: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerSingleSrc
+            code: datePickerSingleSrc,
+            fileName: 'date-picker-single-example'
         }
     ];
 
     datePickerRange: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerRangeSrc
+            code: datePickerRangeSrc,
+            fileName: 'date-picker-range-example'
         }
     ];
 
     datePickerI18N: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickeri18nSrc
+            code: datePickeri18nSrc,
+            fileName: 'date-picker-i18n-example'
         }
     ];
 
     datePickerFormat: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerFormatSrc
+            code: datePickerFormatSrc,
+            fileName: 'date-picker-format-example'
         }
     ];
 
     datePickerAllowNull: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerAllowNullSrc
+            code: datePickerAllowNullSrc,
+            fileName: 'date-picker-allow-null-example'
         }
     ];
 
     datePickerForm: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerFormTsSrc
+            code: datePickerFormTsSrc,
+            fileName: 'date-picker-form-example'
         }
     ];
 
     datePickerRangeForm: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerRangeFormTsSrc
+            code: datePickerRangeFormTsSrc,
+            fileName: 'date-picker-form-range-example'
         }
     ];
 
     datePickerPosition: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerPositionSrc
+            code: datePickerPositionSrc,
+            fileName: 'date-picker-position-example'
         }
     ];
 
     datePickerDisabled: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerDisabledSrc
+            code: datePickerDisabledSrc,
+            fileName: 'date-picker-disabled-example'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

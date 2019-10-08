@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-example.component.html';
+import * as sideNavigationTscode from '!raw-loader!./examples/side-navigation-examples.component.ts';
 import * as sideNavigationCollapsedSrc from '!raw-loader!./examples/side-navigation-collapsed-example.component.html';
 import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
 import * as sideNavigationLevelsSrc from '!raw-loader!./examples/side-navigation-levels-example.component.html';
@@ -17,37 +18,52 @@ export class SideNavigationDocsComponent implements OnInit {
     oneLevelSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationSrc
+            code: sideNavigationSrc,
+            fileName: 'side-navigation-example',
+            secondFile: 'side-navigation-examples',
+            typescriptFileCode: sideNavigationTscode
         }
     ];
 
     titlesSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationTitlesSrc
+            code: sideNavigationTitlesSrc,
+            fileName: 'side-navigation-titles-example',
+            secondFile: 'side-navigation-examples',
+            typescriptFileCode: sideNavigationTscode
         }
     ];
 
     multiLevelsSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationLevelsSrc
+            code: sideNavigationLevelsSrc,
+            fileName: 'side-navigation-levels-example',
+            secondFile: 'side-navigation-examples',
+            typescriptFileCode: sideNavigationTscode
         }
     ];
 
     iconsSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationIconsSrc
+            code: sideNavigationIconsSrc,
+            fileName: 'side-navigation-icons-example',
+            secondFile: 'side-navigation-examples',
+            typescriptFileCode: sideNavigationTscode
         }
     ];
 
     collapsedSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationCollapsedSrc
+            code: sideNavigationCollapsedSrc,
+            fileName: 'side-navigation-collapsed-example',
+            secondFile: 'side-navigation-examples',
+            typescriptFileCode: sideNavigationTscode
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

@@ -9,6 +9,7 @@ import * as buttonStateExample from '!raw-loader!./examples/button-state-example
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import * as buttonExampleTsCode from '!raw-loader!./examples/button-examples.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -683,35 +684,50 @@ export class ButtonDocsComponent implements OnInit {
     buttonHtmlOptions: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonOptionsExample
+            code: buttonOptionsExample,
+            fileName: 'button-options-example',
+            secondFile: 'button-examples',
+            typescriptFileCode: buttonExampleTsCode
         }
     ];
 
     buttonHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonTypesExample
+            code: buttonTypesExample,
+            fileName: 'button-types-example',
+            secondFile: 'button-examples',
+            typescriptFileCode: buttonExampleTsCode
         }
     ];
 
     buttonHtmlSize: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonSizesExample
+            code: buttonSizesExample,
+            fileName: 'button-sizes-example',
+            secondFile: 'button-examples',
+            typescriptFileCode: buttonExampleTsCode
         }
     ];
 
     buttonHtmlIcon: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonIconsExample
+            code: buttonIconsExample,
+            fileName: 'button-icons-example',
+            secondFile: 'button-examples',
+            typescriptFileCode: buttonExampleTsCode
         }
     ];
 
     buttonHtmlState: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonStateExample
+            code: buttonStateExample,
+            fileName: 'button-state-example',
+            secondFile: 'button-examples',
+            typescriptFileCode: buttonExampleTsCode
         }
     ];
 
@@ -719,7 +735,7 @@ export class ButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

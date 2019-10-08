@@ -6,8 +6,14 @@ import * as buttonGroupCompactExample from '!raw-loader!./examples/button-group-
 import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
 import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
 import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
+<<<<<<< HEAD:apps/docs/src/app/core/component-docs/button-group/button-group-docs.component.ts
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+=======
+import * as buttonGroupTsCode from '!raw-loader!./examples/button-group-examples.component.ts';
+import { ExampleFile } from '../../core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
+>>>>>>> added to all example files:apps/docs/src/app/documentation/component-docs/button-group/button-group-docs.component.ts
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -1971,28 +1977,36 @@ export class ButtonGroupDocsComponent implements OnInit {
     xsSizeHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupXsExample
+            code: buttonGroupXsExample,
+            secondFile: 'button-group-examples',
+            typescriptFileCode: buttonGroupTsCode
         }
     ];
 
     sSizeHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupSmallExample
+            code: buttonGroupSmallExample,
+            secondFile: 'button-group-examples',
+            typescriptFileCode: buttonGroupTsCode
         }
     ];
 
     compactSizeHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupCompactExample
+            code: buttonGroupCompactExample,
+            secondFile: 'button-group-examples',
+            typescriptFileCode: buttonGroupTsCode
         }
     ];
 
     defaultSizeHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupDefaultExample
+            code: buttonGroupDefaultExample,
+            secondFile: 'button-group-examples',
+            typescriptFileCode: buttonGroupTsCode
         }
     ];
 
@@ -2000,7 +2014,7 @@ export class ButtonGroupDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('buttonGroup');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     onSchemaValues(data) {
         this.data = data;

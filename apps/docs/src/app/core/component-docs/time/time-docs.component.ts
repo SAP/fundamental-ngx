@@ -8,6 +8,7 @@ import * as timeDisabledSrc from '!raw-loader!./examples/time-disabled-example.c
 import * as timeNoSpinnersSrc from '!raw-loader!./examples/time-no-spinners-example.component.html';
 import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
 import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
+import * as timeTsCode from '!raw-loader!./examples/time-examples.component.ts';
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
 import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html';
 import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts';
@@ -52,42 +53,54 @@ export class TimeDocsComponent implements OnInit {
     timeBasic: ExampleFile[] = [
         {
             language: 'html',
-            code: timeSrc
+            code: timeSrc,
+            secondFile: 'time-examples',
+            typescriptFileCode: timeTsCode
         }
     ];
 
     timeMeridian: ExampleFile[] = [
         {
             language: 'html',
-            code: timeMeridianSrc
+            code: timeMeridianSrc,
+            secondFile: 'time-examples',
+            typescriptFileCode: timeTsCode
         }
     ];
 
     timeDisabled: ExampleFile[] = [
         {
             language: 'html',
-            code: timeDisabledSrc
+            code: timeDisabledSrc,
+            secondFile: 'time-examples',
+            typescriptFileCode: timeTsCode
         }
     ];
 
     timeNoSpinners: ExampleFile[] = [
         {
             language: 'html',
-            code: timeNoSpinnersSrc
+            code: timeNoSpinnersSrc,
+            secondFile: 'time-examples',
+            typescriptFileCode: timeTsCode
         }
     ];
 
     timeNoSeconds: ExampleFile[] = [
         {
             language: 'html',
-            code: timeNoSecondsSrc
+            code: timeNoSecondsSrc,
+            secondFile: 'time-examples',
+            typescriptFileCode: timeTsCode
         }
     ];
 
     timeOnlyHours: ExampleFile[] = [
         {
             language: 'html',
-            code: timeOnlyHoursSrc
+            code: timeOnlyHoursSrc,
+            secondFile: 'time-examples',
+            typescriptFileCode: timeTsCode
         }
     ];
 

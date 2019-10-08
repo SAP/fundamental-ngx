@@ -67,11 +67,13 @@ myDisableFunction = function(d: FdDate): boolean {
     calendarSingleSource: ExampleFile[] = [
         {
             language: 'typescript',
+            fileName: 'calendar-single-example',
             code: calendarSingleSrc
         },
         {
             language: 'typescript',
             code: { default: this.exampleFunctionsHtml },
+            fileName: 'calendar-single-example', // todo
             name: 'Example Block/Disable Functions'
         }
     ];
@@ -79,6 +81,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendarRangeSource: ExampleFile[] = [
         {
             language: 'typescript',
+            fileName: 'calendar-range-example',
             code: calendarRangeSrc
         }
     ];
@@ -86,6 +89,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendarMondayStartSource: ExampleFile[] = [
         {
             language: 'typescript',
+            fileName: 'calendar-monday-start-example',
             code: calendarMondayStartSrc
         }
     ];
@@ -93,6 +97,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18n: ExampleFile[] = [
         {
             language: 'typescript',
+            fileName: 'calendar-i18n-example',
             code: calendarIntlSrc
         }
     ];
@@ -100,24 +105,28 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18nMoment: ExampleFile[] = [
         {
             language: 'typescript',
+            fileName: 'calendar--i18n-moment-example',
             code: calendarIntlMomentSrc
         }
     ];
 
     calendarFormSource: ExampleFile[] = [
         {
-            language: 'typescript',
-            code: calendarFormSourceT
+            language: 'html',
+            fileName: 'calendar-form-examples',
+            code: calendarFormSourceH
         },
         {
-            language: 'html',
-            code: calendarFormSourceH
+            language: 'typescript',
+            fileName: 'calendar-form-examples',
+            code: calendarFormSourceT
         }
     ];
 
     calendarProgrammaticallySource: ExampleFile[] = [
         {
             language: 'typescript',
+            fileName: 'calendar-programmatically-change-example',
             code: calendarProgrammaticallySource
         }
     ];
