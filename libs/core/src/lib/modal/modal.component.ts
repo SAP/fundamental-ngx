@@ -109,6 +109,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
             }
         }
         this.cdRef.detectChanges();
+        this.modalRef.loaded();
     }
 
     @HostListener('keyup', ['$event'])

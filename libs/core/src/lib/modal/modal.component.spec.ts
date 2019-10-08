@@ -34,7 +34,7 @@ describe('ModalComponent', () => {
     let component: ModalComponent;
     let fixture: ComponentFixture<ModalComponent>;
     let modalService: ModalService;
-    const modalRef = createSpyObj('modalRef', ['dismiss']);
+    const modalRef = createSpyObj('modalRef', ['dismiss', 'loaded']);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
