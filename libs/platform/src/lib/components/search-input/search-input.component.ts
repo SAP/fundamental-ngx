@@ -109,7 +109,9 @@ export class SearchInput2Component implements OnInit, OnChanges {
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.combobox.searchInputElement.nativeElement.setAttribute('type', 'search');
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.categories) {
@@ -169,6 +171,9 @@ export class SearchInput2Component implements OnInit, OnChanges {
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
+            // close dropdown
+            this.combobox.isOpen = false;
+
             this.searchSubmit.emit({
                 text: this.inputText,
                 category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
