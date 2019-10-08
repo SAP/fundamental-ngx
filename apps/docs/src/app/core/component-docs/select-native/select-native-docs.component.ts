@@ -7,6 +7,7 @@ import * as formGroupSelectHtml from '!raw-loader!./examples/select-native-form-
 import * as formGroupSelectTs from '!raw-loader!./examples/select-native-form-group-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import * as selectNativeTsCode from '!raw-loader!./examples/select-native-examples.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,34 +18,45 @@ export class SelectNativeDocsComponent implements OnInit {
     selectFormHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formHtml
+            code: formHtml,
+            fileName: 'select-native-example',
+            secondFile: 'select-native-examples',
+            typescriptFileCode: selectNativeTsCode
         }
     ];
 
     selectHelpFormHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formInlineHelpHtml
+            code: formInlineHelpHtml,
+            fileName: 'select-native-inline-help-example',
+            secondFile: 'select-native-examples',
+            typescriptFileCode: selectNativeTsCode
         }
     ];
 
     selectStatesFormHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formStateHtml
+            code: formStateHtml,
+            fileName: 'select-native-state-example',
+            secondFile: 'select-native-examples',
+            typescriptFileCode: selectNativeTsCode
         }
     ];
 
     formGroupSelect: ExampleFile[] = [
         {
             language: 'html',
-            code: formGroupSelectHtml
+            code: formGroupSelectHtml,
+            fileName: 'select-native-form-group-example'
         },
         {
             language: 'typescript',
-            code: formGroupSelectTs
+            code: formGroupSelectTs,
+            fileName: 'select-native-form-group-example'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import * as toggleSizeExample from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.html';
+import * as toggleSizeExampleTsCode from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.ts';
 import * as toggleDisableExample from '!raw-loader!./examples/disabled-toggle-example/disabled-toggle-example.component.html';
+import * as toggleDisableExampleTsCode from '!raw-loader!./examples/disabled-toggle-example/disabled-toggle-example.component.ts';
 import * as toggleBindingExampleHtml from '!raw-loader!./examples/toggle-binding-example/toggle-binding-example.component.html';
-import * as toggleBindingExampleTs from '!raw-loader!./examples/toggle-binding-example/toggle-binding-example.component.ts';
+import * as toggleBindingExampleTsCode from '!raw-loader!./examples/toggle-binding-example/toggle-binding-example.component.ts';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as toggleFormExampleHtmlSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.html';
-import * as toggleFormExampleTsSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.ts';
+import * as toggleFormExampleTsCode from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -57,25 +59,31 @@ export class ToggleDocsComponent implements OnInit {
     toggleSize: ExampleFile[] = [
         {
             language: 'html',
-            code: toggleSizeExample
+            code: toggleSizeExample,
+            secondFile: 'disabled-toggle-example',
+            typescriptFileCode: toggleDisableExampleTsCode
         }
     ];
 
     toggleDisable: ExampleFile[] = [
         {
             language: 'html',
-            code: toggleDisableExample
+            code: toggleDisableExample,
+            secondFile: 'toggle-binding-example',
+            typescriptFileCode: toggleBindingExampleTsCode
         }
     ];
 
     toggleBinding: ExampleFile[] = [
         {
             language: 'html',
-            code: toggleBindingExampleHtml
+            code: toggleBindingExampleHtml,
         },
         {
             language: 'typescript',
-            code: toggleBindingExampleTs
+            code: toggleBindingExampleTsCode,
+            secondFile: 'toggle-sizes-example',
+            typescriptFileCode: toggleSizeExampleTsCode
         }
     ];
 
@@ -86,7 +94,7 @@ export class ToggleDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
-            code: toggleFormExampleTsSrc
+            code: toggleFormExampleTsCode
         }
     ];
 
@@ -94,7 +102,7 @@ export class ToggleDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('toggle');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

@@ -16,7 +16,7 @@ import { AlertService } from '@fundamental-ngx/core';
 import hljs from 'highlight.js/lib';
 import sdk from '@stackblitz/sdk';
 import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
-import * as maints from '!raw-loader!./code-example-stack/main.ts';
+// import * as maints from '!raw-loader!./code-example-stack/main.ts';
 
 
 
@@ -37,9 +37,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     @Input()
     exampleFiles: ExampleFile[] = [];
 
-    @Input() fileName: string;
+    // @Input() fileName: string;
 
-    @Input() component: string;
+    // @Input() component: string;
 
 
     smallScreen: boolean;
@@ -61,6 +61,12 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
     app_app_component = ``// TODO make non inline
 
+    maints = `import { enableProdMode } from '@angular/core';
+    import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+    import { AppModule } from './app/app.module';
+    
+    platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch(err => console.error(err));`
 
     project = {
         files: {},
@@ -76,7 +82,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         }
     };
 
+
     constructor(private element: ElementRef, private copyService: CopyService, private alertService: AlertService) { }
+
 
     get expandIcon(): string {
         return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
@@ -90,21 +98,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     openCode(): void {
 
 
-        if (this.fileName && this.component) {
-            this.parameters.html_tag = 'fd-' + this.fileName;
-            this.parameters.app_module = 'AppModule';
-            this.parameters.app_module_file = 'app.module';
-            this.parameters.app_component = this.component;
-            this.parameters.app_component_basis = this.fileName + '.component';
-            this.parameters.app_component_html = this.fileName + '.component.html';
-            this.parameters.app_component_ts = this.fileName + '.component.ts';
-            this.parameters.app_component_html_path = 'src/app/' + this.fileName + '.component.html';
-            this.parameters.app_component_ts_path = 'src/app/' + this.fileName + '.component.ts';
-        } // wait up
-
         this.app_app_component = `
         import { Component } from '@angular/core';
-        
+
         @Component({
             selector: '${this.parameters.html_tag}',
             templateUrl: './${this.parameters.app_component_html}'
@@ -115,12 +111,12 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         `;
         // TODO make non inline
 
+
         this.project = {
             files: {
-                'src/main.ts': maints.default,
+                'src/main.ts': this.maints,
                 'src/polyfills.ts': polyfills.default,
                 'src/styles.scss': '',
-                [`src/app/${this.fileName}.component.ts`]: this.app_app_component,
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
@@ -133,29 +129,63 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 '@angular/animations': '*'
             }
         };
-        if (this.fileName) {
-            this.exampleFiles.forEach(example => {
-                if (example.language === 'html') {
-                    const _pathHTML = `src/app/${this.fileName}.component.html`;
-                    this.project.files[_pathHTML] = example.code.default;
+
+
+
+        this.exampleFiles.forEach(example => {
+
+            if (example.fileName && example.component) {
+                this.parameters.html_tag = 'fd-' + example.fileName;
+                this.parameters.app_module = 'AppModule';
+                this.parameters.app_module_file = 'app.module';
+                this.parameters.app_component = example.component;
+                this.parameters.app_component_basis = example.fileName + '.component';
+                this.parameters.app_component_html = example.fileName + '.component.html';
+                this.parameters.app_component_ts = example.fileName + '.component.ts';
+                this.parameters.app_component_html_path = 'src/app/' + example.fileName + '.component.html';
+                this.parameters.app_component_ts_path = 'src/app/' + example.fileName + '.component.ts';
+            }
+
+            // if (example.fileName && example.component) {
+            //     export const parameters = {
+            //         html_tag: 'fd-' + example.fileName,
+            //         app_module: 'AppModule',
+            //         app_module_file: 'app.module',
+            //         app_component: 'example.component',
+            //         app_component_basis: example.fileName + '.component',
+            //         app_component_html: example.fileName + '.component.html',
+            //         app_component_ts: example.fileName + '.component.ts',
+            //         app_component_html_path: 'src/app/' + example.fileName + '.component.html',
+            //         app_component_ts_path: 'src/app/' + example.fileName + '.component.ts'
+            //     };
+
+            // }
+
+            if (example.language === 'html') {
+                const _pathHTML = `src/app/${example.fileName}.component.html`;
+                this.project.files[_pathHTML] = example.code.default;
+                if (example.typescriptFileCode !== undefined) {
+                    const _pathTS = `src/app/${example.secondFile}.component.ts`;
+                    this.project.files[_pathTS] = example.typescriptFileCode.default;
                 }
-                if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined)) {
-                    const _pathTS = `src/app/${this.fileName}.component.ts`;
-                    this.project.files[_pathTS] = example.code.default;
-                }
-                else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined)) {
-                    const _pathTS3 = `src/app/${example.secondFile}.component.ts`;
-                    this.project.files[_pathTS3] = example.code.default;
-                }
-                else if (example.language === 'typescript' && example.thirdFile !== undefined) {
-                    this.project.files[example.thirdFile] = example.code.default;
-                }
-                if (example.tagname) {
-                    this.parameters.html_tag = example.tagname;
-                    this.parameters.app_component = example.component;
-                }
-            });
-        }
+            }
+            if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined)) {
+                const _pathTS = `src/app/${example.fileName}.component.ts`;
+                this.project.files[_pathTS] = example.code.default;
+            }
+            else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined)) {
+                const _pathTS3 = `src/app/${example.secondFile}.component.ts`;
+                this.project.files[_pathTS3] = example.code.default;
+            }
+            else if (example.language === 'typescript' && example.thirdFile !== undefined) {
+                this.project.files[example.thirdFile] = example.code.default;
+            }
+            if (example.tagname) {
+                this.parameters.html_tag = example.tagname;
+                this.parameters.app_component = example.component;
+            }
+        });
+
 
         this.project.files['src/index.html'] = `
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css">
@@ -170,7 +200,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
-        
+
         @NgModule({
           declarations: [
             ${this.parameters.app_component}

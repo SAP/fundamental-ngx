@@ -50,44 +50,52 @@ export class TableDocsComponent implements OnInit {
     tableExample: ExampleFile[] = [
         {
             language: 'html',
-            code: tableHtmlSrc
+            code: tableHtmlSrc,
+            fileName: 'table-example'
         },
         {
             language: 'typescript',
-            code: tableTsSrc
+            code: tableTsSrc,
+            fileName: 'table-example'
         }
     ];
 
     tableCheckboxes: ExampleFile[] = [
         {
             language: 'html',
-            code: tableCheckHtml
+            code: tableCheckHtml,
+            fileName: 'table-checkboxes-example'
         },
         {
             language: 'typescript',
-            code: tableCheckTs
+            code: tableCheckTs,
+            fileName: 'table-checkboxes-example'
         }
     ];
 
     tableCdk: ExampleFile[] = [
         {
             language: 'html',
-            code: tableCdkHtml
+            code: tableCdkHtml,
+            fileName: 'table-cdk-example'
         },
         {
             language: 'typescript',
-            code: tableCdkTs
+            code: tableCdkTs,
+            fileName: 'table-cdk-example'
         }
     ];
 
     tableResponsive: ExampleFile[] = [
         {
             language: 'html',
-            code: tableResponsiveHtml
+            code: tableResponsiveHtml,
+            fileName: 'table-responsive-example'
         },
         {
             language: 'typescript',
-            code: tableResponsiveTs
+            code: tableResponsiveTs,
+            fileName: 'table-responsive-example'
         }
     ];
 
@@ -95,7 +103,7 @@ export class TableDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('table');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

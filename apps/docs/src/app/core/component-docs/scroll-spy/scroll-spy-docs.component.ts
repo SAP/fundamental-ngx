@@ -18,24 +18,28 @@ export class ScrollSpyDocsComponent implements OnInit {
     scrollSpy: ExampleFile[] = [
         {
             language: 'html',
-            code: standardH
+            code: standardH,
+            fileName: 'scroll-spy-example',
         },
         {
             language: 'typescript',
-            code: standardT
+            code: standardT,
+            fileName: 'scroll-spy-example',
         }
     ];
 
     scrollSpyCustom: ExampleFile[] = [
         {
             language: 'html',
-            code: customH
+            code: customH,
+            fileName: 'scroll-spy-custom-example',
         },
         {
             language: 'typescript',
-            code: customT
+            code: customT,
+            fileName: 'scroll-spy-custom-example',
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

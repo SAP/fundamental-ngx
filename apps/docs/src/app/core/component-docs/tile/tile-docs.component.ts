@@ -8,6 +8,7 @@ import * as tileDisabledSrc from '!raw-loader!./examples/tile-disabled-example.c
 import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
 import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
 import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
+import * as tileTscode from '!raw-loader!./examples/tile--examples.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -712,42 +713,60 @@ export class TileDocsComponent implements OnInit {
     simpleTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileSrc
+            code: tileSrc,
+            fileName: 'tile-example',
+            secondFile: 'tile-examples',
+            typescriptFileCode: tileTscode
         }
     ];
 
     mediaTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileMediaSrc
+            code: tileMediaSrc,
+            fileName: 'tile-media-example',
+            secondFile: 'tile-examples',
+            typescriptFileCode: tileTscode
         }
     ];
 
     actionsTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileActionsSrc
+            code: tileActionsSrc,
+            fileName: 'tile-action-example',
+            secondFile: 'tile-examples',
+            typescriptFileCode: tileTscode
         }
     ];
 
     buttonTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileButtonSrc
+            code: tileButtonSrc,
+            fileName: 'tile-button-example',
+            secondFile: 'tile-examples',
+            typescriptFileCode: tileTscode
         }
     ];
 
     productTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileProductSrc
+            code: tileProductSrc,
+            fileName: 'tile-product-example',
+            secondFile: 'tile-examples',
+            typescriptFileCode: tileTscode
         }
     ];
 
     disabledTile: ExampleFile[] = [
         {
             language: 'html',
-            code: tileDisabledSrc
+            code: tileDisabledSrc,
+            fileName: 'tile-disabled-example',
+            secondFile: 'tile-examples',
+            typescriptFileCode: tileTscode
         }
     ];
 
@@ -759,5 +778,5 @@ export class TileDocsComponent implements OnInit {
         this.data = data;
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

@@ -7,7 +7,9 @@ import * as alertContent from '!raw-loader!./examples/alert-content.component.ts
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
 import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
+import * as alertInlineExampleTs from '!raw-loader!./examples/alert-inline-example.component.ts';
 import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-example.component.html';
+import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { ActivatedRoute } from '@angular/router';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -68,41 +70,54 @@ export class AlertDocsComponent implements OnInit {
     alertBasicExample: ExampleFile[] = [
         {
             language: 'html',
-            code: alertExampleHtml
+            component: 'AlertExampleComponent',
+            fileName: 'alert-example',
+            code: alertExampleHtml,
+            secondFile: 'alert-example',
+            typescriptFileCode: alertExampleTs
         },
-        {
-            language: 'typescript',
-            code: alertExampleTs
-        }
+
     ];
 
     alertComponentContentExample: ExampleFile[] = [
         {
             language: 'html',
+            component: 'AlertComponentAsContentExampleComponent',
+            fileName: 'alert-component-as-conent',
             code: alertComponentAsContentExampleH
         },
         {
             language: 'typescript',
+            fileName: 'alert-component-as-conent',
             code: alertComponentAsContentExample
         },
         {
             language: 'typescript',
             code: alertContent,
-            name: 'Alert Content'
+            name: 'Alert Content',
+            secondFile: 'alert-content'
         }
     ];
 
     alertInlineExample: ExampleFile[] = [
         {
             language: 'html',
-            code: alertInlineExampleHtml
+            component: 'AlertInlineExampleComponent',
+            fileName: 'alert-inline-example',
+            code: alertInlineExampleHtml,
+            secondFile: 'alert-inline-example',
+            typescriptFileCode: alertInlineExampleTs
         }
     ];
 
     alertWidthExample: ExampleFile[] = [
         {
             language: 'html',
-            code: alertWidthExampleHtml
+            component: 'AlertWidthExampleComponent',
+            code: alertWidthExampleHtml,
+            fileName: 'alert-width-example',
+            secondFile: 'alert-width-example',
+            typescriptFileCode: alertWidthExampleTs
         }
     ];
 
@@ -112,7 +127,7 @@ export class AlertDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

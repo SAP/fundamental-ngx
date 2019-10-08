@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/textarea-example.component.html';
+import * as textareaTscode from '!raw-loader!./examples/textarea-examples.component.ts';
 import * as formInlineHelpHtml from '!raw-loader!./examples/textarea-inline-help-example.component.html';
 import * as formStateHtml from '!raw-loader!./examples/textarea-state-example.component.html';
 import * as formGroupInputHtml from '!raw-loader!./examples/textarea-form-group-example.component.html';
@@ -17,34 +18,45 @@ export class TextareaDocsComponent implements OnInit {
     textareaHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formHtml
+            code: formHtml,
+            fileName: 'textarea-example',
+            secondFile: 'textarea-examples',
+            typescriptFileCode: textareaTscode
         }
     ];
 
     textareaHelpHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formInlineHelpHtml
+            code: formInlineHelpHtml,
+            fileName: 'textarea-inline-help-example',
+            secondFile: 'textarea-examples',
+            typescriptFileCode: textareaTscode
         }
     ];
 
     textareaStatesHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formStateHtml
+            code: formStateHtml,
+            fileName: 'textarea-state-example',
+            secondFile: 'textarea-examples',
+            typescriptFileCode: textareaTscode
         }
     ];
 
     textareaFormGroup: ExampleFile[] = [
         {
             language: 'html',
-            code: formGroupInputHtml
+            code: formGroupInputHtml,
+            fileName: 'textarea-form-group-example'
         },
         {
             language: 'typescript',
-            code: formGroupInputTs
+            code: formGroupInputTs,
+            fileName: 'textarea-form-group-example'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

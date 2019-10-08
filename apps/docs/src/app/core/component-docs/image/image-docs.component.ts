@@ -6,6 +6,7 @@ import * as imageShapesSrc from '!raw-loader!./examples/image-shapes-example.com
 import * as imageSizesSrc from '!raw-loader!./examples/image-sizes-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import * as imageTsCode from '!raw-loader!./examples/image--examples.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -47,14 +48,20 @@ export class ImageDocsComponent implements OnInit {
     imageSizesHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: imageSizesSrc
+            code: imageSizesSrc,
+            fileName: 'image-sizes-example',
+            secondFile: 'image-examples',
+            typescriptFileCode: imageTsCode
         }
     ];
 
     imageShapesHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: imageShapesSrc
+            code: imageShapesSrc,
+            fileName: 'image-shapes-example',
+            secondFile: 'image-examples',
+            typescriptFileCode: imageTsCode
         }
     ];
 
@@ -62,7 +69,7 @@ export class ImageDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('image');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

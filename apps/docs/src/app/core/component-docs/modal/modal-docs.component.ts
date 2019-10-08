@@ -72,84 +72,99 @@ export class ModalDocsComponent implements OnInit {
     templateModal: ExampleFile[] = [
         {
             language: 'html',
-            code: templateHtml
+            code: templateHtml,
+            fileName: ''
         },
         {
             language: 'typescript',
-            code: templateTs
+            code: templateTs,
+            fileName: ''
         }
     ];
 
     componentAsContentSource: ExampleFile[] = [
         {
             language: 'typescript',
-            code: componentAsContentSrc
+            code: componentAsContentSrc,
+            fileName: ''
         },
         {
             language: 'typescript',
             code: contentSrc,
-            name: 'Modal Content'
+            name: 'Modal Content',
+            fileName: ''
         }
     ];
 
     modalInModalExample: ExampleFile[] = [
         {
             language: 'typescript',
-            code: modalInModalExample
+            code: modalInModalExample,
+            fileName: ''
         },
         {
             language: 'typescript',
             code: modalInModalComponent,
-            name: 'First Modal'
+            name: 'First Modal',
+            fileName: ''
         },
         {
             language: 'typescript',
             code: modalInModalSecondComponent,
-            name: 'Second Modal'
+            name: 'Second Modal',
+            fileName: ''
         }
     ];
 
     fullScreenSource: ExampleFile[] = [
         {
             language: 'html',
-            code: fsModalSource
+            code: fsModalSource,
+            fileName: ''
         },
         {
             language: 'typescript',
-            code: fsModalSourceT
+            code: fsModalSourceT,
+            fileName: ''
         }
     ];
 
     backdrop: ExampleFile[] = [
         {
             language: 'html',
-            code: backdropH
+            code: backdropH,
+            fileName: ''
         },
         {
             language: 'typescript',
-            code: backdropT
+            code: backdropT,
+            fileName: ''
         }
     ];
 
     position: ExampleFile[] = [
         {
             language: 'html',
-            code: positionH
+            code: positionH,
+            fileName: ''
         },
         {
             language: 'typescript',
-            code: positionT
+            code: positionT,
+            fileName: ''
         }
     ];
 
     container: ExampleFile[] = [
         {
             language: 'html',
-            code: containerH
+            code: containerH,
+            fileName: ''
         },
         {
             language: 'typescript',
-            code: containerT
+            code: containerT,
+            fileName: ''
         }
     ];
 
@@ -161,7 +176,7 @@ export class ModalDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('modal');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }
