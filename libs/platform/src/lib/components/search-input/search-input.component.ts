@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { ComboboxItem } from '@fundamental-ngx/core/lib/combobox/combobox-item';
-import { ComboboxComponent } from '@fundamental-ngx/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { ComboboxComponent, ComboboxItem } from '@fundamental-ngx/core';
 
 export interface SearchInput {
     text: string;
@@ -25,7 +24,7 @@ export type SearchInputSize = 'small' | 'medium';
     templateUrl: './search-input.component.html',
     styleUrls: ['./search-input.component.scss']
 })
-export class SearchInput2Component implements OnInit, OnChanges {
+export class PlatformSearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     /**
      * Place holder text for search input field.
      */
@@ -105,11 +104,13 @@ export class SearchInput2Component implements OnInit, OnChanges {
      */
     public showCategoryDropdown = false;
 
-    @ViewChild(ComboboxComponent) combobox: ComboboxComponent;
+    @ViewChild('combobox', { static: false }) combobox: ComboboxComponent;
 
     constructor() { }
 
-    ngOnInit() {
+    ngOnInit() { }
+
+    ngAfterViewInit() {
         this.combobox.searchInputElement.nativeElement.setAttribute('type', 'search');
     }
 
@@ -131,7 +132,7 @@ export class SearchInput2Component implements OnInit, OnChanges {
         if (changes.size) {
             this.compact = changes.size.currentValue === 'small';
         }
-        if (changes.isLoading) {
+        if (changes.isLoading && this.combobox && this.combobox.searchInputElement) {
             // disable input field while in "loading" state
             if (changes.isLoading.currentValue) {
                 this.combobox.searchInputElement.nativeElement.disabled = true;

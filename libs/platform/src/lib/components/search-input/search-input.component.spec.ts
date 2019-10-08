@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SearchInput2Component, SearchInput, SuggestionItem, SearchInputSize, ValueLabelItem } from './search-input.component';
+import { PlatformSearchInputComponent, SearchInput, SuggestionItem, SearchInputSize, ValueLabelItem } from './search-input.component';
 import { Component, ViewChild } from '@angular/core';
 import { ComboboxComponent, ComboboxModule, PopoverModule, MenuModule } from '@fundamental-ngx/core';
 import { By } from '@angular/platform-browser';
@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
     `
 })
 class TestComponent {
-    @ViewChild('component') component: SearchInput2Component;
+    @ViewChild(PlatformSearchInputComponent, { static: true }) component: PlatformSearchInputComponent;
     public placeholder: string;
     public suggestions: SuggestionItem[];
     public categories: ValueLabelItem[];
@@ -58,13 +58,13 @@ const CATEGORIES: ValueLabelItem[] = [
 ];
 
 describe('SearchInputComponent', () => {
-    let component: SearchInput2Component;
+    let component: PlatformSearchInputComponent;
     let host: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, SearchInput2Component],
+            declarations: [TestComponent, PlatformSearchInputComponent],
             imports: [CommonModule, FormsModule, ComboboxModule, PopoverModule, MenuModule]
         }).compileComponents();
     }));
