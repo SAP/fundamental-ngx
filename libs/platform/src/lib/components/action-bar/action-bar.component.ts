@@ -7,15 +7,12 @@ import {
     EventEmitter,
     ChangeDetectorRef
 } from '@angular/core';
-import { Placement } from 'popper.js';
 
 export interface ActionItem {
     label: string;
     type: string;
     priority: number;
     editTitle: boolean;
-    options: string;
-    compact: boolean;
 }
 
 @Component({
@@ -31,84 +28,61 @@ export class ActionBarComponent implements OnInit {
     /**
      * Actionbar title
      */
-    @Input()
-    title: string;
+    @Input() title: string;
 
-    /**
-     * flag to set edit mode for renaming the title
-     */
-    @Input()
-    editing: boolean = false;
+    @Input() editMode: boolean = false;
 
     /**
      * Actionbar description
      */
-    @Input()
-    description: string;
-
+    @Input() description: string;
     /**
      * Show "back" button.
      */
-    @Input()
-    showBackButton = false;
+    @Input() showBackButton = false;
 
-    @Input()
-    showOnlyMenu = false;
+    @Input() displayOnlyMenu = false;
 
     /**
      * "back" button label.
      */
-    @Input()
-    backButtonLabel = 'Go Back';
-    /**
-     * used to specify the posistion of the menu1`
-     */
-    @Input()
-    placement: Placement;
+    @Input() backButtonLabel = 'Go Back';
 
-    @Input()
-    actionItems: ActionItem[];
+    @Input() placement: string;
+
+    @Input() actionItems: ActionItem[];
     /**
      * Emitted event when "back" button is clicked.
      */
-    @Output()
-    backButtonClick: EventEmitter<void> = new EventEmitter();
+    @Output() backButtonClick: EventEmitter<void> = new EventEmitter();
 
     /**
      * Emitted event when input textbox out of focus.
      */
 
-    @Output()
-    titleRenamed: EventEmitter<string> = new EventEmitter<string>();
+    @Output() titleRenamed: EventEmitter<string> = new EventEmitter<string>();
 
     /**
      * Emitted event when action button is clicked.
      */
-    @Output()
-    itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
+    @Output() actionClick: EventEmitter<void> = new EventEmitter();
 
-    constructor(private cd: ChangeDetectorRef) {}
+    constructor(public cd: ChangeDetectorRef) {}
 
     ngOnInit() {}
 
-    enableEditTitle(editing: boolean) {
-        this.editing = editing;
+    enableEditTitle(editmode: boolean) {
+        this.editMode = editmode;
         this.cd.markForCheck();
     }
-
-    actionItemClicked(item: ActionItem) {
-        this.itemClick.emit(item);
-        this.cd.markForCheck();
-    }
-
     onFocusOut() {
-        this.editing = false;
+        this.editMode = false;
         this.titleRenamed.emit(this.title);
         this.cd.markForCheck();
     }
     outSideClick = ($event: Event) => {
-        if (!this.editing) {
-            this.editing = false;
+        if (!this.editMode) {
+            this.editMode = false;
             this.cd.markForCheck();
         }
     };

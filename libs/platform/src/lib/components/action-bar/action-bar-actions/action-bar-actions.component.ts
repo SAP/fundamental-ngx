@@ -2,18 +2,17 @@ import {
     Component,
     OnInit,
     Input,
+    QueryList,
     Output,
     EventEmitter,
     ChangeDetectorRef,
-    ChangeDetectionStrategy,
-    ViewChildren,
-    QueryList
+    ChangeDetectionStrategy
 } from '@angular/core';
-import { MenuItemDirective, MenuKeyboardService } from '@fundamental-ngx/core';
+
 import { ActionItem } from '../action-bar.component';
-import { Placement } from 'popper.js';
 
 const MAX_BUTTONS = 3;
+
 @Component({
     selector: 'fdp-action-bar-actions',
     templateUrl: './action-bar-actions.component.html',
@@ -21,58 +20,25 @@ const MAX_BUTTONS = 3;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionBarActionsComponent implements OnInit {
-    /**
-     * Button action items of action bar actions component
-     */
-    buttonItems: ActionItem[] = [];
+    constructor(public cd: ChangeDetectorRef) {}
 
-    /**
-     * Menu action items of action bar action compoents
-     */
+    buttonItems: ActionItem[] = [];
     menuItems: ActionItem[] = [];
 
-    /**
-     * View children of action bar actions component
-     */
-    @ViewChildren(MenuItemDirective)
-    menulist: QueryList<MenuItemDirective>;
+    @Input() placement: string;
 
-    /**
-     * specifies the posistion of the contextual mennu
-     */
-    @Input()
-    placement: Placement;
+    @Input() actionItems: ActionItem[];
 
-    /**
-     * array of action items
-     */
-    @Input()
-    actionItems: ActionItem[];
+    @Input() displayOnlyMenu: boolean;
 
-    /**
-     * If user want to show all the actions in menu, he can set this flag to true
-     */
-    @Input()
-    showOnlyMenu: boolean;
-
-    /**
-     * sorted action items based on priority
-     */
     orderedActionItems: ActionItem[];
 
-    /**
-     * Emit 'itemClick' event when user click on any action item.
-     */
-    @Output()
-    itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
+    @Output() itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
 
-    /**
-     * Emit 'editing' event when the user click on rename button
-     */
-    @Output()
-    editing: EventEmitter<boolean> = new EventEmitter();
+    @Output() editMode: EventEmitter<boolean> = new EventEmitter();
 
-    constructor(private cd: ChangeDetectorRef, private menuKeyboardService: MenuKeyboardService) {}
+    isEditTitle: boolean;
+    isEditModeOn: boolean;
 
     ngOnInit() {
         this.orderActionItem();
@@ -88,7 +54,7 @@ export class ActionBarActionsComponent implements OnInit {
     splitActionItems() {
         let j = 0;
         for (let i = 0; i < this.orderedActionItems.length; i++) {
-            if (i < MAX_BUTTONS && !this.showOnlyMenu) {
+            if (i < MAX_BUTTONS && !this.displayOnlyMenu) {
                 this.buttonItems[i] = this.orderedActionItems[i];
             } else {
                 this.menuItems[j++] = this.orderedActionItems[i];
@@ -101,15 +67,7 @@ export class ActionBarActionsComponent implements OnInit {
         this.cd.markForCheck();
     }
     onRenameClick() {
-        this.editing.emit(true);
+        this.editMode.emit(true);
         this.cd.markForCheck();
-    }
-
-    handleKeyPress(event: KeyboardEvent, index: number) {
-        this.menuKeyboardService.keyDownHandler(event, index, this.menulist.toArray());
-    }
-
-    focusFirst() {
-        setTimeout(() => this.menulist.first.focus(), 0);
     }
 }
