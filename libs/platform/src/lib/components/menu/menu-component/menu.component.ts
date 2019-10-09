@@ -1,22 +1,24 @@
 import {
-    Component,
-    ChangeDetectorRef,
-    OnInit,
-    OnDestroy,
-    OnChanges,
-    SimpleChanges,
-    Input,
-    ViewEncapsulation,
+    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
     ElementRef,
-    QueryList,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+    ViewEncapsulation,
     ViewChildren,
-    AfterViewInit
+    QueryList,
+    AfterContentInit,
+    ContentChildren,
+    OnDestroy
 } from '@angular/core';
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { MenuItemComponent } from './menu-item.component';
-import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
-import { group } from '@angular/animations';
+import { MenuKeyboardService } from '@fundamental-ngx/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 /**
  * Interface that represents menu item.
@@ -62,10 +64,14 @@ export interface MenuItem {
      */
     customLabel?: string;
 
+    childItems?: MenuItem[]; // move this to MegaMenu
+
+    id?: number;
+
     /**
      * Callback function which will execute when menu item is clicked.
      */
-    callback(): void;
+    command(): void;
 }
 
 /**
@@ -96,11 +102,11 @@ export interface MenuGroup {
     /**
      * List of menu items of the group.
      */
-    children: MenuItem[];
+    groupItems: MenuItem[];
 }
 
 /**
- * `<af-menu>` is a menu component which provides navigation, action and selection
+ * `<fdp-menu>` is a menu component which provides navigation, action and selection
  * options.
  *
  * ```html
@@ -113,12 +119,12 @@ export interface MenuGroup {
  * var menu = document.getElementByTagName('fdp-menu')[0];
  * var data = [{
  *   label: 'Item One',
- *   callback: () => {
+ *   command: () => {
  *     alert('The first item.')
  *   }
  * }, {
  *   label: 'Item Two',
- *   callback: () => {
+ *   command: () => {
  *     alert('The second item.')
  *   }
  * }];
@@ -137,11 +143,14 @@ export interface MenuGroup {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+// AfterContentInit, OnDestroy
+// AfterViewInit
+export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy {
     /**
      * Add separating line between menu items. [Default: false]
      */
-    @Input() public separator = false;
+    @Input()
+    public showSeparator = false;
 
     /**
      * Display menu groups as columns. [Default: false]
@@ -152,96 +161,88 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
      * Alignment of menu items; either "left", "right" or "inherit".
      * [Default "inherit"]
      */
-    @Input() public textAlign: string;
+    @Input()
+    public textAlign: string;
 
     /**
      * Specify if items are to scroll
      */
-    @Input() public scrolling: boolean = false;
+    @Input()
+    public isScrolling: boolean = false;
 
     /**
      * Specify the number of items after which scroll must begin
      */
-    @Input() public scrollLimit: number;
+    @Input()
+    public scrollLimit: number;
 
     /**
      * the max width of the menu component
      */
-    @Input() public width: string;
+    @Input()
+    public width: string;
+
+    /**
+     * The menu items that are passed in by the user.
+     */
+    @Input()
+    public menuItems: (MenuItem | MenuGroup)[] = [];
 
     public groups: MenuGroup[];
     private target: ElementRef;
     private isIcon: boolean = false;
     private numberOfItems: number = 0;
+    private data = [];
 
-    @ViewChildren(MenuItemComponent) public menuItems: QueryList<MenuItemComponent>;
-    private keyManager: ActiveDescendantKeyManager<MenuItemComponent>;
+    @ViewChildren(MenuItemComponent)
+    menuQueryList: QueryList<MenuItemComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    // private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
-    /**
-     * Load menu data.
-     * @param data Data can be either array of MenuItems or array of MenuGroups.
-     */
-    @Input() load = (data: (MenuItem | MenuGroup)[]) => {
-        this.groups = this.processData(data);
-        this.cd.markForCheck();
-    };
-
-    /**
-     * Registers 'keyup' event listener on provided element.
-     */
-    @Input() registerKeyupListener = (elem: ElementRef) => {
-        if (this.target) {
-            this.target.nativeElement.removeEventListener('keyup', this.onTargetKeyup);
-        }
-        this.target = elem;
-        this.target.nativeElement.addEventListener('keyup', this.onTargetKeyup.bind(this));
-    };
-
-    initializeKeyManager(): void {
-        this.menuItems.forEach(item => {
-            // remove all focused items
-            console.log(' some item ');
-            console.log(item);
-            item.setInactiveStyles();
-        });
-        //   this.menuItems.forEach(itemObj => {
-        //     // remove all focused item
-        //     itemObj.group.children.forEach(item =>{
-        //       console.log(' some item ' + item.label);
-        //       item.setInactiveStyles();
-        //     })
-
-        // });
-        this.keyManager = new ActiveDescendantKeyManager(this.menuItems).withWrap(false);
-    }
-
-    constructor(private cd: ChangeDetectorRef) {}
+    constructor(private cd: ChangeDetectorRef, private keyboardService: MenuKeyboardService) {}
 
     ngOnInit() {
-        if ((this.scrolling && this.scrollLimit === undefined) || (!this.scrolling && this.scrollLimit > 0)) {
-            // if scroll limit was not specified but scrolling flag was used, use default value
-            // or if scroll limit was specified but scrolling flag was not marked true, even then use default value
+        if ((this.isScrolling && this.scrollLimit === undefined) || (!this.isScrolling && this.scrollLimit > 0)) {
+            // if scroll limit was not specified but isScrolling flag was used, use default value
+            // or if scroll limit was specified but isScrolling flag was not marked true, even then use default value
             this.scrollLimit = this.numberOfItems; // default
+            // can also disable scrolling explicitly
+            this.isScrolling = false;
         }
+        this.groups = this.processData(this.menuItems);
+        console.log('group is ' + this.groups.length);
+        this.cd.markForCheck();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        this.cd.detectChanges();
-    }
-
-    ngAfterViewInit() {
-        console.log('in menu ' + this.menuItems.length);
-        this.initializeKeyManager();
+        // this.cd.detectChanges();
         this.cd.markForCheck();
     }
 
-    ngOnDestroy(): void {
-        if (this.target) {
-            this.target.nativeElement.removeEventListener('keyup', this.onTargetKeyup);
-        }
+    ngAfterViewInit() {
+        this.data = this.menuQueryList.toArray();
+        this.data.sort((a, b) => {
+            console.log('a lbel: ' + a.group.groupItems + ' at index' + a.item.id);
+            // console.log(a);
+            // console.log(b);
+            console.log('b lbel: ' + b.item.label + ' at index' + b.item.id);
+            // return a.item.id > b.item.id ? a.item.id : b.item.id;
+            return a.index - b.index;
+        });
+        console.log('after sort');
+        console.log(this.data);
+        // this.cd.markForCheck();
+        // console.log(this.menuQueryList.toArray());
+
+        this.data.forEach((item: MenuItemComponent, index: number) =>
+            item.keyDown.pipe(takeUntil(this.onDestroy$)).subscribe((keyboardEvent: KeyboardEvent) => {
+                console.log('item index is ' + item.index + ' and index ' + index);
+
+                this.handleKeyPress(keyboardEvent, parseInt(item.index, 10));
+            })
+        );
+        // this.cd.markForCheck();
     }
 
     onItemClick(item: MenuItem, _group: MenuGroup): void {
@@ -254,90 +255,140 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
             item.selected = !item.selected;
             this.cd.markForCheck();
         }
-        item.callback();
+        item.command();
     }
 
     isMenuGroup(item: MenuItem | MenuGroup): item is MenuGroup {
-        return (item as MenuGroup).children !== undefined;
+        return (item as MenuGroup).groupItems !== undefined;
     }
 
     processData(data: (MenuItem | MenuGroup)[]): MenuGroup[] {
         const groups: MenuGroup[] = [];
         let newGroup: MenuItem[] = [];
 
-        data.forEach(record => {
-            console.log(record.label + 'is the label before pushing');
-            if (this.isMenuGroup(record)) {
-                if (newGroup.length > 0) {
+        let index = 0;
+        if (data !== undefined) {
+            data.forEach(record => {
+                console.log(record.label + 'is the label before pushing');
+                if (this.isMenuGroup(record)) {
+                    if (newGroup.length > 0) {
+                        console.log('adding previously unpushed individual items into group @@@@@@@@@');
+
+                        this.numberOfItems++;
+                        // newGroup.forEach(groupItem => {
+                        //     groupItem.id = index;
+                        //     index++;
+                        // });
+                        groups.push({
+                            groupItems: newGroup
+                        });
+                        // console.log('group 1 ');
+                        // console.log(groups);
+                        newGroup = [];
+                    }
+                    console.log('adding a new group with header @@@@@@@@@');
+
                     this.numberOfItems++;
-                    groups.push({
-                        children: newGroup
+                    record.groupItems.forEach(groupItem => {
+                        groupItem.id = index;
+                        index++;
                     });
-                    console.log('group 1 ');
-                    console.log(groups);
-                    newGroup = [];
+                    groups.push(record);
+                    // console.log('group 2 ');
+                    // console.log(groups);
+                } else {
+                    console.log('no header, adding individual items @@@@@@@@@');
+
+                    this.numberOfItems++;
+                    record.id = index;
+                    index++;
+                    newGroup.push(record);
+                    // console.log('group 3 ' + record.id);
+                    // console.log(groups);
                 }
-                this.numberOfItems++;
-                groups.push(record);
-                console.log('group 2 ');
-                console.log(groups);
-            } else {
-                this.numberOfItems++;
-                newGroup.push(record);
-                console.log('group 3 ');
-                console.log(groups);
-            }
-        });
-        // if no group headers present
-        if (newGroup.length > 0) {
-            // this.numberOfItems++;  //todo : check if this is needed. maybe needed.
-            groups.push({
-                children: newGroup
             });
-            console.log('group 4 ');
-            console.log(groups);
         }
+        // if no group headers present or if last set of items have not yet been pushed to a group
+        if (newGroup.length > 0) {
+            console.log('what does this else do? @@@@@@@@@');
+
+            // this.numberOfItems++;  //todo : check if this is needed. maybe needed.
+            // newGroup.forEach(groupItem => {
+            //     groupItem.id = index;
+            //     index++;
+            // });
+            groups.push({
+                groupItems: newGroup
+            });
+            // console.log('group 4 ');
+        }
+        console.log(groups);
         return groups;
     }
 
-    isIconPresent() {
-        for (const _group of this.groups) {
-            if (_group.icon) {
-                // console.log('group icon: ' + group.icon);
-                this.isIcon = true;
-                break;
-            } else if (_group.children) {
-                for (const item of _group.children) {
-                    if (item.icon) {
-                        // console.log('item icon: ' + item.icon);
-                        this.isIcon = true;
-                        break;
-                    }
-                }
-            } else {
-                this.isIcon = false;
-                break;
-            }
-        }
-        return this.isIcon;
-        // return true;
+    // isIconPresent() {
+    //     for (const _group of this.groups) {
+    //         if (_group.icon) {
+    //             // console.log('group icon: ' + group.icon);
+    //             this.isIcon = true;
+    //             break;
+    //         } else if (_group.groupItems) {
+    //             for (const item of _group.groupItems) {
+    //                 if (item.icon) {
+    //                     // console.log('item icon: ' + item.icon);
+    //                     this.isIcon = true;
+    //                     break;
+    //                 }
+    //             }
+    //         } else {
+    //             this.isIcon = false;
+    //             break;
+    //         }
+    //     }
+    //     return this.isIcon;
+    // }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        // this.menuQueryList.forEach((item: MenuItemComponent, index: number) =>
+        //     item.keyDown
+        //         .pipe(takeUntil(this.onDestroy$))
+        //         .subscribe((keyboardEvent: KeyboardEvent) => this.handleKeyPress(keyboardEvent, index))
+        // );
     }
 
-    onTargetKeyup($event: any) {
-        console.log('$event keycode ' + $event.keyCode);
-        if (this.keyManager.activeItem) {
-            console.log('item is ');
-            console.log(this.keyManager.activeItem);
-        }
-        if ($event.keyCode === UP_ARROW || $event.keyCode === DOWN_ARROW) {
-            this.keyManager.onKeydown($event);
-        } else if ($event.keyCode === ENTER) {
-            const activeItem = this.keyManager.activeItem;
-            if (activeItem) {
-                this.onItemClick(activeItem.item, activeItem.group);
-                this.initializeKeyManager();
-            }
-        }
-        this.cd.markForCheck();
+    handleKeyPress(event: KeyboardEvent, index: number) {
+        console.log('yo yo handling at ' + index + 'for event ' + event.key);
+        // console.log(this.menuQueryList);
+        // const data = this.menuQueryList.toArray();
+        // data.sort((a, b) => {
+        //     console.log('a lbel: ' + a.item.label + ' at index' + a.index);
+        //     console.log('b lbel: ' + b.item.label + ' at index' + b.index);
+        //     return a.item.label.localeCompare(b.item.label);
+        // });
+        // console.log('after sort');
+        // console.log(data);
+        // if(event.key === 'ArrowDown'){
+
+        // }else{
+        // this.keyboardService.keyDownHandler(event, index, this.menuQueryList.toArray());
+        this.keyboardService.keyDownHandler(event, index, this.data);
+        // }
+    }
+
+    focusFirst() {
+        console.log('menu query list:--------');
+
+        console.log(this.menuQueryList);
+
+        console.log('end--------');
+
+        setTimeout(() => this.menuQueryList.first.focus(), 0);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 }
