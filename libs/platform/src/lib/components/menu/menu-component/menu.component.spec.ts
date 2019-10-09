@@ -1,21 +1,34 @@
-import { Component, ViewChild } from '@angular/core';
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { MenuComponent } from './menu.component';
+import { Component, ViewChild, Input } from '@angular/core';
+import { async, TestBed, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
+import { MenuComponent, MenuItem, MenuGroup } from './menu.component';
 import { By } from '@angular/platform-browser';
 import { MenuItemComponent } from './menu-item.component';
+import { MenuKeyboardService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-test-component',
     template: `
-        <fdp-menu id="test-menu" [separator]="separator" [textAlign]="textAlign" #menu></fdp-menu>
+        <fdp-menu
+            id="test-menu"
+            [showSeparator]="showSeparator"
+            [textAlign]="textAlign"
+            [menuItems]="menuItems"
+            [width]="'500px'"
+            [isScrolling]="true"
+        ></fdp-menu>
     `
 })
 class TestComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
+    @Input() menuItems: [];
 
-    public separator = false;
+    public showSeparator = false;
     // public useColumns = false;
     public textAlign: string;
+
+    public isScrolling = false;
+
+    public scrollLimit;
 
     constructor() {}
 }
@@ -26,7 +39,8 @@ describe('MenuComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, MenuComponent, MenuItemComponent]
+            declarations: [TestComponent, MenuComponent, MenuItemComponent],
+            providers: [MenuKeyboardService]
         }).compileComponents();
     }));
 
@@ -35,7 +49,7 @@ describe('MenuComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
 
-        component.separator = false;
+        component.showSeparator = false;
         // component.useColumns = false;
     });
 
@@ -44,32 +58,40 @@ describe('MenuComponent', () => {
         let secondItemClicked = false;
         let thirdItemClicked = false;
 
+        let testdata: any[] = [];
+
         beforeEach(() => {
             firstItemClicked = false;
             secondItemClicked = false;
             thirdItemClicked = false;
-            const data = [
+            testdata = [
                 {
                     label: 'First Item',
-                    callback: () => {
+                    command: () => {
                         firstItemClicked = true;
                     }
                 },
                 {
                     label: 'Second Item',
-                    callback: () => {
+                    command: () => {
                         secondItemClicked = true;
                     }
                 },
                 {
                     label: 'Third Item',
-                    callback: () => {
+                    command: () => {
                         thirdItemClicked = true;
                     }
                 }
             ];
-            component.menu.load(data);
+            component.menu.groups = component.menu.processData(testdata);
+            // fixture.detectChanges();
+            // component.menuItems.push(component.menu.groups);
+            // component.menu.load(data);
+            // tick(2000);
+            // setTimeout(() => {
             fixture.detectChanges();
+            // }, 1000);
         });
 
         it('should be able to display the labels', () => {
@@ -77,16 +99,16 @@ describe('MenuComponent', () => {
             expect(menuItems.length).toBe(3);
 
             const firstItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="0"]'));
-            expect(firstItem.nativeElement.textContent).toBe('First Item');
+            expect(firstItem.nativeElement.textContent).toBe(' First Item ');
 
             const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
-            expect(secondItem.nativeElement.textContent).toBe('Second Item');
+            expect(secondItem.nativeElement.textContent).toBe(' Second Item ');
 
             const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="2"]'));
-            expect(thirdItem.nativeElement.textContent).toBe('Third Item');
+            expect(thirdItem.nativeElement.textContent).toBe(' Third Item ');
         });
 
-        it('should be able to bind the callbacks to click events', () => {
+        it('should be able to bind the commands to click events', () => {
             expect(firstItemClicked).toBeFalsy();
             expect(secondItemClicked).toBeFalsy();
             expect(thirdItemClicked).toBeFalsy();
@@ -111,14 +133,14 @@ describe('MenuComponent', () => {
         });
 
         it('should not separate items by default', () => {
-            const menuList = fixture.debugElement.query(By.css('[data-tag="menu__list'));
+            const menuList = fixture.debugElement.query(By.css('[data-tag="menu'));
             expect(menuList.nativeElement.classList.contains('fd-menu__list--separated')).toBeFalsy();
         });
 
-        it('should separate items if "separator" is true', () => {
-            component.separator = true;
+        it('should separate items if "showSeparator" is true', () => {
+            component.showSeparator = true;
             fixture.detectChanges();
-            const menuList = fixture.debugElement.query(By.css('[data-tag="menu__list'));
+            const menuList = fixture.debugElement.query(By.css('[data-tag="menu"]'));
             expect(menuList.nativeElement.classList.contains('fd-menu__list--separated')).toBeTruthy();
         });
 
@@ -130,18 +152,18 @@ describe('MenuComponent', () => {
         //   expect(menu.nativeElement.classList.contains('columns')).toBeTruthy();
         // });
 
-        it('should allow the text alignment to be set', () => {
-            const menu = fixture.debugElement.query(By.css('[data-tag="menu'));
-            expect(menu.nativeElement.style['text-align']).toBe('');
+        // it('should allow the text alignment to be set', () => {
+        //     const menu = fixture.debugElement.query(By.css('[data-tag="menu'));
+        //     expect(menu.nativeElement.style['text-align']).toBe('');
 
-            component.textAlign = 'left';
-            fixture.detectChanges();
-            expect(menu.nativeElement.style['text-align']).toBe('left');
+        //     component.textAlign = 'left';
+        //     fixture.detectChanges();
+        //     expect(menu.nativeElement.style['text-align']).toBe('left');
 
-            component.textAlign = 'right';
-            fixture.detectChanges();
-            expect(menu.nativeElement.style['text-align']).toBe('right');
-        });
+        //     component.textAlign = 'right';
+        //     fixture.detectChanges();
+        //     expect(menu.nativeElement.style['text-align']).toBe('right');
+        // });
     });
 
     describe('Grouped Menu', () => {
@@ -149,29 +171,41 @@ describe('MenuComponent', () => {
         let secondItemClicked = false;
         let thirdItemClicked = false;
 
+        let nonGroupItemClicked = false;
+
+        let testdata: any[] = [];
+
         beforeEach(() => {
             firstItemClicked = false;
             secondItemClicked = false;
             thirdItemClicked = false;
-            const data = [
+            nonGroupItemClicked = false;
+            testdata = [
+                {
+                    label: 'Not a group',
+                    icon: 'sap-icon--bed',
+                    command: () => {
+                        nonGroupItemClicked = true;
+                    }
+                },
                 {
                     label: 'Actions',
-                    children: [
+                    groupItems: [
                         {
                             label: 'First Item',
-                            callback: () => {
+                            command: () => {
                                 firstItemClicked = true;
                             }
                         },
                         {
                             label: 'Second Item',
-                            callback: () => {
+                            command: () => {
                                 secondItemClicked = true;
                             }
                         },
                         {
                             label: 'Third Item',
-                            callback: () => {
+                            command: () => {
                                 thirdItemClicked = true;
                             }
                         }
@@ -179,7 +213,9 @@ describe('MenuComponent', () => {
                 }
             ];
 
-            component.menu.load(data);
+            component.menu.groups = component.menu.processData(testdata);
+            // component.menu.load(data);
+            // tick(2000);
             fixture.detectChanges();
         });
 
@@ -188,21 +224,41 @@ describe('MenuComponent', () => {
             expect(menuGroups.length).toBe(1);
 
             const firstGroupTitle = fixture.debugElement.query(
-                By.css('[data-tag="menu__group"][data-index="0"] [data-tag="menu__group--title"]')
+                By.css('[data-tag="menu__group"][data-index="1"] [data-tag="menu__group--title"]')
             );
-            expect(firstGroupTitle.nativeElement.textContent).toBe('Actions');
+            expect(firstGroupTitle.nativeElement.textContent).toBe(' Actions ');
 
             const menuItems = fixture.debugElement.queryAll(By.css('[data-tag="menu-item"]'));
-            expect(menuItems.length).toBe(3);
+            expect(menuItems.length).toBe(4);
 
-            const firstItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="0"]'));
-            expect(firstItem.nativeElement.textContent).toBe('First Item');
+            const notAGroupItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="0"]'));
+            expect(notAGroupItem.nativeElement.textContent).toBe(' Not a group ');
 
-            const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
-            expect(secondItem.nativeElement.textContent).toBe('Second Item');
+            const firstItem = fixture.debugElement.query(
+                By.css('[data-tag="menu__group"][data-index="1"] [data-tag="menu-item"][data-index="4"]')
+            );
+            expect(firstItem.nativeElement.textContent).toBe(' First Item ');
 
-            const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="2"]'));
-            expect(thirdItem.nativeElement.textContent).toBe('Third Item');
+            const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="5"]'));
+            expect(secondItem.nativeElement.textContent).toBe(' Second Item ');
+
+            const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="6"]'));
+            expect(thirdItem.nativeElement.textContent).toBe(' Third Item ');
+        });
+
+        it('should not scroll if "isScrolling" is true but "scrollLimit" is not specified', () => {
+            component.isScrolling = true;
+            fixture.detectChanges();
+            const menuList = fixture.debugElement.query(By.css('[data-tag="menu"]'));
+            expect(menuList.nativeElement.classList.contains('scrolling-menu')).toBeFalsy();
+        });
+
+        it('should not scroll if "isScrolling" is false but "scrollLimit" is specified', () => {
+            component.scrollLimit = 3;
+            component.isScrolling = false;
+            fixture.detectChanges();
+            const menuList = fixture.debugElement.query(By.css('[data-tag="menu"]'));
+            expect(menuList.nativeElement.classList.contains('scrolling-menu')).toBeFalsy();
         });
     });
 
@@ -211,50 +267,54 @@ describe('MenuComponent', () => {
         let secondItemClicked = false;
         let thirdItemClicked = false;
 
+        let testdata: any[] = [];
+
         beforeEach(() => {
             firstItemClicked = false;
             secondItemClicked = false;
             thirdItemClicked = false;
-            const data = [
+            testdata = [
                 {
                     label: 'First Item',
                     selectable: true,
                     selected: true,
-                    callback: () => {
+                    command: () => {
                         firstItemClicked = true;
                     }
                 },
                 {
                     label: 'Second Item',
                     selectable: true,
-                    callback: () => {
+                    command: () => {
                         secondItemClicked = true;
                     }
                 },
                 {
                     label: 'Third Item',
                     selectable: true,
-                    callback: () => {
+                    command: () => {
                         thirdItemClicked = true;
                     }
                 }
             ];
 
-            component.menu.load(data);
+            // component.menu.load(data);
+            component.menu.groups = component.menu.processData(testdata);
+            // tick(2000);
             fixture.detectChanges();
         });
 
         it('should show selected item', () => {
             const firstItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="0"]'));
-            const firstItemIcon = firstItem.query(By.css('[data-tag="menu-item__icon"]'));
+            const firstItemIcon = firstItem.query(By.css('[data-tag="menu-item__icon-before"]'));
             expect(firstItemIcon.nativeElement.classList.contains('sap-icon--accept')).toBeTruthy();
 
             const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
-            const secondItemIcon = secondItem.queryAll(By.css('[data-tag="menu-item__icon"]'));
+            const secondItemIcon = secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]'));
             expect(secondItemIcon.length).toBe(0);
 
             const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
-            const thirdItemIcon = thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]'));
+            const thirdItemIcon = thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]'));
             expect(thirdItemIcon.length).toBe(0);
         });
 
@@ -273,29 +333,33 @@ describe('MenuComponent', () => {
                 By.css('[data-tag="menu-item"][data-index="2"] [role="button"]')
             );
 
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
 
             secondItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
+            fixture.detectChanges();
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
 
             thirdItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
+            fixture.detectChanges();
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
 
             firstItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
+            fixture.detectChanges();
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
 
             thirdItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
+            fixture.detectChanges();
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
         });
     });
 
@@ -311,26 +375,26 @@ describe('MenuComponent', () => {
             const data = [
                 {
                     isRadioGroup: true,
-                    children: [
+                    groupItems: [
                         {
                             label: 'First Item',
                             selectable: true,
                             selected: true,
-                            callback: () => {
+                            command: () => {
                                 firstItemClicked = true;
                             }
                         },
                         {
                             label: 'Second Item',
                             selectable: true,
-                            callback: () => {
+                            command: () => {
                                 secondItemClicked = true;
                             }
                         },
                         {
                             label: 'Third Item',
                             selectable: true,
-                            callback: () => {
+                            command: () => {
                                 thirdItemClicked = true;
                             }
                         }
@@ -357,24 +421,24 @@ describe('MenuComponent', () => {
                 By.css('[data-tag="menu-item"][data-index="2"] [role="button"]')
             );
 
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
 
             secondItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
 
             thirdItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
 
             firstItemButton.nativeElement.click();
-            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(1);
-            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
-            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon"]')).length).toBe(0);
+            expect(firstItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(1);
+            expect(secondItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
+            expect(thirdItem.queryAll(By.css('[data-tag="menu-item__icon-before"]')).length).toBe(0);
         });
     });*/
 
@@ -383,19 +447,21 @@ describe('MenuComponent', () => {
         let secondItemClicked = false;
         let thirdItemClicked = false;
 
+        let testdata: any[] = [];
+
         beforeEach(() => {
             firstItemClicked = false;
             secondItemClicked = false;
             thirdItemClicked = false;
-            const data = [
+            testdata = [
                 {
                     icon: 'sap-icon--favorite',
-                    children: [
+                    groupItems: [
                         {
                             label: 'First Item',
                             selectable: true,
                             selected: true,
-                            callback: () => {
+                            command: () => {
                                 firstItemClicked = true;
                             }
                         },
@@ -403,16 +469,17 @@ describe('MenuComponent', () => {
                             label: 'Second Item',
                             selectable: true,
                             selected: true,
-                            callback: () => {
+                            command: () => {
                                 secondItemClicked = true;
-                            }
+                            },
+                            secondaryIcon: 'sap-icon--grid'
                         },
                         {
                             label: 'Third Item',
                             selectable: true,
                             selected: true,
                             icon: 'sap-icon--bed',
-                            callback: () => {
+                            command: () => {
                                 thirdItemClicked = true;
                             }
                         }
@@ -420,24 +487,36 @@ describe('MenuComponent', () => {
                 }
             ];
 
-            component.menu.load(data);
+            // component.menu.load(data);
+            component.menu.groups = component.menu.processData(testdata);
+            // tick(2000);
             fixture.detectChanges();
         });
 
         it('should allow for button group select icon to be customized', () => {
             const firstItemIcon = fixture.debugElement.query(
-                By.css('[data-tag="menu-item"][data-index="0"] [data-tag="menu-item__icon"]')
+                By.css('[data-tag="menu-item"][data-index="0"] [data-tag="menu-item__icon-before"]')
             );
             const secondItemIcon = fixture.debugElement.query(
-                By.css('[data-tag="menu-item"][data-index="1"] [data-tag="menu-item__icon"]')
+                By.css('[data-tag="menu-item"][data-index="1"] [data-tag="menu-item__icon-before"]')
             );
             const thirdItemIcon = fixture.debugElement.query(
-                By.css('[data-tag="menu-item"][data-index="2"] [data-tag="menu-item__icon"]')
+                By.css('[data-tag="menu-item"][data-index="2"] [data-tag="menu-item__icon-before"]')
             );
 
             expect(firstItemIcon.nativeElement.classList.contains('sap-icon--favorite')).toBeTruthy();
             expect(secondItemIcon.nativeElement.classList.contains('sap-icon--favorite')).toBeTruthy();
             expect(thirdItemIcon.nativeElement.classList.contains('sap-icon--bed')).toBeTruthy();
+        });
+
+        it('should have secondary icon', () => {
+            // const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
+            // expect(secondItem.nativeElement.classList.contains('fd-menu__addon-after')).toBeTruthy();
+
+            const secondItemIcon = fixture.debugElement.query(
+                By.css('[data-tag="menu-item"][data-index="1"] [data-tag="menu-item__icon-after"]')
+            );
+            expect(secondItemIcon.nativeElement.classList.contains('sap-icon--grid')).toBeTruthy();
         });
     });
 });
