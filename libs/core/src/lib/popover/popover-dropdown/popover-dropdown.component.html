@@ -5,10 +5,7 @@
         [fdType]="btnType"
         [glyph]="glyph"
         [compact]="compact"
-        [ngClass]="
-            (this.disabled ? ' is-disabled' : '') +
-            (toolbar ? ' fd-button--standard': '')
-        "
+        [disabled]="disabled"
         [attr.aria-expanded]="this.disabled ? false : isOpen"
         [attr.aria-disabled]="this.disabled"
         aria-haspopup="true"

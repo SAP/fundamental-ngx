@@ -8,7 +8,7 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     templateUrl: './core-documentation.component.html'
 })
 export class CoreDocumentationComponent implements OnInit {
-    @ViewChild('content', {static: true }) contentElRef: ElementRef;
+    @ViewChild('content', {static: false }) contentElRef: ElementRef;
 
     @ViewChild(SectionsToolbarComponent, {static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
@@ -112,7 +112,9 @@ export class CoreDocumentationComponent implements OnInit {
     }
 
     skipNavClicked() {
-        this.contentElRef.nativeElement.focus();
+        if (this.contentElRef) {
+            this.contentElRef.nativeElement.focus();
+        }
     }
 
     handleMenuCollapseClick(): void {
@@ -123,7 +125,9 @@ export class CoreDocumentationComponent implements OnInit {
         if (this.smallScreen && !this.sideCollapsed) {
             this.sideCollapsed = true;
         }
-        this.contentElRef.nativeElement.scrollTop = 0;
+        if (this.contentElRef) {
+            this.contentElRef.nativeElement.scrollTop = 0;
+        }
         this.skipNavClicked();
     }
 

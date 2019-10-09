@@ -16,14 +16,12 @@ const routes: Routes = [
     declarations: [AppComponent],
     imports: [
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes, {
-            scrollPositionRestoration: 'enabled',
-            anchorScrolling: 'enabled'
-        }),
+        RouterModule.forRoot(routes, { useHash: true }),
         HttpClientModule,
         MarkdownModule.forRoot({ loader: HttpClient }),
     ],
     bootstrap: [AppComponent],
+
     entryComponents: []
 })
-export class AppModule {}
+export class AppModule { }

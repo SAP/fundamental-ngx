@@ -30,18 +30,19 @@ Prior knowledge of Angular is recommended.
 For an existing Angular CLI application,
 
 1. **Install Fundamental-NGX.**
+   `ng add @fundamental-ngx/core`
+   For models prior to 0.10 use `fundamental-ngx`
 
-    `ng add fundamental-ngx`
-    
-    *If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide).*
+    _If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)._
 
-3. **Import the modules you want to use.**
+2. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
 
     ```javascript
+
     import { FundamentalNgxModule } from '@fundamental-ngx/core';
-    
+
     @NgModule({
         ...
         imports: [FundamentalNgxModule],
@@ -54,30 +55,42 @@ For an existing Angular CLI application,
     For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from '@fundamental-ngx/core';
-    
-    @NgModule({
-        ...
-        imports: [ToggleModule],
-    })
-     export class DemoModule { }
+    import { ToggleModule } from '@fundamental-ngx/core’';
     ```
 
-4. **Add the component to your HTML.**
+    For models prior to 0.10 use `fundamental-ngx`
+
+    import { ToggleModule } from '@fundamental-ngx/core';
+
+    @NgModule({
+    ...
+    imports: [ToggleModule],
+    })
+    export class DemoModule { }
+
+    ```
+
+    ```
+
+3. **Add the component to your HTML.**
 
     ```html
-    <fd-toggle [size]="'l'" [(checked)]="checked">Large Toggle</fd-toggle>
+    <fd-toggle [size]="'l'" [(checked)]="myValue">Large Toggle</fd-toggle>
     ```
 
 ## Tests
 
 Fundamental NGX makes use of Jasmine and Karma for its unit tests.
 
-Run `ng test fundamental-ngx`. Append `--code-coverage` to generate code coverage documentation.
+Run `ng test @fundamental-ngx/core`. Append `--code-coverage` to generate code coverage documentation.
+
+For models prior to 0.10 use `fundamental-ngx`
 
 ## Versioning
 
-The `fundamental-ngx` library follows [Semantic Versioning](https://semver.org/). These components strictly adhere to the `[MAJOR].[MINOR].[PATCH]` numbering system (also known as `[BREAKING].[FEATURE].[FIX]`).
+The `@fundamental-ngx/core` library follows [Semantic Versioning](https://semver.org/). These components strictly adhere to the `[MAJOR].[MINOR].[PATCH]` numbering system (also known as `[BREAKING].[FEATURE].[FIX]`).
+
+For models prior to 0.10 use `fundamental-ngx`
 
 Merges to the `master` branch will be published as a prerelease. Prereleases will include an **rc** version (_e.g._ `[MAJOR].[MINOR].[PATCH]-rc.[RC]`).
 
