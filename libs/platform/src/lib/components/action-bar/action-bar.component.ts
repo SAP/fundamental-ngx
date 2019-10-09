@@ -8,6 +8,7 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import { Placement } from 'popper.js';
+
 export interface ActionItem {
     label: string;
     type: string;
