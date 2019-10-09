@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { MenuItemDirective, MenuKeyboardService } from '@fundamental-ngx/core';
 import { ActionItem } from '../action-bar.component';
+import { Placement } from 'popper.js';
 
 const MAX_BUTTONS = 3;
 @Component({
@@ -40,7 +41,7 @@ export class ActionBarActionsComponent implements OnInit {
      * specifies the posistion of the contextual mennu
      */
     @Input()
-    placement: string;
+    placement: Placement;
 
     /**
      * array of action items
