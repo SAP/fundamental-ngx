@@ -5,7 +5,7 @@ import {
     HostBinding,
     Input, OnChanges,
     OnInit,
-    Output, Renderer2, SimpleChanges,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
@@ -140,9 +140,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
         private calendarI18n: CalendarI18n,
         private eRef: ElementRef,
     ) {
-    }
-
-    getFocusedElement() {
     }
 
     /**
@@ -286,7 +283,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    public ngOnChanges(changes: SimpleChanges): void {
+    public ngOnChanges(): void {
         this.buildDayViewGrid();
     }
 
