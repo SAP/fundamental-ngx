@@ -35,7 +35,7 @@ import { ModalRef } from './modal-utils/modal-ref';
         '[attr.aria-modal]': 'true',
         '[attr.id]': 'id',
         'tabindex': '-1',
-        '[@modal-fade]': ''
+        '[@modal-fade]': 'useAnimations'
     },
     animations: [
         modalFadeNgIf
@@ -66,6 +66,8 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     hasBackdrop: boolean  = true;
 
     modalPanelClass: string = '';
+
+    useAnimations: boolean = true;
 
     private componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
