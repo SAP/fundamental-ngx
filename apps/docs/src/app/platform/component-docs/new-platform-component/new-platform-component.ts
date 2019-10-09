@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'platform-home',
-    templateUrl: './platform-home.component.html'
+    selector: 'app-home',
+    templateUrl: './new-platform-component.html'
 })
-export class PlatformHomeComponent implements OnInit {
-
+export class NewPlatformComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
 
     onLoad(event) { }
     onError(event) { }
-
 }

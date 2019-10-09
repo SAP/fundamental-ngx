@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-// import * as buttonOptionsExample from '!raw-loader!./examples/button-options-example.component.html';
-// import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
-// import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
-// import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
-// import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
+import * as buttonOptionsExample from '!raw-loader!./platform-button-examples/platform-button-options-example.component.html';
+import * as buttonIconsExample from '!raw-loader!./platform-button-examples/platform-button-icons-example.component.html';
+import * as buttonSizesExample from '!raw-loader!./platform-button-examples/platform-button-sizes-example.component.html';
+import * as buttonStateExample from '!raw-loader!./platform-button-examples/platform-button-state-example.component.html';
+import * as buttonTypesExample from '!raw-loader!./platform-button-examples/platform-button-types-example.component.html';
+import * as buttonTruncateExample from '!raw-loader!./platform-button-examples/platform-button-truncate-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-button',
@@ -22,7 +25,7 @@ export class PlatformButtonDocsComponent implements OnInit {
                     label: {
                         type: 'string'
                     },
-                    fdType: {
+                    type: {
                         type: 'string',
                         enum: ['', 'standard', 'positive', 'medium', 'negative']
                     },
@@ -32,6 +35,9 @@ export class PlatformButtonDocsComponent implements OnInit {
                     },
                     compact: {
                         type: 'boolean'
+                    },
+                    width: {
+                        type: 'string'
                     },
                     icon: {
                         type: 'string',
@@ -671,48 +677,56 @@ export class PlatformButtonDocsComponent implements OnInit {
     data: any = {
         properties: {
             label: 'click here',
-            fdType: 'default',
+            type: 'default',
             option: 'default',
+            width: '100px',
             size: 'default',
             icon: ''
+
         }
     };
 
-    // buttonHtmlOptions: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: buttonOptionsExample
-    //     }
-    // ];
+    buttonHtmlOptions: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonOptionsExample
+        }
+    ];
 
-    // buttonHtmlType: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: buttonTypesExample
-    //     }
-    // ];
+    buttonHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonTypesExample
+        }
+    ];
 
-    // buttonHtmlSize: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: buttonSizesExample
-    //     }
-    // ];
+    buttonHtmlSize: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonSizesExample
+        }
+    ];
 
-    // buttonHtmlIcon: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: buttonIconsExample
-    //     }
-    // ];
+    buttonHtmlIcon: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonIconsExample
+        }
+    ];
 
-    // buttonHtmlState: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: buttonStateExample
-    //     }
-    // ];
+    buttonHtmlState: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonStateExample
+        }
+    ];
 
+    buttonHtmlTruncate: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonTruncateExample
+        }
+    ];
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('button');
     }

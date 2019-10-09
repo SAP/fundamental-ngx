@@ -57,8 +57,8 @@
 
 <separator></separator>
 
-<description
-    >The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles guidelines.
+<description>The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles
+    guidelines.
     <br />For example: <br />if <code>positive</code> is passed for <code>fdType</code>, the class
     <code>fd-button--positive</code> will be added to the element. <br />if <code>compact</code> is passed for
     <code>size</code>, the class <code>fd-button--compact</code> will be added to the element.
@@ -79,13 +79,8 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <button
-        fd-button
-        [fdType]="data.properties.fdType"
-        [options]="data.properties.options"
-        [compact]="data.properties.compact"
-        [glyph]="data.properties.icon"
-    >
+    <button fd-button [fdType]="data.properties.fdType" [options]="data.properties.options"
+        [compact]="data.properties.compact" [glyph]="data.properties.icon" width="data.properties.width">
         {{ data.properties.label }}
     </button>
 </playground>

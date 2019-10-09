@@ -5,16 +5,38 @@ import { ROUTES } from './platform-documentation.routes';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { MarkdownModule } from 'ngx-markdown';
-import { PlatformButtonHeaderComponent } from './component-docs/platform-button/examples/platform-button-header/platform-button-header.component';
+import { PlatformButtonDocsComponent } from '../platform/component-docs/platform-button/platform-button-docs.component';
+import { PlatformButtonHeaderComponent } from '../platform/component-docs/platform-button/platform-button-header/platform-button-header.component';
+import {
+    PlatformButtonIconsExampleComponent,
+    PlatformButtonOptionsExampleComponent,
+    PlatformButtonSizesExampleComponent,
+    PlatformButtonStateExampleComponent,
+    PlatformButtonTypesExampleComponent,
+    PlatformButtonTruncateExampleComponent
+} from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
+import { SchemaModule } from '../schema/schema.module';
+import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
+import { NewPlatformComponent } from '../platform/component-docs/new-platform-component/new-platform-component';
 
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
         PlatformHomeComponent,
-        PlatformButtonHeaderComponent
+        PlatformButtonDocsComponent,
+        PlatformButtonIconsExampleComponent,
+        PlatformButtonOptionsExampleComponent,
+        PlatformButtonSizesExampleComponent,
+        PlatformButtonTypesExampleComponent,
+        PlatformButtonStateExampleComponent,
+        PlatformButtonHeaderComponent,
+        PlatformButtonTruncateExampleComponent,
+        NewPlatformComponent
+
     ],
     imports: [
         SharedDocumentationModule,
+        SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
     ]

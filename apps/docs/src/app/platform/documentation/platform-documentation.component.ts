@@ -8,21 +8,43 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     templateUrl: './platform-documentation.component.html'
 })
 export class PlatformDocumentationComponent {
-    @ViewChild('content', {static: true }) contentElRef: ElementRef;
+    @ViewChild('content', { static: true }) contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, {static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     sideCollapsed: boolean = window.innerWidth < 576;
 
     guides = [
         { url: 'platform/home', name: 'Home' },
+        { url: 'platform/new-component', name: 'New Component' }
     ];
+
+    components = [
+        { url: 'platform/button', name: 'Button' }
+
+    ];
+
+    layouts = [];
+
+    utilities = [];
 
     sections: SectionInterface[] = [
         {
             header: 'Guides',
             content: this.guides
+        },
+        {
+            header: 'Components',
+            content: this.components
+        },
+        {
+            header: 'layouts',
+            content: this.layouts
+        },
+        {
+            header: 'Utilities',
+            content: this.utilities
         }
     ];
 
