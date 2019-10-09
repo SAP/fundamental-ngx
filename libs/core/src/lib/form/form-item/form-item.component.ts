@@ -30,6 +30,11 @@ export class FormItemComponent {
     @HostBinding('class.fd-form-item--inline')
     isInline: boolean = false;
 
+    /** Whether the form item is horizontal. */
+    @Input()
+    @HostBinding('class.fd-form-item--horizontal')
+    horizontal: boolean = false;
+
     /** @hidden */
     @HostBinding('class.fd-form-item')
     fdFormItemClass: boolean = true;

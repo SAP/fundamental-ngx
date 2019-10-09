@@ -5,16 +5,16 @@
         'fd-input-group--inline': inline === true,
         'fd-input-group--compact' : compact}">
 
-    <ng-container *ngIf="placement !== 'before'">
+    <ng-content></ng-content>
+
+    <ng-container *ngIf="placement !== 'before' && !inputElement">
         <ng-container *ngTemplateOutlet="input"></ng-container>
     </ng-container>
-
-
-    <ng-content *ngIf="addOnElement" select="[fd-input-group-addon]"></ng-content>
 
     <ng-container *ngIf="!addOnElement">
 
         <span *ngIf="button"
+              [state]="state"
               fd-input-group-addon
               [button]="true"
               [placement]="placement">
@@ -31,28 +31,29 @@
         </span>
 
         <span *ngIf="!button"
+              [state]="state"
               fd-input-group-addon
               [placement]="placement">
             <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
-            <span *ngIf="glyph" [ngClass]="'sap-icon--' + glyph"></span>
+            <span *ngIf="glyph"  [ngClass]="'sap-icon--' + glyph"></span>
     </span>
     </ng-container>
 
-    <ng-container *ngIf="placement === 'before'">
+    <ng-container *ngIf="placement === 'before' && !inputElement">
         <ng-container *ngTemplateOutlet="input"></ng-container>
     </ng-container>
 </div>
 
 <ng-template #input>
-    <ng-content *ngIf="inputElement" select="[fd-input-group-input]"></ng-content>
     <ng-container *ngIf="inputTemplate">
         <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
     </ng-container>
     <input [(ngModel)]="inputText"
+           fd-input-group-input
+           [state]="state"
+           [compact]="compact"
            [disabled]="disabled"
            type="text"
            *ngIf="!inputElement && !inputTemplate"
-           placeholder="{{placeholder}}"
-           class="fd-input fd-input-group__default-input"
-           [ngClass]="{'fd-input--compact' : compact}">
+           placeholder="{{placeholder}}">
 </ng-template>

@@ -1,11 +1,15 @@
 <form [formGroup]="customForm">
-    Combobox with communication via Objects
-    <fd-combobox [dropdownValues]="dropdownValues"
-                 [placeholder]="'Type some text...'"
-                 [displayFn]="myDisplayFunction"
-                 [communicateByObject]="true"
-                 formControlName="itemOnDropdownMode">
-    </fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Combobox with communication via Objects</label>
+        <fd-combobox [dropdownValues]="dropdownValues"
+                     [state]="'information'"
+                     [placeholder]="'Type some text...'"
+                     [displayFn]="myDisplayFunction"
+                     [communicateByObject]="true"
+                     formControlName="itemOnDropdownMode">
+        </fd-combobox>
+        <fd-form-message [type]="'information'">More information</fd-form-message>
+    </div>
 </form><br/>
 
 Touched: {{customForm.controls.itemOnDropdownMode.touched}}<br/>
@@ -14,12 +18,16 @@ Json Value: {{customForm.controls.itemOnDropdownMode.value | json}}
 <br/><br/>
 
 <form [formGroup]="customForm">
-    Combobox with communication via displayed value
-    <fd-combobox [dropdownValues]="dropdownValues"
-                 [placeholder]="'Type some text...'"
-                 [displayFn]="myDisplayFunction"
-                 formControlName="item">
-    </fd-combobox>
+    <div fd-form-item>
+        <label fd-form-label>Combobox with communication via displayed value</label>
+        <fd-combobox [dropdownValues]="dropdownValues"
+                     [state]="'information'"
+                     [placeholder]="'Type some text...'"
+                     [displayFn]="myDisplayFunction"
+                     formControlName="item">
+        </fd-combobox>
+        <fd-form-message [type]="'information'">More information</fd-form-message>
+    </div>
 </form><br/>
 
 Touched: {{customForm.controls.item.touched}}<br/>

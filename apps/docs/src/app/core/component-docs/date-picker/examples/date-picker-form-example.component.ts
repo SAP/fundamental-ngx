@@ -4,23 +4,33 @@ import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-picker-form-example',
-    styles: [`
-        .flex-form{
-            display:flex;
-            justify-content: space-between;
-        }
-    `],
     template: `
         <form [formGroup]="customForm" class="flex-form">
             <div>
-                <fd-date-picker formControlName="date"></fd-date-picker><br/>
+
+
+                <div fd-form-item>
+                    <label fd-form-label>Date Picker</label>
+                    <fd-date-picker [state]="'valid'" formControlName="date"></fd-date-picker>
+                    <fd-form-message [type]="'success'">This is valid DatePicker</fd-form-message>
+                    <br/>
+                </div>
+                
                 Touched: {{customForm.controls.date.touched}}<br/>
                 Dirty: {{customForm.controls.date.dirty}}<br/>
                 Valid: {{customForm.controls.date.valid}}<br/>
                 Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
             </div>
+
+
+            <div fd-form-item>
+                <label fd-form-label>Disabled Date Picker</label>
+                <fd-date-picker [state]="'information'" formControlName="disabledDate"></fd-date-picker>
+                <fd-form-message [type]="'information'">This is disabled DatePicker</fd-form-message>
+                <br/>
+            </div>
+            
             <div>
-                <fd-date-picker formControlName="disabledDate"></fd-date-picker><br/>
                 Touched: {{customForm.controls.disabledDate.touched}}<br/>
                 Dirty: {{customForm.controls.disabledDate.dirty}}<br/>
                 Valid: {{customForm.controls.disabledDate.valid}}<br/>

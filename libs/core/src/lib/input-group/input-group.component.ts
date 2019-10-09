@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
+import { FormStates } from '../form/form-control/form-states';
+import { ButtonOptions, ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -81,10 +83,10 @@ export class InputGroupComponent implements ControlValueAccessor {
     /**
      * The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
-    @Input() buttonType: string;
+    @Input() buttonType: ButtonType;
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() buttonOptions: string | string[] = 'light';
+    @Input() buttonOptions: ButtonOptions | ButtonOptions[] = 'light';
 
     /** The icon value for the add-on. */
     @Input()
@@ -97,6 +99,13 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** Whether the input group is disabled. */
     @Input()
     disabled: boolean;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `error`, `warning` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()

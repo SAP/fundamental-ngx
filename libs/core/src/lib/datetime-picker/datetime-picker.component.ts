@@ -23,6 +23,7 @@ import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
+import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
 
 /**
@@ -163,6 +164,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Whether a null input is considered valid. */
     @Input()
     allowNull: boolean = true;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `error`, `warning` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** Event thrown every time calendar active view is changed */
     @Output()

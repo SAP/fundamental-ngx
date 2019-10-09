@@ -4,13 +4,14 @@
         <input fd-input-group-input fd-form-control>
         <span fd-input-group-addon [button]="true">
             <button fd-button
+                    class="fd-input-group__button"
                     [glyph]="'calendar'"
                     [options]="'light'">
             </button>
         </span>
     </fd-input-group>
 </fd-form-group>
-<br />
+<br/>
 <fd-form-group>
     <div fd-form-item>
         <label fd-form-label>Input Group with complex span addon.</label>
@@ -19,6 +20,108 @@
             <span fd-input-group-addon>
                 Addon
             </span>
+        </fd-input-group>
+    </div>
+</fd-form-group>
+<br/>
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label>Multiple Input Group Addons</label>
+        <fd-input-group>
+            <span fd-input-group-addon>
+                Beginning Addon
+            </span>
+            <input fd-input-group-input fd-form-control>
+            <span fd-input-group-addon>
+                Ending Addon
+            </span>
+        </fd-input-group>
+    </div>
+</fd-form-group>
+<br/>
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label>Multiple Input Group Addons</label>
+        <fd-input-group>
+            <input fd-input-group-input fd-form-control>
+            <span fd-input-group-addon>
+                First Addon
+            </span>
+            <span fd-input-group-addon>
+                Second Addon
+            </span>
+        </fd-input-group>
+    </div>
+</fd-form-group>
+
+<br/>
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label>Multiple Button Addons</label>
+        <fd-input-group>
+            <input fd-input-group-input fd-form-control>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'decline'"
+                        [options]="'light'">
+                </button>
+            </span>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'menu'"
+                        [options]="'light'">
+                </button>
+            </span>
+        </fd-input-group>
+    </div>
+</fd-form-group>
+
+<br/>
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label>Multiple Button Addons</label>
+        <fd-input-group>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'decline'"
+                        [options]="'light'">
+                </button>
+            </span>
+            <input fd-input-group-input fd-form-control>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'menu'"
+                        [options]="'light'">
+                </button>
+            </span>
+        </fd-input-group>
+    </div>
+</fd-form-group>
+
+<br/>
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label>Multiple Button Addons</label>
+        <fd-input-group>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'decline'"
+                        [options]="'light'">
+                </button>
+            </span>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'menu'"
+                        [options]="'light'">
+                </button>
+            </span>
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'menu'"
+                        [options]="'light'">
+                </button>
+            </span>
+            <input fd-input-group-input fd-form-control>
         </fd-input-group>
     </div>
 </fd-form-group>

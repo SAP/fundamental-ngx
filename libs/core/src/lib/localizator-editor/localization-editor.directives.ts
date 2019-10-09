@@ -1,4 +1,4 @@
-import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { InputGroupInputDirective } from '../input-group/input-group-directives';
 
 /**
@@ -14,11 +14,6 @@ import { InputGroupInputDirective } from '../input-group/input-group-directives'
     selector: '[fd-localization-editor-input]'
 })
 export class LocalizationEditorInputDirective {
-
-    /** @hidden */
-    @HostBinding('attr.fd-input-group-input')
-    inputGroupDirective: InputGroupInputDirective = new InputGroupInputDirective();
-
     /**
      * @hidden
      *  Variable is controlled by parent component and define if there should be used compact mode
@@ -40,11 +35,6 @@ export class LocalizationEditorInputDirective {
     selector: '[fd-localization-editor-textarea]',
 })
 export class LocalizationEditorTextareaDirective {
-
-    /** @hidden */
-    @HostBinding('attr.fd-input-group-input')
-    inputGroupDirective: InputGroupInputDirective = new InputGroupInputDirective();
-
     /**
      * @hidden
      *  Variable is controlled by parent component and define if there should be used compact mode

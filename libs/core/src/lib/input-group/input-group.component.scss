@@ -8,10 +8,20 @@ fd-input-group {
         height: 100%;
     }
 }
+
+.fd-input-group > :not(:first-child):not(:last-child) {
+    button {
+        border-radius: 0;
+    }
+}
+
+.fd-input-group > :not(:first-child) {
+    margin-left: -1px;
+}
+
 .fd-input-group {
-    .fd-input-group__addon--button > * {
-        border-color: var(--fd-forms-border-color, #89919a);
-        height: 100%;
-        max-height: 100%;
+    .fd-input, .fd-textarea {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }

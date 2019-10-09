@@ -13,6 +13,7 @@ import {
     LocalizationEditorLabel,
     LocalizationEditorTextareaDirective
 } from '../localization-editor.directives';
+import { FormStates } from '../../form/form-control/form-states';
 
 /**
  *  Component that represents field with add-on.

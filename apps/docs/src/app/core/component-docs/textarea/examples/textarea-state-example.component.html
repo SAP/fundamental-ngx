@@ -4,12 +4,16 @@
     </label>
     <textarea fd-form-control id="textarea-51" placeholder="Field placeholder text"></textarea>
     <fd-form-message>Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</fd-form-message>
+    <br/>
 </div>
 <div fd-form-item>
     <label fd-form-label for="textarea-52">
         Valid Textarea
     </label>
     <textarea fd-form-control id="textarea-52" placeholder="Field placeholder text" [state]="'valid'"></textarea>
+    <fd-form-message [type]="'success'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+    </fd-form-message>
+    <br/>
 </div>
 <div fd-form-item>
     <label fd-form-label for="textarea-53">
@@ -18,6 +22,7 @@
     <textarea fd-form-control id="textarea-53" placeholder="Field placeholder text" [state]="'invalid'"></textarea>
     <fd-form-message [type]="'error'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
     </fd-form-message>
+    <br/>
 </div>
 <div fd-form-item>
     <label fd-form-label for="textarea-54">
@@ -26,6 +31,16 @@
     <textarea fd-form-control id="textarea-54" placeholder="Field placeholder text" [state]="'warning'"></textarea>
     <fd-form-message [type]="'warning'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
     </fd-form-message>
+    <br/>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="information-textarea">
+        Information Textarea
+    </label>
+    <textarea fd-form-control id="information-textarea" placeholder="Field placeholder text" [state]="'information'"></textarea>
+    <fd-form-message [type]="'information'">Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+    </fd-form-message>
+    <br/>
 </div>
 <div fd-form-item>
     <label fd-form-label for="textarea-55">
