@@ -5,11 +5,28 @@ import { ROUTES } from './platform-documentation.routes';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { ButtonDocsComponent } from '../platform/component-docs/button/button-docs.component';
+import { ButtonHeaderComponent } from '../platform/component-docs/button/button-header/button-header.component';
+import {
+    ButtonIconsExampleComponent,
+    ButtonOptionsExampleComponent,
+    ButtonSizesExampleComponent,
+    ButtonStateExampleComponent,
+    ButtonTypesExampleComponent
+} from '../platform/component-docs/button/examples/button-examples.component';
 
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
-        PlatformHomeComponent
+        PlatformHomeComponent,
+        ButtonDocsComponent,
+        ButtonIconsExampleComponent,
+        ButtonOptionsExampleComponent,
+        ButtonSizesExampleComponent,
+        ButtonTypesExampleComponent,
+        ButtonStateExampleComponent,
+        ButtonHeaderComponent
+
     ],
     imports: [
         SharedDocumentationModule,
@@ -17,4 +34,4 @@ import { MarkdownModule } from 'ngx-markdown';
         RouterModule.forChild(ROUTES)
     ]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }

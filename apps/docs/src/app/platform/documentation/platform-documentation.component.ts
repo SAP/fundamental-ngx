@@ -7,25 +7,59 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     styleUrls: ['./platform-documentation.component.scss'],
     templateUrl: './platform-documentation.component.html'
 })
-export class PlatformDocumentationComponent {
-    @ViewChild('content', {static: true }) contentElRef: ElementRef;
+export class PlatformDocumentationComponent implements OnInit {
+    @ViewChild('content', { static: true }) contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, {static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     guides = [
-        { url: 'platform/home', name: 'Home' },
+        { url: 'platform/home', name: 'Home' }
     ];
 
+    components = [
+        { url: 'platform/button', name: 'Button' }
+
+    ];
+
+    layouts = [];
+
+    utilities = [];
     sections: SectionInterface[] = [
         {
             header: 'Guides',
             content: this.guides
-        }
+        },
+        {
+            header: 'Components',
+            content: this.components
+        },
+        {
+            header: 'layouts',
+            content: this.layouts
+        },
+        {
+            header: 'Utilities',
+            content: this.utilities
+        },
     ];
 
     smallScreen: boolean = window.innerWidth < 992;
     sideCollapsed: boolean = window.innerWidth < 576;
+
+    ngOnInit() {
+        // sort the list alphabetically
+        this.components.sort((el1, el2) => {
+            if (el1.name < el2.name) {
+                return -1;
+            }
+
+            if (el1.name > el2.name) {
+                return 1;
+            }
+            return 0;
+        });
+    }
 
     skipNavClicked() {
         this.contentElRef.nativeElement.focus();
