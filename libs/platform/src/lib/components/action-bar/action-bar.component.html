@@ -11,22 +11,23 @@
 
     <fdp-action-bar-actions
         [actionItems]="actionItems"
-        [displayOnlyMenu]="displayOnlyMenu"
-        (editMode)="enableEditTitle($event)"
+        [showOnlyMenu]="showOnlyMenu"
+        (editing)="enableEditTitle($event)"
         [placement]="placement"
+        (itemClick)="actionItemClicked($event)"
     >
     </fdp-action-bar-actions>
 </div>
 
 <ng-template #actionBarContent>
     <div class="fd-action-bar__header">
-        <h3 class="fd-action-bar__title" *ngIf="!editMode" [attr.title]="title" data-tag="actionbar__title">
+        <h3 class="fd-action-bar__title" *ngIf="!editing" [attr.title]="title" data-tag="actionbar__title">
             {{ title }}
         </h3>
-        <div fd-form-set *ngIf="editMode">
+        <div fd-form-set *ngIf="editing">
             <div fd-form-item>
                 <input
-                    *ngIf="editMode"
+                    *ngIf="editing"
                     class="fd-input edit-actionbar-title"
                     fd-form-control
                     (focusout)="onFocusOut()"
