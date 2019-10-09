@@ -20,7 +20,6 @@ const MAX_BUTTONS = 3;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionBarActionsComponent implements OnInit {
-    constructor(private cd: ChangeDetectorRef, private menuKeyboardService: MenuKeyboardService) {}
     /**
      * Button action items of action bar actions component
      */
@@ -71,6 +70,8 @@ export class ActionBarActionsComponent implements OnInit {
      */
     @Output()
     editing: EventEmitter<boolean> = new EventEmitter();
+
+    constructor(private cd: ChangeDetectorRef, private menuKeyboardService: MenuKeyboardService) {}
 
     ngOnInit() {
         this.orderActionItem();
