@@ -5,27 +5,27 @@ import { ROUTES } from './platform-documentation.routes';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { MarkdownModule } from 'ngx-markdown';
-import { ButtonDocsComponent } from '../platform/component-docs/button/button-docs.component';
-import { ButtonHeaderComponent } from '../platform/component-docs/button/button-header/button-header.component';
+import { PlatformButtonDocsComponent } from '../platform/component-docs/platform-button/platform-button-docs.component';
+import { PlatformButtonHeaderComponent } from '../platform/component-docs/platform-button/platform-button-header/platform-button-header.component';
 import {
-    ButtonIconsExampleComponent,
-    ButtonOptionsExampleComponent,
-    ButtonSizesExampleComponent,
-    ButtonStateExampleComponent,
-    ButtonTypesExampleComponent
-} from '../platform/component-docs/button/examples/button-examples.component';
+    PlatformButtonIconsExampleComponent,
+    PlatformButtonOptionsExampleComponent,
+    PlatformButtonSizesExampleComponent,
+    PlatformButtonStateExampleComponent,
+    PlatformButtonTypesExampleComponent
+} from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
 
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
         PlatformHomeComponent,
-        ButtonDocsComponent,
-        ButtonIconsExampleComponent,
-        ButtonOptionsExampleComponent,
-        ButtonSizesExampleComponent,
-        ButtonTypesExampleComponent,
-        ButtonStateExampleComponent,
-        ButtonHeaderComponent
+        PlatformButtonDocsComponent,
+        PlatformButtonIconsExampleComponent,
+        PlatformButtonOptionsExampleComponent,
+        PlatformButtonSizesExampleComponent,
+        PlatformButtonTypesExampleComponent,
+        PlatformButtonStateExampleComponent,
+        PlatformButtonHeaderComponent
 
     ],
     imports: [

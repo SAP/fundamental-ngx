@@ -13,9 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-button',
-    templateUrl: './button-docs.component.html'
+    templateUrl: './platform-button-docs.component.html'
 })
-export class ButtonDocsComponent implements OnInit {
+export class PlatformButtonDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
