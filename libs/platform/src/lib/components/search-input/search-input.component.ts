@@ -112,6 +112,7 @@ export class PlatformSearchInputComponent implements OnInit, OnChanges, AfterVie
 
     ngAfterViewInit() {
         this.combobox.searchInputElement.nativeElement.setAttribute('type', 'search');
+        this.combobox.searchInputElement.nativeElement.disabled = this.isLoading;
     }
 
     ngOnChanges(changes: SimpleChanges) {
