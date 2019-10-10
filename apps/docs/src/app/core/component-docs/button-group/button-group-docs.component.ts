@@ -6,14 +6,10 @@ import * as buttonGroupCompactExample from '!raw-loader!./examples/button-group-
 import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
 import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
 import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
-<<<<<<< HEAD:apps/docs/src/app/core/component-docs/button-group/button-group-docs.component.ts
+
+import * as buttonGroupTsCode from '!raw-loader!./examples/button-group-examples.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-=======
-import * as buttonGroupTsCode from '!raw-loader!./examples/button-group-examples.component.ts';
-import { ExampleFile } from '../../core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../core-helpers/docs-section-title/docs-section-title.component';
->>>>>>> added to all example files:apps/docs/src/app/documentation/component-docs/button-group/button-group-docs.component.ts
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -8,8 +8,10 @@ import * as tileDisabledSrc from '!raw-loader!./examples/tile-disabled-example.c
 import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
 import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
 import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
-import * as tileTscode from '!raw-loader!./examples/tile--examples.component.ts';
+import * as tileTscode from '!raw-loader!./examples/tile-examples.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+
 
 @Component({
     selector: 'app-tile',

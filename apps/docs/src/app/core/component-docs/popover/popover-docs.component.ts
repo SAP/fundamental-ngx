@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
-import * as popoverSrcTs from '!raw-loader!./examples/popover-simple/popover-examples.component.ts';
+import * as popoverSrcTs from '!raw-loader!./examples/popover-simple/popover-example.component.ts';
 import * as popoverProgrammaticHtmlSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.html';
 import * as popoverProgrammaticTsSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.ts';
 import * as popoverPlacementHtmlSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.html';

@@ -3,7 +3,7 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as tabSrc from '!raw-loader!./examples/tabs-example.component.html';
-import * as tabsTsCode from '!raw-loader!./examples/tabs-examples.component.ts';
+import * as tabsTsCode from '!raw-loader!./examples/tabs-examples-component.ts';
 import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
@@ -12,8 +12,7 @@ import * as complexTabHTsCode from '!raw-loader!./examples/complex-title-example
 import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import * as navigationTabTsCode from '!raw-loader!./examples/tabs-navigation-mode-example.component.ts';
-
+import * as navigationTabTsCode from '!raw-loader!./examples/tab-navigation-mode-example-component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
