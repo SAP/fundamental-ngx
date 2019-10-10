@@ -32,11 +32,11 @@ import { MenuItemDirective } from './menu-item.directive';
     `
 })
 export class TestMenuComponent implements AfterViewInit {
-    @ViewChild('element1', { static: false }) element1: ElementRef;
-    @ViewChild('element2', { static: false }) element2: ElementRef;
-    @ViewChild('element3', { static: false }) element3: ElementRef;
-    @ViewChild('element4', { static: false }) element4: ElementRef;
-    @ViewChild('elementOutOfScope', { static: false }) elementOutOfScope: ElementRef;
+    @ViewChild('element1') element1: ElementRef;
+    @ViewChild('element2') element2: ElementRef;
+    @ViewChild('element3') element3: ElementRef;
+    @ViewChild('element4') element4: ElementRef;
+    @ViewChild('elementOutOfScope') elementOutOfScope: ElementRef;
     @ViewChildren(MenuItemDirective)
     menuItems: QueryList<MenuItemDirective>;
     public ngAfterViewInit(): void { }

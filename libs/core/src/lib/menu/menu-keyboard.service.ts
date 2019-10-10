@@ -1,7 +1,8 @@
 import { Subject } from 'rxjs';
-import { Output } from '@angular/core';
+import { Output, Injectable } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item';
 
+@Injectable()
 export class MenuKeyboardService {
 
     /** Event emitted when an item link is clicked.*/

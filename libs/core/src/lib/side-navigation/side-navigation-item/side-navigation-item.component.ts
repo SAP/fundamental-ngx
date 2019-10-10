@@ -24,8 +24,8 @@ import { SideNavigationSublistDirective } from '../side-navigation-sublist/side-
     encapsulation: ViewEncapsulation.None
 })
 export class SideNavigationItemComponent implements AfterContentInit, OnDestroy {
-    @ContentChild(SideNavigationLinkDirective, { static: false }) linkElement: SideNavigationLinkDirective;
-    @ContentChild(SideNavigationSublistDirective, { static: false }) subListElement: SideNavigationSublistDirective;
+    @ContentChild(SideNavigationLinkDirective) linkElement: SideNavigationLinkDirective;
+    @ContentChild(SideNavigationSublistDirective) subListElement: SideNavigationSublistDirective;
 
     /** @Hidden */
     subListOpenChanged$: Subscription;

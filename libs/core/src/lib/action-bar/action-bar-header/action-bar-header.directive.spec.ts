@@ -10,7 +10,7 @@ import { ActionBarModule } from '../action-bar.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

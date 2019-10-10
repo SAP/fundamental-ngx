@@ -20,7 +20,7 @@ export class MegaMenuSubitemDirective implements DefaultMenuItem {
     fdMegaMenuClass: boolean = true;
 
     /** @hidden */
-    @ContentChild(MegaMenuSublinkDirective, { static: false })
+    @ContentChild(MegaMenuSublinkDirective)
     link: MegaMenuSublinkDirective;
 
     /** */

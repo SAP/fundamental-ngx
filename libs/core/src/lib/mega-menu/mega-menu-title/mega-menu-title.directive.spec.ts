@@ -10,7 +10,7 @@ import { MegaMenuTitleDirective } from './mega-menu-title.directive';
 })
 
 export class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

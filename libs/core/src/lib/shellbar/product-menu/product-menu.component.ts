@@ -18,7 +18,7 @@ import { PopoverComponent } from '../../popover/popover.component';
 export class ProductMenuComponent extends PopoverComponent implements OnInit {
 
     /** @hidden */
-    @ViewChild(PopoverComponent, { static: false })
+    @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
     /**
