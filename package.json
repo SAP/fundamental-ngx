@@ -6,7 +6,7 @@
   "description": "SAP Fundamental Styles, implemented in Angular",
   "scripts": {
     "build": "ng build",
-    "build-all": "ng build core && ng build platform && ng build docs",
+    "build-all": "ng build core && ng build docs",
     "build-docs": "npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
     "build-docs-netlify": "npm run build-all && npm run compile-typedoc && npm run copy-docs && ng build --prod --base-href=\"/\" ",
     "build-deploy-library": "ng build core && ng build platform && npm run build:schematics && npm run sync-versions && cp README.md dist/libs/core/README.md",
