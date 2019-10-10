@@ -12,8 +12,7 @@ import {
     HostListener
 } from '@angular/core';
 import { MenuItem, MenuGroup } from './menu.component';
-import { Highlightable } from '@angular/cdk/a11y';
-import { DefaultMenuItem, MenuItemDirective, MenuKeyboardService } from '@fundamental-ngx/core';
+import { DefaultMenuItem, MenuKeyboardService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-menu-item',
@@ -22,7 +21,7 @@ import { DefaultMenuItem, MenuItemDirective, MenuKeyboardService } from '@fundam
     encapsulation: ViewEncapsulation.None
     // providers: [MenuKeyboardService]
 }) /*extends MenuItemDirective*/
-export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, AfterViewInit, Highlightable {
+export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, AfterViewInit {
     @Input()
     public label: string;
     @Input()
@@ -46,16 +45,14 @@ export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, Af
     @Input()
     public disabled: boolean;
     @Input()
-    public customLabel: string;
+    public tooltipLabel: string;
     @Input()
     public itemWidth: string;
 
     @Input()
     public childItems: MenuItem[] = [];
 
-    public _isActive = false;
-
-    currentAdIndex = -1;
+    // currentAdIndex = -1;
 
     @Output() itemClick: EventEmitter<void> = new EventEmitter();
 
@@ -79,14 +76,6 @@ export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, Af
 
     ngAfterViewInit() {
         // this.menuKeyboardService.focusEscapeAfterList = () => {};
-    }
-
-    setActiveStyles() {
-        this._isActive = true;
-    }
-
-    setInactiveStyles() {
-        this._isActive = false;
     }
 
     onItemClick() {

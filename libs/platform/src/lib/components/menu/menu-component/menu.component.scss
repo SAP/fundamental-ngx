@@ -46,6 +46,12 @@
     //     border-top-width: 0;
     // }
 }
+fdp-menu-item {
+    &:focus {
+        //to override user agent stylesheet
+        outline: var(--fd-color-action-focus) dotted 1px;
+    }
+}
 
 // custom scrollbar: WILL NOT WORK ON FIREFOX, IE and EDGE
 ::-webkit-scrollbar {

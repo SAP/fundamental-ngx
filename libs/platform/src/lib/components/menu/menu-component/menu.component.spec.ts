@@ -14,7 +14,7 @@ import { MenuKeyboardService } from '@fundamental-ngx/core';
             [textAlign]="textAlign"
             [menuItems]="menuItems"
             [width]="'500px'"
-            [isScrolling]="true"
+            [isScrolling]="isScrolling"
         ></fdp-menu>
     `
 })
@@ -23,12 +23,11 @@ class TestComponent {
     @Input() menuItems: [];
 
     public showSeparator = false;
-    // public useColumns = false;
     public textAlign: string;
 
     public isScrolling = false;
 
-    public scrollLimit;
+    public scrollLimit: number = 0;
 
     constructor() {}
 }
@@ -50,7 +49,6 @@ describe('MenuComponent', () => {
         fixture.detectChanges();
 
         component.showSeparator = false;
-        // component.useColumns = false;
     });
 
     describe('Simple Menu', () => {
@@ -235,14 +233,14 @@ describe('MenuComponent', () => {
             expect(notAGroupItem.nativeElement.textContent).toBe(' Not a group ');
 
             const firstItem = fixture.debugElement.query(
-                By.css('[data-tag="menu__group"][data-index="1"] [data-tag="menu-item"][data-index="4"]')
+                By.css('[data-tag="menu__group"][data-index="1"] [data-tag="menu-item"][data-index="1"]')
             );
             expect(firstItem.nativeElement.textContent).toBe(' First Item ');
 
-            const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="5"]'));
+            const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="2"]'));
             expect(secondItem.nativeElement.textContent).toBe(' Second Item ');
 
-            const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="6"]'));
+            const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="3"]'));
             expect(thirdItem.nativeElement.textContent).toBe(' Third Item ');
         });
 
@@ -323,9 +321,7 @@ describe('MenuComponent', () => {
             const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
             const thirdItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="2"]'));
 
-            const firstItemButton = fixture.debugElement.query(
-                By.css('[data-tag="menu-item"][data-index="0"] [role="button"]')
-            );
+            const firstItemButton = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="0"]'));
             const secondItemButton = fixture.debugElement.query(
                 By.css('[data-tag="menu-item"][data-index="1"] [role="button"]')
             );

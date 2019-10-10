@@ -62,10 +62,16 @@ export interface MenuItem {
     /**
      * a custom label different from `label` for showing in tooltips for accessibility purpose.
      */
-    customLabel?: string;
+    tooltipLabel?: string;
 
+    /**
+     * if this menu item itself has sub-menu opening up, childItems will contain the list of those items.
+     */
     childItems?: MenuItem[]; // move this to MegaMenu
 
+    /**
+     * A unique identifier for this item
+     */
     id?: number;
 
     /**
@@ -97,7 +103,7 @@ export interface MenuGroup {
     /**
      * a custom label different from `label` for showing in tooltips for accessibility purpose.
      */
-    customLabel?: string;
+    tooltipLabel?: string;
 
     /**
      * List of menu items of the group.
@@ -110,25 +116,52 @@ export interface MenuGroup {
  * options.
  *
  * ```html
- * <fdp-menu separate-items="true" use-columns="true"></fdp-menu>
+ * <fdp-menu [menuItems]="menuData"
+ *           [showSeparator]=true
+ *           [textAlign]="'left'"
+ *           [isScrolling]=true
+ *           [scrollLimit]=8
+ *           [width]="'600px'">
+ * </fdp-menu>
  * ```
  *
- * Menu item/group data should be provided to `<fdp-menu>` using its `load` method.
+ * Menu item/group data should be provided to `<fdp-menu>` using an array of MenuItem or MenuGroup:
+ * ```ts
+ * complexMenuData: (MenuItem | MenuGroup)[] = [];
+ * ```
  *
- * ```javascript
- * var menu = document.getElementByTagName('fdp-menu')[0];
- * var data = [{
+ * ```ts
+ * this.complexMenuData = [{
  *   label: 'Item One',
  *   command: () => {
  *     alert('The first item.')
- *   }
+ *   },
+ *   selectable: true,
+ *   selected: true
  * }, {
- *   label: 'Item Two',
- *   command: () => {
- *     alert('The second item.')
- *   }
+ *  label: 'Second Item',
+ *    groupItems: [
+ *              {
+ *                label: 'Item 1 in Group 1',
+ *                command: () => {
+ *                  alert('Item 1 in Group 1 called');
+ *                }
+ *              },
+ *              {
+ *                label: 'Item 2 in Group 1',
+ *                command: () => {
+ *                  alert('Item 2 in Group 111');
+ *                },
+ *                disabled: true
+ *             }
+ *           ]
+ *      },{
+ *     label: 'Third Item',
+ *     command: () => {
+ *       alert("Third");
+ *     },
+ *     icon: 'sap-icon--grid'
  * }];
- * menu.load(data);
  * ```
  *
  */
@@ -149,13 +182,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
     /**
      * Add separating line between menu items. [Default: false]
      */
-    @Input()
-    public showSeparator = false;
-
-    /**
-     * Display menu groups as columns. [Default: false]
-     */
-    // @Input() public useColumns = false;
+    @Input() public showSeparator = false;
 
     /**
      * Alignment of menu items; either "left", "right" or "inherit".
@@ -192,7 +219,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
     private target: ElementRef;
     private isIcon: boolean = false;
     private numberOfItems: number = 0;
-    private data = [];
+    private sortedQueryList = [];
 
     @ViewChildren(MenuItemComponent)
     menuQueryList: QueryList<MenuItemComponent>;
@@ -203,7 +230,10 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
     constructor(private cd: ChangeDetectorRef, private keyboardService: MenuKeyboardService) {}
 
     ngOnInit() {
-        if ((this.isScrolling && this.scrollLimit === undefined) || (!this.isScrolling && this.scrollLimit > 0)) {
+        if (
+            (this.isScrolling && (this.scrollLimit === undefined || this.scrollLimit <= 0)) ||
+            (!this.isScrolling && this.scrollLimit > 0)
+        ) {
             // if scroll limit was not specified but isScrolling flag was used, use default value
             // or if scroll limit was specified but isScrolling flag was not marked true, even then use default value
             this.scrollLimit = this.numberOfItems; // default
@@ -221,8 +251,8 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
     }
 
     ngAfterViewInit() {
-        this.data = this.menuQueryList.toArray();
-        this.data.sort((a, b) => {
+        this.sortedQueryList = this.menuQueryList.toArray();
+        this.sortedQueryList.sort((a, b) => {
             console.log('a lbel: ' + a.group.groupItems + ' at index' + a.item.id);
             // console.log(a);
             // console.log(b);
@@ -231,11 +261,11 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
             return a.index - b.index;
         });
         console.log('after sort');
-        console.log(this.data);
+        console.log(this.sortedQueryList);
         // this.cd.markForCheck();
         // console.log(this.menuQueryList.toArray());
 
-        this.data.forEach((item: MenuItemComponent, index: number) =>
+        this.sortedQueryList.forEach((item: MenuItemComponent, index: number) =>
             item.keyDown.pipe(takeUntil(this.onDestroy$)).subscribe((keyboardEvent: KeyboardEvent) => {
                 console.log('item index is ' + item.index + ' and index ' + index);
 
@@ -269,10 +299,10 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
         let index = 0;
         if (data !== undefined) {
             data.forEach(record => {
-                console.log(record.label + 'is the label before pushing');
+                // console.log(record.label + 'is the label before pushing');
                 if (this.isMenuGroup(record)) {
                     if (newGroup.length > 0) {
-                        console.log('adding previously unpushed individual items into group @@@@@@@@@');
+                        // console.log('adding previously unpushed individual items into group @@@@@@@@@');
 
                         this.numberOfItems++;
                         // newGroup.forEach(groupItem => {
@@ -286,7 +316,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
                         // console.log(groups);
                         newGroup = [];
                     }
-                    console.log('adding a new group with header @@@@@@@@@');
+                    // console.log('adding a new group with header @@@@@@@@@');
 
                     this.numberOfItems++;
                     record.groupItems.forEach(groupItem => {
@@ -297,7 +327,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
                     // console.log('group 2 ');
                     // console.log(groups);
                 } else {
-                    console.log('no header, adding individual items @@@@@@@@@');
+                    // console.log('no header, adding individual items @@@@@@@@@');
 
                     this.numberOfItems++;
                     record.id = index;
@@ -310,7 +340,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
         }
         // if no group headers present or if last set of items have not yet been pushed to a group
         if (newGroup.length > 0) {
-            console.log('what does this else do? @@@@@@@@@');
+            // console.log('what does this else do? @@@@@@@@@');
 
             // this.numberOfItems++;  //todo : check if this is needed. maybe needed.
             // newGroup.forEach(groupItem => {
@@ -372,7 +402,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, AfterCon
 
         // }else{
         // this.keyboardService.keyDownHandler(event, index, this.menuQueryList.toArray());
-        this.keyboardService.keyDownHandler(event, index, this.data);
+        this.keyboardService.keyDownHandler(event, index, this.sortedQueryList);
         // }
     }
 

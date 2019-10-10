@@ -39,7 +39,7 @@
                 [index]="item.id"
                 [separated]="showSeparator"
                 [disabled]="item.disabled"
-                [customLabel]="item.customLabel || group.customLabel"
+                [tooltipLabel]="item.tooltipLabel || group.tooltipLabel"
                 [itemWidth]="width"
                 [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
                 (itemClick)="onItemClick(item, group)"
@@ -55,7 +55,7 @@
         <h3
             class="fd-menu__title"
             data-tag="menu__group--title"
-            [attr.title]="group.customLabel ? group.customLabel : group.label"
+            [attr.title]="group.tooltipLabel ? group.tooltipLabel : group.label"
             tabindex="0"
         >
             {{ group.label }}
@@ -79,7 +79,7 @@
                     [disabled]="item.disabled"
                     [itemWidth]="width"
                     [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
-                    [customLabel]="item.customLabel || group.customLabel"
+                    [tooltipLabel]="item.tooltipLabel || group.tooltipLabel"
                     (itemClick)="onItemClick(item, group)"
                     tabindex="0"
                 ></fdp-menu-item>
