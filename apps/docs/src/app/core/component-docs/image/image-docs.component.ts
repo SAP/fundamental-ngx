@@ -6,7 +6,7 @@ import * as imageShapesSrc from '!raw-loader!./examples/image-shapes-example.com
 import * as imageSizesSrc from '!raw-loader!./examples/image-sizes-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import * as imageTsCode from '!raw-loader!./examples/image--examples.component.ts';
+import * as imageTsCode from '!raw-loader!./examples/image-examples.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
