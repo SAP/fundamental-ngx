@@ -2,7 +2,7 @@
     display: inline-block;
     vertical-align: middle;
 
-    ::ng-deep button {
+    ::ng-deep button.fd-dropdown__control {
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
 
@@ -13,6 +13,8 @@
         &::after {
             color: #0a6ed1;
             color: var(--fd-color-action-1);
+            border: none;
+            background-color: transparent;
         }
     }
 }
@@ -43,6 +45,15 @@
         -webkit-appearance: searchfield-cancel-button;
     }
 
+    ::ng-deep .fd-input-group .fd-input-group__addon--button>* {
+        border-color: transparent;
+    }
+
+    ::ng-deep .fd-button--compact::before {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
 }
 
 .with-categories {
@@ -61,10 +72,6 @@
 
     .search-input__category-dropdown ::ng-deep button {
         border-right: none;
-
-        &:after {
-            margin-left: 10px;
-        }
     }
 }
 
