@@ -5,8 +5,8 @@ import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-examp
 import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
 import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.component.ts';
 import * as calendarIntlMomentSrc from '!raw-loader!./examples/calendar--i18n-moment-example.component.ts';
-import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-examples.component.ts';
-import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-examples.component.html';
+import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-example.component.ts';
+import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-example.component.html';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -65,22 +65,25 @@ myDisableFunction = function(d: FdDate): boolean {
 }`;
 
     calendarSingleSource: ExampleFile[] = [
+
+        {
+            language: 'typescript',
+            code: { default: this.exampleFunctionsHtml },
+            component: 'CalendarSingleExampleComponent',
+            fileName: 'calendar-single-example', // todo
+            name: 'Example Block/Disable Functions'
+        },
         {
             language: 'typescript',
             fileName: 'calendar-single-example',
             code: calendarSingleSrc
         },
-        {
-            language: 'typescript',
-            code: { default: this.exampleFunctionsHtml },
-            fileName: 'calendar-single-example', // todo
-            name: 'Example Block/Disable Functions'
-        }
     ];
 
     calendarRangeSource: ExampleFile[] = [
         {
             language: 'typescript',
+            component: 'CalendarRangeExampleComponent',
             fileName: 'calendar-range-example',
             code: calendarRangeSrc
         }
@@ -89,6 +92,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendarMondayStartSource: ExampleFile[] = [
         {
             language: 'typescript',
+            component: 'CalendarMondayStartExampleComponent',
             fileName: 'calendar-monday-start-example',
             code: calendarMondayStartSrc
         }
@@ -97,6 +101,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18n: ExampleFile[] = [
         {
             language: 'typescript',
+            component: 'CustomCalendarI18n',
             fileName: 'calendar-i18n-example',
             code: calendarIntlSrc
         }
@@ -105,6 +110,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18nMoment: ExampleFile[] = [
         {
             language: 'typescript',
+            component: 'CustomI18nMomentCalendar',
             fileName: 'calendar--i18n-moment-example',
             code: calendarIntlMomentSrc
         }
@@ -113,23 +119,21 @@ myDisableFunction = function(d: FdDate): boolean {
     calendarFormSource: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'calendar-form-examples',
-            code: calendarFormSourceH
-        },
-        {
-            language: 'typescript',
-            fileName: 'calendar-form-examples',
-            code: calendarFormSourceT
+            fileName: 'calendar-form-example',
+            code: calendarFormSourceH,
+            component: 'CalendarFormExamplesComponent',
+            typescriptFileCode: calendarFormSourceT
         }
     ];
 
     calendarProgrammaticallySource: ExampleFile[] = [
         {
             language: 'typescript',
+            component: 'CalendarProgrammaticallyChangeExampleComponent',
             fileName: 'calendar-programmatically-change-example',
             code: calendarProgrammaticallySource
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

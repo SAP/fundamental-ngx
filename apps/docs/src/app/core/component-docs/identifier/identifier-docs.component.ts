@@ -692,7 +692,9 @@ export class IdentifierDocsComponent implements OnInit {
             code: iconSrc,
             fileName: 'icon-identifier-example',
             secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode
+            typescriptFileCode: identifierTsCode,
+            component: 'IconIdentifierExampleComponent',
+            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
         }
     ];
 
@@ -702,7 +704,9 @@ export class IdentifierDocsComponent implements OnInit {
             code: initialsSrc,
             fileName: 'initials-identifier-example',
             secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode
+            typescriptFileCode: identifierTsCode,
+            component: 'InitialsIdentifierExampleComponent',
+            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
         }
     ];
 
@@ -712,7 +716,9 @@ export class IdentifierDocsComponent implements OnInit {
             code: circleSrc,
             fileName: 'circle-identifier-example',
             secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode
+            typescriptFileCode: identifierTsCode,
+            component: 'CircleIdentifierExampleComponent',
+            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
         }
     ];
 
@@ -722,7 +728,9 @@ export class IdentifierDocsComponent implements OnInit {
             code: transparentSrc,
             fileName: 'transparent-identifier-example',
             secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode
+            typescriptFileCode: identifierTsCode,
+            component: 'TransparentIdentifierExampleComponent',
+            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
         }
     ];
 
@@ -732,7 +740,9 @@ export class IdentifierDocsComponent implements OnInit {
             code: colorsSrc,
             fileName: 'colors-identifier-example',
             secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode
+            typescriptFileCode: identifierTsCode,
+            component: 'ColorsIdentifierExampleComponent',
+            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
         }
     ];
 

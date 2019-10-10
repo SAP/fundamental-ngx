@@ -13,6 +13,7 @@ import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { ActivatedRoute } from '@angular/router';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import { AlertExampleComponent } from './examples/alert-example.component';
 
 @Component({
     selector: 'app-alert',
@@ -74,7 +75,7 @@ export class AlertDocsComponent implements OnInit {
             fileName: 'alert-example',
             code: alertExampleHtml,
             secondFile: 'alert-example',
-            typescriptFileCode: alertExampleTs
+            typescriptFileCode: alertExampleTs,
         },
 
     ];
@@ -83,18 +84,20 @@ export class AlertDocsComponent implements OnInit {
         {
             language: 'html',
             component: 'AlertComponentAsContentExampleComponent',
-            fileName: 'alert-component-as-conent',
+            fileName: 'alert-component-as-content-example',
             code: alertComponentAsContentExampleH
+
         },
         {
             language: 'typescript',
-            fileName: 'alert-component-as-conent',
+            fileName: 'alert-component-as-content-example',
             code: alertComponentAsContentExample
         },
         {
             language: 'typescript',
             code: alertContent,
             name: 'Alert Content',
+            fileName: 'alert-content',
             secondFile: 'alert-content'
         }
     ];

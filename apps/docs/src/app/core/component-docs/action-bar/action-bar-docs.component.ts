@@ -20,9 +20,10 @@ export class ActionBarDocsComponent implements OnInit {
         {
             language: 'html',
             code: backButtonExample,
-            fileName: 'action-bar-back-example',
+            fileName: 'action-bar-back',
             secondFile: 'action-bar-examples',
-            typescriptFileCode: actionBarTsCode
+            typescriptFileCode: actionBarTsCode,
+            component: 'ActionBarBackExampleComponent'
         }
     ];
 
@@ -30,9 +31,10 @@ export class ActionBarDocsComponent implements OnInit {
         {
             language: 'html',
             code: titleTruncationExample,
-            fileName: 'action-bar-long-string-title-truncation-example',
+            fileName: 'action-bar-long-string-title-truncation',
             secondFile: 'action-bar-examples',
-            typescriptFileCode: actionBarTsCode
+            typescriptFileCode: actionBarTsCode,
+            component: 'ActionBarLongStringTitleTruncationExampleComponent'
         }
     ];
 
@@ -40,9 +42,10 @@ export class ActionBarDocsComponent implements OnInit {
         {
             language: 'html',
             code: noBackButtonExample,
-            fileName: 'action-bar-no-back-example',
+            fileName: 'action-bar-no-back',
             secondFile: 'action-bar-examples',
-            typescriptFileCode: actionBarTsCode
+            typescriptFileCode: actionBarTsCode,
+            component: 'ActionBarNoBackExampleComponent'
         }
     ];
 
@@ -50,9 +53,10 @@ export class ActionBarDocsComponent implements OnInit {
         {
             language: 'html',
             code: contextualMenuExample,
-            fileName: 'action-bar-contextual-menu-example',
+            fileName: 'action-bar-contextual-menu',
             secondFile: 'action-bar-examples',
-            typescriptFileCode: actionBarTsCode
+            typescriptFileCode: actionBarTsCode,
+            component: 'ActionBarContextualMenuExampleComponent'
         }
     ];
 
@@ -60,9 +64,10 @@ export class ActionBarDocsComponent implements OnInit {
         {
             language: 'html',
             code: mobileExample,
-            fileName: 'action-bar-mobile-example.',
+            fileName: 'action-bar-mobile.',
             secondFile: 'action-bar-examples',
-            typescriptFileCode: actionBarTsCode
+            typescriptFileCode: actionBarTsCode,
+            component: 'ActionBarMobileExampleComponent'
         }
     ];
 
