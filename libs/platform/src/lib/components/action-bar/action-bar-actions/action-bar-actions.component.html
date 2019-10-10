@@ -1,9 +1,9 @@
 <div fd-action-bar-actions>
     <button
+        fd-button
         *ngFor="let action of buttonItems"
         class="action-button-margin fdp-action-button"
         [attr.title]="action.label"
-        fd-button
         [fdType]="action.type"
         [options]="action.options"
         [compact]="action.compact"
@@ -29,8 +29,8 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li
-                        *ngFor="let menu of menuItems; let i = index"
                         fd-menu-item
+                        *ngFor="let menu of menuItems; let i = index"
                         (click)="menu.editTitle ? onRenameClick() : onItemClick(menu)"
                         (keydown)="handleKeyPress($event, i)"
                         tabIndex="0"

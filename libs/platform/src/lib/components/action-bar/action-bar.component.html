@@ -27,9 +27,9 @@
         <div fd-form-set *ngIf="editing">
             <div fd-form-item>
                 <input
+                    fd-form-control
                     *ngIf="editing"
                     class="fd-input edit-actionbar-title"
-                    fd-form-control
                     (focusout)="onFocusOut()"
                     (keydown.enter)="$event.target.blur()"
                     [(ngModel)]="title"
