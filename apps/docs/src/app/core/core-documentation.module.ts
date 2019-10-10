@@ -151,8 +151,9 @@ import { TableExampleComponent } from '../core/component-docs/table/examples/tab
 import {
     TabsExampleComponent,
     TabSelectionExampleComponent,
-    TabsNavigationModeExampleComponent
+
 } from '../core/component-docs/tabs/examples/tabs-examples-component';
+import { TabsNavigationModeExampleComponent } from '../core/component-docs/tabs/examples/tab-navigation-mode-example-component';
 import {
     TileActionsExampleComponent,
     TileDisabledExampleComponent,
@@ -319,7 +320,7 @@ import { LocalizationEditorTextareaExampleComponent } from '../core/component-do
 import { SplitButtonDocsComponent } from '../core/component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from '../core/component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { CalendarFormExamplesComponent } from '../core/component-docs/calendar/examples/calendar-form-examples.component';
+import { CalendarFormExamplesComponent } from '../core/component-docs/calendar/examples/calendar-form-example.component';
 
 import { MenuKeyboardSupportExampleComponent } from '../core/component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from '../core/component-docs/modal/examples/container/container.component';

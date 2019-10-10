@@ -11,5 +11,6 @@ export interface ExampleFile {
     thirdFile?: string;
     secondFile?: string;
     component?: string;
-    fileName?: string
+    fileName?: string;
+    scss?: string;
 }

@@ -9,7 +9,7 @@ import { AlertService } from '@fundamental-ngx/core';
 })
 export class AlertComponentAsContentExampleComponent {
 
-    constructor(public alertService: AlertService) {}
+    constructor(public alertService: AlertService) { }
 
     openFromComponent() {
         this.alertService.open(AlertContentComponent, {

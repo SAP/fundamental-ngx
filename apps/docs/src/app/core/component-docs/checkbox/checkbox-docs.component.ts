@@ -18,6 +18,7 @@ export class CheckboxDocsComponent implements OnInit {
             language: 'html',
             code: formHtml,
             fileName: 'checkbox-example',
+            component: 'CheckboxExample',
             secondFile: 'checkbox-examples',
             typescriptFileCode: formHtmlTsCode
         }
@@ -32,7 +33,8 @@ export class CheckboxDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: formGroupInputTs,
-            fileName: 'checkbox-form-group-example'
+            fileName: 'checkbox-form-group-example',
+            component: 'CheckboxFormGroupExampleComponent'
         }
     ];
 

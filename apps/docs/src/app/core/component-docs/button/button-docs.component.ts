@@ -687,7 +687,9 @@ export class ButtonDocsComponent implements OnInit {
             code: buttonOptionsExample,
             fileName: 'button-options-example',
             secondFile: 'button-examples',
-            typescriptFileCode: buttonExampleTsCode
+            component: 'ButtonOptionsExampleComponent',
+            typescriptFileCode: buttonExampleTsCode,
+            scss: '`.fd-button {margin-right: 12px;}`'
         }
     ];
 
@@ -697,7 +699,9 @@ export class ButtonDocsComponent implements OnInit {
             code: buttonTypesExample,
             fileName: 'button-types-example',
             secondFile: 'button-examples',
-            typescriptFileCode: buttonExampleTsCode
+            component: 'ButtonTypesExampleComponent',
+            typescriptFileCode: buttonExampleTsCode,
+            scss: '`.fd-button {margin-right: 12px;}`'
         }
     ];
 
@@ -707,7 +711,9 @@ export class ButtonDocsComponent implements OnInit {
             code: buttonSizesExample,
             fileName: 'button-sizes-example',
             secondFile: 'button-examples',
-            typescriptFileCode: buttonExampleTsCode
+            component: 'ButtonSizesExampleComponent',
+            typescriptFileCode: buttonExampleTsCode,
+            scss: '`.fd-button {margin-right: 12px;}`'
         }
     ];
 
@@ -717,7 +723,9 @@ export class ButtonDocsComponent implements OnInit {
             code: buttonIconsExample,
             fileName: 'button-icons-example',
             secondFile: 'button-examples',
-            typescriptFileCode: buttonExampleTsCode
+            component: 'ButtonIconsExampleComponent',
+            typescriptFileCode: buttonExampleTsCode,
+            scss: '`.fd-button {margin-right: 12px;}`'
         }
     ];
 
@@ -727,7 +735,9 @@ export class ButtonDocsComponent implements OnInit {
             code: buttonStateExample,
             fileName: 'button-state-example',
             secondFile: 'button-examples',
-            typescriptFileCode: buttonExampleTsCode
+            component: 'ButtonStateExampleComponent',
+            typescriptFileCode: buttonExampleTsCode,
+            scss: '`.fd-button {margin-right: 12px;}`'
         }
     ];
 

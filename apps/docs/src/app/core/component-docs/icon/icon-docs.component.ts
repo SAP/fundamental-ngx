@@ -675,9 +675,8 @@ export class IconDocsComponent implements OnInit {
             language: 'html',
             code: iconSrc,
             fileName: 'icon-example',
-            secondFile: 'icon-example',
-            typescriptFileCode: iconTsCode
-
+            typescriptFileCode: iconTsCode,
+            component: 'IconExampleComponent',
         }
     ];
 

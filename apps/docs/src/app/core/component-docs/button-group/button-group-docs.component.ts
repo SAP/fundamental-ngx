@@ -1974,6 +1974,8 @@ export class ButtonGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: buttonGroupXsExample,
+            fileName: 'button-group-xs-example',
+            component: 'ButtonGroupXsExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode
         }
@@ -1983,6 +1985,8 @@ export class ButtonGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: buttonGroupSmallExample,
+            fileName: 'button-group-s-example',
+            component: 'ButtonGroupSmallExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode
         }
@@ -1992,6 +1996,8 @@ export class ButtonGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: buttonGroupCompactExample,
+            fileName: 'button-group-compact-example',
+            component: 'ButtonGroupCompactExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode
         }
@@ -2001,6 +2007,8 @@ export class ButtonGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: buttonGroupDefaultExample,
+            fileName: 'button-group-default-example',
+            component: 'ButtonGroupDefaultExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode
         }

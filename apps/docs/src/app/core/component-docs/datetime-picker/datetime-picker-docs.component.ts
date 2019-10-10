@@ -37,7 +37,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimeSimpleTs,
-            fileName: 'datetime-example'
+            fileName: 'datetime-example',
+            component: 'DatetimeExampleComponent'
         },
     ];
 
@@ -50,7 +51,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimeNonMeridianTs,
-            fileName: 'datetime-non-meridian-example'
+            fileName: 'datetime-non-meridian-example',
+            component: 'DatetimeNonMeridianExampleComponent'
         },
     ];
 
@@ -63,7 +65,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimeProgTs,
-            fileName: 'datetime-program-example'
+            fileName: 'datetime-program-example',
+            component: 'DatetimeProgramExampleComponent'
         },
     ];
 
@@ -76,7 +79,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimeFormatTs,
-            fileName: 'datetime-format-example'
+            fileName: 'datetime-format-example',
+            component: 'DatetimeFormatExampleComponent'
         },
     ];
 
@@ -89,7 +93,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimeDisabledTs,
-            fileName: 'datetime-disabled-example'
+            fileName: 'datetime-disabled-example',
+            component: 'DatetimeDisabledExampleComponent'
         },
     ];
 
@@ -102,7 +107,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimeFormTs,
-            fileName: 'datetime-form-example'
+            fileName: 'datetime-form-example',
+            component: 'DatetimeFormExampleComponent'
         },
     ];
 
@@ -110,7 +116,8 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimePickerAllowNullTs,
-            fileName: 'datetime-allow-null-example'
+            fileName: 'datetime-allow-null-example',
+            component: 'DatetimePickerAllowNullExampleComponent'
         },
     ];
 

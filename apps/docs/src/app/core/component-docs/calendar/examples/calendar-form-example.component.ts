@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-calendar-form-example',
-    templateUrl: 'calendar-form-examples.component.html',
+    templateUrl: 'calendar-form-example.component.html',
     styles: [`
             button {
                 margin-top: 1rem;

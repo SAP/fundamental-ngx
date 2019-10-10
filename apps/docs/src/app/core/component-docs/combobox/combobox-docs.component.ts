@@ -35,6 +35,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxExampleComponent',
             code: comboboxTSSrc,
             fileName: 'combobox-example'
         }
@@ -48,6 +49,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxDynamicExampleComponent',
             code: comboboxDynTs,
             fileName: 'combobox-dynamic-example'
         }
@@ -61,6 +63,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxSearchFunctionExampleComponent',
             code: comboboxSeaTs,
             fileName: 'combobox-search-function-example'
         }
@@ -74,6 +77,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxAsyncExampleComponent',
             code: comboboxAsyncTs,
             fileName: 'combobox-async-example'
         }
@@ -87,6 +91,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxDisplaywithExampleComponent',
             code: comboboxDisplayTs,
             fileName: 'combobox-displaywith-example'
         }
@@ -100,6 +105,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxDisabledExampleComponent',
             code: comboboxDisabledTemplateT,
             fileName: 'combobox-disabled-example'
         }
@@ -113,6 +119,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxTemplateExampleComponent',
             code: comboboxTemplateT,
             fileName: 'combobox-template-example'
         }
@@ -126,6 +133,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxHeightExampleComponent',
             code: comboboxHeightTs,
             fileName: 'combobox-height-example'
         }
@@ -139,6 +147,7 @@ export class ComboboxDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'ComboboxFormsExampleComponent',
             code: comboboxFormT,
             fileName: 'combobox-forms-example'
         }

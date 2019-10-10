@@ -41,7 +41,8 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
     // @Input() component: string;
 
-
+    addonTs = '';
+    addonScss = '';
     smallScreen: boolean;
 
     selectedFileIndex: number = 0;
@@ -164,8 +165,43 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             if (example.language === 'html') {
                 const _pathHTML = `src/app/${example.fileName}.component.html`;
                 this.project.files[_pathHTML] = example.code.default;
-                if (example.typescriptFileCode !== undefined) {
+                // if (example.typescriptFileCode !== undefined) {
+                //     let _pathTS = `src/app/${example.fileName}.component.ts`;
+                //     this.project.files[_pathTS] = example.typescriptFileCode.default;
+                //     if (example.secondFile) {
+                //         _pathTS = `src/app/${example.secondFile}.component.ts`;
+                //         this.project.files[_pathTS] = example.typescriptFileCode.default;
+                //         if (example.scss) { this.addonScss = example.scss; }
+                //         this.parameters.app_component_basis = example.secondFile + '.component';
+                //         this.project.files[_pathTS] =
+                //             // tslint:disable-next-line: no-unused-expression
+                //             `import { Component } from '@angular/core';
+
+                //         @Component({
+                //             selector: 'fd-${example.fileName}',
+                //             templateUrl: './${example.fileName}.component.html',
+                //             styles: [${this.addonScss}]
+                //         })
+                //         export class ${example.component} {}`;
+                //     }
+                // }
+                if (example.secondFile) {
+                    if (example.scss) { this.addonScss = example.scss; }
                     const _pathTS = `src/app/${example.secondFile}.component.ts`;
+                    this.parameters.app_component_basis = example.secondFile + '.component';
+                    this.project.files[_pathTS] =
+                        // tslint:disable-next-line: no-unused-expression
+                        `import { Component } from '@angular/core';
+
+                    @Component({
+                        selector: 'fd-${example.fileName}',
+                        templateUrl: './${example.fileName}.component.html',
+                        styles: [${this.addonScss}]
+                    })
+                    export class ${example.component} {}`;
+                }
+                else if (example.typescriptFileCode) {
+                    const _pathTS = `src/app/${example.fileName}.component.ts`;
                     this.project.files[_pathTS] = example.typescriptFileCode.default;
                 }
             }
@@ -184,6 +220,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 this.parameters.html_tag = example.tagname;
                 this.parameters.app_component = example.component;
             }
+
+
+
         });
 
 
@@ -197,6 +236,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         this.project.files['src/app/app.module.ts'] = `
         import { BrowserModule } from '@angular/platform-browser';
         import { NgModule } from '@angular/core';
+        import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
         import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
@@ -207,6 +247,8 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
           ],
           imports: [
             BrowserModule,
+            FormsModule,
+            ReactiveFormsModule,
             FundamentalNgxCoreModule,
             BrowserAnimationsModule
           ],

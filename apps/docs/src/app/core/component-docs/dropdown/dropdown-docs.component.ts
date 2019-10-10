@@ -23,6 +23,7 @@ export class DropdownDocsComponent implements OnInit {
             code: dropdownDefaultMenuHtml,
             fileName: 'dropdown-default-example',
             secondFile: 'dropdown-examples',
+            component: 'DropdownDefaultExampleComponent',
             typescriptFileCode: dropdownCodeTs
         },
     ];
@@ -33,6 +34,7 @@ export class DropdownDocsComponent implements OnInit {
             code: dropdownStateMenuHtml,
             fileName: 'dropdown-state-example',
             secondFile: 'dropdown-examples',
+            component: 'DropdownStateExampleComponent',
             typescriptFileCode: dropdownCodeTs
         },
     ];
@@ -43,6 +45,7 @@ export class DropdownDocsComponent implements OnInit {
             code: dropdownIconsMenuHtml,
             fileName: 'dropdown-icons-example',
             secondFile: 'dropdown-examples',
+            component: 'DropdownIconsExampleComponent',
             typescriptFileCode: dropdownCodeTs
         },
     ];
@@ -53,6 +56,7 @@ export class DropdownDocsComponent implements OnInit {
             code: dropdownContextualMenuHtml,
             fileName: 'dropdown-contextual-menu-example',
             secondFile: 'dropdown-examples',
+            component: 'DropdownContextualMenuExampleComponent',
             typescriptFileCode: dropdownCodeTs
         },
     ];
@@ -66,8 +70,8 @@ export class DropdownDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dropdownInfiniteScrollTs,
-            fileName: 'dropdown-infinite-scroll-example'
-
+            fileName: 'dropdown-infinite-scroll-example',
+            component: 'DropdownInfiniteScrollExampleComponent'
         }
     ];
 
@@ -77,6 +81,7 @@ export class DropdownDocsComponent implements OnInit {
             code: dropdownToolbarHtml,
             fileName: 'dropdown-toolbar-example',
             secondFile: 'dropdown-examples',
+            component: 'DropdownToolbarExampleComponent',
             typescriptFileCode: dropdownCodeTs
         },
     ];

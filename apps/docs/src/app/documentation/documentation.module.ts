@@ -316,6 +316,7 @@ import { DatePickerPositionExampleComponent } from '../core/component-docs/date-
 import { TimePickerOtherDelimiterExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-other-delimiter-example.component';
 import { DatetimeFormatExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-format-example/datetime-format-example.component';
 import { DatePickerDisabledExampleComponent } from '../core/component-docs/date-picker/examples/date-picker-disabled-example.component';
+// tslint:disable-next-line: max-line-length
 import { DatetimeDisabledExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { SplitButtonHeaderComponent } from '../core/component-docs/split-button/split-button-header/split-button-header.component';
