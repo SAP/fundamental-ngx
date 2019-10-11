@@ -105,6 +105,8 @@ import { MegaMenuHeaderComponent } from './component-docs/mega-menu/mega-menu-he
 import { MegaMenuDocsComponent } from './component-docs/mega-menu/mega-menu-docs.component';
 import { LayoutGridDocsHeaderComponent } from './component-docs/layout-grid/layout-grid-docs-header/layout-grid-docs-header.component';
 import { LayoutGridDocsComponent } from './component-docs/layout-grid/layout-grid-docs.component';
+import { ProductSwitchDocsHeaderComponent } from './component-docs/product-switch/product-switch-docs-header/product-switch-docs-header.component';
+import { ProductSwitchDocsComponent } from './component-docs/product-switch/product-switch-docs.component';
 import { NotificationDocsComponent } from './component-docs/notification/notification-docs.component';
 import { NotificationDocsHeaderComponent } from './component-docs/notification/notification-docs-header/notification-docs-header.component';
 
@@ -373,6 +375,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PopoverDirectiveDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.popoverDirective } }
+                ]
+            },
+            {
+                path: 'product-switch',
+                component: ProductSwitchDocsHeaderComponent,
+                children: [
+                    { path: '', component: ProductSwitchDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.productSwitch } }
                 ]
             },
             {
