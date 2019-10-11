@@ -73,12 +73,13 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: templateHtml,
-            fileName: ''
+            fileName: 'modal-open-template-example'
         },
         {
             language: 'typescript',
             code: templateTs,
-            fileName: ''
+            fileName: 'modal-open-template-example',
+            component: 'ModalOpenTemplateExampleComponent'
         }
     ];
 
@@ -86,13 +87,16 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: componentAsContentSrc,
-            fileName: ''
+            fileName: 'modal-component-as-content-example',
+            component: 'ModalComponentAsContentExampleComponent'
         },
         {
             language: 'typescript',
             code: contentSrc,
             name: 'Modal Content',
-            fileName: ''
+            secondFile: 'modal-content',
+            fileName: 'modal-content',
+            component: 'ModalContentComponent'
         }
     ];
 
@@ -120,12 +124,13 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: fsModalSource,
-            fileName: ''
+            fileName: 'modal-fullscreen-example'
         },
         {
             language: 'typescript',
             code: fsModalSourceT,
-            fileName: ''
+            fileName: 'modal-fullscreen-example',
+            component: 'ModalFullscreenExampleComponent'
         }
     ];
 
@@ -133,12 +138,13 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: backdropH,
-            fileName: ''
+            fileName: 'modal-fullscreen-example'
         },
         {
             language: 'typescript',
             code: backdropT,
-            fileName: ''
+            fileName: 'modal-fullscreen-example',
+            component: 'ModalFullscreenExampleComponent'
         }
     ];
 
@@ -146,12 +152,13 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: positionH,
-            fileName: ''
+            fileName: 'modal-position-example'
         },
         {
             language: 'typescript',
             code: positionT,
-            fileName: ''
+            fileName: 'modal-position-example',
+            component: 'ModalPositionExampleComponent'
         }
     ];
 
@@ -159,12 +166,13 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: containerH,
-            fileName: ''
+            fileName: 'container'
         },
         {
             language: 'typescript',
             code: containerT,
-            fileName: ''
+            fileName: 'container',
+            component: 'ContainerComponent'
         }
     ];
 

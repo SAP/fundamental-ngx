@@ -4,6 +4,7 @@ import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/sel
 import * as selectBasicTsSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.ts';
 
 import * as selectProgSrcH from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
+import * as selectProgSrcS from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
 import * as selectProgSrcT from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.ts';
 
 import * as selectNestedSrcH from '!raw-loader!./examples/select-nested-options/select-nested-options.component.html';
@@ -11,8 +12,10 @@ import * as selectNestedSrcHTs from '!raw-loader!./examples/select-nested-option
 
 import * as customTriggerSrcH from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.html';
 import * as customTriggerSrcHTs from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.ts';
+import * as customTriggerSrcScss from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.scss';
 
 import * as selectAddingSrcH from '!raw-loader!./examples/select-adding-example/select-adding-example.component.html';
+import * as selectAddingSrcScss from '!raw-loader!./examples/select-adding-example/select-adding-example.component.scss';
 import * as selectAddingSrcT from '!raw-loader!./examples/select-adding-example/select-adding-example.component.ts';
 
 import * as selectFormSrcH from '!raw-loader!./examples/select-forms/select-forms.component.html';
@@ -39,7 +42,9 @@ export class SelectDocsComponent implements OnInit {
             code: selectBasicSrc,
             fileName: 'select-basic-example',
             secondFile: 'select-basic-example',
-            typescriptFileCode: selectBasicTsSrc
+            scss: '".fd-select-example {margin-top: 16px;}"',
+            typescriptFileCode: selectBasicTsSrc,
+            component: 'SelectBasicExampleComponent'
         }
     ];
 
@@ -48,10 +53,12 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: selectProgSrcH,
             fileName: 'select-programmatic-example',
+            scssFileCode: selectProgSrcS
 
         },
         {
             language: 'typescript',
+            component: 'SelectProgrammaticExampleComponent',
             code: selectProgSrcT,
             fileName: 'select-programmatic-example',
         }
@@ -62,8 +69,10 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: selectNestedSrcH,
             fileName: 'select-nested-options',
-            secondFile: 'select-custom-trigger',
-            typescriptFileCode: selectNestedSrcHTs
+            secondFile: 'select-nested-trigger',
+            typescriptFileCode: selectNestedSrcHTs,
+            scss: '".fd-menu__title {background-color: #e7e7e7;}"',
+            component: 'SelectNestedOptionsComponent'
         }
     ];
 
@@ -73,7 +82,9 @@ export class SelectDocsComponent implements OnInit {
             code: customTriggerSrcH,
             fileName: 'select-custom-trigger',
             secondFile: 'select-custom-trigger',
-            typescriptFileCode: customTriggerSrcHTs
+            typescriptFileCode: customTriggerSrcHTs,
+            component: 'SelectCustomTriggerComponent',
+            scssFileCode: customTriggerSrcScss
         }
     ];
 
@@ -82,9 +93,11 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: selectAddingSrcH,
             fileName: 'select-adding-example',
+            scssFileCode: selectAddingSrcScss
         },
         {
             language: 'typescript',
+            component: 'SelectAddingExampleComponent',
             code: selectAddingSrcT,
             fileName: 'select-adding-example',
         }
@@ -94,13 +107,14 @@ export class SelectDocsComponent implements OnInit {
         {
             language: 'html',
             code: selectFormSrcH,
-            fileName: 'select-forms.component',
+            fileName: 'select-forms',
 
         },
         {
             language: 'typescript',
+            component: 'SelectFormsComponent',
             code: selectFormSrcT,
-            fileName: 'select-forms.component',
+            fileName: 'select-forms',
         }
     ];
 
@@ -110,7 +124,8 @@ export class SelectDocsComponent implements OnInit {
             code: selectMaxHeightH,
             fileName: 'select-max-height-example',
             secondFile: 'select-max-height-example',
-            typescriptFileCode: selectMaxHeightHTs
+            typescriptFileCode: selectMaxHeightHTs,
+            component: 'SelectMaxHeightExampleComponent'
         }
     ];
 
@@ -122,6 +137,7 @@ export class SelectDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'SelectViewValueExampleComponent',
             code: selectViewValueT,
             fileName: 'select-view-value-example',
         }

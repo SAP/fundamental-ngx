@@ -21,6 +21,7 @@ export class ShellbarDocsComponent {
         },
         {
             language: 'typescript',
+            component: 'ShellbarBasicExampleComponent',
             code: shellbarBasicTSSrc,
             fileName: 'shellbar-basic-example'
         }
@@ -34,6 +35,7 @@ export class ShellbarDocsComponent {
         },
         {
             language: 'typescript',
+            component: 'ShellbarCollapsibleExampleComponent',
             code: shellbarCollapsibleTSSrc,
             fileName: 'shellbar-collapsible-example'
         }
@@ -47,6 +49,7 @@ export class ShellbarDocsComponent {
         },
         {
             language: 'typescript',
+            component: 'ShellbarAdvancedExampleComponent',
             code: advancedShellbarTs,
             fileName: 'shellbar-advanced/shellbar-advanced-example'
         }

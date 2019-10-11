@@ -27,7 +27,9 @@ export class PopoverDocsComponent implements OnInit {
             code: popoverSrc,
             fileName: 'popover-example',
             secondFile: 'popover-examples',
-            typescriptFileCode: popoverSrcTs
+            typescriptFileCode: popoverSrcTs,
+            component: 'PopoverExampleComponent',
+            scss: '`.fd-docs-flex-display-helper {display: flex;align-items: center;justify-content: space-around;}`'
         }
     ];
 
@@ -39,6 +41,7 @@ export class PopoverDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'PopoverProgrammaticOpenExampleComponent',
             code: popoverProgrammaticTsSrc,
             fileName: 'popover-programmatic-open-example',
         }
@@ -52,6 +55,7 @@ export class PopoverDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'PopoverPlacementExampleComponent',
             code: popoverPlacementTsSrc,
             fileName: 'popover-placement-example',
         }
@@ -65,6 +69,7 @@ export class PopoverDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'PopoverModalExampleComponent',
             code: popoverModalTsSrc,
             fileName: 'popover-modal-example',
         }
@@ -78,6 +83,7 @@ export class PopoverDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'PopoverDynamicExampleComponent',
             code: popoverDynamicTSrc,
             fileName: 'popover-dynamic-example',
         }
@@ -89,7 +95,8 @@ export class PopoverDocsComponent implements OnInit {
             code: popoverFillHSrc,
             fileName: 'popover-c-fill',
             secondFile: 'popover-c-fills',
-            typescriptFileCode: popoverFillSrcTs
+            typescriptFileCode: popoverFillSrcTs,
+            component: 'PopoverCFillComponent'
         }
     ];
 

@@ -4,12 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
     selector: 'fd-time-picker-form-example',
     templateUrl: './time-picker-form-example.component.html',
-    styles: [`
-        .flex-form{
-            display:flex;
-            justify-content:space-between;
-        }
-    `]
+    styleUrls: ['time-picker-form-example.component.scss']
 })
 export class TimePickerFormExampleComponent {
     customForm = new FormGroup({

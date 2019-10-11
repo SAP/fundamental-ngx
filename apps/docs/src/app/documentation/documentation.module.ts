@@ -176,14 +176,12 @@ import {
     TileProductExampleComponent,
     TileButtonExampleComponent
 } from '../core/component-docs/tile/examples/tile-examples.component';
-import {
-    TimeExampleComponent,
-    Time12ExampleComponent,
-    TimeDisabledExampleComponent,
-    TimeNoSecondsExampleComponent,
-    TimeNoSpinnersExampleComponent,
-    TimeOnlyHoursExampleComponent
-} from '../core/component-docs/time/examples/time-examples.component';
+import { TimeExampleComponent } from '../core/component-docs/time/examples/time-example.component';
+import { TimeDisabledExampleComponent } from '../core/component-docs/time/examples/time-disabled-example.component';
+import { TimeNoSecondsExampleComponent } from '../core/component-docs/time/examples/time-no-seconds-example.component';
+import { TimeNoSpinnersExampleComponent } from '../core/component-docs/time/examples/time-no-spinners-example.component';
+import { TimeOnlyHoursExampleComponent } from '../core/component-docs/time/examples/time-only-hours-example.component';
+import { Time12ExampleComponent } from '../core/component-docs/time/examples/time-12-example.component';
 import {
     TimePickerExampleComponent,
     TimePicker12ExampleComponent,
@@ -238,7 +236,7 @@ import { PopoverProgrammaticComponent } from '../core/component-docs/popover-dir
 import { PopoverFillComponent } from '../core/component-docs/popover-directive/examples/popover-fill/popover-fill.component';
 import { PopoverCFillComponent } from '../core/component-docs/popover/examples/popover-c-fill/popover-c-fill.component';
 
-// import { HomeDocsComponent } from '../core/component-docs/home/home.component';
+import { HomeDocsComponent } from '../core/component-docs/core-home/core-home.component';
 import { NewComponentComponent } from '../core/component-docs/new-component/new-component.component';
 
 import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
@@ -343,7 +341,7 @@ import { LocalizationEditorTextareaExampleComponent } from '../core/component-do
 import { SplitButtonDocsComponent } from '../core/component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from '../core/component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { CalendarFormExamplesComponent } from '../core/component-docs/calendar/examples/calendar-form-examples.component';
+import { CalendarFormExamplesComponent } from '../core/component-docs/calendar/examples/calendar-form-example.component';
 
 import { MenuKeyboardSupportExampleComponent } from '../core/component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from '../core/component-docs/modal/examples/container/container.component';
@@ -461,7 +459,7 @@ import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellba
         TimeDocsComponent,
         TimePickerDocsComponent,
         ToggleDocsComponent,
-        // HomeDocsComponent,
+        HomeDocsComponent,
         NewComponentComponent,
         DirectionalityComponent,
         ComponentExampleComponent,

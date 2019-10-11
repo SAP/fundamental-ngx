@@ -20,7 +20,7 @@ export class TableWrapperComponent implements AfterContentInit {
 
     constructor(
         private elementRef: ElementRef
-    ) {}
+    ) { }
 
     public ngAfterContentInit(): void {
         if (this.elementRef.nativeElement && this.elementRef.nativeElement.firstChild) {

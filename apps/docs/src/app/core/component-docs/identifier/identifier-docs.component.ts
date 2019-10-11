@@ -694,7 +694,7 @@ export class IdentifierDocsComponent implements OnInit {
             secondFile: 'identifier-examples',
             typescriptFileCode: identifierTsCode,
             component: 'IconIdentifierExampleComponent',
-            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
+            scss: '".fd-identifier.fd-identifier {margin-right: 20px;}"'
         }
     ];
 
@@ -706,7 +706,7 @@ export class IdentifierDocsComponent implements OnInit {
             secondFile: 'identifier-examples',
             typescriptFileCode: identifierTsCode,
             component: 'InitialsIdentifierExampleComponent',
-            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
+            scss: '".fd-identifier.fd-identifier {margin-right: 20px;}"'
         }
     ];
 
@@ -718,7 +718,7 @@ export class IdentifierDocsComponent implements OnInit {
             secondFile: 'identifier-examples',
             typescriptFileCode: identifierTsCode,
             component: 'CircleIdentifierExampleComponent',
-            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
+            scss: '".fd-identifier.fd-identifier {margin-right: 20px;}"'
         }
     ];
 
@@ -730,7 +730,7 @@ export class IdentifierDocsComponent implements OnInit {
             secondFile: 'identifier-examples',
             typescriptFileCode: identifierTsCode,
             component: 'TransparentIdentifierExampleComponent',
-            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
+            scss: '".fd-identifier.fd-identifier {margin-right: 20px;}"'
         }
     ];
 
@@ -742,7 +742,7 @@ export class IdentifierDocsComponent implements OnInit {
             secondFile: 'identifier-examples',
             typescriptFileCode: identifierTsCode,
             component: 'ColorsIdentifierExampleComponent',
-            scss: "'::ng-deep .identifier-grid span.fd-identifier {margin-right: 20px;}'"
+            scss: '".fd-identifier.fd-identifier {margin-right: 20px;}"'
         }
     ];
 

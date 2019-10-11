@@ -41,7 +41,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
     // @Input() component: string;
 
-    addonTs = '';
     addonScss = '';
     smallScreen: boolean;
 
@@ -79,7 +78,10 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             moment: '*',
             '@fundamental-ngx/core': 'v0.12.0-rc.5',
             'fundamental-styles': 'v0.3.0-rc.6',
-            '@angular/animations': '*'
+            '@angular/animations': '*',
+            '@angular/http': '^7.2.15',
+            '@angular/cdk': '^8.2.3',
+            '@angular/material': '^8.2.3'
         }
     };
 
@@ -127,7 +129,10 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 moment: '*',
                 '@fundamental-ngx/core': 'v0.12.0-rc.5',
                 'fundamental-styles': 'v0.3.0-rc.6',
-                '@angular/animations': '*'
+                '@angular/animations': '*',
+                '@angular/http': '^7.2.15',
+                '@angular/cdk': '^8.2.3',
+                '@angular/material': '^8.2.3'
             }
         };
 
@@ -161,32 +166,16 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             //     };
 
             // }
-
             if (example.language === 'html') {
                 const _pathHTML = `src/app/${example.fileName}.component.html`;
                 this.project.files[_pathHTML] = example.code.default;
-                // if (example.typescriptFileCode !== undefined) {
-                //     let _pathTS = `src/app/${example.fileName}.component.ts`;
-                //     this.project.files[_pathTS] = example.typescriptFileCode.default;
-                //     if (example.secondFile) {
-                //         _pathTS = `src/app/${example.secondFile}.component.ts`;
-                //         this.project.files[_pathTS] = example.typescriptFileCode.default;
-                //         if (example.scss) { this.addonScss = example.scss; }
-                //         this.parameters.app_component_basis = example.secondFile + '.component';
-                //         this.project.files[_pathTS] =
-                //             // tslint:disable-next-line: no-unused-expression
-                //             `import { Component } from '@angular/core';
-
-                //         @Component({
-                //             selector: 'fd-${example.fileName}',
-                //             templateUrl: './${example.fileName}.component.html',
-                //             styles: [${this.addonScss}]
-                //         })
-                //         export class ${example.component} {}`;
-                //     }
-                // }
+                const _pathSCSS = `src/app/${example.fileName}.component.scss`;
+                this.project.files[_pathSCSS] = '';
+                if (example.scssFileCode) {
+                    this.project.files[_pathSCSS] = example.scssFileCode.default;
+                }
                 if (example.secondFile) {
-                    if (example.scss) { this.addonScss = example.scss; }
+                    // if (example.scss) { this.addonScss = example.scss; }
                     const _pathTS = `src/app/${example.secondFile}.component.ts`;
                     this.parameters.app_component_basis = example.secondFile + '.component';
                     this.project.files[_pathTS] =
@@ -196,9 +185,11 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     @Component({
                         selector: 'fd-${example.fileName}',
                         templateUrl: './${example.fileName}.component.html',
-                        styles: [${this.addonScss}]
+                        styleUrls: ['${example.fileName}.component.scss']
                     })
-                    export class ${example.component} {}`;
+                    export class ${example.component} {
+                        ${example.addonTs}
+                    }`;
                 }
                 else if (example.typescriptFileCode) {
                     const _pathTS = `src/app/${example.fileName}.component.ts`;
@@ -210,8 +201,8 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 this.project.files[_pathTS] = example.code.default;
             }
             else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined)) {
-                const _pathTS3 = `src/app/${example.secondFile}.component.ts`;
-                this.project.files[_pathTS3] = example.code.default;
+                const _pathTS2 = `src/app/${example.secondFile}.component.ts`;
+                this.project.files[_pathTS2] = example.code.default;
             }
             else if (example.language === 'typescript' && example.thirdFile !== undefined) {
                 this.project.files[example.thirdFile] = example.code.default;
@@ -227,7 +218,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
 
         this.project.files['src/index.html'] = `
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css">
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css"></link>
             <${this.parameters.html_tag}></${this.parameters.html_tag}>
         `;
         // TODO make non inline
@@ -239,7 +230,13 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+        import { HttpClientModule, HttpClient } from '@angular/common/http';
+        import { HttpModule } from '@angular/http';
+        import { MatTableModule } from '@angular/material';
+        import {CdkTableModule } from '@angular/cdk/table';
+        import { DragDropModule } from '@angular/cdk/drag-drop';  
         import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
+        
 
         @NgModule({
           declarations: [
@@ -248,6 +245,11 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
           imports: [
             BrowserModule,
             FormsModule,
+            HttpClientModule,
+            MatTableModule,
+            DragDropModule,
+            CdkTableModule,
+            HttpModule,
             ReactiveFormsModule,
             FundamentalNgxCoreModule,
             BrowserAnimationsModule

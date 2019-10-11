@@ -688,7 +688,8 @@ export class ListDocsComponent implements OnInit {
             code: listSrc,
             fileName: 'list-example',
             secondFile: 'list-examples',
-            typescriptFileCode: listTsCode
+            typescriptFileCode: listTsCode,
+            component: 'ListExampleComponent'
         }
     ];
 
@@ -698,7 +699,8 @@ export class ListDocsComponent implements OnInit {
             code: listActionsSrc,
             fileName: 'list-actions-example',
             secondFile: 'list-examples',
-            typescriptFileCode: listTsCode
+            typescriptFileCode: listTsCode,
+            component: 'ListActionsExampleComponent'
         }
     ];
 
@@ -708,7 +710,8 @@ export class ListDocsComponent implements OnInit {
             code: listCheckboxSrc,
             fileName: 'list-checkbox-example',
             secondFile: 'list-examples',
-            typescriptFileCode: listTsCode
+            typescriptFileCode: listTsCode,
+            component: 'ListCheckboxExampleComponent'
         }
     ];
 
@@ -721,7 +724,8 @@ export class ListDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: listSingleTs,
-            fileName: 'list-single-select-example'
+            fileName: 'list-single-select-example',
+            component: 'ListSingleSelectExampleComponent'
         }
     ];
 
@@ -734,8 +738,8 @@ export class ListDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: infiniteScrollSrcTs,
-            fileName: 'list-infinite-scroll-example'
-
+            fileName: 'list-infinite-scroll-example',
+            component: 'ListInfiniteScrollExampleComponent'
         }
     ];
 
@@ -748,7 +752,8 @@ export class ListDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: listCheckboxFormTsSrc,
-            fileName: 'list-checkbox-form-example'
+            fileName: 'list-checkbox-form-example',
+            component: 'ListCheckboxFormExampleComponent'
         }
     ];
 

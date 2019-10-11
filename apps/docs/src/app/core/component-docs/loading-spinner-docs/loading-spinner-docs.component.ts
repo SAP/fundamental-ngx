@@ -20,7 +20,8 @@ export class LoadingSpinnerDocsComponent implements OnInit {
             code: loadingSpinnerHtml,
             fileName: 'loading-spinner-example',
             secondFile: 'list-examples',
-            typescriptFileCode: loadingSpinnerTscode
+            typescriptFileCode: loadingSpinnerTscode,
+            component: 'LoadingSpinnerExampleComponent'
         }
     ];
 
@@ -30,7 +31,8 @@ export class LoadingSpinnerDocsComponent implements OnInit {
             code: loadingSpinnerContainerHtml,
             fileName: 'loading-spinner-container-example',
             secondFile: 'loading-spinner-container-example',
-            typescriptFileCode: loadingSpinnerContainerTsCode
+            typescriptFileCode: loadingSpinnerContainerTsCode,
+            component: 'LoadingSpinnerContainerExampleComponent'
         }
     ];
 

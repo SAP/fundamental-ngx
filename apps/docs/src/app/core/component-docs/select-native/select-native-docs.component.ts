@@ -5,6 +5,7 @@ import * as formInlineHelpHtml from '!raw-loader!./examples/select-native-inline
 import * as formStateHtml from '!raw-loader!./examples/select-native-state-example.component.html';
 import * as formGroupSelectHtml from '!raw-loader!./examples/select-native-form-group-example.component.html';
 import * as formGroupSelectTs from '!raw-loader!./examples/select-native-form-group-example.component.ts';
+import * as formGroupSelectScss from '!raw-loader!./examples/select-native-form-group-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as selectNativeTsCode from '!raw-loader!./examples/select-native-examples.component.ts';
@@ -21,7 +22,8 @@ export class SelectNativeDocsComponent implements OnInit {
             code: formHtml,
             fileName: 'select-native-example',
             secondFile: 'select-native-examples',
-            typescriptFileCode: selectNativeTsCode
+            typescriptFileCode: selectNativeTsCode,
+            component: 'SelectNativeExampleComponent'
         }
     ];
 
@@ -31,7 +33,8 @@ export class SelectNativeDocsComponent implements OnInit {
             code: formInlineHelpHtml,
             fileName: 'select-native-inline-help-example',
             secondFile: 'select-native-examples',
-            typescriptFileCode: selectNativeTsCode
+            typescriptFileCode: selectNativeTsCode,
+            component: 'SelectNativeInlineHelpExampleComponent'
         }
     ];
 
@@ -41,7 +44,8 @@ export class SelectNativeDocsComponent implements OnInit {
             code: formStateHtml,
             fileName: 'select-native-state-example',
             secondFile: 'select-native-examples',
-            typescriptFileCode: selectNativeTsCode
+            typescriptFileCode: selectNativeTsCode,
+            component: 'SelectNativeStateExampleComponent'
         }
     ];
 
@@ -49,12 +53,14 @@ export class SelectNativeDocsComponent implements OnInit {
         {
             language: 'html',
             code: formGroupSelectHtml,
-            fileName: 'select-native-form-group-example'
+            fileName: 'select-native-form-group-example',
+            scssFileCode: formGroupSelectScss
         },
         {
             language: 'typescript',
             code: formGroupSelectTs,
-            fileName: 'select-native-form-group-example'
+            fileName: 'select-native-form-group-example',
+            component: 'SelectNativeFormGroupExampleComponent'
         }
     ];
 
