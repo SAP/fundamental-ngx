@@ -1,47 +1,20 @@
 .fd-menu__item {
-    //BEGIN- GENERAL BEHAVIOUR AND INTERACTIONS. Hover, focus, active should always be in that order.
-    // &:hover {
-    //     //hover state
-    //     font-weight: bold;
-    //     // background-color: #fafafa;
-    //     background-color: var(--fd-color-background-hover);
-    // }
     &:hover {
         //don't apply hover properties on only label item, we need it over entire item
         background-color: transparent;
     }
-    // &:focus {
-    //     //selected state
-    //     outline: var(--fd-color-action-focus) dotted 1px;
-    //     // background-color: rgba(10, 110, 209, 0.07);
-    //     background-color: var(--fd-color-action-hover);
-    // }
-    // &:hover:focus {
-    //     //selected hover, combining when focused state is hovered upon
-    //     font-weight: bold;
-    //     // background-color: rgba(10, 110, 209, 0.1);
-    //     background-color: var(--fd-color-action-selected);
-    // }
-    //END- GENERAL BEHAVIOUR AND INTERACTIONS
     text-overflow: ellipsis;
-    min-width: 192px; //192-28 for icon
+    min-width: 192px;
     height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
-    // background-color: #FFFFFF;
     overflow: hidden;
-    // color: #515559; //color is correct in styles itself. REMOVE THIS
     background-color: transparent;
-    // padding: fd-space("tiny") fd-space("small");
-    padding: 12px 16px; //figure out how to use fd-menu-padding-small or tiny  or such variables from scss into here //top-bottom 8px or 12px, read 1 comment on invsion
-    // padding: var(--fd-menu-title-padding) var(--fd-menu-item-padding-y);
+    padding: 12px 16px;
     color: var(--fd-menu-item-color);
+    width: inherit;
 }
 
 .fd-menu__item[aria-selected='true'] {
     background-color: transparent;
-    // &:hover {
-    //     font-weight: bold;
-    //     background-color: transparent;
-    // }
 }
 
 /*
@@ -54,24 +27,14 @@ therefore, space between element and item = 40-28 = 12px, or 6px top and 6px bot
 therefore, between icon and item, space should be (icon padding top-bottom + space between element and item top-bottom) or (8+6 = 14px).
 */
 .fd-menu__addon-before {
-    //fd-menu__addon-before represents the add-on icon element
-    // padding: 8px 0px 8px 8px;
+    //fd-menu__addon-before represents the add-on icon element at the start of the item
     width: 28px;
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
     align-items: center;
     margin: 6px 4px 6px 8px;
-    // color: #0a6ed1;
     color: var(--fd-color-action);
-    // display: block;
-    // .fd-menu__item {
-    //     padding-left: 0px;
-    // }
 }
-// .fd-menu__addon-before [class*=sap-icon]::before{    //works with or without this
-//       width: 12px;
-//       height: 12px;
-//   }
 
 .fd-menu--addon-before > .fd-menu__item {
     //fd-menu--addon-before represents the container of the menu item
@@ -79,19 +42,15 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
 }
 
 .fd-menu__addon-after {
+    //fd-menu__addon-after represents the add-on icon element at the end of the item
     width: 28px;
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
     margin: 6px 4px 6px 8px;
-    // color: #0a6ed1;
     color: var(--fd-color-action);
     display: flex;
     float: right;
     clear: right;
-    // @include fd-rtl() {
-    //     float: right;
-    //     clear: right;
-    // }
     justify-content: center;
     align-items: center;
 }
@@ -123,7 +82,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     display: inline-flex;
 }
 
-/**truncation not happening */
+//have the right state for selected item
 .selected-item-state {
     background-color: var(--fd-color-background-selected);
     &:hover {
@@ -134,11 +93,9 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     }
 }
 
+//have the right state for normal/unselected items
 .normal-item-state {
     &:hover {
-        //hover state
-        // font-weight: bold;
-        // background-color: #fafafa;
         background-color: var(--fd-color-background-hover);
         .fd-menu__item {
             font-weight: bold;

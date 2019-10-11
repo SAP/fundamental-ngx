@@ -1,27 +1,24 @@
 import {
     Component,
     Input,
-    OnDestroy,
     OnInit,
     Output,
     EventEmitter,
-    AfterViewInit,
     ViewEncapsulation,
-    ComponentFactoryResolver,
     ElementRef,
-    HostListener
+    HostListener,
+    Renderer2
 } from '@angular/core';
 import { MenuItem, MenuGroup } from './menu.component';
-import { DefaultMenuItem, MenuKeyboardService } from '@fundamental-ngx/core';
+import { DefaultMenuItem } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',
     styleUrls: ['./menu-item.component.scss'],
     encapsulation: ViewEncapsulation.None
-    // providers: [MenuKeyboardService]
-}) /*extends MenuItemDirective*/
-export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, AfterViewInit {
+})
+export class MenuItemComponent implements OnInit, DefaultMenuItem {
     @Input()
     public label: string;
     @Input()
@@ -52,37 +49,23 @@ export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, Af
     @Input()
     public childItems: MenuItem[] = [];
 
-    // currentAdIndex = -1;
-
     @Output() itemClick: EventEmitter<void> = new EventEmitter();
 
     /**  Event thrown, when there is some keyboard event detected on mega menu item */
     @Output()
     readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
-        private itemEl: ElementRef,
-        private menuKeyboardService: MenuKeyboardService
-    ) {
-        // super(itemEl);
-    }
+    constructor(public itemEl: ElementRef, private renderer: Renderer2) {}
 
-    ngOnInit() {
-        // this._isActive = this.selected ? true : false;
-    }
-
-    ngOnDestroy() {}
-
-    ngAfterViewInit() {
-        // this.menuKeyboardService.focusEscapeAfterList = () => {};
-    }
+    ngOnInit() {}
 
     onItemClick() {
-        console.log('child items ' + this.childItems.length);
         this.itemClick.emit();
     }
 
+    /**
+     * get the menu item label width bby offsetting from total width if `secondaryIcon` is present
+     */
     getItemWidth(): string {
         // todo: handle em, rem etc.
         let finalItemWidth: string = '';
@@ -91,34 +74,24 @@ export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, Af
             finalItemWidth = this.itemWidth;
             if (this.item.secondaryIcon !== undefined || this.item.secondaryIcon !== '') {
                 // secondary icon exists
-                finalItemWidth = itemWidthNumber - 85 + 'px';
+                finalItemWidth = itemWidthNumber - 88 + 'px';
             }
+        } else {
+            const itemElement = this.itemEl.nativeElement;
+            this.renderer.setStyle(itemElement, 'width', 'inherit');
         }
-        // console.log(finalItemWidth + 'is finalItemWidth and itemWidth ' + itemWidthNumber);
         return finalItemWidth;
     }
 
-    doSomethingElse(data: MenuItem[]) {
-        // alert('open new menu ');
-        // this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
-        // const adItem = this.childItems[this.currentAdIndex];
-        // const componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
-
-        // const viewContainerRef = this.data.viewContainerRef;
-        // viewContainerRef.clear();
-
-        // for now do item click only
-        this.itemClick.emit();
-    }
-
+    /**
+     * implemented method for `focus` from `DefaultMenuItem`
+     */
     public focus(): void {
-        console.log('calling focussss');
-        // if (this.group.label) {
-        //     this.itemEl.nativeElement.group.groupItems[0].focus();
-        // }
         this.itemEl.nativeElement.focus();
     }
-
+    /**
+     * implemented method for `click` from `DefaultMenuItem`
+     */
     public click(): void {
         this.itemClick.emit();
     }
@@ -126,11 +99,14 @@ export class MenuItemComponent implements OnInit, OnDestroy, DefaultMenuItem, Af
     /** @hidden */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
-        console.log('@@@@@@@ event code in item ' + event.code);
         switch (event.code) {
             case 'Space':
             case 'Enter':
-                this.itemClick.emit();
+                if (this.disabled) {
+                    event.stopPropagation();
+                } else {
+                    this.itemClick.emit();
+                }
                 break;
             default:
                 this.keyDown.emit(event);

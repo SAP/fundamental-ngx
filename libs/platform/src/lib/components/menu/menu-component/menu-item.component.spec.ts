@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { MenuItemComponent } from './menu-item.component';
 import { By } from '@angular/platform-browser';
@@ -34,6 +34,9 @@ class TestComponent {
 
     @Input()
     public itemWidth: string;
+
+    @ViewChild(MenuItemComponent)
+    menuItem: MenuItemComponent;
 
     public itemClicked = false;
 
@@ -132,5 +135,17 @@ describe('MenuItemComponent', () => {
         const icon = fixture.debugElement.query(By.css('[data-tag="menu-item__icon-before"]'));
         expect(icon).not.toBeNull();
         expect(icon.nativeElement.classList.contains('sap-icon--lightbulb')).toBeTruthy();
+    });
+
+    it('should call handleKeyboardEvent on keypress', () => {
+        component.label = 'New Item';
+        component.index = '1';
+        fixture.detectChanges();
+
+        spyOn(component.menuItem, 'handleKeyboardEvent');
+        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
+
+        component.menuItem.handleKeyboardEvent(event);
+        expect(component.menuItem.handleKeyboardEvent).toHaveBeenCalled();
     });
 });
