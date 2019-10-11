@@ -24,7 +24,8 @@ export class MenuDocsComponent implements OnInit {
             code: menuSrc,
             fileName: 'menu-example',
             secondFile: 'menu-examples',
-            typescriptFileCode: menuTsCode
+            typescriptFileCode: menuTsCode,
+            component: 'MenuAddonExampleComponent'
         }
     ];
     menuAddon: ExampleFile[] = [
@@ -33,7 +34,8 @@ export class MenuDocsComponent implements OnInit {
             code: menuAddon,
             fileName: 'menu-addon-example',
             secondFile: 'menu-addon-examples',
-            typescriptFileCode: menuAddonTsCode
+            typescriptFileCode: menuAddonTsCode,
+            component: 'MenuExampleComponent'
         }
     ];
 
@@ -43,7 +45,8 @@ export class MenuDocsComponent implements OnInit {
             code: menuGroupSrc,
             fileName: 'menu-group-example',
             secondFile: 'menu-examples',
-            typescriptFileCode: menuTsCode
+            typescriptFileCode: menuTsCode,
+            component: 'MenuGroupExampleComponent'
         }
     ];
 
@@ -57,6 +60,7 @@ export class MenuDocsComponent implements OnInit {
             language: 'typescript',
             code: menuKeyboardSrcT,
             fileName: 'menu-keyboard-support-example',
+            component: 'MenuKeyboardSupportExampleComponent'
         }
     ];
 
@@ -66,7 +70,8 @@ export class MenuDocsComponent implements OnInit {
             code: menuSeparatorSrc,
             fileName: 'menu-separator-example',
             secondFile: 'menu-examples',
-            typescriptFileCode: menuTsCode
+            typescriptFileCode: menuTsCode,
+            component: 'MenuSeparatorExampleComponent'
         }
     ];
 

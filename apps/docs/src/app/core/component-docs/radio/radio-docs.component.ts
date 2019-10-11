@@ -18,8 +18,9 @@ export class RadioDocsComponent implements OnInit {
             language: 'html',
             code: formHtml,
             fileName: 'radio-example',
-            secondFile: '',
-            typescriptFileCode: formTs
+            secondFile: 'radio-examples',
+            typescriptFileCode: formTs,
+            component: 'RadioExamplesComponent'
         }
     ];
 
@@ -32,7 +33,8 @@ export class RadioDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: formGroupInputTs,
-            fileName: 'radio-form-group-example'
+            fileName: 'radio-form-group-example',
+            component: 'RadioFormGroupExampleComponent'
         }
     ];
 

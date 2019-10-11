@@ -25,6 +25,7 @@ export class LocalizationEditorDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'LocalizationEditorExampleComponent',
             code: localizationSrcT,
             fileName: 'localization-editor-example',
         }
@@ -38,6 +39,7 @@ export class LocalizationEditorDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'LocalizationEditorTemplateExampleComponent',
             code: localizationTemplateSrcT,
             fileName: 'localization-editor-template-example',
         }
@@ -51,6 +53,7 @@ export class LocalizationEditorDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'LocalizationEditorTextareaExampleComponent',
             code: localizationTextareaSrcT,
             fileName: 'localization-editor-textarea-example',
         }
@@ -64,6 +67,7 @@ export class LocalizationEditorDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'LocalizationEditorFormsExampleComponent',
             code: localizationFormsSrcT,
             fileName: 'localization-editor-forms-example',
         }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'fd-radio-form-group',
+    selector: 'fd-radio-form-group-example',
     templateUrl: './radio-form-group-example.component.html',
     styles: [`
         .flex-form{

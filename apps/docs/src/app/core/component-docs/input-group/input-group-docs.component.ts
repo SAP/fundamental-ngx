@@ -707,7 +707,8 @@ export class InputGroupDocsComponent implements OnInit {
             code: inputGroupTextSrc,
             fileName: 'input-group-text-example',
             secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupTextExampleComponent'
         }
     ];
 
@@ -716,8 +717,9 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupIconSrc,
             fileName: 'input-group-icon-example',
-            secondFile: 'input-groupexamples',
-            typescriptFileCode: inputGroupTscode
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupIconExampleComponent'
         }
     ];
 
@@ -726,8 +728,9 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupButtonSrc,
             fileName: 'input-group-button-example',
-            secondFile: 'input-groupexamples',
-            typescriptFileCode: inputGroupTscode
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupButtonExampleComponent'
         }
     ];
 
@@ -736,8 +739,9 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupNumberSrc,
             fileName: 'input-group-number-example',
-            secondFile: 'input-groupexamples',
-            typescriptFileCode: inputGroupTscode
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupNumberExampleComponent'
         }
     ];
 
@@ -746,8 +750,9 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupSearchSrc,
             fileName: 'input-group-search-example',
-            secondFile: 'input-groupexamples',
-            typescriptFileCode: inputGroupTscode
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupSearchExampleComponent'
         }
     ];
 
@@ -756,8 +761,9 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupTextCompactSrc,
             fileName: 'input-group-compact-example',
-            secondFile: 'input-groupexamples',
-            typescriptFileCode: inputGroupTscode
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupTextCompactExampleComponent'
         }
     ];
 
@@ -771,6 +777,7 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'typescript',
             code: formInputTsSrc,
             fileName: 'input-group-form-example',
+            component: 'InputGroupFormExampleComponent'
         }
     ];
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 
 import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-example.component.html';
 import * as sideNavigationTscode from '!raw-loader!./examples/side-navigation-examples.component.ts';
+import * as sideNavigationScsscode from '!raw-loader!./examples/side-navigation-examples.component.scss';
 import * as sideNavigationCollapsedSrc from '!raw-loader!./examples/side-navigation-collapsed-example.component.html';
 import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
 import * as sideNavigationLevelsSrc from '!raw-loader!./examples/side-navigation-levels-example.component.html';
@@ -21,7 +22,9 @@ export class SideNavigationDocsComponent implements OnInit {
             code: sideNavigationSrc,
             fileName: 'side-navigation-example',
             secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode
+            typescriptFileCode: sideNavigationTscode,
+            component: 'SideNavigationExampleComponent',
+            scssFileCode: sideNavigationScsscode
         }
     ];
 
@@ -31,7 +34,9 @@ export class SideNavigationDocsComponent implements OnInit {
             code: sideNavigationTitlesSrc,
             fileName: 'side-navigation-titles-example',
             secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode
+            typescriptFileCode: sideNavigationTscode,
+            component: 'SideNavigationTitlesExampleComponent',
+            scssFileCode: sideNavigationScsscode
         }
     ];
 
@@ -41,7 +46,9 @@ export class SideNavigationDocsComponent implements OnInit {
             code: sideNavigationLevelsSrc,
             fileName: 'side-navigation-levels-example',
             secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode
+            typescriptFileCode: sideNavigationTscode,
+            component: 'SideNavigationLevelsExampleComponent',
+            scssFileCode: sideNavigationScsscode
         }
     ];
 
@@ -51,7 +58,10 @@ export class SideNavigationDocsComponent implements OnInit {
             code: sideNavigationIconsSrc,
             fileName: 'side-navigation-icons-example',
             secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode
+            typescriptFileCode: sideNavigationTscode,
+            component: 'SideNavigationIconsExampleComponent',
+            scssFileCode: sideNavigationScsscode,
+            scss: '`fd-icon {padding-right: 10px;}`'
         }
     ];
 
@@ -61,7 +71,10 @@ export class SideNavigationDocsComponent implements OnInit {
             code: sideNavigationCollapsedSrc,
             fileName: 'side-navigation-collapsed-example',
             secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode
+            typescriptFileCode: sideNavigationTscode,
+            component: 'SideNavigationCollapsedExampleComponent',
+            scssFileCode: sideNavigationScsscode,
+            scss: '`.fd-side-nav--icons {max-width: 65px;}`'
         }
     ];
 

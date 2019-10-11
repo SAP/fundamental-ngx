@@ -718,7 +718,8 @@ export class TileDocsComponent implements OnInit {
             code: tileSrc,
             fileName: 'tile-example',
             secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode
+            typescriptFileCode: tileTscode,
+            component: 'TileExampleComponent'
         }
     ];
 
@@ -728,7 +729,8 @@ export class TileDocsComponent implements OnInit {
             code: tileMediaSrc,
             fileName: 'tile-media-example',
             secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode
+            typescriptFileCode: tileTscode,
+            component: 'TileMediaExampleComponent'
         }
     ];
 
@@ -738,7 +740,8 @@ export class TileDocsComponent implements OnInit {
             code: tileActionsSrc,
             fileName: 'tile-action-example',
             secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode
+            typescriptFileCode: tileTscode,
+            component: 'TileActionsExampleComponent'
         }
     ];
 
@@ -748,7 +751,8 @@ export class TileDocsComponent implements OnInit {
             code: tileButtonSrc,
             fileName: 'tile-button-example',
             secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode
+            typescriptFileCode: tileTscode,
+            component: 'TileButtonExampleComponent'
         }
     ];
 
@@ -758,7 +762,8 @@ export class TileDocsComponent implements OnInit {
             code: tileProductSrc,
             fileName: 'tile-product-example',
             secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode
+            typescriptFileCode: tileTscode,
+            component: 'TileProductExampleComponent'
         }
     ];
 
@@ -768,7 +773,8 @@ export class TileDocsComponent implements OnInit {
             code: tileDisabledSrc,
             fileName: 'tile-disabled-example',
             secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode
+            typescriptFileCode: tileTscode,
+            component: 'TileDisabledExampleComponent'
         }
     ];
 

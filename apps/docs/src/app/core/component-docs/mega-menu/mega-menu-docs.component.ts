@@ -19,7 +19,8 @@ export class MegaMenuDocsComponent implements OnInit {
             code: menuSrc,
             fileName: 'mega-menu-example',
             secondFile: 'mega-menu-examples',
-            typescriptFileCode: megaMenuTsCode
+            typescriptFileCode: megaMenuTsCode,
+            component: 'MegaMenuExampleComponent'
         }
     ];
 
@@ -29,7 +30,8 @@ export class MegaMenuDocsComponent implements OnInit {
             code: menuGroupSrc,
             fileName: 'mega-menu-group-example',
             secondFile: 'mega-menu-examples',
-            typescriptFileCode: megaMenuTsCode
+            typescriptFileCode: megaMenuTsCode,
+            component: 'MegaMenuGroupExampleComponent'
         }
     ];
 
@@ -39,7 +41,9 @@ export class MegaMenuDocsComponent implements OnInit {
             code: menuPositionSrc,
             fileName: 'mega-menu-position-example',
             secondFile: 'mega-menu-examples',
-            typescriptFileCode: megaMenuTsCode
+            typescriptFileCode: megaMenuTsCode,
+            component: 'MegaMenuPositionExampleComponent',
+            scss: '".mega-menu-right-position {display: flex; justify-content: flex-end;}"'
         }
     ];
 

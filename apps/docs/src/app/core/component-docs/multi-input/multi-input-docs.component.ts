@@ -32,6 +32,7 @@ export class MultiInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'MultiInputExampleComponent',
             code: simpleT,
             fileName: 'multi-input-example'
         }
@@ -45,6 +46,7 @@ export class MultiInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'MultiInputDisplaywithExampleComponent',
             code: displayT,
             fileName: 'multi-input-displaywith-example'
         }
@@ -58,6 +60,7 @@ export class MultiInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'MultiInputFilterExampleComponent',
             code: filterT,
             fileName: 'multi-input-filter-example'
         }
@@ -71,6 +74,7 @@ export class MultiInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'MultiInputAsyncExampleComponent',
             code: asyncT,
             fileName: 'multi-input-async-example'
         }
@@ -84,6 +88,7 @@ export class MultiInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'MultiInputFormExampleComponent',
             code: formT,
             fileName: 'multi-input-form-example'
         }

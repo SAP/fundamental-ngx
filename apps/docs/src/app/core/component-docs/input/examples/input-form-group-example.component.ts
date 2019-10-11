@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'fd-input-form-group',
+    selector: 'fd-input-form-group-example',
     templateUrl: './input-form-group-example.component.html',
-    styleUrls: ['input-form-group-example.component.scss']
+    styles: [`input {margin-bottom: 10px;}`]
 })
 export class InputFormGroupExampleComponent {
     customForm = new FormGroup({

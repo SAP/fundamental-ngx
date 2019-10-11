@@ -50,7 +50,8 @@ export class PaginationDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: paginationSrc,
-            fileName: 'pagination-example'
+            fileName: 'pagination-example',
+            component: 'PaginationExampleComponent'
         }
     ];
 

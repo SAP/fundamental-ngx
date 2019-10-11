@@ -15,11 +15,7 @@ export class TabsNavigationModeExampleComponent {}
 @Component({
     selector: 'fd-tab-selection-example',
     templateUrl: './tab-selection-example.component.html',
-    styles: [`
-        .fd-button {
-            margin-right: 16px;
-        }
-    `]
+    styleUrls: ['tab-selection-example.component.scss']
 })
 export class TabSelectionExampleComponent {
     selectedTab = 0;

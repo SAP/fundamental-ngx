@@ -52,7 +52,8 @@ export class InlineHelpDocsComponent implements OnInit {
             code: inlineHelpSrc,
             fileName: 'inline-help-example',
             secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode
+            typescriptFileCode: inlineHelpTsCode,
+            component: 'InlineHelpExampleComponent'
         }
     ];
 
@@ -62,7 +63,8 @@ export class InlineHelpDocsComponent implements OnInit {
             code: inlineHelpTriggerHtml,
             fileName: 'inline-help-trigger-example',
             secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode
+            typescriptFileCode: inlineHelpTsCode,
+            component: 'InlineHelpTriggerExampleComponent'
         }
     ];
 

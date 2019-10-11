@@ -51,7 +51,8 @@ export class ImageDocsComponent implements OnInit {
             code: imageSizesSrc,
             fileName: 'image-sizes-example',
             secondFile: 'image-examples',
-            typescriptFileCode: imageTsCode
+            typescriptFileCode: imageTsCode,
+            component: 'ImageSizesExampleComponent'
         }
     ];
 
@@ -61,7 +62,8 @@ export class ImageDocsComponent implements OnInit {
             code: imageShapesSrc,
             fileName: 'image-shapes-example',
             secondFile: 'image-examples',
-            typescriptFileCode: imageTsCode
+            typescriptFileCode: imageTsCode,
+            component: 'ImageShapesExampleComponent'
         }
     ];
 

@@ -55,6 +55,7 @@ export class TableDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'TableExampleComponent',
             code: tableTsSrc,
             fileName: 'table-example'
         }
@@ -68,6 +69,7 @@ export class TableDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'TableCheckboxesExampleComponent',
             code: tableCheckTs,
             fileName: 'table-checkboxes-example'
         }
@@ -81,6 +83,7 @@ export class TableDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'TableCdkExampleComponent',
             code: tableCdkTs,
             fileName: 'table-cdk-example'
         }
@@ -94,6 +97,7 @@ export class TableDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'TableResponsiveExampleComponent',
             code: tableResponsiveTs,
             fileName: 'table-responsive-example'
         }

@@ -162,14 +162,12 @@ import {
     TileProductExampleComponent,
     TileButtonExampleComponent
 } from '../core/component-docs/tile/examples/tile-examples.component';
-import {
-    TimeExampleComponent,
-    Time12ExampleComponent,
-    TimeDisabledExampleComponent,
-    TimeNoSecondsExampleComponent,
-    TimeNoSpinnersExampleComponent,
-    TimeOnlyHoursExampleComponent
-} from '../core/component-docs/time/examples/time-examples.component';
+import { Time12ExampleComponent } from '../core/component-docs/time/examples/time-12-example.component';
+import { TimeExampleComponent } from '../core/component-docs/time/examples/time-example.component';
+import { TimeDisabledExampleComponent } from '../core/component-docs/time/examples/time-disabled-example.component';
+import { TimeNoSecondsExampleComponent } from '../core/component-docs/time/examples/time-no-seconds-example.component';
+import { TimeNoSpinnersExampleComponent } from '../core/component-docs/time/examples/time-no-spinners-example.component';
+import { TimeOnlyHoursExampleComponent } from '../core/component-docs/time/examples/time-only-hours-example.component';
 import {
     TimePickerExampleComponent,
     TimePicker12ExampleComponent,

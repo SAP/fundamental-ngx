@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'fd-textarea-form-group',
+    selector: 'fd-textarea-form-group-example',
     templateUrl: './textarea-form-group-example.component.html',
     styleUrls: ['textarea-form-group-example.component.scss']
 })

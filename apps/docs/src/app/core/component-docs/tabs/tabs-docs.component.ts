@@ -5,8 +5,10 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as tabSrc from '!raw-loader!./examples/tabs-example.component.html';
 import * as tabsTsCode from '!raw-loader!./examples/tabs-examples-component.ts';
 import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
+import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.component.scss';
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
+import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
 import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
 import * as complexTabHTsCode from '!raw-loader!./examples/complex-title-example/complex-title-example.component.ts';
 import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
@@ -96,16 +98,18 @@ export class TabsDocsComponent implements OnInit {
     tabExample: ExampleFile[] = [
         {
             language: 'html',
+            component: 'TabsExampleComponent',
             code: tabSrc,
-            fileName: '',
+            fileName: 'tabs-example',
             secondFile: 'tabs-examples',
-            typescriptFileCode: tabsTsCode
+            typescriptFileCode: tabsTsCode,
         }
     ];
 
     complexHeader: ExampleFile[] = [
         {
             language: 'html',
+            component: 'ComplexTitleExampleComponent',
             code: complexTabH,
             fileName: 'complex-title-example',
             secondFile: 'complex-title-example',
@@ -116,6 +120,7 @@ export class TabsDocsComponent implements OnInit {
     navigationTab: ExampleFile[] = [
         {
             language: 'html',
+            component: 'TabsNavigationModeExampleComponent',
             code: navigationTab,
             fileName: 'tabs-navigation-mode-example.component',
             secondFile: 'tabs-navigation-mode-example.component',
@@ -128,11 +133,13 @@ export class TabsDocsComponent implements OnInit {
             language: 'html',
             code: tabAddH,
             fileName: 'adding-tab-example',
+            scssFileCode: tabAddS
         },
         {
             language: 'typescript',
             code: tabAddT,
             fileName: 'adding-tab-example',
+            component: 'AddingTabExampleComponent',
         }
     ];
 
@@ -142,7 +149,9 @@ export class TabsDocsComponent implements OnInit {
             code: tabSelectionSrc,
             fileName: 'tab-selection-example',
             secondFile: 'tabs-examples',
-            typescriptFileCode: tabsTsCode
+            typescriptFileCode: tabsTsCode,
+            component: 'TabSelectionExampleComponent',
+            scssFileCode: tabSelectionScss
         }
     ];
 

@@ -4,6 +4,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as buttonTypesExample from '!raw-loader!./examples/split-button-types-example.component.html';
 import * as splitButtonTscode from '!raw-loader!./examples/split-button-examples.component.ts';
+import * as splitButtonScsscode from '!raw-loader!./examples/split-button-examples.component.scss';
 import * as buttonSplitProgrammaticalyExample from '!raw-loader!./examples/split-button-programmatical-example.component.html';
 import * as buttonSplitOptionsExample from '!raw-loader!./examples/split-button-options-example.component.html';
 import * as buttonSplitIcons from '!raw-loader!./examples/split-button-icons-example.component.html';
@@ -35,7 +36,10 @@ export class SplitButtonDocsComponent implements OnInit {
             code: buttonTypesExample,
             fileName: 'split-button-types-example',
             secondFile: 'split-button-examples',
-            typescriptFileCode: splitButtonTscode
+            typescriptFileCode: splitButtonTscode,
+            component: 'ButtonSplitTypesExampleComponent',
+            scssFileCode: splitButtonScsscode,
+            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -45,7 +49,10 @@ export class SplitButtonDocsComponent implements OnInit {
             code: buttonSplitProgrammaticalyExample,
             fileName: 'split-button-programmatical-example',
             secondFile: 'split-button-examples',
-            typescriptFileCode: splitButtonTscode
+            typescriptFileCode: splitButtonTscode,
+            component: 'ButtonSplitProgrammaticalExampleComponent',
+            scssFileCode: splitButtonScsscode,
+            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -55,7 +62,10 @@ export class SplitButtonDocsComponent implements OnInit {
             code: buttonSplitTemplateExample,
             fileName: 'split-button-template-example',
             secondFile: 'split-button-examples',
-            typescriptFileCode: splitButtonTscode
+            typescriptFileCode: splitButtonTscode,
+            component: 'ButtonSplitTemplateExampleComponent',
+            scssFileCode: splitButtonScsscode,
+            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -65,7 +75,10 @@ export class SplitButtonDocsComponent implements OnInit {
             code: buttonSplitOptionsExample,
             fileName: 'split-button-options-example',
             secondFile: 'split-button-examples',
-            typescriptFileCode: splitButtonTscode
+            typescriptFileCode: splitButtonTscode,
+            component: 'ButtonSplitOptionsExampleComponent',
+            scssFileCode: splitButtonScsscode,
+            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -75,7 +88,10 @@ export class SplitButtonDocsComponent implements OnInit {
             code: buttonSplitIcons,
             fileName: 'split-button-icons-example',
             secondFile: 'split-button-examples',
-            typescriptFileCode: splitButtonTscode
+            typescriptFileCode: splitButtonTscode,
+            component: 'ButtonSplitTypesIconsComponent',
+            scssFileCode: splitButtonScsscode,
+            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 

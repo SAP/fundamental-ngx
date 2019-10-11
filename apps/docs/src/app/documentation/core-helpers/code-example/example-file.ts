@@ -8,9 +8,13 @@ export interface ExampleFile {
     typescriptFileCode?: {
         default: string
     };
+    scssFileCode?: {
+        default: string
+    };
     thirdFile?: string;
     secondFile?: string;
     component?: string;
     fileName?: string;
+    addonTs?: string;
     scss?: string;
 }
