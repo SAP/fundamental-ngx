@@ -18,7 +18,7 @@ import { modalFadeNgIf } from './modal-animations';
         }
     `],
     host: {
-        '[@modal-fade]': '',
+        '[@modal-fade]': 'useAnimations',
         '[class.fd-modal-container]': 'true'
     },
     animations: [
@@ -26,4 +26,8 @@ import { modalFadeNgIf } from './modal-animations';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class ModalContainer {}
+export class ModalContainer {
+
+    useAnimations: boolean = true;
+
+}

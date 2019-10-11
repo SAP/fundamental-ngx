@@ -59,7 +59,13 @@ for P in ${PACKAGES[@]};
 do
     echo publish "@fundamental-ngx/${P}"
     cd ${P}
-    $NPM_BIN  publish --access public
+    if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Archive-pre-release" || $TRAVIS_BUILD_STAGE_NAME =~ "Archive-release" ]]; then
+      $NPM_BIN  publish --tag archive --access public
+    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
+      $NPM_BIN  publish --tag prerelease --access public
+    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
+      $NPM_BIN  publish --access public
+    fi
     cd ..
 done
 

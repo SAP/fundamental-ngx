@@ -62,4 +62,7 @@ export class ModalConfig implements DynamicComponentConfig {
 
     /** Data to pass along to the content through the ModalRef. */
     data?: any;
+
+    /** Defines if the container and modal should use default animations, it can provide some delay */
+    useAnimations?: boolean = true;
 }
