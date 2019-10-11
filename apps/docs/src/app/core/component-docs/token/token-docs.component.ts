@@ -18,7 +18,9 @@ export class TokenDocsComponent implements OnInit {
             language: 'html',
             code: basicTokenH,
             secondFile: 'token-example',
-            typescriptFileCode: tokenTsCode
+            typescriptFileCode: tokenTsCode,
+            fileName: 'token-example',
+            component: 'TokenExampleComponent'
         }
     ];
 

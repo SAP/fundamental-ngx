@@ -29,6 +29,7 @@ export class FileInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'FileInputExampleComponent',
             code: fileInputT,
             fileName: 'file-input-example'
         }
@@ -42,6 +43,7 @@ export class FileInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'FileInputCustomExampleComponent',
             code: fileInputCustomT,
             fileName: 'file-input-custom-example'
         }
@@ -55,6 +57,7 @@ export class FileInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'FileInputDragDisabledExampleComponent',
             code: fileInputInvalidT,
             fileName: 'file-input-drag-disabled-example'
         }
@@ -68,6 +71,7 @@ export class FileInputDocsComponent implements OnInit {
         },
         {
             language: 'typescript',
+            component: 'FileInputMaxExampleComponent',
             code: fileInputMaxT,
             fileName: 'file-input-max-example'
         }
