@@ -19,7 +19,8 @@ export class InfiniteScrollDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: basicInfiniteTs,
-            fileName: 'infinite-scroll-basic-example'
+            fileName: 'infinite-scroll-basic-example',
+            component: 'InfiniteScrollBasicExampleComponent'
         }
     ];
 
