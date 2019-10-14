@@ -388,6 +388,7 @@ import { SharedDocumentationModule } from '../documentation/shared-documentation
 
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { CORE_COMPONENT_SCHEMAS } from './component-docs/schemas';
 
 
 @NgModule({
@@ -720,6 +721,7 @@ import { CoreDocumentationComponent } from './documentation/core-documentation.c
     imports: [
         SharedDocumentationModule,
         MarkdownModule.forChild(),
+        SchemaModule.forRoot(CORE_COMPONENT_SCHEMAS),
         RouterModule.forChild(ROUTES)
     ]
 })

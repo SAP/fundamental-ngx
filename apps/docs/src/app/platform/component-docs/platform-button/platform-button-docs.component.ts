@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -8,8 +8,6 @@ import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-button',
@@ -21,6 +19,9 @@ export class PlatformButtonDocsComponent implements OnInit {
             properties: {
                 type: 'object',
                 properties: {
+                    width: {
+                        type: 'string'
+                    },
                     label: {
                         type: 'string'
                     },
