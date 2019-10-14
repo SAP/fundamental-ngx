@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.1-rc.5"></a>
+## [0.11.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.11.0-rc.23...v0.11.1-rc.5) (2019-10-14)
+
+
+### Bug Fixes
+
+* Angular 7 fixes ([#1368](https://github.com/SAP/fundamental-ngx/issues/1368)) ([781b628](https://github.com/SAP/fundamental-ngx/commit/781b628)), closes [#1283](https://github.com/SAP/fundamental-ngx/issues/1283) [#1295](https://github.com/SAP/fundamental-ngx/issues/1295) [#1292](https://github.com/SAP/fundamental-ngx/issues/1292) [#1301](https://github.com/SAP/fundamental-ngx/issues/1301) [#1305](https://github.com/SAP/fundamental-ngx/issues/1305) [#1306](https://github.com/SAP/fundamental-ngx/issues/1306) [#1309](https://github.com/SAP/fundamental-ngx/issues/1309) [#1312](https://github.com/SAP/fundamental-ngx/issues/1312) [#1315](https://github.com/SAP/fundamental-ngx/issues/1315)
+
+
+
 <a name="0.11.1-rc.4"></a>
 ## [0.11.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.11.1-rc.3...v0.11.1-rc.4) (2019-09-27)
 
