@@ -20,12 +20,11 @@
 
 ## <a name="1"></a>1. Description
 
-See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
-
 The `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
 
 The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
+See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
 
 ## <a name="2"></a>2. Requirements
 
