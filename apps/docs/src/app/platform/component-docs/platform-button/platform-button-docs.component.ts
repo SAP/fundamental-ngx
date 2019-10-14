@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as buttonOptionsExample from '!raw-loader!./examples/button-options-example.component.html';
-import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
-import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
-import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
-import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
+import * as buttonOptionsExample from '!raw-loader!./platform-button-examples/platform-button-options-example.component.html';
+import * as buttonIconsExample from '!raw-loader!./platform-button-examples/platform-button-icons-example.component.html';
+import * as buttonSizesExample from '!raw-loader!./platform-button-examples/platform-button-sizes-example.component.html';
+import * as buttonStateExample from '!raw-loader!./platform-button-examples/platform-button-state-example.component.html';
+import * as buttonTypesExample from '!raw-loader!./platform-button-examples/platform-button-types-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -676,6 +676,7 @@ export class PlatformButtonDocsComponent implements OnInit {
             label: 'click here',
             fdType: 'default',
             option: 'default',
+            width: '100%',
             size: 'default',
             icon: ''
         }

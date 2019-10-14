@@ -80,6 +80,7 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-button [type]="data.properties.fdType" [options]="data.properties.options" [compact]="data.properties.compact"
+                [width]="data.properties.width"
         [glyph]="data.properties.icon">
         {{ data.properties.label }}
     </fdp-button>

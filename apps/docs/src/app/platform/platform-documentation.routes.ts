@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
-import { ButtonDocsComponent } from './component-docs/button/button-docs.component';
-import { ButtonHeaderComponent } from './component-docs/button/button-header/button-header.component';
 import { ApiComponent } from './../documentation/core-helpers/api/api.component';
 import { API_FILES } from './api-files';
+import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
+import { PlatformButtonDocsComponent } from './component-docs/platform-button/platform-button-docs.component';
 
 
 
@@ -16,8 +16,8 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: PlatformHomeComponent },
             {
-                path: 'button', component: ButtonHeaderComponent, children: [
-                    { path: '', component: ButtonDocsComponent },
+                path: 'button', component: PlatformButtonHeaderComponent, children: [
+                    { path: '', component: PlatformButtonDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
                 ]
             }
