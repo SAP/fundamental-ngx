@@ -12,7 +12,8 @@ import {
     PlatformButtonOptionsExampleComponent,
     PlatformButtonSizesExampleComponent,
     PlatformButtonStateExampleComponent,
-    PlatformButtonTypesExampleComponent
+    PlatformButtonTypesExampleComponent,
+    PlatformButtonTruncateExampleComponent
 } from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
 
 @NgModule({
@@ -25,7 +26,8 @@ import {
         PlatformButtonSizesExampleComponent,
         PlatformButtonTypesExampleComponent,
         PlatformButtonStateExampleComponent,
-        PlatformButtonHeaderComponent
+        PlatformButtonHeaderComponent,
+        PlatformButtonTruncateExampleComponent
 
     ],
     imports: [

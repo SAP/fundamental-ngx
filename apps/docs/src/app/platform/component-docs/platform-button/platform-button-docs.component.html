@@ -57,6 +57,20 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'Button-truncate'" [componentName]="'button'">
+    Button with long text truncated
+</fd-docs-section-title>
+<description>
+    When user specifices with width of the button then text will start truncating
+    to accomdate it self in the specified width as shown below
+</description>
+<component-example [name]="'ex5'">
+    <fdp-button-truncate-example></fdp-button-truncate-example>
+</component-example>
+<code-example [exampleFiles]="buttonHtmlTruncate"></code-example>
+
+<separator></separator>
+
 <description>The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles
     guidelines.
     <br />For example: <br />if <code>positive</code> is passed for <code>type</code>, the class
@@ -80,7 +94,7 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-button [type]="data.properties.fdType" [options]="data.properties.options" [compact]="data.properties.compact"
-        [glyph]="data.properties.icon">
+        width="data.properties.width" [glyph]="data.properties.icon">
         {{ data.properties.label }}
     </fdp-button>
 </playground>

@@ -8,7 +8,7 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     templateUrl: './platform-documentation.component.html'
 })
 export class PlatformDocumentationComponent implements OnInit {
-    @ViewChild('content', { static: true }) contentElRef: ElementRef;
+    @ViewChild('content', { static: false }) contentElRef: ElementRef;
 
     @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
@@ -62,7 +62,9 @@ export class PlatformDocumentationComponent implements OnInit {
     }
 
     skipNavClicked() {
-        this.contentElRef.nativeElement.focus();
+        if (this.contentElRef) {
+            this.contentElRef.nativeElement.focus();
+        }
     }
 
 
@@ -74,7 +76,9 @@ export class PlatformDocumentationComponent implements OnInit {
         if (this.smallScreen && !this.sideCollapsed) {
             this.sideCollapsed = true;
         }
-        this.contentElRef.nativeElement.scrollTop = 0;
+        if (this.contentElRef) {
+            this.contentElRef.nativeElement.scrollTop = 0;
+        }
         this.skipNavClicked();
     }
 

@@ -6,6 +6,6 @@
  */
 export const API_FILES = {
     button: [
-        'ButtonComponent'
+        'PlatformButtonComponent'
     ]
 };

@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, Output, EventEmitter, OnInit, HostBinding } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
 export type ButtonOptions = 'light' | 'emphasized' | '';
