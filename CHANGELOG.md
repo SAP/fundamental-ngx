@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.36"></a>
+# [0.12.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.35...v0.12.0-rc.36) (2019-10-14)
+
+
+### Features
+
+* **platform:** Code changes to convert action bar as a component ([5e26b37](https://github.com/SAP/fundamental-ngx/commit/5e26b37))
+
+
+
 <a name="0.12.0-rc.35"></a>
 # [0.12.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.34...v0.12.0-rc.35) (2019-10-13)
 
