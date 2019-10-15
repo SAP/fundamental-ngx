@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'fd-select-forms',
     templateUrl: './select-forms.component.html',
-    styles: ['.flex-form-set{display: flex;justify-content: space-between;}']
+    styleUrls: ['select-forms.component.scss']
 })
 export class SelectFormsComponent {
 

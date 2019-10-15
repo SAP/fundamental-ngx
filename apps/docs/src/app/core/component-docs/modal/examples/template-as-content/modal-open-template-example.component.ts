@@ -4,13 +4,13 @@ import { ModalService } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-modal-open-template-example',
     templateUrl: './modal-open-template-example.component.html',
-    styles: ['.action-button {margin-left: 12px;}']
+    styleUrls: ['modal-open-template-example.component.scss']
 })
 export class ModalOpenTemplateExampleComponent {
 
     confirmationReason: string;
 
-    constructor(private modalService: ModalService) {}
+    constructor(private modalService: ModalService) { }
 
     openModal(modal: TemplateRef<any>): void {
         const modalRef = this.modalService.open(modal);

@@ -6,6 +6,7 @@ import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as iconTsCode from '!raw-loader!./examples/icon-example.component.ts';
+import * as iconScssCode from '!raw-loader!./examples/icon-docs.component.scss';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -677,6 +678,7 @@ export class IconDocsComponent implements OnInit {
             fileName: 'icon-example',
             typescriptFileCode: iconTsCode,
             component: 'IconExampleComponent',
+            scssFileCode: iconScssCode
         }
     ];
 

@@ -39,7 +39,7 @@ export class SplitButtonDocsComponent implements OnInit {
             typescriptFileCode: splitButtonTscode,
             component: 'ButtonSplitTypesExampleComponent',
             scssFileCode: splitButtonScsscode,
-            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
+            addonExport: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -52,7 +52,7 @@ export class SplitButtonDocsComponent implements OnInit {
             typescriptFileCode: splitButtonTscode,
             component: 'ButtonSplitProgrammaticalExampleComponent',
             scssFileCode: splitButtonScsscode,
-            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
+            addonExport: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -65,7 +65,7 @@ export class SplitButtonDocsComponent implements OnInit {
             typescriptFileCode: splitButtonTscode,
             component: 'ButtonSplitTemplateExampleComponent',
             scssFileCode: splitButtonScsscode,
-            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
+            addonExport: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -78,7 +78,7 @@ export class SplitButtonDocsComponent implements OnInit {
             typescriptFileCode: splitButtonTscode,
             component: 'ButtonSplitOptionsExampleComponent',
             scssFileCode: splitButtonScsscode,
-            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
+            addonExport: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 
@@ -91,7 +91,7 @@ export class SplitButtonDocsComponent implements OnInit {
             typescriptFileCode: splitButtonTscode,
             component: 'ButtonSplitTypesIconsComponent',
             scssFileCode: splitButtonScsscode,
-            addonTs: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
+            addonExport: 'itemClicked() {alert("Item Clicked!");}   primaryButtonClicked() {alert("Primary Button Clicked!");}'
         }
     ];
 

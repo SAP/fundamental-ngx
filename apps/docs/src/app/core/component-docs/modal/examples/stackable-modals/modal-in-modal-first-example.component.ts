@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ModalInModalSecondComponent } from './modal-in-modal-second.component';
+import { ModalInModalSecondComponent } from './modal-in-modal-second-example.component';
 import { ModalRef, ModalService } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fd-modal-in-modal',
+    selector: 'fd-modal-in-modal-first',
     template: `
         <fd-modal-header>
             <h1 fd-modal-title>First Modal</h1>
@@ -17,9 +17,9 @@ import { ModalRef, ModalService } from '@fundamental-ngx/core';
         </fd-modal-footer>
 `
 })
-export class ModalInModalComponent {
+export class ModalInModalFirstComponent {
 
-    constructor(public modalService: ModalService, public modalRef: ModalRef)  {}
+    constructor(public modalService: ModalService, public modalRef: ModalRef) { }
 
     openModal() {
         this.modalService.open(ModalInModalSecondComponent, {

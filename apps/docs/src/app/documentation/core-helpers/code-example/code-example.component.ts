@@ -48,6 +48,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
     isOpen: boolean = false;
     parameters = {
+        addonAppModule: '',
         html_tag: '',
         app_module: '',
         app_module_file: '',
@@ -142,6 +143,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
             if (example.fileName && example.component) {
                 this.parameters.html_tag = 'fd-' + example.fileName;
+                this.parameters.addonAppModule = example.appModuleAddon;
                 this.parameters.app_module = 'AppModule';
                 this.parameters.app_module_file = 'app.module';
                 this.parameters.app_component = example.component;
@@ -150,23 +152,13 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 this.parameters.app_component_ts = example.fileName + '.component.ts';
                 this.parameters.app_component_html_path = 'src/app/' + example.fileName + '.component.html';
                 this.parameters.app_component_ts_path = 'src/app/' + example.fileName + '.component.ts';
+                console.log('rfrfr' + this.parameters.app_component);
+
             }
 
-            // if (example.fileName && example.component) {
-            //     export const parameters = {
-            //         html_tag: 'fd-' + example.fileName,
-            //         app_module: 'AppModule',
-            //         app_module_file: 'app.module',
-            //         app_component: 'example.component',
-            //         app_component_basis: example.fileName + '.component',
-            //         app_component_html: example.fileName + '.component.html',
-            //         app_component_ts: example.fileName + '.component.ts',
-            //         app_component_html_path: 'src/app/' + example.fileName + '.component.html',
-            //         app_component_ts_path: 'src/app/' + example.fileName + '.component.ts'
-            //     };
 
-            // }
             if (example.language === 'html') {
+                console.log('sec' + this.parameters.app_component);
                 const _pathHTML = `src/app/${example.fileName}.component.html`;
                 this.project.files[_pathHTML] = example.code.default;
                 const _pathSCSS = `src/app/${example.fileName}.component.scss`;
@@ -188,7 +180,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                         styleUrls: ['${example.fileName}.component.scss']
                     })
                     export class ${example.component} {
-                        ${example.addonTs}
+                        ${example.addonExport}
                     }`;
                 }
                 else if (example.typescriptFileCode) {
@@ -196,33 +188,25 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     this.project.files[_pathTS] = example.typescriptFileCode.default;
                 }
             }
-            if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined)) {
+            if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined && example.module === undefined)) {
                 const _pathTS = `src/app/${example.fileName}.component.ts`;
                 this.project.files[_pathTS] = example.code.default;
             }
-            else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined)) {
+            else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined && example.module === undefined)) {
                 const _pathTS2 = `src/app/${example.secondFile}.component.ts`;
                 this.project.files[_pathTS2] = example.code.default;
-            }
-            else if (example.language === 'typescript' && example.thirdFile !== undefined) {
-                this.project.files[example.thirdFile] = example.code.default;
-            }
-            if (example.tagname) {
-                this.parameters.html_tag = example.tagname;
-                this.parameters.app_component = example.component;
-            }
 
+            }
+            else if (example.language === 'typescript' && (example.thirdFile !== undefined && example.secondFile === undefined && example.module === undefined)) {
+                const _pathTS2 = `src/app/${example.thirdFile}.component.ts`;
+                this.project.files[_pathTS2] = example.code.default;
 
+            }
+            else if (example.language === 'typescript' && example.secondFile === undefined && example.thirdFile === undefined && example.module !== undefined) {
+                this.project.files['src/app/app.module.ts'] = example.code.default;
 
+            }
         });
-
-
-        this.project.files['src/index.html'] = `
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css"></link>
-            <${this.parameters.html_tag}></${this.parameters.html_tag}>
-        `;
-        // TODO make non inline
-
 
         this.project.files['src/app/app.module.ts'] = `
         import { BrowserModule } from '@angular/platform-browser';
@@ -235,12 +219,13 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         import { MatTableModule } from '@angular/material';
         import {CdkTableModule } from '@angular/cdk/table';
         import { DragDropModule } from '@angular/cdk/drag-drop';  
+        import {RouterModule, Routes} from '@angular/router'
         import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
-        
+
 
         @NgModule({
           declarations: [
-            ${this.parameters.app_component}
+            ${this.parameters.app_component},
           ],
           imports: [
             BrowserModule,
@@ -248,6 +233,8 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             HttpClientModule,
             MatTableModule,
             DragDropModule,
+            RouterModule.forRoot([{path: '#', component:${this.parameters.app_component}}], 
+            { useHash: true }),
             CdkTableModule,
             HttpModule,
             ReactiveFormsModule,
@@ -258,6 +245,19 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
           bootstrap: [${this.parameters.app_component}]
         })
         export class ${this.parameters.app_module} { }
+        `;
+        // TODO make non inline
+
+        // if (example.tagname) {
+        //     this.parameters.html_tag = example.tagname;
+        //     this.parameters.app_component = example.component;
+        // }
+
+
+
+        this.project.files['src/index.html'] = `
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css"></link>
+            <${this.parameters.html_tag}></${this.parameters.html_tag}>
         `;
         // TODO make non inline
 

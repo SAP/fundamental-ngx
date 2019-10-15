@@ -184,7 +184,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(fdDate: FdDate): boolean {
+    disableFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -193,7 +193,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeStartFunction = function(fdDate: FdDate): boolean {
+    disableRangeStartFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -202,7 +202,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    disableRangeEndFunction = function(fdDate: FdDate): boolean {
+    disableRangeEndFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -211,7 +211,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
+    blockRangeStartFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -220,7 +220,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
+    blockRangeEndFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -229,7 +229,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @param fdDate FdDate
      */
     @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
+    blockFunction = function (fdDate: FdDate): boolean {
         return false;
     };
 
@@ -317,8 +317,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     constructor(private elRef: ElementRef,
-                private changeDetRef: ChangeDetectorRef,
-                public dateTimeAdapter: DateTimeFormatParser
+        private changeDetRef: ChangeDetectorRef,
+        public dateTimeAdapter: DateTimeFormatParser
     ) {
     }
 

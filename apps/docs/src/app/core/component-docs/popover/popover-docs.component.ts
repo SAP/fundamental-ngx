@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
+import * as popoverSrcScss from '!raw-loader!./examples/popover-simple/popover-example.component.scss';
 import * as popoverSrcTs from '!raw-loader!./examples/popover-simple/popover-example.component.ts';
 import * as popoverProgrammaticHtmlSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.html';
+import * as popoverProgrammaticScssSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.scss';
 import * as popoverProgrammaticTsSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.ts';
 import * as popoverPlacementHtmlSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.html';
 import * as popoverPlacementTsSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.ts';
+import * as popoverPlacementScssSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.scss';
 import * as popoverModalHtmlSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.html';
 import * as popoverModalTsSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.ts';
 import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.html';
@@ -29,7 +32,7 @@ export class PopoverDocsComponent implements OnInit {
             secondFile: 'popover-examples',
             typescriptFileCode: popoverSrcTs,
             component: 'PopoverExampleComponent',
-            scss: '`.fd-docs-flex-display-helper {display: flex;align-items: center;justify-content: space-around;}`'
+            scssFileCode: popoverSrcScss
         }
     ];
 
@@ -38,6 +41,7 @@ export class PopoverDocsComponent implements OnInit {
             language: 'html',
             code: popoverProgrammaticHtmlSrc,
             fileName: 'popover-programmatic-open-example',
+            scssFileCode: popoverProgrammaticScssSrc
         },
         {
             language: 'typescript',
@@ -52,6 +56,7 @@ export class PopoverDocsComponent implements OnInit {
             language: 'html',
             code: popoverPlacementHtmlSrc,
             fileName: 'popover-placement-example',
+            scssFileCode: popoverPlacementScssSrc
         },
         {
             language: 'typescript',

@@ -131,9 +131,10 @@ import { ModalOpenTemplateExampleComponent } from '../core/component-docs/modal/
 import { ModalContentComponent } from '../core/component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from '../core/component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
 import {
-    PanelEdgeBleedExampleComponent,
     PanelExampleComponent
 } from '../core/component-docs/panel/examples/panel-examples.component';
+import { PanelEdgeBleedExampleComponent } from '../core/component-docs/panel/examples/panel-edge-bleed-example.component'
+
 import { PaginationExampleComponent } from '../core/component-docs/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from '../core/component-docs/popover/examples/popover-simple/popover-example.component';
 import { PopoverModalExampleComponent } from '../core/component-docs/popover/examples/popover-modal/popover-modal-example.component';
@@ -186,9 +187,9 @@ import { ToggleFormsExampleComponent } from '../core/component-docs/toggle/examp
 import { ListInfiniteScrollExampleComponent } from '../core/component-docs/list/examples/list-infinite-scroll-example.component';
 import { ListCheckboxFormExampleComponent } from '../core/component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
-import { ModalInModalComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal.component';
-import { ModalInModalSecondComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-second.component';
-import { ModalInModalExampleComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-example.component';
+import { ModalInModalComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-stacked-example.component';
+import { ModalInModalSecondComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-second-example.component';
+import { ModalInModalFirstComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-first-example.component';
 import { ModalFullscreenExampleComponent } from '../core/component-docs/modal/examples/fullscreen-modal/modal-fullscreen-example.component';
 import { InfiniteScrollDocsComponent } from '../core/component-docs/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from '../core/component-docs/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
@@ -552,7 +553,7 @@ import { NotificationContentComponent } from './component-docs/notification/exam
         ModalComponentAsContentExampleComponent,
         ModalInModalComponent,
         ModalInModalSecondComponent,
-        ModalInModalExampleComponent,
+        ModalInModalFirstComponent,
         MultiInputDocsComponent,
         MultiInputExampleComponent,
         ModalFullscreenExampleComponent,

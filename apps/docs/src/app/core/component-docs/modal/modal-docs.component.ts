@@ -1,16 +1,20 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as templateTs from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.ts';
+import * as templateScss from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.scss';
 import * as templateHtml from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.html';
 import * as componentAsContentSrc from '!raw-loader!./examples/component-as-content/modal-component-as-content-example.component.ts';
+import * as componentAsContentModule from '!raw-loader!./examples/component-as-content/modal-component-as-content-example.module.ts';
 import * as contentSrc from '!raw-loader!./examples/component-as-content/modal-content.component.ts';
-import * as modalInModalExample from '!raw-loader!./examples/stackable-modals/modal-in-modal-example.component.ts';
-import * as modalInModalComponent from '!raw-loader!./examples/stackable-modals/modal-in-modal.component.ts';
-import * as modalInModalSecondComponent from '!raw-loader!./examples/stackable-modals/modal-in-modal-second.component.ts';
+import * as modalInModalFirstTs from '!raw-loader!./examples/stackable-modals/modal-in-modal-first-example.component.ts';
+import * as modalInModalComponent from '!raw-loader!./examples/stackable-modals/modal-in-modal-stacked-example.component.ts';
+import * as modalInModalModule from '!raw-loader!./examples/stackable-modals/modal-in-modal-example.module.ts';
+import * as modalInModalSecondComponent from '!raw-loader!./examples/stackable-modals/modal-in-modal-second-example.component.ts';
 import * as fsModalSource from '!raw-loader!./examples/fullscreen-modal/modal-fullscreen-example.component.html';
 import * as fsModalSourceT from '!raw-loader!./examples/fullscreen-modal/modal-fullscreen-example.component.ts';
 import * as backdropT from '!raw-loader!./examples/backdrop-examples/backdrop-examples.component.ts';
 import * as backdropH from '!raw-loader!./examples/backdrop-examples/backdrop-examples.component.html';
+import * as backdropS from '!raw-loader!./examples/backdrop-examples/backdrop-examples.component.scss';
 import * as positionH from '!raw-loader!./examples/modal-position/modal-position-example.component.html';
 import * as positionT from '!raw-loader!./examples/modal-position/modal-position-example.component.ts';
 import * as containerH from '!raw-loader!./examples/container/container.component.html';
@@ -73,7 +77,8 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: templateHtml,
-            fileName: 'modal-open-template-example'
+            fileName: 'modal-open-template-example',
+            scssFileCode: templateScss
         },
         {
             language: 'typescript',
@@ -84,39 +89,58 @@ export class ModalDocsComponent implements OnInit {
     ];
 
     componentAsContentSource: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: componentAsContentSrc,
-            fileName: 'modal-component-as-content-example',
-            component: 'ModalComponentAsContentExampleComponent'
-        },
+
         {
             language: 'typescript',
             code: contentSrc,
             name: 'Modal Content',
             secondFile: 'modal-content',
             fileName: 'modal-content',
-            component: 'ModalContentComponent'
-        }
+            component: 'ModalContentComponent',
+        },
+        {
+            language: 'typescript',
+            code: componentAsContentSrc,
+            fileName: 'modal-component-as-content-example',
+            component: 'ModalComponentAsContentExampleComponent',
+        },
+        {
+            language: 'typescript',
+            code: componentAsContentModule,
+            name: 'Module',
+            module: 'app.module.ts',
+        },
     ];
 
     modalInModalExample: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: modalInModalExample,
-            fileName: ''
-        },
-        {
-            language: 'typescript',
-            code: modalInModalComponent,
-            name: 'First Modal',
-            fileName: ''
-        },
+
         {
             language: 'typescript',
             code: modalInModalSecondComponent,
             name: 'Second Modal',
-            fileName: ''
+            thirdFile: 'modal-in-modal-second-example',
+            fileName: 'modal-in-modal-second-example',
+            component: 'ModalInModalSecondComponent'
+        },
+        {
+            language: 'typescript',
+            code: modalInModalFirstTs,
+            name: 'First Modal',
+            secondFile: 'modal-in-modal-first-example',
+            fileName: 'modal-in-modal-first-example',
+            component: 'ModalInModalFirstComponent'
+        },
+        {
+            language: 'typescript',
+            code: modalInModalComponent,
+            fileName: 'modal-in-modal-stacked-example',
+            component: 'ModalInModalComponent'
+        },
+        {
+            language: 'typescript',
+            code: modalInModalModule,
+            name: 'Module',
+            module: 'app.module.ts',
         }
     ];
 
@@ -124,7 +148,7 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: fsModalSource,
-            fileName: 'modal-fullscreen-example'
+            fileName: 'modal-fullscreen-example',
         },
         {
             language: 'typescript',
@@ -138,13 +162,14 @@ export class ModalDocsComponent implements OnInit {
         {
             language: 'html',
             code: backdropH,
-            fileName: 'modal-fullscreen-example'
+            fileName: 'backdrop-examples',
+            scssFileCode: backdropS
         },
         {
             language: 'typescript',
             code: backdropT,
-            fileName: 'modal-fullscreen-example',
-            component: 'ModalFullscreenExampleComponent'
+            fileName: 'backdrop-examples',
+            component: 'BackdropExamplesComponent'
         }
     ];
 

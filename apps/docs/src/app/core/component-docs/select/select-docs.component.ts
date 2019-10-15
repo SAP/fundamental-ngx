@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 
 import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
 import * as selectBasicTsSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.ts';
+import * as selectBasicScssSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.scss';
 
 import * as selectProgSrcH from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
 import * as selectProgSrcS from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
@@ -9,6 +10,7 @@ import * as selectProgSrcT from '!raw-loader!./examples/select-programmatic-exam
 
 import * as selectNestedSrcH from '!raw-loader!./examples/select-nested-options/select-nested-options.component.html';
 import * as selectNestedSrcHTs from '!raw-loader!./examples/select-nested-options/select-nested-options.component.ts';
+import * as selectNestedSrcScss from '!raw-loader!./examples/select-nested-options/select-nested-options.component.scss';
 
 import * as customTriggerSrcH from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.html';
 import * as customTriggerSrcHTs from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.ts';
@@ -41,8 +43,7 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: selectBasicSrc,
             fileName: 'select-basic-example',
-            secondFile: 'select-basic-example',
-            scss: '".fd-select-example {margin-top: 16px;}"',
+            scssFileCode: selectBasicScssSrc,
             typescriptFileCode: selectBasicTsSrc,
             component: 'SelectBasicExampleComponent'
         }
@@ -69,10 +70,9 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: selectNestedSrcH,
             fileName: 'select-nested-options',
-            secondFile: 'select-nested-trigger',
             typescriptFileCode: selectNestedSrcHTs,
-            scss: '".fd-menu__title {background-color: #e7e7e7;}"',
-            component: 'SelectNestedOptionsComponent'
+            component: 'SelectNestedOptionsComponent',
+            scssFileCode: selectNestedSrcScss
         }
     ];
 

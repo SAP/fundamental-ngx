@@ -6,6 +6,7 @@ import * as menuPositionSrc from '!raw-loader!./examples/mega-menu-position-exam
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as megaMenuTsCode from '!raw-loader!./examples/mega-menu-examples.component.ts';
+import * as menuPositionSrcScss from '!raw-loader!./examples/mega-menu-position-example.component.scss';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -43,7 +44,7 @@ export class MegaMenuDocsComponent implements OnInit {
             secondFile: 'mega-menu-examples',
             typescriptFileCode: megaMenuTsCode,
             component: 'MegaMenuPositionExampleComponent',
-            scss: '".mega-menu-right-position {display: flex; justify-content: flex-end;}"'
+            scssFileCode: menuPositionSrcScss
         }
     ];
 

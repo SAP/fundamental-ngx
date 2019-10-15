@@ -116,7 +116,7 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: dateTimePickerAllowNullTs,
-            fileName: 'datetime-allow-null-example',
+            fileName: 'date-time-picker-allow-null-example',
             component: 'DatetimePickerAllowNullExampleComponent'
         },
     ];
