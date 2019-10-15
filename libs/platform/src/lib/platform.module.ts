@@ -15,4 +15,5 @@ import { ActionBarModule } from './components/action-bar/action-bar.module';
         PlatformSearchInputModule,
         ActionBarModule
     ]
-export class FundamentalNgxPlatformModule {}
+})
+export class FundamentalNgxPlatformModule { }
