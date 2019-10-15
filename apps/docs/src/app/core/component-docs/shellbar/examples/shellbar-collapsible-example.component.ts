@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem } from '../../../../../../library/src/lib/shellbar/model/shellbar-menu-item';
-import { ShellbarProduct } from '../../../../../../library/src/lib/shellbar/model/shellbar-product';
-import { ShellbarUser } from '../../../../../../library/src/lib/shellbar/model/shellbar-user';
+import { ShellbarMenuItem, ShellbarProduct, ShellbarUser } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
@@ -22,7 +20,7 @@ export class ShellbarCollapsibleExampleComponent {
 
     user: ShellbarUser = {
         initials: 'WW',
-        image: './assets/headshot-male.jpg'
+        colorAccent: 1
     };
 
     userMenu: ShellbarMenuItem[] = [

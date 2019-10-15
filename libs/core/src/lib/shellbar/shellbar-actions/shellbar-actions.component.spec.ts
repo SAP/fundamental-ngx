@@ -7,6 +7,7 @@ import { PopoverModule } from '../../popover/popover.module';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { ShellbarProductSwitcherComponent } from '../shellbar-product-switcher/shellbar-product-switcher.component';
 import { ButtonModule } from '../../button/button.module';
+import { IdentifierModule } from '../../identifier/identifier.module';
 
 describe('ShellbarActionsComponent', () => {
     let component: ShellbarActionsComponent;
@@ -18,7 +19,7 @@ describe('ShellbarActionsComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ ShellbarActionsComponent, ShellbarUserMenuComponent, ShellbarProductSwitcherComponent ],
-            imports: [ MenuModule, PopoverModule, ButtonModule ],
+            imports: [ MenuModule, PopoverModule, ButtonModule, IdentifierModule ],
             providers: [{ provide: 'window', useFactory: (() => windowMock ) }]
         }).compileComponents();
     }));

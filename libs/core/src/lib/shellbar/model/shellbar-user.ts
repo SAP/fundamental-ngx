@@ -13,5 +13,5 @@ export interface ShellbarUser {
      * Color Accent of user (optional), for more information about colors accent,
      * please visit: https://sap.github.io/fundamental/components/identifier.html
      */
-    colorAccent?: string
+    colorAccent?: number
 }

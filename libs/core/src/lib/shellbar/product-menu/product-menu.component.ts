@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { PopoverComponent } from '../../popover/popover.component';
+import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 
 /**
  * The component that represents a product menu.

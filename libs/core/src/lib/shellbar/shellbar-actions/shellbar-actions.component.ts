@@ -7,15 +7,12 @@ import {
     AfterContentChecked,
     QueryList,
     ViewEncapsulation,
-    ContentChild, ViewChildren, ViewChild
+    ContentChild, ViewChild
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { SearchInputComponent } from '../../search-input/search-input.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { ShellbarProduct } from '../model/shellbar-product';
 import { ShellbarUser } from '../model/shellbar-user';
-import { ComboboxComponent } from '../../combobox/combobox.component';
-import { PopoverComponent } from '../../popover/popover.component';
 import { ShellbarProductSwitcherComponent } from '../shellbar-product-switcher/shellbar-product-switcher.component';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { ComboboxComponent } from '../../combobox/combobox.component';
@@ -110,7 +107,15 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /**
      * @hidden
      */
-    itemClicked(item: any, event: any): void {
+    productClicked(item: ShellbarProduct, event: any): void {
+        this.triggerItems();
+        item.callback(event);
+    }
+
+    /**
+     * @hidden
+     */
+    actionClicked(item: ShellbarActionComponent, event: any): void {
         this.triggerItems();
         item.callback(event);
     }
@@ -155,7 +160,7 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
         this.showCollapsedProducts = !this.showCollapsedProducts;
     }
 
-    public get productSwitcherItems(): any[] {
+    public get productSwitcherItems(): ShellbarProduct[] {
         if (this.productSwitcherComponent && this.productSwitcherComponent.productSwitcher) {
             return this.productSwitcherComponent.productSwitcher;
         } else {
@@ -163,7 +168,7 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
         }
     }
 
-    public get userItem(): any {
+    public get userItem(): ShellbarUser {
         if (this.userComponent) {
             return this.userComponent.user;
         } else {

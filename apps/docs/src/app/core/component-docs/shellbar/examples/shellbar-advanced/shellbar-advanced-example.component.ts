@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShellbarMenuItem, ShellbarProduct, ShellbarUser } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-advanced-example',
@@ -6,23 +7,23 @@ import { Component } from '@angular/core';
 })
 export class ShellbarAdvancedExampleComponent {
 
-    searchTerm: string = '';
+    searchTerm: string;
 
     productMenuControl = 'Corporate Portal';
 
-    productMenuItems = [
-        {name: 'Application A', callback: () => {alert('Application A Clicked')}},
-        {name: 'Application B', callback: () => {alert('Application B Clicked')}},
-        {name: 'Application C', callback: () => {alert('Application C Clicked')}},
-        {name: 'Application D', callback: () => {alert('Application D Clicked')}}
+    productMenuItems: ShellbarMenuItem[] = [
+        {text: 'Application A', callback: () => {alert('Application A Clicked')}},
+        {text: 'Application B', callback: () => {alert('Application B Clicked')}},
+        {text: 'Application C', callback: () => {alert('Application C Clicked')}},
+        {text: 'Application D', callback: () => {alert('Application D Clicked')}}
     ];
 
-    user = {
+    user: ShellbarUser = {
         initials: 'WW',
-        image: './assets/headshot-male.jpg'
+        colorAccent: 1
     };
 
-    userMenu = [
+    userMenu: ShellbarMenuItem[] = [
         {text: 'Settings', callback: this.settingsCallback},
         {text: 'Sign Out', callback: this.signOutCallback}
     ];
@@ -38,10 +39,10 @@ export class ShellbarAdvancedExampleComponent {
         'Apple',
         'Banana',
         'Kiwi',
-        'Strawberry'
+        'Strawberry',
     ];
 
-    productSwitcher = [
+    productSwitcher: ShellbarProduct[] = [
         {title: 'Fiori Home', image: './assets/01.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
         {title: 'S/4 HANA Cloud', image: './assets/02.png',
@@ -92,5 +93,4 @@ export class ShellbarAdvancedExampleComponent {
         console.log($event);
         alert(product + ' Product Clicked');
     }
-
 }
