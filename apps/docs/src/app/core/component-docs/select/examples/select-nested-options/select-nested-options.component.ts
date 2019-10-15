@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'fd-select-nested-options',
   templateUrl: './select-nested-options.component.html',
-  styles: ['.fd-menu__title {background-color: #e7e7e7;}']
+  styleUrls: ['select-nested-options.component.scss']
 })
 export class SelectNestedOptionsComponent {
 

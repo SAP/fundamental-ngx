@@ -6,6 +6,7 @@ import * as formStateHtml from '!raw-loader!./examples/input-state-example.compo
 import * as inputTsCode from '!raw-loader!./examples/input-examples.component.ts';
 import * as formGroupInputHtml from '!raw-loader!./examples/input-form-group-example.component.html';
 import * as formGroupInputTs from '!raw-loader!./examples/input-form-group-example.component.ts';
+import * as formGroupInputScss from '!raw-loader!./examples/input-form-group-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -51,7 +52,8 @@ export class InputDocsComponent implements OnInit {
         {
             language: 'html',
             code: formGroupInputHtml,
-            fileName: 'input-form-group-example'
+            fileName: 'input-form-group-example',
+            scssFileCode: formGroupInputScss
         },
         {
             language: 'typescript',

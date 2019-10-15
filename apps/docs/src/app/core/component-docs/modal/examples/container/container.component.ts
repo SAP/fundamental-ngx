@@ -4,7 +4,7 @@ import { ModalService } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-container',
     templateUrl: './container.component.html',
-    styles: ['.modal-container-div {position: relative;width: 100%;height: 400px;}']
+    styleUrls: ['container.component.scss']
 })
 export class ContainerComponent {
 

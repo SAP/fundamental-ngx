@@ -12,6 +12,7 @@ import * as comboboxTemplateH from '!raw-loader!./examples/combobox-template-exa
 import * as comboboxTemplateT from '!raw-loader!./examples/combobox-template-example.component.ts';
 import * as comboboxDisabledTemplateH from '!raw-loader!./examples/combobox-disabled-example.component.html';
 import * as comboboxDisabledTemplateT from '!raw-loader!./examples/combobox-disabled-example.component.ts';
+import * as comboboxDisabledTemplateScss from '!raw-loader!./examples/combobox-disabled-example.component.scss';
 import * as comboboxFormT from '!raw-loader!./examples/combobox-forms-example.component.ts';
 import * as comboboxFormH from '!raw-loader!./examples/combobox-forms-example.component.html';
 import * as comboboxHeightHtml from '!raw-loader!./examples/combobox-height-example.component.html';
@@ -101,7 +102,8 @@ export class ComboboxDocsComponent implements OnInit {
         {
             language: 'html',
             code: comboboxDisabledTemplateH,
-            fileName: 'combobox-disabled-example'
+            fileName: 'combobox-disabled-example',
+            scssFileCode: comboboxDisabledTemplateScss
         },
         {
             language: 'typescript',

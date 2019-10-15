@@ -3,31 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-icon-example',
     templateUrl: './icon-example.component.html',
-    styles: [`.grid {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    
-    .grid > * {
-        width: calc(100% / 6);
-        margin-bottom: 1rem;
-    }
-    
-    .grid * {
-        text-align: center;
-        display: block;
-    }
-    
-    .grid fd-icon {
-        margin-bottom: 0.25rem;
-    }
-    
-    @media (max-width: 36rem) {
-        .grid > * {
-            width: calc(100% / 4);
-        }
-    }
-    `]
+    styleUrls: ['icon-docs.component.scss']
 })
 export class IconExampleComponent {
 

@@ -12,6 +12,7 @@ import * as inputGroupTscode from '!raw-loader!./examples/input-group-examples.c
 import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
 import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
+import * as formInputScssSrc from '!raw-loader!./examples/input-group-form-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -772,6 +773,7 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: formInputHtmlSrc,
             fileName: 'input-group-form-example',
+            scssFileCode: formInputScssSrc
         },
         {
             language: 'typescript',
@@ -784,7 +786,11 @@ export class InputGroupDocsComponent implements OnInit {
     complexInput: ExampleFile[] = [
         {
             language: 'html',
-            code: complexInputHtml
+            code: complexInputHtml,
+            fileName: 'input-group-number-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupComplexExampleComponent'
         }
     ];
 

@@ -122,8 +122,8 @@ export class TabsDocsComponent implements OnInit {
             language: 'html',
             component: 'TabsNavigationModeExampleComponent',
             code: navigationTab,
-            fileName: 'tabs-navigation-mode-example.component',
-            secondFile: 'tabs-navigation-mode-example.component',
+            fileName: 'tabs-navigation-mode-example',
+            secondFile: 'tabs-navigation-mode-example',
             typescriptFileCode: navigationTabTsCode
         }
     ];

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-
+import * as buttonScss from '!raw-loader!./examples/button-examples.component.scss';
 import * as buttonOptionsExample from '!raw-loader!./examples/button-options-example.component.html';
 import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
 import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
@@ -689,7 +689,7 @@ export class ButtonDocsComponent implements OnInit {
             secondFile: 'button-examples',
             component: 'ButtonOptionsExampleComponent',
             typescriptFileCode: buttonExampleTsCode,
-            scss: '`.fd-button {margin-right: 12px;}`'
+            scssFileCode: buttonScss
         }
     ];
 
@@ -701,7 +701,7 @@ export class ButtonDocsComponent implements OnInit {
             secondFile: 'button-examples',
             component: 'ButtonTypesExampleComponent',
             typescriptFileCode: buttonExampleTsCode,
-            scss: '`.fd-button {margin-right: 12px;}`'
+            scssFileCode: buttonScss
         }
     ];
 
@@ -713,7 +713,7 @@ export class ButtonDocsComponent implements OnInit {
             secondFile: 'button-examples',
             component: 'ButtonSizesExampleComponent',
             typescriptFileCode: buttonExampleTsCode,
-            scss: '`.fd-button {margin-right: 12px;}`'
+            scssFileCode: buttonScss
         }
     ];
 
@@ -725,7 +725,7 @@ export class ButtonDocsComponent implements OnInit {
             secondFile: 'button-examples',
             component: 'ButtonIconsExampleComponent',
             typescriptFileCode: buttonExampleTsCode,
-            scss: '`.fd-button {margin-right: 12px;}`'
+            scssFileCode: buttonScss
         }
     ];
 
@@ -737,7 +737,7 @@ export class ButtonDocsComponent implements OnInit {
             secondFile: 'button-examples',
             component: 'ButtonStateExampleComponent',
             typescriptFileCode: buttonExampleTsCode,
-            scss: '`.fd-button {margin-right: 12px;}`'
+            scssFileCode: buttonScss
         }
     ];
 

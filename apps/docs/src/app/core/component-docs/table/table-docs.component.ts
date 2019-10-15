@@ -8,8 +8,10 @@ import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
 import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.ts';
+import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.component.scss';
 import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-example.component.html';
 import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
+import * as tableResponsiveScss from '!raw-loader!./examples/table-responsive-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -17,13 +19,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-table',
     templateUrl: './table-docs.component.html',
-    styles: [
-        `
-            ::ng-deep app-table .fd-tile {
-                display: block;
-            }
-        `
-    ]
+    styleUrls: ['table-docs.component.scss']
+
 })
 export class TableDocsComponent implements OnInit {
     static schema: Schema = {
@@ -79,7 +76,8 @@ export class TableDocsComponent implements OnInit {
         {
             language: 'html',
             code: tableCdkHtml,
-            fileName: 'table-cdk-example'
+            fileName: 'table-cdk-example',
+            scssFileCode: tableCdkScss
         },
         {
             language: 'typescript',
@@ -93,7 +91,8 @@ export class TableDocsComponent implements OnInit {
         {
             language: 'html',
             code: tableResponsiveHtml,
-            fileName: 'table-responsive-example'
+            fileName: 'table-responsive-example',
+            scssFileCode: tableResponsiveScss
         },
         {
             language: 'typescript',

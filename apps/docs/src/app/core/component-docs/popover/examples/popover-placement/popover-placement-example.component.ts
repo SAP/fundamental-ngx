@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-popover-placement-example',
     templateUrl: './popover-placement-example.component.html',
-    styles: ['./@import "../../../../../../../../../node_modules/fundamental-styles/dist/layout.css";'],
+    styleUrls: ['popover-placement-example.component.scss']
 })
 export class PopoverPlacementExampleComponent {
 

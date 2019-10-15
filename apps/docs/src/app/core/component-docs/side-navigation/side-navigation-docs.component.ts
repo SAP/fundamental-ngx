@@ -4,7 +4,9 @@ import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-examp
 import * as sideNavigationTscode from '!raw-loader!./examples/side-navigation-examples.component.ts';
 import * as sideNavigationScsscode from '!raw-loader!./examples/side-navigation-examples.component.scss';
 import * as sideNavigationCollapsedSrc from '!raw-loader!./examples/side-navigation-collapsed-example.component.html';
+import * as sideNavigationCollapsedSrcScss from '!raw-loader!./examples/side-navigation-collapsed-example.component.scss';
 import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
+import * as sideNavigationIconsSrcScss from '!raw-loader!./examples/side-navigation-icons-example.component.scss';
 import * as sideNavigationLevelsSrc from '!raw-loader!./examples/side-navigation-levels-example.component.html';
 import * as sideNavigationTitlesSrc from '!raw-loader!./examples/side-navigation-titles-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -60,8 +62,7 @@ export class SideNavigationDocsComponent implements OnInit {
             secondFile: 'side-navigation-examples',
             typescriptFileCode: sideNavigationTscode,
             component: 'SideNavigationIconsExampleComponent',
-            scssFileCode: sideNavigationScsscode,
-            scss: '`fd-icon {padding-right: 10px;}`'
+            scssFileCode: sideNavigationIconsSrcScss
         }
     ];
 
@@ -73,8 +74,8 @@ export class SideNavigationDocsComponent implements OnInit {
             secondFile: 'side-navigation-examples',
             typescriptFileCode: sideNavigationTscode,
             component: 'SideNavigationCollapsedExampleComponent',
-            scssFileCode: sideNavigationScsscode,
-            scss: '`.fd-side-nav--icons {max-width: 65px;}`'
+            scssFileCode: sideNavigationCollapsedSrcScss
+
         }
     ];
 

@@ -3,13 +3,17 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as alertExampleHtml from '!raw-loader!./examples/alert-example.component.html';
 import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.ts';
+import * as alertExampleScs from '!raw-loader!./examples/alert-example.component.scss';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
 import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
+import * as alertComponentAsContentExampleScss from '!raw-loader!./examples/alert-component-as-content-example.component.scss';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
 import * as alertInlineExampleTs from '!raw-loader!./examples/alert-inline-example.component.ts';
+import * as alertInlineExampleScs from '!raw-loader!./examples/alert-inline-example.component.scss';
 import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-example.component.html';
 import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example.component.ts';
+import * as alertWidthExampleScss from '!raw-loader!./examples/alert-width-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { ActivatedRoute } from '@angular/router';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -71,10 +75,10 @@ export class AlertDocsComponent implements OnInit {
     alertBasicExample: ExampleFile[] = [
         {
             language: 'html',
+            scssFileCode: alertExampleScs,
             component: 'AlertExampleComponent',
             fileName: 'alert-example',
             code: alertExampleHtml,
-            secondFile: 'alert-example',
             typescriptFileCode: alertExampleTs,
         },
 
@@ -85,8 +89,8 @@ export class AlertDocsComponent implements OnInit {
             language: 'html',
             component: 'AlertComponentAsContentExampleComponent',
             fileName: 'alert-component-as-content-example',
-            code: alertComponentAsContentExampleH
-
+            code: alertComponentAsContentExampleH,
+            scssFileCode: alertComponentAsContentExampleScss
         },
         {
             language: 'typescript',
@@ -106,9 +110,9 @@ export class AlertDocsComponent implements OnInit {
         {
             language: 'html',
             component: 'AlertInlineExampleComponent',
+            scssFileCode: alertInlineExampleScs,
             fileName: 'alert-inline-example',
             code: alertInlineExampleHtml,
-            secondFile: 'alert-inline-example',
             typescriptFileCode: alertInlineExampleTs
         }
     ];
@@ -119,8 +123,8 @@ export class AlertDocsComponent implements OnInit {
             component: 'AlertWidthExampleComponent',
             code: alertWidthExampleHtml,
             fileName: 'alert-width-example',
-            secondFile: 'alert-width-example',
-            typescriptFileCode: alertWidthExampleTs
+            typescriptFileCode: alertWidthExampleTs,
+            scssFileCode: alertWidthExampleScss
         }
     ];
 

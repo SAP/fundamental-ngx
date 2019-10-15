@@ -7,6 +7,7 @@ import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.c
 import * as calendarIntlMomentSrc from '!raw-loader!./examples/calendar--i18n-moment-example.component.ts';
 import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-example.component.ts';
 import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-example.component.html';
+import * as calendarFormSourceScss from '!raw-loader!./examples/calendar-form-example.component.scss';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -122,7 +123,8 @@ myDisableFunction = function(d: FdDate): boolean {
             fileName: 'calendar-form-example',
             code: calendarFormSourceH,
             component: 'CalendarFormExamplesComponent',
-            typescriptFileCode: calendarFormSourceT
+            typescriptFileCode: calendarFormSourceT,
+            scssFileCode: calendarFormSourceScss
         }
     ];
 
