@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { ComboboxComponent, ComboboxItem } from '@fundamental-ngx/core';
 
 export interface SearchInput {
@@ -22,9 +22,10 @@ export type SearchInputSize = 'small' | 'medium';
 @Component({
     selector: 'fdp-search-input',
     templateUrl: './search-input.component.html',
-    styleUrls: ['./search-input.component.scss']
+    styleUrls: ['./search-input.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlatformSearchInputComponent implements OnInit, OnChanges, AfterViewInit {
+export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     /**
      * Place holder text for search input field.
      */

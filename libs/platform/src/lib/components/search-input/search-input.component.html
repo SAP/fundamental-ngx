@@ -8,8 +8,8 @@
         <fd-popover-body>
             <fd-menu>
                 <ul fd-menu-list class="search-input__category-menu">
-                    <li *ngFor="let category of categories" (click)="setCurrentCategory(category)"><span
-                            fd-menu-item>{{category.label}}</span></li>
+                    <li fd-menu-item *ngFor="let category of categories" (click)="setCurrentCategory(category)">
+                        <span>{{category.label}}</span></li>
                 </ul>
             </fd-menu>
         </fd-popover-body>
