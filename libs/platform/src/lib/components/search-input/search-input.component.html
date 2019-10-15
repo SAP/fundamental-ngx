@@ -15,7 +15,7 @@
         </fd-popover-body>
     </fd-popover>
     <fd-combobox #combobox [glyph]="isLoading ? 'synchronize' : 'search'" [placeholder]="placeholder"
-        [dropdownValues]="dropdownValues" [compact]="compact" [triggers]="[]" [(ngModel)]="inputText"
+        [dropdownValues]="dropdownValues$ | async" [compact]="compact" [triggers]="[]" [(ngModel)]="inputText"
         (ngModelChange)="onValueChange($event)" (itemClicked)="onItemClick($event)" [searchFunction]="onSearchSubmit">
     </fd-combobox>
 </div>

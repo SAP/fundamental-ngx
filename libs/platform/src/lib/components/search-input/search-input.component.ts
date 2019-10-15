@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { ComboboxComponent, ComboboxItem } from '@fundamental-ngx/core';
+import { Observable, isObservable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface SearchInput {
     text: string;
@@ -34,7 +36,7 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     /**
      * List of string values to populate suggestion dropdown selection.
      */
-    @Input() suggestions: SuggestionItem[] = [];
+    @Input() suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
 
     /**
      * Initial input text.
@@ -82,10 +84,10 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     @Output() cancelSearch: EventEmitter<void> = new EventEmitter();
 
     /**
-     * List of string values taken from `suggestions` to populate dropdown menu.
+     * Observable list of string values taken from `suggestions` to populate dropdown menu.
      * @hidden
      */
-    public dropdownValues: string[];
+    public dropdownValues$: Observable<string[]>;
 
     /**
      * Whether the search input should be displayed in compact mode.
@@ -124,11 +126,16 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
         if (changes.suggestions) {
             if (Array.isArray(changes.suggestions.currentValue)) {
                 // convert suggestions to an array of string for "dropdown values"
-                this.dropdownValues = changes.suggestions.currentValue.map((suggestion: SuggestionItem) => {
+                const dropdownValues = changes.suggestions.currentValue.map((suggestion: SuggestionItem) => {
                     return suggestion.value;
                 });
+                this.dropdownValues$ = of(dropdownValues);
+            } else if (isObservable<SuggestionItem[]>(changes.suggestions.currentValue)) {
+                this.dropdownValues$ = changes.suggestions.currentValue.pipe(map((suggestions: SuggestionItem[]) => {
+                    return suggestions.map(suggestion => suggestion.value);
+                }));
             } else {
-                this.dropdownValues = [];
+                this.dropdownValues$ = of([]);
             }
         }
         if (changes.size) {

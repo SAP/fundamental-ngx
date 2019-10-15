@@ -5,6 +5,7 @@ import { ComboboxComponent, ComboboxModule, PopoverModule, MenuModule } from '@f
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-test',
@@ -25,7 +26,7 @@ import { CommonModule } from '@angular/common';
 class TestComponent {
     @ViewChild(SearchInputComponent, { static: true }) component: SearchInputComponent;
     public placeholder: string;
-    public suggestions: SuggestionItem[];
+    public suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
     public categories: ValueLabelItem[];
     public categoryLabel: string;
     public hideCategoryLabel = false;
@@ -92,6 +93,19 @@ describe('SearchInputComponent', () => {
         // set type ahead list
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        fixture.detectChanges();
+
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        expect(combobox.dropdownValues.length).toBe(3);
+        expect(combobox.dropdownValues[0]).toBe('Apple');
+        expect(combobox.dropdownValues[1]).toBe('Banana');
+        expect(combobox.dropdownValues[2]).toBe('Carrot');
+    });
+
+    it('should allow "dropdown" observable string list to be set', () => {
+        // set type ahead list
+        host.placeholder = 'Search';
+        host.suggestions = of([{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }]);
         fixture.detectChanges();
 
         const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
