@@ -12,7 +12,7 @@ import { ActionBarActionsComponent } from './action-bar-actions/action-bar-actio
         <fdp-action-bar
             [title]="actionBarTitle"
             [showBackButton]="showBackButton"
-            [editMode]="editMode"
+            [editing]="editMode"
             [description]="actionBarDescription"
             [actionItems]="actionItems"
             [placement]="'bottom-end'"
@@ -29,7 +29,7 @@ class TestComponent {
     @Input() editMode = false;
     @Input() actionItems = [];
     @Input() placement: string;
-    @ViewChild('actionbar') actionbar: ActionBarComponent;
+    @ViewChild('actionbar', { static: false }) actionbar: ActionBarComponent;
     @Output() onRenameTitle: EventEmitter<string> = new EventEmitter<string>();
     public backButtonClicked = false;
     onBackButtonClick() {
