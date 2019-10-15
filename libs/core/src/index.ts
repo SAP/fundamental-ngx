@@ -1,4 +1,4 @@
-import {angularCliVersion} from '@nrwl/schematics/src/lib-versions';
+import { angularCliVersion } from '@nrwl/schematics/src/lib-versions';
 
 export * from './lib/fundamental-ngx-core.module';
 export * from './lib/action-bar/public_api';
@@ -43,4 +43,4 @@ export * from './lib/time-picker/public_api';
 export * from './lib/toggle/public_api';
 export * from './lib/token/public_api';
 export * from './lib/tree/public_api';
-
+export * from './lib/utils/pipes/pipe.module';
