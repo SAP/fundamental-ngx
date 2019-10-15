@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.37"></a>
+# [0.12.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.36...v0.12.0-rc.37) (2019-10-15)
+
+
+### Features
+
+* **platform:** Creating search input component ([#1386](https://github.com/SAP/fundamental-ngx/issues/1386)) ([6cab279](https://github.com/SAP/fundamental-ngx/commit/6cab279)), closes [#1246](https://github.com/SAP/fundamental-ngx/issues/1246)
+
+
+
 <a name="0.12.0-rc.36"></a>
 # [0.12.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.35...v0.12.0-rc.36) (2019-10-14)
 
