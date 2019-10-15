@@ -10,6 +10,7 @@
 
 .scrolling-menu {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .fd-menu__title {
@@ -22,11 +23,12 @@
  {
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    color: #ededed;
     color: var(--fd-menu-item-separator-color);
     &:focus {
         //selected state
+        outline: #085caf dotted 1px;
         outline: var(--fd-color-action-focus) dotted 1px;
-        background-color: var(--fd-color-action-hover);
     }
 }
 // custom scrollbar: WILL NOT WORK ON FIREFOX, IE and EDGE
@@ -35,5 +37,6 @@
     height: 80px;
 }
 ::-webkit-scrollbar-thumb {
+    background: #89919a;
     background: var(--fd-forms-border-color);
 }

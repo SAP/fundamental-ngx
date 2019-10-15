@@ -19,7 +19,7 @@ import { MenuKeyboardService } from '@fundamental-ngx/core';
     `
 })
 class TestComponent {
-    @ViewChild(MenuComponent) menu: MenuComponent;
+    @ViewChild(MenuComponent, { static: false }) menu: MenuComponent;
     @Input() menuItems: [];
 
     @Input() public showSeparator = false;

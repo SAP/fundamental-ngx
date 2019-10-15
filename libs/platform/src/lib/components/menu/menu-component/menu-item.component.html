@@ -30,7 +30,7 @@
         <div class="fd-menu__label-truncation">
             <span
                 class="fd-menu__item"
-                [ngStyle]="{ width: getItemWidth() }"
+                [ngStyle]="{ width: finalItemWidth }"
                 (click)="onItemClick()"
                 role="button"
                 data-tag="menu-item__button"
@@ -71,7 +71,7 @@
             <span
                 class="fd-menu__item"
                 (click)="onItemClick()"
-                [ngStyle]="{ width: getItemWidth() }"
+                [ngStyle]="{ width: finalItemWidth }"
                 role="button"
                 data-tag="menu-item__button"
                 [attr.title]="tooltipLabel ? tooltipLabel : label"

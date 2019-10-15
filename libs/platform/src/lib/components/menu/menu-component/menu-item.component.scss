@@ -9,8 +9,8 @@
     overflow: hidden;
     background-color: transparent;
     padding: 12px 16px;
+    color: #515559;
     color: var(--fd-menu-item-color);
-    width: inherit;
 }
 
 .fd-menu__item[aria-selected='true'] {
@@ -33,6 +33,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     padding: 8px; //center-aligned icon, therefore 8px
     align-items: center;
     margin: 6px 4px 6px 8px;
+    color: #0a6ed1;
     color: var(--fd-color-action);
 }
 
@@ -47,6 +48,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
     margin: 6px 4px 6px 8px;
+    color: #0a6ed1;
     color: var(--fd-color-action);
     display: flex;
     float: right;
@@ -84,11 +86,13 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
 
 //have the right state for selected item
 .selected-item-state {
+    background-color: #0a6ed112;
     background-color: var(--fd-color-background-selected);
     &:hover {
         .fd-menu__item {
             font-weight: bold;
         }
+        background-color: #0a6ed11a;
         background-color: var(--fd-color-background-selected-hover);
     }
 }
@@ -96,6 +100,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
 //have the right state for normal/unselected items
 .normal-item-state {
     &:hover {
+        background-color: #fafafa;
         background-color: var(--fd-color-background-hover);
         .fd-menu__item {
             font-weight: bold;

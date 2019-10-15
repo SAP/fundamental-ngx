@@ -7,7 +7,9 @@ import {
     ViewEncapsulation,
     ElementRef,
     HostListener,
-    Renderer2
+    Renderer2,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
 import { MenuItem, MenuGroup } from './menu.component';
 import { DefaultMenuItem } from '@fundamental-ngx/core';
@@ -18,7 +20,7 @@ import { DefaultMenuItem } from '@fundamental-ngx/core';
     styleUrls: ['./menu-item.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class MenuItemComponent implements OnInit, DefaultMenuItem {
+export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
     @Input()
     public label: string;
     @Input()
@@ -49,6 +51,9 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem {
     @Input()
     public childItems: MenuItem[] = [];
 
+    /** calculates the final width of the label when icons are used */
+    public finalItemWidth = '';
+
     @Output() itemClick: EventEmitter<void> = new EventEmitter();
 
     /**  Event thrown, when there is some keyboard event detected on mega menu item */
@@ -63,6 +68,12 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem {
         this.itemClick.emit();
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.itemWidth || changes.item) {
+            this.finalItemWidth = this.getItemWidth();
+        }
+    }
+
     /**
      * get the menu item label width bby offsetting from total width if `secondaryIcon` is present
      */
@@ -72,8 +83,12 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem {
         if (this.itemWidth !== undefined) {
             const itemWidthNumber: number = Number(this.itemWidth.split('px')[0]);
             finalItemWidth = this.itemWidth;
-            if (this.item.secondaryIcon !== undefined || this.item.secondaryIcon !== '') {
-                // secondary icon exists
+            if (this.item.icon !== undefined || this.group.icon !== undefined) {
+                // remove primary icon width from label width
+                finalItemWidth = itemWidthNumber - 44 + 'px';
+            }
+            if (this.item.secondaryIcon !== undefined) {
+                // remove secondary icon width from label width
                 finalItemWidth = itemWidthNumber - 88 + 'px';
             }
         } else {
