@@ -2,6 +2,86 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.36"></a>
+# [0.12.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.35...v0.12.0-rc.36) (2019-10-14)
+
+
+### Features
+
+* **platform:** Code changes to convert action bar as a component ([5e26b37](https://github.com/SAP/fundamental-ngx/commit/5e26b37))
+
+
+
+<a name="0.12.0-rc.35"></a>
+# [0.12.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.34...v0.12.0-rc.35) (2019-10-13)
+
+
+
+<a name="0.12.0-rc.34"></a>
+# [0.12.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.33...v0.12.0-rc.34) (2019-10-13)
+
+
+
+<a name="0.12.0-rc.33"></a>
+# [0.12.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.32...v0.12.0-rc.33) (2019-10-13)
+
+
+
+<a name="0.12.0-rc.32"></a>
+# [0.12.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.31...v0.12.0-rc.32) (2019-10-13)
+
+
+
+<a name="0.12.0-rc.31"></a>
+# [0.12.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.30...v0.12.0-rc.31) (2019-10-13)
+
+
+
+<a name="0.12.0-rc.30"></a>
+# [0.12.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.29...v0.12.0-rc.30) (2019-10-13)
+
+
+### Bug Fixes
+
+* fix typo meni -> menu ([#1387](https://github.com/SAP/fundamental-ngx/issues/1387)) ([4014661](https://github.com/SAP/fundamental-ngx/commit/4014661))
+
+
+
+<a name="0.12.0-rc.29"></a>
+# [0.12.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.28...v0.12.0-rc.29) (2019-10-11)
+
+
+
+<a name="0.12.0-rc.28"></a>
+# [0.12.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.27...v0.12.0-rc.28) (2019-10-11)
+
+
+
+<a name="0.12.0-rc.27"></a>
+# [0.12.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.26...v0.12.0-rc.27) (2019-10-11)
+
+
+
+<a name="0.12.0-rc.26"></a>
+# [0.12.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.25...v0.12.0-rc.26) (2019-10-11)
+
+
+
+<a name="0.12.0-rc.25"></a>
+# [0.12.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.24...v0.12.0-rc.25) (2019-10-11)
+
+
+
+<a name="0.12.0-rc.24"></a>
+# [0.12.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.23...v0.12.0-rc.24) (2019-10-11)
+
+
+
+<a name="0.12.0-rc.23"></a>
+# [0.12.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.22...v0.12.0-rc.23) (2019-10-11)
+
+
+
 <a name="0.12.0-rc.22"></a>
 # [0.12.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.21...v0.12.0-rc.22) (2019-10-10)
 
