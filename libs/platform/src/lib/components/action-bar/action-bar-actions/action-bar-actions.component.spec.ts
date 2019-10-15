@@ -21,7 +21,7 @@ class TestComponent {
     buttonItems = [];
     @Input() placement: string;
     editMode = false;
-    @ViewChild('actionbaractions') actionbaraction: ActionBarActionsComponent;
+    @ViewChild('actionbaractions', { static: false }) actionbaraction: ActionBarActionsComponent;
     actionClicked = false;
     onItemClick(item: ActionItem) {
         this.actionClicked = true;
