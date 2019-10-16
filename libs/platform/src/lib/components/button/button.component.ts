@@ -9,11 +9,11 @@ export type ButtonOptions = 'light' | 'emphasized' | '';
     styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-    /** Whether to compact the button. */
+    /** Option to make to button compact. */
     @Input()
     compact: boolean;
 
-    /** Whether the button content should be in truncated form this width. */
+    /** Option to truncate content of the button based on width. */
     @Input()
     width: string;
 
@@ -21,7 +21,7 @@ export class ButtonComponent {
     @Input()
     glyph: string;
 
-    /** Whether the button is disabled. */
+    /** button is disabled on true. */
     @Input()
     disabled: boolean;
 
@@ -39,7 +39,7 @@ export class ButtonComponent {
     buttonClicked = new EventEmitter();
 
     /**
-     *  Handles button click
+     *  Handles button click event
      */
     public onBtnClick($event: any) {
         this.buttonClicked.emit();

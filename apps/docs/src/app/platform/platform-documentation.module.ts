@@ -15,6 +15,8 @@ import {
     PlatformButtonTypesExampleComponent,
     PlatformButtonTruncateExampleComponent
 } from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
+import { SchemaModule } from '../schema/schema.module';
+import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 
 @NgModule({
     declarations: [
@@ -32,6 +34,7 @@ import {
     ],
     imports: [
         SharedDocumentationModule,
+        SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
     ]

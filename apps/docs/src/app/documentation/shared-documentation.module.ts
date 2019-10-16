@@ -26,7 +26,7 @@ import { DocsSectionTitleComponent } from './core-helpers/docs-section-title/doc
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 import { SchemaModule } from '../schema/schema.module';
-import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
+import { CORE_COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
 import { ToolbarComponent } from './core-helpers/toolbar/toolbar.component';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
@@ -63,7 +63,6 @@ import { ApiComponent } from './core-helpers/api/api.component';
         HttpClientModule,
         CdkTableModule,
         DragDropModule,
-        SchemaModule.forRoot(COMPONENT_SCHEMAS),
         RouterModule
     ],
     providers: [CopyService, ApiDocsService],
