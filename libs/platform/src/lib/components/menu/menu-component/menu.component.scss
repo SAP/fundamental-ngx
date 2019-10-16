@@ -24,7 +24,7 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;
     color: #ededed;
-    color: var(--fd-menu-item-separator-color);
+    // color: var(--fd-menu-item-separator-color); //this color has changed in styles recently.
     &:focus {
         //selected state
         outline: #085caf dotted 1px;
@@ -32,6 +32,8 @@
     }
 }
 // custom scrollbar: WILL NOT WORK ON FIREFOX, IE and EDGE
+// note that using this scrollbar has a side-effect of a huge horizontal page scrollbar at times,
+// this will have to be handled at one point
 ::-webkit-scrollbar {
     width: 4px;
     height: 80px;
