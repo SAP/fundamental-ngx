@@ -13,6 +13,8 @@ export class PlatformDocumentationComponent {
     @ViewChild(SectionsToolbarComponent, {static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
+    sideCollapsed: boolean = window.innerWidth < 576;
+
     guides = [
         { url: 'platform/home', name: 'Home' },
     ];
@@ -25,39 +27,37 @@ export class PlatformDocumentationComponent {
     ];
 
     smallScreen: boolean = window.innerWidth < 992;
-    sideCollapsed: boolean = window.innerWidth < 576;
 
     skipNavClicked() {
-        this.contentElRef.nativeElement.focus();
+        if (this.contentElRef) {
+            this.contentElRef.nativeElement.focus();
+        }
     }
 
-
     handleMenuCollapseClick(): void {
-        this.sectionsToolbar.sideCollapsed = !this.sectionsToolbar.sideCollapsed;
+        this.sideCollapsed = !this.sideCollapsed;
+    }
+
+    closeSideBar(): void {
+        this.sideCollapsed = true;
+    }
+
+    isSideBarCollapsed(): boolean {
+        return this.sideCollapsed;
     }
 
     onActivate() {
-        if (this.smallScreen && !this.sideCollapsed) {
-            this.sideCollapsed = true;
+        if (this.contentElRef) {
+            this.contentElRef.nativeElement.scrollTop = 0;
         }
-        this.contentElRef.nativeElement.scrollTop = 0;
         this.skipNavClicked();
-    }
-
-    checkIfCloseSidebar() {
-        if (!this.sideCollapsed) {
-            this.sideCollapsed = !this.sideCollapsed;
+        if (this.sectionsToolbar) {
+            this.sectionsToolbar.onActivate();
         }
     }
 
     windowSize() {
-        if (window.innerWidth < 992) {
-            this.smallScreen = true;
-            this.onActivate();
-        } else {
-            this.smallScreen = false;
-            this.sideCollapsed = false;
-        }
+        this.smallScreen = window.innerWidth < 992;
     }
 
     @HostListener('window:resize', ['$event'])
