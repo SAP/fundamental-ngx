@@ -168,11 +168,11 @@ export class CalendarDayViewComponent implements OnInit, AfterViewChecked, OnCha
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                     this.buildDayViewGrid();
                 } else if (this.selectCounter === 1) {
-                    // Check if date picked is higher than already chosen, otherwise just first one
+                    // Check if date picked is higher than already chosen, otherwise just reverse them
                     if (this.selectedRangeDate.start.getTimeStamp() < day.date.getTimeStamp()) {
                         this.selectedRangeDate = { start: this.selectedRangeDate.start, end: day.date };
                     } else {
-                        this.selectedRangeDate = { start: day.date, end: null };
+                        this.selectedRangeDate = { start: day.date, end: this.selectedRangeDate.start };
                     }
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                     this.buildDayViewGrid();
