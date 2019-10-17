@@ -7,7 +7,7 @@
     td, li {
         &:focus {
             outline: 0;
-            box-shadow: inset 0 0 2px 2px var(--fd-color-neutral-3);
+            box-shadow: inset 0 0 2px 2px #d9d9d9;
             &:after {
                 display: none;
             }

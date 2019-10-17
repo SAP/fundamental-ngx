@@ -13,6 +13,8 @@ export class CoreDocumentationComponent implements OnInit {
     @ViewChild(SectionsToolbarComponent, {static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
+    sideCollapsed: boolean = window.innerWidth < 576;
+
     guides = [
         { url: 'core/home', name: 'Home' },
         { url: 'core/new-component', name: 'New Component' }
@@ -95,10 +97,8 @@ export class CoreDocumentationComponent implements OnInit {
     ];
 
     smallScreen: boolean = window.innerWidth < 992;
-    sideCollapsed: boolean = window.innerWidth < 576;
 
     ngOnInit() {
-        // sort the list alphabetically
         this.components.sort((el1, el2) => {
             if (el1.name < el2.name) {
                 return -1;
@@ -118,33 +118,29 @@ export class CoreDocumentationComponent implements OnInit {
     }
 
     handleMenuCollapseClick(): void {
-        this.sectionsToolbar.sideCollapsed = !this.sectionsToolbar.sideCollapsed;
+        this.sideCollapsed = !this.sideCollapsed;
+    }
+
+    closeSideBar(): void {
+        this.sideCollapsed = true;
+    }
+
+    isSideBarCollapsed(): boolean {
+        return this.sideCollapsed;
     }
 
     onActivate() {
-        if (this.smallScreen && !this.sideCollapsed) {
-            this.sideCollapsed = true;
-        }
         if (this.contentElRef) {
             this.contentElRef.nativeElement.scrollTop = 0;
         }
         this.skipNavClicked();
-    }
-
-    checkIfCloseSidebar() {
-        if (!this.sideCollapsed) {
-            this.sideCollapsed = !this.sideCollapsed;
+        if (this.sectionsToolbar) {
+            this.sectionsToolbar.onActivate();
         }
     }
 
     windowSize() {
-        if (window.innerWidth < 992) {
-            this.smallScreen = true;
-            this.onActivate();
-        } else {
-            this.smallScreen = false;
-            this.sideCollapsed = false;
-        }
+        this.smallScreen = window.innerWidth < 992;
     }
 
     @HostListener('window:resize', ['$event'])

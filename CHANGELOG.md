@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.43"></a>
+# [0.12.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.42...v0.12.0-rc.43) (2019-10-17)
+
+
+### Bug Fixes
+
+* calendar focusing issues ([#1369](https://github.com/SAP/fundamental-ngx/issues/1369)) ([b9ca450](https://github.com/SAP/fundamental-ngx/commit/b9ca450))
+* timepicker without minutes/seconds and add some tests ([#1357](https://github.com/SAP/fundamental-ngx/issues/1357)) ([39b98fa](https://github.com/SAP/fundamental-ngx/commit/39b98fa))
+
+
+
+<a name="0.12.0-rc.42"></a>
+# [0.12.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.41...v0.12.0-rc.42) (2019-10-16)
+
+
+
+<a name="0.12.0-rc.41"></a>
+# [0.12.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.40...v0.12.0-rc.41) (2019-10-16)
+
+
+
+<a name="0.12.0-rc.40"></a>
+# [0.12.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.39...v0.12.0-rc.40) (2019-10-16)
+
+
+
+<a name="0.12.0-rc.39"></a>
+# [0.12.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.38...v0.12.0-rc.39) (2019-10-16)
+
+
+
+<a name="0.12.0-rc.38"></a>
+# [0.12.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.37...v0.12.0-rc.38) (2019-10-16)
+
+
+
+<a name="0.12.0-rc.37"></a>
+# [0.12.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.36...v0.12.0-rc.37) (2019-10-15)
+
+
+### Features
+
+* **platform:** Creating search input component ([#1386](https://github.com/SAP/fundamental-ngx/issues/1386)) ([6cab279](https://github.com/SAP/fundamental-ngx/commit/6cab279)), closes [#1246](https://github.com/SAP/fundamental-ngx/issues/1246)
+
+
+
+<a name="0.12.0-rc.36"></a>
+# [0.12.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.35...v0.12.0-rc.36) (2019-10-14)
+
+
+### Features
+
+* **platform:** Code changes to convert action bar as a component ([5e26b37](https://github.com/SAP/fundamental-ngx/commit/5e26b37))
+
+
+
 <a name="0.12.0-rc.35"></a>
 # [0.12.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.34...v0.12.0-rc.35) (2019-10-13)
 

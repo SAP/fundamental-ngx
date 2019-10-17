@@ -7,60 +7,26 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     styleUrls: ['./platform-documentation.component.scss'],
     templateUrl: './platform-documentation.component.html'
 })
-export class PlatformDocumentationComponent implements OnInit {
-    @ViewChild('content', { static: false }) contentElRef: ElementRef;
+export class PlatformDocumentationComponent {
+    @ViewChild('content', { static: true }) contentElRef: ElementRef;
 
     @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
+    sideCollapsed: boolean = window.innerWidth < 576;
+
     guides = [
         { url: 'platform/home', name: 'Home' },
-        { url: 'platform/new-component', name: 'New Component' }
     ];
 
-    components = [
-        { url: 'platform/button', name: 'Button' }
-
-    ];
-
-    layouts = [];
-
-    utilities = [];
     sections: SectionInterface[] = [
         {
             header: 'Guides',
             content: this.guides
-        },
-        {
-            header: 'Components',
-            content: this.components
-        },
-        {
-            header: 'layouts',
-            content: this.layouts
-        },
-        {
-            header: 'Utilities',
-            content: this.utilities
-        },
+        }
     ];
 
     smallScreen: boolean = window.innerWidth < 992;
-    sideCollapsed: boolean = window.innerWidth < 576;
-
-    ngOnInit() {
-        // sort the list alphabetically
-        this.components.sort((el1, el2) => {
-            if (el1.name < el2.name) {
-                return -1;
-            }
-
-            if (el1.name > el2.name) {
-                return 1;
-            }
-            return 0;
-        });
-    }
 
     skipNavClicked() {
         if (this.contentElRef) {
@@ -68,35 +34,30 @@ export class PlatformDocumentationComponent implements OnInit {
         }
     }
 
-
     handleMenuCollapseClick(): void {
-        this.sectionsToolbar.sideCollapsed = !this.sectionsToolbar.sideCollapsed;
+        this.sideCollapsed = !this.sideCollapsed;
+    }
+
+    closeSideBar(): void {
+        this.sideCollapsed = true;
+    }
+
+    isSideBarCollapsed(): boolean {
+        return this.sideCollapsed;
     }
 
     onActivate() {
-        if (this.smallScreen && !this.sideCollapsed) {
-            this.sideCollapsed = true;
-        }
         if (this.contentElRef) {
             this.contentElRef.nativeElement.scrollTop = 0;
         }
         this.skipNavClicked();
-    }
-
-    checkIfCloseSidebar() {
-        if (!this.sideCollapsed) {
-            this.sideCollapsed = !this.sideCollapsed;
+        if (this.sectionsToolbar) {
+            this.sectionsToolbar.onActivate();
         }
     }
 
     windowSize() {
-        if (window.innerWidth < 992) {
-            this.smallScreen = true;
-            this.onActivate();
-        } else {
-            this.smallScreen = false;
-            this.sideCollapsed = false;
-        }
+        this.smallScreen = window.innerWidth < 992;
     }
 
     @HostListener('window:resize', ['$event'])

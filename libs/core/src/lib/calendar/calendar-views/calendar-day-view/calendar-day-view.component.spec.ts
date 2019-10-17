@@ -116,7 +116,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[2][2];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowDown', preventDefault: () => {
@@ -133,7 +133,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[2][2];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowUp', preventDefault: () => {
@@ -150,7 +150,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[2][2];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowLeft', preventDefault: () => {
@@ -167,7 +167,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[2][2];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowRight', preventDefault: () => {
@@ -184,7 +184,8 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[component.dayViewGrid.length - 1][2];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowDown', preventDefault: () => {
@@ -202,7 +203,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[0][0];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowUp', preventDefault: () => {
@@ -220,7 +221,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[component.dayViewGrid.length - 1][component.dayViewGrid[0].length - 1];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowRight', preventDefault: () => {
@@ -240,7 +241,7 @@ describe('CalendarDayViewComponent', () => {
         const focusFirstCell = component.dayViewGrid[0][0];
 
         component.newFocusedDayId = focusFirstCell.id;
-        component.ngAfterViewChecked();
+        component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
             code: 'ArrowLeft', preventDefault: () => {

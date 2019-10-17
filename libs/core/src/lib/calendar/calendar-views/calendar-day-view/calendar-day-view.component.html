@@ -18,7 +18,7 @@
                     'fd-calendar__item--other-month': cell.monthStatus !== 'current',
                     'is-selected': cell.selected,
                     'is-selected-range-last': cell.selectedLast && !cell.selectedFirst,
-                    'is-selected-range-first': cell.selectedFirst,
+                    'is-selected-range-first': cell.selectedFirst && selectCounter == 2,
                     'is-selected-range': cell.selectedRange && !cell.selectedFirst && !cell.selectedLast,
                     'fd-calendar__item--current': cell.today,
                     'is-disabled': cell.disabled,
