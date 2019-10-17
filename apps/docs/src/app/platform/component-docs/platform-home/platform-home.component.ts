@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlatformHomeComponent implements OnInit {
 
-    constructor() {}
+    constructor() { }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
-    onLoad(event) {}
-    onError(event) {}
+    onLoad(event) { }
+    onError(event) { }
 
 }

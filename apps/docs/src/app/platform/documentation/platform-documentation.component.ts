@@ -17,12 +17,34 @@ export class PlatformDocumentationComponent {
 
     guides = [
         { url: 'platform/home', name: 'Home' },
+        { url: 'platform/new-component', name: 'New Component' }
     ];
+
+    components = [
+        { url: 'platform/button', name: 'Button' }
+
+    ];
+
+    layouts = [];
+
+    utilities = [];
 
     sections: SectionInterface[] = [
         {
             header: 'Guides',
             content: this.guides
+        },
+        {
+            header: 'Components',
+            content: this.components
+        },
+        {
+            header: 'layouts',
+            content: this.layouts
+        },
+        {
+            header: 'Utilities',
+            content: this.utilities
         }
     ];
 

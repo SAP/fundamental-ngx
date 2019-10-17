@@ -14,9 +14,7 @@ export class ApiComponent implements OnInit {
     result: string;
     openMenu: boolean = false;
 
-    constructor(private route: ActivatedRoute,
-                private apiService: ApiDocsService) {
-    }
+    constructor(private route: ActivatedRoute, private apiService: ApiDocsService) { }
 
     ngOnInit() {
         if (this.route.snapshot.data) {
