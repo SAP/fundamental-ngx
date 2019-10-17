@@ -19,15 +19,18 @@ export abstract class TimeFormatParser {
      * @param value String to convert to a time object.
      * @param meridian boolean to define if string should be treated as a meridian.
      * @param displaySeconds boolean to define if string should display seconds.
+     * @param displayMinutes boolean to define if string should display minutes.
      */
-    abstract parse(value: string, displaySeconds: boolean, meridian?: boolean): TimeObject;
+    abstract parse(value: string, displaySeconds: boolean, displayMinutes: boolean, meridian?: boolean): TimeObject;
 
     /**
      * Should take in a time object and return a string representation.
      * @param time TimeObject to convert to a string.
      * @param meridian boolean to define if TimeObject should be treated as a meridian.
+     * @param displaySeconds boolean to define if string should display seconds.
+     * @param displayMinutes boolean to define if string should display minutes.
      */
-    abstract format(time: TimeObject, meridian?: boolean): string;
+    abstract format(time: TimeObject, displaySeconds: boolean, displayMinutes: boolean, meridian?: boolean): string;
 }
 
 /**
@@ -41,15 +44,18 @@ export class TimeFormatParserDefault extends TimeFormatParser {
      * @param value String to convert to a time object.
      * @param meridian boolean to define if string should be treated as a meridian.
      * @param displaySeconds boolean to define if string should display seconds.
+     * @param displayMinutes boolean to define if string should display minutes.
      */
-    public parse(value: string, displaySeconds: boolean = true, meridian?: boolean): TimeObject {
+    public parse(value: string, displaySeconds: boolean = true, displayMinutes: boolean = true, meridian?: boolean): TimeObject {
         const time = new TimeObject();
         let regexp;
         if (!meridian) {
             if (displaySeconds) {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])$/;
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9])(:[0-5][0-9]|[0-9])$/;
+            } else if (displayMinutes) {
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9])$/;
             } else {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/;
+                regexp = /^([0-1]?[0-9]|2[0-3])$/;
             }
             if (regexp.test(value)) {
                 const splitString = value.split(':');
@@ -64,9 +70,11 @@ export class TimeFormatParserDefault extends TimeFormatParser {
             }
         } else if (meridian) {
             if (displaySeconds) {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9]) [APap][mM]$/;
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9])(:[0-5][0-9]|[0-9]) [APap][mM]$/;
+            } else if (displayMinutes) {
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9]) [APap][mM]$/;
             } else {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]) [APap][mM]$/;
+                regexp = /^([0-1]?[0-9]|2[0-3]) [APap][mM]$/;
             }
             if (regexp.test(value)) {
                 const period = value.split(' ')[1];
@@ -93,8 +101,10 @@ export class TimeFormatParserDefault extends TimeFormatParser {
      * Takes in a time object and returns the string representation.
      * @param time TimeObject to convert to a string.
      * @param meridian boolean to define if TimeObject should be treated as a meridian.
+     * @param displaySeconds boolean to define if string should display seconds.
+     * @param displayMinutes boolean to define if string should display minutes.
      */
-    public format(time: TimeObject, meridian?: boolean): string {
+    public format(time: TimeObject, displaySeconds: boolean = true, displayMinutes: boolean = true, meridian?: boolean): string {
         let formattedHour, formattedMinute, formattedSecond;
         let formattedTime;
         let formattedMeridian;
@@ -117,11 +127,11 @@ export class TimeFormatParserDefault extends TimeFormatParser {
                 formattedHour = time.hour;
             }
         }
-        if (time.minute !== null) {
+        if (time.minute !== null && displayMinutes) {
             formattedMinute = time.minute < 10 ? '0' + time.minute : time.minute;
         }
 
-        if (time.second !== null) {
+        if (time.second !== null && displaySeconds) {
             formattedSecond = time.second < 10 ? '0' + time.second : time.second;
         }
         if (formattedHour || formattedHour === 0) {

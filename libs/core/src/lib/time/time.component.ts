@@ -1,4 +1,14 @@
-import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    forwardRef,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewEncapsulation
+} from '@angular/core';
 import { TimeObject } from './time-object';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeI18nLabels } from './i18n/time-i18n-labels';
@@ -119,7 +129,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         if (!time) {
             return;
         }
-        this.time = time;
+        this.time = Object.assign({}, time);
         this.setDisplayedHour();
     }
 
