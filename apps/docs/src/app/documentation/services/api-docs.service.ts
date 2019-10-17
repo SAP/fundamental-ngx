@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ApiDocsService {
 
-    readonly BASE_URL = 'assets/typedoc/';
+    readonly BASE_URL = 'assets/typedoc/core/';
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) { }
 
     getComponentHtml(component: string): Observable<string> {
         component = component.toLocaleLowerCase() + '.html';
-        return this.httpClient.get<string>(this.BASE_URL + 'classes/' + component, { responseType: 'text' as 'json'});
+        return this.httpClient.get<string>(this.BASE_URL + 'classes/' + component, { responseType: 'text' as 'json' });
     }
 }

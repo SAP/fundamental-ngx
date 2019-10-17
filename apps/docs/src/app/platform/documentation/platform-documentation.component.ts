@@ -14,7 +14,8 @@ export class PlatformDocumentationComponent implements OnInit {
     sectionsToolbar: SectionsToolbarComponent;
 
     guides = [
-        { url: 'platform/home', name: 'Home' }
+        { url: 'platform/home', name: 'Home' },
+        { url: 'platform/new-component', name: 'New Component' }
     ];
 
     components = [

@@ -93,8 +93,8 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fdp-button [type]="data.properties.fdType" [options]="data.properties.options" [compact]="data.properties.compact"
-        width="data.properties.width" [glyph]="data.properties.icon">
+    <fdp-button [type]="data.properties.type" [options]="data.properties.options" [compact]="data.properties.compact"
+        [attr.title]='data.properties.label' [width]="data.properties.width" [glyph]="data.properties.icon">
         {{ data.properties.label }}
     </fdp-button>
 </playground>

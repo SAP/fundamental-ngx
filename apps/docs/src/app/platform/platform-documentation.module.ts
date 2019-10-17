@@ -7,6 +7,7 @@ import { PlatformHomeComponent } from './component-docs/platform-home/platform-h
 import { MarkdownModule } from 'ngx-markdown';
 import { PlatformButtonDocsComponent } from '../platform/component-docs/platform-button/platform-button-docs.component';
 import { PlatformButtonHeaderComponent } from '../platform/component-docs/platform-button/platform-button-header/platform-button-header.component';
+import { NewComponentComponent } from '../platform/component-docs/new-component/new-component.component';
 import {
     PlatformButtonIconsExampleComponent,
     PlatformButtonOptionsExampleComponent,
@@ -29,7 +30,8 @@ import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
         PlatformButtonTypesExampleComponent,
         PlatformButtonStateExampleComponent,
         PlatformButtonHeaderComponent,
-        PlatformButtonTruncateExampleComponent
+        PlatformButtonTruncateExampleComponent,
+        NewComponentComponent
 
     ],
     imports: [

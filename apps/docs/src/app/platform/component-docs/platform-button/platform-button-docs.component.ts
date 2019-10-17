@@ -679,8 +679,8 @@ export class PlatformButtonDocsComponent implements OnInit {
             label: 'click here',
             type: 'default',
             option: 'default',
-            size: 'default',
             width: '100%',
+            size: 'default',
             icon: ''
 
         }
