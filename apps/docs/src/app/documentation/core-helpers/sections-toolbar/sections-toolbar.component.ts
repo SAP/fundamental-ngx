@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SectionInterface } from './section.interface';
 
 @Component({
@@ -6,13 +6,22 @@ import { SectionInterface } from './section.interface';
     styleUrls: ['./sections-toolbar.component.scss'],
     templateUrl: './sections-toolbar.component.html'
 })
-export class SectionsToolbarComponent {
+export class SectionsToolbarComponent implements OnInit {
 
     @Input() sections: SectionInterface[];
 
     search: string = '';
     smallScreen: boolean = window.innerWidth < 992;
+
+    @Input()
     sideCollapsed: boolean = window.innerWidth < 576;
+
+    @Output()
+    readonly sideCollapsedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    ngOnInit(): void {
+        this.onActivate();
+    }
 
     onKeypressHandler(event: KeyboardEvent) {
         if (event.code === 'Enter' || event.code === 'Space') {
@@ -25,6 +34,7 @@ export class SectionsToolbarComponent {
     onActivate() {
         if (this.smallScreen && !this.sideCollapsed) {
             this.sideCollapsed = true;
+            this.sideCollapsedChange.emit(this.sideCollapsed);
         }
     }
 
@@ -36,6 +46,7 @@ export class SectionsToolbarComponent {
             this.smallScreen = false;
             this.sideCollapsed = false;
         }
+        this.sideCollapsedChange.emit(this.sideCollapsed);
     }
 
     @HostListener('window:resize', ['$event'])

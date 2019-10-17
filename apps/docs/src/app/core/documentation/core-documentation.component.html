@@ -3,6 +3,7 @@
 <div class="fd-flex-row fd-sidebar-container">
     <sections-toolbar
         [sections]="sections"
+        [(sideCollapsed)]="sideCollapsed"
     ></sections-toolbar>
     <div tabindex="0" class="content" #content>
         <div class="content-margin">
@@ -12,7 +13,7 @@
 </div>
 
 <div class="collapsed-overlay"
-     [ngClass]="{ 'overlay-init': !this.sideCollapsed }"
+     [ngClass]="{ 'overlay-init': !isSideBarCollapsed() }"
      *ngIf="this.smallScreen"
-     (click)="checkIfCloseSidebar()">
+     (click)="closeSideBar()">
 </div>
