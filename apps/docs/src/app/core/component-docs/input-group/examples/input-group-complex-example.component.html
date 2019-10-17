@@ -1,0 +1,24 @@
+<fd-form-group>
+    <label fd-form-label>Input Group with complex button addon.</label>
+    <fd-input-group>
+        <input fd-input-group-input fd-form-control>
+        <span fd-input-group-addon [button]="true">
+            <button fd-button
+                    [glyph]="'calendar'"
+                    [options]="'light'">
+            </button>
+        </span>
+    </fd-input-group>
+</fd-form-group>
+<br />
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label>Input Group with complex span addon.</label>
+        <fd-input-group>
+            <input fd-input-group-input fd-form-control>
+            <span fd-input-group-addon>
+                Addon
+            </span>
+        </fd-input-group>
+    </div>
+</fd-form-group>

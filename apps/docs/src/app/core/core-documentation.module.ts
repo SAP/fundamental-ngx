@@ -112,7 +112,7 @@ import {
     InputGroupNumberExampleComponent,
     InputGroupSearchExampleComponent,
     InputGroupTextExampleComponent,
-    InputGroupTextCompactExampleComponent
+    InputGroupTextCompactExampleComponent, InputGroupComplexExampleComponent
 } from '../core/component-docs/input-group/examples/input-group-examples.component';
 import {
     ListActionsExampleComponent,
@@ -516,6 +516,7 @@ import { CoreDocumentationComponent } from './documentation/core-documentation.c
         InputGroupTextExampleComponent,
         InputGroupTextCompactExampleComponent,
         InputGroupFormExampleComponent,
+        InputGroupComplexExampleComponent,
         InputFormGroupExampleComponent,
         InputInlineHelpExampleComponent,
         InputStateExampleComponent,

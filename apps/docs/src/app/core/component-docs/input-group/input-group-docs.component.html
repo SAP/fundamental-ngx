@@ -89,6 +89,19 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'complex'" [componentName]="'inputGroup'">
+    Input Group with complex templates.
+</fd-docs-section-title>
+<description>It is possible to use complex templates inside <code>Input Group</code> component. To achieve it you should
+    use <code>fd-input-group-input</code> for complex input template, or <code>fd-input-group-addon</code> for complex addon template
+</description>
+<component-example [name]="'ex8'">
+    <fd-input-group-complex-example></fd-input-group-complex-example>
+</component-example>
+<code-example [exampleFiles]="complexInput"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-input-group
         [addOnText]="data.properties.addOnText"
