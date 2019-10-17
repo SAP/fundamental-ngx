@@ -10,9 +10,8 @@ import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-exam
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
 import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
+import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-input-group',
@@ -751,6 +750,13 @@ export class InputGroupDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: formInputTsSrc
+        }
+    ];
+
+    complexInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: complexInputHtml
         }
     ];
 
