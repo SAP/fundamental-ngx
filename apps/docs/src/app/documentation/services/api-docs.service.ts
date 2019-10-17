@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ApiDocsService {
 
-    readonly BASE_URL = 'assets/typedoc/core/';
+    readonly BASE_URL = 'assets/typedoc/';
 
     constructor(private httpClient: HttpClient) { }
 

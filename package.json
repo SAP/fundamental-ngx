@@ -9,7 +9,7 @@
     "build-all": "ng build core && ng build platform && ng build docs",
     "build-docs": "npm run compile-typedoc-all && npm run copy-docs && ng build --prod --base-href=\"/fundamental-ngx/\" ",
     "build-docs-netlify": "npm run build-all && npm run compile-typedoc-all && npm run copy-docs && ng build --prod --base-href=\"/\" ",
-    "build-deploy-library": "ng build core && ng build platform && npm run build:schematics && npm run sync-versions && cp README.md dist/libs/core/README.md && cp PLATFORMREADME.md dist/libs/platform/README.md",
+    "build-deploy-library": "ng build core && ng build platform && npm run build:schematics && npm run sync-versions && cp README.md dist/libs/core/README.md && cp PLATFORMREADME.md dist/libs/platform/PLATFORMREADME.md",
     "build-pack-library": "ng build core && ng build platform && npm run build:schematics && npm run sync-versions && cd dist/libs/core/ && npm pack && cd ../platform && npm pack && cd ../..",
     "copy-docs": "cp README.md apps/docs/src/assets/README.md && cp NEW_COMPONENT.md apps/docs/src/assets/NEW_COMPONENT.md && cp PLATFORMREADME.md apps/docs/src/assets/PLATFORMREADME.md && cp NEW_PLATFORM_COMPONENT.md apps/docs/src/assets/NEW_PLATFORM_COMPONENT.md",
     "deploy-docs": "angular-cli-ghpages -d dist/apps/docs --branch gh-pages",
