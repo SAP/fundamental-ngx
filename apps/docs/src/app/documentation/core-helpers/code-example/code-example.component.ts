@@ -17,7 +17,6 @@ import hljs from 'highlight.js/lib';
 import sdk from '@stackblitz/sdk';
 import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
 import * as angularJson from '!raw-loader!./code-example-stack/helper.js';
-// import * as maints from '!raw-loader!./code-example-stack/main.ts';
 
 
 
