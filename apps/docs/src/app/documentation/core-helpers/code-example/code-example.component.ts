@@ -77,12 +77,14 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         tags: ['stackblitz', 'sdk'],
         dependencies: {
             moment: '*',
-            '@fundamental-ngx/core': 'v0.12.0-rc.5',
+            '@fundamental-ngx/core': 'v0.12.0-rc.45',
             'fundamental-styles': 'v0.3.0-rc.6',
             '@angular/animations': '*',
             '@angular/http': '^7.2.15',
             '@angular/cdk': '^8.2.3',
-            '@angular/material': '^8.2.3'
+            '@angular/material': '^8.2.3',
+            'popper.js': '^1.15.0',
+
         }
     };
 
@@ -128,12 +130,14 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             tags: ['stackblitz', 'sdk'],
             dependencies: {
                 moment: '*',
-                '@fundamental-ngx/core': 'v0.12.0-rc.5',
+                '@fundamental-ngx/core': 'v0.12.0-rc.45',
                 'fundamental-styles': 'v0.3.0-rc.6',
                 '@angular/animations': '*',
                 '@angular/http': '^7.2.15',
                 '@angular/cdk': '^8.2.3',
-                '@angular/material': '^8.2.3'
+                '@angular/material': '^8.2.3',
+                'popper.js': '1.16.0',
+
             }
         };
 
@@ -167,7 +171,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     this.project.files[_pathSCSS] = example.scssFileCode.default;
                 }
                 if (example.secondFile) {
-                    // if (example.scss) { this.addonScss = example.scss; }
                     const _pathTS = `src/app/${example.secondFile}.component.ts`;
                     this.parameters.app_component_basis = example.secondFile + '.component';
                     this.project.files[_pathTS] =
@@ -177,11 +180,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     @Component({
                         selector: 'fd-${example.fileName}',
                         templateUrl: './${example.fileName}.component.html',
-                        styleUrls: ['${example.fileName}.component.scss']
+                        styleUrls: ['./${example.fileName}.component.scss']
                     })
-                    export class ${example.component} {
-                        ${example.addonExport}
-                    }`;
+                    export class ${example.component} {}`;
                 }
                 else if (example.typescriptFileCode) {
                     const _pathTS = `src/app/${example.fileName}.component.ts`;
@@ -192,68 +193,62 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 const _pathTS = `src/app/${example.fileName}.component.ts`;
                 this.project.files[_pathTS] = example.code.default;
             }
+            // tslint:disable-next-line: max-line-length
             else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined && example.module === undefined)) {
                 const _pathTS2 = `src/app/${example.secondFile}.component.ts`;
                 this.project.files[_pathTS2] = example.code.default;
 
             }
+            // tslint:disable-next-line: max-line-length
             else if (example.language === 'typescript' && (example.thirdFile !== undefined && example.secondFile === undefined && example.module === undefined)) {
                 const _pathTS2 = `src/app/${example.thirdFile}.component.ts`;
                 this.project.files[_pathTS2] = example.code.default;
 
             }
+            if (example.module === undefined) {
+                this.project.files['src/app/app.module.ts'] = `
+                import { BrowserModule } from '@angular/platform-browser';
+                import { NgModule } from '@angular/core';
+                import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+                import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+                import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+                import { HttpClientModule, HttpClient } from '@angular/common/http';
+                import { HttpModule } from '@angular/http';
+                import { MatTableModule } from '@angular/material';
+                import {CdkTableModule } from '@angular/cdk/table';
+                import { DragDropModule } from '@angular/cdk/drag-drop';  
+                import {RouterModule, Routes} from '@angular/router'
+                import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
+        
+        
+                @NgModule({
+                  declarations: [
+                    ${this.parameters.app_component},
+                  ],
+                  imports: [
+                    BrowserModule,
+                    FormsModule,
+                    HttpClientModule,
+                    MatTableModule,
+                    DragDropModule,
+                    RouterModule.forRoot([{path: '#', component:${this.parameters.app_component}}], 
+                    { useHash: true }),
+                    CdkTableModule,
+                    HttpModule,
+                    ReactiveFormsModule,
+                    FundamentalNgxCoreModule,
+                    BrowserAnimationsModule
+                  ],
+                  providers: [],
+                  bootstrap: [${this.parameters.app_component}]
+                })
+                export class ${this.parameters.app_module} { }
+                `;
+            }
             else if (example.language === 'typescript' && example.secondFile === undefined && example.thirdFile === undefined && example.module !== undefined) {
                 this.project.files['src/app/app.module.ts'] = example.code.default;
-
             }
         });
-
-        this.project.files['src/app/app.module.ts'] = `
-        import { BrowserModule } from '@angular/platform-browser';
-        import { NgModule } from '@angular/core';
-        import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-        import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-        import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-        import { HttpClientModule, HttpClient } from '@angular/common/http';
-        import { HttpModule } from '@angular/http';
-        import { MatTableModule } from '@angular/material';
-        import {CdkTableModule } from '@angular/cdk/table';
-        import { DragDropModule } from '@angular/cdk/drag-drop';  
-        import {RouterModule, Routes} from '@angular/router'
-        import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
-
-
-        @NgModule({
-          declarations: [
-            ${this.parameters.app_component},
-          ],
-          imports: [
-            BrowserModule,
-            FormsModule,
-            HttpClientModule,
-            MatTableModule,
-            DragDropModule,
-            RouterModule.forRoot([{path: '#', component:${this.parameters.app_component}}], 
-            { useHash: true }),
-            CdkTableModule,
-            HttpModule,
-            ReactiveFormsModule,
-            FundamentalNgxCoreModule,
-            BrowserAnimationsModule
-          ],
-          providers: [],
-          bootstrap: [${this.parameters.app_component}]
-        })
-        export class ${this.parameters.app_module} { }
-        `;
-        // TODO make non inline
-
-        // if (example.tagname) {
-        //     this.parameters.html_tag = example.tagname;
-        //     this.parameters.app_component = example.component;
-        // }
-
-
 
         this.project.files['src/index.html'] = `
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fundamental-styles.css"></link>

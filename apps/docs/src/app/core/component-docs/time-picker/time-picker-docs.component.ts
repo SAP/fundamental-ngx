@@ -7,7 +7,13 @@ import * as timePickerNoSecondsSrc from '!raw-loader!./examples/time-picker-no-s
 import * as timePickerOnlyHoursSrc from '!raw-loader!./examples/time-picker-only-hours-example.component.html';
 import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compact-example.component.html';
 import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
-import * as timePickerTsCode from '!raw-loader!./examples/time-picker-examples.component.ts';
+import * as timePickerSrcTs from '!raw-loader!./examples/time-picker-example.component.ts';
+import * as timePickerMeridianSrcTs from '!raw-loader!./examples/time-picker-12-example.component.ts';
+import * as timePickerDisabledSrcTs from '!raw-loader!./examples/time-picker-disabled-example.component.ts';
+import * as timePickerNoSecondsSrcTs from '!raw-loader!./examples/time-picker-no-seconds-example.component.ts';
+import * as timePickerCompactSrcTs from '!raw-loader!./examples/time-picker-compact-example.component.ts';
+import * as timePickerNullSrcTs from '!raw-loader!./examples/time-picker-allow-null-example.component.ts';
+import * as timePickerOnlyHoursSrcTs from '!raw-loader!./examples/time-picker-only-hours-example.component.ts';
 import * as timePickerOtherDelimiterSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.html';
 import * as timePickerOtherDelimiterTsSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.ts';
 import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
@@ -28,10 +34,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerSrcTs,
             fileName: 'time-picker-example',
             component: 'TimePickerExampleComponent',
-            addonExport: 'timeObject = { hour: 12, minute: 0, second: 0 };'
         }
     ];
 
@@ -40,10 +45,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerMeridianSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerMeridianSrcTs,
             fileName: 'time-picker-12-example',
             component: 'TimePicker12ExampleComponent',
-            addonExport: 'timeMeridianObject = { hour: 12, minute: 0, second: 0 };'
         }
     ];
 
@@ -52,10 +56,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerNoSecondsSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerNoSecondsSrcTs,
             fileName: 'time-picker-no-seconds-example',
             component: 'TimePickerNoSecondsExampleComponent',
-            addonExport: 'timePickerNoSecondsObject = { hour: 12, minute: 0, second: null };'
         }
     ];
 
@@ -64,10 +67,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerOnlyHoursSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerOnlyHoursSrcTs,
             fileName: 'time-picker-only-hours-example',
             component: 'TimePickerOnlyHoursExampleComponent',
-            addonExport: 'timePickerOnlyHoursObject = { hour: 12, minute: null, second: null };'
         }
     ];
 
@@ -76,10 +78,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerDisabledSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerDisabledSrcTs,
             fileName: 'time-picker-disabled-example',
             component: 'TimePickerDisabledExampleComponent',
-            addonExport: 'timeObject = { hour: 12, minute: 0, second: 0 };'
         }
     ];
 
@@ -88,10 +89,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerCompactSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerCompactSrcTs,
             fileName: 'time-picker-compact-example',
             component: 'TimePickerCompactExampleComponent',
-            addonExport: 'timeObject = { hour: 12, minute: 0, second: 0 };'
         }
     ];
 
@@ -100,10 +100,9 @@ export class TimePickerDocsComponent implements OnInit {
             language: 'html',
             code: timePickerNullSrc,
             secondFile: 'time-picker-examples',
-            typescriptFileCode: timePickerTsCode,
+            typescriptFileCode: timePickerNullSrcTs,
             fileName: 'time-picker-allow-null-example',
             component: 'TimePickerAllowNullExampleComponent',
-            addonExport: 'timeObject = { hour: 12, minute: 0, second: 0 };'
         }
     ];
 

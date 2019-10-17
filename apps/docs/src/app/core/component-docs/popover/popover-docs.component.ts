@@ -29,7 +29,6 @@ export class PopoverDocsComponent implements OnInit {
             language: 'html',
             code: popoverSrc,
             fileName: 'popover-example',
-            secondFile: 'popover-examples',
             typescriptFileCode: popoverSrcTs,
             component: 'PopoverExampleComponent',
             scssFileCode: popoverSrcScss
@@ -99,7 +98,6 @@ export class PopoverDocsComponent implements OnInit {
             language: 'html',
             code: popoverFillHSrc,
             fileName: 'popover-c-fill',
-            secondFile: 'popover-c-fills',
             typescriptFileCode: popoverFillSrcTs,
             component: 'PopoverCFillComponent'
         }

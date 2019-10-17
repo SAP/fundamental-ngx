@@ -6,6 +6,7 @@ import * as alertExampleTs from '!raw-loader!./examples/alert-example.component.
 import * as alertExampleScs from '!raw-loader!./examples/alert-example.component.scss';
 import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
 import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
+import * as alertComponentAsContentExampleModule from '!raw-loader!./examples/alert-component-as-content.module.ts';
 import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
 import * as alertComponentAsContentExampleScss from '!raw-loader!./examples/alert-component-as-content-example.component.scss';
 import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
@@ -87,7 +88,6 @@ export class AlertDocsComponent implements OnInit {
     alertComponentContentExample: ExampleFile[] = [
         {
             language: 'html',
-            component: 'AlertComponentAsContentExampleComponent',
             fileName: 'alert-component-as-content-example',
             code: alertComponentAsContentExampleH,
             scssFileCode: alertComponentAsContentExampleScss
@@ -95,7 +95,9 @@ export class AlertDocsComponent implements OnInit {
         {
             language: 'typescript',
             fileName: 'alert-component-as-content-example',
-            code: alertComponentAsContentExample
+            code: alertComponentAsContentExample,
+            component: 'AlertComponentAsContentExampleComponent',
+
         },
         {
             language: 'typescript',
@@ -103,7 +105,14 @@ export class AlertDocsComponent implements OnInit {
             name: 'Alert Content',
             fileName: 'alert-content',
             secondFile: 'alert-content'
+        },
+        {
+            language: 'typescript',
+            code: alertComponentAsContentExampleModule,
+            name: 'Module',
+            module: 'app.module.ts'
         }
+
     ];
 
     alertInlineExample: ExampleFile[] = [
