@@ -202,7 +202,12 @@ In the library source, open `poster.component.html`, remove the default code and
 
 ```HTML
 <img src="https://placeimg.com/400/600/nature'"/>
+
 ```
+
+## Step14: Making stackblitz work
+
+Follow the instructions at https://github.com/SAP/fundamental-ngx/wiki/Stackblitz-support-instructions
 
 Now, when you navigate to the Poster docs through the side navigation, you'll see our new Poster component!
 
