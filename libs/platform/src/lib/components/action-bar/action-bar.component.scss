@@ -1,3 +1,10 @@
 .action-bar-display {
     display: -webkit-box;
 }
+.fdp-action-bar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    background-color: var(--fd-color-background-2);
+}
