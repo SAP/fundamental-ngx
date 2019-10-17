@@ -317,8 +317,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden */
     constructor(private elRef: ElementRef,
-        private changeDetRef: ChangeDetectorRef,
-        public dateTimeAdapter: DateTimeFormatParser
+                private changeDetRef: ChangeDetectorRef,
+                public dateTimeAdapter: DateTimeFormatParser
     ) {
     }
 
