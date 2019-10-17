@@ -21,7 +21,7 @@ import { TileDocsComponent } from './tile/tile-docs.component';
 import { TimeDocsComponent } from './time/time-docs.component';
 import { ToggleDocsComponent } from './toggle/toggle-docs.component';
 
-export const CORE_COMPONENT_SCHEMAS: { [name: string]: Schema } = {
+export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     badgeLabel: BadgeLabelDocsComponent.schema,
     button: ButtonDocsComponent.schema,
     buttonGroup: ButtonGroupDocsComponent.schema,
