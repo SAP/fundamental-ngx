@@ -139,10 +139,12 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
 
     /** Method allowing focusing on elements within this component. */
     focusElement(elementSelector: string): void {
-        const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
-        if (elementToFocus) {
-            this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
-        }
+        setTimeout(() => {
+            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
+            if (elementToFocus) {
+                this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
+            }
+        }, 0);
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
