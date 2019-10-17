@@ -16,6 +16,5 @@ export interface ExampleFile {
     thirdFile?: string;
     component?: string;
     fileName?: string;
-    addonExport?: string;
     appModuleAddon?: string;
 }

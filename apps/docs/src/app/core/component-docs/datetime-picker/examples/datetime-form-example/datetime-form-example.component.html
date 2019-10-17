@@ -1,5 +1,5 @@
 <form [formGroup]="customForm" class="flex-form">
-    <div>
+    <div *ngIf="customForm">
         <fd-datetime-picker formControlName="date"></fd-datetime-picker><br />
         Touched: {{ customForm.controls.date.touched }}<br />
         Dirty: {{ customForm.controls.date.dirty }}<br />

@@ -180,15 +180,13 @@ import { TimeNoSecondsExampleComponent } from '../core/component-docs/time/examp
 import { TimeNoSpinnersExampleComponent } from '../core/component-docs/time/examples/time-no-spinners-example.component';
 import { TimeOnlyHoursExampleComponent } from '../core/component-docs/time/examples/time-only-hours-example.component';
 import { Time12ExampleComponent } from '../core/component-docs/time/examples/time-12-example.component';
-import {
-    TimePickerExampleComponent,
-    TimePicker12ExampleComponent,
-    TimePickerDisabledExampleComponent,
-    TimePickerNoSecondsExampleComponent,
-    TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent,
-    TimePickerOnlyHoursExampleComponent
-} from '../core/component-docs/time-picker/examples/time-picker-examples.component';
+import { TimePickerExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-example.component';
+import { TimePicker12ExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-12-example.component';
+import { TimePickerDisabledExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-disabled-example.component';
+import { TimePickerNoSecondsExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-no-seconds-example.component';
+import { TimePickerCompactExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-compact-example.component';
+import { TimePickerAllowNullExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-allow-null-example.component';
+import { TimePickerOnlyHoursExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-only-hours-example.component';
 import { TimePickerFormExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from '../core/component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from '../core/component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
@@ -316,13 +314,11 @@ import { DatePickerDisabledExampleComponent } from '../core/component-docs/date-
 import { DatetimeDisabledExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { SplitButtonHeaderComponent } from '../core/component-docs/split-button/split-button-header/split-button-header.component';
-import {
-    ButtonSplitOptionsExampleComponent,
-    ButtonSplitProgrammaticalExampleComponent,
-    ButtonSplitTemplateExampleComponent,
-    ButtonSplitTypesExampleComponent,
-    ButtonSplitTypesIconsComponent
-} from '../core/component-docs/split-button/examples/split-button-examples.component';
+import { ButtonSplitOptionsExampleComponent } from '../core/component-docs/split-button/examples/split-button-options-example.component';
+import { ButtonSplitProgrammaticalExampleComponent } from '../core/component-docs/split-button/examples/split-button-programmatical-example.component';
+import { ButtonSplitTemplateExampleComponent } from '../core/component-docs/split-button/examples/split-button-template-example.component';
+import { ButtonSplitTypesExampleComponent } from '../core/component-docs/split-button/examples/split-button-types-example.component';
+import { ButtonSplitTypesIconsComponent } from '../core/component-docs/split-button/examples/split-button-icons-example.component';
 import {
     TabNavigationExampleChildFirst,
     TabNavigationExampleChildSecond,

@@ -5,6 +5,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
 import * as inlineHelpTsCode from '!raw-loader!./examples/inline-help-examples.component.ts';
+import * as inlineHelpScssCode from '!raw-loader!./examples/inline-help-example.component.scss';
 import Popper from 'popper.js';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -53,7 +54,8 @@ export class InlineHelpDocsComponent implements OnInit {
             fileName: 'inline-help-example',
             secondFile: 'inline-help-examples',
             typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpExampleComponent'
+            component: 'InlineHelpExampleComponent',
+            scssFileCode: inlineHelpScssCode
         }
     ];
 
