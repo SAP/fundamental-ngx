@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.43"></a>
+# [0.12.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.42...v0.12.0-rc.43) (2019-10-17)
+
+
+### Bug Fixes
+
+* calendar focusing issues ([#1369](https://github.com/SAP/fundamental-ngx/issues/1369)) ([b9ca450](https://github.com/SAP/fundamental-ngx/commit/b9ca450))
+* timepicker without minutes/seconds and add some tests ([#1357](https://github.com/SAP/fundamental-ngx/issues/1357)) ([39b98fa](https://github.com/SAP/fundamental-ngx/commit/39b98fa))
+
+
+
 <a name="0.12.0-rc.42"></a>
 # [0.12.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.41...v0.12.0-rc.42) (2019-10-16)
 
