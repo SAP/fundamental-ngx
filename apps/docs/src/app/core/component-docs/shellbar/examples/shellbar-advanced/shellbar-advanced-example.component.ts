@@ -11,11 +11,11 @@ export class ShellbarAdvancedExampleComponent {
 
     productMenuControl = 'Corporate Portal';
 
-    productMenuItems: ShellbarMenuItem[] = [
-        {text: 'Application A', callback: () => {alert('Application A Clicked')}},
-        {text: 'Application B', callback: () => {alert('Application B Clicked')}},
-        {text: 'Application C', callback: () => {alert('Application C Clicked')}},
-        {text: 'Application D', callback: () => {alert('Application D Clicked')}}
+    productMenuItems: ShellbarMenuItem = [
+        {name: 'Application A', link: '#', callback: () => {}},
+        {name: 'Application B', glyph: 'menu', callback: () => {}},
+        {name: 'Application C', link: '#', glyph: 'menu', callback: () => {}},
+        {name: 'Application D', link: '#', glyph: 'menu', callback: () => {}}
     ];
 
     user: ShellbarUser = {
@@ -93,4 +93,5 @@ export class ShellbarAdvancedExampleComponent {
         console.log($event);
         alert(product + ' Product Clicked');
     }
+
 }

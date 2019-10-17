@@ -1,5 +1,6 @@
-import { Component, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
+import { MenuComponent } from '../../menu/menu.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 
 /**
@@ -21,6 +22,10 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popoverComponent: PopoverComponent;
+
+    /** @hidden */
+    @ContentChild(MenuComponent, { static: false })
+    menuComponent: MenuComponent;
 
     /**
      * The control element to toggle the product menu,
@@ -65,4 +70,13 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
         item.callback(event);
     }
 
+    /**
+    * @hidden
+    */
+    isAnyGlyphInItems(): boolean {
+        if (!this.items || this.items.length === 0) {
+            return false;
+        }
+        return !!this.items.find(item => item.glyph);
+    }
 }
