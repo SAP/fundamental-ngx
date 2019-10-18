@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ShellbarProduct, ShellbarUser } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, ShellbarProduct, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-advanced-example',
@@ -11,11 +11,11 @@ export class ShellbarAdvancedExampleComponent {
 
     productMenuControl = 'Corporate Portal';
 
-    productMenuItems: ShellbarMenuItem = [
-        {name: 'Application A', link: '#', callback: () => {}},
-        {name: 'Application B', glyph: 'menu', callback: () => {}},
-        {name: 'Application C', link: '#', glyph: 'menu', callback: () => {}},
-        {name: 'Application D', link: '#', glyph: 'menu', callback: () => {}}
+    productMenuItems: ShellbarMenuItem[] = [
+        {name: 'Application A', link: '#'},
+        {name: 'Application B', glyph: 'menu', callback: () => { alert('Application B'); }},
+        {name: 'Application C', link: '#', glyph: 'menu'},
+        {name: 'Application D', link: '#', glyph: 'menu'}
     ];
 
     user: ShellbarUser = {
@@ -23,7 +23,7 @@ export class ShellbarAdvancedExampleComponent {
         colorAccent: 1
     };
 
-    userMenu: ShellbarMenuItem[] = [
+    userMenu: ShellbarUserMenu[] = [
         {text: 'Settings', callback: this.settingsCallback},
         {text: 'Sign Out', callback: this.signOutCallback}
     ];

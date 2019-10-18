@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ShellbarProduct, ShellbarUser } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, ShellbarProduct, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
@@ -12,10 +12,10 @@ export class ShellbarCollapsibleExampleComponent {
     productMenuControl = 'Corporate Portal';
 
     productMenuItems: ShellbarMenuItem[] = [
-        {text: 'Application A', callback: () => {alert('Application A Clicked')}},
-        {text: 'Application B', callback: () => {alert('Application B Clicked')}},
-        {text: 'Application C', callback: () => {alert('Application C Clicked')}},
-        {text: 'Application D', callback: () => {alert('Application D Clicked')}}
+        {name: 'Application A', callback: () => {alert('Application A Clicked')}},
+        {name: 'Application B', callback: () => {alert('Application B Clicked')}},
+        {name: 'Application C', callback: () => {alert('Application C Clicked')}},
+        {name: 'Application D', callback: () => {alert('Application D Clicked')}}
     ];
 
     user: ShellbarUser = {
@@ -23,7 +23,7 @@ export class ShellbarCollapsibleExampleComponent {
         colorAccent: 1
     };
 
-    userMenu: ShellbarMenuItem[] = [
+    userMenu: ShellbarUserMenu[] = [
         {text: 'Settings', callback: this.settingsCallback},
         {text: 'Sign Out', callback: this.signOutCallback}
     ];
