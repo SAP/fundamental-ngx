@@ -1,15 +1,13 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
-    ComponentRef, ContentChild,
+    ComponentRef,
     ElementRef,
     EmbeddedViewRef,
     HostListener,
     Input,
-    OnDestroy,
     Optional,
     TemplateRef,
     Type,
@@ -17,10 +15,10 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import focusTrap from 'focus-trap';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationDefault } from '../notification-utils/notification-default';
 import { DefaultNotificationComponent } from '../notification-utils/default-notification/default-notification.component';
+import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 export type NotificationType = 'success' | 'warning' | 'information' | 'error';
 export type NotificationSize = 's' | 'm';
@@ -37,7 +35,7 @@ export type NotificationSize = 's' | 'm';
         '[attr.id]': 'id',
     }
 })
-export class NotificationComponent implements AfterViewInit {
+export class NotificationComponent extends AbstractFdNgxClass implements AfterViewInit {
 
     /** Size of notification, defined by user, s or m */
     @Input()
@@ -78,6 +76,7 @@ export class NotificationComponent implements AfterViewInit {
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
                 @Optional() private notificationRef: NotificationRef) {
+        super(elRef);
     }
 
     ngAfterViewInit(): void {
@@ -121,6 +120,19 @@ export class NotificationComponent implements AfterViewInit {
         };
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
         console.log('create');
+    }
+
+    _setProperties(): void {
+        this._addClassToElement('fd-notification');
+        this._addClassToElement('fd-notification-custom-block');
+        if (this.type) {
+            this._addClassToElement('fd-notification--' + this.type);
+        }
+
+        if (this.size) {
+            this._addClassToElement('fd-notification--' + this.size);
+        }
+
     }
 
 }

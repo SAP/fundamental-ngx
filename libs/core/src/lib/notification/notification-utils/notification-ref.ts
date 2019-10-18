@@ -46,7 +46,7 @@ export class NotificationRef {
      * @param reason Value passed back to the observable as an error.
      */
     closeWholeGroup(reason?: any): void {
-        this._afterClosedGroup.error(reason);
+        this._afterClosedGroup.next(reason);
     }
 
     /**
