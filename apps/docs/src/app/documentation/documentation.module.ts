@@ -231,6 +231,7 @@ import { PopoverTriggersComponent } from '../core/component-docs/popover-directi
 import { PopoverProgrammaticComponent } from '../core/component-docs/popover-directive/examples/popover-programmatic/popover-programmatic.component';
 import { PopoverFillComponent } from '../core/component-docs/popover-directive/examples/popover-fill/popover-fill.component';
 import { PopoverCFillComponent } from '../core/component-docs/popover/examples/popover-c-fill/popover-c-fill.component';
+import { SectionsToolbarComponent } from './../documentation/core-helpers/sections-toolbar/sections-toolbar.component';
 
 import { HomeDocsComponent } from '../core/component-docs/core-home/core-home.component';
 import { NewComponentComponent } from '../core/component-docs/new-component/new-component.component';
@@ -730,6 +731,7 @@ import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellba
         SearchPipe,
         ModalPositionExampleComponent,
         ContainerComponent,
+        SectionsToolbarComponent,
         SelectDocsComponent,
         SelectHeaderComponent,
         SelectBasicExampleComponent,

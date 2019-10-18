@@ -169,13 +169,13 @@ import { TimeDisabledExampleComponent } from '../core/component-docs/time/exampl
 import { TimeNoSecondsExampleComponent } from '../core/component-docs/time/examples/time-no-seconds-example.component';
 import { TimeNoSpinnersExampleComponent } from '../core/component-docs/time/examples/time-no-spinners-example.component';
 import { TimeOnlyHoursExampleComponent } from '../core/component-docs/time/examples/time-only-hours-example.component';
-import {TimePickerExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-example.component';
-import {TimePicker12ExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-12-example.component';
-import {TimePickerDisabledExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-disabled-example.component';
-import {TimePickerNoSecondsExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-no-seconds-example.component';
-import {TimePickerCompactExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-compact-example.component';
-import {TimePickerAllowNullExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-allow-null-example.component';
-import {TimePickerOnlyHoursExampleComponent} from '../core/component-docs/time-picker/examples/time-picker-only-hours-example.component';
+import { TimePickerExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-example.component';
+import { TimePicker12ExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-12-example.component';
+import { TimePickerDisabledExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-disabled-example.component';
+import { TimePickerNoSecondsExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-no-seconds-example.component';
+import { TimePickerCompactExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-compact-example.component';
+import { TimePickerAllowNullExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-allow-null-example.component';
+import { TimePickerOnlyHoursExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-only-hours-example.component';
 
 
 import { TimePickerFormExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-form-example.component';
@@ -383,7 +383,7 @@ import { LayoutGridDocsComponent } from '../core/component-docs/layout-grid/layo
 import { SimpleTreeExampleComponent } from '../core/component-docs/tree/examples/simple-tree-example.component';
 import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellbar/examples/shellbar-advanced/shellbar-advanced-example.component';
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
-
+import { SectionsToolbarComponent } from './../documentation/core-helpers/sections-toolbar/sections-toolbar.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
 import { NotificationDocsComponent } from './component-docs/notification/notification-docs.component';
@@ -574,6 +574,7 @@ import { NotificationContentComponent } from './component-docs/notification/exam
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
+        SectionsToolbarComponent,
         SelectNativeExampleComponent,
         SelectNativeFormGroupExampleComponent,
         SelectNativeInlineHelpExampleComponent,
