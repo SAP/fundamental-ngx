@@ -31,7 +31,7 @@ For an existing Angular CLI application,
 
 1. **Install Fundamental-NGX.**
    `ng add @fundamental-ngx/platform`
-   For models prior to 0.10 use `fundamental-ngx`
+   For models prior to 0.11.1 use `fundamental-ngx`
 
     _If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)._
 
@@ -58,7 +58,7 @@ For an existing Angular CLI application,
     import { ToggleModule } from '@fundamental-ngx/core';
     ```
 
-    For models prior to 0.10 use `fundamental-ngx`
+    For models prior to 0.11.1 use `fundamental-ngx`
 
     import { ToggleModule } from '@fundamental-ngx/core';
 
@@ -84,13 +84,13 @@ Fundamental NGX makes use of Jasmine and Karma for its unit tests.
 
 Run `ng test @fundamental-ngx/platform`. Append `--code-coverage` to generate code coverage documentation.
 
-For models prior to 0.10 use `fundamental-ngx`
+For models prior to 0.11.1 use `fundamental-ngx`
 
 ## Versioning
 
 The `@fundamental-ngx/platform` library follows [Semantic Versioning](https://semver.org/). These components strictly adhere to the `[MAJOR].[MINOR].[PATCH]` numbering system (also known as `[BREAKING].[FEATURE].[FIX]`).
 
-For models prior to 0.10 use `fundamental-ngx`
+For models prior to 0.11.1 use `fundamental-ngx`
 
 Merges to the `master` branch will be published as a prerelease. Prereleases will include an **rc** version (_e.g._ `[MAJOR].[MINOR].[PATCH]-rc.[RC]`).
 

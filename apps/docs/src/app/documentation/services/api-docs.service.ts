@@ -7,14 +7,12 @@ import { Observable } from 'rxjs';
 export class ApiDocsService {
 
     readonly BASE_URL = 'assets/typedoc/';
-    regex: RegExp;
 
     constructor(private httpClient: HttpClient, private router: Router) { }
 
     getComponentHtml(component: string): Observable<string> {
         const regex = /(\/[^\/\s]+\/)/;
         const currentLib = regex.exec(this.router.url)[0];
-        console.log(`Found match, group`, currentLib);
         component = component.toLocaleLowerCase() + '.html';
         if (currentLib !== null) {
             return this.httpClient.get<string>(this.BASE_URL + currentLib + 'classes/' + component, { responseType: 'text' as 'json' });
