@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
+import { ShellbarMenuItem } from '../model/shellbar-menu-item';
+import { ShellbarUser } from '../model/shellbar-user';
 
 /**
  * This Component extends popover component and passes all of the options and events from outside to popover component
@@ -13,11 +15,11 @@ export class ShellbarUserMenuComponent extends PopoverComponent {
 
     /** The user data. */
     @Input()
-    user: any;
+    user: ShellbarUser;
 
     /** The user menu data. */
     @Input()
-    userMenu: any[];
+    userMenu: ShellbarMenuItem[];
 
     /** Event emitted on item click */
     @Output()
