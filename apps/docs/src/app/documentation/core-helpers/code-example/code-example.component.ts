@@ -161,13 +161,11 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 this.parameters.app_component_ts = example.fileName + '.component.ts';
                 this.parameters.app_component_html_path = 'src/app/' + example.fileName + '.component.html';
                 this.parameters.app_component_ts_path = 'src/app/' + example.fileName + '.component.ts';
-                console.log('rfrfr' + this.parameters.app_component);
 
             }
 
 
             if (example.language === 'html') {
-                console.log('sec' + this.parameters.app_component);
                 const _pathHTML = `src/app/${example.fileName}.component.html`;
                 this.project.files[_pathHTML] = example.code.default;
                 const _pathSCSS = `src/app/${example.fileName}.component.scss`;
@@ -263,7 +261,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         // TODO make non inline
 
 
-        // console.log(this.project);
         sdk.openProject(this.project);
     }
 
