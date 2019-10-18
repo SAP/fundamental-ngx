@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductMenuComponent } from './product-menu.component';
 import { PopoverModule } from '../../popover/popover.module';
 import { MenuModule } from '../../menu/menu.module';
+import { IdentifierModule } from '../../identifier/identifier.module';
 
 describe('ProductMenuComponent', () => {
     let component: ProductMenuComponent;
@@ -11,7 +12,7 @@ describe('ProductMenuComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ProductMenuComponent],
-            imports: [PopoverModule, MenuModule]
+            imports: [PopoverModule, MenuModule, IdentifierModule]
         }).compileComponents();
     }));
 

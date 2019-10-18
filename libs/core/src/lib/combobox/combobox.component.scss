@@ -5,7 +5,11 @@
         display: block;
     }
 
-    .fd-combobox-input-menu-overflow {
-        overflow: auto;
+    .fd-combobox-shellbar-custom {
+        display: inline-block;
     }
+}
+
+.fd-combobox-input-menu-overflow {
+    overflow: auto;
 }

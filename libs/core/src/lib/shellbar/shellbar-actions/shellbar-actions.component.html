@@ -28,7 +28,7 @@
                         </div>
                         <li fd-menu-item
                             *ngFor="let action of shellbarActions"
-                            (click)="itemClicked(action, $event)">
+                            (click)="actionClicked(action, $event)">
                             {{action.label}}
                         </li>
                         <div *ngIf="productSwitcher"
@@ -49,7 +49,7 @@
                         <hr>
                         <li fd-menu-item
                             *ngFor="let product of productSwitcherItems"
-                            (click)="itemClicked(product, $event)">
+                            (click)="productClicked(product, $event)">
                             {{product.title}}
                         </li>
                     </ul>
