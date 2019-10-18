@@ -15,7 +15,7 @@ export class PlayGroundComponent implements OnInit {
 
     @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();
 
-    ngOnInit() { }
+    ngOnInit() {}
 
     onSchemaValueChanges($event) {
         this.onFormChanges.emit($event);

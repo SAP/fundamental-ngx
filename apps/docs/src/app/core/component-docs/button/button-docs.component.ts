@@ -722,7 +722,7 @@ export class ButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() { }
+    ngOnInit() {}
     onSchemaValues(data) {
         this.data = data;
     }
