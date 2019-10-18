@@ -16,6 +16,7 @@ import { AlertService } from '@fundamental-ngx/core';
 import hljs from 'highlight.js/lib';
 import sdk from '@stackblitz/sdk';
 import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
+import * as maints from '!raw-loader!./code-example-stack/main.ts';
 
 
 @Component({
@@ -59,14 +60,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     };
 
     app_app_component = ``
-
-    maints = `import { enableProdMode } from '@angular/core';
-    import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-    import { AppModule } from './app/app.module';
-    
-    platformBrowserDynamic().bootstrapModule(AppModule)
-        .catch(err => console.error(err));`
-
 
 
     project = {
@@ -120,7 +113,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
         this.project = {
             files: {
-                'src/main.ts': this.maints,
+                'src/main.ts': maints.default,
                 'src/polyfills.ts': polyfills.default,
                 'src/styles.scss': '',
             },
