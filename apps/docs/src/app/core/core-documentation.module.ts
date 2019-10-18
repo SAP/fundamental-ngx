@@ -383,7 +383,6 @@ import { LayoutGridDocsComponent } from '../core/component-docs/layout-grid/layo
 import { SimpleTreeExampleComponent } from '../core/component-docs/tree/examples/simple-tree-example.component';
 import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellbar/examples/shellbar-advanced/shellbar-advanced-example.component';
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
-import { SectionsToolbarComponent } from './../documentation/core-helpers/sections-toolbar/sections-toolbar.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
 import { NotificationDocsComponent } from './component-docs/notification/notification-docs.component';
@@ -574,7 +573,6 @@ import { NotificationContentComponent } from './component-docs/notification/exam
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
-        SectionsToolbarComponent,
         SelectNativeExampleComponent,
         SelectNativeFormGroupExampleComponent,
         SelectNativeInlineHelpExampleComponent,

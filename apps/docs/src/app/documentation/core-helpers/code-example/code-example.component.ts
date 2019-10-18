@@ -16,8 +16,6 @@ import { AlertService } from '@fundamental-ngx/core';
 import hljs from 'highlight.js/lib';
 import sdk from '@stackblitz/sdk';
 import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
-import * as angularJson from '!raw-loader!./code-example-stack/helper.js';
-
 
 
 @Component({
@@ -60,7 +58,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         app_component_ts_path: ''
     };
 
-    app_app_component = ``// TODO make non inline
+    app_app_component = ``
 
     maints = `import { enableProdMode } from '@angular/core';
     import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -70,7 +68,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         .catch(err => console.error(err));`
 
 
-    angular_json = angularJson;
 
     project = {
         files: {},
@@ -80,13 +77,13 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         tags: ['stackblitz', 'sdk'],
         dependencies: {
             moment: '*',
-            '@fundamental-ngx/core': 'v0.12.0-rc.45',
-            'fundamental-styles': 'v0.3.0-rc.6',
+            '@fundamental-ngx/core': 'latest',
+            'fundamental-styles': 'latest',
             '@angular/animations': '*',
-            '@angular/http': '^7.2.15',
-            '@angular/cdk': '^8.2.3',
-            '@angular/material': '^8.2.3',
-            'popper.js': '^1.15.0',
+            '@angular/http': 'latest',
+            '@angular/cdk': 'latest',
+            '@angular/material': 'latest',
+            'popper.js': 'latest',
 
         }
     };
@@ -118,13 +115,11 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             title = 'my-fd-ngx-dream-app';
         }
         `;
-        // TODO make non inline
 
 
 
         this.project = {
             files: {
-                'angular.json': this.angular_json,
                 'src/main.ts': this.maints,
                 'src/polyfills.ts': polyfills.default,
                 'src/styles.scss': '',
@@ -135,13 +130,13 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             tags: ['stackblitz', 'sdk'],
             dependencies: {
                 moment: '*',
-                '@fundamental-ngx/core': 'v0.12.0-rc.45',
-                'fundamental-styles': 'v0.3.0-rc.6',
+                '@fundamental-ngx/core': 'latest',
+                'fundamental-styles': 'latest',
                 '@angular/animations': '*',
-                '@angular/http': '^7.2.15',
-                '@angular/cdk': '^8.2.3',
-                '@angular/material': '^8.2.3',
-                'popper.js': '1.16.0',
+                '@angular/http': 'latest',
+                '@angular/cdk': 'latest',
+                '@angular/material': 'latest',
+                'popper.js': 'latest',
 
             }
         };
@@ -258,7 +253,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css"></link>
                     <${this.parameters.html_tag}></${this.parameters.html_tag}>
         `;
-        // TODO make non inline
 
 
         sdk.openProject(this.project);
