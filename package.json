@@ -52,7 +52,7 @@
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
   },
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.803.9",
+    "@angular-devkit/build-angular": "^0.803.12",
     "@angular/animations": "^8.2.7",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.7",
