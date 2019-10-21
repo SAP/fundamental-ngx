@@ -1,6 +1,17 @@
 @import "~fundamental-styles/dist/shellbar";
 @import "~fundamental-styles/dist/counter";
 
+.fd-menu--addon-before {
+    .fd-menu__item {
+        &.fd-product-menu-padding-right {
+            padding-right: 24px;
+        }
+
+        &.fd-product-menu-padding-left {
+            padding-left: 30px;
+        }
+    }
+}
 
 .fd-user-menu__control {
     padding: 4px;
