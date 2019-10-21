@@ -16,11 +16,11 @@ The SAP Fundamental Styles library is a design system and HTML/CSS component lib
 This repository contains 2 libraries, 
 
 * [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/master/libs/core): 
-Fundamental-ngx core provides base angular implementation of SAP Fundamental styles to offer developers a rich set of components
+The Fundamental-ngx core provides base angular implementation of SAP Fundamental styles to offer developers a rich set of components
 they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
 
 * [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/master/libs/platform):
-Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
+The Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
 which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
 
 
@@ -30,7 +30,7 @@ To download and use Fundamental NGX, you will first need to install the [node pa
 
 Fundamental NGX is intended for use with Angular 7 or newer.
 
-Prior knowledge of Angular is recommended, to use fundamental-ngx library.
+Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Known Issues
 
