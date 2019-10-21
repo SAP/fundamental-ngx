@@ -46,6 +46,7 @@ import {FormsModule} from '@angular/forms';
 import {LocalizationEditorModule} from './localizator-editor/localization-editor.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
+import { PipeModule } from './utils/public_api';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -93,6 +94,7 @@ import { LayoutGridModule } from './layout-grid/layout-grid.module';
     ToggleModule,
     TokenModule,
     TreeModule,
+    PipeModule
   ],
   providers: [AlertService, ModalService],
 })

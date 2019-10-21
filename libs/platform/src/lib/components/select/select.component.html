@@ -1,0 +1,27 @@
+<fd-popover [(isOpen)]="isOpen" (isOpenChange)="isOpenChangeHandle($event)" [options]="popperOptions"
+    [fillControlMode]="fillControlMode" [appendTo]="appendTo" class="fd-select-popover-custom">
+    <fd-popover-control>
+        <ng-container *ngIf="triggerTemplate">
+            <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!triggerTemplate">
+            <button class="fd-dropdown__control fd-button fd-select-button-custom" aria-haspopup="true"
+                [ngClass]="(selectType ? ' fd-button--' + selectType : '')+ (glyph ? ' sap-icon--' + glyph : '')+(compact ? ' fd-button--compact' : '')"
+                [attr.aria-expanded]="isOpen" [disabled]="disabled">
+                <span class="fd-select-text-custom">{{triggerValue}}</span>
+            </button>
+        </ng-container>
+    </fd-popover-control>
+    <fd-popover-body class="fd-select-popover-body-custom"
+        [style.maxHeight]="maxHeight || (calculatedMaxHeight + 'px')">
+        <fdp-option *ngFor="let term of dropdownValues; let index = index;"
+            class="fd-option-default-custom fd-menu__item" [ngClass]="(isSelected[index] ? ' is-selected' : '')"
+            (click)="onMenuClickHandler(index)" (keydown)="onMenuKeydownHandler($event, index)">
+            <span *ngIf="!itemTemplate"
+                [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"></span>
+            <ng-container *ngIf="itemTemplate">
+                <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
+            </ng-container>
+        </fdp-option>
+    </fd-popover-body>
+</fd-popover>

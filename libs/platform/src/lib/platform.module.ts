@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-import { PlatformButtonModule } from './components/button/button.module';
-import { PlatformSearchInputModule } from './components/search-input/search-input.module';
-import { ActionBarModule } from './components/action-bar/action-bar.module';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FundamentalNgxCoreModule} from '@fundamental-ngx/core';
+import {PlatformButtonModule} from './components/button/button.module';
+import {PlatformSearchInputModule} from './components/search-input/search-input.module';
+import {ActionBarModule} from './components/action-bar/action-bar.module';
+import {SelectModule} from './components/select/select.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -13,7 +13,8 @@ import { ActionBarModule } from './components/action-bar/action-bar.module';
     exports: [
         PlatformButtonModule,
         PlatformSearchInputModule,
-        ActionBarModule
+        ActionBarModule,
+        SelectModule
     ]
 })
 export class FundamentalNgxPlatformModule { }
