@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.52"></a>
+# [0.12.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.51...v0.12.0-rc.52) (2019-10-21)
+
+
+### Bug Fixes
+
+* **core:** expose Util package to platform ([#1404](https://github.com/SAP/fundamental-ngx/issues/1404)) ([de8c3dd](https://github.com/SAP/fundamental-ngx/commit/de8c3dd)), closes [#1269](https://github.com/SAP/fundamental-ngx/issues/1269)
+
+
+
 <a name="0.12.0-rc.51"></a>
 # [0.12.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.50...v0.12.0-rc.51) (2019-10-19)
 
