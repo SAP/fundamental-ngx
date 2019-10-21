@@ -11,7 +11,7 @@
             fd-dnd-container
             *ngFor="let product of products">
             <div cdkDrag
-                 [cdkDragDisabled]="product.disabledDragAndDrop"
+                 [cdkDragDisabled]="product.disabledDragAndDrop || !dragAndDropEnabled"
                  tabindex="0"
                  class="fd-product-switch__item fd-product-switch__fullfill"
                  [ngClass]="{'selected': product.selected}"

@@ -44,22 +44,18 @@ describe('DndContainerDirective', () => {
 
     it('should react to start drag', () => {
         spyOn(directive.started, 'emit');
-        spyOn((directive as any), 'removeClasses');
         expect((directive as any).placeholderElement).toBeFalsy();
         directive.onCdkDragStart();
         expect((directive as any).placeholderElement).not.toBeFalsy();
         expect(directive.started.emit).toHaveBeenCalled();
-        expect((directive as any).removeClasses).toHaveBeenCalled();
     });
 
     it('should react to drag release', () => {
         spyOn(directive.released, 'emit');
-        spyOn((directive as any), 'returnClasses');
         (directive as any).placeholderElement = document.createElement('div');
         directive.onCdkDragReleased();
         expect((directive as any).placeholderElement).toBeFalsy();
         expect(directive.released.emit).toHaveBeenCalled();
-        expect((directive as any).returnClasses).toHaveBeenCalled();
     });
 
     it('should create proper horizontal line', () => {

@@ -69,7 +69,7 @@ describe('DndListDirective', () => {
 
 
     it('Should handle move and detect good target (1)', () => {
-        spyOn((directive as any), 'generateLines');
+        spyOn((directive as any), 'generateLine');
         const pointerPosition = { pointerPosition: { x: 150, y: 150 } };
         (directive as any).closestLinkIndex = 100;
         (directive as any).closestLinkPosition = 'after';
@@ -80,12 +80,12 @@ describe('DndListDirective', () => {
 
         expect((directive as any).closestLinkIndex).toBe(0);
         expect((directive as any).closestLinkPosition).toBe('before');
-        expect((directive as any).generateLines).toHaveBeenCalledWith(0, 'before');
+        expect((directive as any).generateLine).toHaveBeenCalledWith(0, 'before');
     });
 
 
     it('Should handle move and detect good target (2)', () => {
-        spyOn((directive as any), 'generateLines');
+        spyOn((directive as any), 'generateLine');
         const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
         (directive as any).closestLinkIndex = 1000;
         (directive as any).closestLinkPosition = 'after';
@@ -96,7 +96,7 @@ describe('DndListDirective', () => {
 
         expect((directive as any).closestLinkIndex).toBe(2);
         expect((directive as any).closestLinkPosition).toBe('before');
-        expect((directive as any).generateLines).toHaveBeenCalledWith(2, 'before');
+        expect((directive as any).generateLine).toHaveBeenCalledWith(2, 'before');
     });
 
     it ('should handle dragend', () => {
