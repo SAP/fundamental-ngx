@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.53"></a>
+# [0.12.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.52...v0.12.0-rc.53) (2019-10-21)
+
+
+### Bug Fixes
+
+* Add links and glyphs to product menu ([#1421](https://github.com/SAP/fundamental-ngx/issues/1421)) ([a043b8b](https://github.com/SAP/fundamental-ngx/commit/a043b8b))
+
+
+
 <a name="0.12.0-rc.52"></a>
 # [0.12.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.51...v0.12.0-rc.52) (2019-10-21)
 
