@@ -32,18 +32,18 @@ To download and use Fundamental NGX, you will first need to install the [node pa
 
 Fundamental NGX is intended for use with Angular 7 or newer.
 
-Prior knowledge of Angular is recommended, to use fundamental-ngx library.
+Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Versioning
 
-npm package [fundamental-ngx](https://npmjs.com/package/fundamental-ngx) version `0.10.0` is compiled with Angular 7. Supports Angular 6 and 7 versions.
+npm package [fundamental-ngx](https://npmjs.com/package/fundamental-ngx) version `0.10.0` is compiled with Angular 7. It supports Angular 6 and 7 versions.
  This version is not supported by bug fixes. 
 
 npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 7.
-Supports Angular 6 and 7 version. This version will have merged some bug-fixes.
+It supports Angular 6 and 7 versions. This version will have merged some bug-fixes.
 
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.12.y` compiled with Angular 8.
-Supports Current Angular 8. This version also can be used along with enabled IVY.
+npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.12.y` is compiled with Angular 8.
+It supports the current Angular 8 version. This version also can be used along with enabled IVY.
 
 Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest patches changes.
 
