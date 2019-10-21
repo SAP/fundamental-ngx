@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.12.0-rc.48",
+  "version": "0.12.0-rc.52",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "SAP Fundamental Styles, implemented in Angular",
@@ -54,7 +54,7 @@
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
   },
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.803.9",
+    "@angular-devkit/build-angular": "^0.803.12",
     "@angular/animations": "^8.2.7",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.7",
@@ -79,9 +79,9 @@
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-ng-packagr": "^0.803.9",
+    "@angular-devkit/build-ng-packagr": "^0.803.12",
     "@angular-devkit/core": "^7.3.9",
-    "@angular/cli": "^8.3.10",
+    "@angular/cli": "^8.3.12",
     "@angular/compiler-cli": "^8.2.7",
     "@angular/language-service": "^8.2.11",
     "@angularclass/hmr": "^2.1.3",
