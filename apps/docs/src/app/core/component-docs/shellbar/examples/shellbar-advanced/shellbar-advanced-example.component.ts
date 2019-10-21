@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ShellbarProduct, ShellbarUser } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, ShellbarProduct, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-advanced-example',
@@ -12,10 +12,10 @@ export class ShellbarAdvancedExampleComponent {
     productMenuControl = 'Corporate Portal';
 
     productMenuItems: ShellbarMenuItem[] = [
-        {text: 'Application A', callback: () => {alert('Application A Clicked')}},
-        {text: 'Application B', callback: () => {alert('Application B Clicked')}},
-        {text: 'Application C', callback: () => {alert('Application C Clicked')}},
-        {text: 'Application D', callback: () => {alert('Application D Clicked')}}
+        {name: 'Application A', link: '#'},
+        {name: 'Application B', glyph: 'menu', callback: () => { alert('Application B'); }},
+        {name: 'Application C', link: '#', glyph: 'menu'},
+        {name: 'Application D', link: '#', glyph: 'menu'}
     ];
 
     user: ShellbarUser = {
@@ -23,7 +23,7 @@ export class ShellbarAdvancedExampleComponent {
         colorAccent: 1
     };
 
-    userMenu: ShellbarMenuItem[] = [
+    userMenu: ShellbarUserMenu[] = [
         {text: 'Settings', callback: this.settingsCallback},
         {text: 'Sign Out', callback: this.signOutCallback}
     ];
@@ -93,4 +93,5 @@ export class ShellbarAdvancedExampleComponent {
         console.log($event);
         alert(product + ' Product Clicked');
     }
+
 }
