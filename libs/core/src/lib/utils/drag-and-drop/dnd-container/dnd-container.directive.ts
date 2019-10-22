@@ -28,7 +28,7 @@ export class DndContainerDirective implements AfterContentInit {
     cdkDrag: CdkDrag;
 
     constructor(
-        private element: ElementRef,
+        public element: ElementRef,
     ) {}
 
     /** Event thrown when the element is moved by 1px */

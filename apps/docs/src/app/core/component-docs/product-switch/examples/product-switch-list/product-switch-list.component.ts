@@ -26,16 +26,17 @@ export class ProductSwitchListComponent {
         },
         {
             title: 'Guided Buying',
-            icon: 'credit-card'
+            icon: 'credit-card',
         },
         {
             title: 'Strategic Procurement',
-            icon: 'cart-3'
+            icon: 'cart-3',
         },
         {
             title: 'Vendor Managemen',
             subtitle: 'Fieldglass',
-            icon: 'shipping-status'
+            icon: 'shipping-status',
+            selected: true
         },
         {
             title: 'Human Capital Management',

@@ -16,8 +16,7 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Analytics Cloud',
             subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience',
-            selected: true
+            icon: 'business-objects-experience'
         },
         {
             title: 'Catalog',

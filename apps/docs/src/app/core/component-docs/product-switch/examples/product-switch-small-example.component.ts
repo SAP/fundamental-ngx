@@ -16,12 +16,13 @@ export class ProductSwitchSmallExampleComponent {
         {
             title: 'Analytics Cloud',
             subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience'
+            icon: 'business-objects-experience',
+            selected: true
         },
         {
             title: 'Catalog',
             subtitle: 'Ariba',
-            icon: 'contacts'
+            icon: 'contacts',
         },
         {
             title: 'Guided Buying',

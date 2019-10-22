@@ -1,4 +1,4 @@
-import { AfterContentInit, ContentChildren, Directive, EventEmitter, Input, OnInit, Output, QueryList } from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, ElementRef, EventEmitter, Input, OnInit, Output, QueryList } from '@angular/core';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 import { DndContainerDirective } from '../dnd-container/dnd-container.directive';
 import { Subject } from 'rxjs';
@@ -87,10 +87,10 @@ export class DndListDirective implements AfterContentInit {
     /** Method called, when element is started to be dragged */
     dragStart(ind: number): void {
         this.draggedItemIndex = ind;
+        const draggedItemElement = this.dndContainerItems.toArray()[ind].element;
         /** Counting all of the elements's chords */
-        this.elementChords = this.dndContainerItems.toArray().map((link, index: number) => {
-            const isBefore = (): boolean => index < ind;
-            return link.getElementChord(isBefore(), this.listMode);
+        this.elementChords = this.dndContainerItems.toArray().map((link) => {
+            return link.getElementChord(this.isBefore(draggedItemElement, link.element), this.listMode);
         });
     }
 
@@ -143,5 +143,30 @@ export class DndListDirective implements AfterContentInit {
             item.started.pipe(takeUntil(this.refresh$)).subscribe(() => this.dragStart(index));
             item.released.pipe(takeUntil(this.refresh$)).subscribe(() => this.dragEnd());
         });
+    }
+
+    /**
+     *  @hidden
+     * Return information if element is placed before the dragged element
+     */
+    private isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
+
+        /** Sometimes the element are not straight in one column, that's why offset is needed */
+        const VERTICAL_OFFSET: number = 20;
+
+        /** Distances from the top of screen */
+        const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();
+        const targetElementBound = <DOMRect>targetElement.nativeElement.getBoundingClientRect();
+
+        if (draggedElementBound.y - targetElementBound.y > VERTICAL_OFFSET) {
+            /** If element is higher than the dragged element, it's for sure before */
+            return true;
+        } else if (targetElementBound.y - draggedElementBound.y > VERTICAL_OFFSET) {
+            /** If element is lower than the dragged element, it's for sure after */
+            return false;
+        } else {
+            /** If elements are in same level, the horizontal position decides if it's before/after */
+            return draggedElementBound.x - targetElementBound.x > 0;
+        }
     }
 }
