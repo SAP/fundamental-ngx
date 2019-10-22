@@ -3,6 +3,7 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as listSrc from '!raw-loader!./examples/list-example.component.html';
+import * as listTsCode from '!raw-loader!./examples/list-examples.component.ts';
 import * as listActionsSrc from '!raw-loader!./examples/list-actions-example.component.html';
 import * as listCheckboxSrc from '!raw-loader!./examples/list-checkbox-example.component.html';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
@@ -684,54 +685,75 @@ export class ListDocsComponent implements OnInit {
     simpleList: ExampleFile[] = [
         {
             language: 'html',
-            code: listSrc
+            code: listSrc,
+            fileName: 'list-example',
+            secondFile: 'list-examples',
+            typescriptFileCode: listTsCode,
+            component: 'ListExampleComponent'
         }
     ];
 
     listActions: ExampleFile[] = [
         {
             language: 'html',
-            code: listActionsSrc
+            code: listActionsSrc,
+            fileName: 'list-actions-example',
+            secondFile: 'list-examples',
+            typescriptFileCode: listTsCode,
+            component: 'ListActionsExampleComponent'
         }
     ];
 
     listCheckboxes: ExampleFile[] = [
         {
             language: 'html',
-            code: listCheckboxSrc
+            code: listCheckboxSrc,
+            fileName: 'list-checkbox-example',
+            secondFile: 'list-examples',
+            typescriptFileCode: listTsCode,
+            component: 'ListCheckboxExampleComponent'
         }
     ];
 
     listSingleSelect: ExampleFile[] = [
         {
             language: 'html',
-            code: listSingleHtml
+            code: listSingleHtml,
+            fileName: 'list-single-select-example'
         },
         {
             language: 'typescript',
-            code: listSingleTs
+            code: listSingleTs,
+            fileName: 'list-single-select-example',
+            component: 'ListSingleSelectExampleComponent'
         }
     ];
 
     infiniteScrollCode: ExampleFile[] = [
         {
             language: 'html',
-            code: infiniteScrollSrcHtml
+            code: infiniteScrollSrcHtml,
+            fileName: 'list-infinite-scroll-example'
         },
         {
             language: 'typescript',
-            code: infiniteScrollSrcTs
+            code: infiniteScrollSrcTs,
+            fileName: 'list-infinite-scroll-example',
+            component: 'ListInfiniteScrollExampleComponent'
         }
     ];
 
     listCheckboxForm: ExampleFile[] = [
         {
             language: 'html',
-            code: listCheckboxFormHtmlSrc
+            code: listCheckboxFormHtmlSrc,
+            fileName: 'list-checkbox-form-example'
         },
         {
             language: 'typescript',
-            code: listCheckboxFormTsSrc
+            code: listCheckboxFormTsSrc,
+            fileName: 'list-checkbox-form-example',
+            component: 'ListCheckboxFormExampleComponent'
         }
     ];
 
@@ -739,7 +761,7 @@ export class ListDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('list');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

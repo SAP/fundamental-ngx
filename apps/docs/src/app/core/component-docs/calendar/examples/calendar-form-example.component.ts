@@ -4,17 +4,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-calendar-form-example',
-    templateUrl: 'calendar-form-examples.component.html',
-    styles: [`
-            button {
-                margin-top: 1rem;
-            }
-
-            .flex-form{
-                display:flex;
-                justify-content:space-between;
-            }
-    `]
+    templateUrl: 'calendar-form-example.component.html',
+    styleUrls: ['calendar-form-example.component.scss']
 })
 export class CalendarFormExamplesComponent {
     customForm = new FormGroup({

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'fd-checkbox-form-group',
+    selector: 'fd-checkbox-form-group-example',
     templateUrl: './checkbox-form-group-example.component.html',
 })
 export class CheckboxFormGroupExampleComponent {

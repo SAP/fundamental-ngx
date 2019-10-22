@@ -20,46 +20,58 @@ export class LocalizationEditorDocsComponent implements OnInit {
     localizationBasic: ExampleFile[] = [
         {
             language: 'html',
-            code: localizationSrcH
+            code: localizationSrcH,
+            fileName: 'localization-editor-example',
         },
         {
             language: 'typescript',
-            code: localizationSrcT
+            component: 'LocalizationEditorExampleComponent',
+            code: localizationSrcT,
+            fileName: 'localization-editor-example',
         }
     ];
 
     localizationTemplate: ExampleFile[] = [
         {
             language: 'html',
-            code: localizationTemplateSrcH
+            code: localizationTemplateSrcH,
+            fileName: 'localization-editor-template-example',
         },
         {
             language: 'typescript',
-            code: localizationTemplateSrcT
+            component: 'LocalizationEditorTemplateExampleComponent',
+            code: localizationTemplateSrcT,
+            fileName: 'localization-editor-template-example',
         }
     ];
 
     localizationTextarea: ExampleFile[] = [
         {
             language: 'html',
-            code: localizationTextareaSrcH
+            code: localizationTextareaSrcH,
+            fileName: 'localization-editor-textarea-example',
         },
         {
             language: 'typescript',
-            code: localizationTextareaSrcT
+            component: 'LocalizationEditorTextareaExampleComponent',
+            code: localizationTextareaSrcT,
+            fileName: 'localization-editor-textarea-example',
         }
     ];
 
     localizationForms: ExampleFile[] = [
         {
             language: 'html',
-            code: localizationFormsSrcH
+            code: localizationFormsSrcH,
+            fileName: 'localization-editor-forms-example',
         },
         {
             language: 'typescript',
-            code: localizationFormsSrcT
+            component: 'LocalizationEditorFormsExampleComponent',
+            code: localizationFormsSrcT,
+            fileName: 'localization-editor-forms-example',
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

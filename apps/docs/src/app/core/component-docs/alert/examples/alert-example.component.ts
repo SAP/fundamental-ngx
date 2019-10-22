@@ -3,15 +3,6 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-alert-example',
     templateUrl: './alert-example.component.html',
-    styles: [
-        `
-            fd-alert {
-                margin-bottom: 12px;
-            }
-            fd-alert:last-child {
-                margin: 0;
-            }
-        `
-    ]
+    styleUrls: ['alert-example.component.scss']
 })
-export class AlertExampleComponent {}
+export class AlertExampleComponent { }

@@ -49,7 +49,9 @@ export class PaginationDocsComponent implements OnInit {
     paginationBasic: ExampleFile[] = [
         {
             language: 'typescript',
-            code: paginationSrc
+            code: paginationSrc,
+            fileName: 'pagination-example',
+            component: 'PaginationExampleComponent'
         }
     ];
 
@@ -57,7 +59,7 @@ export class PaginationDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('pagination');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

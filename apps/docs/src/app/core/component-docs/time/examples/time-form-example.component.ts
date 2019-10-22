@@ -3,12 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-time-form-example',
-    styles: [`
-        .flex-form{
-            display: flex;
-            justify-content: space-between;
-        }
-    `],
+    styleUrls: ['time-form-example.component.scss'],
     templateUrl: './time-form-example.component.html'
 })
 export class TimeFormExampleComponent {
