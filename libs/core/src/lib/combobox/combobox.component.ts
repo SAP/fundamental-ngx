@@ -71,6 +71,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     placeholder: string;
 
+    /** Whether the combobox is opened. */
+    @Input()
+    open: boolean = false;
+
     /** Icon to display in the right-side button. */
     @Input()
     glyph: string = 'navigation-down-arrow';
@@ -131,6 +135,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
 
+    /** Event emitted, when the combobox's popover body is opened or closed */
+    @Output()
+    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
     /** @hidden */
     @ViewChildren(MenuItemDirective)
     menuItems: QueryList<MenuItemDirective>;
@@ -141,9 +150,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     displayedValues: any[] = [];
-
-    /** @hidden */
-    isOpen: boolean = false;
 
     /** @hidden */
     inputTextValue: string;
@@ -217,8 +223,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             event.code !== 'Escape' &&
             event.code !== 'Space' &&
             event.code !== 'Enter') {
-            this.isOpen = true;
-            this.isOpenChangeHandle(this.isOpen);
+            this.open = true;
+            this.isOpenChangeHandle(this.open);
         }
     }
 
@@ -285,9 +291,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-        this.isOpen = isOpen;
+        this.open = isOpen;
+        this.openChange.emit(this.open);
         this.onTouched();
-        if (isOpen) {
+        if (open) {
             this.focusTrap.activate();
         } else {
             this.focusTrap.deactivate();
@@ -314,8 +321,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     private handleClickActions(term): void {
         if (this.closeOnSelect) {
-            this.isOpen = false;
-            this.isOpenChangeHandle(this.isOpen);
+            this.open = false;
+            this.isOpenChangeHandle(this.open);
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
