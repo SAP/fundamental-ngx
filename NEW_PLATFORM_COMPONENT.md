@@ -20,13 +20,19 @@ The library's source lies in the `libs` directory. From the root of the repo, cd
 
 ## Step2: Build module & component within libs directory
 
-We're going to be building a component called 'Poster' that displays images. Generate a new 'poster' module in the `src/lib` directory.
+We're going to be building a component called 'Poster' . Generate a new 'poster' module in the `src/lib` directory.
 
-`ng generate module platform/src/lib/poster`
+`ng generate module platform/src/lib/components/poster --project platform`
+
+You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project platform`.
+
+> Note: Don't forget to add `--project platform` or else it will be added to the default project in your `angular.json` file.
 
 Then, generate a 'poster' component in the new module:
 
-`ng generate component /platform/src/lib/poster --module=platform/src/lib/poster/poster.module`
+`ng generate component /platform/src/lib/components/poster --module=platform/src/lib/components/poster/poster.module`
+ 
+You can also use `ng generate component component-name --project platform` to generate a new component.
 
 ## Step3: Create an exports array
 
@@ -61,9 +67,26 @@ The Fundamental NGX Platform library uses 'fdp' as the component and directive p
 
 The documentation application is importing every component in the fundamental-ngx library module. Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
 
-We must also add `export * from './lib/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fdp-poster> component will be an exported member of the fundamental-ngx module as well as the poster module.
+We must also add `export * from './lib/components/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fdp-poster> component will be an exported member of the fundamental-ngx module as well as the poster module.
 
-## Step6: Generating necessary files in documentation folder
+##  Step6: Build
+
+Run `ng build platform` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Step7: Publishing
+
+After building your library with `ng build platform`, go to the dist folder `cd dist/platform` and run `npm publish`.
+
+## Step8: Running unit tests
+
+Run `ng test platform` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Step9: Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Step10: Generating necessary files in documentation folder
 
 Now let's create a new documentation component so we can see our new Poster component in action. Change directories back to the root of the repository, then change into the 'component-docs' directory:
 
@@ -81,7 +104,7 @@ Create two new files in the `poster` directory, `poster-docs.component.ts` and `
 
 The components we create in this directory will not only be rendered on their example page, but the raw source from these files will be used for the code examples.
 
-## Step8: Change the poster-header.component.html file
+## Step11: Change the poster-header.component.html file
 
 In poster-header.component.html Copy/paste the code here:
 
@@ -96,7 +119,7 @@ In poster-header.component.html Copy/paste the code here:
 <router-outlet></router-outlet>
 ```
 
-## Step7: Change poster-example.ts file
+## Step12: Change poster-example.ts file
 
 In `examples`, create the file `poster-example.component.ts`. Copy/paste the code here:
 
@@ -110,7 +133,7 @@ import { Component } from '@angular/core';
 export class PosterExampleComponent {}
 ```
 
-## Step8: Change poster-docs.ts file
+## Step13: Change poster-docs.ts file
 
 Then copy/paste this block to `poster-docs.component.ts`:
 
@@ -132,7 +155,7 @@ export class PosterDocsComponent {
 
 Note that we're using raw-loader to import the poster example code as raw text. This text will be rendered as the example source.
 
-## Step9: Change poster--docs.component.html file
+## Step14: Change poster--docs.component.html file
 
 In `poster-docs.component.html`, we'll provide a brief explanation of the poster component, and we'll add the poster component itself, along with the code example.
 
@@ -147,7 +170,7 @@ In `poster-docs.component.html`, we'll provide a brief explanation of the poster
 <code-example [code]="posterHtml" [language]="'HTML'"></code-example>
 ```
 
-## Step10: Adding the new documentation module and route
+## Step15: Adding the new documentation module and route
 
 Now that we've got our documentation files for the poster, add them to the documentation module declarations array in `documentation.module.ts`.
 
@@ -160,7 +183,7 @@ Now that we've got our documentation files for the poster, add them to the docum
 
 Be sure to import these at the top of the file as well.
 
-## Step11: Adding the new documentation module and route
+## Step16: Adding the new documentation module and route
 
 We use TypeDoc to automatically generate TypeScript documentation for explanations of inputs, outputs, etc. We won't go in to details on TypeDoc in this tutorial, but know that all files we wish to have TypeDocs for must be referenced in `apps/docs/src/app/platform/api-files.ts`. Open the file and add the following to the `API_FILES` object:
 
@@ -172,7 +195,7 @@ poster: [
 
 Let's add a poster route, and put a link for the new docs in the 'Components' side bar.
 
-## Step12: Add the route configuration for poster
+## Step17: Add the route configuration for poster
 
 Open `documentation.routes.ts` and add the following to the `children` in the `ROUTES` array:
 
@@ -186,7 +209,7 @@ Open `documentation.routes.ts` and add the following to the `children` in the `R
 
 You will need to import `PosterHeaderComponent` and `PosterDocsComponent` in this file as well.
 
-## Step13: Add poster url
+## Step18: Add poster url
 
 Next, open `documentation.component.ts` and add the following to the `components` array:
 
@@ -196,7 +219,7 @@ Next, open `documentation.component.ts` and add the following to the `components
 
 You should see 'Poster' appear in the side navigation under 'Components'. Clicking the link will load a page that says `poster works!`
 
-## Step14: Add an image to the Poster component template
+## Step19: Add an image to the Poster component template
 
 In the library source, open `poster.component.html`, remove the default code and add an image with a placeholder.
 
