@@ -17,6 +17,7 @@ import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.componen
 
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 import { ShellbarProductSwitcherComponent } from './shellbar-product-switcher/shellbar-product-switcher.component';
+import { IconModule } from '../icon/icon.module';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,7 @@ import { ShellbarProductSwitcherComponent } from './shellbar-product-switcher/sh
         ShellbarProductSwitcherComponent,
         ShellbarUserMenuComponent
     ],
-    imports: [CommonModule, PopoverModule, MenuModule, IdentifierModule, ButtonModule, ComboboxModule],
+    imports: [CommonModule, PopoverModule, MenuModule, IdentifierModule, ButtonModule, ComboboxModule, IconModule],
     exports: [
         ShellbarComponent,
         ProductMenuComponent,

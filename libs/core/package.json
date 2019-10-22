@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "focus-trap": "^5.0.2",
-    "fundamental-styles": "^0.3.0-rc.3",
+    "fundamental-styles": "~0.3.0",
     "popper.js": "^1.15.0"
   }
 }
