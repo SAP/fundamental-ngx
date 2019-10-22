@@ -21,7 +21,7 @@ export class ButtonComponent {
     @Input()
     glyph: string;
 
-    /** button is disabled on true. */
+    /** Button is disabled on true. */
     @Input()
     disabled: boolean;
 
