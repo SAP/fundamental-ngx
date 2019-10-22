@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 
 import * as standardH from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.html';
 import * as standardT from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.ts';
+import * as standardSCSS from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.scss';
 
 import * as customH from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.html';
 import * as customT from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.ts';
+import * as customSCSS from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -18,24 +20,32 @@ export class ScrollSpyDocsComponent implements OnInit {
     scrollSpy: ExampleFile[] = [
         {
             language: 'html',
-            code: standardH
+            code: standardH,
+            fileName: 'scroll-spy-example',
         },
         {
             language: 'typescript',
-            code: standardT
+            component: 'ScrollSpyExampleComponent',
+            code: standardT,
+            fileName: 'scroll-spy-example',
+            scssFileCode: standardSCSS
         }
     ];
 
     scrollSpyCustom: ExampleFile[] = [
         {
             language: 'html',
-            code: customH
+            code: customH,
+            fileName: 'scroll-spy-custom-example',
+            scssFileCode: customSCSS
         },
         {
             language: 'typescript',
-            code: customT
+            component: 'ScrollSpyCustomExampleComponent',
+            code: customT,
+            fileName: 'scroll-spy-custom-example',
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

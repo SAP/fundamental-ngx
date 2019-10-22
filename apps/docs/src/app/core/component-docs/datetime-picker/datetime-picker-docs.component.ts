@@ -31,75 +31,95 @@ export class DatetimePickerDocsComponent implements OnInit {
     datetimePickerSingle: ExampleFile[] = [
         {
             language: 'html',
-            code: dateTimeSimpleHtml
+            code: dateTimeSimpleHtml,
+            fileName: 'datetime-example'
         },
         {
             language: 'typescript',
-            code: dateTimeSimpleTs
-        }
+            code: dateTimeSimpleTs,
+            fileName: 'datetime-example',
+            component: 'DatetimeExampleComponent'
+        },
     ];
 
     datetimeNonMer: ExampleFile[] = [
         {
             language: 'html',
-            code: dateTimeNonMeridianHtml
+            code: dateTimeNonMeridianHtml,
+            fileName: 'datetime-non-meridian-example'
         },
         {
             language: 'typescript',
-            code: dateTimeNonMeridianTs
-        }
+            code: dateTimeNonMeridianTs,
+            fileName: 'datetime-non-meridian-example',
+            component: 'DatetimeNonMeridianExampleComponent'
+        },
     ];
 
     datetimeProgram: ExampleFile[] = [
         {
             language: 'html',
-            code: dateTimeProgHtml
+            code: dateTimeProgHtml,
+            fileName: 'datetime-program-example'
         },
         {
             language: 'typescript',
-            code: dateTimeProgTs
-        }
+            code: dateTimeProgTs,
+            fileName: 'datetime-program-example',
+            component: 'DatetimeProgramExampleComponent'
+        },
     ];
 
     datetimeFormat: ExampleFile[] = [
         {
             language: 'html',
-            code: dateTimeFormatHtml
+            code: dateTimeFormatHtml,
+            fileName: 'datetime-format-example'
         },
         {
             language: 'typescript',
-            code: dateTimeFormatTs
-        }
+            code: dateTimeFormatTs,
+            fileName: 'datetime-format-example',
+            component: 'DatetimeFormatExampleComponent'
+        },
     ];
 
     datetimeDisabled: ExampleFile[] = [
         {
             language: 'html',
-            code: dateTimeDisabledHtml
+            code: dateTimeDisabledHtml,
+            fileName: 'datetime-disabled-example'
         },
         {
             language: 'typescript',
-            code: dateTimeDisabledTs
-        }
+            code: dateTimeDisabledTs,
+            fileName: 'datetime-disabled-example',
+            component: 'DatetimeDisabledExampleComponent'
+        },
     ];
 
     datetimeForm: ExampleFile[] = [
         {
             language: 'html',
-            code: dateTimeFormHtml
+            code: dateTimeFormHtml,
+            fileName: 'datetime-form-example'
         },
         {
             language: 'typescript',
-            code: dateTimeFormTs
-        }
+            code: dateTimeFormTs,
+            fileName: 'datetime-form-example',
+            component: 'DatetimeFormExampleComponent'
+        },
     ];
 
     datetimePickerAllowNull: ExampleFile[] = [
         {
             language: 'typescript',
-            code: dateTimePickerAllowNullTs
-        }
+            code: dateTimePickerAllowNullTs,
+            fileName: 'date-time-picker-allow-null-example',
+            component: 'DatetimePickerAllowNullExampleComponent'
+        },
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

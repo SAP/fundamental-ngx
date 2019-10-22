@@ -7,10 +7,18 @@ import * as timePickerNoSecondsSrc from '!raw-loader!./examples/time-picker-no-s
 import * as timePickerOnlyHoursSrc from '!raw-loader!./examples/time-picker-only-hours-example.component.html';
 import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compact-example.component.html';
 import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
+import * as timePickerSrcTs from '!raw-loader!./examples/time-picker-example.component.ts';
+import * as timePickerMeridianSrcTs from '!raw-loader!./examples/time-picker-12-example.component.ts';
+import * as timePickerDisabledSrcTs from '!raw-loader!./examples/time-picker-disabled-example.component.ts';
+import * as timePickerNoSecondsSrcTs from '!raw-loader!./examples/time-picker-no-seconds-example.component.ts';
+import * as timePickerCompactSrcTs from '!raw-loader!./examples/time-picker-compact-example.component.ts';
+import * as timePickerNullSrcTs from '!raw-loader!./examples/time-picker-allow-null-example.component.ts';
+import * as timePickerOnlyHoursSrcTs from '!raw-loader!./examples/time-picker-only-hours-example.component.ts';
 import * as timePickerOtherDelimiterSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.html';
 import * as timePickerOtherDelimiterTsSrc from '!raw-loader!./examples/time-picker-other-delimiter-example.component.ts';
 import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
 import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts';
+import * as timePickerFormScssSrc from '!raw-loader!./examples/time-picker-form-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
@@ -24,73 +32,108 @@ export class TimePickerDocsComponent implements OnInit {
     timePicker: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerSrc
+            code: timePickerSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerSrcTs,
+            fileName: 'time-picker-example',
+            component: 'TimePickerExampleComponent',
         }
     ];
 
     meridianTimePicker: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerMeridianSrc
+            code: timePickerMeridianSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerMeridianSrcTs,
+            fileName: 'time-picker-12-example',
+            component: 'TimePicker12ExampleComponent',
         }
     ];
 
     timePickerNoSeconds: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerNoSecondsSrc
+            code: timePickerNoSecondsSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerNoSecondsSrcTs,
+            fileName: 'time-picker-no-seconds-example',
+            component: 'TimePickerNoSecondsExampleComponent',
         }
     ];
 
     timePickerOnlyHours: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerOnlyHoursSrc
+            code: timePickerOnlyHoursSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerOnlyHoursSrcTs,
+            fileName: 'time-picker-only-hours-example',
+            component: 'TimePickerOnlyHoursExampleComponent',
         }
     ];
 
     disabledTimePicker: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerDisabledSrc
+            code: timePickerDisabledSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerDisabledSrcTs,
+            fileName: 'time-picker-disabled-example',
+            component: 'TimePickerDisabledExampleComponent',
         }
     ];
 
     compactTimePicker: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerCompactSrc
+            code: timePickerCompactSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerCompactSrcTs,
+            fileName: 'time-picker-compact-example',
+            component: 'TimePickerCompactExampleComponent',
         }
     ];
 
     nullTimePicker: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerNullSrc
+            code: timePickerNullSrc,
+            secondFile: 'time-picker-examples',
+            typescriptFileCode: timePickerNullSrcTs,
+            fileName: 'time-picker-allow-null-example',
+            component: 'TimePickerAllowNullExampleComponent',
         }
     ];
 
     otherFormatTimePicker: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerOtherDelimiterSrc
+            code: timePickerOtherDelimiterSrc,
+            fileName: 'time-picker-other-delimiter-example',
         },
         {
             language: 'typescript',
-            code: timePickerOtherDelimiterTsSrc
+            code: timePickerOtherDelimiterTsSrc,
+            fileName: 'time-picker-other-delimiter-example',
+            component: 'TimePickerOtherDelimiterExampleComponent'
         }
     ];
 
     timePickerForm: ExampleFile[] = [
         {
             language: 'html',
-            code: timePickerFormHtmlSrc
+            code: timePickerFormHtmlSrc,
+            fileName: 'time-picker-form-example',
+            scssFileCode: timePickerFormScssSrc
         },
         {
             language: 'typescript',
-            code: timePickerFormTsSrc
+            code: timePickerFormTsSrc,
+            fileName: 'time-picker-form-example',
+            component: 'TimePickerFormExampleComponent'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

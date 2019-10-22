@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as identifierScss from '!raw-loader!./examples/identifier-stack.component.scss';
 import * as circleSrc from '!raw-loader!./examples/circle-identifier-example.component.html';
 import * as colorsSrc from '!raw-loader!./examples/colors-identifier-example.component.html';
 import * as iconSrc from '!raw-loader!./examples/icon-identifier-example.component.html';
+import * as identifierTsCode from '!raw-loader!./examples/identifier-examples.component.ts';
 import * as initialsSrc from '!raw-loader!./examples/initials-identifier-example.component.html';
 import * as transparentSrc from '!raw-loader!./examples/transparent-identifier-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -688,35 +690,60 @@ export class IdentifierDocsComponent implements OnInit {
     iconHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: iconSrc
+            code: iconSrc,
+            fileName: 'icon-identifier-example',
+            secondFile: 'identifier-examples',
+            typescriptFileCode: identifierTsCode,
+            component: 'IconIdentifierExampleComponent',
+            scssFileCode: identifierScss
         }
     ];
 
     initialsHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: initialsSrc
+            code: initialsSrc,
+            fileName: 'initials-identifier-example',
+            secondFile: 'identifier-examples',
+            typescriptFileCode: identifierTsCode,
+            component: 'InitialsIdentifierExampleComponent',
+            scssFileCode: identifierScss
         }
     ];
 
     circleHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: circleSrc
+            code: circleSrc,
+            fileName: 'circle-identifier-example',
+            secondFile: 'identifier-examples',
+            typescriptFileCode: identifierTsCode,
+            component: 'CircleIdentifierExampleComponent',
+            scssFileCode: identifierScss
         }
     ];
 
     transparentHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: transparentSrc
+            code: transparentSrc,
+            fileName: 'transparent-identifier-example',
+            secondFile: 'identifier-examples',
+            typescriptFileCode: identifierTsCode,
+            component: 'TransparentIdentifierExampleComponent',
+            scssFileCode: identifierScss
         }
     ];
 
     colorAccentHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: colorsSrc
+            code: colorsSrc,
+            fileName: 'colors-identifier-example',
+            secondFile: 'identifier-examples',
+            typescriptFileCode: identifierTsCode,
+            component: 'ColorsIdentifierExampleComponent',
+            scssFileCode: identifierScss
         }
     ];
 
@@ -724,7 +751,7 @@ export class IdentifierDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('identifier');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

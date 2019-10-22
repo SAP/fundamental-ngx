@@ -1,17 +1,23 @@
 <form [formGroup]="customForm" class="flex-form">
-    <div>
-    <fd-datetime-picker formControlName="date"></fd-datetime-picker><br/>
-        Touched: {{customForm.controls.date.touched}}<br/>
-        Dirty: {{customForm.controls.date.dirty}}<br/>
-        Valid: {{customForm.controls.date.valid}}<br/>
-        Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toLocaleDateString() : 'null' }}
+    <div *ngIf="customForm">
+        <fd-datetime-picker formControlName="date"></fd-datetime-picker><br />
+        Touched: {{ customForm.controls.date.touched }}<br />
+        Dirty: {{ customForm.controls.date.dirty }}<br />
+        Valid: {{ customForm.controls.date.valid }}<br />
+        Selected Date:
+        {{ customForm.controls.date.value ? customForm.controls.date.value.toLocaleDateString() : 'null' }}
     </div>
     <div>
-        <fd-datetime-picker formControlName="disabledDate"></fd-datetime-picker><br/>
-        Touched: {{customForm.controls.disabledDate.touched}}<br/>
-        Dirty: {{customForm.controls.disabledDate.dirty}}<br/>
-        Valid: {{customForm.controls.disabledDate.valid}}<br/>
-        Disabled: {{customForm.controls.disabledDate.disabled}}<br/>
-        Selected Date: {{ customForm.controls.disabledDate.value ? customForm.controls.disabledDate.value.toLocaleDateString() : 'null' }}
+        <fd-datetime-picker formControlName="disabledDate"></fd-datetime-picker><br />
+        Touched: {{ customForm.controls.disabledDate.touched }}<br />
+        Dirty: {{ customForm.controls.disabledDate.dirty }}<br />
+        Valid: {{ customForm.controls.disabledDate.valid }}<br />
+        Disabled: {{ customForm.controls.disabledDate.disabled }}<br />
+        Selected Date:
+        {{
+            customForm.controls.disabledDate.value
+                ? customForm.controls.disabledDate.value.toLocaleDateString()
+                : 'null'
+        }}
     </div>
 </form>

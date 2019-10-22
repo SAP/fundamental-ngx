@@ -18,5 +18,5 @@ import { ModalRef } from '@fundamental-ngx/core';
     `
 })
 export class ModalInModalSecondComponent {
-    constructor(public modalRef: ModalRef) {}
+    constructor(public modalRef: ModalRef) { }
 }

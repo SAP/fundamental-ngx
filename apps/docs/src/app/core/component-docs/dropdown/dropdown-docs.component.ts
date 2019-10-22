@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 import * as dropdownContextualMenuHtml from '!raw-loader!./examples/dropdown-contextual-menu-example.component.html';
 import * as dropdownDefaultMenuHtml from '!raw-loader!./examples/dropdown-default-example.component.html';
 import * as dropdownIconsMenuHtml from '!raw-loader!./examples/dropdown-icons-example.component.html';
+import * as dropdownCodeTs from '!raw-loader!./examples/dropdown-examples.component.ts';
 import * as dropdownStateMenuHtml from '!raw-loader!./examples/dropdown-state-example.component.html';
 import * as dropdownInfiniteScrollHtml from '!raw-loader!./examples/dropdown-infinite-scroll-example.component.html';
 import * as dropdownInfiniteScrollTs from '!raw-loader!./examples/dropdown-infinite-scroll-example.component.ts';
@@ -19,48 +20,71 @@ export class DropdownDocsComponent implements OnInit {
     textDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: dropdownDefaultMenuHtml
-        }
+            code: dropdownDefaultMenuHtml,
+            fileName: 'dropdown-default-example',
+            secondFile: 'dropdown-examples',
+            component: 'DropdownDefaultExampleComponent',
+            typescriptFileCode: dropdownCodeTs
+        },
     ];
 
     disabledDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: dropdownStateMenuHtml
-        }
+            code: dropdownStateMenuHtml,
+            fileName: 'dropdown-state-example',
+            secondFile: 'dropdown-examples',
+            component: 'DropdownStateExampleComponent',
+            typescriptFileCode: dropdownCodeTs
+        },
     ];
 
     iconDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: dropdownIconsMenuHtml
-        }
+            code: dropdownIconsMenuHtml,
+            fileName: 'dropdown-icons-example',
+            secondFile: 'dropdown-examples',
+            component: 'DropdownIconsExampleComponent',
+            typescriptFileCode: dropdownCodeTs
+        },
     ];
 
     contextualMenuDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: dropdownContextualMenuHtml
-        }
+            code: dropdownContextualMenuHtml,
+            fileName: 'dropdown-contextual-menu-example',
+            secondFile: 'dropdown-examples',
+            component: 'DropdownContextualMenuExampleComponent',
+            typescriptFileCode: dropdownCodeTs
+        },
     ];
 
     infiniteScrollHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: dropdownInfiniteScrollHtml
+            code: dropdownInfiniteScrollHtml,
+            fileName: 'dropdown-infinite-scroll-example'
         },
         {
             language: 'typescript',
-            code: dropdownInfiniteScrollTs
+            code: dropdownInfiniteScrollTs,
+            fileName: 'dropdown-infinite-scroll-example',
+            component: 'DropdownInfiniteScrollExampleComponent'
         }
     ];
 
     toolbarDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: dropdownToolbarHtml
-        }
+            code: dropdownToolbarHtml,
+            fileName: 'dropdown-toolbar-example',
+            secondFile: 'dropdown-examples',
+            component: 'DropdownToolbarExampleComponent',
+            typescriptFileCode: dropdownCodeTs
+        },
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

@@ -131,9 +131,10 @@ import { ModalOpenTemplateExampleComponent } from '../core/component-docs/modal/
 import { ModalContentComponent } from '../core/component-docs/modal/examples/component-as-content/modal-content.component';
 import { ModalComponentAsContentExampleComponent } from '../core/component-docs/modal/examples/component-as-content/modal-component-as-content-example.component';
 import {
-    PanelEdgeBleedExampleComponent,
     PanelExampleComponent
 } from '../core/component-docs/panel/examples/panel-examples.component';
+import { PanelEdgeBleedExampleComponent } from '../core/component-docs/panel/examples/panel-edge-bleed-example.component'
+
 import { PaginationExampleComponent } from '../core/component-docs/pagination/examples/pagination-example.component';
 import { PopoverExampleComponent } from '../core/component-docs/popover/examples/popover-simple/popover-example.component';
 import { PopoverModalExampleComponent } from '../core/component-docs/popover/examples/popover-modal/popover-modal-example.component';
@@ -151,8 +152,9 @@ import { TableExampleComponent } from '../core/component-docs/table/examples/tab
 import {
     TabsExampleComponent,
     TabSelectionExampleComponent,
-    TabsNavigationModeExampleComponent
+
 } from '../core/component-docs/tabs/examples/tabs-examples-component';
+import { TabsNavigationModeExampleComponent } from '../core/component-docs/tabs/examples/tab-navigation-mode-example-component';
 import {
     TileActionsExampleComponent,
     TileDisabledExampleComponent,
@@ -161,23 +163,21 @@ import {
     TileProductExampleComponent,
     TileButtonExampleComponent
 } from '../core/component-docs/tile/examples/tile-examples.component';
-import {
-    TimeExampleComponent,
-    Time12ExampleComponent,
-    TimeDisabledExampleComponent,
-    TimeNoSecondsExampleComponent,
-    TimeNoSpinnersExampleComponent,
-    TimeOnlyHoursExampleComponent
-} from '../core/component-docs/time/examples/time-examples.component';
-import {
-    TimePickerExampleComponent,
-    TimePicker12ExampleComponent,
-    TimePickerDisabledExampleComponent,
-    TimePickerNoSecondsExampleComponent,
-    TimePickerCompactExampleComponent,
-    TimePickerAllowNullExampleComponent,
-    TimePickerOnlyHoursExampleComponent
-} from '../core/component-docs/time-picker/examples/time-picker-examples.component';
+import { Time12ExampleComponent } from '../core/component-docs/time/examples/time-12-example.component';
+import { TimeExampleComponent } from '../core/component-docs/time/examples/time-example.component';
+import { TimeDisabledExampleComponent } from '../core/component-docs/time/examples/time-disabled-example.component';
+import { TimeNoSecondsExampleComponent } from '../core/component-docs/time/examples/time-no-seconds-example.component';
+import { TimeNoSpinnersExampleComponent } from '../core/component-docs/time/examples/time-no-spinners-example.component';
+import { TimeOnlyHoursExampleComponent } from '../core/component-docs/time/examples/time-only-hours-example.component';
+import { TimePickerExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-example.component';
+import { TimePicker12ExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-12-example.component';
+import { TimePickerDisabledExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-disabled-example.component';
+import { TimePickerNoSecondsExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-no-seconds-example.component';
+import { TimePickerCompactExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-compact-example.component';
+import { TimePickerAllowNullExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-allow-null-example.component';
+import { TimePickerOnlyHoursExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-only-hours-example.component';
+
+
 import { TimePickerFormExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-form-example.component';
 import { ToggleDocsComponent } from '../core/component-docs/toggle/toggle-docs.component';
 import { ToggleSizesExampleComponent } from '../core/component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
@@ -187,9 +187,9 @@ import { ToggleFormsExampleComponent } from '../core/component-docs/toggle/examp
 import { ListInfiniteScrollExampleComponent } from '../core/component-docs/list/examples/list-infinite-scroll-example.component';
 import { ListCheckboxFormExampleComponent } from '../core/component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
-import { ModalInModalComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal.component';
-import { ModalInModalSecondComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-second.component';
-import { ModalInModalExampleComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-example.component';
+import { ModalInModalComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-stacked-example.component';
+import { ModalInModalSecondComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-second-example.component';
+import { ModalInModalFirstComponent } from '../core/component-docs/modal/examples/stackable-modals/modal-in-modal-first-example.component';
 import { ModalFullscreenExampleComponent } from '../core/component-docs/modal/examples/fullscreen-modal/modal-fullscreen-example.component';
 import { InfiniteScrollDocsComponent } from '../core/component-docs/infinite-scroll/infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from '../core/component-docs/infinite-scroll/examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
@@ -296,13 +296,11 @@ import {
 } from '../core/component-docs/datetime-picker/examples/datetime-disabled-example/datetime-disabled-example.component';
 
 import { SplitButtonHeaderComponent } from '../core/component-docs/split-button/split-button-header/split-button-header.component';
-import {
-    ButtonSplitOptionsExampleComponent,
-    ButtonSplitProgrammaticalExampleComponent,
-    ButtonSplitTemplateExampleComponent,
-    ButtonSplitTypesExampleComponent,
-    ButtonSplitTypesIconsComponent
-} from '../core/component-docs/split-button/examples/split-button-examples.component';
+import { ButtonSplitOptionsExampleComponent } from '../core/component-docs/split-button/examples/split-button-options-example.component';
+import { ButtonSplitProgrammaticalExampleComponent } from '../core/component-docs/split-button/examples/split-button-programmatical-example.component';
+import { ButtonSplitTemplateExampleComponent } from '../core/component-docs/split-button/examples/split-button-template-example.component';
+import { ButtonSplitTypesExampleComponent } from '../core/component-docs/split-button/examples/split-button-types-example.component';
+import { ButtonSplitTypesIconsComponent } from '../core/component-docs/split-button/examples/split-button-icons-example.component';
 import {
     TabNavigationExampleChildFirst,
     TabNavigationExampleChildSecond,
@@ -319,7 +317,7 @@ import { LocalizationEditorTextareaExampleComponent } from '../core/component-do
 import { SplitButtonDocsComponent } from '../core/component-docs/split-button/split-button-docs.component';
 import { ModalPositionExampleComponent } from '../core/component-docs/modal/examples/modal-position/modal-position-example.component';
 
-import { CalendarFormExamplesComponent } from '../core/component-docs/calendar/examples/calendar-form-examples.component';
+import { CalendarFormExamplesComponent } from '../core/component-docs/calendar/examples/calendar-form-example.component';
 
 import { MenuKeyboardSupportExampleComponent } from '../core/component-docs/menu/examples/menu-keyboard-support-example.component';
 import { ContainerComponent } from '../core/component-docs/modal/examples/container/container.component';
@@ -385,7 +383,6 @@ import { LayoutGridDocsComponent } from '../core/component-docs/layout-grid/layo
 import { SimpleTreeExampleComponent } from '../core/component-docs/tree/examples/simple-tree-example.component';
 import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellbar/examples/shellbar-advanced/shellbar-advanced-example.component';
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
-
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
 import { NotificationDocsComponent } from './component-docs/notification/notification-docs.component';
@@ -553,7 +550,7 @@ import { NotificationContentComponent } from './component-docs/notification/exam
         ModalComponentAsContentExampleComponent,
         ModalInModalComponent,
         ModalInModalSecondComponent,
-        ModalInModalExampleComponent,
+        ModalInModalFirstComponent,
         MultiInputDocsComponent,
         MultiInputExampleComponent,
         ModalFullscreenExampleComponent,

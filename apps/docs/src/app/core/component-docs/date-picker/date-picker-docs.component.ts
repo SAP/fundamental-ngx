@@ -21,65 +21,83 @@ export class DatePickerDocsComponent implements OnInit {
     datePickerSingle: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerSingleSrc
+            component: 'DatePickerSingleExampleComponent',
+            code: datePickerSingleSrc,
+            fileName: 'date-picker-single-example'
         }
     ];
 
     datePickerRange: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerRangeSrc
+            component: 'DatePickerRangeExampleComponent',
+            code: datePickerRangeSrc,
+            fileName: 'date-picker-range-example'
         }
     ];
 
     datePickerI18N: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickeri18nSrc
+            component: 'DatePickerI18nExampleComponent',
+            code: datePickeri18nSrc,
+            fileName: 'date-picker-i18n-example'
         }
     ];
 
     datePickerFormat: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerFormatSrc
+            component: 'DatePickerFormatExampleComponent',
+            code: datePickerFormatSrc,
+            fileName: 'date-picker-format-example'
         }
     ];
 
     datePickerAllowNull: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerAllowNullSrc
+            component: 'DatePickerAllowNullExampleComponent',
+            code: datePickerAllowNullSrc,
+            fileName: 'date-picker-allow-null-example'
         }
     ];
 
     datePickerForm: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerFormTsSrc
+            component: 'DatePickerFormExampleComponent',
+            code: datePickerFormTsSrc,
+            fileName: 'date-picker-form-example'
         }
     ];
 
     datePickerRangeForm: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerRangeFormTsSrc
+            component: 'DatePickerFormRangeExampleComponent',
+            code: datePickerRangeFormTsSrc,
+            fileName: 'date-picker-form-range-example'
         }
     ];
 
     datePickerPosition: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerPositionSrc
+            component: 'DatePickerPositionExampleComponent',
+            code: datePickerPositionSrc,
+            fileName: 'date-picker-position-example'
         }
     ];
 
     datePickerDisabled: ExampleFile[] = [
         {
             language: 'typescript',
-            code: datePickerDisabledSrc
+            component: 'DatePickerDisabledExampleComponent',
+            code: datePickerDisabledSrc,
+            fileName: 'date-picker-disabled-example'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }
