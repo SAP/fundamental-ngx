@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { BadgeStatus, BadgeModifier } from '../label/label.component';
 
 /**
  * Badge component, used to indicate status.
@@ -14,10 +15,10 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 })
 export class BadgeComponent extends AbstractFdNgxClass {
     /** Color coded status for the badge. Options are 'success', 'warning', and 'error'. Leave empty for default badge. */
-    @Input() status;
+    @Input() status: BadgeStatus;
 
     /** Modifier for the badge. Options are 'pill' and 'filled'. Leave empty for normal. */
-    @Input() modifier;
+    @Input() modifier: BadgeModifier;
 
     /** @hidden */
     @HostBinding('class.fd-badge')
