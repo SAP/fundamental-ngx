@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.57"></a>
+# [0.12.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.56...v0.12.0-rc.57) (2019-10-22)
+
+
+### Features
+
+* notifications ([#1367](https://github.com/SAP/fundamental-ngx/issues/1367)) ([ad932e3](https://github.com/SAP/fundamental-ngx/commit/ad932e3))
+
+
+
 <a name="0.12.0-rc.56"></a>
 # [0.12.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.55...v0.12.0-rc.56) (2019-10-21)
 
