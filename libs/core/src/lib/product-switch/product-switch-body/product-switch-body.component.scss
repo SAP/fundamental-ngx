@@ -59,6 +59,14 @@ $product-switch-dnd-line-color: #0854A0;
     }
 }
 
+[dir="rtl"] {
+    .fd-product-switch__body--mobile {
+        .fd-product-switch__title, .fd-product-switch__subtitle {
+            text-align: right;
+        }
+    }
+}
+
 .drop-area__line {
     z-index: 10;
     position: absolute;
