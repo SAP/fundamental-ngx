@@ -1,4 +1,5 @@
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalService } from './modal.service';
