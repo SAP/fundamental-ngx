@@ -1,4 +1,4 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 /**
  * The directive for menu addon(for icons).
@@ -8,6 +8,7 @@ import { Directive, HostBinding } from '@angular/core';
 })
 export class MenuAddonDirective {
     /** @hidden */
+    @Input()
     @HostBinding('class.fd-menu--addon-before')
     fdMenuAddonClass: boolean = true;
 }

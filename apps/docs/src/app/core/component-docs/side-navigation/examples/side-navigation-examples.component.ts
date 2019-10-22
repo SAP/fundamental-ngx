@@ -4,41 +4,31 @@ import { Component, ViewEncapsulation } from '@angular/core';
     selector: 'fd-side-navigation-example',
     templateUrl: './side-navigation-example.component.html',
 })
-export class SideNavigationExampleComponent {}
+export class SideNavigationExampleComponent { }
 
 @Component({
     selector: 'fd-side-navigation-collapsed-example',
     templateUrl: './side-navigation-collapsed-example.component.html',
-    styles: [`
-        .fd-side-nav--icons {
-            max-width: 65px;
-        }
-    `],
+    styleUrls: ['side-navigation-collapsed-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SideNavigationCollapsedExampleComponent {}
+export class SideNavigationCollapsedExampleComponent { }
 
 @Component({
     selector: 'fd-side-navigation-icons-example',
     templateUrl: './side-navigation-icons-example.component.html',
-    styles: [
-        `
-            fd-icon {
-                padding-right: 10px;
-            }
-        `
-    ]
+    styleUrls: ['side-navigation-icons-example.component.scss']
 })
-export class SideNavigationIconsExampleComponent {}
+export class SideNavigationIconsExampleComponent { }
 
 @Component({
     selector: 'fd-side-navigation-levels-example',
     templateUrl: './side-navigation-levels-example.component.html'
 })
-export class SideNavigationLevelsExampleComponent {}
+export class SideNavigationLevelsExampleComponent { }
 
 @Component({
     selector: 'fd-side-navigation-titles-example',
     templateUrl: './side-navigation-titles-example.component.html'
 })
-export class SideNavigationTitlesExampleComponent {}
+export class SideNavigationTitlesExampleComponent { }

@@ -5,6 +5,8 @@ import * as menuGroupSrc from '!raw-loader!./examples/mega-menu-group-example.co
 import * as menuPositionSrc from '!raw-loader!./examples/mega-menu-position-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import * as megaMenuTsCode from '!raw-loader!./examples/mega-menu-examples.component.ts';
+import * as menuPositionSrcScss from '!raw-loader!./examples/mega-menu-position-example.component.scss';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,23 +17,36 @@ export class MegaMenuDocsComponent implements OnInit {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
-            code: menuSrc
+            code: menuSrc,
+            fileName: 'mega-menu-example',
+            secondFile: 'mega-menu-examples',
+            typescriptFileCode: megaMenuTsCode,
+            component: 'MegaMenuExampleComponent'
         }
     ];
 
     menuGroup: ExampleFile[] = [
         {
             language: 'html',
-            code: menuGroupSrc
+            code: menuGroupSrc,
+            fileName: 'mega-menu-group-example',
+            secondFile: 'mega-menu-examples',
+            typescriptFileCode: megaMenuTsCode,
+            component: 'MegaMenuGroupExampleComponent'
         }
     ];
 
     menuPosition: ExampleFile[] = [
         {
             language: 'html',
-            code: menuPositionSrc
+            code: menuPositionSrc,
+            fileName: 'mega-menu-position-example',
+            secondFile: 'mega-menu-examples',
+            typescriptFileCode: megaMenuTsCode,
+            component: 'MegaMenuPositionExampleComponent',
+            scssFileCode: menuPositionSrcScss
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

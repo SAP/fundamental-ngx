@@ -5,6 +5,7 @@ import { FdDate } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-date-picker-form-range-example',
     template: `
+        <div *ngIf="customForm">
         <form [formGroup]="customForm">
             <fd-date-picker type="range" formControlName="dates"></fd-date-picker>
         </form>
@@ -15,6 +16,7 @@ import { FdDate } from '@fundamental-ngx/core';
 
         Range Start Date: {{ customForm.controls.dates.value.start ? customForm.controls.dates.value.start.toDateString() : 'null' }}<br/>
         Range End Date: {{ customForm.controls.dates.value.end ? customForm.controls.dates.value.end.toDateString() : 'null' }}
+        </div>
     `
 })
 export class DatePickerFormRangeExampleComponent {

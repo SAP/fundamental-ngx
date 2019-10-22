@@ -8,9 +8,11 @@ import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-
 import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
+import * as inputGroupTscode from '!raw-loader!./examples/input-group-examples.component.ts';
 import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example.component.ts';
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
 import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
+import * as formInputScssSrc from '!raw-loader!./examples/input-group-form-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -703,60 +705,92 @@ export class InputGroupDocsComponent implements OnInit {
     textAddOn: ExampleFile[] = [
         {
             language: 'html',
-            code: inputGroupTextSrc
+            code: inputGroupTextSrc,
+            fileName: 'input-group-text-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupTextExampleComponent'
         }
     ];
 
     iconAddOn: ExampleFile[] = [
         {
             language: 'html',
-            code: inputGroupIconSrc
+            code: inputGroupIconSrc,
+            fileName: 'input-group-icon-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupIconExampleComponent'
         }
     ];
 
     buttonIconAddOn: ExampleFile[] = [
         {
             language: 'html',
-            code: inputGroupButtonSrc
+            code: inputGroupButtonSrc,
+            fileName: 'input-group-button-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupButtonExampleComponent'
         }
     ];
 
     numberInput: ExampleFile[] = [
         {
             language: 'html',
-            code: inputGroupNumberSrc
+            code: inputGroupNumberSrc,
+            fileName: 'input-group-number-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupNumberExampleComponent'
         }
     ];
 
     searchInput: ExampleFile[] = [
         {
             language: 'html',
-            code: inputGroupSearchSrc
+            code: inputGroupSearchSrc,
+            fileName: 'input-group-search-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupSearchExampleComponent'
         }
     ];
 
     textCompact: ExampleFile[] = [
         {
             language: 'html',
-            code: inputGroupTextCompactSrc
+            code: inputGroupTextCompactSrc,
+            fileName: 'input-group-compact-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupTextCompactExampleComponent'
         }
     ];
 
     formInput: ExampleFile[] = [
         {
             language: 'html',
-            code: formInputHtmlSrc
+            code: formInputHtmlSrc,
+            fileName: 'input-group-form-example',
+            scssFileCode: formInputScssSrc
         },
         {
             language: 'typescript',
-            code: formInputTsSrc
+            code: formInputTsSrc,
+            fileName: 'input-group-form-example',
+            component: 'InputGroupFormExampleComponent'
         }
     ];
 
     complexInput: ExampleFile[] = [
         {
             language: 'html',
-            code: complexInputHtml
+            code: complexInputHtml,
+            fileName: 'input-group-number-example',
+            secondFile: 'input-group-examples',
+            typescriptFileCode: inputGroupTscode,
+            component: 'InputGroupComplexExampleComponent'
         }
     ];
 
@@ -764,7 +798,7 @@ export class InputGroupDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('inputGroup');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

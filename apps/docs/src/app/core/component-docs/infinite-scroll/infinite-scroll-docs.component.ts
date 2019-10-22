@@ -13,15 +13,18 @@ export class InfiniteScrollDocsComponent implements OnInit {
     basicInfiniteExample: ExampleFile[] = [
         {
             language: 'html',
-            code: basicInfiniteHtml
+            code: basicInfiniteHtml,
+            fileName: 'infinite-scroll-basic-example'
         },
         {
             language: 'typescript',
-            code: basicInfiniteTs
+            code: basicInfiniteTs,
+            fileName: 'infinite-scroll-basic-example',
+            component: 'InfiniteScrollBasicExampleComponent'
         }
     ];
 
 
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

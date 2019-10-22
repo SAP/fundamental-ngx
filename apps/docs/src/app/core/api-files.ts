@@ -155,6 +155,25 @@ export const API_FILES = {
     multiInput: [
         'MultiInputComponent'
     ],
+    notification: [
+        'NotificationComponent',
+        'NotificationHeaderComponent',
+        'NotificationBodyComponent',
+        'NotificationFooterComponent',
+        'NotificationServiceDirective',
+        'NotificationActionsDirective',
+        'NotificationAvatarDirective',
+        'NotificationContentDirective',
+        'NotificationDescriptionDirective',
+        'NotificationMetadataDirective',
+        'NotificationTextDirective',
+        'NotificationTitleDirective',
+        'DefaultNotificationComponent',
+        'NotificationContainer',
+        'NotificationConfig',
+        'NotificationDefault',
+        'NotificationRef',
+    ],
     pagination: [
         'PaginationComponent',
         'PaginationModel',

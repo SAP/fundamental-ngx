@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit }
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as badgeTsCode from '!raw-loader!./examples/badge-label-examples.component.ts';
 import * as badgeDefaultExample from '!raw-loader!./examples/badge-default-example.component.html';
 import * as badgeFilledExample from '!raw-loader!./examples/badge-filled-example.component.html';
 import * as badgePillExample from '!raw-loader!./examples/badge-pill-example.component.html';
@@ -689,49 +690,70 @@ export class BadgeLabelDocsComponent implements OnInit {
     defaultBadgeHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: badgeDefaultExample
+            code: badgeDefaultExample,
+            fileName: 'badge-default-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
     pillBadgeHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: badgePillExample
+            code: badgePillExample,
+            fileName: 'badge-pill-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
     filledBadgeHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: badgeFilledExample
+            code: badgeFilledExample,
+            fileName: 'badge-filled-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
     labelHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: labelDefaultExample
+            code: labelDefaultExample,
+            fileName: 'label-default-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
     statusIconLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: labelBuildStatusExample
+            code: labelBuildStatusExample,
+            fileName: 'label-build-status-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
     anyIconLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: labelIconStatusExample
+            code: labelIconStatusExample,
+            fileName: 'label-icon-status-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
     semanticColorLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: labelStatusColorsExample
+            code: labelStatusColorsExample,
+            fileName: 'label-status-colors-example',
+            secondFile: 'badge-label-examples',
+            typescriptFileCode: badgeTsCode
         }
     ];
 
@@ -739,7 +761,7 @@ export class BadgeLabelDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('badgeLabel');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

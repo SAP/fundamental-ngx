@@ -4,6 +4,7 @@ import * as breadcrumbHrefExample from '!raw-loader!./examples/breadcrumb-href-e
 import * as breadcrumbRouterLinkExample from '!raw-loader!./examples/breadcrumb-routerLink-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
+import * as breadcrumbTsCode from '!raw-loader!./examples/breadcrumb-examples.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,16 +15,24 @@ export class BreadcrumbDocsComponent implements OnInit {
     breadcrumbRouterLinkHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: breadcrumbRouterLinkExample
+            code: breadcrumbRouterLinkExample,
+            fileName: 'breadcrumb-routerLink-example',
+            component: 'BreadcrumbRouterLinkExampleComponent',
+            secondFile: 'breadcrumb-examples',
+            typescriptFileCode: breadcrumbTsCode
         }
     ];
 
     breadcrumbHrefHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: breadcrumbHrefExample
+            code: breadcrumbHrefExample,
+            fileName: 'fd-breadcrumb-href-example',
+            component: 'BreadcrumbHrefExampleComponent',
+            secondFile: 'breadcrumb-examples',
+            typescriptFileCode: breadcrumbTsCode
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

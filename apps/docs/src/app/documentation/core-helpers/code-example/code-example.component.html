@@ -1,25 +1,34 @@
 <div class="docs-code-example-toolbar">
-    <button fd-button
-            fdType="light"
-            [glyph]="expandIcon"
-            (click)="isOpen = !isOpen">
-        {{isOpen ? 'Hide' : 'Show'}} Code
+    <button fd-button fdType="light" [glyph]="expandIcon" (click)="isOpen = !isOpen">
+        {{ isOpen ? 'Hide' : 'Show' }} Code
     </button>
     <div>
-        <button fd-button glyph="copy"
-                title="Copy example to clipboard"
-                fdType="light"
-                (click)="copyText()"
-                *ngIf="isOpen">
+        <button
+            fd-button
+            glyph="copy"
+            title="Copy example to clipboard"
+            fdType="light"
+            (click)="copyText()"
+            *ngIf="isOpen"
+        >
             Copy
+        </button>
+        <button
+            fd-button
+            glyph="copy"
+            title="Copy example to clipboard"
+            fdType="light"
+            (click)="openCode()"
+            *ngIf="isOpen"
+        >
+            StackBlitz
         </button>
     </div>
 </div>
 <div class="docs-html-example-container" [@height]="isOpen">
     <div class="docs-code-example-content">
         <fd-tab-list [(selectedIndex)]="selectedFileIndex">
-            <fd-tab *ngFor="let file of exampleFiles"
-                    [title]="file.name || file.language | titlecase">
+            <fd-tab *ngFor="let file of exampleFiles" [title]="file.name || file.language | titlecase">
                 <pre>
                     <code #code [ngClass]="file.language" class="hljs">{{file.code?.default}}</code>
                 </pre>
@@ -27,5 +36,3 @@
         </fd-tab-list>
     </div>
 </div>
-
-

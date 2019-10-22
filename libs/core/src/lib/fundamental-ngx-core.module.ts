@@ -47,6 +47,8 @@ import {LocalizationEditorModule} from './localizator-editor/localization-editor
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
 import { PipeModule } from './utils/public_api';
+import { NotificationModule } from './notification/notification.module';
+import { NotificationService } from './notification/notification-service/notification.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -78,6 +80,7 @@ import { PipeModule } from './utils/public_api';
     MegaMenuModule,
     ModalModule,
     MultiInputModule,
+    NotificationModule,
     PaginationModule,
     PanelModule,
     PopoverModule,
@@ -96,7 +99,7 @@ import { PipeModule } from './utils/public_api';
     TreeModule,
     PipeModule
   ],
-  providers: [AlertService, ModalService],
+  providers: [AlertService, ModalService, NotificationService],
 })
 export class FundamentalNgxCoreModule {
 

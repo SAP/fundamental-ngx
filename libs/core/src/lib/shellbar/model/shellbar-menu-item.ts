@@ -1,10 +1,22 @@
 export interface ShellbarMenuItem {
 
     /** Text written in dropdown option */
-    text: string;
+    name: string;
 
     /**
      *  Callback function that will be called on selecting this shellbar menu item from dropdown
      */
-    callback: Function;
+    callback?: Function;
+
+    /**
+     * The link, that user will be redirected to, after clicking item. When this value is set, element will become
+     * anchor with href, otherwise it's basic text
+     */
+    link?: string
+
+    /**
+    /* The icon to include in shellbar menu item See the icon page for the list of icons.
+    */
+    glyph?: string
+
 }

@@ -1,0 +1,26 @@
+<button fd-button (click)="open(notificationTemplate)">Open Notification</button>
+<span style="margin-left: 24px;">{{closeReason}}</span>
+
+<ng-template let-notification #notificationTemplate>
+    <fd-notification-header (closeButtonClick)="notification.dismiss('Close Button Click')">
+        <h3 fd-notification-title>Notification</h3>
+    </fd-notification-header>
+    <fd-notification-body>
+        <div fd-notification-content>
+            <div fd-notification-avatar>
+                <span fd-identifier [size]="'s'" [glyph]="'washing-machine'"></span>
+            </div>
+            <div fd-notification-text>
+                <div fd-notification-description>Notification Description</div>
+                <div fd-notification-metadata>Notification Metadata</div>
+            </div>
+        </div>
+        <fd-notification-footer>
+            <button fd-button [options]="'light'">More Info</button>
+            <div fd-notification-actions>
+                <button fd-button [fdType]="'positive'"  (click)="notification.close('Approve Button Click')">Approve</button>
+                <button fd-button [fdType]="'negative'"  (click)="notification.dismiss('Reject Button Click')">Reject</button>
+            </div>
+        </fd-notification-footer>
+    </fd-notification-body>
+</ng-template>
