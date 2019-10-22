@@ -165,11 +165,6 @@
     animation: sap-icon-spin 2s infinite linear;
 }
 
-.is-loading ::ng-deep .fd-input-group__addon:hover .fd-button:before {
-    content: "\e03e";
-    animation: none;
-}
-
 @keyframes sap-icon-spin {
     0% {
         transform: rotate(0deg);
@@ -178,6 +173,70 @@
     100% {
         transform: rotate(359deg);
     }
+}
+
+/* LOADING SPINNER */
+$fd-spinner-height: 20px !default;
+$fd-spinner-width--bar: 2px;
+$fd-spinner-width--gutter: 1px;
+$_width: $fd-spinner-width--bar*4+$fd-spinner-width--gutter*3;
+$_height: $fd-spinner-height;
+
+::ng-deep .search-input {
+
+    & .fd-button {
+        overflow: hidden;
+    }
+
+    .fd-spinner {
+        width: $_width;
+        height: $_height;
+
+        &::before,
+        &::after {
+            width: $fd-spinner-width--bar;
+        }
+
+        .fd-spinner__body {
+
+            &::before,
+            &::after {
+                width: $fd-spinner-width--bar;
+            }
+
+            &:before {
+                left: $fd-spinner-width--bar + $fd-spinner-width--gutter;
+            }
+
+            &:after {
+                right: $fd-spinner-width--bar + $fd-spinner-width--gutter;
+            }
+        }
+    }
+
+    & .fd-button .fd-spinner {
+        display: none;
+    }
+
+    &.is-loading .fd-button .fd-spinner {
+        display: flex;
+    }
+
+    &.is-loading .fd-button:hover .fd-spinner {
+        display: none;
+    }
+}
+
+::ng-deep .search-input .fd-button:before,
+::ng-deep [dir="rtl"] .search-input .fd-button:before {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.is-loading ::ng-deep .fd-input-group__addon:hover .fd-button:before {
+    width: $_width;
+    content: "\e03e";
+    animation: none;
 }
 
 fd-combobox {

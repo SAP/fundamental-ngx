@@ -1,7 +1,28 @@
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import { ComboboxComponent, ComboboxItem } from '@fundamental-ngx/core';
-import { Observable, isObservable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+    Component,
+    OnInit,
+    Input,
+    EventEmitter,
+    Output,
+    OnChanges,
+    SimpleChanges,
+    ViewChild,
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ElementRef
+} from '@angular/core';
+import {
+    ComboboxComponent,
+    ComboboxItem
+} from '@fundamental-ngx/core';
+import {
+    Observable,
+    isObservable,
+    of
+} from 'rxjs';
+import {
+    map
+} from 'rxjs/operators';
 
 export interface SearchInput {
     text: string;
@@ -107,7 +128,13 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
      */
     public showCategoryDropdown = false;
 
-    @ViewChild('combobox', { static: false }) combobox: ComboboxComponent;
+    @ViewChild('combobox', {
+        static: false
+    }) combobox: ComboboxComponent;
+    @ViewChild('combobox', {
+        static: false,
+        read: ElementRef
+    }) comboboxRef: ElementRef;
 
     constructor() { }
 
@@ -116,6 +143,16 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     ngAfterViewInit() {
         this.combobox.searchInputElement.nativeElement.setAttribute('type', 'search');
         this.combobox.searchInputElement.nativeElement.disabled = this.isLoading;
+
+        const button = this.comboboxRef.nativeElement.querySelector('button');
+        const loadingSpinnerBody: HTMLElement = document.createElement('div');
+        loadingSpinnerBody.className = 'fd-spinner__body';
+        const loadingSpinner: HTMLElement = document.createElement('div');
+        loadingSpinner.className = 'fd-spinner';
+        loadingSpinner.appendChild(loadingSpinnerBody);
+        button.appendChild(loadingSpinner);
+
+        // console.log(button)
     }
 
     ngOnChanges(changes: SimpleChanges) {
