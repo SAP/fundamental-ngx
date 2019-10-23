@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ShellbarProduct, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
+import { ProductSwitchItem, ShellbarMenuItem, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-advanced-example',
@@ -42,7 +42,7 @@ export class ShellbarAdvancedExampleComponent {
         'Strawberry',
     ];
 
-    productSwitcher: ShellbarProduct[] = [
+    productSwitcher: ProductSwitchItem[] = [
         {title: 'Fiori Home', image: './assets/01.png',
             callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
         {title: 'S/4 HANA Cloud', image: './assets/02.png',
@@ -93,5 +93,4 @@ export class ShellbarAdvancedExampleComponent {
         console.log($event);
         alert(product + ' Product Clicked');
     }
-
 }

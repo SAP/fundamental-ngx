@@ -385,6 +385,11 @@ import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellba
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { ProductSwitchListComponent } from './component-docs/product-switch/examples/product-switch-list/product-switch-list.component';
+import { ProductSwitchSmallExampleComponent } from './component-docs/product-switch/examples/product-switch-small-example.component';
+import { ProductSwitchDndExampleComponent } from './component-docs/product-switch/examples/product-switch-dnd-example.component';
+import { ProductSwitchDocsComponent } from './component-docs/product-switch/product-switch-docs.component';
+import { ProductSwitchDocsHeaderComponent } from './component-docs/product-switch/product-switch-docs-header/product-switch-docs-header.component';
 import { NotificationDocsComponent } from './component-docs/notification/notification-docs.component';
 import { NotificationDocsHeaderComponent } from './component-docs/notification/notification-docs-header/notification-docs-header.component';
 import { NotificationGroupTemplateExampleComponent } from './component-docs/notification/examples/group-notification/notification-group-template-example.component';
@@ -568,6 +573,11 @@ import { NotificationContentComponent } from './component-docs/notification/exam
         PopoverProgrammaticComponent,
         PopoverFillComponent,
         PopoverCFillComponent,
+        ProductSwitchDocsHeaderComponent,
+        ProductSwitchDocsComponent,
+        ProductSwitchDndExampleComponent,
+        ProductSwitchSmallExampleComponent,
+        ProductSwitchListComponent,
         RadioFormGroupExampleComponent,
         RadioExamplesComponent,
         ScrollSpyDocsComponent,
