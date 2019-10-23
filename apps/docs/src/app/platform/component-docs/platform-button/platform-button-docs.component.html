@@ -82,10 +82,16 @@
 <fd-docs-section-title [id]="'Button-extensibility'" [componentName]="'button'"> Extensibility </fd-docs-section-title>
 <description>
     The button implementation allows certain extensibility in terms of options for the inputs.
-    <code>button</code> inputs don't have a restriction for the predefined values. You can pass a number of custom
-    options to the <code>options</code> input, which accepts as a parameter either a string or an array of strings. For
-    example, <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code> to the button.
-    If you'd like to add multiple options, you could use <code>[options]="['emphasized', 'option1', 'option2']"</code>.
+
+    <code>button</code> inputs don't have a restriction for the predefined values.
+    You can pass a number of custom options to the <code>options</code> input,
+    which accepts as a parameter either a string or an array of strings.
+
+    For example,
+    <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code> to the button.
+
+    If you'd like to add multiple options, you could use
+    <code>[options]="['emphasized', 'option1', 'option2']"</code>.
     This would result in 3 classes being added to the button: <code>fd-button--emphasized</code>,
     <code>fd-button--option1</code>, and <code>fd-button--option2</code>.
 </description>
