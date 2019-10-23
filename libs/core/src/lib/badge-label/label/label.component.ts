@@ -1,6 +1,10 @@
 import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
+export type BadgeStatus = 'success' | 'warning' | 'error';
+export type BadgeModifier = 'pill' | 'filled';
+export type BadgeIconStatus = 'available' | 'away' | 'busy' | 'offline';
+
 /**
  * Label component, used to indicate status, without any background or border
  * Colors, generally in combination with text, are used to easily highlight the state of an object.
@@ -14,7 +18,7 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 })
 export class LabelComponent extends AbstractFdNgxClass {
     /** Color coded status for the label. Options are 'success', 'warning', and 'error'. Leave empty for default label. */
-    @Input() status: string = '';
+    @Input() status: BadgeStatus;
 
     /** @hidden */
     _setProperties() {
