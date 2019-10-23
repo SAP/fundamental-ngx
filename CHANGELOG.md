@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.64"></a>
+# [0.12.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.63...v0.12.0-rc.64) (2019-10-23)
+
+
+### Bug Fixes
+
+* **platform:search-input:** Fix CSS border rules for "RTL" mode ([#1441](https://github.com/SAP/fundamental-ngx/issues/1441)) ([1b5e560](https://github.com/SAP/fundamental-ngx/commit/1b5e560))
+
+
+
 <a name="0.12.0-rc.63"></a>
 # [0.12.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.62...v0.12.0-rc.63) (2019-10-23)
 
