@@ -87,6 +87,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     triggers: string[] = ['click'];
 
+    /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
+    @Input()
+    closeOnOutsideClick: boolean = true;
+
+    /**
+     * Whether the combobox should open, when any key is pressed in input (except Escape, Space, Enter). True by default
+     */
+    @Input()
+    openOnKeyboardEvent: boolean = true;
+
     /**
      * The template with which to display the individual listed items.
      * Use it by passing an ng-template with implicit content. See examples for more info.
@@ -218,13 +228,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent) {
-        if (this.inputText &&
+        if (this.openOnKeyboardEvent &&
+            this.inputText &&
             this.inputText.length &&
             event.code !== 'Escape' &&
             event.code !== 'Space' &&
             event.code !== 'Enter') {
-            this.open = true;
-            this.isOpenChangeHandle(this.open);
+            this.isOpenChangeHandle(true);
         }
     }
 
@@ -321,8 +331,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     private handleClickActions(term): void {
         if (this.closeOnSelect) {
-            this.open = false;
-            this.isOpenChangeHandle(this.open);
+            this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);

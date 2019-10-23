@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-combobox-open-detect-example',
-    templateUrl: './combobox-open-detect-example.component.html',
+    selector: 'fd-combobox-open-control-example',
+    templateUrl: './combobox-open-control-example.component.html',
 })
-export class ComboboxOpenDetectExampleComponent {
+export class ComboboxOpenControlExampleComponent {
 
     dropdownValues = [
         'Apple',
@@ -13,6 +13,8 @@ export class ComboboxOpenDetectExampleComponent {
         'Kiwi',
         'Strawberry'
     ];
+
+    open: boolean = false;
 
     handleIsOpenChange(isOpen: boolean): void {
         if (isOpen) {
