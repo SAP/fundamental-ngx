@@ -144,6 +144,7 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
         this.combobox.searchInputElement.nativeElement.setAttribute('type', 'search');
         this.combobox.searchInputElement.nativeElement.disabled = this.isLoading;
 
+        // Add loading spinner element to combobox button
         const button = this.comboboxRef.nativeElement.querySelector('button');
         const loadingSpinnerBody: HTMLElement = document.createElement('div');
         loadingSpinnerBody.className = 'fd-spinner__body';
@@ -152,7 +153,6 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
         loadingSpinner.appendChild(loadingSpinnerBody);
         button.appendChild(loadingSpinner);
 
-        // console.log(button)
     }
 
     ngOnChanges(changes: SimpleChanges) {
