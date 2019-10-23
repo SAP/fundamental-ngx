@@ -1,0 +1,30 @@
+
+<div class="fd-product-switch__body"
+     [ngClass]="{
+                    'fd-product-switch__body--col-3': isSmallMode() && !isListMode(),
+                    'fd-product-switch__body--mobile': isListMode()}">
+    <ul fd-dnd-list class="fd-product-switch__list"
+        [items]="products"
+        [listMode]="isListMode()"
+        (itemsChange)="productSwitchItemsChangeHandle($event)">
+        <li
+            fd-dnd-container
+            *ngFor="let product of products">
+            <div cdkDrag
+                 [cdkDragDisabled]="product.disabledDragAndDrop || !dragAndDropEnabled"
+                 tabindex="0"
+                 class="fd-product-switch__item fd-product-switch__fullfill"
+                 [ngClass]="{'selected': product.selected}"
+                 (click)="itemClick(product, $event)">
+                <div class="fd-product-switch__icon"
+                     [ngClass]="product.icon ? ('sap-icon--' + product.icon) : ''">
+                    <img *ngIf="product.image" [src]="product.image">
+                </div>
+                <div class="fd-product-switch__text">
+                    <div class="fd-product-switch__title">{{product.title}}</div>
+                    <div class="fd-product-switch__subtitle">{{product.subtitle}}</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

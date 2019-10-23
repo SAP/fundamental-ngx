@@ -11,9 +11,7 @@ import {
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
-import { ShellbarProduct } from '../model/shellbar-product';
 import { ShellbarUser } from '../model/shellbar-user';
-import { ShellbarProductSwitcherComponent } from '../shellbar-product-switcher/shellbar-product-switcher.component';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { ComboboxComponent } from '../../combobox/combobox.component';
 
@@ -51,10 +49,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */
     showCollapsedProducts: boolean = false;
 
-    /** The product switcher data. */
-    @Input()
-    productSwitcher: ShellbarProduct[];
-
     /** The user data. */
     @Input()
     user: ShellbarUser;
@@ -76,20 +70,12 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarProductSwitcherComponent, { static: false })
-    productSwitcherComponent: ShellbarProductSwitcherComponent;
-
-    /** @hidden */
     @ContentChild(ShellbarUserMenuComponent, { static: false })
     userComponent: ShellbarUserMenuComponent;
 
     /** @hidden */
     @ViewChild(ShellbarUserMenuComponent, { static: false })
     userComponentView: ShellbarUserMenuComponent;
-
-    /** @hidden */
-    @ViewChild(ShellbarProductSwitcherComponent, { static: false })
-    productSwitcherComponentView: ShellbarProductSwitcherComponent;
 
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
@@ -102,14 +88,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     @HostListener('window:resize', [])
     onResize(): void {
         this.actionsCollapsed = window.innerWidth < 1024;
-    }
-
-    /**
-     * @hidden
-     */
-    productClicked(item: ShellbarProduct, event: any): void {
-        this.triggerItems();
-        item.callback(event);
     }
 
     /**
@@ -128,12 +106,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
             }
             if (this.userComponent) {
                 this.userComponent.close();
-            }
-            if (this.productSwitcherComponent) {
-                this.productSwitcherComponent.close();
-            }
-            if (this.productSwitcherComponentView) {
-                this.productSwitcherComponentView.close();
             }
         }
     }
@@ -158,14 +130,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
         event.preventDefault();
         event.stopPropagation();
         this.showCollapsedProducts = !this.showCollapsedProducts;
-    }
-
-    public get productSwitcherItems(): ShellbarProduct[] {
-        if (this.productSwitcherComponent && this.productSwitcherComponent.productSwitcher) {
-            return this.productSwitcherComponent.productSwitcher;
-        } else {
-            return this.productSwitcher;
-        }
     }
 
     public get userItem(): ShellbarUser {

@@ -199,6 +199,10 @@ export const API_FILES = {
     popoverDirective: [
         'PopoverDirective',
     ],
+    productSwitch: [
+        'ProductSwitchComponent',
+        'ProductSwitchItem'
+    ],
     scrollSpy: [
         'ScrollSpyDirective'
     ],

@@ -50,6 +50,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/notification', name: 'Notification' },
         { url: 'core/pagination', name: 'Pagination' },
         { url: 'core/popover', name: 'Popover' },
+        { url: 'core/product-switch', name: 'Product Switch' },
         { url: 'core/radio', name: 'Radio Button' },
         { url: 'core/select-native', name: 'Select Native' },
         { url: 'core/select', name: 'Select' },

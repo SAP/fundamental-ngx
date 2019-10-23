@@ -1,0 +1,39 @@
+<fd-docs-section-title [id]="'basic'" [componentName]="'product-switch'">
+    Basic Product Switch inside <code>Shellbar</code>.
+</fd-docs-section-title>
+<description>
+    Product switch with enabled <code>Drag And Drop</code>. The DnD functionality can be switched off by passing
+    <code>[dragAndDropEnabled]="false"</code> to component. The event thrown on drop can be handled by binding to
+    <code>(productsChange)</code>.
+</description>
+<component-example [name]="'ex1'">
+    <fd-product-switch-basic-example></fd-product-switch-basic-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchBasicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'small'" [componentName]="'product-switch'">
+    Product Switch With Less Than 7 Items
+</fd-docs-section-title>
+<description>
+    When the product switch has less than 7 items, it has 3 columns and 2 rows.
+</description>
+<component-example [name]="'ex2'">
+    <fd-product-switch-small-example></fd-product-switch-small-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchSmallExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'list'" [componentName]="'product-switch'">
+    List Mode
+</fd-docs-section-title>
+<description>
+    For narrow screens the Product Switch transforms to a List by itself. Add the <code>[forceListMode]="true"</code>
+    to force the list layout, even on larger screens.
+</description>
+<component-example [name]="'ex3'">
+    <fd-product-switch-list-example></fd-product-switch-list-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchListExample"></code-example>
