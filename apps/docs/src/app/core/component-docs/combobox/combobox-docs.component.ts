@@ -102,11 +102,14 @@ export class ComboboxDocsComponent implements OnInit {
     comboboxOpenChangeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: comboboxProgramHtml
+            code: comboboxProgramHtml,
+            fileName: 'combobox-open-detect-example'
         },
         {
             language: 'typescript',
-            code: comboboxProgramTs
+            code: comboboxProgramTs,
+            component: 'ComboboxOpenDetectExampleComponent',
+            fileName: 'combobox-open-detect-example'
         }
     ];
 
