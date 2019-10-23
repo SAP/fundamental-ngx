@@ -147,6 +147,20 @@
 
 }
 
+@supports(--css: variables) {
+    ::ng-deep [dir="rtl"] .search-input {
+        & [type=search]+.fd-input-group__addon {
+            border-color: var(--fd-color-neutral-4, #89919a);
+        }
+
+        &.hide-category-label {
+            .search-input__category-dropdown button {
+                border-right-color: var(--fd-color-neutral-4, #89919a);
+            }
+        }
+    }
+}
+
 .is-loading ::ng-deep .fd-button:before {
     animation: sap-icon-spin 2s infinite linear;
 }
