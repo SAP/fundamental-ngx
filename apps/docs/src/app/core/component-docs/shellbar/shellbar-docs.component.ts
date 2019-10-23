@@ -16,22 +16,28 @@ export class ShellbarDocsComponent {
     shellbarBasicExample: ExampleFile[] = [
         {
             language: 'html',
-            code: shellbarBasicHTMLSrc
+            code: shellbarBasicHTMLSrc,
+            fileName: 'shellbar-basic-example'
         },
         {
             language: 'typescript',
-            code: shellbarBasicTSSrc
+            component: 'ShellbarBasicExampleComponent',
+            code: shellbarBasicTSSrc,
+            fileName: 'shellbar-basic-example'
         }
     ];
 
     shellbarCollapsible: ExampleFile[] = [
         {
             language: 'html',
-            code: shellbarCollapsibleHTMLSrc
+            code: shellbarCollapsibleHTMLSrc,
+            fileName: 'shellbar-collapsible-example'
         },
         {
             language: 'typescript',
-            code: shellbarCollapsibleTSSrc
+            component: 'ShellbarCollapsibleExampleComponent',
+            code: shellbarCollapsibleTSSrc,
+            fileName: 'shellbar-collapsible-example'
         }
     ];
 
@@ -39,10 +45,13 @@ export class ShellbarDocsComponent {
         {
             language: 'html',
             code: advancedShellbarHtml,
+            fileName: 'shellbar-advanced/shellbar-advanced-example'
         },
         {
             language: 'typescript',
-            code: advancedShellbarTs
+            component: 'ShellbarAdvancedExampleComponent',
+            code: advancedShellbarTs,
+            fileName: 'shellbar-advanced/shellbar-advanced-example'
         }
     ];
 

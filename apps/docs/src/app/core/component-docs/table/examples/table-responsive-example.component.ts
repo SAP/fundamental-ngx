@@ -3,11 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'fd-table-responsive-example',
     templateUrl: './table-responsive-example.component.html',
-    styles: [`
-        td {
-            min-width: 200px;
-        }
-    `]
+    styleUrls: ['table-responsive-example.component.scss']
+
 })
 export class TableResponsiveExampleComponent implements OnInit {
     tableRows;

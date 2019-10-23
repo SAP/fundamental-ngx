@@ -66,8 +66,18 @@ export class ActionBarComponent implements OnInit {
     @Input()
     placement: Placement;
 
+    /**
+     * List of action items.
+     */
     @Input()
     actionItems: ActionItem[];
+
+    /**
+     * option to specify the sticky action bar.
+     */
+    @Input()
+    sticky = false;
+
     /**
      * Emitted event when "back" button is clicked.
      */

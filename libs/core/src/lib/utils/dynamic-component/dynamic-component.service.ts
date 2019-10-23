@@ -31,7 +31,7 @@ export class DynamicComponentService {
      * @param services Services that will be injected to the component.
      */
     public createDynamicComponent<T>(
-        contentType: TemplateRef<any> | Type<any> | string,
+        contentType: TemplateRef<any> | Type<any> | string | Object,
         componentType: Type<any>,
         config: DynamicComponentConfig,
         services?: any[]

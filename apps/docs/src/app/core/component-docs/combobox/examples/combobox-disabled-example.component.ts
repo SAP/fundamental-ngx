@@ -3,12 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'fd-combobox-disabled-example',
-    styles: [`
-        .flex-form{
-            display:flex;
-            justify-content: space-between
-        }
-    `],
+    styleUrls: ['combobox-disabled-example.component.scss'],
     templateUrl: './combobox-disabled-example.component.html'
 })
 export class ComboboxDisabledExampleComponent {

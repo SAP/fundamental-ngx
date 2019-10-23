@@ -24,46 +24,58 @@ export class FileInputDocsComponent implements OnInit {
     fileInputExample: ExampleFile[] = [
         {
             language: 'html',
-            code: fileInputH
+            code: fileInputH,
+            fileName: 'file-input-example'
         },
         {
             language: 'typescript',
-            code: fileInputT
+            component: 'FileInputExampleComponent',
+            code: fileInputT,
+            fileName: 'file-input-example'
         }
     ];
 
     fileInputCustom: ExampleFile[] = [
         {
             language: 'html',
-            code: fileInputCustomH
+            code: fileInputCustomH,
+            fileName: 'file-input-custom-example'
         },
         {
             language: 'typescript',
-            code: fileInputCustomT
+            component: 'FileInputCustomExampleComponent',
+            code: fileInputCustomT,
+            fileName: 'file-input-custom-example'
         }
     ];
 
     fileInvalidCustom: ExampleFile[] = [
         {
             language: 'html',
-            code: fileInputInvalidH
+            code: fileInputInvalidH,
+            fileName: 'file-input-drag-disabled-example'
         },
         {
             language: 'typescript',
-            code: fileInputInvalidT
+            component: 'FileInputDragDisabledExampleComponent',
+            code: fileInputInvalidT,
+            fileName: 'file-input-drag-disabled-example'
         }
     ];
 
     fileMaxSize: ExampleFile[] = [
         {
             language: 'html',
-            code: fileInputMaxH
+            code: fileInputMaxH,
+            fileName: 'file-input-max-example'
         },
         {
             language: 'typescript',
-            code: fileInputMaxT
+            component: 'FileInputMaxExampleComponent',
+            code: fileInputMaxT,
+            fileName: 'file-input-max-example'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

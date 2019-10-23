@@ -27,57 +27,72 @@ export class MultiInputDocsComponent implements OnInit {
     multiInputBasic: ExampleFile[] = [
         {
             language: 'html',
-            code: simpleH
+            code: simpleH,
+            fileName: 'multi-input-example'
         },
         {
             language: 'typescript',
-            code: simpleT
+            component: 'MultiInputExampleComponent',
+            code: simpleT,
+            fileName: 'multi-input-example'
         }
     ];
 
     display: ExampleFile[] = [
         {
             language: 'html',
-            code: displayH
+            code: displayH,
+            fileName: 'multi-input-displaywith-example'
         },
         {
             language: 'typescript',
-            code: displayT
+            component: 'MultiInputDisplaywithExampleComponent',
+            code: displayT,
+            fileName: 'multi-input-displaywith-example'
         }
     ];
 
     filter: ExampleFile[] = [
         {
             language: 'html',
-            code: filterH
+            code: filterH,
+            fileName: 'multi-input-filter-example'
         },
         {
             language: 'typescript',
-            code: filterT
+            component: 'MultiInputFilterExampleComponent',
+            code: filterT,
+            fileName: 'multi-input-filter-example'
         }
     ];
 
     async: ExampleFile[] = [
         {
             language: 'html',
-            code: asyncH
+            code: asyncH,
+            fileName: 'multi-input-async-example'
         },
         {
             language: 'typescript',
-            code: asyncT
+            component: 'MultiInputAsyncExampleComponent',
+            code: asyncT,
+            fileName: 'multi-input-async-example'
         }
     ];
 
     form: ExampleFile[] = [
         {
             language: 'html',
-            code: formH
+            code: formH,
+            fileName: 'multi-input-form-example'
         },
         {
             language: 'typescript',
-            code: formT
+            component: 'MultiInputFormExampleComponent',
+            code: formT,
+            fileName: 'multi-input-form-example'
         }
     ];
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

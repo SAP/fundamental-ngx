@@ -8,8 +8,10 @@ import * as tableCheckHtml from '!raw-loader!./examples/table-checkboxes-example
 import * as tableCheckTs from '!raw-loader!./examples/table-checkboxes-example.component.ts';
 import * as tableCdkHtml from '!raw-loader!./examples/table-cdk-example.component.html';
 import * as tableCdkTs from '!raw-loader!./examples/table-cdk-example.component.ts';
+import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.component.scss';
 import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-example.component.html';
 import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
+import * as tableResponsiveScss from '!raw-loader!./examples/table-responsive-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -17,13 +19,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-table',
     templateUrl: './table-docs.component.html',
-    styles: [
-        `
-            ::ng-deep app-table .fd-tile {
-                display: block;
-            }
-        `
-    ]
+    styleUrls: ['table-docs.component.scss']
+
 })
 export class TableDocsComponent implements OnInit {
     static schema: Schema = {
@@ -50,44 +47,58 @@ export class TableDocsComponent implements OnInit {
     tableExample: ExampleFile[] = [
         {
             language: 'html',
-            code: tableHtmlSrc
+            code: tableHtmlSrc,
+            fileName: 'table-example'
         },
         {
             language: 'typescript',
-            code: tableTsSrc
+            component: 'TableExampleComponent',
+            code: tableTsSrc,
+            fileName: 'table-example'
         }
     ];
 
     tableCheckboxes: ExampleFile[] = [
         {
             language: 'html',
-            code: tableCheckHtml
+            code: tableCheckHtml,
+            fileName: 'table-checkboxes-example'
         },
         {
             language: 'typescript',
-            code: tableCheckTs
+            component: 'TableCheckboxesExampleComponent',
+            code: tableCheckTs,
+            fileName: 'table-checkboxes-example'
         }
     ];
 
     tableCdk: ExampleFile[] = [
         {
             language: 'html',
-            code: tableCdkHtml
+            code: tableCdkHtml,
+            fileName: 'table-cdk-example',
+            scssFileCode: tableCdkScss
         },
         {
             language: 'typescript',
-            code: tableCdkTs
+            component: 'TableCdkExampleComponent',
+            code: tableCdkTs,
+            fileName: 'table-cdk-example'
         }
     ];
 
     tableResponsive: ExampleFile[] = [
         {
             language: 'html',
-            code: tableResponsiveHtml
+            code: tableResponsiveHtml,
+            fileName: 'table-responsive-example',
+            scssFileCode: tableResponsiveScss
         },
         {
             language: 'typescript',
-            code: tableResponsiveTs
+            component: 'TableResponsiveExampleComponent',
+            code: tableResponsiveTs,
+            fileName: 'table-responsive-example'
         }
     ];
 
@@ -95,7 +106,7 @@ export class TableDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('table');
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }
