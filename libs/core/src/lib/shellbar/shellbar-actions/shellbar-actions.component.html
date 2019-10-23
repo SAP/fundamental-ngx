@@ -31,26 +31,11 @@
                             (click)="actionClicked(action, $event)">
                             {{action.label}}
                         </li>
-                        <div *ngIf="productSwitcher"
-                                class="fd-menu__addon-before">
-                            <span [ngClass]="'sap-icon--grid'"></span>
-                        </div>
-                        <li fd-menu-item
-                            *ngIf="productSwitcher"
-                            (click)="toggleCollapsedProducts($event);">
-                            Product Switcher
-                        </li>
                     </ul>
                     <ul fd-menu-list
                         *ngIf="showCollapsedProducts">
                         <li (click)="toggleCollapsedProducts($event)">
                             <span fd-menu-item class="sap-icon--nav-back"></span>
-                        </li>
-                        <hr>
-                        <li fd-menu-item
-                            *ngFor="let product of productSwitcherItems"
-                            (click)="productClicked(product, $event)">
-                            {{product.title}}
                         </li>
                     </ul>
                 </fd-menu>
@@ -75,15 +60,4 @@
 </ng-container>
 
 
-<ng-container *ngIf="productSwitcherItems">
-    <ng-container *ngIf="productSwitcherComponent">
-        <ng-content select="fd-shellbar-product-switcher"></ng-content>
-    </ng-container>
-    <ng-container *ngIf="!productSwitcherComponent">
-        <fd-shellbar-product-switcher (itemClicked)="triggerItems()"
-                                      [options]="{placement: 'bottom-end'}"
-                                      [productSwitcher]="productSwitcher"
-                                      [focusTrapped]="false">
-        </fd-shellbar-product-switcher>
-    </ng-container>
-</ng-container>
+<ng-content select="fd-product-switch"></ng-content>

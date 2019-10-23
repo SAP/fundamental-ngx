@@ -16,8 +16,10 @@ import { ShellbarLogoComponent } from './shellbar-logo/shellbar-logo.component';
 import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.component';
 
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
-import { ShellbarProductSwitcherComponent } from './shellbar-product-switcher/shellbar-product-switcher.component';
 import { IconModule } from '../icon/icon.module';
+import { DragAndDropModule } from '../utils/drag-and-drop/drag-and-drop.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ProductSwitchModule } from '../product-switch/product-switch.module';
 
 @NgModule({
     declarations: [
@@ -28,10 +30,20 @@ import { IconModule } from '../icon/icon.module';
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
-        ShellbarProductSwitcherComponent,
         ShellbarUserMenuComponent
     ],
-    imports: [CommonModule, PopoverModule, MenuModule, IdentifierModule, ButtonModule, ComboboxModule, IconModule],
+    imports: [
+        CommonModule,
+        PopoverModule,
+        MenuModule,
+        IdentifierModule,
+        ButtonModule,
+        ComboboxModule,
+        DragAndDropModule,
+        DragDropModule,
+        ProductSwitchModule,
+        IconModule
+    ],
     exports: [
         ShellbarComponent,
         ProductMenuComponent,
@@ -40,7 +52,6 @@ import { IconModule } from '../icon/icon.module';
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
-        ShellbarProductSwitcherComponent,
         ShellbarUserMenuComponent
     ]
 })

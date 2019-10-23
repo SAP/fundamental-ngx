@@ -28,11 +28,13 @@
                                [triggers]="[]"
                                [userMenu]="userMenu">
         </fd-shellbar-user-menu>
-        <fd-shellbar-product-switcher #shellbarProductSwitcher
-                                      [closeOnOutsideClick]="false"
-                                      [productSwitcher]="productSwitcher"
-                                      [triggers]="[]"
-        ></fd-shellbar-product-switcher>
+        <fd-product-switch #shellbarProductSwitcher
+                           [closeOnOutsideClick]="false"
+                           [triggers]="[]">
+            <fd-product-switch-body
+                [products]="productSwitcher">
+            </fd-product-switch-body>
+        </fd-product-switch>
         <fd-combobox [(ngModel)]="searchTerm"
                      [glyph]="'search'"
                      [dropdownValues]="searchTerms"

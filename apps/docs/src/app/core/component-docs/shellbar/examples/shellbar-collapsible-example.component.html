@@ -12,8 +12,7 @@
         Subtitle
     </fd-shellbar-subtitle>
     <fd-shellbar-actions [user]="user"
-                         [userMenu]="userMenu"
-                         [productSwitcher]="productSwitcher">
+                         [userMenu]="userMenu">
         <fd-shellbar-action *ngFor="let action of actions"
                             [glyph]="action.glyph"
                             [callback]="action.callback"
@@ -21,6 +20,11 @@
                             [notificationCount]="action.notificationCount"
                             [notificationLabel]="action.notificationLabel">
         </fd-shellbar-action>
+        <fd-product-switch>
+            <fd-product-switch-body
+                [products]="productSwitcher">
+            </fd-product-switch-body>
+        </fd-product-switch>
         <fd-combobox [(ngModel)]="searchTerm"
              [glyph]="'search'"
              [dropdownValues]="searchTerms"

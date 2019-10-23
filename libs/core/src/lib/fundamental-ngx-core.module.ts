@@ -46,6 +46,8 @@ import {FormsModule} from '@angular/forms';
 import {LocalizationEditorModule} from './localizator-editor/localization-editor.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
+import { DragAndDropModule } from './utils/drag-and-drop/drag-and-drop.module';
+import { ProductSwitchModule } from './product-switch/product-switch.module';
 import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification-service/notification.service';
 
@@ -62,6 +64,7 @@ import { NotificationService } from './notification/notification-service/notific
     ComboboxModule,
     DatePickerModule,
     DatetimePickerModule,
+    DragAndDropModule,
     FileInputModule,
     FormModule,
     IconModule,
@@ -82,6 +85,7 @@ import { NotificationService } from './notification/notification-service/notific
     NotificationModule,
     PaginationModule,
     PanelModule,
+    ProductSwitchModule,
     PopoverModule,
     ScrollSpyModule,
     SelectModule,

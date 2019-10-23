@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ShellbarProduct, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, ProductSwitchItem, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
@@ -42,31 +42,76 @@ export class ShellbarCollapsibleExampleComponent {
         'Strawberry',
     ];
 
-    productSwitcher: ShellbarProduct[] = [
-        {title: 'Fiori Home', image: './assets/01.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
-        {title: 'S/4 HANA Cloud', image: './assets/02.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'S/4 HANA Cloud')}},
-        {title: 'Analytics Cloud', image: './assets/03.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Analytics Cloud')}},
-        {title: 'Ariba', image: './assets/04.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Ariba')}},
-        {title: 'SuccessFactors', image: './assets/05.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'SuccessFactors')}},
-        {title: 'Commerce Cloud', image: './assets/06.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Commerce Cloud')}},
-        {title: 'Gigya', image: './assets/07.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Gigya')}},
-        {title: 'Callidus Cloud', image: './assets/08.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Callidus Cloud')}},
-        {title: 'Fieldglass', image: './assets/09.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Fieldglass')}},
-        {title: 'Concur', image: './assets/10.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Concur')}},
-        {title: 'Cloud for Customer', image: './assets/11.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Cloud for Customer')}},
-        {title: 'Cloud Portal', image: './assets/12.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Cloud Portal')}}
+    productSwitcher: ProductSwitchItem[] = [
+        {
+            title: 'Home',
+            subtitle: 'Central Home',
+            icon: 'home',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Analytics Cloud',
+            subtitle: 'Analytics Cloud',
+            icon: 'business-objects-experience',
+            selected: true,
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Catalog',
+            subtitle: 'Ariba',
+            icon: 'contacts',
+            disabledDragAndDrop: true,
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Guided Buying',
+            icon: 'credit-card',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Strategic Procurement',
+            icon: 'cart-3',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Vendor Managemen',
+            subtitle: 'Fieldglass',
+            icon: 'shipping-status',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Human Capital Management',
+            icon: 'customer',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Sales Cloud',
+            subtitle: 'Sales Cloud',
+            icon: 'sales-notification',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Commerce Cloud',
+            subtitle: 'Commerce Cloud',
+            icon: 'retail-store',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Marketing Cloud',
+            subtitle: 'Marketing Cloud',
+            icon: 'marketing-campaign',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Service Cloud',
+            icon: 'family-care',
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'S/4HANA',
+            icon: 'batch-payments',
+            callback: this.productSwitcherCallback
+        },
     ];
 
     settingsCallback($event) {
@@ -89,9 +134,9 @@ export class ShellbarCollapsibleExampleComponent {
         alert('Pool Action Clicked');
     }
 
-    productSwitcherCallback($event, product) {
+    productSwitcherCallback($event) {
         console.log($event);
-        alert(product + ' Product Clicked');
+        alert('Product Clicked');
     }
 
 }
