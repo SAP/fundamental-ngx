@@ -161,20 +161,6 @@
     }
 }
 
-.is-loading ::ng-deep .fd-button:before {
-    animation: sap-icon-spin 2s infinite linear;
-}
-
-@keyframes sap-icon-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(359deg);
-    }
-}
-
 /* LOADING SPINNER */
 $fd-spinner-height: 20px !default;
 $fd-spinner-width--bar: 2px;
