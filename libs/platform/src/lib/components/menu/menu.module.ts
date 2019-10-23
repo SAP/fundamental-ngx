@@ -10,4 +10,4 @@ import { FundamentalNgxCoreModule, MenuKeyboardService } from '@fundamental-ngx/
     exports: [MenuComponent, MenuItemComponent],
     providers: [MenuKeyboardService]
 })
-export class MenuModule {}
+export class FdpMenuModule {}
