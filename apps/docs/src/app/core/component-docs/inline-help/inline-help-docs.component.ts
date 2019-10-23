@@ -73,7 +73,11 @@ export class InlineHelpDocsComponent implements OnInit {
     inlineHelpStyles: ExampleFile[] = [
         {
             language: 'html',
-            code: inlineHelpStylesHtml
+            code: inlineHelpStylesHtml,
+            fileName: 'inline-help-styled-example',
+            secondFile: 'inline-help-examples',
+            typescriptFileCode: inlineHelpTsCode,
+            component: 'InlineHelpStyledExampleComponent'
         }
     ];
 
