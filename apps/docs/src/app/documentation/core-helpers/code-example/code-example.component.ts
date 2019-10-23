@@ -35,14 +35,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
      */
     @Input()
     exampleFiles: ExampleFile[] = [];
-
-    // @Input() fileName: string;
-
-    // @Input() component: string;
-
-    addonScss = '';
     smallScreen: boolean;
-
     selectedFileIndex: number = 0;
 
     isOpen: boolean = false;
@@ -60,7 +53,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     };
 
     app_app_component = ``
-
 
     project = {
         files: {},
@@ -149,7 +141,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 this.parameters.app_component_ts = example.fileName + '.component.ts';
                 this.parameters.app_component_html_path = 'src/app/' + example.fileName + '.component.html';
                 this.parameters.app_component_ts_path = 'src/app/' + example.fileName + '.component.ts';
-
             }
 
 
