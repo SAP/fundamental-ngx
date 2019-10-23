@@ -8,11 +8,12 @@ import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 import { CalendarService } from './calendar.service';
 import { CalendarComponent } from './calendar.component';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
     declarations: [CalendarComponent, CalendarHeaderComponent,
         CalendarDayViewComponent, CalendarMonthViewComponent, CalendarYearViewComponent],
-    imports: [CommonModule, IconModule],
+    imports: [CommonModule, IconModule, ButtonModule],
     exports: [CalendarComponent, CalendarDayViewComponent,
         CalendarHeaderComponent, CalendarYearViewComponent, CalendarMonthViewComponent],
     providers: [CalendarService]

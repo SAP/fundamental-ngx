@@ -45,6 +45,10 @@ function addDependencies(): Rule {
             dependencies.push({ type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/animations' })
         }
 
+        if (!hasPackage(tree, '@angular/cdk')) {
+            dependencies.push({ type: NodeDependencyType.Default, version: `latest`, name: '@angular/cdk' })
+        }
+
         dependencies.forEach(dependency => {
             addPackageJsonDependency(tree, dependency);
             console.log(chalk.green(`✅️ Added ${dependency.name} to ${dependency.type}.`));
