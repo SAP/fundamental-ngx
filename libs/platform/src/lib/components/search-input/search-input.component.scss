@@ -181,6 +181,7 @@ $_height: $fd-spinner-height;
         &::before,
         &::after {
             width: $fd-spinner-width--bar;
+            background-color: #0a6ed1;
         }
 
         .fd-spinner__body {
@@ -188,6 +189,7 @@ $_height: $fd-spinner-height;
             &::before,
             &::after {
                 width: $fd-spinner-width--bar;
+                background-color: #0a6ed1;
             }
 
             &:before {
@@ -210,6 +212,26 @@ $_height: $fd-spinner-height;
 
     &.is-loading .fd-button:hover .fd-spinner {
         display: none;
+    }
+}
+
+@supports(--css: variables) {
+    ::ng-deep .search-input {
+        .fd-spinner {
+
+            &::before,
+            &::after {
+                background-color: var(--fd-color-action-1, #0a6ed1);
+            }
+
+            .fd-spinner__body {
+
+                &::before,
+                &::after {
+                    background-color: var(--fd-color-action-1, #0a6ed1);
+                }
+            }
+        }
     }
 }
 
