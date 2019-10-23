@@ -9,6 +9,7 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -22,6 +23,7 @@ import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
+import { DatePipe } from '@angular/common';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -49,7 +51,8 @@ import { FdDatetime } from './models/fd-datetime';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
-        }
+        },
+        DatePipe
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -100,6 +103,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Whether the time component should be meridian (am/pm). */
     @Input()
     meridian: boolean = true;
+
+    @Input()
+    format: string = 'MM/dd/yyyy, hh:mm:ss';
+
+    @Input()
+    locale: string;
 
     /** Whether the component is disabled. */
     @Input()
@@ -320,9 +329,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     constructor(private elRef: ElementRef,
                 private changeDetRef: ChangeDetectorRef,
-                public dateTimeAdapter: DateTimeFormatParser
-    ) {
-    }
+                public dateTimeAdapter: DateTimeFormatParser,
+                @Optional() private datePipe: DatePipe
+    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -431,7 +440,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     }
 
     private setInput(fdDateTime: FdDatetime): void {
-        this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
+        this.inputFieldDate = this.formatDateTime(fdDateTime);
         this.changeDetRef.detectChanges();
     }
 
@@ -439,6 +448,21 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
         if (this.calendarComponent) {
             this.calendarComponent.setCurrentlyDisplayed(date);
+        }
+    }
+
+    /**
+     * @hidden
+     * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
+     */
+    private formatDateTime(fdDateTime: FdDatetime): string {
+
+        const customFormattedDate: string = this.dateTimeAdapter.format(fdDateTime);
+
+        if (customFormattedDate) {
+            return customFormattedDate;
+        } else {
+            return this.datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
     }
 

@@ -18,7 +18,7 @@
                        (keyup.enter)="handleInputChange(dateTimePicker.value)"
                        (click)="openPopover()"
                        [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }"
-                       [disabled]="disabled">
+                       [disabled]="disabled || inputFieldDisabled">
                 <span fd-input-group-addon [button]="true">
                     <button [disabled]="disabled" fd-button [glyph]="'date-time'"
                             [options]="'light'"

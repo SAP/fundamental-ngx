@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FdDate } from '../../calendar/models/fd-date';
+import { DatePipe } from '@angular/common';
 
 export function DATE_FORMAT_FACTORY() {
     return new DateFormatParserDefault();
@@ -44,8 +45,8 @@ export class DateFormatParserDefault extends DateFormatParser {
      */
     public parse(value: string): FdDate {
         if (value) {
-            const str = value.toString().split('/').map(Number);
-            return new FdDate(str[2], str[0], str[1]);
+            const date: Date = new Date(value);
+            return new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
         } else {
             return new FdDate(null, null, null);
         }
@@ -56,6 +57,6 @@ export class DateFormatParserDefault extends DateFormatParser {
      * @param date FdDate to format to string value.
      */
     public format(date: FdDate): string {
-        return date.month + '/' + date.day + '/' + date.year;
+        return null;
     }
 }
