@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.61"></a>
+# [0.12.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.60...v0.12.0-rc.61) (2019-10-23)
+
+
+### Features
+
+* Product Switch with Drag and Drop. ([#1439](https://github.com/SAP/fundamental-ngx/issues/1439)) ([0dc593f](https://github.com/SAP/fundamental-ngx/commit/0dc593f))
+
+
+
 <a name="0.12.0-rc.60"></a>
 # [0.12.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.59...v0.12.0-rc.60) (2019-10-22)
 
