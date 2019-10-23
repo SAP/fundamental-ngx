@@ -34,6 +34,14 @@
         padding-left: 12px;
         border-color: #89919a;
         background: none;
+
+        &::placeholder {
+            line-height: 36px;
+        }
+
+        &.fd-input--compact::placeholder {
+            line-height: 28px;
+        }
     }
 
     ::ng-deep [type=search]+.fd-input-group__addon {
@@ -66,6 +74,14 @@
         ::ng-deep input[type="search"],
         ::ng-deep .fd-input {
             border-color: var(--fd-color-neutral-4, #89919a);
+
+            &::placeholder {
+                line-height: var(--fd-forms-height, 36px);
+            }
+
+            &.fd-input--compact::placeholder {
+                line-height: var(--fd-forms-height-compact, 28px);
+            }
         }
 
         ::ng-deep [type=search]+.fd-input-group__addon {
