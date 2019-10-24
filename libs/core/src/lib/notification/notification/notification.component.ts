@@ -119,7 +119,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
             $implicit: this.notificationRef
         };
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
-        console.log('create');
     }
 
     _setProperties(): void {
