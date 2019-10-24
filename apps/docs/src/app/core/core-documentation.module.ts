@@ -399,6 +399,7 @@ import { NotificationAsObjectExampleComponent } from './component-docs/notificat
 import { NotificationOptionsExampleComponent } from './component-docs/notification/examples/notification-options/notification-options-example.component';
 import { NotificationContentComponent } from './component-docs/notification/examples/component-as-content/notification-content.component';
 import { ScrollSpyOffsetExampleComponent } from './component-docs/scroll-spy/examples/scroll-spy-custom-offset/scroll-spy-offset-example.component';
+import { ComboboxOpenControlExampleComponent } from './component-docs/combobox/examples/combobox-open-control-example.component';
 
 
 @NgModule({
@@ -646,6 +647,7 @@ import { ScrollSpyOffsetExampleComponent } from './component-docs/scroll-spy/exa
         ComboboxFormsExampleComponent,
         ComboboxDisabledExampleComponent,
         ComboboxHeightExampleComponent,
+        ComboboxOpenControlExampleComponent,
         LoadingSpinnerDocsComponent,
         LoadingSpinnerExampleComponent,
         LoadingSpinnerContainerExampleComponent,

@@ -19,8 +19,9 @@ import * as comboboxHeightHtml from '!raw-loader!./examples/combobox-height-exam
 import * as comboboxHeightTs from '!raw-loader!./examples/combobox-height-example.component.ts';
 import * as comboboxSeaTs from '!raw-loader!./examples/combobox-search-function-example.component.ts';
 import * as comboboxSeaHtml from '!raw-loader!./examples/combobox-search-function-example.component.html';
+import * as comboboxProgramHtml from '!raw-loader!./examples/combobox-open-control-example.component.html';
+import * as comboboxProgramTs from '!raw-loader!./examples/combobox-open-control-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -95,6 +96,20 @@ export class ComboboxDocsComponent implements OnInit {
             component: 'ComboboxDisplaywithExampleComponent',
             code: comboboxDisplayTs,
             fileName: 'combobox-displaywith-example'
+        }
+    ];
+
+    comboboxOpenChangeExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxProgramHtml,
+            fileName: 'combobox-open-control-example'
+        },
+        {
+            language: 'typescript',
+            code: comboboxProgramTs,
+            component: 'ComboboxOpenControlExampleComponent',
+            fileName: 'combobox-open-control-example'
         }
     ];
 
