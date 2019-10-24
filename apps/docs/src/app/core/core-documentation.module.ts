@@ -103,7 +103,7 @@ import {
     ImageSizesExampleComponent
 } from '../core/component-docs/image/examples/image-examples.component';
 import {
-    InlineHelpExampleComponent,
+    InlineHelpExampleComponent, InlineHelpStyledExampleComponent,
     InlineHelpTriggerExampleComponent
 } from '../core/component-docs/inline-help/examples/inline-help-examples.component';
 import {
@@ -520,6 +520,7 @@ import { ScrollSpyOffsetExampleComponent } from './component-docs/scroll-spy/exa
         InfiniteScrollBasicExampleComponent,
         InlineHelpExampleComponent,
         InlineHelpTriggerExampleComponent,
+        InlineHelpStyledExampleComponent,
         InputGroupButtonExampleComponent,
         InputGroupIconExampleComponent,
         InputGroupNumberExampleComponent,
