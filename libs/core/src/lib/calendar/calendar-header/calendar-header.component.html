@@ -1,7 +1,11 @@
 <header class="fd-calendar__header">
     <div class="fd-calendar__navigation">
         <div class="fd-calendar__action">
-            <button class="fd-button--standard fd-button--light fd-button--compact sap-icon--slim-arrow-left"
+            <button fd-button
+                    [fdType]="'standard'"
+                    [compact]="true"
+                    [options]="'light'"
+                    [glyph]="'slim-arrow-left'"
                     [attr.id]="id + '-left-arrow'"
                     [attr.aria-label]="previousLabel"
                     [attr.aria-disabled]="false"
@@ -10,7 +14,9 @@
             </button>
         </div>
         <div class="fd-calendar__action">
-            <button class="fd-button--light fd-button--compact"
+            <button fd-button
+                    [compact]="true"
+                    [options]="'light'"
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel"
                     [attr.aria-selected]="isOnMonthView()"
                     (click)="processViewChange('month')"
@@ -19,7 +25,9 @@
             </button>
         </div>
         <div class="fd-calendar__action">
-            <button class="fd-button--light fd-button--compact"
+            <button fd-button
+                    [compact]="true"
+                    [options]="'light'"
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel"
                     [attr.aria-selected]="isOnYearView()"
                     (click)="processViewChange('year')"
@@ -28,7 +36,11 @@
             </button>
         </div>
         <div class="fd-calendar__action">
-            <button class="fd-button--standard fd-button--light fd-button--compact sap-icon--slim-arrow-right"
+            <button fd-button
+                    [fdType]="'standard'"
+                    [compact]="true"
+                    [options]="'light'"
+                    [glyph]="'slim-arrow-right'"
                     [attr.id]="id + '-right-arrow'"
                     [attr.aria-label]="nextLabel"
                     [attr.aria-disabled]="false"
