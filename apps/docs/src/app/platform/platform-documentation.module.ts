@@ -5,11 +5,13 @@ import { ROUTES } from './platform-documentation.routes';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { PlatformButtonHeaderComponent } from './component-docs/platform-button/examples/platform-button-header/platform-button-header.component';
 
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
-        PlatformHomeComponent
+        PlatformHomeComponent,
+        PlatformButtonHeaderComponent
     ],
     imports: [
         SharedDocumentationModule,
@@ -17,4 +19,4 @@ import { MarkdownModule } from 'ngx-markdown';
         RouterModule.forChild(ROUTES)
     ]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }
