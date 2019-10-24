@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0-rc.71"></a>
+# [0.12.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.70...v0.12.0-rc.71) (2019-10-24)
+
+
+### Bug Fixes
+
+* Add open control for combobox ([#1449](https://github.com/SAP/fundamental-ngx/issues/1449)) ([e2add14](https://github.com/SAP/fundamental-ngx/commit/e2add14))
+* Add styling options to inline help component ([#1471](https://github.com/SAP/fundamental-ngx/issues/1471)) ([169eda6](https://github.com/SAP/fundamental-ngx/commit/169eda6))
+
+
+
 <a name="0.12.0-rc.70"></a>
 # [0.12.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.69...v0.12.0-rc.70) (2019-10-24)
 
