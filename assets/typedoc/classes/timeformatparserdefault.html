@@ -26,14 +26,14 @@
 		<h3>format</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimeObject</span>, meridian<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+			<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimeObject</span>, displaySeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, displayMinutes<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, meridian<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<p>Overrides <span>TimeFormatParser</span>.<span>format</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/37c27ea2/libs/core/src/lib/time-picker/format/time-parser.ts#L97">time-picker/format/time-parser.ts:97</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/c99960dc/libs/core/src/lib/time-picker/format/time-parser.ts#L107">time-picker/format/time-parser.ts:107</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -47,6 +47,18 @@
 						<h5>time: <span class="tsd-signature-type">TimeObject</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<p>TimeObject to convert to a string.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> displaySeconds: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>boolean to define if string should display seconds.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> displayMinutes: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>boolean to define if string should display minutes.</p>
 						</div>
 					</li>
 					<li>
@@ -65,14 +77,14 @@
 		<h3>parse</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, displaySeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, meridian<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimeObject</span></li>
+			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, displaySeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, displayMinutes<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, meridian<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TimeObject</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<p>Overrides <span>TimeFormatParser</span>.<span>parse</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/37c27ea2/libs/core/src/lib/time-picker/format/time-parser.ts#L45">time-picker/format/time-parser.ts:45</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/c99960dc/libs/core/src/lib/time-picker/format/time-parser.ts#L49">time-picker/format/time-parser.ts:49</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -92,6 +104,12 @@
 						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> displaySeconds: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<p>boolean to define if string should display seconds.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> displayMinutes: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>boolean to define if string should display minutes.</p>
 						</div>
 					</li>
 					<li>
