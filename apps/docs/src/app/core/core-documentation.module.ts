@@ -398,6 +398,7 @@ import { NotificationComponentAsContentExampleComponent } from './component-docs
 import { NotificationAsObjectExampleComponent } from './component-docs/notification/examples/notification-as-object.component';
 import { NotificationOptionsExampleComponent } from './component-docs/notification/examples/notification-options/notification-options-example.component';
 import { NotificationContentComponent } from './component-docs/notification/examples/component-as-content/notification-content.component';
+import { ScrollSpyOffsetExampleComponent } from './component-docs/scroll-spy/examples/scroll-spy-custom-offset/scroll-spy-offset-example.component';
 
 
 @NgModule({
@@ -583,6 +584,7 @@ import { NotificationContentComponent } from './component-docs/notification/exam
         ScrollSpyDocsComponent,
         ScrollSpyExampleComponent,
         ScrollSpyCustomExampleComponent,
+        ScrollSpyOffsetExampleComponent,
         SelectNativeExampleComponent,
         SelectNativeFormGroupExampleComponent,
         SelectNativeInlineHelpExampleComponent,
