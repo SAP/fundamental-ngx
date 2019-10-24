@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -6,10 +6,9 @@ import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.compo
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
 import * as inlineHelpTsCode from '!raw-loader!./examples/inline-help-examples.component.ts';
 import * as inlineHelpScssCode from '!raw-loader!./examples/inline-help-example.component.scss';
+import * as inlineHelpStylesHtml from '!raw-loader!./examples/inline-help-styled-example.component.html';
 import Popper from 'popper.js';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-inline-help',
@@ -67,6 +66,18 @@ export class InlineHelpDocsComponent implements OnInit {
             secondFile: 'inline-help-examples',
             typescriptFileCode: inlineHelpTsCode,
             component: 'InlineHelpTriggerExampleComponent'
+        }
+    ];
+
+
+    inlineHelpStyles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inlineHelpStylesHtml,
+            fileName: 'inline-help-styled-example',
+            secondFile: 'inline-help-examples',
+            typescriptFileCode: inlineHelpTsCode,
+            component: 'InlineHelpStyledExampleComponent'
         }
     ];
 

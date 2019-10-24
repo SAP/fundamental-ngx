@@ -11,7 +11,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'inline-help-triggerEvent'" [componentName]="'inlineHelp'">
-    Inline Help with changed trigger event
+    Inline Help with Changed Trigger Event
 </fd-docs-section-title>
 <component-example [name]="'ex2'">
     <p class="fd-centered-content">
@@ -19,6 +19,23 @@
     </p>
 </component-example>
 <code-example [exampleFiles]="inlineHelpTrigger"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'inline-help-styled'" [componentName]="'inlineHelp'">
+    Inline Help with Styled Elements.
+</fd-docs-section-title>
+<description>
+    Inline Help component content can be modified by passing <code>[inlineHelpContentStyle]={{"{'width': '250px'}"}}</code>
+    and icon can be modified by passing <code>[inlineHelpIconStyle]={{"{'margin-left': '20px'}"}}</code>. Structure of the object
+    passed to this component is the same as <code>[ngStyle]</code>.
+</description>
+<component-example [name]="'ex3'">
+    <p class="fd-centered-content">
+        <fd-inline-help-styled-example></fd-inline-help-styled-example>
+    </p>
+</component-example>
+<code-example [exampleFiles]="inlineHelpStyles"></code-example>
 
 <separator></separator>
 
