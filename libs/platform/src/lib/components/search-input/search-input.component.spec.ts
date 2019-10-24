@@ -74,6 +74,8 @@ describe('SearchInputComponent', () => {
         fixture = TestBed.createComponent(TestComponent);
         host = fixture.componentInstance;
         component = host.component;
+        host.inputValue = null;
+        host.submitValue = null;
         fixture.detectChanges();
     });
 
@@ -214,7 +216,7 @@ describe('SearchInputComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        expect(combobox.isOpen).toBeTruthy();
+        expect(combobox.open).toBeTruthy();
     });
 
     it('should emit an "inputChange" event when user types in the input field', () => {
@@ -295,6 +297,24 @@ describe('SearchInputComponent', () => {
         fixture.detectChanges();
 
         expect(host.submitValue).toEqual({ text: 'appl', category: null });
+    });
+
+    it('should not emit a "searchSubmit" event when user clicks keyboard enter in input field and the input field is null', () => {
+
+        // set type ahead list
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        fixture.detectChanges();
+
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+
+        // simulate input entry
+        textInput.nativeElement.value = '';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        textInput.triggerEventHandler('keydown', { code: 'Enter' });
+        fixture.detectChanges();
+
+        expect(host.submitValue).toBeNull();
     });
 
     it('should be able to be put into "isLoading" state', () => {
