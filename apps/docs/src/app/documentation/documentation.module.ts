@@ -760,7 +760,7 @@ import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellba
         FundamentalNgxCoreModule,
         HttpClientModule,
         CdkTableModule,
-        DragDropModule
+        DragDropModule,
     ],
     providers: [CopyService, ApiDocsService]
 })
