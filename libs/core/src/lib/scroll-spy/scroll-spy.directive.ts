@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 /**
- * A directive designed to help navigation elements determine the element currently in view of the user. 
+ * A directive designed to help navigation elements determine the element currently in view of the user.
  */
 @Directive({
     selector: '[fdScrollSpy]'
@@ -19,16 +19,23 @@ export class ScrollSpyDirective {
     @Input()
     public fireEmpty: boolean = false;
 
-    /** 
-     * A number that represent at what location in the container the event is fired. 
-     * 0.5 would fire the events in the middle of the container, 
+    /**
+     * A number that represent at what location in the container the event is fired.
+     * 0.5 would fire the events in the middle of the container,
      * 0 for the top and 1 for the bottom.
      */
     @Input()
     public targetPercent: number = 0;
 
-    /** 
-     * Event fired on the scroll element when a new item becomes activated by the scrollspy . 
+    /**
+     * Number that represents the offset in pixels for fired target. `100` value means that the event will be fired for
+     * target that is 100 pixels below the spy container.
+     */
+    @Input()
+    public targetOffset: number = 0;
+
+    /**
+     * Event fired on the scroll element when a new item becomes activated by the scrollspy .
      * The returned value is the HTMLElement itself.
      */
     @Output()
@@ -46,7 +53,7 @@ export class ScrollSpyDirective {
         let spiedTag: HTMLElement;
         const children = this.elRef.nativeElement.children;
         const targetScrollTop = event.target.scrollTop;
-        const targetOffsetTop = event.target.offsetTop;
+        const targetOffsetTop = event.target.offsetTop + this.targetOffset;
 
         for (let i = 0; i < children.length; i++) {
             const element: HTMLElement = children[i];
