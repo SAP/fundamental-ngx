@@ -205,7 +205,7 @@ In the library source, open `poster.component.html`, remove the default code and
 
 ```
 
-## Step14: Making stackblitz work
+## Step15: Making stackblitz work
 
 Follow the instructions at https://github.com/SAP/fundamental-ngx/wiki/Stackblitz-support-instructions
 
