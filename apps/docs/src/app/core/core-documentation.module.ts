@@ -385,7 +385,7 @@ import { ShellbarAdvancedExampleComponent } from '../core/component-docs/shellba
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
-import { ProductSwitchListComponent } from './component-docs/product-switch/examples/product-switch-list/product-switch-list.component';
+import { ProductSwitchListComponent } from './component-docs/product-switch/examples/product-switch-list/product-switch-list-example.component';
 import { ProductSwitchSmallExampleComponent } from './component-docs/product-switch/examples/product-switch-small-example.component';
 import { ProductSwitchDndExampleComponent } from './component-docs/product-switch/examples/product-switch-dnd-example.component';
 import { ProductSwitchDocsComponent } from './component-docs/product-switch/product-switch-docs.component';
