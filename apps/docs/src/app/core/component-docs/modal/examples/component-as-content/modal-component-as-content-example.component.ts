@@ -24,7 +24,9 @@ export class ModalComponentAsContentExampleComponent {
                     'nearly one-third of the world\'s production of pineapples.',
                 thirdParagraph: 'The flesh and juice of the pineapple are used in cuisines around the world.'
             },
-            maxWidth: '300px'
+            maxWidth: '300px',
+            height: '300px',
+            maxHeight: '100vh'
         });
 
         // TODO Subscribe to result

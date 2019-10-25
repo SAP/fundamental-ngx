@@ -8,7 +8,7 @@ import { ModalRef } from '@fundamental-ngx/core';
             <h1 fd-modal-title>{{modalRef.data.title}}</h1>
             <button fd-modal-close-btn (click)="modalRef.dismiss('x')"></button>
         </fd-modal-header>
-        <fd-modal-body style="max-height: 100px;">
+        <fd-modal-body>
             <p>{{modalRef.data.firstParagraph}}</p>
             <p>{{modalRef.data.secondParagraph}}</p>
             <p>{{modalRef.data.thirdParagraph}}</p>
