@@ -228,7 +228,32 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (changes.width) {
+            let minWidth: number;
+            let splitWidthNumber: number;
+            if (this.width.includes('em')) {
+                splitWidthNumber = Number(this.width.split('em')[0]);
+                minWidth = 13.71;
+                this.width = this.enforceGreaterThanMinWidth(splitWidthNumber, minWidth) + 'em';
+            } else if (this.width.includes('rem')) {
+                splitWidthNumber = Number(this.width.split('rem')[0]);
+                minWidth = 13.71; // todo pending calc for rem
+                this.width = this.enforceGreaterThanMinWidth(splitWidthNumber, minWidth) + 'rem';
+            } else if (this.width.includes('px')) {
+                splitWidthNumber = Number(this.width.split('px')[0]);
+                minWidth = 192;
+                this.width = this.enforceGreaterThanMinWidth(splitWidthNumber, minWidth) + 'px';
+            }
+        }
         this.cd.markForCheck();
+    }
+
+    private enforceGreaterThanMinWidth(splitWidthNumber: number, minWidth: number): number {
+        if (splitWidthNumber < minWidth) {
+            // minimum width
+            splitWidthNumber = minWidth;
+        }
+        return splitWidthNumber;
     }
 
     ngAfterViewInit() {

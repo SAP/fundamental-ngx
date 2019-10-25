@@ -24,12 +24,12 @@
         [attr.disabled]="disabled"
         [ngClass]="['normal-item-state', disabled ? 'is-disabled' : '']"
     >
-        <div class="fd-menu__addon-before" *ngIf="icon; else noIcon">
+        <div fd-menu-item-addon *ngIf="icon; else noIcon">
             <span [ngClass]="[icon]" data-tag="menu-item__icon-before" [attr.title]="icon"> </span>
         </div>
         <div class="fd-menu__label-truncation">
             <span
-                class="fd-menu__item"
+                fd-menu-item
                 [ngStyle]="{ width: finalItemWidth }"
                 (click)="onItemClick()"
                 role="button"
@@ -58,7 +58,7 @@
         [ngClass]="[selected ? 'selected-item-state' : 'normal-item-state', disabled ? 'is-disabled' : '']"
         [attr.aria-selected]="selected ? 'true' : 'false'"
     >
-        <div class="fd-menu__addon-before">
+        <div fd-menu-item-addon>
             <span
                 *ngIf="selected; else noIcon"
                 [ngClass]="[icon ? icon : 'sap-icon--accept']"
@@ -69,7 +69,7 @@
         </div>
         <div class="fd-menu__label-truncation">
             <span
-                class="fd-menu__item"
+                fd-menu-item
                 (click)="onItemClick()"
                 [ngStyle]="{ width: finalItemWidth }"
                 role="button"

@@ -4,13 +4,10 @@
         background-color: transparent;
     }
     text-overflow: ellipsis;
-    min-width: 192px;
     height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
     overflow: hidden;
     background-color: transparent;
     padding: 12px 16px;
-    color: #515559;
-    color: var(--fd-menu-item-color);
 }
 
 .fd-menu__item[aria-selected='true'] {
