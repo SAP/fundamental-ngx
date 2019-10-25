@@ -144,7 +144,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
         if (!elementRef) {
             return;
         }
-        this.HOST_COMPONENT_CLASS_LIST.forEach(className => elementRef.nativeElement.classList.add(className));
+        elementRef.nativeElement.classList.add(...this.HOST_COMPONENT_CLASS_LIST);
     }
 
     _setProperties(): void {
