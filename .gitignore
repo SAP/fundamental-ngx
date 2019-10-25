@@ -10,6 +10,8 @@
 /apps/docs/src/assets/README.md
 /apps/docs/src/assets/CORE_README.md
 /apps/docs/src/assets/NEW_COMPONENT.md
+/apps/docs/src/assets/PLATFORM_README.md
+/apps/docs/src/assets/NEW_PLATFORM_COMPONENT.md
 # dependencies
 **/node_modules
 

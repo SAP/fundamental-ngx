@@ -24,6 +24,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DocsSectionTitleComponent } from './core-helpers/docs-section-title/docs-section-title.component';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 import { SchemaModule } from '../schema/schema.module';
 import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
@@ -54,6 +55,7 @@ import { ApiComponent } from './core-helpers/api/api.component';
 
     imports: [
         FundamentalNgxCoreModule,
+        FundamentalNgxPlatformModule,
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
@@ -67,6 +69,7 @@ import { ApiComponent } from './core-helpers/api/api.component';
     providers: [CopyService, ApiDocsService],
     exports: [
         FundamentalNgxCoreModule,
+        FundamentalNgxPlatformModule,
         PlayGroundComponent,
         CodeExampleComponent,
         HeaderComponent,
