@@ -11,7 +11,8 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Home',
             subtitle: 'Central Home',
-            icon: 'home'
+            icon: 'home',
+            disabledDragAndDrop: true
         },
         {
             title: 'Analytics Cloud',
@@ -21,8 +22,7 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Catalog',
             subtitle: 'Ariba',
-            icon: 'contacts',
-            disabledDragAndDrop: true
+            icon: 'contacts'
         },
         {
             title: 'Guided Buying',
