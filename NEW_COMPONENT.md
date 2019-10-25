@@ -149,7 +149,7 @@ In `poster-docs.component.html`, we'll provide a brief explanation of the poster
 
 ## Step10: Adding the new documentation module and route
 
-Now that we've got our documentation files for the poster, add them to the documentation module declarations array in `documentation.module.ts`.
+Now that we've got our documentation files for the poster, add them to the documentation module declarations array in `core-documentation.module.ts`.
 
 ```TypeScript
     declarations: [
