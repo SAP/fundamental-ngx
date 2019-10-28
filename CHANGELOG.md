@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.1-rc.4"></a>
+## [0.12.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.3...v0.12.1-rc.4) (2019-10-28)
+
+
+### Bug Fixes
+
+* Modal height example issues. Close icon fix. ([#1483](https://github.com/SAP/fundamental-ngx/issues/1483)) ([3a0d185](https://github.com/SAP/fundamental-ngx/commit/3a0d185))
+
+
+
 <a name="0.12.1-rc.3"></a>
 ## [0.12.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.2...v0.12.1-rc.3) (2019-10-28)
 
