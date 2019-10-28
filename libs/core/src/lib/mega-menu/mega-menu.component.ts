@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 /**
  *  Component represents mega menu element, which contains list with menu items, links, sublists, subitems and sublinks..
  *  ```html
@@ -24,6 +24,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     selector: 'fd-mega-menu',
     templateUrl: './mega-menu.component.html',
     styleUrls: ['./mega-menu.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MegaMenuComponent {}

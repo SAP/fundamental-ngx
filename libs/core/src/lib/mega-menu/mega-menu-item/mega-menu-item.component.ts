@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -44,7 +44,8 @@ export type MenuSubListPosition = 'left' | 'right';
     selector: 'fd-mega-menu-item',
     templateUrl: './mega-menu-item.component.html',
     styleUrls: ['./mega-menu-item.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, DefaultMenuItem {
 
