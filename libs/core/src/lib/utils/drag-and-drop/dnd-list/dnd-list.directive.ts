@@ -11,6 +11,7 @@ export interface ElementChord {
     x: number;
     y: number;
     position: LinkPosition;
+    stickToPosition?: boolean
 }
 
 @Directive({
@@ -58,27 +59,33 @@ export class DndListDirective implements AfterContentInit {
 
     /** Method called, when the item is being moved by 1 px */
     onMove(event: CdkDragMove): void {
-        const distances: Array<number> = [];
-
         /** Taking mouse position */
         const mousePosition: {
             x: number;
             y: number;
         } = event.pointerPosition;
 
-        /** Counting the distances by the mileage of the corner of element and cursor position */
-        this.elementChords.forEach(linkChord => {
-            const distance = Math.hypot(linkChord.x - mousePosition.x, linkChord.y - mousePosition.y);
-            distances.push(distance);
+        /** Temporary object, to store lowest distance values */
+        let lowestDistanceItem: {
+            index: number,
+            distance: number
+        } = null;
+
+        this.elementChords.forEach((element, index) => {
+            /** Check if element can be replaced */
+            if (!element.stickToPosition) {
+                /** Counting the distances by the mileage of the corner of element and cursor position */
+                const distance = Math.hypot(element.x - mousePosition.x, element.y - mousePosition.y);
+                if (!lowestDistanceItem || distance < lowestDistanceItem.distance) {
+                    lowestDistanceItem = { distance: distance, index: index };
+                }
+            }
         });
 
-        /** Checking closest element */
-        const closeLinkIndex: number = distances.indexOf(Math.min(...distances));
-
         /** If the closest element is different than the old one, new one is picked. It prevents from performance issues */
-        if (closeLinkIndex !== this.closestLinkIndex) {
-            this.closestLinkIndex = closeLinkIndex;
-            this.closestLinkPosition = this.elementChords[closeLinkIndex].position;
+        if (lowestDistanceItem.index !== this.closestLinkIndex) {
+            this.closestLinkIndex = lowestDistanceItem.index;
+            this.closestLinkPosition = this.elementChords[lowestDistanceItem.index].position;
             /** Generating line, that shows where the element will be placed, on drop */
             this.generateLine(this.closestLinkIndex, this.closestLinkPosition);
         }
@@ -89,9 +96,9 @@ export class DndListDirective implements AfterContentInit {
         this.draggedItemIndex = ind;
         const draggedItemElement = this.dndContainerItems.toArray()[ind].element;
         /** Counting all of the elements's chords */
-        this.elementChords = this.dndContainerItems.toArray().map((link) => {
-            return link.getElementChord(this.isBefore(draggedItemElement, link.element), this.listMode);
-        });
+        this.elementChords = this.dndContainerItems.toArray().map((link) =>
+            link.getElementChord(this.isBefore(draggedItemElement, link.element), this.listMode)
+        );
     }
 
     /** Method called, when element is released */

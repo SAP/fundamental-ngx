@@ -9,6 +9,7 @@
         (itemsChange)="productSwitchItemsChangeHandle($event)">
         <li
             fd-dnd-container
+            [stickInPlace]="product.stickToPosition"
             *ngFor="let product of products">
             <div cdkDrag
                  [cdkDragDisabled]="product.disabledDragAndDrop || !dragAndDropEnabled"

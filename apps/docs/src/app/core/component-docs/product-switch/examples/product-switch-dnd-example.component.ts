@@ -12,6 +12,7 @@ export class ProductSwitchDndExampleComponent {
             title: 'Home',
             subtitle: 'Central Home',
             icon: 'home',
+            stickToPosition: true,
             disabledDragAndDrop: true
         },
         {

@@ -20,4 +20,7 @@ export interface ProductSwitchItem {
 
     /** Whether user wants to disable drag and drop functionality from single element */
     disabledDragAndDrop?: boolean;
+
+    /** Whether this element should stick in one place, without changing position */
+    stickToPosition?: boolean;
 }
