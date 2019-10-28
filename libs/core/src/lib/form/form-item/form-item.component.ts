@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Directive to be applied to the parent of a form control.
@@ -15,7 +15,8 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
     selector: '[fd-form-item]',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./form-item.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormItemComponent {
 

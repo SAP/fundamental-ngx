@@ -1,11 +1,12 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input, OnChanges,
     OnInit,
-    Output,
+    Output, SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
@@ -24,7 +25,8 @@ import { FdRangeDate } from '../../models/fd-range-date';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'id + "-day-view"'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarDayViewComponent implements OnInit, OnChanges {
 
@@ -283,7 +285,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    public ngOnChanges(): void {
+    public ngOnChanges(changes: SimpleChanges): void {
         this.buildDayViewGrid();
     }
 

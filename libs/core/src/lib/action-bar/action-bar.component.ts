@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The parent action bar directive.
@@ -22,7 +22,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
         class: 'fd-action-bar'
     },
     styleUrls: ['./action-bar.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionBarComponent {
 }

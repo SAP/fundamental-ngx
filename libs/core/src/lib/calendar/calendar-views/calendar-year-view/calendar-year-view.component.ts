@@ -1,4 +1,15 @@
-import { Component, OnInit, ViewEncapsulation, Output, Input, EventEmitter, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ViewEncapsulation,
+    Output,
+    Input,
+    EventEmitter,
+    ElementRef,
+    AfterViewChecked,
+    OnDestroy,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { FdDate } from '../../models/fd-date';
 import { takeUntil } from 'rxjs/operators';
 import { CalendarService } from '../../calendar.service';
@@ -12,7 +23,8 @@ import { Subject } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'id + "-year-view"'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
 

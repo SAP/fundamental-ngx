@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Label to be linked to a form control.
@@ -14,7 +14,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     selector: '[fd-form-label]',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./form-label.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormLabelComponent {
     /** @hidden */

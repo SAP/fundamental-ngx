@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdCalendarView } from '../calendar.component';
@@ -15,7 +15,8 @@ import { CalendarCurrent } from '../models/calendar-current';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'id + "-header"'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarHeaderComponent {
 

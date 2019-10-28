@@ -14,7 +14,7 @@ import {
     Optional,
     EmbeddedViewRef,
     Output,
-    EventEmitter, ViewEncapsulation, HostListener, NgZone
+    EventEmitter, ViewEncapsulation, HostListener, NgZone, ChangeDetectionStrategy
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
@@ -42,7 +42,8 @@ let alertUniqueId: number = 0;
     animations: [
         alertFadeNgIf
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 

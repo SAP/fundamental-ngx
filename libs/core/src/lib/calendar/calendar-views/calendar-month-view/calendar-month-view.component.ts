@@ -1,4 +1,15 @@
-import { Component, Input, Output, ViewEncapsulation, EventEmitter, ElementRef, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    ViewEncapsulation,
+    EventEmitter,
+    ElementRef,
+    OnInit,
+    OnDestroy,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { FdDate } from '../../models/fd-date';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { Subject } from 'rxjs';
@@ -13,7 +24,8 @@ import { CalendarService } from '../../calendar.service';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'id + "-month-view"'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 

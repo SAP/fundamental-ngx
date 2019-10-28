@@ -1,15 +1,15 @@
-import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
-/** 
+/**
  * @hidden
- * The base class for the icon component 
+ * The base class for the icon component
  */
 const BASE_ICON_CLASS = 'sap-icon';
 
-/** 
+/**
  * @hidden
- * Prefix for icon prop classes 
+ * Prefix for icon prop classes
  */
 const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
 
@@ -27,7 +27,8 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
     host: {
         role: 'presentation'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent extends AbstractFdNgxClass {
 
@@ -36,7 +37,7 @@ export class IconComponent extends AbstractFdNgxClass {
      * */
     @Input() glyph;
 
-    /** 
+    /**
      * The size of the icon
      * The predefined values for the input size are *xs*, *s*, *l*, and *xl*.
      * *size* can accept any other string, for example *xxs*, which will be translated into class *sap-icon--xxs*.

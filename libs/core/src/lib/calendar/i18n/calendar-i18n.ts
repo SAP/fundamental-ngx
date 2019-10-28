@@ -30,6 +30,8 @@ export abstract class CalendarI18n {
 
     /** Get all full month names. */
     abstract getAllFullMonthNames(): string[];
+
+    /**  */
 }
 
 /**

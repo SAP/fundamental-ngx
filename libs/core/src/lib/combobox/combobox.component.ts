@@ -1,15 +1,18 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     EventEmitter,
     forwardRef,
     Input,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
-    SimpleChanges, TemplateRef,
+    SimpleChanges,
+    TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -50,7 +53,8 @@ import focusTrap, { FocusTrap } from 'focus-trap';
         '[class.fd-combobox-custom-class]': 'true',
         '[class.fd-combobox-input]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
