@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Panel level filters that is specific to the data being displayed within the panel.
@@ -17,7 +17,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     host: {
         '[class.fd-has-display-block]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelFiltersComponent {
 

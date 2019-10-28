@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Main content of the panel can that hold lists, table, tree, text, form or any other information.
@@ -17,7 +17,8 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
     host: {
         '[class.fd-has-display-block]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelBodyComponent {
 

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-notification-container',
@@ -17,6 +17,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     host: {
         '[class.fd-notification-container]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationContainer {}

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-notification-header',
     templateUrl: './notification-header.component.html',
     styleUrls: ['./notification-header.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationHeaderComponent {
     /** @hidden */

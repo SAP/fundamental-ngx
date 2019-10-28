@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a menu group.
@@ -6,7 +6,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-menu-group',
     templateUrl: './menu-group.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuGroupComponent {
     /** @hidden*/
