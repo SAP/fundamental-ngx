@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.1-rc.7"></a>
+## [0.12.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.6...v0.12.1-rc.7) (2019-10-28)
+
+
+### Bug Fixes
+
+* stackblitz for product-switch ([#1486](https://github.com/SAP/fundamental-ngx/issues/1486)) ([24606c9](https://github.com/SAP/fundamental-ngx/commit/24606c9))
+
+
+
 <a name="0.12.1-rc.6"></a>
 ## [0.12.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.5...v0.12.1-rc.6) (2019-10-28)
 
