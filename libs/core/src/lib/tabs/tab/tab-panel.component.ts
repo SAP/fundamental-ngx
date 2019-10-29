@@ -17,7 +17,6 @@ let tabPanelUniqueId: number = 0;
         '[class.is-expanded]': 'expanded'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabPanelComponent {
 

@@ -1,5 +1,5 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy,
+    AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -28,8 +28,7 @@ import { TabsService } from './tabs.service';
         class: 'fd-tabs-custom'
     },
     encapsulation: ViewEncapsulation.None,
-    providers: [TabsService],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    providers: [TabsService]
 })
 export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
 
