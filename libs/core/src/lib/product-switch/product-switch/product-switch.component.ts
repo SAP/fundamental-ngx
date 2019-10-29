@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
-import { ProductSwitchItem } from '../product-switch-body/product-switch.item';
 
 @Component({
     selector: 'fd-product-switch',

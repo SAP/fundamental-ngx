@@ -22,15 +22,6 @@ export class DndContainerDirective implements AfterContentInit {
     private placeholderElement: HTMLElement;
 
     private lineElement: HTMLElement;
-
-    /** @hidden */
-    @ContentChild(CdkDrag, { static: false })
-    cdkDrag: CdkDrag;
-
-    constructor(
-        public element: ElementRef,
-    ) {}
-
     /** Event thrown when the element is moved by 1px */
     @Output()
     readonly moved: EventEmitter<CdkDragMove> = new EventEmitter<CdkDragMove>();
@@ -42,6 +33,17 @@ export class DndContainerDirective implements AfterContentInit {
     /** Event thrown when the element is started to be dragged */
     @Output()
     readonly started: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Whether this element should stick in one place, without changing position */
+    @Input() stickInPlace: boolean = false;
+
+    /** @hidden */
+    @ContentChild(CdkDrag, { static: false })
+    cdkDrag: CdkDrag;
+
+    constructor(
+        public element: ElementRef,
+    ) {}
 
     /** @hidden */
     public getElementChord(isBefore: boolean, listMode: boolean): ElementChord {
@@ -58,7 +60,8 @@ export class DndContainerDirective implements AfterContentInit {
         return {
             x: x,
             position: position,
-            y: rect.y + (this.element.nativeElement.offsetHeight / 2)
+            y: rect.y + (this.element.nativeElement.offsetHeight / 2),
+            stickToPosition: this.stickInPlace
         };
     }
 

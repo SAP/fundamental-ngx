@@ -12,7 +12,9 @@ export class ProductSwitchListComponent {
         {
             title: 'Home',
             subtitle: 'Central Home',
-            icon: 'home'
+            icon: 'home',
+            stickToPosition: true,
+            disabledDragAndDrop: true
         },
         {
             title: 'Analytics Cloud',
