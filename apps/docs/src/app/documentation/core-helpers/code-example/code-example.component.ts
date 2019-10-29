@@ -134,8 +134,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
 
             if (example.fileName && example.component) {
 
-                if (example.fileName !== undefined && example.fileName.indexOf('platform') !== -1) { this.parameters.html_tag = 'fdp-' + example.fileName; }
-                else {
+                if (example.fileName !== undefined && example.fileName.indexOf('platform') !== -1) {
+                    this.parameters.html_tag = 'fdp-' + example.fileName;
+                } else {
                     this.parameters.html_tag = 'fd-' + example.fileName;
                 }
                 this.parameters.addonAppModule = example.appModuleAddon;
