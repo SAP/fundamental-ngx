@@ -63,11 +63,11 @@ For an existing Angular CLI application,
     To add the entire library, add the following import to your main application module.
 
     ```javascript
-    import { FundamentalNgxModule } from '@fundamental-ngx/core';
+    import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 
     @NgModule({
         ...
-        imports: [FundamentalNgxModule],
+        imports: [FundamentalNgxCoreModule],
     })
     export class DemoModule { }
     ```
