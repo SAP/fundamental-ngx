@@ -1,11 +1,12 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
 
 @Component({
     selector: 'fd-product-switch-body',
     templateUrl: './product-switch-body.component.html',
     styleUrls: ['./product-switch-body.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductSwitchBodyComponent implements OnInit {
 

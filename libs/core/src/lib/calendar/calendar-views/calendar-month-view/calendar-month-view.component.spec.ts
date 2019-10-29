@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { CalendarService } from '../../calendar.service';
 
 
-describe('Calendar2MonthViewComponent', () => {
+describe('CalendarMonthViewComponent', () => {
     let component: CalendarMonthViewComponent;
     let fixture: ComponentFixture<CalendarMonthViewComponent>;
     const testMonth: number = 5;
@@ -43,10 +43,13 @@ describe('Calendar2MonthViewComponent', () => {
 
     it('Should have is-selected class when the month is selected', () => {
         const element = fixture.debugElement.query(By.css('li')).nativeElement;
+
+        (component as any).cdRef.detectChanges();
         expect(element.classList.contains('is-selected')).toBe(false);
 
         component.selectMonth(0);
         fixture.detectChanges();
+        (component as any).cdRef.detectChanges();
         const selectedElement = fixture.debugElement.query(By.css('li')).nativeElement;
         expect(selectedElement.classList.contains('is-selected')).toBe(true);
     });

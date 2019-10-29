@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { TreeRowObject } from './tree-row-object.model';
 
 @Component({
     selector: 'fd-tree-child',
     templateUrl: './tree-child.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeChildComponent implements OnInit {
     @Input() row: TreeRowObject;

@@ -156,6 +156,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
                 this.displayedValues = this.dropdownValues;
             }
         }
+        this.changeDetRef.markForCheck();
     }
 
     /** @hidden */

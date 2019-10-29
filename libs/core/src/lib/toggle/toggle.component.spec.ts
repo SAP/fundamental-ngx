@@ -76,6 +76,7 @@ describe('ToggleComponent', () => {
     it('should display size', () => {
         const size = 'l';
         component.size = size;
+        (component as any).changeDetectorRef.markForCheck();
         component.ngOnInit();
         fixture.detectChanges();
 

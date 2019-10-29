@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 
 let tabPanelUniqueId: number = 0;
@@ -17,6 +17,7 @@ let tabPanelUniqueId: number = 0;
         '[class.is-expanded]': 'expanded'
     },
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabPanelComponent {
 

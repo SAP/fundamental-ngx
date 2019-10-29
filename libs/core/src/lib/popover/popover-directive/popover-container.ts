@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+    AfterViewInit, ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component, ElementRef, EmbeddedViewRef,
     EventEmitter, HostBinding,
@@ -28,7 +28,8 @@ import focusTrap from 'focus-trap';
         class: 'fd-popover__popper fd-popover-container-custom',
         'tabindex': '-1'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverContainer implements AfterViewInit, OnDestroy {
 

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -12,6 +12,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-popover-body',
     templateUrl: './popover-body.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverBodyComponent {}
