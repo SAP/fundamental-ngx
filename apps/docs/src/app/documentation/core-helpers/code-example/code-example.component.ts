@@ -162,7 +162,9 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 if (example.secondFile) {
                     const _pathTS = `src/app/${example.secondFile}.component.ts`;
                     let _select = 'fd-';
-                    if (example.secondFile.indexOf('platform') !== -1) { _select = 'fdp-'; }
+                    if (example.secondFile.indexOf('platform') !== -1) {
+                        _select = 'fdp-';
+                    }
                     this.parameters.app_component_basis = example.secondFile + '.component';
                     this.project.files[_pathTS] =
                         // tslint:disable-next-line: no-unused-expression
