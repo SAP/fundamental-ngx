@@ -1,6 +1,6 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -182,7 +182,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     constructor(
         private elRef: ElementRef,
-        private menuKeyboardService: MenuKeyboardService
+        private menuKeyboardService: MenuKeyboardService,
+        private cdRef: ChangeDetectorRef
     ) { }
 
     /** @hidden */
@@ -279,6 +280,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else {
             this.inputTextValue = value;
         }
+        this.cdRef.markForCheck();
     }
 
     /** @hidden */

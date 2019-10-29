@@ -1,8 +1,19 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input, OnDestroy,
+    OnInit,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 /**
  * Internal use only.
@@ -18,7 +29,7 @@ import { CalendarCurrent } from '../models/calendar-current';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarHeaderComponent {
+export class CalendarHeaderComponent implements OnDestroy {
 
     /** Currently active view. Needed for a11y labels. */
     @Input()
@@ -47,10 +58,32 @@ export class CalendarHeaderComponent {
     readonly nextClicked: EventEmitter<void>
         = new EventEmitter<void>();
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
     constructor(
         public calendarI18nLabels: CalendarI18nLabels,
-        public calendarI18n: CalendarI18n
-    ) {}
+        public calendarI18n: CalendarI18n,
+        private changeDetRef: ChangeDetectorRef
+    ) {
+        /** Called to trigger change detection */
+        this.calendarI18n.i18nChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.changeDetRef.markForCheck())
+        ;
+
+        /** Called to trigger change detection */
+        this.calendarI18nLabels.labelsChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.changeDetRef.markForCheck())
+        ;
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
+    }
 
     /** Get the aria label for the previous button. Depends on the active view. */
     get previousLabel(): string {

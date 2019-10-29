@@ -32,6 +32,8 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     /** A number offset used to achieve the 1-12 representation of the calendar */
     private readonly _monthOffset: number = 1;
 
+    private _shortMonthNames: string[];
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
@@ -70,6 +72,11 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         this.calendarService.onKeySelect
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => this.selectMonth(index))
+        ;
+
+        this.calendarI18n.i18nChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.cdRef.markForCheck())
         ;
     }
 
