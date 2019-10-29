@@ -9,11 +9,20 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to both enhance existing functionality with additional features which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts development productivity.
+  The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to both enhance existing functionality with additional features that are driven by application requirements and to provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
 
-Where as `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
+  Such as
+    1. The ngx directives are converted to components all are available as components so a developer can directly use them as components.
+    2. All components are Fiori3 compliant in terms of visual specs.
+    3. Platform components are enhanced based on the feedback and identified use cases from the application teams. 
 
-The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+    For example:
+
+        a).Renaming options in action bar title.
+        b).Multi-select options in the Group button.
+        c).Aria-label for assiability.
+        d).Category search in search component.
+        e).Text truncation options in the button component.
 
 ## API Reference
 
