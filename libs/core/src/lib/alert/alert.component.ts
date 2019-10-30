@@ -165,13 +165,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
      * Opens the alert.
      */
     open(): void {
-        if (!this.alertRef) {
-            if (this.elRef.nativeElement.style.display === 'block') {
-                return;
-            }
-            this.elRef.nativeElement.classList.remove('fd-has-display-none');
-            this.elRef.nativeElement.classList.add('fd-has-display-block');
-        }
+
+        this.elRef.nativeElement.classList.remove('fd-has-display-none');
+        this.elRef.nativeElement.classList.add('fd-has-display-block');
 
         if (this.duration >= 0) {
             this.ngZone.runOutsideAngular(() => {
