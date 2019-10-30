@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
+import { Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -17,9 +18,10 @@ export class ToolbarComponent {
     public isOnCore: boolean = false;
 
     constructor (
-        private routerService: Router
+        private routerService: Router,
+        @Inject('CURRENT_LIB') private currentLib: Libraries
     ) {
-        this.isOnCore = this.routerService.url && this.routerService.url.includes('core/');
+        this.isOnCore = this.currentLib === 'core'
     }
 
     changeLibChange(): void {
