@@ -155,9 +155,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     ) {
         this.calendarI18n.i18nChange
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => {
-                this.refreshShortWeekDays();
-            })
+            .subscribe(() => this.refreshShortWeekDays())
         ;
     }
 

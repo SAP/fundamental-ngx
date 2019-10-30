@@ -13,7 +13,7 @@ import { CalendarI18n } from '../i18n/calendar-i18n';
 import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 
 /**
  * Internal use only.
@@ -66,15 +66,11 @@ export class CalendarHeaderComponent implements OnDestroy {
         public calendarI18n: CalendarI18n,
         private changeDetRef: ChangeDetectorRef
     ) {
-        /** Called to trigger change detection */
-        this.calendarI18n.i18nChange
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.changeDetRef.markForCheck())
-        ;
+        /** Merging 18n observables */
+        const i18nObservables = merge(this.calendarI18n.i18nChange, this.calendarI18nLabels.labelsChange);
 
         /** Called to trigger change detection */
-        this.calendarI18nLabels.labelsChange
-            .pipe(takeUntil(this.onDestroy$))
+        i18nObservables.pipe(takeUntil(this.onDestroy$))
             .subscribe(() => this.changeDetRef.markForCheck())
         ;
     }

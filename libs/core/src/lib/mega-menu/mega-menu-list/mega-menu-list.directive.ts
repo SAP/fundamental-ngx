@@ -7,8 +7,8 @@ import {
     QueryList
 } from '@angular/core';
 import { MegaMenuItemComponent } from '../mega-menu-item/mega-menu-item.component';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 
 /**
@@ -47,6 +47,9 @@ export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
+    /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
+    private readonly onRefresh$: Subject<void> = new Subject<void>();
+
     /** @hidden */
     constructor(
         private menuKeyboardService: MenuKeyboardService,
@@ -54,9 +57,9 @@ export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.items.forEach((item: MegaMenuItemComponent, index: number) => item.keyDown
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe((keyboardEvent: KeyboardEvent) => this.handleListKeyDown(keyboardEvent, index)))
+        this.items.changes
+            .pipe(takeUntil(this.onDestroy$), startWith(5))
+            .subscribe(() => this.refreshSubscription())
         ;
     }
 
@@ -69,5 +72,20 @@ export class MegaMenuListDirective implements AfterContentInit, OnDestroy {
     ngOnDestroy(): void {
         this.onDestroy$.next();
         this.onDestroy$.complete();
+    }
+
+    /** Whether any querylist detects any changes */
+    private refreshSubscription(): void {
+        /** Finish all of the streams, form before */
+        this.onRefresh$.next();
+
+        /** Merge refresh/destroy observables */
+        const refreshObs = merge(this.onRefresh$, this.onDestroy$);
+
+        /** New subscription streams */
+        this.items.forEach((item: MegaMenuItemComponent, index: number) => item.keyDown
+            .pipe(takeUntil(refreshObs))
+            .subscribe((keyboardEvent: KeyboardEvent) => this.handleListKeyDown(keyboardEvent, index)))
+        ;
     }
 }
