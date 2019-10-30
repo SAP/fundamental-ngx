@@ -9,12 +9,75 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to both enhance existing functionality with additional features which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts development productivity.
+   The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality.
 
-Where as `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
+  Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
 
-The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+  Components must be instantiable programmatically.
 
+  Enterprise readiness:
+
+    1. Working with data( reactive stream over the array, Data sources over the reactive steam)
+
+    2. Layouts (Dashboard, detail page, master/detail page, Search/result page).
+
+   It is not about UI:
+
+    1. Application state UI
+    2. Bootstrapping and Configuration
+    3. Communication with the backend system.
+  
+   Example:
+
+ This example captures several things:
+
+   a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
+
+   b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
+
+   c). If we need to group information into sections
+
+   d). How we are handling and forms errors
+   
+   e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
+
+```
+<fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
+                    [formGroup]="fg" [errorHanlding]="'navigate'"
+                    (onSubmit)="save($event)" (navigateToError)="onGoToError($event)">
+
+    <fdp-form-field label="email" id="email" zone="left">
+        <fdp-input type="email" placeholder="email" [required]="true"></fdp-input>
+    </fdp-form-field>
+
+    <fdp-form-field reqiuire="true" label="My Favorite Colors" id="colors" hint="Pick one of your favorite color" zone="right">
+        <fdp-select [list]="myColors"></fdp-select>
+    </fdp-form-field>
+
+    <fdp-form-field label="Description" id="desription" zone="bottom">
+        <fdp-text-area [autoSizeEnabled]="true"></fdp-text-area>
+    </fdp-form-field>
+    </fdp-form-group>
+```
+```
+    <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
+                        [formGroup]="fg" [errorHanlding]="'navigate'">
+        
+        <fdp-form-section title="Basic Information">
+        <fdp-form-field label="email" id="email" zone="left">
+            <fdp-input type="email" placeholder="email" [required]="true"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field reqiuire="true"
+                        label="My Favorite Colors"
+                        id="colors" hint="Pick one of your favorite color" zone="right">
+            <fdp-select [list]="myColors"></fdp-select>
+        </fdp-form-field>
+    </fdp-form-section>
+        <fdp-form-field label="Description" id="desription" zone="bottom">
+            <fdp-text-area [autoSizeEnabled]="true"></fdp-text-area>
+        </fdp-form-field>
+    </fdp-form-group>
+```
 ## API Reference
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/platform/home) for examples and API details.
