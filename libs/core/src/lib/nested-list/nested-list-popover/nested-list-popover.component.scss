@@ -1,0 +1,31 @@
+.fd-side-nav--condensed {
+
+    .fd-popover-container-custom {
+
+        .fd-nested-list__item {
+        }
+
+        .fd-nested-list__title {
+            display: inline-block;
+        }
+
+        .fd-nested-list {
+            .fd-nested-list__link {
+                //padding-left: 0;
+            }
+        }
+
+        .fd-nested-list--text-only {
+            .fd-nested-list__link {
+                //padding-left: 1rem;
+            }
+        }
+
+    }
+
+    .fd-nested-list__popover-header {
+        //box-shadow: 0 0 0.25rem 0 fade(#000, 15 inset 0 -0.0625rem 0 0 #000);
+        box-shadow: inset 0 -0.0625rem 0 0 #000;;
+    }
+}
+

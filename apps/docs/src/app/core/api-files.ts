@@ -221,14 +221,16 @@ export const API_FILES = {
     ],
     sideNavigation: [
         'SideNavigationComponent',
-        'SideNavigationGroupComponent',
-        'SideNavigationItemComponent',
-        'SideNavigationLinkDirective',
-        'SideNavigationListDirective',
-        'SideNavigationSubitemDirective',
-        'SideNavigationSublistDirective',
-        'SideNavigationSublinkDirective',
-        'SideNavigationTitleDirective'
+        'SideNavigationModel',
+        'SideNavigationUtilityDirective',
+        'SideNavigationMainDirective',
+        'NestedListDirective',
+        'NestedListPopoverComponent',
+        'NestedListHeaderDirective',
+        'NestedListIconDirective',
+        'NestedListItem',
+        'NestedListModel',
+        'NestedListLink'
     ],
     splitButton: [
         'SplitButtonComponent',

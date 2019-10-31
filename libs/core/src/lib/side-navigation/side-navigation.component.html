@@ -1,3 +1,21 @@
-<div class="fd-side-nav" [ngClass]="{' fd-side-nav--icons': collapsed === true}">
-  <ng-content></ng-content>
-</div>
+<nav class="fd-side-nav" [ngClass]="{'fd-side-nav--condensed': condensed || sideNavigationConfiguration?.condensed}">
+    <ng-container *ngIf="!sideNavigationConfiguration">
+        <ng-content></ng-content>
+    </ng-container>
+    <ng-container *ngIf="sideNavigationConfiguration">
+        <div fd-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
+            <fd-prepared-nested-list
+                [condensed]="condensed || sideNavigationConfiguration.condensed"
+                [first]="true"
+                [list]="sideNavigationConfiguration.mainNavigation">
+            </fd-prepared-nested-list>
+        </div>
+        <div fd-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
+            <fd-prepared-nested-list
+                [condensed]="condensed || sideNavigationConfiguration.condensed"
+                [first]="true"
+                [list]="sideNavigationConfiguration.utilityNavigation">
+            </fd-prepared-nested-list>
+        </div>
+    </ng-container>
+</nav>

@@ -142,11 +142,10 @@ import { PopoverProgrammaticOpenExampleComponent } from '../core/component-docs/
 import { ShellbarBasicExampleComponent } from '../core/component-docs/shellbar/examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from '../core/component-docs/shellbar/examples/shellbar-collapsible-example.component';
 import {
-    SideNavigationCollapsedExampleComponent,
     SideNavigationExampleComponent,
     SideNavigationIconsExampleComponent,
-    SideNavigationLevelsExampleComponent,
-    SideNavigationTitlesExampleComponent
+    SideNavigationTitlesExampleComponent,
+    SideNavigationCompactExampleComponent
 } from '../core/component-docs/side-navigation/examples/side-navigation-examples.component';
 import { TableExampleComponent } from '../core/component-docs/table/examples/table-example.component';
 import {
@@ -400,6 +399,12 @@ import { NotificationOptionsExampleComponent } from './component-docs/notificati
 import { NotificationContentComponent } from './component-docs/notification/examples/component-as-content/notification-content.component';
 import { ScrollSpyOffsetExampleComponent } from './component-docs/scroll-spy/examples/scroll-spy-custom-offset/scroll-spy-offset-example.component';
 import { ComboboxOpenControlExampleComponent } from './component-docs/combobox/examples/combobox-open-control-example.component';
+import { SideNavigationProgrammaticallyExampleComponent } from './component-docs/side-navigation/examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component';
+import { SideNavigationThreeLevelsExampleComponent } from './component-docs/side-navigation/examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component';
+import { SideNavigationObjectExampleComponent } from './component-docs/side-navigation/examples/side-navigation-object-example/side-navigation-object-example.component';
+import { SideNavigationCondensedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
+import { SideNavigationCondensedObjectExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
+import { SideNavigationMultipleSelectedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
 
 
 @NgModule({
@@ -594,11 +599,11 @@ import { ComboboxOpenControlExampleComponent } from './component-docs/combobox/e
         ShellbarBasicExampleComponent,
         ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent,
-        SideNavigationCollapsedExampleComponent,
         SideNavigationExampleComponent,
         SideNavigationIconsExampleComponent,
-        SideNavigationLevelsExampleComponent,
         SideNavigationTitlesExampleComponent,
+        SideNavigationCompactExampleComponent,
+        SideNavigationMultipleSelectedExampleComponent,
         TableExampleComponent,
         TableCdkExampleComponent,
         TableCheckboxesExampleComponent,
@@ -742,7 +747,12 @@ import { ComboboxOpenControlExampleComponent } from './component-docs/combobox/e
         NotificationComponentAsContentExampleComponent,
         NotificationAsObjectExampleComponent,
         NotificationOptionsExampleComponent,
-        NotificationContentComponent
+        NotificationContentComponent,
+        SideNavigationCondensedExampleComponent,
+        SideNavigationCondensedObjectExampleComponent,
+        SideNavigationObjectExampleComponent,
+        SideNavigationProgrammaticallyExampleComponent,
+        SideNavigationThreeLevelsExampleComponent
     ],
 
     entryComponents: [
