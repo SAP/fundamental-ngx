@@ -1,6 +1,6 @@
 # Implementing a new component for Fundamental NGX
 
-In this guide, we'll explore the library and documentation code base and create a new component of our own.
+In this guide, we'll explore the library and documentation code base and create a new component of our own. For the video tutorial go to: https://www.youtube.com/watch?v=uN9WlsdspHg
 
 ### Code Base Structure
 
