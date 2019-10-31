@@ -51,7 +51,7 @@ export class TimeFormatParserDefault extends TimeFormatParser {
         let regexp;
         if (!meridian) {
             if (displaySeconds) {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9])(:[0-5][0-9]|[0-9])$/;
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/;
             } else if (displayMinutes) {
                 regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9])$/;
             } else {
@@ -70,7 +70,7 @@ export class TimeFormatParserDefault extends TimeFormatParser {
             }
         } else if (meridian) {
             if (displaySeconds) {
-                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9])(:[0-5][0-9]|[0-9]) [APap][mM]$/;
+                regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9]) [APap][mM]$/;
             } else if (displayMinutes) {
                 regexp = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]|[0-9]) [APap][mM]$/;
             } else {
