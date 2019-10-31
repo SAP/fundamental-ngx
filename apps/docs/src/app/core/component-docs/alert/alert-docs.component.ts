@@ -17,14 +17,10 @@ import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example
 import * as alertWidthExampleScss from '!raw-loader!./examples/alert-width-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { AlertExampleComponent } from './examples/alert-example.component';
-import { AlertRef } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'app-alert',
     templateUrl: './alert-docs.component.html',
-    providers: [
-        AlertRef
-    ]
 })
 export class AlertDocsComponent implements OnInit {
     static schema: any = {

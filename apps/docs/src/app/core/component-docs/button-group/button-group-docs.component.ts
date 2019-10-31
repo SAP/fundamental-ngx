@@ -23,10 +23,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             properties: {
                 type: 'object',
                 properties: {
-                    size: {
-                        type: 'string',
-                        enum: ['default', 'xs', 's']
-                    },
                     label1: {
                         type: 'string'
                     },
@@ -48,7 +44,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                         type: 'string',
                         enum: ['default', 'disabled', 'selected']
                     },
-                    icon1: {
+                    icon4: {
                         type: 'string',
                         enum: Icons
                     },
@@ -56,7 +52,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                         type: 'string',
                         enum: ['default', 'disabled', 'selected']
                     },
-                    icon2: {
+                    icon5: {
                         type: 'string',
                         enum: Icons
                     },
@@ -64,7 +60,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                         type: 'string',
                         enum: ['default', 'disabled', 'selected']
                     },
-                    icon3: {
+                    icon6: {
                         type: 'string',
                         enum: Icons
                     },
@@ -85,18 +81,17 @@ export class ButtonGroupDocsComponent implements OnInit {
 
     data: any = {
         properties: {
-            size: 'default',
             label1: 'Left',
             state1: 'default',
             label2: 'Middle',
             state2: 'default',
             label3: 'Right',
             state3: 'default',
-            icon1: '',
+            icon4: 'menu',
             state4: 'default',
-            icon2: 'pie-chart',
+            icon5: 'pie-chart',
             state5: 'default',
-            icon3: 'pool',
+            icon6: 'pool',
             state6: 'default',
             compact: false
         }
