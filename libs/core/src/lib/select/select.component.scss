@@ -34,6 +34,7 @@
             -moz-osx-font-smoothing: grayscale;
             speak: none;
             width: 36px;
+			height: -webkit-fill-available;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -92,4 +93,30 @@
     .fd-select-popover-body-custom {
         display: block;
     }
+}
+
+.fd-button--noborder{
+   border: none  !important;
+}
+.fd-button--noborder::after{
+   border: none !important;
+}
+
+.fd-button--regularborder{
+    border: solid !important;
+}
+.fd-button--regularborder::after{
+    border: none !important;
+}
+.fd-button--splitborder{
+   border:1px solid !important;
+}
+.fd-button--splitborder::after{
+    border-left-style: solid !important;
+    border-left-width: 1px !important;
+}
+.fd-dropdown_truncation{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
 }

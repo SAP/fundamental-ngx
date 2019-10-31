@@ -4,6 +4,7 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule } from './components/button/button.module';
 import { PlatformSearchInputModule } from './components/search-input/search-input.module';
 import { ActionBarModule } from './components/action-bar/action-bar.module';
+import { SelectPlatformModule } from './components/select-platform/select-platform.module';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { ActionBarModule } from './components/action-bar/action-bar.module';
     exports: [
         PlatformButtonModule,
         PlatformSearchInputModule,
-        ActionBarModule
+        ActionBarModule,
+        SelectPlatformModule,
     ]
 })
 export class FundamentalNgxPlatformModule { }

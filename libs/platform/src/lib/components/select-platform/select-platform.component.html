@@ -1,0 +1,8 @@
+<fd-select [placeholder]="placeholder" [selectType]="selectType" [glyph]="gylph" [compact]="compact" [(value)]="value">
+	<fd-option *ngFor="let item of list">
+		<span *ngIf="!itemTemplate" [innerHTML]="item | displayFnPipe:displayFn"></span>
+		<ng-container *ngIf="itemTemplate">
+			<ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item}"></ng-container>
+		</ng-container>
+	</fd-option>
+</fd-select>

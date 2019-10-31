@@ -1,31 +1,29 @@
-<fd-popover [(isOpen)]="isOpen"
-            (isOpenChange)="isOpenChangeHandle($event)"
-            [options]="popperOptions"
-            [fillControlMode]="fillControlMode"
-            [appendTo]="appendTo"
-            class="fd-select-popover-custom">
-    <fd-popover-control>
-        <ng-container *ngIf="triggerTemplate">
-            <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
-        </ng-container>
-        <ng-container *ngIf="!triggerTemplate">
-            <button class="fd-select-button-custom"
-                    fd-button
-                    aria-haspopup="true"
-                    [ngClass]="{'fd-button--compact': compact}"
-                    [attr.aria-expanded]="isOpen"
-                    [disabled]="disabled">
-                <span class="fd-select-text-custom">{{triggerValue}}</span>
-            </button>
-        </ng-container>
-    </fd-popover-control>
-    <fd-popover-body
-        class="fd-select-popover-body-custom"
-        [style.maxHeight]="maxHeight || (calculatedMaxHeight + 'px')">
-        <fd-menu>
-            <ul fd-menu-list>
-                <ng-content></ng-content>
-            </ul>
-        </fd-menu>
-    </fd-popover-body>
+<fd-popover [(isOpen)]="isOpen" (isOpenChange)="isOpenChangeHandle($event)" [options]="popperOptions"
+	[fillControlMode]="fillControlMode" [appendTo]="appendTo" class="fd-select-popover-custom">
+	<fd-popover-control>
+		<ng-container *ngIf="triggerTemplate">
+			<ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
+		</ng-container>
+		<ng-container *ngIf="!triggerTemplate">
+
+			<button class="fd-select-button-custom" fd-button aria-haspopup="true"
+				[class.fd-button--noborder]="selectType==='noborder'"
+				[class.fd-button--regularborder]="selectType==='regularborder'"
+				[class.fd-button--splitborder]="selectType==='splitborder'" [class.fd-button--compact]="compact===true"
+				[attr.aria-expanded]=" isOpen" [disabled]="disabled">
+				<fd-icon *ngIf="glyph!==''" size="l" [glyph]="glyph" class="fd-template-icon"
+					style="margin-top: 5px; margin-right: 12px">
+				</fd-icon>
+				<span class="fd-select-text-custom">{{triggerValue}}</span>
+			</button>
+		</ng-container>
+	</fd-popover-control>
+	<fd-popover-body class="fd-select-popover-body-custom"
+		[style.maxHeight]="maxHeight || (calculatedMaxHeight + 'px')">
+		<fd-menu>
+			<ul fd-menu-list>
+				<ng-content></ng-content>
+			</ul>
+		</fd-menu>
+	</fd-popover-body>
 </fd-popover>

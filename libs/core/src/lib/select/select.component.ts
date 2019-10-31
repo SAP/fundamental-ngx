@@ -55,7 +55,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /** Open state of the select. */
     @Input()
-    isOpen: boolean = false;
+   isOpen: boolean = false;
 
     /** Current value of the selected option. */
     @Input()
@@ -68,6 +68,12 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string;
+
+    @Input()
+    selectType: string = '';
+
+    @Input()
+    glyph: string = '';
 
     /** Popper.js options of the popover. */
     @Input()
@@ -82,7 +88,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         }
     };
 
-    /**
+     /**
      * Preset options for the popover body width.
      * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
      * * `equal` will apply a width to the body equivalent to the width of the control.
@@ -130,10 +136,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     }) as Observable<OptionComponent>;
 
     /** @hidden */
-    onChange: Function = () => {};
+     onChange: Function = () => { };
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: Function = () => { };
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
@@ -146,10 +152,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.value) {
             setTimeout(() => {
-                if (this.value) {
+               if (this.value) {
                     this.selectValue(this.value, false);
                 }
-            });
+           });
         }
     }
 
@@ -160,8 +166,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         this.options.changes.pipe(startWith(null), takeUntil(this.destroy$)).subscribe(() => {
             this.resetOptions();
             this.initSelection();
-        });
-    }
+         });
+     }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -172,28 +178,28 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Toggles the open state of the select. */
     toggle(): void {
         if (this.isOpen && !this.disabled) {
-            this.close();
-        } else {
-            this.open();
-        }
+              this.close();
+         } else {
+              this.open();
+         }
     }
 
     /** Opens the select popover body. */
     open(): void {
-        if (!this.isOpen && !this.disabled) {
+         if (!this.isOpen && !this.disabled) {
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
         }
     }
 
     /** Closes the select popover body. */
-    close(): void {
+     close(): void {
         if (this.isOpen && !this.disabled) {
             this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
         }
     }
-
+ 
     /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
@@ -206,7 +212,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
+         this.disabled = isDisabled;
     }
 
     /** @hidden */
@@ -216,15 +222,15 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         } else {
             // Defer the selection of the value to support forms
             Promise.resolve().then(() => {
-                if (this.options) {
-                    this.selectValue(value, false);
+                 if (this.options) {
+                      this.selectValue(value, false);
                 }
-            });
+           });
         }
     }
 
     /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
-    get triggerValue(): string {
+     get triggerValue(): string {
         return this.selected ? this.selected.viewValueText : this.placeholder;
     }
 
@@ -248,7 +254,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     @HostListener('window:resize')
     resizeScrollHandler() {
-        this.calculatedMaxHeight = window.innerHeight * 0.45;
+         this.calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
     /**
@@ -256,7 +262,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
      * @param option The option component to search for.
      * @param fireEvents Whether to fire change events.
      */
-    private selectOption(option: OptionComponent, fireEvents: boolean = true): OptionComponent | undefined {
+     private selectOption(option: OptionComponent, fireEvents: boolean = true): OptionComponent | undefined {
         if (!this.isOptionActive(option)) {
             if (this.selected) {
                 this.selected.setSelected(false, false);
@@ -270,15 +276,15 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         return;
     }
 
-    /**
+     /**
      * Selects an option by value. If two components have the same value, the first one found is selected.
      * Recommend using selectOption generally.
      * @param value Value to search for.
      * @param fireEvents Whether to fire change events.
      */
-    private selectValue(value: any, fireEvents: boolean = true): OptionComponent | undefined {
+     private selectValue(value: any, fireEvents: boolean = true): OptionComponent | undefined {
         const matchOption = this.options.find((option: OptionComponent) => {
-            return option.value != null && option.value === value;
+             return option.value != null && option.value === value;
         });
 
         // If not match is found, set everything to null
@@ -303,7 +309,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         return matchOption;
     }
 
-    /**
+     /**
      * Updates the value parameter with optional events.
      * @param fireEvents If true, function fires valueChange, onChange and onTouched events.
      */
@@ -318,7 +324,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /**
      * Function used to reset the options state.
-     */
+    */
     private resetOptions(): void {
         // Create observable that fires when the options change or the component is destroyed.
         const destroyCurrentObs = merge(this.options.changes, this.destroy$);
@@ -327,7 +333,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         // Destroy if the observable defined above triggers.
         this.optionsStatusChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
             this.selectOption(instance);
-        });
+       });
     }
 
     /** Selection initialization when a change occurs in options. */
@@ -338,11 +344,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         }
     }
 
-    /**
+     /**
      * Function that tests whether the tested option is currently selected.
      * @param option Option to test against the selected option.
      */
-    private isOptionActive(option: OptionComponent): boolean {
+     private isOptionActive(option: OptionComponent): boolean {
         return option && this.selected && option === this.selected;
     }
 
@@ -382,7 +388,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         // Get corresponding option element to the above
         const correspondingOption = this.options.find(option => {
             return option.getHtmlElement() === activeElement;
-        });
+         });
 
         // If active option is the first option, focus the last one
         // Otherwise, focus the previous option.
@@ -396,14 +402,14 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
                 arrayOptions[index - 1].focus();
             }
         } else if (this.options) {
-            this.options.first.focus();
+             this.options.first.focus();
         }
     }
 
     /**
      * Method used to handle cases where a user removes the currently active option.
      * The timeout is required because this can happen after the view has been checked.
-     */
+    */
     private unselectOptions(): void {
         setTimeout(() => {
             if (this.selected) {
@@ -415,5 +421,4 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
             this.onChange(undefined);
         });
     }
-
 }
