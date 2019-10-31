@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ProductSwitchItem } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fd-product-switch-basic-example',
+    selector: 'fd-product-switch-dnd-example',
     templateUrl: './product-switch-dnd-example.component.html'
 })
 export class ProductSwitchDndExampleComponent {
@@ -11,7 +11,9 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Home',
             subtitle: 'Central Home',
-            icon: 'home'
+            icon: 'home',
+            stickToPosition: true,
+            disabledDragAndDrop: true
         },
         {
             title: 'Analytics Cloud',
@@ -21,8 +23,7 @@ export class ProductSwitchDndExampleComponent {
         {
             title: 'Catalog',
             subtitle: 'Ariba',
-            icon: 'contacts',
-            disabledDragAndDrop: true
+            icon: 'contacts'
         },
         {
             title: 'Guided Buying',

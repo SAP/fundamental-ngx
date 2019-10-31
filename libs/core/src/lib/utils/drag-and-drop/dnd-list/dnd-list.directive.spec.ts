@@ -117,4 +117,27 @@ describe('DndListDirective', () => {
 
         expect((directive as any).removeAllLines).toHaveBeenCalled();
     });
+
+    it ('should handle stickToPosition', () => {
+
+        spyOn((directive as any), 'generateLine');
+
+
+
+        const pointerPosition = { pointerPosition: { x: 230, y: 230 } };
+        (directive as any).closestLinkIndex = 1000;
+        (directive as any).closestLinkPosition = 'after';
+        (directive as any).draggedItemIndex = 3;
+
+        /** This is element tht should be ignored */
+        elementChords.push({ x: 235, y: 230, stickToPosition: true, position: 'after' });
+
+        (directive as any).elementChords = elementChords;
+
+        directive.onMove(<any>pointerPosition);
+
+        expect((directive as any).closestLinkIndex).toBe(2);
+        expect((directive as any).closestLinkPosition).toBe('before');
+        expect((directive as any).generateLine).toHaveBeenCalledWith(2, 'before');
+    })
 });

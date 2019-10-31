@@ -44,6 +44,13 @@ import { ModalRef } from './modal-utils/modal-ref';
 })
 export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 
+    /** List of classes that will be added to component, when load from component option is picked. */
+    readonly HOST_COMPONENT_CLASS_LIST: string[] = [
+        'fd-modal__content--overrides',
+        'fd-modal__content',
+    ];
+
+
     @ViewChild('vc', { read: ViewContainerRef, static: false  })
     containerRef: ViewContainerRef;
 
@@ -122,6 +129,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.containerRef.clear();
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
         this.componentRef = this.containerRef.createComponent(componentFactory);
+        this.addClassesToComponent(this.componentRef.location);
     }
 
     private loadFromTemplate(content: TemplateRef<any>): void {
@@ -130,6 +138,13 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
             $implicit: this.modalRef
         };
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
+    }
+
+    private addClassesToComponent(elementRef: ElementRef): void {
+        if (!elementRef) {
+            return;
+        }
+        elementRef.nativeElement.classList.add(...this.HOST_COMPONENT_CLASS_LIST);
     }
 
     _setProperties(): void {

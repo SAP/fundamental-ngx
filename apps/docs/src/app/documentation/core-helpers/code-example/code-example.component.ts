@@ -63,6 +63,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         dependencies: {
             moment: '*',
             '@fundamental-ngx/core': 'latest',
+            '@fundamental-ngx/platform': 'latest',
             'fundamental-styles': 'latest',
             '@angular/animations': '*',
             '@angular/http': 'latest',
@@ -116,6 +117,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
             dependencies: {
                 moment: '*',
                 '@fundamental-ngx/core': 'latest',
+                '@fundamental-ngx/platform': 'latest',
                 'fundamental-styles': 'latest',
                 '@angular/animations': '*',
                 '@angular/http': 'latest',
@@ -131,7 +133,12 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         this.exampleFiles.forEach(example => {
 
             if (example.fileName && example.component) {
-                this.parameters.html_tag = 'fd-' + example.fileName;
+
+                if (example.fileName !== undefined && example.fileName.indexOf('platform') !== -1) {
+                    this.parameters.html_tag = 'fdp-' + example.fileName;
+                } else {
+                    this.parameters.html_tag = 'fd-' + example.fileName;
+                }
                 this.parameters.addonAppModule = example.appModuleAddon;
                 this.parameters.app_module = 'AppModule';
                 this.parameters.app_module_file = 'app.module';
@@ -154,13 +161,17 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 }
                 if (example.secondFile) {
                     const _pathTS = `src/app/${example.secondFile}.component.ts`;
+                    let _select = 'fd-';
+                    if (example.secondFile.indexOf('platform') !== -1) {
+                        _select = 'fdp-';
+                    }
                     this.parameters.app_component_basis = example.secondFile + '.component';
                     this.project.files[_pathTS] =
                         // tslint:disable-next-line: no-unused-expression
                         `import { Component } from '@angular/core';
 
                     @Component({
-                        selector: 'fd-${example.fileName}',
+                        selector: '${_select}${example.fileName}',
                         templateUrl: './${example.fileName}.component.html',
                         styleUrls: ['./${example.fileName}.component.scss']
                     })
@@ -194,15 +205,16 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
                 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
                 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+                import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
                 import { HttpClientModule, HttpClient } from '@angular/common/http';
                 import { HttpModule } from '@angular/http';
                 import { MatTableModule } from '@angular/material';
                 import {CdkTableModule } from '@angular/cdk/table';
-                import { DragDropModule } from '@angular/cdk/drag-drop';  
+                import { DragDropModule } from '@angular/cdk/drag-drop';
                 import {RouterModule, Routes} from '@angular/router'
                 import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
-        
-        
+
+
                 @NgModule({
                   declarations: [
                     ${this.parameters.app_component},
@@ -213,12 +225,13 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     HttpClientModule,
                     MatTableModule,
                     DragDropModule,
-                    RouterModule.forRoot([{path: '#', component:${this.parameters.app_component}}], 
+                    RouterModule.forRoot([{path: '#', component:${this.parameters.app_component}}],
                     { useHash: true }),
                     CdkTableModule,
                     HttpModule,
                     ReactiveFormsModule,
                     FundamentalNgxCoreModule,
+                    FundamentalNgxPlatformModule,
                     BrowserAnimationsModule
                   ],
                   providers: [],

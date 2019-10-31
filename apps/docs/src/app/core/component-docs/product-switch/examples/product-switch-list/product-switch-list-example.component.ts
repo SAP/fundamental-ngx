@@ -3,7 +3,7 @@ import { ProductSwitchItem } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-product-switch-list-example',
-    templateUrl: './product-switch-list.component.html'
+    templateUrl: './product-switch-list-example.component.html'
 })
 export class ProductSwitchListComponent {
 
@@ -12,7 +12,9 @@ export class ProductSwitchListComponent {
         {
             title: 'Home',
             subtitle: 'Central Home',
-            icon: 'home'
+            icon: 'home',
+            stickToPosition: true,
+            disabledDragAndDrop: true
         },
         {
             title: 'Analytics Cloud',
