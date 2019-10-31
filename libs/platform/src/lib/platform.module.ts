@@ -8,15 +8,16 @@ import { SelectPlatformModule } from './components/select-platform/select-platfo
 import { FdpMenuModule } from './components/menu/menu.module';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FundamentalNgxCoreModule
-	],
-	exports: [
-		PlatformButtonModule,
-		PlatformSearchInputModule,
-		ActionBarModule,
-		SelectPlatformModule,
-		FdpMenuModule
-	]
+    imports: [
+        CommonModule,
+        FundamentalNgxCoreModule
+    ],
+    exports: [
+        PlatformButtonModule,
+        PlatformSearchInputModule,
+        ActionBarModule,
+        SelectPlatformModule,
+        FdpMenuModule
+    ]
+})
 export class FundamentalNgxPlatformModule {}
