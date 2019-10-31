@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, ViewEncapsulation, Input } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Output,
+    ViewChild,
+    ViewEncapsulation,
+    Input,
+    ChangeDetectionStrategy
+} from '@angular/core';
 
 /**
  * A token is used to represent contextualizing information.
@@ -13,7 +23,8 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, V
         '[class.fd-token__disabled]': 'disabled',
         'role': 'button'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
 

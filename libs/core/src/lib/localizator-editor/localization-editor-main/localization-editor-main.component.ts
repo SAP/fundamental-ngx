@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
 
 /**
@@ -12,7 +12,8 @@ import { LocalizationEditorItemComponent } from '../localization-editor-item/loc
 @Component({
     selector: 'fd-localization-editor-main',
     templateUrl: './localization-editor-main.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalizationEditorMainComponent extends LocalizationEditorItemComponent {
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 
@@ -18,7 +18,8 @@ export type ButtonOptions = 'light' | 'emphasized';
     exportAs: 'fd-button',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./button.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent extends AbstractFdNgxClass {
 

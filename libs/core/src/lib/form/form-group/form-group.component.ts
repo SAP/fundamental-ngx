@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Represents a form group element.
@@ -16,7 +16,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     selector: 'fd-form-group',
     templateUrl: './form-group.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./form-group.component.scss']
+    styleUrls: ['./form-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupComponent {
 

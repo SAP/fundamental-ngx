@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-mega-menu-example',
     templateUrl: './mega-menu-example.component.html'
 })
-export class MegaMenuExampleComponent { }
+export class MegaMenuExampleComponent {}
 
 @Component({
     selector: 'fd-mega-menu-group-example',

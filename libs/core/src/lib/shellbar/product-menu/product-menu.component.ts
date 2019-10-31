@@ -1,4 +1,4 @@
-import { Component, ContentChild, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, HostListener, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
 import { MenuComponent } from '../../menu/menu.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
@@ -15,7 +15,8 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 @Component({
     selector: 'fd-product-menu',
     templateUrl: './product-menu.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductMenuComponent extends PopoverComponent implements OnInit {
 

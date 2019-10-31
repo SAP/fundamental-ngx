@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 
 /**
  * Applies fundamental layout and styling to the contents of a modal header.
@@ -13,7 +13,8 @@ import { Component, HostBinding } from '@angular/core';
 @Component({
     selector: 'fd-modal-header',
     templateUrl: './modal-header.component.html',
-    styles: [':host {display: block;}']
+    styles: [':host {display: block;}'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalHeaderComponent {
 

@@ -3,7 +3,7 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation, ContentChild
+    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
@@ -25,7 +25,8 @@ let popoverUniqueId: number = 0;
         '[class.fd-popover-custom]': 'true',
         '[attr.id]': 'id'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverComponent {
 

@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a table wrapper, it will add fd-table class to its first child.
@@ -14,7 +14,8 @@ import { AfterContentInit, Component, ElementRef, ViewEncapsulation } from '@ang
     selector: 'fd-table-wrapper',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./table.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableWrapperComponent implements AfterContentInit {
 

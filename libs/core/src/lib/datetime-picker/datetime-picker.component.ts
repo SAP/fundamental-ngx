@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
@@ -50,7 +51,8 @@ import { FdDatetime } from './models/fd-datetime';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
@@ -352,6 +354,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.setInput(this.date);
         }
+        this.changeDetRef.detectChanges();
     }
 
     /**

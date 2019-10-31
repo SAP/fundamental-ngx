@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,

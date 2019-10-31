@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ContentChildren,
     EventEmitter, forwardRef, HostBinding, HostListener,
@@ -33,7 +33,8 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
     host: {
         '[class.fd-select-custom]': 'true',
         'role': 'listbox',
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
@@ -135,6 +136,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     onTouched: Function = () => {};
 
+    constructor (
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
+
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
@@ -148,6 +153,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
             setTimeout(() => {
                 if (this.value) {
                     this.selectValue(this.value, false);
+                    this.changeDetectorRef.markForCheck();
                 }
             });
         }
@@ -213,11 +219,13 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     writeValue(value: any): void {
         if (this.options) {
             this.selectValue(value, false);
+            this.changeDetectorRef.detectChanges();
         } else {
             // Defer the selection of the value to support forms
             Promise.resolve().then(() => {
                 if (this.options) {
                     this.selectValue(value, false);
+                    this.changeDetectorRef.detectChanges();
                 }
             });
         }

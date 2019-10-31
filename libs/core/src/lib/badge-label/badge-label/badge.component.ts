@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 import { BadgeStatus, BadgeModifier } from '../label/label.component';
 
@@ -11,7 +11,8 @@ import { BadgeStatus, BadgeModifier } from '../label/label.component';
     selector: '[fd-badge]',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./badge-label.component.scss']
+    styleUrls: ['./badge-label.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BadgeComponent extends AbstractFdNgxClass {
     /** Color coded status for the badge. Options are 'success', 'warning', and 'error'. Leave empty for default badge. */

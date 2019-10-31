@@ -1,4 +1,14 @@
-import { ChangeDetectorRef, Component, forwardRef, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    HostBinding,
+    Input,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -19,7 +29,8 @@ import { TimeFormatParser } from './format/time-parser';
         }
     ],
     styleUrls: ['./time-picker.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit {
 
@@ -210,6 +221,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
             return;
         }
         this.time = time;
+        this.cd.markForCheck();
     }
 
     /** @hidden */

@@ -1,15 +1,18 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     forwardRef,
     Input,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
-    SimpleChanges, TemplateRef,
+    SimpleChanges,
+    TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -50,7 +53,8 @@ import focusTrap, { FocusTrap } from 'focus-trap';
         '[class.fd-combobox-custom-class]': 'true',
         '[class.fd-combobox-input]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -178,7 +182,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     constructor(
         private elRef: ElementRef,
-        private menuKeyboardService: MenuKeyboardService
+        private menuKeyboardService: MenuKeyboardService,
+        private cdRef: ChangeDetectorRef
     ) { }
 
     /** @hidden */
@@ -275,6 +280,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else {
             this.inputTextValue = value;
         }
+        this.cdRef.markForCheck();
     }
 
     /** @hidden */

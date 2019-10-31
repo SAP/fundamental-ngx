@@ -1,4 +1,15 @@
-import { Component, Input, Output, ViewEncapsulation, EventEmitter, ElementRef, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    ViewEncapsulation,
+    EventEmitter,
+    ElementRef,
+    OnInit,
+    OnDestroy,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { FdDate } from '../../models/fd-date';
 import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { Subject } from 'rxjs';
@@ -13,12 +24,15 @@ import { CalendarService } from '../../calendar.service';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'id + "-month-view"'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** A number offset used to achieve the 1-12 representation of the calendar */
     private readonly _monthOffset: number = 1;
+
+    private _shortMonthNames: string[];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
@@ -58,6 +72,11 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         this.calendarService.onKeySelect
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => this.selectMonth(index))
+        ;
+
+        this.calendarI18n.i18nChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.cdRef.markForCheck())
         ;
     }
 

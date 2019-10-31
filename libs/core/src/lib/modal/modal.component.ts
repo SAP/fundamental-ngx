@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+    AfterViewInit, ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
@@ -40,7 +40,8 @@ import { ModalRef } from './modal-utils/modal-ref';
     animations: [
         modalFadeNgIf
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 

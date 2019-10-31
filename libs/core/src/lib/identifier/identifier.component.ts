@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -18,7 +18,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
     },
     template: `<ng-content></ng-content>`,
     styleUrls: ['./identifier.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IdentifierComponent extends AbstractFdNgxClass {
     /**

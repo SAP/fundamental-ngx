@@ -6,7 +6,7 @@ import {
     forwardRef,
     ViewEncapsulation,
     ContentChild,
-    TemplateRef,
+    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
@@ -35,6 +35,7 @@ export type InputGroupPlacement = 'before' | 'after';
         }
     ],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupComponent implements ControlValueAccessor {
 
@@ -102,6 +103,11 @@ export class InputGroupComponent implements ControlValueAccessor {
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
+
+    /** @hidden */
     inputTextValue: string;
 
     /** @hidden */
@@ -125,6 +131,7 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** @hidden */
     writeValue(value: any) {
         this.inputTextValue = value;
+        this.changeDetectorRef.markForCheck();
     }
 
     /** @hidden */

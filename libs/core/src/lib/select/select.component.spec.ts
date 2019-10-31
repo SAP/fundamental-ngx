@@ -2,7 +2,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
-import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-wrapper-select',
@@ -37,6 +37,12 @@ describe('SelectComponent', () => {
             declarations: [TestWrapperComponent],
             imports: [SelectModule]
         })
+            .overrideComponent(
+                SelectComponent,
+                {
+                    set: {  changeDetection: ChangeDetectionStrategy.Default  }
+                }
+            )
             .compileComponents();
     }));
 

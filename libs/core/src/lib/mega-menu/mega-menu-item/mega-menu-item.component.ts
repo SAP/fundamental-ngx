@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -17,8 +17,8 @@ import {
 import { MegaMenuSubitemDirective } from '../mega-menu-subitem.directive';
 import { MegaMenuLinkDirective } from '../mega-menu-link/mega-menu-link.directive';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { DefaultMenuItem } from '../../menu/default-menu-item';
 
 export type MenuSubListPosition = 'left' | 'right';
@@ -44,7 +44,8 @@ export type MenuSubListPosition = 'left' | 'right';
     selector: 'fd-mega-menu-item',
     templateUrl: './mega-menu-item.component.html',
     styleUrls: ['./mega-menu-item.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, DefaultMenuItem {
 
@@ -70,6 +71,10 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
+
+    /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
+    private readonly onRefresh$: Subject<void> = new Subject<void>();
+
 
     /** Variable that specifies if the sublist menu is opened. */
     @Input()
@@ -157,9 +162,9 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     /** @hidden */
     ngAfterContentInit(): void {
         this.link.hasChild = this.subItems.length > 0;
-        this.subItems.forEach((item: MegaMenuSubitemDirective, index: number) => item.keyDown
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe((keyboardEvent: KeyboardEvent) => this.handleSubListKeyDown(keyboardEvent, index)))
+        this.subItems.changes
+            .pipe(takeUntil(this.onDestroy$), startWith(5))
+            .subscribe(() => this.refreshSubscription())
         ;
     }
 
@@ -236,5 +241,19 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         } else {
             return 100;
         }
+    }
+
+    /** Whether any querylist detects any changes */
+    private refreshSubscription(): void {
+        /** Finish all of the streams, form before */
+        this.onRefresh$.next();
+
+        /** Merge refresh/destroy observables */
+        const refreshObs = merge(this.onRefresh$, this.onDestroy$);
+
+        this.subItems.forEach((item: MegaMenuSubitemDirective, index: number) => item.keyDown
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe((keyboardEvent: KeyboardEvent) => this.handleSubListKeyDown(keyboardEvent, index)))
+        ;
     }
 }

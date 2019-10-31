@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a shellbar title.
@@ -12,6 +12,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-shellbar-title',
     templateUrl: './shellbar-title.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarTitleComponent { }
