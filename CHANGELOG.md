@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.12"></a>
+# [0.13.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.11...v0.13.0-rc.12) (2019-11-01)
+
+
+### Bug Fixes
+
+* make [@angular](https://github.com/angular)/cdk as a peer dependancy ([#1531](https://github.com/SAP/fundamental-ngx/issues/1531)) ([e84410a](https://github.com/SAP/fundamental-ngx/commit/e84410a))
+
+
+
 <a name="0.13.0-rc.11"></a>
 # [0.13.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.10...v0.13.0-rc.11) (2019-11-01)
 
