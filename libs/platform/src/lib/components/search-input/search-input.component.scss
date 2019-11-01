@@ -1,3 +1,6 @@
+$fd-active-color: #0a6ed1;
+$fd-border-color: #89919a;
+
 .search-input__category-dropdown {
     display: inline-block;
     vertical-align: middle;
@@ -11,7 +14,7 @@
         }
 
         &::after {
-            color: #0a6ed1;
+            color: $fd-active-color;
             border: none;
             background-color: transparent;
         }
@@ -19,7 +22,7 @@
 
     @supports(--css: variables) {
         ::ng-deep button.fd-dropdown__control::after {
-            color: var(--fd-color-action-1, #0a6ed1);
+            color: var(--sapLink_Active_Color, $fd-active-color);
         }
     }
 }
@@ -32,7 +35,7 @@
         border-style: solid;
         padding-right: 12px;
         padding-left: 12px;
-        border-color: #89919a;
+        border-color: $fd-border-color;
         background: none;
     }
 
@@ -40,12 +43,12 @@
         border-width: 1px;
         border-left-width: 0px;
         border-style: solid;
-        border-color: #89919a;
+        border-color: $fd-border-color;
         width: auto;
     }
 
     ::ng-deep input:disabled {
-        border-color: #89919a;
+        border-color: $fd-border-color;
     }
 
     ::ng-deep input[type="search"]::-webkit-search-cancel-button {
@@ -65,15 +68,15 @@
 
         ::ng-deep input[type="search"],
         ::ng-deep .fd-input {
-            border-color: var(--fd-color-neutral-4, #89919a);
+            border-color: var(--sapField_BorderColor, $fd-border-color);
         }
 
         ::ng-deep [type=search]+.fd-input-group__addon {
-            border-color: var(--fd-color-neutral-4, #89919a);
+            border-color: var(--sapField_BorderColor, $fd-border-color);
         }
 
         ::ng-deep input:disabled {
-            border-color: var(--fd-color-neutral-4, #89919a);
+            border-color: var(--sapField_BorderColor, $fd-border-color);
         }
 
     }
@@ -106,7 +109,7 @@
         border-left-width: 1px;
         border-right-width: 0px;
         border-style: solid;
-        border-color: #89919a;
+        border-color: $fd-border-color;
         width: auto;
     }
 
@@ -140,7 +143,7 @@
 
         .search-input__category-dropdown button {
             border-left: none;
-            border-right: solid 1px #89919a;
+            border-right: solid 1px $fd-border-color;
             padding-right: 0px;
         }
     }
@@ -150,12 +153,12 @@
 @supports(--css: variables) {
     ::ng-deep [dir="rtl"] .search-input {
         & [type=search]+.fd-input-group__addon {
-            border-color: var(--fd-color-neutral-4, #89919a);
+            border-color: var(--sapField_BorderColor, $fd-border-color);
         }
 
         &.hide-category-label {
             .search-input__category-dropdown button {
-                border-right-color: var(--fd-color-neutral-4, #89919a);
+                border-right-color: var(--sapField_BorderColor, $fd-border-color);
             }
         }
     }
@@ -181,7 +184,7 @@ $_height: $fd-spinner-height;
         &::before,
         &::after {
             width: $fd-spinner-width--bar;
-            background-color: #0a6ed1;
+            background-color: $fd-active-color;
         }
 
         .fd-spinner__body {
@@ -189,7 +192,7 @@ $_height: $fd-spinner-height;
             &::before,
             &::after {
                 width: $fd-spinner-width--bar;
-                background-color: #0a6ed1;
+                background-color: $fd-active-color;
             }
 
             &:before {
@@ -221,14 +224,14 @@ $_height: $fd-spinner-height;
 
             &::before,
             &::after {
-                background-color: var(--fd-color-action-1, #0a6ed1);
+                background-color: var(--sapLink_Active_Color, $fd-active-color);
             }
 
             .fd-spinner__body {
 
                 &::before,
                 &::after {
-                    background-color: var(--fd-color-action-1, #0a6ed1);
+                    background-color: var(--sapLink_Active_Color, $fd-active-color);
                 }
             }
         }
