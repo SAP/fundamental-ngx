@@ -10,6 +10,7 @@
   "whitelistedNonPeerDependencies": [
     "focus-trap",
     "popper.js",
-    "fundamental-styles"
+    "fundamental-styles",
+    "@angular/cdk"
   ]
 }
