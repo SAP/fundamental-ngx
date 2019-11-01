@@ -53,7 +53,7 @@ Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breakin
 For an existing Angular CLI application,
 
 0. **Video tutorial**
-https://www.youtube.com/watch?v=i4VIiuzD2Fg
+[How to use the Fundamental Core Library](https://www.youtube.com/watch?v=i4VIiuzD2Fg)
 
 1. **Install Fundamental-NGX.**
    `ng add @fundamental-ngx/core`
