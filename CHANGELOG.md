@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.15"></a>
+# [0.13.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.14...v0.13.0-rc.15) (2019-11-01)
+
+
+### Bug Fixes
+
+* loading spinner aria-hidden issue ([#1537](https://github.com/SAP/fundamental-ngx/issues/1537)) ([4ae5791](https://github.com/SAP/fundamental-ngx/commit/4ae5791))
+
+
+
 <a name="0.13.0-rc.14"></a>
 # [0.13.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.13...v0.13.0-rc.14) (2019-11-01)
 
