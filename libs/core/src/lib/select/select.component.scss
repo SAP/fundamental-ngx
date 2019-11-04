@@ -106,6 +106,7 @@
 // regular border class csss overrides the border of the button after adding important
 .fd-button--regularborder{
     border: solid !important;
+	border-radius: 3px !important;
 }
 .fd-button--regularborder::after{
     border: none !important;
@@ -114,6 +115,7 @@
 // split border class csss overrides the border of the button after adding important
 .fd-button--splitborder{
    border:1px solid !important;
+   border-radius: 3px !important;
 }
 .fd-button--splitborder::after{
     border-left-style: solid !important;
