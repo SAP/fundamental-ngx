@@ -35,7 +35,6 @@
         <button
             *ngIf="data.properties.label1.length > 0"
             fd-button-grouped
-            [size]="data.properties.size"
             [compact]="data.properties.compact"
             [state]="data.properties.state1"
         >
@@ -44,7 +43,6 @@
         <button
             *ngIf="data.properties.label2.length > 0"
             fd-button-grouped
-            [size]="data.properties.size"
             [compact]="data.properties.compact"
             [state]="data.properties.state2"
         >
@@ -53,33 +51,29 @@
         <button
             *ngIf="data.properties.label3.length > 0"
             fd-button-grouped
-            [size]="data.properties.size"
             [compact]="data.properties.compact"
             [state]="data.properties.state3"
         >
             {{ data.properties.label3 }}
         </button>
         <button
-            *ngIf="data.properties.icon1.length > 0"
+            *ngIf="data.properties.icon4.length > 0"
             fd-button-grouped
-            [size]="data.properties.size"
-            [glyph]="data.properties.icon1"
+            [glyph]="data.properties.icon4"
             [compact]="data.properties.compact"
             [state]="data.properties.state4"
         ></button>
         <button
-            *ngIf="data.properties.icon2.length > 0"
+            *ngIf="data.properties.icon5.length > 0"
             fd-button-grouped
-            [size]="data.properties.size"
-            [glyph]="data.properties.icon2"
+            [glyph]="data.properties.icon5"
             [compact]="data.properties.compact"
             [state]="data.properties.state5"
         ></button>
         <button
-            *ngIf="data.properties.icon3.length > 0"
+            *ngIf="data.properties.icon6.length > 0"
             fd-button-grouped
-            [size]="data.properties.size"
-            [glyph]="data.properties.icon3"
+            [glyph]="data.properties.icon6"
             [compact]="data.properties.compact"
             [state]="data.properties.state6"
         ></button>
