@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { AfterViewInit, Component, Injectable } from '@angular/core';
 import { CalendarI18n, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
 
 // The weekdays translations have to start with Sunday
@@ -104,12 +104,15 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         }
     ]
 })
-export class DatePickerI18nExampleComponent {
+export class DatePickerI18nExampleComponent implements AfterViewInit {
 
     selected: number = 3;
 
-    constructor(private languageService: LanguageService) {
-    }
+    constructor(
+        private languageService: LanguageService,
+        private calendarI18n: CalendarI18n,
+        private calendarI18nLabels: CalendarI18nLabels
+    ) {}
 
     date = FdDate.getToday();
 
@@ -130,16 +133,29 @@ export class DatePickerI18nExampleComponent {
     setGerman() {
         this.selected = 2;
         this.languageService.setLanguage('de');
+        this.refresh();
     }
 
     setFrench() {
         this.selected = 1;
         this.languageService.setLanguage('fr');
+        this.refresh();
     }
 
     setBulgarian() {
         this.selected = 3;
         this.languageService.setLanguage('bg');
+        this.refresh();
+    }
+
+    ngAfterViewInit(): void {
+        this.refresh();
+    }
+
+    private refresh(): void {
+        this.calendarI18n.i18nChange.next();
+        this.calendarI18nLabels.labelsChange.next();
+
     }
 
 }

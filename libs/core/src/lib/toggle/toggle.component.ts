@@ -1,4 +1,15 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy, ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 let toggleUniqueId: number = 0;
@@ -22,7 +33,8 @@ let toggleUniqueId: number = 0;
         class: 'fd-form__item fd-form__item--check fd-toggle-custom',
         '[attr.id]': 'id',
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
@@ -69,6 +81,10 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
     onTouched: any = () => {};
 
+    constructor (
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
+
     /** @hidden */
     ngOnInit() {
         if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
@@ -105,6 +121,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
      */
     writeValue(value: any) {
         this.checked = value;
+        this.changeDetectorRef.detectChanges();
     }
 
     /**

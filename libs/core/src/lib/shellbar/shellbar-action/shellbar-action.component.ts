@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a shellbar action.
@@ -15,7 +15,8 @@ import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core
 @Component({
     selector: 'fd-shellbar-action',
     templateUrl: './shellbar-action.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarActionComponent {
 

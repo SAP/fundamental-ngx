@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  *  Component represents mega menu group, which contains list with menu items.
@@ -25,7 +25,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-mega-menu-group',
     templateUrl: './mega-menu-group.component.html',
-    encapsulation: ViewEncapsulation.None
-
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MegaMenuGroupComponent {}

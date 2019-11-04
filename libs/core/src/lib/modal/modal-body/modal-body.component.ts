@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 
 /**
  * Applies fundamental layout and styling to the contents of a modal body.
@@ -18,7 +18,8 @@ import { Component, HostBinding } from '@angular/core';
             overflow: auto;
             flex-grow: 1;
         }
-    `]
+    `],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalBodyComponent {
 

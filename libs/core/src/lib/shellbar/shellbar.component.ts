@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -9,7 +9,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
     selector: 'fd-shellbar',
     templateUrl: './shellbar.component.html',
     styleUrls: ['./shellbar.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarComponent {
 }

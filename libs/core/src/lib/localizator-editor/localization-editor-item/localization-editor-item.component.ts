@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, ChangeDetectionStrategy,
     Component,
     ContentChild,
     Input,
@@ -25,7 +25,8 @@ import {
 @Component({
     selector: 'fd-localization-editor-item',
     templateUrl: './localization-editor-item.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalizationEditorItemComponent implements OnInit, AfterContentInit, OnChanges {
 

@@ -1,4 +1,15 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Input,
+    OnInit,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 
 /**
  * Used to represent an option of the select component.
@@ -13,7 +24,8 @@ import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, 
         '[attr.aria-disabled]': 'disabled',
         '[tabindex]': 'disabled ? -1 : 0',
         'role': 'option',
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptionComponent implements OnInit {
 

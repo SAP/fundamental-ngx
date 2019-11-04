@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { ShellbarUser } from '../model/shellbar-user';
@@ -10,7 +10,8 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
  * */
 @Component({
     selector: 'fd-shellbar-user-menu',
-    templateUrl: './shellbar-user-menu.component.html'
+    templateUrl: './shellbar-user-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarUserMenuComponent extends PopoverComponent {
 

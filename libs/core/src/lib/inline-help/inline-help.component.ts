@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Placement } from 'popper.js';
 /**
  * The component that represents an inline-help.
@@ -14,7 +14,8 @@ import { Placement } from 'popper.js';
     selector: 'fd-inline-help',
     templateUrl: './inline-help.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['inline-help.component.scss']
+    styleUrls: ['inline-help.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InlineHelpComponent {
 

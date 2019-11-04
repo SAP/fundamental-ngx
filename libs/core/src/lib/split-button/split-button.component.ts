@@ -1,4 +1,4 @@
-import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { ButtonOptions, ButtonType } from '../button/button.component';
@@ -28,7 +28,8 @@ import { ButtonOptions, ButtonType } from '../button/button.component';
 @Component({
     selector: 'fd-split-button',
     templateUrl: 'split-button.component.html',
-    styleUrls: ['./split-button.component.scss']
+    styleUrls: ['./split-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SplitButtonComponent {
 

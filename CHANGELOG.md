@@ -2,6 +2,111 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.17"></a>
+# [0.13.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.16...v0.13.0-rc.17) (2019-11-02)
+
+
+
+<a name="0.13.0-rc.16"></a>
+# [0.13.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.15...v0.13.0-rc.16) (2019-11-02)
+
+
+
+<a name="0.13.0-rc.15"></a>
+# [0.13.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.14...v0.13.0-rc.15) (2019-11-01)
+
+
+### Bug Fixes
+
+* loading spinner aria-hidden issue ([#1537](https://github.com/SAP/fundamental-ngx/issues/1537)) ([4ae5791](https://github.com/SAP/fundamental-ngx/commit/4ae5791))
+
+
+
+<a name="0.13.0-rc.14"></a>
+# [0.13.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.13...v0.13.0-rc.14) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.13"></a>
+# [0.13.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.12...v0.13.0-rc.13) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.12"></a>
+# [0.13.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.11...v0.13.0-rc.12) (2019-11-01)
+
+
+### Bug Fixes
+
+* make [@angular](https://github.com/angular)/cdk as a peer dependancy ([#1531](https://github.com/SAP/fundamental-ngx/issues/1531)) ([e84410a](https://github.com/SAP/fundamental-ngx/commit/e84410a))
+
+
+
+<a name="0.13.0-rc.11"></a>
+# [0.13.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.10...v0.13.0-rc.11) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.10"></a>
+# [0.13.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.9...v0.13.0-rc.10) (2019-11-01)
+
+
+### Bug Fixes
+
+* [#1521](https://github.com/SAP/fundamental-ngx/issues/1521) export grid-layout public api ([#1529](https://github.com/SAP/fundamental-ngx/issues/1529)) ([1d459d5](https://github.com/SAP/fundamental-ngx/commit/1d459d5))
+
+
+
+<a name="0.13.0-rc.9"></a>
+# [0.13.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.8...v0.13.0-rc.9) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.8"></a>
+# [0.13.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.7...v0.13.0-rc.8) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.7"></a>
+# [0.13.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.6...v0.13.0-rc.7) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.6"></a>
+# [0.13.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.5...v0.13.0-rc.6) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.5"></a>
+# [0.13.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.4...v0.13.0-rc.5) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.4"></a>
+# [0.13.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.3...v0.13.0-rc.4) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.3"></a>
+# [0.13.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.2...v0.13.0-rc.3) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.2"></a>
+# [0.13.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.1...v0.13.0-rc.2) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.1"></a>
+# [0.13.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.0...v0.13.0-rc.1) (2019-10-31)
+
+
+### Bug Fixes
+
+* (core) Introduce change detection strategy OnPush ([#1500](https://github.com/SAP/fundamental-ngx/issues/1500)) ([4a9091f](https://github.com/SAP/fundamental-ngx/commit/4a9091f))
+
+
+
 <a name="0.13.0-rc.0"></a>
 # [0.13.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.9...v0.13.0-rc.0) (2019-10-31)
 

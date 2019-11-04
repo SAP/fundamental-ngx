@@ -7,7 +7,7 @@ import {
     AfterContentChecked,
     QueryList,
     ViewEncapsulation,
-    ContentChild, ViewChild
+    ContentChild, ViewChild, ChangeDetectionStrategy
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
@@ -39,7 +39,8 @@ import { ComboboxComponent } from '../../combobox/combobox.component';
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
     styleUrls: ['./shellbar-actions.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
 

@@ -1,4 +1,13 @@
-import { Component, ContentChild, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    EventEmitter,
+    HostBinding,
+    Input,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { Placement } from 'popper.js';
 import { LocalizationEditorMainComponent } from './localization-editor-main/localization-editor-main.component';
 
@@ -19,7 +28,8 @@ import { LocalizationEditorMainComponent } from './localization-editor-main/loca
     selector: 'fd-localization-editor',
     templateUrl: './localization-editor.component.html',
     styleUrls: ['localization-editor.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalizationEditorComponent {
 

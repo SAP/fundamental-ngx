@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
 import { browser, element, by } from 'protractor'
 
 import { By } from '@angular/platform-browser';
@@ -14,7 +14,10 @@ describe('ImageComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ImageComponent]
-        }).compileComponents();
+        }).overrideComponent(ImageComponent, {
+            set: {  changeDetection: ChangeDetectionStrategy.Default  }
+        })
+        .compileComponents()
     }));
 
     beforeEach(() => {

@@ -1,4 +1,4 @@
-import { Component, Host, Inject, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Inject, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PopoverComponent } from '../popover.component';
 import { ButtonType } from '../../button/button.component';
@@ -18,6 +18,7 @@ import { ButtonType } from '../../button/button.component';
     },
     templateUrl: 'popover-dropdown.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverDropdownComponent {
     /** Whether the popover should have an arrow. */

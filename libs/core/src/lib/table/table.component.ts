@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a table.
@@ -13,7 +13,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
     exportAs: 'fd-table',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./table.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
 

@@ -73,7 +73,9 @@
 </fd-docs-section-title>
 <description>
     The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc. It also uses a
-    separate service called CalendarI18nLabels to populate aria labels in the component itself.
+    separate service called CalendarI18nLabels to populate aria labels in the component itself. After changing the
+    language, to detect changes, it is mandatory to call <code>calendarI18nLabels.labelsChange.next()</code> and
+    <code>calendarI18n.i18nChange.next()</code>, which will trigger change detection on calendar's components.
 </description>
 <component-example [name]="'ex5'">
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
@@ -88,7 +90,8 @@
 <description>
     The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc. It can be used
     along with moment.js library with locale package. The moment.js library contains a lot of languages and allows to
-    change language while page is rendered.
+    change language while page is rendered. After changing the language, to detect changes, it is mandatory to call
+    <code>calendarI18n.i18nChange.next()</code>, which will trigger change detection on calendar's components.
 </description>
 <component-example [name]="'ex6'">
     <fd-calendar-i18n-moment-example></fd-calendar-i18n-moment-example>

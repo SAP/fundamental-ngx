@@ -1,7 +1,7 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
- * The component that represents a loading spinner. 
+ * The component that represents a loading spinner.
  *
  * ```html
  * <fd-loading-spinner [loading]="true"></fd-loading-spinner>
@@ -11,7 +11,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     selector: 'fd-loading-spinner',
     templateUrl: './loading-spinner.component.html',
     styleUrls: ['./loading-spinner.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingSpinnerComponent {
     /** Whether to display the loading indicator animation. */

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Form message. Intended to be displayed under a form control for validation purposes.
@@ -7,7 +7,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     selector: 'fd-form-message',
     templateUrl: './form-message.component.html',
     styleUrls: ['./form-message.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormMessageComponent {
 

@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
@@ -33,7 +34,8 @@ export type NotificationSize = 's' | 'm';
         '[attr.aria-label]': 'ariaLabel',
         'role': 'notification',
         '[attr.id]': 'id',
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationComponent extends AbstractFdNgxClass implements AfterViewInit {
 
