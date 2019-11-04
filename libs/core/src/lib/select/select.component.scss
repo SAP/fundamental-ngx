@@ -95,6 +95,7 @@
     }
 }
 
+// no border class csss overrides the border of the button after adding important 
 .fd-button--noborder{
    border: none  !important;
 }
@@ -102,12 +103,15 @@
    border: none !important;
 }
 
+// regular border class csss overrides the border of the button after adding important
 .fd-button--regularborder{
     border: solid !important;
 }
 .fd-button--regularborder::after{
     border: none !important;
 }
+
+// split border class csss overrides the border of the button after adding important
 .fd-button--splitborder{
    border:1px solid !important;
 }
@@ -115,6 +119,8 @@
     border-left-style: solid !important;
     border-left-width: 1px !important;
 }
+
+// truncation of the overflowing component text
 .fd-dropdown_truncation{
     overflow: hidden;
     text-overflow: ellipsis;

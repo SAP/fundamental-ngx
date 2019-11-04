@@ -9,4 +9,4 @@ import { SelectModule, PipeModule } from '@fundamental-ngx/core';
         CommonModule, SelectModule, PipeModule
     ], exports: [SelectPlatformComponent]
 })
-export class SelectPlatformModule { }
+export class FdpSelectModule { }
