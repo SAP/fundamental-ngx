@@ -1,10 +1,17 @@
 <fd-button-group style="margin-right: 10px; margin-left: 10px;">
-    <button fd-button-grouped [glyph]="'survey'" [state]="'selected'"></button>
-    <button fd-button-grouped [glyph]="'pie-chart'"></button>
-    <button fd-button-grouped [glyph]="'pool'"></button>
+    <button fd-button-grouped [glyph]="'survey'" [size]="'l'" (click)="setLocaleIcon(0)" [state]="isSelectedIcon(0)">
+        survey
+    </button>
+    <button fd-button-grouped [glyph]="'pie-chart'" [size]="'l'" (click)="setLocaleIcon(1)" [state]="isSelectedIcon(1)">
+        pie-chart
+    </button>
+    <button fd-button-grouped [glyph]="'pool'" [size]="'l'" (click)="setLocaleIcon(2)" [state]="isSelectedIcon(2)">
+        pool
+    </button>
 </fd-button-group>
+
 <fd-button-group>
-    <button fd-button-grouped>Left</button>
-    <button fd-button-grouped [state]="'selected'">Middle</button>
-    <button fd-button-grouped>Right</button>
+    <button fd-button-grouped [size]="'l'" (click)="setLocaleLMR(0)" [state]="isSelectedLMR(0)">Left</button>
+    <button fd-button-grouped [size]="'l'" (click)="setLocaleLMR(1)" [state]="isSelectedLMR(1)">Middle</button>
+    <button fd-button-grouped [size]="'l'" (click)="setLocaleLMR(2)" [state]="isSelectedLMR(2)">Right</button>
 </fd-button-group>
