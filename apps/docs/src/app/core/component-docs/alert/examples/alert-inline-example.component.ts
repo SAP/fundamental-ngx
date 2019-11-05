@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     templateUrl: './alert-inline-example.component.html',
     styleUrls: ['alert-inline-example.component.scss']
 })
-export class AlertInlineExampleComponent { }
+export class AlertInlineExampleComponent {}

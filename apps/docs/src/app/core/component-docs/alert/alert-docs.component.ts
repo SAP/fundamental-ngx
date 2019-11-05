@@ -16,13 +16,11 @@ import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-examp
 import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example.component.ts';
 import * as alertWidthExampleScss from '!raw-loader!./examples/alert-width-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { ActivatedRoute } from '@angular/router';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { AlertExampleComponent } from './examples/alert-example.component';
 
 @Component({
     selector: 'app-alert',
-    templateUrl: './alert-docs.component.html'
+    templateUrl: './alert-docs.component.html',
 })
 export class AlertDocsComponent implements OnInit {
     static schema: any = {
@@ -139,7 +137,9 @@ export class AlertDocsComponent implements OnInit {
 
     schema: Schema;
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    constructor(
+        private schemaFactory: SchemaFactoryService
+    ) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
