@@ -1,4 +1,5 @@
 :host {
+
     background-color: #354a5f;
     color: #fff;
     padding: 8px 20px;
@@ -14,6 +15,7 @@
 }
 
 .fd-docs--toolbar {
+
 
     &__sidebar-btn {
         margin-left: -10px;
@@ -65,9 +67,9 @@
     }
 
     &__lib {
-        margin-left: 15px;
+        margin-left: 10px;
         display: flex;
-        align-items: center;
+        height: 28px;
         @media only screen and (max-width:640px) {
             display: none;
         }
