@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ButtonGroupDefaultExampleComponent {
 
     icon: number = 0;
-    lmr: number = 0;
+    lmr: boolean[] = [false, false, false];
 
     constructor() {
     }
@@ -19,14 +19,14 @@ export class ButtonGroupDefaultExampleComponent {
     }
 
     isSelectedLMR(x: number): string {
-        return this.lmr === x ? 'selected' : '';
+        return this.lmr[x] ? 'selected' : '';
     }
 
     setLocaleIcon(x: number): void {
         this.icon = x;
     }
 
-    setLocaleLMR(x: number): void {
-        this.lmr = x;
+    toggleLMR(x: number): void {
+        this.lmr[x] = !this.lmr[x];
     }
 }

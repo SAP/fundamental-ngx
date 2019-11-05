@@ -41,6 +41,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     isOpen: boolean = false;
     parameters = {
         addonAppModule: '',
+        styleAddon: '',
         html_tag: '',
         app_module: '',
         app_module_file: '',
@@ -139,7 +140,7 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 } else {
                     this.parameters.html_tag = 'fd-' + example.fileName;
                 }
-                this.parameters.addonAppModule = example.appModuleAddon;
+                this.parameters.styleAddon = example.styleAddon;
                 this.parameters.app_module = 'AppModule';
                 this.parameters.app_module_file = 'app.module';
                 this.parameters.app_component = example.component;
@@ -248,7 +249,8 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         this.project.files['src/index.html'] = `
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css"></link>
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css"></link>
-                    <${this.parameters.html_tag}></${this.parameters.html_tag}>
+        ${this.parameters.styleAddon}
+        <${this.parameters.html_tag}></${this.parameters.html_tag}>
         `;
 
 

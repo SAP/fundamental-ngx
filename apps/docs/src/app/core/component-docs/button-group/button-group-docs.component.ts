@@ -4,6 +4,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as buttonGroupCompactExample from '!raw-loader!./examples/button-group-compact-example.component.html';
 import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
+import * as buttonGroupDefaultExampleTs from '!raw-loader!./examples/button-group-default-example.component.ts';
 import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
 import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
 
@@ -104,7 +105,8 @@ export class ButtonGroupDocsComponent implements OnInit {
             fileName: 'button-group-xs-example',
             component: 'ButtonGroupXsExampleComponent',
             secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
+            typescriptFileCode: buttonGroupTsCode,
+            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
         }
     ];
 
@@ -115,7 +117,9 @@ export class ButtonGroupDocsComponent implements OnInit {
             fileName: 'button-group-s-example',
             component: 'ButtonGroupSmallExampleComponent',
             secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
+            typescriptFileCode: buttonGroupTsCode,
+            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
+
         }
     ];
 
@@ -126,7 +130,9 @@ export class ButtonGroupDocsComponent implements OnInit {
             fileName: 'button-group-compact-example',
             component: 'ButtonGroupCompactExampleComponent',
             secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
+            typescriptFileCode: buttonGroupTsCode,
+            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
+
         }
     ];
 
@@ -136,8 +142,8 @@ export class ButtonGroupDocsComponent implements OnInit {
             code: buttonGroupDefaultExample,
             fileName: 'button-group-default-example',
             component: 'ButtonGroupDefaultExampleComponent',
-            secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
+            typescriptFileCode: buttonGroupDefaultExampleTs,
+            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
         }
     ];
 
