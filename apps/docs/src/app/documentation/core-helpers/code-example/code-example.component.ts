@@ -139,7 +139,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 } else {
                     this.parameters.html_tag = 'fd-' + example.fileName;
                 }
-                this.parameters.styleAddon = example.styleAddon;
                 this.parameters.app_module = 'AppModule';
                 this.parameters.app_module_file = 'app.module';
                 this.parameters.app_component = example.component;
