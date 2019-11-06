@@ -106,7 +106,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             component: 'ButtonGroupXsExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode,
-            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
         }
     ];
 
@@ -118,7 +117,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             component: 'ButtonGroupSmallExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode,
-            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
 
         }
     ];
@@ -131,7 +129,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             component: 'ButtonGroupCompactExampleComponent',
             secondFile: 'button-group-examples',
             typescriptFileCode: buttonGroupTsCode,
-            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
 
         }
     ];
@@ -143,7 +140,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             fileName: 'button-group-default-example',
             component: 'ButtonGroupDefaultExampleComponent',
             typescriptFileCode: buttonGroupDefaultExampleTs,
-            styleAddon: '<link rel="stylesheet" href="node_modules/fundamental-styles/dist/button.css"></link>'
         }
     ];
 
