@@ -4,11 +4,11 @@ import { Subject } from 'rxjs';
 /**
  * Provides i18n support for labels inside the calendar component.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CalendarI18nLabels {
 
     /** This is event that should be called, when labels are changed, to let component detect an changes. */
-    readonly labelsChange: Subject<void> = new Subject<void>();
+    public readonly labelsChange: Subject<void> = new Subject<void>();
 
     /** Year selection aria label. Used on the button to navigate to the years view. */
     yearSelectionLabel: string = 'Year selection';

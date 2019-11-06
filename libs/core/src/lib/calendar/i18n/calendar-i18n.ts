@@ -17,7 +17,7 @@ export function CALENDAR_I18N_FACTORY(locale) {
 export abstract class CalendarI18n {
 
     /** This is event that should be called, when any property is changed, to let component detect an changes. */
-    readonly i18nChange: Subject<void> = new Subject<void>();
+    public readonly i18nChange: Subject<void> = new Subject<void>();
 
     /**
      * Aria label for a specific date.
