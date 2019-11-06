@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.22"></a>
+# [0.13.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.21...v0.13.0-rc.22) (2019-11-06)
+
+
+
 <a name="0.13.0-rc.21"></a>
 # [0.13.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.20...v0.13.0-rc.21) (2019-11-05)
 
