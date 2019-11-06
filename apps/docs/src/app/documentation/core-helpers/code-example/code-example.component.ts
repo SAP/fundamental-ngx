@@ -41,7 +41,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
     isOpen: boolean = false;
     parameters = {
         addonAppModule: '',
-        styleAddon: '',
         html_tag: '',
         app_module: '',
         app_module_file: '',
@@ -248,10 +247,6 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         this.project.files['src/index.html'] = `
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css"></link>
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css"></link>
-<<<<<<< HEAD
-=======
-        ${this.parameters.styleAddon}
->>>>>>> fixed stackblitz and added toggle
         <${this.parameters.html_tag}></${this.parameters.html_tag}>
         `;
 
