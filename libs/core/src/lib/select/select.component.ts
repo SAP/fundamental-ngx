@@ -139,10 +139,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     }) as Observable<OptionComponent>;
 
     /** @hidden */
-     onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
     constructor (
         private changeDetectorRef: ChangeDetectorRef

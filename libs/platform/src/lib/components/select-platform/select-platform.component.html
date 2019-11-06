@@ -1,5 +1,17 @@
-<fd-select [placeholder]="placeholder" [selectType]="selectType" [glyph]="gylph" [compact]="compact" [(value)]="value">
-	<fd-option *ngFor="let item of list">
-		<span [innerHTML]="item | displayFnPipe:displayFn"></span>
+<fd-select [placeholder]="placeholder" [selectType]="selectType" [glyph]="glyph" [compact]="compact" [(value)]="value" >
+	<fd-option *ngIf="noSelectionString" [disabled]="false" [value]="null" (selectedChange)="onSelection($event)">
+		{{noSelectionString}}
+	</fd-option>
+	<fd-option *ngFor="let item of list ; index as index" 
+	    [disabled]="item.disabled ? true : false"
+		(selectedChange)="onSelection($event)" 
+		[viewValue]="item.label" 
+		[value]="item">
+		<ng-template [ngIf]="!optionValueTemplate">{{item.label ? item.label : item }}</ng-template>
+
+		<ng-template [ngIf]="optionValueTemplate">
+			<ng-container *ngTemplateOutlet="optionValueTemplate; context: {$implicit: item, index: index}">
+			</ng-container>
+		</ng-template>
 	</fd-option>
 </fd-select>
