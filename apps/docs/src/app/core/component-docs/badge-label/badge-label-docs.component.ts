@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-
+import * as badgeSccsCode from '!raw-loader!./examples/badge-label-examples.component.scss';
 import * as badgeTsCode from '!raw-loader!./examples/badge-label-examples.component.ts';
 import * as badgeDefaultExample from '!raw-loader!./examples/badge-default-example.component.html';
 import * as badgeFilledExample from '!raw-loader!./examples/badge-filled-example.component.html';
@@ -71,7 +71,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: badgeDefaultExample,
             fileName: 'badge-default-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'BadgeDefaultExampleComponent'
         }
     ];
 
@@ -81,7 +83,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: badgePillExample,
             fileName: 'badge-pill-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'BadgePillExampleComponent'
         }
     ];
 
@@ -91,7 +95,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: badgeFilledExample,
             fileName: 'badge-filled-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'BadgeFilledExampleComponent'
         }
     ];
 
@@ -101,7 +107,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: labelDefaultExample,
             fileName: 'label-default-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'LabelDefaultExampleComponent'
         }
     ];
 
@@ -111,7 +119,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: labelBuildStatusExample,
             fileName: 'label-build-status-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'LabelBuildStatusExampleComponent'
         }
     ];
 
@@ -121,7 +131,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: labelIconStatusExample,
             fileName: 'label-icon-status-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'LabelIconStatusExampleComponent'
         }
     ];
 
@@ -131,7 +143,9 @@ export class BadgeLabelDocsComponent implements OnInit {
             code: labelStatusColorsExample,
             fileName: 'label-status-colors-example',
             secondFile: 'badge-label-examples',
-            typescriptFileCode: badgeTsCode
+            typescriptFileCode: badgeTsCode,
+            scssFileCode: badgeSccsCode,
+            component: 'LabelStatusColorsExampleComponent'
         }
     ];
 
