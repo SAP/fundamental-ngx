@@ -182,7 +182,12 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
             this.cancelSearch.emit();
         } else {
             // close dropdown
-            this.combobox.open = false;
+            this.combobox.isOpenChangeHandle(false);
+
+            // if there is no input text, don't emit event
+            if (!this.inputText) {
+                return;
+            }
 
             this.searchSubmit.emit({
                 text: this.inputText,
