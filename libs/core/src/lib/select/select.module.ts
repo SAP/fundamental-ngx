@@ -5,7 +5,7 @@ import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/public_api';
+import { IconModule } from '../icon/icon.module';
 
 @NgModule({
     declarations: [
