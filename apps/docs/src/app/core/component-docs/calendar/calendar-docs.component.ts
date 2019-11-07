@@ -102,7 +102,7 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18n: ExampleFile[] = [
         {
             language: 'typescript',
-            component: 'CustomCalendarI18n',
+            component: 'CalendarI18nExampleComponent',
             fileName: 'calendar-i18n-example',
             code: calendarIntlSrc
         }
@@ -111,8 +111,8 @@ myDisableFunction = function(d: FdDate): boolean {
     calendari18nMoment: ExampleFile[] = [
         {
             language: 'typescript',
-            component: 'CustomI18nMomentCalendar',
-            fileName: 'calendar--i18n-moment-example',
+            component: 'CalendarI18nMomentExampleComponent',
+            fileName: 'calendar-i18n-moment-example',
             code: calendarIntlMomentSrc
         }
     ];
