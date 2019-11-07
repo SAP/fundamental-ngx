@@ -80,10 +80,10 @@
                 }
             }
         }
-		&.fd-button--noborder {
+		&.fd-button--noborder{
 			  border-color: var(--sapButton_Lite_Background, transparent);
 		}
-		&.fd-button--splitborder {
+		&.fd-button--splitborder{
 			border:1px solid;
 			border-radius: var(--sapElement_BorderCornerRadius, .25rem);
 			&::after{
@@ -92,7 +92,7 @@
 					height: -webkit-fill-available;
 			}
 		}
-		&.fd-button--regularborder {
+		&.fd-button--regularborder{
 			border-radius: var(--sapElement_BorderCornerRadius, .25rem);
 		}
 
@@ -108,4 +108,11 @@
     .fd-select-popover-body-custom {
         display: block;
     }
+}
+
+// truncation of the overflowing component text
+.fd-dropdown_truncation{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
 }

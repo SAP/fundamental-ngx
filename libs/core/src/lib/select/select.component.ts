@@ -70,6 +70,14 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     @Input()
     maxHeight: string;
 
+    /** Select type defines the border type of the select button. */
+    @Input()
+    selectType: string = '';
+    
+    /** Glyph to add icon in the select component. */
+    @Input()
+    glyph: string = '';
+
     /** Popper.js options of the popover. */
     @Input()
     popperOptions: PopperOptions = {
