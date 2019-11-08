@@ -55,7 +55,6 @@
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
   },
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.803.18",
     "@angular/animations": "^8.2.7",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.7",
@@ -81,6 +80,7 @@
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^0.803.18",
     "@angular-devkit/build-ng-packagr": "^0.803.18",
     "@angular-devkit/core": "^7.3.9",
     "@angular/cli": "^8.3.17",
