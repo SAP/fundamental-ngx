@@ -2,4 +2,8 @@
 
 .fd-nested-list__item {
     display: block;
+
+    .fd-nested-list__link {
+        cursor: pointer;
+    }
 }

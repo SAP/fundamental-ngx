@@ -9,7 +9,7 @@
     }
 
     .fd-nested-list__popover-header {
-        box-shadow: 0 0 0.25rem 0 fade(#000, 15 inset 0 -0.0625rem 0 0 #000);
+        box-shadow: 0 0 0.25rem 0 rgba(0,0,0,0.15), inset 0 -0.0625rem 0 0 #d9d9d9;
     }
 }
 

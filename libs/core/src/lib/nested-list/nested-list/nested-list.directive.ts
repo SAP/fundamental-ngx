@@ -51,10 +51,12 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     ngAfterContentInit(): void {
-        /** Nested level is not set, when there is condensed mode. */
-        if (!this.nestedListStateService.condensed) {
-            this.handleNestedLevel(this.getNestedLevel());
+        let nestedLevel: number = this.getNestedLevel();
+        /** If there is condensed mode, maximum 2nd level class of nest can be added */
+        if (this.nestedListStateService.condensed) {
+            nestedLevel = Math.min(...[nestedLevel, 2]);
         }
+        this.handleNestedLevel(nestedLevel);
     }
 
     /** @hidden */
