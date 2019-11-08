@@ -125,7 +125,7 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
      * implemented method for `focus` from `DefaultMenuItem`
      */
     public focus(): void {
-        this.itemEl.nativeElement.focus();
+        this.itemEl.nativeElement.children[0].focus();
     }
     /**
      * implemented method for `click` from `DefaultMenuItem`

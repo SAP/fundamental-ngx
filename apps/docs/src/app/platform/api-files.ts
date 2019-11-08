@@ -5,7 +5,6 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    button: [
-        'buttoncomponent'
-    ]
+    button: ['buttoncomponent'],
+    menu: ['MenuComponent', 'MenuItemComponent']
 };

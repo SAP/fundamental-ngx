@@ -18,6 +18,15 @@ import {
 } from '../platform/component-docs/platform-button/platform-button-examples/platform-button-examples.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
+import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
+import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
+import {
+    PlatformBasicMenuExampleComponent,
+    PlatformMenuGroupExampleComponent,
+    PlatformMenuSeparatorExampleComponent,
+    PlatformMenuIconsExampleComponent,
+    PlatformComplexMenuExampleComponent
+} from './component-docs/platform-menu/platform-menu-examples/platform-menu-examples.component';
 
 @NgModule({
     declarations: [
@@ -31,8 +40,14 @@ import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
         PlatformButtonStateExampleComponent,
         PlatformButtonHeaderComponent,
         PlatformButtonTruncateExampleComponent,
+        PlatformMenuDocsComponent,
+        PlatformMenuHeaderComponent,
+        PlatformBasicMenuExampleComponent,
+        PlatformMenuGroupExampleComponent,
+        PlatformMenuSeparatorExampleComponent,
+        PlatformMenuIconsExampleComponent,
+        PlatformComplexMenuExampleComponent,
         NewComponentComponent
-
     ],
     imports: [
         SharedDocumentationModule,
@@ -44,4 +59,4 @@ import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
         { provide: 'CURRENT_LIB', useValue: 'platform' }
     ]
 })
-export class PlatformDocumentationModule { }
+export class PlatformDocumentationModule {}
