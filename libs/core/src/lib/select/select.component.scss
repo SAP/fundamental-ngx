@@ -80,6 +80,22 @@
                 }
             }
         }
+		&.fd-button--noborder {
+			  border-color: var(--sapButton_Lite_Background, transparent);
+		}
+		&.fd-button--splitborder {
+			border:1px solid;
+			border-radius: var(--sapElement_BorderCornerRadius, .25rem);
+			&::after{
+				    border-left-style: solid;
+                    border-left-width: 1px;
+					height: -webkit-fill-available;
+			}
+		}
+		&.fd-button--regularborder {
+			border-radius: var(--sapElement_BorderCornerRadius, .25rem);
+		}
+
     }
 
     .fd-select-text-custom {
