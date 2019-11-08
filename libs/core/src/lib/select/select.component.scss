@@ -19,7 +19,7 @@
         width: 100%;
         border-color: var(--sapUiFieldBorderColor, #89919a);
         color: var(--sapUiFieldTextColor, #32363a);
-        border-radius: 0.125rem;
+        border-radius: var(--sapElement_BorderCornerRadius, .25rem);
 
         &::after {
             font-family: 'SAP-icons';
