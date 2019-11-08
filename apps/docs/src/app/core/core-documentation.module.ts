@@ -402,6 +402,7 @@ import { SideNavigationCondensedObjectExampleComponent } from './component-docs/
 import { SideNavigationMultipleSelectedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
 import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
+import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
 
 
 @NgModule({
@@ -733,6 +734,7 @@ import { DatetimePickerComplexI18nExampleComponent } from './component-docs/date
         SelectFormsComponent,
         SelectViewValueExampleComponent,
         SelectMaxHeightExampleComponent,
+        SelectTypesExampleComponent,
         CalendarI18nMomentExampleComponent,
         SelectMaxHeightExampleComponent,
         NotificationDocsComponent,
