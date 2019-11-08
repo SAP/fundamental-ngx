@@ -15,10 +15,12 @@
                     [attr.aria-expanded]="isOpen"
                     [ngClass]="{'fd-button--compact': compact}"
                     [disabled]="disabled"
-                    [class.fd-button--noborder]="selectType==='noborder'"
-                    [class.fd-button--splitborder]="selectType==='splitborder'">
-                <fd-icon *ngIf="glyph!==''" size="m" [glyph]="glyph" class="fd-template-icon" style="margin-top: 3px; margin-right: 12px">
-                </fd-icon>
+					[class.fd-button--noborder]="selectType==='noborder'"
+					[class.fd-button--splitborder]="selectType==='splitborder'"
+					[class.fd-button--compact]="compact===true">
+				<fd-icon *ngIf="glyph!==''" size="m" [glyph]="glyph" class="fd-template-icon"
+					style="margin-top: 3px; margin-right: 12px">
+				</fd-icon>
                 <span class="fd-select-text-custom">{{triggerValue}}</span>
             </button>
         </ng-container>
