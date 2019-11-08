@@ -19,7 +19,7 @@
         width: 100%;
         border-color: var(--sapUiFieldBorderColor, #89919a);
         color: var(--sapUiFieldTextColor, #32363a);
-        border-radius: var(--sapElement_BorderCornerRadius, .25rem);
+        border-radius: 0.125rem;
 
         &::after {
             font-family: 'SAP-icons';
@@ -85,17 +85,12 @@
 		}
 		&.fd-button--splitborder{
 			border:1px solid;
-			border-radius: var(--sapElement_BorderCornerRadius, .25rem);
 			&::after{
 				    border-left-style: solid;
                     border-left-width: 1px;
 					height: -webkit-fill-available;
 			}
 		}
-		&.fd-button--regularborder{
-			border-radius: var(--sapElement_BorderCornerRadius, .25rem);
-		}
-
     }
 
     .fd-select-text-custom {
