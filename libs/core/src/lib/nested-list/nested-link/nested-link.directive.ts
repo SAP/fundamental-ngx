@@ -43,7 +43,7 @@ export class NestedLinkDirective implements OnInit {
     /** Whether this element is selected, the `selected` state is propagated to all of parent elements */
     @Input()
     set selected(selected: boolean) {
-        if (this._selected != selected) {
+        if (this._selected !== selected) {
             this._selected = selected;
             this.controlSelected = selected;
             this.nestedListStateService.refresh$.next();

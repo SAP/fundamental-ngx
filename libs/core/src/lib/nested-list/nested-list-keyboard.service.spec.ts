@@ -13,7 +13,7 @@ class MockNestedItem {
     hasChildren: boolean;
     triggerOpen = () => {};
     triggerClose = () => {};
-    focus = () => { console.log('focused'); };
+    focus = () => {};
     click = () => {};
 
     constructor(

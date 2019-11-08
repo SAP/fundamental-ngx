@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, ViewChild } from '@angular/core';
 import { NestedListDirective } from '../nested-list/nested-list.directive';
 import { NestedListModel } from '../nested-list-model';
+import { NestedListStateService } from '../nested-list-state.service';
 
 /**
  * Component for internal usage, allows to generate the nested list from defined object.
@@ -10,7 +11,7 @@ import { NestedListModel } from '../nested-list-model';
   templateUrl: './prepared-nested-list.component.html',
   styleUrls: ['./prepared-nested-list.component.scss']
 })
-export class PreparedNestedListComponent {
+export class PreparedNestedListComponent implements AfterViewInit {
 
     /**
      * @hidden
@@ -37,4 +38,17 @@ export class PreparedNestedListComponent {
      */
     @ViewChild(forwardRef(() => NestedListDirective), { static: false })
     nestedListDirective: NestedListDirective;
+
+    /** @hidden */
+    constructor (
+        private changeDetRef: ChangeDetectorRef,
+        private stateService: NestedListStateService
+    ) {}
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.stateService.propagateSelected(this.nestedListDirective);
+        this.changeDetRef.markForCheck();
+        this.changeDetRef.detectChanges();
+    }
 }
