@@ -32,7 +32,7 @@ export class ButtonDocsComponent implements OnInit {
                     },
                     options: {
                         type: 'string',
-                        enum: ['', 'emphasized', 'light']
+                        enum: ['', 'emphasized', 'light', 'menu']
                     },
                     compact: {
                         type: 'boolean'

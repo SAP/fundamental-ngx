@@ -3,7 +3,7 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'half';
-export type ButtonOptions = 'light' | 'emphasized';
+export type ButtonOptions = 'light' | 'emphasized' | 'menu';
 
 /**
  * Button directive, used to enhance standard HTML buttons.
