@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.23"></a>
+# [0.13.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.21...v0.13.0-rc.23) (2019-11-08)
+
+
+### Bug Fixes
+
+* popover-placement-example fix for the control elements ([#1549](https://github.com/SAP/fundamental-ngx/issues/1549)) ([78ea4a7](https://github.com/SAP/fundamental-ngx/commit/78ea4a7))
+* **core:** Add menu option to button ([#1565](https://github.com/SAP/fundamental-ngx/issues/1565)) ([7523438](https://github.com/SAP/fundamental-ngx/commit/7523438))
+* **core:** navigation mode for tab ([#1566](https://github.com/SAP/fundamental-ngx/issues/1566)) ([5cb01b5](https://github.com/SAP/fundamental-ngx/commit/5cb01b5))
+* **platform:search-input:** Supress emit or "searchSubmit" event when input text is empty ([#1476](https://github.com/SAP/fundamental-ngx/issues/1476)) ([8399204](https://github.com/SAP/fundamental-ngx/commit/8399204))
+
+
+
 <a name="0.13.0-rc.21"></a>
 # [0.13.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.20...v0.13.0-rc.21) (2019-11-05)
 
