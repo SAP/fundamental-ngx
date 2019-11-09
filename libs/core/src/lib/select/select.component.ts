@@ -15,6 +15,8 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 
+type SelectType = 'noborder' | 'splitborder';
+
 /**
  * Select component intended to mimic the behaviour of the native select element.
  */
