@@ -1,0 +1,39 @@
+<p>Selected Value: {{this.selectValue}}</p>
+<fd-select class="fd-select-example" 
+    [(value)]="selectValue" 
+    [selectType]="'noborder'"
+    [placeholder]="'Select with no border'">
+    <fd-option *ngFor="let option of options"
+        [value]="option">
+        {{option}}
+    </fd-option>
+</fd-select>
+
+<fd-select class="fd-select-example"  
+    [(value)]="selectValue" 
+    [selectType]="'splitborder'"
+    [placeholder]="'select with split border'">
+    <fd-option *ngFor="let option of options"
+        [value]="option">
+        {{option}}
+    </fd-option>
+</fd-select>
+
+<fd-select class="fd-select-example"  
+    [(value)]="selectValue" 
+    [placeholder]="'Default select'">
+    <fd-option *ngFor="let option of options"
+        [value]="option">
+        {{option}}
+    </fd-option>
+</fd-select>
+
+<fd-select class="fd-select-example"  
+    [(value)]="selectValue" 
+    [glyph]="'filter'" 
+    [placeholder]="'Default select with icon'">
+    <fd-option *ngFor="let option of options"
+        [value]="option">
+        {{option}}
+    </fd-option>
+</fd-select>
