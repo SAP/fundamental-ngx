@@ -756,6 +756,9 @@ import { ComboboxOpenControlExampleComponent } from './component-docs/combobox/e
         SharedDocumentationModule,
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
+    ],
+    providers: [
+        { provide: 'CURRENT_LIB', useValue: 'core' }
     ]
 })
 export class CoreDocumentationModule {

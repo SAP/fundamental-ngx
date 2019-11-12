@@ -6,15 +6,20 @@
         NGX
     </span>
 </a>
-
-
-<div class="fd-docs&#45;&#45;toolbar__lib">
-    <span>Platform</span>
-    <fd-toggle [ngModel]="isOnCore" [size]="'s'" (ngModelChange)="changeLibChange()"></fd-toggle>
-    <span>Core</span>
+<div class="fd-docs--toolbar__lib">
+    <fd-product-menu [control]="isOnCore ? 'Core' : 'Platform'"
+                     [closePopoverOnSelect]="true"
+                     [items]="items">
+    </fd-product-menu>
 </div>
-
 <span class="fd-docs--toolbar__spacer"></span>
+
+
+<!--<div class="fd-docs&#45;&#45;toolbar__lib">-->
+<!--    <button fd-button *ngIf="isOnCore" [fdType]="'medium'" [options]="'emphasized'" (click)="changeLibChange()">Platform Docs</button>-->
+<!--    <button fd-button *ngIf="!isOnCore" [fdType]="'medium'" [options]="'emphasized'" (click)="changeLibChange()">Core Docs</button>-->
+<!--</div>-->
+
 <span class="fd-docs--toolbar__version">v{{version}}</span>
 <a href="https://github.com/SAP/fundamental-ngx" title="Find us on Github!">
     <svg class="logo-github logo-github--white" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px"

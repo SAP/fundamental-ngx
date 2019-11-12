@@ -39,6 +39,9 @@ import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
+    ],
+    providers: [
+        { provide: 'CURRENT_LIB', useValue: 'platform' }
     ]
 })
 export class PlatformDocumentationModule { }
