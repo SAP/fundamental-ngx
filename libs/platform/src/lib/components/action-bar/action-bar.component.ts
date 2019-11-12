@@ -5,7 +5,9 @@ import {
     Input,
     Output,
     EventEmitter,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 import { Placement } from 'popper.js';
 
@@ -73,10 +75,9 @@ export class ActionBarComponent implements OnInit {
     actionItems: ActionItem[];
 
     /**
-     * option to specify the sticky action bar.
+     * View child of action bar component
      */
-    @Input()
-    sticky = false;
+    @ViewChild('inputTitle', { static: false }) private inputTitle: ElementRef;
 
     /**
      * Emitted event when "back" button is clicked.
@@ -103,6 +104,7 @@ export class ActionBarComponent implements OnInit {
 
     enableEditTitle(editing: boolean) {
         this.editing = editing;
+        setTimeout(() => this.inputTitle.nativeElement.focus(), 0);
         this.cd.markForCheck();
     }
 

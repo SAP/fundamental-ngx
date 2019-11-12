@@ -27,6 +27,7 @@
         <div fd-form-set *ngIf="editing">
             <div fd-form-item>
                 <input
+                    #inputTitle
                     fd-form-control
                     *ngIf="editing"
                     class="fd-input edit-actionbar-title"
@@ -38,7 +39,12 @@
                 />
             </div>
         </div>
-        <p class="fd-action-bar__description" [attr.title]="description" data-tag="actionbar__description">
+        <p
+            *ngIf="description"
+            class="fd-action-bar__description"
+            [attr.title]="description"
+            data-tag="actionbar__description"
+        >
             {{ description }}
         </p>
     </div>
