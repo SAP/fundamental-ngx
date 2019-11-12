@@ -10,6 +10,7 @@ export class SelectTypesExampleComponent implements OnInit {
     selectValue1: string;
     selectValue2: string;
     selectValue3: string;
+    selectValue4: string;
 
 
     options: string[] = [
