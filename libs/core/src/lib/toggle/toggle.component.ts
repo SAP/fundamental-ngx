@@ -33,8 +33,7 @@ let toggleUniqueId: number = 0;
         class: 'fd-form__item fd-form__item--check fd-toggle-custom',
         '[attr.id]': 'id',
     },
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
