@@ -16,7 +16,7 @@ let tabPanelUniqueId: number = 0;
         '[attr.aria-expanded]': 'expanded ? true : null',
         '[class.is-expanded]': 'expanded'
     },
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class TabPanelComponent {
 

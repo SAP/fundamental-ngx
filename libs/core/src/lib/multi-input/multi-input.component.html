@@ -2,6 +2,7 @@
     <fd-popover [(isOpen)]="isOpen"
                 [triggers]="[]"
                 [disabled]="disabled"
+                [closeOnOutsideClick]="true"
                 [fillControlMode]="fillControlMode"
                 class="fd-multi-input-popover-custom">
         <fd-popover-control>
@@ -9,18 +10,20 @@
                  [attr.aria-label]="multiInputBodyLabel"
                  [attr.aria-expanded]="isOpen">
                 <fd-input-group
+                    [buttonFocusable]="false"
                     [disabled]="disabled"
                     [compact]="compact"
                     [button]="true"
                     [glyph]="glyph"
                     (addOnButtonClicked)="isOpen = !isOpen">
                     <input type="text" class="fd-input" fd-input-group-input
+                           #searchInputElement
                            [ngClass]="{'fd-input--compact': compact}"
                            [placeholder]="placeholder"
                            [disabled]="disabled"
                            [(ngModel)]="searchTerm"
                            (ngModelChange)="handleSearchTermChange()"
-                           (keypress)="isOpen = true"
+                           (keydown)="handleInputKeydown($event)"
                            (click)="isOpen = !isOpen">
                 </fd-input-group>
             </div>
@@ -30,8 +33,8 @@
                      *ngIf="displayedValues && displayedValues.length"
                      [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
-                    <li *ngFor="let value of displayedValues">
-                        <label fd-menu-item>
+                    <li *ngFor="let value of displayedValues; let ind  = index">
+                        <label fd-menu-item (keydown)="handleKeyDown($event, ind)">
                             <input type="checkbox" class="fd-checkbox"
                                    [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                    (ngModelChange)="handleSelect($event, value)">
