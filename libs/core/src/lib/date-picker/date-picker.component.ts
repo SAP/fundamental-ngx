@@ -304,6 +304,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectionRef.detectChanges();
     }
 
     /**

@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -78,6 +78,10 @@ export class FileInputComponent implements ControlValueAccessor {
     @Output()
     readonly onDragLeave: EventEmitter<void> = new EventEmitter<void>();
 
+    constructor (
+        private changeDetRef: ChangeDetectorRef
+    ) {}
+
     /** @hidden */
     onChange: Function = () => {};
 
@@ -97,6 +101,7 @@ export class FileInputComponent implements ControlValueAccessor {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetRef.detectChanges();
     }
 
     /** @hidden */

@@ -1,5 +1,6 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -33,7 +34,8 @@ let toggleUniqueId: number = 0;
         class: 'fd-form__item fd-form__item--check fd-toggle-custom',
         '[attr.id]': 'id',
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** @hidden */
@@ -145,6 +147,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectorRef.detectChanges();
     }
 
 }

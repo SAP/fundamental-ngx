@@ -118,6 +118,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetRef.detectChanges();
     }
 
     constructor(
