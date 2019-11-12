@@ -1,10 +1,18 @@
 # Contributing to Fundamental NGX
 
-We're excited that you're interested in contributing to Fundamental NGX! Your contribution can make this library even better. Please read the guidelines regarding contributions:
+We're excited that you're interested in contributing to Fundamental NGX! Your contribution can make this library even better. 
+As a contributor, here are the guidelines we would like you to follow:
 
--   [Issues and Bugs](#issues-and-bugs)
--   [Feature Requests](#feature-requests)
--   [Contribute Code](#contribute-code)
+ - [Issues and Bugs](#issues-and-bugs)
+ - [Feature Requests](#feature-requests)
+ - [Contribute Code](#contribute-code)
+ - [Submission Guidelines](#submit)
+ - [Commit Message Guidelines](#commit)
+ - [Create PR Title Guidelines](#pr)
+ - [Submitting a Pull Request ](#submit-pr)
+
+
+
 
 ## Issues and Bugs
 
@@ -48,11 +56,11 @@ Status of closed issues:
 -   works: The issue cannot be reproduced, or the feature is working as expected.
 -   wontfix: The issue will not be fixed.
 
-## Contribute Code
+## <a name="contribute-code"></a> Contribute Code
 
 You are welcome to contribute code to Fundamental NGX in order to fix issues or to add new features.
 
-There are three important things to consider:
+There are two important things to consider:
 
 1.  You must be aware of the Apache License (which describes contributions) and **agree to the Contributors License Agreement**. This is common practice in all major Open Source projects. If you are an individual contributor, use _[CLA assistant](https://cla-assistant.io/)_. CLA assistant is an open source tool that integrates with GitHub and enables a one-click-experience for accepting the CLA. If you are contributing on behalf of a company, see the [Company Contributors](#company-contributors) section below for details.
 2.  You must follow **code style, quality, and product standards requirements**. You can find more information on the coding guidelines below.
@@ -77,20 +85,280 @@ the [Corporate Contributor License Agreement](/docs/SAP%20Corporate%20Contributo
 
 The form lists all employees who are authorized to contribute on behalf of your company. When this list changes, please let us know.
 
-### Contribution Content Guidelines
 
-You must follow the coding style as best you can when submitting code. Take note of naming conventions, separation of concerns, and formatting rules. You can use the code formatter [Prettier](https://prettier.io/) to handle some of this for you automatically. You can find the [Prettier configuration file](https://github.com/SAP/fundamental-ngx/blob/master/.prettierrc), which defines some simple formatting rules, in the root repository.
+## <a name="submit"></a> Submission Guidelines
+## <a name="commit"></a> Commit Message Guidelines
 
-### How to contribute - the Process
+We have very precise rules over how our git commit messages can be formatted.  This leads to **more
+readable messages** that are easy to follow when looking through the **project history**. 
 
-1.  Make sure the issue you've filed in the [issue tracker] has the label "contribution welcome" - otherwise, it is not ready to be worked on.
-2.  Fork the Fundamental NGX repository to your GitHub account.
-3.  Create a branch for your issue or feature, and commit or push your changes on that branch.
-4.  Follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
-5.  Create a Pull Request from your forked repository to github.com/SAP/fundamental-ngx. In the subject of the pull request, use "fix:" to denote a bug fix, "feat:" to denote an enhancement or "chore:" for small configuration updates and briefly describe the bug fix or enhancement you're contributing. In the pull request description, please provide a link to the issue in the issue tracker. **Do not include "BREAKING CHANGE" in the subject or description.**
-6.  Follow the link posted by the CLA assistant to your pull request and accept it, as described above.
-7.  Wait for our code review and approval. We may ask you for additional commits, or make changes to your pull request ourselves.
-    -   Note that the Fundamental NGX developers also have their regular duties so, depending on the required effort for reviewing, testing, and clarification, this may take a while.
-8.  Once the change has been approved, we inform you in a comment.
-9.  Your pull request cannot be merged directly into the branch (internal SAP processes), but is merged internally and immediately appears in the public repository as well.
-10. We close the pull request. You can then delete the now obsolete branch.
+### Commit Message Format
+Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
+format that includes a **type**, a **scope** and a **subject**:
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+The **header** is mandatory and the **scope** of the header is optional.
+
+Any line of the commit message cannot be longer than 100 characters! This ensures that the message 
+is easy to read in GitHub and in other git tools.
+
+The footer should contain a [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/) if any.
+
+Samples: 
+
+```
+docs(core): update changelog to beta.5
+```
+```
+fix(platform): need to depend on latest rxjs and zone.js
+
+The version in our package.json gets copied to the one we publish, and users need the latest of these.
+```
+
+
+```
+fix(platform): Actionbar as component
+
+```
+
+
+### Revert
+If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is the SHA of the commit being reverted.
+
+### Type
+Must be one of the following:
+
+* **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+* **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
+* **docs**: Documentation only changes
+* **feat**: A new feature
+* **fix**: A bug fix
+* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+* **test**: Adding missing tests or correcting existing tests
+
+### Scope
+The scope should be the name of the npm package affected (as perceived by the person reading the changelog 
+generated from commit messages).
+
+The following is the list of supported scopes:
+
+* **core**
+* **platform**
+* **doc-app**
+
+There are currently a few exceptions to the "use package name" rule:
+
+* **changelog**: used for updating the release notes in CHANGELOG.md
+* **doc-app**: used for docs-app (angular.io) related changes within the /aio directory of the
+  repo
+* none/empty string: useful for `style`, `test` and `refactor` changes that are done across all
+  packages (e.g. `style: add missing semicolons`) and for docs changes that are not related to a
+  specific package (e.g. `docs: fix typo in tutorial`).
+
+### Subject
+The subject contains a succinct description of the change:
+
+* use the imperative, present tense: "change" not "changed" nor "changes"
+* don't capitalize the first letter
+* no dot (.) at the end
+
+### Body
+Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes".
+The body should include the motivation for the change and contrast this with previous behavior.
+
+### Footer
+The footer should contain any information about **Breaking Changes** and should reference the GitHub 
+issues that this commit **Closes**.
+
+
+**Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. 
+The rest of the commit message is then used for this.
+
+A detailed explanation can be found in this [document][commit-message-format].
+
+## <a name="pr"></a> Create PR Guidelines
+
+If you look at the format of our npm packages you will see:
+
+`0.11.0-rc.10` which should be read as `MAJOR` . `MINOR` . `PATCH PR-BUILD`.
+  
+The number of the **PR Title (not commit message)** will be chosen automatically as part of the CI 
+process.
+
+### PR Title Format
+
+The PR title must follow this format:
+
+
+```
+<type>: <subject>
+```
+
+Samples:
+
+```
+feat: My adding new binding to button component
+```
+
+
+```
+chore: Updated package.json
+```
+
+##### Type
+
+Type can have following values: `WIP|feat|chore|test|doc|fix`.
+
+The `WIP` represent work in progress and it will not be merged, so please make sure to use one of 
+the specific format such as `feat|chore|test|doc|fix` if your PR needs to be merged with master 
+
+
+
+Here are following rules behind the PR title message:
+
+* Bump up PATCH version -` fix:` or  `feat:` 
+    * Here goes all the features and fixes commits
+* To bump up the MINOR version (the feature):
+   * We run script to change the middle number. 
+* To bump the MAJOR
+   * Run script as well. The process was adjusted to work only with Patch and Minor versions at the moment
+
+
+## <a name="submit-issue"></a> Submitting an Issue
+
+Before you submit an issue, please search the issue tracker, maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
+
+A minimal reproduction allows us to quickly confirm a bug (or point out a coding problem) as well as confirm that we are fixing the right problem.
+
+We will be insisting on a minimal reproduction scenario in order to save maintainers time and ultimately be able to fix more bugs. Interestingly, from our experience users often find coding problems themselves while preparing a minimal reproduction. We understand that sometimes it might be hard to extract essential bits of code from a larger code-base but we really need to isolate the problem before we can fix it.
+
+Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you we are going to close an issue that doesn't have enough info to be reproduced.
+
+
+### <a name="submit-pr"></a> Submitting a Pull Request (PR)
+Before you submit your Pull Request (PR) consider the following guidelines:
+
+1. Search [GitHub](https://github.com/SAP/fundamental-ngx/pulls) for an open or closed PR
+  that relates to your submission. You don't want to duplicate effort.
+1. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you'd like to add.
+  Discussing the design up front helps to ensure that we're ready to accept your work.
+1. Fork the fundamental-ngx repo.
+1. Make your changes in a new git branch:
+
+     ```shell
+     git checkout -b my-fix-branch master
+     ```
+
+1. Create your patch, **including appropriate test cases**.
+1. Follow our [Coding Rules](#rules). // Todo: Link to other document guidelines
+1. Run the full test suite and ensure that all tests pass.
+1. Run the full lint suite and ensure that all checks pass.
+1. Commit your changes using a descriptive commit message that follows our
+  [commit message conventions](#commit). Adherence to these conventions
+  is necessary because release notes are automatically generated from these messages.
+
+     ```shell
+     git commit -a
+     ```
+    Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
+
+1. Push your branch to GitHub:
+
+    ```shell
+    git push origin my-fix-branch
+    ```
+
+**Make sure you rebase before you push - to guaranteee your branch is not outdated!**
+ 
+ 
+ _There should not be any Merge commits. When they are you haven't properly rebased_!
+
+
+1. In GitHub, Create Pull Request.
+
+* If we suggest changes then:
+  * Make the required updates.
+  * Re-run the test suites to ensure tests are still passing.
+  * Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
+
+    ```shell
+    git rebase master -i
+    git push -f
+    ```
+
+That's it! Thank you for your contribution!
+
+
+
+
+#### After your pull request is merged
+
+After your pull request is merged, you can safely delete your branch and pull the changes
+from the main (upstream) repository:
+
+* Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
+
+    ```shell
+    git push origin --delete my-fix-branch
+    ```
+
+* Check out the master branch:
+
+    ```shell
+    git checkout master -f
+    ```
+
+* Delete the local branch:
+
+    ```shell
+    git branch -D my-fix-branch
+    ```
+
+* Update your master with the latest upstream version:
+
+    ```shell
+    git pull --ff upstream master
+    ```
+
+## <a name="rules"></a> Coding Rules
+To ensure consistency throughout the source code, keep these rules in mind as you are working:
+
+* All features or bug fixes **must be tested** by one or more specs (unit-tests).
+* All public API methods **must be documented**. (Details TBC).
+* We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
+  **100 characters**. An automated formatter is available, see
+  [DEVELOPER.md](docs/DEVELOPER.md#clang-format).
+
+
+## <a name="cla"></a> Signing the CLA
+
+Please sign our Contributor License Agreement (CLA) before sending pull requests. For any code
+changes to be accepted, the CLA must be signed. It's a quick process, we promise!
+
+* For individuals we have a [simple click-through form][individual-cla].
+* For corporations we'll need you to
+  [print, sign and one of scan+email, fax or mail the form][corporate-cla].
+
+<hr>
+
+  If you have more than one Git identity, you must make sure that you sign the CLA using the primary email address associated with the ID that has been granted access to the Angular repository. Git identities can be associated with more than one email address, and only one is primary. Here are some links to help you sort out multiple Git identities and email addresses:
+
+  * https://help.github.com/articles/setting-your-commit-email-address-in-git/
+  * https://stackoverflow.com/questions/37245303/what-does-usera-committed-with-userb-13-days-ago-on-github-mean
+  * https://help.github.com/articles/about-commit-email-addresses/
+  * https://help.github.com/articles/blocking-command-line-pushes-that-expose-your-personal-email-address/
+
+  Note that if you have more than one Git identity, it is important to verify that you are logged in with the same ID with which you signed the CLA, before you commit changes. If not, your PR will fail the CLA check.
+
+<hr>
+
+[commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/preview
+

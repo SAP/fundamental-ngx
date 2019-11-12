@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
@@ -11,7 +11,8 @@ import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
         '[class.fd-has-display-block]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./panel.component.scss']
+    styleUrls: ['./panel.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelComponent extends AbstractFdNgxClass {
 

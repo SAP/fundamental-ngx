@@ -1,12 +1,11 @@
 <fd-popover [noArrow]="false"
             [placement]="placement"
-            [triggers]="triggers"
-    >
+            [triggers]="triggers">
         <fd-popover-control>
-            <span class="fd-inline-help" role="alert"></span>
+            <span class="fd-inline-help" [ngStyle]="inlineHelpIconStyle" role="alert"></span>
         </fd-popover-control>
         <fd-popover-body>
-            <span class="fd-inline-help__content">
+            <span class="fd-inline-help__content" [ngStyle]="inlineHelpContentStyle">
                 <ng-content></ng-content>
             </span>
         </fd-popover-body>

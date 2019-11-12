@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { AfterViewInit, Component, Injectable } from '@angular/core';
 import { CalendarI18n, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
 
 const localized_values = {
@@ -66,6 +66,17 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         }
     ]
 })
-export class CalendarI18nExampleComponent {
+export class CalendarI18nExampleComponent implements AfterViewInit {
         date = FdDate.getToday();
+
+        constructor (
+            private calendarI18n: CalendarI18n,
+            private calendarI18nLabels: CalendarI18nLabels
+        ) {}
+
+        ngAfterViewInit(): void {
+            this.calendarI18n.i18nChange.next();
+            this.calendarI18nLabels.labelsChange.next();
+        }
+
 }

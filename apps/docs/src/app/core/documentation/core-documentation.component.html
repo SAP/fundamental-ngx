@@ -5,7 +5,7 @@
         [sections]="sections"
         [(sideCollapsed)]="sideCollapsed"
     ></sections-toolbar>
-    <div tabindex="0" class="content" #content>
+    <div tabindex="0" class="content" #content id="page-content">
         <div class="content-margin">
             <router-outlet (activate)="onActivate()"></router-outlet>
         </div>

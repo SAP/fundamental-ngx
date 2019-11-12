@@ -51,6 +51,24 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'open-control'" [componentName]="'combobox'">
+    Open State Control
+</fd-docs-section-title>
+<description>
+    By subscribing to event <code>(openChange)</code> it is possible to detect the changes of open state in combobox.
+</description>
+<description>
+    By passing <code>[closeOnOutsideClick]="false"</code>, <code>[openOnKeyboardEvent]="false"</code> and
+    <code>[triggers]="[]"</code>, it is possible to fully control the <code>open</code> state of combobox. To change it
+    pass variable to <code>[open]</code>.
+</description>
+<component-example [name]="'ex5'">
+    <fd-combobox-open-control-example></fd-combobox-open-control-example>
+</component-example>
+<code-example [exampleFiles]="comboboxOpenChangeExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'combobox-observableAsync'" [componentName]="'combobox'">
     Observable Async Example
 </fd-docs-section-title>
@@ -61,7 +79,7 @@
 <description>
     This example also demonstrates how to create a callback function from data returned by the observable.
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-combobox-async-example></fd-combobox-async-example>
 </component-example>
 <code-example [exampleFiles]="comboboxAsyncExample"></code-example>
@@ -75,7 +93,7 @@
     The way the items are rendered in the popover list can be customized through providing an <code>itemTemplate</code>
     to the component.
 </description>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex7'">
     <fd-combobox-template-example></fd-combobox-template-example>
 </component-example>
 <code-example [exampleFiles]="comboboxTemplateExample"></code-example>
@@ -89,7 +107,7 @@
     This examples shows how to put <code>combobox</code> in a Reactive Form. Also how to sets it's state to
     <code>disabled</code>
 </description>
-<component-example [name]="'ex7'">
+<component-example [name]="'ex8'">
     <fd-combobox-disabled-example></fd-combobox-disabled-example>
 </component-example>
 <code-example [exampleFiles]="comboboxDisabledExample"></code-example>
@@ -103,7 +121,7 @@
     There is also the possibility to define a fixed height for the dropdown list by specifying the desired height using
     the <code>[maxHeight]</code> attribute.
 </description>
-<component-example [name]="'ex7'">
+<component-example [name]="'ex9'">
     <fd-combobox-height-example></fd-combobox-height-example>
 </component-example>
 <code-example [exampleFiles]="comboboxHeightExample"></code-example>
@@ -122,7 +140,7 @@
     value, until it matches one of displayed dropdown options. Also on this mode, combobox on communication uses model
     with same type as it's passed to <code>[dropdownValues]</code>
 </description>
-<component-example [name]="'ex6'">
+<component-example [name]="'ex10'">
     <fd-combobox-forms-example></fd-combobox-forms-example>
 </component-example>
 <code-example [exampleFiles]="comboboxFormExample"></code-example>

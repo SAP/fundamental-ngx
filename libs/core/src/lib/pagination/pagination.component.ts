@@ -1,12 +1,21 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewEncapsulation
+} from '@angular/core';
 import { PaginationService } from './pagination.service';
 
 /**
  * The component that is used to provide navigation between paged information.
  * ```html
- * <fd-pagination 
- *          [totalItems]="50" 
- *          [itemsPerPage]="10" 
+ * <fd-pagination
+ *          [totalItems]="50"
+ *          [itemsPerPage]="10"
  *          [currentPage]="3">
  * </fd-pagination>
  * ```
@@ -24,17 +33,18 @@ import { PaginationService } from './pagination.service';
         }
     `],
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./pagination.component.scss']
+    styleUrls: ['./pagination.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnChanges {
     /** Represents the total number of items. */
     @Input()
     totalItems: number;
-    
+
     /** Represents the current page number. */
     @Input()
     currentPage: number;
-    
+
     /** Represents the number of items per page. */
     @Input()
     itemsPerPage: number;
@@ -42,10 +52,10 @@ export class PaginationComponent implements OnChanges {
     /** Whether to display the total number of items. */
     @Input()
     displayTotalItems: boolean = true;
-    
-    /** 
-     * The text appended to the total number of items. 
-     * The default text is set to 'items' 
+
+    /**
+     * The text appended to the total number of items.
+     * The default text is set to 'items'
      */
     @Input()
     displayText: string = 'items';
@@ -118,7 +128,7 @@ export class PaginationComponent implements OnChanges {
     }
 
     /**
-     * Retrieves an object that represents 
+     * Retrieves an object that represents
      * the total number of items, the current page, and the number of items per page.
      */
     getPaginationObject() {

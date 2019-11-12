@@ -2,8 +2,13 @@
 
 #### Please provide a brief summary of this pull request.
 
-#### If this is a new feature, have you updated the documentation?
+#### Please check whether the PR fulfills the following requirements
 
-- [ ] `README.md`
+- [ ] the commit message follows the guideline:
+https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md
+- [ ] tests for the changes that have been done
+
+Documentation checklist:
+- [ ] update `README.md`
 - [ ] [Breaking Changes Wiki](https://github.com/SAP/fundamental-ngx/wiki/Breaking-Changes)
 - [ ] Documentation Examples

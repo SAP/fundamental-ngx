@@ -1,15 +1,18 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     forwardRef,
     Input,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
-    SimpleChanges, TemplateRef,
+    SimpleChanges,
+    TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -50,7 +53,8 @@ import focusTrap, { FocusTrap } from 'focus-trap';
         '[class.fd-combobox-custom-class]': 'true',
         '[class.fd-combobox-input]': 'true'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -71,6 +75,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     placeholder: string;
 
+    /** Whether the combobox is opened. */
+    @Input()
+    open: boolean = false;
+
     /** Icon to display in the right-side button. */
     @Input()
     glyph: string = 'navigation-down-arrow';
@@ -82,6 +90,16 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
      */
     @Input()
     triggers: string[] = ['click'];
+
+    /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
+    @Input()
+    closeOnOutsideClick: boolean = true;
+
+    /**
+     * Whether the combobox should open, when any key is pressed in input (except Escape, Space, Enter). True by default
+     */
+    @Input()
+    openOnKeyboardEvent: boolean = true;
 
     /**
      * The template with which to display the individual listed items.
@@ -131,6 +149,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
 
+    /** Event emitted, when the combobox's popover body is opened or closed */
+    @Output()
+    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
     /** @hidden */
     @ViewChildren(MenuItemDirective)
     menuItems: QueryList<MenuItemDirective>;
@@ -141,9 +164,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     displayedValues: any[] = [];
-
-    /** @hidden */
-    isOpen: boolean = false;
 
     /** @hidden */
     inputTextValue: string;
@@ -162,7 +182,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     constructor(
         private elRef: ElementRef,
-        private menuKeyboardService: MenuKeyboardService
+        private menuKeyboardService: MenuKeyboardService,
+        private cdRef: ChangeDetectorRef
     ) { }
 
     /** @hidden */
@@ -212,13 +233,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeyupHandler(event: KeyboardEvent) {
-        if (this.inputText &&
+        if (this.openOnKeyboardEvent &&
+            this.inputText &&
             this.inputText.length &&
             event.code !== 'Escape' &&
             event.code !== 'Space' &&
             event.code !== 'Enter') {
-            this.isOpen = true;
-            this.isOpenChangeHandle(this.isOpen);
+            this.isOpenChangeHandle(true);
         }
     }
 
@@ -259,6 +280,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         } else {
             this.inputTextValue = value;
         }
+        this.cdRef.markForCheck();
     }
 
     /** @hidden */
@@ -285,9 +307,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-        this.isOpen = isOpen;
+        this.open = isOpen;
+        this.openChange.emit(this.open);
         this.onTouched();
-        if (isOpen) {
+        if (open) {
             this.focusTrap.activate();
         } else {
             this.focusTrap.deactivate();
@@ -314,8 +337,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     private handleClickActions(term): void {
         if (this.closeOnSelect) {
-            this.isOpen = false;
-            this.isOpenChangeHandle(this.isOpen);
+            this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);

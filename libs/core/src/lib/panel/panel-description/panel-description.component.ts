@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Description of the panel title.
@@ -16,6 +16,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-panel-description',
     templateUrl: './panel-description.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelDescriptionComponent {}

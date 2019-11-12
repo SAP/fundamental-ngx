@@ -1,0 +1,25 @@
+Combobox with open state subscription.
+<br/>
+<fd-combobox [dropdownValues]="dropdownValues"
+             [placeholder]="'Combobox with open state subscription'"
+             (openChange)="handleIsOpenChange($event)"
+             [maxHeight]="'250px'">
+</fd-combobox>
+
+<br/>
+<br/>
+
+Fully controlled combobox.
+<br/>
+<button fd-button (click)="open = true">Open</button>
+<button fd-button (click)="open = false">Close</button>
+<fd-combobox [dropdownValues]="dropdownValues"
+             [open]="open"
+             [placeholder]="'Fully control open state on combobox'"
+             [closeOnOutsideClick]="false"
+             [openOnKeyboardEvent]="false"
+             [closeOnSelect]="false"
+             [triggers]="[]"
+             [maxHeight]="'250px'">
+</fd-combobox>
+

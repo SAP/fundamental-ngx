@@ -34,10 +34,22 @@ export class ModalTitleDirective {
 export class ModalCloseButtonDirective {
 
     /** @hidden */
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = 'close';
+
+    /** @hidden */
+    @HostBinding('class.sap-icon--decline')
+    sapIconDeclineClass: boolean = true;
+
+    /** @hidden */
+    @HostBinding('class.sap-icon--l')
+    sapIconLClass: boolean = true;
+
+    /** @hidden */
     @HostBinding('class.fd-button--light')
-    lightButton = true;
+    lightButtonClass: boolean = true;
 
     /** @hidden */
     @HostBinding('class.fd-modal__close')
-    modalClose = true;
+    modalCloseClass: boolean = true;
 }

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { modalFadeNgIf } from './modal-animations';
 
 @Component({
@@ -24,6 +24,7 @@ import { modalFadeNgIf } from './modal-animations';
     animations: [
         modalFadeNgIf
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalContainer {}

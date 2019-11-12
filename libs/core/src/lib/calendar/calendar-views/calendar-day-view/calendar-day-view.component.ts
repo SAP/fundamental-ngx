@@ -1,9 +1,10 @@
 import {
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     HostBinding,
-    Input, OnChanges,
+    Input, OnChanges, OnDestroy,
     OnInit,
     Output,
     ViewEncapsulation
@@ -15,6 +16,8 @@ import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarService } from '../../calendar.service';
 import { FdRangeDate } from '../../models/fd-range-date';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -24,9 +27,10 @@ import { FdRangeDate } from '../../models/fd-range-date';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'id + "-day-view"'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarDayViewComponent implements OnInit, OnChanges {
+export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     newFocusedDayId: string = '';
@@ -80,6 +84,14 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
     /** Event emitted always, when model is changed in single mode */
     @Output()
     public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
+    /**
+     * Variable that contains first letter of every weekday, basing on CalendarI18nDefault.
+     */
+    private _shortWeekDays: string[];
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -139,7 +151,12 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
     constructor(
         private calendarI18n: CalendarI18n,
         private eRef: ElementRef,
+        private changeDetRef: ChangeDetectorRef
     ) {
+        this.calendarI18n.i18nChange
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.refreshShortWeekDays())
+        ;
     }
 
     /**
@@ -183,7 +200,14 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
 
     /** @hidden */
     ngOnInit(): void {
+        this.refreshShortWeekDays();
         this.buildDayViewGrid();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 
     /** @hidden
@@ -522,9 +546,17 @@ export class CalendarDayViewComponent implements OnInit, OnChanges {
      * providing other class which implements CalendarI18n
      */
     get shortWeekDays(): string[] {
-        return this.calendarI18n.getAllShortWeekdays()
+        return this._shortWeekDays;
+    }
+
+    /**
+     * Method that is called to refresh i18n short week days.
+     */
+    private refreshShortWeekDays(): void {
+        this._shortWeekDays = this.calendarI18n.getAllShortWeekdays()
             .slice(this.startingDayOfWeek - 1)
             .concat(this.calendarI18n.getAllShortWeekdays().slice(0, this.startingDayOfWeek - 1))
             .map(weekday => weekday[0].toLocaleUpperCase());
+        this.changeDetRef.markForCheck();
     }
 }

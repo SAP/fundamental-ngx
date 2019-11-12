@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { ShellbarUser } from '../model/shellbar-user';
+import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 
 /**
  * This Component extends popover component and passes all of the options and events from outside to popover component
@@ -9,7 +10,8 @@ import { ShellbarUser } from '../model/shellbar-user';
  * */
 @Component({
     selector: 'fd-shellbar-user-menu',
-    templateUrl: './shellbar-user-menu.component.html'
+    templateUrl: './shellbar-user-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarUserMenuComponent extends PopoverComponent {
 
@@ -19,7 +21,7 @@ export class ShellbarUserMenuComponent extends PopoverComponent {
 
     /** The user menu data. */
     @Input()
-    userMenu: ShellbarMenuItem[];
+    userMenu: ShellbarUserMenu[];
 
     /** Event emitted on item click */
     @Output()
@@ -28,8 +30,10 @@ export class ShellbarUserMenuComponent extends PopoverComponent {
     /**
      * @hidden
      */
-    itemClick(item: any, event: any): void {
+    itemClick(item: ShellbarUserMenu, event: any): void {
         this.itemClicked.emit();
-        item.callback(event);
+        if (item.callback) {
+            item.callback(event);
+        }
     }
 }

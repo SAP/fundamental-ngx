@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterContentInit, ChangeDetectionStrategy,
     Component,
     ContentChildren,
     EventEmitter,
@@ -50,7 +50,8 @@ import { Subscription } from 'rxjs';
     template: `<ng-content></ng-content>`,
     providers: [TabsService],
     styleUrls: ['./tab-nav.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabNavComponent implements AfterContentInit, OnDestroy {
 

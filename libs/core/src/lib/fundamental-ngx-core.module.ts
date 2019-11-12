@@ -46,6 +46,10 @@ import {FormsModule} from '@angular/forms';
 import {LocalizationEditorModule} from './localizator-editor/localization-editor.module';
 import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
+import { DragAndDropModule } from './utils/drag-and-drop/drag-and-drop.module';
+import { ProductSwitchModule } from './product-switch/product-switch.module';
+import { NotificationModule } from './notification/notification.module';
+import { NotificationService } from './notification/notification-service/notification.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -60,6 +64,7 @@ import { LayoutGridModule } from './layout-grid/layout-grid.module';
     ComboboxModule,
     DatePickerModule,
     DatetimePickerModule,
+    DragAndDropModule,
     FileInputModule,
     FormModule,
     IconModule,
@@ -77,8 +82,10 @@ import { LayoutGridModule } from './layout-grid/layout-grid.module';
     MegaMenuModule,
     ModalModule,
     MultiInputModule,
+    NotificationModule,
     PaginationModule,
     PanelModule,
+    ProductSwitchModule,
     PopoverModule,
     ScrollSpyModule,
     SelectModule,
@@ -94,7 +101,7 @@ import { LayoutGridModule } from './layout-grid/layout-grid.module';
     TokenModule,
     TreeModule,
   ],
-  providers: [AlertService, ModalService],
+  providers: [AlertService, ModalService, NotificationService],
 })
 export class FundamentalNgxCoreModule {
 

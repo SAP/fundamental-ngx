@@ -2,6 +2,380 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.23"></a>
+# [0.13.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.21...v0.13.0-rc.23) (2019-11-08)
+
+
+### Bug Fixes
+
+* popover-placement-example fix for the control elements ([#1549](https://github.com/SAP/fundamental-ngx/issues/1549)) ([78ea4a7](https://github.com/SAP/fundamental-ngx/commit/78ea4a7))
+* **core:** Add menu option to button ([#1565](https://github.com/SAP/fundamental-ngx/issues/1565)) ([7523438](https://github.com/SAP/fundamental-ngx/commit/7523438))
+* **core:** navigation mode for tab ([#1566](https://github.com/SAP/fundamental-ngx/issues/1566)) ([5cb01b5](https://github.com/SAP/fundamental-ngx/commit/5cb01b5))
+* **platform:search-input:** Supress emit or "searchSubmit" event when input text is empty ([#1476](https://github.com/SAP/fundamental-ngx/issues/1476)) ([8399204](https://github.com/SAP/fundamental-ngx/commit/8399204))
+
+
+
+<a name="0.13.0-rc.21"></a>
+# [0.13.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.20...v0.13.0-rc.21) (2019-11-05)
+
+
+
+<a name="0.13.0-rc.20"></a>
+# [0.13.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.19...v0.13.0-rc.20) (2019-11-05)
+
+
+
+<a name="0.13.0-rc.19"></a>
+# [0.13.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.18...v0.13.0-rc.19) (2019-11-05)
+
+
+
+<a name="0.13.0-rc.18"></a>
+# [0.13.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.17...v0.13.0-rc.18) (2019-11-04)
+
+
+### Bug Fixes
+
+* fix playground, mark deprecated [@size](https://github.com/size). ([#1511](https://github.com/SAP/fundamental-ngx/issues/1511)) ([15ac8ac](https://github.com/SAP/fundamental-ngx/commit/15ac8ac))
+
+
+
+<a name="0.13.0-rc.17"></a>
+# [0.13.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.16...v0.13.0-rc.17) (2019-11-02)
+
+
+
+<a name="0.13.0-rc.16"></a>
+# [0.13.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.15...v0.13.0-rc.16) (2019-11-02)
+
+
+
+<a name="0.13.0-rc.15"></a>
+# [0.13.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.14...v0.13.0-rc.15) (2019-11-01)
+
+
+### Bug Fixes
+
+* loading spinner aria-hidden issue ([#1537](https://github.com/SAP/fundamental-ngx/issues/1537)) ([4ae5791](https://github.com/SAP/fundamental-ngx/commit/4ae5791))
+
+
+
+<a name="0.13.0-rc.14"></a>
+# [0.13.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.13...v0.13.0-rc.14) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.13"></a>
+# [0.13.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.12...v0.13.0-rc.13) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.12"></a>
+# [0.13.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.11...v0.13.0-rc.12) (2019-11-01)
+
+
+### Bug Fixes
+
+* make [@angular](https://github.com/angular)/cdk as a peer dependancy ([#1531](https://github.com/SAP/fundamental-ngx/issues/1531)) ([e84410a](https://github.com/SAP/fundamental-ngx/commit/e84410a))
+
+
+
+<a name="0.13.0-rc.11"></a>
+# [0.13.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.10...v0.13.0-rc.11) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.10"></a>
+# [0.13.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.9...v0.13.0-rc.10) (2019-11-01)
+
+
+### Bug Fixes
+
+* [#1521](https://github.com/SAP/fundamental-ngx/issues/1521) export grid-layout public api ([#1529](https://github.com/SAP/fundamental-ngx/issues/1529)) ([1d459d5](https://github.com/SAP/fundamental-ngx/commit/1d459d5))
+
+
+
+<a name="0.13.0-rc.9"></a>
+# [0.13.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.8...v0.13.0-rc.9) (2019-11-01)
+
+
+
+<a name="0.13.0-rc.8"></a>
+# [0.13.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.7...v0.13.0-rc.8) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.7"></a>
+# [0.13.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.6...v0.13.0-rc.7) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.6"></a>
+# [0.13.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.5...v0.13.0-rc.6) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.5"></a>
+# [0.13.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.4...v0.13.0-rc.5) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.4"></a>
+# [0.13.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.3...v0.13.0-rc.4) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.3"></a>
+# [0.13.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.2...v0.13.0-rc.3) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.2"></a>
+# [0.13.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.1...v0.13.0-rc.2) (2019-10-31)
+
+
+
+<a name="0.13.0-rc.1"></a>
+# [0.13.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.0...v0.13.0-rc.1) (2019-10-31)
+
+
+### Bug Fixes
+
+* (core) Introduce change detection strategy OnPush ([#1500](https://github.com/SAP/fundamental-ngx/issues/1500)) ([4a9091f](https://github.com/SAP/fundamental-ngx/commit/4a9091f))
+
+
+
+<a name="0.13.0-rc.0"></a>
+# [0.13.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.9...v0.13.0-rc.0) (2019-10-31)
+
+
+### Features
+
+* **platform:** Menu as a standalone component ([#1390](https://github.com/SAP/fundamental-ngx/issues/1390)) ([99ea344](https://github.com/SAP/fundamental-ngx/commit/99ea344)), closes [#1264](https://github.com/SAP/fundamental-ngx/issues/1264) [#1264](https://github.com/SAP/fundamental-ngx/issues/1264) [#1264](https://github.com/SAP/fundamental-ngx/issues/1264) [#1264](https://github.com/SAP/fundamental-ngx/issues/1264) [#1264](https://github.com/SAP/fundamental-ngx/issues/1264) [#1264](https://github.com/SAP/fundamental-ngx/issues/1264)
+
+
+
+<a name="0.12.1-rc.9"></a>
+## [0.12.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.8...v0.12.1-rc.9) (2019-10-29)
+
+
+
+<a name="0.12.1-rc.8"></a>
+## [0.12.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.7...v0.12.1-rc.8) (2019-10-28)
+
+
+
+<a name="0.12.1-rc.7"></a>
+## [0.12.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.6...v0.12.1-rc.7) (2019-10-28)
+
+
+### Bug Fixes
+
+* stackblitz for product-switch ([#1486](https://github.com/SAP/fundamental-ngx/issues/1486)) ([24606c9](https://github.com/SAP/fundamental-ngx/commit/24606c9))
+
+
+
+<a name="0.12.1-rc.6"></a>
+## [0.12.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.5...v0.12.1-rc.6) (2019-10-28)
+
+
+### Bug Fixes
+
+* add DnD styling improvements to Product Switch ([#1490](https://github.com/SAP/fundamental-ngx/issues/1490)) ([7ed1839](https://github.com/SAP/fundamental-ngx/commit/7ed1839))
+
+
+
+<a name="0.12.1-rc.5"></a>
+## [0.12.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.4...v0.12.1-rc.5) (2019-10-28)
+
+
+
+<a name="0.12.1-rc.4"></a>
+## [0.12.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.3...v0.12.1-rc.4) (2019-10-28)
+
+
+### Bug Fixes
+
+* Modal height example issues. Close icon fix. ([#1483](https://github.com/SAP/fundamental-ngx/issues/1483)) ([3a0d185](https://github.com/SAP/fundamental-ngx/commit/3a0d185))
+
+
+
+<a name="0.12.1-rc.3"></a>
+## [0.12.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.2...v0.12.1-rc.3) (2019-10-28)
+
+
+
+<a name="0.12.1-rc.2"></a>
+## [0.12.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.1...v0.12.1-rc.2) (2019-10-25)
+
+
+
+<a name="0.12.1-rc.1"></a>
+## [0.12.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.12.1-rc.0...v0.12.1-rc.1) (2019-10-25)
+
+
+
+<a name="0.12.1-rc.0"></a>
+## [0.12.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.12.0...v0.12.1-rc.0) (2019-10-24)
+
+
+
+<a name="0.12.0"></a>
+# [0.12.0](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.73...v0.12.0) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.73"></a>
+# [0.12.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.72...v0.12.0-rc.73) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.72"></a>
+# [0.12.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.71...v0.12.0-rc.72) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.71"></a>
+# [0.12.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.70...v0.12.0-rc.71) (2019-10-24)
+
+
+### Bug Fixes
+
+* Add open control for combobox ([#1449](https://github.com/SAP/fundamental-ngx/issues/1449)) ([e2add14](https://github.com/SAP/fundamental-ngx/commit/e2add14))
+* Add styling options to inline help component ([#1471](https://github.com/SAP/fundamental-ngx/issues/1471)) ([169eda6](https://github.com/SAP/fundamental-ngx/commit/169eda6))
+
+
+
+<a name="0.12.0-rc.70"></a>
+# [0.12.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.69...v0.12.0-rc.70) (2019-10-24)
+
+
+### Bug Fixes
+
+* Add [@angular](https://github.com/angular)/cdk to peer dependency, add button module to calendar  ([#1457](https://github.com/SAP/fundamental-ngx/issues/1457)) ([c515c72](https://github.com/SAP/fundamental-ngx/commit/c515c72))
+
+
+
+<a name="0.12.0-rc.69"></a>
+# [0.12.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.68...v0.12.0-rc.69) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.68"></a>
+# [0.12.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.67...v0.12.0-rc.68) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.67"></a>
+# [0.12.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.66...v0.12.0-rc.67) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.66"></a>
+# [0.12.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.65...v0.12.0-rc.66) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.65"></a>
+# [0.12.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.64...v0.12.0-rc.65) (2019-10-24)
+
+
+
+<a name="0.12.0-rc.64"></a>
+# [0.12.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.63...v0.12.0-rc.64) (2019-10-23)
+
+
+### Bug Fixes
+
+* **platform:search-input:** Fix CSS border rules for "RTL" mode ([#1441](https://github.com/SAP/fundamental-ngx/issues/1441)) ([1b5e560](https://github.com/SAP/fundamental-ngx/commit/1b5e560))
+
+
+
+<a name="0.12.0-rc.63"></a>
+# [0.12.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.62...v0.12.0-rc.63) (2019-10-23)
+
+
+
+<a name="0.12.0-rc.62"></a>
+# [0.12.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.61...v0.12.0-rc.62) (2019-10-23)
+
+
+
+<a name="0.12.0-rc.61"></a>
+# [0.12.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.60...v0.12.0-rc.61) (2019-10-23)
+
+
+### Features
+
+* Product Switch with Drag and Drop. ([#1439](https://github.com/SAP/fundamental-ngx/issues/1439)) ([0dc593f](https://github.com/SAP/fundamental-ngx/commit/0dc593f))
+
+
+
+<a name="0.12.0-rc.60"></a>
+# [0.12.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.59...v0.12.0-rc.60) (2019-10-22)
+
+
+### Bug Fixes
+
+* **platform:** provide an option to make action bar sticky and fixing… ([#1423](https://github.com/SAP/fundamental-ngx/issues/1423)) ([fb016f7](https://github.com/SAP/fundamental-ngx/commit/fb016f7))
+
+
+
+<a name="0.12.0-rc.59"></a>
+# [0.12.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.58...v0.12.0-rc.59) (2019-10-22)
+
+
+
+<a name="0.12.0-rc.58"></a>
+# [0.12.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.57...v0.12.0-rc.58) (2019-10-22)
+
+
+
+<a name="0.12.0-rc.57"></a>
+# [0.12.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.56...v0.12.0-rc.57) (2019-10-22)
+
+
+### Features
+
+* notifications ([#1367](https://github.com/SAP/fundamental-ngx/issues/1367)) ([ad932e3](https://github.com/SAP/fundamental-ngx/commit/ad932e3))
+
+
+
+<a name="0.12.0-rc.56"></a>
+# [0.12.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.55...v0.12.0-rc.56) (2019-10-21)
+
+
+
+<a name="0.12.0-rc.55"></a>
+# [0.12.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.54...v0.12.0-rc.55) (2019-10-21)
+
+
+
+<a name="0.12.0-rc.54"></a>
+# [0.12.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.53...v0.12.0-rc.54) (2019-10-21)
+
+
+
+<a name="0.12.0-rc.53"></a>
+# [0.12.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.52...v0.12.0-rc.53) (2019-10-21)
+
+
+### Bug Fixes
+
+* Add links and glyphs to product menu ([#1421](https://github.com/SAP/fundamental-ngx/issues/1421)) ([a043b8b](https://github.com/SAP/fundamental-ngx/commit/a043b8b))
+
+
+
+<a name="0.12.0-rc.52"></a>
+# [0.12.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.51...v0.12.0-rc.52) (2019-10-21)
+
+
+### Bug Fixes
+
+* **core:** expose Util package to platform ([#1404](https://github.com/SAP/fundamental-ngx/issues/1404)) ([de8c3dd](https://github.com/SAP/fundamental-ngx/commit/de8c3dd)), closes [#1269](https://github.com/SAP/fundamental-ngx/issues/1269)
+
+
+
 <a name="0.12.0-rc.51"></a>
 # [0.12.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.12.0-rc.50...v0.12.0-rc.51) (2019-10-19)
 

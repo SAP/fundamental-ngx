@@ -1,5 +1,5 @@
 import {
-    ChangeDetectorRef,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     EventEmitter,
     forwardRef,
@@ -29,7 +29,8 @@ import { TimeI18n } from './i18n/time-i18n';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimeComponent implements OnChanges, ControlValueAccessor {
 
@@ -121,7 +122,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
 
     constructor(
         public timeI18nLabels: TimeI18nLabels,
-        public timeI18n: TimeI18n
+        public timeI18n: TimeI18n,
+        private changeDetRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -131,6 +133,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         }
         this.time = Object.assign({}, time);
         this.setDisplayedHour();
+        this.changeDetRef.detectChanges();
     }
 
     /** @hidden

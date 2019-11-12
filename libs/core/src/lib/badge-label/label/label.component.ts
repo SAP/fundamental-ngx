@@ -1,5 +1,9 @@
-import { Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+
+export type BadgeStatus = 'success' | 'warning' | 'error';
+export type BadgeModifier = 'pill' | 'filled';
+export type BadgeIconStatus = 'available' | 'away' | 'busy' | 'offline';
 
 /**
  * Label component, used to indicate status, without any background or border
@@ -10,11 +14,12 @@ import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
     selector: '[fd-label]',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./label.component.scss']
+    styleUrls: ['./label.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LabelComponent extends AbstractFdNgxClass {
     /** Color coded status for the label. Options are 'success', 'warning', and 'error'. Leave empty for default label. */
-    @Input() status: string = '';
+    @Input() status: BadgeStatus;
 
     /** @hidden */
     _setProperties() {

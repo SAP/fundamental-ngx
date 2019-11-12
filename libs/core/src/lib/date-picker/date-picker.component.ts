@@ -1,17 +1,19 @@
 import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     forwardRef,
     Input,
-    Output, ViewChild,
+    Output,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
+import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Placement } from 'popper.js';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarService } from '../calendar/calendar.service';
-import { CalendarComponent } from '../calendar/calendar.component';
 import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
 
@@ -45,7 +47,8 @@ import { DateFormatParser } from './format/date-parser';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePickerComponent implements ControlValueAccessor, Validator {
 
@@ -269,7 +272,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** @hidden */
     constructor(
-        public dateAdapter: DateFormatParser
+        public dateAdapter: DateFormatParser,
+        private changeDetectionRef: ChangeDetectorRef
     ) {
     }
 
@@ -347,6 +351,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 this.inputFieldDate = '';
             }
         }
+        this.changeDetectionRef.detectChanges();
         this.isInvalidDateInput = !this.isModelValid();
     }
 

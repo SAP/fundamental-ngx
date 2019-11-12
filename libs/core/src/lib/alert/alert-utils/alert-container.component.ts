@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
 
 @Component({
@@ -22,7 +22,8 @@ import { alertContainerNgIf } from './alert-animations';
     animations: [
         alertContainerNgIf
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertContainerComponent {
 

@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -38,7 +39,8 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
@@ -133,7 +135,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     onTouched: Function = () => { };
 
     /** @hidden */
-    constructor(private elRef: ElementRef) { }
+    constructor(
+        private elRef: ElementRef,
+        private changeDetRef: ChangeDetectorRef
+    ) { }
 
     /** @hidden */
     ngOnInit() {
@@ -151,6 +156,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
                 this.displayedValues = this.dropdownValues;
             }
         }
+        this.changeDetRef.markForCheck();
     }
 
     /** @hidden */
@@ -173,6 +179,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         if (selected) {
             this.selected = selected;
         }
+        this.changeDetRef.markForCheck();
     }
 
     /** @hidden */

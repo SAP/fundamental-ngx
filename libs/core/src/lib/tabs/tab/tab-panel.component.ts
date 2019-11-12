@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 
 let tabPanelUniqueId: number = 0;

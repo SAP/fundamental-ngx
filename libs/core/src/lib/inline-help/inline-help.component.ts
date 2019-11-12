@@ -1,7 +1,7 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Placement } from 'popper.js';
 /**
- * The component that represents an inline-help. 
+ * The component that represents an inline-help.
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
  *
  * ```html
@@ -14,7 +14,8 @@ import { Placement } from 'popper.js';
     selector: 'fd-inline-help',
     templateUrl: './inline-help.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['inline-help.component.scss']
+    styleUrls: ['inline-help.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InlineHelpComponent {
 
@@ -29,4 +30,15 @@ export class InlineHelpComponent {
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
     triggers: string[] = ['mouseenter', 'mouseleave'];
+
+    /**
+     * The inline help style has same type as popular [ngStyle] directive. Value will be passed to `control` element
+     * */
+    @Input()
+    inlineHelpIconStyle: {[key: string]: any} | {[key: string]: any}[];
+
+    /** The inline help style has same type as popular [ngStyle] directive. Value will be passed to content element */
+    @Input()
+    inlineHelpContentStyle: {[key: string]: any} | {[key: string]: any}[];
+
 }

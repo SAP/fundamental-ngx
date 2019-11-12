@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 
 /**
  * Container for title and description.
@@ -16,7 +16,8 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fd-panel-head',
     templateUrl: './panel-head.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelHeadComponent {
 

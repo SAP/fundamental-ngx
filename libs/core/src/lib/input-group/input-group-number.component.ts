@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -21,6 +21,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupNumberComponent implements ControlValueAccessor {
     /** Whether the input is disabled. */
@@ -61,8 +62,14 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
+
+    /** @hidden */
     writeValue(value: any) {
         this.inputTextValue = value;
+        this.changeDetectorRef.markForCheck();
     }
 
     /** @hidden */

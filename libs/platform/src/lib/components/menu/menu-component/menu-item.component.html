@@ -1,0 +1,91 @@
+<ng-container
+    *ngTemplateOutlet="
+        selectable ? selectableItemTemplate : itemTemplate;
+        context: {
+            label: label,
+            i: index,
+            selected: selected,
+            item: item,
+            group: group,
+            separated: separated,
+            secondaryIcon: secondaryIcon,
+            disabled: disabled,
+            tooltipLabel: tooltipLabel,
+            itemWidth: itemWidth,
+            childItems: childItems
+        }
+    "
+>
+</ng-container>
+<ng-template #itemTemplate let-label="label" let-i="i">
+    <li
+        data-tag="menu-item"
+        [attr.data-index]="i"
+        [attr.disabled]="disabled"
+        [ngClass]="['normal-item-state', disabled ? 'is-disabled' : '']"
+    >
+        <div fd-menu-item-addon *ngIf="icon; else noIcon">
+            <span [ngClass]="[icon]" data-tag="menu-item__icon-before" [attr.title]="icon"> </span>
+        </div>
+        <div class="fd-menu__label-truncation">
+            <span
+                fd-menu-item
+                [ngStyle]="{ width: finalItemWidth }"
+                (click)="onItemClick()"
+                role="button"
+                data-tag="menu-item__button"
+                [attr.title]="tooltipLabel ? tooltipLabel : label"
+            >
+                {{ label }}
+            </span>
+        </div>
+        <div class="fd-menu__addon-after" *ngIf="secondaryIcon; else noIcon">
+            <span
+                [ngClass]="[secondaryIcon ? secondaryIcon : '']"
+                data-tag="menu-item__icon-after"
+                [attr.title]="secondaryIcon"
+            >
+            </span>
+        </div>
+    </li>
+</ng-template>
+<ng-template #noIcon><span [ngClass]="{ 'fd-menu__list--separated': separated }"></span></ng-template>
+<ng-template #selectableItemTemplate let-label="label" let-i="i" let-selected="selected">
+    <li
+        data-tag="menu-item"
+        [attr.data-index]="i"
+        [attr.disabled]="disabled"
+        [ngClass]="[selected ? 'selected-item-state' : 'normal-item-state', disabled ? 'is-disabled' : '']"
+        [attr.aria-selected]="selected ? 'true' : 'false'"
+    >
+        <div fd-menu-item-addon>
+            <span
+                *ngIf="selected; else noIcon"
+                [ngClass]="[icon ? icon : 'sap-icon--accept']"
+                data-tag="menu-item__icon-before"
+                [attr.title]="icon"
+            >
+            </span>
+        </div>
+        <div class="fd-menu__label-truncation">
+            <span
+                fd-menu-item
+                (click)="onItemClick()"
+                [ngStyle]="{ width: finalItemWidth }"
+                role="button"
+                data-tag="menu-item__button"
+                [attr.title]="tooltipLabel ? tooltipLabel : label"
+            >
+                {{ label }}
+            </span>
+        </div>
+        <div class="fd-menu__addon-after" *ngIf="secondaryIcon; else noIcon">
+            <span
+                [ngClass]="[secondaryIcon ? secondaryIcon : '']"
+                data-tag="menu-item__icon-after"
+                [attr.title]="secondaryIcon"
+            >
+            </span>
+        </div>
+    </li>
+</ng-template>

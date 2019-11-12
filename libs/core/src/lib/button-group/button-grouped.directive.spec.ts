@@ -69,12 +69,4 @@ describe('ButtonGroupedDirective', () => {
         expect(component.ref.nativeElement.className).toContain('is-' + testState);
     });
 
-    it('should support size', () => {
-        const testSize = 'size';
-        directiveInstance.size = testSize;
-        directiveInstance.ngOnInit();
-        fixture.detectChanges();
-        expect(component.ref.nativeElement.className).toContain('fd-button--' + testSize);
-    });
-
 });

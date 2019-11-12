@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, Output, EventEmitter, OnInit, HostBinding } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
 export type ButtonOptions = 'light' | 'emphasized' | '';
@@ -9,11 +9,11 @@ export type ButtonOptions = 'light' | 'emphasized' | '';
     styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-    /** Whether to compact the button. */
+    /** Option to make to button compact. */
     @Input()
     compact: boolean;
 
-    /** Whether the button content should be in truncated form this width. */
+    /** Option to truncate content of the button based on width. */
     @Input()
     width: string;
 
@@ -21,7 +21,7 @@ export class ButtonComponent {
     @Input()
     glyph: string;
 
-    /** Whether the button is disabled. */
+    /** Button is disabled on true. */
     @Input()
     disabled: boolean;
 

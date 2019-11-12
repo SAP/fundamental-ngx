@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 
 /**
  * Applies fundamental layout and styling to the contents of a modal footer.
@@ -17,7 +17,8 @@ import { Component, HostBinding } from '@angular/core';
             display: block;
             border-top: 1px solid #eeeeef;
         }
-    `]
+    `],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalFooterComponent {
 

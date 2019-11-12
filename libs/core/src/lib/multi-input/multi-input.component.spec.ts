@@ -42,6 +42,7 @@ describe('MultiInputComponent', () => {
     it('should set placeholder', () => {
         const placeholder = 'placeholder';
         component.placeholder = placeholder;
+        (component as any).changeDetRef.markForCheck();
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('input').placeholder).toBe(placeholder);
@@ -134,6 +135,7 @@ describe('MultiInputComponent', () => {
         component.isOpen = true;
         fixture.detectChanges();
 
+        (component as any).changeDetRef.markForCheck();
         component.selected = ['test1'];
         fixture.detectChanges();
 

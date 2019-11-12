@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FdDate, FdDatetime } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'app-datetime-program-example',
+    selector: 'fd-datetime-program-example',
     templateUrl: './datetime-program-example.component.html'
 })
 export class DatetimeProgramExampleComponent {

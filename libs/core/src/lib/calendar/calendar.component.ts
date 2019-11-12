@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     EventEmitter,
@@ -59,7 +60,8 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     host: {
         '(blur)': 'onTouched()',
         '[attr.id]': 'id'
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
 
@@ -239,6 +241,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
                 }
             }
         }
+        this.changeDetectorRef.detectChanges();
         this.isValidDateChange.emit(valid);
     }
 
