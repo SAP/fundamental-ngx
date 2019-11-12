@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.27"></a>
+# [0.13.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.26...v0.13.0-rc.27) (2019-11-12)
+
+
+### Bug Fixes
+
+* Remove Change Detection on push on modal and toggle ([#1579](https://github.com/SAP/fundamental-ngx/issues/1579)) ([8fad796](https://github.com/SAP/fundamental-ngx/commit/8fad796))
+
+
+
 <a name="0.13.0-rc.26"></a>
 # [0.13.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.25...v0.13.0-rc.26) (2019-11-12)
 
