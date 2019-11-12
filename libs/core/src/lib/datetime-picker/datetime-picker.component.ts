@@ -337,6 +337,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetRef.detectChanges();
     }
 
     /**

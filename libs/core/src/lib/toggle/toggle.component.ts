@@ -1,5 +1,6 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -146,6 +147,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectorRef.detectChanges();
     }
 
 }

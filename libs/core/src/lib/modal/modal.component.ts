@@ -40,8 +40,7 @@ import { ModalRef } from './modal-utils/modal-ref';
     animations: [
         modalFadeNgIf
     ],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 

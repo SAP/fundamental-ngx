@@ -172,6 +172,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetRef.detectChanges();
     }
 
     /** @hidden */

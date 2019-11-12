@@ -320,6 +320,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.cdRef.detectChanges();
     }
 
     private defaultDisplay(str: any): string {

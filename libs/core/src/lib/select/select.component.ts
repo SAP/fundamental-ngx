@@ -213,6 +213,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
