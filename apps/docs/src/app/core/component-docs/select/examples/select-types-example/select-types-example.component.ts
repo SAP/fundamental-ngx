@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectTypesExampleComponent implements OnInit {
 
-    selectValue: string;
+    selectValue1: string;
+    selectValue2: string;
+    selectValue3: string;
+
 
     options: string[] = [
         'Tomato',
