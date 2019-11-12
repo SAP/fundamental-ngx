@@ -51,7 +51,7 @@ export class DatePickerComplexI18nExampleComponent {
 
     @ViewChild(DatePickerComponent, { static: false }) datePicker: DatePickerComponent;
 
-    constructor () {
+    constructor (private calendarI18nService: CalendarI18n) {
         registerLocaleData(localeFrench, 'fr');
         registerLocaleData(localePolish, 'pl');
         registerLocaleData(localeBulgarian, 'bg');
@@ -72,6 +72,7 @@ export class DatePickerComplexI18nExampleComponent {
         this.datePicker.locale = this.actualLocale;
         this.datePicker.format = this.actualFormat;
         this.datePicker.handleSingleDateChange(this.date);
+        this.calendarI18nService.i18nChange.next();
     }
 
     public setLocale(locale: string): void {

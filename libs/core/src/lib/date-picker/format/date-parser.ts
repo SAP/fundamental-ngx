@@ -29,6 +29,7 @@ export abstract class DateFormatParser {
     /**
      * Should take in a FdDate model object and return a string representation.
      * @param date FdDate to format to string value.
+     * Return null, to keep default angular DatePipe as a formatter.
      */
     abstract format(date: FdDate): string;
 }
@@ -55,6 +56,7 @@ export class DateFormatParserDefault extends DateFormatParser {
     /**
      * Takes in a FdDate model object and return a string representation.
      * @param date FdDate to format to string value.
+     * Return null, to keep default angular DatePipe as a formatter.
      */
     public format(date: FdDate): string {
         return null;

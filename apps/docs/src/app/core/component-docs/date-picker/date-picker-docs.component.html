@@ -116,10 +116,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'combobox-disabled'" [componentName]="'datePicker'">
+<fd-docs-section-title [id]="'complex-i18n'" [componentName]="'datePicker'">
     Complex i18n.
 </fd-docs-section-title>
-<component-example name="'ex7'">
+<description>
+    To change format or locale options in <code>DatePicker</code> component, it is needed to pass some variables to
+    <code>[format]</code> or <code>[locale]</code>. By default FdDate model is formatted by angular built-in
+    <code>datePipe</code>.
+</description>
+<component-example name="'ex8'">
     <fd-date-picker-complex-i18n-example></fd-date-picker-complex-i18n-example>
 </component-example>
 <code-example [exampleFiles]="datePickerDisabled"></code-example>

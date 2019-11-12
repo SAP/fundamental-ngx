@@ -74,9 +74,11 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     placeholder: string = 'mm/dd/yyyy';
 
+    /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
     format: string = 'MM/dd/yyyy';
 
+    /** Locale for date pipe. See more https://angular.io/guide/i18n */
     @Input()
     locale: string;
 
