@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'fd-select-basic-example',
@@ -11,7 +11,7 @@ export class SelectBasicExampleComponent {
     selectTwoValue: string;
 
     selectThreeValue: string;
-    emptyValues: string[] 
+    emptyValues: string[]
     values: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     constructor() { }
 
