@@ -19,6 +19,7 @@ import { PopoverComponent } from '../popover/popover.component';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { MenuItemDirective } from '../menu/menu-item.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import focusTrap, { FocusTrap } from 'focus-trap';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -133,11 +134,19 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Output()
     readonly selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
 
+    /** Whether multi input popover body should be opened */
+    @Input()
+    open: boolean = false;
+
+    /** Event emitted, when the multi input's popover body is opened or closed */
+    @Output()
+    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
-    isOpen = false;
+    public focusTrap: FocusTrap;
 
     /** @hidden */
     onChange: Function = () => { };
@@ -157,6 +166,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
+        this.setupFocusTrap();
     }
 
     /** @hidden */
@@ -202,6 +212,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     /** @hidden */
+    openChangeHandle(open: boolean): void {
+        this.open = open;
+        this.openChange.emit(this.open);
+        this.onTouched();
+        if (this.open) {
+            this.focusTrap.activate();
+        } else {
+            this.focusTrap.deactivate();
+        }
+    }
+
+    /** @hidden */
     handleSelect(checked: any, value: any): void {
         const previousLength = this.selected.length;
         if (checked) {
@@ -229,7 +251,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     public handleInputKeydown(event: KeyboardEvent): void {
         if (event.code === 'ArrowDown') {
             if (event.altKey) {
-                this.isOpen = true;
+                this.openChangeHandle(true)
             }
             if (this.menuItems.first) {
                 this.menuItems.first.focus();
@@ -256,6 +278,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     private defaultDisplay(str: string): string {
         return str;
+    }
+
+    private setupFocusTrap(): void {
+        try {
+            this.focusTrap = focusTrap(this.elRef.nativeElement, {
+                clickOutsideDeactivates: true,
+                returnFocusOnDeactivate: true,
+                escapeDeactivates: false
+            });
+        } catch (e) {
+            console.warn('Unsuccessful attempting to focus trap the Multi Input.');
+        }
     }
 
 }

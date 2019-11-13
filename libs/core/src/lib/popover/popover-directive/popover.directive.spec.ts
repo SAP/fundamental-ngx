@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverDirective } from './popover.directive';
-import { AfterViewInit, Component, NgModule, ViewChild } from '@angular/core';
+import { Component, NgModule, ViewChild } from '@angular/core';
 import { PopoverModule } from '../popover.module';
 
 @Component({

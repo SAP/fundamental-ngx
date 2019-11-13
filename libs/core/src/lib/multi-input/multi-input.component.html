@@ -1,5 +1,6 @@
 <div class="fd-multi-input-field">
-    <fd-popover [(isOpen)]="isOpen"
+    <fd-popover [isOpen]="open"
+                (isOpenChange)="openChangeHandle($event)"
                 [triggers]="[]"
                 [disabled]="disabled"
                 [closeOnOutsideClick]="true"
@@ -8,14 +9,14 @@
         <fd-popover-control>
             <div class="fd-combobox-control"
                  [attr.aria-label]="multiInputBodyLabel"
-                 [attr.aria-expanded]="isOpen">
+                 [attr.aria-expanded]="open">
                 <fd-input-group
                     [buttonFocusable]="false"
                     [disabled]="disabled"
                     [compact]="compact"
                     [button]="true"
                     [glyph]="glyph"
-                    (addOnButtonClicked)="isOpen = !isOpen">
+                    (addOnButtonClicked)="openChangeHandle(!open)">
                     <input type="text" class="fd-input" fd-input-group-input
                            #searchInputElement
                            [ngClass]="{'fd-input--compact': compact}"
@@ -24,11 +25,11 @@
                            [(ngModel)]="searchTerm"
                            (ngModelChange)="handleSearchTermChange()"
                            (keydown)="handleInputKeydown($event)"
-                           (click)="isOpen = !isOpen">
+                           (click)="openChangeHandle(!open)">
                 </fd-input-group>
             </div>
         </fd-popover-control>
-        <fd-popover-body [attr.aria-hidden]="!isOpen">
+        <fd-popover-body [attr.aria-hidden]="!open">
             <fd-menu class="fd-multi-input-menu-overflow"
                      *ngIf="displayedValues && displayedValues.length"
                      [style.maxHeight]="maxHeight">

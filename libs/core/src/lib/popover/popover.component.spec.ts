@@ -44,4 +44,17 @@ describe('PopoverComponent', () => {
         component.toggle();
         expect(component.isOpen).toBe(true);
     });
+
+    it ('should support Alt + ArrowDown event', () => {
+        spyOn(component.isOpenChange, 'emit');
+
+        const event: any = {
+            code: 'ArrowDown',
+            altKey: true
+        };
+
+        component.handleKeydown(event);
+        expect(component.isOpen).toBe(true);
+        expect(component.isOpenChange.emit).toHaveBeenCalledWith(true);
+    })
 });
