@@ -37,6 +37,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: -webkit-fill-available;
         }
 
         &:hover {
@@ -80,17 +81,17 @@
                 }
             }
         }
-		&.fd-button--noborder {
-			  border: transparent;
+        &.fd-button--noborder {
+            border: transparent;
 		}
-		&.fd-button--splitborder{
-			border:1px solid;
-			&::after{
-				    border-left-style: solid;
+        &.fd-button--splitborder {
+            border:1px solid;
+            &::after{
+                    border-left-style: solid;
                     border-left-width: 1px;
-					height: -webkit-fill-available;
-			}
-		}
+                    height: -webkit-fill-available;
+            }
+        }
     }
 
     .fd-select-text-custom {

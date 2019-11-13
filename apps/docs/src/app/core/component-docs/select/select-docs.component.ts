@@ -150,7 +150,7 @@ export class SelectDocsComponent implements OnInit {
         {
             language: 'html',
             code: selectTypesSrc,
-            fileName: 'select-types-example.component',
+            fileName: 'select-types-example',
             scssFileCode: selecTypesScssSrc,
             typescriptFileCode: selectTypesTsSrc,
             component: 'SelectTypesExampleComponent'
