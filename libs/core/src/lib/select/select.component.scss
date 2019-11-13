@@ -13,6 +13,12 @@
         }
     }
 
+    .fd-select-button-custom--loading {
+        &::after {
+            content: '\e080' !important;
+        }
+    }
+
     .fd-select-button-custom {
         padding-right: 0;
         display: flex;

@@ -6,11 +6,13 @@ import { Component } from '@angular/core';
     styleUrls: ['select-basic-example.component.scss']
 })
 export class SelectBasicExampleComponent {
-
     selectOneValue: string;
 
     selectTwoValue: string;
 
     selectThreeValue: string;
+    values: string[] = ['apple', 'banana', 'orange', 'pear'];
+    constructor() { }
 
+    ngOnInit() { }
 }
