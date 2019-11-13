@@ -15,7 +15,39 @@
 
     .fd-select-button-custom--loading {
         &::after {
+            position: absolute;
+            right: 1rem;
+            align-self: center;
+            width: fit-content !important;
+            height: fit-content;
+            margin: 0;
             content: '\e080' !important;
+            -webkit-animation:spin 2s linear infinite;
+            -moz-animation:spin 2s linear infinite;
+            animation:spin 2s linear infinite;
+        }
+        @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+        @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+        &:hover {
+            &::after {
+                border: none;;
+                background-color: var(--sapUiFieldBackground, #ffffff)!important;
+            }
+        }
+        &:active {
+            &::after {
+                border: none;;
+                background-color: var(--sapUiFieldBackground, #ffffff);
+            }
+        }
+        &:active,
+        &.is-active,
+        &[aria-expanded='true'] {
+            &::after {
+                color: var(--sapUiContentIconColor, #0854a0)!important;
+                background-color: var(--sapUiFieldBackground, #ffffff)!important;
+            }
         }
     }
 
