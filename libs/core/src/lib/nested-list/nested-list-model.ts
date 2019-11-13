@@ -15,6 +15,7 @@ export interface NestedListModel {
 export interface NestedListLink {
     icon?: string;
     title: string;
+    callback?: Function;
     href?: string;
     selected?: boolean;
 }

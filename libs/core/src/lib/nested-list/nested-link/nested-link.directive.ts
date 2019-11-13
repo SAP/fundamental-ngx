@@ -49,11 +49,14 @@ export class NestedLinkDirective implements OnInit {
             this.nestedListStateService.refresh$.next();
         }
     }
-
     get selected(): boolean {
         return this._selected;
     }
     _selected: boolean;
+
+    /** Function that is called on click event dispatch on this element. */
+    @Input()
+    onClickCallback: Function;
 
     /** */
     @HostBinding('class.is-selected')
@@ -103,9 +106,12 @@ export class NestedLinkDirective implements OnInit {
         );
 
         /** Mouse Click */
-        this.renderer.listen(this.elementRef.nativeElement, 'click', (event) =>
-            this.clicked.emit(event)
-        );
+        this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
+            if (this.onClickCallback) {
+                this.onClickCallback();
+            }
+            this.clicked.emit(event);
+        });
     }
 
     /** Returns the title value of the title directive */

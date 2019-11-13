@@ -14,6 +14,7 @@ export class SideNavigationObjectExampleComponent {
             items: [
                 {
                     link: {
+                        callback: () => this.callbackFunction('First Item'),
                         icon: 'menu',
                         title: 'Link 1'
                     }
@@ -117,6 +118,11 @@ export class SideNavigationObjectExampleComponent {
                 }
             ]
         }
+    }
+
+
+    callbackFunction(message: string): void {
+        alert('Link Clicked ' + message);
     }
 
 }
