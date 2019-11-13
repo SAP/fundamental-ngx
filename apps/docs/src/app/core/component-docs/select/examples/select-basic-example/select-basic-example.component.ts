@@ -11,7 +11,8 @@ export class SelectBasicExampleComponent {
     selectTwoValue: string;
 
     selectThreeValue: string;
-    values: string[] = ['apple', 'banana', 'orange', 'pear'];
+    emptyValues: string[] 
+    values: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     constructor() { }
 
     ngOnInit() { }
