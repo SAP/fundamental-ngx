@@ -20,14 +20,11 @@ import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
-import {
-    PlatformBasicMenuExampleComponent,
-    PlatformMenuGroupExampleComponent,
-    PlatformMenuSeparatorExampleComponent,
-    PlatformMenuIconsExampleComponent,
-    PlatformComplexMenuExampleComponent
-} from './component-docs/platform-menu/platform-menu-examples/platform-menu-examples.component';
-
+import { PlatformMenuBasicExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-basic-example.component';
+import { PlatformMenuComplexExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-complex-example.component';
+import { PlatformMenuSeparatorExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-separator-example.component';
+import { PlatformMenuGroupExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-group-example.component';
+import { PlatformMenuIconsExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-icons-example.component';
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
@@ -42,11 +39,11 @@ import {
         PlatformButtonTruncateExampleComponent,
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,
-        PlatformBasicMenuExampleComponent,
+        PlatformMenuBasicExampleComponent,
         PlatformMenuGroupExampleComponent,
         PlatformMenuSeparatorExampleComponent,
         PlatformMenuIconsExampleComponent,
-        PlatformComplexMenuExampleComponent,
+        PlatformMenuComplexExampleComponent,
         NewComponentComponent
     ],
     imports: [

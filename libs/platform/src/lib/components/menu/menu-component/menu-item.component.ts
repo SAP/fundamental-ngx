@@ -52,6 +52,7 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
     public childItems: MenuItem[] = [];
 
     /** calculates the final width of the label when icons are used */
+    /** @hidden */
     public finalItemWidth = '';
 
     @Output() itemClick: EventEmitter<void> = new EventEmitter();
@@ -62,12 +63,14 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
 
     constructor(public itemEl: ElementRef, private renderer: Renderer2) {}
 
+    /** @hidden */
     ngOnInit() {}
 
     onItemClick() {
         this.itemClick.emit();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.itemWidth || changes.item) {
             this.finalItemWidth = this.getItemWidth();
