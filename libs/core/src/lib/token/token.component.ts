@@ -21,13 +21,12 @@ import {
     host: {
         class: 'fd-token',
         '[class.fd-token__disabled]': 'disabled',
-        'role': 'button'
+        role: 'button'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
-
     /** @hidden */
     @ViewChild('contentContainer', { static: false })
     contentContainer: ElementRef;
@@ -36,24 +35,26 @@ export class TokenComponent {
     @Input()
     disabled: boolean = false;
 
+    @Input()
+    hideRemovalIcon: boolean = false;
+
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {
-    }
+    constructor(private elRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('click', ['$event'])
     clickHandler(event): void {
         if (this.contentContainer && !this.disabled) {
-            if (this.elRef.nativeElement.contains(event.target) && !this.contentContainer.nativeElement.contains(event.target)) {
+            if (
+                this.elRef.nativeElement.contains(event.target) &&
+                !this.contentContainer.nativeElement.contains(event.target)
+            ) {
                 this.onCloseClick.emit();
             }
         }
     }
-
 }
-
-
