@@ -1,13 +1,18 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
 import * as dropdownContextualMenuHtml from '!raw-loader!./examples/dropdown-contextual-menu-example.component.html';
+import * as dropdownContextualMenuTs from '!raw-loader!./examples/dropdown-contextual-menu-example.component.ts';
 import * as dropdownDefaultMenuHtml from '!raw-loader!./examples/dropdown-default-example.component.html';
+import * as dropdownDefaultMenuTs from '!raw-loader!./examples/dropdown-default-example.component.ts';
 import * as dropdownIconsMenuHtml from '!raw-loader!./examples/dropdown-icons-example.component.html';
+import * as dropdownIconsMenuTs from '!raw-loader!./examples/dropdown-icons-example.component.ts';
 import * as dropdownCodeTs from '!raw-loader!./examples/dropdown-examples.component.ts';
 import * as dropdownStateMenuHtml from '!raw-loader!./examples/dropdown-state-example.component.html';
+import * as dropdownStateMenuTs from '!raw-loader!./examples/dropdown-state-example.component.ts';
 import * as dropdownInfiniteScrollHtml from '!raw-loader!./examples/dropdown-infinite-scroll-example.component.html';
 import * as dropdownInfiniteScrollTs from '!raw-loader!./examples/dropdown-infinite-scroll-example.component.ts';
 import * as dropdownToolbarHtml from '!raw-loader!./examples/dropdown-toolbar-example.component.html';
+import * as dropdownToolbarTs from '!raw-loader!./examples/dropdown-toolbar-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -22,9 +27,8 @@ export class DropdownDocsComponent implements OnInit {
             language: 'html',
             code: dropdownDefaultMenuHtml,
             fileName: 'dropdown-default-example',
-            secondFile: 'dropdown-examples',
             component: 'DropdownDefaultExampleComponent',
-            typescriptFileCode: dropdownCodeTs
+            typescriptFileCode: dropdownDefaultMenuTs
         },
     ];
 
@@ -33,9 +37,8 @@ export class DropdownDocsComponent implements OnInit {
             language: 'html',
             code: dropdownStateMenuHtml,
             fileName: 'dropdown-state-example',
-            secondFile: 'dropdown-examples',
             component: 'DropdownStateExampleComponent',
-            typescriptFileCode: dropdownCodeTs
+            typescriptFileCode: dropdownStateMenuTs
         },
     ];
 
@@ -44,9 +47,8 @@ export class DropdownDocsComponent implements OnInit {
             language: 'html',
             code: dropdownIconsMenuHtml,
             fileName: 'dropdown-icons-example',
-            secondFile: 'dropdown-examples',
             component: 'DropdownIconsExampleComponent',
-            typescriptFileCode: dropdownCodeTs
+            typescriptFileCode: dropdownIconsMenuTs
         },
     ];
 
@@ -55,9 +57,8 @@ export class DropdownDocsComponent implements OnInit {
             language: 'html',
             code: dropdownContextualMenuHtml,
             fileName: 'dropdown-contextual-menu-example',
-            secondFile: 'dropdown-examples',
             component: 'DropdownContextualMenuExampleComponent',
-            typescriptFileCode: dropdownCodeTs
+            typescriptFileCode: dropdownContextualMenuTs
         },
     ];
 
@@ -80,9 +81,8 @@ export class DropdownDocsComponent implements OnInit {
             language: 'html',
             code: dropdownToolbarHtml,
             fileName: 'dropdown-toolbar-example',
-            secondFile: 'dropdown-examples',
             component: 'DropdownToolbarExampleComponent',
-            typescriptFileCode: dropdownCodeTs
+            typescriptFileCode: dropdownToolbarTs
         },
     ];
 
