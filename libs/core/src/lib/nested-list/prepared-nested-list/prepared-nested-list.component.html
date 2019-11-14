@@ -1,0 +1,32 @@
+<ul fd-nested-list [textOnly]="list?.textOnly">
+    <li *ngIf="list.headerTitle" fd-nested-list-header>
+        {{list.headerTitle}}
+    </li>
+    <li *ngFor="let item of list?.items"
+        fd-nested-list-item
+        [(expanded)]="item.expanded">
+
+        <fd-nested-list-popover *ngIf="condensed && first && item.list">
+            <a fd-nested-list-link *ngIf="item.link"
+               [onClickCallback]="item.link.callback"
+               [selected]="item.link.selected"
+               [attr.href]="item.link.href ? item.link.href : null">
+                <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
+                <span fd-nested-list-title>{{item.link.title}}</span>
+            </a>
+            <fd-prepared-nested-list [first]="false" *ngIf="item.list" [list]="item.list"></fd-prepared-nested-list>
+        </fd-nested-list-popover>
+
+        <ng-container *ngIf="!condensed || !first || !item.list">
+            <a fd-nested-list-link *ngIf="item.link"
+               [onClickCallback]="item.link.callback"
+               [selected]="item.link.selected"
+               [attr.href]="item.link.href ? item.link.href : null">
+                <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
+                <span fd-nested-list-title>{{item.link.title}}</span>
+            </a>
+            <fd-prepared-nested-list [first]="false" *ngIf="item.list" [list]="item.list"></fd-prepared-nested-list>
+        </ng-container>
+
+    </li>
+</ul>

@@ -17,9 +17,4 @@ describe('SideNavigationComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
-
-    it('should create', () => {
-        expect(component).toBeTruthy();
-        expect(component.collapsed).toBe(false);
-    });
 });

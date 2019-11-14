@@ -50,6 +50,7 @@ import { DragAndDropModule } from './utils/drag-and-drop/drag-and-drop.module';
 import { ProductSwitchModule } from './product-switch/product-switch.module';
 import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification-service/notification.service';
+import { NestedListModule } from './nested-list/nested-list.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -82,6 +83,7 @@ import { NotificationService } from './notification/notification-service/notific
     MegaMenuModule,
     ModalModule,
     MultiInputModule,
+    NestedListModule,
     NotificationModule,
     PaginationModule,
     PanelModule,
