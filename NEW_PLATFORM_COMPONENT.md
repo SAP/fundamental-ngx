@@ -113,7 +113,7 @@ In poster-header.component.html Copy/paste the code here:
 <description>
     <p>The poster shows an image</p>
 </description>
-<import module="PosterModule" path="fundamental-ngx/platform"></import>
+<import module="PosterModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>
