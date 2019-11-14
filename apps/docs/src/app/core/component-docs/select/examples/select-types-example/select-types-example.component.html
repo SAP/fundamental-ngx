@@ -1,3 +1,5 @@
+<div style="padding: 8px">
+Select box with No Border
 <fd-select class="fd-select-example" 
     [(value)]="selectValue1" 
     [selectType]="'noborder'"
@@ -7,7 +9,10 @@
         {{option}}
     </fd-option>
 </fd-select>
+</div>
 
+<div style="padding: 8px">
+Select box with Split Border
 <fd-select class="fd-select-example"  
     [(value)]="selectValue2" 
     [selectType]="'splitborder'"
@@ -17,7 +22,10 @@
         {{option}}
     </fd-option>
 </fd-select>
+</div>
 
+<div style="padding: 8px">
+Default Select
 <fd-select class="fd-select-example"  
     [(value)]="selectValue3" 
     [placeholder]="'Default select'">
@@ -26,7 +34,10 @@
         {{option}}
     </fd-option>
 </fd-select>
+</div>
 
+<div style="padding: 8px">
+Select box with Icon
 <fd-select class="fd-select-example"  
     [(value)]="selectValue4" 
     [glyph]="'filter'" 
@@ -36,3 +47,4 @@
         {{option}}
     </fd-option>
 </fd-select>
+</div>
