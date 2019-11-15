@@ -83,6 +83,12 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
     stepUpClicked() {
         this.inputTextValue++;
         this.onChange(this.inputTextValue);
