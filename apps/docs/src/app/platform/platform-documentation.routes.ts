@@ -3,11 +3,11 @@ import { PlatformDocumentationComponent } from './documentation/platform-documen
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { PlatformButtonDocsComponent } from './component-docs/platform-button/platform-button-docs.component';
 import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
+import { PlatformActionbarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
+import { PlatformActionBarDocsComponent } from './component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { ApiComponent } from './../documentation/core-helpers/api/api.component';
 import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
-
-
 
 export const ROUTES: Routes = [
     {
@@ -18,12 +18,21 @@ export const ROUTES: Routes = [
             { path: 'home', component: PlatformHomeComponent },
             { path: 'new-component', component: NewComponentComponent },
             {
-                path: 'button', component: PlatformButtonHeaderComponent, children: [
+                path: 'button',
+                component: PlatformButtonHeaderComponent,
+                children: [
                     { path: '', component: PlatformButtonDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
+                ]
+            },
+            {
+                path: 'action-bar',
+                component: PlatformActionbarHeaderComponent,
+                children: [
+                    { path: '', component: PlatformActionBarDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
                 ]
             }
         ]
     }
-
 ];
