@@ -405,6 +405,7 @@ import { SideNavigationObjectExampleComponent } from './component-docs/side-navi
 import { SideNavigationCondensedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
 import { SideNavigationCondensedObjectExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import { SideNavigationMultipleSelectedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
+import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examples/shellbar-side-nav/shellbar-side-nav-example.component';
 
 
 @NgModule({
@@ -599,6 +600,7 @@ import { SideNavigationMultipleSelectedExampleComponent } from './component-docs
         ShellbarBasicExampleComponent,
         ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent,
+        ShellbarSideNavExampleComponent,
         SideNavigationExampleComponent,
         SideNavigationIconsExampleComponent,
         SideNavigationTitlesExampleComponent,

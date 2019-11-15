@@ -20,6 +20,7 @@ import { IconModule } from '../icon/icon.module';
 import { DragAndDropModule } from '../utils/drag-and-drop/drag-and-drop.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '../product-switch/product-switch.module';
+import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { ProductSwitchModule } from '../product-switch/product-switch.module';
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
-        ShellbarUserMenuComponent
+        ShellbarUserMenuComponent,
+        ShellbarSidenavDirective
     ],
     imports: [
         CommonModule,
@@ -52,7 +54,8 @@ import { ProductSwitchModule } from '../product-switch/product-switch.module';
         ShellbarActionComponent,
         ShellbarLogoComponent,
         ShellbarTitleComponent,
-        ShellbarUserMenuComponent
+        ShellbarUserMenuComponent,
+        ShellbarSidenavDirective
     ]
 })
 export class ShellbarModule { }
