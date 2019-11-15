@@ -54,7 +54,7 @@ import { DatePipe } from '@angular/common';
 export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** @hidden The value of the input */
-    inputFieldDate = null;
+    inputFieldDate: string = null;
 
     /** @hidden Whether the date input is invalid */
     isInvalidDateInput: boolean = false;
@@ -299,7 +299,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             dateValidation: {
                 valid: false
             }
-        }
+        };
     }
 
     /** @hidden */
@@ -373,6 +373,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * validation the results are different. It also changes to state of isInvalidDateInput
      */
     dateStringUpdate(date: string): void {
+        this.inputFieldDate = date;
         /** Case when there is single mode */
         if (this.type === 'single') {
 
@@ -410,6 +411,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
                 this.isInvalidDateInput = !firstDate.isDateValid() || !secondDate.isDateValid();
 
+
                 /** If the end date is before the start date, there is need to replace them  */
                 if ((firstDate.getTimeStamp() > secondDate.getTimeStamp()) && secondDate.isDateValid()) {
                     this.selectedRangeDate = { start: secondDate, end: firstDate };
@@ -435,11 +437,12 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Method that provides information if model selected date/dates have properly types and are valid */
     public isModelValid(): boolean {
         if (this.type === 'single') {
-            return this.selectedDate &&
+            return (this.selectedDate &&
                 this.selectedDate instanceof FdDate &&
-                this.selectedDate.isDateValid();
+                this.selectedDate.isDateValid()
+            ) || (!this.inputFieldDate && this.allowNull);
         } else {
-            return this.selectedRangeDate &&
+            return (this.selectedRangeDate &&
                 (
                     this.selectedRangeDate.start &&
                     this.selectedRangeDate.start instanceof FdDate &&
@@ -448,7 +451,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                     this.selectedRangeDate.end &&
                     this.selectedRangeDate.end instanceof FdDate &&
                     this.selectedRangeDate.end.isDateValid()
-                );
+                )) || (!this.inputFieldDate && this.allowNull);
         }
     }
 
