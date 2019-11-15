@@ -7,7 +7,8 @@ import {
     EventEmitter,
     ChangeDetectorRef,
     ViewChild,
-    ElementRef
+    ElementRef,
+    OnDestroy
 } from '@angular/core';
 import { Placement } from 'popper.js';
 
@@ -29,7 +30,7 @@ export interface ActionItem {
     styleUrls: ['./action-bar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionBarComponent implements OnInit {
+export class ActionBarComponent implements OnInit, OnDestroy {
     /**
      * Actionbar title
      */
@@ -97,6 +98,7 @@ export class ActionBarComponent implements OnInit {
      */
     @Output()
     itemClick: EventEmitter<ActionItem> = new EventEmitter<ActionItem>();
+    timer;
 
     constructor(private cd: ChangeDetectorRef) {}
 
@@ -104,7 +106,7 @@ export class ActionBarComponent implements OnInit {
 
     enableEditTitle(editing: boolean) {
         this.editing = editing;
-        setTimeout(() => this.inputTitle.nativeElement.focus(), 0);
+        this.timer = setTimeout(() => this.inputTitle.nativeElement.focus(), 0);
         this.cd.markForCheck();
     }
 
@@ -124,4 +126,11 @@ export class ActionBarComponent implements OnInit {
             this.cd.markForCheck();
         }
     };
+
+    ngOnDestroy() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+    }
+
 }
