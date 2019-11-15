@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-action-bar-simple-example',
     templateUrl: './platform-action-bar-simple-example.component.html',
-    styleUrls: ['./platform-action-bar-simple-example.component.scss']
+    styleUrls: ['./platform-action-bar-simple-example.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformActionbarExamplesComponent implements OnInit {
     actionItems: any[];
