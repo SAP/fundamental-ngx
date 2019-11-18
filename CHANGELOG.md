@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.43"></a>
+# [0.13.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.42...v0.13.0-rc.43) (2019-11-18)
+
+
+### Bug Fixes
+
+* (core) added selected button with group ([#1543](https://github.com/SAP/fundamental-ngx/issues/1543)) ([4c990e5](https://github.com/SAP/fundamental-ngx/commit/4c990e5))
+
+
+
 <a name="0.13.0-rc.42"></a>
 # [0.13.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.41...v0.13.0-rc.42) (2019-11-18)
 
