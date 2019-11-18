@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.2-rc.0"></a>
+## [0.11.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.11.1...v0.11.2-rc.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* ng7 - Change localization button type ([#1608](https://github.com/SAP/fundamental-ngx/issues/1608)) ([75459a2](https://github.com/SAP/fundamental-ngx/commit/75459a2))
+
+
+
 <a name="0.11.1"></a>
 ## [0.11.1](https://github.com/SAP/fundamental-ngx/compare/v0.11.1-rc.6...v0.11.1) (2019-10-18)
 
