@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
 
 /**
@@ -21,4 +21,8 @@ export class LocalizationEditorMainComponent extends LocalizationEditorItemCompo
      * This variable is controlled by parent component
      * */
     expanded: boolean;
+
+    /** Event thrown, when click event is dispatched on button element. */
+    @Output()
+    readonly editorButtonClicked: EventEmitter<void> = new EventEmitter<void>();
 }
