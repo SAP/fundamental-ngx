@@ -71,12 +71,8 @@ import {
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
 } from '../core/component-docs/button/examples/button-examples.component';
-import {
-    ButtonGroupXsExampleComponent,
-    ButtonGroupSmallExampleComponent,
-    ButtonGroupCompactExampleComponent,
-    ButtonGroupDefaultExampleComponent
-} from '../core/component-docs/button-group/examples/button-group-examples.component';
+import { ButtonGroupDefaultExampleComponent } from '../core/component-docs/button-group/examples/button-group-default-example.component';
+import { ButtonGroupToggleExampleComponent } from '../core/component-docs/button-group/examples/button-group-toggle-example.component';
 import { CalendarRangeExampleComponent } from '../core/component-docs/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from '../core/component-docs/calendar/examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from '../core/component-docs/calendar/examples/calendar-monday-start-example.component';
@@ -480,9 +476,7 @@ import { SideNavigationMultipleSelectedExampleComponent } from './component-docs
         ButtonSplitProgrammaticalExampleComponent,
         ButtonSplitOptionsExampleComponent,
         ButtonSplitTemplateExampleComponent,
-        ButtonGroupXsExampleComponent,
-        ButtonGroupSmallExampleComponent,
-        ButtonGroupCompactExampleComponent,
+        ButtonGroupToggleExampleComponent,
         ButtonGroupDefaultExampleComponent,
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
