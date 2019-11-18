@@ -42,40 +42,74 @@ export class ShellbarAdvancedExampleComponent {
         'Strawberry',
     ];
 
+
     productSwitcher: ProductSwitchItem[] = [
-        {title: 'Fiori Home', image: './assets/01.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Fiori Home')}},
-        {title: 'S/4 HANA Cloud', image: './assets/02.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'S/4 HANA Cloud')}},
-        {title: 'Analytics Cloud', image: './assets/03.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Analytics Cloud')}},
-        {title: 'Ariba', image: './assets/04.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Ariba')}},
-        {title: 'SuccessFactors', image: './assets/05.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'SuccessFactors')}},
-        {title: 'Commerce Cloud', image: './assets/06.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Commerce Cloud')}},
-        {title: 'Gigya', image: './assets/07.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Gigya')}},
-        {title: 'Callidus Cloud', image: './assets/08.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Callidus Cloud')}},
-        {title: 'Fieldglass', image: './assets/09.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Fieldglass')}},
-        {title: 'Concur', image: './assets/10.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Concur')}},
-        {title: 'Cloud for Customer', image: './assets/11.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Cloud for Customer')}},
-        {title: 'Cloud Portal', image: './assets/12.png',
-            callback: ($event) => {this.productSwitcherCallback($event, 'Cloud Portal')}}
+        {
+            title: 'Home',
+            subtitle: 'Central Home',
+            icon: 'home',
+            callback: () => this.productSwitcherCallback('Home '),
+            disabledDragAndDrop: true,
+            stickToPosition: true
+        },
+        {
+            title: 'Analytics Cloud',
+            subtitle: 'Analytics Cloud',
+            icon: 'business-objects-experience',
+            selected: true,
+        },
+        {
+            title: 'Catalog',
+            subtitle: 'Ariba',
+            icon: 'contacts',
+        },
+        {
+            title: 'Guided Buying',
+            icon: 'credit-card',
+        },
+        {
+            title: 'Strategic Procurement',
+            icon: 'cart-3',
+        },
+        {
+            title: 'Vendor Managemen',
+            subtitle: 'Fieldglass',
+            icon: 'shipping-status',
+        },
+        {
+            title: 'Human Capital Management',
+            icon: 'customer',
+        },
+        {
+            title: 'Sales Cloud',
+            subtitle: 'Sales Cloud',
+            icon: 'sales-notification',
+        },
+        {
+            title: 'Commerce Cloud',
+            subtitle: 'Commerce Cloud',
+            icon: 'retail-store',
+        },
+        {
+            title: 'Marketing Cloud',
+            subtitle: 'Marketing Cloud',
+            icon: 'marketing-campaign',
+        },
+        {
+            title: 'Service Cloud',
+            icon: 'family-care',
+        },
+        {
+            title: 'S/4HANA',
+            icon: 'batch-payments',
+        },
     ];
 
     settingsCallback($event) {
-        console.log($event);
         alert('Settings Clicked');
     }
 
     signOutCallback($event) {
-        console.log($event);
         alert('Sign Out Clicked');
     }
 
@@ -89,8 +123,7 @@ export class ShellbarAdvancedExampleComponent {
         alert('Pool Action Clicked');
     }
 
-    productSwitcherCallback($event, product) {
-        console.log($event);
+    productSwitcherCallback(product) {
         alert(product + ' Product Clicked');
     }
 }
