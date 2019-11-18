@@ -10,6 +10,9 @@ As a contributor, here are the guidelines we would like you to follow:
  - [Commit Message Guidelines](#commit)
  - [Create PR Title Guidelines](#pr)
  - [Submitting a Pull Request ](#submit-pr)
+ - [CI PipeLine Description](#ci-pipeline)
+ - [Coding Rules](#rules)
+ - [Signing the CLA](#cla)
 
 
 
@@ -327,6 +330,9 @@ from the main (upstream) repository:
     ```shell
     git pull --ff upstream master
     ```
+    
+## <a name="ci-pipeline"></a> CI PipeLine
+Full description of current CI PipeLine can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Deploy-(Release-and-Pre-Release)-pipe-line-description).
 
 ## <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
