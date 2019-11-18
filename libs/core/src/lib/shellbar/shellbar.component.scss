@@ -19,12 +19,18 @@
 
 .fd-shellbar {
     .fd-shellbar-side-nav-control {
-        margin-right: 10px;
+        color: white;
+        margin-right: 4px;
         @media (min-width: 600px) {
-            margin-left: -8px;
+            margin-left: -12px;
         }
         @media (min-width: 1024px) {
-            margin-left: -16px;
+            margin-left: -28px;
+        }
+
+        &:hover {
+            color: #354a5f;
+            color: var(--fd-color-shell-1, #354a5f);
         }
     }
 }
