@@ -21,6 +21,10 @@ import * as platformComplexMenuSrc from '!raw-loader!./platform-menu-examples/pl
 import * as platformComplexMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-complex-example.component.ts';
 import * as platformComplexMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-complex-example.component.scss';
 
+import * as platformMenuClickCloseSrc from '!raw-loader!./platform-menu-examples/platform-menu-click-close-example.component.html';
+import * as platformMenuClickCloseTsCode from '!raw-loader!./platform-menu-examples/platform-menu-click-close-example.component.ts';
+import * as platformMenuClickCloseScss from '!raw-loader!./platform-menu-examples/platform-menu-click-close-example.component.scss';
+
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
 
@@ -101,6 +105,21 @@ export class PlatformMenuDocsComponent implements OnInit {
             code: platformComplexMenuTsCode,
             fileName: 'platform-menu-complex-example',
             component: 'PlatformMenuComplexExampleComponent'
+        }
+    ];
+
+    menuClickClose: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformMenuClickCloseSrc,
+            fileName: 'platform-menu-click-close-example',
+            scssFileCode: platformMenuClickCloseScss
+        },
+        {
+            language: 'typescript',
+            code: platformMenuClickCloseTsCode,
+            fileName: 'platform-menu-click-close-example',
+            component: 'PlatformMenuClickCloseExampleComponent'
         }
     ];
 

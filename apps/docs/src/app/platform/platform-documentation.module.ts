@@ -25,6 +25,7 @@ import { PlatformMenuComplexExampleComponent } from './component-docs/platform-m
 import { PlatformMenuSeparatorExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-separator-example.component';
 import { PlatformMenuGroupExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-group-example.component';
 import { PlatformMenuIconsExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-icons-example.component';
+import { PlatformMenuClickCloseExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-click-close-example.component';
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
@@ -44,6 +45,7 @@ import { PlatformMenuIconsExampleComponent } from './component-docs/platform-men
         PlatformMenuSeparatorExampleComponent,
         PlatformMenuIconsExampleComponent,
         PlatformMenuComplexExampleComponent,
+        PlatformMenuClickCloseExampleComponent,
         NewComponentComponent
     ],
     imports: [
@@ -52,8 +54,6 @@ import { PlatformMenuIconsExampleComponent } from './component-docs/platform-men
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
     ],
-    providers: [
-        { provide: 'CURRENT_LIB', useValue: 'platform' }
-    ]
+    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }]
 })
 export class PlatformDocumentationModule {}
