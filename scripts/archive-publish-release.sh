@@ -21,11 +21,6 @@ rcVersion=$(grep '\"version\":' package.json | grep -c "\-rc.")
 git_status=$(git status --porcelain)
 [ -n "$git_status" ] && echo -e "\n\t${ERROR}Sorry, you have uncommitted changes.${NOCOLOR}\n\tIn order to publish a release, your working directory must be clean.\n\n" && exit 0
 
-# make sure the branch is up-to-date
-hash_head=$(git rev-parse HEAD)
-hash_upstream=$(git rev-parse $git_branch@{upstream})
-[ "$hash_head" != "$hash_upstream" ] && echo -e "\n\t${ERROR}Sorry, the branch is out of date.${NOCOLOR}\n\tIn order to publish a release, the branch must match the origin.\n\n" && exit 0
-
 set -o errexit
 
 git checkout -b $ARCHIVE_TMP_BRANCH
