@@ -79,13 +79,12 @@ import { CalendarMondayStartExampleComponent } from '../core/component-docs/cale
 import { ComboboxExampleComponent } from '../core/component-docs/combobox/examples/combobox-example.component';
 import { DatePickerRangeExampleComponent } from '../core/component-docs/date-picker/examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from '../core/component-docs/date-picker/examples/date-picker-single-example.component';
-import {
-    DropdownContextualMenuExampleComponent,
-    DropdownDefaultExampleComponent,
-    DropdownIconsExampleComponent,
-    DropdownStateExampleComponent,
-    DropdownToolbarExampleComponent
-} from '../core/component-docs/dropdown/examples/dropdown-examples.component';
+
+import { DropdownContextualMenuExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-contextual-menu-example.component';
+import { DropdownDefaultExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-default-example.component';
+import { DropdownIconsExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-icons-example.component';
+import { DropdownStateExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-state-example.component';
+import { DropdownToolbarExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-toolbar-example.component';
 import { IconExampleComponent } from '../core/component-docs/icon/examples/icon-example.component';
 import {
     CircleIdentifierExampleComponent,
