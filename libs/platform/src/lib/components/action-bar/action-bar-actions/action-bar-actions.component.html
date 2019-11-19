@@ -12,7 +12,7 @@
         {{ action.label }}
     </button>
 
-    <fd-popover class="action-button-margin" placement="{{ placement }}">
+    <fd-popover [(isOpen)]="isContextualMenuOpen" class="action-button-margin" placement="{{ placement }}">
         <fd-popover-control>
             <button
                 *ngIf="menuItems?.length > 0"
