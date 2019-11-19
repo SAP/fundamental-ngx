@@ -1,9 +1,8 @@
 <form [formGroup]="customForm">
     <div class="fd-form-item">
-        <label fd-form-label>Localization Editor</label>
         <fd-localization-editor>
-            <fd-localization-editor-main [state]="'information'" [label]="'EN'" [compact]="true">
-                <input fd-form-control fd-localization-editor-input formControlName="en" type="text" placeholder="EN">
+            <fd-localization-editor-main [label]="'EN'" [compact]="true">
+                <input [state]="'information'" fd-form-control fd-localization-editor-input formControlName="en" type="text" placeholder="EN">
             </fd-localization-editor-main>
             <li fd-localization-editor-element *ngFor="let key of customFormKeys">
                 <fd-localization-editor-item [label]="key | uppercase" [compact]="true">

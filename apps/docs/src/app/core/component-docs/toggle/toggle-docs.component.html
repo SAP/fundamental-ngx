@@ -32,11 +32,23 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'semanticCompact'" [componentName]="'toggle'">
+    Semantic and Compact Mode
+</fd-docs-section-title>
+<description>It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode
+by passing <code>[compact]="true"</code> to toggle component.</description>
+<component-example [name]="'ex4'">
+    <semantic-toggle-example></semantic-toggle-example>
+</component-example>
+<code-example [exampleFiles]="toggleSemantic"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'withReactiveForm'" [componentName]="'toggle'">
     Toggle used within Reactive Form
 </fd-docs-section-title>
 <description>It is possible to use the fd-toggle component within Angular Reactive Forms</description>
-<component-example [name]="'ex4'">
+<component-example [name]="'ex5'">
     <fd-toggle-forms-example></fd-toggle-forms-example>
 </component-example>
 <code-example [exampleFiles]="toggleFormExample"></code-example>

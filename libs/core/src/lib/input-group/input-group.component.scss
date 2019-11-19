@@ -23,5 +23,8 @@ fd-input-group {
     .fd-input, .fd-textarea {
         margin-top: 0;
         margin-bottom: 0;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }

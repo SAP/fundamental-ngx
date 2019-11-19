@@ -21,7 +21,8 @@ import { FdDate } from '@fundamental-ngx/core';
                 Valid: {{customForm.controls.date.valid}}<br/>
                 Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
             </div>
-
+            <br/>
+            <br/>
 
             <div fd-form-item>
                 <label fd-form-label>Disabled Date Picker</label>

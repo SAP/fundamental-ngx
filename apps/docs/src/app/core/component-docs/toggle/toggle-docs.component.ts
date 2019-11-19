@@ -12,6 +12,8 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as toggleFormExampleHtmlSrc from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.html';
 import * as toggleFormExampleTsCode from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.ts';
+import * as semanticToggleExampleHtml from '!raw-loader!./examples/semantic-toggle-example/semantic-toggle-example.component.html';
+import * as semanticToggleExampleTs from '!raw-loader!./examples/semantic-toggle-example/semantic-toggle-example.component.ts';
 import * as toggleFormExampleScssCode from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -90,6 +92,17 @@ export class ToggleDocsComponent implements OnInit {
             typescriptFileCode: toggleBindingExampleTsCode,
             component: 'ToggleBindingExampleComponent',
             scssFileCode: toggleBindingExampleScssCode
+        }
+    ];
+
+
+    toggleSemantic: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'semantic-toggle-example',
+            code: semanticToggleExampleHtml,
+            typescriptFileCode: semanticToggleExampleTs,
+            component: 'SemanticToggleExampleComponent',
         }
     ];
 
