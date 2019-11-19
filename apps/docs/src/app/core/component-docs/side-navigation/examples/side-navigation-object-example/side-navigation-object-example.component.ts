@@ -42,43 +42,14 @@ export class SideNavigationObjectExampleComponent {
                             {
                                 link: {
                                     icon: 'menu',
-                                    title: 'Link 2'
+                                    title: 'Link 2',
+                                    selected: true
                                 }
                             },
                             {
-                                expanded: false,
                                 link: {
                                     icon: 'menu',
                                     title: 'Link 3',
-                                },
-                                list: {
-                                    items: [
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 1'
-                                            }
-                                        },
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 2'
-                                            }
-                                        },
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 3'
-                                            }
-                                        },
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 4',
-                                                selected: true
-                                            }
-                                        }
-                                    ]
                                 }
                             },
                             {
