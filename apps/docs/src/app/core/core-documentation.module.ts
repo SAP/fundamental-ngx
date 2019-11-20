@@ -400,6 +400,8 @@ import { SideNavigationObjectExampleComponent } from './component-docs/side-navi
 import { SideNavigationCondensedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
 import { SideNavigationCondensedObjectExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import { SideNavigationMultipleSelectedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
+import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
+import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
 
 
 @NgModule({
@@ -745,7 +747,10 @@ import { SideNavigationMultipleSelectedExampleComponent } from './component-docs
         SideNavigationCondensedObjectExampleComponent,
         SideNavigationObjectExampleComponent,
         SideNavigationProgrammaticallyExampleComponent,
-        SideNavigationThreeLevelsExampleComponent
+        SideNavigationThreeLevelsExampleComponent,
+        NotificationContentComponent,
+        DatePickerComplexI18nExampleComponent,
+        DatetimePickerComplexI18nExampleComponent
     ],
 
     entryComponents: [

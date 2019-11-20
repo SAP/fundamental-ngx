@@ -9,6 +9,7 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -22,6 +23,7 @@ import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
+import { DatePipe } from '@angular/common';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -49,7 +51,8 @@ import { FdDatetime } from './models/fd-datetime';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
-        }
+        },
+        DatePipe
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -100,6 +103,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** Whether the time component should be meridian (am/pm). */
     @Input()
     meridian: boolean = true;
+
+    /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
+    @Input()
+    format: string = 'MM/dd/yyyy, HH:mm:ss';
+
+    /** Locale for date pipe. See more https://angular.io/guide/i18n */
+    @Input()
+    locale: string;
 
     /** Whether the component is disabled. */
     @Input()
@@ -242,7 +253,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     validate(control: AbstractControl): {
         [key: string]: any
     } {
-        return this.isModelValid() ? null : {
+        return this.isCurrentModelValid() ? null : {
             dateValidation: {
                 valid: false
             }
@@ -320,9 +331,9 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     constructor(private elRef: ElementRef,
                 private changeDetRef: ChangeDetectorRef,
-                public dateTimeAdapter: DateTimeFormatParser
-    ) {
-    }
+                public dateTimeAdapter: DateTimeFormatParser,
+                @Optional() private datePipe: DatePipe
+    ) {}
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -351,7 +362,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.selectedDate = selected.date;
         this.time = selected.time;
         this.date = new FdDatetime(this.selectedDate, this.time);
-        if (this.isModelValid()) {
+        if (this.isCurrentModelValid()) {
             this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.setInput(this.date);
         }
@@ -369,7 +380,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.time = this.timeComponent.time;
         }
         this.date = new FdDatetime(this.selectedDate, this.time);
-        this.isInvalidDateInput = !this.isModelValid();
+        this.isInvalidDateInput = !this.isCurrentModelValid();
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -384,7 +395,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.selectedDate = FdDate.getToday();
         }
         this.date = new FdDatetime(this.selectedDate, this.time);
-        this.isInvalidDateInput = !this.isModelValid();
+        this.isInvalidDateInput = !this.isCurrentModelValid();
         this.setInput(this.date);
         this.onChange(this.date);
     }
@@ -403,12 +414,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      */
     handleInputChange(date: string): void {
         const fdTimeDate = this.dateTimeAdapter.parse(date);
-        this.selectedDate = fdTimeDate.date;
-        this.time = fdTimeDate.time;
-        this.date = new FdDatetime(this.selectedDate, this.time);
-        this.isInvalidDateInput = !this.isModelValid();
-        this.onChange(fdTimeDate);
+        this.isInvalidDateInput = !this.isModelValid(fdTimeDate);
         if (!this.isInvalidDateInput) {
+            this.selectedDate = fdTimeDate.date;
+            this.time = fdTimeDate.time;
+            this.date = new FdDatetime(this.selectedDate, this.time);
+            this.onChange(fdTimeDate);
             this.refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
         }
         if (!date && this.allowNull) {
@@ -418,20 +429,25 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.time = this.date.time;
             this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.onChange(null);
-        } else if (!this.allowNull) {
+        } else if (!date && !this.allowNull) {
             this.isInvalidDateInput = true;
         }
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
-    public isModelValid(): boolean {
-        return this.date &&
-            this.date instanceof FdDatetime &&
-            this.date.isDateValid() && this.date.isTimeValid();
+    public isCurrentModelValid(): boolean {
+        return this.isModelValid(this.date);
+    }
+
+    /** Method that provides information if FdDateTime passed as arg has properly types and is valid */
+    private isModelValid(fdDateTime: FdDatetime): boolean {
+        return fdDateTime &&
+            fdDateTime instanceof FdDatetime &&
+            fdDateTime.isDateValid() && fdDateTime.isTimeValid();
     }
 
     private setInput(fdDateTime: FdDatetime): void {
-        this.inputFieldDate = this.dateTimeAdapter.format(fdDateTime);
+        this.inputFieldDate = this.formatDateTime(fdDateTime);
         this.changeDetRef.detectChanges();
     }
 
@@ -439,6 +455,21 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
         if (this.calendarComponent) {
             this.calendarComponent.setCurrentlyDisplayed(date);
+        }
+    }
+
+    /**
+     * @hidden
+     * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
+     */
+    private formatDateTime(fdDateTime: FdDatetime): string {
+
+        const customFormattedDate: string = this.dateTimeAdapter.format(fdDateTime);
+
+        if (customFormattedDate) {
+            return customFormattedDate;
+        } else {
+            return this.datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
     }
 

@@ -14,6 +14,9 @@ import * as dateTimePickerAllowNullTs from '!raw-loader!./examples/datetime-allo
 import * as dateTimeFormatHtml from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.html';
 import * as dateTimeFormatTs from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.ts';
 
+import * as datetimeI18nComplexTs from '!raw-loader!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.ts';
+import * as datetimeI18nComplexH from '!raw-loader!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.html';
+
 import * as dateTimeDisabledHtml from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.html';
 import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.ts';
 import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
@@ -118,6 +121,21 @@ export class DatetimePickerDocsComponent implements OnInit {
             code: dateTimePickerAllowNullTs,
             fileName: 'date-time-picker-allow-null-example',
             component: 'DatetimePickerAllowNullExampleComponent'
+        },
+    ];
+
+    datetimeI18nComplex: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: datetimeI18nComplexTs,
+            fileName: 'fd-datetime-picker-complex-i18n-example',
+            component: 'DatetimePickerComplexI18nExampleComponent'
+        },
+        {
+            language: 'html',
+            code: datetimeI18nComplexH,
+            fileName: 'fd-datetime-picker-complex-i18n-example',
+            component: 'DatetimePickerComplexI18nExampleComponent'
         },
     ];
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FdDatetime } from '../models/fd-datetime';
 import { FdDate } from '../../calendar/models/fd-date';
-import { TimeObject } from '../../time/time-object';
+import { DatePipe } from '@angular/common';
 
 export function DATE_TIME_FORMAT_FACTORY() {
     return new DateTimeFormatParserDefault();
@@ -25,6 +25,7 @@ export abstract class DateTimeFormatParser {
     /**
      * Should take in a FdDatetime model object and return a string representation.
      * @param date FdDatetime object to concert to a date string.
+     * Return null, to keep default angular DatePipe as a formatter.
      */
     abstract format(date: FdDatetime): string;
 }
@@ -43,35 +44,24 @@ export class DateTimeFormatParserDefault extends DateTimeFormatParser {
         if (!value) {
             return FdDatetime.getToday();
         } else {
-            let time: TimeObject;
-            let date: FdDate;
-            const dateStr = value.split(',')[0];
-            if (dateStr) {
-                const dateSplitStr = dateStr.split('.').map(Number);
-                date = new FdDate(dateSplitStr[2], dateSplitStr[1], dateSplitStr[0]);
-            }
-            const timeStr = value.split(',')[1];
-            if (timeStr) {
-                const timeSplitStr = timeStr.split(':').map(Number);
-                time = { hour: timeSplitStr[0], minute: timeSplitStr[1], second: timeSplitStr[2] };
-            }
-            if (date) {
-                return new FdDatetime(date, time);
-            }
+            const date: Date = new Date(value);
+            return new FdDatetime(
+                new FdDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+                {
+                    hour: date.getHours(),
+                    minute: date.getMinutes(),
+                    second: date.getSeconds()
+                }
+            );
         }
     }
 
     /**
      * Takes in a FdDatetime object and returns the string representation.
      * @param date FdDatetime model object to convert to a string.
+     * Return null, to keep default angular DatePipe as a formatter.
      */
     public format(date: FdDatetime): string {
-        return date.day + '.' +
-            date.month + '.' +
-            date.year + ', ' +
-            date.hour + ':' +
-            date.minute + ':' +
-            date.second
-        ;
+        return null;
     }
 }

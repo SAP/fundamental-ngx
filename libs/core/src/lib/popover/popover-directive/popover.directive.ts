@@ -24,7 +24,7 @@ export type PopoverFillMode = 'at-least' | 'equal';
  * ```
  */
 @Directive({
-    selector: '[fdPopover]'
+    selector: '[fdPopover]',
 })
 export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 

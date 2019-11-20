@@ -4,9 +4,8 @@ import {
     Component,
     EventEmitter,
     forwardRef,
-    Input,
-    Output,
-    ViewChild,
+    Input, Optional,
+    Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
@@ -16,6 +15,7 @@ import { FdDate } from '../calendar/models/fd-date';
 import { CalendarService } from '../calendar/calendar.service';
 import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
+import { DatePipe } from '@angular/common';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -45,7 +45,8 @@ import { DateFormatParser } from './format/date-parser';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => DatePickerComponent),
             multi: true
-        }
+        },
+        DatePipe
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -72,6 +73,14 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Date picker input placeholder string */
     @Input()
     placeholder: string = 'mm/dd/yyyy';
+
+    /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
+    @Input()
+    format: string = 'MM/dd/yyyy';
+
+    /** Locale for date pipe. See more https://angular.io/guide/i18n */
+    @Input()
+    locale: string;
 
     /** Whether this is the compact input date picker */
     @Input()
@@ -235,7 +244,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     public handleSingleDateChange(date: FdDate): void {
         if (date) {
-            this.inputFieldDate = this.dateAdapter.format(date);
+            this.inputFieldDate = this.formatDate(date);
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
@@ -252,8 +261,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             (!CalendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
                 !CalendarService.datesEqual(this.selectedRangeDate.end, dates.end))
         ) {
-            this.inputFieldDate = this.dateAdapter.format(dates.start) + this.dateAdapter.rangeDelimiter
-                + this.dateAdapter.format(dates.end)
+            this.inputFieldDate = this.formatDate(dates.start)
+                + this.dateAdapter.rangeDelimiter
+                + this.formatDate(dates.end)
             ;
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
@@ -273,7 +283,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden */
     constructor(
         public dateAdapter: DateFormatParser,
-        private changeDetectionRef: ChangeDetectorRef
+        private changeDetectionRef: ChangeDetectorRef,
+        @Optional() private datePipe: DatePipe
     ) {
     }
 
@@ -325,7 +336,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             selected = <FdDate>selected;
             this.selectedDate = selected;
             if (this.isModelValid()) {
-                this.inputFieldDate = this.dateAdapter.format(selected);
+                this.inputFieldDate = this.formatDate(selected);
                 this.refreshCurrentlyDisplayedCalendarDate(selected);
             } else {
                 this.inputFieldDate = '';
@@ -343,8 +354,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
                 if (this.isModelValid()) {
                     this.refreshCurrentlyDisplayedCalendarDate(selected.start);
-                    this.inputFieldDate = this.dateAdapter.format(selected.start) +
-                        this.dateAdapter.rangeDelimiter + this.dateAdapter.format(selected.end);
+                    this.inputFieldDate = this.formatDate(selected.start) +
+                        this.dateAdapter.rangeDelimiter + this.formatDate(selected.end);
                 } else {
                     this.inputFieldDate = '';
                 }
@@ -445,6 +456,21 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
         if (this.calendarComponent) {
             this.calendarComponent.setCurrentlyDisplayed(date);
+        }
+    }
+
+    /**
+     * @hidden
+     * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
+     */
+    private formatDate(fdDate: FdDate): string {
+
+        const customFormattedDate: string = this.dateAdapter.format(fdDate);
+
+        if (customFormattedDate) {
+            return customFormattedDate;
+        } else {
+            return this.datePipe.transform(fdDate.toDate(), this.format, null, this.locale);
         }
     }
 
