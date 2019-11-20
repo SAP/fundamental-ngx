@@ -207,7 +207,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     /** @hidden */
     public groups: MenuGroup[];
     /** @hidden */
-    public sortedQueryList = [];
+    public sortedQueryList: MenuItemComponent[] = [];
 
     /** @hidden */
     @ViewChildren(MenuItemComponent)
@@ -216,7 +216,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     constructor(private cd: ChangeDetectorRef, private keyboardService: MenuKeyboardService) {}
 
     /** @hidden */
-    ngOnInit() {
+    ngOnInit(): void {
         if (
             (this.isScrolling && (this.scrollLimit === undefined || this.scrollLimit <= 0)) ||
             (!this.isScrolling && this.scrollLimit > 0)
@@ -232,7 +232,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes.width) {
             let minWidth: number;
             let splitWidthNumber: number;
@@ -262,21 +262,21 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.sortQueryList();
         this.handleKeypressForSortedQueryList();
 
         this.cd.markForCheck();
     }
 
-    private sortQueryList() {
+    private sortQueryList(): void {
         this.sortedQueryList = this.menuQueryList.toArray();
         this.sortedQueryList.sort((a, b) => {
-            return a.index - b.index;
+            return parseInt(a.index, 10) - parseInt(b.index, 10);
         });
     }
 
-    private handleKeypressForSortedQueryList() {
+    private handleKeypressForSortedQueryList(): void {
         this.sortedQueryList.forEach((item: MenuItemComponent, index: number) =>
             item.keyDown.pipe(takeUntil(this.onDestroy$)).subscribe((keyboardEvent: KeyboardEvent) => {
                 this.handleKeyPress(keyboardEvent, parseInt(item.index, 10));

@@ -55,7 +55,8 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
     /** @hidden */
     public finalItemWidth = '';
 
-    @Output() itemClick: EventEmitter<void> = new EventEmitter();
+    @Output()
+    readonly itemClick: EventEmitter<void> = new EventEmitter();
 
     /**  Event thrown, when there is some keyboard event detected on mega menu item */
     @Output()
