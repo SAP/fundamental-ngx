@@ -20,6 +20,7 @@
                     [attr.aria-label]="calendarI18nLabels.monthSelectionLabel"
                     [attr.aria-selected]="isOnMonthView()"
                     (click)="processViewChange('month')"
+                    aria-live="polite"
                     type="button">
                 {{monthLabel}}
             </button>
@@ -31,6 +32,7 @@
                     [attr.aria-label]="calendarI18nLabels.yearSelectionLabel"
                     [attr.aria-selected]="isOnYearView()"
                     (click)="processViewChange('year')"
+                    aria-live="polite"
                     type="button">
                 {{currentlyDisplayed.year}}
             </button>
