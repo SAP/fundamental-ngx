@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.53"></a>
+# [0.13.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.52...v0.13.0-rc.53) (2019-11-20)
+
+
+### Bug Fixes
+
+* (core) DatePicker - fix form's valid flag, when allowNull ([#1609](https://github.com/SAP/fundamental-ngx/issues/1609)) ([df066e1](https://github.com/SAP/fundamental-ngx/commit/df066e1))
+
+
+
 <a name="0.13.0-rc.52"></a>
 # [0.13.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.51...v0.13.0-rc.52) (2019-11-20)
 
