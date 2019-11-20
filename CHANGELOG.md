@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.51"></a>
+# [0.13.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.50...v0.13.0-rc.51) (2019-11-20)
+
+
+### Bug Fixes
+
+* **core:** Fix menu with addons ([#1582](https://github.com/SAP/fundamental-ngx/issues/1582)) ([8d3c0cf](https://github.com/SAP/fundamental-ngx/commit/8d3c0cf))
+
+
+
 <a name="0.13.0-rc.50"></a>
 # [0.13.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.49...v0.13.0-rc.50) (2019-11-20)
 
