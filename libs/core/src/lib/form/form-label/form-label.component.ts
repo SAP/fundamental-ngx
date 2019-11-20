@@ -36,4 +36,9 @@ export class FormLabelComponent {
     @Input()
     @HostBinding(('class.fd-form-label--radio'))
     radio: boolean = false;
+
+    /** Whether label is for inline-help */
+    @Input()
+    @HostBinding(('class.fd-form-label--inline-help'))
+    inlineHelp: boolean = false;
 }
