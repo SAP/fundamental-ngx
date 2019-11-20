@@ -124,6 +124,18 @@ describe('ComboboxComponent', () => {
         expect(component.inputText).toBe('someValue');
     });
 
+    it('should reset displayed values', () => {
+        component.writeValue('displayedValue2');
+        component.inputText = 'displayedValue2';
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        (<any>component).refreshDisplayedValues();
+        expect(component.displayedValues.length).toBe(1);
+        component.resetDisplayedValues();
+        expect(component.displayedValues.length).toBe(2);
+    });
+
     it('should registerOnChange and registerOnTouched', () => {
         component.registerOnChange('function');
         component.registerOnTouched('function');
