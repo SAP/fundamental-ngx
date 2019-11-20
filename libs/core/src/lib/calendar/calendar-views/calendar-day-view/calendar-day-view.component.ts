@@ -212,20 +212,22 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden
      *  Amount of selected days
-     *  0, when none,
-     *  1, when only startDate, or endDate same as startDate,
-     *  2, when both
+     *  0, when there is no day selected, or start date is invalid,
+     *  1, when there is only valid start date, or end date is same as start date,
+     *  2, when both dates are valid
      */
     get selectCounter(): number {
-        if (!this.selectedRangeDate || !this.selectedRangeDate.start) {
+        if (!this.selectedRangeDate || !this.selectedRangeDate.start || !this.selectedRangeDate.start.isDateValid()) {
             return 0;
         } else if (this.selectedRangeDate.start &&
-            (!this.selectedRangeDate.end ||
+            (!this.selectedRangeDate.end || !this.selectedRangeDate.end.isDateValid() ||
                 CalendarService.datesEqual(this.selectedRangeDate.start, this.selectedRangeDate.end)
             )
         ) {
             return 1;
-        } else if (this.selectedRangeDate.start && this.selectedRangeDate.end) {
+        } else if (
+            this.selectedRangeDate.start && this.selectedRangeDate.start.isDateValid() &&
+            this.selectedRangeDate.end && this.selectedRangeDate.end.isDateValid()) {
             return 2;
         }
     }
