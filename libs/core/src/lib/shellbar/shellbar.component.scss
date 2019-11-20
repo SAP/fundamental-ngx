@@ -19,7 +19,8 @@
 
 .fd-shellbar {
     .fd-shellbar-side-nav-control {
-        color: white;
+        color: #fff;
+        color: var(--sapShell_TextColor, #fff);
         margin-right: 4px;
         @media (min-width: 600px) {
             margin-left: -12px;
@@ -28,9 +29,9 @@
             margin-left: -28px;
         }
 
-        &:hover {
-            color: #354a5f;
-            color: var(--fd-color-shell-1, #354a5f);
+        &:hover, &:active {
+            background-color: #283848;
+            background-color: var(--sapShell_Hover_Background, #283848);
         }
     }
 }
