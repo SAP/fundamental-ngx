@@ -4,7 +4,7 @@ import { Directive } from '@angular/core';
  * Used for easily displaying forms with a margin. Not necessary for fundamental forms to be functional.
  *
  * ```html
- * <div fd-form-set>
+ * <div fd-fieldset
  *     <div fd-form-item>
  *         ...
  *     </div>
@@ -14,9 +14,9 @@ import { Directive } from '@angular/core';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-form-set]',
+    selector: '[fd-fieldset]',
     host: {
-        class: 'fd-form-set'
+        class: 'fd-fieldset'
     }
 })
-export class FormSetDirective {}
+export class FieldsetDirective {}

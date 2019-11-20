@@ -9,7 +9,7 @@
 </fd-button-group>
 
 <br/>
-<div fd-form-set>
+<fieldset fd-fieldset>
     <div fd-form-item>
         <label fd-form-label for="docs-date-picker-format">Date Format</label>
         <fd-input-group id="docs-date-picker-format" [placeholder]="'Date Format'" [(ngModel)]="actualFormat" class="docs-example-fd-form-group">
@@ -26,5 +26,5 @@
         </a>
         </fd-form-message>
     </div>
-</div>
+</fieldset>
 <fd-date-picker [format]="actualFormat" [locale]="actualLocale" [(ngModel)]="date"></fd-date-picker>

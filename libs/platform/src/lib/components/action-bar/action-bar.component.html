@@ -7,7 +7,7 @@
             [attr.title]="backButtonLabel"
         ></button>
     </div>
-    <ng-container *ngTemplateOutlet="actionBarContent"> </ng-container>
+    <ng-container *ngTemplateOutlet="actionBarContent"></ng-container>
 
     <fdp-action-bar-actions
         [actionItems]="actionItems"
@@ -24,20 +24,18 @@
         <h3 fd-action-bar-title *ngIf="!editing" [attr.title]="title" data-tag="actionbar__title">
             {{ title }}
         </h3>
-        <div fd-form-set *ngIf="editing">
-            <div fd-form-item>
-                <input
-                    #inputTitle
-                    fd-form-control
-                    *ngIf="editing"
-                    class="fd-input edit-actionbar-title"
-                    (focusout)="onFocusOut()"
-                    (keydown.enter)="$event.target.blur()"
-                    [(ngModel)]="title"
-                    aria-required="true"
-                    data-tag="actionbar__input"
-                />
-            </div>
+        <div fd-form-item *ngIf="editing">
+            <input
+                #inputTitle
+                fd-form-control
+                *ngIf="editing"
+                class="fd-input edit-actionbar-title"
+                (focusout)="onFocusOut()"
+                (keydown.enter)="$event.target.blur()"
+                [(ngModel)]="title"
+                aria-required="true"
+                data-tag="actionbar__input"
+            />
         </div>
         <p
             *ngIf="description"

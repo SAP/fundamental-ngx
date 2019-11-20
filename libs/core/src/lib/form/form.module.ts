@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FormSetDirective } from './form-set/form-set.directive';
+import { FieldsetDirective } from './fieldset/fieldset.directive';
 import { FormControlDirective } from './form-control/form-control.directive';
 import { FormItemComponent } from './form-item/form-item.component';
 import { FormLabelComponent } from './form-label/form-label.component';
@@ -12,7 +12,7 @@ import { FormGroupComponent } from './form-group/form-group.component';
 @NgModule({
     imports: [CommonModule],
     exports: [
-        FormSetDirective,
+        FieldsetDirective,
         FormControlDirective,
         FormItemComponent,
         FormLabelComponent,
@@ -21,7 +21,7 @@ import { FormGroupComponent } from './form-group/form-group.component';
         FormGroupComponent
     ],
     declarations: [
-        FormSetDirective,
+        FieldsetDirective,
         FormControlDirective,
         FormItemComponent,
         FormLabelComponent,

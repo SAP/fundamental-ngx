@@ -20,9 +20,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 })
 export class FormItemComponent {
 
-    /** Whether the form item is a checkbox. */
+    /** @deprecated  */
     @Input()
-    @HostBinding('class.fd-form-item--check')
     isCheck: boolean = false;
 
     /** Whether the form item is inline. */
