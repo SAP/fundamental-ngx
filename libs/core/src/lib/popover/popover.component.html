@@ -5,6 +5,7 @@
          aria-haspopup="true"
          (keydown)="handleKeydown($event)"
          [fdPopover]="popoverBody"
+         [additionalClasses]="additionalContainerClasses"
          [(isOpen)]="isOpen"
          (isOpenChange)="openChanged($event)"
          [noArrow]="noArrow"

@@ -70,6 +70,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     @Input()
     appendTo: HTMLElement | 'body' = 'body';
 
+    /** List of additional classes that will be added to popover container element */
+    @Input()
+    additionalClasses: string[] = [];
+
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
@@ -239,6 +243,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.containerRef.instance.focusTrapped = this.focusTrapped;
         this.containerRef.instance.noArrow = this.noArrow;
         this.containerRef.instance.closeOnEscapeKey = this.closeOnEscapeKey;
+
+        if (this.additionalClasses) {
+            this.containerRef.location.nativeElement.classList.add(...this.additionalClasses);
+        }
 
         this.appRef.attachView(this.containerRef.hostView);
         const setupRef = this.containerRef.instance.isSetup.subscribe(() => {
