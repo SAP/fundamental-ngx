@@ -108,4 +108,13 @@ describe('CalendarMonthViewComponent', () => {
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
     });
+
+    it('Should generate grid', () => {
+        expect(component.shortMonthNames).toBeDefined();
+
+        const sizes: number[] = component.shortMonthNames.map(list => list.length);
+
+        expect(sizes).toEqual([4, 4, 4]);
+
+    });
 });

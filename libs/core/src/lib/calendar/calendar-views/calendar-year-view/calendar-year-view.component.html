@@ -6,9 +6,9 @@
             <td class="fd-calendar__item"
                 *ngFor="let year of colYears; let colIndex = index"
                 [ngClass]="{
-                'is-selected': (year == yearSelected),
-                'fd-calendar__item--current': (year == currentYear)
-            }"
+                    'is-selected': (year == yearSelected),
+                    'fd-calendar__item--current': (year == currentYear)
+                }"
                 [attr.id]="id + '-fd-year-' + getId(rowIndex, colIndex)"
                 [attr.tabindex]="year === activeYear ? 0 : -1"
                 (keydown)="onKeydownYearHandler($event, getId(rowIndex, colIndex))"

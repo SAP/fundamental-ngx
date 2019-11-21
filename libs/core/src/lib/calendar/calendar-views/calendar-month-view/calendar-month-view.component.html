@@ -6,8 +6,9 @@
             <td class="fd-calendar__item"
                 *ngFor="let month of colMonths; let colIndex = index"
                 [ngClass]="{
-                'fd-calendar__item--current': isCurrent(getId(rowIndex, colIndex)),
-                'is-selected': isSelected(getId(rowIndex, colIndex))}"
+                    'fd-calendar__item--current': isCurrent(getId(rowIndex, colIndex)),
+                    'is-selected': isSelected(getId(rowIndex, colIndex))
+                }"
                 [attr.tabIndex]="isSelected(getId(rowIndex, colIndex)) ? 0 : -1"
                 [attr.id]="id + '-fd-month-' + getId(rowIndex, colIndex)"
                 (keydown)="onKeydownMonthHandler($event, getId(rowIndex, colIndex))"

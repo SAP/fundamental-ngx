@@ -137,11 +137,12 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         return id + this._monthOffset === this.monthSelected;
     }
 
-    /** Method that returns list of short month names from currently provided calendarI18n service */
+    /** Method that returns grid of short month names from currently provided calendarI18n service */
     get shortMonthNames(): string[][] {
         return this._shortMonthNames;
     }
 
+    /** Method that rewrite short month names, used mostly in case of i18n service language change */
     private refreshShortMonthNames(): void {
         const monthNames: string[] = [...this.calendarI18n.getAllShortMonthNames()];
         const twoDimensionMonthNames: string[][] = [];
