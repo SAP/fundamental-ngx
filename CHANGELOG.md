@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.55"></a>
+# [0.13.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.54...v0.13.0-rc.55) (2019-11-21)
+
+
+### Bug Fixes
+
+* (core) Add popover new open shortcut, improve multi input keyboard support, fix visual menu focus ([#1583](https://github.com/SAP/fundamental-ngx/issues/1583)) ([c573b76](https://github.com/SAP/fundamental-ngx/commit/c573b76))
+
+
+
 <a name="0.13.0-rc.54"></a>
 # [0.13.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.53...v0.13.0-rc.54) (2019-11-21)
 
