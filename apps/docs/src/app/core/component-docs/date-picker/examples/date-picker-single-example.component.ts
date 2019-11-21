@@ -9,10 +9,8 @@ import { FdDate } from '@fundamental-ngx/core';
         <div>Selected Date: {{date ? date.toDateString() : 'null'}}</div>
         <br/>
         <fd-date-picker [type]="'single'" [(ngModel)]="date" compact="true"></fd-date-picker>
-        <div>Selected Date: {{date?.toDateString() }}</div>`
+        <div>Selected Date: {{date?.toDateString() }}</div>`,
 })
 export class DatePickerSingleExampleComponent {
-
     date = FdDate.getToday();
-
 }

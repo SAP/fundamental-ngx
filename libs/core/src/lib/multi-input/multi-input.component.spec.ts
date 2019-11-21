@@ -32,6 +32,10 @@ describe('MultiInputComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
+        component.dropdownValues = [
+            { value: 'value', displayedValue: 'displayedValue' },
+            { value: 'value2', displayedValue: 'displayedValue2' }
+        ];
         fixture.detectChanges();
     });
 
@@ -86,44 +90,33 @@ describe('MultiInputComponent', () => {
     it('should open/close popover on input click', () => {
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
-        component.isOpen = false;
+        component.open = false;
 
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
         inputElement.click();
         fixture.detectChanges();
-        expect(component.isOpen).toBe(true);
+        expect(component.open).toBe(true);
 
         inputElement.click();
         fixture.detectChanges();
 
-        expect(component.isOpen).toBe(false);
+        expect(component.open).toBe(false);
     });
 
     it('should open/close popover on button click', () => {
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
-        component.isOpen = false;
+        component.open = false;
 
         const button = fixture.nativeElement.querySelector('button');
         button.click();
         fixture.detectChanges();
-        expect(component.isOpen).toBe(true);
+        expect(component.open).toBe(true);
 
         button.click();
         fixture.detectChanges();
 
-        expect(component.isOpen).toBe(false);
-    });
-
-    it('should close popover on document click', () => {
-        component.dropdownValues = ['test1', 'test2', 'foobar'];
-        component.ngOnInit();
-        component.isOpen = true;
-
-        document.dispatchEvent(new Event('click'));
-        fixture.detectChanges();
-
-        expect(component.isOpen).toBe(false);
+        expect(component.open).toBe(false);
     });
 
     it('should select values', () => {
@@ -132,7 +125,7 @@ describe('MultiInputComponent', () => {
         spyOn(component, 'handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
-        component.isOpen = true;
+        component.open = true;
         fixture.detectChanges();
 
         (component as any).changeDetRef.markForCheck();
@@ -148,7 +141,7 @@ describe('MultiInputComponent', () => {
         spyOn(component, 'handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
-        component.isOpen = true;
+        component.open = true;
         fixture.detectChanges();
 
         component.selected = ['test1'];
@@ -161,6 +154,31 @@ describe('MultiInputComponent', () => {
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('fd-token')).toBeFalsy();
+    });
+
+    it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
+        const event: any = {
+            code: 'ArrowUp',
+            preventDefault: () => {}
+        };
+        spyOn(event, 'preventDefault');
+        spyOn(component.searchInputElement.nativeElement, 'focus');
+        component.handleKeyDown(event, 0);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
+    });
+
+    it('should handle onMenuKeydownHandler, arrow up', () => {
+        const event: any = {
+            code: 'ArrowUp',
+            preventDefault: () => {},
+            stopPropagation: () => {}
+        };
+        spyOn(component.menuItems.first, 'focus');
+        spyOn(event, 'preventDefault');
+        component.handleKeyDown(event, 1);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(component.menuItems.first.focus).toHaveBeenCalled();
     });
 
 });

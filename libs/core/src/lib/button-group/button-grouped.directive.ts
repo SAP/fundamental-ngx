@@ -22,6 +22,9 @@ export class ButtonGroupedDirective extends AbstractFdNgxClass {
     @Input()
     size: string;
 
+    /** Defines if there will be added fd-button class. Enabled by default. */
+    @Input() fdButtonClass: boolean = true;
+
     /** Glyph (icon) of the button. */
     @Input()
     glyph: string;
@@ -47,6 +50,12 @@ export class ButtonGroupedDirective extends AbstractFdNgxClass {
     /** @hidden */
     _setProperties() {
         this._addClassToElement('fd-button--grouped');
+        if (this.fdButtonClass) {
+            this._addClassToElement('fd-button');
+        }
+        if (this.size) {
+            this._addClassToElement('fd-button--' + this.size);
+        }
         if (this.glyph) {
             this._addClassToElement('sap-icon--' + this.glyph);
         }

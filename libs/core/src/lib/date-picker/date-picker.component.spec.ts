@@ -57,10 +57,10 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         spyOn(component.selectedDateChange, 'emit');
         const date = FdDate.getToday();
-        const dateStr = component.dateAdapter.format(date);
+        const dateStr = (<any>component).formatDate(date);
         component.inputFieldDate = '';
         component.handleSingleDateChange(date);
-        expect(component.inputFieldDate).toBe(dateStr);
+        expect(component.inputFieldDate).toEqual(dateStr);
         expect(component.onChange).toHaveBeenCalledWith(date);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
@@ -70,8 +70,8 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         const dateStart = FdDate.getToday();
         const dateLast = FdDate.getToday(); dateLast.month = 12;
-        const dateStrStart = component.dateAdapter.format(dateStart);
-        const dateStrLast = component.dateAdapter.format(dateLast);
+        const dateStrStart = (<any>component).formatDate(dateStart);
+        const dateStrLast = (<any>component).formatDate(dateLast);
         component.inputFieldDate = '';
         component.handleRangeDateChange({start: dateStart, end: dateLast});
         expect(component.inputFieldDate).toBe(
@@ -83,7 +83,7 @@ describe('DatePickerComponent', () => {
 
     it('Should handle correct write value for single mode', () => {
         const date = FdDate.getToday();
-        const dateStr = component.dateAdapter.format(date);
+        const dateStr = (<any>component).formatDate(date);
         component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
         expect(component.inputFieldDate).toBe(dateStr)
@@ -98,9 +98,10 @@ describe('DatePickerComponent', () => {
     it('Should handle correct write value for range mode', () => {
         component.type = 'range';
         const dateStart = FdDate.getToday();
-        const dateStrStart = component.dateAdapter.format(dateStart);
+        const dateStrStart = (<any>component).formatDate(dateStart);
+
         const dateEnd = FdDate.getToday(); dateEnd.month = 12;
-        const dateStrEnd = component.dateAdapter.format(dateEnd);
+        const dateStrEnd = (<any>component).formatDate(dateEnd);
         component.writeValue({start: dateStart, end: dateEnd});
         expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
         expect(component.inputFieldDate).toBe(
@@ -142,18 +143,18 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         component.selectedDate = new FdDate(2018, 10, 10);
         const date = new FdDate(2000, 10, 10);
-        const strDate = component.dateAdapter.format(date);
+        const strDate = (<any>component).formatDate(date);
         component.type = 'single';
         component.dateStringUpdate(strDate);
         expect(component.isInvalidDateInput).toBe(false);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
-    it('Should handle valid string date', () => {
+    it('Should handle calendar with valid string date', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
         const date = new FdDate(2000, 10, 10);
-        const strDate = component.dateAdapter.format(date);
+        const strDate = (<any>component).formatDate(date);
         component.type = 'single';
         component.dateStringUpdate(strDate);
         expect(component.isInvalidDateInput).toBe(false);
@@ -168,8 +169,9 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
-        const strDate1 = component.dateAdapter.format(date1);
-        const strDate2 = component.dateAdapter.format(date2);
+
+        const strDate1 = (<any>component).formatDate(date1);
+        const strDate2 = (<any>component).formatDate(date2);
         component.type = 'range';
         component.dateStringUpdate(strDate1 + component.dateAdapter.rangeDelimiter + strDate2);
         expect(component.isInvalidDateInput).toBe(false);
@@ -184,8 +186,8 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
-        const strDate1 = component.dateAdapter.format(date1);
-        const strDate2 = component.dateAdapter.format(date2);
+        const strDate1 = (<any>component).formatDate(date1);
+        const strDate2 = (<any>component).formatDate(date2);
         component.type = 'range';
         component.dateStringUpdate(strDate1 + component.dateAdapter.rangeDelimiter + strDate2);
         expect(component.isInvalidDateInput).toBe(false);

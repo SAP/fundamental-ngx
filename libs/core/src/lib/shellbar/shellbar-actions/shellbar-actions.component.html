@@ -22,13 +22,10 @@
                 <fd-menu>
                     <ul fd-menu-list
                         *ngIf="!showCollapsedProducts">
-                        <div *ngFor="let action of shellbarActions"
-                                class="fd-menu__addon-before">
-                            <span [ngClass]="'sap-icon--' + action.glyph"></span>
-                        </div>
                         <li fd-menu-item
                             *ngFor="let action of shellbarActions"
                             (click)="actionClicked(action, $event)">
+                            <fd-icon fd-menu-item-addon [glyph]="action.glyph"></fd-icon>
                             {{action.label}}
                         </li>
                     </ul>

@@ -145,6 +145,12 @@ export class InputGroupComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
     buttonClicked($event) {
         this.addOnButtonClicked.emit($event);
     }

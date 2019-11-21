@@ -2,6 +2,146 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.55"></a>
+# [0.13.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.54...v0.13.0-rc.55) (2019-11-21)
+
+
+### Bug Fixes
+
+* (core) Add popover new open shortcut, improve multi input keyboard support, fix visual menu focus ([#1583](https://github.com/SAP/fundamental-ngx/issues/1583)) ([c573b76](https://github.com/SAP/fundamental-ngx/commit/c573b76))
+
+
+
+<a name="0.13.0-rc.54"></a>
+# [0.13.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.53...v0.13.0-rc.54) (2019-11-21)
+
+
+
+<a name="0.13.0-rc.53"></a>
+# [0.13.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.52...v0.13.0-rc.53) (2019-11-20)
+
+
+### Bug Fixes
+
+* (core) DatePicker - fix form's valid flag, when allowNull ([#1609](https://github.com/SAP/fundamental-ngx/issues/1609)) ([df066e1](https://github.com/SAP/fundamental-ngx/commit/df066e1))
+
+
+
+<a name="0.13.0-rc.52"></a>
+# [0.13.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.51...v0.13.0-rc.52) (2019-11-20)
+
+
+
+<a name="0.13.0-rc.51"></a>
+# [0.13.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.50...v0.13.0-rc.51) (2019-11-20)
+
+
+### Bug Fixes
+
+* **core:** Fix menu with addons ([#1582](https://github.com/SAP/fundamental-ngx/issues/1582)) ([8d3c0cf](https://github.com/SAP/fundamental-ngx/commit/8d3c0cf))
+
+
+
+<a name="0.13.0-rc.50"></a>
+# [0.13.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.49...v0.13.0-rc.50) (2019-11-20)
+
+
+
+<a name="0.13.0-rc.49"></a>
+# [0.13.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.48...v0.13.0-rc.49) (2019-11-20)
+
+
+
+<a name="0.13.0-rc.48"></a>
+# [0.13.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.47...v0.13.0-rc.48) (2019-11-19)
+
+
+### Bug Fixes
+
+* (core) stackblitz files for dropdown ([#1596](https://github.com/SAP/fundamental-ngx/issues/1596)) ([adce0b7](https://github.com/SAP/fundamental-ngx/commit/adce0b7))
+
+
+
+<a name="0.13.0-rc.47"></a>
+# [0.13.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.46...v0.13.0-rc.47) (2019-11-19)
+
+
+
+<a name="0.13.0-rc.46"></a>
+# [0.13.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.45...v0.13.0-rc.46) (2019-11-19)
+
+
+
+<a name="0.13.0-rc.45"></a>
+# [0.13.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.44...v0.13.0-rc.45) (2019-11-19)
+
+
+
+<a name="0.13.0-rc.44"></a>
+# [0.13.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.43...v0.13.0-rc.44) (2019-11-19)
+
+
+
+<a name="0.13.0-rc.43"></a>
+# [0.13.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.42...v0.13.0-rc.43) (2019-11-18)
+
+
+### Bug Fixes
+
+* (core) added selected button with group ([#1543](https://github.com/SAP/fundamental-ngx/issues/1543)) ([4c990e5](https://github.com/SAP/fundamental-ngx/commit/4c990e5))
+
+
+
+<a name="0.13.0-rc.42"></a>
+# [0.13.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.41...v0.13.0-rc.42) (2019-11-18)
+
+
+
+<a name="0.13.0-rc.41"></a>
+# [0.13.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.40...v0.13.0-rc.41) (2019-11-18)
+
+
+
+<a name="0.13.0-rc.40"></a>
+# [0.13.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.39...v0.13.0-rc.40) (2019-11-16)
+
+
+
+<a name="0.13.0-rc.39"></a>
+# [0.13.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.38...v0.13.0-rc.39) (2019-11-15)
+
+
+
+<a name="0.13.0-rc.38"></a>
+# [0.13.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.37...v0.13.0-rc.38) (2019-11-15)
+
+
+
+<a name="0.13.0-rc.37"></a>
+# [0.13.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.36...v0.13.0-rc.37) (2019-11-15)
+
+
+
+<a name="0.13.0-rc.36"></a>
+# [0.13.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.35...v0.13.0-rc.36) (2019-11-15)
+
+
+
+<a name="0.13.0-rc.35"></a>
+# [0.13.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.34...v0.13.0-rc.35) (2019-11-14)
+
+
+
+<a name="0.13.0-rc.34"></a>
+# [0.13.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.33...v0.13.0-rc.34) (2019-11-14)
+
+
+
+<a name="0.13.0-rc.33"></a>
+# [0.13.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.32...v0.13.0-rc.33) (2019-11-14)
+
+
+
 <a name="0.13.0-rc.32"></a>
 # [0.13.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.31...v0.13.0-rc.32) (2019-11-14)
 

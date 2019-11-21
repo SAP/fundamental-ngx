@@ -76,4 +76,10 @@ export class InputGroupSearchComponent implements ControlValueAccessor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this.changeDetectorRef.markForCheck();
+    }
 }

@@ -71,25 +71,20 @@ import {
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
 } from '../core/component-docs/button/examples/button-examples.component';
-import {
-    ButtonGroupXsExampleComponent,
-    ButtonGroupSmallExampleComponent,
-    ButtonGroupCompactExampleComponent,
-    ButtonGroupDefaultExampleComponent
-} from '../core/component-docs/button-group/examples/button-group-examples.component';
+import { ButtonGroupDefaultExampleComponent } from '../core/component-docs/button-group/examples/button-group-default-example.component';
+import { ButtonGroupToggleExampleComponent } from '../core/component-docs/button-group/examples/button-group-toggle-example.component';
 import { CalendarRangeExampleComponent } from '../core/component-docs/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from '../core/component-docs/calendar/examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from '../core/component-docs/calendar/examples/calendar-monday-start-example.component';
 import { ComboboxExampleComponent } from '../core/component-docs/combobox/examples/combobox-example.component';
 import { DatePickerRangeExampleComponent } from '../core/component-docs/date-picker/examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from '../core/component-docs/date-picker/examples/date-picker-single-example.component';
-import {
-    DropdownContextualMenuExampleComponent,
-    DropdownDefaultExampleComponent,
-    DropdownIconsExampleComponent,
-    DropdownStateExampleComponent,
-    DropdownToolbarExampleComponent
-} from '../core/component-docs/dropdown/examples/dropdown-examples.component';
+
+import { DropdownContextualMenuExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-contextual-menu-example.component';
+import { DropdownDefaultExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-default-example.component';
+import { DropdownIconsExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-icons-example.component';
+import { DropdownStateExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-state-example.component';
+import { DropdownToolbarExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-toolbar-example.component';
 import { IconExampleComponent } from '../core/component-docs/icon/examples/icon-example.component';
 import {
     CircleIdentifierExampleComponent,
@@ -406,6 +401,8 @@ import { SideNavigationCondensedExampleComponent } from './component-docs/side-n
 import { SideNavigationCondensedObjectExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import { SideNavigationMultipleSelectedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
 import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examples/shellbar-side-nav/shellbar-side-nav-example.component';
+import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
+import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
 
 
 @NgModule({
@@ -481,9 +478,7 @@ import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examp
         ButtonSplitProgrammaticalExampleComponent,
         ButtonSplitOptionsExampleComponent,
         ButtonSplitTemplateExampleComponent,
-        ButtonGroupXsExampleComponent,
-        ButtonGroupSmallExampleComponent,
-        ButtonGroupCompactExampleComponent,
+        ButtonGroupToggleExampleComponent,
         ButtonGroupDefaultExampleComponent,
         CalendarRangeExampleComponent,
         CalendarSingleExampleComponent,
@@ -754,7 +749,10 @@ import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examp
         SideNavigationCondensedObjectExampleComponent,
         SideNavigationObjectExampleComponent,
         SideNavigationProgrammaticallyExampleComponent,
-        SideNavigationThreeLevelsExampleComponent
+        SideNavigationThreeLevelsExampleComponent,
+        NotificationContentComponent,
+        DatePickerComplexI18nExampleComponent,
+        DatetimePickerComplexI18nExampleComponent
     ],
 
     entryComponents: [

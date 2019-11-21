@@ -2,12 +2,10 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as buttonGroupCompactExample from '!raw-loader!./examples/button-group-compact-example.component.html';
 import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
-import * as buttonGroupSmallExample from '!raw-loader!./examples/button-group-s-example.component.html';
-import * as buttonGroupXsExample from '!raw-loader!./examples/button-group-xs-example.component.html';
-
-import * as buttonGroupTsCode from '!raw-loader!./examples/button-group-examples.component.ts';
+import * as buttonGroupDefaultExampleTs from '!raw-loader!./examples/button-group-default-example.component.ts';
+import * as buttonGroupToggleExample from '!raw-loader!./examples/button-group-toggle-example.component.html';
+import * as buttonGroupToggleExampleTs from '!raw-loader!./examples/button-group-toggle-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -97,36 +95,14 @@ export class ButtonGroupDocsComponent implements OnInit {
         }
     };
 
-    xsSizeHtml: ExampleFile[] = [
-        {
-            language: 'html',
-            code: buttonGroupXsExample,
-            fileName: 'button-group-xs-example',
-            component: 'ButtonGroupXsExampleComponent',
-            secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
-        }
-    ];
 
-    sSizeHtml: ExampleFile[] = [
+    defaultToggleHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupSmallExample,
-            fileName: 'button-group-s-example',
-            component: 'ButtonGroupSmallExampleComponent',
-            secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
-        }
-    ];
-
-    compactSizeHtml: ExampleFile[] = [
-        {
-            language: 'html',
-            code: buttonGroupCompactExample,
-            fileName: 'button-group-compact-example',
-            component: 'ButtonGroupCompactExampleComponent',
-            secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
+            code: buttonGroupToggleExample,
+            fileName: 'button-group-toggle-example',
+            component: 'ButtonGroupToggleExampleComponent',
+            typescriptFileCode: buttonGroupToggleExampleTs,
         }
     ];
 
@@ -136,8 +112,7 @@ export class ButtonGroupDocsComponent implements OnInit {
             code: buttonGroupDefaultExample,
             fileName: 'button-group-default-example',
             component: 'ButtonGroupDefaultExampleComponent',
-            secondFile: 'button-group-examples',
-            typescriptFileCode: buttonGroupTsCode
+            typescriptFileCode: buttonGroupDefaultExampleTs,
         }
     ];
 

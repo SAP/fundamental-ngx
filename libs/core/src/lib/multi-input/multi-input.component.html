@@ -1,37 +1,41 @@
 <div class="fd-multi-input-field">
-    <fd-popover [(isOpen)]="isOpen"
+    <fd-popover [isOpen]="open"
+                (isOpenChange)="openChangeHandle($event)"
                 [triggers]="[]"
                 [disabled]="disabled"
+                [closeOnOutsideClick]="true"
                 [fillControlMode]="fillControlMode"
                 class="fd-multi-input-popover-custom">
         <fd-popover-control>
             <div class="fd-combobox-control"
                  [attr.aria-label]="multiInputBodyLabel"
-                 [attr.aria-expanded]="isOpen">
+                 [attr.aria-expanded]="open">
                 <fd-input-group
+                    [buttonFocusable]="false"
                     [disabled]="disabled"
                     [compact]="compact"
                     [button]="true"
                     [glyph]="glyph"
-                    (addOnButtonClicked)="isOpen = !isOpen">
+                    (addOnButtonClicked)="openChangeHandle(!open)">
                     <input type="text" class="fd-input" fd-input-group-input
+                           #searchInputElement
                            [ngClass]="{'fd-input--compact': compact}"
                            [placeholder]="placeholder"
                            [disabled]="disabled"
                            [(ngModel)]="searchTerm"
                            (ngModelChange)="handleSearchTermChange()"
-                           (keypress)="isOpen = true"
-                           (click)="isOpen = !isOpen">
+                           (keydown)="handleInputKeydown($event)"
+                           (click)="openChangeHandle(!open)">
                 </fd-input-group>
             </div>
         </fd-popover-control>
-        <fd-popover-body [attr.aria-hidden]="!isOpen">
+        <fd-popover-body [attr.aria-hidden]="!open">
             <fd-menu class="fd-multi-input-menu-overflow"
                      *ngIf="displayedValues && displayedValues.length"
                      [style.maxHeight]="maxHeight">
                 <ul fd-menu-list>
-                    <li *ngFor="let value of displayedValues">
-                        <label fd-menu-item>
+                    <li *ngFor="let value of displayedValues; let ind  = index">
+                        <label fd-menu-item (keydown)="handleKeyDown($event, ind)">
                             <input type="checkbox" class="fd-checkbox"
                                    [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                    (ngModelChange)="handleSelect($event, value)">

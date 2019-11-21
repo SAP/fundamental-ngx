@@ -1,0 +1,30 @@
+
+<label fd-form-label>Languages</label>
+<fd-button-group id="language" style="margin-bottom:20px">
+    <button fd-button-grouped [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">English</button>
+    <button fd-button-grouped [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">French</button>
+    <button fd-button-grouped [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
+    <button fd-button-grouped [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
+    <button fd-button-grouped [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
+</fd-button-group>
+
+<br/>
+<div fd-form-set>
+    <div fd-form-item>
+        <label fd-form-label for="docs-date-picker-format">Date Format</label>
+        <fd-input-group id="docs-date-picker-format" [placeholder]="'Date Format'" [(ngModel)]="actualFormat" class="docs-example-fd-form-group">
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        (click)="refresh()">
+                    Refresh
+                </button>
+            </span>
+        </fd-input-group>
+        <fd-form-message type="help">
+            Full list of formats can be found in <a href="https://angular.io/api/common/DatePipe" target="_blank">
+            Official Angular Documentation
+        </a>
+        </fd-form-message>
+    </div>
+</div>
+<fd-date-picker [format]="actualFormat" [locale]="actualLocale" [(ngModel)]="date"></fd-date-picker>

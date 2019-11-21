@@ -72,6 +72,8 @@ export class ActionBarActionsComponent implements OnInit {
     @Output()
     editing: EventEmitter<boolean> = new EventEmitter();
 
+    isContextualMenuOpen: boolean = false;
+
     constructor(private cd: ChangeDetectorRef, private menuKeyboardService: MenuKeyboardService) {}
 
     ngOnInit() {
@@ -98,6 +100,7 @@ export class ActionBarActionsComponent implements OnInit {
 
     onItemClick(item: ActionItem): void {
         this.itemClick.emit(item);
+        this.isContextualMenuOpen = false;
         this.cd.markForCheck();
     }
     onRenameClick() {

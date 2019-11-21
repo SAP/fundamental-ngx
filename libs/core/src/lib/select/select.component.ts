@@ -100,6 +100,14 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     @Input()
     appendTo: HTMLElement | 'body';
 
+    /**
+     * If the option should be unselected and value changed to undefined, when the current value is
+     * not presented in option array. Switching it off can be handy, when there is some delay between providing
+     * possible options and chosen value.
+     */
+    @Input()
+    unselectMissingOption: boolean = true;
+
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean>
@@ -292,7 +300,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
         // If not match is found, set everything to null
         // This is mostly only for cases where a user removes an active option
-        if (!matchOption) {
+        if (!matchOption && this.unselectMissingOption) {
             this.unselectOptions();
             return;
         }
