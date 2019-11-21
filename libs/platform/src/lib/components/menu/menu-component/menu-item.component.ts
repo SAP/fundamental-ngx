@@ -1,7 +1,6 @@
 import {
     Component,
     Input,
-    OnInit,
     Output,
     EventEmitter,
     ViewEncapsulation,
@@ -20,7 +19,7 @@ import { DefaultMenuItem } from '@fundamental-ngx/core';
     styleUrls: ['./menu-item.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
+export class MenuItemComponent implements DefaultMenuItem, OnChanges {
     @Input()
     public label: string;
     @Input()
@@ -64,10 +63,7 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
 
     constructor(public itemEl: ElementRef, private renderer: Renderer2) {}
 
-    /** @hidden */
-    ngOnInit() {}
-
-    onItemClick() {
+    onItemClick(): void {
         this.itemClick.emit();
     }
 
@@ -140,7 +136,7 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
+    handleKeyboardEvent(event: KeyboardEvent): void {
         switch (event.code) {
             case 'Space':
             case 'Enter':
