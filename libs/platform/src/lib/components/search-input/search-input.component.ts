@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import { ComboboxComponent, ComboboxItem } from '@fundamental-ngx/core';
+import { ComboboxComponent, ComboboxItem, PopoverComponent } from '@fundamental-ngx/core';
 import { Observable, isObservable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -109,6 +109,8 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
 
     @ViewChild('combobox', { static: false }) combobox: ComboboxComponent;
 
+    @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
+
     constructor() { }
 
     ngOnInit() { }
@@ -202,6 +204,7 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
      */
     setCurrentCategory(category: ValueLabelItem) {
         this.currentCategory = category;
+        this.categoryDropdown.close();
         this.inputChange.emit({
             text: this.inputText,
             category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
