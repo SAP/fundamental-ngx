@@ -163,6 +163,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     searchInputElement: ElementRef;
 
     /** @hidden */
+    @ViewChild('comboboxMenuElement', { static: false })
+    comboboxMenuElement: ElementRef;
+
+    /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
@@ -220,10 +224,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    onInputKeydownHandler(event) {
+    onInputKeydownHandler(event: KeyboardEvent) {
         if (event.code === 'Enter' && this.searchFunction) {
             this.searchFunction();
         } else if (event.code === 'ArrowDown') {
+            if (event.altKey) {
+                this.isOpenChangeHandle(true);
+            }
             event.preventDefault();
             if (this.menuItems && this.menuItems.first) {
                 this.menuItems.first.focus();
@@ -238,6 +245,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             this.inputText.length &&
             event.code !== 'Escape' &&
             event.code !== 'Space' &&
+            event.code !== 'Tab' &&
             event.code !== 'Enter') {
             this.isOpenChangeHandle(true);
         }
@@ -310,7 +318,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this.open = isOpen;
         this.openChange.emit(this.open);
         this.onTouched();
-        if (open) {
+        if (this.open) {
             this.focusTrap.activate();
         } else {
             this.focusTrap.deactivate();

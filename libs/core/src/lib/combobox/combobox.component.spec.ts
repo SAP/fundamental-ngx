@@ -53,15 +53,14 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'searchFunction');
         const event = {
             code: 'Enter',
-            preventDefault: () => {
-            }
+            preventDefault: () => {}
         };
-        component.onInputKeydownHandler(event);
+        component.onInputKeydownHandler(<any>event);
         expect(component.searchFunction).toHaveBeenCalled();
         event.code = 'ArrowDown';
         spyOn(event, 'preventDefault');
         spyOn(component.menuItems.first, 'focus');
-        component.onInputKeydownHandler(event);
+        component.onInputKeydownHandler(<any>event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.menuItems.first.focus).toHaveBeenCalled();
     });

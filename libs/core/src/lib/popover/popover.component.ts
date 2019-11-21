@@ -155,6 +155,13 @@ export class PopoverComponent {
         this.updateDropdownIsOpen(isOpen);
     }
 
+    /** Method that is called, when there is keydown event dispatched */
+    public handleKeydown(event: KeyboardEvent): void {
+        if (event.code === 'ArrowDown' && event.altKey) {
+            this.open();
+        }
+    }
+
 
     /** @hidden
      *  Function that allows us to control aria-expanded on dropdown child

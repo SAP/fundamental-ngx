@@ -3,6 +3,7 @@
          [attr.aria-expanded]="this.disabled ? false : isOpen"
          [attr.aria-disabled]="this.disabled"
          aria-haspopup="true"
+         (keydown)="handleKeydown($event)"
          [fdPopover]="popoverBody"
          [(isOpen)]="isOpen"
          (isOpenChange)="openChanged($event)"
