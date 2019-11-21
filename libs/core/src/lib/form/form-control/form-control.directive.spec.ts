@@ -40,7 +40,6 @@ describe('FormControlDirective', () => {
         expect(directive).toBeTruthy();
         directiveInstance.ngOnInit();
         expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('fd-form-control');
     });
 
     it('should add appropriate classes', () => {
