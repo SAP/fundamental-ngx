@@ -18,6 +18,7 @@ import { Observable, of } from 'rxjs';
             [hideCategoryLabel]="hideCategoryLabel"
             [size]="size"
             [isLoading]="isLoading"
+            [disabled]="disabled"
             (inputChange)="onInputChange($event)"
             (searchSubmit)="onSearchSubmit($event)"
             (cancelSearch)="onCancelSearch($event)"> </fdp-search-input>
@@ -32,6 +33,7 @@ class TestComponent {
     public hideCategoryLabel = false;
     public size: SearchInputSize;
     public isLoading = false;
+    public disabled = false;
 
     public inputValue: SearchInput;
     public submitValue: SearchInput;
@@ -340,6 +342,18 @@ describe('SearchInputComponent', () => {
         fixture.detectChanges();
 
         expect(host.isSearchCanceled).toBeTruthy();
+    });
+
+    it('should have a disabled state', () => {
+        // set up component
+        host.placeholder = 'Search';
+        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
+        host.disabled = true;
+        fixture.detectChanges();
+
+        const combobox: ComboboxComponent = fixture.debugElement.query(By.css('fd-combobox')).componentInstance;
+        expect(combobox.disabled).toBeTruthy();
+
     });
 
 });
