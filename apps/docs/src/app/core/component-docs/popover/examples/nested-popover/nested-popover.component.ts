@@ -1,13 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector: 'fd-popover-example',
-    templateUrl: './popover-example.component.html',
-    styleUrls: ['popover-example.component.scss'],
+    selector: 'fd-nested-popover',
+    templateUrl: './nested-popover.component.html',
+    styleUrls: ['./nested-popover.component.scss'],
     encapsulation: ViewEncapsulation.None
-
 })
-export class PopoverExampleComponent {
+export class NestedPopoverComponent {
 
     menu1 = [
         { text: 'Option 1', url: '#' },
@@ -20,5 +19,4 @@ export class PopoverExampleComponent {
         { text: 'Option 4', url: '#' },
         { text: 'Option 5', url: '#' }
     ];
-
 }
