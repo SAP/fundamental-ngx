@@ -20,9 +20,9 @@
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
-    "focus-trap": "^5.0.2",
-    "fundamental-styles": "~0.3.0",
-    "popper.js": "^1.15.0",
+    "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
+    "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
+    "popper.js": "POPPER_VER_PLACEHOLDER",
     "@angular/cdk": "CDK_VER_PLACEHOLDER"
   }
 }
