@@ -42,9 +42,8 @@ export class ToolbarComponent {
     ];
 
     productMenuItems: ShellbarMenuItem[] = [
-        { name: this.version, callback: () => { window.location.href = 'https://sap.github.io/fundamental-ngx/#/core/home'; } },
-        { name: 'v0.12.0', callback: () => { window.location.href = 'fundamental-ngx#/core/alert#alert-types'; } },
-        { name: 'prerelease', callback: () => { window.location.href = 'https://fundamental-ngx.netlify.com/#/core/home'; } },
+        { name: 'v0.13.0', callback: () => { window.location.href = 'https://sap.github.io/fundamental-ngx/#/core/home'; } },
+        { name: 'Pre-release', callback: () => { window.location.href = 'https://fundamental-ngx.netlify.com/#/core/home'; } },
     ];
 
     @Output()
