@@ -63,9 +63,9 @@ export class CalendarService {
      * @param index which is number (0 - 11)
      */
     public onKeydownHandler(event: KeyboardEvent, index: number): void {
-        switch (event.code) {
+        switch (event.key) {
             case 'Enter':
-            case 'Space': {
+            case ' ': {
                 event.preventDefault();
                 this.onKeySelect.next(index);
                 break;

@@ -29,7 +29,7 @@ describe('Calendar2YearViewComponent', () => {
     it('Should focus on the year below when on ArrowDown', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowDown', preventDefault: () => {}
+            key: 'ArrowDown', preventDefault: () => {}
         };
         component.id = 'fd-calendar-0';
         component.onKeydownYearHandler(event, 6);
@@ -39,7 +39,7 @@ describe('Calendar2YearViewComponent', () => {
     it('Should focus on the year below when on ArrowUp', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowUp', preventDefault: () => {}
+            key: 'ArrowUp', preventDefault: () => {}
         };
         component.id = 'fd-calendar-0';
         component.onKeydownYearHandler(event, 6);
@@ -49,7 +49,7 @@ describe('Calendar2YearViewComponent', () => {
     it('Should focus on the year below when on ArrowRight', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {}
+            key: 'ArrowRight', preventDefault: () => {}
         };
         component.id = 'fd-calendar-0';
         component.onKeydownYearHandler(event, 6);
@@ -59,7 +59,7 @@ describe('Calendar2YearViewComponent', () => {
     it('Should focus on the year below when on ArrowLeft', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {}
+            key: 'ArrowLeft', preventDefault: () => {}
         };
         component.id = 'fd-calendar-0';
         component.onKeydownYearHandler(event, 6);
@@ -67,9 +67,9 @@ describe('Calendar2YearViewComponent', () => {
     });
 
     it('Should select the year when Enter key is clicked', () => {
-        let event: { code: string; preventDefault: () => void };
+        let event: { key: string; preventDefault: () => void };
         event = {
-            code: 'Enter', preventDefault: () => {}
+            key: 'Enter', preventDefault: () => {}
         };
         component.onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);
@@ -77,7 +77,7 @@ describe('Calendar2YearViewComponent', () => {
 
     it('Should select the year when Space key is clicked', () => {
         const event = {
-            code: 'Space', preventDefault: () => {}
+            key: ' ', preventDefault: () => {}
         };
         component.onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);

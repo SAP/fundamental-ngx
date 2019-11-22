@@ -158,7 +158,7 @@ describe('MultiInputComponent', () => {
 
     it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
         const event: any = {
-            code: 'ArrowUp',
+            key: 'ArrowUp',
             preventDefault: () => {}
         };
         spyOn(event, 'preventDefault');
@@ -170,7 +170,7 @@ describe('MultiInputComponent', () => {
 
     it('should handle onMenuKeydownHandler, arrow up', () => {
         const event: any = {
-            code: 'ArrowUp',
+            key: 'ArrowUp',
             preventDefault: () => {},
             stopPropagation: () => {}
         };

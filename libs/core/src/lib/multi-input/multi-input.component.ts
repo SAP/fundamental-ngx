@@ -249,7 +249,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     public handleInputKeydown(event: KeyboardEvent): void {
-        if (event.code === 'ArrowDown') {
+        if (event.key === 'ArrowDown') {
             if (event.altKey) {
                 this.openChangeHandle(true)
             }

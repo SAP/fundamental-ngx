@@ -74,7 +74,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         spyOn(items[1], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, code: 'ArrowRight' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
         (<any>service).handleKeyDown(keyboardEvent, 0, items);
 
@@ -93,7 +93,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         spyOn(items[1], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, code: 'ArrowRight' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
         (<any>service).handleKeyDown(keyboardEvent, 0, items);
 
@@ -113,7 +113,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         spyOn(items[9], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, code: 'ArrowLeft' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
 
         (<any>service).handleKeyDown(keyboardEvent, 0, items);
 
@@ -131,7 +131,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         spyOn(items[items.length - 1], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, code: 'ArrowLeft' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
 
         (<any>service).handleKeyDown(keyboardEvent, 0, items);
 
@@ -148,7 +148,7 @@ describe('NestedListKeyboardSupportService', () => {
 
         spyOn(items[0], 'focus').and.callThrough();
 
-        const keyboardEvent: any = { preventDefault: () => {}, code: 'ArrowRight' };
+        const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
         (<any>service).handleKeyDown(keyboardEvent, items.length - 1, items);
 
