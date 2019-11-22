@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.60"></a>
+# [0.13.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.59...v0.13.0-rc.60) (2019-11-22)
+
+
+### Bug Fixes
+
+* (core) Add support for icon and select border types ([#1555](https://github.com/SAP/fundamental-ngx/issues/1555)) ([d23e000](https://github.com/SAP/fundamental-ngx/commit/d23e000))
+
+
+
 <a name="0.13.0-rc.59"></a>
 # [0.13.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.58...v0.13.0-rc.59) (2019-11-22)
 
