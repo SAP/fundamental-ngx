@@ -32,6 +32,8 @@
         &:hover, &:active {
             background-color: #283848;
             background-color: var(--sapShell_Hover_Background, #283848);
+            border-color: #283848;
+            border-color: var(--sapShell_Hover_Background, #283848);
         }
     }
 }
