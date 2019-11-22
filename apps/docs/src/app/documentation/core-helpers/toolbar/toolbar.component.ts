@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Inject, Outp
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { ShellbarMenuItem } from '@fundamental-ngx/core';
+import { ShellbarMenuItem, ProductSwitchItem, ShellbarUser } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -10,6 +10,25 @@ import { ShellbarMenuItem } from '@fundamental-ngx/core';
     styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
+
+
+    version: string = environment.version;
+    public isOnCore: boolean = false;
+
+
+    productSwitcher: ProductSwitchItem[] = [
+        {
+            title: 'Core',
+            icon: 'home',
+            selected: true,
+            callback: this.productSwitcherCallback
+        },
+        {
+            title: 'Platform',
+            icon: 'business-objects-experience',
+            callback: this.productSwitcherCallback
+        }
+    ];
 
     items: ShellbarMenuItem[] = [
         {
@@ -22,15 +41,20 @@ export class ToolbarComponent {
         }
     ];
 
+    productMenuItems: ShellbarMenuItem[] = [
+        { name: this.version, callback: () => { window.location.href = 'https://sap.github.io/fundamental-ngx/#/core/home'; } },
+        { name: 'v0.12.0', callback: () => { window.location.href = 'fundamental-ngx#/core/alert#alert-types'; } },
+        { name: 'prerelease', callback: () => { window.location.href = 'https://fundamental-ngx.netlify.com/#/core/home'; } },
+    ];
 
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 
-    version: string = environment.version;
+    productSwitcherCallback($event) {
+        console.log($event);
+    }
 
-    public isOnCore: boolean = false;
-
-    constructor (
+    constructor(
         private routerService: Router,
         @Inject('CURRENT_LIB') private currentLib: Libraries,
     ) {
