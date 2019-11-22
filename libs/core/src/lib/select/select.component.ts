@@ -15,6 +15,8 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 
+type SelectType = 'noborder' | 'splitborder';
+
 /**
  * Select component intended to mimic the behaviour of the native select element.
  */
@@ -69,6 +71,14 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string;
+
+    /** Select type defines the border type of the select button. */
+    @Input()
+    selectType: SelectType ;
+    
+    /** Glyph to add icon in the select component. */
+    @Input()
+    glyph: string ;
 
     /** Popper.js options of the popover. */
     @Input()

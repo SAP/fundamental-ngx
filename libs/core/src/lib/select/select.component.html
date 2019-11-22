@@ -12,9 +12,13 @@
             <button class="fd-select-button-custom"
                     fd-button
                     aria-haspopup="true"
-                    [ngClass]="{'fd-button--compact': compact}"
                     [attr.aria-expanded]="isOpen"
-                    [disabled]="disabled">
+                    [disabled]="disabled"
+                    [ngClass]="{'fd-button--compact':  compact,
+                    'fd-button--noborder':  selectType === 'noborder',
+                    'fd-button--splitborder':  selectType === 'splitborder'}">
+                <fd-icon *ngIf="glyph" size="m" [glyph]="glyph" class="fd-template-icon" style="margin-top: 3px; margin-right: 12px">
+                </fd-icon>
                 <span class="fd-select-text-custom">{{triggerValue}}</span>
             </button>
         </ng-container>
