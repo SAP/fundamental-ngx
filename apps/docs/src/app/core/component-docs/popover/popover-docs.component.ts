@@ -15,6 +15,9 @@ import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-
 import * as popoverFillSrcTs from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.ts';
 import * as popoverDynamicHSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.html';
 import * as popoverDynamicTSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.ts';
+import * as dropdownPopoverHtml from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.html';
+import * as dropdownPopoverTs from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.ts';
+import * as dropdownPopoverScss from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -100,6 +103,33 @@ export class PopoverDocsComponent implements OnInit {
             fileName: 'popover-c-fill',
             typescriptFileCode: popoverFillSrcTs,
             component: 'PopoverCFillComponent'
+        }
+    ];
+
+    dropdownPopover: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dropdownPopoverHtml,
+            fileName: 'popover-dropdown',
+            typescriptFileCode: dropdownPopoverTs,
+            component: 'PopoverDropdownComponent',
+            scssFileCode: dropdownPopoverScss
+        },
+        {
+            language: 'ts',
+            code: dropdownPopoverTs,
+            fileName: 'popover-dropdown',
+            typescriptFileCode: dropdownPopoverTs,
+            component: 'PopoverDropdownComponent',
+            scssFileCode: dropdownPopoverScss
+        },
+        {
+            language: 'scss',
+            code: dropdownPopoverScss,
+            fileName: 'popover-dropdown',
+            typescriptFileCode: dropdownPopoverTs,
+            component: 'PopoverDropdownComponent',
+            scssFileCode: dropdownPopoverScss
         }
     ];
 
