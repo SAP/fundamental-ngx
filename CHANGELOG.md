@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.61"></a>
+# [0.13.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.60...v0.13.0-rc.61) (2019-11-25)
+
+
+### Bug Fixes
+
+* (core) Add shellbar side navigation example and directive. ([#1604](https://github.com/SAP/fundamental-ngx/issues/1604)) ([ddd8022](https://github.com/SAP/fundamental-ngx/commit/ddd8022))
+
+
+
 <a name="0.13.0-rc.60"></a>
 # [0.13.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.59...v0.13.0-rc.60) (2019-11-22)
 
