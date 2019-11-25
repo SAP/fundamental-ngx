@@ -69,7 +69,9 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
         if (this.closePopoverOnSelect) {
             this.popoverComponent.close();
         }
-        item.callback(event);
+        if (item.callback) {
+            item.callback(event);
+        }
     }
 
     /**
