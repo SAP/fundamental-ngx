@@ -13,7 +13,7 @@
                 [attr.id]="id + '-fd-month-' + getId(rowIndex, colIndex)"
                 (keydown)="onKeydownMonthHandler($event, getId(rowIndex, colIndex))"
                 (click)="selectMonth(getId(rowIndex, colIndex), $event)">
-                <span role="button" class="fd-calendar__text">
+                <span role="button" class="fd-calendar__text" [attr.aria-label]="getFullMonthName(rowIndex, colIndex)">
                     {{ month }}
                 </span>
             </td>

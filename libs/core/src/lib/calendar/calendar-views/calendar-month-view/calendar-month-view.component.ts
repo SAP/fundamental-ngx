@@ -35,6 +35,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     private readonly _amountOfColPerRow: number = 4;
 
     private _shortMonthNames: string[][];
+    private _fullMonthNames: string[];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
@@ -142,9 +143,16 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         return this._shortMonthNames;
     }
 
+    /** Method that returns the full name of month for grid element. */
+    getFullMonthName(rowIndex: number, colIndex: number): string {
+        const index = this.getId(rowIndex, colIndex);
+        return this._fullMonthNames[index];
+    }
+
     /** Method that rewrite short month names, used mostly in case of i18n service language change */
     private refreshShortMonthNames(): void {
         const monthNames: string[] = [...this.calendarI18n.getAllShortMonthNames()];
+        this._fullMonthNames = [...this.calendarI18n.getAllFullMonthNames()];
         const twoDimensionMonthNames: string[][] = [];
         /** Creating 2d grid */
         while (monthNames.length) {
