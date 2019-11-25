@@ -400,6 +400,7 @@ import { SideNavigationObjectExampleComponent } from './component-docs/side-navi
 import { SideNavigationCondensedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
 import { SideNavigationCondensedObjectExampleComponent } from './component-docs/side-navigation/examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import { SideNavigationMultipleSelectedExampleComponent } from './component-docs/side-navigation/examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
+import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
@@ -595,6 +596,7 @@ import { SelectTypesExampleComponent } from './component-docs/select/examples/se
         ShellbarBasicExampleComponent,
         ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent,
+        ShellbarSideNavExampleComponent,
         SideNavigationExampleComponent,
         SideNavigationIconsExampleComponent,
         SideNavigationTitlesExampleComponent,
