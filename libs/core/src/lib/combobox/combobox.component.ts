@@ -225,9 +225,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeydownHandler(event: KeyboardEvent) {
-        if (event.code === 'Enter' && this.searchFunction) {
+        if (event.key === 'Enter' && this.searchFunction) {
             this.searchFunction();
-        } else if (event.code === 'ArrowDown') {
+        } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
                 this.isOpenChangeHandle(true);
             }
@@ -243,10 +243,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         if (this.openOnKeyboardEvent &&
             this.inputText &&
             this.inputText.length &&
-            event.code !== 'Escape' &&
-            event.code !== 'Space' &&
-            event.code !== 'Tab' &&
-            event.code !== 'Enter') {
+            event.key !== 'Escape' &&
+            event.key !== ' ' &&
+            event.key !== 'Tab' &&
+            event.key !== 'Enter') {
             this.isOpenChangeHandle(true);
         }
     }

@@ -49,7 +49,7 @@ describe('PopoverComponent', () => {
         spyOn(component.isOpenChange, 'emit');
 
         const event: any = {
-            code: 'ArrowDown',
+            key: 'ArrowDown',
             altKey: true
         };
 

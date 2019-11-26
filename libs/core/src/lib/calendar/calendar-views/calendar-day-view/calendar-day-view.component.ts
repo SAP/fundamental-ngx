@@ -240,14 +240,14 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * @param grid with specified column and row as a x and y
      */
     onKeydownDayHandler(event, cell: CalendarDay, grid: { x: number, y: number }): void {
-        if (event.code === 'Tab' && !event.shiftKey) {
+        if (event.key === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
                 event.preventDefault();
                 this.focusEscapeFunction();
             }
         } else {
-            switch (event.code) {
-                case ('Space'):
+            switch (event.key) {
+                case (' '):
                 case ('Enter'): {
                     event.preventDefault();
                     this.selectDate(cell);

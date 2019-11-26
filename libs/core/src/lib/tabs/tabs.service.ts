@@ -11,7 +11,7 @@ export class TabsService {
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {
-        switch (event.code) {
+        switch (event.key) {
             case ('ArrowLeft'): {
                 if (index - 1 >= 0) {
                     this.getTabLinkFromIndex(index - 1, elements).focus();
@@ -28,7 +28,7 @@ export class TabsService {
                 }
                 break;
             }
-            case ('Space'): {
+            case (' '): {
                 event.preventDefault();
                 this.tabSelected.next(index);
                 break;

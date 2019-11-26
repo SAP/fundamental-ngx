@@ -76,7 +76,7 @@ export class NestedListKeyboardService {
 
         const item: NestedItemInterface = items[index];
 
-        switch (keyboardEvent.code) {
+        switch (keyboardEvent.key) {
             case ('ArrowRight'): {
                 if (!item.expanded && item.hasChildren) {
                     item.triggerOpen();

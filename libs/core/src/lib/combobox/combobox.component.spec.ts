@@ -52,12 +52,12 @@ describe('ComboboxComponent', () => {
     it('should call searchFunction onInputKeydownHandler', () => {
         spyOn(component, 'searchFunction');
         const event = {
-            code: 'Enter',
+            key: 'Enter',
             preventDefault: () => {}
         };
         component.onInputKeydownHandler(<any>event);
         expect(component.searchFunction).toHaveBeenCalled();
-        event.code = 'ArrowDown';
+        event.key = 'ArrowDown';
         spyOn(event, 'preventDefault');
         spyOn(component.menuItems.first, 'focus');
         component.onInputKeydownHandler(<any>event);
@@ -70,7 +70,7 @@ describe('ComboboxComponent', () => {
             return item.displayedValue;
         };
         const event: any = {
-            code: 'Enter',
+            key: 'Enter',
             preventDefault: () => {}
         };
         spyOn(component, 'onChange');
@@ -78,7 +78,7 @@ describe('ComboboxComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
         spyOn(event, 'preventDefault');
         spyOn(component.menuItems.toArray()[1], 'focus');
-        event.code = 'ArrowDown';
+        event.key = 'ArrowDown';
         component.onMenuKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.menuItems.toArray()[1].focus).toHaveBeenCalled();
@@ -86,12 +86,12 @@ describe('ComboboxComponent', () => {
 
     it('should handle onMenuKeydownHandler, arrow up', () => {
         const event: any = {
-            code: 'ArrowUp',
+            key: 'ArrowUp',
             preventDefault: () => {}
         };
         spyOn(component.menuItems.first, 'focus');
         spyOn(event, 'preventDefault');
-        event.code = 'ArrowUp';
+        event.key = 'ArrowUp';
         component.onMenuKeydownHandler(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.menuItems.first.focus).toHaveBeenCalled();
@@ -99,13 +99,13 @@ describe('ComboboxComponent', () => {
 
     it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
         const event: any = {
-            code: 'ArrowUp',
+            key: 'ArrowUp',
             preventDefault: () => {
             }
         };
         spyOn(event, 'preventDefault');
         spyOn(component.searchInputElement.nativeElement, 'focus');
-        event.code = 'ArrowUp';
+        event.key = 'ArrowUp';
         component.onMenuKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
