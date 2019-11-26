@@ -24,6 +24,7 @@
                     'is-blocked': cell.blocked
                 }"
             [attr.id]="cell.id"
+            [attr.aria-disabled]="cell.disabled || cell.blocked"
             [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
             (click)="selectDate(cell, $event)"
             (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: rowIndex })"
