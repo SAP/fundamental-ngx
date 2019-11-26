@@ -201,11 +201,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
-            if (this.inputText) {
-                this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
-            } else {
-                this.displayedValues = this.dropdownValues;
-            }
+            this.refreshDisplayedValues();
         }
     }
 
@@ -315,13 +311,15 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-        this.open = isOpen;
-        this.openChange.emit(this.open);
-        this.onTouched();
-        if (this.open) {
-            this.focusTrap.activate();
-        } else {
-            this.focusTrap.deactivate();
+        if (this.open !== isOpen) {
+            this.openChange.emit(this.open);
+            this.open = isOpen;
+            this.onTouched();
+            if (isOpen) {
+                this.focusTrap.activate();
+            } else {
+                this.focusTrap.deactivate();
+            }
         }
     }
 
@@ -329,6 +327,11 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this.cdRef.detectChanges();
+    }
+
+    /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
+    public resetDisplayedValues(): void {
+        this.displayedValues = this.dropdownValues;
     }
 
     private defaultDisplay(str: any): string {
@@ -367,6 +370,14 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             });
         } catch (e) {
             console.warn('Unsuccessful attempting to focus trap the Combobox.');
+        }
+    }
+
+    private refreshDisplayedValues(): void {
+        if (this.inputText) {
+            this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+        } else {
+            this.displayedValues = this.dropdownValues;
         }
     }
 
