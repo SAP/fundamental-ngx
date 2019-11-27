@@ -6,6 +6,7 @@ import { MenuModule } from '../menu/menu.module';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
+import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { IconModule } from '../icon/icon.module';
         PopoverModule,
         MenuModule,
         ButtonModule,
-        IconModule
+        IconModule,
+        LoadingSpinnerModule
     ]
 })
 export class SelectModule { }

@@ -126,6 +126,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
      */
     @Input()
     unselectMissingOption: boolean = true;
+    /** If user wants to disable clicking when the content has not yet loaded and apply the three dots. */
+    @Input() loading: boolean = false;
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -143,9 +145,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
 
     /** Subject triggered when the component is destroyed. */
     private readonly destroy$: Subject<void> = new Subject<void>();
-
-    @Input() loading: boolean = false;
-
 
     /** Observable triggered when an option has its selectedChange event fire. */
     private readonly optionsStatusChanges: Observable<OptionComponent> = defer(() => {

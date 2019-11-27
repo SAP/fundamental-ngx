@@ -120,3 +120,16 @@
     text-overflow: ellipsis;
     margin-right: auto;
 }
+
+fd-loading-spinner {
+    left: 50%;
+    cursor: not-allowed;
+    position: absolute;
+    bottom: 2.5rem;
+    margin-bottom: -2.5rem;
+}
+
+.fd-loading-spinner--compact {
+    bottom: 2rem;
+    margin-bottom: -2rem;
+}
