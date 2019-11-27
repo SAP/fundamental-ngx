@@ -67,7 +67,7 @@
     "@nrwl/nx": "7.8.7",
     "@types/node": "^12.12.14",
     "@stackblitz/sdk": "1.3.0",
-    "core-js": "^2.6.9",
+    "core-js": "^3.4.4",
     "focus-trap": "^5.1.0",
     "fundamental-styles": "^0.4.0-rc.18",
     "jasminewd2": "^2.0.6",
