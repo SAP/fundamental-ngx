@@ -403,6 +403,7 @@ import { SideNavigationMultipleSelectedExampleComponent } from './component-docs
 import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
+import { PopoverDropdownComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown.component';
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
 
 
@@ -754,7 +755,8 @@ import { SelectTypesExampleComponent } from './component-docs/select/examples/se
         SideNavigationThreeLevelsExampleComponent,
         NotificationContentComponent,
         DatePickerComplexI18nExampleComponent,
-        DatetimePickerComplexI18nExampleComponent
+        DatetimePickerComplexI18nExampleComponent,
+        PopoverDropdownComponent
     ],
 
     entryComponents: [
