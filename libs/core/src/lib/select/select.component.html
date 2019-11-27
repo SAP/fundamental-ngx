@@ -5,7 +5,7 @@
     [fillControlMode]="fillControlMode"
     [appendTo]="appendTo"
     class="fd-select-popover-custom"
-    [disabled]="'disabled || loading'"
+    [disabled]="disabled || loading"
 >
     <fd-popover-control>
         <ng-container *ngIf="triggerTemplate">
@@ -17,13 +17,12 @@
                 fd-button
                 aria-haspopup="true"
                 [attr.aria-expanded]="isOpen"
-                [disabled]="disabled"
+                [disabled]="disabled || loading"
                 [ngClass]="{
                     'fd-button--compact': compact,
                     'fd-button--noborder': selectType === 'noborder',
                     'fd-button--splitborder': selectType === 'splitborder'
                 }"
-                [disabled]="disabled || loading"
             >
                 <fd-icon
                     *ngIf="glyph"
@@ -36,11 +35,7 @@
                 <span class="fd-select-text-custom">{{ triggerValue }}</span>
             </button>
         </ng-container>
-        <fd-loading-spinner
-            *ngIf="loading"
-            [loading]="'loading'"
-            [ngClass]="{ 'fd-loading-spinner--compact': compact }"
-        >
+        <fd-loading-spinner *ngIf="loading" [loading]="loading" [ngClass]="{ 'fd-loading-spinner--compact': compact }">
         </fd-loading-spinner>
     </fd-popover-control>
     <fd-popover-body class="fd-select-popover-body-custom" [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
