@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.77"></a>
+# [0.13.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.75...v0.13.0-rc.77) (2019-11-29)
+
+
+### Bug Fixes
+
+* add routerLink to sideNav Links, change example ([#1682](https://github.com/SAP/fundamental-ngx/issues/1682)) ([9a32c36](https://github.com/SAP/fundamental-ngx/commit/9a32c36))
+
+
+
 <a name="0.13.0-rc.75"></a>
 # [0.13.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.74...v0.13.0-rc.75) (2019-11-29)
 
