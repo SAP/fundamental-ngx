@@ -17,5 +17,6 @@ export interface NestedListLink {
     title: string;
     callback?: Function;
     href?: string;
+    routerLink?: string;
     selected?: boolean;
 }

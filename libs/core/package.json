@@ -17,6 +17,7 @@
     "@angular/core": "ANGULAR_VER_PLACEHOLDER",
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
+    "@angular/router": "ANGULAR_VER_PLACEHOLDER",
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {

@@ -22,7 +22,8 @@ export class SideNavigationObjectExampleComponent {
                 {
                     link: {
                         icon: 'menu',
-                        title: 'Link 2'
+                        title: 'Link 2',
+                        routerLink: '#'
                     }
                 },
                 {
@@ -32,6 +33,7 @@ export class SideNavigationObjectExampleComponent {
                         title: 'Link 3',
                     },
                     list: {
+                        headerTitle: 'Header Title 2',
                         items: [
                             {
                                 link: {
@@ -70,6 +72,7 @@ export class SideNavigationObjectExampleComponent {
             ]
         },
         utilityNavigation: {
+            headerTitle: 'Header Title 3',
             textOnly: true,
             items: [
                 {

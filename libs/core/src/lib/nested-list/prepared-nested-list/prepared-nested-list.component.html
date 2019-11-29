@@ -10,7 +10,8 @@
             <a fd-nested-list-link *ngIf="item.link"
                [onClickCallback]="item.link.callback"
                [selected]="item.link.selected"
-               [attr.href]="item.link.href ? item.link.href : null">
+               [attr.href]="item.link.href ? item.link.href : null"
+               [routerLink]="item.link.routerLink ? item.link.routerLink : []">
                 <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
                 <span fd-nested-list-title>{{item.link.title}}</span>
             </a>
@@ -21,7 +22,8 @@
             <a fd-nested-list-link *ngIf="item.link"
                [onClickCallback]="item.link.callback"
                [selected]="item.link.selected"
-               [attr.href]="item.link.href ? item.link.href : null">
+               [attr.href]="item.link.href ? item.link.href : null"
+               [routerLink]="item.link.routerLink ? item.link.routerLink : []">
                 <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
                 <span fd-nested-list-title>{{item.link.title}}</span>
             </a>
