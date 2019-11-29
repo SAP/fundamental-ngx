@@ -10,8 +10,10 @@ export class SideNavigationCondensedObjectExampleComponent {
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: true,
         mainNavigation: {
-            headerTitle: 'Header Title 1',
             items: [
+                {
+                    headerTitle: 'Header Title 1'
+                },
                 {
                     link: {
                         icon: 'menu',
@@ -58,6 +60,9 @@ export class SideNavigationCondensedObjectExampleComponent {
                             }
                         ]
                     }
+                },
+                {
+                    headerTitle: 'Header Title'
                 },
                 {
                     link: {
