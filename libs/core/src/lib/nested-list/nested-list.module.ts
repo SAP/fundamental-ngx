@@ -10,11 +10,13 @@ import { PopoverModule } from '../popover/popover.module';
 import { NestedListPopoverComponent } from './nested-list-popover/nested-list-popover.component';
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
 import { NestedListStateService } from './nested-list-state.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
         CommonModule,
-        PopoverModule
+        PopoverModule,
+        RouterModule
     ],
     declarations: [
         NestedListDirective,

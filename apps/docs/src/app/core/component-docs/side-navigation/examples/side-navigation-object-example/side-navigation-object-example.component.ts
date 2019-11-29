@@ -10,8 +10,10 @@ export class SideNavigationObjectExampleComponent {
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: false,
         mainNavigation: {
-            headerTitle: 'Header Title 1',
             items: [
+                {
+                    headerTitle: 'Header Title 1',
+                },
                 {
                     link: {
                         callback: () => this.callbackFunction('First Item'),
@@ -20,9 +22,13 @@ export class SideNavigationObjectExampleComponent {
                     }
                 },
                 {
+                    headerTitle: 'Header Title 2',
+                },
+                {
                     link: {
                         icon: 'menu',
-                        title: 'Link 2'
+                        title: 'Link 2',
+                        routerLink: '#'
                     }
                 },
                 {
@@ -72,6 +78,9 @@ export class SideNavigationObjectExampleComponent {
         utilityNavigation: {
             textOnly: true,
             items: [
+                {
+                    headerTitle: 'Header Title 3',
+                },
                 {
                     link: {
                         title: 'Link 1'

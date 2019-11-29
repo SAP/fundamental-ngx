@@ -1,5 +1,6 @@
 
 export interface NestedListItem {
+    headerTitle?: string,
     list?: NestedListModel;
     link?: NestedListLink;
     expanded?: boolean;
@@ -9,7 +10,6 @@ export interface NestedListItem {
 export interface NestedListModel {
     textOnly?: boolean;
     items: NestedListItem[];
-    headerTitle?: string
 }
 
 export interface NestedListLink {
@@ -17,5 +17,6 @@ export interface NestedListLink {
     title: string;
     callback?: Function;
     href?: string;
+    routerLink?: string;
     selected?: boolean;
 }
