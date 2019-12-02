@@ -58,7 +58,7 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month below with ArrowDown', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowDown', preventDefault: () => {}
+            key: 'ArrowDown', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-9');
@@ -67,7 +67,7 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month above with ArrowUp', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowUp', preventDefault: () => {}
+            key: 'ArrowUp', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-1');
@@ -76,7 +76,7 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month to the left with ArrowLeft', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {}
+            key: 'ArrowLeft', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-4');
@@ -85,7 +85,7 @@ describe('CalendarMonthViewComponent', () => {
     it('Should focus the month to the right with ArrowRight', () => {
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {}
+            key: 'ArrowRight', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-6');
@@ -93,7 +93,7 @@ describe('CalendarMonthViewComponent', () => {
 
     it('Should select a month with Enter', () => {
         const event = {
-            code: 'Enter', preventDefault: () => {}
+            key: 'Enter', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
@@ -102,7 +102,7 @@ describe('CalendarMonthViewComponent', () => {
     it('Should select a month with Space', () => {
 
         const event = {
-            code: 'Space', preventDefault: () => {}
+            key: ' ', preventDefault: () => {}
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);

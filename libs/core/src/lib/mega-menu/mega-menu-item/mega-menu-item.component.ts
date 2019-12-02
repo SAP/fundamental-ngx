@@ -98,14 +98,14 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     /** @hidden */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
-        switch (event.code) {
+        switch (event.key) {
             case ('ArrowLeft'): {
                 this.closeSubList();
                 this.link.focus();
                 break;
             }
             case ('ArrowRight'):
-            case ('Space'):
+            case (' '):
             case ('Enter'): {
                 this.openSubList();
                 this.changeDetectionRef.detectChanges();
@@ -180,7 +180,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
      */
     handleSubListKeyDown(event: KeyboardEvent, index: number): void {
         this.menuKeyboardService.keyDownHandler(event, index, this.subItems.toArray());
-        if (event.code === 'ArrowDown' || event.code === 'ArrowUp') {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
             event.stopPropagation();
         }
     }

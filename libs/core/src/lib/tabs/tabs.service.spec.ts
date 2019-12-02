@@ -42,33 +42,33 @@ describe('TabsService', () => {
     it('should handle focus', () => {
         const elements = anchors.map(anchor => anchor.nativeElement);
         spyOn(elements[1], 'focus');
-        service.tabHeaderKeyHandler(0, {code: 'ArrowRight'}, elements);
+        service.tabHeaderKeyHandler(0, {key: 'ArrowRight'}, elements);
         expect(elements[1].focus).toHaveBeenCalled();
     });
 
     it('should handle focus on first element, when reached last', () => {
         const elements = anchors.map(anchor => anchor.nativeElement);
         spyOn(elements[0], 'focus');
-        service.tabHeaderKeyHandler(2, {code: 'ArrowRight'}, elements);
+        service.tabHeaderKeyHandler(2, {key: 'ArrowRight'}, elements);
         expect(elements[0].focus).toHaveBeenCalled();
     });
 
     it('should handle focus on last element, when reached before first', () => {
         const elements = anchors.map(anchor => anchor.nativeElement);
         spyOn(elements[2], 'focus');
-        service.tabHeaderKeyHandler(0, {code: 'ArrowLeft'}, elements);
+        service.tabHeaderKeyHandler(0, {key: 'ArrowLeft'}, elements);
         expect(elements[2].focus).toHaveBeenCalled();
     });
 
     it('should handle select on first element', () => {
         const elements = anchors.map(anchor => anchor.nativeElement);
         service.tabSelected.subscribe(index => expect(index).toBe(0));
-        service.tabHeaderKeyHandler(0, {code: 'Enter'}, elements);
+        service.tabHeaderKeyHandler(0, {key: 'Enter'}, elements);
     });
 
     it('should handle select when space click on first element', () => {
         const elements = anchors.map(anchor => anchor.nativeElement);
         service.tabSelected.subscribe(index => expect(index).toBe(1));
-        service.tabHeaderKeyHandler(1, {code: 'Space', preventDefault: () => {}}, elements);
+        service.tabHeaderKeyHandler(1, {key: ' ', preventDefault: () => {}}, elements);
     });
 });

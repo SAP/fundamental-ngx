@@ -16,3 +16,24 @@
 .fd-user-menu__control {
     padding: 4px;
 }
+
+.fd-shellbar {
+    .fd-shellbar-side-nav-control {
+        color: #fff;
+        color: var(--sapShell_TextColor, #fff);
+        margin-right: 4px;
+        @media (min-width: 600px) {
+            margin-left: -12px;
+        }
+        @media (min-width: 1024px) {
+            margin-left: -28px;
+        }
+
+        &:hover, &:active {
+            background-color: #283848;
+            background-color: var(--sapShell_Hover_Background, #283848);
+            border-color: #283848;
+            border-color: var(--sapShell_Hover_Background, #283848);
+        }
+    }
+}
