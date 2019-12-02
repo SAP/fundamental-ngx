@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
 import * as popoverSrcScss from '!raw-loader!./examples/popover-simple/popover-example.component.scss';
@@ -15,15 +15,10 @@ import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-
 import * as popoverFillSrcTs from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.ts';
 import * as popoverDynamicHSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.html';
 import * as popoverDynamicTSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.ts';
-import * as nestedPopoverTs from '!raw-loader!./examples/nested-popover/nested-popover.component.ts';
-import * as nestedPopoverHtml from '!raw-loader!./examples/nested-popover/nested-popover.component.html';
-import * as nestedPopoverScss from '!raw-loader!./examples/nested-popover/nested-popover.component.scss';
 import * as dropdownPopoverHtml from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.html';
 import * as dropdownPopoverTs from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.ts';
 import * as dropdownPopoverScss from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-popover',
@@ -107,33 +102,6 @@ export class PopoverDocsComponent implements OnInit {
             typescriptFileCode: popoverFillSrcTs,
             component: 'PopoverCFillComponent'
         }
-    ];
-
-    nestedPopover: ExampleFile[] = [
-        {
-            language: 'html',
-            code: nestedPopoverHtml,
-            fileName: 'nested-popover',
-            typescriptFileCode: nestedPopoverTs,
-            component: 'NestedPopoverComponent',
-            scssFileCode: nestedPopoverScss
-        },
-        {
-            language: 'typescript',
-            code: nestedPopoverTs,
-            fileName: 'nested-popover',
-            typescriptFileCode: nestedPopoverTs,
-            component: 'NestedPopoverComponent',
-            scssFileCode: nestedPopoverScss
-        },
-        {
-            language: 'scss',
-            code: nestedPopoverScss,
-            fileName: 'nested-popover',
-            typescriptFileCode: nestedPopoverTs,
-            component: 'NestedPopoverComponent',
-            scssFileCode: nestedPopoverScss
-        },
     ];
 
     dropdownPopover: ExampleFile[] = [
