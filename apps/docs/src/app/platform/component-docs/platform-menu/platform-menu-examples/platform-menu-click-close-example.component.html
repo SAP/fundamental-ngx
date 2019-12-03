@@ -1,0 +1,11 @@
+<fd-popover [(isOpen)]="isOpen" placement="top">
+    <fd-dropdown-control>Menu</fd-dropdown-control>
+    <fd-popover-body>
+        <fdp-menu
+            [menuItems]="closeOnClickMenuData"
+            [showSeparator]="false"
+            [isScrolling]="false"
+            [width]="'200px'"
+        ></fdp-menu>
+    </fd-popover-body>
+</fd-popover>

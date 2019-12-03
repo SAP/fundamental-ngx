@@ -36,7 +36,6 @@
                 [itemWidth]="width"
                 [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
                 (itemClick)="onItemClick(item, group)"
-                tabindex="0"
             >
             </fdp-menu-item>
         </ng-container>
@@ -70,7 +69,6 @@
                     [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
                     [tooltipLabel]="item.tooltipLabel || group.tooltipLabel"
                     (itemClick)="onItemClick(item, group)"
-                    tabindex="0"
                 ></fdp-menu-item>
             </ng-container>
         </ul>

@@ -15,15 +15,9 @@ export class PlatformDocumentationComponent {
 
     sideCollapsed: boolean = window.innerWidth < 576;
 
-    guides = [
-        { url: 'platform/home', name: 'Home' },
-        { url: 'platform/new-component', name: 'New Component' }
-    ];
+    guides = [{ url: 'platform/home', name: 'Home' }, { url: 'platform/new-component', name: 'New Component' }];
 
-    components = [
-        { url: 'platform/button', name: 'Button' }
-
-    ];
+    components = [{ url: 'platform/button', name: 'Button' }, { url: 'platform/menu', name: 'Menu' }];
 
     layouts = [];
 

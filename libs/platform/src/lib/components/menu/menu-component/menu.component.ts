@@ -204,15 +204,19 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     @Input()
     public menuItems: (MenuItem | MenuGroup)[] = [];
 
+    /** @hidden */
     public groups: MenuGroup[];
-    public sortedQueryList = [];
+    /** @hidden */
+    public sortedQueryList: MenuItemComponent[] = [];
 
+    /** @hidden */
     @ViewChildren(MenuItemComponent)
     menuQueryList: QueryList<MenuItemComponent>;
 
     constructor(private cd: ChangeDetectorRef, private keyboardService: MenuKeyboardService) {}
 
-    ngOnInit() {
+    /** @hidden */
+    ngOnInit(): void {
         if (
             (this.isScrolling && (this.scrollLimit === undefined || this.scrollLimit <= 0)) ||
             (!this.isScrolling && this.scrollLimit > 0)
@@ -227,7 +231,8 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         this.cd.markForCheck();
     }
 
-    ngOnChanges(changes: SimpleChanges) {
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes.width) {
             let minWidth: number;
             let splitWidthNumber: number;
@@ -256,21 +261,22 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         return splitWidthNumber;
     }
 
-    ngAfterViewInit() {
+    /** @hidden */
+    ngAfterViewInit(): void {
         this.sortQueryList();
         this.handleKeypressForSortedQueryList();
 
         this.cd.markForCheck();
     }
 
-    sortQueryList() {
+    private sortQueryList(): void {
         this.sortedQueryList = this.menuQueryList.toArray();
         this.sortedQueryList.sort((a, b) => {
-            return a.index - b.index;
+            return parseInt(a.index, 10) - parseInt(b.index, 10);
         });
     }
 
-    handleKeypressForSortedQueryList() {
+    private handleKeypressForSortedQueryList(): void {
         this.sortedQueryList.forEach((item: MenuItemComponent, index: number) =>
             item.keyDown.pipe(takeUntil(this.onDestroy$)).subscribe((keyboardEvent: KeyboardEvent) => {
                 this.handleKeyPress(keyboardEvent, parseInt(item.index, 10));
@@ -286,7 +292,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         item.command();
     }
 
-    isMenuGroup(item: MenuItem | MenuGroup): item is MenuGroup {
+    private isMenuGroup(item: MenuItem | MenuGroup): item is MenuGroup {
         return (item as MenuGroup).groupItems !== undefined;
     }
 
@@ -333,10 +339,6 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
 
     handleKeyPress(event: KeyboardEvent, index: number) {
         this.keyboardService.keyDownHandler(event, index, this.sortedQueryList);
-    }
-
-    focusFirst() {
-        setTimeout(() => this.menuQueryList.first.focus(), 0);
     }
 
     /** @hidden */
