@@ -8,9 +8,9 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     templateUrl: './core-documentation.component.html'
 })
 export class CoreDocumentationComponent implements OnInit {
-    @ViewChild('content', {static: false }) contentElRef: ElementRef;
+    @ViewChild('content', { static: false }) contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, {static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     sideCollapsed: boolean = window.innerWidth < 576;
@@ -25,6 +25,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/alert', name: 'Alert' },
         { url: 'core/badgeLabel', name: 'Status Indicator' },
         { url: 'core/breadcrumb', name: 'Breadcrumb' },
+        { url: 'core/busyIndicator', name: 'Busy Indicator' },
         { url: 'core/button', name: 'Button' },
         { url: 'core/buttonGroup', name: 'Button Group' },
         { url: 'core/checkbox', name: 'Checkbox' },

@@ -8,6 +8,8 @@ import { AlertHeaderComponent } from './component-docs/alert/alert-header/alert-
 import { AlertDocsComponent } from './component-docs/alert/alert-docs.component';
 import { BadgeLabelDocsComponent } from './component-docs/badge-label/badge-label-docs.component';
 import { BreadcrumbDocsComponent } from './component-docs/breadcrumb/breadcrumb-docs.component';
+import { BusyIndicatorDocsComponent } from './component-docs/busy-indicator/busy-indicator-docs.component';
+import { BusyIndicatorHeaderComponent } from './component-docs/busy-indicator/busy-indicator-header/busy-indicator-header.component';
 import { ButtonDocsComponent } from './component-docs/button/button-docs.component';
 import { ButtonGroupDocsComponent } from './component-docs/button-group/button-group-docs.component';
 import { CalendarDocsComponent } from './component-docs/calendar/calendar-docs.component';
@@ -146,6 +148,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: BreadcrumbDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.breadcrumb } }
+                ]
+            },
+            {
+                path: 'busyIndicator',
+                component: BusyIndicatorHeaderComponent,
+                children: [
+                    { path: '', component: BusyIndicatorDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.busyIndicator } }
                 ]
             },
             {
@@ -340,9 +350,10 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.multiInput } }
                 ]
             },
-            { path: 'notification', component: NotificationDocsHeaderComponent, children: [
-                    { path: '', component: NotificationDocsComponent},
-                    { path: 'api', component: ApiComponent, data: {content: API_FILES.multiInput}}
+            {
+                path: 'notification', component: NotificationDocsHeaderComponent, children: [
+                    { path: '', component: NotificationDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.multiInput } }
                 ]
             },
             {
