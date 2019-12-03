@@ -16,13 +16,17 @@ describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent;
     let fixture: ComponentFixture<DatetimePickerComponent>;
 
+    const takeAtLeastTwoDigits = (digit: number): string => {
+        return digit < 10 ? '0' + digit : String(digit);
+    };
+
     const internalParser = (date: FdDatetime): string => {
-        return date.month + '/' +
-            date.day + '/' +
+        return takeAtLeastTwoDigits(date.month) + '/' +
+            takeAtLeastTwoDigits(date.day) + '/' +
             date.year + ', ' +
-            date.hour + ':' +
-            date.minute + ':' +
-            date.second
+            takeAtLeastTwoDigits(date.hour) + ':' +
+            takeAtLeastTwoDigits(date.minute) + ':' +
+            takeAtLeastTwoDigits(date.second)
         ;
     };
 
