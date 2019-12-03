@@ -1,7 +1,6 @@
 import {
     Component,
     Input,
-    OnInit,
     Output,
     EventEmitter,
     ViewEncapsulation,
@@ -20,7 +19,7 @@ import { DefaultMenuItem } from '@fundamental-ngx/core';
     styleUrls: ['./menu-item.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
+export class MenuItemComponent implements DefaultMenuItem, OnChanges {
     @Input()
     public label: string;
     @Input()
@@ -52,9 +51,11 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
     public childItems: MenuItem[] = [];
 
     /** calculates the final width of the label when icons are used */
+    /** @hidden */
     public finalItemWidth = '';
 
-    @Output() itemClick: EventEmitter<void> = new EventEmitter();
+    @Output()
+    readonly itemClick: EventEmitter<void> = new EventEmitter();
 
     /**  Event thrown, when there is some keyboard event detected on mega menu item */
     @Output()
@@ -62,12 +63,11 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
 
     constructor(public itemEl: ElementRef, private renderer: Renderer2) {}
 
-    ngOnInit() {}
-
-    onItemClick() {
+    onItemClick(): void {
         this.itemClick.emit();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.itemWidth || changes.item) {
             this.finalItemWidth = this.getItemWidth();
@@ -125,7 +125,7 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
      * implemented method for `focus` from `DefaultMenuItem`
      */
     public focus(): void {
-        this.itemEl.nativeElement.focus();
+        this.itemEl.nativeElement.children[0].focus();
     }
     /**
      * implemented method for `click` from `DefaultMenuItem`
@@ -136,7 +136,7 @@ export class MenuItemComponent implements OnInit, DefaultMenuItem, OnChanges {
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
+    handleKeyboardEvent(event: KeyboardEvent): void {
         switch (event.code) {
             case 'Space':
             case 'Enter':
