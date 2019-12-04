@@ -102,6 +102,18 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'states'" [componentName]="'inputGroup'">
+    Input Group with States.
+</fd-docs-section-title>
+<description>
+</description>
+<component-example [name]="'ex9'">
+    <fd-input-group-states-example></fd-input-group-states-example>
+</component-example>
+<code-example [exampleFiles]="statesInput"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-input-group
         [addOnText]="data.properties.addOnText"

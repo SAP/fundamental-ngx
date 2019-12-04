@@ -406,6 +406,7 @@ import { DatetimePickerComplexI18nExampleComponent } from './component-docs/date
 import { PopoverDropdownComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown.component';
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
 import { SemanticToggleExampleComponent } from './component-docs/toggle/examples/semantic-toggle-example/semantic-toggle-example.component';
+import { InputGroupStatesExampleComponent } from './component-docs/input-group/examples/input-group-states-example/input-group-states-example.component';
 
 
 @NgModule({
@@ -758,7 +759,8 @@ import { SemanticToggleExampleComponent } from './component-docs/toggle/examples
         NotificationContentComponent,
         DatePickerComplexI18nExampleComponent,
         DatetimePickerComplexI18nExampleComponent,
-        PopoverDropdownComponent
+        PopoverDropdownComponent,
+        InputGroupStatesExampleComponent
     ],
 
     entryComponents: [

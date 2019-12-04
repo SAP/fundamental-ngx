@@ -7,24 +7,10 @@ fd-input-group {
         max-height: 100%;
         height: 100%;
     }
-}
 
-.fd-input-group > :not(:first-child):not(:last-child) {
-    button {
-        border-radius: 0;
-    }
-}
-
-.fd-input-group > :not(:first-child) {
-    margin-left: -1px;
-}
-
-.fd-input-group {
-    .fd-input, .fd-textarea {
-        margin-top: 0;
-        margin-bottom: 0;
-        &:last-child {
-            margin-bottom: 0;
+    .fd-input-group__addon--button .fd-input-group__button {
+        &:hover {
+            border: none;
         }
     }
 }

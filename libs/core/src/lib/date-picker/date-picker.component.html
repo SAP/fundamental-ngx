@@ -5,10 +5,9 @@
             [closeOnEscapeKey]="true"
             [disabled]="disabled">
     <fd-popover-control>
-        <fd-input-group [compact]="compact" [state]="state">
+        <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled">
             <input #datePicker
                    class="fd-input"
-                   [state]="state"
                    fd-input-group-input
                    type="text"
                    [attr.aria-label]="dateInputLabel"
@@ -16,11 +15,11 @@
                    [placeholder]="placeholder"
                    (keyup.enter)="handleInputChange(datePicker.value)"
                    (click)="openCalendar()"
-                   [disabled]="disabled"
                    [compact]="compact"
                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }">
-            <span fd-input-group-addon [state]="state" [button]="true">
-                <button [disabled]="disabled" fd-button [glyph]="'calendar'"
+            <span fd-input-group-addon [button]="true">
+                <button fd-button
+                        [glyph]="'calendar'"
                         [options]="'light'"
                         [compact]="compact"
                         (click)="toggleCalendar()" [attr.aria-label]="displayCalendarToggleLabel"

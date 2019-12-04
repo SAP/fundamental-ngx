@@ -13,6 +13,8 @@ import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
 import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
 import * as formInputScssSrc from '!raw-loader!./examples/input-group-form-example.component.scss';
+import * as statesInputGroupTsCode from '!raw-loader!./examples/input-group-states-example/input-group-states-example.component.ts';
+import * as statesInputHtml from '!raw-loader!./examples/input-group-states-example/input-group-states-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -169,6 +171,17 @@ export class InputGroupDocsComponent implements OnInit {
             secondFile: 'input-group-examples',
             typescriptFileCode: inputGroupTscode,
             component: 'InputGroupComplexExampleComponent'
+        }
+    ];
+
+    statesInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: statesInputHtml,
+            fileName: 'input-group-states-example',
+            secondFile: 'input-group-states-example',
+            typescriptFileCode: statesInputGroupTsCode,
+            component: 'InputGroupStatesExampleComponent'
         }
     ];
 

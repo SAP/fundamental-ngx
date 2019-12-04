@@ -6,7 +6,7 @@ import {
     forwardRef,
     ViewEncapsulation,
     ContentChild,
-    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef
+    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';

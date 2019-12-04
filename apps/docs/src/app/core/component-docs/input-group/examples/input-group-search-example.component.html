@@ -1,4 +1,11 @@
 <label fd-form-label>Search input</label>
-<fd-input-group-search [disabled]="false" [(ngModel)]="searchTerm"></fd-input-group-search>
+<fd-input-group
+    [disabled]="false"
+    [(ngModel)]="searchTerm"
+    [glyph]="'decline'"
+    [placeholder]="'Search'"
+    [button]="true"
+    (addOnButtonClicked)="searchTerm = ''">
+</fd-input-group>
 <br/>
 <span>searchTerm: {{searchTerm}}</span>

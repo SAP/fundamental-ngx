@@ -20,6 +20,10 @@ export class LocalizationEditorInputDirective {
      * */
     @HostBinding('class.fd-input--compact')
     public compact: boolean;
+
+    /** @hidden */
+    @HostBinding('class.fd-input-group__input')
+    fdInputGroupInputClass: boolean = true;
 }
 
 /**
@@ -41,6 +45,10 @@ export class LocalizationEditorTextareaDirective {
      * */
     @HostBinding('class.fd-input--compact')
     public compact: boolean;
+
+    /** @hidden */
+    @HostBinding('class.fd-input-group__input')
+    fdInputGroupInputClass: boolean = true;
 
     /**
      * @hidden
@@ -80,7 +88,12 @@ export class LocalizationEditorLabel {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-localization-editor-element]',
 })
-export class LocalizationEditorElement {}
+export class LocalizationEditorElement {
+
+    /** @hidden */
+    @HostBinding('class.fd-localization-editor__language')
+    fdLocalizationEditorLanguage: boolean = true;
+}
 
 /**
  * Not for external use. Portal to render the complex title template.
