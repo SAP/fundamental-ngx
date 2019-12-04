@@ -7,7 +7,8 @@
         border-bottom-right-radius: 0px;
 
         &:disabled {
-            opacity: 1.0;
+            color: #89919a;
+            border-color: #89919a;
         }
 
         &::after {
@@ -18,6 +19,11 @@
     }
 
     @supports(--css: variables) {
+        ::ng-deep button.fd-dropdown__control:disabled {
+            color: var(--fd-color-neutral-4, #89919a);
+            border-color: var(--fd-color-neutral-4, #89919a);
+        }
+
         ::ng-deep button.fd-dropdown__control::after {
             color: var(--fd-color-action-1, #0a6ed1);
         }
@@ -28,20 +34,13 @@
 
     ::ng-deep input[type="search"],
     ::ng-deep .fd-input {
-        border-width: 1px;
-        border-style: solid;
-        padding-right: 12px;
-        padding-left: 12px;
-        border-color: #89919a;
-        background: none;
+        margin-top: 0px;
     }
 
-    ::ng-deep [type=search]+.fd-input-group__addon {
-        border-width: 1px;
-        border-left-width: 0px;
-        border-style: solid;
-        border-color: #89919a;
-        width: auto;
+    ::ng-deep .fd-input--compact {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: var(--fd-forms-height-compact, 28px);
     }
 
     ::ng-deep input:disabled {
@@ -50,15 +49,6 @@
 
     ::ng-deep input[type="search"]::-webkit-search-cancel-button {
         -webkit-appearance: searchfield-cancel-button;
-    }
-
-    ::ng-deep .fd-input-group .fd-input-group__addon--button>* {
-        border-color: transparent;
-    }
-
-    ::ng-deep .fd-button--compact::before {
-        font-size: 14px;
-        line-height: 1.2;
     }
 
     @supports(--css: variables) {
@@ -100,15 +90,6 @@
 }
 
 ::ng-deep [dir="rtl"] .search-input {
-
-    & [type=search]+.fd-input-group__addon {
-        border-width: 1px;
-        border-left-width: 1px;
-        border-right-width: 0px;
-        border-style: solid;
-        border-color: #89919a;
-        width: auto;
-    }
 
     & .search-input__category-dropdown button {
         border-top-right-radius: 4px;
@@ -163,6 +144,10 @@
 
 .is-loading ::ng-deep .fd-button:before {
     animation: sap-icon-spin 2s infinite linear;
+}
+
+.is-loading ::ng-deep .fd-button {
+    margin-left: 0;
 }
 
 .is-loading ::ng-deep .fd-input-group__addon:hover .fd-button:before {
