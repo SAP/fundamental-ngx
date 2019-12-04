@@ -30,7 +30,7 @@ export class MenuKeyboardService {
             return;
         }
 
-        switch (event.code) {
+        switch (event.key) {
             case ('ArrowDown'): {
                 if (menuItems.length > index + 1) {
                     menuItems[index + 1].focus();
@@ -57,7 +57,7 @@ export class MenuKeyboardService {
                 event.preventDefault();
                 break;
             }
-            case ('Space'): {
+            case (' '): {
                 if (menuItems[index]) {
                     menuItems[index].click();
                     event.preventDefault();

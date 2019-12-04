@@ -1,3 +1,11 @@
+$fd-icon-color: #0a6ed1;
+$fd-item-focus-color: #085caf;
+$fd-selected-item-bg-color: #0a6ed112;
+$fd-selected-item-bg-color-hover: #0a6ed11a;
+$fd-normal-item-color-hover: #fafafa;
+$fd-disabled-item-color: #51555999;
+$fd-item-color: var(--fd-menu-item-color); //#515559 is not available in css_variables file
+
 .fd-menu__item {
     &:hover {
         //don't apply hover properties on only label item, we need it over entire item
@@ -7,7 +15,10 @@
     height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
     overflow: hidden;
     background-color: transparent;
-    padding: 12px 16px;
+    // padding: 12px 40px; //for alignment with icons
+    padding: 8px 16px;
+    line-height: 24px;
+    width: inherit;
 }
 
 .fd-menu__item[aria-selected='true'] {
@@ -30,8 +41,8 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     padding: 8px; //center-aligned icon, therefore 8px
     align-items: center;
     margin: 6px 4px 6px 8px;
-    color: #0a6ed1;
-    color: var(--fd-color-action);
+    color: var(--sapInformationColor, $fd-icon-color);
+    background-color: transparent; //recent styles repo changes made it white color
 }
 
 .fd-menu--addon-before > .fd-menu__item {
@@ -45,8 +56,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     height: 28px;
     padding: 8px; //center-aligned icon, therefore 8px
     margin: 6px 4px 6px 8px;
-    color: #0a6ed1;
-    color: var(--fd-color-action);
+    color: var(--sapInformationColor, $fd-icon-color);
     display: flex;
     float: right;
     clear: right;
@@ -58,10 +68,6 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     float: left;
     clear: left;
 }
-.fd-menu--addon-after > .fd-menu__item {
-    padding-right: 36px;
-}
-
 .is-disabled,
 .is-disabled:hover,
 .is-disabled:focus,
@@ -72,7 +78,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
     .fd-menu__item,
     .fd-menu__addon-before,
     .fd-menu__addon-after {
-        color: rgba(81, 85, 89, 0.6);
+        color: var(--sapContent_DisabledTextColor, $fd-disabled-item-color);
     }
 }
 
@@ -83,24 +89,43 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
 
 //have the right state for selected item
 .selected-item-state {
-    background-color: #0a6ed112;
-    background-color: var(--fd-color-background-selected);
+    background-color: var(--sapInformationColor, $fd-selected-item-bg-color);
     &:hover {
         .fd-menu__item {
             font-weight: bold;
+            color: $fd-item-color;
         }
-        background-color: #0a6ed11a;
-        background-color: var(--fd-color-background-selected-hover);
+        background-color: var(--sapInformationColor, $fd-selected-item-bg-color-hover);
+    }
+    &:focus {
+        outline: var(--sapButton_Emphasized_Hover_BorderColor, $fd-item-focus-color) dotted 1px;
+        .fd-menu__item {
+            color: $fd-item-color; //to override the blue color to selected item
+        }
     }
 }
 
 //have the right state for normal/unselected items
 .normal-item-state {
     &:hover {
-        background-color: #fafafa;
-        background-color: var(--fd-color-background-hover);
+        background-color: var(--sapList_FooterBackground, $fd-normal-item-color-hover);
         .fd-menu__item {
             font-weight: bold;
+            color: $fd-item-color;
         }
+    }
+    &:focus {
+        outline: var(--sapButton_Emphasized_Hover_BorderColor, $fd-item-focus-color) dotted 1px;
+        .fd-menu__item {
+            color: $fd-item-color; //to override the blue color to selected item
+        }
+    }
+}
+
+//removes extra padding when icons are present
+.fd-menu__addon-before + .fd-menu__label-truncation {
+    .fd-menu__item {
+        // padding: 12px 0px;   //for alignment with icons
+        padding: 8px 0px;
     }
 }

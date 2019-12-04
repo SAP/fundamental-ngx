@@ -1,6 +1,5 @@
 <fd-notification-header [closeButton]="!!defaultConfigurationNotification?.closeButtonCallback"
-                        (closeButtonClick)="defaultConfigurationNotification?.closeButtonCallback &&
-                        defaultConfigurationNotification?.closeButtonCallback()" [type]="type">
+                        (closeButtonClick)="handleCloseButtonClick()" [type]="type">
     <h3 fd-notification-title *ngIf="defaultConfigurationNotification?.title">
         {{defaultConfigurationNotification?.title}}
     </h3>
@@ -26,12 +25,12 @@
         <div fd-notification-actions>
             <button fd-button [fdType]="'positive'"
                     *ngIf="defaultConfigurationNotification?.approve"
-                    (click)="defaultConfigurationNotification?.approveCallback && defaultConfigurationNotification?.approveCallback()">
+                    (click)="handleApproveButtonClick()">
                 {{defaultConfigurationNotification?.approve}}
             </button>
             <button fd-button [fdType]="'negative'"
                     *ngIf="defaultConfigurationNotification?.cancel"
-                    (click)="defaultConfigurationNotification?.cancelCallback && defaultConfigurationNotification.cancelCallback()">
+                    (click)="handleCancelButtonClick()">
                 {{defaultConfigurationNotification?.cancel}}
             </button>
         </div>

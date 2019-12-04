@@ -10,8 +10,10 @@ export class SideNavigationCondensedObjectExampleComponent {
     sideNavigationConfiguration: SideNavigationModel = {
         condensed: true,
         mainNavigation: {
-            headerTitle: 'Header Title 1',
             items: [
+                {
+                    headerTitle: 'Header Title 1'
+                },
                 {
                     link: {
                         icon: 'menu',
@@ -44,39 +46,10 @@ export class SideNavigationCondensedObjectExampleComponent {
                                 }
                             },
                             {
-                                expanded: true,
                                 link: {
                                     icon: 'menu',
                                     title: 'Link 3',
-                                },
-                                list: {
-                                    items: [
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 1'
-                                            }
-                                        },
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 2'
-                                            }
-                                        },
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 3'
-                                            }
-                                        },
-                                        {
-                                            link: {
-                                                icon: 'menu',
-                                                title: 'Link 4',
-                                                selected: true
-                                            }
-                                        }
-                                    ]
+                                    selected: true
                                 }
                             },
                             {
@@ -87,6 +60,9 @@ export class SideNavigationCondensedObjectExampleComponent {
                             }
                         ]
                     }
+                },
+                {
+                    headerTitle: 'Header Title'
                 },
                 {
                     link: {

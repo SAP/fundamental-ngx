@@ -1,30 +1,36 @@
-<form [formGroup]="customForm">
-    <div fd-form-set class="flex-form-set">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div fd-form-set>
         <div fd-form-item>
             <label fd-form-label for="form-input-1">Default Input:</label>
-            <input
-                formControlName="inputControl"
-                fd-form-control
-                type="text"
-                id="form-input-1"
-                placeholder="Field placeholder text"
-            />
-            Input Value: {{ customForm.controls.inputControl.value }}
+            <input formControlName="inputControl" fd-form-control type="text" id="form-input-1"
+                placeholder="Field placeholder text" />
+            Input Value: {{ myForm.get('inputControl').value }}
         </div>
         <div fd-form-item>
             <label fd-form-label for="form-input-2">Default Input:</label>
-            <input
-                formControlName="disabledInputControl"
-                fd-form-control
-                type="text"
-                id="form-input-2"
-                placeholder="Field placeholder text"
-            />
-            Input Value: {{ customForm.controls.disabledInputControl.value }} <br/>
-            Disabled: {{ customForm.controls.disabledInputControl.disabled }}
+            <input formControlName="disabledInputControl" fd-form-control type="text" id="form-input-2"
+                placeholder="Field placeholder text" />
+            Input Value: {{ myForm.get('disabledInputControl').value }} <br>
+            Disabled : {{ myForm.get('disabledInputControl').disabled }}
         </div>
     </div>
+    <div formArrayName="arr" *ngFor="let a of myForm.get('arr')['controls']; let i = index">
+        <div [formGroupName]="i" style="margin-bottom: 10px;">
+            <div fd-form-set>
+                <div fd-form-item>
+                    <label fd-form-label for="form-input-3">Primary Input in Form Array</label>
+                    <input class="fd-form-control fd-input" formControlName="primaryInput" fd-form-control type="text"
+                        id="form-input-3" placeholder="Field placeholder text" />
+                </div>
+                <div fd-form-item>
+                    <label fd-form-label for="form-input-4">Secondary Input in Form Array</label>
+                    <input class="fd-form-control fd-input" formControlName="secondaryInput" fd-form-control type="text"
+                        id="form-input-4" placeholder="Field placeholder text" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button fd-button type="button" (click)="addItem()" style="margin-right: 5px;">Add</button>
+    <button fd-button type="submit">Submit</button>
 </form>
-
-
-

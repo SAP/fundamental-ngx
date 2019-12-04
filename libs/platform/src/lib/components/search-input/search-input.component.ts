@@ -69,6 +69,11 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     @Input() isLoading = false;
 
     /**
+     * Toggle "disabled" mode.
+     */
+    @Input() disabled = false;
+
+    /**
      * Input change event.
      */
     @Output() inputChange: EventEmitter<SearchInput> = new EventEmitter();

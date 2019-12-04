@@ -1,6 +1,6 @@
 # @Fundamental-NGX/Core
 
-[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx.core)
+[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx/core)
 [![Minified Size](https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
 [![Minzipped Size](https://badgen.net/bundlephobia/minzip/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
 [![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=master)](https://travis-ci.org/SAP/fundamental-ngx)

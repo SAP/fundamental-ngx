@@ -157,7 +157,7 @@ export class PopoverComponent {
 
     /** Method that is called, when there is keydown event dispatched */
     public handleKeydown(event: KeyboardEvent): void {
-        if (event.code === 'ArrowDown' && event.altKey) {
+        if (event.key === 'ArrowDown' && event.altKey) {
             this.open();
         }
     }

@@ -32,6 +32,10 @@ import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/d
 import * as selectMaxHeightHTs from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
 import { ActivatedRoute } from '@angular/router';
 
+import * as selectTypesSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.html';
+import * as selectTypesTsSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.ts';
+import * as selecTypesScssSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.scss';
+
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
@@ -140,6 +144,16 @@ export class SelectDocsComponent implements OnInit {
             component: 'SelectViewValueExampleComponent',
             code: selectViewValueT,
             fileName: 'select-view-value-example',
+        }
+    ];
+    selectTypes: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectTypesSrc,
+            fileName: 'select-types-example',
+            scssFileCode: selecTypesScssSrc,
+            typescriptFileCode: selectTypesTsSrc,
+            component: 'SelectTypesExampleComponent'
         }
     ];
 
