@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { SelectComponent } from './select.component';
+import { SelectPlatformComponent } from './select.component';
 import { ElementRef, ViewChild, Component } from '@angular/core';
 
 @Component({
@@ -15,50 +15,29 @@ import { ElementRef, ViewChild, Component } from '@angular/core';
 })
 class TestWrapperComponent {
 
-    @ViewChild(SelectComponent, { static: true })
-    selectRef: SelectComponent;
+    @ViewChild(SelectPlatformComponent, { static: true })
+    selectRef: SelectPlatformComponent;
 
-    @ViewChild(SelectComponent, { read: ElementRef, static: true })
+    @ViewChild(SelectPlatformComponent, { read: ElementRef, static: true })
     selectElement: ElementRef;
 
     wrapperValue: string;
 }
 
-describe('SelectComponent', () => {
-    let component: SelectComponent;
-    let fixture: ComponentFixture<SelectComponent>;
+describe('SelectPlatformComponent', () => {
+    let component: SelectPlatformComponent;
+    let fixture: ComponentFixture<SelectPlatformComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-        declarations: [ SelectComponent ]
+        declarations: [ SelectPlatformComponent ]
     })
     .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SelectComponent);
+        fixture = TestBed.createComponent(SelectPlatformComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
-
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
-
-    it('should start closed', fakeAsync(() => {
-        expect(document.body.querySelector('#fdtest1')).toBeFalsy();
-    }));
-
-    it('should support custom view values', fakeAsync(() => {
-        component.selectType = 'noborder';
-        fixture.detectChanges();
-        tick();
-        expect(document.body.querySelector('#fdtest1')).toBeTruthy();
-    }));
-    it('should support custom view values', fakeAsync(() => {
-        component.selectType = 'splitborder';
-        fixture.detectChanges();
-        tick();
-        expect(document.body.querySelector('#fdtest1')).toBeTruthy();
-    }));
 });
