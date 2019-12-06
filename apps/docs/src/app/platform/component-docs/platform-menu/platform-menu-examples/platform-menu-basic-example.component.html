@@ -1,5 +1,7 @@
-<fd-popover placement="right">
-    <fd-dropdown-control>Menu with Dropdown Invoker</fd-dropdown-control>
+<fd-popover>
+    <fd-popover-control>
+        <button fd-button [options]="'menu'">Dropdown Popover - Basic</button>
+    </fd-popover-control>
     <fd-popover-body>
         <fdp-menu
             [menuItems]="basicMenuData"

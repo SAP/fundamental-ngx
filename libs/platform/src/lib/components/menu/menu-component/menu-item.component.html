@@ -25,8 +25,8 @@
         [ngClass]="['normal-item-state', disabled ? 'is-disabled' : '']"
         tabindex="0"
     >
-        <div fd-menu-item-addon *ngIf="icon; else noIcon">
-            <span [ngClass]="[icon]" data-tag="menu-item__icon-before" [attr.title]="icon"> </span>
+        <div class="menu-icon-before" *ngIf="icon; else noIcon">
+            <fd-icon fd-menu-item-addon data-tag="menu-item__icon-before" [attr.title]="icon" [glyph]="icon"></fd-icon>
         </div>
         <div class="fd-menu__label-truncation" [ngStyle]="{ width: finalItemWidth }">
             <span
@@ -59,14 +59,13 @@
         [attr.aria-selected]="selected ? 'true' : 'false'"
         tabindex="0"
     >
-        <div fd-menu-item-addon>
-            <span
-                *ngIf="selected; else noIcon"
-                [ngClass]="[icon ? icon : 'sap-icon--accept']"
+        <div class="menu-icon-before" *ngIf="selected; else noIcon">
+            <fd-icon
+                fd-menu-item-addon
                 data-tag="menu-item__icon-before"
                 [attr.title]="icon"
-            >
-            </span>
+                [glyph]="icon ? icon : 'accept'"
+            ></fd-icon>
         </div>
         <div class="fd-menu__label-truncation" [ngStyle]="{ width: finalItemWidth }">
             <span

@@ -123,7 +123,7 @@ therefore, between icon and item, space should be (icon padding top-bottom + spa
 }
 
 //removes extra padding when icons are present
-.fd-menu__addon-before + .fd-menu__label-truncation {
+.menu-icon-before + .fd-menu__label-truncation {
     .fd-menu__item {
         // padding: 12px 0px;   //for alignment with icons
         padding: 8px 0px;

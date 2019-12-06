@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
+import { FdpItem } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-menu-icons-example',
@@ -8,7 +8,7 @@ import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuIconsExampleComponent implements OnInit {
-    iconMenuData: (MenuItem | MenuGroup)[] = [];
+    iconMenuData: FdpItem[] = [];
 
     ngOnInit() {
         this.iconMenuData = [
@@ -25,14 +25,14 @@ export class PlatformMenuIconsExampleComponent implements OnInit {
                 command: () => {
                     alert('second');
                 },
-                icon: 'sap-icon--activity-items'
+                icon: 'activity-items'
             },
             {
                 label: 'Third Item with double-sided icons',
                 command: () => {
                     alert('Third');
                 },
-                icon: 'sap-icon--vehicle-repair',
+                icon: 'vehicle-repair',
                 secondaryIcon: 'sap-icon--grid'
             }
         ];

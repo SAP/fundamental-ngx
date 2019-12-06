@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
+import { FdpItem } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-menu-separator-example',
@@ -8,7 +8,7 @@ import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuSeparatorExampleComponent implements OnInit {
-    basicMenuData: (MenuItem | MenuGroup)[] = [];
+    basicMenuData: FdpItem[] = [];
 
     ngOnInit() {
         this.basicMenuData = [

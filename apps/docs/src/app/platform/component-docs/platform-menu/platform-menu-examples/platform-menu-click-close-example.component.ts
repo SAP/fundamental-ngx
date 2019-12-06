@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
+import { FdpItem } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-menu-click-close-example',
@@ -8,7 +8,7 @@ import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuClickCloseExampleComponent implements OnInit {
-    closeOnClickMenuData: (MenuItem | MenuGroup)[] = [];
+    closeOnClickMenuData: FdpItem[] = [];
 
     // boolean flag useed in conjunction with the popover's two-way binding property
     // that changes the state of the popover visibility
