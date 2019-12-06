@@ -56,7 +56,7 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
 
     /** variable to input any type of object. */
     @Input()
-    list: Array<any>;
+    list: Array<SelectItem>;
 
     /**
      * String rendered as first value in the popup which let the user to make 'no selection' from
