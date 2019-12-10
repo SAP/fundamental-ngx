@@ -24,7 +24,7 @@ export class PlatformActionbarWithBackButtonExampleComponent implements OnInit {
         ];
     }
 
-    onBackBuutonClick() {
+    onBackButtonClick() {
         alert('Back button clicked');
     }
 
