@@ -108,6 +108,8 @@ export interface MenuGroup {
     groupItems: MenuItem[];
 }
 
+export type FdpItem = MenuItem | MenuGroup;
+
 /**
  * `<fdp-menu>` is a menu component which provides navigation, action and selection
  * options.
@@ -123,7 +125,7 @@ export interface MenuGroup {
  *
  * Menu item/group data should be provided to `<fdp-menu>` using an array of MenuItem or MenuGroup:
   ```ts
-  complexMenuData: (MenuItem | MenuGroup)[] = [];
+  complexMenuData: FdpItem[] = [];
   ```
  *
   ```ts
@@ -133,7 +135,8 @@ export interface MenuGroup {
       alert('The first item.')
     },
     selectable: true,
-    selected: true
+    selected: true,
+    secondaryIcon: 'sap-icon--grid',
   }, {
    label: 'Second Item',
      groupItems: [
@@ -156,9 +159,10 @@ export interface MenuGroup {
       command: () => {
         alert("Third");
       },
-      icon: 'sap-icon--grid'
+      icon: 'grid'
   }];
   ```
+  Please note that `secondaryIcon` takes icon in the format `sap-icon<icon-name>` whereas `icon` takes the format `<icon-name>`.
  *
  */
 @Component({
@@ -202,7 +206,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
      * The menu items that are passed in by the user.
      */
     @Input()
-    public menuItems: (MenuItem | MenuGroup)[] = [];
+    public menuItems: FdpItem[] = [];
 
     /** @hidden */
     public groups: MenuGroup[];
@@ -217,10 +221,7 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
 
     /** @hidden */
     ngOnInit(): void {
-        if (
-            (this.isScrolling && (this.scrollLimit === undefined || this.scrollLimit <= 0)) ||
-            (!this.isScrolling && this.scrollLimit > 0)
-        ) {
+        if (this.isValidScroll()) {
             // if scroll limit was not specified but isScrolling flag was used, use default value
             // or if scroll limit was specified but isScrolling flag was not marked true, even then use default value
             this.scrollLimit = this.numberOfItems; // default
@@ -229,6 +230,13 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         }
         this.groups = this.processData(this.menuItems);
         this.cd.markForCheck();
+    }
+
+    private isValidScroll() {
+        return (
+            (this.isScrolling && (this.scrollLimit === undefined || this.scrollLimit <= 0)) ||
+            (!this.isScrolling && this.scrollLimit > 0)
+        );
     }
 
     /** @hidden */
@@ -292,16 +300,16 @@ export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         item.command();
     }
 
-    private isMenuGroup(item: MenuItem | MenuGroup): item is MenuGroup {
+    private isMenuGroup(item: FdpItem): item is MenuGroup {
         return (item as MenuGroup).groupItems !== undefined;
     }
 
-    processData(data: (MenuItem | MenuGroup)[]): MenuGroup[] {
+    processData(data: FdpItem[]): MenuGroup[] {
         const groups: MenuGroup[] = [];
         let newGroup: MenuItem[] = [];
 
         let index = 0;
-        if (data !== undefined) {
+        if (data) {
             data.forEach(record => {
                 if (this.isMenuGroup(record)) {
                     if (newGroup.length > 0) {

@@ -1,5 +1,7 @@
 <fd-popover [(isOpen)]="isOpen" placement="top">
-    <fd-dropdown-control>Menu</fd-dropdown-control>
+    <fd-popover-control>
+        <button fd-button [options]="'menu'">Close on Click Menu</button>
+    </fd-popover-control>
     <fd-popover-body>
         <fdp-menu
             [menuItems]="closeOnClickMenuData"

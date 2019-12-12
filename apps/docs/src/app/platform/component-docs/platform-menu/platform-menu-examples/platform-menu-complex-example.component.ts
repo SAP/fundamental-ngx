@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
+import { FdpItem } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-menu-complex-example',
@@ -8,7 +8,7 @@ import { MenuItem, MenuGroup } from '@fundamental-ngx/platform';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuComplexExampleComponent implements OnInit {
-    complexMenuData: (MenuItem | MenuGroup)[] = [];
+    complexMenuData: FdpItem[] = [];
     ngOnInit() {
         this.complexMenuData = [
             {
@@ -24,7 +24,7 @@ export class PlatformMenuComplexExampleComponent implements OnInit {
             },
             {
                 label: 'Item 2',
-                icon: 'sap-icon--vehicle-repair',
+                icon: 'vehicle-repair',
                 secondaryIcon: 'sap-icon--grid',
                 selectable: false,
                 command: () => {
@@ -50,7 +50,7 @@ export class PlatformMenuComplexExampleComponent implements OnInit {
                         }
                     }
                 ],
-                icon: 'sap-icon--vehicle-repair'
+                icon: 'vehicle-repair'
             },
             {
                 label: 'Item 5',
@@ -62,7 +62,7 @@ export class PlatformMenuComplexExampleComponent implements OnInit {
             },
             {
                 label: 'Item 6',
-                icon: 'sap-icon--vehicle-repair',
+                icon: 'vehicle-repair',
                 command: () => {
                     alert('Item 6 called');
                 }

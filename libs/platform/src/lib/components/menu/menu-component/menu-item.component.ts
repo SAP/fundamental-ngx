@@ -69,7 +69,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.itemWidth || changes.item) {
+        if (changes.itemWidth || changes.item || changes.selected) {
             this.finalItemWidth = this.getItemWidth();
         }
     }
@@ -80,7 +80,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges {
     getItemWidth(): string {
         // todo: handle em, rem etc.
         let finalItemWidth: string = '';
-        if (this.itemWidth !== undefined) {
+        if (this.itemWidth) {
             finalItemWidth = this.getOffsetItemWidth(finalItemWidth);
         } else {
             const itemElement = this.itemEl.nativeElement;
@@ -96,7 +96,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges {
         let unit: string;
         if (this.itemWidth.includes('em')) {
             splitWidthNumber = Number(this.itemWidth.split('em')[0]);
-            iconOffset = 42 / 14; // 14px font-size = 1em
+            iconOffset = 46 / 14; // 14px font-size = 1em
             secondaryIconOffset = iconOffset * 2;
             unit = 'em';
         } else if (this.itemWidth.includes('rem')) {
@@ -104,19 +104,25 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges {
             // todo handle for rem
         } else if (this.itemWidth.includes('px')) {
             splitWidthNumber = Number(this.itemWidth.split('px')[0]);
-            iconOffset = 42;
+            iconOffset = 46;
             secondaryIconOffset = 88;
             unit = 'px';
         }
         // enforce minimum width
         finalItemWidth = this.itemWidth;
-        if (this.item.icon !== undefined || this.group.icon !== undefined || this.item.selected) {
+        if (this.item.icon || this.item.selected) {
             // remove primary icon width from label width
             finalItemWidth = splitWidthNumber - iconOffset + unit;
         }
-        if (this.item.secondaryIcon !== undefined) {
-            // remove secondary icon width from label width
-            finalItemWidth = splitWidthNumber - secondaryIconOffset + unit;
+        if (this.item.secondaryIcon) {
+            // handle case where unselected item with secondary icon is present
+            // and 2 icon's offsets were being calculated instead.
+            if (this.item.selectable && !this.item.selected) {
+                finalItemWidth = splitWidthNumber - iconOffset + unit;
+            } else {
+                // remove secondary icon width from label width
+                finalItemWidth = splitWidthNumber - secondaryIconOffset + unit;
+            }
         }
         return finalItemWidth;
     }
