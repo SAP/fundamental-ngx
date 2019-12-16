@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.82"></a>
+# [0.13.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.80...v0.13.0-rc.82) (2019-12-16)
+
+
+### Bug Fixes
+
+* **platform:** Menu component library fixes ([#1711](https://github.com/SAP/fundamental-ngx/issues/1711)) ([cbd4949](https://github.com/SAP/fundamental-ngx/commit/cbd4949))
+* **platform:search-input:** Closing category dropdown after category item is selected ([#1640](https://github.com/SAP/fundamental-ngx/issues/1640)) ([7317382](https://github.com/SAP/fundamental-ngx/commit/7317382))
+* **platform:search-input:** Fixing SCSS after fundamental-styles upgrade ([#1658](https://github.com/SAP/fundamental-ngx/issues/1658)) ([a96199a](https://github.com/SAP/fundamental-ngx/commit/a96199a))
+
+
+### Features
+
+* **platform:** select component  for platform to enhance the core ([#1694](https://github.com/SAP/fundamental-ngx/issues/1694)) ([ca94c86](https://github.com/SAP/fundamental-ngx/commit/ca94c86))
+* **platform:search-input:** Adding disabled state to search input component ([#1647](https://github.com/SAP/fundamental-ngx/issues/1647)) ([307869f](https://github.com/SAP/fundamental-ngx/commit/307869f))
+
+
+
 <a name="0.13.0-rc.80"></a>
 # [0.13.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.79...v0.13.0-rc.80) (2019-12-03)
 
