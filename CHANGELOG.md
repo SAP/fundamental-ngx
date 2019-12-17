@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.88"></a>
+# [0.13.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.87...v0.13.0-rc.88) (2019-12-17)
+
+
+### Bug Fixes
+
+* **platform:** extending the select component to the 3rd party application  ([#1737](https://github.com/SAP/fundamental-ngx/issues/1737)) ([a6a7bb1](https://github.com/SAP/fundamental-ngx/commit/a6a7bb1))
+
+
+
 <a name="0.13.0-rc.87"></a>
 # [0.13.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.86...v0.13.0-rc.87) (2019-12-16)
 
