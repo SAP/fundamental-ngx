@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
@@ -32,7 +32,6 @@ import { ToolbarComponent } from './core-helpers/toolbar/toolbar.component';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
 import { ApiComponent } from './core-helpers/api/api.component';
-
 
 @NgModule({
     declarations: [

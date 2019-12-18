@@ -118,6 +118,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetRef.detectChanges();
     }
 
     constructor(
@@ -369,7 +370,7 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
      * Handles last button keyboard events
      */
     lastButtonKeydown(event: KeyboardEvent): void {
-        if (event.code === 'Tab' && !event.shiftKey) {
+        if (event.key === 'Tab' && !event.shiftKey) {
             event.preventDefault();
             this.focusArrowLeft.emit();
         }

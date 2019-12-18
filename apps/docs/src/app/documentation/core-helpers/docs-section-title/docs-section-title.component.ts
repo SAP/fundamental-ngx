@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'fd-docs-section-title',
@@ -27,15 +28,16 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @Input()
     componentName: string = '';
 
-    readonly currentLibrary: 'core' | 'platform' = null;
+    readonly currentLibrary: Libraries = null;
 
     private idFromUrl: any;
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        @Inject('CURRENT_LIB') private currentLib: Libraries
     ) {
-        this.currentLibrary = this.router.url && this.router.url.includes('core/') ? 'core' : 'platform';
+        this.currentLibrary = this.currentLib;
     }
 
     ngOnInit(): void {

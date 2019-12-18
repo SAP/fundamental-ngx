@@ -105,7 +105,7 @@ export class PaginationComponent implements OnChanges {
      * @param $event The keyboard event.
      */
     onKeypressHandler(page: number, $event: KeyboardEvent) {
-        if ($event.code === 'Space' || $event.code === 'Enter') {
+        if ($event.key === ' ' || $event.key === 'Enter') {
             $event.preventDefault();
             this.goToPage(page);
         }

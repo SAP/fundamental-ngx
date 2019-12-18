@@ -1,22 +1,25 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
-    HostListener,
     Input,
     OnChanges,
     OnInit,
-    Output,
+    Output, QueryList,
     SimpleChanges,
-    ViewChild,
+    ViewChild, ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
+import { MenuItemDirective } from '../menu/menu-item.directive';
+import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import focusTrap, { FocusTrap } from 'focus-trap';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -37,16 +40,25 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => MultiInputComponent),
             multi: true
-        }
+        },
+        MenuKeyboardService
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges {
+export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit {
 
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popoverRef: PopoverComponent;
+
+    /** @hidden */
+    @ViewChildren(MenuItemDirective)
+    menuItems: QueryList<MenuItemDirective>;
+
+    /** @hidden */
+    @ViewChild('searchInputElement', { static: false })
+    searchInputElement: ElementRef;
 
     /** @hidden */
     @HostBinding('class.fd-multi-input')
@@ -122,11 +134,19 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Output()
     readonly selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
 
+    /** Whether multi input popover body should be opened */
+    @Input()
+    open: boolean = false;
+
+    /** Event emitted, when the multi input's popover body is opened or closed */
+    @Output()
+    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
-    isOpen = false;
+    public focusTrap: FocusTrap;
 
     /** @hidden */
     onChange: Function = () => { };
@@ -137,7 +157,8 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     constructor(
         private elRef: ElementRef,
-        private changeDetRef: ChangeDetectorRef
+        private changeDetRef: ChangeDetectorRef,
+        private menuKeyboardService: MenuKeyboardService
     ) { }
 
     /** @hidden */
@@ -145,6 +166,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
+        this.setupFocusTrap();
     }
 
     /** @hidden */
@@ -160,6 +182,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
+        this.menuKeyboardService.focusEscapeAfterList = () => { };
+    }
+
+    /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
@@ -172,6 +200,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -180,6 +209,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             this.selected = selected;
         }
         this.changeDetRef.markForCheck();
+    }
+
+    /** @hidden */
+    openChangeHandle(open: boolean): void {
+        this.open = open;
+        this.openChange.emit(this.open);
+        this.onTouched();
+        if (this.open) {
+            this.focusTrap.activate();
+        } else {
+            this.focusTrap.deactivate();
+        }
     }
 
     /** @hidden */
@@ -202,6 +243,24 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     /** @hidden */
+    public handleKeyDown(event: KeyboardEvent, index: number): void {
+        this.menuKeyboardService.keyDownHandler(event, index, this.menuItems.toArray());
+    }
+
+    /** @hidden */
+    public handleInputKeydown(event: KeyboardEvent): void {
+        if (event.key === 'ArrowDown') {
+            if (event.altKey) {
+                this.openChangeHandle(true)
+            }
+            if (this.menuItems.first) {
+                this.menuItems.first.focus();
+                event.preventDefault();
+            }
+        }
+    }
+
+    /** @hidden */
     handleSearchTermChange(): void {
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
@@ -221,12 +280,15 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         return str;
     }
 
-    /** @hidden */
-    @HostListener('document:click', ['$event'])
-    clickHandler(event) {
-        event.stopPropagation();
-        if (!this.elRef.nativeElement.contains(event.target)) {
-            this.isOpen = false;
+    private setupFocusTrap(): void {
+        try {
+            this.focusTrap = focusTrap(this.elRef.nativeElement, {
+                clickOutsideDeactivates: true,
+                returnFocusOnDeactivate: true,
+                escapeDeactivates: false
+            });
+        } catch (e) {
+            console.warn('Unsuccessful attempting to focus trap the Multi Input.');
         }
     }
 

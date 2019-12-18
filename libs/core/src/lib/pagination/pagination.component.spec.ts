@@ -31,7 +31,7 @@ describe('Pagination Test', () => {
 
     it('should handle keypress', () => {
         const keyboardEvent = new KeyboardEvent('keypress', {
-            code: 'Enter'
+            key: 'Enter'
         });
         spyOn(keyboardEvent, 'preventDefault');
         spyOn(component, 'goToPage');

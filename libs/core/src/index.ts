@@ -27,6 +27,7 @@ export * from './lib/menu/public_api';
 export * from './lib/mega-menu/public_api';
 export * from './lib/modal/public_api';
 export * from './lib/multi-input/public_api';
+export * from './lib/nested-list/public_api';
 export * from './lib/notification/public_api';
 export * from './lib/pagination/public_api';
 export * from './lib/panel/public_api';

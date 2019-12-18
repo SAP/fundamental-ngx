@@ -119,7 +119,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowDown', preventDefault: () => {
+            key: 'ArrowDown', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
@@ -136,7 +136,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowUp', preventDefault: () => {
+            key: 'ArrowUp', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
@@ -153,7 +153,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {
+            key: 'ArrowLeft', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
@@ -170,7 +170,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {
+            key: 'ArrowRight', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
@@ -188,7 +188,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowDown', preventDefault: () => {
+            key: 'ArrowDown', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: component.dayViewGrid.length - 1 });
@@ -206,7 +206,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowUp', preventDefault: () => {
+            key: 'ArrowUp', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 0, y: 0 });
@@ -224,7 +224,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowRight', preventDefault: () => {
+            key: 'ArrowRight', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell,
@@ -244,7 +244,7 @@ describe('CalendarDayViewComponent', () => {
         component.focusElement(component.newFocusedDayId);
         const focusSpy = spyOn(component, 'focusElement');
         const event = {
-            code: 'ArrowLeft', preventDefault: () => {
+            key: 'ArrowLeft', preventDefault: () => {
             }
         };
         component.onKeydownDayHandler(event, focusFirstCell, { x: 0, y: 0 });

@@ -30,7 +30,8 @@
                             "apps/docs/src/styles.scss"
                         ],
                         "scripts": ["node_modules/marked/lib/marked.js"],
-                        "es5BrowserSupport": true
+                        "es5BrowserSupport": true,
+                        "showCircularDependencies": false
                     },
                     "configurations": {
                         "production": {

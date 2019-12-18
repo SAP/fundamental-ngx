@@ -1,17 +1,25 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-example.component.html';
 import * as sideNavigationTscode from '!raw-loader!./examples/side-navigation-examples.component.ts';
 import * as sideNavigationScsscode from '!raw-loader!./examples/side-navigation-examples.component.scss';
-import * as sideNavigationCollapsedSrc from '!raw-loader!./examples/side-navigation-collapsed-example.component.html';
-import * as sideNavigationCollapsedSrcScss from '!raw-loader!./examples/side-navigation-collapsed-example.component.scss';
-import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
-import * as sideNavigationIconsSrcScss from '!raw-loader!./examples/side-navigation-icons-example.component.scss';
 import * as sideNavigationLevelsSrc from '!raw-loader!./examples/side-navigation-levels-example.component.html';
+import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
 import * as sideNavigationTitlesSrc from '!raw-loader!./examples/side-navigation-titles-example.component.html';
+import * as sideNavigationCompactSrc from '!raw-loader!./examples/side-navigation-compact-example.component.html';
+import * as sideNavigationMultiLevelSrc from '!raw-loader!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.html';
+import * as sideNavigationMultiLevelSrcTs from '!raw-loader!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.ts';
+import * as programmaticallySideNavigationSrc from '!raw-loader!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.html';
+import * as programmaticallySideNavigationSrcTs from '!raw-loader!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.ts';
+import * as sideNavigationMultiSelectedSrc from '!raw-loader!./examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component.html';
+import * as sideNavigationMultiSelectedSrcTs from '!raw-loader!./examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component.ts';
+import * as sideNavigationCondensedSrc from '!raw-loader!./examples/side-navigation-condensed-example/side-navigation-condensed-example.component.html';
+import * as sideNavigationCondensedSrcTs from '!raw-loader!./examples/side-navigation-condensed-example/side-navigation-condensed-example.component.ts';
+import * as sideNavigationObjectSrc from '!raw-loader!./examples/side-navigation-object-example/side-navigation-object-example.component.html';
+import * as sideNavigationObjectSrcTs from '!raw-loader!./examples/side-navigation-object-example/side-navigation-object-example.component.ts';
+import * as sideNavigationCondensedObjectSrc from '!raw-loader!./examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component.html';
+import * as sideNavigationCondensedObjectSrcTs from '!raw-loader!./examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-side-navigation',
@@ -42,15 +50,56 @@ export class SideNavigationDocsComponent implements OnInit {
         }
     ];
 
+    compactSideNav: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sideNavigationCompactSrc,
+            fileName: 'side-navigation-compact-example',
+            secondFile: 'side-navigation-examples',
+            typescriptFileCode: sideNavigationTscode,
+            component: 'SideNavigationCompactExampleComponent',
+            scssFileCode: sideNavigationScsscode
+        }
+    ];
+
     multiLevelsSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationLevelsSrc,
-            fileName: 'side-navigation-levels-example',
-            secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode,
-            component: 'SideNavigationLevelsExampleComponent',
-            scssFileCode: sideNavigationScsscode
+            code: sideNavigationMultiLevelSrc,
+            fileName: 'fd-side-navigation-three-levels-example',
+            secondFile: 'fd-side-navigation-three-levels-example',
+            typescriptFileCode: sideNavigationMultiLevelSrcTs,
+            component: 'SideNavigationThreeLevelsExampleComponent'
+        }
+    ];
+
+    multiLevelsSelectedSideNav: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sideNavigationMultiSelectedSrc,
+            fileName: 'side-navigation-multiple-selected-example',
+            secondFile: 'side-navigation-multiple-selected-example',
+            typescriptFileCode: sideNavigationMultiSelectedSrcTs,
+            component: 'SideNavigationMultipleSelectedExampleComponent'
+        }
+    ];
+
+    programmaticallySideNavigation: ExampleFile[] = [
+        {
+            language: 'html',
+            code: programmaticallySideNavigationSrc,
+            fileName: 'fd-side-navigation-programmatically-example',
+            secondFile: 'fd-side-navigation-programmatically-example',
+            typescriptFileCode: programmaticallySideNavigationSrcTs,
+            component: 'SideNavigationProgrammaticallyExampleComponent'
+        },
+        {
+            language: 'ts',
+            code: programmaticallySideNavigationSrcTs,
+            fileName: 'fd-side-navigation-programmatically-example',
+            secondFile: 'fd-side-navigation-programmatically-example',
+            typescriptFileCode: programmaticallySideNavigationSrcTs,
+            component: 'SideNavigationProgrammaticallyExampleComponent'
         }
     ];
 
@@ -62,21 +111,56 @@ export class SideNavigationDocsComponent implements OnInit {
             secondFile: 'side-navigation-examples',
             typescriptFileCode: sideNavigationTscode,
             component: 'SideNavigationIconsExampleComponent',
-            scssFileCode: sideNavigationIconsSrcScss
         }
     ];
 
-    collapsedSideNav: ExampleFile[] = [
+    condensedSideNav: ExampleFile[] = [
         {
             language: 'html',
-            code: sideNavigationCollapsedSrc,
-            fileName: 'side-navigation-collapsed-example',
-            secondFile: 'side-navigation-examples',
-            typescriptFileCode: sideNavigationTscode,
-            component: 'SideNavigationCollapsedExampleComponent',
-            scssFileCode: sideNavigationCollapsedSrcScss
-
+            code: sideNavigationCondensedSrc,
+            fileName: 'fd-side-navigation-condensed-example,',
+            secondFile: 'fd-side-navigation-condensed-example,',
+            typescriptFileCode: sideNavigationCondensedSrcTs,
+            component: 'SideNavigationCondensedExampleComponent',
         }
+    ];
+
+    sideNavConfiguration: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sideNavigationObjectSrc,
+            fileName: 'fd-side-navigation-object-example',
+            secondFile: 'fd-side-navigation-object-example',
+            typescriptFileCode: sideNavigationCondensedSrcTs,
+            component: 'SideNavigationObjectExampleComponent',
+        },
+        {
+            language: 'ts',
+            code: sideNavigationObjectSrcTs,
+            fileName: 'fd-side-navigation-object-example',
+            secondFile: 'fd-side-navigation-object-example',
+            typescriptFileCode: sideNavigationCondensedSrcTs,
+            component: 'SideNavigationObjectExampleComponent',
+        },
+    ];
+
+    sideNavCondensedConfiguration: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sideNavigationCondensedObjectSrc,
+            fileName: 'fd-side-navigation-condensed-object-example',
+            secondFile: 'fd-side-navigation-condensed-object-example',
+            typescriptFileCode: sideNavigationCondensedObjectSrcTs,
+            component: 'SideNavigationCondensedObjectExampleComponent',
+        },
+        {
+            language: 'ts',
+            code: sideNavigationCondensedObjectSrcTs,
+            fileName: 'fd-side-navigation-condensed-object-example',
+            secondFile: 'fd-side-navigation-condensed-object-example',
+            typescriptFileCode: sideNavigationCondensedObjectSrcTs,
+            component: 'SideNavigationCondensedObjectExampleComponent',
+        },
     ];
 
     ngOnInit() { }

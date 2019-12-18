@@ -22,8 +22,7 @@
         </div>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
-        <fd-menu class="fd-combobox-input-menu-overflow"
-                 [style.maxHeight]="maxHeight">
+        <fd-menu class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight">
             <ng-content></ng-content>
             <ul fd-menu-list>
                 <li *ngFor="let term of displayedValues; let index = index;"

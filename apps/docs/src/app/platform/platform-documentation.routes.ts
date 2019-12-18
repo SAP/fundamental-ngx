@@ -8,6 +8,8 @@ import { PlatformActionBarDocsComponent } from './component-docs/platform-action
 import { ApiComponent } from './../documentation/core-helpers/api/api.component';
 import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
+import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
+import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -26,11 +28,19 @@ export const ROUTES: Routes = [
                 ]
             },
             {
+
                 path: 'action-bar',
                 component: PlatformActionbarHeaderComponent,
                 children: [
                     { path: '', component: PlatformActionBarDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }]
+            },
+          {
+                path: 'menu',
+                component: PlatformMenuHeaderComponent,
+                children: [
+                    { path: '', component: PlatformMenuDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             }
         ]

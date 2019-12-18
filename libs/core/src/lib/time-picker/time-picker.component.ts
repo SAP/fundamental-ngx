@@ -213,6 +213,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.cd.detectChanges();
     }
 
     /** @hidden */

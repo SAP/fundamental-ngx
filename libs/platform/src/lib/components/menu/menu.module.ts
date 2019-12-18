@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from './menu-component/menu.component';
-import { MenuItemComponent } from './menu-component/menu-item.component';
+import { MenuComponent } from './menu.component';
+import { MenuItemComponent } from './menu-item.component';
 import { FundamentalNgxCoreModule, MenuKeyboardService } from '@fundamental-ngx/core';
 
 @NgModule({

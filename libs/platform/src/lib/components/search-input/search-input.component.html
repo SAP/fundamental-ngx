@@ -1,7 +1,7 @@
 <div class="search-input"
     [ngClass]="{'with-categories': showCategoryDropdown, 'is-loading': isLoading, 'hide-category-label': hideCategoryLabel}">
-    <fd-popover *ngIf="showCategoryDropdown" class="search-input__category-dropdown" [disabled]="isLoading">
-        <fd-dropdown-control [toolbar]="true" [disabled]="isLoading" [compact]="compact">
+    <fd-popover *ngIf="showCategoryDropdown" class="search-input__category-dropdown" [disabled]="isLoading || disabled">
+        <fd-dropdown-control [toolbar]="true" [disabled]="isLoading || disabled" [compact]="compact">
             <span class="search-input__category-label"
                 *ngIf="!hideCategoryLabel">{{currentCategory ? currentCategory.label : categoryLabel}}</span>
         </fd-dropdown-control>
@@ -16,6 +16,7 @@
     </fd-popover>
     <fd-combobox #combobox [glyph]="isLoading ? 'synchronize' : 'search'" [placeholder]="placeholder"
         [dropdownValues]="dropdownValues$ | async" [compact]="compact" [triggers]="[]" [(ngModel)]="inputText"
-        (ngModelChange)="onValueChange($event)" (itemClicked)="onItemClick($event)" [searchFunction]="onSearchSubmit">
+        (ngModelChange)="onValueChange($event)" (itemClicked)="onItemClick($event)" [searchFunction]="onSearchSubmit"
+        [disabled]="disabled">
     </fd-combobox>
 </div>

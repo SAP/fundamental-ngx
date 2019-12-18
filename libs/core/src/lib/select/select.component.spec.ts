@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
             <fd-option id="fdtest1" [value]="'test1'">Test1</fd-option>
             <fd-option id="fdtest2" [value]="'test2'">Test2</fd-option>
             <fd-option id="viewValue1" [value]="'viewValue1'" [viewValue]="'testViewValue'">Test3</fd-option>
+            <fd-option id="fdtest3Timeout" *ngIf="timeoutPassed" [value]="'test4'">Test4</fd-option>
             <div>
                 <fd-option id="nestedOption" [value]="'nestedOption'">Nested</fd-option>
             </div>
@@ -25,6 +26,8 @@ class TestWrapperComponent {
     selectElement: ElementRef;
 
     wrapperValue: string;
+
+    timeoutPassed: boolean = false;
 }
 
 describe('SelectComponent', () => {
@@ -163,6 +166,23 @@ describe('SelectComponent', () => {
         document.body.querySelector('#nestedOption').dispatchEvent(new MouseEvent('click'));
         expect(component.value).toBe('nestedOption');
         expect(component.triggerValue).toBe('Nested');
+    }));
+
+    it('Should not unselect option, when this is switched off' , (() => {
+        component.unselectMissingOption = false;
+        const testValue = 'fdtest3Timeout';
+        expect(component.value).toBeFalsy();
+        fixture.componentInstance.wrapperValue = testValue;
+
+        fixture.detectChanges();
+
+        fixture.componentInstance.timeoutPassed = true;
+
+        fixture.detectChanges();
+
+        expect(component.value).toBe('fdtest3Timeout');
+
+
     }));
 
 });

@@ -15,6 +15,8 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 
+type SelectType = 'noborder' | 'splitborder';
+
 /**
  * Select component intended to mimic the behaviour of the native select element.
  */
@@ -70,6 +72,14 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     @Input()
     maxHeight: string;
 
+    /** Select type defines the border type of the select button. */
+    @Input()
+    selectType: SelectType ;
+    
+    /** Glyph to add icon in the select component. */
+    @Input()
+    glyph: string ;
+
     /** Popper.js options of the popover. */
     @Input()
     popperOptions: PopperOptions = {
@@ -99,6 +109,14 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** The element to which the popover should be appended. */
     @Input()
     appendTo: HTMLElement | 'body';
+
+    /**
+     * If the option should be unselected and value changed to undefined, when the current value is
+     * not presented in option array. Switching it off can be handy, when there is some delay between providing
+     * possible options and chosen value.
+     */
+    @Input()
+    unselectMissingOption: boolean = true;
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -213,6 +231,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
@@ -239,7 +258,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        switch (event.code) {
+        switch (event.key) {
             case ('ArrowUp'): {
                 event.preventDefault();
                 this.decrementFocused();
@@ -291,7 +310,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
         // If not match is found, set everything to null
         // This is mostly only for cases where a user removes an active option
-        if (!matchOption) {
+        if (!matchOption && this.unselectMissingOption) {
             this.unselectOptions();
             return;
         }

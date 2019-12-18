@@ -47,70 +47,60 @@ export class ShellbarCollapsibleExampleComponent {
             title: 'Home',
             subtitle: 'Central Home',
             icon: 'home',
-            callback: this.productSwitcherCallback
+            callback: () => this.productSwitcherCallback('Home '),
+            disabledDragAndDrop: true,
+            stickToPosition: true
         },
         {
             title: 'Analytics Cloud',
             subtitle: 'Analytics Cloud',
             icon: 'business-objects-experience',
             selected: true,
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Catalog',
             subtitle: 'Ariba',
             icon: 'contacts',
-            disabledDragAndDrop: true,
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Guided Buying',
             icon: 'credit-card',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Strategic Procurement',
             icon: 'cart-3',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Vendor Managemen',
             subtitle: 'Fieldglass',
             icon: 'shipping-status',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Human Capital Management',
             icon: 'customer',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Sales Cloud',
             subtitle: 'Sales Cloud',
             icon: 'sales-notification',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Commerce Cloud',
             subtitle: 'Commerce Cloud',
             icon: 'retail-store',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Marketing Cloud',
             subtitle: 'Marketing Cloud',
             icon: 'marketing-campaign',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Service Cloud',
             icon: 'family-care',
-            callback: this.productSwitcherCallback
         },
         {
             title: 'S/4HANA',
             icon: 'batch-payments',
-            callback: this.productSwitcherCallback
         },
     ];
 
@@ -134,9 +124,8 @@ export class ShellbarCollapsibleExampleComponent {
         alert('Pool Action Clicked');
     }
 
-    productSwitcherCallback($event) {
-        console.log($event);
-        alert('Product Clicked');
+    productSwitcherCallback(product) {
+        alert(product + 'Product Clicked');
     }
 
 }

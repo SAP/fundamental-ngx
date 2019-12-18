@@ -15,6 +15,7 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 @Component({
     selector: 'fd-product-menu',
     templateUrl: './product-menu.component.html',
+    styleUrls: ['./product-menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -68,7 +69,9 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
         if (this.closePopoverOnSelect) {
             this.popoverComponent.close();
         }
-        item.callback(event);
+        if (item.callback) {
+            item.callback(event);
+        }
     }
 
     /**
