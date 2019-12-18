@@ -1,5 +1,5 @@
-<div class="fd-action-bar action-bar-display">
-    <div class="fd-action-bar__back" *ngIf="showBackButton" (click)="backButtonClick.emit($event)">
+<div fd-action-bar>
+    <div fd-action-bar-back *ngIf="showBackButton" (click)="backButtonClick.emit($event)">
         <button
             class="fd-button--light fd-button--compact sap-icon--nav-back"
             [attr.aria-label]="backButtonLabel"
@@ -20,8 +20,8 @@
 </div>
 
 <ng-template #actionBarContent>
-    <div class="fd-action-bar__header">
-        <h3 class="fd-action-bar__title" *ngIf="!editing" [attr.title]="title" data-tag="actionbar__title">
+    <div fd-action-bar-header>
+        <h3 fd-action-bar-title *ngIf="!editing" [attr.title]="title" data-tag="actionbar__title">
             {{ title }}
         </h3>
         <div fd-form-set *ngIf="editing">
@@ -41,10 +41,11 @@
         </div>
         <p
             *ngIf="description"
-            class="fd-action-bar__description"
+            fd-action-bar-description
             [attr.title]="description"
             data-tag="actionbar__description"
         >
+
             {{ description }}
         </p>
     </div>

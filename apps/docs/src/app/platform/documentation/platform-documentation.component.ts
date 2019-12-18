@@ -17,7 +17,13 @@ export class PlatformDocumentationComponent {
 
     guides = [{ url: 'platform/home', name: 'Home' }, { url: 'platform/new-component', name: 'New Component' }];
 
-    components = [{ url: 'platform/button', name: 'Button' }, { url: 'platform/menu', name: 'Menu' }];
+   
+
+    components = [{ url: 'platform/action-bar', name: 'Action Bar' }, 
+                  { url: 'platform/button', name: 'Button' }, 
+                  { url: 'platform/menu', name: 'Menu' }
+                 ];
+
 
     layouts = [];
 
