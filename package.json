@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.12.1-rc.11",
+  "version": "0.12.1",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "SAP Fundamental Styles, implemented in Angular",
@@ -48,9 +48,6 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "help": "./node_modules/.bin/nx help",
     "std-version": "standard-version --infile ./CHANGELOG.md -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\""
-  },
-  "publishConfig": {
-    "registry": "https://repository.hybris.com/api/npm/npm-repository/"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^0.803.14",
