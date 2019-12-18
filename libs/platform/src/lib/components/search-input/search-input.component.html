@@ -1,6 +1,7 @@
 <div class="search-input"
     [ngClass]="{'with-categories': showCategoryDropdown, 'is-loading': isLoading, 'hide-category-label': hideCategoryLabel}">
-    <fd-popover *ngIf="showCategoryDropdown" class="search-input__category-dropdown" [disabled]="isLoading || disabled">
+    <fd-popover #categoryDropdown *ngIf="showCategoryDropdown" class="search-input__category-dropdown"
+        [disabled]="isLoading || disabled">
         <fd-dropdown-control [toolbar]="true" [disabled]="isLoading || disabled" [compact]="compact">
             <span class="search-input__category-label"
                 *ngIf="!hideCategoryLabel">{{currentCategory ? currentCategory.label : categoryLabel}}</span>

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchInputComponent, SearchInput, SuggestionItem, SearchInputSize, ValueLabelItem } from './search-input.component';
 import { Component, ViewChild } from '@angular/core';
-import { ComboboxComponent, ComboboxModule, PopoverModule, MenuModule } from '@fundamental-ngx/core';
+import { ComboboxComponent, ComboboxModule, PopoverModule, MenuModule, IconModule } from '@fundamental-ngx/core';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -68,7 +68,14 @@ describe('SearchInputComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, SearchInputComponent],
-            imports: [CommonModule, FormsModule, ComboboxModule, PopoverModule, MenuModule]
+            imports: [
+                CommonModule,
+                FormsModule,
+                ComboboxModule,
+                PopoverModule,
+                MenuModule,
+                IconModule
+            ]
         }).compileComponents();
     }));
 
@@ -276,9 +283,7 @@ describe('SearchInputComponent', () => {
         fixture.detectChanges();
 
         // select second item
-        combobox.onMenuKeydownHandler(new KeyboardEvent('keydown', {
-            code: 'Enter'
-        }), 1);
+        combobox.onMenuClickHandler(1);
         fixture.detectChanges();
         expect(host.submitValue).toEqual({ text: 'Banana', category: null });
     });
@@ -295,7 +300,7 @@ describe('SearchInputComponent', () => {
         // simulate input entry
         textInput.nativeElement.value = 'appl';
         textInput.nativeElement.dispatchEvent(new Event('input'));
-        textInput.triggerEventHandler('keydown', { code: 'Enter' });
+        textInput.triggerEventHandler('keydown', { code: 'Enter', key: 'Enter' });
         fixture.detectChanges();
 
         expect(host.submitValue).toEqual({ text: 'appl', category: null });
