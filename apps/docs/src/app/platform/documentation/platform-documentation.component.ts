@@ -21,9 +21,9 @@ export class PlatformDocumentationComponent {
 
     components = [{ url: 'platform/action-bar', name: 'Action Bar' }, 
                   { url: 'platform/button', name: 'Button' }, 
-                  { url: 'platform/menu', name: 'Menu' }
+                  { url: 'platform/menu', name: 'Menu' },
+                  { url: 'platform/select', name: 'Select'}
                  ];
-
 
     layouts = [];
 
