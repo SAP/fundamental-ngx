@@ -69,7 +69,7 @@
     "@stackblitz/sdk": "1.3.0",
     "core-js": "^2.6.9",
     "focus-trap": "^5.1.0",
-    "fundamental-styles": "^0.4.0-rc.30",
+    "fundamental-styles": "^0.4.0",
     "jasminewd2": "^2.0.6",
     "highlight.js": "^9.17.1",
     "moment": "^2.24.0",
