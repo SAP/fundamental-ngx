@@ -23,8 +23,6 @@ mergeable:
           - required:
               reviewers: [ 'fkolar' ]
           - required:
-              reviewers: [ 'KevinOkamoto' ]
-          - required:
               reviewers: [ 'JKMarkowski' ]
           - min:
               count: 2
