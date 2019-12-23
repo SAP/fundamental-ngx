@@ -10,6 +10,8 @@ import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
+import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
+import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -40,6 +42,14 @@ export const ROUTES: Routes = [
                 component: PlatformMenuHeaderComponent,
                 children: [
                     { path: '', component: PlatformMenuDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+            {
+                path: 'select',
+                component: PlatformSelectHeaderComponent,
+                children: [
+                    { path: '', component: PlatformSelectDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             }

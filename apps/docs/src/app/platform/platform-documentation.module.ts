@@ -37,6 +37,13 @@ import { PlatformMenuSeparatorExampleComponent } from './component-docs/platform
 import { PlatformMenuGroupExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-group-example.component';
 import { PlatformMenuIconsExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-icons-example.component';
 import { PlatformMenuClickCloseExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-click-close-example.component';
+
+import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
+import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
+import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-default-example.component';
+import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
+import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
+
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
@@ -66,8 +73,12 @@ import { PlatformMenuClickCloseExampleComponent } from './component-docs/platfor
         PlatformMenuIconsExampleComponent,
         PlatformMenuComplexExampleComponent,
         PlatformMenuClickCloseExampleComponent,
-
-        NewComponentComponent
+        NewComponentComponent,
+        PlatformSelectDocsComponent,
+        PlatformSelectHeaderComponent,
+        PlatformSelectTypesDefaultExampleComponent,
+        PlatformSelectTypesNoBorderExampleComponent,
+        PlatformSelectTypesSplitExampleComponent
     ],
     imports: [
         SharedDocumentationModule,
