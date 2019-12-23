@@ -17,7 +17,7 @@
                    (click)="openCalendar()"
                    [compact]="compact"
                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }">
-            <span fd-input-group-addon [button]="true">
+            <span fd-input-group-addon [button]="true" [compact]="compact">
                 <button fd-button
                         [glyph]="'calendar'"
                         [options]="'light'"

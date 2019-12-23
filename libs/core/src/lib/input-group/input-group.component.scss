@@ -10,7 +10,7 @@ fd-input-group {
 
     .fd-input-group__addon--button .fd-input-group__button {
         &:hover {
-            border: none;
+            border-color: transparent;
         }
     }
 }

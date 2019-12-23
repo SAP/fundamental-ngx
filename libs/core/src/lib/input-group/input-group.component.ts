@@ -6,7 +6,7 @@ import {
     forwardRef,
     ViewEncapsulation,
     ContentChild,
-    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit
+    TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
@@ -26,7 +26,7 @@ export type InputGroupPlacement = 'before' | 'after';
  * ```
  */
 @Component({
-    selector: ' fd-input-group',
+    selector: 'fd-input-group',
     templateUrl: './input-group.component.html',
     styleUrls: ['./input-group.component.scss'],
     providers: [

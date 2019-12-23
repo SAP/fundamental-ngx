@@ -50,7 +50,11 @@ export class InputGroupDocsComponent implements OnInit {
                     },
                     button: {
                         type: 'boolean'
-                    }
+                    },
+                    state: {
+                        type: 'string',
+                        enum: ['valid', 'error', 'information', 'warning']
+                    },
                 }
             },
             state: {

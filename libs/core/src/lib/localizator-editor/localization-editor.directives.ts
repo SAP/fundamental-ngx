@@ -14,12 +14,6 @@ import { InputGroupInputDirective } from '../input-group/input-group-directives'
     selector: '[fd-localization-editor-input]'
 })
 export class LocalizationEditorInputDirective {
-    /**
-     * @hidden
-     *  Variable is controlled by parent component and define if there should be used compact mode
-     * */
-    @HostBinding('class.fd-input--compact')
-    public compact: boolean;
 
     /** @hidden */
     @HostBinding('class.fd-input-group__input')
