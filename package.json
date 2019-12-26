@@ -105,7 +105,7 @@
     "karma-cli": "^2.0.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "^2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.2",
+    "karma-jasmine-html-reporter": "^1.5.1",
     "ng-packagr": "^5.7.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.19.1",
