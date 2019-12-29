@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation, OnInit } from '@angular/core';
-import { CssStyleBuilder, IHash, applyCssClass, CssClassBuilder, applyCssStyle } from '../utils/public_api';
+import { CssStyleBuilder, Hash, applyCssClass, CssClassBuilder, applyCssStyle } from '../utils/public_api';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'half';
 export type ButtonOptions = 'light' | 'emphasized' | 'menu';
@@ -80,7 +80,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     }
 
     @applyCssStyle
-    buildComponentCssStyle(): IHash {
+    buildComponentCssStyle(): Hash {
         return {
         }
     }

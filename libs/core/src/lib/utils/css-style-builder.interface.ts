@@ -1,10 +1,10 @@
 import { ElementRef } from '@angular/core';
 
-export interface IHash {
+export interface Hash {
     [key: string]: any;
 }
 
 export interface CssStyleBuilder {
     elementRef(): ElementRef;
-    buildComponentCssStyle(): IHash;
+    buildComponentCssStyle(): Hash;
 }
