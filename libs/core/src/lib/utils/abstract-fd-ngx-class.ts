@@ -1,4 +1,5 @@
 import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
 
 /*
  This abstract class allows the user to set their own custom styles on a Fundamental NGX directive, in addition to the
@@ -12,7 +13,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     private _elementRef: ElementRef;
 
     /** @hidden */
-    @Input() class; // user's custom classes
+    @Input() class: string // user's custom classes
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to
@@ -20,6 +21,14 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
      */
     /** @hidden */
     abstract _setProperties(): void;
+
+    _setClassToElement(className: string) {
+        (this._elementRef.nativeElement as HTMLElement).classList.value = `${className} ${this.class}`;
+    }
+
+    _clearElementClass() {
+        (this._elementRef.nativeElement as HTMLElement).classList.value = '';
+    }
 
     /** @hidden */
     _addClassToElement(className: string) {
@@ -39,14 +48,14 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
 
     /** @hidden */
     ngOnChanges() {
-        const classList = (this._elementRef.nativeElement as HTMLElement).classList;
-        while (classList.length > 0) {
-            classList.remove(classList.item(0));
-        }
-        if (this.class) {
-            this._addClassToElement(this.class);
-        }
-        this._setProperties();
+        // const classList = (this._elementRef.nativeElement as HTMLElement).classList;
+        // while (classList.length > 0) {
+        //     classList.remove(classList.item(0));
+        // }
+        // if (this.class) {
+        //     this._addClassToElement(this.class);
+        // }
+        // this._setProperties();
     }
 
     /** @hidden */

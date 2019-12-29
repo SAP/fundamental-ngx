@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
-
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { CssStyleBuilder, IHash, applyCssClass, CssClassBuilder, applyCssStyle } from '../utils/public_api';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'half';
 export type ButtonOptions = 'light' | 'emphasized' | 'menu';
@@ -21,16 +20,25 @@ export type ButtonOptions = 'light' | 'emphasized' | 'menu';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonComponent extends AbstractFdNgxClass {
+export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder {
+    private _class: string = '';
+    @Input() set class(userClass: string) {
+        this._class = userClass;
+        this.buildComponentCssClass();
+    } // user's custom classes
+
+    /** The icon to include in the button. See the icon page for the list of icons. */
+    private _glyph: string
+    @Input() set glyph(icon: string) {
+        this._glyph = icon;
+        this.buildComponentCssClass()
+    };
 
     /** Defines if there will be added fd-button class. Enabled by default. */
     @Input() fdButtonClass: boolean = true;
 
     /** Whether to apply compact mode to the button. */
     @Input() compact: boolean;
-
-    /** The icon to include in the button. See the icon page for the list of icons. */
-    @Input() glyph: string;
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', 'negative', 'half'.
      * Leave empty for default (Action button).'*/
@@ -47,34 +55,45 @@ export class ButtonComponent extends AbstractFdNgxClass {
 
     /** @hidden */
     _setProperties() {
-        if (this.fdButtonClass) {
-            this._addClassToElement('fd-button');
-        }
-        if (this.compact) {
-            this._addClassToElement('fd-button--compact');
-        }
-        if (this.glyph) {
-            this._addClassToElement('sap-icon--' + this.glyph);
-        }
-        if (this.fdType) {
-            this._addClassToElement('fd-button--' + this.fdType);
-        }
-        if (this.options) {
-            if (typeof this.options === 'string') {
-                this._addClassToElement('fd-button--' + this.options);
-            } else if (Array.isArray(this.options)) {
-                this.options.forEach(option => {
-                    if (typeof option === 'string') {
-                        this._addClassToElement('fd-button--' + option);
-                    }
-                });
-            }
-        }
+
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    constructor(private _elementRef: ElementRef) {
+    }
+
+    ngOnInit() {
+        this.buildComponentCssClass();
+        this.buildComponentCssStyle();
+    }
+
+    @applyCssClass
+    buildComponentCssClass(): string {
+        return [
+            this.fdButtonClass && 'fd-button',
+            this.compact && 'fd-button--compact',
+            this._glyph && `sap-icon--${this._glyph}`,
+            this.fdType && `fd-button--${this.fdType}`,
+            this.options && this.getOptionCssClass(this.options),
+            this._class
+        ].join(' ');
+    }
+
+    @applyCssStyle
+    buildComponentCssStyle(): IHash {
+        return {
+        }
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
+    private getOptionCssClass(options: string | ButtonOptions[]): string {
+        if (Array.isArray(this.options)) {
+            return this.options.reduce((_class, option) => _class += ` fd-button--${option}`, ' ')
+        }
+        return `fd-button--${options}`
     }
 }
 
