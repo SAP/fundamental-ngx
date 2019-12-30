@@ -89,9 +89,12 @@ export class FdDate {
     /** Get next day */
     public nextDay(): FdDate {
         const maxDays = CalendarService.getDaysInMonth(this.month, this.year);
-        const day = this.day >= maxDays ? 1 : this.day + 1;
-        const month = day !== 1 ? this.month : (this.month > 11 ? 1 : this.month + 1);
-        const year = month !== 1 ? this.year : this.year + 1;
+        const isNextMonth = this.day >= maxDays;
+        const isNextYear = isNextMonth && this.month === 12;
+
+        const day = isNextMonth ? 1 : this.day + 1;
+        const month = isNextMonth ? (isNextYear ? 1 : this.month + 1) : this.month;
+        const year = isNextYear ? this.year + 1 : this.year;
         return new FdDate(year, month, day);
     }
 
@@ -102,7 +105,7 @@ export class FdDate {
         const prevMonth: boolean = this.day === 1;
 
         /** Check if should switch year to previous one */
-        const prevYear: boolean = ( this.month === 1 ) && prevMonth;
+        const prevYear: boolean = prevMonth && ( this.month === 1 );
 
         const year = prevYear ? this.year - 1 : this.year;
         const month = prevYear ? 12 : ( prevMonth ? this.month - 1 : this.month );
