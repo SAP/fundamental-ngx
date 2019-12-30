@@ -2,11 +2,22 @@
     <div class="fd-form-item">
         <fd-localization-editor>
             <fd-localization-editor-main [label]="'EN'" [compact]="true">
-                <input [state]="'information'" fd-form-control fd-localization-editor-input formControlName="en" type="text" placeholder="EN">
+                <input [state]="'information'"
+                       [compact]="true"
+                       fd-form-control
+                       fd-localization-editor-input
+                       formControlName="en"
+                       type="text"
+                       placeholder="EN">
             </fd-localization-editor-main>
             <li fd-localization-editor-element *ngFor="let key of customFormKeys">
                 <fd-localization-editor-item [label]="key | uppercase" [compact]="true">
-                    <input fd-form-control fd-localization-editor-input formControlName="{{key}}" type="text"  placeholder="{{key | uppercase}}">
+                    <input fd-form-control
+                           fd-localization-editor-input
+                           formControlName="{{key}}"
+                           type="text"
+                           [compact]="true"
+                           placeholder="{{key | uppercase}}">
                 </fd-localization-editor-item>
             </li>
         </fd-localization-editor>
