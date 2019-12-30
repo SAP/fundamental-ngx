@@ -51,6 +51,7 @@ import { ProductSwitchModule } from './product-switch/product-switch.module';
 import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification-service/notification.service';
 import { NestedListModule } from './nested-list/nested-list.module';
+import { RadioModule } from './radio/radio.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -89,6 +90,7 @@ import { NestedListModule } from './nested-list/nested-list.module';
     PanelModule,
     ProductSwitchModule,
     PopoverModule,
+    RadioModule,
     ScrollSpyModule,
     SelectModule,
     ShellbarModule,

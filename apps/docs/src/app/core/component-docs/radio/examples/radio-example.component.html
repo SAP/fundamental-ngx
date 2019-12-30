@@ -1,23 +1,20 @@
 <fieldset fd-form-set>
     <legend fd-form-legend>Radio buttons</legend>
     <fd-form-group>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-1">
-                <input fd-form-control type="radio" id="radio-1" name="radio-name-1" value="" checked>
+        <div fd-form-item>
+            <fd-radio-button [value]="'val1'" id="radio-1" name="radio-name-1" [(ngModel)]="optionVariable">
                 Option One
-            </label>
+            </fd-radio-button>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-2">
-                <input fd-form-control type="radio" id="radio-2" name="radio-name-1" value="">
-                Option Two
-            </label>
+        <div fd-form-item>
+            <fd-radio-button [value]="'val2'" id="radio-2" name="radio-name-1" [(ngModel)]="optionVariable">
+                Option One
+            </fd-radio-button>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-3">
-                <input fd-form-control type="radio" id="radio-3" name="radio-name-1" value="">
-                Option Three
-            </label>
+        <div fd-form-item>
+            <fd-radio-button [value]="'val3'" id="radio-3" name="radio-name-1" [(ngModel)]="optionVariable">
+                Option One
+            </fd-radio-button>
         </div>
     </fd-form-group>
 </fieldset>
@@ -25,23 +22,20 @@
 <fieldset fd-form-set>
     <legend fd-form-legend>Radio buttons disabled</legend>
     <fd-form-group>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-4">
-                <input fd-form-control type="radio" id="radio-4" name="radio-name-2" value="" checked disabled>
+        <div fd-form-item>
+            <fd-radio-button [value]="'val1'" id="radio-4" name="radio-name-2" [disabled]="true" [(ngModel)]="optionTwoVariable">
                 Option One
-            </label>
+            </fd-radio-button>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-5">
-                <input fd-form-control type="radio" id="radio-5" name="radio-name-2" value="" disabled>
-                Option Two
-            </label>
+        <div fd-form-item>
+            <fd-radio-button [value]="'val2'" id="radio-5" name="radio-name-2" [(ngModel)]="optionTwoVariable">
+                Option One
+            </fd-radio-button>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-6">
-                <input fd-form-control type="radio" id="radio-6" name="radio-name-2" value="" disabled>
-                Option Three
-            </label>
+        <div fd-form-item>
+            <fd-radio-button [value]="'val3'" id="radio-6" name="radio-name-2" [(ngModel)]="optionTwoVariable">
+                Option One
+            </fd-radio-button>
         </div>
     </fd-form-group>
 </fieldset>
@@ -49,23 +43,20 @@
 <fieldset fd-form-set>
     <legend fd-form-legend>Inline Radio buttons</legend>
     <fd-form-group>
-        <div fd-form-item [isInline]="true" [isCheck]="true">
-            <label fd-form-label for="radio-7">
-                <input fd-form-control type="radio" id="radio-7" name="radio-name-3" value="" checked>
+        <div fd-form-item [isInline]="true">
+            <fd-radio-button [value]="'val1'" id="radio-7" name="radio-name-3" [(ngModel)]="optionThreeVariable">
                 Option One
-            </label>
+            </fd-radio-button>
         </div>
-        <div fd-form-item [isInline]="true" [isCheck]="true">
-            <label fd-form-label for="radio-8">
-                <input fd-form-control type="radio" id="radio-8" name="radio-name-3" value="">
-                Option Two
-            </label>
+        <div fd-form-item [isInline]="true">
+            <fd-radio-button [value]="'val2'" id="radio-8" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+                Option One
+            </fd-radio-button>
         </div>
-        <div fd-form-item [isInline]="true" [isCheck]="true">
-            <label fd-form-label for="radio-9">
-                <input fd-form-control type="radio" id="radio-9" name="radio-name-3" value="">
-                Option Three
-            </label>
+        <div fd-form-item [isInline]="true">
+            <fd-radio-button [value]="'val3'" id="radio-9" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+                Option One
+            </fd-radio-button>
         </div>
     </fd-form-group>
 </fieldset>
