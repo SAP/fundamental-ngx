@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.102"></a>
+# [0.13.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.101...v0.13.0-rc.102) (2019-12-30)
+
+
+### Bug Fixes
+
+* (core) Calendar A11y - change ul/li to table with grid ([#1649](https://github.com/SAP/fundamental-ngx/issues/1649)) ([6a540c1](https://github.com/SAP/fundamental-ngx/commit/6a540c1))
+
+
+
 <a name="0.13.0-rc.101"></a>
 # [0.13.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.100...v0.13.0-rc.101) (2019-12-27)
 
