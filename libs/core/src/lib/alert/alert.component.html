@@ -1,4 +1,7 @@
 <button class="fd-alert__close"
+        fd-button
+        [compact]="true"
+        [options]="'light'"
         *ngIf="dismissible"
         (click)="dismiss(undefined, true)"
         [attr.aria-controls]="id"

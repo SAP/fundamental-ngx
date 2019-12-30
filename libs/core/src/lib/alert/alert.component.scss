@@ -2,6 +2,7 @@
 
 .fd-alert {
     display: block;
+    line-height: 1rem;
 }
 
 
@@ -11,4 +12,10 @@
 
 .fd-has-display-none {
     display: none;
+}
+
+.fd-alert__close {
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
 }
