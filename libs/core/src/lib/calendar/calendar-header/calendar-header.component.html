@@ -1,4 +1,4 @@
-<header class="fd-calendar__header">
+<header class="fd-calendar__header" aria-live="polite">
     <div class="fd-calendar__navigation">
         <div class="fd-calendar__action">
             <button fd-button
@@ -17,7 +17,7 @@
             <button fd-button
                     [compact]="true"
                     [options]="'light'"
-                    [attr.aria-label]="calendarI18nLabels.monthSelectionLabel"
+                    [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
                     [attr.aria-selected]="isOnMonthView()"
                     (click)="processViewChange('month')"
                     type="button">
@@ -28,7 +28,7 @@
             <button fd-button
                     [compact]="true"
                     [options]="'light'"
-                    [attr.aria-label]="calendarI18nLabels.yearSelectionLabel"
+                    [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
                     [attr.aria-selected]="isOnYearView()"
                     (click)="processViewChange('year')"
                     type="button">
