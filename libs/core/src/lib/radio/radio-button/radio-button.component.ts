@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+export type state = 'valid' | 'invalid' | 'warning' | 'default' | 'information';
 @Component({
     selector: 'fd-radio-button',
     templateUrl: './radio-button.component.html',
@@ -14,16 +15,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ]
 })
 export class RadioButtonComponent implements ControlValueAccessor {
-
     @ViewChild('inputElement', { static: false })
     inputElement: ElementRef;
 
     /** @hidden */
     actualValue: any;
 
-    @Input() disabled: boolean = false;
-
     @Input() compact: boolean = false;
+    @Input() state: state = 'default';
+
+    @Input() disabled: boolean = false;
 
     @Input() id: string;
 
@@ -37,6 +38,9 @@ export class RadioButtonComponent implements ControlValueAccessor {
     /** @hidden */
     onTouched: any = () => {};
 
+    constructor(private changeDetectionRef: ChangeDetectorRef) {}
+
+    // ControlValueAccessor implementation
     registerOnChange(fn: (selected: any) => { void }): void {
         this.onChange = fn;
     }
@@ -44,10 +48,6 @@ export class RadioButtonComponent implements ControlValueAccessor {
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
-
-    constructor (
-        private changeDetectionRef: ChangeDetectorRef
-    ) {}
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
@@ -58,6 +58,7 @@ export class RadioButtonComponent implements ControlValueAccessor {
     writeValue(value: any): void {
         this.actualValue = value;
     }
+    // End implementation
 
     labelClicked(): void {
         this.valueChange(this.value);
@@ -67,5 +68,14 @@ export class RadioButtonComponent implements ControlValueAccessor {
     valueChange(value: any): void {
         this.actualValue = value;
         this.onChange(value);
+    }
+
+    // this method is going to be updated when PR #1770 will be merged
+    get buildComponentCssClass(): string {
+        return [
+            'fd-radio',
+            this.compact && 'fd-radio--compact',
+            this.state && this.state !== 'default' && `is-${this.state}`
+        ].join(' ');
     }
 }
