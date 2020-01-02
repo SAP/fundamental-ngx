@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.106"></a>
+# [0.13.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.105...v0.13.0-rc.106) (2020-01-02)
+
+
+### Bug Fixes
+
+* (core) Add Additional class to popover component, introduce nested popover example ([#1646](https://github.com/SAP/fundamental-ngx/issues/1646)) ([3bdf3f7](https://github.com/SAP/fundamental-ngx/commit/3bdf3f7))
+
+
+
 <a name="0.13.0-rc.105"></a>
 # [0.13.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.104...v0.13.0-rc.105) (2020-01-02)
 
