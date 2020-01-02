@@ -13,10 +13,12 @@ export class BusyIndicatorComponent {
   @Input()
   loading: boolean = false;
 
-  /** Aria label for the 'loading' spinner. */
+  /** The size of the loading indicator, default will be medium */
+  @Input()
+  size: string = 'm';
+
+  /** Aria label for the 'loading' indicator. */
   @Input()
   loadingLabel: string = 'Loading';
-
-  constructor() { }
 
 }
