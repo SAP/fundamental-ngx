@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.105"></a>
+# [0.13.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.104...v0.13.0-rc.105) (2020-01-02)
+
+
+### Bug Fixes
+
+* **core:calendar:** Change nextDay method implementation ([#1767](https://github.com/SAP/fundamental-ngx/issues/1767)) ([ec01a46](https://github.com/SAP/fundamental-ngx/commit/ec01a46))
+
+
+
 <a name="0.13.0-rc.104"></a>
 # [0.13.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.103...v0.13.0-rc.104) (2020-01-01)
 
