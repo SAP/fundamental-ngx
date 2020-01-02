@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as BusyIndicatorHtml from '!raw-loader!./examples/busy-indicator-basic-example.component.html';
 import * as BusyIndicatorTscode from '!raw-loader!./examples/busy-indicator-basic-example.component.ts';
@@ -10,7 +10,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-busy-indicator-docs',
     templateUrl: './busy-indicator-docs.component.html',
 })
-export class BusyIndicatorDocsComponent implements OnInit {
+export class BusyIndicatorDocsComponent {
     BusyIndicatorBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -29,6 +29,4 @@ export class BusyIndicatorDocsComponent implements OnInit {
             component: 'BusyIndicatorToggleExampleComponent'
         }
     ];
-
-    ngOnInit() { }
 }
