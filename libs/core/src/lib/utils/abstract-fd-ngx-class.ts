@@ -1,5 +1,4 @@
 import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
-import { debounceTime } from 'rxjs/operators';
 
 /*
  This abstract class allows the user to set their own custom styles on a Fundamental NGX directive, in addition to the
@@ -48,14 +47,14 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
 
     /** @hidden */
     ngOnChanges() {
-        // const classList = (this._elementRef.nativeElement as HTMLElement).classList;
-        // while (classList.length > 0) {
-        //     classList.remove(classList.item(0));
-        // }
-        // if (this.class) {
-        //     this._addClassToElement(this.class);
-        // }
-        // this._setProperties();
+        const classList = (this._elementRef.nativeElement as HTMLElement).classList;
+        while (classList.length > 0) {
+            classList.remove(classList.item(0));
+        }
+        if (this.class) {
+            this._addClassToElement(this.class);
+        }
+        this._setProperties();
     }
 
     /** @hidden */

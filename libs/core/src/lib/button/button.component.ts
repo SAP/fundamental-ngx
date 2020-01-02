@@ -27,11 +27,14 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
         this.buildComponentCssClass();
     } // user's custom classes
 
-    /** The icon to include in the button. See the icon page for the list of icons. */
+    /** The icon to include in the button. See the icon page for the list of icons.
+     * setter is used to control when css class have to be rebuilded
+     */
     private _glyph: string
     @Input() set glyph(icon: string) {
         this._glyph = icon;
-        this.buildComponentCssClass()
+        this.buildComponentCssClass();
+        this.buildComponentCssStyle();
     };
 
     /** Defines if there will be added fd-button class. Enabled by default. */
@@ -54,20 +57,23 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     @Input() size: string; // TODO: deprecated, leaving for backwards compatibility
 
     /** @hidden */
-    _setProperties() {
-
-    }
-
-    /** @hidden */
     constructor(private _elementRef: ElementRef) {
     }
 
-    ngOnInit() {
+    /** Function runs when component is initialized
+     * function should build component css class
+     * function should build css style
+     */
+    ngOnInit(): void {
         this.buildComponentCssClass();
         this.buildComponentCssStyle();
     }
 
     @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
     buildComponentCssClass(): string {
         return [
             this.fdButtonClass && 'fd-button',
@@ -80,15 +86,24 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     }
 
     @applyCssStyle
+    /** CssStyleBuilder interface implementation
+     * function must return hashmap where
+     * key:string
+     * value:any
+     */
     buildComponentCssStyle(): Hash {
         return {
         }
     }
 
+    /** HasElementRef interface implementation
+     * function used by applyCssClass and applyCssStyle decorators 
+     */
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
+    /** @hidden */
     private getOptionCssClass(options: string | ButtonOptions[]): string {
         if (Array.isArray(this.options)) {
             return this.options.reduce((_class, option) => _class += ` fd-button--${option}`, ' ')

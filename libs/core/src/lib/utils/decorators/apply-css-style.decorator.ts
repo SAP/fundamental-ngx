@@ -1,8 +1,16 @@
 import { Hash, ELEMENT_REF_EXCEPTION } from '../public_api';
 
+/**
+ * Method decorator to apply css styles to a component through native element
+ * decorator will store original method in variable and wrap it with custom one
+ * component has to implement HasElementRef or CssStyleBuilder interface
+ * more info abour method decorator: https://www.typescriptlang.org/docs/handbook/decorators.html#method-decorators
+ * @param target a component
+ * @param propertyKey name of the method
+ * @param descriptor method
+ */
 export function applyCssStyle(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value
-    console.log(descriptor);
+    const originalMethod = descriptor.value;
     descriptor.value = function (): Hash {
         if (!this.elementRef) { throw ELEMENT_REF_EXCEPTION; }
 
