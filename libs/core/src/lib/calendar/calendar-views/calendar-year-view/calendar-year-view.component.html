@@ -1,18 +1,23 @@
 <div class="fd-calendar__years">
-    <ul class="fd-calendar__list">
-        <li class="fd-calendar__item"
-            *ngFor="let year of calendarYearList; let i = index"
-            [ngClass]="{
-                'is-selected': (year == yearSelected),
-                'fd-calendar__item--current': (year == currentYear)
-            }"
-            [attr.id]="id + '-fd-year-' + i"
-            [attr.tabindex]="year === activeYear ? 0 : -1"
-            (keydown)="onKeydownYearHandler($event, i)"
-            (click)="selectYear(year, $event)">
-            <span role="button" class="fd-calendar__text">
-                {{ year }}
-            </span>
-        </li>
-    </ul>
+    <table class="fd-calendar__table" role="grid">
+        <tbody class="fd-calendar__group">
+        <tr class="fd-calendar__row"
+            *ngFor="let colYears of calendarYearListGrid; let rowIndex = index">
+            <td class="fd-calendar__item"
+                *ngFor="let year of colYears; let colIndex = index"
+                [ngClass]="{
+                    'is-selected': (year == yearSelected),
+                    'fd-calendar__item--current': (year == currentYear)
+                }"
+                [attr.id]="id + '-fd-year-' + getId(rowIndex, colIndex)"
+                [attr.tabindex]="year === activeYear ? 0 : -1"
+                (keydown)="onKeydownYearHandler($event, getId(rowIndex, colIndex))"
+                (click)="selectYear(year, $event)">
+                <span role="button" class="fd-calendar__text">
+                    {{ year }}
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
