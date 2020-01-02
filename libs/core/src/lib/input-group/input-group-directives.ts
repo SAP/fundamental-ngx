@@ -14,7 +14,7 @@ export class InputGroupInputDirective extends AbstractFdNgxClass {
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `error`, `warning` or blank for default.
+     *  Can be `valid`, `invalid`, `warning`, 'information' or blank for default.
      */
     @Input()
     state: FormStates;
@@ -75,7 +75,7 @@ export class InputGroupAddOnDirective extends AbstractFdNgxClass implements Afte
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `error`, `warning` or blank for default.
+     *  Can be `valid`, `invalid`, `warning`, 'information' or blank for default.
      */
     @Input()
     state: FormStates;

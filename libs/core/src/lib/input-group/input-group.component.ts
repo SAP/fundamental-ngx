@@ -83,10 +83,12 @@ export class InputGroupComponent implements ControlValueAccessor {
     /**
      * The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
-    @Input() buttonType: ButtonType;
+    @Input()
+    buttonType: ButtonType;
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() buttonOptions: ButtonOptions | ButtonOptions[] = 'light';
+    @Input()
+    buttonOptions: ButtonOptions | ButtonOptions[] = 'light';
 
     /** The icon value for the add-on. */
     @Input()
@@ -102,7 +104,7 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `error`, `warning` or blank for default.
+     *  Can be `valid`, `invalid`, `warning`, 'information' or blank for default.
      */
     @Input()
     state: FormStates;
@@ -126,7 +128,7 @@ export class InputGroupComponent implements ControlValueAccessor {
     onTouched: any = () => { };
 
     /** Get the value of the text input. */
-    get inputText() {
+    get inputText(): string {
         return this.inputTextValue;
     }
 
@@ -138,18 +140,18 @@ export class InputGroupComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    writeValue(value: any) {
+    writeValue(value: any): void {
         this.inputTextValue = value;
         this.changeDetectorRef.markForCheck();
     }
 
     /** @hidden */
-    registerOnChange(fn) {
+    registerOnChange(fn): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn) {
+    registerOnTouched(fn): void {
         this.onTouched = fn;
     }
 
@@ -160,7 +162,7 @@ export class InputGroupComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    buttonClicked($event) {
+    buttonClicked($event): void {
         this.addOnButtonClicked.emit($event);
     }
 }

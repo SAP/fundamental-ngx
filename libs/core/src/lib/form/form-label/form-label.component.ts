@@ -24,21 +24,21 @@ export class FormLabelComponent {
 
     /** Whether form is required */
     @Input()
-    @HostBinding(('class.fd-form-label--required'))
+    @HostBinding('class.fd-form-label--required')
     required: boolean = false;
 
     /** Whether label is for checkbox */
      @Input()
-    @HostBinding(('class.fd-form-label--checkbox'))
+    @HostBinding('class.fd-form-label--checkbox')
     checkbox: boolean = false;
 
     /** Whether label is for radio */
     @Input()
-    @HostBinding(('class.fd-form-label--radio'))
+    @HostBinding('class.fd-form-label--radio')
     radio: boolean = false;
 
     /** Whether label is for inline-help */
     @Input()
-    @HostBinding(('class.fd-form-label--inline-help'))
+    @HostBinding('class.fd-form-label--inline-help')
     inlineHelp: boolean = false;
 }

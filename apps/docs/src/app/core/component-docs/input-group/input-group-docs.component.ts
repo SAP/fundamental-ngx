@@ -53,7 +53,7 @@ export class InputGroupDocsComponent implements OnInit {
                     },
                     state: {
                         type: 'string',
-                        enum: ['valid', 'error', 'information', 'warning']
+                        enum: ['valid', 'invalid', 'information', 'warning']
                     },
                 }
             },
