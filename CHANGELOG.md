@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.108"></a>
+# [0.13.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.107...v0.13.0-rc.108) (2020-01-03)
+
+
+### Bug Fixes
+
+* (core:Alert) Add new button classes to alert component ([#1768](https://github.com/SAP/fundamental-ngx/issues/1768)) ([15b9864](https://github.com/SAP/fundamental-ngx/commit/15b9864))
+
+
+
 <a name="0.13.0-rc.107"></a>
 # [0.13.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.106...v0.13.0-rc.107) (2020-01-03)
 
