@@ -30,6 +30,9 @@ export const API_FILES = {
         'BreadcrumbItemDirective',
         'BreadcrumbLinkDirective'
     ],
+    busyIndicator: [
+        'BusyIndicatorComponent',
+    ],
     button: [
         'ButtonComponent'
     ],
