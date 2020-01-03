@@ -9,6 +9,7 @@ import { SchemaModule } from '../schema/schema.module';
 // containers
 import { BadgeLabelDocsComponent } from '../core/component-docs/badge-label/badge-label-docs.component';
 import { BreadcrumbDocsComponent } from '../core/component-docs/breadcrumb/breadcrumb-docs.component';
+import { BusyIndicatorDocsComponent } from './component-docs/busy-indicator/busy-indicator-docs.component';
 import { ButtonDocsComponent } from '../core/component-docs/button/button-docs.component';
 import { ButtonGroupDocsComponent } from '../core/component-docs/button-group/button-group-docs.component';
 import { AlertDocsComponent } from '../core/component-docs/alert/alert-docs.component';
@@ -64,6 +65,8 @@ import {
     BreadcrumbHrefExampleComponent,
     BreadcrumbRouterLinkExampleComponent
 } from '../core/component-docs/breadcrumb/examples/breadcrumb-examples.component';
+import { BusyIndicatorBasicExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-basic-example.component';
+import { BusyIndicatorToggleExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-toggle-example.component';
 import {
     ButtonIconsExampleComponent,
     ButtonOptionsExampleComponent,
@@ -225,6 +228,7 @@ import { AlertHeaderComponent } from '../core/component-docs/alert/alert-header/
 import { ActionBarHeaderComponent } from '../core/component-docs/action-bar/action-bar-header/action-bar-header.component';
 import { BadgeLabelHeaderComponent } from '../core/component-docs/badge-label/badge-label-header/badge-label-header.component';
 import { BreadcrumbHeaderComponent } from '../core/component-docs/breadcrumb/breadcrumb-header/breadcrumb-header.component';
+import { BusyIndicatorHeaderComponent } from './component-docs/busy-indicator/busy-indicator-header/busy-indicator-header.component';
 import { ButtonHeaderComponent } from '../core/component-docs/button/button-header/button-header.component';
 import { ButtonGroupHeaderComponent } from '../core/component-docs/button-group/button-group-header/button-group-header.component';
 import { CalendarHeaderComponent } from '../core/component-docs/calendar/calendar-header/calendar-header.component';
@@ -413,6 +417,8 @@ import { SelectTypesExampleComponent } from './component-docs/select/examples/se
         AlertDocsComponent,
         BadgeLabelDocsComponent,
         BreadcrumbDocsComponent,
+        BusyIndicatorDocsComponent,
+        BusyIndicatorHeaderComponent,
         ButtonDocsComponent,
         ButtonGroupDocsComponent,
         CheckboxDocsComponent,
@@ -470,6 +476,8 @@ import { SelectTypesExampleComponent } from './component-docs/select/examples/se
         LabelStatusColorsExampleComponent,
         BreadcrumbHrefExampleComponent,
         BreadcrumbRouterLinkExampleComponent,
+        BusyIndicatorBasicExampleComponent,
+        BusyIndicatorToggleExampleComponent,
         ButtonIconsExampleComponent,
         ButtonOptionsExampleComponent,
         ButtonSizesExampleComponent,

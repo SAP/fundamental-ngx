@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.112"></a>
+# [0.13.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.111...v0.13.0-rc.112) (2020-01-03)
+
+
+
+<a name="0.13.0-rc.111"></a>
+# [0.13.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.110...v0.13.0-rc.111) (2020-01-03)
+
+
+
+<a name="0.13.0-rc.110"></a>
+# [0.13.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.109...v0.13.0-rc.110) (2020-01-03)
+
+
+### Features
+
+* added decorators and interfaces to replace AbstractFdNgxClass ([#1770](https://github.com/SAP/fundamental-ngx/issues/1770)) ([d5893eb](https://github.com/SAP/fundamental-ngx/commit/d5893eb))
+
+
+
+<a name="0.13.0-rc.109"></a>
+# [0.13.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.108...v0.13.0-rc.109) (2020-01-03)
+
+
+### Features
+
+* Busy indicator ([#1700](https://github.com/SAP/fundamental-ngx/issues/1700)) ([ad3e418](https://github.com/SAP/fundamental-ngx/commit/ad3e418))
+
+
+
+<a name="0.13.0-rc.108"></a>
+# [0.13.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.107...v0.13.0-rc.108) (2020-01-03)
+
+
+### Bug Fixes
+
+* (core:Alert) Add new button classes to alert component ([#1768](https://github.com/SAP/fundamental-ngx/issues/1768)) ([15b9864](https://github.com/SAP/fundamental-ngx/commit/15b9864))
+
+
+
+<a name="0.13.0-rc.107"></a>
+# [0.13.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.106...v0.13.0-rc.107) (2020-01-03)
+
+
+
+<a name="0.13.0-rc.106"></a>
+# [0.13.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.105...v0.13.0-rc.106) (2020-01-02)
+
+
+### Bug Fixes
+
+* (core) Add Additional class to popover component, introduce nested popover example ([#1646](https://github.com/SAP/fundamental-ngx/issues/1646)) ([3bdf3f7](https://github.com/SAP/fundamental-ngx/commit/3bdf3f7))
+
+
+
 <a name="0.13.0-rc.105"></a>
 # [0.13.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.104...v0.13.0-rc.105) (2020-01-02)
 

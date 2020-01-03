@@ -66,6 +66,10 @@ export class PopoverComponent {
     @Input()
     isOpen: boolean = false;
 
+    /** List of additional classes that will be added to popover container element */
+    @Input()
+    additionalClasses: string[] = [];
+
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
     @Input()
