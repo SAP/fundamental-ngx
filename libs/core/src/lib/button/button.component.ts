@@ -80,7 +80,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
             this.compact ? 'fd-button--compact' : '',
             this._glyph ? `sap-icon--${this._glyph}` : '',
             this.fdType ? `fd-button--${this.fdType}` : '',
-            this.options ? this.getOptionCssClass(this.options) : '',
+            this.options ? this._getOptionCssClass(this.options) : '',
             this._class
         ].filter(x => x !== '').join(' ');
     }
@@ -91,7 +91,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
      * key:string
      * value:any
      */
-    buildComponentCssStyle(): Hash {
+    buildComponentCssStyle(): Hash<number | string> {
         return {
         }
     }
@@ -104,9 +104,9 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     }
 
     /** @hidden */
-    private getOptionCssClass(options: string | ButtonOptions[]): string {
+    private _getOptionCssClass(options: string | ButtonOptions[]): string {
         if (Array.isArray(this.options)) {
-            return this.options.reduce((_class, option) => _class += ` fd-button--${option}`, ' ')
+            return this.options.map(option => `fd-button--${option}`).join(' ');
         }
         return `fd-button--${options}`
     }

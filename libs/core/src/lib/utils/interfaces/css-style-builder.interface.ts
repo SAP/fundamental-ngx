@@ -1,9 +1,5 @@
-import { HasElementRef } from '../public_api';
-
-export interface Hash {
-    [key: string]: any;
-}
+import { HasElementRef, Hash } from '../public_api';
 
 export interface CssStyleBuilder extends HasElementRef {
-    buildComponentCssStyle(): Hash;
+    buildComponentCssStyle(): Hash<number | string>;
 }

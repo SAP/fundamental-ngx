@@ -9,12 +9,12 @@ import { Hash, ELEMENT_REF_EXCEPTION } from '../public_api';
  * @param propertyKey name of the method
  * @param descriptor method
  */
-export function applyCssStyle(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+export function applyCssStyle(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
-    descriptor.value = function (): Hash {
+    descriptor.value = function (): Hash<number | string> {
         if (!this.elementRef) { throw ELEMENT_REF_EXCEPTION; }
 
-        const _styles: Hash = originalMethod.apply(this);
+        const _styles: Hash<number | string> = originalMethod.apply(this);
 
         Object.keys(_styles).forEach(key => {
             (this.elementRef().nativeElement as HTMLElement).style[key] = _styles[key];
