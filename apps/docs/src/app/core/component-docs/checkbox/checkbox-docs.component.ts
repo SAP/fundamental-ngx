@@ -1,18 +1,14 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/checkbox-example.component.html';
 import * as formHtmlTsCode from '!raw-loader!./examples/checkbox-examples.component.ts';
-import * as formGroupInputHtml from '!raw-loader!./examples/checkbox-form-group-example.component.html';
-import * as formGroupInputTs from '!raw-loader!./examples/checkbox-form-group-example.component.ts';
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
+import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-input',
     templateUrl: './checkbox-docs.component.html'
 })
-export class CheckboxDocsComponent implements OnInit {
+export class CheckboxDocsComponent {
     checkboxFormHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -24,19 +20,20 @@ export class CheckboxDocsComponent implements OnInit {
         }
     ];
 
-    checkboxFormGroup: ExampleFile[] = [
-        {
-            language: 'html',
-            code: formGroupInputHtml,
-            fileName: 'checkbox-form-group-example'
-        },
-        {
-            language: 'typescript',
-            code: formGroupInputTs,
-            fileName: 'checkbox-form-group-example',
-            component: 'CheckboxFormGroupExampleComponent'
-        }
-    ];
+    // checkboxFormGroup: ExampleFile[] = [
+    //     {
+    //         language: 'html',
+    //         code: formGroupInputHtml,
+    //         fileName: 'checkbox-form-group-example'
+    //     },
+    //     {
+    //         language: 'typescript',
+    //         code: formGroupInputTs,
+    //         fileName: 'checkbox-form-group-example',
+    //         component: 'CheckboxFormGroupExampleComponent'
+    //     }
+    // ];
 
-    ngOnInit() { }
+    // ngOnInit() {
+    // }
 }
