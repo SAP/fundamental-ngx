@@ -76,13 +76,13 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
      */
     buildComponentCssClass(): string {
         return [
-            this.fdButtonClass && 'fd-button',
-            this.compact && 'fd-button--compact',
-            this._glyph && `sap-icon--${this._glyph}`,
-            this.fdType && `fd-button--${this.fdType}`,
-            this.options && this.getOptionCssClass(this.options),
+            this.fdButtonClass ? 'fd-button' : '',
+            this.compact ? 'fd-button--compact' : '',
+            this._glyph ? `sap-icon--${this._glyph}` : '',
+            this.fdType ? `fd-button--${this.fdType}` : '',
+            this.options ? this.getOptionCssClass(this.options) : '',
             this._class
-        ].join(' ');
+        ].filter(x => x !== '').join(' ');
     }
 
     @applyCssStyle

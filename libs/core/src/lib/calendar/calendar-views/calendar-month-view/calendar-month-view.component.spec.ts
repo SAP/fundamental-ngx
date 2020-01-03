@@ -32,17 +32,18 @@ describe('CalendarMonthViewComponent', () => {
 
     it('Should have 12 months', () => {
         expect(component.shortMonthNames).toBeDefined();
-        expect(component.shortMonthNames.length).toBe(12);
+        const monthList: string[] = [].concat.apply([], component.shortMonthNames);
+        expect(monthList.length).toBe(12);
     });
 
     it('Should trigger a click event', () => {
         spyOn(component, 'selectMonth');
-        fixture.debugElement.query(By.css('li')).nativeElement.click();
+        fixture.debugElement.query(By.css('td')).nativeElement.click();
         expect(component.selectMonth).toHaveBeenCalled();
     });
 
     it('Should have is-selected class when the month is selected', () => {
-        const element = fixture.debugElement.query(By.css('li')).nativeElement;
+        const element = fixture.debugElement.query(By.css('td')).nativeElement;
 
         (component as any).cdRef.detectChanges();
         expect(element.classList.contains('is-selected')).toBe(false);
@@ -50,7 +51,7 @@ describe('CalendarMonthViewComponent', () => {
         component.selectMonth(0);
         fixture.detectChanges();
         (component as any).cdRef.detectChanges();
-        const selectedElement = fixture.debugElement.query(By.css('li')).nativeElement;
+        const selectedElement = fixture.debugElement.query(By.css('td')).nativeElement;
         expect(selectedElement.classList.contains('is-selected')).toBe(true);
     });
 
@@ -106,5 +107,14 @@ describe('CalendarMonthViewComponent', () => {
         };
         component.onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
+    });
+
+    it('Should generate grid', () => {
+        expect(component.shortMonthNames).toBeDefined();
+
+        const sizes: number[] = component.shortMonthNames.map(list => list.length);
+
+        expect(sizes).toEqual([4, 4, 4]);
+
     });
 });

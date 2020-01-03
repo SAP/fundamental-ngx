@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { AlertRef } from '../alert-utils/alert-ref';
+import { ButtonModule } from '@fundamental-ngx/core';
 
 @Component({
     template: `        
@@ -21,7 +22,7 @@ class TemplateTestComponent {
 
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
-    imports: [CommonModule, BrowserModule],
+    imports: [CommonModule, BrowserModule, ButtonModule],
     providers: [AlertService, DynamicComponentService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })

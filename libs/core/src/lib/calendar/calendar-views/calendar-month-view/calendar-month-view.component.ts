@@ -32,7 +32,10 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     /** A number offset used to achieve the 1-12 representation of the calendar */
     private readonly _monthOffset: number = 1;
 
-    private _shortMonthNames: string[];
+    private readonly _amountOfColPerRow: number = 4;
+
+    private _shortMonthNames: string[][];
+    private _fullMonthNames: string[];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
@@ -58,11 +61,13 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         private cdRef: ChangeDetectorRef,
         private calendarI18n: CalendarI18n,
         private calendarService: CalendarService
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
+        this.refreshShortMonthNames();
 
         this.calendarService.onFocusIdChange
             .pipe(takeUntil(this.onDestroy$))
@@ -76,7 +81,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
         this.calendarI18n.i18nChange
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.cdRef.markForCheck())
+            .subscribe(() => this.refreshShortMonthNames())
         ;
     }
 
@@ -107,7 +112,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** Method for handling the keyboard events (a11y) */
     onKeydownMonthHandler(event, index: number): void {
-       this.calendarService.onKeydownHandler(event, index)
+        this.calendarService.onKeydownHandler(event, index);
     }
 
     /** Method that allows to focus elements inside this component */
@@ -118,8 +123,42 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** Method that returns list of short month names from currently provided calendarI18n service */
-    get shortMonthNames(): string[] {
-        return this.calendarI18n.getAllShortMonthNames();
+    /** Method returning id of month cell */
+    getId(rowIndex: number, colIndex: number): number {
+        return rowIndex * this._amountOfColPerRow + colIndex;
+    }
+
+    /** Method that checks if this is current month */
+    isCurrent(id: number): boolean {
+        return id + this._monthOffset === this.currentMonth;
+    }
+
+    /** Method that check if this is selected month */
+    isSelected(id: number): boolean {
+        return id + this._monthOffset === this.monthSelected;
+    }
+
+    /** Method that returns grid of short month names from currently provided calendarI18n service */
+    get shortMonthNames(): string[][] {
+        return this._shortMonthNames;
+    }
+
+    /** Method that returns the full name of month for grid element. */
+    getFullMonthName(rowIndex: number, colIndex: number): string {
+        const index = this.getId(rowIndex, colIndex);
+        return this._fullMonthNames[index];
+    }
+
+    /** Method that rewrite short month names, used mostly in case of i18n service language change */
+    private refreshShortMonthNames(): void {
+        const monthNames: string[] = [...this.calendarI18n.getAllShortMonthNames()];
+        this._fullMonthNames = [...this.calendarI18n.getAllFullMonthNames()];
+        const twoDimensionMonthNames: string[][] = [];
+        /** Creating 2d grid */
+        while (monthNames.length) {
+            twoDimensionMonthNames.push(monthNames.splice(0, this._amountOfColPerRow));
+        }
+        this._shortMonthNames = twoDimensionMonthNames;
+        this.cdRef.markForCheck();
     }
 }

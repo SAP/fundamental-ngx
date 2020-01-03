@@ -8,6 +8,7 @@ import { getProject } from '@schematics/angular/utility/project';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import chalk from 'chalk';
+import { cdkVersion } from './versions';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
@@ -43,6 +44,10 @@ function addDependencies(): Rule {
 
         if (!hasPackage(tree, '@angular/animations')) {
             dependencies.push({ type: NodeDependencyType.Default, version: `${ngCoreVersionTag}`, name: '@angular/animations' })
+        }
+
+        if (!hasPackage(tree, '@angular/cdk')) {
+            dependencies.push({ type: NodeDependencyType.Default, version: `${cdkVersion}`, name: '@angular/cdk' })
         }
 
         dependencies.forEach(dependency => {

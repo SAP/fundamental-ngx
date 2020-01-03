@@ -28,13 +28,15 @@ import { Subject } from 'rxjs';
 })
 export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
 
+    private readonly _amountOfColPerRow: number = 4;
+
     /** @hidden
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
      */
     activeYear: number;
 
     /** Parameter that stores the dozen of years that are currently being displayed. */
-    calendarYearList: number[];
+    calendarYearListGrid: number[][];
 
     /** Parameter storing the year of the present day. */
     currentYear: number = FdDate.getToday().year;
@@ -82,7 +84,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     /** @hidden */
     ngOnInit(): void {
         this.firstYearInList = this.yearSelected;
-        this.constructYearList();
+        this.constructYearGrid();
 
         this.calendarService.onFocusIdChange
             .pipe(takeUntil(this.onDestroy$))
@@ -95,7 +97,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
 
         this.calendarService.onKeySelect
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.selectYear(this.calendarYearList[index]))
+            .subscribe(index => this.selectYear(this.getYearList()[index]))
         ;
 
         this.calendarService.onListStartApproach
@@ -122,17 +124,17 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
      * if there is no current year, or selected, return first one
      */
     private getActiveYear(): number {
-        const selectedYear: number = this.calendarYearList.find(year => year === this.yearSelected);
+        const selectedYear: number = this.getYearList().find(year => year === this.yearSelected);
         if (selectedYear) {
             return selectedYear;
         }
 
-        const currentYear: number = this.calendarYearList.find(year => year === this.currentYear);
+        const currentYear: number = this.getYearList().find(year => year === this.currentYear);
         if (currentYear) {
             return currentYear;
         }
 
-        return this.calendarYearList[0];
+        return this.calendarYearListGrid[0][0];
     }
 
     /** Method for handling the keyboard navigation. */
@@ -143,13 +145,13 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     /** Method used to load the previous 12 years to be displayed. */
     loadNextYearList(): void {
         this.firstYearInList += 12;
-        this.constructYearList();
+        this.constructYearGrid();
     }
 
     /** Method used to load the next 12 years to be displayed. */
     loadPreviousYearList(): void {
         this.firstYearInList -= 12;
-        this.constructYearList();
+        this.constructYearGrid();
     }
 
     /** Method allowing focusing on elements within this component. */
@@ -171,14 +173,28 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         this.yearClicked.emit(this.yearSelected);
     }
 
+    getId(rowIndex: number, colIndex: number): number {
+        return rowIndex * this._amountOfColPerRow + colIndex;
+    }
+
     /** @hidden */
-    private constructYearList(): void {
+    private constructYearGrid(): void {
         const displayedYearsAmount: number = 12;
-        this.calendarYearList = [];
+        const calendarYearList = [];
+        this.calendarYearListGrid = [];
         for (let x = 0; x < displayedYearsAmount; ++x) {
-            this.calendarYearList.push(this.firstYearInList + x);
+            calendarYearList.push(this.firstYearInList + x);
+        }
+        /** Creating 2d grid */
+        while (calendarYearList.length) {
+            this.calendarYearListGrid.push(calendarYearList.splice(0, this._amountOfColPerRow));
         }
         this.activeYear = this.getActiveYear();
         this.changeDetectorRef.markForCheck();
+    }
+
+    /** Returns transformed 1d array from 2d year grid. */
+    private getYearList(): number[] {
+        return [].concat.apply([], this.calendarYearListGrid);
     }
 }
