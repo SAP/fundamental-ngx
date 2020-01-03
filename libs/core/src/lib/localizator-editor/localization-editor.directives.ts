@@ -1,5 +1,4 @@
-import { Directive, ElementRef, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { InputGroupInputDirective } from '../input-group/input-group-directives';
+import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 /**
  * Directive which is used along with input elements, inside the localization editor item or main.

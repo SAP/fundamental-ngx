@@ -12,22 +12,12 @@ export class InputGroupInputDirective extends AbstractFdNgxClass {
     @Input()
     compact: boolean = false;
 
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be `valid`, `invalid`, `warning`, 'information' or blank for default.
-     */
-    @Input()
-    state: FormStates;
-
     /** @hidden */
     _setProperties() {
         this._addClassToElement('fd-input');
         this._addClassToElement('fd-input-group__input');
         if (this.compact) {
             this._addClassToElement('fd-input--compact');
-        }
-        if (this.state) {
-            this._addClassToElement('is-' + this.state);
         }
     }
 
