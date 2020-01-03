@@ -11,7 +11,7 @@
         <ng-container *ngIf="triggerTemplate">
             <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
         </ng-container>
-        <ng-container *ngIf="!triggerTemplate">
+        <div *ngIf="!triggerTemplate" [ngClass]="{ loading: loading }">
             <button
                 class="fd-select-button-custom"
                 fd-button
@@ -34,8 +34,8 @@
                 </fd-icon>
                 <span class="fd-select-text-custom">{{ triggerValue }}</span>
             </button>
-        </ng-container>
-        <fd-busy-indicator *ngIf="loading" [loading]="loading" [size]="compact ? 's' : 'm'"> </fd-busy-indicator>
+            <fd-busy-indicator *ngIf="loading" [size]="'m'" [loading]="true"></fd-busy-indicator>
+        </div>
     </fd-popover-control>
     <fd-popover-body class="fd-select-popover-body-custom" [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
         <fd-menu>

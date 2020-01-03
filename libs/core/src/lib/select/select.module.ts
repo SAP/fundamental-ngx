@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module';
+import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { LoadingSpinnerModule } from '../loading-spinner/loading-spinner.module'
         OptionComponent
     ],
     imports: [
+        BusyIndicatorModule,
         CommonModule,
         PopoverModule,
         MenuModule,

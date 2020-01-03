@@ -11,7 +11,7 @@ export class BusyIndicatorComponent {
 
   /** Whether to display the loading indicator animation. */
   @Input()
-  loading: boolean = false;
+  loading: boolean;
 
   /** The size of the loading indicator, default will be medium */
   @Input()
