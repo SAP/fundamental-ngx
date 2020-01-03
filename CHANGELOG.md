@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.108"></a>
+# [0.13.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.107...v0.13.0-rc.108) (2020-01-03)
+
+
+### Bug Fixes
+
+* (core:Alert) Add new button classes to alert component ([#1768](https://github.com/SAP/fundamental-ngx/issues/1768)) ([15b9864](https://github.com/SAP/fundamental-ngx/commit/15b9864))
+
+
+
+<a name="0.13.0-rc.107"></a>
+# [0.13.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.106...v0.13.0-rc.107) (2020-01-03)
+
+
+
+<a name="0.13.0-rc.106"></a>
+# [0.13.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.105...v0.13.0-rc.106) (2020-01-02)
+
+
+### Bug Fixes
+
+* (core) Add Additional class to popover component, introduce nested popover example ([#1646](https://github.com/SAP/fundamental-ngx/issues/1646)) ([3bdf3f7](https://github.com/SAP/fundamental-ngx/commit/3bdf3f7))
+
+
+
+<a name="0.13.0-rc.105"></a>
+# [0.13.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.104...v0.13.0-rc.105) (2020-01-02)
+
+
+### Bug Fixes
+
+* **core:calendar:** Change nextDay method implementation ([#1767](https://github.com/SAP/fundamental-ngx/issues/1767)) ([ec01a46](https://github.com/SAP/fundamental-ngx/commit/ec01a46))
+
+
+
+<a name="0.13.0-rc.104"></a>
+# [0.13.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.103...v0.13.0-rc.104) (2020-01-01)
+
+
+
+<a name="0.13.0-rc.103"></a>
+# [0.13.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.102...v0.13.0-rc.103) (2020-01-01)
+
+
+
+<a name="0.13.0-rc.102"></a>
+# [0.13.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.101...v0.13.0-rc.102) (2019-12-30)
+
+
+### Bug Fixes
+
+* (core) Calendar A11y - change ul/li to table with grid ([#1649](https://github.com/SAP/fundamental-ngx/issues/1649)) ([6a540c1](https://github.com/SAP/fundamental-ngx/commit/6a540c1))
+
+
+
 <a name="0.13.0-rc.101"></a>
 # [0.13.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.100...v0.13.0-rc.101) (2019-12-27)
 
