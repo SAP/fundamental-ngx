@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.109"></a>
+# [0.13.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.108...v0.13.0-rc.109) (2020-01-03)
+
+
+### Features
+
+* Busy indicator ([#1700](https://github.com/SAP/fundamental-ngx/issues/1700)) ([ad3e418](https://github.com/SAP/fundamental-ngx/commit/ad3e418))
+
+
+
 <a name="0.13.0-rc.108"></a>
 # [0.13.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.107...v0.13.0-rc.108) (2020-01-03)
 
