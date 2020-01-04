@@ -1,5 +1,5 @@
-import {Component, forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, Renderer2} from '@angular/core';
+import {CheckboxControlValueAccessor, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FdCheckboxValues} from './fd-checkbox-values.interface';
 
 let checkboxUniqueId: number = 0;
@@ -22,7 +22,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     inputId: string = `fd-checkbox-${checkboxUniqueId++}`;
 
     @Input()
-    state: string;
+    state: 'valid' | 'invalid' | 'info' | 'warning';
+
+    @Input()
+    name: string;
+
+    @Input()
+    label: string;
 
     @Input()
     disabled: boolean;
@@ -34,12 +40,18 @@ export class CheckboxComponent implements ControlValueAccessor {
     tristate: boolean;
 
     @Input()
+    tristateSelectable: boolean;
+
+    @Input()
     values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
+
+    @Output()
+    onChange: EventEmitter<any> = new EventEmitter();
 
     public checkboxValue: any;
     public checkboxState: 'checked' | 'unchecked' | 'indeterminate';
-    public onTouched: () => {};
-    public onChange: (newValue) => {};
+    public onTouched = () => {};
+    public onValueChange = (newValue) => {};
 
     get isChecked(): boolean {
         return this.checkboxState === 'checked';
@@ -55,11 +67,15 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     registerOnChange(fn: any): void {
-        this.onChange = fn;
+        this.onValueChange = fn;
     }
 
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
+    }
+
+    setDisabledState(disabled: boolean) {
+        this.disabled = disabled;
     }
 
     public nextValue(): void {
@@ -68,14 +84,17 @@ export class CheckboxComponent implements ControlValueAccessor {
                 this.checkboxValue = this.values.falseValue;
                 break;
             case 'unchecked':
-                this.checkboxValue = this.tristate ? this.values.thirdStateValue : this.values.trueValue;
+                this.checkboxValue = this.tristate && this.tristateSelectable
+                    ? this.values.thirdStateValue
+                    : this.values.trueValue;
                 break;
             case 'indeterminate':
                 this.checkboxValue = this.values.trueValue;
                 break;
         }
         this._setState();
-        this.onChange(this.checkboxValue);
+        this.onValueChange(this.checkboxValue);
+        this.onChange.emit(this.checkboxValue);
     }
 
     private _setState(): void {
@@ -89,5 +108,4 @@ export class CheckboxComponent implements ControlValueAccessor {
             this.checkboxState = 'unchecked';
         }
     }
-
 }

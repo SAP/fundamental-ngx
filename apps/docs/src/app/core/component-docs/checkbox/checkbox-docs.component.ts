@@ -1,7 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
-import * as formHtml from '!raw-loader!./examples/checkbox-example.component.html';
-import * as formHtmlTsCode from '!raw-loader!./examples/checkbox-examples.component.ts';
+import * as checkboxDefaultTsCode from '!raw-loader!./examples/checkbox-default-example.component.ts';
+import * as checkboxTristateTsCode from '!raw-loader!./examples/checkbox-tristate-example.component.ts';
+import * as checkboxCustomValuesTsCode from '!raw-loader!./examples/checkbox-custom-values-example.component.ts';
+import * as checkboxReactiveFormsTsCode from '!raw-loader!./examples/checkbox-reactive-forms-example.component.ts';
+import * as checkboxStatesTsCode from '!raw-loader!./examples/checkbox-states-example.component.ts';
+
 import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -9,31 +13,48 @@ import {ExampleFile} from '../../../documentation/core-helpers/code-example/exam
     templateUrl: './checkbox-docs.component.html'
 })
 export class CheckboxDocsComponent {
-    checkboxFormHtml: ExampleFile[] = [
+    checkboxDefault: ExampleFile[] = [
         {
-            language: 'html',
-            code: formHtml,
-            fileName: 'checkbox-example',
-            component: 'CheckboxExample',
-            secondFile: 'checkbox-examples',
-            typescriptFileCode: formHtmlTsCode
+            language: 'TypeScript',
+            fileName: 'checkbox-default-example',
+            component: 'CheckboxDefaultExamplesComponent',
+            code: checkboxDefaultTsCode
         }
     ];
 
-    // checkboxFormGroup: ExampleFile[] = [
-    //     {
-    //         language: 'html',
-    //         code: formGroupInputHtml,
-    //         fileName: 'checkbox-form-group-example'
-    //     },
-    //     {
-    //         language: 'typescript',
-    //         code: formGroupInputTs,
-    //         fileName: 'checkbox-form-group-example',
-    //         component: 'CheckboxFormGroupExampleComponent'
-    //     }
-    // ];
+    checkboxTristate: ExampleFile[] = [
+        {
+            language: 'TypeScript',
+            fileName: 'checkbox-tristate-example',
+            component: 'DefaultCheckboxExamplesComponent',
+            code: checkboxTristateTsCode
+        }
+    ];
 
-    // ngOnInit() {
-    // }
+    checkboxCustomValues: ExampleFile[] = [
+        {
+            language: 'TypeScript',
+            fileName: 'checkbox-custom-values-example',
+            component: 'CheckboxCustomValuesExampleComponent',
+            code: checkboxCustomValuesTsCode
+        }
+    ];
+
+    checkboxReactiveForms: ExampleFile[] = [
+        {
+            language: 'TypeScript',
+            fileName: 'checkbox-reactive-forms-example',
+            component: 'CheckboxReactiveFormsExampleComponent',
+            code: checkboxReactiveFormsTsCode
+        }
+    ];
+
+    checkboxStates: ExampleFile[] = [
+        {
+            language: 'TypeScript',
+            fileName: 'checkbox-states-example',
+            component: 'CheckboxStatesExampleComponent',
+            code: checkboxStatesTsCode
+        }
+    ];
 }

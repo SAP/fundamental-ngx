@@ -1,16 +1,15 @@
-<div class="fd-form-item">
-    <input
-        type="checkbox"
-        class="fd-checkbox"
-        [id]="inputId"
-        [disabled]="disabled"
-        [checked]="isChecked"
-        [indeterminate]="isIndeterminate"
-        [class.fd-checkbox--compact]="compact"
-        (change)="nextValue()"
-    >
-    <label class="fd-checkbox__label"
-           [for]="inputId">
-        Field label
-    </label>
-</div>
+<input
+    type="checkbox"
+    class="fd-checkbox"
+    [id]="inputId"
+    [name]="name"
+    [disabled]="disabled"
+    [checked]="isChecked"
+    [indeterminate]="isIndeterminate"
+    [class.fd-checkbox--compact]="compact"
+    [ngClass]="state ? 'is-' + state : ''"
+    (change)="nextValue()"
+>
+<label class="fd-checkbox__label" [for]="inputId">
+    {{label}}
+</label>
