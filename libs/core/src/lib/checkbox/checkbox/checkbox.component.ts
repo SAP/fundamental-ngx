@@ -18,35 +18,48 @@ let checkboxUniqueId: number = 0;
 })
 export class CheckboxComponent implements ControlValueAccessor {
 
+    /** Sets id property of input, binds input with input label */
     @Input()
     inputId: string = `fd-checkbox-${checkboxUniqueId++}`;
 
+    /** State of input, changes visual appearance of input.
+     * Available states: 'valid', 'invalid', 'info', 'warning'
+     * */
     @Input()
     state: 'valid' | 'invalid' | 'info' | 'warning';
 
+    /** Sets name property of input */
     @Input()
     name: string;
 
+    /** Sets content of input label */
     @Input()
     label: string;
 
+    /** Allows to disable/enable input */
     @Input()
     disabled: boolean;
 
+    /** Allows to minimize input to compact mode */
     @Input()
     compact: boolean;
 
+    /** Enables third state of the input */
     @Input()
     tristate: boolean;
 
+    /** Allows to prevent user from manually selecting third state of the input */
     @Input()
-    tristateSelectable: boolean;
+    tristateSelectable: boolean = true;
 
+    /** Values returned by checkbox.
+     * By default checkbox returns true(checked), false(unchecked), null(third state) values.*/
     @Input()
     values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
 
+    /** Emits new checkbox value whenever its changed */
     @Output()
-    onChange: EventEmitter<any> = new EventEmitter();
+    onChange: EventEmitter<any> = new EventEmitter<any>();
 
     public checkboxValue: any;
     public checkboxState: 'checked' | 'unchecked' | 'indeterminate';
