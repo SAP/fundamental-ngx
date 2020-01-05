@@ -4,8 +4,10 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as inputGroupButtonSrc from '!raw-loader!./examples/input-group-button-example.component.html';
 import * as inputGroupIconSrc from '!raw-loader!./examples/input-group-icon-example.component.html';
-import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example.component.html';
-import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
+import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example/input-group-number-example.component.html';
+import * as inputGroupNumberSrcTs from '!raw-loader!./examples/input-group-number-example/input-group-number-example.component.ts';
+import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.html';
+import * as inputGroupSearchSrcTs from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.ts';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
 import * as inputGroupTscode from '!raw-loader!./examples/input-group-examples.component.ts';
@@ -124,8 +126,7 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupNumberSrc,
             fileName: 'input-group-number-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
+            typescriptFileCode: inputGroupNumberSrcTs,
             component: 'InputGroupNumberExampleComponent'
         }
     ];
@@ -135,8 +136,7 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupSearchSrc,
             fileName: 'input-group-search-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
+            typescriptFileCode: inputGroupSearchSrcTs,
             component: 'InputGroupSearchExampleComponent'
         }
     ];
@@ -183,7 +183,6 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: statesInputHtml,
             fileName: 'input-group-states-example',
-            secondFile: 'input-group-states-example',
             typescriptFileCode: statesInputGroupTsCode,
             component: 'InputGroupStatesExampleComponent'
         }

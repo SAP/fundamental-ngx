@@ -1,6 +1,4 @@
 @import '~fundamental-styles/dist/input-group';
-@import '~fundamental-styles/dist/input';
-@import '~fundamental-styles/dist/textarea';
 
 fd-input-group {
     .fd-input-group__addon--button.fd-input-group__addon--textarea > * {
@@ -12,5 +10,9 @@ fd-input-group {
         &:hover {
             border-color: transparent;
         }
+    }
+
+    .fd-input-group__input {
+        width: 100%;
     }
 }

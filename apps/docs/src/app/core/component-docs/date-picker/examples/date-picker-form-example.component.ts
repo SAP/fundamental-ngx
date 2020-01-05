@@ -13,9 +13,8 @@ import { FdDate } from '@fundamental-ngx/core';
                     <label fd-form-label>Date Picker</label>
                     <fd-date-picker [state]="'valid'" formControlName="date"></fd-date-picker>
                     <fd-form-message [type]="'success'">This is valid DatePicker</fd-form-message>
-                    <br/>
                 </div>
-                
+                <br/>
                 Touched: {{customForm.controls.date.touched}}<br/>
                 Dirty: {{customForm.controls.date.dirty}}<br/>
                 Valid: {{customForm.controls.date.valid}}<br/>

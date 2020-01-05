@@ -104,8 +104,6 @@ import {
 import {
     InputGroupButtonExampleComponent,
     InputGroupIconExampleComponent,
-    InputGroupNumberExampleComponent,
-    InputGroupSearchExampleComponent,
     InputGroupTextExampleComponent,
     InputGroupTextCompactExampleComponent, InputGroupComplexExampleComponent
 } from '../core/component-docs/input-group/examples/input-group-examples.component';
@@ -407,6 +405,8 @@ import { PopoverDropdownComponent } from './component-docs/popover/examples/popo
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
 import { SemanticToggleExampleComponent } from './component-docs/toggle/examples/semantic-toggle-example/semantic-toggle-example.component';
 import { InputGroupStatesExampleComponent } from './component-docs/input-group/examples/input-group-states-example/input-group-states-example.component';
+import { InputGroupNumberExampleComponent } from './component-docs/input-group/examples/input-group-number-example/input-group-number-example.component';
+import { InputGroupSearchExampleComponent } from './component-docs/input-group/examples/input-group-search-example/input-group-search-example.component';
 
 
 @NgModule({
