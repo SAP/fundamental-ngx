@@ -11,8 +11,9 @@ import { FdDate } from '@fundamental-ngx/core';
 
                 <div fd-form-item>
                     <label fd-form-label>Date Picker</label>
-                    <fd-date-picker [state]="'valid'" formControlName="date"></fd-date-picker>
-                    <fd-form-message [type]="'success'">This is valid DatePicker</fd-form-message>
+                    <fd-date-picker [state]="isValid() ? 'valid' : 'invalid'" formControlName="date"></fd-date-picker>
+                    <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid DatePicker</fd-form-message>
+                    <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid DatePicker</fd-form-message>
                 </div>
                 <br/>
                 Touched: {{customForm.controls.date.touched}}<br/>
@@ -45,4 +46,8 @@ export class DatePickerFormExampleComponent {
         date: new FormControl(FdDate.getToday()),
         disabledDate: new FormControl({ value: FdDate.getToday(), disabled: true })
     });
+
+    isValid(): boolean {
+        return this.customForm.get('date').valid;
+    }
 }

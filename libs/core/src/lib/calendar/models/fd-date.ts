@@ -137,7 +137,13 @@ export class FdDate {
             return false;
         }
 
-        if (this.year <= 0 || this.month < 1 || this.month > 12) {
+        if (this.year <= 0 ||
+            this.month < 1 ||
+            this.month > 12 ||
+            isNaN(this.year) ||
+            isNaN(this.month) ||
+            isNaN(this.day)
+        ) {
             return false;
         }
 

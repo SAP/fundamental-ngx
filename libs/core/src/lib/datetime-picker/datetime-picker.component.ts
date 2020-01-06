@@ -261,7 +261,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     validate(control: AbstractControl): {
         [key: string]: any
     } {
-        return this.isCurrentModelValid() ? null : {
+        return ( this.isCurrentModelValid() && !this.isInvalidDateInput ) ? null : {
             dateValidation: {
                 valid: false
             }
@@ -440,6 +440,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         } else if (!date && !this.allowNull) {
             this.isInvalidDateInput = true;
         }
+        this.onChange(this.date);
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
