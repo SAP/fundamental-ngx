@@ -92,12 +92,24 @@
     Input Group with complex templates.
 </fd-docs-section-title>
 <description>It is possible to use complex templates inside <code>Input Group</code> component. To achieve it you should
-    use <code>fd-input-group-input</code> for complex input template, or <code>fd-input-group-addon</code> for complex addon template
+    use <code>fd-input-group-input</code> for complex input template, or <code>fd-input-group-addon</code>.
 </description>
 <component-example [name]="'ex8'">
     <fd-input-group-complex-example></fd-input-group-complex-example>
 </component-example>
 <code-example [exampleFiles]="complexInput"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'states'" [componentName]="'inputGroup'">
+    Input Group with States.
+</fd-docs-section-title>
+<description>
+</description>
+<component-example [name]="'ex9'">
+    <fd-input-group-states-example></fd-input-group-states-example>
+</component-example>
+<code-example [exampleFiles]="statesInput"></code-example>
 
 <separator></separator>
 
@@ -108,6 +120,7 @@
         [button]="data.properties.button"
         [glyph]="data.properties.glyph"
         [inline]="data.properties.inline"
+        [state]="data.properties.state"
         [(ngModel)]="data.properties.ngModel"
         [placement]="data.properties.placement"
         [disabled]="data.state.disabled"

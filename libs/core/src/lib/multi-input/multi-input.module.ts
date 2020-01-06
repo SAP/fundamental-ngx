@@ -7,6 +7,7 @@ import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { FormModule } from '../form/form.module';
 
 @NgModule({
     declarations: [MultiInputComponent],
@@ -17,7 +18,8 @@ import { InputGroupModule } from '../input-group/input-group.module';
         MenuModule,
         PopoverModule,
         PipeModule,
-        InputGroupModule
+        InputGroupModule,
+        FormModule
     ],
     exports: [MultiInputComponent]
 })

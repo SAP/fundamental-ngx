@@ -9,6 +9,10 @@
     .fd-dropdown {
         position: static;
     }
+
+    &--disabled {
+        pointer-events: none;
+    }
 }
 
 //TODO to be reviewed and if needed to be moved in fd-styles

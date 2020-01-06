@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { InputGroupComponent } from './input-group.component';
 import { InputGroupNumberComponent } from './input-group-number.component';
-import { InputGroupSearchComponent } from './input-group-search.component';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import {
@@ -15,7 +14,6 @@ import {
 
 @NgModule({
     declarations: [
-        InputGroupSearchComponent,
         InputGroupNumberComponent,
         InputGroupComponent,
         InputGroupInputDirective,
@@ -24,7 +22,6 @@ import {
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule],
     exports: [
-        InputGroupSearchComponent,
         InputGroupNumberComponent,
         InputGroupComponent,
         InputGroupInputDirective,

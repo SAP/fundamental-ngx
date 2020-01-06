@@ -61,6 +61,14 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @Input()
     checked: boolean = false;
 
+    /** Whether the toggle is semantic */
+    @Input()
+    semantic: boolean = false;
+
+    /** Whether the toggle is compact */
+    @Input()
+    compact: boolean = false;
+
     /** aria-label attribute of the inner input element. */
     @Input()
     ariaLabel: string = null;

@@ -9,9 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    LocalizationEditorInputDirective,
-    LocalizationEditorLabel,
-    LocalizationEditorTextareaDirective
+    LocalizationEditorLabel
 } from '../localization-editor.directives';
 
 /**
@@ -28,7 +26,7 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LocalizationEditorItemComponent implements OnInit, AfterContentInit, OnChanges {
+export class LocalizationEditorItemComponent {
 
     /** @hidden */
     type: string;
@@ -42,38 +40,6 @@ export class LocalizationEditorItemComponent implements OnInit, AfterContentInit
     compact: boolean;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorInputDirective, { static: false })
-    input: LocalizationEditorInputDirective;
-
-    /** @hidden */
-    @ContentChild(LocalizationEditorTextareaDirective, { static: false })
-    textarea: LocalizationEditorTextareaDirective;
-
-    /** @hidden */
     @ContentChild(LocalizationEditorLabel, { read: TemplateRef, static: false })
     labelTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.refreshChildInput();
-    }
-
-    ngOnChanges(): void {
-        this.refreshChildInput();
-    }
-
-    ngAfterContentInit(): void {
-        if (this.textarea) {
-            this.type = 'textarea';
-        }
-    }
-
-    private refreshChildInput(): void {
-        if (this.input) {
-            this.input.compact = this.compact;
-        }
-        if (this.textarea) {
-            this.textarea.compact = this.compact;
-        }
-    }
 }

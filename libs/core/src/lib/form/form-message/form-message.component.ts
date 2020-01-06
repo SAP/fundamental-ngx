@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
+export type MessageStates = 'success' | 'error' | 'warning' | 'information'
+
 /**
- * Form message. Intended to be displayed under a form control for validation purposes.
+ * Form message. Intended to be displayed with a form control for validation purposes.
  */
 @Component({
     selector: 'fd-form-message',
@@ -12,7 +14,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 })
 export class FormMessageComponent {
 
-    /** Type of the message. Can be `text`, `help`, `error` and `warning`. */
+    /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
-    type: string = '';
+    type: MessageStates;
 }

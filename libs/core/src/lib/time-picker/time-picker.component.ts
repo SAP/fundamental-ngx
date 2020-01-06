@@ -13,6 +13,7 @@ import { TimeObject } from '../time/time-object';
 import { TimeComponent } from '../time/time.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TimeFormatParser } from './format/time-parser';
+import { FormStates } from '../form/form-control/form-states';
 
 @Component({
     selector: 'fd-time-picker',
@@ -89,6 +90,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     /** Whether a null input is considered valid. */
     @Input()
     allowNull: boolean = true;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** @hidden Whether the input time is valid. Internal use. */
     isInvalidTimeInput: boolean = false;

@@ -1,5 +1,5 @@
 <form [formGroup]="customForm">
-    <div fd-form-set class="flex-form-set">
+    <fieldset fd-fieldset>
         <div fd-form-item>
             <label fd-form-label for="select-1">Default select:</label>
             <select fd-form-control formControlName="selectControl" id="select-1" name="">
@@ -19,5 +19,5 @@
             Select Value: {{ customForm.controls.disabledSelectControl.value }} <br />
             Disabled: {{ customForm.controls.disabledSelectControl.disabled }}
         </div>
-    </div>
+    </fieldset>
 </form>

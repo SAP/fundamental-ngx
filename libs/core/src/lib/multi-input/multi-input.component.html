@@ -11,6 +11,7 @@
                  [attr.aria-label]="multiInputBodyLabel"
                  [attr.aria-expanded]="open">
                 <fd-input-group
+                    [state]="state"
                     [buttonFocusable]="false"
                     [disabled]="disabled"
                     [compact]="compact"
@@ -19,7 +20,7 @@
                     (addOnButtonClicked)="openChangeHandle(!open)">
                     <input type="text" class="fd-input" fd-input-group-input
                            #searchInputElement
-                           [ngClass]="{'fd-input--compact': compact}"
+                           [compact]="compact"
                            [placeholder]="placeholder"
                            [disabled]="disabled"
                            [(ngModel)]="searchTerm"
@@ -36,7 +37,7 @@
                 <ul fd-menu-list>
                     <li *ngFor="let value of displayedValues; let ind  = index">
                         <label fd-menu-item (keydown)="handleKeyDown($event, ind)">
-                            <input type="checkbox" class="fd-checkbox"
+                            <input type="checkbox" fd-form-control
                                    [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
                                    (ngModelChange)="handleSelect($event, value)">
                             <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>

@@ -24,6 +24,7 @@ import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import focusTrap, { FocusTrap } from 'focus-trap';
+import { FormStates } from '../form/form-control/form-states';
 
 /**
  * Allows users to filter through results and select a value.
@@ -100,6 +101,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
      */
     @Input()
     openOnKeyboardEvent: boolean = true;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /**
      * The template with which to display the individual listed items.

@@ -1,20 +1,20 @@
-<fieldset fd-form-set>
+<fieldset fd-fieldset>
     <legend fd-form-legend>Radio buttons</legend>
     <fd-form-group>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-1">
+        <div fd-form-item>
+            <label fd-form-label for="radio-1" [radio]="true">
                 <input fd-form-control type="radio" id="radio-1" name="radio-name-1" value="" checked>
                 Option One
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-2">
+        <div fd-form-item>
+            <label fd-form-label for="radio-2" [radio]="true">
                 <input fd-form-control type="radio" id="radio-2" name="radio-name-1" value="">
                 Option Two
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-3">
+        <div fd-form-item>
+            <label fd-form-label for="radio-3" [radio]="true">
                 <input fd-form-control type="radio" id="radio-3" name="radio-name-1" value="">
                 Option Three
             </label>
@@ -22,23 +22,47 @@
     </fd-form-group>
 </fieldset>
 
-<fieldset fd-form-set>
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Compact Radio buttons</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <label fd-form-label for="radio-26" [radio]="true">
+                <input fd-form-control [compact]="true" type="radio" id="radio-26" name="compactRadio" value="" checked>
+                Option One
+            </label>
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="radio-27" [radio]="true">
+                <input fd-form-control [compact]="true" type="radio" id="radio-27" name="compactRadio" value="">
+                Option Two
+            </label>
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="radio-28" [radio]="true">
+                <input fd-form-control [compact]="true" type="radio" id="radio-28" name="compactRadio" value="">
+                Option Three
+            </label>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
     <legend fd-form-legend>Radio buttons disabled</legend>
     <fd-form-group>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-4">
+        <div fd-form-item>
+            <label fd-form-label for="radio-4" [radio]="true">
                 <input fd-form-control type="radio" id="radio-4" name="radio-name-2" value="" checked disabled>
                 Option One
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-5">
+        <div fd-form-item>
+            <label fd-form-label for="radio-5" [radio]="true">
                 <input fd-form-control type="radio" id="radio-5" name="radio-name-2" value="" disabled>
                 Option Two
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-6">
+        <div fd-form-item>
+            <label fd-form-label for="radio-6" [radio]="true">
                 <input fd-form-control type="radio" id="radio-6" name="radio-name-2" value="" disabled>
                 Option Three
             </label>
@@ -46,23 +70,23 @@
     </fd-form-group>
 </fieldset>
 
-<fieldset fd-form-set>
+<fieldset fd-fieldset>
     <legend fd-form-legend>Inline Radio buttons</legend>
     <fd-form-group>
-        <div fd-form-item [isInline]="true" [isCheck]="true">
-            <label fd-form-label for="radio-7">
+        <div fd-form-item [isInline]="true">
+            <label fd-form-label for="radio-7" [radio]="true">
                 <input fd-form-control type="radio" id="radio-7" name="radio-name-3" value="" checked>
                 Option One
             </label>
         </div>
-        <div fd-form-item [isInline]="true" [isCheck]="true">
-            <label fd-form-label for="radio-8">
+        <div fd-form-item [isInline]="true">
+            <label fd-form-label for="radio-8" [radio]="true">
                 <input fd-form-control type="radio" id="radio-8" name="radio-name-3" value="">
                 Option Two
             </label>
         </div>
-        <div fd-form-item [isInline]="true" [isCheck]="true">
-            <label fd-form-label for="radio-9">
+        <div fd-form-item [isInline]="true">
+            <label fd-form-label for="radio-9" [radio]="true">
                 <input fd-form-control type="radio" id="radio-9" name="radio-name-3" value="">
                 Option Three
             </label>
@@ -70,25 +94,31 @@
     </fd-form-group>
 </fieldset>
 
-<fieldset fd-form-set>
+<fieldset fd-fieldset>
     <legend fd-form-legend>Radio button States</legend>
     <fd-form-group>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-10">
+        <div fd-form-item>
+            <label fd-form-label for="radio-10" [radio]="true">
                 <input fd-form-control type="radio" id="radio-10" name="radio-name-4" [state]="'valid'">
                 Valid Option
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-11">
+        <div fd-form-item>
+            <label fd-form-label for="radio-11" [radio]="true">
                 <input fd-form-control type="radio" id="radio-11" name="radio-name-4" [state]="'warning'">
                 Warning Option
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="radio-12">
+        <div fd-form-item>
+            <label fd-form-label for="radio-12" [radio]="true">
                 <input fd-form-control type="radio" id="radio-12" name="radio-name-4" [state]="'invalid'">
                 Invalid Option
+            </label>
+        </div>
+        <div fd-form-item>
+            <label fd-form-label for="information-input" [radio]="true">
+                <input fd-form-control type="radio" id="information-input" name="radio-name-4" [state]="'information'">
+                Information Option
             </label>
         </div>
     </fd-form-group>

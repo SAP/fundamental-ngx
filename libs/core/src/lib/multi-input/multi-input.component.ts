@@ -20,6 +20,7 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
 import { MenuItemDirective } from '../menu/menu-item.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
+import { FormStates } from '../form/form-control/form-states';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -125,6 +126,13 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()

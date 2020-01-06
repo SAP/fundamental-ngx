@@ -123,7 +123,6 @@ describe('DatetimePickerComponent', () => {
         const dateTime = new FdDatetime(component.date.date, timeModel);
         const dateStr = internalParser(dateTime);
         component.handleInputChange(dateStr);
-        expect(component.onChange).not.toHaveBeenCalled();
         expect(component.isInvalidDateInput).toEqual(true);
     });
 
@@ -133,7 +132,6 @@ describe('DatetimePickerComponent', () => {
         const dateTime = new FdDatetime(date, component.date.time);
         const dateStr = internalParser(dateTime);
         component.handleInputChange(dateStr);
-        expect(component.onChange).not.toHaveBeenCalled();
         expect(component.isInvalidDateInput).toEqual(true);
     });
 

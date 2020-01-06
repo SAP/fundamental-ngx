@@ -107,8 +107,6 @@ import {
 import {
     InputGroupButtonExampleComponent,
     InputGroupIconExampleComponent,
-    InputGroupNumberExampleComponent,
-    InputGroupSearchExampleComponent,
     InputGroupTextExampleComponent,
     InputGroupTextCompactExampleComponent, InputGroupComplexExampleComponent
 } from '../core/component-docs/input-group/examples/input-group-examples.component';
@@ -409,6 +407,10 @@ import { DatePickerComplexI18nExampleComponent } from './component-docs/date-pic
 import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
 import { PopoverDropdownComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown.component';
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
+import { SemanticToggleExampleComponent } from './component-docs/toggle/examples/semantic-toggle-example/semantic-toggle-example.component';
+import { InputGroupStatesExampleComponent } from './component-docs/input-group/examples/input-group-states-example/input-group-states-example.component';
+import { InputGroupNumberExampleComponent } from './component-docs/input-group/examples/input-group-number-example/input-group-number-example.component';
+import { InputGroupSearchExampleComponent } from './component-docs/input-group/examples/input-group-search-example/input-group-search-example.component';
 
 
 @NgModule({
@@ -673,6 +675,7 @@ import { SelectTypesExampleComponent } from './component-docs/select/examples/se
         DisabledToggleExampleComponent,
         ToggleBindingExampleComponent,
         ToggleFormsExampleComponent,
+        SemanticToggleExampleComponent,
         TokenDocsComponent,
         TokenExampleComponent,
         MultiInputAsyncExampleComponent,
@@ -764,7 +767,8 @@ import { SelectTypesExampleComponent } from './component-docs/select/examples/se
         NotificationContentComponent,
         DatePickerComplexI18nExampleComponent,
         DatetimePickerComplexI18nExampleComponent,
-        PopoverDropdownComponent
+        PopoverDropdownComponent,
+        InputGroupStatesExampleComponent
     ],
 
     entryComponents: [

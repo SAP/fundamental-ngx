@@ -1,5 +1,5 @@
-<fd-input-group [compact]="compact" [inputTemplate]="input">
-    <span fd-input-group-addon [type]="type">
+<fd-input-group [compact]="compact" [inputTemplate]="input" [placement]="'after'">
+    <span fd-input-group-addon [type]="type" [compact]="compact">
         <ng-container *ngIf="labelTemplate">
             <ng-container [fd-localization-editor-load-label]="labelTemplate"></ng-container>
         </ng-container>

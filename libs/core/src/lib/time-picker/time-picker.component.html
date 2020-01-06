@@ -5,9 +5,11 @@
             [compact]="compact"
             (addOnButtonClicked)="addOnButtonClicked()"
             [button]="true"
+            [state]="state"
             [disabled]="disabled"
             [glyph]="'fob-watch'">
             <input [value]="getFormattedTime()"
+                   [compact]="compact"
                    #inputElement
                    fd-input-group-input
                    (keyup.enter)="timeInputChanged($event.currentTarget.value)"
@@ -16,7 +18,7 @@
                    (click)="inputGroupClicked($event)"
                    [disabled]="disabled"
                    type="text"
-                   [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidTimeInput && validate }"
+                   [ngClass]="{ 'is-invalid': isInvalidTimeInput && validate }"
                    class="fd-input"
                    [placeholder]="placeholder"
                    [attr.aria-label]="timePickerInputLabel">

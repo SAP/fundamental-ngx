@@ -7,7 +7,7 @@
                 [disabled]="disabled"
                 [placement]="placement">
         <fd-popover-control>
-            <fd-input-group [compact]="compact">
+            <fd-input-group [compact]="compact" [state]="state">
                 <input type="text"
                        class="fd-input"
                        fd-input-group-input
@@ -17,9 +17,10 @@
                        [placeholder]="placeholder"
                        (keyup.enter)="handleInputChange(dateTimePicker.value)"
                        (click)="openPopover()"
-                       [ngClass]="{ 'fd-input--compact': compact, 'is-invalid': isInvalidDateInput && useValidation }"
+                       [compact]="compact"
+                       [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
                        [disabled]="disabled">
-                <span fd-input-group-addon [button]="true">
+                <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">
                     <button [disabled]="disabled" fd-button [glyph]="'date-time'"
                             [options]="'light'"
                             [compact]="compact"
