@@ -1,6 +1,10 @@
 <fd-docs-section-title [id]="'oneLevel'" [componentName]="'sideNavigation'">
-    Side navigation with one level
+    Side Navigation with One Level List
 </fd-docs-section-title>
+<description>
+    It's mandatory to use <code>[textOnly]="true"</code> to <code>fd-nested-list</code>,
+    when there are no icons.
+</description>
 <component-example [name]="'ex1'">
     <fd-side-navigation-example></fd-side-navigation-example>
 </component-example>
@@ -9,7 +13,7 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'withTitles'" [componentName]="'sideNavigation'">
-    Side navigation with titles
+    Side Navigation with Titles
 </fd-docs-section-title>
 <description>Use this to group navigation. Titles are not clickable.</description>
 <component-example [name]="'ex2'">
@@ -75,8 +79,8 @@
     Side navigation with Icons
 </fd-docs-section-title>
 <description>
-    To put icons into the <code>Side Navigation</code>, it mandatory needed to pass <code>[textOnly]="false"</code> to
-    <code>fd-nested-list</code>.
+    To put icons into the <code>Side Navigation</code>, there is no need to add <code>[textOnly]="true"</code> to
+    <code>fd-nested-list</code> anymore.
 </description>
 <component-example [name]="'ex7'">
     <fd-side-navigation-icons-example></fd-side-navigation-icons-example>
