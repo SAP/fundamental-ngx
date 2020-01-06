@@ -429,6 +429,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.date = new FdDatetime(this.selectedDate, this.time);
             this.onChange(fdTimeDate);
             this.refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
+        } else {
+            this.onChange(this.date);
         }
         if (!date && this.allowNull) {
             this.isInvalidDateInput = false;
@@ -440,7 +442,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         } else if (!date && !this.allowNull) {
             this.isInvalidDateInput = true;
         }
-        this.onChange(this.date);
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
