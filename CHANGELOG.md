@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.114"></a>
+# [0.13.0-rc.114](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.113...v0.13.0-rc.114) (2020-01-06)
+
+
+### Features
+
+* (core) Add [state] to all input-group related components. Adapt forms ([#1613](https://github.com/SAP/fundamental-ngx/issues/1613)) ([adabbc7](https://github.com/SAP/fundamental-ngx/commit/adabbc7))
+
+
+
 <a name="0.13.0-rc.113"></a>
 # [0.13.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.112...v0.13.0-rc.113) (2020-01-06)
 
