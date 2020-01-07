@@ -21,7 +21,7 @@
         width: 100%;
         border-color: var(--sapUiFieldBorderColor, #89919a);
         color: var(--sapUiFieldTextColor, #32363a);
-        border-radius: var(--sapField_BorderCornerRadius, .125rem);
+        border-radius: var(--sapField_BorderCornerRadius, 0.125rem);
 
         &::after {
             font-family: 'SAP-icons';
@@ -87,16 +87,16 @@
             border: transparent;
         }
         &.fd-button--splitborder {
-            border:1px solid;
+            border: 1px solid;
             border-color: var(--sapUiFieldBorderColor, #89919a);
-            &::after{
-                    border-left-style: solid;
-                    border-left-width: 1px;
-                    height: -webkit-fill-available;
-                    border-color: var(--sapUiFieldBorderColor, #89919a);
+            &::after {
+                border-left-style: solid;
+                border-left-width: 1px;
+                height: -webkit-fill-available;
+                border-color: var(--sapUiFieldBorderColor, #89919a);
             }
             &:hover {
-                    border-color: var(--sapUiFieldHoverBorderColor, #0854a0);
+                border-color: var(--sapUiFieldHoverBorderColor, #0854a0);
             }
         }
     }
@@ -115,8 +115,18 @@
 }
 
 // truncation of the overflowing component text
-.fd-dropdown_truncation{
+.fd-dropdown_truncation {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-right: auto;
+}
+
+fd-busy-indicator {
+    position: absolute;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
