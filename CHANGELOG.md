@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.117"></a>
+# [0.13.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.116...v0.13.0-rc.117) (2020-01-07)
+
+
+### Bug Fixes
+
+* (core)loading spinner for select ([#1587](https://github.com/SAP/fundamental-ngx/issues/1587)) ([094ac5f](https://github.com/SAP/fundamental-ngx/commit/094ac5f))
+
+
+
 <a name="0.13.0-rc.116"></a>
 # [0.13.0-rc.116](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.115...v0.13.0-rc.116) (2020-01-07)
 
