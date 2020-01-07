@@ -1,15 +1,25 @@
 <label fd-form-label [attr.for]="innerInputId">
-    <span class="fd-toggle fd-form__control" [ngClass]="(this.size ? ('fd-toggle--' + this.size) : '')">
+    <span class="fd-toggle"
+          [ngClass]="
+          (size ? ('fd-toggle--' + size) : '') +
+          (semantic ? ' fd-toggle--semantic' : '') +
+          (compact ? ' fd-toggle--compact' : '') "
+    >
         <input #input
                type="checkbox"
                class="fd-toggle__input"
                [id]="innerInputId"
-               [disabled]="this.disabled"
+               [disabled]="disabled"
                [attr.aria-checked]="checked"
-               [attr.aria-label]="this.ariaLabel"
-               [attr.aria-labelledby]="this.ariaLabelledby"
-               [(ngModel)]="this.isChecked">
-        <span class="fd-toggle__switch" role="presentation"></span>
+               [attr.aria-label]="ariaLabel"
+               [attr.aria-labelledby]="ariaLabelledby"
+               [(ngModel)]="isChecked">
+        <span class="fd-toggle__switch" role="presentation">
+            <ng-container *ngIf="semantic">
+                <span class="fd-toggle__semantic--off sap-icon--decline"></span>
+                <span class="fd-toggle__semantic--on sap-icon--accept"></span>
+            </ng-container>
+        </span>
     </span>
     <ng-content></ng-content>
 </label>

@@ -8,10 +8,11 @@
             [ngClass]="{'fd-popover-body--display-none': displayedValues && !displayedValues.length}">
     <fd-popover-control>
         <div class="fd-combobox-control">
-            <fd-input-group [glyph]="glyph" [compact]="compact" [button]="true"
+            <fd-input-group [glyph]="glyph" [compact]="compact" [button]="true" [state]="state"
                             (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="false">
-                <input #searchInputElement type="text" class="fd-input" fd-input-group-input
-                       [ngClass]="{'fd-input--compact': compact}"
+                <input #searchInputElement type="text"
+                       fd-input-group-input
+                       [compact]="compact"
                        (keydown)="onInputKeydownHandler($event)"
                        (keyup)="onInputKeyupHandler($event)"
                        [disabled]="disabled"

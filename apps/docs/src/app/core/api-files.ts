@@ -103,7 +103,6 @@ export const API_FILES = {
     inputGroup: [
         'InputGroupComponent',
         'InputGroupNumberComponent',
-        'InputGroupSearchComponent'
     ],
     layoutGrid: [
         'LayoutGridComponent',

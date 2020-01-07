@@ -1,28 +1,28 @@
 <p>Checkboxes</p>
 <form [formGroup]="customForm">
-    <div fd-form-set>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="checkbox-13">
-                <input fd-form-control formControlName="firstOption" type="checkbox" id="checkbox-13"
-                       name="checkbox-name-6">
+    <fieldset fd-fieldset>
+        <div fd-form-item>
+            <label fd-form-label for="checkbox-17" [checkbox]="true">
+                <input fd-form-control formControlName="firstOption" type="checkbox" id="checkbox-17"
+                       name="checkbox-name-7">
                 Option 1
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="checkbox-14">
-                <input fd-form-control formControlName="secondOption" type="checkbox" id="checkbox-14"
-                       name="checkbox-name-6">
+        <div fd-form-item>
+            <label fd-form-label for="checkbox-18" [checkbox]="true">
+                <input fd-form-control formControlName="secondOption" type="checkbox" id="checkbox-18"
+                       name="checkbox-name-7">
                 Option 2
             </label>
         </div>
-        <div fd-form-item [isCheck]="true">
-            <label fd-form-label for="checkbox-15">
-                <input fd-form-control formControlName="thirdOption" type="checkbox" id="checkbox-15"
-                       name="checkbox-name-6">
+        <div fd-form-item>
+            <label fd-form-label for="checkbox-19" [checkbox]="true">
+                <input fd-form-control formControlName="thirdOption" type="checkbox" id="checkbox-19"
+                       name="checkbox-name-7">
                 Option 3
             </label>
         </div>
-    </div>
+    </fieldset>
 </form>
 <br>
 Option 1 Value: {{ customForm.controls.firstOption.value }} Disabled: {{ customForm.controls.firstOption.disabled }} <br>

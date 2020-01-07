@@ -1,5 +1,7 @@
-import { Input, ElementRef, Component, Directive } from '@angular/core';
+import { Input, ElementRef, Directive } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { FormStates } from './form-states';
+
 
 /**
  * Directive intended for use on form controls.
@@ -17,39 +19,43 @@ export class FormControlDirective extends AbstractFdNgxClass {
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `error`, `warning` or blank for default.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: string;
+    state: FormStates;
+
+    /**
+     * Whether form is in compact mode
+     */
+    @Input()
+    compact: boolean = false;
 
 
     @Input()
     type: string;
 
     /** @hidden */
-    _setProperties() {
-
-        this._addClassToElement('fd-form-control');
+    _setProperties(): void {
         if (this.state) {
             this._addClassToElement('is-' + this.state);
         }
 
         switch (this.type) {
             case 'checkbox': {
-                this._addClassToElement('fd-checkbox');
+                this._addControlClass('fd-checkbox');
                 break;
             }
             case 'radio': {
-                this._addClassToElement('fd-radio');
+                this._addControlClass('fd-radio');
                 break;
             }
             default: {
                 if (this.getElementTag() === 'input') {
-                    this._addClassToElement('fd-input');
+                    this._addControlClass('fd-input');
                 } else if (this.getElementTag() === 'textarea') {
-                    this._addClassToElement('fd-textarea');
+                    this._addControlClass('fd-textarea');
                 } else if (this.getElementTag() === 'select') {
-                    this._addClassToElement('fd-form-select');
+                    this._addControlClass('fd-form-select');
                 }
                 break;
             }
@@ -61,9 +67,18 @@ export class FormControlDirective extends AbstractFdNgxClass {
         super(elementRef);
     }
 
+    /** @hidden */
     private getElementTag(): string {
         if (this.elementRef && this.elementRef.nativeElement) {
             return this.elementRef.nativeElement.tagName.toLocaleLowerCase();
+        }
+    }
+
+    /** @hidden */
+    private _addControlClass(className: string): void {
+        this._addClassToElement(className);
+        if (this.compact) {
+            this._addClassToElement('${className}--compact`');
         }
     }
 }

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Input, Component, ViewEncapsulation } from '@angular/core';
 import { LocalizationEditorItemComponent } from '../localization-editor-item/localization-editor-item.component';
+import { FormStates } from '../../form/form-control/form-states';
 
 /**
  *  Component that represents the field which is always visible and is rendered outside the popover.
@@ -22,4 +23,11 @@ export class LocalizationEditorMainComponent extends LocalizationEditorItemCompo
      * This variable is controlled by parent component
      * */
     expanded: boolean;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 }

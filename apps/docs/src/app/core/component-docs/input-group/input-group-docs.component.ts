@@ -4,8 +4,10 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as inputGroupButtonSrc from '!raw-loader!./examples/input-group-button-example.component.html';
 import * as inputGroupIconSrc from '!raw-loader!./examples/input-group-icon-example.component.html';
-import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example.component.html';
-import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example.component.html';
+import * as inputGroupNumberSrc from '!raw-loader!./examples/input-group-number-example/input-group-number-example.component.html';
+import * as inputGroupNumberSrcTs from '!raw-loader!./examples/input-group-number-example/input-group-number-example.component.ts';
+import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.html';
+import * as inputGroupSearchSrcTs from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.ts';
 import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
 import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
 import * as inputGroupTscode from '!raw-loader!./examples/input-group-examples.component.ts';
@@ -13,6 +15,8 @@ import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example
 import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example.component.html';
 import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
 import * as formInputScssSrc from '!raw-loader!./examples/input-group-form-example.component.scss';
+import * as statesInputGroupTsCode from '!raw-loader!./examples/input-group-states-example/input-group-states-example.component.ts';
+import * as statesInputHtml from '!raw-loader!./examples/input-group-states-example/input-group-states-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -48,7 +52,11 @@ export class InputGroupDocsComponent implements OnInit {
                     },
                     button: {
                         type: 'boolean'
-                    }
+                    },
+                    state: {
+                        type: 'string',
+                        enum: ['valid', 'invalid', 'information', 'warning']
+                    },
                 }
             },
             state: {
@@ -118,8 +126,7 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupNumberSrc,
             fileName: 'input-group-number-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
+            typescriptFileCode: inputGroupNumberSrcTs,
             component: 'InputGroupNumberExampleComponent'
         }
     ];
@@ -129,8 +136,7 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupSearchSrc,
             fileName: 'input-group-search-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
+            typescriptFileCode: inputGroupSearchSrcTs,
             component: 'InputGroupSearchExampleComponent'
         }
     ];
@@ -169,6 +175,16 @@ export class InputGroupDocsComponent implements OnInit {
             secondFile: 'input-group-examples',
             typescriptFileCode: inputGroupTscode,
             component: 'InputGroupComplexExampleComponent'
+        }
+    ];
+
+    statesInput: ExampleFile[] = [
+        {
+            language: 'html',
+            code: statesInputHtml,
+            fileName: 'input-group-states-example',
+            typescriptFileCode: statesInputGroupTsCode,
+            component: 'InputGroupStatesExampleComponent'
         }
     ];
 

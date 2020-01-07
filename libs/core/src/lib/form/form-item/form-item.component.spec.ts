@@ -4,13 +4,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<div #componentElement fd-form-item [isCheck]="check" [isInline]="inline">FormItem</div>'
+    template: '<div #componentElement fd-form-item [horizontal]="horizontal" [isInline]="inline">FormItem</div>'
 })
 export class TestComponent {
     @ViewChild('componentElement', { read: ElementRef, static: false })
     ref: ElementRef;
 
-    check: boolean = false;
+
+    horizontal: boolean = false;
 
     inline: boolean = false;
 }
@@ -43,10 +44,10 @@ describe('FormItemComponent', () => {
         expect(component.ref.nativeElement.className).toBe('fd-form-item');
     });
 
-    it('should support isCheck', () => {
-        component.check = true;
+    it('should support horizontal', () => {
+        component.horizontal = true;
         fixture.detectChanges();
-        expect(component.ref.nativeElement.className).toContain('fd-form-item--check');
+        expect(component.ref.nativeElement.className).toContain('fd-form-item--horizontal');
     });
 
     it('should support isInline', () => {

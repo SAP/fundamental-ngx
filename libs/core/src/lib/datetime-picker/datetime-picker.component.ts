@@ -23,6 +23,7 @@ import { DateTimeFormatParser } from './format/datetime-parser';
 import { FdDate } from '../calendar/models/fd-date';
 import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { FdDatetime } from './models/fd-datetime';
+import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
 
 /**
@@ -164,6 +165,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     allowNull: boolean = true;
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
+
     /** Event thrown every time calendar active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -253,7 +261,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     validate(control: AbstractControl): {
         [key: string]: any
     } {
-        return this.isCurrentModelValid() ? null : {
+        return ( this.isCurrentModelValid() && !this.isInvalidDateInput ) ? null : {
             dateValidation: {
                 valid: false
             }
@@ -421,6 +429,8 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.date = new FdDatetime(this.selectedDate, this.time);
             this.onChange(fdTimeDate);
             this.refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
+        } else {
+            this.onChange(this.date);
         }
         if (!date && this.allowNull) {
             this.isInvalidDateInput = false;

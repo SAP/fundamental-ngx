@@ -1,10 +1,13 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
         <div class="fd-docs-search">
-            <fd-input-group-search
+            <fd-input-group
                 [disabled]="false"
                 [(ngModel)]="search"
-                [placeholder]="'Search'">
-            </fd-input-group-search>
+                [glyph]="'decline'"
+                [button]="true"
+                [placeholder]="'Search'"
+                (addOnButtonClicked)="search = ''">
+            </fd-input-group>
         </div>
         <div class="fd-docs-sidebar-content">
             <nav *ngFor="let section of sections">

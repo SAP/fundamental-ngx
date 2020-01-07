@@ -16,6 +16,7 @@ import { CalendarService } from '../calendar/calendar.service';
 import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
 import { DatePipe } from '@angular/common';
+import { FormStates } from '../form/form-control/form-states';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -128,6 +129,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Whether the date picker is disabled. */
     @Input()
     disabled: boolean;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** Fired when a new date is selected. */
     @Output()

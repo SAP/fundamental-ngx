@@ -4,7 +4,7 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     Directive,
-    ElementRef, EmbeddedViewRef, EventEmitter, HostListener,
+    ElementRef, EmbeddedViewRef, EventEmitter, HostBinding, HostListener,
     Injector, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges,
     TemplateRef
 } from '@angular/core';
@@ -60,6 +60,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     /** Whether the popover is disabled. */
     @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
     disabled: boolean = false;
 
     /** Whether the popover should close when a click is made outside its boundaries. */

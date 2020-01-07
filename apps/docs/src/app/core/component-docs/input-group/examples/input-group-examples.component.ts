@@ -13,26 +13,6 @@ export class InputGroupButtonExampleComponent {}
 export class InputGroupIconExampleComponent {}
 
 @Component({
-    selector: 'fd-input-group-number-example',
-    templateUrl: './input-group-number-example.component.html'
-})
-export class InputGroupNumberExampleComponent {
-
-    numberValue = '123';
-
-}
-
-@Component({
-    selector: 'fd-input-group-search-example',
-    templateUrl: './input-group-search-example.component.html'
-})
-export class InputGroupSearchExampleComponent {
-
-    searchTerm = 'Search Term';
-
-}
-
-@Component({
     selector: 'fd-input-group-text-example',
     templateUrl: './input-group-text-example.component.html'
 })

@@ -33,7 +33,8 @@ export class PlatformSelectTypesDefaultExampleComponent implements OnInit {
             label: item.name + item.id,
             value: item,
             triggerValue: '( ' + item.id + ' )',
-            disabled: item.id === 'B' ? true : false
+            disabled: item.id === 'B' ? true : false,
+            icon: ''
         };
     });
 

@@ -4,15 +4,23 @@
         <button fd-button [glyph]="'add'" class="fd-image--circle"></button>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-side-nav *ngFor="let component of componentWithTasks">
-            <fd-side-nav-item>
-                <a fd-side-nav-link [hasSublist]="true" (onSubListOpenChange)="popoverComponent.updatePopover()">{{component.name}}</a>
-                <div fd-side-nav-sublist>
-                    <div fd-side-nav-subitem *ngFor="let task of component.tasks">
-                        <a fd-side-nav-sublink>{{task.name}}</a>
-                    </div>
-                </div>
-            </fd-side-nav-item>
+        <fd-side-nav>
+            <div fd-side-nav-main>
+                <ul fd-nested-list [textOnly]="true">
+                    <li fd-nested-list-item *ngFor="let component of componentWithTasks" (expandedChange)="updatePopover()">
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-title>{{ component.name }}</span>
+                        </a>
+                        <ul fd-nested-list *ngIf="component.tasks?.length > 0">
+                            <li fd-nested-list-item *ngFor="let task of component.tasks">
+                                <a fd-nested-list-link>
+                                    <span fd-nested-list-title>{{ task.name }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </fd-side-nav>
     </fd-popover-body>
 </fd-popover>

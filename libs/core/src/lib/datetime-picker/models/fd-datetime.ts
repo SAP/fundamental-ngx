@@ -51,7 +51,10 @@ export class FdDatetime {
         if (!this.time ||
             this.hour === undefined ||
             this.minute === undefined ||
-            this.second === undefined
+            this.second === undefined ||
+            isNaN(this.hour) ||
+            isNaN(this.minute) ||
+            isNaN(this.second)
         ) {
             return false;
         }

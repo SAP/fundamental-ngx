@@ -40,19 +40,19 @@
           </ng-template>
         </ng-container>
         <ng-container *ngSwitchCase="'boolean'">
-          <div fd-form-item [isCheck]="true" class="form-group checkbox">
-            <input fd-form-control type="checkbox" [formControl]="control.control" [id]="control.key">
-            <label class="tn-form__label" [for]="control.key">
-              {{ control.key }}
-            </label>
+          <div fd-form-item>
+              <label fd-form-label [for]="'playground' + control.key" [checkbox]="true">
+                  {{ control.key }}
+                  <input fd-form-control type="checkbox" [formControl]="control.control" [id]="'playground' + control.key">
+              </label>
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'enum'">
-          <div fd-form-item [isCheck]="true" class="form-group checkbox">
-            <input fd-form-control type="checkbox" [formControl]="control.control">
-            <label class="tn-form__label">
-              {{ control.key }}
-            </label>
+          <div fd-form-item>
+              <label fd-form-label [checkbox]="true" [for]="'playground' + control.key">
+                  {{ control.key }}
+                  <input fd-form-control type="checkbox" [formControl]="control.control" [id]="'playground' + control.key">
+              </label>
           </div>
         </ng-container>
       </ng-container>

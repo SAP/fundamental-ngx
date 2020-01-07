@@ -1,5 +1,5 @@
 <form [formGroup]="customForm">
-    <div fd-form-set class="flex-form">
+    <fieldset fd-fieldset class="flex-form">
         <div fd-form-item>
             <label fd-form-label for="form-combo-1">Select Fruit:</label>
             <fd-combobox
@@ -19,7 +19,7 @@
             Disabled: {{ customForm.controls.disabledComboControl.disabled }}<br/>
             Selected Value: {{ customForm.controls.disabledComboControl.value }}
         </div>
-    </div>
+    </fieldset>
 </form>
 
 

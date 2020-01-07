@@ -3,7 +3,7 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy
+    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
@@ -42,6 +42,7 @@ export class PopoverComponent {
 
     /** Whether the popover is disabled. */
     @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
     disabled: boolean = false;
 
     /** Whether the popover should be treated as a dropdown. */
