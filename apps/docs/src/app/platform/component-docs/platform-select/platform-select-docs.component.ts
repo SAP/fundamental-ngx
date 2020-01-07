@@ -6,6 +6,7 @@ import { PlatformSelectTypesDefaultExampleComponent } from './platform-select-ex
 
 import { PlatformSelectTypesNoBorderExampleComponent } from './platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './platform-select-examples/platform-select-types-split-example.component';
+import { PlatformSelectTypesWithIconExampleComponent } from './platform-select-examples/platform-select-types-with-icon-example.component';
 
 import * as platformselectDefaultTypesSrc from '!raw-loader!./platform-select-examples/platform-select-types-default-example.component.html';
 import * as platformselectDefaultTypesTsSrc from '!raw-loader!./platform-select-examples/platform-select-types-default-example.component.ts';
@@ -15,6 +16,9 @@ import * as platformselectNoBorderTypesTsSrc from '!raw-loader!./platform-select
 
 import * as platformselectSplitTypesSrc from '!raw-loader!./platform-select-examples/platform-select-types-split-example.component.html';
 import * as platformselectSplitTypesTsSrc from '!raw-loader!./platform-select-examples/platform-select-types-split-example.component.ts';
+
+import * as platformselectWithIconTypesSrc from '!raw-loader!./platform-select-examples/platform-select-types-with-icon-example.component.html';
+import * as platformselectWithIconTypesTsSrc from '!raw-loader!./platform-select-examples/platform-select-types-with-icon-example.component.ts';
 
 @Component({
     selector : 'fd-select-docs',
@@ -58,6 +62,19 @@ export class PlatformSelectDocsComponent implements OnInit {
             code: platformselectSplitTypesTsSrc,
             fileName: 'platform-select-types-split-example',
             component: 'PlatformSelectTypesSplitExampleComponent'
+        }
+    ];
+    WithIconselectType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformselectWithIconTypesSrc,
+            fileName: 'platform-select-types-split-example'
+        },
+        {
+            language: 'typescript',
+            code: platformselectWithIconTypesTsSrc,
+            fileName: 'platform-select-types-with-icon-example',
+            component: 'PlatformSelectTypesWithIconExampleComponent'
         }
     ];
 
