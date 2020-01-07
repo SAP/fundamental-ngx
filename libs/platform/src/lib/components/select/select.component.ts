@@ -26,6 +26,7 @@ export interface SelectItem {
     value: any;
     disabled?: boolean;
 
+    icon: string;
     /**
      * Trigger values is a text for selected item
      */
