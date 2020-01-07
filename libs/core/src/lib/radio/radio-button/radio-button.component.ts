@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
-export type state = 'valid' | 'invalid' | 'warning' | 'default' | 'information';
+export type stateType = 'valid' | 'invalid' | 'warning' | 'default' | 'information';
 @Component({
     selector: 'fd-radio-button',
     templateUrl: './radio-button.component.html',
@@ -14,17 +15,32 @@ export type state = 'valid' | 'invalid' | 'warning' | 'default' | 'information';
         }
     ]
 })
-export class RadioButtonComponent implements ControlValueAccessor {
+export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, ControlValueAccessor {
+    class: string;
+
     @ViewChild('inputElement', { static: false })
     inputElement: ElementRef;
 
     /** @hidden */
     actualValue: any;
 
-    @Input() compact: boolean = false;
-    @Input() state: state = 'default';
+    private _compact: boolean = false;
+    @Input() set compact(isCompact: boolean) {
+        this._compact = isCompact;
+        this.buildComponentCssClass();
+    }
 
-    @Input() disabled: boolean = false;
+    private _state: stateType = 'default';
+    @Input() set state(newState: stateType) {
+        this._state = newState;
+        this.buildComponentCssClass();
+    }
+
+    private _disabled: boolean = false;
+    @Input() set disabled(isDisabled: boolean) {
+        this._disabled = isDisabled;
+        this.buildComponentCssClass();
+    }
 
     @Input() id: string;
 
@@ -33,13 +49,13 @@ export class RadioButtonComponent implements ControlValueAccessor {
     @Input() value: any;
 
     /** @hidden */
-    onChange: any = (selected: any) => { };
+    onChange: any = (selected: any) => {};
 
     /** @hidden */
-    onTouched: any = () => { };
+    onTouched: any = () => {};
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) { }
+    constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
     // ControlValueAccessor implementation
     /** @hidden */
@@ -76,13 +92,22 @@ export class RadioButtonComponent implements ControlValueAccessor {
         this.onChange(value);
     }
 
+    ngAfterViewInit(): void {
+        this.buildComponentCssClass();
+    }
+
     // this method is going to be updated when PR #1770 will be merged
     /** @hidden */
-    get buildComponentCssClass(): string {
+    @applyCssClass
+    buildComponentCssClass(): string {
         return [
             'fd-radio',
-            this.compact && 'fd-radio--compact',
-            this.state && this.state !== 'default' && `is-${this.state}`
+            this._compact ? 'fd-radio--compact' : '',
+            this._state !== 'default' ? `is-${this._state}` : ''
         ].join(' ');
+    }
+
+    elementRef(): ElementRef<any> {
+        return this.inputElement;
     }
 }

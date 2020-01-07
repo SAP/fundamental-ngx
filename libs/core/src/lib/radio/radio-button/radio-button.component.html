@@ -1,8 +1,7 @@
 <input
     type="radio"
     class="fd-radio"
-    [ngClass]="buildComponentCssClass"
-    [disabled]="disabled"
+    [disabled]="_disabled"
     [id]="id"
     [name]="name"
     [ngModel]="actualValue"
