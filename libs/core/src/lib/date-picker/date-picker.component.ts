@@ -387,7 +387,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
             let fdDate = this.dateAdapter.parse(date);
 
-            /**Check if dates are equal, if dates are the same there is no need to make any changes */
+            /** Check if dates are equal, if so, there is no need to make any changes */
             if (!CalendarService.datesEqual(fdDate, this.selectedDate)) {
                 this.isInvalidDateInput = !this.isSingleModelValid(fdDate);
 
