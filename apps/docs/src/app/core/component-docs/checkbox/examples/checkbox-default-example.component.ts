@@ -10,4 +10,3 @@ import {Component} from '@angular/core';
 export class CheckboxDefaultExampleComponent {
     checkboxValue = false;
 }
-

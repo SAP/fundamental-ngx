@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
     selector: 'fd-checkbox-reactive-forms-example',
     template: `
         <form [formGroup]="registrationForm">
-            <fd-checkbox formControlName="acceptAll" [tristate]="true" label="Accept all"></fd-checkbox>
+            <fd-checkbox formControlName="acceptAll" [tristate]="true" [tristateSelectable]="false" label="Accept all"></fd-checkbox>
             <fieldset formGroupName="agreements">
                 <fd-checkbox formControlName="termsAndConditions" label="I accept Terms and Conditions"></fd-checkbox>
                 <fd-checkbox formControlName="marketing" label="I want to receive Marketing Materials"></fd-checkbox>

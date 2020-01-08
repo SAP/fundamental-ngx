@@ -1,5 +1,5 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, Renderer2} from '@angular/core';
-import {CheckboxControlValueAccessor, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FdCheckboxValues} from './fd-checkbox-values.interface';
 
 let checkboxUniqueId: number = 0;
@@ -18,17 +18,15 @@ let checkboxUniqueId: number = 0;
 })
 export class CheckboxComponent implements ControlValueAccessor {
 
-    /** Sets id property of input, binds input with input label */
+    /** Sets [id] property of input, binds input with input label [for] property. */
     @Input()
     inputId: string = `fd-checkbox-${checkboxUniqueId++}`;
 
-    /** State of input, changes visual appearance of input.
-     * Available states: 'valid', 'invalid', 'info', 'warning'
-     * */
+    /** State of input, changes visual appearance of input. */
     @Input()
     state: 'valid' | 'invalid' | 'info' | 'warning';
 
-    /** Sets name property of input */
+    /** Sets [name] property of input */
     @Input()
     name: string;
 
@@ -36,11 +34,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     label: string;
 
-    /** Allows to disable/enable input */
+    /** Allows to disable/enable control */
     @Input()
     disabled: boolean;
 
-    /** Allows to minimize input to compact mode */
+    /** Allows to minimize control to compact mode */
     @Input()
     compact: boolean;
 
@@ -92,6 +90,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     public nextValue(): void {
+
+        if (this.disabled) {
+            return;
+        }
+
         switch (this.checkboxState) {
             case 'checked':
                 this.checkboxValue = this.values.falseValue;
@@ -117,8 +120,6 @@ export class CheckboxComponent implements ControlValueAccessor {
             this.checkboxState = 'unchecked';
         } else if (this.tristate && this.checkboxValue === this.values.thirdStateValue) {
             this.checkboxState = 'indeterminate';
-        } else {
-            this.checkboxState = 'unchecked';
         }
     }
 }

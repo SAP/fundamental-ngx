@@ -56,6 +56,9 @@ export const API_FILES = {
     combobox: [
         'ComboboxComponent'
     ],
+    checkbox: [
+        'CheckboxComponent'
+    ],
     datePicker: [
         'DatePickerComponent',
         'DateFormatParser',

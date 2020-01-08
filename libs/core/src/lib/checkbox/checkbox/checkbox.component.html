@@ -5,9 +5,10 @@
     [name]="name"
     [disabled]="disabled"
     [checked]="isChecked"
+    [value]="checkboxValue"
     [indeterminate]="isIndeterminate"
     [class.fd-checkbox--compact]="compact"
-    [ngClass]="state ? 'is-' + state : ''"
+    [ngClass]="(state ? 'is-' + state : '')"
     (change)="nextValue()"
 >
 <label class="fd-checkbox__label" [for]="inputId">
