@@ -18,77 +18,94 @@ let checkboxUniqueId: number = 0;
 })
 export class CheckboxComponent implements ControlValueAccessor {
 
-    /** Sets [id] property of input, binds input with input label [for] property. */
+    /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
     inputId: string = `fd-checkbox-${checkboxUniqueId++}`;
 
-    /** State of input, changes visual appearance of input. */
+    /** State of control, changes visual appearance of control. */
     @Input()
     state: 'valid' | 'invalid' | 'info' | 'warning';
 
-    /** Sets [name] property of input */
+    /** Sets [name] property of input. */
     @Input()
     name: string;
 
-    /** Sets content of input label */
+    /** Sets text of control label. */
     @Input()
     label: string;
 
-    /** Allows to disable/enable control */
+    /** Allows to disable/enable control. */
     @Input()
     disabled: boolean;
 
-    /** Allows to minimize control to compact mode */
+    /** Allows to minimize control to compact mode. */
     @Input()
     compact: boolean;
 
-    /** Enables third state of the input */
+    /** Enables controls third state. */
     @Input()
     tristate: boolean;
 
-    /** Allows to prevent user from manually selecting third state of the input */
+    /** Allows to prevent user from manually selecting controls third state. */
     @Input()
     tristateSelectable: boolean = true;
 
-    /** Values returned by checkbox.
-     * By default checkbox returns true(checked), false(unchecked), null(third state) values.*/
+    /** Values returned by control. */
     @Input()
     values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
 
-    /** Emits new checkbox value whenever its changed */
+    /** Emits new control value whenever it's changed. */
     @Output()
     onChange: EventEmitter<any> = new EventEmitter<any>();
 
+    /** Stores current checkbox value. */
     public checkboxValue: any;
+    /** Stores current checkbox state. */
     public checkboxState: 'checked' | 'unchecked' | 'indeterminate';
+    /** @hidden */
     public onTouched = () => {};
+    /** @hidden */
     public onValueChange = (newValue) => {};
 
+    /** @hidden */
     get isChecked(): boolean {
         return this.checkboxState === 'checked';
     }
 
+    /** @hidden */
     get isIndeterminate(): boolean {
         return this.checkboxState === 'indeterminate';
     }
 
+    /** @hidden ControlValueAccessor interface
+     * - sets new control value
+     * - updates control state
+     * */
     writeValue(value: any): void {
         this.checkboxValue = value;
         this._setState()
     }
 
+    /** @hidden ControlValueAccessor interface */
     registerOnChange(fn: any): void {
         this.onValueChange = fn;
     }
 
+    /** @hidden ControlValueAccessor interface */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    setDisabledState(disabled: boolean) {
+    /** @hidden Called by FormControl */
+    setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
     }
 
+    /** Based on current control state:
+     * - sets next control value
+     * - emits new control value
+     * - updates control state based on new control value
+     * */
     public nextValue(): void {
 
         if (this.disabled) {
@@ -113,6 +130,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         this.onChange.emit(this.checkboxValue);
     }
 
+    /** Based on current control value sets new control state. */
     private _setState(): void {
         if (this.checkboxValue === this.values.trueValue) {
             this.checkboxState = 'checked';
