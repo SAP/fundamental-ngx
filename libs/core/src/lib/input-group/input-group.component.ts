@@ -76,7 +76,7 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     addOnText: string;
 
-    /** Whether Button should be focusable */
+    /** Whether AddOn Button should be focusable */
     @Input()
     buttonFocusable: boolean = true;
 

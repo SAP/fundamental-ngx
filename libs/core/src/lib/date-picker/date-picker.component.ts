@@ -137,6 +137,12 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     @Input()
     state: FormStates;
 
+    /**
+     * Whether AddOn Button should be focusable, set to true by default
+     */
+    @Input()
+    buttonFocusable: boolean = true;
+
     /** Fired when a new date is selected. */
     @Output()
     public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();

@@ -24,6 +24,7 @@
                     <button [disabled]="disabled" fd-button [glyph]="'date-time'"
                             [options]="'light'"
                             [compact]="compact"
+                            [attr.tabindex]="buttonFocusable ? 0 : -1"
                             (click)="togglePopover()" [attr.aria-label]="displayDatetimeToggleLabel"
                             [attr.aria-expanded]="isOpen">
                     </button>

@@ -153,6 +153,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     displayFn: Function = this.defaultDisplay;
 
+    /** Whether AddOn Button should be focusable, set to false by default */
+    @Input()
+    buttonFocusable: boolean = false;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
