@@ -8,8 +8,21 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 })
 export class RadioFormGroupExampleComponent {
+
+    radioInput = {
+        name: 'radio-input-form-1',
+        formControlName: 'radioInput',
+        values: [1, 2, 3]
+    }
+
+    disabledRadio = {
+        name: 'radio-input-form-2',
+        formControlName: 'disabledRadio',
+        values: ['1', '2', '3']
+    }
+
     customForm = new FormGroup({
-        radioInput: new FormControl({ value: 'option1', disabled: false }),
-        disabledRadio: new FormControl({ value: 'option13', disabled: true })
+        radioInput: new FormControl({ value: 1, disabled: false }),
+        disabledRadio: new FormControl({ value: '1', disabled: true })
     });
 }
