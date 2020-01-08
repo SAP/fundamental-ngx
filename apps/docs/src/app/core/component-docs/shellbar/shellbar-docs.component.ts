@@ -47,13 +47,13 @@ export class ShellbarDocsComponent {
         {
             language: 'html',
             code: advancedShellbarHtml,
-            fileName: 'shellbar-advanced/shellbar-advanced-example'
+            fileName: 'shellbar-advanced-example'
         },
         {
             language: 'typescript',
             component: 'ShellbarAdvancedExampleComponent',
             code: advancedShellbarTs,
-            fileName: 'shellbar-advanced/shellbar-advanced-example'
+            fileName: 'shellbar-advanced-example'
         }
     ];
 
@@ -61,13 +61,13 @@ export class ShellbarDocsComponent {
         {
             language: 'html',
             code: sideNavShellbarHtml,
-            fileName: 'shellbar-side-nav'
+            fileName: 'shellbar-side-nav-example'
         },
         {
             language: 'typescript',
-            component: 'ShellbarAdvancedExampleComponent',
+            component: 'ShellbarSideNavExampleComponent',
             code: sideNavShellbarTs,
-            fileName: 'shellbar-side-nav'
+            fileName: 'shellbar-side-nav-example'
         }
     ];
 
