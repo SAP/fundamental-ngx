@@ -210,42 +210,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     };
 
     /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    disableRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    disableRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
      * Function used to block certain dates in the calendar.
      * @param fdDate FdDate
      */
@@ -453,7 +417,15 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     private isModelValid(fdDateTime: FdDatetime): boolean {
         return fdDateTime &&
             fdDateTime instanceof FdDatetime &&
-            fdDateTime.isDateValid() && fdDateTime.isTimeValid();
+            this.isDateValid(fdDateTime) && fdDateTime.isTimeValid();
+    }
+
+    /** Method that provides information if Date is valid */
+    private isDateValid(fdDateTime: FdDatetime): boolean {
+        return fdDateTime && fdDateTime.isDateValid() &&
+            !this.disableFunction(fdDateTime.date) &&
+            !this.blockFunction(fdDateTime.date)
+        ;
     }
 
     private setInput(fdDateTime: FdDatetime): void {

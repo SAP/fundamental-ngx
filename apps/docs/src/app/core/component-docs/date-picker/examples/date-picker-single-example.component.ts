@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core';
+import { Component, ViewChild } from '@angular/core';
+import { DatePickerComponent, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-picker-single-example',
@@ -13,4 +13,10 @@ import { FdDate } from '@fundamental-ngx/core';
 })
 export class DatePickerSingleExampleComponent {
     date = FdDate.getToday();
+
+    @ViewChild(DatePickerComponent, { static: false }) datePicker: DatePickerComponent;
+
+    isValid(): boolean {
+        return this.datePicker && this.datePicker.isModelValid();
+    }
 }

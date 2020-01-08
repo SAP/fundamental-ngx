@@ -140,9 +140,9 @@ export class FdDate {
         if (this.year <= 0 ||
             this.month < 1 ||
             this.month > 12 ||
-            isNaN(this.year) ||
-            isNaN(this.month) ||
-            isNaN(this.day)
+            this.isInvalid(this.year) ||
+            this.isInvalid(this.month) ||
+            this.isInvalid(this.day)
         ) {
             return false;
         }
@@ -152,6 +152,10 @@ export class FdDate {
         }
 
         return true;
+    }
+
+    private isInvalid(num: number): boolean {
+        return !num && num === 0;
     }
 
 }
