@@ -8,6 +8,7 @@
           [type]="type">
         <button class="fd-localization-editor__button"
                 fd-button aria-haspopup="true"
+                [attr.tabindex]="buttonFocusable ? 0 : -1"
                 [options]="'light'"
                 [compact]="compact"
                 [attr.aria-expanded]="expanded">

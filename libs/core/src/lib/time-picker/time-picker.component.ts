@@ -98,6 +98,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     state: FormStates;
 
+    /**
+     * Whether AddOn Button should be focusable, set to true by default
+     */
+    @Input()
+    buttonFocusable: boolean = true;
+
     /** @hidden Whether the input time is valid. Internal use. */
     isInvalidTimeInput: boolean = false;
 
