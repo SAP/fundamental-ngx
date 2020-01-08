@@ -5,13 +5,12 @@
     [fillControlMode]="fillControlMode"
     [appendTo]="appendTo"
     class="fd-select-popover-custom"
-    [disabled]="disabled || loading"
->
+    [disabled]="disabled || loading">
     <fd-popover-control>
         <ng-container *ngIf="triggerTemplate">
             <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
         </ng-container>
-        <ng-container *ngIf="!triggerTemplate">
+        <div *ngIf="!triggerTemplate" [ngClass]="{ loading: loading }">
             <button class="fd-select-button-custom fd-button"
                     aria-haspopup="true"
                     [attr.aria-expanded]="isOpen"
