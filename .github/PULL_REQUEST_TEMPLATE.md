@@ -12,3 +12,5 @@ Documentation checklist:
 - [ ] update `README.md`
 - [ ] [Breaking Changes Wiki](https://github.com/SAP/fundamental-ngx/wiki/Breaking-Changes)
 - [ ] Documentation Examples
+- [ ] Stackblitz works for all examples
+
