@@ -30,4 +30,10 @@ export class LocalizationEditorMainComponent extends LocalizationEditorItemCompo
      */
     @Input()
     state: FormStates;
+
+    /**
+     * Whether AddOn Button should be focusable, set to true by default
+     */
+    @Input()
+    buttonFocusable: boolean = true;
 }

@@ -172,6 +172,12 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     @Input()
     state: FormStates;
 
+    /**
+     * Whether AddOn Button should be focusable, set to true by default
+     */
+    @Input()
+    buttonFocusable: boolean = true;
+
     /** Event thrown every time calendar active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
