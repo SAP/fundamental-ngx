@@ -1,4 +1,4 @@
-import {compareObjects} from '@fundamental-ngx/core';
+import {compareObjects} from '../functions';
 
 describe('compareObjects', () => {
     interface TestValue {
