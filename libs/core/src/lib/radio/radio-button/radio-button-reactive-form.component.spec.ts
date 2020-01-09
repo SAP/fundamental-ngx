@@ -2,34 +2,48 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
 import { Component, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     template: `
-        <fd-radio-button #radio1 [(ngModel)]="selectedValue" [value]="1" name="radio"> </fd-radio-button>
-        <fd-radio-button #radio2 [(ngModel)]="selectedValue" [value]="2" name="radio"> </fd-radio-button>
+        <form [formGroup]="radioForm">
+            <fd-radio-button
+                #radio1
+                [selectedValue]="radioForm.controls.radioInput.value"
+                [value]="1"
+                name="radio"
+            ></fd-radio-button>
+            <fd-radio-button
+                #radio2
+                [selectedValue]="radioForm.controls.radioInput.value"
+                [value]="2"
+                name="radio"
+            ></fd-radio-button>
+        </form>
     `
 })
-class TestRadioButtonComponent {
-    selectedValue = 1;
-
+class TestRadioButtonComponentReactiveForms {
     @ViewChild('radio1', { static: false }) radioButton1: RadioButtonComponent;
     @ViewChild('radio2', { static: false }) radioButton2: RadioButtonComponent;
+
+    radioForm = new FormGroup({
+        radioInput: new FormControl({ value: 1, disabled: false })
+    });
 }
 
-describe('RadioButtonComponent', () => {
-    let component: TestRadioButtonComponent;
-    let fixture: ComponentFixture<TestRadioButtonComponent>;
+describe('RadioButtonComponent reactive forms', () => {
+    let component: TestRadioButtonComponentReactiveForms;
+    let fixture: ComponentFixture<TestRadioButtonComponentReactiveForms>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [RadioButtonComponent, TestRadioButtonComponent]
+            imports: [FormsModule, ReactiveFormsModule],
+            declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveForms]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestRadioButtonComponent);
+        fixture = TestBed.createComponent(TestRadioButtonComponentReactiveForms);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

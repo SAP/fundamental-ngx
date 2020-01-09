@@ -1,4 +1,14 @@
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Input, ViewChild, AfterViewInit, Self, ChangeDetectionStrategy } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    forwardRef,
+    Input,
+    ViewChild,
+    AfterViewInit,
+    Self,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -90,6 +100,13 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
         return this._name;
     }
 
+    get checked(): boolean {
+        if (this.value === undefined) {
+            return false;
+        }
+        return this.actualValue === this.value;
+    }
+
     /**
      * Set uniqueId to a radio button
      */
@@ -104,12 +121,10 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = (selected: any) => {
-    };
+    onChange: any = (selected: any) => {};
 
     /** @hidden */
-    onTouched: any = () => { };
-
+    onTouched: any = () => {};
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -136,26 +151,26 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     /** @hidden */
     labelClicked(): void {
         this.valueChange(this.value);
+        this._setFocusOnNativeElement();
     }
 
     /** @hidden */
     valueChange(value: any): void {
         this.actualValue = value;
 
-        this.setFocusOnNativeElement();
+        this._setNativeElementCheckedState();
 
-        this.changeDetectionRef.markForCheck();
+        this.changeDetectionRef.detectChanges();
         this.onChange(value);
     }
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) {
-    }
+    constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
         this.buildComponentCssClass();
-        this.checkMandatoryFields();
+        this._checkMandatoryFields();
     }
 
     /** @hidden */
@@ -174,13 +189,26 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     }
 
     /** @hidden */
-    private checkMandatoryFields() {
-        if (!this.name) { throw 'name field is required' };
-        if (!this.value) { throw 'value field is required' };
+    private _checkMandatoryFields() {
+        if (!this.name) {
+            throw 'name field is required';
+        }
+        if (!this.value) {
+            throw 'value field is required';
+        }
     }
 
     /** @hidden */
-    private setFocusOnNativeElement() {
-        if (this.inputElement) { this.inputElement.nativeElement.focus(); }
+    private _setFocusOnNativeElement() {
+        if (this.inputElement) {
+            this.inputElement.nativeElement.focus();
+        }
+    }
+
+    /** @hidden */
+    private _setNativeElementCheckedState() {
+        if (this.inputElement) {
+            this.inputElement.nativeElement.checked = this.checked;
+        }
     }
 }
