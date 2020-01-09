@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.13.0-rc.118",
+  "version": "0.13.0-rc.120",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "SAP Fundamental Styles, implemented in Angular",
@@ -83,7 +83,7 @@
     "@angular-devkit/build-angular": "^0.803.21",
     "@angular-devkit/build-ng-packagr": "^0.803.21",
     "@angular-devkit/core": "^7.3.9",
-    "@angular/cli": "^8.3.21",
+    "@angular/cli": "^8.3.22",
     "@angular/compiler-cli": "^8.2.7",
     "@angular/language-service": "^8.2.14",
     "@angularclass/hmr": "^2.1.3",
