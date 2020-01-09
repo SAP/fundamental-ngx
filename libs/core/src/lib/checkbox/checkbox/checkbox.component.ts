@@ -1,6 +1,7 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FdCheckboxValues} from './fd-checkbox-values.interface';
+import {compareObjects} from '@fundamental-ngx/core';
 
 let checkboxUniqueId: number = 0;
 
@@ -127,12 +128,18 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
-        if (this.checkboxValue === this.values.trueValue) {
+        if (this._compare(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
-        } else if (this.checkboxValue === this.values.falseValue) {
+        } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
-        } else if (this.tristate && this.checkboxValue === this.values.thirdStateValue) {
+        } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         }
+    }
+
+    private _compare(val1: any, val2: any): boolean {
+        return typeof val1 === 'object'
+            ? compareObjects(val1, val2)
+            : val1 === val2;
     }
 }
