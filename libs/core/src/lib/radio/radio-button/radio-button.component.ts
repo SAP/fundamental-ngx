@@ -6,7 +6,6 @@ import {
     Input,
     ViewChild,
     AfterViewInit,
-    Self,
     ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -121,7 +120,7 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = (selected: any) => {};
+    onChange: any = () => {};
 
     /** @hidden */
     onTouched: any = () => {};
