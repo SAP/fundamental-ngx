@@ -6,8 +6,15 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
     template: `
-        <fd-radio-button #radio1 [(ngModel)]="selectedValue" [value]="1" name="radio"> </fd-radio-button>
-        <fd-radio-button #radio2 [(ngModel)]="selectedValue" [value]="2" name="radio"> </fd-radio-button>
+        <fd-radio-button #radio1 state="valid" [(ngModel)]="selectedValue" [value]="1" name="radio"></fd-radio-button>
+        <fd-radio-button #radio2 state="invalid" [(ngModel)]="selectedValue" [value]="2" name="radio"></fd-radio-button>
+        <fd-radio-button
+            #radio3
+            [disabled]="true"
+            [(ngModel)]="selectedValue"
+            [value]="3"
+            name="radio"
+        ></fd-radio-button>
     `
 })
 class TestRadioButtonComponent {
@@ -15,6 +22,7 @@ class TestRadioButtonComponent {
 
     @ViewChild('radio1', { static: false }) radioButton1: RadioButtonComponent;
     @ViewChild('radio2', { static: false }) radioButton2: RadioButtonComponent;
+    @ViewChild('radio3', { static: false }) radioButton3: RadioButtonComponent;
 }
 
 describe('RadioButtonComponent', () => {
@@ -41,6 +49,7 @@ describe('RadioButtonComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+        expect(component.radioButton1.name).toContain('radio');
     });
 
     it('should have the value', async () => {
@@ -57,5 +66,20 @@ describe('RadioButtonComponent', () => {
 
         expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
         expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+    });
+
+    it('should have correct state', async () => {
+        await wait(fixture);
+
+        // value is accessed by [] because component doesn't have a getter for state by design
+        expect(component.radioButton1['_state']).toContain('valid');
+        expect(component.radioButton2['_state']).toContain('invalid');
+    });
+
+    it('should be disabled', async () => {
+        await wait(fixture);
+
+        expect(component.radioButton3['_disabled']).toBeTruthy();
+        expect(component.radioButton3.inputElement.nativeElement.disabled).toBeTruthy();
     });
 });
