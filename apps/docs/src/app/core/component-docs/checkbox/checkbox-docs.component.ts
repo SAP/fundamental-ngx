@@ -5,6 +5,7 @@ import * as checkboxTristateTsCode from '!raw-loader!./examples/checkbox-tristat
 import * as checkboxCustomValuesTsCode from '!raw-loader!./examples/checkbox-custom-values-example.component.ts';
 import * as checkboxReactiveFormsTsCode from '!raw-loader!./examples/checkbox-reactive-forms-example.component.ts';
 import * as checkboxStatesTsCode from '!raw-loader!./examples/checkbox-states-example.component.ts';
+import * as checkboxCustomLabelTsCode from '!raw-loader!./examples/checkbox-custom-label-example.component.ts';
 
 import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -55,6 +56,15 @@ export class CheckboxDocsComponent {
             fileName: 'checkbox-states-example',
             component: 'CheckboxStatesExampleComponent',
             code: checkboxStatesTsCode
+        }
+    ];
+
+    checkboxCustomLabel: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'checkbox-custom-label-example',
+            component: 'CheckboxCustomLabelExampleComponent',
+            code: checkboxCustomLabelTsCode
         }
     ];
 }

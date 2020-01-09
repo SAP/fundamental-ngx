@@ -351,12 +351,8 @@ import {
 import { TextareaFormGroupExampleComponent } from '../core/component-docs/textarea/examples/textarea-form-group-example.component';
 import { TextareaHeaderComponent } from '../core/component-docs/textarea/textarea-header/textarea-header.component';
 import { CheckboxHeaderComponent } from '../core/component-docs/checkbox/checkbox-header/checkbox-header.component';
-import { CheckboxReactiveFormsExampleComponent } from './component-docs/checkbox/examples/checkbox-reactive-forms-example.component';
-import { CheckboxDefaultExampleComponent } from './component-docs/checkbox/examples/checkbox-default-example.component';
-import { CheckboxTristateExampleComponent } from './component-docs/checkbox/examples/checkbox-tristate-example.component';
-import { CheckboxCustomValuesExampleComponent } from './component-docs/checkbox/examples/checkbox-custom-values-example.component';
-import { CheckboxStatesExampleComponent } from './component-docs/checkbox/examples/checkbox-states-example.component';
 import { CheckboxDocsComponent } from '../core/component-docs/checkbox/checkbox-docs.component';
+import { checkboxExampleComponents } from '../core/component-docs/checkbox/';
 import { RadioFormGroupExampleComponent } from '../core/component-docs/radio/examples/radio-form-group-example.component';
 import { RadioExamplesComponent } from '../core/component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from '../core/component-docs/radio/radio-docs.component';
@@ -503,11 +499,7 @@ import { TimeTwoDigitsExampleComponent } from './component-docs/time/examples/ti
         CalendarMondayStartExampleComponent,
         CalendarFormExamplesComponent,
         CalendarProgrammaticallyChangeExampleComponent,
-        CheckboxReactiveFormsExampleComponent,
-        CheckboxDefaultExampleComponent,
-        CheckboxCustomValuesExampleComponent,
-        CheckboxTristateExampleComponent,
-        CheckboxStatesExampleComponent,
+        checkboxExampleComponents,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,

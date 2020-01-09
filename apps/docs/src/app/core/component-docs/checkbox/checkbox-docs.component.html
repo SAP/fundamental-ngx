@@ -64,6 +64,20 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'checkbox-custom-label-example'" [componentName]="'checkbox'">
+    Checkbox with custom label
+</fd-docs-section-title>
+<description>
+    Checkbox label can by passed to component as external content using content projection mechanism. If external
+    content is provided value passed using <code>[label]</code> property is ignored.
+</description>
+<component-example [name]="'ex5'">
+    <fd-checkbox-custom-label-example></fd-checkbox-custom-label-example>
+</component-example>
+<code-example [exampleFiles]="checkboxCustomLabel"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'checkbox-states-example'" [componentName]="'checkbox'">
     Checkbox styling properties
 </fd-docs-section-title>
@@ -84,7 +98,7 @@
         </li>
     </ul>
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex6'">
     <fd-checkbox-states-example></fd-checkbox-states-example>
 </component-example>
 <code-example [exampleFiles]="checkboxStates"></code-example>
