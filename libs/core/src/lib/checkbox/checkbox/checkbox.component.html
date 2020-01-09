@@ -11,6 +11,8 @@
     [ngClass]="(state ? 'is-' + state : '')"
     (change)="nextValue()"
 >
-<label class="fd-checkbox__label" [for]="inputId">
+<label class="fd-checkbox__label"
+       [class.fd-checkbox__label--compact]="compact"
+       [for]="inputId">
     {{label}}
 </label>

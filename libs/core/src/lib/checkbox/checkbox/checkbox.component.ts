@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FdCheckboxValues} from './fd-checkbox-values.interface';
 
@@ -54,10 +54,6 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
 
-    /** Emits new control value whenever it's changed. */
-    @Output()
-    onChange: EventEmitter<any> = new EventEmitter<any>();
-
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
@@ -101,7 +97,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         this.disabled = disabled;
     }
 
-    /** Based on current control state:
+    /** @hidden Based on current control state:
      * - sets next control value
      * - emits new control value
      * - updates control state based on new control value
@@ -127,10 +123,9 @@ export class CheckboxComponent implements ControlValueAccessor {
         }
         this._setState();
         this.onValueChange(this.checkboxValue);
-        this.onChange.emit(this.checkboxValue);
     }
 
-    /** Based on current control value sets new control state. */
+    /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
         if (this.checkboxValue === this.values.trueValue) {
             this.checkboxState = 'checked';

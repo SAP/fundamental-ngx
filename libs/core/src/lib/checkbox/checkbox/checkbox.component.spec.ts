@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CheckboxComponent} from './checkbox.component';
 import {FormsModule} from '@angular/forms';
@@ -6,7 +6,8 @@ import {Component, ViewChild} from '@angular/core';
 
 @Component({
     template: `
-        <fd-checkbox [(ngModel)]="value"></fd-checkbox>`
+        <fd-checkbox [(ngModel)]="value"></fd-checkbox>
+    `
 })
 class TestCheckboxComponent {
     @ViewChild(CheckboxComponent, {static: false}) checkboxRef;
@@ -35,164 +36,145 @@ describe('CheckboxComponent', () => {
         expect(checkbox).toBeTruthy();
     });
 
-    it('should properly bind control value', () => {
-        fixture.detectChanges();
-
-        spyOn(checkbox, 'writeValue');
-
+    it('should properly bind control value', async () => {
         hostComponent.value = true;
         fixture.detectChanges();
 
-        hostComponent.value = false;
-        fixture.detectChanges();
-
-        expect(checkbox.writeValue).toHaveBeenCalledTimes(3);
-        expect(checkbox.checkboxValue).toBe(false);
+        await fixture.whenStable();
+        expect(checkbox.checkboxValue).toBe(true);
     });
 
-    // it('should be unchecked on double click', () => {
-    //     const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
-    //     checkboxLabel.click();
-    //     checkboxLabel.click();
-    //     fixture.detectChanges();
-    //
-    //     const input = fixture.nativeElement.querySelector('input');
-    //     expect(input.checked).toBe(false);
-    //     expect(hostComponent.value).toBe(false);
-    //     expect(checkbox.checkboxValue).toBe(false);
-    // });
-    //
-    // it('should add state class', () => {
-    //     checkbox.state = 'valid';
-    //     fixture.detectChanges();
-    //
-    //     const input = fixture.nativeElement.querySelector('input');
-    //     expect(input).toHaveClass('is-valid')
-    // });
-    //
-    // it('should display input label', () => {
-    //     const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
-    //     checkbox.label = 'Option 1';
-    //     fixture.detectChanges();
-    //
-    //     expect(checkboxLabel.innerText).toBe('Option 1')
-    // });
-    //
-    // it('should be disabled', () => {
-    //     const input = fixture.nativeElement.querySelector('input');
-    //     hostComponent.value = true;
-    //     fixture.detectChanges();
-    //
-    //     checkbox.disabled = true;
-    //     fixture.detectChanges();
-    //
-    //     expect(input.disabled).toBe(true);
-    //     expect(input.checked).toBe(false);
-    //     expect(hostComponent.value).toBe(false);
-    //     expect(checkbox.checkboxValue).toBe(false);
+    it('should be checked on click', async () => {
+        const input = fixture.nativeElement.querySelector('input');
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        fixture.detectChanges();
 
-    // checkboxLabel.click();
-    // fixture.detectChanges();
-    //
-    // expect(input.disabled).toBe(true);
-    // expect(input.checked).toBe(false);
-    // expect(hostComponent.value).toBe(false);
-    // expect(checkbox.checkboxValue).toBe(false);
-    // });
-    //
-    // it('should be compact', () => {
-    //     checkbox.compact = true;
-    //     fixture.detectChanges();
-    //
-    //     const input = fixture.nativeElement.querySelector('input');
-    //     expect(input).toHaveClass('fd-checkbox--compact');
-    // });
-    //
-    // it('should use custom values', () => {
-    //     hostComponent.value = 'Yes';
-    //     checkbox.values = {trueValue: 'Yes', falseValue: 'No'};
-    //     fixture.detectChanges();
-    //
-    //     expect(hostComponent.value).toBe('Yes');
-    //
-    //     checkboxLabel.click();
-    //     fixture.detectChanges();
-    //
-    //     expect(hostComponent.value).toBe('No');
-    // });
-    //
-    // it('should not use third state', () => {
-    //     checkboxLabel.click();
-    //     checkboxLabel.click();
-    //     fixture.detectChanges();
-    //
-    //     expect(hostComponent.value).toBe(false);
-    // });
-    //
-    // it('should use third state', () => {
-    //     checkbox.tristate = true;
-    //     checkboxLabel.click();
-    //     checkboxLabel.click();
-    //     fixture.detectChanges();
-    //
-    //     expect(checkbox.tristate).toBe(true);
-    //     expect(hostComponent.value).toBe(null);
-    // });
-    //
-    // it('should use custom values for third state', () => {
-    //     const input = fixture.nativeElement.querySelector('input');
-    //
-    //     checkbox.tristate = true;
-    //     checkbox.values = {trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby'};
-    //     fixture.detectChanges();
-    //
-    //     hostComponent.value = 'Yes';
-    //     fixture.detectChanges();
-    //
-    //     console.log(checkbox);
-    //     console.log(hostComponent);
-    //
-    //     checkboxLabel.click();
-    //     fixture.detectChanges();
-    //
-    //     expect(hostComponent.value).toBe('Yes');
-    //     expect(input.checked).toBe(true);
-    //     expect(input.indeterminate).toBe(false);
-    //
-    //     // checkboxLabel.click();
-    //     // fixture.detectChanges();
-    //     // expect(hostComponent.value).toBe('No');
-    //     // expect(input.checked).toBe(false);
-    //     // expect(input.indeterminate).toBe(false);
-    //     //
-    //     // checkboxLabel.click();
-    //     // fixture.detectChanges();
-    //     // expect(hostComponent.value).toBe('Maby');
-    //     // expect(input.checked).toBe(false);
-    //     // expect(input.indeterminate).toBe(true);
-    // });
-    //
-    // it('should use not select enabled third state', () => {
-    //     const input = fixture.nativeElement.querySelector('input');
-    //
-    //     checkbox.tristate = true;
-    //     hostComponent.value = null;
-    //
-    //     fixture.detectChanges();
-    //     expect(hostComponent.value).toBe(null);
-    //     expect(input.checked).toBe(false);
-    //     expect(input.indeterminate).toBe(true);
-    //
-    //     // checkboxLabel.click();
-    //     // fixture.detectChanges();
-    //     // expect(hostComponent.value).toBe(true);
-    //     // expect(input.checked).toBe(true);
-    //     // expect(input.indeterminate).toBe(false);
-    //     //
-    //     // checkboxLabel.click();
-    //     // fixture.detectChanges();
-    //     // expect(hostComponent.value).toBe(false);
-    //     // expect(input.checked).toBe(false);
-    //     // expect(input.indeterminate).toBe(false);
-    // });
+        await fixture.whenStable();
+        checkboxLabel.click();
+        expect(input.checked).toBe(true);
+        expect(hostComponent.value).toBe(true);
+        expect(checkbox.checkboxValue).toBe(true);
+    });
+
+    it('should be unchecked on double click', async () => {
+        const input = fixture.nativeElement.querySelector('input');
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        spyOn(checkbox, 'nextValue');
+        checkboxLabel.click();
+        checkboxLabel.click();
+        expect(input.checked).toBe(false);
+        expect(hostComponent.value).toBe(false);
+        expect(checkbox.checkboxValue).toBe(false);
+        expect(checkbox.nextValue).toHaveBeenCalledTimes(2);
+    });
+
+    it('should add state class', () => {
+        checkbox.state = 'valid';
+        fixture.detectChanges();
+
+        const input = fixture.nativeElement.querySelector('input');
+        expect(input).toHaveClass('is-valid')
+    });
+
+    it('should display input label', () => {
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        checkbox.label = 'Option 1';
+        fixture.detectChanges();
+
+        expect(checkboxLabel.innerText).toBe('Option 1')
+    });
+
+    it('should be disabled', async () => {
+        const input = fixture.nativeElement.querySelector('input');
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        checkbox.disabled = true;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        spyOn(checkbox, 'nextValue');
+        checkboxLabel.click();
+        expect(input.checked).toBe(false);
+        expect(input.disabled).toBe(true);
+        expect(hostComponent.value).toBe(false);
+        expect(checkbox.checkboxValue).toBe(false);
+        expect(checkbox.nextValue).not.toHaveBeenCalled();
+    });
+
+    it('should be compact', () => {
+        checkbox.compact = true;
+        fixture.detectChanges();
+
+        const input = fixture.nativeElement.querySelector('input');
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        expect(input).toHaveClass('fd-checkbox--compact');
+        expect(checkboxLabel).toHaveClass('fd-checkbox__label--compact');
+    });
+
+    it('should use custom values', async () => {
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        checkbox.values = {trueValue: 'Yes', falseValue: 'No'};
+        hostComponent.value = 'Yes';
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(hostComponent.value).toBe('Yes');
+        expect(checkbox.checkboxValue).toBe('Yes');
+
+        checkboxLabel.click();
+
+        expect(hostComponent.value).toBe('No');
+        expect(checkbox.checkboxValue).toBe('No');
+    });
+
+    it('should use third state', async () => {
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        checkbox.tristate = true;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(hostComponent.value).toBe(false);
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe(null);
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe(true);
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe(false);
+    });
+
+    it('should not use third state', async () => {
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        hostComponent.value = null;
+        checkbox.tristate = true;
+        checkbox.tristateSelectable = false;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(hostComponent.value).toBe(null);
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe(true);
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe(false);
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe(true);
+    });
+
+    it('should use custom values for third state', async () => {
+        const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+        checkbox.tristate = true;
+        checkbox.values = {trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby'};
+        hostComponent.value = 'Yes';
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(hostComponent.value).toBe('Yes');
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe('No');
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe('Maby');
+        checkboxLabel.click();
+        expect(hostComponent.value).toBe('Yes');
+    });
 });
