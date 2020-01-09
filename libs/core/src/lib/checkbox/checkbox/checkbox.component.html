@@ -15,4 +15,7 @@
        [class.fd-checkbox__label--compact]="compact"
        [for]="inputId">
     {{label}}
+    <ng-container *ngIf="!label">
+        <ng-content></ng-content>
+    </ng-container>
 </label>
