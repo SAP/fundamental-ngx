@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.122"></a>
+# [0.13.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.121...v0.13.0-rc.122) (2020-01-09)
+
+
+### Bug Fixes
+
+* null check in decorator added ([#1784](https://github.com/SAP/fundamental-ngx/issues/1784)) ([56b0914](https://github.com/SAP/fundamental-ngx/commit/56b0914))
+
+
+
 <a name="0.13.0-rc.121"></a>
 # [0.13.0-rc.121](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.120...v0.13.0-rc.121) (2020-01-09)
 
