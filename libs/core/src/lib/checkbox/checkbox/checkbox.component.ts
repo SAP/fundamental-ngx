@@ -51,25 +51,28 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input()
     tristateSelectable: boolean = true;
 
+    /** Sets values returned by control. */
+    @Input('values')
+    set _values(checkboxValues: FdCheckboxValues) {
+        this.values = {...this.values, ...checkboxValues}
+    }
     /** Values returned by control. */
-    @Input()
-    values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
-
+    public values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
     public checkboxState: 'checked' | 'unchecked' | 'indeterminate';
-    /** @hidden */
+    /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
-    /** @hidden */
+    /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange = (newValue) => {};
 
-    /** @hidden */
+    /** @hidden Used to define if control is in 'checked' / 'unchecked' state.*/
     get isChecked(): boolean {
         return this.checkboxState === 'checked';
     }
 
-    /** @hidden */
+    /** @hidden Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
         return this.checkboxState === 'indeterminate';
     }
@@ -83,17 +86,17 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._setState()
     }
 
-    /** @hidden ControlValueAccessor interface */
+    /** @hidden ControlValueAccessor interface method - sets onValueChange callback.*/
     registerOnChange(fn: any): void {
         this.onValueChange = fn;
     }
 
-    /** @hidden ControlValueAccessor interface */
+    /** @hidden ControlValueAccessor interface method - sets onTouched callback.*/
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden Called by FormControl */
+    /** @hidden Called by FormControl - used to disable / enable control.*/
     setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
     }
@@ -104,11 +107,6 @@ export class CheckboxComponent implements ControlValueAccessor {
      * - updates control state based on new control value
      * */
     public nextValue(): void {
-
-        if (this.disabled) {
-            return;
-        }
-
         switch (this.checkboxState) {
             case 'checked':
                 this.checkboxValue = this.values.falseValue;
@@ -137,6 +135,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         }
     }
 
+    /** @hidden Compares values */
     private _compare(val1: any, val2: any): boolean {
         return typeof val1 === 'object'
             ? compareObjects(val1, val2)

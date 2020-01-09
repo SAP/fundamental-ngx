@@ -15,7 +15,7 @@ import {ExampleFile} from '../../../documentation/core-helpers/code-example/exam
 export class CheckboxDocsComponent {
     checkboxDefault: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             fileName: 'checkbox-default-example',
             component: 'CheckboxDefaultExamplesComponent',
             code: checkboxDefaultTsCode
@@ -24,7 +24,7 @@ export class CheckboxDocsComponent {
 
     checkboxTristate: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             fileName: 'checkbox-tristate-example',
             component: 'DefaultCheckboxExamplesComponent',
             code: checkboxTristateTsCode
@@ -33,7 +33,7 @@ export class CheckboxDocsComponent {
 
     checkboxCustomValues: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             fileName: 'checkbox-custom-values-example',
             component: 'CheckboxCustomValuesExampleComponent',
             code: checkboxCustomValuesTsCode
@@ -42,7 +42,7 @@ export class CheckboxDocsComponent {
 
     checkboxReactiveForms: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             fileName: 'checkbox-reactive-forms-example',
             component: 'CheckboxReactiveFormsExampleComponent',
             code: checkboxReactiveFormsTsCode
@@ -51,7 +51,7 @@ export class CheckboxDocsComponent {
 
     checkboxStates: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             fileName: 'checkbox-states-example',
             component: 'CheckboxStatesExampleComponent',
             code: checkboxStatesTsCode
