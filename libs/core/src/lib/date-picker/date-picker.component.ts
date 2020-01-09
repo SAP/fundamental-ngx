@@ -431,12 +431,12 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
                 this.isInvalidDateInput = !this.isRangeModelValid(selectedRangeDate);
 
-                /** If start date is invalid, cause of format, block or disable function, there is invalidDate forced */
+                /** If start date is invalid, because of format, block or disable function, there is invalidDate forced */
                 if (!this.isStartDateValid(selectedRangeDate.start)) {
                     selectedRangeDate.start = this.invalidDate();
                 }
 
-                /** If end date is invalid, cause of format, block or disable function, there is invalidDate forced */
+                /** If end date is invalid, because of format, block or disable function, there is invalidDate forced */
                 if (!this.isEndDateValid(selectedRangeDate.end)) {
                     selectedRangeDate.end = this.invalidDate();
                 }
