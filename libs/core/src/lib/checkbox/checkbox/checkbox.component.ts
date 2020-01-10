@@ -1,4 +1,11 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    forwardRef, HostBinding,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FdCheckboxValues} from './fd-checkbox-values.interface';
 import {compareObjects} from '../../utils/functions';
@@ -9,6 +16,8 @@ let checkboxUniqueId: number = 0;
     selector: 'fd-checkbox',
     templateUrl: './checkbox.component.html',
     styleUrls: ['./checkbox.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -56,6 +65,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     set _values(checkboxValues: FdCheckboxValues) {
         this.values = {...this.values, ...checkboxValues}
     }
+
+    /** @hidden */
+    @HostBinding('style.position')
+    readonly position = 'relative';
+
     /** Values returned by control. */
     public values: FdCheckboxValues = {trueValue: true, falseValue: false, thirdStateValue: null};
     /** Stores current checkbox value. */
@@ -66,6 +80,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange = (newValue) => {};
+
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {
+    }
 
     /** @hidden Used to define if control is in 'checked' / 'unchecked' state.*/
     get isChecked(): boolean {
@@ -81,23 +98,24 @@ export class CheckboxComponent implements ControlValueAccessor {
      * - sets new control value
      * - updates control state
      * */
-    writeValue(value: any): void {
+    public writeValue(value: any): void {
         this.checkboxValue = value;
-        this._setState()
+        this._setState();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden ControlValueAccessor interface method - sets onValueChange callback.*/
-    registerOnChange(fn: any): void {
+    public registerOnChange(fn: any): void {
         this.onValueChange = fn;
     }
 
     /** @hidden ControlValueAccessor interface method - sets onTouched callback.*/
-    registerOnTouched(fn: any): void {
+    public registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
     /** @hidden Called by FormControl - used to disable / enable control.*/
-    setDisabledState(disabled: boolean): void {
+    public setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
     }
 

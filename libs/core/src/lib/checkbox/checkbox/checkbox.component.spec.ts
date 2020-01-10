@@ -71,19 +71,21 @@ describe('CheckboxComponent', () => {
         expect(checkbox.nextValue).toHaveBeenCalledTimes(2);
     });
 
-    it('should add state class', () => {
+    it('should add state class', async () => {
         checkbox.state = 'valid';
         fixture.detectChanges();
 
+        await fixture.whenStable();
         const input = fixture.nativeElement.querySelector('input');
         expect(input).toHaveClass('is-valid')
     });
 
-    it('should display input label', () => {
+    it('should display input label', async () => {
         const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
         checkbox.label = 'Option 1';
         fixture.detectChanges();
 
+        await fixture.whenStable();
         expect(checkboxLabel.innerText).toBe('Option 1')
     });
 
@@ -103,12 +105,14 @@ describe('CheckboxComponent', () => {
         expect(checkbox.nextValue).not.toHaveBeenCalled();
     });
 
-    it('should be compact', () => {
+    it('should be compact', async() => {
         checkbox.compact = true;
         fixture.detectChanges();
 
         const input = fixture.nativeElement.querySelector('input');
         const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
+
+        await fixture.whenStable();
         expect(input).toHaveClass('fd-checkbox--compact');
         expect(checkboxLabel).toHaveClass('fd-checkbox__label--compact');
     });
