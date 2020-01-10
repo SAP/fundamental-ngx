@@ -120,10 +120,10 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => { };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => { };
 
     /** @hidden */
     registerOnChange(fn: (selected: any) => { void }): void {
@@ -164,7 +164,7 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     }
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) {}
+    constructor(private changeDetectionRef: ChangeDetectorRef) { }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -172,7 +172,11 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
         this._checkMandatoryFields();
     }
 
-    /** @hidden */
+
+    /** This method is responsible for building a css class based on current state
+     *  It is implementation of CssClassBuilder interface and
+     *  should be used with @applyCssClass decorator
+     */
     @applyCssClass
     buildComponentCssClass(): string {
         return [
