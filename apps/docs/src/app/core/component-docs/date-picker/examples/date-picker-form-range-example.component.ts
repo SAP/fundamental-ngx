@@ -10,8 +10,6 @@ import { FdDate } from '@fundamental-ngx/core';
                 <fd-date-picker
                         type="range"
                         formControlName="dates"
-                        [disableRangeEndFunction]="disabledEndFunction"
-                        [disableRangeStartFunction]="disabledStartFunction"
                 ></fd-date-picker>
             </form>
 
@@ -33,12 +31,4 @@ export class DatePickerFormRangeExampleComponent {
             end: FdDate.getToday().nextDay()
         })
     });
-
-    disabledEndFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
-    };
-
-    disabledStartFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() < fdDate.getTimeStamp();
-    };
 }

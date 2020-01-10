@@ -87,14 +87,24 @@
 <fd-docs-section-title [id]="'combobox-reactiveForm-rangeOfDates'" [componentName]="'datePicker'">
     Date Picker in Reactive Form with a Range of Dates.
 </fd-docs-section-title>
-<description>
-    The <code>[disableFunction]</code> controls the <code>valid</code> flag. In this example future dates are disabled for
-    first date and past dates are disabled for second date.
-</description>
 <component-example [name]="'ex7'">
     <fd-date-picker-form-range-example></fd-date-picker-form-range-example>
 </component-example>
 <code-example [exampleFiles]="datePickerRangeForm"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'combobox-reactiveForm-rangeOfDates'" [componentName]="'datePicker'">
+    Date Picker in Reactive Form with Disable Functions.
+</fd-docs-section-title>
+<description>
+    The <code>[disableFunction]</code> controls the <code>valid</code> flag. In this example future dates are disabled for
+    first date and past dates are disabled for second date.
+</description>
+<component-example [name]="'ex8'">
+    <fd-date-picker-range-disabled-example></fd-date-picker-range-disabled-example>
+</component-example>
+<code-example [exampleFiles]="datePickerDisabled"></code-example>
 
 <separator></separator>
 
@@ -104,7 +114,7 @@
 <description>
     There is also added <code>[position]</code> attribute which allows us to decide where popup should be shown.
 </description>
-<component-example name="'ex8'">
+<component-example name="'ex9'">
     <fd-date-picker-position-example></fd-date-picker-position-example>
 </component-example>
 <code-example [exampleFiles]="datePickerPosition"></code-example>
@@ -114,7 +124,7 @@
 <fd-docs-section-title [id]="'combobox-disabled'" [componentName]="'datePicker'">
     Disabled State
 </fd-docs-section-title>
-<component-example name="'ex7'">
+<component-example name="'ex10'">
     <fd-date-picker-disabled-example></fd-date-picker-disabled-example>
 </component-example>
 <code-example [exampleFiles]="datePickerDisabled"></code-example>
