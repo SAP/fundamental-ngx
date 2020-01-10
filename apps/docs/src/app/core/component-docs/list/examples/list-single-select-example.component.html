@@ -1,8 +1,9 @@
 <ul fd-list>
     <li fd-list-item *ngFor="let number of [0, 1, 2, 3, 4]">
-        <input type="radio" fd-form-control [id]="number" [value]="number" [(ngModel)]="this.selectedItem"/>
-        <label [for]="number" style="padding-left: 10px;">List item {{number}}</label>
+        <fd-radio-button [id]="number" [value]="number" [(ngModel)]="this.selectedItem">
+            List item {{ number }}
+        </fd-radio-button>
     </li>
 </ul>
 
-Selected Item: {{selectedItem}}
+Selected Item: {{ selectedItem }}

@@ -27,7 +27,7 @@ class TestRadioButtonComponentReactiveForms {
     @ViewChild('radio2', { static: false }) radioButton2: RadioButtonComponent;
 
     radioForm = new FormGroup({
-        radioInput: new FormControl({ value: 1, disabled: false })
+        radioInput: new FormControl(1)
     });
 }
 

@@ -20,7 +20,7 @@ export class RadioFormGroupExampleComponent {
     };
 
     customForm = new FormGroup({
-        radioInput: new FormControl({ value: 1, disabled: false }),
+        radioInput: new FormControl(1),
         disabledRadio: new FormControl({ value: '1', disabled: true })
     });
 }
