@@ -12,6 +12,8 @@ import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disab
 import * as datePickerComplexI18nSrcTs from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
 import * as datePickerComplexI18nSrcH from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html';
 import * as datePickerRangeDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
+import * as datePickerSingleDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
+import * as datePickerSingleDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
 import * as datePickerRangeDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
@@ -115,6 +117,22 @@ export class DatePickerDocsComponent implements OnInit {
             component: 'DatePickerRangeDisabledExampleComponent',
             code: datePickerRangeDisableH,
             fileName: 'fd-date-picker-range-disabled-example'
+        },
+    ];
+
+
+    datePickerSingleDisable: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerDisableFuncExampleComponent',
+            code: datePickerSingleDisableTs,
+            fileName: 'fd-date-picker-disable-func-example'
+        },
+        {
+            language: 'html',
+            component: 'DatePickerDisableFuncExampleComponent',
+            code: datePickerSingleDisableH,
+            fileName: 'fd-date-picker-disable-func-example'
         },
     ];
 

@@ -94,12 +94,24 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'combobox-reactiveForm-rangeOfDates'" [componentName]="'datePicker'">
-    Date Picker in Reactive Form with Disable Functions.
+<fd-docs-section-title [id]="'combobox-reactiveForm-singleDate'" [componentName]="'datePicker'">
+    Single Date Picker in Reactive Form with Disable Function.
 </fd-docs-section-title>
 <description>
-    The <code>[disableFunction]</code> controls the <code>valid</code> flag. In this example future dates are disabled for
-    first date and past dates are disabled for second date.
+    The <code>[disableFunction]</code> controls the <code>valid</code> flag. In this example only future date is available.
+</description>
+<component-example [name]="'ex8'">
+    <fd-date-picker-disable-func-example></fd-date-picker-disable-func-example>
+</component-example>
+<code-example [exampleFiles]="datePickerSingleDisable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'combobox-reactiveForm-rangeOfDates'" [componentName]="'datePicker'">
+    Range Date Picker in Reactive Form with Disable Functions.
+</fd-docs-section-title>
+<description>
+    The <code>[disableFunction]</code> controls the <code>valid</code> flag. In this example only next 2 weeks are available.
 </description>
 <component-example [name]="'ex8'">
     <fd-date-picker-range-disabled-example></fd-date-picker-range-disabled-example>

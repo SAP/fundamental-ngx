@@ -10,7 +10,6 @@ import { FdDate } from '@fundamental-ngx/core';
                 <div fd-form-item>
                     <label fd-form-label>Date Picker</label>
                     <fd-date-picker 
-                            [disableFunction]="disableFunction" 
                             [state]="isValid() ? 'valid' : 'invalid'" 
                             formControlName="date">
                     </fd-date-picker>
@@ -52,9 +51,4 @@ export class DatePickerFormExampleComponent {
     isValid(): boolean {
         return this.customForm.get('date').valid;
     }
-
-    disableFunction = (fdDate: FdDate): boolean => {
-        return (fdDate && fdDate.getTimeStamp() < FdDate.getToday().getTimeStamp());
-    };
-
 }

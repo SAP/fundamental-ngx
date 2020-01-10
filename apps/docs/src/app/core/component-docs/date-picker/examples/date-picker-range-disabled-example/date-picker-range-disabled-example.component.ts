@@ -14,11 +14,28 @@ export class DatePickerRangeDisabledExampleComponent {
         })
     });
 
+    isValid(): boolean {
+        return this.customForm.get('dates').valid;
+    }
+
     disabledEndFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
+        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp() ||
+            fdDate.getTimeStamp() > this._getFutureDate(FdDate.getToday()).getTimeStamp()
+        ;
     };
 
     disabledStartFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() < fdDate.getTimeStamp();
+        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp() ||
+            fdDate.getTimeStamp() > this._getFutureDate(FdDate.getToday()).getTimeStamp()
+        ;
     };
+
+    /** Get date for next 14 days. */
+    private _getFutureDate(fdDate: FdDate): FdDate {
+        const amountOfDaysInFuture: number = 14;
+        for (let i = 0; i < amountOfDaysInFuture; i++) {
+            fdDate = fdDate.nextDay();
+        }
+        return fdDate;
+    }
 }

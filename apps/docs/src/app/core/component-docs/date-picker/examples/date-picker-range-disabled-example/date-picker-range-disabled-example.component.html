@@ -3,6 +3,7 @@
         <fd-date-picker
             type="range"
             formControlName="dates"
+            [state]="isValid() ? 'valid' : 'invalid'"
             [disableRangeEndFunction]="disabledEndFunction"
             [disableRangeStartFunction]="disabledStartFunction"
         ></fd-date-picker>
