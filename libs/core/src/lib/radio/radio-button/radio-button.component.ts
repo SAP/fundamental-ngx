@@ -192,7 +192,7 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     }
 
     /** @hidden */
-    private _checkMandatoryFields() {
+    private _checkMandatoryFields(): void {
         if (!this.name) {
             throw 'name field is required';
         }
@@ -202,14 +202,14 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     }
 
     /** @hidden */
-    private _setFocusOnNativeElement() {
+    private _setFocusOnNativeElement(): void {
         if (this.inputElement) {
             this.inputElement.nativeElement.focus();
         }
     }
 
     /** @hidden */
-    private _setNativeElementCheckedState() {
+    private _setNativeElementCheckedState(): void {
         if (this.inputElement) {
             this.inputElement.nativeElement.checked = this.checked;
         }
