@@ -1,0 +1,21 @@
+<div fd-form-item>
+    <label fd-form-label for="input-1">Default Input</label>
+	<input fd-form-control class="fd-input" [ngClass]="{'fd-input--compact': compact}" [attr.type]=inputType [placeholder]="placeholder" [state]="state">
+	<fd-form-message [type]="errorMsgType">{{errorMessage}}</fd-form-message>
+
+	<!--div [ngSwitch]="inputType">
+    <div *ngSwitchCase="'text'">
+      <input type="text" formControlName="{{form_elem.label}}"/>
+    </div>
+    <div *ngSwitchCase="'number'">
+      <input type="number" formControlName="{{form_elem.label}}"/>
+    </div>
+	<div *ngSwitchCase="'password'">
+      <input type="password" formControlName="{{form_elem.label}}"/>
+    </div>
+	<div *ngSwitchCase="'email'">
+      <input type="email" formControlName="{{form_elem.label}}"/>
+    </div>
+	</div>-->
+
+</div>

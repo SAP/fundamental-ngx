@@ -45,6 +45,10 @@ import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/pl
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
 
+import { PlatformInputDocsComponent } from './component-docs/platform-input/platform-input-docs.component';
+import { PlatformInputExampleComponent } from './component-docs/platform-input/platform-input-example/platform-input-example.component';
+import { PlatformInputHeaderComponent } from './component-docs/platform-input/platform-input-header/platform-input-header.component';
+
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
@@ -80,7 +84,10 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformSelectTypesDefaultExampleComponent,
         PlatformSelectTypesNoBorderExampleComponent,
         PlatformSelectTypesSplitExampleComponent,
-        PlatformSelectTypesWithIconExampleComponent
+        PlatformSelectTypesWithIconExampleComponent,
+        PlatformInputDocsComponent,
+        PlatformInputExampleComponent,
+        PlatformInputHeaderComponent
     ],
     imports: [
         SharedDocumentationModule,

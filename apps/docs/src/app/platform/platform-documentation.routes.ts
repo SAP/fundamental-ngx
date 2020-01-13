@@ -12,6 +12,8 @@ import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/plat
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
+import { PlatformInputHeaderComponent } from './component-docs/platform-input/platform-input-header/platform-input-header.component';
+import { PlatformInputDocsComponent } from './component-docs/platform-input/platform-input-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -50,7 +52,15 @@ export const ROUTES: Routes = [
                 component: PlatformSelectHeaderComponent,
                 children: [
                     { path: '', component: PlatformSelectDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.select } }
+                ]
+            },
+            {
+                path: 'input',
+                component: PlatformInputHeaderComponent,
+                children: [
+                    { path: '', component: PlatformInputDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.input } }
                 ]
             }
         ]
