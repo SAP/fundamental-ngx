@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.130"></a>
+# [0.13.0-rc.130](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.129...v0.13.0-rc.130) (2020-01-13)
+
+
+
+<a name="0.13.0-rc.129"></a>
+# [0.13.0-rc.129](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.128...v0.13.0-rc.129) (2020-01-12)
+
+
+
+<a name="0.13.0-rc.128"></a>
+# [0.13.0-rc.128](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.127...v0.13.0-rc.128) (2020-01-11)
+
+
+
+<a name="0.13.0-rc.127"></a>
+# [0.13.0-rc.127](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.126...v0.13.0-rc.127) (2020-01-11)
+
+
+
+<a name="0.13.0-rc.126"></a>
+# [0.13.0-rc.126](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.125...v0.13.0-rc.126) (2020-01-11)
+
+
+
+<a name="0.13.0-rc.125"></a>
+# [0.13.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.124...v0.13.0-rc.125) (2020-01-10)
+
+
+
+<a name="0.13.0-rc.124"></a>
+# [0.13.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.123...v0.13.0-rc.124) (2020-01-10)
+
+
+
+<a name="0.13.0-rc.123"></a>
+# [0.13.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.122...v0.13.0-rc.123) (2020-01-10)
+
+
+
+<a name="0.13.0-rc.122"></a>
+# [0.13.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.121...v0.13.0-rc.122) (2020-01-09)
+
+
+### Bug Fixes
+
+* null check in decorator added ([#1784](https://github.com/SAP/fundamental-ngx/issues/1784)) ([56b0914](https://github.com/SAP/fundamental-ngx/commit/56b0914))
+
+
+
+<a name="0.13.0-rc.121"></a>
+# [0.13.0-rc.121](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.120...v0.13.0-rc.121) (2020-01-09)
+
+
+
 <a name="0.13.0-rc.120"></a>
 # [0.13.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.119...v0.13.0-rc.120) (2020-01-09)
 
