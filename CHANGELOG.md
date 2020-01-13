@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.133"></a>
+# [0.13.0-rc.133](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.132...v0.13.0-rc.133) (2020-01-13)
+
+
+### Bug Fixes
+
+* Add two digits pipe to time component ([#1806](https://github.com/SAP/fundamental-ngx/issues/1806)) ([846be12](https://github.com/SAP/fundamental-ngx/commit/846be12))
+
+
+
 <a name="0.13.0-rc.132"></a>
 # [0.13.0-rc.132](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.131...v0.13.0-rc.132) (2020-01-13)
 
