@@ -258,7 +258,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     public handleSingleDateChange(date: FdDate): void {
         if (date) {
-            this.inputFieldDate = this.formatDate(date);
+            this.inputFieldDate = this._formatDate(date);
             this.selectedDate = date;
             this.selectedDateChange.emit(date);
             this.onChange(date);
@@ -275,9 +275,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             (!CalendarService.datesEqual(this.selectedRangeDate.start, dates.start) ||
                 !CalendarService.datesEqual(this.selectedRangeDate.end, dates.end))
         ) {
-            this.inputFieldDate = this.formatDate(dates.start)
+            this.inputFieldDate = this._formatDate(dates.start)
                 + this.dateAdapter.rangeDelimiter
-                + this.formatDate(dates.end)
+                + this._formatDate(dates.end)
             ;
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
@@ -297,8 +297,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden */
     constructor(
         public dateAdapter: DateFormatParser,
-        private changeDetectionRef: ChangeDetectorRef,
-        @Optional() private datePipe: DatePipe
+        private _changeDetectionRef: ChangeDetectorRef,
+        @Optional() private _datePipe: DatePipe
     ) {
     }
 
@@ -329,7 +329,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetectionRef.detectChanges();
+        this._changeDetectionRef.detectChanges();
     }
 
     /**
@@ -349,9 +349,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
              */
             selected = <FdDate>selected;
             this.selectedDate = selected;
-            if (this.isModelValid()) {
-                this.inputFieldDate = this.formatDate(selected);
-                this.refreshCurrentlyDisplayedCalendarDate(selected);
+            if (this._isSingleModelValid(this.selectedDate)) {
+                this.inputFieldDate = this._formatDate(selected);
+                this._refreshCurrentlyDisplayedCalendarDate(selected);
             } else {
                 this.inputFieldDate = '';
             }
@@ -366,10 +366,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             if (selected.start) {
                 this.selectedRangeDate = { start: selected.start, end: selected.end };
 
-                if (this.isModelValid()) {
-                    this.refreshCurrentlyDisplayedCalendarDate(selected.start);
-                    this.inputFieldDate = this.formatDate(selected.start) +
-                        this.dateAdapter.rangeDelimiter + this.formatDate(selected.end);
+                if (this._isRangeModelValid(this.selectedRangeDate)) {
+                    this._refreshCurrentlyDisplayedCalendarDate(selected.start);
+                    this.inputFieldDate = this._formatDate(selected.start) +
+                        this.dateAdapter.rangeDelimiter + this._formatDate(selected.end);
                 } else {
                     this.inputFieldDate = '';
                 }
@@ -377,7 +377,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
                 this.inputFieldDate = '';
             }
         }
-        this.changeDetectionRef.detectChanges();
+        this._changeDetectionRef.detectChanges();
         this.isInvalidDateInput = !this.isModelValid();
     }
 
@@ -391,22 +391,25 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         /** Case when there is single mode */
         if (this.type === 'single') {
 
-            const fdDate = this.dateAdapter.parse(date);
+            let fdDate = this.dateAdapter.parse(date);
 
-            /**
-             * Check if dates are equal, if dates are the same there is no need to make any changes
-             * Date in model is changed no matter if the parsed date fro string is valid or not.
-             */
+            /** Check if dates are equal, if so, there is no need to make any changes */
             if (!CalendarService.datesEqual(fdDate, this.selectedDate)) {
-                this.isInvalidDateInput = !fdDate.isDateValid();
+                this.isInvalidDateInput = !this._isSingleModelValid(fdDate);
+
+                /** Check if date is valid, if it's not, there is no need to refresh calendar */
+                if (!this.isInvalidDateInput && date) {
+                    this._refreshCurrentlyDisplayedCalendarDate(fdDate);
+                } else {
+                    /** Whether string is invalid, by passed block or disable functions there is forced Invalid Object, */
+                    fdDate = this._invalidDate();
+                }
+                /**
+                 * Date in model is changed no matter if the parsed date from string is valid or not.
+                 */
                 this.selectedDate = fdDate;
                 this.onChange(this.selectedDate);
                 this.selectedDateChange.emit(this.selectedDate);
-
-                /** Check if date is valid, if it's not, there is no need to refresh calendar */
-                if (!this.isInvalidDateInput) {
-                    this.refreshCurrentlyDisplayedCalendarDate(this.selectedDate);
-                }
             }
 
 
@@ -423,22 +426,36 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
             if (!CalendarService.datesEqual(firstDate, this.selectedRangeDate.start) ||
                 !CalendarService.datesEqual(secondDate, this.selectedRangeDate.end)) {
 
-                this.isInvalidDateInput = !firstDate.isDateValid() || !secondDate.isDateValid();
-
+                let selectedRangeDate: FdRangeDate = null;
 
                 /** If the end date is before the start date, there is need to replace them  */
                 if ((firstDate.getTimeStamp() > secondDate.getTimeStamp()) && secondDate.isDateValid()) {
-                    this.selectedRangeDate = { start: secondDate, end: firstDate };
+                    selectedRangeDate = { start: secondDate, end: firstDate };
                 } else {
-                    this.selectedRangeDate = { start: firstDate, end: secondDate };
+                    selectedRangeDate = { start: firstDate, end: secondDate };
                 }
 
-                this.selectedRangeDateChange.emit(this.selectedRangeDate);
-                this.onChange({ start: this.selectedRangeDate.start, end: this.selectedRangeDate.end });
+                this.isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
 
-                /** Check if dates are valid, if it's not, there is no need o refresh calendar */
-                if (!this.isInvalidDateInput) {
-                    this.refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
+                /** If start date is invalid, because of format, block or disable function, there is invalidDate forced */
+                if (!this._isStartDateValid(selectedRangeDate.start)) {
+                    selectedRangeDate.start = this._invalidDate();
+                }
+
+                /** If end date is invalid, because of format, block or disable function, there is invalidDate forced */
+                if (!this._isEndDateValid(selectedRangeDate.end)) {
+                    selectedRangeDate.end = this._invalidDate();
+                }
+
+                /** Whole object is changed, even it's invalid */
+                this.selectedRangeDate = selectedRangeDate;
+
+                this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                this.onChange(this.selectedRangeDate);
+
+                /** Check if start date is valid, if it's not, there is no need o refresh calendar */
+                if (this._isStartDateValid(this.selectedRangeDate.start)) {
+                    this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
                 }
             }
         }
@@ -451,26 +468,56 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Method that provides information if model selected date/dates have properly types and are valid */
     public isModelValid(): boolean {
         if (this.type === 'single') {
-            return (this.selectedDate &&
-                this.selectedDate instanceof FdDate &&
-                this.selectedDate.isDateValid()
-            ) || (!this.inputFieldDate && this.allowNull);
+            return this._isSingleModelValid(this.selectedDate);
         } else {
-            return (this.selectedRangeDate &&
-                (
-                    this.selectedRangeDate.start &&
-                    this.selectedRangeDate.start instanceof FdDate &&
-                    this.selectedRangeDate.start.isDateValid()
-                ) && (
-                    this.selectedRangeDate.end &&
-                    this.selectedRangeDate.end instanceof FdDate &&
-                    this.selectedRangeDate.end.isDateValid()
-                )) || (!this.inputFieldDate && this.allowNull);
+            return this._isRangeModelValid(this.selectedRangeDate);
         }
     }
 
+    /** Method that returns info if single model given is valid */
+    private _isSingleModelValid(fdDate: FdDate): boolean {
+        return (
+            this._isFdDateValid(fdDate) &&
+            !this.disableFunction(fdDate) &&
+            !this.blockFunction(fdDate)
+        ) || (!this.inputFieldDate && this.allowNull);
+    }
+
+    /** Method that returns info if range date model given is valid */
+    private _isRangeModelValid(fdRangeDate: FdRangeDate): boolean {
+        return (fdRangeDate &&
+                this._isStartDateValid(fdRangeDate.start) &&
+                this._isEndDateValid(fdRangeDate.end)
+            ) || (!this.inputFieldDate && this.allowNull);
+    }
+
+    /** Method that returns info if end date model given is valid */
+    private _isEndDateValid(endDate: FdDate): boolean {
+        return this._isFdDateValid(endDate) &&
+            !this.disableRangeEndFunction(endDate) &&
+            !this.blockRangeEndFunction(endDate);
+    }
+
+    /** Method that returns info if start date model given is valid */
+    private _isStartDateValid(startDate: FdDate): boolean {
+        return this._isFdDateValid(startDate) &&
+            !this.disableRangeStartFunction(startDate) &&
+            !this.blockRangeStartFunction(startDate);
+    }
+
+    /** Method that returns info if end date model given is valid */
+    private _isFdDateValid(fdDate: FdDate): boolean {
+        return fdDate &&
+            fdDate instanceof FdDate &&
+            fdDate.isDateValid();
+    }
+
+    private _invalidDate(): FdDate {
+        return this.dateAdapter.parse('InVaLiDDaTe');
+    }
+
     /** @hidden */
-    private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
+    private _refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
         if (this.calendarComponent) {
             this.calendarComponent.setCurrentlyDisplayed(date);
         }
@@ -480,14 +527,14 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      * @hidden
      * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
      */
-    private formatDate(fdDate: FdDate): string {
+    private _formatDate(fdDate: FdDate): string {
 
         const customFormattedDate: string = this.dateAdapter.format(fdDate);
 
         if (customFormattedDate) {
             return customFormattedDate;
         } else {
-            return this.datePipe.transform(fdDate.toDate(), this.format, null, this.locale);
+            return this._datePipe.transform(fdDate.toDate(), this.format, null, this.locale);
         }
     }
 

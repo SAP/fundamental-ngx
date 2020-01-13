@@ -58,7 +58,7 @@ import { DatePipe } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
+export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Validator {
 
     /** @hidden Reference to the inner time component. */
     @ViewChild(TimeComponent, { static: false })
@@ -82,9 +82,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** @hidden The CalendarDay object which interacts with the inner Calendar component. Internal use. */
     selectedDate: FdDate;
-
-    /** Subscription of the dateFromInput. */
-    private dateFromInputSubscription: Subscription;
 
     /** Placeholder for the inner input element. */
     @Input()
@@ -216,42 +213,6 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     };
 
     /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    disableRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    disableRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
      * Function used to block certain dates in the calendar.
      * @param fdDate FdDate
      */
@@ -322,7 +283,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     @HostListener('document:click', ['$event'])
     public onGlobalClick(event: MouseEvent): void {
-        if (!this.elRef.nativeElement.contains(event.target)) {
+        if (!this._elRef.nativeElement.contains(event.target)) {
             this.closePopover();
         }
     }
@@ -336,17 +297,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        if (this.dateFromInputSubscription) {
-            this.dateFromInputSubscription.unsubscribe();
-        }
-    }
-
-    /** @hidden */
-    constructor(private elRef: ElementRef,
-                private changeDetRef: ChangeDetectorRef,
+    constructor(private _elRef: ElementRef,
+                private _changeDetRef: ChangeDetectorRef,
                 public dateTimeAdapter: DateTimeFormatParser,
-                @Optional() private datePipe: DatePipe
+                @Optional() private _datePipe: DatePipe
     ) {}
 
     /** @hidden */
@@ -362,7 +316,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetRef.detectChanges();
+        this._changeDetRef.detectChanges();
     }
 
     /**
@@ -377,10 +331,10 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         this.time = selected.time;
         this.date = new FdDatetime(this.selectedDate, this.time);
         if (this.isCurrentModelValid()) {
-            this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
-            this.setInput(this.date);
+            this._refreshCurrentlyDisplayedCalendarDate(this.date.date);
+            this._setInput(this.date);
         }
-        this.changeDetRef.detectChanges();
+        this._changeDetRef.detectChanges();
     }
 
     /**
@@ -395,7 +349,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.isCurrentModelValid();
-        this.setInput(this.date);
+        this._setInput(this.date);
         this.onChange(this.date);
     }
 
@@ -410,14 +364,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
         }
         this.date = new FdDatetime(this.selectedDate, this.time);
         this.isInvalidDateInput = !this.isCurrentModelValid();
-        this.setInput(this.date);
+        this._setInput(this.date);
         this.onChange(this.date);
     }
 
     /** @hidden */
     focusArrowLeft(): void {
-        if (this.elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow')) {
-            this.elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow').focus();
+        if (this._elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow')) {
+            this._elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow').focus();
         }
     }
 
@@ -428,13 +382,13 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      */
     handleInputChange(date: string): void {
         const fdTimeDate = this.dateTimeAdapter.parse(date);
-        this.isInvalidDateInput = !this.isModelValid(fdTimeDate);
+        this.isInvalidDateInput = !this._isModelValid(fdTimeDate);
         if (!this.isInvalidDateInput) {
             this.selectedDate = fdTimeDate.date;
             this.time = fdTimeDate.time;
             this.date = new FdDatetime(this.selectedDate, this.time);
             this.onChange(fdTimeDate);
-            this.refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
+            this._refreshCurrentlyDisplayedCalendarDate(fdTimeDate.date);
         } else {
             this.onChange(this.date);
         }
@@ -443,7 +397,7 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
             this.date = FdDatetime.getToday();
             this.selectedDate = this.date.date;
             this.time = this.date.time;
-            this.refreshCurrentlyDisplayedCalendarDate(this.date.date);
+            this._refreshCurrentlyDisplayedCalendarDate(this.date.date);
             this.onChange(null);
         } else if (!date && !this.allowNull) {
             this.isInvalidDateInput = true;
@@ -452,23 +406,33 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
     public isCurrentModelValid(): boolean {
-        return this.isModelValid(this.date);
+        return this._isModelValid(this.date);
     }
 
     /** Method that provides information if FdDateTime passed as arg has properly types and is valid */
-    private isModelValid(fdDateTime: FdDatetime): boolean {
+    private _isModelValid(fdDateTime: FdDatetime): boolean {
         return fdDateTime &&
             fdDateTime instanceof FdDatetime &&
-            fdDateTime.isDateValid() && fdDateTime.isTimeValid();
+            this._isDateValid(fdDateTime) &&
+            fdDateTime.isTimeValid()
+        ;
     }
 
-    private setInput(fdDateTime: FdDatetime): void {
-        this.inputFieldDate = this.formatDateTime(fdDateTime);
-        this.changeDetRef.detectChanges();
+    /** Method that provides information if Date is valid */
+    private _isDateValid(fdDateTime: FdDatetime): boolean {
+        return fdDateTime && fdDateTime.isDateValid() &&
+            !this.disableFunction(fdDateTime.date) &&
+            !this.blockFunction(fdDateTime.date)
+        ;
+    }
+
+    private _setInput(fdDateTime: FdDatetime): void {
+        this.inputFieldDate = this._formatDateTime(fdDateTime);
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
-    private refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
+    private _refreshCurrentlyDisplayedCalendarDate(date: FdDate): void {
         if (this.calendarComponent) {
             this.calendarComponent.setCurrentlyDisplayed(date);
         }
@@ -478,14 +442,14 @@ export class DatetimePickerComponent implements OnInit, OnDestroy, ControlValueA
      * @hidden
      * If there is any format function provided, it is used. Otherwise date format follows angular DatePipe functionality.
      */
-    private formatDateTime(fdDateTime: FdDatetime): string {
+    private _formatDateTime(fdDateTime: FdDatetime): string {
 
         const customFormattedDate: string = this.dateTimeAdapter.format(fdDateTime);
 
         if (customFormattedDate) {
             return customFormattedDate;
         } else {
-            return this.datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
+            return this._datePipe.transform(fdDateTime.toDate(), this.format, null, this.locale);
         }
     }
 

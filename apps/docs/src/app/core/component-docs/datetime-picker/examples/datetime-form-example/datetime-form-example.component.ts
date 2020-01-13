@@ -1,6 +1,6 @@
 import { Component, } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FdDatetime } from '@fundamental-ngx/core';
+import { FdDate, FdDatetime } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-datetime-form-example',
@@ -15,5 +15,9 @@ export class DatetimeFormExampleComponent {
 
     isValid(): boolean {
         return this.customForm.get('date').valid;
+    }
+
+    blockFunction = (fdDate: FdDate): boolean => {
+        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
     }
 }
