@@ -4,7 +4,7 @@ import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
-import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module'
+import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
@@ -52,61 +52,61 @@ import { ProductSwitchModule } from './product-switch/product-switch.module';
 import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification-service/notification.service';
 import { NestedListModule } from './nested-list/nested-list.module';
+import { RadioModule } from './radio/radio.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule],
-  exports: [
-    ActionBarModule,
-    AlertModule,
-    BadgeLabelModule,
-    BreadcrumbModule,
-    BusyIndicatorModule,
-    ButtonModule,
-    ButtonGroupModule,
-    CalendarModule,
-    ComboboxModule,
-    DatePickerModule,
-    DatetimePickerModule,
-    DragAndDropModule,
-    FileInputModule,
-    FormModule,
-    IconModule,
-    IdentifierModule,
-    ImageModule,
-    InlineHelpModule,
-    IdentifierModule,
-    InfiniteScrollModule,
-    InputGroupModule,
-    LayoutGridModule,
-    ListModule,
-    LoadingSpinnerModule,
-    LocalizationEditorModule,
-    MenuModule,
-    MegaMenuModule,
-    ModalModule,
-    MultiInputModule,
-    NestedListModule,
-    NotificationModule,
-    PaginationModule,
-    PanelModule,
-    ProductSwitchModule,
-    PopoverModule,
-    ScrollSpyModule,
-    SelectModule,
-    ShellbarModule,
-    SideNavigationModule,
-    SplitButtonModule,
-    TableModule,
-    TabsModule,
-    TileModule,
-    TimeModule,
-    TimePickerModule,
-    ToggleModule,
-    TokenModule,
-    TreeModule,
-  ],
-  providers: [AlertService, ModalService, NotificationService],
+    imports: [CommonModule, FormsModule],
+    exports: [
+        ActionBarModule,
+        AlertModule,
+        BadgeLabelModule,
+        BreadcrumbModule,
+        BusyIndicatorModule,
+        ButtonModule,
+        ButtonGroupModule,
+        CalendarModule,
+        ComboboxModule,
+        DatePickerModule,
+        DatetimePickerModule,
+        DragAndDropModule,
+        FileInputModule,
+        FormModule,
+        IconModule,
+        IdentifierModule,
+        ImageModule,
+        InlineHelpModule,
+        IdentifierModule,
+        InfiniteScrollModule,
+        InputGroupModule,
+        LayoutGridModule,
+        ListModule,
+        LoadingSpinnerModule,
+        LocalizationEditorModule,
+        MenuModule,
+        MegaMenuModule,
+        ModalModule,
+        MultiInputModule,
+        NestedListModule,
+        NotificationModule,
+        PaginationModule,
+        PanelModule,
+        ProductSwitchModule,
+        PopoverModule,
+        RadioModule,
+        ScrollSpyModule,
+        SelectModule,
+        ShellbarModule,
+        SideNavigationModule,
+        SplitButtonModule,
+        TableModule,
+        TabsModule,
+        TileModule,
+        TimeModule,
+        TimePickerModule,
+        ToggleModule,
+        TokenModule,
+        TreeModule
+    ],
+    providers: [AlertService, ModalService, NotificationService]
 })
-export class FundamentalNgxCoreModule {
-
-}
+export class FundamentalNgxCoreModule {}
