@@ -48,6 +48,7 @@
                              [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time [disabled]="disabled"
+                         [keepTwoDigits]="keepTwoDigitsTime"
                          [meridian]="meridian"
                          [ngModel]="time"
                          (ngModelChange)="handleTimeChange($event)"

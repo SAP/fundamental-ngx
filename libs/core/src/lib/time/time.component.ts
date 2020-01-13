@@ -46,6 +46,13 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     @Input() validate: boolean = true;
 
     /**
+     * @Input when set to true, time inputs won't allow to have 1 digit
+     * for example 9 will become 09
+     * but 12 will be kept as 12.
+     */
+    @Input() keepTwoDigits: boolean = false;
+
+    /**
      * @Input Disables the component.
      */
     @Input() disabled: boolean;
@@ -170,7 +177,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles changes of displayed hour value from template.
      */
-    displayedHourChanged(): void {
+    displayedHourChanged(changedHour: number): void {
+        this.displayedHour = changedHour;
         if (!this.meridian) {
             this.time.hour = this.displayedHour;
         } else {
@@ -334,7 +342,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles minutes model change from template
      * */
-    minuteModelChange(): void {
+    minuteModelChange(minuteChange: number): void {
+        this.time.minute = minuteChange;
         if (!(this.time.minute > 59 || this.time.minute < 0) || !this.validate) {
             this.onChange(this.time);
         }
@@ -343,7 +352,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
     /** @hidden
      * Handles seconds model change from template
      * */
-    secondModelChange(): void {
+    secondModelChange(secondChange: number): void {
+        this.time.second = secondChange;
         if (!(this.time.second > 59 || this.time.second < 0) || !this.validate) {
             this.onChange(this.time);
         }
