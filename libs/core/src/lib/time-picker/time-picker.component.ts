@@ -104,6 +104,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     buttonFocusable: boolean = true;
 
+    /**
+     * @Input when set to true, time inputs won't allow to have 1 digit
+     * for example 9 will become 09
+     * but 12 will be kept as 12.
+     */
+    @Input() keepTwoDigitsTime: boolean = false;
+
     /** @hidden Whether the input time is valid. Internal use. */
     isInvalidTimeInput: boolean = false;
 

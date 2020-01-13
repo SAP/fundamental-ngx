@@ -6,11 +6,12 @@ import { TimeComponent } from './time.component';
 import { ButtonModule } from '../button/button.module';
 import { OnlyDigitsDirective } from '../utils/directives/only-digits.directive';
 import { FormModule } from '../form/form.module';
+import { PipeModule } from '../utils/pipes/pipe.module';
 
 
 @NgModule({
     declarations: [TimeComponent, OnlyDigitsDirective],
-    imports: [CommonModule, FormsModule, FormModule, ButtonModule],
+    imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule],
     exports: [TimeComponent, OnlyDigitsDirective]
 })
 export class TimeModule {}

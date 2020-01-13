@@ -29,6 +29,7 @@
         <fd-time [disabled]="disabled"
                  [meridian]="meridian"
                  [(ngModel)]="time"
+                 [keepTwoDigits]="keepTwoDigitsTime"
                  (ngModelChange)="timeFromTimeComponentChanged()"
                  [spinners]="spinners"
                  [displayMinutes]="displayMinutes"

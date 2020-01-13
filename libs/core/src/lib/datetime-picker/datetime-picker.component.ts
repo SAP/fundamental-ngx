@@ -163,6 +163,13 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     allowNull: boolean = true;
 
     /**
+     * @Input when set to true, time inputs won't allow to have 1 digit
+     * for example 9 will become 09
+     * but 12 will be kept as 12.
+     */
+    @Input() keepTwoDigitsTime: boolean = false;
+
+    /**
      *  The state of the form control - applies css classes.
      *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
      */
