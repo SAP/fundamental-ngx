@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { PopoverModule } from '../popover/popover.module';
 import { InputGroupModule } from '../input-group/input-group.module';
-import { TimeComponent } from '../time/time.component';
 
 import { TimePickerComponent } from './time-picker.component';
 import { TimeObject } from '../time/time-object';
 import { ButtonModule } from '../button/button.module';
+import { TimeModule } from '../time/time.module';
 
 
 
@@ -18,8 +18,8 @@ describe('TimePickerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule],
-            declarations: [TimeComponent, TimePickerComponent]
+            imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule, TimeModule],
+            declarations: [TimePickerComponent]
         }).compileComponents();
     }));
 
