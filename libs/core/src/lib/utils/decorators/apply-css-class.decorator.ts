@@ -11,7 +11,7 @@ import { ELEMENT_REF_EXCEPTION } from '../public_api';
  */
 export function applyCssClass(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
-    descriptor.value = function(): string {
+    descriptor.value = function (): string {
         if (!this.elementRef) {
             throw ELEMENT_REF_EXCEPTION;
         }
@@ -20,7 +20,7 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
         const elementRef = this.elementRef();
 
         if (elementRef) {
-            (elementRef.nativeElement as HTMLElement).classList.value = `${_class} ${this.class}`;
+            (elementRef.nativeElement as HTMLElement).classList.value = `${_class} ${this.class ? this.class : ''}`;
         }
 
         return _class;

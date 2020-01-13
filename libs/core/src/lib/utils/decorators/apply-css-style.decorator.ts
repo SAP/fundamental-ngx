@@ -11,20 +11,15 @@ import { Hash, ELEMENT_REF_EXCEPTION } from '../public_api';
  */
 export function applyCssStyle(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
-    descriptor.value = function(): Hash<number | string> {
-        if (!this.elementRef) {
-            throw ELEMENT_REF_EXCEPTION;
-        }
+    descriptor.value = function (): Hash<number | string> {
+        if (!this.elementRef) { throw ELEMENT_REF_EXCEPTION; }
 
         const _styles: Hash<number | string> = originalMethod.apply(this);
-        const elementRef = this.elementRef();
 
-        if (elementRef) {
-            Object.keys(_styles).forEach(key => {
-                (elementRef.nativeElement as HTMLElement).style[key] = _styles[key];
-            });
-        }
+        Object.keys(_styles).forEach(key => {
+            (this.elementRef().nativeElement as HTMLElement).style[key] = _styles[key];
+        });
 
         return _styles;
-    };
+    }
 }

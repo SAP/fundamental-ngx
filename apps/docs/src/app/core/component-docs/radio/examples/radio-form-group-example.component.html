@@ -1,47 +1,30 @@
 <form [formGroup]="customForm" class="flex-form">
     <fieldset fd-fieldset>
-        <div fd-form-item>
-            <label fd-form-label for="radio-13">
-                <input fd-form-control formControlName="radioInput" name="radioInput" value="option1" type="radio"
-                       id="radio-13">Option 1
-            </label>
-        </div>
-        <div fd-form-item>
-            <label fd-form-label for="radio-14">
-                <input fd-form-control formControlName="radioInput" name="radioInput" value="option2" type="radio"
-                       id="radio-14">Option 2
-            </label>
-        </div>
-        <div fd-form-item>
-            <label fd-form-label for="radio-15">
-                <input fd-form-control formControlName="radioInput" name="radioInput" value="option3" type="radio"
-                       id="radio-15">Option 3
-            </label>
+        <div fd-form-item *ngFor="let value of radioInput.values">
+            <fd-radio-button
+                [selectedValue]="customForm.controls.radioInput.value"
+                [value]="value"
+                [name]="radioInput.name"
+                [formControlName]="radioInput.formControlName"
+            >
+                Option {{ value }}
+            </fd-radio-button>
         </div>
         Radio Button Value: {{ customForm.controls.radioInput.value }}
     </fieldset>
 
     <fieldset fd-fieldset>
-        <div fd-form-item>
-            <label fd-form-label for="radio-23">
-                <input fd-form-control formControlName="disabledRadio" name="disabledRadio" value="option11" type="radio"
-                       id="radio-23">Option 11
-            </label>
-        </div>
-        <div fd-form-item>
-            <label fd-form-label for="radio-24">
-                <input fd-form-control formControlName="disabledRadio" name="disabledRadio" value="option12" type="radio"
-                       id="radio-24">Option 12
-            </label>
-        </div>
-        <div fd-form-item>
-            <label fd-form-label for="radio-25">
-                <input fd-form-control formControlName="disabledRadio" name="disabledRadio" value="option13" type="radio"
-                       id="radio-25">Option 13
-            </label>
+        <div fd-form-item *ngFor="let value of disabledRadio.values">
+            <fd-radio-button
+                [selectedValue]="customForm.controls.disabledRadio.value"
+                [value]="value"
+                [name]="disabledRadio.name"
+                [formControlName]="disabledRadio.formControlName"
+            >
+                Option {{ value }}
+            </fd-radio-button>
         </div>
         Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}
     </fieldset>
 </form>
-<br><br>
-
+<br /><br />
