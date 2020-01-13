@@ -413,6 +413,7 @@ import { InputGroupNumberExampleComponent } from './component-docs/input-group/e
 import { InputGroupSearchExampleComponent } from './component-docs/input-group/examples/input-group-search-example/input-group-search-example.component';
 import { DatePickerRangeDisabledExampleComponent } from './component-docs/date-picker/examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import { DatePickerDisableFuncExampleComponent } from './component-docs/date-picker/examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
+import { TimeTwoDigitsExampleComponent } from './component-docs/time/examples/time-two-digits-example/time-two-digits-example.component';
 
 
 @NgModule({
@@ -772,7 +773,8 @@ import { DatePickerDisableFuncExampleComponent } from './component-docs/date-pic
         PopoverDropdownComponent,
         InputGroupStatesExampleComponent,
         DatePickerRangeDisabledExampleComponent,
-        DatePickerDisableFuncExampleComponent
+        DatePickerDisableFuncExampleComponent,
+        TimeTwoDigitsExampleComponent
     ],
 
     entryComponents: [

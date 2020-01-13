@@ -6,6 +6,7 @@ import { TimeObject } from './time-object';
 import { TimeComponent } from './time.component';
 import { SimpleChange } from '@angular/core';
 import { ButtonModule } from '../button/button.module';
+import { PipeModule } from '../utils/pipes/pipe.module';
 
 describe('TimeComponent', () => {
     let component: TimeComponent;
@@ -13,7 +14,7 @@ describe('TimeComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, ButtonModule],
+            imports: [FormsModule, ButtonModule, PipeModule],
             declarations: [TimeComponent]
         }).compileComponents();
     }));
@@ -57,34 +58,28 @@ describe('TimeComponent', () => {
 
         component.meridian = true;
 
-        component.displayedHour = 12;
         component.period = 'am';
-        component.displayedHourChanged();
+        component.displayedHourChanged(12);
         expect(component.time.hour).toBe(0);
 
-        component.displayedHour = 1;
         component.period = 'am';
-        component.displayedHourChanged();
+        component.displayedHourChanged(1);
         expect(component.time.hour).toBe(1);
 
-        component.displayedHour = 12;
         component.period = 'pm';
-        component.displayedHourChanged();
+        component.displayedHourChanged(12);
         expect(component.time.hour).toBe(12);
 
-        component.displayedHour = 1;
         component.period = 'pm';
-        component.displayedHourChanged();
+        component.displayedHourChanged(1);
         expect(component.time.hour).toBe(13);
 
         component.meridian = false;
 
-        component.displayedHour = 12;
-        component.displayedHourChanged();
+        component.displayedHourChanged(12);
         expect(component.time.hour).toBe(12);
 
-        component.displayedHour = 1;
-        component.displayedHourChanged();
+        component.displayedHourChanged(1);
         expect(component.time.hour).toBe(1);
     });
 

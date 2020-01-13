@@ -15,6 +15,8 @@ import * as timeDisabledSrcTs from '!raw-loader!./examples/time-disabled-example
 import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-no-spinners-example.component.ts';
 import * as timeNoSecondsSrcTs from '!raw-loader!./examples/time-no-seconds-example.component.ts';
 import * as timeOnlyHoursSrcTs from '!raw-loader!./examples/time-only-hours-example.component.ts';
+import * as timeTwoDigitsSrcTs from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.ts';
+import * as timeTwoDigitsSrcH from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.html';
 
 import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
 import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html';
@@ -105,6 +107,16 @@ export class TimeDocsComponent implements OnInit {
             code: timeNoSecondsSrc,
             typescriptFileCode: timeNoSecondsSrcTs,
             component: 'TimeNoSecondsExampleComponent'
+        }
+    ];
+
+    timeTwoDigits: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'time-two-digits-example',
+            code: timeTwoDigitsSrcH,
+            typescriptFileCode: timeTwoDigitsSrcTs,
+            component: 'TimeTwoDigitsExampleComponent'
         }
     ];
 
