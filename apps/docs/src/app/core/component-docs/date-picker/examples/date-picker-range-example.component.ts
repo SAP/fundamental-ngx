@@ -3,12 +3,13 @@ import { FdDate, FdRangeDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-picker-range-example',
-    template: ` <fd-date-picker [type]="'range'" [(ngModel)]="selectedRange">
-                </fd-date-picker>
-                <br/>
-                <div>Selected First Date: {{getSelectedFirstDate()}}</div>
-                <br/>
-                <div>Selected Last Date: {{getSelectedLastDate()}}</div>`
+    template: `
+        <fd-date-picker [type]="'range'" [(ngModel)]="selectedRange">
+        </fd-date-picker>
+        <br/>
+        <div>Selected First Date: {{getSelectedFirstDate()}}</div>
+        <br/>
+        <div>Selected Last Date: {{getSelectedLastDate()}}</div>`
 })
 export class DatePickerRangeExampleComponent {
 

@@ -411,6 +411,8 @@ import { SemanticToggleExampleComponent } from './component-docs/toggle/examples
 import { InputGroupStatesExampleComponent } from './component-docs/input-group/examples/input-group-states-example/input-group-states-example.component';
 import { InputGroupNumberExampleComponent } from './component-docs/input-group/examples/input-group-number-example/input-group-number-example.component';
 import { InputGroupSearchExampleComponent } from './component-docs/input-group/examples/input-group-search-example/input-group-search-example.component';
+import { DatePickerRangeDisabledExampleComponent } from './component-docs/date-picker/examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
+import { DatePickerDisableFuncExampleComponent } from './component-docs/date-picker/examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
 
 
 @NgModule({
@@ -768,7 +770,9 @@ import { InputGroupSearchExampleComponent } from './component-docs/input-group/e
         DatePickerComplexI18nExampleComponent,
         DatetimePickerComplexI18nExampleComponent,
         PopoverDropdownComponent,
-        InputGroupStatesExampleComponent
+        InputGroupStatesExampleComponent,
+        DatePickerRangeDisabledExampleComponent,
+        DatePickerDisableFuncExampleComponent
     ],
 
     entryComponents: [
