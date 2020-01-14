@@ -37,10 +37,10 @@
                 <ul fd-menu-list>
                     <li *ngFor="let value of displayedValues; let ind  = index">
                         <label fd-menu-item (keydown)="handleKeyDown($event, ind)">
-                            <input type="checkbox" fd-form-control
-                                   [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
-                                   (ngModelChange)="handleSelect($event, value)">
-                            <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
+                            <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
+                                         (ngModelChange)="handleSelect($event, value)">
+                                <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
+                            </fd-checkbox>
                         </label>
                     </li>
                 </ul>

@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-select-header',
-  templateUrl: './checkbox-header.component.html',
+    selector: 'app-select-header',
+    templateUrl: './checkbox-header.component.html',
 })
-export class CheckboxHeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CheckboxHeaderComponent {
 }

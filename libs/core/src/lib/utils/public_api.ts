@@ -15,4 +15,5 @@ export * from './decorators/apply-css-style.decorator';
 export * from './dynamic-component/dynamic-component-config';
 export * from './dynamic-component/dynamic-component-injector';
 export * from './dynamic-component/dynamic-component.service';
+export * from './functions';
 export * from './datatypes/hash.datatype';
