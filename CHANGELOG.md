@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.135"></a>
+# [0.13.0-rc.135](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.134...v0.13.0-rc.135) (2020-01-14)
+
+
+### Features
+
+* rewrite Checkbox as a separate module | suit to Fiori3 ([#1777](https://github.com/SAP/fundamental-ngx/issues/1777)) ([3ef07f8](https://github.com/SAP/fundamental-ngx/commit/3ef07f8))
+
+
+
 <a name="0.13.0-rc.134"></a>
 # [0.13.0-rc.134](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.133...v0.13.0-rc.134) (2020-01-14)
 
