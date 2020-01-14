@@ -117,6 +117,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Called by FormControl - used to disable / enable control.*/
     public setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Based on current control state:
@@ -140,6 +141,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         }
         this._setState();
         this.onValueChange(this.checkboxValue);
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Based on current control value sets new control state. */
