@@ -8,6 +8,7 @@ import { MenuModule } from '../menu/menu.module';
 import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { CheckboxModule } from '../checkbox/checkbox.module';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -23,6 +24,7 @@ describe('MultiInputComponent', () => {
                 MenuModule,
                 PopoverModule,
                 PipeModule,
+                CheckboxModule,
                 InputGroupModule
             ]
         })
@@ -43,7 +45,9 @@ describe('MultiInputComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should set placeholder', () => {
+    it('should set placeholder', async () => {
+        await fixture.whenStable();
+
         const placeholder = 'placeholder';
         component.placeholder = placeholder;
         (component as any).changeDetRef.markForCheck();
@@ -52,7 +56,8 @@ describe('MultiInputComponent', () => {
         expect(fixture.nativeElement.querySelector('input').placeholder).toBe(placeholder);
     });
 
-    it('should handle search term change', () => {
+    it('should handle search term change', async () => {
+        await fixture.whenStable();
         spyOn(component.searchTermChange, 'emit');
         spyOn(component.popoverRef, 'updatePopover');
         spyOn(component, 'filterFn');
@@ -70,7 +75,8 @@ describe('MultiInputComponent', () => {
         expect(component.popoverRef.updatePopover).toHaveBeenCalled();
     });
 
-    it('should filter dropdown values', () => {
+    it('should filter dropdown values', async() => {
+        await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
 
@@ -87,7 +93,8 @@ describe('MultiInputComponent', () => {
         expect(component.dropdownValues.length).toBe(3);
     });
 
-    it('should open/close popover on input click', () => {
+    it('should open/close popover on input click', async() => {
+        await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         component.open = false;
@@ -103,7 +110,8 @@ describe('MultiInputComponent', () => {
         expect(component.open).toBe(false);
     });
 
-    it('should open/close popover on button click', () => {
+    it('should open/close popover on button click', async() => {
+        await fixture.whenStable();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         component.open = false;
@@ -119,12 +127,14 @@ describe('MultiInputComponent', () => {
         expect(component.open).toBe(false);
     });
 
-    it('should select values', () => {
+    it('should select values', async() => {
+        await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
         spyOn(component, 'handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
+        fixture.detectChanges();
         component.open = true;
         fixture.detectChanges();
 
@@ -135,7 +145,8 @@ describe('MultiInputComponent', () => {
         expect(fixture.nativeElement.querySelector('fd-token')).toBeTruthy();
     });
 
-    it('should de-select values', () => {
+    it('should de-select values', async() => {
+        await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
         spyOn(component, 'handleSelect').and.callThrough();
@@ -156,7 +167,8 @@ describe('MultiInputComponent', () => {
         expect(fixture.nativeElement.querySelector('fd-token')).toBeFalsy();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
+    it('should handle onMenuKeydownHandler, arrow up on the first item', async() => {
+        await fixture.whenStable();
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {}
@@ -168,7 +180,8 @@ describe('MultiInputComponent', () => {
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up', () => {
+    it('should handle onMenuKeydownHandler, arrow up', async() => {
+        await fixture.whenStable();
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {},

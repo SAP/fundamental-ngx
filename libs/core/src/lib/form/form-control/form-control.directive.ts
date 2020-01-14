@@ -41,10 +41,6 @@ export class FormControlDirective extends AbstractFdNgxClass {
         }
 
         switch (this.type) {
-            case 'checkbox': {
-                this._addControlClass('fd-checkbox');
-                break;
-            }
             case 'radio': {
                 this._addControlClass('fd-radio');
                 break;

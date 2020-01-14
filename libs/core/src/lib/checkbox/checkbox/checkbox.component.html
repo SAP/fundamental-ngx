@@ -1,0 +1,21 @@
+<input
+    type="checkbox"
+    class="fd-checkbox"
+    [id]="inputId"
+    [name]="name"
+    [disabled]="disabled"
+    [checked]="isChecked"
+    [value]="checkboxValue"
+    [indeterminate]="isIndeterminate"
+    [class.fd-checkbox--compact]="compact"
+    [ngClass]="(state ? 'is-' + state : '')"
+    (change)="nextValue()"
+>
+<label class="fd-checkbox__label"
+       [class.fd-checkbox__label--compact]="compact"
+       [for]="inputId">
+    {{label}}
+    <ng-container *ngIf="!label">
+        <ng-content></ng-content>
+    </ng-container>
+</label>

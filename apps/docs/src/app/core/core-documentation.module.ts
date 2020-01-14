@@ -351,9 +351,8 @@ import {
 import { TextareaFormGroupExampleComponent } from '../core/component-docs/textarea/examples/textarea-form-group-example.component';
 import { TextareaHeaderComponent } from '../core/component-docs/textarea/textarea-header/textarea-header.component';
 import { CheckboxHeaderComponent } from '../core/component-docs/checkbox/checkbox-header/checkbox-header.component';
-import { CheckboxExamplesComponent } from '../core/component-docs/checkbox/examples/checkbox-examples.component';
-import { CheckboxFormGroupExampleComponent } from '../core/component-docs/checkbox/examples/checkbox-form-group-example.component';
 import { CheckboxDocsComponent } from '../core/component-docs/checkbox/checkbox-docs.component';
+import { checkboxExampleComponents } from '../core/component-docs/checkbox/';
 import { RadioFormGroupExampleComponent } from '../core/component-docs/radio/examples/radio-form-group-example.component';
 import { RadioExamplesComponent } from '../core/component-docs/radio/examples/radio-examples.component';
 import { RadioDocsComponent } from '../core/component-docs/radio/radio-docs.component';
@@ -500,8 +499,7 @@ import { TimeTwoDigitsExampleComponent } from './component-docs/time/examples/ti
         CalendarMondayStartExampleComponent,
         CalendarFormExamplesComponent,
         CalendarProgrammaticallyChangeExampleComponent,
-        CheckboxExamplesComponent,
-        CheckboxFormGroupExampleComponent,
+        checkboxExampleComponents,
         DatePickerRangeExampleComponent,
         DatePickerSingleExampleComponent,
         DatePickerAllowNullExampleComponent,
