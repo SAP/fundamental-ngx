@@ -1,0 +1,81 @@
+<div [id]="id" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseenter)="pause()"
+    (mouseleave)="play()" (mouseup)="play()" class="carousel {{ class }} {{ type }}" data-ride="carousel">
+    <ol *ngIf="slides.length > 1 && checkDots() && isControls && top " id="topNav" (mouseenter)="pause()"
+        (mouseleave)="play()" (mouseup)="play()" (keypress)="onKeypressHandler($event)" class="carousel-indicators">
+        <span *ngIf="slides.length < 8" class="carousel-indicators">
+            <li *ngFor="let slidez of slides; let i = index" [class.active]="slidez.active === true" tabindex="0"
+                (click)="selectSlide(i)">
+            </li>
+        </span>
+        <span *ngIf="slides.length > 8" class="carousel-indicators">
+            <a tabindex="0" role="button">{{activeSlide}}</a>
+            <span class="fd-pagination"> ... </span>
+            <span class="fd-pagination fd-pagination__total">{{slides.length}} </span>
+        </span>
+        <a class="carousel-control-prev" id="prev" [class.disabled]="activeSlide === 0 && noWrap" tabindex="0"
+            style="top: 20px;padding:0 48px 0 48px;align-items: flex-start;" (keypress)="onKeypressHandler($event)"
+            (click)="previousSlide()" *ngIf="slides.length > 1 && checkNavigation() && isControls && !inMiddle">
+            <span class="fd-button--standard fd-button--light fd-button sap-icon--slim-arrow-left" aria-hidden="true"
+                aria-label="Previous" title="Previous"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" id="next" (click)="nextSlide()" tabindex="0"
+            style="top: 20px;padding:0 48px 0 48px;align-items: flex-start;" (keypress)="onKeypressHandler($event)"
+            [class.disabled]="isLast(activeSlide) && noWrap"
+            *ngIf="slides.length > 1 && checkNavigation() && isControls && !inMiddle">
+            <span class="fd-button--standard fd-button--light fd-button sap-icon--slim-arrow-right" aria-hidden="true"
+                aria-label="Next" title="Next"></span>
+            <span class="sr-only"></span>
+        </a>
+    </ol>
+
+    <div class="carousel-inner" tabindex="0">
+        <ng-content></ng-content>
+    </div>
+
+
+    <a class="carousel-control-prev" id="prev" [class.disabled]="activeSlide === 0 && noWrap" (click)="previousSlide()"
+        style="bottom: 100px;margin:0 8px 0 8px;" tabindex="0" (keypress)="onKeypressHandler($event)"
+        *ngIf="slides.length > 1 && checkNavigation() && isControls && inMiddle">
+        <span class="fd-button--standard fd-button--light fd-button sap-icon--slim-arrow-left" aria-hidden="true"
+            aria-label="Previous" title="Previous"></span>
+        <span class="sr-only">middel</span>
+    </a>
+    <a class="carousel-control-next" id="next" (click)="nextSlide()" [class.disabled]="isLast(activeSlide) && noWrap"
+        style="bottom: 100px;margin: 0 8px 0 8px;" tabindex="0" (keypress)="onKeypressHandler($event)"
+        *ngIf="slides.length > 1 && checkNavigation() && isControls && inMiddle">
+        <span class="fd-button--standard fd-button--light fd-button sap-icon--slim-arrow-right" aria-hidden="true"
+            aria-label="Next" title="Next"></span>
+        <span class="sr-only"></span>
+    </a>
+
+
+    <ol class="carousel-indicators" *ngIf="slides.length > 1 && checkDots() && isControls && bottom" id="bottomNav"
+        (mouseenter)="pause()" (mouseleave)="play()" (mouseup)="play()" (keypress)="onKeypressHandler($event)">
+        <span *ngIf="slides.length < 8" class="carousel-indicators">
+            <li *ngFor="let slidez of slides; let i = index" [class.active]="slidez.active === true" tabindex="0"
+                (click)="selectSlide(i)">
+            </li>
+        </span>
+        <span *ngIf="slides.length > 8" class="carousel-indicators">
+            <a tabindex="0" role="button">{{activeSlide}}</a>
+            <span class="fd-pagination"> of </span>
+            <span class="fd-pagination fd-pagination__total">{{slides.length}} </span>
+        </span>
+        <a class="carousel-control-prev" id="prev" [class.disabled]="activeSlide === 0 && noWrap" tabindex="0"
+            style="bottom: 18px;padding:0 48px 0 48px;align-items: flex-end;" (keypress)="onKeypressHandler($event)"
+            (click)="previousSlide()" *ngIf="slides.length > 1 && checkNavigation() && isControls && !inMiddle">
+            <span class="fd-button--standard fd-button--light fd-button sap-icon--slim-arrow-left" aria-hidden="true"
+                aria-label="Previous" title="Previous"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" id="next" (click)="nextSlide()" tabindex="0"
+            style="bottom: 18px;padding:0 48px 0 48px;align-items: flex-end;" (keypress)="onKeypressHandler($event)"
+            [class.disabled]="isLast(activeSlide) && noWrap"
+            *ngIf="slides.length > 1 && checkNavigation() && isControls && !inMiddle">
+            <span class="fd-button--standard fd-button--light fd-button sap-icon--slim-arrow-right" aria-hidden="true"
+                aria-label="Next" title="Next"></span>
+            <span class="sr-only"></span>
+        </a>
+    </ol>
+</div>

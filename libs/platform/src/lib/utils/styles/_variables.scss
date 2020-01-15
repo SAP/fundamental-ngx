@@ -1,0 +1,77 @@
+// Variables
+// Fonts
+$font-size-large: 1.5rem !default;
+$font-bold: 500 !default;
+$font-small: 0.9rem !default;
+
+$line-height-small: 1 !default;
+$line-height-extra-large: 2.5 !default;
+
+// Shadows
+$z-depth-1: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !default;
+$z-depth-1-half: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !default;
+$z-depth-2: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !default;
+$z-depth-3: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !default;
+$z-depth-4: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21) !default;
+$z-depth-5: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22) !default;
+
+// Transitions
+$transition-basic: all 0.2s ease-in-out !default;
+$transition-hoverable: all 0.55s ease-in-out !default;
+
+// Border radius
+$border-radius-base: 0.125rem !default;
+$border-radius-circle: 50% !default;
+
+
+/*** Global ***/
+// Media Query Ranges
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$small-screen: 600px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default;
+$sidenav-breakpoint: 1440px !default;
+
+$medium-and-up: 'only screen and (min-width : #{$small-screen-up})' !default;
+$large-and-up: 'only screen and (min-width : #{$medium-screen-up})' !default;
+$small-and-down: 'only screen and (max-width : #{$small-screen})' !default;
+$medium-and-down: 'only screen and (max-width : #{$medium-screen})' !default;
+$medium-only: 'only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})' !default;
+$hide-sidenav: 'only screen and (max-width : #{$sidenav-breakpoint})' !default;
+
+// Link color
+$link-color: #0275d8 !default;
+$link-hover-color: darken($link-color, 15%) !default;
+
+// Carousels
+$fdp-carousel-transition-duration: 0.6s !default;
+$fdp-carousel-control-icon-width: 2.25rem !default;
+$fdp-carousel-control-icon-height: $fdp-carousel-control-icon-width !default;
+$fdp-carousel-indicators-width: auto;
+$fdp-carousel-indicators-height: $fdp-carousel-indicators-width !default;
+$fdp-carousel-indicators-border-radius: $border-radius-circle !default;
+$fdp-carousel-transition-duration: 0.6s !default;
+$fdp-carousel-item-transform: translateX(0) !default;
+$fdp-carousel-item-transform-2: translate3d(0, 0, 0) !default;
+$fdp-carousel-hundered-percent:100% ;
+
+
+$fdp-carousel-inner-background-color: #fafafa;
+
+$fdp-carousel-active-indicator-height: 8px;
+$fdp-carousel-active-indicator-width: 8px;
+$fdp-carousel-active-indicator-border-radius: 4px;
+$fdp-carousel-active-indicator-background-color: #0854A0;
+
+$fdp-carousel-hover-indicator-height:4px;
+$fdp-carousel-hover-indicator-width:4px;
+$fdp-carousel-hover-indicator-border-radius: 4px;
+$fdp-carousel-hover-indicator-background-color: #095CAF;
+
+$fdp-carousel-indicators-li-height: 4px;
+$fdp-carousel-indicators-li-width: 4px;
+$fdp-carousel-indicators-li-border-radius: 4px;
+
+

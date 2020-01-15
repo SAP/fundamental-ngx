@@ -1,0 +1,157 @@
+<fd-docs-section-title [id]="'Carosuel-no-control'" [componentName]="'carosuel'"> Carosuel With No Control
+</fd-docs-section-title>
+<description>
+    Carousel with no control where slides will only displayed automtically after 3000 time interval with default image
+    alignment.
+    <code class="code-snippet">[isControls]="'false'"</code> and
+    <code class="code-snippet">[animation]="'slide'"</code> options are used to achive this.
+</description>
+<component-example [name]="'ex0'">
+    <fdp-platform-no-control-carosuel-example></fdp-platform-no-control-carosuel-example>
+</component-example>
+<code-example [exampleFiles]="carosuelNoControlExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'Carosuel-with-control'" [componentName]="'carosuel'"> Carosuel With Control
+</fd-docs-section-title>
+<description>
+    Carousel with control where slides display can be controlled by using next and previous buttons.
+    <code class="code-snippet">[isControls]="'true'"</code> it is default value.
+    <code class="code-snippet">[animation]="'slide'"</code> options are used to achieve this.
+</description>
+<component-example [name]="'ex1'">
+    <fdp-platform-carosuel-with-control-example></fdp-platform-carosuel-with-control-example>
+</component-example>
+<code-example [exampleFiles]="carosuelWithControlExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'Carosuel-With-Top-Indicator'" [componentName]="'carosuel'"> Carosuel With Top Indicator
+</fd-docs-section-title>
+<description>
+    Carousel with top Indicator control where slides display can be controlled by using next and previous buttons.
+    <code class="code-snippet">[isControls]="'true'"</code> it is default value.
+    <code class="code-snippet">[animation]="'slide'"</code> and set
+    <code class="code-snippet">[indicatorPosition]="'value''"</code> to place
+    the indicator as per our requirement.
+</description>
+<component-example [name]="'ex2'">
+    <fdp-platform-carosuel-indicator-on-top-example></fdp-platform-carosuel-indicator-on-top-example>
+</component-example>
+<code-example [exampleFiles]="carosuelWithTopIndicatorExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'Carosuel-With-Top-Indicator'" [componentName]="'carosuel'"> Carosuel With previous and
+    next navigations along with Indicators
+</fd-docs-section-title>
+<description>
+    Carousel with previous and
+    next navigations along with Indicators where slides display can be controlled by using next and previous buttons.
+    <code class="code-snippet">[isControls]="'true'"</code> it is default value.
+    <code class="code-snippet">[animation]="'slide'"</code> and set
+    <code class="code-snippet">[indicatorPosition]="'value'"</code> and set
+    <code class="code-snippet">[inMiddle]="false|true"</code> true
+    will make the previous and next navigations in middle of the slides and false will display it along with page
+    indicators.
+</description>
+<component-example [name]="'ex2'">
+    <fdp-platform-carosuel-navigation-example></fdp-platform-carosuel-navigation-example>
+</component-example>
+<code-example [exampleFiles]="carosuelNavigationExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'Carosuel-With-Interval'" [componentName]="'carosuel'"> Carosuel With Defined intervals
+</fd-docs-section-title>
+<description>
+    Interval attribute will help to give the defined intervals between slide display.
+    <code class="code-snippet">[interval]="'value'"</code> required to be set.
+</description>
+<component-example [name]="'ex3'">
+    <fdp-platform-carosuel-interval-example></fdp-platform-carosuel-interval-example>
+</component-example>
+<code-example [exampleFiles]="carosuelIntervalExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'Carosuel-With-Caption'" [componentName]="'carosuel'"> Carosuel With Caption
+</fd-docs-section-title>
+<description>
+    Each slide will have some caption.
+    <code class="code-snippet">[caption]="'value'"</code> required to be set in "'fdp-carousel-item'" tag.
+</description>
+<component-example [name]="'ex4'">
+    <fdp-platform-carosuel-caption-example></fdp-platform-carosuel-caption-example>
+</component-example>
+<code-example [exampleFiles]="carosuelCaptionExample"></code-example>
+<separator></separator>
+
+
+<fd-docs-section-title [id]="'Carosuel-With-Video'" [componentName]="'carosuel'"> Videos in Carosuel
+</fd-docs-section-title>
+<description>
+    We can have vedios also in carousel. Need to give the vedio source details in fdp-carosuel-item.
+</description>
+<component-example [name]="'ex5'">
+    <fdp-platform-carosuel-video-example>
+    </fdp-platform-carosuel-video-example>
+</component-example>
+<code-example [exampleFiles]="carosuelVideoExample"></code-example>
+<separator></separator>
+
+
+
+<fd-docs-section-title [id]="'Carosuel-With-Number-Indicators'" [componentName]="'carosuel'"> Carosuel With Number
+    Indicator
+</fd-docs-section-title>
+<description>
+    When number of slides reached more than 8 then dots will be converted into numbers as shown in example.
+</description>
+<component-example [name]="'ex6'">
+    <fdp-platform-carosuel-number-indicator-example>
+    </fdp-platform-carosuel-number-indicator-example>
+</component-example>
+<code-example [exampleFiles]="carosuelNumberIndicatorExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title [id]="'Carosuel-With-Error'" [componentName]="'carosuel'"> Error handling in Carosuel
+</fd-docs-section-title>
+<description>
+    Validate a required senario and update the <code class="code-snippet">[error]="'true'"</code>
+</description>
+<component-example [name]="'ex7'">
+    <fdp-platform-carosuel-with-error-example>
+    </fdp-platform-carosuel-with-error-example>
+</component-example>
+<code-example [exampleFiles]="carosuelWithErrorExample"></code-example>
+<separator></separator>
+
+
+<fd-docs-section-title [id]="'Carosuel-With-loading-indicator'" [componentName]="'carosuel'"> Loading indicator in
+    Carosuel
+</fd-docs-section-title>
+<description>
+    Validate a required senario and update the <code class="code-snippet">[loading]="'true'"</code> to display loading
+    indicator
+</description>
+<component-example [name]="'ex8'">
+    <fdp-platform-carosuel-with-loading-indicator-example>
+    </fdp-platform-carosuel-with-loading-indicator-example>
+</component-example>
+<code-example [exampleFiles]="carosuelWithLoadingIndicatorExample"></code-example>
+<separator></separator>
+
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fdp-carosuel [id]="'myCarouselPlay'" [animation]="data.properties.animation"
+        [(activeSlide)]="data.properties.activeSlideIndex" [indicatorPosition]="data.properties.indicatorPosition"
+        [isControls]="data.properties.isControls" [inMiddle]="data.properties.inMiddle"
+        [interval]="data.properties.interval" [noWrap]="data.properties.noWrap" [noPause]="data.properties.noPause">
+        <fdp-carousel-item>
+            <img style="width: 100%;" src="../../../../../assets/07.png" alt="First slide">
+        </fdp-carousel-item>
+        <fdp-carousel-item>
+            <img style="width: 100%;" src="../../../../../assets/08.png" alt="Second slide">
+        </fdp-carousel-item>
+        <fdp-carousel-item>
+            <img style="width: 100%;" src="../../../../../assets/09.png" alt="Third slide">
+        </fdp-carousel-item>
+    </fdp-carosuel>
+</playground>

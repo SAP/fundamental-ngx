@@ -5,6 +5,8 @@ import { PlatformButtonDocsComponent } from './component-docs/platform-button/pl
 import { PlatformButtonHeaderComponent } from './component-docs/platform-button/platform-button-header/platform-button-header.component';
 import { PlatformActionbarHeaderComponent } from './component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
 import { PlatformActionBarDocsComponent } from './component-docs/platform-action-bar/platform-action-bar-docs.component';
+import { PlatformCarosuelDocsComponent } from './component-docs/platform-carosuel/platform-carosuel-docs.component';
+import { PlatformCarosuelHeaderComponent } from './component-docs/platform-carosuel/platform-carosuel-header/platform-carosuel-header.component';
 import { ApiComponent } from './../documentation/core-helpers/api/api.component';
 import { API_FILES } from './api-files';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
@@ -37,7 +39,7 @@ export const ROUTES: Routes = [
                     { path: '', component: PlatformActionBarDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }]
             },
-          {
+            {
                 path: 'menu',
                 component: PlatformMenuHeaderComponent,
                 children: [
@@ -51,6 +53,12 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformSelectDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+            {
+                path: 'carosuel', component: PlatformCarosuelHeaderComponent, children: [
+                    { path: '', component: PlatformCarosuelDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.carosuel } }
                 ]
             }
         ]

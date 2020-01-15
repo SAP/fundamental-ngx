@@ -1,0 +1,50 @@
+<div *ngIf="!error && !loading">
+    <ng-content></ng-content>
+</div>
+<div class="carousel-caption">
+    <span class="responsive-caption">{{caption}}</span>
+</div>
+<div *ngIf="error">
+    <div id="errorMsg" aria-labelledby="error-label" class="fdp-small-margin-bottom " style="font-size: 1rem;">
+        <div style="text-align: center;width: 100%;height: 100%;">
+            <h2 class="fd-tile__text"><span class="fdp-icon--document"> </span></h2>
+            <p class="fd-tile__text"><span id="error-text" class="fdp-label-text-wrapper">
+                    {{errorMessage}}</span></p>
+        </div>
+    </div>
+</div>
+<div *ngIf="loading">
+
+    <div class="fd-tile__content" style="text-align: center;height: 100%;">
+        <div class="fd-busy-indicator--m" aria-hidden="false" aria-label="Loading">
+            <div class="fd-busy-indicator--circle-0"></div>
+            <div class="fd-busy-indicator--circle-1"></div>
+            <div class="fd-busy-indicator--circle-2"></div>
+        </div><br /><br />
+    </div>
+    <!-- <div class="fd-tile__content" style="text-align: center;width: 100%;height: 100%;">
+        <div style="text-align: center">
+            <div id="indicator" data-fdp-ui="indicator" aria-labelledby="indicator-label"
+                class="fdpMBusyIndicator fdp-small-margin-bottom " style="font-size: 1rem;">
+                <div id="indicator0-busy-area" class="fdpMBusyIndicatorBusyArea fdpLocalBusy"
+                    style="position: relative;" aria-busy="true" tabindex="0">
+                    <div id="indicator-busyIndicator"
+                        class="fdpBlockLayer fdpLocalBusyIndicator fdpLocalBusyIndicatorSizeMedium fdpLocalBusyIndicatorFade"
+                        role="progressbar" aria-valuemin="0" aria-valuemax="100" alt="" tabindex="0"
+                        title="Please wait">
+                        <div class="fdpLocalBusyIndicatorAnimation fdpLocalBusyIndicatorAnimStandard fd-tile__text">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <label tabindex="0" id="indicator0-label" data-fdp-ui="indicator0-label" aria-label="loading..."
+                    class="fdpMLabel fdpSelectable fdpMLabelMaxWidth fd-tile__text" style="text-align: center;">
+                    <span id="indicator-label-text" class="fdp-label-text-wrapper">
+                        loading...</span>
+                </label>
+            </div>
+        </div>
+    </div> -->
+</div>

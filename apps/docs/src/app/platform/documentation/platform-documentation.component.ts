@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { SectionInterface } from '../../documentation/core-helpers/sections-toolbar/section.interface';
 import { SectionsToolbarComponent } from '../../documentation/core-helpers/sections-toolbar/sections-toolbar.component';
 
@@ -17,13 +17,13 @@ export class PlatformDocumentationComponent {
 
     guides = [{ url: 'platform/home', name: 'Home' }, { url: 'platform/new-component', name: 'New Component' }];
 
-   
 
-    components = [{ url: 'platform/action-bar', name: 'Action Bar' }, 
-                  { url: 'platform/button', name: 'Button' }, 
-                  { url: 'platform/menu', name: 'Menu' },
-                  { url: 'platform/select', name: 'Select'}
-                 ];
+    components = [{ url: 'platform/action-bar', name: 'Action Bar' },
+    { url: 'platform/button', name: 'Button' },
+    { url: 'platform/menu', name: 'Menu' },
+    { url: 'platform/select', name: 'Select' },
+    { url: 'platform/carosuel', name: 'Carosuel' }
+    ];
 
     layouts = [];
 

@@ -6,7 +6,8 @@
     ]
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.d.ts"
   ],
   "paths": {
     "@fundamental-ngx/core": [

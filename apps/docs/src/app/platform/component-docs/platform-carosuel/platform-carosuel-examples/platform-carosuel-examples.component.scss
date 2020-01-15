@@ -1,0 +1,22 @@
+.carousel .carousel-item {
+    transition-duration: 1000;
+}
+
+.carousel-fade {
+    .carousel-item {
+      opacity: 0;
+      transition-duration: .3s ease-in 1s;
+      transition-property: opacity;
+    }
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+
+.content-display {
+    width: 100% !important;
+    display: block !important;
+}

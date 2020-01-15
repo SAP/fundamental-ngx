@@ -19,14 +19,14 @@ import {
 import {
     PlatformActionbarExamplesComponent
 } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
-import {PlatformActionbarWithBackButtonExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
-import {PlatformActionbarWithDescriptionExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
-import {PlatformActionbarWithLongPageTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
-import {PlatformActionbarEditTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
-import {PlatformActionbarWithContextualMenuExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
-import {PlatformActionbarWithPositiveNegativeActionsExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
+import { PlatformActionbarWithBackButtonExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
+import { PlatformActionbarWithDescriptionExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
+import { PlatformActionbarWithLongPageTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
+import { PlatformActionbarEditTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
+import { PlatformActionbarWithContextualMenuExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
+import { PlatformActionbarWithPositiveNegativeActionsExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
 import { PlatformActionbarHeaderComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
-import {PlatformActionBarDocsComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
+import { PlatformActionBarDocsComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
@@ -45,6 +45,20 @@ import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/pl
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
 
+import { PlatformCarosuelHeaderComponent } from './component-docs/platform-carosuel/platform-carosuel-header/platform-carosuel-header.component';
+import {
+    PlatformCarosuelWithLoadingIndicatorExampleComponent,
+    PlatformCarosuelWithErrorExampleComponent,
+    PlatformCarosuelNumberIndicatorExampleComponent,
+    PlatformCarosuelVideoExampleComponent,
+    PlatformCarosuelCaptionExampleComponent,
+    PlatformCarosuelNoControlExampleComponent,
+    PlatformCarosuelWithControlExampleComponent,
+    PlatformCarosuelIndicatorOnTopExampleComponent,
+    PlatformCarosuelNavigationExampleComponent,
+    PlatformCarosuelIntervalExampleComponent
+} from './component-docs/platform-carosuel/platform-carosuel-examples/platform-carosuel-examples.component';
+import { PlatformCarosuelDocsComponent } from './component-docs/platform-carosuel/platform-carosuel-docs.component';
 @NgModule({
     declarations: [
         PlatformDocumentationComponent,
@@ -80,7 +94,19 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformSelectTypesDefaultExampleComponent,
         PlatformSelectTypesNoBorderExampleComponent,
         PlatformSelectTypesSplitExampleComponent,
-        PlatformSelectTypesWithIconExampleComponent
+        PlatformSelectTypesWithIconExampleComponent,
+        PlatformCarosuelHeaderComponent,
+        PlatformCarosuelNoControlExampleComponent,
+        PlatformCarosuelWithControlExampleComponent,
+        PlatformCarosuelDocsComponent,
+        PlatformCarosuelIndicatorOnTopExampleComponent,
+        PlatformCarosuelNavigationExampleComponent,
+        PlatformCarosuelIntervalExampleComponent,
+        PlatformCarosuelCaptionExampleComponent,
+        PlatformCarosuelVideoExampleComponent,
+        PlatformCarosuelNumberIndicatorExampleComponent,
+        PlatformCarosuelWithErrorExampleComponent,
+        PlatformCarosuelWithLoadingIndicatorExampleComponent
     ],
     imports: [
         SharedDocumentationModule,
@@ -90,4 +116,4 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
     ],
     providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }
