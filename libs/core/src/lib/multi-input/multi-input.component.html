@@ -5,7 +5,7 @@
                 [disabled]="disabled"
                 [closeOnOutsideClick]="true"
                 [fillControlMode]="fillControlMode"
-                [hideContainer]="displayedValues.length === 0"
+                [hideContainer]="displayedValues && displayedValues.length === 0"
                 class="fd-multi-input-popover-custom">
         <fd-popover-control>
             <div class="fd-combobox-control"
