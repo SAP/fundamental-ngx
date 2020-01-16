@@ -40,6 +40,10 @@ export class PopoverComponent {
     @Input()
     noArrow: boolean = true;
 
+    /** Whether the popover container needs an extra class for styling. */
+    @Input()
+    addContainerClass: string;
+
     /** Whether the popover is disabled. */
     @Input()
     @HostBinding('class.fd-popover-custom--disabled')
