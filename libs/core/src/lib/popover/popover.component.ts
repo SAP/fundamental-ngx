@@ -3,7 +3,7 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding
+    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding, OnInit, OnChanges
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
@@ -28,7 +28,7 @@ let popoverUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopoverComponent {
+export class PopoverComponent implements OnInit, OnChanges {
 
     /** @hidden */
     @ViewChild(PopoverDirective, { static: false })
@@ -114,6 +114,10 @@ export class PopoverComponent {
     @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
 
+    /** Used to hide the popover container when the contents are empty. */
+    @Input()
+    hideContainer: boolean = false;
+
     /**
      * Toggles the popover open state.
      */
@@ -175,6 +179,24 @@ export class PopoverComponent {
         if (this.dropdownComponent) {
             this.dropdownComponent.isOpen = isOpen;
         }
+    }
+
+    /** @hidden
+     *  Function that hides the container, primarily used when the container is empty
+     * */
+    private updateHideContainer() {
+        this.additionalClasses = this.additionalClasses.filter(className => className !== 'fd-popover-hide-container');
+        if (this.hideContainer) {
+            this.additionalClasses.push('fd-popover-hide-container');
+        }
+    }
+
+    ngOnInit() {
+        this.updateHideContainer();
+    }
+
+    ngOnChanges() {
+        this.updateHideContainer();
     }
 
 }
