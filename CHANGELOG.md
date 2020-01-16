@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.142"></a>
+# [0.13.0-rc.142](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.141...v0.13.0-rc.142) (2020-01-16)
+
+
+### Bug Fixes
+
+* add fix for input compact mode ([#1816](https://github.com/SAP/fundamental-ngx/issues/1816)) ([1b53a1f](https://github.com/SAP/fundamental-ngx/commit/1b53a1f))
+
+
+
 <a name="0.13.0-rc.141"></a>
 # [0.13.0-rc.141](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.140...v0.13.0-rc.141) (2020-01-16)
 
