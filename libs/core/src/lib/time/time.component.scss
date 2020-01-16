@@ -1,8 +1,8 @@
 @import "~fundamental-styles/dist/input";
 @import "~fundamental-styles/dist/time";
 
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.fd-time__item {
+    .fd-time__input {
+        min-width: auto;
+    }
 }
