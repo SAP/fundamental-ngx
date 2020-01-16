@@ -74,7 +74,7 @@ export class FormControlDirective extends AbstractFdNgxClass {
     private _addControlClass(className: string): void {
         this._addClassToElement(className);
         if (this.compact) {
-            this._addClassToElement('${className}--compact`');
+            this._addClassToElement(className + '--compact');
         }
     }
 }
