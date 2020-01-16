@@ -56,5 +56,14 @@ describe('PopoverComponent', () => {
         component.handleKeydown(event);
         expect(component.isOpen).toBe(true);
         expect(component.isOpenChange.emit).toHaveBeenCalledWith(true);
-    })
+    });
+
+    it('should update the hideContainer variable', () => {
+        component.hideContainer = true;
+        component.additionalClasses = [];
+
+        component.ngOnChanges();
+
+        expect(component.additionalClasses.indexOf('fd-popover-hide-container')).toBeGreaterThan(-1);
+    });
 });
