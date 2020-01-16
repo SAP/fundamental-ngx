@@ -13,9 +13,6 @@ import { ModalService, ModalRef } from '@fundamental-ngx/core';
 
 @NgModule({
     declarations: [
-        ModalInModalComponent,
-        ModalInModalSecondComponent,
-        ModalInModalFirstComponent
     ],
     imports: [
         BrowserModule,
