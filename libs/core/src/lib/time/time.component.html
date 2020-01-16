@@ -19,7 +19,7 @@
             }"
             (ngModelChange)="displayedHourChanged($event)"
             (blur)="inputBlur('hour')"
-            class="fd-input fd-time__input"
+            class="fd-input fd-time__input fd-input--no-number-spinner"
             type="number"
             placeholder="{{timeI18n?.hoursPlaceholder}}"
             [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
@@ -54,7 +54,7 @@
             (ngModelChange)="minuteModelChange($event)"
             (blur)="inputBlur('minute')"
             [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
-            class="fd-input fd-time__input"
+            class="fd-input fd-time__input fd-input--no-number-spinner"
             type="number"
             placeholder="{{timeI18n?.minutesPlaceholder}}"
             [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
@@ -88,7 +88,7 @@
             (ngModelChange)="secondModelChange($event)"
             (blur)="inputBlur('second')"
             [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
-            class="fd-input fd-time__input"
+            class="fd-input fd-time__input fd-input--no-number-spinner"
             type="number"
             placeholder="{{timeI18n?.secondsPlaceholder}}"
             (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"
