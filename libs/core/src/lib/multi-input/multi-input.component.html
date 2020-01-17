@@ -1,5 +1,5 @@
 <div class="fd-multi-input-field">
-    <fd-popover [isOpen]="open"
+    <fd-popover [isOpen]="open && displayedValues && displayedValues.length"
                 (isOpenChange)="openChangeHandle($event)"
                 [triggers]="[]"
                 [disabled]="disabled"
