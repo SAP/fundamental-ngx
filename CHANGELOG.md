@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.147"></a>
+# [0.13.0-rc.147](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.146...v0.13.0-rc.147) (2020-01-17)
+
+
+### Bug Fixes
+
+* (combobox) - event throw reorder ([#1831](https://github.com/SAP/fundamental-ngx/issues/1831)) ([f1988d1](https://github.com/SAP/fundamental-ngx/commit/f1988d1))
+
+
+
 <a name="0.13.0-rc.146"></a>
 # [0.13.0-rc.146](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.145...v0.13.0-rc.146) (2020-01-17)
 
