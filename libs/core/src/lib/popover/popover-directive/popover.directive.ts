@@ -180,18 +180,6 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
                 this.setupFillBehaviour();
             });
         }
-
-        if (changes.additionalClasses) {
-            const hideContainerPreviousIndex = changes.additionalClasses.previousValue.indexOf('fd-popover-hide-container');
-            const hideContainerCurrentIndex = changes.additionalClasses.currentValue.indexOf('fd-popover-hide-container');
-            if (this.containerRef) {
-                if (hideContainerPreviousIndex >= 0 && hideContainerCurrentIndex === -1) {
-                    this.containerRef.location.nativeElement.classList.remove('fd-popover-hide-container');
-                } else if (hideContainerCurrentIndex >= 0 && hideContainerPreviousIndex === -1)  {
-                    this.containerRef.location.nativeElement.classList.add('fd-popover-hide-container');
-                }
-            }
-        }
     }
 
     /**
