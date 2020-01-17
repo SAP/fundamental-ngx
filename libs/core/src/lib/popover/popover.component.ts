@@ -113,11 +113,7 @@ export class PopoverComponent {
     /** Id of the popover. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
-
-    /** Used to hide the popover container when the contents are empty. */
-    @Input()
-    hideContainer: boolean = false;
-
+    
     /**
      * Toggles the popover open state.
      */

@@ -5,7 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding, HostListener,
+    HostBinding,
     Input,
     OnChanges,
     OnInit,
