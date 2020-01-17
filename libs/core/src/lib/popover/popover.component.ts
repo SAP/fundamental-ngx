@@ -113,7 +113,7 @@ export class PopoverComponent {
     /** Id of the popover. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
-
+    
     /**
      * Toggles the popover open state.
      */

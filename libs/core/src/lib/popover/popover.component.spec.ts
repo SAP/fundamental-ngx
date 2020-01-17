@@ -56,5 +56,5 @@ describe('PopoverComponent', () => {
         component.handleKeydown(event);
         expect(component.isOpen).toBe(true);
         expect(component.isOpenChange.emit).toHaveBeenCalledWith(true);
-    })
+    });
 });
