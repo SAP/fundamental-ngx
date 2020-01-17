@@ -17,4 +17,7 @@ export class FormMessageComponent {
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
     type: MessageStates;
+
+    // adding a compact class which shrinks the margin from the top
+    @Input () compact: boolean = false;
 }

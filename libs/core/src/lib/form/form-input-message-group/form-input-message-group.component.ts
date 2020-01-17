@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { MessageStates } from '../form-message/form-message.component';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'fd-form-input-message-group',
@@ -9,17 +8,10 @@ import { MessageStates } from '../form-message/form-message.component';
 
 })
 export class FormInputMessageGroupComponent {
+  //To allow user to determine what event he wants to trigger the messages to show
+  @Input() triggers: string[] = ['click'];
 
-  @Input() state: string;
-  @Input() compact: boolean = false;
-  type: MessageStates;
+  // Allows the user to decide if he wants to keep the error message after they click outside
+  @Input() closeOnOutsideClick: boolean = true;
 
-  /** Whether form message should be opened */
-  @Input()
-  open: boolean = false;
-
-  @Output()
-  readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor() { }
 }
