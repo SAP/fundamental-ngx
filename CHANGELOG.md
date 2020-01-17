@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0-rc.148"></a>
+# [0.13.0-rc.148](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.147...v0.13.0-rc.148) (2020-01-17)
+
+
+### Bug Fixes
+
+* multi-input 0.13.0 bugs ([#1828](https://github.com/SAP/fundamental-ngx/issues/1828)) ([46c7504](https://github.com/SAP/fundamental-ngx/commit/46c7504))
+
+
+
 <a name="0.13.0-rc.147"></a>
 # [0.13.0-rc.147](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.146...v0.13.0-rc.147) (2020-01-17)
 
