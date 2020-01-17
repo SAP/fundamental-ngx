@@ -324,8 +324,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
         if (this.open !== isOpen) {
-            this.openChange.emit(this.open);
             this.open = isOpen;
+            this.openChange.emit(this.open);
             this.onTouched();
             if (isOpen) {
                 this.focusTrap.activate();
