@@ -21,12 +21,10 @@ export class ToolbarComponent {
             title: 'Core',
             icon: 'home',
             selected: true,
-            callback: this.productSwitcherCallback
         },
         {
             title: 'Platform',
             icon: 'business-objects-experience',
-            callback: this.productSwitcherCallback
         }
     ];
 
@@ -48,10 +46,6 @@ export class ToolbarComponent {
 
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
-
-    productSwitcherCallback($event) {
-        console.log($event);
-    }
 
     constructor(
         private routerService: Router,
