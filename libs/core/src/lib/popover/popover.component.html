@@ -1,23 +1,25 @@
-<div #popoverContainer>
-    <div class="fd-popover__control"
-         [attr.aria-expanded]="this.disabled ? false : isOpen"
-         [attr.aria-disabled]="this.disabled"
-         aria-haspopup="true"
-         (keydown)="handleKeydown($event)"
-         [fdPopover]="popoverBody"
-         [additionalClasses]="additionalClasses"
-         [(isOpen)]="isOpen"
-         (isOpenChange)="openChanged($event)"
-         [noArrow]="noArrow"
-         [disabled]="disabled"
-         [triggers]="triggers"
-         [placement]="placement"
-         [focusTrapped]="focusTrapped"
-         [options]="options"
-         [fillControlMode]="fillControlMode"
-         [closeOnOutsideClick]="closeOnOutsideClick"
-         [closeOnEscapeKey]="closeOnEscapeKey"
-         [appendTo]="(appendTo ? appendTo : popoverContainer)">
+<div #popoverContainer [ngClass]="addContainerClass ? addContainerClass : ''">
+    <div
+        class="fd-popover__control"
+        [attr.aria-expanded]="this.disabled ? false : isOpen"
+        [attr.aria-disabled]="this.disabled"
+        aria-haspopup="true"
+        (keydown)="handleKeydown($event)"
+        [fdPopover]="popoverBody"
+        [additionalClasses]="additionalClasses"
+        [(isOpen)]="isOpen"
+        (isOpenChange)="openChanged($event)"
+        [noArrow]="noArrow"
+        [disabled]="disabled"
+        [triggers]="triggers"
+        [placement]="placement"
+        [focusTrapped]="focusTrapped"
+        [options]="options"
+        [fillControlMode]="fillControlMode"
+        [closeOnOutsideClick]="closeOnOutsideClick"
+        [closeOnEscapeKey]="closeOnEscapeKey"
+        [appendTo]="appendTo ? appendTo : popoverContainer"
+    >
         <ng-content select="fd-popover-control"></ng-content>
         <ng-content select="fd-dropdown-control"></ng-content>
     </div>

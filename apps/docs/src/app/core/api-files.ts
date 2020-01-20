@@ -86,7 +86,8 @@ export const API_FILES = {
         'FormLabelComponent',
         'FormLegendDirective',
         'FormMessageComponent',
-        'FormSetDirective'
+        'FormSetDirective',
+        'FormInputMessageGroupComponent'
     ],
     icon: [
         'IconComponent'

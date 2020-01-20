@@ -8,9 +8,11 @@ import { FormLabelComponent } from './form-label/form-label.component';
 import { FormLegendDirective } from './form-legend/form-legend.directive';
 import { FormMessageComponent } from './form-message/form-message.component';
 import { FormGroupComponent } from './form-group/form-group.component';
+import { FormInputMessageGroupComponent } from './form-input-message-group/form-input-message-group.component';
+import { PopoverModule } from '../popover/popover.module';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, PopoverModule],
     exports: [
         FieldsetComponent,
         FormControlDirective,
@@ -18,6 +20,7 @@ import { FormGroupComponent } from './form-group/form-group.component';
         FormLabelComponent,
         FormLegendDirective,
         FormMessageComponent,
+        FormInputMessageGroupComponent,
         FormGroupComponent
     ],
     declarations: [
@@ -27,7 +30,8 @@ import { FormGroupComponent } from './form-group/form-group.component';
         FormLabelComponent,
         FormLegendDirective,
         FormMessageComponent,
-        FormGroupComponent
+        FormInputMessageGroupComponent,
+        FormGroupComponent,
     ]
 })
-export class FormModule {}
+export class FormModule { }
