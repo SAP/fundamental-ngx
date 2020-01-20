@@ -144,6 +144,34 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._changeDetectorRef.detectChanges();
     }
 
+    /** @hidden Updates checkbox state on mouse click
+     * and prevents from double check update from label-input binding */
+    public checkByClick(event: Event) {
+        this.nextValue();
+        event.preventDefault();
+    }
+
+    /** @hidden Updates checkbox state on spacebar key
+     * and prevents from double check update from label-input binding */
+    public checkByKey(event: KeyboardEvent): void {
+        if (this._isSpaceBarEvent(event)) {
+            this.nextValue();
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden Prevents from checkbox update based on label-input binding */
+    public muteKey(event: KeyboardEvent): void {
+        if (this._isSpaceBarEvent(event)) {
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden Determines event source based on key code */
+    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
+        return event.keyCode === 32;
+    }
+
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
         if (this._compare(this.checkboxValue, this.values.trueValue)) {
