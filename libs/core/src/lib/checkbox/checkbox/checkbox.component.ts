@@ -154,7 +154,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Updates checkbox state on spacebar key
      * and prevents from double check update from label-input binding */
     public checkByKey(event: KeyboardEvent): void {
-        if (event.keyCode === 32) {
+        if (this._isSpaceBarEvent(event)) {
             this.nextValue();
             event.preventDefault();
         }
@@ -162,9 +162,14 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Prevents from checkbox update based on label-input binding */
     public muteKey(event: KeyboardEvent): void {
-        if (event.keyCode === 32) {
+        if (this._isSpaceBarEvent(event)) {
             event.preventDefault();
         }
+    }
+
+    /** @hidden Determines event source based on key code */
+    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
+        return event.keyCode === 32;
     }
 
     /** @hidden Based on current control value sets new control state. */
