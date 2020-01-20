@@ -1,0 +1,162 @@
+<div class="fd-tsdoc-container">
+<div class="tsd-panel tsd-typography">
+	<a href="#fundamental-ngx" id="fundamental-ngx" style="color: inherit; text-decoration: none;">
+		<h1>Fundamental NGX</h1>
+	</a>
+	<p><a href="//www.npmjs.com/package/@fundamental-ngx/platform"><img src="https://badge.fury.io/js/%40fundamental-ngx%2Fplatform.svg" alt="npm version"></a>
+		<a href="https://bundlephobia.com/result?p=%40fundamental-ngx%2Fplatform"><img src="https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fplatform" alt="Minified Size"></a>
+		<a href="https://bundlephobia.com/result?p=%40fundamental-ngx%2Fplatform"><img src="https://badgen.net/bundlephobia/minzip/%40fundamental-ngx%2Fplatform" alt="Minzipped Size"></a>
+		<a href="https://travis-ci.org/SAP/fundamental-ngx"><img src="https://travis-ci.org/SAP/fundamental-ngx.svg?branch=master" alt="Build Status"></a>
+		<a href="https://coveralls.io/github/SAP/fundamental-ngx?branch=master"><img src="https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=master" alt="Coverage Status"></a>
+	<a href="https://ui-fundamentals.slack.com"><img src="https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack" alt="Slack"></a></p>
+	<a href="#description" id="description" style="color: inherit; text-decoration: none;">
+		<h2>Description</h2>
+	</a>
+	<p>   The <code>@fundamental-ngx/platform</code> is built on top of the <code>@fundamental-ngx/core</code> to enhance existing functionality.</p>
+	<p>  Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.</p>
+	<p>  Components must be instantiable programmatically.</p>
+	<p>  Enterprise readiness:</p>
+	<p>    1. Working with data( reactive stream over the array, Data sources over the reactive steam)</p>
+	<p>    2. Layouts (Dashboard, detail page, master/detail page, Search/result page).</p>
+	<p>   It is not about UI:</p>
+	<p>    1. Application state UI
+		2. Bootstrapping and Configuration
+		3. Communication with the backend system.
+	Example:</p>
+	<p> This example captures several things:</p>
+	<p>   a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..</p>
+	<p>   b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)</p>
+	<p>   c). If we need to group information into sections</p>
+	<p>   d). How we are handling and forms errors
+	e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.</p>
+	<pre><code>&lt;fdp-<span class="hljs-keyword">form</span>-group [isFiveZoneLayout]=<span class="hljs-string">"true"</span> labelLayout=<span class="hljs-string">"floating"</span>
+                    [formGroup]=<span class="hljs-string">"fg"</span> [errorHanlding]=<span class="hljs-string">"'navigate'"</span>
+                    (onSubmit)=<span class="hljs-string">"save($event)"</span> (navigateToError)=<span class="hljs-string">"onGoToError($event)"</span>&gt;
+
+    &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"email"</span> id=<span class="hljs-string">"email"</span> zone=<span class="hljs-string">"left"</span>&gt;
+        &lt;fdp-<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"email"</span> placeholder=<span class="hljs-string">"email"</span> [required]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-<span class="hljs-keyword">input</span>&gt;
+    &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
+
+    &lt;fdp-<span class="hljs-keyword">form</span>-field reqiuire=<span class="hljs-string">"true"</span> <span class="hljs-keyword">label</span>=<span class="hljs-string">"My Favorite Colors"</span> id=<span class="hljs-string">"colors"</span> hint=<span class="hljs-string">"Pick one of your favorite color"</span> zone=<span class="hljs-string">"right"</span>&gt;
+        &lt;fdp-select [<span class="hljs-keyword">list</span>]=<span class="hljs-string">"myColors"</span>&gt;&lt;/fdp-select&gt;
+    &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
+
+    &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"Description"</span> id=<span class="hljs-string">"desription"</span> zone=<span class="hljs-string">"bottom"</span>&gt;
+        &lt;fdp-text-area [autoSizeEnabled]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-text-area&gt;
+    &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
+    &lt;/fdp-<span class="hljs-keyword">form</span>-group&gt;</code></pre><pre><code>    &lt;fdp-<span class="hljs-keyword">form</span>-group [isFiveZoneLayout]=<span class="hljs-string">"true"</span> labelLayout=<span class="hljs-string">"floating"</span>
+                        [formGroup]=<span class="hljs-string">"fg"</span> [errorHanlding]=<span class="hljs-string">"'navigate'"</span>&gt;
+        
+        &lt;fdp-<span class="hljs-keyword">form</span>-section title=<span class="hljs-string">"Basic Information"</span>&gt;
+        &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"email"</span> id=<span class="hljs-string">"email"</span> zone=<span class="hljs-string">"left"</span>&gt;
+            &lt;fdp-<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"email"</span> placeholder=<span class="hljs-string">"email"</span> [required]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-<span class="hljs-keyword">input</span>&gt;
+        &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
+        &lt;fdp-<span class="hljs-keyword">form</span>-field reqiuire=<span class="hljs-string">"true"</span>
+                        <span class="hljs-keyword">label</span>=<span class="hljs-string">"My Favorite Colors"</span>
+                        id=<span class="hljs-string">"colors"</span> hint=<span class="hljs-string">"Pick one of your favorite color"</span> zone=<span class="hljs-string">"right"</span>&gt;
+            &lt;fdp-select [<span class="hljs-keyword">list</span>]=<span class="hljs-string">"myColors"</span>&gt;&lt;/fdp-select&gt;
+        &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
+    &lt;/fdp-<span class="hljs-keyword">form</span>-section&gt;
+        &lt;fdp-<span class="hljs-keyword">form</span>-field <span class="hljs-keyword">label</span>=<span class="hljs-string">"Description"</span> id=<span class="hljs-string">"desription"</span> zone=<span class="hljs-string">"bottom"</span>&gt;
+            &lt;fdp-text-area [autoSizeEnabled]=<span class="hljs-string">"true"</span>&gt;&lt;/fdp-text-area&gt;
+        &lt;/fdp-<span class="hljs-keyword">form</span>-field&gt;
+    &lt;/fdp-<span class="hljs-keyword">form</span>-group&gt;</code></pre>
+	<a href="#api-reference" id="api-reference" style="color: inherit; text-decoration: none;">
+		<h2>API Reference</h2>
+	</a>
+	<p>See <a href="https://sap.github.io/fundamental-ngx/docs/platform/home">Component Documentation</a> for examples and API details.</p>
+	<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+		<h2>Requirements</h2>
+	</a>
+	<p>To download and use Fundamental NGX, you will first need to install the <a href="https://www.npmjs.com/get-npm">node package manager</a>.</p>
+	<p>Fundamental NGX is intended for use with Angular 5 or newer.</p>
+	<p>Prior knowledge of Angular is recommended.</p>
+	<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+		<h2>Getting Started</h2>
+	</a>
+	<p>For an existing Angular CLI application,</p>
+	<ol>
+		<li><p><strong>Install Fundamental-NGX.</strong>
+				<code>ng add @fundamental-ngx/platform</code>
+			For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
+			<p> <em>If you do not use the Angular CLI or if this command does not work for you, please see the <a href="https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide">full installation guide</a>.</em></p>
+		</li>
+		<li><p><strong>Import the modules you want to use.</strong></p>
+			<p> To add the entire library, add the following import to your main application module.</p>
+			<pre><code class="language-javascript">
+ <span class="hljs-keyword">import</span> { FundamentalNgxPlatformModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/platform'</span>;
+
+ @NgModule({
+     ...
+     imports: [FundamentalNgxPlatformModule],
+ })
+ <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
+			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
+			<p> For example, to use Toggles, add the following import to your main application module.</p>
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { ToggleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;</code></pre>
+			<p> For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
+			<p> import { ToggleModule } from &#39;@fundamental-ngx/core&#39;;</p>
+			<p> @NgModule({
+				...
+				imports: [ToggleModule],
+				})
+			export class DemoModule { }</p>
+		<pre><code></code></pre></li>
+		<li><p><strong>Add the component to your HTML.</strong></p>
+			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-toggle</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"'l'"</span> [(<span class="hljs-attr">checked</span>)]=<span class="hljs-string">"myValue"</span>&gt;</span>Large Toggle<span class="hljs-tag">&lt;/<span class="hljs-name">fd-toggle</span>&gt;</span></code></pre>
+		</li>
+	</ol>
+	<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
+		<h2>Tests</h2>
+	</a>
+	<p>Fundamental NGX makes use of Jasmine and Karma for its unit tests.</p>
+	<p>Run <code>ng test @fundamental-ngx/platform</code>. Append <code>--code-coverage</code> to generate code coverage documentation.</p>
+	<p>For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
+	<a href="#versioning" id="versioning" style="color: inherit; text-decoration: none;">
+		<h2>Versioning</h2>
+	</a>
+	<p>The <code>@fundamental-ngx/platform</code> library follows <a href="https://semver.org/">Semantic Versioning</a>. These components strictly adhere to the <code>[MAJOR].[MINOR].[PATCH]</code> numbering system (also known as <code>[BREAKING].[FEATURE].[FIX]</code>).</p>
+	<p>For models prior to 0.11.1 use <code>fundamental-ngx</code></p>
+	<p>Merges to the <code>master</code> branch will be published as a prerelease. Prereleases will include an <strong>rc</strong> version (<em>e.g.</em> <code>[MAJOR].[MINOR].[PATCH]-rc.[RC]</code>).</p>
+	<a href="#known-issues" id="known-issues" style="color: inherit; text-decoration: none;">
+		<h2>Known Issues</h2>
+	</a>
+	<p>Please see <a href="https://github.com/SAP/fundamental-ngx/issues">Issues</a>.</p>
+	<a href="#support" id="support" style="color: inherit; text-decoration: none;">
+		<h2>Support</h2>
+	</a>
+	<p>If you encounter an issue, you can <a href="https://github.com/SAP/fundamental-ngx/issues">create a ticket</a>.</p>
+	<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+		<h2>Contributing</h2>
+	</a>
+	<p>If you want to contribute, please check the <a href="https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> documentation for contribution guidelines. Please follow the <a href="https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit">Angular commit message guidelines</a>.</p>
+	<p>Check out the <a href="https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md">NEW_COMPONENT.md</a> guide on building a new component for the library and creating the necessary documentation for your new component.</p>
+	<a href="#platform" id="platform" style="color: inherit; text-decoration: none;">
+		<h1>Platform</h1>
+	</a>
+	<p>This library was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 7.2.0.</p>
+	<a href="#code-scaffolding" id="code-scaffolding" style="color: inherit; text-decoration: none;">
+		<h2>Code scaffolding</h2>
+	</a>
+	<p>Run <code>ng generate component component-name --project platform</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module --project platform</code>.</p>
+	<blockquote>
+		<p>Note: Don&#39;t forget to add <code>--project platform</code> or else it will be added to the default project in your <code>angular.json</code> file.</p>
+	</blockquote>
+	<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+		<h2>Build</h2>
+	</a>
+	<p>Run <code>ng build platform</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
+	<a href="#publishing" id="publishing" style="color: inherit; text-decoration: none;">
+		<h2>Publishing</h2>
+	</a>
+	<p>After building your library with <code>ng build platform</code>, go to the dist folder <code>cd dist/platform</code> and run <code>npm publish</code>.</p>
+	<a href="#running-unit-tests" id="running-unit-tests" style="color: inherit; text-decoration: none;">
+		<h2>Running unit tests</h2>
+	</a>
+	<p>Run <code>ng test platform</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+	<a href="#further-help" id="further-help" style="color: inherit; text-decoration: none;">
+		<h2>Further help</h2>
+	</a>
+	<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://github.com/angular/angular-cli/blob/master/README.md">Angular CLI README</a>.</p>
+</div>
+</div>

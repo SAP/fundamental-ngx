@@ -1,6 +1,6 @@
 # @Fundamental-NGX/Core
 
-[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx.core)
+[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx/core)
 [![Minified Size](https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
 [![Minzipped Size](https://badgen.net/bundlephobia/minzip/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
 [![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=master)](https://travis-ci.org/SAP/fundamental-ngx)
@@ -52,6 +52,9 @@ Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breakin
 
 For an existing Angular CLI application,
 
+0. **Video tutorial**
+[How to use the Fundamental Core Library](https://www.youtube.com/watch?v=i4VIiuzD2Fg)
+
 1. **Install Fundamental-NGX.**
    `ng add @fundamental-ngx/core`
    For models prior to 0.10 use `fundamental-ngx`
@@ -63,11 +66,11 @@ For an existing Angular CLI application,
     To add the entire library, add the following import to your main application module.
 
     ```javascript
-    import { FundamentalNgxModule } from '@fundamental-ngx/core';
+    import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 
     @NgModule({
         ...
-        imports: [FundamentalNgxModule],
+        imports: [FundamentalNgxCoreModule],
     })
     export class DemoModule { }
     ```

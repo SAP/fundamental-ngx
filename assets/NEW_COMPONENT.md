@@ -1,6 +1,6 @@
 # Implementing a new component for Fundamental NGX
 
-In this guide, we'll explore the library and documentation code base and create a new component of our own.
+In this guide, we'll explore the library and documentation code base and create a new component of our own. [How to create a new Fundamental NGX component](https://www.youtube.com/watch?v=uN9WlsdspHg)
 
 ### Code Base Structure
 
@@ -90,7 +90,7 @@ In poster-header.component.html Copy/paste the code here:
 <description>
     <p>The poster shows an image</p>
 </description>
-<import module="PosterModule" path="fundamental-ngx"></import>
+<import module="PosterModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>
@@ -149,7 +149,7 @@ In `poster-docs.component.html`, we'll provide a brief explanation of the poster
 
 ## Step10: Adding the new documentation module and route
 
-Now that we've got our documentation files for the poster, add them to the documentation module declarations array in `documentation.module.ts`.
+Now that we've got our documentation files for the poster, add them to the documentation module declarations array in `core-documentation.module.ts`.
 
 ```TypeScript
     declarations: [
@@ -205,7 +205,7 @@ In the library source, open `poster.component.html`, remove the default code and
 
 ```
 
-## Step14: Making stackblitz work
+## Step15: Making stackblitz work
 
 Follow the instructions at https://github.com/SAP/fundamental-ngx/wiki/Stackblitz-support-instructions
 

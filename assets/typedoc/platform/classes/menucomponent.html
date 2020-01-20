@@ -1,0 +1,263 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fdp-menu&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p><code>&lt;fdp-menu&gt;</code> is a menu component which provides navigation, action and selection
+			options.</p>
+		</div>
+		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fdp-menu</span> [<span class="hljs-attr">menuItems</span>]=<span class="hljs-string">"menuData"</span>
+[<span class="hljs-attr">showSeparator</span>]=<span class="hljs-string">true</span>
+[<span class="hljs-attr">isScrolling</span>]=<span class="hljs-string">true</span>
+[<span class="hljs-attr">scrollLimit</span>]=<span class="hljs-string">8</span>
+[<span class="hljs-attr">width</span>]=<span class="hljs-string">"'600px'"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">fdp-menu</span>&gt;</span></code></pre>
+		<p>Menu item/group data should be provided to <code>&lt;fdp-menu&gt;</code> using an array of MenuItem or MenuGroup:</p>
+		<pre><code class="language-ts">complexMenuData: FdpItem[] = [];</code></pre>
+		<pre><code class="language-ts"><span class="hljs-keyword">this</span>.complexMenuData = [{
+label: <span class="hljs-string">'Item One'</span>,
+command: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+alert(<span class="hljs-string">'The first item.'</span>)
+},
+selectable: <span class="hljs-literal">true</span>,
+selected: <span class="hljs-literal">true</span>,
+secondaryIcon: <span class="hljs-string">'sap-icon--grid'</span>,
+}, {
+label: <span class="hljs-string">'Second Item'</span>,
+groupItems: [
+{
+label: <span class="hljs-string">'Item 1 in Group 1'</span>,
+command: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+alert(<span class="hljs-string">'Item 1 in Group 1 called'</span>);
+}
+},
+{
+label: <span class="hljs-string">'Item 2 in Group 1'</span>,
+command: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+alert(<span class="hljs-string">'Item 2 in Group 111'</span>);
+},
+disabled: <span class="hljs-literal">true</span>
+}
+]
+},{
+label: <span class="hljs-string">'Third Item'</span>,
+command: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+alert(<span class="hljs-string">"Third"</span>);
+},
+icon: <span class="hljs-string">'grid'</span>
+}];</code></pre>
+		<p>Please note that <code>secondaryIcon</code> takes icon in the format <code>sap-icon&lt;icon-name&gt;</code> whereas <code>icon</code> takes the format <code>&lt;icon-name&gt;</code>.</p>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">MenuComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnChanges</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isscrolling" class="tsd-anchor"></a>
+		<h3>is<wbr>Scrolling</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Scrolling<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L191">libs/platform/src/lib/components/menu/menu.component.ts:191</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Specify if items are to scroll</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="menuitems" class="tsd-anchor"></a>
+		<h3>menu<wbr>Items</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">menu<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdpItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L209">libs/platform/src/lib/components/menu/menu.component.ts:209</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The menu items that are passed in by the user.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="scrolllimit" class="tsd-anchor"></a>
+		<h3>scroll<wbr>Limit</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">scroll<wbr>Limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L197">libs/platform/src/lib/components/menu/menu.component.ts:197</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Specify the number of items after which scroll must begin</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="showseparator" class="tsd-anchor"></a>
+		<h3>show<wbr>Separator</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">show<wbr>Separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L185">libs/platform/src/lib/components/menu/menu.component.ts:185</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Add separating line between menu items. [Default: false]</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="width" class="tsd-anchor"></a>
+		<h3>width</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L203">libs/platform/src/lib/components/menu/menu.component.ts:203</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>the max width of the menu component</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Menu<wbr>Component<span class="tsd-signature-symbol">(</span>cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, keyboardService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuKeyboardService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L218">libs/platform/src/lib/components/menu/menu.component.ts:218</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+					<li>
+						<h5>keyboardService: <span class="tsd-signature-type">MenuKeyboardService</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MenuComponent</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="handlekeypress" class="tsd-anchor"></a>
+		<h3>handle<wbr>Key<wbr>Press</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">handle<wbr>Key<wbr>Press<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyboardEvent</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L348">libs/platform/src/lib/components/menu/menu.component.ts:348</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>event: <span class="tsd-signature-type">KeyboardEvent</span></h5>
+					</li>
+					<li>
+						<h5>index: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="onitemclick" class="tsd-anchor"></a>
+		<h3>on<wbr>Item<wbr>Click</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">on<wbr>Item<wbr>Click<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuItem</span>, _group<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuGroup</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L295">libs/platform/src/lib/components/menu/menu.component.ts:295</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>item: <span class="tsd-signature-type">MenuItem</span></h5>
+					</li>
+					<li>
+						<h5>_group: <span class="tsd-signature-type">MenuGroup</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="processdata" class="tsd-anchor"></a>
+		<h3>process<wbr>Data</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">process<wbr>Data<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdpItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MenuGroup</span><span class="tsd-signature-symbol">[]</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/menu/menu.component.ts#L307">libs/platform/src/lib/components/menu/menu.component.ts:307</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>data: <span class="tsd-signature-type">FdpItem</span><span class="tsd-signature-symbol">[]</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MenuGroup</span><span class="tsd-signature-symbol">[]</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

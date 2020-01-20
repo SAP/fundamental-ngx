@@ -1,0 +1,602 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="tsd-signature-type">SelectComponent</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">SelectPlatformComponent</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnChanges</span></li>
+		<li><span class="tsd-signature-type">AfterContentInit</span></li>
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">AfterContentInit</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L56">libs/platform/src/lib/components/select/select.component.ts:56</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form element ID.
+				Todo: This should be moved to higher class that will be common to all input fields</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="list" class="tsd-anchor"></a>
+		<h3>list</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L60">libs/platform/src/lib/components/select/select.component.ts:60</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>variable to input any type of object.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="noselectionstring" class="tsd-anchor"></a>
+		<h3>no<wbr>Selection<wbr>String</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">no<wbr>Selection<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L68">libs/platform/src/lib/components/select/select.component.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>String rendered as first value in the popup which let the user to make &#39;no selection&#39; from
+					available list of values. When this option is active and use make this selection we save a
+				NULL value</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-overwrite">
+		<a name="value" class="tsd-anchor"></a>
+		<h3>value</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides SelectComponent.value</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L83">libs/platform/src/lib/components/select/select.component.ts:83</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Directly sets value to the component that at the ends up at writeValue as well fires
+						change detections</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides SelectComponent.value</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L87">libs/platform/src/lib/components/select/select.component.ts:87</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Directly sets value to the component that at the ends up at writeValue as well fires
+						change detections</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>newValue: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Select<wbr>Platform<wbr>Component<span class="tsd-signature-symbol">(</span>cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectPlatformComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides SelectComponent.__constructor</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L100">libs/platform/src/lib/components/select/select.component.ts:100</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SelectPlatformComponent</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="appendto" class="tsd-anchor"></a>
+		<h3>append<wbr>To</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">append<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"body"</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>appendTo</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The element to which the popover should be appended.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>compact</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the select is in compact mode.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="disabled" class="tsd-anchor"></a>
+		<h3>disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>disabled</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the select component is disabled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="fillcontrolmode" class="tsd-anchor"></a>
+		<h3>fill<wbr>Control<wbr>Mode</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fill<wbr>Control<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopoverFillMode</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>fillControlMode</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Preset options for the popover body width.</p>
+				<ul>
+					<li><code>at-least</code> will apply a minimum width to the body equivalent to the width of the control.</li>
+					<li><code>equal</code> will apply a width to the body equivalent to the width of the control.</li>
+					<li>Leave blank for no effect.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="glyph" class="tsd-anchor"></a>
+		<h3>glyph</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>glyph</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Glyph to add icon in the select component.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="isopen" class="tsd-anchor"></a>
+		<h3>is<wbr>Open</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>isOpen</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Open state of the select.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="isopenchange" class="tsd-anchor"></a>
+		<h3>is<wbr>Open<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>isOpenChange</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when the popover open state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="loading" class="tsd-anchor"></a>
+		<h3>loading</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>loading</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>If user wants to disable clicking when the content has not yet loaded and apply the three dots.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="maxheight" class="tsd-anchor"></a>
+		<h3>max<wbr>Height</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">max<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>maxHeight</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Max height of the popover. Any overflowing elements will be accessible through scrolling.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="optionvaluetemplate" class="tsd-anchor"></a>
+		<h3>option<wbr>Value<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">option<wbr>Value<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L75">libs/platform/src/lib/components/select/select.component.ts:75</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>custom option popup item template defined by app.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="placeholder" class="tsd-anchor"></a>
+		<h3>placeholder</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>placeholder</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Placeholder for the select. Appears in the triggerbox if no option is selected.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="popperoptions" class="tsd-anchor"></a>
+		<h3>popper<wbr>Options</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">popper<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopperOptions</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>popperOptions</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Popper.js options of the popover.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="selecttype" class="tsd-anchor"></a>
+		<h3>select<wbr>Type</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">select<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectType</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>selectType</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Select type defines the border type of the select button.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="triggertemplate" class="tsd-anchor"></a>
+		<h3>trigger<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">trigger<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>triggerTemplate</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Template with which to display the trigger box.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="triggervalue" class="tsd-anchor"></a>
+		<h3>trigger<wbr>Value</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">trigger<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>triggerValue</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="unselectmissingoption" class="tsd-anchor"></a>
+		<h3>unselect<wbr>Missing<wbr>Option</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">unselect<wbr>Missing<wbr>Option<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>unselectMissingOption</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>If the option should be unselected and value changed to undefined, when the current value is
+					not presented in option array. Switching it off can be handy, when there is some delay between providing
+				possible options and chosen value.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="valuechange" class="tsd-anchor"></a>
+		<h3>value<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">value<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>SelectPlatformComponent</span>.<span>valueChange</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when the selected value of the select changes.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="close" class="tsd-anchor"></a>
+		<h3>close</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>SelectPlatformComponent</span>.<span>close</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Closes the select popover body.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="ngaftercontentinit" class="tsd-anchor"></a>
+		<h3>ng<wbr>After<wbr>Content<wbr>Init</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>Content<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides SelectComponent.ngAfterContentInit</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L118">libs/platform/src/lib/components/select/select.component.ts:118</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Dirty assignment is to disable resetOption logic.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="ngoninit" class="tsd-anchor"></a>
+		<h3>ng<wbr>OnInit</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides SelectComponent.ngOnInit</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L123">libs/platform/src/lib/components/select/select.component.ts:123</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="onselection" class="tsd-anchor"></a>
+		<h3>on<wbr>Selection</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">on<wbr>Selection<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OptionComponent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L107">libs/platform/src/lib/components/select/select.component.ts:107</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>event: <span class="tsd-signature-type">OptionComponent</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="open" class="tsd-anchor"></a>
+		<h3>open</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>SelectPlatformComponent</span>.<span>open</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Opens the select popover body.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="toggle" class="tsd-anchor"></a>
+		<h3>toggle</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">toggle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>SelectPlatformComponent</span>.<span>toggle</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Toggles the open state of the select.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="writevalue" class="tsd-anchor"></a>
+		<h3>write<wbr>Value</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>newValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides SelectComponent.writeValue</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/0e8f0c81/libs/platform/src/lib/components/select/select.component.ts#L126">libs/platform/src/lib/components/select/select.component.ts:126</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>newValue: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>
