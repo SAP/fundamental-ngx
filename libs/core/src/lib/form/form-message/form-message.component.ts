@@ -17,4 +17,8 @@ export class FormMessageComponent {
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
     type: MessageStates;
+
+    /** Whether to apply compact mode to the message. */
+    @Input()
+    compact: boolean = false;
 }
