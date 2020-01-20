@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.0"></a>
+# [0.13.0](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.149...v0.13.0) (2020-01-20)
+
+
+### Bug Fixes
+
+* change checkbox state update trigger ([#1832](https://github.com/SAP/fundamental-ngx/issues/1832)) ([abe9ee4](https://github.com/SAP/fundamental-ngx/commit/abe9ee4))
+
+
+### Features
+
+* form messages adoption from styles 4.0 ([#1827](https://github.com/SAP/fundamental-ngx/issues/1827)) ([e3d7871](https://github.com/SAP/fundamental-ngx/commit/e3d7871))
+
+
+
 <a name="0.13.0-rc.149"></a>
 # [0.13.0-rc.149](https://github.com/SAP/fundamental-ngx/compare/v0.13.0-rc.148...v0.13.0-rc.149) (2020-01-17)
 
