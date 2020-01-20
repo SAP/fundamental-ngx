@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { PopoverFillMode } from '@fundamental-ngx/core';
+import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
 
 @Component({
     selector: 'fd-form-input-message-group',
