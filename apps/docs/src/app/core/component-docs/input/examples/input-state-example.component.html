@@ -3,21 +3,21 @@
         Valid Input
     </label>
     <fd-form-input-message-group>
-        <input fd-form-control type="text" id="input-52" placeholder="Field placeholder text" [state]="'valid'" />
-        <fd-form-message [type]="'success'"
-            >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-52" placeholder="Field placeholder text" [state]="'valid'"/>
+        <fd-form-message [type]="'success'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item>
     <label fd-form-label for="input-53">
-        Invalid Input
+        Invalid Input - Message appears on hover
     </label>
-    <fd-form-input-message-group [triggers]="['hover']">
-        <input fd-form-control type="text" id="input-53" placeholder="Field placeholder text" [state]="'invalid'" />
-        <fd-form-message [type]="'error'"
-            >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+    <fd-form-input-message-group [triggers]="['mouseenter', 'mouseleave']">
+        <input fd-form-control type="text" id="input-53" placeholder="Field placeholder text" [state]="'invalid'"/>
+        <fd-form-message [type]="'error'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
@@ -27,9 +27,9 @@
         Warning Input
     </label>
     <fd-form-input-message-group>
-        <input fd-form-control type="text" id="input-54" placeholder="Field placeholder text" [state]="'warning'" />
-        <fd-form-message [type]="'warning'"
-            >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-54" placeholder="Field placeholder text" [state]="'warning'"/>
+        <fd-form-message [type]="'warning'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
@@ -39,9 +39,9 @@
         Information Input
     </label>
     <fd-form-input-message-group>
-        <input fd-form-control type="text" id="input-55" placeholder="Field placeholder text" [state]="'information'" />
-        <fd-form-message [type]="'information'"
-            >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        <input fd-form-control type="text" id="input-55" placeholder="Field placeholder text" [state]="'information'"/>
+        <fd-form-message [type]="'information'">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
@@ -50,11 +50,11 @@
     <label fd-form-label for="input-56">
         Disabled Input
     </label>
-    <input fd-form-control type="text" id="input-56" placeholder="Field placeholder text" disabled />
+    <input fd-form-control type="text" id="input-56" placeholder="Field placeholder text" disabled/>
 </div>
 <div fd-form-item>
     <label fd-form-label for="input-57">
         Readonly Input
     </label>
-    <input fd-form-control type="text" id="input-57" placeholder="Field placeholder text" readonly />
+    <input fd-form-control type="text" id="input-57" placeholder="Field placeholder text" readonly/>
 </div>

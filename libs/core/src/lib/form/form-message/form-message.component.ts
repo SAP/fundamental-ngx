@@ -18,6 +18,7 @@ export class FormMessageComponent {
     @Input()
     type: MessageStates;
 
-    // adding a compact class which shrinks the margin from the top
-    @Input () compact: boolean = false;
+    /** Whether to apply compact mode to the message. */
+    @Input()
+    compact: boolean = false;
 }
