@@ -5,3 +5,4 @@ export * from './form-item/form-item.component';
 export * from './form-legend/form-legend.directive';
 export * from './form-message/form-message.component';
 export * from './fieldset/fieldset.component';
+export * from './form-input-message-group/form-input-message-group.component';

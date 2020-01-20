@@ -9,7 +9,7 @@ import { FormLegendDirective } from './form-legend/form-legend.directive';
 import { FormMessageComponent } from './form-message/form-message.component';
 import { FormGroupComponent } from './form-group/form-group.component';
 import { FormInputMessageGroupComponent } from './form-input-message-group/form-input-message-group.component';
-import { PopoverModule } from '../popover/public_api';
+import { PopoverModule } from '../popover/popover.module';
 
 @NgModule({
     imports: [CommonModule, PopoverModule],
