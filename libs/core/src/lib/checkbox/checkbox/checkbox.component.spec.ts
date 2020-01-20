@@ -102,7 +102,6 @@ describe('CheckboxComponent', () => {
         expect(input.disabled).toBe(true);
         expect(hostComponent.value).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
-        expect(checkbox.nextValue).not.toHaveBeenCalled();
     });
 
     it('should be compact', async() => {

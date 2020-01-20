@@ -9,9 +9,11 @@
     [indeterminate]="isIndeterminate"
     [class.fd-checkbox--compact]="compact"
     [ngClass]="(state ? 'is-' + state : '')"
-    (change)="nextValue()"
+    (keydown)="muteKey($event)"
+    (keyup)="checkByKey($event)"
 >
 <label class="fd-checkbox__label"
+       (click)="checkByClick($event)"
        [class.fd-checkbox__label--compact]="compact"
        [for]="inputId">
     {{label}}
