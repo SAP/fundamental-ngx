@@ -1,7 +1,5 @@
 <div *ngIf="comboboxComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
-    <div class="fd-search-input">
-        <ng-content select="fd-combobox"></ng-content>
-    </div>
+    <ng-content select="fd-combobox"></ng-content>
 </div>
 
 <div *ngIf="actionsCollapsed && shellbarActions.length"

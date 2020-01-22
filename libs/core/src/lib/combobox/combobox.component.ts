@@ -157,6 +157,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     buttonFocusable: boolean = false;
 
+    /** Whether the combobox is part of the shellbar, used to add shellbar-specific styles */
+    @Input()
+    inShellbar: boolean = false;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
