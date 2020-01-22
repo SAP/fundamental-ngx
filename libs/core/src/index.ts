@@ -9,6 +9,7 @@ export * from './lib/busy-indicator/public_api';
 export * from './lib/button/public_api';
 export * from './lib/button-group/public_api';
 export * from './lib/calendar/public_api';
+export * from './lib/checkbox/public_api';
 export * from './lib/combobox/public_api';
 export * from './lib/date-picker/public_api';
 export * from './lib/datetime-picker/public_api';
