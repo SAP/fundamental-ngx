@@ -1,8 +1,8 @@
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
-import { withKnobs, text, boolean, number, radios, array } from '@storybook/addon-knobs';
-import { NgForm, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { withKnobs, text, radios, array } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RadioButtonComponent, RadioModule } from '../../libs/core/src/lib/radio/public_api';
 
@@ -12,6 +12,7 @@ export default {
   moduleMetadata: moduleMetadata,
   decorators: [
     withKnobs,
+    withA11y,
     moduleMetadata({
       imports: [RadioModule, ReactiveFormsModule],
       declarations: []
