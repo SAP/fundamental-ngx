@@ -24,5 +24,11 @@ mergeable:
               reviewers: [ 'fkolar' ]
           - required:
               reviewers: [ 'JKMarkowski' ]
+          - required:
+              reviewers: [ 'mikerodonnell89' ]
+          - required:
+              reviewers: [ 'rengare' ]
+          - required:
+              reviewers: [ 'salarenko' ]
           - min:
               count: 2
