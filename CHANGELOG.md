@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.1-rc.2"></a>
+## [0.13.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.13.1-rc.1...v0.13.1-rc.2) (2020-01-22)
+
+
+### Bug Fixes
+
+* added missing export ([#1855](https://github.com/SAP/fundamental-ngx/issues/1855)) ([87d8ec9](https://github.com/SAP/fundamental-ngx/commit/87d8ec9))
+
+
+
 <a name="0.13.1-rc.1"></a>
 ## [0.13.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.13.1-rc.0...v0.13.1-rc.1) (2020-01-22)
 
