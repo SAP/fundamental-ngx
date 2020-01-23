@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
+import { TabItemState } from '../tab-item/tab-item.directive';
 
 let tabPanelUniqueId: number = 0;
 
@@ -24,22 +25,6 @@ export class TabPanelComponent {
     @ContentChild(TabTitleDirective, { read: TemplateRef, static: false })
     titleTemplate: TemplateRef<any>;
 
-    /** The title of the tab header. */
-    @Input()
-    title: string;
-
-    /** Aria-label of the tab. Also applied to the tab header. */
-    @Input()
-    ariaLabel: string;
-
-    /** Id of the element that labels the tab. Also applied to the tab header. */
-    @Input()
-    ariaLabelledBy: string;
-
-    /** Whether the tab is disabled. */
-    @Input()
-    disabled: boolean;
-
     /** Id of the tab. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-tab-panel' + tabPanelUniqueId++;
@@ -49,4 +34,32 @@ export class TabPanelComponent {
 
     /** @hidden */
     index: number;
+
+    /** Aria-label of the tab. Also applied to the tab header. */
+    @Input()
+    ariaLabel: string;
+
+    /** Id of the element that labels the tab. Also applied to the tab header. */
+    @Input()
+    ariaLabelledBy: string;
+
+    /** The title of tab, depending on mode used, it will be placed in different position */
+    @Input()
+    title: string;
+
+    /** The count of tab, depending on mode used, it will be placed in different position */
+    @Input()
+    count: string;
+
+    /** Glyph icon, it can be used only on  */
+    @Input()
+    glyph: string;
+
+    /** Glyph icon, it can be used only on  */
+    @Input()
+    header: boolean = false;
+
+    /** */
+    @Input()
+    tabState: TabItemState
 }

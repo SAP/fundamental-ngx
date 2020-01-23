@@ -17,6 +17,10 @@ import { TabPanelComponent } from './tab/tab-panel.component';
 import { Subscription } from 'rxjs';
 import { TabsService } from './tabs.service';
 
+export type TabModes = 'icon-only' | 'process' | 'filter'
+
+export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
+
 /**
  * Represents a list of tab-panels.
  */
@@ -43,6 +47,21 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     /** Index of the selected tab panel. */
     @Input()
     selectedIndex: number = 0;
+
+    /** Whether user wants to use tab component in compact mode */
+    @Input()
+    compact: boolean = false;
+
+    /** TODO */
+    @Input()
+    size: TabSizes = 'm';
+
+    /**
+     * Whether user wants to use tab component in certain mode. Modes available:
+     * 'icon-only' | 'process' | 'filter'
+     */
+    @Input()
+    mode: TabModes;
 
     /** Event emitted when the selected panel changes. */
     @Output()
@@ -94,7 +113,7 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
      * @param tabIndex Index of the tab to select.
      */
     selectTab(tabIndex: number): void {
-       if (this.isIndexInRange() && this.isTargetTabEnabled(tabIndex)) {
+       if (this.isIndexInRange()) {
             this.panelTabs.forEach((tab, index) => {
                 tab.expanded = index === tabIndex;
             });
@@ -117,10 +136,6 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
     private isIndexInRange(): boolean {
         return this.panelTabs && this.panelTabs.length > 0 && this.selectedIndex < this.panelTabs.length;
-    }
-
-    private isTargetTabEnabled(index: number): boolean {
-        return !this.panelTabs.toArray()[index].disabled;
     }
 
     private isTabContentEmpty(): boolean {

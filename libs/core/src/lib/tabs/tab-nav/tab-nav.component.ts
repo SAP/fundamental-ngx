@@ -1,9 +1,9 @@
 import {
     AfterContentInit, ChangeDetectionStrategy,
     Component,
-    ContentChildren,
-    EventEmitter,
-    OnDestroy,
+    ContentChildren, ElementRef,
+    EventEmitter, Input,
+    OnDestroy, OnInit,
     Output,
     QueryList,
     Renderer2,
@@ -13,6 +13,8 @@ import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
 import { Subscription } from 'rxjs';
+import { TabModes, TabSizes } from '../tab-list.component';
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 
 /**
@@ -43,23 +45,53 @@ import { Subscription } from 'rxjs';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-tab-nav]',
-    host: {
-        'class': 'fd-tabs',
-        'role': 'tablist'
-    },
     template: `<ng-content></ng-content>`,
     providers: [TabsService],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabNavComponent implements AfterContentInit, OnDestroy {
+export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBuilder {
 
-    /** @hidden */
+    // /** @hidden */
     @ContentChildren(TabLinkDirective) links: QueryList<TabLinkDirective>;
 
-    /** @hidden */
+    // /** @hidden */
     @ContentChildren(TabItemDirective) items: QueryList<TabItemDirective>;
+
+    private _class: string = '';
+    @Input()
+    set class(userClass: string) {
+        this._class = userClass;
+        this.buildComponentCssClass();
+    } // user's custom classes
+
+    private _mode: TabModes;
+    /**
+     * Whether user wants to use tab component in certain mode. Modes available:
+     * 'icon-only' | 'process' | 'filter'
+     */
+    @Input()
+    set mode(mode: TabModes) {
+        this._mode = mode;
+        this.buildComponentCssClass();
+    }
+
+    private _size: TabSizes = 'm';
+    /***/
+    @Input()
+    set size(size: TabSizes) {
+        this._size = size;
+        this.buildComponentCssClass();
+    }
+
+    private _compact: boolean;
+    /** Whether user wants to use tab component in compact mode */
+    @Input()
+    set compact(compact: boolean) {
+        this._compact = compact;
+        this.buildComponentCssClass();
+    }
 
     /** @hidden */
     private _tabSelectSubscription: Subscription;
@@ -70,7 +102,8 @@ export class TabNavComponent implements AfterContentInit, OnDestroy {
     /** @hidden */
     constructor(
         private renderer: Renderer2,
-        private tabsService: TabsService
+        private tabsService: TabsService,
+        private _elementRef: ElementRef
     ) {}
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
@@ -91,7 +124,9 @@ export class TabNavComponent implements AfterContentInit, OnDestroy {
             this.renderer.listen(linkElement.elementRef.nativeElement, 'keydown', (event) => {
                 this.tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement))
             }
-        )})
+        )});
+
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
@@ -105,5 +140,27 @@ export class TabNavComponent implements AfterContentInit, OnDestroy {
      */
     selectTab(tabIndex: number): void {
         this.tabLinks[tabIndex].elementRef.nativeElement.click();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            `fd-tabs`,
+            this._mode ? ('fd-tabs--' + this._mode) : '',
+            this._compact ? 'fd-tabs--compact' : '',
+            `fd-tabs--${this._size}`,
+            this._class
+        ].filter(x => x !== '').join(' ');
+    }
+
+    /** HasElementRef interface implementation
+     * function used by applyCssClass and applyCssStyle decorators
+     */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

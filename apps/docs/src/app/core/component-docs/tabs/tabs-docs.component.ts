@@ -16,6 +16,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as navigationTabTsCode from '!raw-loader!./examples/tab-navigation-mode-example-component.ts';
 import { ActivatedRoute } from '@angular/router';
+import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-tabs',
@@ -30,44 +31,68 @@ export class TabsDocsComponent implements OnInit {
                     items: {
                         type: 'object',
                         properties: {
-                            label: {
-                                type: 'string'
+                            mode: {
+                                type: 'string',
+                                enum: ['', 'icon-only', 'filter', 'process']
                             },
-                            label2: {
-                                type: 'string'
-                            },
-                            label3: {
-                                type: 'string'
+                            compact: {
+                                type: 'boolean'
                             }
                         }
                     },
-                    panels: {
+                    item1: {
                         type: 'object',
                         properties: {
+                            title: {
+                                type: 'string'
+                            },
+                            counter: {
+                                type: 'string'
+                            },
                             content: {
+                                type: 'string'
+                            },
+                            icon: {
+                                type: 'string',
+                                enum: Icons
+                            }
+                        }
+                    },
+                    item2: {
+                        type: 'object',
+                        properties: {
+                            title2: {
+                                type: 'string'
+                            },
+                            counter2: {
                                 type: 'string'
                             },
                             content2: {
                                 type: 'string'
                             },
-                            content3: {
-                                type: 'string'
+                            icon2: {
+                                type: 'string',
+                                enum: Icons
                             }
                         }
-                    }
-                }
-            },
-            state: {
-                type: 'object',
-                properties: {
-                    disabled: {
-                        type: 'boolean'
                     },
-                    disabled2: {
-                        type: 'boolean'
-                    },
-                    disabled3: {
-                        type: 'boolean'
+                    item3: {
+                        type: 'object',
+                        properties: {
+                            title3: {
+                                type: 'string'
+                            },
+                            counter3: {
+                                type: 'string'
+                            },
+                            content3: {
+                                type: 'string'
+                            },
+                            icon3: {
+                                type: 'string',
+                                enum: Icons
+                            }
+                        }
                     }
                 }
             }
@@ -80,19 +105,28 @@ export class TabsDocsComponent implements OnInit {
     data: any = {
         properties: {
             items: {
-                label: 'Link',
-                label2: 'Selected',
-                label3: 'Disabled'
+                mode: '',
+                compact: false
             },
-            panels: {
-                content: 'Content Link',
-                content2: 'Content Selected',
-                content3: 'Content Disabled'
-            }
+            item1: {
+                title: 'Title1',
+                counter: '1',
+                content: 'Content 1',
+                icon: 'menu'
+            },
+            item2: {
+                title2: 'Title2',
+                counter2: '2',
+                content2: 'Content 2',
+                icon2: 'menu'
+            },
+            item3: {
+                title3: 'Title3',
+                counter3: '3',
+                content3: 'Content 3',
+                icon3: 'menu'
+            },
         },
-        state: {
-            disabled3: 'true'
-        }
     };
 
     tabExample: ExampleFile[] = [

@@ -10,13 +10,13 @@ import { TabsModule } from './tabs.module';
     <fd-tab [title]="'Link'" id="tab1">
       Content Link
     </fd-tab>
-    <fd-tab [title]="'Selected'" [disabled]="false" id="tab2">
+    <fd-tab [title]="'Selected'" id="tab2">
       Content Selected
     </fd-tab>
-    <fd-tab [title]="'Link'" [disabled]="false" id="tab3">
+    <fd-tab [title]="'Link'" id="tab3">
       Content Link Two
     </fd-tab>
-    <fd-tab [title]="'Disabled'" [disabled]="true" id="tab4">
+    <fd-tab [title]="'Disabled'" id="tab4">
       Disabled
     </fd-tab>
   </fd-tab-list>`
