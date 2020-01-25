@@ -1,9 +1,9 @@
 import { moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, text, radios, array, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CheckboxComponent, CheckboxModule } from '@fundamental-ngx/core';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { CheckboxComponent, CheckboxModule } from 'libs/core/src/lib/checkbox/public_api';
 
 export default {
     title: 'Fd checkbox',

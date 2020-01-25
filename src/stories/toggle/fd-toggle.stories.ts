@@ -1,8 +1,7 @@
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text, radios, array, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ToggleComponent, ToggleModule } from 'libs/core/src/lib/toggle/public_api';
 
@@ -14,7 +13,7 @@ export default {
         withKnobs,
         withA11y,
         moduleMetadata({
-            imports: [ToggleModule, ReactiveFormsModule],
+            imports: [ToggleModule],
             declarations: []
         })
     ]
