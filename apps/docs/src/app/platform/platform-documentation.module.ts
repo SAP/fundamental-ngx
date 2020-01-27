@@ -44,6 +44,7 @@ import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/pla
 import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
+import { LinkExampleComponent } from './component-docs/platform-link/link-example.component';
 
 @NgModule({
     declarations: [
@@ -80,7 +81,8 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformSelectTypesDefaultExampleComponent,
         PlatformSelectTypesNoBorderExampleComponent,
         PlatformSelectTypesSplitExampleComponent,
-        PlatformSelectTypesWithIconExampleComponent
+        PlatformSelectTypesWithIconExampleComponent,
+        LinkExampleComponent
     ],
     imports: [
         SharedDocumentationModule,

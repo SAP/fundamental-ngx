@@ -6,9 +6,17 @@ import { PlatformSearchInputModule } from './components/search-input/search-inpu
 import { ActionBarModule } from './components/action-bar/action-bar.module';
 import { FdpMenuModule } from './components/menu/menu.module';
 import { PlatformSelectModule } from './components/select/select.module';
+import { LinkModule } from './components/link/link.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
-    exports: [PlatformButtonModule, PlatformSearchInputModule, ActionBarModule, FdpMenuModule, PlatformSelectModule]
+    exports: [
+        PlatformButtonModule,
+        PlatformSearchInputModule,
+        ActionBarModule,
+        FdpMenuModule,
+        PlatformSelectModule,
+        LinkModule
+    ]
 })
 export class FundamentalNgxPlatformModule {}

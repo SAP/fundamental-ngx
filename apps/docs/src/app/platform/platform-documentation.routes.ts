@@ -12,6 +12,7 @@ import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/plat
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
+import { LinkExampleComponent } from './component-docs/platform-link/link-example.component';
 
 export const ROUTES: Routes = [
     {
@@ -50,6 +51,14 @@ export const ROUTES: Routes = [
                 component: PlatformSelectHeaderComponent,
                 children: [
                     { path: '', component: PlatformSelectDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+            {
+                path: 'link',
+                component: LinkExampleComponent,
+                children: [
+                    { path: '', component: LinkExampleComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             }
