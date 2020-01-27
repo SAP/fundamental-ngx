@@ -201,6 +201,9 @@ export const API_FILES = {
         'PopoverBodyComponent',
         'PopoverControlComponent',
         'PopoverDropdownComponent',
+        'PopoverBodyHeaderDirective',
+        'PopoverBodySubheaderDirective',
+        'PopoverBodyFooterDirective'
     ],
     popoverDirective: [
         'PopoverDirective',
