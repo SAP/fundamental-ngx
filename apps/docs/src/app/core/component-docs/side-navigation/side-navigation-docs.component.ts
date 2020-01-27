@@ -88,16 +88,12 @@ export class SideNavigationDocsComponent implements OnInit {
         {
             language: 'html',
             code: programmaticallySideNavigationSrc,
-            fileName: 'fd-side-navigation-programmatically-example',
-            secondFile: 'fd-side-navigation-programmatically-example',
-            typescriptFileCode: programmaticallySideNavigationSrcTs,
-            component: 'SideNavigationProgrammaticallyExampleComponent'
+            fileName: 'side-navigation-programmatically-example'
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: programmaticallySideNavigationSrcTs,
-            fileName: 'fd-side-navigation-programmatically-example',
-            secondFile: 'fd-side-navigation-programmatically-example',
+            fileName: 'side-navigation-programmatically-example',
             typescriptFileCode: programmaticallySideNavigationSrcTs,
             component: 'SideNavigationProgrammaticallyExampleComponent'
         }
@@ -110,7 +106,7 @@ export class SideNavigationDocsComponent implements OnInit {
             fileName: 'side-navigation-icons-example',
             secondFile: 'side-navigation-examples',
             typescriptFileCode: sideNavigationTscode,
-            component: 'SideNavigationIconsExampleComponent',
+            component: 'SideNavigationIconsExampleComponent'
         }
     ];
 
@@ -118,10 +114,10 @@ export class SideNavigationDocsComponent implements OnInit {
         {
             language: 'html',
             code: sideNavigationCondensedSrc,
-            fileName: 'fd-side-navigation-condensed-example,',
-            secondFile: 'fd-side-navigation-condensed-example,',
+            fileName: 'side-navigation-condensed-example',
+            secondFile: 'side-navigation-condensed-example',
             typescriptFileCode: sideNavigationCondensedSrcTs,
-            component: 'SideNavigationCondensedExampleComponent',
+            component: 'SideNavigationCondensedExampleComponent'
         }
     ];
 
@@ -129,39 +125,31 @@ export class SideNavigationDocsComponent implements OnInit {
         {
             language: 'html',
             code: sideNavigationObjectSrc,
-            fileName: 'fd-side-navigation-object-example',
-            secondFile: 'fd-side-navigation-object-example',
-            typescriptFileCode: sideNavigationCondensedSrcTs,
-            component: 'SideNavigationObjectExampleComponent',
+            fileName: 'side-navigation-object-example'
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: sideNavigationObjectSrcTs,
-            fileName: 'fd-side-navigation-object-example',
-            secondFile: 'fd-side-navigation-object-example',
+            fileName: 'side-navigation-object-example',
             typescriptFileCode: sideNavigationCondensedSrcTs,
-            component: 'SideNavigationObjectExampleComponent',
-        },
+            component: 'SideNavigationObjectExampleComponent'
+        }
     ];
 
     sideNavCondensedConfiguration: ExampleFile[] = [
         {
             language: 'html',
             code: sideNavigationCondensedObjectSrc,
-            fileName: 'fd-side-navigation-condensed-object-example',
-            secondFile: 'fd-side-navigation-condensed-object-example',
-            typescriptFileCode: sideNavigationCondensedObjectSrcTs,
-            component: 'SideNavigationCondensedObjectExampleComponent',
+            fileName: 'side-navigation-condensed-object-example'
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: sideNavigationCondensedObjectSrcTs,
-            fileName: 'fd-side-navigation-condensed-object-example',
-            secondFile: 'fd-side-navigation-condensed-object-example',
+            fileName: 'side-navigation-condensed-object-example',
             typescriptFileCode: sideNavigationCondensedObjectSrcTs,
-            component: 'SideNavigationCondensedObjectExampleComponent',
-        },
+            component: 'SideNavigationCondensedObjectExampleComponent'
+        }
     ];
 
-    ngOnInit() { }
+    ngOnInit() {}
 }

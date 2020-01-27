@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.2-rc.5"></a>
+## [0.13.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.4...v0.13.2-rc.5) (2020-01-27)
+
+
+### Bug Fixes
+
+* [#1841](https://github.com/SAP/fundamental-ngx/issues/1841) popover refactoring  ([#1851](https://github.com/SAP/fundamental-ngx/issues/1851)) ([8dc6641](https://github.com/SAP/fundamental-ngx/commit/8dc6641))
+
+
+
+<a name="0.13.2-rc.4"></a>
+## [0.13.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.3...v0.13.2-rc.4) (2020-01-27)
+
+
+
+<a name="0.13.2-rc.3"></a>
+## [0.13.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.2...v0.13.2-rc.3) (2020-01-24)
+
+
+
+<a name="0.13.2-rc.2"></a>
+## [0.13.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.1...v0.13.2-rc.2) (2020-01-23)
+
+
+
+<a name="0.13.2-rc.1"></a>
+## [0.13.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.0...v0.13.2-rc.1) (2020-01-22)
+
+
+
+<a name="0.13.2-rc.0"></a>
+## [0.13.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.13.1...v0.13.2-rc.0) (2020-01-22)
+
+
+
+<a name="0.13.1"></a>
+## [0.13.1](https://github.com/SAP/fundamental-ngx/compare/v0.13.1-rc.2...v0.13.1) (2020-01-22)
+
+
+
+<a name="0.13.1-rc.2"></a>
+## [0.13.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.13.1-rc.1...v0.13.1-rc.2) (2020-01-22)
+
+
+### Bug Fixes
+
+* added missing export ([#1855](https://github.com/SAP/fundamental-ngx/issues/1855)) ([87d8ec9](https://github.com/SAP/fundamental-ngx/commit/87d8ec9))
+
+
+
+<a name="0.13.1-rc.1"></a>
+## [0.13.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.13.1-rc.0...v0.13.1-rc.1) (2020-01-22)
+
+
+
 <a name="0.13.1-rc.0"></a>
 ## [0.13.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.13.0...v0.13.1-rc.0) (2020-01-21)
 
