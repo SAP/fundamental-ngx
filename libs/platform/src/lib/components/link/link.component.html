@@ -1,0 +1,9 @@
+<a
+    class="fd-link"
+    [attr.href]="href"
+    [attr.aria-disabled]="disabled"
+    [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted }"
+    (click)="clicked($event)"
+>
+    <ng-content></ng-content>
+</a>
