@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'fd-tab-counter-example',
-  templateUrl: './tab-counter.component.html',
-  styleUrls: ['./tab-counter.component.scss']
+  templateUrl: './tab-counter.component.html'
 })
 export class TabCounterComponent {}
