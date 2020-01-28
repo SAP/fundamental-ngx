@@ -18,11 +18,6 @@ import {
     selector: 'fd-token',
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
-    host: {
-        class: 'fd-token',
-        '[class.fd-token__disabled]': 'disabled',
-        'role': 'button'
-    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -35,6 +30,18 @@ export class TokenComponent {
     /** Whether the token is disabled. */
     @Input()
     disabled: boolean = false;
+
+    /** Whether the token is compact. */
+    @Input()
+    compact: boolean = false;
+
+    /** Whether the token is selected. */
+    @Input()
+    selected: boolean = false;
+
+    /** Whether the token is read-only. */
+    @Input()
+    readOnly: boolean = false;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
@@ -55,5 +62,3 @@ export class TokenComponent {
     }
 
 }
-
-

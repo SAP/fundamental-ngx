@@ -1,4 +1,10 @@
-<span class="fd-token-content" #contentContainer>
-    <ng-content></ng-content>
+<span class="fd-token" role="button"
+      [ngClass]="{'fd-token__disabled': disabled, 'fd-token--compact': compact, 'fd-token--selected': selected,
+        'fd-token--readonly': readOnly, 'fd-token--compact': compact}"
+      tabindex="0">
+    <span class="fd-token__text">
+        <ng-content></ng-content>
+    </span>
+    <button *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></button>
 </span>
 
