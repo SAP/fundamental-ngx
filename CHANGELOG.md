@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.13.2-rc.6"></a>
+## [0.13.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.5...v0.13.2-rc.6) (2020-01-28)
+
+
+### Bug Fixes
+
+* (core) Allow outside click for modal ([#1870](https://github.com/SAP/fundamental-ngx/issues/1870)) ([d3d62d4](https://github.com/SAP/fundamental-ngx/commit/d3d62d4))
+
+
+
 <a name="0.13.2-rc.5"></a>
 ## [0.13.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.4...v0.13.2-rc.5) (2020-01-27)
 
