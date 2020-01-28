@@ -55,10 +55,4 @@ describe('TabListComponent', () => {
         component.selectedIndexChange.subscribe(id => expect(id).toBe(1));
         component.selectTab(1);
     });
-
-    it('should not select disabled tabs', () => {
-        component.ngAfterContentInit();
-        component.selectedIndexChange.subscribe(id => expect(id).toBe(0));
-        component.selectTab(3);
-    });
 });

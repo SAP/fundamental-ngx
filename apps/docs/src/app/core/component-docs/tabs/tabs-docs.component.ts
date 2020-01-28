@@ -19,9 +19,7 @@ import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-e
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
 import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
 import * as complexTabHTsCode from '!raw-loader!./examples/complex-title-example/complex-title-example.component.ts';
-import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as navigationTabTsCode from '!raw-loader!./examples/tab-navigation-mode-example-component.ts';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
