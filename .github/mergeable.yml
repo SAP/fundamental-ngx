@@ -32,3 +32,12 @@ mergeable:
               reviewers: [ 'salarenko' ]
           - min:
               count: 2
+  - when: schedule.repository
+    validate:
+      - do: stale
+        days: 20
+        type: pull_request
+    pass:
+      - do: comment
+        payload:
+          body: This PR is getting old. Is it still relevant?
