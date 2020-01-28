@@ -1,3 +1,6 @@
-<span class="fd-form-message" [ngClass]="[type ? ' fd-form-message--' + type : '']">
-  <ng-content></ng-content>
+<span
+    class="fd-form-message"
+    [ngClass]="[type ? ' fd-form-message--' + type : '', compact ? ' fd-form-message--' + compact : '']"
+>
+    <ng-content></ng-content>
 </span>

@@ -113,7 +113,7 @@ describe('DatetimePickerComponent', () => {
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
         expect(component.inputFieldDate).toEqual((<any>component)
-            .formatDateTime(new FdDatetime(component.selectedDate, timeModel))
+            ._formatDateTime(new FdDatetime(component.selectedDate, timeModel))
         );
     });
 
@@ -143,7 +143,7 @@ describe('DatetimePickerComponent', () => {
         component.handleDateChange(date);
 
         expect(component.onChange).toHaveBeenCalledWith(dateTime);
-        expect(component.inputFieldDate).toEqual((<any>component).formatDateTime(new FdDatetime(date, component.time)));
+        expect(component.inputFieldDate).toEqual((<any>component)._formatDateTime(new FdDatetime(date, component.time)));
     });
 
     it('should handle correct write value function', () => {

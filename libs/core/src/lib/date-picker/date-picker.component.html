@@ -19,6 +19,7 @@
                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }">
             <span fd-input-group-addon [button]="true" [compact]="compact">
                 <button fd-button
+                        [attr.tabindex]="buttonFocusable ? 0 : -1"
                         [glyph]="'calendar'"
                         [options]="'light'"
                         [compact]="compact"

@@ -187,7 +187,7 @@ export const ROUTES: Routes = [
                 component: CheckboxHeaderComponent,
                 children: [
                     { path: '', component: CheckboxDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.checkbox } }
                 ]
             },
             {

@@ -14,8 +14,6 @@ import { ModalContentComponent } from './modal-content.component';
 
 @NgModule({
     declarations: [
-        ModalComponentAsContentExampleComponent,
-        ModalContentComponent
     ],
     imports: [
         BrowserModule,

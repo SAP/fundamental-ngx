@@ -11,15 +11,15 @@
                 [size]="'xs'"
                 [attr.aria-label]="timeI18nLabels?.increaseHoursLabel"></button>
     </div>
-    <input [(ngModel)]="displayedHour"
+    <input [ngModel]="displayedHour | twoDigits : keepTwoDigits "
             fd-only-digits
             [ngClass]="{
             'is-disabled': disabled,
             'is-invalid': ((displayedHour > 24 || displayedHour < 0) && validate)
             }"
-            (ngModelChange)="displayedHourChanged()"
+            (ngModelChange)="displayedHourChanged($event)"
             (blur)="inputBlur('hour')"
-            class="fd-input fd-time__input"
+            class="fd-input fd-time__input fd-input--no-number-spinner"
             type="number"
             placeholder="{{timeI18n?.hoursPlaceholder}}"
             [attr.aria-label]="timeI18nLabels?.hoursLabel"/>
@@ -49,12 +49,12 @@
                 type="button"
                 [attr.aria-label]="timeI18nLabels?.increaseMinutesLabel"></button>
     </div>
-    <input [(ngModel)]="time.minute"
+    <input [ngModel]="time.minute | twoDigits : keepTwoDigits"
             fd-only-digits
-            (ngModelChange)="minuteModelChange()"
+            (ngModelChange)="minuteModelChange($event)"
             (blur)="inputBlur('minute')"
             [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.minute > 59 || time.minute < 0) && validate)}"
-            class="fd-input fd-time__input"
+            class="fd-input fd-time__input fd-input--no-number-spinner"
             type="number"
             placeholder="{{timeI18n?.minutesPlaceholder}}"
             [attr.aria-label]="timeI18nLabels?.minutesLabel"/>
@@ -83,12 +83,12 @@
                 type="button"
                 [attr.aria-label]="timeI18nLabels?.increaseSecondsLabel"></button>
     </div>
-    <input [(ngModel)]="time.second"
+    <input [ngModel]="time.second | twoDigits : keepTwoDigits"
             fd-only-digits
-            (ngModelChange)="secondModelChange()"
+            (ngModelChange)="secondModelChange($event)"
             (blur)="inputBlur('second')"
             [ngClass]="{'is-disabled': disabled, 'is-invalid': ((time.second > 59 || time.second < 0) && validate)}"
-            class="fd-input fd-time__input"
+            class="fd-input fd-time__input fd-input--no-number-spinner"
             type="number"
             placeholder="{{timeI18n?.secondsPlaceholder}}"
             (keydown)="!meridian && !spinners ? lastButtonKeydown($event) : ''"

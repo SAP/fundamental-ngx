@@ -4,11 +4,12 @@ import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { BadgeLabelModule } from './badge-label/badge-label.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
-import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module'
+import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
 import { ButtonModule } from './button/button.module';
 import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { ComboboxModule } from './combobox/combobox.module';
+import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
@@ -52,6 +53,7 @@ import { ProductSwitchModule } from './product-switch/product-switch.module';
 import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification-service/notification.service';
 import { NestedListModule } from './nested-list/nested-list.module';
+import { RadioModule } from './radio/radio.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -65,6 +67,7 @@ import { NestedListModule } from './nested-list/nested-list.module';
     ButtonGroupModule,
     CalendarModule,
     ComboboxModule,
+    CheckboxModule,
     DatePickerModule,
     DatetimePickerModule,
     DragAndDropModule,
@@ -91,6 +94,7 @@ import { NestedListModule } from './nested-list/nested-list.module';
     PanelModule,
     ProductSwitchModule,
     PopoverModule,
+    RadioModule,
     ScrollSpyModule,
     SelectModule,
     ShellbarModule,
@@ -107,6 +111,4 @@ import { NestedListModule } from './nested-list/nested-list.module';
   ],
   providers: [AlertService, ModalService, NotificationService],
 })
-export class FundamentalNgxCoreModule {
-
-}
+export class FundamentalNgxCoreModule {}

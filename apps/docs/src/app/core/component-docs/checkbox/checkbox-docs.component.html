@@ -1,20 +1,104 @@
-<fd-docs-section-title [id]="'checkbox-standard'" [componentName]="'checkbox'">
+<fd-docs-section-title [id]="'checkbox-default-example'" [componentName]="'checkbox'">
     Standard Checkbox
 </fd-docs-section-title>
+<description>
+    By default fd-checkbox component is binary, returning <code>true</code> and <code>false</code> values.
+</description>
 <component-example [name]="'ex1'">
-    <fd-checkbox-example></fd-checkbox-example>
+    <fd-default-checkbox-example></fd-default-checkbox-example>
 </component-example>
-<code-example [exampleFiles]="checkboxFormHtml"></code-example>
+<code-example [exampleFiles]="checkboxDefault"></code-example>
 
 <separator></separator>
-<fd-docs-section-title [id]="'checkbox-reactiveForms'" [componentName]="'checkbox'">
-    Checkbox Reactive Forms
+
+<fd-docs-section-title [id]="'checkbox-tristate-example'" [componentName]="'checkbox'">
+    Tristate Checkbox
 </fd-docs-section-title>
 <description>
-    The checkbox input element, like several other native html elements, support Angular reactive forms. Using the
-    checkbox within the form element greatly simplifies value access and validation.
+    Tristate mode adds third state to default checkbox behaviour. In this mode checkbox returns:
+    <code>true</code>, <code>false</code> and <code>null</code> values.
+    <br>
+    To prevent user from manually selecting third state of the checkbox use <code>[tristateSelectable]</code> property.
 </description>
 <component-example [name]="'ex2'">
-    <fd-checkbox-form-group-example></fd-checkbox-form-group-example>
+    <fd-checkbox-tristate-example></fd-checkbox-tristate-example>
 </component-example>
-<code-example [exampleFiles]="checkboxFormGroup"></code-example>
+<code-example [exampleFiles]="checkboxTristate"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'checkbox-custom-values-example'" [componentName]="'checkbox'">
+    Checkbox custom values
+</fd-docs-section-title>
+<description>
+    Values returned by checkbox can be customized using <code>[values]</code> property.
+    <br>
+    <ul>
+        <li style="margin-bottom: .5rem;">
+            Type: <code>{{'{ trueValue?: any, falseValue?: any, thirdStateValue?: any }'}}</code>
+        </li>
+        <li>
+            Default value: <code>{{'{ trueValue: true, falseValue: false, thirdStateValue: null }'}}</code>
+        </li>
+    </ul>
+</description>
+<component-example [name]="'ex3'">
+    <fd-checkbox-custom-values-example></fd-checkbox-custom-values-example>
+</component-example>
+<code-example [exampleFiles]="checkboxCustomValues"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'checkbox-reactive-forms-example'" [componentName]="'checkbox'">
+    Checkbox with Reactive Forms
+</fd-docs-section-title>
+<description>
+    Checkbox can be used with Reactive Forms by binding it as standard form control with <code>[formControlName]</code>
+    input. Example below shows usage of checkbox component with Reactive Form. "Accept all" behaves as master control
+    representing overall state of agreements controls.
+</description>
+<component-example [name]="'ex4'">
+    <fd-checkbox-reactive-forms-example></fd-checkbox-reactive-forms-example>
+</component-example>
+<code-example [exampleFiles]="checkboxReactiveForms"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'checkbox-custom-label-example'" [componentName]="'checkbox'">
+    Checkbox with custom label
+</fd-docs-section-title>
+<description>
+    Checkbox label can by passed to component as external content using content projection mechanism. If external
+    content is provided value passed using <code>[label]</code> property is ignored.
+</description>
+<component-example [name]="'ex5'">
+    <fd-checkbox-custom-label-example></fd-checkbox-custom-label-example>
+</component-example>
+<code-example [exampleFiles]="checkboxCustomLabel"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'checkbox-states-example'" [componentName]="'checkbox'">
+    Checkbox styling properties
+</fd-docs-section-title>
+<description>
+    Checkbox can be but in various states by modifying following properties:
+    <ul>
+        <li style="margin-bottom: .5rem;">
+            Modifies visual appearance of checkbox <br>
+            <code>[state] = 'valid' | 'invalid' | 'information' | 'warning'</code>
+        </li>
+        <li style="margin-bottom: .5rem;">
+            Disables control <br>
+            <code>[disable] = true | false</code>
+        </li>
+        <li>
+            Miniaturizes checkbox <br>
+            <code>[compact] = true | false</code>
+        </li>
+    </ul>
+</description>
+<component-example [name]="'ex6'">
+    <fd-checkbox-states-example></fd-checkbox-states-example>
+</component-example>
+<code-example [exampleFiles]="checkboxStates"></code-example>

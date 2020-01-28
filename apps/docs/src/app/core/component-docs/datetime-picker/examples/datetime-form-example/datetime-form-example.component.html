@@ -2,7 +2,11 @@
 
     <div fd-form-item>
         <label fd-form-label>Valid Date Picker</label>
-        <fd-datetime-picker [state]="isValid() ? 'valid' : 'invalid'" formControlName="date"></fd-datetime-picker>
+        <fd-datetime-picker
+            [state]="isValid() ? 'valid' : 'invalid'"
+            formControlName="date"
+            [disableFunction]="blockFunction">
+        </fd-datetime-picker>
         <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid DateTimePicker</fd-form-message>
         <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid DateTimePicker</fd-form-message>
         <br/>

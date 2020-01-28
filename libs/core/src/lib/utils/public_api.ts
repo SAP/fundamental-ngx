@@ -1,6 +1,7 @@
 export * from './directives/only-digits.directive';
 export * from './pipes/pipe.module';
 export * from './pipes/displayFn.pipe';
+export * from './pipes/two-digits.pipe';
 export * from './pipes/search-highlight.pipe';
 export * from './drag-and-drop/drag-and-drop.module';
 export * from './drag-and-drop/dnd-list/dnd-list.directive';
@@ -14,4 +15,5 @@ export * from './decorators/apply-css-style.decorator';
 export * from './dynamic-component/dynamic-component-config';
 export * from './dynamic-component/dynamic-component-injector';
 export * from './dynamic-component/dynamic-component.service';
+export * from './functions';
 export * from './datatypes/hash.datatype';

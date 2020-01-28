@@ -56,6 +56,9 @@ export const API_FILES = {
     combobox: [
         'ComboboxComponent'
     ],
+    checkbox: [
+        'CheckboxComponent'
+    ],
     datePicker: [
         'DatePickerComponent',
         'DateFormatParser',
@@ -83,7 +86,8 @@ export const API_FILES = {
         'FormLabelComponent',
         'FormLegendDirective',
         'FormMessageComponent',
-        'FormSetDirective'
+        'FormSetDirective',
+        'FormInputMessageGroupComponent'
     ],
     icon: [
         'IconComponent'
@@ -197,6 +201,9 @@ export const API_FILES = {
         'PopoverBodyComponent',
         'PopoverControlComponent',
         'PopoverDropdownComponent',
+        'PopoverBodyHeaderDirective',
+        'PopoverBodySubheaderDirective',
+        'PopoverBodyFooterDirective'
     ],
     popoverDirective: [
         'PopoverDirective',

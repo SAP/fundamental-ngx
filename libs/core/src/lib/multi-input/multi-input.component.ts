@@ -134,6 +134,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     state: FormStates;
 
+    /**
+     * Whether AddOn Button should be focusable, set to false by default
+     */
+    @Input()
+    buttonFocusable: boolean = false;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -208,6 +214,11 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        if (isDisabled) {
+            this.elRef.nativeElement.style.pointerEvents = 'none';
+        } else {
+            this.elRef.nativeElement.style.pointerEvents = 'auto';
+        }
         this.changeDetRef.detectChanges();
     }
 
@@ -270,6 +281,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     handleSearchTermChange(): void {
+        if (!this.open && this.searchTerm && this.searchTerm.length) {
+            this.openChangeHandle(true);
+        }
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
         this.popoverRef.updatePopover();

@@ -7,6 +7,10 @@ import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverDirective } from './popover-directive/popover.directive';
 import { PopoverContainer } from './popover-directive/popover-container';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
+import { PopoverBodyHeaderDirective } from './popover-body/popover-body-directives/popover-body-header.directive';
+import { PopoverBodySubheaderDirective } from './popover-body/popover-body-directives/popover-body-subheader.directive';
+import { PopoverBodyFooterDirective } from './popover-body/popover-body-directives/popover-body-footer.directive';
+
 import { ButtonModule } from '../button/button.module';
 
 @NgModule({
@@ -17,9 +21,21 @@ import { ButtonModule } from '../button/button.module';
         PopoverDirective,
         PopoverContainer,
         PopoverDropdownComponent,
+        PopoverBodyHeaderDirective,
+        PopoverBodySubheaderDirective,
+        PopoverBodyFooterDirective
     ],
     imports: [CommonModule, ButtonModule],
-    exports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, PopoverDirective, PopoverDropdownComponent],
+    exports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        PopoverDirective,
+        PopoverDropdownComponent,
+        PopoverBodyHeaderDirective,
+        PopoverBodySubheaderDirective,
+        PopoverBodyFooterDirective
+    ],
     entryComponents: [PopoverContainer]
 })
-export class PopoverModule {}
+export class PopoverModule { }

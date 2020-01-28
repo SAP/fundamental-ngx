@@ -7,6 +7,7 @@ import { FdDate } from '../calendar/models/fd-date';
 import { CalendarModule } from '../calendar/calendar.module';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { FdRangeDate } from '@fundamental-ngx/core';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent;
@@ -57,7 +58,7 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         spyOn(component.selectedDateChange, 'emit');
         const date = FdDate.getToday();
-        const dateStr = (<any>component).formatDate(date);
+        const dateStr = (<any>component)._formatDate(date);
         component.inputFieldDate = '';
         component.handleSingleDateChange(date);
         expect(component.inputFieldDate).toEqual(dateStr);
@@ -70,8 +71,8 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         const dateStart = FdDate.getToday();
         const dateLast = FdDate.getToday(); dateLast.month = 12;
-        const dateStrStart = (<any>component).formatDate(dateStart);
-        const dateStrLast = (<any>component).formatDate(dateLast);
+        const dateStrStart = (<any>component)._formatDate(dateStart);
+        const dateStrLast = (<any>component)._formatDate(dateLast);
         component.inputFieldDate = '';
         component.handleRangeDateChange({start: dateStart, end: dateLast});
         expect(component.inputFieldDate).toBe(
@@ -83,7 +84,7 @@ describe('DatePickerComponent', () => {
 
     it('Should handle correct write value for single mode', () => {
         const date = FdDate.getToday();
-        const dateStr = (<any>component).formatDate(date);
+        const dateStr = (<any>component)._formatDate(date);
         component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
         expect(component.inputFieldDate).toBe(dateStr)
@@ -98,10 +99,10 @@ describe('DatePickerComponent', () => {
     it('Should handle correct write value for range mode', () => {
         component.type = 'range';
         const dateStart = FdDate.getToday();
-        const dateStrStart = (<any>component).formatDate(dateStart);
+        const dateStrStart = (<any>component)._formatDate(dateStart);
 
         const dateEnd = FdDate.getToday(); dateEnd.month = 12;
-        const dateStrEnd = (<any>component).formatDate(dateEnd);
+        const dateStrEnd = (<any>component)._formatDate(dateEnd);
         component.writeValue({start: dateStart, end: dateEnd});
         expect(component.selectedRangeDate).toEqual({start: dateStart, end: dateEnd});
         expect(component.inputFieldDate).toBe(
@@ -143,7 +144,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         component.selectedDate = new FdDate(2018, 10, 10);
         const date = new FdDate(2000, 10, 10);
-        const strDate = (<any>component).formatDate(date);
+        const strDate = (<any>component)._formatDate(date);
         component.type = 'single';
         component.dateStringUpdate(strDate);
         expect(component.isInvalidDateInput).toBe(false);
@@ -154,7 +155,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
         const date = new FdDate(2000, 10, 10);
-        const strDate = (<any>component).formatDate(date);
+        const strDate = (<any>component)._formatDate(date);
         component.type = 'single';
         component.dateStringUpdate(strDate);
         expect(component.isInvalidDateInput).toBe(false);
@@ -170,8 +171,8 @@ describe('DatePickerComponent', () => {
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
 
-        const strDate1 = (<any>component).formatDate(date1);
-        const strDate2 = (<any>component).formatDate(date2);
+        const strDate1 = (<any>component)._formatDate(date1);
+        const strDate2 = (<any>component)._formatDate(date2);
         component.type = 'range';
         component.dateStringUpdate(strDate1 + component.dateAdapter.rangeDelimiter + strDate2);
         expect(component.isInvalidDateInput).toBe(false);
@@ -186,8 +187,8 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
-        const strDate1 = (<any>component).formatDate(date1);
-        const strDate2 = (<any>component).formatDate(date2);
+        const strDate1 = (<any>component)._formatDate(date1);
+        const strDate2 = (<any>component)._formatDate(date2);
         component.type = 'range';
         component.dateStringUpdate(strDate1 + component.dateAdapter.rangeDelimiter + strDate2);
         expect(component.isInvalidDateInput).toBe(false);
@@ -195,5 +196,69 @@ describe('DatePickerComponent', () => {
         expect(component.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
+    });
+
+    it ('Should handle single date blocked by disable function', () => {
+        spyOn(component.selectedDateChange, 'emit');
+        spyOn(component, 'onChange');
+        const invalidDate = (<any>component)._invalidDate();
+        component.blockFunction = (fdDate: FdDate) => true;
+        const todayDate = FdDate.getToday();
+        const date = new FdDate(2000, 10, 10);
+        const strDate = (<any>component)._formatDate(date);
+        component.type = 'single';
+        component.dateStringUpdate(strDate);
+        expect(component.isInvalidDateInput).toBe(true);
+        expect(component.calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component.calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component.selectedDateChange.emit).toHaveBeenCalledWith(invalidDate);
+        expect(component.onChange).toHaveBeenCalledWith(invalidDate);
+    });
+
+    it ('Should handle both range dates blocked by disable function', () => {
+        spyOn(component.selectedRangeDateChange, 'emit');
+        spyOn(component, 'onChange');
+        const invalidDate = (<any>component)._invalidDate();
+        const rangeDateInvalidObject: FdRangeDate = { start: invalidDate, end: invalidDate };
+        component.type = 'range';
+        component.blockRangeStartFunction = (fdDate: FdDate) => true;
+        component.blockRangeEndFunction = (fdDate: FdDate) => true;
+        const todayDate = FdDate.getToday();
+
+        const date1 = new FdDate(2011, 10, 10);
+        const date2 = new FdDate(2000, 10, 10);
+        const strDate1 = (<any>component)._formatDate(date1);
+        const strDate2 = (<any>component)._formatDate(date2);
+
+        component.dateStringUpdate(strDate1 + ' - ' + strDate2);
+
+        expect(component.isInvalidDateInput).toBe(true);
+        expect(component.calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component.calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
+        expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
+    });
+
+    it ('Should handle end range date blocked by disable function', () => {
+        spyOn(component.selectedRangeDateChange, 'emit');
+        spyOn(component, 'onChange');
+        const invalidDate = (<any>component)._invalidDate();
+        component.type = 'range';
+        component.blockRangeEndFunction = (fdDate: FdDate) => fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp();
+
+        const date1 = new FdDate(2010, 10, 10);
+        const date2 = FdDate.getToday().nextDay();
+        const strDate1 = (<any>component)._formatDate(date1);
+        const strDate2 = (<any>component)._formatDate(date2);
+
+        const rangeDateInvalidObject: FdRangeDate = { start: date1, end: invalidDate };
+
+        component.dateStringUpdate(strDate1 + ' - ' + strDate2);
+
+        expect(component.isInvalidDateInput).toBe(true);
+        expect(component.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
+        expect(component.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
+        expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 });
