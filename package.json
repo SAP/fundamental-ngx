@@ -75,7 +75,7 @@
     "highlight.js": "^9.18.0",
     "jasminewd2": "^2.0.6",
     "moment": "^2.24.0",
-    "ngx-markdown": "^8.2.1",
+    "ngx-markdown": "^8.2.2",
     "npm": "^6.13.6",
     "popper.js": "^1.16.1",
     "rxjs": "^6.5.4",
