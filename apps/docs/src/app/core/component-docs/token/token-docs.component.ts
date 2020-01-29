@@ -12,6 +12,9 @@ import * as readOnlyTokenTsCode from '!raw-loader!./examples/token-readonly-exam
 import * as compactTokenH from '!raw-loader!./examples/token-compact-example/token-compact-example.component.html';
 import * as compactTokenTsCode from '!raw-loader!./examples/token-compact-example/token-compact-example.component.ts';
 
+import * as tokenizerH from '!raw-loader!./examples/tokenizer-example/tokenizer-example.component.html';
+import * as tokenizerTsCode from '!raw-loader!./examples/tokenizer-example/tokenizer-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -60,6 +63,16 @@ export class TokenDocsComponent implements OnInit {
             typescriptFileCode: compactTokenTsCode,
             fileName: 'token-compact-example',
             component: 'TokenCompactExampleComponent'
+        }
+    ];
+    tokenizer: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tokenizerH,
+            secondFile: 'tokenizer-example-example',
+            typescriptFileCode: tokenizerTsCode,
+            fileName: 'tokenizer-example-example',
+            component: 'TokenizerExampleComponent'
         }
     ];
 

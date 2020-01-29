@@ -1,0 +1,7 @@
+<div class="fd-tokenizer" (focus)="tokenizerHasFocus = true" (blur)="tokenizerHasFocus = false; null"
+        [ngClass]="{'is-focus': tokenizerHasFocus, 'fd-tokenizer--compact': compact}">
+    <div class="fd-tokenizer__inner">
+        <ng-content></ng-content>
+        <input class="fd-input fd-tokenizer__input" />
+    </div>
+</div>

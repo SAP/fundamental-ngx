@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TokenComponent } from './token.component';
+import { TokenizerComponent } from './tokenizer.component';
 
 @NgModule({
-    declarations: [TokenComponent],
+    declarations: [TokenComponent, TokenizerComponent],
     imports: [CommonModule],
-    exports: [TokenComponent]
+    exports: [TokenComponent, TokenizerComponent]
 })
 export class TokenModule {}
