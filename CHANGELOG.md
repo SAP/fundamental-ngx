@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.5"></a>
+# [0.14.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.4...v0.14.0-rc.5) (2020-01-29)
+
+
+
+<a name="0.14.0-rc.4"></a>
+# [0.14.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.3...v0.14.0-rc.4) (2020-01-29)
+
+
+
+<a name="0.14.0-rc.3"></a>
+# [0.14.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.2...v0.14.0-rc.3) (2020-01-28)
+
+
+
+<a name="0.14.0-rc.2"></a>
+# [0.14.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.1...v0.14.0-rc.2) (2020-01-28)
+
+
+
+<a name="0.14.0-rc.1"></a>
+# [0.14.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.0...v0.14.0-rc.1) (2020-01-28)
+
+
+
+<a name="0.14.0-rc.0"></a>
+# [0.14.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.6...v0.14.0-rc.0) (2020-01-28)
+
+
+### Features
+
+* [#1845](https://github.com/SAP/fundamental-ngx/issues/1845) storybook integration ([#1862](https://github.com/SAP/fundamental-ngx/issues/1862)) ([8cbedde](https://github.com/SAP/fundamental-ngx/commit/8cbedde))
+
+
+
+<a name="0.13.2-rc.6"></a>
+## [0.13.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.5...v0.13.2-rc.6) (2020-01-28)
+
+
+### Bug Fixes
+
+* (core) Allow outside click for modal ([#1870](https://github.com/SAP/fundamental-ngx/issues/1870)) ([d3d62d4](https://github.com/SAP/fundamental-ngx/commit/d3d62d4))
+
+
+
 <a name="0.13.2-rc.5"></a>
 ## [0.13.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.13.2-rc.4...v0.13.2-rc.5) (2020-01-27)
 
