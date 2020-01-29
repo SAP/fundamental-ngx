@@ -1,10 +1,7 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
-    HostListener,
     Output,
-    ViewChild,
     ViewEncapsulation,
     Input,
     ChangeDetectionStrategy
@@ -22,10 +19,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
-
-    /** @hidden */
-    @ViewChild('contentContainer', { static: false })
-    contentContainer: ElementRef;
 
     /** Whether the token is disabled. */
     @Input()
@@ -48,16 +41,9 @@ export class TokenComponent {
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {
-    }
-
-    /** @hidden */
-    @HostListener('click', ['$event'])
     clickHandler(event): void {
-        if (this.contentContainer && !this.disabled) {
-            if (this.elRef.nativeElement.contains(event.target) && !this.contentContainer.nativeElement.contains(event.target)) {
-                this.onCloseClick.emit();
-            }
+        if (!this.disabled) {
+            this.onCloseClick.emit(event);
         }
     }
 

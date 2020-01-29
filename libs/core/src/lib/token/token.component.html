@@ -5,5 +5,5 @@
     <span class="fd-token__text">
         <ng-content></ng-content>
     </span>
-    <button *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></button>
+    <span (click)="clickHandler($event)" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
 </span>
