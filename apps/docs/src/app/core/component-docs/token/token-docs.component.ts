@@ -64,8 +64,7 @@ export class TokenDocsComponent implements OnInit {
         {
             language: 'html',
             code: tokenizerH,
-            fileName: 'tokenizer-example-example',
-            component: 'TokenizerExampleComponent'
+            fileName: 'tokenizer-example-example'
         },
         {
             language: 'typescript',
