@@ -2,13 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-token-selected-example',
-    templateUrl: './token-selected-example.component.html',
-    styles: [
-        `
-            fd-token {
-                margin-right: 5px;
-            }
-        `
-    ]
+    templateUrl: './token-selected-example.component.html'
 })
 export class TokenSelectedExampleComponent {}

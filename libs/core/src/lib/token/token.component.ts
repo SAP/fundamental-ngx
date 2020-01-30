@@ -2,7 +2,6 @@ import {
     Component,
     EventEmitter,
     Output,
-    ViewEncapsulation,
     Input,
     ChangeDetectionStrategy
 } from '@angular/core';
@@ -15,7 +14,6 @@ import {
     selector: 'fd-token',
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
