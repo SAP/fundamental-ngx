@@ -40,6 +40,7 @@ export class TokenComponent {
 
     /** @hidden */
     clickHandler(event): void {
+        event.stopPropagation();
         if (!this.disabled) {
             this.onCloseClick.emit(event);
         }

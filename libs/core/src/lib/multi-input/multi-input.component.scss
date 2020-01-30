@@ -1,4 +1,5 @@
 @import "~fundamental-styles/dist/multi-input";
+@import "~fundamental-styles/dist/tokenizer";
 
 //TODO evaluate whether this should be in fd-styles
 .fd-multi-input-custom {
@@ -17,12 +18,15 @@
         overflow: auto;
     }
 
-    .fd-multi-input-token-spacing {
-        margin: 0 4px 4px 0;
+    .fd-multi-input-tokenizer {
+        width: 100%;
+    }
 
-        &:last-child {
-            margin-right: 0;
-        }
+    .fd-multi-input-tokenizer-input {
+        border: none;
+        outline: none !important;
+        margin-top: 0;
+        margin-bottom: 0 !important;
     }
 }
 
