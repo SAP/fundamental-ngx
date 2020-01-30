@@ -49,6 +49,14 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @Input()
     size: string;
 
+    /** If the toggle should have text in it or not. */
+    @Input()
+    noText: boolean = true;
+
+    /** For the toggle's direction. */
+    @Input()
+    dir: string = 'left';
+
     /** Whether the toggle is disabled. */
     @Input()
     disabled: boolean = false;
@@ -77,6 +85,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @Input()
     ariaLabelledby: string = null;
 
+
     /**
      * Event fired when the state of the toggle changes.
      * *$event* can be used to retrieve the new state of the toggle.
@@ -85,14 +94,14 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = () => { };
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = () => { };
 
-    constructor (
+    constructor(
         private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnInit() {

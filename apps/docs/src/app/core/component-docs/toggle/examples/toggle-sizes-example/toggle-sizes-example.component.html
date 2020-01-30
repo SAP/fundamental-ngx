@@ -1,5 +1,20 @@
-<fd-toggle [size]="'xs'">Extra Small Toggle</fd-toggle>
-<fd-toggle [compact]="true" [(ngModel)]="checked">Compact Toggle</fd-toggle>
-<fd-toggle [size]="'s'" [(ngModel)]="checked">Small Toggle</fd-toggle>
-<fd-toggle>Default Toggle</fd-toggle>
-<fd-toggle [size]="'l'" [(ngModel)]="checked">Large Toggle</fd-toggle>
+<fd-toggle [semantic]="false">
+    <label fd-form-label>
+        Default Toggle
+    </label>
+</fd-toggle>
+<fd-toggle [compact]="true" [(ngModel)]="checked">
+    <label fd-form-label>
+        Compact Toggle
+    </label>
+</fd-toggle>
+<fd-toggle [compact]="true" [(ngModel)]="checked1" [noText]="true">
+    <label fd-form-label>
+        No Text Toggle
+    </label>
+</fd-toggle>
+<fd-toggle [(ngModel)]="checked2" [noText]="false">
+    <label fd-form-label>
+        Text Toggle
+    </label>
+</fd-toggle>

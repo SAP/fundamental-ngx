@@ -1,8 +1,16 @@
 <!-- Requires FormsModule -->
-<fd-toggle [(ngModel)]="firstToggle">Toggle 1</fd-toggle>
+<fd-toggle [(ngModel)]="firstToggle">
+    <label fd-form-label>
+        Toggle 1
+    </label>
+</fd-toggle>
 
 <!-- Does not require FormsModule -->
-<fd-toggle [(checked)]="secondToggle">Toggle 2</fd-toggle>
+<fd-toggle [(checked)]="secondToggle">
+    <label fd-form-label>
+        Toggle 2
+    </label>
+</fd-toggle>
 
 <button fd-button (click)="toggleBoth()">Toggle Both</button>
 <button fd-button (click)="toggleOne()">Toggle 1</button>
