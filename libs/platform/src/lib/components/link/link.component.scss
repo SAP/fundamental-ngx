@@ -1,1 +1,36 @@
 @import '~fundamental-styles/dist/link';
+
+.fdp-link-truncate__txt {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.tooltiptext {
+    visibility: visible;
+    width: 120px;
+    background-color: grey;
+    opacity: 0.8;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    margin-top: -30px;
+}
+
+.tooltiptext::after {
+    content: ' ';
+    position: absolute;
+    opacity: 0.8;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: grey transparent transparent transparent;
+}

@@ -1,9 +1,17 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter,
+    HostListener,
+    ChangeDetectorRef
+} from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-const VALID_INPUT_TYPES = ['standard', 'emphasized'];
-
 export type LinkType = 'standard' | 'emphasized';
+const VALID_INPUT_TYPES = ['standard', 'emphasized'];
 
 @Component({
     selector: 'fdp-link',
@@ -12,6 +20,14 @@ export type LinkType = 'standard' | 'emphasized';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent implements OnInit {
+    private _disabled: boolean = false;
+    private _inverted: boolean = false;
+    private _wrap: boolean = false;
+    isEmphasized: boolean = false;
+    tooltipVisibility: boolean = false;
+
+    constructor(private cd: ChangeDetectorRef) {}
+
     @Input() id?: string;
 
     @Input() href: string;
@@ -46,12 +62,11 @@ export class LinkComponent implements OnInit {
         this._wrap = coerceBooleanProperty(value);
     }
 
-    @Input() popoverText?: string;
+    @Input() toolTipText?: string;
 
-    private _disabled: boolean = false;
-    private _inverted: boolean = false;
-    private _wrap: boolean = false;
-    isEmphasized: boolean = false;
+    /** Option to truncate content of the button based on width. */
+    @Input()
+    width: string;
 
     @Output()
     click: EventEmitter<any> = new EventEmitter();
@@ -60,17 +75,18 @@ export class LinkComponent implements OnInit {
         this.click.emit(event);
     }
 
-    constructor() {}
-
     ngOnInit() {
+        /* if link disabled, for Avoiding tab focus and click. marking href undefined. */
         if (this.disabled) {
-            // if link disabled, for Avoiding tab focus and click. marking href undefined.
             this.href = undefined;
         }
+
+        /* If link type===emphasized then make link emphasized type */
         if (this.type === VALID_INPUT_TYPES[1]) {
             this.isEmphasized = true;
         }
 
+        /* if link type not supported, throw Error */
         if (this.type && VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(`fdp-link type ${this.type} is not supported`);
         }
@@ -80,8 +96,20 @@ export class LinkComponent implements OnInit {
     handleKeyboardEvent(event: KeyboardEvent) {
         if (event.keyCode === 32) {
             event.preventDefault();
-
-            // DO navigation
+            // this.renderer.selectRootElement
+            // DO navigation, on spacebar get elements by id
         }
+    }
+
+    onFocusEvent() {
+        setTimeout(() => {
+            this.tooltipVisibility = true;
+            this.cd.detectChanges();
+        }, 1000);
+    }
+
+    onFocusOutEvent() {
+        this.tooltipVisibility = false;
+        this.cd.detectChanges();
     }
 }

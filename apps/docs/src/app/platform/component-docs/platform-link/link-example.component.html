@@ -4,7 +4,8 @@
 <description>This example shows Link Regular Link implementaion </description>
 <component-example [name]="'ex1'">
     This is an Example of
-    <fdp-link [href]="'http://www.google.com'">RegularLink</fdp-link>
+    <fdp-link [href]="'http://www.google.com'" [toolTipText]="'my tooltiptext'">RegularLink</fdp-link>
+    text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>
 
@@ -14,6 +15,7 @@
 <component-example [name]="'ex2'">
     This is an Example of
     <fdp-link [href]="'http://www.google.com'" [type]="'emphasized'">EmphasizedLink</fdp-link>
+    text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>
 
@@ -23,6 +25,7 @@
 <component-example [name]="'ex3'">
     This is an Example of
     <fdp-link [href]="'http://www.google.com'" [disabled]="true">DisabledLink</fdp-link>
+    text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>
 
@@ -32,6 +35,7 @@
 <component-example [name]="'ex4'">
     This is an Example of
     <fdp-link [href]="" [type]="'emphasized'" [disabled]="true">DisabledEmphasizedLink</fdp-link>
+    text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>
 
@@ -40,6 +44,31 @@
 <description>This example shows Inverted Link implementaion </description>
 <component-example [name]="'ex5'">
     This is an Example of
-    <fdp-link [href]="'http://www.googlewww.com'" [inverted]="true">InvertedLink</fdp-link>
+    <fdp-link [href]="'http://www.google.com'" [inverted]="true" [toolTipText]="'my tooltiptext'"
+        >InvertedLink</fdp-link
+    >
+    text after link
+</component-example>
+<code-example [exampleFiles]="defaultselectType"></code-example>
+
+<separator></separator>
+
+<description>This example shows Truncated Link implementaion </description>
+<component-example [name]="'ex6'">
+    This is an Example of
+    <fdp-link [href]="'http://www.google.com'" [width]="'150px'">TruncatedLink-TruncatedLink-TruncatedLink</fdp-link>
+    text after link
+</component-example>
+<code-example [exampleFiles]="defaultselectType"></code-example>
+
+<separator></separator>
+
+<description>This example shows Merged Link implementaion </description>
+<component-example [name]="'ex7'">
+    This is an Example of
+    <fdp-link [href]="'http://www.google.com'" [width]="'150px'" [wrap]="true"
+        >MergedLink-MergedLink-MergedLink</fdp-link
+    >
+    text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>

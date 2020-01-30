@@ -2,8 +2,12 @@
     class="fd-link"
     [attr.href]="href"
     [attr.aria-disabled]="disabled"
-    [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted }"
+    [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted, 'fdp-link-truncate__txt': !wrap }"
     (click)="clicked($event)"
+    [ngStyle]="{ width: width }"
+    (focus)="onFocusEvent()"
+    (focusout)="onFocusOutEvent()"
 >
+    <span class="tooltiptext" *ngIf="toolTipText && tooltipVisibility">{{ toolTipText }}</span>
     <ng-content></ng-content>
 </a>

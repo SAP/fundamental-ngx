@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as linkTypesSrc from '!raw-loader!./link-example.component.html';
+import * as linkTypesSrcts from '!raw-loader!./link-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -16,7 +17,7 @@ export class LinkExampleComponent implements OnInit {
         },
         {
             language: 'typescript',
-            code: linkTypesSrc,
+            code: linkTypesSrcts,
             fileName: 'link-example',
             component: 'LinkComponent'
         }
