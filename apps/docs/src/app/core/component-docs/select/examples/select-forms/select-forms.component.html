@@ -1,5 +1,5 @@
 <form [formGroup]="customForm">
-    <div fd-form-set class="flex-form-set">
+    <fieldset fd-fieldset>
         <div fd-form-item>
             <fd-select formControlName="selectControl">
                 <fd-option value="apple">Apple</fd-option>
@@ -20,7 +20,7 @@
 
             Disabled: {{customForm.controls.disabledSelectControl.disabled}}<br/>
         </div>
-    </div>
+    </fieldset>
 </form>
 
 Form Touched: {{customForm.touched}} <br />

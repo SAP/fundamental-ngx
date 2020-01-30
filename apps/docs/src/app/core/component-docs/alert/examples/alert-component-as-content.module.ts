@@ -11,7 +11,6 @@ import { AlertContentComponent } from './alert-content.component';
 
 @NgModule({
     declarations: [
-        AlertComponentAsContentExampleComponent, AlertContentComponent
     ],
     imports: [
         BrowserModule,

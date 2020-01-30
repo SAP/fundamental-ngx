@@ -1,28 +1,42 @@
-<p>Selected Value: {{this.selectOneValue}}</p>
-<fd-select [(value)]="selectOneValue"
-           placeholder="Select an option...">
-    <fd-option value="apple">Apple</fd-option>
-    <fd-option value="pineapple">Pineapple</fd-option>
-    <fd-option value="tomato">Tomato</fd-option>
-    <fd-option value="strawberry">Strawberry</fd-option>
+<p>Selected Value: {{ this.selectOneValue }}</p>
+
+<fd-select [(value)]="selectOneValue" [loading]="true" placeholder="Select an option...">
+    <div *ngFor="let fruit of emptyValues">
+        <fd-option value="fruit">{{ fruit }}</fd-option>
+    </div>
 </fd-select>
 
-<fd-select class="fd-select-example"
-           [(value)]="selectTwoValue"
-           [compact]="true"
-           placeholder="Compact select">
-    <fd-option value="apple">Apple</fd-option>
-    <fd-option value="pineapple">Pineapple</fd-option>
-    <fd-option value="tomato">Tomato</fd-option>
-    <fd-option value="strawberry">Strawberry</fd-option>
+<fd-select
+    class="fd-select-example"
+    [(value)]="selectOneValue"
+    [loading]="values == null"
+    placeholder="Select an option..."
+>
+    <div *ngFor="let fruit of values">
+        <fd-option value="fruit">{{ fruit }}</fd-option>
+    </div>
 </fd-select>
 
-<fd-select class="fd-select-example"
-           [(value)]="selectThreeValue"
-           [disabled]="true"
-           placeholder="Disabled select">
-    <fd-option value="apple">Apple</fd-option>
-    <fd-option value="pineapple">Pineapple</fd-option>
-    <fd-option value="tomato">Tomato</fd-option>
-    <fd-option value="strawberry">Strawberry</fd-option>
+<fd-select
+    class="fd-select-example"
+    [(value)]="selectTwoValue"
+    [loading]="values == null"
+    [compact]="true"
+    placeholder="Compact select"
+>
+    <div *ngFor="let fruit of values">
+        <fd-option value="fruit">{{ fruit }}</fd-option>
+    </div>
+</fd-select>
+
+<fd-select
+    class="fd-select-example"
+    [(value)]="selectThreeValue"
+    [loading]="values == null"
+    [disabled]="true"
+    placeholder="Disabled select"
+>
+    <div *ngFor="let fruit of values">
+        <fd-option value="fruit">{{ fruit }}</fd-option>
+    </div>
 </fd-select>

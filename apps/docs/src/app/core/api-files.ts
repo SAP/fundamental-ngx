@@ -30,6 +30,9 @@ export const API_FILES = {
         'BreadcrumbItemDirective',
         'BreadcrumbLinkDirective'
     ],
+    busyIndicator: [
+        'BusyIndicatorComponent',
+    ],
     button: [
         'ButtonComponent'
     ],
@@ -52,6 +55,9 @@ export const API_FILES = {
     ],
     combobox: [
         'ComboboxComponent'
+    ],
+    checkbox: [
+        'CheckboxComponent'
     ],
     datePicker: [
         'DatePickerComponent',
@@ -80,7 +86,8 @@ export const API_FILES = {
         'FormLabelComponent',
         'FormLegendDirective',
         'FormMessageComponent',
-        'FormSetDirective'
+        'FormSetDirective',
+        'FormInputMessageGroupComponent'
     ],
     icon: [
         'IconComponent'
@@ -100,7 +107,6 @@ export const API_FILES = {
     inputGroup: [
         'InputGroupComponent',
         'InputGroupNumberComponent',
-        'InputGroupSearchComponent'
     ],
     layoutGrid: [
         'LayoutGridComponent',
@@ -195,6 +201,9 @@ export const API_FILES = {
         'PopoverBodyComponent',
         'PopoverControlComponent',
         'PopoverDropdownComponent',
+        'PopoverBodyHeaderDirective',
+        'PopoverBodySubheaderDirective',
+        'PopoverBodyFooterDirective'
     ],
     popoverDirective: [
         'PopoverDirective',

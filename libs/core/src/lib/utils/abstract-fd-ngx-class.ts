@@ -12,7 +12,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     private _elementRef: ElementRef;
 
     /** @hidden */
-    @Input() class; // user's custom classes
+    @Input() class: string // user's custom classes
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to
@@ -21,13 +21,21 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     /** @hidden */
     abstract _setProperties(): void;
 
+    _setClassToElement(className: string): void {
+        (this._elementRef.nativeElement as HTMLElement).classList.value = `${className} ${this.class}`;
+    }
+
+    _clearElementClass(): void {
+        (this._elementRef.nativeElement as HTMLElement).classList.value = '';
+    }
+
     /** @hidden */
-    _addClassToElement(className: string) {
+    _addClassToElement(className: string): void {
         (this._elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
     }
 
     /** @hidden */
-    _addStyleToElement(attribute, value) {
+    _addStyleToElement(attribute, value): void {
         (this._elementRef.nativeElement as HTMLElement).style[attribute] = value;
     }
 

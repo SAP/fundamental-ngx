@@ -45,10 +45,5 @@ describe('LocalizationEditorItemComponent', () => {
 
     it('should detect custom label template', () => {
         expect(component.labelTemplate).toBeTruthy();
-    })
-
-    it('should detect input directive', () => {
-        expect(component.input).toBeTruthy();
-        expect(component.type).toBeUndefined();
-    })
+    });
 });

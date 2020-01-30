@@ -1,5 +1,4 @@
 import { Directive, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { InputGroupInputDirective } from '../input-group/input-group-directives';
 
 /**
  * Directive which is used along with input elements, inside the localization editor item or main.
@@ -16,15 +15,8 @@ import { InputGroupInputDirective } from '../input-group/input-group-directives'
 export class LocalizationEditorInputDirective {
 
     /** @hidden */
-    @HostBinding('attr.fd-input-group-input')
-    inputGroupDirective: InputGroupInputDirective = new InputGroupInputDirective();
-
-    /**
-     * @hidden
-     *  Variable is controlled by parent component and define if there should be used compact mode
-     * */
-    @HostBinding('class.fd-input--compact')
-    public compact: boolean;
+    @HostBinding('class.fd-input-group__input')
+    fdInputGroupInputClass: boolean = true;
 }
 
 /**
@@ -40,17 +32,16 @@ export class LocalizationEditorInputDirective {
     selector: '[fd-localization-editor-textarea]',
 })
 export class LocalizationEditorTextareaDirective {
-
-    /** @hidden */
-    @HostBinding('attr.fd-input-group-input')
-    inputGroupDirective: InputGroupInputDirective = new InputGroupInputDirective();
-
     /**
      * @hidden
      *  Variable is controlled by parent component and define if there should be used compact mode
      * */
     @HostBinding('class.fd-input--compact')
     public compact: boolean;
+
+    /** @hidden */
+    @HostBinding('class.fd-input-group__input')
+    fdInputGroupInputClass: boolean = true;
 
     /**
      * @hidden
@@ -90,7 +81,12 @@ export class LocalizationEditorLabel {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-localization-editor-element]',
 })
-export class LocalizationEditorElement {}
+export class LocalizationEditorElement {
+
+    /** @hidden */
+    @HostBinding('class.fd-localization-editor__language')
+    fdLocalizationEditorLanguage: boolean = true;
+}
 
 /**
  * Not for external use. Portal to render the complex title template.

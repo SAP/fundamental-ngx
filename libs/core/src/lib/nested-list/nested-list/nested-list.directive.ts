@@ -24,7 +24,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fd-nested-list--text-only')
-    textOnly: boolean = true;
+    textOnly: boolean = false;
 
     /** In case the user wants put compact mode in this list */
     @Input()

@@ -84,4 +84,16 @@ describe('ToggleComponent', () => {
         expect(toggle.classList).toContain('fd-toggle--' + size)
     });
 
+    it('should display compact and semantic', () => {
+        component.semantic = true;
+        component.compact = true;
+        (component as any).changeDetectorRef.markForCheck();
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const toggle = fixture.nativeElement.querySelector('.fd-toggle');
+        expect(toggle.classList).toContain('fd-toggle--compact');
+        expect(toggle.classList).toContain('fd-toggle--semantic');
+    });
+
 });

@@ -1,8 +1,13 @@
 <form [formGroup]="customForm">
-    <div fd-form-set class="flex-form-set">
+    <fieldset fd-fieldset>
         <div fd-form-item>
             <label fd-form-label>Search Input</label>
-            <fd-input-group-search [placeholder]="'Search'" formControlName="searchQuery"></fd-input-group-search>
+            <fd-input-group
+                formControlName="searchQuery"
+                [glyph]="'decline'"
+                [button]="true"
+                [placeholder]="'Search'">
+            </fd-input-group>
             Search Query Entered: {{ customForm.controls.searchQuery.value }}
         </div>
         <div fd-form-item>
@@ -10,6 +15,6 @@
             <fd-input-group-number  formControlName="number"></fd-input-group-number>
             Number Entered: {{ customForm.controls?.number?.value }}
         </div>
-    </div>
+    </fieldset>
 </form>
 

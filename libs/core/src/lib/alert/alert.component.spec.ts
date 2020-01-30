@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ButtonModule } from '@fundamental-ngx/core';
 
 @Component({
     template: `        
@@ -22,7 +23,7 @@ class TemplateTestComponent {
 
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, NoopAnimationsModule],
+    imports: [CommonModule, BrowserModule, NoopAnimationsModule, ButtonModule],
     providers: [AlertService, DynamicComponentService],
     entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
 })

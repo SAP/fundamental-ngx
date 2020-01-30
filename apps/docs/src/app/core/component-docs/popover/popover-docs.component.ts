@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
 import * as popoverSrcScss from '!raw-loader!./examples/popover-simple/popover-example.component.scss';
@@ -19,8 +19,6 @@ import * as dropdownPopoverHtml from '!raw-loader!./examples/popover-dropdown/po
 import * as dropdownPopoverTs from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.ts';
 import * as dropdownPopoverScss from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-popover',

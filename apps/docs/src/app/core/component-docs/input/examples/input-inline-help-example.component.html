@@ -1,22 +1,9 @@
-<div fd-form-set>
-    <div fd-form-item>
-        <label fd-form-label for="input-41">
-            Input with inline help
-                <fd-inline-help [placement]="'right'">
-                 Lorem ipsum dolor sit amet, consectetur adipiscing.
-                </fd-inline-help>
-        </label>
-        <input fd-form-control placeholder="Field placeholder text" type="text" id="input-41">
-    </div>
-</div>
-<div fd-form-set>
-    <div fd-form-item>
-        <label fd-form-label for="input-42">
-            Input with help message
-        </label>
-        <input fd-form-control placeholder="Field placeholder text" type="text" id="input-42">
-        <fd-form-message type="help">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
-        </fd-form-message>
-    </div>
+<div fd-form-item>
+    <label fd-form-label for="input-41" [inlineHelp]="true">
+        Input with inline help
+        <fd-inline-help [placement]="'right'">
+            Lorem ipsum dolor sit amet, consectetur adipiscing.
+        </fd-inline-help>
+    </label>
+    <input fd-form-control placeholder="Field placeholder text" type="text" id="input-41">
 </div>

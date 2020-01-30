@@ -1,6 +1,5 @@
 <ul fd-list>
     <li fd-list-item *ngFor="let num of [1, 2, 3, 4]">
-        <input type="checkbox" fd-form-control [id]="num"/>
-        <label [for]="num" style="padding-left: 10px;">List item {{num}}</label>
+        <fd-checkbox [ngModel]="false" [label]="'List item ' + num"></fd-checkbox>
     </li>
 </ul>

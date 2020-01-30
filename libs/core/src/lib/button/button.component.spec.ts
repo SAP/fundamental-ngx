@@ -7,14 +7,14 @@ import { By } from '@angular/platform-browser';
     selector: 'fd-test-component',
     template: '<button fd-button>Button</button>'
 })
-export class TestComponent {}
+export class TestComponent { }
 
 describe('ButtonComponent', () => {
     let fixture: ComponentFixture<TestComponent>,
         debugElement: DebugElement,
         element: HTMLElement;
 
-    let component, componentInstance;
+    let component, componentInstance: ButtonComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -29,35 +29,29 @@ describe('ButtonComponent', () => {
         fixture.detectChanges();
         component = debugElement.query(By.directive(ButtonComponent));
         componentInstance = component.injector.get(ButtonComponent);
-
-        spyOn(componentInstance, '_setProperties').and.callThrough();
-        spyOn(componentInstance, '_addClassToElement');
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
         componentInstance.ngOnInit();
-        expect(componentInstance._setProperties).toHaveBeenCalled();
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
     });
 
     it('should add appropriate classes', () => {
-        componentInstance.compact = 'true';
+        componentInstance.compact = true;
         componentInstance.glyph = 'someGlyph';
-        componentInstance.fdType = 'someFdType';
-        componentInstance.options = 'someOption';
+        componentInstance.fdType = 'standard';
         componentInstance.ngOnInit();
-        expect(componentInstance._setProperties).toHaveBeenCalled();
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button');
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--compact');
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('sap-icon--someGlyph');
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someFdType');
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption');
+
+        let cssClass = componentInstance.buildComponentCssClass();
+        expect(cssClass).toContain('someGlyph');
+        expect(cssClass).toContain('standard');
+        expect(cssClass).toContain('standard');
 
         // should handle an array of options
-        componentInstance.options = ['someOption1', 'someOption2'];
+        componentInstance.options = ['light'];
         componentInstance.ngOnInit();
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption1');
-        expect(componentInstance._addClassToElement).toHaveBeenCalledWith('fd-button--someOption2');
+
+        cssClass = componentInstance.buildComponentCssClass();
+        expect(cssClass).toContain('light');
     });
 });

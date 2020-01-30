@@ -20,6 +20,7 @@ import { PopoverFillMode } from '../popover/popover-directive/popover.directive'
 import { MenuItemDirective } from '../menu/menu-item.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
+import { FormStates } from '../form/form-control/form-states';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -126,6 +127,19 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
+
+    /**
+     * Whether AddOn Button should be focusable, set to false by default
+     */
+    @Input()
+    buttonFocusable: boolean = false;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -200,6 +214,11 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        if (isDisabled) {
+            this.elRef.nativeElement.style.pointerEvents = 'none';
+        } else {
+            this.elRef.nativeElement.style.pointerEvents = 'auto';
+        }
         this.changeDetRef.detectChanges();
     }
 
@@ -262,6 +281,9 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     handleSearchTermChange(): void {
+        if (!this.open && this.searchTerm && this.searchTerm.length) {
+            this.openChangeHandle(true);
+        }
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
         this.popoverRef.updatePopover();

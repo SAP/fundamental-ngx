@@ -1,5 +1,5 @@
 <form [formGroup]="customForm">
-    <div fd-form-set>
+    <fieldset fd-fieldset>
         <div fd-form-item>
             <label fd-form-label for="textarea-1">Textarea:</label>
             <textarea
@@ -20,6 +20,6 @@
             ></textarea>
             Textarea Value: {{ customForm.controls.disabledTextAreaControl.value }}
         </div>
-    </div>
+    </fieldset>
 </form>
 

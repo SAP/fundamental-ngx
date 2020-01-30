@@ -82,4 +82,13 @@ describe('Calendar2YearViewComponent', () => {
         component.onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);
     });
+
+    it('Should generate grid', () => {
+        expect(component.calendarYearListGrid).toBeDefined();
+
+        const sizes: number[] = component.calendarYearListGrid.map(list => list.length);
+
+        expect(sizes).toEqual([4, 4, 4]);
+
+    });
 });

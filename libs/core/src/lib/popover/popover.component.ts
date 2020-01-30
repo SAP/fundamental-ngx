@@ -3,7 +3,7 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy
+    ViewChild, ViewEncapsulation, ContentChild, ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 import { Placement, PopperOptions } from 'popper.js';
 import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
@@ -40,8 +40,13 @@ export class PopoverComponent {
     @Input()
     noArrow: boolean = true;
 
+    /** Whether the popover container needs an extra class for styling. */
+    @Input()
+    addContainerClass: string;
+
     /** Whether the popover is disabled. */
     @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
     disabled: boolean = false;
 
     /** Whether the popover should be treated as a dropdown. */
@@ -65,6 +70,10 @@ export class PopoverComponent {
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
     isOpen: boolean = false;
+
+    /** List of additional classes that will be added to popover container element */
+    @Input()
+    additionalClasses: string[] = [];
 
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
@@ -108,7 +117,7 @@ export class PopoverComponent {
     /** Id of the popover. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-popover-' + popoverUniqueId++;
-
+    
     /**
      * Toggles the popover open state.
      */

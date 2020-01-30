@@ -1,32 +1,13 @@
-<div fd-form-set>
-    <div fd-form-item>
-        <label fd-form-label for="select-41">
-            Select with inline help
-            <span class="fd-inline-help fd-has-float-right">
-                <span class="fd-inline-help__content fd-inline-help__content--bottom-right">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing.
-                </span>
-            </span>
-        </label>
-        <select fd-form-control id="select-41" name="">
-            <option value="1">Duis malesuada odio volutpat elementum</option>
-            <option value="2">Suspendisse ante ligula</option>
-            <option value="3">Sed bibendum sapien at posuere interdum</option>
-        </select>
-    </div>
-</div>
-<div fd-form-set>
-    <div fd-form-item>
-        <label fd-form-label for="select-42">
-            Select with help message
-        </label>
-        <select fd-form-control id="select-42" name="">
-            <option value="1">Duis malesuada odio volutpat elementum</option>
-            <option value="2">Suspendisse ante ligula</option>
-            <option value="3">Sed bibendum sapien at posuere interdum</option>
-        </select>
-        <fd-form-message type="help">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
-        </fd-form-message>
-    </div>
+<div fd-form-item>
+    <label fd-form-label [inlineHelp]="true" for="select-41">
+        Select with inline help
+        <fd-inline-help>
+            Lorem ipsum dolor sit amet, consectetur adipiscing.
+        </fd-inline-help>
+    </label>
+    <select fd-form-control id="select-41" name="">
+        <option value="1">Duis malesuada odio volutpat elementum</option>
+        <option value="2">Suspendisse ante ligula</option>
+        <option value="3">Sed bibendum sapien at posuere interdum</option>
+    </select>
 </div>

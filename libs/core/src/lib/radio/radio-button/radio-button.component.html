@@ -1,0 +1,14 @@
+<input
+    type="radio"
+    class="fd-radio"
+    [disabled]="disabled"
+    [id]="id"
+    [name]="name"
+    [ngModel]="actualValue"
+    (ngModelChange)="valueChange($event)"
+    #inputElement
+    [value]="value"
+/>
+<label class="fd-radio__label" [for]="id" (click)="labelClicked()">
+    <ng-content></ng-content>
+</label>

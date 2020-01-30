@@ -4,7 +4,7 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     Directive,
-    ElementRef, EmbeddedViewRef, EventEmitter, HostListener,
+    ElementRef, EmbeddedViewRef, EventEmitter, HostBinding, HostListener,
     Injector, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges,
     TemplateRef
 } from '@angular/core';
@@ -60,6 +60,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     /** Whether the popover is disabled. */
     @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
     disabled: boolean = false;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
@@ -69,6 +70,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** The element to which the popover should be appended. */
     @Input()
     appendTo: HTMLElement | 'body' = 'body';
+
+    /** List of additional classes that will be added to popover container element */
+    @Input()
+    additionalClasses: string[] = [];
 
     /** The Popper.js options to attach to this popover.
      * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
@@ -239,6 +244,10 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.containerRef.instance.focusTrapped = this.focusTrapped;
         this.containerRef.instance.noArrow = this.noArrow;
         this.containerRef.instance.closeOnEscapeKey = this.closeOnEscapeKey;
+
+        if (this.additionalClasses) {
+            this.containerRef.location.nativeElement.classList.add(...this.additionalClasses);
+        }
 
         this.appRef.attachView(this.containerRef.hostView);
         const setupRef = this.containerRef.instance.isSetup.subscribe(() => {

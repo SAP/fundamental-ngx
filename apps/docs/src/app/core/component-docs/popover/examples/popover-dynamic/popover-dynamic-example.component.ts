@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-popover-dynamic-example',
     templateUrl: './popover-dynamic-example.component.html'
 })
 export class PopoverDynamicExampleComponent {
+
+    @ViewChild('popoverComponent', { static: false })
+    popoverComponent: PopoverComponent
+
+    constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
     componentWithTasks = [
         {
@@ -48,5 +54,10 @@ export class PopoverDynamicExampleComponent {
             ]
         },
     ];
+
+    updatePopover(): void {
+        this.popoverComponent.updatePopover();
+        this.changeDetectionRef.detectChanges();
+    }
 
 }

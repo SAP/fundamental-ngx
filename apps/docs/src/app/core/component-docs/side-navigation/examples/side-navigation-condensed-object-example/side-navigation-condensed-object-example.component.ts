@@ -32,29 +32,26 @@ export class SideNavigationCondensedObjectExampleComponent {
                         title: 'Link 3',
                     },
                     list: {
+                        textOnly: true,
                         items: [
                             {
                                 link: {
-                                    icon: 'menu',
                                     title: 'Link 1'
                                 }
                             },
                             {
                                 link: {
-                                    icon: 'menu',
                                     title: 'Link 2'
                                 }
                             },
                             {
                                 link: {
-                                    icon: 'menu',
                                     title: 'Link 3',
                                     selected: true
                                 }
                             },
                             {
                                 link: {
-                                    icon: 'menu',
                                     title: 'Link 4'
                                 }
                             }
