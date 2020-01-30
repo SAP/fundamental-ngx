@@ -1,5 +1,6 @@
 @import "~fundamental-styles/dist/multi-input";
 @import "~fundamental-styles/dist/tokenizer";
+@import "~fundamental-styles/dist/token";
 
 //TODO evaluate whether this should be in fd-styles
 .fd-multi-input-custom {
@@ -27,6 +28,7 @@
         outline: none !important;
         margin-top: 0;
         margin-bottom: 0 !important;
+        padding-left: 0;
     }
 }
 

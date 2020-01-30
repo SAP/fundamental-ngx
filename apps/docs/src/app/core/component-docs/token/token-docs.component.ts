@@ -15,6 +15,9 @@ import * as compactTokenTs from '!raw-loader!./examples/token-compact-example/to
 import * as tokenizerH from '!raw-loader!./examples/tokenizer-example/tokenizer-example.component.html';
 import * as tokenizerTsCode from '!raw-loader!./examples/tokenizer-example/tokenizer-example.component.ts';
 
+import * as tokenizerCompactH from '!raw-loader!./examples/tokenizer-compact-example/tokenizer-compact-example.component.html';
+import * as tokenizerCompactTsCode from '!raw-loader!./examples/tokenizer-compact-example/tokenizer-compact-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -64,13 +67,26 @@ export class TokenDocsComponent implements OnInit {
         {
             language: 'html',
             code: tokenizerH,
-            fileName: 'tokenizer-example-example'
+            fileName: 'tokenizer-example'
         },
         {
             language: 'typescript',
             component: 'TokenizerExampleComponent',
             code: tokenizerTsCode,
             fileName: 'tokenizer-example'
+        }
+    ];
+    tokenizerCompact: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tokenizerCompactH,
+            fileName: 'tokenizer-compact-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TokenizerCompactExampleComponent',
+            code: tokenizerCompactTsCode,
+            fileName: 'tokenizer-compact-example'
         }
     ];
 

@@ -1,10 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    Output,
-    Input,
-    ChangeDetectionStrategy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
 /**
  * A token is used to represent contextualizing information.
@@ -14,6 +8,7 @@ import {
     selector: 'fd-token',
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenComponent {
