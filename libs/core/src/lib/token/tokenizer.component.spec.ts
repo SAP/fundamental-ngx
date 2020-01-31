@@ -23,6 +23,5 @@ describe('TokenizerComponent', () => {
     expect(component).toBeTruthy();
     expect(component.tokenizerHasFocus).toBeFalsy();
     expect(component.compact).toBeFalsy();
-    expect(component.inputValue).toBeDefined();
   });
 });
