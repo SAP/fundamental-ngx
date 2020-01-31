@@ -3,11 +3,10 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'background-toggle',
     template: `
-    <fd-toggle style="margin-bottom: 18px" [size]="'xs'" (checkedChange)="onChange()">
     <label fd-form-label>
         Toggle background
     </label>
-    </fd-toggle>
+    <fd-toggle style="margin-bottom: 18px" (checkedChange)="onChange()"></fd-toggle>
     `
 })
 export class ExampleBackgroundComponent {

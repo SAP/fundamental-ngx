@@ -1,20 +1,16 @@
-<fd-toggle [semantic]="false">
-    <label fd-form-label>
-        Default Toggle
-    </label>
-</fd-toggle>
-<fd-toggle [compact]="true" [(ngModel)]="checked">
-    <label fd-form-label>
-        Compact Toggle
-    </label>
-</fd-toggle>
-<fd-toggle [compact]="true" [(ngModel)]="checked1" [noText]="true">
-    <label fd-form-label>
-        No Text Toggle
-    </label>
-</fd-toggle>
-<fd-toggle [(ngModel)]="checked2" [noText]="false">
-    <label fd-form-label>
-        Text Toggle
-    </label>
-</fd-toggle>
+<label fd-form-label>
+    Default Toggle
+</label>
+<fd-toggle></fd-toggle>
+<label fd-form-label>
+    Compact Toggle
+</label>
+<fd-toggle [compact]="true" [(ngModel)]="checked"></fd-toggle>
+<label fd-form-label>
+    Compact Toggle
+</label>
+<fd-toggle [compact]="true" [noText]="false"></fd-toggle>
+<label fd-form-label>
+    Text Compact Toggle
+</label>
+<fd-toggle [noText]="false"></fd-toggle>

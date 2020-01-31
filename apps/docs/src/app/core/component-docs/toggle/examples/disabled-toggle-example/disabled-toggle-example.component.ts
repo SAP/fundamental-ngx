@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class DisabledToggleExampleComponent {
 
-    checked = true;
+    checked = false;
 
 }

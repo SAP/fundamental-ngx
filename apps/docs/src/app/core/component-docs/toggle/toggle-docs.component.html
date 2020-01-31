@@ -1,8 +1,11 @@
 <fd-docs-section-title [id]="'sizes'" [componentName]="'toggle'">
-    Toggle Sizes
+    Default toggle with variations
 </fd-docs-section-title>
 
-<description>Options include 'xs', 's', 'l' and default. If no value is provided, default is used.</description>
+<description
+    >Default toggle which can include a [noText] input to remove text. The [noText] input is set to true by default. The
+    [compact] input will make the toggle compact.</description
+>
 <component-example [name]="'ex1'">
     <fd-toggle-sizes-example></fd-toggle-sizes-example>
 </component-example>
@@ -35,8 +38,10 @@
 <fd-docs-section-title [id]="'semanticCompact'" [componentName]="'toggle'">
     Semantic and Compact Mode
 </fd-docs-section-title>
-<description>It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode
-by passing <code>[compact]="true"</code> to toggle component.</description>
+<description
+    >It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode by passing
+    <code>[compact]="true"</code> to toggle component.</description
+>
 <component-example [name]="'ex4'">
     <semantic-toggle-example></semantic-toggle-example>
 </component-example>

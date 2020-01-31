@@ -3,11 +3,10 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'rtl-toggle',
     template: `
-        <fd-toggle [(ngModel)]="isChecked" (ngModelChange)="onChange()">
-           <label fd-form-label>
-                Simulate RTL
-            </label>
-        </fd-toggle>
+        <label fd-form-label>
+            Simulate RTL
+        </label>
+        <fd-toggle [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-toggle> 
     `,
     encapsulation: ViewEncapsulation.None
 })
