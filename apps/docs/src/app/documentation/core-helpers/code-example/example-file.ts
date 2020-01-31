@@ -11,10 +11,11 @@ export interface ExampleFile {
     scssFileCode?: {
         default: string
     };
-    module?: string;
     secondFile?: string;
     thirdFile?: string;
     component?: string;
     fileName?: string;
-    styleAddon?: string;
+    entryComponent?: string;
+    declarationArray?: string;
+    imports?: string;
 }
