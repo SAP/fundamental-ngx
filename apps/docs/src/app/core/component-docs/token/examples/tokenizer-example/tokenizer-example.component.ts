@@ -26,7 +26,7 @@ export class TokenizerExampleComponent implements OnInit {
         });
     }
 
-    onSubmit() {
+    onSubmit(): void {
         this.tokens.push({
             text: this.tokenizerExampleForm.controls.inputControl.value,
             readOnly: false
@@ -34,7 +34,7 @@ export class TokenizerExampleComponent implements OnInit {
         this.tokenizerExampleForm.controls.inputControl.reset();
     }
 
-    removeToken(token) {
+    removeToken(token): void {
         this.tokens.splice(this.tokens.indexOf(token), 1);
     }
 

@@ -1,10 +1,11 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'fd-tokenizer',
   templateUrl: './tokenizer.component.html',
   styleUrls: ['./tokenizer.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenizerComponent {
 

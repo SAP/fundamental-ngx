@@ -1,2 +1,8 @@
 @import "~fundamental-styles/dist/tokenizer";
 
+.fd-tokenizer__input {
+    margin-right: 1px; // needed to display the right side tokenizer outline
+    border: none !important;
+    outline: none !important;
+}
+
