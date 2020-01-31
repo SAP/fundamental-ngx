@@ -40,7 +40,7 @@
                         <li *ngFor="let value of displayedValues; let ind  = index">
                             <label fd-menu-item (keydown)="handleKeyDown($event, ind)">
                                 <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
-                                             (ngModelChange)="handleSelect($event, value)">
+                                             (ngModelChange)="handleSelect($event, value)" class="fd-multi-input-checkbox">
                                     <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
                                 </fd-checkbox>
                             </label>

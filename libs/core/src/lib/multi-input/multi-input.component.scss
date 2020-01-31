@@ -24,11 +24,17 @@
     }
 
     .fd-multi-input-tokenizer-input {
-        border: none;
+        border: none !important;
         outline: none !important;
         margin-top: 0;
         margin-bottom: 0 !important;
         padding-left: 0;
+    }
+
+    .fd-multi-input-checkbox {
+        .fd-checkbox__label {
+            width: 100%; // makes the entire width of the checkbox clickable
+        }
     }
 }
 
