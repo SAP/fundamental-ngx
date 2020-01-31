@@ -97,18 +97,15 @@ export class ModalDocsComponent implements OnInit {
             secondFile: 'modal-content',
             fileName: 'modal-content',
             component: 'ModalContentComponent',
+            imports: `import { ModalContentComponent } from './modal-content.component';`,
+            entryComponent: 'ModalContentComponent, ModalComponentAsContentExampleComponent',
+            declarationArray: 'ModalContentComponent'
         },
         {
             language: 'typescript',
             code: componentAsContentSrc,
             fileName: 'modal-component-as-content-example',
             component: 'ModalComponentAsContentExampleComponent',
-        },
-        {
-            language: 'typescript',
-            code: componentAsContentModule,
-            name: 'Module',
-            module: 'app.module.ts',
         },
     ];
 
@@ -120,7 +117,11 @@ export class ModalDocsComponent implements OnInit {
             name: 'Second Modal',
             thirdFile: 'modal-in-modal-second-example',
             fileName: 'modal-in-modal-second-example',
-            component: 'ModalInModalSecondComponent'
+            component: 'ModalInModalSecondComponent',
+            imports: `import { ModalInModalFirstComponent } from './modal-in-modal-first-example.component';
+            import { ModalInModalSecondComponent } from './modal-in-modal-second-example.component';`,
+            declarationArray: 'ModalInModalComponent, ModalInModalFirstComponent,ModalInModalSecondComponent',
+            entryComponent: 'ModalInModalComponent, ModalInModalFirstComponent, ModalInModalSecondComponent'
         },
         {
             language: 'typescript',
@@ -136,12 +137,6 @@ export class ModalDocsComponent implements OnInit {
             fileName: 'modal-in-modal-stacked-example',
             component: 'ModalInModalComponent'
         },
-        {
-            language: 'typescript',
-            code: modalInModalModule,
-            name: 'Module',
-            module: 'app.module.ts',
-        }
     ];
 
     fullScreenSource: ExampleFile[] = [

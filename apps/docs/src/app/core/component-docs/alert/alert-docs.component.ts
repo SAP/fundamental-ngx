@@ -95,6 +95,9 @@ export class AlertDocsComponent implements OnInit {
             fileName: 'alert-component-as-content-example',
             code: alertComponentAsContentExample,
             component: 'AlertComponentAsContentExampleComponent',
+            entryComponent: 'AlertContentComponent, AlertComponentAsContentExampleComponent',
+            declarationArray: 'AlertContentComponent',
+            imports: `import { AlertContentComponent } from './alert-content.component';`
 
         },
         {
@@ -103,14 +106,7 @@ export class AlertDocsComponent implements OnInit {
             name: 'Alert Content',
             fileName: 'alert-content',
             secondFile: 'alert-content'
-        },
-        {
-            language: 'typescript',
-            code: alertComponentAsContentExampleModule,
-            name: 'Module',
-            module: 'app.module.ts'
         }
-
     ];
 
     alertInlineExample: ExampleFile[] = [

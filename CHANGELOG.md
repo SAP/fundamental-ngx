@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.10"></a>
+# [0.14.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.9...v0.14.0-rc.10) (2020-01-31)
+
+
+### Bug Fixes
+
+* busy-indicator added aria-hidden attribute and a storybook for testing ([#1872](https://github.com/SAP/fundamental-ngx/issues/1872)) ([260bfd4](https://github.com/SAP/fundamental-ngx/commit/260bfd4))
+
+
+
+<a name="0.14.0-rc.9"></a>
+# [0.14.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.8...v0.14.0-rc.9) (2020-01-31)
+
+
+
+<a name="0.14.0-rc.8"></a>
+# [0.14.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.7...v0.14.0-rc.8) (2020-01-30)
+
+
+
+<a name="0.14.0-rc.7"></a>
+# [0.14.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.6...v0.14.0-rc.7) (2020-01-30)
+
+
+
+<a name="0.14.0-rc.6"></a>
+# [0.14.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.5...v0.14.0-rc.6) (2020-01-30)
+
+
+
+<a name="0.14.0-rc.5"></a>
+# [0.14.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.4...v0.14.0-rc.5) (2020-01-29)
+
+
+
+<a name="0.14.0-rc.4"></a>
+# [0.14.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.3...v0.14.0-rc.4) (2020-01-29)
+
+
+
 <a name="0.14.0-rc.3"></a>
 # [0.14.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.2...v0.14.0-rc.3) (2020-01-28)
 
