@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.10"></a>
+# [0.14.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.9...v0.14.0-rc.10) (2020-01-31)
+
+
+### Bug Fixes
+
+* busy-indicator added aria-hidden attribute and a storybook for testing ([#1872](https://github.com/SAP/fundamental-ngx/issues/1872)) ([260bfd4](https://github.com/SAP/fundamental-ngx/commit/260bfd4))
+
+
+
 <a name="0.14.0-rc.9"></a>
 # [0.14.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.8...v0.14.0-rc.9) (2020-01-31)
 
