@@ -1,12 +1,11 @@
-<div
-    [ngClass]="{
+<div [ngClass]="{
         'fd-busy-indicator--l': size == 'l',
         'fd-busy-indicator--m': size == 'm',
         'fd-busy-indicator--s': size == 's'
     }"
-    *ngIf="loading"
-    [attr.aria-label]="loadingLabel"
->
+     *ngIf="loading"
+     aria-hidden="true"
+     [attr.aria-label]="loadingLabel">
     <div class="fd-busy-indicator--circle-0"></div>
     <div class="fd-busy-indicator--circle-1"></div>
     <div class="fd-busy-indicator--circle-2"></div>
