@@ -42,13 +42,6 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     @ViewChild('input', { static: false })
     inputElement: ElementRef<HTMLInputElement>;
 
-    /**
-     * The size of the toggle.
-     * Can be one of the four *xs*, *s*, *l*, *error* or default.
-     */
-    @Input()
-    size: string;
-
     /** If the toggle should have text in it or not. */
     @Input()
     noText: boolean = true;
@@ -105,9 +98,6 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
     /** @hidden */
     ngOnInit() {
-        if (this.size && this.size !== 'xs' && this.size !== 's' && this.size !== 'l') {
-            this.size = null;
-        }
     }
 
     /** Set focus on the input element. */

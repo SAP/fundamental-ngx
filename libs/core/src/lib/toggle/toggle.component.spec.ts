@@ -61,28 +61,12 @@ describe('ToggleComponent', () => {
         expect(component.checkedChange.emit).toHaveBeenCalledWith(false);
     });
 
-    it('should have a default size', () => {
-        component.size = 'test';
-        component.ngOnInit();
-        expect(component.size).toBeNull();
-    });
-
     it('should focus inner input element', () => {
         spyOn(component.inputElement.nativeElement, 'focus');
         component.focus();
         expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
     });
 
-    it('should display size', () => {
-        const size = 'l';
-        component.size = size;
-        (component as any).changeDetectorRef.markForCheck();
-        component.ngOnInit();
-        fixture.detectChanges();
-
-        const toggle = fixture.nativeElement.querySelector('.fd-toggle');
-        expect(toggle.classList).toContain('fd-toggle--' + size)
-    });
 
     it('should display compact and semantic', () => {
         component.semantic = true;
