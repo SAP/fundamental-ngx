@@ -2,6 +2,16 @@
     Link Example
 </fd-docs-section-title>
 <description>This example shows Link Regular Link implementaion </description>
+
+<component-example [name]="'ex1'">
+    This is an Example of
+    <fdp-link></fdp-link>
+    text after link
+</component-example>
+<code-example [exampleFiles]="defaultselectType"></code-example>
+
+<separator></separator>
+
 <component-example [name]="'ex1'">
     This is an Example of
     <fdp-link [href]="'http://www.google.com'" [toolTipText]="'my tooltiptext'">RegularLink</fdp-link>
@@ -69,6 +79,26 @@
     <fdp-link [href]="'http://www.google.com'" [width]="'150px'" [wrap]="true"
         >MergedLink-MergedLink-MergedLink</fdp-link
     >
+    text after link
+</component-example>
+<code-example [exampleFiles]="defaultselectType"></code-example>
+
+<separator></separator>
+
+<description>This example shows Regular Link implementaion having Target on self</description>
+<component-example [name]="'ex8'">
+    This is an Example of
+    <fdp-link [href]="'http://www.google.com'" [target]="'_self'">NavigationOnSelf</fdp-link>
+    text after link
+</component-example>
+<code-example [exampleFiles]="defaultselectType"></code-example>
+
+<separator></separator>
+
+<description>This example shows Regular Link implementaion having Target on new wiindow</description>
+<component-example [name]="'ex9'">
+    This is an Example of
+    <fdp-link [id]="'ex9'" [href]="'http://www.google.com'" [target]="'_blank'">NavigationOnNewtab</fdp-link>
     text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>

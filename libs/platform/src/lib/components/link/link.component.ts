@@ -5,13 +5,18 @@ import {
     Input,
     Output,
     EventEmitter,
-    HostListener,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    AfterViewInit,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type LinkType = 'standard' | 'emphasized';
+export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
 const VALID_INPUT_TYPES = ['standard', 'emphasized'];
+const VALID_TARGET_TYPES = ['_blank', '_self', '_parent', '_top', 'framename'];
+const timeout: number = 1000;
 
 @Component({
     selector: 'fdp-link',
@@ -19,18 +24,21 @@ const VALID_INPUT_TYPES = ['standard', 'emphasized'];
     styleUrls: ['./link.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LinkComponent implements OnInit {
+export class LinkComponent implements OnInit, AfterViewInit {
     private _disabled: boolean = false;
     private _inverted: boolean = false;
     private _wrap: boolean = false;
     isEmphasized: boolean = false;
     tooltipVisibility: boolean = false;
+    isfocused: boolean = false;
 
-    constructor(private cd: ChangeDetectorRef) {}
+    @ViewChild('link', { static: false }) anchor: ElementRef;
 
     @Input() id?: string;
 
     @Input() href: string;
+
+    @Input() target?: NavigationTarget = '_self';
 
     @Input()
     type: LinkType = 'standard';
@@ -75,6 +83,8 @@ export class LinkComponent implements OnInit {
         this.click.emit(event);
     }
 
+    constructor(private cd: ChangeDetectorRef) {}
+
     ngOnInit() {
         /* if link disabled, for Avoiding tab focus and click. marking href undefined. */
         if (this.disabled) {
@@ -90,26 +100,32 @@ export class LinkComponent implements OnInit {
         if (this.type && VALID_INPUT_TYPES.indexOf(this.type) === -1) {
             throw new Error(`fdp-link type ${this.type} is not supported`);
         }
-    }
 
-    @HostListener('document:keyup', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
-        if (event.keyCode === 32) {
-            event.preventDefault();
-            // this.renderer.selectRootElement
-            // DO navigation, on spacebar get elements by id
+        if (this.target && VALID_TARGET_TYPES.indexOf(this.target) === -1) {
+            throw new Error(`fdp-link target ${this.type} is not supported`);
         }
     }
 
     onFocusEvent() {
+        this.isfocused = true;
         setTimeout(() => {
-            this.tooltipVisibility = true;
-            this.cd.detectChanges();
-        }, 1000);
+            if (this.isfocused) {
+                this.tooltipVisibility = true;
+                this.cd.detectChanges();
+            }
+        }, timeout);
     }
 
     onFocusOutEvent() {
+        this.isfocused = false;
         this.tooltipVisibility = false;
         this.cd.detectChanges();
+    }
+
+    ngAfterViewInit() {
+        console.log('this.anchor.nativeElement: ' + this.anchor.nativeElement.textContent.length);
+        if (this.anchor.nativeElement.textContent.length === 0) {
+            throw new Error('Mandatory text for fdp-link missing');
+        }
     }
 }

@@ -1,6 +1,9 @@
 <a
+    #link
     class="fd-link"
+    [attr.id]="id"
     [attr.href]="href"
+    [target]="target"
     [attr.aria-disabled]="disabled"
     [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted, 'fdp-link-truncate__txt': !wrap }"
     (click)="clicked($event)"
