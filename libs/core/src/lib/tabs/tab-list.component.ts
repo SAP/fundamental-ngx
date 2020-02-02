@@ -52,7 +52,7 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     @Input()
     compact: boolean = false;
 
-    /** TODO */
+    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';
 
@@ -71,8 +71,10 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     private _tabSelectSubscription: Subscription;
 
     constructor(
-        private tabsService: TabsService
-    ) {}
+        private _tabsService: TabsService,
+        private _changeRef: ChangeDetectorRef
+    ) {
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -80,15 +82,15 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
             this.selectTab(this.selectedIndex);
         });
 
-        this._tabSelectSubscription = this.tabsService.tabSelected.subscribe(index => {
+        this._tabSelectSubscription = this._tabsService.tabSelected.subscribe(index => {
             if (index !== this.selectedIndex) {
                 this.selectTab(index);
             }
         });
 
         this._tabsSubscription = this.panelTabs.changes.subscribe(() => {
-            if (!this.isIndexInRange() || this.isTabContentEmpty()) {
-                this.resetTabHook();
+            if (!this._isIndexInRange() || this._isTabContentEmpty()) {
+                this._resetTabHook();
             }
         });
     }
@@ -113,11 +115,12 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
      * @param tabIndex Index of the tab to select.
      */
     selectTab(tabIndex: number): void {
-       if (this.isIndexInRange()) {
+        if (this._isIndexInRange()) {
             this.panelTabs.forEach((tab, index) => {
                 tab.expanded = index === tabIndex;
             });
             this.selectedIndex = tabIndex;
+            this._changeRef.detectChanges();
             this.selectedIndexChange.emit(tabIndex);
         }
     }
@@ -131,14 +134,14 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any): void {
-        this.tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
+        this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
     }
 
-    private isIndexInRange(): boolean {
+    private _isIndexInRange(): boolean {
         return this.panelTabs && this.panelTabs.length > 0 && this.selectedIndex < this.panelTabs.length;
     }
 
-    private isTabContentEmpty(): boolean {
+    private _isTabContentEmpty(): boolean {
         let result = true;
         this.panelTabs.forEach(tab => {
             if (tab.expanded) {
@@ -148,7 +151,7 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         return result;
     }
 
-    private resetTabHook(): void {
+    private _resetTabHook(): void {
         this.selectedIndex = 0;
         setTimeout(() => {
             this.selectTab(this.selectedIndex);

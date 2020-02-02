@@ -16,32 +16,6 @@ import { Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
-
-/**
- * Tab Nav for only navigation mode when you want for example use router-outlet
- *
- * ```html
- *<nav fd-tab-nav>
- *  <div fd-tab-item>
- *      <a fd-tab-link
- *      [active]="true">
- *          Link
- *      </a>
- *  </div>
- *  <div fd-tab-item>
- *      <a fd-tab-link
- *      [active]="false">
- *          Link
- *      </a>
- *  </div>
- *  <a fd-tab-link
- *  [active]="false">
- *      Link
- *  </a>
- * </nav>
- * ```
- */
-
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-tab-nav]',
@@ -78,7 +52,7 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
     }
 
     private _size: TabSizes = 'm';
-    /***/
+    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     set size(size: TabSizes) {
         this._size = size;
