@@ -98,7 +98,7 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformSelectTypesDefaultExampleComponent,
         PlatformSelectTypesNoBorderExampleComponent,
         PlatformSelectTypesSplitExampleComponent,
-        PlatformSelectTypesWithIconExampleComponent,
+        PlatformSelectTypesWithIconExampleComponent
     ],
     imports: [
         SharedDocumentationModule,
