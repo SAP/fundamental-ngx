@@ -3,7 +3,7 @@ import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { MenuComponent } from './menu.component';
 import { By } from '@angular/platform-browser';
 import { MenuItemComponent } from './menu-item.component';
-import { MenuKeyboardService } from '@fundamental-ngx/core';
+import { MenuKeyboardService, IconModule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-test-component',
@@ -28,7 +28,7 @@ class TestComponent {
 
     @Input() public scrollLimit;
 
-    constructor() {}
+    constructor() { }
 }
 
 describe('MenuComponent', () => {
@@ -37,6 +37,7 @@ describe('MenuComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [IconModule],
             declarations: [TestComponent, MenuComponent, MenuItemComponent],
             providers: [MenuKeyboardService]
         }).compileComponents();
@@ -149,8 +150,8 @@ describe('MenuComponent', () => {
             testdata = [
                 {
                     label: 'Not a group',
-                    icon: 'sap-icon--bed',
-                    command: () => {}
+                    icon: 'bed',
+                    command: () => { }
                 },
                 {
                     label: 'Actions',
@@ -163,11 +164,11 @@ describe('MenuComponent', () => {
                         },
                         {
                             label: 'Second Item',
-                            command: () => {}
+                            command: () => { }
                         },
                         {
                             label: 'Third Item',
-                            command: () => {}
+                            command: () => { }
                         }
                     ]
                 }
@@ -240,12 +241,12 @@ describe('MenuComponent', () => {
                 {
                     label: 'Second Item',
                     selectable: true,
-                    command: () => {}
+                    command: () => { }
                 },
                 {
                     label: 'Third Item',
                     selectable: true,
-                    command: () => {}
+                    command: () => { }
                 }
             ];
 
@@ -322,7 +323,7 @@ describe('MenuComponent', () => {
             firstItemClicked = false;
             testdata = [
                 {
-                    icon: 'sap-icon--favorite',
+                    icon: 'favorite',
                     groupItems: [
                         {
                             label: 'First Item',
@@ -336,15 +337,15 @@ describe('MenuComponent', () => {
                             label: 'Second Item',
                             selectable: true,
                             selected: true,
-                            command: () => {},
+                            command: () => { },
                             secondaryIcon: 'sap-icon--grid'
                         },
                         {
                             label: 'Third Item',
                             selectable: true,
                             selected: true,
-                            icon: 'sap-icon--bed',
-                            command: () => {}
+                            icon: 'bed',
+                            command: () => { }
                         }
                     ]
                 }
@@ -364,7 +365,6 @@ describe('MenuComponent', () => {
             const thirdItemIcon = fixture.debugElement.query(
                 By.css('[data-tag="menu-item"][data-index="2"] [data-tag="menu-item__icon-before"]')
             );
-
             expect(firstItemIcon.nativeElement.classList.contains('sap-icon--favorite')).toBeTruthy();
             expect(secondItemIcon.nativeElement.classList.contains('sap-icon--favorite')).toBeTruthy();
             expect(thirdItemIcon.nativeElement.classList.contains('sap-icon--bed')).toBeTruthy();
