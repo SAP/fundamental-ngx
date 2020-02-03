@@ -12,7 +12,7 @@ import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/plat
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
-import { LinkExampleComponent } from './component-docs/platform-link/link-example.component';
+import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -38,6 +38,14 @@ export const ROUTES: Routes = [
                     { path: '', component: PlatformActionBarDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.actionbar } }]
             },
+            {
+                path: 'link',
+                component: PlatformLinkDocsComponent,
+                children: [
+                    { path: '', component: PlatformLinkDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
           {
                 path: 'menu',
                 component: PlatformMenuHeaderComponent,
@@ -51,14 +59,6 @@ export const ROUTES: Routes = [
                 component: PlatformSelectHeaderComponent,
                 children: [
                     { path: '', component: PlatformSelectDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
-                ]
-            },
-            {
-                path: 'link',
-                component: LinkExampleComponent,
-                children: [
-                    { path: '', component: LinkExampleComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
                 ]
             }

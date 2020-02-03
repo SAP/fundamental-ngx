@@ -29,6 +29,16 @@ import { PlatformActionbarHeaderComponent } from '../platform/component-docs/pla
 import {PlatformActionBarDocsComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
+
+import { PlatformLinkStandardExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-standard-example.component';
+import { PlatformLinkEmphasizedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-emphasized-example.component';
+import { PlatformLinkDisabledExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-disabled-example.component';
+import { PlatformLinkDisabledEmphasizedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-disabled-emphasized-example.component';
+import { PlatformLinkInvertedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-inverted-example.component';
+import { PlatformLinkTruncatedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-truncated-example.component';
+import { PlatformLinkMergedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-merged-example.component';
+import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
+
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuBasicExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-basic-example.component';
@@ -44,7 +54,6 @@ import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/pla
 import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
-import { LinkExampleComponent } from './component-docs/platform-link/link-example.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +76,14 @@ import { LinkExampleComponent } from './component-docs/platform-link/link-exampl
         PlatformActionbarEditTitleExampleComponent,
         PlatformActionbarWithContextualMenuExampleComponent,
         PlatformActionbarWithPositiveNegativeActionsExampleComponent,
+        PlatformLinkStandardExampleComponent,
+        PlatformLinkEmphasizedExampleComponent,
+        PlatformLinkDisabledExampleComponent,
+        PlatformLinkDisabledEmphasizedExampleComponent,
+        PlatformLinkInvertedExampleComponent,
+        PlatformLinkTruncatedExampleComponent,
+        PlatformLinkMergedExampleComponent,
+        PlatformLinkDocsComponent,
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,
         PlatformMenuBasicExampleComponent,
@@ -82,7 +99,6 @@ import { LinkExampleComponent } from './component-docs/platform-link/link-exampl
         PlatformSelectTypesNoBorderExampleComponent,
         PlatformSelectTypesSplitExampleComponent,
         PlatformSelectTypesWithIconExampleComponent,
-        LinkExampleComponent
     ],
     imports: [
         SharedDocumentationModule,
