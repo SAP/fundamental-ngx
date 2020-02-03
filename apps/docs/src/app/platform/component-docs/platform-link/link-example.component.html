@@ -1,17 +1,8 @@
 <fd-docs-section-title [id]="'def'" [componentName]="'Link'">
-    Link Example
+    Link Examples
 </fd-docs-section-title>
-<description>This example shows Link Regular Link implementaion </description>
 
-<component-example [name]="'ex1'">
-    This is an Example of
-    <fdp-link></fdp-link>
-    text after link
-</component-example>
-<code-example [exampleFiles]="defaultselectType"></code-example>
-
-<separator></separator>
-
+<description>This example shows Regular Link implementaion </description>
 <component-example [name]="'ex1'">
     This is an Example of
     <fdp-link [href]="'http://www.google.com'" [toolTipText]="'my tooltiptext'">RegularLink</fdp-link>
@@ -21,7 +12,7 @@
 
 <separator></separator>
 
-<description>This example shows Link Emphasized Link implementaion </description>
+<description>This example shows Emphasized Link implementaion </description>
 <component-example [name]="'ex2'">
     This is an Example of
     <fdp-link [href]="'http://www.google.com'" [type]="'emphasized'">EmphasizedLink</fdp-link>
@@ -31,7 +22,7 @@
 
 <separator></separator>
 
-<description>This example shows Link Disabled Link implementaion </description>
+<description>This example shows Disabled Link implementaion </description>
 <component-example [name]="'ex3'">
     This is an Example of
     <fdp-link [href]="'http://www.google.com'" [disabled]="true">DisabledLink</fdp-link>
@@ -41,7 +32,7 @@
 
 <separator></separator>
 
-<description>This example shows Link Disabled and Emphasized Link implementaion </description>
+<description>This example shows Disabled and Emphasized Link implementaion </description>
 <component-example [name]="'ex4'">
     This is an Example of
     <fdp-link [href]="" [type]="'emphasized'" [disabled]="true">DisabledEmphasizedLink</fdp-link>
@@ -85,17 +76,17 @@
 
 <separator></separator>
 
-<description>This example shows Regular Link implementaion having Target on self</description>
+<description>This example shows Regular Link implementaion having Target on same Tab</description>
 <component-example [name]="'ex8'">
     This is an Example of
-    <fdp-link [href]="'http://www.google.com'" [target]="'_self'">NavigationOnSelf</fdp-link>
+    <fdp-link [href]="'http://www.google.com'" [target]="'_self'">NavigationOnSameTab</fdp-link>
     text after link
 </component-example>
 <code-example [exampleFiles]="defaultselectType"></code-example>
 
 <separator></separator>
 
-<description>This example shows Regular Link implementaion having Target on new wiindow</description>
+<description>This example shows Regular Link implementaion having Target on new Tab</description>
 <component-example [name]="'ex9'">
     This is an Example of
     <fdp-link [id]="'ex9'" [href]="'http://www.google.com'" [target]="'_blank'">NavigationOnNewtab</fdp-link>
