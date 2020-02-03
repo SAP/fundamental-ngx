@@ -64,6 +64,11 @@ export class ModalService {
             < ModalContainer > (contentType, ModalContainer, modalConfig)
         ;
 
+        // Add classes to container native element
+        if (modalConfig.containerClass) {
+            container.location.nativeElement.classList.add(modalConfig.containerClass);
+        }
+
         // Define Container to put backdrop and component to container
         modalConfig.container = container.location.nativeElement;
 

@@ -29,4 +29,14 @@ export class BackdropExamplesComponent {
                 ' do not have to be in your global styles file.'
         });
     }
+
+    openModifiedContainer(modal): void {
+        this.modalService.open(modal, {
+            maxWidth: '400px',
+            backdropClickCloseable: false,
+            data: 'This modal has modified container! ' +
+                'It sets z-index to 0, which keeps side-navigation enabled, when modal is opened',
+            containerClass: 'custom-container-class'
+        });
+    }
 }
