@@ -72,7 +72,7 @@
     <div fd-tab-item>
         <a fd-tab-link
            [active]="rla1.isActive"
-           [routerLink]="['tab1', {outlets: {aux: 'process'}}]"
+           [routerLink]="'tab1'"
            routerLinkActive
            #rla1="routerLinkActive">
             <span fd-tab-icon [icon]="'menu'"></span>
@@ -86,7 +86,7 @@
     <div fd-tab-item>
         <a fd-tab-link
            [active]="rla2.isActive"
-           [routerLink]="['tab2', {outlets: {aux: 'process'}}]"
+           [routerLink]="'tab2'"
            routerLinkActive
            #rla2="routerLinkActive">
             <span fd-tab-icon [icon]="'edit'"></span>
@@ -100,7 +100,7 @@
     <div fd-tab-item>
         <a fd-tab-link
            [active]="rla3.isActive"
-           [routerLink]="['tab3', {outlets: {aux: 'process'}}]"
+           [routerLink]="'tab3'"
            routerLinkActive
            #rla3="routerLinkActive">
             <span fd-tab-icon [icon]="'search'"></span>
