@@ -21,6 +21,7 @@ export * from './lib/image/public_api';
 export * from './lib/infinite-scroll/public_api';
 export * from './lib/inline-help/public_api';
 export * from './lib/input-group/public_api';
+export * from './lib/link/public_api';
 export * from './lib/list/public_api';
 export * from './lib/layout-grid/public_api';
 export * from './lib/loading-spinner/public_api';

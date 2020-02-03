@@ -41,6 +41,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/inlineHelp', name: 'Inline Help' },
         { url: 'core/input', name: 'Input' },
         { url: 'core/inputGroup', name: 'Input Group' },
+        { url: 'core/link', name: 'Link' },
         { url: 'core/list', name: 'List' },
         { url: 'core/loadingSpinner', name: 'Loading Spinner' },
         { url: 'core/localizationEditor', name: 'Localization Editor' },

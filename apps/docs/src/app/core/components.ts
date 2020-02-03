@@ -401,6 +401,9 @@ import { DatePickerDisableFuncExampleComponent } from './component-docs/date-pic
 import { TimeTwoDigitsExampleComponent } from './component-docs/time/examples/time-two-digits-example/time-two-digits-example.component';
 import { PanelEdgeBleedExampleComponent } from './component-docs/panel/examples/panel-edge-bleed-example.component';
 import { TabSelectionExampleComponent } from './component-docs/tabs/examples/tab-selection-example.component';
+import { LinkExampleComponent } from './component-docs/link/examples/link-example.component';
+import { LinkDocsComponent } from './component-docs/link/link-docs.component';
+import { LinkHeaderComponent } from './component-docs/link/link-header/link-header.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -758,7 +761,10 @@ export const declarations = [
     InputGroupStatesExampleComponent,
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
-    TimeTwoDigitsExampleComponent
+    TimeTwoDigitsExampleComponent,
+    LinkExampleComponent,
+    LinkDocsComponent,
+    LinkHeaderComponent
 ]
 
 export const entryComponents = [
