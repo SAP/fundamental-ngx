@@ -34,6 +34,7 @@ export class FormControlDirective extends AbstractFdNgxClass {
     @Input()
     type: string;
 
+    /** @hidden */
     elementRef: ElementRef;
 
     /** @hidden */

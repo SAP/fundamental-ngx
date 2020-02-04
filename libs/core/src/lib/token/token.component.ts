@@ -41,6 +41,7 @@ export class TokenComponent {
     @Output()
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
+    /** @hidden */
     elementRef: ElementRef;
 
     /** @hidden */

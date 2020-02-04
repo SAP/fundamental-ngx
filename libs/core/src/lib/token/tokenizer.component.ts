@@ -38,16 +38,45 @@ export class TokenizerComponent implements AfterViewInit {
     @Input()
     inputValue: string;
 
+    /** @hidden */
     ngAfterViewInit() {
         this.input.elementRef.nativeElement.addEventListener('keydown', (event) => this.inputKeyDown(event));
     }
 
+    /** @hidden */
     inputKeyDown(event) {
         if (event.key === 'ArrowLeft') {
-            const lastToken = this.tokenList.last.elementRef.nativeElement.querySelector('.fd-token');
-            lastToken.setAttribute('tabindex', '0');
-            lastToken.focus();
-            lastToken.addEventListener('blur', () => lastToken.setAttribute('tabindex', '-1'));
+            this.handleTokenFocus(event, this.tokenList.length);
+        }
+    }
+
+    /** @hidden */
+    handleTokenFocus(event, fromIndex) {
+        let newIndex;
+        const that = this;
+        function handleFunctionReference(e) {
+            if (newIndex || newIndex === 0) {
+                that.handleTokenFocus(e, newIndex);
+            }
+        }
+        if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+            let elementToFocus;
+            if (event.code === 'ArrowLeft') {
+                newIndex = fromIndex - 1;
+            } else if (event.code === 'ArrowRight') {
+                newIndex = fromIndex + 1;
+            }
+            if (newIndex >= -1 && newIndex < this.tokenList.length) {
+                elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
+                    .elementRef.nativeElement.querySelector('.fd-token');
+                elementToFocus.setAttribute('tabindex', '0');
+                elementToFocus.focus();
+                elementToFocus.addEventListener('keydown', handleFunctionReference);
+                elementToFocus.addEventListener('blur', () => {
+                    elementToFocus.setAttribute('tabindex', '-1');
+                    elementToFocus.removeEventListener('keydown', handleFunctionReference);
+                });
+            }
         }
     }
 
