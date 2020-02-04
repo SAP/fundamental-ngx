@@ -53,12 +53,12 @@ export class TokenizerComponent implements AfterViewInit {
     /** @hidden */
     handleTokenFocus(event, fromIndex) {
         let newIndex;
-        const that = this;
-        function handleFunctionReference(e) {
+        // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
+        const handleFunctionReference = (e) => {
             if (newIndex || newIndex === 0) {
-                that.handleTokenFocus(e, newIndex);
+                this.handleTokenFocus(e, newIndex);
             }
-        }
+        };
         if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
             let elementToFocus;
             if (event.code === 'ArrowLeft') {
@@ -66,9 +66,10 @@ export class TokenizerComponent implements AfterViewInit {
             } else if (event.code === 'ArrowRight') {
                 newIndex = fromIndex + 1;
             }
-            if (newIndex >= -1 && newIndex < this.tokenList.length) {
+            if (newIndex >= 0 && newIndex < this.tokenList.length) {
                 elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
                     .elementRef.nativeElement.querySelector('.fd-token');
+                // element needs tabindex in order to be focused
                 elementToFocus.setAttribute('tabindex', '0');
                 elementToFocus.focus();
                 elementToFocus.addEventListener('keydown', handleFunctionReference);
@@ -76,6 +77,8 @@ export class TokenizerComponent implements AfterViewInit {
                     elementToFocus.setAttribute('tabindex', '-1');
                     elementToFocus.removeEventListener('keydown', handleFunctionReference);
                 });
+            } else if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
+                this.input.elementRef.nativeElement.focus();
             }
         }
     }
