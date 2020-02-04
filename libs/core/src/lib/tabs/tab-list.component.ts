@@ -1,5 +1,5 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,
+    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -14,8 +14,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
-import { Subscription } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { TabsService } from './tabs.service';
+import { filter, takeUntil } from 'rxjs/operators';
 
 export type TabModes = 'icon-only' | 'process' | 'filter'
 
@@ -32,9 +33,10 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
         class: 'fd-tabs-custom'
     },
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TabsService]
 })
-export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy {
+export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     /** @hidden */
     @ContentChildren(TabPanelComponent)
@@ -43,6 +45,9 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
     /** @hidden */
     @ViewChildren('tabLink')
     tabLinks: QueryList<ElementRef>;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
 
     /** Index of the selected tab panel. */
     @Input()
@@ -69,44 +74,49 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
     private _tabsSubscription: Subscription;
     private _tabSelectSubscription: Subscription;
+    private _tabsPropertySubscription: Subscription;
 
     constructor(
         private _tabsService: TabsService,
         private _changeRef: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        setTimeout(() => {
-            this.selectTab(this.selectedIndex);
-        });
+    ngAfterViewInit(): void {
+        this.selectTab(this.selectedIndex);
 
-        this._tabSelectSubscription = this._tabsService.tabSelected.subscribe(index => {
-            if (index !== this.selectedIndex) {
-                this.selectTab(index);
-            }
-        });
+        this._tabSelectSubscription = this._tabsService.tabSelected
+            .pipe(
+                takeUntil(this.onDestroy$),
+                filter(index => index !== this.selectedIndex)
+            )
+            .subscribe(index => this.selectTab(index))
+        ;
 
-        this._tabsSubscription = this.panelTabs.changes.subscribe(() => {
-            if (!this._isIndexInRange() || this._isTabContentEmpty()) {
-                this._resetTabHook();
-            }
-        });
+        this._tabsSubscription = this.panelTabs.changes
+            .pipe(
+                takeUntil(this.onDestroy$),
+                filter(() => !this._isIndexInRange(this.selectedIndex) || this._isAnyTabExpanded())
+            )
+            .subscribe(() => this._resetTabHook())
+        ;
+
+        this._tabsPropertySubscription = merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this._changeRef.detectChanges())
+        ;
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._tabsSubscription.unsubscribe();
-        this._tabSelectSubscription.unsubscribe();
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.selectedIndex) {
-            setTimeout(() => {
-                this.selectTab(changes.selectedIndex.currentValue);
-            });
+            this.selectTab(changes.selectedIndex.currentValue);
         }
     }
 
@@ -115,13 +125,15 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
      * @param tabIndex Index of the tab to select.
      */
     selectTab(tabIndex: number): void {
-        if (this._isIndexInRange()) {
-            this.panelTabs.forEach((tab, index) => {
-                tab.expanded = index === tabIndex;
-            });
-            this.selectedIndex = tabIndex;
-            this._changeRef.detectChanges();
-            this.selectedIndexChange.emit(tabIndex);
+        if (this._isIndexInRange(tabIndex)) {
+            setTimeout(() => {
+                this.panelTabs.forEach((tab, index) => {
+                    tab.triggerExpandedPanel(index === tabIndex);
+                });
+                this.selectedIndex = tabIndex;
+                this.selectedIndexChange.emit(tabIndex);
+                this._changeRef.detectChanges();
+            })
         }
     }
 
@@ -137,24 +149,15 @@ export class TabListComponent implements AfterContentInit, OnChanges, OnDestroy 
         this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
     }
 
-    private _isIndexInRange(): boolean {
-        return this.panelTabs && this.panelTabs.length > 0 && this.selectedIndex < this.panelTabs.length;
+    private _isIndexInRange(index: number): boolean {
+        return this.panelTabs && this.panelTabs.length > 0 && index < this.panelTabs.length;
     }
 
-    private _isTabContentEmpty(): boolean {
-        let result = true;
-        this.panelTabs.forEach(tab => {
-            if (tab.expanded) {
-                result = false;
-            }
-        });
-        return result;
+    private _isAnyTabExpanded(): boolean {
+        return !this.panelTabs.some(tab => tab.expanded);
     }
 
     private _resetTabHook(): void {
-        this.selectedIndex = 0;
-        setTimeout(() => {
-            this.selectTab(this.selectedIndex);
-        });
+        this.selectTab(0);
     }
 }

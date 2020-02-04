@@ -7,7 +7,10 @@ import { Subject } from 'rxjs';
 export class TabsService {
 
     /** Event is thrown always when tab is selected by keyboard actions */
-    public tabSelected = new Subject<number>();
+    readonly tabSelected: Subject<number> = new Subject<number>();
+
+    /** Event is thrown always, when some property is changed */
+    readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {

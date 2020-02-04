@@ -62,9 +62,10 @@
     Filter Mode
 </fd-docs-section-title>
 <description>
-    The Process Mode can be used by adding <code>[mode]="'process'"</code>. As on icons it has different structure than
+    The Filter Mode can be used by adding <code>[mode]="'filter'"</code>. It has different structure than
     tab any other mode. It can be built by setting properties, defining own template, or using it with
-    <code>[routerLink]</code>.
+    <code>[routerLink]</code>. To make filter Mode Tabs looks properly, it's mandatory to add <code>[header]="true"</code>
+    property to first tab item, or in case of custom template use different structure, as it is shown in example.
 </description>
 <component-example [name]="'ex5'">
     <fd-tab-filter-example></fd-tab-filter-example>

@@ -3,7 +3,7 @@ import {
     Component,
     ContentChildren, ElementRef,
     EventEmitter, Input,
-    OnDestroy, OnInit,
+    OnDestroy,
     Output,
     QueryList,
     Renderer2,
@@ -12,14 +12,16 @@ import {
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
-import { Subscription } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-tab-nav]',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <ng-content></ng-content>`,
     providers: [TabsService],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -32,6 +34,14 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
 
     // /** @hidden */
     @ContentChildren(TabItemDirective) items: QueryList<TabItemDirective>;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
+    /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
+    private readonly onRefresh$: Subject<void> = new Subject<void>();
+
+    private rendererListenFunctions: Function[] = [];
 
     private _class: string = '';
     @Input()
@@ -69,43 +79,54 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
 
     /** @hidden */
     private _tabSelectSubscription: Subscription;
+    /** @hidden */
+    private _tabChangeSubscription: Subscription;
 
     /** Event Thrown every time something is clicked */
-    @Output() onKeyDown = new EventEmitter<{event: any, index: number}>();
+    @Output() onKeyDown = new EventEmitter<{ event: any, index: number }>();
 
     /** @hidden */
     constructor(
         private renderer: Renderer2,
         private tabsService: TabsService,
         private _elementRef: ElementRef
-    ) {}
+    ) {
+    }
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
     public get tabLinks(): TabLinkDirective[] {
         let tabLinks: TabLinkDirective[] = [];
-        if (this.links) { tabLinks = tabLinks.concat(this.links.map(link => link)); }
-        if (this.items) { tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem)); }
+        if (this.links) {
+            tabLinks = tabLinks.concat(this.links.map(link => link));
+        }
+        if (this.items) {
+            tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem));
+        }
         return tabLinks;
     }
 
     /** @hidden */
     public ngAfterContentInit(): void {
-        this._tabSelectSubscription = this.tabsService.tabSelected.subscribe(index => {
-            this.selectTab(index);
-        });
+        this.refreshSubscription();
 
-        this.tabLinks.forEach((linkElement, index) => {
-            this.renderer.listen(linkElement.elementRef.nativeElement, 'keydown', (event) => {
-                this.tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement))
-            }
-        )});
+        this._tabSelectSubscription = this.tabsService.tabSelected
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(index => this.selectTab(index))
+        ;
+
+        /** Merging 2 subscriptions */
+        this._tabChangeSubscription = merge(this.links.changes, this.items.changes)
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(() => this.refreshSubscription())
+        ;
 
         this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._tabSelectSubscription.unsubscribe();
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
     }
 
     /**
@@ -136,5 +157,27 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
      */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** Whether any QueryList detects any changes */
+    private refreshSubscription(): void {
+        /** Finish all of the streams, form before */
+        this.onRefresh$.next();
+
+        /** Merge refresh/destroy observables */
+        const refreshObs = merge(this.onRefresh$, this.onDestroy$);
+
+        refreshObs.subscribe(() => {
+            this.rendererListenFunctions.forEach(func => func());
+            this.rendererListenFunctions = [];
+        });
+
+        this.tabLinks.forEach((linkElement, index) => {
+            this.rendererListenFunctions.push(
+                this.renderer.listen(linkElement.elementRef.nativeElement, 'keydown', (event) => {
+                    this.tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement));
+                })
+            );
+        });
     }
 }

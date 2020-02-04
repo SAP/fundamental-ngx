@@ -7,8 +7,8 @@
         <li fd-tab-item
             [header]="tab.header"
             [tabItemState]="tab.tabState">
-            <a #tabLink
-               fd-tab-link
+            <a fd-tab-link
+               #tabLink
                [active]="tab.expanded"
                [attr.tabindex]="0"
                [attr.aria-controls]="tab.id"

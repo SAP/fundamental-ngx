@@ -1,6 +1,17 @@
-import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
+    Input,
+    OnChanges, Optional,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
+import { TabsService } from '../tabs.service';
 
 let tabPanelUniqueId: number = 0;
 
@@ -17,9 +28,10 @@ let tabPanelUniqueId: number = 0;
         '[attr.aria-expanded]': 'expanded ? true : null',
         '[class.is-expanded]': 'expanded'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabPanelComponent {
+export class TabPanelComponent implements OnChanges {
 
     /** @hidden */
     @ContentChild(TabTitleDirective, { read: TemplateRef, static: false })
@@ -29,8 +41,10 @@ export class TabPanelComponent {
     @Input()
     id: string = 'fd-tab-panel' + tabPanelUniqueId++;
 
-    /** @hidden */
-    expanded = false;
+    /** @hidden
+     * Flag to inform if body for this tab should be displayed
+     */
+    expanded: boolean = false;
 
     /** @hidden */
     index: number;
@@ -59,7 +73,30 @@ export class TabPanelComponent {
     @Input()
     header: boolean = false;
 
-    /** */
+    /** Semantic type of the tab item */
     @Input()
-    tabState: TabItemState
+    tabState: TabItemState;
+
+    /** @hidden */
+    constructor(
+        private _changeDetRef: ChangeDetectorRef,
+        @Optional() private _tabsService: TabsService
+    ) {}
+
+    /** @hidden
+     * Thanks to OnPush change strategy detection on tab-list parent component,
+     * every change of any property should be reported.
+     */
+    public ngOnChanges(): void {
+        if (this._tabsService) {
+            this._tabsService.tabPanelPropertyChanged.next();
+        }
+    }
+
+    /** @hidden
+     * Method to change the state of expanded flag */
+    triggerExpandedPanel(expanded: boolean): void {
+        this.expanded = expanded;
+        this._changeDetRef.detectChanges();
+    }
 }

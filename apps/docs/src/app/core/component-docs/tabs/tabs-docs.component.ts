@@ -144,17 +144,6 @@ export class TabsDocsComponent implements OnInit {
         }
     ];
 
-    counterTab: ExampleFile[] = [
-        {
-            language: 'html',
-            component: 'ComplexTitleExampleComponent',
-            code: complexTabH,
-            fileName: 'complex-title-example',
-            secondFile: 'complex-title-example',
-            typescriptFileCode: complexTabHTsCode
-        }
-    ];
-
     tabCounter: ExampleFile[] = [
         {
             language: 'html',
