@@ -48,6 +48,9 @@ export class ModalConfig implements DynamicComponentConfig {
     /** Whether clicking on the backdrop should close the modal. Only works if hasBackdrop is true. */
     backdropClickCloseable?: boolean = true;
 
+    /** Classes to apply to the `fd-modal-container`  */
+    containerClass?: string = '';
+
     /** Global classes to apply to the modal panel. */
     modalPanelClass?: string = '';
 
