@@ -34,6 +34,8 @@ export class FormControlDirective extends AbstractFdNgxClass {
     @Input()
     type: string;
 
+    elementRef: ElementRef;
+
     /** @hidden */
     _setProperties(): void {
         if (this.state) {
@@ -59,8 +61,9 @@ export class FormControlDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
+    constructor(elementRef: ElementRef) {
         super(elementRef);
+        this.elementRef = elementRef;
     }
 
     /** @hidden */

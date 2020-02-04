@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 
 /**
  * A token is used to represent contextualizing information.
@@ -33,12 +41,18 @@ export class TokenComponent {
     @Output()
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
+    elementRef: ElementRef;
+
     /** @hidden */
     clickHandler(event): void {
         event.stopPropagation();
         if (!this.disabled) {
             this.onCloseClick.emit(event);
         }
+    }
+
+    constructor(elementRef: ElementRef) {
+        this.elementRef = elementRef;
     }
 
 }
