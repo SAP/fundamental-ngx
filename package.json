@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.14.0-rc.16",
+  "version": "0.14.0-rc.18",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "SAP Fundamental Styles, implemented in Angular",
@@ -72,7 +72,7 @@
     "core-js": "^2.6.9",
     "focus-trap": "^5.1.0",
     "fundamental-styles": "^0.5.0",
-    "highlight.js": "^9.18.0",
+    "highlight.js": "^9.18.1",
     "jasminewd2": "^2.0.6",
     "moment": "^2.24.0",
     "ngx-markdown": "^8.2.2",
