@@ -2,7 +2,6 @@ import {
     AfterViewInit,
     Component,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     EventEmitter,
     ElementRef,
     Input,
@@ -15,8 +14,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 export type LinkType = 'standard' | 'emphasized';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
 const VALID_INPUT_TYPES = ['standard', 'emphasized'];
-const timeout: number = 1000;
-/** This Timeout should be reviewed */
 
 @Component({
     selector: 'fdp-link',
@@ -25,24 +22,27 @@ const timeout: number = 1000;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent implements OnInit, AfterViewInit {
+    isEmphasized: boolean = false;
+    isfocused: boolean = false;
     private _disabled: boolean = false;
     private _inverted: boolean = false;
     private _wrap: boolean = false;
-    isEmphasized: boolean = false;
-    tooltipVisibility: boolean = false;
-    isfocused: boolean = false;
 
     /** Access child element, for checking link content*/
-    @ViewChild('link', { static: false }) anchor: ElementRef;
+    @ViewChild('link', { static: false })
+    anchor: ElementRef;
 
     /** Id for the link */
-    @Input() id?: string;
+    @Input()
+    id?: string;
 
     /** href value to Navigate to */
-    @Input() href: string;
+    @Input()
+    href: string;
 
     /** target where navigation will happen, Default=same frame */
-    @Input() target?: NavigationTarget = '_self';
+    @Input()
+    target?: NavigationTarget = '_self';
 
     /** type of link, options standard or Emphasized, Default=standard */
     @Input()
@@ -79,11 +79,12 @@ export class LinkComponent implements OnInit, AfterViewInit {
     }
 
     /** Tooltip text to show when focused for more than  timeout value*/
-    @Input() toolTipText?: string;
+    @Input()
+    title?: string;
 
     /** Gives option to truncate content of the link based on width. */
     @Input()
-    width: string;
+    width?: string;
 
     /** Emitting link click event */
     @Output()
@@ -93,7 +94,7 @@ export class LinkComponent implements OnInit, AfterViewInit {
         this.click.emit(event);
     }
 
-    constructor(private cd: ChangeDetectorRef) {}
+    constructor() {}
 
     ngOnInit() {
         /* if link disabled, for Avoiding tab focus and click. marking href undefined. */
@@ -112,28 +113,10 @@ export class LinkComponent implements OnInit, AfterViewInit {
         }
     }
 
-    /** On link Focus, if focus for more than timeout; show Tooltip */
-    onFocusEvent() {
-        this.isfocused = true;
-        setTimeout(() => {
-            if (this.isfocused) {
-                this.tooltipVisibility = true;
-                this.cd.detectChanges();
-            }
-        }, timeout);
-    }
-
-    /** Remove Tooltip on focusOut event  */
-    onFocusOutEvent() {
-        this.isfocused = false;
-        this.tooltipVisibility = false;
-        this.cd.detectChanges();
-    }
-
     /** Throw error for blank text link */
     ngAfterViewInit() {
-        if (this.anchor.nativeElement.textContent.length === 0) {
-            throw new Error('Mandatory text for fdp-link missing');
+        if (!this.anchor.nativeElement.innerHTML) {
+            throw new Error('Mandatory text/icon for fdp-link missing');
         }
     }
 }

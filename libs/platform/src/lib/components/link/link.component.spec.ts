@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinkComponent } from './link.component';
 import { Component, ViewChild, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -11,9 +11,15 @@ import { By } from '@angular/platform-browser';
     `
 })
 class TestComponent {
-    @ViewChild(LinkComponent, { static: false }) link: LinkComponent;
-    @Input() href = 'https://www.google.com/';
-    @Input() type: string = 'standard';
+    @ViewChild(LinkComponent, { static: false })
+    link: LinkComponent;
+
+    @Input()
+    href = 'https://www.google.com/';
+
+    @Input()
+    type: string = 'standard';
+
     constructor() {}
 }
 
@@ -45,21 +51,6 @@ describe('LinkComponent', () => {
         expect(linkElement.nativeElement.classList.contains('fd-link')).toBe(true);
         expect(linkElement.nativeElement.textContent).toContain('StandardLink');
     });
-
-    /** Tooltip visibility disappear on focus-out event */
-    it('should not display tooltip', () => {
-        component.link.onFocusOutEvent();
-        expect(component.link.isfocused).toBeFalsy();
-        expect(component.link.tooltipVisibility).toBeFalsy();
-    });
-
-    /** Tooltip visibility on Focus event */
-    it('should display tooltip', fakeAsync(() => {
-        component.link.onFocusEvent();
-        tick(2000);
-        expect(component.link.isfocused).toBeTruthy();
-        expect(component.link.tooltipVisibility).toBeTruthy();
-    }));
 });
 
 /** Disabled link test */
@@ -70,10 +61,17 @@ describe('LinkComponent', () => {
     `
 })
 class DisabledLinkComponent {
-    @ViewChild(LinkComponent, { static: false }) link: LinkComponent;
-    @Input() href = 'https://www.google.com/';
-    @Input() disabled: boolean = true;
-    @Input() type: string = 'emphasized';
+    @ViewChild(LinkComponent, { static: false })
+    link: LinkComponent;
+
+    @Input()
+    href = 'https://www.google.com/';
+
+    @Input()
+    disabled: boolean = true;
+
+    @Input()
+    type: string = 'emphasized';
 
     constructor() {}
 }
