@@ -9,6 +9,7 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     `,
     styleUrls: ['./link.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent implements OnInit, OnChanges, CssClassBuilder {
 
