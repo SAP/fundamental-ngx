@@ -17,8 +17,8 @@ import * as invertedlinkTsCode from '!raw-loader!./platform-link-examples/platfo
 import * as truncatedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-truncated-example.component.html';
 import * as truncatedlinkTsCode from '!raw-loader!./platform-link-examples/platform-link-truncated-example.component.ts';
 
-import * as mergedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-merged-example.component.html';
-import * as mergedlinkTsCode from '!raw-loader!./platform-link-examples/platform-link-merged-example.component.ts';
+import * as iconlinkSrc from '!raw-loader!./platform-link-examples/platform-link-icon-example.component.html';
+import * as iconlinkTsCode from '!raw-loader!./platform-link-examples/platform-link-icon-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -111,20 +111,21 @@ export class PlatformLinkDocsComponent implements OnInit {
             component: 'PlatformLinkTruncatedExampleComponent'
         }
     ];
-    mergedLink: ExampleFile[] = [
+
+    iconLink: ExampleFile[] = [
         {
             language: 'html',
-            code: mergedlinkSrc,
-            fileName: 'platform-link-merged-example'
+            code: iconlinkSrc,
+            fileName: 'platform-link-icon-example'
         },
         {
             language: 'typescript',
-            code: mergedlinkTsCode,
-            fileName: 'platform-link-merged-example',
-            component: 'PlatformLinkMergedExampleComponent'
+            code: iconlinkTsCode,
+            fileName: 'platform-link-icon-example',
+            component: 'PlatformLinkIconExampleComponent'
         }
     ];
-    
+
     constructor() {}
 
     ngOnInit() {}

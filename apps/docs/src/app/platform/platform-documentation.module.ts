@@ -36,7 +36,7 @@ import { PlatformLinkDisabledExampleComponent } from './component-docs/platform-
 import { PlatformLinkDisabledEmphasizedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-disabled-emphasized-example.component';
 import { PlatformLinkInvertedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-inverted-example.component';
 import { PlatformLinkTruncatedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-truncated-example.component';
-import { PlatformLinkMergedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-merged-example.component';
+import { PlatformLinkIconExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-icon-example.component';
 import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
 
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
@@ -82,7 +82,7 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformLinkDisabledEmphasizedExampleComponent,
         PlatformLinkInvertedExampleComponent,
         PlatformLinkTruncatedExampleComponent,
-        PlatformLinkMergedExampleComponent,
+        PlatformLinkIconExampleComponent,
         PlatformLinkDocsComponent,
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,

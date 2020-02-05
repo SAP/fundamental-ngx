@@ -13,7 +13,9 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type LinkType = 'standard' | 'emphasized';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
+export type IconPosition = 'left' | 'right';
 const VALID_INPUT_TYPES = ['standard', 'emphasized'];
+const VALID_IconPositions = ['left', 'right'];
 
 @Component({
     selector: 'fdp-link',
@@ -24,6 +26,8 @@ const VALID_INPUT_TYPES = ['standard', 'emphasized'];
 export class LinkComponent implements OnInit, AfterViewInit {
     isEmphasized: boolean = false;
     isfocused: boolean = false;
+    iconBefore: boolean = false;
+    iconAfter: boolean = false;
     private _disabled: boolean = false;
     private _inverted: boolean = false;
     private _wrap: boolean = false;
@@ -48,6 +52,18 @@ export class LinkComponent implements OnInit, AfterViewInit {
     @Input()
     type: LinkType = 'standard';
 
+    /** Icon support inside Anchor link */
+    @Input()
+    icon?: string;
+
+    /** Takes size for Icon */
+    @Input()
+    iconSize?: string = 'l';
+
+    /** Position Icon size, before or after Link text */
+    @Input()
+    iconPosition?: IconPosition = 'left';
+
     @Input()
     get disabled(): boolean {
         return this._disabled;
@@ -68,23 +84,9 @@ export class LinkComponent implements OnInit, AfterViewInit {
         this._inverted = coerceBooleanProperty(value);
     }
 
-    @Input()
-    get wrap(): boolean {
-        return this._wrap;
-    }
-
-    /** For long link text more than given width, either truncate text or wrap */
-    set wrap(value: boolean) {
-        this._wrap = coerceBooleanProperty(value);
-    }
-
     /** Tooltip text to show when focused for more than  timeout value*/
     @Input()
     title?: string;
-
-    /** Gives option to truncate content of the link based on width. */
-    @Input()
-    width?: string;
 
     /** Emitting link click event */
     @Output()
@@ -105,6 +107,18 @@ export class LinkComponent implements OnInit, AfterViewInit {
         /* If link type===emphasized then make link emphasized type */
         if (this.type === VALID_INPUT_TYPES[1]) {
             this.isEmphasized = true;
+        }
+
+        /** Setting Icon position */
+        if (this.icon && this.iconPosition) {
+            // if icon position is left, set iconBefore to true
+            if (this.iconPosition === VALID_IconPositions[0]) {
+                this.iconBefore = true;
+            }
+            // if icon position is right, set iconBefore to true
+            if (this.iconPosition === VALID_IconPositions[1]) {
+                this.iconAfter = true;
+            }
         }
 
         /* if link type not supported, throw Error */

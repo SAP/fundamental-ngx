@@ -1,5 +1,13 @@
-<p>
+<div>
     This is an Example of
-    <fdp-link [href]="'http://www.google.com'" [width]="'150px'">TruncatedLink-TruncatedLink-TruncatedLink</fdp-link>
+    <p style="display: inline-block; width: 150px;">
+        <fdp-link
+            [href]="'http://www.google.com'"
+            [title]="'tooltip text showing on focus'"
+            [icon]="'chain-link'"
+            [iconPosition]="'left'"
+            >TruncatedLink TruncatedLink TruncatedLink</fdp-link
+        >
+    </p>
     text after link
-</p>
+</div>

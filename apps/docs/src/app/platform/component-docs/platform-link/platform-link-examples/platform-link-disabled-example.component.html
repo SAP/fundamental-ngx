@@ -1,5 +1,12 @@
 <p>
     This is an Example of
-    <fdp-link [href]="'http://www.google.com'" [disabled]="true">DisabledLink</fdp-link>
+    <fdp-link
+        [href]="'http://www.google.com'"
+        [title]="'tooltip text showing on focus'"
+        [disabled]="true"
+        [icon]="'chain-link'"
+        [iconPosition]="'left'"
+        >DisabledLink</fdp-link
+    >
     text after link
 </p>

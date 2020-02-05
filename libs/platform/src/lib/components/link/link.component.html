@@ -1,14 +1,15 @@
 <a
     #link
-    class="fd-link"
+    class="fd-link fdp-link-truncate__txt"
     [attr.id]="id"
     [attr.href]="href"
     [target]="target"
     [attr.aria-disabled]="disabled"
     [attr.title]="title"
-    [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted, 'fdp-link-truncate__txt': !wrap }"
+    [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted }"
     (click)="clicked($event)"
-    [ngStyle]="{ width: width }"
 >
+    <fd-icon [glyph]="icon" [size]="iconSize" *ngIf="icon && iconBefore"></fd-icon>
     <ng-content></ng-content>
+    <fd-icon [glyph]="icon" [size]="iconSize" *ngIf="icon && iconAfter"></fd-icon>
 </a>
