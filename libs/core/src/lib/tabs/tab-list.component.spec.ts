@@ -49,11 +49,4 @@ describe('TabListComponent', () => {
         expect(component.selectedIndex).toBe(0);
         expect(component.tabLinks.length).toBe(4);
     });
-
-    it('should handle tab select', fakeAsync(() => {
-        component.ngAfterViewInit();
-        component.selectTab(1);
-        tick(1);
-        expect(component.selectedIndex).toBe(1);
-    }));
 });
