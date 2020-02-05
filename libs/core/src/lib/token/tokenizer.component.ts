@@ -39,50 +39,52 @@ export class TokenizerComponent implements AfterViewInit {
     inputValue: string;
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         if (this.input && this.input.elementRef) {
-            this.input.elementRef.nativeElement.addEventListener('keydown', (event) => this.inputKeyDown(event));
+            this.input.elementRef.nativeElement.addEventListener('keydown', (event) => {
+                this.handleKeyDown(event, this.tokenList.length);
+            });
         }
     }
 
     /** @hidden */
-    inputKeyDown(event): void {
-        if (event.key === 'ArrowLeft') {
-            this.handleTokenFocus(event, this.tokenList.length);
-        }
-    }
-
-    /** @hidden */
-    handleTokenFocus(event, fromIndex): void {
+    handleKeyDown(event, fromIndex): void {
         let newIndex;
+        if (event.code === 'ArrowLeft') {
+            newIndex = fromIndex - 1;
+        } else if (event.code === 'ArrowRight') {
+            newIndex = fromIndex + 1;
+        }
+        if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
+            this.input.elementRef.nativeElement.focus();
+        } else if (newIndex || newIndex === 0) {
+            this.focusTokenElement(event, newIndex);
+        }
+    }
+
+    /** @hidden */
+    focusTokenElement(event, newIndex): HTMLElement {
         // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
         const handleFunctionReference = (e) => {
             if (newIndex || newIndex === 0) {
-                this.handleTokenFocus(e, newIndex);
+                this.handleKeyDown(e, newIndex);
             }
         };
-        if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
-            let elementToFocus;
-            if (event.code === 'ArrowLeft') {
-                newIndex = fromIndex - 1;
-            } else if (event.code === 'ArrowRight') {
-                newIndex = fromIndex + 1;
-            }
-            if (newIndex >= 0 && newIndex < this.tokenList.length) {
-                elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
-                    .elementRef.nativeElement.querySelector('.fd-token');
-                // element needs tabindex in order to be focused
-                elementToFocus.setAttribute('tabindex', '0');
-                elementToFocus.focus();
-                elementToFocus.addEventListener('keydown', handleFunctionReference);
-                elementToFocus.addEventListener('blur', () => {
-                    elementToFocus.setAttribute('tabindex', '-1');
-                    elementToFocus.removeEventListener('keydown', handleFunctionReference);
-                });
-            } else if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
-                this.input.elementRef.nativeElement.focus();
-            }
+        let elementToFocus;
+        if (newIndex >= 0 && newIndex < this.tokenList.length) {
+            elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
+                .elementRef.nativeElement.querySelector('.fd-token');
+            // element needs tabindex in order to be focused
+            elementToFocus.setAttribute('tabindex', '0');
+            elementToFocus.focus();
+            elementToFocus.addEventListener('keydown', handleFunctionReference);
+            elementToFocus.addEventListener('blur', () => {
+                elementToFocus.setAttribute('tabindex', '-1');
+                elementToFocus.removeEventListener('keydown', handleFunctionReference);
+            });
         }
+
+        return elementToFocus;
     }
 
 }

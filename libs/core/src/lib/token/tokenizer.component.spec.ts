@@ -41,44 +41,64 @@ describe('TokenizerComponent', () => {
     expect(component.compact).toBeFalsy();
   });
 
-  it('should handle inputKeyDown', () => {
-    spyOn(component, 'handleTokenFocus');
-    const event = {key: 'ArrowLeft'};
-    component.inputKeyDown(event);
-    expect(component.handleTokenFocus).toHaveBeenCalledWith(event, 3);
-  });
-
-  it('should handleTokenFocus left arrow from input', () => {
-    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus'));
-    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute'));
-    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'addEventListener'));
-    component.handleTokenFocus({code: 'ArrowLeft'}, component.tokenList.length);
+  it('should addEventListener to input during ngAfterViewInit and handle keydown', () => {
+    spyOn(component, 'handleKeyDown');
+    component.ngAfterViewInit();
+    component.input.elementRef.nativeElement.focus();
+    const event = new KeyboardEvent('keydown', {
+        'code': 'ArrowLeft'
+    });
+    component.input.elementRef.nativeElement.dispatchEvent(event);
 
     fixture.detectChanges();
 
-    expect(component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token').focus).toHaveBeenCalled();
-    expect(component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token').setAttribute).toHaveBeenCalledWith('tabindex', '0');
-    expect(component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token').focus).not.toHaveBeenCalled();
-    expect(component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token').setAttribute).not.toHaveBeenCalled();
+    expect(component.handleKeyDown).toHaveBeenCalledWith(event, component.tokenList.length);
   });
 
-  it('should handleTokenFocus right arrow from input', () => {
-    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus'));
-    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute'));
-    component.handleTokenFocus({code: 'ArrowRight'}, component.tokenList.length);
-
-    fixture.detectChanges();
-
-    expect(component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token').focus).not.toHaveBeenCalled();
-    expect(component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token').setAttribute).not.toHaveBeenCalledWith();
-  });
-
-  it('should handleTokenFocus right arrow from last token', () => {
+  it('should handleKeyDown on ArrowLeft when last token is focused', () => {
     spyOn(component.input.elementRef.nativeElement, 'focus');
-    component.handleTokenFocus({code: 'ArrowRight'}, component.tokenList.length - 1);
+    spyOn(component, 'focusTokenElement');
+    const event = {
+      'code': 'ArrowLeft'
+      };
+    component.handleKeyDown(event, component.tokenList.length - 1);
 
-    fixture.detectChanges();
+    expect(component.input.elementRef.nativeElement.focus).not.toHaveBeenCalled();
+    expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 2);
+    });
+
+  it('should handleKeyDown on ArrowRight when last token is focused', () => {
+    spyOn(component.input.elementRef.nativeElement, 'focus');
+    spyOn(component, 'focusTokenElement');
+    const event = {
+      'code': 'ArrowRight'
+    };
+    component.handleKeyDown(event, component.tokenList.length - 1);
 
     expect(component.input.elementRef.nativeElement.focus).toHaveBeenCalled();
+    expect(component.focusTokenElement).not.toHaveBeenCalled();
+  });
+
+  it('should handleKeyDown on ArrowRight when second to last token is focused', () => {
+    spyOn(component, 'focusTokenElement');
+    const event = {
+      'code': 'ArrowRight'
+    };
+    component.handleKeyDown(event, component.tokenList.length - 2);
+
+    expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 1);
+  });
+
+  it('should focus a token element', () => {
+    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus'));
+    component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute'));
+    spyOn(component, 'handleKeyDown');
+
+    component.focusTokenElement({}, 1);
+
+    const elementToCheck = component.tokenList.filter((element, index) =>
+        index === 1)[0].elementRef.nativeElement.querySelector('.fd-token');
+    expect(elementToCheck.focus).toHaveBeenCalled();
+    expect(elementToCheck.setAttribute).toHaveBeenCalledWith('tabindex', '0');
   });
 });
