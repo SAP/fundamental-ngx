@@ -149,14 +149,17 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
         this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
     }
 
+    /** @hidden */
     private _isIndexInRange(index: number): boolean {
         return this.panelTabs && this.panelTabs.length > 0 && index < this.panelTabs.length;
     }
 
+    /** @hidden */
     private _isAnyTabExpanded(): boolean {
         return !this.panelTabs.some(tab => tab.expanded);
     }
 
+    /** @hidden */
     private _resetTabHook(): void {
         this.selectTab(0);
     }
