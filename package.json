@@ -93,7 +93,7 @@
     "@nrwl/schematics": "7.8.7",
     "@schematics/angular": "^7.3.9",
     "@storybook/addon-a11y": "^5.3.8",
-    "@storybook/addon-actions": "^5.3.8",
+    "@storybook/addon-actions": "^5.3.12",
     "@storybook/addon-knobs": "^5.3.12",
     "@storybook/addon-links": "^5.3.12",
     "@storybook/addon-notes": "^5.3.12",
