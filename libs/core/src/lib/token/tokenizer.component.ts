@@ -40,18 +40,20 @@ export class TokenizerComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit() {
-        this.input.elementRef.nativeElement.addEventListener('keydown', (event) => this.inputKeyDown(event));
+        if (this.input && this.input.elementRef) {
+            this.input.elementRef.nativeElement.addEventListener('keydown', (event) => this.inputKeyDown(event));
+        }
     }
 
     /** @hidden */
-    inputKeyDown(event) {
+    inputKeyDown(event): void {
         if (event.key === 'ArrowLeft') {
             this.handleTokenFocus(event, this.tokenList.length);
         }
     }
 
     /** @hidden */
-    handleTokenFocus(event, fromIndex) {
+    handleTokenFocus(event, fromIndex): void {
         let newIndex;
         // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
         const handleFunctionReference = (e) => {
