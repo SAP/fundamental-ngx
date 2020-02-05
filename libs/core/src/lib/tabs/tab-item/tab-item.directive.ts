@@ -26,7 +26,8 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
 export class TabItemDirective implements CssClassBuilder, OnInit {
 
     /** @hidden */
-    @ContentChild(TabLinkDirective, { static: false }) linkItem: TabLinkDirective;
+    @ContentChild(TabLinkDirective, { static: false })
+    linkItem: TabLinkDirective;
 
     private _class: string = '';
     @Input()

@@ -17,17 +17,17 @@ export class TabsService {
         switch (event.key) {
             case ('ArrowLeft'): {
                 if (index - 1 >= 0) {
-                    this.getTabLinkFromIndex(index - 1, elements).focus();
+                    this._getTabLinkFromIndex(index - 1, elements).focus();
                 } else {
-                    this.getTabLinkFromIndex(elements.length - 1, elements).focus();
+                    this._getTabLinkFromIndex(elements.length - 1, elements).focus();
                 }
                 break;
             }
             case ('ArrowRight'): {
                 if (index + 1 < elements.length) {
-                    this.getTabLinkFromIndex(index + 1, elements).focus();
+                    this._getTabLinkFromIndex(index + 1, elements).focus();
                 } else {
-                    this.getTabLinkFromIndex(0, elements).focus();
+                    this._getTabLinkFromIndex(0, elements).focus();
                 }
                 break;
             }
@@ -43,7 +43,7 @@ export class TabsService {
     }
 
     /** @hidden */
-    private getTabLinkFromIndex(index: number, elements: HTMLElement[]): HTMLElement {
+    private _getTabLinkFromIndex(index: number, elements: HTMLElement[]): HTMLElement {
         return elements[index];
     }
 }

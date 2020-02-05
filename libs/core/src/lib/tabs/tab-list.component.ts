@@ -47,7 +47,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     tabLinks: QueryList<ElementRef>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** Index of the selected tab panel. */
     @Input()
@@ -72,10 +72,6 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
-    private _tabsSubscription: Subscription;
-    private _tabSelectSubscription: Subscription;
-    private _tabsPropertySubscription: Subscription;
-
     constructor(
         private _tabsService: TabsService,
         private _changeRef: ChangeDetectorRef
@@ -85,32 +81,32 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     ngAfterViewInit(): void {
         this.selectTab(this.selectedIndex);
 
-        this._tabSelectSubscription = this._tabsService.tabSelected
+        this._tabsService.tabSelected
             .pipe(
-                takeUntil(this.onDestroy$),
+                takeUntil(this._onDestroy$),
                 filter(index => index !== this.selectedIndex)
             )
             .subscribe(index => this.selectTab(index))
         ;
 
-        this._tabsSubscription = this.panelTabs.changes
+        this.panelTabs.changes
             .pipe(
-                takeUntil(this.onDestroy$),
+                takeUntil(this._onDestroy$),
                 filter(() => !this._isIndexInRange(this.selectedIndex) || this._isAnyTabExpanded())
             )
             .subscribe(() => this._resetTabHook())
         ;
 
-        this._tabsPropertySubscription = merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
-            .pipe(takeUntil(this.onDestroy$))
+        merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(() => this._changeRef.detectChanges())
         ;
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */

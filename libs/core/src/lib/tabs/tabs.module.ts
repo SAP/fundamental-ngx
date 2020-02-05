@@ -8,7 +8,7 @@ import {
     TabCountDirective,
     TabCounterHeaderDirective, TabHeaderDirective,
     TabIconDirective, TabLabelDirective,
-    TabLoadTitleDirective, TabProcessDirective, TabProcessIconDirective, TabSeparator,
+    TabLoadTitleDirective, TabProcessDirective, TabProcessIconDirective, TabSeparatorDirective,
     TabTagDirective,
     TabTitleDirective
 } from './tab-utils/tab-directives';
@@ -33,7 +33,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabHeaderDirective,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparator
+        TabSeparatorDirective
     ],
     imports: [
         CommonModule
@@ -54,7 +54,7 @@ import { TabItemDirective } from './tab-item/tab-item.directive';
         TabHeaderDirective,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparator
+        TabSeparatorDirective
     ]
 })
 export class TabsModule {}

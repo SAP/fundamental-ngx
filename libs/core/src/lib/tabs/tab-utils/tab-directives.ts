@@ -35,11 +35,11 @@ export class TabLoadTitleDirective implements OnInit {
 
     private contentRef: EmbeddedViewRef<any>;
 
-    constructor(private viewRef: ViewContainerRef) {}
+    constructor(private _viewRef: ViewContainerRef) {}
 
     ngOnInit(): void {
-        this.viewRef.clear();
-        this.contentRef = this.viewRef.createEmbeddedView(this.content);
+        this._viewRef.clear();
+        this.contentRef = this._viewRef.createEmbeddedView(this.content);
     }
 }
 
@@ -191,5 +191,5 @@ export class TabProcessIconDirective {
         'class': 'fd-tabs__separator'
     }
 })
-export class TabSeparator {
+export class TabSeparatorDirective {
 }
