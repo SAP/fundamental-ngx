@@ -6,7 +6,6 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    OnInit,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -37,7 +36,7 @@ let toggleUniqueId: number = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToggleComponent implements OnInit, ControlValueAccessor {
+export class ToggleComponent implements ControlValueAccessor {
     /** @hidden */
     @ViewChild('input', { static: false })
     inputElement: ElementRef<HTMLInputElement>;
@@ -45,10 +44,6 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     /** If the toggle should have text in it or not. */
     @Input()
     noText: boolean = true;
-
-    /** For the toggle's direction. */
-    @Input()
-    dir: string = 'left';
 
     /** Whether the toggle is disabled. */
     @Input()
@@ -95,10 +90,6 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
     constructor(
         private changeDetectorRef: ChangeDetectorRef
     ) { }
-
-    /** @hidden */
-    ngOnInit() {
-    }
 
     /** Set focus on the input element. */
     public focus(): void {

@@ -72,11 +72,11 @@ describe('ToggleComponent', () => {
         component.semantic = true;
         component.compact = true;
         (component as any).changeDetectorRef.markForCheck();
-        component.ngOnInit();
         fixture.detectChanges();
 
         const toggle = fixture.nativeElement.querySelector('.fd-toggle');
         expect(toggle.classList).toContain('fd-toggle--compact');
+        expect(toggle.classList).toContain('fd-toggle--disabled');
         expect(toggle.classList).toContain('fd-toggle--semantic');
     });
 
