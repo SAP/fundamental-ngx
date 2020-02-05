@@ -49,7 +49,10 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
         app_component_html: '',
         app_component_ts: '',
         app_component_html_path: '',
-        app_component_ts_path: ''
+        app_component_ts_path: '',
+        app_module_entryComponents: '',
+        app_module_imports: '',
+        app_module_declarationArray: ''
     };
 
     app_app_component = ``
@@ -139,6 +142,15 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 } else {
                     this.parameters.html_tag = 'fd-' + example.fileName;
                 }
+                if (example.entryComponent !== undefined) {
+                    this.parameters.app_module_entryComponents = example.entryComponent;
+                }
+                if (example.declarationArray !== undefined) {
+                    this.parameters.app_module_declarationArray = example.declarationArray;
+                }
+                if (example.imports !== undefined) {
+                    this.parameters.app_module_imports = example.imports;
+                }
                 this.parameters.app_module = 'AppModule';
                 this.parameters.app_module_file = 'app.module';
                 this.parameters.app_component = example.component;
@@ -181,24 +193,23 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     this.project.files[_pathTS] = example.typescriptFileCode.default;
                 }
             }
-            if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined && example.module === undefined)) {
+            if (example.language === 'typescript' && (example.secondFile === undefined && example.thirdFile === undefined)) {
                 const _pathTS = `src/app/${example.fileName}.component.ts`;
                 this.project.files[_pathTS] = example.code.default;
             }
             // tslint:disable-next-line: max-line-length
-            else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined && example.module === undefined)) {
+            else if (example.language === 'typescript' && (example.secondFile !== undefined && example.thirdFile === undefined)) {
                 const _pathTS2 = `src/app/${example.secondFile}.component.ts`;
                 this.project.files[_pathTS2] = example.code.default;
 
             }
             // tslint:disable-next-line: max-line-length
-            else if (example.language === 'typescript' && (example.thirdFile !== undefined && example.secondFile === undefined && example.module === undefined)) {
+            else if (example.language === 'typescript' && (example.thirdFile !== undefined && example.secondFile === undefined)) {
                 const _pathTS2 = `src/app/${example.thirdFile}.component.ts`;
                 this.project.files[_pathTS2] = example.code.default;
 
             }
-            if (example.module === undefined) {
-                this.project.files['src/app/app.module.ts'] = `
+            this.project.files['src/app/app.module.ts'] = `
                 import { BrowserModule } from '@angular/platform-browser';
                 import { NgModule } from '@angular/core';
                 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -212,11 +223,11 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                 import { DragDropModule } from '@angular/cdk/drag-drop';
                 import {RouterModule, Routes} from '@angular/router'
                 import { ${this.parameters.app_component} } from './${this.parameters.app_component_basis}';
-
+                ${this.parameters.app_module_imports}
 
                 @NgModule({
                   declarations: [
-                    ${this.parameters.app_component},
+                    ${this.parameters.app_component},${this.parameters.app_module_declarationArray}
                   ],
                   imports: [
                     BrowserModule,
@@ -234,14 +245,11 @@ export class CodeExampleComponent implements OnInit, AfterViewInit {
                     BrowserAnimationsModule
                   ],
                   providers: [],
+                  entryComponents: [${this.parameters.app_module_entryComponents}],
                   bootstrap: [${this.parameters.app_component}]
                 })
                 export class ${this.parameters.app_module} { }
                 `;
-            }
-            else if (example.language === 'typescript' && example.secondFile === undefined && example.thirdFile === undefined && example.module !== undefined) {
-                this.project.files['src/app/app.module.ts'] = example.code.default;
-            }
         });
 
         this.project.files['src/index.html'] = `

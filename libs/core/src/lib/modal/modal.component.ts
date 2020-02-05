@@ -108,7 +108,8 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
                 this.focusTrap = focusTrap(this.elRef.nativeElement, {
                     clickOutsideDeactivates: this.backdropClickCloseable && this.hasBackdrop,
                     escapeDeactivates: false,
-                    initialFocus: this.elRef.nativeElement
+                    initialFocus: this.elRef.nativeElement,
+                    allowOutsideClick: (event: MouseEvent) => true
                 });
                 this.focusTrap.activate();
             } catch (e) {
