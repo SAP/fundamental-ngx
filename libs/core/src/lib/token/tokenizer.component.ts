@@ -9,7 +9,8 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlDirective, TokenComponent } from '@fundamental-ngx/core';
+import { FormControlDirective } from '../form/form-control/form-control.directive';
+import { TokenComponent } from './token.component';
 
 @Component({
   selector: 'fd-tokenizer',
