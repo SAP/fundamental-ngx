@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 
 /**
  * Breadcrumb item directive. Must have child breadcrumb link directives.
@@ -17,4 +17,8 @@ import { Directive } from '@angular/core';
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemDirective {}
+export class BreadcrumbItemDirective {
+
+    constructor(public elementRef: ElementRef) {}
+
+}
