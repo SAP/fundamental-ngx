@@ -9,7 +9,5 @@
     [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted }"
     (click)="clicked($event)"
 >
-    <fd-icon [glyph]="icon" [size]="iconSize" *ngIf="icon && iconBefore"></fd-icon>
     <ng-content></ng-content>
-    <fd-icon [glyph]="icon" [size]="iconSize" *ngIf="icon && iconAfter"></fd-icon>
 </a>

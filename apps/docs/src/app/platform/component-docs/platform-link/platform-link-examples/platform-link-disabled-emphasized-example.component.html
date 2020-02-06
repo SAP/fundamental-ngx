@@ -1,13 +1,9 @@
 <p>
     This is an Example of
-    <fdp-link
-        [href]=""
-        [type]="'emphasized'"
-        [title]="'tooltip text showing on focus'"
-        [disabled]="true"
-        [icon]="'chain-link'"
-        [iconPosition]="'left'"
-        >DisabledEmphasizedLink</fdp-link
+    <fdp-link [href]="" [type]="'emphasized'" [title]="'tooltip text showing on focus'" [disabled]="true">
+        <fd-icon [glyph]="'chain-link'" [size]="'l'"></fd-icon>
+        DisabledEmphasizedLink</fdp-link
     >
+
     text after link
 </p>

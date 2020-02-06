@@ -30,7 +30,6 @@ export class LinkComponent implements OnInit, AfterViewInit {
     iconAfter: boolean = false;
     private _disabled: boolean = false;
     private _inverted: boolean = false;
-    private _wrap: boolean = false;
 
     /** Access child element, for checking link content*/
     @ViewChild('link', { static: false })
@@ -51,18 +50,6 @@ export class LinkComponent implements OnInit, AfterViewInit {
     /** type of link, options standard or Emphasized, Default=standard */
     @Input()
     type: LinkType = 'standard';
-
-    /** Icon support inside Anchor link */
-    @Input()
-    icon?: string;
-
-    /** Takes size for Icon */
-    @Input()
-    iconSize?: string = 'l';
-
-    /** Position Icon size, before or after Link text */
-    @Input()
-    iconPosition?: IconPosition = 'left';
 
     @Input()
     get disabled(): boolean {
@@ -107,18 +94,6 @@ export class LinkComponent implements OnInit, AfterViewInit {
         /* If link type===emphasized then make link emphasized type */
         if (this.type === VALID_INPUT_TYPES[1]) {
             this.isEmphasized = true;
-        }
-
-        /** Setting Icon position */
-        if (this.icon && this.iconPosition) {
-            // if icon position is left, set iconBefore to true
-            if (this.iconPosition === VALID_IconPositions[0]) {
-                this.iconBefore = true;
-            }
-            // if icon position is right, set iconBefore to true
-            if (this.iconPosition === VALID_IconPositions[1]) {
-                this.iconAfter = true;
-            }
         }
 
         /* if link type not supported, throw Error */

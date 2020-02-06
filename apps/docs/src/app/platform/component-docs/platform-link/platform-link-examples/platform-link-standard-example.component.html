@@ -1,12 +1,8 @@
 <p>
     This is an Example of
-    <fdp-link
-        [href]="'http://www.google.com'"
-        [title]="'tooltip text showing on focus'"
-        [icon]="'chain-link'"
-        [iconPosition]="'left'"
-    >
-        Regular link.
+    <fdp-link [href]="'http://www.google.com'" [title]="'tooltip text showing on focus'">
+        <fd-icon [glyph]="'chain-link'" [size]="'l'"></fd-icon>
+        Standard Link
     </fdp-link>
     text after link
 </p>
