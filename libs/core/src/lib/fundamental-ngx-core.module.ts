@@ -54,6 +54,7 @@ import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification-service/notification.service';
 import { NestedListModule } from './nested-list/nested-list.module';
 import { RadioModule } from './radio/radio.module';
+import { LinkModule } from './link/link.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -81,6 +82,7 @@ import { RadioModule } from './radio/radio.module';
     InfiniteScrollModule,
     InputGroupModule,
     LayoutGridModule,
+    LinkModule,
     ListModule,
     LoadingSpinnerModule,
     LocalizationEditorModule,

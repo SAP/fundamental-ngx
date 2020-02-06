@@ -1,0 +1,17 @@
+<a [routerLink]="['./']" fd-link>Standard Link</a>
+<br><br>
+<a [routerLink]="['./']" fd-link [emphasized]="true">Emphasized Link</a>
+<br><br>
+<a  fd-link [disabled]="true" aria-disabled="true">Disabled Link</a>
+<br><br>
+<a fd-link [routerLink]="['./']" fragment="inverted" [inverted]="true">Inverted Link</a>
+<br><br>
+<a [routerLink]="['./']" fd-link>
+    Icon Right Link
+    <fd-icon [glyph]="'slim-arrow-right'" [size]="'s'"></fd-icon>
+</a>
+<br><br>
+<a [routerLink]="['./']" fd-link>
+    <fd-icon [glyph]="'slim-arrow-left'" [size]="'s'"></fd-icon>
+    Icon Left Link
+</a>

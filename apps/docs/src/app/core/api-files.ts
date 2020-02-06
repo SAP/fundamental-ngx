@@ -112,6 +112,9 @@ export const API_FILES = {
         'LayoutGridComponent',
         'LayoutGridSpanDirective',
     ],
+    link: [
+        'LinkComponent'
+    ],
     list: [
         'ListComponent',
         'ListActionDirective',
