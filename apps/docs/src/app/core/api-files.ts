@@ -304,8 +304,8 @@ export const API_FILES = {
         'TimeFormatParserDefault',
         'TimeObject',
     ],
-    toggle: [
-        'ToggleComponent'
+    switch: [
+        'SwitchComponent'
     ],
     token: [
         'TokenComponent',

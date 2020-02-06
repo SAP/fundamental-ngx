@@ -203,8 +203,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
         this.destroy$.complete();
     }
 
-    /** Toggles the open state of the select. */
-    toggle(): void {
+    /** Switchs the open state of the select. */
+    switch(): void {
         if (this.isOpen && !this.disabled) {
             this.close();
         } else {

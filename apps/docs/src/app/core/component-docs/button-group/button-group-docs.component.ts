@@ -4,8 +4,8 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 
 import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
 import * as buttonGroupDefaultExampleTs from '!raw-loader!./examples/button-group-default-example.component.ts';
-import * as buttonGroupToggleExample from '!raw-loader!./examples/button-group-toggle-example.component.html';
-import * as buttonGroupToggleExampleTs from '!raw-loader!./examples/button-group-toggle-example.component.ts';
+import * as buttonGroupSwitchExample from '!raw-loader!./examples/button-group-switch-example.component.html';
+import * as buttonGroupSwitchExampleTs from '!raw-loader!./examples/button-group-switch-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
@@ -96,11 +96,18 @@ export class ButtonGroupDocsComponent implements OnInit {
     };
 
 
-    defaultToggleHtml: ExampleFile[] = [
+    defaultSwitchHtml: ExampleFile[] = [
         {
             language: 'html',
+<<<<<<< HEAD
             code: buttonGroupToggleExample,
             fileName: 'button-group-toggle-example',
+=======
+            code: buttonGroupSwitchExample,
+            fileName: 'button-group-switch-example',
+            component: 'ButtonGroupSwitchExampleComponent',
+            typescriptFileCode: buttonGroupSwitchExampleTs,
+>>>>>>> change naming
         }
     ];
 

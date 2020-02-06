@@ -64,7 +64,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/tile', name: 'Tile' },
         { url: 'core/time', name: 'Time' },
         { url: 'core/timePicker', name: 'Time Picker' },
-        { url: 'core/toggle', name: 'Toggle' },
+        { url: 'core/switch', name: 'Switch' },
         { url: 'core/token', name: 'Token' },
         // { url: 'core/tree', name: 'Tree' }
     ];

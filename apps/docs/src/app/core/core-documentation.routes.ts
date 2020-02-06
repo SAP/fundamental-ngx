@@ -42,7 +42,7 @@ import { TileDocsComponent } from './component-docs/tile/tile-docs.component';
 import { TimeDocsComponent } from './component-docs/time/time-docs.component';
 import { TimePickerDocsComponent } from './component-docs/time-picker/time-picker-docs.component';
 import { TreeDocsComponent } from './component-docs/tree/tree-docs.component';
-import { ToggleDocsComponent } from './component-docs/toggle/toggle-docs.component';
+import { SwitchDocsComponent } from './component-docs/switch/switch-docs.component';
 import { TokenDocsComponent } from './component-docs/token/token-docs.component';
 import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
@@ -80,7 +80,7 @@ import { TileDocsHeaderComponent } from './component-docs/tile/tile-docs-header/
 import { TimeHeaderComponent } from './component-docs/time/time-header/time-header.component';
 import { TimePickerHeaderComponent } from './component-docs/time-picker/time-picker-header/time-picker-header.component';
 import { TreeHeaderComponent } from './component-docs/tree/tree-header/tree-header.component';
-import { ToggleHeaderComponent } from './component-docs/toggle/toggle-header/toggle-header.component';
+import { SwitchHeaderComponent } from './component-docs/switch/switch-header/switch-header.component';
 import { TokenHeaderComponent } from './component-docs/token/token-header/token-header.component';
 import { LocalizationEditorHeaderComponent } from './component-docs/localization-editor/localization-editor-header/localization-editor-header.component';
 import { LocalizationEditorDocsComponent } from './component-docs/localization-editor/localization-editor-docs.component';
@@ -527,11 +527,11 @@ export const ROUTES: Routes = [
                 ]
             },
             {
-                path: 'toggle',
-                component: ToggleHeaderComponent,
+                path: 'switch',
+                component: SwitchHeaderComponent,
                 children: [
-                    { path: '', component: ToggleDocsComponent },
-                    { path: 'api', component: ApiComponent, data: { content: API_FILES.toggle } }
+                    { path: '', component: SwitchDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.switch } }
                 ]
             },
             {

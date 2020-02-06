@@ -2,35 +2,35 @@ import { moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ToggleComponent, ToggleModule } from 'libs/core/src/lib/toggle/public_api';
+import { SwitchComponent, SwitchModule } from 'libs/core/src/lib/switch/public_api';
 
 export default {
-    title: 'Fd toggle',
-    component: ToggleComponent,
+    title: 'Fd switch',
+    component: SwitchComponent,
     moduleMetadata: moduleMetadata,
     decorators: [
         withKnobs,
         withA11y,
         moduleMetadata({
-            imports: [ToggleModule, FormsModule],
+            imports: [SwitchModule, FormsModule],
             declarations: []
         })
     ]
 };
 
-export const Toggle = () => ({
+export const Switch = () => ({
     template:
         `
-        <fd-toggle 
-            [(ngModel)]="toggleValue1" 
+        <fd-switch 
+            [(ngModel)]="switchValue1" 
             [noText]="noText"
             [semantic]="semantic"
             [compact]="compact"
             [disabled]="disabled">
-        </fd-toggle>
+        </fd-switch>
   `,
     props: {
-        toggleValue1: boolean('toggle 1', false),
+        switchValue1: boolean('switch 1', false),
         noText: boolean('noText', false),
         semantic: boolean('semantic', false),
         disabled: boolean('disabled', false),

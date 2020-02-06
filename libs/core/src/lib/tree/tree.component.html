@@ -2,7 +2,7 @@
      *ngIf="headers.length > 0">
   <div class="fd-tree__row fd-tree__row--header">
     <div class="fd-tree__col fd-tree__col--control">
-      <button (click)="toggleDisplayAll()"
+      <button (click)="switchDisplayAll()"
               class="fd-tree__control"
               aria-label="Expand all"
               [ngClass]="{'is-pressed' : !hideAll}"

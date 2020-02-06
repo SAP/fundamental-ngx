@@ -22,7 +22,7 @@ export class TreeChildComponent implements OnInit {
         this.hideChildren = false;
     }
 
-    toggleDisplayChildren(hideAll?) {
+    switchDisplayChildren(hideAll?) {
         if (hideAll !== undefined) {
             this.hideChildren = hideAll;
         } else {

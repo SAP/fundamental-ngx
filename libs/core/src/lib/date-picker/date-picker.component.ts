@@ -109,7 +109,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayCalendarToggleLabel: string = 'Display calendar toggle';
+    displayCalendarSwitchLabel: string = 'Display calendar switch';
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -239,8 +239,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         }
     }
 
-    /** Toggles the calendar open or closed */
-    public toggleCalendar(): void {
+    /** Switchs the calendar open or closed */
+    public switchCalendar(): void {
         this.onTouched();
         this.isOpen = !this.isOpen;
     }

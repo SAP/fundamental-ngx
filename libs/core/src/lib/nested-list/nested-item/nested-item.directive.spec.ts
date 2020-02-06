@@ -129,12 +129,12 @@ describe('NestedItemDirective', () => {
     });
 
     it('Should react to events from link child', () => {
-        spyOn(emptyItemDirective, 'toggle');
+        spyOn(emptyItemDirective, 'switch');
         spyOn(emptyItemDirective.keyboardTriggered, 'emit');
         const keyboardEvent: any = { key: 'value' };
         emptyItemDirective.linkItem.clicked.emit();
         emptyItemDirective.linkItem.keyboardTriggered.emit(keyboardEvent);
-        expect(emptyItemDirective.toggle).toHaveBeenCalled();
+        expect(emptyItemDirective.switch).toHaveBeenCalled();
         expect(emptyItemDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
     });
 

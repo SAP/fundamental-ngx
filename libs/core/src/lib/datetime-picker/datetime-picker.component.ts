@@ -156,7 +156,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayDatetimeToggleLabel: string = 'Display calendar toggle';
+    displayDatetimeSwitchLabel: string = 'Display calendar switch';
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -242,8 +242,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
         };
     }
 
-    /** Toggles the popover. */
-    togglePopover(): void {
+    /** Switchs the popover. */
+    switchPopover(): void {
         this.onTouched();
         if (this.isOpen) {
             this.closePopover();

@@ -241,34 +241,34 @@ describe('TimeComponent', () => {
         expect(component.time.second).toBe(0);
     });
 
-    it('should toggle and call period model change the period for am', () => {
+    it('should switch and call period model change the period for am', () => {
         spyOn(component, 'periodModelChange');
         component.time.hour = 13;
         component.period = 'am';
-        component.togglePeriod();
+        component.switchPeriod();
         expect(component.periodModelChange).toHaveBeenCalled();
     });
 
-    it('should toggle and change the period for am', () => {
+    it('should switch and change the period for am', () => {
         component.time.hour = 13;
         component.period = 'am';
-        component.togglePeriod();
+        component.switchPeriod();
         expect(component.period).toBe('pm');
     });
 
-    it('should toggle and change the period for pm', () => {
+    it('should switch and change the period for pm', () => {
         component.time.hour = 13;
         component.period = 'pm';
-        component.togglePeriod();
+        component.switchPeriod();
         expect(component.period).toBe('am');
         expect(component.time.hour).toBe(1);
     });
 
-    it('should toggle and call period model change the period for pm', () => {
+    it('should switch and call period model change the period for pm', () => {
         spyOn(component, 'periodModelChange');
         component.time.hour = 13;
         component.period = 'pm';
-        component.togglePeriod();
+        component.switchPeriod();
         expect(component.periodModelChange).toHaveBeenCalled();
     });
 

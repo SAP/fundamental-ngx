@@ -76,9 +76,9 @@ export class LocalizationEditorComponent {
     compact: boolean = false;
 
     /**
-     * Toggles the popover open state.
+     * Switchs the popover open state.
      */
-    public toggle(): void {
+    public switch(): void {
         if (this.isOpen) {
             this.close();
         } else {

@@ -102,7 +102,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
         if (this.linkItem) {
             /** Subscribe to mouse click event, thrown by link item */
-            this.linkItem.clicked.subscribe(() => this.toggle());
+            this.linkItem.clicked.subscribe(() => this.switch());
 
             /** Subscribe to keyboard event and throw it farther */
             this.linkItem.keyboardTriggered.subscribe(keyboardEvent =>
@@ -135,8 +135,8 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         }
     }
 
-    /** Method that toggle the item and propagate it to children */
-    toggle(): void {
+    /** Method that switch the item and propagate it to children */
+    switch(): void {
         /** Propagate initial open state to children */
         this.propagateOpenChange(!this._expanded);
     }

@@ -109,9 +109,9 @@ export class SplitButtonComponent {
     }
 
     /**
-     * Toggles the popover open state.
+     * Switchs the popover open state.
      */
-    public toggle(): void {
+    public switch(): void {
         if (this.isOpen) {
             this.close();
         } else {

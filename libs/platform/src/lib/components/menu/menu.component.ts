@@ -28,7 +28,7 @@ export interface MenuItem {
 
     /**
      * Is menu item selectable. If item is selectable, then it will display
-     * selected/non-selected state when toggled.
+     * selected/non-selected state when switchd.
      */
     selectable?: boolean;
 
