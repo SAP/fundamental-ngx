@@ -12,7 +12,7 @@ import {
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
-import { merge, Subject, Subscription } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 import { takeUntil } from 'rxjs/operators';
@@ -86,8 +86,7 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         private _renderer: Renderer2,
         private _tabsService: TabsService,
         private _elementRef: ElementRef
-    ) {
-    }
+    ) {}
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
     public get tabLinks(): TabLinkDirective[] {
@@ -104,18 +103,8 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
     /** @hidden */
     public ngAfterContentInit(): void {
         this._refreshSubscription();
-
-        this._tabsService.tabSelected
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(index => this.selectTab(index))
-        ;
-
-        /** Merging 2 subscriptions */
-        merge(this.links.changes, this.items.changes)
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._refreshSubscription())
-        ;
-
+        this._listenOnTabSelect();
+        this._listenOnContentQueryListChange();
         this.buildComponentCssClass();
     }
 
@@ -155,6 +144,26 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         return this._elementRef;
     }
 
+    /** @hidden */
+    private _listenOnTabSelect(): void {
+        this._tabsService.tabSelected
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(index => this.selectTab(index))
+        ;
+    }
+
+    /**
+     * @hidden
+     * Every time any of query is changed, ex. tab is removed or added
+     * reference to keydown subscriptions handler is renewed
+     */
+    private _listenOnContentQueryListChange(): void {
+        merge(this.links.changes, this.items.changes)
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this._refreshSubscription())
+        ;
+    }
+
     /** Whether any QueryList detects any changes */
     private _refreshSubscription(): void {
         /** Finish all of the streams, form before */
@@ -163,6 +172,7 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
 
+        /** Remove old subscription reference */
         refreshObs.subscribe(() => {
             this._rendererListenFunctions.forEach(func => func());
             this._rendererListenFunctions = [];

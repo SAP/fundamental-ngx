@@ -80,27 +80,9 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     ngAfterViewInit(): void {
         this.selectTab(this.selectedIndex);
-
-        this._tabsService.tabSelected
-            .pipe(
-                takeUntil(this._onDestroy$),
-                filter(index => index !== this.selectedIndex)
-            )
-            .subscribe(index => this.selectTab(index))
-        ;
-
-        this.panelTabs.changes
-            .pipe(
-                takeUntil(this._onDestroy$),
-                filter(() => !this._isIndexInRange(this.selectedIndex) || this._isAnyTabExpanded())
-            )
-            .subscribe(() => this._resetTabHook())
-        ;
-
-        merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._changeRef.detectChanges())
-        ;
+        this._listenOnTabSelect();
+        this._listenOnContentQueryListChange();
+        this._listenOnPropertiesChange();
     }
 
     /** @hidden */
@@ -143,6 +125,40 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any): void {
         this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(tab => tab.nativeElement));
+    }
+
+    /** @hidden */
+    private _listenOnTabSelect(): void {
+        this._tabsService.tabSelected
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter(index => index !== this.selectedIndex)
+            )
+            .subscribe(index => this.selectTab(index))
+        ;
+    }
+
+    /**
+     * @hidden
+     * Every time any of query is changed, ex. tab is removed or added
+     * reference to keydown subscriptions handler is renewed
+     */
+    private _listenOnContentQueryListChange(): void {
+        this.panelTabs.changes
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter(() => !this._isIndexInRange(this.selectedIndex) || this._isAnyTabExpanded())
+            )
+            .subscribe(() => this._resetTabHook())
+        ;
+    }
+
+    /** @hidden */
+    private _listenOnPropertiesChange(): void {
+        merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this._changeRef.detectChanges())
+        ;
     }
 
     /** @hidden */
