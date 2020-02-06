@@ -31,12 +31,10 @@ describe('ToggleComponent', () => {
     it('should accept custom id', () => {
         const id = 'custom-id';
         component.id = id;
-        component.ngOnInit();
         expect(component.id).toBe(id);
     });
 
     it('should generate id', () => {
-        component.ngOnInit();
         expect(component.id).toBeTruthy();
     });
 
