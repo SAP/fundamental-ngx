@@ -2,24 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinkComponent } from './link.component';
 import { Component, ViewChild, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { LinkModule } from '@fundamental-ngx/core';
 
 /** Standard link functionality tests */
 @Component({
     selector: 'fdp-link-test',
     template: `
-        <fdp-link [href]="href" [type]="type">StandardLink</fdp-link>
+        <fdp-link [href]="'https://www.google.com/'" [type]="'standard'">StandardLink</fdp-link>
     `
 })
 class TestComponent {
-    @ViewChild(LinkComponent, { static: false })
-    link: LinkComponent;
-
-    @Input()
-    href = 'https://www.google.com/';
-
-    @Input()
-    type: string = 'standard';
-
     constructor() {}
 }
 
@@ -29,6 +21,7 @@ describe('LinkComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [LinkModule],
             declarations: [LinkComponent, TestComponent],
             providers: []
         }).compileComponents();
@@ -57,7 +50,7 @@ describe('LinkComponent', () => {
 @Component({
     selector: 'fdp-disabled-link',
     template: `
-        <fdp-link [href]="href" [type]="type" [disabled]="disabled">EmphasizedLink</fdp-link>
+        <fdp-link [href]="href" [type]="'emphasized'" [disabled]="true">DisabledLink</fdp-link>
     `
 })
 class DisabledLinkComponent {
@@ -66,12 +59,6 @@ class DisabledLinkComponent {
 
     @Input()
     href = 'https://www.google.com/';
-
-    @Input()
-    disabled: boolean = true;
-
-    @Input()
-    type: string = 'emphasized';
 
     constructor() {}
 }
@@ -82,6 +69,7 @@ describe('LinkComponent Disabled', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [LinkModule],
             declarations: [LinkComponent, DisabledLinkComponent],
             providers: []
         }).compileComponents();

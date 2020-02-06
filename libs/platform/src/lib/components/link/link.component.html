@@ -1,12 +1,15 @@
 <a
     #link
-    class="fd-link fdp-link-truncate__txt"
+    fd-link
+    class="fdp-link-truncate__txt"
     [attr.id]="id"
     [attr.href]="href"
     [target]="target"
-    [attr.aria-disabled]="disabled"
-    [attr.title]="title"
-    [ngClass]="{ 'fd-link--emphasized': isEmphasized, 'fd-link--inverted': inverted }"
+    [disabled]="disabled"
+    [emphasized]="emphasized"
+    [inverted]="inverted"
+    [title]="title ? title : ''"
+    [attr.aria-label]="title ? title : ''"
     (click)="clicked($event)"
 >
     <ng-content></ng-content>

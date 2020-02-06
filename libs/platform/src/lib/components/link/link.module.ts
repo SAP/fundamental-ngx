@@ -8,4 +8,4 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
     imports: [CommonModule, FundamentalNgxCoreModule],
     exports: [LinkComponent]
 })
-export class LinkModule {}
+export class PlatformLinkModule {}

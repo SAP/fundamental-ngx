@@ -30,13 +30,16 @@ import {PlatformActionBarDocsComponent} from '../platform/component-docs/platfor
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 
-import { PlatformLinkStandardExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-standard-example.component';
-import { PlatformLinkEmphasizedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-emphasized-example.component';
-import { PlatformLinkDisabledExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-disabled-example.component';
-import { PlatformLinkDisabledEmphasizedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-disabled-emphasized-example.component';
-import { PlatformLinkInvertedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-inverted-example.component';
-import { PlatformLinkTruncatedExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-truncated-example.component';
-import { PlatformLinkIconExampleComponent } from './component-docs/platform-link/platform-link-examples/platform-link-icon-example.component';
+import { 
+    PlatformLinkStandardExampleComponent,
+    PlatformLinkEmphasizedExampleComponent,
+    PlatformLinkDisabledExampleComponent,
+    PlatformLinkDisabledEmphasizedExampleComponent,
+    PlatformLinkInvertedExampleComponent,
+    PlatformLinkTruncatedExampleComponent,
+    PlatformLinkIconExampleComponent 
+} from './component-docs/platform-link/platform-link-examples/platform-link-examples.component';
+import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
 import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
 
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
@@ -83,6 +86,7 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformLinkInvertedExampleComponent,
         PlatformLinkTruncatedExampleComponent,
         PlatformLinkIconExampleComponent,
+        PlatformLinkHeaderComponent,
         PlatformLinkDocsComponent,
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,

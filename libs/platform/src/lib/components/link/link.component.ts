@@ -13,9 +13,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type LinkType = 'standard' | 'emphasized';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
-export type IconPosition = 'left' | 'right';
 const VALID_INPUT_TYPES = ['standard', 'emphasized'];
-const VALID_IconPositions = ['left', 'right'];
 
 @Component({
     selector: 'fdp-link',
@@ -24,15 +22,13 @@ const VALID_IconPositions = ['left', 'right'];
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent implements OnInit, AfterViewInit {
-    isEmphasized: boolean = false;
+    emphasized: boolean = false;
     isfocused: boolean = false;
-    iconBefore: boolean = false;
-    iconAfter: boolean = false;
     private _disabled: boolean = false;
     private _inverted: boolean = false;
 
     /** Access child element, for checking link content*/
-    @ViewChild('link', { static: false })
+    @ViewChild('link', { read: ElementRef, static: false })
     anchor: ElementRef;
 
     /** Id for the link */
@@ -93,7 +89,7 @@ export class LinkComponent implements OnInit, AfterViewInit {
 
         /* If link type===emphasized then make link emphasized type */
         if (this.type === VALID_INPUT_TYPES[1]) {
-            this.isEmphasized = true;
+            this.emphasized = true;
         }
 
         /* if link type not supported, throw Error */
