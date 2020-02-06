@@ -35,9 +35,6 @@ export class FormControlDirective extends AbstractFdNgxClass {
     type: string;
 
     /** @hidden */
-    elementRef: ElementRef;
-
-    /** @hidden */
     _setProperties(): void {
         if (this.state) {
             this._addClassToElement('is-' + this.state);
@@ -62,9 +59,8 @@ export class FormControlDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    constructor(elementRef: ElementRef) {
+    constructor(public elementRef: ElementRef) {
         super(elementRef);
-        this.elementRef = elementRef;
     }
 
     /** @hidden */

@@ -20,9 +20,11 @@ import { FormControlDirective, TokenComponent } from '@fundamental-ngx/core';
 })
 export class TokenizerComponent implements AfterViewInit {
 
+    /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
 
+    /** @hidden */
     @ContentChild(forwardRef(() => FormControlDirective), {static: true})
     input: FormControlDirective;
 
@@ -48,7 +50,7 @@ export class TokenizerComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    handleKeyDown(event, fromIndex): void {
+    handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex;
         if (event.code === 'ArrowLeft') {
             newIndex = fromIndex - 1;
@@ -63,7 +65,7 @@ export class TokenizerComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    focusTokenElement(event, newIndex): HTMLElement {
+    focusTokenElement(event: KeyboardEvent, newIndex: number): HTMLElement {
         // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
         const handleFunctionReference = (e) => {
             if (newIndex || newIndex === 0) {

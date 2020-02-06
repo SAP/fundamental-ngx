@@ -42,9 +42,6 @@ export class TokenComponent {
     readonly onCloseClick: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    elementRef: ElementRef;
-
-    /** @hidden */
     clickHandler(event): void {
         event.stopPropagation();
         if (!this.disabled) {
@@ -52,8 +49,6 @@ export class TokenComponent {
         }
     }
 
-    constructor(elementRef: ElementRef) {
-        this.elementRef = elementRef;
-    }
+    constructor(public elementRef: ElementRef) {}
 
 }
