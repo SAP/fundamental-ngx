@@ -58,9 +58,9 @@ describe('TokenizerComponent', () => {
   it('should handleKeyDown on ArrowLeft when last token is focused', () => {
     spyOn(component.input.elementRef.nativeElement, 'focus');
     spyOn(component, 'focusTokenElement');
-    const event = {
+    const event = new KeyboardEvent('keydown', {
       'code': 'ArrowLeft'
-      };
+    });
     component.handleKeyDown(event, component.tokenList.length - 1);
 
     expect(component.input.elementRef.nativeElement.focus).not.toHaveBeenCalled();
@@ -70,9 +70,9 @@ describe('TokenizerComponent', () => {
   it('should handleKeyDown on ArrowRight when last token is focused', () => {
     spyOn(component.input.elementRef.nativeElement, 'focus');
     spyOn(component, 'focusTokenElement');
-    const event = {
+    const event = new KeyboardEvent('keydown', {
       'code': 'ArrowRight'
-    };
+    });
     component.handleKeyDown(event, component.tokenList.length - 1);
 
     expect(component.input.elementRef.nativeElement.focus).toHaveBeenCalled();
@@ -81,9 +81,9 @@ describe('TokenizerComponent', () => {
 
   it('should handleKeyDown on ArrowRight when second to last token is focused', () => {
     spyOn(component, 'focusTokenElement');
-    const event = {
+    const event = new KeyboardEvent('keydown', {
       'code': 'ArrowRight'
-    };
+    });
     component.handleKeyDown(event, component.tokenList.length - 2);
 
     expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 1);
@@ -93,8 +93,11 @@ describe('TokenizerComponent', () => {
     component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus'));
     component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute'));
     spyOn(component, 'handleKeyDown');
+    const event = new KeyboardEvent('keydown', {
+      'code': 'ArrowRight'
+    });
 
-    component.focusTokenElement({}, 1);
+    component.focusTokenElement(event, 1);
 
     const elementToCheck = component.tokenList.filter((element, index) =>
         index === 1)[0].elementRef.nativeElement.querySelector('.fd-token');
