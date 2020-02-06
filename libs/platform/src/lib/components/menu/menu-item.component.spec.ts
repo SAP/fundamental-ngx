@@ -2,7 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { MenuItemComponent } from './menu-item.component';
 import { By } from '@angular/platform-browser';
-import { MenuKeyboardService } from '@fundamental-ngx/core';
+import { MenuKeyboardService, IconModule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-test-component',
@@ -40,7 +40,7 @@ class TestComponent {
 
     public itemClicked = false;
 
-    constructor() {}
+    constructor() { }
 
     onItemClick() {
         this.itemClicked = true;
@@ -53,6 +53,7 @@ describe('MenuItemComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [IconModule],
             declarations: [TestComponent, MenuItemComponent],
             providers: [MenuKeyboardService]
         }).compileComponents();
@@ -114,7 +115,7 @@ describe('MenuItemComponent', () => {
     });
 
     it('should allow for icons to be added', () => {
-        component.icon = 'sap-icon--lightbulb';
+        component.icon = 'lightbulb';
         component.label = 'Icon Item';
         component.index = '1';
         fixture.detectChanges();
@@ -125,7 +126,7 @@ describe('MenuItemComponent', () => {
     });
 
     it('should allow for alternative select icons to be added', () => {
-        component.icon = 'sap-icon--lightbulb';
+        component.icon = 'lightbulb';
         component.label = 'Icon Item';
         component.index = '1';
         component.selectable = true;
@@ -143,7 +144,7 @@ describe('MenuItemComponent', () => {
         fixture.detectChanges();
 
         spyOn(component.menuItem, 'handleKeyboardEvent');
-        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
+        const event: any = { code: 'ArrowDown', preventDefault: () => { } };
 
         component.menuItem.handleKeyboardEvent(event);
         expect(component.menuItem.handleKeyboardEvent).toHaveBeenCalled();
