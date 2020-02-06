@@ -42,7 +42,6 @@ describe('ToggleComponent', () => {
         spyOn(component, 'onChange');
         spyOn(component.checkedChange, 'emit');
 
-        component.ngOnInit();
         component.checked = false;
         fixture.detectChanges();
 
