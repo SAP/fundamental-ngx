@@ -24,8 +24,6 @@ const VALID_INPUT_TYPES = ['standard', 'emphasized'];
 export class LinkComponent implements OnInit, AfterViewInit {
     emphasized: boolean = false;
     isfocused: boolean = false;
-    private _disabled: boolean = false;
-    private _inverted: boolean = false;
 
     /** Access child element, for checking link content*/
     @ViewChild('link', { read: ElementRef, static: false })
@@ -75,6 +73,9 @@ export class LinkComponent implements OnInit, AfterViewInit {
     @Output()
     click: EventEmitter<any> = new EventEmitter();
 
+    private _disabled: boolean = false;
+    private _inverted: boolean = false;
+
     clicked(event: any) {
         this.click.emit(event);
     }
@@ -98,7 +99,7 @@ export class LinkComponent implements OnInit, AfterViewInit {
         }
     }
 
-    /** Throw error for blank text link */
+    /** Throw error for blank text/icon link */
     ngAfterViewInit() {
         if (!this.anchor.nativeElement.innerHTML) {
             throw new Error('Mandatory text/icon for fdp-link missing');

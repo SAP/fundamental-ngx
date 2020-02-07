@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LinkComponent } from './link.component';
-import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { LinkModule } from '@fundamental-ngx/core';
 
 @NgModule({
     declarations: [LinkComponent],
-    imports: [CommonModule, FundamentalNgxCoreModule],
+    imports: [CommonModule, LinkModule],
     exports: [LinkComponent]
 })
 export class PlatformLinkModule {}
