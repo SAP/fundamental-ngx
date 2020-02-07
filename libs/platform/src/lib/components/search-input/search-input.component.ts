@@ -64,12 +64,12 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
     @Input() hideCategoryLabel = false;
 
     /**
-     * Switch "loading" mode.
+     * Toggle "loading" mode.
      */
     @Input() isLoading = false;
 
     /**
-     * Switch "disabled" mode.
+     * Toggle "disabled" mode.
      */
     @Input() disabled = false;
 

@@ -9,37 +9,37 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality.
+   The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality.
 
-Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
+  Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
 
-Components must be instantiable programmatically.
+  Components must be instantiable programmatically.
 
-Enterprise readiness:
+  Enterprise readiness:
 
-1. Working with data( reactive stream over the array, Data sources over the reactive steam)
+    1. Working with data( reactive stream over the array, Data sources over the reactive steam)
 
-2. Layouts (Dashboard, detail page, master/detail page, Search/result page).
+    2. Layouts (Dashboard, detail page, master/detail page, Search/result page).
 
-It is not about UI:
+   It is not about UI:
 
-1. Application state UI
+    1. Application state UI
     2. Bootstrapping and Configuration
     3. Communication with the backend system.
+  
+   Example:
 
-Example:
+ This example captures several things:
 
-This example captures several things:
+   a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
 
-a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
+   b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
 
-b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
+   c). If we need to group information into sections
 
-c). If we need to group information into sections
-
-d). How we are handling and forms errors
-
-e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
+   d). How we are handling and forms errors
+   
+   e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
 
 ```
 <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
@@ -59,7 +59,6 @@ e). Dropdown usage. Everything is happening inside the component that 
     </fdp-form-field>
     </fdp-form-group>
 ```
-
 ```
     <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
                         [formGroup]="fg" [errorHanlding]="'navigate'">
@@ -79,7 +78,6 @@ e). Dropdown usage. Everything is happening inside the component that 
         </fdp-form-field>
     </fdp-form-group>
 ```
-
 ## API Reference
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/platform/home) for examples and API details.
@@ -119,19 +117,19 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Switchs, add the following import to your main application module.
+    For example, to use Toggles, add the following import to your main application module.
 
     ```javascript
-    import { SwitchModule } from '@fundamental-ngx/core';
+    import { ToggleModule } from '@fundamental-ngx/core';
     ```
 
     For models prior to 0.11.1 use `fundamental-ngx`
 
-    import { SwitchModule } from '@fundamental-ngx/core';
+    import { ToggleModule } from '@fundamental-ngx/core';
 
     @NgModule({
     ...
-    imports: [SwitchModule],
+    imports: [ToggleModule],
     })
     export class DemoModule { }
 
@@ -142,7 +140,7 @@ For an existing Angular CLI application,
 3. **Add the component to your HTML.**
 
     ```html
-    <fd-switch [size]="'l'" [(checked)]="myValue">Large Switch</fd-switch>
+    <fd-toggle [size]="'l'" [(checked)]="myValue">Large Toggle</fd-toggle>
     ```
 
 ## Tests
@@ -174,6 +172,7 @@ If you encounter an issue, you can [create a ticket](https://github.com/SAP/fund
 If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
+
 
 # Platform
 

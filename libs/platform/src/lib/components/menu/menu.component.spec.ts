@@ -268,7 +268,7 @@ describe('MenuComponent', () => {
             expect(thirdItemIcon.length).toBe(0);
         });
 
-        it('should switch selectable item on click', () => {
+        it('should toggle selectable item on click', () => {
             fixture.detectChanges();
             const firstItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="0"]'));
             const secondItem = fixture.debugElement.query(By.css('[data-tag="menu-item"][data-index="1"]'));
