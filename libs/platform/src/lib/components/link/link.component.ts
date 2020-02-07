@@ -39,7 +39,7 @@ export class LinkComponent implements OnInit, AfterViewInit {
 
     /** target where navigation will happen, Default=same frame */
     @Input()
-    target?: NavigationTarget = '_self';
+    target?: NavigationTarget;
 
     /** type of link, options standard or Emphasized, Default=standard */
     @Input()
@@ -68,6 +68,22 @@ export class LinkComponent implements OnInit, AfterViewInit {
     /** Tooltip text to show when focused for more than  timeout value*/
     @Input()
     title?: string;
+
+    /** Specifies the language of the linked document */
+    @Input()
+    hreflang?: string;
+
+    /** Specifies that the target will be downloaded when a user clicks on the hyperlink */
+    @Input()
+    download?: string;
+
+    /** Specifies what media/device the linked document is optimized for */
+    @Input()
+    media?: string;
+
+    /** Specifies the relationship between the current document and the linked document */
+    @Input()
+    rel?: string;
 
     /** Emitting link click event */
     @Output()
