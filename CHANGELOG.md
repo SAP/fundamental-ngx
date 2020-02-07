@@ -1126,7 +1126,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* Remove Change Detection on push on modal and switch ([#1579](https://github.com/SAP/fundamental-ngx/issues/1579)) ([8fad796](https://github.com/SAP/fundamental-ngx/commit/8fad796))
+* Remove Change Detection on push on modal and toggle ([#1579](https://github.com/SAP/fundamental-ngx/issues/1579)) ([8fad796](https://github.com/SAP/fundamental-ngx/commit/8fad796))
 
 
 

@@ -6,7 +6,7 @@
          [attr.data-index]="i"
          class="fd-tree__col"
          [ngClass]="{'fd-tree__col--control': i === 0}">
-      <button (click)="switchDisplayChildren()"
+      <button (click)="toggleDisplayChildren()"
               *ngIf="row.children && i === 0"
               class="fd-tree__control"
               aria-label="Expand"

@@ -36,12 +36,12 @@ describe('PopoverComponent', () => {
         expect(component.isOpenChange.emit).toHaveBeenCalledWith(false);
     });
 
-    it('should switch', () => {
+    it('should toggle', () => {
         component.isOpen = true;
-        component.switch();
+        component.toggle();
         expect(component.isOpen).toBe(false);
 
-        component.switch();
+        component.toggle();
         expect(component.isOpen).toBe(true);
     });
 

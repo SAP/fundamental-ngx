@@ -201,7 +201,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     /** Method that changes state of open variable */
-    public switchOpen(): void {
+    public toggleOpen(): void {
         if (this.open) {
             this.closeSubList()
         } else {

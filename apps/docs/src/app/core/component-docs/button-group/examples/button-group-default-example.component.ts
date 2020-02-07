@@ -26,7 +26,7 @@ export class ButtonGroupDefaultExampleComponent {
         this.icon = x;
     }
 
-    switchLMR(x: number): void {
+    toggleLMR(x: number): void {
         this.lmr[x] = !this.lmr[x];
     }
 }

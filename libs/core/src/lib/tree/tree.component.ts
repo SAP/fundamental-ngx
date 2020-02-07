@@ -47,10 +47,10 @@ export class TreeComponent implements OnInit, AfterContentInit {
         }
     }
 
-    switchDisplayAll() {
+    toggleDisplayAll() {
         this.hideAll = !this.hideAll;
         this.treeChildren.forEach(child => {
-            child.switchDisplayChildren(this.hideAll);
+            child.toggleDisplayChildren(this.hideAll);
         });
     }
 

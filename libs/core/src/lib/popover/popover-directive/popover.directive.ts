@@ -183,9 +183,9 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     /**
-     * Switchs the popover open state.
+     * Toggles the popover open state.
      */
-    public switch(fireEvent: boolean = true): void {
+    public toggle(fireEvent: boolean = true): void {
         if (this.isOpen) {
             this.close(fireEvent);
         } else {
@@ -278,7 +278,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         if (this.triggers && this.triggers.length > 0) {
             this.triggers.forEach(trigger => {
                 this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
-                    this.switch();
+                    this.toggle();
                 }));
             });
         }

@@ -326,8 +326,8 @@ export class TimeComponent implements OnChanges, ControlValueAccessor {
         this.onChange(this.time);
     }
 
-    /** Switchs the period (am/pm). */
-    switchPeriod(): void {
+    /** Toggles the period (am/pm). */
+    togglePeriod(): void {
         if (this.time.hour < 24 && this.time.hour >= 0) {
             if (this.isAm(this.period)) {
                 this.period = this.timeI18n.meridianPm;

@@ -111,7 +111,7 @@
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [disabled]="disabled"
-                (click)="switchPeriod()"
+                (click)="togglePeriod()"
                 fd-button
                 [size]="'xs'"
                 [glyph]="'navigation-up-arrow'"
@@ -130,7 +130,7 @@
     <div class="fd-time__control">
         <button *ngIf="spinners"
                 [disabled]="disabled"
-                (click)="switchPeriod()"
+                (click)="togglePeriod()"
                 fd-button
                 [size]="'xs'"
                 [glyph]="'navigation-down-arrow'"

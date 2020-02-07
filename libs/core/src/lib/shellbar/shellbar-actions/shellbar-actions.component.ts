@@ -127,7 +127,7 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     }
 
     /** @hidden */
-    switchCollapsedProducts(event: MouseEvent): void {
+    toggleCollapsedProducts(event: MouseEvent): void {
         event.preventDefault();
         event.stopPropagation();
         this.showCollapsedProducts = !this.showCollapsedProducts;

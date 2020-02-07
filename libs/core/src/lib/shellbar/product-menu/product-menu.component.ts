@@ -30,7 +30,7 @@ export class ProductMenuComponent extends PopoverComponent implements OnInit {
     menuComponent: MenuComponent;
 
     /**
-     * The control element to switch the product menu,
+     * The control element to toggle the product menu,
      * represented by the name of the current application.
      */
     @Input()
