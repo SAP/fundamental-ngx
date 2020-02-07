@@ -2,7 +2,7 @@
     <fd-busy-indicator [loading]="loading"></fd-busy-indicator>
     <div class="fd-panel__header">
         <h1>Lorem ipsum</h1>
-        <button fd-button (click)="loading = !loading">Click to switch loading</button>
+        <button fd-button (click)="loading = !loading">Click to toggle loading</button>
     </div>
     <!-- Loaded content goes here -->
     <div class="fd-panel__footer" *ngIf="!loading">

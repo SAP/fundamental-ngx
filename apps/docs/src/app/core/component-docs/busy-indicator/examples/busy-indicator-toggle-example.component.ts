@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-busy-indicator-switch-example',
-    templateUrl: './busy-indicator-switch-example.component.html',
+    selector: 'fd-busy-indicator-toggle-example',
+    templateUrl: './busy-indicator-toggle-example.component.html',
 
 })
 export class BusyIndicatorSwitchExampleComponent {

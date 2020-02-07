@@ -58,7 +58,7 @@ import {
     BreadcrumbRouterLinkExampleComponent
 } from '../core/component-docs/breadcrumb/examples/breadcrumb-examples.component';
 import { BusyIndicatorBasicExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-basic-example.component';
-import { BusyIndicatorSwitchExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-switch-example.component';
+import { BusyIndicatorSwitchExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-toggle-example.component';
 import {
     ButtonIconsExampleComponent,
     ButtonOptionsExampleComponent,
@@ -67,7 +67,7 @@ import {
     ButtonTypesExampleComponent
 } from '../core/component-docs/button/examples/button-examples.component';
 import { ButtonGroupDefaultExampleComponent } from '../core/component-docs/button-group/examples/button-group-default-example.component';
-import { ButtonGroupSwitchExampleComponent } from '../core/component-docs/button-group/examples/button-group-switch-example.component';
+import { ButtonGroupToggleExampleComponent } from '../core/component-docs/button-group/examples/button-group-toggle-example.component';
 import { CalendarRangeExampleComponent } from '../core/component-docs/calendar/examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from '../core/component-docs/calendar/examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from '../core/component-docs/calendar/examples/calendar-monday-start-example.component';
@@ -491,7 +491,7 @@ export const declarations = [
     ButtonSplitProgrammaticalExampleComponent,
     ButtonSplitOptionsExampleComponent,
     ButtonSplitTemplateExampleComponent,
-    ButtonGroupSwitchExampleComponent,
+    ButtonGroupToggleExampleComponent,
     ButtonGroupDefaultExampleComponent,
     CalendarRangeExampleComponent,
     CalendarSingleExampleComponent,
