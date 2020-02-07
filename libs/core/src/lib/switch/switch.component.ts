@@ -43,7 +43,7 @@ export class SwitchComponent implements ControlValueAccessor {
 
     /** If the switch should have text in it or not. */
     @Input()
-    noText: boolean = true;
+    optionalText: boolean = false;
 
     /** Whether the switch is disabled. */
     @Input()

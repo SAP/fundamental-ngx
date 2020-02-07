@@ -6,7 +6,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
         <label fd-form-label>
             Simulate RTL
         </label>
-        <fd-switch [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch> 
+        <fd-switch [compact]="true" [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch> 
     `,
     encapsulation: ViewEncapsulation.None
 })

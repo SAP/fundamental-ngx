@@ -2,7 +2,7 @@
     <span
         class="fd-switch"
         [ngClass]="{
-            'fd-switch--no-text': noText,
+            'fd-switch--no-text': !optionalText && !semantic,
             'fd-switch--compact': compact,
             'fd-switch--semantic': semantic,
             'is-disabled': disabled
@@ -22,9 +22,15 @@
         />
         <div class="fd-switch__wrapper">
             <div class="fd-switch__track">
-                <span *ngIf="!noText" class="fd-switch__text fd-switch__text--on">on</span>
+                <span
+                    *ngIf="semantic"
+                    class="fd-switch__text fd-switch__icon--on fd-switch__icon sap-icon--accept"
+                ></span>
                 <span class="fd-switch__handle" role="presentation"></span>
-                <span *ngIf="!noText" class="fd-switch__text fd-switch__text--off">off</span>
+                <span
+                    *ngIf="semantic"
+                    class="fd-switch__text fd-switch__icon--off fd-switch__icon sap-icon--decline"
+                ></span>
             </div>
         </div>
     </span>

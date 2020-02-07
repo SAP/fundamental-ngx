@@ -23,7 +23,7 @@ export const Switch = () => ({
         `
         <fd-switch 
             [(ngModel)]="switchValue1" 
-            [noText]="noText"
+            [optionalText]="optionalText"
             [semantic]="semantic"
             [compact]="compact"
             [disabled]="disabled">
@@ -31,7 +31,7 @@ export const Switch = () => ({
   `,
     props: {
         switchValue1: boolean('switch 1', false),
-        noText: boolean('noText', false),
+        optionalText: boolean('optionalText', false),
         semantic: boolean('semantic', false),
         disabled: boolean('disabled', false),
         compact: boolean('compact', false),

@@ -3,7 +3,7 @@
 </fd-docs-section-title>
 
 <description
-    >Default switch which can include a [noText] input to remove text. The [noText] input is set to true by default. The
+    >Default switch which can include a [optionalText] input to remove text. The [optionalText] input is set to true by default. The
     [compact] input will make the switch compact.</description
 >
 <component-example [name]="'ex1'">
@@ -59,7 +59,5 @@
 <code-example [exampleFiles]="switchFormExample"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-switch [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked" [size]="data.modifier.size">
-        Example Switch</fd-switch
-    >
+    <fd-switch [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked"> Example Switch</fd-switch>
 </playground>
