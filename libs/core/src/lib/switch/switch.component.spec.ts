@@ -59,6 +59,9 @@ describe('SwitchComponent', () => {
     });
 
     it('should focus inner input element', () => {
+        console.log(spyOn(component.inputElement.nativeElement, 'focus'));
+        console.log(component.focus());
+        console.log(expect(component.inputElement.nativeElement.focus).toHaveBeenCalled());
         spyOn(component.inputElement.nativeElement, 'focus');
         component.focus();
         expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
@@ -68,20 +71,13 @@ describe('SwitchComponent', () => {
     it('should display compact and semantic', () => {
         component.semantic = true;
         component.compact = true;
+        component.disabled = true;
         (component as any).changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--compact');
         expect(switchComp.classList).toContain('fd-switch--semantic');
-    });
-
-    it('should display disabled', () => {
-        component.disabled = true;
-        (component as any).changeDetectorRef.markForCheck();
-        fixture.detectChanges();
-
-        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--disabled');
     });
 
