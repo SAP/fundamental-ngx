@@ -73,8 +73,16 @@ describe('SwitchComponent', () => {
 
         const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--compact');
-        expect(switchComp.classList).toContain('fd-switch--disabled');
         expect(switchComp.classList).toContain('fd-switch--semantic');
+    });
+
+    it('should display disabled', () => {
+        component.disabled = true;
+        (component as any).changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+
+        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
+        expect(switchComp.classList).toContain('fd-switch--disabled');
     });
 
 });
