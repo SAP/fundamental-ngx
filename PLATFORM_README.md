@@ -119,7 +119,7 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Switchs, add the following import to your main application module.
+    For example, to use Switch, add the following import to your main application module.
 
     ```javascript
     import { SwitchModule } from '@fundamental-ngx/core';

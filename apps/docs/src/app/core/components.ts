@@ -58,7 +58,7 @@ import {
     BreadcrumbRouterLinkExampleComponent
 } from '../core/component-docs/breadcrumb/examples/breadcrumb-examples.component';
 import { BusyIndicatorBasicExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-basic-example.component';
-import { BusyIndicatorSwitchExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-toggle-example.component';
+import { BusyIndicatorToggleExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-toggle-example.component';
 import {
     ButtonIconsExampleComponent,
     ButtonOptionsExampleComponent,
@@ -480,7 +480,7 @@ export const declarations = [
     BreadcrumbHrefExampleComponent,
     BreadcrumbRouterLinkExampleComponent,
     BusyIndicatorBasicExampleComponent,
-    BusyIndicatorSwitchExampleComponent,
+    BusyIndicatorToggleExampleComponent,
     ButtonIconsExampleComponent,
     ButtonOptionsExampleComponent,
     ButtonSizesExampleComponent,

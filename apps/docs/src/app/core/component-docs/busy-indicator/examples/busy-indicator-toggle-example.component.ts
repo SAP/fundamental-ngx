@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './busy-indicator-toggle-example.component.html',
 
 })
-export class BusyIndicatorSwitchExampleComponent {
+export class BusyIndicatorToggleExampleComponent {
 
     loading = true;
 
