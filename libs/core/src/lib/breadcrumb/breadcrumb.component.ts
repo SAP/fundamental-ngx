@@ -38,21 +38,46 @@ export class BreadcrumbComponent implements AfterContentInit {
 
     collapsedBreadcrumbItems: Array = [];
 
+    previousWindowInnerWidth: number;
+
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
-        let i = 0;
-        while (this.elementRef.nativeElement.offsetWidth >= window.innerWidth) {
-            const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
-            this.collapsedBreadcrumbItems.push({
-                text: breadcrumbItem.elementRef.nativeElement.innerText
-            });
-            breadcrumbItem.elementRef.nativeElement.style.display = 'none';
-            i++;
+        // if the screen is getting smaller
+        if (window.innerWidth <= this.previousWindowInnerWidth) {
+            // and the breadcrumbs extend past the window
+            if (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth) {
+                let i = 0;
+                // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
+                while (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth) {
+                    const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
+                    if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
+                        this.collapsedBreadcrumbItems.push(breadcrumbItem);
+                    }
+                    // hide the breadcrumbs moved in to the collapsed menu
+                    breadcrumbItem.elementRef.nativeElement.style.display = 'none';
+                    i++;
+                }
+            }
+        } else if (this.collapsedBreadcrumbItems.length) { // if the screen is getting bigger
+            const collapsedItemToPop = this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
+            const breadcrumbOfConcern = this.breadcrumbItems.filter((item) => item === collapsedItemToPop)[0];
+            breadcrumbOfConcern.elementRef.nativeElement.style.display = 'inline-block';
+            breadcrumbOfConcern.elementRef.nativeElement.style.visibility = 'hidden';
+            if (this.collapsedBreadcrumbItems.length) {
+                if (this.elementRef.nativeElement.getBoundingClientRect().right < window.innerWidth) {
+                    this.collapsedBreadcrumbItems.pop();
+                    breadcrumbOfConcern.elementRef.nativeElement.style.visibility = 'visible';
+                } else {
+                    breadcrumbOfConcern.elementRef.nativeElement.style.display = 'none';
+                }
+            }
         }
+        this.previousWindowInnerWidth = window.innerWidth;
     }
 
     ngAfterContentInit(): void {
+        this.previousWindowInnerWidth = window.innerWidth;
         this.onResize();
     }
 

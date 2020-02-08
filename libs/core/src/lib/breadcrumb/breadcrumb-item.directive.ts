@@ -1,4 +1,5 @@
-import { Directive, ElementRef } from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
+import { BreadcrumbLinkDirective } from '@fundamental-ngx/core';
 
 /**
  * Breadcrumb item directive. Must have child breadcrumb link directives.
@@ -17,8 +18,24 @@ import { Directive, ElementRef } from '@angular/core';
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemDirective {
+export class BreadcrumbItemDirective implements AfterContentInit {
+
+    /** @hidden */
+    href: string = '';
+
+    /** @hidden */
+    routerLink: string = '';
+
+    @ContentChild(forwardRef(() => BreadcrumbLinkDirective), { static: false })
+    breadcrumbLink: BreadcrumbLinkDirective;
 
     constructor(public elementRef: ElementRef) {}
+
+    ngAfterContentInit(): void {
+        if (this.breadcrumbLink && this.breadcrumbLink.elementRef.nativeElement.getAttribute('href')) {
+            this.href = this.breadcrumbLink.elementRef.nativeElement.getAttribute('href');
+            this.routerLink = this.breadcrumbLink.routerLink;
+        }
+    }
 
 }
