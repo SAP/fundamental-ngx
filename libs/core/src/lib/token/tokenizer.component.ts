@@ -52,7 +52,7 @@ export class TokenizerComponent implements AfterViewInit {
 
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
-        let newIndex;
+        let newIndex: number;
         if (event.code === 'ArrowLeft') {
             newIndex = fromIndex - 1;
         } else if (event.code === 'ArrowRight') {
@@ -67,27 +67,31 @@ export class TokenizerComponent implements AfterViewInit {
 
     /** @hidden */
     focusTokenElement(event: KeyboardEvent, newIndex: number): HTMLElement {
-        // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
-        const handleFunctionReference = (e) => {
-            if (newIndex || newIndex === 0) {
-                this.handleKeyDown(e, newIndex);
-            }
-        };
-        let elementToFocus;
+        let elementToFocus: HTMLElement;
         if (newIndex >= 0 && newIndex < this.tokenList.length) {
             elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
                 .elementRef.nativeElement.querySelector('.fd-token');
             // element needs tabindex in order to be focused
             elementToFocus.setAttribute('tabindex', '0');
             elementToFocus.focus();
-            elementToFocus.addEventListener('keydown', handleFunctionReference);
-            elementToFocus.addEventListener('blur', () => {
-                elementToFocus.setAttribute('tabindex', '-1');
-                elementToFocus.removeEventListener('keydown', handleFunctionReference);
-            });
+            this.addKeyboardListener(elementToFocus, newIndex);
         }
 
         return elementToFocus;
+    }
+
+    addKeyboardListener(element: HTMLElement, newIndex: number): void {
+        // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
+        const handleFunctionReference = (e) => {
+            if (newIndex || newIndex === 0) {
+                this.handleKeyDown(e, newIndex);
+            }
+        };
+        element.addEventListener('keydown', handleFunctionReference);
+        element.addEventListener('blur', () => {
+            element.setAttribute('tabindex', '-1');
+            element.removeEventListener('keydown', handleFunctionReference);
+        });
     }
 
 }
