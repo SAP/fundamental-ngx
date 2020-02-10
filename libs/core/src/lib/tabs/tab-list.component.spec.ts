@@ -16,13 +16,13 @@ import { TabsModule } from './tabs.module';
     <fd-tab [title]="'Link'" id="tab3">
       Content Link Two
     </fd-tab>
-    <fd-tab [title]="'Disabled'" id="tab4" *ngIf="disabled">
+    <fd-tab [title]="'Disabled'" id="tab4" *ngIf="showDisabled">
       Disabled
     </fd-tab>
   </fd-tab-list>`
 })
 class TestWrapperComponent {
-    disabled: boolean = true;
+    showDisabled: boolean = true;
 }
 
 describe('TabListComponent', () => {
@@ -59,5 +59,21 @@ describe('TabListComponent', () => {
         tick(10);
         fixture.detectChanges();
         expect(component.selectedIndex).toBe(3);
+    }));
+
+    it('should call reset tab', fakeAsync(() => {
+        spyOn((component as any), '_resetTabHook').and.callThrough();
+        component.ngAfterViewInit();
+        component.selectTab(3);
+
+        tick(10);
+        fixture.detectChanges();
+
+        fixture.componentInstance.showDisabled = false;
+        fixture.detectChanges();
+        tick(10);
+        fixture.detectChanges();
+        expect((component as any)._resetTabHook).toHaveBeenCalled();
+
     }));
 });
