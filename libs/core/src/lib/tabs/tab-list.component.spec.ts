@@ -16,12 +16,14 @@ import { TabsModule } from './tabs.module';
     <fd-tab [title]="'Link'" id="tab3">
       Content Link Two
     </fd-tab>
-    <fd-tab [title]="'Disabled'" id="tab4">
+    <fd-tab [title]="'Disabled'" id="tab4" *ngIf="disabled">
       Disabled
     </fd-tab>
   </fd-tab-list>`
 })
-class TestWrapperComponent {}
+class TestWrapperComponent {
+    disabled: boolean = true;
+}
 
 describe('TabListComponent', () => {
     let component: TabListComponent;
@@ -49,4 +51,13 @@ describe('TabListComponent', () => {
         expect(component.selectedIndex).toBe(0);
         expect(component.tabLinks.length).toBe(4);
     });
+
+    it('should select tab', fakeAsync(() => {
+        component.ngAfterViewInit();
+        component.selectTab(3);
+
+        tick(10);
+        fixture.detectChanges();
+        expect(component.selectedIndex).toBe(3);
+    }));
 });
