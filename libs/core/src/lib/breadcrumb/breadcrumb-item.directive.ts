@@ -34,6 +34,8 @@ export class BreadcrumbItemDirective implements AfterContentInit {
     ngAfterContentInit(): void {
         if (this.breadcrumbLink && this.breadcrumbLink.elementRef.nativeElement.getAttribute('href')) {
             this.href = this.breadcrumbLink.elementRef.nativeElement.getAttribute('href');
+        }
+        if (this.breadcrumbLink && this.breadcrumbLink.routerLink) {
             this.routerLink = this.breadcrumbLink.routerLink;
         }
     }
