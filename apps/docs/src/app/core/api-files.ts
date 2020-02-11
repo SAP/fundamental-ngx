@@ -297,7 +297,8 @@ export const API_FILES = {
         'ToggleComponent'
     ],
     token: [
-        'TokenComponent'
+        'TokenComponent',
+        'TokenizerComponent'
     ],
     tree: [
         'TreeComponent',

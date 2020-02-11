@@ -17,11 +17,15 @@
         overflow: auto;
     }
 
-    .fd-multi-input-token-spacing {
-        margin: 0 4px 4px 0;
+    .fd-multi-input-tokenizer {
+        width: 100%;
+    }
 
-        &:last-child {
-            margin-right: 0;
+    .fd-input {
+        &.fd-multi-input-tokenizer-input {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 0;
         }
     }
 }

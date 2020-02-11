@@ -1,0 +1,7 @@
+<div class="fd-tokenizer" tabindex="0" (focus)="tokenizerHasFocus = true" (blur)="tokenizerHasFocus = false;"
+        [ngClass]="{'is-focus': tokenizerHasFocus, 'fd-tokenizer--compact': compact}">
+    <div class="fd-tokenizer__inner">
+        <ng-content select="fd-token"></ng-content>
+        <ng-content select="[fd-form-control]"></ng-content>
+    </div>
+</div>

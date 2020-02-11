@@ -186,6 +186,11 @@ import { FileInputDragDisabledExampleComponent } from '../core/component-docs/fi
 import { FileInputMaxExampleComponent } from '../core/component-docs/file-input/examples/file-input-max-example/file-input-max-example.component';
 import { TokenDocsComponent } from '../core/component-docs/token/token-docs.component';
 import { TokenExampleComponent } from '../core/component-docs/token/examples/token-example/token-example.component';
+import { TokenizerExampleComponent } from '../core/component-docs/token/examples/tokenizer-example/tokenizer-example.component';
+import { TokenizerCompactExampleComponent } from './component-docs/token/examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenSelectedExampleComponent } from '../core/component-docs/token/examples/token-selected-example/token-selected-example.component';
+import { TokenCompactExampleComponent } from '../core/component-docs/token/examples/token-compact-example/token-compact-example.component';
+import { TokenReadOnlyExampleComponent } from '../core/component-docs/token/examples/token-readonly-example/token-readonly-example.component';
 import { DatetimePickerDocsComponent } from '../core/component-docs/datetime-picker/datetime-picker-docs.component';
 import { DatetimeExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-example/datetime-example.component';
 import { DatetimeNonMeridianExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
@@ -668,6 +673,11 @@ export const declarations = [
     SemanticToggleExampleComponent,
     TokenDocsComponent,
     TokenExampleComponent,
+    TokenizerExampleComponent,
+    TokenizerCompactExampleComponent,
+    TokenSelectedExampleComponent,
+    TokenReadOnlyExampleComponent,
+    TokenCompactExampleComponent,
     MultiInputAsyncExampleComponent,
     MultiInputFilterExampleComponent,
     MultiInputDisplaywithExampleComponent,
