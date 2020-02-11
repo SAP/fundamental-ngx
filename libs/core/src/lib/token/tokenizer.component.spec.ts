@@ -92,6 +92,7 @@ describe('TokenizerComponent', () => {
   it('should focus a token element', () => {
     component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus'));
     component.tokenList.forEach(token => spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute'));
+    spyOn(component, 'addKeyboardListener');
     spyOn(component, 'handleKeyDown');
     const event = new KeyboardEvent('keydown', {
       'code': 'ArrowRight'
@@ -103,5 +104,21 @@ describe('TokenizerComponent', () => {
         index === 1)[0].elementRef.nativeElement.querySelector('.fd-token');
     expect(elementToCheck.focus).toHaveBeenCalled();
     expect(elementToCheck.setAttribute).toHaveBeenCalledWith('tabindex', '0');
+    expect(component.addKeyboardListener).toHaveBeenCalledWith(elementToCheck, 1);
+  });
+
+  it('should add keyboard listener', () => {
+    spyOn(component, 'handleKeyDown');
+    const mockElement = document.createElement('span');
+    spyOn(mockElement, 'addEventListener').and.callThrough();
+    spyOn(mockElement, 'setAttribute');
+    spyOn(mockElement, 'removeEventListener');
+    const event = new KeyboardEvent('blur');
+    component.addKeyboardListener(mockElement, 0);
+    mockElement.dispatchEvent(event);
+    fixture.detectChanges();
+    expect(mockElement.addEventListener).toHaveBeenCalled();
+    expect(mockElement.setAttribute).toHaveBeenCalled();
+    expect(mockElement.removeEventListener).toHaveBeenCalled();
   });
 });
