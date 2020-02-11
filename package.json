@@ -116,7 +116,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
-    "karma-jasmine": "^3.1.0",
+    "karma-jasmine": "^3.1.1",
     "karma-jasmine-html-reporter": "^1.5.2",
     "ng-packagr": "^5.7.1",
     "pre-commit": "^1.2.2",
