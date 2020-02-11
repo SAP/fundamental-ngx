@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.36"></a>
+# [0.14.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.35...v0.14.0-rc.36) (2020-02-11)
+
+
+### Bug Fixes
+
+* token and tokenizer implementation of 0.5.0 ([#1878](https://github.com/SAP/fundamental-ngx/issues/1878)) ([dd2e8ad](https://github.com/SAP/fundamental-ngx/commit/dd2e8ad))
+
+
+
 <a name="0.14.0-rc.35"></a>
 # [0.14.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.34...v0.14.0-rc.35) (2020-02-11)
 
