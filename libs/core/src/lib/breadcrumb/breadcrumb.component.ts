@@ -64,7 +64,7 @@ export class BreadcrumbComponent implements AfterContentInit {
     collapseBreadcrumbs(): void {
         let i = 0;
         // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
-        while (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth) {
+        while (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth && i < this.breadcrumbItems.length) {
             const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
             if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
                 this.collapsedBreadcrumbItems.push(breadcrumbItem);
