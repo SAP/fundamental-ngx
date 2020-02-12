@@ -15,10 +15,10 @@ import { Component } from '@angular/core';
     template: `
         <fd-breadcrumb>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 1</a>
+                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 1</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Breadcrumb Level 2</a>
+                <a fd-breadcrumb-link [attr.href]="'#'">Breadcrumb Level 2</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
                 <span>Breadcrumb Level 3</span>
@@ -28,7 +28,7 @@ import { Component } from '@angular/core';
 })
 class BreadcrumbWrapperComponent {}
 
-fdescribe('BreadcrumbComponent', () => {
+describe('BreadcrumbComponent', () => {
     let component: BreadcrumbComponent;
     let fixture: ComponentFixture<BreadcrumbWrapperComponent>;
 
@@ -81,7 +81,7 @@ fdescribe('BreadcrumbComponent', () => {
     });
 
     it('should collapse the breadcrumbs', () => {
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({right: 2});
+        spyOnProperty(component.elementRef.nativeElement, 'offsetWidth').and.returnValue(2);
         spyOnProperty(window, 'innerWidth').and.returnValue(1);
 
         component.collapseBreadcrumbs();
@@ -93,12 +93,14 @@ fdescribe('BreadcrumbComponent', () => {
     });
 
     it('should expand all of the breadcrumbs', () => {
-        // collapse all the breadcrumbs first
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({right: 3});
-        spyOnProperty(window, 'innerWidth').and.returnValue(2);
-        component.collapseBreadcrumbs();
+        // move breadcrumbItems into collapsed array first
+        component.breadcrumbItems.forEach(item => {
+            component.collapsedBreadcrumbItems.push(item);
+            item.elementRef.nativeElement.style.display = 'none';
+        });
 
-        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({right: 1});
+        spyOnProperty(window, 'innerWidth').and.returnValue(2);
+        spyOnProperty(component.elementRef.nativeElement, 'offsetWidth').and.returnValue(1);
 
         component.expandBreadcrumbs();
 

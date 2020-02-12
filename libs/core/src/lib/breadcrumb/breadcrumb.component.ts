@@ -46,7 +46,7 @@ export class BreadcrumbComponent implements AfterContentInit {
         // if the screen is getting smaller
         if (window.innerWidth <= this.previousWindowInnerWidth) {
             // and the breadcrumbs extend past the window
-            if (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth) {
+            if (this.elementRef.nativeElement.offsetWidth >= window.innerWidth) {
                 this.collapseBreadcrumbs();
             }
         } else if (this.collapsedBreadcrumbItems.length) { // if the screen is getting bigger and there are collapsed breadcrumbs
@@ -64,7 +64,7 @@ export class BreadcrumbComponent implements AfterContentInit {
     collapseBreadcrumbs(): void {
         let i = 0;
         // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
-        while (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth && i < this.breadcrumbItems.length) {
+        while (this.elementRef.nativeElement.offsetWidth >= window.innerWidth && i < this.breadcrumbItems.length) {
             const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
             if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
                 this.collapsedBreadcrumbItems.push(breadcrumbItem);
@@ -85,7 +85,7 @@ export class BreadcrumbComponent implements AfterContentInit {
         let breakLoop = false;
         let i = 0;
         const originalCollapsedLength = this.collapsedBreadcrumbItems.length;
-        while (this.elementRef.nativeElement.getBoundingClientRect().right < window.innerWidth &&
+        while (this.elementRef.nativeElement.offsetWidth < window.innerWidth &&
                 !breakLoop && i < originalCollapsedLength) {
             // get the most recently collapsed breadcrumb
             const collapsedItemToPop = this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
@@ -97,7 +97,7 @@ export class BreadcrumbComponent implements AfterContentInit {
              */
             breadcrumbToCheck.elementRef.nativeElement.style.display = 'inline-block';
             breadcrumbToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-            if (this.elementRef.nativeElement.getBoundingClientRect().right < window.innerWidth) {
+            if (this.elementRef.nativeElement.offsetWidth < window.innerWidth) {
                 /*
                   if the width of the breadcrumb component is still smaller than the window width, including the
                   breadcrumbToCheck, pop the latest collapsedBreadcrumbItem
