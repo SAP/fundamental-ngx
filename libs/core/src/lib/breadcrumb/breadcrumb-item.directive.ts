@@ -1,5 +1,5 @@
 import { AfterContentInit, ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
-import { BreadcrumbLinkDirective } from '@fundamental-ngx/core';
+import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
 
 /**
  * Breadcrumb item directive. Must have child breadcrumb link directives.
