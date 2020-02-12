@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.38"></a>
+# [0.14.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.37...v0.14.0-rc.38) (2020-02-12)
+
+
+### Features
+
+* adjust Tabs to newest 0.5.0 fundamental-styles structure ([#1871](https://github.com/SAP/fundamental-ngx/issues/1871)) ([8ed7073](https://github.com/SAP/fundamental-ngx/commit/8ed7073))
+
+
+
 <a name="0.14.0-rc.37"></a>
 # [0.14.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.36...v0.14.0-rc.37) (2020-02-12)
 
