@@ -409,6 +409,10 @@ import { TabSelectionExampleComponent } from './component-docs/tabs/examples/tab
 import { LinkExampleComponent } from './component-docs/link/examples/link-example.component';
 import { LinkDocsComponent } from './component-docs/link/link-docs.component';
 import { LinkHeaderComponent } from './component-docs/link/link-header/link-header.component';
+import { TabIconOnlyExampleComponent } from './component-docs/tabs/examples/tab-icon-only-example/tab-icon-only-example.component';
+import { TabProcessExampleComponent } from './component-docs/tabs/examples/tab-process-example/tab-process-example.component';
+import { TabFilterExampleComponent } from './component-docs/tabs/examples/tab-filter-example/tab-filter-example.component';
+import { TabCounterComponent } from './component-docs/tabs/examples/tab-counter/tab-counter.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -494,6 +498,7 @@ export const declarations = [
     CalendarFormExamplesComponent,
     CalendarProgrammaticallyChangeExampleComponent,
     checkboxExampleComponents,
+    TabIconOnlyExampleComponent,
     DatePickerRangeExampleComponent,
     DatePickerSingleExampleComponent,
     DatePickerAllowNullExampleComponent,
@@ -771,6 +776,11 @@ export const declarations = [
     InputGroupStatesExampleComponent,
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
+    TimeTwoDigitsExampleComponent,
+    TabProcessExampleComponent,
+    TabFilterExampleComponent,
+    TabCounterComponent,
+    TabProcessExampleComponent,
     TimeTwoDigitsExampleComponent,
     LinkExampleComponent,
     LinkDocsComponent,

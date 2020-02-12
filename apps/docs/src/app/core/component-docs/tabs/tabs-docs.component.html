@@ -1,10 +1,76 @@
 <fd-docs-section-title [id]="'simple'" [componentName]="'tabs'">
     Simple Tabs
 </fd-docs-section-title>
+<description>
+    Simple tabs can be built by setting specified properties to <code>fd-tab</code>. There is way to define
+    own templates, or use it with <code>[routerLink]</code>.
+    There is no <code>compact</code> mode on inline tabs.
+</description>
 <component-example [name]="'ex1'">
     <fd-tabs-example></fd-tabs-example>
 </component-example>
 <code-example [exampleFiles]="tabExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'counter'" [componentName]="'tabs'">
+    Tabs with Counter
+</fd-docs-section-title>
+<description>
+    Tabs with counter can be built by setting specified properties to <code>fd-tab</code>. There is way to define
+    own templates, or use it with <code>[routerLink]</code>.
+    There is no <code>compact</code> mode on inline tabs with counter.
+</description>
+<component-example [name]="'ex2'">
+    <fd-tab-counter-example></fd-tab-counter-example>
+</component-example>
+<code-example [exampleFiles]="tabCounter"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'iconOnlyMode'" [componentName]="'tabs'">
+    Icon Only Mode
+</fd-docs-section-title>
+<description>
+    The Icon Only mode can be used, by adding <code>[mode]="'icon-only'"</code>. It requires different structure usage.
+    Tabs in Icon Only mode can be built by setting specified properties to <code>fd-tab</code>. There is way to define
+    own templates, or use it with <code>[routerLink]</code>.
+</description>
+<component-example [name]="'ex3'">
+    <fd-tab-icon-only-example></fd-tab-icon-only-example>
+</component-example>
+<code-example [exampleFiles]="tabIcon"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'processMode'" [componentName]="'tabs'">
+    Process Mode
+</fd-docs-section-title>
+<description>
+    The Process Mode can be used by adding <code>[mode]="'process'"</code>. As on icons it has different structure than
+    tab any other mode. It can be built by setting properties, defining own template, or using it with
+    <code>[routerLink]</code>.
+</description>
+<component-example [name]="'ex4'">
+    <fd-tab-process-example></fd-tab-process-example>
+</component-example>
+<code-example [exampleFiles]="tabProcess"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'filterMode'" [componentName]="'tabs'">
+    Filter Mode
+</fd-docs-section-title>
+<description>
+    The Filter Mode can be used by adding <code>[mode]="'filter'"</code>. It has different structure than
+    tab any other mode. It can be built by setting properties, defining own template, or using it with
+    <code>[routerLink]</code>. To make filter Mode Tabs looks properly, it's mandatory to add <code>[header]="true"</code>
+    property to first tab item, or in case of custom template use different structure, as it is shown in example.
+</description>
+<component-example [name]="'ex5'">
+    <fd-tab-filter-example></fd-tab-filter-example>
+</component-example>
+<code-example [exampleFiles]="tabFilter"></code-example>
 
 <separator></separator>
 
@@ -16,37 +82,10 @@
     maintaining a flag. The second method requires setting a template reference variable and then calling the
     <code>selectTab(index)</code> method.
 </description>
-<component-example [name]="'ex2'">
+<component-example [name]="'ex6'">
     <fd-tab-selection-example></fd-tab-selection-example>
 </component-example>
 <code-example [exampleFiles]="tabSelection"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'complexTabTitles'" [componentName]="'tabs'">
-    Complex Tab Titles
-</fd-docs-section-title>
-<description>
-    Use an ng-template with the <code>fd-tab-title</code> directive to access heavily customizable tab titles.
-</description>
-<component-example [name]="'ex3'">
-    <fd-complex-title-example></fd-complex-title-example>
-</component-example>
-<code-example [exampleFiles]="complexHeader"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'tabNavigationMode'" [componentName]="'tabs'">
-    Tab Navigation Mode
-</fd-docs-section-title>
-<description>
-    It is possible to use the tabs in navigation mode. While there is no option to provide some content in this mode, it
-    does allow the use of a <code>router-outlet</code> with <code>[routerLink]</code> or <code>[href]</code> attributes.
-</description>
-<component-example [name]="'ex4'">
-    <fd-tabs-navigation-mode-example></fd-tabs-navigation-mode-example>
-</component-example>
-<code-example [exampleFiles]="navigationTab"></code-example>
 
 <separator></separator>
 
@@ -56,21 +95,28 @@
 <description>
     The tab component is very flexible, and supports dynamically adding or removing tabs.
 </description>
-<component-example [name]="'ex5'">
+<component-example [name]="'ex7'">
     <fd-adding-tab-example></fd-adding-tab-example>
 </component-example>
 <code-example [exampleFiles]="addingTab"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-tab-list>
-        <fd-tab [title]="data.properties.items.label" [disabled]="data.state.disabled">
-            {{ data.properties.panels.content }}
+    <fd-tab-list [mode]="data.properties.items.mode" [compact]="data.properties.items.compact">
+        <fd-tab [header]="data.properties.items.mode === 'filter'"
+                [title]="data.properties.item1.title"
+                [glyph]="data.properties.item1.icon"
+                [count]="data.properties.item1.counter">
+            {{ data.properties.item1.content }}
         </fd-tab>
-        <fd-tab [title]="data.properties.items.label2" [disabled]="data.state.disabled2">
-            {{ data.properties.panels.content2 }}
+        <fd-tab [title]="data.properties.item2.title2"
+                [glyph]="data.properties.item2.icon2"
+                [count]="data.properties.item2.counter2">
+            {{ data.properties.item2.content2 }}
         </fd-tab>
-        <fd-tab [title]="data.properties.items.label3" [disabled]="data.state.disabled3">
-            {{ data.properties.panels.content3 }}
+        <fd-tab [title]="data.properties.item3.title3"
+                [glyph]="data.properties.item3.icon3"
+                [count]="data.properties.item3.counter3">
+            {{ data.properties.item3.content3 }}
         </fd-tab>
     </fd-tab-list>
 </playground>

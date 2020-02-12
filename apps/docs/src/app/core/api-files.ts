@@ -260,11 +260,22 @@ export const API_FILES = {
         'ColumnSortableDirective'
     ],
     tabs: [
-        'TabPanelComponent',
         'TabListComponent',
+        'TabPanelComponent',
         'TabTitleDirective',
+        'TabLoadTitleDirective',
+        'TabNavComponent',
         'TabLinkDirective',
-        'TabNavComponent'
+        'TabItemDirective',
+        'TabTagDirective',
+        'TabIconDirective',
+        'TabCountDirective',
+        'TabLabelDirective',
+        'TabProcessDirective',
+        'TabHeaderDirective',
+        'TabCounterHeaderDirective',
+        'TabProcessIconDirective',
+        'TabSeparator'
     ],
     tile: [
         'ProductTileComponent',

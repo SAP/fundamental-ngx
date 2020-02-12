@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 
 /**
@@ -33,6 +33,10 @@ export class TabLinkDirective extends AbstractFdNgxClass {
     @HostBinding('attr.aria-disabled')
     disabled: boolean;
 
+    /** Event Emitted always when, any keyboard event is dispatched on this element */
+    @Output()
+    readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
     /** @hidden */
     _setProperties() {
         this._addClassToElement('fd-tabs__link');
@@ -44,6 +48,12 @@ export class TabLinkDirective extends AbstractFdNgxClass {
     /** @hidden */
     constructor(public elementRef: ElementRef) {
         super(elementRef);
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeyDown(e: KeyboardEvent) {
+        this.keyDown.emit(e);
     }
 
 }

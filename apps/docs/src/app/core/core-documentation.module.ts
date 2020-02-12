@@ -7,7 +7,9 @@ import { declarations, entryComponents } from './components';
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
 
 @NgModule({
-    declarations: declarations,
+    declarations: [
+        declarations,
+    ],
 
     entryComponents: entryComponents,
     imports: [
