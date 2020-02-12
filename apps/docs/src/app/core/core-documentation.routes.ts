@@ -111,6 +111,8 @@ import { ProductSwitchDocsHeaderComponent } from './component-docs/product-switc
 import { ProductSwitchDocsComponent } from './component-docs/product-switch/product-switch-docs.component';
 import { NotificationDocsComponent } from './component-docs/notification/notification-docs.component';
 import { NotificationDocsHeaderComponent } from './component-docs/notification/notification-docs-header/notification-docs-header.component';
+import { LinkHeaderComponent } from './component-docs/link/link-header/link-header.component';
+import { LinkDocsComponent } from './component-docs/link/link-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -292,6 +294,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: LayoutGridDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.layoutGrid } }
+                ]
+            },
+            {
+                path: 'link',
+                component: LinkHeaderComponent,
+                children: [
+                    { path: '', component: LinkDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.link } }
                 ]
             },
             {

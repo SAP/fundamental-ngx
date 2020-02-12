@@ -1,0 +1,12 @@
+@import "~fundamental-styles/dist/tokenizer";
+
+input {
+    &.fd-input {
+        &.fd-tokenizer__input {
+            margin-right: 1px; // needed to display the right side tokenizer outline
+            border: none;
+            outline: none;
+        }
+    }
+}
+

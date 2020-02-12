@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { ButtonModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../button/button.module';
 
 @Component({
     template: `        

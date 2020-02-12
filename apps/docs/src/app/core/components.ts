@@ -186,6 +186,11 @@ import { FileInputDragDisabledExampleComponent } from '../core/component-docs/fi
 import { FileInputMaxExampleComponent } from '../core/component-docs/file-input/examples/file-input-max-example/file-input-max-example.component';
 import { TokenDocsComponent } from '../core/component-docs/token/token-docs.component';
 import { TokenExampleComponent } from '../core/component-docs/token/examples/token-example/token-example.component';
+import { TokenizerExampleComponent } from '../core/component-docs/token/examples/tokenizer-example/tokenizer-example.component';
+import { TokenizerCompactExampleComponent } from './component-docs/token/examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenSelectedExampleComponent } from '../core/component-docs/token/examples/token-selected-example/token-selected-example.component';
+import { TokenCompactExampleComponent } from '../core/component-docs/token/examples/token-compact-example/token-compact-example.component';
+import { TokenReadOnlyExampleComponent } from '../core/component-docs/token/examples/token-readonly-example/token-readonly-example.component';
 import { DatetimePickerDocsComponent } from '../core/component-docs/datetime-picker/datetime-picker-docs.component';
 import { DatetimeExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-example/datetime-example.component';
 import { DatetimeNonMeridianExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
@@ -401,6 +406,13 @@ import { DatePickerDisableFuncExampleComponent } from './component-docs/date-pic
 import { TimeTwoDigitsExampleComponent } from './component-docs/time/examples/time-two-digits-example/time-two-digits-example.component';
 import { PanelEdgeBleedExampleComponent } from './component-docs/panel/examples/panel-edge-bleed-example.component';
 import { TabSelectionExampleComponent } from './component-docs/tabs/examples/tab-selection-example.component';
+import { LinkExampleComponent } from './component-docs/link/examples/link-example.component';
+import { LinkDocsComponent } from './component-docs/link/link-docs.component';
+import { LinkHeaderComponent } from './component-docs/link/link-header/link-header.component';
+import { TabIconOnlyExampleComponent } from './component-docs/tabs/examples/tab-icon-only-example/tab-icon-only-example.component';
+import { TabProcessExampleComponent } from './component-docs/tabs/examples/tab-process-example/tab-process-example.component';
+import { TabFilterExampleComponent } from './component-docs/tabs/examples/tab-filter-example/tab-filter-example.component';
+import { TabCounterComponent } from './component-docs/tabs/examples/tab-counter/tab-counter.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -486,6 +498,7 @@ export const declarations = [
     CalendarFormExamplesComponent,
     CalendarProgrammaticallyChangeExampleComponent,
     checkboxExampleComponents,
+    TabIconOnlyExampleComponent,
     DatePickerRangeExampleComponent,
     DatePickerSingleExampleComponent,
     DatePickerAllowNullExampleComponent,
@@ -665,6 +678,11 @@ export const declarations = [
     SemanticToggleExampleComponent,
     TokenDocsComponent,
     TokenExampleComponent,
+    TokenizerExampleComponent,
+    TokenizerCompactExampleComponent,
+    TokenSelectedExampleComponent,
+    TokenReadOnlyExampleComponent,
+    TokenCompactExampleComponent,
     MultiInputAsyncExampleComponent,
     MultiInputFilterExampleComponent,
     MultiInputDisplaywithExampleComponent,
@@ -758,7 +776,15 @@ export const declarations = [
     InputGroupStatesExampleComponent,
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
-    TimeTwoDigitsExampleComponent
+    TimeTwoDigitsExampleComponent,
+    TabProcessExampleComponent,
+    TabFilterExampleComponent,
+    TabCounterComponent,
+    TabProcessExampleComponent,
+    TimeTwoDigitsExampleComponent,
+    LinkExampleComponent,
+    LinkDocsComponent,
+    LinkHeaderComponent
 ]
 
 export const entryComponents = [

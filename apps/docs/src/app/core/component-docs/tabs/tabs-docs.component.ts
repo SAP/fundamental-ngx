@@ -3,6 +3,14 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as tabSrc from '!raw-loader!./examples/tabs-example.component.html';
+import * as tabCounter from '!raw-loader!./examples/tab-counter/tab-counter.component.html';
+import * as tabCounterTs from '!raw-loader!./examples/tab-counter/tab-counter.component.ts';
+import * as tabProcess from '!raw-loader!./examples/tab-process-example/tab-process-example.component.html';
+import * as tabProcessTs from '!raw-loader!./examples/tab-process-example/tab-process-example.component.ts';
+import * as tabIcon from '!raw-loader!./examples/tab-icon-only-example/tab-icon-only-example.component.html';
+import * as tabIconTs from '!raw-loader!./examples/tab-icon-only-example/tab-icon-only-example.component.ts';
+import * as tabFilter from '!raw-loader!./examples/tab-filter-example/tab-filter-example.component.html';
+import * as tabFilterTs from '!raw-loader!./examples/tab-filter-example/tab-filter-example.component.ts';
 import * as tabsTsCode from '!raw-loader!./examples/tabs-examples-component.ts';
 import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
 import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.component.scss';
@@ -11,11 +19,8 @@ import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-e
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
 import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
 import * as complexTabHTsCode from '!raw-loader!./examples/complex-title-example/complex-title-example.component.ts';
-import * as navigationTab from '!raw-loader!./examples/tabs-navigation-mode-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import * as navigationTabTsCode from '!raw-loader!./examples/tab-navigation-mode-example-component.ts';
-import { ActivatedRoute } from '@angular/router';
+import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-tabs',
@@ -30,44 +35,68 @@ export class TabsDocsComponent implements OnInit {
                     items: {
                         type: 'object',
                         properties: {
-                            label: {
-                                type: 'string'
+                            mode: {
+                                type: 'string',
+                                enum: ['', 'icon-only', 'filter', 'process']
                             },
-                            label2: {
-                                type: 'string'
-                            },
-                            label3: {
-                                type: 'string'
+                            compact: {
+                                type: 'boolean'
                             }
                         }
                     },
-                    panels: {
+                    item1: {
                         type: 'object',
                         properties: {
+                            title: {
+                                type: 'string'
+                            },
+                            counter: {
+                                type: 'string'
+                            },
                             content: {
+                                type: 'string'
+                            },
+                            icon: {
+                                type: 'string',
+                                enum: Icons
+                            }
+                        }
+                    },
+                    item2: {
+                        type: 'object',
+                        properties: {
+                            title2: {
+                                type: 'string'
+                            },
+                            counter2: {
                                 type: 'string'
                             },
                             content2: {
                                 type: 'string'
                             },
-                            content3: {
-                                type: 'string'
+                            icon2: {
+                                type: 'string',
+                                enum: Icons
                             }
                         }
-                    }
-                }
-            },
-            state: {
-                type: 'object',
-                properties: {
-                    disabled: {
-                        type: 'boolean'
                     },
-                    disabled2: {
-                        type: 'boolean'
-                    },
-                    disabled3: {
-                        type: 'boolean'
+                    item3: {
+                        type: 'object',
+                        properties: {
+                            title3: {
+                                type: 'string'
+                            },
+                            counter3: {
+                                type: 'string'
+                            },
+                            content3: {
+                                type: 'string'
+                            },
+                            icon3: {
+                                type: 'string',
+                                enum: Icons
+                            }
+                        }
                     }
                 }
             }
@@ -80,19 +109,28 @@ export class TabsDocsComponent implements OnInit {
     data: any = {
         properties: {
             items: {
-                label: 'Link',
-                label2: 'Selected',
-                label3: 'Disabled'
+                mode: '',
+                compact: false
             },
-            panels: {
-                content: 'Content Link',
-                content2: 'Content Selected',
-                content3: 'Content Disabled'
-            }
+            item1: {
+                title: 'Title1',
+                counter: '1',
+                content: 'Content 1',
+                icon: 'menu'
+            },
+            item2: {
+                title2: 'Title2',
+                counter2: '2',
+                content2: 'Content 2',
+                icon2: 'menu'
+            },
+            item3: {
+                title3: 'Title3',
+                counter3: '3',
+                content3: 'Content 3',
+                icon3: 'menu'
+            },
         },
-        state: {
-            disabled3: 'true'
-        }
     };
 
     tabExample: ExampleFile[] = [
@@ -106,25 +144,47 @@ export class TabsDocsComponent implements OnInit {
         }
     ];
 
-    complexHeader: ExampleFile[] = [
+    tabCounter: ExampleFile[] = [
         {
             language: 'html',
-            component: 'ComplexTitleExampleComponent',
-            code: complexTabH,
-            fileName: 'complex-title-example',
-            secondFile: 'complex-title-example',
-            typescriptFileCode: complexTabHTsCode
+            component: 'TabCounterComponent',
+            code: tabCounter,
+            fileName: 'fd-tab-counter-example',
+            secondFile: 'fd-tab-counter-example',
+            typescriptFileCode: tabCounterTs
         }
     ];
 
-    navigationTab: ExampleFile[] = [
+    tabProcess: ExampleFile[] = [
         {
             language: 'html',
-            component: 'TabsNavigationModeExampleComponent',
-            code: navigationTab,
-            fileName: 'tabs-navigation-mode-example',
-            secondFile: 'tabs-navigation-mode-example',
-            typescriptFileCode: navigationTabTsCode
+            component: 'TabProcessExampleComponent',
+            code: tabProcess,
+            fileName: 'fd-tab-process-example',
+            secondFile: 'fd-tab-process-example',
+            typescriptFileCode: tabProcessTs
+        }
+    ];
+
+    tabIcon: ExampleFile[] = [
+        {
+            language: 'html',
+            component: 'TabIconExampleComponent',
+            code: tabIcon,
+            fileName: 'fd-tab-icon-example',
+            secondFile: 'fd-tab-icon-example',
+            typescriptFileCode: tabIconTs
+        }
+    ];
+
+    tabFilter: ExampleFile[] = [
+        {
+            language: 'html',
+            component: 'TabFilterExampleComponent',
+            code: tabFilter,
+            fileName: 'fd-tab-filter-example',
+            secondFile: 'fd-tab-filter-example',
+            typescriptFileCode: tabFilterTs
         }
     ];
 

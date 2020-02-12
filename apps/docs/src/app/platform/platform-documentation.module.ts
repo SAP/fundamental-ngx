@@ -29,6 +29,19 @@ import { PlatformActionbarHeaderComponent } from '../platform/component-docs/pla
 import {PlatformActionBarDocsComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
+
+import { 
+    PlatformLinkStandardExampleComponent,
+    PlatformLinkEmphasizedExampleComponent,
+    PlatformLinkDisabledExampleComponent,
+    PlatformLinkDisabledEmphasizedExampleComponent,
+    PlatformLinkInvertedExampleComponent,
+    PlatformLinkTruncatedExampleComponent,
+    PlatformLinkIconExampleComponent 
+} from './component-docs/platform-link/platform-link-examples/platform-link-examples.component';
+import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
+import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
+
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuBasicExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-basic-example.component';
@@ -66,6 +79,15 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         PlatformActionbarEditTitleExampleComponent,
         PlatformActionbarWithContextualMenuExampleComponent,
         PlatformActionbarWithPositiveNegativeActionsExampleComponent,
+        PlatformLinkStandardExampleComponent,
+        PlatformLinkEmphasizedExampleComponent,
+        PlatformLinkDisabledExampleComponent,
+        PlatformLinkDisabledEmphasizedExampleComponent,
+        PlatformLinkInvertedExampleComponent,
+        PlatformLinkTruncatedExampleComponent,
+        PlatformLinkIconExampleComponent,
+        PlatformLinkHeaderComponent,
+        PlatformLinkDocsComponent,
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,
         PlatformMenuBasicExampleComponent,

@@ -12,6 +12,7 @@ import { NestedListModule } from '../nested-list/nested-list.module';
         SideNavigationComponent,
         SideNavigationMainDirective,
         SideNavigationUtilityDirective,
+        NestedListModule
     ],
     declarations: [
         SideNavigationComponent,
