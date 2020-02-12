@@ -243,7 +243,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     /** @hidden */
-    handleSelect(checked: any, value: any): void {
+    handleSelect(checked: any, value: any, event: MouseEvent): void {
+        if (event) {
+            event.preventDefault(); // prevent this function from being called twice when checkbox updates
+        }
         const previousLength = this.selected.length;
         if (checked) {
             this.selected.push(value);

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-token-example',
-    templateUrl: './token-example.component.html',
+    selector: 'app-token-readonly-example',
+    templateUrl: './token-readonly-example.component.html',
     styles: [
         `
             fd-token {
@@ -11,6 +11,4 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class TokenExampleComponent {
-    isOpen = true;
-}
+export class TokenReadOnlyExampleComponent {}

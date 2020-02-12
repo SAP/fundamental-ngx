@@ -1,10 +1,50 @@
 <fd-docs-section-title [id]="'default'" [componentName]="'token'">
-    Token
+    Default Token
 </fd-docs-section-title>
-<description
-    >The token is very flexible. It can be styled freely, closed on clicking the cancel icon, and more.</description
->
 <component-example [name]="'ex1'">
     <app-token-example></app-token-example>
 </component-example>
 <code-example [exampleFiles]="basicToken"></code-example>
+
+<fd-docs-section-title [id]="'selected'" [componentName]="'token'">
+    Selected Token
+</fd-docs-section-title>
+<component-example [name]="'ex2'">
+    <app-token-selected-example></app-token-selected-example>
+</component-example>
+<code-example [exampleFiles]="selectedToken"></code-example>
+
+<fd-docs-section-title [id]="'readOnly'" [componentName]="'token'">
+    Read Only Token
+</fd-docs-section-title>
+<component-example [name]="'ex3'">
+    <app-token-readonly-example></app-token-readonly-example>
+</component-example>
+<code-example [exampleFiles]="readOnlyToken"></code-example>
+
+<fd-docs-section-title [id]="'compact'" [componentName]="'token'">
+    Compact Token
+</fd-docs-section-title>
+<component-example [name]="'ex4'">
+    <app-token-compact-example></app-token-compact-example>
+</component-example>
+<code-example [exampleFiles]="compactToken"></code-example>
+
+<fd-docs-section-title [id]="'tokenizer'" [componentName]="'token'">
+    Tokenizer
+</fd-docs-section-title>
+<description>
+    Tokenizer is container for tokens, can be placed inside multi input components. To show focus on whole element, it’s needed to add .is-focus into container.
+</description>
+<component-example [name]="'ex5'">
+    <app-tokenizer-example></app-tokenizer-example>
+</component-example>
+<code-example [exampleFiles]="tokenizer"></code-example>
+
+<fd-docs-section-title [id]="'tokenizer-compact'" [componentName]="'token'">
+    Compact Tokenizer
+</fd-docs-section-title>
+<component-example [name]="'ex6'">
+    <app-tokenizer-compact-example></app-tokenizer-compact-example>
+</component-example>
+<code-example [exampleFiles]="tokenizerCompact"></code-example>

@@ -59,7 +59,7 @@ export class FormControlDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
+    constructor(public elementRef: ElementRef) {
         super(elementRef);
     }
 
