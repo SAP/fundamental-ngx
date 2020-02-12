@@ -2,11 +2,9 @@ import {
     AfterContentInit, ChangeDetectionStrategy,
     Component,
     ContentChildren, ElementRef,
-    EventEmitter, Input,
+    Input,
     OnDestroy,
-    Output,
     QueryList,
-    Renderer2,
     ViewEncapsulation
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
@@ -40,9 +38,6 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _rendererListenFunctions: Function[] = [];
 
     private _class: string = '';
     @Input()
@@ -78,12 +73,8 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         this.buildComponentCssClass();
     }
 
-    /** Event Thrown every time something is clicked */
-    @Output() onKeyDown = new EventEmitter<{ event: any, index: number }>();
-
     /** @hidden */
     constructor(
-        private _renderer: Renderer2,
         private _tabsService: TabsService,
         private _elementRef: ElementRef
     ) {}
@@ -172,18 +163,12 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
 
-        /** Remove old subscription reference */
-        refreshObs.subscribe(() => {
-            this._rendererListenFunctions.forEach(func => func());
-            this._rendererListenFunctions = [];
-        });
-
-        this.tabLinks.forEach((linkElement, index) => {
-            this._rendererListenFunctions.push(
-                this._renderer.listen(linkElement.elementRef.nativeElement, 'keydown', (event) => {
-                    this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement));
-                })
-            );
+        this.tabLinks.forEach((tab: TabLinkDirective, index: number) => {
+            tab.keyDown
+                .pipe(takeUntil(refreshObs))
+                .subscribe(event =>
+                    this._tabsService.tabHeaderKeyHandler(index, event, this.tabLinks.map(link => link.elementRef.nativeElement))
+                )
         });
     }
 }

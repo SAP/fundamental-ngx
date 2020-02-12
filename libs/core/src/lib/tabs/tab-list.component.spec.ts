@@ -76,4 +76,53 @@ describe('TabListComponent', () => {
         expect((component as any)._resetTabHook).toHaveBeenCalled();
 
     }));
+
+    it('should not call reset tab', fakeAsync(() => {
+        spyOn((component as any), '_resetTabHook').and.callThrough();
+        component.ngAfterViewInit();
+        component.selectTab(2);
+
+        tick(10);
+        fixture.detectChanges();
+
+        fixture.componentInstance.showDisabled = false;
+        fixture.detectChanges();
+        tick(10);
+        fixture.detectChanges();
+        expect((component as any)._resetTabHook).not.toHaveBeenCalled();
+
+    }));
+
+    it('should not select out of range tab', fakeAsync(() => {
+        component.ngAfterViewInit();
+        component.selectTab(1);
+
+        tick(10);
+        fixture.detectChanges();
+        expect(component.selectedIndex).toBe(1);
+
+        component.selectTab(7);
+
+        tick(10);
+        fixture.detectChanges();
+        expect(component.selectedIndex).toBe(1);
+    }));
+
+    it('should call select tab on service event', fakeAsync(() => {
+        component.ngAfterViewInit();
+        component.selectTab(1);
+
+        tick(10);
+        fixture.detectChanges();
+        expect(component.selectedIndex).toBe(1);
+
+        spyOn((component as any), 'selectTab').and.callThrough();
+
+        (component as any)._tabsService.tabSelected.next(2);
+
+        tick(10);
+        fixture.detectChanges();
+        expect(component.selectTab).toHaveBeenCalledWith(2);
+        expect(component.selectedIndex).toBe(2);
+    }));
 });
