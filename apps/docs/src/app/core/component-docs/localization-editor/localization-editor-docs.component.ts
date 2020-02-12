@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import * as localizationSrcH from '!raw-loader!./examples/localization-editor-example.component.html';
 import * as localizationSrcT from '!raw-loader!./examples/localization-editor-example.component.ts';
@@ -9,8 +9,6 @@ import * as localizationTextareaSrcT from '!raw-loader!./examples/localization-e
 import * as localizationFormsSrcH from '!raw-loader!./examples/localization-editor-forms-example.component.html';
 import * as localizationFormsSrcT from '!raw-loader!./examples/localization-editor-forms-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-localization-editor',

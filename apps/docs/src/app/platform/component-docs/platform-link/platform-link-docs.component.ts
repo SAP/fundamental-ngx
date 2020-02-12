@@ -6,7 +6,6 @@ import * as disabledEmphasizedlinkSrc from '!raw-loader!./platform-link-examples
 import * as invertedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-inverted-example.component.html';
 import * as truncatedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-truncated-example.component.html';
 import * as iconlinkSrc from '!raw-loader!./platform-link-examples/platform-link-icon-example.component.html';
-import * as linkTsCode from '!raw-loader!./platform-link-examples/platform-link-examples.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -20,9 +19,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: standardlinkSrc,
             fileName: 'platform-link-standard-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkStandardExampleComponent'
         }
     ];
 
@@ -31,9 +27,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: emphasizedlinkSrc,
             fileName: 'platform-link-emphasized-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkEmphasizedExampleComponent'
         }
     ];
 
@@ -42,9 +35,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: disabledlinkSrc,
             fileName: 'platform-link-disabled-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkDisabledExampleComponent'
         }
     ];
 
@@ -53,9 +43,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: disabledEmphasizedlinkSrc,
             fileName: 'platform-link-disabled-emphasized-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkDisabledEmphasizedExampleComponent'
         }
     ];
 
@@ -64,9 +51,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: invertedlinkSrc,
             fileName: 'platform-link-inverted-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkInvertedExampleComponent'
         }
     ];
 
@@ -75,9 +59,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: truncatedlinkSrc,
             fileName: 'platform-link-truncated-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkTruncatedExampleComponent'
         }
     ];
 
@@ -86,9 +67,6 @@ export class PlatformLinkDocsComponent implements OnInit {
             language: 'html',
             code: iconlinkSrc,
             fileName: 'platform-link-icon-example',
-            secondFile: 'platform-link-examples',
-            typescriptFileCode: linkTsCode,
-            component: 'PlatformLinkIconExampleComponent'
         }
     ];
 

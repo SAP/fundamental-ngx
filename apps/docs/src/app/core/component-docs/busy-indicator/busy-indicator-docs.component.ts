@@ -16,8 +16,6 @@ export class BusyIndicatorDocsComponent {
             language: 'html',
             code: BusyIndicatorHtml,
             fileName: 'busy-indicator-basic-example',
-            typescriptFileCode: BusyIndicatorTscode,
-            component: 'BusyIndicatorBasicExampleComponent'
         }
     ];
     BusyIndicatorToggleExample: ExampleFile[] = [
@@ -25,8 +23,6 @@ export class BusyIndicatorDocsComponent {
             language: 'html',
             code: BusyIndicatorToggleHtml,
             fileName: 'busy-indicator-toggle-example',
-            typescriptFileCode: BusyIndicatorToggleTscode,
-            component: 'BusyIndicatorToggleExampleComponent'
         }
     ];
 }

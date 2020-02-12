@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as toggleSizeExample from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.html';
 import * as toggleSizeExampleTsCode from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.ts';
 import * as toggleSizeExampleScssCode from '!raw-loader!./examples/toggle-sizes-example/toggle-sizes-example.component.scss';
@@ -16,8 +16,6 @@ import * as semanticToggleExampleHtml from '!raw-loader!./examples/semantic-togg
 import * as semanticToggleExampleTs from '!raw-loader!./examples/semantic-toggle-example/semantic-toggle-example.component.ts';
 import * as toggleFormExampleScssCode from '!raw-loader!./examples/toggle-form-example/toggle-forms-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-toggle',

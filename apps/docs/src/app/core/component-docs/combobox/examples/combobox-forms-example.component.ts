@@ -12,7 +12,6 @@ interface ComboboxItem {
 })
 export class ComboboxFormsExampleComponent {
 
-
     customForm = new FormGroup({
         item: new FormControl(null),
         itemOnDropdownMode: new FormControl(null)

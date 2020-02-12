@@ -93,9 +93,6 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupTextSrc,
             fileName: 'input-group-text-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupTextExampleComponent'
         }
     ];
 
@@ -104,9 +101,6 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupIconSrc,
             fileName: 'input-group-icon-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupIconExampleComponent'
         }
     ];
 
@@ -115,9 +109,6 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupButtonSrc,
             fileName: 'input-group-button-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupButtonExampleComponent'
         }
     ];
 
@@ -146,9 +137,6 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: inputGroupTextCompactSrc,
             fileName: 'input-group-compact-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupTextCompactExampleComponent'
         }
     ];
 
@@ -172,9 +160,6 @@ export class InputGroupDocsComponent implements OnInit {
             language: 'html',
             code: complexInputHtml,
             fileName: 'input-group-number-example',
-            secondFile: 'input-group-examples',
-            typescriptFileCode: inputGroupTscode,
-            component: 'InputGroupComplexExampleComponent'
         }
     ];
 

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './popover-dropdown.component.html',
   styleUrls: ['./popover-dropdown.component.scss']
 })
-export class PopoverDropdownComponent {
+export class PopoverDropdownExampleComponent {
 
     menu = [
         'Option 1',

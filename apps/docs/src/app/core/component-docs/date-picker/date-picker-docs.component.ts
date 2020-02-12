@@ -18,6 +18,7 @@ import * as datePickerRangeDisableH from '!raw-loader!./examples/date-picker-ran
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { ActivatedRoute } from '@angular/router';
+import { StackblitzDependencies } from '../../../documentation/core-helpers/stackblitz/stackblitz-dependencies';
 
 @Component({
     selector: 'app-date-picker',
@@ -47,7 +48,7 @@ export class DatePickerDocsComponent implements OnInit {
             language: 'typescript',
             component: 'DatePickerI18nExampleComponent',
             code: datePickeri18nSrc,
-            fileName: 'date-picker-i18n-example'
+            fileName: 'datepicker-i18n-example'
         }
     ];
 
@@ -141,15 +142,18 @@ export class DatePickerDocsComponent implements OnInit {
             language: 'typescript',
             component: 'DatePickerComplexI18nExampleComponent',
             code: datePickerComplexI18nSrcTs,
-            fileName: 'fd-date-picker-complex-i18n-example'
+            fileName: 'date-picker-complex-i18n-example'
         },
         {
             language: 'html',
             component: 'DatePickerComplexI18nExampleComponent',
             code: datePickerComplexI18nSrcH,
-            fileName: 'fd-date-picker-complex-i18n-example'
+            fileName: 'date-picker-complex-i18n-example'
         },
     ];
 
-    ngOnInit() { }
+    ngOnInit() {
+        console.log(StackblitzDependencies.GetDependencies());
+
+    }
 }

@@ -1,24 +1,18 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as tabSrc from '!raw-loader!./examples/tabs-example.component.html';
 import * as tabCounter from '!raw-loader!./examples/tab-counter/tab-counter.component.html';
-import * as tabCounterTs from '!raw-loader!./examples/tab-counter/tab-counter.component.ts';
 import * as tabProcess from '!raw-loader!./examples/tab-process-example/tab-process-example.component.html';
-import * as tabProcessTs from '!raw-loader!./examples/tab-process-example/tab-process-example.component.ts';
 import * as tabIcon from '!raw-loader!./examples/tab-icon-only-example/tab-icon-only-example.component.html';
-import * as tabIconTs from '!raw-loader!./examples/tab-icon-only-example/tab-icon-only-example.component.ts';
 import * as tabFilter from '!raw-loader!./examples/tab-filter-example/tab-filter-example.component.html';
-import * as tabFilterTs from '!raw-loader!./examples/tab-filter-example/tab-filter-example.component.ts';
-import * as tabsTsCode from '!raw-loader!./examples/tabs-examples-component.ts';
 import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
+import * as tabSelectionSrcTs from '!raw-loader!./examples/tab-selection-example.component.ts';
 import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.component.scss';
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
-import * as complexTabH from '!raw-loader!./examples/complex-title-example/complex-title-example.component.html';
-import * as complexTabHTsCode from '!raw-loader!./examples/complex-title-example/complex-title-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -136,55 +130,40 @@ export class TabsDocsComponent implements OnInit {
     tabExample: ExampleFile[] = [
         {
             language: 'html',
-            component: 'TabsExampleComponent',
             code: tabSrc,
             fileName: 'tabs-example',
-            secondFile: 'tabs-examples',
-            typescriptFileCode: tabsTsCode,
         }
     ];
 
     tabCounter: ExampleFile[] = [
         {
             language: 'html',
-            component: 'TabCounterComponent',
             code: tabCounter,
-            fileName: 'fd-tab-counter-example',
-            secondFile: 'fd-tab-counter-example',
-            typescriptFileCode: tabCounterTs
+            fileName: 'tab-counter-example',
         }
     ];
 
     tabProcess: ExampleFile[] = [
         {
             language: 'html',
-            component: 'TabProcessExampleComponent',
             code: tabProcess,
-            fileName: 'fd-tab-process-example',
-            secondFile: 'fd-tab-process-example',
-            typescriptFileCode: tabProcessTs
+            fileName: 'tab-process-example',
         }
     ];
 
     tabIcon: ExampleFile[] = [
         {
             language: 'html',
-            component: 'TabIconExampleComponent',
             code: tabIcon,
-            fileName: 'fd-tab-icon-example',
-            secondFile: 'fd-tab-icon-example',
-            typescriptFileCode: tabIconTs
+            fileName: 'tab-icon-example',
         }
     ];
 
     tabFilter: ExampleFile[] = [
         {
             language: 'html',
-            component: 'TabFilterExampleComponent',
             code: tabFilter,
-            fileName: 'fd-tab-filter-example',
-            secondFile: 'fd-tab-filter-example',
-            typescriptFileCode: tabFilterTs
+            fileName: 'tab-filter-example',
         }
     ];
 
@@ -208,8 +187,7 @@ export class TabsDocsComponent implements OnInit {
             language: 'html',
             code: tabSelectionSrc,
             fileName: 'tab-selection-example',
-            secondFile: 'tabs-examples',
-            typescriptFileCode: tabsTsCode,
+            typescriptFileCode: tabSelectionSrcTs,
             component: 'TabSelectionExampleComponent',
             scssFileCode: tabSelectionScss
         }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as buttonScss from '!raw-loader!./examples/button-examples.component.scss';
@@ -8,9 +8,6 @@ import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import * as buttonExampleTsCode from '!raw-loader!./examples/button-examples.component.ts';
-import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
@@ -64,9 +61,6 @@ export class ButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonOptionsExample,
             fileName: 'button-options-example',
-            secondFile: 'button-examples',
-            component: 'ButtonOptionsExampleComponent',
-            typescriptFileCode: buttonExampleTsCode,
             scssFileCode: buttonScss
         }
     ];
@@ -76,9 +70,6 @@ export class ButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonTypesExample,
             fileName: 'button-types-example',
-            secondFile: 'button-examples',
-            component: 'ButtonTypesExampleComponent',
-            typescriptFileCode: buttonExampleTsCode,
             scssFileCode: buttonScss
         }
     ];
@@ -88,9 +79,6 @@ export class ButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonSizesExample,
             fileName: 'button-sizes-example',
-            secondFile: 'button-examples',
-            component: 'ButtonSizesExampleComponent',
-            typescriptFileCode: buttonExampleTsCode,
             scssFileCode: buttonScss
         }
     ];
@@ -100,9 +88,6 @@ export class ButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonIconsExample,
             fileName: 'button-icons-example',
-            secondFile: 'button-examples',
-            component: 'ButtonIconsExampleComponent',
-            typescriptFileCode: buttonExampleTsCode,
             scssFileCode: buttonScss
         }
     ];
@@ -112,9 +97,6 @@ export class ButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonStateExample,
             fileName: 'button-state-example',
-            secondFile: 'button-examples',
-            component: 'ButtonStateExampleComponent',
-            typescriptFileCode: buttonExampleTsCode,
             scssFileCode: buttonScss
         }
     ];

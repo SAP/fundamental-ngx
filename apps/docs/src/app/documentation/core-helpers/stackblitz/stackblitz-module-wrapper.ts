@@ -1,0 +1,81 @@
+import { StackblitzFile } from './interfaces/stackblitz-parameters';
+
+export interface StackblitzFileObject {
+    path: string,
+    name: string
+}
+
+export class StackblitzModuleWrapper {
+    private static defaultModules: Array<StackblitzFileObject> = [
+        { name: 'BrowserModule', path: '@angular/platform-browser' },
+        { name: 'FormsModule', path: '@angular/forms' },
+        { name: 'ReactiveFormsModule', path: '@angular/forms' },
+        { name: 'BrowserAnimationsModule', path: '@angular/platform-browser/animations' },
+        { name: 'FundamentalNgxCoreModule', path: '@fundamental-ngx/core' },
+        { name: 'FundamentalNgxPlatformModule', path: '@fundamental-ngx/platform' },
+        { name: 'HttpClientModule', path: '@angular/common/http' },
+        { name: 'CdkTableModule', path: '@angular/cdk/table' },
+        { name: 'DragDropModule', path: '@angular/cdk/drag-drop' },
+    ];
+
+    static GetModule(tsFiles: StackblitzFile[]): string {
+
+        const defaultImports: string = this.defaultModules.map(this.getImport).join(';\n');
+
+        // Imports generated basing on passed ts files.
+        const imports: string = tsFiles.map(file =>
+            this.getImport({ name: file.componentName, path: './' + file.basis })
+        ).join(';\n');
+
+        const moduleImports: string = this.defaultModules.map(module => module.name).join(',\n');
+
+        const declarations: string = tsFiles.map(file => file.componentName).join(',\n');
+
+        // Main component that will be added as a root, if there is no component with main flag, first is chosen
+        let mainComponent: string;
+        const _mainComponent: StackblitzFile = tsFiles.find(file => file.main);
+        if (_mainComponent) {
+            mainComponent = _mainComponent.componentName;
+        } else {
+            mainComponent = tsFiles[0].componentName;
+        }
+
+        const entryComponents: string = tsFiles
+            .filter(file => file.entryComponent)
+            .map(file => file.componentName)
+            .join(',\n')
+        ;
+
+        return `
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+${defaultImports}
+${imports}
+
+@NgModule({
+    declarations: [
+        ${declarations}
+    ],
+    imports: [
+        ${moduleImports},
+        RouterModule.forRoot([{path: '#', component:${mainComponent}}],
+        { useHash: true }),
+    ],
+    providers: [],
+    entryComponents: [
+        ${entryComponents}
+    ],
+    bootstrap: [
+        ${mainComponent}
+    ]
+})
+export class AppModule {}
+`;
+
+    }
+
+    private static getImport(file: StackblitzFileObject): string {
+        return `import { ${file.name} } from '${file.path}'`;
+    }
+
+}

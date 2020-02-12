@@ -1,6 +1,6 @@
 export * from './menu.module';
 export * from './menu-item.directive';
-export * from './menu-keyboard.service';
+export * from './menu-keyboard.service'; 
 export * from './menu-group.component';
 export * from './menu-addon.directive';
 export * from './menu-list.directive';
