@@ -3,7 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren, ElementRef, forwardRef,
-    HostListener, QueryList,
+    HostListener, Input, QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
@@ -38,21 +38,42 @@ export class BreadcrumbComponent implements AfterContentInit {
 
     collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
 
-    previousWindowInnerWidth: number;
+    previousContainerWidth: number;
+
+    /**
+     * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
+     * performs better. When not provided, the immediate parent element's width will be used.
+     */
+    @Input()
+    containerElement: HTMLElement;
+
+    /**
+     * This boolean should be set to 'true' when the breadcrumbs are to be used in RTL mode. This is required to correctly
+     * set the position of the popover body.
+     */
+    @Input()
+    rtl: boolean = false;
+
+    /** @hidden */
+    containerBoundary: number;
 
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
+        this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
+        if (this.containerElement) {
+            this.containerBoundary = this.containerElement.getBoundingClientRect().width;
+        }
         // if the screen is getting smaller
-        if (window.innerWidth <= this.previousWindowInnerWidth) {
+        if (this.containerBoundary < this.previousContainerWidth) {
             // and the breadcrumbs extend past the window
-            if (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth) {
+            if (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary) {
                 this.collapseBreadcrumbs();
             }
         } else if (this.collapsedBreadcrumbItems.length) { // if the screen is getting bigger and there are collapsed breadcrumbs
             this.expandBreadcrumbs();
         }
-        this.previousWindowInnerWidth = window.innerWidth;
+        this.previousContainerWidth = this.containerBoundary;
     }
 
     /**
@@ -64,7 +85,7 @@ export class BreadcrumbComponent implements AfterContentInit {
     collapseBreadcrumbs(): void {
         let i = 0;
         // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
-        while (this.elementRef.nativeElement.getBoundingClientRect().right >= window.innerWidth && i < this.breadcrumbItems.length) {
+        while (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary && i < this.breadcrumbItems.length) {
             const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
             if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
                 this.collapsedBreadcrumbItems.push(breadcrumbItem);
@@ -85,7 +106,7 @@ export class BreadcrumbComponent implements AfterContentInit {
         let breakLoop = false;
         let i = 0;
         const originalCollapsedLength = this.collapsedBreadcrumbItems.length;
-        while (this.elementRef.nativeElement.getBoundingClientRect().right < window.innerWidth &&
+        while (this.elementRef.nativeElement.getBoundingClientRect().width < this.containerBoundary &&
                 !breakLoop && i < originalCollapsedLength) {
             // get the most recently collapsed breadcrumb
             const collapsedItemToPop = this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
@@ -97,7 +118,7 @@ export class BreadcrumbComponent implements AfterContentInit {
              */
             breadcrumbToCheck.elementRef.nativeElement.style.display = 'inline-block';
             breadcrumbToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-            if (this.elementRef.nativeElement.getBoundingClientRect().right < window.innerWidth) {
+            if (this.elementRef.nativeElement.getBoundingClientRect().width < this.containerBoundary) {
                 /*
                   if the width of the breadcrumb component is still smaller than the window width, including the
                   breadcrumbToCheck, pop the latest collapsedBreadcrumbItem
@@ -118,7 +139,7 @@ export class BreadcrumbComponent implements AfterContentInit {
     }
 
     ngAfterContentInit(): void {
-        this.previousWindowInnerWidth = window.innerWidth;
+        this.previousContainerWidth = this.containerBoundary;
         this.onResize();
     }
 

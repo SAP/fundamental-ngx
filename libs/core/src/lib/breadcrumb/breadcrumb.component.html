@@ -1,4 +1,4 @@
-<fd-popover *ngIf="collapsedBreadcrumbItems.length" [noArrow]="true" placement='bottom-start'>
+<fd-popover *ngIf="collapsedBreadcrumbItems.length" [noArrow]="true" [placement]="rtl ? 'bottom-end' : 'bottom-start'">
     <fd-popover-control>
         <fd-breadcrumb-item>
             <a fd-breadcrumb-link>...<fd-icon [glyph]="'slim-arrow-down'"></fd-icon></a>
