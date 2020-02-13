@@ -70,12 +70,12 @@ cd ../../
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
 
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
-    npm run build-docs
+    npm run build-docs-github-pages
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 elif [[ $TRAVIS_BUILD_STAGE_NAME == "Archive-Release" ]]; then
 
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $ARCHIVE_BRANCH
-    npm run build-docs
+    npm run build-docs-github-pages
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 fi
 
