@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.40"></a>
+# [0.14.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.39...v0.14.0-rc.40) (2020-02-13)
+
+
+### Bug Fixes
+
+* Speed up netlify builds ([#1941](https://github.com/SAP/fundamental-ngx/issues/1941)) ([055b97e](https://github.com/SAP/fundamental-ngx/commit/055b97e))
+
+
+
 <a name="0.14.0-rc.39"></a>
 # [0.14.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.38...v0.14.0-rc.39) (2020-02-12)
 
