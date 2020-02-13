@@ -87,12 +87,12 @@ export class LinkComponent implements OnInit, AfterViewInit {
 
     /** Emitting link click event */
     @Output()
-    click: EventEmitter<any> = new EventEmitter();
+    click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
     private _disabled: boolean = false;
     private _inverted: boolean = false;
 
-    clicked(event: any) {
+    clicked(event: MouseEvent | KeyboardEvent | TouchEvent) {
         this.click.emit(event);
     }
 
