@@ -9,6 +9,7 @@ import {
 } from '@fundamental-ngx/core';
 import { RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
     selector: 'fd-breadcrumb-test-component',
@@ -28,14 +29,14 @@ import { Component } from '@angular/core';
 })
 class BreadcrumbWrapperComponent {}
 
-fdescribe('BreadcrumbComponent', () => {
+describe('BreadcrumbComponent', () => {
     let component: BreadcrumbComponent;
     let fixture: ComponentFixture<BreadcrumbWrapperComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [BreadcrumbComponent, BreadcrumbItemDirective, BreadcrumbLinkDirective, BreadcrumbWrapperComponent],
-            imports: [PopoverModule, MenuModule, IconModule, RouterModule]
+            imports: [PopoverModule, MenuModule, IconModule, RouterModule, RouterTestingModule]
         }).compileComponents();
     }));
 
@@ -50,10 +51,11 @@ fdescribe('BreadcrumbComponent', () => {
     });
 
     it('should handle onResize - enlarging the screen', () => {
+        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({width: 3});
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
         spyOn(component, 'collapseBreadcrumbs');
         spyOn(component, 'expandBreadcrumbs');
-        component.previousWindowInnerWidth = 1;
-        spyOnProperty(window, 'innerWidth').and.returnValue(2);
+        component.previousContainerWidth = 2;
 
         // move breadcrumbItems into collapsed array first
         component.breadcrumbItems.forEach(item => {
@@ -64,25 +66,26 @@ fdescribe('BreadcrumbComponent', () => {
 
         expect(component.expandBreadcrumbs).toHaveBeenCalled();
         expect(component.collapseBreadcrumbs).not.toHaveBeenCalled();
-        expect(component.previousWindowInnerWidth).toBe(2);
+        expect(component.previousContainerWidth).toBe(3);
     });
 
     it('should handle onResize - shrinking the screen', () => {
         spyOn(component, 'collapseBreadcrumbs');
         spyOn(component, 'expandBreadcrumbs');
-        component.previousWindowInnerWidth = 2;
-        spyOnProperty(window, 'innerWidth').and.returnValue(1);
+        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({width: 1});
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 3});
+        component.previousContainerWidth = 2;
 
         component.onResize();
 
         expect(component.expandBreadcrumbs).not.toHaveBeenCalled();
         expect(component.collapseBreadcrumbs).toHaveBeenCalled();
-        expect(component.previousWindowInnerWidth).toBe(1);
+        expect(component.previousContainerWidth).toBe(1);
     });
 
     it('should collapse the breadcrumbs', () => {
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({right: 2});
-        spyOnProperty(window, 'innerWidth').and.returnValue(1);
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 2});
+        component.containerBoundary = 1;
 
         component.collapseBreadcrumbs();
 
@@ -94,11 +97,11 @@ fdescribe('BreadcrumbComponent', () => {
 
     it('should expand all of the breadcrumbs', () => {
         // collapse all the breadcrumbs first
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({right: 3});
-        spyOnProperty(window, 'innerWidth').and.returnValue(2);
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 3});
+        component.containerBoundary = 2;
         component.collapseBreadcrumbs();
 
-        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({right: 1});
+        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 1});
 
         component.expandBreadcrumbs();
 
