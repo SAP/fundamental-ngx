@@ -19,7 +19,12 @@
     <tbody fd-table-body>
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row>
             <td fd-table-cell>
-                <fd-checkbox [compact]="true" label="Option {{ i + 1 }}" [(ngModel)]="row.checked"></fd-checkbox>
+                <fd-checkbox
+                    [compact]="true"
+                    [ngModel]="tableRows[i].checked"
+                    (ngModelChange)="select(i)"
+                    label="Option {{ i }}"
+                ></fd-checkbox>
             </td>
             <td fd-table-cell>{{ row.column1 }}</td>
             <td fd-table-cell>{{ row.column2 }}</td>
