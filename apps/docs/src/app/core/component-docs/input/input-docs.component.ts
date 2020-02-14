@@ -21,9 +21,6 @@ export class InputDocsComponent implements OnInit {
             language: 'html',
             code: formHtml,
             fileName: 'input-example',
-            secondFile: 'input-examples',
-            typescriptFileCode: inputTsCode,
-            component: 'InputExampleComponent'
         }
     ];
     inputsHelpFormHtml: ExampleFile[] = [
@@ -31,9 +28,6 @@ export class InputDocsComponent implements OnInit {
             language: 'html',
             code: formInlineHelpHtml,
             fileName: 'input-inline-help-example',
-            secondFile: 'input-examples',
-            typescriptFileCode: inputTsCode,
-            component: 'InputInlineHelpExampleComponent'
         }
     ];
 
@@ -41,10 +35,7 @@ export class InputDocsComponent implements OnInit {
         {
             language: 'html',
             code: formStateHtml,
-            fileName: 'InputStateExampleComponent',
-            secondFile: 'input-examples',
-            typescriptFileCode: inputTsCode,
-            component: 'InputStateExampleComponent'
+            fileName: 'input-state-example',
         }
     ];
 

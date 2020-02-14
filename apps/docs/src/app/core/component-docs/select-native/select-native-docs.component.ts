@@ -21,9 +21,6 @@ export class SelectNativeDocsComponent implements OnInit {
             language: 'html',
             code: formHtml,
             fileName: 'select-native-example',
-            secondFile: 'select-native-examples',
-            typescriptFileCode: selectNativeTsCode,
-            component: 'SelectNativeExampleComponent'
         }
     ];
 
@@ -32,9 +29,6 @@ export class SelectNativeDocsComponent implements OnInit {
             language: 'html',
             code: formInlineHelpHtml,
             fileName: 'select-native-inline-help-example',
-            secondFile: 'select-native-examples',
-            typescriptFileCode: selectNativeTsCode,
-            component: 'SelectNativeInlineHelpExampleComponent'
         }
     ];
 
@@ -43,9 +37,6 @@ export class SelectNativeDocsComponent implements OnInit {
             language: 'html',
             code: formStateHtml,
             fileName: 'select-native-state-example',
-            secondFile: 'select-native-examples',
-            typescriptFileCode: selectNativeTsCode,
-            component: 'SelectNativeStateExampleComponent'
         }
     ];
 

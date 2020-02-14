@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as listSrc from '!raw-loader!./examples/list-example.component.html';
-import * as listTsCode from '!raw-loader!./examples/list-examples.component.ts';
 import * as listActionsSrc from '!raw-loader!./examples/list-actions-example.component.html';
 import * as listCheckboxSrc from '!raw-loader!./examples/list-checkbox-example.component.html';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
@@ -13,8 +12,6 @@ import * as listSingleTs from '!raw-loader!./examples/list-single-select-example
 import * as listCheckboxFormHtmlSrc from '!raw-loader!./examples/list-checkbox-form-example.component.html';
 import * as listCheckboxFormTsSrc from '!raw-loader!./examples/list-checkbox-form-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
@@ -65,9 +62,6 @@ export class ListDocsComponent implements OnInit {
             language: 'html',
             code: listSrc,
             fileName: 'list-example',
-            secondFile: 'list-examples',
-            typescriptFileCode: listTsCode,
-            component: 'ListExampleComponent'
         }
     ];
 
@@ -76,9 +70,6 @@ export class ListDocsComponent implements OnInit {
             language: 'html',
             code: listActionsSrc,
             fileName: 'list-actions-example',
-            secondFile: 'list-examples',
-            typescriptFileCode: listTsCode,
-            component: 'ListActionsExampleComponent'
         }
     ];
 
@@ -87,9 +78,6 @@ export class ListDocsComponent implements OnInit {
             language: 'html',
             code: listCheckboxSrc,
             fileName: 'list-checkbox-example',
-            secondFile: 'list-examples',
-            typescriptFileCode: listTsCode,
-            component: 'ListCheckboxExampleComponent'
         }
     ];
 

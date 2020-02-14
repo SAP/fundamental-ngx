@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'app-tokenizer-example',
+    selector: 'fd-tokenizer-example',
     templateUrl: './tokenizer-example.component.html'
 })
 export class TokenizerExampleComponent implements OnInit {

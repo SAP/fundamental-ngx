@@ -395,7 +395,7 @@ import { SideNavigationMultipleSelectedExampleComponent } from './component-docs
 import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
-import { PopoverDropdownComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown.component';
+import { PopoverDropdownExampleComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown-example.component';
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
 import { SemanticToggleExampleComponent } from './component-docs/toggle/examples/semantic-toggle-example/semantic-toggle-example.component';
 import { InputGroupStatesExampleComponent } from './component-docs/input-group/examples/input-group-states-example/input-group-states-example.component';
@@ -413,6 +413,7 @@ import { TabIconOnlyExampleComponent } from './component-docs/tabs/examples/tab-
 import { TabProcessExampleComponent } from './component-docs/tabs/examples/tab-process-example/tab-process-example.component';
 import { TabFilterExampleComponent } from './component-docs/tabs/examples/tab-filter-example/tab-filter-example.component';
 import { TabCounterComponent } from './component-docs/tabs/examples/tab-counter/tab-counter.component';
+import { NotificationOptionsContentComponent } from './component-docs/notification/examples/notification-options/notification-options-content.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -772,7 +773,7 @@ export const declarations = [
     NotificationContentComponent,
     DatePickerComplexI18nExampleComponent,
     DatetimePickerComplexI18nExampleComponent,
-    PopoverDropdownComponent,
+    PopoverDropdownExampleComponent,
     InputGroupStatesExampleComponent,
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
@@ -784,7 +785,8 @@ export const declarations = [
     TimeTwoDigitsExampleComponent,
     LinkExampleComponent,
     LinkDocsComponent,
-    LinkHeaderComponent
+    LinkHeaderComponent,
+    NotificationOptionsContentComponent
 ]
 
 export const entryComponents = [

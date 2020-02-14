@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-token-example',
+    selector: 'fd-token-example',
     templateUrl: './token-example.component.html',
     styles: [
         `

@@ -101,8 +101,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             language: 'html',
             code: buttonGroupToggleExample,
             fileName: 'button-group-toggle-example',
-            component: 'ButtonGroupToggleExampleComponent',
-            typescriptFileCode: buttonGroupToggleExampleTs,
         }
     ];
 
@@ -111,8 +109,6 @@ export class ButtonGroupDocsComponent implements OnInit {
             language: 'html',
             code: buttonGroupDefaultExample,
             fileName: 'button-group-default-example',
-            component: 'ButtonGroupDefaultExampleComponent',
-            typescriptFileCode: buttonGroupDefaultExampleTs,
         }
     ];
 
