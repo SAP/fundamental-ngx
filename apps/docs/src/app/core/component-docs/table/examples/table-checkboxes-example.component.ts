@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class TableCheckboxesExampleComponent {
 
     selectedRows = [];
-
+    selectMasterModel = false;
     allSelected = false;
 
     tableRows = [
