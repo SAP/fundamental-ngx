@@ -26,11 +26,13 @@ export class BreadcrumbItemDirective implements AfterContentInit {
     /** @hidden */
     routerLink: string = '';
 
+    /** @hidden */
     @ContentChild(forwardRef(() => BreadcrumbLinkDirective), { static: false })
     breadcrumbLink: BreadcrumbLinkDirective;
 
     constructor(public elementRef: ElementRef) {}
 
+    /** @hidden */
     ngAfterContentInit(): void {
         if (this.breadcrumbLink && this.breadcrumbLink.elementRef.nativeElement.getAttribute('href')) {
             this.href = this.breadcrumbLink.elementRef.nativeElement.getAttribute('href');

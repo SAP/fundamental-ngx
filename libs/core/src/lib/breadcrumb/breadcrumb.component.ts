@@ -33,11 +33,14 @@ import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 })
 export class BreadcrumbComponent implements AfterContentInit {
 
+    /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
     breadcrumbItems: QueryList<BreadcrumbItemDirective>;
 
+    /** @hidden */
     collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
 
+    /** @hidden */
     previousContainerWidth: number;
 
     /**
@@ -138,6 +141,7 @@ export class BreadcrumbComponent implements AfterContentInit {
         }
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this.previousContainerWidth = this.containerBoundary;
         this.onResize();
