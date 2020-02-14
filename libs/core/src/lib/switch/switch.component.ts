@@ -38,7 +38,7 @@ let switchUniqueId: number = 0;
 })
 export class SwitchComponent implements ControlValueAccessor {
     /** @hidden */
-    @ViewChild('input', { static: false })
+    @ViewChild('switchInput', { static: false })
     inputElement: ElementRef<HTMLInputElement>;
 
     /** If the switch should have text in it or not. */
@@ -87,9 +87,7 @@ export class SwitchComponent implements ControlValueAccessor {
     /** @hidden */
     onTouched: any = () => { };
 
-    constructor(
-        private changeDetectorRef: ChangeDetectorRef
-    ) { }
+    constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
     /** Set focus on the input element. */
     public focus(): void {
@@ -102,7 +100,7 @@ export class SwitchComponent implements ControlValueAccessor {
     }
 
     /** Get the isChecked property of the switch. */
-    get isChecked() {
+    get isChecked(): boolean {
         return this.checked;
     }
 
@@ -118,7 +116,7 @@ export class SwitchComponent implements ControlValueAccessor {
      * @hidden
      * @param value Sets the value of the *checked* property of the switch.
      */
-    writeValue(value: any) {
+    writeValue(value: any): void {
         this.checked = value;
         this.changeDetectorRef.detectChanges();
     }
@@ -127,7 +125,7 @@ export class SwitchComponent implements ControlValueAccessor {
      * @hidden
      * @param fn User defined function that handles the *onChange* event of the switch.
      */
-    registerOnChange(fn) {
+    registerOnChange(fn): void {
         this.onChange = fn;
     }
 
@@ -135,7 +133,7 @@ export class SwitchComponent implements ControlValueAccessor {
      * @hidden
      * @param fn User defined function that handles the *onTouch* event of the switch.
      */
-    registerOnTouched(fn) {
+    registerOnTouched(fn): void {
         this.onTouched = fn;
     }
 

@@ -3,26 +3,33 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
     let fixture: ComponentFixture<SwitchComponent>;
+    let changeDetectorRef: ChangeDetectorRef;
     let input;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, FormsModule],
             declarations: [SwitchComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SwitchComponent);
         component = fixture.componentInstance;
-        input = fixture.nativeElement.querySelector('input');
+        input = fixture.nativeElement.querySelector('.fd-switch__input');
+        changeDetectorRef = fixture.componentRef.injector.get(ChangeDetectorRef);
         fixture.detectChanges();
     });
+
+    function detectChangesOnPush() {
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+    }
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -31,15 +38,17 @@ describe('SwitchComponent', () => {
     it('should accept custom id', () => {
         const id = 'custom-id';
         component.id = id;
-        expect(component.id).toBe(id);
+
+        detectChangesOnPush();
+
+        expect(input.id).toBe(component.innerInputId);
     });
 
-    it('should generate id', () => {
+    it('should auto-generate id', () => {
         expect(component.id).toBeTruthy();
     });
 
     it('should switch on click', () => {
-        spyOn(component, 'onChange');
         spyOn(component.checkedChange, 'emit');
 
         component.checked = false;
@@ -48,37 +57,56 @@ describe('SwitchComponent', () => {
         input.click();
         fixture.detectChanges();
 
-        expect(component.onChange).toHaveBeenCalledWith(true);
         expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
 
         input.click();
         fixture.detectChanges();
 
-        expect(component.onChange).toHaveBeenCalledWith(false);
         expect(component.checkedChange.emit).toHaveBeenCalledWith(false);
     });
 
     it('should focus inner input element', () => {
-        console.log(spyOn(component.inputElement.nativeElement, 'focus'));
-        console.log(component.focus());
-        console.log(expect(component.inputElement.nativeElement.focus).toHaveBeenCalled());
-        spyOn(component.inputElement.nativeElement, 'focus');
+        spyOn(input, 'focus');
+
+        detectChangesOnPush();
+
         component.focus();
-        expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
+
+        expect(input.focus).toHaveBeenCalled();
     });
 
-
-    it('should display compact and semantic', () => {
-        component.semantic = true;
+    it('should display compact', () => {
         component.compact = true;
-        component.disabled = true;
-        (component as any).changeDetectorRef.markForCheck();
-        fixture.detectChanges();
+
+        detectChangesOnPush();
 
         const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--compact');
+    });
+
+    it('should display semantic', () => {
+        component.semantic = true;
+
+        detectChangesOnPush();
+
+        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
         expect(switchComp.classList).toContain('fd-switch--semantic');
-        expect(switchComp.classList).toContain('fd-switch--disabled');
+    });
+
+    it('should disable', async () => {
+        spyOn(component.checkedChange, 'emit');
+        component.disabled = true;
+
+        detectChangesOnPush();
+        await fixture.whenStable();
+
+        input.click();
+
+        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
+
+        expect(component.checkedChange.emit).not.toHaveBeenCalled();
+        expect(switchComp.classList).toContain('is-disabled');
+        expect(input.disabled).toBeTrue();
     });
 
 });
