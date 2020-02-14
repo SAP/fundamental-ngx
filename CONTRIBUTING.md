@@ -1,6 +1,6 @@
-# Contributing to Fundamental NGX
+# Contributing to Fundamental Library for Angular
 
-We're excited that you're interested in contributing to Fundamental NGX! Your contribution can make this library even better. 
+We're excited that you're interested in contributing to Fundamental Library for Angular! Your contribution can make this library even better. 
 As a contributor, here are the guidelines we would like you to follow:
 
  - [Issues and Bugs](#issues-and-bugs)
@@ -61,7 +61,7 @@ Status of closed issues:
 
 ## <a name="contribute-code"></a> Contribute Code
 
-You are welcome to contribute code to Fundamental NGX in order to fix issues or to add new features.
+You are welcome to contribute code to Fundamental Library for Angular in order to fix issues or to add new features.
 
 There are two important things to consider:
 
@@ -70,7 +70,7 @@ There are two important things to consider:
 
 ### Contributor License Agreement
 
-When you contribute (code, documentation, or anything else), you must be aware that your contribution is covered by the same [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) that is applied to Fundamental NGX itself.
+When you contribute (code, documentation, or anything else), you must be aware that your contribution is covered by the same [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) that is applied to Fundamental Library for Angular itself.
 In particular, you need to agree to the Individual Contributor License Agreement,
 which can be [found here](https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8).
 (This applies to all contributors, including those contributing on behalf of a company). If you agree to its content, you simply have to click on the link posted by the CLA assistant as a comment to the pull request. Click it to check the CLA and, if you agree to it, accept it on the following screen. CLA assistant saves this decision for upcoming contributions and notifies you if there is any change to the CLA in the meantime.

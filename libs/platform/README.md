@@ -1,4 +1,4 @@
-# Fundamental NGX
+# Fundamental Library for Angular
 
 [![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fplatform.svg)](//www.npmjs.com/package/@fundamental-ngx/platform)
 [![Minified Size](https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fplatform)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fplatform)
@@ -84,9 +84,9 @@ See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/platfor
 
 ## Requirements
 
-To download and use Fundamental NGX, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental NGX is intended for use with Angular 5 or newer.
+Fundamental Library for Angular is intended for use with Angular 8 or newer.
 
 Prior knowledge of Angular is recommended.
 
@@ -145,7 +145,7 @@ For an existing Angular CLI application,
 
 ## Tests
 
-Fundamental NGX makes use of Jasmine and Karma for its unit tests.
+Fundamental Library for Angular makes use of Jasmine and Karma for its unit tests.
 
 Run `ng test @fundamental-ngx/platform`. Append `--code-coverage` to generate code coverage documentation.
 

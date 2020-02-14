@@ -28,9 +28,9 @@ See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) f
 
 ## <a name="2"></a>2. Requirements
 
-To download and use Fundamental NGX, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental NGX is intended for use with Angular 7 or newer.
+Fundamental Library for Angular is intended for use with Angular 8 or newer.
 
 Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
@@ -39,11 +39,14 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 npm package [fundamental-ngx](https://npmjs.com/package/fundamental-ngx) version `0.10.0` is compiled with Angular 7. It supports Angular 6 and 7 versions.
  This version is not supported by bug fixes. 
 
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 7.
-It supports Angular 6 and 7 versions. This version will have merged some bug-fixes.
+npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 8.
+It supports Angular 8 version and newer. This version will have merged some bug-fixes.
 
 npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.12.y` is compiled with Angular 8.
-It supports the current Angular 8 version. This version also can be used along with enabled IVY.
+It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.
+
+npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.13.z` is compiled with Angular 8.
+It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.
 
 Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest patches changes.
 

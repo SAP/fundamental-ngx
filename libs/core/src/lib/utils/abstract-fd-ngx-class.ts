@@ -1,7 +1,7 @@
 import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
 
 /*
- This abstract class allows the user to set their own custom styles on a Fundamental NGX directive, in addition to the
+ This abstract class allows the user to set their own custom styles on a Fundamental Library for Angular directive, in addition to the
  styles the library needs to add itself.
  When library styles were added through the directive's host: {'[class]'} property, any styles the user added would be
  overwritten.  By extending this class, we instead add library styles to the user's classList rather than replace them.
