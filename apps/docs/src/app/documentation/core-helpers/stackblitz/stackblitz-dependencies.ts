@@ -1,4 +1,5 @@
-import { dependencies, version, devDependencies } from '../../../../../../../package.json';
+import { version } from '../../../../../../../package.json';
+import { dependencies } from '../../../../../../../package-lock.json'
 
 export class StackblitzDependencies {
 
@@ -8,27 +9,30 @@ export class StackblitzDependencies {
     ];
 
     private static _dependencies: string[] = [
-        'fundamental-styles',
-        'moment',
         '@angular/animations',
         '@angular/cdk',
+        '@angular/core',
+        '@angular/compiler',
+        '@angular/common',
+        '@angular/forms',
+        '@angular/router',
+        'fundamental-styles',
+        'moment',
         'popper.js',
-        'tslib'
+        'tslib',
     ];
 
     static GetDependencies(): object {
-
-        const allDependencies: object = Object.assign(dependencies, devDependencies);
 
         const _dependencies: object = {};
 
         this._libDependencies.forEach(libDep => _dependencies[libDep] = version);
 
         this._dependencies.forEach(dep => {
-            if (allDependencies && allDependencies[dep]) {
-                _dependencies[dep] = allDependencies[dep];
+            if (dependencies && dependencies[dep]) {
+                _dependencies[dep] = dependencies[dep].version;
             } else {
-                throw new Error('Dependency ' + dep + ' not found in package.json');
+                throw new Error('Dependency ' + dep + ' not found in package-lock.json');
             }
         });
 

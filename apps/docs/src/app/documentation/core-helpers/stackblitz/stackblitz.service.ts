@@ -9,6 +9,17 @@ import { Libraries } from '../../utilities/libraries';
 import { ExampleFile } from '../code-example/example-file';
 import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
 
+interface GeneratedFile {
+    path: string;
+    code: string;
+}
+
+interface GeneratedFiles {
+    scss?: GeneratedFile;
+    ts?: GeneratedFile;
+    html?: GeneratedFile;
+}
+
 @Injectable()
 export class StackblitzService {
 
@@ -38,51 +49,35 @@ export class StackblitzService {
 
         exampleFiles.forEach((example: ExampleFile) => {
 
+            let generatedFiles: GeneratedFiles;
+
             /**
              * Main Component Will be bootstrapped on app module and added to index.html
              * */
             const mainComponent: boolean = exampleFiles.length === 1 || example.main;
 
             if (example.language === 'html') {
-
-                const _pathHTML = this.getFilePath(example.fileName, 'html');
-                defaultProjectInfo.files[_pathHTML] = example.code.default;
-                const _pathSCSS = this.getFilePath(example.fileName, 'scss');
-
-                if (example.scssFileCode || !defaultProjectInfo.files[_pathSCSS]) {
-                    defaultProjectInfo.files[_pathSCSS] = example.scssFileCode ? example.scssFileCode.default : '';
-                }
-
-                if (example.standalone || exampleFiles.length === 1 || example.typescriptFileCode) {
-                    // If there is only HTML added, file is standalone or it has typescript code,
-                    // the typescript file is added
-
-                    const _pathTS = this.getFilePath(example.fileName, 'ts');
-
-                    if (example.typescriptFileCode) {
-                        defaultProjectInfo.files[_pathTS] = example.typescriptFileCode.default;
-                    } else {
-                        // If there is no TS code provided, typescript file is generated
-                        defaultProjectInfo.files[_pathTS] = this.getDefaultTypescriptFile(example.fileName);
-                    }
-
-                    stackBlitzFiles.push(
-                        this.getStackBlitzTsFile(
-                            example,
-                            mainComponent
-                        )
-                    );
-
-                }
+                generatedFiles = this.handleHtmlFile(exampleFiles, example);
             } else if (example.language === 'typescript') {
-                const _pathTS = this.getFilePath(example.fileName, 'ts');
-                defaultProjectInfo.files[_pathTS] = example.code.default;
+                generatedFiles = this.handleTsFile(example);
+            }
 
-                if (example.scssFileCode) {
-                    const _pathSCSS = this.getFilePath(example.fileName, 'scss');
-                    defaultProjectInfo.files[_pathSCSS] = example.scssFileCode.default;
-                }
+            if (generatedFiles.html) {
+                defaultProjectInfo.files[generatedFiles.html.path] = generatedFiles.html.code;
+            }
 
+            const scssFilePath = this.getFilePath(example.fileName, 'scss');
+
+            if (generatedFiles.scss) {
+                defaultProjectInfo.files[generatedFiles.scss.path] = generatedFiles.scss.code;
+            } else if (!defaultProjectInfo.files[scssFilePath]) {
+                // Typescript files created by default has got scss file included, so it's mandatory to create
+                // Empty scss file, to avoid errors
+                defaultProjectInfo.files[scssFilePath] = '';
+            }
+
+            if (generatedFiles.ts) {
+                defaultProjectInfo.files[generatedFiles.ts.path] = generatedFiles.ts.code;
                 stackBlitzFiles.push(
                     this.getStackBlitzTsFile(
                         example,
@@ -170,5 +165,56 @@ import { Component } from '@angular/core';
 
     private getModule(files: StackblitzFile[]): string {
         return StackblitzModuleWrapper.GetModule(files);
+    }
+
+    private handleHtmlFile(exampleFiles: ExampleFile[], file: ExampleFile): GeneratedFiles {
+
+        const generatedFile: GeneratedFiles = {};
+
+        generatedFile.html = {
+            path: this.getFilePath(file.fileName, 'html'),
+            code: file.code.default
+        };
+
+        if (file.scssFileCode) {
+            generatedFile.html = {
+                path: this.getFilePath(file.fileName, 'scss'),
+                code: file.scssFileCode ? file.scssFileCode.default : ''
+            };
+        }
+
+        // If there is only HTML added, file is standalone or it has typescript code,
+        // the typescript file is added
+        if (this.isStandAlone(exampleFiles, file)) {
+            generatedFile.ts = {
+                path: this.getFilePath(file.fileName, 'ts'),
+                code: file.typescriptFileCode ?
+                    file.typescriptFileCode.default :
+                    this.getDefaultTypescriptFile(file.fileName)
+            };
+        }
+        return generatedFile;
+    }
+
+    private handleTsFile(file: ExampleFile): GeneratedFiles {
+        const generatedFile: GeneratedFiles = {};
+
+        if (file.scssFileCode) {
+            generatedFile.scss = {
+                path: this.getFilePath(file.fileName, 'scss'),
+                code: file.scssFileCode ? file.scssFileCode.default : ''
+            };
+        }
+
+        generatedFile.ts = {
+            path: this.getFilePath(file.fileName, 'ts'),
+            code: file.code.default
+        };
+
+        return generatedFile;
+    }
+
+    private isStandAlone(exampleFiles: ExampleFile[], file: ExampleFile): boolean {
+        return !!(file.standalone || exampleFiles.length === 1 || file.typescriptFileCode);
     }
 }

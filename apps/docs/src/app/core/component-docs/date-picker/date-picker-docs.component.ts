@@ -16,15 +16,12 @@ import * as datePickerSingleDisableTs from '!raw-loader!./examples/date-picker-r
 import * as datePickerSingleDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
 import * as datePickerRangeDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
-import { StackblitzDependencies } from '../../../documentation/core-helpers/stackblitz/stackblitz-dependencies';
 
 @Component({
     selector: 'app-date-picker',
     templateUrl: './date-picker-docs.component.html'
 })
-export class DatePickerDocsComponent implements OnInit {
+export class DatePickerDocsComponent {
     datePickerSingle: ExampleFile[] = [
         {
             language: 'typescript',
@@ -151,9 +148,4 @@ export class DatePickerDocsComponent implements OnInit {
             fileName: 'date-picker-complex-i18n-example'
         },
     ];
-
-    ngOnInit() {
-        console.log(StackblitzDependencies.GetDependencies());
-
-    }
 }
