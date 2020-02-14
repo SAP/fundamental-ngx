@@ -59,9 +59,9 @@ The Fundamental Library for Angular uses 'fd' as the component and directive pre
 
 ## Step5: Add poster module to list of imports (can be in FundamentalNgxCore)
 
-The documentation application is importing every component in the Fundamental Library for Angular module. Open `Fundamental Library for Angular.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
+The documentation application is importing every component in the Fundamental Library for Angular module. Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
 
-We must also add `export * from './lib/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fd-poster> component will be an exported member of the Fundamental Library for Angular module as well as the poster module.
+We must also add `export * from './lib/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fd-poster> component will be an exported member of the fundamental-ngx module as well as the poster module.
 
 ## Step6: Generating necessary files in documentation folder
 
