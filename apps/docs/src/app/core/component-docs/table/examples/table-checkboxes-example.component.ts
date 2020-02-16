@@ -56,7 +56,6 @@ export class TableCheckboxesExampleComponent {
     select(row: number): void {
         if (this.tableRows[row].checked === false) {
             this.selectedRows.push(row);
-            console.log(this.tableRows);
             this.tableRows[row].checked = true;
         } else {
             this.selectedRows.splice(this.selectedRows.indexOf(row), 1);
