@@ -99,22 +99,8 @@ export class ButtonGroupDocsComponent implements OnInit {
     defaultToggleHtml: ExampleFile[] = [
         {
             language: 'html',
-<<<<<<< HEAD
-<<<<<<< HEAD
             code: buttonGroupToggleExample,
             fileName: 'button-group-toggle-example',
-=======
-            code: buttonGroupSwitchExample,
-            fileName: 'button-group-switch-example',
-            component: 'ButtonGroupSwitchExampleComponent',
-            typescriptFileCode: buttonGroupSwitchExampleTs,
->>>>>>> change naming
-=======
-            code: buttonGroupToggleExample,
-            fileName: 'button-group-toggle-example',
-            component: 'ButtonGroupToggleExampleComponent',
-            typescriptFileCode: buttonGroupToggleExampleTs,
->>>>>>> remove unecessary files
         }
     ];
 

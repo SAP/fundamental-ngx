@@ -34,16 +34,10 @@ export class SwitchDocsComponent implements OnInit {
                     },
                     checked: {
                         type: 'boolean'
-                    }
-                }
-            },
-            modifier: {
-                type: 'object',
-                properties: {
-                    size: {
-                        type: 'string',
-                        enum: ['default', 'xs', 's', 'l']
-                    }
+                    },
+                    compact: {
+                        type: 'boolean'
+                    },
                 }
             }
         },
@@ -55,11 +49,9 @@ export class SwitchDocsComponent implements OnInit {
     data: any = {
         properties: {
             disabled: false,
-            checked: false
+            checked: false,
+            compact: true
         },
-        modifier: {
-            size: 'default'
-        }
     };
 
     switchSize: ExampleFile[] = [
