@@ -51,8 +51,9 @@ export class BreadcrumbComponent implements AfterContentInit {
     containerElement: HTMLElement;
 
     /**
-     * This boolean should be set to 'true' when the breadcrumbs are to be used in RTL mode. This is required to correctly
-     * set the position of the popover body.
+     * TODO: investigate if this input is needed or if RTL should be inferred from browser language settings or parent dir="rtl"
+     * This is used to position the popover body in RTL mode.
+     * @hidden
      */
     @Input()
     rtl: boolean = false;
