@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { RtlService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'component-example',
@@ -16,6 +17,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
         </div>
     `,
     styleUrls: ['./component-example.component.scss'],
+    providers: [RtlService],
     encapsulation: ViewEncapsulation.None
 })
 export class ComponentExampleComponent implements OnInit {
