@@ -13,7 +13,7 @@ export class PanelDocsComponent {
 
     panelBasic: ExampleFile[] = [{
         language: 'html',
-        component: 'PanelExampleComponent',
+        fileName: 'panel-example',
         code: panelSrc,
     }];
 

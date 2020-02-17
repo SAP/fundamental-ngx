@@ -177,7 +177,7 @@ import { Component } from '@angular/core';
         };
 
         if (file.scssFileCode) {
-            generatedFile.html = {
+            generatedFile.scss = {
                 path: this.getFilePath(file.fileName, 'scss'),
                 code: file.scssFileCode ? file.scssFileCode.default : ''
             };
