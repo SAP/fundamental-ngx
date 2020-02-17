@@ -18,10 +18,14 @@ export default {
     ]
 };
 
+const ariaLabelConst: string = 'Optioanl Label';
+
 export const Switch = () => ({
     template:
         `
         <fd-switch 
+            id="sb-switch-1"
+            [ariaLabel]="optionalText"
             [(ngModel)]="switchValue1" 
             [optionalText]="optionalText"
             [semantic]="semantic"
@@ -30,10 +34,11 @@ export const Switch = () => ({
         </fd-switch>
   `,
     props: {
-        switchValue1: boolean('switch 1', false),
-        optionalText: boolean('optionalText', false),
-        semantic: boolean('semantic', false),
-        disabled: boolean('disabled', false),
-        compact: boolean('compact', false),
+        switchValue1: boolean('Switched', false),
+        ariaLabel: text('Aria Label', ariaLabelConst),
+        optionalText: boolean('Optional Text', false),
+        semantic: boolean('Semantic Design', false),
+        disabled: boolean('Disabled', false),
+        compact: boolean('Compact Mode', false),
     }
 });
