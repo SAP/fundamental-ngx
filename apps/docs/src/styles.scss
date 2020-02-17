@@ -78,6 +78,28 @@ fd-card {
     width: 95%;
 }
 
+.fd-scroll-spy-example-icon-class {
+    position: relative;
+    display: inline-block;
+    @at-root {
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            transform: rotate(180deg);
+            bottom: 2px;
+        }
+    }
+}
+
+.middle-marker-container {
+    @at-root {
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            right: initial !important;
+            left: 0 !important;
+        }
+    }
+}
+
 pre {
     margin: 0;
     white-space: pre-wrap;
