@@ -8,7 +8,6 @@ import * as popoverProgrammaticScssSrc from '!raw-loader!./examples/popover-prog
 import * as popoverProgrammaticTsSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.ts';
 import * as popoverPlacementHtmlSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.html';
 import * as popoverPlacementTsSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.ts';
-import * as popoverPlacementScssSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.scss';
 import * as popoverModalHtmlSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.html';
 import * as popoverModalTsSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.ts';
 import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.html';
@@ -16,7 +15,7 @@ import * as popoverFillSrcTs from '!raw-loader!./examples/popover-c-fill/popover
 import * as popoverDynamicHSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.html';
 import * as popoverDynamicTSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.ts';
 import * as dropdownPopoverHtml from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.html';
-import * as dropdownPopoverTs from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.ts';
+import * as dropdownPopoverTs from '!raw-loader!./examples/popover-dropdown/popover-dropdown-example.component.ts';
 import * as dropdownPopoverScss from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -56,7 +55,6 @@ export class PopoverDocsComponent implements OnInit {
             language: 'html',
             code: popoverPlacementHtmlSrc,
             fileName: 'popover-placement-example',
-            scssFileCode: popoverPlacementScssSrc
         },
         {
             language: 'typescript',
@@ -109,23 +107,19 @@ export class PopoverDocsComponent implements OnInit {
             language: 'html',
             code: dropdownPopoverHtml,
             fileName: 'popover-dropdown',
-            typescriptFileCode: dropdownPopoverTs,
-            component: 'PopoverDropdownComponent',
             scssFileCode: dropdownPopoverScss
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: dropdownPopoverTs,
-            fileName: 'popover-dropdown',
+            fileName: 'popover-dropdown-example',
             typescriptFileCode: dropdownPopoverTs,
-            component: 'PopoverDropdownComponent',
-            scssFileCode: dropdownPopoverScss
+            component: 'PopoverDropdownExampleComponent',
         },
         {
             language: 'scss',
             code: dropdownPopoverScss,
             fileName: 'popover-dropdown',
-            typescriptFileCode: dropdownPopoverTs,
             component: 'PopoverDropdownComponent',
             scssFileCode: dropdownPopoverScss
         }

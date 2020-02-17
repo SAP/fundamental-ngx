@@ -8,8 +8,6 @@ import * as formGroupInputHtml from '!raw-loader!./examples/textarea-form-group-
 import * as formGroupInputScss from '!raw-loader!./examples/textarea-form-group-example.component.scss';
 import * as formGroupInputTs from '!raw-loader!./examples/textarea-form-group-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-input',
@@ -21,9 +19,6 @@ export class TextareaDocsComponent implements OnInit {
             language: 'html',
             code: formHtml,
             fileName: 'textarea-example',
-            secondFile: 'textarea-examples',
-            typescriptFileCode: textareaTscode,
-            component: 'TextareaExampleComponent'
         }
     ];
 
@@ -32,9 +27,6 @@ export class TextareaDocsComponent implements OnInit {
             language: 'html',
             code: formInlineHelpHtml,
             fileName: 'textarea-inline-help-example',
-            secondFile: 'textarea-examples',
-            typescriptFileCode: textareaTscode,
-            component: 'TextareaInlineHelpExampleComponent'
         }
     ];
 
@@ -43,9 +35,6 @@ export class TextareaDocsComponent implements OnInit {
             language: 'html',
             code: formStateHtml,
             fileName: 'textarea-state-example',
-            secondFile: 'textarea-examples',
-            typescriptFileCode: textareaTscode,
-            component: 'TextareaStateExampleComponent'
         }
     ];
 

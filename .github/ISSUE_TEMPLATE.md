@@ -2,7 +2,7 @@
 
 #### Briefly describe your proposal.
 
-#### Which versions of Angular and Fundamental NGX are affected? (If this is a feature request, use current version.)
+#### Which versions of Angular and Fundamental Library for Angular are affected? (If this is a feature request, use current version.)
 
 #### If this is a bug, please provide steps for reproducing it.
 

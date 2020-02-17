@@ -1,4 +1,4 @@
-# Fundamental NGX
+# Fundamental Library for Angular
 
 ## Content
 * [1. Description](#1)
@@ -26,9 +26,9 @@ which are driven by application requirements and to provide higher abstraction f
 
 ## <a name="2"></a>2. Requirements
 
-To download and use Fundamental NGX, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental NGX is intended for use with Angular 7 or newer.
+Fundamental Library for Angular is intended for use with Angular 8 or newer.
 
 Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 

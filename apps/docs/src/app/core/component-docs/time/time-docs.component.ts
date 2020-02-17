@@ -134,7 +134,7 @@ export class TimeDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: timeI18nSrc,
-            fileName: 'time-i18n-example.component.ts',
+            fileName: 'time-i18n-example',
             component: 'TimeI18nExampleComponent'
         }
     ];

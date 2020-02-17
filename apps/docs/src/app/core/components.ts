@@ -164,11 +164,11 @@ import { TimePickerOnlyHoursExampleComponent } from '../core/component-docs/time
 
 
 import { TimePickerFormExampleComponent } from '../core/component-docs/time-picker/examples/time-picker-form-example.component';
-import { ToggleDocsComponent } from '../core/component-docs/toggle/toggle-docs.component';
-import { ToggleSizesExampleComponent } from '../core/component-docs/toggle/examples/toggle-sizes-example/toggle-sizes-example.component';
-import { DisabledToggleExampleComponent } from '../core/component-docs/toggle/examples/disabled-toggle-example/disabled-toggle-example.component';
-import { ToggleBindingExampleComponent } from '../core/component-docs/toggle/examples/toggle-binding-example/toggle-binding-example.component';
-import { ToggleFormsExampleComponent } from '../core/component-docs/toggle/examples/toggle-form-example/toggle-forms-example.component';
+import { SwitchDocsComponent } from '../core/component-docs/switch/switch-docs.component';
+import { SwitchSizesExampleComponent } from '../core/component-docs/switch/examples/switch-sizes-example/switch-sizes-example.component';
+import { DisabledSwitchExampleComponent } from '../core/component-docs/switch/examples/disabled-switch-example/disabled-switch-example.component';
+import { SwitchBindingExampleComponent } from '../core/component-docs/switch/examples/switch-binding-example/switch-binding-example.component';
+import { SwitchFormsExampleComponent } from '../core/component-docs/switch/examples/switch-form-example/switch-forms-example.component';
 import { ListInfiniteScrollExampleComponent } from '../core/component-docs/list/examples/list-infinite-scroll-example.component';
 import { ListCheckboxFormExampleComponent } from '../core/component-docs/list/examples/list-checkbox-form-example.component';
 import { DropdownInfiniteScrollExampleComponent } from '../core/component-docs/dropdown/examples/dropdown-infinite-scroll-example.component';
@@ -187,6 +187,11 @@ import { FileInputDragDisabledExampleComponent } from '../core/component-docs/fi
 import { FileInputMaxExampleComponent } from '../core/component-docs/file-input/examples/file-input-max-example/file-input-max-example.component';
 import { TokenDocsComponent } from '../core/component-docs/token/token-docs.component';
 import { TokenExampleComponent } from '../core/component-docs/token/examples/token-example/token-example.component';
+import { TokenizerExampleComponent } from '../core/component-docs/token/examples/tokenizer-example/tokenizer-example.component';
+import { TokenizerCompactExampleComponent } from './component-docs/token/examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenSelectedExampleComponent } from '../core/component-docs/token/examples/token-selected-example/token-selected-example.component';
+import { TokenCompactExampleComponent } from '../core/component-docs/token/examples/token-compact-example/token-compact-example.component';
+import { TokenReadOnlyExampleComponent } from '../core/component-docs/token/examples/token-readonly-example/token-readonly-example.component';
 import { DatetimePickerDocsComponent } from '../core/component-docs/datetime-picker/datetime-picker-docs.component';
 import { DatetimeExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-example/datetime-example.component';
 import { DatetimeNonMeridianExampleComponent } from '../core/component-docs/datetime-picker/examples/datetime-non-meridian-example/datetime-non-meridian-example.component';
@@ -249,7 +254,7 @@ import { TabsHeaderComponent } from '../core/component-docs/tabs/tabs-header/tab
 import { TileDocsHeaderComponent } from '../core/component-docs/tile/tile-docs-header/tile-docs-header.component';
 import { TimeHeaderComponent } from '../core/component-docs/time/time-header/time-header.component';
 import { TimePickerHeaderComponent } from '../core/component-docs/time-picker/time-picker-header/time-picker-header.component';
-import { ToggleHeaderComponent } from '../core/component-docs/toggle/toggle-header/toggle-header.component';
+import { SwitchHeaderComponent } from '../core/component-docs/switch/switch-header/switch-header.component';
 import { TokenHeaderComponent } from '../core/component-docs/token/token-header/token-header.component';
 import { TreeHeaderComponent } from '../core/component-docs/tree/tree-header/tree-header.component';
 import { ComplexTitleExampleComponent } from '../core/component-docs/tabs/examples/complex-title-example/complex-title-example.component';
@@ -391,9 +396,9 @@ import { SideNavigationMultipleSelectedExampleComponent } from './component-docs
 import { ShellbarSideNavExampleComponent } from './component-docs/shellbar/examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import { DatePickerComplexI18nExampleComponent } from './component-docs/date-picker/examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import { DatetimePickerComplexI18nExampleComponent } from './component-docs/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
-import { PopoverDropdownComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown.component';
+import { PopoverDropdownExampleComponent } from './component-docs/popover/examples/popover-dropdown/popover-dropdown-example.component';
 import { SelectTypesExampleComponent } from './component-docs/select/examples/select-types-example/select-types-example.component';
-import { SemanticToggleExampleComponent } from './component-docs/toggle/examples/semantic-toggle-example/semantic-toggle-example.component';
+import { SemanticSwitchExampleComponent } from './component-docs/switch/examples/semantic-switch-example/semantic-switch-example.component';
 import { InputGroupStatesExampleComponent } from './component-docs/input-group/examples/input-group-states-example/input-group-states-example.component';
 import { InputGroupNumberExampleComponent } from './component-docs/input-group/examples/input-group-number-example/input-group-number-example.component';
 import { InputGroupSearchExampleComponent } from './component-docs/input-group/examples/input-group-search-example/input-group-search-example.component';
@@ -405,6 +410,11 @@ import { TabSelectionExampleComponent } from './component-docs/tabs/examples/tab
 import { LinkExampleComponent } from './component-docs/link/examples/link-example.component';
 import { LinkDocsComponent } from './component-docs/link/link-docs.component';
 import { LinkHeaderComponent } from './component-docs/link/link-header/link-header.component';
+import { TabIconOnlyExampleComponent } from './component-docs/tabs/examples/tab-icon-only-example/tab-icon-only-example.component';
+import { TabProcessExampleComponent } from './component-docs/tabs/examples/tab-process-example/tab-process-example.component';
+import { TabFilterExampleComponent } from './component-docs/tabs/examples/tab-filter-example/tab-filter-example.component';
+import { TabCounterComponent } from './component-docs/tabs/examples/tab-counter/tab-counter.component';
+import { NotificationOptionsContentComponent } from './component-docs/notification/examples/notification-options/notification-options-content.component';
 
 export const declarations = [
     ActionBarDocsComponent,
@@ -448,7 +458,7 @@ export const declarations = [
     TimeDocsComponent,
     TimePickerDocsComponent,
     CoreDocumentationComponent,
-    ToggleDocsComponent,
+    SwitchDocsComponent,
     HomeDocsComponent,
     NewComponentComponent,
     ActionBarBackExampleComponent,
@@ -492,6 +502,7 @@ export const declarations = [
     CalendarFormExamplesComponent,
     CalendarProgrammaticallyChangeExampleComponent,
     checkboxExampleComponents,
+    TabIconOnlyExampleComponent,
     DatePickerRangeExampleComponent,
     DatePickerSingleExampleComponent,
     DatePickerAllowNullExampleComponent,
@@ -664,13 +675,18 @@ export const declarations = [
     LocalizationEditorTemplateExampleComponent,
     LocalizationEditorTextareaExampleComponent,
     LocalizationEditorFormsExampleComponent,
-    ToggleSizesExampleComponent,
-    DisabledToggleExampleComponent,
-    ToggleBindingExampleComponent,
-    ToggleFormsExampleComponent,
-    SemanticToggleExampleComponent,
+    SwitchSizesExampleComponent,
+    DisabledSwitchExampleComponent,
+    SwitchBindingExampleComponent,
+    SwitchFormsExampleComponent,
+    SemanticSwitchExampleComponent,
     TokenDocsComponent,
     TokenExampleComponent,
+    TokenizerExampleComponent,
+    TokenizerCompactExampleComponent,
+    TokenSelectedExampleComponent,
+    TokenReadOnlyExampleComponent,
+    TokenCompactExampleComponent,
     MultiInputAsyncExampleComponent,
     MultiInputFilterExampleComponent,
     MultiInputDisplaywithExampleComponent,
@@ -720,7 +736,7 @@ export const declarations = [
     TileDocsHeaderComponent,
     TimeHeaderComponent,
     TimePickerHeaderComponent,
-    ToggleHeaderComponent,
+    SwitchHeaderComponent,
     TokenHeaderComponent,
     TreeHeaderComponent,
     ComplexTitleExampleComponent,
@@ -760,14 +776,20 @@ export const declarations = [
     NotificationContentComponent,
     DatePickerComplexI18nExampleComponent,
     DatetimePickerComplexI18nExampleComponent,
-    PopoverDropdownComponent,
+    PopoverDropdownExampleComponent,
     InputGroupStatesExampleComponent,
     DatePickerRangeDisabledExampleComponent,
     DatePickerDisableFuncExampleComponent,
     TimeTwoDigitsExampleComponent,
+    TabProcessExampleComponent,
+    TabFilterExampleComponent,
+    TabCounterComponent,
+    TabProcessExampleComponent,
+    TimeTwoDigitsExampleComponent,
     LinkExampleComponent,
     LinkDocsComponent,
-    LinkHeaderComponent
+    LinkHeaderComponent,
+    NotificationOptionsContentComponent
 ]
 
 export const entryComponents = [

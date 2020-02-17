@@ -1,7 +1,12 @@
 <table fd-table>
     <thead fd-table-header>
         <tr fd-table-row>
-            <th fd-table-cell><input type="checkbox" [checked]="allSelected" (change)="selectMaster()"/></th>
+            <th fd-table-cell>
+                <fd-checkbox [compact]="true"
+                             label="Select all"
+                             [(ngModel)]="selectMasterModel"
+                             (click)="selectMaster()"></fd-checkbox>
+            </th>
             <th fd-table-cell>Column 1</th>
             <th fd-table-cell>Column 2</th>
             <th fd-table-cell>Column 3</th>
@@ -12,7 +17,10 @@
     <tbody fd-table-body>
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row>
             <td fd-table-cell>
-                <input type="checkbox" [checked]="row.checked" (change)="select($event, i)"/>
+                <fd-checkbox [compact]="true"
+                             [ngModel]="tableRows[i].checked"
+                             (ngModelChange)="select(i)"
+                             label="Option {{ i }}"></fd-checkbox>
             </td>
             <td fd-table-cell>{{row.column1}}</td>
             <td fd-table-cell>{{row.column2}}</td>

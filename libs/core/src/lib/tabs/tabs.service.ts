@@ -7,24 +7,27 @@ import { Subject } from 'rxjs';
 export class TabsService {
 
     /** Event is thrown always when tab is selected by keyboard actions */
-    public tabSelected = new Subject<number>();
+    readonly tabSelected: Subject<number> = new Subject<number>();
+
+    /** Event is thrown always, when some property is changed */
+    readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
 
     /** @hidden */
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {
         switch (event.key) {
             case ('ArrowLeft'): {
                 if (index - 1 >= 0) {
-                    this.getTabLinkFromIndex(index - 1, elements).focus();
+                    this._getTabLinkFromIndex(index - 1, elements).focus();
                 } else {
-                    this.getTabLinkFromIndex(elements.length - 1, elements).focus();
+                    this._getTabLinkFromIndex(elements.length - 1, elements).focus();
                 }
                 break;
             }
             case ('ArrowRight'): {
                 if (index + 1 < elements.length) {
-                    this.getTabLinkFromIndex(index + 1, elements).focus();
+                    this._getTabLinkFromIndex(index + 1, elements).focus();
                 } else {
-                    this.getTabLinkFromIndex(0, elements).focus();
+                    this._getTabLinkFromIndex(0, elements).focus();
                 }
                 break;
             }
@@ -40,7 +43,7 @@ export class TabsService {
     }
 
     /** @hidden */
-    private getTabLinkFromIndex(index: number, elements: HTMLElement[]): HTMLElement {
+    private _getTabLinkFromIndex(index: number, elements: HTMLElement[]): HTMLElement {
         return elements[index];
     }
 }

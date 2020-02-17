@@ -3,7 +3,13 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-split-button-programmatical-example',
     templateUrl: './split-button-programmatical-example.component.html',
-    styleUrls: ['./split-button-examples.component.scss']
+    styles: [
+        `
+            fd-split-button {
+                margin-right: 12px;
+            }
+        `
+    ]
 })
 export class ButtonSplitProgrammaticalExampleComponent {
     isOpen: boolean = false;

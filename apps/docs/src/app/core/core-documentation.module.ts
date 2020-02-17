@@ -5,9 +5,12 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ROUTES } from './core-documentation.routes';
 import { declarations, entryComponents } from './components';
 import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
+import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 
 @NgModule({
-    declarations: declarations,
+    declarations: [
+        declarations,
+    ],
 
     entryComponents: entryComponents,
     imports: [
@@ -16,7 +19,8 @@ import { SharedDocumentationModule } from '../documentation/shared-documentation
         RouterModule.forChild(ROUTES)
     ],
     providers: [
-        { provide: 'CURRENT_LIB', useValue: 'core' }
+        { provide: 'CURRENT_LIB', useValue: 'core' },
+        StackblitzService
     ]
 })
 export class CoreDocumentationModule { }

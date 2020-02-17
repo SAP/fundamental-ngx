@@ -2,6 +2,131 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.54"></a>
+# [0.14.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.53...v0.14.0-rc.54) (2020-02-17)
+
+
+
+<a name="0.14.0-rc.53"></a>
+# [0.14.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.52...v0.14.0-rc.53) (2020-02-17)
+
+
+### Features
+
+* rename and migrate toggle to switch component ([#1889](https://github.com/SAP/fundamental-ngx/issues/1889)) ([d3d98ea](https://github.com/SAP/fundamental-ngx/commit/d3d98ea))
+
+
+
+<a name="0.14.0-rc.52"></a>
+# [0.14.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.51...v0.14.0-rc.52) (2020-02-17)
+
+
+
+<a name="0.14.0-rc.51"></a>
+# [0.14.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.50...v0.14.0-rc.51) (2020-02-17)
+
+
+### Bug Fixes
+
+* rtl service added ([#1982](https://github.com/SAP/fundamental-ngx/issues/1982)) ([7b9f76f](https://github.com/SAP/fundamental-ngx/commit/7b9f76f))
+
+
+
+<a name="0.14.0-rc.50"></a>
+# [0.14.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.49...v0.14.0-rc.50) (2020-02-17)
+
+
+
+<a name="0.14.0-rc.49"></a>
+# [0.14.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.48...v0.14.0-rc.49) (2020-02-17)
+
+
+
+<a name="0.14.0-rc.48"></a>
+# [0.14.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.47...v0.14.0-rc.48) (2020-02-17)
+
+
+
+<a name="0.14.0-rc.47"></a>
+# [0.14.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.46...v0.14.0-rc.47) (2020-02-16)
+
+
+
+<a name="0.14.0-rc.46"></a>
+# [0.14.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.45...v0.14.0-rc.46) (2020-02-16)
+
+
+
+<a name="0.14.0-rc.45"></a>
+# [0.14.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.44...v0.14.0-rc.45) (2020-02-15)
+
+
+
+<a name="0.14.0-rc.44"></a>
+# [0.14.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.43...v0.14.0-rc.44) (2020-02-14)
+
+
+
+<a name="0.14.0-rc.43"></a>
+# [0.14.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.42...v0.14.0-rc.43) (2020-02-14)
+
+
+
+<a name="0.14.0-rc.42"></a>
+# [0.14.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.41...v0.14.0-rc.42) (2020-02-14)
+
+
+
+<a name="0.14.0-rc.41"></a>
+# [0.14.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.40...v0.14.0-rc.41) (2020-02-13)
+
+
+### Bug Fixes
+
+* (platform) Link component documentation and template structure change ([#1942](https://github.com/SAP/fundamental-ngx/issues/1942)) ([1aceb21](https://github.com/SAP/fundamental-ngx/commit/1aceb21))
+
+
+
+<a name="0.14.0-rc.40"></a>
+# [0.14.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.39...v0.14.0-rc.40) (2020-02-13)
+
+
+### Bug Fixes
+
+* Speed up netlify builds ([#1941](https://github.com/SAP/fundamental-ngx/issues/1941)) ([055b97e](https://github.com/SAP/fundamental-ngx/commit/055b97e))
+
+
+
+<a name="0.14.0-rc.39"></a>
+# [0.14.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.38...v0.14.0-rc.39) (2020-02-12)
+
+
+
+<a name="0.14.0-rc.38"></a>
+# [0.14.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.37...v0.14.0-rc.38) (2020-02-12)
+
+
+### Features
+
+* adjust Tabs to newest 0.5.0 fundamental-styles structure ([#1871](https://github.com/SAP/fundamental-ngx/issues/1871)) ([8ed7073](https://github.com/SAP/fundamental-ngx/commit/8ed7073))
+
+
+
+<a name="0.14.0-rc.37"></a>
+# [0.14.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.36...v0.14.0-rc.37) (2020-02-12)
+
+
+
+<a name="0.14.0-rc.36"></a>
+# [0.14.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.35...v0.14.0-rc.36) (2020-02-11)
+
+
+### Bug Fixes
+
+* token and tokenizer implementation of 0.5.0 ([#1878](https://github.com/SAP/fundamental-ngx/issues/1878)) ([dd2e8ad](https://github.com/SAP/fundamental-ngx/commit/dd2e8ad))
+
+
+
 <a name="0.14.0-rc.35"></a>
 # [0.14.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.34...v0.14.0-rc.35) (2020-02-11)
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -14,8 +14,6 @@ import * as buttonSplitOptionsExample from '!raw-loader!./examples/split-button-
 import * as buttonSplitIcons from '!raw-loader!./examples/split-button-icons-example.component.html';
 import * as buttonSplitTemplateExample from '!raw-loader!./examples/split-button-template-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-split-button',
@@ -39,10 +37,8 @@ export class SplitButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonTypesExample,
             fileName: 'split-button-types-example',
-            secondFile: 'split-button-examples',
             typescriptFileCode: buttonTypesExampleTs,
             component: 'ButtonSplitTypesExampleComponent',
-            scssFileCode: splitButtonScsscode,
         }
     ];
 
@@ -51,10 +47,8 @@ export class SplitButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonSplitProgrammaticalyExample,
             fileName: 'split-button-programmatical-example',
-            secondFile: 'split-button-examples',
             typescriptFileCode: buttonSplitProgrammaticalyExampleTs,
             component: 'ButtonSplitProgrammaticalExampleComponent',
-            scssFileCode: splitButtonScsscode,
         }
     ];
 
@@ -63,10 +57,8 @@ export class SplitButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonSplitTemplateExample,
             fileName: 'split-button-template-example',
-            secondFile: 'split-button-examples',
             typescriptFileCode: buttonSplitTemplateExampleTs,
             component: 'ButtonSplitTemplateExampleComponent',
-            scssFileCode: splitButtonScsscode,
         }
     ];
 
@@ -75,10 +67,8 @@ export class SplitButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonSplitOptionsExample,
             fileName: 'split-button-options-example',
-            secondFile: 'split-button-examples',
             typescriptFileCode: buttonSplitOptionsExampleTs,
             component: 'ButtonSplitOptionsExampleComponent',
-            scssFileCode: splitButtonScsscode,
         }
     ];
 
@@ -87,10 +77,8 @@ export class SplitButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonSplitIcons,
             fileName: 'split-button-icons-example',
-            secondFile: 'split-button-examples',
             typescriptFileCode: buttonSplitIconsTs,
             component: 'ButtonSplitTypesIconsComponent',
-            scssFileCode: splitButtonScsscode,
         }
     ];
 

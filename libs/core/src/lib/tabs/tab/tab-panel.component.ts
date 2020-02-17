@@ -1,5 +1,17 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
+    Input,
+    OnChanges, Optional,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
+import { TabItemState } from '../tab-item/tab-item.directive';
+import { TabsService } from '../tabs.service';
 
 let tabPanelUniqueId: number = 0;
 
@@ -16,17 +28,26 @@ let tabPanelUniqueId: number = 0;
         '[attr.aria-expanded]': 'expanded ? true : null',
         '[class.is-expanded]': 'expanded'
     },
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabPanelComponent {
+export class TabPanelComponent implements OnChanges {
 
     /** @hidden */
     @ContentChild(TabTitleDirective, { read: TemplateRef, static: false })
     titleTemplate: TemplateRef<any>;
 
-    /** The title of the tab header. */
+    /** Id of the tab. If none is provided, one will be generated. */
     @Input()
-    title: string;
+    id: string = 'fd-tab-panel' + tabPanelUniqueId++;
+
+    /** @hidden
+     * Flag to inform if body for this tab should be displayed
+     */
+    expanded: boolean = false;
+
+    /** @hidden */
+    index: number;
 
     /** Aria-label of the tab. Also applied to the tab header. */
     @Input()
@@ -36,17 +57,46 @@ export class TabPanelComponent {
     @Input()
     ariaLabelledBy: string;
 
-    /** Whether the tab is disabled. */
+    /** The title of tab, depending on mode used, it will be placed in different position */
     @Input()
-    disabled: boolean;
+    title: string;
 
-    /** Id of the tab. If none is provided, one will be generated. */
+    /** The count of tab, depending on mode used, it will be placed in different position */
     @Input()
-    id: string = 'fd-tab-panel' + tabPanelUniqueId++;
+    count: string;
+
+    /** Glyph icon, it can be used only on  */
+    @Input()
+    glyph: string;
+
+    /** Glyph icon, it can be used only on  */
+    @Input()
+    header: boolean = false;
+
+    /** Semantic type of the tab item */
+    @Input()
+    tabState: TabItemState;
 
     /** @hidden */
-    expanded = false;
+    constructor(
+        private _changeDetRef: ChangeDetectorRef,
+        @Optional() private _tabsService: TabsService
+    ) {}
 
-    /** @hidden */
-    index: number;
+    /** @hidden
+     * Thanks to OnPush change strategy detection on tab-list parent component,
+     * every change of any property should be reported.
+     */
+    public ngOnChanges(): void {
+        if (this._tabsService) {
+            this._tabsService.tabPanelPropertyChanged.next();
+        }
+    }
+
+    /** @hidden
+     * Method to change the state of expanded flag */
+    triggerExpandedPanel(expanded: boolean): void {
+        this.expanded = expanded;
+        this._changeDetRef.detectChanges();
+    }
 }

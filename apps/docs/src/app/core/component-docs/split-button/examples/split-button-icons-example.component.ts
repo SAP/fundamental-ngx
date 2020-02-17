@@ -3,7 +3,13 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-split-button-icons-example',
     templateUrl: './split-button-icons-example.component.html',
-    styleUrls: ['./split-button-examples.component.scss']
+    styles: [
+        `
+            fd-split-button {
+                margin-right: 12px;
+            }
+        `
+    ]
 })
 export class ButtonSplitTypesIconsComponent {
     itemClicked() {

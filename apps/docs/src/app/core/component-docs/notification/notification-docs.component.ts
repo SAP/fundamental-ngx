@@ -4,6 +4,7 @@ import * as componentAsContentTs from '!raw-loader!./examples/component-as-conte
 import * as contentTs from '!raw-loader!./examples/component-as-content/notification-content.component.ts';
 import * as groupTs from '!raw-loader!./examples/group-notification/notification-group-template-example.component.ts';
 import * as groupH from '!raw-loader!./examples/group-notification/notification-group-template-example.component.html';
+import * as optionsContentTs from '!raw-loader!./examples/notification-options/notification-options-content.component.ts';
 import * as optionsTs from '!raw-loader!./examples/notification-options/notification-options-example.component.ts';
 import * as optionsH from '!raw-loader!./examples/notification-options/notification-options-example.component.html';
 import * as templateTs from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.ts';
@@ -21,57 +22,76 @@ export class NotificationDocsComponent {
         {
             language: 'typescript',
             code: componentAsContentTs,
-            name: 'Usage of Component'
+            fileName: 'notification-component-as-content-example',
+            component: 'NotificationComponentAsContentExampleComponent',
+            name: 'Usage of Component',
+            main: true
         },
         {
             language: 'typescript',
             code: contentTs,
-            name: 'Content'
+            name: 'Content',
+            fileName: 'notification-content',
+            component: 'NotificationContentComponent',
+            entryComponent: true
         }
     ];
 
     groups: ExampleFile[] = [
         {
             language: 'typescript',
-            code: groupTs
+            code: groupTs,
+            component: 'NotificationGroupTemplateExampleComponent',
+            fileName: 'notification-group-template-example'
         },
         {
             language: 'html',
-            code: groupH
+            code: groupH,
+            fileName: 'notification-group-template-example'
         }
     ];
 
     options: ExampleFile[] = [
         {
             language: 'typescript',
-            code: optionsTs
-        },
-        {
-            language: 'html',
-            code: optionsH
+            code: optionsTs,
+            fileName: 'notification-options-example',
+            component: 'NotificationOptionsExampleComponent'
         },
         {
             language: 'typescript',
-            code: contentTs,
-            name: 'Content'
+            code: optionsContentTs,
+            fileName: 'notification-options-content',
+            component: 'NotificationOptionsContentComponent',
+            entryComponent: true
+        },
+        {
+            language: 'html',
+            code: optionsH,
+            fileName: 'notification-options-example'
         }
     ];
 
     template: ExampleFile[] = [
         {
             language: 'typescript',
-            code: templateTs
+            code: templateTs,
+            component: 'NotificationOpenTemplateExampleComponent',
+            fileName: 'notification-open-template-example'
         },
         {
             language: 'html',
-            code: templateH
-        },
+            code: templateH,
+            fileName: 'notification-open-template-example'
+        }
     ];
 
     object: ExampleFile[] = [
         {
             language: 'typescript',
-            code: objectTs
+            code: objectTs,
+            component: 'NotificationAsObjectExampleComponent',
+            fileName: 'notification-component-as-object-example'
         }
     ];
 

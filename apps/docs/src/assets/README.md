@@ -1,106 +1,58 @@
-# Fundamental NGX
+# Fundamental Library for Angular
 
-[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx.core)
-[![Minified Size](https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
-[![Minzipped Size](https://badgen.net/bundlephobia/minzip/%40fundamental-ngx%2Fcore)](https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore)
-[![Build Status](https://travis-ci.org/SAP/fundamental-ngx.svg?branch=master)](https://travis-ci.org/SAP/fundamental-ngx)
-[![Coverage Status](https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=master)](https://coveralls.io/github/SAP/fundamental-ngx?branch=master)
-[![Slack](https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack)](https://ui-fundamentals.slack.com)
+## Content
+* [1. Description](#1)
+* [2. Requirements](#2)
+* [3. Known Issues](#3)
+* [4. Support](#4)
+* [5. Contributing](#5)
+* [6. License](#6)
+* [7. Similar Projects](#7)
 
-## Description
-
-The `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
+## <a name="1"></a>1. Description
 
 The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
-## API Reference
+This repository contains 2 libraries, 
 
-See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
+* [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/master/libs/core): 
+The Fundamental-ngx core provides base angular implementation of SAP Fundamental styles to offer developers a rich set of components
+they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
 
-## Requirements
+* [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/master/libs/platform):
+The Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
+which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
 
-To download and use Fundamental NGX, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental NGX is intended for use with Angular 5 or newer.
+## <a name="2"></a>2. Requirements
 
-Prior knowledge of Angular is recommended.
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-## Getting Started
+Fundamental Library for Angular is intended for use with Angular 8 or newer.
 
-For an existing Angular CLI application,
+Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
-1. **Install Fundamental-NGX.**
-
-    `ng add fundamental-ngx`
-    
-    *If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide).*
-
-3. **Import the modules you want to use.**
-
-    To add the entire library, add the following import to your main application module.
-
-    ```javascript
-    import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-    
-    @NgModule({
-        ...
-        imports: [FundamentalNgxCoreModule],
-    })
-    export class DemoModule { }
-    ```
-
-    To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
-
-    For example, to use Toggles, add the following import to your main application module.
-
-    ```javascript
-    import { ToggleModule } from '@fundamental-ngx/core';
-    
-    @NgModule({
-        ...
-        imports: [ToggleModule],
-    })
-     export class DemoModule { }
-    ```
-
-4. **Add the component to your HTML.**
-
-    ```html
-    <fd-toggle [size]="'l'" [(checked)]="checked">Large Toggle</fd-toggle>
-    ```
-
-## Tests
-
-Fundamental NGX makes use of Jasmine and Karma for its unit tests.
-
-Run `ng test fundamental-ngx`. Append `--code-coverage` to generate code coverage documentation.
-
-## Versioning
-
-The `fundamental-ngx` library follows [Semantic Versioning](https://semver.org/). These components strictly adhere to the `[MAJOR].[MINOR].[PATCH]` numbering system (also known as `[BREAKING].[FEATURE].[FIX]`).
-
-Merges to the `master` branch will be published as a prerelease. Prereleases will include an **rc** version (_e.g._ `[MAJOR].[MINOR].[PATCH]-rc.[RC]`).
-
-## Known Issues
+## <a name="3"></a>3. Known Issues
 
 Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
 
-## Support
+## <a name="4"></a>4. Support
 
 If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
 
-## Contributing
+## <a name="5"></a>5. Contributing
 
 If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/master/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/master/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
 
-## License
+## <a name="6"></a>6. License
 
 Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 This file is licensed under the Apache Software License, v.2 except as noted otherwise in the [LICENSE file](https://github.com/SAP/fundamental-ngx/blob/master/LICENSE.txt).
 
 ## Similar Projects
+## <a name="7"></a>7. Similar Projects
 
 [Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of SAP Fundamental Styles
 

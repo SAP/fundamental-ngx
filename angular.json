@@ -54,6 +54,18 @@
                                 "maximumError": "5mb"
                             }]
                         },
+                        "production-unoptimized": {
+                            "fileReplacements": [{
+                                "replace": "apps/docs/src/environments/environment.ts",
+                                "with": "apps/docs/src/environments/environment.prod.ts"
+                            }],
+                            "aot": true,
+                            "extractCss": true,
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "optimization": false
+                        },
                         "hmr": {
                             "optimization": true,
                             "outputHashing": "all",

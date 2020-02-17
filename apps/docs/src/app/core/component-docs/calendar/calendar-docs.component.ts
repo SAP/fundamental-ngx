@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
@@ -10,8 +10,6 @@ import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-examp
 import * as calendarFormSourceScss from '!raw-loader!./examples/calendar-form-example.component.scss';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-calendar',
@@ -75,6 +73,7 @@ myDisableFunction = function(d: FdDate): boolean {
             name: 'Example Block/Disable Functions'
         },
         {
+            component: 'CalendarSingleExampleComponent',
             language: 'typescript',
             fileName: 'calendar-single-example',
             code: calendarSingleSrc
@@ -122,9 +121,13 @@ myDisableFunction = function(d: FdDate): boolean {
             language: 'html',
             fileName: 'calendar-form-example',
             code: calendarFormSourceH,
-            component: 'CalendarFormExamplesComponent',
-            typescriptFileCode: calendarFormSourceT,
             scssFileCode: calendarFormSourceScss
+        },
+        {
+            language: 'typescript',
+            fileName: 'calendar-form-example',
+            code: calendarFormSourceT,
+            component: 'CalendarFormExamplesComponent',
         }
     ];
 

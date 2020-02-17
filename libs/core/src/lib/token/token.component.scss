@@ -1,21 +1,6 @@
 @import "~fundamental-styles/dist/token";
 
-.fd-token-content {
-    display: inline-block;
-}
 //temporary fix until fundamental styles introduces a disabled token
 .fd-token__disabled::after{
     cursor: not-allowed;
-}
-
-.fd-token {
-    padding-left: 0;
-    padding-right: 0;
-    &:after {
-        padding-right: 8px;
-    }
-}
-
-.fd-token-content {
-    padding-left: 8px;
 }

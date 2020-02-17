@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { PopoverModule } from '@fundamental-ngx/core';
+import { PopoverModule } from '../../popover.module';
 
 @Component({
     template: `

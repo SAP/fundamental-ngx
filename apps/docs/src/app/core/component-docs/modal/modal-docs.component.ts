@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import * as templateTs from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.ts';
 import * as templateScss from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.scss';
 import * as templateHtml from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.html';
 import * as componentAsContentSrc from '!raw-loader!./examples/component-as-content/modal-component-as-content-example.component.ts';
-import * as componentAsContentModule from '!raw-loader!./examples/component-as-content/modal-component-as-content-example.module.ts';
 import * as contentSrc from '!raw-loader!./examples/component-as-content/modal-content.component.ts';
 import * as modalInModalFirstTs from '!raw-loader!./examples/stackable-modals/modal-in-modal-first-example.component.ts';
 import * as modalInModalComponent from '!raw-loader!./examples/stackable-modals/modal-in-modal-stacked-example.component.ts';
-import * as modalInModalModule from '!raw-loader!./examples/stackable-modals/modal-in-modal-example.module.ts';
 import * as modalInModalSecondComponent from '!raw-loader!./examples/stackable-modals/modal-in-modal-second-example.component.ts';
 import * as fsModalSource from '!raw-loader!./examples/fullscreen-modal/modal-fullscreen-example.component.html';
 import * as fsModalSourceT from '!raw-loader!./examples/fullscreen-modal/modal-fullscreen-example.component.ts';
@@ -23,8 +21,6 @@ import { ModalService } from '@fundamental-ngx/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { Schema } from '../../../schema/models/schema.model';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-modal',
@@ -94,16 +90,15 @@ export class ModalDocsComponent implements OnInit {
             language: 'typescript',
             code: contentSrc,
             name: 'Modal Content',
-            secondFile: 'modal-content',
             fileName: 'modal-content',
             component: 'ModalContentComponent',
-            imports: `import { ModalContentComponent } from './modal-content.component';`,
-            entryComponent: 'ModalContentComponent, ModalComponentAsContentExampleComponent',
-            declarationArray: 'ModalContentComponent'
+            entryComponent: true,
         },
         {
             language: 'typescript',
             code: componentAsContentSrc,
+            entryComponent: true,
+            main: true,
             fileName: 'modal-component-as-content-example',
             component: 'ModalComponentAsContentExampleComponent',
         },
@@ -115,27 +110,24 @@ export class ModalDocsComponent implements OnInit {
             language: 'typescript',
             code: modalInModalSecondComponent,
             name: 'Second Modal',
-            thirdFile: 'modal-in-modal-second-example',
             fileName: 'modal-in-modal-second-example',
             component: 'ModalInModalSecondComponent',
-            imports: `import { ModalInModalFirstComponent } from './modal-in-modal-first-example.component';
-            import { ModalInModalSecondComponent } from './modal-in-modal-second-example.component';`,
-            declarationArray: 'ModalInModalComponent, ModalInModalFirstComponent,ModalInModalSecondComponent',
-            entryComponent: 'ModalInModalComponent, ModalInModalFirstComponent, ModalInModalSecondComponent'
+            entryComponent: true
         },
         {
             language: 'typescript',
             code: modalInModalFirstTs,
             name: 'First Modal',
-            secondFile: 'modal-in-modal-first-example',
             fileName: 'modal-in-modal-first-example',
-            component: 'ModalInModalFirstComponent'
+            component: 'ModalInModalFirstComponent',
+            entryComponent: true
         },
         {
             language: 'typescript',
             code: modalInModalComponent,
             fileName: 'modal-in-modal-stacked-example',
-            component: 'ModalInModalComponent'
+            component: 'ModalInModalComponent',
+            main: true
         },
     ];
 
@@ -199,7 +191,6 @@ export class ModalDocsComponent implements OnInit {
     constructor(
         private schemaFactory: SchemaFactoryService,
         private modalService: ModalService,
-        private route: ActivatedRoute
     ) {
         this.schema = this.schemaFactory.getComponent('modal');
     }

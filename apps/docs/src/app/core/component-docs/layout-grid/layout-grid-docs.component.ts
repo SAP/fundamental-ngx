@@ -18,45 +18,30 @@ export class LayoutGridDocsComponent {
         language: 'html',
         code: layoutGapSrc,
         fileName: 'layout-grid-gap-size-example',
-        secondFile: 'layout-grid-examples',
-        typescriptFileCode: layoutGridTsCode,
-        component: 'LayoutGridGapSizeExample'
     }];
 
     defaultLayoutGrid: ExampleFile[] = [{
         language: 'html',
         code: layoutGridSrc,
         fileName: 'layout-grid-example',
-        secondFile: 'layout-grid-examples',
-        typescriptFileCode: layoutGridTsCode,
-        component: 'LayoutGridExampleComponent'
     }];
 
     noGapLayoutGrid: ExampleFile[] = [{
         language: 'html',
         code: layoutGridNoGapSrc,
         fileName: 'layout-grid-nogap-example',
-        secondFile: 'layout-grid-examples',
-        typescriptFileCode: layoutGridTsCode,
-        component: 'LayoutGridNoGapExampleComponent'
     }];
 
     twoColumnsLayoutGrid: ExampleFile[] = [{
         language: 'html',
         code: layoutGridColumnsSrc,
         fileName: 'layout-grid-columns-example',
-        secondFile: 'layout-grid-examples',
-        typescriptFileCode: layoutGridTsCode,
-        component: 'LayoutColumnsExampleComponent'
     }];
 
     columnSpanLayoutGrid: ExampleFile[] = [{
         language: 'html',
         code: layoutGridRowColumnSrc,
         fileName: 'layout-grid-column-span-example',
-        secondFile: 'layout-grid-examples',
-        typescriptFileCode: layoutGridTsCode,
-        component: 'LayoutGridColumnSpanExampleComponent'
     }];
 
 }

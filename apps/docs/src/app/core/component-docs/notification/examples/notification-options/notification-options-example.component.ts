@@ -4,8 +4,9 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { NotificationContentComponent } from '../component-as-content/notification-content.component';
 import { NotificationService } from '@fundamental-ngx/core';
+import { NotificationOptionsContentComponent } from './notification-options-content.component';
+
 
 @Component({
     selector: 'fd-notification-options-example',
@@ -38,39 +39,39 @@ export class NotificationOptionsExampleComponent {
 
         this.ref.clear();
 
-        this.notificationService.open(NotificationContentComponent, {
+        this.notificationService.open(NotificationOptionsContentComponent, {
             size: 's',
             type: 'success',
             data: this.data,
             container: this.ref.element.nativeElement
         });
 
-        this.notificationService.open(NotificationContentComponent, {
+        this.notificationService.open(NotificationOptionsContentComponent, {
             size: 'm',
             type: 'success',
             data: this.data,
             container: this.ref.element.nativeElement
         });
 
-        this.notificationService.open(NotificationContentComponent, {
+        this.notificationService.open(NotificationOptionsContentComponent, {
             type: 'success',
             data: this.data,
             container: this.ref.element.nativeElement
         });
 
-        this.notificationService.open(NotificationContentComponent, {
+        this.notificationService.open(NotificationOptionsContentComponent, {
             type: 'warning',
             data: this.data,
             container: this.ref.element.nativeElement
         });
 
-        this.notificationService.open(NotificationContentComponent, {
+        this.notificationService.open(NotificationOptionsContentComponent, {
             type: 'error',
             data: this.data,
             container: this.ref.element.nativeElement
         });
 
-        this.notificationService.open(NotificationContentComponent, {
+        this.notificationService.open(NotificationOptionsContentComponent, {
             type: 'information',
             data: this.data,
             container: this.ref.element.nativeElement

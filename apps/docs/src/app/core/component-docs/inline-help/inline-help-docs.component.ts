@@ -51,9 +51,6 @@ export class InlineHelpDocsComponent implements OnInit {
             language: 'html',
             code: inlineHelpSrc,
             fileName: 'inline-help-example',
-            secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpExampleComponent',
             scssFileCode: inlineHelpScssCode
         }
     ];
@@ -63,9 +60,6 @@ export class InlineHelpDocsComponent implements OnInit {
             language: 'html',
             code: inlineHelpTriggerHtml,
             fileName: 'inline-help-trigger-example',
-            secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpTriggerExampleComponent'
         }
     ];
 
@@ -75,9 +69,6 @@ export class InlineHelpDocsComponent implements OnInit {
             language: 'html',
             code: inlineHelpStylesHtml,
             fileName: 'inline-help-styled-example',
-            secondFile: 'inline-help-examples',
-            typescriptFileCode: inlineHelpTsCode,
-            component: 'InlineHelpStyledExampleComponent'
         }
     ];
 

@@ -19,9 +19,6 @@ export class BreadcrumbDocsComponent implements OnInit {
             language: 'html',
             code: breadcrumbRouterLinkExample,
             fileName: 'breadcrumb-routerLink-example',
-            component: 'BreadcrumbRouterLinkExampleComponent',
-            secondFile: 'breadcrumb-examples',
-            typescriptFileCode: breadcrumbTsCode
         }
     ];
 
@@ -30,9 +27,6 @@ export class BreadcrumbDocsComponent implements OnInit {
             language: 'html',
             code: breadcrumbHrefExample,
             fileName: 'fd-breadcrumb-href-example',
-            component: 'BreadcrumbHrefExampleComponent',
-            secondFile: 'breadcrumb-examples',
-            typescriptFileCode: breadcrumbTsCode
         }
     ];
 

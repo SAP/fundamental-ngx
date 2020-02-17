@@ -128,13 +128,13 @@ export class DatetimePickerDocsComponent implements OnInit {
         {
             language: 'typescript',
             code: datetimeI18nComplexTs,
-            fileName: 'fd-datetime-picker-complex-i18n-example',
+            fileName: 'datetime-picker-complex-i18n-example',
             component: 'DatetimePickerComplexI18nExampleComponent'
         },
         {
             language: 'html',
             code: datetimeI18nComplexH,
-            fileName: 'fd-datetime-picker-complex-i18n-example',
+            fileName: 'datetime-picker-complex-i18n-example',
             component: 'DatetimePickerComplexI18nExampleComponent'
         },
     ];
