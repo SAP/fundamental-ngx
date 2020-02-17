@@ -33,17 +33,3 @@ export class BreadcrumbHrefExampleComponent {}
     templateUrl: './breadcrumb-responsive-example.component.html'
 })
 export class BreadcrumbResponsiveExampleComponent {}
-
-@Component({
-    selector: 'fd-breadcrumb-rtl-example',
-    templateUrl: './breadcrumb-rtl-example.component.html',
-    styles: [
-        `
-            :host {
-                display: block;
-                width: 100%;
-            }
-        `
-    ]
-})
-export class BreadcrumbRtlExampleComponent {}

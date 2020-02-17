@@ -5,7 +5,7 @@ import {
     PopoverModule,
     IconModule,
     BreadcrumbItemDirective,
-    BreadcrumbLinkDirective
+    BreadcrumbLinkDirective, RtlService
 } from '@fundamental-ngx/core';
 import { RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
@@ -36,7 +36,8 @@ describe('BreadcrumbComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [BreadcrumbComponent, BreadcrumbItemDirective, BreadcrumbLinkDirective, BreadcrumbWrapperComponent],
-            imports: [PopoverModule, MenuModule, IconModule, RouterModule, RouterTestingModule]
+            imports: [PopoverModule, MenuModule, IconModule, RouterModule, RouterTestingModule],
+            providers: [RtlService]
         }).compileComponents();
     }));
 
