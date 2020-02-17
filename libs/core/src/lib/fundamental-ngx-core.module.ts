@@ -40,7 +40,7 @@ import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
 import { TimePickerModule } from './time-picker/time-picker.module';
-import { ToggleModule } from './toggle/toggle.module';
+import { SwitchModule } from './switch/switch.module';
 import { TokenModule } from './token/token.module';
 
 import { CommonModule } from '@angular/common';
@@ -107,10 +107,10 @@ import { LinkModule } from './link/link.module';
     TileModule,
     TimeModule,
     TimePickerModule,
-    ToggleModule,
+    SwitchModule,
     TokenModule,
     TreeModule,
   ],
   providers: [AlertService, ModalService, NotificationService],
 })
-export class FundamentalNgxCoreModule {}
+export class FundamentalNgxCoreModule { }

@@ -1,0 +1,30 @@
+<label class="fd-switch__label">
+    <span class="fd-switch"
+          [ngClass]="{
+            'fd-switch--no-text': !optionalText && !semantic,
+            'fd-switch--compact': compact,
+            'fd-switch--semantic': semantic,
+            'is-disabled': disabled
+        }">
+        <input #switchInput
+               class="fd-switch__input"
+               type="checkbox"
+               role="checkbox"
+               [id]="innerInputId"
+               [disabled]="disabled"
+               [attr.aria-checked]="checked"
+               [attr.aria-label]="ariaLabel"
+               [attr.aria-labelledby]="ariaLabelledby"
+               [(ngModel)]="isChecked" />
+        <div class="fd-switch__wrapper">
+            <div class="fd-switch__track">
+                <span *ngIf="semantic"
+                      class="fd-switch__text fd-switch__icon--on fd-switch__icon sap-icon--accept"></span>
+                <span class="fd-switch__handle"
+                      role="presentation"></span>
+                <span *ngIf="semantic"
+                      class="fd-switch__text fd-switch__icon--off fd-switch__icon sap-icon--decline"></span>
+            </div>
+        </div>
+    </span>
+</label>

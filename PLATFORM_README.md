@@ -9,37 +9,37 @@
 
 ## Description
 
-   The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality.
+The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality.
 
-  Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
+Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
 
-  Components must be instantiable programmatically.
+Components must be instantiable programmatically.
 
-  Enterprise readiness:
+Enterprise readiness:
 
-    1. Working with data( reactive stream over the array, Data sources over the reactive steam)
+1. Working with data( reactive stream over the array, Data sources over the reactive steam)
 
-    2. Layouts (Dashboard, detail page, master/detail page, Search/result page).
+2. Layouts (Dashboard, detail page, master/detail page, Search/result page).
 
-   It is not about UI:
+It is not about UI:
 
-    1. Application state UI
+1. Application state UI
     2. Bootstrapping and Configuration
     3. Communication with the backend system.
-  
-   Example:
 
- This example captures several things:
+Example:
 
-   a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
+This example captures several things:
 
-   b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
+a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
 
-   c). If we need to group information into sections
+b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
 
-   d). How we are handling and forms errors
-   
-   e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
+c). If we need to group information into sections
+
+d). How we are handling and forms errors
+
+e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
 
 ```
 <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
@@ -59,6 +59,7 @@
     </fdp-form-field>
     </fdp-form-group>
 ```
+
 ```
     <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
                         [formGroup]="fg" [errorHanlding]="'navigate'">
@@ -78,6 +79,7 @@
         </fdp-form-field>
     </fdp-form-group>
 ```
+
 ## API Reference
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/platform/home) for examples and API details.
@@ -117,19 +119,19 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Toggles, add the following import to your main application module.
+    For example, to use Switch, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from '@fundamental-ngx/core';
+    import { SwitchModule } from '@fundamental-ngx/core';
     ```
 
     For models prior to 0.11.1 use `fundamental-ngx`
 
-    import { ToggleModule } from '@fundamental-ngx/core';
+    import { SwitchModule } from '@fundamental-ngx/core';
 
     @NgModule({
     ...
-    imports: [ToggleModule],
+    imports: [SwitchModule],
     })
     export class DemoModule { }
 
@@ -140,7 +142,7 @@ For an existing Angular CLI application,
 3. **Add the component to your HTML.**
 
     ```html
-    <fd-toggle [size]="'l'" [(checked)]="myValue">Large Toggle</fd-toggle>
+    <fd-switch [size]="'l'" [(checked)]="myValue">Large Switch</fd-switch>
     ```
 
 ## Tests

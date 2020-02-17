@@ -2,9 +2,12 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'rtl-toggle',
+    selector: 'rtl-switch',
     template: `
-        <fd-toggle [size]="'xs'" [(ngModel)]="isChecked" (ngModelChange)="onChange()">Simulate RTL</fd-toggle>
+        <label fd-form-label>
+            Simulate RTL
+        </label>
+        <fd-switch [compact]="true" [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch> 
     `,
     encapsulation: ViewEncapsulation.None
 })

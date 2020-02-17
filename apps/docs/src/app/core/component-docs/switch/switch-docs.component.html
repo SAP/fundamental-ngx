@@ -1,0 +1,69 @@
+<fd-docs-section-title [id]="'sizes'"
+                       [componentName]="'switch'">
+    Default switch with variations
+</fd-docs-section-title>
+
+<description>Default switch which can include a [optionalText] input to remove text. The [optionalText] input is set to
+    true by default. The
+    [compact] input will make the switch compact.</description>
+<component-example [name]="'ex1'">
+    <fd-switch-sizes-example></fd-switch-sizes-example>
+</component-example>
+<code-example [exampleFiles]="switchSize"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'disabled'"
+                       [componentName]="'switch'">
+    Disabled State
+</fd-docs-section-title>
+<description>Switch can be in the disabled state, which prevents the user from interacting with it.</description>
+<component-example [name]="'ex2'">
+    <fd-disabled-switch-example></fd-disabled-switch-example>
+</component-example>
+<code-example [exampleFiles]="switchDisable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'twoWayBinding'"
+                       [componentName]="'switch'">
+    Two-Way Binding
+</fd-docs-section-title>
+<description>It is possible to two-way bind to the checked property of the fd-switch.</description>
+<component-example [name]="'ex3'">
+    <fd-switch-binding-example></fd-switch-binding-example>
+</component-example>
+<code-example [exampleFiles]="switchBinding"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'semanticCompact'"
+                       [componentName]="'switch'">
+    Semantic and Compact Mode
+</fd-docs-section-title>
+<description>It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode by passing
+    <code>[compact]="true"</code> to switch component.</description>
+<component-example [name]="'ex4'">
+    <semantic-switch-example></semantic-switch-example>
+</component-example>
+<code-example [exampleFiles]="switchSemantic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'withReactiveForm'"
+                       [componentName]="'switch'">
+    Switch used within Reactive Form
+</fd-docs-section-title>
+<description>It is possible to use the fd-switch component within Angular Reactive Forms</description>
+<component-example [name]="'ex5'">
+    <fd-switch-forms-example></fd-switch-forms-example>
+</component-example>
+<code-example [exampleFiles]="switchFormExample"></code-example>
+
+<playground [schema]="schema"
+            [schemaInitialValues]="data"
+            (onFormChanges)="onSchemaValues($event)">
+    <fd-switch [disabled]="data.properties.disabled"
+               [(ngModel)]="data.properties.checked"
+               [compact]="data.properties.compact"> Example Switch</fd-switch>
+</playground>
