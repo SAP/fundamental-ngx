@@ -3,10 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren, ElementRef, forwardRef,
-    HostListener, Input, QueryList,
+    HostListener, Input, OnDestroy, OnInit, QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
+import { RtlService } from '../utils/services/rtl.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -31,7 +33,7 @@ import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbComponent implements AfterContentInit {
+export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy {
 
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
@@ -43,20 +45,18 @@ export class BreadcrumbComponent implements AfterContentInit {
     /** @hidden */
     previousContainerWidth: number;
 
+    /** @hidden */
+    rtl: boolean = false;
+
+    /** @hidden */
+    private rtlSubscription: Subscription;
+
     /**
      * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
      * performs better. When not provided, the immediate parent element's width will be used.
      */
     @Input()
     containerElement: HTMLElement;
-
-    /**
-     * TODO: investigate if this input is needed or if RTL should be inferred from browser language settings or parent dir="rtl"
-     * This is used to position the popover body in RTL mode.
-     * @hidden
-     */
-    @Input()
-    rtl: boolean = false;
 
     /** @hidden */
     containerBoundary: number;
@@ -148,6 +148,18 @@ export class BreadcrumbComponent implements AfterContentInit {
         this.onResize();
     }
 
-    constructor(public elementRef: ElementRef) {}
+    /** @hidden */
+    ngOnInit(): void {
+        this.rtlSubscription = this.rtlService.rtl.subscribe(value => this.rtl = value);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this.rtlSubscription) {
+            this.rtlSubscription.unsubscribe();
+        }
+    }
+
+    constructor(public elementRef: ElementRef, private rtlService: RtlService) {}
 
 }

@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular
 import * as breadcrumbHrefExample from '!raw-loader!./examples/breadcrumb-href-example.component.html';
 import * as breadcrumbResponsiveExample from '!raw-loader!./examples/breadcrumb-responsive-example.component.html';
 import * as breadcrumbRouterLinkExample from '!raw-loader!./examples/breadcrumb-routerLink-example.component.html';
-import * as breadcrumbRtlExample from '!raw-loader!./examples/breadcrumb-rtl-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as breadcrumbTsCode from '!raw-loader!./examples/breadcrumb-examples.component.ts';
@@ -34,21 +33,7 @@ export class BreadcrumbDocsComponent implements OnInit {
         {
             language: 'html',
             code: breadcrumbResponsiveExample,
-            fileName: 'fd-breadcrumb-responsive-example',
-            component: 'BreadcrumbResponsiveExampleComponent',
-            secondFile: 'breadcrumb-examples',
-            typescriptFileCode: breadcrumbTsCode
-        }
-    ];
-
-    breadcrumbRtlHtml: ExampleFile[] = [
-        {
-            language: 'html',
-            code: breadcrumbRtlExample,
-            fileName: 'fd-breadcrumb-rtl-example',
-            component: 'BreadcrumbRtlExampleComponent',
-            secondFile: 'breadcrumb-examples',
-            typescriptFileCode: breadcrumbTsCode
+            fileName: 'fd-breadcrumb-responsive-example'
         }
     ];
 
