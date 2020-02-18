@@ -81,17 +81,18 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange = (newValue) => {};
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {
-    }
-
-    /** @hidden Used to define if control is in 'checked' / 'unchecked' state.*/
-    get isChecked(): boolean {
-        return this.checkboxState === 'checked';
-    }
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
         return this.checkboxState === 'indeterminate';
+    }
+
+    /** @hidden Used to define if control is in 'checked' / 'unchecked' state. */
+    get isChecked(): boolean {
+        return this.checkboxState === 'checked';
     }
 
     /** @hidden ControlValueAccessor interface
@@ -142,34 +143,6 @@ export class CheckboxComponent implements ControlValueAccessor {
         this._setState();
         this.onValueChange(this.checkboxValue);
         this._changeDetectorRef.detectChanges();
-    }
-
-    /** @hidden Updates checkbox state on mouse click
-     * and prevents from double check update from label-input binding */
-    public checkByClick(event: Event) {
-        this.nextValue();
-        event.preventDefault();
-    }
-
-    /** @hidden Updates checkbox state on spacebar key
-     * and prevents from double check update from label-input binding */
-    public checkByKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event)) {
-            this.nextValue();
-            event.preventDefault();
-        }
-    }
-
-    /** @hidden Prevents from checkbox update based on label-input binding */
-    public muteKey(event: KeyboardEvent): void {
-        if (this._isSpaceBarEvent(event)) {
-            event.preventDefault();
-        }
-    }
-
-    /** @hidden Determines event source based on key code */
-    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
-        return event.keyCode === 32;
     }
 
     /** @hidden Based on current control value sets new control state. */
