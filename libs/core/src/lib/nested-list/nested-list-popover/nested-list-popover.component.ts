@@ -46,8 +46,7 @@ export class NestedListPopoverComponent {
             rtlService.rtl
                 .subscribe(
                     rtl => {
-                        const placement = rtl ? 'left-start' : 'right-start';
-                        this.placement$.next(placement);
+                        this.placement$.next(rtl ? 'left-start' : 'right-start');
                     }
                 );
         }
