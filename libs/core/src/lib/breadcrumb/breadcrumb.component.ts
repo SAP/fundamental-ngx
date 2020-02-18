@@ -3,12 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren, ElementRef, forwardRef,
-    HostListener, Input, OnDestroy, OnInit, QueryList,
+    HostListener, Input, OnInit, Optional, QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -33,7 +33,7 @@ import { Subscription } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy {
+export class BreadcrumbComponent implements AfterContentInit, OnInit {
 
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
@@ -46,10 +46,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     previousContainerWidth: number;
 
     /** @hidden */
-    rtl: boolean = false;
-
-    /** @hidden */
-    private rtlSubscription: Subscription;
+    rtl$: BehaviorSubject<string> = new BehaviorSubject<string>('bottom-start');
 
     /**
      * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
@@ -150,16 +147,11 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
 
     /** @hidden */
     ngOnInit(): void {
-        this.rtlSubscription = this.rtlService.rtl.subscribe(value => this.rtl = value);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this.rtlSubscription) {
-            this.rtlSubscription.unsubscribe();
+        if (this.rtlService) {
+            this.rtlService.rtl.subscribe(value => this.rtl$.next(value ? 'bottom-end' : 'bottom-start'));
         }
     }
 
-    constructor(public elementRef: ElementRef, private rtlService: RtlService) {}
+    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) {}
 
 }
