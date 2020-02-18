@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
