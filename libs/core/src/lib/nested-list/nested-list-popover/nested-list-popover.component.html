@@ -1,4 +1,4 @@
-<fd-popover [placement]="'right-start'" [triggers]="[]" [noArrow]="false" [isOpen]="open" (isOpenChange)="handleOpenChange($event)">
+<fd-popover [placement]="placement$ | async" [triggers]="[]" [noArrow]="false" [isOpen]="open" (isOpenChange)="handleOpenChange($event)">
     <fd-popover-control>
         <ng-content select="[fd-nested-list-link]"></ng-content>
     </fd-popover-control>
