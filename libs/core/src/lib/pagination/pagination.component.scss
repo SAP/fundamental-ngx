@@ -1,1 +1,10 @@
 @import "~fundamental-styles/dist/pagination";
+
+.fd-pagination-direction-override-display {
+    display: inline-block;
+}
+
+.fd-pagination__total--rtl {
+    margin-right: 0;
+    margin-left: 8px;
+}

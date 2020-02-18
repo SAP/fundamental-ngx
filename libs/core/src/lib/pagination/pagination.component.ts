@@ -1,14 +1,16 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
-    OnChanges,
+    OnChanges, OnInit, Optional,
     Output,
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { PaginationService } from './pagination.service';
+import { RtlService } from '@fundamental-ngx/core';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * The component that is used to provide navigation between paged information.
@@ -36,7 +38,7 @@ import { PaginationService } from './pagination.service';
     styleUrls: ['./pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginationComponent implements OnChanges {
+export class PaginationComponent implements OnChanges, OnInit {
     /** Represents the total number of items. */
     @Input()
     totalItems: number;
@@ -76,7 +78,11 @@ export class PaginationComponent implements OnChanges {
     pages: number[];
 
     /** @hidden */
-    constructor(private paginationService: PaginationService) {}
+    rtl$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService,
+                private changeDetectionRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
@@ -89,6 +95,17 @@ export class PaginationComponent implements OnChanges {
             this.currentPage = 1;
         } else if (this.currentPage > totalPages) {
             this.currentPage = totalPages;
+        }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.rtlService) {
+            this.rtlService.rtl.subscribe(value => {
+                this.rtl$.next(value);
+                this.pages = this.paginationService.getPages(this.getPaginationObject());
+                this.changeDetectionRef.detectChanges();
+            })
         }
     }
 
