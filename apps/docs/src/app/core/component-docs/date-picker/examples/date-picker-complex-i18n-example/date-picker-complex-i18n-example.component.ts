@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, ViewChild } from '@angular/core';
 import { CalendarI18n, DatePickerComponent, FdDate } from '@fundamental-ngx/core';
 
 import moment from 'moment';

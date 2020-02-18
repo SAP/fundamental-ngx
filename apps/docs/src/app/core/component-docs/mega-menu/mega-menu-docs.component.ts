@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as menuSrc from '!raw-loader!./examples/mega-menu-example.component.html';
 import * as menuGroupSrc from '!raw-loader!./examples/mega-menu-group-example.component.html';
@@ -10,7 +10,7 @@ import * as menuPositionSrcScss from '!raw-loader!./examples/mega-menu-position-
     selector: 'app-mega-menu',
     templateUrl: './mega-menu-docs.component.html'
 })
-export class MegaMenuDocsComponent implements OnInit {
+export class MegaMenuDocsComponent {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -35,6 +35,4 @@ export class MegaMenuDocsComponent implements OnInit {
             scssFileCode: menuPositionSrcScss
         }
     ];
-
-    ngOnInit() { }
 }

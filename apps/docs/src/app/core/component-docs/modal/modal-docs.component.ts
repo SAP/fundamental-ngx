@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as templateTs from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.ts';
 import * as templateScss from '!raw-loader!./examples/template-as-content/modal-open-template-example.component.scss';
@@ -26,7 +26,7 @@ import { Schema } from '../../../schema/models/schema.model';
     selector: 'app-modal',
     templateUrl: './modal-docs.component.html'
 })
-export class ModalDocsComponent implements OnInit {
+export class ModalDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -195,7 +195,6 @@ export class ModalDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('modal');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

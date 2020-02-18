@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as simpleH from '!raw-loader!./examples/multi-input-example/multi-input-example.component.html';
 import * as simpleT from '!raw-loader!./examples/multi-input-example/multi-input-example.component.ts';
@@ -15,15 +15,13 @@ import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-
 import * as formH from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.html';
 import * as formT from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
     styleUrls: ['./multi-input-docs.component.scss']
 })
-export class MultiInputDocsComponent implements OnInit {
+export class MultiInputDocsComponent {
     multiInputBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -93,6 +91,4 @@ export class MultiInputDocsComponent implements OnInit {
             fileName: 'multi-input-form-example'
         }
     ];
-
-    ngOnInit() { }
 }

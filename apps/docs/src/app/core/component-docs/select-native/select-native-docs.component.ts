@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/select-native-example.component.html';
 import * as formInlineHelpHtml from '!raw-loader!./examples/select-native-inline-help-example.component.html';
@@ -7,15 +7,12 @@ import * as formGroupSelectHtml from '!raw-loader!./examples/select-native-form-
 import * as formGroupSelectTs from '!raw-loader!./examples/select-native-form-group-example.component.ts';
 import * as formGroupSelectScss from '!raw-loader!./examples/select-native-form-group-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import * as selectNativeTsCode from '!raw-loader!./examples/select-native-examples.component.ts';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-select',
     templateUrl: './select-native-docs.component.html'
 })
-export class SelectNativeDocsComponent implements OnInit {
+export class SelectNativeDocsComponent {
     selectFormHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -54,6 +51,4 @@ export class SelectNativeDocsComponent implements OnInit {
             component: 'SelectNativeFormGroupExampleComponent'
         }
     ];
-
-    ngOnInit() { }
 }

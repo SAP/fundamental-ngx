@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -20,7 +20,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-tabs',
     templateUrl: './tabs-docs.component.html'
 })
-export class TabsDocsComponent implements OnInit {
+export class TabsDocsComponent {
     static schema: Schema = {
         properties: {
             properties: {
@@ -197,7 +197,6 @@ export class TabsDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('tabs');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

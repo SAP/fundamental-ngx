@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as comboboxHTMLSrc from '!raw-loader!./examples/combobox-example.component.html';
 import * as comboboxTSSrc from '!raw-loader!./examples/combobox-example.component.ts';
@@ -22,13 +22,12 @@ import * as comboboxSeaHtml from '!raw-loader!./examples/combobox-search-functio
 import * as comboboxProgramHtml from '!raw-loader!./examples/combobox-open-control-example.component.html';
 import * as comboboxProgramTs from '!raw-loader!./examples/combobox-open-control-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html'
 })
-export class ComboboxDocsComponent implements OnInit {
+export class ComboboxDocsComponent {
     comboboxBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -169,6 +168,4 @@ export class ComboboxDocsComponent implements OnInit {
             fileName: 'combobox-forms-example'
         }
     ];
-
-    ngOnInit() { }
 }

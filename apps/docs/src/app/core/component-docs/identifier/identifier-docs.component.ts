@@ -1,25 +1,22 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
-import { Schema } from '../../../schema/models/schema.model';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
+import {Component} from '@angular/core';
+import {Schema} from '../../../schema/models/schema.model';
+import {SchemaFactoryService} from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as identifierScss from '!raw-loader!./examples/identifier-stack.component.scss';
 import * as circleSrc from '!raw-loader!./examples/circle-identifier-example.component.html';
 import * as colorsSrc from '!raw-loader!./examples/colors-identifier-example.component.html';
 import * as iconSrc from '!raw-loader!./examples/icon-identifier-example.component.html';
-import * as identifierTsCode from '!raw-loader!./examples/identifier-examples.component.ts';
 import * as initialsSrc from '!raw-loader!./examples/initials-identifier-example.component.html';
 import * as transparentSrc from '!raw-loader!./examples/transparent-identifier-example.component.html';
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
-import { Icons } from '../../../documentation/utilities/icons';
+import {ExampleFile} from '../../../documentation/core-helpers/code-example/example-file';
+import {Icons} from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-identifier',
     templateUrl: './identifier-docs.component.html',
     styleUrls: ['./identifier-docs.component.scss']
 })
-export class IdentifierDocsComponent implements OnInit {
+export class IdentifierDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -114,7 +111,6 @@ export class IdentifierDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('identifier');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

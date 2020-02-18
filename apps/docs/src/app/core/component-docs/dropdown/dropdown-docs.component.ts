@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as dropdownContextualMenuHtml from '!raw-loader!./examples/dropdown-contextual-menu-example.component.html';
 import * as dropdownContextualMenuTs from '!raw-loader!./examples/dropdown-contextual-menu-example.component.ts';
@@ -18,7 +18,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-dropdown',
     templateUrl: './dropdown-docs.component.html'
 })
-export class DropdownDocsComponent implements OnInit {
+export class DropdownDocsComponent {
     textDropdownHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -102,6 +102,4 @@ export class DropdownDocsComponent implements OnInit {
             component: 'DropdownToolbarExampleComponent',
         }
     ];
-
-    ngOnInit() { }
 }

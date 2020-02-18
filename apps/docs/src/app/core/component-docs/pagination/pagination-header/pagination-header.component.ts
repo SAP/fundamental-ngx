@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './pagination-header.component.html',
   styleUrls: ['./pagination-header.component.scss']
 })
-export class PaginationHeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class PaginationHeaderComponent {
 }

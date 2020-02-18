@@ -1,20 +1,18 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as iconTsCode from '!raw-loader!./examples/icon-example.component.ts';
 import * as iconScssCode from '!raw-loader!./examples/icon-example.component.scss';
-import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-icon',
     templateUrl: './icon-docs.component.html'
 })
-export class IconDocsComponent implements OnInit {
+export class IconDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -65,7 +63,6 @@ export class IconDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('icon');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

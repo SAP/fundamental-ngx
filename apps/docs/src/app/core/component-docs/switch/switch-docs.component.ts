@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import * as switchSizeExample from '!raw-loader!./examples/switch-sizes-example/switch-sizes-example.component.html';
 import * as switchSizeExampleTsCode from '!raw-loader!./examples/switch-sizes-example/switch-sizes-example.component.ts';
 import * as switchSizeExampleScssCode from '!raw-loader!./examples/switch-sizes-example/switch-sizes-example.component.scss';
@@ -16,14 +16,12 @@ import * as semanticSwitchExampleHtml from '!raw-loader!./examples/semantic-swit
 import * as semanticSwitchExampleTs from '!raw-loader!./examples/semantic-switch-example/semantic-switch-example.component.ts';
 import * as switchFormExampleScssCode from '!raw-loader!./examples/switch-form-example/switch-forms-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-switch',
     templateUrl: './switch-docs.component.html'
 })
-export class SwitchDocsComponent implements OnInit {
+export class SwitchDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -117,7 +115,6 @@ export class SwitchDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('switch');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

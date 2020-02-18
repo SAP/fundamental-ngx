@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as badgeSccsCode from '!raw-loader!./examples/badge-label-examples.component.scss';
-import * as badgeTsCode from '!raw-loader!./examples/badge-label-examples.component.ts';
 import * as badgeDefaultExample from '!raw-loader!./examples/badge-default-example.component.html';
 import * as badgeFilledExample from '!raw-loader!./examples/badge-filled-example.component.html';
 import * as badgePillExample from '!raw-loader!./examples/badge-pill-example.component.html';
@@ -17,7 +16,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-badge-label',
     templateUrl: './badge-label-docs.component.html'
 })
-export class BadgeLabelDocsComponent implements OnInit {
+export class BadgeLabelDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -130,7 +129,6 @@ export class BadgeLabelDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('badgeLabel');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -20,7 +20,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     styleUrls: ['table-docs.component.scss']
 
 })
-export class TableDocsComponent implements OnInit {
+export class TableDocsComponent {
     static schema: Schema = {
         properties: {
             state: {
@@ -104,7 +104,6 @@ export class TableDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('table');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

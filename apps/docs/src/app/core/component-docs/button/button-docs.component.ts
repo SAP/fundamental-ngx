@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as buttonScss from '!raw-loader!./examples/button-examples.component.scss';
@@ -14,7 +14,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-button',
     templateUrl: './button-docs.component.html'
 })
-export class ButtonDocsComponent implements OnInit {
+export class ButtonDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -105,7 +105,6 @@ export class ButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

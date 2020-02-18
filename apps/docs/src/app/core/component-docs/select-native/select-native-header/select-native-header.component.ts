@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-select-header',
     templateUrl: './select-native-header.component.html'
 })
-export class SelectNativeHeaderComponent implements OnInit {
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
+export class SelectNativeHeaderComponent {
 }

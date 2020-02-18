@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -23,14 +23,12 @@ import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.compo
 import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts';
 import * as timeFormScssSrc from '!raw-loader!./examples/time-form-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-time',
     templateUrl: './time-docs.component.html'
 })
-export class TimeDocsComponent implements OnInit {
+export class TimeDocsComponent {
     static schema: Schema = {
         properties: {
             properties: {
@@ -158,7 +156,6 @@ export class TimeDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('time');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

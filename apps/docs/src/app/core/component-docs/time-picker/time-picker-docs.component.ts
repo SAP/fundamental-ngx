@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as timePickerSrc from '!raw-loader!./examples/time-picker-example.component.html';
 import * as timePickerMeridianSrc from '!raw-loader!./examples/time-picker-12-example.component.html';
@@ -25,7 +25,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-time-picker',
     templateUrl: './time-picker-docs.component.html'
 })
-export class TimePickerDocsComponent implements OnInit {
+export class TimePickerDocsComponent {
     timePicker: ExampleFile[] = [
         {
             language: 'html',
@@ -124,6 +124,4 @@ export class TimePickerDocsComponent implements OnInit {
             component: 'TimePickerFormExampleComponent'
         }
     ];
-
-    ngOnInit() { }
 }

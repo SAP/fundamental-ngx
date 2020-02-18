@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as selectBasicSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
 import * as selectBasicTsSrc from '!raw-loader!./examples/select-basic-example/select-basic-example.component.ts';
@@ -28,9 +28,7 @@ import * as selectViewValueT from '!raw-loader!./examples/select-view-value-exam
 
 import * as selectMaxHeightH from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import * as selectMaxHeightHTs from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
-import { ActivatedRoute } from '@angular/router';
 
 import * as selectTypesSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.html';
 import * as selectTypesTsSrc from '!raw-loader!./examples/select-types-example/select-types-example.component.ts';
@@ -41,7 +39,7 @@ import * as selecTypesScssSrc from '!raw-loader!./examples/select-types-example/
     templateUrl: './select-docs.component.html',
     styleUrls: ['./select-docs.component.scss']
 })
-export class SelectDocsComponent implements OnInit {
+export class SelectDocsComponent {
     selectBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -154,6 +152,4 @@ export class SelectDocsComponent implements OnInit {
             component: 'SelectTypesExampleComponent'
         }
     ];
-
-    ngOnInit() { }
 }

@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./input-group-states-example.component.scss']
 })
 export class InputGroupStatesExampleComponent {
-
 }

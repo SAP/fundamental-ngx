@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as loadingSpinnerHtml from '!raw-loader!./examples/loading-spinner-example.component.html';
 import * as loadingSpinnerContainerHtml from '!raw-loader!./examples/loading-spinner-container-example.component.html';
@@ -11,7 +11,7 @@ import * as loadingSpinnerContainerTsCode from '!raw-loader!./examples/loading-s
     templateUrl: './loading-spinner-docs.component.html',
     styleUrls: ['./loading-spinner-docs.component.scss']
 })
-export class LoadingSpinnerDocsComponent implements OnInit {
+export class LoadingSpinnerDocsComponent {
     loadingSpinnerExample: ExampleFile[] = [
         {
             language: 'html',
@@ -30,6 +30,4 @@ export class LoadingSpinnerDocsComponent implements OnInit {
             scssFileCode: loadingSpinnerContainerScss
         }
     ];
-
-    ngOnInit() { }
 }

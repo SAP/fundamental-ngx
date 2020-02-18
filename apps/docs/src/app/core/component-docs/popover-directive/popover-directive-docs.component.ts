@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as simpleH from '!raw-loader!./examples/popover-directive-example/popover-directive-example.component.html';
 import * as simpleTs from '!raw-loader!./examples/popover-directive-example/popover-directive-example.component.ts';
@@ -17,7 +17,7 @@ import * as fillTs from '!raw-loader!./examples/popover-fill/popover-fill.compon
     templateUrl: './popover-directive-docs.component.html',
     styleUrls: ['./popover-directive-docs.component.scss']
 })
-export class PopoverDirectiveDocsComponent implements OnInit {
+export class PopoverDirectiveDocsComponent {
     simplePopover: ExampleFile[] = [
         {
             language: 'html',
@@ -58,6 +58,4 @@ export class PopoverDirectiveDocsComponent implements OnInit {
             typescriptFileCode: fillTs
         }
     ];
-
-    ngOnInit() { }
 }

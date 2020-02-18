@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as formHtml from '!raw-loader!./examples/radio-example.component.html';
 import * as formTs from '!raw-loader!./examples/radio-examples.component.ts';
@@ -10,7 +10,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-radio',
     templateUrl: './radio-docs.component.html'
 })
-export class RadioDocsComponent implements OnInit {
+export class RadioDocsComponent {
     radioFormHtml: ExampleFile[] = [
         {
             language: 'html',
@@ -34,6 +34,4 @@ export class RadioDocsComponent implements OnInit {
             component: 'RadioFormGroupExampleComponent'
         }
     ];
-
-    ngOnInit() { }
 }

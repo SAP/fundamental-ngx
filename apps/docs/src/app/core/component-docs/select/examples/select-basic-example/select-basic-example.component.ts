@@ -7,10 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SelectBasicExampleComponent {
     selectOneValue: string;
-
     selectTwoValue: string;
-
     selectThreeValue: string;
-    emptyValues: string[]
+    emptyValues: string[];
     values: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 }
