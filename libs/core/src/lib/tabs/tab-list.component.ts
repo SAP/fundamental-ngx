@@ -110,7 +110,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
                 });
                 this.selectedIndex = tabIndex;
                 this.selectedIndexChange.emit(tabIndex);
-                this._changeRef.markForCheck();
+                this._detectChanges();
             })
         }
     }
@@ -157,7 +157,7 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     private _listenOnPropertiesChange(): void {
         merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._changeRef.markForCheck())
+            .subscribe(() => this._detectChanges())
         ;
     }
 
@@ -174,5 +174,11 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     private _resetTabHook(): void {
         this.selectTab(0);
+    }
+
+    private _detectChanges(): void {
+        if (this._changeRef && !this._changeRef['destroyed']) {
+            this._changeRef.detectChanges();
+        }
     }
 }
