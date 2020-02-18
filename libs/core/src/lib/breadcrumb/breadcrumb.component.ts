@@ -46,7 +46,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     previousContainerWidth: number;
 
     /** @hidden */
-    rtl$: BehaviorSubject<string> = new BehaviorSubject<string>('bottom-start');
+    placement$: BehaviorSubject<string> = new BehaviorSubject<string>('bottom-start');
 
     /**
      * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
@@ -148,7 +148,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     /** @hidden */
     ngOnInit(): void {
         if (this.rtlService) {
-            this.rtlService.rtl.subscribe(value => this.rtl$.next(value ? 'bottom-end' : 'bottom-start'));
+            this.rtlService.rtl.subscribe(value => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
         }
     }
 
