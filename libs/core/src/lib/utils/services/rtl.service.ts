@@ -1,7 +1,8 @@
 import { BehaviorSubject } from 'rxjs';
-import { Optional, Injectable } from '@angular/core';
+import { Optional, Injectable, Inject, InjectionToken } from '@angular/core';
 
 const DefaultRtlLanguages = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ku', 'ps', 'ur', 'yi'];
+export const RtlLanguageToken = new InjectionToken<string[]>('RtlLanguageToken')
 
 @Injectable()
 /** 
@@ -12,8 +13,8 @@ const DefaultRtlLanguages = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', '
 */
 export class RtlService {
     rtl: BehaviorSubject<boolean>;
-    constructor(@Optional() injectedRtlLanguages: string[]) {
-        injectedRtlLanguages = injectedRtlLanguages ? injectedRtlLanguages : DefaultRtlLanguages
+    constructor(@Optional() @Inject(RtlLanguageToken) injectedRtlLanguages: string[]) {
+        injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages
 
         const filtered = injectedRtlLanguages.filter(language => navigator.language.includes(language));
 
