@@ -13,12 +13,13 @@ script:
 jobs:
   include:
   - stage: "Lint and Test"
+    before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
   - stage: "Pre-release"
     if: branch = master
+    before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
     - git checkout master
-    - export NODE_OPTIONS=–max_old_space_size=4096
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
@@ -26,9 +27,9 @@ jobs:
       skip_cleanup: true
   - stage: "Archive-pre-release"
     if: branch = archive-ngx-core-ng*
+    before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
     - git checkout archive-ngx-core-ng7
-    - export NODE_OPTIONS=–max_old_space_size=4096
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
@@ -38,11 +39,11 @@ jobs:
         all_branches: true
   - stage: "Release"
     if: branch = tmp_branch_for_automated_release_do_not_use
+    before_script: export NODE_OPTIONS='-–-max_old_space_size=4096'
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
     - git checkout master
-    - export NODE_OPTIONS=–max_old_space_size=4096
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
@@ -52,11 +53,11 @@ jobs:
         all_branches: true
   - stage: "Archive-release"
     if: branch = archive_tmp_branch_for_automated_release_do_not_use
+    before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
     - git checkout archive-ngx-core-ng7
-    - export NODE_OPTIONS=–max_old_space_size=4096
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
