@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.57"></a>
+# [0.14.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.56...v0.14.0-rc.57) (2020-02-18)
+
+
+### Bug Fixes
+
+* added support for rtl ([#1993](https://github.com/SAP/fundamental-ngx/issues/1993)) ([6225a6a](https://github.com/SAP/fundamental-ngx/commit/6225a6a))
+
+
+
 <a name="0.14.0-rc.56"></a>
 # [0.14.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.55...v0.14.0-rc.56) (2020-02-18)
 
