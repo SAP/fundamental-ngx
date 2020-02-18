@@ -10,27 +10,14 @@
        (click)="goToPage(currentPage - 1)">
     </a>
     <div dir="ltr" class="fd-pagination-direction-override-display">
-        <ng-container *ngIf="rtl$.getValue() === false">
-            <ng-container *ngFor="let page of pages">
-                <a class="fd-pagination__link"
-                   tabindex="0"
-                   role="button"
-                   (keypress)="onKeypressHandler(page, $event)"
-                   (click)="goToPage(page, $event)"
-                   *ngIf="page !== -1; else more"
-                   [attr.aria-selected]="currentPage === page">{{page}}</a>
-            </ng-container>
-        </ng-container>
-        <ng-container *ngIf="rtl$.getValue() === true">
-            <ng-container *ngFor="let page of pages.slice().reverse()">
-                <a class="fd-pagination__link"
-                   tabindex="0"
-                   role="button"
-                   (keypress)="onKeypressHandler(page, $event)"
-                   (click)="goToPage(page, $event)"
-                   *ngIf="page !== -1; else more"
-                   [attr.aria-selected]="currentPage === page">{{page}}</a>
-            </ng-container>
+        <ng-container *ngFor="let page of (rtl$.getValue() === true ? (pages | paginationReverse) : pages)">
+            <a class="fd-pagination__link"
+               tabindex="0"
+               role="button"
+               (keypress)="onKeypressHandler(page, $event)"
+               (click)="goToPage(page, $event)"
+               *ngIf="page !== -1; else more"
+               [attr.aria-selected]="currentPage === page">{{page}}</a>
         </ng-container>
     </div>
     <a class="fd-pagination__link fd-pagination__link--next"

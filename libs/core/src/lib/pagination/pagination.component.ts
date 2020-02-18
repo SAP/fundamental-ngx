@@ -157,3 +157,4 @@ export class PaginationComponent implements OnChanges, OnInit {
         return retVal;
     }
 }
+
