@@ -5,9 +5,14 @@ import { Component } from '@angular/core';
 import { TokenComponent } from '@fundamental-ngx/core';
 import { FormControlDirective } from '@fundamental-ngx/core';
 
+async function whenStable(fixture) {
+  fixture.detectChanges();
+  await fixture.whenStable();
+}
+
 @Component({
-    selector: 'fd-tokenizer-test-component',
-    template: `
+  selector: 'fd-tokenizer-test-component',
+  template: `
         <fd-tokenizer>
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
@@ -16,7 +21,7 @@ import { FormControlDirective } from '@fundamental-ngx/core';
         </fd-tokenizer>
     `
 })
-class TokenizerWrapperComponent {}
+class TokenizerWrapperComponent { }
 
 describe('TokenizerComponent', () => {
   let component: TokenizerComponent;
@@ -24,15 +29,15 @@ describe('TokenizerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TokenizerComponent, TokenComponent, TokenizerWrapperComponent, FormControlDirective ]
+      declarations: [TokenizerComponent, TokenComponent, TokenizerWrapperComponent, FormControlDirective]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(TokenizerWrapperComponent);
     component = fixture.debugElement.children[0].componentInstance;
-    fixture.detectChanges();
+    await whenStable(fixture);
   });
 
   it('should create', () => {
@@ -41,16 +46,19 @@ describe('TokenizerComponent', () => {
     expect(component.compact).toBeFalsy();
   });
 
-  it('should addEventListener to input during ngAfterViewInit and handle keydown', () => {
+  it('should addEventListener to input during ngAfterViewInit and handle keydown', async () => {
     spyOn(component, 'handleKeyDown');
     component.ngAfterViewInit();
+
+    await whenStable(fixture);
+
     component.input.elementRef.nativeElement.focus();
     const event = new KeyboardEvent('keydown', {
-        'code': 'ArrowLeft'
+      'code': 'ArrowLeft'
     });
     component.input.elementRef.nativeElement.dispatchEvent(event);
 
-    fixture.detectChanges();
+    await whenStable(fixture);
 
     expect(component.handleKeyDown).toHaveBeenCalledWith(event, component.tokenList.length);
   });
@@ -65,7 +73,7 @@ describe('TokenizerComponent', () => {
 
     expect(component.input.elementRef.nativeElement.focus).not.toHaveBeenCalled();
     expect(component.focusTokenElement).toHaveBeenCalledWith(event, component.tokenList.length - 2);
-    });
+  });
 
   it('should handleKeyDown on ArrowRight when last token is focused', () => {
     spyOn(component.input.elementRef.nativeElement, 'focus');
@@ -101,13 +109,13 @@ describe('TokenizerComponent', () => {
     component.focusTokenElement(event, 1);
 
     const elementToCheck = component.tokenList.filter((element, index) =>
-        index === 1)[0].elementRef.nativeElement.querySelector('.fd-token');
+      index === 1)[0].elementRef.nativeElement.querySelector('.fd-token');
     expect(elementToCheck.focus).toHaveBeenCalled();
     expect(elementToCheck.setAttribute).toHaveBeenCalledWith('tabindex', '0');
     expect(component.addKeyboardListener).toHaveBeenCalledWith(elementToCheck, 1);
   });
 
-  it('should add keyboard listener', () => {
+  it('should add keyboard listener', async () => {
     spyOn(component, 'handleKeyDown');
     const mockElement = document.createElement('span');
     spyOn(mockElement, 'addEventListener').and.callThrough();
@@ -116,7 +124,9 @@ describe('TokenizerComponent', () => {
     const event = new KeyboardEvent('blur');
     component.addKeyboardListener(mockElement, 0);
     mockElement.dispatchEvent(event);
-    fixture.detectChanges();
+
+    await whenStable(fixture);
+
     expect(mockElement.addEventListener).toHaveBeenCalled();
     expect(mockElement.setAttribute).toHaveBeenCalled();
     expect(mockElement.removeEventListener).toHaveBeenCalled();
