@@ -21,6 +21,11 @@ import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
 export class BreadcrumbItemDirective implements AfterContentInit {
 
     /** @hidden */
+    get elementRef(): ElementRef {
+        return this._elementRef;
+    }
+
+    /** @hidden */
     href: string = '';
 
     /** @hidden */
@@ -30,7 +35,7 @@ export class BreadcrumbItemDirective implements AfterContentInit {
     @ContentChild(forwardRef(() => BreadcrumbLinkDirective), { static: false })
     breadcrumbLink: BreadcrumbLinkDirective;
 
-    constructor(public elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) { }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -41,5 +46,4 @@ export class BreadcrumbItemDirective implements AfterContentInit {
             this.routerLink = this.breadcrumbLink.routerLink;
         }
     }
-
 }

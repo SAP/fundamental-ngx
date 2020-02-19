@@ -107,32 +107,30 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
         let breakLoop = false;
         let i = 0;
         const originalCollapsedLength = this.collapsedBreadcrumbItems.length;
-        while (this.elementRef.nativeElement.getBoundingClientRect().width < this.containerBoundary &&
-                !breakLoop && i < originalCollapsedLength) {
+        while (this.fitInBoundries() && !breakLoop && i < originalCollapsedLength) {
             // get the most recently collapsed breadcrumb
-            const collapsedItemToPop = this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
+            const collapsedItemToPop = this.getCollapsedItem();
             // find the corresponding breadcrumb from the original breadcrumb item QueryList
-            const breadcrumbToCheck = this.breadcrumbItems.filter((item) => item === collapsedItemToPop)[0];
+            const breadcrumbToCheck = this.getBreadcrumbToCheck(collapsedItemToPop);
             /*
               set display: 'inline-block' and visibility: 'hidden' - this way, the parent breadcrumb component's width will
               contain the width of the breadcrumb item we might pop, without actually making the item visible to the user
              */
-            breadcrumbToCheck.elementRef.nativeElement.style.display = 'inline-block';
-            breadcrumbToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-            if (this.elementRef.nativeElement.getBoundingClientRect().width < this.containerBoundary) {
+            this.applyStylesToBreadcrumb(breadcrumbToCheck);
+
+            if (this.fitInBoundries()) {
                 /*
                   if the width of the breadcrumb component is still smaller than the window width, including the
                   breadcrumbToCheck, pop the latest collapsedBreadcrumbItem
                 */
-                this.collapsedBreadcrumbItems.pop();
-                // make the breadcrumb we checked visible
-                breadcrumbToCheck.elementRef.nativeElement.style.visibility = 'visible';
+                this.popLastElement();
+                this.makeBreadcrumbVisible(breadcrumbToCheck);
             } else {
                 /*
                   if the width of the breadcrumb component is wider than the window after making the breadcrumbToCheck's
                   display: 'inline-block', then put it's display back to 'none' and don't pop the collapsedBreadcrumbItem
                  */
-                breadcrumbToCheck.elementRef.nativeElement.style.display = 'none';
+                this.makeBreadcrumbInvisible(breadcrumbToCheck);
                 breakLoop = true;
             }
             i++;
@@ -152,6 +150,35 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
         }
     }
 
-    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) {}
+    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) { }
 
+    private fitInBoundries(): boolean {
+        return this.elementRef.nativeElement.getBoundingClientRect().width < this.containerBoundary;
+    }
+
+    private getCollapsedItem(): BreadcrumbItemDirective {
+        return this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
+    }
+
+    private getBreadcrumbToCheck(collapsedItemToPop: BreadcrumbItemDirective) {
+        return this.breadcrumbItems.filter((item) => item === collapsedItemToPop)[0];
+    }
+
+    private applyStylesToBreadcrumb(breadcrumb: BreadcrumbItemDirective) {
+        breadcrumb.elementRef.nativeElement.style.display = 'inline-block';
+        breadcrumb.elementRef.nativeElement.style.visibility = 'hidden';
+    }
+
+    private popLastElement() {
+        this.collapsedBreadcrumbItems.pop();
+        // make the breadcrumb we checked visible
+    }
+
+    private makeBreadcrumbVisible(breadcrumb: BreadcrumbItemDirective) {
+        breadcrumb.elementRef.nativeElement.style.visibility = 'visible';
+    }
+
+    private makeBreadcrumbInvisible(breadcrumb: BreadcrumbItemDirective) {
+        breadcrumb.elementRef.nativeElement.style.display = 'none';
+    }
 }

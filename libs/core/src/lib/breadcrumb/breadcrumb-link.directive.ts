@@ -16,11 +16,13 @@ import { Directive, ElementRef, Input } from '@angular/core';
     }
 })
 export class BreadcrumbLinkDirective {
-
     /** @hidden */
     @Input()
     routerLink: string = '';
 
-    constructor(public elementRef: ElementRef) {}
+    get elementRef() {
+        return this._elementRef;
+    }
 
+    constructor(private _elementRef: ElementRef) { }
 }
