@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { PaginationService } from './pagination.service';
-import { RtlService } from '@fundamental-ngx/core';
+import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
 
 /**
