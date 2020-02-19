@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination.component';
 import { PaginationService } from './pagination.service';
+import { PaginationReversePipe } from './pagination-reverse.pipe';
 
 describe('Pagination Test', () => {
     let component: PaginationComponent;
@@ -11,7 +12,7 @@ describe('Pagination Test', () => {
         const paginationSpy = jasmine.createSpyObj('PaginationService', ['getTotalPages', 'getPages']);
 
         TestBed.configureTestingModule({
-            declarations: [PaginationComponent],
+            declarations: [PaginationComponent, PaginationReversePipe],
             providers: [
                 { provide: PaginationService, useValue: paginationSpy }
             ]
