@@ -161,12 +161,14 @@ export class PaginationComponent implements OnChanges, OnInit {
         };
     }
 
+    /** @hidden */
     private refreshPages() {
         let pages = this.paginationService.getPages(this.getPaginationObject());
         pages = this.rtl ? pages.slice().reverse() : pages;
         this.pages$.next(pages);
     }
 
+    /** @hidden */
     private get isLastPage(): boolean {
         return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
     }
