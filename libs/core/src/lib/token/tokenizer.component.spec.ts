@@ -49,6 +49,9 @@ describe('TokenizerComponent', () => {
   it('should addEventListener to input during ngAfterViewInit and handle keydown', async () => {
     spyOn(component, 'handleKeyDown');
     component.ngAfterViewInit();
+
+    await whenStable(fixture);
+
     component.input.elementRef.nativeElement.focus();
     const event = new KeyboardEvent('keydown', {
       'code': 'ArrowLeft'
