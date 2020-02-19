@@ -171,4 +171,3 @@ export class PaginationComponent implements OnChanges, OnInit {
         return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
     }
 }
-
