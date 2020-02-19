@@ -797,5 +797,6 @@ export const entryComponents = [
     ModalInModalSecondComponent,
     AlertContentComponent,
     NotificationContentComponent,
+    NotificationOptionsContentComponent,
     ModalInModalFirstComponent
 ]
