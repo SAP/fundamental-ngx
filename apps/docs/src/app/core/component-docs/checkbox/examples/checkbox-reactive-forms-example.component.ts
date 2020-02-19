@@ -49,7 +49,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
 
     private setControlOnAgreementsChange(): void {
         this.registrationForm.get('agreements').valueChanges.pipe(
-            map(agreements => Object.values(agreements)),
+            map(agreements => this.getValuesFromObject(agreements)),
             map((agreementsValues: boolean[]) => {
                 const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);
                 const declineAll = agreementsValues.reduce((overall, value) => !value && overall, true);
@@ -62,6 +62,11 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
                 }
             })
         ).subscribe(acceptAllValue => this.registrationForm.get('acceptAll').setValue(acceptAllValue, {emitEvent: false}))
+    }
+
+    // This is equivalent for `Object.values` not supported by IE11
+    private getValuesFromObject(obj: Object): any[] {
+        return Object.keys(obj).map(e => obj[e]);
     }
 }
 

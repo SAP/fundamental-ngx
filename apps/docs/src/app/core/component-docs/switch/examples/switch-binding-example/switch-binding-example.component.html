@@ -1,0 +1,15 @@
+<!-- Requires FormsModule -->
+<label fd-form-label>
+    Switch 1
+</label>
+<fd-switch [(ngModel)]="firstSwitch"></fd-switch>
+
+<!-- Does not require FormsModule -->
+<label fd-form-label>
+    Switch 2
+</label>
+<fd-switch [(checked)]="secondSwitch"></fd-switch>
+
+<button fd-button (click)="switchBoth()">Switch Both</button>
+<button fd-button (click)="switchOne()">Switch 1</button>
+<button fd-button (click)="switchTwo()">Switch 2</button>

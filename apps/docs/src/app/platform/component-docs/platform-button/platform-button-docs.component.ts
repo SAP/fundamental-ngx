@@ -8,13 +8,10 @@ import * as buttonSizesExample from '!raw-loader!./platform-button-examples/plat
 import * as buttonStateExample from '!raw-loader!./platform-button-examples/platform-button-state-example.component.html';
 import * as buttonTypesExample from '!raw-loader!./platform-button-examples/platform-button-types-example.component.html';
 import * as buttonTruncateExample from '!raw-loader!./platform-button-examples/platform-button-truncate-example.component.html';
-import * as buttonTsCode from '!raw-loader!./platform-button-examples/platform-button-examples.component.ts';
 import * as buttonScss from '!raw-loader!./platform-button-examples/platform-button-examples.scss';
 
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
@@ -73,9 +70,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonOptionsExample,
             fileName: 'platform-button-options-example',
-            secondFile: 'platform-button-examples',
-            typescriptFileCode: buttonTsCode,
-            component: 'PlatformButtonOptionsExampleComponent',
             scssFileCode: buttonScss
         }
     ];
@@ -85,9 +79,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonTypesExample,
             fileName: 'platform-button-types-example',
-            secondFile: 'platform-button-examples',
-            typescriptFileCode: buttonTsCode,
-            component: 'PlatformButtonTypesExampleComponent',
             scssFileCode: buttonScss
         }
     ];
@@ -97,9 +88,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonSizesExample,
             fileName: 'platform-button-sizes-example',
-            secondFile: 'platform-button-examples',
-            typescriptFileCode: buttonTsCode,
-            component: 'PlatformButtonTypesExampleComponent',
             scssFileCode: buttonScss
         }
     ];
@@ -109,9 +97,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonIconsExample,
             fileName: 'platform-button-icons-example',
-            secondFile: 'platform-button-examples',
-            typescriptFileCode: buttonTsCode,
-            component: 'PlatformButtonTypesExampleComponent',
             scssFileCode: buttonScss
         }
     ];
@@ -121,9 +106,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonStateExample,
             fileName: 'platform-button-state-example',
-            secondFile: 'platform-button-examples',
-            typescriptFileCode: buttonTsCode,
-            component: 'PlatformButtonTypesExampleComponent',
             scssFileCode: buttonScss
         }
     ];
@@ -133,9 +115,6 @@ export class PlatformButtonDocsComponent implements OnInit {
             language: 'html',
             code: buttonTruncateExample,
             fileName: 'platform-button-truncate-example',
-            secondFile: 'platform-button-examples',
-            typescriptFileCode: buttonTsCode,
-            component: 'PlatformButtonTypesExampleComponent',
             scssFileCode: buttonScss
         }
     ];

@@ -12,4 +12,4 @@ import { PaginationService } from './pagination.service';
     providers: [PaginationService],
     exports: [PaginationComponent]
 })
-export class PaginationModule {}
+export class PaginationModule { }

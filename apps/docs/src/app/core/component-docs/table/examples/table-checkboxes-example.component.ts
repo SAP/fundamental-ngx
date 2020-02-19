@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class TableCheckboxesExampleComponent {
 
     selectedRows = [];
-
+    selectMasterModel = false;
     allSelected = false;
 
     tableRows = [
@@ -53,8 +53,8 @@ export class TableCheckboxesExampleComponent {
         }
     ];
 
-    select(event: any, row: number): void {
-        if (event.srcElement.checked) {
+    select(row: number): void {
+        if (this.tableRows[row].checked === false) {
             this.selectedRows.push(row);
             this.tableRows[row].checked = true;
         } else {

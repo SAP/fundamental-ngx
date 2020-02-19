@@ -13,7 +13,7 @@ export class PlatformMenuIconsExampleComponent implements OnInit {
     ngOnInit() {
         this.iconMenuData = [
             {
-                label: 'First Item with add-on. Click on item to toggle state.',
+                label: 'First Item with add-on. Click on item to switch state.',
                 command: () => {
                     alert('First');
                 },

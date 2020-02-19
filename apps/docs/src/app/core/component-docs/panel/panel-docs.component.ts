@@ -4,7 +4,6 @@ import * as panelEdgeBleedSrc from '!raw-loader!./examples/panel-edge-bleed-exam
 import * as panelEdgeBleedSrcTs from '!raw-loader!./examples/panel-edge-bleed-example.component.ts';
 import * as panelSrc from '!raw-loader!./examples/panel-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as panelSrcTs from '!raw-loader!./examples/panel-examples.component.ts';
 
 @Component({
     selector: 'app-panel',
@@ -14,11 +13,8 @@ export class PanelDocsComponent {
 
     panelBasic: ExampleFile[] = [{
         language: 'html',
-        component: 'PanelExampleComponent',
-        code: panelSrc,
         fileName: 'panel-example',
-        secondFile: 'panel-examples',
-        typescriptFileCode: panelSrcTs
+        code: panelSrc,
     }];
 
     tableBleed: ExampleFile[] = [{

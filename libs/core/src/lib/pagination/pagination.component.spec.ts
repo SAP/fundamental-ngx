@@ -55,7 +55,7 @@ describe('Pagination Test', () => {
     it('should get the pagination object for the service', () => {
         const retVal = component.getPaginationObject();
 
-        expect(retVal).toEqual({totalItems: 3, currentPage: 1, itemsPerPage: 2});
+        expect(retVal).toEqual({ totalItems: 3, currentPage: 1, itemsPerPage: 2 });
     });
 
 });

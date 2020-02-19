@@ -15,9 +15,6 @@ export class LinkDocsComponent {
             language: 'html',
             code: linkH,
             fileName: 'link-example',
-            secondFile: 'link-example',
-            typescriptFileCode: linkTs,
-            component: 'LinkExampleComponent'
         }
     ];
 

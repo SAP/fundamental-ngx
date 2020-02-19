@@ -8,15 +8,16 @@
 [![Slack](https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack)](https://ui-fundamentals.slack.com)
 
 ## Content
-* [1. Description](#1)
-* [2. Requirements](#2)
-* [3. Versioning](#3)
-* [4. Getting Started](#4)
-* [5. Known Issues](#5)
-* [6. Support](#6)
-* [7. Contributing](#7)
-* [8. License](#8)
-* [9. Similar Projects](#9)
+
+-   [1. Description](#1)
+-   [2. Requirements](#2)
+-   [3. Versioning](#3)
+-   [4. Getting Started](#4)
+-   [5. Known Issues](#5)
+-   [6. Support](#6)
+-   [7. Contributing](#7)
+-   [8. License](#8)
+-   [9. Similar Projects](#9)
 
 ## <a name="1"></a>1. Description
 
@@ -28,32 +29,34 @@ See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) f
 
 ## <a name="2"></a>2. Requirements
 
-To download and use Fundamental NGX, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental NGX is intended for use with Angular 7 or newer.
+Fundamental Library for Angular is intended for use with Angular 8 or newer.
 
 Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Versioning
 
 npm package [fundamental-ngx](https://npmjs.com/package/fundamental-ngx) version `0.10.0` is compiled with Angular 7. It supports Angular 6 and 7 versions.
- This version is not supported by bug fixes. 
+This version is not supported by bug fixes.
 
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 7.
-It supports Angular 6 and 7 versions. This version will have merged some bug-fixes.
+npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 8.
+It supports Angular 8 version and newer. This version will have merged some bug-fixes.
 
 npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.12.y` is compiled with Angular 8.
-It supports the current Angular 8 version. This version also can be used along with enabled IVY.
+It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.
+
+npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.13.z` is compiled with Angular 8.
+It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.
 
 Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest patches changes.
-
 
 ## <a name="4"></a>4. Getting Started
 
 For an existing Angular CLI application,
 
 0. **Video tutorial**
-[How to use the Fundamental Core Library](https://www.youtube.com/watch?v=i4VIiuzD2Fg)
+   [How to use the Fundamental Core Library](https://www.youtube.com/watch?v=i4VIiuzD2Fg)
 
 1. **Install Fundamental-NGX.**
    `ng add @fundamental-ngx/core`
@@ -61,7 +64,7 @@ For an existing Angular CLI application,
 
     _If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)._
 
-2. **Import the modules you want to use.**
+1. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
 
@@ -77,30 +80,29 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Toggles, add the following import to your main application module.
+    For example, to use Switchs, add the following import to your main application module.
 
     ```javascript
-    import { ToggleModule } from '@fundamental-ngx/core’';
+    import { SwitchModule } from '@fundamental-ngx/core’';
     ```
 
     For models prior to 0.10 use `fundamental-ngx`
 
     ```
-    import { ToggleModule } from '@fundamental-ngx/core';
+    import { SwitchModule } from '@fundamental-ngx/core';
 
     @NgModule({
         ...
-        imports: [ToggleModule],
+        imports: [SwitchModule],
     })
     export class DemoModule { }
     ```
 
-3. **Add the component to your HTML.**
+1. **Add the component to your HTML.**
 
     ```html
-    <fd-toggle [size]="'l'" [(checked)]="myValue">Large Toggle</fd-toggle>
+    <fd-switch [size]="'l'" [(checked)]="myValue">Large Switch</fd-switch>
     ```
-
 
 ## <a name="5"></a>5. Known Issues
 

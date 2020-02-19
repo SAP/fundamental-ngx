@@ -2118,23 +2118,23 @@
         margin-bottom: 0;
     }
 
-    .toggle-protected .tsd-is-private {
+    .switch-protected .tsd-is-private {
         display: none;
     }
 
-    .toggle-public .tsd-is-private, .toggle-public .tsd-is-protected, .toggle-public .tsd-is-private-protected {
+    .switch-public .tsd-is-private, .switch-public .tsd-is-protected, .switch-public .tsd-is-private-protected {
         display: none;
     }
 
-    .toggle-inherited .tsd-is-inherited {
+    .switch-inherited .tsd-is-inherited {
         display: none;
     }
 
-    .toggle-only-exported .tsd-is-not-exported {
+    .switch-only-exported .tsd-is-not-exported {
         display: none;
     }
 
-    .toggle-externals .tsd-is-external {
+    .switch-externals .tsd-is-external {
         display: none;
     }
 

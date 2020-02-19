@@ -70,9 +70,6 @@ export class IdentifierDocsComponent implements OnInit {
             language: 'html',
             code: iconSrc,
             fileName: 'icon-identifier-example',
-            secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode,
-            component: 'IconIdentifierExampleComponent',
             scssFileCode: identifierScss
         }
     ];
@@ -82,9 +79,6 @@ export class IdentifierDocsComponent implements OnInit {
             language: 'html',
             code: initialsSrc,
             fileName: 'initials-identifier-example',
-            secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode,
-            component: 'InitialsIdentifierExampleComponent',
             scssFileCode: identifierScss
         }
     ];
@@ -94,9 +88,6 @@ export class IdentifierDocsComponent implements OnInit {
             language: 'html',
             code: circleSrc,
             fileName: 'circle-identifier-example',
-            secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode,
-            component: 'CircleIdentifierExampleComponent',
             scssFileCode: identifierScss
         }
     ];
@@ -106,9 +97,6 @@ export class IdentifierDocsComponent implements OnInit {
             language: 'html',
             code: transparentSrc,
             fileName: 'transparent-identifier-example',
-            secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode,
-            component: 'TransparentIdentifierExampleComponent',
             scssFileCode: identifierScss
         }
     ];
@@ -118,9 +106,6 @@ export class IdentifierDocsComponent implements OnInit {
             language: 'html',
             code: colorsSrc,
             fileName: 'colors-identifier-example',
-            secondFile: 'identifier-examples',
-            typescriptFileCode: identifierTsCode,
-            component: 'ColorsIdentifierExampleComponent',
             scssFileCode: identifierScss
         }
     ];

@@ -85,7 +85,6 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: customTriggerSrcH,
             fileName: 'select-custom-trigger',
-            secondFile: 'select-custom-trigger',
             typescriptFileCode: customTriggerSrcHTs,
             component: 'SelectCustomTriggerComponent',
             scssFileCode: customTriggerSrcScss
@@ -127,7 +126,6 @@ export class SelectDocsComponent implements OnInit {
             language: 'html',
             code: selectMaxHeightH,
             fileName: 'select-max-height-example',
-            secondFile: 'select-max-height-example',
             typescriptFileCode: selectMaxHeightHTs,
             component: 'SelectMaxHeightExampleComponent'
         }

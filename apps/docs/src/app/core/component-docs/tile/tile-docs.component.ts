@@ -95,9 +95,6 @@ export class TileDocsComponent implements OnInit {
             language: 'html',
             code: tileSrc,
             fileName: 'tile-example',
-            secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode,
-            component: 'TileExampleComponent'
         }
     ];
 
@@ -106,9 +103,6 @@ export class TileDocsComponent implements OnInit {
             language: 'html',
             code: tileMediaSrc,
             fileName: 'tile-media-example',
-            secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode,
-            component: 'TileMediaExampleComponent'
         }
     ];
 
@@ -117,9 +111,6 @@ export class TileDocsComponent implements OnInit {
             language: 'html',
             code: tileActionsSrc,
             fileName: 'tile-action-example',
-            secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode,
-            component: 'TileActionsExampleComponent'
         }
     ];
 
@@ -128,9 +119,6 @@ export class TileDocsComponent implements OnInit {
             language: 'html',
             code: tileButtonSrc,
             fileName: 'tile-button-example',
-            secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode,
-            component: 'TileButtonExampleComponent'
         }
     ];
 
@@ -139,9 +127,6 @@ export class TileDocsComponent implements OnInit {
             language: 'html',
             code: tileProductSrc,
             fileName: 'tile-product-example',
-            secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode,
-            component: 'TileProductExampleComponent'
         }
     ];
 
@@ -150,9 +135,6 @@ export class TileDocsComponent implements OnInit {
             language: 'html',
             code: tileDisabledSrc,
             fileName: 'tile-disabled-example',
-            secondFile: 'tile-examples',
-            typescriptFileCode: tileTscode,
-            component: 'TileDisabledExampleComponent'
         }
     ];
 

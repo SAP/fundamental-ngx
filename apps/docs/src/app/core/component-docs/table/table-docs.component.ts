@@ -13,8 +13,6 @@ import * as tableResponsiveHtml from '!raw-loader!./examples/table-responsive-ex
 import * as tableResponsiveTs from '!raw-loader!./examples/table-responsive-example.component.ts';
 import * as tableResponsiveScss from '!raw-loader!./examples/table-responsive-example.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-table',

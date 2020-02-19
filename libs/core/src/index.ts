@@ -48,6 +48,6 @@ export * from './lib/tabs/public_api';
 export * from './lib/tile/public_api';
 export * from './lib/time/public_api';
 export * from './lib/time-picker/public_api';
-export * from './lib/toggle/public_api';
+export * from './lib/switch/public_api';
 export * from './lib/token/public_api';
 export * from './lib/tree/public_api';

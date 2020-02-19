@@ -1,8 +1,12 @@
-import { Component, ContentChild, HostBinding, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, HostBinding, ViewChild, ViewEncapsulation, Optional } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { PopoverComponent } from '../../popover/popover.component';
+import { RtlService } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-nested-list-popover',
@@ -11,6 +15,8 @@ import { PopoverComponent } from '../../popover/popover.component';
     encapsulation: ViewEncapsulation.None
 })
 export class NestedListPopoverComponent {
+    /** @hidden */
+    placement$: BehaviorSubject<string> = new BehaviorSubject('right-start');
 
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
@@ -26,7 +32,8 @@ export class NestedListPopoverComponent {
 
     /** @hidden */
     constructor(
-        private keyboardNestService: NestedListKeyboardService
+        private keyboardNestService: NestedListKeyboardService,
+        @Optional() private rtlService: RtlService
     ) {
         this.keyboardNestService.refresh$.subscribe(() => {
             /** Update popover position, on list of hidden items change */
@@ -34,6 +41,15 @@ export class NestedListPopoverComponent {
                 this.popoverComponent.updatePopover();
             }
         });
+
+        if (rtlService) {
+            rtlService.rtl
+                .subscribe(
+                    rtl => {
+                        this.placement$.next(rtl ? 'left-start' : 'right-start');
+                    }
+                );
+        }
     }
 
     /**
