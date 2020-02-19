@@ -21,13 +21,16 @@ export default {
 export const Pagination = () => ({
     template:
         `
-        <fd-pagination [totalItems]="totalItems"
+        <fd-pagination [totalItems]="totalItems" (pageChangeStart)="newPageClicked($event)" 
                        [itemsPerPage]="itemsPerPage"
                        [currentPage]="currentPage"></fd-pagination>
   `,
     props: {
         totalItems: number('totalItems', 50),
         itemsPerPage: number('itemsPerPage', 10),
-        currentPage: number('currentPage', 3)
+        currentPage: number('currentPage', 3),
+        newPageClicked: (event: number) => {
+            alert('Page ' + event + ' clicked!');
+        }
     }
 });
