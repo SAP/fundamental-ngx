@@ -12,6 +12,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
 import {API_FILES} from '../../api-files';
 import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
+import { ActionBarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ActionBarModule
     ],
     exports: [RouterModule],
     declarations: [

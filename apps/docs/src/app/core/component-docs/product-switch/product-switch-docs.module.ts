@@ -8,6 +8,7 @@ import {ProductSwitchDndExampleComponent} from './examples/product-switch-dnd-ex
 import {ProductSwitchDocsHeaderComponent} from './product-switch-docs-header/product-switch-docs-header.component';
 import {ProductSwitchListComponent} from './examples/product-switch-list/product-switch-list-example.component';
 import {ProductSwitchDocsComponent} from './product-switch-docs.component';
+import { ProductSwitchModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -23,7 +24,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ProductSwitchModule
     ],
     exports: [RouterModule],
     declarations: [

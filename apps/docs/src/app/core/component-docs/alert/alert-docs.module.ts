@@ -10,6 +10,7 @@ import {AlertContentComponent} from './examples/alert-content.component';
 import {AlertInlineExampleComponent} from './examples/alert-inline-example.component';
 import {AlertWidthExampleComponent} from './examples/alert-width-example.component';
 import {AlertHeaderComponent} from './alert-header/alert-header.component';
+import { AlertModule, AlertService } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        AlertModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -39,6 +41,9 @@ const routes: Routes = [
     ],
     entryComponents: [
         AlertContentComponent
+    ],
+    providers: [
+        AlertService
     ]
 })
 export class AlertDocsModule {

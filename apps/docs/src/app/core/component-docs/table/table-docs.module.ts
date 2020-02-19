@@ -9,6 +9,7 @@ import {TableExampleComponent} from './examples/table-example.component';
 import {TableCdkExampleComponent} from './examples/table-cdk-example.component';
 import {TableResponsiveExampleComponent} from './examples/table-responsive-example.component';
 import {TableCheckboxesExampleComponent} from './examples/table-checkboxes-example.component';
+import { TableModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +25,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        TableModule
     ],
     exports: [RouterModule],
     declarations: [

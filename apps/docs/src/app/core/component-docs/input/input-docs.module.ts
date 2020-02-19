@@ -11,6 +11,7 @@ import {
     InputInlineHelpExampleComponent,
     InputStateExampleComponent
 } from './examples/input-examples.component';
+import { FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        FormModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -12,6 +12,7 @@ import {
     InitialsIdentifierExampleComponent,
     TransparentIdentifierExampleComponent
 } from './examples/identifier-examples.component';
+import { IdentifierModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        IdentifierModule
     ],
     exports: [RouterModule],
     declarations: [

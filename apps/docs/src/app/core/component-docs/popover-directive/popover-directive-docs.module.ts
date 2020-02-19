@@ -9,6 +9,7 @@ import {PopoverDirectiveExampleComponent} from './examples/popover-directive-exa
 import {PopoverFillComponent} from './examples/popover-fill/popover-fill.component';
 import {PopoverProgrammaticComponent} from './examples/popover-programmatic/popover-programmatic.component';
 import {PopoverTriggersComponent} from './examples/popover-triggers/popover-triggers.component';
+import { PopoverModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +25,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        PopoverModule
     ],
     exports: [RouterModule],
     declarations: [

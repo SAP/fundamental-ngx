@@ -10,6 +10,7 @@ import {
 } from './examples/breadcrumb-examples.component';
 import {BreadcrumbHeaderComponent} from './breadcrumb-header/breadcrumb-header.component';
 import {BreadcrumbDocsComponent} from './breadcrumb-docs.component';
+import { BreadcrumbModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        BreadcrumbModule
     ],
     exports: [RouterModule],
     declarations: [

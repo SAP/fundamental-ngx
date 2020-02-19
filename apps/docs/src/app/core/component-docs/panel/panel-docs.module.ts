@@ -7,6 +7,7 @@ import {PanelDocsHeaderComponent} from './panel-docs-header/panel-docs-header.co
 import {PanelDocsComponent} from './panel-docs.component';
 import {PanelExampleComponent} from './examples/panel-examples.component';
 import {PanelEdgeBleedExampleComponent} from './examples/panel-edge-bleed-example.component';
+import { PanelModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        PanelModule
     ],
     exports: [RouterModule],
     declarations: [

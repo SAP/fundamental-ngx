@@ -12,6 +12,7 @@ import {PopoverModalExampleComponent} from './examples/popover-modal/popover-mod
 import {PopoverPlacementExampleComponent} from './examples/popover-placement/popover-placement-example.component';
 import {PopoverProgrammaticOpenExampleComponent} from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import {PopoverExampleComponent} from './examples/popover-simple/popover-example.component';
+import { PopoverModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        PopoverModule
     ],
     exports: [RouterModule],
     declarations: [
