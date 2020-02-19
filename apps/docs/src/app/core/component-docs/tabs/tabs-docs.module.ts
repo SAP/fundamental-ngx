@@ -44,7 +44,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        TabsModule
+        TabsModule,
     ],
     exports: [RouterModule],
     declarations: [

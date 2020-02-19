@@ -12,7 +12,7 @@ import {NotificationOptionsContentComponent} from './examples/notification-optio
 import {NotificationOptionsExampleComponent} from './examples/notification-options/notification-options-example.component';
 import {NotificationOpenTemplateExampleComponent} from './examples/template-as-content/notification-open-template-example.component';
 import {NotificationAsObjectExampleComponent} from './examples/notification-as-object.component';
-import { NotificationModule, NotificationService } from '@fundamental-ngx/core';
+import { IdentifierModule, NotificationModule, NotificationService } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -29,7 +29,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        NotificationModule
+        NotificationModule,
+        IdentifierModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -9,7 +9,7 @@ import {ShellbarBasicExampleComponent} from './examples/shellbar-basic-example.c
 import {ShellbarSideNavExampleComponent} from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import {ShellbarAdvancedExampleComponent} from './examples/shellbar-advanced/shellbar-advanced-example.component';
 import {ShellbarCollapsibleExampleComponent} from './examples/shellbar-collapsible-example.component';
-import { ShellbarModule } from '@fundamental-ngx/core';
+import { ComboboxModule, IdentifierModule, ProductSwitchModule, ShellbarModule, SideNavigationModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +26,11 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        ShellbarModule
+        ShellbarModule,
+        ComboboxModule,
+        SideNavigationModule,
+        IdentifierModule,
+        ProductSwitchModule
     ],
     exports: [RouterModule],
     declarations: [

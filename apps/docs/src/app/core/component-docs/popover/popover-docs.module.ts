@@ -12,7 +12,15 @@ import {PopoverModalExampleComponent} from './examples/popover-modal/popover-mod
 import {PopoverPlacementExampleComponent} from './examples/popover-placement/popover-placement-example.component';
 import {PopoverProgrammaticOpenExampleComponent} from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import {PopoverExampleComponent} from './examples/popover-simple/popover-example.component';
-import { PopoverModule } from '@fundamental-ngx/core';
+import {
+    IdentifierModule,
+    ImageModule,
+    MenuModule,
+    ModalModule,
+    MultiInputModule,
+    PopoverModule,
+    SideNavigationModule
+} from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -29,7 +37,13 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        PopoverModule
+        PopoverModule,
+        ImageModule,
+        IdentifierModule,
+        SideNavigationModule,
+        MultiInputModule,
+        MenuModule,
+        ModalModule
     ],
     exports: [RouterModule],
     declarations: [
