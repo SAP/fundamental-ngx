@@ -1,17 +1,19 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
     Component,
     EventEmitter,
     Input,
-    OnChanges, OnInit, Optional,
+    OnChanges,
+    OnInit,
+    Optional,
     Output,
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { PaginationService } from './pagination.service';
 import { RtlService } from '../utils/services/rtl.service';
-import { BehaviorSubject, Observable, from } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { Pagination } from './pagination.model';
 
 /**
  * The component that is used to provide navigation between paged information.
@@ -86,7 +88,7 @@ export class PaginationComponent implements OnChanges, OnInit {
     /** @hidden */
     pages$: BehaviorSubject<number[]> = new BehaviorSubject([]);
 
-    isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(this.isLastPage)
+    isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(this._isLastPage);
 
     /** @hidden */
     constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService) { }
@@ -97,7 +99,7 @@ export class PaginationComponent implements OnChanges, OnInit {
             this.currentPage = changes.currentPage.currentValue;
         }
 
-        this.refreshPages();
+        this._refreshPages();
 
         const totalPages = this.paginationService.getTotalPages(this.getPaginationObject());
         if (!this.currentPage || this.currentPage < 1) {
@@ -106,7 +108,7 @@ export class PaginationComponent implements OnChanges, OnInit {
             this.currentPage = totalPages;
         }
 
-        this.isLastPage$.next(this.isLastPage);
+        this.isLastPage$.next(this._isLastPage);
     }
 
     /** @hidden */
@@ -114,7 +116,7 @@ export class PaginationComponent implements OnChanges, OnInit {
         if (this.rtlService) {
             this.rtlService.rtl.subscribe(value => {
                 this.rtl = value;
-                this.refreshPages();
+                this._refreshPages();
             })
         }
     }
@@ -144,7 +146,7 @@ export class PaginationComponent implements OnChanges, OnInit {
             return;
         }
 
-        this.refreshPages();
+        this._refreshPages();
 
         this.pageChangeStart.emit(page);
     }
@@ -153,7 +155,7 @@ export class PaginationComponent implements OnChanges, OnInit {
      * Retrieves an object that represents
      * the total number of items, the current page, and the number of items per page.
      */
-    getPaginationObject() {
+    getPaginationObject(): Pagination {
         return {
             totalItems: this.totalItems,
             currentPage: this.currentPage,
@@ -162,14 +164,14 @@ export class PaginationComponent implements OnChanges, OnInit {
     }
 
     /** @hidden */
-    private refreshPages() {
+    private _refreshPages(): void {
         let pages = this.paginationService.getPages(this.getPaginationObject());
         pages = this.rtl ? pages.slice().reverse() : pages;
         this.pages$.next(pages);
     }
 
     /** @hidden */
-    private get isLastPage(): boolean {
+    private get _isLastPage(): boolean {
         return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
     }
 }
