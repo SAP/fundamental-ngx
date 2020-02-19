@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 /**
  * Breadcrumb link directive. Use Angular router options (such as 'routerLink' and 'queryParams') with this directive.
@@ -15,4 +15,14 @@ import { Directive } from '@angular/core';
         class: 'fd-breadcrumb__link'
     }
 })
-export class BreadcrumbLinkDirective {}
+export class BreadcrumbLinkDirective {
+    /** @hidden */
+    @Input()
+    routerLink: string = '';
+
+    get elementRef() {
+        return this._elementRef;
+    }
+
+    constructor(private _elementRef: ElementRef) { }
+}

@@ -55,7 +55,8 @@ import {
 } from '../core/component-docs/badge-label/examples/badge-label-examples.component';
 import {
     BreadcrumbHrefExampleComponent,
-    BreadcrumbRouterLinkExampleComponent
+    BreadcrumbRouterLinkExampleComponent,
+    BreadcrumbResponsiveExampleComponent,
 } from '../core/component-docs/breadcrumb/examples/breadcrumb-examples.component';
 import { BusyIndicatorBasicExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-basic-example.component';
 import { BusyIndicatorToggleExampleComponent } from './component-docs/busy-indicator/examples/busy-indicator-toggle-example.component';
@@ -478,6 +479,7 @@ export const declarations = [
     LabelIconStatusExampleComponent,
     LabelStatusColorsExampleComponent,
     BreadcrumbHrefExampleComponent,
+    BreadcrumbResponsiveExampleComponent,
     BreadcrumbRouterLinkExampleComponent,
     BusyIndicatorBasicExampleComponent,
     BusyIndicatorToggleExampleComponent,
