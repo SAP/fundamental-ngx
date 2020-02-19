@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination.component';
 import { PaginationService } from './pagination.service';
-import { PaginationReversePipe } from './pagination-reverse.pipe';
 
 describe('Pagination Test', () => {
     let component: PaginationComponent;
@@ -12,7 +11,7 @@ describe('Pagination Test', () => {
         const paginationSpy = jasmine.createSpyObj('PaginationService', ['getTotalPages', 'getPages']);
 
         TestBed.configureTestingModule({
-            declarations: [PaginationComponent, PaginationReversePipe],
+            declarations: [PaginationComponent],
             providers: [
                 { provide: PaginationService, useValue: paginationSpy }
             ]
@@ -56,7 +55,7 @@ describe('Pagination Test', () => {
     it('should get the pagination object for the service', () => {
         const retVal = component.getPaginationObject();
 
-        expect(retVal).toEqual({totalItems: 3, currentPage: 1, itemsPerPage: 2});
+        expect(retVal).toEqual({ totalItems: 3, currentPage: 1, itemsPerPage: 2 });
     });
 
 });
