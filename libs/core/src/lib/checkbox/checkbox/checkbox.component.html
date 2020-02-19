@@ -4,16 +4,13 @@
     [id]="inputId"
     [name]="name"
     [disabled]="disabled"
-    [checked]="isChecked"
-    [value]="checkboxValue"
     [indeterminate]="isIndeterminate"
     [class.fd-checkbox--compact]="compact"
     [ngClass]="(state ? 'is-' + state : '')"
-    (keydown)="muteKey($event)"
-    (keyup)="checkByKey($event)"
+    [ngModel]="isChecked"
+    (ngModelChange)="nextValue()"
 >
 <label class="fd-checkbox__label"
-       (click)="checkByClick($event)"
        [class.fd-checkbox__label--compact]="compact"
        [for]="inputId">
     {{label}}
