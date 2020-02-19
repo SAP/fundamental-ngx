@@ -153,7 +153,7 @@ export class PaginationComponent implements OnChanges, OnInit {
      * Retrieves an object that represents
      * the total number of items, the current page, and the number of items per page.
      */
-    private getPaginationObject() {
+    getPaginationObject() {
         return {
             totalItems: this.totalItems,
             currentPage: this.currentPage,
