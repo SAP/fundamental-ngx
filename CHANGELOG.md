@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.60"></a>
+# [0.14.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.58...v0.14.0-rc.60) (2020-02-19)
+
+
+### Bug Fixes
+
+* (tabs) Add keyboard support for RTl ([#1988](https://github.com/SAP/fundamental-ngx/issues/1988)) ([63d6bbf](https://github.com/SAP/fundamental-ngx/commit/63d6bbf))
+* breadcrumb 0.5.0 ([#1958](https://github.com/SAP/fundamental-ngx/issues/1958)) ([75c1d05](https://github.com/SAP/fundamental-ngx/commit/75c1d05))
+* Remove event prevention on Checkbox ([#1994](https://github.com/SAP/fundamental-ngx/issues/1994)) ([f872399](https://github.com/SAP/fundamental-ngx/commit/f872399))
+
+
+
 <a name="0.14.0-rc.58"></a>
 # [0.14.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.57...v0.14.0-rc.58) (2020-02-19)
 
