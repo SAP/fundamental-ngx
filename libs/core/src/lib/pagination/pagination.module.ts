@@ -5,12 +5,11 @@ import { PaginationComponent } from './pagination.component';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { PaginationService } from './pagination.service';
-import { PaginationReversePipe } from './pagination-reverse.pipe';
 
 @NgModule({
-    declarations: [PaginationComponent, PaginationReversePipe],
+    declarations: [PaginationComponent],
     imports: [CommonModule, ButtonModule, IconModule],
     providers: [PaginationService],
-    exports: [PaginationComponent, PaginationReversePipe]
+    exports: [PaginationComponent]
 })
-export class PaginationModule {}
+export class PaginationModule { }
