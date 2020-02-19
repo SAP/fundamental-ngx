@@ -81,9 +81,12 @@ fd-card {
 .fd-scroll-spy-example-icon-class {
     position: relative;
     display: inline-block;
+    margin-right: 4px;
     @at-root {
         [dir="rtl"] &,
         &[dir="rtl"] {
+            margin-right: 0;
+            margin-left: 4px;
             transform: rotate(180deg);
             bottom: 2px;
         }
