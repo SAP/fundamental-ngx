@@ -55,7 +55,8 @@
                             }]
                         },
                         "production-unoptimized": {
-                            "fileReplacements": [{
+                            "tsConfig":"apps/docs/tsconfig.netlify.json",
+			                      "fileReplacements": [{
                                 "replace": "apps/docs/src/environments/environment.ts",
                                 "with": "apps/docs/src/environments/environment.prod.ts"
                             }],
