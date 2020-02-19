@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.59"></a>
+# [0.14.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.58...v0.14.0-rc.59) (2020-02-19)
+
+
+### Bug Fixes
+
+* (tabs) Add keyboard support for RTl ([#1988](https://github.com/SAP/fundamental-ngx/issues/1988)) ([63d6bbf](https://github.com/SAP/fundamental-ngx/commit/63d6bbf))
+
+
+
 <a name="0.14.0-rc.58"></a>
 # [0.14.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.57...v0.14.0-rc.58) (2020-02-19)
 
