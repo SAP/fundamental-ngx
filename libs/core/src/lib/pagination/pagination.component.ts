@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { PaginationService } from './pagination.service';
 import { RtlService } from '../utils/services/rtl.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, from } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 /**
  * The component that is used to provide navigation between paged information.
@@ -75,45 +76,47 @@ export class PaginationComponent implements OnChanges, OnInit {
     pageChangeStart = new EventEmitter<number>();
 
     /** @hidden */
-    pages: number[];
+    rtl: boolean = false;
 
     /** @hidden */
-    rtl$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    get customClasses(): string {
+        return this.rtl ? 'fd-pagination__total--rtl' : '';
+    }
 
     /** @hidden */
-    constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService,
-                private changeDetectionRef: ChangeDetectorRef) {}
+    pages$: BehaviorSubject<number[]> = new BehaviorSubject([]);
+
+    isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(this.isLastPage)
+
+    /** @hidden */
+    constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService) { }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
         if (changes && changes.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
-        this.pages = this.paginationService.getPages(this.getPaginationObject());
+
+        this.refreshPages();
+
         const totalPages = this.paginationService.getTotalPages(this.getPaginationObject());
         if (!this.currentPage || this.currentPage < 1) {
             this.currentPage = 1;
         } else if (this.currentPage > totalPages) {
             this.currentPage = totalPages;
         }
+
+        this.isLastPage$.next(this.isLastPage);
     }
 
     /** @hidden */
     ngOnInit(): void {
         if (this.rtlService) {
             this.rtlService.rtl.subscribe(value => {
-                this.rtl$.next(value);
-                this.pages = this.paginationService.getPages(this.getPaginationObject());
-                this.changeDetectionRef.detectChanges();
+                this.rtl = value;
+                this.refreshPages();
             })
         }
-    }
-
-    /**
-     * Checks if the current page is the last page.
-     */
-    isLastPage(): boolean {
-        return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
     }
 
     /**
@@ -140,7 +143,9 @@ export class PaginationComponent implements OnChanges, OnInit {
         if (page > this.paginationService.getTotalPages(this.getPaginationObject()) || page < 1) {
             return;
         }
-        this.pages = this.paginationService.getPages(this.getPaginationObject());
+
+        this.refreshPages();
+
         this.pageChangeStart.emit(page);
     }
 
@@ -148,13 +153,22 @@ export class PaginationComponent implements OnChanges, OnInit {
      * Retrieves an object that represents
      * the total number of items, the current page, and the number of items per page.
      */
-    getPaginationObject() {
-        const retVal = {
+    private getPaginationObject() {
+        return {
             totalItems: this.totalItems,
             currentPage: this.currentPage,
             itemsPerPage: this.itemsPerPage
         };
-        return retVal;
+    }
+
+    private refreshPages() {
+        let pages = this.paginationService.getPages(this.getPaginationObject());
+        pages = this.rtl ? pages.slice().reverse() : pages;
+        this.pages$.next(pages);
+    }
+
+    private get isLastPage(): boolean {
+        return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
     }
 }
 
