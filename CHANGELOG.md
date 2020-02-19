@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0-rc.64"></a>
+# [0.14.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.63...v0.14.0-rc.64) (2020-02-19)
+
+
+### Bug Fixes
+
+* pagination RTL idea ([#2001](https://github.com/SAP/fundamental-ngx/issues/2001)) ([7858562](https://github.com/SAP/fundamental-ngx/commit/7858562))
+
+
+
 <a name="0.14.0-rc.63"></a>
 # [0.14.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.14.0-rc.62...v0.14.0-rc.63) (2020-02-19)
 
