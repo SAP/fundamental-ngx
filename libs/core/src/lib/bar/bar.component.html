@@ -1,0 +1,12 @@
+<div class="fd-bar"
+    [ngClass]="
+        (cosy ? ' fd-bar--cosy' : '') + 
+        (barDesign ? ' fd-bar--' + barDesign : '') + 
+        (inPage && !size ? ' fd-bar--page': '') + 
+        (inPage && size ? ' fd-bar--page-' + size: '') + 
+        (inHomePage && !size ? ' fd-bar--home-page': '') + 
+        (inHomePage && size ? ' fd-bar--home-page-' + size: '')">
+    <ng-content select="[fd-bar-left]"></ng-content>
+    <ng-content select="[fd-bar-middle]"></ng-content>
+    <ng-content select="[fd-bar-right]"></ng-content>
+</div>
