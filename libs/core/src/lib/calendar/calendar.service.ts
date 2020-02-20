@@ -1,6 +1,6 @@
-import { FdDate } from './models/fd-date';
 import { Subject } from 'rxjs';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { FdDate } from './models/fd-date';
 
 @Injectable()
 export class CalendarService {
