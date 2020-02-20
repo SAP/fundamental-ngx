@@ -1,4 +1,5 @@
 <input
+    #inputLabel
     type="checkbox"
     class="fd-checkbox"
     [id]="inputId"
@@ -9,8 +10,11 @@
     [ngClass]="(state ? 'is-' + state : '')"
     [ngModel]="isChecked"
     (ngModelChange)="nextValue()"
+    (keydown)="checkByKey($event)"
+    (keyup)="$event.stopPropagation()"
 >
 <label class="fd-checkbox__label"
+       (click)="checkByClick()"
        [class.fd-checkbox__label--compact]="compact"
        [for]="inputId">
     {{label}}
