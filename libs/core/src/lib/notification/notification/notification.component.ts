@@ -47,7 +47,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
     @Input()
     type: NotificationType;
 
-    @ViewChild('vc', { read: ViewContainerRef, static: false })
+    @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
     id: string;

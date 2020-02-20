@@ -8,7 +8,7 @@ import { BarModule } from '../bar.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement', { read: ElementRef })
     ref: ElementRef;
 }
 

@@ -60,11 +60,11 @@ import { DatePipe } from '@angular/common';
 export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Validator {
 
     /** @hidden Reference to the inner time component. */
-    @ViewChild(TimeComponent, { static: false })
+    @ViewChild(TimeComponent)
     timeComponent: TimeComponent;
 
     /** @hidden Reference to the inner calendar component. */
-    @ViewChild(CalendarComponent, { static: false })
+    @ViewChild(CalendarComponent)
     calendarComponent: CalendarComponent;
 
     /**

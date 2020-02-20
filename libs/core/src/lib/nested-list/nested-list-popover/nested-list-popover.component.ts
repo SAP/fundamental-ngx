@@ -19,7 +19,7 @@ export class NestedListPopoverComponent {
     placement$: Observable<string>;
 
     /** @hidden */
-    @ViewChild(PopoverComponent, { static: false })
+    @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
     /** @hidden */
@@ -27,7 +27,7 @@ export class NestedListPopoverComponent {
     popoverClass: boolean = true;
 
     /** @hidden */
-    @ContentChild(NestedLinkDirective, { static: false })
+    @ContentChild(NestedLinkDirective)
     linkDirective: NestedLinkDirective;
 
     /**

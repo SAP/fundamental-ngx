@@ -29,7 +29,7 @@ class TestComponent {
     @Input() editMode = false;
     @Input() actionItems = [];
     @Input() placement: string;
-    @ViewChild('actionbar', { static: false }) actionbar: ActionBarComponent;
+    @ViewChild('actionbar') actionbar: ActionBarComponent;
     @Output() onRenameTitle: EventEmitter<string> = new EventEmitter<string>();
     public backButtonClicked = false;
     onBackButtonClick() {

@@ -19,7 +19,7 @@ import { NotificationOptionsContentComponent } from './notification-options-cont
 })
 export class NotificationOptionsExampleComponent {
 
-    @ViewChild('vc', { read: ViewContainerRef, static: false })
+    @ViewChild('vc', { read: ViewContainerRef })
     ref: ViewContainerRef;
 
     data = {

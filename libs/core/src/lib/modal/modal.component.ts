@@ -51,7 +51,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     ];
 
 
-    @ViewChild('vc', { read: ViewContainerRef, static: false  })
+    @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
     id: string;

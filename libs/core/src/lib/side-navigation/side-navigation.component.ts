@@ -44,11 +44,11 @@ export class SideNavigationComponent implements AfterContentInit, OnInit {
     condensed: boolean = false;
 
     /** @hidden */
-    @ContentChild(SideNavigationUtilityDirective, { static: false })
+    @ContentChild(SideNavigationUtilityDirective)
     sideNavUtility: SideNavigationUtilityDirective;
 
     /** @hidden */
-    @ContentChild(SideNavigationMainDirective, { static: false })
+    @ContentChild(SideNavigationMainDirective)
     sideNavMain: SideNavigationMainDirective;
 
     @ViewChildren(PreparedNestedListComponent)

@@ -3,17 +3,11 @@
     "compilerOptions": {
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "outDir": "../../dist/out-tsc/apps/docs",
-        "types": [
-            "node"
-        ]
+        "outDir": "../../dist/out-tsc",
+        "types": ["node"]
     },
-    "exclude": [
-        "src/test.ts",
-        "**/*.spec.ts",
-        "**/*.stories.ts"
-    ],
     "angularCompilerOptions": {
         "enableIvy": false
     },
+    "include": ["apps/docs/src/**/*.d.ts"]
 }

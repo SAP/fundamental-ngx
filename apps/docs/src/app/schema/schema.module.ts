@@ -20,7 +20,7 @@ import { Schema } from './models/schema.model';
     exports: [SchemaComponent]
 })
 export class SchemaModule {
-    static forRoot(componentSchemas: { [name: string]: Schema }): ModuleWithProviders {
+    static forRoot(componentSchemas: { [name: string]: Schema }): ModuleWithProviders<SchemaModule> {
         return {
             ngModule: SchemaModule,
             providers: [

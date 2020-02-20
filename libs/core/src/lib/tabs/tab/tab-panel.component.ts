@@ -34,7 +34,7 @@ let tabPanelUniqueId: number = 0;
 export class TabPanelComponent implements OnChanges {
 
     /** @hidden */
-    @ContentChild(TabTitleDirective, { read: TemplateRef, static: false })
+    @ContentChild(TabTitleDirective, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
     /** Id of the tab. If none is provided, one will be generated. */

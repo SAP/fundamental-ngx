@@ -8,9 +8,9 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
     templateUrl: './core-documentation.component.html'
 })
 export class CoreDocumentationComponent implements OnInit {
-    @ViewChild('content', { static: false }) contentElRef: ElementRef;
+    @ViewChild('content') contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     sideCollapsed: boolean = window.innerWidth < 576;

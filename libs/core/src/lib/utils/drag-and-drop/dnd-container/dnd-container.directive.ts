@@ -38,7 +38,7 @@ export class DndContainerDirective implements AfterContentInit {
     @Input() stickInPlace: boolean = false;
 
     /** @hidden */
-    @ContentChild(CdkDrag, { static: false })
+    @ContentChild(CdkDrag)
     cdkDrag: CdkDrag;
 
     constructor(

@@ -1,4 +1,4 @@
-import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
+import { ElementRef, OnChanges, OnInit, Input, Directive } from '@angular/core';
 
 /*
  This abstract class allows the user to set their own custom styles on a Fundamental Library for Angular directive, in addition to the
@@ -8,6 +8,7 @@ import { ElementRef, OnChanges, OnInit, Input } from '@angular/core';
  */
 
 /** @hidden */
+@Directive()
 export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     private _elementRef: ElementRef;
 

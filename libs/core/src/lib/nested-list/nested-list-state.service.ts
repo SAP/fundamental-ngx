@@ -1,7 +1,9 @@
 import { NestedListInterface } from './nested-list/nested-list.interface';
 import { NestedItemInterface } from './nested-item/nested-item.interface';
 import { Subject } from 'rxjs';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class NestedListStateService {
 
     /**

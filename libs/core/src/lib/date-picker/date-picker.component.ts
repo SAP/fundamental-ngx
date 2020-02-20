@@ -64,7 +64,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     isOpen: boolean = false;
 
     /** @hidden */
-    @ViewChild(CalendarComponent, { static: false })
+    @ViewChild(CalendarComponent)
     calendarComponent: CalendarComponent;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
