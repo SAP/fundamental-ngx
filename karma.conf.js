@@ -30,6 +30,9 @@ module.exports = () => {
     logLevel: constants.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: true
+    singleRun: true,
+    parallelOptions: {
+      executors: 6
+    }
   };
 };
