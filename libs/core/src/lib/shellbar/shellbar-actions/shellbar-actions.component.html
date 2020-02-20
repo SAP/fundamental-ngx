@@ -54,5 +54,6 @@
     </ng-container>
 </ng-container>
 
-
-<ng-content select="fd-product-switch"></ng-content>
+<div [ngClass]="{'fd-shellbar__action': productSwitchComponent}">
+    <ng-content select="fd-product-switch"></ng-content>
+</div>

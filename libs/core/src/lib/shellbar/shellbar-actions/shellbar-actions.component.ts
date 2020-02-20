@@ -14,6 +14,7 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { ComboboxComponent } from '../../combobox/combobox.component';
+import { ProductSwitchComponent } from '../../product-switch/product-switch/product-switch.component';
 
 /**
  * The component that represents shellbar actions.
@@ -81,6 +82,10 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;
+
+    /** @hidden */
+    @ContentChild(ProductSwitchComponent, {static: false})
+    productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
     totalNotifications: number;
