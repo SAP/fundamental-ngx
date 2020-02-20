@@ -43,7 +43,7 @@ describe('ModalService', () => {
     });
 
     it('should open modal from template', () => {
-        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+        spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
@@ -54,12 +54,12 @@ describe('ModalService', () => {
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         modalRef.dismiss();
-        expect((service as any).destroyModalComponent).toHaveBeenCalled();
+        expect((service as any)._destroyModalComponent).toHaveBeenCalled();
         expect(service['modals'].length).toBe(0);
     });
 
     it('should open modal from component', () => {
-        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+        spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
         const modalRef: ModalRef = service.open(TemplateTestComponent);
@@ -69,12 +69,12 @@ describe('ModalService', () => {
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         modalRef.dismiss();
-        expect((service as any).destroyModalComponent).toHaveBeenCalled();
+        expect((service as any)._destroyModalComponent).toHaveBeenCalled();
         expect(service['modals'].length).toBe(0);
     });
 
     it('should support disabled backdrop', () => {
-        spyOn<any>(service, 'destroyModalComponent').and.callThrough();
+        spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
         const modalRef: ModalRef = service.open(TemplateTestComponent, {hasBackdrop: false});
@@ -84,7 +84,7 @@ describe('ModalService', () => {
         expect(service['modals'][0].backdropRef).toBeFalsy();
 
         modalRef.dismiss();
-        expect((service as any).destroyModalComponent).toHaveBeenCalled();
+        expect((service as any)._destroyModalComponent).toHaveBeenCalled();
         expect(service['modals'].length).toBe(0);
     });
 
