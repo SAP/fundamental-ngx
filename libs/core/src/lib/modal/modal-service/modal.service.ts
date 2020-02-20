@@ -153,14 +153,14 @@ export class ModalService {
         const isYPositionSet: boolean = !!(position.bottom || position.top);
 
         if (isYPositionSet) {
-            componentRef.location.nativeElement.style.top = 'initial';
-            componentRef.location.nativeElement.style.bottom = 'initial';
+            componentRef.location.nativeElement.style.top = 'auto';
+            componentRef.location.nativeElement.style.bottom = 'auto';
             componentRef.location.nativeElement.style.transform = 'translate(-50%, 0)';
         }
 
         if (isXPositionSet) {
-            componentRef.location.nativeElement.style.right = 'initial';
-            componentRef.location.nativeElement.style.left = 'initial';
+            componentRef.location.nativeElement.style.right = 'auto';
+            componentRef.location.nativeElement.style.left = 'auto';
             componentRef.location.nativeElement.style.transform = 'translate(0, -50%)';
         }
 
