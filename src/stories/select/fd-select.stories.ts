@@ -22,24 +22,22 @@ export default {
 export const Select = () => ({
     template:
         `
-        <button (click)="removeOption()">remove</button>
-
-<fd-select
-class="fd-select-example"
-[compact]="compactVar"
-[disabled]="isDisabledVar"
-[maxHeight]="maxHeightVar"
-[glyph]="glyphVar"
-[isOpen]="isOpenVar"
-[loading]="loadingVar"
-[placeholder]="placeholderVar"
-[fillControlMode]="fillControlModeVar"
-[selectType]="selectTypeVar"
->
-<div *ngFor="let value of values">
-    <fd-option value="value">{{ value }}</fd-option>
-</div>
-</fd-select>
+        <fd-select
+        class="fd-select-example"
+        [compact]="compactVar"
+        [disabled]="isDisabledVar"
+        [maxHeight]="maxHeightVar"
+        [glyph]="glyphVar"
+        [isOpen]="isOpenVar"
+        [loading]="loadingVar"
+        [placeholder]="placeholderVar"
+        [fillControlMode]="fillControlModeVar"
+        [selectType]="selectTypeVar"
+        >
+        <div *ngFor="let value of values">
+            <fd-option value="value">{{ value }}</fd-option>
+        </div>
+        </fd-select>
   `,
     props: {
         selectTypeVar: select('Button Border Type', {
