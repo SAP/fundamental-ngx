@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuModule } from '../menu/menu.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { PopoverComponent } from '@fundamental-ngx/core';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -175,4 +176,16 @@ describe('ComboboxComponent', () => {
         component.writeValue({ value: 'value2', displayedValue: 'displayedValue2' });
         expect(component.inputTextValue).toBe('displayedValue2');
     });
+
+    it('should handleSearchTermChange', () => {
+        component.dropdownValues = ['value 1', 'value 2'];
+        component.inputText = 'input text';
+        spyOn(component, 'filterFn');
+        spyOn(component.popoverComponent, 'updatePopover');
+
+        component.handleSearchTermChange();
+
+        expect(component.filterFn).toHaveBeenCalledWith(component.dropdownValues, component.inputText);
+        expect(component.popoverComponent.updatePopover).toHaveBeenCalled();
+    })
 });

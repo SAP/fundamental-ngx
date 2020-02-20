@@ -25,6 +25,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
+import { PopoverComponent } from '../popover/popover.component';
 
 /**
  * Allows users to filter through results and select a value.
@@ -179,6 +180,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     comboboxMenuElement: ElementRef;
 
     /** @hidden */
+    @ViewChild(PopoverComponent, { static: false })
+    popoverComponent: PopoverComponent;
+
+    /** @hidden */
     displayedValues: any[] = [];
 
     /** @hidden */
@@ -312,6 +317,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     handleSearchTermChange(): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+        if (this.popoverComponent) {
+            this.popoverComponent.updatePopover();
+        }
     }
 
     /** @hidden */
