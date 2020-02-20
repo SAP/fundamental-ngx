@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -8,9 +8,7 @@ import * as tileDisabledSrc from '!raw-loader!./examples/tile-disabled-example.c
 import * as tileSrc from '!raw-loader!./examples/tile-example.component.html';
 import * as tileMediaSrc from '!raw-loader!./examples/tile-media-example.component.html';
 import * as tileProductSrc from '!raw-loader!./examples/tile-product-example.component.html';
-import * as tileTscode from '!raw-loader!./examples/tile-examples.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
 import { Icons } from '../../../documentation/utilities/icons';
 
 
@@ -18,7 +16,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html'
 })
-export class TileDocsComponent implements OnInit {
+export class TileDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -145,6 +143,4 @@ export class TileDocsComponent implements OnInit {
     onSchemaValues(data) {
         this.data = data;
     }
-
-    ngOnInit() { }
 }

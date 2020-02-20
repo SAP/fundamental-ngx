@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as backButtonExample from '!raw-loader!./examples/action-bar-back-example.component.html';
 import * as titleTruncationExample from '!raw-loader!./examples/action-bar-long-string-title-truncation-example.component.html';
@@ -12,7 +12,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './action-bar-docs.component.html',
     styleUrls: ['action-bar-docs.component.scss']
 })
-export class ActionBarDocsComponent implements OnInit {
+export class ActionBarDocsComponent {
     backButtonExample: ExampleFile[] = [
         {
             language: 'html',
@@ -52,6 +52,4 @@ export class ActionBarDocsComponent implements OnInit {
             fileName: 'action-bar-mobile',
         }
     ];
-
-    ngOnInit() { }
 }

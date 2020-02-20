@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
 import * as popoverSrcScss from '!raw-loader!./examples/popover-simple/popover-example.component.scss';
@@ -23,7 +23,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-popover',
     templateUrl: './popover-docs.component.html'
 })
-export class PopoverDocsComponent implements OnInit {
+export class PopoverDocsComponent {
     popoverExample: ExampleFile[] = [
         {
             language: 'html',
@@ -124,6 +124,4 @@ export class PopoverDocsComponent implements OnInit {
             scssFileCode: dropdownPopoverScss
         }
     ];
-
-    ngOnInit() { }
 }

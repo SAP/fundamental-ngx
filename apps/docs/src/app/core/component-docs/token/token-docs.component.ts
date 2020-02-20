@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import * as basicTokenH from '!raw-loader!./examples/token-example/token-example.component.html';
 import * as basicTokenTs from '!raw-loader!./examples/token-example/token-example.component.ts';
@@ -26,7 +26,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     styleUrls: ['./token-docs.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class TokenDocsComponent implements OnInit {
+export class TokenDocsComponent {
     basicToken: ExampleFile[] = [
         {
             language: 'html',
@@ -89,6 +89,4 @@ export class TokenDocsComponent implements OnInit {
             fileName: 'tokenizer-compact-example'
         }
     ];
-
-    ngOnInit() { }
 }

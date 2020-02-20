@@ -193,10 +193,10 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
     /** @hidden */
     private _checkMandatoryFields(): void {
-        if (!this.name) {
+        if (this.name === undefined) {
             throw 'name field is required';
         }
-        if (!this.value) {
+        if (this.value === undefined) {
             throw 'value field is required';
         }
     }
