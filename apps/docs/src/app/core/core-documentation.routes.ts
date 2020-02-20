@@ -1,7 +1,7 @@
-import {Routes} from '@angular/router';
-import {CoreDocumentationComponent} from './documentation/core-documentation.component';
-import {HomeDocsComponent} from './component-docs/core-home/core-home.component';
-import {NewComponentComponent} from './component-docs/new-component/new-component.component';
+import { Routes } from '@angular/router';
+import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
+import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
 export const ROUTES: Routes = [
     {
@@ -25,7 +25,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'bar',
-                loadChildren: () => import('./component-docs/bar/bar-docs.module').then(m => m.BarDocsModule
+                loadChildren: () => import('./component-docs/bar/bar-docs.module').then(m => m.BarDocsModule)
             },
             {
                 path: 'breadcrumb',
