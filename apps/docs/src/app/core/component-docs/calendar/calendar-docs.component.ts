@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
@@ -15,8 +15,8 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html'
 })
-export class CalendarDocsComponent implements OnInit {
-    exampleFunctionsHtml = `Example Disable and Block Functions: 
+export class CalendarDocsComponent {
+    exampleFunctionsHtml = `Example Disable and Block Functions:
 
 // Disable the weekends
 myDisableFunction = function (d: FdDate): boolean {
@@ -40,7 +40,7 @@ myDisableFunction = function(d: FdDate): boolean {
 // Disable future selection
 myDisableFunction = function(d: FdDate): boolean {
     let today = FdDate.getToday();
-    today.setHours(0,0,0,0); 
+    today.setHours(0,0,0,0);
     return d.getTimeStamp() > today.getTimeStamp()
 }
 
@@ -139,6 +139,4 @@ myDisableFunction = function(d: FdDate): boolean {
             code: calendarProgrammaticallySource
         }
     ];
-
-    ngOnInit() { }
 }

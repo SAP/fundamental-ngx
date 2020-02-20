@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
@@ -18,7 +18,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-list',
     templateUrl: './list-docs.component.html'
 })
-export class ListDocsComponent implements OnInit {
+export class ListDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -127,7 +127,6 @@ export class ListDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('list');
     }
 
-    ngOnInit() { }
     onSchemaValues(data) {
         this.data = data;
     }

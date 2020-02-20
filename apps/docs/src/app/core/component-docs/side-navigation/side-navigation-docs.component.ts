@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-example.component.html';
 import * as sideNavigationScsscode from '!raw-loader!./examples/side-navigation-examples.component.scss';
@@ -23,7 +23,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-side-navigation',
     templateUrl: './side-navigation-docs.component.html'
 })
-export class SideNavigationDocsComponent implements OnInit {
+export class SideNavigationDocsComponent {
     oneLevelSideNav: ExampleFile[] = [
         {
             language: 'html',
@@ -131,6 +131,4 @@ export class SideNavigationDocsComponent implements OnInit {
             component: 'SideNavigationCondensedObjectExampleComponent'
         }
     ];
-
-    ngOnInit() {}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-button-group-toggle-example',
@@ -8,9 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class ButtonGroupToggleExampleComponent {
 
     lmr: boolean[] = [false, false, false];
-
-    constructor() {
-    }
 
     isSelectedLMR(x: number): string {
         return this.lmr[x] ? 'selected' : '';

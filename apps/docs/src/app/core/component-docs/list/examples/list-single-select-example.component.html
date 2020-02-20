@@ -1,6 +1,9 @@
 <ul fd-list>
     <li fd-list-item *ngFor="let number of [0, 1, 2, 3, 4]">
-        <fd-radio-button [id]="number" [value]="number" [(ngModel)]="this.selectedItem">
+        <fd-radio-button name="radio-group"
+                         [id]="number"
+                         [value]="number"
+                         [(ngModel)]="this.selectedItem">
             List item {{ number }}
         </fd-radio-button>
     </li>

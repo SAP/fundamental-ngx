@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-button-group-default-example',
@@ -9,10 +9,6 @@ export class ButtonGroupDefaultExampleComponent {
 
     icon: number = 0;
     lmr: boolean[] = [false, false, false];
-
-    constructor() {
-    }
-
 
     isSelectedIcon(x: number): string {
         return this.icon === x ? 'selected' : '';

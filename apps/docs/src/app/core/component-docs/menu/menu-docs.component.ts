@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
 import * as menuAddon from '!raw-loader!./examples/menu-addon-example.component.html';
@@ -14,7 +14,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-menu',
     templateUrl: './menu-docs.component.html'
 })
-export class MenuDocsComponent implements OnInit {
+export class MenuDocsComponent {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -61,6 +61,4 @@ export class MenuDocsComponent implements OnInit {
             fileName: 'menu-separator-example',
         }
     ];
-
-    ngOnInit() { }
 }

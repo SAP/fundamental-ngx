@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as linkTs from '!raw-loader!./examples/link-example.component.ts';
 import * as linkH from '!raw-loader!./examples/link-example.component.html';
 
 
