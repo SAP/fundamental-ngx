@@ -57,6 +57,7 @@ import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/pla
 import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
+import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 
 @NgModule({
     declarations: [
@@ -110,6 +111,9 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
     ],
-    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }]
+    providers: [
+            { provide: 'CURRENT_LIB', useValue: 'platform' },
+            StackblitzService
+        ]
 })
 export class PlatformDocumentationModule {}
