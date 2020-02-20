@@ -18,7 +18,7 @@ export class FormMessageComponent {
     @Input()
     type: MessageStates;
 
-    /** Whether to apply compact mode to the message. */
+    /** Whether to display the message in static mode. */
     @Input()
-    compact: boolean = false;
+    static: boolean = false;
 }
