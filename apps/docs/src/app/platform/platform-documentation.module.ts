@@ -19,25 +19,25 @@ import {
 import {
     PlatformActionbarExamplesComponent
 } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
-import {PlatformActionbarWithBackButtonExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
-import {PlatformActionbarWithDescriptionExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
-import {PlatformActionbarWithLongPageTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
-import {PlatformActionbarEditTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
-import {PlatformActionbarWithContextualMenuExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
-import {PlatformActionbarWithPositiveNegativeActionsExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
+import { PlatformActionbarWithBackButtonExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
+import { PlatformActionbarWithDescriptionExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
+import { PlatformActionbarWithLongPageTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
+import { PlatformActionbarEditTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
+import { PlatformActionbarWithContextualMenuExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
+import { PlatformActionbarWithPositiveNegativeActionsExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
 import { PlatformActionbarHeaderComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
-import {PlatformActionBarDocsComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
+import { PlatformActionBarDocsComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 
-import { 
+import {
     PlatformLinkStandardExampleComponent,
     PlatformLinkEmphasizedExampleComponent,
     PlatformLinkDisabledExampleComponent,
     PlatformLinkDisabledEmphasizedExampleComponent,
     PlatformLinkInvertedExampleComponent,
     PlatformLinkTruncatedExampleComponent,
-    PlatformLinkIconExampleComponent 
+    PlatformLinkIconExampleComponent
 } from './component-docs/platform-link/platform-link-examples/platform-link-examples.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
 import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
@@ -57,6 +57,7 @@ import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/pla
 import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-noborder-example.component';
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
+import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 
 @NgModule({
     declarations: [
@@ -110,6 +111,8 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
         MarkdownModule.forChild(),
         RouterModule.forChild(ROUTES)
     ],
-    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }]
+    providers: [
+        StackblitzService,
+        { provide: 'CURRENT_LIB', useValue: 'platform' }]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }
