@@ -107,8 +107,8 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     /** @hidden */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
-        this.subListPosition === 'right' ? this.keyboardLtr(event) : this.keyboardRtl(event);
-        this.keyboardDefault(event);
+        this.subListPosition === 'right' ? this._keyboardLtr(event) : this._keyboardRtl(event);
+        this._keyboardDefault(event);
     }
 
     /** @hidden */
@@ -131,8 +131,8 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
              * When the page is resized and the menu sub list goes beyond the page,
              * the sub list should go over the parent list
              */
-            while (distanceFromCorner > window.innerWidth && this.getLeftPropertyFromSubList() > 1) {
-                this.subList.nativeElement.style.left = (this.getLeftPropertyFromSubList() - 1) + '%';
+            while (distanceFromCorner > window.innerWidth && this._getLeftPropertyFromSubList() > 1) {
+                this.subList.nativeElement.style.left = (this._getLeftPropertyFromSubList() - 1) + '%';
                 this.changeDetectionRef.detectChanges();
                 distanceFromCorner = this.subList.nativeElement.getBoundingClientRect().right;
             }
@@ -141,8 +141,8 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
              * When the page is resized and the menu sub list was pulled over parent list,
              * the sub list should go to right side of parent list
              */
-            while (distanceFromCorner < window.innerWidth && this.getLeftPropertyFromSubList() < 100) {
-                this.subList.nativeElement.style.left = (this.getLeftPropertyFromSubList() + 1) + '%';
+            while (distanceFromCorner < window.innerWidth && this._getLeftPropertyFromSubList() < 100) {
+                this.subList.nativeElement.style.left = (this._getLeftPropertyFromSubList() + 1) + '%';
                 this.changeDetectionRef.detectChanges();
                 distanceFromCorner = this.subList.nativeElement.getBoundingClientRect().right;
             }
@@ -154,7 +154,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         this.link.hasChild = this.subItems.length > 0;
         this.subItems.changes
             .pipe(takeUntil(this.onDestroy$), startWith(5))
-            .subscribe(() => this.refreshSubscription())
+            .subscribe(() => this._refreshSubscription())
             ;
     }
 
@@ -220,7 +220,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     /** Method that helps with the responsive support. Gives percentage number of left css attribute on list. */
-    private getLeftPropertyFromSubList(): number {
+    private _getLeftPropertyFromSubList(): number {
         const styles = getComputedStyle(this.subList.nativeElement);
         if (styles.left) {
             if (styles.left.includes('px')) {
@@ -234,7 +234,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     /** Whether any querylist detects any changes */
-    private refreshSubscription(): void {
+    private _refreshSubscription(): void {
         /** Finish all of the streams, form before */
         this.onRefresh$.next();
 
@@ -247,37 +247,37 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
             ;
     }
 
-    private keyboardLtr(event: KeyboardEvent) {
+    private _keyboardLtr(event: KeyboardEvent) {
         switch (event.key) {
             case ('ArrowLeft'): {
-                this.handleCloseSubList();
+                this._handleCloseSubList();
                 break;
             }
             case ('ArrowRight'): {
-                this.handleOpenSubList(event);
+                this._handleOpenSubList(event);
                 break;
             }
         }
     }
 
-    private keyboardRtl(event: KeyboardEvent) {
+    private _keyboardRtl(event: KeyboardEvent) {
         switch (event.key) {
             case ('ArrowRight'): {
-                this.handleCloseSubList();
+                this._handleCloseSubList();
                 break;
             }
             case ('ArrowLeft'): {
-                this.handleOpenSubList(event);
+                this._handleOpenSubList(event);
                 break;
             }
         }
     }
 
-    private keyboardDefault(event: KeyboardEvent) {
+    private _keyboardDefault(event: KeyboardEvent) {
         switch (event.key) {
             case (' '):
             case ('Enter'): {
-                this.handleOpenSubList(event);
+                this._handleOpenSubList(event);
                 break;
             }
             default: {
@@ -286,12 +286,12 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         }
     }
 
-    private handleCloseSubList() {
+    private _handleCloseSubList() {
         this.closeSubList();
         this.link.focus();
     }
 
-    private handleOpenSubList(event: KeyboardEvent) {
+    private _handleOpenSubList(event: KeyboardEvent) {
         this.openSubList();
         this.changeDetectionRef.detectChanges();
         if (this.subItems.first) {
