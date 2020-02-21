@@ -20,10 +20,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { defer, merge, Observable, Subject } from 'rxjs';
+import { defer, merge, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { PopperOptions } from 'popper.js';
+import { PopperOptions, Behavior } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
+import { RtlService } from 'libs/core/src/lib/utils/public_api';
 
 type SelectType = 'noborder' | 'splitborder';
 
@@ -52,6 +53,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
+
+    /** @hidden */
+    dir$: BehaviorSubject<string> = new BehaviorSubject('ltr');
 
     /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
@@ -163,7 +167,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     onTouched: Function = () => { };
 
-    constructor(private changeDetectorRef: ChangeDetectorRef) { }
+    constructor(private changeDetectorRef: ChangeDetectorRef, private rtlService: RtlService) { }
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
@@ -185,7 +189,12 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     }
 
     ngOnInit() {
-        // console.log(this.loading);
+        if (this.rtlService) {
+            this.rtlService.rtl
+                .subscribe(isRtl => {
+                    this.dir$.next(isRtl ? 'rtl' : 'ltr')
+                })
+        }
     }
 
     /** @hidden */

@@ -5,22 +5,26 @@
     [fillControlMode]="fillControlMode"
     [appendTo]="appendTo"
     class="fd-select-popover-custom"
-    [disabled]="disabled || loading">
+    [disabled]="disabled || loading"
+>
     <fd-popover-control>
         <ng-container *ngIf="triggerTemplate">
             <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>
         </ng-container>
         <div *ngIf="!triggerTemplate">
-            <button class="fd-select-button-custom fd-button"
-                    aria-haspopup="true"
-                    [attr.aria-expanded]="isOpen"
-                    [disabled]="disabled"
-                    [ngClass]="{'fd-button--compact':  compact,
-                    'fd-button--noborder':  selectType === 'noborder',
-                    'fd-button--splitborder':  selectType === 'splitborder'}">
-                <fd-icon *ngIf="glyph" size="m" [glyph]="glyph" class="fd-template-icon icon-position">
-                </fd-icon>
-                <span class="fd-select-text-custom">{{ triggerValue }}</span>
+            <button
+                class="fd-select-button-custom fd-button"
+                aria-haspopup="true"
+                [attr.aria-expanded]="isOpen"
+                [disabled]="disabled"
+                [ngClass]="{
+                    'fd-button--compact': compact,
+                    'fd-button--noborder': selectType === 'noborder',
+                    'fd-button--splitborder': selectType === 'splitborder'
+                }"
+            >
+                <fd-icon *ngIf="glyph" size="m" [glyph]="glyph" class="fd-template-icon icon-position"> </fd-icon>
+                <span class="fd-select-text-custom" [dir]="dir$ | async">{{ triggerValue }}</span>
             </button>
             <fd-busy-indicator *ngIf="loading" [size]="'m'" [loading]="true"></fd-busy-indicator>
         </div>
