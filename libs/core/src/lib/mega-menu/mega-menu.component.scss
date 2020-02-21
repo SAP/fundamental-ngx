@@ -17,8 +17,7 @@ $block: fd-mega-menu;
     $fd-mega-menu-link-focus-color: #085caf !default;
     $fd-mega-menu-title-background-color: #fafafa !default;
     $fd-mega-menu-header-box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.07);
-    $fd-mega-menu-link-background-image-right: 'data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4LjAxIDExLjk5Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzIxMjYyYzt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmRvd25sb2FkPC90aXRsZT48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zLjQ3LTEuOTMsOS45MiwzLjgxYS4yNy4yNywwLDAsMSwwLC4zOGgwTDMuNDcsOS45NGEuMjMuMjMsMCwwLDEtLjMzLDBoMEwyLjA1LDguNjJhLjI4LjI4LDAsMCwxLDAtLjE2djBhLjIxLjIxLDAsMCwxLC4wOC0uMTdMNyw0LDIuMDgtLjI2YS4yNy4yNywwLDAsMSwwLS4zNkwzLjEzLTEuOTFBLjIxLjIxLDAsMCwxLDMuMjktMiwuMi4yLDAsMCwxLDMuNDctMS45M1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yIDEuOTkpIi8+PC9zdmc+' !default;
-    $fd-mega-menu-link-background-image-left: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgaWQ9IkxheWVyXzEiCiAgIGRhdGEtbmFtZT0iTGF5ZXIgMSIKICAgdmlld0JveD0iMCAwIDguMDEgMTEuOTkiCiAgIHZlcnNpb249IjEuMSIKICAgc29kaXBvZGk6ZG9jbmFtZT0iYXJyb3ctbGVmdC5zdmciCiAgIGlua3NjYXBlOnZlcnNpb249IjAuOTIuNCAoNWRhNjg5YzMxMywgMjAxOS0wMS0xNCkiPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTEzIj4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT5kb3dubG9hZDwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiCiAgICAgYm9yZGVyb3BhY2l0eT0iMSIKICAgICBvYmplY3R0b2xlcmFuY2U9IjEwIgogICAgIGdyaWR0b2xlcmFuY2U9IjEwIgogICAgIGd1aWRldG9sZXJhbmNlPSIxMCIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTg2NiIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE2IgogICAgIGlkPSJuYW1lZHZpZXcxMSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6em9vbT0iNjUuOTY5MDM4IgogICAgIGlua3NjYXBlOmN4PSI0LjAwNTAwMDEiCiAgICAgaW5rc2NhcGU6Y3k9IjUuOTk0OTk5OSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iNTQiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9IjI3IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhpbWl6ZWQ9IjEiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0iTGF5ZXJfMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzNCI+CiAgICA8c3R5bGUKICAgICAgIGlkPSJzdHlsZTIiPi5jbHMtMXtmaWxsOiMyMTI2MmM7fTwvc3R5bGU+CiAgPC9kZWZzPgogIDx0aXRsZQogICAgIGlkPSJ0aXRsZTYiPmRvd25sb2FkPC90aXRsZT4KICA8cGF0aAogICAgIGNsYXNzPSJjbHMtMSIKICAgICBkPSJNIDYuNTM5NDEyOSwwLjA2IDAuMDg5NDEyODYsNS44IGEgMC4yNywwLjI3IDAgMCAwIDAsMC4zOCB2IDAgbCA2LjQ1MDAwMDA0LDUuNzUgYSAwLjIzLDAuMjMgMCAwIDAgMC4zMywwIHYgMCBsIDEuMDksLTEuMzIgYSAwLjI4LDAuMjggMCAwIDAgMCwtMC4xNiB2IDAgYSAwLjIxLDAuMjEgMCAwIDAgLTAuMDgsLTAuMTcgbCAtNC44NywtNC4yOSA0LjkyLC00LjI2IGEgMC4yNywwLjI3IDAgMCAwIDAsLTAuMzYgbCAtMS4wNSwtMS4yOSBhIDAuMjEsMC4yMSAwIDAgMCAtMC4xNiwtMC4wOSAwLjIsMC4yIDAgMCAwIC0wLjE4LDAuMDcgeiIKICAgICBpZD0icGF0aDgiCiAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICBzdHlsZT0iZmlsbDojMjEyNjJjIiAvPgo8L3N2Zz4K' !default;
+    $fd-mega-menu-list-icon-position: 20px;
 
     @mixin fd-reset {
         font-size: 1rem;
@@ -145,10 +144,12 @@ $block: fd-mega-menu;
 
     &__link {
         &.has-child {
-            background-image: url(#{$fd-mega-menu-link-background-image-right});
-            background-repeat: no-repeat;
-            background-position: calc(100% - 12px) center;
-            background-size: 8px;
+            &::after {
+                position: absolute;
+                font-family: 'SAP-icons';
+                content: '\e066';
+                right: $fd-mega-menu-list-icon-position;
+            }
         }
     }
 
@@ -171,8 +172,11 @@ $block: fd-mega-menu;
     &[dir='rtl'] {
         .#{$block}__link {
             &.has-child {
-                background-image: url(#{$fd-mega-menu-link-background-image-left});
-                background-position: 12px center;
+                &::after {
+                    content: '\e067';
+                    left: $fd-mega-menu-list-icon-position;
+                    right: auto;
+                }
             }
         }
     }
