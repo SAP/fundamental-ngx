@@ -60,6 +60,7 @@ export const Select = () => ({
         isDisabledVar: boolean('Disabled', false),
         values: object('Objects',
             ['value1', 'value2', 'value3', 'value4']
-        )
+        ),
+
     }
 });

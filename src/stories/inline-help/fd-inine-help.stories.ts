@@ -24,7 +24,7 @@ export const InlineHelp = () => ({
         `
         Inline Help
         <fd-inline-help [placement]="placementVar">
-            Lorem ipsum
+            {{textValue}}
         </fd-inline-help>
   `,
     props: {
@@ -39,5 +39,7 @@ export const InlineHelp = () => ({
             leftEnd: 'left-end',
 
         }, 'bottom-start'),
+        textValue: text('Text Value 6', 'Lorem ipsum'),
+
     }
 });

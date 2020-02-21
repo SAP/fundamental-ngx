@@ -23,10 +23,12 @@ export const Link = () => ({
         [emphasized]="emphasizedVar"
         [disabled]="disabled"
         [inverted]="invertedVar"
-        fd-link>Standard Link</a>`,
+        fd-link>{{textValue}}</a>`,
     props: {
         emphasizedVar: boolean('Disabled', false),
         disabledVar: boolean('Disabled', false),
         invertedVar: boolean('Inverted', false),
+        textValue: text('Text Value 6', 'Standard Link'),
+
     }
 });
