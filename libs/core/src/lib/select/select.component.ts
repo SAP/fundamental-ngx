@@ -24,7 +24,7 @@ import { defer, merge, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions, Behavior } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { RtlService } from 'libs/core/src/lib/utils/public_api';
+import { RtlService } from '../utils/public_api';
 
 type SelectType = 'noborder' | 'splitborder';
 
