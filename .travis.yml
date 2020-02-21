@@ -1,6 +1,6 @@
 language: node_js
 sudo: required
-node_js: 10.15.0
+node_js: 10.19.0
 cache: npm
 dist: trusty
 addons:
