@@ -12,7 +12,8 @@ import {
     Output,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Optional
 } from '@angular/core';
 import { MegaMenuSubitemDirective } from '../mega-menu-subitem.directive';
 import { MegaMenuLinkDirective } from '../mega-menu-link/mega-menu-link.directive';
@@ -20,6 +21,7 @@ import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { DefaultMenuItem } from '../../menu/default-menu-item';
+import { RtlService } from '../../utils/public_api';
 
 export type MenuSubListPosition = 'left' | 'right';
 
@@ -92,33 +94,21 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     constructor(
         private elRef: ElementRef,
         private menuKeyboardService: MenuKeyboardService,
-        private changeDetectionRef: ChangeDetectorRef
-    ) {}
+        private changeDetectionRef: ChangeDetectorRef,
+        @Optional() private rtlService: RtlService
+    ) {
+        if (rtlService) {
+            rtlService.rtl.subscribe(rtl => {
+                this.subListPosition = rtl ? 'left' : 'right';
+            })
+        }
+    }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
-        switch (event.key) {
-            case ('ArrowLeft'): {
-                this.closeSubList();
-                this.link.focus();
-                break;
-            }
-            case ('ArrowRight'):
-            case (' '):
-            case ('Enter'): {
-                this.openSubList();
-                this.changeDetectionRef.detectChanges();
-                if (this.subItems.first) {
-                    this.subItems.first.focus();
-                }
-                event.preventDefault();
-                break;
-            }
-            default: {
-                this.keyDown.emit(event);
-            }
-        }
+        this.subListPosition === 'right' ? this.keyboardLtr(event) : this.keyboardRtl(event);
+        this.keyboardDefault(event);
     }
 
     /** @hidden */
@@ -165,7 +155,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         this.subItems.changes
             .pipe(takeUntil(this.onDestroy$), startWith(5))
             .subscribe(() => this.refreshSubscription())
-        ;
+            ;
     }
 
     /** @hidden */
@@ -254,6 +244,59 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         this.subItems.forEach((item: MegaMenuSubitemDirective, index: number) => item.keyDown
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((keyboardEvent: KeyboardEvent) => this.handleSubListKeyDown(keyboardEvent, index)))
-        ;
+            ;
+    }
+
+    private keyboardLtr(event: KeyboardEvent) {
+        switch (event.key) {
+            case ('ArrowLeft'): {
+                this.handleCloseSubList();
+                break;
+            }
+            case ('ArrowRight'): {
+                this.handleOpenSubList(event);
+                break;
+            }
+        }
+    }
+
+    private keyboardRtl(event: KeyboardEvent) {
+        switch (event.key) {
+            case ('ArrowRight'): {
+                this.handleCloseSubList();
+                break;
+            }
+            case ('ArrowLeft'): {
+                this.handleOpenSubList(event);
+                break;
+            }
+        }
+    }
+
+    private keyboardDefault(event: KeyboardEvent) {
+        switch (event.key) {
+            case (' '):
+            case ('Enter'): {
+                this.handleOpenSubList(event);
+                break;
+            }
+            default: {
+                this.keyDown.emit(event);
+            }
+        }
+    }
+
+    private handleCloseSubList() {
+        this.closeSubList();
+        this.link.focus();
+    }
+
+    private handleOpenSubList(event: KeyboardEvent) {
+        this.openSubList();
+        this.changeDetectionRef.detectChanges();
+        if (this.subItems.first) {
+            this.subItems.first.focus();
+        }
+        event.preventDefault();
     }
 }
