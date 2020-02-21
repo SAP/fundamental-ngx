@@ -7,7 +7,8 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { PopoverFillMode, RtlService } from '../../..';
+import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
+import { RtlService } from '../../utils/services/rtl.service';
 import { Observable, of } from 'rxjs';
 import { Placement } from 'popper.js';
 import { map } from 'rxjs/operators';
