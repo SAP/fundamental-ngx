@@ -17,6 +17,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewEncapsulation,
+    Optional,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
@@ -167,7 +168,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     onTouched: Function = () => { };
 
-    constructor(private changeDetectorRef: ChangeDetectorRef, private rtlService: RtlService) { }
+    constructor(private changeDetectorRef: ChangeDetectorRef, @Optional() private rtlService: RtlService) { }
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
