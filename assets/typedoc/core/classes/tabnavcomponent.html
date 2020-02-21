@@ -1,30 +1,4 @@
 <div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-comment">
-	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-tab-nav&gt;</p>
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>Tab Nav for only navigation mode when you want for example use router-outlet</p>
-		</div>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">fd-tab-nav</span>&gt;</span>
- <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">fd-tab-item</span>&gt;</span>
-     <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">fd-tab-link</span>
-     [<span class="hljs-attr">active</span>]=<span class="hljs-string">"true"</span>&gt;</span>
-         Link
-     <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
- <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
- <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">fd-tab-item</span>&gt;</span>
-     <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">fd-tab-link</span>
-     [<span class="hljs-attr">active</span>]=<span class="hljs-string">"false"</span>&gt;</span>
-         Link
-     <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
- <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
- <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">fd-tab-link</span>
- [<span class="hljs-attr">active</span>]=<span class="hljs-string">"false"</span>&gt;</span>
-     Link
- <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></code></pre>
-	</div>
-</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
@@ -38,25 +12,122 @@
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">AfterContentInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
+		<li><span class="tsd-signature-type">CssClassBuilder</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Outputs</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="onkeydown" class="tsd-anchor"></a>
-		<h3>on<wbr>Key<wbr>Down</h3>
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="class" class="tsd-anchor"></a>
+		<h3>class</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Key<wbr>Down<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;{event: any, index: number}&gt;()</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L68">tabs/tab-nav/tab-nav.component.ts:68</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event Thrown every time something is clicked</p>
-			</div>
-		</div>
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> class<span class="tsd-signature-symbol">(</span>userClass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L44">tabs/tab-nav/tab-nav.component.ts:44</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>userClass: <span class="tsd-signature-type">string</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="compact" class="tsd-anchor"></a>
+		<h3>compact</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> compact<span class="tsd-signature-symbol">(</span>compact<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L71">tabs/tab-nav/tab-nav.component.ts:71</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether user wants to use tab component in compact mode</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>compact: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="mode" class="tsd-anchor"></a>
+		<h3>mode</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> mode<span class="tsd-signature-symbol">(</span>mode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TabModes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L55">tabs/tab-nav/tab-nav.component.ts:55</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether user wants to use tab component in certain mode. Modes available:
+						&#39;icon-only&#39; | &#39;process&#39; | &#39;filter&#39;</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>mode: <span class="tsd-signature-type">TabModes</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="size" class="tsd-anchor"></a>
+		<h3>size</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> size<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TabSizes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L63">tabs/tab-nav/tab-nav.component.ts:63</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Size of tab, it&#39;s mostly about adding spacing on tab container, available sizes &#39;s&#39; | &#39;m&#39; | &#39;l&#39; | &#39;xl&#39; | &#39;xxl&#39;</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>size: <span class="tsd-signature-type">TabSizes</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -72,7 +143,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L77">tabs/tab-nav/tab-nav.component.ts:77</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L83">tabs/tab-nav/tab-nav.component.ts:83</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -88,6 +159,50 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="buildcomponentcssclass" class="tsd-anchor"></a>
+		<h3>build<wbr>Component<wbr>Css<wbr>Class</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">build<wbr>Component<wbr>Css<wbr>Class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Implementation of <span>CssClassBuilder</span>.<span>buildComponentCssClass</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L121">tabs/tab-nav/tab-nav.component.ts:121</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="elementref" class="tsd-anchor"></a>
+		<h3>element<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Implementation of <span>CssClassBuilder</span>.<span>elementRef</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L134">tabs/tab-nav/tab-nav.component.ts:134</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>HasElementRef interface implementation
+						function used by applyCssClass and applyCssStyle decorators</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="selecttab" class="tsd-anchor"></a>
 		<h3>select<wbr>Tab</h3>
 		<!-- {log decorators} -->
@@ -98,7 +213,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L106">tabs/tab-nav/tab-nav.component.ts:106</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/tabs/tab-nav/tab-nav.component.ts#L112">tabs/tab-nav/tab-nav.component.ts:112</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

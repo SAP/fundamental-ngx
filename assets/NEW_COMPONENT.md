@@ -1,6 +1,6 @@
-# Implementing a new component for Fundamental NGX
+# Implementing a new component for Fundamental Library for Angular
 
-In this guide, we'll explore the library and documentation code base and create a new component of our own. [How to create a new Fundamental NGX component](https://www.youtube.com/watch?v=uN9WlsdspHg)
+In this guide, we'll explore the library and documentation code base and create a new component of our own. [How to create a new Fundamental Library for Angular component](https://www.youtube.com/watch?v=uN9WlsdspHg)
 
 ### Code Base Structure
 
@@ -51,7 +51,7 @@ Create an `exports` array in the poster module and add the poster component, lik
 
 ## Step4: Change selector to fd prefix
 
-The Fundamental NGX library uses 'fd' as the component and directive prefix. Open `poster.component.ts` and change the component's 'app' prefix to 'fd', like so:
+The Fundamental Library for Angular uses 'fd' as the component and directive prefix. Open `poster.component.ts` and change the component's 'app' prefix to 'fd', like so:
 
 ```TypeScript
   selector: 'fd-poster',
@@ -59,7 +59,7 @@ The Fundamental NGX library uses 'fd' as the component and directive prefix. Ope
 
 ## Step5: Add poster module to list of imports (can be in FundamentalNgxCore)
 
-The documentation application is importing every component in the fundamental-ngx library module. Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
+The documentation application is importing every component in the Fundamental Library for Angular module. Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
 
 We must also add `export * from './lib/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fd-poster> component will be an exported member of the fundamental-ngx module as well as the poster module.
 

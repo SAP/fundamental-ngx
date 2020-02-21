@@ -1,4 +1,4 @@
-# Implementing a new component for Fundamental NGX-Platform
+# Implementing a new component for Fundamental Library for Angular-Platform
 
 In this guide, we'll explore the library and documentation code base and create a new component of our own.
 
@@ -57,7 +57,7 @@ Create an `exports` array in the poster module and add the poster component, lik
 
 ## Step4: Change selector to fdp prefix
 
-The Fundamental NGX Platform library uses 'fdp' as the component and directive prefix. Open `poster.component.ts` and change the component's 'app' prefix to 'fdp', like so:
+The Fundamental Library for Angular Platform library uses 'fdp' as the component and directive prefix. Open `poster.component.ts` and change the component's 'app' prefix to 'fdp', like so:
 
 ```TypeScript
   selector: 'fdp-poster',
@@ -65,7 +65,7 @@ The Fundamental NGX Platform library uses 'fdp' as the component and directive p
 
 ## Step5: Add poster module to list of imports (can be in FundamentalNgxPlatform)
 
-The documentation application is importing every component in the fundamental-ngx library module. Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
+The documentation application is importing every component in the Fundamental Library for Angular module. Open `fundamental-ngx.module.ts` and add `import { PosterModule } from './poster/poster.module';` to the list of imports at the top of the file, then add `PosterModule` to the array of exports.
 
 We must also add `export * from './lib/components/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fdp-poster> component will be an exported member of the fundamental-ngx module as well as the poster module.
 

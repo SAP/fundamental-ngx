@@ -1,10 +1,10 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-toggle&gt;</p>
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-switch&gt;</p>
 	<div class="tsd-comment tsd-typography">
 		<div class="lead">
-			<p>The Toggle component is used to activate or deactivate an element.
-			It uses a visual metaphor to inform the user of the state of the toggle.</p>
+			<p>The Switch component is used to activate or deactivate an element.
+			It uses a visual metaphor to inform the user of the state of the switch.</p>
 		</div>
 	</div>
 </section>
@@ -12,14 +12,13 @@
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="target">ToggleComponent</span>
+			<span class="target">SwitchComponent</span>
 		</li>
 	</ul>
 </section>
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
 	</ul>
 </section>
@@ -32,7 +31,7 @@
 		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L74">toggle/toggle.component.ts:74</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L70">switch/switch.component.ts:70</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -48,7 +47,7 @@
 		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelledby<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L78">toggle/toggle.component.ts:78</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L74">switch/switch.component.ts:74</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -64,12 +63,12 @@
 		<div class="tsd-signature tsd-kind-icon">checked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L62">toggle/toggle.component.ts:62</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L58">switch/switch.component.ts:58</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether the toggle is checked.</p>
+				<p>Whether the switch is checked.</p>
 			</div>
 		</div>
 	</section>
@@ -80,12 +79,12 @@
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L70">toggle/toggle.component.ts:70</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L66">switch/switch.component.ts:66</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether the toggle is compact</p>
+				<p>Whether the switch is compact</p>
 			</div>
 		</div>
 	</section>
@@ -96,12 +95,12 @@
 		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L54">toggle/toggle.component.ts:54</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L50">switch/switch.component.ts:50</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether the toggle is disabled.</p>
+				<p>Whether the switch is disabled.</p>
 			</div>
 		</div>
 	</section>
@@ -109,15 +108,31 @@
 		<a name="id" class="tsd-anchor"></a>
 		<h3>id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;fd-toggle-&#x27; + toggleUniqueId++</span></div>
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;fd-switch-&#x27; + switchUniqueId++</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L58">toggle/toggle.component.ts:58</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L54">switch/switch.component.ts:54</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Id for the toggle component. If omitted, a unique one is generated.</p>
+				<p>Id for the switch component. If omitted, a unique one is generated.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="optionaltext" class="tsd-anchor"></a>
+		<h3>optional<wbr>Text</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">optional<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L46">switch/switch.component.ts:46</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>If the switch should have text in it or not.</p>
 			</div>
 		</div>
 	</section>
@@ -128,29 +143,12 @@
 		<div class="tsd-signature tsd-kind-icon">semantic<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L66">toggle/toggle.component.ts:66</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L62">switch/switch.component.ts:62</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether the toggle is semantic</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="size" class="tsd-anchor"></a>
-		<h3>size</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L50">toggle/toggle.component.ts:50</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The size of the toggle.
-				Can be one of the four <em>xs</em>, <em>s</em>, <em>l</em>, <em>error</em> or default.</p>
+				<p>Whether the switch is semantic</p>
 			</div>
 		</div>
 	</section>
@@ -164,13 +162,13 @@
 		<div class="tsd-signature tsd-kind-icon">checked<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;boolean&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L85">toggle/toggle.component.ts:85</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L82">switch/switch.component.ts:82</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Event fired when the state of the toggle changes.
-				<em>$event</em> can be used to retrieve the new state of the toggle.</p>
+				<p>Event fired when the state of the switch changes.
+				<em>$event</em> can be used to retrieve the new state of the switch.</p>
 			</div>
 		</div>
 	</section>
@@ -182,13 +180,13 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Toggle<wbr>Component<span class="tsd-signature-symbol">(</span>changeDetectorRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ToggleComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Switch<wbr>Component<span class="tsd-signature-symbol">(</span>changeDetectorRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SwitchComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L91">toggle/toggle.component.ts:91</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L88">switch/switch.component.ts:88</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -197,7 +195,7 @@
 						<h5>changeDetectorRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ToggleComponent</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SwitchComponent</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -215,12 +213,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L110">toggle/toggle.component.ts:110</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L98">switch/switch.component.ts:98</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get the id of the inner input element of the toggle.</p>
+						<p>Get the id of the inner input element of the switch.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -239,12 +237,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L115">toggle/toggle.component.ts:115</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L103">switch/switch.component.ts:103</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get the isChecked property of the toggle.</p>
+						<p>Get the isChecked property of the switch.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -252,12 +250,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L120">toggle/toggle.component.ts:120</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L108">switch/switch.component.ts:108</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Set the isChecked property of the toggle.</p>
+						<p>Set the isChecked property of the switch.</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -284,7 +282,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/bf9f83fe/libs/core/src/lib/toggle/toggle.component.ts#L105">toggle/toggle.component.ts:105</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec5bd4f0/libs/core/src/lib/switch/switch.component.ts#L93">switch/switch.component.ts:93</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
