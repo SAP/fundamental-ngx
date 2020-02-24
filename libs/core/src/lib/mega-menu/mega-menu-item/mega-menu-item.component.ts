@@ -23,6 +23,8 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { DefaultMenuItem } from '../../menu/default-menu-item';
 import { RtlService } from '../../utils/public_api';
 
+const left = 'left';
+const right = 'left';
 export type MenuSubListPosition = 'left' | 'right';
 
 /**
@@ -84,7 +86,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** Defines what should be position for sublist */
     @Input()
-    subListPosition: MenuSubListPosition = 'right';
+    subListPosition: MenuSubListPosition = right;
 
     /** Event that is thrown always, when the open variable is changed */
     @Output()
@@ -98,16 +100,20 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         @Optional() private rtlService: RtlService
     ) {
         if (rtlService) {
-            rtlService.rtl.subscribe(rtl => {
-                this.subListPosition = rtl ? 'left' : 'right';
-            })
+            rtlService.rtl
+                .pipe(
+                    takeUntil(this.onDestroy$)
+                )
+                .subscribe(rtl => {
+                    this.subListPosition = rtl ? left : right;
+                })
         }
     }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
-        this.subListPosition === 'right' ? this._keyboardLtr(event) : this._keyboardRtl(event);
+        this.isSubListPositionRight() ? this._keyboardLtr(event) : this._keyboardRtl(event);
         this._keyboardDefault(event);
     }
 
@@ -187,7 +193,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** Method that informs if actual position of sublist is set to right */
     public isSubListPositionRight(): boolean {
-        return this.subListPosition === 'right';
+        return this.subListPosition === right;
     }
 
     /** Method that changes state of open variable */
@@ -248,7 +254,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     private _keyboardLtr(event: KeyboardEvent) {
-        switch (event.key) {
+        switch (this.getKeyCode(event)) {
             case ('ArrowLeft'): {
                 this._handleCloseSubList();
                 break;
@@ -261,7 +267,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     private _keyboardRtl(event: KeyboardEvent) {
-        switch (event.key) {
+        switch (this.getKeyCode(event)) {
             case ('ArrowRight'): {
                 this._handleCloseSubList();
                 break;
@@ -274,7 +280,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     private _keyboardDefault(event: KeyboardEvent) {
-        switch (event.key) {
+        switch (this.getKeyCode(event)) {
             case (' '):
             case ('Enter'): {
                 this._handleOpenSubList(event);
@@ -298,5 +304,13 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
             this.subItems.first.focus();
         }
         event.preventDefault();
+    }
+
+    private getKeyCode(event: KeyboardEvent): string {
+        const ieKeys = {
+            'Left': 'ArrowLeft',
+            'Right': 'ArrowRight',
+        };
+        return ieKeys[event.key] || event.key
     }
 }

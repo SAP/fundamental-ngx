@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, Optional } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RtlService } from '../utils/public_api';
+import { map } from 'rxjs/operators';
 
 const rtl = 'rtl';
 const ltr = 'ltr';
@@ -33,11 +34,16 @@ const ltr = 'ltr';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MegaMenuComponent {
-    dir$: BehaviorSubject<string> = new BehaviorSubject(rtl);
+    dir$: Observable<string>;
 
     constructor(@Optional() private rtlService: RtlService) {
         if (rtlService) {
-            rtlService.rtl.subscribe(isRtl => this.dir$.next(isRtl ? rtl : ltr));
+            this.dir$ = rtlService.rtl
+                .pipe(
+                    map(isRtl => isRtl ? rtl : ltr)
+                )
+        } else {
+            this.dir$ = of(ltr);
         }
     }
 }
