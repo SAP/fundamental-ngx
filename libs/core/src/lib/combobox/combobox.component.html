@@ -7,9 +7,8 @@
             class="fd-combobox-popover-custom">
     <fd-popover-control>
         <div class="fd-combobox-control">
-            <fd-input-group [glyph]="glyph"  [compact]="compact" [button]="true" [state]="state"
-                            (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable"
-                            [inShellbar]="inShellbar">
+            <fd-input-group [glyph]="glyph"  [compact]="compact" [button]="true" [state]="state" [inShellbar]="inShellbar"
+                            (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable">
                 <input #searchInputElement type="text"
                        fd-input-group-input
                        [compact]="compact"
@@ -18,8 +17,7 @@
                        [disabled]="disabled"
                        [(ngModel)]="inputText"
                        (ngModelChange)="handleSearchTermChange()"
-                       placeholder="{{placeholder}}"
-                       [ngClass]="{'fd-shellbar__input-group__input': inShellbar}">
+                       placeholder="{{placeholder}}">
             </fd-input-group>
         </div>
     </fd-popover-control>
