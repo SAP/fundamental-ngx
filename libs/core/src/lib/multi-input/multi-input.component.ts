@@ -83,7 +83,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** Icon of the button on the right of the input field. */
     @Input()
-    glyph: string = 'navigation-down-arrow';
+    glyph: string = 'value-help';
 
     /** Values to be displayed in the unfiltered dropdown. */
     @Input()

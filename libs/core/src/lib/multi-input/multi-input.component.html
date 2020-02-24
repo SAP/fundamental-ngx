@@ -13,11 +13,13 @@
                     [buttonFocusable]="buttonFocusable"
                     [button]="true"
                     [glyph]="glyph"
+                    [compact]="compact"
                     [disabled]="disabled"
                     (click)="openChangeHandle(!open)">
                     <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer">
                         <fd-token
                             *ngFor="let token of selected"
+                            [compact]="compact"
                             [disabled]=this.disabled
                             (onCloseClick)="handleSelect(false, token, null)">
                             <span [innerHtml]="token | displayFnPipe:displayFn"></span>
@@ -27,6 +29,7 @@
                                #searchInputElement
                                [placeholder]="placeholder"
                                [(ngModel)]="searchTerm"
+                               [ngClass]="{'fd-input--compact': compact}"
                                (ngModelChange)="handleSearchTermChange()"
                                (keydown)="handleInputKeydown($event)">
                     </fd-tokenizer>

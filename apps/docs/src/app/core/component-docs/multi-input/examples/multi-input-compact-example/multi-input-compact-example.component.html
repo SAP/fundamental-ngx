@@ -1,0 +1,6 @@
+<fd-multi-input [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Strawberry']"
+                [placeholder]="'Search here...'"
+                [compact]="true"
+                [(ngModel)]="selected"></fd-multi-input>
+
+Selected: [{{selected.toLocaleString()}}]

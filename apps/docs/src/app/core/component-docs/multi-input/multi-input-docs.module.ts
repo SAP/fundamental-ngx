@@ -10,6 +10,7 @@ import {MultiInputDisplaywithExampleComponent} from './examples/multi-input-disp
 import {MultiInputExampleComponent} from './examples/multi-input-example/multi-input-example.component';
 import {MultiInputFilterExampleComponent} from './examples/multi-input-filter-example/multi-input-filter-example.component';
 import {MultiInputFormExampleComponent} from './examples/multi-input-form-example/multi-input-form-example.component';
+import {MultiInputCompactExampleComponent} from './examples/multi-input-compact-example/multi-input-compact-example.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         MultiInputFormExampleComponent,
         MultiInputAsyncExampleComponent,
         MultiInputFilterExampleComponent,
-        MultiInputDisplaywithExampleComponent
+        MultiInputDisplaywithExampleComponent,
+        MultiInputCompactExampleComponent
     ]
 })
 export class MultiInputDocsModule {
