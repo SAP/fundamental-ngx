@@ -1,5 +1,3 @@
-<p>Selected Value: {{ selectOneValue }}</p>
-
 <fd-select [loading]="true" placeholder="Select an option...">
     <div *ngFor="let fruit of emptyValues">
         <fd-option [value]="fruit">{{ fruit }}</fd-option>
@@ -16,6 +14,7 @@
         <fd-option [value]="fruit">{{ fruit }}</fd-option>
     </div>
 </fd-select>
+<p>Selected Value: {{ selectOneValue }}</p>
 
 <fd-select
     class="fd-select-example"
@@ -28,6 +27,7 @@
         <fd-option [value]="fruit">{{ fruit }}</fd-option>
     </div>
 </fd-select>
+<p>Selected Value: {{ selectTwoValue }}</p>
 
 <fd-select
     class="fd-select-example"
