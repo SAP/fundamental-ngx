@@ -86,4 +86,16 @@ describe('PaginationService', () => {
         expect(pages[1]).toEqual(service.MORE);
         expect(pages[5]).toEqual(service.MORE);
     });
+
+    it('should not have two dots sections if second to last page is currentPage', () => {
+        const pagination: Pagination = {
+            totalItems: 150,
+            itemsPerPage: 2,
+            currentPage: 73
+        };
+        const pages = service.getPages(pagination);
+        expect(pages[1]).toEqual(service.MORE);
+        expect(pages[5]).not.toEqual(service.MORE);
+        expect(pages[5]).toEqual(75);
+    })
 });

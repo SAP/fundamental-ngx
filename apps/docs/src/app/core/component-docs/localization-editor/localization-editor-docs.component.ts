@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as localizationSrcH from '!raw-loader!./examples/localization-editor-example.component.html';
 import * as localizationSrcT from '!raw-loader!./examples/localization-editor-example.component.ts';
@@ -14,7 +14,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-localization-editor',
     templateUrl: './localization-editor-docs.component.html'
 })
-export class LocalizationEditorDocsComponent implements OnInit {
+export class LocalizationEditorDocsComponent {
     localizationBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -70,6 +70,4 @@ export class LocalizationEditorDocsComponent implements OnInit {
             fileName: 'localization-editor-forms-example',
         }
     ];
-
-    ngOnInit() { }
 }

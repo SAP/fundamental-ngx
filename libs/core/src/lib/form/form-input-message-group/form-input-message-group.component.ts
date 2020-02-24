@@ -1,5 +1,17 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Optional,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
+import { RtlService } from '../../utils/services/rtl.service';
+import { Observable, of } from 'rxjs';
+import { Placement } from 'popper.js';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-form-input-message-group',
@@ -41,6 +53,13 @@ export class FormInputMessageGroupComponent {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** @hidden */
+    public placement$: Observable<Placement>;
+
+    constructor(@Optional() private _rtlService: RtlService) {
+        this._createRtlObservable();
+    }
+
     /**
      * Function is called every time message changes isOpen attribute
      */
@@ -48,4 +67,10 @@ export class FormInputMessageGroupComponent {
         this.isOpenChange.emit(isOpen);
     }
 
+    /** @hidden */
+    private _createRtlObservable(): void {
+        this.placement$ = this._rtlService
+            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'bottom-end' : 'bottom-start'))
+            : of('bottom-start')
+    }
 }

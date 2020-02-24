@@ -40,6 +40,13 @@ $product-switch-dnd-line-color: #0854A0;
     &.fd-dnd-on-drag {
         background-color: white;
         z-index: 15;
+        .fd-product-switch__item {
+            .fd-product-switch__title {
+                &:before, &:after {
+                    background-color: white;
+                }
+            }
+        }
         .fd-product-switch__item:active .fd-product-switch__icon {
             color: #0854a0;
         }

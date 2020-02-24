@@ -1,5 +1,3 @@
-@import "~fundamental-styles/dist/multi-input";
-
 //TODO evaluate whether this should be in fd-styles
 .fd-multi-input-custom {
     display: block;
@@ -11,6 +9,9 @@
 
     .fd-multi-input-popover-custom {
         display: block;
+        .fd-tokenizer {
+            height: 100%;
+        }
     }
 
     .fd-multi-input-menu-overflow {
@@ -29,4 +30,3 @@
         }
     }
 }
-

@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-combobox-template-example',
-    templateUrl: './combobox-template-example.component.html'
+    templateUrl: './combobox-template-example.component.html',
+    styles: [
+        '.fd-template-container-div { display: flex; align-items: center; cursor: pointer;}',
+        '.fd-template-container-div:hover { background-color: var(--fd-color-background-hover); }',
+        '.fd-template-icon { margin-right: 12px; }'
+    ]
 })
 export class ComboboxTemplateExampleComponent {
     values = [

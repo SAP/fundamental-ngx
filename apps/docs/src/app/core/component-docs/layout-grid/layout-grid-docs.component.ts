@@ -6,7 +6,6 @@ import * as layoutGridSrc from '!raw-loader!./examples/layout-grid-example.compo
 import * as layoutGridNoGapSrc from '!raw-loader!./examples/layout-grid-nogap-example.component.html';
 import * as layoutGridRowColumnSrc from '!raw-loader!./examples/layout-grid-column-span-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as layoutGridTsCode from '!raw-loader!./examples/layout-grid-examples.component.ts';
 
 @Component({
     selector: 'app-layoutGrid',

@@ -1,4 +1,5 @@
 <fd-popover class="fd-form-input-message-group"
+            [placement]="placement$ | async"
             [triggers]="triggers"
             [fillControlMode]="fillControlMode"
             [closeOnOutsideClick]="closeOnOutsideClick"

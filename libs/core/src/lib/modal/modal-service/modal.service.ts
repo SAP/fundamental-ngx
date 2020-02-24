@@ -25,7 +25,7 @@ export class ModalService {
 
     /** @hidden */
     constructor(
-        @Inject(DynamicComponentService) private dynamicComponentService: DynamicComponentService
+        @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService
     ) {}
 
     /**
@@ -41,7 +41,7 @@ export class ModalService {
      */
     public dismissAll(): void {
         this.modals.forEach(item => {
-            this.destroyModalComponent(item.modalRef);
+            this._destroyModalComponent(item.modalRef);
         });
     }
 
@@ -60,7 +60,7 @@ export class ModalService {
         service.data = modalConfig.data;
 
         // Create Container
-        const container: ComponentRef<ModalContainer> = this.dynamicComponentService.createDynamicComponent
+        const container: ComponentRef<ModalContainer> = this._dynamicComponentService.createDynamicComponent
             < ModalContainer > (contentType, ModalContainer, modalConfig)
         ;
 
@@ -75,21 +75,21 @@ export class ModalService {
         // Create Backdrop
         let backdrop: ComponentRef<ModalBackdrop>;
         if (modalConfig.hasBackdrop) {
-            backdrop = this.dynamicComponentService.createDynamicComponent<ModalBackdrop>
+            backdrop = this._dynamicComponentService.createDynamicComponent<ModalBackdrop>
                 (contentType, ModalBackdrop, modalConfig, [service])
             ;
         }
 
         // Create Component
-        const component = this.dynamicComponentService.createDynamicComponent
+        const component = this._dynamicComponentService.createDynamicComponent
             < ModalComponent > (contentType, ModalComponent, modalConfig, [service])
         ;
 
         // Sizing
-        this.setModalSize(component, modalConfig);
+        this._setModalSize(component, modalConfig);
 
         // Positioning
-        this.setModalPosition(component, modalConfig.position);
+        this._setModalPosition(component, modalConfig.position);
 
         this.modals.push({
             modalRef: component,
@@ -98,7 +98,7 @@ export class ModalService {
         });
 
         const defaultBehaviourOnClose = () => {
-            this.destroyModalComponent(component);
+            this._destroyModalComponent(component);
             refSub.unsubscribe();
         };
 
@@ -109,17 +109,17 @@ export class ModalService {
         return service;
     }
 
-    private destroyModalComponent(modal: ComponentRef<ModalComponent>): void {
+    private _destroyModalComponent(modal: ComponentRef<ModalComponent>): void {
 
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
         const indexOf = this.modals.indexOf(arrayRef);
-        this.dynamicComponentService.destroyComponent(arrayRef.modalRef);
-        this.dynamicComponentService.destroyComponent(arrayRef.containerRef);
+        this._dynamicComponentService.destroyComponent(arrayRef.modalRef);
+        this._dynamicComponentService.destroyComponent(arrayRef.containerRef);
         arrayRef.containerRef.destroy();
         arrayRef.modalRef.destroy();
 
         if (arrayRef.backdropRef) {
-            this.dynamicComponentService.destroyComponent(arrayRef.backdropRef);
+            this._dynamicComponentService.destroyComponent(arrayRef.backdropRef);
             arrayRef.backdropRef.destroy();
         }
 
@@ -128,7 +128,7 @@ export class ModalService {
 
     }
 
-    private setModalSize(componentRef: ComponentRef<ModalComponent>, configObj: ModalConfig): void {
+    private _setModalSize(componentRef: ComponentRef<ModalComponent>, configObj: ModalConfig): void {
         componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
         componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
         componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
@@ -137,12 +137,35 @@ export class ModalService {
         componentRef.location.nativeElement.style.height = configObj.height;
     }
 
-    private setModalPosition(componentRef: ComponentRef<ModalComponent>, position: ModalPosition): void {
+    private _setModalPosition(componentRef: ComponentRef<ModalComponent>, position: ModalPosition): void {
         if (position) {
+            this._removeCurrentPositionModifiers(componentRef, position);
             componentRef.location.nativeElement.style.top = position.top;
             componentRef.location.nativeElement.style.bottom = position.bottom;
             componentRef.location.nativeElement.style.right = position.right;
             componentRef.location.nativeElement.style.left = position.left;
+        }
+    }
+
+    private _removeCurrentPositionModifiers(componentRef: ComponentRef<ModalComponent>, position: ModalPosition): void {
+
+        const isXPositionSet: boolean = !!(position.right || position.left);
+        const isYPositionSet: boolean = !!(position.bottom || position.top);
+
+        if (isYPositionSet) {
+            componentRef.location.nativeElement.style.top = 'auto';
+            componentRef.location.nativeElement.style.bottom = 'auto';
+            componentRef.location.nativeElement.style.transform = 'translate(-50%, 0)';
+        }
+
+        if (isXPositionSet) {
+            componentRef.location.nativeElement.style.right = 'auto';
+            componentRef.location.nativeElement.style.left = 'auto';
+            componentRef.location.nativeElement.style.transform = 'translate(0, -50%)';
+        }
+
+        if (isXPositionSet && isYPositionSet) {
+            componentRef.location.nativeElement.style.transform = 'translate(0, 0)'
         }
     }
 }

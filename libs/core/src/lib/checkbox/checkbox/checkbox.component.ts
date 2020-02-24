@@ -1,9 +1,9 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, ElementRef,
     forwardRef, HostBinding,
-    Input,
+    Input, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -27,6 +27,10 @@ let checkboxUniqueId: number = 0;
     ]
 })
 export class CheckboxComponent implements ControlValueAccessor {
+
+    /** @hidden */
+    @ViewChild('inputLabel', { static: false })
+    inputLabel: ElementRef;
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
@@ -75,7 +79,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
-    public checkboxState: 'checked' | 'unchecked' | 'indeterminate';
+    public checkboxState: 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
@@ -92,7 +96,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** @hidden Used to define if control is in 'checked' / 'unchecked' state. */
     get isChecked(): boolean {
-        return this.checkboxState === 'checked';
+        return (this.checkboxState === 'checked' || this.checkboxState === 'force-checked');
     }
 
     /** @hidden ControlValueAccessor interface
@@ -110,6 +114,11 @@ export class CheckboxComponent implements ControlValueAccessor {
         this.onValueChange = fn;
     }
 
+    /** @hidden prevent event from propagating */
+    public muteKey(event: KeyboardEvent): void {
+        event.stopPropagation();
+    }
+
     /** @hidden ControlValueAccessor interface method - sets onTouched callback.*/
     public registerOnTouched(fn: any): void {
         this.onTouched = fn;
@@ -119,6 +128,19 @@ export class CheckboxComponent implements ControlValueAccessor {
     public setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
         this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
+    public checkByClick() {
+        this._nextValueEvent();
+    }
+
+    /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
+    public checkByKey(event: KeyboardEvent): void {
+        if (this._isSpaceBarEvent(event)) {
+            this._nextValueEvent();
+            this.muteKey(event);
+        }
     }
 
     /** @hidden Based on current control state:
@@ -137,9 +159,12 @@ export class CheckboxComponent implements ControlValueAccessor {
                     : this.values.trueValue;
                 break;
             case 'indeterminate':
+            case 'force-checked':
                 this.checkboxValue = this.values.trueValue;
+                this.inputLabel.nativeElement.checked = true;
                 break;
         }
+
         this._setState();
         this.onValueChange(this.checkboxValue);
         this._changeDetectorRef.detectChanges();
@@ -154,6 +179,15 @@ export class CheckboxComponent implements ControlValueAccessor {
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         }
+        this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _nextValueEvent(): void {
+        if (this._isIE() && this.checkboxState === 'indeterminate') {
+            this.checkboxState = 'force-checked';
+            this._changeDetectorRef.detectChanges();
+        }
     }
 
     /** @hidden Compares values */
@@ -161,5 +195,19 @@ export class CheckboxComponent implements ControlValueAccessor {
         return typeof val1 === 'object'
             ? compareObjects(val1, val2)
             : val1 === val2;
+    }
+
+    /** @hidden */
+    private _isIE(): boolean {
+        const ua = window.navigator.userAgent; // Check the userAgent property of the window.navigator object
+        const msie = ua.indexOf('MSIE '); // IE 10 or older
+        const trident = ua.indexOf('Trident/'); // IE 11
+
+        return (msie > 0 || trident > 0);
+    }
+
+    /** @hidden Determines event source based on key code */
+    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
+        return event.keyCode === 32;
     }
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 
 @Component({
     selector: 'app-tree',
     templateUrl: './tree-docs.component.html'
 })
-export class TreeDocsComponent implements OnInit {
+export class TreeDocsComponent {
     static schema: Schema = {
         properties: {
             properties: {
@@ -165,8 +165,6 @@ export class TreeDocsComponent implements OnInit {
           }
         ]`
     ;
-
-    ngOnInit() {}
 
     onSchemaValues(data) {
         this.data = data;

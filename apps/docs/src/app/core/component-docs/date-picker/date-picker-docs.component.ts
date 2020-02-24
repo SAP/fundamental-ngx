@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as datePickerRangeSrc from '!raw-loader!./examples/date-picker-range-example.component.ts';
 import * as datePickerSingleSrc from '!raw-loader!./examples/date-picker-single-example.component.ts';
@@ -8,7 +8,6 @@ import * as datePickerAllowNullSrc from '!raw-loader!./examples/date-picker-allo
 import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-example.component.ts';
 import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
-import * as datePickerDisabledSrc from '!raw-loader!./examples/date-picker-disabled-example.component.ts';
 import * as datePickerComplexI18nSrcTs from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
 import * as datePickerComplexI18nSrcH from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html';
 import * as datePickerRangeDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';

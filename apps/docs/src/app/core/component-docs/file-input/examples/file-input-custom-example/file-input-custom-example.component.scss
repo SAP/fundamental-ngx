@@ -1,0 +1,42 @@
+:host {
+    display: block;
+}
+
+.outer-div {
+    height: 200px;
+    background-color: white;
+    padding: 6px;
+}
+
+.inner-div {
+    height: 100%;
+    border: 2px lightgray dashed;
+    transition: 0.25s background-color ease-in-out,
+    0.25s border ease-in-out,
+    0.25s border-color ease-in-out,
+    0.25s color ease-in-out;
+}
+
+.state-over {
+    border: 2px solid #006eaf;
+    color: #006eaf;
+    background-color: #f1f7fa;
+}
+
+.content-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.delete-icon {
+    color: grey;
+    cursor: pointer;
+    transition: 0.25s color ease-in-out;
+}
+
+.delete-icon:hover {
+    color: #990100;
+}
