@@ -4,11 +4,11 @@
         <fd-menu fd-menu-addon>
             <ul fd-menu-list>
                 <li *ngFor="let option of values">
-                    <div fd-menu-item-addon>
-                        <fd-icon size="l" [glyph]="option.icon" class="fd-template-icon"></fd-icon>
-                    </div>
-                    <a href="" fd-menu-item>{{option.name}}</a>
-
+                    <a href="" fd-menu-item>
+                        <fd-icon fd-menu-item-addon size="m" [glyph]="option.icon" class="fd-template-icon"></fd-icon>
+                        {{option.name}}
+                    </a>
+                </li>
             </ul>
         </fd-menu>
     </fd-popover-body>
