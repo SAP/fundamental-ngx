@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const bottomStart = 'bottom-start';
 const bottomEnd = 'bottom-end';
@@ -11,7 +12,7 @@ const bottomEnd = 'bottom-end';
 })
 export class PopoverDropdownExampleComponent {
 
-  dropDownPlacement$: BehaviorSubject<string> = new BehaviorSubject(bottomStart);
+  dropDownPlacement$: Observable<string>;
 
   menu = [
     'Option 1',
@@ -19,7 +20,10 @@ export class PopoverDropdownExampleComponent {
     'Option 3',
   ];
 
-  constructor(private rtlService: RtlService) {
-    rtlService.rtl.subscribe(isRtl => this.dropDownPlacement$.next(isRtl ? bottomEnd : bottomStart))
+  constructor(private _rtlService: RtlService) {
+    this.dropDownPlacement$ = _rtlService.rtl
+      .pipe(
+        map(isRtl => isRtl ? bottomEnd : bottomStart)
+      )
   }
 }
