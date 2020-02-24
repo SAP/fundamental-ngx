@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.1-rc.8"></a>
+## [0.14.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.7...v0.14.1-rc.8) (2020-02-24)
+
+
+### Bug Fixes
+
+* Add RTL support for input messages ([#2047](https://github.com/SAP/fundamental-ngx/issues/2047)) ([88f9d4e](https://github.com/SAP/fundamental-ngx/commit/88f9d4e))
+
+
+
 <a name="0.14.1-rc.7"></a>
 ## [0.14.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.6...v0.14.1-rc.7) (2020-02-24)
 
