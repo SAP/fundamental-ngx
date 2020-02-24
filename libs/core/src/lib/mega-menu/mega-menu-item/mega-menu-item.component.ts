@@ -99,15 +99,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         private changeDetectionRef: ChangeDetectorRef,
         @Optional() private rtlService: RtlService
     ) {
-        if (rtlService) {
-            rtlService.rtl
-                .pipe(
-                    takeUntil(this.onDestroy$)
-                )
-                .subscribe(rtl => {
-                    this.subListPosition = rtl ? left : right;
-                })
-        }
+        this.subscribeToRtl();
     }
 
     /** @hidden */
@@ -160,8 +152,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
         this.link.hasChild = this.subItems.length > 0;
         this.subItems.changes
             .pipe(takeUntil(this.onDestroy$), startWith(5))
-            .subscribe(() => this._refreshSubscription())
-            ;
+            .subscribe(() => this._refreshSubscription());
     }
 
     /** @hidden */
@@ -312,5 +303,17 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
             'Right': 'ArrowRight',
         };
         return ieKeys[event.key] || event.key
+    }
+
+    private subscribeToRtl() {
+        if (this.rtlService) {
+            this.rtlService.rtl
+                .pipe(
+                    takeUntil(this.onDestroy$)
+                )
+                .subscribe(rtl => {
+                    this.subListPosition = rtl ? left : right;
+                })
+        }
     }
 }
