@@ -21,10 +21,8 @@ import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { DefaultMenuItem } from '../../menu/default-menu-item';
-import { RtlService } from '../../utils/public_api';
+import { RtlService, unifyKeyboardKey } from '../../utils/public_api';
 
-const left = 'left';
-const right = 'left';
 export type MenuSubListPosition = 'left' | 'right';
 
 /**
@@ -86,7 +84,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** Defines what should be position for sublist */
     @Input()
-    subListPosition: MenuSubListPosition = right;
+    subListPosition: MenuSubListPosition = 'right';
 
     /** Event that is thrown always, when the open variable is changed */
     @Output()
@@ -184,7 +182,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
 
     /** Method that informs if actual position of sublist is set to right */
     public isSubListPositionRight(): boolean {
-        return this.subListPosition === right;
+        return this.subListPosition === 'right';
     }
 
     /** Method that changes state of open variable */
@@ -278,6 +276,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
                 break;
             }
             default: {
+                event.preventDefault();
                 this.keyDown.emit(event);
             }
         }
@@ -298,11 +297,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
     }
 
     private getKeyCode(event: KeyboardEvent): string {
-        const ieKeys = {
-            'Left': 'ArrowLeft',
-            'Right': 'ArrowRight',
-        };
-        return ieKeys[event.key] || event.key
+        return unifyKeyboardKey(event);
     }
 
     private subscribeToRtl() {
@@ -312,7 +307,7 @@ export class MegaMenuItemComponent implements AfterContentInit, OnDestroy, Defau
                     takeUntil(this.onDestroy$)
                 )
                 .subscribe(rtl => {
-                    this.subListPosition = rtl ? left : right;
+                    this.subListPosition = rtl ? 'left' : 'right';
                 })
         }
     }
