@@ -8,6 +8,7 @@ import {ScrollSpyOffsetExampleComponent} from './examples/scroll-spy-custom-offs
 import {ScrollSpyExampleComponent} from './examples/scroll-spy-example/scroll-spy-example.component';
 import {ScrollSpyHeaderComponent} from './scroll-spy-header/scroll-spy-header.component';
 import {ScrollSpyDocsComponent} from './scroll-spy-docs.component';
+import { ScrollSpyModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -23,7 +24,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ScrollSpyModule
     ],
     exports: [RouterModule],
     declarations: [

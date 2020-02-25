@@ -12,6 +12,7 @@ import {
     LayoutGridNoGapExampleComponent
 } from './examples/layout-grid-examples.component';
 import {LayoutGridDocsHeaderComponent} from './layout-grid-docs-header/layout-grid-docs-header.component';
+import { LayoutGridModule, PanelModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -27,7 +28,9 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        LayoutGridModule,
+        PanelModule
     ],
     exports: [RouterModule],
     declarations: [

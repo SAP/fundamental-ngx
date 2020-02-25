@@ -19,6 +19,7 @@ import {TabIconOnlyExampleComponent} from './examples/tab-icon-only-example/tab-
 import {TabSelectionExampleComponent} from './examples/tab-selection-example.component';
 import {ComplexTitleExampleComponent} from './examples/complex-title-example/complex-title-example.component';
 import {TabsNavigationModeExampleComponent} from './examples/tab-navigation-mode-example-component';
+import { TabsModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -42,7 +43,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        TabsModule,
     ],
     exports: [RouterModule],
     declarations: [

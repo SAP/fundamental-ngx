@@ -10,6 +10,7 @@ import {
     MegaMenuGroupExampleComponent,
     MegaMenuPositionExampleComponent
 } from './examples/mega-menu-examples.component';
+import { MegaMenuModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        MegaMenuModule
     ],
     exports: [RouterModule],
     declarations: [

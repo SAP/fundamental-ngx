@@ -13,6 +13,7 @@ import {
     ListExampleComponent
 } from './examples/list-examples.component';
 import {ListCheckboxFormExampleComponent} from './examples/list-checkbox-form-example.component';
+import { CheckboxModule, InfiniteScrollModule, ListModule, RadioModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -28,7 +29,11 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ListModule,
+        CheckboxModule,
+        RadioModule,
+        InfiniteScrollModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -10,6 +10,7 @@ import {ButtonSplitTemplateExampleComponent} from './examples/split-button-templ
 import {ButtonSplitProgrammaticalExampleComponent} from './examples/split-button-programmatical-example.component';
 import {ButtonSplitOptionsExampleComponent} from './examples/split-button-options-example.component';
 import {ButtonSplitTypesIconsComponent} from './examples/split-button-icons-example.component';
+import { SplitButtonModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        SplitButtonModule
     ],
     exports: [RouterModule],
     declarations: [

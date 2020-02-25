@@ -6,6 +6,7 @@ import {API_FILES} from '../../api-files';
 import {LinkHeaderComponent} from './link-header/link-header.component';
 import {LinkDocsComponent} from './link-docs.component';
 import {LinkExampleComponent} from './examples/link-example.component';
+import { LinkModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        LinkModule
     ],
     exports: [RouterModule],
     declarations: [

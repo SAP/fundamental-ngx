@@ -7,6 +7,7 @@ import {RadioHeaderComponent} from './radio-header/radio-header.component';
 import {RadioDocsComponent} from './radio-docs.component';
 import {RadioExamplesComponent} from './examples/radio-examples.component';
 import {RadioFormGroupExampleComponent} from './examples/radio-form-group-example.component';
+import { RadioModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        RadioModule
     ],
     exports: [RouterModule],
     declarations: [

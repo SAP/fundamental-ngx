@@ -17,6 +17,7 @@ import {DatePickerFormatExampleComponent} from './examples/date-picker-format-ex
 import {DatePickerComplexI18nExampleComponent} from './examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component';
 import {DatePickerRangeDisabledExampleComponent} from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import {DatePickerDisableFuncExampleComponent} from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
+import { ButtonGroupModule, DatePickerModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,7 +33,9 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        DatePickerModule,
+        ButtonGroupModule
     ],
     exports: [RouterModule],
     declarations: [

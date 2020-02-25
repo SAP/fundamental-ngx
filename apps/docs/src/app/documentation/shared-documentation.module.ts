@@ -32,6 +32,7 @@ import { ToolbarComponent } from './core-helpers/toolbar/toolbar.component';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
 import { ApiComponent } from './core-helpers/api/api.component';
+import { sharedCoreModules } from './shared-core-modules';
 
 @NgModule({
     declarations: [
@@ -53,8 +54,6 @@ import { ApiComponent } from './core-helpers/api/api.component';
     ],
 
     imports: [
-        FundamentalNgxCoreModule,
-        FundamentalNgxPlatformModule,
         MarkdownModule.forChild(),
         CommonModule,
         FormsModule,
@@ -63,12 +62,11 @@ import { ApiComponent } from './core-helpers/api/api.component';
         CdkTableModule,
         DragDropModule,
         SchemaModule.forRoot(COMPONENT_SCHEMAS),
-        RouterModule
+        RouterModule,
+        sharedCoreModules
     ],
     providers: [CopyService, ApiDocsService],
     exports: [
-        FundamentalNgxCoreModule,
-        FundamentalNgxPlatformModule,
         PlayGroundComponent,
         CodeExampleComponent,
         HeaderComponent,
@@ -90,7 +88,8 @@ import { ApiComponent } from './core-helpers/api/api.component';
         ToolbarComponent,
         SectionsToolbarComponent,
         HeaderTabsComponent,
-        ApiComponent
+        ApiComponent,
+        sharedCoreModules
     ]
 })
 export class SharedDocumentationModule { }

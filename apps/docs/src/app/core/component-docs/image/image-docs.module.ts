@@ -6,6 +6,7 @@ import {API_FILES} from '../../api-files';
 import {ImageHeaderComponent} from './image-header/image-header.component';
 import {ImageDocsComponent} from './image-docs.component';
 import {ImageShapesExampleComponent, ImageSizesExampleComponent} from './examples/image-examples.component';
+import { ImageModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ImageModule
     ],
     exports: [RouterModule],
     declarations: [

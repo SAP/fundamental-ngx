@@ -10,6 +10,7 @@ import {SwitchFormsExampleComponent} from './examples/switch-form-example/switch
 import {SwitchBindingExampleComponent} from './examples/switch-binding-example/switch-binding-example.component';
 import {SemanticSwitchExampleComponent} from './examples/semantic-switch-example/semantic-switch-example.component';
 import {DisabledSwitchExampleComponent} from './examples/disabled-switch-example/disabled-switch-example.component';
+import { SwitchModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        SwitchModule
     ],
     exports: [RouterModule],
     declarations: [

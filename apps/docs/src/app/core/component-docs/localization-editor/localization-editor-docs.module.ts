@@ -9,6 +9,7 @@ import {LocalizationEditorExampleComponent} from './examples/localization-editor
 import {LocalizationEditorFormsExampleComponent} from './examples/localization-editor-forms-example.component';
 import {LocalizationEditorTextareaExampleComponent} from './examples/localization-editor-textarea-example.component';
 import {LocalizationEditorTemplateExampleComponent} from './examples/localization-editor-template-example.component';
+import { LocalizationEditorModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +25,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        LocalizationEditorModule
     ],
     exports: [RouterModule],
     declarations: [

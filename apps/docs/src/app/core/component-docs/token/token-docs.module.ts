@@ -11,6 +11,7 @@ import {TokenCompactExampleComponent} from './examples/token-compact-example/tok
 import {TokenSelectedExampleComponent} from './examples/token-selected-example/token-selected-example.component';
 import {TokenReadOnlyExampleComponent} from './examples/token-readonly-example/token-readonly-example.component';
 import {TokenizerCompactExampleComponent} from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        TokenModule
     ],
     exports: [RouterModule],
     declarations: [

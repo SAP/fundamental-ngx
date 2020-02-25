@@ -9,6 +9,14 @@ import {ShellbarBasicExampleComponent} from './examples/shellbar-basic-example.c
 import {ShellbarSideNavExampleComponent} from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import {ShellbarAdvancedExampleComponent} from './examples/shellbar-advanced/shellbar-advanced-example.component';
 import {ShellbarCollapsibleExampleComponent} from './examples/shellbar-collapsible-example.component';
+import {
+    ComboboxModule,
+    IdentifierModule,
+    ProductSwitchModule,
+    ShellbarModule,
+    SideNavigationModule,
+    TileModule
+} from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +32,13 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ShellbarModule,
+        ComboboxModule,
+        SideNavigationModule,
+        IdentifierModule,
+        ProductSwitchModule,
+        TileModule
     ],
     exports: [RouterModule],
     declarations: [

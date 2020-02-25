@@ -17,6 +17,7 @@ import {SideNavigationObjectExampleComponent} from './examples/side-navigation-o
 import {SideNavigationMultipleSelectedExampleComponent} from './examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
 import {SideNavigationCondensedObjectExampleComponent} from './examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import {SideNavigationCondensedExampleComponent} from './examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
+import { SideNavigationModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        SideNavigationModule
     ],
     exports: [RouterModule],
     declarations: [

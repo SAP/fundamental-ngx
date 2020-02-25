@@ -11,6 +11,7 @@ import {
     TextareaStateExampleComponent
 } from './examples/textarea-examples.component';
 import {TextareaFormGroupExampleComponent} from './examples/textarea-form-group-example.component';
+import { FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        FormModule
     ],
     exports: [RouterModule],
     declarations: [

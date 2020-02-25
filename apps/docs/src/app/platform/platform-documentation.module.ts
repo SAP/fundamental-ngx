@@ -30,14 +30,14 @@ import {PlatformActionBarDocsComponent} from '../platform/component-docs/platfor
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 
-import { 
+import {
     PlatformLinkStandardExampleComponent,
     PlatformLinkEmphasizedExampleComponent,
     PlatformLinkDisabledExampleComponent,
     PlatformLinkDisabledEmphasizedExampleComponent,
     PlatformLinkInvertedExampleComponent,
     PlatformLinkTruncatedExampleComponent,
-    PlatformLinkIconExampleComponent 
+    PlatformLinkIconExampleComponent
 } from './component-docs/platform-link/platform-link-examples/platform-link-examples.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
 import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
@@ -58,6 +58,8 @@ import { PlatformSelectTypesNoBorderExampleComponent } from './component-docs/pl
 import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-split-example.component';
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
+import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 @NgModule({
     declarations: [
@@ -106,6 +108,8 @@ import { StackblitzService } from '../documentation/core-helpers/stackblitz/stac
         PlatformSelectTypesWithIconExampleComponent
     ],
     imports: [
+        FundamentalNgxCoreModule,
+        FundamentalNgxPlatformModule,
         SharedDocumentationModule,
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),

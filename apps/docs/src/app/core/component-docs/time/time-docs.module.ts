@@ -14,6 +14,7 @@ import {TimeExampleComponent} from './examples/time-example.component';
 import {TimeDisabledExampleComponent} from './examples/time-disabled-example.component';
 import {Time12ExampleComponent} from './examples/time-12-example.component';
 import {TimeTwoDigitsExampleComponent} from './examples/time-two-digits-example/time-two-digits-example.component';
+import { TimeModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        TimeModule
     ],
     exports: [RouterModule],
     declarations: [
