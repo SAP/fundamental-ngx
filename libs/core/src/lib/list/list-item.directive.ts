@@ -22,7 +22,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 })
 export class ListItemDirective {
 
-    /** Whether condensed mode is included */
+    /** Whether tab is selected */
     @Input()
     @HostBinding('class.is-selected')
     selected: boolean = false;

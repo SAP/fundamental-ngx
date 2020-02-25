@@ -15,6 +15,7 @@ import {
     ListSecondaryDirective,
     ListTitleDirective
 } from './list.directives';
+import { ListMessageDirective } from './list-message.directive';
 @NgModule({
     declarations: [
         ListComponent,
@@ -25,7 +26,8 @@ import {
         ListGroupHeaderDirective,
         ListIconDirective,
         ListFooterDirective,
-        ListActionDirective
+        ListActionDirective,
+        ListMessageDirective
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule, FormModule],
     exports: [
@@ -37,7 +39,8 @@ import {
         ListGroupHeaderDirective,
         ListIconDirective,
         ListFooterDirective,
-        ListActionDirective
+        ListActionDirective,
+        ListMessageDirective
     ]
 })
 export class ListModule {}

@@ -17,24 +17,27 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 })
 export class ListComponent {
 
-    /** Whether condensed mode is included */
+    /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')
     dropdownMode: boolean = false;
 
-    /** Whether condensed mode is included */
+    /** Whether multi mode is included to component, used for MultiInput */
     @Input()
     @HostBinding('class.fd-list--multi-input')
     multiInputMode: boolean = false;
 
+    /** Whether compact mode is included to component */
     @Input()
     @HostBinding('class.fd-list--compact')
     compact: boolean = false;
 
+    /** Whether list component contains message */
     @Input()
     @HostBinding('class.fd-list--has-message')
     hasMessage: boolean = false;
 
+    /** Whether list component has removed borders */
     @Input()
     @HostBinding('class.fd-list--no-border')
     noBorder: boolean = false;
