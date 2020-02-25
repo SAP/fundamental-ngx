@@ -13,9 +13,9 @@ export class ShellbarAdvancedExampleComponent {
 
     productMenuItems: ShellbarMenuItem[] = [
         {name: 'Application A', link: '#'},
-        {name: 'Application B', glyph: 'menu', callback: () => { alert('Application B'); }},
-        {name: 'Application C', link: '#', glyph: 'menu'},
-        {name: 'Application D', link: '#', glyph: 'menu'}
+        {name: 'Application B', callback: () => { alert('Application B'); }},
+        {name: 'Application C', link: '#'},
+        {name: 'Application D', link: '#'}
     ];
 
     user: ShellbarUser = {

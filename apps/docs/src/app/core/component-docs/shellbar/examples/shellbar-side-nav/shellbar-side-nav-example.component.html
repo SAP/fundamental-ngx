@@ -58,17 +58,21 @@
         </div>
     </fd-side-nav>
 
-    <fd-tile>
-        <div fd-tile-media>
-        <span fd-identifier
-              [size]="'s'"
-              [glyph]="'home'"
-              [transparent]="true"></span>
-        </div>
-        <div fd-tile-content>
-            <h2 fd-tile-title>
-                Content
-            </h2>
-        </div>
-    </fd-tile>
+    <fd-panel style="width: 100%;">
+        <fd-panel-header>
+            <fd-panel-head>
+                <h2 fd-panel-title>Sample Page Title</h2>
+                <fd-panel-description>Sample Description</fd-panel-description>
+            </fd-panel-head>
+            <fd-panel-actions>
+                Sample Text
+            </fd-panel-actions>
+        </fd-panel-header>
+        <fd-panel-body>
+            Sample Body
+        </fd-panel-body>
+        <fd-panel-footer>
+            Sample Footer
+        </fd-panel-footer>
+    </fd-panel>
 </div>
