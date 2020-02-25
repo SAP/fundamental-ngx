@@ -6,6 +6,7 @@ import {API_FILES} from '../../api-files';
 import {IconHeaderComponent} from './icon-header/icon-header.component';
 import {IconDocsComponent} from './icon-docs.component';
 import {IconExampleComponent} from './examples/icon-example.component';
+import { IconModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        IconModule
     ],
     exports: [RouterModule],
     declarations: [

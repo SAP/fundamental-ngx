@@ -11,6 +11,7 @@ import {
 import {SelectNativeFormGroupExampleComponent} from './examples/select-native-form-group-example.component';
 import {SelectNativeHeaderComponent} from './select-native-header/select-native-header.component';
 import {SelectNativeDocsComponent} from './select-native-docs.component';
+import { FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        FormModule
     ],
     exports: [RouterModule],
     declarations: [

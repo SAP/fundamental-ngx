@@ -6,6 +6,7 @@ import {API_FILES} from '../../api-files';
 import {PaginationHeaderComponent} from './pagination-header/pagination-header.component';
 import {PaginationDocsComponent} from './pagination-docs.component';
 import {PaginationExampleComponent} from './examples/pagination-example.component';
+import { PaginationModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        PaginationModule
     ],
     exports: [RouterModule],
     declarations: [

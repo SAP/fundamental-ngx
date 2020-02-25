@@ -12,6 +12,7 @@ import {
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
 } from './examples/button-examples.component';
+import { ButtonModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ButtonModule
     ],
     exports: [RouterModule],
     declarations: [

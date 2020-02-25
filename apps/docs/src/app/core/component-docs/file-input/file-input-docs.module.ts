@@ -9,6 +9,7 @@ import {FileInputExampleComponent} from './examples/file-input-example/file-inpu
 import {FileInputCustomExampleComponent} from './examples/file-input-custom-example/file-input-custom-example.component';
 import {FileInputDragDisabledExampleComponent} from './examples/file-input-drag-disabled-example/file-input-drag-disabled-example.component';
 import {FileInputMaxExampleComponent} from './examples/file-input-max-example/file-input-max-example.component';
+import { FileInputModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -24,7 +25,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        FileInputModule
     ],
     exports: [RouterModule],
     declarations: [

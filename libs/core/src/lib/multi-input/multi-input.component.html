@@ -36,20 +36,20 @@
                 </fd-input-group>
             </fd-popover-control>
             <fd-popover-body [attr.aria-hidden]="!open">
-                <fd-menu class="fd-multi-input-menu-overflow"
-                         *ngIf="displayedValues && displayedValues.length"
-                         [style.maxHeight]="maxHeight">
-                    <ul fd-menu-list>
-                        <li *ngFor="let value of displayedValues; let ind  = index">
-                            <label (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" fd-menu-item (keydown)="handleKeyDown($event, ind)">
-                                <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
-                                             class="fd-multi-input-checkbox">
-                                    <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
-                                </fd-checkbox>
-                            </label>
-                        </li>
-                    </ul>
-                </fd-menu>
+                <ul fd-list class="fd-multi-input-menu-overflow" *ngIf="displayedValues && displayedValues.length" [style.maxHeight]="maxHeight">
+                    <li fd-list-item *ngFor="let value of displayedValues; let ind  = index" [selected]="selected.indexOf(value) !== -1"
+                        [ngClass]="{'fd-multi-input-list-item-last': ind === displayedValues.length - 1}">
+                        <label (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" (keydown)="handleKeyDown($event, ind)">
+                            <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
+                                         class="fd-multi-input-checkbox">
+                                <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
+                            </fd-checkbox>
+                        </label>
+                    </li>
+                    <li fd-list-footer class="fd-multi-input-show-all">
+                        <a class="fd-link" (click)="showAllClicked($event)" href>Show All</a>
+                    </li>
+                </ul>
                 <ng-content></ng-content>
             </fd-popover-body>
         </fd-popover>

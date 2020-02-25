@@ -11,6 +11,7 @@ import {MultiInputExampleComponent} from './examples/multi-input-example/multi-i
 import {MultiInputFilterExampleComponent} from './examples/multi-input-filter-example/multi-input-filter-example.component';
 import {MultiInputFormExampleComponent} from './examples/multi-input-form-example/multi-input-form-example.component';
 import {MultiInputCompactExampleComponent} from './examples/multi-input-compact-example/multi-input-compact-example.component';
+import { MultiInputModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        MultiInputModule
     ],
     exports: [RouterModule],
     declarations: [

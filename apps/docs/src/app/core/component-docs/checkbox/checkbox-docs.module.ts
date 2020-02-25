@@ -11,6 +11,7 @@ import {CheckboxDefaultExampleComponent} from './examples/checkbox-default-examp
 import {CheckboxReactiveFormsExampleComponent} from './examples/checkbox-reactive-forms-example.component';
 import {CheckboxStatesExampleComponent} from './examples/checkbox-states-example.component';
 import {CheckboxTristateExampleComponent} from './examples/checkbox-tristate-example.component';
+import { CheckboxModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        CheckboxModule
     ],
     exports: [RouterModule],
     declarations: [

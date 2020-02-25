@@ -3,7 +3,7 @@
            class="fd-input fd-input-group__input fd-input--no-number-spinner"
            [disabled]="disabled"
            [(ngModel)]="inputText"
-           placeholder="{{placeholder}}"/>
+           [placeholder]="placeholder"/>
     <span fd-input-group-addon [button]="true" [placement]="'after'">
         <button fd-button
                 [disabled]="disabled"

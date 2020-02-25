@@ -7,6 +7,7 @@ import {LoadingSpinnerHeaderComponent} from './loading-spinner-header/loading-sp
 import {LoadingSpinnerDocsComponent} from './loading-spinner-docs.component';
 import {LoadingSpinnerExampleComponent} from './examples/loading-spinner-example.component';
 import {LoadingSpinnerContainerExampleComponent} from './examples/loading-spinner-container-example.component';
+import { LoadingSpinnerModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        LoadingSpinnerModule
     ],
     exports: [RouterModule],
     declarations: [

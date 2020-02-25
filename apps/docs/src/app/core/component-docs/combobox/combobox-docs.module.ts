@@ -15,6 +15,7 @@ import {ComboboxFormsExampleComponent} from './examples/combobox-forms-example.c
 import {ComboboxDisabledExampleComponent} from './examples/combobox-disabled-example.component';
 import {ComboboxHeightExampleComponent} from './examples/combobox-height-example.component';
 import {ComboboxOpenControlExampleComponent} from './examples/combobox-open-control-example.component';
+import { ComboboxModule, FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -30,7 +31,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ComboboxModule
     ],
     exports: [RouterModule],
     declarations: [

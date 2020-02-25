@@ -292,6 +292,13 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.popoverRef.updatePopover();
     }
 
+    /** @hidden */
+    showAllClicked(event: MouseEvent): void {
+        event.preventDefault();
+        this.searchTerm = '';
+        this.handleSearchTermChange();
+    }
+
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter(item => {

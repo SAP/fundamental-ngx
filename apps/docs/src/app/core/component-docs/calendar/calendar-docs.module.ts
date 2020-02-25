@@ -12,6 +12,7 @@ import {CalendarFormExamplesComponent} from './examples/calendar-form-example.co
 import {CalendarProgrammaticallyChangeExampleComponent} from './examples/calendar-programmatically-change-example.component';
 import {CalendarI18nExampleComponent} from './examples/calendar-i18n-example.component';
 import {CalendarI18nMomentExampleComponent} from './examples/calendar--i18n-moment-example.component';
+import { ButtonGroupModule, CalendarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -27,7 +28,9 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        CalendarModule,
+        ButtonGroupModule
     ],
     exports: [RouterModule],
     declarations: [

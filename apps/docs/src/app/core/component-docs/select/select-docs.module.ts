@@ -14,6 +14,7 @@ import {SelectCustomTriggerComponent} from './examples/select-custom-trigger/sel
 import {SelectMaxHeightExampleComponent} from './examples/select-height/select-max-height-example.component';
 import {SelectViewValueExampleComponent} from './examples/select-view-value-example/select-view-value-example.component';
 import {SelectProgrammaticExampleComponent} from './examples/select-programmatic-example/select-programmatic-example.component';
+import { SelectModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [

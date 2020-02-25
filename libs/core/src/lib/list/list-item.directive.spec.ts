@@ -34,6 +34,6 @@ describe('ListItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list-group__item');
+        expect(component.ref.nativeElement.className).toBe('fd-list__item');
     });
 });
