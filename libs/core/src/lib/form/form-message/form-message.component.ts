@@ -21,4 +21,7 @@ export class FormMessageComponent {
     /** Whether to apply compact mode to the message. */
     @Input()
     compact: boolean = false;
+
+    @Input()
+    static: boolean = false;
 }

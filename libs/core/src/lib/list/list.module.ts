@@ -7,9 +7,37 @@ import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { FormsModule } from '@angular/forms';
 import { FormModule } from '../form/form.module';
+import {
+    ListFooterDirective,
+    ListGroupHeaderDirective,
+    ListIconDirective,
+    ListLabelDirective,
+    ListSecondaryDirective,
+    ListTitleDirective
+} from './list.directives';
 @NgModule({
-    declarations: [ListComponent, ListItemDirective, ListActionDirective],
+    declarations: [
+        ListComponent,
+        ListItemDirective,
+        ListLabelDirective,
+        ListTitleDirective,
+        ListSecondaryDirective,
+        ListGroupHeaderDirective,
+        ListIconDirective,
+        ListFooterDirective,
+        ListActionDirective
+    ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule, FormModule],
-    exports: [ListComponent, ListItemDirective, ListActionDirective]
+    exports: [
+        ListComponent,
+        ListItemDirective,
+        ListLabelDirective,
+        ListTitleDirective,
+        ListSecondaryDirective,
+        ListGroupHeaderDirective,
+        ListIconDirective,
+        ListFooterDirective,
+        ListActionDirective
+    ]
 })
 export class ListModule {}

@@ -1,27 +1,24 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {API_FILES} from '../../api-files';
-import {ListHeaderComponent} from './list-header/list-header.component';
-import {ListDocsComponent} from './list-docs.component';
-import {ListSingleSelectExampleComponent} from './examples/list-single-select-example.component';
-import {ListInfiniteScrollExampleComponent} from './examples/list-infinite-scroll-example.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { API_FILES } from '../../api-files';
+import { ListHeaderComponent } from './list-header/list-header.component';
+import { ListDocsComponent } from './list-docs.component';
+import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
 import {
-    ListActionsExampleComponent,
-    ListCheckboxExampleComponent,
-    ListExampleComponent
+    ListComplexExampleComponent,
+    ListExampleComponent, ListIconExampleComponent, ListSecondaryExampleComponent
 } from './examples/list-examples.component';
-import {ListCheckboxFormExampleComponent} from './examples/list-checkbox-form-example.component';
-import { CheckboxModule, InfiniteScrollModule, ListModule, RadioModule } from '@fundamental-ngx/core';
+import { CheckboxModule, InfiniteScrollModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
         path: '',
         component: ListHeaderComponent,
         children: [
-            {path: '', component: ListDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.list}}
+            { path: '', component: ListDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.list } }
         ]
     }
 ];
@@ -31,6 +28,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         ListModule,
+        LinkModule,
         CheckboxModule,
         RadioModule,
         InfiniteScrollModule
@@ -40,11 +38,10 @@ const routes: Routes = [
         ListDocsComponent,
         ListHeaderComponent,
         ListExampleComponent,
-        ListActionsExampleComponent,
-        ListCheckboxExampleComponent,
-        ListCheckboxFormExampleComponent,
-        ListSingleSelectExampleComponent,
-        ListInfiniteScrollExampleComponent
+        ListInfiniteScrollExampleComponent,
+        ListSecondaryExampleComponent,
+        ListIconExampleComponent,
+        ListComplexExampleComponent
     ]
 })
 export class ListDocsModule {
