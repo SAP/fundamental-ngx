@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { MessageStates } from '@fundamental-ngx/core';
+import { MessageStates } from '../form/form-message/form-message.component';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Directive({
