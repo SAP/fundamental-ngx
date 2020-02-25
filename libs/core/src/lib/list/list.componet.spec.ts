@@ -34,6 +34,6 @@ describe('ListComponent', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list-group');
+        expect(component.ref.nativeElement.className).toBe('fd-list');
     });
 });
