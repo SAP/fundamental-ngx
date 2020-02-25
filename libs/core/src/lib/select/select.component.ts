@@ -301,9 +301,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
             option.setSelected(true, false);
             this.selected = option;
             this.updateValue(fireEvents);
-            this.close();
             return option;
         }
+        this.close();
         return;
     }
 
