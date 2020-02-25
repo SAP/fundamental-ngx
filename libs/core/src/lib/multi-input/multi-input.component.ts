@@ -17,10 +17,10 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
-import { MenuItemDirective } from '../menu/menu-item.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { FormStates } from '../form/form-control/form-states';
+import { ListItemDirective } from '../list/list-item.directive';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -54,8 +54,8 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     popoverRef: PopoverComponent;
 
     /** @hidden */
-    @ViewChildren(MenuItemDirective)
-    menuItems: QueryList<MenuItemDirective>;
+    @ViewChildren(ListItemDirective)
+    listItems: QueryList<ListItemDirective>;
 
     /** @hidden */
     @ViewChild('searchInputElement', { static: false })
@@ -266,7 +266,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
 
     /** @hidden */
     public handleKeyDown(event: KeyboardEvent, index: number): void {
-        this.menuKeyboardService.keyDownHandler(event, index, this.menuItems.toArray());
+        this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
     /** @hidden */
@@ -275,8 +275,8 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
             if (event.altKey) {
                 this.openChangeHandle(true)
             }
-            if (this.menuItems.first) {
-                this.menuItems.first.focus();
+            if (this.listItems.first) {
+                this.listItems.first.focus();
                 event.preventDefault();
             }
         }
