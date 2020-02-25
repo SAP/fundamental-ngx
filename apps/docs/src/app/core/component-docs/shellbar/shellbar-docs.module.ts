@@ -7,7 +7,6 @@ import {ShellbarDocsHeaderComponent} from './shellbar-docs-header/shellbar-docs-
 import {ShellbarDocsComponent} from './shellbar-docs.component';
 import {ShellbarBasicExampleComponent} from './examples/shellbar-basic-example.component';
 import {ShellbarSideNavExampleComponent} from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
-import {ShellbarAdvancedExampleComponent} from './examples/shellbar-advanced/shellbar-advanced-example.component';
 import {ShellbarCollapsibleExampleComponent} from './examples/shellbar-collapsible-example.component';
 
 const routes: Routes = [
@@ -32,7 +31,6 @@ const routes: Routes = [
         ShellbarDocsHeaderComponent,
         ShellbarBasicExampleComponent,
         ShellbarSideNavExampleComponent,
-        ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent
     ]
 })
