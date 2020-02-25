@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.1-rc.12"></a>
+## [0.14.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.11...v0.14.1-rc.12) (2020-02-25)
+
+
+### Bug Fixes
+
+* rtl support added to mega menu ([#2051](https://github.com/SAP/fundamental-ngx/issues/2051)) ([c7bd09d](https://github.com/SAP/fundamental-ngx/commit/c7bd09d))
+
+
+
 <a name="0.14.1-rc.11"></a>
 ## [0.14.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.10...v0.14.1-rc.11) (2020-02-25)
 
