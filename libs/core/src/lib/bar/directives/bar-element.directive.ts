@@ -4,6 +4,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
  * An element of the Bar.
  */
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'fd-bar-element',
     host: {
         class: 'fd-bar__element'

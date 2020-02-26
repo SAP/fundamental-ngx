@@ -12,6 +12,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
  * The Bar has 2 modes - Desktop (default) and Tablet/Mobile (cosy).
  */
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'fd-bar',
     templateUrl: './bar.component.html',
     styleUrls: ['./bar.component.scss'],

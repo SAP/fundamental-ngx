@@ -4,7 +4,7 @@ import { BarModule } from '../bar.module';
 
 @Component({
     template: `
-        <div #directiveElement fd-bar-element [fullWidth]="true">Bar Element Test</div>
+        <fd-bar-element #directiveElement fd-bar-element [fullWidth]="true">Bar Element Test</fd-bar-element>
     `
 })
 class TestComponent {
