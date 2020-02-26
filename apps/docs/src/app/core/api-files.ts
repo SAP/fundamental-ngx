@@ -124,7 +124,6 @@ export const API_FILES = {
         'ListGroupHeaderDirective',
         'ListIconDirective',
         'ListFooterDirective',
-        'ListActionDirective'
     ],
     loadingSpinner: [
         'LoadingSpinnerComponent'
