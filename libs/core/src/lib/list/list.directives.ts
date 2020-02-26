@@ -17,6 +17,11 @@ export class ListLabelDirective {}
     }
 })
 export class ListTitleDirective {
+    /**
+     * Enabling this flag causes forcing title directive to not wrap text,
+     * instead of wrapping there will be text truncation
+     */
+    @Input()
     @HostBinding('class.fd-list__title--no-wrap')
     noWrap: boolean = false;
 }
@@ -29,6 +34,10 @@ export class ListTitleDirective {
     }
 })
 export class ListSecondaryDirective {
+    /**
+     * Enabling this flag causes forcing secondary item directive to not wrap text,
+     * instead of wrapping there will be text truncation
+     */
     @Input()
     @HostBinding('class.fd-list__secondary--no-wrap')
     noWrap: boolean = false;
