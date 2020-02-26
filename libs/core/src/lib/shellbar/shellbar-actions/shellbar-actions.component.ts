@@ -4,7 +4,6 @@ import {
     HostListener,
     Input,
     OnInit,
-    AfterContentChecked,
     QueryList,
     ViewEncapsulation,
     ContentChild, ViewChild, ChangeDetectionStrategy
@@ -43,13 +42,10 @@ import { ProductSwitchComponent } from '../../product-switch/product-switch/prod
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
+export class ShellbarActionsComponent implements OnInit {
 
     /** @hidden */
     actionsCollapsed: boolean = false;
-
-    /** @hidden */
-    showCollapsedProducts: boolean = false;
 
     /** The user data. */
     @Input()
@@ -88,9 +84,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
-    totalNotifications: number;
-
-    /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
         this.actionsCollapsed = window.innerWidth < 1024;
@@ -119,23 +112,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */
     ngOnInit(): void {
         this.onResize();
-    }
-
-    /** @hidden */
-    ngAfterContentChecked(): void {
-        this.totalNotifications = 0;
-        this.shellbarActions.forEach((action) => {
-            if (action.notificationCount && typeof action.notificationCount === 'number') {
-                this.totalNotifications = this.totalNotifications + action.notificationCount;
-            }
-        });
-    }
-
-    /** @hidden */
-    toggleCollapsedProducts(event: MouseEvent): void {
-        event.preventDefault();
-        event.stopPropagation();
-        this.showCollapsedProducts = !this.showCollapsedProducts;
     }
 
     public get userItem(): ShellbarUser {
