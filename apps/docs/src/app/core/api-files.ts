@@ -25,6 +25,13 @@ export const API_FILES = {
         'LabelComponent',
         'StatusLabelComponent'
     ],
+    bar: [
+        'BarComponent',
+        'BarElementDirective',
+        'BarLeftDirective',
+        'BarMiddleDirective',
+        'BarRightDirective'
+    ],
     breadcrumb: [
         'BreadcrumbComponent',
         'BreadcrumbItemDirective',
