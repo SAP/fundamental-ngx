@@ -17,15 +17,15 @@
               [compact]="compact"
               [button]="true"
               [placement]="placement"
-              [ngClass]="{'fd-shellbar__input-group__addon': inShellbar}">
+              [class]="inShellbar ? 'fd-shellbar__input-group__addon' : ''">
             <button fd-button
                     [compact]="compact"
                     [attr.tabindex]="buttonFocusable ? 0 : -1"
                     [fdType]="buttonType"
                     [options]="buttonOptions"
                     [glyph]="glyph"
-                    (click)="buttonClicked($event)"
-                    [ngClass]="{'fd-shellbar__button': inShellbar}">
+                    [class]="inShellbar ? 'fd-shellbar__button' : ''"
+                    (click)="buttonClicked($event)">
                 <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
             </button>
         </span>
@@ -49,7 +49,7 @@
         <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
     </ng-container>
     <input [(ngModel)]="inputText"
-           [ngClass]="{'fd-shellbar__input-group__input': inShellbar}"
+           [class]="inShellbar ? 'fd-shellbar__input-group__input' : ''"
            fd-input-group-input
            [compact]="compact"
            type="text"
