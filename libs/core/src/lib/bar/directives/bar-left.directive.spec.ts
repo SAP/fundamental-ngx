@@ -12,7 +12,7 @@ class TestComponent {
     ref: ElementRef;
 }
 
-describe('ActionBarActionsDirective', () => {
+describe('BarLeftDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
