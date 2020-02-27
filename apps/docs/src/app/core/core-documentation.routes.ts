@@ -24,6 +24,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/badge-label/badge-label-docs.module').then(m => m.BadgeLabelDocsModule)
             },
             {
+                path: 'bar',
+                loadChildren: () => import('./component-docs/bar/bar-docs.module').then(m => m.BarDocsModule)
+            },
+            {
                 path: 'breadcrumb',
                 loadChildren: () => import('./component-docs/breadcrumb/breadcrumb-docs.module').then(m => m.BreadcrumbDocsModule)
             },
