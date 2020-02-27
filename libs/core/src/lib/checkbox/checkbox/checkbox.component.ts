@@ -85,6 +85,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange = (newValue) => {};
 
+    /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         public elementRef: ElementRef
