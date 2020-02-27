@@ -9,39 +9,40 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'actionList'" [componentName]="'list'">
-    Action List
+<fd-docs-section-title [id]="'secondaryList'" [componentName]="'list'">
+    Secondary Item on List
 </fd-docs-section-title>
-<description>The list items can also contain quick actions, such as: remove, edit, copy, etc.</description>
+<description>The list component can be customized by adding additional information in additional columns.</description>
 <component-example [name]="'ex2'">
-    <fd-list-actions-example></fd-list-actions-example>
+    <fd-list-secondary-example></fd-list-secondary-example>
 </component-example>
-<code-example [exampleFiles]="listActions"></code-example>
+<code-example [exampleFiles]="secondaryList"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'singleSelectList'" [componentName]="'list'">
-    Single Select List
+<fd-docs-section-title [id]="'iconList'" [componentName]="'list'">
+    List with Icons
+</fd-docs-section-title>
+<description>It is possible to put icons on both sides.</description>
+<component-example [name]="'ex3'">
+    <fd-list-icon-example></fd-list-icon-example>
+</component-example>
+<code-example [exampleFiles]="iconList"></code-example>
+
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'iconList'" [componentName]="'list'">
+    Complex Borderless List with Group Headers and Footer
 </fd-docs-section-title>
 <description>
-    Some lists may require the user to only select one item. In those cases, a radio button is the best-fitting input.
-    There is no formal support for this feature, though an example on how to accomplish it is provided below.
+    In ListComponent items can be split to different groups, there is also available footer element. Also there is a way
+    to remove bottom borders, by passing <code>[noBorder]="true"</code>.
 </description>
-<component-example [name]="'ex3'">
-    <fd-list-single-select-example></fd-list-single-select-example>
-</component-example>
-<code-example [exampleFiles]="listSingleSelect"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'checkbox List'" [componentName]="'list'">
-    Checkbox List
-</fd-docs-section-title>
-<description>Checkboxes can be used, allowing the user to select multiple items for bulk actions.</description>
 <component-example [name]="'ex4'">
-    <fd-list-checkbox-example></fd-list-checkbox-example>
+    <fd-list-complex-example></fd-list-complex-example>
 </component-example>
-<code-example [exampleFiles]="listCheckboxes"></code-example>
+<code-example [exampleFiles]="listComplex"></code-example>
 
 <separator></separator>
 
@@ -59,12 +60,3 @@
 <code-example [exampleFiles]="infiniteScrollCode"></code-example>
 
 <separator></separator>
-
-<fd-docs-section-title [id]="'checkboxListForm'" [componentName]="'list'">
-    Checkbox List in Form
-</fd-docs-section-title>
-<description>It is possible to use the fd-list-checkbox component within Angular Reactive Forms</description>
-<component-example [name]="'ex6'">
-    <fd-list-checkbox-form-example></fd-list-checkbox-form-example>
-</component-example>
-<code-example [exampleFiles]="listCheckboxForm"></code-example>

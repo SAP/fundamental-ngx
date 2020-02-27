@@ -4,12 +4,14 @@ import { ListModule } from './list.module';
 
 @Component({
     template: `
-        <li #directiveElement fd-list-item>List Item Test Text</li>
+        <li #directiveElement fd-list-item [selected]="selected">List Item Test Text</li>
     `
 })
 class TestComponent {
     @ViewChild('directiveElement', {static: true })
     ref: ElementRef;
+
+    selected: boolean = false;
 }
 
 describe('ListItemDirective', () => {
@@ -34,6 +36,12 @@ describe('ListItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list-group__item');
+        expect(component.ref.nativeElement.className).toBe('fd-list__item');
+    });
+
+    it('should assign is selected', () => {
+        component.selected = true;
+        fixture.detectChanges();
+        expect(component.ref.nativeElement.classList).toContain('is-selected');
     });
 });
