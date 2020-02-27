@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.15.0-rc.4"></a>
+# [0.15.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.3...v0.15.0-rc.4) (2020-02-27)
+
+
+### Bug Fixes
+
+* upgrade shellbar to fundamental-styles 0.6.0 update ([#2079](https://github.com/SAP/fundamental-ngx/issues/2079)) ([48511ae](https://github.com/SAP/fundamental-ngx/commit/48511ae))
+
+
+
 <a name="0.15.0-rc.3"></a>
 # [0.15.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.2...v0.15.0-rc.3) (2020-02-27)
 
