@@ -89,14 +89,6 @@ export class ShellbarActionsComponent implements OnInit {
         this.actionsCollapsed = window.innerWidth < 1024;
     }
 
-    /**
-     * @hidden
-     */
-    actionClicked(item: ShellbarActionComponent, event: any): void {
-        this.triggerItems();
-        item.callback(event);
-    }
-
     /** @hidden */
     triggerItems(): void {
         if (this.closePopoverOnSelect) {

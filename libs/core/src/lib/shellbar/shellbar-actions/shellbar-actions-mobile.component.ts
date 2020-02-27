@@ -36,7 +36,7 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     }
 
     /** @hidden */
-    ngAfterContentChecked() {
+    ngAfterContentChecked(): void {
         this.totalNotifications = 0;
         this.shellbarActions.forEach((action) => {
             if (action.notificationCount && typeof action.notificationCount === 'number') {
