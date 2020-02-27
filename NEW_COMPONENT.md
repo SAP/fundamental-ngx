@@ -141,7 +141,7 @@ In `poster-docs.component.html`, we'll provide a brief explanation of the poster
 <description>
     The Poster component displays a photograph taken from an image placeholder site.
 </description>
-<component-example [name]="'ex1'">
+<component-example>
     <app-poster-example></app-poster-example>
 </component-example>
 <code-example [code]="posterHtml" [language]="'HTML'"></code-example>

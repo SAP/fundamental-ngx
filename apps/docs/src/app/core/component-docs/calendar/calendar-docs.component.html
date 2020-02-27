@@ -15,7 +15,7 @@
     blocked date or range of dates cannot be selected, usually applied to blackout or booked dates mixed in with
     available dates.
 </description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-calendar-single-example></fd-calendar-single-example>
 </component-example>
 <code-example [exampleFiles]="calendarSingleSource"></code-example>
@@ -34,7 +34,7 @@
     dates. In this example, the user can only select a start date on or before October 10, 2019, and an end date on or
     after October 20, 2019.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-calendar-range-example></fd-calendar-range-example>
 </component-example>
 <code-example [exampleFiles]="calendarRangeSource"></code-example>
@@ -48,7 +48,7 @@
     property stores the date that the calendar highlights as the one that is currently selected. By programmatically
     changing the value of this property, the date that is highlighted on the calendar will change accordingly.
 </description>
-<component-example [name]="'ex3'">
+<component-example>
     <fd-calendar-programmatically-change-example></fd-calendar-programmatically-change-example>
 </component-example>
 <code-example [exampleFiles]="calendarProgrammaticallySource"></code-example>
@@ -61,7 +61,7 @@
     >Use the <code>startingDayOfWeek</code> input to change the order in which the days of the week appear. 1 is for
     Sunday, 2 is Monday, 3 is Tuesday, etc.
 </description>
-<component-example [name]="'ex4'">
+<component-example>
     <fd-calendar-monday-start-example></fd-calendar-monday-start-example>
 </component-example>
 <code-example [exampleFiles]="calendarMondayStartSource"></code-example>
@@ -77,7 +77,7 @@
     language, to detect changes, it is mandatory to call <code>calendarI18nLabels.labelsChange.next()</code> and
     <code>calendarI18n.i18nChange.next()</code>, which will trigger change detection on calendar's components.
 </description>
-<component-example [name]="'ex5'">
+<component-example>
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
 </component-example>
 <code-example [exampleFiles]="calendari18n"></code-example>
@@ -93,7 +93,7 @@
     change language while page is rendered. After changing the language, to detect changes, it is mandatory to call
     <code>calendarI18n.i18nChange.next()</code>, which will trigger change detection on calendar's components.
 </description>
-<component-example [name]="'ex6'">
+<component-example>
     <fd-calendar-i18n-moment-example></fd-calendar-i18n-moment-example>
 </component-example>
 <code-example [exampleFiles]="calendari18nMoment"></code-example>
@@ -104,7 +104,7 @@
     Calendar in Reactive Form
 </fd-docs-section-title>
 <description>The Calendar component may also be used within Angular Reactive Forms.</description>
-<component-example [name]="'ex7'">
+<component-example>
     <fd-calendar-form-example></fd-calendar-form-example>
 </component-example>
 <code-example [exampleFiles]="calendarFormSource"></code-example>

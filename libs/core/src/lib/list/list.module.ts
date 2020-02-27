@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListComponent } from './list.component';
 import { ListItemDirective } from './list-item.directive';
-import { ListActionDirective } from './list-action.directive';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ import { ListMessageDirective } from './list-message.directive';
         ListGroupHeaderDirective,
         ListIconDirective,
         ListFooterDirective,
-        ListActionDirective,
         ListMessageDirective
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule, FormModule],
@@ -39,7 +37,6 @@ import { ListMessageDirective } from './list-message.directive';
         ListGroupHeaderDirective,
         ListIconDirective,
         ListFooterDirective,
-        ListActionDirective,
         ListMessageDirective
     ]
 })

@@ -2,7 +2,7 @@
     24-Hour Clock
 </fd-docs-section-title>
 <description>This is the default clock setting.</description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-time-example></fd-time-example>
 </component-example>
 <code-example [exampleFiles]="timeBasic"></code-example>
@@ -16,7 +16,7 @@
     You can use a Meridian 12-hour clock by setting <code>[meridian]="true"</code>. The passed time object will still
     contain a 24-hour clock.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-time-12-example></fd-time-12-example>
 </component-example>
 <code-example [exampleFiles]="timeMeridian"></code-example>
@@ -27,7 +27,7 @@
     Clock Without Spinners
 </fd-docs-section-title>
 <description>Use <code>[spinners]="false"</code> to hide the spinners.</description>
-<component-example [name]="'ex3'">
+<component-example>
     <fd-time-no-spinners-example></fd-time-no-spinners-example>
 </component-example>
 <code-example [exampleFiles]="timeNoSpinners"></code-example>
@@ -38,7 +38,7 @@
     Clock Without Seconds
 </fd-docs-section-title>
 <description>Use <code>[displaySeconds]="false"</code> to hide the seconds input.</description>
-<component-example [name]="'ex4'">
+<component-example>
     <fd-time-no-seconds-example></fd-time-no-seconds-example>
 </component-example>
 <code-example [exampleFiles]="timeNoSeconds"></code-example>
@@ -53,7 +53,7 @@
     <code>[displayHours]="false"</code>
     to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
 </description>
-<component-example [name]="'ex5'">
+<component-example>
     <fd-time-only-hours-example></fd-time-only-hours-example>
 </component-example>
 <code-example [exampleFiles]="timeOnlyHours"></code-example>
@@ -64,7 +64,7 @@
     Disabled State
 </fd-docs-section-title>
 <description> You can disable the entire component by setting <code>[disabled]="true"</code>. </description>
-<component-example [name]="'ex6'">
+<component-example>
     <fd-time-disabled-example></fd-time-disabled-example>
 </component-example>
 <code-example [exampleFiles]="timeDisabled"></code-example>
@@ -78,7 +78,7 @@
     Add <code>[keepTwoDigits]="true"</code> to always have two digits in hours, minutes and seconds input.
     It also can be used in <code>TimePicker</code> and <code>DateTimePicker</code> components.
 </description>
-<component-example [name]="'ex7'">
+<component-example>
     <fd-time-two-digits-example></fd-time-two-digits-example>
 </component-example>
 <code-example [exampleFiles]="timeTwoDigits"></code-example>
@@ -95,7 +95,7 @@
     vorm. and nach. are shown. Also it is possible to modify placeholders of the inputs, such as hours, minutes,
     seconds, and meridian. Besides service allows to define if meridian modifier should be validated case sensitive.
 </description>
-<component-example [name]="'ex7'">
+<component-example>
     <fd-time-i18n-example></fd-time-i18n-example>
 </component-example>
 <code-example [exampleFiles]="timeI18n"></code-example>
@@ -109,7 +109,7 @@
     The time component may also be used within a form. The values within the form may then be accessed through the usual
     methods used for accessing data within Angular reactive forms.
 </description>
-<component-example [name]="'ex8'">
+<component-example>
     <fd-time-form-example></fd-time-form-example>
 </component-example>
 <code-example [exampleFiles]="timeForm"></code-example>

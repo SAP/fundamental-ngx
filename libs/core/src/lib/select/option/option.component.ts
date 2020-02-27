@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -55,7 +55,10 @@ export class OptionComponent implements OnInit {
         = new EventEmitter<OptionComponent>();
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {}
+    constructor(
+        private _elRef: ElementRef,
+        private _changeDetRef: ChangeDetectorRef
+    ) {}
 
 
     /** @hidden */
@@ -68,7 +71,7 @@ export class OptionComponent implements OnInit {
     /** Returns the view value text of the option, or the viewValue input if it exists. */
     get viewValueText(): string {
         return this.viewValue ? this.viewValue :
-            ((this.elRef.nativeElement as HTMLElement).textContent || '').trim();
+            ((this._elRef.nativeElement as HTMLElement).textContent || '').trim();
     }
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
@@ -82,12 +85,12 @@ export class OptionComponent implements OnInit {
 
     /** Focuses the element. */
     focus(): void {
-        (this.elRef.nativeElement as HTMLElement).focus();
+        (this._elRef.nativeElement as HTMLElement).focus();
     }
 
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
-        return this.elRef.nativeElement as HTMLElement;
+        return this._elRef.nativeElement as HTMLElement;
     }
 
     /** @hidden */
@@ -96,8 +99,9 @@ export class OptionComponent implements OnInit {
     selectionHandler(): void {
         if (!this.selected && !this.disabled) {
             this.selected = true;
-            this.selectedChange.emit(this);
+            this._changeDetRef.markForCheck();
         }
+        this.selectedChange.emit(this);
     }
 
 }

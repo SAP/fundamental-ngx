@@ -49,5 +49,4 @@ export class ListItemDirective {
             this.itemEl.nativeElement.click();
         }
     }
-
 }

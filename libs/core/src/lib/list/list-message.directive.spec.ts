@@ -1,18 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ListModule } from './list.module';
+import { ListMessageDirective } from './list-message.directive';
+import { MessageStates } from '@fundamental-ngx/core';
 
 @Component({
     template: `
-        <ul #componentElement fd-list>Action Bar Title Test Text</ul>
+        <li #directiveElement fd-list-message [type]="type">List Item Test Text</li>
     `
 })
 class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef, static: false })
-    ref: ElementRef;
+    @ViewChild(ListMessageDirective, {static: true })
+    directive: ListMessageDirective;
+    type: MessageStates;
 }
 
-describe('ListComponent', () => {
+describe('ListMessageDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -34,6 +37,14 @@ describe('ListComponent', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list-group');
+        component.directive.buildComponentCssClass();
+        expect(component.directive.elementRef().nativeElement.className).toContain('fd-list__message');
+    });
+
+    it('should assign success class', () => {
+        component.type = 'success';
+        component.directive.buildComponentCssClass();
+        fixture.detectChanges();
+        expect(component.directive.elementRef().nativeElement.classList).toContain('fd-list__message--success');
     });
 });

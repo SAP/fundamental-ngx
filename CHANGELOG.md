@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.15.0-rc.2"></a>
+# [0.15.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.1...v0.15.0-rc.2) (2020-02-27)
+
+
+
+<a name="0.15.0-rc.1"></a>
+# [0.15.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.0...v0.15.0-rc.1) (2020-02-27)
+
+
+
+<a name="0.15.0-rc.0"></a>
+# [0.15.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.14...v0.15.0-rc.0) (2020-02-27)
+
+
+### Features
+
+* List component preparation before dropdowns ([#2069](https://github.com/SAP/fundamental-ngx/issues/2069)) ([6857711](https://github.com/SAP/fundamental-ngx/commit/6857711))
+
+
+
+<a name="0.14.1-rc.14"></a>
+## [0.14.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.13...v0.14.1-rc.14) (2020-02-26)
+
+
+### Bug Fixes
+
+* (select) fix close behaviour ([#2067](https://github.com/SAP/fundamental-ngx/issues/2067)) ([48b7426](https://github.com/SAP/fundamental-ngx/commit/48b7426))
+
+
+
+<a name="0.14.1-rc.13"></a>
+## [0.14.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.12...v0.14.1-rc.13) (2020-02-25)
+
+
+### Bug Fixes
+
+* dropdown menu position fixed ([#2046](https://github.com/SAP/fundamental-ngx/issues/2046)) ([a398681](https://github.com/SAP/fundamental-ngx/commit/a398681))
+
+
+
+<a name="0.14.1-rc.12"></a>
+## [0.14.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.11...v0.14.1-rc.12) (2020-02-25)
+
+
+### Bug Fixes
+
+* rtl support added to mega menu ([#2051](https://github.com/SAP/fundamental-ngx/issues/2051)) ([c7bd09d](https://github.com/SAP/fundamental-ngx/commit/c7bd09d))
+
+
+
+<a name="0.14.1-rc.11"></a>
+## [0.14.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.10...v0.14.1-rc.11) (2020-02-25)
+
+
+
 <a name="0.14.1-rc.10"></a>
 ## [0.14.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.14.1-rc.9...v0.14.1-rc.10) (2020-02-25)
 

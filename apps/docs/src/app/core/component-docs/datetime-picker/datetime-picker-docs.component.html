@@ -9,7 +9,7 @@
 <description>
     The value for the input only changes the model on blur or an enter/return keystroke.
 </description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-datetime-example></fd-datetime-example>
 </component-example>
 <code-example [exampleFiles]="datetimePickerSingle"></code-example>
@@ -23,7 +23,7 @@
     Removing the am/pm from the time component. The string representation may or may not conserve it depending on
     locality.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-datetime-non-meridian-example></fd-datetime-non-meridian-example>
 </component-example>
 <code-example [exampleFiles]="datetimeNonMer"></code-example>
@@ -37,7 +37,7 @@
     It is possible to programmatically change the value of the date of the datetime picker and still conserve full
     functionality.
 </description>
-<component-example [name]="'ex3'">
+<component-example>
     <fd-datetime-program-example></fd-datetime-program-example>
 </component-example>
 <code-example [exampleFiles]="datetimeProgram"></code-example>
@@ -49,7 +49,7 @@
 <description>
     Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.
 </description>
-<component-example [name]="'ex4'">
+<component-example>
     <fd-date-time-picker-allow-null-example></fd-date-time-picker-allow-null-example>
 </component-example>
 <code-example [exampleFiles]="datetimePickerAllowNull"></code-example>
@@ -59,7 +59,7 @@
     Formatting
 </fd-docs-section-title>
 <description>Providing a custom format for the dates is possible through providing a service.</description>
-<component-example [name]="'ex5'">
+<component-example>
     <fd-datetime-format-example></fd-datetime-format-example>
 </component-example>
 <code-example [exampleFiles]="datetimeFormat"></code-example>
@@ -69,7 +69,7 @@
 <fd-docs-section-title [id]="'datetime-picker-disabled'" [componentName]="'datetime-picker'">
     Disabled State
 </fd-docs-section-title>
-<component-example [name]="'ex6'">
+<component-example>
     <fd-datetime-disabled-example></fd-datetime-disabled-example>
 </component-example>
 <code-example [exampleFiles]="datetimeDisabled"></code-example>
@@ -82,7 +82,7 @@
 <description>The date-time-picker component may also be used within Angular Reactive Forms. DateTime Picker follows
     Date Picker with <code>[blockFunction]</code> and <code>[disableFunction]</code>
 </description>
-<component-example [name]="'ex7'">
+<component-example>
     <fd-datetime-form-example></fd-datetime-form-example>
 </component-example>
 <code-example [exampleFiles]="datetimeForm"></code-example>
@@ -97,7 +97,7 @@
     <code>[format]</code> or <code>[locale]</code>. By default FdDate model is formatted by angular built-in
     <code>datePipe</code>.
 </description>
-<component-example [name]="'ex8'">
+<component-example>
     <fd-datetime-picker-complex-i18n-example></fd-datetime-picker-complex-i18n-example>
 </component-example>
 <code-example [exampleFiles]="datetimeI18nComplex"></code-example>
