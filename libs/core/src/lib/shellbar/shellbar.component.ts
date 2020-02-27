@@ -23,16 +23,27 @@ import { ComboboxComponent } from '../combobox/combobox.component';
 })
 export class ShellbarComponent implements AfterContentInit {
 
+    /** @hidden */
     @ContentChild(ComboboxComponent, {static: false})
     comboboxComponent: ComboboxComponent;
 
+    /** @hidden */
     @ContentChildren(forwardRef(() => ButtonComponent))
     buttons: QueryList<ButtonComponent>;
 
-    ngAfterContentInit() {
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this.applyShellbarModeToCombobox();
+        this.applyShellbarModeToButtons();
+    }
+
+    /** @hidden */
+    applyShellbarModeToCombobox(): void {
         if (this.comboboxComponent) {
             this.comboboxComponent.inShellbar = true;
         }
+    }
+    applyShellbarModeToButtons(): void {
         if (this.buttons && this.buttons.length) {
             this.buttons.forEach(button => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');

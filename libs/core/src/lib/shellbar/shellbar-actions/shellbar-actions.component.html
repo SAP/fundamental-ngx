@@ -23,6 +23,6 @@
     </ng-container>
 </ng-container>
 
-<div [ngClass]="{'fd-shellbar__action': productSwitchComponent}">
+<div *ngIf="productSwitchComponent" class="fd-shellbar__action">
     <ng-content select="fd-product-switch"></ng-content>
 </div>

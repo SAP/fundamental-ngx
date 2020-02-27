@@ -239,7 +239,9 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
         this.menuKeyboardService.focusEscapeAfterList = () => { };
 
-        this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
+        if (this.inShellbar) {
+            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
+        }
     }
 
     /** @hidden */
