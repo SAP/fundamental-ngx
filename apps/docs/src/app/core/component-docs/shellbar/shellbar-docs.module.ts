@@ -7,11 +7,11 @@ import {ShellbarDocsHeaderComponent} from './shellbar-docs-header/shellbar-docs-
 import {ShellbarDocsComponent} from './shellbar-docs.component';
 import {ShellbarBasicExampleComponent} from './examples/shellbar-basic-example.component';
 import {ShellbarSideNavExampleComponent} from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
-import {ShellbarAdvancedExampleComponent} from './examples/shellbar-advanced/shellbar-advanced-example.component';
 import {ShellbarCollapsibleExampleComponent} from './examples/shellbar-collapsible-example.component';
 import {
     ComboboxModule,
     IdentifierModule,
+    PanelModule,
     ProductSwitchModule,
     ShellbarModule,
     SideNavigationModule,
@@ -38,7 +38,8 @@ const routes: Routes = [
         SideNavigationModule,
         IdentifierModule,
         ProductSwitchModule,
-        TileModule
+        TileModule,
+        PanelModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -46,7 +47,6 @@ const routes: Routes = [
         ShellbarDocsHeaderComponent,
         ShellbarBasicExampleComponent,
         ShellbarSideNavExampleComponent,
-        ShellbarAdvancedExampleComponent,
         ShellbarCollapsibleExampleComponent
     ]
 })

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    ContentChildren, forwardRef, QueryList,
+    ViewEncapsulation
+} from '@angular/core';
+import { ButtonComponent } from '../button/button.component';
+import { ComboboxComponent } from '../combobox/combobox.component';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -12,5 +21,34 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarComponent {
+export class ShellbarComponent implements AfterContentInit {
+
+    /** @hidden */
+    @ContentChild(ComboboxComponent, {static: false})
+    comboboxComponent: ComboboxComponent;
+
+    /** @hidden */
+    @ContentChildren(forwardRef(() => ButtonComponent))
+    buttons: QueryList<ButtonComponent>;
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this.applyShellbarModeToCombobox();
+        this.applyShellbarModeToButtons();
+    }
+
+    /** @hidden */
+    applyShellbarModeToCombobox(): void {
+        if (this.comboboxComponent) {
+            this.comboboxComponent.inShellbar = true;
+        }
+    }
+    applyShellbarModeToButtons(): void {
+        if (this.buttons && this.buttons.length) {
+            this.buttons.forEach(button => {
+                button.elementRef().nativeElement.classList.add('fd-shellbar__button');
+            });
+        }
+    }
+
 }

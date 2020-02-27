@@ -158,6 +158,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     buttonFocusable: boolean = false;
 
+    /** Whether the combobox is part of the shellbar, used to add shellbar-specific styles */
+    @Input()
+    inShellbar: boolean = false;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
@@ -234,6 +238,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
             .subscribe(index => this.onMenuClickHandler(index));
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
         this.menuKeyboardService.focusEscapeAfterList = () => { };
+
+        if (this.inShellbar) {
+            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
+        }
     }
 
     /** @hidden */

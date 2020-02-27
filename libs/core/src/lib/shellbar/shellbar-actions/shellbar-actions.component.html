@@ -1,45 +1,12 @@
 <div *ngIf="comboboxComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
-    <div class="fd-search-input">
-        <ng-content select="fd-combobox"></ng-content>
-    </div>
+    <ng-content select="fd-combobox"></ng-content>
 </div>
 
 <div *ngIf="actionsCollapsed && shellbarActions.length"
-        class="fd-shellbar__action fd-shellbar__action--mobile">
-    <div class="fd-shellbar-collapse">
-        <fd-popover [options]="{placement: 'bottom-end'}"
-                    [focusTrapped]="false">
-            <fd-popover-control>
-                <div class="fd-shellbar-collapse--control">
-                    <button fd-button [glyph]="'overflow'" class="fd-shellbar__button"
-                            [attr.aria-label]="collapsedItemMenuLabel">
-                        <span *ngIf="totalNotifications"
-                                class="fd-counter fd-counter--notification">{{totalNotifications}}</span>
-                    </button>
-                </div>
-            </fd-popover-control>
-            <fd-popover-body>
-                <fd-menu>
-                    <ul fd-menu-list
-                        *ngIf="!showCollapsedProducts">
-                        <li fd-menu-item
-                            *ngFor="let action of shellbarActions"
-                            (click)="actionClicked(action, $event)">
-                            <fd-icon fd-menu-item-addon [glyph]="action.glyph"></fd-icon>
-                            {{action.label}}
-                        </li>
-                    </ul>
-                    <ul fd-menu-list
-                        *ngIf="showCollapsedProducts">
-                        <li (click)="toggleCollapsedProducts($event)">
-                            <span fd-menu-item class="sap-icon--nav-back"></span>
-                        </li>
-                    </ul>
-                </fd-menu>
-            </fd-popover-body>
-        </fd-popover>
-    </div>
+     class="fd-shellbar__action fd-shellbar__action--mobile">
+    <fd-shellbar-actions-mobile [shellbarActions]="shellbarActions" [collapsedItemMenuLabel]="collapsedItemMenuLabel"></fd-shellbar-actions-mobile>
 </div>
+
 <ng-content></ng-content>
 <ng-content select="fd-shellbar-action"></ng-content>
 <ng-container *ngIf="userItem">
@@ -56,5 +23,6 @@
     </ng-container>
 </ng-container>
 
-
-<ng-content select="fd-product-switch"></ng-content>
+<div *ngIf="productSwitchComponent" class="fd-shellbar__action">
+    <ng-content select="fd-product-switch"></ng-content>
+</div>
