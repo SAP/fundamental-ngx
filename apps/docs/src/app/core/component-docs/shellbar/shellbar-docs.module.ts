@@ -11,6 +11,7 @@ import {ShellbarCollapsibleExampleComponent} from './examples/shellbar-collapsib
 import {
     ComboboxModule,
     IdentifierModule,
+    PanelModule,
     ProductSwitchModule,
     ShellbarModule,
     SideNavigationModule,
@@ -37,7 +38,8 @@ const routes: Routes = [
         SideNavigationModule,
         IdentifierModule,
         ProductSwitchModule,
-        TileModule
+        TileModule,
+        PanelModule
     ],
     exports: [RouterModule],
     declarations: [
