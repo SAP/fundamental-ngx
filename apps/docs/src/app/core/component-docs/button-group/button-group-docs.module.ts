@@ -7,6 +7,7 @@ import {ButtonGroupDocsComponent} from './button-group-docs.component';
 import {ButtonGroupHeaderComponent} from './button-group-header/button-group-header.component';
 import {ButtonGroupToggleExampleComponent} from './examples/button-group-toggle-example.component';
 import {ButtonGroupDefaultExampleComponent} from './examples/button-group-default-example.component';
+import { ButtonGroupModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        ButtonGroupModule
     ],
     exports: [RouterModule],
     declarations: [

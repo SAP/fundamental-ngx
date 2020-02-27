@@ -6,6 +6,7 @@ import {API_FILES} from '../../api-files';
 import {InfiniteScrollHeaderComponent} from './infinite-scroll-header/infinite-scroll-header.component';
 import {InfiniteScrollDocsComponent} from './infinite-scroll-docs.component';
 import {InfiniteScrollBasicExampleComponent} from './examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
+import { InfiniteScrollModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        InfiniteScrollModule
     ],
     exports: [RouterModule],
     declarations: [

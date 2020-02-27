@@ -18,3 +18,4 @@ export * from './dynamic-component/dynamic-component.service';
 export * from './functions';
 export * from './datatypes/hash.datatype';
 export * from './services/rtl.service';
+export * from './keyboard-unification';

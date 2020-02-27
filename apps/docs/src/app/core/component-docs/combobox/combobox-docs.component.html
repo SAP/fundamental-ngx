@@ -2,7 +2,7 @@
     Standard Combobox
 </fd-docs-section-title>
 <description>The standard version of the component that most people will likely use regularly.</description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-combobox-example></fd-combobox-example>
 </component-example>
 <code-example [exampleFiles]="comboboxBasicExample"></code-example>
@@ -16,7 +16,7 @@
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
     accepts an array and a search term, and then returns the desired filtered array.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
 </component-example>
 <code-example [exampleFiles]="comboboxDynamicExample"></code-example>
@@ -30,7 +30,7 @@
     Custom search function can be provided by <code>[searchFunction]</code> to combobox. It will be called on mouse
     click on combobox's primary button, or on enter key press, while focused on combobox input.
 </description>
-<component-example [name]="'ex3'">
+<component-example>
     <fd-combobox-search-function-example></fd-combobox-search-function-example>
 </component-example>
 <code-example [exampleFiles]="comboboxSearchFunctionExample"></code-example>
@@ -44,7 +44,7 @@
     Passing object arrays to the Combobox is supported through the <code>displayFn</code> input function. To access the
     <code>this</code> keyword inside the passed function, use an arrow function.
 </description>
-<component-example [name]="'ex4'">
+<component-example>
     <fd-combobox-displaywith-example></fd-combobox-displaywith-example>
 </component-example>
 <code-example [exampleFiles]="comboboxDisplayExample"></code-example>
@@ -62,7 +62,7 @@
     <code>[triggers]="[]"</code>, it is possible to fully control the <code>open</code> state of combobox. To change it
     pass variable to <code>[open]</code>.
 </description>
-<component-example [name]="'ex5'">
+<component-example>
     <fd-combobox-open-control-example></fd-combobox-open-control-example>
 </component-example>
 <code-example [exampleFiles]="comboboxOpenChangeExample"></code-example>
@@ -79,7 +79,7 @@
 <description>
     This example also demonstrates how to create a callback function from data returned by the observable.
 </description>
-<component-example [name]="'ex6'">
+<component-example>
     <fd-combobox-async-example></fd-combobox-async-example>
 </component-example>
 <code-example [exampleFiles]="comboboxAsyncExample"></code-example>
@@ -93,7 +93,7 @@
     The way the items are rendered in the popover list can be customized through providing an <code>itemTemplate</code>
     to the component.
 </description>
-<component-example [name]="'ex7'">
+<component-example>
     <fd-combobox-template-example></fd-combobox-template-example>
 </component-example>
 <code-example [exampleFiles]="comboboxTemplateExample"></code-example>
@@ -107,7 +107,7 @@
     This examples shows how to put <code>combobox</code> in a Reactive Form. Also how to sets it's state to
     <code>disabled</code>
 </description>
-<component-example [name]="'ex8'">
+<component-example>
     <fd-combobox-disabled-example></fd-combobox-disabled-example>
 </component-example>
 <code-example [exampleFiles]="comboboxDisabledExample"></code-example>
@@ -121,7 +121,7 @@
     There is also the possibility to define a fixed height for the dropdown list by specifying the desired height using
     the <code>[maxHeight]</code> attribute.
 </description>
-<component-example [name]="'ex9'">
+<component-example>
     <fd-combobox-height-example></fd-combobox-height-example>
 </component-example>
 <code-example [exampleFiles]="comboboxHeightExample"></code-example>
@@ -140,7 +140,7 @@
     value, until it matches one of displayed dropdown options. Also on this mode, combobox on communication uses model
     with same type as it's passed to <code>[dropdownValues]</code>
 </description>
-<component-example [name]="'ex10'">
+<component-example>
     <fd-combobox-forms-example></fd-combobox-forms-example>
 </component-example>
 <code-example [exampleFiles]="comboboxFormExample"></code-example>

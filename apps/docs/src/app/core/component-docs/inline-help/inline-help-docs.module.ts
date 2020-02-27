@@ -10,6 +10,7 @@ import {
     InlineHelpStyledExampleComponent,
     InlineHelpTriggerExampleComponent
 } from './examples/inline-help-examples.component';
+import { InlineHelpModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        InlineHelpModule
     ],
     exports: [RouterModule],
     declarations: [

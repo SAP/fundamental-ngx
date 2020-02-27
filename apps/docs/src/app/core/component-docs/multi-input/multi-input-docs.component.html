@@ -5,7 +5,7 @@
     The standard version of the component that most people will use regularly. Width of the input can be controlled
     simply through the top-level component element sizing.
 </description>
-<component-example [name]="'ex1'">
+<component-example>
     <fd-multi-input-example></fd-multi-input-example>
 </component-example>
 <code-example [exampleFiles]="multiInputBasic"></code-example>
@@ -20,7 +20,7 @@
     fully customizable through providing a function that accepts the object and returns the string to be displayed. The
     example below shows displaying an object field in full uppercase.
 </description>
-<component-example [name]="'ex2'">
+<component-example>
     <fd-multi-input-displaywith-example></fd-multi-input-displaywith-example>
 </component-example>
 <code-example [exampleFiles]="display"></code-example>
@@ -34,7 +34,7 @@
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
     accepts an array and a search term, and then returns the desired filtered array.
 </description>
-<component-example [name]="'ex3'">
+<component-example>
     <fd-multi-input-filter-example></fd-multi-input-filter-example>
 </component-example>
 <code-example [exampleFiles]="filter"></code-example>
@@ -48,7 +48,7 @@
     The <code>dropdownValues</code> input can accept an Observable with the async pipe, which could be useful for
     autocomplete.
 </description>
-<component-example [name]="'ex4'">
+<component-example>
     <fd-multi-input-async-example></fd-multi-input-async-example>
 </component-example>
 <code-example [exampleFiles]="async"></code-example>
@@ -59,7 +59,7 @@
     Multi Input in Reactive Form
 </fd-docs-section-title>
 <description>The multi-input component may also be used within an angular reactive form.</description>
-<component-example [name]="'ex5'">
+<component-example>
     <fd-multi-input-form-example></fd-multi-input-form-example>
 </component-example>
 <code-example [exampleFiles]="form"></code-example>

@@ -1,8 +1,6 @@
-<p>Selected Value: {{ this.selectOneValue }}</p>
-
-<fd-select [(value)]="selectOneValue" [loading]="true" placeholder="Select an option...">
+<fd-select [loading]="true" placeholder="Select an option...">
     <div *ngFor="let fruit of emptyValues">
-        <fd-option value="fruit">{{ fruit }}</fd-option>
+        <fd-option [value]="fruit">{{ fruit }}</fd-option>
     </div>
 </fd-select>
 
@@ -13,9 +11,10 @@
     placeholder="Select an option..."
 >
     <div *ngFor="let fruit of values">
-        <fd-option value="fruit">{{ fruit }}</fd-option>
+        <fd-option [value]="fruit">{{ fruit }}</fd-option>
     </div>
 </fd-select>
+<p>Selected Value: {{ selectOneValue }}</p>
 
 <fd-select
     class="fd-select-example"
@@ -25,9 +24,10 @@
     placeholder="Compact select"
 >
     <div *ngFor="let fruit of values">
-        <fd-option value="fruit">{{ fruit }}</fd-option>
+        <fd-option [value]="fruit">{{ fruit }}</fd-option>
     </div>
 </fd-select>
+<p>Selected Value: {{ selectTwoValue }}</p>
 
 <fd-select
     class="fd-select-example"
@@ -37,6 +37,6 @@
     placeholder="Disabled select"
 >
     <div *ngFor="let fruit of values">
-        <fd-option value="fruit">{{ fruit }}</fd-option>
+        <fd-option [value]="fruit">{{ fruit }}</fd-option>
     </div>
 </fd-select>
