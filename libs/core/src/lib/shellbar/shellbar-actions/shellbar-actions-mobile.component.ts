@@ -35,6 +35,13 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
         this.showCollapsedProducts = !this.showCollapsedProducts;
     }
 
+    /**
+     * @hidden
+     */
+    actionClicked(item: ShellbarActionComponent, event: any): void {
+        item.callback(event);
+    }
+
     /** @hidden */
     ngAfterContentChecked(): void {
         this.totalNotifications = 0;
