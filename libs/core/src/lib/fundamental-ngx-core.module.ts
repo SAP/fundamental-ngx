@@ -3,6 +3,7 @@ import { ActionBarModule } from './action-bar/action-bar.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { BadgeLabelModule } from './badge-label/badge-label.module';
+import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
 import { ButtonModule } from './button/button.module';
@@ -62,6 +63,7 @@ import { LinkModule } from './link/link.module';
     ActionBarModule,
     AlertModule,
     BadgeLabelModule,
+    BarModule,
     BreadcrumbModule,
     BusyIndicatorModule,
     ButtonModule,
