@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item';
-import { ListItemDirective } from '@fundamental-ngx/core';
+import { ListItemDirective } from '../list/list-item.directive';
 
 export class MenuKeyboardService {
 
