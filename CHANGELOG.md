@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.15.0-rc.7"></a>
+# [0.15.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.6...v0.15.0-rc.7) (2020-02-28)
+
+
+### Bug Fixes
+
+* upgrade Multi Input to fundamental-styles 0.6.0 ([#2080](https://github.com/SAP/fundamental-ngx/issues/2080)) ([fed09dc](https://github.com/SAP/fundamental-ngx/commit/fed09dc))
+
+
+
 <a name="0.15.0-rc.6"></a>
 # [0.15.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.5...v0.15.0-rc.6) (2020-02-28)
 
