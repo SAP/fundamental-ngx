@@ -1,12 +1,13 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    ContentChildren,
-    forwardRef,
+    ContentChildren, ElementRef,
+    forwardRef, HostListener,
     Input,
-    QueryList,
+    QueryList, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FormControlDirective } from '../form/form-control/form-control.directive';
@@ -19,7 +20,7 @@ import { TokenComponent } from './token.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenizerComponent implements AfterViewInit {
+export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
@@ -28,6 +29,10 @@ export class TokenizerComponent implements AfterViewInit {
     /** @hidden */
     @ContentChild(forwardRef(() => FormControlDirective), {static: true})
     input: FormControlDirective;
+
+    /** @hidden */
+    @ViewChild('more', {static: true})
+    moreElement: HTMLElement;
 
     /** Used to add focus class to the tokenizer-example */
     @Input()
@@ -40,6 +45,12 @@ export class TokenizerComponent implements AfterViewInit {
     /** The value for the tokenizer input */
     @Input()
     inputValue: string;
+
+    /** @hidden */
+    previousElementWidth: number;
+
+    /** @hidden */
+    hiddenCount: number = 0;
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -80,6 +91,7 @@ export class TokenizerComponent implements AfterViewInit {
         return elementToFocus;
     }
 
+    /** @hidden */
     addKeyboardListener(element: HTMLElement, newIndex: number): void {
         // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
         const handleFunctionReference = (e) => {
@@ -93,5 +105,88 @@ export class TokenizerComponent implements AfterViewInit {
             element.removeEventListener('keydown', handleFunctionReference);
         });
     }
+
+    /** @hidden */
+    @HostListener('window:resize', [])
+    onResize(): void {
+        const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        if (elementWidth <= this.previousElementWidth) {
+            this.collapseTokens();
+        } else {
+            this.expandTokens();
+        }
+        this.previousElementWidth = elementWidth;
+    }
+
+    /** @hidden */
+    collapseTokens(): void {
+        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
+        let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
+        let i = 0;
+        while (innerWidth >= elementWidth && i < this.tokenList.length) {
+            const token = this.tokenList.filter((item, index) => index === i)[0];
+            token.elementRef.nativeElement.style.display = 'none';
+            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            innerWidth = this.getInnerWidth();
+            i++;
+            this.hiddenCount = i;
+        }
+    }
+
+    /** @hidden */
+    expandTokens(): void {
+        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
+        let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
+        let i = 0;
+        let breakLoop = false;
+        const originalHiddenCount = this.hiddenCount;
+        while (innerWidth < elementWidth && i < originalHiddenCount && !breakLoop) {
+            // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
+            const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[0];
+            /*
+              set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
+              contain the width of the token we might display, without actually making the token visible to the user
+             */
+            tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
+            tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
+            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            innerWidth = this.getInnerWidth();
+            /*
+              if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
+              make the token visible and reduce the hidden count
+            */
+            if (innerWidth < elementWidth) {
+                tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
+                this.hiddenCount--;
+            } else {
+                // otherwise, stop looping and set the token's display back to 'none'
+                tokenToCheck.elementRef.nativeElement.style.display = 'none';
+                breakLoop = true;
+            }
+            i++;
+        }
+    }
+
+    /** @hidden */
+    getInnerWidth(): number {
+        let totalTokenWidth = 0;
+        this.tokenList.forEach(token => {
+            totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
+        });
+        totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width; // add input width
+        if (this.hiddenCount > 0 && this.moreElement) {
+            totalTokenWidth = totalTokenWidth + this.moreElement.getBoundingClientRect().width;
+        }
+
+        return totalTokenWidth;
+    }
+
+    /** @hidden */
+    ngAfterContentInit() {
+        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        this.onResize();
+    }
+
+    constructor(private elementRef: ElementRef) {}
 
 }
