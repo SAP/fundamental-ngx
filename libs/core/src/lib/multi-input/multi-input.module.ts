@@ -9,6 +9,7 @@ import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { FormModule } from '../form/form.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
+import { ListModule } from '../list/list.module';
 
 @NgModule({
     declarations: [MultiInputComponent],
@@ -17,6 +18,7 @@ import { CheckboxModule } from '../checkbox/checkbox.module';
         TokenModule,
         FormsModule,
         MenuModule,
+        ListModule,
         PopoverModule,
         PipeModule,
         InputGroupModule,

@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs';
 import { Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item';
+import { ListItemDirective } from '../list/list-item.directive';
 
 export class MenuKeyboardService {
 
@@ -24,7 +25,7 @@ export class MenuKeyboardService {
      * @param index index of items starts from 0
      * @param menuItems array of menu item directives
      * */
-    keyDownHandler(event: KeyboardEvent, index: number, menuItems: DefaultMenuItem[]): void {
+    keyDownHandler(event: KeyboardEvent, index: number, menuItems: DefaultMenuItem[] | ListItemDirective[]): void {
 
         if (this.disableKeydownHandling) {
             return;

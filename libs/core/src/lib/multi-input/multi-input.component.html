@@ -13,11 +13,13 @@
                     [buttonFocusable]="buttonFocusable"
                     [button]="true"
                     [glyph]="glyph"
+                    [compact]="compact"
                     [disabled]="disabled"
                     (click)="openChangeHandle(!open)">
                     <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer">
                         <fd-token
                             *ngFor="let token of selected"
+                            [compact]="compact"
                             [disabled]=this.disabled
                             (onCloseClick)="handleSelect(false, token, null)">
                             <span [innerHtml]="token | displayFnPipe:displayFn"></span>
@@ -27,26 +29,24 @@
                                #searchInputElement
                                [placeholder]="placeholder"
                                [(ngModel)]="searchTerm"
+                               [ngClass]="{'fd-input--compact': compact}"
                                (ngModelChange)="handleSearchTermChange()"
                                (keydown)="handleInputKeydown($event)">
                     </fd-tokenizer>
                 </fd-input-group>
             </fd-popover-control>
             <fd-popover-body [attr.aria-hidden]="!open">
-                <fd-menu class="fd-multi-input-menu-overflow"
-                         *ngIf="displayedValues && displayedValues.length"
-                         [style.maxHeight]="maxHeight">
-                    <ul fd-menu-list>
-                        <li *ngFor="let value of displayedValues; let ind  = index">
-                            <label (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" fd-menu-item (keydown)="handleKeyDown($event, ind)">
-                                <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false"
-                                             class="fd-multi-input-checkbox">
-                                    <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
-                                </fd-checkbox>
-                            </label>
-                        </li>
-                    </ul>
-                </fd-menu>
+                <ul fd-list class="fd-multi-input-menu-overflow" *ngIf="displayedValues && displayedValues.length" [style.maxHeight]="maxHeight">
+                    <li fd-list-item *ngFor="let value of displayedValues; let ind  = index" [selected]="selected.indexOf(value) !== -1">
+                        <fd-checkbox [ngModel]="selected ? selected.indexOf(value) !== -1 : false" class="fd-multi-input-checkbox"
+                                 (click)="handleSelect(selected.indexOf(value) === -1, value, $event)" (keydown)="handleKeyDown($event, ind)">
+                            <span [innerHtml]="value | displayFnPipe:displayFn | highlight:searchTerm:highlight"></span>
+                        </fd-checkbox>
+                    </li>
+                    <li fd-list-item class="fd-multi-input-show-all">
+                        <a class="fd-link" (click)="showAllClicked($event)" href>Show All ({{dropdownValues.length}})</a>
+                    </li>
+                </ul>
                 <ng-content></ng-content>
             </fd-popover-body>
         </fd-popover>
