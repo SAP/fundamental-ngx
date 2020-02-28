@@ -176,7 +176,9 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         this.tokenList.forEach(token => {
             totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
         });
-        totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width; // add input width
+        if (this.input && this.input.elementRef) {
+            totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width; // add input width
+        }
         if (this.hiddenCount > 0 && this.moreElement && this.moreElement.nativeElement) {
             totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
         }
