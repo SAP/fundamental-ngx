@@ -109,6 +109,13 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     state: FormStates;
 
+    /**
+     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
+     * @hidden
+     */
+    @Input()
+    inShellbar: boolean = false;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();

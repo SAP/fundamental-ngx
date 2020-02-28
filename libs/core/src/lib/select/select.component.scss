@@ -107,11 +107,15 @@
         overflow-x: hidden;
         pointer-events: none;
         margin-right: auto;
+        &[dir='rtl'] {
+            margin-left: auto;
+            margin-right: 0px;
+        }
     }
 
-    .icon-position{
+    .icon-position {
         margin: 1px 12px;
-	}
+    }
 
     .fd-select-popover-body-custom {
         display: block;

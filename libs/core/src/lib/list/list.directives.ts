@@ -1,6 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
-import { MessageStates } from '../form/form-message/form-message.component';
 
 @Directive({
     // tslint:disable-next-line:directive-selector

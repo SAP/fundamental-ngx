@@ -9,6 +9,7 @@ import { PopoverModule } from '../popover/popover.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
+import { ListModule } from '../list/list.module';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -22,6 +23,7 @@ describe('MultiInputComponent', () => {
                 TokenModule,
                 FormsModule,
                 MenuModule,
+                ListModule,
                 PopoverModule,
                 PipeModule,
                 CheckboxModule,
@@ -189,11 +191,11 @@ describe('MultiInputComponent', () => {
             preventDefault: () => {},
             stopPropagation: () => {}
         };
-        spyOn(component.menuItems.first, 'focus');
+        spyOn(component.listItems.first, 'focus');
         spyOn(event, 'preventDefault');
         component.handleKeyDown(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.menuItems.first.focus).toHaveBeenCalled();
+        expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
 });

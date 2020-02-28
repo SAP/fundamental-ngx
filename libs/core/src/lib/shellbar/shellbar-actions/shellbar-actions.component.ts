@@ -4,7 +4,6 @@ import {
     HostListener,
     Input,
     OnInit,
-    AfterContentChecked,
     QueryList,
     ViewEncapsulation,
     ContentChild, ViewChild, ChangeDetectionStrategy
@@ -14,6 +13,7 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { ComboboxComponent } from '../../combobox/combobox.component';
+import { ProductSwitchComponent } from '../../product-switch/product-switch/product-switch.component';
 
 /**
  * The component that represents shellbar actions.
@@ -42,13 +42,10 @@ import { ComboboxComponent } from '../../combobox/combobox.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
+export class ShellbarActionsComponent implements OnInit {
 
     /** @hidden */
     actionsCollapsed: boolean = false;
-
-    /** @hidden */
-    showCollapsedProducts: boolean = false;
 
     /** The user data. */
     @Input()
@@ -83,20 +80,13 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */
-    totalNotifications: number;
+    @ContentChild(ProductSwitchComponent, {static: false})
+    productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
         this.actionsCollapsed = window.innerWidth < 1024;
-    }
-
-    /**
-     * @hidden
-     */
-    actionClicked(item: ShellbarActionComponent, event: any): void {
-        this.triggerItems();
-        item.callback(event);
     }
 
     /** @hidden */
@@ -114,23 +104,6 @@ export class ShellbarActionsComponent implements OnInit, AfterContentChecked {
     /** @hidden */
     ngOnInit(): void {
         this.onResize();
-    }
-
-    /** @hidden */
-    ngAfterContentChecked(): void {
-        this.totalNotifications = 0;
-        this.shellbarActions.forEach((action) => {
-            if (action.notificationCount && typeof action.notificationCount === 'number') {
-                this.totalNotifications = this.totalNotifications + action.notificationCount;
-            }
-        });
-    }
-
-    /** @hidden */
-    toggleCollapsedProducts(event: MouseEvent): void {
-        event.preventDefault();
-        event.stopPropagation();
-        this.showCollapsedProducts = !this.showCollapsedProducts;
     }
 
     public get userItem(): ShellbarUser {
