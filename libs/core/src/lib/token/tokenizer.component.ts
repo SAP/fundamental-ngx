@@ -7,7 +7,8 @@ import {
     ContentChildren, ElementRef,
     forwardRef, HostListener,
     Input,
-    QueryList, ViewChild,
+    QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FormControlDirective } from '../form/form-control/form-control.directive';
@@ -31,7 +32,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     input: FormControlDirective;
 
     /** @hidden */
-    @ViewChild('more', {static: true})
+    @ViewChild('moreElement', {static: true})
     moreElement: HTMLElement;
 
     /** Used to add focus class to the tokenizer-example */
@@ -59,6 +60,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 this.handleKeyDown(event, this.tokenList.length);
             });
         }
+        console.log('sdfjsdlkfjlksdjfljsdf');
+        console.log(this.moreElement);
     }
 
     /** @hidden */
@@ -174,8 +177,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
         });
         totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width; // add input width
-        if (this.hiddenCount > 0 && this.moreElement) {
-            totalTokenWidth = totalTokenWidth + this.moreElement.getBoundingClientRect().width;
+        if (this.hiddenCount > 0 && this.moreElement && this.moreElement.nativeElement) {
+            totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
         }
 
         return totalTokenWidth;
