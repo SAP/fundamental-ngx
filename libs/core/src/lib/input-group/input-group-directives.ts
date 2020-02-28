@@ -9,16 +9,10 @@ import { FormStates } from '../form/form-control/form-states';
 })
 export class InputGroupInputDirective extends AbstractFdNgxClass {
 
-    @Input()
-    compact: boolean = false;
-
     /** @hidden */
     _setProperties() {
         this._addClassToElement('fd-input');
         this._addClassToElement('fd-input-group__input');
-        if (this.compact) {
-            this._addClassToElement('fd-input--compact');
-        }
     }
 
 
@@ -53,10 +47,6 @@ export class InputGroupAddOnDirective extends AbstractFdNgxClass implements Afte
     @Input()
     placement: InputGroupPlacement = 'after';
 
-    /** Whether to apply compact mode to the AddOn. */
-    @Input()
-    compact: boolean = false;
-
     /**
      * The placement of the add-on. Options include *before* and *after*
      */
@@ -87,9 +77,6 @@ export class InputGroupAddOnDirective extends AbstractFdNgxClass implements Afte
         }
         if (this.state) {
             this._addClassToElement('is-' + this.state);
-        }
-        if (this.compact) {
-            this._addClassToElement('fd-input-group__addon--compact')
         }
     }
 
