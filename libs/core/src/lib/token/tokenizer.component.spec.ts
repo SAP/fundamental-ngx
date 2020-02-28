@@ -131,4 +131,78 @@ describe('TokenizerComponent', () => {
     expect(mockElement.setAttribute).toHaveBeenCalled();
     expect(mockElement.removeEventListener).toHaveBeenCalled();
   });
+
+  it('should handle resize - getting smaller', () => {
+    spyOn(component, 'collapseTokens');
+    spyOn(component, 'expandTokens');
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    component.previousElementWidth = 2;
+    component.onResize();
+
+    expect(component.collapseTokens).toHaveBeenCalled();
+    expect(component.expandTokens).not.toHaveBeenCalled();
+    expect(component.previousElementWidth).toBe(1);
+  });
+
+  it('should handle resize - getting bigger', () => {
+    spyOn(component, 'collapseTokens');
+    spyOn(component, 'expandTokens');
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 2});
+    component.previousElementWidth = 1;
+    component.onResize();
+
+    expect(component.collapseTokens).not.toHaveBeenCalled();
+    expect(component.expandTokens).toHaveBeenCalled();
+    expect(component.previousElementWidth).toBe(2);
+  });
+
+  it('should collapse the tokens', () => {
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component, 'getInnerWidth').and.returnValue(2);
+    component.collapseTokens();
+
+    component.tokenList.forEach(token => {
+      expect(token.elementRef.nativeElement.style.display).toBe('none');
+    });
+    expect(component.hiddenCount).toBe(3);
+  });
+
+  it('should expand the tokens', () => {
+      // need to collapse the tokens before running expand
+      spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+      spyOn(component, 'getInnerWidth').and.returnValue(2);
+      component.collapseTokens();
+
+      component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 3});
+
+      component.expandTokens();
+
+      component.tokenList.forEach(token => {
+          expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
+      });
+      expect(component.hiddenCount).toBe(0);
+  });
+
+  it('should get the inner width', () => {
+    component.hiddenCount = 1;
+    component.tokenList.forEach(token => {
+      spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1})
+    });
+    spyOn(component.input.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component.moreElement.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+
+    const retVal = component.getInnerWidth();
+
+    expect(retVal).toBe(5);
+  });
+
+  it('should handle ngAfterContentInit', () => {
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component, 'onResize');
+
+    component.ngAfterContentInit();
+
+    expect(component.previousElementWidth).toBe(1);
+    expect(component.onResize).toHaveBeenCalled();
+  });
 });

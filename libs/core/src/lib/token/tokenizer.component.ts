@@ -33,7 +33,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     @ViewChild('moreElement', {static: true})
-    moreElement: HTMLElement;
+    moreElement: ElementRef;
 
     /** Used to add focus class to the tokenizer-example */
     @Input()
@@ -60,8 +60,6 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 this.handleKeyDown(event, this.tokenList.length);
             });
         }
-        console.log('sdfjsdlkfjlksdjfljsdf');
-        console.log(this.moreElement);
     }
 
     /** @hidden */
@@ -112,13 +110,15 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
-        const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-        if (elementWidth <= this.previousElementWidth) {
-            this.collapseTokens();
-        } else {
-            this.expandTokens();
+        if (this.elementRef) {
+            const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            if (elementWidth <= this.previousElementWidth) {
+                this.collapseTokens();
+            } else {
+                this.expandTokens();
+            }
+            this.previousElementWidth = elementWidth;
         }
-        this.previousElementWidth = elementWidth;
     }
 
     /** @hidden */
@@ -190,6 +190,6 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         this.onResize();
     }
 
-    constructor(private elementRef: ElementRef) {}
+    constructor(public elementRef: ElementRef) {}
 
 }
