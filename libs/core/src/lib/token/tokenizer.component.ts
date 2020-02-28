@@ -112,10 +112,11 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     onResize(): void {
         if (this.elementRef) {
             const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            // if the element is geting smaller, try collapsing tokens
             if (elementWidth <= this.previousElementWidth) {
                 this.collapseTokens();
             } else {
-                this.expandTokens();
+                this.expandTokens(); // if it's getting bigger, try expanding
             }
             this.previousElementWidth = elementWidth;
         }
@@ -127,8 +128,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
         let i = 0;
         while (innerWidth >= elementWidth && i < this.tokenList.length) {
+            // loop through the tokens and hide them until the innerWidth fits in the elementWidth
             const token = this.tokenList.filter((item, index) => index === i)[0];
             token.elementRef.nativeElement.style.display = 'none';
+            // get the new elementWidth and innerWidth as these will have changed after setting a token display to 'none'
             elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             innerWidth = this.getInnerWidth();
             i++;
@@ -173,12 +176,15 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     getInnerWidth(): number {
         let totalTokenWidth = 0;
+        // get the width of each token
         this.tokenList.forEach(token => {
             totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
         });
+        // add input width
         if (this.input && this.input.elementRef) {
-            totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width; // add input width
+            totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width;
         }
+        // add the width of the "____ more" element
         if (this.hiddenCount > 0 && this.moreElement && this.moreElement.nativeElement) {
             totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
         }
