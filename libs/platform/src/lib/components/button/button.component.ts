@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ViewChild,
+    ElementRef,
+    AfterViewInit
+} from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
 export type ButtonOptions = 'light' | 'emphasized' | '';
@@ -8,7 +16,7 @@ export type ButtonOptions = 'light' | 'emphasized' | '';
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent {
+export class ButtonComponent implements AfterViewInit {
     /** Option to make to button compact. */
     @Input()
     compact: boolean;
@@ -37,6 +45,20 @@ export class ButtonComponent {
     /** Event sent when button is clicked */
     @Output()
     buttonClicked = new EventEmitter();
+
+    @ViewChild('fdButton', { read: ElementRef, static: false })
+    button: ElementRef<HTMLElement>;
+
+    constructor(
+        private _element: ElementRef<HTMLElement>
+    ) { }
+
+    ngAfterViewInit() {
+        // need to transfer focus to child button
+        this._element.nativeElement.focus = () => {
+            this.button.nativeElement.focus();
+        }
+    }
 
     /**
      *  Handles button click

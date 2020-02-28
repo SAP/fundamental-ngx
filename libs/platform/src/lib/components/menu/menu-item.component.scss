@@ -1,131 +1,31 @@
-$fd-icon-color: #0a6ed1;
-$fd-item-focus-color: #085caf;
-$fd-selected-item-bg-color: #0a6ed112;
-$fd-selected-item-bg-color-hover: #0a6ed11a;
-$fd-normal-item-color-hover: #fafafa;
-$fd-disabled-item-color: #51555999;
-$fd-item-color: var(--fd-menu-item-color); //#515559 is not available in css_variables file
-
-.fd-menu__item {
-    &:hover {
-        //don't apply hover properties on only label item, we need it over entire item
-        background-color: transparent;
-    }
-    text-overflow: ellipsis;
-    height: 40px; //line=24 px. calc is 40-8-8(padding top/bottom)=24px
-    overflow: hidden;
-    background-color: transparent;
-    // padding: 12px 40px; //for alignment with icons
-    padding: 8px 16px;
-    line-height: 24px;
-    width: inherit;
+:host.cascades-right {
+  padding-right: 2rem;
+  /* render arrow for trigger */
+  &.trigger:after {
+    position: absolute;
+    right: 0;
+    width: 2rem;
+    font-family: SAP-icons;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    text-align: center;
+    content: '\e066';
+  }
 }
 
-.fd-menu__item[aria-selected='true'] {
-    background-color: transparent;
-}
-
-/*
-my calculation is as follows:
-1. icon element height = 28px
-item height = 40px
-therefore, space between element and item = 40-28 = 12px, or 6px top and 6px bottom.
-
-2. icon padding top-bottom = 8+8=16px
-therefore, between icon and item, space should be (icon padding top-bottom + space between element and item top-bottom) or (8+6 = 14px).
-*/
-.fd-menu__addon-before {
-    //fd-menu__addon-before represents the add-on icon element at the start of the item
-    width: 28px;
-    height: 28px;
-    padding: 8px; //center-aligned icon, therefore 8px
-    align-items: center;
-    margin: 6px 4px 6px 8px;
-    color: var(--sapInformationColor, $fd-icon-color);
-    background-color: transparent; //recent styles repo changes made it white color
-}
-
-.fd-menu--addon-before > .fd-menu__item {
-    //fd-menu--addon-before represents the container of the menu item
-    padding-left: 0px;
-}
-
-.fd-menu__addon-after {
-    //fd-menu__addon-after represents the add-on icon element at the end of the item
-    width: 28px;
-    height: 28px;
-    padding: 8px; //center-aligned icon, therefore 8px
-    margin: 6px 4px 6px 8px;
-    color: var(--sapInformationColor, $fd-icon-color);
-    display: flex;
-    float: right;
-    clear: right;
-    justify-content: center;
-    align-items: center;
-}
-
-[dir='rtl'] .fd-menu__addon-after {
-    float: left;
-    clear: left;
-}
-.is-disabled,
-.is-disabled:hover,
-.is-disabled:focus,
-.is-disabled:active {
-    cursor: not-allowed;
-    text-decoration: none;
-    pointer-events: none;
-    .fd-menu__item,
-    .fd-menu__addon-before,
-    .fd-menu__addon-after {
-        color: var(--sapContent_DisabledTextColor, $fd-disabled-item-color);
-    }
-}
-
-//inline-flex cannot be used in conjunction with overflow:hidden. This is a workaround to have both.
-.fd-menu__label-truncation {
-    display: inline-flex;
-}
-
-//have the right state for selected item
-.selected-item-state {
-    background-color: var(--sapInformationColor, $fd-selected-item-bg-color);
-    &:hover {
-        .fd-menu__item {
-            font-weight: bold;
-            color: $fd-item-color;
-        }
-        background-color: var(--sapInformationColor, $fd-selected-item-bg-color-hover);
-    }
-    &:focus {
-        outline: var(--sapButton_Emphasized_Hover_BorderColor, $fd-item-focus-color) dotted 1px;
-        .fd-menu__item {
-            color: $fd-item-color; //to override the blue color to selected item
-        }
-    }
-}
-
-//have the right state for normal/unselected items
-.normal-item-state {
-    &:hover {
-        background-color: var(--sapList_FooterBackground, $fd-normal-item-color-hover);
-        .fd-menu__item {
-            font-weight: bold;
-            color: $fd-item-color;
-        }
-    }
-    &:focus {
-        outline: var(--sapButton_Emphasized_Hover_BorderColor, $fd-item-focus-color) dotted 1px;
-        .fd-menu__item {
-            color: $fd-item-color; //to override the blue color to selected item
-        }
-    }
-}
-
-//removes extra padding when icons are present
-.menu-icon-before + .fd-menu__label-truncation {
-    .fd-menu__item {
-        // padding: 12px 0px;   //for alignment with icons
-        padding: 8px 0px;
-    }
+:host.cascades-left {
+  padding-left: 2rem;
+  /* render arrow for trigger */
+  &.trigger:before {
+    position: absolute;
+    left: 0;
+    width: 2rem;
+    font-family: SAP-icons;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    text-align: center;
+    content: '\e067';
+  }
 }

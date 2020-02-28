@@ -1,76 +1,9 @@
-<div
-    class="fd-menu"
-    data-tag="menu"
-    [ngClass]="{
-        'fd-menu__list--separated': showSeparator,
-        'scrolling-menu': isScrolling
-    }"
-    [ngStyle]="{ height: scrollLimit * 40 + 8 + 'px', width: width }"
->
-    <ng-container *ngFor="let group of groups; let i = index">
-        <ng-container
-            *ngTemplateOutlet="
-                group.label ? listWithGroupTitleTemplate : listWithoutGroupTitleTemplate;
-                context: { group: group, i: i }
-            "
-        >
-        </ng-container>
-    </ng-container>
-</div>
-
-<ng-template #listWithoutGroupTitleTemplate let-group="group" let-i="i">
-    <ul fd-menu-list data-tag="menu__list" [attr.data-index]="i">
-        <ng-container *ngFor="let item of group.groupItems; let j = index">
-            <fdp-menu-item
-                [label]="item.label"
-                [selectable]="item.selectable"
-                [selected]="item.selected"
-                [icon]="item.icon || group.icon"
-                [secondaryIcon]="item.secondaryIcon"
-                [item]="item"
-                [group]="group"
-                [index]="item.id"
-                [separated]="showSeparator"
-                [disabled]="item.disabled"
-                [tooltipLabel]="item.tooltipLabel || group.tooltipLabel"
-                [itemWidth]="width"
-                [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
-                (itemClick)="onItemClick(item, group)"
-            >
-            </fdp-menu-item>
-        </ng-container>
-    </ul>
-</ng-template>
-
-<ng-template #listWithGroupTitleTemplate let-group=" group" let-i="i">
-    <div class="fd-menu__group" data-tag="menu__group" [attr.data-index]="i">
-        <h3
-            fd-menu-title
-            data-tag="menu__group--title"
-            [attr.title]="group.tooltipLabel ? group.tooltipLabel : group.label"
-            tabindex="0"
-        >
-            {{ group.label }}
-        </h3>
-        <ul fd-menu-list data-tag="menu__list">
-            <ng-container *ngFor="let item of group.groupItems; let j = index">
-                <fdp-menu-item
-                    [label]="item.label"
-                    [selectable]="item.selectable"
-                    [selected]="item.selected"
-                    [icon]="item.icon || group.icon"
-                    [secondaryIcon]="item.secondaryIcon"
-                    [item]="item"
-                    [group]="group"
-                    [index]="item.id"
-                    [separated]="showSeparator"
-                    [disabled]="item.disabled"
-                    [itemWidth]="width"
-                    [childItems]="item.childItems !== undefined ? item.childItems : '[]'"
-                    [tooltipLabel]="item.tooltipLabel || group.tooltipLabel"
-                    (itemClick)="onItemClick(item, group)"
-                ></fdp-menu-item>
-            </ng-container>
-        </ul>
+<ng-template #menuTemplate>
+    <div class="fd-popover__body fd-popover__body--no-arrow" [attr.id]="menuId">
+        <nav class="fd-menu" tabindex="0" role="menu" (click)="onClick($event)" (keydown)="onKeydown($event)">
+            <div class="fd-menu__list">
+                <ng-content></ng-content>
+            </div>
+        </nav>
     </div>
 </ng-template>
