@@ -33,9 +33,17 @@
         <fd-popover-control>
             <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]='3'></span>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length">
-            <div fd-popover-body-header [hasSubheader]="true">Header</div>
-            <div fd-popover-body-subheader [compact]="true">Compact Subheader</div>
+        <fd-popover-body *ngIf="menu1 && menu1.length" style="min-width: 400px">
+            <div fd-popover-body-header>
+                <div fd-bar [barDesign]="'header'">
+                    <div fd-bar-left>
+                        <fd-bar-element>
+                            <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="'navigation-left-arrow'" [compact]="true"></button>
+                        </fd-bar-element>
+                        <fd-bar-element>Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
@@ -43,7 +51,6 @@
                     </li>
                 </ul>
             </fd-menu>
-            <div fd-popover-body-footer>Footer</div>
         </fd-popover-body>
     </fd-popover>
 
@@ -52,7 +59,19 @@
             <button fd-button>Button</button>
         </fd-popover-control>
         <fd-popover-body *ngIf="menu1 && menu1.length">
-            <div fd-popover-body-header [compact]="true">Compact Header</div>
+            <div fd-popover-body-header>
+                <div fd-bar [barDesign]="'header-with-subheader'" [cosy]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cosy Header</fd-bar-element>
+                    </div>
+                </div>
+                <div fd-bar [barDesign]="'subheader'" [cosy]="true">
+                    <div fd-bar-middle>
+                        <fd-bar-element [fullWidth]="true">SubHeader Middle section with Full Width Element
+                        </fd-bar-element>
+                    </div>
+                </div>
+            </div>
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
@@ -60,7 +79,18 @@
                     </li>
                 </ul>
             </fd-menu>
-            <div fd-popover-body-footer [compact]="true">Compact Footer</div>
+            <div fd-popover-body-footer>
+                <div fd-bar [barDesign]="'footer'" [cosy]="true">
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <button fd-button [options]="'emphasized'" [compact]="true">Save</button>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <button fd-button [options]="'light'" [compact]="true">Cancel</button>
+                        </fd-bar-element>
+                    </div>
+                </div>
+            </div>
         </fd-popover-body>
     </fd-popover>
 
