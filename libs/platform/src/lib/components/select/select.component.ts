@@ -1,4 +1,4 @@
-import { 	
+import {
     Component,
     OnInit,
     Input,
@@ -7,9 +7,10 @@ import {
     ChangeDetectorRef,
     ContentChild,
     TemplateRef,
-    AfterContentInit } from '@angular/core';
+    AfterContentInit
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { OptionComponent, SelectComponent as fdSelect } from '@fundamental-ngx/core';
+import { OptionComponent, SelectComponent as fdSelect, RtlService } from '@fundamental-ngx/core';
 /**
  * Interface SelectItem is used to deal with complex object in order to be able to format custom label that is
  * shown in the options.
@@ -18,7 +19,7 @@ export interface SelectItem {
     /**
      * Item text shown in the popup
      */
-     label: string;
+    label: string;
 
     /**
      * References to the object instance
@@ -46,12 +47,12 @@ export interface SelectItem {
         }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectPlatformComponent extends fdSelect implements OnInit, AfterContentInit  {
+export class SelectPlatformComponent extends fdSelect implements OnInit, AfterContentInit {
 
- /**
-     * Form element ID.
-     * Todo: This should be moved to higher class that will be common to all input fields
-     */
+    /**
+        * Form element ID.
+        * Todo: This should be moved to higher class that will be common to all input fields
+        */
     @Input()
     id: string;
 
@@ -99,8 +100,8 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      */
     private _value: any;
 
-    constructor(private cd: ChangeDetectorRef) {
-        super(cd);
+    constructor(private cd: ChangeDetectorRef, private rtl: RtlService) {
+        super(cd, rtl);
         this.fdDropdownClass = false;
     }
 

@@ -22,7 +22,7 @@ class TestWrapperComponent {
     @ViewChild(SelectComponent, { static: true })
     selectRef: SelectComponent;
 
-    @ViewChild(SelectComponent, { read: ElementRef, static: true  })
+    @ViewChild(SelectComponent, { read: ElementRef, static: true })
     selectElement: ElementRef;
 
     wrapperValue: string;
@@ -43,7 +43,7 @@ describe('SelectComponent', () => {
             .overrideComponent(
                 SelectComponent,
                 {
-                    set: {  changeDetection: ChangeDetectionStrategy.Default  }
+                    set: { changeDetection: ChangeDetectionStrategy.Default }
                 }
             )
             .compileComponents();
@@ -137,17 +137,19 @@ describe('SelectComponent', () => {
         expect(document.body.querySelector('#fdtest1')).toBeFalsy();
     }));
 
-    it('should change value programmatically', fakeAsync(() => {
+    it('should change value programmatically', async () => {
         const testValue = 'test1';
         expect(component.value).toBeFalsy();
         fixture.componentInstance.wrapperValue = testValue;
+
         fixture.detectChanges();
-        tick();
+        await fixture.whenStable();
+
         expect(component.value).toBe(testValue);
         expect(component.options.find(option => option.value === testValue).selected).toBe(true);
-        expect((component as any).selected).toBeTruthy();
-        expect((component as any).selected.value).toBe(testValue);
-    }));
+        expect(component['_selected']).toBeTruthy();
+        expect(component['_selected'].value).toBe(testValue);
+    });
 
     it('should support custom view values', fakeAsync(() => {
         const testValue = 'viewValue1';
@@ -168,7 +170,7 @@ describe('SelectComponent', () => {
         expect(component.triggerValue).toBe('Nested');
     }));
 
-    it('Should not unselect option, when this is switched off' , (() => {
+    it('Should not unselect option, when this is switched off', (() => {
         component.unselectMissingOption = false;
         const testValue = 'fdtest3Timeout';
         expect(component.value).toBeFalsy();
