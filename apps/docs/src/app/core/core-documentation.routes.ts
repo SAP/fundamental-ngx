@@ -84,6 +84,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/image/image-docs.module').then(m => m.ImageDocsModule)
             },
             {
+                path: 'info-label',
+                loadChildren: () => import('./component-docs/info-label/info-label-docs.module').then(m => m.InfoLabelDocsModule)
+            },
+            {
                 path: 'infiniteScroll',
                 loadChildren: () => import('./component-docs/infinite-scroll/infinite-scroll-docs.module').then(m => m.InfiniteScrollDocsModule)
             },

@@ -105,6 +105,9 @@ export const API_FILES = {
     image: [
         'ImageComponent'
     ],
+    infolabel: [
+        'InfoLabelComponent'
+    ],
     infiniteScroll: [
         'InfiniteScrollDirective'
     ],
