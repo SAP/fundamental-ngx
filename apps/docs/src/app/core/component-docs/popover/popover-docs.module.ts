@@ -19,7 +19,8 @@ import {
     ModalModule,
     MultiInputModule,
     PopoverModule,
-    SideNavigationModule
+    SideNavigationModule,
+    BarModule
 } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
         SideNavigationModule,
         MultiInputModule,
         MenuModule,
-        ModalModule
+        ModalModule,
+        BarModule
     ],
     exports: [RouterModule],
     declarations: [
