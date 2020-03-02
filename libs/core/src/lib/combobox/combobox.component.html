@@ -6,38 +6,36 @@
             [closeOnOutsideClick]="closeOnOutsideClick"
             class="fd-combobox-popover-custom">
     <fd-popover-control>
-        <div class="fd-combobox-control">
-            <fd-input-group [glyph]="glyph"  [compact]="compact" [button]="true" [state]="state" [inShellbar]="inShellbar"
-                            (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable">
-                <input #searchInputElement type="text"
-                       fd-input-group-input
-                       [compact]="compact"
-                       (keydown)="onInputKeydownHandler($event)"
-                       (keyup)="onInputKeyupHandler($event)"
-                       [disabled]="disabled"
-                       [(ngModel)]="inputText"
-                       (ngModelChange)="handleSearchTermChange()"
-                       placeholder="{{placeholder}}">
-            </fd-input-group>
-        </div>
+        <fd-input-group [glyph]="glyph"  [compact]="compact" [button]="true" [state]="state" [inShellbar]="inShellbar"
+                        (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable">
+            <input #searchInputElement type="text"
+                   fd-input-group-input
+                   [compact]="compact"
+                   (keydown)="onInputKeydownHandler($event)"
+                   (keyup)="onInputKeyupHandler($event)"
+                   [disabled]="disabled"
+                   [(ngModel)]="inputText"
+                   (ngModelChange)="handleSearchTermChange()"
+                   placeholder="{{placeholder}}">
+        </fd-input-group>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
-        <fd-menu class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight">
-            <ng-content></ng-content>
-            <ul fd-menu-list>
-                <li *ngFor="let term of displayedValues; let index = index;"
-                    (click)="onMenuClickHandler(index)"
-                    (keydown)="onMenuKeydownHandler($event, index)"
-                    fd-menu-item
-                    tabindex="0">
-                    <span *ngIf="!itemTemplate"
-                          [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"
-                    ></span>
-                    <ng-container *ngIf="itemTemplate">
-                        <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
-                    </ng-container>
-                </li>
-            </ul>
-        </fd-menu>
+        <ng-content></ng-content>
+        <ul fd-list class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight">
+            <li *ngFor="let term of displayedValues; let index = index;"
+                (click)="onMenuClickHandler(index)"
+                (keydown)="onMenuKeydownHandler($event, index)"
+                fd-list-item
+                tabindex="0"
+                class="fd-combobox-list-item"
+                [selected]="displayFn(term) === inputText">
+                <span *ngIf="!itemTemplate"
+                      [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting"
+                ></span>
+                <ng-container *ngIf="itemTemplate">
+                    <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
+                </ng-container>
+            </li>
+        </ul>
     </fd-popover-body>
 </fd-popover>

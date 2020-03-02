@@ -18,7 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MenuItemDirective } from '../menu/menu-item.directive';
+import { ListItemDirective } from '../list/list-item.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
@@ -172,16 +172,12 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
 
     /** @hidden */
-    @ViewChildren(MenuItemDirective)
-    menuItems: QueryList<MenuItemDirective>;
+    @ViewChildren(ListItemDirective)
+    listItems: QueryList<ListItemDirective>;
 
     /** @hidden */
     @ViewChild('searchInputElement', { static: false })
     searchInputElement: ElementRef;
-
-    /** @hidden */
-    @ViewChild('comboboxMenuElement', { static: false })
-    comboboxMenuElement: ElementRef;
 
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
@@ -253,8 +249,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
                 this.isOpenChangeHandle(true);
             }
             event.preventDefault();
-            if (this.menuItems && this.menuItems.first) {
-                this.menuItems.first.focus();
+            if (this.listItems && this.listItems.first) {
+                this.listItems.first.focus();
             }
         }
     }
@@ -274,7 +270,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onMenuKeydownHandler(event: KeyboardEvent, index: number) {
-        this.menuKeyboardService.keyDownHandler(event, index, this.menuItems.toArray());
+        this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
     /** @hidden */
