@@ -15,6 +15,7 @@ import {ComboboxFormsExampleComponent} from './examples/combobox-forms-example.c
 import {ComboboxDisabledExampleComponent} from './examples/combobox-disabled-example.component';
 import {ComboboxHeightExampleComponent} from './examples/combobox-height-example.component';
 import {ComboboxOpenControlExampleComponent} from './examples/combobox-open-control-example.component';
+import { ComboboxColumnsExampleComponent } from './examples/combobox-columns-example.component';
 import { ComboboxModule, FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
         ComboboxDisabledExampleComponent,
         ComboboxDisplaywithExampleComponent,
         ComboboxOpenControlExampleComponent,
-        ComboboxSearchFunctionExampleComponent
+        ComboboxSearchFunctionExampleComponent,
+        ComboboxColumnsExampleComponent
     ]
 })
 export class ComboboxDocsModule {
