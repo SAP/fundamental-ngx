@@ -30,7 +30,7 @@ export class InputGroupNumberComponent implements ControlValueAccessor {
 
     /** Placeholder for the input field. */
     @Input()
-    placeholder: string;
+    placeholder: string = '';
 
     /** Aria label for the 'step up' button. */
     @Input()
