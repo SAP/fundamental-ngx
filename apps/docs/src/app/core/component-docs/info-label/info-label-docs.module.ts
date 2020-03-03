@@ -11,6 +11,7 @@ import {
     InfoLableNumericIconExampleComponent
 } from './examples/info-label-examples.component';
 import {InfoLabelHeaderComponent} from './info-label-header/info-label-header.component';
+import {InfoLabelModule} from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        InfoLabelModule
     ],
     exports: [RouterModule],
     declarations: [
