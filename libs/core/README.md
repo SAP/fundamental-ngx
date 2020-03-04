@@ -91,17 +91,17 @@ For an existing Angular CLI application,
     For example, to use Switchs, add the following import to your main application module.
 
     ```javascript
-    import { SwitchModule } from '@fundamental-ngx/core’';
+    import { CheckboxModule } from '@fundamental-ngx/core’';
     ```
 
     For models prior to 0.10 use `fundamental-ngx`
 
     ```
-    import { SwitchModule } from '@fundamental-ngx/core';
+    import { CheckboxModule } from '@fundamental-ngx/core';
 
     @NgModule({
         ...
-        imports: [SwitchModule],
+        imports: [CheckboxModule],
     })
     export class DemoModule { }
     ```
@@ -109,7 +109,7 @@ For an existing Angular CLI application,
 1. **Add the component to your HTML.**
 
     ```html
-    <fd-switch [size]="'l'" [(checked)]="myValue">Large Switch</fd-switch>
+    <fd-checkbox label="Fundamental Ngx Checkbox"></fd-checkbox>
     ```
 
 ## <a name="5"></a>5. Known Issues
