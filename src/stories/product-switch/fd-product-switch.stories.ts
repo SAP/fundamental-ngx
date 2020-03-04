@@ -22,7 +22,9 @@ export default {
 export const ProductSwitch = () => ({
     template:
         `    
-    <fd-product-switch>
+    <fd-product-switch
+    [ariaLabel]="product switch button"
+    >
         <fd-product-switch-body
             [forceListMode]="forceListModeVar"
             [products]="objectVar"

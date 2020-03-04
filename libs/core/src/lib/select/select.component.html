@@ -16,6 +16,7 @@
                 class="fd-select-button-custom fd-button"
                 aria-haspopup="true"
                 [attr.aria-expanded]="isOpen"
+                aria-owns="ulListName"
                 [disabled]="disabled"
                 [ngClass]="{
                     'fd-button--compact': compact,
@@ -31,7 +32,7 @@
     </fd-popover-control>
     <fd-popover-body class="fd-select-popover-body-custom" [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
         <fd-menu>
-            <ul fd-menu-list>
+            <ul id="ulListName" fd-menu-list>
                 <ng-content></ng-content>
             </ul>
         </fd-menu>
