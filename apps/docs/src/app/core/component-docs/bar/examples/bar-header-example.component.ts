@@ -13,11 +13,9 @@ export class BarHeaderExampleComponent implements OnInit {
     constructor(private rtlService: RtlService) { }
 
     ngOnInit(): void {
-        if (this.rtlService) {
-            this.rtlService.rtl.subscribe(value => {
-                this.navigationArrow$.next(value ? 'navigation-right-arrow' : 'navigation-left-arrow');
-            });
-        }
+        this.rtlService.rtl.subscribe(value => {
+            this.navigationArrow$.next(value ? 'navigation-right-arrow' : 'navigation-left-arrow');
+        });
     }
 
 }
