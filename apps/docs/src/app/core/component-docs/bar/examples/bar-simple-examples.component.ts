@@ -1,16 +1,6 @@
-import { Component } from '@angular/core';
-
-@Component({
-    selector: 'fd-bar-default-example',
-    templateUrl: './bar-default-example.component.html'
-})
-export class BarDefaultExampleComponent { }
-
-@Component({
-    selector: 'fd-bar-header-example',
-    templateUrl: './bar-header-example.component.html'
-})
-export class BarHeaderExampleComponent { }
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-bar-subheader-example',
@@ -36,14 +26,3 @@ export class BarFooterExampleComponent { }
 })
 export class BarFloatingFooterExampleComponent { }
 
-@Component({
-    selector: 'fd-bar-page-example',
-    templateUrl: './bar-page-example.component.html'
-})
-export class BarPageExampleComponent { }
-
-@Component({
-    selector: 'fd-bar-page-responsive-example',
-    templateUrl: './bar-page-responsive-example.component.html'
-})
-export class BarPageResponsiveExampleComponent { }
