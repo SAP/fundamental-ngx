@@ -1,25 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-bar-header-example',
     templateUrl: './bar-header-example.component.html'
 })
-export class BarHeaderExampleComponent implements OnInit, OnDestroy {
+export class BarHeaderExampleComponent implements OnInit {
 
-    navigationArrow$: BehaviorSubject<string> = new BehaviorSubject<string>('navigation-left-arrow');
+    navigationArrow$: Observable<string>;
 
-    constructor(private rtlService: RtlService) { }
+    constructor(private _rtlService: RtlService) { }
 
     ngOnInit(): void {
-        this.rtlService.rtl.subscribe(value => {
-            this.navigationArrow$.next(value ? 'navigation-right-arrow' : 'navigation-left-arrow');
-        });
-    }
-
-    ngOnDestroy(): void {
-        this.rtlService.rtl.unsubscribe();
+        this.navigationArrow$ = this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'));
     }
 
 }
