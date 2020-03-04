@@ -21,11 +21,10 @@ export default {
 
 export const InlineHelp = () => ({
     template:
-        `
+        `<div style="display:flex;align-items:center;justify-content:center;margin-top:10%;">
         Inline Help
-        <fd-inline-help [placement]="placementVar">
-            {{textValue}}
-        </fd-inline-help>
+            <fd-inline-help style="margin-left:2px;" [placement]="placementVar">{{textValue}}</fd-inline-help>
+        </div>
   `,
     props: {
         placementVar: select('Placement', {

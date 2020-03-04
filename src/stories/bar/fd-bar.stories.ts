@@ -28,28 +28,55 @@ const barDesign = {
 
 export const Bar = () => ({
     template: `
-    <div style="padding: 30px">
-        <fd-bar [barDesign]="barDesign" [cosy]="cosy">
-            <div fd-bar-left>
-                <fd-bar-element>
-                Left Section
-                </fd-bar-element>
-            </div>
-            <div fd-bar-middle>
-                <fd-bar-element>
-                Middle Section
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                Right Section
-                </fd-bar-element>
-            </div>
-        </fd-bar>
+    <div fd-bar [barDesign]="barDesignVar">
+    <div fd-bar-left>
+        <fd-bar-element>
+            <button fd-button [fdType]="buttonTypeVar" [options]="buttonOptionsVar" [glyph]="buttonGlyphVar" [compact]="buttonCompactVar"></button>
+        </fd-bar-element>
+        <fd-bar-element>
+           Left Section
+        </fd-bar-element>
     </div>
+    <div fd-bar-middle>
+        <fd-bar-element>
+           Middle Section
+        </fd-bar-element>
+    </div>
+    <div fd-bar-right>
+        <fd-bar-element>
+           Right Section
+        </fd-bar-element>
+        <fd-bar-element>
+           <fd-image [size]="imageSizeVar" [photo]="photoVar">
+           </fd-image>
+        </fd-bar-element>
+    </div>
+</div>
   `,
     props: {
-        barDesign: select('barDesign', barDesign, 'header'),
-        cosy: boolean('cosy', false)
+        cosy: boolean('cosy', false),
+        barDesignVar: text('Bar Design', 'header'),
+        buttonTypeVar: select('Button Type', {
+            standard: 'standard',
+            positive: 'positive',
+            medium: 'medium',
+            negative: 'negative',
+        }, 'standard'),
+        buttonOptionsVar: select('Button Options', {
+            emphasized: 'emphasized',
+            light: 'light',
+            empty: '',
+        }, ''),
+        buttonCompactVar: boolean('loading', true),
+
+        buttonGlyphVar: text('Glyph', 'Home'),
+        imageSizeVar: select('Image Size', {
+            small: 's',
+            medium: 'm',
+            large: 'l',
+        }, 's'),
+        photoVar: text('Image link', 'https://placeimg.com/400/400/nature'),
+
+
     }
 });

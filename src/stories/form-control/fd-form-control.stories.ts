@@ -24,10 +24,12 @@ export const FormControl = () => ({
         `
         <div fd-form-item>
         <label fd-form-label for="input-1" [required]="requiredVar">Default Input</label>
-        <input fd-form-control type="text" id="input-1" placeholder="Field placeholder text"
-        [compact]="compactVar"
-        [state]="stateVar"
-        >
+        <fd-form-input-message-group>
+        <input fd-form-control type="text" id="input-52" placeholder="Field placeholder text" [compact]="compactVar" [state]="stateVar"/>
+        <fd-form-message [type]="messageStateVar">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+        </fd-form-message>
+    </fd-form-input-message-group>
         
     </div>
   `,
@@ -36,6 +38,13 @@ export const FormControl = () => ({
             information: 'information',
             valid: 'valid',
             invalid: 'invalid',
+            warning: 'warning',
+            none: '',
+        }, ''),
+        messageStateVar: select('Message state', {
+            information: 'information',
+            success: 'success',
+            error: 'error',
             warning: 'warning',
             none: '',
         }, ''),
