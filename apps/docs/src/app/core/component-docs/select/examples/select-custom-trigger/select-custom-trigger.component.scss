@@ -1,13 +1,23 @@
-.example-trigger {
-    padding: 8px 12px;
-    display: block;
-    border-radius: 6px;
-    border: 1px dashed grey;
-    background-color: transparent;
-    transition: all 0.2s ease-in-out;
+.custom-icon-styling {
+    padding-right: .5rem;
+    position: relative;
+    animation: animateIcon 1.5s infinite ease-in-out;
 }
 
-.example-trigger:focus {
-    outline: none;
-    border: 1px solid var(--fd-color-action-hover);
+@keyframes animateIcon {
+    0% {
+        bottom: 0;
+    }
+    25% {
+        bottom: -2px;
+    }
+    50% {
+        bottom: 4px;
+    }
+    75% {
+        bottom: -2px;
+    }
+    100% {
+        bottom: 0;
+    }
 }

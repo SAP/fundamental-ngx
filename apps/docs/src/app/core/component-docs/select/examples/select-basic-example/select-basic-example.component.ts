@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ControlState } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-select-basic-example',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
     styleUrls: ['select-basic-example.component.scss']
 })
 export class SelectBasicExampleComponent {
+    controlState = ControlState;
     selectOneValue: string;
     selectTwoValue: string;
     selectThreeValue: string;

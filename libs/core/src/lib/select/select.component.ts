@@ -10,24 +10,26 @@ import {
     HostListener,
     Input,
     OnChanges,
-    OnInit,
     OnDestroy,
+    OnInit,
+    Optional,
     Output,
     QueryList,
     SimpleChanges,
     TemplateRef,
-    ViewEncapsulation,
-    Optional
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { defer, merge, Observable, Subject, BehaviorSubject, of } from 'rxjs';
-import { startWith, switchMap, takeUntil, map, tap } from 'rxjs/operators';
-import { PopperOptions, Behavior } from 'popper.js';
+import { defer, merge, Observable, of, Subject } from 'rxjs';
+import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
+import { ControlState } from '../utils/datatypes';
 
 type SelectType = 'noborder' | 'splitborder';
+let selectUniqueId: number = 0;
 
 /**
  * Select component intended to mimic the behaviour of the native select element.
@@ -56,15 +58,28 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     fdDropdownClass: boolean = true;
 
     /** @hidden */
-    dir$: Observable<'ltr' | 'rtl'>;
-
-    /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
     options: QueryList<OptionComponent>;
 
     /** Whether the select component is disabled. */
     @Input()
+    state: ControlState = ControlState.NONE;
+
+    /** Whether the select component should be displayed in mobile mode. */
+    @Input()
+    mobile: boolean = false;
+
+    /** Whether the select component is disabled. */
+    @Input()
+    stateMessage: string;
+
+    /** Whether the select component is disabled. */
+    @Input()
     disabled: boolean = false;
+
+    /** Whether the select component is readonly. */
+    @Input()
+    readonly: boolean = false;
 
     /** Placeholder for the select. Appears in the triggerbox if no option is selected. */
     @Input()
@@ -92,7 +107,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
 
     /** Glyph to add icon in the select component. */
     @Input()
-    glyph: string;
+    glyph: string = 'slim-arrow-down';
 
     /** Popper.js options of the popover. */
     @Input()
@@ -145,6 +160,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     calculatedMaxHeight: number;
 
+    /** @hidden */
+    dir$: Observable<'ltr' | 'rtl'>;
+
+    controlState = ControlState;
+
     /** Current selected option component reference. */
     private _selected: OptionComponent;
 
@@ -168,7 +188,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     onTouched: Function = () => {};
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
+    get controlId(): string {
+        return `select-list-${selectUniqueId++}`
+    }
+
+    constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) { }
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {

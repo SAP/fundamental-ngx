@@ -21,7 +21,7 @@ import {
     styleUrls: ['./option.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[class.fd-option-default-custom]': 'true',
+        'class': 'fd-list__item',
         '[attr.aria-disabled]': 'disabled',
         '[tabindex]': 'disabled ? -1 : 0',
         role: 'option'
@@ -29,9 +29,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptionComponent implements OnInit {
-    /** @hidden */
-    @HostBinding('class.fd-menu__item')
-    fdMenuItemClass: boolean = true;
 
     /** @hidden */
     @HostBinding('class.is-selected')
@@ -54,7 +51,21 @@ export class OptionComponent implements OnInit {
     readonly selectedChange: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
     /** @hidden */
-    constructor(private _elRef: ElementRef, private _changeDetRef: ChangeDetectorRef) {}
+    @HostListener('keydown.enter')
+    @HostListener('click')
+    selectionHandler(): void {
+        if (!this.selected && !this.disabled) {
+            this.selected = true;
+            this._changeDetRef.markForCheck();
+            this.selectedChange.emit(this);
+        }
+    }
+
+    /** @hidden */
+    constructor(
+        private _elRef: ElementRef,
+        private _changeDetRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -65,7 +76,7 @@ export class OptionComponent implements OnInit {
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
     get viewValueText(): string {
-        return this.viewValue ? this.viewValue : ((this._elRef.nativeElement as HTMLElement).textContent || '').trim();
+        return this.viewValue || ((this._elRef.nativeElement as HTMLElement).textContent || '').trim();
     }
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
@@ -85,16 +96,5 @@ export class OptionComponent implements OnInit {
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
         return this._elRef.nativeElement as HTMLElement;
-    }
-
-    /** @hidden */
-    @HostListener('keydown.enter')
-    @HostListener('click')
-    selectionHandler(): void {
-        if (!this.selected && !this.disabled) {
-            this.selected = true;
-            this._changeDetRef.markForCheck();
-            this.selectedChange.emit(this);
-        }
     }
 }
