@@ -2,6 +2,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { LinkComponent, LinkModule } from 'libs/core/src/lib/link/public_api';
+import { RouterModule } from '@angular/router';
 
 export default {
     title: 'Fd link',
@@ -11,7 +12,7 @@ export default {
         withKnobs,
         withA11y,
         moduleMetadata({
-            imports: [LinkModule],
+            imports: [LinkModule, RouterModule],
             declarations: []
         })
     ]
@@ -19,9 +20,10 @@ export default {
 
 export const Link = () => ({
     template:
-        `<a [routerLink]="['./']"
+        `<a [href]="hrefVar"
         [emphasized]="emphasizedVar"
         [disabled]="disabled"
+        aria-disabled="disabled"
         [inverted]="invertedVar"
         fd-link>{{textValue}}</a>`,
     props: {
@@ -29,6 +31,9 @@ export const Link = () => ({
         disabledVar: boolean('Disabled', false),
         invertedVar: boolean('Inverted', false),
         textValue: text('Text Value 6', 'Standard Link'),
+        hrefVar: text('Link', './'),
+        glyphVar: text('Glyph', 'Home'),
 
     }
 });
+
