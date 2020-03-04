@@ -33,9 +33,13 @@ export const Select = () => ({
         [placeholder]="placeholderVar"
         [fillControlMode]="fillControlModeVar"
         [selectType]="selectTypeVar"
+        [attr.aria-labelledby]="'ariaLabelledby'"
+        [attr.aria-label]="'dismissLabel'"
+        title="Search in"
+        [ulListName]="'list'"
         >
         <div *ngFor="let value of values">
-            <fd-option value="value">{{ value }}</fd-option>
+            <fd-option id="value"  role="button" value="value">{{ value }}</fd-option>
         </div>
         </fd-select>
   `,
@@ -56,6 +60,7 @@ export const Select = () => ({
         loadingVar: boolean('Is Loading', false),
         placeholderVar: text('Placeholder', 'Default placeholder'),
         glyphVar: text('Glyph', ''),
+        selectVar: text('ARIA title', 'Select'),
         buttonFocusableVar: boolean('Button Focusable', true),
         isDisabledVar: boolean('Disabled', false),
         values: object('Objects',
