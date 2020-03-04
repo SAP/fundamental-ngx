@@ -1,7 +1,7 @@
 <div fd-bar [inPage]="true" [size]="'m_l'">
     <div fd-bar-left>
         <fd-bar-element>
-            <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="'navigation-left-arrow'" [compact]="true"></button>
+            <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="navigationArrow$ | async" [compact]="true"></button>
         </fd-bar-element>
         <fd-bar-element>
            Left Section

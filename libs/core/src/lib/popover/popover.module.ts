@@ -8,7 +8,6 @@ import { PopoverDirective } from './popover-directive/popover.directive';
 import { PopoverContainer } from './popover-directive/popover-container';
 import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 import { PopoverBodyHeaderDirective } from './popover-body/popover-body-directives/popover-body-header.directive';
-import { PopoverBodySubheaderDirective } from './popover-body/popover-body-directives/popover-body-subheader.directive';
 import { PopoverBodyFooterDirective } from './popover-body/popover-body-directives/popover-body-footer.directive';
 
 import { ButtonModule } from '../button/button.module';
@@ -22,7 +21,6 @@ import { ButtonModule } from '../button/button.module';
         PopoverContainer,
         PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
-        PopoverBodySubheaderDirective,
         PopoverBodyFooterDirective
     ],
     imports: [CommonModule, ButtonModule],
@@ -33,7 +31,6 @@ import { ButtonModule } from '../button/button.module';
         PopoverDirective,
         PopoverDropdownComponent,
         PopoverBodyHeaderDirective,
-        PopoverBodySubheaderDirective,
         PopoverBodyFooterDirective
     ],
     entryComponents: [PopoverContainer]

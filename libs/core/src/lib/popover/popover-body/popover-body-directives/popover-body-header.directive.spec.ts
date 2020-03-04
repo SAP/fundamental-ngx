@@ -4,7 +4,7 @@ import { PopoverModule } from '../../popover.module';
 
 @Component({
     template: `
-        <div #directiveElement fd-popover-body-header [compact]="true" [hasSubheader]="true">Popover Header Test</div>
+        <div #directiveElement fd-popover-body-header>Popover Header Test</div>
     `
 })
 class TestComponent {
@@ -34,14 +34,6 @@ describe('PopoverBodyHeaderDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-popover__body-header');
-    });
-
-    it('should take into account the compact input property', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-popover__body-header--compact');
-    });
-
-    it('should take into account the with-subheader input property', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-popover__body-header--with-subheader');
+        expect(component.ref.nativeElement.className).toBe('fd-popover__body-header');
     });
 });
