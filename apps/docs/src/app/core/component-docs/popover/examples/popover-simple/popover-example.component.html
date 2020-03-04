@@ -1,5 +1,5 @@
 <div class="fd-docs-flex-display-helper">
-    <fd-popover placement="left">
+    <fd-popover [placement]="leftPlacement$ | async">
         <fd-popover-control>
             <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
         </fd-popover-control>
@@ -54,7 +54,7 @@
         </fd-popover-body>
     </fd-popover>
 
-    <fd-popover placement="right">
+    <fd-popover [placement]="rightPlacement$ | async">
         <fd-popover-control>
             <button fd-button>Button</button>
         </fd-popover-control>
