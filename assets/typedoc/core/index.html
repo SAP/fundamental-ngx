@@ -60,6 +60,11 @@
 			For models prior to 0.10 use <code>fundamental-ngx</code></p>
 			<p> <em>If you do not use the Angular CLI or if this command does not work for you, please see the <a href="https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide">full installation guide</a>.</em></p>
 		</li>
+		<li><p><strong>Import fonts.css and icon.css</strong>
+			Open your application&#39;s <code>angular.json</code> and add the following to the <code>styles</code> array(s)</p>
+			<pre><code class="language-$json"> &quot;node_modules/fundamental-styles/dist/fonts.css&quot;,
+ &quot;node_modules/fundamental-styles/dist/icon.css&quot;,</code></pre>
+		</li>
 		<li><p><strong>Import the modules you want to use.</strong></p>
 			<p> To add the entire library, add the following import to your main application module.</p>
 			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { FundamentalNgxCoreModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;
@@ -71,17 +76,17 @@
  <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
 			<p> For example, to use Switchs, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { SwitchModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core’'</span>;</code></pre>
+			<pre><code class="language-javascript"> <span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core’'</span>;</code></pre>
 			<p> For models prior to 0.10 use <code>fundamental-ngx</code></p>
-			<pre><code> <span class="hljs-keyword">import</span> { SwitchModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;
+			<pre><code> <span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@fundamental-ngx/core'</span>;
 
  @NgModule({
      ...
-     imports: [SwitchModule],
+     imports: [CheckboxModule],
  })
  <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> { }</span></code></pre></li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
-			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-switch</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"'l'"</span> [(<span class="hljs-attr">checked</span>)]=<span class="hljs-string">"myValue"</span>&gt;</span>Large Switch<span class="hljs-tag">&lt;/<span class="hljs-name">fd-switch</span>&gt;</span></code></pre>
+			<pre><code class="language-html"> <span class="hljs-tag">&lt;<span class="hljs-name">fd-checkbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Fundamental Ngx Checkbox"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-checkbox</span>&gt;</span></code></pre>
 		</li>
 	</ol>
 	<a href="#a-name5a5-known-issues" id="a-name5a5-known-issues" style="color: inherit; text-decoration: none;">
