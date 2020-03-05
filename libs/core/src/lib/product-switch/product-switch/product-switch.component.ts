@@ -8,7 +8,4 @@ import { PopoverComponent } from '../../popover/popover.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductSwitchComponent extends PopoverComponent {
-    //aria-label for screen readers
-    @Input() ariaLabel = "";
-}
+export class ProductSwitchComponent extends PopoverComponent { }
