@@ -51,3 +51,4 @@ export * from './lib/switch/public_api';
 export * from './lib/token/public_api';
 export * from './lib/tree/public_api';
 export * from './lib/info-label/public_api';
+export * from './lib/object-status/public_api';

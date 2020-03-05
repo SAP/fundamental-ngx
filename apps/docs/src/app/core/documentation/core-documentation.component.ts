@@ -52,6 +52,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/menu', name: 'Menu' },
         { url: 'core/multi-input', name: 'Multi Input' },
         { url: 'core/notification', name: 'Notification' },
+        { url: 'core/object-status', name: 'Object Status' },
         { url: 'core/pagination', name: 'Pagination' },
         { url: 'core/popover', name: 'Popover' },
         { url: 'core/product-switch', name: 'Product Switch' },
