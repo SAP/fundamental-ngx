@@ -46,8 +46,6 @@ type SelectType = 'noborder' | 'splitborder';
     ],
     host: {
         '[class.fd-select-custom]': 'true',
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
-        '[attr.aria-label]': 'ariaLabel',
         role: 'listbox'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -63,17 +61,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
     options: QueryList<OptionComponent>;
-
-    /** aria-labelledby attribute of the select option. */
-    @Input()
-    ariaLabelledby: string = null;
-
-    /** id for ul to add with aria-owns */
-    @Input() ulListName: string = null;
-
-    /** Aria label for the select component element. */
-    @Input()
-    ariaLabel: string = null;
 
     /** Whether the select component is disabled. */
     @Input()
