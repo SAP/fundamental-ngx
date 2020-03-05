@@ -33,10 +33,6 @@ export const Select = () => ({
         [placeholder]="placeholderVar"
         [fillControlMode]="fillControlModeVar"
         [selectType]="selectTypeVar"
-        [attr.aria-labelledby]="'ariaLabelledby'"
-        [attr.aria-label]="'dismissLabel'"
-        title="Search in"
-        [ulListName]="'list'"
         >
         <div *ngFor="let value of values">
             <fd-option id="value"  role="button" value="value">{{ value }}</fd-option>
