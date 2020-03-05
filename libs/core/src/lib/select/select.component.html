@@ -4,6 +4,7 @@
     [options]="popperOptions"
     [disabled]="disabled || loading || readonly"
     [fillControlMode]="fillControlMode"
+    [triggers]="['click', { keyEvent: 'keydown', key: 32 }]"
     (isOpenChange)="isOpenChangeHandle($event)">
 
     <fd-popover-control>
@@ -27,6 +28,7 @@
                 </ng-template>
 
                 <button fd-button
+                        tabindex="-1"
                         class="fd-button--transparent fd-select__button"
                         *ngIf="!readonly"
                         [disabled]="disabled || loading"

@@ -155,6 +155,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     calculatedMaxHeight: number;
 
+    controlId: string = `select-list-${selectUniqueId++}`;
+
     /** Current selected option component reference. */
     private _selected: OptionComponent;
 
@@ -216,10 +218,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     ngOnDestroy(): void {
         this._destroy$.next();
         this._destroy$.complete();
-    }
-
-    get controlId(): string {
-        return `select-list-${selectUniqueId++}`
     }
 
     /** @hidden */

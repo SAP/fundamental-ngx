@@ -22,6 +22,7 @@ import {
 import { PopoverContainer } from './popover-container';
 import Popper, { Placement, PopperOptions } from 'popper.js';
 
+export interface KeyTrigger { keyEvent: 'keydown' | 'keypress' | 'keyup', key: string | number };
 export type PopoverFillMode = 'at-least' | 'equal';
 
 /**
@@ -49,7 +50,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    triggers: string[] = ['click'];
+    triggers: (string | KeyTrigger)[] = ['click'];
 
     /** Whether the popover should display the default arrow. */
     @Input()
@@ -293,12 +294,19 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
 
     private addTriggerListeners(): void {
         if (this.triggers && this.triggers.length > 0) {
-            this.triggers.forEach((trigger) => {
-                this.eventRef.push(
-                    this.renderer.listen(this.elRef.nativeElement, trigger, () => {
+            this.triggers.forEach(trigger => {
+                if (typeof trigger === 'string') {
+                    this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, trigger, () => {
                         this.toggle();
-                    })
-                );
+                    }));
+                } else {
+                    const keyTrigger = trigger as KeyTrigger;
+                    this.eventRef.push(this.renderer.listen(this.elRef.nativeElement, keyTrigger.keyEvent, (event) => {
+                        if (event.code === keyTrigger || event.keyCode === keyTrigger.key) {
+                            this.toggle();
+                        }
+                    }));
+                }
             });
         }
     }
