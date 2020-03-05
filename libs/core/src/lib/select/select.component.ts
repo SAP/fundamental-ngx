@@ -11,7 +11,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
@@ -21,14 +20,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
-import { defer, merge, Observable, of, Subject } from 'rxjs';
-import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { defer, merge, Observable, Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
 import { ControlState } from '../utils/datatypes';
 
-type SelectType = 'noborder' | 'splitborder';
 let selectUniqueId: number = 0;
 
 /**
@@ -52,20 +50,20 @@ let selectUniqueId: number = 0;
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
     /** @hidden */
     @HostBinding('class.fd-dropdown')
     fdDropdownClass: boolean = true;
 
     /** @hidden */
-    @ContentChildren(OptionComponent, { descendants: true })
+    @ContentChildren(OptionComponent, {descendants: true})
     options: QueryList<OptionComponent>;
 
     /** Whether the select component is disabled. */
     @Input()
     state: ControlState = ControlState.NONE;
 
-    /** Whether the select component should be displayed in mobile mode. */
+    /** @hidden TODO Whether the select component should be displayed in mobile mode. */
     @Input()
     mobile: boolean = false;
 
@@ -101,10 +99,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     @Input()
     maxHeight: string;
 
-    /** Select type defines the border type of the select button. */
-    @Input()
-    selectType: SelectType;
-
     /** Glyph to add icon in the select component. */
     @Input()
     glyph: string = 'slim-arrow-down';
@@ -131,9 +125,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
 
-    /** Template with which to display the trigger box. */
+    /** Custom template used to build control body. */
     @Input()
-    triggerTemplate: TemplateRef<any>;
+    controlTemplate: TemplateRef<any>;
 
     /** The element to which the popover should be appended. */
     @Input()
@@ -146,6 +140,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
      */
     @Input()
     unselectMissingOption: boolean = true;
+
     /** If user wants to disable clicking when the content has not yet loaded and apply the three dots. */
     @Input() loading: boolean = false;
 
@@ -160,11 +155,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     calculatedMaxHeight: number;
 
-    /** @hidden */
-    dir$: Observable<'ltr' | 'rtl'>;
-
-    controlState = ControlState;
-
     /** Current selected option component reference. */
     private _selected: OptionComponent;
 
@@ -172,15 +162,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     private readonly _destroy$: Subject<void> = new Subject<void>();
 
     /** Observable triggered when an option has its selectedChange event fire. */
-    private readonly _optionsStatusChanges: Observable<OptionComponent> = defer(() => {
-        const options = this.options;
-        if (options) {
-            return options.changes.pipe(
-                startWith(options),
-                switchMap(() => merge(...options.map((option) => option.selectedChange)))
-            );
-        }
-    }) as Observable<OptionComponent>;
+    private readonly _optionsStatusChanges: Observable<OptionComponent> = this._createOptionStatusChangeObserver();
 
     /** @hidden */
     onChange: Function = () => {};
@@ -188,18 +170,30 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     /** @hidden */
     onTouched: Function = () => {};
 
-    get controlId(): string {
-        return `select-list-${selectUniqueId++}`
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        switch (event.code) {
+            case 'ArrowUp': {
+                event.preventDefault();
+                this._decrementFocused();
+                break;
+            }
+            case 'ArrowDown': {
+                event.preventDefault();
+                this._incrementFocused();
+                break;
+            }
+        }
+    }
+
+    /** @hidden */
+    @HostListener('window:resize')
+    resizeScrollHandler(): void {
+        this.calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
     constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) { }
-
-    /** @hidden */
-    isOpenChangeHandle(isOpen: boolean): void {
-        this.isOpen = isOpen;
-        this.isOpenChange.emit(isOpen);
-        this.resizeScrollHandler();
-    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -213,27 +207,26 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
         }
     }
 
-    ngOnInit() {
-        if (this._rtlService) {
-            this.dir$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr')));
-        } else {
-            this.dir$ = of['ltr'];
-        }
-    }
-
     /** @hidden */
     ngAfterContentInit(): void {
-        // If the observable state changes, reset the options and initialize selection.
-        this.options.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
-            this._resetOptions();
-            this._initSelection();
-        });
+        this._listenOnOptionChanges();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._destroy$.next();
         this._destroy$.complete();
+    }
+
+    get controlId(): string {
+        return `select-list-${selectUniqueId++}`
+    }
+
+    /** @hidden */
+    isOpenChangeHandle(isOpen: boolean): void {
+        this.isOpen = isOpen;
+        this.isOpenChange.emit(isOpen);
+        this.resizeScrollHandler();
     }
 
     /** Toggles the open state of the select. */
@@ -294,31 +287,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
     }
 
     /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
-    get triggerValue(): string {
+    get selectValue(): string {
         return this._selected ? this._selected.viewValueText : this.placeholder;
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keydownHandler(event: KeyboardEvent): void {
-        switch (event.code) {
-            case 'ArrowUp': {
-                event.preventDefault();
-                this._decrementFocused();
-                break;
-            }
-            case 'ArrowDown': {
-                event.preventDefault();
-                this._incrementFocused();
-                break;
-            }
-        }
-    }
-
-    /** @hidden */
-    @HostListener('window:resize')
-    resizeScrollHandler() {
-        this.calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
     /**
@@ -483,5 +453,30 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnInit, OnD
             this.valueChange.emit(undefined);
             this.onChange(undefined);
         });
+    }
+
+    private _createOptionStatusChangeObserver(): Observable<OptionComponent> {
+        return defer(() => {
+            const options = this.options;
+            if (options) {
+                return options.changes.pipe(
+                    startWith(options),
+                    switchMap(() => merge(...options.map(option => option.selectedChange)))
+                );
+            }
+        }) as Observable<OptionComponent>;
+    }
+
+    private _listenOnOptionChanges(): void {
+        // If the observable state changes, reset the options and initialize selection.
+        this.options.changes
+            .pipe(
+                startWith(null),
+                takeUntil(this._destroy$)
+            )
+            .subscribe(() => {
+                this._resetOptions();
+                this._initSelection();
+            });
     }
 }

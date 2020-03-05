@@ -2,7 +2,7 @@
     [(isOpen)]="isOpen"
     [appendTo]="appendTo"
     [options]="popperOptions"
-    [disabled]="disabled || loading"
+    [disabled]="disabled || loading || readonly"
     [fillControlMode]="fillControlMode"
     (isOpenChange)="isOpenChangeHandle($event)">
 
@@ -11,54 +11,33 @@
              [class.fd-select--compact]="compact">
             <div class="fd-select__control"
                  tabindex="0"
-                 aria-haspopup="true"
                  [ngClass]="state ? 'is-' + state : ''"
                  [class.is-disabled]="disabled"
                  [class.is-readonly]="readonly"
+                 [attr.aria-expanded]="isOpen"
                  [attr.aria-disabled]="disabled"
                  [attr.aria-readonly]="readonly"
-                 [attr.aria-expanded]="isOpen"
-                 [attr.aria-controls]="controlId">
+                 [attr.aria-controls]="controlId"
+                 [attr.aria-haspopup]="!disabled && !readonly && !loading">
 
-
-                <ng-container *ngTemplateOutlet="triggerTemplate ? triggerTemplate : defaultSelectContent; context: {$implicit: triggerValue}"></ng-container>
+                <ng-container *ngTemplateOutlet="controlTemplate ? controlTemplate : defaultSelectContent; context: {$implicit: selectValue}"></ng-container>
 
                 <ng-template #defaultSelectContent>
-                    {{ triggerValue }}
+                    {{ selectValue }}
                 </ng-template>
 
                 <button fd-button
                         class="fd-button--transparent fd-select__button"
+                        *ngIf="!readonly"
                         [disabled]="disabled || loading"
                         [glyph]="glyph">
                 </button>
             </div>
         </div>
-        <!--        <ng-container *ngIf="triggerTemplate">-->
-        <!--            <ng-container *ngTemplateOutlet="triggerTemplate; context: {$implicit: this}"></ng-container>-->
-        <!--        </ng-container>-->
-        <!--        <div *ngIf="!triggerTemplate">-->
-        <!--            <button-->
-        <!--                class="fd-select-button-custom fd-button"-->
-        <!--                aria-haspopup="true"-->
-        <!--                [attr.aria-expanded]="isOpen"-->
-        <!--                [disabled]="disabled"-->
-        <!--                [ngClass]="{-->
-        <!--                    'fd-button&#45;&#45;compact': compact,-->
-        <!--                    'fd-button&#45;&#45;noborder': selectType === 'noborder',-->
-        <!--                    'fd-button&#45;&#45;splitborder': selectType === 'splitborder'-->
-        <!--                }"-->
-        <!--            >-->
-        <!--                <fd-icon *ngIf="glyph" size="m" [glyph]="glyph" class="fd-template-icon icon-position"> </fd-icon>-->
-        <!--                <span class="fd-select-text-custom" [dir]="dir$ | async">{{ triggerValue }}</span>-->
-        <!--            </button>-->
-        <!--            <fd-busy-indicator *ngIf="loading" [size]="'m'" [loading]="true"></fd-busy-indicator>-->
-        <!--        </div>-->
-
+        <fd-busy-indicator *ngIf="loading" [loading]="true" size="m" ></fd-busy-indicator>
     </fd-popover-control>
 
-    <fd-popover-body class="fd-select-popover-body-custom"
-                     [attr.aria-controls]="controlId"
+    <fd-popover-body [attr.aria-controls]="controlId"
                      [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
 
         <ul fd-list

@@ -1,7 +1,17 @@
-<fd-docs-section-title [id]="'standard'" [componentName]="'select'">
-    Standard Select
+<fd-docs-section-title [id]="'basic'" [componentName]="'select'">
+    Select composition
 </fd-docs-section-title>
-<description>A basic example of the select component with no advanced features.</description>
+<description>
+    Select is composed out of:
+    <ul>
+        <li>
+            <code>SelectComponent</code> - main component representing input control
+        </li>
+        <li>
+            <code>OptionComponent</code> - component representing select option
+        </li>
+    </ul>
+</description>
 <component-example>
     <fd-select-basic-example></fd-select-basic-example>
 </component-example>
@@ -9,31 +19,54 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'Types'" [componentName]="'select'">
-    Select Border Types
+<fd-docs-section-title [id]="'state'" [componentName]="'select'">
+    Select states
 </fd-docs-section-title>
-<description
-    >An example of the select component with diffrent types of Border type and ability to add icon.
-</description>
+<description>Examples of Select control in different states</description>
 <component-example>
-    <fd-select-types-example></fd-select-types-example>
+    <fd-select-state-example></fd-select-state-example>
 </component-example>
-<code-example [exampleFiles]="selectTypes"></code-example>
+<code-example [exampleFiles]="selectState"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'programmaticControl'" [componentName]="'select'">
-    Programmatic Control
+<fd-docs-section-title [id]="'semantic'" [componentName]="'select'">
+    Select semantic states
 </fd-docs-section-title>
+<description></description>
+<component-example>
+    <fd-select-semantic-state-example></fd-select-semantic-state-example>
+</component-example>
+<code-example [exampleFiles]="selectSemantic"></code-example>
 
+<separator></separator>
+
+<fd-docs-section-title [id]="'customSelectTemplate'" [componentName]="'select'">
+    Custom control content
+</fd-docs-section-title>
 <description>
-    Controlling the select through programmatic methods is possible by calling the select component instance directly.
-    Note that this can be done through ViewChild as well.
+    Content of Select control can be customized with custom template. Custom template reference must be provided to
+    <code>[controlTemplate]</code> input. Selects provide selected option as a context to custom template.
 </description>
 <component-example>
-    <fd-select-programmatic-example></fd-select-programmatic-example>
+    <fd-select-custom-trigger></fd-select-custom-trigger>
 </component-example>
-<code-example [exampleFiles]="selectProg"></code-example>
+<code-example [exampleFiles]="customSelectTemplate"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'nestedOptions'" [componentName]="'select'">
+    Extended Options
+</fd-docs-section-title>
+<description>
+    OptionComponent is based on ListComponent thus list element features like headers, titles and icons are supported
+    inside select option.
+    This example also shows how to handle options that are complex types like <code>Object</code>
+</description>
+<component-example>
+    <fd-select-nested-options></fd-select-nested-options>
+</component-example>
+<code-example [exampleFiles]="selectExtendedOptions"></code-example>
 
 <separator></separator>
 
@@ -41,7 +74,8 @@
     Custom View Value
 </fd-docs-section-title>
 <description>
-    The value which appears inside the trigger can be customized easily through the <code>viewValue</code> input.
+    The value which appears inside select control can be easily customized using OptionComponent <code>[viewValue]</code>
+    input.
 </description>
 <component-example>
     <fd-select-view-value-example></fd-select-view-value-example>
@@ -64,36 +98,6 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'nestedOptions'" [componentName]="'select'">
-    Nested Options
-</fd-docs-section-title>
-<description>
-    Instances of the fd-option component will be found regardless of how deep in the hierarchy they are. It also
-    includes having options inside options, for instance. This feature allows for some very flexible usage. The example
-    below showcases how to add a scrolling container around the options. Note that accessibility generally requires some
-    text-content to be present in the actual option element.
-</description>
-<component-example>
-    <fd-select-nested-options></fd-select-nested-options>
-</component-example>
-<code-example [exampleFiles]="selectNested"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'customTrigger'" [componentName]="'select'">
-    Custom Trigger
-</fd-docs-section-title>
-<description>
-    The default trigger can be replaced by providing a template reference to the appropriate input. Note that the
-    top-level element must be tab-indexed for the keyboard support to function correctly.
-</description>
-<component-example>
-    <fd-select-custom-trigger></fd-select-custom-trigger>
-</component-example>
-<code-example [exampleFiles]="customTrigger"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title [id]="'addingRemovingOptions'" [componentName]="'select'">
     Adding and Removing Options
 </fd-docs-section-title>
@@ -110,10 +114,23 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'programmaticControl'" [componentName]="'select'">
+    Programmatic Control
+</fd-docs-section-title>
+<description>
+    Controlling the select through programmatic methods is possible by calling the select component instance directly.
+    Note that this can be done through ViewChild as well.
+</description>
+<component-example>
+    <fd-select-programmatic-example></fd-select-programmatic-example>
+</component-example>
+<code-example [exampleFiles]="selectProgrammatic"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'reactiveForm'" [componentName]="'select'">
     Select In A Reactive Form
 </fd-docs-section-title>
-Select In A Reactive Form
 <description>
     The select component can be used inside Angular reactive forms.
 </description>

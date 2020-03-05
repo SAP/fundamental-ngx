@@ -6,15 +6,18 @@ import { Component } from '@angular/core';
     styleUrls: ['select-nested-options.component.scss']
 })
 export class SelectNestedOptionsComponent {
-    value: string;
 
-    options: any[] = [
-        { name: 'Tomato', value: 'tomato', viewValue: 'Tomatoes are good' },
-        { name: 'Pineapple', value: 'pineapple', viewValue: 'Pineapples are not so good' },
-        { name: 'Apple', value: 'apple', viewValue: 'Apples are good' },
-        { name: 'Strawberry', value: 'strawberry', viewValue: 'Strawberries are good' },
-        { name: 'Kiwi', value: 'kiwi', viewValue: 'Kiwi are not so good' },
-        { name: 'Watermelon', value: 'watermelon', viewValue: 'Watermelons are good' },
-        { name: 'Blackberry', value: 'blackberry', viewValue: 'Blackberries are good' }
+    selectedValue: string;
+
+    fruits: { name: string, kCal: string }[] = [
+        {name: 'Apple', kCal: '49.05'},
+        {name: 'Pineapple', kCal: '50'},
+        {name: 'Strawberry', kCal: '32'}
+    ];
+
+    vegetables: { name: string, kCal: string }[] = [
+        {name: 'Cabbage', kCal: '23'},
+        {name: 'Carrot', kCal: '35'},
+        {name: 'Leek', kCal: '31'},
     ];
 }

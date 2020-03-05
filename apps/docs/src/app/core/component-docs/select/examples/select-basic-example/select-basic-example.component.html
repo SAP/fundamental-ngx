@@ -1,54 +1,9 @@
-<fd-select [loading]="true" placeholder="Select an option...">
-    <div *ngFor="let fruit of emptyValues">
-        <fd-option [value]="fruit">{{ fruit }}</fd-option>
-    </div>
+<fd-select placeholder="Select an option" [(value)]="selectedValue">
+
+    <fd-option value="Apple">Apple</fd-option>
+    <fd-option value="Tomato">Tomato</fd-option>
+    <fd-option value="Pineapple">Pineapple</fd-option>
+    <fd-option value="Strawberry">Strawberry</fd-option>
+
 </fd-select>
-
-<br/>
-
-<fd-select
-    class="fd-select-example"
-    [(value)]="selectOneValue"
-    [loading]="values == null"
-    placeholder="Select an option..."
->
-    <div *ngFor="let fruit of values">
-        <fd-option [value]="fruit">{{ fruit }}</fd-option>
-    </div>
-</fd-select>
-<p>Selected Value: {{ selectOneValue }}</p>
-
-<fd-select
-    class="fd-select-example"
-    [(value)]="selectTwoValue"
-    [loading]="values == null"
-    [compact]="true"
-    [mobile]="true"
-    [stateMessage]="'Error message'"
-    [state]="controlState.ERROR"
-    placeholder="Compact select"
->
-    <li fd-list-group-header>Group Header 1</li>
-    <fd-option>
-        <span fd-list-title>Product 2</span>
-        <span fd-list-secondary>750 EUR</span>
-    </fd-option>
-    <div *ngFor="let fruit of values">
-        <fd-option [value]="fruit">{{ fruit }}</fd-option>
-    </div>
-
-    <li fd-list-footer>I'm Footer</li>
-</fd-select>
-<p>Selected Value: {{ selectTwoValue }}</p>
-
-<fd-select
-    class="fd-select-example"
-    [(value)]="selectThreeValue"
-    [loading]="values == null"
-    [disabled]="true"
-    placeholder="Disabled select"
->
-    <div *ngFor="let fruit of values">
-        <fd-option [value]="fruit">{{ fruit }}</fd-option>
-    </div>
-</fd-select>
+<small>Selected value: {{selectedValue}}</small>

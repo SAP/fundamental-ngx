@@ -5,5 +5,12 @@ import { Component } from '@angular/core';
     templateUrl: './select-view-value-example.component.html'
 })
 export class SelectViewValueExampleComponent {
-    selectOneValue: string;
+
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+
+    selectedValue: string;
+
+    customViewValue(value: string): string {
+        return `I love ${value}!`
+    }
 }

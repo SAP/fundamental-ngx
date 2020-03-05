@@ -18,7 +18,6 @@ import {
 @Component({
     selector: 'fd-option',
     templateUrl: './option.component.html',
-    styleUrls: ['./option.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
         'class': 'fd-list__item',
@@ -76,7 +75,7 @@ export class OptionComponent implements OnInit {
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
     get viewValueText(): string {
-        return this.viewValue || ((this._elRef.nativeElement as HTMLElement).textContent || '').trim();
+        return this.viewValue || this.value;
     }
 
     /** Returns the view value text of the option, or the viewValue input if it exists. */
