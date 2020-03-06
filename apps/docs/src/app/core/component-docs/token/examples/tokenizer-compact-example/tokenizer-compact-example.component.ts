@@ -27,11 +27,15 @@ export class TokenizerCompactExampleComponent implements OnInit {
     }
 
     onSubmit(): void {
-        this.tokens.push({
-            text: this.tokenizerExampleForm.controls.inputControl.value,
-            readOnly: false
-        });
-        this.tokenizerExampleForm.controls.inputControl.reset();
+        let newTokenText = this.tokenizerExampleForm.controls.inputControl.value;
+        newTokenText = newTokenText.trim();
+        if (newTokenText && newTokenText !== '') {
+            this.tokens.push({
+                text: newTokenText,
+                readOnly: false
+            });
+            this.tokenizerExampleForm.controls.inputControl.reset();
+        }
     }
 
     removeToken(token): void {

@@ -3,7 +3,7 @@
         <fd-tokenizer>
             <fd-token (onCloseClick)="removeToken(token)" *ngFor="let token of tokens"
                       [readOnly]="token.readOnly">{{token.text}}</fd-token>
-            <input formControlName="inputControl" fd-form-control fd-tokenizer-input
+            <input formControlName="inputControl" fd-tokenizer-input fd-form-control
                    placeholder="Field placeholder text">
         </fd-tokenizer>
     </div>

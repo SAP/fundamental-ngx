@@ -2,6 +2,7 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren, ElementRef,
@@ -51,7 +52,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     previousElementWidth: number;
 
     /** @hidden */
-    hiddenCount: number = 0;
+    moreTokens: Array<TokenComponent> = [];
+
+    /** @hidden */
+    previousTokenCount: number;
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -60,6 +64,13 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 this.handleKeyDown(event, this.tokenList.length);
             });
         }
+        if (this.tokenList) {
+            this.previousTokenCount = this.tokenList.length;
+        }
+        this.tokenList.changes.subscribe(() => {
+            this.previousTokenCount > this.tokenList.length ? this.expandTokens() : this.collapseTokens();
+            this.previousTokenCount = this.tokenList.length;
+        });
     }
 
     /** @hidden */
@@ -130,12 +141,15 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         while (innerWidth >= elementWidth && i < this.tokenList.length) {
             // loop through the tokens and hide them until the innerWidth fits in the elementWidth
             const token = this.tokenList.filter((item, index) => index === i)[0];
+            if (this.moreTokens.indexOf(token) === -1) {
+                this.moreTokens.push(token);
+            }
             token.elementRef.nativeElement.style.display = 'none';
             // get the new elementWidth and innerWidth as these will have changed after setting a token display to 'none'
             elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             innerWidth = this.getInnerWidth();
             i++;
-            this.hiddenCount = i;
+            this.cdRef.detectChanges();
         }
     }
 
@@ -143,12 +157,11 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     expandTokens(): void {
         let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
         let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
-        let i = 0;
         let breakLoop = false;
-        const originalHiddenCount = this.hiddenCount;
-        while (innerWidth < elementWidth && i < originalHiddenCount && !breakLoop) {
+        let i = this.moreTokens.length - 1;
+        while (innerWidth < elementWidth && i >= 0 && !breakLoop) {
             // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
-            const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[0];
+            const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
             /*
               set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
               contain the width of the token we might display, without actually making the token visible to the user
@@ -163,13 +176,14 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             */
             if (innerWidth < elementWidth) {
                 tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
-                this.hiddenCount--;
+                this.moreTokens.pop();
             } else {
                 // otherwise, stop looping and set the token's display back to 'none'
                 tokenToCheck.elementRef.nativeElement.style.display = 'none';
                 breakLoop = true;
             }
-            i++;
+            i--;
+            this.cdRef.detectChanges();
         }
     }
 
@@ -185,7 +199,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width;
         }
         // add the width of the "____ more" element
-        if (this.hiddenCount > 0 && this.moreElement && this.moreElement.nativeElement) {
+        if (this.moreTokens.length > 0 && this.moreElement && this.moreElement.nativeElement) {
             totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
         }
 
@@ -198,6 +212,6 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         this.onResize();
     }
 
-    constructor(public elementRef: ElementRef) {}
+    constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef) {}
 
 }
