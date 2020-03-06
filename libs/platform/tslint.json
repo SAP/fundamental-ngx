@@ -2,6 +2,7 @@
     "extends": "../../tslint.json",
     "rules": {
         "directive-selector": [true, "attribute", "fundamentalNgx", "camelCase"],
-        "component-selector": [true, "element", "fdp", "kebab-case"]
+        "component-selector": [true, "element", "fdp", "kebab-case"],
+        "use-lifecycle-interface": false
     }
 }

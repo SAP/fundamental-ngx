@@ -1,0 +1,52 @@
+<form (ngSubmit)="onSubmit.emit($event)"
+      *ngIf="useForm; else body"
+      [id]="id"
+      [name]="name">
+
+    <ng-container *ngTemplateOutlet="body"></ng-container>
+</form>
+
+
+<ng-template #body>
+    <!--  Render TOP Zone-->
+    <ng-container *ngTemplateOutlet="zone;context: {$implicit: tZone, title:topTitle}">
+    </ng-container>
+
+    <!--  Render MAIN Zone in which we usually support LEFT and RIGHT column -->
+    <ng-container
+        *ngTemplateOutlet="zone;context: {$implicit:mZone , title:mainTitle, multiColumn:true}">
+    </ng-container>
+
+    <!--  Render BOTTOM Zone-->
+    <ng-container *ngTemplateOutlet="zone;context: {$implicit:bZone , title:bottomTitle}">
+    </ng-container>
+</ng-template>
+
+<ng-template #zone let-fields let-multiColumn="multiColumn" let-title="title">
+
+    <div *ngIf="fields"
+         [formGroup]="formGroup"
+         [ngClass]="{'is-editable' : editable}"
+         class="fd-section fd-section--no-border fd-has-margin-regular"
+
+
+    >
+        <div *ngIf="title" class="fd-section__header">
+            <h3 class="fd-section__title">{{title}}</h3>
+        </div>
+
+
+        <div *ngIf="mZone" class="row start-xs">
+            <div *ngFor="let f of fields;trackBy: trackByFieldName"
+                 [ngClass]="f.styleClass"
+                 [style.order]="f.rank"
+                 class="col-xs-12"
+                 fd-form-set>
+
+
+                <ng-container *ngTemplateOutlet="f?.renderer"></ng-container>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
