@@ -10,27 +10,26 @@
 </fd-select>
 <small>Selected value: {{selectedValue2}}</small>
 
-<h4>Select in loading state</h4>
+<h4>Select in loading mode</h4>
 <fd-select placeholder="Select an option" [loading]="true" [(value)]="selectedValue3">
     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
-
 </fd-select>
 <small>Selected value: {{selectedValue3}}</small>
 
-<h4>Select in disabled state</h4>
+<h4>Select in disabled mode</h4>
 <fd-select placeholder="Select an option" [disabled]="true" [(value)]="selectedValue4">
     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
 </fd-select>
 <small>Selected value: {{selectedValue4}}</small>
 
-<h4>Select in read-only state</h4>
+<h4>Select in read-only mode</h4>
 <fd-select placeholder="Select an option" [readonly]="true" [(value)]="selectedValue5">
     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
 </fd-select>
 <small>Selected value: {{selectedValue5}}</small>
 
-<!--<h4>Select with custom icon</h4>-->
-<!--<fd-select placeholder="Select an option" [glyph]="'filter'" [(value)]="selectedValue6">-->
-<!--    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>-->
-<!--</fd-select>-->
-<!--<small>Selected value: {{selectedValue6}}</small>-->
+<h4>Select in mobile mode</h4>
+<fd-select placeholder="Select an option" [(value)]="selectedValue6" [mobile]="true">
+    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+</fd-select>
+<small>Selected value: {{selectedValue6}}</small>

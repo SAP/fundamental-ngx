@@ -4,8 +4,8 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import * as selectBasicHtml from '!raw-loader!./examples/select-basic-example/select-basic-example.component.html';
 import * as selectBasicTs from '!raw-loader!./examples/select-basic-example/select-basic-example.component.ts';
 
-import * as selectStateHtml from '!raw-loader!./examples/select-state-example/select-state-example.component.html';
-import * as selectStateTs from '!raw-loader!./examples/select-state-example/select-state-example.component.ts';
+import * as selectModeHtml from '!raw-loader!./examples/select-mode-example/select-mode-example.component.html';
+import * as selectModeTs from '!raw-loader!./examples/select-mode-example/select-mode-example.component.ts';
 
 import * as selectProgressiveHtml from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
 import * as selectProgressiveScss from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
@@ -50,13 +50,13 @@ export class SelectDocsComponent {
         }
     ];
 
-    selectState: ExampleFile[] = [
+    selectMode: ExampleFile[] = [
         {
             language: 'html',
-            code: selectStateHtml,
-            fileName: 'select-state-example',
-            typescriptFileCode: selectStateTs,
-            component: 'SelectStateExampleComponent'
+            code: selectModeHtml,
+            fileName: 'select-mode-example',
+            typescriptFileCode: selectModeTs,
+            component: 'SelectModeExampleComponent'
         }
     ];
 

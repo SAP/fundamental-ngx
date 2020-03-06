@@ -15,7 +15,7 @@ import { SelectViewValueExampleComponent } from './examples/select-view-value-ex
 import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
 import { FormModule, SelectModule } from '@fundamental-ngx/core';
 import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component.js';
-import { SelectStateExampleComponent } from './examples/select-state-example/select-state-example.component.js';
+import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
 
 const routes: Routes = [
     {
@@ -35,9 +35,9 @@ const routes: Routes = [
         SelectDocsComponent,
         SelectFormsComponent,
         SelectHeaderComponent,
-        SelectNestedOptionsComponent,
+        SelectModeExampleComponent,
         SelectBasicExampleComponent,
-        SelectStateExampleComponent,
+        SelectNestedOptionsComponent,
         SelectAddingExampleComponent,
         SelectCustomTriggerComponent,
         SelectMaxHeightExampleComponent,

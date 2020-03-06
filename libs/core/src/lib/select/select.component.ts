@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -16,6 +17,7 @@ import {
     QueryList,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -26,6 +28,8 @@ import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
 import { ControlState } from '../utils/datatypes';
+import { ModalService } from '../modal/modal-service/modal.service';
+import { ModalRef } from '../modal/modal-utils/modal-ref';
 
 let selectUniqueId: number = 0;
 
@@ -59,11 +63,19 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     @ContentChildren(OptionComponent, {descendants: true})
     options: QueryList<OptionComponent>;
 
+    /** @hidden */
+    @ViewChild('selectMobileModal', {static: true})
+    modalTemplateRef: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('selectControl', {static: true})
+    controlTemplateRef: ElementRef;
+
     /** Whether the select component is disabled. */
     @Input()
     state: ControlState = ControlState.NONE;
 
-    /** @hidden TODO Whether the select component should be displayed in mobile mode. */
+    /** Whether the select component should be displayed in mobile mode. */
     @Input()
     mobile: boolean = false;
 
@@ -155,7 +167,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     calculatedMaxHeight: number;
 
+    /** @hidden */
     controlId: string = `select-list-${selectUniqueId++}`;
+
+    /** Reference to existing modal */
+    modalRef: ModalRef;
 
     /** Current selected option component reference. */
     private _selected: OptionComponent;
@@ -175,15 +191,23 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        switch (event.code) {
-            case 'ArrowUp': {
+        switch (event.code || event.keyCode) {
+            case 'ArrowUp':
+            case 38: {
                 event.preventDefault();
-                this._decrementFocused();
+                this._focusOption('previous');
                 break;
             }
-            case 'ArrowDown': {
+            case 'ArrowDown':
+            case 40: {
                 event.preventDefault();
-                this._incrementFocused();
+                this._focusOption('next');
+                break;
+            }
+            case 'Space':
+            case 32: {
+                event.preventDefault();
+                this.toggle();
                 break;
             }
         }
@@ -195,7 +219,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         this.calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService) { }
+    constructor(
+        private _modalService: ModalService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService
+    ) { }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -220,6 +248,11 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         this._destroy$.complete();
     }
 
+    /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
+    get selectValue(): string {
+        return this._selected ? this._selected.viewValueText : this.placeholder;
+    }
+
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
@@ -229,26 +262,46 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
     /** Toggles the open state of the select. */
     toggle(): void {
-        if (this.isOpen && !this.disabled) {
-            this.close();
-        } else {
-            this.open();
+        if (!this.disabled) {
+            if (this.isOpen || this.modalRef) {
+                this.close();
+            } else {
+                this.open();
+            }
         }
     }
 
     /** Opens the select popover body. */
     open(): void {
         if (!this.isOpen && !this.disabled) {
-            this.isOpen = true;
+            if (this.mobile) {
+                this.modalRef = this._modalService.open(this.modalTemplateRef);
+            } else {
+                this.isOpen = true;
+            }
             this.isOpenChange.emit(this.isOpen);
+            this._focusOption('onOpen');
         }
     }
 
     /** Closes the select popover body. */
     close(): void {
-        if (this.isOpen && !this.disabled) {
-            this.isOpen = false;
+        if (!this.disabled) {
+            if (this.mobile && this.modalRef) {
+                this.modalRef.close();
+                this.modalRef = undefined;
+            } else if (this.isOpen) {
+                this.isOpen = false;
+            }
             this.isOpenChange.emit(this.isOpen);
+            this.focus();
+        }
+    }
+
+    /** Focuses select control. */
+    focus(): void {
+        if (this.controlTemplateRef) {
+            (this.controlTemplateRef.nativeElement as HTMLElement).focus();
         }
     }
 
@@ -282,11 +335,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
                 }
             });
         }
-    }
-
-    /** Returns the current trigger value if there is a selected option. Otherwise, returns the placeholder. */
-    get selectValue(): string {
-        return this._selected ? this._selected.viewValueText : this.placeholder;
     }
 
     /**
@@ -385,55 +433,35 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
         return option && this._selected && option === this._selected;
     }
 
-    /** Method that focuses the next option in the list, or the first one if the last one is currently focused. */
-    private _incrementFocused(): void {
-        // Get active focused element
-        const activeElement = document.activeElement;
+    /** Method used to focus options
+     * @param action
+     * 'onOpen'     - focus currently selected or first
+     * 'next'       - focus next element
+     * 'previous'   - focus previous element
+     * */
+    private _focusOption(action: 'onOpen' | 'next' | 'previous'): void {
+        let activeIndex: number;
+        const focusAsync = (option: OptionComponent) => setTimeout(() => option.focus(), 10);
+        const findActiveIndex = (options: OptionComponent[], activeOption: Element): number => options
+            .map(option => option.getHtmlElement())
+            .indexOf(activeOption as HTMLElement);
 
-        // Get corresponding option element to the above
-        const correspondingOption = this.options.find((option) => {
-            return option.getHtmlElement() === activeElement;
-        });
-
-        if (correspondingOption) {
-            const arrayOptions = this.options.toArray();
-            const index = arrayOptions.indexOf(correspondingOption);
-
-            // If active option is the last option, focus the first one
-            // Otherwise, focus the next option.
-            if (index === this.options.length - 1) {
-                arrayOptions[0].focus();
-            } else {
-                arrayOptions[index + 1].focus();
-            }
-        } else if (this.options) {
-            this.options.first.focus();
-        }
-    }
-
-    /** Method that focuses the previous option in the list, or the last one if the last one is currently focused. */
-    private _decrementFocused(): void {
-        // Get active focused element
-        const activeElement = document.activeElement;
-
-        // Get corresponding option element to the above
-        const correspondingOption = this.options.find((option) => {
-            return option.getHtmlElement() === activeElement;
-        });
-
-        // If active option is the first option, focus the last one
-        // Otherwise, focus the previous option.
-        if (correspondingOption) {
-            const arrayOptions = this.options.toArray();
-            const index = arrayOptions.indexOf(correspondingOption);
-
-            if (index === 0) {
-                arrayOptions[this.options.length - 1].focus();
-            } else {
-                arrayOptions[index - 1].focus();
-            }
-        } else if (this.options) {
-            this.options.first.focus();
+        switch (action) {
+            case 'onOpen':
+                focusAsync(this._selected || this.options.first);
+                break;
+            case 'next':
+                activeIndex = findActiveIndex(this.options.toArray(), document.activeElement);
+                if (activeIndex < this.options.length - 1) {
+                    this.options.toArray()[++activeIndex].focus();
+                }
+                break;
+            case 'previous':
+                activeIndex = findActiveIndex(this.options.toArray(), document.activeElement);
+                if (activeIndex > 0) {
+                    this.options.toArray()[--activeIndex].focus();
+                }
+                break;
         }
     }
 

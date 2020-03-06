@@ -1,10 +1,10 @@
 <fd-popover
     [(isOpen)]="isOpen"
+    [triggers]="[]"
     [appendTo]="appendTo"
     [options]="popperOptions"
     [disabled]="disabled || loading || readonly"
     [fillControlMode]="fillControlMode"
-    [triggers]="['click', { keyEvent: 'keydown', key: 32 }]"
     (isOpenChange)="isOpenChangeHandle($event)">
 
     <fd-popover-control>
@@ -12,6 +12,7 @@
              [class.fd-select--compact]="compact">
             <div class="fd-select__control"
                  tabindex="0"
+                 #selectControl
                  [ngClass]="state ? 'is-' + state : ''"
                  [class.is-disabled]="disabled"
                  [class.is-readonly]="readonly"
@@ -19,7 +20,8 @@
                  [attr.aria-disabled]="disabled"
                  [attr.aria-readonly]="readonly"
                  [attr.aria-controls]="controlId"
-                 [attr.aria-haspopup]="!disabled && !readonly && !loading">
+                 [attr.aria-haspopup]="!disabled && !readonly && !loading"
+                 (click)="toggle()">
 
                 <ng-container *ngTemplateOutlet="controlTemplate ? controlTemplate : defaultSelectContent; context: {$implicit: selectValue}"></ng-container>
 
@@ -41,21 +43,31 @@
 
     <fd-popover-body [attr.aria-controls]="controlId"
                      [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
-
-        <ul fd-list
-            [compact]="compact"
-            [dropdownMode]="true"
-            [hasMessage]="stateMessage">
-
-            <li fd-list-message
-                *ngIf="stateMessage"
-                [type]="state">
-                {{stateMessage}}
-            </li>
-
-            <ng-content></ng-content>
-
-        </ul>
-
+        <ng-container *ngTemplateOutlet="selectOptionsTemplate"></ng-container>
     </fd-popover-body>
 </fd-popover>
+
+<ng-template #selectOptionsTemplate>
+    <ul fd-list
+        [compact]="compact"
+        [dropdownMode]="true"
+        [hasMessage]="stateMessage">
+
+        <li fd-list-message *ngIf="stateMessage" [type]="state">
+            {{stateMessage}}
+        </li>
+
+        <ng-content></ng-content>
+
+    </ul>
+</ng-template>
+
+<ng-template let-modal #selectMobileModal>
+    <fd-modal-header>
+        <h1 fd-modal-title>Select option</h1>
+        <button fd-modal-close-btn (click)="modal.dismiss('x')"></button>
+    </fd-modal-header>
+    <fd-modal-body>
+        <ng-container *ngTemplateOutlet="selectOptionsTemplate"></ng-container>
+    </fd-modal-body>
+</ng-template>

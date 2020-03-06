@@ -50,9 +50,13 @@ export class OptionComponent implements OnInit {
     readonly selectedChange: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
     /** @hidden */
-    @HostListener('keydown.enter')
     @HostListener('click')
-    selectionHandler(): void {
+    @HostListener('keydown.space', ['$event'])
+    selectionHandler(event?: KeyboardEvent): void {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
         if (!this.selected && !this.disabled) {
             this.selected = true;
             this._changeDetRef.markForCheck();
