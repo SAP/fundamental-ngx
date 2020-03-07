@@ -21,18 +21,37 @@ export default {
 
 export const ProductSwitch = () => ({
     template:
-        `    
-    <fd-product-switch
-    >
-        <fd-product-switch-body
-            [forceListMode]="forceListModeVar"
-            [products]="objectVar"
-            >
-        </fd-product-switch-body>
-    </fd-product-switch>
+        `<fd-product-switch
+                [closeOnEscapeKey]="closeOnEscapeKey"
+                [closeOnOutsideClick]="closeOnOutsideClick"
+                [disabled]="disabled"
+                [fillControlMode]="fillControlMode"
+                [focusTrapped]="focusTrapped"
+                [id]="id"
+                [isDropdown]="isDropdown"
+                [isOpen]="isOpen"
+                [noArrow]="noArrow"
+                [placement]="placement">
+            <fd-product-switch-body
+                [forceListMode]="forceListModeVar"
+                [products]="objectVar"
+                [dragAndDropEnabled]="dragAndDropEnabled">
+            </fd-product-switch-body>
+        </fd-product-switch>
     `,
     props: {
-        forceListModeVar: boolean('Force list mode', false),
+        forceListModeVar: boolean('Mobile Mode', false),
+        closeOnEscapeKey: boolean('Close On Esc', false),
+        closeOnOutsideClick: boolean('Close on Outside Click', false),
+        disabled: boolean('disabled', false),
+        fillControlMode: text('Full Controll Mode', 'equal'),
+        focusTrapped: boolean('Focus Trapped', false),
+        id: text('id', 'abd123'),
+        isDropdown: boolean('Is Dropdown', true),
+        isOpen: boolean('Is Open', true),
+        noArrow: boolean('Hide Arrow', false),
+        placement: text('Placement', "right"),
+        dragAndDropEnabled: boolean('Enable Drag and Drop', false),
         objectVar: object('Objects',
             [
                 {

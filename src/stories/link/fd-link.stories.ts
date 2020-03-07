@@ -22,17 +22,16 @@ export const Link = () => ({
     template:
         `<a [href]="hrefVar"
         [emphasized]="emphasizedVar"
-        [disabled]="disabled"
-        aria-disabled="disabled"
+        [disabled]="disabledVar"
+        fragment="inverted"
         [inverted]="invertedVar"
         fd-link>{{textValue}}</a>`,
     props: {
-        emphasizedVar: boolean('Disabled', false),
+        emphasizedVar: boolean('Emphasized', false),
         disabledVar: boolean('Disabled', false),
         invertedVar: boolean('Inverted', false),
         textValue: text('Text Value 6', 'Standard Link'),
-        hrefVar: text('Link', './'),
-        glyphVar: text('Glyph', 'Home'),
+        hrefVar: text('Link', '#'),
 
     }
 });
