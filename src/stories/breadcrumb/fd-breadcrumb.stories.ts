@@ -1,6 +1,9 @@
 import { moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean, text, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import { RouterModule } from '@angular/router';
+
+import { RtlService } from 'libs/core/src/lib/utils/services/rtl.service';
 import { BreadcrumbComponent, BreadcrumbModule } from 'libs/core/src/lib/breadcrumb/public_api';
 
 export default {
@@ -11,35 +14,30 @@ export default {
         withKnobs,
         withA11y,
         moduleMetadata({
-            imports: [BreadcrumbModule],
-            declarations: []
+            imports: [BreadcrumbModule, RouterModule],
+            declarations: [],
+            providers: [RtlService]
         })
     ]
 };
 
-const breadcrumbText = 'Breadcrumb Link Level '
-
 export const Breadcrumb = () => ({
 
-
     template:
-        `<div style="width:300px; border: 1px solid red; padding: 10px;">
-            <fd-breadcrumb>
+        `<div #responsiveBreadcrumbContainer >
+            <fd-breadcrumb 
+                [containerElement]="responsiveBreadcrumbContainer">>
                 <fd-breadcrumb-item *ngFor="let row of getArray(bcLevels); let i = index;">
                     <a fd-breadcrumb-link [attr.href]="breadcrumbHref1">{{breadcrumbLabel + i}}</a>
                 </fd-breadcrumb-item>
             </fd-breadcrumb>
         </div>`,
     props: {
-        emphasizedVar: boolean('Disabled', false),
         bcLevels: number('Levels', 5),
-        disabledVar: boolean('Disabled', false),
-        invertedVar: boolean('Inverted', false),
         breadcrumbLabel: text('breadcrumbLabel', 'Breadcrumb Level'),
         breadcrumbHref1: text('breadcrumbHref1', '#'),
         getArray: (len: number) => {
             return new Array(len);
         },
-
     }
 });

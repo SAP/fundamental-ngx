@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { PopoverComponent } from '../../popover/popover.component';
 
 @Component({
@@ -8,4 +8,4 @@ import { PopoverComponent } from '../../popover/popover.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductSwitchComponent extends PopoverComponent { }
+export class ProductSwitchComponent extends PopoverComponent {}
