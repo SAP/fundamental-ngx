@@ -1,5 +1,5 @@
 import { moduleMetadata } from '@storybook/angular';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { BreadcrumbComponent, BreadcrumbModule } from 'libs/core/src/lib/breadcrumb/public_api';
 
@@ -17,28 +17,29 @@ export default {
     ]
 };
 
+const breadcrumbText = 'Breadcrumb Link Level '
+
 export const Breadcrumb = () => ({
+
+
     template:
-        `<fd-breadcrumb>
-            <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="breadcrumbHref1">{{breadcrumbLabel1}}</a>
-            </fd-breadcrumb-item>
-            <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="breadcrumbHref2">{{breadcrumbLabel2}}</a>
-            </fd-breadcrumb-item>
-            <fd-breadcrumb-item>
-                <span fd-breadcrumb-link [attr.href]="'#'">{{breadcrumbLabel3}}</span>
-            </fd-breadcrumb-item>
-        </fd-breadcrumb>`,
+        `<div style="width:300px; border: 1px solid red; padding: 10px;">
+            <fd-breadcrumb>
+                <fd-breadcrumb-item *ngFor="let row of getArray(bcLevels); let i = index;">
+                    <a fd-breadcrumb-link [attr.href]="breadcrumbHref1">{{breadcrumbLabel + i}}</a>
+                </fd-breadcrumb-item>
+            </fd-breadcrumb>
+        </div>`,
     props: {
         emphasizedVar: boolean('Disabled', false),
+        bcLevels: number('Levels', 5),
         disabledVar: boolean('Disabled', false),
         invertedVar: boolean('Inverted', false),
-        breadcrumbLabel1: text('breadcrumbLabel1', 'Breadcrumb Level 1'),
-        breadcrumbLabel2: text('breadcrumbLabel2', 'Breadcrumb Level 2'),
-        breadcrumbLabel3: text('breadcrumbLabel3', 'Breadcrumb Level 3'),
+        breadcrumbLabel: text('breadcrumbLabel', 'Breadcrumb Level'),
         breadcrumbHref1: text('breadcrumbHref1', '#'),
-        breadcrumbHref2: text('breadcrumbHref2', '#'),
-        breadcrumbHref3: text('breadcrumbHref3', '#')
+        getArray: (len: number) => {
+            return new Array(len);
+        },
+
     }
 });
