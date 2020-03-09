@@ -1,15 +1,15 @@
 import { Observable, Subject } from 'rxjs';
 
 /**
- * Reference to a modal component generated via the ModalService.
+ * Reference to a dialog component generated via the DialogService.
  * It can be injected into the content component through the constructor.
  * For a template, it is declared as part of the implicit context, see examples.
  */
-export class ModalRef {
+export class DialogRef {
     private readonly _afterClosed = new Subject<any>();
 
     /**
-     * Observable that is triggered when the modal is closed.
+     * Observable that is triggered when the dialog is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.
      */
     public afterClosed: Observable<any> = this._afterClosed.asObservable();
@@ -18,7 +18,7 @@ export class ModalRef {
     public data: any;
 
     /**
-     * Closes the modal and passes the argument to the afterClosed observable.
+     * Closes the dialog and passes the argument to the afterClosed observable.
      * @param result Value passed back to the observable as a result.
      */
     close(result?: any): void {
@@ -27,7 +27,7 @@ export class ModalRef {
     }
 
     /**
-     * Dismisses the modal and passes the argument to the afterClosed observable as an error.
+     * Dismisses the dialog and passes the argument to the afterClosed observable as an error.
      * @param reason Value passed back to the observable as an error.
      */
     dismiss(reason?: any): void {

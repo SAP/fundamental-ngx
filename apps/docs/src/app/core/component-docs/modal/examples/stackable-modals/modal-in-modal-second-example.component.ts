@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
-import { ModalRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-modal-in-modal-second',
     template: `
-        <fd-modal-header>
-            <h1 fd-modal-title>Second Modal</h1>
-            <button fd-modal-close-btn (click)="modalRef.dismiss()"></button>
-        </fd-modal-header>
-        <fd-modal-body>
+        <fd-dialog-header>
+            <h1 fd-dialog-title>Second Modal</h1>
+            <button fd-dialog-close-btn (click)="modalRef.dismiss()"></button>
+        </fd-dialog-header>
+        <fd-dialog-body>
             <p>This is the second modal!</p>
             <p>It is completely independent from the first modal and can be controlled separately!</p>
-        </fd-modal-body>
-        <fd-modal-footer>
+        </fd-dialog-body>
+        <fd-dialog-footer>
             <button fd-button (click)="modalRef.close()" [fdType]="'emphasized'">Close</button>
-        </fd-modal-footer>
+        </fd-dialog-footer>
     `
 })
 export class ModalInModalSecondComponent {
-    constructor(public modalRef: ModalRef) { }
+    constructor(public modalRef: DialogRef) { }
 }

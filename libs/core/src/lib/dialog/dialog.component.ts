@@ -1,5 +1,5 @@
 import {
-    AfterViewInit, ChangeDetectionStrategy,
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
@@ -16,18 +16,18 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { modalFadeNgIf } from './modal-utils/modal-animations';
+import { dialogFadeNgIf } from './dialog-utils/dialog-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import focusTrap from 'focus-trap';
-import { ModalRef } from './modal-utils/modal-ref';
+import { DialogRef } from './dialog-utils/dialog-ref';
 
 @Component({
-    selector: 'fd-modal',
-    styleUrls: ['modal.component.scss'],
-    templateUrl: './modal.component.html',
+    selector: 'fd-dialog',
+    styleUrls: ['dialog.component.scss'],
+    templateUrl: './dialog.component.html',
     host: {
-        'role': 'dialog',
-        '[class.fd-modal]': 'true',
+        'role': 'modal',
+        '[class.fd-dialog]': 'true',
         '[class.fd-modal-custom]': 'true',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
@@ -35,14 +35,14 @@ import { ModalRef } from './modal-utils/modal-ref';
         '[attr.aria-modal]': 'true',
         '[attr.id]': 'id',
         'tabindex': '-1',
-        '[@modal-fade]': ''
+        '[@dialog-fade]': ''
     },
     animations: [
-        modalFadeNgIf
+        dialogFadeNgIf
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
+export class DialogComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
 
     /** List of classes that will be added to component, when load from component option is picked. */
     readonly HOST_COMPONENT_CLASS_LIST: string[] = [
@@ -81,7 +81,7 @@ export class ModalComponent extends AbstractFdNgxClass implements OnInit, AfterV
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
-                @Optional() private modalRef: ModalRef) {
+                @Optional() private modalRef: DialogRef) {
         super(elRef);
     }
 

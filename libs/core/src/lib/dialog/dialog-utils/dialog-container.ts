@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { modalFadeNgIf } from './modal-animations';
+import { dialogFadeNgIf } from './dialog-animations.js';
 
 @Component({
     selector: 'fd-modal-container',
@@ -18,13 +18,13 @@ import { modalFadeNgIf } from './modal-animations';
         }
     `],
     host: {
-        '[@modal-fade]': '',
+        '[@dialog-fade]': '',
         '[class.fd-modal-container]': 'true'
     },
     animations: [
-        modalFadeNgIf
+        dialogFadeNgIf
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalContainer {}
+export class DialogContainer {}

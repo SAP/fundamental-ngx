@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
 import { ModalInModalSecondComponent } from './modal-in-modal-second-example.component';
-import { ModalRef, ModalService } from '@fundamental-ngx/core';
+import { DialogRef, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-modal-in-modal-first',
     template: `
-        <fd-modal-header>
-            <h1 fd-modal-title>First Modal</h1>
-            <button fd-modal-close-btn (click)="modalRef.dismiss('x')"></button>
-        </fd-modal-header>
-        <fd-modal-body>
+        <fd-dialog-header>
+            <h1 fd-dialog-title>First Modal</h1>
+            <button fd-dialog-close-btn (click)="modalRef.dismiss('x')"></button>
+        </fd-dialog-header>
+        <fd-dialog-body>
             This is the first modal! Click the button below to open the second modal.
-        </fd-modal-body>
-        <fd-modal-footer>
+        </fd-dialog-body>
+        <fd-dialog-footer>
             <button fd-button (click)="openModal()" [fdType]="'emphasized'">Open Second Modal</button>
-        </fd-modal-footer>
+        </fd-dialog-footer>
 `
 })
 export class ModalInModalFirstComponent {
 
-    constructor(public modalService: ModalService, public modalRef: ModalRef) { }
+    constructor(public modalService: DialogService, public modalRef: DialogRef) { }
 
     openModal() {
         this.modalService.open(ModalInModalSecondComponent, {

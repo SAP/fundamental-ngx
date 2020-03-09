@@ -1,18 +1,18 @@
 import { Directive, HostBinding } from '@angular/core';
 
 /**
- * Directive that applies fundamental modal styling to a header.
+ * Directive that applies fundamental dialog styling to a header.
  *
  * ```html
- * <h1 fd-modal-title>Modal Title</h1>
+ * <h1 fd-dialog-title>Modal Title</h1>
  * ```
  */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-modal-title]'
+    selector: '[fd-dialog-title]'
 })
-export class ModalTitleDirective {
+export class DialogTitleDirective {
 
     /** @hidden */
     @HostBinding('class.fd-modal__title')
@@ -20,18 +20,18 @@ export class ModalTitleDirective {
 }
 
 /**
- * Directive that applies fundamental modal styling to a button.
+ * Directive that applies fundamental dialog styling to a button.
  *
  * ```html
- * <button fd-modal-close-btn></button>
+ * <button fd-dialog-close-btn></button>
  * ```
  */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-modal-close-btn]'
+    selector: '[fd-dialog-close-btn]'
 })
-export class ModalCloseButtonDirective {
+export class DialogCloseButtonDirective {
 
     /** @hidden */
     @HostBinding('attr.aria-label')

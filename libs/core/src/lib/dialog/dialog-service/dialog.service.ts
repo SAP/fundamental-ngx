@@ -4,23 +4,23 @@ import {
     Type,
     TemplateRef, Inject
 } from '@angular/core';
-import { ModalComponent } from '../modal.component';
-import { ModalBackdrop } from '../modal-utils/modal-backdrop';
-import { ModalContainer } from '../modal-utils/modal-container';
-import { ModalConfig } from '../modal-utils/modal-config';
-import { ModalPosition } from '../modal-utils/modal-position';
+import { DialogComponent } from '../dialog.component';
+import { DialogBackdrop } from '../dialog-utils/dialog-backdrop';
+import { DialogContainer } from '../dialog-utils/dialog-container';
+import { DialogConfig } from '../dialog-utils/dialog-config';
+import { DialogPosition } from '../dialog-utils/dialog-position';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { ModalRef } from '../modal-utils/modal-ref';
+import { DialogRef } from '../dialog-utils/dialog-ref';
 
 /**
- * Service used to dynamically generate a modal.
+ * Service used to dynamically generate a dialog.
  */
 @Injectable()
-export class ModalService {
+export class DialogService {
     private modals: {
-        modalRef: ComponentRef<ModalComponent>,
-        backdropRef?: ComponentRef<ModalBackdrop>,
-        containerRef?: ComponentRef<ModalContainer>
+        modalRef: ComponentRef<DialogComponent>,
+        backdropRef?: ComponentRef<DialogBackdrop>,
+        containerRef?: ComponentRef<DialogContainer>
     }[] = [];
 
     /** @hidden */
@@ -29,15 +29,15 @@ export class ModalService {
     ) {}
 
     /**
-     * Status of the modal service.
-     * Returns true if there are open modals, false otherwise.
+     * Status of the dialog service.
+     * Returns true if there are open dialogs, false otherwise.
      */
     public hasOpenModals(): boolean {
         return this.modals && this.modals.length > 0;
     }
 
     /**
-     * Dismisses all currently open modals.
+     * Dismisses all currently open dialogs.
      */
     public dismissAll(): void {
         this.modals.forEach(item => {
@@ -46,23 +46,22 @@ export class ModalService {
     }
 
     /**
-     * Opens a modal component with a content of type TemplateRef or a component type.
-     * @param contentType Content of the modal component.
-     * @param modalConfig Configuration of the modal component.
+     * Opens a dialog component with a content of type TemplateRef or a component type.
+     * @param contentType Content of the dialog component.
+     * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: ModalConfig = new ModalConfig()): ModalRef {
+    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: DialogConfig = new DialogConfig()): DialogRef {
 
         // Get default values from model
-        modalConfig = Object.assign(new ModalConfig(), modalConfig);
+        modalConfig = Object.assign(new DialogConfig(), modalConfig);
 
-        // Instantiate modal ref service
-        const service: ModalRef = new ModalRef();
+        // Instantiate dialog ref service
+        const service: DialogRef = new DialogRef();
         service.data = modalConfig.data;
 
         // Create Container
-        const container: ComponentRef<ModalContainer> = this._dynamicComponentService.createDynamicComponent
-            < ModalContainer > (contentType, ModalContainer, modalConfig)
-        ;
+        const container: ComponentRef<DialogContainer> = this._dynamicComponentService
+            .createDynamicComponent <DialogContainer>(contentType, DialogContainer, modalConfig);
 
         // Add classes to container native element
         if (modalConfig.containerClass) {
@@ -73,17 +72,15 @@ export class ModalService {
         modalConfig.container = container.location.nativeElement;
 
         // Create Backdrop
-        let backdrop: ComponentRef<ModalBackdrop>;
+        let backdrop: ComponentRef<DialogBackdrop>;
         if (modalConfig.hasBackdrop) {
-            backdrop = this._dynamicComponentService.createDynamicComponent<ModalBackdrop>
-                (contentType, ModalBackdrop, modalConfig, [service])
-            ;
+            backdrop = this._dynamicComponentService.createDynamicComponent<DialogBackdrop>
+                (contentType, DialogBackdrop, modalConfig, [service]);
         }
 
         // Create Component
-        const component = this._dynamicComponentService.createDynamicComponent
-            < ModalComponent > (contentType, ModalComponent, modalConfig, [service])
-        ;
+        const component = this._dynamicComponentService
+            .createDynamicComponent <DialogComponent>(contentType, DialogComponent, modalConfig, [service]);
 
         // Sizing
         this._setModalSize(component, modalConfig);
@@ -103,13 +100,12 @@ export class ModalService {
         };
 
         const refSub = service.afterClosed
-            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose)
-        ;
+            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
 
         return service;
     }
 
-    private _destroyModalComponent(modal: ComponentRef<ModalComponent>): void {
+    private _destroyModalComponent(modal: ComponentRef<DialogComponent>): void {
 
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
         const indexOf = this.modals.indexOf(arrayRef);
@@ -128,7 +124,7 @@ export class ModalService {
 
     }
 
-    private _setModalSize(componentRef: ComponentRef<ModalComponent>, configObj: ModalConfig): void {
+    private _setModalSize(componentRef: ComponentRef<DialogComponent>, configObj: DialogConfig): void {
         componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
         componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
         componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
@@ -137,7 +133,7 @@ export class ModalService {
         componentRef.location.nativeElement.style.height = configObj.height;
     }
 
-    private _setModalPosition(componentRef: ComponentRef<ModalComponent>, position: ModalPosition): void {
+    private _setModalPosition(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
         if (position) {
             this._removeCurrentPositionModifiers(componentRef, position);
             componentRef.location.nativeElement.style.top = position.top;
@@ -147,7 +143,7 @@ export class ModalService {
         }
     }
 
-    private _removeCurrentPositionModifiers(componentRef: ComponentRef<ModalComponent>, position: ModalPosition): void {
+    private _removeCurrentPositionModifiers(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
 
         const isXPositionSet: boolean = !!(position.right || position.left);
         const isYPositionSet: boolean = !!(position.bottom || position.top);

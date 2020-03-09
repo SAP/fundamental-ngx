@@ -16,7 +16,7 @@ import {
     IdentifierModule,
     ImageModule,
     MenuModule,
-    ModalModule,
+    DialogModule,
     MultiInputModule,
     PopoverModule,
     SideNavigationModule,
@@ -45,7 +45,7 @@ const routes: Routes = [
         SideNavigationModule,
         MultiInputModule,
         MenuModule,
-        ModalModule,
+        DialogModule,
         BarModule
     ],
     exports: [RouterModule],

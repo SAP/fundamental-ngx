@@ -163,15 +163,15 @@ export const API_FILES = {
         'MenuKeyboardService'
     ],
     modal: [
-        'ModalService',
-        'ModalTitleDirective',
-        'ModalCloseButtonDirective',
-        'ModalConfig',
+        'DialogService',
+        'DialogTitleDirective',
+        'DialogCloseButtonDirective',
+        'DialogConfig',
         'ModalPosition',
-        'ModalBodyComponent',
-        'ModalHeaderComponent',
-        'ModalFooterComponent',
-        'ModalRef'
+        'DialogBodyComponent',
+        'DialogHeaderComponent',
+        'DialogFooterComponent',
+        'DialogRef'
     ],
     multiInput: [
         'MultiInputComponent'

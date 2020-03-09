@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalBodyComponent } from './modal-body.component';
+import { DialogFooterComponent } from './dialog-footer.component';
 
-describe('ModalBodyComponent', () => {
-    let component: ModalBodyComponent;
-    let fixture: ComponentFixture<ModalBodyComponent>;
+describe('DialogFooterComponent', () => {
+    let component: DialogFooterComponent;
+    let fixture: ComponentFixture<DialogFooterComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ModalBodyComponent]
+            declarations: [DialogFooterComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ModalBodyComponent);
+        fixture = TestBed.createComponent(DialogFooterComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

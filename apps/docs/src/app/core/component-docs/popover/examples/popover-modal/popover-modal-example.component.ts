@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-popover-modal-example',
@@ -7,6 +7,6 @@ import { ModalService } from '@fundamental-ngx/core';
 })
 export class PopoverModalExampleComponent {
 
-    constructor(public modalService: ModalService) {}
+    constructor(public modalService: DialogService) {}
 
 }

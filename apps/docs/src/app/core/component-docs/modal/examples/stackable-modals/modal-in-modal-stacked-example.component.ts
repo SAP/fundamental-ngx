@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalInModalFirstComponent } from './modal-in-modal-first-example.component';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-modal-in-modal-stacked-example',
@@ -10,7 +10,7 @@ import { ModalService } from '@fundamental-ngx/core';
 })
 export class ModalInModalComponent {
 
-    constructor(private modalService: ModalService) { }
+    constructor(private modalService: DialogService) { }
 
     openModal(): void {
         this.modalService.open(ModalInModalFirstComponent);

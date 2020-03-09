@@ -15,7 +15,7 @@ import {ModalPositionExampleComponent} from './examples/modal-position/modal-pos
 import {ModalFullscreenExampleComponent} from './examples/fullscreen-modal/modal-fullscreen-example.component';
 import {ModalOpenTemplateExampleComponent} from './examples/template-as-content/modal-open-template-example.component';
 import {ModalComponentAsContentExampleComponent} from './examples/component-as-content/modal-component-as-content-example.component';
-import { ModalModule, ModalService } from '@fundamental-ngx/core';
+import { DialogModule, DialogService } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -32,7 +32,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        ModalModule
+        DialogModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -56,7 +56,7 @@ const routes: Routes = [
         ModalInModalSecondComponent
     ],
     providers: [
-        ModalService
+        DialogService
     ]
 })
 export class ModalDocsModule {

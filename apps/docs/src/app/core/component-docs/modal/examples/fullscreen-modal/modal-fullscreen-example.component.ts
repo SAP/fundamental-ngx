@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-modal-fullscreen-example',
@@ -7,7 +7,7 @@ import { ModalService } from '@fundamental-ngx/core';
 })
 export class ModalFullscreenExampleComponent {
 
-    constructor(public modalService: ModalService)  {}
+    constructor(public modalService: DialogService)  {}
 
     openModal(modalTemplate) {
         this.modalService.open(modalTemplate, {

@@ -3,18 +3,19 @@
 <button class="action-button" fd-button (click)="openModifiedContainer(modal)">Modified Container</button>
 
 <ng-template let-modal #modal>
-    <fd-modal-header>
-        <h1 fd-modal-title>Backdrop Configuration</h1>
-        <button fd-modal-close-btn (click)="modal.dismiss()"></button>
-    </fd-modal-header>
-    <fd-modal-body>
-        <p>{{ modal.data }}</p>
+    <fd-dialog-header>
+        <h1 fd-dialog-title>Backdrop Configuration</h1>
+        <button fd-dialog-close-btn (click)="modal.dismiss()"></button>
+    </fd-dialog-header>
+    <fd-dialog-body>
+        <p>{{modal.data}}</p>
         <p>
-            In all cases, the backdrop cannot be used to close the modal. With the first case, there is simply no
-            backdrop to click. The <i>backdropClickCloseable</i> property is set to false.
+            In all cases, the backdrop cannot be used to close the modal.
+            With the first case, there is simply no backdrop to click.
+            The <i>backdropClickCloseable</i> property is set to false.
         </p>
-    </fd-modal-body>
-    <fd-modal-footer>
+    </fd-dialog-body>
+    <fd-dialog-footer>
         <button fd-button [fdType]="'emphasized'" (click)="modal.close()">Close</button>
-    </fd-modal-footer>
+    </fd-dialog-footer>
 </ng-template>

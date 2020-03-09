@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 
 /**
- * Applies fundamental layout and styling to the contents of a modal body.
+ * Applies fundamental layout and styling to the contents of a dialog body.
  *
  * ```html
- * <fd-modal-body>
+ * <fd-dialog-body>
  *     <div>Modal body content</div>
- * </fd-modal-body>
+ * </fd-dialog-body>
  * ```
  */
 @Component({
-    selector: 'fd-modal-body',
-    templateUrl: './modal-body.component.html',
+    selector: 'fd-dialog-body',
+    templateUrl: './dialog-body.component.html',
     styles: [`
         :host {
             display: block;
@@ -21,7 +21,7 @@ import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalBodyComponent {
+export class DialogBodyComponent {
 
     /** @hidden */
     @HostBinding('class.fd-modal__body')

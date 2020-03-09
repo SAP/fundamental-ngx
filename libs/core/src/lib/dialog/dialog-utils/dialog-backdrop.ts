@@ -1,21 +1,21 @@
 import { Component, ElementRef, HostBinding, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
-import { modalFadeNgIf } from './modal-animations';
-import { ModalRef } from './modal-ref';
+import { dialogFadeNgIf } from './dialog-animations';
+import { DialogRef } from './dialog-ref';
 
 @Component({
-    selector: 'fd-modal-overlay',
+    selector: 'fd-dialog-overlay',
     template: ``,
     host: {
         'tabindex': '-1',
-        '[@modal-fade]': ''
+        '[@dialog-fade]': ''
     },
     animations: [
-        modalFadeNgIf
+        dialogFadeNgIf
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
+export class DialogBackdrop extends AbstractFdNgxClass implements OnInit {
 
     backdropClass: string = '';
     backdropClickCloseable: boolean = true;
@@ -24,7 +24,7 @@ export class ModalBackdrop extends AbstractFdNgxClass implements OnInit {
     @HostBinding('class.fd-overlay--modal') overlayModal = true;
 
     constructor(private elRef: ElementRef,
-                private modalRef: ModalRef) {
+                private modalRef: DialogRef) {
         super(elRef);
     }
 

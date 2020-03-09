@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalContentComponent } from './modal-content.component';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-modal-component-as-content-example',
@@ -13,7 +13,7 @@ export class ModalComponentAsContentExampleComponent {
 
     closeReason: string;
 
-    constructor(private modalService: ModalService) {}
+    constructor(private modalService: DialogService) {}
 
     open(): void {
         const modalRef = this.modalService.open(ModalContentComponent, {

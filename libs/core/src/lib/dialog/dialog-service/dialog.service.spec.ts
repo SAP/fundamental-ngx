@@ -2,14 +2,14 @@ import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { ModalService } from './modal.service';
-import { ModalModule } from '../modal.module';
+import { DialogService } from './dialog.service';
+import { DialogModule } from '../dialog.module';
 import { TestBed } from '@angular/core/testing';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { ModalRef } from '../modal-utils/modal-ref';
+import { DialogRef } from '../dialog-utils/dialog-ref';
 
 @Component({
-    template: `        
+    template: `
             <ng-template #testTemplate let-alert>
                 <h1>test</h1>
             </ng-template>
@@ -21,21 +21,21 @@ class TemplateTestComponent {
 
 @NgModule({
     declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, ModalModule],
-    providers: [ModalService, DynamicComponentService],
+    imports: [CommonModule, BrowserModule, DialogModule],
+    providers: [DialogService, DynamicComponentService],
     entryComponents: [TemplateTestComponent]
 })
 class TestModule {}
 
-describe('ModalService', () => {
-    let service: ModalService;
+describe('DialogService', () => {
+    let service: DialogService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [TestModule]
         }).compileComponents();
 
-        service = TestBed.get(ModalService);
+        service = TestBed.get(DialogService);
     });
 
     it('should create', () => {
@@ -47,7 +47,7 @@ describe('ModalService', () => {
         expect(service['modals'].length).toBe(0);
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        const modalRef: ModalRef = service.open(fixtureElTmp);
+        const modalRef: DialogRef = service.open(fixtureElTmp);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -62,7 +62,7 @@ describe('ModalService', () => {
         spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent);
+        const modalRef: DialogRef = service.open(TemplateTestComponent);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();
@@ -77,7 +77,7 @@ describe('ModalService', () => {
         spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
-        const modalRef: ModalRef = service.open(TemplateTestComponent, {hasBackdrop: false});
+        const modalRef: DialogRef = service.open(TemplateTestComponent, {hasBackdrop: false});
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].containerRef).toBeTruthy();

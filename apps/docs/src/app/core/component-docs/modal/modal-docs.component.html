@@ -2,8 +2,8 @@
     Template as Content
 </fd-docs-section-title>
 <description>
-    The ModalService allows passing in a template reference as the content of the modal. Add <code>let-modal</code> to
-    the template element to access the injected <code>ModalRef</code>. <br /><br />
+    The DialogService allows passing in a template reference as the content of the modal. Add <code>let-modal</code> to
+    the template element to access the injected <code>DialogRef</code>. <br /><br />
     The example also features a confirmation modal. Subscribe to <code>afterClosed</code> to access the returned value.
     A dismissal will trigger an error on the observable, similar to rejecting a promise.
 </description>
@@ -18,8 +18,8 @@
     Component as Content
 </fd-docs-section-title>
 <description>
-    A component type can be passed to the ModalService open method as the content of the modal. Inject
-    <code>ModalRef</code> inside the content component to access methods such as close and dismiss. <br /><br />
+    A component type can be passed to the DialogService open method as the content of the modal. Inject
+    <code>DialogRef</code> inside the content component to access methods such as close and dismiss. <br /><br />
     The example also features a modal with a scrollable body.
 </description>
 <component-example>
@@ -61,7 +61,7 @@
 </fd-docs-section-title>
 <description>
     <p>
-        The ModalService supports limitless stacked modals. Each can be closed individually, there is no specific
+        The DialogService supports limitless stacked modals. Each can be closed individually, there is no specific
         closing order.
     </p>
     <p>
@@ -80,8 +80,8 @@
     Backdrop and Container Configuration
 </fd-docs-section-title>
 <description>
-    The modal backdrop and container can be styled, disabled or even customized at will. Classes being applied to the
-    element do not have to be in your global styles.
+    The modal backdrop and container can be styled, disabled or even customized at will. Classes being applied to the element do not
+    have to be in your global styles.
 </description>
 <component-example>
     <fd-backdrop-examples></fd-backdrop-examples>
@@ -107,12 +107,12 @@
 
 <description>
     <p>
-        Modals make use of a singleton service called <code>ModalService</code>. It provides the ability to
+        Modals make use of a singleton service called <code>DialogService</code>. It provides the ability to
         <code>open()</code> modal windows.
     </p>
     <p>
         The <code>open()</code> method accepts either a TemplateRef or Component as modal content. In addition, you may
-        optionally provide a ModalConfig object to override some system-default modal window behaviours.
+        optionally provide a DialogConfig object to override some system-default modal window behaviours.
     </p>
     <p>
         When a modal window is opened, the content is positioned in a parent element that is appended to the body.
@@ -131,14 +131,14 @@
 </playground>
 
 <ng-template #playgroundModal let-modal>
-    <fd-modal-header>
-        <h1 fd-modal-title>Playground Modal</h1>
-        <button fd-modal-close-btn (click)="modal.dismiss()"></button>
-    </fd-modal-header>
-    <fd-modal-body>
+    <fd-dialog-header>
+        <h1 fd-dialog-title>Playground Modal</h1>
+        <button fd-dialog-close-btn (click)="modal.dismiss()"></button>
+    </fd-dialog-header>
+    <fd-dialog-body>
         This is the modal playground body text!
-    </fd-modal-body>
-    <fd-modal-footer>
+    </fd-dialog-body>
+    <fd-dialog-footer>
         <button fd-button [fdType]="'emphasized'" (click)="modal.dismiss()">Close</button>
-    </fd-modal-footer>
+    </fd-dialog-footer>
 </ng-template>

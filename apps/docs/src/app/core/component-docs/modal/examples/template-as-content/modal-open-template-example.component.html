@@ -1,20 +1,20 @@
 <ng-template let-modal #confirmationModal>
-    <fd-modal-header>
-        <h1 fd-modal-title>Are you sure?</h1>
-        <button fd-modal-close-btn (click)="modal.dismiss('x')"></button>
-    </fd-modal-header>
-    <fd-modal-body>
+    <fd-dialog-header>
+        <h1 fd-dialog-title>Are you sure?</h1>
+        <button fd-dialog-close-btn (click)="modal.dismiss('x')"></button>
+    </fd-dialog-header>
+    <fd-dialog-body>
         This action is permanent and cannot be undone. Do you wish to continue?
-    </fd-modal-body>
-    <fd-modal-footer>
-        <button class="action-button" fd-button (click)="modal.dismiss('cancel')" [fdType]="'transparent'">
+    </fd-dialog-body>
+    <fd-dialog-footer>
+        <button class="action-button" fd-button [fdType]="'transparent'" (click)="modal.dismiss('cancel')" >
             Cancel
         </button>
-        <button class="action-button" fd-button (click)="modal.close('continue')" [fdType]="''">
+        <button class="action-button" fd-button (click)="modal.close('continue')" [fdType]="'emphasized'">
             Continue
         </button>
-    </fd-modal-footer>
+    </fd-dialog-footer>
 </ng-template>
 
 <button fd-button (click)="openModal(confirmationModal)">Open from Template</button>
-<span style="margin-left: 24px;">{{ confirmationReason }}</span>
+<span style="margin-left: 24px;">{{confirmationReason}}</span>

@@ -3,11 +3,11 @@
 </button>
 
 <ng-template #template let-modal>
-    <fd-modal-header>
+    <fd-dialog-header>
         Popover Example
-        <button fd-modal-close-btn (click)="modal.dismiss()"></button>
-    </fd-modal-header>
-    <fd-modal-body style="max-height: 200px">
+        <button fd-dialog-close-btn (click)="modal.dismiss()"></button>
+    </fd-dialog-header>
+    <fd-dialog-body style="max-height: 200px">
         <div style="height: 500px;">
             <fd-popover [noArrow]="false" [placement]="'bottom'">
                 <fd-popover-control>
@@ -23,5 +23,5 @@
             <fd-multi-input [dropdownValues]="['Pineapple', 'Apple', 'Pepper', 'Tomato']"></fd-multi-input>
             <p>The popover disappears if the attached reference object is outside the view!</p>
         </div>
-    </fd-modal-body>
+    </fd-dialog-body>
 </ng-template>

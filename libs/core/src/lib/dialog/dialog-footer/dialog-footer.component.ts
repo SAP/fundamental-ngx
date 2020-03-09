@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 
 /**
- * Applies fundamental layout and styling to the contents of a modal footer.
+ * Applies fundamental layout and styling to the contents of a dialog footer.
  *
  * ```html
- * <fd-modal-footer>
+ * <fd-dialog-footer>
  *     <button>Do action</button>
- * </fd-modal-footer>
+ * </fd-dialog-footer>
  * ```
  */
 @Component({
-    selector: 'fd-modal-footer',
-    templateUrl: './modal-footer.component.html',
+    selector: 'fd-dialog-footer',
+    templateUrl: './dialog-footer.component.html',
     styles: [`
         :host {
             display: block;
@@ -20,7 +20,7 @@ import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalFooterComponent {
+export class DialogFooterComponent {
 
     /** @hidden */
     @HostBinding('class.fd-modal__footer')

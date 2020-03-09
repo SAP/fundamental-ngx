@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-backdrop-examples',
@@ -8,7 +8,7 @@ import { ModalService } from '@fundamental-ngx/core';
 })
 export class BackdropExamplesComponent {
 
-    constructor(private modalService: ModalService) {}
+    constructor(private modalService: DialogService) {}
 
     openDisabledBackdrop(modal): void {
         this.modalService.open(modal, {

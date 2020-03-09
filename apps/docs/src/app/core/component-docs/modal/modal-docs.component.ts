@@ -17,7 +17,7 @@ import * as positionH from '!raw-loader!./examples/modal-position/modal-position
 import * as positionT from '!raw-loader!./examples/modal-position/modal-position-example.component.ts';
 import * as containerH from '!raw-loader!./examples/container/container.component.html';
 import * as containerT from '!raw-loader!./examples/container/container.component.ts';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { Schema } from '../../../schema/models/schema.model';
@@ -190,7 +190,7 @@ export class ModalDocsComponent {
 
     constructor(
         private schemaFactory: SchemaFactoryService,
-        private modalService: ModalService,
+        private modalService: DialogService,
     ) {
         this.schema = this.schemaFactory.getComponent('modal');
     }

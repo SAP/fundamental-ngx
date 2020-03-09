@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { ModalService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-modal-open-template-example',
@@ -10,7 +10,7 @@ export class ModalOpenTemplateExampleComponent {
 
     confirmationReason: string;
 
-    constructor(private modalService: ModalService) { }
+    constructor(private modalService: DialogService) { }
 
     openModal(modal: TemplateRef<any>): void {
         const modalRef = this.modalService.open(modal);

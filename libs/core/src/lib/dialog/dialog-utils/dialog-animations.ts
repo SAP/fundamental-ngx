@@ -1,7 +1,7 @@
 import { animate, AnimationTriggerMetadata, style, transition, trigger } from '@angular/animations';
 
-export const modalFadeNgIf: AnimationTriggerMetadata = trigger(
-    'modal-fade',
+export const dialogFadeNgIf: AnimationTriggerMetadata = trigger(
+    'dialog-fade',
     [
         transition(
             ':enter', [

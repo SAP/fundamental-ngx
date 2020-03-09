@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ModalComponent } from './modal.component';
-import { ModalService } from './modal-service/modal.service';
-import { ModalModule } from './modal.module';
+import { DialogComponent } from './dialog.component';
+import { DialogService } from './dialog-service/dialog.service';
+import { DialogModule } from './dialog.module';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import createSpyObj = jasmine.createSpyObj;
-import { ModalRef } from './modal-utils/modal-ref';
+import { DialogRef } from './dialog-utils/dialog-ref';
 
 @Component({
-    template: `        
+    template: `
             <ng-template #testTemplate let-modal>
                 <h1>test</h1>
                 <a href="#">testLink</a>
@@ -24,30 +24,30 @@ class TemplateTestComponent {
 
 @NgModule({
     declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, ModalModule, NoopAnimationsModule],
-    providers: [ModalService],
+    imports: [CommonModule, BrowserModule, DialogModule, NoopAnimationsModule],
+    providers: [DialogService],
     entryComponents: [TemplateTestComponent]
 })
 class TestModule {}
 
-describe('ModalComponent', () => {
-    let component: ModalComponent;
-    let fixture: ComponentFixture<ModalComponent>;
-    let modalService: ModalService;
+describe('DialogComponent', () => {
+    let component: DialogComponent;
+    let fixture: ComponentFixture<DialogComponent>;
+    let modalService: DialogService;
     const modalRef = createSpyObj('modalRef', ['dismiss']);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [TestModule],
-            providers: [{provide: ModalRef, useValue: modalRef}]
+            providers: [{provide: DialogRef, useValue: modalRef}]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ModalComponent);
+        fixture = TestBed.createComponent(DialogComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        modalService = TestBed.get(ModalService);
+        modalService = TestBed.get(DialogService);
     });
 
     it('should create', () => {
