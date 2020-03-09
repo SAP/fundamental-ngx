@@ -28,6 +28,7 @@ import { DialogRef } from './dialog-utils/dialog-ref';
     host: {
         'role': 'modal',
         '[class.fd-dialog]': 'true',
+        '[class.fd-dialog--active]': 'true',
         '[class.fd-modal-custom]': 'true',
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',

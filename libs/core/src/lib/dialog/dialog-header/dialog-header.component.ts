@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
+    QueryList,
+    TemplateRef
+} from '@angular/core';
+import { TemplateDirective } from '../../utils/directives';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog header.
@@ -13,12 +22,35 @@ import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 @Component({
     selector: 'fd-dialog-header',
     templateUrl: './dialog-header.component.html',
-    styles: [':host {display: block;}'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogHeaderComponent {
+export class DialogHeaderComponent implements AfterContentInit {
 
-    /** @hidden */
-    @HostBinding('class.fd-modal__header')
-    modalHeader = true;
+    headerTemplate: TemplateRef<any>;
+    subHeaderTemplate: TemplateRef<any>;
+
+    @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
+
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+    ngAfterContentInit() {
+        this._assignCustomTemplates();
+    }
+
+    private _assignCustomTemplates(): void {
+        this.customTemplates.forEach(template => {
+            switch (template.getName()) {
+                case 'header':
+                    this.headerTemplate = template.templateRef;
+                    break;
+                case 'subHeader':
+                    this.subHeaderTemplate = template.templateRef;
+                    break;
+            }
+        });
+
+        if (this.customTemplates.length) {
+            this._changeDetectorRef.detectChanges();
+        }
+    }
 }

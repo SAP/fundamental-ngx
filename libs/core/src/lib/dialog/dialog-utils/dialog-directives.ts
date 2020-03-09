@@ -8,15 +8,13 @@ import { Directive, HostBinding } from '@angular/core';
  * ```
  */
 @Directive({
-    // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-dialog-title]'
+    selector: '[fd-dialog-title]',
+    host: {
+        '[class.fd-dialog__title]': 'true',
+    }
 })
 export class DialogTitleDirective {
-
-    /** @hidden */
-    @HostBinding('class.fd-modal__title')
-    modalTitle = true;
 }
 
 /**

@@ -13,9 +13,12 @@ import { DialogBackdrop } from './dialog-utils/dialog-backdrop';
 import { DialogContainer } from './dialog-utils/dialog-container';
 import { DialogCloseButtonDirective, DialogTitleDirective } from './dialog-utils/dialog-directives';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { TemplateDirective } from '../utils/directives';
+import { BarModule } from '../bar/bar.module';
 
 @NgModule({
     declarations: [
+        TemplateDirective,
         DialogComponent,
         DialogHeaderComponent,
         DialogBodyComponent,
@@ -26,11 +29,14 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
         DialogTitleDirective
     ],
     imports: [
+        BarModule,
         CommonModule,
         ButtonModule,
         IconModule
     ],
     exports: [
+        BarModule,
+        TemplateDirective,
         DialogHeaderComponent,
         DialogBodyComponent,
         DialogFooterComponent,

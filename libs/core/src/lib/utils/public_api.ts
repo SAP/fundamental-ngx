@@ -1,4 +1,4 @@
-export * from './directives/only-digits.directive';
+export * from './directives';
 export * from './pipes/pipe.module';
 export * from './pipes/displayFn.pipe';
 export * from './pipes/two-digits.pipe';
