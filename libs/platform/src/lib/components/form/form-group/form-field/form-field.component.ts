@@ -238,7 +238,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterCon
 
 
     hasErrors(): boolean {
-        return this._editable && this._control && this._control.inErrorState;
+        return this._editable && this._control && this._control.status === 'error';
     }
 
     private validateFieldControlComponent() {

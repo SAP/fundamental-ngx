@@ -1,6 +1,9 @@
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
+export type InputSize = 'compact' | 'cozy';
+export type Status = 'error' | 'warning' | void;
+
 export abstract class FormFieldControl<T> {
 
     /**
@@ -14,15 +17,20 @@ export abstract class FormFieldControl<T> {
      */
     placeholder: string;
 
-
     /**
      * Sets id from FF to Input
      */
     id: string;
 
-
+    /**
+     * This should be coming from Parent.
+     */
     editable: boolean;
 
+    /**
+     *  Components works in two sizes compact or cozy
+     */
+    size: InputSize;
     /**
      *
      * Form Field listen for all the changes happening inside the input
@@ -43,9 +51,17 @@ export abstract class FormFieldControl<T> {
      */
     readonly focused: boolean;
 
-    /** Whether the control is in an error state. */
-    readonly inErrorState: boolean;
+    /**
+     * Currently used only to identify if we are in error status
+     */
+    readonly status: Status;
 
+    abstract focus(event?: MouseEvent): void;
+
+    /**
+     * Handles even when we click on parent container which is the FormField Wrapping this
+     * control
+     */
     abstract onContainerClick(event: MouseEvent): void;
 
 }

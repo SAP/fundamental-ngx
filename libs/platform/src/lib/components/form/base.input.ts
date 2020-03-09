@@ -12,7 +12,7 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { FormFieldControl } from './form-control';
+import { FormFieldControl, InputSize, Status } from './form-control';
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
@@ -27,41 +27,29 @@ let randomId = 0;
  * common logic. It should be possible to use some kind of compositions with Proxies but something
  * similar that exists in Aspect Oriented Programing.
  *
+ * Usually try to fire stateChange only for things that can change dynamically in runtime. We don't expect
+ * that e.g. placeholder will change after component is created
  */
 export abstract class BaseInput implements FormFieldControl<any>, ControlValueAccessor,
     OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
 
-    protected defaultId: string = `fdp-id-${randomId++}`;
+    protected defaultId: string = `fdp-input-id-${randomId++}`;
+    protected _disabled: boolean;
+    protected _value: any;
+    protected _editable: boolean = true;
+    protected _destroyed = new Subject<void>();
 
     @Input()
     id: string = this.defaultId;
 
     @Input()
-    get name(): string {
-        return this._name ? this._name : this.id;
-    }
-
-    set name(value: string) {
-        this._name = value;
-        this.stateChanges.next('rb set name');
-    }
+    name: string;
 
     @Input()
-    get placeholder(): string {
-        return this._placeholder;
-    }
-
-    set placeholder(value: string) {
-        if (value) {
-            this._placeholder = value;
-        }
-    }
-
-    private _placeholder: string;
+    placeholder: string;
 
     @Input()
-    readonly: boolean;
-
+    size: InputSize = 'cozy';
 
     @Input()
     get disabled(): boolean {
@@ -76,6 +64,29 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
     }
 
     /**
+     * Tell  the component if we are in editing mode.
+     *
+     */
+    @Input()
+    get editable(): boolean {
+        return this._editable;
+    }
+
+    /**
+     * Firing CD, as we can keep switching between editable and non-editable mode
+     *
+     */
+    set editable(value: boolean) {
+        const newVal = coerceBooleanProperty(value);
+        if (this._editable !== newVal) {
+            this._editable = newVal;
+            this._cd.markForCheck();
+            this.stateChanges.next('editable');
+        }
+    }
+
+
+    /**
      * need to make  these value accessor as abstract to be implemented by subclasses. Having them
      * in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
      * which we need to programmatically wraps components set/get value
@@ -85,26 +96,6 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
 
     abstract set value(value: any);
 
-    @Input()
-    compact: boolean = false;
-
-    /**
-     * Tell  the component if we are in editing mode.
-     *
-     */
-    @Input()
-    get editable(): boolean {
-        return this._editable;
-    }
-
-    set editable(value: boolean) {
-        const newVal = this.boolProperty(value);
-        if (this._editable !== newVal) {
-            this._editable = newVal;
-            this._cd.markForCheck();
-            this.stateChanges.next('editable');
-        }
-    }
 
     /**
      * Reference to internal Input element
@@ -121,14 +112,13 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
     /**
      * See @FormFieldControl
      */
+    _status: Status;
+
+    /**
+     * See @FormFieldControl
+     */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
-    protected _disabled: boolean;
-    protected _value: any;
-    protected _name: string;
-    protected _inErrorState: boolean;
-    protected _editable: boolean = true;
-    protected _destroyed = new Subject<void>();
 
     // @formatter:off
     onChange = (_: any) => {};
@@ -146,13 +136,13 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
     }
 
     ngOnInit(): void {
-        // if (!this.id) {
-        //   throw new Error('form input must have [id] attribute.');
-        // }
+        if (!this.id || !this.name) {
+            throw new Error('form input must have [id] and [name] attribute.');
+        }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.stateChanges.next('rb: ngOnChanges');
+        this.stateChanges.next('input: ngOnChanges');
     }
 
 
@@ -185,7 +175,7 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
     }
 
     setDisabledState(isDisabled: boolean): void {
-        const newState = this.boolProperty(isDisabled);
+        const newState = coerceBooleanProperty(isDisabled);
         if (newState !== this._disabled) {
             this._disabled = isDisabled;
             this.stateChanges.next('setDisabledState');
@@ -201,8 +191,8 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
         this.stateChanges.next('writeValue');
     }
 
-    get inErrorState(): boolean {
-        return this._inErrorState;
+    get status(): Status {
+        return this._status;
     }
 
 
@@ -211,7 +201,7 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
      * Keeps track of element focus
      */
     _onFocusChanged(isFocused: boolean) {
-        if (isFocused !== this.focused && (!this.readonly || !isFocused)) {
+        if (isFocused !== this.focused && (!this.disabled || !isFocused)) {
             this.focused = isFocused;
             this.stateChanges.next('_onFocusChanged');
         }
@@ -223,35 +213,43 @@ export abstract class BaseInput implements FormFieldControl<any>, ControlValueAc
      * control
      */
     onContainerClick(event: MouseEvent): void {
+        this.focus(event);
+    }
+
+    /**
+     * In most of the cases when working with input element directly you should be just find to assing
+     * variable to this element
+     *
+     * ```
+     * <input #elemRef fd-form-control ...>
+     * ```
+     *
+     * and this default behavior used. For other cases implement focus.
+     *
+     */
+    focus(event?: MouseEvent): void {
         if (this._elementRef && !this.focused) {
             this._elementRef.nativeElement.focus(event);
         }
     }
+
 
     /**
      *  Need re-validates errors on every CD iteration to make sure we are also
      *  covering non-control errors, errors that happens outside of this control
      */
     protected updateErrorState() {
-        const oldState = this._inErrorState;
+        const oldState = this.status === 'error';
         const parent = this.ngForm;
         const control = this.ngControl ? this.ngControl.control as FormControl : null;
-        const newState = !!(control && control.invalid && (control.touched ||
-            (parent && parent.submitted)));
+        const newState = !!(control && control.invalid && (control.touched || (parent && parent.submitted)));
 
         if (newState !== oldState) {
-            this._inErrorState = newState;
+            this._status = newState ? 'error' : undefined;
             this.stateChanges.next('updateErrorState');
         }
     }
 
-    protected boolProperty(value: boolean): boolean {
-        return coerceBooleanProperty(value);
-    }
-
-    protected input(): HTMLInputElement {
-        return this._elementRef.nativeElement.querySelector('.fd-input');
-    }
 
     protected setValue(value: any) {
         if (value !== this._value) {
