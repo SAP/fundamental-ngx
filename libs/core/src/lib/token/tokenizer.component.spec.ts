@@ -157,6 +157,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should collapse the tokens', () => {
+    component.inMultiInput = true;
     spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getInnerWidth').and.returnValue(2);
     component.moreTokens.length = 0;
@@ -169,6 +170,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should expand the tokens', () => {
+      component.inMultiInput = true;
       // need to collapse the tokens before running expand
       spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
       spyOn(component, 'getInnerWidth').and.returnValue(2);
@@ -189,11 +191,10 @@ describe('TokenizerComponent', () => {
       spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1})
     });
     spyOn(component.input.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
-    spyOn(component.moreElement.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
 
     const retVal = component.getInnerWidth();
 
-    expect(retVal).toBe(5);
+    expect(retVal).toBe(4);
   });
 
   it('should handle ngAfterContentInit', () => {

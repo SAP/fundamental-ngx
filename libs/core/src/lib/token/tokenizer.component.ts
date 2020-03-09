@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { FormControlDirective } from '../form/form-control/form-control.directive';
 import { TokenComponent } from './token.component';
+import { InputGroupAddOnDirective } from '../input-group/input-group-directives';
 
 @Component({
   selector: 'fd-tokenizer',
@@ -36,6 +37,9 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @ViewChild('moreElement', {static: true})
     moreElement: ElementRef;
 
+    @ViewChild(InputGroupAddOnDirective, {static: true})
+    inputGroupAddonEl: ElementRef;
+
     /** Used to add focus class to the tokenizer-example */
     @Input()
     tokenizerHasFocus: boolean = false;
@@ -47,6 +51,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** The value for the tokenizer input */
     @Input()
     inputValue: string;
+
+    /** @hidden */
+    @Input()
+    inMultiInput: boolean = false;
 
     /** @hidden */
     previousElementWidth: number;
@@ -135,55 +143,59 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     collapseTokens(): void {
-        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
-        let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
-        let i = 0;
-        while (innerWidth >= elementWidth && i < this.tokenList.length) {
-            // loop through the tokens and hide them until the innerWidth fits in the elementWidth
-            const token = this.tokenList.filter((item, index) => index === i)[0];
-            if (this.moreTokens.indexOf(token) === -1) {
-                this.moreTokens.push(token);
+        if (this.inMultiInput) {
+            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
+            let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
+            let i = 0;
+            while (innerWidth >= elementWidth && i < this.tokenList.length) {
+                // loop through the tokens and hide them until the innerWidth fits in the elementWidth
+                const token = this.tokenList.filter((item, index) => index === i)[0];
+                if (this.moreTokens.indexOf(token) === -1) {
+                    this.moreTokens.push(token);
+                }
+                token.elementRef.nativeElement.style.display = 'none';
+                // get the new elementWidth and innerWidth as these will have changed after setting a token display to 'none'
+                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+                innerWidth = this.getInnerWidth();
+                i++;
+                this.cdRef.detectChanges();
             }
-            token.elementRef.nativeElement.style.display = 'none';
-            // get the new elementWidth and innerWidth as these will have changed after setting a token display to 'none'
-            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-            innerWidth = this.getInnerWidth();
-            i++;
-            this.cdRef.detectChanges();
         }
     }
 
     /** @hidden */
     expandTokens(): void {
-        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
-        let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
-        let breakLoop = false;
-        let i = this.moreTokens.length - 1;
-        while (innerWidth < elementWidth && i >= 0 && !breakLoop) {
-            // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
-            const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
-            /*
-              set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
-              contain the width of the token we might display, without actually making the token visible to the user
-             */
-            tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
-            tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-            innerWidth = this.getInnerWidth();
-            /*
-              if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
-              make the token visible and reduce the hidden count
-            */
-            if (innerWidth < elementWidth) {
-                tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
-                this.moreTokens.pop();
-            } else {
-                // otherwise, stop looping and set the token's display back to 'none'
-                tokenToCheck.elementRef.nativeElement.style.display = 'none';
-                breakLoop = true;
+        if (this.inMultiInput) {
+            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
+            let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
+            let breakLoop = false;
+            let i = this.moreTokens.length - 1;
+            while (innerWidth < elementWidth && i >= 0 && !breakLoop) {
+                // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
+                const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
+                /*
+                  set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
+                  contain the width of the token we might display, without actually making the token visible to the user
+                 */
+                tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
+                tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
+                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+                innerWidth = this.getInnerWidth();
+                /*
+                  if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
+                  make the token visible and reduce the hidden count
+                */
+                if (innerWidth < elementWidth) {
+                    tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
+                    this.moreTokens.pop();
+                } else {
+                    // otherwise, stop looping and set the token's display back to 'none'
+                    tokenToCheck.elementRef.nativeElement.style.display = 'none';
+                    breakLoop = true;
+                }
+                i--;
+                this.cdRef.detectChanges();
             }
-            i--;
-            this.cdRef.detectChanges();
         }
     }
 
@@ -201,6 +213,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         // add the width of the "____ more" element
         if (this.moreTokens.length > 0 && this.moreElement && this.moreElement.nativeElement) {
             totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
+        }
+        // add the input group addon
+        if (this.inputGroupAddonEl && this.inputGroupAddonEl.nativeElement) {
+            totalTokenWidth = totalTokenWidth + this.inputGroupAddonEl.nativeElement.getBoundingClientRect().width;
         }
 
         return totalTokenWidth;
