@@ -1,3 +1,13 @@
-<div class="fd-modal__actions">
-    <ng-content></ng-content>
-</div>
+<footer fd-bar
+        class="fd-dialog__footer"
+        barDesign="footer">
+
+    <ng-container *ngTemplateOutlet="footerTemplate ? footerTemplate : defaultTemplate"></ng-container>
+
+    <ng-template #defaultTemplate>
+        <div fd-bar-right>
+            <ng-content></ng-content>
+        </div>
+    </ng-template>
+
+</footer>

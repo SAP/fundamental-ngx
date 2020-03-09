@@ -43,14 +43,10 @@ export class DialogHeaderComponent implements AfterContentInit {
                 case 'header':
                     this.headerTemplate = template.templateRef;
                     break;
-                case 'subHeader':
+                case 'subheader':
                     this.subHeaderTemplate = template.templateRef;
                     break;
             }
         });
-
-        if (this.customTemplates.length) {
-            this._changeDetectorRef.detectChanges();
-        }
     }
 }

@@ -1,21 +1,9 @@
 <ng-template let-modal #confirmationModal>
     <fd-dialog-header>
-        <ng-template fdTemplate="header">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    <ng-content select="[fd-dialog-title]"></ng-content>
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <ng-content select="[fd-dialog-close-btn]"></ng-content>
-                </fd-bar-element>
-            </div>
-        </ng-template>
-        Dialog header
-        <!--        <h1 fd-dialog-title>Are you sure?</h1>-->
-        <!--        <button fd-dialog-close-btn (click)="modal.dismiss('x')"></button>-->
+        <h1 fd-dialog-title>Are you sure?</h1>
+        <button fd-dialog-close-btn (click)="modal.dismiss('x')"></button>
     </fd-dialog-header>
+
     <fd-dialog-body>
         This action is permanent and cannot be undone. Do you wish to continue?
     </fd-dialog-body>

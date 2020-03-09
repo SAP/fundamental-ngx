@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
+    QueryList,
+    TemplateRef
+} from '@angular/core';
+import { TemplateDirective } from '../../utils/directives';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog footer.
@@ -12,17 +21,23 @@ import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 @Component({
     selector: 'fd-dialog-footer',
     templateUrl: './dialog-footer.component.html',
-    styles: [`
-        :host {
-            display: block;
-            border-top: 1px solid #eeeeef;
-        }
-    `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogFooterComponent {
+export class DialogFooterComponent implements AfterContentInit {
 
-    /** @hidden */
-    @HostBinding('class.fd-modal__footer')
-    modalFooter = true;
+    footerTemplate: TemplateRef<any>;
+
+    @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
+
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+    ngAfterContentInit() {
+        this._assignCustomTemplates();
+    }
+
+    private _assignCustomTemplates(): void {
+        const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
+        this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
+    }
+
 }
