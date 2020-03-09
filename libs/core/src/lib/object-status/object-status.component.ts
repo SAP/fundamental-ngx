@@ -13,7 +13,7 @@ export class ObjectStatusComponent implements OnInit {
 
     /** Select type defines the border type of the select button. */
     @Input()
-    objectStatus: ObjectStatus;
+    status: ObjectStatus;
 
     @Input()
     glyph: String; 
@@ -41,18 +41,18 @@ export class ObjectStatusComponent implements OnInit {
     ngOnInit() {
     }
 
-    get getCustomCssClass(): string {
+    get buildCustomCss(): string {
 
-        if (this.objectStatus === 'negative') {
+        if (this.status === 'negative') {
             this.cssname = this.cssname + ' fd-object-status--negative';
         }
-        if (this.objectStatus === 'critical') {
+        if (this.status === 'critical') {
             this.cssname = this.cssname + ' fd-object-status--critical';
         }
-        if (this.objectStatus === 'positive') {
+        if (this.status === 'positive') {
             this.cssname = this.cssname + ' fd-object-status--positive';
         }
-        if (this.objectStatus === 'informative') {
+        if (this.status === 'informative') {
             this.cssname = this.cssname + ' fd-object-status--informative';
         }
         if (this.glyph) {
