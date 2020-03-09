@@ -11,16 +11,15 @@ type LabelType = 'numeric' | 'only-icon' | 'icon';
 })
 export class InfoLabelComponent implements OnInit {
 
-    /** Select type defines the border type of the select button. */
+    /** Select type defines the label types */
     @Input()
     labelType: LabelType;
 
+    /** define the icon type */
     @Input()
     glyph: String; 
 
-    @Input()
-    message: String;
-
+    /**define the colour of the info label */
     @Input()
     color: String;
 
@@ -32,7 +31,7 @@ export class InfoLabelComponent implements OnInit {
     ngOnInit() {
     }
 
-    get getCustomIconClass(): string {
+    get buildCustomCss(): string {
 
         if (this.labelType === 'numeric') {
             this.cssname = this.cssname + 'fd-info-label--numeric';

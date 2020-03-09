@@ -1,4 +1,4 @@
-@import "~fundamental-styles/dist/modal";
+//@import "~fundamental-styles/dist/modal";
 
 //TODO evaluate whether this should go to fd-styles
 .fd-modal-custom {
@@ -14,7 +14,6 @@
     &:focus {
         outline: none;
     }
-
 }
 
 .fd-modal__content--overrides {
