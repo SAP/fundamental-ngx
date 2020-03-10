@@ -19,7 +19,7 @@ import { Subject } from 'rxjs';
     styleUrls: ['./menu-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuItemComponent implements OnInit, OnDestroy, FocusableOption {
+export class MenuItemComponent implements OnDestroy, FocusableOption {
 
     @Input() cascadeDirection: 'right' | 'left' = 'right';
 
@@ -59,8 +59,6 @@ export class MenuItemComponent implements OnInit, OnDestroy, FocusableOption {
     @HostListener('mouseenter') onMouseEnter() {
         this.hovered.next(this);
     }
-
-    ngOnInit() { }
 
     ngOnDestroy() {
         this.hovered.complete();

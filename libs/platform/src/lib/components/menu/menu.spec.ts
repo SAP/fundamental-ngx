@@ -9,6 +9,7 @@ import { createKeyboardEvent, createMouseEvent } from '@angular/cdk/testing';
 import { DOWN_ARROW, ESCAPE, UP_ARROW, ENTER, TAB, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
 import { of } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core';
 
 
 @Component({
@@ -55,6 +56,9 @@ describe('Simple Menu', () => {
             ],
             declarations: [
                 SimpleMenuComponent
+            ],
+            providers: [
+                RtlService
             ]
         })
             .compileComponents();
@@ -398,6 +402,9 @@ describe('Cascading Menu', () => {
             ],
             declarations: [
                 CascadingMenuComponent
+            ],
+            providers: [
+                RtlService
             ]
         })
             .compileComponents();
@@ -489,7 +496,7 @@ describe('Cascading Menu', () => {
         items[0].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
 
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[0].dispatchEvent(keyboardEvent);
 
         // check menu elements are shown
@@ -521,7 +528,7 @@ describe('Cascading Menu', () => {
          * SELECT SUB MENU ITEM W/ MOUSE CLICK
          */
         const mouseClickEvent = createMouseEvent('click');
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[1].dispatchEvent(mouseClickEvent);
         fixture.detectChanges();
 
@@ -553,14 +560,14 @@ describe('Cascading Menu', () => {
         /**
          * OPEN SUB MENU ITEM W/ KEYBOARD ENTER
          */
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[0].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
 
         /**
          * SELECT SUB-SUB MENU ITEM W/ KEYBOARD ENTER
          */
-        const subsubItems = overlayContainerEl.querySelectorAll('#braeburnMenu .fd-menu__item');
+        const subsubItems = overlayContainerEl.querySelectorAll('#fdp-menu-braeburnMenu .fd-menu__item');
         subsubItems[0].dispatchEvent(keyboardEvent);
         fixture.detectChanges();
 
@@ -656,7 +663,7 @@ describe('Cascading Menu', () => {
         /**
          * OPEN SUB MENU ITEM W/ MOUSE ENTER
          */
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[0].dispatchEvent(mouseEnterEvent);
         fixture.detectChanges();
 
@@ -716,7 +723,7 @@ describe('Cascading Menu', () => {
          * KEYPRESS LEFT ARROW
          */
         const keyboardLeftEvent = createKeyboardEvent('keydown', LEFT_ARROW, 'ArrowLeft');
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[0].dispatchEvent(keyboardLeftEvent);
         fixture.detectChanges();
 
@@ -776,6 +783,9 @@ describe('Cascading Menu - Position Before', () => {
             ],
             declarations: [
                 CascadingBeforeMenuComponent
+            ],
+            providers: [
+                RtlService
             ]
         })
             .compileComponents();
@@ -839,7 +849,7 @@ describe('Cascading Menu - Position Before', () => {
         /**
          * KEYPRESS LEFT ARROW
          */
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         const keyboardRightEvent = createKeyboardEvent('keydown', RIGHT_ARROW, 'ArrowRight');
         subItems[0].dispatchEvent(keyboardRightEvent);
         fixture.detectChanges();
@@ -893,8 +903,7 @@ describe('Cascading Menu - Position After, RTL', () => {
     let trigger: MenuTriggerDirective;
 
     const dirProvider = {
-        value: 'rtl',
-        change: of('rtl')
+        rtl: of(true)
     };
 
     beforeEach(async(() => {
@@ -906,11 +915,10 @@ describe('Cascading Menu - Position After, RTL', () => {
                 CascadingAfterRTLMenuComponent
             ],
             providers: [{
-                provide: Directionality,
+                provide: RtlService,
                 useFactory: () => dirProvider
             }]
-        })
-            .compileComponents();
+        }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
@@ -974,7 +982,7 @@ describe('Cascading Menu - Position After, RTL', () => {
          * KEYPRESS RIGHT ARROW
          */
         const keyboardRightEvent = createKeyboardEvent('keydown', RIGHT_ARROW, 'ArrowRight');
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[0].dispatchEvent(keyboardRightEvent);
         fixture.detectChanges();
 
@@ -1027,8 +1035,7 @@ describe('Cascading Menu - Position Before, RTL', () => {
     let trigger: MenuTriggerDirective;
 
     const dirProvider = {
-        value: 'rtl',
-        change: of('rtl')
+        rtl: of(true)
     };
 
     beforeEach(async(() => {
@@ -1040,11 +1047,10 @@ describe('Cascading Menu - Position Before, RTL', () => {
                 CascadingBeforeRTLMenuComponent
             ],
             providers: [{
-                provide: Directionality,
+                provide: RtlService,
                 useFactory: () => dirProvider
             }]
-        })
-            .compileComponents();
+        }).compileComponents();
 
         inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
             overlayContainerEl = overlayContainer.getContainerElement();
@@ -1108,7 +1114,7 @@ describe('Cascading Menu - Position Before, RTL', () => {
          * KEYPRESS LEFT ARROW
          */
         const keyboardLeftEvent = createKeyboardEvent('keydown', LEFT_ARROW, 'ArrowLeft');
-        const subItems = overlayContainerEl.querySelectorAll('#appleMenu .fd-menu__item');
+        const subItems = overlayContainerEl.querySelectorAll('#fdp-menu-appleMenu .fd-menu__item');
         subItems[0].dispatchEvent(keyboardLeftEvent);
         fixture.detectChanges();
 
