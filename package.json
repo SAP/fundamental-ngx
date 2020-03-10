@@ -128,7 +128,7 @@
     "protractor": "^5.4.3",
     "standard-version": "4.4.0",
     "ts-node": "^8.6.2",
-    "tsickle": "^0.38.0",
+    "tsickle": "^0.38.1",
     "tslib": "^1.11.1",
     "tslint": "^5.20.1",
     "typedoc": "^0.16.11",
