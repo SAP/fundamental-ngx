@@ -160,13 +160,13 @@ describe('TokenizerComponent', () => {
     component.inMultiInput = true;
     spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getInnerWidth').and.returnValue(2);
-    component.moreTokens.length = 0;
+    component.moreTokensLeft.length = 0;
     component.collapseTokens();
 
     component.tokenList.forEach(token => {
       expect(token.elementRef.nativeElement.style.display).toBe('none');
     });
-    expect(component.moreTokens.length).toBe(3);
+    expect(component.moreTokensLeft.length).toBe(3);
   });
 
   it('should expand the tokens', () => {
@@ -183,7 +183,7 @@ describe('TokenizerComponent', () => {
       component.tokenList.forEach(token => {
           expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
       });
-      expect(component.moreTokens.length).toBe(0);
+      expect(component.moreTokensLeft.length).toBe(0);
   });
 
   it('should get the inner width', () => {
