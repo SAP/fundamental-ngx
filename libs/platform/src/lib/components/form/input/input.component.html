@@ -1,0 +1,16 @@
+<!--
+  Does it make sense to have some other state than error?
+-->
+<input #elemRef fd-form-control
+       [(ngModel)]="value"
+       [ngModelOptions]="{standalone: true}"
+       [attr.id]="id"
+       [attr.name]="name"
+       [attr.type]="type"
+       [attr.placeholder]="placeholder"
+       [disabled]="disabled"
+       [compact]="size == 'compact'"
+       [state]="status === 'error' ? 'invalid' : '' "
+       (blur)="_onFocusChanged(false)"
+       (focus)="_onFocusChanged(true)"
+/>
