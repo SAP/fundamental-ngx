@@ -86,13 +86,6 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
-        /*
-        console.log('from index: ' + fromIndex);
-        console.log('tokenList.length: ' + this.tokenList.length);
-        console.log('moreTokensRight.length: ' + this.moreTokensRight.length);
-        console.log('moreTokensLeft.length: ' + this.moreTokensLeft.length);
-
-         */
         let newIndex: number;
         if (event.code === 'ArrowLeft') {
             // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
@@ -100,7 +93,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                  const poppedToken = this.moreTokensLeft.pop();
                  if (poppedToken) {
                      poppedToken.elementRef.nativeElement.style.display = 'inline-block';
-                     poppedToken.elementRef.nativeElement.style.visibility = 'visibility';
+                     poppedToken.elementRef.nativeElement.style.visibility = 'visible';
                  }
                  // and then hide any tokens from the right that no longer fit
                  this.collapseTokens('right');
@@ -108,11 +101,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             newIndex = fromIndex - 1;
         } else if (event.code === 'ArrowRight') {
             if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
-                console.log(this.moreTokensRight);
                 const poppedToken = this.moreTokensRight.pop();
                 if (poppedToken) {
                     poppedToken.elementRef.nativeElement.style.display = 'inline-block';
-                    poppedToken.elementRef.nativeElement.style.visibility = 'visibility';
+                    poppedToken.elementRef.nativeElement.style.visibility = 'visible';
                 }
                 // and then hide any tokens from the left that no longer fit
                 this.collapseTokens('left');
@@ -194,7 +186,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             innerWidth = this.getInnerWidth();
             dir === 'right' ? i-- : i++;
-            this.cdRef.detectChanges();
+            this.cdRef.markForCheck();
         }
     }
 
@@ -228,7 +220,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 breakLoop = true;
             }
             i--;
-            this.cdRef.detectChanges();
+            this.cdRef.markForCheck();
         }
     }
 
