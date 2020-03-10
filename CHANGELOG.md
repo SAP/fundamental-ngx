@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.0"></a>
+# [0.16.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.3...v0.16.0-rc.0) (2020-03-10)
+
+
+### Features
+
+* **platform:** FormGroup layout support ([#2139](https://github.com/SAP/fundamental-ngx/issues/2139)) ([a335311](https://github.com/SAP/fundamental-ngx/commit/a335311)), closes [#2131](https://github.com/SAP/fundamental-ngx/issues/2131)
+
+
+
 <a name="0.15.2-rc.3"></a>
 ## [0.15.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.2...v0.15.2-rc.3) (2020-03-09)
 
