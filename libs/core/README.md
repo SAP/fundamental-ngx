@@ -64,6 +64,14 @@ For an existing Angular CLI application,
 
     _If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)._
 
+1. **Import fonts.css and icon.css**
+   Open your application's `angular.json` and add the following to the `styles` array(s)
+
+    ```$json
+    "node_modules/fundamental-styles/dist/fonts.css",
+    "node_modules/fundamental-styles/dist/icon.css",
+    ```
+
 1. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
@@ -83,17 +91,17 @@ For an existing Angular CLI application,
     For example, to use Switchs, add the following import to your main application module.
 
     ```javascript
-    import { SwitchModule } from '@fundamental-ngx/core’';
+    import { CheckboxModule } from '@fundamental-ngx/core’';
     ```
 
     For models prior to 0.10 use `fundamental-ngx`
 
     ```
-    import { SwitchModule } from '@fundamental-ngx/core';
+    import { CheckboxModule } from '@fundamental-ngx/core';
 
     @NgModule({
         ...
-        imports: [SwitchModule],
+        imports: [CheckboxModule],
     })
     export class DemoModule { }
     ```
@@ -101,7 +109,7 @@ For an existing Angular CLI application,
 1. **Add the component to your HTML.**
 
     ```html
-    <fd-switch [size]="'l'" [(checked)]="myValue">Large Switch</fd-switch>
+    <fd-checkbox label="Fundamental Ngx Checkbox"></fd-checkbox>
     ```
 
 ## <a name="5"></a>5. Known Issues

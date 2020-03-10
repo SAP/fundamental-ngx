@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.1"></a>
+# [0.16.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.0...v0.16.0-rc.1) (2020-03-10)
+
+
+
+<a name="0.16.0-rc.0"></a>
+# [0.16.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.3...v0.16.0-rc.0) (2020-03-10)
+
+
+### Features
+
+* **platform:** FormGroup layout support ([#2139](https://github.com/SAP/fundamental-ngx/issues/2139)) ([a335311](https://github.com/SAP/fundamental-ngx/commit/a335311)), closes [#2131](https://github.com/SAP/fundamental-ngx/issues/2131)
+
+
+
+<a name="0.15.2-rc.3"></a>
+## [0.15.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.2...v0.15.2-rc.3) (2020-03-09)
+
+
+
+<a name="0.15.2-rc.2"></a>
+## [0.15.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.1...v0.15.2-rc.2) (2020-03-08)
+
+
+
+<a name="0.15.2-rc.1"></a>
+## [0.15.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.0...v0.15.2-rc.1) (2020-03-08)
+
+
+
+<a name="0.15.2-rc.0"></a>
+## [0.15.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.1...v0.15.2-rc.0) (2020-03-08)
+
+
+
+<a name="0.15.1"></a>
+## [0.15.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.5...v0.15.1) (2020-03-05)
+
+
+
+<a name="0.15.1-rc.5"></a>
+## [0.15.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.3...v0.15.1-rc.5) (2020-03-05)
+
+
+
+<a name="0.15.1-rc.4"></a>
+## [0.15.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.3...v0.15.1-rc.4) (2020-03-05)
+
+
+
+<a name="0.15.1-rc.3"></a>
+## [0.15.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.2...v0.15.1-rc.3) (2020-03-05)
+
+
+
+<a name="0.15.1-rc.2"></a>
+## [0.15.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.1...v0.15.1-rc.2) (2020-03-05)
+
+
+
+<a name="0.15.1-rc.1"></a>
+## [0.15.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.0...v0.15.1-rc.1) (2020-03-05)
+
+
+
+<a name="0.15.1-rc.0"></a>
+## [0.15.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.0...v0.15.1-rc.0) (2020-03-05)
+
+
+
 <a name="0.15.0"></a>
 # [0.15.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.0-rc.17...v0.15.0) (2020-03-04)
 
