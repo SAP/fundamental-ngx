@@ -8,6 +8,5 @@
     },
     "angularCompilerOptions": {
         "enableIvy": false
-    },
-    "include": ["apps/docs/src/**/*.d.ts"]
+    }
 }
