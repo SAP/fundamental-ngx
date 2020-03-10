@@ -1,0 +1,15 @@
+<fd-popover (isOpenChange)="openChanged($event)"
+            [addContainerClass]="'fd-popover-container-custom--message'"
+            [closeOnOutsideClick]="closeOnOutsideClick"
+            [fillControlMode]="fillControlMode"
+            [isOpen]="isOpen"
+            [placement]="placement$ | async"
+            [triggers]="triggers"
+            class="fd-form-input-message-group">
+    <fd-popover-control>
+        <ng-container *ngTemplateOutlet="triggerItemTemplate"></ng-container>
+    </fd-popover-control>
+    <fd-popover-body>
+        <ng-content select="fd-form-message"></ng-content>
+    </fd-popover-body>
+</fd-popover>
