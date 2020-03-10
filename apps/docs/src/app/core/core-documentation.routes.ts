@@ -1,7 +1,7 @@
-import {Routes} from '@angular/router';
-import {CoreDocumentationComponent} from './documentation/core-documentation.component';
-import {HomeDocsComponent} from './component-docs/core-home/core-home.component';
-import {NewComponentComponent} from './component-docs/new-component/new-component.component';
+import { Routes } from '@angular/router';
+import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
+import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
 export const ROUTES: Routes = [
     {
@@ -126,6 +126,10 @@ export const ROUTES: Routes = [
             {
                 path: 'menu',
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then(m => m.MenuDocsModule)
+            },
+            {
+                path: 'message-strip',
+                loadChildren: () => import('./component-docs/message-strip/message-strip-docs.module').then(m => m.MessageStripDocsModule)
             },
             {
                 path: 'modal',

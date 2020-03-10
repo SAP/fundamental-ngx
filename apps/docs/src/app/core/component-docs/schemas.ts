@@ -15,6 +15,7 @@ import { ListDocsComponent } from './list/list-docs.component';
 import { TabsDocsComponent } from './tabs/tabs-docs.component';
 import { DropdownDocsComponent } from './dropdown/dropdown-docs.component';
 import { TreeDocsComponent } from './tree/tree-docs.component';
+import { MessageStripDocsComponent } from './message-strip/message-strip-docs.component';
 import { ModalDocsComponent } from './modal/modal-docs.component';
 import { TableDocsComponent } from './table/table-docs.component';
 import { TileDocsComponent } from './tile/tile-docs.component';
@@ -32,6 +33,7 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     inputGroup: InputGroupDocsComponent.schema,
     image: ImageDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
+    messageStrip: MessageStripDocsComponent.schema,
     modal: ModalDocsComponent.schema,
     list: ListDocsComponent.schema,
     tabs: TabsDocsComponent.schema,

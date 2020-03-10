@@ -29,6 +29,7 @@ export * from './lib/loading-spinner/public_api';
 export * from './lib/localizator-editor/public_api';
 export * from './lib/menu/public_api';
 export * from './lib/mega-menu/public_api';
+export * from './lib/message-strip/public_api';
 export * from './lib/modal/public_api';
 export * from './lib/multi-input/public_api';
 export * from './lib/nested-list/public_api';

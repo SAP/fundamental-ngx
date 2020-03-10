@@ -162,6 +162,9 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
+    messageStrip: [
+        'MessageStripComponent'
+    ],
     modal: [
         'ModalService',
         'ModalTitleDirective',
