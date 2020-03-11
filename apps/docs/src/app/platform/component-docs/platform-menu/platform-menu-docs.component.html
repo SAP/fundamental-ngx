@@ -1,7 +1,6 @@
-<fd-docs-section-title [id]="'def'" [componentName]="'menu'">
-    Menu
-</fd-docs-section-title>
-<description>This example shows Menu with a dropdown popover as invoker</description>
+<fd-docs-section-title [id]="'def'" [componentName]="'menu'">Menu</fd-docs-section-title>
+<description>The Menu can be invoked from any element, by using the <code>fdpMenuTriggerFor</code> directive.
+</description>
 <component-example>
     <fdp-platform-menu-basic-example></fdp-platform-menu-basic-example>
 </component-example>
@@ -9,64 +8,38 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">
-    Menu with Optional Separator
-</fd-docs-section-title>
-<description>Each menu item can have an optional separator shown as a line beneath the item.</description>
+<fd-docs-section-title [id]="'def'" [componentName]="'menu'">Menu with Horizontal Positioning</fd-docs-section-title>
+<description>The horizontal position of the menu can be controlled via the <code>xPosition</code> property, which can be
+    set to either 'after' or 'before'. The default value is 'after'.</description>
 <component-example>
-    <fdp-platform-menu-separator-example></fdp-platform-menu-separator-example>
+    <fdp-platform-menu-x-position-example></fdp-platform-menu-x-position-example>
 </component-example>
-<code-example [exampleFiles]="menuSeparator"></code-example>
+<code-example [exampleFiles]="menuXPosition"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'addon'" [componentName]="'menu'">
-    Menu with Addon
-</fd-docs-section-title>
-<description
-    >This is an additional container that can be used for an icon or checkbox before the menu item text. This can be
-    achieved by using the <code>icon</code> and <code>secondaryIcon</code> fields while entering the data.
-</description>
+<fd-docs-section-title [id]="'def'" [componentName]="'menu'">Cascading Menu</fd-docs-section-title>
+<description>Menus can be cascaded by adding the <code>fdpMenuTriggerFor</code> directives to MenuItems.</description>
 <component-example>
-    <fdp-platform-menu-icons-example></fdp-platform-menu-icons-example>
+    <fdp-platform-menu-cascade-example></fdp-platform-menu-cascade-example>
 </component-example>
-<code-example [exampleFiles]="menuAddon"></code-example>
+<code-example [exampleFiles]="menuCascade"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'group'" [componentName]="'menu'">
-    Menu with Group
-</fd-docs-section-title>
+
+<fd-docs-section-title [id]="'def'" [componentName]="'menu'">Menu Within Scrolling Container</fd-docs-section-title>
 <description>
-    This provides an additional grouping of some items for better readability.
+    <p>Menus are designed to reposition themselves upon scroll of the page or within a scrollable container.
+        However, In order to accomplish this the Menu/MenuTrigger system is reliant on the
+        <a href="https://material.angular.io/cdk/scrolling/overview">CDK Scrolling</a> package</p>
+    <p>For containers that
+        are scrollable (e.g. via the CSS <code>overflow: scroll</code> property), the user needs to add the
+        <code>cdk-scrollable</code> (or <code>cdkScrollable</code>) directive to that container.</p>
 </description>
 <component-example>
-    <fdp-platform-menu-group-example></fdp-platform-menu-group-example>
+    <fdp-platform-menu-scrolling-example></fdp-platform-menu-scrolling-example>
 </component-example>
-<code-example [exampleFiles]="menuGroup"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'clickCloseMenu'" [componentName]="'menu'">
-    Menu example to demonstrate closing of popover on click of menu item
-</fd-docs-section-title>
-<description
-    >This example shows how to close a popover or any invoking component when a Menu item is clicked.
-</description>
-<component-example>
-    <fdp-platform-menu-click-close-example></fdp-platform-menu-click-close-example>
-</component-example>
-<code-example [exampleFiles]="menuClickClose"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'complexMenu'" [componentName]="'menu'">
-    Complex menu with all options used
-</fd-docs-section-title>
-<description>This example shows Menu with a <code>fd-popover-control</code> using button as the invoker</description>
-<component-example>
-    <fdp-platform-menu-complex-example></fdp-platform-menu-complex-example>
-</component-example>
-<code-example [exampleFiles]="menuComplex"></code-example>
+<code-example [exampleFiles]="menuScrolling"></code-example>
 
 <separator></separator>

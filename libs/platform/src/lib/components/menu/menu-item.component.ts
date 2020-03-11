@@ -1,159 +1,71 @@
 import {
     Component,
-    Input,
+    OnInit,
+    ElementRef,
+    HostBinding,
     Output,
     EventEmitter,
-    ViewEncapsulation,
-    ElementRef,
     HostListener,
-    Renderer2,
-    OnChanges,
-    SimpleChanges
+    ChangeDetectionStrategy,
+    OnDestroy,
+    Input
 } from '@angular/core';
-import { MenuItem, MenuGroup } from './menu.component';
-import { DefaultMenuItem } from '@fundamental-ngx/core';
+import { FocusableOption } from '@angular/cdk/a11y';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',
     styleUrls: ['./menu-item.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuItemComponent implements DefaultMenuItem, OnChanges {
-    @Input()
-    public label: string;
-    @Input()
-    public index: string;
-    @Input()
-    public icon: string;
-    @Input()
-    public selectable: boolean;
-    @Input()
-    public selected: boolean;
-    @Input()
-    public secondaryIcon: string;
+export class MenuItemComponent implements OnDestroy, FocusableOption {
 
-    @Input()
-    public item: MenuItem;
-    @Input()
-    public group: MenuGroup;
+    @Input() cascadeDirection: 'right' | 'left' = 'right';
 
-    @Input()
-    public separated: boolean;
-    @Input()
-    public disabled: boolean;
-    @Input()
-    public tooltipLabel: string;
-    @Input()
-    public itemWidth: string;
+    @Output() itemSelect: EventEmitter<void> = new EventEmitter();
 
-    @Input()
-    public childItems: MenuItem[] = [];
+    // Track when menu item is hovered over
+    public hovered: Subject<MenuItemComponent> = new Subject<MenuItemComponent>();
 
-    /** calculates the final width of the label when icons are used */
-    /** @hidden */
-    public finalItemWidth = '';
+    constructor(
+        private elementRef: ElementRef
+    ) { }
 
-    @Output()
-    readonly itemClick: EventEmitter<void> = new EventEmitter();
-
-    /**  Event thrown, when there is some keyboard event detected on mega menu item */
-    @Output()
-    readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-    constructor(public itemEl: ElementRef, private renderer: Renderer2) {}
-
-    onItemClick(): void {
-        this.itemClick.emit();
+    // Add Fundamental-Styles class for menu item
+    @HostBinding('class.fd-menu__item') menuItemClass = true;
+    @HostBinding('class.trigger') isTrigger = false;
+    @HostBinding('class.cascades-right') get cascadesRight(): boolean {
+        return this.cascadeDirection === 'right';
     }
 
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.itemWidth || changes.item || changes.selected) {
-            this.finalItemWidth = this.getItemWidth();
+    @HostBinding('class.cascades-left') get cascadesLeft(): boolean {
+        return this.cascadeDirection === 'left';
+    }
+
+    @HostBinding('attr.role') role = 'listitem';
+    @HostBinding('attr.tabindex') tabindex = '-1';
+
+    // Handle selection of item via keyboard 'Enter' or mouseclick
+    @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent) {
+        if (event && event.key === 'Enter') {
+            this.itemSelect.emit();
         }
     }
-
-    /**
-     * get the menu item label width bby offsetting from total width if `secondaryIcon` is present
-     */
-    getItemWidth(): string {
-        // todo: handle em, rem etc.
-        let finalItemWidth: string = '';
-        if (this.itemWidth) {
-            finalItemWidth = this.getOffsetItemWidth(finalItemWidth);
-        } else {
-            const itemElement = this.itemEl.nativeElement;
-            this.renderer.setStyle(itemElement, 'width', 'inherit');
-        }
-        return finalItemWidth;
+    @HostListener('click') onItemClick() {
+        this.itemSelect.emit();
     }
 
-    private getOffsetItemWidth(finalItemWidth: string) {
-        let splitWidthNumber: number;
-        let iconOffset: number;
-        let secondaryIconOffset: number;
-        let unit: string;
-        if (this.itemWidth.includes('em')) {
-            splitWidthNumber = Number(this.itemWidth.split('em')[0]);
-            iconOffset = 46 / 14; // 14px font-size = 1em
-            secondaryIconOffset = iconOffset * 2;
-            unit = 'em';
-        } else if (this.itemWidth.includes('rem')) {
-            splitWidthNumber = Number(this.itemWidth.split('rem')[0]);
-            // todo handle for rem
-        } else if (this.itemWidth.includes('px')) {
-            splitWidthNumber = Number(this.itemWidth.split('px')[0]);
-            iconOffset = 46;
-            secondaryIconOffset = 88;
-            unit = 'px';
-        }
-        // enforce minimum width
-        finalItemWidth = this.itemWidth;
-        if (this.item.icon || this.item.selected) {
-            // remove primary icon width from label width
-            finalItemWidth = splitWidthNumber - iconOffset + unit;
-        }
-        if (this.item.secondaryIcon) {
-            // handle case where unselected item with secondary icon is present
-            // and 2 icon's offsets were being calculated instead.
-            if (this.item.selectable && !this.item.selected) {
-                finalItemWidth = splitWidthNumber - iconOffset + unit;
-            } else {
-                // remove secondary icon width from label width
-                finalItemWidth = splitWidthNumber - secondaryIconOffset + unit;
-            }
-        }
-        return finalItemWidth;
+    @HostListener('mouseenter') onMouseEnter() {
+        this.hovered.next(this);
     }
 
-    /**
-     * implemented method for `focus` from `DefaultMenuItem`
-     */
-    public focus(): void {
-        this.itemEl.nativeElement.children[0].focus();
-    }
-    /**
-     * implemented method for `click` from `DefaultMenuItem`
-     */
-    public click(): void {
-        this.itemClick.emit();
+    ngOnDestroy() {
+        this.hovered.complete();
     }
 
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent): void {
-        switch (event.code) {
-            case 'Space':
-            case 'Enter':
-                if (this.disabled) {
-                    event.stopPropagation();
-                } else {
-                    this.itemClick.emit();
-                }
-                break;
-            default:
-                this.keyDown.emit(event);
-        }
+    focus() {
+        this.elementRef.nativeElement.focus();
     }
+
 }
