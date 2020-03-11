@@ -15,9 +15,34 @@
             </fd-menu>
         </fd-popover-body>
     </fd-popover>
-    <fd-combobox #combobox [glyph]="isLoading ? 'synchronize' : 'search'" [placeholder]="placeholder"
+    <!-- <fd-combobox #combobox [glyph]="isLoading ? 'synchronize' : 'search'" [placeholder]="placeholder"
         [dropdownValues]="dropdownValues$ | async" [compact]="compact" [triggers]="[]" [(ngModel)]="inputText"
         (ngModelChange)="onValueChange($event)" (itemClicked)="onItemClick($event)" [searchFunction]="onSearchSubmit"
         [disabled]="disabled">
-    </fd-combobox>
+    </fd-combobox> -->
+    <div class="fd-popover">
+        <div class="fd-popover__control">
+            <div aria-label="" aria-controls="" aria-expanded="false" aria-haspopup="true">
+                <div class="fd-input-group">
+                    <input type="text" class="fd-input fd-input-group__input" id="" [(ngModel)]="inputText"
+                        (ngModelChange)="onValueChange($event)" placeholder="{{placeholder}}">
+                    <span class="fd-input-group__addon fd-input-group__addon--button">
+                        <button
+                            class="fd-input-group__button fd-button fd-button--transparent sap-icon--decline"></button>
+                    </span>
+                    <span class="fd-input-group__addon fd-input-group__addon--button">
+                        <button class="fd-input-group__button fd-button fd-button--transparent sap-icon--search"
+                            (click)="onSearchSubmit()"></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="fd-popover__body fd-popover__body--no-arrow" aria-hidden="true" id="F4GcX348bc">
+            <nav class="fd-menu">
+                <ul class="fd-menu__list">
+                    <li class="fd-menu__item" *ngFor="let value of dropdownValues$ | async">{{value}}</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>

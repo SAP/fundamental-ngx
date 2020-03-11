@@ -163,6 +163,7 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
      * @hidden
      */
     onValueChange($event: string) {
+        console.log($event)
         this.inputChange.emit({
             text: $event,
             category: (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null
