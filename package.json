@@ -77,14 +77,16 @@
     "focus-trap": "^5.1.0",
     "fundamental-styles": "^0.6.0",
     "highlight.js": "^9.18.1",
+    "intl": "^1.2.5",
     "jasminewd2": "^2.0.6",
     "moment": "^2.24.0",
-    "ngx-markdown": "^9.0.0",
+    "ngx-markdown": "8.2.2",
     "npm": "^6.14.2",
     "popper.js": "^1.16.1",
     "raw-loader": "^4.0.0",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
