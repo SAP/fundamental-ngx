@@ -19,3 +19,10 @@
 .fd-has-display-block {
     display: block;
 }
+
+@font-face {
+    font-family: 'SAP-icons';
+    src: url('node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/fonts/SAP-icons.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
