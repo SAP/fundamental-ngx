@@ -1,13 +1,1 @@
-:host {
-    // little hack to align nested formgroup
-    ::ng-deep .fd-section {
-        border: 1px solid transparent !important;
-        margin: 0 !important;
-        padding: 0;
-    }
-
-    .fd-form-item ::ng-deep .fd-form-item {
-        margin-bottom: 0px;
-    }
-}
 

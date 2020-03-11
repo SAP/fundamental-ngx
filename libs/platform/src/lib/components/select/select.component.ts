@@ -11,29 +11,6 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionComponent, SelectComponent as fdSelect, RtlService } from '@fundamental-ngx/core';
-/**
- * Interface SelectItem is used to deal with complex object in order to be able to format custom label that is
- * shown in the options.
- */
-export interface SelectItem {
-    /**
-     * Item text shown in the popup
-     */
-    label: string;
-
-    /**
-     * References to the object instance
-     */
-    value: any;
-    disabled?: boolean;
-
-    icon: string;
-    /**
-     * Trigger values is a text for selected item
-     */
-    triggerValue?: string;
-}
-
 
 @Component({
     selector: 'fdp-select',
