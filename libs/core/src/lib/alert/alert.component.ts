@@ -23,6 +23,10 @@ import { AlertRef } from './alert-utils/alert-ref';
 let alertUniqueId: number = 0;
 
 /**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ * 
  * The component that represents an alert. It can be only be used inline.
  * If the AlertService is used, this component is auto-generated.
  */
@@ -109,11 +113,12 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     childComponentType: Type<any> | TemplateRef<any> | string;
 
     /** @hidden */
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private ngZone: NgZone,
-                @Optional() private alertRef: AlertRef) {
+    constructor(
+        private elRef: ElementRef,
+        private cdRef: ChangeDetectorRef,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private ngZone: NgZone,
+        @Optional() private alertRef: AlertRef) {
         super(elRef);
     }
 

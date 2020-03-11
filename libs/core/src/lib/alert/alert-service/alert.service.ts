@@ -10,7 +10,11 @@ import { AlertConfig } from '../alert-utils/alert-config';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { AlertRef } from '../alert-utils/alert-ref';
 
-/**
+ /**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ * 
  * Service used to dynamically generate an alert as an overlay.
  */
 @Injectable()
