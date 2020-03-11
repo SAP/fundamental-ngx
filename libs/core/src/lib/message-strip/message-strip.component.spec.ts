@@ -35,11 +35,19 @@ describe('MessageStripComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Add no-icon class', () => {
+    it('Should Add no-icon modifier class', () => {
         component.ngOnInit();
         component.noIcon = true;
         component.ngOnChanges();
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--no-icon')).toBe(true);
+    });
+
+    it('Should apply a type', () => {
+        component.ngOnInit();
+        component.type = 'success';
+        component.ngOnChanges();
+        fixture.detectChanges();
+        expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--success')).toBe(true);
     });
 });
