@@ -56,7 +56,7 @@ describe('DialogComponent', () => {
 
     it('should generate component', () => {
         spyOn<any>(component, 'loadFromComponent').and.callThrough();
-        component.childComponentType = TemplateTestComponent;
+        component.childContent = TemplateTestComponent;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
@@ -65,7 +65,7 @@ describe('DialogComponent', () => {
 
     it('should generate template', () => {
         spyOn<any>(component, 'loadFromTemplate').and.callThrough();
-        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
@@ -73,7 +73,7 @@ describe('DialogComponent', () => {
     });
 
     it('should close after esc pressed', () => {
-        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();

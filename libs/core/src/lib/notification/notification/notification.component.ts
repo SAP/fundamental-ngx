@@ -64,7 +64,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     ariaDescribedBy: string = null;
 
-    childComponentType: TemplateRef<any> | Type<any> | NotificationDefault;
+    childContent: TemplateRef<any> | Type<any> | NotificationDefault;
 
     backdropClickCloseable: boolean = true;
 
@@ -82,13 +82,13 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
     }
 
     ngAfterViewInit(): void {
-        if (this.childComponentType) {
-            if (this.childComponentType instanceof Type) {
-                this.loadFromComponent(this.childComponentType);
-            } else if (this.childComponentType instanceof TemplateRef) {
-                this.loadFromTemplate(this.childComponentType);
+        if (this.childContent) {
+            if (this.childContent instanceof Type) {
+                this.loadFromComponent(this.childContent);
+            } else if (this.childContent instanceof TemplateRef) {
+                this.loadFromTemplate(this.childContent);
             } else {
-                this.createFromDefaultConfiguration(this.childComponentType);
+                this.createFromDefaultConfiguration(this.childContent);
             }
         }
         this.cdRef.detectChanges();

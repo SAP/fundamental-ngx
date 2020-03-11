@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewEncapsulati
 import { dialogFadeNgIf } from './dialog.animations';
 import { DialogRef } from './dialog-ref.class';
 import { Subscription } from 'rxjs';
+import { DialogConfig } from './dialog-config.class';
 
 @Component({
     selector: 'fd-dialog-overlay',
@@ -10,8 +11,8 @@ import { Subscription } from 'rxjs';
     host: {
         'tabindex': '-1',
         '[@dialog-fade]': '',
-        '[class]': 'backdropClass',
-        '[class.fd-dialog]': 'hasBackdrop',
+        '[class]': 'dialogConfig.backdropClass',
+        '[class.fd-dialog]': 'dialogConfig.hasBackdrop',
         '[class.fd-dialog--active]': 'showDialogWindow'
     },
     animations: [
@@ -21,43 +22,40 @@ import { Subscription } from 'rxjs';
 })
 export class DialogOverlay implements OnInit, OnDestroy {
 
-    /** @hidden Custom backdrop class | ModalConfig */
-    hasBackdrop: boolean = true;
-
-    /** @hidden Custom backdrop class | ModalConfig */
-    backdropClass: string = '';
-
-    /** @hidden Whenever dialog should be closed on overlay click | ModalConfig */
-    backdropClickCloseable: boolean = true;
-
     /** @hidden Whenever dialog should be visible */
     showDialogWindow: boolean;
 
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(private _modalRef: DialogRef,
-                private _elementRef: ElementRef) {
+    constructor(
+        public dialogConfig: DialogConfig,
+        private _dialogRef: DialogRef,
+        private _elementRef: ElementRef) {
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._listenOnHidden();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden Listen and close dialog on Escape key */
     @HostListener('mousedown', ['$event.target'])
-    closeModal(target): void {
-        if (this.backdropClickCloseable && target === this._elementRef.nativeElement) {
-            this._modalRef.dismiss('backdrop');
+    closeModal(target: ElementRef): void {
+        if (this.dialogConfig.backdropClickCloseable && target === this._elementRef.nativeElement) {
+            this._dialogRef.dismiss('backdrop');
         }
     }
 
-    private _listenOnHidden() {
+    /** @hidden Listen on dialog visibility */
+    private _listenOnHidden(): void {
         this._subscriptions.add(
-            this._modalRef.onHide.subscribe(isHidden => this.showDialogWindow = !isHidden)
+            this._dialogRef.onHide.subscribe(isHidden => this.showDialogWindow = !isHidden)
         );
     }
 }

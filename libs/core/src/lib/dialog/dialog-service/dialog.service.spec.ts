@@ -126,22 +126,22 @@ describe('DialogService', () => {
 
     it('should close modal on backdrop click', () => {
 
-        expect(service.hasOpenModals()).toBe(false);
+        expect(service.hasOpenDialogs()).toBe(false);
 
         service.open(TemplateTestComponent, {backdropClickCloseable: true});
 
-        expect(service.hasOpenModals()).toBeTruthy();
+        expect(service.hasOpenDialogs()).toBeTruthy();
 
         expect(service['modals'][0].modalRef).toBeTruthy();
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         service['modals'][0].backdropRef.location.nativeElement.click();
-        expect(service.hasOpenModals()).toBe(false);
+        expect(service.hasOpenDialogs()).toBe(false);
 
         service.open(TemplateTestComponent, {backdropClickCloseable: false});
         service['modals'][0].backdropRef.location.nativeElement.click();
 
-        expect(service.hasOpenModals()).toBeTruthy();
+        expect(service.hasOpenDialogs()).toBeTruthy();
 
     });
 
@@ -155,10 +155,10 @@ describe('DialogService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
-    it('should support hasOpenModals', () => {
-        expect(service.hasOpenModals()).toBe(false);
+    it('should support hasOpenDialogs', () => {
+        expect(service.hasOpenDialogs()).toBe(false);
         service.open(TemplateTestComponent);
-        expect(service.hasOpenModals()).toBe(true);
+        expect(service.hasOpenDialogs()).toBe(true);
     });
 
 });

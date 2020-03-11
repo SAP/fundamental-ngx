@@ -1,47 +1,38 @@
-import {
-    Injectable,
-    ComponentRef,
-    Type,
-    TemplateRef,
-    Inject
-} from '@angular/core';
+import { ComponentRef, Inject, Injectable, Optional, TemplateRef, Type } from '@angular/core';
 import { DialogComponent } from '../dialog.component';
 import { DialogOverlay } from '../dialog-utils/dialog-overlay.component';
-import { DialogConfigClass } from '../dialog-utils/dialog-config.class';
+import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 import { DialogPosition } from '../dialog-utils/dialog-position.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { DialogRef } from '../dialog-utils/dialog-ref.class';
 
-/**
- * Service used to dynamically generate a dialog.
- */
+/** Service used to dynamically generate a dialog. */
 @Injectable()
 export class DialogService {
-    private modals: {
-        modalRef: ComponentRef<DialogComponent>,
+
+    /** @hidden Collection of existing dialog references */
+    private _dialogs: {
+        dialogRef: ComponentRef<DialogComponent>,
         backdropRef?: ComponentRef<DialogOverlay>,
     }[] = [];
 
     /** @hidden */
     constructor(
-        @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService
+        @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService,
+        @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig
     ) {}
 
     /**
      * Status of the dialog service.
      * Returns true if there are open dialogs, false otherwise.
      */
-    public hasOpenModals(): boolean {
-        return this.modals && this.modals.length > 0;
+    public hasOpenDialogs(): boolean {
+        return this._dialogs && this._dialogs.length > 0;
     }
 
-    /**
-     * Dismisses all currently open dialogs.
-     */
+    /** Dismisses all currently open dialogs. */
     public dismissAll(): void {
-        this.modals.forEach(item => {
-            this._destroyModalComponent(item.modalRef);
-        });
+        this._dialogs.forEach(item => this._destroyDialogComponent(item.dialogRef));
     }
 
     /**
@@ -49,64 +40,62 @@ export class DialogService {
      * @param contentType Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: DialogConfigClass = new DialogConfigClass()): DialogRef {
+    public open(contentType: Type<any> | TemplateRef<any>, dialogConfig?: DialogConfig): DialogRef {
 
-        // Get default values from model
-        modalConfig = Object.assign(new DialogConfigClass(), modalConfig);
+        const dialogRef: DialogRef = new DialogRef();
 
-        // Instantiate dialog ref service
-        const service: DialogRef = new DialogRef();
-        service.data = modalConfig.data;
+        dialogRef.data = dialogConfig.data;
+        dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
 
-        // Create Backdrop
-        const backdrop: ComponentRef<DialogOverlay> = this._dynamicComponentService
-            .createDynamicComponent<DialogOverlay>(contentType, DialogOverlay, modalConfig, [service]);
+        const backdrop: ComponentRef<DialogOverlay> = this._dynamicComponentService.createDynamicComponent<DialogOverlay>(
+            contentType,
+            DialogOverlay,
+            dialogConfig,
+            [dialogRef, dialogConfig]
+        );
 
-        // Create Component inside DialogOverlay
-        const backdropConfig = {...modalConfig, container: backdrop.location.nativeElement};
+        const component = this._dynamicComponentService.createDynamicComponent<DialogComponent>(
+            contentType,
+            DialogComponent,
+            {...dialogConfig, container: backdrop.location.nativeElement},
+            [dialogRef, dialogConfig]
+        );
 
-        const component = this._dynamicComponentService
-            .createDynamicComponent<DialogComponent>(contentType, DialogComponent, backdropConfig, [service]);
+        this._setDialogSize(component, dialogConfig);
+        this._setDialogPosition(component, dialogConfig.position);
 
-        // Sizing
-        this._setModalSize(component, modalConfig);
-
-        // Positioning
-        this._setModalPosition(component, modalConfig.position);
-
-        this.modals.push({
-            modalRef: component,
-            backdropRef: backdrop
-        });
+        this._dialogs.push({dialogRef: component, backdropRef: backdrop});
 
         const defaultBehaviourOnClose = () => {
-            this._destroyModalComponent(component);
+            this._destroyDialogComponent(component);
             refSub.unsubscribe();
         };
 
-        const refSub = service.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+        const refSub = dialogRef.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
 
-        return service;
+        return dialogRef;
     }
 
-    private _destroyModalComponent(modal: ComponentRef<DialogComponent>): void {
+    /** @hidden */
+    private _destroyDialogComponent(dialog: ComponentRef<DialogComponent>): void {
 
-        const arrayRef = this.modals.find((item) => item.modalRef === modal);
-        const indexOf = this.modals.indexOf(arrayRef);
-        this._dynamicComponentService.destroyComponent(arrayRef.modalRef);
-        arrayRef.modalRef.destroy();
+        const arrayRef = this._dialogs.find((item) => item.dialogRef === dialog);
+        const indexOf = this._dialogs.indexOf(arrayRef);
+        this._dynamicComponentService.destroyComponent(arrayRef.dialogRef);
+        arrayRef.dialogRef.destroy();
 
         if (arrayRef.backdropRef) {
             this._dynamicComponentService.destroyComponent(arrayRef.backdropRef);
             arrayRef.backdropRef.destroy();
         }
 
-        this.modals[indexOf] = null;
-        this.modals = this.modals.filter(item => item !== null && item !== undefined);
+        this._dialogs[indexOf] = null;
+        this._dialogs = this._dialogs.filter(item => item !== null && item !== undefined);
 
     }
 
-    private _setModalSize(componentRef: ComponentRef<DialogComponent>, configObj: DialogConfigClass): void {
+    /** @hidden */
+    private _setDialogSize(componentRef: ComponentRef<DialogComponent>, configObj: DialogConfig): void {
         componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
         componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
         componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
@@ -115,7 +104,8 @@ export class DialogService {
         componentRef.location.nativeElement.style.height = configObj.height;
     }
 
-    private _setModalPosition(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
+    /** @hidden */
+    private _setDialogPosition(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
         if (position) {
             this._removeCurrentPositionModifiers(componentRef, position);
             componentRef.location.nativeElement.style.top = position.top;
@@ -125,6 +115,7 @@ export class DialogService {
         }
     }
 
+    /** @hidden */
     private _removeCurrentPositionModifiers(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
 
         const isXPositionSet: boolean = !!(position.right || position.left);
@@ -145,5 +136,14 @@ export class DialogService {
         if (isXPositionSet && isYPositionSet) {
             componentRef.location.nativeElement.style.transform = 'translate(0, 0)'
         }
+    }
+
+    /** @hidden Extends dialog config using default values and returns JS DialogConfig object*/
+    private _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
+        const newConfig = new DialogConfig();
+        const mergedConfigs = {...defaultConfig, ...config};
+        Object.keys(mergedConfigs).forEach(key => newConfig[key] = mergedConfigs[key]);
+
+        return newConfig;
     }
 }

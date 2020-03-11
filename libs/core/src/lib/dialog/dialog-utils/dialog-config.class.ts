@@ -3,8 +3,11 @@
  */
 import { DialogPosition } from './dialog-position.class';
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
+import { InjectionToken } from '@angular/core';
 
-export class DialogConfigClass implements DynamicComponentConfig {
+export const DIALOG_DEFAULT_CONFIG = new InjectionToken<string[]>('DialogConfig');
+
+export class DialogConfig implements DynamicComponentConfig {
 
     /** Id for the dialog component. If omitted, a unique one is generated. */
     id?: string;
