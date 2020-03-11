@@ -11,8 +11,9 @@
                    fd-input-group-input
                    type="text"
                    [attr.aria-label]="dateInputLabel"
-                   [value]="inputFieldDate"
+                   [(ngModel)]="inputFieldDate"
                    [placeholder]="placeholder"
+                   (ngModelChange)="handleInputChange($event)"
                    (keyup.enter)="handleInputChange(datePicker.value)"
                    (click)="openCalendar()"
                    [compact]="compact"

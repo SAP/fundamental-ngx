@@ -14,6 +14,7 @@
                        #dateTimePicker
                        [attr.aria-label]="datetimeInputLabel"
                        [(ngModel)]="inputFieldDate"
+                       (ngModelChange)="handleInputChange($event)"
                        [placeholder]="placeholder"
                        (keyup.enter)="handleInputChange(dateTimePicker.value)"
                        (click)="openPopover()"
