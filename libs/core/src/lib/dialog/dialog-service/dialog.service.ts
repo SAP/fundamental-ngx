@@ -2,15 +2,15 @@ import {
     Injectable,
     ComponentRef,
     Type,
-    TemplateRef, Inject
+    TemplateRef,
+    Inject
 } from '@angular/core';
 import { DialogComponent } from '../dialog.component';
-import { DialogBackdrop } from '../dialog-utils/dialog-backdrop';
-import { DialogContainer } from '../dialog-utils/dialog-container';
-import { DialogConfig } from '../dialog-utils/dialog-config';
-import { DialogPosition } from '../dialog-utils/dialog-position';
+import { DialogOverlay } from '../dialog-utils/dialog-overlay.component';
+import { DialogConfigClass } from '../dialog-utils/dialog-config.class';
+import { DialogPosition } from '../dialog-utils/dialog-position.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { DialogRef } from '../dialog-utils/dialog-ref';
+import { DialogRef } from '../dialog-utils/dialog-ref.class';
 
 /**
  * Service used to dynamically generate a dialog.
@@ -19,8 +19,7 @@ import { DialogRef } from '../dialog-utils/dialog-ref';
 export class DialogService {
     private modals: {
         modalRef: ComponentRef<DialogComponent>,
-        backdropRef?: ComponentRef<DialogBackdrop>,
-        containerRef?: ComponentRef<DialogContainer>
+        backdropRef?: ComponentRef<DialogOverlay>,
     }[] = [];
 
     /** @hidden */
@@ -50,37 +49,24 @@ export class DialogService {
      * @param contentType Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: DialogConfig = new DialogConfig()): DialogRef {
+    public open(contentType: Type<any> | TemplateRef<any>, modalConfig: DialogConfigClass = new DialogConfigClass()): DialogRef {
 
         // Get default values from model
-        modalConfig = Object.assign(new DialogConfig(), modalConfig);
+        modalConfig = Object.assign(new DialogConfigClass(), modalConfig);
 
         // Instantiate dialog ref service
         const service: DialogRef = new DialogRef();
         service.data = modalConfig.data;
 
-        // Create Container
-        const container: ComponentRef<DialogContainer> = this._dynamicComponentService
-            .createDynamicComponent <DialogContainer>(contentType, DialogContainer, modalConfig);
-
-        // Add classes to container native element
-        if (modalConfig.containerClass) {
-            container.location.nativeElement.classList.add(modalConfig.containerClass);
-        }
-
-        // Define Container to put backdrop and component to container
-        modalConfig.container = container.location.nativeElement;
-
         // Create Backdrop
-        let backdrop: ComponentRef<DialogBackdrop>;
-        if (modalConfig.hasBackdrop) {
-            backdrop = this._dynamicComponentService.createDynamicComponent<DialogBackdrop>
-                (contentType, DialogBackdrop, modalConfig, [service]);
-        }
+        const backdrop: ComponentRef<DialogOverlay> = this._dynamicComponentService
+            .createDynamicComponent<DialogOverlay>(contentType, DialogOverlay, modalConfig, [service]);
 
-        // Create Component
+        // Create Component inside DialogOverlay
+        const backdropConfig = {...modalConfig, container: backdrop.location.nativeElement};
+
         const component = this._dynamicComponentService
-            .createDynamicComponent <DialogComponent>(contentType, DialogComponent, modalConfig, [service]);
+            .createDynamicComponent<DialogComponent>(contentType, DialogComponent, backdropConfig, [service]);
 
         // Sizing
         this._setModalSize(component, modalConfig);
@@ -90,7 +76,6 @@ export class DialogService {
 
         this.modals.push({
             modalRef: component,
-            containerRef: container,
             backdropRef: backdrop
         });
 
@@ -99,8 +84,7 @@ export class DialogService {
             refSub.unsubscribe();
         };
 
-        const refSub = service.afterClosed
-            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+        const refSub = service.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
 
         return service;
     }
@@ -110,8 +94,6 @@ export class DialogService {
         const arrayRef = this.modals.find((item) => item.modalRef === modal);
         const indexOf = this.modals.indexOf(arrayRef);
         this._dynamicComponentService.destroyComponent(arrayRef.modalRef);
-        this._dynamicComponentService.destroyComponent(arrayRef.containerRef);
-        arrayRef.containerRef.destroy();
         arrayRef.modalRef.destroy();
 
         if (arrayRef.backdropRef) {
@@ -124,7 +106,7 @@ export class DialogService {
 
     }
 
-    private _setModalSize(componentRef: ComponentRef<DialogComponent>, configObj: DialogConfig): void {
+    private _setModalSize(componentRef: ComponentRef<DialogComponent>, configObj: DialogConfigClass): void {
         componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
         componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
         componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;

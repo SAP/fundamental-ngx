@@ -50,11 +50,10 @@ export class DynamicComponentService {
 
         // Assign component attributes
         const configObj = Object.assign({}, config);
-        Object.keys(configObj).forEach(key => {
-            if (key !== 'data') {
-                componentRef.instance[key] = configObj[key];
-            }
-        });
+        Object.keys(configObj)
+            .filter(key => key !== 'data')
+            .forEach(key => componentRef.instance[key] = configObj[key]);
+
         componentRef.instance.childComponentType = contentType;
 
         // Render component

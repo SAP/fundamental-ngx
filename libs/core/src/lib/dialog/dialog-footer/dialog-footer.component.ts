@@ -3,7 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChildren,
+    ContentChildren, Input,
     QueryList,
     TemplateRef
 } from '@angular/core';
@@ -24,6 +24,9 @@ import { TemplateDirective } from '../../utils/directives';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogFooterComponent implements AfterContentInit {
+
+    @Input()
+    mobile: boolean = false;
 
     footerTemplate: TemplateRef<any>;
 

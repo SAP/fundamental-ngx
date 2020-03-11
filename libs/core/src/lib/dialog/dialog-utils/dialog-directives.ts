@@ -37,3 +37,20 @@ export class DialogTitleDirective {
 })
 export class DialogCloseButtonDirective {
 }
+
+/**
+ * Directive that applies fundamental dialog styling to a button.
+ *
+ * ```html
+ * <button fd-dialog-close-btn></button>
+ * ```
+ */
+@Directive({
+    // tslint:disable-next-line:directive-selector
+    selector: '[fd-dialog-decisive-btn]',
+    host: {
+        '[class.fd-dialog__decisive-button]': 'true',
+    }
+})
+export class DialogDecisiveButtonDirective {
+}

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogHeaderComponent } from './dialog-header.component';
 import { DialogModule } from '../dialog.module';
-import { DialogRef } from '../dialog-utils/dialog-ref';
+import { DialogRef } from '../dialog-utils/dialog-ref.class';
 
 describe('DialogHeaderComponent', () => {
     let component: DialogHeaderComponent;

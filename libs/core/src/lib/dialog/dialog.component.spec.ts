@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import createSpyObj = jasmine.createSpyObj;
-import { DialogRef } from './dialog-utils/dialog-ref';
+import { DialogRef } from './dialog-utils/dialog-ref.class';
 
 @Component({
     template: `
@@ -57,7 +57,6 @@ describe('DialogComponent', () => {
     it('should generate component', () => {
         spyOn<any>(component, 'loadFromComponent').and.callThrough();
         component.childComponentType = TemplateTestComponent;
-        component.ngOnInit();
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
@@ -67,7 +66,6 @@ describe('DialogComponent', () => {
     it('should generate template', () => {
         spyOn<any>(component, 'loadFromTemplate').and.callThrough();
         component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        component.ngOnInit();
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
@@ -76,7 +74,6 @@ describe('DialogComponent', () => {
 
     it('should close after esc pressed', () => {
         component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
-        component.ngOnInit();
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();

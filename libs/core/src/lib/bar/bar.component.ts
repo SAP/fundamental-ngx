@@ -85,7 +85,7 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
             this._inPage && this._size ? `fd-bar--page-${this._size}` : '',
             this._inHomePage && !this._size ? 'fd-bar--home-page' : '',
             this._inHomePage && this._size ? `fd-bar--home-page-${this._size}` : '',
-            this.class
+            this._class
         ].filter(x => x !== '').join(' ');
     }
 
@@ -100,12 +100,12 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

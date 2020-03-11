@@ -26,5 +26,5 @@ import { DialogRef } from '@fundamental-ngx/core';
 })
 export class ModalContentComponent {
 
-    constructor(public modalRef: DialogRef)  {}
+    constructor(public modalRef: DialogRef) {}
 }

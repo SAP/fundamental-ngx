@@ -1,4 +1,4 @@
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 /**
  * Reference to a dialog component generated via the DialogService.
@@ -7,12 +7,16 @@ import { Observable, Subject } from 'rxjs';
  */
 export class DialogRef {
     private readonly _afterClosed = new Subject<any>();
+    private readonly _onHide = new BehaviorSubject<boolean>(false);
 
     /**
      * Observable that is triggered when the dialog is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.
      */
     public afterClosed: Observable<any> = this._afterClosed.asObservable();
+
+    /** Observable that is triggered whenever the dialog should be visually hidden or visible.*/
+    public onHide: Observable<boolean> = this._onHide.asObservable();
 
     /** Data passed from the calling component to the content.*/
     public data: any;
@@ -32,5 +36,13 @@ export class DialogRef {
      */
     dismiss(reason?: any): void {
         this._afterClosed.error(reason);
+    }
+
+    /**
+     * Visually hides the dialog.
+     * @param visible Value used to determine if dialog window should be hidden or visible.
+     */
+    hide(visible: boolean): void {
+        this._onHide.next(visible);
     }
 }

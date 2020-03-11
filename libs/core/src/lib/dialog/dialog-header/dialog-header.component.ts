@@ -3,7 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChildren,
+    ContentChildren, ElementRef, Input,
     QueryList,
     TemplateRef
 } from '@angular/core';
@@ -26,14 +26,24 @@ import { TemplateDirective } from '../../utils/directives';
 })
 export class DialogHeaderComponent implements AfterContentInit {
 
+    @Input()
+    mobile: boolean = false;
+
+    @Input()
+    draggable: boolean = false;
+
     headerTemplate: TemplateRef<any>;
+
     subHeaderTemplate: TemplateRef<any>;
+
 
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef,
+                private _elementRef: ElementRef) {
+    }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this._assignCustomTemplates();
     }
 

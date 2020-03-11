@@ -8,10 +8,10 @@
         This action is permanent and cannot be undone. Do you wish to continue?
     </fd-dialog-body>
     <fd-dialog-footer>
-        <button class="action-button" fd-button [fdType]="'transparent'" (click)="modal.dismiss('cancel')" >
+        <button class="action-button" fd-button fd-dialog-decisive-btn [fdType]="'transparent'" (click)="modal.dismiss('cancel')">
             Cancel
         </button>
-        <button class="action-button" fd-button (click)="modal.close('continue')" [fdType]="'emphasized'">
+        <button class="action-button" fd-button fd-dialog-decisive-btn [fdType]="'emphasized'" (click)="modal.close('continue')">
             Continue
         </button>
     </fd-dialog-footer>

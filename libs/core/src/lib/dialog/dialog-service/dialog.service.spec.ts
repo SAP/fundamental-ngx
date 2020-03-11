@@ -6,7 +6,7 @@ import { DialogService } from './dialog.service';
 import { DialogModule } from '../dialog.module';
 import { TestBed } from '@angular/core/testing';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { DialogRef } from '../dialog-utils/dialog-ref';
+import { DialogRef } from '../dialog-utils/dialog-ref.class';
 
 @Component({
     template: `
@@ -50,7 +50,6 @@ describe('DialogService', () => {
         const modalRef: DialogRef = service.open(fixtureElTmp);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].containerRef).toBeTruthy();
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         modalRef.dismiss();
@@ -65,7 +64,6 @@ describe('DialogService', () => {
         const modalRef: DialogRef = service.open(TemplateTestComponent);
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].containerRef).toBeTruthy();
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         modalRef.dismiss();
@@ -80,7 +78,6 @@ describe('DialogService', () => {
         const modalRef: DialogRef = service.open(TemplateTestComponent, {hasBackdrop: false});
         expect(service['modals'].length).toBe(1);
         expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].containerRef).toBeTruthy();
         expect(service['modals'][0].backdropRef).toBeFalsy();
 
         modalRef.dismiss();
@@ -136,7 +133,6 @@ describe('DialogService', () => {
         expect(service.hasOpenModals()).toBeTruthy();
 
         expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].containerRef).toBeTruthy();
         expect(service['modals'][0].backdropRef).toBeTruthy();
 
         service['modals'][0].backdropRef.location.nativeElement.click();

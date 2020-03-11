@@ -1,11 +1,5 @@
-<div class="fd-dialog__content" role="document">
+<ng-container #contentContainer></ng-container>
 
-    <ng-content select="fd-dialog-header"></ng-content>
-    <ng-content select="fd-dialog-body"></ng-content>
-    <ng-content select="fd-dialog-footer"></ng-content>
-    <ng-container #vc></ng-container>
-    <ng-content></ng-content>
+<ng-content></ng-content>
 
-    <span *ngIf="true" class="fd-dialog__resize-handle"></span>
-
-</div>
+<span *ngIf="true" class="fd-dialog__resize-handle"></span>

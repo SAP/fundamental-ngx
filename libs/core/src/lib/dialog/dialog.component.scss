@@ -1,33 +1,40 @@
 @import "~fundamental-styles/dist/dialog";
 
-//TODO evaluate whether this should go to fd-styles
-//.fd-modal-custom {
-//    max-width: none;
-//    left: 50%;
-//    top: 50%;
-//    transform: translate(-50%, -50%);
-//    position: absolute;
-//
-//    z-index: 1000;
-//    max-height: 100vh;
-//
-//    &:focus {
-//        outline: none;
-//    }
-//
-//}
-//
-//.fd-modal__content--overrides {
-//    height: 100%;
-//    width: 100%;
-//    min-height: inherit;
-//    min-width: inherit;
-//    max-height: inherit;
-//    max-width: inherit;
-//    display: flex;
-//    flex-direction: column;
-//}
-//
-//.fd-modal__body {
-//    max-height: none;
-//}
+.fd-dialog {
+    z-index: 1000;
+
+    &--active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.fd-dialog__header {
+    position: relative;
+}
+
+.fd-dialog__resize-handle {
+    z-index: 10;
+}
+
+.fd-dialog__content {
+    outline: none;
+    position: absolute;
+    transform: initial;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+}
+
+.fd-dialog__content--component {
+    @extend .fd-dialog__content;
+    position: relative;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    min-width: inherit;
+    max-height: inherit;
+    min-height: inherit;
+}

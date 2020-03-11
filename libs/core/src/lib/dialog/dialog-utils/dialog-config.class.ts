@@ -1,10 +1,10 @@
 /**
  * Configuration for opening a dialog with the DialogService.
  */
-import { DialogPosition } from './dialog-position';
+import { DialogPosition } from './dialog-position.class';
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
 
-export class DialogConfig implements DynamicComponentConfig {
+export class DialogConfigClass implements DynamicComponentConfig {
 
     /** Id for the dialog component. If omitted, a unique one is generated. */
     id?: string;

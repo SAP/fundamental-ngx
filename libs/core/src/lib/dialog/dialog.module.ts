@@ -9,12 +9,16 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 
 import { DialogService } from './dialog-service/dialog.service';
-import { DialogBackdrop } from './dialog-utils/dialog-backdrop';
-import { DialogContainer } from './dialog-utils/dialog-container';
-import { DialogCloseButtonDirective, DialogTitleDirective } from './dialog-utils/dialog-directives';
+import { DialogOverlay } from './dialog-utils/dialog-overlay.component';
+import {
+    DialogCloseButtonDirective,
+    DialogDecisiveButtonDirective,
+    DialogTitleDirective
+} from './dialog-utils/dialog-directives';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { TemplateDirective } from '../utils/directives';
 import { BarModule } from '../bar/bar.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -23,12 +27,13 @@ import { BarModule } from '../bar/bar.module';
         DialogHeaderComponent,
         DialogBodyComponent,
         DialogFooterComponent,
-        DialogBackdrop,
-        DialogContainer,
+        DialogOverlay,
         DialogCloseButtonDirective,
-        DialogTitleDirective
+        DialogTitleDirective,
+        DialogDecisiveButtonDirective
     ],
     imports: [
+        DragDropModule,
         BarModule,
         CommonModule,
         ButtonModule,
@@ -36,19 +41,19 @@ import { BarModule } from '../bar/bar.module';
     ],
     exports: [
         BarModule,
+        DialogComponent,
         TemplateDirective,
         DialogHeaderComponent,
         DialogBodyComponent,
         DialogFooterComponent,
-        DialogBackdrop,
-        DialogContainer,
+        DialogOverlay,
         DialogCloseButtonDirective,
-        DialogTitleDirective
+        DialogTitleDirective,
+        DialogDecisiveButtonDirective
     ],
     entryComponents: [
         DialogComponent,
-        DialogBackdrop,
-        DialogContainer
+        DialogOverlay
     ],
     providers: [DialogService, DynamicComponentService]
 })
