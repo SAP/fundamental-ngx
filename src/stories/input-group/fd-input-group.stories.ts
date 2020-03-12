@@ -22,15 +22,13 @@ export default {
 export const InputGroup = () => ({
     template:
         `
-        <template><h1>template ref</h1></template>
         <label fd-form-label>Input Group</label>
         <fd-input-group 
         [placement]="placementVar"
         [addOnText]="addOnTextVar" 
-        [placeholder]="placeholderVar"
+        [placeholder]="placeholder"
         [compact]="compactVar"
         [inline]="inlineVar"
-        [inputTemplate]="inputTemplateVar"
         [buttonFocusable]="buttonFocusable"
         [buttonType]="buttonTypeVar"
         [buttonOptions]="buttonOptionsVar"
