@@ -22,6 +22,7 @@
                     'fd-button--noborder': selectType === 'noborder',
                     'fd-button--splitborder': selectType === 'splitborder'
                 }"
+                type="button"
             >
                 <fd-icon *ngIf="glyph" size="m" [glyph]="glyph" class="fd-template-icon icon-position"> </fd-icon>
                 <span class="fd-select-text-custom" [dir]="dir$ | async">{{ triggerValue }}</span>
