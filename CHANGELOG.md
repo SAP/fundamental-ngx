@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.4"></a>
+# [0.16.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.3...v0.16.0-rc.4) (2020-03-12)
+
+
+### Bug Fixes
+
+* add type button to input group and select ([#2154](https://github.com/SAP/fundamental-ngx/issues/2154)) ([d5c48db](https://github.com/SAP/fundamental-ngx/commit/d5c48db))
+
+
+
 <a name="0.16.0-rc.3"></a>
 # [0.16.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.2...v0.16.0-rc.3) (2020-03-12)
 
