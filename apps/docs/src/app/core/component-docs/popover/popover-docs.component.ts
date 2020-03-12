@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import * as popoverSrc from '!raw-loader!./examples/popover-simple/popover-example.component.html';
 import * as popoverSrcScss from '!raw-loader!./examples/popover-simple/popover-example.component.scss';
 import * as popoverSrcTs from '!raw-loader!./examples/popover-simple/popover-example.component.ts';
+import * as popoverComplexSrc from '!raw-loader!./examples/popover-complex-example/popover-complex-example.component.html';
+import * as popoverComplexSrcTs from '!raw-loader!./examples/popover-complex-example/popover-complex-example.component.ts';
 import * as popoverProgrammaticHtmlSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.html';
 import * as popoverProgrammaticScssSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.scss';
 import * as popoverProgrammaticTsSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.ts';
@@ -31,6 +33,17 @@ export class PopoverDocsComponent {
             fileName: 'popover-example',
             typescriptFileCode: popoverSrcTs,
             component: 'PopoverExampleComponent',
+            scssFileCode: popoverSrcScss
+        }
+    ];
+
+    popoverComplex: ExampleFile[] = [
+        {
+            language: 'html',
+            code: popoverComplexSrc,
+            fileName: 'popover-complex-example',
+            typescriptFileCode: popoverComplexSrcTs,
+            component: 'PopoverComplexExampleComponent',
             scssFileCode: popoverSrcScss
         }
     ];
