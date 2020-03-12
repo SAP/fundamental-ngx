@@ -80,9 +80,9 @@
                             "aot": true,
                             "extractCss": true,
                             "sourceMap": false,
-                            "namedChunks": true,
-                            "vendorChunk": true,
-                            "optimization": true
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "optimization": false
                         },
                         "hmr": {
                             "budgets": [
