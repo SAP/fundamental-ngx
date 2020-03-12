@@ -55,7 +55,7 @@ export const Bar = () => ({
                 </fd-bar-element>
             </div>
             <div fd-bar-middle *ngIf="showMiddle">
-                <fd-bar-element>
+                <fd-bar-element [fullWidth]="fullwidthVar">
                     <button fd-button 
                         [glyph]="'basket'">btn
                     </button>
@@ -91,5 +91,6 @@ export const Bar = () => ({
         inHomePage: boolean('In Home Page', true),
         inPage: boolean('In Page', true),
         size: select('Size', sizes, 's'),
+        fullwidthVar: boolean('Full width element', true),
     }
 });

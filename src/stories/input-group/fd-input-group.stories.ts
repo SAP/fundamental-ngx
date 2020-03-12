@@ -1,13 +1,13 @@
 import { moduleMetadata } from '@storybook/angular';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { InputGroupComponent, InputGroupModule } from 'libs/core/src/lib/input-group/public_api';
+import { InputGroupComponent, InputGroupNumberComponent, InputGroupModule } from 'libs/core/src/lib/input-group/public_api';
 
 export default {
     title: 'Fd input-group',
-    component: InputGroupComponent,
+    component: InputGroupNumberComponent, InputGroupComponent,
     moduleMetadata: moduleMetadata,
     decorators: [
         withKnobs,
@@ -18,6 +18,29 @@ export default {
         })
     ]
 };
+
+export const InputGroupNumber = () => ({
+    template:
+        `
+        <label fd-form-label>Input Group</label>
+        <fd-input-group-number 
+        [placeholder]="placeholderVar"
+        [disabled]="disabledVar"
+        [stepDownLabel]="stepDownLabel"
+        [stepUpLabel]="stepUpLabel"
+        [(ngModel)]="number"
+        ></fd-input-group-number>
+  `,
+    props: {
+        placeholderVar: text('Placeholder', 'Choose a number'),
+        disabledVar: boolean('Disabled', false),
+        stepDownLabel: text('Step down aria label', 'step-down'),
+        stepUpLabel: text('Step up aria label', 'step-up'),
+        number: number('Number', 0),
+
+    }
+});
+
 
 export const InputGroup = () => ({
     template:

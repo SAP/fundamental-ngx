@@ -27,7 +27,7 @@ export const Switch = () => ({
             id="sb-switch-1"
             [ariaLabel]="optionalText"
             [ariaLabelledby]="optionalText"
-            [(ngModel)]="switchValue1" 
+            [(ngModel)]="checked" 
             [optionalText]="optionalText"
             [checked]="checked"
             [semantic]="semantic"
@@ -37,7 +37,6 @@ export const Switch = () => ({
         </fd-switch>
   `,
     props: {
-        switchValue1: boolean('Switched', false),
         ariaLabel: text('Aria Label', ariaLabelConst),
         id: text('Id', '0123'),
         optionalText: boolean('Optional Text', false),
