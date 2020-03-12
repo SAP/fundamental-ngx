@@ -1,6 +1,6 @@
 import { moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text, radios, array } from '@storybook/addon-knobs';
+import { withKnobs, text, radios, array, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -40,6 +40,7 @@ export const NgModel = () => ({
         [state]="state"
         [value]="value"
         [name]="name"
+        [compact]="compactVar"
         [(ngModel)]="model">
           Option {{ value }}
     </fd-radio-button>
@@ -48,6 +49,7 @@ export const NgModel = () => ({
   props: {
     model: text('[(ngModel)]', '1'),
     name: 'radio-buttons-ngmodel',
+    compactVar: boolean('Compact', false),
     state: radios('state', stateOptions, stateDefaultValue),
     radioButtonValues: array('radioButtonValues', [...radioValues]),
     onClick: (value: string) => action('radio button clicked')(value)

@@ -1,7 +1,7 @@
 import { moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean, select, text, object } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import { ProductSwitchComponent, ProductSwitchItem, ProductSwitchModule } from 'libs/core/src/lib/product-switch/public_api';
+import { ProductSwitchComponent, ProductSwitchModule } from 'libs/core/src/lib/product-switch/public_api';
 
 export default {
     title: 'Fd product-switch',

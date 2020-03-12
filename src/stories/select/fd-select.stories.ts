@@ -33,6 +33,7 @@ export const Select = () => ({
         [placeholder]="placeholderVar"
         [fillControlMode]="fillControlModeVar"
         [selectType]="selectTypeVar"
+        [value]="valueVar"
         >
         <div *ngFor="let value of values">
             <fd-option id="value"  role="button" value="value">{{ value }}</fd-option>
@@ -62,6 +63,7 @@ export const Select = () => ({
         values: object('Objects',
             ['value1', 'value2', 'value3', 'value4']
         ),
+        valueVar: text('Value', 'value1'),
 
     }
 });

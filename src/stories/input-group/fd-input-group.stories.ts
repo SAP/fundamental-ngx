@@ -22,13 +22,15 @@ export default {
 export const InputGroup = () => ({
     template:
         `
+        <template><h1>template ref</h1></template>
         <label fd-form-label>Input Group</label>
         <fd-input-group 
         [placement]="placementVar"
         [addOnText]="addOnTextVar" 
-        [placeholder]="placeholder"
+        [placeholder]="placeholderVar"
         [compact]="compactVar"
         [inline]="inlineVar"
+        [inputTemplate]="inputTemplateVar"
         [buttonFocusable]="buttonFocusable"
         [buttonType]="buttonTypeVar"
         [buttonOptions]="buttonOptionsVar"
@@ -67,6 +69,7 @@ export const InputGroup = () => ({
         glyphVar: text('Glyph', ''),
         buttonFocusableVar: boolean('Button Focusable', true),
         buttonVar: boolean('Add on is Button', false),
+        disabledVar: boolean('Disabled', false),
 
     }
 });

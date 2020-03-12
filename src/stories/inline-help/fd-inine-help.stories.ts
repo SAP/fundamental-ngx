@@ -1,5 +1,5 @@
 import { moduleMetadata } from '@storybook/angular';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text, object } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -23,7 +23,12 @@ export const InlineHelp = () => ({
     template:
         `<div style="display:flex;align-items:center;justify-content:center;margin-top:10%;">
         Inline Help
-            <fd-inline-help style="margin-left:2px;" [placement]="placementVar">{{textValue}}</fd-inline-help>
+            <fd-inline-help style="margin-left:2px;" [placement]="placementVar"
+            [inlineHelpContentStyle]="inlineHelpContentStyleVar"
+            [inlineHelpIconStyle]="inlineHelpIconStyleVar"
+            [triggers]="triggersVar">
+            {{textValue}}
+            </fd-inline-help>
         </div>
   `,
     props: {
@@ -39,6 +44,9 @@ export const InlineHelp = () => ({
 
         }, 'bottom-start'),
         textValue: text('Text Value 6', 'Lorem ipsum'),
+        inlineHelpContentStyleVar: object('Inline help paragraph style', { 'width': '250px', 'min-width': '250px', 'overflow': 'hidden', 'text-overflow': 'ellipsis', 'color': 'red' }),
+        inlineHelpIconStyleVar: object('Inline help icon style', { 'background-color': 'black' }),
+        triggersVar: object('Triggers', ['click'])
 
     }
 });

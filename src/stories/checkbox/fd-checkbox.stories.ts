@@ -1,5 +1,5 @@
 import { moduleMetadata } from '@storybook/angular';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text, object } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -30,6 +30,7 @@ export const Checkbox = () => ({
     template:
         `
         <fd-checkbox [(ngModel)]="checkboxValue1" 
+            [values]="valuesVar"
             [state]="state"
             [label]="label"
             [name]="name"
@@ -48,5 +49,6 @@ export const Checkbox = () => ({
         compact: boolean('compact', false),
         tristate: boolean('tristate', false),
         tristateSelectable: boolean('tristateSelectable', false),
-    }
+        valuesVar: object('Values', ["null", "true", "false"])
+    },
 });

@@ -1,5 +1,5 @@
 import { moduleMetadata } from '@storybook/angular';
-import { withKnobs, number } from '@storybook/addon-knobs';
+import { withKnobs, number, text, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import { PaginationComponent, PaginationModule } from 'libs/core/src/lib/pagination/public_api';
@@ -23,12 +23,21 @@ export const Pagination = () => ({
         `
         <fd-pagination [totalItems]="totalItems" (pageChangeStart)="newPageClicked($event)" 
                        [itemsPerPage]="itemsPerPage"
-                       [currentPage]="currentPage"></fd-pagination>
+                       [currentPage]="currentPage"
+                       [displayText]="displayTextVar"
+                       [nextLabel]="nextLabelVar"
+                       [previousLabel]="prevLabelVar"
+                       [displayTotalItems]="displayTotalItemsVar"></fd-pagination>
   `,
     props: {
-        totalItems: number('totalItems', 50),
-        itemsPerPage: number('itemsPerPage', 10),
-        currentPage: number('currentPage', 3),
+        totalItems: number('Total Items', 50),
+        itemsPerPage: number('Items Per page', 10),
+        currentPage: number('Current PAge', 3),
+        displayTextVar: text('Text appended', 'items'),
+        nextLabelVar: text('Next Aria Page Label', 'Next'),
+        prevLabelVar: text('Prev Aria Page Label', 'Next'),
+        displayTotalItemsVar: boolean('Display total number of items', false),
+
         newPageClicked: (event: number) => {
             alert('Page ' + event + ' clicked!');
         }
