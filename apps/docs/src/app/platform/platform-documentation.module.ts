@@ -52,6 +52,8 @@ import { PlatformMenuScrollingExampleComponent } from './component-docs/platform
 import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
 import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-search-field/platform-search-field-header/platform-search-field-header.component';
 import { PlatformSearchFieldBasicExampleComponent } from './component-docs/platform-search-field/platform-search-field-examples/platform-search-field-basic-example.component';
+import { PlatformSearchFieldCategoriesExampleComponent } from './component-docs/platform-search-field/platform-search-field-examples/platform-search-field-categories-example.component';
+import { PlatformSearchFieldDataSourceExampleComponent } from './component-docs/platform-search-field/platform-search-field-examples/platform-search-field-data-source-example.component';
 
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
@@ -105,6 +107,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformSearchFieldDocsComponent,
         PlatformSearchFieldHeaderComponent,
         PlatformSearchFieldBasicExampleComponent,
+        PlatformSearchFieldCategoriesExampleComponent,
+        PlatformSearchFieldDataSourceExampleComponent,
         PlatformSelectDocsComponent,
         PlatformSelectHeaderComponent,
         PlatformSelectTypesDefaultExampleComponent,
