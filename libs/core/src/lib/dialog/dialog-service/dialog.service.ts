@@ -1,7 +1,7 @@
-import { ComponentRef, Inject, Injectable, Optional, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DialogComponent } from '../dialog.component';
 import { DialogOverlay } from '../dialog-utils/dialog-overlay.component';
-import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 import { DialogPosition } from '../dialog-utils/dialog-position.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { DialogRef } from '../dialog-utils/dialog-ref.class';
@@ -16,7 +16,6 @@ export class DialogService {
         backdropRef?: ComponentRef<DialogOverlay>,
     }[] = [];
 
-    /** @hidden */
     constructor(
         @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig
@@ -42,23 +41,32 @@ export class DialogService {
      */
     public open(contentType: Type<any> | TemplateRef<any>, dialogConfig?: DialogConfig): DialogRef {
 
-        const dialogRef: DialogRef = new DialogRef();
 
-        dialogRef.data = dialogConfig.data;
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
 
+        const dialogRef: DialogRef = new DialogRef();
+        dialogRef.data = dialogConfig.data;
+
+        const overlayInjector = Injector.create({providers: [{provide: DIALOG_CONFIG, useValue: dialogConfig}]});
         const backdrop: ComponentRef<DialogOverlay> = this._dynamicComponentService.createDynamicComponent<DialogOverlay>(
             contentType,
             DialogOverlay,
             dialogConfig,
-            [dialogRef, dialogConfig]
+            {
+                injector: overlayInjector,
+                services: [dialogRef]
+            }
         );
 
+        const dialogInjector = Injector.create({providers: [], parent: overlayInjector});
         const component = this._dynamicComponentService.createDynamicComponent<DialogComponent>(
             contentType,
             DialogComponent,
             {...dialogConfig, container: backdrop.location.nativeElement},
-            [dialogRef, dialogConfig]
+            {
+                injector: dialogInjector,
+                services: [dialogRef]
+            }
         );
 
         this._setDialogSize(component, dialogConfig);

@@ -6,7 +6,7 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    HostListener,
+    HostListener, Inject, Injector,
     OnDestroy,
     TemplateRef,
     Type,
@@ -17,7 +17,7 @@ import {
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { dialogFadeNgIf } from './dialog-utils/dialog.animations';
 import { DialogRef } from './dialog-utils/dialog-ref.class';
-import { DialogConfig } from './dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from './dialog-utils/dialog-config.class';
 
 @Component({
     selector: 'fd-dialog',
@@ -56,7 +56,8 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
     private _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     constructor(
-        public dialogConfig: DialogConfig,
+        @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        private _injector: Injector,
         private _dialogRef: DialogRef,
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,

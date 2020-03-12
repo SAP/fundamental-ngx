@@ -30,7 +30,7 @@ export class DialogHeaderComponent implements AfterContentInit {
     mobile: boolean = false;
 
     @Input()
-    draggable: boolean = false;
+    draggable: boolean = true;
 
     headerTemplate: TemplateRef<any>;
 

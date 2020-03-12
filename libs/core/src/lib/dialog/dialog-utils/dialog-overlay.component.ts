@@ -1,8 +1,16 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    HostListener,
+    Inject,
+    OnDestroy,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { dialogFadeNgIf } from './dialog.animations';
 import { DialogRef } from './dialog-ref.class';
 import { Subscription } from 'rxjs';
-import { DialogConfig } from './dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from './dialog-config.class';
 
 @Component({
     selector: 'fd-dialog-overlay',
@@ -29,7 +37,7 @@ export class DialogOverlay implements OnInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     constructor(
-        public dialogConfig: DialogConfig,
+        @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         private _dialogRef: DialogRef,
         private _elementRef: ElementRef) {
     }

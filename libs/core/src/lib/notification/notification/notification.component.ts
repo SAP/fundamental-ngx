@@ -20,6 +20,7 @@ import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationDefault } from '../notification-utils/notification-default';
 import { DefaultNotificationComponent } from '../notification-utils/default-notification/default-notification.component';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { NotificationConfig } from '../../..';
 
 export type NotificationType = 'success' | 'warning' | 'information' | 'error';
 export type NotificationSize = 's' | 'm';
@@ -30,10 +31,10 @@ export type NotificationSize = 's' | 'm';
     styleUrls: ['./notification.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
-        '[attr.aria-label]': 'ariaLabel',
-        'role': 'notification',
-        '[attr.id]': 'id',
+        '[attr.aria-labelledby]': 'notificationConfig.ariaLabelledBy',
+        '[attr.aria-label]': 'notificationConfig.ariaLabel',
+        '[attr.id]': 'notificationConfig.id',
+        'role': 'notification'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -47,38 +48,20 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
     @Input()
     type: NotificationType;
 
-    @ViewChild('vc', { read: ViewContainerRef })
+    @ViewChild('vc', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
-    id: string;
-
-    escKeyCloseable: boolean = true;
-
-    focusTrapped: boolean = true;
-
-    ariaLabelledBy: string = null;
-
-    defaultNotificationConfiguration: NotificationDefault;
-
-    ariaLabel: string = null;
-
-    ariaDescribedBy: string = null;
-
-    childContent: TemplateRef<any> | Type<any> | NotificationDefault;
-
-    backdropClickCloseable: boolean = true;
-
-    hasBackdrop: boolean = true;
-
-    notificationPanelClass: string = '';
+    childContent: TemplateRef<any> | Type<any> | NotificationDefault = undefined;
 
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
-                @Optional() private notificationRef: NotificationRef) {
+                @Optional() private notificationRef: NotificationRef,
+                @Optional() public notificationConfig: NotificationConfig) {
         super(elRef);
+        this._initialiseWithNotificationConfig();
     }
 
     ngAfterViewInit(): void {
@@ -96,7 +79,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     @HostListener('keyup', ['$event'])
     closeNotificationEsc(event: KeyboardEvent): void {
-        if (this.escKeyCloseable && event.key === 'Escape') {
+        if (this.notificationConfig.escKeyCloseable && event.key === 'Escape') {
             this.notificationRef.dismiss('escape');
         }
     }
@@ -134,6 +117,15 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
             this._addClassToElement('fd-notification--' + this.size);
         }
 
+        if (this.notificationConfig && this.notificationConfig.notificationPanelClass) {
+            this._addClassToElement(this.notificationConfig.notificationPanelClass);
+        }
     }
 
+    private _initialiseWithNotificationConfig(): void {
+        this.notificationConfig = this.notificationConfig || new NotificationConfig();
+
+        this.size = this.notificationConfig.size;
+        this.type = this.notificationConfig.type;
+    }
 }

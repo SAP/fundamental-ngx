@@ -19,6 +19,7 @@ import {
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import { AlertRef } from './alert-utils/alert-ref';
+import { AlertConfig } from './alert-utils/alert-config';
 
 let alertUniqueId: number = 0;
 
@@ -48,8 +49,12 @@ let alertUniqueId: number = 0;
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
     /** @hidden */
-    @ViewChild('container', { read: ViewContainerRef })
+    @ViewChild('container', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
+
+    /** Whether the alert is displayed inline. */
+    @Input()
+    inline: boolean = false;
 
     /** Whether the alert is dismissible. */
     @Input()
@@ -106,20 +111,22 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    childContent: Type<any> | TemplateRef<any> | string;
+    childContent: Type<any> | TemplateRef<any> | string = undefined;
 
     /** @hidden */
-    constructor(private elRef: ElementRef,
-                private cdRef: ChangeDetectorRef,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private ngZone: NgZone,
-                @Optional() private alertRef: AlertRef) {
-        super(elRef);
+    constructor(private _ngZone: NgZone,
+                private _elRef: ElementRef,
+                private _changeDetectorRef: ChangeDetectorRef,
+                private _componentFactoryResolver: ComponentFactoryResolver,
+                @Optional() private _alertRef: AlertRef,
+                @Optional() public alertConfig: AlertConfig) {
+        super(_elRef);
+        this._initialiseWithAlertConfig();
     }
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.alertRef) {
+        if (this._alertRef) {
             this.open();
         }
         this._setProperties();
@@ -135,7 +142,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
             } else {
                 this.loadFromString(this.childContent);
             }
-            this.cdRef.detectChanges();
+            this._changeDetectorRef.detectChanges();
         }
     }
 
@@ -149,14 +156,14 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
      */
     dismiss(reason?: any, manualDismiss: boolean = false): void {
         if (manualDismiss) {
-            this.elRef.nativeElement.classList.add('fd-has-display-none');
-            this.elRef.nativeElement.classList.remove('fd-has-display-block');
+            this._elRef.nativeElement.classList.add('fd-has-display-none');
+            this._elRef.nativeElement.classList.remove('fd-has-display-block');
         }
-        if (this.alertRef) {
-            this.alertRef.dismiss(reason);
+        if (this._alertRef) {
+            this._alertRef.dismiss(reason);
         } else {
-            this.elRef.nativeElement.classList.add('fd-has-display-none');
-            this.elRef.nativeElement.classList.remove('fd-has-display-block');
+            this._elRef.nativeElement.classList.add('fd-has-display-none');
+            this._elRef.nativeElement.classList.remove('fd-has-display-block');
         }
         this.onDismiss.emit();
     }
@@ -165,28 +172,28 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
      * Opens the alert.
      */
     open(): void {
-        if (!this.alertRef) {
-            if (this.elRef.nativeElement.style.display === 'block') {
+        if (!this._alertRef) {
+            if (this._elRef.nativeElement.style.display === 'block') {
                 return;
             }
-            this.elRef.nativeElement.classList.remove('fd-has-display-none');
-            this.elRef.nativeElement.classList.add('fd-has-display-block');
+            this._elRef.nativeElement.classList.remove('fd-has-display-none');
+            this._elRef.nativeElement.classList.add('fd-has-display-block');
         }
 
         if (this.duration >= 0) {
-            this.ngZone.runOutsideAngular(() => {
+            this._ngZone.runOutsideAngular(() => {
                 setTimeout(() => {
                     if (this.mousePersist) {
                         const wait = () => {
                             if (this.mouseInAlert === true) {
                                 setTimeout(wait, 500);
                             } else {
-                                this.ngZone.run(() => this.dismiss());
+                                this._ngZone.run(() => this.dismiss());
                             }
                         };
                         wait();
                     } else {
-                        this.ngZone.run(() => this.dismiss());
+                        this._ngZone.run(() => this.dismiss());
                     }
                 }, this.duration);
             });
@@ -216,14 +223,12 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     }
 
     private loadFromTemplate(template: TemplateRef<any>): void {
-        const context = {
-            $implicit: this.alertRef
-        };
+        const context = {$implicit: this._alertRef};
         this.componentRef = this.containerRef.createEmbeddedView(template, context);
     }
 
     private loadFromComponent(componentType: Type<any>): void {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
         this.containerRef.clear();
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
@@ -233,4 +238,19 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.message = contentString;
     }
 
+    private _initialiseWithAlertConfig(): void {
+        if (!this.inline) {
+            this.alertConfig = this.alertConfig || new AlertConfig();
+
+            this.id = this.alertConfig.id;
+            this.type = this.alertConfig.type;
+            this.width = this.alertConfig.width;
+            this.minWidth = this.alertConfig.minWidth;
+            this.duration = this.alertConfig.duration;
+            this.ariaLabel = this.alertConfig.ariaLabel;
+            this.dismissible = this.alertConfig.dismissible;
+            this.mousePersist = this.alertConfig.mousePersist;
+            this.ariaLabelledBy = this.alertConfig.ariaLabelledBy;
+        }
+    }
 }

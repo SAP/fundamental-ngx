@@ -2,6 +2,9 @@
  * Configuration for opening an alert with the AlertService.
  */
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
+import { InjectionToken } from '@angular/core';
+
+export const ALERT_DEFAULT_CONFIG = new InjectionToken<string[]>('AlertConfig');
 
 export class AlertConfig implements DynamicComponentConfig {
 

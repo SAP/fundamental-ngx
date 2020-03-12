@@ -29,17 +29,18 @@ export class DynamicComponentService {
      * @param content Type of the component content
      * @param componentType Type of component that should be rendered.
      * @param config Configuration that will be passed to the component.
-     * @param services Services that will be injected to the component.
+     * @param inject  enables to provide preconfigured component injector and dependencies
      */
     public createDynamicComponent<T>(
         content: TemplateRef<any> | Type<any> | string | Object,
         componentType: Type<T>,
         config: DynamicComponentConfig,
-        services?: any[]
+        inject: { injector?: Injector, services?: any[] } = {}
     ): ComponentRef<T> {
 
+        const {injector, services} = inject;
         const dependenciesMap = this._createDependencyMap(services);
-        const componentRef = this._createComponent<T>(componentType, dependenciesMap);
+        const componentRef = this._createComponent<T>(componentType, dependenciesMap, injector);
         this._passExternalContent<T>(componentRef, content);
         this._attachToContainer<T>(componentRef, config);
 
@@ -68,9 +69,10 @@ export class DynamicComponentService {
         }
     }
 
-    private _createComponent<V>(componentType: Type<V>, dependenciesMap: WeakMap<any, any>): ComponentRef<V> {
+    private _createComponent<V>(componentType: Type<V>, dependenciesMap: WeakMap<any, any>, injector: Injector): ComponentRef<V> {
+        const dynamicComponentInjector = new DynamicComponentInjector(injector || this._injector, dependenciesMap);
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
-        const componentRef = componentFactory.create(new DynamicComponentInjector(this._injector, dependenciesMap));
+        const componentRef = componentFactory.create(dynamicComponentInjector);
         this._applicationRef.attachView(componentRef.hostView);
         return componentRef;
     }

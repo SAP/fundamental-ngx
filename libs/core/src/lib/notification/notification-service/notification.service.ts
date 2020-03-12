@@ -1,7 +1,7 @@
-import { ComponentRef, Injectable, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Inject, Injectable, Optional, TemplateRef, Type } from '@angular/core';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
-import { NotificationConfig } from '../notification-utils/notification-config';
+import { NOTIFICATION_DEFAULT_CONFIG, NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { NotificationGroupComponent } from '../notification-group/notification-group.component';
@@ -18,7 +18,8 @@ export class NotificationService {
 
 
     constructor(
-        private dynamicComponentService: DynamicComponentService
+        private dynamicComponentService: DynamicComponentService,
+        @Optional() @Inject(NOTIFICATION_DEFAULT_CONFIG) private _defaultConfig: NotificationConfig
     ) {}
 
     /**
@@ -29,13 +30,13 @@ export class NotificationService {
      */
     public open(
         content: TemplateRef<any> | Type<any> | NotificationDefault,
-        notificationConfig: NotificationConfig = new NotificationConfig(),
+        notificationConfig?: NotificationConfig,
         notificationGroup?: ComponentRef<NotificationGroupComponent>
     ): NotificationRef {
 
         // Reassigning Object And Service
         const notificationService: NotificationRef = new NotificationRef();
-        notificationConfig = Object.assign(new NotificationConfig(), notificationConfig);
+        notificationConfig = this._applyDefaultConfig(notificationConfig, this._defaultConfig || new NotificationConfig())
         notificationService.data = notificationConfig.data;
         if (notificationService.data) {
             notificationService.data.type = notificationConfig.type;
@@ -59,7 +60,7 @@ export class NotificationService {
                 content,
                 NotificationComponent,
                 notificationConfig,
-                [notificationService]
+                {services: [notificationService, notificationConfig]}
             );
 
             // Add To array
@@ -74,12 +75,12 @@ export class NotificationService {
                 content,
                 NotificationComponent,
                 notificationConfig,
-                [notificationService]
+                {services: [notificationService, notificationConfig]}
             );
 
             // Add To array
             this.notifications.push({
-                notificationComponent: notificationComponentRef,
+                notificationComponent: notificationComponentRef
             });
         }
 
@@ -95,13 +96,10 @@ export class NotificationService {
             refSub.unsubscribe();
         };
 
-        const refSub = notificationService.afterClosed
-            .subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose)
-        ;
+        const refSub = notificationService.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
 
         const refGroupSub = notificationService.afterClosedGroup
-            .subscribe(defaultBehaviourOnGroupClose, defaultBehaviourOnGroupClose)
-        ;
+            .subscribe(defaultBehaviourOnGroupClose, defaultBehaviourOnGroupClose);
 
         return notificationService;
     }
@@ -119,8 +117,8 @@ export class NotificationService {
     }
 
     /** Method to create Notification Group */
-    public createNotificationGroup (
-        notificationConfig: NotificationConfig = new NotificationConfig(),
+    public createNotificationGroup(
+        notificationConfig: NotificationConfig = new NotificationConfig()
     ): ComponentRef<NotificationGroupComponent> {
 
         // Reassign Config Object
@@ -139,8 +137,7 @@ export class NotificationService {
 
         // Create and return notification Group component reference
         return this.dynamicComponentService.createDynamicComponent
-            <NotificationGroupComponent>(null, NotificationGroupComponent, notificationConfig)
-        ;
+            < NotificationGroupComponent > (null, NotificationGroupComponent, notificationConfig);
     }
 
     private destroyWholeGroup(notification: ComponentRef<NotificationComponent>): void {
@@ -189,5 +186,13 @@ export class NotificationService {
             this.containerRef = null;
         }
 
+    }
+
+    private _applyDefaultConfig(config: NotificationConfig, defaultConfig: NotificationConfig) {
+        const newConfig = new NotificationConfig();
+        const mergedConfigs = {...defaultConfig, ...config};
+        Object.keys(mergedConfigs).forEach(key => newConfig[key] = mergedConfigs[key]);
+
+        return newConfig;
     }
 }
