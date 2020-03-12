@@ -9,75 +9,34 @@
 
 ## Description
 
-   The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality.
+The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and 
+to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is 
+to create a layer which is closer to application development and not to the library creators. 
 
-  Provide a higher abstraction for the components by hiding most of the internal implementation details which boosts developer productivity.
+Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
 
-  Components must be instantiable programmatically.
+## Design
 
-  Enterprise readiness:
+Each component that is developed here needs to have corresponding [technical specification](https://github.com/SAP/fundamental-ngx/wiki/Platform-Library-Home), where we need to agree on several things:
 
-    1. Working with data( reactive stream over the array, Data sources over the reactive steam)
+* Component Signature
+* We try to capture common things among components
+* Functionality
+* We decide how much extensible the component needs to be.
 
-    2. Layouts (Dashboard, detail page, master/detail page, Search/result page).
+As already mentioned above platform the goal is try to be closer to application developer as well as make it more ready for
+enterprise use. 
 
-   It is not about UI:
+* Defining component model and how we work with data
+* Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).
 
-    1. Application state UI
-    2. Bootstrapping and Configuration
-    3. Communication with the backend system.
+This `Platform UI library` is not going to be only about UI but it needs to also capture other aspects:
+
+* Application state UI
+* Bootstrapping and Configuration
+* Communication with the backend system.
+
   
-   Example:
-
- This example captures several things:
-
-   a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
-
-   b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
-
-   c). If we need to group information into sections
-
-   d). How we are handling and forms errors
-   
-   e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
-
-```
-<fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
-                    [formGroup]="fg" [errorHanlding]="'navigate'"
-                    (onSubmit)="save($event)" (navigateToError)="onGoToError($event)">
-
-    <fdp-form-field label="email" id="email" zone="left">
-        <fdp-input type="email" placeholder="email" [required]="true"></fdp-input>
-    </fdp-form-field>
-
-    <fdp-form-field reqiuire="true" label="My Favorite Colors" id="colors" hint="Pick one of your favorite color" zone="right">
-        <fdp-select [list]="myColors"></fdp-select>
-    </fdp-form-field>
-
-    <fdp-form-field label="Description" id="desription" zone="bottom">
-        <fdp-text-area [autoSizeEnabled]="true"></fdp-text-area>
-    </fdp-form-field>
-    </fdp-form-group>
-```
-```
-    <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating"
-                        [formGroup]="fg" [errorHanlding]="'navigate'">
-        
-        <fdp-form-section title="Basic Information">
-        <fdp-form-field label="email" id="email" zone="left">
-            <fdp-input type="email" placeholder="email" [required]="true"></fdp-input>
-        </fdp-form-field>
-        <fdp-form-field reqiuire="true"
-                        label="My Favorite Colors"
-                        id="colors" hint="Pick one of your favorite color" zone="right">
-            <fdp-select [list]="myColors"></fdp-select>
-        </fdp-form-field>
-    </fdp-form-section>
-        <fdp-form-field label="Description" id="desription" zone="bottom">
-            <fdp-text-area [autoSizeEnabled]="true"></fdp-text-area>
-        </fdp-form-field>
-    </fdp-form-group>
-```
 ## API Reference
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/platform/home) for examples and API details.
