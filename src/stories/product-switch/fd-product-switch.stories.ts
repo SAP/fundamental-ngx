@@ -27,7 +27,7 @@ export const ProductSwitch = () => ({
                 [disabled]="disabled"
                 [fillControlMode]="fillControlMode"
                 [focusTrapped]="focusTrapped"
-                [id]="id"
+                [ariaLabel]="id"
                 [isDropdown]="isDropdown"
                 [isOpen]="isOpen"
                 [noArrow]="noArrow"
