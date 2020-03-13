@@ -69,4 +69,22 @@ export class DialogConfig implements DynamicComponentConfig {
 
     /** Data to pass along to the content through the DialogRef. */
     data?: any;
+
+    /** Whether the dialog should be displayed in full screen mode. */
+    fullScreen?: boolean;
+
+    /** Whether the dialog should be displayed in mobile mode. */
+    mobile?: boolean;
+
+    /** Whether the dialog in mobile mode should have outer space. */
+    mobileOuterSpacing?: boolean;
+
+    /** Whether the dialog should be draggable. */
+    draggable?: boolean;
+
+    /** Whether the dialog should be resizable. */
+    resizable?: boolean;
+
+    /** Whether the dialog should have vertical padding. */
+    verticalPadding?: boolean = true;
 }

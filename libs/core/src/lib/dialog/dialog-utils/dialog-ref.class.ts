@@ -1,10 +1,14 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { InjectionToken } from '@angular/core';
 
 /**
  * Reference to a dialog component generated via the DialogService.
  * It can be injected into the content component through the constructor.
  * For a template, it is declared as part of the implicit context, see examples.
  */
+
+export const DIALOG_REF = new InjectionToken<string[]>('DialogRef');
+
 export class DialogRef {
     private readonly _afterClosed = new Subject<any>();
     private readonly _onHide = new BehaviorSubject<boolean>(false);

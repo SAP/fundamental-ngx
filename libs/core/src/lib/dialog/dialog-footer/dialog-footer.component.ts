@@ -1,13 +1,15 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ContentChildren, Input,
+    ContentChildren,
+    Inject,
+    Optional,
     QueryList,
     TemplateRef
 } from '@angular/core';
 import { TemplateDirective } from '../../utils/directives';
+import { DIALOG_CONFIG, DialogConfig } from '../../..';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog footer.
@@ -25,14 +27,11 @@ import { TemplateDirective } from '../../utils/directives';
 })
 export class DialogFooterComponent implements AfterContentInit {
 
-    @Input()
-    mobile: boolean = false;
-
     footerTemplate: TemplateRef<any>;
 
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
 
     ngAfterContentInit() {
         this._assignCustomTemplates();
@@ -42,5 +41,4 @@ export class DialogFooterComponent implements AfterContentInit {
         const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
     }
-
 }

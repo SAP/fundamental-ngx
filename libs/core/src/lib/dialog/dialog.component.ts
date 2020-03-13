@@ -1,13 +1,18 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
-    ComponentRef,
+    ContentChild,
     ElementRef,
-    EmbeddedViewRef,
-    HostListener, Inject, Injector,
+    HostListener,
+    Inject,
+    Injector,
+    Input,
     OnDestroy,
+    OnInit,
+    Optional,
     TemplateRef,
     Type,
     ViewChild,
@@ -16,63 +21,97 @@ import {
 } from '@angular/core';
 import focusTrap, { FocusTrap } from 'focus-trap';
 import { dialogFadeNgIf } from './dialog-utils/dialog.animations';
-import { DialogRef } from './dialog-utils/dialog-ref.class';
 import { DIALOG_CONFIG, DialogConfig } from './dialog-utils/dialog-config.class';
+import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
+import { DIALOG_REF, DialogRef } from './dialog-utils/dialog-ref.class';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'fd-dialog',
     styleUrls: ['dialog.component.scss'],
     templateUrl: './dialog.component.html',
     host: {
-        'role': 'dialog',
         'tabindex': '-1',
-        'attr.aria-modal': 'true',
         '[@dialog-fade]': '',
-        '[attr.id]': 'dialogConfig.id',
-        '[attr.aria-label]': 'dialogConfig.ariaLabel',
-        '[attr.aria-labelledby]': 'dialogConfig.ariaLabelledBy',
-        '[attr.aria-describedby]': 'dialogConfig.ariaDescribedBy',
-        '[class.fd-dialog__content]': '!hasChildComponent',
-        '[style.position]': 'hasChildComponent ? "relative" : ""'
+        '[class]': 'dialogConfig.backdropClass',
+        '[class.fd-dialog]': 'dialogConfig.hasBackdrop',
+        '[class.fd-dialog--active]': 'showDialogWindow'
     },
     animations: [
         dialogFadeNgIf
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class DialogComponent implements AfterViewInit, OnDestroy {
+export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+
+    @Input('dialogRef')
+    set embeddedDialogRef(value: DialogRef) {
+        this._dialogRef = value;
+    };
+
+    @Input('dialogConfig')
+    set embeddedDialogConfig(value: DialogConfig) {
+        this.dialogConfig = value;
+    };
 
     /** @hidden */
     @ViewChild('contentContainer', {read: ViewContainerRef})
     containerRef: ViewContainerRef;
 
     /** @hidden */
+    @ContentChild(DialogHeaderComponent, {static: false}) dialogHeaderRef: DialogHeaderComponent;
+
+    /** @hidden */
+    @ContentChild(DialogBodyComponent, {static: false}) dialogBodyRef: DialogBodyComponent;
+
+    /** @hidden */
+    @ContentChild(DialogFooterComponent, {static: false}) dialogFooterRef: DialogFooterComponent;
+
+    /** @hidden Whenever dialog should be visible */
+    showDialogWindow: boolean;
+
+    /** @hidden */
     childContent: TemplateRef<any> | Type<any> = undefined;
+
+    /** @hidden */
+    isDragged: boolean;
 
     /** @hidden */
     private _focusTrap: FocusTrap;
 
     /** @hidden */
-    private _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
+    private _subscriptions = new Subscription();
 
     constructor(
-        @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,
         private _injector: Injector,
-        private _dialogRef: DialogRef,
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _componentFactoryResolver: ComponentFactoryResolver) {
+    }    /** @hidden Listen and close dialog on Escape key */
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._listenOnHidden();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._passConfigToSubComponents();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._trapFocus();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._deactivateFocus();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._loadDialog();
-        this._trapFocus();
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -83,34 +122,11 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
-    get hasChildComponent(): boolean {
-        return this.childContent instanceof Type;
-    }
-
-    /** @hidden */
-    private _loadDialog(): void {
-        if (this.childContent instanceof Type) {
-            this._createFromComponent(this.childContent);
-        } else if (this.childContent instanceof TemplateRef) {
-            this._createFromTemplate(this.childContent);
+    @HostListener('mousedown', ['$event.target'])
+    closeModal(target: ElementRef): void {
+        if (this.dialogConfig.backdropClickCloseable && target === this._elementRef.nativeElement) {
+            this._dialogRef.dismiss('backdrop');
         }
-        this._changeDetectorRef.detectChanges();
-    }
-
-    /** @hidden */
-    private _createFromComponent(content: Type<any>): void {
-        this.containerRef.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
-        this._componentRef = this.containerRef.createComponent(componentFactory);
-        this._componentRef.location.nativeElement.classList.add('fd-dialog__content--component');
-    }
-
-    /** @hidden */
-    private _createFromTemplate(content: TemplateRef<any>): void {
-        this.containerRef.clear();
-        const context = {$implicit: this._dialogRef};
-        this._componentRef = this.containerRef.createEmbeddedView(content, context);
     }
 
     /** @hidden */
@@ -135,5 +151,28 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
         if (this._focusTrap) {
             this._focusTrap.deactivate();
         }
+    }
+
+    /** @hidden If dialog subcomponents didn't receive DialogConfig from Injector, DialogConfig is passed from parent.
+     * This is necessary when dialog has been passed as TemplateRef and created as EmbeddedView.
+     * In such case parent injector of DialogComponent is the component that DECLARED the TemplateRef.
+     **/
+    private _passConfigToSubComponents(): void {
+        if (this.dialogHeaderRef) {
+            this.dialogHeaderRef.dialogConfig = this.dialogHeaderRef.dialogConfig || this.dialogConfig;
+        }
+        if (this.dialogBodyRef) {
+            this.dialogBodyRef.dialogConfig = this.dialogBodyRef.dialogConfig || this.dialogConfig;
+        }
+        if (this.dialogFooterRef) {
+            this.dialogFooterRef.dialogConfig = this.dialogFooterRef.dialogConfig || this.dialogConfig;
+        }
+    }
+
+    /** @hidden Listen on dialog visibility */
+    private _listenOnHidden(): void {
+        this._subscriptions.add(
+            this._dialogRef.onHide.subscribe(isHidden => this.showDialogWindow = !isHidden)
+        );
     }
 }

@@ -9,7 +9,7 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 
 import { DialogService } from './dialog-service/dialog.service';
-import { DialogOverlay } from './dialog-utils/dialog-overlay.component';
+import { DialogContainerComponent } from './dialog-utils/dialog-container.component';
 import {
     DialogCloseButtonDirective,
     DialogDecisiveButtonDirective,
@@ -27,7 +27,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         DialogHeaderComponent,
         DialogBodyComponent,
         DialogFooterComponent,
-        DialogOverlay,
+        DialogContainerComponent,
         DialogCloseButtonDirective,
         DialogTitleDirective,
         DialogDecisiveButtonDirective
@@ -46,14 +46,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         DialogHeaderComponent,
         DialogBodyComponent,
         DialogFooterComponent,
-        DialogOverlay,
+        DialogContainerComponent,
         DialogCloseButtonDirective,
         DialogTitleDirective,
         DialogDecisiveButtonDirective
     ],
     entryComponents: [
         DialogComponent,
-        DialogOverlay
+        DialogContainerComponent
     ],
     providers: [DialogService, DynamicComponentService]
 })

@@ -26,7 +26,9 @@ export class ModalComponentAsContentExampleComponent {
             },
             maxWidth: '300px',
             height: '300px',
-            maxHeight: '100vh'
+            maxHeight: '100vh',
+            draggable: true,
+            mobile: true
         });
 
         // TODO Subscribe to result

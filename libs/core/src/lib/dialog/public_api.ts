@@ -4,7 +4,7 @@ export * from './dialog.component';
 export * from './dialog-utils/dialog-config.class';
 export * from './dialog-utils/dialog-position.class'
 export * from './dialog-utils/dialog-ref.class';
-export * from './dialog-utils/dialog-overlay.component';
+export * from './dialog-utils/dialog-container.component';
 export * from './dialog-utils/dialog-directives';
 export * from './dialog-body/dialog-body.component';
 export * from './dialog-footer/dialog-footer.component';

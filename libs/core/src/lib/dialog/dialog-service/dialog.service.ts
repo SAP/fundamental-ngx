@@ -1,20 +1,17 @@
 import { ComponentRef, Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DialogComponent } from '../dialog.component';
-import { DialogOverlay } from '../dialog-utils/dialog-overlay.component';
+import { DialogContainerComponent } from '../dialog-utils/dialog-container.component';
 import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 import { DialogPosition } from '../dialog-utils/dialog-position.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { DialogRef } from '../dialog-utils/dialog-ref.class';
+import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
 
 /** Service used to dynamically generate a dialog. */
 @Injectable()
 export class DialogService {
 
     /** @hidden Collection of existing dialog references */
-    private _dialogs: {
-        dialogRef: ComponentRef<DialogComponent>,
-        backdropRef?: ComponentRef<DialogOverlay>,
-    }[] = [];
+    private _dialogs: ComponentRef<DialogContainerComponent>[] = [];
 
     constructor(
         @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService,
@@ -31,7 +28,7 @@ export class DialogService {
 
     /** Dismisses all currently open dialogs. */
     public dismissAll(): void {
-        this._dialogs.forEach(item => this._destroyDialogComponent(item.dialogRef));
+        this._dialogs.forEach(item => this._destroyDialogComponent(item));
     }
 
     /**
@@ -47,32 +44,38 @@ export class DialogService {
         const dialogRef: DialogRef = new DialogRef();
         dialogRef.data = dialogConfig.data;
 
-        const overlayInjector = Injector.create({providers: [{provide: DIALOG_CONFIG, useValue: dialogConfig}]});
-        const backdrop: ComponentRef<DialogOverlay> = this._dynamicComponentService.createDynamicComponent<DialogOverlay>(
-            contentType,
-            DialogOverlay,
-            dialogConfig,
-            {
-                injector: overlayInjector,
-                services: [dialogRef]
-            }
-        );
+        const dialogInjector = Injector.create({
+            providers: [
+                {provide: DIALOG_CONFIG, useValue: dialogConfig},
+                {provide: DIALOG_REF, useValue: dialogRef}
+            ]
+        });
 
-        const dialogInjector = Injector.create({providers: [], parent: overlayInjector});
-        const component = this._dynamicComponentService.createDynamicComponent<DialogComponent>(
-            contentType,
-            DialogComponent,
-            {...dialogConfig, container: backdrop.location.nativeElement},
-            {
-                injector: dialogInjector,
-                services: [dialogRef]
-            }
-        );
+        const component: ComponentRef<DialogContainerComponent> = this._dynamicComponentService
+            .createDynamicComponent<DialogContainerComponent>(
+                contentType,
+                DialogContainerComponent,
+                dialogConfig,
+                {
+                    injector: dialogInjector
+                }
+            );
 
-        this._setDialogSize(component, dialogConfig);
-        this._setDialogPosition(component, dialogConfig.position);
+        // const dialogInjector = Injector.create({providers: [], parent: overlayInjector});
+        // const component = this._dynamicComponentService.createDynamicComponent<DialogComponent>(
+        //     contentType,
+        //     DialogComponent,
+        //     {...dialogConfig, container: backdrop.location.nativeElement},
+        //     {
+        //         injector: dialogInjector,
+        //         services: [dialogRef]
+        //     }
+        // );
 
-        this._dialogs.push({dialogRef: component, backdropRef: backdrop});
+        // this._setDialogSize(component, dialogConfig);
+        // this._setDialogPosition(component, dialogConfig.position);
+
+        this._dialogs.push(component);
 
         const defaultBehaviourOnClose = () => {
             this._destroyDialogComponent(component);
@@ -85,17 +88,12 @@ export class DialogService {
     }
 
     /** @hidden */
-    private _destroyDialogComponent(dialog: ComponentRef<DialogComponent>): void {
+    private _destroyDialogComponent(dialog: ComponentRef<DialogContainerComponent>): void {
 
-        const arrayRef = this._dialogs.find((item) => item.dialogRef === dialog);
+        const arrayRef = this._dialogs.find((item) => item === dialog);
         const indexOf = this._dialogs.indexOf(arrayRef);
-        this._dynamicComponentService.destroyComponent(arrayRef.dialogRef);
-        arrayRef.dialogRef.destroy();
-
-        if (arrayRef.backdropRef) {
-            this._dynamicComponentService.destroyComponent(arrayRef.backdropRef);
-            arrayRef.backdropRef.destroy();
-        }
+        this._dynamicComponentService.destroyComponent(arrayRef);
+        arrayRef.destroy();
 
         this._dialogs[indexOf] = null;
         this._dialogs = this._dialogs.filter(item => item !== null && item !== undefined);

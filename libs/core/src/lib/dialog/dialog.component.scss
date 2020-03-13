@@ -26,15 +26,11 @@
     bottom: auto;
     left: auto;
     right: auto;
-}
 
-.fd-dialog__content--component {
-    @extend .fd-dialog__content;
-    position: relative;
-    width: inherit;
-    height: inherit;
-    max-width: inherit;
-    min-width: inherit;
-    max-height: inherit;
-    min-height: inherit;
+    &--full-screen {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
 }

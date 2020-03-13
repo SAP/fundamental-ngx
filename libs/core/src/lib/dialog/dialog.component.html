@@ -1,5 +1,33 @@
-<ng-container #contentContainer></ng-container>
+<div class="fd-dialog__content"
+     role="dialog"
+     tabindex="-1"
+     attr.aria-modal="true"
+     cdkDrag
+     cdkDragBoundary=".fd-dialog"
+     [ngClass]="{
+        'fd-dialog__content--mobile': dialogConfig.mobile,
+        'fd-dialog__content--full-screen': dialogConfig.fullScreen,
+        'fd-dialog__body--no-vertical-padding': dialogConfig.verticalPadding,
+        'fd-dialog__content--no-mobile-stretch': dialogConfig.mobileOuterSpacing,
+        'fd-dialog__content--draggable-grab': dialogConfig.draggable && !isDragged,
+        'fd-dialog__content--draggable-grabbing': dialogConfig.draggable && isDragged
+     }"
+     [cdkDragDisabled]="!dialogConfig.draggable"
+     [@dialog-fade]
+     [attr.id]="dialogConfig.id"
+     [attr.aria-label]="dialogConfig.ariaLabel"
+     [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
+     [attr.aria-describedby]="dialogConfig.ariaDescribedBy"
+     (cdkDragStarted)="isDragged = true"
+     (cdkDragEnded)="isDragged = false">
 
-<ng-content></ng-content>
+    <div cdkDragHandle
+         [cdkDragHandleDisabled]="!dialogConfig.draggable">
+        <ng-content select="fd-dialog-header"></ng-content>
+    </div>
 
-<span *ngIf="true" class="fd-dialog__resize-handle"></span>
+    <ng-content select="fd-dialog-body"></ng-content>
+    <ng-content select="fd-dialog-footer"></ng-content>
+
+    <span *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
+</div>

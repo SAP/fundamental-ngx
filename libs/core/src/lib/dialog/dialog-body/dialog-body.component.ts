@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Optional } from '@angular/core';
+import { DIALOG_CONFIG, DialogConfig } from '../../..';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog body.
@@ -18,4 +19,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
 })
 export class DialogBodyComponent {
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
 }

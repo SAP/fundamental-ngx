@@ -1,13 +1,15 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ContentChildren, ElementRef, Input,
+    ContentChildren,
+    Inject,
+    Optional,
     QueryList,
     TemplateRef
 } from '@angular/core';
 import { TemplateDirective } from '../../utils/directives';
+import { DIALOG_CONFIG, DialogConfig } from '../../..';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog header.
@@ -26,22 +28,14 @@ import { TemplateDirective } from '../../utils/directives';
 })
 export class DialogHeaderComponent implements AfterContentInit {
 
-    @Input()
-    mobile: boolean = false;
-
-    @Input()
-    draggable: boolean = true;
-
     headerTemplate: TemplateRef<any>;
 
     subHeaderTemplate: TemplateRef<any>;
 
-
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef,
-                private _elementRef: ElementRef) {
-    }
+    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
+
 
     ngAfterContentInit(): void {
         this._assignCustomTemplates();

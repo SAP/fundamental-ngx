@@ -13,7 +13,12 @@ export class ModalOpenTemplateExampleComponent {
     constructor(private modalService: DialogService) { }
 
     openModal(modal: TemplateRef<any>): void {
-        const modalRef = this.modalService.open(modal);
+        const modalRef = this.modalService.open(modal, {
+            draggable: true,
+            mobile: true,
+            mobileOuterSpacing: true,
+            verticalPadding: false
+        });
 
         modalRef.afterClosed.subscribe(result => {
             this.confirmationReason = 'Modal closed with result: ' + result;
