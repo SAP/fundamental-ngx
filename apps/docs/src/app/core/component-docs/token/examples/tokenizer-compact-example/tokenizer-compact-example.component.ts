@@ -12,10 +12,22 @@ export class TokenizerCompactExampleComponent implements OnInit {
     inputValue = 'New token';
 
     tokens = [
-        {text: 'Bibendum', readOnly: false},
-        {text: 'Lorem', readOnly: false},
-        {text: 'Dolor', readOnly: false},
-        {text: 'Filter', readOnly: true}
+        {text: 'One', readOnly: false},
+        {text: 'Two', readOnly: false},
+        {text: 'Three', readOnly: false},
+        {text: 'Four', readOnly: false},
+        {text: 'Five', readOnly: false},
+        {text: 'Six', readOnly: false},
+        {text: 'Seven', readOnly: false},
+        {text: 'Eight', readOnly: false},
+        {text: 'Nine', readOnly: false},
+        {text: 'Ten', readOnly: false},
+        {text: 'Eleven', readOnly: false},
+        {text: 'Twelve', readOnly: false},
+        {text: 'Thirteen', readOnly: false},
+        {text: 'Fourteen', readOnly: false},
+        {text: 'Fifteen', readOnly: false},
+        {text: 'Sixteen', readOnly: false}
     ];
 
     constructor(private fb: FormBuilder) { }

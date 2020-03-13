@@ -157,7 +157,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should collapse the tokens', () => {
-    component.inMultiInput = true;
+    component.compact = true;
     spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getInnerWidth').and.returnValue(2);
     component.moreTokensLeft.length = 0;
@@ -170,7 +170,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should expand the tokens', () => {
-      component.inMultiInput = true;
+      component.compact = true;
       // need to collapse the tokens before running expand
       spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
       spyOn(component, 'getInnerWidth').and.returnValue(2);
