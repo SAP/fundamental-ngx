@@ -9,5 +9,5 @@
 <fd-object-status [large]="true" [inverted]="true" [status]="'informative'" style="margin-right: 20px;">6.99</fd-object-status>
 <fd-object-status [large]="true" [inverted]="true" style="margin-right: 20px;">default label</fd-object-status>
 <div style="margin-top: 10px;" *ngFor="let item of [1,2,3,4,5,6,7,8]">
-  <fd-object-status [large]="true" [clickable]="true" [inverted]="true" [color]="item" style="margin-right: 20px;">Inverted Informative</fd-object-status>
+  <fd-object-status [large]="true" [clickable]="true" [inverted]="true" (click)="showAlert(item)" [color]="item" style="margin-right: 20px;">Inverted Informative</fd-object-status>
 </div>

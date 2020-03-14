@@ -28,7 +28,11 @@ export class ObjectStatusTextIconExampleComponent { }
     selector: 'fd-object-status-clickable-and-icon-example',
     templateUrl: './object-status-clickable-and-icon-example.component.html'
 })
-export class ObjectStatusClickableAndIconExampleComponent { }
+export class ObjectStatusClickableAndIconExampleComponent { 
+    showAlert() {
+        alert('you clicked the clickable ObjectStatus');
+    }
+}
 
 @Component({
     selector: 'fd-object-status-inverted-example',
@@ -52,4 +56,10 @@ export class ObjectStatusInvertedGenericIconAndTextExampleComponent { }
     selector: 'fd-object-status-object-status-large-example',
     templateUrl: './object-status-large-example.component.html'
 })
-export class ObjectStatusLargeExampleComponent { }
+export class ObjectStatusLargeExampleComponent { 
+
+    showAlert(index) {
+        alert('clicked alert large at index:- ' + index);
+    }
+
+}

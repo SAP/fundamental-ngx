@@ -1,2 +1,2 @@
-<fd-object-status [clickable]="true" [status]="'negative'" [glyph]="'status-negative'" style="margin-right: 20px;">Negative</fd-object-status>
-<fd-object-status [clickable]="true" [status]="'informative'" >informative</fd-object-status>
+<fd-object-status [clickable]="true" [status]="'negative'" [glyph]="'status-negative'" (click)="showAlert()" style="margin-right: 20px;">Negative</fd-object-status>
+<fd-object-status [clickable]="true" [status]="'informative'" (click)="showAlert()">informative</fd-object-status>
