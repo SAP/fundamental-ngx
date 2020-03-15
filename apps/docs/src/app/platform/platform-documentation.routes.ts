@@ -16,6 +16,8 @@ import { PlatformLinkHeaderComponent } from './component-docs/platform-link/plat
 import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
 import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-search-field/platform-search-field-header/platform-search-field-header.component';
 import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
+import { PlatformComboboxHeaderComponent } from './component-docs/platform-combobox/platform-combobox-header/platform-combobox-header.component';
+import { PlatformComboboxDocsComponent } from './component-docs/platform-combobox/platform-combobox-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -71,6 +73,14 @@ export const ROUTES: Routes = [
                 children: [
                     { path: '', component: PlatformSelectDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+            {
+                path: 'combobox',
+                component: PlatformComboboxHeaderComponent,
+                children: [
+                    { path: '', component: PlatformComboboxDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.comboBox } }
                 ]
             }
         ]
