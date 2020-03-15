@@ -218,7 +218,7 @@ chore: Updated package.json
 
 ##### Type
 
-Type can have following values: `WIP|feat|chore|test|doc|fix`.
+c
 
 The `WIP` represent work in progress and it will not be merged, so please make sure to use one of 
 the specific format such as `feat|chore|test|doc|fix` if your PR needs to be merged with master 
