@@ -66,7 +66,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             this.containerBoundary = this.containerElement.getBoundingClientRect().width;
         }
         // if the screen is getting smaller
-        if (this.containerBoundary < this.previousContainerWidth) {
+        if (!this.previousContainerWidth || this.containerBoundary < this.previousContainerWidth) {
             // and the breadcrumbs extend past the window
             if (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary) {
                 this.collapseBreadcrumbs();
@@ -139,7 +139,6 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.previousContainerWidth = this.containerBoundary;
         this.onResize();
     }
 
