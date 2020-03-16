@@ -16,7 +16,7 @@
                    (keyup.enter)="handleInputChange(datePicker.value)"
                    (click)="openCalendar()"
                    [compact]="compact"
-                   [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }">
+                   [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }">
             <span fd-input-group-addon [button]="true" [compact]="compact">
                 <button fd-button
                         [attr.tabindex]="buttonFocusable ? 0 : -1"

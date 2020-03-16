@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {CheckboxComponent} from './checkbox.component';
-import {FormsModule} from '@angular/forms';
-import {Component, ViewChild} from '@angular/core';
+import { CheckboxComponent } from './checkbox.component';
+import { FormsModule } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
     template: `
@@ -10,7 +10,7 @@ import {Component, ViewChild} from '@angular/core';
     `
 })
 class TestCheckboxComponent {
-    @ViewChild(CheckboxComponent, {static: false}) checkboxRef;
+    @ViewChild(CheckboxComponent, { static: false }) checkboxRef;
     value: any = false;
 }
 
@@ -72,12 +72,12 @@ describe('CheckboxComponent', () => {
     });
 
     it('should add state class', async () => {
-        checkbox.state = 'valid';
+        checkbox.state = 'success';
         fixture.detectChanges();
 
         await fixture.whenStable();
         const input = fixture.nativeElement.querySelector('input');
-        expect(input).toHaveClass('is-valid')
+        expect(input).toHaveClass('is-success')
     });
 
     it('should display input label', async () => {
@@ -104,7 +104,7 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe(false);
     });
 
-    it('should be compact', async() => {
+    it('should be compact', async () => {
         checkbox.compact = true;
         fixture.detectChanges();
 
@@ -118,7 +118,7 @@ describe('CheckboxComponent', () => {
 
     it('should use custom values', async () => {
         const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
-        checkbox.values = {trueValue: 'Yes', falseValue: 'No'};
+        checkbox.values = { trueValue: 'Yes', falseValue: 'No' };
         hostComponent.value = 'Yes';
         fixture.detectChanges();
 
@@ -167,7 +167,7 @@ describe('CheckboxComponent', () => {
     it('should use custom values for third state', async () => {
         const checkboxLabel = fixture.nativeElement.querySelector('.fd-checkbox__label');
         checkbox.tristate = true;
-        checkbox.values = {trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby'};
+        checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby' };
         hostComponent.value = 'Yes';
         fixture.detectChanges();
 

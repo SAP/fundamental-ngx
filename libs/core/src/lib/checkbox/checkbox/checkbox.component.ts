@@ -38,7 +38,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** State of control, changes visual appearance of control. */
     @Input()
-    state: 'valid' | 'invalid' | 'info' | 'warning';
+    state: 'success' | 'error' | 'info' | 'warning';
 
     /** Sets [name] property of input. */
     @Input()

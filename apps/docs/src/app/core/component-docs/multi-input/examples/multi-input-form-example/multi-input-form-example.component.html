@@ -3,7 +3,7 @@
         <div fd-form-item>
             <label fd-form-label>Valid Localization Editor</label>
             <fd-multi-input
-                [state]="isValid() ? 'valid' : 'invalid'"
+                [state]="isValid() ? 'success' : 'error'"
                 formControlName="selectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
                 [placeholder]="'Search Here...'"

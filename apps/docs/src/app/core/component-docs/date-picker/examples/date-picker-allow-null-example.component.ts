@@ -4,7 +4,7 @@ import { DatePickerComponent, FdDate } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-date-picker-allow-null-example',
     template: `
-        <fd-date-picker [allowNull]="false" [type]="'single'" [(ngModel)]="date" [state]="isInvalid() ? 'invalid' : 'valid'"></fd-date-picker>
+        <fd-date-picker [allowNull]="false" [type]="'single'" [(ngModel)]="date" [state]="isInvalid() ? 'error' : 'success'"></fd-date-picker>
         <br/>
         <div>Selected Date: {{date ? date.toDateString() : 'null'}}</div>`
 })

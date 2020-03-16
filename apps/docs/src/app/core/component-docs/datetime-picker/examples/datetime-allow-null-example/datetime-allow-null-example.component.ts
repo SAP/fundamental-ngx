@@ -4,7 +4,7 @@ import { DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-date-time-picker-allow-null-example',
     template: `
-        <fd-datetime-picker [allowNull]="false" [(ngModel)]="selectedDay" [state]="isValid() ? 'invalid' : 'valid'"></fd-datetime-picker>
+        <fd-datetime-picker [allowNull]="false" [(ngModel)]="selectedDay" [state]="isValid() ? 'error' : 'success'"></fd-datetime-picker>
         <span style="padding-left: 20px;">Selected Date: {{selectedDay?.toLocaleDateString()}}</span>
     `
 })

@@ -11,7 +11,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
-export type stateType = 'valid' | 'invalid' | 'warning' | 'default' | 'information';
+export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
 @Component({
     selector: 'fd-radio-button',
@@ -51,7 +51,7 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
     private _state: stateType = 'default';
     /** The field to set state of radio button using:
-     * 'valid' | 'invalid' | 'warning' | 'default' | 'information'
+     * 'success' | 'error' | 'warning' | 'default' | 'information'
      * by default value is set to 'default'
      */
     @Input()
