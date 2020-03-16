@@ -16,7 +16,7 @@ export class PaginationExampleComponent {
     itemsPerPage = 10;
     currentPage = 3;
 
-    @ViewChild(PaginationComponent, {static: false }) paginationComponent: PaginationComponent;
+    @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
     newPageClicked(event) {
         this.http.get('assets/pagination-data.json').subscribe(data => {

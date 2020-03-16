@@ -34,7 +34,7 @@ import { ButtonOptions, ButtonType } from '../button/button.component';
 export class SplitButtonComponent {
 
     /** @hidden */
-    @ContentChild(SplitButtonActionTitle, { read: TemplateRef, static: false })
+    @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
     /** The trigger events that will open/close the popover.

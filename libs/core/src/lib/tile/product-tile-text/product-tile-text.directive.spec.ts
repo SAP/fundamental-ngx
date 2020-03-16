@@ -9,7 +9,7 @@ import { ProductTileTextDirective } from './product-tile-text.directive';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 })
 
 export class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

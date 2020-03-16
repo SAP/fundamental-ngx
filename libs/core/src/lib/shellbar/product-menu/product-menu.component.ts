@@ -22,11 +22,11 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 export class ProductMenuComponent extends PopoverComponent implements OnInit {
 
     /** @hidden */
-    @ViewChild(PopoverComponent, { static: false })
+    @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
     /** @hidden */
-    @ContentChild(MenuComponent, { static: false })
+    @ContentChild(MenuComponent)
     menuComponent: MenuComponent;
 
     /**

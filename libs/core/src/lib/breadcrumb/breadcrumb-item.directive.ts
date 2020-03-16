@@ -32,7 +32,7 @@ export class BreadcrumbItemDirective implements AfterContentInit {
     routerLink: string = '';
 
     /** @hidden */
-    @ContentChild(forwardRef(() => BreadcrumbLinkDirective), { static: false })
+    @ContentChild(forwardRef(() => BreadcrumbLinkDirective))
     breadcrumbLink: BreadcrumbLinkDirective;
 
     constructor(private _elementRef: ElementRef) { }

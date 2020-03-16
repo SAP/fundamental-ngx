@@ -40,6 +40,6 @@ export class LocalizationEditorItemComponent {
     compact: boolean;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorLabel, { read: TemplateRef, static: false })
+    @ContentChild(LocalizationEditorLabel, { read: TemplateRef })
     labelTemplate: TemplateRef<any>;
 }

@@ -29,19 +29,19 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
      * @hidden
      * Reference to the link directive, to allow manipulating the properties of this element.
      */
-    @ContentChild(NestedLinkDirective, { static: false })
+    @ContentChild(NestedLinkDirective)
     linkItem: NestedLinkDirective;
 
     /** @hidden */
-    @ContentChild(NestedListPopoverComponent, { static: false })
+    @ContentChild(NestedListPopoverComponent)
     popoverItem: NestedListPopoverComponent;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => NestedListDirective), { static: false })
+    @ContentChild(forwardRef(() => NestedListDirective))
     nestedListItem: NestedListDirective;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => PreparedNestedListComponent), { static: false })
+    @ContentChild(forwardRef(() => PreparedNestedListComponent))
     preparedListComponent: PreparedNestedListComponent;
 
     /** Check if the item element has any child */

@@ -78,7 +78,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
     /**
      * View child of action bar component
      */
-    @ViewChild('inputTitle', { static: false }) private inputTitle: ElementRef;
+    @ViewChild('inputTitle') private inputTitle: ElementRef;
 
     /**
      * Emitted event when "back" button is clicked.

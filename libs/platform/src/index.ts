@@ -1,4 +1,6 @@
 export * from './lib/platform.module';
+export * from './lib/components/button/public_api';
+export * from './lib/components/search-input/public_api';
 export * from './lib/components/action-bar/public_api';
 export * from './lib/components/menu/public_api';
 export * from './lib/components/select/public_api';

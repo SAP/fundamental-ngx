@@ -20,9 +20,9 @@ import { FormsModule } from '@angular/forms';
 class TestRadioButtonComponent {
     selectedValue = 1;
 
-    @ViewChild('radio1', { static: false }) radioButton1: RadioButtonComponent;
-    @ViewChild('radio2', { static: false }) radioButton2: RadioButtonComponent;
-    @ViewChild('radio3', { static: false }) radioButton3: RadioButtonComponent;
+    @ViewChild('radio1') radioButton1: RadioButtonComponent;
+    @ViewChild('radio2') radioButton2: RadioButtonComponent;
+    @ViewChild('radio3') radioButton3: RadioButtonComponent;
 }
 
 describe('RadioButtonComponent', () => {

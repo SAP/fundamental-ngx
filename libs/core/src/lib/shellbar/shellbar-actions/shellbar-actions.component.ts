@@ -68,15 +68,15 @@ export class ShellbarActionsComponent implements OnInit {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarUserMenuComponent, { static: false })
+    @ContentChild(ShellbarUserMenuComponent)
     userComponent: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarUserMenuComponent, { static: false })
+    @ViewChild(ShellbarUserMenuComponent)
     userComponentView: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ContentChild(ComboboxComponent, { static: false })
+    @ContentChild(ComboboxComponent)
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */

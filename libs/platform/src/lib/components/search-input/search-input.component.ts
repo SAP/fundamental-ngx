@@ -112,9 +112,9 @@ export class SearchInputComponent implements OnInit, OnChanges, AfterViewInit {
      */
     public showCategoryDropdown = false;
 
-    @ViewChild('combobox', { static: false }) combobox: ComboboxComponent;
+    @ViewChild('combobox') combobox: ComboboxComponent;
 
-    @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
+    @ViewChild('categoryDropdown') categoryDropdown: PopoverComponent;
 
     constructor() { }
 

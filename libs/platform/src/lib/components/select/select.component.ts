@@ -49,7 +49,7 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      * custom option popup item template defined by app.
      *
      */
-    @ContentChild('optionValue', { static: false })
+    @ContentChild('optionValue')
     optionValueTemplate: TemplateRef<any>;
 
     /**

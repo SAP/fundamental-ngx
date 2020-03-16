@@ -7,7 +7,7 @@ import { PopoverComponent } from '@fundamental-ngx/core';
 })
 export class PopoverDynamicExampleComponent {
 
-    @ViewChild('popoverComponent', { static: false })
+    @ViewChild('popoverComponent')
     popoverComponent: PopoverComponent
 
     constructor(private changeDetectionRef: ChangeDetectorRef) {}

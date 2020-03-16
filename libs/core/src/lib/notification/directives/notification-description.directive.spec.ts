@@ -8,7 +8,7 @@ import { NotificationModule } from '@fundamental-ngx/core';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 describe('NotificationDescriptionDirective', () => {
