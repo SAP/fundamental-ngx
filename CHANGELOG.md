@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0-rc.11"></a>
+# [0.16.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.10...v0.16.0-rc.11) (2020-03-16)
+
+
+### Bug Fixes
+
+* Change datepickers model on ngModelChange ([#2156](https://github.com/SAP/fundamental-ngx/issues/2156)) ([2daeb0e](https://github.com/SAP/fundamental-ngx/commit/2daeb0e))
+
+
+
 <a name="0.16.0-rc.10"></a>
 # [0.16.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.9...v0.16.0-rc.10) (2020-03-16)
 
