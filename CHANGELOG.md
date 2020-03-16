@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.15.2](https://github.com/SAP/fundamental-ngx/compare/v0.15.1...v0.15.2) (2020-03-16)
+
+
+### Bug Fixes
+
+* add type button to input group and select ([#2154](https://github.com/SAP/fundamental-ngx/issues/2154)) ([444ccbe](https://github.com/SAP/fundamental-ngx/commit/444ccbebb53295d15ec8d228fb9bf36d8959e677))
+* Change datepickers model on ngModelChange ([#2156](https://github.com/SAP/fundamental-ngx/issues/2156)) ([6878e14](https://github.com/SAP/fundamental-ngx/commit/6878e149766b16273a58290564d71502bbac74aa))
 
 <a name="0.15.1"></a>
 ## [0.15.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.5...v0.15.1) (2020-03-05)
