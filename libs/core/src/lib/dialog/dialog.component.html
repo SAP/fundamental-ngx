@@ -2,6 +2,8 @@
      role="dialog"
      tabindex="-1"
      attr.aria-modal="true"
+     fdResize
+     fdResizeBoundary=".fd-dialog"
      cdkDrag
      cdkDragBoundary=".fd-dialog"
      [ngClass]="{
@@ -29,5 +31,5 @@
     <ng-content select="fd-dialog-body"></ng-content>
     <ng-content select="fd-dialog-footer"></ng-content>
 
-    <span *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
+    <span fdResizeHandle *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
 </div>

@@ -19,6 +19,7 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
 import { TemplateDirective } from '../utils/directives';
 import { BarModule } from '../bar/bar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ResizeModule } from '../utils/directives/resize/resize.module';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         DialogDecisiveButtonDirective
     ],
     imports: [
+        ResizeModule,
         DragDropModule,
         BarModule,
         CommonModule,
