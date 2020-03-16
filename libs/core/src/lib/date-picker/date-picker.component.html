@@ -1,5 +1,4 @@
 <fd-popover [(isOpen)]="isOpen"
-            (isOpenChange)="handleInputChange(datePicker.value)"
             [triggers]="[]"
             [placement]="placement"
             [closeOnEscapeKey]="true"
@@ -11,9 +10,9 @@
                    fd-input-group-input
                    type="text"
                    [attr.aria-label]="dateInputLabel"
-                   [value]="inputFieldDate"
+                   [(ngModel)]="inputFieldDate"
                    [placeholder]="placeholder"
-                   (keyup.enter)="handleInputChange(datePicker.value)"
+                   (ngModelChange)="handleInputChange($event)"
                    (click)="openCalendar()"
                    [compact]="compact"
                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }">
