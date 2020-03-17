@@ -1,17 +1,15 @@
 <fd-docs-section-title [id]="'default'" [componentName]="'objectstatus'">
-	Default Object Status
+	Object Status Icon Only
 </fd-docs-section-title>
 <component-example>
 	<fd-object-status-default-example></fd-object-status-default-example>
 </component-example>
 <code-example [exampleFiles]="defaultObjectStatusHtmlType"></code-example>
-<label fd-form-label>Default Object Status by passing the default message </label>
 <separator></separator>
 
 <fd-docs-section-title [id]="'Text'" [componentName]="'objectstatus'">
-	Object Status with Text
+	Object Status Text Only
 </fd-docs-section-title>
-<description> <code>fd-object-status fd-object-status--negative fd-object-status--critical fd-object-status--informative fd-object-status--positive</code> modifier can be used to render a Text version of the Object Status. </description>
 <component-example>
 	<fd-object-status-text-example></fd-object-status-text-example>
 </component-example>
@@ -19,21 +17,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'genericText'" [componentName]="'objectstatus'">
-	Object Status with Generic text
-</fd-docs-section-title>
-<description> <code>fd-object-status fd-object-status--indication-1</code> modifier can be used to render a generic coloration text version of the Object Status. </description>
-<component-example>
-	<fd-object-status-generic-text-example></fd-object-status-generic-text-example>
-</component-example>
-<code-example [exampleFiles]="ObjectStatusTextIconExample"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title [id]="'iconandtext'" [componentName]="'objectstatus'">
 	Object Status with Text and Icon
 </fd-docs-section-title>
-<description> <code>fd-object-status--numeric fd-object-status--only-icon</code> modifier can be used to render a icon with text version of the Object Status. </description>
+<description></description>
 <component-example>
 	<fd-object-status-numeric-icon-example></fd-object-status-numeric-icon-example>
 </component-example>
@@ -41,15 +28,21 @@
 
 <separator></separator>
 
-<!--
-
-	code change
-
--->
-<fd-docs-section-title [id]="'clickable'" [componentName]="'objectstatus'">
-	Object Status with clickable
+<fd-docs-section-title [id]="'genericText'" [componentName]="'objectstatus'">
+	Object Status with Generic Indication Colors
 </fd-docs-section-title>
-<description> <code>fd-object-status--link fd-object-status--negative</code> modifier can be used to render a icon and text with clickable version of the Object Status. </description>
+<description></description>
+<component-example>
+	<fd-object-status-generic-text-example></fd-object-status-generic-text-example>
+</component-example>
+<code-example [exampleFiles]="ObjectStatusTextIconExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'clickable'" [componentName]="'objectstatus'">
+	Clickable Object Status
+</fd-docs-section-title>
+<description>For clickable Object Status set the <code>[clickable]</code> property to <code>true</code>.</description>
 <component-example>
 	<fd-object-status-clickable-and-icon-example></fd-object-status-clickable-and-icon-example>
 </component-example>
@@ -58,9 +51,9 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'Inverted'" [componentName]="'objectstatus'">
-	Object Status Inverted
+	Inverted Object Status
 </fd-docs-section-title>
-<description> <code>fd-object-status--inverted fd-object-status--negative</code> modifier can be used to render a inverted version of the Inverted Object Status. </description>
+<description>Inverted Object Status are achieved by setting the <code>[inverted]</code> property to <code>true</code>.</description>
 <component-example>
 	<fd-object-status-inverted-example></fd-object-status-inverted-example>
 </component-example>
@@ -69,9 +62,9 @@
 <separator></separator>
 
 <fd-docs-section-title [id]="'invertedgeneric'" [componentName]="'objectstatus'">
-	Object Status Iverted with Generic color
+	Inverted Object Status with Generic Indication Colors
 </fd-docs-section-title>
-<description> <code>fd-object-status--indication-1 fd-object-status--inverted</code> modifier can be used to render a generic colour version of the Inverted Object Status. </description>
+<description></description>
 <component-example>
 	<fd-object-status-inverted-generic-text-example></fd-object-status-inverted-generic-text-example>
 </component-example>
@@ -79,21 +72,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'invertediconandtext'" [componentName]="'objectstatus'">
-	Object Status Inverted Icon And Text
-</fd-docs-section-title>
-<description> <code>fd-object-status--inverted fd-object-status--negative sap-icon--status-negative</code> modifier can be used to render a icon with text version of the Inverted Object Status. </description>
-<component-example>
-	<fd-object-status-inverted-icon-and-text-example></fd-object-status-inverted-icon-and-text-example>
-</component-example>
-<code-example [exampleFiles]="ObjectStatusInverterdIconAndTextExample"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title [id]="'objectstatusLarge'" [componentName]="'objectstatus'">
-	Object Status Large
+	Object Status Large Design
 </fd-docs-section-title>
-<description> <code>fd-object-status--large</code> modifier can be used to render a object with larger version of the Inverted Object Status. </description>
+<description>For Object Status in large design use <code>[large]="true"</code>.</description>
 <component-example>
 	<fd-object-status-object-status-large-example></fd-object-status-object-status-large-example>
 </component-example>
