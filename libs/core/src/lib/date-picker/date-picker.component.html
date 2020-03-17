@@ -1,51 +1,50 @@
-<fd-popover [(isOpen)]="isOpen"
-            [triggers]="[]"
-            [placement]="placement"
-            [closeOnEscapeKey]="true"
-            [disabled]="disabled">
+<fd-popover [(isOpen)]="isOpen" [triggers]="[]" [placement]="placement" [closeOnEscapeKey]="true" [disabled]="disabled">
     <fd-popover-control>
         <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled">
-            <input #datePicker
-                   class="fd-input"
-                   fd-input-group-input
-                   type="text"
-                   [attr.aria-label]="dateInputLabel"
-                   [(ngModel)]="inputFieldDate"
-                   [placeholder]="placeholder"
-                   (ngModelChange)="handleInputChange($event)"
-                   (click)="openCalendar()"
-                   [compact]="compact"
-                   [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }">
+            <input
+                #datePicker
+                class="fd-input"
+                fd-input-group-input
+                type="text"
+                [attr.aria-label]="dateInputLabel"
+                [(ngModel)]="inputFieldDate"
+                [placeholder]="placeholder"
+                (ngModelChange)="handleInputChange($event)"
+                (click)="openCalendar()"
+                [compact]="compact"
+                [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
+            />
             <span fd-input-group-addon [button]="true" [compact]="compact">
-                <button fd-button
-                        [attr.tabindex]="buttonFocusable ? 0 : -1"
-                        [glyph]="'calendar'"
-                        [options]="'light'"
-                        [compact]="compact"
-                        (click)="toggleCalendar()" [attr.aria-label]="displayCalendarToggleLabel"
-                        [attr.aria-expanded]="isOpen">
-                </button>
+                <button
+                    fd-button
+                    [attr.tabindex]="buttonFocusable ? 0 : -1"
+                    [glyph]="'calendar'"
+                    [fdType]="'transparent'"
+                    [compact]="compact"
+                    (click)="toggleCalendar()"
+                    [attr.aria-label]="displayCalendarToggleLabel"
+                    [attr.aria-expanded]="isOpen"
+                ></button>
             </span>
         </fd-input-group>
     </fd-popover-control>
-    <fd-popover-body
-        [style.display]="'block'"
-        [attr.aria-expanded]="isOpen"
-        [attr.aria-hidden]="!isOpen">
-        <fd-calendar (closeCalendar)="closeFromCalendar()"
-                     [activeView]="activeView"
-                     (activeViewChange)="handleCalendarActiveViewChange($event)"
-                     [calType]="type"
-                     [disableFunction]="disableFunction ? disableFunction : null"
-                     [blockFunction]="blockFunction ? blockFunction : null"
-                     [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
-                     [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
-                     [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
-                     [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
-                     [selectedDate]="selectedDate"
-                     [selectedRangeDate]="selectedRangeDate"
-                     (selectedRangeDateChange)="handleRangeDateChange($event)"
-                     (selectedDateChange)="handleSingleDateChange($event)"
-                     [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
+    <fd-popover-body [style.display]="'block'" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
+        <fd-calendar
+            (closeCalendar)="closeFromCalendar()"
+            [activeView]="activeView"
+            (activeViewChange)="handleCalendarActiveViewChange($event)"
+            [calType]="type"
+            [disableFunction]="disableFunction ? disableFunction : null"
+            [blockFunction]="blockFunction ? blockFunction : null"
+            [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
+            [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
+            [blockRangeStartFunction]="blockRangeStartFunction ? blockRangeStartFunction : null"
+            [blockRangeEndFunction]="blockRangeEndFunction ? blockRangeEndFunction : null"
+            [selectedDate]="selectedDate"
+            [selectedRangeDate]="selectedRangeDate"
+            (selectedRangeDateChange)="handleRangeDateChange($event)"
+            (selectedDateChange)="handleSingleDateChange($event)"
+            [startingDayOfWeek]="startingDayOfWeek"
+        ></fd-calendar>
     </fd-popover-body>
 </fd-popover>

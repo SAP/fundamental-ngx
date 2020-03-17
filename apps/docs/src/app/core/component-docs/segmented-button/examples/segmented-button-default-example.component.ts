@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-button-group-default-example',
-    templateUrl: './button-group-default-example.component.html',
+    selector: 'fd-segmented-button-default-example',
+    templateUrl: './segmented-button-default-example.component.html',
 
 })
-export class ButtonGroupDefaultExampleComponent {
+export class SegmentedButtonDefaultExampleComponent {
 
     icon: number = 0;
     lmr: boolean[] = [false, false, false];
 
     isSelectedIcon(x: number): string {
-        return this.icon === x ? 'selected' : '';
+        return this.icon === x ? 'is-selected' : '';
     }
 
     isSelectedLMR(x: number): string {
-        return this.lmr[x] ? 'selected' : '';
+        return this.lmr[x] ? 'is-selected' : '';
     }
 
     setLocaleIcon(x: number): void {

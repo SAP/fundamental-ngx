@@ -1,1 +1,10 @@
-@import "~fundamental-styles/dist/button-split";
+@import '~fundamental-styles/dist/button-split';
+
+// temp fix, this should be added to styles
+.fd-button-split {
+    > .fd-button:nth-child(2) {
+        &.fd-button--transparent {
+            border-width: 0.0625rem;
+        }
+    }
+}

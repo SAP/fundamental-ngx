@@ -9,13 +9,12 @@
     </fd-modal-header>
     <fd-modal-body>
         <p>
-            In this example, the modal is not appended to the body but is instead a part of the modalDiv defined in the example.
-            This can be useful to set specific style rules for a modal, for example.
-
-            If you inspect this modal, you will find that it is NOT appended to the body.
+            In this example, the modal is not appended to the body but is instead a part of the modalDiv defined in the
+            example. This can be useful to set specific style rules for a modal, for example. If you inspect this modal,
+            you will find that it is NOT appended to the body.
         </p>
     </fd-modal-body>
     <fd-modal-footer>
-        <button fd-button [options]="'emphasized'" (click)="modal.close()">Close</button>
+        <button fd-button [fdType]="'emphasized'" (click)="modal.close()">Close</button>
     </fd-modal-footer>
 </ng-template>

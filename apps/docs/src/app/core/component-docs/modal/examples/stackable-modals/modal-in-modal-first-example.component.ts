@@ -13,7 +13,7 @@ import { ModalRef, ModalService } from '@fundamental-ngx/core';
             This is the first modal! Click the button below to open the second modal.
         </fd-modal-body>
         <fd-modal-footer>
-            <button fd-button (click)="openModal()" [options]="'emphasized'">Open Second Modal</button>
+            <button fd-button (click)="openModal()" [fdType]="'emphasized'">Open Second Modal</button>
         </fd-modal-footer>
 `
 })
