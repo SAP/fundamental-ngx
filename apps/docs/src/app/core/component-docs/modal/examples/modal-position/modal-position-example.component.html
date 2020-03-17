@@ -7,10 +7,10 @@
         This modal is opened in the bottom right corner. 100px from the bottom, 100px from the right.
     </fd-modal-body>
     <fd-modal-footer>
-        <button class="action-button" fd-button (click)="modal.dismiss('cancel')" [options]="'light'">
+        <button class="action-button" fd-button (click)="modal.dismiss('cancel')" [fdType]="'transparent'">
             Cancel
         </button>
-        <button class="action-button" fd-button (click)="modal.close('continue')" [fdType]="'main'">
+        <button class="action-button" fd-button (click)="modal.close('continue')" [fdType]="''">
             Continue
         </button>
     </fd-modal-footer>

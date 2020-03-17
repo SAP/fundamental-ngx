@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ButtonGroupComponent } from './button-group.component';
+import { SegmentedButtonComponent } from './segmented-button.component';
 
-describe('ButtonGroupComponent', () => {
-    let component: ButtonGroupComponent;
-    let fixture: ComponentFixture<ButtonGroupComponent>;
+describe('SegmentedButtonComponent', () => {
+    let component: SegmentedButtonComponent;
+    let fixture: ComponentFixture<SegmentedButtonComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonGroupComponent]
+            declarations: [SegmentedButtonComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ButtonGroupComponent);
+        fixture = TestBed.createComponent(SegmentedButtonComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

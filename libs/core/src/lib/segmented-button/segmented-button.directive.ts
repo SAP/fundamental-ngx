@@ -2,18 +2,18 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 
 /**
- * Directive to be applied to buttons that are members of a button group.
+ * Directive to be applied to buttons that are members of a segmented button.
  *
  * ```html
- * <button fd-button-grouped>Button</button>
+ * <button fd-segmented-button>Button</button>
  * ```
  */
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-button-grouped]'
+    selector: '[fd-segmented-button]'
 })
-export class ButtonGroupedDirective extends AbstractFdNgxClass {
+export class SegmentedButtonDirective extends AbstractFdNgxClass {
 
     /**
      * @deprecated
@@ -45,6 +45,7 @@ export class ButtonGroupedDirective extends AbstractFdNgxClass {
     /** @hidden */
     constructor(private elementRef: ElementRef) {
         super(elementRef);
+        console.warn('SegmentedButtonDirective is not supported and will be removed in 0.17.0')
     }
 
     /** @hidden */

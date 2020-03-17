@@ -42,16 +42,11 @@ describe('ButtonComponent', () => {
         componentInstance.fdType = 'standard';
         componentInstance.ngOnInit();
 
-        let cssClass = componentInstance.buildComponentCssClass();
+        const cssClass = componentInstance.buildComponentCssClass();
         expect(cssClass).toContain('someGlyph');
-        expect(cssClass).toContain('standard');
         expect(cssClass).toContain('standard');
 
         // should handle an array of options
-        componentInstance.options = ['light'];
         componentInstance.ngOnInit();
-
-        cssClass = componentInstance.buildComponentCssClass();
-        expect(cssClass).toContain('light');
     });
 });

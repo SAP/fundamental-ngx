@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-button-group-toggle-example',
-    templateUrl: './button-group-toggle-example.component.html',
+    selector: 'fd-segmented-button-toggle-example',
+    templateUrl: './segmented-button-toggle-example.component.html',
 
 })
-export class ButtonGroupToggleExampleComponent {
+export class SegmentedButtonToggleExampleComponent {
 
     lmr: boolean[] = [false, false, false];
 
     isSelectedLMR(x: number): string {
-        return this.lmr[x] ? 'selected' : '';
+        return this.lmr[x] ? 'is-selected' : '';
     }
 
     toggleLMR(x: number): void {
