@@ -1,16 +1,14 @@
 <fd-shellbar>
-
-    <button fd-shellbar-side-nav
-            fd-button
-            [options]="'light'"
-            [glyph]="'menu2'"
-            (click)="condensed = !condensed">
-    </button>
+    <button
+        fd-shellbar-side-nav
+        fd-button
+        [fdType]="'transparent'"
+        [glyph]="'menu2'"
+        (click)="condensed = !condensed"
+    ></button>
 
     <fd-shellbar-logo>
-        <a href="#"
-           class="fd-shellbar__logo fd-shellbar__logo--image-replaced"
-           aria-label="SAP"></a>
+        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
     </fd-shellbar-logo>
 </fd-shellbar>
 <div class="shellbar-sidenav-content-example">
@@ -46,14 +44,18 @@
 
         <div fd-side-nav-utility>
             <ul fd-nested-list [textOnly]="false">
-                <li fd-nested-list-item><a fd-nested-list-link>
-                    <span fd-nested-list-icon [glyph]="'menu'"></span>
-                    <span fd-nested-list-title>Link 1</span>
-                </a></li>
-                <li fd-nested-list-item><a fd-nested-list-link>
-                    <span fd-nested-list-icon [glyph]="'home'"></span>
-                    <span fd-nested-list-title>Link 2</span>
-                </a></li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <span fd-nested-list-icon [glyph]="'menu'"></span>
+                        <span fd-nested-list-title>Link 1</span>
+                    </a>
+                </li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <span fd-nested-list-icon [glyph]="'home'"></span>
+                        <span fd-nested-list-title>Link 2</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </fd-side-nav>

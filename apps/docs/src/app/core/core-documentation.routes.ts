@@ -1,7 +1,7 @@
-import {Routes} from '@angular/router';
-import {CoreDocumentationComponent} from './documentation/core-documentation.component';
-import {HomeDocsComponent} from './component-docs/core-home/core-home.component';
-import {NewComponentComponent} from './component-docs/new-component/new-component.component';
+import { Routes } from '@angular/router';
+import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
+import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
 export const ROUTES: Routes = [
     {
@@ -40,8 +40,8 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/button/button-docs.module').then(m => m.ButtonDocsModule)
             },
             {
-                path: 'buttonGroup',
-                loadChildren: () => import('./component-docs/button-group/button-group-docs.module').then(m => m.ButtonGroupDocsModule)
+                path: 'segmentedButton',
+                loadChildren: () => import('./component-docs/segmented-button/segmented-button-docs.module').then(m => m.SegmentedButtonDocsModule)
             },
             {
                 path: 'calendar',

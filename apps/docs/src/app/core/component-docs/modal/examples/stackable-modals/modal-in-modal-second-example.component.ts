@@ -13,7 +13,7 @@ import { ModalRef } from '@fundamental-ngx/core';
             <p>It is completely independent from the first modal and can be controlled separately!</p>
         </fd-modal-body>
         <fd-modal-footer>
-            <button fd-button (click)="modalRef.close()" [options]="'emphasized'">Close</button>
+            <button fd-button (click)="modalRef.close()" [fdType]="'emphasized'">Close</button>
         </fd-modal-footer>
     `
 })

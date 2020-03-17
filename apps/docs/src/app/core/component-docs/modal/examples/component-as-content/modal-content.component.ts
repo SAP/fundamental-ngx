@@ -14,10 +14,10 @@ import { ModalRef } from '@fundamental-ngx/core';
             <p>{{modalRef.data.thirdParagraph}}</p>
         </fd-modal-body>
         <fd-modal-footer>
-            <button class="action-button" fd-button [fdType]="'light'" (click)="this.modalRef.dismiss('cancel')">
+            <button class="action-button" fd-button [fdType]="'transparent'" (click)="this.modalRef.dismiss('cancel')">
                 Cancel
             </button>
-            <button class="action-button"  fd-button [options]="'emphasized'" (click)="this.modalRef.close('success')">
+            <button class="action-button"  fd-button [fdType]="'emphasized'" (click)="this.modalRef.close('success')">
                 Buy
             </button>
         </fd-modal-footer>
@@ -26,5 +26,5 @@ import { ModalRef } from '@fundamental-ngx/core';
 })
 export class ModalContentComponent {
 
-    constructor(public modalRef: ModalRef)  {}
+    constructor(public modalRef: ModalRef) { }
 }

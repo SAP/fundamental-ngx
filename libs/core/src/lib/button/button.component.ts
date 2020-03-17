@@ -1,8 +1,22 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation, OnInit } from '@angular/core';
-import { CssStyleBuilder, Hash, applyCssClass, CssClassBuilder, applyCssStyle } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
-export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'half';
+export type ButtonType = '' | 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu';
 export type ButtonOptions = 'light' | 'emphasized' | 'menu';
+
+
+// TODO remove in 0.9.0
+function replaceLightWithTransparent(option: string): string {
+    return option.replace('light', 'transparent');
+}
+
+// TODO remove in 0.9.0
+export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): string {
+    if (Array.isArray(options)) {
+        return options.map(option => `fd-button--${this.replaceLightWithTransparent(option)}`).join(' ');
+    }
+    return `fd-button--${this.replaceLightWithTransparent(options)}`
+}
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -20,11 +34,11 @@ export type ButtonOptions = 'light' | 'emphasized' | 'menu';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder {
+export class ButtonComponent implements OnInit, CssClassBuilder {
     private _class: string = '';
     @Input() set class(userClass: string) {
         this._class = userClass;
-        this.buildComponentCssClass();
+        this._change();
     } // user's custom classes
 
     /** The icon to include in the button. See the icon page for the list of icons.
@@ -33,28 +47,40 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     private _glyph: string
     @Input() set glyph(icon: string) {
         this._glyph = icon;
-        this.buildComponentCssClass();
-        this.buildComponentCssStyle();
+        this._change();
     };
 
-    /** Defines if there will be added fd-button class. Enabled by default. */
-    @Input() fdButtonClass: boolean = true;
-
     /** Whether to apply compact mode to the button. */
-    @Input() compact: boolean;
+    private _compact: boolean = false;
+    @Input() set compact(isComact: boolean) {
+        this._compact = isComact;
+        this._change();
+    }
 
-    /** The type of the button. Types include 'standard', 'positive', 'medium', 'negative', 'half'.
+    /** The type of the button. Types include:
+     * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
      * Leave empty for default (Action button).'*/
-    @Input() fdType: ButtonType;
+    private _type: ButtonType;
+    @Input() set fdType(type: ButtonType) {
+        this._type = type;
+        this._change();
+    }
 
-    /** @hidden */
-    @Input() semantic: string; // TODO: deprecated, leaving for backwards compatibility
+    /** Whether to apply menu mode to the button.*/
+    private _menu: boolean = false;
+    @Input() set fdMenu(menu: boolean) {
+        this._menu = menu;
+        this._change();
+    }
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input() options: ButtonOptions | ButtonOptions[];
-
-    /** @hidden */
-    @Input() size: string; // TODO: deprecated, leaving for backwards compatibility
+    private _options: ButtonOptions | ButtonOptions[]
+    @Input() options(opt: ButtonOptions | ButtonOptions[]) {
+        console.warn(`fd-button options property is deprecated and will be removed in 0.17.0.
+        Please follow the breaking changes.`)
+        this._options = opt;
+        this._change();
+    };
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {
@@ -65,8 +91,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
      * function should build css style
      */
     ngOnInit(): void {
-        this.buildComponentCssClass();
-        this.buildComponentCssStyle();
+        this._change();
     }
 
     @applyCssClass
@@ -76,24 +101,14 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
      */
     buildComponentCssClass(): string {
         return [
-            this.fdButtonClass ? 'fd-button' : '',
-            this.compact ? 'fd-button--compact' : '',
+            'fd-button',
+            this._type ? `fd-button--${this._type}` : '',
+            this._compact ? 'fd-button--compact' : '',
+            this._menu ? `fd-button--menu` : '',
+            this._options ? getOptionCssClass(this._options) : '',
             this._glyph ? `sap-icon--${this._glyph}` : '',
-            this.fdType ? `fd-button--${this.fdType}` : '',
-            this.options ? this._getOptionCssClass(this.options) : '',
             this._class
         ].filter(x => x !== '').join(' ');
-    }
-
-    @applyCssStyle
-    /** CssStyleBuilder interface implementation
-     * function must return hashmap where
-     * key:string
-     * value:any
-     */
-    buildComponentCssStyle(): Hash<number | string> {
-        return {
-        }
     }
 
     /** HasElementRef interface implementation
@@ -103,13 +118,9 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
         return this._elementRef;
     }
 
-    /** @hidden */
-    private _getOptionCssClass(options: string | ButtonOptions[]): string {
-        if (Array.isArray(this.options)) {
-            return this.options.map(option => `fd-button--${option}`).join(' ');
-        }
-        return `fd-button--${options}`
+    private _change(): void {
+        this.buildComponentCssClass();
     }
+
+
 }
-
-

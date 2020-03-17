@@ -1,24 +1,23 @@
 <div fd-bar [inPage]="true" [size]="'m_l'">
     <div fd-bar-left>
         <fd-bar-element>
-            <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="navigationArrow$ | async" [compact]="true"></button>
+            <button fd-button [fdType]="'transparent'" [glyph]="navigationArrow$ | async" [compact]="true"></button>
         </fd-bar-element>
         <fd-bar-element>
-           Left Section
+            Left Section
         </fd-bar-element>
     </div>
     <div fd-bar-middle>
         <fd-bar-element>
-           Middle Section
+            Middle Section
         </fd-bar-element>
     </div>
     <div fd-bar-right>
         <fd-bar-element>
-           Right Section
+            Right Section
         </fd-bar-element>
         <fd-bar-element>
-           <fd-image [size]="'s'" [photo]="'https://placeimg.com/400/400/nature'">
-           </fd-image>
+            <fd-image [size]="'s'" [photo]="'https://placeimg.com/400/400/nature'"> </fd-image>
         </fd-bar-element>
     </div>
 </div>

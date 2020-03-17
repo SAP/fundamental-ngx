@@ -6,7 +6,7 @@ import { Directive } from '@angular/core';
  * ```html
  * <div fd-action-bar>
  *     <div fd-action-bar-back>
- *         <button aria-label="back" fd-button [fdType]="'light'" [compact]="true" [glyph]="'nav-back'"></button>
+ *         <button aria-label="back" fd-button [fdType]="'transparent'" [compact]="true" [glyph]="'nav-back'"></button>
  *     </div>
  * </div>
  * ```
@@ -18,4 +18,4 @@ import { Directive } from '@angular/core';
         class: 'fd-action-bar__back'
     }
 })
-export class ActionBarBackDirective {}
+export class ActionBarBackDirective { }

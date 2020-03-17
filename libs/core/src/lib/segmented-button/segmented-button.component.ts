@@ -4,24 +4,24 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  * Container for grouped buttons.
  *
  * ```html
- * <fd-button-group>
- *     <button fd-button-grouped>Button</button>
- * </fd-button-group>
+ * <fd-segmented-button>
+ *     <button fd-button>Button</button>
+ * </fd-segmented-button>
  * ```
  */
 @Component({
-    selector: 'fd-button-group',
-    templateUrl: './button-group.component.html',
-    styleUrls: ['./button-group.component.scss'],
+    selector: 'fd-segmented-button',
+    templateUrl: './segmented-button.component.html',
+    styleUrls: ['./segmented-button.component.scss'],
     host: {
         'role': 'group'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonGroupComponent {
+export class SegmentedButtonComponent {
 
     /** @hidden */
-    @HostBinding('class.fd-button-group')
+    @HostBinding('class.fd-segmented-button')
     fdButtonGroupClass: boolean = true;
 }
