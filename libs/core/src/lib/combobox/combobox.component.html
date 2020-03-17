@@ -7,7 +7,7 @@
             class="fd-combobox-popover-custom">
     <fd-popover-control>
         <fd-input-group [glyph]="glyph"  [compact]="compact" [button]="true" [state]="state" [inShellbar]="inShellbar"
-                        (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable">
+                        (addOnButtonClicked)="onPrimaryButtonClick()" [buttonFocusable]="buttonFocusable" [disabled]="disabled">
             <input #searchInputElement type="text"
                    fd-input-group-input
                    [compact]="compact"
@@ -23,13 +23,13 @@
         <ng-content></ng-content>
         <ul fd-list [dropdownMode]="true" class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight">
             <ng-container *ngIf="groupBy">
-                <ng-container *ngFor="let group of displayedValues | groupByPipe:groupBy | keyvalue">
+                <ng-container *ngFor="let group of displayedValues | groupByPipe:groupBy | keyvalue; let groupIndex = index">
                     <li fd-list-group-header>
                         {{group.key}}
                     </li>
-                    <li *ngFor="let term of group.value; let index = index;"
-                        (click)="onMenuClickHandler(index)"
-                        (keydown)="onMenuKeydownHandler($event, index)"
+                    <li *ngFor="let term of group.value; let termIndex = index;"
+                        (click)="onMenuClickHandler((groupIndex *  group.value.length) + termIndex)"
+                        (keydown)="onMenuKeydownHandler($event, (groupIndex *  group.value.length) + termIndex)"
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
