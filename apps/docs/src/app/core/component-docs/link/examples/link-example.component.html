@@ -8,10 +8,10 @@
 <br><br>
 <a [routerLink]="['./']" fd-link>
     Icon Right Link
-    <fd-icon [glyph]="'slim-arrow-right'" [size]="'s'"></fd-icon>
+    <fd-icon [glyph]="arrowRight$ | async" [size]="'s'"></fd-icon>
 </a>
 <br><br>
 <a [routerLink]="['./']" fd-link>
-    <fd-icon [glyph]="'slim-arrow-left'" [size]="'s'"></fd-icon>
+    <fd-icon [glyph]="arrowLeft$ | async" [size]="'s'"></fd-icon>
     Icon Left Link
 </a>

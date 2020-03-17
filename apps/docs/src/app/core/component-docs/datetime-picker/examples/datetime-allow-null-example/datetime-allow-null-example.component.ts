@@ -10,7 +10,7 @@ import { DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
 })
 export class DatetimePickerAllowNullExampleComponent {
 
-    @ViewChild(DatetimePickerComponent, { static: false }) datePicker: DatetimePickerComponent;
+    @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent;
 
     selectedDay: FdDatetime = FdDatetime.getToday();
 

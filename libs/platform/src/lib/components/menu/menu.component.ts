@@ -1,357 +1,201 @@
+/**
+ * @license
+ * Copyright (c) 2010-2020 SAP
+ * Copyright (c) 2010-2020 Google LLC. http://angular.io/license
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    Input,
-    OnChanges,
     OnInit,
-    SimpleChanges,
-    ViewEncapsulation,
-    ViewChildren,
+    AfterViewInit,
+    ContentChildren,
     QueryList,
-    OnDestroy
+    ViewChild,
+    TemplateRef,
+    Output,
+    EventEmitter,
+    OnDestroy,
+    Input,
+    ChangeDetectionStrategy,
+    AfterContentInit
 } from '@angular/core';
+
 import { MenuItemComponent } from './menu-item.component';
-import { MenuKeyboardService } from '@fundamental-ngx/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
+import { Observable, merge, Subscription } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
+import { RtlService } from '@fundamental-ngx/core';
 
 /**
- * Interface that represents menu item.
+ * Variables for generating menu IDs.
+ * Needed for establising 'aria-control' between trigger and menu.
  */
-export interface MenuItem {
-    /**
-     * Menu item label.
-     */
-    label: string;
+const MENU_ID_ROOT = 'fdp-menu-';
+let menuIdCounter = 0;
 
-    /**
-     * Is menu item selectable. If item is selectable, then it will display
-     * selected/non-selected state when toggled.
-     */
-    selectable?: boolean;
-
-    /**
-     * Is menu item selected?
-     */
-    selected?: boolean;
-
-    /**
-     * Icon to display in front of menu label. Accepted values are SAP class icon names
-     * (see [SAP Fundamental Styles: Icon](https://sap.github.io/fundamental-styles/components/icon.html)).
-     *
-     * Setting this will also override the default icon for "selectable" menu items.
-     */
-    icon?: string;
-
-    /**
-     * A secondary icon to display at the end of the menu item. No action will be performed for this icon,
-     * it is just for better accessibility or to make the meaning of the menu item more clear.
-     */
-    secondaryIcon?: string;
-
-    /**
-     * Whether this item should be disabled or not.
-     */
-    disabled?: boolean;
-
-    /**
-     * a custom label different from `label` for showing in tooltips for accessibility purpose.
-     */
-    tooltipLabel?: string;
-
-    /**
-     * if this menu item itself has sub-menu opening up, childItems will contain the list of those items.
-     */
-    childItems?: MenuItem[]; // move this to MegaMenu
-
-    /**
-     * A unique identifier for this item
-     */
-    id?: number;
-
-    /**
-     * Callback function which will execute when menu item is clicked.
-     */
-    command(): void;
-}
-
-/**
- * Interface that represents menu group.
- */
-export interface MenuGroup {
-    /**
-     * Menu group label. This field is optional.
-     */
-    label?: string;
-
-    /**
-     * Set icon for menu group.
-     */
-    icon?: string;
-
-    /**
-     * Menu group acts as a radio group. Only one menu item of the group
-     * will be in selected state at a time.
-     */
-    // isRadioGroup?: boolean;
-
-    /**
-     * a custom label different from `label` for showing in tooltips for accessibility purpose.
-     */
-    tooltipLabel?: string;
-
-    /**
-     * List of menu items of the group.
-     */
-    groupItems: MenuItem[];
-}
-
-export type FdpItem = MenuItem | MenuGroup;
-
-/**
- * `<fdp-menu>` is a menu component which provides navigation, action and selection
- * options.
- *
- * ```html
- <fdp-menu [menuItems]="menuData"
-           [showSeparator]=true
-           [isScrolling]=true
-           [scrollLimit]=8
-           [width]="'600px'">
-</fdp-menu>
-  ```
- *
- * Menu item/group data should be provided to `<fdp-menu>` using an array of MenuItem or MenuGroup:
-  ```ts
-  complexMenuData: FdpItem[] = [];
-  ```
- *
-  ```ts
-  this.complexMenuData = [{
-    label: 'Item One',
-    command: () => {
-      alert('The first item.')
-    },
-    selectable: true,
-    selected: true,
-    secondaryIcon: 'sap-icon--grid',
-  }, {
-   label: 'Second Item',
-     groupItems: [
-               {
-                 label: 'Item 1 in Group 1',
-                 command: () => {
-                   alert('Item 1 in Group 1 called');
-                 }
-               },
-               {
-                 label: 'Item 2 in Group 1',
-                 command: () => {
-                   alert('Item 2 in Group 111');
-                 },
-                 disabled: true
-              }
-            ]
-       },{
-      label: 'Third Item',
-      command: () => {
-        alert("Third");
-      },
-      icon: 'grid'
-  }];
-  ```
-  Please note that `secondaryIcon` takes icon in the format `sap-icon<icon-name>` whereas `icon` takes the format `<icon-name>`.
- *
- */
 @Component({
     selector: 'fdp-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-    private numberOfItems: number = 0;
+export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private _id: string;
+    public menuId: string;
 
-    /**
-     * Add separating line between menu items. [Default: false]
-     */
     @Input()
-    public showSeparator = false;
+    get id(): string {
+        return this._id;
+    };
+    set id(id: string) {
+        this._id = id;
 
-    /**
-     * Specify if items are to scroll
-     */
-    @Input()
-    public isScrolling: boolean = false;
-
-    /**
-     * Specify the number of items after which scroll must begin
-     */
-    @Input()
-    public scrollLimit: number;
-
-    /**
-     * the max width of the menu component
-     */
-    @Input()
-    public width: string;
-
-    /**
-     * The menu items that are passed in by the user.
-     */
-    @Input()
-    public menuItems: FdpItem[] = [];
-
-    /** @hidden */
-    public groups: MenuGroup[];
-    /** @hidden */
-    public sortedQueryList: MenuItemComponent[] = [];
-
-    /** @hidden */
-    @ViewChildren(MenuItemComponent)
-    menuQueryList: QueryList<MenuItemComponent>;
-
-    constructor(private cd: ChangeDetectorRef, private keyboardService: MenuKeyboardService) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.isValidScroll()) {
-            // if scroll limit was not specified but isScrolling flag was used, use default value
-            // or if scroll limit was specified but isScrolling flag was not marked true, even then use default value
-            this.scrollLimit = this.numberOfItems; // default
-            // can also disable scrolling explicitly
-            this.isScrolling = false;
-        }
-        this.groups = this.processData(this.menuItems);
-        this.cd.markForCheck();
+        // Use 'id' property to create menu ID for aria-control purposes.
+        this.menuId = MENU_ID_ROOT + id;
     }
 
-    private isValidScroll() {
-        return (
-            (this.isScrolling && (this.scrollLimit === undefined || this.scrollLimit <= 0)) ||
-            (!this.isScrolling && this.scrollLimit > 0)
-        );
-    }
+    /**
+     * Horizontal position of menu in relation to trigger element.
+     */
+    @Input() xPosition: 'before' | 'after' = 'after';
 
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.width) {
-            let minWidth: number;
-            let splitWidthNumber: number;
-            if (this.width.includes('em')) {
-                splitWidthNumber = Number(this.width.split('em')[0]);
-                minWidth = 13.71;
-                this.width = this.enforceGreaterThanMinWidth(splitWidthNumber, minWidth) + 'em';
-            } else if (this.width.includes('rem')) {
-                splitWidthNumber = Number(this.width.split('rem')[0]);
-                minWidth = 13.71; // todo pending calc for rem
-                this.width = this.enforceGreaterThanMinWidth(splitWidthNumber, minWidth) + 'rem';
-            } else if (this.width.includes('px')) {
-                splitWidthNumber = Number(this.width.split('px')[0]);
-                minWidth = 192;
-                this.width = this.enforceGreaterThanMinWidth(splitWidthNumber, minWidth) + 'px';
-            }
-        }
-        this.cd.markForCheck();
-    }
+    /**
+     * The templateRef needs to be available to the menu trigger for
+     * opening in a CDK overlay.
+     */
+    @ViewChild('menuTemplate', { static: false }) templateRef: TemplateRef<any>;
 
-    private enforceGreaterThanMinWidth(splitWidthNumber: number, minWidth: number): number {
-        if (splitWidthNumber < minWidth) {
-            // minimum width
-            splitWidthNumber = minWidth;
-        }
-        return splitWidthNumber;
-    }
+    /**
+     * Child items of the menu.
+     */
+    @ContentChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.sortQueryList();
-        this.handleKeypressForSortedQueryList();
+    /**
+     * Emitted event when menu closes
+     */
+    @Output() close: EventEmitter<MenuCloseMethod> = new EventEmitter();
 
-        this.cd.markForCheck();
-    }
+    private _direction: 'ltr' | 'rtl' | void = 'ltr';
+    private _keyManager: FocusKeyManager<MenuItemComponent>;
+    private _tabSubscription = Subscription.EMPTY;
+    private _dirChangeSubscription = Subscription.EMPTY;
 
-    private sortQueryList(): void {
-        this.sortedQueryList = this.menuQueryList.toArray();
-        this.sortedQueryList.sort((a, b) => {
-            return parseInt(a.index, 10) - parseInt(b.index, 10);
+    constructor(
+        private _rtl: RtlService
+    ) {
+        this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
+            this._direction = value ? 'rtl' : 'ltr';
+            this._setMenuItemCascadeDirection();
         });
     }
 
-    private handleKeypressForSortedQueryList(): void {
-        this.sortedQueryList.forEach((item: MenuItemComponent, index: number) =>
-            item.keyDown.pipe(takeUntil(this.onDestroy$)).subscribe((keyboardEvent: KeyboardEvent) => {
-                this.handleKeyPress(keyboardEvent, parseInt(item.index, 10));
-            })
-        );
+    ngOnInit() {
     }
 
-    onItemClick(item: MenuItem, _group: MenuGroup): void {
-        if (item.selectable) {
-            item.selected = !item.selected;
-            this.cd.markForCheck();
+    ngAfterViewInit() {
+        if (!this.menuId) {
+            this.menuId = MENU_ID_ROOT + menuIdCounter++;
         }
-        item.command();
+        if (this.menuItems) {
+            this._keyManager = new FocusKeyManager(this.menuItems);
+            this._tabSubscription = this._keyManager.tabOut.subscribe(() => {
+                this.close.emit('keyboard');
+            });
+        }
     }
 
-    private isMenuGroup(item: FdpItem): item is MenuGroup {
-        return (item as MenuGroup).groupItems !== undefined;
+    ngAfterContentInit() {
+        this._setMenuItemCascadeDirection();
     }
 
-    processData(data: FdpItem[]): MenuGroup[] {
-        const groups: MenuGroup[] = [];
-        let newGroup: MenuItem[] = [];
+    ngOnDestroy() {
+        this.close.complete();
+        this._tabSubscription.unsubscribe();
+        this._dirChangeSubscription.unsubscribe();
+    }
 
-        let index = 0;
-        if (data) {
-            data.forEach(record => {
-                if (this.isMenuGroup(record)) {
-                    if (newGroup.length > 0) {
-                        // adding previously unpushed individual items into group
-                        this.numberOfItems++;
-                        groups.push({
-                            groupItems: newGroup
-                        });
-                        newGroup = [];
-                    }
-                    // adding a new group with header
-                    this.numberOfItems++;
-                    record.groupItems.forEach(groupItem => {
-                        groupItem.id = index;
-                        index++;
-                    });
-                    groups.push(record);
-                } else {
-                    // no header, adding individual items
-                    this.numberOfItems++;
-                    record.id = index;
-                    index++;
-                    newGroup.push(record);
+    onKeydown($event: KeyboardEvent) {
+        const code = $event.key;
+        switch (code) {
+            case 'Left':
+            case 'ArrowLeft':
+                if (this.cascadesRight()) {
+                    this.close.emit('arrow');
                 }
-            });
+                break;
+            case 'Right':
+            case 'ArrowRight':
+                if (this.cascadesLeft()) {
+                    this.close.emit('arrow');
+                }
+                break;
+            case 'Esc':
+            case 'Escape':
+                this.close.emit('keyboard');
+                break;
+            case 'Enter':
+                this.close.emit('keyboard');
+                break;
+            default:
+                this._keyManager.onKeydown($event);
         }
-        // if no group headers present or if last set of items have not yet been pushed to a group
-        if (newGroup.length > 0) {
-            groups.push({
-                groupItems: newGroup
-            });
-        }
-        return groups;
     }
 
-    handleKeyPress(event: KeyboardEvent, index: number) {
-        this.keyboardService.keyDownHandler(event, index, this.sortedQueryList);
+    onClick($event: MouseEvent): void {
+        this.close.emit('mouse');
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
+    focusOnFirstItem(origin: FocusOrigin = 'program'): void {
+        this._keyManager.setFocusOrigin(origin).setFirstItemActive();
     }
+
+    closeMenu(method: MenuCloseMethod): void {
+        this.close.emit(method);
+    }
+
+    menuItemHoverChange(): Observable<MenuItemComponent> {
+        const menuItems = this.menuItems.changes as Observable<QueryList<MenuItemComponent>>;
+        return menuItems.pipe(
+            startWith(this.menuItems),
+            switchMap(items => merge(...items.map((item: MenuItemComponent) => item.hovered)))
+        ) as Observable<MenuItemComponent>;
+    }
+
+    _setMenuItemCascadeDirection(): void {
+        if (!this.menuItems) {
+            return;
+        }
+        // set cascade direction
+        this.menuItems.forEach(item => {
+            item.cascadeDirection = this.cascadesLeft() ? 'left' : 'right';
+        });
+    }
+
+    cascadesRight(): boolean {
+        return (this.xPosition === 'after' && this._direction === 'ltr')
+            || (this.xPosition === 'before' && this._direction === 'rtl');
+    }
+
+    cascadesLeft(): boolean {
+        return (this.xPosition === 'after' && this._direction === 'rtl')
+            || (this.xPosition === 'before' && this._direction === 'ltr');
+    }
+
 }
+
+export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';

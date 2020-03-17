@@ -15,7 +15,7 @@ export class NotificationAsObjectExampleComponent {
 
     public closeReason: string;
 
-    @ViewChild('avatarRef', {read: TemplateRef, static: false }) avatarRef: TemplateRef<any>;
+    @ViewChild('avatarRef', { read: TemplateRef }) avatarRef: TemplateRef<any>;
 
     constructor (
         private notificationService: NotificationService

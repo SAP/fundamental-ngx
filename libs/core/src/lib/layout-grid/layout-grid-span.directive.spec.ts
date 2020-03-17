@@ -8,7 +8,7 @@ import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
     template: '<div #directiveElement fd-layout-grid-span [columnSpan]="columnSpan">Span</div>'
 })
 export class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
     columnSpan: number;
 }

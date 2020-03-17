@@ -7,7 +7,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
     template: '<div #componentElement fd-form-item [horizontal]="horizontal" [isInline]="inline">FormItem</div>'
 })
 export class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef, static: false })
+    @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
 

@@ -1,13 +1,12 @@
 <header>Menu</header>
-<!-- <description>
-    Menu item anchors will be keyboard navigable via the tab key provided they have <code>[routerLink]</code> or
-    <code>[attr.href]</code> attributes.
-</description> -->
 <description>
-    Menu that can be used out-of-the-box with a tag <code>fdp-menu</code> with available attributes. Menu is navigable
-    by pressing tab or arrow up/down, space and enter keys.
+    <p>Menu is a component that contains a list of MenuItems which the user can execute actions from.
+        The Menu cannot be used alone; it requires a "trigger" element which can be designated using
+        the <code>fdpMenuTriggerFor</code> directive.</p>
+
+    <p>The Menu can be navigated using the keyboard arrow up/down, space and enter keys.</p>
 </description>
-<import module="MenuItem, MenuGroup"></import>
+<import module="PlatformMenuModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 })
 export class ComboboxColumnsExampleComponent {
 
+    searchTerm = '';
+
     dropdownValues = [
         {name: 'Apple', price: '1.00 USD'},
         {name: 'Pineapple', price: '3.00 USD'},

@@ -10,7 +10,7 @@ import {Component, ViewChild} from '@angular/core';
     `
 })
 class TestCheckboxComponent {
-    @ViewChild(CheckboxComponent, {static: false}) checkboxRef;
+    @ViewChild(CheckboxComponent) checkboxRef;
     value: any = false;
 }
 

@@ -1,4 +1,5 @@
 // @import url("../../../node_modules/fundamental-styles/dist/fundamental-styles.css");
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 $gutter-size: 15px;
 
@@ -9,7 +10,9 @@ body {
     overflow: hidden;
 }
 
-*, ::after, ::before {
+*,
+::after,
+::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
@@ -82,7 +85,9 @@ fd-card {
     position: relative;
     display: inline-block;
     margin-right: 4px;
+
     @at-root {
+
         [dir="rtl"] &,
         &[dir="rtl"] {
             margin-right: 0;
@@ -95,6 +100,7 @@ fd-card {
 
 .middle-marker-container {
     @at-root {
+
         [dir="rtl"] &,
         &[dir="rtl"] {
             right: initial !important;
@@ -144,12 +150,14 @@ pre {
     text-align: center;
 }
 
-.is-disabled, .is-blocked {
+.is-disabled,
+.is-blocked {
     pointer-events: none;
 }
 
 //highlight overrides
-.hljs-tag, .hljs-name {
+.hljs-tag,
+.hljs-name {
     color: #000080;
 }
 
@@ -177,7 +185,8 @@ pre {
     padding: 10px 10px 0 10px;
 }
 
-a, a:focus {
+a,
+a:focus {
     text-decoration: none;
 }
 
@@ -216,12 +225,12 @@ a, a:focus {
     }
 }
 
-.fd-playground--markdown > h1 {
+.fd-playground--markdown>h1 {
     font-size: 2.2rem;
     line-height: 1;
 }
 
-.fd-playground--markdown > p {
+.fd-playground--markdown>p {
     margin-bottom: 1.5rem;
     font-size: 1rem;
     font-weight: 300;

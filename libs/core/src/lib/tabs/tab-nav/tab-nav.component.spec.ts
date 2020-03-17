@@ -35,10 +35,10 @@ import { TabLinkDirective } from '../tab-link/tab-link.directive';
     `
 })
 class TestNavWrapperComponent {
-    @ViewChild(TabNavComponent, { static: false })
+    @ViewChild(TabNavComponent)
     tabNavDirective: TabNavComponent;
 
-    @ViewChild('fdTabLink', { static: false, read: TabLinkDirective })
+    @ViewChild('fdTabLink', { read: TabLinkDirective })
     tabLink: TabLinkDirective;
 
     showLastTab: boolean = true;

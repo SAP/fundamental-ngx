@@ -19,8 +19,10 @@ import {
     ModalModule,
     MultiInputModule,
     PopoverModule,
-    SideNavigationModule
+    SideNavigationModule,
+    BarModule
 } from '@fundamental-ngx/core';
+import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
 
 const routes: Routes = [
     {
@@ -43,7 +45,8 @@ const routes: Routes = [
         SideNavigationModule,
         MultiInputModule,
         MenuModule,
-        ModalModule
+        ModalModule,
+        BarModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -55,7 +58,8 @@ const routes: Routes = [
         PopoverDynamicExampleComponent,
         PopoverDropdownExampleComponent,
         PopoverPlacementExampleComponent,
-        PopoverProgrammaticOpenExampleComponent
+        PopoverProgrammaticOpenExampleComponent,
+        PopoverComplexExampleComponent
     ]
 })
 export class PopoverDocsModule {

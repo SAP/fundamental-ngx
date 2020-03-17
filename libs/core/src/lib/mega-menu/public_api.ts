@@ -4,5 +4,6 @@ export * from './mega-menu-link/mega-menu-link.directive'
 export * from './mega-menu-subitem.directive';
 export * from './mega-menu-sublink.directive';
 export * from './mega-menu-group/mega-menu-group.component';
+export * from './mega-menu-list/mega-menu-list.directive';
 export * from './mega-menu-title/mega-menu-title.directive';
 export * from './mega-menu.component';

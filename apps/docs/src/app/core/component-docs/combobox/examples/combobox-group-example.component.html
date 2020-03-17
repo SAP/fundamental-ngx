@@ -1,0 +1,20 @@
+<fd-combobox [(ngModel)]="searchTerm"
+             [dropdownValues]="dropdownValues"
+             [groupTemplate]="groupTemplate"
+             [displayFn]="displayFunc"
+             [placeholder]="'Type some text...'"
+             [maxHeight]="'250px'">
+</fd-combobox>
+
+<ng-template #groupTemplate>
+    <ng-container *ngFor="let group of dropdownValues">
+        <li fd-list-group-header>
+            {{group.name}}
+        </li>
+        <li fd-list-item *ngFor="let value of group.values">
+            <span fd-list-title>
+                {{value}}
+            </span>
+        </li>
+    </ng-container>
+</ng-template>

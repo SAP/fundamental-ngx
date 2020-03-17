@@ -117,6 +117,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     @Input()
     itemTemplate: TemplateRef<any>;
 
+    /**
+     * The template with which to display grouped items.
+     * Use it by passing an ng-template with implicit content. See examples for more info.
+     */
+    @Input()
+    groupTemplate: TemplateRef<any>;
+
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string = '200px';
@@ -176,7 +183,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     listItems: QueryList<ListItemDirective>;
 
     /** @hidden */
-    @ViewChild('searchInputElement', { static: false })
+    @ViewChild('searchInputElement')
     searchInputElement: ElementRef;
 
     /** @hidden */

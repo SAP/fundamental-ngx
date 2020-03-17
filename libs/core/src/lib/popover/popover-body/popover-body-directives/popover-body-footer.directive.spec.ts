@@ -4,11 +4,11 @@ import { PopoverModule } from '../../popover.module';
 
 @Component({
     template: `
-        <div #directiveElement fd-popover-body-footer [compact]="true">Popover Footer Test</div>
+        <div #directiveElement fd-popover-body-footer>Popover Footer Test</div>
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 describe('PopoverBodyFooterDirective', () => {
@@ -34,10 +34,6 @@ describe('PopoverBodyFooterDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-popover__body-footer');
-    });
-
-    it('should take into account the compact input property', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-popover__body-footer--compact');
+        expect(component.ref.nativeElement.className).toBe('fd-popover__body-footer');
     });
 });

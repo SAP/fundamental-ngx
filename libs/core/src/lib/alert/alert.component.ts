@@ -48,7 +48,7 @@ let alertUniqueId: number = 0;
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
 
     /** @hidden */
-    @ViewChild('container', { read: ViewContainerRef, static: false })
+    @ViewChild('container', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
     /** Whether the alert is dismissible. */

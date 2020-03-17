@@ -25,7 +25,8 @@
                     [options]="buttonOptions"
                     [glyph]="glyph"
                     [class]="inShellbar ? 'fd-shellbar__button' : ''"
-                    (click)="buttonClicked($event)">
+                    (click)="buttonClicked($event)"
+                    type="button">
                 <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
             </button>
         </span>

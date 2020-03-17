@@ -9,7 +9,7 @@ import { PanelModule } from '../panel.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

@@ -8,7 +8,7 @@ import { FormModule } from '../form.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 
