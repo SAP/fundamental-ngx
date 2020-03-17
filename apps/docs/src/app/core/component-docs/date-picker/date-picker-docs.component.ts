@@ -6,7 +6,6 @@ import * as datePickeri18nSrc from '!raw-loader!./examples/date-picker-i18n-exam
 import * as datePickerFormatSrc from '!raw-loader!./examples/date-picker-format-example.component.ts';
 import * as datePickerAllowNullSrc from '!raw-loader!./examples/date-picker-allow-null-example.component.ts';
 import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-example.component.ts';
-import * as serviceSrc from '!raw-loader!./examples/custom-example.service.ts';
 import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
 import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
 import * as datePickerComplexI18nSrcTs from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
@@ -46,13 +45,6 @@ export class DatePickerDocsComponent {
             component: 'DatePickerI18nExampleComponent',
             code: datePickeri18nSrc,
             fileName: 'datepicker-i18n-example'
-        },
-        {
-            language: 'typescript',
-            code: serviceSrc,
-            service: true,
-            component: 'CustomExampleService',
-            fileName: 'custom-example'
         }
     ];
 
