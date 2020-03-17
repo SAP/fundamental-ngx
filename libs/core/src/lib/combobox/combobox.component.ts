@@ -118,11 +118,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     itemTemplate: TemplateRef<any>;
 
     /**
-     * The template with which to display grouped items.
-     * Use it by passing an ng-template with implicit content. See examples for more info.
+     * The object attribute by which to group items.
      */
     @Input()
-    groupTemplate: TemplateRef<any>;
+    groupBy: string;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
