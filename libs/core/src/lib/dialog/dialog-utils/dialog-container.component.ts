@@ -19,7 +19,10 @@ import { DIALOG_CONFIG, DialogConfig } from './dialog-config.class';
     selector: 'fd-dialog-container',
     template: `
         <ng-container #contentContainer></ng-container>
-    `
+    `,
+    host: {
+        '[class]': 'dialogConfig.containerClass'
+    }
 })
 export class DialogContainerComponent implements AfterViewInit {
 
@@ -39,6 +42,7 @@ export class DialogContainerComponent implements AfterViewInit {
         private _changeDetectorRef: ChangeDetectorRef,
         private _componentFactoryResolver: ComponentFactoryResolver) {
     }
+
     /** @hidden */
     ngAfterViewInit(): void {
         this._loadDialog();

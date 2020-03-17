@@ -61,20 +61,6 @@ export class DialogService {
                 }
             );
 
-        // const dialogInjector = Injector.create({providers: [], parent: overlayInjector});
-        // const component = this._dynamicComponentService.createDynamicComponent<DialogComponent>(
-        //     contentType,
-        //     DialogComponent,
-        //     {...dialogConfig, container: backdrop.location.nativeElement},
-        //     {
-        //         injector: dialogInjector,
-        //         services: [dialogRef]
-        //     }
-        // );
-
-        // this._setDialogSize(component, dialogConfig);
-        // this._setDialogPosition(component, dialogConfig.position);
-
         this._dialogs.push(component);
 
         const defaultBehaviourOnClose = () => {
@@ -98,50 +84,6 @@ export class DialogService {
         this._dialogs[indexOf] = null;
         this._dialogs = this._dialogs.filter(item => item !== null && item !== undefined);
 
-    }
-
-    /** @hidden */
-    private _setDialogSize(componentRef: ComponentRef<DialogComponent>, configObj: DialogConfig): void {
-        componentRef.location.nativeElement.style.minWidth = configObj.minWidth;
-        componentRef.location.nativeElement.style.minHeight = configObj.minHeight;
-        componentRef.location.nativeElement.style.maxWidth = configObj.maxWidth;
-        componentRef.location.nativeElement.style.maxHeight = configObj.maxHeight;
-        componentRef.location.nativeElement.style.width = configObj.width;
-        componentRef.location.nativeElement.style.height = configObj.height;
-    }
-
-    /** @hidden */
-    private _setDialogPosition(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
-        if (position) {
-            this._removeCurrentPositionModifiers(componentRef, position);
-            componentRef.location.nativeElement.style.top = position.top;
-            componentRef.location.nativeElement.style.bottom = position.bottom;
-            componentRef.location.nativeElement.style.right = position.right;
-            componentRef.location.nativeElement.style.left = position.left;
-        }
-    }
-
-    /** @hidden */
-    private _removeCurrentPositionModifiers(componentRef: ComponentRef<DialogComponent>, position: DialogPosition): void {
-
-        const isXPositionSet: boolean = !!(position.right || position.left);
-        const isYPositionSet: boolean = !!(position.bottom || position.top);
-
-        if (isYPositionSet) {
-            componentRef.location.nativeElement.style.top = 'auto';
-            componentRef.location.nativeElement.style.bottom = 'auto';
-            componentRef.location.nativeElement.style.transform = 'translate(-50%, 0)';
-        }
-
-        if (isXPositionSet) {
-            componentRef.location.nativeElement.style.right = 'auto';
-            componentRef.location.nativeElement.style.left = 'auto';
-            componentRef.location.nativeElement.style.transform = 'translate(0, -50%)';
-        }
-
-        if (isXPositionSet && isYPositionSet) {
-            componentRef.location.nativeElement.style.transform = 'translate(0, 0)'
-        }
     }
 
     /** @hidden Extends dialog config using default values and returns JS DialogConfig object*/

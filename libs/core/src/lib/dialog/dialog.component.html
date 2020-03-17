@@ -1,4 +1,5 @@
-<div class="fd-dialog__content"
+<div [class]="dialogConfig.dialogPanelClass"
+     #dialogWindow
      role="dialog"
      tabindex="-1"
      attr.aria-modal="true"
@@ -7,14 +8,15 @@
      cdkDrag
      cdkDragBoundary=".fd-dialog"
      [ngClass]="{
+        'fd-dialog__content': true,
         'fd-dialog__content--mobile': dialogConfig.mobile,
         'fd-dialog__content--full-screen': dialogConfig.fullScreen,
-        'fd-dialog__body--no-vertical-padding': dialogConfig.verticalPadding,
         'fd-dialog__content--no-mobile-stretch': dialogConfig.mobileOuterSpacing,
         'fd-dialog__content--draggable-grab': dialogConfig.draggable && !isDragged,
         'fd-dialog__content--draggable-grabbing': dialogConfig.draggable && isDragged
      }"
      [cdkDragDisabled]="!dialogConfig.draggable"
+     [fdResizeDisabled]="!dialogConfig.resizable"
      [@dialog-fade]
      [attr.id]="dialogConfig.id"
      [attr.aria-label]="dialogConfig.ariaLabel"

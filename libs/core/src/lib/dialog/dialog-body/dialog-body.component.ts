@@ -13,9 +13,9 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
 @Component({
     selector: 'fd-dialog-body',
     templateUrl: './dialog-body.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fd-dialog__body]': 'true'
+        '[class.fd-dialog__body]': 'true',
+        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
     }
 })
 export class DialogBodyComponent {

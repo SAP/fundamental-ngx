@@ -57,17 +57,17 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     };
 
     /** @hidden */
-    @ViewChild('contentContainer', {read: ViewContainerRef})
-    containerRef: ViewContainerRef;
+    @ViewChild('dialogWindow')
+    dialogWindow: ElementRef;
 
     /** @hidden */
-    @ContentChild(DialogHeaderComponent, {static: false}) dialogHeaderRef: DialogHeaderComponent;
+    @ContentChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
 
     /** @hidden */
-    @ContentChild(DialogBodyComponent, {static: false}) dialogBodyRef: DialogBodyComponent;
+    @ContentChild(DialogBodyComponent) dialogBodyRef: DialogBodyComponent;
 
     /** @hidden */
-    @ContentChild(DialogFooterComponent, {static: false}) dialogFooterRef: DialogFooterComponent;
+    @ContentChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
 
     /** @hidden Whenever dialog should be visible */
     showDialogWindow: boolean;
@@ -91,7 +91,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _componentFactoryResolver: ComponentFactoryResolver) {
-    }    /** @hidden Listen and close dialog on Escape key */
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -106,6 +106,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     /** @hidden */
     ngAfterViewInit(): void {
         this._trapFocus();
+        this._setStyles();
     }
 
     /** @hidden */
@@ -114,7 +115,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @hidden Listen and close dialog on Escape key */
     @HostListener('keyup', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
         if (this.dialogConfig.escKeyCloseable && event.key === 'Escape') {
@@ -122,8 +123,9 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         }
     }
 
+    /** @hidden */
     @HostListener('mousedown', ['$event.target'])
-    closeModal(target: ElementRef): void {
+    closeDialog(target: ElementRef): void {
         if (this.dialogConfig.backdropClickCloseable && target === this._elementRef.nativeElement) {
             this._dialogRef.dismiss('backdrop');
         }
@@ -135,7 +137,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
             try {
                 this._focusTrap = focusTrap(this._elementRef.nativeElement, {
                     clickOutsideDeactivates: this.dialogConfig.backdropClickCloseable && this.dialogConfig.hasBackdrop,
-                    initialFocus: this._elementRef.nativeElement.querySelector('[fd-dialog-decisive-btn]'),
+                    initialFocus: this._elementRef.nativeElement.querySelector('[fd-dialog-decisive-button]'),
                     escapeDeactivates: false,
                     allowOutsideClick: (event: MouseEvent) => true
                 });
@@ -174,5 +176,19 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         this._subscriptions.add(
             this._dialogRef.onHide.subscribe(isHidden => this.showDialogWindow = !isHidden)
         );
+    }
+
+    private _setStyles(): void {
+        const position = this.dialogConfig.position || {};
+        this.dialogWindow.nativeElement.style.width = this.dialogConfig.width;
+        this.dialogWindow.nativeElement.style.height = this.dialogConfig.height;
+        this.dialogWindow.nativeElement.style.minWidth = this.dialogConfig.minWidth;
+        this.dialogWindow.nativeElement.style.minHeight = this.dialogConfig.minHeight;
+        this.dialogWindow.nativeElement.style.maxWidth = this.dialogConfig.maxWidth;
+        this.dialogWindow.nativeElement.style.maxHeight = this.dialogConfig.maxHeight;
+        this.dialogWindow.nativeElement.style.top = position.top;
+        this.dialogWindow.nativeElement.style.bottom = position.bottom;
+        this.dialogWindow.nativeElement.style.left = position.left;
+        this.dialogWindow.nativeElement.style.right = position.right;
     }
 }

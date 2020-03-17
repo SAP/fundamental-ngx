@@ -46,17 +46,17 @@ export class DialogConfig implements DynamicComponentConfig {
     /** Whether the dialog should have a backdrop. */
     hasBackdrop?: boolean = true;
 
-    /** Global classes to apply to the backdrop. */
-    backdropClass?: string = '';
-
     /** Whether clicking on the backdrop should close the dialog. Only works if hasBackdrop is true. */
     backdropClickCloseable?: boolean = true;
+
+    /** Global classes to apply to the backdrop. */
+    backdropClass?: string = '';
 
     /** Classes to apply to the `fd-modal-container`  */
     containerClass?: string = '';
 
     /** Global classes to apply to the dialog panel. */
-    modalPanelClass?: string = '';
+    dialogPanelClass?: string = '';
 
     /** Whether the escape key should close the dialog. */
     escKeyCloseable?: boolean = true;

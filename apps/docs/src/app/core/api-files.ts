@@ -162,7 +162,7 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
-    modal: [
+    dialog: [
         'DialogService',
         'DialogTitleDirective',
         'DialogCloseButtonDirective',

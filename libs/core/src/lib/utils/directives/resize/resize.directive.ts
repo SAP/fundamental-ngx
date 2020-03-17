@@ -5,8 +5,10 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    OnChanges,
     OnDestroy,
-    Output
+    Output,
+    SimpleChanges
 } from '@angular/core';
 import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
@@ -20,9 +22,12 @@ interface ResizeMove {
 @Directive({
     selector: '[fdResize], [fd-resize-handle]'
 })
-export class ResizeDirective implements AfterContentInit, OnDestroy {
+export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeBoundary') resizeBoundary = 'body';
+
+    // tslint:disable-next-line:no-input-rename
+    @Input('fdResizeDisabled') disabled: boolean = false;
 
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'bottom-right';
@@ -43,8 +48,20 @@ export class ResizeDirective implements AfterContentInit, OnDestroy {
     constructor(private _elementRef: ElementRef) {
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['disabled']) {
+            if (changes['disabled'].previousValue === false && changes['disabled'].currentValue === true) {
+                this._subscriptions.unsubscribe();
+            } else if (changes['disabled'].previousValue === true && changes['disabled'].currentValue === false) {
+                this._setResizeListeners();
+            }
+        }
+    }
+
     ngAfterContentInit() {
-        this._setResizeListeners();
+        if (!this.disabled) {
+            this._setResizeListeners();
+        }
     }
 
     ngOnDestroy() {

@@ -22,8 +22,7 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
  */
 @Component({
     selector: 'fd-dialog-footer',
-    templateUrl: './dialog-footer.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './dialog-footer.component.html'
 })
 export class DialogFooterComponent implements AfterContentInit {
 

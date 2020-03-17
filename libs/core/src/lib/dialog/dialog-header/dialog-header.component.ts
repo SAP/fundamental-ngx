@@ -17,14 +17,13 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
  * ```html
  * <fd-dialog-header>
  *     <h1 fd-dialog-title>Title</h1>
- *     <button fd-dialog-close-btn></button>
+ *     <button fd-dialog-close-button></button>
  * </fd-dialog-header>
  * ```
  */
 @Component({
     selector: 'fd-dialog-header',
-    templateUrl: './dialog-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './dialog-header.component.html'
 })
 export class DialogHeaderComponent implements AfterContentInit {
 
