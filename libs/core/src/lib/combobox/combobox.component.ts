@@ -1,7 +1,8 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy, ChangeDetectorRef,
-    Component,
+    Component, ContentChildren,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -19,6 +20,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemDirective } from '../list/list-item.directive';
+import { ListMessageDirective } from '../list/list-message.directive';
+import { ListComponent } from '../list/list.component';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';
@@ -188,6 +191,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popoverComponent: PopoverComponent;
+
+    /** @hidden */
+    @ContentChildren(ListMessageDirective)
+    listMessages: QueryList<ListMessageDirective>;
 
     /** @hidden */
     displayedValues: any[] = [];

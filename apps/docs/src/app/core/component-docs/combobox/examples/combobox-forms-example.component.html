@@ -7,6 +7,7 @@
                      [displayFn]="myDisplayFunction"
                      [communicateByObject]="true"
                      formControlName="itemOnDropdownMode">
+            <li fd-list-message [type]="'information'">More information</li>
         </fd-combobox>
         <fd-form-message [type]="'information'">More information</fd-form-message>
     </div>
@@ -25,6 +26,7 @@ Json Value: {{customForm.controls.itemOnDropdownMode.value | json}}
                      [placeholder]="'Type some text...'"
                      [displayFn]="myDisplayFunction"
                      formControlName="item">
+            <li fd-list-message [type]="'information'">More information</li>
         </fd-combobox>
         <fd-form-message [type]="'information'">More information</fd-form-message>
     </div>
