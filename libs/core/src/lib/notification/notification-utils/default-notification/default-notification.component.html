@@ -1,7 +1,10 @@
-<fd-notification-header [closeButton]="!!defaultConfigurationNotification?.closeButtonCallback"
-                        (closeButtonClick)="handleCloseButtonClick()" [type]="type">
+<fd-notification-header
+    [closeButton]="!!defaultConfigurationNotification?.closeButtonCallback"
+    (closeButtonClick)="handleCloseButtonClick()"
+    [type]="type"
+>
     <h3 fd-notification-title *ngIf="defaultConfigurationNotification?.title">
-        {{defaultConfigurationNotification?.title}}
+        {{ defaultConfigurationNotification?.title }}
     </h3>
 </fd-notification-header>
 <fd-notification-body>
@@ -11,27 +14,33 @@
         </div>
         <div fd-notification-text>
             <div fd-notification-description *ngIf="defaultConfigurationNotification?.description">
-                {{defaultConfigurationNotification?.description}}
+                {{ defaultConfigurationNotification?.description }}
             </div>
             <div fd-notification-metadata *ngIf="defaultConfigurationNotification?.metadata">
-                {{defaultConfigurationNotification?.metadata}}
+                {{ defaultConfigurationNotification?.metadata }}
             </div>
         </div>
     </div>
     <fd-notification-footer>
-        <button fd-button [options]="'light'" *ngIf="defaultConfigurationNotification?.moreInfo">
-            {{defaultConfigurationNotification?.moreInfo}}
+        <button fd-button [fdType]="'transparent'" *ngIf="defaultConfigurationNotification?.moreInfo">
+            {{ defaultConfigurationNotification?.moreInfo }}
         </button>
         <div fd-notification-actions>
-            <button fd-button [fdType]="'positive'"
-                    *ngIf="defaultConfigurationNotification?.approve"
-                    (click)="handleApproveButtonClick()">
-                {{defaultConfigurationNotification?.approve}}
+            <button
+                fd-button
+                [fdType]="'positive'"
+                *ngIf="defaultConfigurationNotification?.approve"
+                (click)="handleApproveButtonClick()"
+            >
+                {{ defaultConfigurationNotification?.approve }}
             </button>
-            <button fd-button [fdType]="'negative'"
-                    *ngIf="defaultConfigurationNotification?.cancel"
-                    (click)="handleCancelButtonClick()">
-                {{defaultConfigurationNotification?.cancel}}
+            <button
+                fd-button
+                [fdType]="'negative'"
+                *ngIf="defaultConfigurationNotification?.cancel"
+                (click)="handleCancelButtonClick()"
+            >
+                {{ defaultConfigurationNotification?.cancel }}
             </button>
         </div>
     </fd-notification-footer>

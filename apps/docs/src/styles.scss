@@ -9,7 +9,9 @@ body {
     overflow: hidden;
 }
 
-*, ::after, ::before {
+*,
+::after,
+::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
@@ -83,8 +85,8 @@ fd-card {
     display: inline-block;
     margin-right: 4px;
     @at-root {
-        [dir="rtl"] &,
-        &[dir="rtl"] {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
             margin-right: 0;
             margin-left: 4px;
             transform: rotate(180deg);
@@ -95,8 +97,8 @@ fd-card {
 
 .middle-marker-container {
     @at-root {
-        [dir="rtl"] &,
-        &[dir="rtl"] {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
             right: initial !important;
             left: 0 !important;
         }
@@ -144,12 +146,14 @@ pre {
     text-align: center;
 }
 
-.is-disabled, .is-blocked {
+.is-disabled,
+.is-blocked {
     pointer-events: none;
 }
 
 //highlight overrides
-.hljs-tag, .hljs-name {
+.hljs-tag,
+.hljs-name {
     color: #000080;
 }
 
@@ -170,19 +174,19 @@ pre {
 }
 
 .hljs-meta {
-    color: #2b91af
+    color: #2b91af;
 }
 
 .side-nav__search {
     padding: 10px 10px 0 10px;
 }
 
-a, a:focus {
+a,
+a:focus {
     text-decoration: none;
 }
 
 .fd-playground--markdown {
-
     #fundamental-ngx {
         margin-top: calc(2rem + 10px);
         font-size: 2.2rem;
@@ -247,6 +251,6 @@ body {
     }
 
     .modal-no-backdrop-custom-shadow {
-        box-shadow: 0 4px 20px 0 grey
+        box-shadow: 0 4px 20px 0 grey;
     }
 }

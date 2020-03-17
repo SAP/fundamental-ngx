@@ -355,7 +355,7 @@ describe('MenuComponent', () => {
             fixture.detectChanges();
         });
 
-        it('should allow for button group select icon to be customized', () => {
+        it('should allow for segmented button select icon to be customized', () => {
             const firstItemIcon = fixture.debugElement.query(
                 By.css('[data-tag="menu-item"][data-index="0"] [data-tag="menu-item__icon-before"]')
             );

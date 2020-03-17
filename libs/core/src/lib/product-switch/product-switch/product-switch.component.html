@@ -1,15 +1,17 @@
 <div class="fd-product-switch">
-    <fd-popover [options]="{placement: 'bottom-end'}"
-                [closeOnEscapeKey]="closeOnEscapeKey"
-                [closeOnOutsideClick]="closeOnOutsideClick"
-                [(isOpen)]="isOpen"
-                (isOpenChange)="openChanged($event)"
-                [disabled]="disabled"
-                [triggers]="triggers"
-                [isDropdown]="isDropdown"
-                [focusTrapped]="false">
+    <fd-popover
+        [options]="{ placement: 'bottom-end' }"
+        [closeOnEscapeKey]="closeOnEscapeKey"
+        [closeOnOutsideClick]="closeOnOutsideClick"
+        [(isOpen)]="isOpen"
+        (isOpenChange)="openChanged($event)"
+        [disabled]="disabled"
+        [triggers]="triggers"
+        [isDropdown]="isDropdown"
+        [focusTrapped]="false"
+    >
         <fd-popover-control>
-            <button fd-button class="fd-product-switch__control" [glyph]="'grid'" [options]="'light'"></button>
+            <button fd-button class="fd-product-switch__control" [glyph]="'grid'" [fdType]="'transparent'"></button>
         </fd-popover-control>
         <fd-popover-body>
             <ng-content></ng-content>

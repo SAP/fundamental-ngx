@@ -1,21 +1,17 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as buttonGroupDefaultExample from '!raw-loader!./examples/button-group-default-example.component.html';
-import * as buttonGroupDefaultExampleTs from '!raw-loader!./examples/button-group-default-example.component.ts';
-import * as buttonGroupToggleExample from '!raw-loader!./examples/button-group-toggle-example.component.html';
-import * as buttonGroupToggleExampleTs from '!raw-loader!./examples/button-group-toggle-example.component.ts';
+import * as buttonGroupDefaultExample from '!raw-loader!./examples/segmented-button-default-example.component.html';
+import * as buttonGroupToggleExample from '!raw-loader!./examples/segmented-button-toggle-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import { DocsSectionTitleComponent } from '../../../documentation/core-helpers/docs-section-title/docs-section-title.component';
-import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
-    selector: 'app-button-group',
-    templateUrl: './button-group-docs.component.html'
+    selector: 'app-segmented-button',
+    templateUrl: './segmented-button-docs.component.html'
 })
-export class ButtonGroupDocsComponent implements OnInit {
+export class SegmentedButtonDocsComponent implements OnInit {
     static schema: any = {
         properties: {
             properties: {
@@ -26,21 +22,21 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state1: {
                         type: 'string',
-                        enum: ['default', 'disabled', 'selected']
+                        enum: ['default', 'is-disabled', 'is-selected']
                     },
                     label2: {
                         type: 'string'
                     },
                     state2: {
                         type: 'string',
-                        enum: ['default', 'disabled', 'selected']
+                        enum: ['default', 'is-disabled', 'is-selected']
                     },
                     label3: {
                         type: 'string'
                     },
                     state3: {
                         type: 'string',
-                        enum: ['default', 'disabled', 'selected']
+                        enum: ['default', 'is-disabled', 'is-selected']
                     },
                     icon4: {
                         type: 'string',
@@ -48,7 +44,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state4: {
                         type: 'string',
-                        enum: ['default', 'disabled', 'selected']
+                        enum: ['default', 'is-disabled', 'is-selected']
                     },
                     icon5: {
                         type: 'string',
@@ -56,7 +52,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state5: {
                         type: 'string',
-                        enum: ['default', 'disabled', 'selected']
+                        enum: ['default', 'is-disabled', 'is-selected']
                     },
                     icon6: {
                         type: 'string',
@@ -64,7 +60,7 @@ export class ButtonGroupDocsComponent implements OnInit {
                     },
                     state6: {
                         type: 'string',
-                        enum: ['default', 'disabled', 'selected']
+                        enum: ['default', 'is-disabled', 'is-selected']
                     },
                     compact: {
                         type: 'boolean'
@@ -100,7 +96,7 @@ export class ButtonGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: buttonGroupToggleExample,
-            fileName: 'button-group-toggle-example',
+            fileName: 'segmented-button-toggle-example',
         }
     ];
 
@@ -108,12 +104,12 @@ export class ButtonGroupDocsComponent implements OnInit {
         {
             language: 'html',
             code: buttonGroupDefaultExample,
-            fileName: 'button-group-default-example',
+            fileName: 'segmented-button-default-example',
         }
     ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
-        this.schema = this.schemaFactory.getComponent('buttonGroup');
+        this.schema = this.schemaFactory.getComponent('segmentedButton');
     }
 
     ngOnInit() { }

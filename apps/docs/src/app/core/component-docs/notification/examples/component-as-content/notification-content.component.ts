@@ -22,7 +22,7 @@ import { NotificationRef } from '@fundamental-ngx/core';
                 </div>
             </div>
             <fd-notification-footer>
-                <button fd-button [options]="'light'">                        
+                <button fd-button [fdType]="'transparent'">                        
                     {{notificationRef.data.moreInfo}}
                 </button>
                 <div fd-notification-actions>
@@ -40,5 +40,5 @@ import { NotificationRef } from '@fundamental-ngx/core';
 export class NotificationContentComponent {
     constructor(
         public notificationRef: NotificationRef
-    ) {}
+    ) { }
 }

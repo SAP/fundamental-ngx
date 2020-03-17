@@ -1,4 +1,8 @@
-<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [disabled]="true" [mainActionTitle]="'Disabled Button'">
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [disabled]="true"
+    [mainActionTitle]="'Disabled Button'"
+>
     <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
@@ -26,7 +30,11 @@
         </fd-menu>
     </div>
 </fd-split-button>
-<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [options]="'emphasized'" [mainActionTitle]="'Emphasized Button'">
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'emphasized'"
+    [mainActionTitle]="'Emphasized Button'"
+>
     <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
@@ -40,7 +48,11 @@
         </fd-menu>
     </div>
 </fd-split-button>
-<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [options]="'light'" [mainActionTitle]="'Light Button'">
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'transparent'"
+    [mainActionTitle]="'Light Button'"
+>
     <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>

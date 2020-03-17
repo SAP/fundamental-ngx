@@ -1,17 +1,20 @@
 <button fd-button (click)="openFromComponent()">Open from Component</button>
 <button fd-button (click)="openFromTemplate(template)">Open from Template</button>
 <button fd-button (click)="openFromString()">Open from String</button>
-<button fd-button [options]="'emphasized'" (click)="alertService.dismissAll()" [disabled]="!alertService.hasOpenAlerts()">Dismiss All</button>
+<button
+    fd-button
+    [fdType]="'emphasized'"
+    (click)="alertService.dismissAll()"
+    [disabled]="!alertService.hasOpenAlerts()"
+>
+    Dismiss All
+</button>
 
 <!-- Defining a template to open -->
 <ng-template let-alert #template>
-    <p>{{alert.data.firstLine}}</p>
-    <p>{{alert.data.secondLine}}</p>
-    <button fd-button
-            [fdType]="'positive'"
-            [options]="'emphasized'"
-            [compact]="true"
-            (click)="alert.dismiss('Data passed back')">
+    <p>{{ alert.data.firstLine }}</p>
+    <p>{{ alert.data.secondLine }}</p>
+    <button fd-button [fdType]="'positive'" [compact]="true" (click)="alert.dismiss('Data passed back')">
         Click to dismiss
     </button>
 </ng-template>

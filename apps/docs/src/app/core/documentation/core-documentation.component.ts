@@ -28,7 +28,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/breadcrumb', name: 'Breadcrumb' },
         { url: 'core/busyIndicator', name: 'Busy Indicator' },
         { url: 'core/button', name: 'Button' },
-        { url: 'core/buttonGroup', name: 'Button Group' },
+        { url: 'core/segmentedButton', name: 'Segmented Button' },
         { url: 'core/checkbox', name: 'Checkbox' },
         { url: 'core/splitButton', name: 'Split Button' },
         { url: 'core/calendar', name: 'Calendar' },

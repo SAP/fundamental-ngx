@@ -8,14 +8,13 @@
         <button fd-modal-close-btn (click)="modal.dismiss()"></button>
     </fd-modal-header>
     <fd-modal-body>
-        <p>{{modal.data}}</p>
+        <p>{{ modal.data }}</p>
         <p>
-            In all cases, the backdrop cannot be used to close the modal.
-            With the first case, there is simply no backdrop to click.
-            The <i>backdropClickCloseable</i> property is set to false.
+            In all cases, the backdrop cannot be used to close the modal. With the first case, there is simply no
+            backdrop to click. The <i>backdropClickCloseable</i> property is set to false.
         </p>
     </fd-modal-body>
     <fd-modal-footer>
-        <button fd-button [options]="'emphasized'" (click)="modal.close()">Close</button>
+        <button fd-button [fdType]="'emphasized'" (click)="modal.close()">Close</button>
     </fd-modal-footer>
 </ng-template>

@@ -80,8 +80,8 @@
     Backdrop and Container Configuration
 </fd-docs-section-title>
 <description>
-    The modal backdrop and container can be styled, disabled or even customized at will. Classes being applied to the element do not
-    have to be in your global styles.
+    The modal backdrop and container can be styled, disabled or even customized at will. Classes being applied to the
+    element do not have to be in your global styles.
 </description>
 <component-example>
     <fd-backdrop-examples></fd-backdrop-examples>
@@ -139,6 +139,6 @@
         This is the modal playground body text!
     </fd-modal-body>
     <fd-modal-footer>
-        <button fd-button [options]="'emphasized'" (click)="modal.dismiss()">Close</button>
+        <button fd-button [fdType]="'emphasized'" (click)="modal.dismiss()">Close</button>
     </fd-modal-footer>
 </ng-template>
