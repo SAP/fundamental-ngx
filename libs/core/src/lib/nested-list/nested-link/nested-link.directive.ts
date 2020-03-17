@@ -29,7 +29,7 @@ export class NestedLinkDirective implements OnInit {
      *  @hidden
      *  Reference to title element, it is used, to get title for condensed mode.
      */
-    @ContentChild(NestedListTitleDirective, { static: false })
+    @ContentChild(NestedListTitleDirective)
     title: NestedListTitleDirective;
 
     /** Event that is thrown, when any keyboard event is dispatched on this element */

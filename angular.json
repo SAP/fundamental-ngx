@@ -17,6 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "aot": true,
                         "outputPath": "dist/apps/docs",
                         "index": "apps/docs/src/index.html",
                         "main": "apps/docs/src/main.ts",
@@ -78,6 +79,12 @@
                             "optimization": false
                         },
                         "hmr": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -187,6 +194,11 @@
                     "options": {
                         "tsConfig": "libs/core/tsconfig.lib.json",
                         "project": "libs/core/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "lint": {
@@ -227,6 +239,11 @@
                     "options": {
                         "tsConfig": "libs/platform/tsconfig.lib.json",
                         "project": "libs/platform/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/platform/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "lint": {
@@ -261,13 +278,13 @@
     "schematics": {
         "@schematics/angular:component": {
             "prefix": "fd",
-            "styleext": "scss"
+            "style": "scss"
         },
         "@schematics/angular:directive": {
             "prefix": "fd"
         }
     },
     "cli": {
-        "defaultCollection": "@nrwl/schematics"
+        "defaultCollection": "@nrwl/angular"
     }
 }

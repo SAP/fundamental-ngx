@@ -1,6 +1,8 @@
-import { FdDate } from './models/fd-date';
 import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { FdDate } from './models/fd-date';
 
+@Injectable()
 export class CalendarService {
 
     /** Event thrown, when the element is selected by space or enter keys */

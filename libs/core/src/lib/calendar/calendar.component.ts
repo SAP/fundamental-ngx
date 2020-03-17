@@ -66,10 +66,10 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
 
     /** @hidden */
-    @ViewChild(CalendarDayViewComponent, { static: false }) dayViewComponent: CalendarDayViewComponent;
+    @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent;
 
     /** @hidden */
-    @ViewChild(CalendarYearViewComponent, { static: false }) yearViewComponent: CalendarYearViewComponent;
+    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
 
     /** @hidden */
     @HostBinding('class.fd-calendar')

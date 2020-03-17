@@ -42,11 +42,11 @@ export type InputGroupPlacement = 'before' | 'after';
 export class InputGroupComponent implements ControlValueAccessor {
 
     /** @hidden */
-    @ContentChild(InputGroupInputDirective, { static: false })
+    @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
 
     /** @hidden */
-    @ContentChild(InputGroupAddOnDirective, { static: false })
+    @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
 
     /** Input template */

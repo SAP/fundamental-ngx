@@ -13,6 +13,7 @@ export * from './directives/notification-description.directive';
 export * from './directives/notification-metadata.directive';
 export * from './directives/notification-text.directive';
 export * from './directives/notification-title.directive';
+export * from './notification-utils/default-notification/default-notification.component';
 export * from './notification-body/notification-body.component';
 export * from './notification-footer/notification-footer.component';
 export * from './notification-header/notification-header.component';

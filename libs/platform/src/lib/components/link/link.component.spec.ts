@@ -54,7 +54,7 @@ describe('LinkComponent', () => {
     `
 })
 class DisabledLinkComponent {
-    @ViewChild(LinkComponent, { static: false })
+    @ViewChild(LinkComponent)
     link: LinkComponent;
 
     @Input()

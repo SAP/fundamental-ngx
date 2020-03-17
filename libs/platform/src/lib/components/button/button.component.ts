@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ViewChild,
+    ElementRef
+} from '@angular/core';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'toolbar' | 'main';
 export type ButtonOptions = 'light' | 'emphasized' | '';
@@ -37,6 +44,11 @@ export class ButtonComponent {
     /** Event sent when button is clicked */
     @Output()
     buttonClicked = new EventEmitter();
+
+    @ViewChild('fdButton', { read: ElementRef, static: false })
+    focusEl: ElementRef<HTMLElement>;
+
+    constructor() { }
 
     /**
      *  Handles button click

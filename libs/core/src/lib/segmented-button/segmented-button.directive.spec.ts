@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
     template: '<button #directive fd-segmented-button>SegmentedButton</button>'
 })
 export class TestComponent {
-    @ViewChild('directive', { static: false })
+    @ViewChild('directive')
     ref: ElementRef;
 }
 

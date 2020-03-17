@@ -31,10 +31,10 @@ let popoverUniqueId: number = 0;
 export class PopoverComponent {
 
     /** @hidden */
-    @ViewChild(PopoverDirective, { static: false })
+    @ViewChild(PopoverDirective)
     directiveRef: PopoverDirective;
     /** @hidden */
-    @ContentChild(PopoverDropdownComponent, { static: false }) dropdownComponent: PopoverDropdownComponent;
+    @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
 
     /** Whether the popover should have an arrow. */
     @Input()

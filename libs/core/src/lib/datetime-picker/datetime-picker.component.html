@@ -1,7 +1,6 @@
 <div class="fd-datetime">
     <fd-popover
         [(isOpen)]="isOpen"
-        (isOpenChange)="handleInputChange(dateTimePicker.value)"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
         [triggers]="[]"
@@ -17,8 +16,8 @@
                     #dateTimePicker
                     [attr.aria-label]="datetimeInputLabel"
                     [(ngModel)]="inputFieldDate"
+                    (ngModelChange)="handleInputChange($event)"
                     [placeholder]="placeholder"
-                    (keyup.enter)="handleInputChange(dateTimePicker.value)"
                     (click)="openPopover()"
                     [compact]="compact"
                     [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"

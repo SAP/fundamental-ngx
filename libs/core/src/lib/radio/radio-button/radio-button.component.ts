@@ -31,7 +31,7 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     class: string;
 
     /** @hidden */
-    @ViewChild('inputElement', { static: false })
+    @ViewChild('inputElement')
     inputElement: ElementRef;
 
     /** @hidden */

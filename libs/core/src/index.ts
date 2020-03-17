@@ -1,5 +1,3 @@
-import { angularCliVersion } from '@nrwl/schematics/src/lib-versions';
-
 export * from './lib/fundamental-ngx-core.module';
 export * from './lib/action-bar/public_api';
 export * from './lib/alert/public_api';
