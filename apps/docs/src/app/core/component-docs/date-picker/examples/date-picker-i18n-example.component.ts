@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Injectable } from '@angular/core';
 import { CalendarI18n, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
+import { CustomExampleService } from './custom-example.service';
 
 // The weekdays translations have to start with Sunday
 const localized_values = {
@@ -111,8 +112,11 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
     constructor(
         private languageService: LanguageService,
         private calendarI18n: CalendarI18n,
-        private calendarI18nLabels: CalendarI18nLabels
-    ) {}
+        private calendarI18nLabels: CalendarI18nLabels,
+        private service: CustomExampleService
+    ) {
+        console.log(this.service.c);
+    }
 
     date = FdDate.getToday();
 

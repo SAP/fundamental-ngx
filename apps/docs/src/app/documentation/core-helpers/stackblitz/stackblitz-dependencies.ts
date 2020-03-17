@@ -16,6 +16,7 @@ export class StackblitzDependencies {
         '@angular/common',
         '@angular/forms',
         '@angular/router',
+        'core-js',
         'fundamental-styles',
         'moment',
         'popper.js',

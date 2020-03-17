@@ -18,6 +18,7 @@ import {DatePickerComplexI18nExampleComponent} from './examples/date-picker-comp
 import {DatePickerRangeDisabledExampleComponent} from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import {DatePickerDisableFuncExampleComponent} from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
 import { ButtonGroupModule, DatePickerModule } from '@fundamental-ngx/core';
+import { CustomExampleService } from './examples/custom-example.service';
 
 const routes: Routes = [
     {
@@ -53,7 +54,8 @@ const routes: Routes = [
         DatePickerComplexI18nExampleComponent,
         DatePickerDisableFuncExampleComponent,
         DatePickerRangeDisabledExampleComponent,
-    ]
+    ],
+    providers: [CustomExampleService]
 })
 export class DatePickerDocsModule {
 }

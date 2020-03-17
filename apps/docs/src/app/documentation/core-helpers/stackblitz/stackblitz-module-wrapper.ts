@@ -29,7 +29,8 @@ export class StackblitzModuleWrapper {
 
         const moduleImports: string = this.defaultModules.map(module => module.name).join(',\n');
 
-        const declarations: string = tsFiles.map(file => file.componentName).join(',\n');
+        const declarations: string = tsFiles.filter(file => !file.service).map(file => file.componentName).join(',\n');
+        const providers: string = tsFiles.filter(file => file.service).map(file => file.componentName).join(',\n');
 
         // Main component that will be added as a root, if there is no component with main flag, first is chosen
         let mainComponent: string;
@@ -61,7 +62,9 @@ ${imports}
         RouterModule.forRoot([{path: '#', component:${mainComponent}}],
         { useHash: true }),
     ],
-    providers: [],
+    providers: [
+        ${providers}
+    ],
     entryComponents: [
         ${entryComponents}
     ],
