@@ -12,9 +12,9 @@ import { ButtonModule } from '../button/button.module';
 
 @Component({
     template: `
-            <ng-template #testTemplate let-alert>
-                <h1>test</h1>
-            </ng-template>
+        <ng-template #testTemplate let-alert>
+            <h1>test</h1>
+        </ng-template>
     `
 })
 class TemplateTestComponent {

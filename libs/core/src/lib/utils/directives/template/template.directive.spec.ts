@@ -3,9 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 @Component({
-    template: `
-        <ng-template [fdTemplate]="templateName">Template content</ng-template>
-    `
+    template: '<ng-template [fdTemplate]="templateName">Template content</ng-template>'
 })
 class TestComponent {
     @ViewChild(TemplateDirective, {static: true}) templateDirectiveRef: TemplateDirective;

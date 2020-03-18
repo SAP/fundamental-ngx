@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
 
 @Component({
@@ -17,8 +17,7 @@ import { alertContainerNgIf } from './alert-animations';
         }
     `],
     host: {
-        '[@alertContainerNgIf]': '',
-        '[class.fd-alert-container]': 'true'
+        '[@alertContainerNgIf]': ''
     },
     animations: [
         alertContainerNgIf
@@ -27,4 +26,8 @@ import { alertContainerNgIf } from './alert-animations';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertContainerComponent {
+
+    /** @hidden */
+    @HostBinding('class.fd-alert-container')
+    fdAlertContainerClass: boolean = true;
 }

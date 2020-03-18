@@ -12,11 +12,11 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
 
 @Component({
     template: `
-            <ng-template #testTemplate let-notification>
-                <h1>test</h1>
-                <a href="#">testLink</a>
-                <button>testBtn</button>
-            </ng-template>
+        <ng-template #testTemplate let-notification>
+            <h1>test</h1>
+            <a href="#">testLink</a>
+            <button>testBtn</button>
+        </ng-template>
     `
 })
 class TemplateTestComponent {

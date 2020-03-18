@@ -1,7 +1,12 @@
-import { ComponentRef, Inject, Injectable, Optional, TemplateRef, Type } from '@angular/core';
+import {
+    Injectable,
+    ComponentRef,
+    TemplateRef,
+    Type
+} from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
-import { ALERT_DEFAULT_CONFIG, AlertConfig } from '../alert-utils/alert-config';
+import { AlertConfig } from '../alert-utils/alert-config';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { AlertRef } from '../alert-utils/alert-ref';
 
@@ -15,8 +20,7 @@ export class AlertService {
 
     /** @hidden */
     constructor(
-        private dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(ALERT_DEFAULT_CONFIG) private _defaultConfig: AlertConfig
+        private dynamicComponentService: DynamicComponentService
     ) {}
 
     /**
@@ -31,44 +35,39 @@ export class AlertService {
      * @param content Content of the alert component.
      * @param alertConfig Configuration of the alert component.
      */
-    public open(content: TemplateRef<any> | Type<any> | string, alertConfig?: AlertConfig): AlertRef {
+    public open(content: TemplateRef<any> | Type<any> | string, alertConfig: AlertConfig = new AlertConfig()): AlertRef {
 
-        alertConfig = this._applyDefaultConfig(alertConfig, this._defaultConfig || new AlertConfig());
+        // Get default values from alert model
+        alertConfig = Object.assign(new AlertConfig(), alertConfig);
 
-        const alertRef: AlertRef = new AlertRef();
-        alertRef.data = alertConfig.data;
+        // Instantiate alert ref service
+        const service: AlertRef = new AlertRef();
+        service.data = alertConfig.data;
 
         // If empty or undefined alert array, create container
         if (!this.alerts || this.alerts.length === 0 || !this.alertContainerRef) {
-            this.alertContainerRef = this.dynamicComponentService.createDynamicComponent<AlertContainerComponent>(
-                content,
-                AlertContainerComponent,
-                alertConfig,
-                {services: [alertConfig]}
-            );
+            this.alertContainerRef = this.dynamicComponentService.createDynamicComponent
+                < AlertContainerComponent > (content, AlertContainerComponent, alertConfig)
+            ;
         }
 
         // Define Container to put backdrop and component to container
         alertConfig.container = this.alertContainerRef.location.nativeElement;
 
-        const component = this.dynamicComponentService.createDynamicComponent<AlertComponent>(
-            content,
-            AlertComponent,
-            alertConfig,
-            {services: [alertRef, alertConfig]}
-        );
+        const component = this.dynamicComponentService.createDynamicComponent
+            <AlertComponent>(content, AlertComponent, alertConfig, { services: [service]});
 
         component.location.nativeElement.style.marginTop = '10px';
 
         // Subscription to close alert from ref
-        const refSub = alertRef.afterDismissed.subscribe(() => {
+        const refSub = service.afterDismissed.subscribe(() => {
             this.destroyAlertComponent(component);
             refSub.unsubscribe();
         });
 
         // Log new component
         this.alerts.push(component);
-        return alertRef;
+        return service;
     }
 
     /**
@@ -95,12 +94,4 @@ export class AlertService {
         this.alertContainerRef = undefined;
     }
 
-    /** @hidden Extends alert config using default values and returns JS DialogConfig object*/
-    private _applyDefaultConfig(config: AlertConfig, defaultConfig: AlertConfig): AlertConfig {
-        const newConfig = new AlertConfig();
-        const mergedConfigs = {...defaultConfig, ...config};
-        Object.keys(mergedConfigs).forEach(key => newConfig[key] = mergedConfigs[key]);
-
-        return newConfig;
-    }
 }
