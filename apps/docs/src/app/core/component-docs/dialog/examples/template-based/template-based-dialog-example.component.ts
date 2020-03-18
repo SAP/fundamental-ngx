@@ -12,7 +12,7 @@ export class TemplateBasedDialogExampleComponent {
     constructor(private _dialogService: DialogService) { }
 
     openDialog(dialog: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialog, {resizable: true});
+        const dialogRef = this._dialogService.open(dialog);
 
         dialogRef.afterClosed.subscribe(result => {
             this.confirmationReason = 'Dialog closed with result: ' + result;

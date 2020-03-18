@@ -87,4 +87,12 @@ export class DialogConfig implements DynamicComponentConfig {
 
     /** Whether the dialog should have vertical padding. */
     verticalPadding?: boolean = true;
+
+    /** Whether the dialog should have responsive horizontal paddings changing with Dialogs window width.
+     * max-width: 599px                         - .fd-dialog__content--s
+     * min-width: 600px and max-width: 1023px   - .fd-dialog__content--m
+     * min-width: 1024px and max-width: 1439px  - .fd-dialog__content--l
+     * min-width: 1440px                        - .fd-dialog__content--xl
+     * */
+    responsivePadding?: boolean = false;
 }

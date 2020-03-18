@@ -79,6 +79,9 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     isDragged: boolean;
 
     /** @hidden */
+    dialogPaddingSize: 's' | 'm' | 'l' | 'xl';
+
+    /** @hidden */
     private _focusTrap: FocusTrap;
 
     /** @hidden */
@@ -107,6 +110,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     ngAfterViewInit(): void {
         this._trapFocus();
         this._setStyles();
+        this.adjustResponsivePadding();
     }
 
     /** @hidden */
@@ -128,6 +132,21 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     closeDialog(target: ElementRef): void {
         if (this.dialogConfig.backdropClickCloseable && target === this._elementRef.nativeElement) {
             this._dialogRef.dismiss('backdrop');
+        }
+    }
+
+    adjustResponsivePadding(): void {
+        if (this.dialogConfig.responsivePadding) {
+            const dialogWidth = this.dialogWindow.nativeElement.getBoundingClientRect().width;
+            if (dialogWidth < 599) {
+                this.dialogPaddingSize = 's';
+            } else if (dialogWidth < 1023) {
+                this.dialogPaddingSize = 'm';
+            } else if (dialogWidth < 1439) {
+                this.dialogPaddingSize = 'l';
+            } else {
+                this.dialogPaddingSize = 'xl';
+            }
         }
     }
 

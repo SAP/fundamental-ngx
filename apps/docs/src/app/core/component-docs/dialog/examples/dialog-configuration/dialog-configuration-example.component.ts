@@ -12,6 +12,8 @@ export class DialogConfigurationExample {
     openDialog(template): void {
         this._dialogService.open(template, {
             draggable: true,
+            resizable: true,
+            responsivePadding: true,
             escKeyCloseable: false,
             backdropClickCloseable: false,
             width: '300px',

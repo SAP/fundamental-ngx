@@ -9,6 +9,10 @@
      cdkDragBoundary=".fd-dialog"
      [ngClass]="{
         'fd-dialog__content': true,
+        'fd-dialog__content--s': dialogPaddingSize === 's',
+        'fd-dialog__content--m': dialogPaddingSize === 'm',
+        'fd-dialog__content--l': dialogPaddingSize === 'l',
+        'fd-dialog__content--xl': dialogPaddingSize === 'xl',
         'fd-dialog__content--mobile': dialogConfig.mobile,
         'fd-dialog__content--full-screen': dialogConfig.fullScreen,
         'fd-dialog__content--no-mobile-stretch': dialogConfig.mobileOuterSpacing,
@@ -23,7 +27,8 @@
      [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
      [attr.aria-describedby]="dialogConfig.ariaDescribedBy"
      (cdkDragStarted)="isDragged = true"
-     (cdkDragEnded)="isDragged = false">
+     (cdkDragEnded)="isDragged = false"
+     (onResizeEnd)="adjustResponsivePadding()">
 
     <div cdkDragHandle
          [cdkDragHandleDisabled]="!dialogConfig.draggable">
