@@ -108,7 +108,7 @@ export class DndContainerDirective implements AfterContentInit {
 
     /** @hidden */
     public removePlaceholder(): void {
-        if (this.placeholderElement) {
+        if (this.placeholderElement && this.placeholderElement.parentNode) {
             // IE11 workaround
             this.placeholderElement.parentNode.removeChild(this.placeholderElement);
             this.placeholderElement = null;
@@ -117,7 +117,7 @@ export class DndContainerDirective implements AfterContentInit {
 
     /** @hidden */
     public removeLine(): void {
-        if (this.lineElement) {
+        if (this.lineElement && this.lineElement.parentNode) {
             // IE11 workaround
             this.lineElement.parentNode.removeChild(this.lineElement);
             this.lineElement = null;
