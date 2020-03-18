@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnInit, ElementRef, OnChanges } from '@angular/core';
+import { CssClassBuilder } from '../utils/public_api';
 
 type LabelType = 'numeric' | 'only-icon' | 'icon';
 
@@ -9,7 +10,7 @@ type LabelType = 'numeric' | 'only-icon' | 'icon';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InfoLabelComponent implements OnInit {
+export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
 
     /** Select type defines the label types */
     @Input()
@@ -17,22 +18,19 @@ export class InfoLabelComponent implements OnInit {
 
     /** define the icon type */
     @Input()
-    glyph: String; 
+    glyph: string; 
 
     /**define the colour of the info label */
     @Input()
-    color: String;
+    color: string;
 
     cssname: string = '';
+    clickable: boolean;
+    inverted: boolean;
+    large: boolean;
+    class: string;
 
-    /** @hidden */
-    constructor() {
-    }
-    ngOnInit() {
-    }
-
-    get buildCustomCss(): string {
-
+    buildComponentCssClass(): string {
         if (this.labelType === 'numeric') {
             this.cssname = this.cssname + 'fd-info-label--numeric';
         }
@@ -51,4 +49,20 @@ export class InfoLabelComponent implements OnInit {
         return this.cssname;
     }
 
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {
+    }
+
+    ngOnInit(): void  {
+        this.buildComponentCssClass();
+    }
+
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
 }
