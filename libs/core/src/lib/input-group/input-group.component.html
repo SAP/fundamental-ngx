@@ -53,7 +53,7 @@
            [class]="inShellbar ? 'fd-shellbar__input-group__input' : ''"
            fd-input-group-input
            [compact]="compact"
-           type="text"
+           [type]="type"
            *ngIf="!inputElement && !inputTemplate"
            placeholder="{{placeholder}}">
 </ng-template>
