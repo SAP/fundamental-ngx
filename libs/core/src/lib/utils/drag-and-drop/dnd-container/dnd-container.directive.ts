@@ -54,13 +54,13 @@ export class DndContainerDirective implements AfterContentInit {
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
         /** Depending on the position, gets the left or right side of element */
-        const x = rect.x + (isBefore || listMode ? 0 : this.element.nativeElement.offsetWidth);
+        const x = rect.left + (isBefore || listMode ? 0 : this.element.nativeElement.offsetWidth);
 
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
             x: x,
             position: position,
-            y: rect.y + (this.element.nativeElement.offsetHeight / 2),
+            y: rect.top + (this.element.nativeElement.offsetHeight / 2),
             stickToPosition: this.stickInPlace
         };
     }
@@ -109,7 +109,8 @@ export class DndContainerDirective implements AfterContentInit {
     /** @hidden */
     public removePlaceholder(): void {
         if (this.placeholderElement) {
-            this.placeholderElement.remove();
+            // IE11 workaround
+            this.placeholderElement.parentNode.removeChild(this.placeholderElement);
             this.placeholderElement = null;
         }
     }
@@ -117,7 +118,8 @@ export class DndContainerDirective implements AfterContentInit {
     /** @hidden */
     public removeLine(): void {
         if (this.lineElement) {
-            this.lineElement.remove();
+            // IE11 workaround
+            this.lineElement.parentNode.removeChild(this.lineElement);
             this.lineElement = null;
         }
     }
