@@ -87,8 +87,9 @@ fd-card {
     margin-right: 4px;
 
     @at-root {
-        [dir='rtl'] &,
-        &[dir='rtl'] {
+
+        [dir="rtl"] &,
+        &[dir="rtl"] {
             margin-right: 0;
             margin-left: 4px;
             transform: rotate(180deg);
@@ -99,8 +100,9 @@ fd-card {
 
 .middle-marker-container {
     @at-root {
-        [dir='rtl'] &,
-        &[dir='rtl'] {
+
+        [dir="rtl"] &,
+        &[dir="rtl"] {
             right: initial !important;
             left: 0 !important;
         }
@@ -175,7 +177,7 @@ pre {
 }
 
 .hljs-meta {
-    color: #2b91af;
+    color: #2b91af
 }
 
 .side-nav__search {
@@ -188,6 +190,7 @@ a:focus {
 }
 
 .fd-playground--markdown {
+
     #fundamental-ngx {
         margin-top: calc(2rem + 10px);
         font-size: 2.2rem;
@@ -221,12 +224,12 @@ a:focus {
     }
 }
 
-.fd-playground--markdown > h1 {
+.fd-playground--markdown>h1 {
     font-size: 2.2rem;
     line-height: 1;
 }
 
-.fd-playground--markdown > p {
+.fd-playground--markdown>p {
     margin-bottom: 1.5rem;
     font-size: 1rem;
     font-weight: 300;
@@ -252,6 +255,6 @@ body {
     }
 
     .modal-no-backdrop-custom-shadow {
-        box-shadow: 0 4px 20px 0 grey;
+        box-shadow: 0 4px 20px 0 grey
     }
 }
