@@ -4,7 +4,6 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 @Component({
     template: `
         <fd-dialog>
-
             <fd-dialog-header>
                 <h1 fd-dialog-title>{{dialogRef.data.title}}</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss('Close button')"></button>
@@ -33,9 +32,7 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                         (click)="this.dialogRef.close('Continue')">
                     Interesting
                 </button>
-
             </fd-dialog-footer>
-
         </fd-dialog>
     `,
 })

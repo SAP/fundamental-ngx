@@ -4,6 +4,7 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 @Component({
     template: `
         <fd-dialog>
+
             <fd-dialog-header>
                 <h1 fd-dialog-title>Second Dialog</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss()"></button>
@@ -23,6 +24,7 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
                     Close
                 </button>
             </fd-dialog-footer>
+
         </fd-dialog>
     `
 })

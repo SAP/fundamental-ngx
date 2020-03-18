@@ -23,31 +23,40 @@ interface ResizeMove {
     selector: '[fdResize], [fd-resize-handle]'
 })
 export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
+    /** Element limiting resizable container growth */
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeBoundary') resizeBoundary = 'body';
 
+    /** Weather resizable behaviour should be disabled */
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeDisabled') disabled: boolean = false;
 
+    /** Localization of resize handle inside resizable container */
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'bottom-right';
 
+    /** Resize handle reference - should be used if Resize handle is not a ContentChild of resizable container */
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeResizeHandleRef') set setResizeHandleReference(value: ResizeHandleDirective) {
         this.resizeHandleReference = value;
     };
 
+    /** Emits event when resizing has tarted */
     @Output() onResizeStart = new EventEmitter<void>();
 
+    /** Emits event when resizing has ended */
     @Output() onResizeEnd = new EventEmitter<void>();
 
+    /** @hidden Reference to Resize handle */
     @ContentChild(ResizeHandleDirective, {static: false}) resizeHandleReference;
 
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     constructor(private _elementRef: ElementRef) {
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges) {
         if (changes['disabled']) {
             if (changes['disabled'].previousValue === false && changes['disabled'].currentValue === true) {
@@ -58,16 +67,19 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         }
     }
 
+    /** @hidden */
     ngAfterContentInit() {
         if (!this.disabled) {
             this._setResizeListeners();
         }
     }
 
+    /** @hidden */
     ngOnDestroy() {
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden Sets Resize listeners */
     private _setResizeListeners(): void {
 
         const resize = this._getResizeFunction();
@@ -95,6 +107,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         this._subscriptions.add(emitResizableEvents$.subscribe());
     }
 
+    /** @hidden Creates resize function*/
     private _getResizeFunction(): (move: ResizeMove) => void {
         return (move: ResizeMove) => {
             this._elementRef.nativeElement.style.width = this._elementRef.nativeElement.offsetWidth + move.x + 'px';
@@ -102,6 +115,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         }
     }
 
+    /** @hidden Creates move function */
     private _getMoveOffsetFunction(): (event: MouseEvent) => ResizeMove {
 
         let verticalModifier: 1 | -1;
@@ -132,6 +146,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         })
     }
 
+    /** @hidden Return boundary container */
     private _findResizeContainer(): Element {
         const resizeContainer = document.querySelector(this.resizeBoundary);
         if (resizeContainer) {
@@ -142,6 +157,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         }
     }
 
+    /** @hidden Check weather resizable container is overflowing boundary container */
     private _getBoundaryOverflowFunction(resizeContainer: Element): (move: ResizeMove) => boolean {
         return (move: ResizeMove) => {
             const containerPosition = resizeContainer.getBoundingClientRect();
@@ -164,6 +180,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         }
     }
 
+    /** @hidden Create Observable notifying on resize actions */
     private _getResizeEventsNotifiers(trigger$: Observable<boolean>): Observable<any> {
         const emitResizableStart$ = trigger$.pipe(
             filter(isActive => isActive),
@@ -178,6 +195,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         return merge(emitResizableStart$, emitResizableEnd$);
     }
 
+    /** @hidden Block resizable container pointer events when resizing  */
     private _blockOtherPointerEvents(trigger$: Observable<boolean>): Observable<any> {
         return trigger$.pipe(
             map(isActive => isActive ? 'none' : 'auto'),

@@ -18,8 +18,9 @@ export class DialogBackdropContainerExampleComponent {
     openCustomBackdrop(modal): void {
         this._dialogService.open(modal, {
             width: '300px',
+            responsivePadding: true,
             backdropClass: 'modal-custom-overlay-example',
-            data: `This modal has a custom backdrop!`
+            data: `This modal has a custom backdrop!`,
         });
     }
 
@@ -27,7 +28,8 @@ export class DialogBackdropContainerExampleComponent {
         this._dialogService.open(modal, {
             width: '300px',
             container: containerRef,
-            data: `This modal has been opened inside local div!`
+            responsivePadding: true,
+            data: `This modal has been opened inside local div!`,
         });
     }
 
@@ -36,6 +38,7 @@ export class DialogBackdropContainerExampleComponent {
             width: '300px',
             hasBackdrop: false,
             container: containerRef,
+            responsivePadding: true,
             dialogPanelClass: 'static-dialog',
             data: `This modal has been opened inside local div and displayed as static element!`
         });

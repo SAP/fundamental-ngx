@@ -18,14 +18,11 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-dialog-container',
-    template: `
-        <ng-container #contentContainer></ng-container>
-    `
+    template: '<ng-container #contentContainer></ng-container>'
 })
 export class DialogContainerComponent implements AfterViewInit, CssClassBuilder {
 
     /** Custom classes */
-    private _class: string = '';
     @Input()
     set class(userClass: string) {
         this._class = userClass;
@@ -37,6 +34,9 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
 
     /** @hidden Content that should be placed inside container */
     childContent: TemplateRef<any> | Type<any> = undefined;
+
+    /** @hidden */
+    private _class: string = '';
 
     /** @hidden */
     private _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;

@@ -12,10 +12,10 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
  */
 @Component({
     selector: 'fd-dialog-body',
-    templateUrl: './dialog-body.component.html',
+    template: '<ng-content></ng-content>',
     host: {
         '[class.fd-dialog__body]': 'true',
-        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
+        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding'
     }
 })
 export class DialogBodyComponent {

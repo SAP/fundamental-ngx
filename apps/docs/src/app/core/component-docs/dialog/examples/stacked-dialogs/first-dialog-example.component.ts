@@ -5,6 +5,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
 @Component({
     template: `
         <fd-dialog>
+
             <fd-dialog-header>
                 <h1 fd-dialog-title>First Dialog</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss('x')"></button>
@@ -23,8 +24,8 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
                         (click)="openDialog()">
                     Open Second Dialog
                 </button>
-
             </fd-dialog-footer>
+
         </fd-dialog>
     `
 })
@@ -32,7 +33,7 @@ export class FirstDialogExampleComponent {
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, public _dialogService: DialogService) { }
 
-    openDialog() {
-        this._dialogService.open(SecondDialogExampleComponent);
+    openDialog(): void {
+        this._dialogService.open(SecondDialogExampleComponent, {responsivePadding: true});
     }
 }

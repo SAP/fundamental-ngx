@@ -4,15 +4,13 @@ import { DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-stacked-example',
-    template: `
-        <button fd-button (click)="openDialog()">Open First Dialog</button>
-    `
+    template: '<button fd-button (click)="openDialog()">Open First Dialog</button>'
 })
 export class DialogStackedExampleComponent {
 
     constructor(private _dialogService: DialogService) { }
 
     openDialog(): void {
-        this._dialogService.open(FirstDialogExampleComponent);
+        this._dialogService.open(FirstDialogExampleComponent, {responsivePadding: true});
     }
 }

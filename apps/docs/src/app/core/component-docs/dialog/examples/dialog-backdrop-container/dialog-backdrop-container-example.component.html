@@ -14,7 +14,6 @@
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
-
         <fd-dialog-header>
             <h1 fd-dialog-title>Backdrop Configuration</h1>
             <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
@@ -33,6 +32,5 @@
                 Close
             </button>
         </fd-dialog-footer>
-
     </fd-dialog>
 </ng-template>

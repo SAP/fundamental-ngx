@@ -47,7 +47,14 @@
 <code-example [exampleFiles]="customConfiguration"></code-example>
 
 <description>
-    Default values used by the Dialog can be specified by providing <code>DIALOG_DEFAULT_CONFIG</code> token value.
+    Default values used by the Dialog can be specified by providing <code>DIALOG_DEFAULT_CONFIG</code> token value.<br/><br/>
+    <code>
+        @NgModule({{'{'}}
+            provide: [
+                {{'{'}}provide: DIALOG_DEFAULT_CONFIG, useValue: customConfig{{'}'}}
+            ]
+        {{'}'}}
+    </code>
 </description>
 
 <separator></separator>

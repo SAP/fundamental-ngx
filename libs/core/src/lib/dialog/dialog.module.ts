@@ -16,41 +16,41 @@ import {
     DialogTitleDirective
 } from './dialog-utils/dialog-directives';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { TemplateDirective } from '../utils/directives';
 import { BarModule } from '../bar/bar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizeModule } from '../utils/directives/resize/resize.module';
+import { TemplateModule } from '../utils/directives/template/template.module';
 
 @NgModule({
     declarations: [
-        TemplateDirective,
         DialogComponent,
-        DialogHeaderComponent,
         DialogBodyComponent,
+        DialogTitleDirective,
         DialogFooterComponent,
+        DialogHeaderComponent,
         DialogContainerComponent,
         DialogCloseButtonDirective,
-        DialogTitleDirective,
         DialogDecisiveButtonDirective
     ],
     imports: [
-        ResizeModule,
-        DragDropModule,
         BarModule,
+        IconModule,
         CommonModule,
         ButtonModule,
-        IconModule
+        ResizeModule,
+        TemplateModule,
+        DragDropModule
     ],
     exports: [
         BarModule,
+        TemplateModule,
         DialogComponent,
-        TemplateDirective,
-        DialogHeaderComponent,
         DialogBodyComponent,
+        DialogTitleDirective,
         DialogFooterComponent,
+        DialogHeaderComponent,
         DialogContainerComponent,
         DialogCloseButtonDirective,
-        DialogTitleDirective,
         DialogDecisiveButtonDirective
     ],
     entryComponents: [

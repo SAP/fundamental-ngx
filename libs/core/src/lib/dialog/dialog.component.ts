@@ -42,7 +42,6 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, CssClassBuilder {
 
     /** Custom classes */
-    private _class: string = '';
     @Input()
     set class(userClass: string) {
         this._class = userClass;
@@ -85,6 +84,9 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
 
     /** @hidden */
     private _focusTrap: FocusTrap;
+
+    /** @hidden */
+    private _class: string = '';
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -209,7 +211,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         }
     }
 
-    /** @hidden Listen on dialog visibility */
+    /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
         this._subscriptions.add(
             this._dialogRef.onHide.subscribe(isHidden => {

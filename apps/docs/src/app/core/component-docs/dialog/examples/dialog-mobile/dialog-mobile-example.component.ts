@@ -9,9 +9,10 @@ export class DialogMobileExampleComponent {
 
     constructor(public _dialogService: DialogService)  {}
 
-    openDialog(modalTemplate) {
+    openDialog(modalTemplate): void {
         this._dialogService.open(modalTemplate, {
-            mobile: true
+            mobile: true,
+            responsivePadding: true
         });
     }
 }

@@ -36,10 +36,9 @@ export class DialogService {
      */
     public open(contentType: Type<any> | TemplateRef<any>, dialogConfig?: DialogConfig): DialogRef {
 
+        const dialogRef: DialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
-
-        const dialogRef: DialogRef = new DialogRef();
         dialogRef.data = dialogConfig.data;
 
         const dialogInjector = Injector.create({
@@ -84,12 +83,8 @@ export class DialogService {
 
     }
 
-    /** @hidden Extends dialog config using default values and returns JS DialogConfig object*/
+    /** @hidden Extends dialog config using default values*/
     private _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
-        const newConfig = new DialogConfig();
-        const mergedConfigs = {...defaultConfig, ...config};
-        Object.keys(mergedConfigs).forEach(key => newConfig[key] = mergedConfigs[key]);
-
-        return newConfig;
+        return {...defaultConfig, ...config};
     }
 }

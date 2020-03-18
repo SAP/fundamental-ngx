@@ -12,7 +12,8 @@ export class DialogPositionExampleComponent {
   openDialog(template): void {
       this._dialogService.open(template, {
           width: '300px',
-          position: {bottom: '100px', right: '100px'},
+          responsivePadding: true,
+          position: {bottom: '100px', right: '100px'}
       });
   }
 }
