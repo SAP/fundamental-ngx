@@ -1,8 +1,6 @@
 import { ComponentRef, Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
-import { DialogComponent } from '../dialog.component';
 import { DialogContainerComponent } from '../dialog-utils/dialog-container.component';
 import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
-import { DialogPosition } from '../dialog-utils/dialog-position.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
 import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
 
@@ -73,7 +71,7 @@ export class DialogService {
         return dialogRef;
     }
 
-    /** @hidden */
+    /** @hidden Destroy existing Dialog */
     private _destroyDialogComponent(dialog: ComponentRef<DialogContainerComponent>): void {
 
         const arrayRef = this._dialogs.find((item) => item === dialog);

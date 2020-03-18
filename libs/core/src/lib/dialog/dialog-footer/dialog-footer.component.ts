@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    ChangeDetectionStrategy,
     Component,
     ContentChildren,
     Inject,
@@ -16,7 +15,7 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
  *
  * ```html
  * <fd-dialog-footer>
- *     <button>Do action</button>
+ *     <button fd-dialog-decisive-button>Do action</button>
  * </fd-dialog-footer>
  * ```
  */
@@ -26,16 +25,20 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
 })
 export class DialogFooterComponent implements AfterContentInit {
 
+    /** @hidden */
     footerTemplate: TemplateRef<any>;
 
+    /** @hidden */
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
     constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
 
+    /** @hidden */
     ngAfterContentInit() {
         this._assignCustomTemplates();
     }
 
+    /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
         const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;

@@ -1,5 +1,4 @@
-<div [class]="dialogConfig.dialogPanelClass"
-     #dialogWindow
+<div #dialogWindow
      role="dialog"
      tabindex="-1"
      attr.aria-modal="true"
@@ -7,6 +6,7 @@
      fdResizeBoundary=".fd-dialog"
      cdkDrag
      cdkDragBoundary=".fd-dialog"
+     [class]="dialogConfig.dialogPanelClass"
      [ngClass]="{
         'fd-dialog__content': true,
         'fd-dialog__content--s': dialogPaddingSize === 's',

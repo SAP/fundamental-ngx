@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { DIALOG_CONFIG, DialogConfig } from '../../..';
 
 /**

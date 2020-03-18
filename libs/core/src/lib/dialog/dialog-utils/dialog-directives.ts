@@ -18,7 +18,7 @@ export class DialogTitleDirective {
 }
 
 /**
- * Directive that applies fundamental dialog styling to a button.
+ * Directive that applies fundamental dialog styling to a dialog close button.
  *
  * ```html
  * <button fd-dialog-close-button></button>

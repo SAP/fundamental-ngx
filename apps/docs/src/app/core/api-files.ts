@@ -164,10 +164,12 @@ export const API_FILES = {
     ],
     dialog: [
         'DialogService',
+        'DialogContainerComponent',
         'DialogTitleDirective',
         'DialogCloseButtonDirective',
+        'DialogDecisiveButtonDirective',
         'DialogConfig',
-        'ModalPosition',
+        'DialogPosition',
         'DialogBodyComponent',
         'DialogHeaderComponent',
         'DialogFooterComponent',

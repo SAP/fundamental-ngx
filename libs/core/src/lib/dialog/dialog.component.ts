@@ -13,10 +13,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    TemplateRef,
-    Type,
     ViewChild,
-    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import focusTrap, { FocusTrap } from 'focus-trap';
@@ -27,6 +24,7 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DIALOG_REF, DialogRef } from './dialog-utils/dialog-ref.class';
 import { Subscription } from 'rxjs';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Component({
     selector: 'fd-dialog',
@@ -34,23 +32,30 @@ import { Subscription } from 'rxjs';
     templateUrl: './dialog.component.html',
     host: {
         'tabindex': '-1',
-        '[@dialog-fade]': '',
-        '[class]': 'dialogConfig.backdropClass',
-        '[class.fd-dialog]': 'dialogConfig.hasBackdrop',
-        '[class.fd-dialog--active]': 'showDialogWindow'
+        '[@dialog-fade]': ''
     },
     animations: [
         dialogFadeNgIf
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, CssClassBuilder {
 
+    /** Custom classes */
+    private _class: string = '';
+    @Input()
+    set class(userClass: string) {
+        this._class = userClass;
+        this.buildComponentCssClass();
+    }
+
+    /** DialogRef - should be used for Template based Dialog implementation  */
     @Input('dialogRef')
     set embeddedDialogRef(value: DialogRef) {
         this._dialogRef = value;
     };
 
+    /** DialogConfig - should be used for Template based Dialog implementation  */
     @Input('dialogConfig')
     set embeddedDialogConfig(value: DialogConfig) {
         this.dialogConfig = value;
@@ -72,13 +77,10 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     /** @hidden Whenever dialog should be visible */
     showDialogWindow: boolean;
 
-    /** @hidden */
-    childContent: TemplateRef<any> | Type<any> = undefined;
-
-    /** @hidden */
+    /** @hidden Whenever dialog is dragged */
     isDragged: boolean;
 
-    /** @hidden */
+    /** @hidden Dialog padding sizes */
     dialogPaddingSize: 's' | 'm' | 'l' | 'xl';
 
     /** @hidden */
@@ -127,7 +129,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         }
     }
 
-    /** @hidden */
+    /** @hidden Listen and close dialog on Backdrop click */
     @HostListener('mousedown', ['$event.target'])
     closeDialog(target: ElementRef): void {
         if (this.dialogConfig.backdropClickCloseable && target === this._elementRef.nativeElement) {
@@ -135,6 +137,23 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         }
     }
 
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string {
+        return [
+            this.dialogConfig.hasBackdrop ? 'fd-dialog' : '',
+            this.showDialogWindow ? 'fd-dialog--active' : '',
+            this._class,
+            this.dialogConfig.backdropClass
+        ].filter(x => x !== '').join(' ');
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef {
+        return this._elementRef;
+    }
+
+    /** @hidden Determine Dialog padding size based on Dialogs window width */
     adjustResponsivePadding(): void {
         if (this.dialogConfig.responsivePadding) {
             const dialogWidth = this.dialogWindow.nativeElement.getBoundingClientRect().width;
@@ -150,7 +169,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         }
     }
 
-    /** @hidden */
+    /** @hidden Trap focus inside Dialog window */
     private _trapFocus(): void {
         if (this.dialogConfig.focusTrapped) {
             try {
@@ -193,10 +212,14 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     /** @hidden Listen on dialog visibility */
     private _listenOnHidden(): void {
         this._subscriptions.add(
-            this._dialogRef.onHide.subscribe(isHidden => this.showDialogWindow = !isHidden)
+            this._dialogRef.onHide.subscribe(isHidden => {
+                this.showDialogWindow = !isHidden;
+                this.buildComponentCssClass();
+            })
         );
     }
 
+    /** @hidden Set Dialog styles from DialogConfig */
     private _setStyles(): void {
         const position = this.dialogConfig.position || {};
         this.dialogWindow.nativeElement.style.width = this.dialogConfig.width;

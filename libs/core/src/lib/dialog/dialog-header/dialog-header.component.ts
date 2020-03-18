@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    ChangeDetectionStrategy,
     Component,
     ContentChildren,
     Inject,
@@ -27,19 +26,24 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
 })
 export class DialogHeaderComponent implements AfterContentInit {
 
+    /** @hidden */
     headerTemplate: TemplateRef<any>;
 
+    /** @hidden */
     subHeaderTemplate: TemplateRef<any>;
 
+    /** @hidden */
     @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
 
     constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) { }
 
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this._assignCustomTemplates();
     }
 
+    /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach(template => {
             switch (template.getName()) {

@@ -7,6 +7,7 @@ import { InjectionToken } from '@angular/core';
  * For a template, it is declared as part of the implicit context, see examples.
  */
 
+/** DialogRef injection token */
 export const DIALOG_REF = new InjectionToken<string[]>('DialogRef');
 
 export class DialogRef {
