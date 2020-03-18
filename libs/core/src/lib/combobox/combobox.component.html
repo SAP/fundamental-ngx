@@ -34,12 +34,7 @@
                         tabindex="0"
                         class="fd-combobox-list-item"
                         [selected]="displayFn(term) === inputText">
-                            <span *ngIf="!itemTemplate"
-                                  [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting">
-                            </span>
-                            <ng-container *ngIf="itemTemplate">
-                                <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
-                            </ng-container>
+                        <ng-container [ngTemplateOutlet]="itemH" [ngTemplateOutletContext]="{term: term}"></ng-container>
                     </li>
                 </ng-container>
             </ng-container>
@@ -51,14 +46,18 @@
                     tabindex="0"
                     class="fd-combobox-list-item"
                     [selected]="displayFn(term) === inputText">
-                <span *ngIf="!itemTemplate"
-                      [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting">
-                </span>
-                    <ng-container *ngIf="itemTemplate">
-                        <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
-                    </ng-container>
+                    <ng-container [ngTemplateOutlet]="itemH" [ngTemplateOutletContext]="{term: term}"></ng-container>
                 </li>
             </ng-container>
         </ul>
     </fd-popover-body>
 </fd-popover>
+
+<ng-template let-term="term" #itemH>
+    <span *ngIf="!itemTemplate"
+        [innerHTML]="term | displayFnPipe:displayFn | highlight:inputText:highlighting">
+    </span>
+    <ng-container *ngIf="itemTemplate">
+        <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: term}"></ng-container>
+    </ng-container>
+</ng-template>
