@@ -29,7 +29,7 @@
                     </li>
                     <li *ngFor="let term of group.value; let termIndex = index;"
                         (click)="onMenuClickHandler((groupIndex *  group.value.length) + termIndex)"
-                        (keydown)="onMenuKeydownHandler($event, (groupIndex *  group.value.length) + termIndex)"
+                        (keydown)="onListKeydownHandler($event, (groupIndex *  group.value.length) + termIndex)"
                         fd-list-item
                         tabindex="0"
                         class="fd-combobox-list-item"
@@ -41,7 +41,7 @@
             <ng-container *ngIf="!groupFn">
                 <li *ngFor="let term of displayedValues; let index = index;"
                     (click)="onMenuClickHandler(index)"
-                    (keydown)="onMenuKeydownHandler($event, index)"
+                    (keydown)="onListKeydownHandler($event, index)"
                     fd-list-item
                     tabindex="0"
                     class="fd-combobox-list-item"

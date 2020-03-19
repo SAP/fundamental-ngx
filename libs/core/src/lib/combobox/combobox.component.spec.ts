@@ -3,10 +3,9 @@ import { ComboboxComponent } from './combobox.component';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '../popover/popover.module';
 import { FormsModule } from '@angular/forms';
-import { MenuModule } from '../menu/menu.module';
+import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
-import { PopoverComponent } from '@fundamental-ngx/core';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -20,7 +19,7 @@ describe('ComboboxComponent', () => {
                 CommonModule,
                 PopoverModule,
                 FormsModule,
-                MenuModule,
+                ListModule,
                 PipeModule,
             ]
         }).compileComponents();
@@ -66,7 +65,7 @@ describe('ComboboxComponent', () => {
         expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
-    it('should fire selected event onMenuKeydownHandler, arrow down', () => {
+    it('should fire selected event onListKeydownHandler, arrow down', () => {
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
@@ -75,17 +74,17 @@ describe('ComboboxComponent', () => {
             preventDefault: () => {}
         };
         spyOn(component, 'onChange');
-        component.onMenuKeydownHandler(event, 0);
+        component.onListKeydownHandler(event, 0);
         expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
         spyOn(event, 'preventDefault');
         spyOn(component.listItems.toArray()[1], 'focus');
         event.key = 'ArrowDown';
-        component.onMenuKeydownHandler(event, 0);
+        component.onListKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.toArray()[1].focus).toHaveBeenCalled();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up', () => {
+    it('should handle onListKeydownHandler, arrow up', () => {
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {}
@@ -93,12 +92,12 @@ describe('ComboboxComponent', () => {
         spyOn(component.listItems.first, 'focus');
         spyOn(event, 'preventDefault');
         event.key = 'ArrowUp';
-        component.onMenuKeydownHandler(event, 1);
+        component.onListKeydownHandler(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
-    it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
+    it('should handle onListKeydownHandler, arrow up on the first item', () => {
         const event: any = {
             key: 'ArrowUp',
             preventDefault: () => {
@@ -107,7 +106,7 @@ describe('ComboboxComponent', () => {
         spyOn(event, 'preventDefault');
         spyOn(component.searchInputElement.nativeElement, 'focus');
         event.key = 'ArrowUp';
-        component.onMenuKeydownHandler(event, 0);
+        component.onListKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(component.searchInputElement.nativeElement.focus).toHaveBeenCalled();
     });

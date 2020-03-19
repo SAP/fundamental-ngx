@@ -282,7 +282,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     /** @hidden */
-    onMenuKeydownHandler(event: KeyboardEvent, index: number) {
+    onListKeydownHandler(event: KeyboardEvent, index: number) {
         this.menuKeyboardService.keyDownHandler(event, index, this.listItems.toArray());
     }
 
