@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.17...v0.16.0-rc.18) (2020-03-19)
+
+
+### Bug Fixes
+
+* Make properties DND IE11 compatible ([#2196](https://github.com/SAP/fundamental-ngx/issues/2196)) ([eb821df](https://github.com/SAP/fundamental-ngx/commit/eb821df18fcc0922e9c794a9357eb29551703362))
+
 ## [0.16.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.16...v0.16.0-rc.17) (2020-03-19)
 
 
