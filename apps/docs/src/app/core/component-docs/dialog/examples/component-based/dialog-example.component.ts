@@ -19,7 +19,7 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 
             <fd-dialog-footer>
                 <button fd-button
-                        options="light"
+                        fdType="transparent"
                         fd-dialog-decisive-button
                         [compact]="true"
                         (click)="this.dialogRef.dismiss('Cancel')">

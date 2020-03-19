@@ -1,5 +1,5 @@
 <div class="docs-code-example-toolbar">
-    <button fd-button fdType="light" [glyph]="expandIcon" (click)="isOpen = !isOpen">
+    <button fd-button [glyph]="expandIcon" (click)="isOpen = !isOpen">
         {{ isOpen ? 'Hide' : 'Show' }} Code
     </button>
     <div>
@@ -7,7 +7,6 @@
             fd-button
             glyph="copy"
             title="Copy example to clipboard"
-            fdType="light"
             (click)="copyText()"
             *ngIf="isOpen"
         >
@@ -17,7 +16,6 @@
             fd-button
             glyph="play"
             title="Open code in stackblitz"
-            fdType="light"
             (click)="openStackBlitz()"
             *ngIf="isOpen"
         >
