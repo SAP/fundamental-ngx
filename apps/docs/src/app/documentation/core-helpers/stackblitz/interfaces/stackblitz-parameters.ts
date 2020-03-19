@@ -5,6 +5,7 @@ export interface StackblitzFile {
     selector: string;
     entryComponent: boolean;
     main: boolean;
+    service: boolean;
 }
 
 

@@ -5,7 +5,7 @@ const DefaultRtlLanguages = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', '
 export const RtlLanguageToken = new InjectionToken<string[]>('RtlLanguageToken')
 
 @Injectable()
-/** 
+/**
  * Service taking care of RTL trough behavior subject
  * language list is used to determine if rtl should be enabled at start
  * user can overwrite default languages by using injection token RtlLanguageToken
