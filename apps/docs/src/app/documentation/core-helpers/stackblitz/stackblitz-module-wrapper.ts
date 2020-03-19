@@ -50,6 +50,7 @@ export class StackblitzModuleWrapper {
         return `
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { RtlService } from '@fundamental-ngx/core';
 ${defaultImports}
 ${imports}
 
@@ -63,6 +64,7 @@ ${imports}
         { useHash: true }),
     ],
     providers: [
+        RtlService,
         ${providers}
     ],
     entryComponents: [
