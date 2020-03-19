@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class ListGroupPipe implements PipeTransform {
 
-    transform(items: [], group: Function): any {
+    transform(items: any[], group: Function): any {
         return group(items);
     }
 
