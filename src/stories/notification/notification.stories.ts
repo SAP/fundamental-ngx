@@ -35,7 +35,7 @@ export default {
 export const Notifications = () => ({
     template:
         `
-        <fd-notification  [type]="headerType" [size]="size">
+        <fd-notification [type]="headerType" [size]="size">
 
         <fd-notification-header (closeButtonClick)="closeButtonAction">
             <h3 fd-notification-title>{{title}}</h3>

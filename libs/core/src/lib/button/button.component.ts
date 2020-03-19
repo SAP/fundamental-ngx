@@ -53,6 +53,13 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.aria-labelledby]': 'ariaLabelledBy',
+        '[attr.aria-label]': 'ariaLabel',
+        'role': 'button',
+        '[attr.id]': 'id',
+        'title': 'title'
+    },
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     /** The property allows user to pass additional css classes
@@ -102,6 +109,10 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
+
+    ariaLabelledBy: string = null;
+
+    ariaLabel: string = null;
 
     /** Function runs when component is initialized
      * function should build component css class
