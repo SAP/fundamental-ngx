@@ -26,7 +26,7 @@ export const FormControl = () => ({
         <fd-form-input-message-group>
         <input id="form-input" aria-label="input1" fd-form-control type="text" id="input-52" placeholder="Field placeholder text" [compact]="compactVar" [state]="stateVar"/>
         <fd-form-message [type]="messageStateVar">
-            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
+            {{messageText}}
         </fd-form-message>
     </fd-form-input-message-group>
         
@@ -49,5 +49,7 @@ export const FormControl = () => ({
         }, ''),
         compactVar: boolean('Compact', false),
         requiredVar: boolean('Required', false),
+        messageText: text('Message Text', 'Message'),
+
     }
 });
