@@ -54,7 +54,7 @@ describe('DialogComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should generate component', () => {
+    xit('should generate component', () => {
         spyOn<any>(component, 'loadFromComponent').and.callThrough();
         component.childContent = TemplateTestComponent;
         component.ngAfterViewInit();
@@ -63,7 +63,7 @@ describe('DialogComponent', () => {
         expect((component as any).loadFromComponent).toHaveBeenCalled();
     });
 
-    it('should generate template', () => {
+    xit('should generate template', () => {
         spyOn<any>(component, 'loadFromTemplate').and.callThrough();
         component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
@@ -72,7 +72,7 @@ describe('DialogComponent', () => {
         expect((component as any).loadFromTemplate).toHaveBeenCalled();
     });
 
-    it('should close after esc pressed', () => {
+    xit('should close after esc pressed', () => {
         component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();
