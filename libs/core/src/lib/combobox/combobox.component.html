@@ -22,8 +22,8 @@
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
         <ul fd-list [dropdownMode]="true" class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight" [hasMessage]="listMessages.length > 0">
             <ng-content></ng-content>
-            <ng-container *ngIf="groupBy">
-                <ng-container *ngFor="let group of displayedValues | groupByPipe:groupBy | keyvalue; let groupIndex = index">
+            <ng-container *ngIf="groupFn">
+                <ng-container *ngFor="let group of displayedValues | listGroupPipe:groupFn | keyvalue; let groupIndex = index">
                     <li fd-list-group-header>
                         {{group.key}}
                     </li>
@@ -38,7 +38,7 @@
                     </li>
                 </ng-container>
             </ng-container>
-            <ng-container *ngIf="!groupBy">
+            <ng-container *ngIf="!groupFn">
                 <li *ngFor="let term of displayedValues; let index = index;"
                     (click)="onMenuClickHandler(index)"
                     (keydown)="onMenuKeydownHandler($event, index)"

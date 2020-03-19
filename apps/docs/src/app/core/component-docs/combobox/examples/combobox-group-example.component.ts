@@ -25,4 +25,20 @@ export class ComboboxGroupExampleComponent {
         }
     }
 
+    groupFunc(items: any): {} {
+        const retVal = {
+            Fruits: [],
+            Vegetables: []
+        };
+        items.forEach(value => {
+            if (value.type === 'Fruits') {
+                retVal.Fruits.push(value);
+            } else if (value.type === 'Vegetables') {
+                retVal.Vegetables.push(value);
+            }
+        });
+
+        return retVal;
+    }
+
 }

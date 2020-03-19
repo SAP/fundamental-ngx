@@ -121,10 +121,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
     itemTemplate: TemplateRef<any>;
 
     /**
-     * The object attribute by which to group items.
+     * Function used to handle grouping of items.
      */
     @Input()
-    groupBy: string;
+    groupFn: Function;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()

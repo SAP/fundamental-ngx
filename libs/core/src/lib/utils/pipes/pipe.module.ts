@@ -3,20 +3,20 @@ import { NgModule } from '@angular/core';
 import { DisplayFnPipe } from './displayFn.pipe';
 import { SearchHighlightPipe } from './search-highlight.pipe';
 import { TwoDigitsPipe } from './two-digits.pipe';
-import { GroupByPipe } from './groupBy.pipe';
+import { ListGroupPipe } from './list-group.pipe';
 
 @NgModule({
     declarations: [
         DisplayFnPipe,
         SearchHighlightPipe,
         TwoDigitsPipe,
-        GroupByPipe
+        ListGroupPipe
     ],
     exports: [
         DisplayFnPipe,
         SearchHighlightPipe,
         TwoDigitsPipe,
-        GroupByPipe
+        ListGroupPipe
     ]
 })
 export class PipeModule {}
