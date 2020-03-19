@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'semantic-switch-example',
+    selector: 'fd-semantic-switch-example',
     templateUrl: 'semantic-switch-example.component.html',
     styles: [
         `
