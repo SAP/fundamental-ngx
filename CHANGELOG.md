@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.19...v0.16.0-rc.20) (2020-03-19)
+
+
+### Bug Fixes
+
+* fixed-width breadcrumb containers not collapsing overflowing breadcrumbs ([#2185](https://github.com/SAP/fundamental-ngx/issues/2185)) ([0388eba](https://github.com/SAP/fundamental-ngx/commit/0388eba2eef9bd718f58c97ea2db4db116e024b4))
+
 ## [0.16.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.18...v0.16.0-rc.19) (2020-03-19)
 
 ## [0.16.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.17...v0.16.0-rc.18) (2020-03-19)

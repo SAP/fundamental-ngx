@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.16.0-rc.19",
+  "version": "0.16.0-rc.20",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "SAP Fundamental Styles, implemented in Angular",
