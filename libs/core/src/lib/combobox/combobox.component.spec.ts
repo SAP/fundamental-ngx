@@ -60,10 +60,10 @@ describe('ComboboxComponent', () => {
         expect(component.searchFunction).toHaveBeenCalled();
         event.key = 'ArrowDown';
         spyOn(event, 'preventDefault');
-        spyOn(component.menuItems.first, 'focus');
+        spyOn(component.listItems.first, 'focus');
         component.onInputKeydownHandler(<any>event);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.menuItems.first.focus).toHaveBeenCalled();
+        expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
     it('should fire selected event onMenuKeydownHandler, arrow down', () => {
@@ -78,11 +78,11 @@ describe('ComboboxComponent', () => {
         component.onMenuKeydownHandler(event, 0);
         expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[0].displayedValue);
         spyOn(event, 'preventDefault');
-        spyOn(component.menuItems.toArray()[1], 'focus');
+        spyOn(component.listItems.toArray()[1], 'focus');
         event.key = 'ArrowDown';
         component.onMenuKeydownHandler(event, 0);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.menuItems.toArray()[1].focus).toHaveBeenCalled();
+        expect(component.listItems.toArray()[1].focus).toHaveBeenCalled();
     });
 
     it('should handle onMenuKeydownHandler, arrow up', () => {
@@ -90,12 +90,12 @@ describe('ComboboxComponent', () => {
             key: 'ArrowUp',
             preventDefault: () => {}
         };
-        spyOn(component.menuItems.first, 'focus');
+        spyOn(component.listItems.first, 'focus');
         spyOn(event, 'preventDefault');
         event.key = 'ArrowUp';
         component.onMenuKeydownHandler(event, 1);
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(component.menuItems.first.focus).toHaveBeenCalled();
+        expect(component.listItems.first.focus).toHaveBeenCalled();
     });
 
     it('should handle onMenuKeydownHandler, arrow up on the first item', () => {
