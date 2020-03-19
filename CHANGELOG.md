@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.16...v0.16.0-rc.17) (2020-03-19)
+
+
+### Bug Fixes
+
+* remove product switch bullets ([#2165](https://github.com/SAP/fundamental-ngx/issues/2165)) ([fb9aab1](https://github.com/SAP/fundamental-ngx/commit/fb9aab1e6af9156fc8653a1e426cb1789b4f9894))
+
 ## [0.16.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.15...v0.16.0-rc.16) (2020-03-19)
 
 ## [0.16.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.14...v0.16.0-rc.15) (2020-03-19)
