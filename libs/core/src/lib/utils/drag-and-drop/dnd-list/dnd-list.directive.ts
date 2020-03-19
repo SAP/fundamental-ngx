@@ -108,8 +108,6 @@ export class DndListDirective implements AfterContentInit {
         const replacedItemIndex = this.closestLinkIndex;
         const draggedItem = this.items[draggedItemIndex];
 
-
-
         if (draggedItemIndex < replacedItemIndex) {
             for (let i = draggedItemIndex; i < replacedItemIndex; i++) {
                 this.items[i] = this.items[i + 1];
