@@ -2,12 +2,13 @@ import {NgModule} from '@angular/core';
 import {ActionBarDocsComponent} from './action-bar-docs.component';
 import {ActionBarHeaderComponent} from './action-bar-header/action-bar-header.component';
 import {
-    ActionBarBackExampleComponent,
     ActionBarContextualMenuExampleComponent,
-    ActionBarLongStringTitleTruncationExampleComponent,
-    ActionBarMobileExampleComponent,
     ActionBarNoBackExampleComponent
 } from './examples/action-bar-examples.component';
+import { ActionBarBackExampleComponent } from './examples/action-bar-back-example.component';
+import { ActionBarLongStringTitleTruncationExampleComponent } from './examples/action-bar-long-string-title-truncation-example.component';
+import { ActionBarMobileExampleComponent } from './examples/action-bar-mobile-example.component';
+
 import {RouterModule, Routes} from '@angular/router';
 import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
 import {API_FILES} from '../../api-files';

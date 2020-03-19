@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulatio
 import { CssStyleBuilder, Hash, applyCssClass, CssClassBuilder, applyCssStyle } from '../utils/public_api';
 
 export type ButtonType = 'standard' | 'positive' | 'medium' | 'negative' | 'half';
-export type ButtonOptions = 'light' | 'emphasized' | 'menu';
+export type ButtonOptions = 'light' | 'emphasized' | 'menu' | 'transparent';
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -50,7 +50,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     /** @hidden */
     @Input() semantic: string; // TODO: deprecated, leaving for backwards compatibility
 
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
+    /** Button options.  Options include 'menu', 'transparent', 'emphasized' and 'light'. Leave empty for default. */
     @Input() options: ButtonOptions | ButtonOptions[];
 
     /** @hidden */
@@ -97,7 +97,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder, CssStyleBuilder
     }
 
     /** HasElementRef interface implementation
-     * function used by applyCssClass and applyCssStyle decorators 
+     * function used by applyCssClass and applyCssStyle decorators
      */
     elementRef(): ElementRef<any> {
         return this._elementRef;
