@@ -26,7 +26,7 @@ export const Breadcrumb = () => ({
     template:
         `<div #responsiveBreadcrumbContainer >
             <fd-breadcrumb 
-                [containerElement]="responsiveBreadcrumbContainer">>
+                [containerElement]="responsiveBreadcrumbContainer">
                 <fd-breadcrumb-item *ngFor="let row of getArray(bcLevels); let i = index;">
                     <a fd-breadcrumb-link [attr.href]="breadcrumbHref1">{{breadcrumbLabel + i}}</a>
                 </fd-breadcrumb-item>
