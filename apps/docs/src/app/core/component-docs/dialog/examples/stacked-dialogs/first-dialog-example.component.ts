@@ -12,8 +12,8 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
             </fd-dialog-header>
 
             <fd-dialog-body>
-                This is the first modal!<br/>
-                Click the button below to open the second modal.
+                This is the first dialog!<br/>
+                Click the button below to open the second dialog.
             </fd-dialog-body>
 
             <fd-dialog-footer>

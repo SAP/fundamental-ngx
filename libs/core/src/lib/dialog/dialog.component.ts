@@ -3,12 +3,10 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
     ContentChild,
     ElementRef,
     HostListener,
     Inject,
-    Injector,
     Input,
     OnDestroy,
     OnInit,
@@ -94,10 +92,8 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     constructor(
         @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
         @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,
-        private _injector: Injector,
         private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _componentFactoryResolver: ComponentFactoryResolver) {
+        private _changeDetectorRef: ChangeDetectorRef) {
     }
 
     /** @hidden */
@@ -169,6 +165,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
                 this.dialogPaddingSize = 'xl';
             }
         }
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Trap focus inside Dialog window */

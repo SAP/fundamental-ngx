@@ -1,14 +1,15 @@
-<button fd-button (click)="modalService.open(template, {width: '500px'})">
-    Open Modal
+<button fd-button (click)="openDialog(template)">
+    Open Dialog
 </button>
 
-<ng-template #template let-modal>
-    <fd-dialog-header>
-        Popover Example
-        <button fd-dialog-close-button (click)="modal.dismiss()"></button>
-    </fd-dialog-header>
-    <fd-dialog-body style="max-height: 200px">
-        <div style="height: 500px;">
+<ng-template #template let-dialog let-dialogConfig="dialogConfig">
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-dialog-title>Popover Example</h1>
+            <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
             <fd-popover [noArrow]="false" [placement]="'bottom'">
                 <fd-popover-control>
                     <button fd-button>Click me!</button>
@@ -19,9 +20,9 @@
                     </div>
                 </fd-popover-body>
             </fd-popover>
-            <br /><br />
+            <br/><br/>
             <fd-multi-input [dropdownValues]="['Pineapple', 'Apple', 'Pepper', 'Tomato']"></fd-multi-input>
             <p>The popover disappears if the attached reference object is outside the view!</p>
-        </div>
-    </fd-dialog-body>
+        </fd-dialog-body>
+    </fd-dialog>
 </ng-template>

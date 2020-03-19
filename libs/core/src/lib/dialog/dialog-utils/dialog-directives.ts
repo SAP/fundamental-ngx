@@ -42,7 +42,7 @@ export class DialogCloseButtonDirective {
  * Directive that applies fundamental dialog styling to a button.
  *
  * ```html
- * <button fd-dialog-close-button></button>
+ * <button fd-dialog-decisive-button></button>
  * ```
  */
 @Directive({

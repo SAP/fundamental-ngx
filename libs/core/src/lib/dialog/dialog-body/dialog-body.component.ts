@@ -6,7 +6,7 @@ import { DIALOG_CONFIG, DialogConfig } from '../../..';
  *
  * ```html
  * <fd-dialog-body>
- *     <div>Modal body content</div>
+ *     <div>Dialog body content</div>
  * </fd-dialog-body>
  * ```
  */

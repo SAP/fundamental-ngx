@@ -3,7 +3,7 @@
 </fd-docs-section-title>
 <description>
     The Dialog can be declared inside <code>ng-template</code> and opened with DialogService using template reference.
-    Each template based modal can use provided context values:
+    Each template based dialog can use provided context values:
     <ul>
         <li>DialogRef - <code>implicit</code></li>
         <li>DialogConfig - <code>dialogConfig</code></li>
@@ -80,7 +80,7 @@
     Dialog on mobile devices takes full viewport and adjusts its header and footer. To create additional spacing around
     Dialog use <code>DialogConfig.mobileOuterSpacing</code> property.
     <br/><br/>
-    To achieve full-screen modal without mobile mode features use <code>DialogConfig.fullScreen</code> property.
+    To achieve full-screen dialog without mobile mode features use <code>DialogConfig.fullScreen</code> property.
 </description>
 <component-example>
     <fd-dialog-mobile-example></fd-dialog-mobile-example>
@@ -114,7 +114,7 @@
     Stacked Dialogs
 </fd-docs-section-title>
 <description>
-    The DialogService supports limitless stacked modals. Each can be closed individually, there is no specific
+    The DialogService supports limitless stacked dialogs. Each can be closed individually, there is no specific
     closing order.
     <br/><br/>
     In the example below, it is accomplished via components as content. However, it is entirely possible with
@@ -140,7 +140,7 @@
     </ul>
     The Dialog can be appended to whatever DOM element you choose. Simply pass an HTMLElement to the <code>DialogConfig.container</code>
     configuration option. Note that there is no visual distinction between parents. This functionality can be used to
-    apply a select set of style rules to a specific modal, for example.
+    apply a select set of style rules to a specific dialog, for example.
 </description>
 <component-example>
     <fd-dialog-backdrop-container-example></fd-dialog-backdrop-container-example>
@@ -154,12 +154,12 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #playgroundDialog>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
-            <h1 fd-dialog-title>Playground Modal</h1>
+            <h1 fd-dialog-title>Playground Dialog</h1>
             <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            This is the modal playground body text!
+            This is the dialog playground body text!
         </fd-dialog-body>
 
         <fd-dialog-footer>

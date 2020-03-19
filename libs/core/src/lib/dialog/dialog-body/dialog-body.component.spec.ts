@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogBodyComponent } from './dialog-body.component.js';
-import { DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DialogBodyComponent } from './dialog-body.component';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
 describe('DialogBodyComponent', () => {
     let component: DialogBodyComponent;
@@ -9,14 +9,14 @@ describe('DialogBodyComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [DialogBodyComponent]
+            declarations: [DialogBodyComponent],
+            providers: [{provide: DIALOG_CONFIG, useClass: DialogConfig}]
         }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DialogBodyComponent);
         component = fixture.componentInstance;
-        component.dialogConfig = new DialogConfig();
         fixture.detectChanges();
     });
 
@@ -29,7 +29,7 @@ describe('DialogBodyComponent', () => {
         expect(fixture.nativeElement).toHaveClass('fd-dialog__body');
         expect(fixture.nativeElement).not.toHaveClass('fd-dialog__body--no-vertical-padding');
 
-        component.dialogConfig.verticalPadding = true;
+        component.dialogConfig.verticalPadding = false;
         fixture.detectChanges();
 
         expect(fixture.nativeElement).toHaveClass('fd-dialog__body--no-vertical-padding');

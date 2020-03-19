@@ -12,7 +12,7 @@ import { DynamicComponentInjector } from './dynamic-component-injector';
 import { DynamicComponentConfig } from './dynamic-component-config';
 
 /**
- * Service used to dynamically generate components like modals/alerts/notifications
+ * Service used to dynamically generate components like dialogs/alerts/notifications
  */
 @Injectable()
 export class DynamicComponentService {

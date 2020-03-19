@@ -15,32 +15,32 @@ export class DialogBackdropContainerExampleComponent {
 
     constructor(private _dialogService: DialogService) {}
 
-    openCustomBackdrop(modal): void {
-        this._dialogService.open(modal, {
+    openCustomBackdrop(dialog): void {
+        this._dialogService.open(dialog, {
             width: '300px',
             responsivePadding: true,
-            backdropClass: 'modal-custom-overlay-example',
-            data: `This modal has a custom backdrop!`,
+            backdropClass: 'dialog-custom-overlay-example',
+            data: `This dialog has a custom backdrop!`,
         });
     }
 
-    openInCustomContainer(modal, containerRef: HTMLElement): void {
-        this._dialogService.open(modal, {
+    openInCustomContainer(dialog, containerRef: HTMLElement): void {
+        this._dialogService.open(dialog, {
             width: '300px',
             container: containerRef,
             responsivePadding: true,
-            data: `This modal has been opened inside local div!`,
+            data: `This dialog has been opened inside local div!`,
         });
     }
 
-    openStaticDialog(modal, containerRef: HTMLElement): void {
-        this._dialogService.open(modal, {
+    openStaticDialog(dialog, containerRef: HTMLElement): void {
+        this._dialogService.open(dialog, {
             width: '300px',
             hasBackdrop: false,
             container: containerRef,
             responsivePadding: true,
             dialogPanelClass: 'static-dialog',
-            data: `This modal has been opened inside local div and displayed as static element!`
+            data: `This dialog has been opened inside local div and displayed as static element!`
         });
     }
 }

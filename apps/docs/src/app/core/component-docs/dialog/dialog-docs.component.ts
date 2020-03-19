@@ -31,7 +31,7 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import { Schema } from '../../../schema/models/schema.model';
 
 @Component({
-    selector: 'app-modal',
+    selector: 'app-dialog',
     templateUrl: './dialog-docs.component.html'
 })
 export class DialogDocsComponent {
@@ -135,9 +135,9 @@ export class DialogDocsComponent {
         {
             language: 'typescript',
             code: componentBasedDialogExampleTs,
-            name: 'Modal Content',
-            fileName: 'modal-content',
-            component: 'ModalContentComponent',
+            name: 'Dialog Content',
+            fileName: 'dialog-example',
+            component: 'DialogExampleComponent',
             entryComponent: true
         },
         {
@@ -145,8 +145,8 @@ export class DialogDocsComponent {
             code: componentBasedDialogTs,
             entryComponent: true,
             main: true,
-            fileName: 'modal-component-as-content-example',
-            component: 'ModalComponentAsContentExampleComponent'
+            fileName: 'component-based-dialog-example',
+            component: 'ComponentBasedDialogExampleComponent'
         }
     ];
 

@@ -12,6 +12,13 @@
 
 .fd-dialog__header {
     position: relative;
+    border-top-left-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+    border-top-right-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+}
+
+.fd-dialog__footer {
+    border-bottom-left-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+    border-bottom-right-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
 }
 
 .fd-dialog__resize-handle {
@@ -19,6 +26,7 @@
 }
 
 .fd-dialog__content {
+    overflow: initial;
     outline: none;
     position: absolute;
     transform: initial;
