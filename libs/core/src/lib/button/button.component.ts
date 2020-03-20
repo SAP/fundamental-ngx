@@ -21,6 +21,7 @@ export type ButtonType =
     | 'emphasized'
     | 'menu';
 export type ButtonOptions = 'light' | 'emphasized' | 'menu';
+let buttonUniqueId: number = 0;
 
 // TODO remove in 0.17.0
 function replaceLightWithTransparent(option: string): string {
@@ -106,6 +107,10 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
         Please follow the breaking changes.`);
         this._options = opt;
     }
+
+    /** Id for the button component. If omitted, a unique one is generated. */
+    @Input()
+    id: string = 'fd-switch-' + buttonUniqueId++;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
