@@ -271,6 +271,7 @@
         }
     },
     "cli": {
-        "defaultCollection": "@nrwl/angular"
+        "defaultCollection": "@nrwl/angular",
+        "analytics": false
     }
 }
