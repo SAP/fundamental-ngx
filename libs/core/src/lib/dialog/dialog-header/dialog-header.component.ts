@@ -7,8 +7,8 @@ import {
     QueryList,
     TemplateRef
 } from '@angular/core';
-import { TemplateDirective } from '../../utils/directives';
-import { DIALOG_CONFIG, DialogConfig } from '../../..';
+import { TemplateDirective } from '../../utils/directives/template/template.directive';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog header.

@@ -6,15 +6,17 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    Inject, Input,
+    Inject,
+    Input,
     TemplateRef,
     Type,
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { DIALOG_REF, DialogRef } from './dialog-ref.class';
-import { DIALOG_CONFIG, DialogConfig } from './dialog-config.class';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
 
 @Component({
     selector: 'fd-dialog-container',
@@ -30,7 +32,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     }
 
     /** @hidden */
-    @ViewChild('contentContainer', {read: ViewContainerRef, static: false}) containerRef: ViewContainerRef;
+    @ViewChild('contentContainer', {read: ViewContainerRef}) containerRef: ViewContainerRef;
 
     /** @hidden Content that should be placed inside container */
     childContent: TemplateRef<any> | Type<any> = undefined;
@@ -65,7 +67,7 @@ export class DialogContainerComponent implements AfterViewInit, CssClassBuilder 
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 

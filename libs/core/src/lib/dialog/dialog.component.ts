@@ -22,7 +22,8 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DIALOG_REF, DialogRef } from './dialog-utils/dialog-ref.class';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 
 @Component({
     selector: 'fd-dialog',

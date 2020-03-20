@@ -1,5 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig } from '../../..';
+import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog body.

@@ -9,7 +9,7 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 
 import { DialogService } from './dialog-service/dialog.service';
-import { DialogContainerComponent } from './dialog-utils/dialog-container.component';
+import { DialogContainerComponent } from './dialog-container/dialog-container.component';
 import {
     DialogCloseButtonDirective,
     DialogDecisiveButtonDirective,
