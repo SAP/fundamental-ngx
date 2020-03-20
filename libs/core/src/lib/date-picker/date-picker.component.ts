@@ -4,7 +4,7 @@ import {
     Component,
     EventEmitter,
     forwardRef,
-    Input, Optional,
+    Input, OnInit, Optional,
     Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -52,7 +52,7 @@ import { FormStates } from '../form/form-control/form-states';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePickerComponent implements ControlValueAccessor, Validator {
+export class DatePickerComponent implements ControlValueAccessor, Validator, OnInit {
 
     /** @hidden The value of the input */
     inputFieldDate: string = null;
@@ -73,7 +73,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     /** Date picker input placeholder string */
     @Input()
-    placeholder: string = 'mm/dd/yyyy';
+    placeholder: string;
 
     /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
     @Input()
@@ -300,6 +300,13 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         private _changeDetectionRef: ChangeDetectorRef,
         @Optional() private _datePipe: DatePipe
     ) {
+    }
+
+    /** @hidden */
+    ngOnInit() {
+        if (!this.placeholder) {
+            this.placeholder = this.format;
+        }
     }
 
     /**
