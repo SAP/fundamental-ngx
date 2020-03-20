@@ -10,6 +10,7 @@ import { InputGroupModule } from '../input-group/input-group.module';
 import { FormModule } from '../form/form.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
+import { LinkModule } from '../link/link.module';
 
 @NgModule({
     declarations: [MultiInputComponent],
@@ -23,7 +24,8 @@ import { ListModule } from '../list/list.module';
         PipeModule,
         InputGroupModule,
         FormModule,
-        CheckboxModule
+        CheckboxModule,
+        LinkModule
     ],
     exports: [MultiInputComponent]
 })
