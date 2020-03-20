@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 export class InputGroupSearchExampleComponent {
 
     searchTerm = 'Search Term';
+    searchTermSecond = 'Search Term';
 
 }

@@ -86,6 +86,10 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     buttonType: ButtonType;
 
+    /** The type of the input, used in Input Group. By default value is set to 'text' */
+    @Input()
+    type: string = 'text';
+
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input()
     buttonOptions: ButtonOptions | ButtonOptions[] = 'light';
