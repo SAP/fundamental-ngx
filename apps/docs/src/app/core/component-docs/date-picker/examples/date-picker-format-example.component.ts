@@ -24,11 +24,11 @@ export class DateFormatDashes extends DateFormatParser {
 @Component({
     selector: 'fd-date-picker-format-example',
     template: `
-        <fd-date-picker [(ngModel)]="date" placeholder="yyyy/mm/dd"></fd-date-picker>
+        <fd-date-picker [(ngModel)]="date" placeholder="dd-mm-yyyy"></fd-date-picker>
         <br/>
         <div>Selected Date: {{date?.toDateString()}}</div>
         <br/>
-        <fd-date-picker placeholder="yyyy/mm/dd to yyyy/mm/dd"
+        <fd-date-picker placeholder="dd-mm-yyyy to dd-mm-yyyy"
                         [type]="'range'" [(ngModel)]="selectedRange"></fd-date-picker>
         <br/>
         <div>Selected First Date: {{selectedRange?.start?.toDateString()}}</div>
