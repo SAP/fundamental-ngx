@@ -42,11 +42,11 @@ export type InputGroupPlacement = 'before' | 'after';
 export class InputGroupComponent implements ControlValueAccessor {
 
     /** @hidden */
-    @ContentChild(InputGroupInputDirective, { static: false })
+    @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
 
     /** @hidden */
-    @ContentChild(InputGroupAddOnDirective, { static: false })
+    @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
 
     /** Input template */
@@ -85,6 +85,10 @@ export class InputGroupComponent implements ControlValueAccessor {
      * Leave empty for default (Action button).'*/
     @Input()
     buttonType: ButtonType;
+
+    /** The type of the input, used in Input Group. By default value is set to 'text' */
+    @Input()
+    type: string = 'text';
 
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input()

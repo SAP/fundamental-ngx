@@ -17,6 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "aot": true,
                         "outputPath": "dist/apps/docs",
                         "index": "apps/docs/src/index.html",
                         "main": "apps/docs/src/main.ts",
@@ -35,10 +36,12 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [{
-                                "replace": "apps/docs/src/environments/environment.ts",
-                                "with": "apps/docs/src/environments/environment.prod.ts"
-                            }],
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/docs/src/environments/environment.ts",
+                                    "with": "apps/docs/src/environments/environment.prod.ts"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -48,18 +51,32 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "budgets": [{
-                                "type": "initial",
-                                "maximumWarning": "2mb",
-                                "maximumError": "5mb"
-                            }]
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ]
                         },
                         "production-unoptimized": {
-                            "tsConfig":"apps/docs/tsconfig.netlify.json",
-			                      "fileReplacements": [{
-                                "replace": "apps/docs/src/environments/environment.ts",
-                                "with": "apps/docs/src/environments/environment.prod.ts"
-                            }],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "tsConfig": "apps/docs/tsconfig.netlify.json",
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/docs/src/environments/environment.ts",
+                                    "with": "apps/docs/src/environments/environment.prod.ts"
+                                }
+                            ],
                             "aot": true,
                             "extractCss": true,
                             "sourceMap": false,
@@ -68,6 +85,12 @@
                             "optimization": false
                         },
                         "hmr": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -77,10 +100,12 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "fileReplacements": [{
-                                "replace": "apps/docs/src/environments/environment.ts",
-                                "with": "apps/docs/src/environments/environment.prod.ts"
-                            }]
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/docs/src/environments/environment.ts",
+                                    "with": "apps/docs/src/environments/environment.prod.ts"
+                                }
+                            ]
                         }
                     }
                 },
@@ -165,6 +190,11 @@
                     "options": {
                         "tsConfig": "libs/core/tsconfig.lib.json",
                         "project": "libs/core/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "lint": {
@@ -200,6 +230,11 @@
                     "options": {
                         "tsConfig": "libs/platform/tsconfig.lib.json",
                         "project": "libs/platform/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/platform/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "lint": {
@@ -229,13 +264,13 @@
     "schematics": {
         "@schematics/angular:component": {
             "prefix": "fd",
-            "styleext": "scss"
+            "style": "scss"
         },
         "@schematics/angular:directive": {
             "prefix": "fd"
         }
     },
     "cli": {
-        "defaultCollection": "@nrwl/schematics"
+        "defaultCollection": "@nrwl/angular"
     }
 }

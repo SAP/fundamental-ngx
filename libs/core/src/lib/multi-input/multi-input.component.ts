@@ -50,7 +50,7 @@ import { ListItemDirective } from '../list/list-item.directive';
 export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChanges, AfterViewInit {
 
     /** @hidden */
-    @ViewChild(PopoverComponent, { static: false })
+    @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
 
     /** @hidden */
@@ -58,7 +58,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     listItems: QueryList<ListItemDirective>;
 
     /** @hidden */
-    @ViewChild('searchInputElement', { static: false })
+    @ViewChild('searchInputElement')
     searchInputElement: ElementRef;
 
     /** @hidden */

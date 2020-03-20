@@ -35,7 +35,7 @@ class TestComponent {
     @Input()
     public itemWidth: string;
 
-    @ViewChild(MenuItemComponent, { static: false })
+    @ViewChild(MenuItemComponent)
     menuItem: MenuItemComponent;
 
     public itemClicked = false;

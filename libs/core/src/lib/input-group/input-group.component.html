@@ -25,7 +25,8 @@
                     [options]="buttonOptions"
                     [glyph]="glyph"
                     [class]="inShellbar ? 'fd-shellbar__button' : ''"
-                    (click)="buttonClicked($event)">
+                    (click)="buttonClicked($event)"
+                    type="button">
                 <ng-container *ngIf="!glyph">{{addOnText}}</ng-container>
             </button>
         </span>
@@ -52,7 +53,7 @@
            [class]="inShellbar ? 'fd-shellbar__input-group__input' : ''"
            fd-input-group-input
            [compact]="compact"
-           type="text"
+           [type]="type"
            *ngIf="!inputElement && !inputTemplate"
            placeholder="{{placeholder}}">
 </ng-template>

@@ -66,11 +66,11 @@ export class StackblitzService {
                 defaultProjectInfo.files[generatedFiles.html.path] = generatedFiles.html.code;
             }
 
-            const scssFilePath = this.getFilePath(example.fileName, 'scss');
+            const scssFilePath = this.getFilePath(example, 'scss');
 
             if (generatedFiles.scss) {
                 defaultProjectInfo.files[generatedFiles.scss.path] = generatedFiles.scss.code;
-            } else if (!defaultProjectInfo.files[scssFilePath]) {
+            } else if (!defaultProjectInfo.files[scssFilePath] && this.containsStyleUrls(generatedFiles.ts)) {
                 // Typescript files created by default has got scss file included, so it's mandatory to create
                 // Empty scss file, to avoid errors
                 defaultProjectInfo.files[scssFilePath] = '';
@@ -126,12 +126,24 @@ import { Component } from '@angular/core';
         }
     }
 
-    private getFilePath(fileName: string, extension: string): string {
-        return  'src/app/' + this.getFileBasis(fileName) + '.' + extension;
+    private containsStyleUrls(tsFile: GeneratedFile): boolean {
+        if (tsFile && tsFile.code) {
+            return tsFile.code.includes('styleUrls');
+        } else {
+            return false;
+        }
     }
 
-    private getFileBasis(fileName: string): string {
-        return fileName + '.component';
+    private getFilePath(file: ExampleFile, extension: string): string {
+        return  'src/app/' + this.getFileBasis(file) + '.' + extension;
+    }
+
+    private getFileBasis(file: ExampleFile): string {
+        if (file.service) {
+            return file.fileName + '.service';
+        } else {
+            return file.fileName + '.component';
+        }
     }
 
     /** this function transform that-word, or that_word to ThatWord */
@@ -150,16 +162,17 @@ import { Component } from '@angular/core';
         mainComponent: boolean
     ): StackblitzFile {
 
-        const path = this.getFilePath(example.fileName, 'ts');
+        const path = this.getFilePath(example, 'ts');
         const componentName = example.component || this.transformSnakeCaseToPascalCase(example.fileName);
 
         return {
             path: path,
             componentName: componentName,
-            basis: this.getFileBasis(example.fileName),
+            basis: this.getFileBasis(example),
             selector: this.getLibraryPrefix() + example.fileName,
             entryComponent: example.entryComponent,
-            main: mainComponent
+            main: mainComponent,
+            service: example.service
         };
     }
 
@@ -172,13 +185,13 @@ import { Component } from '@angular/core';
         const generatedFile: GeneratedFiles = {};
 
         generatedFile.html = {
-            path: this.getFilePath(file.fileName, 'html'),
+            path: this.getFilePath(file, 'html'),
             code: file.code.default
         };
 
         if (file.scssFileCode) {
             generatedFile.scss = {
-                path: this.getFilePath(file.fileName, 'scss'),
+                path: this.getFilePath(file, 'scss'),
                 code: file.scssFileCode ? file.scssFileCode.default : ''
             };
         }
@@ -187,7 +200,7 @@ import { Component } from '@angular/core';
         // the typescript file is added
         if (this.isStandAlone(exampleFiles, file)) {
             generatedFile.ts = {
-                path: this.getFilePath(file.fileName, 'ts'),
+                path: this.getFilePath(file, 'ts'),
                 code: file.typescriptFileCode ?
                     file.typescriptFileCode.default :
                     this.getDefaultTypescriptFile(file.fileName)
@@ -201,13 +214,13 @@ import { Component } from '@angular/core';
 
         if (file.scssFileCode) {
             generatedFile.scss = {
-                path: this.getFilePath(file.fileName, 'scss'),
+                path: this.getFilePath(file, 'scss'),
                 code: file.scssFileCode ? file.scssFileCode.default : ''
             };
         }
 
         generatedFile.ts = {
-            path: this.getFilePath(file.fileName, 'ts'),
+            path: this.getFilePath(file, 'ts'),
             code: file.code.default
         };
 

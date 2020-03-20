@@ -16,10 +16,14 @@ export class StackblitzDependencies {
         '@angular/common',
         '@angular/forms',
         '@angular/router',
+        '@angular/platform-browser',
+        '@angular/platform-browser-dynamic',
+        'core-js',
         'fundamental-styles',
         'moment',
         'popper.js',
         'tslib',
+        'typescript'
     ];
 
     static GetDependencies(): object {

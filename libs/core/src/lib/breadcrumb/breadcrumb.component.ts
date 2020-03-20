@@ -42,7 +42,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     /** @hidden */
     collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
 
-    /** @hidden */
+    /** @hidden used to compare to the current width to know whether to collapse or expand breadcrumbs */
     previousContainerWidth: number;
 
     /** @hidden */
@@ -56,19 +56,28 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     containerElement: HTMLElement;
 
     /** @hidden */
+    containerBoundary: number;
+
+    /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
-        const containerBoundary = this.getContainerBoundary();
-        // if the screen is getting smaller
-        if (containerBoundary <= this.previousContainerWidth) {
+        this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
+        if (this.containerElement) {
+            this.containerBoundary = this.containerElement.getBoundingClientRect().width;
+        }
+        /*
+            if this is the first load and there is no previousContainerWidth,
+            or the container boundary is smaller than the previousContainerWidth
+         */
+        if (!this.previousContainerWidth || this.containerBoundary < this.previousContainerWidth) {
             // and the breadcrumbs extend past the window
-            if (this.elementRef.nativeElement.getBoundingClientRect().width > containerBoundary) {
+            if (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary) {
                 this.collapseBreadcrumbs();
             }
         } else if (this.collapsedBreadcrumbItems.length) { // if the screen is getting bigger and there are collapsed breadcrumbs
             this.expandBreadcrumbs();
         }
-        this.previousContainerWidth = containerBoundary;
+        this.previousContainerWidth = this.containerBoundary;
     }
 
     /** @hidden */
@@ -144,7 +153,6 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.previousContainerWidth = this.getContainerBoundary();
         this.onResize();
     }
 

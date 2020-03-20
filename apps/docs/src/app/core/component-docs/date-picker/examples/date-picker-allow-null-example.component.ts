@@ -10,7 +10,7 @@ import { DatePickerComponent, FdDate } from '@fundamental-ngx/core';
 })
 export class DatePickerAllowNullExampleComponent {
 
-    @ViewChild(DatePickerComponent, { static: false }) datePicker: DatePickerComponent;
+    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent;
 
     date = FdDate.getToday();
 

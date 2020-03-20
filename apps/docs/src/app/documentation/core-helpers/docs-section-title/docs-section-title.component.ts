@@ -19,7 +19,7 @@ import { Libraries } from '../../utilities/libraries';
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
 
-    @ViewChild('title', { read: ElementRef, static: false })
+    @ViewChild('title', { read: ElementRef })
     sectionTitle: ElementRef;
 
     @Input()

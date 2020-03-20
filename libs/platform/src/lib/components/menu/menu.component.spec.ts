@@ -19,7 +19,7 @@ import { MenuKeyboardService, IconModule } from '@fundamental-ngx/core';
     `
 })
 class TestComponent {
-    @ViewChild(MenuComponent, { static: false }) menu: MenuComponent;
+    @ViewChild(MenuComponent) menu: MenuComponent;
     @Input() menuItems: [];
 
     @Input() public showSeparator = false;

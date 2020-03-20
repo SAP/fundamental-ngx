@@ -38,7 +38,7 @@ export class LocalizationEditorComponent {
     fdLocalizationEditorClass: boolean = true;
 
     /** @hidden */
-    @ContentChild(LocalizationEditorMainComponent, { static: false })
+    @ContentChild(LocalizationEditorMainComponent)
     mainElement: LocalizationEditorMainComponent;
 
     /** The trigger events that will open/close the popover.

@@ -1,6 +1,151 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [0.16.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.20...v0.16.0-rc.21) (2020-03-20)
+
+
+### Bug Fixes
+
+* (input group) Add type of input group and example ([#2190](https://github.com/SAP/fundamental-ngx/issues/2190)) ([473aa07](https://github.com/SAP/fundamental-ngx/commit/473aa072eb7f854e95e916501edb359e6b7bcefa))
+
+## [0.16.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.19...v0.16.0-rc.20) (2020-03-19)
+
+
+### Bug Fixes
+
+* fixed-width breadcrumb containers not collapsing overflowing breadcrumbs ([#2185](https://github.com/SAP/fundamental-ngx/issues/2185)) ([0388eba](https://github.com/SAP/fundamental-ngx/commit/0388eba2eef9bd718f58c97ea2db4db116e024b4))
+
+## [0.16.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.18...v0.16.0-rc.19) (2020-03-19)
+
+## [0.16.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.17...v0.16.0-rc.18) (2020-03-19)
+
+
+### Bug Fixes
+
+* Make properties DND IE11 compatible ([#2196](https://github.com/SAP/fundamental-ngx/issues/2196)) ([eb821df](https://github.com/SAP/fundamental-ngx/commit/eb821df18fcc0922e9c794a9357eb29551703362))
+
+## [0.16.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.16...v0.16.0-rc.17) (2020-03-19)
+
+
+### Bug Fixes
+
+* remove product switch bullets ([#2165](https://github.com/SAP/fundamental-ngx/issues/2165)) ([fb9aab1](https://github.com/SAP/fundamental-ngx/commit/fb9aab1e6af9156fc8653a1e426cb1789b4f9894))
+
+## [0.16.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.15...v0.16.0-rc.16) (2020-03-19)
+
+## [0.16.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.14...v0.16.0-rc.15) (2020-03-19)
+
+## [0.16.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.13...v0.16.0-rc.14) (2020-03-19)
+
+## [0.16.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.12...v0.16.0-rc.13) (2020-03-19)
+
+## [0.16.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.11...v0.16.0-rc.12) (2020-03-18)
+
+<a name="0.16.0-rc.11"></a>
+# [0.16.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.10...v0.16.0-rc.11) (2020-03-16)
+
+
+### Bug Fixes
+
+* Change datepickers model on ngModelChange ([#2156](https://github.com/SAP/fundamental-ngx/issues/2156)) ([2daeb0e](https://github.com/SAP/fundamental-ngx/commit/2daeb0e))
+
+
+
+<a name="0.16.0-rc.10"></a>
+# [0.16.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.9...v0.16.0-rc.10) (2020-03-16)
+
+
+
+<a name="0.16.0-rc.9"></a>
+# [0.16.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.8...v0.16.0-rc.9) (2020-03-16)
+
+
+
+<a name="0.16.0-rc.8"></a>
+# [0.16.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.7...v0.16.0-rc.8) (2020-03-15)
+
+
+
+<a name="0.16.0-rc.7"></a>
+# [0.16.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.6...v0.16.0-rc.7) (2020-03-15)
+
+
+
+<a name="0.16.0-rc.6"></a>
+# [0.16.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.5...v0.16.0-rc.6) (2020-03-15)
+
+
+
+<a name="0.16.0-rc.5"></a>
+# [0.16.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.4...v0.16.0-rc.5) (2020-03-14)
+
+
+
+<a name="0.16.0-rc.4"></a>
+# [0.16.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.3...v0.16.0-rc.4) (2020-03-12)
+
+
+### Bug Fixes
+
+* add type button to input group and select ([#2154](https://github.com/SAP/fundamental-ngx/issues/2154)) ([d5c48db](https://github.com/SAP/fundamental-ngx/commit/d5c48db))
+
+
+
+<a name="0.16.0-rc.3"></a>
+# [0.16.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.2...v0.16.0-rc.3) (2020-03-12)
+
+
+### Features
+
+* **combobox:** Adding first combobox version ([#2158](https://github.com/SAP/fundamental-ngx/issues/2158)) ([42a333e](https://github.com/SAP/fundamental-ngx/commit/42a333e))
+
+
+
+<a name="0.16.0-rc.2"></a>
+# [0.16.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.1...v0.16.0-rc.2) (2020-03-11)
+
+
+### Features
+
+* **platform:** Adding initial code for new platform menu. ([#2117](https://github.com/SAP/fundamental-ngx/issues/2117)) ([a3694ce](https://github.com/SAP/fundamental-ngx/commit/a3694ce))
+
+
+
+<a name="0.16.0-rc.1"></a>
+# [0.16.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.0...v0.16.0-rc.1) (2020-03-10)
+
+
+
+<a name="0.16.0-rc.0"></a>
+# [0.16.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.3...v0.16.0-rc.0) (2020-03-10)
+
+
+### Features
+
+* **platform:** FormGroup layout support ([#2139](https://github.com/SAP/fundamental-ngx/issues/2139)) ([a335311](https://github.com/SAP/fundamental-ngx/commit/a335311)), closes [#2131](https://github.com/SAP/fundamental-ngx/issues/2131)
+
+
+
+<a name="0.15.2-rc.3"></a>
+## [0.15.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.2...v0.15.2-rc.3) (2020-03-09)
+
+
+
+<a name="0.15.2-rc.2"></a>
+## [0.15.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.1...v0.15.2-rc.2) (2020-03-08)
+
+
+
+<a name="0.15.2-rc.1"></a>
+## [0.15.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.2-rc.0...v0.15.2-rc.1) (2020-03-08)
+
+
+
+<a name="0.15.2-rc.0"></a>
+## [0.15.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.15.1...v0.15.2-rc.0) (2020-03-08)
+
+
 
 <a name="0.15.1"></a>
 ## [0.15.1](https://github.com/SAP/fundamental-ngx/compare/v0.15.1-rc.5...v0.15.1) (2020-03-05)

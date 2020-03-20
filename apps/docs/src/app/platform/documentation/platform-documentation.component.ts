@@ -10,7 +10,7 @@ import { SectionsToolbarComponent } from '../../documentation/core-helpers/secti
 export class PlatformDocumentationComponent {
     @ViewChild('content', { static: true }) contentElRef: ElementRef;
 
-    @ViewChild(SectionsToolbarComponent, { static: false, read: SectionsToolbarComponent })
+    @ViewChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
     sideCollapsed: boolean = window.innerWidth < 576;

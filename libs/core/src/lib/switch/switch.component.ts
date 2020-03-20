@@ -38,7 +38,7 @@ let switchUniqueId: number = 0;
 })
 export class SwitchComponent implements ControlValueAccessor {
     /** @hidden */
-    @ViewChild('switchInput', { static: false })
+    @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
 
     /** If the switch should have text in it or not. */

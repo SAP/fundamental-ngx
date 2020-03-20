@@ -37,7 +37,7 @@ export class PreparedNestedListComponent implements AfterViewInit {
     /**
      * @hidden
      */
-    @ViewChild(forwardRef(() => NestedListDirective), { static: false })
+    @ViewChild(forwardRef(() => NestedListDirective))
     _nestedListDirective: NestedListDirective;
 
     /**

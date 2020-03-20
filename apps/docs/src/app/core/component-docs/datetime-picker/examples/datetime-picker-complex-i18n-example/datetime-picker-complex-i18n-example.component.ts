@@ -49,7 +49,7 @@ export class CustomI18nMomentCalendar extends CalendarI18n {
 })
 export class DatetimePickerComplexI18nExampleComponent {
 
-    @ViewChild(DatetimePickerComponent, { static: false }) datetimePickerComponent: DatetimePickerComponent;
+    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent;
 
     constructor (private calendarI18nService: CalendarI18n) {
         registerLocaleData(localeFrench, 'fr');

@@ -141,3 +141,7 @@ $product-switch-dnd-line-color: #0854A0;
         }
     }
 }
+
+.fd-product-switch__list > li {
+    list-style-type: none;
+}

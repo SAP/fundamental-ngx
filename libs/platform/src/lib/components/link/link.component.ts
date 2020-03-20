@@ -26,7 +26,7 @@ export class LinkComponent implements OnInit, AfterViewInit {
     isfocused: boolean = false;
 
     /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef, static: false })
+    @ViewChild('link', { read: ElementRef })
     anchor: ElementRef;
 
     /** Id for the link */

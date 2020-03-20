@@ -19,14 +19,14 @@ import {
 import {
     PlatformActionbarExamplesComponent
 } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-simple-example.component';
-import {PlatformActionbarWithBackButtonExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
-import {PlatformActionbarWithDescriptionExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
-import {PlatformActionbarWithLongPageTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
-import {PlatformActionbarEditTitleExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
-import {PlatformActionbarWithContextualMenuExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
-import {PlatformActionbarWithPositiveNegativeActionsExampleComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
+import { PlatformActionbarWithBackButtonExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-back-button-example.component';
+import { PlatformActionbarWithDescriptionExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-description-example.component';
+import { PlatformActionbarWithLongPageTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-with-long-title-example.component';
+import { PlatformActionbarEditTitleExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-edit-title-example.component';
+import { PlatformActionbarWithContextualMenuExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
+import { PlatformActionbarWithPositiveNegativeActionsExampleComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
 import { PlatformActionbarHeaderComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-header/platform-action-bar-header.component';
-import {PlatformActionBarDocsComponent} from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
+import { PlatformActionBarDocsComponent } from '../platform/component-docs/platform-action-bar/platform-action-bar-docs.component';
 import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 
@@ -45,11 +45,9 @@ import { PlatformLinkDocsComponent } from './component-docs/platform-link/platfo
 import { PlatformMenuDocsComponent } from './component-docs/platform-menu/platform-menu-docs.component';
 import { PlatformMenuHeaderComponent } from './component-docs/platform-menu/platform-menu-header/platform-menu-header.component';
 import { PlatformMenuBasicExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-basic-example.component';
-import { PlatformMenuComplexExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-complex-example.component';
-import { PlatformMenuSeparatorExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-separator-example.component';
-import { PlatformMenuGroupExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-group-example.component';
-import { PlatformMenuIconsExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-icons-example.component';
-import { PlatformMenuClickCloseExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-click-close-example.component';
+import { PlatformMenuXPositionExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-x-position-example.component';
+import { PlatformMenuCascadeExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-cascade-example.component';
+import { PlatformMenuScrollingExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-scrolling-example.component';
 
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
@@ -60,6 +58,8 @@ import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/pl
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
+
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -94,11 +94,9 @@ import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,
         PlatformMenuBasicExampleComponent,
-        PlatformMenuGroupExampleComponent,
-        PlatformMenuSeparatorExampleComponent,
-        PlatformMenuIconsExampleComponent,
-        PlatformMenuComplexExampleComponent,
-        PlatformMenuClickCloseExampleComponent,
+        PlatformMenuXPositionExampleComponent,
+        PlatformMenuCascadeExampleComponent,
+        PlatformMenuScrollingExampleComponent,
         NewComponentComponent,
         PlatformSelectDocsComponent,
         PlatformSelectHeaderComponent,
@@ -113,11 +111,12 @@ import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
         SharedDocumentationModule,
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
-        RouterModule.forChild(ROUTES)
+        RouterModule.forChild(ROUTES),
+        ScrollingModule
     ],
     providers: [
-            { provide: 'CURRENT_LIB', useValue: 'platform' },
-            StackblitzService
-        ]
+        { provide: 'CURRENT_LIB', useValue: 'platform' },
+        StackblitzService
+    ]
 })
-export class PlatformDocumentationModule {}
+export class PlatformDocumentationModule { }

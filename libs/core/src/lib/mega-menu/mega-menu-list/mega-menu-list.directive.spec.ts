@@ -11,7 +11,7 @@ import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 })
 
 export class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 
 }

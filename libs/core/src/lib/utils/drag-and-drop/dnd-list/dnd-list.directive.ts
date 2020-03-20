@@ -165,15 +165,15 @@ export class DndListDirective implements AfterContentInit {
         const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();
         const targetElementBound = <DOMRect>targetElement.nativeElement.getBoundingClientRect();
 
-        if (draggedElementBound.y - targetElementBound.y > VERTICAL_OFFSET) {
+        if (draggedElementBound.top - targetElementBound.top > VERTICAL_OFFSET) {
             /** If element is higher than the dragged element, it's for sure before */
             return true;
-        } else if (targetElementBound.y - draggedElementBound.y > VERTICAL_OFFSET) {
+        } else if (targetElementBound.top - draggedElementBound.top > VERTICAL_OFFSET) {
             /** If element is lower than the dragged element, it's for sure after */
             return false;
         } else {
             /** If elements are in same level, the horizontal position decides if it's before/after */
-            return draggedElementBound.x - targetElementBound.x > 0;
+            return draggedElementBound.left - targetElementBound.left > 0;
         }
     }
 }

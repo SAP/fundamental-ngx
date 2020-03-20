@@ -8,7 +8,7 @@ import { TileModule } from '../tile.module';
     `
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement')
     ref: ElementRef;
 }
 

@@ -1,0 +1,114 @@
+<div class="fd-docs-flex-display-helper">
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button>Simple</button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-menu>
+                <ul fd-menu-list>
+                    <li *ngFor="let option of menu">
+                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                    </li>
+                </ul>
+            </fd-menu>
+        </fd-popover-body>
+    </fd-popover>
+
+
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button>With Header</button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div fd-popover-body-header>
+                <div fd-bar [cosy]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cosy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-menu>
+                <ul fd-menu-list>
+                    <li *ngFor="let option of menu">
+                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                    </li>
+                </ul>
+            </fd-menu>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button>With Header And Footer</button>
+        </fd-popover-control>
+        <fd-popover-body>
+
+            <div fd-popover-body-header>
+                <div fd-bar [cosy]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cosy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-menu>
+                <ul fd-menu-list>
+                    <li *ngFor="let option of menu">
+                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                    </li>
+                </ul>
+            </fd-menu>
+            <div fd-popover-body-footer>
+                <div fd-bar [barDesign]="'footer'" [cosy]="true">
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <button fd-button [options]="'emphasized'" [compact]="true">Save</button>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <button fd-button [options]="'light'" [compact]="true">Cancel</button>
+                        </fd-bar-element>
+                    </div>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button>With Header, SubHeader And Footer</button>
+        </fd-popover-control>
+        <fd-popover-body>
+
+            <div fd-popover-body-header>
+                <div fd-bar [barDesign]="'header-with-subheader'" [cosy]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cosy Header</fd-bar-element>
+                    </div>
+                </div>
+                <div fd-bar [barDesign]="'subheader'" [cosy]="true">
+                    <div fd-bar-middle>
+                        <fd-bar-element>Cozy Subheader</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-menu>
+                <ul fd-menu-list>
+                    <li *ngFor="let option of menu">
+                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                    </li>
+                </ul>
+            </fd-menu>
+            <div fd-popover-body-footer>
+                <div fd-bar [barDesign]="'footer'" [cosy]="true">
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <button fd-button [options]="'emphasized'" [compact]="true">Save</button>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <button fd-button [options]="'light'" [compact]="true">Cancel</button>
+                        </fd-bar-element>
+                    </div>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</div>
