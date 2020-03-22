@@ -111,7 +111,7 @@
     "@types/jasmine": "3.5.9",
     "@types/jasminewd2": "2.0.8",
     "angular-cli-ghpages": "^0.6.2",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "chalk": "^3.0.0",
     "codelyzer": "^5.1.2",
     "coveralls": "^3.0.11",
