@@ -36,7 +36,7 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ul fd-list [compact]="true">
+            <ul *ngIf="!(dialogRef.onLoading | async)" fd-list [compact]="true">
                 <li *ngFor="let fruit of filterFruits(fruitCollection, searchedPhrase)"
                     fd-list-item
                     [selected]="isSelected(fruit.id)"

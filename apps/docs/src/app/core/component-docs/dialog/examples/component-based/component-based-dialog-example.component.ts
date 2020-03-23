@@ -22,11 +22,11 @@ export class ComponentBasedDialogExampleComponent {
                 pineappleFunFacts: [
                     `You can grow your own pineapple by planting the top of the pineapple in soil`,
                     `Pulling leaves from a pineapple is not an indication of ripeness as many people think`,
-                    `James Dole is considered the “King of Pineapples`,
+                    `James Dole is considered the “King of Pineapples“`,
                     `A pineapple cannot ripen more after it is picked`,
                     `An unripe pineapple not only tastes awful, it can be poisonous`,
                     `One of the ways you tell if a pineapple is ripe is by smelling it`,
-                    `In Hawaii, the word for pineapple is “Hala kahiki`
+                    `In Hawaii, the word for pineapple is “Hala kahiki“`
                 ],
             },
             width: '400px'

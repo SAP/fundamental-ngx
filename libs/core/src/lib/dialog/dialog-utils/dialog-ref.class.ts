@@ -13,6 +13,7 @@ export const DIALOG_REF = new InjectionToken<string[]>('DialogRef');
 export class DialogRef {
     private readonly _afterClosed = new Subject<any>();
     private readonly _onHide = new BehaviorSubject<boolean>(false);
+    private readonly _onLoading = new BehaviorSubject<boolean>(false);
 
     /**
      * Observable that is triggered when the dialog is closed.
@@ -22,6 +23,9 @@ export class DialogRef {
 
     /** Observable that is triggered whenever the dialog should be visually hidden or visible.*/
     public onHide: Observable<boolean> = this._onHide.asObservable();
+
+    /** Observable that is triggered whenever the dialog should be displayed in loading state.*/
+    public onLoading: Observable<boolean> = this._onLoading.asObservable();
 
     /** Data passed from the calling component to the content.*/
     public data: any;
@@ -49,5 +53,13 @@ export class DialogRef {
      */
     hide(visible: boolean): void {
         this._onHide.next(visible);
+    }
+
+    /**
+     * Displays the dialog in loading state.
+     * @param isLoading Value used to determine if dialog window should be displayed in loading state.
+     */
+    loading(isLoading: boolean): void {
+        this._onLoading.next(isLoading);
     }
 }

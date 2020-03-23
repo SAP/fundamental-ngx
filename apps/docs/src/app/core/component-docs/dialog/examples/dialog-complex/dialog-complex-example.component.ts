@@ -49,6 +49,8 @@ export class DialogComplexExampleComponent {
             verticalPadding: false,
             backdropClickCloseable: false
         });
+        this.dialogRef.loading(true);
+        setTimeout(() => this.dialogRef.loading(false), 2000);
     }
 
     get totalPrice(): number {

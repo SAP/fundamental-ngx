@@ -202,6 +202,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
             this.dialogHeaderRef.dialogConfig = this.dialogHeaderRef.dialogConfig || this.dialogConfig;
         }
         if (this.dialogBodyRef) {
+            this.dialogBodyRef.dialogRef = this.dialogBodyRef.dialogRef || this._dialogRef;
             this.dialogBodyRef.dialogConfig = this.dialogBodyRef.dialogConfig || this.dialogConfig;
         }
         if (this.dialogFooterRef) {

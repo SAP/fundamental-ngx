@@ -20,6 +20,7 @@ import { BarModule } from '../bar/bar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizeModule } from '../utils/directives/resize/resize.module';
 import { TemplateModule } from '../utils/directives/template/template.module';
+import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { TemplateModule } from '../utils/directives/template/template.module';
         ButtonModule,
         ResizeModule,
         TemplateModule,
-        DragDropModule
+        DragDropModule,
+        BusyIndicatorModule
     ],
     exports: [
         BarModule,
