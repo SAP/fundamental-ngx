@@ -5,16 +5,3 @@
              [placeholder]="'Type some text...'"
              [maxHeight]="'250px'">
 </fd-combobox>
-
-<ng-template>
-    <ng-container *ngFor="let group of dropdownValues">
-        <li fd-list-group-header>
-            {{group.type}}
-        </li>
-        <li fd-list-item *ngFor="let value of group.values">
-            <span fd-list-title>
-                {{value}}
-            </span>
-        </li>
-    </ng-container>
-</ng-template>

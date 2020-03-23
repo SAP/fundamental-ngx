@@ -16,7 +16,7 @@
                    [disabled]="disabled"
                    [(ngModel)]="inputText"
                    (ngModelChange)="handleSearchTermChange()"
-                   placeholder="{{placeholder}}">
+                   [placeholder]="placeholder">
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body *ngIf="displayedValues && displayedValues.length">
