@@ -12,8 +12,12 @@ type LabelType = 'numeric' | 'only-icon' | 'icon';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
-
-    /** Select type defines the label types */
+  
+    /** 
+     * The LabelType represented by the info label .
+     * Can be one of the following: 'numeric' | 'only-icon' | 'icon'
+     * For default info label omit this property
+     */
     _labelType: LabelType;
     
     @Input()
