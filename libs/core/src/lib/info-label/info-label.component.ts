@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnInit, ElementRef, OnChanges } from '@angular/core';
-import { CssClassBuilder } from '../utils/public_api';
+import { CssClassBuilder, applyCssClass } from '../utils/public_api';
 
 type LabelType = 'numeric' | 'only-icon' | 'icon';
 
@@ -30,6 +30,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     large: boolean;
     class: string;
 
+    @applyCssClass
     buildComponentCssClass(): string {
         if (this.labelType === 'numeric') {
             this.cssname = this.cssname + 'fd-info-label--numeric';
