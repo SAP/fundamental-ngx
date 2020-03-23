@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'fd-test-info-label',
-  template: `<fd-info-label>info Label</fd-info-label>`
+  template: `<span fd-info-label>info Label</span>`
 })
 class TestInfoLabelComponent {
   @ViewChild(InfoLabelComponent, { static: true })

@@ -4,8 +4,9 @@ import { CssClassBuilder, applyCssClass } from '../utils/public_api';
 type LabelType = 'numeric' | 'only-icon' | 'icon';
 
 @Component({
-    selector: 'fd-info-label',
-    templateUrl: './info-label.component.html',
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-info-label]',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./info-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,41 +14,66 @@ type LabelType = 'numeric' | 'only-icon' | 'icon';
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
 
     /** Select type defines the label types */
+    _labelType: LabelType;
+    
     @Input()
-    labelType: LabelType;
+    set labelType(value: LabelType) {
+        this._labelType = value;
+        this.buildComponentCssClass();
+    }
+
+    get labelType(): LabelType {
+        return this._labelType;
+    }
 
     /** define the icon type */
+    _glyph: string; 
+
     @Input()
-    glyph: string; 
+    set glyph(value: string) {
+        this._glyph = value;
+        this.buildComponentCssClass();
+    }
+
+    get glyph(): string {
+        return this._glyph;
+    }
 
     /**define the colour of the info label */
+    _color: string;
+    
     @Input()
-    color: string;
+    set color(value: string) {
+        this._color = value;
+        this.buildComponentCssClass();
+    }
 
-    cssname: string = '';
-    clickable: boolean;
-    inverted: boolean;
-    large: boolean;
-    class: string;
+    get color(): string {
+        return this._color;
+    }
+
+
+    _class: string = '';
+
+    @Input()
+    set class(value: string) {
+        this._class = value;
+        this.buildComponentCssClass();
+    }
+
+    get class(): string {
+        return this._class;
+    }
 
     @applyCssClass
     buildComponentCssClass(): string {
-        if (this.labelType === 'numeric') {
-            this.cssname = this.cssname + 'fd-info-label--numeric';
-        }
-        if (this.labelType === 'icon') {
-            this.cssname = this.cssname + 'fd-info-label--icon';
-        }
-        if (this.labelType === 'only-icon') {
-            this.cssname = this.cssname + 'fd-info-label--only-icon';
-        }
-        if (this.glyph) {
-            this.cssname = this.cssname + ' sap-icon--' + this.glyph;
-        }
-        if (this.color) {
-            this.cssname = this.cssname + ' fd-info-label--accent-color-' + this.color;
-        }
-        return this.cssname;
+        return [
+            'fd-info-label',
+            this._labelType ? `fd-info-label--${this._labelType}` : '',
+            this._glyph ? `sap-icon--${this._glyph}` : '',
+            this._color ? `fd-info-label--accent-color-${this._color}` : '',
+            this._class
+        ].filter(x => x !== '').join(' ');
     }
 
     /** @hidden */
