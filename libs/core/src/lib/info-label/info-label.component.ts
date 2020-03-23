@@ -34,6 +34,8 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     _glyph: string; 
 
     /** define the icon type */
+    _glyph: string; 
+
     @Input()
     set glyph(value: string) {
         this._glyph = value;
