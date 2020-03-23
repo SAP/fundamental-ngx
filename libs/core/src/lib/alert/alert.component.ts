@@ -106,7 +106,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    childContent: Type<any> | TemplateRef<any> | string;
+    childContent: Type<any> | TemplateRef<any> | string = undefined;
 
     /** @hidden */
     constructor(private elRef: ElementRef,

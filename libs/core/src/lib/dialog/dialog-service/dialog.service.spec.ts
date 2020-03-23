@@ -1,10 +1,11 @@
-import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 import { DialogService } from './dialog.service';
 import { TestBed } from '@angular/core/testing';
 import { DialogRef } from '../dialog-utils/dialog-ref.class';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogModule } from '../dialog.module';
+import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
 
 @Component({
     template: `
@@ -17,18 +18,14 @@ class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;
 }
 
-@NgModule({
-
-})
-class TestModule {}
-
 describe('DialogService', () => {
     let service: DialogService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [TemplateTestComponent],
-            imports: [DialogModule]
+            imports: [DialogModule],
+            providers: [{provide: DIALOG_DEFAULT_CONFIG, useValue: {...new DialogConfig(), resizable: true}}],
         }).overrideModule(BrowserDynamicTestingModule, {
             set: {entryComponents: [TemplateTestComponent]}
         }).compileComponents();
@@ -40,116 +37,41 @@ describe('DialogService', () => {
         expect(service).toBeDefined();
     });
 
-    it('should open modal from template', () => {
-        spyOn<any>(service, '_destroyModalComponent').and.callThrough();
-        expect(service['modals'].length).toBe(0);
+    it('should open dialog from template', () => {
+        spyOn<any>(service, '_destroyDialogComponent').and.callThrough();
+        expect(service['_dialogs'].length).toBe(0);
 
         const fixtureElTmp = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         const modalRef: DialogRef = service.open(fixtureElTmp);
-        expect(service['modals'].length).toBe(1);
-        expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].backdropRef).toBeTruthy();
+        expect(service['_dialogs'].length).toBe(1);
+        expect(service['_dialogs'][0]).toBeTruthy();
 
         modalRef.dismiss();
-        expect((service as any)._destroyModalComponent).toHaveBeenCalled();
-        expect(service['modals'].length).toBe(0);
+        expect((service as any)._destroyDialogComponent).toHaveBeenCalled();
+        expect(service['_dialogs'].length).toBe(0);
     });
 
-    it('should open modal from component', () => {
-        spyOn<any>(service, '_destroyModalComponent').and.callThrough();
-        expect(service['modals'].length).toBe(0);
+    it('should open dialog from component', () => {
+        spyOn<any>(service, '_destroyDialogComponent').and.callThrough();
+        expect(service['_dialogs'].length).toBe(0);
 
         const modalRef: DialogRef = service.open(TemplateTestComponent);
-        expect(service['modals'].length).toBe(1);
-        expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].backdropRef).toBeTruthy();
+        expect(service['_dialogs'].length).toBe(1);
+        expect(service['_dialogs'][0]).toBeTruthy();
 
         modalRef.dismiss();
-        expect((service as any)._destroyModalComponent).toHaveBeenCalled();
-        expect(service['modals'].length).toBe(0);
-    });
-
-    it('should support disabled backdrop', () => {
-        spyOn<any>(service, '_destroyModalComponent').and.callThrough();
-        expect(service['modals'].length).toBe(0);
-
-        const modalRef: DialogRef = service.open(TemplateTestComponent, {hasBackdrop: false});
-        expect(service['modals'].length).toBe(1);
-        expect(service['modals'][0].modalRef).toBeTruthy();
-
-        modalRef.dismiss();
-        expect((service as any)._destroyModalComponent).toHaveBeenCalled();
-        expect(service['modals'].length).toBe(0);
-    });
-
-    it('should support setting modal size', () => {
-        const width = '400px';
-        const height = '200px';
-
-        service.open(TemplateTestComponent, {
-            maxWidth: width,
-            minWidth: width,
-            width: width,
-            maxHeight: height,
-            minHeight: height,
-            height: height
-        });
-
-        expect(service['modals'].length).toBe(1);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.maxWidth).toBe(width);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.minWidth).toBe(width);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.width).toBe(width);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.maxHeight).toBe(height);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.minHeight).toBe(height);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.height).toBe(height);
-    });
-
-    it('should support setting modal position', () => {
-        const top = '400px';
-        const bottom = '300px';
-        const right = '200px';
-        const left = '100px';
-
-        service.open(TemplateTestComponent, {
-            position: {top: top, bottom: bottom, right: right, left: left}
-        });
-
-        expect(service['modals'].length).toBe(1);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.top).toBe(top);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.bottom).toBe(bottom);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.right).toBe(right);
-        expect(service['modals'][0].modalRef.location.nativeElement.style.left).toBe(left);
-    });
-
-    it('should close modal on backdrop click', () => {
-
-        expect(service.hasOpenDialogs()).toBe(false);
-
-        service.open(TemplateTestComponent, {backdropClickCloseable: true});
-
-        expect(service.hasOpenDialogs()).toBeTruthy();
-
-        expect(service['modals'][0].modalRef).toBeTruthy();
-        expect(service['modals'][0].backdropRef).toBeTruthy();
-
-        service['modals'][0].backdropRef.location.nativeElement.click();
-        expect(service.hasOpenDialogs()).toBe(false);
-
-        service.open(TemplateTestComponent, {backdropClickCloseable: false});
-        service['modals'][0].backdropRef.location.nativeElement.click();
-
-        expect(service.hasOpenDialogs()).toBeTruthy();
-
+        expect((service as any)._destroyDialogComponent).toHaveBeenCalled();
+        expect(service['_dialogs'].length).toBe(0);
     });
 
     it('should dismiss all modals', () => {
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
-        expect(service['modals'].length).toBe(3);
+        expect(service['_dialogs'].length).toBe(3);
 
         service.dismissAll();
-        expect(service['modals'].length).toBe(0);
+        expect(service['_dialogs'].length).toBe(0);
     });
 
     it('should support hasOpenDialogs', () => {
@@ -158,4 +80,8 @@ describe('DialogService', () => {
         expect(service.hasOpenDialogs()).toBe(true);
     });
 
+    it('should use default values', () => {
+        const dialogConfig = service['_applyDefaultConfig'](new DialogConfig(), service['_defaultConfig']);
+        expect(dialogConfig.resizable).toEqual(true);
+    });
 });
