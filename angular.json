@@ -25,7 +25,6 @@
                         "tsConfig": "apps/docs/tsconfig.app.json",
                         "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"],
                         "styles": [
-                            "node_modules/fundamental-styles/dist/fonts.css",
                             "node_modules/fundamental-styles/dist/icon.css",
                             "apps/docs/src/fd-typedoc/assets/css/main.scss",
                             "apps/docs/src/styles.scss"
