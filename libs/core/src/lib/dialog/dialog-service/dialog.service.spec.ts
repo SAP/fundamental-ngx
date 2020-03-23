@@ -36,11 +36,11 @@ describe('DialogService', () => {
         service = TestBed.inject<DialogService>(DialogService);
     });
 
-    xit('should create', () => {
+    it('should create', () => {
         expect(service).toBeDefined();
     });
 
-    xit('should open modal from template', () => {
+    it('should open modal from template', () => {
         spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
@@ -55,7 +55,7 @@ describe('DialogService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
-    xit('should open modal from component', () => {
+    it('should open modal from component', () => {
         spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
@@ -69,7 +69,7 @@ describe('DialogService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
-    xit('should support disabled backdrop', () => {
+    it('should support disabled backdrop', () => {
         spyOn<any>(service, '_destroyModalComponent').and.callThrough();
         expect(service['modals'].length).toBe(0);
 
@@ -82,7 +82,7 @@ describe('DialogService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
-    xit('should support setting modal size', () => {
+    it('should support setting modal size', () => {
         const width = '400px';
         const height = '200px';
 
@@ -104,7 +104,7 @@ describe('DialogService', () => {
         expect(service['modals'][0].modalRef.location.nativeElement.style.height).toBe(height);
     });
 
-    xit('should support setting modal position', () => {
+    it('should support setting modal position', () => {
         const top = '400px';
         const bottom = '300px';
         const right = '200px';
@@ -121,7 +121,7 @@ describe('DialogService', () => {
         expect(service['modals'][0].modalRef.location.nativeElement.style.left).toBe(left);
     });
 
-    xit('should close modal on backdrop click', () => {
+    it('should close modal on backdrop click', () => {
 
         expect(service.hasOpenDialogs()).toBe(false);
 
@@ -142,7 +142,7 @@ describe('DialogService', () => {
 
     });
 
-    xit('should dismiss all modals', () => {
+    it('should dismiss all modals', () => {
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
@@ -152,7 +152,7 @@ describe('DialogService', () => {
         expect(service['modals'].length).toBe(0);
     });
 
-    xit('should support hasOpenDialogs', () => {
+    it('should support hasOpenDialogs', () => {
         expect(service.hasOpenDialogs()).toBe(false);
         service.open(TemplateTestComponent);
         expect(service.hasOpenDialogs()).toBe(true);

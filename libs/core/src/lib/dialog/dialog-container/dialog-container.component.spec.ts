@@ -53,12 +53,4 @@ describe('DialogContainerComponent', () => {
         expect(childComponentEl).toBeTruthy();
         expect(childComponentEl.textContent).toContain('Hello there');
     });
-
-    xit('should apply config classes', async () => {
-        await wait(fixture);
-
-        const containerEl = fixture.nativeElement.querySelector('fd-dialog-container');
-        expect(containerEl).toBeTruthy();
-        expect(containerEl).toHaveClass('test-class');
-    });
 });

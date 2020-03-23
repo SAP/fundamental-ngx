@@ -4,11 +4,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TemplateModule } from './template.module';
 
 @Component({
-    template: '<div fdTemplate="templateName">Template content</div>'
+    template: '<ng-template fdTemplate="Header">Template content</ng-template>'
 })
 class TestComponent {
-    @ViewChild(TemplateDirective, {static: true}) templateDirectiveRef: TemplateDirective;
-    public templateName: string = 'Header';
+    @ViewChild(TemplateDirective) templateDirectiveRef: TemplateDirective;
 }
 
 describe('TemplateDirective', () => {
@@ -28,13 +27,13 @@ describe('TemplateDirective', () => {
         fixture.detectChanges();
     });
 
-    xit('should create an instance', () => {
+    it('should create an instance', () => {
         expect(component).toBeTruthy();
         expect(component.templateDirectiveRef).toBeTruthy();
     });
 
-    xit('should return template name', () => {
-        expect(component.templateDirectiveRef.getName).toBe(component.templateName);
+    it('should return template name', () => {
+        expect(component.templateDirectiveRef.getName()).toBe('Header');
     });
 
 });

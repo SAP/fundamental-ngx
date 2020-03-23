@@ -102,7 +102,7 @@ describe('AlertComponent', () => {
         expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(false);
     });
 
-    xit('should persist', fakeAsync(() => {
+    it('should persist', fakeAsync(() => {
         service.open(TemplateTestComponent, {duration: -1});
         service['alerts'][0].instance.ngOnInit();
         fixture.detectChanges();
@@ -114,7 +114,7 @@ describe('AlertComponent', () => {
         });
     }));
 
-    xit('should support visibleTime', fakeAsync(() => {
+    it('should support visibleTime', fakeAsync(() => {
         service.open(TemplateTestComponent, {duration: 10});
         service['alerts'][0].instance.ngOnInit();
         fixture.detectChanges();
