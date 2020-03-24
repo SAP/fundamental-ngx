@@ -7,7 +7,7 @@
     [triggers]="triggers"
     [fillControlMode]="fillControlMode"
 >
-    <fd-popover-control>
+    <fd-popover-control [dir]="direction$ | async">
         <div class="fd-button-split">
             <button
                 fd-button

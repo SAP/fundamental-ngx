@@ -44,7 +44,7 @@ describe('SegmentedButtonDirective', () => {
     });
 
     it('should assign base class', () => {
-        expect(component.ref.nativeElement.className).toContain('fd-button--grouped');
+        expect(component.ref.nativeElement.className).toContain('fd-segmented-button');
     });
 
     it('should support compact mode', () => {

@@ -43,9 +43,9 @@ export const API_FILES = {
     button: [
         'ButtonComponent'
     ],
-    buttonGroup: [
-        'ButtonGroupComponent',
-        'ButtonGroupedDirective',
+    segmentedButton: [
+        'SegmentedButtonComponent',
+        'SegmentedButtonDirective',
     ],
     calendar: [
         'CalendarComponent',
