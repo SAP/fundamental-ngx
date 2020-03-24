@@ -10,7 +10,7 @@
 
     <ng-content></ng-content>
 
-    <ng-container *ngIf="!addOnElement">
+    <ng-container *ngIf="!addOnElement && (glyph || addOnText)">
 
         <span *ngIf="button"
               fd-input-group-addon

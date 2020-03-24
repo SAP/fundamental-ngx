@@ -41,7 +41,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @ViewChild('moreElement', {static: false})
     moreElement: ElementRef;
 
-    @ViewChild(InputGroupAddOnDirective, {static: true})
+    @ViewChild('inputGroupAddOn', {static: true})
     inputGroupAddonEl: ElementRef;
 
     /** Used to add focus class to the tokenizer-example */
@@ -55,6 +55,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** The value for the tokenizer input */
     @Input()
     inputValue: string;
+
+    /** Icon of the button on the right of the input field. */
+    @Input()
+    glyph: string;
 
     /** @hidden */
     previousElementWidth: number;

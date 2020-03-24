@@ -6,5 +6,15 @@
             <ng-container *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) && compact">{{moreTokensLeft.length + moreTokensRight.length}} more</ng-container>
         </span>
         <ng-content select="[fd-form-control]"></ng-content>
+        <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn
+              [compact]="compact"
+              [button]="true"
+              [placement]="'after'">
+            <button fd-button
+                    [compact]="compact"
+                    [glyph]="glyph"
+                    type="button">
+            </button>
+        </span>
     </div>
 </div>

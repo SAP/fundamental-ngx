@@ -12,11 +12,10 @@
                     [state]="state"
                     [buttonFocusable]="buttonFocusable"
                     [button]="true"
-                    [glyph]="glyph"
                     [compact]="compact"
                     [disabled]="disabled"
                     (click)="openChangeHandle(!open)">
-                    <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer">
+                    <fd-tokenizer [compact]="compact" class="fd-multi-input-tokenizer" [glyph]="glyph">
                         <fd-token
                             *ngFor="let token of selected"
                             [compact]="compact"
