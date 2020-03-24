@@ -41,7 +41,12 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @ViewChild('moreElement', {static: false})
     moreElement: ElementRef;
 
-    @ViewChild('inputGroupAddOn', {static: true})
+    /** @hidden */
+    @ViewChild('inputGroupAddOn') set content(content: ElementRef) {
+        this.inputGroupAddonEl = content;
+    }
+
+    /** @hidden */
     inputGroupAddonEl: ElementRef;
 
     /** Used to add focus class to the tokenizer-example */
@@ -82,6 +87,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         if (this.tokenList) {
             this.previousTokenCount = this.tokenList.length;
         }
+        // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
         this.tokenList.changes.subscribe(() => {
             this.previousTokenCount > this.tokenList.length ? this.expandTokens() : this.collapseTokens();
             this.previousTokenCount = this.tokenList.length;
@@ -97,27 +103,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         if (event.code === 'ArrowLeft') {
-            // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
-            if (fromIndex === this.moreTokensLeft.length) {
-                 const poppedToken = this.moreTokensLeft.pop();
-                 if (poppedToken) {
-                     poppedToken.elementRef.nativeElement.style.display = 'inline-block';
-                     poppedToken.elementRef.nativeElement.style.visibility = 'visible';
-                 }
-                 // and then hide any tokens from the right that no longer fit
-                 this.collapseTokens('right');
-            }
+            this.handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
         } else if (event.code === 'ArrowRight') {
-            if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
-                const poppedToken = this.moreTokensRight.pop();
-                if (poppedToken) {
-                    poppedToken.elementRef.nativeElement.style.display = 'inline-block';
-                    poppedToken.elementRef.nativeElement.style.visibility = 'visible';
-                }
-                // and then hide any tokens from the left that no longer fit
-                this.collapseTokens('left');
-            }
+            this.handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
         }
         if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
@@ -127,6 +116,29 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             this.focusTokenElement(event, newIndex - this.moreTokensRight.length);
         } else if (newIndex || newIndex === 0) {
             this.focusTokenElement(event, newIndex);
+        }
+    }
+
+    private handleArrowLeft(fromIndex: number): void {
+        // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
+        if (fromIndex === this.moreTokensLeft.length) {
+            const poppedToken = this.moreTokensLeft.pop();
+            if (poppedToken) {
+                this.makeElementVisible(poppedToken.elementRef);
+            }
+            // and then hide any tokens from the right that no longer fit
+            this.collapseTokens('right');
+        }
+    }
+
+    private handleArrowRight(fromIndex: number): void {
+        if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
+            const poppedToken = this.moreTokensRight.pop();
+            if (poppedToken) {
+                this.makeElementVisible(poppedToken.elementRef);
+            }
+            // and then hide any tokens from the left that no longer fit
+            this.collapseTokens('left');
         }
     }
 
@@ -273,5 +285,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     }
 
     constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef) {}
+
+    private makeElementVisible(elementRef: ElementRef): void {
+        elementRef.nativeElement.style.display = 'inline-block';
+        elementRef.nativeElement.style.visibility = 'visible';
+    }
 
 }
