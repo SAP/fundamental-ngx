@@ -41,9 +41,6 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @ViewChild('moreElement', {static: false})
     moreElement: ElementRef;
 
-    @ViewChild(InputGroupAddOnDirective, {static: true})
-    inputGroupAddonEl: ElementRef;
-
     /** Used to add focus class to the tokenizer-example */
     @Input()
     tokenizerHasFocus: boolean = false;
@@ -254,9 +251,11 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         if (this.moreTokensLeft.length > 0 && this.moreElement && this.moreElement.nativeElement) {
             totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
         }
-        // add the input group addon
-        if (this.inputGroupAddonEl && this.inputGroupAddonEl.nativeElement) {
-            totalTokenWidth = totalTokenWidth + this.inputGroupAddonEl.nativeElement.getBoundingClientRect().width;
+        // add the input group addon, which is a sibling element so need to use querySelector
+        if (this.elementRef.nativeElement.parentElement &&
+            this.elementRef.nativeElement.parentElement.querySelector('.fd-input-group__addon--button') !== null) {
+            totalTokenWidth = totalTokenWidth +
+                this.elementRef.nativeElement.parentElement.querySelector('.fd-input-group__addon--button').getBoundingClientRect().width;
         }
 
         return totalTokenWidth;
