@@ -5,6 +5,8 @@ import * as platformBasicSearchFieldSrc from '!raw-loader!./platform-search-fiel
 import * as platformBasicSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-basic-example.component.ts';
 import * as platformCategoriesSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component.html';
 import * as platformCategoriesSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component.ts';
+import * as platformDataSourceSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component.html';
+import * as platformDataSourceSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component.ts';
 
 @Component({
     selector: 'app-search-field',
@@ -15,13 +17,13 @@ export class PlatformSearchFieldDocsComponent implements OnInit {
         {
             language: 'html',
             code: platformBasicSearchFieldSrc,
-            fileName: 'platform-menu-basic-example'
+            fileName: 'platform-search-field-basic-example'
         },
         {
             language: 'typescript',
             code: platformBasicSearchFieldTsCode,
-            fileName: 'platform-menu-basic-example',
-            component: 'PlatformMenuBasicExampleComponent'
+            fileName: 'platform-search-field-basic-example',
+            component: 'PlatformSearchFieldBasicExampleComponent'
         }
     ];
 
@@ -29,13 +31,27 @@ export class PlatformSearchFieldDocsComponent implements OnInit {
         {
             language: 'html',
             code: platformCategoriesSearchFieldSrc,
-            fileName: 'platform-menu-categories-example'
+            fileName: 'platform-search-field-categories-example'
         },
         {
             language: 'typescript',
             code: platformCategoriesSearchFieldTsCode,
-            fileName: 'platform-menu-categories-example',
-            component: 'PlatformMenuCategoriesExampleComponent'
+            fileName: 'platform-search-field-categories-example',
+            component: 'PlatformSearchFieldCategoriesExampleComponent'
+        }
+    ];
+
+    searchFieldDataSource: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformDataSourceSearchFieldSrc,
+            fileName: 'platform-search-field-data-source-example'
+        },
+        {
+            language: 'typescript',
+            code: platformDataSourceSearchFieldTsCode,
+            fileName: 'platform-search-field-data-source-example',
+            component: 'PlatformSearchFieldDataSourceExampleComponent'
         }
     ];
 
