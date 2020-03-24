@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { filter, map, mapTo, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, mapTo, pairwise, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 
 interface ResizeMove {
     x: number;
@@ -96,14 +96,21 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         const emitResizableEvents$ = this._getResizeEventsNotifiers(resizeActive$);
         const preventOtherPointerEvents$ = this._blockOtherPointerEvents(resizeActive$);
 
-        const resizingCursorPosition$ = mouseMoveEvent$.pipe(
-            withLatestFrom(resizeActive$),
-            filter(([_, isActive]: [MouseEvent, boolean]) => isActive),
-            map(([event, _]) => moveOffset(event)),
+
+        const resizingCursorMovement$ = mouseMoveEvent$.pipe(
+            pairwise(),
+            map(([event1, event2]: [MouseEvent, MouseEvent]) => moveOffset(event1, event2)),
             filter(move => isBoundaryOverflow(move))
         );
 
-        this._subscriptions.add(resizingCursorPosition$.subscribe(event => resize(event)));
+        const setupResizer = () => resizingCursorMovement$.pipe(takeUntil(mouseUpEvent$)).subscribe(event => resize(event));
+
+        const setupResize$ = resizeActive$.pipe(
+            filter(isActive => isActive),
+            tap(() => setupResizer())
+        );
+
+        this._subscriptions.add(setupResize$.subscribe());
         this._subscriptions.add(preventOtherPointerEvents$.subscribe());
         this._subscriptions.add(emitResizableEvents$.subscribe());
     }
@@ -117,7 +124,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     }
 
     /** @hidden Creates move function */
-    private _getMoveOffsetFunction(): (event: MouseEvent) => ResizeMove {
+    private _getMoveOffsetFunction(): (event1: MouseEvent, event2: MouseEvent) => ResizeMove {
 
         let verticalModifier: 1 | -1;
         let horizontalModifier: 1 | -1;
@@ -141,9 +148,9 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
                 break;
         }
 
-        return (event: MouseEvent) => ({
-            x: event.movementX * verticalModifier,
-            y: event.movementY * horizontalModifier
+        return (event1: MouseEvent, event2: MouseEvent) => ({
+            x: (event2.screenX - event1.screenX) * verticalModifier,
+            y: (event2.screenY - event1.screenY) * horizontalModifier
         })
     }
 
