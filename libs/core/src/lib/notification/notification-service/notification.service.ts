@@ -60,7 +60,7 @@ export class NotificationService {
                 NotificationComponent,
                 notificationConfig,
                 {
-                    services: [notificationService]
+                    services: [notificationService, notificationConfig]
                 }
             );
 
@@ -77,7 +77,7 @@ export class NotificationService {
                 NotificationComponent,
                 notificationConfig,
                 {
-                    services: [notificationService]
+                    services: [notificationService, notificationConfig]
                 }
 
             );

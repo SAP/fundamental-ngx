@@ -19,6 +19,7 @@ import {
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
 import { AlertRef } from './alert-utils/alert-ref';
+import { AlertConfig } from './alert-utils/alert-config';
 
 let alertUniqueId: number = 0;
 
@@ -109,11 +110,15 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     childContent: Type<any> | TemplateRef<any> | string = undefined;
 
     /** @hidden */
+    // @ts-ignore
     constructor(private elRef: ElementRef,
                 private cdRef: ChangeDetectorRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private ngZone: NgZone,
+                @Optional() private alertConfig: AlertConfig,
                 @Optional() private alertRef: AlertRef) {
+        // @ts-ignore
+        this._setAlertConfig(alertConfig);
         super(elRef);
     }
 
@@ -233,4 +238,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.message = contentString;
     }
 
+    private _setAlertConfig(alertConfig: AlertConfig): void {
+        Object.keys(alertConfig || {})
+            .filter(key => key !== 'data' && key !== 'container')
+            .forEach(key => this[key] = alertConfig[key]);
+    }
 }

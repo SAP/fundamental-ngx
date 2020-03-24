@@ -20,6 +20,7 @@ import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationDefault } from '../notification-utils/notification-default';
 import { DefaultNotificationComponent } from '../notification-utils/default-notification/default-notification.component';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { NotificationConfig } from '../notification-utils/notification-config';
 
 export type NotificationType = 'success' | 'warning' | 'information' | 'error';
 export type NotificationSize = 's' | 'm';
@@ -64,7 +65,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     ariaDescribedBy: string = null;
 
-    childContent: TemplateRef<any> | Type<any> | NotificationDefault;
+    childContent: TemplateRef<any> | Type<any> | NotificationDefault = undefined;
 
     backdropClickCloseable: boolean = true;
 
@@ -74,10 +75,14 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
+    // @ts-ignore
     constructor(private elRef: ElementRef,
                 private componentFactoryResolver: ComponentFactoryResolver,
                 private cdRef: ChangeDetectorRef,
+                @Optional() private notificationConfig: NotificationConfig,
                 @Optional() private notificationRef: NotificationRef) {
+        // @ts-ignore
+        this._setNotificationConfig(notificationConfig);
         super(elRef);
     }
 
@@ -136,4 +141,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     }
 
+    private _setNotificationConfig(notificationConfig: NotificationConfig): void {
+        Object.keys(notificationConfig || {})
+            .filter(key => key !== 'data' && key !== 'container')
+            .forEach(key => this[key] = notificationConfig[key]);
+    }
 }
