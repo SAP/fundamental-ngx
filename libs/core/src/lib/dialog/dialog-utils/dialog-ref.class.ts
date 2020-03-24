@@ -49,10 +49,10 @@ export class DialogRef {
 
     /**
      * Visually hides the dialog.
-     * @param visible Value used to determine if dialog window should be hidden or visible.
+     * @param isHidden Value used to determine if dialog window should be hidden or visible.
      */
-    hide(visible: boolean): void {
-        this._onHide.next(visible);
+    hide(isHidden: boolean): void {
+        this._onHide.next(isHidden);
     }
 
     /**

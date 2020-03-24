@@ -53,6 +53,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {
     }
 
@@ -110,8 +111,8 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden Creates resize function*/
     private _getResizeFunction(): (move: ResizeMove) => void {
         return (move: ResizeMove) => {
-            this._elementRef.nativeElement.style.width = this._elementRef.nativeElement.offsetWidth + move.x + 'px';
-            this._elementRef.nativeElement.style.height = this._elementRef.nativeElement.offsetHeight + move.y + 'px';
+            this._elementRef.nativeElement.style.width = `${this._elementRef.nativeElement.offsetWidth + move.x}px`;
+            this._elementRef.nativeElement.style.height = `${this._elementRef.nativeElement.offsetHeight + move.y}px`;
         }
     }
 

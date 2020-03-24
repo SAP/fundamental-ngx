@@ -9,14 +9,28 @@ export class DialogConfigurationExample {
 
     constructor(public _dialogService: DialogService) { }
 
-    openDialog(template): void {
+    openDraggableDialog(template): void {
         this._dialogService.open(template, {
-            draggable: true,
-            resizable: true,
-            responsivePadding: true,
-            escKeyCloseable: false,
-            backdropClickCloseable: false,
             width: '300px',
+            draggable: true,
+            responsivePadding: true
+        });
+    }
+
+    openResizableDialog(template): void {
+        this._dialogService.open(template, {
+            width: '300px',
+            resizable: true,
+            responsivePadding: true
+        });
+    }
+
+    openClosableByButtonDialog(template): void {
+        this._dialogService.open(template, {
+            width: '300px',
+            escKeyCloseable: false,
+            responsivePadding: true,
+            backdropClickCloseable: false
         });
     }
 

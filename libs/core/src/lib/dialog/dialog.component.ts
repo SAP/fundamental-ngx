@@ -21,9 +21,10 @@ import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DIALOG_REF, DialogRef } from './dialog-utils/dialog-ref.class';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dialog',
@@ -111,6 +112,7 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
     ngAfterViewInit(): void {
         this._trapFocus();
         this._setStyles();
+        this._listenOnWindowResize();
         this.adjustResponsivePadding();
     }
 
@@ -165,8 +167,8 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
             } else {
                 this.dialogPaddingSize = 'xl';
             }
+            this._changeDetectorRef.detectChanges();
         }
-        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Trap focus inside Dialog window */
@@ -233,5 +235,16 @@ export class DialogComponent implements OnInit, AfterContentInit, AfterViewInit,
         this.dialogWindow.nativeElement.style.bottom = position.bottom;
         this.dialogWindow.nativeElement.style.left = position.left;
         this.dialogWindow.nativeElement.style.right = position.right;
+    }
+
+    /** @hidden Listen on window resize and adjust padding */
+    private _listenOnWindowResize(): void {
+        if (this.dialogConfig.responsivePadding) {
+            this._subscriptions.add(
+                fromEvent(window, 'resize').pipe(
+                    debounceTime(100)
+                ).subscribe(() => this.adjustResponsivePadding())
+            )
+        }
     }
 }

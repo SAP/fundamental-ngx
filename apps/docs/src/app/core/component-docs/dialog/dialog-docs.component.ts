@@ -9,6 +9,9 @@ import * as componentBasedDialogExampleTs from '!raw-loader!./examples/component
 import * as customConfigurationDialogTs from '!raw-loader!./examples/dialog-configuration/dialog-configuration-example.component.ts';
 import * as customConfigurationDialogHtml from '!raw-loader!./examples/dialog-configuration/dialog-configuration-example.component.html';
 
+import * as stateDialogTs from '!raw-loader!./examples/dialog-state/dialog-state-example.component.ts';
+import * as stateDialogHtml from '!raw-loader!./examples/dialog-state/dialog-state-example.component.html';
+
 import * as positionHtml from '!raw-loader!./examples/dialog-position/dialog-position-example.component.html';
 import * as positionTs from '!raw-loader!./examples/dialog-position/dialog-position-example.component.ts';
 
@@ -128,6 +131,20 @@ export class DialogDocsComponent {
             code: templateBasedDialogTs,
             fileName: 'template-based-dialog-example',
             component: 'TemplateBasedDialogExampleComponent'
+        }
+    ];
+
+    stateDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: stateDialogHtml,
+            fileName: 'dialog-state-example'
+        },
+        {
+            language: 'typescript',
+            code: stateDialogTs,
+            fileName: 'dialog-state-example',
+            component: 'DialogStateExample'
         }
     ];
 

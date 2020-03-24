@@ -26,4 +26,6 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button (click)="openDialog(dialogTemplate)">Open with custom configuration</button>
+<button fd-button (click)="openDraggableDialog(dialogTemplate)">Open draggable Dialog</button>
+<button fd-button (click)="openResizableDialog(dialogTemplate)" style="margin-left: 1rem;">Open resizable Dialog</button>
+<button fd-button (click)="openClosableByButtonDialog(dialogTemplate)" style="margin-left: 1rem;">Open Dialog closable only with footer button</button>

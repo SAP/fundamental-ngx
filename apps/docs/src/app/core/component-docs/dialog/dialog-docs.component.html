@@ -34,6 +34,25 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'dialogState'" [componentName]="'dialog'">
+    Dialog state
+</fd-docs-section-title>
+<description>
+    Dialog state can be controlled with <code>DialogRef</code>, providing such features like:
+    <ul>
+        <li><code>DialogRef.hide()</code> - visually hiding the Dialog window</li>
+        <li><code>DialogRef.close()</code> - closing the Dialog window</li>
+        <li><code>DialogRef.dismiss()</code> - dismissing the Dialog window</li>
+        <li><code>DialogRef.loading()</code> - displaying the dialog in loading state</li>
+    </ul>
+</description>
+<component-example>
+    <fd-dialog-state-example></fd-dialog-state-example>
+</component-example>
+<code-example [exampleFiles]="stateDialog"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'dialogConfiguration'" [componentName]="'dialog'">
     Dialog configuration
 </fd-docs-section-title>

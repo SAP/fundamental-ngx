@@ -29,7 +29,7 @@ export class DialogComplexExampleComponent {
         {id: 13, name: 'Korean Melon', price: 6.50},
         {id: 14, name: 'Feijoa', price: 2.00},
         {id: 15, name: 'Tamarillo ', price: 8.75},
-        {id: 16, name: 'Loquat', price: 0.99},
+        {id: 16, name: 'Loquat', price: 0.99}
     ];
 
     selectedFruits: Fruit[] = [];
@@ -59,7 +59,7 @@ export class DialogComplexExampleComponent {
     }
 
     filterFruits(fruits: Fruit[], searchedPhrase: string): Fruit[] {
-        return this.fruitCollection.filter(fruit => fruit.name.includes(searchedPhrase));
+        return this.fruitCollection.filter(fruit => fruit.name.toLowerCase().includes(searchedPhrase.toLowerCase()));
     }
 
     isSelected(id: number): boolean {
@@ -76,8 +76,8 @@ export class DialogComplexExampleComponent {
         }
     }
 
-    clearList(): void {
-        this.selectedFruits = [];
+    clearSearch(): void {
+        this.searchedPhrase = '';
     }
 
     checkout(): void {
