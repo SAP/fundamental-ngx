@@ -29,6 +29,7 @@
                                #searchInputElement
                                [placeholder]="placeholder"
                                [(ngModel)]="searchTerm"
+                               [compact]="compact"
                                [ngClass]="{'fd-input--compact': compact}"
                                (ngModelChange)="handleSearchTermChange()"
                                (keydown)="handleInputKeydown($event)">
