@@ -18,7 +18,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
      * Can be one of the following: 'numeric' | 'only-icon' | 'icon'
      * For default info label omit this property
      */
-    _labelType: LabelType;
+    private _labelType: LabelType;
     
     @Input()
     set labelType(value: LabelType) {
@@ -30,8 +30,8 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
         return this._labelType;
     }
 
-    /** define the icon type */
-    _glyph: string; 
+    /** glyph define the icon of info label */
+    private _glyph: string; 
 
     /** define the icon type */
     _glyph: string; 
@@ -46,8 +46,8 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
         return this._glyph;
     }
 
-    /**define the colour of the info label */
-    _color: string;
+    /**define the colour of the info label starting form 1 to 10 */
+    private _color: string;
     
     @Input()
     set color(value: string) {
@@ -60,7 +60,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     }
 
 
-    _class: string = '';
+    private _class: string = '';
 
     @Input()
     set class(value: string) {
