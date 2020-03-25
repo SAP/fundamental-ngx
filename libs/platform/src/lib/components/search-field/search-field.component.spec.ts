@@ -837,6 +837,7 @@ describe('SearchFieldComponent with DataSource', () => {
         fixture = TestBed.createComponent(DataSourceTestComponent);
         host = fixture.componentInstance;
         host.placeholder = 'Search';
+        host.categories = CATEGORIES;
         component = host.component;
         host.inputValue = null;
         host.submitValue = null;
@@ -871,6 +872,35 @@ describe('SearchFieldComponent with DataSource', () => {
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Banana');
         expect(items[1].textContent).toBe('Orange');
+    });
+
+    it('should be able to filter data source by category', () => {
+        // click on category button
+        const button = fixture.debugElement.query(By.css('.search-field--category-button'))
+        button.nativeElement.click();
+        fixture.detectChanges();
+
+        // click on category item
+        const catMenuEl = overlayContainerEl.querySelector('.fd-menu');
+        const catItems = getDropdownItems(catMenuEl);
+        (catItems[2] as HTMLElement).click();
+        fixture.detectChanges();
+
+        // simulate input entry
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+        textInput.nativeElement.value = 'al';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+
+        // check dropdown
+        const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        expect(menuEls.length).toBe(1);
+        expect(component.showDropdown).toBeTruthy();
+        const items = getDropdownItems(menuEls[0]);
+        expect(items.length).toBe(2);
+        expect(items[0].textContent).toBe('Almond');
+        expect(items[1].textContent).toBe('Walnut');
+
     });
 
 });
