@@ -13,7 +13,9 @@ import { ImageDocsComponent } from './image/image-docs.component';
 import { PaginationDocsComponent } from './pagination/pagination-docs.component';
 import { ListDocsComponent } from './list/list-docs.component';
 import { TabsDocsComponent } from './tabs/tabs-docs.component';
-import { ModalDocsComponent } from './modal/modal-docs.component';
+import { DropdownDocsComponent } from './dropdown/dropdown-docs.component';
+import { TreeDocsComponent } from './tree/tree-docs.component';
+import { DialogDocsComponent } from './dialog/dialog-docs.component';
 import { TableDocsComponent } from './table/table-docs.component';
 import { TileDocsComponent } from './tile/tile-docs.component';
 import { TimeDocsComponent } from './time/time-docs.component';
@@ -30,7 +32,7 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     inputGroup: InputGroupDocsComponent.schema,
     image: ImageDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
-    modal: ModalDocsComponent.schema,
+    dialog: DialogDocsComponent.schema,
     list: ListDocsComponent.schema,
     tabs: TabsDocsComponent.schema,
     table: TableDocsComponent.schema,
