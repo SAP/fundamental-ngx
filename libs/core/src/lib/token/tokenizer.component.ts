@@ -14,7 +14,6 @@ import {
 } from '@angular/core';
 import { FormControlDirective } from '../form/form-control/form-control.directive';
 import { TokenComponent } from './token.component';
-import { InputGroupAddOnDirective } from '../input-group/input-group-directives';
 
 @Component({
   selector: 'fd-tokenizer',
@@ -87,16 +86,27 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         if (this.tokenList) {
             this.previousTokenCount = this.tokenList.length;
         }
+        this.handleTokenClickSubscriptions();
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
         this.tokenList.changes.subscribe(() => {
             this.previousTokenCount > this.tokenList.length ? this.expandTokens() : this.collapseTokens();
             this.previousTokenCount = this.tokenList.length;
+            this.handleTokenClickSubscriptions();
         });
         if (!this.compact) {
             // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
             this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth -
                 this.tokenizerInnerEl.nativeElement.clientWidth;
         }
+    }
+
+    /** @hidden */
+    handleTokenClickSubscriptions(): void {
+        this.tokenList.forEach((token, index) => {
+            token.onTokenClick.subscribe(event => {
+                this.focusTokenElement(event, index);
+            })
+        });
     }
 
     /** @hidden */
@@ -143,7 +153,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     }
 
     /** @hidden */
-    focusTokenElement(event: KeyboardEvent, newIndex: number): HTMLElement {
+    focusTokenElement(event: Event, newIndex: number): HTMLElement {
         let elementToFocus: HTMLElement;
         if (newIndex >= 0 && newIndex < this.tokenList.length) {
             elementToFocus = this.tokenList.filter((element, index) => index === newIndex)[0]
@@ -176,7 +186,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @HostListener('window:resize', [])
     onResize(): void {
         if (this.elementRef) {
-            const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            const elementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
             // if the element is geting smaller, try collapsing tokens
             if (elementWidth <= this.previousElementWidth) {
                 this.collapseTokens();
@@ -190,8 +200,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     collapseTokens(side?: string): void {
         if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
-            let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
+            let elementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
+            let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
             /*
              When resizing, we want to collapse the tokens on the left first. However when the user is navigating through a
@@ -202,17 +212,17 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             if (side === 'right') {
                 i = this.tokenList.length - 1;
             }
-            while (innerWidth >= elementWidth && (side === 'right' ? i >= 0 : i < this.tokenList.length)) {
-                // loop through the tokens and hide them until the innerWidth fits in the elementWidth
+            while (combinedTokenWidth > elementWidth && (side === 'right' ? i >= 0 : i < this.tokenList.length)) {
+                // loop through the tokens and hide them until the combinedTokenWidth fits in the elementWidth
                 const token = this.tokenList.filter((item, index) => index === i)[0];
                 const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
                 if (moreTokens.indexOf(token) === -1) {
                     moreTokens.push(token);
                 }
                 token.elementRef.nativeElement.style.display = 'none';
-                // get the new elementWidth and innerWidth as these will have changed after setting a token display to 'none'
-                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-                innerWidth = this.getInnerWidth();
+                // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
+                elementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
+                combinedTokenWidth = this.getCombinedTokenWidth();
                 side === 'right' ? i-- : i++;
                 this.cdRef.markForCheck();
             }
@@ -222,11 +232,11 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     expandTokens(): void {
         if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width; // the fd-tokenizer element
-            let innerWidth = this.getInnerWidth(); // the combined width of all tokens, the "____ more" text, and the input
+            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+            let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let breakLoop = false;
             let i = this.moreTokensLeft.length - 1;
-            while (innerWidth < elementWidth && i >= 0 && !breakLoop) {
+            while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
                 // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
                 const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
                 /*
@@ -236,12 +246,12 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
                 tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
                 elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-                innerWidth = this.getInnerWidth();
+                combinedTokenWidth = this.getCombinedTokenWidth();
                 /*
                   if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
                   make the token visible and reduce the hidden count
                 */
-                if (innerWidth < elementWidth) {
+                if (combinedTokenWidth < elementWidth) {
                     tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
                     this.moreTokensLeft.pop();
                 } else {
@@ -256,7 +266,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     }
 
     /** @hidden */
-    getInnerWidth(): number {
+    getCombinedTokenWidth(): number {
         let totalTokenWidth = 0;
         // get the width of each token
         this.tokenList.forEach(token => {
@@ -280,7 +290,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit() {
-        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        this.previousElementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
         this.onResize();
     }
 
