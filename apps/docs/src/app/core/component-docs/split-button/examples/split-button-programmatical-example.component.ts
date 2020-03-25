@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
             fd-split-button {
                 margin-right: 12px;
             }
-            .programmable-button {
+            .docs-button {
                 margin-right: 12px;
             }
         `

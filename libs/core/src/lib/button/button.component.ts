@@ -36,7 +36,7 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
  */
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: `button[fd-button], a[fd-button]`,
+    selector: 'button[fd-button], a[fd-button]',
     exportAs: 'fd-button',
     template: `
         <ng-content></ng-content>
@@ -94,6 +94,7 @@ export class ButtonComponent implements OnInit, CssClassBuilder {
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.'
      * @deprecated 
      * Will be removed in 0.17.0. 
+     * Use 'fdType' instead.
      */
     @Input() options(opt: ButtonOptions | ButtonOptions[]) {
         console.warn(`fd-button options property is deprecated and will be removed in 0.17.0.
