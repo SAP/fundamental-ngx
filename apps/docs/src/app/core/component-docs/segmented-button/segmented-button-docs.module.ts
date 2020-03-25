@@ -15,7 +15,7 @@ const routes: Routes = [
         component: SegmentedButtonHeaderComponent,
         children: [
             { path: '', component: SegmentedButtonDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.buttonGroup } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.segmentedButton } }
         ]
     }
 ];

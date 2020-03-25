@@ -17,12 +17,14 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
 
     /**
      * @deprecated
-     * Will be removed in 0.13.0
+     * Will be removed in 0.17.0
      */
     @Input()
     size: string;
 
-    /** Defines if there will be added fd-button class. Enabled by default. */
+    /** Defines if there will be added fd-button class. 
+     * Enabled by default. 
+    */
     @Input() fdButtonClass: boolean = true;
 
     /** Glyph (icon) of the button. */
@@ -33,24 +35,27 @@ export class SegmentedButtonDirective extends AbstractFdNgxClass {
     @Input()
     state: string;
 
-    /** Whether the button should be in compact form. */
+    /** Whether the button should be in compact form. 
+     * Default value is set to false
+    */
     @Input()
     @HostBinding('class.fd-button--compact')
     compact: boolean = false;
 
     /** @hidden */
-    @HostBinding('class.fd-button--grouped')
-    fdButtonGroupedClass: boolean = true;
+    @HostBinding('class.fd-segmented-button')
+    fdsegmentedButtonClass: boolean = true;
 
     /** @hidden */
     constructor(private elementRef: ElementRef) {
         super(elementRef);
-        console.warn('SegmentedButtonDirective is not supported and will be removed in 0.17.0')
+        console.warn(`SegmentedButtonDirective is not supported and will be removed in 0.17.0.
+        Add styles directly to button instead`);
     }
 
     /** @hidden */
     _setProperties() {
-        this._addClassToElement('fd-button--grouped');
+        this._addClassToElement('fd-segmented-button');
         if (this.fdButtonClass) {
             this._addClassToElement('fd-button');
         }
