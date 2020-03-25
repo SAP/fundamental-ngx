@@ -50,10 +50,12 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
 })
 export class ButtonComponent implements OnInit, CssClassBuilder {
     private _class: string = '';
+    /** The property allows user to pass additional css classes
+     */
     @Input() set class(userClass: string) {
         this._class = userClass;
         this._change();
-    } // user's custom classes
+    }
 
     private _glyph: string;
     /** The icon to include in the button. See the icon page for the list of icons.
