@@ -29,9 +29,12 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
 
 /**
  * Button directive, used to enhance standard HTML buttons.
- *
+ * 
+ * ``` selector: button[fd-button], a[fd-button] ```
+ * 
  * ```html
  * <button fd-button>Button Text</button>
+ * <a fd-button>Button Text</a>
  * ```
  */
 @Component({
