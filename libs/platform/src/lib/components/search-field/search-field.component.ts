@@ -4,8 +4,6 @@ import {
     Input,
     EventEmitter,
     Output,
-    OnChanges,
-    SimpleChanges,
     ViewChild,
     ChangeDetectionStrategy,
     PipeTransform,
@@ -15,12 +13,9 @@ import {
     TemplateRef,
     OnDestroy,
     ChangeDetectorRef,
-    ContentChildren,
-    AfterViewInit,
     Directive,
     ViewChildren,
-    QueryList,
-    HostListener
+    QueryList
 } from '@angular/core';
 
 import {
@@ -54,8 +49,6 @@ export interface ValueLabelItem {
     label: string;
 }
 
-export type SearchFieldSize = 'compact' | 'medium';
-
 @Directive({
     selector: '[fdpSearchFieldSuggestion]',
     host: {
@@ -78,7 +71,7 @@ let searchFieldIdCount = 0;
     styleUrls: ['./search-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
+export class SearchFieldComponent implements OnInit, OnDestroy {
     /**
      * Place holder text for search input field.
      */
@@ -87,7 +80,27 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
     /**
      * List of string values to populate suggestion dropdown selection.
      */
-    @Input() suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
+    @Input()
+    get suggestions(): SuggestionItem[] | Observable<SuggestionItem[]> {
+        return this._suggestions;
+    }
+    set suggestions(value: SuggestionItem[] | Observable<SuggestionItem[]>) {
+        this._suggestions = value;
+        if (Array.isArray(value)) {
+            // convert suggestions to an array of string for "dropdown values"
+            const dropdownValues = value.map((suggestion: SuggestionItem) => {
+                return suggestion.value;
+            });
+            this.dropdownValues$ = of(dropdownValues);
+        } else if (isObservable<SuggestionItem[]>(value)) {
+            this.dropdownValues$ = value.pipe(map((suggestions: SuggestionItem[]) => {
+                return suggestions.map(suggestion => suggestion.value);
+            }));
+        } else {
+            this.dropdownValues$ = of([]);
+        }
+    }
+    private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
 
     /**
      * Datasource for suggestion list
@@ -111,12 +124,26 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
     /**
      * Set size of search input component.
      */
-    @Input() size: SearchFieldSize = 'medium';
+    @Input()
+    get size(): 'cozy' | 'compact' {
+        return this.compact ? 'compact' : 'cozy'
+    }
+    set size(value: 'cozy' | 'compact') {
+        this.compact = value === 'compact';
+    }
 
     /**
      * List of categories.
      */
-    @Input() categories: ValueLabelItem[];
+    @Input()
+    get categories(): ValueLabelItem[] {
+        return this._categories;
+    }
+    set categories(value: ValueLabelItem[]) {
+        this._categories = value;
+        this.showCategoryDropdown = (Array.isArray(value) && value.length > 0);
+    }
+    private _categories: ValueLabelItem[];
 
     /**
      * Set label for category dropdown button.
@@ -221,31 +248,6 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
             this.dir = isRtl ? 'rtl' : 'ltr';
             this._cd.detectChanges();
         });
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.categories) {
-            // check to see it we have categories
-            this.showCategoryDropdown = changes.categories.currentValue && changes.categories.currentValue.length;
-        }
-        if (changes.suggestions) {
-            if (Array.isArray(changes.suggestions.currentValue)) {
-                // convert suggestions to an array of string for "dropdown values"
-                const dropdownValues = changes.suggestions.currentValue.map((suggestion: SuggestionItem) => {
-                    return suggestion.value;
-                });
-                this.dropdownValues$ = of(dropdownValues);
-            } else if (isObservable<SuggestionItem[]>(changes.suggestions.currentValue)) {
-                this.dropdownValues$ = changes.suggestions.currentValue.pipe(map((suggestions: SuggestionItem[]) => {
-                    return suggestions.map(suggestion => suggestion.value);
-                }));
-            } else {
-                this.dropdownValues$ = of([]);
-            }
-        }
-        if (changes.size) {
-            this.compact = changes.size.currentValue === 'compact';
-        }
     }
 
     ngOnDestroy() {

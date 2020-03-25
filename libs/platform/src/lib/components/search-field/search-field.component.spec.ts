@@ -4,7 +4,7 @@ import {
     TestBed,
     inject
 } from '@angular/core/testing';
-import { SearchFieldComponent, SearchInput, SuggestionItem, SearchFieldSize, ValueLabelItem, SuggestionMatchesPipe } from './search-field.component';
+import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem, SuggestionMatchesPipe } from './search-field.component';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { createKeyboardEvent } from '../../testing/event-objects';
@@ -82,7 +82,7 @@ class TestComponent {
     public categories: ValueLabelItem[];
     public categoryLabel: string;
     public hideCategoryLabel = false;
-    public size: SearchFieldSize;
+    public size: 'cozy' | 'compact';
     public isLoading = false;
     public disabled = false;
 
@@ -779,7 +779,7 @@ class DataSourceTestComponent implements OnInit {
     public categories: ValueLabelItem[];
     public categoryLabel: string;
     public hideCategoryLabel = false;
-    public size: SearchFieldSize;
+    public size: 'cozy' | 'compact';
     public isLoading = false;
     public disabled = false;
     public dataSource: SearchFieldDataSource<any>;
