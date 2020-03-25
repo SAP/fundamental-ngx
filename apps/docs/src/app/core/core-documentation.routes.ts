@@ -64,6 +64,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/datetime-picker/datetime-picker-docs.module').then(m => m.DatetimePickerDocsModule)
             },
             {
+                path: 'dialog',
+                loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then(m => m.DialogDocsModule)
+            },
+            {
                 path: 'dropdown',
                 loadChildren: () => import('./component-docs/dropdown/dropdown-docs.module').then(m => m.DropdownDocsModule)
             },
@@ -130,10 +134,6 @@ export const ROUTES: Routes = [
             {
                 path: 'menu',
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then(m => m.MenuDocsModule)
-            },
-            {
-                path: 'modal',
-                loadChildren: () => import('./component-docs/modal/modal-docs.module').then(m => m.ModalDocsModule)
             },
             {
                 path: 'multi-input',

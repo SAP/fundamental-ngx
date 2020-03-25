@@ -5,7 +5,7 @@ export type SizeType = '' | 's' | 'm_l' | 'xl';
 export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer';
 
 /**
- * The Bar component is a container that holds titles, buttons and input controls. 
+ * The Bar component is a container that holds titles, buttons and input controls.
  * Its content is distributed in three areas - left, middle and right.
  * The Bar has 2 modes - Desktop (default) and Tablet/Mobile (cosy).
  */
@@ -28,7 +28,7 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
     }
 
     /** Whether the Bar component is used as a header, subheader, header-with-subheader,
-     * footer or floating-footer. 
+     * footer or floating-footer.
      * Types available: 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer' */
     private _barDesign: BarDesignType;
     @Input()
@@ -53,7 +53,7 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
         this.buildComponentCssClass();
     }
 
-    /** The size of the Page in Page responsive design. 
+    /** The size of the Page in Page responsive design.
      * Available sizes: 's' | 'm_l' | 'xl'
     */
     private _size: SizeType = '';
@@ -85,7 +85,7 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
             this._inPage && this._size ? `fd-bar--page-${this._size}` : '',
             this._inHomePage && !this._size ? 'fd-bar--home-page' : '',
             this._inHomePage && this._size ? `fd-bar--home-page-${this._size}` : '',
-            this.class
+            this._class
         ].filter(x => x !== '').join(' ');
     }
 
@@ -100,12 +100,12 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }
