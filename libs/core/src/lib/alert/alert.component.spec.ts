@@ -11,10 +11,10 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
 import { ButtonModule } from '../button/button.module';
 
 @Component({
-    template: `        
-            <ng-template #testTemplate let-alert>
-                <h1>test</h1>
-            </ng-template>
+    template: `
+        <ng-template #testTemplate let-alert>
+            <h1>test</h1>
+        </ng-template>
     `
 })
 class TemplateTestComponent {
@@ -58,7 +58,7 @@ describe('AlertComponent', () => {
 
     it('should load child component', () => {
         spyOn<any>(component, 'loadFromComponent').and.callThrough();
-        component.childComponentType = TemplateTestComponent;
+        component.childContent = TemplateTestComponent;
         component.ngOnInit();
         component.ngAfterViewInit();
         expect((component as any).loadFromComponent).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('AlertComponent', () => {
 
     it('should load child template', () => {
         spyOn<any>(component, 'loadFromTemplate').and.callThrough();
-        component.childComponentType = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngOnInit();
         component.ngAfterViewInit();
         expect((component as any).loadFromTemplate).toHaveBeenCalled();
@@ -77,7 +77,7 @@ describe('AlertComponent', () => {
     it('should load child string', () => {
         const tester = 'teststring';
         spyOn<any>(component, 'loadFromString').and.callThrough();
-        component.childComponentType = tester;
+        component.childContent = tester;
         component.ngOnInit();
         component.ngAfterViewInit();
         expect((component as any).loadFromString).toHaveBeenCalled();

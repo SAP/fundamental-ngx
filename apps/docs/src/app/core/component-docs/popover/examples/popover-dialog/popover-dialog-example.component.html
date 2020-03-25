@@ -1,0 +1,28 @@
+<button fd-button (click)="openDialog(template)">
+    Open Dialog
+</button>
+
+<ng-template #template let-dialog let-dialogConfig="dialogConfig">
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-dialog-title>Popover Example</h1>
+            <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <fd-popover [noArrow]="false" [placement]="'bottom'">
+                <fd-popover-control>
+                    <button fd-button>Click me!</button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <div style="padding: 12px">
+                        This is the button's popover!
+                    </div>
+                </fd-popover-body>
+            </fd-popover>
+            <br/><br/>
+            <fd-multi-input [dropdownValues]="['Pineapple', 'Apple', 'Pepper', 'Tomato']"></fd-multi-input>
+            <p>The popover disappears if the attached reference object is outside the view!</p>
+        </fd-dialog-body>
+    </fd-dialog>
+</ng-template>

@@ -23,8 +23,8 @@ import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
-import { ModalModule } from './modal/modal.module';
-import { ModalService } from './modal/modal-service/modal.service';
+import { DialogModule } from './dialog/dialog.module';
+import { DialogService } from './dialog/dialog-service/dialog.service';
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
@@ -90,7 +90,7 @@ import { LinkModule } from './link/link.module';
     LocalizationEditorModule,
     MenuModule,
     MegaMenuModule,
-    ModalModule,
+    DialogModule,
     MultiInputModule,
     NestedListModule,
     NotificationModule,
@@ -114,6 +114,6 @@ import { LinkModule } from './link/link.module';
     TokenModule,
     TreeModule,
   ],
-  providers: [AlertService, ModalService, NotificationService],
+  providers: [AlertService, DialogService, NotificationService],
 })
 export class FundamentalNgxCoreModule { }

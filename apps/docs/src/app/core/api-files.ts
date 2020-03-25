@@ -162,16 +162,18 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
-    modal: [
-        'ModalService',
-        'ModalTitleDirective',
-        'ModalCloseButtonDirective',
-        'ModalConfig',
-        'ModalPosition',
-        'ModalBodyComponent',
-        'ModalHeaderComponent',
-        'ModalFooterComponent',
-        'ModalRef'
+    dialog: [
+        'DialogService',
+        'DialogContainerComponent',
+        'DialogTitleDirective',
+        'DialogCloseButtonDirective',
+        'DialogDecisiveButtonDirective',
+        'DialogConfig',
+        'DialogPosition',
+        'DialogBodyComponent',
+        'DialogHeaderComponent',
+        'DialogFooterComponent',
+        'DialogRef'
     ],
     multiInput: [
         'MultiInputComponent'

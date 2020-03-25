@@ -8,7 +8,7 @@ import {PopoverDocsComponent} from './popover-docs.component';
 import {PopoverCFillComponent} from './examples/popover-c-fill/popover-c-fill.component';
 import {PopoverDropdownExampleComponent} from './examples/popover-dropdown/popover-dropdown-example.component';
 import {PopoverDynamicExampleComponent} from './examples/popover-dynamic/popover-dynamic-example.component';
-import {PopoverModalExampleComponent} from './examples/popover-modal/popover-modal-example.component';
+import {PopoverDialogExampleComponent} from './examples/popover-dialog/popover-dialog-example.component';
 import {PopoverPlacementExampleComponent} from './examples/popover-placement/popover-placement-example.component';
 import {PopoverProgrammaticOpenExampleComponent} from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import {PopoverExampleComponent} from './examples/popover-simple/popover-example.component';
@@ -16,7 +16,7 @@ import {
     IdentifierModule,
     ImageModule,
     MenuModule,
-    ModalModule,
+    DialogModule,
     MultiInputModule,
     PopoverModule,
     SideNavigationModule,
@@ -45,7 +45,7 @@ const routes: Routes = [
         SideNavigationModule,
         MultiInputModule,
         MenuModule,
-        ModalModule,
+        DialogModule,
         BarModule
     ],
     exports: [RouterModule],
@@ -54,7 +54,7 @@ const routes: Routes = [
         PopoverCFillComponent,
         PopoverHeaderComponent,
         PopoverExampleComponent,
-        PopoverModalExampleComponent,
+        PopoverDialogExampleComponent,
         PopoverDynamicExampleComponent,
         PopoverDropdownExampleComponent,
         PopoverPlacementExampleComponent,
