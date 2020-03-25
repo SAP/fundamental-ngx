@@ -13,7 +13,7 @@ import { SearchFieldDataProvider } from './platform-search-field-example.service
 @Component({
     selector: 'fdp-platform-search-field-data-source-example',
     templateUrl: './platform-search-field-data-source-example.component.html',
-    styleUrls: ['./platform-search-field-example.scss'],
+    styleUrls: ['./platform-search-field-data-source-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {

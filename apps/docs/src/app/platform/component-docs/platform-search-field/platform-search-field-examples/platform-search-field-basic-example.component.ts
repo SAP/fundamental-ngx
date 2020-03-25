@@ -4,7 +4,7 @@ import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform';
 @Component({
     selector: 'fdp-platform-search-field-basic-example',
     templateUrl: './platform-search-field-basic-example.component.html',
-    styleUrls: ['./platform-search-field-example.scss'],
+    styleUrls: ['./platform-search-field-basic-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformSearchFieldBasicExampleComponent implements OnInit {
