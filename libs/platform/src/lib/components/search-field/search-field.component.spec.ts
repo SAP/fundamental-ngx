@@ -5,7 +5,7 @@ import {
     inject
 } from '@angular/core/testing';
 import { SearchFieldComponent, SearchInput, SuggestionItem, SearchFieldSize, ValueLabelItem, SuggestionMatchesPipe } from './search-field.component';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { createKeyboardEvent } from '../../testing/event-objects';
 import { By } from '@angular/platform-browser';
@@ -13,6 +13,49 @@ import { Observable, of } from 'rxjs';
 import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { PlatformSearchFieldModule } from './search-field.module';
 import { RtlService } from '@fundamental-ngx/core';
+import { DataProvider, SearchFieldDataSource } from '../../domain/public_api';
+
+
+const CATEGORIES: ValueLabelItem[] = [
+    { value: 'Fruits', label: 'Fruits' },
+    { value: 'Vegetables', label: 'Vegetables' },
+    { value: 'Nuts', label: 'Nuts' }
+];
+
+const DATA: any[] = [
+    { category: 'Fruits', value: 'Apple' },
+    { category: 'Fruits', value: 'Banana' },
+    { category: 'Fruits', value: 'Cherry' },
+    { category: 'Fruits', value: 'Orange' },
+    { category: 'Vegetables', value: 'Asparagus' },
+    { category: 'Vegetables', value: 'Celery' },
+    { category: 'Vegetables', value: 'Potato' },
+    { category: 'Nuts', value: 'Almond' },
+    { category: 'Nuts', value: 'Pistacio' },
+    { category: 'Nuts', value: 'Walnut' }
+];
+
+class SearchFieldDataProvider extends DataProvider<string> {
+    constructor() {
+        super();
+    }
+    fetch(params: Map<string, string>): Observable<string[]> {
+        let data = DATA;
+        if (params['keyword']) {
+            const keyword = params['keyword'].toLowerCase();
+            data = data.filter(item => (item.value.toLowerCase().indexOf(keyword) > -1));
+        }
+        if (params['category']) {
+            data = data.filter(item => item.category === params['category']);
+        }
+        return of(data.map(item => item.value));
+    }
+}
+
+function getDropdownItems(menu: Element): NodeList {
+    const items = menu.querySelectorAll('.fd-menu__item');
+    return items;
+}
 
 @Component({
     selector: 'fdp-test',
@@ -63,18 +106,6 @@ class TestComponent {
         this.isSearchCanceled = true;
     }
 }
-
-const CATEGORIES: ValueLabelItem[] = [
-    { value: 'Fruits', label: 'Fruits' },
-    { value: 'Vegetables', label: 'Vegetables' },
-    { value: 'Nuts', label: 'Nuts' }
-];
-
-function getDropdownItems(menu: Element): NodeList {
-    const items = menu.querySelectorAll('.fd-menu__item');
-    return items;
-}
-
 describe('SearchFieldComponent', () => {
     let component: SearchFieldComponent;
     let host: TestComponent;
@@ -720,6 +751,126 @@ describe('SearchFieldComponent', () => {
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
         expect(component.showDropdown).toBeFalsy();
+    });
+
+});
+
+@Component({
+    selector: 'fdp-test',
+    template: `
+        <fdp-search-field #component
+            [placeholder]="placeholder"
+            [categories]="categories"
+            [categoryLabel]="categoryLabel"
+            [hideCategoryLabel]="hideCategoryLabel"
+            [dataSource]="dataSource"
+            [size]="size"
+            [isLoading]="isLoading"
+            [disabled]="disabled"
+            (inputChange)="onInputChange($event)"
+            (searchSubmit)="onSearchSubmit($event)"
+            (cancelSearch)="onCancelSearch($event)"> </fdp-search-field>
+        <button #outsideButton>Outside</button>
+    `
+})
+class DataSourceTestComponent implements OnInit {
+    @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
+    public placeholder: string;
+    public categories: ValueLabelItem[];
+    public categoryLabel: string;
+    public hideCategoryLabel = false;
+    public size: SearchFieldSize;
+    public isLoading = false;
+    public disabled = false;
+    public dataSource: SearchFieldDataSource<any>;
+
+    public inputValue: SearchInput;
+    public submitValue: SearchInput;
+    public isSearchCanceled = false;
+
+    @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
+
+    constructor() { }
+
+    ngOnInit() {
+        this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider())
+    }
+
+    onInputChange($event) {
+        this.inputValue = $event;
+    }
+
+    onSearchSubmit($event) {
+        this.submitValue = $event;
+    }
+
+    onCancelSearch($event) {
+        this.isSearchCanceled = true;
+    }
+}
+describe('SearchFieldComponent with DataSource', () => {
+    let component: SearchFieldComponent;
+    let host: DataSourceTestComponent;
+    let fixture: ComponentFixture<DataSourceTestComponent>;
+
+    let overlayContainerEl: HTMLElement;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                DataSourceTestComponent
+            ],
+            imports: [
+                PlatformSearchFieldModule
+            ],
+            providers: [
+                RtlService
+            ]
+        }).compileComponents();
+
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(DataSourceTestComponent);
+        host = fixture.componentInstance;
+        host.placeholder = 'Search';
+        component = host.component;
+        host.inputValue = null;
+        host.submitValue = null;
+        fixture.detectChanges();
+    });
+
+    it('should be able to filter data source on keyword match', () => {
+        // simulate input entry
+        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
+        textInput.nativeElement.value = 'apple';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+
+        // check dropdown
+        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        expect(menuEls.length).toBe(1);
+        expect(component.showDropdown).toBeTruthy();
+        let items = getDropdownItems(menuEls[0]);
+        expect(items.length).toBe(1);
+        expect(items[0].textContent).toBe('Apple');
+
+        // simulate input entry
+        textInput.nativeElement.value = 'an';
+        textInput.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+
+        // check dropdown
+        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
+        expect(menuEls.length).toBe(1);
+        expect(component.showDropdown).toBeTruthy();
+        items = getDropdownItems(menuEls[0]);
+        expect(items.length).toBe(2);
+        expect(items[0].textContent).toBe('Banana');
+        expect(items[1].textContent).toBe('Orange');
     });
 
 });

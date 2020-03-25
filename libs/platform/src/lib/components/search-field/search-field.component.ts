@@ -32,10 +32,11 @@ import {
 
 import { PopoverComponent } from '@fundamental-ngx/core';
 import { Observable, isObservable, of, Subscription, fromEvent } from 'rxjs';
-import { map, filter, take } from 'rxjs/operators';
+import { map, filter, take, takeUntil } from 'rxjs/operators';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { RtlService } from '@fundamental-ngx/core';
+import { SearchFieldDataSource } from '../../domain/public_api';
 
 export interface SearchInput {
     text: string;
@@ -87,6 +88,20 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
      * List of string values to populate suggestion dropdown selection.
      */
     @Input() suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
+
+    /**
+     * Datasource for suggestion list
+     */
+    @Input()
+    get dataSource(): SearchFieldDataSource<any> {
+        return this._dataSource;
+    };
+    set dataSource(value: SearchFieldDataSource<any>) {
+        if (value) {
+            this._initializeDataSource(value);
+        }
+    }
+    private _dataSource: SearchFieldDataSource<any>;
 
     /**
      * Initial input text.
@@ -179,6 +194,7 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
 
     private _rtlChangeSubscription = Subscription.EMPTY;
     private _outsideClickSubscription = Subscription.EMPTY;
+    private _dataSourceSubscription = Subscription.EMPTY;
 
     @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
     @ViewChild('inputGroup', { static: false }) inputGroup: ElementRef<HTMLElement>;
@@ -238,6 +254,8 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
             this._suggestionOverlayRef = null;
         }
         this._rtlChangeSubscription.unsubscribe();
+        this._outsideClickSubscription.unsubscribe();
+        this._dataSourceSubscription.unsubscribe();
     }
 
     onKeydown($event: KeyboardEvent) {
@@ -266,6 +284,12 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
             this.openSuggestionMenu();
         } else {
             this.closeSuggestionMenu();
+        }
+        if (this.dataSource) {
+            const match = new Map();
+            match.set('keyword', $event);
+            match.set('category', (this.currentCategory && this.currentCategory.value) ? this.currentCategory.value : null);
+            this.dataSource.match(match);
         }
         this.inputChange.emit({
             text: $event,
@@ -407,6 +431,14 @@ export class SearchFieldComponent implements OnInit, OnChanges, OnDestroy {
             backdropClass: 'cdk-overlay-transparent-backdrop',
             width: this.inputGroup.nativeElement.offsetWidth
         });
+    }
+
+    _initializeDataSource(dataSource: SearchFieldDataSource<any>) {
+        this._dataSourceSubscription = dataSource.open()
+            .subscribe(data => {
+                this.dropdownValues$ = of(data);
+            });
+        this._dataSource = dataSource;
     }
 }
 

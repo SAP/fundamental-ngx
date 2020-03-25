@@ -1,5 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SuggestionItem, SearchInput, ValueLabelItem } from '@fundamental-ngx/platform';
+import {
+    Component,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
+import {
+    SearchInput,
+    ValueLabelItem,
+    SearchFieldDataSource
+} from '@fundamental-ngx/platform';
+import { SearchFieldDataProvider } from './platform-search-field-example.service';
 
 @Component({
     selector: 'fdp-platform-search-field-data-source-example',
@@ -9,7 +18,6 @@ import { SuggestionItem, SearchInput, ValueLabelItem } from '@fundamental-ngx/pl
 })
 export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
 
-    public suggestions: SuggestionItem[];
     public categories: ValueLabelItem[];
 
     public searchTerm = '';
@@ -22,33 +30,10 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
     public compactInputText = '';
     public compactInputCategory = '';
 
-    ngOnInit() {
-        this.suggestions = [{
-            value: 'Apple'
-        }, {
-            value: 'Banana'
-        }, {
-            value: 'Blueberry'
-        }, {
-            value: 'Cherry'
-        }, {
-            value: 'Grape'
-        }, {
-            value: 'Lemon'
-        }, {
-            value: 'Lime'
-        }, {
-            value: 'Orange'
-        }, {
-            value: 'Peach'
-        }, {
-            value: 'Pineapple'
-        }, {
-            value: 'Plum'
-        }, {
-            value: 'Raspberry'
-        }];
+    public dataSource: SearchFieldDataSource<any>;
 
+    ngOnInit() {
+        this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
         this.categories = [{
             value: 'red',
             label: 'Red'

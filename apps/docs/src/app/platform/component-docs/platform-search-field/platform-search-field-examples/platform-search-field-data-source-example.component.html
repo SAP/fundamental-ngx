@@ -1,9 +1,5 @@
-<fdp-search-field
-    [placeholder]="'Search'"
-    [suggestions]="suggestions"
-    [categories]="categories"
-    (searchSubmit)="onSearchSubmit($event)"
-    (inputChange)="onInputChange($event)"></fdp-search-field>
+<fdp-search-field [placeholder]="'Search'" [dataSource]="dataSource" [categories]="categories"
+    (searchSubmit)="onSearchSubmit($event)" (inputChange)="onInputChange($event)"></fdp-search-field>
 <div class="result-block">
     <div class="result-field">
         <label>Input Change Text: </label><span>{{inputText}}</span>
@@ -19,13 +15,8 @@
     </div>
 </div>
 <br>
-<fdp-search-field
-    [placeholder]="'Search'"
-    [suggestions]="suggestions"
-    [categories]="categories"
-    [size]="'compact'"
-    (searchSubmit)="onCompactSearchSubmit($event)"
-    (inputChange)="onCompactInputChange($event)"></fdp-search-field>
+<fdp-search-field [placeholder]="'Search'" [dataSource]="dataSource" [categories]="categories" [size]="'compact'"
+    (searchSubmit)="onCompactSearchSubmit($event)" (inputChange)="onCompactInputChange($event)"></fdp-search-field>
 <div class="result-block">
     <div class="result-field">
         <label>Input Change Text: </label><span>{{compactInputText}}</span>
