@@ -23,5 +23,5 @@ export class SegmentedButtonComponent {
 
     /** @hidden */
     @HostBinding('class.fd-segmented-button')
-    fdButtonGroupClass: boolean = true;
+    fdSegmentedButtonClass: boolean = true;
 }

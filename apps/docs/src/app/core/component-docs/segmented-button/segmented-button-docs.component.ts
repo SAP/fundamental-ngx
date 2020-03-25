@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as buttonGroupDefaultExample from '!raw-loader!./examples/segmented-button-default-example.component.html';
-import * as buttonGroupToggleExample from '!raw-loader!./examples/segmented-button-toggle-example.component.html';
+import * as segmentedDefaultExample from '!raw-loader!./examples/segmented-button-default-example.component.html';
+import * as segmentedToggleExample from '!raw-loader!./examples/segmented-button-toggle-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -95,7 +95,7 @@ export class SegmentedButtonDocsComponent implements OnInit {
     defaultToggleHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupToggleExample,
+            code: segmentedToggleExample,
             fileName: 'segmented-button-toggle-example',
         }
     ];
@@ -103,7 +103,7 @@ export class SegmentedButtonDocsComponent implements OnInit {
     defaultSizeHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonGroupDefaultExample,
+            code: segmentedDefaultExample,
             fileName: 'segmented-button-default-example',
         }
     ];
