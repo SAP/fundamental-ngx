@@ -186,7 +186,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @HostListener('window:resize', [])
     onResize(): void {
         if (this.elementRef) {
-            const elementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
+            const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             // if the element is geting smaller, try collapsing tokens
             if (elementWidth <= this.previousElementWidth) {
                 this.collapseTokens();
