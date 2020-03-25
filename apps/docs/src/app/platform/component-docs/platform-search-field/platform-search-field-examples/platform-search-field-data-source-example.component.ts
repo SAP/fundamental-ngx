@@ -25,11 +25,6 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
     public inputText = '';
     public inputCategory = '';
 
-    public compactSearchTerm = '';
-    public compactSearchCategory = '';
-    public compactInputText = '';
-    public compactInputCategory = '';
-
     public dataSource: SearchFieldDataSource<any>;
 
     ngOnInit() {
@@ -66,15 +61,5 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
     onInputChange($event: SearchInput) {
         this.inputText = $event.text;
         this.inputCategory = $event.category;
-    }
-
-    onCompactSearchSubmit($event: SearchInput) {
-        this.compactSearchTerm = $event.text;
-        this.compactSearchCategory = $event.category;
-    }
-
-    onCompactInputChange($event: SearchInput) {
-        this.compactInputText = $event.text;
-        this.compactInputCategory = $event.category;
     }
 }
