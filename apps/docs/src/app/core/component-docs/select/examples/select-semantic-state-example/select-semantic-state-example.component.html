@@ -2,42 +2,42 @@
 <fd-select placeholder="Select value"
            stateMessage="Success message"
            [(value)]="selectedValue1"
-           [state]="controlState.SUCCESS">
+           [state]="'success'">
     <fd-option *ngFor="let option of options" [value]="option">
         {{option}}
     </fd-option>
 </fd-select>
-<fd-form-message [static]="true" [type]="controlState.SUCCESS">Success message</fd-form-message>
+<fd-form-message [static]="true" [type]="'success'">Success message</fd-form-message>
 
 <h4>Warning state</h4>
 <fd-select placeholder="Select value"
            stateMessage="Warning message"
            [(value)]="selectedValue2"
-           [state]="controlState.WARNING">
+           [state]="'warning'">
     <fd-option *ngFor="let option of options" [value]="option">
         {{option}}
     </fd-option>
 </fd-select>
-<fd-form-message [static]="true" [type]="controlState.WARNING">Warning message</fd-form-message>
+<fd-form-message [static]="true" [type]="'warning'">Warning message</fd-form-message>
 
 <h4>Error state</h4>
 <fd-select placeholder="Select value"
            stateMessage="Error message"
            [(value)]="selectedValue3"
-           [state]="controlState.ERROR">
+           [state]="'error'">
     <fd-option *ngFor="let option of options" [value]="option">
         {{option}}
     </fd-option>
 </fd-select>
-<fd-form-message [static]="true" [type]="controlState.ERROR">Error message</fd-form-message>
+<fd-form-message [static]="true" [type]="'error'">Error message</fd-form-message>
 
 <h4>Information state</h4>
 <fd-select placeholder="Select value"
            stateMessage="Information message"
            [(value)]="selectedValue4"
-           [state]="controlState.INFORMATION">
+           [state]="'information'">
     <fd-option *ngFor="let option of options" [value]="option">
         {{option}}
     </fd-option>
 </fd-select>
-<fd-form-message [static]="true" [type]="controlState.INFORMATION">Information message</fd-form-message>
+<fd-form-message [static]="true" [type]="'information'">Information message</fd-form-message>

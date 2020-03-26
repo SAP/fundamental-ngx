@@ -3,8 +3,9 @@
     [triggers]="[]"
     [appendTo]="appendTo"
     [options]="popperOptions"
-    [disabled]="disabled || loading || readonly"
     [fillControlMode]="fillControlMode"
+    [closeOnOutsideClick]="closeOnOutsideClick"
+    [disabled]="disabled || loading || readonly"
     (isOpenChange)="isOpenChangeHandle($event)">
 
     <fd-popover-control>

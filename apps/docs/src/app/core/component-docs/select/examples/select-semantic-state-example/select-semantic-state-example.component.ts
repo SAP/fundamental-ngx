@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ControlState } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-select-semantic-state-example',
@@ -7,7 +6,6 @@ import { ControlState } from '@fundamental-ngx/core';
 })
 export class SelectSemanticStateExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
-    controlState = ControlState;
     selectedValue1: string;
     selectedValue2: string;
     selectedValue3: string;

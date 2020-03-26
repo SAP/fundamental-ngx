@@ -7,7 +7,6 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
     HostListener,
     Input,
     OnChanges,
@@ -27,11 +26,12 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { PopperOptions } from 'popper.js';
 import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { RtlService } from '../utils/public_api';
-import { ControlState } from '../utils/datatypes';
 import { ModalService } from '../modal/modal-service/modal.service';
 import { ModalRef } from '../modal/modal-utils/modal-ref';
 
 let selectUniqueId: number = 0;
+
+export type SelectControlState = 'error' | 'success' | 'warning' | 'information';
 
 /**
  * Select component intended to mimic the behaviour of the native select element.
@@ -49,31 +49,27 @@ let selectUniqueId: number = 0;
         }
     ],
     host: {
-        '[class.fd-select-custom]': 'true',
+        '[class.fd-dropdown]': 'true',
         role: 'listbox'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
     /** @hidden */
-    @HostBinding('class.fd-dropdown')
-    fdDropdownClass: boolean = true;
-
-    /** @hidden */
     @ContentChildren(OptionComponent, {descendants: true})
     options: QueryList<OptionComponent>;
 
     /** @hidden */
-    @ViewChild('selectMobileModal', {static: true})
+    @ViewChild('selectMobileModal')
     modalTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChild('selectControl', {static: true})
+    @ViewChild('selectControl')
     controlTemplateRef: ElementRef;
 
     /** Whether the select component is disabled. */
     @Input()
-    state: ControlState = ControlState.NONE;
+    state: SelectControlState = null;
 
     /** Whether the select component should be displayed in mobile mode. */
     @Input()
@@ -114,6 +110,10 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     /** Glyph to add icon in the select component. */
     @Input()
     glyph: string = 'slim-arrow-down';
+
+    /** Whether close the popover on outside click. */
+    @Input()
+    closeOnOutsideClick: boolean = true;
 
     /** Popper.js options of the popover. */
     @Input()
@@ -180,7 +180,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
     private readonly _destroy$: Subject<void> = new Subject<void>();
 
     /** Observable triggered when an option has its selectedChange event fire. */
-    private readonly _optionsStatusChanges: Observable<OptionComponent> = this._createOptionStatusChangeObserver();
+    private readonly _optionsStatusChanges$: Observable<OptionComponent> = this._createOptionStatusChangeObserver();
 
     /** @hidden */
     onChange: Function = () => {};
@@ -342,7 +342,7 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
      * @param option The option component to search for.
      * @param fireEvents Whether to fire change events.
      */
-    private _selectOption(option: OptionComponent, fireEvents: boolean = true): OptionComponent | undefined {
+    private _selectOption(option: OptionComponent, fireEvents: boolean = true) {
         if (!this._isOptionActive(option)) {
             if (this._selected) {
                 this._selected.setSelected(false, false);
@@ -350,11 +350,8 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
             option.setSelected(true, false);
             this._selected = option;
             this._updateValue(fireEvents);
-            this.close();
-            return option;
         }
         this.close();
-        return;
     }
 
     /**
@@ -363,10 +360,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
      * @param value Value to search for.
      * @param fireEvents Whether to fire change events.
      */
-    private _selectValue(value: any, fireEvents: boolean = true): OptionComponent | undefined {
-        const matchOption = this.options.find((option: OptionComponent) => {
-            return option.value != null && option.value === value;
-        });
+    private _selectValue(value: any, fireEvents: boolean = true): void {
+        const matchOption = this.options
+            .find((option: OptionComponent) => option.value !== null && option.value === value);
 
         // If not match is found, set everything to null
         // This is mostly only for cases where a user removes an active option
@@ -386,8 +382,6 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
             this._updateValue(fireEvents);
             this.close();
         }
-
-        return matchOption;
     }
 
     /**
@@ -412,9 +406,9 @@ export class SelectComponent implements OnChanges, AfterContentInit, OnDestroy, 
 
         // Subscribe to observable defined in component properties which fires when an option is clicked.
         // Destroy if the observable defined above triggers.
-        this._optionsStatusChanges.pipe(takeUntil(destroyCurrentObs)).subscribe((instance: OptionComponent) => {
-            this._selectOption(instance);
-        });
+        this._optionsStatusChanges$
+            .pipe(takeUntil(destroyCurrentObs))
+            .subscribe((instance: OptionComponent) => this._selectOption(instance));
     }
 
     /** Selection initialization when a change occurs in options. */

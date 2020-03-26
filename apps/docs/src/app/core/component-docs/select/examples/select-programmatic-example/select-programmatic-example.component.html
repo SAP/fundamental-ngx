@@ -4,7 +4,7 @@
     <button fd-button (click)="select.close()">Close</button>
 </div>
 
-<fd-select placeholder="Select value" #select [(value)]="selectedValue">
+<fd-select placeholder="Select value" #select [(value)]="selectedValue" [closeOnOutsideClick]="false">
     <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
 </fd-select>
 <small>Selected value: {{selectedValue}}</small>
