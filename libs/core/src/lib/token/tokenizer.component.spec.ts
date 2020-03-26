@@ -158,9 +158,7 @@ describe('TokenizerComponent', () => {
 
   it('should collapse the tokens', () => {
     component.compact = true;
-    spyOn(component.elementRef.nativeElement, 'querySelector').and.returnValue({
-        getBoundingClientRect: () => ({width: 1})
-    });
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
     component.moreTokensLeft.length = 0;
     component.collapseTokens();
@@ -174,13 +172,11 @@ describe('TokenizerComponent', () => {
   it('should expand the tokens', () => {
       component.compact = true;
       // need to collapse the tokens before running expand
-      spyOn(component.elementRef.nativeElement, 'querySelector').and.returnValue({
-          getBoundingClientRect: () => ({width: 1})
-      });
+      spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
       spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
       component.collapseTokens();
 
-      spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 3});
+      component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 3});
 
       component.expandTokens();
 
@@ -191,9 +187,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should get the inner width', () => {
-    component.tokenList.forEach(token => {
-      spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1})
-    });
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component.input.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
 
     const retVal = component.getCombinedTokenWidth();

@@ -200,7 +200,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     /** @hidden */
     collapseTokens(side?: string): void {
         if (this.compact) {
-            let elementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
+            let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
             /*
@@ -221,7 +221,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 }
                 token.elementRef.nativeElement.style.display = 'none';
                 // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
-                elementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
+                elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
                 side === 'right' ? i-- : i++;
                 this.cdRef.markForCheck();
@@ -234,6 +234,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         if (this.compact) {
             let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
+
             let breakLoop = false;
             let i = this.moreTokensLeft.length - 1;
             while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
@@ -290,7 +291,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit() {
-        this.previousElementWidth = this.elementRef.nativeElement.querySelector('.fd-tokenizer__inner').getBoundingClientRect().width;
+        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
         this.onResize();
     }
 
