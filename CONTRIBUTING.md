@@ -338,10 +338,11 @@ Full description of current CI PipeLine can be found [here](https://github.com/S
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
-* All public API methods **must be documented**. (Details TBC).
+* All public API methods **must be documented**. [Documentation Guideline](https://github.com/SAP/fundamental-ngx/wiki/Documenting-Code)
 * We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
   **100 characters**. An automated formatter is available, see
   [DEVELOPER.md](docs/DEVELOPER.md#clang-format).
+* Rules are also mentioned in our [Code Contribution Guideline](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline)
 
 
 ## <a name="cla"></a> Signing the CLA

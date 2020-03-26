@@ -6,11 +6,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
     template: `
-        <div #directiveElement fd-dnd-container>
-            <div cdkDrag>
-                <div></div>
-            </div>
-        </div>
+            <span>
+                <div #directiveElement fd-dnd-container>
+                    <div cdkDrag>
+                        <div></div>
+                    </div>
+                </div>
+            </span>
     `
 })
 class TestDndContainerComponent {
@@ -53,6 +55,7 @@ describe('DndContainerDirective', () => {
     it('should react to drag release', () => {
         spyOn(directive.released, 'emit');
         (directive as any).placeholderElement = document.createElement('div');
+        directive.element.nativeElement.appendChild((directive as any).placeholderElement);
         directive.onCdkDragReleased();
         expect((directive as any).placeholderElement).toBeFalsy();
         expect(directive.released.emit).toHaveBeenCalled();

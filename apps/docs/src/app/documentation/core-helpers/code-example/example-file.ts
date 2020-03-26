@@ -15,4 +15,5 @@ export interface ExampleFile {
     typescriptFileCode?: {
         default: string
     };
+    service?: boolean;
 }
