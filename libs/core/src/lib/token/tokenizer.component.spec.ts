@@ -186,8 +186,10 @@ describe('TokenizerComponent', () => {
       expect(component.moreTokensLeft.length).toBe(0);
   });
 
-  it('should get the inner width', () => {
-    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+  it('should get the combined token width', () => {
+    component.tokenList.forEach(token => {
+      spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1})
+    });
     spyOn(component.input.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
 
     const retVal = component.getCombinedTokenWidth();
@@ -196,9 +198,7 @@ describe('TokenizerComponent', () => {
   });
 
   it('should handle ngAfterContentInit', () => {
-    spyOn(component.elementRef.nativeElement, 'querySelector').and.returnValue({
-      getBoundingClientRect: () => ({width: 1})
-    });
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'onResize');
 
     component.ngAfterContentInit();

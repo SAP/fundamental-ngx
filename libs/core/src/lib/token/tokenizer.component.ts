@@ -236,7 +236,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
 
             let breakLoop = false;
-            let i = this.moreTokensLeft.length - 1;
+            let i = this.moreTokensLeft.length - 1 + this.moreTokensRight.length;
             while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
                 // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
                 const tokenToCheck = this.tokenList.filter(token => token.elementRef.nativeElement.style.display === 'none')[i];
@@ -254,7 +254,11 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
                 */
                 if (combinedTokenWidth < elementWidth) {
                     tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
-                    this.moreTokensLeft.pop();
+                    if (this.moreTokensLeft.length) {
+                        this.moreTokensLeft.pop();
+                    } else if (this.moreTokensRight.length) {
+                        this.moreTokensRight.pop();
+                    }
                 } else {
                     // otherwise, stop looping and set the token's display back to 'none'
                     tokenToCheck.elementRef.nativeElement.style.display = 'none';
