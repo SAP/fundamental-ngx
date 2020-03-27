@@ -99,11 +99,11 @@ export class RadioButtonComponent implements OnChanges, CssClassBuilder, Control
         this._checkMandatoryFields();
     }
 
+    @applyCssClass
     /** This method is responsible for building a css class based on current state
      *  It is implementation of CssClassBuilder interface and
      *  should be used with @applyCssClass decorator
      */
-    @applyCssClass
     public buildComponentCssClass(): string {
         return [
             'fd-radio',
