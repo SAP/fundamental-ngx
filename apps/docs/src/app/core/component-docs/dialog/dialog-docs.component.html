@@ -3,7 +3,7 @@
 </fd-docs-section-title>
 <description>
     The Dialog can be declared inside <code>ng-template</code> and opened with DialogService using template reference.
-    Each template based dialog can use provided context values:
+    Each template based dialog can use the following context values:
     <ul>
         <li>DialogRef - <code>implicit</code></li>
         <li>DialogConfig - <code>dialogConfig</code></li>
@@ -39,7 +39,7 @@
     Dialog state
 </fd-docs-section-title>
 <description>
-    Dialog state can be controlled with <code>DialogRef</code>, providing such features like:
+    Dialog state can be controlled with <code>DialogRef</code>, providing such features as:
     <ul>
         <li><code>DialogRef.hide()</code> - visually hiding the Dialog window</li>
         <li><code>DialogRef.close()</code> - closing the Dialog window</li>
@@ -96,9 +96,9 @@
     Dialog on mobile devices
 </fd-docs-section-title>
 <description>
-    To display Dialog component in mobile mode set use <code>DialogConfig.mobile</code> property.
-    Dialog on mobile devices takes full viewport and adjusts its header and footer. To create additional spacing around
-    Dialog use <code>DialogConfig.mobileOuterSpacing</code> property.
+    To display the Dialog component in mobile mode, use the <code>DialogConfig.mobile</code> property.
+    Dialog on mobile devices takes up full viewport and adjusts its header and footer. To create additional spacing around
+    Dialog use the <code>DialogConfig.mobileOuterSpacing</code> property.
     <br/><br/>
     To achieve full-screen dialog without mobile mode features use <code>DialogConfig.fullScreen</code> property.
 </description>
@@ -115,7 +115,7 @@
 </fd-docs-section-title>
 <description>
     To create more complex Dialogs it is possible to provide custom header, subheader and footer templates.<br/>
-    To provide custom template create element with on of the following directives:
+    To provide these custom templates, create an element with one of the following directives:
     <ul>
         <li>Header - <code>fdTemplate="header"</code></li>
         <li>Subheader - <code>fdTemplate="subheader"</code></li>
@@ -135,11 +135,10 @@
     Stacked Dialogs
 </fd-docs-section-title>
 <description>
-    The DialogService supports limitless stacked dialogs. Each can be closed individually, there is no specific
+    The DialogService supports limitless stacked dialogs. Each can be closed individually and there is no specific
     closing order.
     <br/><br/>
-    In the example below, it is accomplished via components as content. However, it is entirely possible with
-    templates through the same methodology.
+    In the example below, this is accomplished by using components as content however this can also be achieved using templates.
 </description>
 <component-example>
     <fd-dialog-stacked-example></fd-dialog-stacked-example>
@@ -153,7 +152,7 @@
 </fd-docs-section-title>
 <description>
     The dialog backdrop and container can be styled, disabled or even customized at will. Custom css classes can be
-    applies using:
+    applied using:
     <ul>
         <li><code>DialogConfig.containerClass</code></li>
         <li><code>DialogConfig.backdropClass</code></li>
@@ -161,7 +160,7 @@
     </ul>
     The Dialog can be appended to whatever DOM element you choose. Simply pass an HTMLElement to the <code>DialogConfig.container</code>
     configuration option. Note that there is no visual distinction between parents. This functionality can be used to
-    apply a select set of style rules to a specific dialog, for example.
+    apply a select set of style rules to a specific dialog, as you can see in the following example.
 </description>
 <component-example>
     <fd-dialog-backdrop-container-example></fd-dialog-backdrop-container-example>

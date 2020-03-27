@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { filter, map, mapTo, pairwise, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
 
 interface ResizeMove {
     x: number;
@@ -111,8 +111,8 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         );
 
         this._subscriptions.add(setupResize$.subscribe());
-        this._subscriptions.add(preventOtherPointerEvents$.subscribe());
         this._subscriptions.add(emitResizableEvents$.subscribe());
+        this._subscriptions.add(preventOtherPointerEvents$.subscribe());
     }
 
     /** @hidden Creates resize function*/
@@ -156,7 +156,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** @hidden Return boundary container */
     private _findResizeContainer(): Element {
-        const resizeContainer = document.querySelector(this.resizeBoundary);
+        const resizeContainer = this._elementRef.nativeElement.closest(this.resizeBoundary);
         if (resizeContainer) {
             return resizeContainer;
         } else {
