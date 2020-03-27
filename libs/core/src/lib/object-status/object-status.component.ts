@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
@@ -9,97 +9,52 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     template: `<ng-content></ng-content>`,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ObjectStatusComponent implements OnInit, OnChanges, CssClassBuilder {
-
+export class ObjectStatusComponent implements OnChanges, CssClassBuilder {
     /** User's custom classes */
-    private _class: string = '';
     @Input()
-    set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    }
+    public class: string;
 
-    /** 
+    /**
      * The status represented by the Object Status.
      * Can be one of the following: 'negative' | 'critical' | 'positive' | 'informative'
      * For default Object Status omit this property
      */
-    private _status: ObjectStatus;
     @Input()
-    set status(status: ObjectStatus) {
-        this._status = status;
-        this.buildComponentCssClass();
-    }
+    public status: ObjectStatus;
 
-    get status(): ObjectStatus {
-        return this._status;
-    }
-
-    /** 
+    /**
      * Glyph (icon) of the Object Status.
      */
-    private _glyph: string;
     @Input()
-    set glyph(glyph: string) {
-        this._glyph = glyph;
-        this.buildComponentCssClass();
-    }
+    public glyph: string;
 
-    get glyph(): string {
-        return this._glyph;
-    }
-
-    /** 
-     * A number representing the indication color. 
+    /**
+     * A number representing the indication color.
      * Option includes numbers from 1 to 8
      */
-    private _indicationColor: number = null;
     @Input()
-    set indicationColor(indicationColor: number) {
-        this._indicationColor = indicationColor;
-        this.buildComponentCssClass();
-    }
-
-    get indicationColor(): number {
-        return this._indicationColor;
-    }
+    public indicationColor: number = null;
 
     /** Whether the Object Status is clickable. */
-    private _clickable: boolean = false;
     @Input()
-    set clickable(clickable: boolean) {
-        this._clickable = clickable;
-        this.buildComponentCssClass();
-    }
-
-    get clickable(): boolean {
-        return this._clickable;
-    }
+    public clickable: boolean = false;
 
     /** Whether the Object Status is inverted. */
-    private _inverted: boolean = false;
     @Input()
-    set inverted(inverted: boolean) {
-        this._inverted = inverted;
-        this.buildComponentCssClass();
-    }
-
-    get inverted(): boolean {
-        return this._inverted;
-    }
+    public inverted: boolean = false;
 
     /** Whether the Object Status is in Large Design. */
-    private _large: boolean = false;
     @Input()
-    set large(large: boolean) {
-        this._large = large;
-        this.buildComponentCssClass();
-    }
+    public large: boolean = false;
 
-    get large(): boolean {
-        return this._large;
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    public ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     @applyCssClass
@@ -107,35 +62,23 @@ export class ObjectStatusComponent implements OnInit, OnChanges, CssClassBuilder
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    public buildComponentCssClass(): string {
         return [
             'fd-object-status',
-            this._inverted ? 'fd-object-status--inverted' : '',
-            this._large ? 'fd-object-status--large' : '',
-            this._status ? `fd-object-status--${this._status}` : '',
-            this._glyph ? `sap-icon--${this._glyph}` : '',
-            this._indicationColor ? `fd-object-status--indication-${this._indicationColor}` : '',
-            this._clickable ? 'fd-object-status--link' : '',
-            this._class
-        ].filter(x => x !== '').join(' ');
+            this.inverted ? 'fd-object-status--inverted' : '',
+            this.large ? 'fd-object-status--large' : '',
+            this.status ? `fd-object-status--${this.status}` : '',
+            this.glyph ? `sap-icon--${this.glyph}` : '',
+            this.indicationColor ? `fd-object-status--indication-${this.indicationColor}` : '',
+            this.clickable ? 'fd-object-status--link' : '',
+            this.class,
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<any> {
         return this._elementRef;
     }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
 }
