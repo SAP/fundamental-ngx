@@ -20,25 +20,25 @@ export class ListComponent {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')
-    public dropdownMode: boolean = false;
+    dropdownMode: boolean = false;
 
     /** Whether multi mode is included to component, used for MultiInput */
     @Input()
     @HostBinding('class.fd-list--multi-input')
-    public multiInputMode: boolean = false;
+    multiInputMode: boolean = false;
 
     /** Whether compact mode is included to component */
     @Input()
     @HostBinding('class.fd-list--compact')
-    public compact: boolean = false;
+    compact: boolean = false;
 
     /** Whether list component contains message */
     @Input()
     @HostBinding('class.fd-list--has-message')
-    public hasMessage: boolean = false;
+    hasMessage: boolean = false;
 
     /** Whether list component has removed borders */
     @Input()
     @HostBinding('class.fd-list--no-border')
-    public noBorder: boolean = false;
+    noBorder: boolean = false;
 }

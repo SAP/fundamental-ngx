@@ -6,7 +6,8 @@ import {
     Input,
     ViewChild,
     ChangeDetectionStrategy,
-    OnChanges
+    OnChanges,
+    OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
@@ -26,37 +27,37 @@ let uniqueId = 0;
         }
     ]
 })
-export class RadioButtonComponent implements OnChanges, CssClassBuilder, ControlValueAccessor {
+export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder, ControlValueAccessor {
     /** @hidden */
     class: string;
 
     /** @hidden */
     @ViewChild('inputElement')
-    public inputElement: ElementRef;
+    inputElement: ElementRef;
 
     /** @hidden */
-    public actualValue: any;
+    actualValue: any;
 
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
      * By default field is set to false
      */
     @Input()
-    public compact: boolean;
+    compact: boolean;
 
     /** The field to set state of radio button using:
      * 'valid' | 'invalid' | 'warning' | 'default' | 'information'
      * by default value is set to 'default'
      */
     @Input()
-    public state: stateType;
+    state: stateType;
 
     /** The field is used to tell if radio button should be disabled
      * Value: true or false
      * by default disabled state is set to false
      */
     @Input()
-    public disabled: boolean;
+    disabled: boolean;
 
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
@@ -69,21 +70,21 @@ export class RadioButtonComponent implements OnChanges, CssClassBuilder, Control
      * The field is mandatory
      */
     @Input()
-    public name: string;
+    name: string;
 
     /**
      * uniqueId to a radio button
      */
     @Input()
-    public id: string = `radio-id-${uniqueId++}`;
+    id: string = `radio-id-${uniqueId++}`;
 
     /** Value field stores information about holding value by radio button
      * The field is mandatory
      */
     @Input()
-    public value: any;
+    value: any;
 
-    public get checked(): boolean {
+    get checked(): boolean {
         if (this.value === undefined) {
             return false;
         }
@@ -94,36 +95,42 @@ export class RadioButtonComponent implements OnChanges, CssClassBuilder, Control
     constructor(private changeDetectionRef: ChangeDetectorRef) { }
 
     /** @hidden */
-    public ngOnChanges(): void {
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+        this._checkMandatoryFields();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
         this.buildComponentCssClass();
         this._checkMandatoryFields();
     }
 
     // ControlValueAccessor implementation
     /** @hidden */
-    public onChange: any = () => { };
+    onChange: any = () => { };
 
     /** @hidden */
-    public onTouched: any = () => { };
+    onTouched: any = () => { };
 
     /** @hidden */
-    public registerOnChange(fn: (selected: any) => { void }): void {
+    registerOnChange(fn: (selected: any) => { void }): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    public registerOnTouched(fn: any): void {
+    registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
     /** @hidden */
-    public setDisabledState(isDisabled: boolean): void {
+    setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this.changeDetectionRef.detectChanges();
     }
 
     /** @hidden */
-    public writeValue(value: any): void {
+    writeValue(value: any): void {
         this.valueChange(value);
     }
     // End implementation
@@ -133,7 +140,7 @@ export class RadioButtonComponent implements OnChanges, CssClassBuilder, Control
      *  It is implementation of CssClassBuilder interface and
      *  should be used with @applyCssClass decorator
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             'fd-radio',
             this.compact ? 'fd-radio--compact' : '',
@@ -142,18 +149,18 @@ export class RadioButtonComponent implements OnChanges, CssClassBuilder, Control
     }
 
     /** @hidden */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this.inputElement;
     }
 
     /** @hidden */
-    public labelClicked(): void {
+    labelClicked(): void {
         this.valueChange(this.value);
         this._setFocusOnNativeElement();
     }
 
     /** @hidden */
-    public valueChange(value: any): void {
+    valueChange(value: any): void {
         this.actualValue = value;
 
         this._setNativeElementCheckedState();

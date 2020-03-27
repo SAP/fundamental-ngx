@@ -17,35 +17,35 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BarComponent implements OnChanges, CssClassBuilder {
+export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** user's custom classes */
     @Input()
-    public class: string;
+    class: string;
 
     /** Whether the Bar component is used as a header, subheader, header-with-subheader,
      * footer or floating-footer. 
      * Types available: 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer' */
     @Input()
-    public barDesign: BarDesignType;
+    barDesign: BarDesignType;
 
     /** Whether the Bar component is used in Page Layout. */
     @Input()
-    public inPage: boolean;
+    inPage: boolean;
 
     /** Whether the Bar component is used in Home Page Layout. */
     @Input()
-    public inHomePage: boolean;
+    inHomePage: boolean;
 
     /** The size of the Page in Page responsive design. 
      * Available sizes: 's' | 'm_l' | 'xl'
     */
     @Input()
-    public size: SizeType = '';
+    size: SizeType = '';
 
     /** Whether to apply cosy mode to the Bar. */
     @Input()
-    public cosy: boolean;
+    cosy: boolean;
 
     /** @hidden */
     constructor(
@@ -57,7 +57,7 @@ export class BarComponent implements OnChanges, CssClassBuilder {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             'fd-bar',
             this.cosy ? 'fd-bar--cosy' : '',
@@ -71,12 +71,17 @@ export class BarComponent implements OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
     /** @hidden */
-    public ngOnChanges(): void {
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 }

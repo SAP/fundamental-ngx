@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation, OnInit } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 @Component({
@@ -11,23 +11,23 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LinkComponent implements OnChanges, CssClassBuilder {
+export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** user's custom classes */
     @Input()
-    public class: string;
+    class: string;
 
     /** Whether user wants to use emphasized mode */
     @Input()
-    public emphasized: boolean;
+    emphasized: boolean;
 
     /** Whether user wants to put disabled mode */
     @Input()
-    public disabled: boolean;
+    disabled: boolean;
 
     /** Whether user wants to use inverted mode */
     @Input()
-    public inverted: boolean;
+    inverted: boolean;
 
     /** @hidden */
     constructor(
@@ -35,7 +35,7 @@ export class LinkComponent implements OnChanges, CssClassBuilder {
     ) { }
 
     /** @hidden */
-    public ngOnChanges(): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
@@ -43,7 +43,7 @@ export class LinkComponent implements OnChanges, CssClassBuilder {
     /** CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             'fd-link',
             this.emphasized ? 'fd-link--emphasized' : '',
@@ -54,7 +54,12 @@ export class LinkComponent implements OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 
 @Directive({
@@ -24,7 +24,7 @@ export class ListTitleDirective {
      */
     @Input()
     @HostBinding('class.fd-list__title--no-wrap')
-    public noWrap: boolean = false;
+    noWrap: boolean = false;
 }
 
 @Directive({
@@ -41,7 +41,7 @@ export class ListSecondaryDirective {
      */
     @Input()
     @HostBinding('class.fd-list__secondary--no-wrap')
-    public noWrap: boolean = false;
+    noWrap: boolean = false;
 }
 
 @Directive({
@@ -57,26 +57,29 @@ export class ListGroupHeaderDirective { }
     // tslint:disable-next-line:directive-selector
     selector: '[fd-list-icon]'
 })
-export class ListIconDirective implements OnChanges {
+export class ListIconDirective implements OnChanges, OnInit {
 
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
     @Input()
-    public glyph: string;
+    glyph: string;
 
     /** Apply user custom styles */
     @Input()
-    public class: string;
+    class: string;
 
     constructor(
         private _elementRef: ElementRef
     ) { }
 
-    /** Function runs when component is initialized
-     * function should build component css class
-     */
-    public ngOnChanges(): void {
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
@@ -85,7 +88,7 @@ export class ListIconDirective implements OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             'fd-list__icon',
             this.glyph ? ('sap-icon--' + this.glyph) : '',
@@ -94,7 +97,7 @@ export class ListIconDirective implements OnChanges {
     }
 
     /** @hidden */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }

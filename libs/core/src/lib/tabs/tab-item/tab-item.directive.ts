@@ -1,4 +1,4 @@
-import { ContentChild, Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { ContentChild, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -23,26 +23,26 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
         'class': 'fd-tabs__item'
     }
 })
-export class TabItemDirective implements CssClassBuilder, OnChanges {
+export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     /** Apply user custom styles */
     @Input()
-    public class: string = '';
+    class: string = '';
 
     /** Semantic type of the tab item */
     @Input()
-    public tabItemState: TabItemState;
+    tabItemState: TabItemState;
 
     /** This should be used only on `filterMode`. Flag should be enable for first item */
     @Input()
-    public header: boolean;
+    header: boolean;
 
     /** Defines if there will be added fd-tabs__item class. Enabled by default. */
     @Input()
-    public fdTabItemClass: boolean = true;
+    fdTabItemClass: boolean = true;
 
     /** @hidden */
     @ContentChild(TabLinkDirective)
-    public linkItem: TabLinkDirective;
+    linkItem: TabLinkDirective;
 
     /** @hidden */
     constructor(
@@ -53,7 +53,12 @@ export class TabItemDirective implements CssClassBuilder, OnChanges {
      * Function runs when component is initialized
      * function should build component css class
      */
-    public ngOnChanges(): void {
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnint(): void {
         this.buildComponentCssClass();
     }
 
@@ -62,7 +67,7 @@ export class TabItemDirective implements CssClassBuilder, OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             this.fdTabItemClass ? 'fd-tabs__item' : '',
             this.header ? 'fd-tabs__item--header' : '',
@@ -74,7 +79,7 @@ export class TabItemDirective implements CssClassBuilder, OnChanges {
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }

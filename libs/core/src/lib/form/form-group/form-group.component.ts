@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, ElementRef, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 
 /**
@@ -20,18 +20,18 @@ import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormGroupComponent implements CssClassBuilder, OnChanges {
+export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     @HostBinding('class.fd-form-group')
-    public fdFormGroupClass: boolean = true;
+    fdFormGroupClass: boolean = true;
 
     /** Determines if form items should be displayed inline or not
      * Default value is set to false;
      */
     @Input()
-    public isInline: boolean;
+    isInline: boolean;
 
     /** @hidden */
-    public class: string;
+    class: string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {
@@ -39,7 +39,12 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges {
     }
 
     /** @hidden */
-    public ngOnChanges() {
+    ngOnChanges() {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
@@ -48,12 +53,12 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges {
      *  should be used with @applyCssClass decorator
      */
     @applyCssClass
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return this.isInline ? 'fd-form-group--inline' : '';
     }
 
     /** @hidden */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }

@@ -6,7 +6,8 @@ import {
     OnDestroy,
     QueryList,
     ViewEncapsulation,
-    OnChanges
+    OnChanges,
+    OnInit
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
@@ -26,33 +27,33 @@ import { takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, CssClassBuilder {
+export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
-    public class: string;
+    class: string;
 
     /**
      * Whether user wants to use tab component in certain mode. Modes available:
      * 'icon-only' | 'process' | 'filter'
      */
     @Input()
-    public mode: TabModes;
+    mode: TabModes;
 
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
-    public size: TabSizes = 'm';
+    size: TabSizes = 'm';
 
     /** Whether user wants to use tab component in compact mode */
     @Input()
-    public compact: boolean;
+    compact: boolean;
 
     /** @hidden */
     @ContentChildren(TabLinkDirective)
-    public links: QueryList<TabLinkDirective>;
+    links: QueryList<TabLinkDirective>;
 
     /** @hidden */
     @ContentChildren(TabItemDirective)
-    public items: QueryList<TabItemDirective>;
+    items: QueryList<TabItemDirective>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -67,18 +68,24 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
     ) { }
 
     /** @hidden */
-    public ngAfterContentInit(): void {
+    ngAfterContentInit(): void {
         this._refreshSubscription();
         this._listenOnTabSelect();
         this._listenOnContentQueryListChange();
     }
 
-    public ngOnChanges() {
+    /** @hidden */
+    ngOnChanges() {
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    public ngOnDestroy(): void {
+    ngOnInit() {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -88,7 +95,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             `fd-tabs`,
             this.mode ? ('fd-tabs--' + this.mode) : '',
@@ -101,12 +108,12 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
-    public get tabLinks(): TabLinkDirective[] {
+    get tabLinks(): TabLinkDirective[] {
         let tabLinks: TabLinkDirective[] = [];
         if (this.links) {
             tabLinks = tabLinks.concat(this.links.map(link => link));
@@ -121,7 +128,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
      * Function to select a new tab from an index.
      * @param tabIndex Index of the tab to select.
      */
-    public selectTab(tabIndex: number): void {
+    selectTab(tabIndex: number): void {
         this.tabLinks[tabIndex].elementRef.nativeElement.click();
     }
 
