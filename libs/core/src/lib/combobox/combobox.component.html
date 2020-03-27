@@ -19,7 +19,7 @@
                    [placeholder]="placeholder">
         </fd-input-group>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body *ngIf="displayedValues && displayedValues.length">
         <ul fd-list [dropdownMode]="true" class="fd-combobox-input-menu-overflow" [style.maxHeight]="maxHeight" [hasMessage]="listMessages.length > 0">
             <ng-content></ng-content>
             <ng-container *ngIf="groupFn">
