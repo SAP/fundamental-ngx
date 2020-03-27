@@ -281,7 +281,7 @@ describe('SearchFieldComponent', () => {
         host.categories = [];
         fixture.detectChanges();
 
-        const categoryDropdown = fixture.debugElement.queryAll(By.css('.search-input__category-dropdown'));
+        const categoryDropdown = fixture.debugElement.queryAll(By.css('.search-field__category-dropdown'));
         expect(categoryDropdown.length).toBe(0);
     });
 
@@ -586,7 +586,7 @@ describe('SearchFieldComponent', () => {
         host.isLoading = true;
         fixture.detectChanges();
 
-        const wrapper = fixture.debugElement.query(By.css('.search-input'));
+        const wrapper = fixture.debugElement.query(By.css('.search-field'));
         expect(wrapper.classes['is-loading']).toBeTruthy();
     });
 
