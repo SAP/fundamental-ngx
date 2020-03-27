@@ -21,6 +21,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizeModule } from '../utils/directives/resize/resize.module';
 import { TemplateModule } from '../utils/directives/template/template.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
+import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-footer-button.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
         DialogHeaderComponent,
         DialogContainerComponent,
         DialogCloseButtonDirective,
+        DialogFooterButtonComponent,
         DialogDecisiveButtonDirective
     ],
     imports: [
@@ -53,6 +55,7 @@ import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
         DialogHeaderComponent,
         DialogContainerComponent,
         DialogCloseButtonDirective,
+        DialogFooterButtonComponent,
         DialogDecisiveButtonDirective
     ],
     entryComponents: [

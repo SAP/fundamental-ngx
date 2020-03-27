@@ -17,13 +17,15 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <button fd-button
-                        fdType="emphasized"
-                        fd-dialog-decisive-button
-                        [compact]="true"
-                        (click)="openDialog()">
-                    Open Second Dialog
-                </button>
+                <fd-dialog-footer-button>
+                    <button fd-button
+                            fdType="emphasized"
+                            fd-dialog-decisive-button
+                            [compact]="true"
+                            (click)="openDialog()">
+                        Open Second Dialog
+                    </button>
+                </fd-dialog-footer-button>
             </fd-dialog-footer>
 
         </fd-dialog>

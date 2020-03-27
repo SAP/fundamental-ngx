@@ -1,4 +1,5 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive } from '@angular/core';
+import { BarElementDirective } from '../../..';
 
 /**
  * Directive that applies fundamental dialog styling to a header.
@@ -30,9 +31,9 @@ export class DialogTitleDirective {
     host: {
         'attr.aria-label': 'close',
         '[class.fd-button]': 'true',
-        '[class.sap-icon--l]': 'true',
-        '[class.sap-icon--decline]': 'true',
-        '[class.fd-button--transparent]': 'true'
+        '[class.fd-button--compact]': 'true',
+        '[class.fd-button--transparent]': 'true',
+        '[class.sap-icon--decline]': 'true'
     }
 })
 export class DialogCloseButtonDirective {
@@ -53,7 +54,4 @@ export class DialogCloseButtonDirective {
     }
 })
 export class DialogDecisiveButtonDirective {
-    /** Weather decisive button is used as bar element */
-    @Input()
-    @HostBinding('class.fd-bar__element') standaloneBarElement = true;
 }

@@ -16,13 +16,15 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <button fd-button
-                        fdType="emphasized"
-                        fd-dialog-decisive-button
-                        [compact]="true"
-                        (click)="dialogRef.close()">
-                    Close
-                </button>
+                <fd-dialog-footer-button>
+                    <button fd-button
+                            fdType="emphasized"
+                            fd-dialog-decisive-button
+                            [compact]="true"
+                            (click)="dialogRef.close()">
+                        Close
+                    </button>
+                </fd-dialog-footer-button>
             </fd-dialog-footer>
 
         </fd-dialog>

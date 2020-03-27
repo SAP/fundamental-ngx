@@ -10,6 +10,7 @@
     </ul>
     <b>DialogRef and DialogConfig reference needs to be passed to Dialog component</b> when using template based Dialog.
     To receive Dialog dismiss/close reasons subscribe to <code>afterClosed</code> observable.
+    Use <code>fd-dialog-footer-button</code> to wrap footer buttons and create space between them.
 </description>
 <component-example>
     <fd-dialog-open-template-example></fd-dialog-open-template-example>
@@ -120,7 +121,8 @@
         <li>Subheader - <code>fdTemplate="subheader"</code></li>
         <li>Footer - <code>fdTemplate="footer"</code></li>
     </ul>
-    Custom templates are embedded views for Bar Component so it is possible to use Bar Component features inside them.
+    Custom templates are embedded views for Bar Component so it is possible to use Bar Component features inside them. <br/>
+    For complex templates you may use <code>fd-bar-element</code> as equivalent  of <code>fd-dialog-footer-button</code>.
 </description>
 <component-example>
     <fd-dialog-complex-example></fd-dialog-complex-example>
@@ -182,13 +184,15 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <button fd-button
-                    fdType="emphasized"
-                    fd-dialog-decisive-button
-                    [compact]="true"
-                    (click)="dialog.close()">
-                Close
-            </button>
+            <fd-dialog-footer-button>
+                <button fd-button
+                        fdType="emphasized"
+                        fd-dialog-decisive-button
+                        [compact]="true"
+                        (click)="dialog.close()">
+                    Close
+                </button>
+            </fd-dialog-footer-button>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
