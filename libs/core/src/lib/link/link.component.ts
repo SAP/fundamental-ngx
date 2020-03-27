@@ -15,24 +15,29 @@ export class LinkComponent implements OnChanges, CssClassBuilder {
 
     /** user's custom classes */
     @Input()
-    class: string;
+    public class: string;
 
     /** Whether user wants to use emphasized mode */
     @Input()
-    emphasized: boolean;
+    public emphasized: boolean;
 
     /** Whether user wants to put disabled mode */
     @Input()
-    disabled: boolean;
+    public disabled: boolean;
 
     /** Whether user wants to use inverted mode */
     @Input()
-    inverted: boolean;
+    public inverted: boolean;
 
     /** @hidden */
     constructor(
         private _elementRef: ElementRef
     ) { }
+
+    /** @hidden */
+    public ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
 
     @applyCssClass
     /** CssClassBuilder interface implementation
@@ -51,10 +56,5 @@ export class LinkComponent implements OnChanges, CssClassBuilder {
     /** @hidden */
     public elementRef(): ElementRef<any> {
         return this._elementRef;
-    }
-
-    /** @hidden */
-    public ngOnChanges(): void {
-        this.buildComponentCssClass();
     }
 }

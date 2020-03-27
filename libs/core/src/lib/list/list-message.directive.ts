@@ -10,11 +10,11 @@ export class ListMessageDirective implements OnChanges, CssClassBuilder {
 
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
-    type: MessageStates;
+    public type: MessageStates;
 
     /** Apply user custom styles */
     @Input()
-    class: string;
+    public class: string;
 
     constructor(
         private _elementRef: ElementRef
@@ -23,7 +23,7 @@ export class ListMessageDirective implements OnChanges, CssClassBuilder {
     /** Function runs when component is initialized
      * function should build component css class
      */
-    ngOnChanges(): void {
+    public ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
@@ -32,7 +32,7 @@ export class ListMessageDirective implements OnChanges, CssClassBuilder {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    public buildComponentCssClass(): string {
         return [
             'fd-list__message',
             this.type ? ('fd-list__message--' + this.type) : '',
@@ -41,7 +41,7 @@ export class ListMessageDirective implements OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }

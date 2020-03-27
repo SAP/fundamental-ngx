@@ -24,26 +24,25 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
     }
 })
 export class TabItemDirective implements CssClassBuilder, OnChanges {
-
-    /** @hidden */
-    @ContentChild(TabLinkDirective)
-    linkItem: TabLinkDirective;
-
     /** Apply user custom styles */
     @Input()
-    class: string = '';
+    public class: string = '';
 
     /** Semantic type of the tab item */
     @Input()
-    tabItemState: TabItemState;
+    public tabItemState: TabItemState;
 
     /** This should be used only on `filterMode`. Flag should be enable for first item */
     @Input()
-    header: boolean;
+    public header: boolean;
 
     /** Defines if there will be added fd-tabs__item class. Enabled by default. */
     @Input()
-    fdTabItemClass: boolean = true;
+    public fdTabItemClass: boolean = true;
+
+    /** @hidden */
+    @ContentChild(TabLinkDirective)
+    public linkItem: TabLinkDirective;
 
     /** @hidden */
     constructor(

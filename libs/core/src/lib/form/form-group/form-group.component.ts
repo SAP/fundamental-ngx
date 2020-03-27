@@ -21,16 +21,17 @@ import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges {
-    class: string;
-    /** @hidden */
     @HostBinding('class.fd-form-group')
-    fdFormGroupClass: boolean = true;
+    public fdFormGroupClass: boolean = true;
 
     /** Determines if form items should be displayed inline or not
      * Default value is set to false;
      */
     @Input()
-    isInline: boolean;
+    public isInline: boolean;
+
+    /** @hidden */
+    public class: string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {

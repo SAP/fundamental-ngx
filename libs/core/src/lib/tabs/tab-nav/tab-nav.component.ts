@@ -27,12 +27,32 @@ import { takeUntil } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, CssClassBuilder {
+    /** Apply user custom styles */
+    @Input()
+    public class: string;
+
+    /**
+     * Whether user wants to use tab component in certain mode. Modes available:
+     * 'icon-only' | 'process' | 'filter'
+     */
+    @Input()
+    public mode: TabModes;
+
+    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
+    @Input()
+    public size: TabSizes = 'm';
+
+    /** Whether user wants to use tab component in compact mode */
+    @Input()
+    public compact: boolean;
 
     /** @hidden */
-    @ContentChildren(TabLinkDirective) links: QueryList<TabLinkDirective>;
+    @ContentChildren(TabLinkDirective)
+    public links: QueryList<TabLinkDirective>;
 
     /** @hidden */
-    @ContentChildren(TabItemDirective) items: QueryList<TabItemDirective>;
+    @ContentChildren(TabItemDirective)
+    public items: QueryList<TabItemDirective>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -40,42 +60,11 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-    /** Apply user custom styles */
-    @Input()
-    class: string;
-
-    /**
-     * Whether user wants to use tab component in certain mode. Modes available:
-     * 'icon-only' | 'process' | 'filter'
-     */
-    @Input()
-    mode: TabModes;
-
-    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
-    @Input()
-    size: TabSizes = 'm';
-
-    /** Whether user wants to use tab component in compact mode */
-    @Input()
-    compact: boolean;
-
     /** @hidden */
     constructor(
         private _tabsService: TabsService,
         private _elementRef: ElementRef
     ) { }
-
-    /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
-    public get tabLinks(): TabLinkDirective[] {
-        let tabLinks: TabLinkDirective[] = [];
-        if (this.links) {
-            tabLinks = tabLinks.concat(this.links.map(link => link));
-        }
-        if (this.items) {
-            tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem));
-        }
-        return tabLinks;
-    }
 
     /** @hidden */
     public ngAfterContentInit(): void {
@@ -92,14 +81,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
     public ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
-    }
-
-    /**
-     * Function to select a new tab from an index.
-     * @param tabIndex Index of the tab to select.
-     */
-    public selectTab(tabIndex: number): void {
-        this.tabLinks[tabIndex].elementRef.nativeElement.click();
     }
 
     @applyCssClass
@@ -122,6 +103,26 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnDestroy, 
      */
     public elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
+    public get tabLinks(): TabLinkDirective[] {
+        let tabLinks: TabLinkDirective[] = [];
+        if (this.links) {
+            tabLinks = tabLinks.concat(this.links.map(link => link));
+        }
+        if (this.items) {
+            tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem));
+        }
+        return tabLinks;
+    }
+
+    /**
+     * Function to select a new tab from an index.
+     * @param tabIndex Index of the tab to select.
+     */
+    public selectTab(tabIndex: number): void {
+        this.tabLinks[tabIndex].elementRef.nativeElement.click();
     }
 
     /** @hidden */

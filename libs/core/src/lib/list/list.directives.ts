@@ -24,7 +24,7 @@ export class ListTitleDirective {
      */
     @Input()
     @HostBinding('class.fd-list__title--no-wrap')
-    noWrap: boolean = false;
+    public noWrap: boolean = false;
 }
 
 @Directive({
@@ -41,7 +41,7 @@ export class ListSecondaryDirective {
      */
     @Input()
     @HostBinding('class.fd-list__secondary--no-wrap')
-    noWrap: boolean = false;
+    public noWrap: boolean = false;
 }
 
 @Directive({
@@ -63,11 +63,11 @@ export class ListIconDirective implements OnChanges {
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
     @Input()
-    glyph: string;
+    public glyph: string;
 
     /** Apply user custom styles */
     @Input()
-    class: string;
+    public class: string;
 
     constructor(
         private _elementRef: ElementRef
@@ -76,7 +76,7 @@ export class ListIconDirective implements OnChanges {
     /** Function runs when component is initialized
      * function should build component css class
      */
-    ngOnChanges(): void {
+    public ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
@@ -85,7 +85,7 @@ export class ListIconDirective implements OnChanges {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    public buildComponentCssClass(): string {
         return [
             'fd-list__icon',
             this.glyph ? ('sap-icon--' + this.glyph) : '',
@@ -94,7 +94,7 @@ export class ListIconDirective implements OnChanges {
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }
