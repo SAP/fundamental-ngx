@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, ViewEncapsulation, OnInit } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
@@ -11,10 +11,10 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ObjectStatusComponent implements OnChanges, CssClassBuilder {
+export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()
-    public class: string;
+    class: string;
 
     /**
      * The status represented by the Object Status.
@@ -22,38 +22,43 @@ export class ObjectStatusComponent implements OnChanges, CssClassBuilder {
      * For default Object Status omit this property
      */
     @Input()
-    public status: ObjectStatus;
+    status: ObjectStatus;
 
     /**
      * Glyph (icon) of the Object Status.
      */
     @Input()
-    public glyph: string;
+    glyph: string;
 
     /**
      * A number representing the indication color.
      * Option includes numbers from 1 to 8
      */
     @Input()
-    public indicationColor: number = null;
+    indicationColor: number = null;
 
     /** Whether the Object Status is clickable. */
     @Input()
-    public clickable: boolean = false;
+    clickable: boolean = false;
 
     /** Whether the Object Status is inverted. */
     @Input()
-    public inverted: boolean = false;
+    inverted: boolean = false;
 
     /** Whether the Object Status is in Large Design. */
     @Input()
-    public large: boolean = false;
+    large: boolean = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) { }
 
     /** @hidden */
-    public ngOnChanges(): void {
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
@@ -62,7 +67,7 @@ export class ObjectStatusComponent implements OnChanges, CssClassBuilder {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    public buildComponentCssClass(): string {
+    buildComponentCssClass(): string {
         return [
             'fd-object-status',
             this.inverted ? 'fd-object-status--inverted' : '',
@@ -78,7 +83,7 @@ export class ObjectStatusComponent implements OnChanges, CssClassBuilder {
     }
 
     /** @hidden */
-    public elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }
