@@ -49,16 +49,13 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
         private _elementRef: ElementRef
     ) { }
 
-    /** @hidden
-     * Function runs when component is initialized
-     * function should build component css class
-     */
+    /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnint(): void {
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
