@@ -1,4 +1,7 @@
-import { Directive, ElementRef, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    Directive, ElementRef, EmbeddedViewRef,
+    HostBinding, Input, OnInit, TemplateRef, ViewContainerRef, OnChanges
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 /**
@@ -19,7 +22,7 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-title-template]'
 })
-export class TabTitleDirective {}
+export class TabTitleDirective { }
 
 /**
  * Not for external use. Portal to render the complex title template.
@@ -35,7 +38,7 @@ export class TabLoadTitleDirective implements OnInit {
 
     private contentRef: EmbeddedViewRef<any>;
 
-    constructor(private _viewRef: ViewContainerRef) {}
+    constructor(private _viewRef: ViewContainerRef) { }
 
     ngOnInit(): void {
         this._viewRef.clear();
@@ -67,12 +70,10 @@ export class TabCountDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-icon]'
 })
-export class TabIconDirective implements CssClassBuilder, OnInit {
-    private _class: string = '';
-    @Input() set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    } // user's custom classes
+export class TabIconDirective implements CssClassBuilder, OnChanges {
+    /** Apply user custom styles */
+    @Input()
+    class: string
 
     /** Defines if there will be added fd-tabs-icon class. Enabled by default. */
     fdTabIconClass: boolean = true;
@@ -81,23 +82,20 @@ export class TabIconDirective implements CssClassBuilder, OnInit {
      * The icon to include inside the element
      * See the icon page for the list of icons.
      */
-    private _icon: string;
-    @Input() set icon(icon: string) {
-        this._icon = icon;
-        this.buildComponentCssClass();
-    };
+    @Input()
+    icon: string
 
     /** @hidden */
     constructor(
         private _elementRef: ElementRef
-    ) {}
+    ) { }
 
     /** @hidden
      * Function runs when component is initialized
      * function should build component css class
      * function should build css style
      */
-    ngOnInit(): void {
+    public ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
@@ -106,18 +104,18 @@ export class TabIconDirective implements CssClassBuilder, OnInit {
      * function must return single string
      * function is responsible for order which css classes are applied
      */
-    buildComponentCssClass(): string {
+    public buildComponentCssClass(): string {
         return [
             this.fdTabIconClass ? 'fd-tabs__icon' : '',
-            this._icon ? `sap-icon--${this._icon}` : '',
-            this._class
+            this.icon ? `sap-icon--${this.icon}` : '',
+            this.class
         ].filter(x => x !== '').join(' ');
     }
 
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 }
