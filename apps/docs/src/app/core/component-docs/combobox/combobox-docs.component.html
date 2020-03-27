@@ -118,6 +118,7 @@
     Combobox with Two Columns
 </fd-docs-section-title>
 <description>
+    The <code>[itemTemplate]</code> input can be used to create a combobox with two columns of information.
 </description>
 <component-example>
     <fd-combobox-columns-example></fd-combobox-columns-example>
@@ -128,6 +129,10 @@
     Combobox with Groups
 </fd-docs-section-title>
 <description>
+    Grouping data within a set of values can be achieved by passing a function to the <code>[groupFn]</code> input. This
+    function should accept an object of key/value pairs as the parameter. Each key will be a group name and the corresponding
+    value for that key will be an array of any type. A <code>[displayFn]</code> can be used to specify what to display
+    from that array.
 </description>
 <component-example>
     <fd-combobox-group-example></fd-combobox-group-example>

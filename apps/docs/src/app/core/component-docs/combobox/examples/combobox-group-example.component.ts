@@ -19,26 +19,21 @@ export class ComboboxGroupExampleComponent {
         {name: 'Spinach', type: 'Vegetables'}
     ];
 
-    displayFunc(obj: {name: string, price: string}): string {
+    displayFunc(obj: {name: string, price: string}): string | void {
         if (obj) {
             return obj.name;
         }
     }
 
     groupFunc(items: any): {} {
-        const retVal = {
-            Fruits: [],
-            Vegetables: []
-        };
-        items.forEach(value => {
-            if (value.type === 'Fruits') {
-                retVal.Fruits.push(value);
-            } else if (value.type === 'Vegetables') {
-                retVal.Vegetables.push(value);
-            }
+        console.log({
+            Fruits: items.filter(item => item.type === 'Fruits'),
+            Vegetables: items.filter(item => item.type === 'Vegetables')
         });
-
-        return retVal;
+        return {
+            Fruits: items.filter(item => item.type === 'Fruits'),
+            Vegetables: items.filter(item => item.type === 'Vegetables')
+        }
     }
 
 }

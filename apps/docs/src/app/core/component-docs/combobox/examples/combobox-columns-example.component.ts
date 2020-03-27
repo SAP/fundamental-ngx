@@ -16,10 +16,4 @@ export class ComboboxColumnsExampleComponent {
         {name: 'Strawberries', price: '4.00 USD'}
     ];
 
-    displayFunc(obj: {name: string, price: string}): string {
-        if (obj) {
-            return obj.name;
-        }
-    }
-
 }

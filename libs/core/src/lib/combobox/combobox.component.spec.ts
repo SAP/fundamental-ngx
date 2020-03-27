@@ -130,7 +130,7 @@ describe('ComboboxComponent', () => {
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
-        (<any>component).refreshDisplayedValues();
+        (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
         component.resetDisplayedValues();
         expect(component.displayedValues.length).toBe(2);
