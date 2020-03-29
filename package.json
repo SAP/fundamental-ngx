@@ -119,7 +119,7 @@
     "github-assistant": "^0.3.0",
     "jasmine-core": "~3.5.0",
     "jasmine-marbles": "0.6.0",
-    "jasmine-spec-reporter": "~4.2.1",
+    "jasmine-spec-reporter": "~5.0.1",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
