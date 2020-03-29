@@ -113,7 +113,7 @@
     "angular-cli-ghpages": "^0.6.2",
     "babel-loader": "^8.1.0",
     "chalk": "^3.0.0",
-    "codelyzer": "^5.1.2",
+    "codelyzer": "^5.2.2",
     "coveralls": "^3.0.11",
     "fs-extra": "^8.1.0",
     "github-assistant": "^0.3.0",
