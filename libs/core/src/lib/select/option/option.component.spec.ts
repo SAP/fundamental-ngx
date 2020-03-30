@@ -34,13 +34,13 @@ describe('OptionComponent', () => {
 
     it('should be selectable programmatically', () => {
         spyOn(component.selectedChange, 'emit');
-        spyOn(component.selectedChange, 'emit');
         component.setSelected(true, true);
         expect(component.selectedChange.emit).toHaveBeenCalled();
         expect(component.selected).toBe(true);
     });
 
     it('should be selectable by click', () => {
+        spyOn(component.selectedChange, 'emit');
         spyOn(component, 'selectionHandler').and.callThrough();
         component.getHtmlElement().click();
         expect(component.selectionHandler).toHaveBeenCalled();
