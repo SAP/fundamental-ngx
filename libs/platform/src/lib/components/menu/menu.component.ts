@@ -90,7 +90,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
      */
     @Output() close: EventEmitter<MenuCloseMethod> = new EventEmitter();
 
-    public direction: 'ltr' | 'rtl' | void = 'ltr';
+    public direction: 'ltr' | 'rtl' = 'ltr';
     private _keyManager: FocusKeyManager<MenuItemComponent>;
     private _tabSubscription = Subscription.EMPTY;
     private _dirChangeSubscription = Subscription.EMPTY;
