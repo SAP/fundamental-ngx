@@ -100,8 +100,8 @@ export class OptionComponent implements OnInit {
         if (!this.selected && !this.disabled) {
             this.selected = true;
             this._changeDetRef.markForCheck();
+            this.selectedChange.emit(this);
         }
-        this.selectedChange.emit(this);
     }
 
 }
