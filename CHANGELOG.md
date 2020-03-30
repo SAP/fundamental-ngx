@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.46...v0.16.0-rc.47) (2020-03-30)
+
+
+### Bug Fixes
+
+* do not require callback function for shellbar actions ([#2219](https://github.com/SAP/fundamental-ngx/issues/2219)) ([9b268b7](https://github.com/SAP/fundamental-ngx/commit/9b268b763b83e7be62d73deacab490d2e7ef59c0))
+
 ## [0.16.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.45...v0.16.0-rc.46) (2020-03-30)
 
 ## [0.16.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.44...v0.16.0-rc.45) (2020-03-29)
