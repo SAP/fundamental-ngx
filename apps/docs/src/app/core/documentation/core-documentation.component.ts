@@ -39,6 +39,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/icon', name: 'Icon' },
         { url: 'core/identifier', name: 'Identifier' },
         { url: 'core/image', name: 'Image' },
+        { url: 'core/info-label', name: 'Info Label' },
         { url: 'core/inlineHelp', name: 'Inline Help' },
         { url: 'core/input', name: 'Input' },
         { url: 'core/inputGroup', name: 'Input Group' },
