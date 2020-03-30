@@ -34,6 +34,7 @@ describe('OptionComponent', () => {
 
     it('should be selectable programmatically', () => {
         spyOn(component.selectedChange, 'emit');
+        spyOn(component.selectedChange, 'emit');
         component.setSelected(true, true);
         expect(component.selectedChange.emit).toHaveBeenCalled();
         expect(component.selected).toBe(true);
@@ -43,15 +44,25 @@ describe('OptionComponent', () => {
         spyOn(component, 'selectionHandler').and.callThrough();
         component.getHtmlElement().click();
         expect(component.selectionHandler).toHaveBeenCalled();
+        expect(component.selectedChange.emit).toHaveBeenCalled();
         expect(component.selected).toBe(true);
     });
 
     it('should be selectable by keyboard', () => {
         spyOn(component, 'selectionHandler').and.callThrough();
+        spyOn(component.selectedChange, 'emit');
         component.getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
         expect(component.selectionHandler).toHaveBeenCalled();
+        expect(component.selectedChange.emit).toHaveBeenCalled();
         expect(component.selected).toBe(true);
     });
+
+    it('should not fire select event when disabled', () => {
+        spyOn(component.selectedChange, 'emit');
+        component.disabled = true;
+        component.selectionHandler();
+        expect(component.selectedChange.emit).not.toHaveBeenCalled();
+    })
 
     it('should support custom view value', () => {
         component.value = 'value';
