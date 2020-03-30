@@ -13,6 +13,7 @@ import {
 import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
+import { closestElement } from '../../functions/closest-element';
 
 interface ResizeMove {
     x: number;
@@ -156,11 +157,11 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** @hidden Return boundary container */
     private _findResizeContainer(): Element {
-        const resizeContainer = this._elementRef.nativeElement.closest(this.resizeBoundary);
+        const resizeContainer = closestElement(this.resizeBoundary, this._elementRef.nativeElement);
         if (resizeContainer) {
             return resizeContainer;
         } else {
-            console.warn(`Cannot find "${this.resizeBoundary}", falling back to "body"`);
+            console.warn(`fdResize - Cannot find "${this.resizeBoundary}", falling back to "body"`);
             return document.querySelector('body')
         }
     }
