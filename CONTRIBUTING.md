@@ -66,7 +66,7 @@ You are welcome to contribute code to Fundamental Library for Angular in order t
 There are two important things to consider:
 
 1.  You must be aware of the Apache License (which describes contributions) and **agree to the Contributors License Agreement**. This is common practice in all major Open Source projects. If you are an individual contributor, use _[CLA assistant](https://cla-assistant.io/)_. CLA assistant is an open source tool that integrates with GitHub and enables a one-click-experience for accepting the CLA. If you are contributing on behalf of a company, see the [Company Contributors](#company-contributors) section below for details.
-2.  You must follow **code style, quality, and product standards requirements**. You can find more information on the coding guidelines below.
+2.  You must follow **code style, quality, and product standards requirements**. You can find more information [HERE](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline).
 
 ### Contributor License Agreement
 
