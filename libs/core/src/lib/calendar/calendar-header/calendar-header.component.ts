@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    EventEmitter,
+    EventEmitter, HostBinding,
     Input, OnDestroy,
     OnInit,
     Output,
@@ -14,6 +14,7 @@ import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 import { takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
+import { CalendarYearGrid } from '../models/calendar-year-grid';
 
 /**
  * Internal use only.
@@ -39,9 +40,21 @@ export class CalendarHeaderComponent implements OnDestroy {
     @Input()
     currentlyDisplayed: CalendarCurrent;
 
+    // TODO
+    @Input()
+    calendarYearGrid: CalendarYearGrid
+
     /** Id */
     @Input()
     id: string;
+
+    /** Id */
+    @Input()
+    showCloseButton: boolean = false;
+
+    /** Whether compact mode should be included into calendar */
+    @Input()
+    public compact: boolean = false;
 
     /** Event emitted when the active view should change. */
     @Output()
@@ -56,6 +69,11 @@ export class CalendarHeaderComponent implements OnDestroy {
     /** Event emitted when the next button is clicked. */
     @Output()
     readonly nextClicked: EventEmitter<void>
+        = new EventEmitter<void>();
+
+    /** TODO */
+    @Output()
+    readonly closeClicked: EventEmitter<void>
         = new EventEmitter<void>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
@@ -106,6 +124,10 @@ export class CalendarHeaderComponent implements OnDestroy {
         return this.activeView === 'year';
     }
 
+    amountOfYearsPerPeriod(): number {
+        return this.calendarYearGrid.cols * this.calendarYearGrid.rows
+    }
+
     processViewChange(type: FdCalendarView): void {
         if (type === this.activeView) {
             this.activeView = 'day';
@@ -113,6 +135,10 @@ export class CalendarHeaderComponent implements OnDestroy {
             this.activeView = type;
         }
         this.activeViewChange.emit(this.activeView);
+    }
+
+    emitClose(): void {
+        this.closeClicked.emit();
     }
 
 }

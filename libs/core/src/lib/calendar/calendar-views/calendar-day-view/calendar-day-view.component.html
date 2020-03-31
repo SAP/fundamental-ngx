@@ -1,8 +1,9 @@
 <table class="fd-calendar__table" role="grid">
     <thead class="fd-calendar__group">
     <tr class="fd-calendar__row">
-        <th class="fd-calendar__column-header" *ngFor="let day of shortWeekDays">
-            <span class="fd-calendar__day-of-week">{{day}}</span>
+        <th class="fd-calendar__item fd-calendar__item--side-helper" *ngIf="showWeekNumbers"></th>
+        <th class="fd-calendar__item fd-calendar__item--side-helper" *ngFor="let day of shortWeekDays">
+            <span class="fd-calendar__text" role="button">{{day}}</span>
         </th>
     </tr>
     </thead>
@@ -10,24 +11,28 @@
     <tr class="fd-calendar__row"
         *ngFor="let row of dayViewGrid; let rowIndex = index;">
 
+        <td class="fd-calendar__item fd-calendar__item--side-helper" *ngIf="showWeekNumbers">
+            <span class="fd-calendar__text" role="button" *ngIf="weeks && weeks[rowIndex]">{{weeks[rowIndex]}}</span>
+        </td>
+
         <td class="fd-calendar__item"
             role="gridcell"
             *ngFor="let cell of row; let cellIndex = index;"
             [ngClass]="{
                     'fd-calendar__item--other-month': cell.monthStatus !== 'current',
-                    'is-selected': cell.selected,
-                    'is-selected-range-last': cell.selectedLast && !cell.selectedFirst,
-                    'is-selected-range-first': cell.selectedFirst && selectCounter == 2,
-                    'is-selected-range': cell.selectedRange && !cell.selectedFirst && !cell.selectedLast,
+                    'is-active': cell.selectedLast || cell.selectedFirst || cell.selected,
+                    'fd-calendar__item--range': cell.selectedRange && !cell.selectedFirst && !cell.selectedLast,
                     'fd-calendar__item--current': cell.today,
+                    'fd-calendar__item--weekend': cell.weekend && markWeekends,
                     'is-disabled': cell.disabled,
                     'is-blocked': cell.blocked
                 }"
+            [class]="cell.specialNumber ? ('fd-calendar__special-day--' + cell.specialNumber) : ''"
             [attr.id]="cell.id"
             [attr.aria-disabled]="cell.disabled || cell.blocked"
             [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
             (click)="selectDate(cell, $event)"
-            (keydown)="onKeydownDayHandler($event, cell, { x: cellIndex, y: rowIndex })"
+            (keydown)="onKeydownDayHandler($event, cell, getId(rowIndex, cellIndex))"
         >
             <span class="fd-calendar__text" role="button" [attr.aria-label]="cell.ariaLabel">{{cell.date.day}}</span>
         </td>

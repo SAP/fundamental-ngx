@@ -109,151 +109,6 @@ describe('CalendarDayViewComponent', () => {
         expect(component.dayViewGrid[1][1].selected).toBe(true);
     });
 
-    it('Should focus cell below with ArrowDown', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[2][2];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowDown', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[3][2].id);
-    });
-
-    it('Should focus cell up with ArrowUp', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[2][2];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowUp', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[1][2].id);
-    });
-
-    it('Should focus left cell with ArrowLeft', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[2][2];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowLeft', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[2][1].id);
-    });
-
-    it('Should focus right cell with ArrowRight', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[2][2];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowRight', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: 2 });
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[2][3].id);
-    });
-
-    it('Should Switch to next month and focus first row cell with ArrowDown', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[component.dayViewGrid.length - 1][2];
-
-        component.newFocusedDayId = focusFirstCell.id;
-
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowDown', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 2, y: component.dayViewGrid.length - 1 });
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[0][2].id);
-        expect(component.currentlyDisplayed.month).toBe(11);
-    });
-
-    it('Should Switch to previous month and focus last row cell with ArrowUp', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[0][0];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowUp', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 0, y: 0 });
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[component.dayViewGrid.length - 1][0].id);
-        expect(component.currentlyDisplayed.month).toBe(9);
-    });
-
-    it('Should Switch to next month and focus first cell after ArrowRight on last cell', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[component.dayViewGrid.length - 1][component.dayViewGrid[0].length - 1];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowRight', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell,
-            { x: component.dayViewGrid[0].length - 1, y: component.dayViewGrid.length - 1 }
-        );
-        expect(focusSpy).toHaveBeenCalledWith(component.dayViewGrid[0][0].id);
-        expect(component.currentlyDisplayed.month).toBe(11);
-    });
-
-    it('Should Switch to previous month and focus last cell after ArrowLeft on first cell', () => {
-        component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.ngOnInit();
-
-        const focusFirstCell = component.dayViewGrid[0][0];
-
-        component.newFocusedDayId = focusFirstCell.id;
-        component.focusElement(component.newFocusedDayId);
-        const focusSpy = spyOn(component, 'focusElement');
-        const event = {
-            key: 'ArrowLeft', preventDefault: () => {
-            }
-        };
-        component.onKeydownDayHandler(event, focusFirstCell, { x: 0, y: 0 });
-        expect(focusSpy).toHaveBeenCalledWith(
-            component.dayViewGrid[component.dayViewGrid.length - 1][component.dayViewGrid[0].length - 1].id
-        );
-        expect(component.currentlyDisplayed.month).toBe(9);
-    });
-
     it('should properly rearrange days when different startingDayOfWeek is used', () => {
         component.startingDayOfWeek = 1;
         component.ngOnInit();
@@ -265,4 +120,20 @@ describe('CalendarDayViewComponent', () => {
         component.ngOnInit();
         expect(component.shortWeekDays).toEqual(['T', 'W', 'T', 'F', 'S', 'S', 'M']);
     });
+
+    it('should generate proper week count on january 2010', () => {
+        component.currentlyDisplayed.year = 2010;
+        component.currentlyDisplayed.month = 1;
+        component.ngOnInit();
+        component.weeks = [53, 1, 2, 3, 4];
+    });
+
+    it('should generate proper week count on december 2010', () => {
+        component.currentlyDisplayed.year = 2012;
+        component.currentlyDisplayed.month = 12;
+        component.ngOnInit();
+        component.weeks = [48, 49, 50, 51, 52, 1];
+    });
+
+    it('should focus element on ')
 });

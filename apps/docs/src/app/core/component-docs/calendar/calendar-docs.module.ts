@@ -12,7 +12,8 @@ import { CalendarFormExamplesComponent } from './examples/calendar-form-example.
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
 import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
 import { CalendarI18nMomentExampleComponent } from './examples/calendar--i18n-moment-example.component';
-import { SegmentedButtonModule, CalendarModule } from '@fundamental-ngx/core';
+import { SegmentedButtonModule, CalendarModule, FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -30,7 +31,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         CalendarModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        FundamentalNgxCoreModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -43,6 +45,7 @@ const routes: Routes = [
         CalendarI18nExampleComponent,
         CalendarI18nMomentExampleComponent,
         CalendarProgrammaticallyChangeExampleComponent,
+        CalendarMobileExampleComponent
     ],
 })
 export class CalendarDocsModule {

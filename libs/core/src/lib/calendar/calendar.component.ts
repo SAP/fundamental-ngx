@@ -18,6 +18,11 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { FdRangeDate } from './models/fd-range-date';
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
+import { SpecialDayRule } from './models/special-day-rule';
+import { CalendarService } from './calendar.service';
+import { CalendarYearGrid } from './models/calendar-year-grid';
+import { AggregatedYear } from './models/aggregated-year';
+import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 
 let calendarUniqueId: number = 0;
 
@@ -25,7 +30,7 @@ let calendarUniqueId: number = 0;
 export type CalendarType = 'single' | 'range';
 
 /** Type for the calendar view */
-export type FdCalendarView = 'day' | 'month' | 'year';
+export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';
 
 /** Type for the days of the week. */
 export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -55,13 +60,14 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => CalendarComponent),
             multi: true
-        }
+        },
+        CalendarService
     ],
     host: {
         '(blur)': 'onTouched()',
         '[attr.id]': 'id'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
 
@@ -70,6 +76,9 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** @hidden */
     @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
+
+    /** @hidden */
+    @ViewChild(CalendarAggregatedYearViewComponent) aggregatedYearViewComponent: CalendarAggregatedYearViewComponent;
 
     /** @hidden */
     @HostBinding('class.fd-calendar')
@@ -85,6 +94,29 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** The currently selected FdDate model in single mode. */
     @Input()
     public selectedDate: FdDate = FdDate.getToday();
+
+    /** Whether compact mode should be included into calendar */
+    @Input()
+    @HostBinding('class.fd-calendar--compact')
+    public compact: boolean = false;
+
+    // TODO
+    @Input()
+    markWeekends: boolean = true;
+
+    // TODO
+    @Input()
+    showWeekNumbers: boolean = true;
+
+    // TODO
+    @Input()
+    @HostBinding('class.fd-calendar--mobile-landscape')
+    mobileLandscape: boolean = false;
+
+    // TODO
+    @Input()
+    @HostBinding('class.fd-calendar--mobile-portrait')
+    mobilePortrait: boolean = false;
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
@@ -106,6 +138,32 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     @Input()
     id = 'fd-calendar-' + calendarUniqueId++;
 
+    /**
+     * TODO
+     */
+    @Input()
+    specialDaysRules: SpecialDayRule[] = [];
+
+    /**
+     * TODO
+     */
+    @Input()
+    yearGrid: CalendarYearGrid = {
+        rows: 5,
+        cols: 6,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * TODO
+     */
+    @Input()
+    aggregatedYearGrid: CalendarYearGrid = {
+        rows: 6,
+        cols: 2,
+        yearMapping: (num: number) => num.toString()
+    }
+
     /** Event thrown every time active view is changed */
     @Output()
     public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -125,6 +183,10 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** Event thrown every time when calendar should be closed */
     @Output()
     public readonly closeCalendar: EventEmitter<void> = new EventEmitter<void>();
+
+    /** TODO */
+    @Output()
+    readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     onChange: Function = () => {
@@ -320,6 +382,9 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
             case 'year':
                 this.displayNextYearList();
                 break;
+            case 'aggregatedYear':
+                this.displayNextYearsList();
+                break;
         }
         this.onTouched();
     }
@@ -335,6 +400,9 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
                 break;
             case 'year':
                 this.displayPreviousYearList();
+                break;
+            case 'aggregatedYear':
+                this.displayPreviousYearsList();
                 break;
         }
         this.onTouched();
@@ -378,6 +446,16 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         this.yearViewComponent.loadPreviousYearList();
     }
 
+    /** Function that allows to switch actually displayed list of year to next year list*/
+    public displayNextYearsList(): void {
+        this.aggregatedYearViewComponent.loadNextYearsList();
+    }
+
+    /** Function that allows to switch actually displayed list of year to previous year list*/
+    public displayPreviousYearsList(): void {
+        this.aggregatedYearViewComponent.loadPreviousYearsList();
+    }
+
     /** Function that allows to change currently displayed month/year configuration,
      * which are connected to days displayed
      */
@@ -402,6 +480,12 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         this.currentlyDisplayed.year = yearSelected;
         this.changeDetectorRef.detectChanges();
         this.dayViewComponent.focusActiveDay();
+    }
+
+    public selectedYears(yearsSelected: AggregatedYear) {
+        this.activeView = 'year';
+        this.currentlyDisplayed.year = yearsSelected.startYear;
+        this.changeDetectorRef.detectChanges();
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */

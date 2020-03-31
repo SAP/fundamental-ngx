@@ -62,6 +62,8 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         private calendarI18n: CalendarI18n,
         private calendarService: CalendarService
     ) {
+        this.calendarService.rowAmount = 3;
+        this.calendarService.colAmount = this._amountOfColPerRow;
     }
 
     /** @hidden */
@@ -125,7 +127,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** Method returning id of month cell */
     getId(rowIndex: number, colIndex: number): number {
-        return rowIndex * this._amountOfColPerRow + colIndex;
+        return this.calendarService.getId(rowIndex, colIndex);
     }
 
     /** Method that checks if this is current month */

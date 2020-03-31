@@ -6,7 +6,6 @@ import {
     Input,
     EventEmitter,
     ElementRef,
-    AfterViewChecked,
     OnDestroy,
     ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
@@ -14,6 +13,7 @@ import { FdDate } from '../../models/fd-date';
 import { takeUntil } from 'rxjs/operators';
 import { CalendarService } from '../../calendar.service';
 import { Subject } from 'rxjs';
+import { CalendarYearGrid } from '../../models/calendar-year-grid';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -26,9 +26,7 @@ import { Subject } from 'rxjs';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDestroy {
-
-    private readonly _amountOfColPerRow: number = 4;
+export class CalendarYearViewComponent implements OnInit, OnDestroy {
 
     /** @hidden
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
@@ -62,6 +60,10 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     @Input()
     yearSelected: number;
 
+    // TODO
+    @Input()
+    yearViewGrid: CalendarYearGrid;
+
     /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
@@ -74,15 +76,9 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
     }
 
     /** @hidden */
-    ngAfterViewChecked(): void {
-        if (this.newFocusedYearId) {
-            this.focusElement(this.newFocusedYearId);
-            this.newFocusedYearId = null;
-        }
-    }
-
-    /** @hidden */
     ngOnInit(): void {
+        this.calendarService.colAmount = this.yearViewGrid.cols;
+        this.calendarService.rowAmount = this.yearViewGrid.rows;
         this.firstYearInList = this.yearSelected;
         this.constructYearGrid();
 
@@ -90,7 +86,7 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => {
                 this.newFocusedYearId = this.id + '-fd-year-' + index;
-                this.focusElement(this.newFocusedYearId);
+                this.focusYearElement();
             })
         ;
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
@@ -102,12 +98,18 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
 
         this.calendarService.onListStartApproach
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.loadPreviousYearList())
+            .subscribe((index) => {
+                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.loadPreviousYearList();
+            })
         ;
 
         this.calendarService.onListEndApproach
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => this.loadNextYearList())
+            .subscribe((index) => {
+                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.loadNextYearList();
+            })
         ;
     }
 
@@ -142,26 +144,28 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         this.calendarService.onKeydownHandler(event, index);
     }
 
-    /** Method used to load the previous 12 years to be displayed. */
+    /** Method used to load the previous {{col * row}} years to be displayed. */
     loadNextYearList(): void {
-        this.firstYearInList += 12;
+        this.firstYearInList += this.getAmountOfYearsShownAtOnce();
         this.constructYearGrid();
     }
 
-    /** Method used to load the next 12 years to be displayed. */
+    /** Method used to load the next {{col * row}} years to be displayed. */
     loadPreviousYearList(): void {
-        this.firstYearInList -= 12;
+        this.firstYearInList -= this.getAmountOfYearsShownAtOnce();
         this.constructYearGrid();
     }
 
     /** Method allowing focusing on elements within this component. */
-    focusElement(elementSelector: string): void {
-        setTimeout(() => {
-            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + elementSelector);
+    focusYearElement(): void {
+        console.log('focus');
+        if (this.newFocusedYearId) {
+            const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + this.newFocusedYearId);
+            this.newFocusedYearId = '';
             if (elementToFocus) {
-                this.eRef.nativeElement.querySelector('#' + elementSelector).focus();
+                elementToFocus.focus();
             }
-        }, 0);
+        }
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
@@ -173,13 +177,14 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         this.yearClicked.emit(this.yearSelected);
     }
 
+    /** TODO */
     getId(rowIndex: number, colIndex: number): number {
-        return rowIndex * this._amountOfColPerRow + colIndex;
+        return this.calendarService.getId(rowIndex, colIndex);
     }
 
     /** @hidden */
     private constructYearGrid(): void {
-        const displayedYearsAmount: number = 12;
+        const displayedYearsAmount: number = this.yearViewGrid.cols * this.yearViewGrid.rows;
         const calendarYearList = [];
         this.calendarYearListGrid = [];
         for (let x = 0; x < displayedYearsAmount; ++x) {
@@ -187,14 +192,19 @@ export class CalendarYearViewComponent implements AfterViewChecked, OnInit, OnDe
         }
         /** Creating 2d grid */
         while (calendarYearList.length) {
-            this.calendarYearListGrid.push(calendarYearList.splice(0, this._amountOfColPerRow));
+            this.calendarYearListGrid.push(calendarYearList.splice(0, this.yearViewGrid.cols));
         }
         this.activeYear = this.getActiveYear();
-        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+        this.focusYearElement();
     }
 
     /** Returns transformed 1d array from 2d year grid. */
     private getYearList(): number[] {
         return [].concat.apply([], this.calendarYearListGrid);
+    }
+
+    private getAmountOfYearsShownAtOnce(): number {
+        return this.yearViewGrid.rows * this.yearViewGrid.cols
     }
 }

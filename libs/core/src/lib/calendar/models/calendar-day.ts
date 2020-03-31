@@ -4,7 +4,8 @@ export interface CalendarDay {
     date: FdDate;
     weekDay: number;
     disabled: boolean;
-    monthStatus?: string,
+    weekend: boolean;
+    monthStatus?: string;
     blocked?: boolean;
     selected?: boolean;
     selectedFirst?: boolean;
@@ -14,4 +15,5 @@ export interface CalendarDay {
     isTabIndexed?: boolean;
     ariaLabel?: string;
     id?: string;
+    specialNumber?: number
 }

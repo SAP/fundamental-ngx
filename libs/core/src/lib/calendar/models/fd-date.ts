@@ -125,6 +125,21 @@ export class FdDate {
         return new Date(this.year, this.month - 1, this.day);
     }
 
+    /*
+    * Get week number from a date
+    */
+    public getWeekNumber(): number {
+        const date = this.toDate();
+        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+
+        // January 4 is always in week 1.
+        const firstWeek = new Date(date.getFullYear(), 0, 4);
+
+        // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+        return 1 + Math.round(((date.getTime() - firstWeek.getTime()) / 86400000
+            - 3 + (firstWeek.getDay() + 6) % 7) / 7);
+    }
+
     /**
      * Method that checks validity of current FdDate object.
      */
