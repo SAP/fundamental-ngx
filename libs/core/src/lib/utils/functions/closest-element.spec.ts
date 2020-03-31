@@ -6,7 +6,7 @@ import { closestElement } from './closest-element';
     template: `
         <article class="article-class">
             <div id="div-01" class="div-class">Here is div-01
-                <div id="" class="div-class">Here is div-02
+                <div id="div-02" class="div-class">Here is div-02
                     <div id="div-03">Here is div-03</div>
                 </div>
             </div>
@@ -16,6 +16,7 @@ import { closestElement } from './closest-element';
 class TestComponent {
     constructor(public elementRef: ElementRef) {}
 }
+
 describe('closestElement', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -37,12 +38,12 @@ describe('closestElement', () => {
     });
 
     it('should return proper HTML Element', () => {
+        const element = component.elementRef.nativeElement.querySelector('#div-03');
 
-        expect(closestElement('div', component.elementRef)).toBe(fixture.nativeElement.querySelector('div-03'));
-        expect(closestElement('.article-class', component.elementRef)).toBe(fixture.nativeElement.querySelector('article'));
-        expect(closestElement('.div-class', component.elementRef)).toBe(fixture.nativeElement.querySelector('#div-02'));
-        expect(closestElement('#div-03', component.elementRef)).toBe(fixture.nativeElement.querySelector('#div-03'));
-        expect(closestElement('article > div', component.elementRef)).toBe(fixture.nativeElement.querySelector('#div-01'));
-        expect(closestElement(':not(div)', component.elementRef)).toBe(fixture.nativeElement.querySelector('article'));
+        expect(element).toBeTruthy();
+        expect(closestElement('#div-03', element)).toEqual(fixture.nativeElement.querySelector('#div-03'));
+        expect(closestElement('.article-class', element)).toEqual(fixture.nativeElement.querySelector('article'));
+        expect(closestElement('.div-class', element)).toEqual(fixture.nativeElement.querySelector('#div-02'));
+        expect(closestElement('article > div', element)).toEqual(fixture.nativeElement.querySelector('#div-01'));
     });
 });
