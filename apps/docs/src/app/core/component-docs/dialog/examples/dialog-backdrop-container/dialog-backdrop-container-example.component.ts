@@ -29,7 +29,7 @@ export class DialogBackdropContainerExampleComponent {
             width: '300px',
             container: containerRef,
             responsivePadding: true,
-            data: `This dialog has been opened inside local div!`,
+            data: `This dialog has been opened inside a local div!`,
         });
     }
 
@@ -40,7 +40,7 @@ export class DialogBackdropContainerExampleComponent {
             container: containerRef,
             responsivePadding: true,
             dialogPanelClass: 'static-dialog',
-            data: `This dialog has been opened inside local div and displayed as static element!`
+            data: `This dialog has been opened inside a local div and displayed as a static element!`
         });
     }
 }
