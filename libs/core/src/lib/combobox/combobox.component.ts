@@ -221,9 +221,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.dropdownValues) {
-            this.displayedValues = this.dropdownValues;
-        }
+        this._refreshDisplayedValues();
         this._setupFocusTrap();
     }
 
@@ -241,12 +239,21 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._setupKeyboardService();
+        this._addShellbarClass();
+    }
+
+    /** @hidden */
+    private _setupKeyboardService(): void {
         this.menuKeyboardService.itemClicked
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => this.onMenuClickHandler(index));
         this.menuKeyboardService.focusEscapeBeforeList = () => this.searchInputElement.nativeElement.focus();
         this.menuKeyboardService.focusEscapeAfterList = () => { };
+    }
 
+    /** @hidden */
+    private _addShellbarClass(): void {
         if (this.inShellbar) {
             this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
         }
