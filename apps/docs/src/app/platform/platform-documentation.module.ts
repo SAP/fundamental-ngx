@@ -63,12 +63,27 @@ import { PlatformSelectTypesSplitExampleComponent } from './component-docs/platf
 import { PlatformSelectTypesWithIconExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-with-icon-example.component';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
-import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
+import { FundamentalNgxPlatformModule, DataProvider, ArrayDataProvider, DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PlatformComboboxDocsComponent } from './component-docs/platform-combobox/platform-combobox-docs.component';
 import { PlatformComboboxHeaderComponent } from './component-docs/platform-combobox/platform-combobox-header/platform-combobox-header.component';
 import { PlatformComboboxTypesDefaultExampleComponent } from './component-docs/platform-combobox/platform-combobox-examples/platform-combobox-types-default-example.component';
+import { Address } from './component-docs/platform-combobox/platform-combobox-examples/address';
+import { addressDB, AddressCSV } from './component-docs/platform-combobox/platform-combobox-examples/addressCSV';
+
+const dataProviderServiceFactory = () => {
+  const providers = new Map<string, DataProvider<any>>();
+
+  providers.set('Address', new ArrayDataProvider<Address>(
+    addressDB.map((i: AddressCSV) => {
+
+      return new Address(
+        i.UniqueName, i.Name, i.Lines, i.City, i.State, i.PostalCode + '',
+        i.Phone, i.Fax, i.Email, i.URL, i.Country);
+    })));
+
+  return providers;
+};
 
 @NgModule({
     declarations: [
@@ -128,12 +143,12 @@ import { PlatformComboboxTypesDefaultExampleComponent } from './component-docs/p
         SharedDocumentationModule,
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS),
         MarkdownModule.forChild(),
-        RouterModule.forChild(ROUTES),
-        ScrollingModule
+        RouterModule.forChild(ROUTES)
     ],
     providers: [
         { provide: 'CURRENT_LIB', useValue: 'platform' },
-        StackblitzService
+        StackblitzService,
+        { provide: DATA_PROVIDERS, useFactory: dataProviderServiceFactory }
     ]
 })
 export class PlatformDocumentationModule { }
