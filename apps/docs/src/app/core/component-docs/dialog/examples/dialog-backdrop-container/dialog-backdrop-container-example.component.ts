@@ -6,8 +6,12 @@ import { DialogService } from '@fundamental-ngx/core';
     templateUrl: './dialog-backdrop-container-example.component.html',
     encapsulation: ViewEncapsulation.None,
     styles: [`
-        .static-dialog {
-            position: static !important;
+        .static-dialog.fd-dialog--active {
+            display: inline-block;
+        }
+
+        .static-dialog > .fd-dialog__content {
+            position: static;
         }
     `]
 })
@@ -20,7 +24,7 @@ export class DialogBackdropContainerExampleComponent {
             width: '300px',
             responsivePadding: true,
             backdropClass: 'dialog-custom-overlay-example',
-            data: `This dialog has a custom backdrop!`,
+            data: `This dialog has a custom backdrop!`
         });
     }
 
@@ -29,7 +33,7 @@ export class DialogBackdropContainerExampleComponent {
             width: '300px',
             container: containerRef,
             responsivePadding: true,
-            data: `This dialog has been opened inside a local div!`,
+            data: `This dialog has been opened inside a local div!`
         });
     }
 
@@ -39,7 +43,7 @@ export class DialogBackdropContainerExampleComponent {
             hasBackdrop: false,
             container: containerRef,
             responsivePadding: true,
-            dialogPanelClass: 'static-dialog',
+            backdropClass: 'static-dialog',
             data: `This dialog has been opened inside a local div and displayed as a static element!`
         });
     }

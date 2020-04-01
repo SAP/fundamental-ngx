@@ -5,21 +5,21 @@
 }
 
 .fd-dialog__resize-handle {
-    z-index: 10;
+    z-index: 100;
 }
 
-// .fd-dialog__content {
-//     overflow: initial;
-//     outline: none;
-//     position: absolute;
-//     transform: initial;
-//     top: auto;
-//     bottom: auto;
-//     left: auto;
-//     right: auto;
-// }
+.fd-dialog__content {
+    &--full-screen {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
 
-.cdk-drag-handle + .fd-dialog__body {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    &--with-header {
+        .fd-dialog__body {
+            border-top-left-radius: initial;
+            border-top-right-radius: initial;
+        }
+    }
 }
