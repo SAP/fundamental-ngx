@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation, OnChanges, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    ViewEncapsulation,
+    OnChanges,
+    OnInit,
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 export type ButtonType =
@@ -73,7 +81,6 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     @Input()
     public fdType: ButtonType = 'standard';
 
-    private _menu: boolean = false;
     /** Whether to apply menu mode to the button.
      * Default value is set to false
      */
@@ -94,7 +101,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** Function runs when component is initialized
      * function should build component css class
@@ -118,7 +125,7 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
             this.compact ? 'fd-button--compact' : '',
-            this._menu ? `fd-button--menu` : '',
+            this.fdMenu ? `fd-button--menu` : '',
             this._options ? getOptionCssClass(this._options) : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.class,
