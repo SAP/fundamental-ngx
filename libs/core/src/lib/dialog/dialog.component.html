@@ -1,0 +1,43 @@
+<div #dialogWindow
+     role="dialog"
+     tabindex="-1"
+     attr.aria-modal="true"
+     fdResize
+     fdResizeBoundary=".fd-dialog"
+     cdkDrag
+     cdkDragBoundary=".fd-dialog"
+     [class]="dialogConfig.dialogPanelClass"
+     [ngClass]="{
+        'fd-dialog__content': true,
+        'fd-dialog__content--s': dialogPaddingSize === 's',
+        'fd-dialog__content--m': dialogPaddingSize === 'm',
+        'fd-dialog__content--l': dialogPaddingSize === 'l',
+        'fd-dialog__content--xl': dialogPaddingSize === 'xl',
+        'fd-dialog__content--mobile': dialogConfig.mobile,
+        'fd-dialog__content--full-screen': dialogConfig.fullScreen,
+        'fd-dialog__content--no-mobile-stretch': dialogConfig.mobileOuterSpacing,
+        'fd-dialog__content--draggable-grab': dialogConfig.draggable && !isDragged,
+        'fd-dialog__content--draggable-grabbing': dialogConfig.draggable && isDragged,
+        'fd-dialog__content--with-header': headerWrapper.children.length
+     }"
+     [cdkDragDisabled]="!dialogConfig.draggable"
+     [fdResizeDisabled]="!dialogConfig.resizable"
+     [@dialog-fade]
+     [attr.id]="dialogConfig.id"
+     [attr.aria-label]="dialogConfig.ariaLabel"
+     [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
+     [attr.aria-describedby]="dialogConfig.ariaDescribedBy"
+     (cdkDragStarted)="isDragged = true"
+     (cdkDragEnded)="isDragged = false"
+     (onResizeEnd)="adjustResponsivePadding()">
+
+    <span fdResizeHandle *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
+
+    <div #headerWrapper cdkDragHandle
+         [cdkDragHandleDisabled]="!dialogConfig.draggable">
+        <ng-content select="fd-dialog-header"></ng-content>
+    </div>
+
+    <ng-content select="fd-dialog-body"></ng-content>
+    <ng-content select="fd-dialog-footer"></ng-content>
+</div>

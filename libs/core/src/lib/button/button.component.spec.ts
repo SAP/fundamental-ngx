@@ -5,20 +5,18 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button>Button</button>'
+    template: '<button fd-button>Button</button>',
 })
-export class TestComponent { }
+export class TestComponent {}
 
 describe('ButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
 
     let component, componentInstance: ButtonComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonComponent, TestComponent]
+            declarations: [ButtonComponent, TestComponent],
         });
     }));
 
@@ -33,25 +31,16 @@ describe('ButtonComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-        componentInstance.ngOnInit();
     });
 
     it('should add appropriate classes', () => {
         componentInstance.compact = true;
         componentInstance.glyph = 'someGlyph';
         componentInstance.fdType = 'standard';
-        componentInstance.ngOnInit();
+        componentInstance.buildComponentCssClass();
 
-        let cssClass = componentInstance.buildComponentCssClass();
+        const cssClass = componentInstance.buildComponentCssClass();
         expect(cssClass).toContain('someGlyph');
         expect(cssClass).toContain('standard');
-        expect(cssClass).toContain('standard');
-
-        // should handle an array of options
-        componentInstance.options = ['light'];
-        componentInstance.ngOnInit();
-
-        cssClass = componentInstance.buildComponentCssClass();
-        expect(cssClass).toContain('light');
     });
 });

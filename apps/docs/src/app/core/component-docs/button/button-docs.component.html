@@ -1,22 +1,7 @@
-<fd-docs-section-title [id]="'Button-options'" [componentName]="'button'"> Button Options </fd-docs-section-title>
-<description>
-    There are three emphasis styles used to indicate the importance of the button on the page. Do not provide a value
-    for the default option. Use <code class="code-snippet">[options]="'emphasized'"</code>,
-    <code class="code-snippet">[options]="'menu'"</code> or
-    <code class="code-snippet">[options]="'light'"</code> to set the option. Options also can be combined in the array.
-    For example<code class="code-snippet">[options]="['emphasized', 'menu']"</code>
-</description>
-<component-example>
-    <fd-button-options-example></fd-button-options-example>
-</component-example>
-<code-example [exampleFiles]="buttonHtmlOptions"></code-example>
-<separator></separator>
-
 <fd-docs-section-title [id]="'Button-types'" [componentName]="'button'"> Button Types </fd-docs-section-title>
 <description>
-    The default button type is "action", no modifier is required. Use
-    <code class="code-snippet">[fdType]="'standard'", [fdType]="'positive'", [fdType]="'medium'"</code>, or
-    <code class="code-snippet">[fdType]="'negative'"</code> to modify the type of the button.
+    The button component follows fundamental-styles for button guidelines. The default button type is "Default button", no modifier
+    is required. Use the <code class="code-snippet">[fdType]=""</code> property to set the button type.
 </description>
 <component-example>
     <fd-button-types-example></fd-button-types-example>
@@ -24,8 +9,16 @@
 <code-example [exampleFiles]="buttonHtmlType"></code-example>
 <separator></separator>
 
+<fd-docs-section-title [id]="'Button-Menu'" [componentName]="'button'"> Menu Button </fd-docs-section-title>
+<description> In order to use menu button, use <code class="code-snippet">[fdMenu]="true"</code> </description>
+<component-example>
+    <fd-button-menu-example></fd-button-menu-example>
+</component-example>
+<code-example [exampleFiles]="buttonHtmlOptions"></code-example>
+<separator></separator>
+
 <fd-docs-section-title [id]="'Button-sizes'" [componentName]="'button'"> Button Sizes </fd-docs-section-title>
-<description> Use <code class="code-snippet">[compact]="true"</code> for the mobile button size. </description>
+<description> Use (or skip) <code class="code-snippet">[compact]="false"</code> for the mobile button size. </description>
 <component-example>
     <fd-button-sizes-example></fd-button-sizes-example>
 </component-example>
@@ -49,7 +42,7 @@
     Button State
 </fd-docs-section-title>
 <description>
-    'disabled' and 'selected' state can be achieved through native 'disabled' / 'aria-disabled' and 'aria-selected'
+    'disabled' and 'selected' states can be achieved through native 'disabled' / 'aria-disabled' and 'aria-selected'
     attributes.
 </description>
 <component-example>
@@ -60,31 +53,18 @@
 <separator></separator>
 
 <description
-    >The inputs for <code>button</code> will be translated into classes attributed to fundamental-styles guidelines.
-    <br />For example: <br />if <code>positive</code> is passed for <code>fdType</code>, the class
-    <code>fd-button--positive</code> will be added to the element. <br />if <code>compact</code> is passed for
+    >The inputs for <code>button</code> will be translated into classes attributed to the fundamental-styles guidelines.
+    <br />For example: <br />if <code>positive</code> is passed for <code>fdType</code>, the 
+    <code>fd-button--positive</code> class will be added to the element. <br />if <code>compact</code> is passed for
     <code>size</code>, the class <code>fd-button--compact</code> will be added to the element.
 </description>
-<separator></separator>
-
-<fd-docs-section-title [id]="'Button-extensibility'" [componentName]="'button'"> Extensibility </fd-docs-section-title>
-<description>
-    The button implementation allows certain extensibility in terms of options for the inputs.
-    <code>button</code> inputs don't have a restriction for the predefined values. You can pass a number of custom
-    options to the <code>options</code> input, which accepts as a parameter either a string or an array of strings. For
-    example, <code>[options]="'emphasized'"</code> will add the class <code>fd-button--emphasized</code> to the button.
-    If you'd like to add multiple options, you could use <code>[options]="['emphasized', 'option1', 'option2']"</code>.
-    This would result in 3 classes being added to the button: <code>fd-button--emphasized</code>,
-    <code>fd-button--option1</code>, and <code>fd-button--option2</code>.
-</description>
-
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <button
         fd-button
         [fdType]="data.properties.fdType"
-        [options]="data.properties.options"
+        [fdMenu]="data.properties.fdMenu"
         [compact]="data.properties.compact"
         [glyph]="data.properties.icon"
     >

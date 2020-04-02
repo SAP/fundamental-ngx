@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ApiComponent} from '../../../documentation/core-helpers/api/api.component';
-import {API_FILES} from '../../api-files';
-import {SharedDocumentationModule} from '../../../documentation/shared-documentation.module';
-import {ButtonHeaderComponent} from './button-header/button-header.component';
-import {ButtonDocsComponent} from './button-docs.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { API_FILES } from '../../api-files';
+import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { ButtonHeaderComponent } from './button-header/button-header.component';
+import { ButtonDocsComponent } from './button-docs.component';
 import {
     ButtonIconsExampleComponent,
-    ButtonOptionsExampleComponent,
+    ButtonMenuExampleComponent,
     ButtonSizesExampleComponent,
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
@@ -19,8 +19,8 @@ const routes: Routes = [
         path: '',
         component: ButtonHeaderComponent,
         children: [
-            {path: '', component: ButtonDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.button}}
+            { path: '', component: ButtonDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
         ]
     }
 ];
@@ -39,7 +39,7 @@ const routes: Routes = [
         ButtonSizesExampleComponent,
         ButtonIconsExampleComponent,
         ButtonStateExampleComponent,
-        ButtonOptionsExampleComponent,
+        ButtonMenuExampleComponent,
     ],
 })
 export class ButtonDocsModule {

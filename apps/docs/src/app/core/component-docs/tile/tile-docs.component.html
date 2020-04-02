@@ -87,7 +87,8 @@
                         [disabled]="data.properties.disabled"
                         [isButton]="data.properties.isButton"
                         [colorAccent]="data.properties.colorAccent"
-                        *ngIf="data.properties.type !== 'product'">
+                        *ngIf="data.properties.type !== 'product'"
+                    >
                         <div fd-tile-media *ngIf="data.properties.type === 'media'">
                             <span *ngIf="data.properties.imageUrl.length === 0; else urlTemplate">
                                 <span
@@ -128,7 +129,7 @@
                         <div fd-tile-actions *ngIf="data.properties.hasActions === true">
                             <fd-popover>
                                 <fd-popover-control>
-                                    <button fd-button [options]="'light'" [glyph]="'vertical-grip'"></button>
+                                    <button fd-button [fdType]="'transparent'" [glyph]="'vertical-grip'"></button>
                                 </fd-popover-control>
                                 <fd-popover-body>
                                     <fd-menu>

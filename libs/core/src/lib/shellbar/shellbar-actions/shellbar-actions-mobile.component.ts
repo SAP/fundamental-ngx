@@ -39,7 +39,9 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
      * @hidden
      */
     actionClicked(item: ShellbarActionComponent, event: any): void {
-        item.callback(event);
+        if (item.callback) {
+            item.callback(event);
+        }
     }
 
     /** @hidden */

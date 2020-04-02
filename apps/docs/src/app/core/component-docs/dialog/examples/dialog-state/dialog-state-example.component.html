@@ -1,0 +1,30 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+
+        <fd-dialog-header>
+            <h1 fd-dialog-title>Dialog states</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            {{dialog.data}}
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-dialog-footer-button>
+                <button fd-button
+                        fdType="emphasized"
+                        fd-dialog-decisive-button
+                        [compact]="true"
+                        (click)="dialog.close()">
+                    Ok
+                </button>
+            </fd-dialog-footer-button>
+        </fd-dialog-footer>
+
+    </fd-dialog>
+</ng-template>
+
+<button fd-button (click)="openCloseDialog(dialogTemplate)">Open self closing Dialog</button>
+<button fd-button (click)="openDismissDialog(dialogTemplate)" style="margin-left: 1rem;">Open self dismissing Dialog</button>
+<button fd-button (click)="openHideDialog(dialogTemplate)" style="margin-left: 1rem;">Open self hiding Dialog</button>
+<button fd-button (click)="openLoadingDialog(dialogTemplate)" style="margin-left: 1rem;">Open loading Dialog</button>

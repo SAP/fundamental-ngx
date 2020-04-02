@@ -1,5 +1,6 @@
-<ng-template [ngIf]="items?.length > 0" [ngIfElse]="subHeader">
-    <fd-popover [options]="{placement: 'bottom-end'}"
+<ng-template [ngIf]="items?.length > 0"
+             [ngIfElse]="subHeader">
+    <fd-popover [options]="{ placement: 'bottom-end' }"
                 [disabled]="!items || items.length === 0 || disabled"
                 [closeOnEscapeKey]="closeOnEscapeKey"
                 [closeOnOutsideClick]="closeOnOutsideClick"
@@ -10,36 +11,31 @@
                 [focusTrapped]="false"
                 [placement]="'bottom-start'">
         <fd-popover-control>
-            <button class="fd-button--light fd-button--menu fd-shellbar__button--menu">
+            <button
+                    class="fd-button fd-button--transparent fd-button--menu fd-shellbar__button--menu">
                 <span class="fd-shellbar__title">
-                    {{control}}
+                    {{ control }}
                 </span>
             </button>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-menu fd-menu-addon [fdMenuAddonClass]="isAnyGlyphInItems()" *ngIf="!menuComponent">
+            <fd-menu fd-menu-addon
+                     [fdMenuAddonClass]="isAnyGlyphInItems()"
+                     *ngIf="!menuComponent">
                 <ul fd-menu-list>
                     <ng-container *ngFor="let item of items">
-                        <li (click)="itemClicked(item, $event)" *ngIf="item.link">
-                            <a href="{{item.link}}"
-                               fd-menu-item
-                               [ngClass]="{'fd-product-menu-padding-left': !item.glyph}"
-                               class="fd-product-menu-padding-right">
-                                {{item.name}}
-                                <div fd-menu-item-addon *ngIf="item.glyph">
+                        <li (click)="itemClicked(item, $event)"
+                            fd-menu-item>
+                            <a href="{{ item.link }}"
+                               fd-menu-link
+                               [ngClass]="{ 'fd-product-menu-padding-left': !item.glyph }"
+                               class="fd-product-menu-padding-right fd-menu__link">
+                                <span fd-menu-title>{{ item.name }}</span>
+                                <div fd-menu-item-addon
+                                     *ngIf="item.glyph">
                                     <fd-icon [glyph]="item.glyph"></fd-icon>
                                 </div>
                             </a>
-                        </li>
-                        <li *ngIf="!item.link"
-                            fd-menu-item
-                            (click)="itemClicked(item, $event)"
-                            [ngClass]="{'fd-product-menu-padding-left': !item.glyph}"
-                            class="fd-product-menu-padding-right">
-                            {{item.name}}
-                            <div fd-menu-item-addon *ngIf="item.glyph">
-                                <fd-icon [glyph]="item.glyph"></fd-icon>
-                            </div>
                         </li>
                     </ng-container>
                 </ul>
@@ -49,9 +45,8 @@
     </fd-popover>
 </ng-template>
 
-
 <ng-template #subHeader>
     <span class="fd-shellbar__title fd-product-menu__title">
-        {{control}}
+        {{ control }}
     </span>
 </ng-template>

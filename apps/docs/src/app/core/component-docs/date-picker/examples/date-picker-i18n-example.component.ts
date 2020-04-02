@@ -83,11 +83,11 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     selector: 'fd-datepicker-i18n-example',
     template: `
         <label fd-form-label for="language">Select language:</label>
-        <fd-button-group id="language" style="margin-bottom:20px">
-            <button fd-button-grouped [size]="'xs'" (click)="setFrench()" [state]="isSelected('fr')">French</button>
-            <button fd-button-grouped [size]="'xs'" (click)="setGerman()" [state]="isSelected('de')">German</button>
-            <button fd-button-grouped [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">Bulgarian</button>
-        </fd-button-group>
+        <fd-segmented-button id="language" style="margin-bottom:20px">
+            <button fd-segmented-button [size]="'xs'" (click)="setFrench()" [state]="isSelected('fr')">French</button>
+            <button fd-segmented-button [size]="'xs'" (click)="setGerman()" [state]="isSelected('de')">German</button>
+            <button fd-segmented-button [size]="'xs'" (click)="setBulgarian()" [state]="isSelected('bg')">Bulgarian</button>
+        </fd-segmented-button>
         <br>
         <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1"></fd-date-picker>
     `,
@@ -112,7 +112,7 @@ export class DatePickerI18nExampleComponent implements AfterViewInit {
         private languageService: LanguageService,
         private calendarI18n: CalendarI18n,
         private calendarI18nLabels: CalendarI18nLabels
-    ) {}
+    ) { }
 
     date = FdDate.getToday();
 

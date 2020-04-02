@@ -1,6 +1,6 @@
 <fd-popover [placement]="dropDownPlacement$ | async">
     <fd-popover-control>
-        <button fd-button [options]="'menu'">Dropdown Popover</button>
+        <button fd-button [fdMenu]="true">Dropdown Popover</button>
     </fd-popover-control>
     <fd-popover-body>
         <fd-menu>
@@ -14,7 +14,7 @@
 </fd-popover>
 <fd-popover [placement]="dropDownPlacement$ | async" [disabled]="true">
     <fd-popover-control>
-        <button fd-button [disabled]="true" [options]="'menu'">Disabled Dropdown Popover</button>
+        <button fd-button [disabled]="true" [fdMenu]="true">Disabled Dropdown Popover</button>
     </fd-popover-control>
     <fd-popover-body>
         <fd-menu>
@@ -28,7 +28,7 @@
 </fd-popover>
 <fd-popover [placement]="dropDownPlacement$ | async">
     <fd-popover-control>
-        <button fd-button [options]="'menu'" [glyph]="'filter'">Dropdown with icon</button>
+        <button fd-button [fdMenu]="true" [glyph]="'filter'">Dropdown with icon</button>
     </fd-popover-control>
     <fd-popover-body>
         <fd-menu>

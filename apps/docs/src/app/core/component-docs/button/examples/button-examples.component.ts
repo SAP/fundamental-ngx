@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-button-options-example',
-    templateUrl: './button-options-example.component.html',
+    selector: 'fd-button-menu-example',
+    templateUrl: './button-menu-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonOptionsExampleComponent { }
+export class ButtonMenuExampleComponent { }
 
 @Component({
     selector: 'fd-button-types-example',
