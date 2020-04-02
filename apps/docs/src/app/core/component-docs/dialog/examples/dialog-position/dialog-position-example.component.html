@@ -1,0 +1,29 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+
+        <fd-dialog-header>
+            <h1 fd-dialog-title>More Facts about the Pineapple</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            The natural (or most common) pollinator of the pineapple is the hummingbird. Pollination is required for
+            seed formation; the presence of seeds negatively affects the quality of the fruit. In Hawaii, where
+            pineapple is cultivated on an agricultural scale, importation of hummingbirds is prohibited for this reason.
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-dialog-footer-button>
+                <button fd-button
+                        fdType="emphasized"
+                        fd-dialog-decisive-button
+                        [compact]="true"
+                        (click)="dialog.close()">
+                    Interesting
+                </button>
+            </fd-dialog-footer-button>
+        </fd-dialog-footer>
+
+    </fd-dialog>
+</ng-template>
+
+<button fd-button (click)="openDialog(dialogTemplate)">Open in Bottom Right</button>

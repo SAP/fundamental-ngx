@@ -55,7 +55,7 @@ export class AlertService {
         alertConfig.container = this.alertContainerRef.location.nativeElement;
 
         const component = this.dynamicComponentService.createDynamicComponent
-            <AlertComponent>(content, AlertComponent, alertConfig, [service]);
+            <AlertComponent>(content, AlertComponent, alertConfig, { services: [service, alertConfig]});
 
         component.location.nativeElement.style.marginTop = '10px';
 

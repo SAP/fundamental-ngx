@@ -7,7 +7,6 @@ import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
 import { ButtonModule } from './button/button.module';
-import { ButtonGroupModule } from './button-group/button-group.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { ComboboxModule } from './combobox/combobox.module';
 import { CheckboxModule } from './checkbox/checkbox.module';
@@ -24,8 +23,8 @@ import { InputGroupModule } from './input-group/input-group.module';
 import { ListModule } from './list/list.module';
 import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
-import { ModalModule } from './modal/modal.module';
-import { ModalService } from './modal/modal-service/modal.service';
+import { DialogModule } from './dialog/dialog.module';
+import { DialogService } from './dialog/dialog-service/dialog.service';
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
@@ -41,6 +40,7 @@ import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
 import { TimePickerModule } from './time-picker/time-picker.module';
+import { SegmentedButtonModule } from './segmented-button/public_api';
 import { SwitchModule } from './switch/switch.module';
 import { TokenModule } from './token/token.module';
 
@@ -68,7 +68,7 @@ import { InfoLabelModule } from './info-label/info-label.module';
     BreadcrumbModule,
     BusyIndicatorModule,
     ButtonModule,
-    ButtonGroupModule,
+    SegmentedButtonModule,
     CalendarModule,
     ComboboxModule,
     CheckboxModule,
@@ -92,7 +92,7 @@ import { InfoLabelModule } from './info-label/info-label.module';
     LocalizationEditorModule,
     MenuModule,
     MegaMenuModule,
-    ModalModule,
+    DialogModule,
     MultiInputModule,
     NestedListModule,
     NotificationModule,
@@ -102,6 +102,7 @@ import { InfoLabelModule } from './info-label/info-label.module';
     PopoverModule,
     RadioModule,
     ScrollSpyModule,
+    SegmentedButtonModule,
     SelectModule,
     ShellbarModule,
     SideNavigationModule,
@@ -115,6 +116,6 @@ import { InfoLabelModule } from './info-label/info-label.module';
     TokenModule,
     TreeModule,
   ],
-  providers: [AlertService, ModalService, NotificationService],
+  providers: [AlertService, DialogService, NotificationService],
 })
 export class FundamentalNgxCoreModule { }

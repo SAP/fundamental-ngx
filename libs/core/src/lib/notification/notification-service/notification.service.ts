@@ -59,7 +59,9 @@ export class NotificationService {
                 content,
                 NotificationComponent,
                 notificationConfig,
-                [notificationService]
+                {
+                    services: [notificationService, notificationConfig]
+                }
             );
 
             // Add To array
@@ -74,7 +76,10 @@ export class NotificationService {
                 content,
                 NotificationComponent,
                 notificationConfig,
-                [notificationService]
+                {
+                    services: [notificationService, notificationConfig]
+                }
+
             );
 
             // Add To array
@@ -139,8 +144,7 @@ export class NotificationService {
 
         // Create and return notification Group component reference
         return this.dynamicComponentService.createDynamicComponent
-            <NotificationGroupComponent>(null, NotificationGroupComponent, notificationConfig)
-        ;
+            <NotificationGroupComponent>(null, NotificationGroupComponent, notificationConfig);
     }
 
     private destroyWholeGroup(notification: ComponentRef<NotificationComponent>): void {

@@ -1,7 +1,7 @@
-import {Routes} from '@angular/router';
-import {CoreDocumentationComponent} from './documentation/core-documentation.component';
-import {HomeDocsComponent} from './component-docs/core-home/core-home.component';
-import {NewComponentComponent} from './component-docs/new-component/new-component.component';
+import { Routes } from '@angular/router';
+import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
+import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
 export const ROUTES: Routes = [
     {
@@ -40,8 +40,8 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/button/button-docs.module').then(m => m.ButtonDocsModule)
             },
             {
-                path: 'buttonGroup',
-                loadChildren: () => import('./component-docs/button-group/button-group-docs.module').then(m => m.ButtonGroupDocsModule)
+                path: 'segmentedButton',
+                loadChildren: () => import('./component-docs/segmented-button/segmented-button-docs.module').then(m => m.SegmentedButtonDocsModule)
             },
             {
                 path: 'calendar',
@@ -62,6 +62,10 @@ export const ROUTES: Routes = [
             {
                 path: 'datetime-picker',
                 loadChildren: () => import('./component-docs/datetime-picker/datetime-picker-docs.module').then(m => m.DatetimePickerDocsModule)
+            },
+            {
+                path: 'dialog',
+                loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then(m => m.DialogDocsModule)
             },
             {
                 path: 'dropdown',
@@ -130,10 +134,6 @@ export const ROUTES: Routes = [
             {
                 path: 'menu',
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then(m => m.MenuDocsModule)
-            },
-            {
-                path: 'modal',
-                loadChildren: () => import('./component-docs/modal/modal-docs.module').then(m => m.ModalDocsModule)
             },
             {
                 path: 'multi-input',

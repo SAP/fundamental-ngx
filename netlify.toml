@@ -8,4 +8,4 @@
 [build]
   ignore = 'sh ./ignore.sh'
   publish = "dist/apps/docs"
-  command = "npm run build-docs-netlify"
+  command = "NODE_OPTIONS=--max_old_space_size=8192 npm run build-docs-netlify"

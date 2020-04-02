@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
+export type BusyIndicatorSize = 's' | 'm' | 'l';
+
 @Component({
   selector: 'fd-busy-indicator',
   templateUrl: './busy-indicator.component.html',
@@ -15,7 +17,7 @@ export class BusyIndicatorComponent {
 
   /** The size of the loading indicator, default will be medium */
   @Input()
-  size: string = 'm';
+  size: BusyIndicatorSize = 'm';
 
   /** Aria label for the 'loading' indicator. */
   @Input()

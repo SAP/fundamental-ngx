@@ -43,9 +43,9 @@ export const API_FILES = {
     button: [
         'ButtonComponent'
     ],
-    buttonGroup: [
-        'ButtonGroupComponent',
-        'ButtonGroupedDirective',
+    segmentedButton: [
+        'SegmentedButtonComponent',
+        'SegmentedButtonDirective',
     ],
     calendar: [
         'CalendarComponent',
@@ -165,16 +165,18 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
-    modal: [
-        'ModalService',
-        'ModalTitleDirective',
-        'ModalCloseButtonDirective',
-        'ModalConfig',
-        'ModalPosition',
-        'ModalBodyComponent',
-        'ModalHeaderComponent',
-        'ModalFooterComponent',
-        'ModalRef'
+    dialog: [
+        'DialogService',
+        'DialogContainerComponent',
+        'DialogTitleDirective',
+        'DialogCloseButtonDirective',
+        'DialogDecisiveButtonDirective',
+        'DialogConfig',
+        'DialogPosition',
+        'DialogBodyComponent',
+        'DialogHeaderComponent',
+        'DialogFooterComponent',
+        'DialogRef'
     ],
     multiInput: [
         'MultiInputComponent'
