@@ -1,52 +1,57 @@
 <header class="fd-calendar__header" aria-live="polite">
     <div class="fd-calendar__navigation">
         <div class="fd-calendar__action">
-            <button fd-button
-                    [fdType]="'standard'"
-                    [compact]="true"
-                    [options]="'light'"
-                    [glyph]="'slim-arrow-left'"
-                    [attr.id]="id + '-left-arrow'"
-                    [attr.aria-label]="previousLabel"
-                    [attr.aria-disabled]="false"
-                    type="button"
-                    (click)="previousClicked.emit()">
+            <button
+                fd-button
+                [fdType]="'standard'"
+                [compact]="true"
+                [fdType]="'transparent'"
+                [glyph]="'slim-arrow-left'"
+                [attr.id]="id + '-left-arrow'"
+                [attr.aria-label]="previousLabel"
+                [attr.aria-disabled]="false"
+                type="button"
+                (click)="previousClicked.emit()"
+            ></button>
+        </div>
+        <div class="fd-calendar__action">
+            <button
+                fd-button
+                [compact]="true"
+                [fdType]="'transparent'"
+                [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
+                [attr.aria-selected]="isOnMonthView()"
+                (click)="processViewChange('month')"
+                type="button"
+            >
+                {{ monthLabel }}
             </button>
         </div>
         <div class="fd-calendar__action">
-            <button fd-button
-                    [compact]="true"
-                    [options]="'light'"
-                    [attr.aria-label]="calendarI18nLabels.monthSelectionLabel + ' ' + monthLabel"
-                    [attr.aria-selected]="isOnMonthView()"
-                    (click)="processViewChange('month')"
-                    type="button">
-                {{monthLabel}}
+            <button
+                fd-button
+                [compact]="true"
+                [fdType]="'transparent'"
+                [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
+                [attr.aria-selected]="isOnYearView()"
+                (click)="processViewChange('year')"
+                type="button"
+            >
+                {{ currentlyDisplayed.year }}
             </button>
         </div>
         <div class="fd-calendar__action">
-            <button fd-button
-                    [compact]="true"
-                    [options]="'light'"
-                    [attr.aria-label]="calendarI18nLabels.yearSelectionLabel + ' ' + currentlyDisplayed.year"
-                    [attr.aria-selected]="isOnYearView()"
-                    (click)="processViewChange('year')"
-                    type="button">
-                {{currentlyDisplayed.year}}
-            </button>
-        </div>
-        <div class="fd-calendar__action">
-            <button fd-button
-                    [fdType]="'standard'"
-                    [compact]="true"
-                    [options]="'light'"
-                    [glyph]="'slim-arrow-right'"
-                    [attr.id]="id + '-right-arrow'"
-                    [attr.aria-label]="nextLabel"
-                    [attr.aria-disabled]="false"
-                    (click)="nextClicked.emit()"
-                    type="button">
-            </button>
+            <button
+                fd-button
+                [compact]="true"
+                [fdType]="'transparent'"
+                [glyph]="'slim-arrow-right'"
+                [attr.id]="id + '-right-arrow'"
+                [attr.aria-label]="nextLabel"
+                [attr.aria-disabled]="false"
+                (click)="nextClicked.emit()"
+                type="button"
+            ></button>
         </div>
     </div>
 </header>

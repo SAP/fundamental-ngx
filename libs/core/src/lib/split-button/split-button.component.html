@@ -1,34 +1,39 @@
-<fd-popover [(isOpen)]="isOpen"
-            [focusTrapped]="focusTrapped"
-            [closeOnEscapeKey]="closeOnEscapeKey"
-            [closeOnOutsideClick]="closeOnOutsideClick"
-            [disabled]="disabled"
-            [triggers]="triggers"
-            [fillControlMode]="fillControlMode">
-    <fd-popover-control>
+<fd-popover
+    [(isOpen)]="isOpen"
+    [focusTrapped]="focusTrapped"
+    [closeOnEscapeKey]="closeOnEscapeKey"
+    [closeOnOutsideClick]="closeOnOutsideClick"
+    [disabled]="disabled"
+    [triggers]="triggers"
+    [fillControlMode]="fillControlMode"
+>
+    <fd-popover-control [dir]="direction$ | async">
         <div class="fd-button-split">
-            <button fd-button
-                    [fdType]="fdType"
-                    [options]="options"
-                    [compact]="compact"
-                    (click)="buttonClick($event)"
-                    [disabled]="disabled">
+            <button
+                fd-button
+                [fdType]="fdType"
+                [options]="options"
+                [compact]="compact"
+                (click)="buttonClick($event)"
+                [disabled]="disabled"
+            >
                 <ng-container *ngIf="titleTemplate">
                     <ng-container [fd-split-button-load-action-title]="titleTemplate"></ng-container>
                 </ng-container>
                 <ng-container *ngIf="!titleTemplate">
-                    {{mainActionTitle}}
+                    {{ mainActionTitle }}
                 </ng-container>
             </button>
-            <button fd-button
-                    [attr.aria-expanded]="disabled ? false : isOpen"
-                    [attr.aria-disabled]="disabled"
-                    aria-haspopup="true"
-                    [fdType]="fdType"
-                    [options]="options"
-                    [compact]="compact"
-                    [glyph]="glyph">
-            </button>
+            <button
+                fd-button
+                [options]="options"
+                [attr.aria-expanded]="disabled ? false : isOpen"
+                [attr.aria-disabled]="disabled"
+                aria-haspopup="true"
+                [fdType]="fdType"
+                [compact]="compact"
+                [glyph]="glyph"
+            ></button>
         </div>
     </fd-popover-control>
     <fd-popover-body>

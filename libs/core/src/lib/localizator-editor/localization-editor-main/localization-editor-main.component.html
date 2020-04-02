@@ -1,22 +1,19 @@
-<fd-input-group [compact]="compact"
-                [state]="state"
-                [inputTemplate]="input">
-    <span fd-input-group-addon
-          [button]="true"
-          [compact]="compact"
-          [state]="state"
-          [type]="type">
-        <button class="fd-localization-editor__button"
-                fd-button aria-haspopup="true"
-                [attr.tabindex]="buttonFocusable ? 0 : -1"
-                [options]="'light'"
-                [compact]="compact"
-                [attr.aria-expanded]="expanded">
+<fd-input-group [compact]="compact" [state]="state" [inputTemplate]="input">
+    <span fd-input-group-addon [button]="true" [compact]="compact" [state]="state" [type]="type">
+        <button
+            class="fd-localization-editor__button"
+            fd-button
+            aria-haspopup="true"
+            [attr.tabindex]="buttonFocusable ? 0 : -1"
+            [fdType]="'transparent'"
+            [compact]="compact"
+            [attr.aria-expanded]="expanded"
+        >
             <ng-container *ngIf="labelTemplate">
                 <ng-container [fd-localization-editor-load-label]="labelTemplate"></ng-container>
             </ng-container>
             <ng-container *ngIf="!labelTemplate">
-                {{label}}
+                {{ label }}
             </ng-container>
         </button>
     </span>

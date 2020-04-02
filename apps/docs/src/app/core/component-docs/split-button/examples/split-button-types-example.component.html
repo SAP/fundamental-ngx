@@ -12,7 +12,12 @@
         </fd-menu>
     </div>
 </fd-split-button>
-<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [fdType]="'standard'" [mainActionTitle]="'Standard Button'">
+
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'standard'"
+    [mainActionTitle]="'Standard Button'"
+>
     <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
@@ -26,8 +31,104 @@
         </fd-menu>
     </div>
 </fd-split-button>
-<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [fdType]="'medium'" [mainActionTitle]="'Standard Button'">
-    <div fd-split-button-menu>  
+
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'emphasized'"
+    [mainActionTitle]="'Emphasized Button'"
+>
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 1
+                </li>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 2
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+
+<fd-split-button (primaryButtonClicked)="primaryButtonClicked()" [fdType]="'ghost'" [mainActionTitle]="'Ghost Button'">
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 1
+                </li>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 2
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'positive'"
+    [mainActionTitle]="'Positive Button'"
+>
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 1
+                </li>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 2
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'negative'"
+    [mainActionTitle]="'Negative Button'"
+>
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 1
+                </li>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 2
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'attention'"
+    [mainActionTitle]="'Attention Button'"
+>
+    <div fd-split-button-menu>
+        <fd-menu>
+            <ul fd-menu-list>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 1
+                </li>
+                <li fd-menu-item (click)="itemClicked()">
+                    option 2
+                </li>
+            </ul>
+        </fd-menu>
+    </div>
+</fd-split-button>
+
+<fd-split-button
+    (primaryButtonClicked)="primaryButtonClicked()"
+    [fdType]="'transparent'"
+    [mainActionTitle]="'Transparent Button'"
+>
+    <div fd-split-button-menu>
         <fd-menu>
             <ul fd-menu-list>
                 <li fd-menu-item (click)="itemClicked()">

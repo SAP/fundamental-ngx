@@ -10,8 +10,8 @@ import * as popoverProgrammaticScssSrc from '!raw-loader!./examples/popover-prog
 import * as popoverProgrammaticTsSrc from '!raw-loader!./examples/popover-programmatic/popover-programmatic-open-example.component.ts';
 import * as popoverPlacementHtmlSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.html';
 import * as popoverPlacementTsSrc from '!raw-loader!./examples/popover-placement/popover-placement-example.component.ts';
-import * as popoverModalHtmlSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.html';
-import * as popoverModalTsSrc from '!raw-loader!./examples/popover-modal/popover-modal-example.component.ts';
+import * as popoverDialogHtmlSrc from '!raw-loader!./examples/popover-dialog/popover-dialog-example.component.html';
+import * as popoverDialogTsSrc from '!raw-loader!./examples/popover-dialog/popover-dialog-example.component.ts';
 import * as popoverFillHSrc from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.html';
 import * as popoverFillSrcTs from '!raw-loader!./examples/popover-c-fill/popover-c-fill.component.ts';
 import * as popoverDynamicHSrc from '!raw-loader!./examples/popover-dynamic/popover-dynamic-example.component.html';
@@ -77,17 +77,17 @@ export class PopoverDocsComponent {
         }
     ];
 
-    popoverModalExample: ExampleFile[] = [
+    popoverDialogExample: ExampleFile[] = [
         {
             language: 'html',
-            code: popoverModalHtmlSrc,
-            fileName: 'popover-modal-example',
+            code: popoverDialogHtmlSrc,
+            fileName: 'popover-dialog-example',
         },
         {
             language: 'typescript',
-            component: 'PopoverModalExampleComponent',
-            code: popoverModalTsSrc,
-            fileName: 'popover-modal-example',
+            component: 'PopoverDialogExampleComponent',
+            code: popoverDialogTsSrc,
+            fileName: 'popover-dialog-example',
         }
     ];
 

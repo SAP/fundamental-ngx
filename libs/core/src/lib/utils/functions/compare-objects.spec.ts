@@ -1,4 +1,4 @@
-import {compareObjects} from '../functions';
+import {compareObjects} from './compare-objects';
 
 describe('compareObjects', () => {
     interface TestValue {

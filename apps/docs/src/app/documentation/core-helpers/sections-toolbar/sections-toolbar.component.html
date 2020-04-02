@@ -1,33 +1,37 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed }">
-        <div class="fd-docs-search">
-            <fd-input-group
-                [disabled]="false"
-                [(ngModel)]="search"
-                [glyph]="'decline'"
-                [button]="true"
-                [placeholder]="'Search'"
-                (addOnButtonClicked)="search = ''">
-            </fd-input-group>
-        </div>
-        <div class="fd-docs-sidebar-content">
-            <nav *ngFor="let section of sections">
-                <ul class="nav">
-                    <div class="side-nav__headers">{{section.header}}</div>
-                    <ng-container *ngFor="let item of section.content">
-                        <li *ngIf="item.url === 'home' || (item | docsSearch:search)">
-                            <div class="nav-item-container">
-                                <a class="nav-item"
-                                   [routerLink]="'/' + item.url"
-                                   (keypress)="onKeypressHandler($event)"
-                                   tabindex="0"
-                                   role="button"
-                                   routerLinkActive="nav-item--active">
-                                    {{ item.name }}
-                                </a>
-                            </div>
-                        </li>
-                    </ng-container>
-                </ul>
-            </nav>
-        </div>
+    <div class="fd-docs-search">
+        <fd-input-group
+            [disabled]="false"
+            [(ngModel)]="search"
+            [glyph]="'decline'"
+            [button]="true"
+            [buttonType]="'transparent'"
+            [placeholder]="'Search'"
+            (addOnButtonClicked)="search = ''"
+        >
+        </fd-input-group>
     </div>
+    <div class="fd-docs-sidebar-content">
+        <nav *ngFor="let section of sections">
+            <ul class="nav">
+                <div class="side-nav__headers">{{ section.header }}</div>
+                <ng-container *ngFor="let item of section.content">
+                    <li *ngIf="item.url === 'home' || (item | docsSearch: search)">
+                        <div class="nav-item-container">
+                            <a
+                                class="nav-item"
+                                [routerLink]="'/' + item.url"
+                                (keypress)="onKeypressHandler($event)"
+                                tabindex="0"
+                                role="button"
+                                routerLinkActive="nav-item--active"
+                            >
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+        </nav>
+    </div>
+</div>

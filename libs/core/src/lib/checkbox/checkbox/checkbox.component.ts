@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FdCheckboxValues} from './fd-checkbox-values.interface';
-import {compareObjects} from '../../utils/functions';
+import {compareObjects} from '../../utils/public_api';
 
 let checkboxUniqueId: number = 0;
 

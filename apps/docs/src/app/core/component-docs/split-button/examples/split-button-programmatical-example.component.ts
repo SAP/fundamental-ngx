@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
             fd-split-button {
                 margin-right: 12px;
             }
+            .docs-button {
+                margin-right: 12px;
+            }
         `
     ]
 })
@@ -21,5 +24,4 @@ export class ButtonSplitProgrammaticalExampleComponent {
     primaryButtonClicked() {
         alert('Primary Button Clicked!');
     }
-
 }

@@ -1,0 +1,11 @@
+<fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+    <button fd-button [glyph]="'survey'" (click)="setLocaleIcon(0)" [class]="isSelectedIcon(0)">
+        survey
+    </button>
+    <button fd-button [glyph]="'pie-chart'" (click)="setLocaleIcon(1)" [class]="isSelectedIcon(1)">
+        pie-chart
+    </button>
+    <button fd-button [glyph]="'pool'" (click)="setLocaleIcon(2)" [class]="isSelectedIcon(2)">
+        pool
+    </button>
+</fd-segmented-button>
