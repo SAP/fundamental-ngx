@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.48...v0.16.0-rc.49) (2020-04-02)
+
+
+### Bug Fixes
+
+* add notification to storybook ([#2204](https://github.com/SAP/fundamental-ngx/issues/2204)) ([1334f5b](https://github.com/SAP/fundamental-ngx/commit/1334f5ba435c6743e3a4b7409a444661c2176448))
+
 ## [0.16.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.47...v0.16.0-rc.48) (2020-04-02)
 
 
