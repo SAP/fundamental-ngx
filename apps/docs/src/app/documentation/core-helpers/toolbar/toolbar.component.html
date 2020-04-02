@@ -19,11 +19,9 @@
         </a>
     </fd-shellbar-logo>
 
-    <fd-product-menu [control]="isOnCore ? 'Core' : 'Platform'" [closePopoverOnSelect]="true" [items]="items">
-    </fd-product-menu>
+    <fd-product-menu [control]="library" [closePopoverOnSelect]="true" [items]="items"> </fd-product-menu>
 
     <fd-shellbar-actions>
-        <!-- <fd-shellbar-action> -->
         <span class="fd-docs--toolbar__version">v{{ version }}</span>
         <a href="https://github.com/SAP/fundamental-ngx" title="Find us on Github!">
             <svg
@@ -64,6 +62,5 @@
                 </g>
             </svg>
         </a>
-        <!-- </fd-shellbar-action> -->
     </fd-shellbar-actions>
 </fd-shellbar>
