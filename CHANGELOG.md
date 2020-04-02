@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.47...v0.16.0-rc.48) (2020-04-02)
+
+
+### Features
+
+* Button in FIori3 | Dialog in Fiori3 | New way of adding Icons ([#2224](https://github.com/SAP/fundamental-ngx/issues/2224)) ([510264e](https://github.com/SAP/fundamental-ngx/commit/510264eab292e3a6899ee787a69cd928559bd8e1)), closes [#2187](https://github.com/SAP/fundamental-ngx/issues/2187) [#2189](https://github.com/SAP/fundamental-ngx/issues/2189) [#2221](https://github.com/SAP/fundamental-ngx/issues/2221) [#2227](https://github.com/SAP/fundamental-ngx/issues/2227)
+
 ## [0.16.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.46...v0.16.0-rc.47) (2020-03-30)
 
 
