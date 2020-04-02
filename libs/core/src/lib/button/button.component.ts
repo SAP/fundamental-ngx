@@ -63,9 +63,7 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
     },
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
-    /**
-     * For accessibility
-     */
+
     ariaLabelledBy: string = null;
 
     ariaLabel: string = null;
