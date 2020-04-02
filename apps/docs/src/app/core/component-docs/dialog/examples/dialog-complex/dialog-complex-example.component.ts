@@ -76,8 +76,9 @@ export class DialogComplexExampleComponent {
         }
     }
 
-    clearSearch(): void {
+    clear(): void {
         this.searchedPhrase = '';
+        this.selectedFruits = [];
     }
 
     checkout(): void {
