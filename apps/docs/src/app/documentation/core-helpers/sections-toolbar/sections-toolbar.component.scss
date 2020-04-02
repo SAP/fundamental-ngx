@@ -17,7 +17,6 @@
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
-    padding-top: 52px;
 }
 
 .fd-docs-sidebar-content {
@@ -48,7 +47,6 @@
         color: #085caf;
         text-decoration: none;
     }
-
 }
 
 .nav-item--active {
@@ -71,7 +69,7 @@
     flex-grow: 1;
     overflow-y: scroll;
     padding-bottom: 2rem;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding-top: 52px;
 
     &:focus {
@@ -89,9 +87,8 @@
 .fd-docs-search {
     flex: 0 0 auto;
     padding: 15px 20px;
-    box-shadow: -2px 2px 4px rgba(0,0,0,.25);
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
 
 .nav-item-container {
     display: flex;
@@ -110,7 +107,7 @@
     transition: 0.3s opacity ease-in-out;
     visibility: hidden;
 
-    @media screen and (min-width: 992px){
+    @media screen and (min-width: 992px) {
         display: none;
         width: 0;
         height: 0;
@@ -143,7 +140,7 @@
     overflow: hidden;
 }
 
-@media (max-width: 992px){
+@media (max-width: 992px) {
     .sidebar {
         position: absolute;
         box-shadow: 2px 0 50px 0 #292929;
@@ -159,13 +156,13 @@
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .content-margin {
         padding: 10px 40px;
     }
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
     .content-margin {
         padding: 10px 20px;
     }
