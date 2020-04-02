@@ -63,6 +63,13 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
     },
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
+    /**
+     * For accessibility
+     */
+    ariaLabelledBy: string = null;
+
+    ariaLabel: string = null;
+
     /** The property allows user to pass additional css classes
      */
     @Input()
@@ -101,6 +108,11 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * Will be removed in 0.17.0.
      * Use 'fdType' instead.
      */
+
+    /** Id for the button component. If omitted, a unique one is generated. */
+    @Input()
+    id: string = 'fd-switch-' + buttonUniqueId++;
+
     @Input()
     public options(opt: ButtonOptions | ButtonOptions[]) {
         console.warn(`fd-button options property is deprecated and will be removed in 0.17.0.
@@ -108,16 +120,8 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
         this._options = opt;
     }
 
-    /** Id for the button component. If omitted, a unique one is generated. */
-    @Input()
-    id: string = 'fd-switch-' + buttonUniqueId++;
-
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
-
-    ariaLabelledBy: string = null;
-
-    ariaLabel: string = null;
 
     /** Function runs when component is initialized
      * function should build component css class
