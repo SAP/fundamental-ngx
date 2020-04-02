@@ -34,7 +34,7 @@ describe('LinkComponent', () => {
     });
 
     it('Should Add emphasized class', () => {
-        component.ngOnInit();
+        component.ngOnChanges();
         component.emphasized = true;
         component.ngOnChanges();
         fixture.detectChanges();
@@ -42,7 +42,7 @@ describe('LinkComponent', () => {
     });
 
     it('Should Add inverted class', () => {
-        component.ngOnInit();
+        component.ngOnChanges();
         component.inverted = true;
         component.ngOnChanges();
         fixture.detectChanges();
@@ -50,7 +50,7 @@ describe('LinkComponent', () => {
     });
 
     it('Should Add disabled class', () => {
-        component.ngOnInit();
+        component.ngOnChanges();
         component.disabled = true;
         component.ngOnChanges();
         fixture.detectChanges();

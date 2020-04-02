@@ -1,4 +1,4 @@
-import { ContentChild, Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { ContentChild, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -23,52 +23,38 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
         'class': 'fd-tabs__item'
     }
 })
-export class TabItemDirective implements CssClassBuilder, OnInit {
-
-    /** @hidden */
-    @ContentChild(TabLinkDirective)
-    linkItem: TabLinkDirective;
-
-    private _class: string = '';
+export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
+    /** Apply user custom styles */
     @Input()
-    set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    } // user's custom classes
+    class: string = '';
 
     /** Semantic type of the tab item */
-    private _tabItemState: TabItemState;
     @Input()
-    set tabItemState(tabItemState: TabItemState) {
-        this._tabItemState = tabItemState;
-        this.buildComponentCssClass();
-    }
+    tabItemState: TabItemState;
 
     /** This should be used only on `filterMode`. Flag should be enable for first item */
-    private _header: boolean;
     @Input()
-    set header(header: boolean) {
-        this._header = header;
-        this.buildComponentCssClass();
-    }
-
-    get header(): boolean {
-        return this._header;
-    }
+    header: boolean;
 
     /** Defines if there will be added fd-tabs__item class. Enabled by default. */
     @Input()
     fdTabItemClass: boolean = true;
 
     /** @hidden */
+    @ContentChild(TabLinkDirective)
+    linkItem: TabLinkDirective;
+
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef
-    ) {}
+    ) { }
 
-    /** @hidden
-     * Function runs when component is initialized
-     * function should build component css class
-     */
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
@@ -81,9 +67,9 @@ export class TabItemDirective implements CssClassBuilder, OnInit {
     buildComponentCssClass(): string {
         return [
             this.fdTabItemClass ? 'fd-tabs__item' : '',
-            this._header ? 'fd-tabs__item--header' : '',
-            this._tabItemState ? `fd-tabs__item--${this._tabItemState}` : '',
-            this._class
+            this.header ? 'fd-tabs__item--header' : '',
+            this.tabItemState ? `fd-tabs__item--${this.tabItemState}` : '',
+            this.class
         ].filter(x => x !== '').join(' ');
     }
 
