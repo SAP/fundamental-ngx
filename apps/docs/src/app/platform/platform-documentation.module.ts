@@ -10,7 +10,6 @@ import { PlatformButtonHeaderComponent } from '../platform/component-docs/platfo
 import { NewComponentComponent } from '../platform/component-docs/new-component/new-component.component';
 import {
     PlatformButtonIconsExampleComponent,
-    PlatformButtonOptionsExampleComponent,
     PlatformButtonSizesExampleComponent,
     PlatformButtonStateExampleComponent,
     PlatformButtonTypesExampleComponent,
@@ -73,7 +72,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformHomeComponent,
         PlatformButtonDocsComponent,
         PlatformButtonIconsExampleComponent,
-        PlatformButtonOptionsExampleComponent,
         PlatformButtonSizesExampleComponent,
         PlatformButtonTypesExampleComponent,
         PlatformButtonStateExampleComponent,
