@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.49...v0.16.0-rc.50) (2020-04-03)
+
+
+### Bug Fixes
+
+* bug where disabled options could be selected ([#2243](https://github.com/SAP/fundamental-ngx/issues/2243)) ([9f6b4d3](https://github.com/SAP/fundamental-ngx/commit/9f6b4d3cbaf232725f1d54f5eb5040fe4ba5fdb2))
+
 ## [0.16.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.48...v0.16.0-rc.49) (2020-04-02)
 
 
