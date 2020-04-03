@@ -1,9 +1,9 @@
 <div fd-form-item>
     <label fd-form-label for="input-52">
-        Valid Textarea
+        Valid(Success) Textarea
     </label>
     <fd-form-input-message-group>
-        <textarea fd-form-control id="textarea-52" placeholder="Field placeholder text" [state]="'valid'"></textarea>
+        <textarea fd-form-control id="textarea-52" placeholder="Field placeholder text" [state]="'success'"></textarea>
         <fd-form-message [type]="'success'"
             >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
@@ -12,10 +12,10 @@
 
 <div fd-form-item>
     <label fd-form-label for="input-53">
-        Invalid Textarea
+        Invalid(Error) Textarea
     </label>
     <fd-form-input-message-group>
-        <textarea fd-form-control id="textarea-53" placeholder="Field placeholder text" [state]="'invalid'"></textarea>
+        <textarea fd-form-control id="textarea-53" placeholder="Field placeholder text" [state]="'error'"></textarea>
         <fd-form-message [type]="'error'"
             >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
@@ -35,7 +35,7 @@
 
 <div fd-form-item>
     <label fd-form-label for="input-55">
-        Invalid Textarea
+        Information Textarea
     </label>
     <fd-form-input-message-group>
         <textarea
@@ -43,6 +43,7 @@
             id="textarea-55"
             placeholder="Field placeholder text"
             [state]="'information'"
+            [compact]="true"
         ></textarea>
         <fd-form-message [type]="'information'"
             >Pellentesque metus lacus commodo eget justo ut rutrum varius nunc

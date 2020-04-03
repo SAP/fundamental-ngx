@@ -54,7 +54,7 @@ export class InputGroupDocsComponent {
                     },
                     state: {
                         type: 'string',
-                        enum: ['valid', 'invalid', 'information', 'warning']
+                        enum: ['success', 'error', 'information', 'warning']
                     },
                 }
             },

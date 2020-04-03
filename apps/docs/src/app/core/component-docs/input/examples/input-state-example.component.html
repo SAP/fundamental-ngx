@@ -1,9 +1,9 @@
 <div fd-form-item>
     <label fd-form-label for="input-52">
-        Valid Input
+        Valid(Success) Input
     </label>
     <fd-form-input-message-group>
-        <input fd-form-control type="text" id="input-52" placeholder="Field placeholder text" [state]="'valid'"/>
+        <input fd-form-control type="text" id="input-52" placeholder="Field placeholder text" [state]="'success'"/>
         <fd-form-message [type]="'success'">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
@@ -12,10 +12,10 @@
 
 <div fd-form-item>
     <label fd-form-label for="input-53">
-        Invalid Input - Message appears on hover
+        Invalid(Error) Input - Message appears on hover
     </label>
     <fd-form-input-message-group [triggers]="['mouseenter', 'mouseleave']">
-        <input fd-form-control type="text" id="input-53" placeholder="Field placeholder text" [state]="'invalid'"/>
+        <input fd-form-control type="text" id="input-53" placeholder="Field placeholder text" [state]="'error'"/>
         <fd-form-message [type]="'error'">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
