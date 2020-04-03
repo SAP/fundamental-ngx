@@ -12,7 +12,6 @@ import {
     ObjectStatusGenericExampleComponent,
     ObjectStatusInvertedGenericTextExampleComponent,
     ObjectStatusInvertedTextExampleComponent,
-    ObjectStatusInvertedGenericIconAndTextExampleComponent,
     ObjectStatusLargeExampleComponent
 } from './examples/object-status-examples.component';
 import {ObjectStatusHeaderComponent} from './object-status-header/object-status-header.component';
@@ -46,7 +45,6 @@ const routes: Routes = [
         ObjectStatusGenericExampleComponent,
         ObjectStatusInvertedGenericTextExampleComponent,
         ObjectStatusInvertedTextExampleComponent,
-        ObjectStatusInvertedGenericIconAndTextExampleComponent,
         ObjectStatusLargeExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
