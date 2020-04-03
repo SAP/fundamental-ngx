@@ -1,4 +1,4 @@
-import { ELEMENT_REF_EXCEPTION } from '../public_api';
+import { ELEMENT_REF_EXCEPTION, getStringFromHashMap, uuidv4 } from '../public_api';
 
 /**
  * Method decorator to apply css class to a component through native element
@@ -11,7 +11,7 @@ import { ELEMENT_REF_EXCEPTION } from '../public_api';
  */
 export function applyCssClass(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
-    descriptor.value = function(): string {
+    descriptor.value = function (): string {
         if (!this.elementRef) {
             throw ELEMENT_REF_EXCEPTION;
         }
@@ -20,7 +20,19 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
         const elementRef = this.elementRef.apply(this);
 
         if (elementRef) {
-            (elementRef.nativeElement as HTMLElement).className = `${_class} ${this.class ? this.class : ''}`;
+            if (!elementRef.nativeElement._classMap) {
+                elementRef.nativeElement._classMap = {};
+            }
+
+            if (!this._uuidv4) {
+                this._uuidv4 = uuidv4();
+            }
+
+            elementRef.nativeElement._classMap[this._uuidv4] = `${_class} ${this.class ? this.class : ''}`;
+
+            (elementRef.nativeElement as HTMLElement).className = getStringFromHashMap<string>(
+                elementRef.nativeElement._classMap
+            );
         }
 
         return _class;
