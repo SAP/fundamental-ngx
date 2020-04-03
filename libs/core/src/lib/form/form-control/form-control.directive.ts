@@ -40,21 +40,12 @@ export class FormControlDirective extends AbstractFdNgxClass {
             this._addClassToElement('is-' + this.state);
         }
 
-        switch (this.type) {
-            case 'radio': {
-                this._addControlClass('fd-radio');
-                break;
-            }
-            default: {
-                if (this.getElementTag() === 'input') {
-                    this._addControlClass('fd-input');
-                } else if (this.getElementTag() === 'textarea') {
-                    this._addControlClass('fd-textarea');
-                } else if (this.getElementTag() === 'select') {
-                    this._addControlClass('fd-form-select');
-                }
-                break;
-            }
+        if (this.getElementTag() === 'input') {
+            this._addControlClass('fd-input');
+        } else if (this.getElementTag() === 'textarea') {
+            this._addControlClass('fd-textarea');
+        } else if (this.getElementTag() === 'select') {
+            this._addControlClass('fd-form-select');
         }
     }
 
