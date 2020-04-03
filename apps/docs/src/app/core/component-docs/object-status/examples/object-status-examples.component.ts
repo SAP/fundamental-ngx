@@ -54,13 +54,6 @@ export class ObjectStatusInvertedTextExampleComponent { }
 export class ObjectStatusInvertedGenericTextExampleComponent { }
 
 @Component({
-    selector: 'fd-object-status-inverted-icon-and-text-example',
-    templateUrl: './object-status-inverted-icon-and-text-example.component.html',
-    styleUrls: ['./object-status-examples.component.scss']
-})
-export class ObjectStatusInvertedGenericIconAndTextExampleComponent { }
-
-@Component({
     selector: 'fd-object-status-object-status-large-example',
     templateUrl: './object-status-large-example.component.html',
     styleUrls: ['./object-status-examples.component.scss']

@@ -6,7 +6,6 @@ import * as ObjectStatusTextIconExample from '!raw-loader!./examples/object-stat
 import * as ObjectStatusClickableAndIConExample from '!raw-loader!./examples/object-status-clickable-and-icon-example.component.html';
 import * as ObjectStatusInvertedTextExample from '!raw-loader!./examples/object-status-inverted-example.component.html';
 import * as ObjectStatusInvertedGenericExample from '!raw-loader!./examples/object-status-inverted-generic-text-example.component.html';
-import * as ObjectStatusInvertedIconAndTextExample from '!raw-loader!./examples/object-status-inverted-icon-and-text-example.component.html';
 import * as ObjectStatusLargeExample from '!raw-loader!./examples/object-status-large-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -71,15 +70,6 @@ export class ObjectStatusDocsComponent {
             fileName: 'object-status-inverted-generic-text-example',
         }
     ];
-
-    ObjectStatusInverterdIconAndTextExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: ObjectStatusInvertedIconAndTextExample,
-            fileName: 'object-status-inverted-Icon-and-text-example',
-        }
-    ];
-
 
     ObjectStatusLargeExample: ExampleFile[] = [
         {
