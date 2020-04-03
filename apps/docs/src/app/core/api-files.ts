@@ -200,7 +200,7 @@ export const API_FILES = {
         'NotificationDefault',
         'NotificationRef',
     ],
-    objectstatus: [
+    objectStatus: [
         'ObjectStatusModule',
         'ObjectStatusComponent'
     ],
