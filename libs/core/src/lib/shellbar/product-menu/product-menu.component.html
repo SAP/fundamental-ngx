@@ -18,7 +18,7 @@
             </button>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-menu fd-menu-addon [fdMenuAddonClass]="isAnyGlyphInItems()" *ngIf="!menuComponent">
+            <fd-menu fd-menu-addon *ngIf="!menuComponent">
                 <ul fd-menu-list>
                     <ng-container *ngFor="let item of items">
                         <li (click)="itemClicked(item, $event)" fd-menu-item>

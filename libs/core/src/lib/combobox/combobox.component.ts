@@ -22,6 +22,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListItemDirective } from '../list/list-item.directive';
 import { ListMessageDirective } from '../list/list-message.directive';
+import { MenuItemDirective } from '../menu/directives/menu-item.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { Subject } from 'rxjs';

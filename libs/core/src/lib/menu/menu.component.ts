@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a menu.
@@ -11,13 +11,19 @@ import { Component, HostBinding, ViewEncapsulation, Input, ChangeDetectionStrate
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent {
+
     /** @hidden */
     @HostBinding('class.fd-menu')
-    fdMenuClass: boolean = true;
+    readonly fdMenuClass: boolean = true;
 
-    /** The separator line for each menu item. When set to true, it adds a separator below each menu item in the list.
-     * False by default. Leave empty for default. */
+    /** Display menu in compact mode */
     @Input()
-    @HostBinding('class.fd-menu__list--separated')
+    compact: boolean = false;
+
+    /** Display menu in mobile mode */
+    @Input()
+    mobile: boolean = false;
+
+    @Input()
     separator: boolean = false;
 }

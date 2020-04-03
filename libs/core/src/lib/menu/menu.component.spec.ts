@@ -4,7 +4,7 @@ import { MenuComponent } from './menu.component';
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuModule } from './menu.module';
 import { MenuKeyboardService } from './menu-keyboard.service';
-import { MenuItemDirective } from './menu-item.directive';
+import { MenuItemDirective } from './directives/menu-item.directive';
 
 @Component({
     selector: 'fd-menu-test',
