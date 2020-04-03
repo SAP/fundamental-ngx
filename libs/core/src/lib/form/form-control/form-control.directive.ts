@@ -1,7 +1,6 @@
-import { Input, ElementRef, Directive } from '@angular/core';
-import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { Input, ElementRef, Directive, OnInit, OnChanges } from '@angular/core';
 import { FormStates } from './form-states';
-
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 /**
  * Directive intended for use on form controls.
@@ -15,11 +14,11 @@ import { FormStates } from './form-states';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-form-control]',
 })
-export class FormControlDirective extends AbstractFdNgxClass {
+export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges {
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
     state: FormStates;
@@ -30,42 +29,64 @@ export class FormControlDirective extends AbstractFdNgxClass {
     @Input()
     compact: boolean = false;
 
-
     @Input()
     type: string;
 
-    /** @hidden */
-    _setProperties(): void {
-        if (this.state) {
-            this._addClassToElement('is-' + this.state);
-        }
+    /** user's custom classes */
+    @Input()
+    class: string;
 
-        if (this.getElementTag() === 'input') {
-            this._addControlClass('fd-input');
-        } else if (this.getElementTag() === 'textarea') {
-            this._addControlClass('fd-textarea');
-        } else if (this.getElementTag() === 'select') {
-            this._addControlClass('fd-form-select');
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            this.state ? 'is-' + this.state : '',
+            this._getFormClass(),
+            this.compact ? (this._getFormClass() + '--compact') : '',
+            this.class
+        ].filter(x => x !== '').join(' ');
+    }
+
+    private _getFormClass(): string {
+        switch (this._getElementTag()) {
+            case 'input':
+                return 'fd-input';
+            case 'select':
+                return 'fd-form-select';
+            case 'textarea':
+                return 'fd-textarea';
         }
     }
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) {
-        super(elementRef);
+    constructor(
+        private _elementRef: ElementRef
+    ) {
     }
 
     /** @hidden */
-    private getElementTag(): string {
-        if (this.elementRef && this.elementRef.nativeElement) {
-            return this.elementRef.nativeElement.tagName.toLocaleLowerCase();
-        }
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    private _addControlClass(className: string): void {
-        this._addClassToElement(className);
-        if (this.compact) {
-            this._addClassToElement(className + '--compact');
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
+    /** @hidden */
+    private _getElementTag(): string {
+        if (this.elementRef() && this.elementRef().nativeElement) {
+            return this.elementRef().nativeElement.tagName.toLocaleLowerCase();
         }
     }
 }
+

@@ -34,8 +34,8 @@ export const TextArea = () => ({
     props: {
         stateVar: select('State', {
             information: 'information',
-            valid: 'valid',
-            invalid: 'invalid',
+            success: 'success',
+            error: 'error',
             warning: 'warning',
             none: '',
         }, ''),
