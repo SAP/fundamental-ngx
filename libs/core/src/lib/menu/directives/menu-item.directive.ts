@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding } from '@angular/core';
-import { DefaultMenuItem } from './default-menu-item';
+import { DefaultMenuItem } from '../default-menu-item.class';
 
 /**
  * The directive that represents a menu item.
@@ -15,13 +15,13 @@ export class MenuItemDirective implements DefaultMenuItem {
     fdMenuItemClass: boolean = true;
 
     /** @hidden */
-    constructor(public itemEl: ElementRef) {}
+    constructor (public elementRef: ElementRef) {}
 
     public focus(): void {
-        this.itemEl.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
     }
 
     public click(): void {
-        this.itemEl.nativeElement.click();
+        this.elementRef.nativeElement.click();
     }
 }

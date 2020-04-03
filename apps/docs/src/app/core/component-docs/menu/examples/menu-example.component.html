@@ -1,13 +1,72 @@
 <fd-menu>
-    <ul fd-menu-list>
-        <li fd-menu-item>
-            Option 1
-        </li>
-        <li fd-menu-item>
-            Option 2
-        </li>
-        <li fd-menu-item>
-            Option 3
-        </li>
-    </ul>
+    <fd-menu-item>
+        <a href="#" fd-menu-link>
+            <fd-icon fd-menu-addon glyph="accept"></fd-icon>
+            <span fd-menu-title>Option 1</span>
+            <fd-icon fd-menu-addon position="after" glyph="grid"></fd-icon>
+        </a>
+    </fd-menu-item>
+
+    <fd-menu-item>
+        <a href="#" fd-menu-link>
+            <span fd-menu-title>Option 2</span>
+        </a>
+    </fd-menu-item>
+
+    <fd-menu-item [hasNestedItems]="true">
+        <a href="#" fd-menu-link>
+            <span fd-menu-title>Option 3</span>
+        </a>
+
+        <fd-menu-item [hasNestedItems]="true">
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Sub Option 1</span>
+            </a>
+
+            <fd-menu-item>
+                <a href="#" fd-menu-link>
+                    <span fd-menu-title>Sub sub Option 1</span>
+                </a>
+            </fd-menu-item>
+
+            <fd-menu-item>
+                <a href="#" fd-menu-link>
+                    <span fd-menu-title>Sub sub Option 2</span>
+                </a>
+            </fd-menu-item>
+        </fd-menu-item>
+
+        <fd-menu-item [hasNestedItems]="true">
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Sub Option 2</span>
+            </a>
+
+            <fd-menu-item>
+                <a href="#" fd-menu-link>
+                    <span fd-menu-title>Sub sub Option 1</span>
+                </a>
+            </fd-menu-item>
+
+            <fd-menu-item>
+                <a href="#" fd-menu-link>
+                    <span fd-menu-title>Sub sub Option 2</span>
+                </a>
+            </fd-menu-item>
+        </fd-menu-item>
+
+    </fd-menu-item>
+
+    <fd-menu-separator></fd-menu-separator>
+
+    <fd-menu-item>
+        <a href="#" fd-menu-link>
+            <span fd-menu-title>Option 4</span>
+        </a>
+    </fd-menu-item>
+
+    <fd-menu-item>
+        <a href="#" fd-menu-link>
+            <span fd-menu-title>Option 5</span>
+        </a>
+    </fd-menu-item>
 </fd-menu>

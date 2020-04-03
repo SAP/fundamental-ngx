@@ -1,1 +1,13 @@
-<ng-content></ng-content>
+<ng-container *ngTemplateOutlet="mobile ? null : menuTemplate"></ng-container>
+
+<ng-template #menuTemplate>
+    <nav class="fd-menu"
+         [ngClass]="{
+            'fd-menu--compact': compact,
+            'fd-menu--mobile': mobile
+         }">
+        <ul fd-menu-list>
+            <ng-content></ng-content>
+        </ul>
+    </nav>
+</ng-template>

@@ -1,0 +1,15 @@
+<li fd-menu-item
+    [attr.aria-controls]="itemId"
+    [attr.aria-haspopup]="hasNestedItems">
+
+    <ng-content select="[fd-menu-link]"></ng-content>
+
+    <ng-container *ngIf="hasNestedItems">
+        <ul class="fd-menu__sublist"
+            [attr.id]="itemId"
+            [attr.aria-hidden]="!subLevelVisible">
+            <ng-content></ng-content>
+        </ul>
+    </ng-container>
+
+</li>
