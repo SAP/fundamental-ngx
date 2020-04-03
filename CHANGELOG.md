@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.50...v0.16.0-rc.51) (2020-04-03)
+
+
+### Bug Fixes
+
+*  broken toolbar replaced by Shellbar ([#2254](https://github.com/SAP/fundamental-ngx/issues/2254)) ([54d061e](https://github.com/SAP/fundamental-ngx/commit/54d061e1158fae4c5a8cacb4d9bc0875f504b62e))
+
 ## [0.16.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.49...v0.16.0-rc.50) (2020-04-03)
 
 
