@@ -51,7 +51,7 @@ export const Bar = () => ({
                     </button>
                 </fd-bar-element>
                 <fd-bar-element>
-                    Left Section
+                    {{leftText}}
                 </fd-bar-element>
             </div>
             <div fd-bar-middle *ngIf="showMiddle">
@@ -61,7 +61,7 @@ export const Bar = () => ({
                     </button>
                 </fd-bar-element>
                 <fd-bar-element>
-                Middle Section
+                {{middleText}}
                 </fd-bar-element>
                 <fd-bar-element>
                     <button fd-button 
@@ -71,7 +71,7 @@ export const Bar = () => ({
             </div>
             <div fd-bar-right *ngIf="showRight">
                 <fd-bar-element>
-                Right Section
+                {{rightText}}
                 </fd-bar-element>
                 <fd-bar-element>
                     <button fd-button 
@@ -91,6 +91,9 @@ export const Bar = () => ({
         inHomePage: boolean('In Home Page', true),
         inPage: boolean('In Page', true),
         size: select('Size', sizes, 's'),
+        leftText: text('Left Text', 'Left Text'),
+        middleText: text('Middle Text', 'Middle Text'),
+        rightText: text('Right Text', 'Right Text'),
         fullwidthVar: boolean('Full width element', true),
     }
 });

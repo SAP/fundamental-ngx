@@ -30,16 +30,11 @@ export class FormControlDirective extends AbstractFdNgxClass {
     @Input()
     compact: boolean = false;
 
-
-    @Input()
-    type: string;
-
     /** @hidden */
     _setProperties(): void {
         if (this.state) {
             this._addClassToElement('is-' + this.state);
         }
-
         if (this.getElementTag() === 'input') {
             this._addControlClass('fd-input');
         } else if (this.getElementTag() === 'textarea') {
