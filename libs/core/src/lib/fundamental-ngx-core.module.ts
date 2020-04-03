@@ -25,6 +25,7 @@ import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 import { MenuModule } from './menu/menu.module';
 import { DialogModule } from './dialog/dialog.module';
 import { DialogService } from './dialog/dialog-service/dialog.service';
+import { MessageStripModule } from './message-strip/message-strip.module'
 import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
@@ -93,6 +94,7 @@ import { InfoLabelModule } from './info-label/info-label.module';
     MenuModule,
     MegaMenuModule,
     DialogModule,
+    MessageStripModule,
     MultiInputModule,
     NestedListModule,
     NotificationModule,
