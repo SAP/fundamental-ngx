@@ -10,11 +10,6 @@ export abstract class BaseComponent {
 
     protected defaultId: string = `fdp-id-${randomId++}`;
     protected _value: any;
-    protected _editable: boolean = true;
-    /**
-     * See @FormFieldControl
-     */
-    readonly stateChanges: Subject<any> = new Subject<any>();
 
     @Input()
     id: string = this.defaultId;
@@ -23,37 +18,12 @@ export abstract class BaseComponent {
     name: string;
 
     @Input()
-    placeholder: string;
-
-    @Input()
     size: InputSize = 'cozy';
 
     /**
      * See @FormFieldControl
      */
     _status: Status;
-
-    /**
-     * Tell  the component if we are in editing mode.
-     *
-     */
-    @Input()
-    get editable(): boolean {
-        return this._editable;
-    }
-
-    /**
-     * Firing CD, as we can keep switching between editable and non-editable mode
-     *
-     */
-    set editable(value: boolean) {
-        const newVal = coerceBooleanProperty(value);
-        if (this._editable !== newVal) {
-            this._editable = newVal;
-            this._cd.markForCheck();
-            this.stateChanges.next('editable');
-        }
-    }
 
     get status(): Status {
         return this._status;
@@ -67,5 +37,16 @@ export abstract class BaseComponent {
             throw new Error('form input must have [id] and [name] attribute.');
         }
     }
+
+
+    /**
+     * need to make  these value accessor as abstract to be implemented by subclasses. Having them
+     * in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
+     * which we need to programmatically wraps components set/get value
+     *
+     */
+    abstract get value(): any;
+
+    abstract set value(value: any);
 
 }
