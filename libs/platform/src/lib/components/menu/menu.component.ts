@@ -90,7 +90,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
      */
     @Output() close: EventEmitter<MenuCloseMethod> = new EventEmitter();
 
-    private _direction: 'ltr' | 'rtl' | void = 'ltr';
+    public direction: 'ltr' | 'rtl' = 'ltr';
     private _keyManager: FocusKeyManager<MenuItemComponent>;
     private _tabSubscription = Subscription.EMPTY;
     private _dirChangeSubscription = Subscription.EMPTY;
@@ -99,7 +99,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
         private _rtl: RtlService
     ) {
         this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
-            this._direction = value ? 'rtl' : 'ltr';
+            this.direction = value ? 'rtl' : 'ltr';
             this._setMenuItemCascadeDirection();
         });
     }
@@ -187,13 +187,13 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
     }
 
     cascadesRight(): boolean {
-        return (this.xPosition === 'after' && this._direction === 'ltr')
-            || (this.xPosition === 'before' && this._direction === 'rtl');
+        return (this.xPosition === 'after' && this.direction === 'ltr')
+            || (this.xPosition === 'before' && this.direction === 'rtl');
     }
 
     cascadesLeft(): boolean {
-        return (this.xPosition === 'after' && this._direction === 'rtl')
-            || (this.xPosition === 'before' && this._direction === 'ltr');
+        return (this.xPosition === 'after' && this.direction === 'rtl')
+            || (this.xPosition === 'before' && this.direction === 'ltr');
     }
 
 }

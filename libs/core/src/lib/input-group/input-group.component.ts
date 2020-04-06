@@ -11,7 +11,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonOptions, ButtonType } from '../button/button.component';
+import { ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -90,10 +90,6 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     type: string = 'text';
 
-    /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
-    @Input()
-    buttonOptions: ButtonOptions | ButtonOptions[] = 'light';
-
     /** The icon value for the add-on. */
     @Input()
     glyph: string;
@@ -127,7 +123,7 @@ export class InputGroupComponent implements ControlValueAccessor {
     /** @hidden */
     constructor(
         private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    ) { }
 
     /** @hidden */
     inputTextValue: string;

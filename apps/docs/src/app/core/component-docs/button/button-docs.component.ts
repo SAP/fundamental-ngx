@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as buttonScss from '!raw-loader!./examples/button-examples.component.scss';
-import * as buttonOptionsExample from '!raw-loader!./examples/button-options-example.component.html';
+import * as buttonOptionsExample from '!raw-loader!./examples/button-menu-example.component.html';
 import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
 import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
 import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
@@ -25,11 +25,10 @@ export class ButtonDocsComponent {
                     },
                     fdType: {
                         type: 'string',
-                        enum: ['', 'standard', 'positive', 'medium', 'negative']
+                        enum: ['', 'standard', 'positive', 'negative', 'attention', 'half', 'ghost', 'transparent', 'emphasized', 'menu']
                     },
-                    options: {
-                        type: 'string',
-                        enum: ['', 'emphasized', 'light', 'menu']
+                    fdMenu: {
+                        type: 'boolean',
                     },
                     compact: {
                         type: 'boolean'
@@ -50,8 +49,9 @@ export class ButtonDocsComponent {
         properties: {
             label: 'click here',
             fdType: 'default',
-            option: 'default',
+            fdMenu: false,
             size: 'default',
+            compact: false,
             icon: ''
         }
     };
@@ -60,7 +60,7 @@ export class ButtonDocsComponent {
         {
             language: 'html',
             code: buttonOptionsExample,
-            fileName: 'button-options-example',
+            fileName: 'button-menu-example',
             scssFileCode: buttonScss
         }
     ];

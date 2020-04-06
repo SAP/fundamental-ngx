@@ -5,7 +5,7 @@ import { MenuItemComponent } from './menu-item.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
 import { PlatformMenuModule } from './menu.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { createKeyboardEvent, createMouseEvent } from '@angular/cdk/testing';
+import { createKeyboardEvent, createMouseEvent } from '../../testing/event-objects';
 import { DOWN_ARROW, ESCAPE, UP_ARROW, ENTER, TAB, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
 import { of } from 'rxjs';

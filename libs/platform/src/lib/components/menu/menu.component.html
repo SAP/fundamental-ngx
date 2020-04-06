@@ -1,5 +1,5 @@
 <ng-template #menuTemplate>
-    <div class="fd-popover__body fd-popover__body--no-arrow" [attr.id]="menuId">
+    <div class="fd-popover__body fd-popover__body--no-arrow" [attr.id]="menuId" [attr.dir]="direction">
         <nav class="fd-menu" tabindex="0" role="menu" (click)="onClick($event)" (keydown)="onKeydown($event)">
             <div class="fd-menu__list">
                 <ng-content></ng-content>

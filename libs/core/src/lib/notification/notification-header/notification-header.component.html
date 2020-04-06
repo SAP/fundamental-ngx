@@ -1,3 +1,9 @@
 <div [ngClass]="['fd-notification__indicator--' + type]" *ngIf="type"></div>
 <ng-content select="[fd-notification-title]"></ng-content>
-<button fd-button [glyph]="'decline'" [options]="'light'" class="fd-notification__close" (click)="closeButtonClicked()"></button>
+<button
+    fd-button
+    [glyph]="'decline'"
+    [fdType]="'transparent'"
+    class="fd-notification__close"
+    (click)="closeButtonClicked()"
+></button>

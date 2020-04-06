@@ -14,6 +14,8 @@ import { PlatformSelectHeaderComponent } from './component-docs/platform-select/
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformLinkHeaderComponent } from './component-docs/platform-link/platform-link-header/platform-link-header.component';
 import { PlatformLinkDocsComponent } from './component-docs/platform-link/platform-link-docs.component';
+import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-search-field/platform-search-field-header/platform-search-field-header.component';
+import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
 
 export const ROUTES: Routes = [
     {
@@ -47,12 +49,20 @@ export const ROUTES: Routes = [
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.link } }
                 ]
             },
-          {
+            {
                 path: 'menu',
                 component: PlatformMenuHeaderComponent,
                 children: [
                     { path: '', component: PlatformMenuDocsComponent },
                     { path: 'api', component: ApiComponent, data: { content: API_FILES.menu } }
+                ]
+            },
+            {
+                path: 'search-field',
+                component: PlatformSearchFieldHeaderComponent,
+                children: [
+                    { path: '', component: PlatformSearchFieldDocsComponent },
+                    { path: 'api', component: ApiComponent, data: { content: API_FILES.searchField } }
                 ]
             },
             {

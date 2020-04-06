@@ -8,5 +8,6 @@ export const API_FILES = {
     button: ['buttoncomponent'],
     actionbar: ['actionbarcomponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
-    link: ['LinkComponent']
+    link: ['LinkComponent'],
+    searchField: ['SearchFieldComponent']
 };

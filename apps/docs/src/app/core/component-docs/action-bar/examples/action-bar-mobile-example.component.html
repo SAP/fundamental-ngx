@@ -1,7 +1,7 @@
 <div fd-action-bar-mobile>
     <div fd-action-bar>
         <div fd-action-bar-back>
-            <button aria-label="back" fd-button [fdType]="'light'" [compact]="true" [glyph]="'nav-back'"></button>
+            <button aria-label="back" fd-button [fdType]="'transparent'" [compact]="true" [glyph]="'nav-back'"></button>
         </div>
         <div fd-action-bar-header>
             <h3 fd-action-bar-title>Page Title</h3>
@@ -10,8 +10,13 @@
         <div fd-action-bar-actions>
             <fd-popover placement="bottom-end">
                 <fd-popover-control>
-                    <button aria-label="More" aria-haspopup="true" fd-button [fdType]="'light'"
-                        [glyph]="'overflow'"></button>
+                    <button
+                        aria-label="More"
+                        aria-haspopup="true"
+                        fd-button
+                        [fdType]="'transparent'"
+                        [glyph]="'overflow'"
+                    ></button>
                 </fd-popover-control>
                 <fd-popover-body>
                     <fd-menu>

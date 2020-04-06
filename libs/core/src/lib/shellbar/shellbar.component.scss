@@ -2,7 +2,7 @@
 @import "~fundamental-styles/dist/counter";
 
 .fd-shellbar {
-    .fd-shellbar-side-nav-control {
+    .fd-button.fd-shellbar-side-nav-control {
         margin-right: 4px;
         @media (min-width: 600px) {
             margin-left: -12px;
