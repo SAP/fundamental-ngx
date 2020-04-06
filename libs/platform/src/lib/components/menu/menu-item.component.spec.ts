@@ -18,7 +18,7 @@ import { MenuKeyboardService, IconModule } from '@fundamental-ngx/core';
                 (itemClick)="onItemClick($event)"
             ></fdp-menu-item>
         </div>
-    `
+    `,
 })
 class TestComponent {
     @Input()
@@ -40,7 +40,7 @@ class TestComponent {
 
     public itemClicked = false;
 
-    constructor() { }
+    constructor() {}
 
     onItemClick() {
         this.itemClicked = true;
@@ -55,7 +55,7 @@ describe('MenuItemComponent', () => {
         TestBed.configureTestingModule({
             imports: [IconModule],
             declarations: [TestComponent, MenuItemComponent],
-            providers: [MenuKeyboardService]
+            providers: [MenuKeyboardService],
         }).compileComponents();
     }));
 
@@ -143,10 +143,10 @@ describe('MenuItemComponent', () => {
         component.index = '1';
         fixture.detectChanges();
 
-        spyOn(component.menuItem, 'handleKeyboardEvent');
-        const event: any = { code: 'ArrowDown', preventDefault: () => { } };
+        spyOn(component.menuItem, 'onItemKeydown');
+        const event: any = { code: 'ArrowDown', preventDefault: () => {} };
 
-        component.menuItem.handleKeyboardEvent(event);
-        expect(component.menuItem.handleKeyboardEvent).toHaveBeenCalled();
+        component.menuItem.onItemKeydown(event);
+        expect(component.menuItem.onItemKeydown).toHaveBeenCalled();
     });
 });
