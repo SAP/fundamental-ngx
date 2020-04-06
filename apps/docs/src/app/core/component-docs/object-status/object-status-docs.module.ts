@@ -23,7 +23,7 @@ const routes: Routes = [
         component: ObjectStatusHeaderComponent,
         children: [
             {path: '', component: ObjectStatusDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.objectstatus}}
+            {path: 'api', component: ApiComponent, data: {content: API_FILES.objectStatus}}
         ]
     }
 ];
