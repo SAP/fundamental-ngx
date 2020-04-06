@@ -1,14 +1,15 @@
-
 <label fd-form-label>Languages</label>
-<fd-button-group id="language" style="margin-bottom:20px">
-    <button fd-button-grouped [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">English</button>
-    <button fd-button-grouped [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">French</button>
-    <button fd-button-grouped [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
-    <button fd-button-grouped [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
-    <button fd-button-grouped [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
-</fd-button-group>
+<fd-segmented-button id="language" style="margin-bottom:20px">
+    <button fd-segmented-button [size]="'xs'" (click)="setLocale('en-gb')" [state]="isSelected('en-gb')">
+        English
+    </button>
+    <button fd-segmented-button [size]="'xs'" (click)="setLocale('fr')" [state]="isSelected('fr')">French</button>
+    <button fd-segmented-button [size]="'xs'" (click)="setLocale('de')" [state]="isSelected('de')">German</button>
+    <button fd-segmented-button [size]="'xs'" (click)="setLocale('bg')" [state]="isSelected('bg')">Bulgarian</button>
+    <button fd-segmented-button [size]="'xs'" (click)="setLocale('pl')" [state]="isSelected('pl')">Polish</button>
+</fd-segmented-button>
 
-<br/>
+<br />
 <fieldset fd-fieldset>
     <div fd-form-item>
         <label fd-form-label for="docs-date-picker-format">Date Format</label>
@@ -19,12 +20,14 @@
             class="docs-example-fd-form-group"
             [button]="true"
             (addOnButtonClicked)="refresh()"
-            [addOnText]="'Refresh'">
+            [addOnText]="'Refresh'"
+        >
         </fd-input-group>
         <fd-form-message type="help">
-            Full list of formats can be found in <a href="https://angular.io/api/common/DatePipe" target="_blank">
-            Official Angular Documentation
-        </a>
+            The full list of formats can be found at
+            <a href="https://angular.io/api/common/DatePipe" target="_blank">
+                Official Angular Documentation
+            </a>
         </fd-form-message>
     </div>
 </fieldset>

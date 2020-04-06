@@ -7,7 +7,7 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu>
@@ -22,7 +22,7 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu>
@@ -31,14 +31,20 @@
 
     <fd-popover placement="bottom">
         <fd-popover-control>
-            <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]='3'></span>
+            <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]="3"></span>
         </fd-popover-control>
         <fd-popover-body *ngIf="menu1 && menu1.length" style="min-width: 400px">
             <div fd-popover-body-header>
                 <div fd-bar [barDesign]="'header'">
                     <div fd-bar-left>
                         <fd-bar-element>
-                            <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="'navigation-left-arrow'" [compact]="true"></button>
+                            <button
+                                fd-button
+                                [fdType]="'standard'"
+                                [fdType]="'transparent'"
+                                [glyph]="'navigation-left-arrow'"
+                                [compact]="true"
+                            ></button>
                         </fd-bar-element>
                         <fd-bar-element>Header</fd-bar-element>
                     </div>
@@ -47,7 +53,7 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu>
@@ -67,7 +73,8 @@
                 </div>
                 <div fd-bar [barDesign]="'subheader'" [cosy]="true">
                     <div fd-bar-middle>
-                        <fd-bar-element [fullWidth]="true">SubHeader Middle section with Full Width Element
+                        <fd-bar-element [fullWidth]="true"
+                            >SubHeader Middle section with Full Width Element
                         </fd-bar-element>
                     </div>
                 </div>
@@ -75,7 +82,7 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu>
@@ -83,10 +90,10 @@
                 <div fd-bar [barDesign]="'footer'" [cosy]="true">
                     <div fd-bar-right>
                         <fd-bar-element>
-                            <button fd-button [options]="'emphasized'" [compact]="true">Save</button>
+                            <button fd-button [fdType]="'emphasized'" [compact]="true">Save</button>
                         </fd-bar-element>
                         <fd-bar-element>
-                            <button fd-button [options]="'light'" [compact]="true">Cancel</button>
+                            <button fd-button [fdType]="'transparent'" [compact]="true">Cancel</button>
                         </fd-bar-element>
                     </div>
                 </div>
@@ -102,15 +109,18 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu>
         </fd-popover-body>
     </fd-popover>
 
-    <fd-popover placement="bottom" [noArrow]="false"
-        [options]="{modifiers:{flip:{enabled:false},preventOverflow: { enabled: false }}}">
+    <fd-popover
+        placement="bottom"
+        [noArrow]="false"
+        [options]="{ modifiers: { flip: { enabled: false }, preventOverflow: { enabled: false } } }"
+    >
         <fd-popover-control>
             <button fd-button>Fixed Position</button>
         </fd-popover-control>
@@ -118,7 +128,7 @@
             <fd-menu>
                 <ul fd-menu-list>
                     <li *ngFor="let option of menu1">
-                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>
+                        <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
                     </li>
                 </ul>
             </fd-menu>

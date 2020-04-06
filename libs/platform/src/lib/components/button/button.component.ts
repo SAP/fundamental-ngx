@@ -37,6 +37,9 @@ export class ButtonComponent {
     @Input()
     type: ButtonType;
 
+    @Input()
+    fdType: ButtonType;
+
     /** Button options.  Options include 'emphasized' and 'light'. Leave empty for default.' */
     @Input()
     options: ButtonOptions | ButtonOptions[];

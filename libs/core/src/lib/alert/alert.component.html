@@ -1,13 +1,14 @@
-<button class="fd-alert__close"
-        fd-button
-        [compact]="true"
-        [options]="'light'"
-        *ngIf="dismissible"
-        (click)="dismiss(undefined, true)"
-        [attr.aria-controls]="id"
-        [attr.aria-label]="dismissLabel">
-</button>
+<button
+    class="fd-alert__close"
+    fd-button
+    [compact]="true"
+    [fdType]="'transparent'"
+    *ngIf="dismissible"
+    (click)="dismiss(undefined, true)"
+    [attr.aria-controls]="id"
+    [attr.aria-label]="dismissLabel"
+></button>
 <p class="fd-alert__text">
-    <ng-container #container>{{message}}</ng-container>
+    <ng-container #container>{{ message }}</ng-container>
     <ng-content></ng-content>
 </p>

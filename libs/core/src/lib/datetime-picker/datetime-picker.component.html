@@ -1,61 +1,70 @@
 <div class="fd-datetime">
-    <fd-popover [(isOpen)]="isOpen"
-                [closeOnOutsideClick]="false"
-                [closeOnEscapeKey]="false"
-                [triggers]="[]"
-                [disabled]="disabled"
-                [placement]="placement">
+    <fd-popover
+        [(isOpen)]="isOpen"
+        [closeOnOutsideClick]="false"
+        [closeOnEscapeKey]="false"
+        [triggers]="[]"
+        [disabled]="disabled"
+        [placement]="placement"
+    >
         <fd-popover-control>
             <fd-input-group [compact]="compact" [state]="state">
-                <input type="text"
-                       class="fd-input"
-                       fd-input-group-input
-                       #dateTimePicker
-                       [attr.aria-label]="datetimeInputLabel"
-                       [(ngModel)]="inputFieldDate"
-                       (ngModelChange)="handleInputChange($event)"
-                       [placeholder]="placeholder"
-                       (click)="openPopover()"
-                       [compact]="compact"
-                       [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
-                       [disabled]="disabled">
+                <input
+                    type="text"
+                    class="fd-input"
+                    fd-input-group-input
+                    #dateTimePicker
+                    [attr.aria-label]="datetimeInputLabel"
+                    [(ngModel)]="inputFieldDate"
+                    (ngModelChange)="handleInputChange($event)"
+                    [placeholder]="placeholder"
+                    (click)="openPopover()"
+                    [compact]="compact"
+                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
+                    [disabled]="disabled"
+                />
                 <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">
-                    <button [disabled]="disabled" fd-button [glyph]="'date-time'"
-                            [options]="'light'"
-                            [compact]="compact"
-                            [attr.tabindex]="buttonFocusable ? 0 : -1"
-                            (click)="togglePopover()" [attr.aria-label]="displayDatetimeToggleLabel"
-                            [attr.aria-expanded]="isOpen">
-                    </button>
+                    <button
+                        [disabled]="disabled"
+                        fd-button
+                        [glyph]="'date-time'"
+                        [fdType]="'transparent'"
+                        [compact]="compact"
+                        [attr.tabindex]="buttonFocusable ? 0 : -1"
+                        (click)="togglePopover()"
+                        [attr.aria-label]="displayDatetimeToggleLabel"
+                        [attr.aria-expanded]="isOpen"
+                    ></button>
                 </span>
             </fd-input-group>
         </fd-popover-control>
-        <fd-popover-body
-            [attr.aria-expanded]="isOpen"
-            [attr.aria-hidden]="!isOpen"
-            [style.display]="'block'">
+        <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">
             <div class="fd-datetime__container">
-                <fd-calendar calType="single"
-                             [activeView]="activeView"
-                             (activeViewChange)="handleCalendarActiveViewChange($event)"
-                             [disableFunction]="disableFunction ? disableFunction : null"
-                             [blockFunction]="blockFunction ? blockFunction : null"
-                             [selectedDate]="selectedDate"
-                             (selectedDateChange)="handleDateChange($event)"
-                             (isValidDateChange)="isInvalidDateInputHandler($event)"
-                             [escapeFocusFunction]="null"
-                             [startingDayOfWeek]="startingDayOfWeek"></fd-calendar>
+                <fd-calendar
+                    calType="single"
+                    [activeView]="activeView"
+                    (activeViewChange)="handleCalendarActiveViewChange($event)"
+                    [disableFunction]="disableFunction ? disableFunction : null"
+                    [blockFunction]="blockFunction ? blockFunction : null"
+                    [selectedDate]="selectedDate"
+                    (selectedDateChange)="handleDateChange($event)"
+                    (isValidDateChange)="isInvalidDateInputHandler($event)"
+                    [escapeFocusFunction]="null"
+                    [startingDayOfWeek]="startingDayOfWeek"
+                ></fd-calendar>
                 <div class="fd-datetime__separator"></div>
-                <fd-time [disabled]="disabled"
-                         [keepTwoDigits]="keepTwoDigitsTime"
-                         [meridian]="meridian"
-                         [ngModel]="time"
-                         (ngModelChange)="handleTimeChange($event)"
-                         [spinners]="spinners"
-                         [displaySeconds]="displaySeconds"
-                         [displayMinutes]="displayMinutes"
-                         [displayHours]="displayHours"
-                         (focusArrowLeft)="focusArrowLeft()"></fd-time>
+                <fd-time
+                    [disabled]="disabled"
+                    [keepTwoDigits]="keepTwoDigitsTime"
+                    [meridian]="meridian"
+                    [ngModel]="time"
+                    (ngModelChange)="handleTimeChange($event)"
+                    [spinners]="spinners"
+                    [displaySeconds]="displaySeconds"
+                    [displayMinutes]="displayMinutes"
+                    [displayHours]="displayHours"
+                    (focusArrowLeft)="focusArrowLeft()"
+                ></fd-time>
             </div>
         </fd-popover-body>
     </fd-popover>
