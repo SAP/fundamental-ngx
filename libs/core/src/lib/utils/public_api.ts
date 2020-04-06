@@ -32,3 +32,5 @@ export * from './services/rtl.service';
 export * from './functions/compare-objects';
 export * from './functions/closest-element';
 export * from './functions/keyboard-unification';
+export * from './functions/uuidv4-generator';
+export * from './functions/get-string-from-hashmap';

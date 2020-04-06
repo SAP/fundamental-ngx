@@ -1,0 +1,9 @@
+@import '~fundamental-styles/dist/input';
+input.fd-input {
+    border: none;
+    border-width: 0;
+}
+.fd-popover__body {
+    position: static;
+    width: 100%;
+}

@@ -21,6 +21,7 @@ export type ButtonType =
     | 'emphasized'
     | 'menu';
 export type ButtonOptions = 'light' | 'emphasized' | 'menu';
+let buttonUniqueId: number = 0;
 
 // TODO remove in 0.17.0
 function replaceLightWithTransparent(option: string): string {
@@ -53,8 +54,20 @@ export function getOptionCssClass(options: ButtonOptions | ButtonOptions[]): str
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.aria-labelledby]': 'ariaLabelledBy',
+        '[attr.aria-label]': 'ariaLabel',
+        'role': 'button',
+        '[attr.id]': 'id',
+        'title': 'title'
+    },
 })
 export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
+
+    ariaLabelledBy: string = null;
+
+    ariaLabel: string = null;
+
     /** The property allows user to pass additional css classes
      */
     @Input()
@@ -93,6 +106,11 @@ export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
      * Will be removed in 0.17.0.
      * Use 'fdType' instead.
      */
+
+    /** Id for the button component. If omitted, a unique one is generated. */
+    @Input()
+    id: string = 'fd-switch-' + buttonUniqueId++;
+
     @Input()
     public options(opt: ButtonOptions | ButtonOptions[]) {
         console.warn(`fd-button options property is deprecated and will be removed in 0.17.0.

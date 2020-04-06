@@ -7,33 +7,32 @@ import { ShellbarMenuItem } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.scss']
+    styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-
     items: ShellbarMenuItem[] = [
         {
             name: 'Core Docs',
-            callback: () => { this.routerService.navigate(['core/home']) }
+            callback: () => {
+                this.routerService.navigate(['core/home']);
+            },
         },
         {
             name: 'Platform Docs',
-            callback: () => { this.routerService.navigate(['platform/home']) }
-        }
+            callback: () => {
+                this.routerService.navigate(['platform/home']);
+            },
+        },
     ];
-
 
     @Output()
     btnClicked: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     version: string = environment.version;
 
-    public isOnCore: boolean = false;
+    public library: string;
 
-    constructor (
-        private routerService: Router,
-        @Inject('CURRENT_LIB') private currentLib: Libraries,
-    ) {
-        this.isOnCore = this.currentLib === 'core';
+    constructor(private routerService: Router, @Inject('CURRENT_LIB') private currentLib: Libraries) {
+        this.library = routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
     }
 }

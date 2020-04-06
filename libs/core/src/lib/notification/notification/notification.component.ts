@@ -33,7 +33,7 @@ export type NotificationSize = 's' | 'm';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
-        'role': 'notification',
+        'role': 'alertdialog',
         '[attr.id]': 'id',
     },
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.62...v0.16.0-rc.63) (2020-04-06)
+
+
+### Features
+
+* (platform) Refactor of SearchInput and renaming to SearchField ([#2226](https://github.com/SAP/fundamental-ngx/issues/2226)) ([b94e5db](https://github.com/SAP/fundamental-ngx/commit/b94e5db7f0b82579f28921e91736780a3f94a786))
+
+## [0.16.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.61...v0.16.0-rc.62) (2020-04-05)
+
+## [0.16.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.60...v0.16.0-rc.61) (2020-04-05)
+
+## [0.16.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.59...v0.16.0-rc.60) (2020-04-05)
+
+## [0.16.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.58...v0.16.0-rc.59) (2020-04-05)
+
+## [0.16.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.57...v0.16.0-rc.58) (2020-04-05)
+
+## [0.16.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.56...v0.16.0-rc.57) (2020-04-05)
+
+## [0.16.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.55...v0.16.0-rc.56) (2020-04-05)
+
+## [0.16.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.54...v0.16.0-rc.55) (2020-04-05)
+
+## [0.16.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.53...v0.16.0-rc.54) (2020-04-05)
+
+## [0.16.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.52...v0.16.0-rc.53) (2020-04-03)
+
+## [0.16.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.51...v0.16.0-rc.52) (2020-04-03)
+
+## [0.16.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.50...v0.16.0-rc.51) (2020-04-03)
+
+
+### Bug Fixes
+
+*  broken toolbar replaced by Shellbar ([#2254](https://github.com/SAP/fundamental-ngx/issues/2254)) ([54d061e](https://github.com/SAP/fundamental-ngx/commit/54d061e1158fae4c5a8cacb4d9bc0875f504b62e))
+
+## [0.16.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.49...v0.16.0-rc.50) (2020-04-03)
+
+
+### Bug Fixes
+
+* bug where disabled options could be selected ([#2243](https://github.com/SAP/fundamental-ngx/issues/2243)) ([9f6b4d3](https://github.com/SAP/fundamental-ngx/commit/9f6b4d3cbaf232725f1d54f5eb5040fe4ba5fdb2))
+
+## [0.16.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.48...v0.16.0-rc.49) (2020-04-02)
+
+
+### Bug Fixes
+
+* add notification to storybook ([#2204](https://github.com/SAP/fundamental-ngx/issues/2204)) ([1334f5b](https://github.com/SAP/fundamental-ngx/commit/1334f5ba435c6743e3a4b7409a444661c2176448))
+
 ## [0.16.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.47...v0.16.0-rc.48) (2020-04-02)
 
 

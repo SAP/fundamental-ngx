@@ -49,6 +49,12 @@ import { PlatformMenuXPositionExampleComponent } from './component-docs/platform
 import { PlatformMenuCascadeExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-cascade-example.component';
 import { PlatformMenuScrollingExampleComponent } from './component-docs/platform-menu/platform-menu-examples/platform-menu-scrolling-example.component';
 
+import { PlatformSearchFieldDocsComponent } from './component-docs/platform-search-field/platform-search-field-docs.component';
+import { PlatformSearchFieldHeaderComponent } from './component-docs/platform-search-field/platform-search-field-header/platform-search-field-header.component';
+import { PlatformSearchFieldBasicExampleComponent } from './component-docs/platform-search-field/platform-search-field-examples/platform-search-field-basic-example.component';
+import { PlatformSearchFieldCategoriesExampleComponent } from './component-docs/platform-search-field/platform-search-field-examples/platform-search-field-categories-example.component';
+import { PlatformSearchFieldDataSourceExampleComponent } from './component-docs/platform-search-field/platform-search-field-examples/platform-search-field-data-source-example.component';
+
 import { PlatformSelectDocsComponent } from './component-docs/platform-select/platform-select-docs.component';
 import { PlatformSelectHeaderComponent } from './component-docs/platform-select/platform-select-header/platform-select-header.component';
 import { PlatformSelectTypesDefaultExampleComponent } from './component-docs/platform-select/platform-select-examples/platform-select-types-default-example.component';
@@ -98,6 +104,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PlatformMenuCascadeExampleComponent,
         PlatformMenuScrollingExampleComponent,
         NewComponentComponent,
+        PlatformSearchFieldDocsComponent,
+        PlatformSearchFieldHeaderComponent,
+        PlatformSearchFieldBasicExampleComponent,
+        PlatformSearchFieldCategoriesExampleComponent,
+        PlatformSearchFieldDataSourceExampleComponent,
         PlatformSelectDocsComponent,
         PlatformSelectHeaderComponent,
         PlatformSelectTypesDefaultExampleComponent,

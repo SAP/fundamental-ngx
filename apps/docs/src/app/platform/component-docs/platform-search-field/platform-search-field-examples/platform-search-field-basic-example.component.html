@@ -1,0 +1,23 @@
+<h4>Cozy</h4>
+<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" (searchSubmit)="onSearchSubmit($event)"
+    (inputChange)="onInputChange($event)"></fdp-search-field>
+<div class="result-block">
+    <div class="result-field">
+        <label>Input Change Text: </label><span>{{inputText}}</span>
+    </div>
+    <div class="result-field">
+        <label>Search Submit Term: </label><span>{{searchTerm}}</span>
+    </div>
+</div>
+<h4>Compact</h4>
+<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" [size]="'compact'"
+    (searchSubmit)="onCompactSearchSubmit($event)" (inputChange)="onCompactInputChange($event)"></fdp-search-field>
+
+<div class="result-block">
+    <div class="result-field">
+        <label>Input Change Text: </label><span>{{compactInputText}}</span>
+    </div>
+    <div class="result-field">
+        <label>Search Submit Term: </label><span>{{compactSearchTerm}}</span>
+    </div>
+</div>
