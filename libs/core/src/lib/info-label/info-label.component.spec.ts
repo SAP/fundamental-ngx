@@ -18,9 +18,9 @@ describe('InfoLabelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoLabelComponent, TestInfoLabelComponent ]
+      declarations: [InfoLabelComponent, TestInfoLabelComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -36,7 +36,7 @@ describe('InfoLabelComponent', () => {
 
   it('Should Add label Type', () => {
     component.ngOnInit();
-    component.labelType = 'numeric';
+    component.type = 'numeric';
     component.ngOnChanges();
     fixture.detectChanges();
     expect(component.elementRef().nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
@@ -44,7 +44,7 @@ describe('InfoLabelComponent', () => {
 
   it('Should Add  label Type only icon', () => {
     component.ngOnInit();
-    component.labelType = 'only-icon';
+    component.type = 'only-icon';
     component.ngOnChanges();
     fixture.detectChanges();
     expect(component.elementRef().nativeElement.classList.contains('fd-info-label--only-icon')).toBe(true);
@@ -52,7 +52,7 @@ describe('InfoLabelComponent', () => {
 
   it('Should Add  label Type icon', () => {
     component.ngOnInit();
-    component.labelType = 'icon';
+    component.type = 'icon';
     component.ngOnChanges();
     fixture.detectChanges();
     expect(component.elementRef().nativeElement.classList.contains('fd-info-label--icon')).toBe(true);

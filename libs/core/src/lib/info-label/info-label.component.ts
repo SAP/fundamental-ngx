@@ -15,18 +15,18 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** user's custom classes */
     @Input()
     class: string = '';
-  
+
     /** 
      * The LabelType represented by the info label .
      * Can be one of the following: 'numeric' | 'only-icon' | 'icon'
      * For default info label omit this property
      */
     @Input()
-    labelType: LabelType;
+    type: LabelType;
 
     /** glyph define the icon of info label */
     @Input()
-    glyph: string; 
+    glyph: string;
 
     /**define the colour of the info label starting form 1 to 10 */
     @Input()
@@ -36,7 +36,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     buildComponentCssClass(): string {
         return [
             'fd-info-label',
-            this.labelType ? `fd-info-label--${this.labelType}` : '',
+            this.type ? `fd-info-label--${this.type}` : '',
             this.glyph ? `sap-icon--${this.glyph}` : '',
             this.color ? `fd-info-label--accent-color-${this.color}` : '',
             this.class
@@ -47,7 +47,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     constructor(private _elementRef: ElementRef) {
     }
 
-    ngOnInit(): void  {
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
