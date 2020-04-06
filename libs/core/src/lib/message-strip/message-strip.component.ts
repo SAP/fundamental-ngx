@@ -23,7 +23,7 @@ let messageStripUniqueId: number = 0;
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
 
-    /** user's custom classes */
+    /** User's custom classes */
     @Input()
     class: string = '';
 
@@ -68,13 +68,9 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     minWidth: string;
 
-    /** Alternative way of passing in a message to the message-strip. */
-    @Input()
-    message: string;
-
     /** Event fired when the message-strip is dismissed. */
     @Output()
-    onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
+    onDismiss: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) { }
@@ -85,13 +81,13 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
     /**

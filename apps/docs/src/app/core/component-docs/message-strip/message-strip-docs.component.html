@@ -1,4 +1,4 @@
-<fd-docs-section-title [id]="'message-strip-types'" [componentName]="'messageStrip'">
+<fd-docs-section-title [id]="'message-strip-basic'" [componentName]="'messageStrip'">
     Message Strip Types
 </fd-docs-section-title>
 <description>A number of message strip types are available. They offer preset styling for different contextual situations. Can be one of 'warning', 'success', 'information', 'error' or normal (default). </description>
@@ -9,7 +9,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'message-strip-types'" [componentName]="'messageStrip'">
+<fd-docs-section-title [id]="'message-strip-no-icon'" [componentName]="'messageStrip'">
     Message Strips Without Icons
 </fd-docs-section-title>
 <description>The default message strip has no icon. Information, Success, Warning and Error message strips by default are rendered with icons. To remove them set the <code>[noIcon]</code> property to <code>true</code>. </description>
@@ -20,7 +20,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'message-strip-types'" [componentName]="'messageStrip'">
+<fd-docs-section-title [id]="'message-strip-width'" [componentName]="'messageStrip'">
     Message Strips With Customizable Width
 </fd-docs-section-title>
 <description>The width of the message strip can be customized by the <code>[width]</code> and <code>[minWidth]</code> properties. </description>
@@ -35,8 +35,8 @@
         [dismissible]="data.properties.dismissible"
         [noIcon]="data.properties.noIcon"
         [width]="data.properties.width"
-        [message]="data.properties.message"
     >
+        {{data.properties.message}}
     </fd-message-strip>
 </playground>
 

@@ -50,4 +50,12 @@ describe('MessageStripComponent', () => {
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--success')).toBe(true);
     });
+
+    it('should dismiss', () => {
+        component.dismiss();
+        component.ngOnChanges();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
+    });
 });
