@@ -73,7 +73,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
         this.calendarService.onFocusIdChange
             .pipe(takeUntil(this.onDestroy$))
-            .subscribe(index => this.focusElement('#' + this.id + '-fd-month-' + index))
+            .subscribe(index => this.focusElement('#' + this.getId(index)))
         ;
 
         this.calendarService.onKeySelect
@@ -126,8 +126,13 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method returning id of month cell */
-    getId(rowIndex: number, colIndex: number): number {
+    getIndex(rowIndex: number, colIndex: number): number {
         return this.calendarService.getId(rowIndex, colIndex);
+    }
+
+    /** Get id of calendar's month item */
+    public getId(index: number): string {
+        return this.id + '-fd-month-' + index;
     }
 
     /** Method that checks if this is current month */
@@ -147,7 +152,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** Method that returns the full name of month for grid element. */
     getFullMonthName(rowIndex: number, colIndex: number): string {
-        const index = this.getId(rowIndex, colIndex);
+        const index = this.getIndex(rowIndex, colIndex);
         return this._fullMonthNames[index];
     }
 

@@ -32,7 +32,7 @@
             [attr.aria-disabled]="cell.disabled || cell.blocked"
             [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
             (click)="selectDate(cell, $event)"
-            (keydown)="onKeydownDayHandler($event, cell, getId(rowIndex, cellIndex))"
+            (keydown)="onKeydownDayHandler($event, cell, getIndex(rowIndex, cellIndex))"
         >
             <span class="fd-calendar__text" role="button" [attr.aria-label]="cell.ariaLabel">{{cell.date.day}}</span>
         </td>

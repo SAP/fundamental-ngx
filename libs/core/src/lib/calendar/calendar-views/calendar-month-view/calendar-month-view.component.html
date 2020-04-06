@@ -6,13 +6,13 @@
             <td class="fd-calendar__item"
                 *ngFor="let month of colMonths; let colIndex = index"
                 [ngClass]="{
-                    'fd-calendar__item--current': isCurrent(getId(rowIndex, colIndex)),
-                    'is-selected': isSelected(getId(rowIndex, colIndex))
+                    'fd-calendar__item--current': isCurrent(getIndex(rowIndex, colIndex)),
+                    'is-selected': isSelected(getIndex(rowIndex, colIndex))
                 }"
-                [attr.tabIndex]="isSelected(getId(rowIndex, colIndex)) ? 0 : -1"
-                [attr.id]="id + '-fd-month-' + getId(rowIndex, colIndex)"
-                (keydown)="onKeydownMonthHandler($event, getId(rowIndex, colIndex))"
-                (click)="selectMonth(getId(rowIndex, colIndex), $event)">
+                [attr.tabIndex]="isSelected(getIndex(rowIndex, colIndex)) ? 0 : -1"
+                [attr.id]="getId(getIndex(rowIndex, colIndex))"
+                (keydown)="onKeydownMonthHandler($event, getIndex(rowIndex, colIndex))"
+                (click)="selectMonth(getIndex(rowIndex, colIndex), $event)">
                 <span role="button" class="fd-calendar__text" [attr.aria-label]="getFullMonthName(rowIndex, colIndex)">
                     {{ month }}
                 </span>

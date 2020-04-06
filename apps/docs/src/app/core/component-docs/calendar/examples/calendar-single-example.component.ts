@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FdDate, SpecialDayRule } from '@fundamental-ngx/core';
-import { CalendarYearGrid } from '../../../../../../../../libs/core/src/lib/calendar/models/calendar-year-grid';
+import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-single-example',

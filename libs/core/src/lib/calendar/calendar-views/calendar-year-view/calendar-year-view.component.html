@@ -9,9 +9,9 @@
                     'is-selected': (year == yearSelected),
                     'fd-calendar__item--current': (year == currentYear)
                 }"
-                [attr.id]="id + '-fd-year-' + getId(rowIndex, colIndex)"
+                [attr.id]="getId(getIndex(rowIndex, colIndex))"
                 [attr.tabindex]="year === activeYear ? 0 : -1"
-                (keydown)="onKeydownYearHandler($event, getId(rowIndex, colIndex))"
+                (keydown)="onKeydownYearHandler($event, getIndex(rowIndex, colIndex))"
                 (click)="selectYear(year, $event)">
                 <span role="button" class="fd-calendar__text">
                     {{ yearViewGrid.yearMapping(year) }}

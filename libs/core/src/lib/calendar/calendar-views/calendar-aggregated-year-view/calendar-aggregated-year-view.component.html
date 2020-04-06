@@ -9,9 +9,9 @@
                     'is-selected': yearsSelected && (year.startYear === yearsSelected.startYear),
                     'fd-calendar__item--current': isBetween(year, currentYear)
                 }"
-                [attr.id]="id + '-fd-year-' + getId(rowIndex, colIndex)"
+                [attr.id]="getId(getIndex(rowIndex, colIndex))"
                 [attr.tabindex]="year === activeYear ? 0 : -1"
-                (keydown)="onKeydownYearHandler($event, getId(rowIndex, colIndex))"
+                (keydown)="onKeydownYearHandler($event, getIndex(rowIndex, colIndex))"
                 (click)="selectYear(year, $event)">
                 <span role="button" class="fd-calendar__text">
                     {{ aggregatedYearsViewGrid.yearMapping(year.startYear) }}

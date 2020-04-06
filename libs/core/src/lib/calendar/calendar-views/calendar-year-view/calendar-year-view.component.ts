@@ -87,7 +87,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
         this.calendarService.onFocusIdChange
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.newFocusedYearId = this.getId(index);
                 this.focusYearElement();
             })
         ;
@@ -101,7 +101,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
         this.calendarService.onListStartApproach
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((index) => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.newFocusedYearId = this.getId(index);
                 this.loadPreviousYearList();
             })
         ;
@@ -109,7 +109,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
         this.calendarService.onListEndApproach
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((index) => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.newFocusedYearId = this.getId(index);
                 this.loadNextYearList();
             })
         ;
@@ -181,8 +181,13 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
     /**
      * Standardized method to calculate grid [x][y] to index number of flatten list
      */
-    getId(rowIndex: number, colIndex: number): number {
+    getIndex(rowIndex: number, colIndex: number): number {
         return this.calendarService.getId(rowIndex, colIndex);
+    }
+
+    /** Get id of calendar's year item */
+    public getId(index: number): string {
+        return this.id + '-fd-year-' + index;
     }
 
     /** @hidden */
@@ -207,6 +212,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
         return [].concat.apply([], this.calendarYearListGrid);
     }
 
+    /** Amount of years displayed in year view */
     private getAmountOfYearsShownAtOnce(): number {
         return this.yearViewGrid.rows * this.yearViewGrid.cols
     }

@@ -387,7 +387,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /**
      * Standardized method to calculate grid [x][y] to index number of flatten list
      */
-    getId(rowIndex: number, colIndex: number): number {
+    getIndex(rowIndex: number, colIndex: number): number {
         return this.calendarService.getId(rowIndex, colIndex);
     }
 
@@ -463,7 +463,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         return;
     }
 
-    /** TODO */
+    /** Get id of calendar's day item */
     private _getId(index: number): string {
         return this.id + '-fd-day-' + index;
     }

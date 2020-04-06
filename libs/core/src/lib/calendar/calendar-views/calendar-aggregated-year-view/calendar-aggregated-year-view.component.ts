@@ -43,11 +43,15 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     @Input()
     yearSelected: number;
 
-    // TODO
+    /**
+     * Object to customize aggregated year grid
+     */
     @Input()
     aggregatedYearsViewGrid: CalendarYearGrid;
 
-    // TODO
+    /**
+     * Object to customize year grid
+     */
     @Input()
     yearViewGrid: CalendarYearGrid;
 
@@ -80,7 +84,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         this.calendarService.onFocusIdChange
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(index => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.newFocusedYearId = this.getId(index);
                 this.focusYearElement();
             })
         ;
@@ -94,7 +98,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         this.calendarService.onListStartApproach
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((index) => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.newFocusedYearId = this.getId(index);
                 this.loadPreviousYearsList();
             })
         ;
@@ -102,7 +106,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         this.calendarService.onListEndApproach
             .pipe(takeUntil(this.onDestroy$))
             .subscribe((index) => {
-                this.newFocusedYearId = this.id + '-fd-year-' + index;
+                this.newFocusedYearId = this.getId(index);
                 this.loadNextYearsList();
             })
         ;
@@ -176,9 +180,14 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** TODO */
-    getId(rowIndex: number, colIndex: number): number {
+    /** Method returning index of aggregated year index cell */
+    getIndex(rowIndex: number, colIndex: number): number {
         return this.calendarService.getId(rowIndex, colIndex);
+    }
+
+    /** Get id of calendar's aggregated year item */
+    public getId(index: number): string {
+        return this.id + '-fd-aggregated-year-' + index;
     }
 
     private _constructYearsGrid(): void {
@@ -186,7 +195,10 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         const calendarYearList: AggregatedYear[] = [];
         this.calendarYearListGrid = [];
         for (let index = 0; index < displayedYearsAmount; ++index) {
-            // TODO
+            /**
+             * Generates object with certain period of years,
+             * which depends on amount of years displayed in year view
+             */
             calendarYearList.push({
                 startYear: this.firstYearInList + (this._yearsInOnePeriod() * index),
                 endYear: this.firstYearInList + (this._yearsInOnePeriod() * (index + 1)) - 1
@@ -202,7 +214,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         this.focusYearElement();
     }
 
-    // TODO
+    /** Amount of years displayed in year view */
     private _yearsInOnePeriod(): number {
         if (this.yearViewGrid) {
             return this.yearViewGrid.cols * this.yearViewGrid.rows;
@@ -211,7 +223,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         }
     }
 
-    // TODO
+    /** Amount of years displayed in aggregated year view */
     private _periodsAmount(): number {
         return this.aggregatedYearsViewGrid.cols * this.aggregatedYearsViewGrid.rows
     }
@@ -221,7 +233,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         return [].concat.apply([], this.calendarYearListGrid);
     }
 
-    // TODO
+    /** Check if specified year is between start year and end year) */
     public isBetween(aggregatedYear: AggregatedYear, yearToCheck: number): boolean {
         return aggregatedYear.endYear >= yearToCheck && aggregatedYear.startYear <= yearToCheck;
     }

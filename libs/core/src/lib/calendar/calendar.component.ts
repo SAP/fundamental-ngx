@@ -22,7 +22,9 @@ import { SpecialDayRule } from './models/special-day-rule';
 import { CalendarService } from './calendar.service';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
-import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import {
+    CalendarAggregatedYearViewComponent
+} from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 
 let calendarUniqueId: number = 0;
 
@@ -67,7 +69,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
         '(blur)': 'onTouched()',
         '[attr.id]': 'id'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
 
@@ -153,7 +155,8 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     specialDaysRules: SpecialDayRule[] = [];
 
     /**
-     * Object to customize year grid
+     * Object to customize year grid,
+     * Row, Columns and method to display year can be modified
      */
     @Input()
     yearGrid: CalendarYearGrid = {
@@ -163,7 +166,8 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     };
 
     /**
-     * Object to customize aggregated year grid
+     * Object to customize aggregated year grid,
+     * Row, Columns and method to display year can be modified
      */
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
@@ -270,7 +274,8 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     constructor(
         public calendarI18n: CalendarI18n,
         private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
