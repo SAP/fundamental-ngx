@@ -14,7 +14,9 @@
 </fd-docs-section-title>
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
-    accepts an array and a search term, and then returns the desired filtered array.
+    accepts an array and a search term, handle filtering logic within this function, and then return the desired filtered array.
+    In this example, we are only populating the list with results where the search term matches the beginning of the result,
+    as opposed to the usual behavior where the list will be populated if the search term appears anywhere in the string.
 </description>
 <component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
@@ -27,8 +29,8 @@
     Custom Search Function
 </fd-docs-section-title>
 <description>
-    Custom search function can be provided by <code>[searchFunction]</code> to combobox. It will be called on mouse
-    click on combobox's primary button, or on enter key press, while focused on combobox input.
+    A custom search function can be provided with the <code>[searchFn]</code> input. This function will be called when the primary
+    combobox button is clicked, or when the user presses the 'enter' key while focused in the combobox input.
 </description>
 <component-example>
     <fd-combobox-search-function-example></fd-combobox-search-function-example>
@@ -41,8 +43,8 @@
     Display Object Property
 </fd-docs-section-title>
 <description>
-    Passing object arrays to the Combobox is supported through the <code>displayFn</code> input function. To access the
-    <code>this</code> keyword inside the passed function, use an arrow function.
+    The <code>displayFn</code> input can be used to modify how the results are presented within the combobox. In this
+    example we are making the results all upper-cased.
 </description>
 <component-example>
     <fd-combobox-displaywith-example></fd-combobox-displaywith-example>
@@ -91,7 +93,8 @@
 </fd-docs-section-title>
 <description>
     The way the items are rendered in the popover list can be customized through providing an <code>itemTemplate</code>
-    to the component.
+    to the component. The <code>itemTemlpate</code> should align with the contents of an <a [routerLink]="'/core/list'">fd-list-item</a>
+    directive.
 </description>
 <component-example>
     <fd-combobox-template-example></fd-combobox-template-example>
@@ -118,7 +121,8 @@
     Combobox with Two Columns
 </fd-docs-section-title>
 <description>
-    The <code>[itemTemplate]</code> input can be used to create a combobox with two columns of information.
+    The <code>[itemTemplate]</code> input can be used to create a combobox with two columns of information. Note that a
+    <code>displayFn</code> is required for this example so the combobox knows how to display the selected item.
 </description>
 <component-example>
     <fd-combobox-columns-example></fd-combobox-columns-example>

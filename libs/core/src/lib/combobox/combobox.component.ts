@@ -131,7 +131,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
-    searchFunction: Function;
+    searchFn: Function;
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
@@ -261,8 +261,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (event.key === 'Enter' && this.searchFunction) {
-            this.searchFunction();
+        if (event.key === 'Enter' && this.searchFn) {
+            this.searchFn();
         } else if (event.key === 'ArrowDown') {
             if (event.altKey) {
                 this.isOpenChangeHandle(true);
@@ -347,8 +347,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     onPrimaryButtonClick(): void {
-        if (this.searchFunction) {
-            this.searchFunction();
+        if (this.searchFn) {
+            this.searchFn();
         }
     }
 
@@ -381,13 +381,21 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         return str;
     }
 
-    private _defaultFilter(contentArray: any[], searchTerm: string): any[] {
-        const searchLower = searchTerm.toLocaleLowerCase();
-        return contentArray.filter(item => {
-            if (item) {
-                return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
-            }
-        });
+    private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
+        if (typeof searchTerm === 'string') {
+            const searchLower = searchTerm.toLocaleLowerCase();
+            return contentArray.filter(item => {
+                if (item) {
+                    return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                }
+            });
+        } else if (typeof searchTerm === 'object') {
+            return contentArray.filter(item => {
+                if (item === searchTerm) {
+                    return item;
+                }
+            })
+        }
     }
 
     private _handleClickActions(term): void {

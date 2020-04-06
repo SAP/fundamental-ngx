@@ -32,7 +32,7 @@ describe('ComboboxComponent', () => {
             { value: 'value', displayedValue: 'displayedValue' },
             { value: 'value2', displayedValue: 'displayedValue2' }
         ];
-        component.searchFunction = () => {
+        component.searchFn = () => {
         };
         fixture.detectChanges();
 
@@ -49,14 +49,14 @@ describe('ComboboxComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should call searchFunction onInputKeydownHandler', () => {
-        spyOn(component, 'searchFunction');
+    it('should call searchFn onInputKeydownHandler', () => {
+        spyOn(component, 'searchFn');
         const event = {
             key: 'Enter',
             preventDefault: () => {}
         };
         component.onInputKeydownHandler(<any>event);
-        expect(component.searchFunction).toHaveBeenCalled();
+        expect(component.searchFn).toHaveBeenCalled();
         event.key = 'ArrowDown';
         spyOn(event, 'preventDefault');
         spyOn(component.listItems.first, 'focus');

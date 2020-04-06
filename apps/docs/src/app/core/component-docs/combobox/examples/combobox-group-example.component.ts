@@ -25,11 +25,7 @@ export class ComboboxGroupExampleComponent {
         }
     }
 
-    groupFunc(items: any): {} {
-        console.log({
-            Fruits: items.filter(item => item.type === 'Fruits'),
-            Vegetables: items.filter(item => item.type === 'Vegetables')
-        });
+    groupFunc(items: {name: string, type: string}[]): {} {
         return {
             Fruits: items.filter(item => item.type === 'Fruits'),
             Vegetables: items.filter(item => item.type === 'Vegetables')

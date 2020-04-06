@@ -2,7 +2,8 @@
              [dropdownValues]="dropdownValues"
              [itemTemplate]="columnTemplate"
              [placeholder]="'Type some text...'"
-             [maxHeight]="'250px'">
+             [maxHeight]="'250px'"
+             [displayFn]="displayFunc">
 </fd-combobox>
 
 <ng-template #columnTemplate let-item>
