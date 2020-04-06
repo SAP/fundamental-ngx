@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.62...v0.16.0-rc.63) (2020-04-06)
+
+
+### Features
+
+* (platform) Refactor of SearchInput and renaming to SearchField ([#2226](https://github.com/SAP/fundamental-ngx/issues/2226)) ([b94e5db](https://github.com/SAP/fundamental-ngx/commit/b94e5db7f0b82579f28921e91736780a3f94a786))
+
 ## [0.16.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.61...v0.16.0-rc.62) (2020-04-05)
 
 ## [0.16.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.60...v0.16.0-rc.61) (2020-04-05)
