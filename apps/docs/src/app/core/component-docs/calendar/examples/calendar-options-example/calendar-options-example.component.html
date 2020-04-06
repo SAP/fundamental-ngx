@@ -1,0 +1,16 @@
+<fd-calendar
+    [showWeekNumbers]="showWeekCount"
+    [compact]="compact"
+    [markWeekends]="markWeekends"
+    [specialDaysRules]="showSpecialDays ?  specialDays : []"
+></fd-calendar>
+<div>
+    <fd-checkbox [(ngModel)]="showWeekCount">Show Week Count</fd-checkbox>
+    <fd-checkbox [(ngModel)]="compact">Compact</fd-checkbox>
+    <fd-checkbox [(ngModel)]="markWeekends">Mark Weekends</fd-checkbox>
+    <fd-checkbox [(ngModel)]="showSpecialDays">Add Special Days (1-20) {{ ' '}}
+        <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html">
+            Check Examples on Calendar special days section
+        </a>
+    </fd-checkbox>
+</div>

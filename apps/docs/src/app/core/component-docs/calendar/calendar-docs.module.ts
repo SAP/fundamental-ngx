@@ -14,6 +14,8 @@ import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.c
 import { CalendarI18nMomentExampleComponent } from './examples/calendar--i18n-moment-example.component';
 import { SegmentedButtonModule, CalendarModule, FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example.component';
+import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
+import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
 
 const routes: Routes = [
     {
@@ -45,7 +47,9 @@ const routes: Routes = [
         CalendarI18nExampleComponent,
         CalendarI18nMomentExampleComponent,
         CalendarProgrammaticallyChangeExampleComponent,
-        CalendarMobileExampleComponent
+        CalendarMobileExampleComponent,
+        CalendarOptionsExampleComponent,
+        CalendarGridExampleComponent
     ],
 })
 export class CalendarDocsModule {
