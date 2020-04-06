@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './platform-combobox-header.component.html',
     styleUrls: ['./platform-combobox-header.component.scss']
 })
-export class PlatformComboboxHeaderComponent implements OnInit {
+export class PlatformComboboxHeaderComponent {
     constructor() {}
-
-    ngOnInit() {}
 }

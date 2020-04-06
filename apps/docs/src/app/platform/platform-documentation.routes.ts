@@ -76,7 +76,7 @@ export const ROUTES: Routes = [
                 ]
             },
             {
-                path: 'combobox',
+                path: 'combo-box',
                 component: PlatformComboboxHeaderComponent,
                 children: [
                     { path: '', component: PlatformComboboxDocsComponent },

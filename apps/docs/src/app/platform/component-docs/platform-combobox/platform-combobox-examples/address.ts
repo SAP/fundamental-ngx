@@ -41,7 +41,7 @@ export class Address implements Entity {
     return 'Address';
   }
 
-  toString() {
+  toString(): string {
     return `${this.uniqueName} - ${this.name}`;
   }
 }

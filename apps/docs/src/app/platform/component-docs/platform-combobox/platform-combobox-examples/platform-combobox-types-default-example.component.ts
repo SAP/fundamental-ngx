@@ -14,21 +14,21 @@ export class PlatformComboboxTypesDefaultExampleComponent implements OnInit {
 
     addressDataSource: ComboBoxDataSource<Address>;
 
+    constructor() {
+    }
+
     ngOnInit() {
         this.initDataSources();
     }
 
-    constructor() {
-    }
-
-  private initDataSources() {
-    this.addressDataSource = new ArrayComboBoxDataSource<Address>(
-      addressDB.map((i: AddressCSV) => {
+    private initDataSources(): void {
+        this.addressDataSource = new ArrayComboBoxDataSource<Address>(
+        addressDB.map((i: AddressCSV) => {
 
         return new Address(
           i.UniqueName, i.Name, i.Lines, i.City, i.State, i.PostalCode + '',
           i.Phone, i.Fax, i.Email, i.URL, i.Country);
-      }));
-  }
+        }));
+    }
 
 }

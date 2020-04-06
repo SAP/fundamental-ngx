@@ -24,7 +24,7 @@ export class PlatformDocumentationComponent {
                   { url: 'platform/menu', name: 'Menu' },
                   { url: 'platform/select', name: 'Select'},
                   { url: 'platform/link', name: 'Link' },
-                  { url: 'platform/combobox', name: 'ComboBox' }
+                  { url: 'platform/combo-box', name: 'ComboBox' }
                  ];
 
     layouts = [];

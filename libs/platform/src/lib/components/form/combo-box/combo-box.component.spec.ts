@@ -20,14 +20,13 @@ class TestWrapperComboBoxComponent {
 
     wrapperValue: string;
 
-CELL_DATA: CellDataCsv[] = [
-    { column1: 'Row 1', column2: 'Row 1', column3: 'Row 1', date: '09-07-18', type: 'search' },
-    { column1: 'Row 2', column2: 'Row 2', column3: 'Row 2', date: '09-08-18', type: 'cart' },
-    { column1: 'Row 3', column2: 'Row 3', column3: 'Row 3', date: '02-14-18', type: 'calendar' },
-    { column1: 'Row 4', column2: 'Row 4', column3: 'Row 4', date: '12-30-17', type: 'search' },
-    { column1: 'Row 5', column2: 'Row 5', column3: 'Row 5', date: '11-12-18', type: 'search' }
-];
-
+    CELL_DATA: CellDataCsv[] = [
+        { column1: 'Row 1', column2: 'Row 1', column3: 'Row 1', date: '09-07-18', type: 'search' },
+        { column1: 'Row 2', column2: 'Row 2', column3: 'Row 2', date: '09-08-18', type: 'cart' },
+        { column1: 'Row 3', column2: 'Row 3', column3: 'Row 3', date: '02-14-18', type: 'calendar' }, 
+        { column1: 'Row 4', column2: 'Row 4', column3: 'Row 4', date: '12-30-17', type: 'search' }, 
+        { column1: 'Row 5', column2: 'Row 5', column3: 'Row 5', date: '11-12-18', type: 'search' }
+    ];
 }
 
 export interface CellDataCsv {
@@ -46,7 +45,7 @@ export class CellData implements Entity {
         public readonly type: string) {	
     }
 
-    toString() {
+    toString(): string {
         return `${this.column1} - ${this.type}`;
     }
 
@@ -92,7 +91,7 @@ describe('ComboBoxComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create', () => {
+    it('component create', () => {
         expect(component).toBeTruthy();
     });
 

@@ -12,7 +12,7 @@ import * as platformComboboxAddressCSVTypesTsSrc from '!raw-loader!./platform-co
     selector: 'fd-combobox-docs',
     templateUrl: './platform-combobox-docs.component.html'
 })
-export class PlatformComboboxDocsComponent implements OnInit {
+export class PlatformComboboxDocsComponent {
     defaultComboboxType: ExampleFile[] = [
         {
             language: 'html',
@@ -38,6 +38,4 @@ export class PlatformComboboxDocsComponent implements OnInit {
             component: 'AddressCSV'
         }
     ];
-
-    ngOnInit() { }
 }
