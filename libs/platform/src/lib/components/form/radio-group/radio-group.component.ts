@@ -26,16 +26,14 @@ let nextUniqueId = 0;
     templateUrl: './radio-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GroupRadioButtonComponent extends CollectionBaseInput implements AfterViewInit {
+export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit {
     /** value of selected radio button */
     @Input()
     get value(): any {
-        return this._value;
+        return super.getValue();
     }
     set value(newValue: any) {
         super.setValue(newValue);
-        this._value = newValue;
-        this.writeValue(newValue);
     }
 
     /**
@@ -125,6 +123,7 @@ export class GroupRadioButtonComponent extends CollectionBaseInput implements Af
     private _initViewRadioButtons() {
         if (this.viewRadioButtons && this.viewRadioButtons.length > 0) {
             this.viewRadioButtons.forEach((button) => {
+                button.status = this.status;
                 this.selectUnselect(button);
                 this.onChange(this._value);
             });
@@ -164,7 +163,6 @@ export class GroupRadioButtonComponent extends CollectionBaseInput implements Af
                 }
             }
         }
-        this._changeDetector.detectChanges();
     }
 
     /**
@@ -175,9 +173,8 @@ export class GroupRadioButtonComponent extends CollectionBaseInput implements Af
         if (button) {
             button.name = this.name;
             button.size = this.size;
-            button.state = this.status;
+            button.status = this.status;
             button.disabled = button.disabled ? button.disabled : this._disabled;
-            this._changeDetector.detectChanges();
         }
     }
 
@@ -192,7 +189,6 @@ export class GroupRadioButtonComponent extends CollectionBaseInput implements Af
         this._value = button.value;
         this.change.emit(button);
         this.onChange(this._value);
-        this._changeDetector.detectChanges();
     }
 
     /**

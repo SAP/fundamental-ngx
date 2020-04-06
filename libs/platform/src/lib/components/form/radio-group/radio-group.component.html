@@ -9,7 +9,6 @@
                             name: name,
                             value: radio.value,
                             size: size,
-                            state: status || radio.state,
                             disabled: disabled || radio.disabled
                         }
                     "
@@ -28,7 +27,6 @@
             <fdp-radio-button
                 [name]="name"
                 [value]="'None'"
-                [state]="status"
                 [size]="size"
                 [disabled]="disabled"
                 [forceRender]="true"
@@ -43,7 +41,6 @@
             <fdp-radio-button
                 [name]="name"
                 [value]="item.value ? item.value : item"
-                [state]="status"
                 [size]="size"
                 [disabled]="item.disabled ? item.disabled : disabled"
                 [forceRender]="true"

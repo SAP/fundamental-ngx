@@ -3,7 +3,7 @@ import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RadioButtonComponent } from './radio/radio.component';
-import { GroupRadioButtonComponent } from './radio-group.component';
+import { RadioGroupComponent } from './radio-group.component';
 import { FormModule, RadioModule } from '@fundamental-ngx/core';
 
 @Component({
@@ -34,19 +34,19 @@ class TestComponentContent {
         example1: new FormControl({ value: '', disabled: false }),
     });
 
-    @ViewChild(GroupRadioButtonComponent)
-    radioGroup: GroupRadioButtonComponent;
+    @ViewChild(RadioGroupComponent)
+    radioGroup: RadioGroupComponent;
 }
 
-describe('GroupRadioButtonComponent', () => {
+describe('RadioGroupComponent', () => {
     let host: TestComponentContent;
-    let component: GroupRadioButtonComponent;
+    let component: RadioGroupComponent;
     let fixture: ComponentFixture<TestComponentContent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormModule, RadioModule, ReactiveFormsModule],
-            declarations: [TestComponentContent, GroupRadioButtonComponent, RadioButtonComponent],
+            declarations: [TestComponentContent, RadioGroupComponent, RadioButtonComponent],
         }).compileComponents();
     }));
 
@@ -144,8 +144,8 @@ class TestComponentList {
 
     favoriteSeason: string = '';
 
-    @ViewChild(GroupRadioButtonComponent)
-    radioGroup: GroupRadioButtonComponent;
+    @ViewChild(RadioGroupComponent)
+    radioGroup: RadioGroupComponent;
 
     @ViewChildren(RadioButtonComponent)
     radioButtons: RadioButtonComponent;
@@ -153,13 +153,13 @@ class TestComponentList {
 
 describe('GroupRadioButtonComponent', () => {
     let host: TestComponentList;
-    let component: GroupRadioButtonComponent;
+    let component: RadioGroupComponent;
     let fixture: ComponentFixture<TestComponentList>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormModule, RadioModule, FormsModule],
-            declarations: [TestComponentList, GroupRadioButtonComponent, RadioButtonComponent],
+            declarations: [TestComponentList, RadioGroupComponent, RadioButtonComponent],
         }).compileComponents();
     }));
 

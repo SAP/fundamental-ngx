@@ -23,28 +23,25 @@ let uniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonComponent extends BaseInput {
-    /**
-     * Type of Radio buttons. valid | error | warning | default |information
-     * currently supported only error with BaseInput
-     */
-    @Input()
-    get state(): Status | stateType {
-        return this._state;
-    }
-    set state(newState: Status | stateType) {
-        this._state = newState ? newState : 'default';
-        this._cd.markForCheck();
-    }
-
+    /** value for Radio button */
     @Input()
     get value(): any {
-        return this._value;
+        return super.getValue();
     }
     set value(newValue: any) {
-        if (this._value !== newValue) {
+        if (super.getValue() !== newValue) {
             super.setValue(newValue);
-            this._value = newValue;
         }
+    }
+
+    /** set status value */
+    set status(newStatus: Status) {
+        this._status = newStatus;
+        this.state = newStatus;
+        if (newStatus !== 'error' || newStatus !== 'error') {
+            this.state = 'default';
+        }
+        this._cd.markForCheck();
     }
 
     /** @hidden
@@ -65,7 +62,7 @@ export class RadioButtonComponent extends BaseInput {
     @ViewChild('renderer')
     renderer: TemplateRef<any>;
 
-    private _state: Status | stateType = 'default';
+    state: Status | stateType = 'default';
 
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -85,8 +82,8 @@ export class RadioButtonComponent extends BaseInput {
     onClick(event: KeyboardEvent | MouseEvent) {
         event.stopPropagation();
         if (!this.disabled) {
-            if (this._value !== undefined) {
-                this.onChange(this._value);
+            if (super.getValue() !== undefined) {
+                this.onChange(super.getValue());
                 this.click.emit(this);
             }
         }

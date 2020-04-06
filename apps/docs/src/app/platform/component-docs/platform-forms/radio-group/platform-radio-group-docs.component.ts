@@ -12,8 +12,7 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
 
 @Component({
     selector: 'app-radio-group',
-    templateUrl: './platform-radio-group-docs.component.html',
-    styleUrls: ['./platform-radio-group-docs.component.scss']
+    templateUrl: './platform-radio-group-docs.component.html'
 })
 export class PlatformRadioGroupDocsComponent implements OnInit {
     listItemsRadioGroup: ExampleFile[] = [
