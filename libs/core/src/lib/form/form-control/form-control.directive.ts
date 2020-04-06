@@ -1,7 +1,6 @@
-import { Input, ElementRef, Directive } from '@angular/core';
-import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { Input, ElementRef, Directive, OnInit, OnChanges } from '@angular/core';
 import { FormStates } from './form-states';
-
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 /**
  * Directive intended for use on form controls.
@@ -15,7 +14,7 @@ import { FormStates } from './form-states';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-form-control]',
 })
-export class FormControlDirective extends AbstractFdNgxClass {
+export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges {
 
     /**
      *  The state of the form control - applies css classes.
@@ -30,51 +29,58 @@ export class FormControlDirective extends AbstractFdNgxClass {
     @Input()
     compact: boolean = false;
 
-
     @Input()
     type: string;
 
-    /** @hidden */
-    _setProperties(): void {
-        if (this.state) {
-            this._addClassToElement('is-' + this.state);
-        }
+    /** user's custom classes */
+    @Input()
+    class: string;
 
-        switch (this.type) {
-            case 'radio': {
-                this._addControlClass('fd-radio');
-                break;
-            }
-            default: {
-                if (this.getElementTag() === 'input') {
-                    this._addControlClass('fd-input');
-                } else if (this.getElementTag() === 'textarea') {
-                    this._addControlClass('fd-textarea');
-                } else if (this.getElementTag() === 'select') {
-                    this._addControlClass('fd-form-select');
-                }
-                break;
-            }
-        }
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            this.state ? 'is-' + this.state : '',
+            this.type === 'radio' ? 'fd-radio' : '',
+            this._getElementTag() === 'input' ? 'fd-input' : '',
+            this._getElementTag() === 'textarea' ? 'fd-textarea' : '',
+            this._getElementTag() === 'select' ? 'fd-form-select' : '',
+            this.compact && this._getElementTag() === 'input' ? 'fd-input--compact' : '',
+            this.compact && this._getElementTag() === 'textarea' ? 'fd-textarea--compact' : '',
+            this.compact && this._getElementTag() === 'select' ? 'fd-form-select--compact' : '',
+            this.class
+        ].filter(x => x !== '').join(' ');
     }
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) {
-        super(elementRef);
+    constructor(
+        private _elementRef: ElementRef
+    ) {
     }
 
     /** @hidden */
-    private getElementTag(): string {
-        if (this.elementRef && this.elementRef.nativeElement) {
-            return this.elementRef.nativeElement.tagName.toLocaleLowerCase();
-        }
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    private _addControlClass(className: string): void {
-        this._addClassToElement(className);
-        if (this.compact) {
-            this._addClassToElement(className + '--compact');
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
+    }
+
+    /** @hidden */
+    private _getElementTag(): string {
+        if (this.elementRef() && this.elementRef().nativeElement) {
+            return this.elementRef().nativeElement.tagName.toLocaleLowerCase();
         }
     }
 }
+

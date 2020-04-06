@@ -32,20 +32,17 @@ describe('FormControlDirective', () => {
         directive = debugElement.query(By.directive(FormControlDirective));
         directiveInstance = directive.injector.get(FormControlDirective);
 
-        spyOn(directiveInstance, '_setProperties').and.callThrough();
-        spyOn(directiveInstance, '_addClassToElement');
+        spyOn(directiveInstance, 'buildComponentCssClass').and.callThrough();
     });
 
     it('should create', () => {
         expect(directive).toBeTruthy();
         directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
+        expect(directiveInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should add appropriate classes', () => {
-        directiveInstance.state = 'someState';
-        directiveInstance.ngOnInit();
-        expect(directiveInstance._setProperties).toHaveBeenCalled();
-        expect(directiveInstance._addClassToElement).toHaveBeenCalledWith('is-someState');
+        directiveInstance.ngOnChanges();
+        expect(directiveInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 });

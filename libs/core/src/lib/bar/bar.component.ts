@@ -79,4 +79,9 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
 }

@@ -78,8 +78,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.input && this.input.elementRef) {
-            this.input.elementRef.nativeElement.addEventListener('keydown', (event) => {
+        if (this.input && this.input.elementRef()) {
+            this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
                 this.handleKeyDown(event, this.tokenList.length);
             });
         }
@@ -120,9 +120,9 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             newIndex = fromIndex + 1;
         }
         if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
-            this.input.elementRef.nativeElement.focus();
+            this.input.elementRef().nativeElement.focus();
         } else if (newIndex > this.tokenList.length - this.moreTokensRight.length &&
-            document.activeElement === this.input.elementRef.nativeElement) {
+            document.activeElement === this.input.elementRef().nativeElement) {
             this.focusTokenElement(event, newIndex - this.moreTokensRight.length);
         } else if (newIndex || newIndex === 0) {
             this.focusTokenElement(event, newIndex);
@@ -278,8 +278,8 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
         });
         // add input width
-        if (this.input && this.input.elementRef) {
-            totalTokenWidth = totalTokenWidth + this.input.elementRef.nativeElement.getBoundingClientRect().width;
+        if (this.input && this.input.elementRef()) {
+            totalTokenWidth = totalTokenWidth + this.input.elementRef().nativeElement.getBoundingClientRect().width;
         }
         // add the width of the "____ more" element
         if (this.moreTokensLeft.length > 0 && this.moreElement && this.moreElement.nativeElement) {
