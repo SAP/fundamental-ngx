@@ -15,7 +15,7 @@ class TestMessageStripComponent {
     messageStripComponent: MessageStripComponent;
 }
 
-fdescribe('MessageStripComponent', () => {
+describe('MessageStripComponent', () => {
     let component: MessageStripComponent;
     let fixture: ComponentFixture<TestMessageStripComponent>;
 
@@ -51,7 +51,7 @@ fdescribe('MessageStripComponent', () => {
         expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--success')).toBe(true);
     });
 
-    fit('should dismiss', () => {
+    it('should dismiss', () => {
         component.dismiss();
         expect(component.elementRef().nativeElement.classList.contains('fd-has-display-block')).toBe(false);
         expect(component.elementRef().nativeElement.classList.contains('fd-has-display-none')).toBe(true);
