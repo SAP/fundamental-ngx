@@ -100,20 +100,24 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     @HostBinding('class.fd-calendar--compact')
     public compact: boolean = false;
 
-    // TODO
+    /**
+     * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
+     */
     @Input()
     markWeekends: boolean = true;
 
-    // TODO
+    /**
+     * Whether user wants to show week numbers next to days
+     */
     @Input()
     showWeekNumbers: boolean = true;
 
-    // TODO
+    /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
     @Input()
     @HostBinding('class.fd-calendar--mobile-landscape')
     mobileLandscape: boolean = false;
 
-    // TODO
+    /** Whether calendar is used inside mobile in portrait mode */
     @Input()
     @HostBinding('class.fd-calendar--mobile-portrait')
     mobilePortrait: boolean = false;
@@ -139,13 +143,17 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     id = 'fd-calendar-' + calendarUniqueId++;
 
     /**
-     * TODO
+     * Special days mark, it can be used by passing array of object with
+     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
+     * Rule accepts method with FdDate object as a parameter. ex:
+     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
     specialDaysRules: SpecialDayRule[] = [];
 
     /**
-     * TODO
+     * Object to customize year grid
      */
     @Input()
     yearGrid: CalendarYearGrid = {
@@ -155,14 +163,14 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     };
 
     /**
-     * TODO
+     * Object to customize aggregated year grid
      */
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
         rows: 6,
         cols: 2,
         yearMapping: (num: number) => num.toString()
-    }
+    };
 
     /** Event thrown every time active view is changed */
     @Output()
@@ -184,7 +192,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     @Output()
     public readonly closeCalendar: EventEmitter<void> = new EventEmitter<void>();
 
-    /** TODO */
+    /** Event thrown, when close button is clicked */
     @Output()
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 

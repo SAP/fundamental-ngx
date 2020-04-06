@@ -135,5 +135,38 @@ describe('CalendarDayViewComponent', () => {
         component.weeks = [48, 49, 50, 51, 52, 1];
     });
 
-    it('should focus element on ')
+    it('should generate proper days for february 2020', () => {
+        component.currentlyDisplayed.year = 2020;
+        component.currentlyDisplayed.month = 2;
+        component.startingDayOfWeek = 2;
+        component.ngOnInit();
+        expect(component.dayViewGrid.map(day => day.map(_day => _day.date.day))).toEqual([
+            [27, 28, 29, 30, 31, 1, 2],
+            [3, 4, 5, 6, 7, 8, 9],
+            [10, 11, 12, 13, 14, 15, 16],
+            [17, 18, 19, 20, 21, 22, 23],
+            [24, 25, 26, 27, 28, 29, 1],
+            [2, 3, 4, 5, 6, 7, 8],
+        ])
+    });
+
+    it('should get active cell for selected', () => {
+        component.currentlyDisplayed.year = 2015;
+        component.currentlyDisplayed.month = 6;
+        component.ngOnInit();
+        const day: CalendarDay = component.calendarDayList[15];
+        component.selectDate(day);
+        const activeCell: CalendarDay = (<any>component).getActiveCell(component.calendarDayList);
+        expect(CalendarService.datesEqual(activeCell.date, day.date)).toBe(true);
+    });
+
+    it('should get active cell for today', () => {
+        component.currentlyDisplayed.year = 2015;
+        component.currentlyDisplayed.month = 6;
+        component.ngOnInit();
+        const day: CalendarDay = component.calendarDayList[15];
+        day.today = true;
+        const activeCell: CalendarDay = (<any>component).getActiveCell(component.calendarDayList);
+        expect(CalendarService.datesEqual(activeCell.date, day.date)).toBe(true);
+    });
 });

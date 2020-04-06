@@ -1,10 +1,12 @@
 export interface CalendarYearGrid {
-    // TODO
+    /** Number of rows in year grid */
     rows: number,
 
-    // TODO
+    /** Number of columns in year grid */
     cols: number;
 
-    // TODO
+    /**
+     * Year map method, thanks to it the year can be displayed as user desire.
+     */
     yearMapping: (year: number) => string;
 }

@@ -72,7 +72,9 @@ export class CalendarService {
         return this.datesEqual(dateRange1.start, dateRange2.start) && this.datesEqual(dateRange1.end, dateRange2.end);
     }
 
-    /** TODO: */
+    /**
+     * Standardized method to calculate grid [x][y] to index number
+     */
     public getId(row: number, col: number): number {
         return row * this.colAmount + col;
     }

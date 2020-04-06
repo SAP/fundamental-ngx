@@ -27,46 +27,6 @@ describe('CalendarYearViewComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    // it('Should focus on the year below when on ArrowDown', () => {
-    //     const focusSpy = spyOn(component, 'focusElement');
-    //     const event = {
-    //         key: 'ArrowDown', preventDefault: () => {}
-    //     };
-    //     component.id = 'fd-calendar-0';
-    //     component.onKeydownYearHandler(event, 6);
-    //     expect(focusSpy).toHaveBeenCalledWith('fd-calendar-0-fd-year-10');
-    // });
-    //
-    // it('Should focus on the year below when on ArrowUp', () => {
-    //     const focusSpy = spyOn(component, 'focusElement');
-    //     const event = {
-    //         key: 'ArrowUp', preventDefault: () => {}
-    //     };
-    //     component.id = 'fd-calendar-0';
-    //     component.onKeydownYearHandler(event, 6);
-    //     expect(focusSpy).toHaveBeenCalledWith('fd-calendar-0-fd-year-2');
-    // });
-    //
-    // it('Should focus on the year below when on ArrowRight', () => {
-    //     const focusSpy = spyOn(component, 'focusElement');
-    //     const event = {
-    //         key: 'ArrowRight', preventDefault: () => {}
-    //     };
-    //     component.id = 'fd-calendar-0';
-    //     component.onKeydownYearHandler(event, 6);
-    //     expect(focusSpy).toHaveBeenCalledWith('fd-calendar-0-fd-year-7');
-    // });
-    //
-    // it('Should focus on the year below when on ArrowLeft', () => {
-    //     const focusSpy = spyOn(component, 'focusElement');
-    //     const event = {
-    //         key: 'ArrowLeft', preventDefault: () => {}
-    //     };
-    //     component.id = 'fd-calendar-0';
-    //     component.onKeydownYearHandler(event, 6);
-    //     expect(focusSpy).toHaveBeenCalledWith('fd-calendar-0-fd-year-5');
-    // });
-
     it('Should select the year when Enter key is clicked', () => {
         let event: { key: string; preventDefault: () => void };
         event = {
@@ -106,14 +66,35 @@ describe('CalendarYearViewComponent', () => {
 
     });
 
+    it('Should generate proper grid', () => {
+        component.yearViewGrid = { cols: 3, rows: 3, yearMapping: (year) => year.toString() };
+        component.yearSelected = 2000;
+        component.ngOnInit();
+        expect(component.calendarYearListGrid).toEqual([[2000, 2001, 2002], [2003, 2004, 2005], [2006, 2007, 2008]]);
+    });
+
+    it('Should generate proper grid', () => {
+        component.yearViewGrid = { cols: 9, rows: 1, yearMapping: (year) => year.toString() };
+        component.yearSelected = 2000;
+        component.ngOnInit();
+        expect(component.calendarYearListGrid).toEqual([[2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008]]);
+    });
+
+    it('Should generate proper grid', () => {
+        component.yearViewGrid = { cols: 1, rows: 9, yearMapping: (year) => year.toString() };
+        component.yearSelected = 2000;
+        component.ngOnInit();
+        expect(component.calendarYearListGrid).toEqual([[2000],  [2001],  [2002],  [2003],  [2004],  [2005],  [2006],  [2007],  [2008]]);
+    });
+
     it('Should detect active year as current one', () => {
         component.yearViewGrid = { cols: 5, rows: 4, yearMapping: (year) => year.toString() };
 
         component.currentYear = 2020;
-        component.yearSelected = 1900;
         component.firstYearInList = 2010;
-
         component.ngOnInit();
+
+        component.yearSelected = 1900;
 
         component.activeYear = (<any>component).getActiveYear();
 

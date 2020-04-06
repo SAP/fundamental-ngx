@@ -34,6 +34,9 @@ import { compareObjects } from '../../../utils/public_api';
 })
 export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
+    private readonly _amountOfCols: number = 7; // Days per week
+    private readonly _amountOfRow: number = 6;  // Weeks per month
+
     /** @hidden */
     newFocusedDayId: string = '';
 
@@ -101,17 +104,31 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     /** Id of the calendar. If none is provided, one will be generated. */
     @Input() id: string;
 
-    // TODO
+    /**
+     * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
+     */
     @Input()
     markWeekends: boolean = false;
 
-    // TODO
+    /**
+     * Whether user wants to show week numbers next to days
+     */
     @Input()
     showWeekNumbers: boolean = true;
 
     /** Function that allows to specify which function would be called, when focus wants to escape */
     @Input()
     focusEscapeFunction: Function;
+
+    /**
+     * Special days mark, it can be used by passing array of object with
+     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
+     * Rule accepts method with FdDate object as a parameter. ex:
+     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     */
+    @Input()
+    specialDaysRules: SpecialDayRule[] = [];
 
     /** Event emitted always, when model is changed in range mode */
     @Output()
@@ -191,12 +208,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         return false;
     };
 
-    /**
-     * TODO
-     */
-    @Input()
-    specialDaysRules: SpecialDayRule[] = [];
-
     /** @hidden */
     constructor(
         private calendarI18n: CalendarI18n,
@@ -204,8 +215,8 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService
     ) {
-        this.calendarService.colAmount = 7;
-        this.calendarService.rowAmount = 6;
+        this.calendarService.colAmount = this._amountOfCols;
+        this.calendarService.rowAmount = this._amountOfRow;
         this.calendarI18n.i18nChange
             .pipe(takeUntil(this.onDestroy$))
             .subscribe(() => this.refreshShortWeekDays())
@@ -251,7 +262,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
     ngOnInit(): void {
         this.refreshShortWeekDays();
         this.buildDayViewGrid();
-
 
         this.calendarService.onFocusIdChange
             .pipe(takeUntil(this.onDestroy$))
@@ -374,7 +384,9 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** TODO */
+    /**
+     * Standardized method to calculate grid [x][y] to index number of flatten list
+     */
     getId(rowIndex: number, colIndex: number): number {
         return this.calendarService.getId(rowIndex, colIndex);
     }
@@ -442,7 +454,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         const dayViewGrid: CalendarDay[][] = [];
 
         while (calendarDays.length > 0) {
-            dayViewGrid.push(calendarDays.splice(0, 7));
+            dayViewGrid.push(calendarDays.splice(0, this._amountOfCols));
         }
         this.dayViewGrid = dayViewGrid;
         this.weeks = this.refreshWeekCount();

@@ -40,15 +40,17 @@ export class CalendarHeaderComponent implements OnDestroy {
     @Input()
     currentlyDisplayed: CalendarCurrent;
 
-    // TODO
+    /**
+     * Object to customize year grid
+     */
     @Input()
-    calendarYearGrid: CalendarYearGrid
+    calendarYearGrid: CalendarYearGrid;
 
     /** Id */
     @Input()
     id: string;
 
-    /** Id */
+    /** Whether close button should be shown */
     @Input()
     showCloseButton: boolean = false;
 
@@ -71,7 +73,7 @@ export class CalendarHeaderComponent implements OnDestroy {
     readonly nextClicked: EventEmitter<void>
         = new EventEmitter<void>();
 
-    /** TODO */
+    /** Event thrown, when the close button is clicked */
     @Output()
     readonly closeClicked: EventEmitter<void>
         = new EventEmitter<void>();
@@ -116,14 +118,17 @@ export class CalendarHeaderComponent implements OnDestroy {
         return this.calendarI18n.getAllFullMonthNames()[this.currentlyDisplayed.month - 1];
     }
 
+    /** Get information is calendar is on month view */
     isOnMonthView(): boolean {
         return this.activeView === 'month';
     }
 
+    /** Get information is calendar is on year view */
     isOnYearView(): boolean {
         return this.activeView === 'year';
     }
 
+    /** Get information about amount of years displayed at once on year view  */
     amountOfYearsPerPeriod(): number {
         return this.calendarYearGrid.cols * this.calendarYearGrid.rows
     }

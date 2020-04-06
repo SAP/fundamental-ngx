@@ -60,7 +60,9 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
     @Input()
     yearSelected: number;
 
-    // TODO
+    /**
+     * Object to customize year grid
+     */
     @Input()
     yearViewGrid: CalendarYearGrid;
 
@@ -158,7 +160,6 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
 
     /** Method allowing focusing on elements within this component. */
     focusYearElement(): void {
-        console.log('focus');
         if (this.newFocusedYearId) {
             const elementToFocus: HTMLElement = this.eRef.nativeElement.querySelector('#' + this.newFocusedYearId);
             this.newFocusedYearId = '';
@@ -177,7 +178,9 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
         this.yearClicked.emit(this.yearSelected);
     }
 
-    /** TODO */
+    /**
+     * Standardized method to calculate grid [x][y] to index number of flatten list
+     */
     getId(rowIndex: number, colIndex: number): number {
         return this.calendarService.getId(rowIndex, colIndex);
     }
