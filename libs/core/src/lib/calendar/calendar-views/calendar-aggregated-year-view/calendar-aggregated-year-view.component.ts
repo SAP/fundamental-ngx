@@ -19,17 +19,18 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
      */
     activeYear: AggregatedYear;
 
-    /** Parameter that stores the dozen of years that are currently being displayed. */
+    /**
+     *  Parameter that stores the dozen of years that are currently being displayed. */
     calendarYearListGrid: AggregatedYear[][];
 
-    /** // TODO */
+    /**
+     * @hidden
+     * Current period of years selected
+     */
     yearsSelected: AggregatedYear;
 
     /** Parameter storing the year of the present day. */
     currentYear: number = FdDate.getToday().year;
-
-    /** Parameter storing first shown year on list */
-    firstYearInList: number;
 
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
@@ -58,6 +59,9 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     /** Event fired when a year is selected. */
     @Output()
     readonly yearsClicked: EventEmitter<AggregatedYear> = new EventEmitter<AggregatedYear>();
+
+    /** Parameter storing first shown year on list */
+    private firstYearInList: number;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
@@ -190,6 +194,11 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
         return this.id + '-fd-aggregated-year-' + index;
     }
 
+    /** Check if specified year is between start year and end year) */
+    public isBetween(aggregatedYear: AggregatedYear, yearToCheck: number): boolean {
+        return aggregatedYear.endYear >= yearToCheck && aggregatedYear.startYear <= yearToCheck;
+    }
+
     private _constructYearsGrid(): void {
         const displayedYearsAmount: number = this.aggregatedYearsViewGrid.cols * this.aggregatedYearsViewGrid.rows;
         const calendarYearList: AggregatedYear[] = [];
@@ -231,10 +240,5 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
     /** Returns transformed 1d array from 2d year grid. */
     private getYearsList(): AggregatedYear[] {
         return [].concat.apply([], this.calendarYearListGrid);
-    }
-
-    /** Check if specified year is between start year and end year) */
-    public isBetween(aggregatedYear: AggregatedYear, yearToCheck: number): boolean {
-        return aggregatedYear.endYear >= yearToCheck && aggregatedYear.startYear <= yearToCheck;
     }
 }
