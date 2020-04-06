@@ -15,7 +15,7 @@ class TestMessageStripComponent {
     messageStripComponent: MessageStripComponent;
 }
 
-describe('MessageStripComponent', () => {
+fdescribe('MessageStripComponent', () => {
     let component: MessageStripComponent;
     let fixture: ComponentFixture<TestMessageStripComponent>;
 
@@ -51,11 +51,9 @@ describe('MessageStripComponent', () => {
         expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--success')).toBe(true);
     });
 
-    it('should dismiss', () => {
+    fit('should dismiss', () => {
         component.dismiss();
-        component.ngOnChanges();
-        fixture.detectChanges();
-        expect(fixture.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
-        expect(fixture.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
+        expect(component.elementRef().nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(component.elementRef().nativeElement.classList.contains('fd-has-display-none')).toBe(true);
     });
 });
