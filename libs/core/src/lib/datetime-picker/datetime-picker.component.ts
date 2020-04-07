@@ -24,6 +24,7 @@ import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calen
 import { FdDatetime } from './models/fd-datetime';
 import { FormStates } from '../form/form-control/form-states';
 import { DatePipe } from '@angular/common';
+import { CalendarYearGrid, SpecialDayRule } from '../..';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -180,6 +181,50 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
      */
     @Input()
     buttonFocusable: boolean = true;
+
+    /**
+     * Special days mark, it can be used by passing array of object with
+     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
+     * Rule accepts method with FdDate object as a parameter. ex:
+     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     */
+    @Input()
+    specialDaysRules: SpecialDayRule[] = [];
+
+    /**
+     * Object to customize year grid,
+     * Row, Columns and method to display year can be modified
+     */
+    @Input()
+    yearGrid: CalendarYearGrid = {
+        rows: 5,
+        cols: 6,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * Object to customize aggregated year grid,
+     * Row, Columns and method to display year can be modified
+     */
+    @Input()
+    aggregatedYearGrid: CalendarYearGrid = {
+        rows: 6,
+        cols: 2,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
+     */
+    @Input()
+    markWeekends: boolean = true;
+
+    /**
+     * Whether user wants to show week numbers next to days
+     */
+    @Input()
+    showWeekNumbers: boolean = true;
 
     /** Event thrown every time calendar active view is changed */
     @Output()

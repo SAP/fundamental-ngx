@@ -69,6 +69,42 @@ myDisableFunction = function(d: FdDate): boolean {
     return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp()
 }`;
 
+
+    exampleSpecialDays = `Example Special Days Functions:
+
+// Mark weekends with special day number 10
+specialDay: SpecialDayRule[] = [
+    { 
+        specialDayNumber: 10,
+        rule: fdDate => fdDate.getDay() === 7 || fdDate.getDay() === 1 
+    }
+]
+
+
+// Mark Monday with special day number 5
+specialDay: SpecialDayRule[] = [
+    { 
+        specialDayNumber: 5,
+        rule: fdDate => fdDate.getDay() === 2 
+    }
+]
+
+// Mark Days inside a range with number 3 and all tuesdays with number 6
+specialDay: SpecialDayRule[] = [
+    { 
+        specialDayNumber: 3,
+        rule: fdDate => {
+            let firstDay = new FdDate(2018, 7, 5);
+            let lastDay = new FdDate(2018, 7, 20);
+            return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp()
+        },
+    },
+    { 
+        specialDayNumber: 6,
+        rule: fdDate => fdDate.getDay() === 3 
+    }
+]`;
+
     calendarSingleSource: ExampleFile[] = [
 
         {
@@ -83,7 +119,7 @@ myDisableFunction = function(d: FdDate): boolean {
             language: 'typescript',
             fileName: 'calendar-single-example',
             code: calendarSingleSrc
-        },
+        }
     ];
 
     calendarRangeSource: ExampleFile[] = [
@@ -122,10 +158,17 @@ myDisableFunction = function(d: FdDate): boolean {
             component: 'CalendarGridExampleComponent',
             fileName: 'calendar-grid-example',
             code: calendarGridHtml
-        },
+        }
     ];
 
     calendarOptionsSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarOptionsExampleComponent',
+            fileName: 'calendar-options-example',
+            code: { default: this.exampleSpecialDays },
+            name: 'Example Special Day Functions'
+        },
         {
             language: 'typescript',
             component: 'CalendarOptionsExampleComponent',
@@ -137,7 +180,7 @@ myDisableFunction = function(d: FdDate): boolean {
             component: 'CalendarOptionsExampleComponent',
             fileName: 'calendar-options-example',
             code: calendarOptionHtml
-        },
+        }
     ];
 
     calendarMondayStartSource: ExampleFile[] = [
@@ -178,7 +221,7 @@ myDisableFunction = function(d: FdDate): boolean {
             language: 'typescript',
             fileName: 'calendar-form-example',
             code: calendarFormSourceT,
-            component: 'CalendarFormExamplesComponent',
+            component: 'CalendarFormExamplesComponent'
         }
     ];
 

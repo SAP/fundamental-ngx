@@ -3,7 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    forwardRef,
+    forwardRef, HostBinding,
     Input, Optional,
     Output, ViewChild,
     ViewEncapsulation
@@ -17,6 +17,7 @@ import { FdRangeDate } from '../calendar/models/fd-range-date';
 import { DateFormatParser } from './format/date-parser';
 import { DatePipe } from '@angular/common';
 import { FormStates } from '../form/form-control/form-states';
+import { CalendarYearGrid, SpecialDayRule } from '../..';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -142,6 +143,50 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
      */
     @Input()
     buttonFocusable: boolean = true;
+
+    /**
+     * Special days mark, it can be used by passing array of object with
+     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
+     * Rule accepts method with FdDate object as a parameter. ex:
+     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     */
+    @Input()
+    specialDaysRules: SpecialDayRule[] = [];
+
+    /**
+     * Object to customize year grid,
+     * Row, Columns and method to display year can be modified
+     */
+    @Input()
+    yearGrid: CalendarYearGrid = {
+        rows: 5,
+        cols: 6,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * Object to customize aggregated year grid,
+     * Row, Columns and method to display year can be modified
+     */
+    @Input()
+    aggregatedYearGrid: CalendarYearGrid = {
+        rows: 6,
+        cols: 2,
+        yearMapping: (num: number) => num.toString()
+    };
+
+    /**
+     * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
+     */
+    @Input()
+    markWeekends: boolean = true;
+
+    /**
+     * Whether user wants to show week numbers next to days
+     */
+    @Input()
+    showWeekNumbers: boolean = true;
 
     /** Fired when a new date is selected. */
     @Output()

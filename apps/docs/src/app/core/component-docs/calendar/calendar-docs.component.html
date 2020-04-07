@@ -26,7 +26,9 @@
     Mobile Calendar
 </fd-docs-section-title>
 <description>
-
+    Calendar component has dedicated mode for mobile devices. To achieve mobile mode, it should be wrapper inside the
+    dialog and bar component, example of various dialog usages can be found <a fd-link [routerLink]="'/core/dialog'">here</a> .
+    Also it supports landscape and portrait mode.
 </description>
 <component-example>
     <fd-calendar-mobile-example></fd-calendar-mobile-example>
@@ -39,6 +41,9 @@
     Calendar Options
 </fd-docs-section-title>
 <description>
+    Calendar has a lot of different options, there is way to put special days, change visibility of week counter, user
+    can applied compact mode, to adjust view for desktop devices. Weekend also can be marked with additional class, which
+    has different styling.
 </description>
 <component-example>
     <fd-calendar-options-example></fd-calendar-options-example>
@@ -51,6 +56,8 @@
     Calendar Years Grid
 </fd-docs-section-title>
 <description>
+    Year Grid and Aggregated Year Grid can be customized, by passing <code>[yearGrid]</code> and <code>[aggregatedYearGrid]</code>
+    properties. The columns and rows amount can be modified, same as the way how year is displayed.
 </description>
 <component-example>
     <fd-calendar-grid-example></fd-calendar-grid-example>
