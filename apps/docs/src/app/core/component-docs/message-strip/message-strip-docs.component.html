@@ -1,0 +1,42 @@
+<fd-docs-section-title [id]="'message-strip-basic'" [componentName]="'messageStrip'">
+    Message Strip Types
+</fd-docs-section-title>
+<description>A number of message strip types are available. They offer preset styling for different contextual situations. Can be one of 'warning', 'success', 'information', 'error' or normal (default). </description>
+<component-example>
+    <fd-message-strip-example></fd-message-strip-example>
+</component-example>
+<code-example [exampleFiles]="messageStripBasicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'message-strip-no-icon'" [componentName]="'messageStrip'">
+    Message Strips Without Icons
+</fd-docs-section-title>
+<description>The default message strip has no icon. Information, Success, Warning and Error message strips by default are rendered with icons. To remove them set the <code>[noIcon]</code> property to <code>true</code>. </description>
+<component-example>
+    <fd-message-strip-noicon-example></fd-message-strip-noicon-example>
+</component-example>
+<code-example [exampleFiles]="messageStripNoIconExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'message-strip-width'" [componentName]="'messageStrip'">
+    Message Strips With Customizable Width
+</fd-docs-section-title>
+<description>The width of the message strip can be customized by the <code>[width]</code> and <code>[minWidth]</code> properties. </description>
+<component-example>
+    <fd-message-strip-width-example></fd-message-strip-width-example>
+</component-example>
+<code-example [exampleFiles]="messageStripWidthExample"></code-example>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-message-strip
+        [type]="data.modifier.type"
+        [dismissible]="data.properties.dismissible"
+        [noIcon]="data.properties.noIcon"
+        [width]="data.properties.width"
+    >
+        {{data.properties.message}}
+    </fd-message-strip>
+</playground>
+

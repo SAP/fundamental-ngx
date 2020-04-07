@@ -72,12 +72,12 @@ describe('CheckboxComponent', () => {
     });
 
     it('should add state class', async () => {
-        checkbox.state = 'valid';
+        checkbox.state = 'success';
         fixture.detectChanges();
 
         await fixture.whenStable();
         const input = fixture.nativeElement.querySelector('input');
-        expect(input).toHaveClass('is-valid')
+        expect(input).toHaveClass('is-success')
     });
 
     it('should display input label', async () => {

@@ -7,9 +7,9 @@ import {Component} from '@angular/core';
             States:
             <fd-checkbox [(ngModel)]="checkboxValue1" label="No state"></fd-checkbox>
             <fd-checkbox [(ngModel)]="checkboxValue2" state="information" label="Info state"></fd-checkbox>
-            <fd-checkbox [(ngModel)]="checkboxValue3" state="valid" label="Valid state"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue3" state="success" label="Success state"></fd-checkbox>
             <fd-checkbox [(ngModel)]="checkboxValue4" state="warning" label="Warning state"></fd-checkbox>
-            <fd-checkbox [(ngModel)]="checkboxValue5" state="invalid" label="Invalid state"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue5" state="error" label="Error state"></fd-checkbox>
         </div>
         <div>
             Disabled:

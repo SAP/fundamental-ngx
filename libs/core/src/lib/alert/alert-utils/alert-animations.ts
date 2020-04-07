@@ -1,5 +1,10 @@
 import { animate, AnimationTriggerMetadata, style, transition, trigger } from '@angular/animations';
 
+/**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ */
 export const alertFadeNgIf: AnimationTriggerMetadata = trigger(
     'fadeAlertNgIf',
     [

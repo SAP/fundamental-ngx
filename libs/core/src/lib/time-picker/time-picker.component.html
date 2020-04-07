@@ -19,7 +19,7 @@
                    (click)="inputGroupClicked($event)"
                    [disabled]="disabled"
                    type="text"
-                   [ngClass]="{ 'is-invalid': isInvalidTimeInput && validate }"
+                   [ngClass]="{ 'is-error': isInvalidTimeInput && validate }"
                    class="fd-input"
                    [placeholder]="placeholder"
                    [attr.aria-label]="timePickerInputLabel">

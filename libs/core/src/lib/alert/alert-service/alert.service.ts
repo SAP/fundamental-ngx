@@ -11,6 +11,10 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
 import { AlertRef } from '../alert-utils/alert-ref';
 
 /**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ * 
  * Service used to dynamically generate an alert as an overlay.
  */
 @Injectable()
@@ -21,7 +25,7 @@ export class AlertService {
     /** @hidden */
     constructor(
         private dynamicComponentService: DynamicComponentService
-    ) {}
+    ) { }
 
     /**
      * Returns true if there are some alerts currently open. False otherwise.
@@ -47,15 +51,15 @@ export class AlertService {
         // If empty or undefined alert array, create container
         if (!this.alerts || this.alerts.length === 0 || !this.alertContainerRef) {
             this.alertContainerRef = this.dynamicComponentService.createDynamicComponent
-                < AlertContainerComponent > (content, AlertContainerComponent, alertConfig)
-            ;
+                <AlertContainerComponent>(content, AlertContainerComponent, alertConfig)
+                ;
         }
 
         // Define Container to put backdrop and component to container
         alertConfig.container = this.alertContainerRef.location.nativeElement;
 
         const component = this.dynamicComponentService.createDynamicComponent
-            <AlertComponent>(content, AlertComponent, alertConfig, { services: [service, alertConfig]});
+            <AlertComponent>(content, AlertComponent, alertConfig, { services: [service, alertConfig] });
 
         component.location.nativeElement.style.marginTop = '10px';
 

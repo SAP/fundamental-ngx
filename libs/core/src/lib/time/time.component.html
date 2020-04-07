@@ -16,7 +16,7 @@
         fd-only-digits
         [ngClass]="{
             'is-disabled': disabled,
-            'is-invalid': (displayedHour > 24 || displayedHour < 0) && validate
+            'is-error': (displayedHour > 24 || displayedHour < 0) && validate
         }"
         (ngModelChange)="displayedHourChanged($event)"
         (blur)="inputBlur('hour')"
@@ -57,7 +57,7 @@
         fd-only-digits
         (ngModelChange)="minuteModelChange($event)"
         (blur)="inputBlur('minute')"
-        [ngClass]="{ 'is-disabled': disabled, 'is-invalid': (time.minute > 59 || time.minute < 0) && validate }"
+        [ngClass]="{ 'is-disabled': disabled, 'is-error': (time.minute > 59 || time.minute < 0) && validate }"
         class="fd-input fd-time__input fd-input--no-number-spinner"
         type="number"
         placeholder="{{ timeI18n?.minutesPlaceholder }}"
@@ -94,7 +94,7 @@
         fd-only-digits
         (ngModelChange)="secondModelChange($event)"
         (blur)="inputBlur('second')"
-        [ngClass]="{ 'is-disabled': disabled, 'is-invalid': (time.second > 59 || time.second < 0) && validate }"
+        [ngClass]="{ 'is-disabled': disabled, 'is-error': (time.second > 59 || time.second < 0) && validate }"
         class="fd-input fd-time__input fd-input--no-number-spinner"
         type="number"
         placeholder="{{ timeI18n?.secondsPlaceholder }}"

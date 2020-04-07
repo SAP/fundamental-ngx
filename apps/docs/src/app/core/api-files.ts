@@ -165,6 +165,9 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
+    messageStrip: [
+        'MessageStripComponent'
+    ],
     dialog: [
         'DialogService',
         'DialogContainerComponent',
@@ -199,6 +202,10 @@ export const API_FILES = {
         'NotificationConfig',
         'NotificationDefault',
         'NotificationRef',
+    ],
+    objectStatus: [
+        'ObjectStatusModule',
+        'ObjectStatusComponent'
     ],
     pagination: [
         'PaginationComponent',

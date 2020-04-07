@@ -3,7 +3,7 @@
     <div fd-form-item>
         <label fd-form-label>Valid Date Picker</label>
         <fd-datetime-picker
-            [state]="isValid() ? 'valid' : 'invalid'"
+            [state]="isValid() ? 'success' : 'error'"
             formControlName="date"
             [disableFunction]="blockFunction">
         </fd-datetime-picker>

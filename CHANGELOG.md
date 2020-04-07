@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.66...v0.16.0-rc.67) (2020-04-07)
+
+
+### Bug Fixes
+
+* introduce message strip and depricate alerts ([#2258](https://github.com/SAP/fundamental-ngx/issues/2258)) ([dde194f](https://github.com/SAP/fundamental-ngx/commit/dde194ff0d07c13aed852e6dc2c2a1cd7281cb93))
+
+## [0.16.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.65...v0.16.0-rc.66) (2020-04-07)
+
+
+### Bug Fixes
+
+* status indicator refactoring to Object Status ([#2152](https://github.com/SAP/fundamental-ngx/issues/2152)) ([2f8debc](https://github.com/SAP/fundamental-ngx/commit/2f8debc0541034719b0be6a616fb9364f21c6393))
+
+## [0.16.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.64...v0.16.0-rc.65) (2020-04-07)
+
+
+### Features
+
+* replaced setters in favor of ngOnChanges ([#2228](https://github.com/SAP/fundamental-ngx/issues/2228)) ([e054cf9](https://github.com/SAP/fundamental-ngx/commit/e054cf936895bb91db58e28de9bbed5f73bf659b))
+
+
+### Bug Fixes
+
+* IE11 crash by avoiding argument-less calls to classList.add ([#2244](https://github.com/SAP/fundamental-ngx/issues/2244)) ([d356914](https://github.com/SAP/fundamental-ngx/commit/d356914224c7140d957b87c833a915d605203e9a))
+
 ## [0.16.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.63...v0.16.0-rc.64) (2020-04-06)
 
 ## [0.16.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.62...v0.16.0-rc.63) (2020-04-06)

@@ -1,0 +1,10 @@
+<a fd-object-status [status]="'negative'" [glyph]="'status-negative'" [clickable]="true">Negative</a>
+<a fd-object-status [status]="'critical'" [glyph]="'status-critical'" [clickable]="true">Critical</a>
+<a fd-object-status [status]="'positive'" [glyph]="'status-positive'" [clickable]="true">Positive</a>
+<a fd-object-status [status]="'informative'" [glyph]="'hint'" [clickable]="true">Informative</a>
+<a fd-object-status [glyph]="'to-be-reviewed'" [clickable]="true">Default</a>
+<br>
+<br>
+<ng-container *ngFor="let item of [1,2,3,4,5,6,7,8]">
+  <a fd-object-status [indicationColor]="item" [clickable]="true">Indication Color {{item}}</a>
+</ng-container>

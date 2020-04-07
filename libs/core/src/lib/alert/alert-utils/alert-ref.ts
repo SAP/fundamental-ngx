@@ -1,6 +1,10 @@
 import { Observable, Subject } from 'rxjs';
 
 /**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ * 
  * Reference to an alert component generated via the AlertService.
  * It can be injected into the content component in the same way a service would be injected.
  * For a template, add let-alert to your ng-template tag. Now using *alert* in the template refers to this class.
