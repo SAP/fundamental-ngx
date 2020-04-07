@@ -32,7 +32,7 @@ export class MenuLinkDirective implements OnInit, OnDestroy {
     /** @hidden Update sub menu visibility */
     @HostListener('click')
     onClick() {
-        if (this._menuItem.hasSubMenu) {
+        if (this._menuItem.subMenu) {
             this._menuItem.subLevelVisible$.next(!this._menuItem.subLevelVisible$.value);
         }
     };

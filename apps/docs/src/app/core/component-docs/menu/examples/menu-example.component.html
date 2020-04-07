@@ -1,82 +1,95 @@
-<fd-menu [mobile]="true" mobileMenuTitle="Fresh Market">
-    <li fd-menu-item-component>
-        <a href="#" fd-menu-link>
-            <fd-icon fd-menu-addon glyph="accept"></fd-icon>
-            <span fd-menu-title>Option 1</span>
-        </a>
-    </li>
-
-    <li fd-menu-item-component>
-        <a href="#" fd-menu-link>
-            <span fd-menu-title>Option 2</span>
-            <span fd-menu-shortcut>Alt + F1</span>
-        </a>
-    </li>
-
-    <li fd-menu-item-component>
+<fd-menu [mobile]="false" mobileMenuTitle="Fresh Market">
+    <li fd-menu-item-component [subMenu]="fruits">
         <div fd-menu-link>
-            <span fd-menu-title>Option 3</span>
+            <span fd-menu-title>Fruits</span>
             <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
         </div>
-
-        <ng-template fdTemplate="subMenu">
-
-            <li fd-menu-item-component>
-                <div fd-menu-link>
-                    <span fd-menu-title>Sub Option 1</span>
-                    <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
-                </div>
-
-                <ng-template fdTemplate="subMenu">
-                    <li fd-menu-item-component>
-                        <a href="#" fd-menu-link>
-                            <span fd-menu-title>Sub sub Option 1</span>
-                        </a>
-                    </li>
-
-                    <li fd-menu-item-component>
-                        <a href="#" fd-menu-link>
-                            <span fd-menu-title>Sub sub Option 2</span>
-                        </a>
-                    </li>
-                </ng-template>
-            </li>
-
-            <li fd-menu-item-component>
-                <div fd-menu-link>
-                    <span fd-menu-title>Sub Option 2</span>
-                    <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
-                </div>
-
-                <ng-template fdTemplate="subMenu">
-                    <li fd-menu-item-component>
-                        <a href="#" fd-menu-link>
-                            <span fd-menu-title>Sub sub Option 1</span>
-                        </a>
-                    </li>
-
-                    <li fd-menu-item-component>
-                        <a href="#" fd-menu-link>
-                            <span fd-menu-title>Sub sub Option 2</span>
-                        </a>
-                    </li>
-                </ng-template>
-            </li>
-
-        </ng-template>
     </li>
 
-    <fd-menu-separator></fd-menu-separator>
-
-    <li fd-menu-item-component>
-        <a href="#" fd-menu-link>
-            <span fd-menu-title>Option 4</span>
-        </a>
+    <li fd-menu-item-component [subMenu]="vegetables">
+        <div fd-menu-link>
+            <span fd-menu-title>Vegetables</span>
+            <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
+        </div>
     </li>
 
-    <li fd-menu-item-component>
-        <a href="#" fd-menu-link>
-            <span fd-menu-title>Option 5</span>
-        </a>
+    <li fd-menu-item-component [subMenu]="milkProducts">
+        <div fd-menu-link>
+            <span fd-menu-title>Milk products</span>
+            <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
+        </div>
     </li>
+
+    <ng-template #fruits>
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Pineapple</span>
+            </a>
+        </li>
+
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Banana</span>
+            </a>
+        </li>
+    </ng-template>
+
+    <ng-template #vegetables>
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Cucumber</span>
+            </a>
+        </li>
+
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Onion</span>
+            </a>
+        </li>
+    </ng-template>
+
+    <ng-template #milkProducts>
+        <li fd-menu-item-component [subMenu]="cheeses">
+            <div fd-menu-link>
+                <span fd-menu-title>Cheese</span>
+                <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
+            </div>
+        </li>
+
+        <li fd-menu-item-component [subMenu]="yogurts">
+            <div fd-menu-link>
+                <span fd-menu-title>Yogurts</span>
+                <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
+            </div>
+        </li>
+    </ng-template>
+
+
+    <ng-template #cheeses>
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Parmesan</span>
+            </a>
+        </li>
+
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Brie</span>
+            </a>
+        </li>
+    </ng-template>
+
+    <ng-template #yogurts>
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Greek</span>
+            </a>
+        </li>
+
+        <li fd-menu-item-component>
+            <a href="#" fd-menu-link>
+                <span fd-menu-title>Natural</span>
+            </a>
+        </li>
+    </ng-template>
 </fd-menu>
