@@ -5,8 +5,9 @@ import {
     forwardRef,
     Input,
     ViewChild,
-    AfterViewInit,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    OnChanges,
+    OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
@@ -26,7 +27,7 @@ let uniqueId = 0;
         }
     ]
 })
-export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, ControlValueAccessor {
+export class RadioButtonComponent implements OnChanges, OnInit, CssClassBuilder, ControlValueAccessor {
     /** @hidden */
     class: string;
 
@@ -37,77 +38,42 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     /** @hidden */
     actualValue: any;
 
-    private _compact: boolean = false;
-
     /** Whether to apply compact mode to the radio button.
      * Value: true or false
      * By default field is set to false
      */
     @Input()
-    set compact(isCompact: boolean) {
-        this._compact = isCompact;
-        this.buildComponentCssClass();
-    }
+    compact: boolean;
 
-    private _state: stateType = 'default';
     /** The field to set state of radio button using:
      * 'valid' | 'invalid' | 'warning' | 'default' | 'information'
      * by default value is set to 'default'
      */
     @Input()
-    set state(newState: stateType) {
-        this._state = newState;
-        this.buildComponentCssClass();
-    }
+    state: stateType;
 
-    private _disabled: boolean = false;
     /** The field is used to tell if radio button should be disabled
      * Value: true or false
      * by default disabled state is set to false
      */
     @Input()
-    set disabled(isDisabled: boolean) {
-        this._disabled = isDisabled;
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    get disabled(): boolean {
-        return this._disabled;
-    }
+    disabled: boolean;
 
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
      * The field is mandatory when working with reactive forms
      */
     @Input()
-    set selectedValue(v: any) {
-        this.actualValue = v;
-    }
+    selectedValue: any;
 
-    private _name: string;
     /** The name of the radio button
      * The field is mandatory
      */
     @Input()
-    set name(v: string) {
-        this._name = v;
-    }
-
-    /** @hidden */
-    get name(): string {
-        return this._name;
-    }
-
-    get checked(): boolean {
-        if (this.value === undefined) {
-            return false;
-        }
-        return this.actualValue === this.value;
-    }
+    name: string;
 
     /**
-     * Set uniqueId to a radio button
+     * uniqueId to a radio button
      */
     @Input()
     id: string = `radio-id-${uniqueId++}`;
@@ -117,6 +83,28 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
      */
     @Input()
     value: any;
+
+    get checked(): boolean {
+        if (this.value === undefined) {
+            return false;
+        }
+        return this.actualValue === this.value;
+    }
+
+    /** @hidden */
+    constructor(private changeDetectionRef: ChangeDetectorRef) { }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+        this._checkMandatoryFields();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+        this._checkMandatoryFields();
+    }
 
     // ControlValueAccessor implementation
     /** @hidden */
@@ -147,6 +135,24 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
     }
     // End implementation
 
+    @applyCssClass
+    /** This method is responsible for building a css class based on current state
+     *  It is implementation of CssClassBuilder interface and
+     *  should be used with @applyCssClass decorator
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-radio',
+            this.compact ? 'fd-radio--compact' : '',
+            this.state !== 'default' ? `is-${this.state}` : ''
+        ].join(' ');
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this.inputElement;
+    }
+
     /** @hidden */
     labelClicked(): void {
         this.valueChange(this.value);
@@ -161,34 +167,6 @@ export class RadioButtonComponent implements AfterViewInit, CssClassBuilder, Con
 
         this.changeDetectionRef.detectChanges();
         this.onChange(value);
-    }
-
-    /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) { }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.buildComponentCssClass();
-        this._checkMandatoryFields();
-    }
-
-
-    /** This method is responsible for building a css class based on current state
-     *  It is implementation of CssClassBuilder interface and
-     *  should be used with @applyCssClass decorator
-     */
-    @applyCssClass
-    buildComponentCssClass(): string {
-        return [
-            'fd-radio',
-            this._compact ? 'fd-radio--compact' : '',
-            this._state !== 'default' ? `is-${this._state}` : ''
-        ].join(' ');
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this.inputElement;
     }
 
     /** @hidden */
