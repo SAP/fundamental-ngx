@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.67...v0.16.0-rc.68) (2020-04-07)
+
+
+### Features
+
+* update form validation states and messages ([#2260](https://github.com/SAP/fundamental-ngx/issues/2260)) ([d7c06dc](https://github.com/SAP/fundamental-ngx/commit/d7c06dcd63af0013de4fb99e5c3680736d073af7))
+
+
+### Bug Fixes
+
+* update action bar to new fundamental-styles ([#2218](https://github.com/SAP/fundamental-ngx/issues/2218)) ([114190b](https://github.com/SAP/fundamental-ngx/commit/114190b467528763c77145fe5ebff7d0653f4f61))
+
 ## [0.16.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.66...v0.16.0-rc.67) (2020-04-07)
 
 
