@@ -28,7 +28,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeBoundary') resizeBoundary = 'body';
 
-    /** Weather resizable behaviour should be disabled */
+    /** Whether resizable behaviour should be disabled */
     // tslint:disable-next-line:no-input-rename
     @Input('fdResizeDisabled') disabled: boolean = false;
 
@@ -164,7 +164,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         }
     }
 
-    /** @hidden Check weather resizable container is overflowing boundary container */
+    /** @hidden Check whether resizable container is overflowing boundary container */
     private _getBoundaryOverflowFunction(resizeContainer: Element): (move: ResizeMove) => boolean {
         return (move: ResizeMove) => {
             const containerPosition = resizeContainer.getBoundingClientRect();

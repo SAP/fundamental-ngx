@@ -21,19 +21,19 @@
             <fd-menu fd-menu-addon *ngIf="!menuComponent">
                 <ul fd-menu-list>
                     <ng-container *ngFor="let item of items">
-                        <li (click)="itemClicked(item, $event)" fd-menu-item>
-                            <a
-                                [attr.href]="item.link ? item.link : null"
-                                fd-menu-link
-                                [ngClass]="{ 'fd-product-menu-padding-left': !item.glyph }"
-                                class="fd-product-menu-padding-right fd-menu__link"
-                            >
-                                <span fd-menu-title>{{ item.name }}</span>
-                                <div fd-menu-item-addon *ngIf="item.glyph">
-                                    <fd-icon [glyph]="item.glyph"></fd-icon>
-                                </div>
-                            </a>
-                        </li>
+<!--                        <li (click)="itemClicked(item, $event)" fd-menu-item>-->
+<!--                            <a-->
+<!--                                [attr.href]="item.link ? item.link : null"-->
+<!--                                fd-menu-link-->
+<!--                                [ngClass]="{ 'fd-product-menu-padding-left': !item.glyph }"-->
+<!--                                class="fd-product-menu-padding-right fd-menu__link"-->
+<!--                            >-->
+<!--                                <span fd-menu-title>{{ item.name }}</span>-->
+<!--                                <div fd-menu-item-addon *ngIf="item.glyph">-->
+<!--                                    <fd-icon [glyph]="item.glyph"></fd-icon>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
                     </ng-container>
                 </ul>
             </fd-menu>

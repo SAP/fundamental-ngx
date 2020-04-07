@@ -5,7 +5,6 @@ import { DefaultMenuItem } from '../default-menu-item.class';
  * The directive that represents a menu item.
  */
 @Directive({
-    // TODO to be discussed
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-item]'
 })

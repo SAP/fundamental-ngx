@@ -11,13 +11,12 @@ export class MenuAddonDirective {
     fdAddonBeforeClass: boolean = true;
 
     /** @hidden */
-    @HostBinding('class.fd-menu__addon-before')
+    @HostBinding('class.fd-menu__addon-after')
     fdAddonAfterClass: boolean = false;
 
-    /** Display addon before or after text */
+    /** Whether addon is used before or after text */
     @Input('position') set setAddonPosition(position: 'before' | 'after') {
         this.fdAddonBeforeClass = position === 'before';
         this.fdAddonAfterClass = position === 'after';
     }
-
 }

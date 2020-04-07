@@ -12,7 +12,7 @@ import {
 } from './examples/menu-examples.component';
 import { MenuAddonExampleComponent } from './examples/menu-addon-examples.component';
 import { MenuKeyboardSupportExampleComponent } from './examples/menu-keyboard-support-example.component';
-import { MenuModule } from '@fundamental-ngx/core';
+import { MenuModule, TemplateModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, MenuModule],
+    imports: [ RouterModule.forChild(routes), SharedDocumentationModule, MenuModule, TemplateModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,

@@ -3,6 +3,7 @@ import { Directive, HostBinding } from '@angular/core';
 /**
  * The directive for menu item addon(for icons).
  */
+// TODO REMOVE!
 @Directive({
     selector: '[fd-menu-item-addon], [fdMenuItemAddon]'
 })
