@@ -1,204 +1,57 @@
-// @import "~fundamental-styles/dist/menu";
+@import "~fundamental-styles/dist/menu";
 
-@import './mixins.scss';
+.fd-menu,
+.fd-menu__sublist {
+    box-shadow: var(--sapContent_Shadow2, 0 0 0 0.0625rem rgba(0, 0, 0, 0.42), 0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3));
+    background: var(--sapGroup_ContentBackground);
+    border-radius: 0.25rem;
+    border: none;
 
-$block: fd-menu;
+    & li {
+        border-radius: initial;
 
-.#{$block} {
-    // group title
-    $fd-menu-title-color: var(--sapList_TextColor, #32363a) !default;
-    $fd-menu-title-background-color: var(--sapList_Background, #ffffff) !default;
-    $fd-menu-title-padding: 8px !default;
+        &:first-child {
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
 
-    // items
-    $fd-menu-item-color: var(--sapList_TextColor, #32363a) !default;
-    $fd-menu-item-color--active: var(--sapList_Active_TextColor, #ffffff) !default;
-    $fd-menu-item-background-color: var(--sapList_Background, #ffffff) !default;
-    $fd-menu-item-background-color--hover: var(--sapList_Hover_Background, #f5f5f5) !default;
-    $fd-menu-item-background-color--active: var(--sapList_Active_Background, #0854a0) !default;
-    $fd-menu-item-background-color--selected: var(--sapList_SelectionBackgroundColor, #e5f0fa) !default;
-    $fd-menu-item-background-color--selected-hover: var(--sapList_Hover_SelectionBackground, #d8e9f8) !default;
-    $fd-menu-item-border-color-selected: var(--sapList_SelectionBorderColor, #0854a0);
-
-    $fd-menu-item-padding-x: 24px !default;
-    $fd-menu-item-padding-y: 10px !default;
-
-    $fd-menu-item-separator-color: var(--sapGroup_ContentBorderColor, #d9d9d9) !default;
-
-    $fd-menu-item-background-addon-color: var(--sapContent_NonInteractiveIconColor, #6a6d70) !default;
-    $fd-menu-item-background-addon-color--active: var(--sapList_Active_TextColor, #ffffff) !default;
-
-    // BLOCK BASE *******************************************
-    // set all BLOCK reset and baseline styles
-    @include fd-reset();
-    @include fd-ellipsis();
-
-    position: relative;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    width: 100%;
-    display: inline-block;
-
-    &__group {
-        @include fd-reset();
-
-        list-style: none;
-        margin-bottom: 0;
-        padding-left: 0;
-    }
-
-    &__list {
-        @include fd-reset();
-
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        @at-root {
-            &--separated {
-                & > *,
-                .#{$block}__list > * {
-                    border-top-style: solid;
-                    border-top-width: 1px;
-                    border-top-color: $fd-menu-item-separator-color;
-
-                    &:first-child {
-                        border-top-width: 0;
-                    }
-                }
-            }
+        &:last-child {
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
         }
     }
 
-    &__title {
-        display: block;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: $fd-menu-title-padding $fd-menu-item-padding-x;
-        font-size: 12px;
-        text-transform: uppercase;
-        color: $fd-menu-title-color;
-        background-color: $fd-menu-title-background-color;
-    }
-
-    &__item {
-        @include fd-reset();
-        @include fd-ellipsis();
-        @include action-cursor();
-
-        display: block;
-        font-weight: normal;
-        text-decoration: none;
-        color: $fd-menu-item-color;
-        background-color: $fd-menu-item-background-color;
-        transition: all 0.125s ease-in;
-        padding: $fd-menu-item-padding-y $fd-menu-item-padding-x;
-
-        > .fd-checkbox {
-            margin: 0 10px 0 0;
-        }
-
-        @include fd-hover() {
-            color: $fd-menu-item-color;
-            background-color: $fd-menu-item-background-color--hover;
-
-            .fd-menu__addon-before {
-                color: $fd-menu-item-background-addon-color;
+    .fd-menu__item {
+        .fd-menu__link {
+            .fd-menu__addon-after {
+                margin: auto;
+                justify-content: flex-end;
             }
-        }
-
-        @include fd-selected() {
-            color: $fd-menu-item-color;
-            background-color: $fd-menu-item-background-color--selected;
-            border-bottom: 1px solid $fd-menu-item-border-color-selected;
-
-            .fd-menu__addon-before {
-                color: $fd-menu-item-background-addon-color;
-            }
-
-            @include fd-hover() {
-                color: $fd-menu-item-color;
-                background-color: $fd-menu-item-background-color--selected-hover;
-                border-bottom: 1px solid $fd-menu-item-border-color-selected;
-
-                .fd-menu__addon-before {
-                    color: $fd-menu-item-background-addon-color;
-                }
-            }
-        }
-
-        @include fd-active() {
-            color: $fd-menu-item-color--active;
-            background-color: $fd-menu-item-background-color--active;
-
-            .fd-menu__addon-before {
-                color: $fd-menu-item-background-addon-color--active;
-            }
-
-            @include fd-hover() {
-                color: $fd-menu-item-color--active;
-                background-color: $fd-menu-item-background-color--active;
-
-                .fd-menu__addon-before {
-                    color: $fd-menu-item-background-addon-color--active;
-                }
-            }
-        }
-
-        @include fd-pressed() {
-            color: $fd-menu-item-color--active;
-            background-color: $fd-menu-item-background-color--active;
-
-            .fd-menu__addon-before {
-                color: $fd-menu-item-background-addon-color--active;
-            }
-
-            @include fd-hover() {
-                color: $fd-menu-item-color--active;
-                background-color: $fd-menu-item-background-color--active;
-
-                .fd-menu__addon-before {
-                    color: $fd-menu-item-background-addon-color--active;
-                }
-            }
-        }
-
-        &:focus {
-            outline-offset: -0.1875rem;
-            outline-width: var(--sapContent_FocusWidth, 0.0625rem);
-            outline-color: var(--sapContent_FocusColor, #000);
-            outline-style: var(--sapContent_FocusStyle, dotted);
-        }
-
-        @include fd-disabled() {
-            opacity: 0.4;
-            cursor: not-allowed;
-            text-decoration: none;
         }
     }
+}
 
-    &--addon-before {
-        .fd-menu__item {
-            padding-top: $fd-menu-item-padding-y;
-            padding-bottom: $fd-menu-item-padding-y;
-            padding-left: 2px;
-            padding-right: 2px;
+.fd-menu__link {
+    border-radius: initial;
+}
+
+.fd-menu__shortcut {
+    font-size: var(--sapFontMediumSize);
+    font-weight: normal;
+    white-space: nowrap;
+    width: auto;
+}
+
+.fd-menu.fd-menu--mobile,
+.fd-menu.fd-menu--mobile .fd-menu__sublist {
+    border-radius: 0;
+    box-shadow: none;
+    position: static;
+
+    & li {
+        &:first-child,
+        &:last-child {
+            border-radius: 0;
         }
-    }
-
-    &__addon-before {
-        @include fd-flex-center();
-
-        @include fd-rtl() {
-            float: right;
-            clear: right;
-        }
-
-        color: $fd-menu-item-background-addon-color;
-        background-color: transparent;
-        float: left;
-        clear: left;
-        min-height: 1px;
-        width: 30px;
     }
 }

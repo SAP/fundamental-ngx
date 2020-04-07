@@ -1,47 +1,63 @@
-import { Directive, ElementRef, Host, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, Host, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { Subscription } from 'rxjs';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-menu-link]'
 })
-export class MenuLinkDirective {
+export class MenuLinkDirective implements OnInit, OnDestroy {
 
+    /** Mark as disabled */
     @Input()
     @HostBinding('class.is-disabled')
     disabled: boolean = false;
 
-    @Input()
-    @HostBinding('class.is-active')
-    active: boolean = false;
-
+    /** Mark as selected */
     @Input()
     @HostBinding('class.is-selected')
-    selected: boolean = this.hasVisibleChild;
+    selected: boolean = false;
 
-    /** @hidden */
+    /** @hidden Whether menu item has currently open sub menu */
     @HostBinding('class.has-child')
-    fdHasChildClass: boolean = this.hasVisibleChild;
+    fdHasChildClass: boolean = false;
 
     /** @hidden */
     @HostBinding('class.fd-menu__link')
     readonly fdMenuLinkClass: boolean = true;
 
     /** @hidden */
-    @HostListener('click', ['$event']) onClick(event: MouseEvent) {
-        if (this._menuItem.hasNestedItems) {
-            event.preventDefault();
-            this._menuItem.subLevelVisible = !this._menuItem.subLevelVisible;
+    private _subscriptions = new Subscription();
+
+    /** @hidden Update sub menu visibility */
+    @HostListener('click')
+    onClick() {
+        if (this._menuItem.hasSubMenu) {
+            this._menuItem.subLevelVisible$.next(!this._menuItem.subLevelVisible$.value);
         }
     };
 
+    /** @hidden */
     constructor(
-        @Host() private _menuItem: MenuItemComponent,
-        private _elementRef: ElementRef
+        public elementRef: ElementRef,
+        @Host() private _menuItem: MenuItemComponent
     ) {
     }
 
-    get hasVisibleChild(): boolean {
-        return this._menuItem.hasNestedItems && this._menuItem.subLevelVisible;
+    /** @hidden */
+    ngOnInit() {
+        this._listenOnActiveSublist();
+    }
+
+    /** @hidden */
+    ngOnDestroy() {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    private _listenOnActiveSublist(): void {
+        this._subscriptions.add(
+            this._menuItem.subLevelVisible$.subscribe(isVisible => this.fdHasChildClass = isVisible)
+        );
     }
 }

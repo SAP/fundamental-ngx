@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="mobile ? null : menuTemplate"></ng-container>
+<ng-container *ngTemplateOutlet="mobile ? dialogTemplate : menuTemplate"></ng-container>
 
 <ng-template #menuTemplate>
     <nav class="fd-menu"
@@ -6,8 +6,55 @@
             'fd-menu--compact': compact,
             'fd-menu--mobile': mobile
          }">
-        <ul fd-menu-list>
+        <ul class="fd-menu__list">
             <ng-content></ng-content>
         </ul>
     </nav>
+</ng-template>
+
+<ng-template #subMenuTemplate>
+    <nav class="fd-menu fd-menu--mobile">
+        <ul class="fd-menu__sublist">
+            <ng-container *ngTemplateOutlet="dialogContent.template"></ng-container>
+        </ul>
+    </nav>
+</ng-template>
+
+<ng-template #dialogTemplate>
+    <ng-template #dialog let-dialog let-dialogConfig="dialogConfig">
+        <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+            <fd-dialog-header>
+                <ng-template fdTemplate="header">
+                    <div fd-bar-left>
+                        <fd-bar-element *ngIf="isOnNestedLevel">
+                            <button fd-button
+                                    fdType="transparent"
+                                    glyph="navigation-left-arrow"
+                                    (click)="goToPreviousMenuLevel()">
+                            </button>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <h3 fd-dialog-title>{{ dialogContent.title }}</h3>
+                        </fd-bar-element>
+                    </div>
+                </ng-template>
+            </fd-dialog-header>
+
+            <fd-dialog-body>
+                <ng-container *ngTemplateOutlet="isOnNestedLevel
+                    ? subMenuTemplate
+                    : dialogContent.template">
+                </ng-container>
+            </fd-dialog-body>
+
+            <fd-dialog-footer>
+                <button fd-button
+                        fdType="transparent"
+                        fd-dialog-decisive-button
+                        (click)="dialog.close()">
+                    Cancel
+                </button>
+            </fd-dialog-footer>
+        </fd-dialog>
+    </ng-template>
 </ng-template>
