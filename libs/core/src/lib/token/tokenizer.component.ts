@@ -29,15 +29,15 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     tokenList: QueryList<TokenComponent>;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => FormControlDirective), {static: false})
+    @ContentChild(forwardRef(() => FormControlDirective))
     input: FormControlDirective;
 
     /** @hidden */
-    @ViewChild('tokenizerInner', {static: false})
+    @ViewChild('tokenizerInner')
     tokenizerInnerEl: ElementRef;
 
     /** @hidden */
-    @ViewChild('moreElement', {static: false})
+    @ViewChild('moreElement')
     moreElement: ElementRef;
 
     /** @hidden */
