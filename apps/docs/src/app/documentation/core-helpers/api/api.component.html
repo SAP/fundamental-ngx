@@ -7,16 +7,13 @@
         </fd-popover-control>
         <fd-popover-body>
             <fd-menu>
-                <ul fd-menu-list>
-                    <li
-                        fd-menu-item
-                        *ngFor="let file of files"
-                        (click)="getFile(file)"
-                        [ngClass]="{ 'is-selected': file === activeFile }"
-                    >
-                        {{ file }}
-                    </li>
-                </ul>
+                <li fd-menu-item-component *ngFor="let file of files"
+                    [ngClass]="{'is-selected': file === activeFile}"
+                    (click)="getFile(file)">
+                    <div fd-menu-link>
+                        <span fd-menu-title>{{file}}</span>
+                    </div>
+                </li>
             </fd-menu>
         </fd-popover-body>
     </fd-popover>

@@ -1,6 +1,5 @@
 import { Component, ContentChild, ElementRef, HostListener, Input, TemplateRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { TemplateDirective } from '../../utils/directives/template/template.directive';
 import { MenuComponent } from '../menu.component';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 
@@ -22,9 +21,9 @@ export class MenuItemComponent {
     @Input()
     itemId: string = `fd-menu-item-${menuUniqueId++}`;
 
-    /** @hidden Reference to sub menu template */
-    @ContentChild(TemplateDirective, {read: TemplateRef})
-    subMenuTemplate: TemplateRef<any>;
+    /** Reference to sub menu template */
+    @Input()
+    subMenu: TemplateRef<any>;
 
     /** @hidden Reference to menu item title */
     @ContentChild(MenuTitleDirective)
@@ -44,8 +43,8 @@ export class MenuItemComponent {
     /** @hidden Handle click if Menu is displayed in mobile mode */
     @HostListener('click')
     onMobileItemClicked() {
-        if (this.hasSubMenu && this._menuComponent.mobile) {
-            this._menuComponent.loadView({title: this.menuItemTitle.title, template: this.subMenuTemplate})
+        if (this.subMenu && this._menuComponent.mobile) {
+            this._menuComponent.loadView({title: this.menuItemTitle.title, template: this.subMenu})
         }
     };
 
@@ -54,13 +53,8 @@ export class MenuItemComponent {
                 private _menuComponent: MenuComponent) {
     }
 
-    /** Whether menu item has sub menu  */
-    get hasSubMenu(): boolean {
-        return !!this.subMenuTemplate;
-    }
-
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.hasSubMenu && !this._menuComponent.mobile;
+        return this.subMenu && !this._menuComponent.mobile;
     }
 }

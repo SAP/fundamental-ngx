@@ -1,7 +1,9 @@
 <fd-popover *ngIf="collapsedBreadcrumbItems.length" [noArrow]="true" [placement]="placement$ | async">
     <fd-popover-control>
         <fd-breadcrumb-item>
-            <a fd-breadcrumb-link>...<fd-icon [glyph]="'slim-arrow-down'"></fd-icon></a>
+            <a fd-breadcrumb-link>...
+                <fd-icon [glyph]="'slim-arrow-down'"></fd-icon>
+            </a>
         </fd-breadcrumb-item>
         <fd-breadcrumb-item *ngIf="collapsedBreadcrumbItems.length < breadcrumbItems.length">
             <!-- needed for :after -->
@@ -9,17 +11,12 @@
     </fd-popover-control>
     <fd-popover-body>
         <fd-menu [separator]="true">
-            <ul fd-menu-list>
-                <li *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
-                    <a
-                        fd-menu-item
-                        [attr.href]="collapsedBreadcrumbItem.href"
-                        [routerLink]="collapsedBreadcrumbItem.routerLink"
-                    >
-                        {{ collapsedBreadcrumbItem.elementRef.nativeElement.innerText }}
-                    </a>
-                </li>
-            </ul>
+            <li fd-menu-item-component *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
+                <a fd-menu-link [attr.href]="collapsedBreadcrumbItem.href"
+                   [routerLink]="collapsedBreadcrumbItem.routerLink">
+                    <span fd-menu-title>{{collapsedBreadcrumbItem.elementRef.nativeElement.innerText}}</span>
+                </a>
+            </li>
         </fd-menu>
     </fd-popover-body>
 </fd-popover>

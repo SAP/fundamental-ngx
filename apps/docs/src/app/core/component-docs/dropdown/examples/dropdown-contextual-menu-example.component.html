@@ -1,44 +1,44 @@
-<!--<fd-popover style="margin-right: 12px">-->
-<!--    <fd-popover-control>-->
-<!--        <button fd-button [fdType]="'transparent'" [glyph]="'vertical-grip'"></button>-->
-<!--    </fd-popover-control>-->
-<!--    <fd-popover-body *ngIf="menu1 && menu1.length">-->
-<!--        <fd-menu>-->
-<!--            <fd-menu-item *ngFor="let option of menu1">-->
-<!--                <a [attr.href]="option.url" fd-menu-link>-->
-<!--                    <span fd-menu-title>{{option.text}}</span>-->
-<!--                </a>-->
-<!--            </fd-menu-item>-->
-<!--        </fd-menu>-->
-<!--    </fd-popover-body>-->
-<!--</fd-popover>-->
+<fd-popover style="margin-right: 12px">
+    <fd-popover-control>
+        <button fd-button [fdType]="'transparent'" [glyph]="'vertical-grip'"></button>
+    </fd-popover-control>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
+        <fd-menu>
+            <li fd-menu-item-component *ngFor="let option of menu1">
+                <a [attr.href]="option.url" fd-menu-link>
+                    <span fd-menu-title>{{option.text}}</span>
+                </a>
+            </li>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
 
-<!--<fd-popover style="margin-right: 12px">-->
-<!--    <fd-popover-control>-->
-<!--        <button fd-button>More</button>-->
-<!--    </fd-popover-control>-->
-<!--    <fd-popover-body *ngIf="menu1 && menu1.length">-->
-<!--        <fd-menu>-->
-<!--            <fd-menu-item *ngFor="let option of menu1">-->
-<!--                <a [attr.href]="option.url" fd-menu-link>-->
-<!--                    <span fd-menu-title>{{option.text}}</span>-->
-<!--                </a>-->
-<!--            </fd-menu-item>-->
-<!--        </fd-menu>-->
-<!--    </fd-popover-body>-->
-<!--</fd-popover>-->
+<fd-popover style="margin-right: 12px">
+    <fd-popover-control>
+        <button fd-button>More</button>
+    </fd-popover-control>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
+        <fd-menu>
+            <li fd-menu-item-component *ngFor="let option of menu1">
+                <a [attr.href]="option.url" fd-menu-link>
+                    <span fd-menu-title>{{option.text}}</span>
+                </a>
+            </li>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
 
-<!--<fd-popover>-->
-<!--    <fd-popover-control>-->
-<!--        <button fd-button [fdType]="'transparent'">More</button>-->
-<!--    </fd-popover-control>-->
-<!--    <fd-popover-body *ngIf="menu1 && menu1.length">-->
-<!--        <fd-menu>-->
-<!--            <fd-menu-item *ngFor="let option of menu1">-->
-<!--                <a [attr.href]="option.url" fd-menu-link>-->
-<!--                    <span fd-menu-title>{{option.text}}</span>-->
-<!--                </a>-->
-<!--            </fd-menu-item>-->
-<!--        </fd-menu>-->
-<!--    </fd-popover-body>-->
-<!--</fd-popover>-->
+<fd-popover>
+    <fd-popover-control>
+        <button fd-button [fdType]="'transparent'">More</button>
+    </fd-popover-control>
+    <fd-popover-body *ngIf="menu1 && menu1.length">
+        <fd-menu>
+            <li fd-menu-item-component *ngFor="let option of menu1">
+                <a [attr.href]="option.url" fd-menu-link>
+                    <span fd-menu-title>{{option.text}}</span>
+                </a>
+            </li>
+        </fd-menu>
+    </fd-popover-body>
+</fd-popover>
