@@ -24,12 +24,11 @@
                     'fd-calendar__item--range': cell.selectedRange && !cell.selectedFirst && !cell.selectedLast,
                     'fd-calendar__item--current': cell.today,
                     'fd-calendar__item--weekend': cell.weekend && markWeekends,
-                    'is-disabled': cell.disabled,
-                    'is-blocked': cell.blocked
+                    'is-disabled': cell.disabled
                 }"
             [class]="cell.specialNumber ? ('fd-calendar__special-day--' + cell.specialNumber) : ''"
             [attr.id]="cell.id"
-            [attr.aria-disabled]="cell.disabled || cell.blocked"
+            [attr.aria-disabled]="cell.disabled"
             [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
             (click)="selectDate(cell, $event)"
             (keydown)="onKeydownDayHandler($event, cell, getIndex(rowIndex, cellIndex))"

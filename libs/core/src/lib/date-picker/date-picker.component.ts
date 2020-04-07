@@ -236,33 +236,6 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     };
 
     /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
      * Method that handle calendar active view change and throws event.
      */
     public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
@@ -523,8 +496,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     private _isSingleModelValid(fdDate: FdDate): boolean {
         return (
             this._isFdDateValid(fdDate) &&
-            !this.disableFunction(fdDate) &&
-            !this.blockFunction(fdDate)
+            !this.disableFunction(fdDate)
         ) || (!this.inputFieldDate && this.allowNull);
     }
 
@@ -539,15 +511,15 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     /** Method that returns info if end date model given is valid */
     private _isEndDateValid(endDate: FdDate): boolean {
         return this._isFdDateValid(endDate) &&
-            !this.disableRangeEndFunction(endDate) &&
-            !this.blockRangeEndFunction(endDate);
+            !this.disableRangeEndFunction(endDate)
+        ;
     }
 
     /** Method that returns info if start date model given is valid */
     private _isStartDateValid(startDate: FdDate): boolean {
         return this._isFdDateValid(startDate) &&
-            !this.disableRangeStartFunction(startDate) &&
-            !this.blockRangeStartFunction(startDate);
+            !this.disableRangeStartFunction(startDate)
+        ;
     }
 
     /** Method that returns info if end date model given is valid */

@@ -6,11 +6,6 @@ import { CalendarYearGrid, FdDate, SpecialDayRule } from '@fundamental-ngx/core'
     template: `
         <fd-calendar [calType]="'single'"
                      [(ngModel)]="date"
-                     [yearGrid]="gridYear"
-                     [aggregatedYearGrid]="aggregatedYearGrid"
-                     [showWeekNumbers]="false"
-                     [blockFunction]="myBlockFunction"
-                     [specialDaysRules]="specialDayRule"
                      [disableFunction]="myDisableFunction">
         </fd-calendar>
         <br/>
@@ -29,32 +24,9 @@ export class CalendarSingleExampleComponent {
 
     date = FdDate.getToday();
 
-    specialDayRule: SpecialDayRule[] = [
-        { specialDayNumber: 4, rule: fdDate => fdDate.getDay() === 1 }
-    ];
-
-    gridYear: CalendarYearGrid = {
-        rows: 4,
-        cols: 2,
-        yearMapping: (year: number) => year + ' c-test'
-    };
-
-    aggregatedYearGrid: CalendarYearGrid = {
-        rows: 8,
-        cols: 1,
-        yearMapping: (year: number) => year + ' d-test'
-    };
-
     myDisableFunction = function (d: FdDate): boolean {
         const day = d.getDay();
         return day === 6 || day === 7;
-    };
-
-    // Block days before/after any day
-    myBlockFunction = function (d: FdDate): boolean {
-        const firstDay = FdDate.getToday();
-        const lastDay = new FdDate(firstDay.year, firstDay.month, firstDay.day + 7);
-        return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp();
     };
 
     disableWednesday() {

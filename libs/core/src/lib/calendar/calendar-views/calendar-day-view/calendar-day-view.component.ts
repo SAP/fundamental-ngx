@@ -181,33 +181,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         return false;
     };
 
-    /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
     /** @hidden */
     constructor(
         private calendarI18n: CalendarI18n,
@@ -236,7 +209,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             event.preventDefault();
             this.newFocusedDayId = day.id;
         }
-        if (!day.blocked && !day.disabled) {
+        if (!day.disabled) {
             if (this.calType === 'single') {
                 this.selectedDate = day.date;
                 this.selectedDateChange.emit(day.date);
@@ -561,7 +534,6 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             date: fdDate,
             weekDay: fdDate.getDay(),
             disabled: this.disableFunction(fdDate),
-            blocked: this.blockFunction(fdDate),
             selected: (
                 (this.calType === 'single' && CalendarService.datesEqual(fdDate, this.selectedDate)) ||
                 (this.selectedRangeDate && CalendarService.datesEqual(fdDate, this.selectedRangeDate.start)) ||
@@ -582,16 +554,9 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             if (this.disableRangeStartFunction && !day.disabled) {
                 day.disabled = this.disableRangeStartFunction(day.date);
             }
-            if (this.blockRangeStartFunction && !day.blocked) {
-                day.blocked = this.blockRangeStartFunction(day.date);
-            }
         } else if (this.selectCounter === 1) {
             if (this.disableRangeEndFunction && !day.disabled) {
                 day.disabled = this.disableRangeEndFunction(day.date);
-            }
-
-            if (this.blockRangeEndFunction && !day.blocked) {
-                day.blocked = this.blockRangeEndFunction(day.date);
             }
         }
 

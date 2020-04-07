@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '../../models/fd-date';
 import { Subject } from 'rxjs';
 import { CalendarService } from '../../calendar.service';
 import { takeUntil } from 'rxjs/operators';

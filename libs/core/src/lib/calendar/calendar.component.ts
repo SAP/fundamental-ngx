@@ -235,33 +235,6 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         return false;
     };
 
-    /**
-     * Function used to block certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeStartFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockRangeEndFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
-     * Function used to block certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
     escapeFocusFunction: Function = (): void => {

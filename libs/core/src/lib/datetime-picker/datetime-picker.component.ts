@@ -264,15 +264,6 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     };
 
     /**
-     * Function used to block certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    blockFunction = function(fdDate: FdDate): boolean {
-        return false;
-    };
-
-    /**
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
@@ -472,8 +463,7 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor, Va
     /** Method that provides information if Date is valid */
     private _isDateValid(fdDateTime: FdDatetime): boolean {
         return fdDateTime && fdDateTime.isDateValid() &&
-            !this.disableFunction(fdDateTime.date) &&
-            !this.blockFunction(fdDateTime.date)
+            !this.disableFunction(fdDateTime.date)
         ;
     }
 
