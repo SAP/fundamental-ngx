@@ -41,6 +41,4 @@ export class ListComponent {
     @Input()
     @HostBinding('class.fd-list--no-border')
     noBorder: boolean = false;
-
-
 }

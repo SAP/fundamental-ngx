@@ -5,7 +5,9 @@ import {
     Input,
     OnDestroy,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    OnChanges,
+    OnInit
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
@@ -25,13 +27,33 @@ import { takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBuilder {
+export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy, CssClassBuilder {
+    /** Apply user custom styles */
+    @Input()
+    class: string;
+
+    /**
+     * Whether user wants to use tab component in certain mode. Modes available:
+     * 'icon-only' | 'process' | 'filter'
+     */
+    @Input()
+    mode: TabModes;
+
+    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
+    @Input()
+    size: TabSizes = 'm';
+
+    /** Whether user wants to use tab component in compact mode */
+    @Input()
+    compact: boolean;
 
     /** @hidden */
-    @ContentChildren(TabLinkDirective) links: QueryList<TabLinkDirective>;
+    @ContentChildren(TabLinkDirective)
+    links: QueryList<TabLinkDirective>;
 
     /** @hidden */
-    @ContentChildren(TabItemDirective) items: QueryList<TabItemDirective>;
+    @ContentChildren(TabItemDirective)
+    items: QueryList<TabItemDirective>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -39,63 +61,26 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-    private _class: string = '';
-    @Input()
-    set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    } // user's custom classes
-
-    private _mode: TabModes;
-    /**
-     * Whether user wants to use tab component in certain mode. Modes available:
-     * 'icon-only' | 'process' | 'filter'
-     */
-    @Input()
-    set mode(mode: TabModes) {
-        this._mode = mode;
-        this.buildComponentCssClass();
-    }
-
-    private _size: TabSizes = 'm';
-    /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
-    @Input()
-    set size(size: TabSizes) {
-        this._size = size;
-        this.buildComponentCssClass();
-    }
-
-    private _compact: boolean;
-    /** Whether user wants to use tab component in compact mode */
-    @Input()
-    set compact(compact: boolean) {
-        this._compact = compact;
-        this.buildComponentCssClass();
-    }
-
     /** @hidden */
     constructor(
         private _tabsService: TabsService,
         private _elementRef: ElementRef
-    ) {}
-
-    /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
-    public get tabLinks(): TabLinkDirective[] {
-        let tabLinks: TabLinkDirective[] = [];
-        if (this.links) {
-            tabLinks = tabLinks.concat(this.links.map(link => link));
-        }
-        if (this.items) {
-            tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem));
-        }
-        return tabLinks;
-    }
+    ) { }
 
     /** @hidden */
-    public ngAfterContentInit(): void {
+    ngAfterContentInit(): void {
         this._refreshSubscription();
         this._listenOnTabSelect();
         this._listenOnContentQueryListChange();
+    }
+
+    /** @hidden */
+    ngOnChanges() {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit() {
         this.buildComponentCssClass();
     }
 
@@ -103,14 +88,6 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
-    }
-
-    /**
-     * Function to select a new tab from an index.
-     * @param tabIndex Index of the tab to select.
-     */
-    selectTab(tabIndex: number): void {
-        this.tabLinks[tabIndex].elementRef.nativeElement.click();
     }
 
     @applyCssClass
@@ -121,10 +98,10 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
     buildComponentCssClass(): string {
         return [
             `fd-tabs`,
-            this._mode ? ('fd-tabs--' + this._mode) : '',
-            this._compact ? 'fd-tabs--compact' : '',
-            `fd-tabs--${this._size}`,
-            this._class
+            this.mode ? ('fd-tabs--' + this.mode) : '',
+            this.compact ? 'fd-tabs--compact' : '',
+            `fd-tabs--${this.size}`,
+            this.class
         ].filter(x => x !== '').join(' ');
     }
 
@@ -135,12 +112,32 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         return this._elementRef;
     }
 
+    /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
+    get tabLinks(): TabLinkDirective[] {
+        let tabLinks: TabLinkDirective[] = [];
+        if (this.links) {
+            tabLinks = tabLinks.concat(this.links.map(link => link));
+        }
+        if (this.items) {
+            tabLinks = tabLinks.concat(this.items.filter(item => !!item.linkItem).map(item => item.linkItem));
+        }
+        return tabLinks;
+    }
+
+    /**
+     * Function to select a new tab from an index.
+     * @param tabIndex Index of the tab to select.
+     */
+    selectTab(tabIndex: number): void {
+        this.tabLinks[tabIndex].elementRef.nativeElement.click();
+    }
+
     /** @hidden */
     private _listenOnTabSelect(): void {
         this._tabsService.tabSelected
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(index => this.selectTab(index))
-        ;
+            ;
     }
 
     /**
@@ -152,7 +149,7 @@ export class TabNavComponent implements AfterContentInit, OnDestroy, CssClassBui
         merge(this.links.changes, this.items.changes)
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(() => this._refreshSubscription())
-        ;
+            ;
     }
 
     /** Whether any QueryList detects any changes */
