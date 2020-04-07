@@ -1,18 +1,12 @@
-<fd-popover>
-    <fd-dropdown-control>Dropdown</fd-dropdown-control>
-    <fd-popover-body>
-        <fd-menu>
-            <ul
-                fd-menu-list
-                fdInfiniteScroll
-                (onScrollAction)="loadMoreElements()"
-                [scrollPercent]="scrollPercent"
-                style="overflow-y: scroll; display: block; max-height: 120px;"
-            >
-                <li fd-menu-item *ngFor="let element of displayedList">
-                    {{ element.label }}
-                </li>
-            </ul>
-        </fd-menu>
-    </fd-popover-body>
-</fd-popover>
+<!--<fd-popover>-->
+<!--    <fd-dropdown-control>Dropdown</fd-dropdown-control>-->
+<!--    <fd-popover-body>-->
+<!--        <fd-menu fdInfiniteScroll (onScrollAction)="loadMoreElements()" [scrollPercent]="scrollPercent" style="overflow-y: scroll; display: block; max-height: 120px;">-->
+<!--            <fd-menu-item *ngFor="let option of displayedList">-->
+<!--                <a [attr.href]="option.url" fd-menu-link>-->
+<!--                    <span fd-menu-title>{{ option.label }}</span>-->
+<!--                </a>-->
+<!--            </fd-menu-item>-->
+<!--        </fd-menu>-->
+<!--    </fd-popover-body>-->
+<!--</fd-popover>-->

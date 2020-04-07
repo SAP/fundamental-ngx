@@ -2,7 +2,6 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    HostBinding,
     Input,
     TemplateRef,
     ViewChild,
