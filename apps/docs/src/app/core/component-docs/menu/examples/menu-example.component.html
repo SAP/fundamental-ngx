@@ -1,19 +1,19 @@
-<fd-menu [mobile]="false" mobileMenuTitle="Fresh Market">
-    <fd-menu-item>
+<fd-menu [mobile]="true" mobileMenuTitle="Fresh Market">
+    <li fd-menu-item-component>
         <a href="#" fd-menu-link>
             <fd-icon fd-menu-addon glyph="accept"></fd-icon>
             <span fd-menu-title>Option 1</span>
         </a>
-    </fd-menu-item>
+    </li>
 
-    <fd-menu-item>
+    <li fd-menu-item-component>
         <a href="#" fd-menu-link>
             <span fd-menu-title>Option 2</span>
             <span fd-menu-shortcut>Alt + F1</span>
         </a>
-    </fd-menu-item>
+    </li>
 
-    <fd-menu-item>
+    <li fd-menu-item-component>
         <div fd-menu-link>
             <span fd-menu-title>Option 3</span>
             <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
@@ -21,62 +21,62 @@
 
         <ng-template fdTemplate="subMenu">
 
-            <fd-menu-item>
+            <li fd-menu-item-component>
                 <div fd-menu-link>
                     <span fd-menu-title>Sub Option 1</span>
                     <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
                 </div>
 
                 <ng-template fdTemplate="subMenu">
-                    <fd-menu-item>
+                    <li fd-menu-item-component>
                         <a href="#" fd-menu-link>
                             <span fd-menu-title>Sub sub Option 1</span>
                         </a>
-                    </fd-menu-item>
+                    </li>
 
-                    <fd-menu-item>
+                    <li fd-menu-item-component>
                         <a href="#" fd-menu-link>
                             <span fd-menu-title>Sub sub Option 2</span>
                         </a>
-                    </fd-menu-item>
+                    </li>
                 </ng-template>
-            </fd-menu-item>
+            </li>
 
-            <fd-menu-item>
+            <li fd-menu-item-component>
                 <div fd-menu-link>
                     <span fd-menu-title>Sub Option 2</span>
                     <fd-icon fd-menu-addon position="after" glyph="navigation-right-arrow"></fd-icon>
                 </div>
 
                 <ng-template fdTemplate="subMenu">
-                    <fd-menu-item>
+                    <li fd-menu-item-component>
                         <a href="#" fd-menu-link>
                             <span fd-menu-title>Sub sub Option 1</span>
                         </a>
-                    </fd-menu-item>
+                    </li>
 
-                    <fd-menu-item>
+                    <li fd-menu-item-component>
                         <a href="#" fd-menu-link>
                             <span fd-menu-title>Sub sub Option 2</span>
                         </a>
-                    </fd-menu-item>
+                    </li>
                 </ng-template>
-            </fd-menu-item>
+            </li>
 
         </ng-template>
-    </fd-menu-item>
+    </li>
 
     <fd-menu-separator></fd-menu-separator>
 
-    <fd-menu-item>
+    <li fd-menu-item-component>
         <a href="#" fd-menu-link>
             <span fd-menu-title>Option 4</span>
         </a>
-    </fd-menu-item>
+    </li>
 
-    <fd-menu-item>
+    <li fd-menu-item-component>
         <a href="#" fd-menu-link>
             <span fd-menu-title>Option 5</span>
         </a>
-    </fd-menu-item>
+    </li>
 </fd-menu>

@@ -7,8 +7,14 @@ import { MenuTitleDirective } from '../directives/menu-title.directive';
 let menuUniqueId: number = 0;
 
 @Component({
-    selector: 'fd-menu-item',
-    templateUrl: './menu-item.component.html'
+    // tslint:disable-next-line:component-selector
+    selector: 'li[fd-menu-item-component]',
+    exportAs: 'fd-menu-item-component',
+    templateUrl: './menu-item.component.html',
+    host: {
+        '[attr.aria-controls]': 'itemId',
+        '[attr.aria-haspopup]': 'hasPopup'
+    }
 })
 export class MenuItemComponent {
 

@@ -1,16 +1,9 @@
-<li fd-menu-item
-    [attr.aria-controls]="itemId"
-    [attr.aria-haspopup]="hasPopup">
+<ng-content></ng-content>
 
-    <ng-content select="[fd-menu-link]"></ng-content>
-
-    <ng-content></ng-content>
-
-    <ng-container *ngIf="hasPopup">
-        <ul class="fd-menu__sublist"
-            [attr.id]="itemId"
-            [attr.aria-hidden]="!(subLevelVisible$ | async)">
-            <ng-container *ngTemplateOutlet="subMenuTemplate"></ng-container>
-        </ul>
-    </ng-container>
-</li>
+<ng-container *ngIf="hasPopup">
+    <ul class="fd-menu__sublist"
+        [attr.id]="itemId"
+        [attr.aria-hidden]="!(subLevelVisible$ | async)">
+        <ng-container *ngTemplateOutlet="subMenuTemplate"></ng-container>
+    </ul>
+</ng-container>

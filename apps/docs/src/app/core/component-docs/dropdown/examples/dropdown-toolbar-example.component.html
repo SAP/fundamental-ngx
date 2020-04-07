@@ -1,35 +1,25 @@
-<fd-popover style="margin-right: 12px;">
-    <fd-dropdown-control [toolbar]="true">Dropdown</fd-dropdown-control>
-    <fd-popover-body *ngIf="(menu1 && menu1.length) || (menu2 && menu2.length)">
-        <fd-menu>
-            <ul fd-menu-list>
-                <li *ngFor="let option of menu1">
-                    <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
-                </li>
-            </ul>
-<!--            <fd-menu-group>-->
-<!--                <h1 fd-menu-title>-->
-<!--                    Group header-->
-<!--                </h1>-->
-<!--                <ul fd-menu-list>-->
-<!--                    <li *ngFor="let option of menu2">-->
-<!--                        <a fd-menu-item [attr.href]="option.url">{{option.text}}</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </fd-menu-group>-->
-        </fd-menu>
-    </fd-popover-body>
-</fd-popover>
+<!--<fd-popover style="margin-right: 12px">-->
+<!--    <fd-dropdown-control [toolbar]="true">Dropdown</fd-dropdown-control>-->
+<!--    <fd-popover-body *ngIf="menu1 && menu1.length">-->
+<!--        <fd-menu>-->
+<!--            <fd-menu-item *ngFor="let option of menu1">-->
+<!--                <a [attr.href]="option.url" fd-menu-link>-->
+<!--                    <span fd-menu-title>{{ option.text }}</span>-->
+<!--                </a>-->
+<!--            </fd-menu-item>-->
+<!--        </fd-menu>-->
+<!--    </fd-popover-body>-->
+<!--</fd-popover>-->
 
-<fd-popover>
-    <fd-dropdown-control [toolbar]="true" [compact]="true">Compact Dropdown</fd-dropdown-control>
-    <fd-popover-body *ngIf="menu1 && menu1.length">
-        <fd-menu>
-            <ul fd-menu-list>
-                <li *ngFor="let option of menu1">
-                    <a fd-menu-item [attr.href]="option.url">{{ option.text }}</a>
-                </li>
-            </ul>
-        </fd-menu>
-    </fd-popover-body>
-</fd-popover>
+<!--<fd-popover>-->
+<!--    <fd-dropdown-control [toolbar]="true" [compact]="true">Compact Dropdown</fd-dropdown-control>-->
+<!--    <fd-popover-body *ngIf="menu1 && menu1.length">-->
+<!--        <fd-menu [compact]="true">-->
+<!--            <fd-menu-item *ngFor="let option of menu1">-->
+<!--                <a [attr.href]="option.url" fd-menu-link>-->
+<!--                    <span fd-menu-title>{{ option.text }}</span>-->
+<!--                </a>-->
+<!--            </fd-menu-item>-->
+<!--        </fd-menu>-->
+<!--    </fd-popover-body>-->
+<!--</fd-popover>-->
