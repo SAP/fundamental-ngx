@@ -1,8 +1,12 @@
-/**
- * Configuration for opening an alert with the AlertService.
- */
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
 
+/**
+ * @deprecated
+ * Alert component is depricated since version 0.16.0
+ * Message Strip component should be used instead.
+ * 
+ * Configuration for opening an alert with the AlertService.
+ */
 export class AlertConfig implements DynamicComponentConfig {
 
     /** Whether the alert is dismissible. */

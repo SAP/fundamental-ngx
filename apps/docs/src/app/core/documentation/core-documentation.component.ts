@@ -50,6 +50,7 @@ export class CoreDocumentationComponent implements OnInit {
         { url: 'core/localizationEditor', name: 'Localization Editor' },
         { url: 'core/mega-menu', name: 'Mega Menu' },
         { url: 'core/menu', name: 'Menu' },
+        { url: 'core/message-strip', name: 'Message Strip' },
         { url: 'core/multi-input', name: 'Multi Input' },
         { url: 'core/notification', name: 'Notification' },
         { url: 'core/object-status', name: 'Object Status' },

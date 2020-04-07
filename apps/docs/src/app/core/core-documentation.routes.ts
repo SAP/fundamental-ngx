@@ -136,6 +136,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then(m => m.MenuDocsModule)
             },
             {
+                path: 'message-strip',
+                loadChildren: () => import('./component-docs/message-strip/message-strip-docs.module').then(m => m.MessageStripDocsModule)
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () => import('./component-docs/multi-input/multi-input-docs.module').then(m => m.MultiInputDocsModule)
             },
