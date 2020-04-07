@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
 
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
+import * as calendarOptionHtml from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.html';
+import * as calendarOptionSrc from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.ts';
+import * as calendarGridSrc from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.ts';
+import * as calendarGridHtml from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.html';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
 import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
 import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.component.ts';
 import * as calendarIntlMomentSrc from '!raw-loader!./examples/calendar--i18n-moment-example.component.ts';
+import * as calendarMobileSrc from '!raw-loader!./examples/calendar-mobile-example/calendar-mobile-example.component.ts';
+import * as calendarMobileHtml from '!raw-loader!./examples/calendar-mobile-example/calendar-mobile-example.component.html';
 import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-example.component.ts';
 import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-example.component.html';
 import * as calendarFormSourceScss from '!raw-loader!./examples/calendar-form-example.component.scss';
@@ -16,45 +22,45 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './calendar-docs.component.html'
 })
 export class CalendarDocsComponent {
-    exampleFunctionsHtml = `Example Disable and Block Functions:
+    exampleFunctionsHtml = `Example Disable, Block Functions:
 
 // Disable the weekends
 myDisableFunction = function (d: FdDate): boolean {
     let day = d.getDay();
     return day === 6 || day === 0;
-}
+};
 
 // Disable any weekday (Monday)
 myDisableFunction2 = function(d: FdDate): boolean {
     let day = d.getDay();
     return day === 1;
-}
+};
 
 // Disable past selection
 myDisableFunction = function(d: FdDate): boolean {
     let today = FdDate.getToday();
     today.setHours(0,0,0,0);
     return d.getTimeStamp() < today.getTimeStamp();
-}
+};
 
 // Disable future selection
 myDisableFunction = function(d: FdDate): boolean {
     let today = FdDate.getToday();
     today.setHours(0,0,0,0);
     return d.getTimeStamp() > today.getTimeStamp()
-}
+};
 
 // Disable days before a particular day
 myDisableFunction = function(d: FdDate): boolean {
     let day = new FdDate(2018, 9, 15);
     return d.getTimeStamp() < day.getTimeStamp();
-}
+};
 
 // Disable days after a particular day
 myDisableFunction = function(d: FdDate): boolean {
     let day = new FdDate(2018, 9, 5);
     return d.getTimeStamp() > day.getTimeStamp()
-}
+};
 
 // Disable days within a range
 myDisableFunction = function(d: FdDate): boolean {
@@ -87,6 +93,51 @@ myDisableFunction = function(d: FdDate): boolean {
             fileName: 'calendar-range-example',
             code: calendarRangeSrc
         }
+    ];
+
+    calendarMobileSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarMobileExampleComponent',
+            fileName: 'calendar-mobile-example',
+            code: calendarMobileSrc
+        },
+        {
+            language: 'html',
+            component: 'CalendarMobileExampleComponent',
+            fileName: 'calendar-mobile-example',
+            code: calendarMobileHtml
+        }
+    ];
+
+    calendarGridSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarGridExampleComponent',
+            fileName: 'calendar-grid-example',
+            code: calendarGridSrc
+        },
+        {
+            language: 'html',
+            component: 'CalendarGridExampleComponent',
+            fileName: 'calendar-grid-example',
+            code: calendarGridHtml
+        },
+    ];
+
+    calendarOptionsSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarOptionsExampleComponent',
+            fileName: 'calendar-options-example',
+            code: calendarOptionSrc
+        },
+        {
+            language: 'html',
+            component: 'CalendarOptionsExampleComponent',
+            fileName: 'calendar-options-example',
+            code: calendarOptionHtml
+        },
     ];
 
     calendarMondayStartSource: ExampleFile[] = [
