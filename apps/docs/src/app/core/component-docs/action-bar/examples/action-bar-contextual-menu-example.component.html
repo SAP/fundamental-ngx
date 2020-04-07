@@ -1,39 +1,34 @@
 <div fd-action-bar>
     <div fd-action-bar-header>
         <h3 fd-action-bar-title>Page Title</h3>
-    </div>
-    <div fd-action-bar-actions>
-        <fd-popover placement="bottom-end">
-            <fd-popover-control>
-                <button
-                    fd-button
-                    aria-label="More"
-                    aria-haspopup="true"
-                    [fdType]="'transparent'"
-                    [glyph]="'overflow'"
-                ></button>
-            </fd-popover-control>
-            <fd-popover-body>
-                <fd-menu>
-                    <ul fd-menu-list>
-                        <li fd-menu-item class="is-disabled">
-                            Edit
-                        </li>
-                        <li fd-menu-item>
-                            Delete
-                        </li>
-                        <li fd-menu-item>
-                            Assign
-                        </li>
-                        <li fd-menu-item>
-                            Expire
-                        </li>
-                        <li fd-menu-item>
-                            Archive
-                        </li>
-                    </ul>
-                </fd-menu>
-            </fd-popover-body>
-        </fd-popover>
+        <div fd-action-bar-actions>
+            <fd-popover placement="bottom-end" [noArrow]="false">
+                <fd-popover-control>
+                    <button fd-button aria-label="More" aria-haspopup="true" [compact]="true" [fdType]="'transparent'"
+                            [glyph]="'overflow'"></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <fd-menu>
+                        <ul fd-menu-list>
+                            <li fd-menu-item class="is-disabled">
+                                Edit
+                            </li>
+                            <li fd-menu-item>
+                                Delete
+                            </li>
+                            <li fd-menu-item>
+                                Assign
+                            </li>
+                            <li fd-menu-item>
+                                Expire
+                            </li>
+                            <li fd-menu-item>
+                                Archive
+                            </li>
+                        </ul>
+                    </fd-menu>
+                </fd-popover-body>
+            </fd-popover>
+        </div>
     </div>
 </div>

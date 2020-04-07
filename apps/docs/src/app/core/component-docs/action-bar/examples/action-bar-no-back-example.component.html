@@ -1,10 +1,10 @@
 <div fd-action-bar>
     <div fd-action-bar-header>
         <h3 fd-action-bar-title>Page Title</h3>
-        <div fd-action-bar-description>Action bar Description</div>
+        <div fd-action-bar-actions>
+            <button fd-button [compact]="true">Cancel</button>
+            <button fd-button [compact]="true" [fdType]="'emphasized'">Save</button>
+        </div>
     </div>
-    <div fd-action-bar-actions>
-        <button fd-button [fdType]="'main'">Save</button>
-        <button fd-button [fdType]="'transparent'">Cancel</button>
-    </div>
+    <p fd-action-bar-description>Action bar Description</p>
 </div>
