@@ -161,13 +161,13 @@ describe('NestedListStateService', () => {
                 },
                 {
                     linkItem: {
-                        controlSelected: false
+                        controlSelected: undefined
                     },
                     allChildrenItems: []
                 },
                 {
                     linkItem: {
-                        controlSelected: false
+                        controlSelected: undefined
                     },
                     allChildrenItems: []
                 }
@@ -194,17 +194,17 @@ describe('NestedListStateService', () => {
                             allChildrenItems: [
                                 {
                                     linkItem: {
-                                        controlSelected: false
+                                        controlSelected: undefined
                                     },
                                     allChildrenItems: [
                                         {
                                             linkItem: {
-                                                controlSelected: false
+                                                controlSelected: undefined
                                             },
                                             allChildrenItems: [
                                                 {
                                                     linkItem: {
-                                                        controlSelected: false
+                                                        controlSelected: undefined
                                                     },
                                                     allChildrenItems: []
                                                 }
@@ -225,13 +225,13 @@ describe('NestedListStateService', () => {
                 {
                     linkItem: {
                         selected: true,
-                        controlSelected: false
+                        controlSelected: undefined
                     },
                     allChildrenItems: []
                 },
                 {
                     linkItem: {
-                        controlSelected: false
+                        controlSelected: undefined
                     },
                     allChildrenItems: []
                 }
