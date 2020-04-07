@@ -17,7 +17,6 @@ export class ComboboxDisabledExampleComponent {
     ];
 
     customForm = new FormGroup({
-        comboControl: new FormControl('Banana', Validators.required),
         disabledComboControl: new FormControl({ value: 'Kiwi', disabled: true }, Validators.required)
     });
 

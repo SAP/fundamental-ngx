@@ -339,7 +339,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
 
     /** @hidden */
     handleSearchTermChange(): void {
-        this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
+        let foundMatch = false;
+        this.dropdownValues.forEach(value => {
+            if (this.displayFn(value) === this.inputText) {
+                foundMatch = true;
+            }
+        });
+        foundMatch ? this.displayedValues = this.dropdownValues : this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         if (this.popoverComponent) {
             this.popoverComponent.updatePopover();
         }
@@ -404,8 +410,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit, OnChange
         }
         if (this.fillOnSelect) {
             this.inputText = this.displayFn(term);
-            this.handleSearchTermChange();
         }
+        this.handleSearchTermChange();
     }
 
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
