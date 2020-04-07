@@ -1,4 +1,14 @@
-import { Directive, ElementRef, EmbeddedViewRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    EmbeddedViewRef,
+    HostBinding,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewContainerRef,
+    OnChanges
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 /**
@@ -43,7 +53,6 @@ export class TabLoadTitleDirective implements OnInit {
     }
 }
 
-
 /**
  * Directive for counter element, available in most of modes on `tab` component
  */
@@ -58,7 +67,6 @@ export class TabCountDirective {
     fdTabsCountClass: boolean = true;
 }
 
-
 /**
  * Directive for icon element, available in most of modes on `tab` component
  */
@@ -67,12 +75,10 @@ export class TabCountDirective {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-icon]'
 })
-export class TabIconDirective implements CssClassBuilder, OnInit {
-    private _class: string = '';
-    @Input() set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    } // user's custom classes
+export class TabIconDirective implements CssClassBuilder, OnChanges {
+    /** Apply user custom styles */
+    @Input()
+    class: string;
 
     /** Defines if there will be added fd-tabs-icon class. Enabled by default. */
     fdTabIconClass: boolean = true;
@@ -81,23 +87,18 @@ export class TabIconDirective implements CssClassBuilder, OnInit {
      * The icon to include inside the element
      * See the icon page for the list of icons.
      */
-    private _icon: string;
-    @Input() set icon(icon: string) {
-        this._icon = icon;
-        this.buildComponentCssClass();
-    };
+    @Input()
+    icon: string;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) {}
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden
      * Function runs when component is initialized
      * function should build component css class
      * function should build css style
      */
-    ngOnInit(): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
@@ -107,11 +108,9 @@ export class TabIconDirective implements CssClassBuilder, OnInit {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string {
-        return [
-            this.fdTabIconClass ? 'fd-tabs__icon' : '',
-            this._icon ? `sap-icon--${this._icon}` : '',
-            this._class
-        ].filter(x => x !== '').join(' ');
+        return [this.fdTabIconClass ? 'fd-tabs__icon' : '', this.icon ? `sap-icon--${this.icon}` : '', this.class]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
     /** HasElementRef interface implementation
@@ -126,70 +125,61 @@ export class TabIconDirective implements CssClassBuilder, OnInit {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-tag]',
     host: {
-        'class': 'fd-tabs__tag'
+        class: 'fd-tabs__tag'
     }
 })
-export class TabTagDirective {
-}
+export class TabTagDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-label]',
     host: {
-        'class': 'fd-tabs__label'
+        class: 'fd-tabs__label'
     }
 })
-export class TabLabelDirective {
-}
+export class TabLabelDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-process]',
     host: {
-        'class': 'fd-tabs__process'
+        class: 'fd-tabs__process'
     }
 })
-export class TabProcessDirective {
-}
+export class TabProcessDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-header]',
     host: {
-        'class': 'fd-tabs__header'
+        class: 'fd-tabs__header'
     }
 })
-export class TabHeaderDirective {
-}
+export class TabHeaderDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-counter-header]',
     host: {
-        'class': 'fd-tabs__counter-header'
+        class: 'fd-tabs__counter-header'
     }
 })
-export class TabCounterHeaderDirective {
-}
-
+export class TabCounterHeaderDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-process-icon]',
     host: {
-        'class': 'fd-tabs__process-icon'
+        class: 'fd-tabs__process-icon'
     }
 })
-export class TabProcessIconDirective {
-}
-
+export class TabProcessIconDirective {}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-separator]',
     host: {
-        'class': 'fd-tabs__separator'
+        class: 'fd-tabs__separator'
     }
 })
-export class TabSeparatorDirective {
-}
+export class TabSeparatorDirective {}

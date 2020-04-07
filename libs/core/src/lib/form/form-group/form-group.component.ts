@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 
 /**
@@ -20,20 +20,18 @@ import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormGroupComponent implements CssClassBuilder, AfterViewInit {
-    class: string;
-    /** @hidden */
+export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     @HostBinding('class.fd-form-group')
     fdFormGroupClass: boolean = true;
 
-    private _isInline: boolean = false;
     /** Determines if form items should be displayed inline or not
      * Default value is set to false;
      */
-    @Input() set isInline(inline: boolean) {
-        this._isInline = inline;
-        this.buildComponentCssClass();
-    }
+    @Input()
+    isInline: boolean;
+
+    /** @hidden */
+    class: string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {
@@ -41,7 +39,12 @@ export class FormGroupComponent implements CssClassBuilder, AfterViewInit {
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngOnChanges() {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
@@ -51,7 +54,7 @@ export class FormGroupComponent implements CssClassBuilder, AfterViewInit {
      */
     @applyCssClass
     buildComponentCssClass(): string {
-        return this._isInline ? 'fd-form-group--inline' : '';
+        return this.isInline ? 'fd-form-group--inline' : '';
     }
 
     /** @hidden */
