@@ -1,0 +1,91 @@
+<p>Example (Reactive form examples):</p>
+<form [formGroup]="customForm" class="flex-form">
+    <p>Example 1: Radio Button passed as content</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [id]="'myid'"
+            [name]="'radio1'"
+            [size]="'compact'"
+            [isInline]="true"
+            formControlName="example1"
+        >
+            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
+                {{ season }}
+            </fdp-radio-button>
+        </fdp-radio-group>
+    </fieldset>
+
+    <p>Example 2: Radio Button created from list of string values</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [id]="'radio2'"
+            [name]="'radio2'"
+            [list]="seasons"
+            [isInline]="true"
+            [size]="'compact'"
+            [value]="'Winter'"
+            [hasNoValue]="true"
+            [noValueLabel]="'(No selection)'"
+            formControlName="example2"
+        >
+        </fdp-radio-group>
+    </fieldset>
+    <p>Example 3: Radio Buttons created from list of objects</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group [name]="'radio1'" [list]="items" [isInline]="true" formControlName="example3">
+        </fdp-radio-group>
+    </fieldset>
+</form>
+<br />
+<br />
+<p>Example (Template Driven form):</p>
+<form class="flex-form">
+    <p>Example 4: Radio Button passed as content</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [id]="'myid'"
+            [name]="'radio3'"
+            [size]="'compact'"
+            [disabled]="true"
+            [isInline]="true"
+            [(ngModel)]="favoriteSeason1"
+        >
+            <fdp-radio-button *ngFor="let season of seasons" [value]="season">
+                {{ season }}
+            </fdp-radio-button>
+        </fdp-radio-group>
+    </fieldset>
+
+    <p>Example 5: Radio Button created from list of string values</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [id]="'radio2'"
+            [name]="'radio4'"
+            [list]="seasons"
+            [isInline]="true"
+            [size]="'compact'"
+            [value]="'Winter'"
+            [disabled]="true"
+            [hasNoValue]="true"
+            [noValueLabel]="'(No selection)'"
+            [(ngModel)]="favoriteSeason2"
+        >
+        </fdp-radio-group>
+    </fieldset>
+    <p>Example 6: Radio Buttons created from list of objects</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group
+            [name]="'radio5'"
+            [list]="items"
+            [disabled]="true"
+            [isInline]="true"
+            [(ngModel)]="favoriteSeason3"
+        >
+        </fdp-radio-group>
+    </fieldset>
+    <p>Example 7: Radio Buttons created from list of objects with disabled property</p>
+    <fieldset fd-fieldset>
+        <fdp-radio-group [name]="'radio6'" [list]="disabledItems" [isInline]="true" [(ngModel)]="favoriteSeason4">
+        </fdp-radio-group>
+    </fieldset>
+</form>
