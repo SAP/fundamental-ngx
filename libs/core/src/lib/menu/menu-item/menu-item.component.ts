@@ -1,4 +1,12 @@
-import { Component, ContentChild, ElementRef, HostListener, Input, TemplateRef } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    ElementRef, Host,
+    HostListener,
+    Input,
+    TemplateRef
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MenuComponent } from '../menu.component';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
@@ -10,6 +18,7 @@ let menuUniqueId: number = 0;
     selector: 'li[fd-menu-item-component]',
     exportAs: 'fd-menu-item-component',
     templateUrl: './menu-item.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.aria-controls]': 'itemId',
         '[attr.aria-haspopup]': 'hasPopup'
@@ -50,7 +59,7 @@ export class MenuItemComponent {
 
     /** @hidden */
     constructor(private _elementRef: ElementRef,
-                private _menuComponent: MenuComponent) {
+                @Host() private _menuComponent: MenuComponent) {
     }
 
     /** Whether menu item has popup (desktop mode)  */

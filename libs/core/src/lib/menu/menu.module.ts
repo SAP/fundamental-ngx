@@ -9,14 +9,13 @@ import { MenuItemAddonDirective } from './menu-item-addon.directive';
 import { MenuLinkDirective } from './directives/menu-link.directive';
 import { MenuSeparatorComponent } from './menu-separator/menu-separator.component';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
-import { PopoverModule } from '../popover/popover.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
 import { DialogModule } from '../dialog/dialog.module';
 import { ButtonModule } from '../button/button.module';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, DialogModule, ButtonModule],
+    imports: [CommonModule, DialogModule, ButtonModule],
     declarations: [
         MenuComponent,
         MenuItemComponent,

@@ -7,8 +7,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core';
-import { DialogService } from '../..';
+import { DialogRef } from '../dialog/dialog-utils/dialog-ref.class';
+import { DialogService } from '../dialog/dialog-service/dialog.service';
 
 interface DialogContent { title: string, template: TemplateRef<any> }
 
