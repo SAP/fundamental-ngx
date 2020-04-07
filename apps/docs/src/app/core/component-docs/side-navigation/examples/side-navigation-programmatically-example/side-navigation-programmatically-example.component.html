@@ -12,13 +12,13 @@
                 </a>
             </li>
             <li fd-nested-list-item [(expanded)]="open">
-                <a fd-nested-list-link>
-                    <span fd-nested-list-title>Link 3</span>
+                <a fd-nested-list-link [selected]="selectedParent">
+                    <span fd-nested-list-title>Link 3 {{selectedParent}}</span>
                 </a>
                 <ul fd-nested-list>
                     <li fd-nested-list-item>
-                        <a fd-nested-list-link>
-                            <span fd-nested-list-title>Link 1</span>
+                        <a fd-nested-list-link [selected]="selected">
+                            <span fd-nested-list-title>Link 1 {{selected}}</span>
                         </a>
                     </li>
                     <li fd-nested-list-item>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li fd-nested-list-item>
-                        <a fd-nested-list-link [selected]="selected">
+                        <a fd-nested-list-link>
                             <span fd-nested-list-title>Link 4</span>
                         </a>
                     </li>
@@ -58,5 +58,6 @@
     </div>
 </fd-side-nav>
 
-<button fd-button (click)="selected = !selected">Selected {{selected}}</button>
+<button fd-button (click)="selected = !selected">Selected Child {{selected}}</button>
+<button fd-button (click)="selectedParent = !selectedParent">Selected Parent {{selectedParent}}</button>
 <button fd-button (click)="open = !open">Open {{open}}</button>

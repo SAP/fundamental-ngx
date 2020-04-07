@@ -41,7 +41,7 @@ export class NestedListStateService {
      */
     private resetSelected(item: NestedItemInterface): void {
         if (item.linkItem) {
-            item.linkItem.controlSelected = false;
+            item.linkItem.controlSelected = item.linkItem._selected;
         }
         item.allChildrenItems.forEach(_item => {
             this.resetSelected(_item);

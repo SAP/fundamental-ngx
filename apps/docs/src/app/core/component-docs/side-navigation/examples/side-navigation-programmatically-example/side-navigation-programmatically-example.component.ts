@@ -9,4 +9,5 @@ export class SideNavigationProgrammaticallyExampleComponent {
     open: boolean = true;
 
     selected: boolean = true;
+    selectedParent: boolean = false;
 }
