@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.65...v0.16.0-rc.66) (2020-04-07)
+
+
+### Bug Fixes
+
+* status indicator refactoring to Object Status ([#2152](https://github.com/SAP/fundamental-ngx/issues/2152)) ([2f8debc](https://github.com/SAP/fundamental-ngx/commit/2f8debc0541034719b0be6a616fb9364f21c6393))
+
 ## [0.16.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.64...v0.16.0-rc.65) (2020-04-07)
 
 
