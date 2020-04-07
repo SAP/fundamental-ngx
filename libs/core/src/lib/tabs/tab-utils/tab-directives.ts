@@ -7,7 +7,7 @@ import {
     OnInit,
     TemplateRef,
     ViewContainerRef,
-    OnChanges,
+    OnChanges
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
@@ -125,8 +125,8 @@ export class TabIconDirective implements CssClassBuilder, OnChanges {
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-tag]',
     host: {
-        class: 'fd-tabs__tag',
-    },
+        class: 'fd-tabs__tag'
+    }
 })
 export class TabTagDirective {}
 
@@ -134,8 +134,8 @@ export class TabTagDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-label]',
     host: {
-        class: 'fd-tabs__label',
-    },
+        class: 'fd-tabs__label'
+    }
 })
 export class TabLabelDirective {}
 
@@ -143,8 +143,8 @@ export class TabLabelDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-process]',
     host: {
-        class: 'fd-tabs__process',
-    },
+        class: 'fd-tabs__process'
+    }
 })
 export class TabProcessDirective {}
 
@@ -152,8 +152,8 @@ export class TabProcessDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-header]',
     host: {
-        class: 'fd-tabs__header',
-    },
+        class: 'fd-tabs__header'
+    }
 })
 export class TabHeaderDirective {}
 
@@ -161,8 +161,8 @@ export class TabHeaderDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-counter-header]',
     host: {
-        class: 'fd-tabs__counter-header',
-    },
+        class: 'fd-tabs__counter-header'
+    }
 })
 export class TabCounterHeaderDirective {}
 
@@ -170,8 +170,8 @@ export class TabCounterHeaderDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-process-icon]',
     host: {
-        class: 'fd-tabs__process-icon',
-    },
+        class: 'fd-tabs__process-icon'
+    }
 })
 export class TabProcessIconDirective {}
 
@@ -179,7 +179,7 @@ export class TabProcessIconDirective {}
     // tslint:disable-next-line:directive-selector
     selector: '[fd-tab-separator]',
     host: {
-        class: 'fd-tabs__separator',
-    },
+        class: 'fd-tabs__separator'
+    }
 })
 export class TabSeparatorDirective {}

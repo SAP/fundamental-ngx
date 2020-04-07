@@ -245,7 +245,7 @@ export class PopoverDirective implements OnInit, OnDestroy, OnChanges {
         this.containerRef.instance.noArrow = this.noArrow;
         this.containerRef.instance.closeOnEscapeKey = this.closeOnEscapeKey;
 
-        if (this.additionalClasses) {
+        if (this.additionalClasses.length > 0) {
             this.containerRef.location.nativeElement.classList.add(...this.additionalClasses);
         }
 

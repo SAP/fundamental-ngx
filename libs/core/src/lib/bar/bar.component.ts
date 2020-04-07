@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation,
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
@@ -15,10 +23,9 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     templateUrl: './bar.component.html',
     styleUrls: ['./bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
-
     /** user's custom classes */
     @Input()
     class: string;
@@ -39,7 +46,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** The size of the Page in Page responsive design.
      * Available sizes: 's' | 'm_l' | 'xl'
-    */
+     */
     @Input()
     size: SizeType = '';
 
@@ -48,9 +55,17 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     cosy: boolean;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
 
     @applyCssClass
     /** CssClassBuilder interface implementation
@@ -66,22 +81,13 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
             this.inPage && this.size ? `fd-bar--page-${this.size}` : '',
             this.inHomePage && !this.size ? 'fd-bar--home-page' : '',
             this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
-            this.class
-        ].filter(x => x !== '').join(' ');
+            this.class,
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
     }
 
-    /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
     }
 }
