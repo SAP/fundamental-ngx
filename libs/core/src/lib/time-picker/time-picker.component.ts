@@ -87,13 +87,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
     @Input()
     timePickerInputLabel: string = 'Time picker input';
 
-    /** Whether a null input is considered valid. */
+    /** Whether a null input is considered valid(success). */
     @Input()
     allowNull: boolean = true;
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `valid`, `invalid`, `warning`, `information` or blank for default.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
     state: FormStates;
@@ -111,7 +111,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit {
      */
     @Input() keepTwoDigitsTime: boolean = false;
 
-    /** @hidden Whether the input time is valid. Internal use. */
+    /** @hidden Whether the input time is valid(success). Internal use. */
     isInvalidTimeInput: boolean = false;
 
     /** @hidden */

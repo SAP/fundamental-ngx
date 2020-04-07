@@ -20,7 +20,7 @@
                     [placeholder]="placeholder"
                     (click)="openPopover()"
                     [compact]="compact"
-                    [ngClass]="{ 'is-invalid': isInvalidDateInput && useValidation }"
+                    [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
                 />
                 <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">

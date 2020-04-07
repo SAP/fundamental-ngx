@@ -1,9 +1,9 @@
 <form [formGroup]="customForm">
     <fieldset fd-fieldset>
         <div fd-form-item>
-            <label fd-form-label>Valid Localization Editor</label>
+            <label fd-form-label>Valid Multi Input</label>
             <fd-multi-input
-                [state]="isValid() ? 'valid' : 'invalid'"
+                [state]="isValid() ? 'success' : 'error'"
                 formControlName="selectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
                 [placeholder]="'Search Here...'"
@@ -11,7 +11,7 @@
             </fd-multi-input>
         </div>
         <div fd-form-item>
-            <label fd-form-label>Disabled Localization Editor</label>
+            <label fd-form-label>Disabled Multi Input</label>
             <fd-multi-input
                 formControlName="disabledSelectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
