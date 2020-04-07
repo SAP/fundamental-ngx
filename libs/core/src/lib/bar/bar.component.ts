@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation,
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
@@ -15,84 +23,39 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     templateUrl: './bar.component.html',
     styleUrls: ['./bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
-
+export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** user's custom classes */
-    private _class: string = '';
     @Input()
-    set class(userClass: string) {
-        this._class = userClass;
-        this.buildComponentCssClass();
-    }
+    class: string;
 
     /** Whether the Bar component is used as a header, subheader, header-with-subheader,
      * footer or floating-footer.
      * Types available: 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer' */
-    private _barDesign: BarDesignType;
     @Input()
-    set barDesign(barDesign: BarDesignType) {
-        this._barDesign = barDesign;
-        this.buildComponentCssClass();
-    }
+    barDesign: BarDesignType;
 
     /** Whether the Bar component is used in Page Layout. */
-    private _inPage: boolean;
     @Input()
-    set inPage(inPage: boolean) {
-        this._inPage = inPage;
-        this.buildComponentCssClass();
-    }
+    inPage: boolean;
 
     /** Whether the Bar component is used in Home Page Layout. */
-    private _inHomePage: boolean;
     @Input()
-    set inHomePage(inHomePage: boolean) {
-        this._inHomePage = inHomePage;
-        this.buildComponentCssClass();
-    }
+    inHomePage: boolean;
 
     /** The size of the Page in Page responsive design.
      * Available sizes: 's' | 'm_l' | 'xl'
-    */
-    private _size: SizeType = '';
+     */
     @Input()
-    set size(size: SizeType) {
-        this._size = size;
-        this.buildComponentCssClass();
-    }
+    size: SizeType = '';
 
     /** Whether to apply cosy mode to the Bar. */
-    private _cosy: boolean;
     @Input()
-    set cosy(cosy: boolean) {
-        this._cosy = cosy;
-        this.buildComponentCssClass();
-    }
-
-    @applyCssClass
-    /** CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    buildComponentCssClass(): string {
-        return [
-            'fd-bar',
-            this._cosy ? 'fd-bar--cosy' : '',
-            this._barDesign ? `fd-bar--${this._barDesign}` : '',
-            this._inPage && !this._size ? 'fd-bar--page' : '',
-            this._inPage && this._size ? `fd-bar--page-${this._size}` : '',
-            this._inHomePage && !this._size ? 'fd-bar--home-page' : '',
-            this._inHomePage && this._size ? `fd-bar--home-page-${this._size}` : '',
-            this._class
-        ].filter(x => x !== '').join(' ');
-    }
+    cosy: boolean;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef
-    ) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -104,7 +67,26 @@ export class BarComponent implements OnInit, OnChanges, CssClassBuilder {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string {
+        return [
+            'fd-bar',
+            this.cosy ? 'fd-bar--cosy' : '',
+            this.barDesign ? `fd-bar--${this.barDesign}` : '',
+            this.inPage && !this.size ? 'fd-bar--page' : '',
+            this.inPage && this.size ? `fd-bar--page-${this.size}` : '',
+            this.inHomePage && !this.size ? 'fd-bar--home-page' : '',
+            this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
+            this.class,
+        ]
+            .filter((x) => x !== '')
+            .join(' ');
+    }
+
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }

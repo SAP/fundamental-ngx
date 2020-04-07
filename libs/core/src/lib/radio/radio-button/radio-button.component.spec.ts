@@ -72,14 +72,14 @@ describe('RadioButtonComponent', () => {
         await wait(fixture);
 
         // value is accessed by [] because component doesn't have a getter for state by design
-        expect(component.radioButton1['_state']).toContain('valid');
-        expect(component.radioButton2['_state']).toContain('invalid');
+        expect(component.radioButton1.state).toContain('valid');
+        expect(component.radioButton2.state).toContain('invalid');
     });
 
     it('should be disabled', async () => {
         await wait(fixture);
 
-        expect(component.radioButton3['_disabled']).toBeTruthy();
+        expect(component.radioButton3.disabled).toBeTruthy();
         expect(component.radioButton3.inputElement.nativeElement.disabled).toBeTruthy();
     });
 });
