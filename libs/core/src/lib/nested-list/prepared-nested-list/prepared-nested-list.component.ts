@@ -56,13 +56,11 @@ export class PreparedNestedListComponent implements AfterViewInit {
 
     /** @hidden */
     constructor (
-        private changeDetRef: ChangeDetectorRef,
-        private stateService: NestedListStateService
+        private changeDetRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.stateService.propagateSelected(this.nestedListDirective);
         this.changeDetRef.markForCheck();
         this.changeDetRef.detectChanges();
     }
