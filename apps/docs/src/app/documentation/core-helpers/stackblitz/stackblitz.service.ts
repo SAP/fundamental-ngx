@@ -1,5 +1,6 @@
 import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
 import * as maints from '!raw-loader!./code-example-stack/main.ts';
+import * as stylesScss from '!raw-loader!./code-example-stack/styles.scss';
 import sdk from '@stackblitz/sdk';
 import { StackblitzFile } from './interfaces/stackblitz-parameters';
 import { StackblitzDependencies } from './stackblitz-dependencies';
@@ -32,7 +33,8 @@ export class StackblitzService {
             files: {
                 'src/main.ts': maints.default,
                 'src/polyfills.ts': polyfills.default,
-                'src/styles.scss': ''
+                'src/styles.scss': stylesScss.default,
+                'angular.json': StackblitzDependencies.GetAngularJson(),
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
