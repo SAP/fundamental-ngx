@@ -27,7 +27,7 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-title-template]',
+    selector: '[fd-tab-title-template]'
 })
 export class TabTitleDirective {}
 
@@ -37,7 +37,7 @@ export class TabTitleDirective {}
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-load-title]',
+    selector: '[fd-tab-load-title]'
 })
 export class TabLoadTitleDirective implements OnInit {
     @Input('fd-tab-load-title')
@@ -59,7 +59,7 @@ export class TabLoadTitleDirective implements OnInit {
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-count]',
+    selector: '[fd-tab-count]'
 })
 export class TabCountDirective {
     /** @hidden */
@@ -73,7 +73,7 @@ export class TabCountDirective {
 @Directive({
     // TODO to be discussed
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-icon]',
+    selector: '[fd-tab-icon]'
 })
 export class TabIconDirective implements CssClassBuilder, OnChanges {
     /** Apply user custom styles */
