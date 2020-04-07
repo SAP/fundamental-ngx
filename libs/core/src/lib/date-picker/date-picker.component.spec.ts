@@ -202,7 +202,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
-        component.blockFunction = (fdDate: FdDate) => true;
+        component.disableFunction = (fdDate: FdDate) => true;
         const todayDate = FdDate.getToday();
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>component)._formatDate(date);
@@ -221,8 +221,8 @@ describe('DatePickerComponent', () => {
         const invalidDate = (<any>component)._invalidDate();
         const rangeDateInvalidObject: FdRangeDate = { start: invalidDate, end: invalidDate };
         component.type = 'range';
-        component.blockRangeStartFunction = (fdDate: FdDate) => true;
-        component.blockRangeEndFunction = (fdDate: FdDate) => true;
+        component.disableRangeStartFunction = (fdDate: FdDate) => true;
+        component.disableRangeEndFunction = (fdDate: FdDate) => true;
         const todayDate = FdDate.getToday();
 
         const date1 = new FdDate(2011, 10, 10);
@@ -244,7 +244,7 @@ describe('DatePickerComponent', () => {
         spyOn(component, 'onChange');
         const invalidDate = (<any>component)._invalidDate();
         component.type = 'range';
-        component.blockRangeEndFunction = (fdDate: FdDate) => fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp();
+        component.disableRangeEndFunction = (fdDate: FdDate) => fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp();
 
         const date1 = new FdDate(2010, 10, 10);
         const date2 = FdDate.getToday().nextDay();
