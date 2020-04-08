@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
 import * as calendarOptionHtml from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.html';
 import * as calendarOptionSrc from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.ts';
+import * as calendarSpecialSrc from '!raw-loader!./examples/calendar-special-day-example/calendar-special-day-example.component.ts';
+import * as calendarSpecialHtml from '!raw-loader!./examples/calendar-special-day-example/calendar-special-day-example.component.html';
 import * as calendarGridSrc from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.ts';
 import * as calendarGridHtml from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.html';
 import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
@@ -161,14 +163,31 @@ specialDay: SpecialDayRule[] = [
         }
     ];
 
-    calendarOptionsSource: ExampleFile[] = [
+    calendarSpecialDays: ExampleFile[] = [
         {
             language: 'typescript',
-            component: 'CalendarOptionsExampleComponent',
-            fileName: 'calendar-options-example',
+            component: 'CalendarSpecialDayExampleComponent',
+            fileName: 'calendar-special-days-example',
             code: { default: this.exampleSpecialDays },
             name: 'Example Special Day Functions'
         },
+        {
+            language: 'typescript',
+            component: 'CalendarSpecialDayExampleComponent',
+            fileName: 'calendar-special-days-example',
+            code: calendarSpecialSrc
+        },
+        {
+            language: 'html',
+            component: 'CalendarSpecialDayExampleComponent',
+            fileName: 'calendar-special-days-example',
+            code: calendarSpecialHtml
+        }
+    ];
+
+
+
+    calendarOptionsSource: ExampleFile[] = [
         {
             language: 'typescript',
             component: 'CalendarOptionsExampleComponent',

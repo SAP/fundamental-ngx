@@ -16,6 +16,7 @@ import { SegmentedButtonModule, CalendarModule, FundamentalNgxCoreModule } from 
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
 import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
+import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-day-example/calendar-special-day-example.component';
 
 const routes: Routes = [
     {
@@ -49,7 +50,8 @@ const routes: Routes = [
         CalendarProgrammaticallyChangeExampleComponent,
         CalendarMobileExampleComponent,
         CalendarOptionsExampleComponent,
-        CalendarGridExampleComponent
+        CalendarGridExampleComponent,
+        CalendarSpecialDayExampleComponent
     ],
 })
 export class CalendarDocsModule {

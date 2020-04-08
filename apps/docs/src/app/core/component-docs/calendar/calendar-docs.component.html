@@ -40,7 +40,7 @@
     Calendar Options
 </fd-docs-section-title>
 <description>
-    Calendar has a lot of different options, there is way to put special days, change visibility of week counter, user
+    Calendar has a lot of different options, there is way to change visibility of week counter, user
     can applied compact mode, to adjust view for desktop devices. Weekend also can be marked with additional class, which
     has different styling.
 </description>
@@ -48,6 +48,24 @@
     <fd-calendar-options-example></fd-calendar-options-example>
 </component-example>
 <code-example [exampleFiles]="calendarOptionsSource"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'calendar-special'" [componentName]="'calendar'">
+    Calendar with Special Days
+</fd-docs-section-title>
+<description>
+    Grid days can have applied additional classes, by passing proper object to <code>[specialDaysRules]</code>
+    List of special day numbers can be found
+    <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html">
+        here
+    </a>.
+    The rules have the same format as block function, it takes FdDate object as a parameter and returns true/false.
+</description>
+<component-example>
+    <fd-calendar-special-day-example></fd-calendar-special-day-example>
+</component-example>
+<code-example [exampleFiles]="calendarSpecialDays"></code-example>
 
 <separator></separator>
 
