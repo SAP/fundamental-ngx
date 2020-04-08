@@ -5,9 +5,5 @@
 
     .fd-nested-list__link {
         cursor: pointer;
-
-        &:focus {
-            outline: .0625rem dotted #000;
-        }
     }
 }
