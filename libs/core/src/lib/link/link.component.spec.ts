@@ -4,9 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-tabs',
-    template: `
-        <a fd-link>Test Link</a>
-    `
+    template: ` <a fd-link>Test Link</a> `,
 })
 class TestLinkComponent {
     @ViewChild(LinkComponent, { static: true })
@@ -19,7 +17,7 @@ describe('LinkComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LinkComponent, TestLinkComponent]
+            declarations: [LinkComponent, TestLinkComponent],
         }).compileComponents();
     }));
 
@@ -34,25 +32,22 @@ describe('LinkComponent', () => {
     });
 
     it('Should Add emphasized class', () => {
-        component.ngOnChanges();
         component.emphasized = true;
-        component.ngOnChanges();
+        component.buildComponentCssClass();
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
     });
 
     it('Should Add inverted class', () => {
-        component.ngOnChanges();
         component.inverted = true;
-        component.ngOnChanges();
+        component.buildComponentCssClass();
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('fd-link--inverted')).toBe(true);
     });
 
     it('Should Add disabled class', () => {
-        component.ngOnChanges();
         component.disabled = true;
-        component.ngOnChanges();
+        component.buildComponentCssClass();
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('is-disabled')).toBe(true);
     });
