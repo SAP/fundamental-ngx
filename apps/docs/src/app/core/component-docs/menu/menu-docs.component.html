@@ -54,13 +54,13 @@
 <description>
     Each Menu item can have its submenu. To create a submenu, do the following:
     <ul>
-        <li>create <code>ng-template</code> containing menu items, using standard menu item markup</li>
-        <li>attach created template to parent menu item by passing <code>TemplateRef</code> to its
+        <li>create an <code>ng-template</code> containing menu items, using the standard menu item markup</li>
+        <li>attach your template to the parent menu item by passing the <code>TemplateRef</code> to its
             <code>[subMenu]</code>
         </li>
     </ul>
-    The important thing is to create templates with submenu items inside <code>fd-menu</code> tag, so Angular correctly
-    attaches them to DI tree.
+    The important thing is to create templates with submenu items inside the <code>fd-menu</code> tag, so Angular correctly
+    attaches them to the DI tree.
 </description>
 <component-example>
     <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
