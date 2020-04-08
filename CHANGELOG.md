@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.70...v0.16.0-rc.71) (2020-04-08)
+
+## [0.16.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.69...v0.16.0-rc.70) (2020-04-08)
+
+
+### Bug Fixes
+
+* (shellbar) Add missing class to button ([#2290](https://github.com/SAP/fundamental-ngx/issues/2290)) ([4afd9a5](https://github.com/SAP/fundamental-ngx/commit/4afd9a5a9b0f1e1b00f672d09b521b9914af7bc8))
+
+## [0.16.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.68...v0.16.0-rc.69) (2020-04-08)
+
+
+### Bug Fixes
+
+* reverted changes, removed 'this' keyboard from function call ([#2283](https://github.com/SAP/fundamental-ngx/issues/2283)) ([5978f4b](https://github.com/SAP/fundamental-ngx/commit/5978f4ba9df815c98542c4512cd549e100b73d62))
+
+## [0.16.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.67...v0.16.0-rc.68) (2020-04-07)
+
+
+### Features
+
+* update form validation states and messages ([#2260](https://github.com/SAP/fundamental-ngx/issues/2260)) ([d7c06dc](https://github.com/SAP/fundamental-ngx/commit/d7c06dcd63af0013de4fb99e5c3680736d073af7))
+
+
+### Bug Fixes
+
+* update action bar to new fundamental-styles ([#2218](https://github.com/SAP/fundamental-ngx/issues/2218)) ([114190b](https://github.com/SAP/fundamental-ngx/commit/114190b467528763c77145fe5ebff7d0653f4f61))
+
 ## [0.16.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.66...v0.16.0-rc.67) (2020-04-07)
 
 
