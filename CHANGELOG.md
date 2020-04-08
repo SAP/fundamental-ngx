@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.68...v0.16.0-rc.69) (2020-04-08)
+
+
+### Bug Fixes
+
+* reverted changes, removed 'this' keyboard from function call ([#2283](https://github.com/SAP/fundamental-ngx/issues/2283)) ([5978f4b](https://github.com/SAP/fundamental-ngx/commit/5978f4ba9df815c98542c4512cd549e100b73d62))
+
 ## [0.16.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.67...v0.16.0-rc.68) (2020-04-07)
 
 
