@@ -1,10 +1,10 @@
 <fd-popover [disabled]="true">
     <fd-dropdown-control [disabled]="true">Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length">
-        <fd-menu>
-            <li fd-menu-item-component *ngFor="let option of menu1">
-                <a fd-menu-link [attr.href]="option.url">{{option.text}}</a>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of menu1">
+                <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
             </li>
-        </fd-menu>
+        </ul>
     </fd-popover-body>
 </fd-popover>

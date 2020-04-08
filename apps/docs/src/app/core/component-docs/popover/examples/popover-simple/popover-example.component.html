@@ -3,14 +3,12 @@
         <fd-popover-control>
             <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/nature'"></fd-image>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length">
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu1">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+        <fd-popover-body *ngIf="list1 && list1.length">
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list1">
+                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 
@@ -18,14 +16,12 @@
         <fd-popover-control>
             <fd-icon [glyph]="'menu2'" [size]="'l'"></fd-icon>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length">
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu1">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+        <fd-popover-body *ngIf="list1 && list1.length">
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list1">
+                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 
@@ -33,7 +29,7 @@
         <fd-popover-control>
             <span fd-identifier [size]="'l'" [glyph]="'money-bills'" [colorAccent]="3"></span>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length" style="min-width: 400px;">
+        <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px;">
             <div fd-popover-body-header>
                 <div fd-bar [barDesign]="'header'">
                     <div fd-bar-left>
@@ -50,13 +46,11 @@
                     </div>
                 </div>
             </div>
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu1">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list1">
+                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 
@@ -64,7 +58,7 @@
         <fd-popover-control>
             <button fd-button>Button</button>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length">
+        <fd-popover-body *ngIf="list1 && list1.length">
             <div fd-popover-body-header>
                 <div fd-bar [barDesign]="'header-with-subheader'" [cosy]="true">
                     <div fd-bar-left>
@@ -79,13 +73,11 @@
                     </div>
                 </div>
             </div>
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu1">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list1">
+                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
                 </li>
-            </fd-menu>
+            </ul>
             <div fd-popover-body-footer>
                 <div fd-bar [barDesign]="'footer'" [cosy]="true">
                     <div fd-bar-right>
@@ -105,14 +97,12 @@
         <fd-popover-control>
             <fd-image [size]="'l'" [circle]="true" [photo]="'https://placeimg.com/400/400/tech'"></fd-image>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length">
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu1">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+        <fd-popover-body *ngIf="list1 && list1.length">
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list1">
+                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 
@@ -124,14 +114,12 @@
         <fd-popover-control>
             <button fd-button>Fixed Position</button>
         </fd-popover-control>
-        <fd-popover-body *ngIf="menu1 && menu1.length">
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu1">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+        <fd-popover-body *ngIf="list1 && list1.length">
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list1">
+                    <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 </div>
