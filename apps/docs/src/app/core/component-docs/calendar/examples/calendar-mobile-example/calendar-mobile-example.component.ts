@@ -20,14 +20,14 @@ export class CalendarMobileExampleComponent {
     openLandScapeDialog(dialog: TemplateRef<any>): void {
         this._dialogService.open(
             dialog,
-            { mobile: true, verticalPadding: false, width: '640px', height: '400px' }
+            { mobile: true, responsivePadding: true, verticalPadding: false, width: '640px', height: '400px' }
         );
     }
 
     openPortraitDialog(dialog: TemplateRef<any>): void {
         this._dialogService.open(
             dialog,
-            { mobile: true, verticalPadding: false, width: '360px', height: '640px' }
+            { mobile: true, responsivePadding: true, verticalPadding: false, width: '360px', height: '640px' }
         );
     }
 
