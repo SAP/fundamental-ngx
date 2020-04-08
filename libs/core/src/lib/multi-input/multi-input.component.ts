@@ -114,6 +114,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     @Input()
     displayFn: Function = this.defaultDisplay;
 
+    /** Parse function. Used for submitting new tokens. Accepts a string by default.
+     * An arrow function can be used to access the *this* keyword in the calling component.
+     * See multi input examples for details. */
+    @Input()
+    newTokenParseFn: Function = this.defaultParse;
+
     /** Aria label for the multi input body. */
     @Input()
     multiInputBodyLabel: string = 'Multi input body';
@@ -139,6 +145,12 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
      */
     @Input()
     buttonFocusable: boolean = false;
+
+    /**
+     * Whether the multi-input allows the creation of new tokens.
+     */
+    @Input()
+    allowNewTokens: boolean = false;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -243,7 +255,7 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     /** @hidden */
-    handleSelect(checked: any, value: any, event: MouseEvent): void {
+    handleSelect(checked: any, value: any, event?: MouseEvent): void {
         if (event) {
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
         }
@@ -299,6 +311,18 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
         this.handleSearchTermChange();
     }
 
+    /** @hidden */
+    onSubmit(): void {
+        if (this.allowNewTokens) {
+            const newToken = this.newTokenParseFn(this.searchTerm);
+            this.dropdownValues.push(newToken);
+            this.handleSelect(true, newToken);
+            this.searchTerm = '';
+            this.handleSearchTermChange();
+            this.open = false;
+        }
+    }
+
     private defaultFilter(contentArray: any[], searchTerm: string): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter(item => {
@@ -309,6 +333,10 @@ export class MultiInputComponent implements OnInit, ControlValueAccessor, OnChan
     }
 
     private defaultDisplay(str: string): string {
+        return str;
+    }
+
+    private defaultParse(str: string): string {
         return str;
     }
 

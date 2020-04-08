@@ -17,6 +17,10 @@ import * as compactT from '!raw-loader!./examples/multi-input-compact-example/mu
 
 import * as formH from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.html';
 import * as formT from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.ts';
+
+import * as newTokensH from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.html';
+import * as newTokensT from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -106,6 +110,20 @@ export class MultiInputDocsComponent {
             component: 'MultiInputFormExampleComponent',
             code: formT,
             fileName: 'multi-input-form-example'
+        }
+    ];
+
+    newTokens: ExampleFile[] = [
+        {
+            language: 'html',
+            code: newTokensH,
+            fileName: 'multi-input-new-tokens-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputNewTokensExampleComponent',
+            code: newTokensT,
+            fileName: 'multi-input-new-tokens-example'
         }
     ];
 }

@@ -133,57 +133,36 @@ describe('TokenizerComponent', () => {
   });
 
   it('should handle resize - getting smaller', () => {
-    spyOn(component, 'collapseTokens');
-    spyOn(component, 'expandTokens');
-    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
-    component.previousElementWidth = 2;
-    component.onResize();
-
-    expect(component.collapseTokens).toHaveBeenCalled();
-    expect(component.expandTokens).not.toHaveBeenCalled();
-    expect(component.previousElementWidth).toBe(1);
-  });
-
-  it('should handle resize - getting bigger', () => {
-    spyOn(component, 'collapseTokens');
-    spyOn(component, 'expandTokens');
-    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 2});
-    component.previousElementWidth = 1;
-    component.onResize();
-
-    expect(component.collapseTokens).not.toHaveBeenCalled();
-    expect(component.expandTokens).toHaveBeenCalled();
-    expect(component.previousElementWidth).toBe(2);
-  });
-
-  it('should collapse the tokens', () => {
     component.compact = true;
     spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
     spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+    component.previousElementWidth = 2;
+    component.onResize();
     component.moreTokensLeft.length = 0;
-    component.collapseTokens();
+    component.onResize();
 
     component.tokenList.forEach(token => {
       expect(token.elementRef.nativeElement.style.display).toBe('none');
     });
     expect(component.moreTokensLeft.length).toBe(3);
+    expect(component.previousElementWidth).toBe(1);
   });
 
-  it('should expand the tokens', () => {
-      component.compact = true;
-      // need to collapse the tokens before running expand
-      spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
-      spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
-      component.collapseTokens();
+  it('should handle resize - getting bigger', () => {
+    component.compact = true;
+    // need to collapse the tokens before running expand
+    spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({width: 1});
+    spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+    component.onResize();
+    component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 3});
+    component.previousElementWidth = 1;
+    component.onResize();
 
-      component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({width: 3});
-
-      component.expandTokens();
-
-      component.tokenList.forEach(token => {
-          expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
-      });
-      expect(component.moreTokensLeft.length).toBe(0);
+    expect(component.previousElementWidth).toBe(3);
+    component.tokenList.forEach(token => {
+      expect(token.elementRef.nativeElement.style.display).toBe('inline-block');
+    });
+    expect(component.moreTokensLeft.length).toBe(0);
   });
 
   it('should get the combined token width', () => {

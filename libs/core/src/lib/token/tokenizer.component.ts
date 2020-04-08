@@ -64,6 +64,10 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     @Input()
     glyph: string;
 
+    /** Word to use for when there are extra tokens. */
+    @Input()
+    moreTerm: string = 'more';
+
     /** @hidden */
     previousElementWidth: number;
 
@@ -89,7 +93,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
         this.handleTokenClickSubscriptions();
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
         this.tokenList.changes.subscribe(() => {
-            this.previousTokenCount > this.tokenList.length ? this.expandTokens() : this.collapseTokens();
+            this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
         });
@@ -101,55 +105,20 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     }
 
     /** @hidden */
+    ngAfterContentInit() {
+        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        this.onResize();
+    }
+
+    constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef) {}
+
+    /** @hidden */
     handleTokenClickSubscriptions(): void {
         this.tokenList.forEach((token, index) => {
             token.onTokenClick.subscribe(event => {
                 this.focusTokenElement(event, index);
             })
         });
-    }
-
-    /** @hidden */
-    handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
-        let newIndex: number;
-        if (event.code === 'ArrowLeft') {
-            this.handleArrowLeft(fromIndex);
-            newIndex = fromIndex - 1;
-        } else if (event.code === 'ArrowRight') {
-            this.handleArrowRight(fromIndex);
-            newIndex = fromIndex + 1;
-        }
-        if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
-            this.input.elementRef().nativeElement.focus();
-        } else if (newIndex > this.tokenList.length - this.moreTokensRight.length &&
-            document.activeElement === this.input.elementRef().nativeElement) {
-            this.focusTokenElement(event, newIndex - this.moreTokensRight.length);
-        } else if (newIndex || newIndex === 0) {
-            this.focusTokenElement(event, newIndex);
-        }
-    }
-
-    private handleArrowLeft(fromIndex: number): void {
-        // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
-        if (fromIndex === this.moreTokensLeft.length) {
-            const poppedToken = this.moreTokensLeft.pop();
-            if (poppedToken) {
-                this.makeElementVisible(poppedToken.elementRef);
-            }
-            // and then hide any tokens from the right that no longer fit
-            this.collapseTokens('right');
-        }
-    }
-
-    private handleArrowRight(fromIndex: number): void {
-        if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
-            const poppedToken = this.moreTokensRight.pop();
-            if (poppedToken) {
-                this.makeElementVisible(poppedToken.elementRef);
-            }
-            // and then hide any tokens from the left that no longer fit
-            this.collapseTokens('left');
-        }
     }
 
     /** @hidden */
@@ -189,16 +158,84 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
             const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             // if the element is geting smaller, try collapsing tokens
             if (elementWidth <= this.previousElementWidth) {
-                this.collapseTokens();
+                this._collapseTokens();
             } else {
-                this.expandTokens(); // if it's getting bigger, try expanding
+                this._expandTokens(); // if it's getting bigger, try expanding
             }
             this.previousElementWidth = elementWidth;
         }
     }
 
     /** @hidden */
-    collapseTokens(side?: string): void {
+    handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
+        let newIndex: number;
+        if (event.code === 'ArrowLeft') {
+            this._handleArrowLeft(fromIndex);
+            newIndex = fromIndex - 1;
+        } else if (event.code === 'ArrowRight') {
+            this._handleArrowRight(fromIndex);
+            newIndex = fromIndex + 1;
+        }
+        if (newIndex === this.tokenList.length && event.code === 'ArrowRight') {
+            this.input.elementRef().nativeElement.focus();
+        } else if (newIndex > this.tokenList.length - this.moreTokensRight.length &&
+            document.activeElement === this.input.elementRef().nativeElement) {
+            this.focusTokenElement(event, newIndex - this.moreTokensRight.length);
+        } else if (newIndex || newIndex === 0) {
+            this.focusTokenElement(event, newIndex);
+        }
+    }
+
+    /** @hidden */
+    getCombinedTokenWidth(): number {
+        let totalTokenWidth = 0;
+        // get the width of each token
+        this.tokenList.forEach(token => {
+            totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
+        });
+        // add input width
+        if (this.input && this.input.elementRef()) {
+            totalTokenWidth = totalTokenWidth + this.input.elementRef().nativeElement.getBoundingClientRect().width;
+        }
+        // add the width of the "____ more" element
+        if (this.moreTokensLeft.length > 0 && this.moreElement && this.moreElement.nativeElement) {
+            totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
+        }
+        // add the input group addon
+        if (this.inputGroupAddonEl && this.inputGroupAddonEl.nativeElement) {
+            totalTokenWidth = totalTokenWidth + this.inputGroupAddonEl.nativeElement.getBoundingClientRect().width;
+        }
+
+        return totalTokenWidth;
+    }
+
+    /** @hidden */
+    private _handleArrowLeft(fromIndex: number): void {
+        // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
+        if (fromIndex === this.moreTokensLeft.length) {
+            const poppedToken = this.moreTokensLeft.pop();
+            if (poppedToken) {
+                this._makeElementVisible(poppedToken.elementRef);
+            }
+            // and then hide any tokens from the right that no longer fit
+            this._collapseTokens('right');
+        }
+    }
+
+    /** @hidden */
+    private _handleArrowRight(fromIndex: number): void {
+        if (fromIndex === this.tokenList.length - this.moreTokensRight.length - 1 && this.moreTokensRight.length) {
+            const poppedToken = this.moreTokensRight.pop();
+            if (poppedToken) {
+                this._makeElementVisible(poppedToken.elementRef);
+            }
+            // and then hide any tokens from the left that no longer fit
+            this._collapseTokens('left');
+        }
+    }
+
+    /** @hidden */
+    private _collapseTokens(side?: string): void {
         if (this.compact) {
             let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
@@ -230,7 +267,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     }
 
     /** @hidden */
-    expandTokens(): void {
+    private _expandTokens(): void {
         if (this.compact) {
             let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
@@ -271,37 +308,7 @@ export class TokenizerComponent implements AfterViewInit, AfterContentInit {
     }
 
     /** @hidden */
-    getCombinedTokenWidth(): number {
-        let totalTokenWidth = 0;
-        // get the width of each token
-        this.tokenList.forEach(token => {
-            totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
-        });
-        // add input width
-        if (this.input && this.input.elementRef()) {
-            totalTokenWidth = totalTokenWidth + this.input.elementRef().nativeElement.getBoundingClientRect().width;
-        }
-        // add the width of the "____ more" element
-        if (this.moreTokensLeft.length > 0 && this.moreElement && this.moreElement.nativeElement) {
-            totalTokenWidth = totalTokenWidth + this.moreElement.nativeElement.getBoundingClientRect().width;
-        }
-        // add the input group addon
-        if (this.inputGroupAddonEl && this.inputGroupAddonEl.nativeElement) {
-            totalTokenWidth = totalTokenWidth + this.inputGroupAddonEl.nativeElement.getBoundingClientRect().width;
-        }
-
-        return totalTokenWidth;
-    }
-
-    /** @hidden */
-    ngAfterContentInit() {
-        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-        this.onResize();
-    }
-
-    constructor(public elementRef: ElementRef, private cdRef: ChangeDetectorRef) {}
-
-    private makeElementVisible(elementRef: ElementRef): void {
+    private _makeElementVisible(elementRef: ElementRef): void {
         elementRef.nativeElement.style.display = 'inline-block';
         elementRef.nativeElement.style.visibility = 'visible';
     }

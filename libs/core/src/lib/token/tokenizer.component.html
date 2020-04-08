@@ -3,7 +3,7 @@
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
         <span *ngIf="(moreTokensLeft.length > 0 || moreTokensRight.length > 0) && compact" class="fd-tokenizer-more" #moreElement>
-            <ng-container>{{moreTokensLeft.length + moreTokensRight.length}} more</ng-container>
+            <ng-container>{{moreTokensLeft.length + moreTokensRight.length}} {{moreTerm}}</ng-container>
         </span>
         <ng-content select="[fd-form-control]"></ng-content>
     </div>

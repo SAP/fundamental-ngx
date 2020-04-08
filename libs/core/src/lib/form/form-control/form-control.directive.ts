@@ -44,15 +44,21 @@ export class FormControlDirective implements CssClassBuilder, OnInit, OnChanges 
     buildComponentCssClass(): string {
         return [
             this.state ? 'is-' + this.state : '',
-            this.type === 'radio' ? 'fd-radio' : '',
-            this._getElementTag() === 'input' ? 'fd-input' : '',
-            this._getElementTag() === 'textarea' ? 'fd-textarea' : '',
-            this._getElementTag() === 'select' ? 'fd-form-select' : '',
-            this.compact && this._getElementTag() === 'input' ? 'fd-input--compact' : '',
-            this.compact && this._getElementTag() === 'textarea' ? 'fd-textarea--compact' : '',
-            this.compact && this._getElementTag() === 'select' ? 'fd-form-select--compact' : '',
+            this._getFormClass(),
+            this.compact ? (this._getFormClass() + '--compact') : '',
             this.class
         ].filter(x => x !== '').join(' ');
+    }
+
+    private _getFormClass(): string {
+        switch (this._getElementTag()) {
+            case 'input':
+                return 'fd-input';
+            case 'select':
+                return 'fd-form-select';
+            case 'textarea':
+                return 'fd-textarea';
+        }
     }
 
     /** @hidden */
