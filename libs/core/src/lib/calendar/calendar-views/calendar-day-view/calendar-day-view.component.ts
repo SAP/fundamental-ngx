@@ -35,6 +35,7 @@ import { compareObjects } from '../../../utils/public_api';
 export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
     private readonly _amountOfCols: number = 7; // Days per week
+    private isOnRangePick: boolean = false;
 
     /** @hidden */
     newFocusedDayIndex: number;
@@ -57,9 +58,11 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             this.buildDayViewGrid();
         }
     }
+
     public get currentlyDisplayed(): CalendarCurrent {
         return this._currentlyDisplayed;
     }
+
     private _currentlyDisplayed: CalendarCurrent;
 
     /** The currently selected FdDate model in single mode. */
@@ -206,6 +209,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             event.stopPropagation();
             event.preventDefault();
             this.newFocusedDayIndex = day.index;
+            this.isOnRangePick = !this.isOnRangePick;
         }
         if (!day.disabled) {
             if (this.calType === 'single') {
@@ -225,6 +229,27 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                 }
 
+            }
+        }
+    }
+
+    /** @hidden */
+    refreshHoverRange(day: CalendarDay): void {
+        if (this.isOnRangePick) {
+            if (day.date.getTimeStamp() < this.selectedRangeDate.start.getTimeStamp()) {
+                this.calendarDayList.forEach(_day => {
+                    _day.hoverRange = (
+                        _day.date.getTimeStamp() > day.date.getTimeStamp() &&
+                        _day.date.getTimeStamp() < this.selectedRangeDate.start.getTimeStamp()
+                    );
+                });
+            } else {
+                this.calendarDayList.forEach(_day => {
+                    _day.hoverRange = (
+                        _day.date.getTimeStamp() < day.date.getTimeStamp() &&
+                        _day.date.getTimeStamp() > this.selectedRangeDate.start.getTimeStamp()
+                    );
+                });
             }
         }
     }
@@ -400,7 +425,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
         calendar = calendar.concat(this.getCurrentMonthDays());
         calendar = this.getNextMonthDays(calendar);
 
-        calendar.forEach((call, index: number) => {call.id = this._getId(index); call.index = index});
+        calendar.forEach((call, index: number) => {
+            call.id = this._getId(index);
+            call.index = index;
+        });
 
         return calendar;
     }

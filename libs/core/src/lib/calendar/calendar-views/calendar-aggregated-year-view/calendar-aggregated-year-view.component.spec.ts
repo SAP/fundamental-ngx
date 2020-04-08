@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-view.component';
 import { CalendarService } from '../../calendar.service';
-import { AggregatedYear } from '@fundamental-ngx/core';
+import { AggregatedYear } from '../../models/aggregated-year';
 
 describe('CalendarAggregatedYearViewComponent', () => {
     let component: CalendarAggregatedYearViewComponent;

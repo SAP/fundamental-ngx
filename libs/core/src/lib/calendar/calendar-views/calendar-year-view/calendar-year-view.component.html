@@ -1,7 +1,8 @@
 <div class="fd-calendar__years">
     <table class="fd-calendar__table" role="grid">
-        <tbody class="fd-calendar__group">
+        <tbody class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row"
+            role="row"
             *ngFor="let colYears of calendarYearListGrid; let rowIndex = index">
             <td class="fd-calendar__item"
                 *ngFor="let year of colYears; let colIndex = index"
@@ -9,6 +10,7 @@
                     'is-selected': (year == yearSelected),
                     'fd-calendar__item--current': (year == currentYear)
                 }"
+                role="gridcell"
                 [attr.id]="getId(getIndex(rowIndex, colIndex))"
                 [attr.tabindex]="year === activeYear ? 0 : -1"
                 (keydown)="onKeydownYearHandler($event, getIndex(rowIndex, colIndex))"

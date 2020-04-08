@@ -1,6 +1,6 @@
 import {
     AlertModule,
-    ButtonModule, DialogModule,
+    ButtonModule,
     FormModule,
     IconModule,
     InlineHelpModule,
@@ -15,7 +15,6 @@ export const sharedCoreModules = [
     ButtonModule,
     InputGroupModule,
     ShellbarModule,
-    DialogModule,
     IconModule,
     TabsModule,
     SwitchModule,

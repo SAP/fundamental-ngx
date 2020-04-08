@@ -11,12 +11,18 @@ import { ButtonModule } from '../button/button.module';
 import {
     CalendarAggregatedYearViewComponent
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { CalendarCloseButtonDirective, CalendarNavigation } from './calendar-directives';
 
 @NgModule({
     declarations: [CalendarComponent, CalendarHeaderComponent,
-        CalendarDayViewComponent, CalendarMonthViewComponent, CalendarYearViewComponent, CalendarAggregatedYearViewComponent],
+        CalendarDayViewComponent, CalendarMonthViewComponent, CalendarYearViewComponent, CalendarAggregatedYearViewComponent,
+        CalendarCloseButtonDirective, CalendarNavigation
+    ],
     imports: [CommonModule, IconModule, ButtonModule],
     exports: [CalendarComponent, CalendarDayViewComponent,
-        CalendarHeaderComponent, CalendarYearViewComponent, CalendarMonthViewComponent, CalendarAggregatedYearViewComponent]
+        CalendarHeaderComponent, CalendarYearViewComponent, CalendarMonthViewComponent, CalendarAggregatedYearViewComponent,
+        CalendarCloseButtonDirective, CalendarNavigation
+    ]
 })
-export class CalendarModule {}
+export class CalendarModule {
+}

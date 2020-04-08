@@ -1,9 +1,11 @@
 <div class="fd-calendar__months">
     <table class="fd-calendar__table" role="grid">
-        <tbody class="fd-calendar__group">
+        <tbody class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row"
+            role="row"
             *ngFor="let colMonths of shortMonthNames; let rowIndex = index">
             <td class="fd-calendar__item"
+                role="gridcell"
                 *ngFor="let month of colMonths; let colIndex = index"
                 [ngClass]="{
                     'fd-calendar__item--current': isCurrent(getIndex(rowIndex, colIndex)),

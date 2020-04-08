@@ -52,7 +52,7 @@ export class CalendarHeaderComponent implements OnDestroy {
 
     /** Whether close button should be shown */
     @Input()
-    showCloseButton: boolean = false;
+    mobileLandscape: boolean = false;
 
     /** Whether compact mode should be included into calendar */
     @Input()

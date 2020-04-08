@@ -10,6 +10,7 @@ export interface CalendarDay {
     selected?: boolean;
     selectedFirst?: boolean;
     selectedRange?: boolean;
+    hoverRange?: boolean;
     selectedLast?: boolean;
     today?: boolean;
     isTabIndexed?: boolean;

@@ -32,7 +32,8 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     /** A number offset used to achieve the 1-12 representation of the calendar */
     private readonly _monthOffset: number = 1;
 
-    private readonly _amountOfColPerRow: number = 4;
+    private readonly _amountOfColPerRow: number = 3;
+    private readonly _amountOfRows: number = 4;
 
     private _shortMonthNames: string[][];
     private _fullMonthNames: string[];
@@ -62,7 +63,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         private calendarI18n: CalendarI18n,
         private calendarService: CalendarService
     ) {
-        this.calendarService.rowAmount = 3;
+        this.calendarService.rowAmount = this._amountOfRows;
         this.calendarService.colAmount = this._amountOfColPerRow;
     }
 

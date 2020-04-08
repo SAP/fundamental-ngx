@@ -1,9 +1,10 @@
 <div class="fd-calendar__years">
     <table class="fd-calendar__table" role="grid">
-        <tbody class="fd-calendar__group">
+        <tbody class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row"
             *ngFor="let colYears of calendarYearListGrid; let rowIndex = index">
             <td class="fd-calendar__item"
+                role="gridcell"
                 *ngFor="let year of colYears; let colIndex = index"
                 [ngClass]="{
                     'is-selected': yearsSelected && (year.startYear === yearsSelected.startYear),

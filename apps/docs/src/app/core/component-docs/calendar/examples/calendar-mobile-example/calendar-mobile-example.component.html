@@ -1,7 +1,8 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #landScapeDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-body>
-            <fd-calendar #landscapeCalendar [mobileLandscape]="true" [ngModel]="datePicked" (closeClicked)="dialog.close()"></fd-calendar>
+            <fd-calendar #landscapeCalendar [mobileLandscape]="true" [ngModel]="datePicked"
+                         (closeClicked)="dialog.close()"></fd-calendar>
         </fd-dialog-body>
 
         <fd-dialog-footer>
@@ -21,8 +22,18 @@
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #portraitDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+
+        <fd-dialog-header>
+            <h3 fd-dialog-title>Pick a date</h3>
+            <button fd-dialog-close-button
+                    fd-calendar-close-button
+                    (click)="dialog.close()">
+            </button>
+        </fd-dialog-header>
+
         <fd-dialog-body>
-            <fd-calendar #portraitCalendar [mobilePortrait]="true" [ngModel]="datePicked" (closeClicked)="dialog.close()"></fd-calendar>
+            <fd-calendar #portraitCalendar [mobilePortrait]="true" [ngModel]="datePicked"
+                         (closeClicked)="dialog.close()"></fd-calendar>
         </fd-dialog-body>
 
         <fd-dialog-footer>

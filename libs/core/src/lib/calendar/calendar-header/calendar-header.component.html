@@ -1,5 +1,6 @@
 <header class="fd-calendar__header" aria-live="polite">
-    <div class="fd-calendar__navigation fd-calendar__navigation--main">
+    <div class="fd-calendar__navigation"
+         [ngClass]="{'fd-calendar__navigation--main': mobileLandscape}">
         <div class="fd-calendar__action fd-calendar__action--arrow-left">
             <button
                 fd-button
@@ -72,7 +73,7 @@
             ></button>
         </div>
         <button fd-button
-                *ngIf="showCloseButton"
+                *ngIf="mobileLandscape"
                 (click)="emitClose()"
                 type="button"
                 [fdType]="'transparent'"
