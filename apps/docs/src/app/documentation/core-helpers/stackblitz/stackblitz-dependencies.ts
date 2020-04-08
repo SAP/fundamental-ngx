@@ -18,6 +18,7 @@ export class StackblitzDependencies {
         '@angular/router',
         '@angular/platform-browser',
         '@angular/platform-browser-dynamic',
+        '@sap-theming/theming-base-content',
         'core-js',
         'fundamental-styles',
         'moment',
