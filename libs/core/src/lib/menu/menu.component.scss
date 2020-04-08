@@ -1,1 +1,206 @@
-@import "~fundamental-styles/dist/menu";
+// @import "~fundamental-styles/dist/menu";
+
+@import "./mixins.scss";
+
+$block: fd-menu;
+
+.#{$block} {
+
+  // group title
+  $fd-menu-title-color: var(--sapList_TextColor, #32363A) !default;
+  $fd-menu-title-background-color: var(--sapList_Background, #FFFFFF) !default;
+  $fd-menu-title-padding: 8px !default;
+
+  // items
+  $fd-menu-item-color: var(--sapList_TextColor, #32363A) !default;
+  $fd-menu-item-color--active: var(--sapList_Active_TextColor, #FFFFFF) !default;
+  $fd-menu-item-background-color: var(--sapList_Background, #FFFFFF) !default;
+  $fd-menu-item-background-color--hover: var(--sapList_Hover_Background, #F5F5F5) !default;
+  $fd-menu-item-background-color--active: var(--sapList_Active_Background, #0854A0) !default;
+  $fd-menu-item-background-color--selected: var(--sapList_SelectionBackgroundColor, #E5F0FA) !default;
+  $fd-menu-item-background-color--selected-hover: var(--sapList_Hover_SelectionBackground, #D8E9F8) !default;
+  $fd-menu-item-border-color-selected: var(--sapList_SelectionBorderColor, #0854A0);
+
+  $fd-menu-item-padding-x: 24px !default;
+  $fd-menu-item-padding-y: 10px !default;
+
+  $fd-menu-item-separator-color: var(--sapGroup_ContentBorderColor, #D9D9D9) !default;
+
+
+  $fd-menu-item-background-addon-color: var(--sapContent_NonInteractiveIconColor, #6A6D70) !default;
+  $fd-menu-item-background-addon-color--active: var(--sapList_Active_TextColor, #FFFFFF) !default;
+
+  // BLOCK BASE *******************************************
+  // set all BLOCK reset and baseline styles
+  @include fd-reset();
+  @include fd-ellipsis();
+
+  position: relative;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+  display: inline-block;
+
+  &__group {
+    @include fd-reset();
+
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+
+  &__list {
+    @include fd-reset();
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @at-root {
+      &--separated {
+        & > *,
+        .#{$block}__list > * {
+          border-top-style: solid;
+          border-top-width: 1px;
+          border-top-color: $fd-menu-item-separator-color;
+
+          &:first-child {
+            border-top-width: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: $fd-menu-title-padding $fd-menu-item-padding-x;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: $fd-menu-title-color;
+    background-color: $fd-menu-title-background-color;
+  }
+
+  &__item {
+    @include fd-reset();
+    @include fd-ellipsis();
+    @include action-cursor();
+
+    display: block;
+    font-weight: normal;
+    text-decoration: none;
+    color: $fd-menu-item-color;
+    background-color: $fd-menu-item-background-color;
+    transition: all 0.125s ease-in;
+    padding: $fd-menu-item-padding-y $fd-menu-item-padding-x;
+    
+    > .fd-checkbox {
+      margin: 0 10px 0 0;
+    }
+
+    @include fd-hover() {
+      color: $fd-menu-item-color;
+      background-color: $fd-menu-item-background-color--hover;
+
+      .fd-menu__addon-before {
+        color: $fd-menu-item-background-addon-color;
+      }
+    }
+
+    @include fd-selected() {
+        color: $fd-menu-item-color;
+        background-color: $fd-menu-item-background-color--selected;
+        border-bottom: 1px solid $fd-menu-item-border-color-selected;
+
+        .fd-menu__addon-before {
+            color: $fd-menu-item-background-addon-color;
+        }
+
+      @include fd-hover() {
+        color: $fd-menu-item-color;
+        background-color: $fd-menu-item-background-color--selected-hover;
+        border-bottom: 1px solid $fd-menu-item-border-color-selected;
+
+        .fd-menu__addon-before {
+            color: $fd-menu-item-background-addon-color;
+        }
+      }
+    }
+
+    @include fd-active() {
+        color: $fd-menu-item-color--active;
+        background-color: $fd-menu-item-background-color--active;
+
+        .fd-menu__addon-before {
+            color: $fd-menu-item-background-addon-color--active;
+        }
+
+        @include fd-hover() {
+            color: $fd-menu-item-color--active;
+            background-color: $fd-menu-item-background-color--active;
+
+            .fd-menu__addon-before {
+                color: $fd-menu-item-background-addon-color--active;
+            }
+        }
+    }
+
+    @include fd-pressed() {
+        color: $fd-menu-item-color--active;
+        background-color: $fd-menu-item-background-color--active;
+
+        .fd-menu__addon-before {
+            color: $fd-menu-item-background-addon-color--active;
+        }
+
+        @include fd-hover() {
+            color: $fd-menu-item-color--active;
+            background-color: $fd-menu-item-background-color--active;
+
+            .fd-menu__addon-before {
+                color: $fd-menu-item-background-addon-color--active;
+            }
+        }
+    }
+
+    &:focus {
+        outline-offset: -.1875rem;
+        outline-width: var(--sapContent_FocusWidth, .0625rem);
+        outline-color: var(--sapContent_FocusColor, #000);
+        outline-style: var(--sapContent_FocusStyle, dotted);
+    }
+
+    @include fd-disabled() {
+        opacity: 0.4;
+        cursor: not-allowed;
+        text-decoration: none;
+    }
+  }
+
+  &--addon-before {
+    .fd-menu__item {
+      padding-top: $fd-menu-item-padding-y;
+      padding-bottom: $fd-menu-item-padding-y;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
+
+  &__addon-before {
+    @include fd-flex-center();
+
+    @include fd-rtl() {
+      float: right;
+      clear: right;
+    }
+
+    color: $fd-menu-item-background-addon-color;
+    background-color: transparent;
+    float: left;
+    clear: left;
+    min-height: 1px;
+    width: 30px;
+  }
+}
