@@ -16,10 +16,6 @@ export class MenuShortcutDirective implements AfterViewInit {
     fdMenuShortcutClass: boolean = true;
 
     /** @hidden */
-    @HostBinding('class.fd-menu__addon-after')
-    fdMenuAddonAfterClass: boolean = true;
-
-    /** @hidden */
     constructor(private _menuComponent: MenuComponent,
                 private _elementRef: ElementRef) {
     }
