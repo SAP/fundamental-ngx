@@ -27,6 +27,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { RtlService } from '@fundamental-ngx/core';
 import { SearchFieldDataSource } from '../../domain/public_api';
+import { BaseComponent } from '../base';
 
 export interface SearchInput {
     text: string;
@@ -52,7 +53,7 @@ export interface ValueLabelItem {
     }
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
-    constructor(private element: ElementRef) {}
+    constructor(private element: ElementRef) { }
     focus() {
         this.element.nativeElement.focus();
     }
@@ -66,7 +67,7 @@ let searchFieldIdCount = 0;
     styleUrls: ['./search-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchFieldComponent implements OnInit, OnDestroy {
+export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy {
     /**
      * Place holder text for search input field.
      */
@@ -117,17 +118,6 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
      * Initial input text.
      */
     @Input() inputText: string;
-
-    /**
-     * Set size of search input component.
-     */
-    @Input()
-    get size(): 'cozy' | 'compact' {
-        return this.compact ? 'compact' : 'cozy';
-    }
-    set size(value: 'cozy' | 'compact') {
-        this.compact = value === 'compact';
-    }
 
     /**
      * List of categories.
@@ -230,9 +220,11 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     constructor(
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
-        private _cd: ChangeDetectorRef,
+        protected _cd: ChangeDetectorRef,
         private _rtl: RtlService
-    ) {}
+    ) {
+        super(_cd);
+    }
 
     ngOnInit() {
         const baseId = 'fdp-search-field';
@@ -398,7 +390,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         this.showDropdown = false;
     }
 
-    openCategoryMenu(): void {}
+    openCategoryMenu(): void { }
 
     clearTextInput(): void {
         this.inputText = '';
