@@ -20,6 +20,7 @@ let menuUniqueId: number = 0;
     templateUrl: './menu-item.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
+        '[class.fd-menu__item]': 'true',
         '[attr.aria-controls]': 'itemId',
         '[attr.aria-haspopup]': 'hasPopup'
     }

@@ -1,57 +1,58 @@
 @import "~fundamental-styles/dist/menu";
 
-.fd-menu,
-.fd-menu__sublist {
-    box-shadow: var(--sapContent_Shadow2, 0 0 0 0.0625rem rgba(0, 0, 0, 0.42), 0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3));
-    background: var(--sapGroup_ContentBackground);
-    border-radius: 0.25rem;
-    border: none;
+.fd-menu {
+    .fd-menu__list,
+    .fd-menu__sublist {
+        .fd-menu__item {
+            border-radius: 0;
 
-    & li {
-        border-radius: initial;
+            &:first-child {
+                border-top-right-radius: 0.25rem;
+                border-top-left-radius: 0.25rem;
+            }
 
-        &:first-child {
-            border-top-left-radius: 0.25rem;
-            border-top-right-radius: 0.25rem;
-        }
+            &:last-child {
+                border-bottom-right-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
+            }
 
-        &:last-child {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-        }
-    }
+            .fd-menu__link {
+                text-decoration: none;
 
-    .fd-menu__item {
-        .fd-menu__link {
-            .fd-menu__addon-after {
-                margin: auto;
-                justify-content: flex-end;
+                .fd-menu__addon-after {
+                    margin: auto;
+                    justify-content: flex-end;
+                }
+
+                .fd-menu__shortcut {
+                    @extend .fd-menu__addon-after;
+                    font-size: var(--sapFontMediumSize);
+                    font-weight: normal;
+                    white-space: nowrap;
+                    width: auto;
+                }
             }
         }
     }
-}
 
-.fd-menu__link {
-    border-radius: initial;
-}
+    .fd-menu__sublist {
+        box-shadow: var(--sapContent_Shadow2, 0 0 0 0.0625rem rgba(0, 0, 0, 0.42), 0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3));
+        border-radius: 0.25rem;
+        border: none;
+    }
 
-.fd-menu__shortcut {
-    font-size: var(--sapFontMediumSize);
-    font-weight: normal;
-    white-space: nowrap;
-    width: auto;
-}
-
-.fd-menu.fd-menu--mobile,
-.fd-menu.fd-menu--mobile .fd-menu__sublist {
-    border-radius: 0;
-    box-shadow: none;
-    position: static;
-
-    & li {
-        &:first-child,
-        &:last-child {
+    &.fd-menu--mobile {
+        .fd-menu__sublist {
             border-radius: 0;
+            box-shadow: none;
+            position: static;
+
+            .fd-menu__item {
+                &:first-child,
+                &:last-child {
+                    border-radius: 0;
+                }
+            }
         }
     }
 }
