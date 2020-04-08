@@ -4,13 +4,11 @@
             <button fd-button>Simple</button>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list">
+                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 
@@ -26,13 +24,11 @@
                     </div>
                 </div>
             </div>
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list">
+                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
-            </fd-menu>
+            </ul>
         </fd-popover-body>
     </fd-popover>
 
@@ -48,15 +44,11 @@
                     </div>
                 </div>
             </div>
-            <fd-menu>
-                <ul fd-menu-list>
-                    <li fd-menu-item-component *ngFor="let option of menu">
-                        <a fd-menu-link [attr.href]="option.url">
-                            <span fd-menu-title>{{ option.text }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </fd-menu>
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list">
+                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                </li>
+            </ul>
             <div fd-popover-body-footer>
                 <div fd-bar [barDesign]="'footer'" [cosy]="true">
                     <div fd-bar-right>
@@ -89,13 +81,13 @@
                     </div>
                 </div>
             </div>
-            <fd-menu>
-                <li fd-menu-item-component *ngFor="let option of menu">
-                    <a fd-menu-link [attr.href]="option.url">
-                        <span fd-menu-title>{{ option.text }}</span>
-                    </a>
+
+            <ul fd-list>
+                <li fd-list-item *ngFor="let option of list">
+                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
-            </fd-menu>
+            </ul>
+
             <div fd-popover-body-footer>
                 <div fd-bar [barDesign]="'footer'" [cosy]="true">
                     <div fd-bar-right>

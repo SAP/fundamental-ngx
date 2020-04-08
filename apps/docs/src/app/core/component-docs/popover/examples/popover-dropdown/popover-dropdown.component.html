@@ -3,13 +3,11 @@
         <button fd-button [fdMenu]="true">Dropdown Popover</button>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-menu>
-            <li fd-menu-item-component *ngFor="let item of menu">
-                <div fd-menu-link>
-                    <span fd-menu-title>{{ item }}</span>
-                </div>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of list">
+                <span fd-list-title>{{option}}</span>
             </li>
-        </fd-menu>
+        </ul>
     </fd-popover-body>
 </fd-popover>
 <fd-popover [placement]="dropDownPlacement$ | async" [disabled]="true">
@@ -17,13 +15,11 @@
         <button fd-button [disabled]="true" [fdMenu]="true">Disabled Dropdown Popover</button>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-menu>
-            <li fd-menu-item-component *ngFor="let item of menu">
-                <div fd-menu-link>
-                    <span fd-menu-title>{{ item }}</span>
-                </div>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of list">
+                <span fd-list-title>{{option}}</span>
             </li>
-        </fd-menu>
+        </ul>
     </fd-popover-body>
 </fd-popover>
 <fd-popover [placement]="dropDownPlacement$ | async">
@@ -31,12 +27,10 @@
         <button fd-button [fdMenu]="true" [glyph]="'filter'">Dropdown with icon</button>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-menu>
-            <li fd-menu-item-component *ngFor="let item of menu">
-                <div fd-menu-link>
-                    <span fd-menu-title>{{ item }}</span>
-                </div>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of list">
+                <span fd-list-title>{{option}}</span>
             </li>
-        </fd-menu>
+        </ul>
     </fd-popover-body>
 </fd-popover>

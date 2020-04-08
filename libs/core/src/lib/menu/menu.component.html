@@ -30,6 +30,7 @@
                             <button fd-button
                                     fdType="transparent"
                                     glyph="navigation-left-arrow"
+                                    aria-label="Navigate to previous menu level"
                                     (click)="goToPreviousMenuLevel()">
                             </button>
                         </fd-bar-element>
@@ -51,7 +52,8 @@
                 <button fd-button
                         fdType="transparent"
                         fd-dialog-decisive-button
-                        (click)="dialog.close()">
+                        aria-label="Close navigation Dialog"
+                        (click)="closeDialog(dialog)">
                     Cancel
                 </button>
             </fd-dialog-footer>

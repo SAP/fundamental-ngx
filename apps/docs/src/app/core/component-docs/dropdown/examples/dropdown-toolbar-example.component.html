@@ -1,25 +1,21 @@
 <fd-popover style="margin-right: 12px">
     <fd-dropdown-control [toolbar]="true">Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length">
-        <fd-menu>
-            <li fd-menu-item-component *ngFor="let option of menu1">
-                <a [attr.href]="option.url" fd-menu-link>
-                    <span fd-menu-title>{{ option.text }}</span>
-                </a>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of menu1">
+                <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
             </li>
-        </fd-menu>
+        </ul>
     </fd-popover-body>
 </fd-popover>
 
 <fd-popover>
     <fd-dropdown-control [toolbar]="true" [compact]="true">Compact Dropdown</fd-dropdown-control>
     <fd-popover-body *ngIf="menu1 && menu1.length">
-        <fd-menu [compact]="true">
-            <li fd-menu-item-component *ngFor="let option of menu1">
-                <a [attr.href]="option.url" fd-menu-link>
-                    <span fd-menu-title>{{ option.text }}</span>
-                </a>
+        <ul fd-list [compact]="true">
+            <li fd-list-item *ngFor="let option of menu1">
+                <a [attr.href]="option.url" fd-list-title>{{option.text}}</a>
             </li>
-        </fd-menu>
+        </ul>
     </fd-popover-body>
 </fd-popover>

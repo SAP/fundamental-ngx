@@ -1,45 +1,88 @@
-<fd-docs-section-title [id]="'def'" [componentName]="'menu'">
-    Menu
+<fd-docs-section-title [id]="'simple-menu'" [componentName]="'menu'">
+    Simple menu
 </fd-docs-section-title>
+<description>
+    To create simple menu compose you menu items using following directives:
+    <ul>
+        <li><code>fd-menu-item</code> - menu list element</li>
+        <li><code>fd-menu-link</code> - menu interactive element</li>
+        <li><code>fd-menu-title</code> - menu element title</li>
+    </ul>
+</description>
 <component-example>
     <fd-menu-example></fd-menu-example>
 </component-example>
 <code-example [exampleFiles]="menuBasic"></code-example>
 
-<!--<separator></separator>-->
+<separator></separator>
 
-<!--<fd-docs-section-title [id]="'addon'" [componentName]="'menu'">-->
-<!--    Menu with Addon-->
-<!--</fd-docs-section-title>-->
-<!--<description-->
-<!--    >This is an additional container that can be used for an icon or checkbox before the menu item text. This can be-->
-<!--    achieved with the directives <code>fd-menu-item-addon</code> and <code>fd-menu-addon</code>-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fd-menu-addon-example></fd-menu-addon-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="menuAddon"></code-example>-->
+<fd-docs-section-title [id]="'menu-with-icons'" [componentName]="'menu'">
+    Menu with icons
+</fd-docs-section-title>
+<description>
+    Menu item can be extended with additional content using following directives:
+    <ul>
+        <li><code>fd-menu-icon</code> - to add icon to menu item. If you use <code>fd-menu-icon</code> after
+            menu item title remember to add set <code>[position]="'after'"</code></li>
+        <li><code>fd-menu-shortcut</code> - to add information about useful shortcuts</li>
+    </ul>
+</description>
+<component-example>
+    <fd-menu-addon-example></fd-menu-addon-example>
+</component-example>
+<code-example [exampleFiles]="menuAddon"></code-example>
 
-<!--<separator></separator>-->
+<separator></separator>
 
-<!--<fd-docs-section-title [id]="'group'" [componentName]="'menu'">-->
-<!--    Menu with Group-->
-<!--</fd-docs-section-title>-->
-<!--<component-example>-->
-<!--    <fd-menu-group-example></fd-menu-group-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="menuGroup"></code-example>-->
+<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">
+    Menu with separator and compact mode
+</fd-docs-section-title>
+<description>
+    To add visual separation line between menu items use <code>fd-menu-separator</code> component.<br/>
+    To display Menu in compact mode use <code>[compact]="true"</code>.
+</description>
+<component-example>
+    <fd-menu-separator-example></fd-menu-separator-example>
+</component-example>
+<code-example [exampleFiles]="menuSeparator"></code-example>
 
-<!--<separator></separator>-->
+<separator></separator>
 
-<!--<fd-docs-section-title [id]="'optionalSeparator'" [componentName]="'menu'">-->
-<!--    Menu with Optional Separator-->
-<!--</fd-docs-section-title>-->
-<!--<description>Each menu item can have an optional separator shown as a line beneath the item.</description>-->
-<!--<component-example>-->
-<!--    <fd-menu-separator-example></fd-menu-separator-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="menuSeparator"></code-example>-->
+<fd-docs-section-title [id]="'menu-with-submenu'" [componentName]="'menu'">
+    Menu with submenu
+</fd-docs-section-title>
+<description>
+    Each Menu item can have its submenu. To create submenu:
+    <ul>
+        <li>create <code>ng-template</code> containing menu items, using standard menu item markup</li>
+        <li>attach created template to parent menu item by passing <code>TemplateRef</code> to its
+            <code>[subMenu]</code>
+        </li>
+    </ul>
+    The important thing is to create templates with submenu items inside <code>fd-menu</code> tag, so Angular correctly
+    attaches them to DI tree.
+</description>
+<component-example>
+    <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
+</component-example>
+<code-example [exampleFiles]="menuWithSubmenu"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title [id]="'mobile-menu'" [componentName]="'menu'">
+    Menu in mobile mode
+</fd-docs-section-title>
+<description>
+    To open Menu in mobile mode use <code>[mobile]="true"</code> option.
+    In mobile mode the Menu is opened inside Dialog component taking whole viewport of the device.
+    When going through nested levels of the Menu, name of the parent menu item will display in Dialogs header.
+    To add initial header visible in the Dialogs header at the first level on the Menu use
+    <code>[mobileMenuTitle]</code>.
+</description>
+<component-example>
+    <fd-menu-mobile-example></fd-menu-mobile-example>
+</component-example>
+<code-example [exampleFiles]="menuMobile"></code-example>
 
 <!--<separator></separator>-->
 

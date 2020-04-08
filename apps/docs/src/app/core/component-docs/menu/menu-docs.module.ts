@@ -7,8 +7,9 @@ import { MenuHeaderComponent } from './menu-header/menu-header.component';
 import { MenuDocsComponent } from './menu-docs.component';
 import {
     MenuExampleComponent,
-    MenuGroupExampleComponent,
-    MenuSeparatorExampleComponent
+    MenuMobileExampleComponent,
+    MenuSeparatorExampleComponent,
+    MenuWithSubmenuExampleComponent
 } from './examples/menu-examples.component';
 import { MenuAddonExampleComponent } from './examples/menu-addon-examples.component';
 import { MenuKeyboardSupportExampleComponent } from './examples/menu-keyboard-support-example.component';
@@ -33,8 +34,9 @@ const routes: Routes = [
         MenuHeaderComponent,
         MenuExampleComponent,
         MenuAddonExampleComponent,
-        MenuGroupExampleComponent,
+        MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
+        MenuWithSubmenuExampleComponent,
         MenuKeyboardSupportExampleComponent
     ]
 })

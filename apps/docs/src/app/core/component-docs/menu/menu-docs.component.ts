@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import * as menuSrc from '!raw-loader!./examples/menu-example.component.html';
 import * as menuAddon from '!raw-loader!./examples/menu-addon-example.component.html';
 import * as menuAddonTsCode from '!raw-loader!./examples/menu-addon-examples.component.ts';
-import * as menuGroupSrc from '!raw-loader!./examples/menu-group-example.component.html';
 import * as menuKeyboardSrcH from '!raw-loader!./examples/menu-keyboard-support-example.component.html';
 import * as menuKeyboardSrcT from '!raw-loader!./examples/menu-keyboard-support-example.component.ts';
 import * as menuSeparatorSrc from '!raw-loader!./examples/menu-separator-example.component.html';
+import * as menuMobileSrc from '!raw-loader!./examples/menu-mobile-example.component.html';
+import * as menuWithSubmenuSrc from '!raw-loader!./examples/menu-with-submenu-example.component.html';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -32,14 +33,6 @@ export class MenuDocsComponent {
         }
     ];
 
-    menuGroup: ExampleFile[] = [
-        {
-            language: 'html',
-            code: menuGroupSrc,
-            fileName: 'menu-group-example'
-        }
-    ];
-
     menuKeyboard: ExampleFile[] = [
         {
             language: 'html',
@@ -59,6 +52,22 @@ export class MenuDocsComponent {
             language: 'html',
             code: menuSeparatorSrc,
             fileName: 'menu-separator-example'
+        }
+    ];
+
+    menuMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: menuMobileSrc,
+            fileName: 'menu-mobile-example'
+        }
+    ];
+
+    menuWithSubmenu: ExampleFile[] = [
+        {
+            language: 'html',
+            code: menuWithSubmenuSrc,
+            fileName: 'menu-with-submenu-example'
         }
     ];
 }
