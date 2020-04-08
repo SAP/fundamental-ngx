@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.69...v0.16.0-rc.70) (2020-04-08)
+
+
+### Bug Fixes
+
+* (shellbar) Add missing class to button ([#2290](https://github.com/SAP/fundamental-ngx/issues/2290)) ([4afd9a5](https://github.com/SAP/fundamental-ngx/commit/4afd9a5a9b0f1e1b00f672d09b521b9914af7bc8))
+
 ## [0.16.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.16.0-rc.68...v0.16.0-rc.69) (2020-04-08)
 
 
