@@ -36,5 +36,11 @@
             <span class="fd-calendar__text" role="button" [attr.aria-label]="cell.ariaLabel">{{cell.date.day}}</span>
         </td>
     </tr>
+    <tr class="fd-calendar__row" *ngIf="dayViewGrid.length <= 5">
+        <td class="fd-calendar__item hidden-day"></td>
+    </tr>
+    <tr class="fd-calendar__row" *ngIf="dayViewGrid.length === 4">
+        <td class="fd-calendar__item hidden-day"></td>
+    </tr>
     </tbody>
 </table>

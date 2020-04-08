@@ -96,6 +96,7 @@ export class CalendarService {
             }
             case 'ArrowLeft': {
                 event.preventDefault();
+                console.log('arrow right');
                 if (index === 0) {
                     this.onListStartApproach.next(this.getId(this.rowAmount, 0) - 1);
                 } else {
@@ -105,6 +106,7 @@ export class CalendarService {
             }
             case 'ArrowRight': {
                 event.preventDefault();
+                console.log('arrow right');
                 if (index === this.getId(this.rowAmount, 0) - 1) {
                     this.onListEndApproach.next(0);
                 } else {

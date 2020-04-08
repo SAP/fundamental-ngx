@@ -29,6 +29,21 @@ export class FdDate {
     }
 
     /**
+     * Get Amount of weeks in current month/year
+     * Month:  1 represents January, 2 is February, 3 is March, and so on.
+     * dayStart:  1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.
+     */
+    static GetAmountOfWeeks(year: number, month: number, dayStart: number = 1): number {
+        const firstOfMonth = new Date(year, month - 1, 1);
+        const lastOfMonth = new Date(year, month, 0);
+
+        const dayOffset = (firstOfMonth.getDay() - dayStart + 8) % 7;
+        const used = dayOffset + lastOfMonth.getDate();
+
+        return Math.ceil(used / 7);
+    }
+
+    /**
      *  Static function allowing convert js date object to FdDate model
      */
     static getModelFromDate(date: Date): FdDate {
@@ -105,10 +120,10 @@ export class FdDate {
         const prevMonth: boolean = this.day === 1;
 
         /** Check if should switch year to previous one */
-        const prevYear: boolean = prevMonth && ( this.month === 1 );
+        const prevYear: boolean = prevMonth && (this.month === 1);
 
         const year = prevYear ? this.year - 1 : this.year;
-        const month = prevYear ? 12 : ( prevMonth ? this.month - 1 : this.month );
+        const month = prevYear ? 12 : (prevMonth ? this.month - 1 : this.month);
 
         /** Amount of days in month */
         const maxDays: number = CalendarService.getDaysInMonth(month, year);
