@@ -11,7 +11,6 @@ import {
     Renderer2
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
-import { NestedListStateService } from '../nested-list-state.service';
 
 @Directive({
     selector: '[fdNestedLink], [fd-nested-list-link]',
@@ -40,27 +39,14 @@ export class NestedLinkDirective implements OnInit {
     @Output()
     readonly clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
-    /** Whether this element is selected, the `selected` state is propagated to all of parent elements */
-    @Input()
-    set selected(selected: boolean) {
-        if (this._selected !== selected) {
-            this._selected = selected;
-            this.controlSelected = selected;
-            this.nestedListStateService.refresh$.next();
-        }
-    }
-    get selected(): boolean {
-        return this._selected;
-    }
-    _selected: boolean;
-
     /** Function that is called on click event dispatch on this element. */
     @Input()
     onClickCallback: Function;
 
-    /** */
+    /** Whether this element is selected*/
+    @Input()
     @HostBinding('class.is-selected')
-    controlSelected: boolean = this._selected;
+    selected: boolean = false;
 
     /**
      * @hidden
@@ -92,7 +78,6 @@ export class NestedLinkDirective implements OnInit {
     constructor(
         private renderer: Renderer2,
         private elementRef: ElementRef,
-        private nestedListStateService: NestedListStateService,
         public changeDetRef: ChangeDetectorRef
     ) {}
 

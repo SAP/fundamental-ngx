@@ -30,6 +30,7 @@ export class SideNavigationCondensedObjectExampleComponent {
                     link: {
                         icon: 'menu',
                         title: 'Link 3',
+                        selected: true
                     },
                     list: {
                         textOnly: true,
