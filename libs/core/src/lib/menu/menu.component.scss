@@ -25,6 +25,7 @@
 
                 .fd-menu__shortcut {
                     @extend .fd-menu__addon-after;
+                    padding-left: 1rem;
                     margin: auto;
                     justify-content: flex-end;
                     font-size: var(--sapFontMediumSize);
