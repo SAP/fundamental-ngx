@@ -91,7 +91,7 @@ export class CalendarYearViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method for handling the keyboard navigation. */
-    onKeydownYearHandler(event, index: number): void {
+    onKeydownYearHandler(event: KeyboardEvent, index: number): void {
         this._calendarService.onKeydownHandler(event, index);
     }
 
