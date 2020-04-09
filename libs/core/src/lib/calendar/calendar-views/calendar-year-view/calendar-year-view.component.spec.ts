@@ -28,8 +28,7 @@ describe('CalendarYearViewComponent', () => {
     });
 
     it('Should select the year when Enter key is clicked', () => {
-        let event: { key: string; preventDefault: () => void };
-        event = {
+        const event: any = {
             key: 'Enter', preventDefault: () => {
             }
         };
@@ -38,7 +37,7 @@ describe('CalendarYearViewComponent', () => {
     });
 
     it('Should select the year when Space key is clicked', () => {
-        const event = {
+        const event: any = {
             key: ' ', preventDefault: () => {
             }
         };
