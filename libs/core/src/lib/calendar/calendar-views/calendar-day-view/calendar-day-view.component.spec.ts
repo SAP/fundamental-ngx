@@ -125,14 +125,14 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.year = 2010;
         component.currentlyDisplayed.month = 1;
         component.ngOnInit();
-        component.weeks = [53, 1, 2, 3, 4];
+        component.weeks = [53, 1, 2, 3, 4, 5];
     });
 
     it('should generate proper week count on december 2010', () => {
         component.currentlyDisplayed.year = 2012;
         component.currentlyDisplayed.month = 12;
         component.ngOnInit();
-        component.weeks = [48, 49, 50, 51, 52, 1];
+        component.weeks = [48, 49, 50, 51, 52];
     });
 
     it('should generate proper days for february 2020', () => {
@@ -145,8 +145,7 @@ describe('CalendarDayViewComponent', () => {
             [3, 4, 5, 6, 7, 8, 9],
             [10, 11, 12, 13, 14, 15, 16],
             [17, 18, 19, 20, 21, 22, 23],
-            [24, 25, 26, 27, 28, 29, 1],
-            [2, 3, 4, 5, 6, 7, 8],
+            [24, 25, 26, 27, 28, 29, 1]
         ])
     });
 
@@ -156,7 +155,7 @@ describe('CalendarDayViewComponent', () => {
         component.ngOnInit();
         const day: CalendarDay = component.calendarDayList[15];
         component.selectDate(day);
-        const activeCell: CalendarDay = (<any>component).getActiveCell(component.calendarDayList);
+        const activeCell: CalendarDay = (<any>component)._getActiveCell(component.calendarDayList);
         expect(CalendarService.datesEqual(activeCell.date, day.date)).toBe(true);
     });
 
@@ -166,7 +165,7 @@ describe('CalendarDayViewComponent', () => {
         component.ngOnInit();
         const day: CalendarDay = component.calendarDayList[15];
         day.today = true;
-        const activeCell: CalendarDay = (<any>component).getActiveCell(component.calendarDayList);
+        const activeCell: CalendarDay = (<any>component)._getActiveCell(component.calendarDayList);
         expect(CalendarService.datesEqual(activeCell.date, day.date)).toBe(true);
     });
 });

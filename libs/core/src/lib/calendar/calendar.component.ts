@@ -254,8 +254,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     constructor(
         public calendarI18n: CalendarI18n,
         private _changeDetectorRef: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -468,14 +467,14 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         this.dayViewComponent.focusActiveDay();
     }
 
-    public selectedYear(yearSelected: number) {
+    public selectedYear(yearSelected: number): void {
         this.activeView = 'day';
         this.currentlyDisplayed.year = yearSelected;
         this._changeDetectorRef.detectChanges();
         this.dayViewComponent.focusActiveDay();
     }
 
-    public selectedYears(yearsSelected: AggregatedYear) {
+    public selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
         this.currentlyDisplayed.year = yearsSelected.startYear;
         this._changeDetectorRef.detectChanges();

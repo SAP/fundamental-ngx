@@ -240,7 +240,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             event.preventDefault();
             this.newFocusedDayIndex = day.index;
 
-            if (this.calType === 'range' && this.rangeHoverEffect) {
+            if (this.calType === 'range' && this.rangeHoverEffect && this.selectCounter === 1) {
                 this._isOnRangePick = !this._isOnRangePick;
             }
         }
@@ -334,7 +334,7 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
      * @param cell CalendarDay
      * @param grid with specified column and row as a x and y
      */
-    onKeydownDayHandler(event, cell: CalendarDay, index: number): void {
+    onKeydownDayHandler(event: KeyboardEvent, cell: CalendarDay, index: number): void {
         if (event.key === 'Tab' && !event.shiftKey) {
             if (this.focusEscapeFunction) {
                 event.preventDefault();

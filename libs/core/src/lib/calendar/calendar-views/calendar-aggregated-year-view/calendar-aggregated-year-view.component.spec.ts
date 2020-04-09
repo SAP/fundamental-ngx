@@ -36,7 +36,7 @@ describe('CalendarAggregatedYearViewComponent', () => {
             key: 'Enter', preventDefault: () => {}
         };
         component.onKeydownYearHandler(event, 6);
-        const aggregatedYear: AggregatedYear = (<any>component).getYearsList()[6];
+        const aggregatedYear: AggregatedYear = (<any>component)._getYearsList()[6];
         expect(component.yearsSelected).toEqual(aggregatedYear);
     });
 

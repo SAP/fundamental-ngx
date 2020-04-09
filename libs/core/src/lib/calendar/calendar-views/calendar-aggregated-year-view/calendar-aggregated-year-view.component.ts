@@ -123,7 +123,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
      * if there is no selected year, but there is current year, return current year
      * if there is no current year, or selected, return first one
      */
-    private getActiveYear(): AggregatedYear {
+    private _getActiveYear(): AggregatedYear {
         const selectedYear: AggregatedYear = this._getYearsList()
             .find(aggregatedYears => this.isBetween(aggregatedYears, this.yearSelected))
         ;
@@ -186,7 +186,7 @@ export class CalendarAggregatedYearViewComponent implements OnInit, OnDestroy {
             this.calendarYearListGrid.push(calendarYearList.splice(0, this.aggregatedYearsViewGrid.cols));
         }
         this.yearsSelected = calendarYearList.find(years => this.isBetween(years, this.yearSelected));
-        this.activeYear = this.getActiveYear();
+        this.activeYear = this._getActiveYear();
         this._changeDetectorRef.detectChanges();
         this.focusYearElement();
     }

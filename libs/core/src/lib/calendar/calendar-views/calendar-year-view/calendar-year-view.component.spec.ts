@@ -96,7 +96,7 @@ describe('CalendarYearViewComponent', () => {
 
         component.yearSelected = 1900;
 
-        component.activeYear = (<any>component).getActiveYear();
+        component.activeYear = (<any>component)._getActiveYear();
 
         expect(component.activeYear).toBe(component.currentYear);
     });
